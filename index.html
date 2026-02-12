@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,10 +178,45 @@
     position: relative;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     animation: fadeInDown 0.5s ease both;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .keter-card:hover {
+    box-shadow: 0 3px 12px rgba(139, 105, 20, 0.15);
+  }
+
+  .keter-card .expand-icon {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 14px;
+    color: var(--gold);
+    transition: transform 0.25s ease;
+    z-index: 2;
+  }
+
+  .keter-card.expanded .expand-icon {
+    transform: rotate(180deg);
+  }
+
+  .keter-visible-content {
     display: grid;
-    grid-template-columns: repeat(6, 1fr) minmax(180px, 1.3fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0;
-    overflow: hidden;
+  }
+
+  .keter-detail {
+    display: none;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .keter-card.expanded .keter-detail {
+    display: block;
+  }
+
+  .keter-detail .keter-section:not(:last-child) {
+    border-bottom: 1px solid var(--border);
   }
 
   .keter-card::before {
@@ -194,15 +230,23 @@
   }
 
   @media (max-width: 540px) {
-    .keter-card { grid-template-columns: 1fr; }
+    .keter-visible-content { grid-template-columns: 1fr; }
+    .keter-card .expand-icon { top: 12px; right: 16px; }
   }
 
   .keter-section {
-    padding: 16px 18px;
+    padding: 16px 20px;
   }
 
-  .keter-section:not(:last-child) {
+  .keter-visible-content .keter-section:not(:last-child) {
     border-right: 1px solid var(--border);
+  }
+
+  @media (max-width: 540px) {
+    .keter-visible-content .keter-section:not(:last-child) {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
   }
 
   .keter-section-label {
@@ -818,50 +862,62 @@
   <div class="keter-title-row">
     <span class="keter-crown-label">✦ KETER ✦</span>
   </div>
-  <div class="keter-card">
-    <!-- CHUMASH section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Chumash with Rashi</div>
-      <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
-      <div class="keter-main" id="keter-chumash-main">Loading…</div>
-      <div class="keter-meta" id="keter-chumash-meta"></div>
+  <div class="keter-card" onclick="toggleKeterExpand(this)">
+    <span class="expand-icon">▾</span>
+    
+    <!-- Always visible sections -->
+    <div class="keter-visible-content">
+      <!-- HAYOM YOM section -->
+      <div class="keter-section">
+        <div class="keter-section-label">✦ Hayom Yom — היום יום</div>
+        <div class="keter-main" id="keter-hayomyom">Loading…</div>
+        <div class="keter-meta" id="keter-hy-meta"></div>
+      </div>
+      <!-- DAILY LM section -->
+      <div class="keter-section">
+        <div class="keter-section-label">✦ Daily Likutei Moharan</div>
+        <div class="keter-main" id="keter-lm-main">Loading…</div>
+        <div class="keter-meta" id="keter-lm-meta"></div>
+      </div>
+      <!-- DAF YOMI section -->
+      <div class="keter-section">
+        <div class="keter-section-label">✦ Daf Yomi — דַּף יוֹמִי</div>
+        <div class="keter-hdate" id="keter-daf-masechet">Loading…</div>
+        <div class="keter-main" id="keter-daf-main">Loading…</div>
+        <div class="keter-meta" id="keter-daf-meta"></div>
+      </div>
     </div>
-    <!-- TEHILLIM section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Tehillim</div>
-      <div class="keter-main" id="keter-tehillim-main">Loading…</div>
-      <div class="keter-meta" id="keter-tehillim-meta"></div>
-    </div>
-    <!-- TANYA section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Tanya</div>
-      <div class="keter-main" id="keter-tanya-main">Loading…</div>
-      <div class="keter-meta" id="keter-tanya-meta"></div>
-    </div>
-    <!-- RAMBAM section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Rambam</div>
-      <div class="keter-main" id="keter-rambam-main">Loading…</div>
-      <div class="keter-meta" id="keter-rambam-meta"></div>
-    </div>
-    <!-- HAYOM YOM section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Hayom Yom — היום יום</div>
-      <div class="keter-main" id="keter-hayomyom">Loading…</div>
-      <div class="keter-meta" id="keter-hy-meta"></div>
-    </div>
-    <!-- DAILY LM section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Daily Likutei Moharan</div>
-      <div class="keter-main" id="keter-lm-main">Loading…</div>
-      <div class="keter-meta" id="keter-lm-meta"></div>
-    </div>
-    <!-- DAF YOMI section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Daf Yomi — דַּף יוֹמִי</div>
-      <div class="keter-hdate" id="keter-daf-masechet">Loading…</div>
-      <div class="keter-main" id="keter-daf-main">Loading…</div>
-      <div class="keter-meta" id="keter-daf-meta"></div>
+
+    <!-- Expandable detail sections -->
+    <div class="keter-detail" style="display:none">
+      <div class="section-divider" style="margin: 16px 0">
+        <span class="divider-symbol">◆</span>
+      </div>
+      <!-- CHUMASH section -->
+      <div class="keter-section">
+        <div class="keter-section-label">✦ Chumash with Rashi</div>
+        <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
+        <div class="keter-main" id="keter-chumash-main">Loading…</div>
+        <div class="keter-meta" id="keter-chumash-meta"></div>
+      </div>
+      <!-- TEHILLIM section -->
+      <div class="keter-section">
+        <div class="keter-section-label">✦ Tehillim</div>
+        <div class="keter-main" id="keter-tehillim-main">Loading…</div>
+        <div class="keter-meta" id="keter-tehillim-meta"></div>
+      </div>
+      <!-- TANYA section -->
+      <div class="keter-section">
+        <div class="keter-section-label">✦ Tanya</div>
+        <div class="keter-main" id="keter-tanya-main">Loading…</div>
+        <div class="keter-meta" id="keter-tanya-meta"></div>
+      </div>
+      <!-- RAMBAM section -->
+      <div class="keter-section">
+        <div class="keter-section-label">✦ Rambam</div>
+        <div class="keter-main" id="keter-rambam-main">Loading…</div>
+        <div class="keter-meta" id="keter-rambam-meta"></div>
+      </div>
     </div>
   </div>
   <div class="upper-sefirot-grid" id="upper-sefirot-grid">
@@ -1629,28 +1685,373 @@
 
   // ── LIKUTEI MOHARAN THEMES ───────────────────────────────────────────────────
   const LM_THEMES = {
-    1:   { theme: 'Torah & Prayer',         summary: 'Through genuine Torah study, prayer rises and finds grace before G-d. Rebbe Nachman teaches that every Jew carries a spark that prayer can ignite.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.1' },
-    2:   { theme: 'Prayer & the Covenant',  summary: 'Prayer is Mashiach\'s essential weapon. The covenant of the tongue — holy speech — is the gateway through which all blessing flows.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.2' },
-    5:   { theme: 'Joy of Mitzvot',         summary: 'The joy of a mitzvah is a shofar blast that shatters all barriers. True joy is not frivolity but a gateway to closeness with the Divine.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.5' },
-    6:   { theme: 'Self-Nullification',     summary: 'Minimize your own honor and maximize G-d\'s honor. The more one diminishes the ego, the more divine light can shine through.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.6' },
-    7:   { theme: 'Faith (Emunah)',         summary: 'Exile and suffering stem from a lack of faith. Strengthening one\'s emunah is the root of all repair and the path back to G-d.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.7' },
-    17:  { theme: 'The Tzaddik & Faith',    summary: 'Faith in the Tzaddik is the root of all remedies. By connecting to a true guide, a person\'s prayers ascend and their soul is healed.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.17' },
-    21:  { theme: 'Shabbat Elevates All',   summary: 'Shabbat gathers and elevates all the deeds of the week. Every act done in holiness during the week finds its completion in Shabbat.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.21' },
-    25:  { theme: 'Humility & Wisdom',      summary: 'Humility is the vessel for receiving wisdom. The more a person empties themselves of pride, the more Torah and insight can enter.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.25' },
-    49:  { theme: 'Joy Defeats Sadness',    summary: 'The remedy for sadness and constriction is joy. Even manufactured joy can break open the heart and lead to genuine divine connection.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.49' },
-    64:  { theme: 'Prayer Illuminates',     summary: 'Prayer offered with concentration and joy illuminates the world. The quality of one\'s prayer directly affects the spiritual light revealed.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.64' },
-    282: { theme: 'Begin Again',            summary: 'The final teaching: it is never too late to begin again. No matter where one has fallen, G-d\'s hand is always extended in welcome.',
-            url: 'https://www.sefaria.org/Likutei_Moharan.282' },
+    // ELUL (25-29) - Lessons 1-5
+    1:   { theme: 'Torah & Prayer',            summary: 'Through Torah study, prayer rises and is accepted. Connect to the intellect in Creation to reach Hashem.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.1' },
+    2:   { theme: 'Prayer & the Covenant',     summary: 'Prayer is Mashiach\'s weapon. Guard the covenant to pray properly and connect to true tzadikim.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.2' },
+    3:   { theme: 'Song & Holiness',           summary: 'Listening to kosher singers is beneficial. Study Oral Torah at night to rectify improper song.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.3' },
+    4:   { theme: 'World to Come Awareness',   summary: 'Knowing everything is for your benefit is the World to Come. Confess before a Torah scholar.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.4' },
+    5:   { theme: 'Joy of Mitzvot',            summary: 'Joy of a mitzvah shatters barriers. The shofar straightens the heart and removes foreign thoughts.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.5' },
+    // TISHREI (1-30) - Lessons 6-35
+    6:   { theme: 'Self-Nullification',        summary: 'Minimize your honor, maximize G-d\'s honor. Be in constant Teshuva, judging others favorably.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.6' },
+    7:   { theme: 'Faith (Emunah)',            summary: 'Exile stems from lack of faith. Emunah through truth and closeness to Tzadikim brings redemption.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.7' },
+    8:   { theme: 'Sighs & Divine Breath',     summary: 'A Jewish sigh is precious. The Tzadik breathes life through mercy, winning atonement.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.8' },
+    9:   { theme: 'Prayer Gates',              summary: 'Life force comes from prayer. Each tribe has its own gate; connect to the Tzadik to find yours.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.9' },
+    10:  { theme: 'Clapping & Dancing',        summary: 'Clapping and dancing sweeten judgements. Draw close to Tzadikim to elevate prayer properly.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.10' },
+    11:  { theme: 'Shema\'s Unifications',     summary: 'Bring about higher and lower unifications. Speech enlightens; guard the Brit to receive light of Teshuva.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.11' },
+    12:  { theme: 'Tzadik vs. Demon Scholar',  summary: 'Jewish demon scholars attack Tzadikim. The Tzadik accepts with love and derives Torah from the attack.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.12' },
+    13:  { theme: 'Breaking Desire for Money', summary: 'Full Divine providence requires breaking the desire for money. This brings kindness and knowledge.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.13' },
+    14:  { theme: 'Torah of Kindness',         summary: 'Draw closer those outside holiness through Torah of kindness. Humility brings peace and prayer.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.14' },
+    15:  { theme: 'Hidden Light & Fear',       summary: 'Elevate fear to its source to taste the Hidden Light. Judge yourself; prayer with humility is accepted.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.15' },
+    16:  { theme: 'The Large Fish',            summary: 'Sometimes not engaging in Torah upholds it. References the great fish and future revelation.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.16' },
+    17:  { theme: 'The Tzadik & Faith',        summary: 'Faith in the Tzadik is the root of all remedies. The Tzadik reveals Hashem\'s will and pride in Israel.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.17' },
+    18:  { theme: 'Purpose & Mercy',           summary: 'Everything has a higher purpose leading to World to Come. Show mercy in anger to sweeten judgement.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.18' },
+    19:  { theme: 'Traveling to the Tzadik',   summary: 'Travel to the Tzadik; learning from his face is unlike books. Guard Lashon HaKodesh to control desire.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.19' },
+    20:  { theme: 'Words Like Coals',          summary: 'Torah revealed through suffering. Pour out your heart in prayer; words must be hot like coals.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.20' },
+    21:  { theme: 'Shabbat Elevates All',      summary: 'Divine influx comes without introduction through sanctifying the senses. This is the Sukkah and Ruach HaKodesh.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.21' },
+    22:  { theme: 'Seal Within a Seal',        summary: 'Rebuke seals harsh judgement. Fill hands with faith of the Seven Shepherds through holy boldness and joy.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.22' },
+    23:  { theme: 'Joy Defeats Sadness',       summary: 'Shining face of holiness comes from faith in livelihood. Breaking desire for money brings life and light.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.23' },
+    24:  { theme: 'Joy & Mitzvot',             summary: 'Doing mitzvot with joy elevates the Shechinah. Bring down blessing from all worlds through joy.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.24' },
+    25:  { theme: 'Humility & Wisdom',         summary: 'Break imagination, elevate intellect. Tzedakah reveals Creator\'s greatness; joy subdues forces of impurity.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.25' },
+    26:  { theme: 'Self-Sacrifice',            summary: 'The Tzadik elevates fallen sparks wherever external thoughts enter. Requires great self-sacrifice.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.26' },
+    27:  { theme: 'Peace & Truth',             summary: 'World serving Hashem brings peace. Peace leads to truth through majestic countenance and song.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.27' },
+    28:  { theme: 'Faith Like a Worm',         summary: 'Faith in sages defeats enemies. Invite righteous scholars; this is like bringing the daily Tamid offering.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.28' },
+    29:  { theme: 'Praise of Tzadikim',        summary: 'Speech accepted when it has good through praise of Tzadikim. Guard clothing and purity to earn livelihood.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.29' },
+    30:  { theme: 'The Proper Teacher',        summary: 'G-dliness grasped through contractions. Request a proper teacher; despise bribes to attain wisdom.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.30' },
+    31:  { theme: 'Tzedakah & the Spheres',    summary: 'Tzedakah connected to celestial spheres. Emunah is the source of blessings; guard the Brit on journeys.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.31' },
+    32:  { theme: 'Dancing at Weddings',       summary: 'Dancing at weddings mitigates judgements. Rectify the bride through joy of the heart brought to the legs.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.32' },
+    33:  { theme: 'Pursue Peace',              summary: 'Pursue peace between people and within yourself. Accept everything from G-d; find Him in all materiality.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.33' },
+    34:  { theme: 'Yosef the Ruler',           summary: 'The Tzadik awakens Jews to service, removing disgrace. Each person has a special quality to shine.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.34' },
+    35:  { theme: 'Guarding Wisdom',           summary: 'Return everything to its source in Chochmah. Guard wisdom from external concepts; renew through \'sleep.\'',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.35' },
+    // CHESHVAN (1-30) - Lessons 36-65
+    36:  { theme: 'Seventy Souls',             summary: 'Every Jewish soul rooted in 70 souls of Yaakov. Exile brings 70 screams, then Torah revelation.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.36' },
+    37:  { theme: 'Essence of Creation',       summary: 'Know Him through subordinating physicality. Fast, give Tzedakah, stay connected to Torah when earning a living.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.37' },
+    38:  { theme: 'Tefilin & Glory',           summary: 'Tefilin represents attachment to Hashem. Elevate speech through Torah learned in poverty and distress.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.38' },
+    39:  { theme: 'Breaking Hunger',           summary: 'Break the urge for eating. Sanctity in marital relations elevates and blesses the week.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.39' },
+    40:  { theme: 'Journeys & Faith',          summary: 'All journeys result from blemished Emunah. Perfect faith means Hashem can provide without travel.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.40' },
+    41:  { theme: 'Elevating the Heels',       summary: 'Bring Gevurot of Binah to the legs. Dance and joy from holiness sweetens judgements at their roots.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.41' },
+    42:  { theme: 'Song Mitigates Judgement',  summary: 'Through song, judgements are mitigated. Believe in the sages; provide garments to the Tzadik.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.42' },
+    43:  { theme: 'Da\'at of Holiness',        summary: 'Wicked person\'s Da\'at engenders immorality. Learn to make vessels kosher when conquering the world.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.43' },
+    44:  { theme: 'Clapping Purifies Air',     summary: 'Clapping during prayer purifies the air. Removes killing and destruction, connecting to Avraham.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.44' },
+    45:  { theme: 'Wings of the Lungs',        summary: 'Clapping arouses the lungs and speech. Develops the mouth through the aspects of Exodus and jubilee.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.45' },
+    46:  { theme: 'Union & Memory',            summary: 'Clapping mitigates judgement, activates memory. Brings right and left together, eliminating strife.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.46' },
+    47:  { theme: 'Breaking Desire for Food',  summary: 'Breaking desire for food brings truth and wealth. Praise Hashem for bounty to renew Heaven and Earth.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.47' },
+    48:  { theme: 'Strength in Prayer',        summary: 'Say words of Torah and prayer with strength. This corresponds to the Sukkah and the 28 letters of Creation.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.48' },
+    49:  { theme: 'Revelation of Malchut',     summary: 'Hashem\'s Malchut revealed through Middot. Sanctify thoughts; prayer erects Malchut and elevates Jerusalem.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.49' },
+    50:  { theme: 'Waters of Sweetness',       summary: 'Guarding the Brit brings sweetness in prayer. Blemishing it brings bitterness like a dog consuming prayers.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.50' },
+    51:  { theme: 'Pure Marble',               summary: 'Falsehood damages eyes. Don\'t say \'Water, Water\' in spiritual realms; distance from falsehood brings purity.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.51' },
+    52:  { theme: 'Self-Nullification Through Prayer', summary: 'The world is not necessary existence; only Hashem is. Achieve self-nullification through Hitbodedut at night.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.52' },
+    53:  { theme: 'Da\'at Brings Children',    summary: 'Ability to have children depends on complete Da\'at. Bring others close to Hashem to expand your Da\'at.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.53' },
+    54:  { theme: 'Guard Your Memory',         summary: 'Guard memory of the World to Come. Understand daily hints but serve mainly through Torah and Mitzvot.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.54' },
+    55:  { theme: 'Land of Israel & Justice',  summary: 'See downfall of wicked through Land of Israel. Find merit in the wicked to create protective shade.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.55' },
+    56:  { theme: 'Kingship & Da\'at',         summary: 'Each person has Malchut, revealed and hidden. Use it for Hashem\'s will; Torah brings measured vitality.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.56' },
+    57:  { theme: 'Faith in the Sages',        summary: 'Blemishing faith in sages has no cure. Connect to Yaakov; delight in Shabbat brings peace beyond fasting.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.57' },
+    58:  { theme: 'Moshe\'s Double Portion',   summary: 'Well, Clouds, and Mannah given in Moshe\'s merit. Fight Amalek; fix the Brit to merit double portion.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.58' },
+    59:  { theme: 'Building Holy Chambers',    summary: 'Bringing others close builds holy chambers. Guard against their impurity through judgement and angelic fire.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.59' },
+    60:  { theme: 'Shabbat & Livelihood',      summary: 'Shabbat provides sustenance for the coming week. Honoring it brings abundant livelihood.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.60' },
+    // SHEVAT (1-30) - Lessons 123-152
+    123: { theme: 'Binding to the Tzadik',     summary: 'Bind yourself to the Tzadik, accepting his words without veering. Cast off pseudo-wisdoms and be simple and upright.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.123' },
+    124: { theme: 'Victory in Prayer',         summary: 'Hashem takes pleasure when we "win" Him in prayer. He provides the words we need to be victorious.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.124' },
+    125: { theme: 'Three Shabbat Meals',       summary: 'Eat three meals on Shabbat for that specific day. Shabbat eating is precious, corresponding to World to Come delight.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.125' },
+    126: { theme: 'Missing the Tzadik',        summary: 'The Tzadik is like Shabbat. One misses the Tzadik before his passing, as one misses the extra soul after Shabbat.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.126' },
+    127: { theme: 'Honorable Clothing',        summary: 'Clothes serve as protection and should be whole. Honor your clothes; they make claims if dishonored.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.127' },
+    128: { theme: 'Guarding the Eyes',         summary: 'The Sages blinded evil inclination for sexual desire. Lower your eyes completely, not just from the side.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.128' },
+    129: { theme: 'Faith Transforms',          summary: 'Faith in the Tzadik transforms you to be part of him, like consumed food becomes part of the eater.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.129' },
+    130: { theme: 'Humility Guards Covenant',  summary: 'Humility leads to salvation from sexual immorality. Moshe exemplifies ultimate humility and guarding the Covenant.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.130' },
+    131: { theme: 'Fear of Honor',             summary: 'Be afraid of honor—it is life-threatening. Glory is kingship which judges.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.131' },
+    132: { theme: 'Hidden Springs',            summary: 'A Tzadik may be famous in one land, unknown in another. Like a spring that waters tree roots underground.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.132' },
+    133: { theme: 'The Tzadik as Sun',         summary: 'The Tzadik illuminates constantly like the sun; the world blocks us from seeing Torah\'s greatness. Seek higher perspective.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.133' },
+    134: { theme: 'Speaking Torah',            summary: 'Speaking Torah publicly is a major endeavor. Weigh words carefully; inappropriate words resemble wasting seed.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.134' },
+    135: { theme: 'Honoring Holidays',         summary: 'Escape haughtiness by honoring Yamim Tovim with joy. Yom Tov connects to Binah and brings humility.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.135' },
+    136: { theme: 'Judging Favorably',         summary: 'Judge your companion favorably during disputes, whether they are higher or lower than you.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.136' },
+    137: { theme: 'G-dly Portion',             summary: 'Your G-dly portion tells you to keep Hashem\'s words. Give tithes as commanded.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.137' },
+    138: { theme: 'Heart as Emissary',         summary: 'The heart becomes Hashem\'s emissary. With a pure heart, it speaks His words literally.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.138' },
+    139: { theme: 'Shabbat Returns Mitzvot',   summary: 'Shabbat returns the "feet" of weekday Mitzvot to holiness. Like a father delighting in his child\'s first steps.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.139' },
+    140: { theme: 'Tzadik as Seal',            summary: 'A Tzadik is understood through those close to him. He is a seal because he guards the Covenant.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.140' },
+    141: { theme: 'Circumcising the Heart',    summary: 'Circumcise your heart to feel pain over sins. When you feel remorse, your fallen seed feels it too.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.141' },
+    142: { theme: 'Study from the Heart',      summary: 'If you cannot study but your heart burns with desire, this is studying from the Book of Remembrance.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.142' },
+    143: { theme: 'Accepting Wise Advice',     summary: 'Accepting advice from the wise sweetens judgement. Expands constricted mind. Even if things don\'t work out, it was from Heaven.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.143' },
+    144: { theme: 'Always Serving Hashem',     summary: 'For a Tzadik, no difference between life and death—always serving Hashem. Conquers desires even on permitted days.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.144' },
+    145: { theme: 'Restraining Strife',        summary: 'Restraining desire for strife is like not dying. Being quoted in Halacha keeps one alive.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.145' },
+    146: { theme: 'Torah\'s Female Quality',   summary: 'Torah uses female quality to provide testimony where men don\'t go. Enlightens the foolish pursuing lusts.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.146' },
+    147: { theme: 'Holy Boldness',             summary: 'Need holy boldness from Hashem to overcome obstacles. Must temper boldness so it doesn\'t become brazenness.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.147' },
+    148: { theme: 'Fear Itself Fears',         summary: 'Fear of Hashem itself fears Hashem, and that fear also fears, continuing indefinitely. Heel of humility, head of wisdom.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.148' },
+    149: { theme: 'Tikkun Chatzot',            summary: 'Midnight prayer works as redemption. Darkest time when night starts getting lighter. Two-hour window after sixth hour from nightfall.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.149' },
+    150: { theme: 'Hidden Test',               summary: 'Yaakov\'s appearance to Yosef during his test is deeply hidden. That it remained difficult even after is covered and hidden.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.150' },
+    151: { theme: 'Healing Infants',           summary: 'Recite Rosh Chodesh verse to have children or heal infants. Relates to fixing the moon\'s blemish and Moshe\'s completion.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.151' },
+    152: { theme: 'Opening of Faith',          summary: 'Soul surrounded by impurity except for opening of faith. Blemishes seal it. G-d-fearing guards it. Self-sacrifice connects to Tzadik.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.152' },
+    // ADAR (1-29) - Lessons 153-181
+    153: { theme: 'Greeting Torah Scholar',    summary: 'Disciple must be like polished mirror to receive Torah scholar\'s light. Cannot be thick with lust or brazenness.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.153' },
+    154: { theme: 'Fallen Fears',              summary: 'Suffering comes from fallen fears. Elevate fears to their root. Judge yourself; then no judgement above and no need to fear anything except Hashem.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.154' },
+    155: { theme: 'Joy Through Faith',         summary: 'Sadness prevents traveling to Tzadik and proper prayer. Faith in Hashem listening gives power to grow and overcome with joy.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.155' },
+    156: { theme: 'Hitbodedut as Ruach HaKodesh', summary: 'Private conversation with Hashem is holy spirit. Renew words each time. Purify heart through flames of desire for Hashem.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.156' },
+    157: { theme: 'Ultimate Desire',           summary: 'Cleaving to Torah words from a Tzadik\'s mouth makes one wonder how anyone desires this world\'s life.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.157' },
+    158: { theme: 'Temporary Fires',           summary: 'Temporary burning desire to serve Hashem is like distant mist fires. Contrast with true desire from Tzadik\'s Torah.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.158' },
+    159: { theme: 'Torah Fire & Water',        summary: 'Shechinah is intermediary. Torah has fire (spiritual) and water (physical). Not everyone merits Shechinah receiving their Torah.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.159' },
+    160: { theme: 'Pulse & Speech',            summary: 'Pulse knocks, reminding to serve Hashem or to sin. Pulse follows speech; both go according to one\'s words.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.160' },
+    161: { theme: 'Disputes Elevate',          summary: 'Disputes raise and elevate like water carrying a tree. See positive aspect of disagreement to avoid tragedy.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.161' },
+    162: { theme: 'Wisdom & Wealth',           summary: 'Wealthy distinguished man opposed Maggid, became close through prayer. Became wise but lost wealth. Only humility allows both.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.162' },
+    163: { theme: 'Speech Held Captive',       summary: 'Holy speech wants to emerge but can be trapped by impurity. Tzadik has power to free it. Person becomes conversation on people\'s mouths.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.163' },
+    164: { theme: 'The Great Doctor',          summary: 'Doctor became ill, needed great doctor\'s special cures. Tzadik knows what spiritual cures each person needs.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.164' },
+    165: { theme: 'Bad Within Us',             summary: 'When something bad happens, it\'s due to bad within us. Need Teshuvah.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.165' },
+    166: { theme: 'Gathering Around Tzadik',   summary: 'Gather by the Tzadik to give him rulership. This grants power to annul decrees.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.166' },
+    167: { theme: 'Shabbat Like Fasts',        summary: 'Shabbats spent with the true Torah scholar are like fasts. Spiritual elevation through time with Tzadik.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.167' },
+    168: { theme: 'Haughtiness & Humility',    summary: 'Haughtiness indicates coming trouble. Lowliness/humility signs that great honor approaches.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.168' },
+    169: { theme: 'Joy & Judgement',           summary: 'Dancing and joy, but also judgements brought by runners. Pregnancy is judgement; birth removes it. Judge yourself to bring joy.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.169' },
+    170: { theme: 'Afflictions Elevate',       summary: 'Person suffers afflictions from those around. Greater person suffers from more. Afflictions subjugate body, releasing soul to elevate others.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.170' },
+    171: { theme: 'Rising from Dust',          summary: 'Those rising from dust: use new Torah for eternal life or to mock—leading to eternal derision. Humility or ego determines path.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.171' },
+    172: { theme: 'Nullifying Oneself',        summary: 'Become nothing before Hashem. Nullifying one\'s shade allows divine light to enter. Hashem\'s smile and Tzadikim\'s smile benefit the world.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.172' },
+    173: { theme: 'Recognizing the Soul',      summary: 'Tzadik HaEmet recognizes from writing and speech the inner dimension of one\'s soul and root of faith.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.173' },
+    174: { theme: 'Not Evoking Names',         summary: 'In time of judgement, don\'t evoke person\'s name. Moshe hints at Miriam\'s name through gematria when praying for her.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.174' },
+    175: { theme: 'Crying from Joy',           summary: 'Essential crying is from joy and happiness. Even remorse should be from joy in Hashem.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.175' },
+    176: { theme: 'Removing Foolishness',      summary: 'Spirit of folly fills heart with air. Connecting to Tzadik\'s hollow heart creates vacuum, removing foolishness and leaving humility.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.176' },
+    177: { theme: 'Wine & Leadership',         summary: 'True Tzadikim pardon sin through occasional wine. Wine makes one a leader. Being content with G-d\'s will gives reign to His kingship.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.177' },
+    178: { theme: 'Confession & Joy',          summary: 'Confess verbally. Turn to joy of mitzvot from head to toe. Many mitzvot overcome worry, enabling confession.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.178' },
+    179: { theme: 'Fasting Resolves Strife',   summary: 'Strife resolved through fasting. Links one\'s will to Hashem\'s, reviving joy. Yom Kippur essence encompasses all days.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.179' },
+    180: { theme: 'Pidyon - Redemption',       summary: 'Pidyon to Tzadik mitigates judgement. Money corresponds to feet/Malchut. Atonement through Binah.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.180' },
+    181: { theme: 'United Glory',              summary: 'Group can unite their "glory" against someone greater. Wicked have no glory. Words against true Tzadik benefit him—they stand him up.',
+           blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
+           url: 'https://www.sefaria.org/Likutei_Moharan.181' },
+    //  Additional lessons from Nissan onwards can be added from the blog
+    64:  { theme: 'Prayer Illuminates',        summary: 'Prayer offered with concentration and joy illuminates the world. The quality of one\'s prayer directly affects the spiritual light revealed.',
+           url: 'https://www.sefaria.org/Likutei_Moharan.64' },
+    282: { theme: 'Begin Again',               summary: 'The final teaching: it is never too late to begin again. No matter where one has fallen, G-d\'s hand is always extended in welcome.',
+           url: 'https://www.sefaria.org/Likutei_Moharan.282' },
   };
 
   // ── DAF YOMI — Cycle 14 (Jan 5 2020 → July 7 2027) ──────────────────────────
@@ -1738,6 +2139,32 @@
   }
 
   // ── ALEF-BET DATA (22 sets × 2 letters each = 16.5 full sets in 364-day year) ──
+  // Single letters for each day 1-22 within any cycle
+  const SINGLE_LETTERS_22 = [
+    { letter: 'Alef', hebrew: 'א' },      // Day 1
+    { letter: 'Bet', hebrew: 'ב' },       // Day 2
+    { letter: 'Gimmel', hebrew: 'ג' },    // Day 3
+    { letter: 'Dalet', hebrew: 'ד' },     // Day 4
+    { letter: 'Heh', hebrew: 'ה' },       // Day 5
+    { letter: 'Vav', hebrew: 'ו' },       // Day 6
+    { letter: 'Zayin', hebrew: 'ז' },     // Day 7
+    { letter: 'Chet', hebrew: 'ח' },      // Day 8
+    { letter: 'Tet', hebrew: 'ט' },       // Day 9
+    { letter: 'Yud', hebrew: 'י' },       // Day 10
+    { letter: 'Kaf', hebrew: 'כ' },       // Day 11
+    { letter: 'Lamed', hebrew: 'ל' },     // Day 12
+    { letter: 'Mem', hebrew: 'מ' },       // Day 13
+    { letter: 'Nun', hebrew: 'נ' },       // Day 14
+    { letter: 'Samech', hebrew: 'ס' },    // Day 15
+    { letter: 'Ayin', hebrew: 'ע' },      // Day 16
+    { letter: 'Peh', hebrew: 'פ' },       // Day 17
+    { letter: 'Tzaddik', hebrew: 'צ' },   // Day 18
+    { letter: 'Kuf', hebrew: 'ק' },       // Day 19
+    { letter: 'Reish', hebrew: 'ר' },     // Day 20
+    { letter: 'Shin', hebrew: 'ש' },      // Day 21
+    { letter: 'Tav', hebrew: 'ת' }        // Day 22
+  ];
+
   const ALEF_BET = [
     { letters: 'Alef & Bet', hebrew: 'א & ב', theme: 'Heavens & Earth', cycle: 1 },
     { letters: 'Gimmel & Dalet', hebrew: 'ג & ד', theme: 'Eden & Gehennom', cycle: 2 },
@@ -1762,10 +2189,20 @@
   function get22DayInfo(d) {
     const cycle = (d % 22 == 0) ? parseInt(d/22) : 1 + parseInt(d/22);
     const day   = (d % 22 == 0) ? 22 : d % 22;
-    // Which letter-set (0-indexed): each set is 22 days, 17 sets total
+    // Daily letter (1-22)
+    const dailyLetter = SINGLE_LETTERS_22[day - 1];
+    // Which cycle theme (0-indexed): each set is 22 days, 17 sets total
     const setIndex = Math.min(cycle - 1, ALEF_BET.length - 1);
     const ab = ALEF_BET[setIndex];
-    return { cycle, day, letters: ab.letters, hebrew: ab.hebrew, theme: ab.theme };
+    return { 
+      cycle, 
+      day, 
+      letters: ab.letters,        // Cycle letters (e.g., "Mem & Nun" for Set 7)
+      hebrew: ab.hebrew,          // Cycle Hebrew
+      theme: ab.theme,
+      dailyLetter: dailyLetter.letter,      // Day letter (e.g., "Samech" for day 15)
+      dailyHebrew: dailyLetter.hebrew       // Day Hebrew
+    };
   }
 
   // 13-day cycle — enriched with 13 Attributes
@@ -2680,13 +3117,12 @@
 
     // CHOCHMAH — 22-Day Alef-Bet
     document.getElementById('chochmah-cycle-name').textContent = 'Alef-Bet — 22-Day Cycle';
-    const cy22LetterName = cy22.letters.split(' & ')[cy22.day <= 11 ? 0 : 1]; // First or second letter
     document.getElementById('chochmah-main').innerHTML =
       `Set <strong>${cy22.cycle}</strong> — <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
-      `<span style="font-size:0.9em;color:var(--ink-mid)">Day ${cy22.day}, ${cy22LetterName}</span>`;
+      `<span style="font-size:0.9em;color:var(--ink-mid)">Day ${cy22.day} · Letter: ${cy22.dailyLetter} ${cy22.dailyHebrew}</span>`;
     document.getElementById('chochmah-sub').textContent = `Theme: ${cy22.theme}`;
     document.getElementById('chochmah-tags').innerHTML =
-      `<span class="tag highlight">${cy22.letters}</span><span class="tag">Day ${cy22.day} of 22</span><span class="tag">${cy22.theme}</span>`;
+      `<span class="tag highlight">${cy22.dailyLetter} ${cy22.dailyHebrew}</span><span class="tag">Day ${cy22.day} of 22</span><span class="tag">${cy22.letters}</span>`;
     
     // Acrostic Psalms mapping to 22-day cycles (based on blog)
     const ACROSTIC_PSALMS = {
@@ -2715,7 +3151,8 @@
       : '';
     
     document.getElementById('chochmah-detail').innerHTML =
-      `<div class="detail-row"><span class="detail-label">Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
+      `<div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
+       <div class="detail-row"><span class="detail-label">Daily Letter:</span><span class="detail-value">Day ${cy22.day} · ${cy22.dailyLetter} ${cy22.dailyHebrew}</span></div>
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${cy22.theme}</span></div>
        <div class="detail-row"><span class="detail-label">Set:</span><span class="detail-value">Set ${cy22.cycle} of 17 · Day ${cy22.day} of 22</span></div>
        ${acrosticRow}
@@ -2958,6 +3395,10 @@
   }
 
   function toggleExpand(card) {
+    card.classList.toggle('expanded');
+  }
+
+  function toggleKeterExpand(card) {
     card.classList.toggle('expanded');
   }
 
