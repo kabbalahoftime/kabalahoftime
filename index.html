@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,6 +7,7 @@
 <title>Kabbalah of Time — Daily Reading</title>
 
 <!-- PWA Configuration -->
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b6914">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -40,818 +41,814 @@
     --accent-brown:  #5a3a1a;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  .app {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-  }
-
-  /* ── HEADER ── */
-  .header {
-    text-align: center;
-    padding: 44px 0 28px;
-    border-bottom: 2px solid var(--border-strong);
-    margin-bottom: 28px;
-  }
-
-  .star-of-david {
-    font-size: 26px;
-    color: var(--gold);
-    display: block;
-    margin-bottom: 14px;
-  }
-
-  .title-hebrew {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 24px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    margin-bottom: 6px;
-  }
-
-  .title-main {
-    font-family: 'Cinzel', serif;
-    font-size: 26px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .title-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--ink-soft);
-    letter-spacing: 1px;
-  }
-
-  /* ── DATE SELECTOR ── */
-  .date-bar {
-    background: var(--bg-card);
-    border: 1px solid var(--border-strong);
-    border-radius: 4px;
-    padding: 12px 18px;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  }
-
-  .date-nav-btn {
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border-strong);
-    color: var(--gold);
-    width: 34px;
-    height: 34px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-    flex-shrink: 0;
-    font-weight: bold;
-  }
-
-  .date-nav-btn:hover {
-    background: var(--gold-pale);
-    border-color: var(--gold);
-  }
-
-  .date-info { text-align: center; flex: 1; }
-
-  .date-gregorian {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    color: var(--ink);
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  .date-hebrew {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 15px;
-    color: var(--ink-soft);
-    margin-top: 2px;
-  }
-
-  .date-day-indicator {
-    font-size: 11px;
-    color: var(--ink-mid);
-    font-style: italic;
-    margin-top: 3px;
-  }
-
-  /* ── CROWN ── */
-  .keter-title-row {
-    text-align: center;
-    margin-bottom: 6px;
-  }
-  .keter-crown-label {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-  .keter-card {
-    background: var(--bg-card);
-    border: 2px solid var(--border-strong);
-    border-radius: 4px;
-    margin-bottom: 10px;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    animation: fadeInDown 0.5s ease both;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .keter-card:hover {
-    box-shadow: 0 3px 12px rgba(139, 105, 20, 0.15);
-  }
-
-  .keter-card .expand-icon {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    font-size: 14px;
-    color: var(--gold);
-    transition: transform 0.25s ease;
-    z-index: 2;
-  }
-
-  .keter-card.expanded .expand-icon {
-    transform: rotate(180deg);
-  }
-
-  .keter-visible-content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-  }
-
-  .keter-detail {
-    display: none;
-    animation: fadeIn 0.25s ease;
-  }
-
-  .keter-card.expanded .keter-detail {
-    display: block;
-  }
-
-  .keter-detail .keter-section:not(:last-child) {
-    border-bottom: 1px solid var(--border);
-  }
-
-  .keter-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    border-radius: 4px 4px 0 0;
-    z-index: 1;
-  }
-
-  @media (max-width: 540px) {
-    .keter-visible-content { grid-template-columns: 1fr; }
-    .keter-card .expand-icon { top: 12px; right: 16px; }
-  }
-
-  .keter-section {
-    padding: 16px 20px;
-  }
-
-  .keter-visible-content .keter-section:nth-child(odd) {
-    background: var(--bg-card);
-  }
-
-  .keter-visible-content .keter-section:nth-child(even) {
-    background: var(--bg-card-alt);
-  }
-
-  .keter-detail .keter-section {
-    background: var(--bg-card);
-  }
-
-  .keter-visible-content .keter-section:not(:last-child) {
-    border-right: 1px solid var(--border);
-  }
-
-  @media (max-width: 540px) {
-    .keter-visible-content .keter-section:not(:last-child) {
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-    }
-  }
-
-  .keter-section-label {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 2.5px;
-    color: var(--ink-dim);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .keter-hdate {
-    font-size: 11px;
-    color: var(--gold);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-  }
-
-  .keter-main {
-    font-size: 13.5px;
-    color: var(--ink);
-    line-height: 1.55;
-    font-style: italic;
-  }
-
-  .keter-meta {
-    font-size: 11px;
-    color: var(--ink-dim);
-    margin-top: 6px;
-  }
-
-  .keter-meta strong {
-    color: var(--gold);
-  }
-
-  /* ── SEFIRAH CARDS ── */
-  .upper-sefirot-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .upper-sefirah {
-    border-top: 3px solid var(--gold) !important;
-    border-left: none !important;
-    grid-template-columns: 96px 1fr;
-  }
-  .upper-sefirah .sefirah-label-col {
-    overflow: hidden;
-    padding-right: 6px;
-  }
-  .upper-sefirah .sefirah-name {
-    font-size: 9.5px;
-    letter-spacing: 0.8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: clip;
-  }
-  .upper-sefirah .sefirah-hebrew {
-    font-size: 16px;
-  }
-  @media (max-width: 540px) {
-    .upper-sefirot-grid { grid-template-columns: 1fr; }
-  }
-
-  .sefirot-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 24px;
-  }
-
-  .sefirah-card {
-    background: var(--bg-card);
-    border-radius: 3px;
-    padding: 14px 18px;
-    display: grid;
-    grid-template-columns: 86px 1fr;
-    gap: 14px;
-    align-items: start;
-    position: relative;
-    cursor: pointer;
-    transition: box-shadow 0.2s, transform 0.15s;
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--sefirah-color, var(--gold));
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    animation: fadeInUp 0.4s ease both;
-  }
-
-  .sefirah-card:hover {
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-    transform: translateY(-1px);
-  }
-
-  .sefirah-card:nth-child(1) { animation-delay: 0.05s; --sefirah-color: var(--accent-blue); }
-  .sefirah-card:nth-child(2) { animation-delay: 0.10s; --sefirah-color: var(--accent-red); }
-  .sefirah-card:nth-child(3) { animation-delay: 0.15s; --sefirah-color: var(--accent-green); }
-  .sefirah-card:nth-child(4) { animation-delay: 0.20s; --sefirah-color: var(--accent-orange); }
-  .sefirah-card:nth-child(5) { animation-delay: 0.25s; --sefirah-color: var(--accent-teal); }
-  .sefirah-card:nth-child(6) { animation-delay: 0.30s; --sefirah-color: var(--accent-purple); }
-  .sefirah-card:nth-child(7) { animation-delay: 0.35s; --sefirah-color: var(--accent-brown); }
-
-  .sefirah-label-col {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-top: 2px;
-    border-right: 1px solid var(--border);
-    padding-right: 12px;
-  }
-
-  .sefirah-name {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--sefirah-color, var(--gold));
-    margin-bottom: 5px;
-    font-weight: 600;
-  }
-
-  .sefirah-hebrew {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 22px;
-    color: var(--sefirah-color, var(--gold));
-    line-height: 1;
-    opacity: 0.85;
-  }
-
-  .sefirah-content-col { padding-left: 2px; }
-
-  .sefirah-cycle-name {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--ink-dim);
-    margin-bottom: 5px;
-  }
-
-  .sefirah-main-text {
-    font-size: 18px;
-    color: var(--ink);
-    line-height: 1.45;
-    font-weight: 400;
-  }
-
-  .sefirah-main-text strong {
-    font-weight: 700;
-    color: var(--sefirah-color, var(--gold));
-  }
-
-  .sefirah-sub-text {
-    font-size: 14px;
-    color: var(--ink-soft);
-    margin-top: 5px;
-    font-style: italic;
-    line-height: 1.5;
-  }
-
-  .sefirah-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 7px;
-  }
-
-  .tag {
-    font-size: 11px;
-    padding: 2px 9px;
-    border-radius: 2px;
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border);
-    color: var(--ink-mid);
-    letter-spacing: 0.3px;
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  .tag.highlight {
-    background: var(--gold-pale);
-    border-color: var(--border-strong);
-    color: var(--gold);
-    font-weight: 600;
-  }
-
-  /* ── EXPANDED DETAIL ── */
-  .sefirah-detail {
-    display: none;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
-    margin-top: 10px;
-  }
-
-  .sefirah-card.expanded .sefirah-detail {
-    display: block;
-    animation: fadeIn 0.25s ease;
-  }
-
-  .detail-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 6px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .detail-label {
-    color: var(--gold-mid);
-    font-style: italic;
-    min-width: 110px;
-    flex-shrink: 0;
-    font-weight: 500;
-  }
-
-  .detail-value { color: var(--ink-mid); }
-
-  /* ── DIVIDER ── */
-  .section-divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 20px 0 14px;
-  }
-
-  .section-divider::before,
-  .section-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border-strong);
-  }
-
-  .divider-symbol {
-    color: var(--gold);
-    font-size: 13px;
-  }
-
-  /* ── WEEKLY SECTION ── */
-  .weekly-section {
-    background: var(--bg-card);
-    border: 1px solid var(--border-strong);
-    border-radius: 4px;
-    padding: 18px 22px;
-    margin-bottom: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    animation: fadeInUp 0.4s ease 0.4s both;
-  }
-
-  .weekly-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .weekly-title {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--ink-dim);
-  }
-
-  .weekly-badge {
-    font-size: 13px;
-    padding: 3px 10px;
-    border: 1px solid var(--border-strong);
-    color: var(--gold);
-    border-radius: 2px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    background: var(--bg-card-alt);
-  }
-
-  .weekly-items {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .weekly-item {
-    padding: 12px;
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-  }
-
-  .weekly-item-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--ink-dim);
-    margin-bottom: 5px;
-    font-family: 'Cinzel', serif;
-  }
-
-  .weekly-item-value {
-    font-size: 17px;
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .weekly-item-sub {
-    font-size: 12px;
-    color: var(--ink-soft);
-    font-style: italic;
-    margin-top: 3px;
-  }
-  .weekly-book-row {
-    display: flex;
-    gap: 12px;
-    padding: 10px 12px;
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    margin-bottom: 6px;
-    align-items: flex-start;
-  }
-
-  .weekly-book-label {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-family: 'Cinzel', serif;
-    min-width: 62px;
-    padding-top: 2px;
-    opacity: 0.85;
-  }
-
-  .weekly-book-content {
-    flex: 1;
-  }
-
-  .weekly-book-subrow {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 5px;
-  }
-
-  .weekly-tag {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    background: rgba(184,142,77,0.12);
-    color: var(--ink-soft);
-    border: 1px solid var(--border);
-  }
-
-
-
-
-
-  /* ── MALCHUT EXPANDED PANEL ── */
-  .mal-today-highlight {
-    background: linear-gradient(135deg, rgba(180,140,60,0.12), rgba(180,140,60,0.05));
-    border: 2px solid var(--gold);
-    border-radius: 3px;
-    padding: 8px;
-    margin-bottom: 12px;
-  }
-  .mal-today-badge {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    padding-left: 4px;
-  }
-  .mal-week-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 14px 0 10px 0;
-  }
-
-  .mal-parasha-header {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 6px 8px 8px;
-    margin-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-    font-size: 11px;
-    color: var(--text-dim);
-  }
-  .mal-parasha-header strong {
-    color: var(--gold);
-    font-size: 13px;
-    font-family: 'Cinzel', serif;
-    letter-spacing: 0.5px;
-  }
-
-  .mal-book-row {
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    margin-bottom: 6px;
-    overflow: hidden;
-  }
-  .mal-today {
-    border-color: var(--gold);
-    background: rgba(184,142,77,0.07);
-  }
-
-  .mal-book-header {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    padding: 5px 8px 3px;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
-  .mal-today .mal-book-header {
-    background: rgba(184,142,77,0.1);
-  }
-
-  .mal-night {
-    font-size: 9px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    white-space: nowrap;
-  }
-  .mal-text-name {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-main);
-    font-family: 'Cinzel', serif;
-    flex: 1;
-  }
-  .mal-today .mal-text-name {
-    color: var(--gold);
-  }
-  .mal-book-label {
-    font-size: 9px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.75;
-    white-space: nowrap;
-  }
-  .mal-today .mal-book-label {
-    opacity: 1;
-  }
-
-  .mal-fields {
-    padding: 4px 8px 5px;
-  }
-  .mal-field {
-    display: flex;
-    gap: 6px;
-    align-items: baseline;
-    padding: 2px 0;
-    font-size: 11px;
-    line-height: 1.4;
-  }
-  .mal-field-label {
-    font-size: 9px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-    white-space: nowrap;
-    min-width: 80px;
-    padding-top: 1px;
-  }
-  .mal-today .mal-field-label {
-    opacity: 1;
-  }
-  .mal-field-value {
-    color: var(--text-main);
-    flex: 1;
-  }
-
-  .detail-source {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.8;
-    margin-bottom: 2px;
-    font-family: 'Cinzel', serif;
-  }
-
-  .detail-today {
-    background: rgba(184,142,77,0.12);
-    border-radius: 3px;
-    padding: 2px 4px;
-    margin: 1px -4px;
-  }
-
-  .detail-today .detail-label {
-    color: var(--gold);
-    font-weight: 600;
-  }
-
-  .detail-week-header .detail-label {
-    color: var(--gold);
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-  }
-
-  .detail-week-header {
-    margin-bottom: 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .ww-label-zohar  { color: #9b7fc8; }
-  .ww-label-ls     { color: var(--gold); }
-  .ww-label-kst    { color: #e8c97a; }
-  .ww-label-ne     { color: #7ec8a0; }
-  .ww-label-tanya  { color: #7ab8e8; }
-  .ww-label-lm     { color: #e87a7a; }
-  .ww-label-my     { color: #c8a07e; }
-
-  .weekly-tag.dim {
-    opacity: 0.75;
-    font-style: italic;
-  }
-
-
-
-  /* ── FOOTER ── */
-  .footer {
-    text-align: center;
-    padding: 28px 0 0;
-    border-top: 1px solid var(--border);
-    margin-top: 28px;
-  }
-
-  .footer-text {
-    font-size: 13px;
-    color: var(--ink-soft);
-    font-style: italic;
-    letter-spacing: 1px;
-  }
-
-  .footer-authors {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--gold);
-    margin-top: 6px;
-    text-transform: uppercase;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  /* ── EXPAND ICON ── */
-  .expand-icon {
-    position: absolute;
-    right: 12px;
-    top: 14px;
-    color: var(--ink-dim);
-    font-size: 11px;
-    transition: transform 0.3s;
-  }
-  .sefirah-card.expanded .expand-icon { transform: rotate(180deg); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 480px) {
-    .sefirah-card { grid-template-columns: 70px 1fr; gap: 10px; }
-    .weekly-items { grid-template-columns: 1fr; }
-    .title-main { font-size: 20px; }
-    .crown-text { font-size: 17px; }
-    .sefirah-main-text { font-size: 16px; }
-  }
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–ink);
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+.app {
+max-width: 680px;
+margin: 0 auto;
+padding: 0 20px 60px;
+}
+
+/* ── HEADER ── */
+.header {
+text-align: center;
+padding: 44px 0 28px;
+border-bottom: 2px solid var(–border-strong);
+margin-bottom: 28px;
+}
+
+.star-of-david {
+font-size: 26px;
+color: var(–gold);
+display: block;
+margin-bottom: 14px;
+}
+
+.title-hebrew {
+font-family: ‘Frank Ruhl Libre’, serif;
+font-size: 24px;
+color: var(–gold);
+letter-spacing: 3px;
+margin-bottom: 6px;
+}
+
+.title-main {
+font-family: ‘Cinzel’, serif;
+font-size: 26px;
+font-weight: 600;
+color: var(–ink);
+letter-spacing: 3px;
+text-transform: uppercase;
+margin-bottom: 4px;
+}
+
+.title-sub {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+font-size: 16px;
+color: var(–ink-soft);
+letter-spacing: 1px;
+}
+
+/* ── DATE SELECTOR ── */
+.date-bar {
+background: var(–bg-card);
+border: 1px solid var(–border-strong);
+border-radius: 4px;
+padding: 12px 18px;
+margin-bottom: 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.date-nav-btn {
+background: var(–bg-card-alt);
+border: 1px solid var(–border-strong);
+color: var(–gold);
+width: 34px;
+height: 34px;
+border-radius: 3px;
+cursor: pointer;
+font-size: 18px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.15s;
+flex-shrink: 0;
+font-weight: bold;
+}
+
+.date-nav-btn:hover {
+background: var(–gold-pale);
+border-color: var(–gold);
+}
+
+.date-info { text-align: center; flex: 1; }
+
+.date-gregorian {
+font-family: ‘Cinzel’, serif;
+font-size: 13px;
+letter-spacing: 2px;
+color: var(–ink);
+text-transform: uppercase;
+font-weight: 600;
+}
+
+.date-hebrew {
+font-family: ‘Frank Ruhl Libre’, serif;
+font-size: 15px;
+color: var(–ink-soft);
+margin-top: 2px;
+}
+
+.date-day-indicator {
+font-size: 11px;
+color: var(–ink-mid);
+font-style: italic;
+margin-top: 3px;
+}
+
+/* ── CROWN ── */
+.keter-title-row {
+text-align: center;
+margin-bottom: 6px;
+}
+.keter-crown-label {
+font-family: ‘Cinzel’, serif;
+font-size: 11px;
+letter-spacing: 4px;
+color: var(–gold);
+text-transform: uppercase;
+}
+.keter-card {
+background: var(–bg-card);
+border: 2px solid var(–border-strong);
+border-radius: 4px;
+margin-bottom: 10px;
+position: relative;
+box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+animation: fadeInDown 0.5s ease both;
+cursor: pointer;
+transition: all 0.2s ease;
+}
+
+.keter-card:hover {
+box-shadow: 0 3px 12px rgba(139, 105, 20, 0.15);
+}
+
+.keter-card .expand-icon {
+position: absolute;
+top: 16px;
+right: 20px;
+font-size: 14px;
+color: var(–gold);
+transition: transform 0.25s ease;
+z-index: 2;
+}
+
+.keter-card.expanded .expand-icon {
+transform: rotate(180deg);
+}
+
+.keter-visible-content {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 0;
+}
+
+.keter-detail {
+display: none;
+animation: fadeIn 0.25s ease;
+}
+
+.keter-card.expanded .keter-detail {
+display: block;
+}
+
+.keter-detail .keter-section:not(:last-child) {
+border-bottom: 1px solid var(–border);
+}
+
+.keter-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+background: linear-gradient(90deg, transparent, var(–gold), transparent);
+border-radius: 4px 4px 0 0;
+z-index: 1;
+}
+
+@media (max-width: 540px) {
+.keter-visible-content { grid-template-columns: 1fr; }
+.keter-card .expand-icon { top: 12px; right: 16px; }
+}
+
+.keter-section {
+padding: 16px 20px;
+}
+
+.keter-visible-content .keter-section:nth-child(odd) {
+background: var(–bg-card);
+}
+
+.keter-visible-content .keter-section:nth-child(even) {
+background: var(–bg-card-alt);
+}
+
+.keter-detail .keter-section {
+background: var(–bg-card);
+}
+
+.keter-visible-content .keter-section:not(:last-child) {
+border-right: 1px solid var(–border);
+}
+
+@media (max-width: 540px) {
+.keter-visible-content .keter-section:not(:last-child) {
+border-right: none;
+border-bottom: 1px solid var(–border);
+}
+}
+
+.keter-section-label {
+font-family: ‘Cinzel’, serif;
+font-size: 9px;
+letter-spacing: 2.5px;
+color: var(–ink-dim);
+text-transform: uppercase;
+margin-bottom: 6px;
+}
+
+.keter-hdate {
+font-size: 11px;
+color: var(–gold);
+font-weight: 600;
+letter-spacing: 0.5px;
+margin-bottom: 8px;
+}
+
+.keter-main {
+font-size: 13.5px;
+color: var(–ink);
+line-height: 1.55;
+font-style: italic;
+}
+
+.keter-meta {
+font-size: 11px;
+color: var(–ink-dim);
+margin-top: 6px;
+}
+
+.keter-meta strong {
+color: var(–gold);
+}
+
+/* ── SEFIRAH CARDS ── */
+.upper-sefirot-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+margin-bottom: 12px;
+}
+.upper-sefirah {
+border-top: 3px solid var(–gold) !important;
+border-left: none !important;
+grid-template-columns: 96px 1fr;
+}
+.upper-sefirah .sefirah-label-col {
+overflow: hidden;
+padding-right: 6px;
+}
+.upper-sefirah .sefirah-name {
+font-size: 9.5px;
+letter-spacing: 0.8px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: clip;
+}
+.upper-sefirah .sefirah-hebrew {
+font-size: 16px;
+}
+@media (max-width: 540px) {
+.upper-sefirot-grid { grid-template-columns: 1fr; }
+}
+
+.sefirot-grid {
+display: flex;
+flex-direction: column;
+gap: 6px;
+margin-bottom: 24px;
+}
+
+.sefirah-card {
+background: var(–bg-card);
+border-radius: 3px;
+padding: 14px 18px;
+display: grid;
+grid-template-columns: 86px 1fr;
+gap: 14px;
+align-items: start;
+position: relative;
+cursor: pointer;
+transition: box-shadow 0.2s, transform 0.15s;
+border: 1px solid var(–border);
+border-left: 4px solid var(–sefirah-color, var(–gold));
+box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+animation: fadeInUp 0.4s ease both;
+}
+
+.sefirah-card:hover {
+box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+transform: translateY(-1px);
+}
+
+.sefirah-card:nth-child(1) { animation-delay: 0.05s; –sefirah-color: var(–accent-blue); }
+.sefirah-card:nth-child(2) { animation-delay: 0.10s; –sefirah-color: var(–accent-red); }
+.sefirah-card:nth-child(3) { animation-delay: 0.15s; –sefirah-color: var(–accent-green); }
+.sefirah-card:nth-child(4) { animation-delay: 0.20s; –sefirah-color: var(–accent-orange); }
+.sefirah-card:nth-child(5) { animation-delay: 0.25s; –sefirah-color: var(–accent-teal); }
+.sefirah-card:nth-child(6) { animation-delay: 0.30s; –sefirah-color: var(–accent-purple); }
+.sefirah-card:nth-child(7) { animation-delay: 0.35s; –sefirah-color: var(–accent-brown); }
+
+.sefirah-label-col {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding-top: 2px;
+border-right: 1px solid var(–border);
+padding-right: 12px;
+}
+
+.sefirah-name {
+font-family: ‘Cinzel’, serif;
+font-size: 11px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–sefirah-color, var(–gold));
+margin-bottom: 5px;
+font-weight: 600;
+}
+
+.sefirah-hebrew {
+font-family: ‘Frank Ruhl Libre’, serif;
+font-size: 22px;
+color: var(–sefirah-color, var(–gold));
+line-height: 1;
+opacity: 0.85;
+}
+
+.sefirah-content-col { padding-left: 2px; }
+
+.sefirah-cycle-name {
+font-family: ‘Cinzel’, serif;
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–ink-dim);
+margin-bottom: 5px;
+}
+
+.sefirah-main-text {
+font-size: 18px;
+color: var(–ink);
+line-height: 1.45;
+font-weight: 400;
+}
+
+.sefirah-main-text strong {
+font-weight: 700;
+color: var(–sefirah-color, var(–gold));
+}
+
+.sefirah-sub-text {
+font-size: 14px;
+color: var(–ink-soft);
+margin-top: 5px;
+font-style: italic;
+line-height: 1.5;
+}
+
+.sefirah-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+margin-top: 7px;
+}
+
+.tag {
+font-size: 11px;
+padding: 2px 9px;
+border-radius: 2px;
+background: var(–bg-card-alt);
+border: 1px solid var(–border);
+color: var(–ink-mid);
+letter-spacing: 0.3px;
+font-family: ‘Cormorant Garamond’, serif;
+}
+
+.tag.highlight {
+background: var(–gold-pale);
+border-color: var(–border-strong);
+color: var(–gold);
+font-weight: 600;
+}
+
+/* ── EXPANDED DETAIL ── */
+.sefirah-detail {
+display: none;
+padding-top: 10px;
+border-top: 1px solid var(–border);
+margin-top: 10px;
+}
+
+.sefirah-card.expanded .sefirah-detail {
+display: block;
+animation: fadeIn 0.25s ease;
+}
+
+.detail-row {
+display: flex;
+gap: 10px;
+margin-bottom: 6px;
+font-size: 14px;
+line-height: 1.4;
+}
+
+.detail-label {
+color: var(–gold-mid);
+font-style: italic;
+min-width: 110px;
+flex-shrink: 0;
+font-weight: 500;
+}
+
+.detail-value { color: var(–ink-mid); }
+
+/* ── DIVIDER ── */
+.section-divider {
+display: flex;
+align-items: center;
+gap: 14px;
+margin: 20px 0 14px;
+}
+
+.section-divider::before,
+.section-divider::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–border-strong);
+}
+
+.divider-symbol {
+color: var(–gold);
+font-size: 13px;
+}
+
+/* ── WEEKLY SECTION ── */
+.weekly-section {
+background: var(–bg-card);
+border: 1px solid var(–border-strong);
+border-radius: 4px;
+padding: 18px 22px;
+margin-bottom: 8px;
+box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+animation: fadeInUp 0.4s ease 0.4s both;
+}
+
+.weekly-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 14px;
+flex-wrap: wrap;
+gap: 8px;
+}
+
+.weekly-title {
+font-family: ‘Cinzel’, serif;
+font-size: 10px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–ink-dim);
+}
+
+.weekly-badge {
+font-size: 13px;
+padding: 3px 10px;
+border: 1px solid var(–border-strong);
+color: var(–gold);
+border-radius: 2px;
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+background: var(–bg-card-alt);
+}
+
+.weekly-items {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+}
+
+.weekly-item {
+padding: 12px;
+background: var(–bg-card-alt);
+border: 1px solid var(–border);
+border-radius: 3px;
+}
+
+.weekly-item-label {
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–ink-dim);
+margin-bottom: 5px;
+font-family: ‘Cinzel’, serif;
+}
+
+.weekly-item-value {
+font-size: 17px;
+color: var(–ink);
+font-weight: 500;
+}
+
+.weekly-item-sub {
+font-size: 12px;
+color: var(–ink-soft);
+font-style: italic;
+margin-top: 3px;
+}
+.weekly-book-row {
+display: flex;
+gap: 12px;
+padding: 10px 12px;
+background: var(–bg-card-alt);
+border: 1px solid var(–border);
+border-radius: 3px;
+margin-bottom: 6px;
+align-items: flex-start;
+}
+
+.weekly-book-label {
+font-size: 10px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–gold);
+font-family: ‘Cinzel’, serif;
+min-width: 62px;
+padding-top: 2px;
+opacity: 0.85;
+}
+
+.weekly-book-content {
+flex: 1;
+}
+
+.weekly-book-subrow {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+margin-top: 5px;
+}
+
+.weekly-tag {
+font-size: 11px;
+padding: 2px 8px;
+border-radius: 10px;
+background: rgba(184,142,77,0.12);
+color: var(–ink-soft);
+border: 1px solid var(–border);
+}
+
+/* ── MALCHUT EXPANDED PANEL ── */
+.mal-today-highlight {
+background: linear-gradient(135deg, rgba(180,140,60,0.12), rgba(180,140,60,0.05));
+border: 2px solid var(–gold);
+border-radius: 3px;
+padding: 8px;
+margin-bottom: 12px;
+}
+.mal-today-badge {
+font-family: ‘Cinzel’, serif;
+font-size: 9px;
+letter-spacing: 2px;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 6px;
+padding-left: 4px;
+}
+.mal-week-divider {
+border: none;
+border-top: 1px solid var(–border);
+margin: 14px 0 10px 0;
+}
+
+.mal-parasha-header {
+display: flex;
+flex-direction: column;
+gap: 2px;
+padding: 6px 8px 8px;
+margin-bottom: 8px;
+border-bottom: 1px solid var(–border);
+font-size: 11px;
+color: var(–text-dim);
+}
+.mal-parasha-header strong {
+color: var(–gold);
+font-size: 13px;
+font-family: ‘Cinzel’, serif;
+letter-spacing: 0.5px;
+}
+
+.mal-book-row {
+border: 1px solid var(–border);
+border-radius: 5px;
+margin-bottom: 6px;
+overflow: hidden;
+}
+.mal-today {
+border-color: var(–gold);
+background: rgba(184,142,77,0.07);
+}
+
+.mal-book-header {
+display: flex;
+align-items: baseline;
+gap: 6px;
+padding: 5px 8px 3px;
+border-bottom: 1px solid var(–border);
+flex-wrap: wrap;
+}
+.mal-today .mal-book-header {
+background: rgba(184,142,77,0.1);
+}
+
+.mal-night {
+font-size: 9px;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: var(–text-dim);
+white-space: nowrap;
+}
+.mal-text-name {
+font-size: 12px;
+font-weight: 600;
+color: var(–text-main);
+font-family: ‘Cinzel’, serif;
+flex: 1;
+}
+.mal-today .mal-text-name {
+color: var(–gold);
+}
+.mal-book-label {
+font-size: 9px;
+letter-spacing: 0.8px;
+text-transform: uppercase;
+color: var(–gold);
+opacity: 0.75;
+white-space: nowrap;
+}
+.mal-today .mal-book-label {
+opacity: 1;
+}
+
+.mal-fields {
+padding: 4px 8px 5px;
+}
+.mal-field {
+display: flex;
+gap: 6px;
+align-items: baseline;
+padding: 2px 0;
+font-size: 11px;
+line-height: 1.4;
+}
+.mal-field-label {
+font-size: 9px;
+letter-spacing: 0.8px;
+text-transform: uppercase;
+color: var(–gold);
+opacity: 0.7;
+white-space: nowrap;
+min-width: 80px;
+padding-top: 1px;
+}
+.mal-today .mal-field-label {
+opacity: 1;
+}
+.mal-field-value {
+color: var(–text-main);
+flex: 1;
+}
+
+.detail-source {
+display: block;
+font-size: 10px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–gold);
+opacity: 0.8;
+margin-bottom: 2px;
+font-family: ‘Cinzel’, serif;
+}
+
+.detail-today {
+background: rgba(184,142,77,0.12);
+border-radius: 3px;
+padding: 2px 4px;
+margin: 1px -4px;
+}
+
+.detail-today .detail-label {
+color: var(–gold);
+font-weight: 600;
+}
+
+.detail-week-header .detail-label {
+color: var(–gold);
+font-weight: 600;
+font-size: 11px;
+letter-spacing: 0.5px;
+}
+
+.detail-week-header {
+margin-bottom: 4px;
+padding-bottom: 4px;
+border-bottom: 1px solid var(–border);
+}
+
+.ww-label-zohar  { color: #9b7fc8; }
+.ww-label-ls     { color: var(–gold); }
+.ww-label-kst    { color: #e8c97a; }
+.ww-label-ne     { color: #7ec8a0; }
+.ww-label-tanya  { color: #7ab8e8; }
+.ww-label-lm     { color: #e87a7a; }
+.ww-label-my     { color: #c8a07e; }
+
+.weekly-tag.dim {
+opacity: 0.75;
+font-style: italic;
+}
+
+/* ── FOOTER ── */
+.footer {
+text-align: center;
+padding: 28px 0 0;
+border-top: 1px solid var(–border);
+margin-top: 28px;
+}
+
+.footer-text {
+font-size: 13px;
+color: var(–ink-soft);
+font-style: italic;
+letter-spacing: 1px;
+}
+
+.footer-authors {
+font-family: ‘Cinzel’, serif;
+font-size: 11px;
+letter-spacing: 2px;
+color: var(–gold);
+margin-top: 6px;
+text-transform: uppercase;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeInDown {
+from { opacity: 0; transform: translateY(-10px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(10px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* ── EXPAND ICON ── */
+.expand-icon {
+position: absolute;
+right: 12px;
+top: 14px;
+color: var(–ink-dim);
+font-size: 11px;
+transition: transform 0.3s;
+}
+.sefirah-card.expanded .expand-icon { transform: rotate(180deg); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+.sefirah-card { grid-template-columns: 70px 1fr; gap: 10px; }
+.weekly-items { grid-template-columns: 1fr; }
+.title-main { font-size: 20px; }
+.crown-text { font-size: 17px; }
+.sefirah-main-text { font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 
 <div class="app">
 
   <!-- HEADER -->
+
   <header class="header">
     <span class="star-of-david">✦</span>
     <div class="title-hebrew">קַבָּלַת הַזְּמַן</div>
@@ -860,6 +857,7 @@
   </header>
 
   <!-- DATE BAR -->
+
   <div class="date-bar">
     <button class="date-nav-btn" onclick="changeDay(-1)">‹</button>
     <div class="date-info">
@@ -871,100 +869,106 @@
   </div>
 
   <!-- CROWN — YEARLY CYCLE -->
+
   <div class="keter-title-row">
     <span class="keter-crown-label">✦ KETER ✦</span>
   </div>
   <div class="keter-card" onclick="toggleKeterExpand(this, event)">
     <span class="expand-icon">▾</span>
-    
-    <!-- Always visible sections -->
-    <div class="keter-visible-content">
-      <!-- HAYOM YOM section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Hayom Yom — היום יום</div>
-        <div class="keter-main" id="keter-hayomyom">Loading…</div>
-        <div class="keter-meta" id="keter-hy-meta"></div>
-      </div>
-      <!-- DAILY LM section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Daily Likutei Moharan</div>
-        <div class="keter-main" id="keter-lm-main">Loading…</div>
-        <div class="keter-meta" id="keter-lm-meta"></div>
-      </div>
-      <!-- DAF YOMI section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Daf Yomi — דַּף יוֹמִי</div>
-        <div class="keter-hdate" id="keter-daf-masechet">Loading…</div>
-        <div class="keter-main" id="keter-daf-main">Loading…</div>
-        <div class="keter-meta" id="keter-daf-meta"></div>
-      </div>
-    </div>
 
-    <!-- Expandable detail sections -->
-    <div class="keter-detail">
-      <div class="section-divider" style="margin: 16px 0">
-        <span class="divider-symbol">◆</span>
-      </div>
-      <!-- CHUMASH section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Chumash with Rashi</div>
-        <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
-        <div class="keter-main" id="keter-chumash-main">Loading…</div>
-        <div class="keter-meta" id="keter-chumash-meta"></div>
-      </div>
-      <!-- TEHILLIM section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Tehillim</div>
-        <div class="keter-main" id="keter-tehillim-main">Loading…</div>
-        <div class="keter-meta" id="keter-tehillim-meta"></div>
-      </div>
-      <!-- TANYA section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Tanya</div>
-        <div class="keter-main" id="keter-tanya-main">Loading…</div>
-        <div class="keter-meta" id="keter-tanya-meta"></div>
-      </div>
-      <!-- RAMBAM section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Rambam</div>
-        <div class="keter-main" id="keter-rambam-main">Loading…</div>
-        <div class="keter-meta" id="keter-rambam-meta"></div>
-      </div>
-    </div>
+```
+<!-- Always visible sections -->
+<div class="keter-visible-content">
+  <!-- HAYOM YOM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Hayom Yom — היום יום</div>
+    <div class="keter-main" id="keter-hayomyom">Loading…</div>
+    <div class="keter-meta" id="keter-hy-meta"></div>
+  </div>
+  <!-- DAILY LM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Daily Likutei Moharan</div>
+    <div class="keter-main" id="keter-lm-main">Loading…</div>
+    <div class="keter-meta" id="keter-lm-meta"></div>
+  </div>
+  <!-- DAF YOMI section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Daf Yomi — דַּף יוֹמִי</div>
+    <div class="keter-hdate" id="keter-daf-masechet">Loading…</div>
+    <div class="keter-main" id="keter-daf-main">Loading…</div>
+    <div class="keter-meta" id="keter-daf-meta"></div>
+  </div>
+</div>
+
+<!-- Expandable detail sections -->
+<div class="keter-detail">
+  <div class="section-divider" style="margin: 16px 0">
+    <span class="divider-symbol">◆</span>
+  </div>
+  <!-- CHUMASH section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Chumash with Rashi</div>
+    <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
+    <div class="keter-main" id="keter-chumash-main">Loading…</div>
+    <div class="keter-meta" id="keter-chumash-meta"></div>
+  </div>
+  <!-- TEHILLIM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Tehillim</div>
+    <div class="keter-main" id="keter-tehillim-main">Loading…</div>
+    <div class="keter-meta" id="keter-tehillim-meta"></div>
+  </div>
+  <!-- TANYA section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Tanya</div>
+    <div class="keter-main" id="keter-tanya-main">Loading…</div>
+    <div class="keter-meta" id="keter-tanya-meta"></div>
+  </div>
+  <!-- RAMBAM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Rambam</div>
+    <div class="keter-main" id="keter-rambam-main">Loading…</div>
+    <div class="keter-meta" id="keter-rambam-meta"></div>
+  </div>
+</div>
+```
+
   </div>
   <div class="upper-sefirot-grid" id="upper-sefirot-grid">
 
-    <!-- CHOCHMAH: 22-Day Alef-Bet Cycle -->
-    <div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name" style="color:var(--accent-blue)">Chochmah</div>
-        <div class="sefirah-hebrew" style="color:var(--accent-blue)">חָכְמָה</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef-Bet — 22-Day Cycle</div>
-        <div class="sefirah-main-text" id="chochmah-main">Loading…</div>
-        <div class="sefirah-sub-text" id="chochmah-sub"></div>
-        <div class="sefirah-tags" id="chochmah-tags"></div>
-        <div class="sefirah-detail" id="chochmah-detail"></div>
-      </div>
-    </div>
+```
+<!-- CHOCHMAH: 22-Day Alef-Bet Cycle -->
+<div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name" style="color:var(--accent-blue)">Chochmah</div>
+    <div class="sefirah-hebrew" style="color:var(--accent-blue)">חָכְמָה</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef-Bet — 22-Day Cycle</div>
+    <div class="sefirah-main-text" id="chochmah-main">Loading…</div>
+    <div class="sefirah-sub-text" id="chochmah-sub"></div>
+    <div class="sefirah-tags" id="chochmah-tags"></div>
+    <div class="sefirah-detail" id="chochmah-detail"></div>
+  </div>
+</div>
 
-    <!-- BINAH: 7×7×7 Sefirot Omer Cycle -->
-    <div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name" style="color:var(--accent-red)">Binah</div>
-        <div class="sefirah-hebrew" style="color:var(--accent-red)">בִּינָה</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="binah-cycle-name">Sefirot — 7×7×7 Cycle</div>
-        <div class="sefirah-main-text" id="binah-main">Loading…</div>
-        <div class="sefirah-sub-text" id="binah-sub"></div>
-        <div class="sefirah-tags" id="binah-tags"></div>
-        <div class="sefirah-detail" id="binah-detail"></div>
-      </div>
-    </div>
+<!-- BINAH: 7×7×7 Sefirot Omer Cycle -->
+<div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name" style="color:var(--accent-red)">Binah</div>
+    <div class="sefirah-hebrew" style="color:var(--accent-red)">בִּינָה</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="binah-cycle-name">Sefirot — 7×7×7 Cycle</div>
+    <div class="sefirah-main-text" id="binah-main">Loading…</div>
+    <div class="sefirah-sub-text" id="binah-sub"></div>
+    <div class="sefirah-tags" id="binah-tags"></div>
+    <div class="sefirah-detail" id="binah-detail"></div>
+  </div>
+</div>
+```
 
   </div>
 
@@ -973,267 +977,270 @@
   </div>
 
   <!-- 7 SEFIROT CARDS -->
+
   <div class="sefirot-grid" id="sefirot-grid">
 
-    <!-- CHESED: Mishna / Tosefta -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Chesed</div>
-        <div class="sefirah-hebrew">חֶסֶד</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="chesed-cycle-name">Mishna — Oral Torah</div>
-        <div class="sefirah-main-text" id="chesed-main">Loading…</div>
-        <div class="sefirah-sub-text" id="chesed-sub"></div>
-        <div class="sefirah-tags" id="chesed-tags"></div>
-        <div class="sefirah-detail" id="chesed-detail"></div>
-      </div>
+```
+<!-- CHESED: Mishna / Tosefta -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Chesed</div>
+    <div class="sefirah-hebrew">חֶסֶד</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="chesed-cycle-name">Mishna — Oral Torah</div>
+    <div class="sefirah-main-text" id="chesed-main">Loading…</div>
+    <div class="sefirah-sub-text" id="chesed-sub"></div>
+    <div class="sefirah-tags" id="chesed-tags"></div>
+    <div class="sefirah-detail" id="chesed-detail"></div>
+  </div>
+</div>
+
+<!-- GEVURAH: Tanach -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Gevurah</div>
+    <div class="sefirah-hebrew">גְּבוּרָה</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
+    <div class="sefirah-main-text" id="gevurah-main">Loading…</div>
+    <div class="sefirah-sub-text" id="gevurah-sub"></div>
+    <div class="sefirah-tags" id="gevurah-tags"></div>
+    <div class="sefirah-detail" id="gevurah-detail"></div>
+  </div>
+</div>
+
+<!-- TIFERET: 13-Day Cycle (dynamic) -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Tiferet</div>
+    <div class="sefirah-hebrew">תִּפְאֶרֶת</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name">13 Attributes — 13-Day Cycle</div>
+    <div class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-sub-text"></div>
+    <div class="sefirah-tags"></div>
+    <div class="sefirah-detail"></div>
+  </div>
+</div>
+
+<!-- NETZACH: 41-Day Cycle (dynamic) -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Netzach</div>
+    <div class="sefirah-hebrew">נֶצַח</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name">41-Day Cycle — Mivtzoyim</div>
+    <div class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-sub-text"></div>
+    <div class="sefirah-tags"></div>
+    <div class="sefirah-detail"></div>
+  </div>
+</div>
+
+<!-- HOD: Halacha -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Hod</div>
+    <div class="sefirah-hebrew">הוֹד</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name">Halacha — Daily Law</div>
+    <div class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-sub-text">Loading…</div>
+    <div class="sefirah-tags"></div>
+    <div class="sefirah-detail"></div>
+  </div>
+</div>
+
+<!-- YESOD: Shovavim / Parasha -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Yesod</div>
+    <div class="sefirah-hebrew">יְסוֹד</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name">Shovavim — Parasha Cycle</div>
+
+    <!-- Exact blog markup, restyled -->
+    <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
+    <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
+    <div class="sefirah-detail">
+      <div id="yesod-parasha-cycle" style="font-size:14px; line-height:1.7; color:var(--ink-mid);"></div>
     </div>
+  </div>
+</div>
 
-    <!-- GEVURAH: Tanach -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Gevurah</div>
-        <div class="sefirah-hebrew">גְּבוּרָה</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
-        <div class="sefirah-main-text" id="gevurah-main">Loading…</div>
-        <div class="sefirah-sub-text" id="gevurah-sub"></div>
-        <div class="sefirah-tags" id="gevurah-tags"></div>
-        <div class="sefirah-detail" id="gevurah-detail"></div>
-      </div>
-    </div>
+<style>
+  /* Override cycle-label class inside Yesod card to match parchment theme */
+  #yesod-parasha-cycle .cycle-label {
+    color: var(--gold-mid);
+    font-weight: 600;
+    display: block;
+    margin-top: 4px;
+    border-top: 1px solid var(--border);
+    padding-top: 4px;
+    font-style: italic;
+  }
+</style>
 
-    <!-- TIFERET: 13-Day Cycle (dynamic) -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Tiferet</div>
-        <div class="sefirah-hebrew">תִּפְאֶרֶת</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name">13 Attributes — 13-Day Cycle</div>
-        <div class="sefirah-main-text">Loading…</div>
-        <div class="sefirah-sub-text"></div>
-        <div class="sefirah-tags"></div>
-        <div class="sefirah-detail"></div>
-      </div>
-    </div>
+<script>
+(function() {
+    const parashotData = [
+        { date: "2025-09-27", name: "Vayeilech", numbers: [52], isHoliday: false },
+        { date: "2025-10-04", name: "Haazinu", numbers: [53], isHoliday: false },
+        { date: "2025-10-11", name: "Sukkot V (CH''M)", numbers: [], isHoliday: true },
+        { date: "2025-10-18", name: "Bereshit", numbers: [1], isHoliday: false },
+        { date: "2025-10-25", name: "Noach", numbers: [2], isHoliday: false },
+        { date: "2025-11-01", name: "Lech Lecha", numbers: [3], isHoliday: false },
+        { date: "2025-11-08", name: "Vayeira", numbers: [4], isHoliday: false },
+        { date: "2025-11-15", name: "Chayei Sara", numbers: [5], isHoliday: false },
+        { date: "2025-11-22", name: "Toledot", numbers: [6], isHoliday: false },
+        { date: "2025-11-29", name: "Vayetzei", numbers: [7], isHoliday: false },
+        { date: "2025-12-06", name: "Vayishlach", numbers: [8], isHoliday: false },
+        { date: "2025-12-13", name: "Vayeshev", numbers: [9], isHoliday: false },
+        { date: "2025-12-20", name: "Miketz", numbers: [10], isHoliday: false },
+        { date: "2025-12-27", name: "Vayigash", numbers: [11], isHoliday: false },
+        { date: "2026-01-03", name: "Vayechi", numbers: [12], isHoliday: false },
+        { date: "2026-01-10", name: "Shemot", numbers: [13], isHoliday: false },
+        { date: "2026-01-17", name: "Vaera", numbers: [14], isHoliday: false },
+        { date: "2026-01-24", name: "Bo", numbers: [15], isHoliday: false },
+        { date: "2026-01-31", name: "Beshalach", numbers: [16], isHoliday: false },
+        { date: "2026-02-07", name: "Yitro", numbers: [17], isHoliday: false },
+        { date: "2026-02-14", name: "Mishpatim", numbers: [18], isHoliday: false },
+        { date: "2026-02-21", name: "Terumah", numbers: [19], isHoliday: false },
+        { date: "2026-02-28", name: "Tetzaveh", numbers: [20], isHoliday: false },
+        { date: "2026-03-07", name: "Ki Tisa", numbers: [21], isHoliday: false },
+        { date: "2026-03-14", name: "Vayakhel-Pekudei", numbers: [22, 23], isHoliday: false },
+        { date: "2026-03-21", name: "Vayikra", numbers: [24], isHoliday: false },
+        { date: "2026-03-28", name: "Tzav", numbers: [25], isHoliday: false },
+        { date: "2026-04-04", name: "Pesach III (CH''M)", numbers: [], isHoliday: true },
+        { date: "2026-04-11", name: "Shmini", numbers: [26], isHoliday: false },
+        { date: "2026-04-18", name: "Tazria-Metzora", numbers: [27, 28], isHoliday: false },
+        { date: "2026-04-25", name: "Achrei Mot-Kedoshim", numbers: [29, 30], isHoliday: false },
+        { date: "2026-05-02", name: "Emor", numbers: [31], isHoliday: false },
+        { date: "2026-05-09", name: "Behar-Bechukotai", numbers: [32, 33], isHoliday: false },
+        { date: "2026-05-16", name: "Bamidbar", numbers: [34], isHoliday: false },
+        { date: "2026-05-23", name: "Shavuot II", numbers: [], isHoliday: true },
+        { date: "2026-05-30", name: "Nasso", numbers: [35], isHoliday: false },
+        { date: "2026-06-06", name: "Behaalotecha", numbers: [36], isHoliday: false },
+        { date: "2026-06-13", name: "Shlach", numbers: [37], isHoliday: false },
+        { date: "2026-06-20", name: "Korach", numbers: [38], isHoliday: false },
+        { date: "2026-06-27", name: "Chukat-Balak", numbers: [39, 40], isHoliday: false },
+        { date: "2026-07-04", name: "Pinchas", numbers: [41], isHoliday: false },
+        { date: "2026-07-11", name: "Matot-Masei", numbers: [42, 43], isHoliday: false },
+        { date: "2026-07-18", name: "Devarim", numbers: [44], isHoliday: false },
+        { date: "2026-07-25", name: "Vaetchanan", numbers: [45], isHoliday: false },
+        { date: "2026-08-01", name: "Eikev", numbers: [46], isHoliday: false },
+        { date: "2026-08-08", name: "Re'eh", numbers: [47], isHoliday: false },
+        { date: "2026-08-15", name: "Shoftim", numbers: [48], isHoliday: false },
+        { date: "2026-08-22", name: "Ki Teitzei", numbers: [49], isHoliday: false },
+        { date: "2026-08-29", name: "Ki Tavo", numbers: [50], isHoliday: false },
+        { date: "2026-09-05", name: "Nitzavim-Vayeilech", numbers: [51, 52], isHoliday: false }
+    ];
+    const cycles = [
+        { cycle: 1, start: 1, end: 6 },
+        { cycle: 2, start: 7, end: 12 },
+        { cycle: 3, start: 13, end: 20 },
+        { cycle: 4, start: 21, end: 28 },
+        { cycle: 5, start: 29, end: 36 },
+        { cycle: 6, start: 37, end: 42 },
+        { cycle: 7, start: 43, end: 48 },
+        { cycle: 8, start: 49, end: 54 }
+    ];
+    const qualitiesData = {
+        1: { letter: "Shin", name: "Moshe", concept: "Torah", service: "Shiviti" },
+        2: { letter: "Vav", name: "Aharon", concept: "Avodah", service: "Ve'Ahavta" },
+        3: { letter: "Beit (1)", name: "Mordechai", concept: "Mesirut Nefesh & Tzedaka", service: "B'chol" },
+        4: { letter: "Beit (2) (Heh)", name: "Esther", concept: "Taanit", service: "Hatzneah" },
+        5: { letter: "Yud", name: "Rashbi", concept: "Tikkun Klali", service: "Tamim" },
+        6: { letter: "Mem Sofit", name: "Ari", concept: "Mikvah", service: "Tamim" },
+        7: { letter: "Tav (1)", name: "Moshiach", concept: "Tikkun Leah", service: "Tamim" },
+        8: { letter: "Tav (2)", name: "Eliyahu", concept: "Tikkun Rachel/Perek Shira", service: "Tamim" }
+    };
 
-    <!-- NETZACH: 41-Day Cycle (dynamic) -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Netzach</div>
-        <div class="sefirah-hebrew">נֶצַח</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name">41-Day Cycle — Mivtzoyim</div>
-        <div class="sefirah-main-text">Loading…</div>
-        <div class="sefirah-sub-text"></div>
-        <div class="sefirah-tags"></div>
-        <div class="sefirah-detail"></div>
-      </div>
-    </div>
+    function getNextShabbat(d) { let day = d.getDay(); let diff = (6 - day + 7) % 7; let s = new Date(d); s.setDate(d.getDate() + diff); s.setHours(0,0,0,0); return s; }
+    function formatDate(d) { return d.getFullYear() + '-' + (d.getMonth()+1).toString().padStart(2,'0') + '-' + d.getDate().toString().padStart(2,'0'); }
+    function getQualities(n) { return qualitiesData[n] || null; }
 
-    <!-- HOD: Halacha -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Hod</div>
-        <div class="sefirah-hebrew">הוֹד</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name">Halacha — Daily Law</div>
-        <div class="sefirah-main-text">Loading…</div>
-        <div class="sefirah-sub-text">Loading…</div>
-        <div class="sefirah-tags"></div>
-        <div class="sefirah-detail"></div>
-      </div>
-    </div>
+    function getCycleAndRelativeNumberForParasha(n) {
+        for (const c of cycles) { if (n >= c.start && n <= c.end) return { cycle: c.cycle, relativeNumber: n - c.start + 1, cycleLength: c.end - c.start + 1 }; }
+        return null;
+    }
 
-    <!-- YESOD: Shovavim / Parasha -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Yesod</div>
-        <div class="sefirah-hebrew">יְסוֹד</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name">Shovavim — Parasha Cycle</div>
+    function findCurrentParasha(f) {
+        let cp = null, ci = -1;
+        for (let i=0; i<parashotData.length; i++) { if (parashotData[i].date <= f) { cp = parashotData[i]; ci = i; } else break; }
+        if (cp && cp.isHoliday) { for (let i=ci+1; i<parashotData.length; i++) { if (!parashotData[i].isHoliday) return parashotData[i]; } }
+        return cp;
+    }
 
-        <!-- Exact blog markup, restyled -->
-        <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
-        <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
-        <div class="sefirah-detail">
-          <div id="yesod-parasha-cycle" style="font-size:14px; line-height:1.7; color:var(--ink-mid);"></div>
-        </div>
-      </div>
-    </div>
+    function displayParasha() {
+        const foundParasha = findCurrentParasha(formatDate(getNextShabbat(new Date())));
+        if (foundParasha) {
+            document.getElementById('yesod-parasha-name').textContent = foundParasha.name;
+            document.getElementById('yesod-parasha-numbers').textContent =
+                'Shovavim Week: ' + (foundParasha.numbers.length > 0 ? foundParasha.numbers.join(', ') : 'N/A');
 
-    <style>
-      /* Override cycle-label class inside Yesod card to match parchment theme */
-      #yesod-parasha-cycle .cycle-label {
-        color: var(--gold-mid);
-        font-weight: 600;
-        display: block;
-        margin-top: 4px;
-        border-top: 1px solid var(--border);
-        padding-top: 4px;
-        font-style: italic;
-      }
-    </style>
-
-    <script>
-    (function() {
-        const parashotData = [
-            { date: "2025-09-27", name: "Vayeilech", numbers: [52], isHoliday: false },
-            { date: "2025-10-04", name: "Haazinu", numbers: [53], isHoliday: false },
-            { date: "2025-10-11", name: "Sukkot V (CH''M)", numbers: [], isHoliday: true },
-            { date: "2025-10-18", name: "Bereshit", numbers: [1], isHoliday: false },
-            { date: "2025-10-25", name: "Noach", numbers: [2], isHoliday: false },
-            { date: "2025-11-01", name: "Lech Lecha", numbers: [3], isHoliday: false },
-            { date: "2025-11-08", name: "Vayeira", numbers: [4], isHoliday: false },
-            { date: "2025-11-15", name: "Chayei Sara", numbers: [5], isHoliday: false },
-            { date: "2025-11-22", name: "Toledot", numbers: [6], isHoliday: false },
-            { date: "2025-11-29", name: "Vayetzei", numbers: [7], isHoliday: false },
-            { date: "2025-12-06", name: "Vayishlach", numbers: [8], isHoliday: false },
-            { date: "2025-12-13", name: "Vayeshev", numbers: [9], isHoliday: false },
-            { date: "2025-12-20", name: "Miketz", numbers: [10], isHoliday: false },
-            { date: "2025-12-27", name: "Vayigash", numbers: [11], isHoliday: false },
-            { date: "2026-01-03", name: "Vayechi", numbers: [12], isHoliday: false },
-            { date: "2026-01-10", name: "Shemot", numbers: [13], isHoliday: false },
-            { date: "2026-01-17", name: "Vaera", numbers: [14], isHoliday: false },
-            { date: "2026-01-24", name: "Bo", numbers: [15], isHoliday: false },
-            { date: "2026-01-31", name: "Beshalach", numbers: [16], isHoliday: false },
-            { date: "2026-02-07", name: "Yitro", numbers: [17], isHoliday: false },
-            { date: "2026-02-14", name: "Mishpatim", numbers: [18], isHoliday: false },
-            { date: "2026-02-21", name: "Terumah", numbers: [19], isHoliday: false },
-            { date: "2026-02-28", name: "Tetzaveh", numbers: [20], isHoliday: false },
-            { date: "2026-03-07", name: "Ki Tisa", numbers: [21], isHoliday: false },
-            { date: "2026-03-14", name: "Vayakhel-Pekudei", numbers: [22, 23], isHoliday: false },
-            { date: "2026-03-21", name: "Vayikra", numbers: [24], isHoliday: false },
-            { date: "2026-03-28", name: "Tzav", numbers: [25], isHoliday: false },
-            { date: "2026-04-04", name: "Pesach III (CH''M)", numbers: [], isHoliday: true },
-            { date: "2026-04-11", name: "Shmini", numbers: [26], isHoliday: false },
-            { date: "2026-04-18", name: "Tazria-Metzora", numbers: [27, 28], isHoliday: false },
-            { date: "2026-04-25", name: "Achrei Mot-Kedoshim", numbers: [29, 30], isHoliday: false },
-            { date: "2026-05-02", name: "Emor", numbers: [31], isHoliday: false },
-            { date: "2026-05-09", name: "Behar-Bechukotai", numbers: [32, 33], isHoliday: false },
-            { date: "2026-05-16", name: "Bamidbar", numbers: [34], isHoliday: false },
-            { date: "2026-05-23", name: "Shavuot II", numbers: [], isHoliday: true },
-            { date: "2026-05-30", name: "Nasso", numbers: [35], isHoliday: false },
-            { date: "2026-06-06", name: "Behaalotecha", numbers: [36], isHoliday: false },
-            { date: "2026-06-13", name: "Shlach", numbers: [37], isHoliday: false },
-            { date: "2026-06-20", name: "Korach", numbers: [38], isHoliday: false },
-            { date: "2026-06-27", name: "Chukat-Balak", numbers: [39, 40], isHoliday: false },
-            { date: "2026-07-04", name: "Pinchas", numbers: [41], isHoliday: false },
-            { date: "2026-07-11", name: "Matot-Masei", numbers: [42, 43], isHoliday: false },
-            { date: "2026-07-18", name: "Devarim", numbers: [44], isHoliday: false },
-            { date: "2026-07-25", name: "Vaetchanan", numbers: [45], isHoliday: false },
-            { date: "2026-08-01", name: "Eikev", numbers: [46], isHoliday: false },
-            { date: "2026-08-08", name: "Re'eh", numbers: [47], isHoliday: false },
-            { date: "2026-08-15", name: "Shoftim", numbers: [48], isHoliday: false },
-            { date: "2026-08-22", name: "Ki Teitzei", numbers: [49], isHoliday: false },
-            { date: "2026-08-29", name: "Ki Tavo", numbers: [50], isHoliday: false },
-            { date: "2026-09-05", name: "Nitzavim-Vayeilech", numbers: [51, 52], isHoliday: false }
-        ];
-        const cycles = [
-            { cycle: 1, start: 1, end: 6 },
-            { cycle: 2, start: 7, end: 12 },
-            { cycle: 3, start: 13, end: 20 },
-            { cycle: 4, start: 21, end: 28 },
-            { cycle: 5, start: 29, end: 36 },
-            { cycle: 6, start: 37, end: 42 },
-            { cycle: 7, start: 43, end: 48 },
-            { cycle: 8, start: 49, end: 54 }
-        ];
-        const qualitiesData = {
-            1: { letter: "Shin", name: "Moshe", concept: "Torah", service: "Shiviti" },
-            2: { letter: "Vav", name: "Aharon", concept: "Avodah", service: "Ve'Ahavta" },
-            3: { letter: "Beit (1)", name: "Mordechai", concept: "Mesirut Nefesh & Tzedaka", service: "B'chol" },
-            4: { letter: "Beit (2) (Heh)", name: "Esther", concept: "Taanit", service: "Hatzneah" },
-            5: { letter: "Yud", name: "Rashbi", concept: "Tikkun Klali", service: "Tamim" },
-            6: { letter: "Mem Sofit", name: "Ari", concept: "Mikvah", service: "Tamim" },
-            7: { letter: "Tav (1)", name: "Moshiach", concept: "Tikkun Leah", service: "Tamim" },
-            8: { letter: "Tav (2)", name: "Eliyahu", concept: "Tikkun Rachel/Perek Shira", service: "Tamim" }
-        };
-
-        function getNextShabbat(d) { let day = d.getDay(); let diff = (6 - day + 7) % 7; let s = new Date(d); s.setDate(d.getDate() + diff); s.setHours(0,0,0,0); return s; }
-        function formatDate(d) { return d.getFullYear() + '-' + (d.getMonth()+1).toString().padStart(2,'0') + '-' + d.getDate().toString().padStart(2,'0'); }
-        function getQualities(n) { return qualitiesData[n] || null; }
-
-        function getCycleAndRelativeNumberForParasha(n) {
-            for (const c of cycles) { if (n >= c.start && n <= c.end) return { cycle: c.cycle, relativeNumber: n - c.start + 1, cycleLength: c.end - c.start + 1 }; }
-            return null;
-        }
-
-        function findCurrentParasha(f) {
-            let cp = null, ci = -1;
-            for (let i=0; i<parashotData.length; i++) { if (parashotData[i].date <= f) { cp = parashotData[i]; ci = i; } else break; }
-            if (cp && cp.isHoliday) { for (let i=ci+1; i<parashotData.length; i++) { if (!parashotData[i].isHoliday) return parashotData[i]; } }
-            return cp;
-        }
-
-        function displayParasha() {
-            const foundParasha = findCurrentParasha(formatDate(getNextShabbat(new Date())));
-            if (foundParasha) {
-                document.getElementById('yesod-parasha-name').textContent = foundParasha.name;
-                document.getElementById('yesod-parasha-numbers').textContent =
-                    'Shovavim Week: ' + (foundParasha.numbers.length > 0 ? foundParasha.numbers.join(', ') : 'N/A');
-
-                let cycleOutput = foundParasha.numbers.map(num => {
-                    const cycleData = getCycleAndRelativeNumberForParasha(num);
-                    if (cycleData) {
-                        const pQ = getQualities(cycleData.relativeNumber);
-                        const cQ = getQualities(cycleData.cycle);
-                        let pText = pQ ? `<strong>Parasha ${cycleData.relativeNumber}:</strong> ${pQ.letter}, ${pQ.service}, ${pQ.name}, ${pQ.concept}` : `<strong>Parasha ${cycleData.relativeNumber}</strong>`;
-                        if (cycleData.cycleLength === 6) {
-                            let ex = null;
-                            if (cycleData.relativeNumber === 5) ex = getQualities(7);
-                            if (cycleData.relativeNumber === 6) ex = getQualities(8);
-                            if (ex) pText += `<br>+ ${ex.letter}, ${ex.service}, ${ex.name}, ${ex.concept}`;
-                        }
-                        let cText = cQ
-                            ? `<span class="cycle-label">in <strong>Cycle ${cycleData.cycle}:</strong> ${cQ.letter}, ${cQ.service}, ${cQ.name}, ${cQ.concept}</span>`
-                            : `<span class="cycle-label">in Cycle ${cycleData.cycle}</span>`;
-                        return `<div style="margin-bottom:4px;">${pText}${cText}</div>`;
+            let cycleOutput = foundParasha.numbers.map(num => {
+                const cycleData = getCycleAndRelativeNumberForParasha(num);
+                if (cycleData) {
+                    const pQ = getQualities(cycleData.relativeNumber);
+                    const cQ = getQualities(cycleData.cycle);
+                    let pText = pQ ? `<strong>Parasha ${cycleData.relativeNumber}:</strong> ${pQ.letter}, ${pQ.service}, ${pQ.name}, ${pQ.concept}` : `<strong>Parasha ${cycleData.relativeNumber}</strong>`;
+                    if (cycleData.cycleLength === 6) {
+                        let ex = null;
+                        if (cycleData.relativeNumber === 5) ex = getQualities(7);
+                        if (cycleData.relativeNumber === 6) ex = getQualities(8);
+                        if (ex) pText += `<br>+ ${ex.letter}, ${ex.service}, ${ex.name}, ${ex.concept}`;
                     }
-                    return `Parasha ${num}`;
-                }).join('<hr style="border:0; border-top:1px dashed var(--border); margin:8px 0;">');
+                    let cText = cQ
+                        ? `<span class="cycle-label">in <strong>Cycle ${cycleData.cycle}:</strong> ${cQ.letter}, ${cQ.service}, ${cQ.name}, ${cQ.concept}</span>`
+                        : `<span class="cycle-label">in Cycle ${cycleData.cycle}</span>`;
+                    return `<div style="margin-bottom:4px;">${pText}${cText}</div>`;
+                }
+                return `Parasha ${num}`;
+            }).join('<hr style="border:0; border-top:1px dashed var(--border); margin:8px 0;">');
 
-                document.getElementById('yesod-parasha-cycle').innerHTML = cycleOutput;
-            }
+            document.getElementById('yesod-parasha-cycle').innerHTML = cycleOutput;
         }
-        displayParasha();
-    })();
-    </script>
+    }
+    displayParasha();
+})();
+</script>
 
-    <!-- MALCHUT: Daily Text + Weekly Book -->
-    <div class="sefirah-card malchut-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Malchut</div>
-        <div class="sefirah-hebrew">מַלְכוּת</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="malchut-cycle-name">Daily Text</div>
-        <div class="sefirah-main-text" id="malchut-main">Loading…</div>
-        <div class="sefirah-sub-text" id="malchut-sub"></div>
-        <div class="sefirah-tags" id="malchut-tags"></div>
-        <div class="sefirah-detail" id="malchut-detail">
-          <!-- Weekly book content injected by render() -->
-        </div>
-      </div>
+<!-- MALCHUT: Daily Text + Weekly Book -->
+<div class="sefirah-card malchut-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Malchut</div>
+    <div class="sefirah-hebrew">מַלְכוּת</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="malchut-cycle-name">Daily Text</div>
+    <div class="sefirah-main-text" id="malchut-main">Loading…</div>
+    <div class="sefirah-sub-text" id="malchut-sub"></div>
+    <div class="sefirah-tags" id="malchut-tags"></div>
+    <div class="sefirah-detail" id="malchut-detail">
+      <!-- Weekly book content injected by render() -->
     </div>
+  </div>
+</div>
+```
 
   </div>
 
-
   <!-- FOOTER -->
+
   <footer class="footer">
     <div class="footer-text">Based on the book</div>
     <div class="footer-authors">Kabbalah of Time · by Ann Helen Wainer and Rabbi Daniel Kahane</div>
@@ -3017,7 +3024,7 @@
 
   // ── RENDER ──
   function render() {
-    const d    = getDaysDiff(currentOffset) - 1; // Current day (last night), not upcoming (tonight)
+    const d    = getDaysDiff(currentOffset); // KoT day number (matches blog)
     const date = getDisplayDate(currentOffset);
     const dowName   = DAYS_OF_WEEK[date.getDay()];
 
@@ -3436,5 +3443,6 @@
     });
   }
 </script>
+
 </body>
 </html>
