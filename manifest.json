@@ -2,7 +2,7 @@
   "name": "Kabbalah of Time - Daily Reading",
   "short_name": "Kabbalah of Time",
   "description": "Daily spiritual readings through the lens of Jewish mysticism and the sefirot",
-  "start_url": "/",
+  "start_url": "/kabalahoftime/",
   "display": "standalone",
   "background_color": "#f7f2e8",
   "theme_color": "#8b6914",
