@@ -172,7 +172,6 @@ color: var(–gold);
 text-transform: uppercase;
 }
 .keter-card {
-background: var(–bg-card);
 border: 2px solid var(–border-strong);
 border-radius: 4px;
 margin-bottom: 10px;
@@ -181,6 +180,7 @@ box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 animation: fadeInDown 0.5s ease both;
 cursor: pointer;
 transition: all 0.2s ease;
+overflow: hidden;
 }
 
 .keter-card:hover {
@@ -240,15 +240,15 @@ padding: 16px 20px;
 }
 
 .keter-visible-content .keter-section:nth-child(odd) {
-background: var(–bg-card);
+background: #fdf9f2 !important;
 }
 
 .keter-visible-content .keter-section:nth-child(even) {
-background: var(–bg-card-alt);
+background: #f2ead8 !important;
 }
 
 .keter-detail .keter-section {
-background: var(–bg-card);
+background: var(–bg-card) !important;
 }
 
 .keter-visible-content .keter-section:not(:last-child) {
@@ -355,13 +355,13 @@ box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 transform: translateY(-1px);
 }
 
-.sefirah-card:nth-child(1) { animation-delay: 0.05s; –sefirah-color: var(–accent-blue); }
-.sefirah-card:nth-child(2) { animation-delay: 0.10s; –sefirah-color: var(–accent-red); }
-.sefirah-card:nth-child(3) { animation-delay: 0.15s; –sefirah-color: var(–accent-green); }
-.sefirah-card:nth-child(4) { animation-delay: 0.20s; –sefirah-color: var(–accent-orange); }
-.sefirah-card:nth-child(5) { animation-delay: 0.25s; –sefirah-color: var(–accent-teal); }
-.sefirah-card:nth-child(6) { animation-delay: 0.30s; –sefirah-color: var(–accent-purple); }
-.sefirah-card:nth-child(7) { animation-delay: 0.35s; –sefirah-color: var(–accent-brown); }
+.sefirah-card:nth-child(1) { animation-delay: 0.05s; –sefirah-color: var(–accent-blue) !important; }
+.sefirah-card:nth-child(2) { animation-delay: 0.10s; –sefirah-color: var(–accent-red) !important; }
+.sefirah-card:nth-child(3) { animation-delay: 0.15s; –sefirah-color: var(–accent-green) !important; }
+.sefirah-card:nth-child(4) { animation-delay: 0.20s; –sefirah-color: var(–accent-orange) !important; }
+.sefirah-card:nth-child(5) { animation-delay: 0.25s; –sefirah-color: var(–accent-teal) !important; }
+.sefirah-card:nth-child(6) { animation-delay: 0.30s; –sefirah-color: var(–accent-purple) !important; }
+.sefirah-card:nth-child(7) { animation-delay: 0.35s; –sefirah-color: var(–accent-brown) !important; }
 
 .sefirah-label-col {
 display: flex;
