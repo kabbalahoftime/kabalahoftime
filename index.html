@@ -298,15 +298,22 @@ color: var(–gold);
 
 /* ── SEFIRAH CARDS ── */
 .upper-sefirot-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
+display: grid !important;
+grid-template-columns: 1fr 1fr !important;
 gap: 12px;
 margin-bottom: 12px;
 }
 .upper-sefirah {
-border-top: 3px solid var(–gold) !important;
 border-left: none !important;
 grid-template-columns: 96px 1fr;
+}
+
+.upper-sefirot-grid .sefirah-card:nth-child(1) {
+border-top: 3px solid var(–accent-blue) !important;
+}
+
+.upper-sefirot-grid .sefirah-card:nth-child(2) {
+border-top: 3px solid var(–accent-red) !important;
 }
 .upper-sefirah .sefirah-label-col {
 overflow: hidden;
@@ -322,8 +329,8 @@ text-overflow: clip;
 .upper-sefirah .sefirah-hebrew {
 font-size: 16px;
 }
-@media (max-width: 540px) {
-.upper-sefirot-grid { grid-template-columns: 1fr; }
+@media (max-width: 768px) {
+.upper-sefirot-grid { grid-template-columns: 1fr !important; }
 }
 
 .sefirot-grid {
@@ -355,13 +362,13 @@ box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 transform: translateY(-1px);
 }
 
-.sefirah-card:nth-child(1) { animation-delay: 0.05s; –sefirah-color: var(–accent-blue) !important; }
-.sefirah-card:nth-child(2) { animation-delay: 0.10s; –sefirah-color: var(–accent-red) !important; }
-.sefirah-card:nth-child(3) { animation-delay: 0.15s; –sefirah-color: var(–accent-green) !important; }
-.sefirah-card:nth-child(4) { animation-delay: 0.20s; –sefirah-color: var(–accent-orange) !important; }
-.sefirah-card:nth-child(5) { animation-delay: 0.25s; –sefirah-color: var(–accent-teal) !important; }
-.sefirah-card:nth-child(6) { animation-delay: 0.30s; –sefirah-color: var(–accent-purple) !important; }
-.sefirah-card:nth-child(7) { animation-delay: 0.35s; –sefirah-color: var(–accent-brown) !important; }
+.sefirot-grid .sefirah-card:nth-child(1) { animation-delay: 0.05s; –sefirah-color: var(–accent-blue) !important; }
+.sefirot-grid .sefirah-card:nth-child(2) { animation-delay: 0.10s; –sefirah-color: var(–accent-red) !important; }
+.sefirot-grid .sefirah-card:nth-child(3) { animation-delay: 0.15s; –sefirah-color: var(–accent-green) !important; }
+.sefirot-grid .sefirah-card:nth-child(4) { animation-delay: 0.20s; –sefirah-color: var(–accent-orange) !important; }
+.sefirot-grid .sefirah-card:nth-child(5) { animation-delay: 0.25s; –sefirah-color: var(–accent-teal) !important; }
+.sefirot-grid .sefirah-card:nth-child(6) { animation-delay: 0.30s; –sefirah-color: var(–accent-purple) !important; }
+.sefirot-grid .sefirah-card:nth-child(7) { animation-delay: 0.35s; –sefirah-color: var(–accent-brown) !important; }
 
 .sefirah-label-col {
 display: flex;
