@@ -1432,7 +1432,7 @@ transition: transform 0.3s;
   // ── SHOVAVIM / PARASHA DATA (from blog) ──
   // ── EXACT CALCULATION ENGINE (from kabbalahoftime.com blog) ──
   const DATE_FROM_API = "2025-08-20T21:00:00Z";
-  const DAY_OFFSET = 28;
+  const DAY_OFFSET = 29;
 
   let currentOffset = 0;
 
@@ -3024,7 +3024,8 @@ transition: transform 0.3s;
 
   // ── RENDER ──
   function render() {
-    const d    = getDaysDiff(currentOffset); // KoT day number (matches blog)
+    const rawDay = getDaysDiff(currentOffset); // Days since Rosh Hashanah
+    const d = rawDay; // Current Jewish day (started last night)
     const date = getDisplayDate(currentOffset);
     const dowName   = DAYS_OF_WEEK[date.getDay()];
 
