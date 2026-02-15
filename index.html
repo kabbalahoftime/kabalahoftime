@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,6 +7,7 @@
 <title>Kabbalah of Time — Daily Reading</title>
 
 <!-- PWA Configuration -->
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b6914">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -40,853 +41,849 @@
     --accent-brown:  #5a3a1a;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  .app {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-  }
-
-  /* ── HEADER ── */
-  .header {
-    text-align: center;
-    padding: 44px 0 28px;
-    border-bottom: 2px solid var(--border-strong);
-    margin-bottom: 28px;
-  }
-
-  .star-of-david {
-    font-size: 26px;
-    color: var(--gold);
-    display: block;
-    margin-bottom: 14px;
-  }
-
-  .title-hebrew {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 24px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    margin-bottom: 6px;
-  }
-
-  .title-main {
-    font-family: 'Cinzel', serif;
-    font-size: 26px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .title-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--ink-soft);
-    letter-spacing: 1px;
-  }
-
-  /* ── DATE SELECTOR ── */
-  .date-bar {
-    background: var(--bg-card);
-    border: 1px solid var(--border-strong);
-    border-radius: 4px;
-    padding: 12px 18px;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  }
-
-  .date-nav-btn {
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border-strong);
-    color: var(--gold);
-    width: 34px;
-    height: 34px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-    flex-shrink: 0;
-    font-weight: bold;
-  }
-
-  .date-nav-btn:hover {
-    background: var(--gold-pale);
-    border-color: var(--gold);
-  }
-
-  .date-info { text-align: center; flex: 1; }
-
-  .date-gregorian {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    letter-spacing: 2px;
-    color: var(--ink);
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  .date-hebrew {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 15px;
-    color: var(--ink-soft);
-    margin-top: 2px;
-  }
-
-  .date-day-indicator {
-    font-size: 11px;
-    color: var(--ink-mid);
-    font-style: italic;
-    margin-top: 3px;
-  }
-
-  /* ── CROWN ── */
-  .keter-title-row {
-    text-align: center;
-    margin-bottom: 6px;
-  }
-  .keter-crown-label {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-  .keter-card {
-    border: 2px solid var(--border-strong);
-    border-radius: 4px;
-    margin-bottom: 10px;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    animation: fadeInDown 0.5s ease both;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    overflow: hidden;
-  }
-
-  .keter-card:hover {
-    box-shadow: 0 3px 12px rgba(139, 105, 20, 0.15);
-  }
-
-  .keter-card .expand-icon {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    font-size: 14px;
-    color: var(--gold);
-    transition: transform 0.25s ease;
-    z-index: 2;
-  }
-
-  .keter-card.expanded .expand-icon {
-    transform: rotate(180deg);
-  }
-
-  .keter-visible-content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-  }
-
-  .keter-detail {
-    display: none;
-    animation: fadeIn 0.25s ease;
-  }
-
-  .keter-card.expanded .keter-detail {
-    display: block;
-  }
-
-  .keter-detail .keter-section:not(:last-child) {
-    border-bottom: 1px solid var(--border);
-  }
-
-  .keter-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    border-radius: 4px 4px 0 0;
-    z-index: 1;
-  }
-
-  @media (max-width: 540px) {
-    .keter-visible-content { grid-template-columns: 1fr; }
-    .keter-card .expand-icon { top: 12px; right: 16px; }
-  }
-
-  .keter-section {
-    padding: 16px 20px;
-  }
-
-  .keter-visible-content .keter-section:nth-child(odd) {
-    background: #fdf9f2 !important;
-  }
-
-  .keter-visible-content .keter-section:nth-child(even) {
-    background: #f2ead8 !important;
-  }
-
-  .keter-detail .keter-section {
-    background: var(--bg-card) !important;
-  }
-
-  .keter-visible-content .keter-section:not(:last-child) {
-    border-right: 1px solid var(--border);
-  }
-
-  @media (max-width: 540px) {
-    .keter-visible-content .keter-section:not(:last-child) {
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-    }
-  }
-
-  .keter-section-label {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 2.5px;
-    color: var(--ink-dim);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .keter-hdate {
-    font-size: 11px;
-    color: var(--gold);
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-  }
-
-  .keter-main {
-    font-size: 13.5px;
-    color: var(--ink);
-    line-height: 1.55;
-    font-style: italic;
-  }
-
-  .keter-meta {
-    font-size: 11px;
-    color: var(--ink-dim);
-    margin-top: 6px;
-  }
-
-  .keter-meta strong {
-    color: var(--gold);
-  }
-
-  /* ── SEFIRAH CARDS ── */
-  .upper-sefirot-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .upper-sefirah {
-    border-left: none !important;
-    grid-template-columns: 96px 1fr;
-  }
-  
-  .upper-sefirot-grid .sefirah-card:nth-child(1) {
-    border-top: 3px solid var(--accent-blue) !important;
-    background: #fdf9f2 !important;
-  }
-  
-  .upper-sefirot-grid .sefirah-card:nth-child(2) {
-    border-top: 3px solid var(--accent-red) !important;
-    background: #f2ead8 !important;
-  }
-  .upper-sefirah .sefirah-label-col {
-    overflow: hidden;
-    padding-right: 6px;
-  }
-  .upper-sefirah .sefirah-name {
-    font-size: 9.5px;
-    letter-spacing: 0.8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: clip;
-  }
-  .upper-sefirah .sefirah-hebrew {
-    font-size: 16px;
-  }
-
-  .sefirot-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 24px;
-  }
-
-  .sefirah-card {
-    background: var(--bg-card);
-    border-radius: 3px;
-    padding: 14px 18px;
-    display: grid;
-    grid-template-columns: 86px 1fr;
-    gap: 14px;
-    align-items: start;
-    position: relative;
-    cursor: pointer;
-    transition: box-shadow 0.2s, transform 0.15s;
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--sefirah-color, var(--gold));
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    animation: fadeInUp 0.4s ease both;
-  }
-
-  .sefirah-card:hover {
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-    transform: translateY(-1px);
-  }
-
-  .sefirot-grid .sefirah-card:nth-child(1) { 
-    animation-delay: 0.05s; 
-    --sefirah-color: var(--accent-blue) !important;
-    background: #fdf9f2 !important;
-  }
-  .sefirot-grid .sefirah-card:nth-child(2) { 
-    animation-delay: 0.10s; 
-    --sefirah-color: var(--accent-red) !important;
-    background: #f2ead8 !important;
-  }
-  .sefirot-grid .sefirah-card:nth-child(3) { 
-    animation-delay: 0.15s; 
-    --sefirah-color: var(--accent-green) !important;
-    background: #fdf9f2 !important;
-  }
-  .sefirot-grid .sefirah-card:nth-child(4) { 
-    animation-delay: 0.20s; 
-    --sefirah-color: var(--accent-orange) !important;
-    background: #f2ead8 !important;
-  }
-  .sefirot-grid .sefirah-card:nth-child(5) { 
-    animation-delay: 0.25s; 
-    --sefirah-color: var(--accent-teal) !important;
-    background: #fdf9f2 !important;
-  }
-  .sefirot-grid .sefirah-card:nth-child(6) { 
-    animation-delay: 0.30s; 
-    --sefirah-color: var(--accent-purple) !important;
-    background: #f2ead8 !important;
-  }
-  .sefirot-grid .sefirah-card:nth-child(7) { 
-    animation-delay: 0.35s; 
-    --sefirah-color: var(--accent-brown) !important;
-    background: #fdf9f2 !important;
-  }
-
-  .sefirah-label-col {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-top: 2px;
-    border-right: 1px solid var(--border);
-    padding-right: 12px;
-  }
-
-  .sefirah-name {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--sefirah-color, var(--gold));
-    margin-bottom: 5px;
-    font-weight: 600;
-  }
-
-  .sefirah-hebrew {
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 22px;
-    color: var(--sefirah-color, var(--gold));
-    line-height: 1;
-    opacity: 0.85;
-  }
-
-  .sefirah-content-col { padding-left: 2px; }
-
-  .sefirah-cycle-name {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--ink-dim);
-    margin-bottom: 5px;
-  }
-
-  .sefirah-main-text {
-    font-size: 18px;
-    color: var(--ink);
-    line-height: 1.45;
-    font-weight: 400;
-  }
-
-  .sefirah-main-text strong {
-    font-weight: 700;
-    color: var(--sefirah-color, var(--gold));
-  }
-
-  .sefirah-sub-text {
-    font-size: 14px;
-    color: var(--ink-soft);
-    margin-top: 5px;
-    font-style: italic;
-    line-height: 1.5;
-  }
-
-  .sefirah-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 7px;
-  }
-
-  .tag {
-    font-size: 11px;
-    padding: 2px 9px;
-    border-radius: 2px;
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border);
-    color: var(--ink-mid);
-    letter-spacing: 0.3px;
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  .tag.highlight {
-    background: var(--gold-pale);
-    border-color: var(--border-strong);
-    color: var(--gold);
-    font-weight: 600;
-  }
-
-  /* ── EXPANDED DETAIL ── */
-  .sefirah-detail {
-    display: none;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
-    margin-top: 10px;
-    background: var(--bg-card);
-  }
-
-  .sefirah-card.expanded .sefirah-detail {
-    display: block;
-    animation: fadeIn 0.25s ease;
-  }
-
-  .detail-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 6px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-
-  .detail-label {
-    color: var(--gold-mid);
-    font-style: italic;
-    min-width: 110px;
-    flex-shrink: 0;
-    font-weight: 500;
-  }
-
-  .detail-value { color: var(--ink-mid); }
-
-  /* ── DIVIDER ── */
-  .section-divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 20px 0 14px;
-  }
-
-  .section-divider::before,
-  .section-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border-strong);
-  }
-
-  .divider-symbol {
-    color: var(--gold);
-    font-size: 13px;
-  }
-
-  /* ── WEEKLY SECTION ── */
-  .weekly-section {
-    background: var(--bg-card);
-    border: 1px solid var(--border-strong);
-    border-radius: 4px;
-    padding: 18px 22px;
-    margin-bottom: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    animation: fadeInUp 0.4s ease 0.4s both;
-  }
-
-  .weekly-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .weekly-title {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--ink-dim);
-  }
-
-  .weekly-badge {
-    font-size: 13px;
-    padding: 3px 10px;
-    border: 1px solid var(--border-strong);
-    color: var(--gold);
-    border-radius: 2px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    background: var(--bg-card-alt);
-  }
-
-  .weekly-items {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .weekly-item {
-    padding: 12px;
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-  }
-
-  .weekly-item-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--ink-dim);
-    margin-bottom: 5px;
-    font-family: 'Cinzel', serif;
-  }
-
-  .weekly-item-value {
-    font-size: 17px;
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .weekly-item-sub {
-    font-size: 12px;
-    color: var(--ink-soft);
-    font-style: italic;
-    margin-top: 3px;
-  }
-  .weekly-book-row {
-    display: flex;
-    gap: 12px;
-    padding: 10px 12px;
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    margin-bottom: 6px;
-    align-items: flex-start;
-  }
-
-  .weekly-book-label {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-family: 'Cinzel', serif;
-    min-width: 62px;
-    padding-top: 2px;
-    opacity: 0.85;
-  }
-
-  .weekly-book-content {
-    flex: 1;
-  }
-
-  .weekly-book-subrow {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 5px;
-  }
-
-  .weekly-tag {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 10px;
-    background: rgba(184,142,77,0.12);
-    color: var(--ink-soft);
-    border: 1px solid var(--border);
-  }
-
-
-
-
-
-  /* ── MALCHUT EXPANDED PANEL ── */
-  .mal-today-highlight {
-    background: linear-gradient(135deg, rgba(180,140,60,0.12), rgba(180,140,60,0.05));
-    border: 2px solid var(--gold);
-    border-radius: 3px;
-    padding: 8px;
-    margin-bottom: 12px;
-  }
-  .mal-today-badge {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    padding-left: 4px;
-  }
-  .mal-week-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 14px 0 10px 0;
-  }
-
-  .mal-parasha-header {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 6px 8px 8px;
-    margin-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-    font-size: 11px;
-    color: var(--text-dim);
-  }
-  .mal-parasha-header strong {
-    color: var(--gold);
-    font-size: 13px;
-    font-family: 'Cinzel', serif;
-    letter-spacing: 0.5px;
-  }
-
-  .mal-book-row {
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    margin-bottom: 6px;
-    overflow: hidden;
-  }
-  .mal-today {
-    border-color: var(--gold);
-    background: rgba(184,142,77,0.07);
-  }
-
-  .mal-book-header {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    padding: 5px 8px 3px;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
-  .mal-today .mal-book-header {
-    background: rgba(184,142,77,0.1);
-  }
-
-  .mal-night {
-    font-size: 9px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    white-space: nowrap;
-  }
-  .mal-text-name {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-main);
-    font-family: 'Cinzel', serif;
-    flex: 1;
-  }
-  .mal-today .mal-text-name {
-    color: var(--gold);
-  }
-  .mal-book-label {
-    font-size: 9px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.75;
-    white-space: nowrap;
-  }
-  .mal-today .mal-book-label {
-    opacity: 1;
-  }
-
-  .mal-fields {
-    padding: 4px 8px 5px;
-  }
-  .mal-field {
-    display: flex;
-    gap: 6px;
-    align-items: baseline;
-    padding: 2px 0;
-    font-size: 11px;
-    line-height: 1.4;
-  }
-  .mal-field-label {
-    font-size: 9px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-    white-space: nowrap;
-    min-width: 80px;
-    padding-top: 1px;
-  }
-  .mal-today .mal-field-label {
-    opacity: 1;
-  }
-  .mal-field-value {
-    color: var(--text-main);
-    flex: 1;
-  }
-
-  .detail-source {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.8;
-    margin-bottom: 2px;
-    font-family: 'Cinzel', serif;
-  }
-
-  .detail-today {
-    background: rgba(184,142,77,0.12);
-    border-radius: 3px;
-    padding: 2px 4px;
-    margin: 1px -4px;
-  }
-
-  .detail-today .detail-label {
-    color: var(--gold);
-    font-weight: 600;
-  }
-
-  .detail-week-header .detail-label {
-    color: var(--gold);
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-  }
-
-  .detail-week-header {
-    margin-bottom: 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .ww-label-zohar  { color: #9b7fc8; }
-  .ww-label-ls     { color: var(--gold); }
-  .ww-label-kst    { color: #e8c97a; }
-  .ww-label-ne     { color: #7ec8a0; }
-  .ww-label-tanya  { color: #7ab8e8; }
-  .ww-label-lm     { color: #e87a7a; }
-  .ww-label-my     { color: #c8a07e; }
-
-  .weekly-tag.dim {
-    opacity: 0.75;
-    font-style: italic;
-  }
-
-
-
-  /* ── FOOTER ── */
-  .footer {
-    text-align: center;
-    padding: 28px 0 0;
-    border-top: 1px solid var(--border);
-    margin-top: 28px;
-  }
-
-  .footer-text {
-    font-size: 13px;
-    color: var(--ink-soft);
-    font-style: italic;
-    letter-spacing: 1px;
-  }
-
-  .footer-authors {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--gold);
-    margin-top: 6px;
-    text-transform: uppercase;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  /* ── EXPAND ICON ── */
-  .expand-icon {
-    position: absolute;
-    right: 12px;
-    top: 14px;
-    color: var(--ink-dim);
-    font-size: 11px;
-    transition: transform 0.3s;
-  }
-  .sefirah-card.expanded .expand-icon { transform: rotate(180deg); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 480px) {
-    .sefirah-card { grid-template-columns: 70px 1fr; gap: 10px; }
-    .weekly-items { grid-template-columns: 1fr; }
-    .title-main { font-size: 20px; }
-    .crown-text { font-size: 17px; }
-    .sefirah-main-text { font-size: 16px; }
-  }
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–ink);
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+.app {
+max-width: 680px;
+margin: 0 auto;
+padding: 0 20px 60px;
+}
+
+/* ── HEADER ── */
+.header {
+text-align: center;
+padding: 44px 0 28px;
+border-bottom: 2px solid var(–border-strong);
+margin-bottom: 28px;
+}
+
+.star-of-david {
+font-size: 26px;
+color: var(–gold);
+display: block;
+margin-bottom: 14px;
+}
+
+.title-hebrew {
+font-family: ‘Frank Ruhl Libre’, serif;
+font-size: 24px;
+color: var(–gold);
+letter-spacing: 3px;
+margin-bottom: 6px;
+}
+
+.title-main {
+font-family: ‘Cinzel’, serif;
+font-size: 26px;
+font-weight: 600;
+color: var(–ink);
+letter-spacing: 3px;
+text-transform: uppercase;
+margin-bottom: 4px;
+}
+
+.title-sub {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+font-size: 16px;
+color: var(–ink-soft);
+letter-spacing: 1px;
+}
+
+/* ── DATE SELECTOR ── */
+.date-bar {
+background: var(–bg-card);
+border: 1px solid var(–border-strong);
+border-radius: 4px;
+padding: 12px 18px;
+margin-bottom: 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.date-nav-btn {
+background: var(–bg-card-alt);
+border: 1px solid var(–border-strong);
+color: var(–gold);
+width: 34px;
+height: 34px;
+border-radius: 3px;
+cursor: pointer;
+font-size: 18px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.15s;
+flex-shrink: 0;
+font-weight: bold;
+}
+
+.date-nav-btn:hover {
+background: var(–gold-pale);
+border-color: var(–gold);
+}
+
+.date-info { text-align: center; flex: 1; }
+
+.date-gregorian {
+font-family: ‘Cinzel’, serif;
+font-size: 13px;
+letter-spacing: 2px;
+color: var(–ink);
+text-transform: uppercase;
+font-weight: 600;
+}
+
+.date-hebrew {
+font-family: ‘Frank Ruhl Libre’, serif;
+font-size: 15px;
+color: var(–ink-soft);
+margin-top: 2px;
+}
+
+.date-day-indicator {
+font-size: 11px;
+color: var(–ink-mid);
+font-style: italic;
+margin-top: 3px;
+}
+
+/* ── CROWN ── */
+.keter-title-row {
+text-align: center;
+margin-bottom: 6px;
+}
+.keter-crown-label {
+font-family: ‘Cinzel’, serif;
+font-size: 11px;
+letter-spacing: 4px;
+color: var(–gold);
+text-transform: uppercase;
+}
+.keter-card {
+border: 2px solid var(–border-strong);
+border-radius: 4px;
+margin-bottom: 10px;
+position: relative;
+box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+animation: fadeInDown 0.5s ease both;
+cursor: pointer;
+transition: all 0.2s ease;
+overflow: hidden;
+}
+
+.keter-card:hover {
+box-shadow: 0 3px 12px rgba(139, 105, 20, 0.15);
+}
+
+.keter-card .expand-icon {
+position: absolute;
+top: 16px;
+right: 20px;
+font-size: 14px;
+color: var(–gold);
+transition: transform 0.25s ease;
+z-index: 2;
+}
+
+.keter-card.expanded .expand-icon {
+transform: rotate(180deg);
+}
+
+.keter-visible-content {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 0;
+}
+
+.keter-detail {
+display: none;
+animation: fadeIn 0.25s ease;
+}
+
+.keter-card.expanded .keter-detail {
+display: block;
+}
+
+.keter-detail .keter-section:not(:last-child) {
+border-bottom: 1px solid var(–border);
+}
+
+.keter-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+background: linear-gradient(90deg, transparent, var(–gold), transparent);
+border-radius: 4px 4px 0 0;
+z-index: 1;
+}
+
+@media (max-width: 540px) {
+.keter-visible-content { grid-template-columns: 1fr; }
+.keter-card .expand-icon { top: 12px; right: 16px; }
+}
+
+.keter-section {
+padding: 16px 20px;
+}
+
+.keter-visible-content .keter-section:nth-child(odd) {
+background: #fdf9f2 !important;
+}
+
+.keter-visible-content .keter-section:nth-child(even) {
+background: #f2ead8 !important;
+}
+
+.keter-detail .keter-section {
+background: var(–bg-card) !important;
+}
+
+.keter-visible-content .keter-section:not(:last-child) {
+border-right: 1px solid var(–border);
+}
+
+@media (max-width: 540px) {
+.keter-visible-content .keter-section:not(:last-child) {
+border-right: none;
+border-bottom: 1px solid var(–border);
+}
+}
+
+.keter-section-label {
+font-family: ‘Cinzel’, serif;
+font-size: 9px;
+letter-spacing: 2.5px;
+color: var(–ink-dim);
+text-transform: uppercase;
+margin-bottom: 6px;
+}
+
+.keter-hdate {
+font-size: 11px;
+color: var(–gold);
+font-weight: 600;
+letter-spacing: 0.5px;
+margin-bottom: 8px;
+}
+
+.keter-main {
+font-size: 13.5px;
+color: var(–ink);
+line-height: 1.55;
+font-style: italic;
+}
+
+.keter-meta {
+font-size: 11px;
+color: var(–ink-dim);
+margin-top: 6px;
+}
+
+.keter-meta strong {
+color: var(–gold);
+}
+
+/* ── SEFIRAH CARDS ── */
+.upper-sefirot-grid {
+display: grid !important;
+grid-template-columns: 1fr !important;
+gap: 12px;
+margin-bottom: 12px;
+}
+.upper-sefirah {
+border-left: none !important;
+grid-template-columns: 96px 1fr;
+}
+
+.upper-sefirot-grid .sefirah-card:nth-child(1) {
+border-top: 3px solid var(–accent-blue) !important;
+background: #fdf9f2 !important;
+}
+
+.upper-sefirot-grid .sefirah-card:nth-child(2) {
+border-top: 3px solid var(–accent-red) !important;
+background: #f2ead8 !important;
+}
+.upper-sefirah .sefirah-label-col {
+overflow: hidden;
+padding-right: 6px;
+}
+.upper-sefirah .sefirah-name {
+font-size: 9.5px;
+letter-spacing: 0.8px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: clip;
+}
+.upper-sefirah .sefirah-hebrew {
+font-size: 16px;
+}
+
+.sefirot-grid {
+display: flex;
+flex-direction: column;
+gap: 6px;
+margin-bottom: 24px;
+}
+
+.sefirah-card {
+background: var(–bg-card);
+border-radius: 3px;
+padding: 14px 18px;
+display: grid;
+grid-template-columns: 86px 1fr;
+gap: 14px;
+align-items: start;
+position: relative;
+cursor: pointer;
+transition: box-shadow 0.2s, transform 0.15s;
+border: 1px solid var(–border);
+border-left: 4px solid var(–sefirah-color, var(–gold));
+box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+animation: fadeInUp 0.4s ease both;
+}
+
+.sefirah-card:hover {
+box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+transform: translateY(-1px);
+}
+
+.sefirot-grid .sefirah-card:nth-child(1) {
+animation-delay: 0.05s;
+–sefirah-color: var(–accent-blue) !important;
+background: #fdf9f2 !important;
+}
+.sefirot-grid .sefirah-card:nth-child(2) {
+animation-delay: 0.10s;
+–sefirah-color: var(–accent-red) !important;
+background: #f2ead8 !important;
+}
+.sefirot-grid .sefirah-card:nth-child(3) {
+animation-delay: 0.15s;
+–sefirah-color: var(–accent-green) !important;
+background: #fdf9f2 !important;
+}
+.sefirot-grid .sefirah-card:nth-child(4) {
+animation-delay: 0.20s;
+–sefirah-color: var(–accent-orange) !important;
+background: #f2ead8 !important;
+}
+.sefirot-grid .sefirah-card:nth-child(5) {
+animation-delay: 0.25s;
+–sefirah-color: var(–accent-teal) !important;
+background: #fdf9f2 !important;
+}
+.sefirot-grid .sefirah-card:nth-child(6) {
+animation-delay: 0.30s;
+–sefirah-color: var(–accent-purple) !important;
+background: #f2ead8 !important;
+}
+.sefirot-grid .sefirah-card:nth-child(7) {
+animation-delay: 0.35s;
+–sefirah-color: var(–accent-brown) !important;
+background: #fdf9f2 !important;
+}
+
+.sefirah-label-col {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding-top: 2px;
+border-right: 1px solid var(–border);
+padding-right: 12px;
+}
+
+.sefirah-name {
+font-family: ‘Cinzel’, serif;
+font-size: 11px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–sefirah-color, var(–gold));
+margin-bottom: 5px;
+font-weight: 600;
+}
+
+.sefirah-hebrew {
+font-family: ‘Frank Ruhl Libre’, serif;
+font-size: 22px;
+color: var(–sefirah-color, var(–gold));
+line-height: 1;
+opacity: 0.85;
+}
+
+.sefirah-content-col { padding-left: 2px; }
+
+.sefirah-cycle-name {
+font-family: ‘Cinzel’, serif;
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–ink-dim);
+margin-bottom: 5px;
+}
+
+.sefirah-main-text {
+font-size: 18px;
+color: var(–ink);
+line-height: 1.45;
+font-weight: 400;
+}
+
+.sefirah-main-text strong {
+font-weight: 700;
+color: var(–sefirah-color, var(–gold));
+}
+
+.sefirah-sub-text {
+font-size: 14px;
+color: var(–ink-soft);
+margin-top: 5px;
+font-style: italic;
+line-height: 1.5;
+}
+
+.sefirah-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+margin-top: 7px;
+}
+
+.tag {
+font-size: 11px;
+padding: 2px 9px;
+border-radius: 2px;
+background: var(–bg-card-alt);
+border: 1px solid var(–border);
+color: var(–ink-mid);
+letter-spacing: 0.3px;
+font-family: ‘Cormorant Garamond’, serif;
+}
+
+.tag.highlight {
+background: var(–gold-pale);
+border-color: var(–border-strong);
+color: var(–gold);
+font-weight: 600;
+}
+
+/* ── EXPANDED DETAIL ── */
+.sefirah-detail {
+display: none;
+padding-top: 10px;
+border-top: 1px solid var(–border);
+margin-top: 10px;
+background: var(–bg-card);
+}
+
+.sefirah-card.expanded .sefirah-detail {
+display: block;
+animation: fadeIn 0.25s ease;
+}
+
+.detail-row {
+display: flex;
+gap: 10px;
+margin-bottom: 6px;
+font-size: 14px;
+line-height: 1.4;
+}
+
+.detail-label {
+color: var(–gold-mid);
+font-style: italic;
+min-width: 110px;
+flex-shrink: 0;
+font-weight: 500;
+}
+
+.detail-value { color: var(–ink-mid); }
+
+/* ── DIVIDER ── */
+.section-divider {
+display: flex;
+align-items: center;
+gap: 14px;
+margin: 20px 0 14px;
+}
+
+.section-divider::before,
+.section-divider::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–border-strong);
+}
+
+.divider-symbol {
+color: var(–gold);
+font-size: 13px;
+}
+
+/* ── WEEKLY SECTION ── */
+.weekly-section {
+background: var(–bg-card);
+border: 1px solid var(–border-strong);
+border-radius: 4px;
+padding: 18px 22px;
+margin-bottom: 8px;
+box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+animation: fadeInUp 0.4s ease 0.4s both;
+}
+
+.weekly-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 14px;
+flex-wrap: wrap;
+gap: 8px;
+}
+
+.weekly-title {
+font-family: ‘Cinzel’, serif;
+font-size: 10px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–ink-dim);
+}
+
+.weekly-badge {
+font-size: 13px;
+padding: 3px 10px;
+border: 1px solid var(–border-strong);
+color: var(–gold);
+border-radius: 2px;
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+background: var(–bg-card-alt);
+}
+
+.weekly-items {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+}
+
+.weekly-item {
+padding: 12px;
+background: var(–bg-card-alt);
+border: 1px solid var(–border);
+border-radius: 3px;
+}
+
+.weekly-item-label {
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–ink-dim);
+margin-bottom: 5px;
+font-family: ‘Cinzel’, serif;
+}
+
+.weekly-item-value {
+font-size: 17px;
+color: var(–ink);
+font-weight: 500;
+}
+
+.weekly-item-sub {
+font-size: 12px;
+color: var(–ink-soft);
+font-style: italic;
+margin-top: 3px;
+}
+.weekly-book-row {
+display: flex;
+gap: 12px;
+padding: 10px 12px;
+background: var(–bg-card-alt);
+border: 1px solid var(–border);
+border-radius: 3px;
+margin-bottom: 6px;
+align-items: flex-start;
+}
+
+.weekly-book-label {
+font-size: 10px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–gold);
+font-family: ‘Cinzel’, serif;
+min-width: 62px;
+padding-top: 2px;
+opacity: 0.85;
+}
+
+.weekly-book-content {
+flex: 1;
+}
+
+.weekly-book-subrow {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+margin-top: 5px;
+}
+
+.weekly-tag {
+font-size: 11px;
+padding: 2px 8px;
+border-radius: 10px;
+background: rgba(184,142,77,0.12);
+color: var(–ink-soft);
+border: 1px solid var(–border);
+}
+
+/* ── MALCHUT EXPANDED PANEL ── */
+.mal-today-highlight {
+background: linear-gradient(135deg, rgba(180,140,60,0.12), rgba(180,140,60,0.05));
+border: 2px solid var(–gold);
+border-radius: 3px;
+padding: 8px;
+margin-bottom: 12px;
+}
+.mal-today-badge {
+font-family: ‘Cinzel’, serif;
+font-size: 9px;
+letter-spacing: 2px;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 6px;
+padding-left: 4px;
+}
+.mal-week-divider {
+border: none;
+border-top: 1px solid var(–border);
+margin: 14px 0 10px 0;
+}
+
+.mal-parasha-header {
+display: flex;
+flex-direction: column;
+gap: 2px;
+padding: 6px 8px 8px;
+margin-bottom: 8px;
+border-bottom: 1px solid var(–border);
+font-size: 11px;
+color: var(–text-dim);
+}
+.mal-parasha-header strong {
+color: var(–gold);
+font-size: 13px;
+font-family: ‘Cinzel’, serif;
+letter-spacing: 0.5px;
+}
+
+.mal-book-row {
+border: 1px solid var(–border);
+border-radius: 5px;
+margin-bottom: 6px;
+overflow: hidden;
+}
+.mal-today {
+border-color: var(–gold);
+background: rgba(184,142,77,0.07);
+}
+
+.mal-book-header {
+display: flex;
+align-items: baseline;
+gap: 6px;
+padding: 5px 8px 3px;
+border-bottom: 1px solid var(–border);
+flex-wrap: wrap;
+}
+.mal-today .mal-book-header {
+background: rgba(184,142,77,0.1);
+}
+
+.mal-night {
+font-size: 9px;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: var(–text-dim);
+white-space: nowrap;
+}
+.mal-text-name {
+font-size: 12px;
+font-weight: 600;
+color: var(–text-main);
+font-family: ‘Cinzel’, serif;
+flex: 1;
+}
+.mal-today .mal-text-name {
+color: var(–gold);
+}
+.mal-book-label {
+font-size: 9px;
+letter-spacing: 0.8px;
+text-transform: uppercase;
+color: var(–gold);
+opacity: 0.75;
+white-space: nowrap;
+}
+.mal-today .mal-book-label {
+opacity: 1;
+}
+
+.mal-fields {
+padding: 4px 8px 5px;
+}
+.mal-field {
+display: flex;
+gap: 6px;
+align-items: baseline;
+padding: 2px 0;
+font-size: 11px;
+line-height: 1.4;
+}
+.mal-field-label {
+font-size: 9px;
+letter-spacing: 0.8px;
+text-transform: uppercase;
+color: var(–gold);
+opacity: 0.7;
+white-space: nowrap;
+min-width: 80px;
+padding-top: 1px;
+}
+.mal-today .mal-field-label {
+opacity: 1;
+}
+.mal-field-value {
+color: var(–text-main);
+flex: 1;
+}
+
+.detail-source {
+display: block;
+font-size: 10px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–gold);
+opacity: 0.8;
+margin-bottom: 2px;
+font-family: ‘Cinzel’, serif;
+}
+
+.detail-today {
+background: rgba(184,142,77,0.12);
+border-radius: 3px;
+padding: 2px 4px;
+margin: 1px -4px;
+}
+
+.detail-today .detail-label {
+color: var(–gold);
+font-weight: 600;
+}
+
+.detail-week-header .detail-label {
+color: var(–gold);
+font-weight: 600;
+font-size: 11px;
+letter-spacing: 0.5px;
+}
+
+.detail-week-header {
+margin-bottom: 4px;
+padding-bottom: 4px;
+border-bottom: 1px solid var(–border);
+}
+
+.ww-label-zohar  { color: #9b7fc8; }
+.ww-label-ls     { color: var(–gold); }
+.ww-label-kst    { color: #e8c97a; }
+.ww-label-ne     { color: #7ec8a0; }
+.ww-label-tanya  { color: #7ab8e8; }
+.ww-label-lm     { color: #e87a7a; }
+.ww-label-my     { color: #c8a07e; }
+
+.weekly-tag.dim {
+opacity: 0.75;
+font-style: italic;
+}
+
+/* ── FOOTER ── */
+.footer {
+text-align: center;
+padding: 28px 0 0;
+border-top: 1px solid var(–border);
+margin-top: 28px;
+}
+
+.footer-text {
+font-size: 13px;
+color: var(–ink-soft);
+font-style: italic;
+letter-spacing: 1px;
+}
+
+.footer-authors {
+font-family: ‘Cinzel’, serif;
+font-size: 11px;
+letter-spacing: 2px;
+color: var(–gold);
+margin-top: 6px;
+text-transform: uppercase;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeInDown {
+from { opacity: 0; transform: translateY(-10px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(10px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+
+/* ── EXPAND ICON ── */
+.expand-icon {
+position: absolute;
+right: 12px;
+top: 14px;
+color: var(–ink-dim);
+font-size: 11px;
+transition: transform 0.3s;
+}
+.sefirah-card.expanded .expand-icon { transform: rotate(180deg); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+.sefirah-card { grid-template-columns: 70px 1fr; gap: 10px; }
+.weekly-items { grid-template-columns: 1fr; }
+.title-main { font-size: 20px; }
+.crown-text { font-size: 17px; }
+.sefirah-main-text { font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 
 <div class="app">
 
   <!-- HEADER -->
+
   <header class="header">
     <span class="star-of-david">✦</span>
     <div class="title-hebrew">קַבָּלַת הַזְּמַן</div>
@@ -895,6 +892,7 @@
   </header>
 
   <!-- DATE BAR -->
+
   <div class="date-bar">
     <button class="date-nav-btn" onclick="changeDay(-1)">‹</button>
     <div class="date-info">
@@ -906,100 +904,106 @@
   </div>
 
   <!-- CROWN — YEARLY CYCLE -->
+
   <div class="keter-title-row">
     <span class="keter-crown-label">✦ KETER ✦</span>
   </div>
   <div class="keter-card" onclick="toggleKeterExpand(this, event)">
     <span class="expand-icon">▾</span>
-    
-    <!-- Always visible sections -->
-    <div class="keter-visible-content">
-      <!-- HAYOM YOM section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Hayom Yom — היום יום</div>
-        <div class="keter-main" id="keter-hayomyom">Loading…</div>
-        <div class="keter-meta" id="keter-hy-meta"></div>
-      </div>
-      <!-- DAILY LM section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Daily Likutei Moharan</div>
-        <div class="keter-main" id="keter-lm-main">Loading…</div>
-        <div class="keter-meta" id="keter-lm-meta"></div>
-      </div>
-      <!-- DAF YOMI section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Daf Yomi — דַּף יוֹמִי</div>
-        <div class="keter-hdate" id="keter-daf-masechet">Loading…</div>
-        <div class="keter-main" id="keter-daf-main">Loading…</div>
-        <div class="keter-meta" id="keter-daf-meta"></div>
-      </div>
-    </div>
 
-    <!-- Expandable detail sections -->
-    <div class="keter-detail">
-      <div class="section-divider" style="margin: 16px 0">
-        <span class="divider-symbol">◆</span>
-      </div>
-      <!-- CHUMASH section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Chumash with Rashi</div>
-        <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
-        <div class="keter-main" id="keter-chumash-main">Loading…</div>
-        <div class="keter-meta" id="keter-chumash-meta"></div>
-      </div>
-      <!-- TEHILLIM section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Tehillim</div>
-        <div class="keter-main" id="keter-tehillim-main">Loading…</div>
-        <div class="keter-meta" id="keter-tehillim-meta"></div>
-      </div>
-      <!-- TANYA section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Tanya</div>
-        <div class="keter-main" id="keter-tanya-main">Loading…</div>
-        <div class="keter-meta" id="keter-tanya-meta"></div>
-      </div>
-      <!-- RAMBAM section -->
-      <div class="keter-section">
-        <div class="keter-section-label">✦ Rambam</div>
-        <div class="keter-main" id="keter-rambam-main">Loading…</div>
-        <div class="keter-meta" id="keter-rambam-meta"></div>
-      </div>
-    </div>
+```
+<!-- Always visible sections -->
+<div class="keter-visible-content">
+  <!-- HAYOM YOM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Hayom Yom — היום יום</div>
+    <div class="keter-main" id="keter-hayomyom">Loading…</div>
+    <div class="keter-meta" id="keter-hy-meta"></div>
+  </div>
+  <!-- DAILY LM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Daily Likutei Moharan</div>
+    <div class="keter-main" id="keter-lm-main">Loading…</div>
+    <div class="keter-meta" id="keter-lm-meta"></div>
+  </div>
+  <!-- DAF YOMI section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Daf Yomi — דַּף יוֹמִי</div>
+    <div class="keter-hdate" id="keter-daf-masechet">Loading…</div>
+    <div class="keter-main" id="keter-daf-main">Loading…</div>
+    <div class="keter-meta" id="keter-daf-meta"></div>
+  </div>
+</div>
+
+<!-- Expandable detail sections -->
+<div class="keter-detail">
+  <div class="section-divider" style="margin: 16px 0">
+    <span class="divider-symbol">◆</span>
+  </div>
+  <!-- CHUMASH section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Chumash with Rashi</div>
+    <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
+    <div class="keter-main" id="keter-chumash-main">Loading…</div>
+    <div class="keter-meta" id="keter-chumash-meta"></div>
+  </div>
+  <!-- TEHILLIM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Tehillim</div>
+    <div class="keter-main" id="keter-tehillim-main">Loading…</div>
+    <div class="keter-meta" id="keter-tehillim-meta"></div>
+  </div>
+  <!-- TANYA section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Tanya</div>
+    <div class="keter-main" id="keter-tanya-main">Loading…</div>
+    <div class="keter-meta" id="keter-tanya-meta"></div>
+  </div>
+  <!-- RAMBAM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Rambam</div>
+    <div class="keter-main" id="keter-rambam-main">Loading…</div>
+    <div class="keter-meta" id="keter-rambam-meta"></div>
+  </div>
+</div>
+```
+
   </div>
   <div class="upper-sefirot-grid" id="upper-sefirot-grid">
 
-    <!-- CHOCHMAH: 22-Day Alef-Bet Cycle -->
-    <div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name" style="color:var(--accent-blue)">Chochmah</div>
-        <div class="sefirah-hebrew" style="color:var(--accent-blue)">חָכְמָה</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef-Bet — 22-Day Cycle</div>
-        <div class="sefirah-main-text" id="chochmah-main">Loading…</div>
-        <div class="sefirah-sub-text" id="chochmah-sub"></div>
-        <div class="sefirah-tags" id="chochmah-tags"></div>
-        <div class="sefirah-detail" id="chochmah-detail"></div>
-      </div>
-    </div>
+```
+<!-- CHOCHMAH: 22-Day Alef-Bet Cycle -->
+<div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name" style="color:var(--accent-blue)">Chochmah</div>
+    <div class="sefirah-hebrew" style="color:var(--accent-blue)">חָכְמָה</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef-Bet — 22-Day Cycle</div>
+    <div class="sefirah-main-text" id="chochmah-main">Loading…</div>
+    <div class="sefirah-sub-text" id="chochmah-sub"></div>
+    <div class="sefirah-tags" id="chochmah-tags"></div>
+    <div class="sefirah-detail" id="chochmah-detail"></div>
+  </div>
+</div>
 
-    <!-- BINAH: 7×7×7 Sefirot Omer Cycle -->
-    <div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name" style="color:var(--accent-red)">Binah</div>
-        <div class="sefirah-hebrew" style="color:var(--accent-red)">בִּינָה</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="binah-cycle-name">Sefirot — 7×7×7 Cycle</div>
-        <div class="sefirah-main-text" id="binah-main">Loading…</div>
-        <div class="sefirah-sub-text" id="binah-sub"></div>
-        <div class="sefirah-tags" id="binah-tags"></div>
-        <div class="sefirah-detail" id="binah-detail"></div>
-      </div>
-    </div>
+<!-- BINAH: 7×7×7 Sefirot Omer Cycle -->
+<div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name" style="color:var(--accent-red)">Binah</div>
+    <div class="sefirah-hebrew" style="color:var(--accent-red)">בִּינָה</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="binah-cycle-name">Sefirot — 7×7×7 Cycle</div>
+    <div class="sefirah-main-text" id="binah-main">Loading…</div>
+    <div class="sefirah-sub-text" id="binah-sub"></div>
+    <div class="sefirah-tags" id="binah-tags"></div>
+    <div class="sefirah-detail" id="binah-detail"></div>
+  </div>
+</div>
+```
 
   </div>
 
@@ -1008,267 +1012,270 @@
   </div>
 
   <!-- 7 SEFIROT CARDS -->
+
   <div class="sefirot-grid" id="sefirot-grid">
 
-    <!-- CHESED: Mishna / Tosefta -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Chesed</div>
-        <div class="sefirah-hebrew">חֶסֶד</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="chesed-cycle-name">Mishna — Oral Torah</div>
-        <div class="sefirah-main-text" id="chesed-main">Loading…</div>
-        <div class="sefirah-sub-text" id="chesed-sub"></div>
-        <div class="sefirah-tags" id="chesed-tags"></div>
-        <div class="sefirah-detail" id="chesed-detail"></div>
-      </div>
+```
+<!-- CHESED: Mishna / Tosefta -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Chesed</div>
+    <div class="sefirah-hebrew">חֶסֶד</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="chesed-cycle-name">Mishna — Oral Torah</div>
+    <div class="sefirah-main-text" id="chesed-main">Loading…</div>
+    <div class="sefirah-sub-text" id="chesed-sub"></div>
+    <div class="sefirah-tags" id="chesed-tags"></div>
+    <div class="sefirah-detail" id="chesed-detail"></div>
+  </div>
+</div>
+
+<!-- GEVURAH: Tanach -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Gevurah</div>
+    <div class="sefirah-hebrew">גְּבוּרָה</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
+    <div class="sefirah-main-text" id="gevurah-main">Loading…</div>
+    <div class="sefirah-sub-text" id="gevurah-sub"></div>
+    <div class="sefirah-tags" id="gevurah-tags"></div>
+    <div class="sefirah-detail" id="gevurah-detail"></div>
+  </div>
+</div>
+
+<!-- TIFERET: 13-Day Cycle (dynamic) -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Tiferet</div>
+    <div class="sefirah-hebrew">תִּפְאֶרֶת</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name">13 Attributes — 13-Day Cycle</div>
+    <div class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-sub-text"></div>
+    <div class="sefirah-tags"></div>
+    <div class="sefirah-detail"></div>
+  </div>
+</div>
+
+<!-- NETZACH: 41-Day Cycle (dynamic) -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Netzach</div>
+    <div class="sefirah-hebrew">נֶצַח</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name">41-Day Cycle — Mivtzoyim</div>
+    <div class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-sub-text"></div>
+    <div class="sefirah-tags"></div>
+    <div class="sefirah-detail"></div>
+  </div>
+</div>
+
+<!-- HOD: Halacha -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Hod</div>
+    <div class="sefirah-hebrew">הוֹד</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name">Halacha — Daily Law</div>
+    <div class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-sub-text">Loading…</div>
+    <div class="sefirah-tags"></div>
+    <div class="sefirah-detail"></div>
+  </div>
+</div>
+
+<!-- YESOD: Shovavim / Parasha -->
+<div class="sefirah-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Yesod</div>
+    <div class="sefirah-hebrew">יְסוֹד</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name">Shovavim — Parasha Cycle</div>
+
+    <!-- Exact blog markup, restyled -->
+    <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
+    <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
+    <div class="sefirah-detail">
+      <div id="yesod-parasha-cycle" style="font-size:14px; line-height:1.7; color:var(--ink-mid);"></div>
     </div>
+  </div>
+</div>
 
-    <!-- GEVURAH: Tanach -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Gevurah</div>
-        <div class="sefirah-hebrew">גְּבוּרָה</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
-        <div class="sefirah-main-text" id="gevurah-main">Loading…</div>
-        <div class="sefirah-sub-text" id="gevurah-sub"></div>
-        <div class="sefirah-tags" id="gevurah-tags"></div>
-        <div class="sefirah-detail" id="gevurah-detail"></div>
-      </div>
-    </div>
+<style>
+  /* Override cycle-label class inside Yesod card to match parchment theme */
+  #yesod-parasha-cycle .cycle-label {
+    color: var(--gold-mid);
+    font-weight: 600;
+    display: block;
+    margin-top: 4px;
+    border-top: 1px solid var(--border);
+    padding-top: 4px;
+    font-style: italic;
+  }
+</style>
 
-    <!-- TIFERET: 13-Day Cycle (dynamic) -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Tiferet</div>
-        <div class="sefirah-hebrew">תִּפְאֶרֶת</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name">13 Attributes — 13-Day Cycle</div>
-        <div class="sefirah-main-text">Loading…</div>
-        <div class="sefirah-sub-text"></div>
-        <div class="sefirah-tags"></div>
-        <div class="sefirah-detail"></div>
-      </div>
-    </div>
+<script>
+(function() {
+    const parashotData = [
+        { date: "2025-09-27", name: "Vayeilech", numbers: [52], isHoliday: false },
+        { date: "2025-10-04", name: "Haazinu", numbers: [53], isHoliday: false },
+        { date: "2025-10-11", name: "Sukkot V (CH''M)", numbers: [], isHoliday: true },
+        { date: "2025-10-18", name: "Bereshit", numbers: [1], isHoliday: false },
+        { date: "2025-10-25", name: "Noach", numbers: [2], isHoliday: false },
+        { date: "2025-11-01", name: "Lech Lecha", numbers: [3], isHoliday: false },
+        { date: "2025-11-08", name: "Vayeira", numbers: [4], isHoliday: false },
+        { date: "2025-11-15", name: "Chayei Sara", numbers: [5], isHoliday: false },
+        { date: "2025-11-22", name: "Toledot", numbers: [6], isHoliday: false },
+        { date: "2025-11-29", name: "Vayetzei", numbers: [7], isHoliday: false },
+        { date: "2025-12-06", name: "Vayishlach", numbers: [8], isHoliday: false },
+        { date: "2025-12-13", name: "Vayeshev", numbers: [9], isHoliday: false },
+        { date: "2025-12-20", name: "Miketz", numbers: [10], isHoliday: false },
+        { date: "2025-12-27", name: "Vayigash", numbers: [11], isHoliday: false },
+        { date: "2026-01-03", name: "Vayechi", numbers: [12], isHoliday: false },
+        { date: "2026-01-10", name: "Shemot", numbers: [13], isHoliday: false },
+        { date: "2026-01-17", name: "Vaera", numbers: [14], isHoliday: false },
+        { date: "2026-01-24", name: "Bo", numbers: [15], isHoliday: false },
+        { date: "2026-01-31", name: "Beshalach", numbers: [16], isHoliday: false },
+        { date: "2026-02-07", name: "Yitro", numbers: [17], isHoliday: false },
+        { date: "2026-02-14", name: "Mishpatim", numbers: [18], isHoliday: false },
+        { date: "2026-02-21", name: "Terumah", numbers: [19], isHoliday: false },
+        { date: "2026-02-28", name: "Tetzaveh", numbers: [20], isHoliday: false },
+        { date: "2026-03-07", name: "Ki Tisa", numbers: [21], isHoliday: false },
+        { date: "2026-03-14", name: "Vayakhel-Pekudei", numbers: [22, 23], isHoliday: false },
+        { date: "2026-03-21", name: "Vayikra", numbers: [24], isHoliday: false },
+        { date: "2026-03-28", name: "Tzav", numbers: [25], isHoliday: false },
+        { date: "2026-04-04", name: "Pesach III (CH''M)", numbers: [], isHoliday: true },
+        { date: "2026-04-11", name: "Shmini", numbers: [26], isHoliday: false },
+        { date: "2026-04-18", name: "Tazria-Metzora", numbers: [27, 28], isHoliday: false },
+        { date: "2026-04-25", name: "Achrei Mot-Kedoshim", numbers: [29, 30], isHoliday: false },
+        { date: "2026-05-02", name: "Emor", numbers: [31], isHoliday: false },
+        { date: "2026-05-09", name: "Behar-Bechukotai", numbers: [32, 33], isHoliday: false },
+        { date: "2026-05-16", name: "Bamidbar", numbers: [34], isHoliday: false },
+        { date: "2026-05-23", name: "Shavuot II", numbers: [], isHoliday: true },
+        { date: "2026-05-30", name: "Nasso", numbers: [35], isHoliday: false },
+        { date: "2026-06-06", name: "Behaalotecha", numbers: [36], isHoliday: false },
+        { date: "2026-06-13", name: "Shlach", numbers: [37], isHoliday: false },
+        { date: "2026-06-20", name: "Korach", numbers: [38], isHoliday: false },
+        { date: "2026-06-27", name: "Chukat-Balak", numbers: [39, 40], isHoliday: false },
+        { date: "2026-07-04", name: "Pinchas", numbers: [41], isHoliday: false },
+        { date: "2026-07-11", name: "Matot-Masei", numbers: [42, 43], isHoliday: false },
+        { date: "2026-07-18", name: "Devarim", numbers: [44], isHoliday: false },
+        { date: "2026-07-25", name: "Vaetchanan", numbers: [45], isHoliday: false },
+        { date: "2026-08-01", name: "Eikev", numbers: [46], isHoliday: false },
+        { date: "2026-08-08", name: "Re'eh", numbers: [47], isHoliday: false },
+        { date: "2026-08-15", name: "Shoftim", numbers: [48], isHoliday: false },
+        { date: "2026-08-22", name: "Ki Teitzei", numbers: [49], isHoliday: false },
+        { date: "2026-08-29", name: "Ki Tavo", numbers: [50], isHoliday: false },
+        { date: "2026-09-05", name: "Nitzavim-Vayeilech", numbers: [51, 52], isHoliday: false }
+    ];
+    const cycles = [
+        { cycle: 1, start: 1, end: 6 },
+        { cycle: 2, start: 7, end: 12 },
+        { cycle: 3, start: 13, end: 20 },
+        { cycle: 4, start: 21, end: 28 },
+        { cycle: 5, start: 29, end: 36 },
+        { cycle: 6, start: 37, end: 42 },
+        { cycle: 7, start: 43, end: 48 },
+        { cycle: 8, start: 49, end: 54 }
+    ];
+    const qualitiesData = {
+        1: { letter: "Shin", name: "Moshe", concept: "Torah", service: "Shiviti" },
+        2: { letter: "Vav", name: "Aharon", concept: "Avodah", service: "Ve'Ahavta" },
+        3: { letter: "Beit (1)", name: "Mordechai", concept: "Mesirut Nefesh & Tzedaka", service: "B'chol" },
+        4: { letter: "Beit (2) (Heh)", name: "Esther", concept: "Taanit", service: "Hatzneah" },
+        5: { letter: "Yud", name: "Rashbi", concept: "Tikkun Klali", service: "Tamim" },
+        6: { letter: "Mem Sofit", name: "Ari", concept: "Mikvah", service: "Tamim" },
+        7: { letter: "Tav (1)", name: "Moshiach", concept: "Tikkun Leah", service: "Tamim" },
+        8: { letter: "Tav (2)", name: "Eliyahu", concept: "Tikkun Rachel/Perek Shira", service: "Tamim" }
+    };
 
-    <!-- NETZACH: 41-Day Cycle (dynamic) -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Netzach</div>
-        <div class="sefirah-hebrew">נֶצַח</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name">41-Day Cycle — Mivtzoyim</div>
-        <div class="sefirah-main-text">Loading…</div>
-        <div class="sefirah-sub-text"></div>
-        <div class="sefirah-tags"></div>
-        <div class="sefirah-detail"></div>
-      </div>
-    </div>
+    function getNextShabbat(d) { let day = d.getDay(); let diff = (6 - day + 7) % 7; let s = new Date(d); s.setDate(d.getDate() + diff); s.setHours(0,0,0,0); return s; }
+    function formatDate(d) { return d.getFullYear() + '-' + (d.getMonth()+1).toString().padStart(2,'0') + '-' + d.getDate().toString().padStart(2,'0'); }
+    function getQualities(n) { return qualitiesData[n] || null; }
 
-    <!-- HOD: Halacha -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Hod</div>
-        <div class="sefirah-hebrew">הוֹד</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name">Halacha — Daily Law</div>
-        <div class="sefirah-main-text">Loading…</div>
-        <div class="sefirah-sub-text">Loading…</div>
-        <div class="sefirah-tags"></div>
-        <div class="sefirah-detail"></div>
-      </div>
-    </div>
+    function getCycleAndRelativeNumberForParasha(n) {
+        for (const c of cycles) { if (n >= c.start && n <= c.end) return { cycle: c.cycle, relativeNumber: n - c.start + 1, cycleLength: c.end - c.start + 1 }; }
+        return null;
+    }
 
-    <!-- YESOD: Shovavim / Parasha -->
-    <div class="sefirah-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Yesod</div>
-        <div class="sefirah-hebrew">יְסוֹד</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name">Shovavim — Parasha Cycle</div>
+    function findCurrentParasha(f) {
+        let cp = null, ci = -1;
+        for (let i=0; i<parashotData.length; i++) { if (parashotData[i].date <= f) { cp = parashotData[i]; ci = i; } else break; }
+        if (cp && cp.isHoliday) { for (let i=ci+1; i<parashotData.length; i++) { if (!parashotData[i].isHoliday) return parashotData[i]; } }
+        return cp;
+    }
 
-        <!-- Exact blog markup, restyled -->
-        <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
-        <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
-        <div class="sefirah-detail">
-          <div id="yesod-parasha-cycle" style="font-size:14px; line-height:1.7; color:var(--ink-mid);"></div>
-        </div>
-      </div>
-    </div>
+    function displayParasha() {
+        const foundParasha = findCurrentParasha(formatDate(getNextShabbat(new Date())));
+        if (foundParasha) {
+            document.getElementById('yesod-parasha-name').textContent = foundParasha.name;
+            document.getElementById('yesod-parasha-numbers').textContent =
+                'Shovavim Week: ' + (foundParasha.numbers.length > 0 ? foundParasha.numbers.join(', ') : 'N/A');
 
-    <style>
-      /* Override cycle-label class inside Yesod card to match parchment theme */
-      #yesod-parasha-cycle .cycle-label {
-        color: var(--gold-mid);
-        font-weight: 600;
-        display: block;
-        margin-top: 4px;
-        border-top: 1px solid var(--border);
-        padding-top: 4px;
-        font-style: italic;
-      }
-    </style>
-
-    <script>
-    (function() {
-        const parashotData = [
-            { date: "2025-09-27", name: "Vayeilech", numbers: [52], isHoliday: false },
-            { date: "2025-10-04", name: "Haazinu", numbers: [53], isHoliday: false },
-            { date: "2025-10-11", name: "Sukkot V (CH''M)", numbers: [], isHoliday: true },
-            { date: "2025-10-18", name: "Bereshit", numbers: [1], isHoliday: false },
-            { date: "2025-10-25", name: "Noach", numbers: [2], isHoliday: false },
-            { date: "2025-11-01", name: "Lech Lecha", numbers: [3], isHoliday: false },
-            { date: "2025-11-08", name: "Vayeira", numbers: [4], isHoliday: false },
-            { date: "2025-11-15", name: "Chayei Sara", numbers: [5], isHoliday: false },
-            { date: "2025-11-22", name: "Toledot", numbers: [6], isHoliday: false },
-            { date: "2025-11-29", name: "Vayetzei", numbers: [7], isHoliday: false },
-            { date: "2025-12-06", name: "Vayishlach", numbers: [8], isHoliday: false },
-            { date: "2025-12-13", name: "Vayeshev", numbers: [9], isHoliday: false },
-            { date: "2025-12-20", name: "Miketz", numbers: [10], isHoliday: false },
-            { date: "2025-12-27", name: "Vayigash", numbers: [11], isHoliday: false },
-            { date: "2026-01-03", name: "Vayechi", numbers: [12], isHoliday: false },
-            { date: "2026-01-10", name: "Shemot", numbers: [13], isHoliday: false },
-            { date: "2026-01-17", name: "Vaera", numbers: [14], isHoliday: false },
-            { date: "2026-01-24", name: "Bo", numbers: [15], isHoliday: false },
-            { date: "2026-01-31", name: "Beshalach", numbers: [16], isHoliday: false },
-            { date: "2026-02-07", name: "Yitro", numbers: [17], isHoliday: false },
-            { date: "2026-02-14", name: "Mishpatim", numbers: [18], isHoliday: false },
-            { date: "2026-02-21", name: "Terumah", numbers: [19], isHoliday: false },
-            { date: "2026-02-28", name: "Tetzaveh", numbers: [20], isHoliday: false },
-            { date: "2026-03-07", name: "Ki Tisa", numbers: [21], isHoliday: false },
-            { date: "2026-03-14", name: "Vayakhel-Pekudei", numbers: [22, 23], isHoliday: false },
-            { date: "2026-03-21", name: "Vayikra", numbers: [24], isHoliday: false },
-            { date: "2026-03-28", name: "Tzav", numbers: [25], isHoliday: false },
-            { date: "2026-04-04", name: "Pesach III (CH''M)", numbers: [], isHoliday: true },
-            { date: "2026-04-11", name: "Shmini", numbers: [26], isHoliday: false },
-            { date: "2026-04-18", name: "Tazria-Metzora", numbers: [27, 28], isHoliday: false },
-            { date: "2026-04-25", name: "Achrei Mot-Kedoshim", numbers: [29, 30], isHoliday: false },
-            { date: "2026-05-02", name: "Emor", numbers: [31], isHoliday: false },
-            { date: "2026-05-09", name: "Behar-Bechukotai", numbers: [32, 33], isHoliday: false },
-            { date: "2026-05-16", name: "Bamidbar", numbers: [34], isHoliday: false },
-            { date: "2026-05-23", name: "Shavuot II", numbers: [], isHoliday: true },
-            { date: "2026-05-30", name: "Nasso", numbers: [35], isHoliday: false },
-            { date: "2026-06-06", name: "Behaalotecha", numbers: [36], isHoliday: false },
-            { date: "2026-06-13", name: "Shlach", numbers: [37], isHoliday: false },
-            { date: "2026-06-20", name: "Korach", numbers: [38], isHoliday: false },
-            { date: "2026-06-27", name: "Chukat-Balak", numbers: [39, 40], isHoliday: false },
-            { date: "2026-07-04", name: "Pinchas", numbers: [41], isHoliday: false },
-            { date: "2026-07-11", name: "Matot-Masei", numbers: [42, 43], isHoliday: false },
-            { date: "2026-07-18", name: "Devarim", numbers: [44], isHoliday: false },
-            { date: "2026-07-25", name: "Vaetchanan", numbers: [45], isHoliday: false },
-            { date: "2026-08-01", name: "Eikev", numbers: [46], isHoliday: false },
-            { date: "2026-08-08", name: "Re'eh", numbers: [47], isHoliday: false },
-            { date: "2026-08-15", name: "Shoftim", numbers: [48], isHoliday: false },
-            { date: "2026-08-22", name: "Ki Teitzei", numbers: [49], isHoliday: false },
-            { date: "2026-08-29", name: "Ki Tavo", numbers: [50], isHoliday: false },
-            { date: "2026-09-05", name: "Nitzavim-Vayeilech", numbers: [51, 52], isHoliday: false }
-        ];
-        const cycles = [
-            { cycle: 1, start: 1, end: 6 },
-            { cycle: 2, start: 7, end: 12 },
-            { cycle: 3, start: 13, end: 20 },
-            { cycle: 4, start: 21, end: 28 },
-            { cycle: 5, start: 29, end: 36 },
-            { cycle: 6, start: 37, end: 42 },
-            { cycle: 7, start: 43, end: 48 },
-            { cycle: 8, start: 49, end: 54 }
-        ];
-        const qualitiesData = {
-            1: { letter: "Shin", name: "Moshe", concept: "Torah", service: "Shiviti" },
-            2: { letter: "Vav", name: "Aharon", concept: "Avodah", service: "Ve'Ahavta" },
-            3: { letter: "Beit (1)", name: "Mordechai", concept: "Mesirut Nefesh & Tzedaka", service: "B'chol" },
-            4: { letter: "Beit (2) (Heh)", name: "Esther", concept: "Taanit", service: "Hatzneah" },
-            5: { letter: "Yud", name: "Rashbi", concept: "Tikkun Klali", service: "Tamim" },
-            6: { letter: "Mem Sofit", name: "Ari", concept: "Mikvah", service: "Tamim" },
-            7: { letter: "Tav (1)", name: "Moshiach", concept: "Tikkun Leah", service: "Tamim" },
-            8: { letter: "Tav (2)", name: "Eliyahu", concept: "Tikkun Rachel/Perek Shira", service: "Tamim" }
-        };
-
-        function getNextShabbat(d) { let day = d.getDay(); let diff = (6 - day + 7) % 7; let s = new Date(d); s.setDate(d.getDate() + diff); s.setHours(0,0,0,0); return s; }
-        function formatDate(d) { return d.getFullYear() + '-' + (d.getMonth()+1).toString().padStart(2,'0') + '-' + d.getDate().toString().padStart(2,'0'); }
-        function getQualities(n) { return qualitiesData[n] || null; }
-
-        function getCycleAndRelativeNumberForParasha(n) {
-            for (const c of cycles) { if (n >= c.start && n <= c.end) return { cycle: c.cycle, relativeNumber: n - c.start + 1, cycleLength: c.end - c.start + 1 }; }
-            return null;
-        }
-
-        function findCurrentParasha(f) {
-            let cp = null, ci = -1;
-            for (let i=0; i<parashotData.length; i++) { if (parashotData[i].date <= f) { cp = parashotData[i]; ci = i; } else break; }
-            if (cp && cp.isHoliday) { for (let i=ci+1; i<parashotData.length; i++) { if (!parashotData[i].isHoliday) return parashotData[i]; } }
-            return cp;
-        }
-
-        function displayParasha() {
-            const foundParasha = findCurrentParasha(formatDate(getNextShabbat(new Date())));
-            if (foundParasha) {
-                document.getElementById('yesod-parasha-name').textContent = foundParasha.name;
-                document.getElementById('yesod-parasha-numbers').textContent =
-                    'Shovavim Week: ' + (foundParasha.numbers.length > 0 ? foundParasha.numbers.join(', ') : 'N/A');
-
-                let cycleOutput = foundParasha.numbers.map(num => {
-                    const cycleData = getCycleAndRelativeNumberForParasha(num);
-                    if (cycleData) {
-                        const pQ = getQualities(cycleData.relativeNumber);
-                        const cQ = getQualities(cycleData.cycle);
-                        let pText = pQ ? `<strong>Parasha ${cycleData.relativeNumber}:</strong> ${pQ.letter}, ${pQ.service}, ${pQ.name}, ${pQ.concept}` : `<strong>Parasha ${cycleData.relativeNumber}</strong>`;
-                        if (cycleData.cycleLength === 6) {
-                            let ex = null;
-                            if (cycleData.relativeNumber === 5) ex = getQualities(7);
-                            if (cycleData.relativeNumber === 6) ex = getQualities(8);
-                            if (ex) pText += `<br>+ ${ex.letter}, ${ex.service}, ${ex.name}, ${ex.concept}`;
-                        }
-                        let cText = cQ
-                            ? `<span class="cycle-label">in <strong>Cycle ${cycleData.cycle}:</strong> ${cQ.letter}, ${cQ.service}, ${cQ.name}, ${cQ.concept}</span>`
-                            : `<span class="cycle-label">in Cycle ${cycleData.cycle}</span>`;
-                        return `<div style="margin-bottom:4px;">${pText}${cText}</div>`;
+            let cycleOutput = foundParasha.numbers.map(num => {
+                const cycleData = getCycleAndRelativeNumberForParasha(num);
+                if (cycleData) {
+                    const pQ = getQualities(cycleData.relativeNumber);
+                    const cQ = getQualities(cycleData.cycle);
+                    let pText = pQ ? `<strong>Parasha ${cycleData.relativeNumber}:</strong> ${pQ.letter}, ${pQ.service}, ${pQ.name}, ${pQ.concept}` : `<strong>Parasha ${cycleData.relativeNumber}</strong>`;
+                    if (cycleData.cycleLength === 6) {
+                        let ex = null;
+                        if (cycleData.relativeNumber === 5) ex = getQualities(7);
+                        if (cycleData.relativeNumber === 6) ex = getQualities(8);
+                        if (ex) pText += `<br>+ ${ex.letter}, ${ex.service}, ${ex.name}, ${ex.concept}`;
                     }
-                    return `Parasha ${num}`;
-                }).join('<hr style="border:0; border-top:1px dashed var(--border); margin:8px 0;">');
+                    let cText = cQ
+                        ? `<span class="cycle-label">in <strong>Cycle ${cycleData.cycle}:</strong> ${cQ.letter}, ${cQ.service}, ${cQ.name}, ${cQ.concept}</span>`
+                        : `<span class="cycle-label">in Cycle ${cycleData.cycle}</span>`;
+                    return `<div style="margin-bottom:4px;">${pText}${cText}</div>`;
+                }
+                return `Parasha ${num}`;
+            }).join('<hr style="border:0; border-top:1px dashed var(--border); margin:8px 0;">');
 
-                document.getElementById('yesod-parasha-cycle').innerHTML = cycleOutput;
-            }
+            document.getElementById('yesod-parasha-cycle').innerHTML = cycleOutput;
         }
-        displayParasha();
-    })();
-    </script>
+    }
+    displayParasha();
+})();
+</script>
 
-    <!-- MALCHUT: Daily Text + Weekly Book -->
-    <div class="sefirah-card malchut-card" onclick="toggleExpand(this)">
-      <span class="expand-icon">▾</span>
-      <div class="sefirah-label-col">
-        <div class="sefirah-name">Malchut</div>
-        <div class="sefirah-hebrew">מַלְכוּת</div>
-      </div>
-      <div class="sefirah-content-col">
-        <div class="sefirah-cycle-name" id="malchut-cycle-name">Daily Text</div>
-        <div class="sefirah-main-text" id="malchut-main">Loading…</div>
-        <div class="sefirah-sub-text" id="malchut-sub"></div>
-        <div class="sefirah-tags" id="malchut-tags"></div>
-        <div class="sefirah-detail" id="malchut-detail">
-          <!-- Weekly book content injected by render() -->
-        </div>
-      </div>
+<!-- MALCHUT: Daily Text + Weekly Book -->
+<div class="sefirah-card malchut-card" onclick="toggleExpand(this)">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div class="sefirah-name">Malchut</div>
+    <div class="sefirah-hebrew">מַלְכוּת</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div class="sefirah-cycle-name" id="malchut-cycle-name">Daily Text</div>
+    <div class="sefirah-main-text" id="malchut-main">Loading…</div>
+    <div class="sefirah-sub-text" id="malchut-sub"></div>
+    <div class="sefirah-tags" id="malchut-tags"></div>
+    <div class="sefirah-detail" id="malchut-detail">
+      <!-- Weekly book content injected by render() -->
     </div>
+  </div>
+</div>
+```
 
   </div>
 
-
   <!-- FOOTER -->
+
   <footer class="footer">
     <div class="footer-text">Based on the book</div>
     <div class="footer-authors">Kabbalah of Time · by Ann Helen Wainer and Rabbi Daniel Kahane</div>
@@ -1460,7 +1467,7 @@
   // ── SHOVAVIM / PARASHA DATA (from blog) ──
   // ── EXACT CALCULATION ENGINE (from kabbalahoftime.com blog) ──
   const DATE_FROM_API = "2025-08-20T21:00:00Z";
-  const DAY_OFFSET = 29;
+  const DAY_OFFSET = 28;
 
   let currentOffset = 0;
 
@@ -2346,86 +2353,94 @@
   // W1
   { week:1, parasha:'Rosh Hashana / Haazinu',   month:'Tishrei',
     b1_theme:   'Raise our Heads & Recognize G-d\'s Oneness',
-    b1_animal:  'Rooster', b1_avot: 'Avot 1:1–3 — Men of the Great Assembly',
+    b1_animal:  'Rooster', b1_avot: 'Introduction and 14 rabbis (7 pairs) – acquiring a master',
     b2_quality: 'Torah greater than priesthood and kingship',      b2_prophet: 'Avraham & Sarah',
-    b3_ruth:    'Perez — breakthrough and new beginnings',          b3_haftara: 'Hannah\'s Prayer',
+    b3_ruth:    'Adam',          b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 1 — The beginning of wisdom is awe of G-d',
     b5_shir:    'Shir 1:1 — Let him kiss me with kisses of his mouth',
+    b5_souls:   'Reuven', b5_jeremiah: 'Chapter 1', b5_talmud: 'Portion of Shevuos Torah reading',
     b6_psalms:  'Ps 1–3 — Happy the man who walks not in counsel of the wicked',
     b7_mesilas: 'Intro — Man\'s purpose: to delight in G-d and enjoy His presence' },
   // W2
   { week:2, parasha:'Yom Kippur / Bereshit',    month:'Tishrei',
     b1_theme:   'Relate Well to Others and to Our Own Body',
-    b1_animal:  'Hen', b1_avot: 'Avot 1:4–5 — Yossi ben Yoezer & Yossi ben Yochanan',
+    b1_animal:  'Hen', b1_avot: 'Shimon ben Raban Gamliel – "silence" of the body',
     b2_quality: 'Constant study',                                   b2_prophet: 'Yitzchak',
-    b3_ruth:    'Hezron — the enclosed courtyard, entering deeper', b3_haftara: 'Hannah\'s Prayer',
+    b3_ruth:    'Shet', b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 2 — If you seek it like silver, you will find knowledge of G-d',
     b5_shir:    'Shir 1:2–4 — Your oils have a goodly fragrance',
+    b5_souls:   'Hanoch', b5_jeremiah: 'Chapter 2', b5_talmud: '2',
     b6_psalms:  'Ps 4–6 — O Lord, rebuke me not in Your anger',
     b7_mesilas: 'Ch 1 — Man\'s Duty in his World: clarify your purpose' },
   // W3
   { week:3, parasha:'Sukkot',                   month:'Tishrei',
     b1_theme:   'Be Happy, Balanced, and Secure in G-d',
-    b1_animal:  'Dove', b1_avot: 'Avot 1:6–7 — Yehoshua ben Perachia & Nitai',
+    b1_animal:  'Dove', b1_avot: 'Rabban Shimon ben Gamliel – justice, truth and peace',
     b2_quality: 'Attentive listening (Shmiat haOzen)',             b2_prophet: 'Yaakov',
-    b3_ruth:    'Ram — elevated, like the lulav raised on high',   b3_haftara: 'Hannah\'s Prayer',
+    b3_ruth:    'Enosh',   b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 3 — Trust in G-d with all your heart',
     b5_shir:    'Shir 1:5–7 — I am dark but comely, O daughters of Jerusalem',
+    b5_souls:   'Pallu', b5_jeremiah: 'Chapter 3', b5_talmud: '3',
     b6_psalms:  'Ps 7–9 — O Lord our Master, how mighty is Your name',
     b7_mesilas: 'Ch 2 — Watchfulness (Zehirut): mindful awareness of all actions' },
   // W4
   { week:4, parasha:'Bereshit',                 month:'Tishrei',
     b1_theme:   'Take Responsibility Yet Protect Oneself',
-    b1_animal:  'Turtledove', b1_avot: 'Avot 1:8–9 — Yehuda ben Tabbai & Shimon ben Shatach',
+    b1_animal:  'Turtledove', b1_avot: 'Rabbi Yehudah HaNassí – an eye that sees, an Ear that hears, and all your deeds are written in a Book',
     b2_quality: 'Verbal enunciation',                              b2_prophet: 'Moshe',
-    b3_ruth:    'Aminadav — my people are willing (Bereshit: free will)',
+    b3_ruth:    'Keinan',
     b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 4 — Acquire wisdom, acquire understanding — do not forget',
     b5_shir:    'Shir 1:8–11 — If you do not know yourself, O fairest of women',
+    b5_souls:   'Hezron', b5_jeremiah: 'Chapter 4', b5_talmud: '4',
     b6_psalms:  'Ps 10–12 — Why do You stand afar, O Lord?',
     b7_mesilas: 'Ch 3 — Divisions of Watchfulness: intellectual and personal introspection' },
   // W5
   { week:5, parasha:'Noach',                    month:'Cheshvan',
     b1_theme:   'Use All Tools Available to Elevate the World',
-    b1_animal:  'Eagle', b1_avot: 'Avot 1:10–11 — Shemayah & Avtalyon',
+    b1_animal:  'Eagle', b1_avot: 'Rabban Gamliel ben Rabbi Yehudah HaNassí - combine Torah study with work',
     b2_quality: 'Perception of the heart (Binat HaLev)',           b2_prophet: 'Aharon',
-    b3_ruth:    'Nachshon — he who dove in first (Noach: first to build)',
+    b3_ruth:    'Mahalel',
     b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 5 — Beware the strange woman; her lips drip honey',
     b5_shir:    'Shir 1:12–14 — While the king was at his table, my spikenard gave its fragrance',
+    b5_souls:   'Carmi', b5_jeremiah: 'Chapter 5', b5_talmud: '5',
     b6_psalms:  'Ps 13–15 — Who shall dwell on Your holy mountain?',
     b7_mesilas: 'Ch 4 — Acquiring Watchfulness through self-reflection and Torah' },
   // W6
   { week:6, parasha:'Lech Lecha',               month:'Cheshvan',
     b1_theme:   'Impact the World, Laying a Foundation',
-    b1_animal:  'Crane (Agur)', b1_avot: 'Avot 1:12–13 — Hillel & Shammai',
+    b1_animal:  'Crane (Agur)', b1_avot: 'Rabban Yochanan ben Zakai – an individual that learned much Torah should not feel that he or she deserves special recognition',
     b2_quality: 'Awe (Eimah)',                                     b2_prophet: 'Yehoshua',
-    b3_ruth:    'Salmon — garment, protection (Lech Lecha: Avraham\'s journey)',
+    b3_ruth:    'Yered',
     b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 6 — Go to the ant, you sluggard; consider its ways',
     b5_shir:    'Shir 1:15–17 — Behold you are beautiful, my beloved',
+    b5_souls:   'Simeon', b5_jeremiah: 'Chapter 6', b5_talmud: '6',
     b6_psalms:  'Ps 16–18 — I have set G-d before me always',
     b7_mesilas: 'Ch 5 — Obstacles to Watchfulness: frivolity, bad company, worldliness' },
   // W7
   { week:7, parasha:'Vayera',                   month:'Cheshvan',
     b1_theme:   'Recognize and Reveal the Divine Presence',
-    b1_animal:  'Swallow (Dror)', b1_avot: 'Avot 1:14–15 — Hillel\'s sayings',
+    b1_animal:  'Swallow (Dror)', b1_avot: 'Rabbi Eliezer – the honor of your neighbor should be as precious in your eyes as your own, and do not become easily irritated',
     b2_quality: 'Fear (Yirah)',                                     b2_prophet: 'Pinchas',
-    b3_ruth:    'Boaz — strength (Vayera: Avraham\'s strength for hospitality)',
+    b3_ruth:    'Enoch',
     b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 7 — Keep my commandments and live; guard my Torah as the apple of your eye',
     b5_shir:    'Shir 2:1–3 — I am a rose of Sharon, a lily of the valleys',
+    b5_souls:   'Jemuel', b5_jeremiah: 'Chapter 7', b5_talmud: '7',
     b6_psalms:  'Ps 19–21 — The heavens declare the glory of G-d',
     b7_mesilas: 'Ch 6 — Alacrity (Zerizut): enthusiasm and speed in divine service' },
   // W8
   { week:8, parasha:'Chayei Sarah',             month:'Cheshvan',
     b1_theme:   'Not Lose Focus on Our Spirituality',
-    b1_animal:  'Swift (Sis)', b1_avot: 'Avot 1:16–18 — Shammai & Rabban Shimon ben Gamliel',
+    b1_animal:  'Swift (Sis)', b1_avot: 'Rabbi Yehoshua – an evil eye, an evil inclination, and hatred of one\'s fellow takes a man out of this world',
     b2_quality: 'Humility (Anavah)',                               b2_prophet: 'Elkanah & Chanah',
-    b3_ruth:    'Obed — he who serves (Chayei Sarah: service and dedication)',
+    b3_ruth:    'Methuselah',
     b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 8 — Does not Wisdom call out, does not Understanding raise her voice?',
     b5_shir:    'Shir 2:4–7 — He brought me to the banquet hall and his banner over me is love',
+    b5_souls:   'Jamin', b5_jeremiah: 'Chapter 8', b5_talmud: '8',
     b6_psalms:  'Ps 22–24 — The Lord is my shepherd, I shall not want',
     b7_mesilas: 'Ch 7 — Divisions of Alacrity: beginning and completing a mitzvah',
     b7_theme:   'The Swift is Saying',
@@ -2433,111 +2448,121 @@
   // W9
   { week:9, parasha:'Toldot',                   month:'Kislev',
     b1_theme:   'Fighting Darkness with Light',
-    b1_animal:  'Stork (Chasidah)', b1_avot: 'Avot 2:1 — Rabbi Yehudah HaNasi',
+    b1_animal:  'Stork (Chasidah)', b1_avot: 'Rabbi Yossi – the possessions of your neighbor should be as dear to you as your own',
     b2_quality: 'Joy (Simchah)',                                    b2_prophet: 'Eli',
-    b3_ruth:    'Yishai — G-d exists (Toldot: Yitzchak, man of wells)',
+    b3_ruth:    'Lamech',
     b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 9 — Wisdom has built her house; she has hewn her seven pillars',
     b5_shir:    'Shir 2:8–10 — The voice of my beloved! Behold he comes',
+    b5_souls:   'Ohad', b5_jeremiah: 'Chapter 9', b5_talmud: '9',
     b6_psalms:  'Ps 25–27 — The Lord is my light and my salvation',
     b7_mesilas: 'Ch 8 — Acquiring Alacrity through contemplating G-d\'s greatness' },
   // W10
   { week:10, parasha:'Vayetze',                 month:'Kislev',
     b1_theme:   'Trust in G-d\'s Mercy',
-    b1_animal:  'Bat', b1_avot: 'Avot 2:2–3 — Rabban Gamliel: be cautious with rulers',
+    b1_animal:  'Bat', b1_avot: 'Rabbi Shimon – be careful in reciting the Shemah and the Shmoneh Esreh. Do not make of your prayer a routine act',
     b2_quality: 'Purity (Taharah)',                                 b2_prophet: 'Shmuel',
-    b3_ruth:    'Obed — servant of G-d (Vayetze: Yaakov\'s service for Rachel)',
+    b3_ruth:    'Noach',
     b3_haftara: 'Hannah\'s Prayer',
     b4_proverbs:'Prov 10 — The proverbs of Solomon: a wise son gladdens his father',
     b5_shir:    'Shir 2:11–13 — For behold, the winter has passed, the rain is over and gone',
+    b5_souls:   'Jachin', b5_jeremiah: 'Chapter 10', b5_talmud: '10',
     b6_psalms:  'Ps 28–30 — I will exalt You, O Lord, for You have raised me up',
     b7_mesilas: 'Ch 9 — Obstacles to Alacrity: laziness and excessive comfort' },
   // W11
   { week:11, parasha:'Vayishlach',              month:'Kislev',
     b1_theme:   'Fighting Evil & Heresy, Knowing How to Forgive',
-    b1_animal:  'Raven', b1_avot: 'Avot 2:4–5 — Hillel: do not separate from the community',
+    b1_animal:  'Raven', b1_avot: 'Rabbi Elazar – know what to answer the heretic and be diligent in your Torah study',
     b2_quality: 'Ministering to sages',                            b2_prophet: 'Gad',
-    b3_ruth:    'Jesse — foundation (Vayishlach: Yaakov wrestles, emerges as Yisrael)',
+    b3_ruth:    'Shem',
     b3_haftara: 'Eli and Shmuel',
     b4_proverbs:'Prov 11 — A false balance is an abomination to G-d',
     b5_shir:    'Shir 2:14–16 — My dove in the clefts of the rock, let me see your countenance',
+    b5_souls:   'Zohar', b5_jeremiah: 'Chapter 11', b5_talmud: '11',
     b6_psalms:  'Ps 31–33 — Rejoice in the Lord, O righteous',
     b7_mesilas: 'Ch 10 — Cleanliness (Nekiyut): purity of motives and subtle sins' },
   // W12
   { week:12, parasha:'Vayeshev',                month:'Kislev',
     b1_theme:   'Revealing Warmth to Those That Are Cold',
-    b1_animal:  'Starling', b1_avot: 'Avot 2:6–7 — Hillel on Torah study',
+    b1_animal:  'Starling', b1_avot: 'Rabbi Tarfon – the day is short, the work is great, the workers are lazy, the reward is big, and the Owner is pressing',
     b2_quality: 'Bonding with friends (Dibuk Chaverim)',           b2_prophet: 'Natan',
-    b3_ruth:    'David — beloved (Vayeshev: Yosef, beloved son)',
+    b3_ruth:    'Arpachshad',
     b3_haftara: 'Eli and Shmuel',
     b4_proverbs:'Prov 12 — A righteous man cares for the life of his animal',
     b5_shir:    'Shir 2:17–3:2 — Until the day breathes and the shadows flee',
+    b5_souls:   'Saul the son of the Canaanitess', b5_jeremiah: 'Chapter 12', b5_talmud: '12',
     b6_psalms:  'Ps 34–36 — Taste and see that the Lord is good',
     b7_mesilas: 'Ch 11 — Particulars of Cleanliness: speech, business, and personal integrity' },
   // W13
   { week:13, parasha:'Chanukah / Miketz',        month:'Kislev',
     b1_theme:   'Publicize Miracles with Pride and Humility',
-    b1_animal:  'Grasshopper', b1_avot: 'Avot 2:8 — Five students of Rabban Yochanan',
+    b1_animal:  'Grasshopper', b1_avot: 'Akaviah ben Mahalalel – know from where you come and to where you are going, and before Whom you will be judged',
     b2_quality: 'Sharp discussion with students (Pilpul HaTalmidim)', b2_prophet: 'David & Avigail',
-    b3_ruth:    'Shelah — the name of Mashiach (Chanukah: hidden light revealed)',
+    b3_ruth:    'Shelah',
     b3_haftara: 'Eli and Shmuel',
     b4_proverbs:'Prov 13 — A wise son heeds his father\'s instruction',
     b5_shir:    'Shir 3:3–5 — The watchmen found me as I went about the city',
+    b5_souls:   'Levi', b5_jeremiah: 'Chapter 13', b5_talmud: '13',
     b6_psalms:  'Ps 37–39 — Commit your way to the Lord; trust in Him',
     b7_mesilas: 'Ch 12 — Acquiring Cleanliness: persistence and careful observance' },
   // W14
   { week:14, parasha:'Miketz / Vayigash',        month:'Tevet',
     b1_theme:   'Believe in Our Own Strength from G-d',
-    b1_animal:  'Snail', b1_avot: 'Avot 2:9–10 — Rabbi Eliezer & Rabbi Yehoshua',
+    b1_animal:  'Snail', b1_avot: 'Rabbi Chaninah, Segan Kohen Gadol – pray for the welfare of the government, for if it were not for the fear of it…',
     b2_quality: 'With calmness (Yishuv)',                          b2_prophet: 'Shlomo',
-    b3_ruth:    'Perez lineage — breakthrough after constriction (Yosef in dungeon)',
+    b3_ruth:    'Eber',
     b3_haftara: 'Eli and Shmuel',
     b4_proverbs:'Prov 14 — The wise woman builds her house; the foolish one tears it down',
     b5_shir:    'Shir 3:6–11 — Who is this who comes up from the wilderness like pillars of smoke?',
+    b5_souls:   'Gershon', b5_jeremiah: 'Chapter 14', b5_talmud: '14',
     b6_psalms:  'Ps 40–42 — As the deer yearns for the water brooks',
     b7_mesilas: 'Ch 13 — Separation (Perishut): distancing from excess pleasure' },
   // W15
   { week:15, parasha:'Vayigash / Vayechi',       month:'Tevet',
     b1_theme:   'Give Proper Value to Torah & the Shechinah',
-    b1_animal:  'Ant', b1_avot: 'Avot 2:11–12 — Rabbi Yossi & Rabbi Shimon',
+    b1_animal:  'Ant', b1_avot: 'Rabbi Chaninah ben Teradion – if two people are sitting together and do not exchange words of Torah…',
     b2_quality: 'With knowledge of Mikra (Scripture)',             b2_prophet: 'Iddo',
-    b3_ruth:    'Hezron — the enclosed heart (10th Tevet: siege of Jerusalem)',
+    b3_ruth:    'Peleg',
     b3_haftara: 'Eli and Shmuel',
     b4_proverbs:'Prov 15 — A gentle answer turns away wrath',
     b5_shir:    'Shir 4:1–5 — Behold you are beautiful, my beloved; your eyes are doves',
+    b5_souls:   'Kehath', b5_jeremiah: 'Chapter 15', b5_talmud: '15',
     b6_psalms:  'Ps 43–45 — My heart overflows with a goodly theme',
     b7_mesilas: 'Ch 14 — Particulars of Separation: food, relations, speech, thoughts' },
   // W16
   { week:16, parasha:'Vayechi',                  month:'Tevet',
     b1_theme:   'Use Adversity as a Way to Grow',
-    b1_animal:  'Bee', b1_avot: 'Avot 2:13–14 — Rabbi Elazar on the good path',
+    b1_animal:  'Bee', b1_avot: 'Rabbi Shimon [Bar Yochai] – Three people that ate together and did not say words of Torah…',
     b2_quality: 'Knowledge of Mishnah',                            b2_prophet: 'Michah ben Imlah',
-    b3_ruth:    'Ram — elevation even in exile (Yaakov blesses sons from Egypt)',
+    b3_ruth:    'Reu',
     b3_haftara: 'Eli and Shmuel',
     b4_proverbs:'Prov 16 — Pride comes before destruction',
     b5_shir:    'Shir 4:6–9 — I will go to the mountain of myrrh and to the hill of frankincense',
+    b5_souls:   'Merari', b5_jeremiah: 'Chapter 16', b5_talmud: '16',
     b6_psalms:  'Ps 46–48 — G-d is our refuge and strength',
     b7_mesilas: 'Ch 15 — Acquiring Separation: moderation and ongoing self-examination' },
   // W17
   { week:17, parasha:'Shemot',                   month:'Tevet',
     b1_theme:   'Pay Attention to G-d\'s Guidance',
-    b1_animal:  'Spider', b1_avot: 'Avot 2:15–16 — Rabbi Eliezer on repentance',
+    b1_animal:  'Spider', b1_avot: 'Rabbi Chaninah ben Chachinai – one who is awake at night or travels on the road, and turns his heart to idleness…',
     b2_quality: 'Minimized business activity (Miut Schorah)',      b2_prophet: 'Ovadiah',
-    b3_ruth:    'Aminadav — willing-hearted (Moshe: willing to lead despite reluctance)',
+    b3_ruth:    'Serug',
     b3_haftara: 'Eli and Shmuel',
     b4_proverbs:'Prov 17 — Better is a dry morsel with quiet than a house full of feasting with strife',
     b5_shir:    'Shir 4:10–15 — Your lips, O my bride, drip honey',
+    b5_souls:   'Yocheved', b5_jeremiah: 'Chapter 17', b5_talmud: '17',
     b6_psalms:  'Ps 49–51 — Have mercy on me, O G-d, according to Your loving-kindness',
     b7_mesilas: 'Ch 16 — Purity (Taharah): purifying one\'s heart and imagination' },
   // W18
   { week:18, parasha:'Vaera',                    month:'Shvat',
     b1_theme:   'Live in Harmony with Nature, Above Nature',
-    b1_animal:  'Scorpion', b1_avot: 'Avot 3:1 — Akavyah ben Mahalalel: know your origin',
+    b1_animal:  'Scorpion', b1_avot: 'Rabbi Nechuniah – one who takes upon oneself the yoke of Torah, the yoke of making a living and of government are removed from him',
     b2_quality: 'Minimized worldly activity (Miut Derech Eretz)',  b2_prophet: 'Ahiah HaShiloni',
-    b3_ruth:    'Nachshon — daring first step (Moshe confronts Pharaoh again and again)',
+    b3_ruth:    'Nahor',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 18 — A brother offended is harder to win than a strong city',
     b5_shir:    'Shir 4:16–5:2 — Awake, O north wind, come O south wind',
+    b5_souls:   'Judah', b5_jeremiah: 'Chapter 18', b5_talmud: '18',
     b6_psalms:  'Ps 52–54 — O G-d, save me by Your name',
     b7_mesilas: 'Ch 17 — Particulars of Purity: refining thought and imagination',
     b7_theme:   'The Scorpion is Saying',
@@ -2545,12 +2570,13 @@
   // W19
   { week:19, parasha:'Bo',                       month:'Shvat',
     b1_theme:   'Feel that G-d is Close Even When Far Away',
-    b1_animal:  'Snake', b1_avot: 'Avot 3:2–3 — Rabbi Chanina & Rabbi Shimon',
+    b1_animal:  'Snake', b1_avot: 'Rabbi Chalaftah – ten men that are gathered and occupy themselves in Torah...',
     b2_quality: 'Minimized pleasure (Miut Ta\'anug)',              b2_prophet: 'Yehu ben Chanani',
-    b3_ruth:    'Salmon — garment/protection (Bo: Pesach preparations, chametz removal)',
+    b3_ruth:    'Terah',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 19 — Wealth adds many friends; the poor man is separated from his friend',
     b5_shir:    'Shir 5:3–7 — I have taken off my robe, shall I put it on again?',
+    b5_souls:   'Shelah', b5_jeremiah: 'Chapter 19', b5_talmud: '19',
     b6_psalms:  'Ps 55–57 — Be gracious to me, O G-d, be gracious to me',
     b7_mesilas: 'Ch 18 — Acquiring Purity: constant mindfulness and directed thought',
     b7_theme:   'The Snake is Saying',
@@ -2558,23 +2584,25 @@
   // W20
   { week:20, parasha:'Beshalach',                month:'Shvat',
     b1_theme:   'Be Solid and Giving in Our Relationships',
-    b1_animal:  'Frog', b1_avot: 'Avot 3:4–5 — Rabbi Chananya ben Teradyon',
+    b1_animal:  'Frog', b1_avot: 'Rabbi Elazar de Bartota – give to Him what is His, for you and all that is yours is His',
     b2_quality: 'Minimized sleep (Miut Sheinah)',                  b2_prophet: 'Azariah ben Oded',
-    b3_ruth:    'Boaz — strength in the sea (Beshalach: crossing the sea, song of the sea)',
+    b3_ruth:    'Abraham',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 20 — Wine is a mocker, strong drink a brawler',
     b5_shir:    'Shir 5:8–6:1 — I charge you, O daughters of Jerusalem, if you find my beloved',
+    b5_souls:   'Perez', b5_jeremiah: 'Chapter 20', b5_talmud: '20',
     b6_psalms:  'Ps 58–60 — O G-d, You have rejected us and broken our defenses',
     b7_mesilas: 'Ch 19 — Piety (Chassidut): going beyond the letter of the law' },
   // W21
   { week:21, parasha:'Yitro',                    month:'Shvat',
     b1_theme:   'Keep Things in Perspective',
-    b1_animal:  'Fly', b1_avot: 'Avot 3:6–7 — Rabbi Chalafta & Rabbi Elazar',
+    b1_animal:  'Fly', b1_avot: 'Rabbi Yaakov – whoever is travelling on the road while studying and interrupts to exclaim how beautiful is this tree…',
     b2_quality: 'Minimized conversation (Miut Sichah)',            b2_prophet: 'Yachaziel HaLevi',
-    b3_ruth:    'Obed — service (Yitro: Moshe receives Torah, judges the people)',
+    b3_ruth:    'Isaac',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 21 — A king\'s heart is like rivulets of water in G-d\'s hand',
     b5_shir:    'Shir 6:2–5 — My beloved has gone down to his garden, to the beds of spices',
+    b5_souls:   'Zerah', b5_jeremiah: 'Chapter 21', b5_talmud: '21',
     b6_psalms:  'Ps 61–63 — My soul thirsts for You in a dry and weary land',
     b7_mesilas: 'Ch 20 — Particulars of Piety: prayer, love of G-d, and humility',
     b7_theme:   'The Fly is Saying',
@@ -2582,23 +2610,25 @@
   // W22
   { week:22, parasha:'Mishpatim',                month:'Adar',
     b1_theme:   'Complement Each Other in Happiness',
-    b1_animal:  'Worm', b1_avot: 'Avot 3:8–9 — Rabbi Nehunyah & Rabbi Chananya ben Akashyah',
+    b1_animal:  'Worm', b1_avot: 'Rabbi Dostai, ben Yanai – one who forgets their Torah knowledge…',
     b2_quality: 'Minimized laughter (Miut Schok)',                 b2_prophet: 'Eliezer ben Dodavahu',
-    b3_ruth:    'Yishai — foundation (Mishpatim: laws that sustain civilization)',
+    b3_ruth:    'Jacob',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 22 — Train the child in the way he should go',
     b5_shir:    'Shir 6:6–9 — As beautiful as the moon, as pure as the sun',
+    b5_souls:   'Hezron', b5_jeremiah: 'Chapter 22', b5_talmud: '22',
     b6_psalms:  'Ps 64–66 — Shout joyfully to G-d, all the earth',
     b7_mesilas: 'Ch 21 — Acquiring Piety: love of G-d through meditation on His greatness' },
   // W23
   { week:23, parasha:'Purim',                    month:'Adar',
     b1_theme:   'Be Happy Even Without Knowing Why',
-    b1_animal:  'Mouse', b1_avot: 'Avot 3:10–11 — Rabbi Dosa & Rabbi Elazar HaModa\'i',
+    b1_animal:  'Mouse', b1_avot: 'Rabbi Chaninah ben Dossah – one whose fear of sin is greater than his wisdom, his wisdom will endure…',
     b2_quality: 'With slowness to anger (Erech Apayim)',           b2_prophet: 'Hoshea',
-    b3_ruth:    'David — the hidden king revealed (Purim: Esther\'s hidden identity revealed)',
+    b3_ruth:    'Yehudah',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 23 — Do not eat the bread of a stingy man; do not desire his delicacies',
     b5_shir:    'Shir 6:10–12 — Who is this who shines through like the dawn?',
+    b5_souls:   'Hamul', b5_jeremiah: 'Chapter 23', b5_talmud: '23',
     b6_psalms:  'Ps 67–69 — Save me, O G-d, for the waters have reached my soul',
     b7_mesilas: 'Ch 22 — Humility (Anavah): seeing oneself clearly before G-d',
     b7_theme:   'The Mouse is Saying',
@@ -2606,12 +2636,13 @@
   // W24
   { week:24, parasha:'Terumah',                  month:'Adar',
     b1_theme:   'Live Above Our Worldly Concerns',
-    b1_animal:  'Cat', b1_avot: 'Avot 3:12–13 — Rabbi Yishmael & Rabbi Akiva',
+    b1_animal:  'Cat', b1_avot: 'Rabbi Dossah ben Harkinas – the sleep of the morning, wine of the afternoon, the talk of children, and meeting places of the ignorant…',
     b2_quality: 'Good heart (Lev Tov)',                            b2_prophet: 'Yoel',
-    b3_ruth:    'Perez — contributing to the building (Terumah: building the Mishkan)',
+    b3_ruth:    'Perez',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 24 — Do not envy evil men or desire to be with them',
     b5_shir:    'Shir 7:1–5 — How beautiful are your feet in sandals, O nobleman\'s daughter',
+    b5_souls:   'Issachar', b5_jeremiah: 'Chapter 24', b5_talmud: '24',
     b6_psalms:  'Ps 70–72 — Give the king Your judgments, O G-d',
     b7_mesilas: 'Ch 23 — Particulars of Humility: honor, position, and recognition',
     b7_theme:   'The Cat is Saying',
@@ -2619,34 +2650,37 @@
   // W25
   { week:25, parasha:'Tetzaveh',                 month:'Adar',
     b1_theme:   'Have Self-Sacrifice to Fulfill Our Mission',
-    b1_animal:  'Ox', b1_avot: 'Avot 3:14–15 — Rabbi Akiva on love of man',
+    b1_animal:  'Ox', b1_avot: 'Rabbi Elazar, the Modahite – one who profanes sacred objects, degrades the festivals, humiliates other in public…',
     b2_quality: 'Trusting in the Sages (Emunat Chachamim)',        b2_prophet: 'Amos',
-    b3_ruth:    'Hezron — enclosure and sacred garments (Tetzaveh: priestly garments)',
+    b3_ruth:    'Hezron',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 25 — A word aptly spoken is like apples of gold in settings of silver',
     b5_shir:    'Shir 7:6–10 — How beautiful and pleasant you are, O love, with all your charms',
+    b5_souls:   'Tola', b5_jeremiah: 'Chapter 25', b5_talmud: '25',
     b6_psalms:  'Ps 73–75 — Truly G-d is good to Israel, to those pure of heart',
     b7_mesilas: 'Ch 24 — Acquiring Humility: knowing one\'s place and G-d\'s greatness' },
   // W26
   { week:26, parasha:'Ki Tisa',                  month:'Nissan',
     b1_theme:   'Be Humble and Let G-d Guide Us',
-    b1_animal:  'Wild Ox (Re\'em)', b1_avot: 'Avot 3:16–17 — Rabbi Elazar ben Azaryah',
-    b2_quality: 'Accepting of suffering (Ohev et HaYisurin)',      b2_prophet: 'Michah',
-    b3_ruth:    'Ram — elevated service despite failures (Ki Tisa: Golden Calf, Moshe intercedes)',
+    b1_animal:  'Wild Ox (Re\'em)', b1_avot: 'Rabbi Yishmael – be submissive to the head, and courteous to the young, and receive every person with joy',
+    b2_quality: 'Faith in the Sages (Emunat Chachamim)',        b2_prophet: 'Micah the Morashite',
+    b3_ruth:    'Ram',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 26 — Like snow in summer and rain at harvest, so honor is unseemly for a fool',
     b5_shir:    'Shir 7:11–8:2 — Come, my beloved, let us go forth to the field',
+    b5_souls:   'Puvvah', b5_jeremiah: 'Chapter 26', b5_talmud: '26',
     b6_psalms:  'Ps 76–78 — A psalm of Asaph: G-d is known in Judah',
     b7_mesilas: 'Ch 25 — Fear of Sin (Yirat Chet): constant mindfulness of G-d\'s presence' },
   // W27
   { week:27, parasha:'Pesach',                   month:'Nissan',
     b1_theme:   'Purify Ourselves in Order to Change',
-    b1_animal:  'Horse', b1_avot: 'Avot 3:18 — Rabbi Akiva: beloved is Israel',
-    b2_quality: 'Knowing one\'s place (Makir et Mekomo)',          b2_prophet: 'Nachum',
-    b3_ruth:    'Aminadav — willing-hearted (Pesach: nation springs to freedom)',
+    b1_animal:  'Horse', b1_avot: 'Rabbi Akiva – jest and frivolity accustom a person to lust… everything is prepared for the banquet',
+    b2_quality: 'Acceptance of suffering (Kabalat HaYissurin)',        b2_prophet: 'Amoz',
+    b3_ruth:    'Amminadab',
     b3_haftara: 'The Tribes in War',
     b4_proverbs:'Prov 27 — Do not boast about tomorrow; you do not know what a day may bring',
     b5_shir:    'Shir 8:3–7 — His left hand under my head, his right hand embracing me',
+    b5_souls:   'Iob', b5_jeremiah: 'Chapter 27', b5_talmud: '27',
     b6_psalms:  'Ps 79–81 — Blow the shofar at the new moon, at the full moon on our feast day',
     b7_mesilas: 'Ch 26 — Particulars of Fear of Sin: examination of deeds and thoughts',
     b7_theme:   'The Ox is Saying',
@@ -2654,12 +2688,13 @@
   // W28
   { week:28, parasha:'Shemini',                  month:'Nissan',
     b1_theme:   'Recognize Our Limits to Free Ourselves',
-    b1_animal:  'Mule', b1_avot: 'Avot 4:1 — Ben Zoma on strength and honor',
-    b2_quality: 'Happy with one\'s portion (Sameach beChelko)',    b2_prophet: 'Chavakuk',
-    b3_ruth:    'Nachshon — boldness (Shemini: inauguration of Mishkan, Nadav and Avihu)',
+    b1_animal:  'Mule', b1_avot: 'Rabbi Elazar ben Azariah – without Torah there is no common decency... without flour there is no Torah…',
+    b2_quality: 'He who knows his place (HaMakir et Mekomo)',    b2_prophet: 'Eliyahu',
+    b3_ruth:    'Nachshon',
     b3_haftara: 'Deborah',
     b4_proverbs:'Prov 28 — The wicked flee when no man pursues',
     b5_shir:    'Shir 8:8–14 — We have a little sister and she has no breasts',
+    b5_souls:   'Shimron', b5_jeremiah: 'Chapter 28', b5_talmud: '28',
     b6_psalms:  'Ps 82–84 — How lovely are Your tabernacles, O Lord of Hosts',
     b7_mesilas: 'Ch 27 — Holiness (Kedushah): sanctifying all physical activities for G-d',
     b7_theme:   'The Horse is Saying',
@@ -2667,12 +2702,13 @@
   // W29
   { week:29, parasha:'Tazria',                   month:'Nissan',
     b1_theme:   'After the Initial Inspiration, Get to Work',
-    b1_animal:  'Camel', b1_avot: 'Avot 4:2 — Ben Azzai: mitzvah leads to mitzvah',
-    b2_quality: 'Making a fence for one\'s words (Oseh Seyag Lidvarav)', b2_prophet: 'Tzefanyah',
-    b3_ruth:    'Salmon — garment/protection (Tazria: laws of purity after birth)',
+    b1_animal:  'Camel', b1_avot: 'Rabbi Elazar ben Chismah – the laws of bird sacrifices and menstrual periods are essential…',
+    b2_quality: 'He who is happy with his lot (HaSameach beChelkoh)',                b2_prophet: 'Elisha',
+    b3_ruth:    'Salmah',
     b3_haftara: 'Deborah',
     b4_proverbs:'Prov 29 — Where there is no vision, the people perish',
     b5_shir:    'Shir 1:1 (Cycle 2) — The Song of Songs which is Solomon\'s',
+    b5_souls:   'Zebulun', b5_jeremiah: 'Chapter 29', b5_talmud: '29',
     b6_psalms:  'Ps 85–87 — You have been favorable to Your land, O Lord',
     b7_mesilas: 'Ch 28 — Acquiring Holiness: consecrating all deeds and intentions',
     b7_theme:   'The Mule is Saying',
@@ -2680,12 +2716,13 @@
   // W30
   { week:30, parasha:'Metzora',                  month:'Iyar',
     b1_theme:   'Know the World Needs More Love and Respect',
-    b1_animal:  'Sheep / Lamb', b1_avot: 'Avot 4:3–4 — Rabbi Levitas & Rabbi Yochanan ben Beroka',
-    b2_quality: 'Not claiming credit (Eino Machazik Tova leAtzmo)', b2_prophet: 'Chaggai',
-    b3_ruth:    'Boaz — kindness and strength (Metzora: purification and return to community)',
+    b1_animal:  'Sheep / Lamb', b1_avot: 'Ben Zomah – Who is wise? One that learns from everyone',
+    b2_quality: 'He who makes a fence around his words',        b2_prophet: 'Jonah ben Amittai',
+    b3_ruth:    'Boaz',
     b3_haftara: 'Deborah',
     b4_proverbs:'Prov 30 — Who can find a virtuous woman? Her price is far above rubies',
     b5_shir:    'Shir 1:2–4 (Cycle 2) — Your oils have a goodly fragrance',
+    b5_souls:   'Sered', b5_jeremiah: 'Chapter 30', b5_talmud: '30',
     b6_psalms:  'Ps 88–90 — Lord, You have been our dwelling place throughout all generations',
     b7_mesilas: 'Ch 29 — Particulars of Holiness: elevating food, sleep, and physical acts',
     b7_theme:   'The Camel is Saying',
@@ -2693,12 +2730,13 @@
   // W31
   { week:31, parasha:'Acharei Mot',              month:'Iyar',
     b1_theme:   'Be Proud of Our Humble Connection with G-d',
-    b1_animal:  'Goat', b1_avot: 'Avot 4:5–6 — Rabbi Yishmael ben Rabbi Yossi',
-    b2_quality: 'Beloved (Ahuv)',                                  b2_prophet: 'Zecharyah',
-    b3_ruth:    'Obed — service on Yom Kippur (Acharei Mot: Yom Kippur service)',
+    b1_animal:  'Goat', b1_avot: 'Ben Azai – run to pursue a mitzvah, and flee from transgression. A mitzvah attracts another mitzvah...',
+    b2_quality: 'He claims no credit for his achievements (Einoh Machazik Tovah l\'Atzmo)',                 b2_prophet: 'Isaiah',
+    b3_ruth:    'Obed',
     b3_haftara: 'Deborah',
     b4_proverbs:'Prov 31 — Eshet Chayil: a woman of valor, who can find?',
     b5_shir:    'Shir 1:5–7 (Cycle 2) — I am dark but comely',
+    b5_souls:   'Elon', b5_jeremiah: 'Chapter 31', b5_talmud: '31',
     b6_psalms:  'Ps 91–93 — The Lord reigns; He is clothed in majesty',
     b7_mesilas: 'Ch 30 — Ruach HaKodesh (Divine Inspiration): the crown of the ladder',
     b7_theme:   'The Lamb is Saying',
@@ -2706,34 +2744,37 @@
   // W32
   { week:32, parasha:'Kedoshim',                 month:'Iyar',
     b1_theme:   'Recognize Deep in Our Heart How Small We Are',
-    b1_animal:  'Ram', b1_avot: 'Avot 4:7–8 — Rabbi Tzadok & Rabbi Yossi on Torah',
-    b2_quality: 'Loved by G-d (Ahov et HaMakom)',                  b2_prophet: 'Malachi',
-    b3_ruth:    'Yishai — foundation of holiness (Kedoshim: be holy as I am holy)',
+    b1_animal:  'Ram', b1_avot: 'Rabbi Levitas of Yavneh – be extremely humble, because the hope of mortal man is worms...',
+    b2_quality: 'Loved (Ahuv)',                  b2_prophet: 'Joel',
+    b3_ruth:    'Yishai',
     b3_haftara: 'Deborah',
-    b4_proverbs:'Prov 1 (Cycle 2) — The beginning of wisdom is awe of G-d',
+    b4_proverbs:'Kohelet: Chapter 1',
     b5_shir:    'Shir 1:8–11 (Cycle 2) — If you do not know yourself',
+    b5_souls:   'Jahleel', b5_jeremiah: 'Chapter 32', b5_talmud: '32',
     b6_psalms:  'Ps 94–96 — O come, let us sing to the Lord',
     b7_mesilas: 'Introduction (Cycle 2) — Man\'s purpose revisited in light of practice' },
   // W33
   { week:33, parasha:'Emor',                     month:'Iyar',
     b1_theme:   'Recognize the Spiritual Treasures Within Each',
-    b1_animal:  'Donkey', b1_avot: 'Avot 4:9–10 — Rabbi Yonatan & Rabbi Meir',
-    b2_quality: 'Loved by people (Ahov et HaBriyot)',             b2_prophet: 'Shimeon ben Tiferet',
-    b3_ruth:    'David — kingly bearing (Emor: holiness of the Kohen and the holidays)',
+    b1_animal:  'Donkey', b1_avot: 'Rabbi Yochanan ben Berokah – whoever profanes the Divine Name in secret will be punished in public...',
+    b2_quality: 'Loves Hashem (Ohev et HaMakom)',             b2_prophet: 'Nahum',
+    b3_ruth:    'David',
     b3_haftara: 'Deborah',
-    b4_proverbs:'Prov 2 (Cycle 2) — If you seek it like silver',
+    b4_proverbs:'Kohelet: Chapter 2',
     b5_shir:    'Shir 1:12–14 (Cycle 2) — While the king was at his table',
+    b5_souls:   'Dinah / Asenath daughter of Poti-phera Chief of On', b5_jeremiah: 'Chapter 33', b5_talmud: '33',
     b6_psalms:  'Ps 97–99 — The Lord reigns; let the earth rejoice',
     b7_mesilas: 'Ch 1 (Cycle 2) — Man\'s Duty: renewed clarity of purpose' },
   // W34
   { week:34, parasha:'Behar',                    month:'Iyar',
     b1_theme:   'Work in a Focused Manner and Without Ego',
-    b1_animal:  'Lion', b1_avot: 'Avot 4:11–12 — Rabbi Eliezer ben Yaakov',
-    b2_quality: 'Loves correction (Ohev et HaTochachot)',          b2_prophet: 'Ezra',
-    b3_ruth:    'Perez — release and redemption (Behar: Shmitah, release of debts)',
+    b1_animal:  'Lion', b1_avot: 'Rabbi Yishmael the son of Rabbi Yossi – one who studies Torah in order to teach is given the opportunity to learn and teach; one that studies Torah in order to practice…',
+    b2_quality: 'Loves people (Ohev et HaBriot)',          b2_prophet: 'Chabakuk',
+    b3_ruth:    'Solomon',
     b3_haftara: 'Devorah and the women of Israel',
-    b4_proverbs:'Prov 3 (Cycle 2) — Trust in G-d with all your heart',
+    b4_proverbs:'Kohelet: Chapter 3',
     b5_shir:    'Shir 1:15–17 (Cycle 2) — Behold you are beautiful',
+    b5_souls:   'Gad / Menasheh', b5_jeremiah: 'Chapter 34', b5_talmud: '34',
     b6_psalms:  'Ps 100–102 — O Lord, hear my prayer; let my cry come to You',
     b7_mesilas: 'Ch 2 (Cycle 2) — Watchfulness deepened through experience',
     b7_theme:   'The Donkey is Saying',
@@ -2741,23 +2782,25 @@
   // W35
   { week:35, parasha:'Bechukotai',               month:'Sivan',
     b1_theme:   'Thank G-d in Unison',
-    b1_animal:  'Bear', b1_avot: 'Avot 4:13–14 — Rabbi Yochanan HaSandlar',
-    b2_quality: 'Distances from honor (Ohev et HaMeisharim)',      b2_prophet: 'Nechemiah',
-    b3_ruth:    'Hezron — enclosed strength (Bechukotai: blessings for keeping Torah)',
+    b1_animal:  'Bear', b1_avot: 'Rabbi Tzadok – do not separate yourself from the community… do not make the Torah into a crown to glorify yourself',
+    b2_quality: 'Loves the ways of righteousness (Ohev et HaTzedakot)',      b2_prophet: 'Zephaniah',
+    b3_ruth:    'Rehoboam',
     b3_haftara: 'Devorah and the women of Israel',
-    b4_proverbs:'Prov 4 (Cycle 2) — Acquire wisdom, acquire understanding',
+    b4_proverbs:'Kohelet: Chapter 4',
     b5_shir:    'Shir 2:1–3 (Cycle 2) — I am a rose of Sharon',
+    b5_souls:   'Ziphion / Ephraim', b5_jeremiah: 'Chapter 35', b5_talmud: '35',
     b6_psalms:  'Ps 103–105 — Bless the Lord, O my soul',
     b7_mesilas: 'Ch 3 (Cycle 2) — Watchfulness divisions: examining one\'s inner world' },
   // W36
   { week:36, parasha:'Shavuot',                  month:'Sivan',
     b1_theme:   'Have Emunah',
-    b1_animal:  'Wolf', b1_avot: 'Avot 4:15–16 — Rabbi Yehudah on Torah study',
-    b2_quality: 'Torah enclothes him with humility',               b2_prophet: 'Mordechai',
-    b3_ruth:    'Ram — the whole Book of Ruth read on Shavuot (Ruth: loyalty and Torah)',
+    b1_animal:  'Wolf', b1_avot: 'Rabbi Yossi – one that honors the Torah will be honored by men…',
+    b2_quality: 'Loves justice (Ohev et HaMeisharim)',               b2_prophet: 'Uriah',
+    b3_ruth:    'Abijam',
     b3_haftara: 'Devorah and the women of Israel',
-    b4_proverbs:'Prov 5 (Cycle 2) — Beware the strange woman',
+    b4_proverbs:'Kohelet: Chapter 5',
     b5_shir:    'Shir 2:4–7 (Cycle 2) — He brought me to the banquet hall',
+    b5_souls:   'Haggi / Bela', b5_jeremiah: 'Chapter 36', b5_talmud: '36',
     b6_psalms:  'Ps 106–108 — Give thanks to the Lord, for He is good',
     b7_mesilas: 'Ch 4 (Cycle 2) — Acquiring Watchfulness: self-examination leads to growth',
     b7_theme:   'The Lion is Saying',
@@ -2765,12 +2808,13 @@
   // W37
   { week:37, parasha:'Bamidbar',                 month:'Sivan',
     b1_theme:   'Maintain Our Humility After Greatness',
-    b1_animal:  'Fox', b1_avot: 'Avot 4:17 — Three crowns and the crown of a good name',
-    b2_quality: 'Torah enclothes him with fear',                   b2_prophet: 'Chananyah ben Hezekiah',
-    b3_ruth:    'Aminadav — the willing count (Bamidbar: counting of the people)',
+    b1_animal:  'Fox', b1_avot: 'Rabbi Yishmael – one who refrains from serving as a judge avoid hatred, theft and false oaths',
+    b2_quality: 'Loves reproof (Ohev et HaTochachot)',                   b2_prophet: 'Jeremiah',
+    b3_ruth:    'Asa',
     b3_haftara: 'Devorah and the women of Israel',
-    b4_proverbs:'Prov 6 (Cycle 2) — Go to the ant, you sluggard',
+    b4_proverbs:'Kohelet: Chapter 6',
     b5_shir:    'Shir 2:8–10 (Cycle 2) — The voice of my beloved',
+    b5_souls:   'Shuni / Becher', b5_jeremiah: 'Chapter 37', b5_talmud: '37',
     b6_psalms:  'Ps 109–111 — Praise the Lord! I will give thanks with my whole heart',
     b7_mesilas: 'Ch 5 (Cycle 2) — Obstacles to Watchfulness revisited with new depth',
     b7_theme:   'The Bear is Saying',
@@ -2778,12 +2822,13 @@
   // W38
   { week:38, parasha:'Naso',                     month:'Sivan',
     b1_theme:   'Be Strong and Courageous for the Common Good',
-    b1_animal:  'Wild Deer (Tzvi)', b1_avot: 'Avot 4:18–19 — Rabbi Shimon ben Elazar',
-    b2_quality: 'Torah makes him fit to be righteous',             b2_prophet: 'Natan',
-    b3_ruth:    'Nachshon — the Nasi (prince) who offers first (Naso: Nassi offerings)',
+    b1_animal:  'Wild Deer (Tzvi)', b1_avot: 'Rabbi Yonatan – whoever fulfills the Torah in poverty will ultimately fulfill it in wealth...',
+    b2_quality: 'Keeps far from honor',             b2_prophet: 'Ezekiel',
+    b3_ruth:    'Jehoshaphat',
     b3_haftara: 'Devorah and the women of Israel',
-    b4_proverbs:'Prov 7 (Cycle 2) — Keep my commandments and live',
+    b4_proverbs:'Kohelet: Chapter 7',
     b5_shir:    'Shir 2:11–13 (Cycle 2) — For behold, the winter has passed',
+    b5_souls:   'Ezbon / Ashbel', b5_jeremiah: 'Chapter 38', b5_talmud: '38',
     b6_psalms:  'Ps 112–114 — When Israel went out from Egypt',
     b7_mesilas: 'Ch 6 (Cycle 2) — Alacrity deepened: acting from love, not obligation',
     b7_theme:   'The Wolf is Saying',
@@ -2791,12 +2836,13 @@
   // W39
   { week:39, parasha:'Behaalotecha',             month:'Tammuz',
     b1_theme:   'See the World in a Positive Light to Elevate It',
-    b1_animal:  'Gazelle', b1_avot: 'Avot 4:20–21 — Rabbi Elisha ben Avuya',
-    b2_quality: 'Torah makes him fit to be correct (Yashar)',      b2_prophet: 'Gad',
-    b3_ruth:    'Salmon — lighting the menorah (Behaalotecha: Aaron lights the menorah)',
+    b1_animal:  'Gazelle', b1_avot: 'Rabbi Meir – engage minimally in business, and occupy yourself with Torah...',
+    b2_quality: 'Does not act arrogantly with his knowledge (Lo Megis Liboh BeTalmudoh)',      b2_prophet: 'Daniel (Shemaiah)',
+    b3_ruth:    'Jehoram',
     b3_haftara: 'Yiftach\'s daughter',
-    b4_proverbs:'Prov 8 (Cycle 2) — Does not Wisdom call out?',
+    b4_proverbs:'Kohelet: Chapter 8',
     b5_shir:    'Shir 2:14–16 (Cycle 2) — My dove in the clefts of the rock',
+    b5_souls:   'Eri / Gera', b5_jeremiah: 'Chapter 39', b5_talmud: '39',
     b6_psalms:  'Ps 115–118 — This is the day the Lord has made; let us rejoice',
     b7_mesilas: 'Ch 7 (Cycle 2) — Alacrity divisions: beginning and finishing with the same fire',
     b7_theme:   'The Fox is Saying',
@@ -2804,23 +2850,25 @@
   // W40
   { week:40, parasha:'Shelach',                  month:'Tammuz',
     b1_theme:   'Fight for Truth',
-    b1_animal:  'Ibex (Ya\'el)', b1_avot: 'Avot 4:22 — Rabbi Yaakov on Olam Haba',
-    b2_quality: 'Torah makes him beloved (Ahov)',                  b2_prophet: 'Natan',
-    b3_ruth:    'Boaz — faithful amid spies (Shelach: spies sent to Canaan)',
+    b1_animal:  'Ibex (Ya\'el)', b1_avot: 'Rabbi Eliezer – one who fulfills one mitzvah acquires an advocate for himself...',
+    b2_quality: 'Does not take pleasure in handing down [halachic] decisions (Einoh Sameach b\'Hora\'ah)',                  b2_prophet: 'Baruch',
+    b3_ruth:    'Ahaziah',
     b3_haftara: 'Yiftach\'s daughter',
-    b4_proverbs:'Prov 9 (Cycle 2) — Wisdom has built her house',
+    b4_proverbs:'Kohelet: Chapter 9',
     b5_shir:    'Shir 2:17–3:2 (Cycle 2) — Until the day breathes',
+    b5_souls:   'Arodi / Naaman', b5_jeremiah: 'Chapter 40', b5_talmud: '40',
     b6_psalms:  'Ps 119:1–96 — Happy are those whose way is blameless',
     b7_mesilas: 'Ch 8 (Cycle 2) — Acquiring Alacrity through love of G-d\'s commandments' },
   // W41
   { week:41, parasha:'Korach',                   month:'Tammuz',
     b1_theme:   'Not Become Corrupt',
-    b1_animal:  'Hare (Arnevet)', b1_avot: 'Avot 4:23–24 — Rabbi Shimon ben Elazar on the right time',
-    b2_quality: 'Torah loves him (Ohavo)',                         b2_prophet: 'Eliyahu',
-    b3_ruth:    'Obed — the servant vs. the rebel (Korach\'s rebellion against Moshe)',
+    b1_animal:  'Hare (Arnevet)', b1_avot: 'Rabbi Yochanan HaSandlar – every gathering that is for the sake of Heaven will endure…',
+    b2_quality: 'Bears the burden with his friends (Noseh b\'Ol im Chaveroh)',                         b2_prophet: 'Neriah',
+    b3_ruth:    'Athaliah, mother of Ahaziah',
     b3_haftara: 'Yiftach\'s daughter',
-    b4_proverbs:'Prov 10 (Cycle 2) — A wise son gladdens his father',
+    b4_proverbs:'Kohelet: Chapter 10',
     b5_shir:    'Shir 3:3–5 (Cycle 2) — The watchmen found me',
+    b5_souls:   'Areli / Ehi', b5_jeremiah: 'Chapter 41', b5_talmud: '41',
     b6_psalms:  'Ps 119:97–176 — Oh, how I love Your Torah!',
     b7_mesilas: 'Ch 9 (Cycle 2) — Obstacles to Alacrity: identifying inner inertia',
     b7_theme:   'The Gazelle is Saying',
@@ -2828,23 +2876,25 @@
   // W42
   { week:42, parasha:'Chukat',                   month:'Tammuz',
     b1_theme:   'Be Loyal and Pursue Justice',
-    b1_animal:  'Hedgehog (Kipod)', b1_avot: 'Avot 5:1–3 — World created with 10 utterances',
-    b2_quality: 'Torah gives him a kingdom',                       b2_prophet: 'Eliyahu',
-    b3_ruth:    'Yishai — the statute beyond understanding (Chukat: the red heifer)',
+    b1_animal:  'Hedgehog (Kipod)', b1_avot: 'Rabbi Eliezer ben Shammuah – the honor of your student should be as precious to you as your own…',
+    b2_quality: 'Judges him favorably (Machrioh Lechaf Zechut) / Places him [in the path of] truth (Ma\'amidoh al HaEmet)',                       b2_prophet: 'Seraiah',
+    b3_ruth:    'Jehoash',
     b3_haftara: 'Yiftach\'s daughter',
-    b4_proverbs:'Prov 11 (Cycle 2) — A false balance is an abomination',
+    b4_proverbs:'Kohelet: Chapter 11',
     b5_shir:    'Shir 3:6–11 (Cycle 2) — Who is this who comes up from the wilderness?',
+    b5_souls:   'Asher / Rosh', b5_jeremiah: 'Chapter 42', b5_talmud: '42',
     b6_psalms:  'Ps 120–122 — I lift my eyes to the mountains',
     b7_mesilas: 'Ch 10 (Cycle 2) — Cleanliness: rooting out subtle rationalized sins' },
   // W43
   { week:43, parasha:'Balak',                    month:'Av',
     b1_theme:   'Pursue the Enemy and Pursue Peace',
-    b1_animal:  'Pig (Chazir)', b1_avot: 'Avot 5:4–6 — Ten miracles in the Wilderness',
-    b2_quality: 'Torah gives him dominion',                        b2_prophet: 'Elisha',
-    b3_ruth:    'David — peace against Balak\'s curses (Balak: Bilaam\'s curses turned to blessing)',
+    b1_animal:  'Pig (Chazir)', b1_avot: 'Rabbi Yehudah – be careful in your studies, for an error in learning it tantamount to a willful sin',
+    b2_quality: 'Places him [in the path of] peace (Ma\'amidoh al HaShalom)',                        b2_prophet: 'Mehsiah',
+    b3_ruth:    'Amaziah',
     b3_haftara: 'Yiftach\'s daughter',
-    b4_proverbs:'Prov 12 (Cycle 2) — A righteous man cares for his animal',
+    b4_proverbs:'Kohelet: Chapter 12',
     b5_shir:    'Shir 4:1–5 (Cycle 2) — Behold you are beautiful, my beloved',
+    b5_souls:   'Imnah / Muppim', b5_jeremiah: 'Chapter 43', b5_talmud: '43',
     b6_psalms:  'Ps 123–125 — Those who trust in G-d are like Mount Zion',
     b7_mesilas: 'Ch 11 (Cycle 2) — Particulars of Cleanliness: refining speech and thought',
     b7_theme:   'The Pig is Saying',
@@ -2852,12 +2902,13 @@
   // W44
   { week:44, parasha:'Pinchas',                  month:'Av',
     b1_theme:   'Recognize Our Mistakes and Change',
-    b1_animal:  'Leviathan', b1_avot: 'Avot 5:7 — Seven things of a golem vs. a sage',
-    b2_quality: 'Torah reveals to him secrets of the Torah',       b2_prophet: 'Elisha',
-    b3_ruth:    'Perez — zealous action for righteousness (Pinchas: Pinchas\'s zealotry)',
+    b1_animal:  'Leviathan', b1_avot: 'Rabbi Nehorai – exile yourself  to a place of Torah; do not say that it will come after you… rely not on your own understanding',
+    b2_quality: 'He deliberates in his study (Mityashev Liboh BeTalmudoh)',       b2_prophet: 'Haggai',
+    b3_ruth:    'Uzziah (also known as Azariah)',
     b3_haftara: 'Eliyahu',
-    b4_proverbs:'Prov 13 (Cycle 2) — A wise son heeds his father\'s instruction',
+    b4_proverbs:'Tehilim 127',
     b5_shir:    'Shir 4:6–9 (Cycle 2) — I will go to the mountain of myrrh',
+    b5_souls:   'Ishvah / Huppim', b5_jeremiah: 'Chapter 44', b5_talmud: '44',
     b6_psalms:  'Ps 126–128 — Unless G-d builds the house, the builders labor in vain',
     b7_mesilas: 'Ch 12 (Cycle 2) — Acquiring Cleanliness through consistent vigilance',
     b7_theme:   'The Leviathan is Saying',
@@ -2865,12 +2916,13 @@
   // W45
   { week:45, parasha:'Matot-Masei',              month:'Av',
     b1_theme:   'Raise Ourselves Up Through Love and Humility',
-    b1_animal:  'Fish', b1_avot: 'Avot 5:8–9 — Seven kinds of punishment',
-    b2_quality: 'Torah makes him like a never-failing spring',     b2_prophet: 'Elisha',
-    b3_ruth:    'Hezron — the journey home (Matot-Masei: journeys in the desert)',
+    b1_animal:  'Fish', b1_avot: 'Rabbi Yanai – we cannot comprehend the tranquility of the wicked or the suffering of the righteous...',
+    b2_quality: 'Asks and responds (Shoel uMeshiv)',     b2_prophet: 'Zechariah',
+    b3_ruth:    'Jotham',
     b3_haftara: 'Eliyahu',
-    b4_proverbs:'Prov 14 (Cycle 2) — The wise woman builds her house',
+    b4_proverbs:'Shir HaShirim: Chapter 1',
     b5_shir:    'Shir 4:10–15 (Cycle 2) — Your lips, O my bride, drip honey',
+    b5_souls:   'Ishvi / Ard', b5_jeremiah: 'Chapter 45', b5_talmud: '45',
     b6_psalms:  'Ps 129–131 — Out of the depths I cry to You, O Lord',
     b7_mesilas: 'Ch 13 (Cycle 2) — Separation: voluntary withdrawal for spiritual depth',
     b7_theme:   'The Fish are Saying',
@@ -2878,12 +2930,13 @@
   // W46
   { week:46, parasha:'Devarim',                  month:'Av',
     b1_theme:   'Know Our Place in Order to Be Truly Happy',
-    b1_animal:  'Great Whale', b1_avot: 'Avot 5:10–11 — Four types of donors',
-    b2_quality: 'Torah makes him humble',                          b2_prophet: 'Yeshayahu',
-    b3_ruth:    'Ram — Moshe\'s last speech (Devarim: Moshe\'s farewell words of rebuke)',
+    b1_animal:  'Great Whale', b1_avot: 'Rabbi Matiah ben Charash – be first to greet every man. Be a tail to lions, rather than a head to foxes',
+    b2_quality: 'Listens and adds (Shomeah uMosif)',                          b2_prophet: 'Malachi',
+    b3_ruth:    'Ahaz',
     b3_haftara: 'Eliyahu',
-    b4_proverbs:'Prov 15 (Cycle 2) — A gentle answer turns away wrath',
+    b4_proverbs:'Shir HaShirim: Chapter 2',
     b5_shir:    'Shir 4:16–5:2 (Cycle 2) — Awake, O north wind',
+    b5_souls:   'Briah / Dan', b5_jeremiah: 'Chapter 46', b5_talmud: '46',
     b6_psalms:  'Ps 132–134 — Behold how good and pleasant it is',
     b7_mesilas: 'Ch 14 (Cycle 2) — Particulars of Separation: time, food, and focus',
     b7_theme:   'Giant Sea Creatures are Saying',
@@ -2891,45 +2944,49 @@
   // W47
   { week:47, parasha:'Vaetchanan',               month:'Elul',
     b1_theme:   'Time for Teshuvah — Return to G-d!',
-    b1_animal:  'Sea / Waves', b1_avot: 'Avot 5:12–13 — Four types of students',
-    b2_quality: 'Torah makes him far from sin',                    b2_prophet: 'Yirmiyahu',
-    b3_ruth:    'Aminadav — Shema Yisrael and willing return (Vaetchanan: Shema)',
+    b1_animal:  'Sea / Waves', b1_avot: 'Rabbi Yaakov – this world is like an antechamber for the World to Come...',
+    b2_quality: 'Learns in order to teach (Lomed al Menat Lilmod)',                    b2_prophet: 'Mordechai Bilshan',
+    b3_ruth:    'Hezekiah',
     b3_haftara: 'Seven Haftarot of Consolation',
-    b4_proverbs:'Prov 16 (Cycle 2) — Pride comes before destruction',
+    b4_proverbs:'Shir HaShirim: Chapter 3',
     b5_shir:    'Shir 5:3–7 (Cycle 2) — I have taken off my robe',
+    b5_souls:   'Serah / Hushim', b5_jeremiah: 'Chapter 47', b5_talmud: '47',
     b6_psalms:  'Ps 135–137 — By the rivers of Babylon, there we sat and wept',
     b7_mesilas: 'Ch 15 (Cycle 2) — Acquiring Separation through self-mastery' },
   // W48
   { week:48, parasha:'Eikev',                    month:'Elul',
     b1_theme:   'Fight Coldness with Warmth',
-    b1_animal:  'Rivers (Naharot)', b1_avot: 'Avot 5:14–15 — Four types of Torah students',
-    b2_quality: 'Torah gives him a good name',                     b2_prophet: 'Yechezkel',
-    b3_ruth:    'Nachshon — walking in G-d\'s ways (Eikev: if you walk in My commandments)',
+    b1_animal:  'Rivers (Naharot)', b1_avot: 'Rabbi Shimon ben Elazar – do not attempt to appease your friend at the moment of his anger…',
+    b2_quality: 'Learns in order to practice (Lomed al Menat La\'asot)',                     b2_prophet: 'Unknown / Oded (Mashiach ben Yosef)',
+    b3_ruth:    'Manasseh',
     b3_haftara: 'Seven Haftarot of Consolation',
-    b4_proverbs:'Prov 17 (Cycle 2) — Better a dry morsel with quiet',
+    b4_proverbs:'Shir HaShirim: Chapter 4',
     b5_shir:    'Shir 5:8–6:1 (Cycle 2) — I charge you, O daughters of Jerusalem',
+    b5_souls:   'Heber / Naftali', b5_jeremiah: 'Chapter 48', b5_talmud: '48',
     b6_psalms:  'Ps 138–140 — O Lord, You have probed me and You know me',
     b7_mesilas: 'Ch 16 (Cycle 2) — Purity: deeper refinement of inner life' },
   // W49
   { week:49, parasha:"Re\'eh",                    month:'Elul',
     b1_theme:   'Bring More Light to Extinguish Darkness',
-    b1_animal:  'Frogs (aquatic)', b1_avot: 'Avot 5:16–17 — Four types of disputes',
-    b2_quality: 'Torah raises up his heart',                       b2_prophet: 'Daniel',
-    b3_ruth:    'Salmon — clear choices: blessing and curse (Re\'eh: see I give before you)',
+    b1_animal:  'Frogs (aquatic)', b1_avot: 'Shmuel the Small – when your enemy falls, do not rejoice...',
+    b2_quality: 'Increases the wisdom of his teacher (Machkim et Rabboh)',                       b2_prophet: 'Unknown / Chanani (Mashiach ben David)',
+    b3_ruth:    'Amon',
     b3_haftara: 'Seven Haftarot of Consolation',
-    b4_proverbs:'Prov 18 (Cycle 2) — A brother offended is harder to win',
+    b4_proverbs:'Shir HaShirim: Chapter 5',
     b5_shir:    'Shir 6:2–5 (Cycle 2) — My beloved has gone down to his garden',
+    b5_souls:   'Malkiel / Jahze\'el', b5_jeremiah: 'Chapter 49', b5_talmud: '49',
     b6_psalms:  'Ps 141–143 — O Lord, I call to You; hasten to me',
     b7_mesilas: 'Ch 17 (Cycle 2) — Purity particulars: guarding the mind for G-d\'s sake' },
   // W50
   { week:50, parasha:'Shoftim',                  month:'Elul',
     b1_theme:   'Know There Are No Limits to Our Growth',
-    b1_animal:  'Swamp (Agam)', b1_avot: 'Avot 5:18–19 — Four who sat before the wise',
-    b2_quality: 'Torah humbles him before greatness',              b2_prophet: 'Mordechai & Esther',
-    b3_ruth:    'Boaz — justice and judges (Shoftim: appoint judges)',
+    b1_animal:  'Swamp (Agam)', b1_avot: 'Elishah ben Avuyah – one who learns Torah in his childhood, to what is he compared? To ink on fresh paper…',
+    b2_quality: 'Who properly understands what he learns (Kavanah)',              b2_prophet: 'Miriam (Rachel); Rebbetzin Menucha Rachel',
+    b3_ruth:    'Josiah',
     b3_haftara: 'Seven Haftarot of Consolation',
-    b4_proverbs:'Prov 19 (Cycle 2) — Wealth adds many friends',
+    b4_proverbs:'Shir HaShirim: Chapter 6',
     b5_shir:    'Shir 6:6–9 (Cycle 2) — As beautiful as the moon',
+    b5_souls:   'Rachel / Guni', b5_jeremiah: 'Chapter 50', b5_talmud: 'Makkoth 2-8',
     b6_psalms:  'Ps 144–146 — Praise G-d! Praise G-d from the heavens',
     b7_mesilas: 'Ch 18 (Cycle 2) — Acquiring Purity: guarding all senses for holiness',
     b7_theme:   'The Frog is Saying',
@@ -2937,23 +2994,25 @@
   // W51
   { week:51, parasha:'Ki Teitzei',               month:'Elul',
     b1_theme:   'Understand That We Are All One Soul',
-    b1_animal:  'Heavenly Creatures', b1_avot: 'Avot 5:20–21 — Ben Bag Bag & Ben Heh Heh',
-    b2_quality: 'Torah builds him up',                             b2_prophet: 'Ezra & Nechemiah',
-    b3_ruth:    'Obed — return of the lost (Ki Teitzei: laws of returning lost objects)',
+    b1_animal:  'Heavenly Creatures', b1_avot: 'Rabbi Yossi ben Yehudah of Kfar Bavli – one who learns Torah from youngsters…',
+    b2_quality: 'Who relates a statement in the name of the one who said it',                             b2_prophet: 'Devorah (Leah); Rebbetzin Devorah Leah',
+    b3_ruth:    '(Jehoahaz, 3 months) Jehoiakim, also known as Eliakim',
     b3_haftara: 'Seven Haftarot of Consolation',
-    b4_proverbs:'Prov 20 (Cycle 2) — Wine is a mocker, strong drink a brawler',
+    b4_proverbs:'Shir HaShirim: Chapter 7',
     b5_shir:    'Shir 6:10–12 (Cycle 2) — Who is this who shines through like the dawn?',
+    b5_souls:   'Joseph / Yezer', b5_jeremiah: 'Chapter 51', b5_talmud: 'Makkoth 9-16',
     b6_psalms:  'Ps 147–149 — Praise the Lord! Sing to the Lord a new song',
     b7_mesilas: 'Ch 19 (Cycle 2) — Piety: going beyond the law from love' },
   // W52
   { week:52, parasha:'Ki Tavo',                  month:'Elul',
     b1_theme:   'Crown G-d as Our King',
-    b1_animal:  'Dogs', b1_avot: 'Avot 5:22–23 — Disciples of Avraham vs. Bilaam',
-    b2_quality: 'Torah exalts him above all creations',            b2_prophet: 'Haggai & Zechariah',
-    b3_ruth:    'David — first fruits and the harvest (Ki Tavo: bikkurim offering)',
+    b1_animal:  'Dogs', b1_avot: 'Rabbi Elazar HaKappar – envy, lust, and honor take a man out of the world… Those who are born will die, and the dead will live [again]…',
+    b2_quality: 'Whoever relates a statement in the name of the one who said it brings redemption to the world',            b2_prophet: 'Esther (Sarah); Rebbetzin Shterna Sarah',
+    b3_ruth:    '(Jehoiachin also known as Jeconiah, 3 months) Mattaniah also known as Zedekiah',
     b3_haftara: 'Seven Haftarot of Consolation',
-    b4_proverbs:'Prov 21 (Cycle 2) — A king\'s heart in G-d\'s hand; full crown of wisdom',
+    b4_proverbs:'Shir HaShirim: Chapter 8',
     b5_shir:    'Shir 7:1–5 (Cycle 2) — How beautiful are your feet in sandals',
+    b5_souls:   'Benjamin / Shilem', b5_jeremiah: 'Chapter 52', b5_talmud: 'Makkoth 17-24',
     b6_psalms:  'Ps 150 — Praise G-d in His sanctuary; praise Him in His mighty heavens',
     b7_mesilas: 'Ch 20 (Cycle 2) — Piety particulars: prayer and love as daily service' },
   ];
@@ -3355,7 +3414,12 @@
       { book: 'Book 4 · Song of Hannah',       emoji: '💎',
         fields: [{ label: 'Proverbs',          value: wk.b4_proverbs }] },
       { book: 'Book 5 · Song of Songs',      emoji: '🌹',
-        fields: [{ label: 'Song of Songs',     value: wk.b5_shir }] },
+        fields: [
+          { label: 'Song of Songs',     value: wk.b5_shir },
+          { label: 'Seventy Souls',     value: wk.b5_souls },
+          { label: 'Jeremiah',          value: wk.b5_jeremiah },
+          { label: 'Talmud',            value: wk.b5_talmud }
+        ] },
       { book: 'Book 6 · General Remedy',      emoji: '🎵',
         fields: [{ label: 'Tikkun HaKlali',    value: wk.b6_psalms }] },
       // BOOK 7: Gathering of Songs (Saved in 2013)
@@ -3472,5 +3536,6 @@
     });
   }
 </script>
+
 </body>
 </html>
