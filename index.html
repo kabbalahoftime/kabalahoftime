@@ -63,6 +63,7 @@ text-align: center;
 padding: 44px 0 28px;
 border-bottom: 2px solid var(–border-strong);
 margin-bottom: 28px;
+background: linear-gradient(to bottom, rgba(212,175,55,0.08), rgba(212,175,55,0.02));
 }
 
 .star-of-david {
@@ -824,6 +825,7 @@ text-align: center;
 padding: 28px 0 0;
 border-top: 1px solid var(–border);
 margin-top: 28px;
+background: linear-gradient(to top, rgba(212,175,55,0.08), rgba(212,175,55,0.02));
 }
 
 .footer-text {
@@ -3485,7 +3487,7 @@ transition: transform 0.3s;
 
   // Malchut daily texts — 7 texts cycling through the week
   // Order (by KoT day 1–7): 
-  //   Day 1 (Fri eve / Shabbat): Zohar / Arizal
+  //   Day 1 (Fri eve / Shabbat): Chidah (Zohar / Arizal)
   //   Day 2 (Sat eve / Sunday): Keter Shem Tov  
   //   Day 3 (Sun eve / Monday): Noam Elimelech
   //   Day 4 (Mon eve / Tuesday): Tanya
@@ -3495,7 +3497,7 @@ transition: transform 0.3s;
   // MALCHUT_TEXTS[i] where i = (dayNum - 1) % 7
   // dayNum 1=Thu→Fri, 2=Fri→Shab, 3=Sat→Sun, 4=Sun→Mon, 5=Mon→Tue, 6=Tue→Wed, 7=Wed→Thu
   const MALCHUT_TEXTS = [
-    { name: 'Zohar / Arizal',      author: 'R. Shimon bar Yochai / R. Luria',    shortName: 'Zohar',    day: 'Friday — Erev Shabbat',   desc: 'Mystical depth of the Parasha — the hidden light of Torah' },
+    { name: 'Chidah (Zohar / Arizal)',      author: 'R. Shimon bar Yochai / R. Luria',    shortName: 'Zohar',    day: 'Friday — Erev Shabbat',   desc: 'Mystical depth of the Parasha — the hidden light of Torah' },
     { name: 'Likutei Sichos',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight' },
     { name: 'Keter Shem Tov',      author: 'Baal Shem Tov',                      shortName: 'KST',      day: 'Sunday',                  desc: 'Foundations of Chassidic thought and Divine joy' },
     { name: 'Noam Elimelech',      author: 'R. Elimelech of Lizhensk',           shortName: 'NE',       day: 'Monday',                  desc: 'The Tzadik\'s path: elevating the world through Torah' },
@@ -3930,7 +3932,7 @@ transition: transform 0.3s;
 
     // Detail panel: today's entry highlighted, then full weekly context
     const DAYS_LABELS = ['Friday','Shabbat','Sunday','Monday','Tuesday','Wednesday','Thursday'];
-    const TEXTS  = ['Zohar / Arizal','Likutei Sichos','Keter Shem Tov',
+    const TEXTS  = ['Chidah (Zohar / Arizal)','Likutei Sichos','Keter Shem Tov',
                     'Noam Elimelech','Tanya','Likutei Moharan','Mesilat Yesharim'];
 
     // Today's highlighted entry
