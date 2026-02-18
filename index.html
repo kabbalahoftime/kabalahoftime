@@ -2357,31 +2357,61 @@ transition: transform 0.3s;
   // Book 6: Psalms (weekly portions)
   // Book 7: Mesilat Yesharim chapters + parasha connection
 
+  // PARASHA NAME TO NUMBER MAPPING (1-54)
+  const PARASHA_TO_NUMBER = {
+    'Bereshit': 1, 'Noach': 2, 'Lech Lecha': 3, 'Vayera': 4, 'Chayei Sarah': 5,
+    'Toldot': 6, 'Vayetzei': 7, 'Vayishlach': 8, 'Vayeshev': 9, 'Miketz': 10,
+    'Vayigash': 11, 'Vayechi': 12, 'Shemot': 13, 'Vaera': 14, 'Bo': 15,
+    'Beshalach': 16, 'Yitro': 17, 'Mishpatim': 18, 'Terumah': 19, 'Tetzaveh': 20,
+    'Ki Tisa': 21, 'Vayakhel': 22, 'Pekudei': 23, 'Vayikra': 24, 'Tzav': 25,
+    'Shemini': 26, 'Tazria': 27, 'Metzora': 28, 'Achrei Mot': 29, 'Kedoshim': 30,
+    'Emor': 31, 'Behar': 32, 'Bechukotai': 33, 'Bamidbar': 34, 'Nasso': 35,
+    'Beha\'alotcha': 36, 'Shelach': 37, 'Korach': 38, 'Chukat': 39, 'Balak': 40,
+    'Pinchas': 41, 'Matot': 42, 'Massei': 43, 'Devarim': 44, 'Va\'etchanan': 45,
+    'Ekev': 46, 'Re\'eh': 47, 'Shoftim': 48, 'Ki Tetzeh': 49, 'Ki Tavo': 50,
+    'Nitzavim': 51, 'Vayelech': 52, 'Haazinu': 53, 'VeZot HaBrachah': 54,
+    // Special weeks that should map to their main parasha
+    'Rosh Hashana / Haazinu': 53,
+    'Yom Kippur / Bereshit': 1,
+    'Sukkot': 1, // During Sukkot we read from Bereshit cycle
+    'Shemini Atzeret': 1
+  };
+
   // MALCHUT PARASHA MAPPINGS
   // Each of the 7 daily texts has specific portions mapped to each parasha
   const MALCHUT_PARASHA_MAPPINGS = {
-    // Tanya: 53 chapters (intro + 52), one per parasha
+    // Tanya: 53 chapters (intro + 52), one per parasha (54 total including VeZot HaBrachah)
     tanya: {
-      1: { chapter: "Intro", theme: "Neshamah Klali - corruption through generations; authoritative version" },
-      2: { chapter: 1, theme: "Tzadik, Rasha, Beinoni - nature and levels" },
-      3: { chapter: 2, theme: "G-dly soul from essence of G-d" },
-      4: { chapter: 3, theme: "Fiery love through meditation on G-d's greatness" },
-      5: { chapter: 4, theme: "Levushim of the soul - thought, speech, deed" },
-      6: { chapter: 5, theme: "Grasping Torah, being enclothed in G-dliness" },
-      7: { chapter: 6, theme: "Klippah and imprisonment of holy sparks" },
-      8: { chapter: 7, theme: "G-dly soul vs animal soul" },
-      9: { chapter: 8, theme: "Two kinds of Tzadikim" },
-      10: { chapter: 9, theme: "Dwelling places of souls; transformation" },
-      11: { chapter: 10, theme: "Yirah - fear of teacher, father, mother" },
-      12: { chapter: 11, theme: "Beinoni - engaging with darkness" },
-      13: { chapter: 12, theme: "Revelation and concealment" },
-      14: { chapter: 13, theme: "Breaking through limitations" },
-      15: { chapter: 14, theme: "Light and vessels" },
-      16: { chapter: 15, theme: "Garden of delight" },
-      17: { chapter: 16, theme: "Soul leaving the body" },
-      18: { chapter: 17, theme: "Kavod - honor" },
-      19: { chapter: 18, theme: "Acquiring love through meditation or inheritance" },
-      20: { chapter: 19, theme: "Neshamah as flickering candle returning to source" },
+      1: { chapter: "Intro", theme: "Neshamah Klali - corruption through generations; authoritative version" }, // Bereshit
+      2: { chapter: 1, theme: "Tzadik, Rasha, Beinoni - nature and levels" }, // Noach
+      3: { chapter: 2, theme: "G-dly soul from essence of G-d" }, // Lech Lecha
+      4: { chapter: 3, theme: "Fiery love through meditation on G-d's greatness" }, // Vayera
+      5: { chapter: 4, theme: "Levushim of the soul - thought, speech, deed" }, // Chayei Sarah
+      6: { chapter: 5, theme: "Grasping Torah, being enclothed in G-dliness" }, // Toldot
+      7: { chapter: 6, theme: "Klippah and imprisonment of holy sparks" }, // Vayetzei
+      8: { chapter: 7, theme: "G-dly soul vs animal soul" }, // Vayishlach
+      9: { chapter: 8, theme: "Two kinds of Tzadikim" }, // Vayeshev
+      10: { chapter: 9, theme: "Dwelling places of souls; transformation" }, // Miketz
+      11: { chapter: 10, theme: "Yirah - fear of teacher, father, mother" }, // Vayigash
+      12: { chapter: 11, theme: "Beinoni - engaging with darkness" }, // Vayechi
+      13: { chapter: 12, theme: "Beinoni - engaging with darkness" }, // Shemot
+      14: { chapter: 13, theme: "Revelation and concealment" }, // Vaera
+      15: { chapter: 14, theme: "Breaking through limitations" }, // Bo
+      16: { chapter: 15, theme: "Light and vessels" }, // Beshalach
+      17: { chapter: 16, theme: "Soul leaving the body" }, // Yitro
+      18: { chapter: 17, theme: "Kavod - honor" }, // Mishpatim
+      19: { chapter: 18, theme: "Acquiring love through meditation or inheritance" }, // Terumah
+      20: { chapter: 19, theme: "Neshamah as flickering candle returning to source" }, // Tetzaveh
+      21: { chapter: 20, theme: "Words of rebuke to inspire Yirah" },
+      22: { chapter: 21, theme: "Comprehension of G-d's greatness" },
+      23: { chapter: 22, theme: "Levels of love and fear" },
+      24: { chapter: 23, theme: "Service with joy" },
+      25: { chapter: 24, theme: "Nullification in prayer" },
+      26: { chapter: 25, theme: "Elevation through mitzvot" },
+      27: { chapter: 26, theme: "Unity of G-d" },
+      28: { chapter: 27, theme: "Intellectual love" },
+      29: { chapter: 28, theme: "Contemplation on creation" },
+      30: { chapter: 29, theme: "Breaking timtum halev" },
       31: { chapter: 30, theme: "Broken-heartedness vs depression; transforming weapons" },
       32: { chapter: 31, theme: "Ve'Ahavtah - loving souls at their root" },
       33: { chapter: 32, theme: "Rejoicing over inheritance from forefathers" },
@@ -2404,82 +2434,130 @@ transition: transform 0.3s;
       50: { chapter: 49, theme: "Love from Gevurah/fire via intellectual comprehension" },
       51: { chapter: 50, theme: "Shechinah concentrated in head/brain; sum of vitality" },
       52: { chapter: 51, theme: "Summary: serving G-d through Torah and mitzvot via intellect" },
-      53: { chapter: 52, theme: "Tablets; combining Torah with rabbinic mitzvot produces Keter" }
+      53: { chapter: 52, theme: "Summary of entire Torah" }, // Haazinu
+      54: { chapter: 53, theme: "Tablets; combining Torah with rabbinic mitzvot produces Keter" } // VeZot HaBrachah
     },
     
-    // Likutei Moharan: Starting from Lesson 51, one-to-one correspondence
+    // Keter Shem Tov: 430 chapters (2 introductions + 428), 8 chapters per parasha
+    // Parasha N covers chapters: (N-1)*8 + 1 through N*8
+    keterShemTov: {
+      // This is handled specially in getParashaMapping function
+    },
+    
+    // Likutei Moharan: Starting from Lesson 51, one-to-one correspondence with parshiyot
     likuteiMoharan: {
-      1: { lesson: 51, theme: "Creation; apostates' error; souls of Israel contain all worlds" },
-      2: { lesson: "52 (part 2)", theme: "Becoming Tzadik through hitbodedut at night" },
-      3: { lesson: 53, theme: "Da'at connected to Zerah" },
-      4: { lesson: "54 (part 1)", theme: "Importance of memory, especially of World to Come" },
-      5: { lesson: "54 (part 2)", theme: "Will of Hashem through thought, speech, deed" },
-      6: { lesson: 55, theme: "Downfall of wicked via holiness of Land and patriarchs' merit" },
-      7: { lesson: 56, theme: "Establishing Malchut in household; elevating wealth" },
-      8: { lesson: 57, theme: "Overcoming imprisonment of issurim; power of speech" },
-      9: { lesson: 58, theme: "Power of patriarchs and Yosef becoming Mishneh" },
-      10: { lesson: 59, theme: "Approaching others carefully; words from heart" },
-      11: { lesson: 60, theme: "Richness from old age from Yirah; enclothing Torah in stories" },
-      12: { lesson: 61, theme: "Emunat Chachamim" },
-      13: { lesson: 62, theme: "Emunah" },
-      14: { lesson: "63-64", theme: "Circumcision; 'Bo el Paroh'" },
-      15: { lesson: 65, theme: "Garden" },
-      16: { lesson: 66, theme: "Soul leaving the body" },
-      17: { lesson: 67, theme: "Kavod" },
-      18: { lesson: "68-69", theme: "Lust for money; tzedakah as remedy" },
-      19: { lesson: 70, theme: "Power of Tzadik; humility as dust of gold" },
-      31: { lesson: 83, theme: "6 Pehs in Alef-Beit; fighting klippah through tzedakah" },
-      32: { lesson: 84, theme: "Reaching high levels through love" },
-      33: { lesson: 85, theme: "Establishing Malchut via intellectual contemplation" },
-      34: { lesson: 86, theme: "Shabat vs weekdays; walking; truth and tzedakah" },
-      35: { lesson: 87, theme: "Two types of Yirah; sweetening judgments through Emet" },
-      36: { lesson: 88, theme: "Korach - arguments reduce kitrugim; Machloket LeShem Shamayim" },
-      37: { lesson: "89-90", theme: "Chisaron of individual is chisaron of Shechinah" },
-      38: { lesson: 91, theme: "Tumah in hands; washing with Mayim/Sechel; Emunah above intellect" },
-      39: { lesson: 92, theme: "Pacing resurrects dead; Jacob/Joseph; cooling heart's fire" },
-      40: { lesson: 93, theme: "Kiddush Hashem through honesty in business" },
-      41: { lesson: 94, theme: "Holy Tzimtzum to counteract pure Chesed" },
-      42: { lesson: "94 (end)", theme: "Emunah + Chochmah for Chesed; elevating sparks of words" },
-      43: { lesson: "95-96", theme: "Humility in leadership; extraneous thoughts on tzadik" },
-      44: { lesson: "97-99", theme: "Prayer as gift not merit; overwhelming revelation; consistent prayer" },
-      45: { lesson: 100, theme: "Tzadikim with patience vs those with burning Torah" },
-      46: { lesson: 101, theme: "Torah as source; choice between life/death; defining Adam" },
-      47: { lesson: "101 (cont)", theme: "Overcoming darkness by 'killing' oneself over Torah" },
-      48: { lesson: "101 (end)", theme: "Man defined by Chabad - escaping darkness" },
-      49: { lesson: 102, theme: "Blessing brings glory; receiving through Yirah" },
-      50: { lesson: 103, theme: "[To be mapped]" },
-      51: { lesson: 104, theme: "[To be mapped]" }
+      1: { lesson: 51, theme: "Creation; apostates' error; souls of Israel contain all worlds" }, // Bereshit
+      2: { lesson: "52 (part 2)", theme: "Becoming Tzadik through hitbodedut at night" }, // Noach
+      3: { lesson: 53, theme: "Da'at connected to Zerah" }, // Lech Lecha
+      4: { lesson: "54 (part 1)", theme: "Importance of memory, especially of World to Come" }, // Vayera
+      5: { lesson: "54 (part 2)", theme: "Will of Hashem through thought, speech, deed" }, // Chayei Sarah
+      6: { lesson: 55, theme: "Downfall of wicked via holiness of Land and patriarchs' merit" }, // Toldot
+      7: { lesson: 56, theme: "Establishing Malchut in household; elevating wealth" }, // Vayetzei
+      8: { lesson: 57, theme: "Overcoming imprisonment of issurim; power of speech" }, // Vayishlach
+      9: { lesson: 58, theme: "Power of patriarchs and Yosef becoming Mishneh" }, // Vayeshev
+      10: { lesson: 59, theme: "Approaching others carefully; words from heart" }, // Miketz
+      11: { lesson: 60, theme: "Richness from old age from Yirah; enclothing Torah in stories" }, // Vayigash
+      12: { lesson: 61, theme: "Emunat Chachamim" }, // Vayechi
+      13: { lesson: 62, theme: "Emunah" }, // Shemot
+      14: { lesson: "63-64", theme: "Circumcision; 'Bo el Paroh'" }, // Vaera
+      15: { lesson: 65, theme: "Garden" }, // Bo
+      16: { lesson: 66, theme: "Soul leaving the body" }, // Beshalach
+      17: { lesson: 67, theme: "Kavod" }, // Yitro
+      18: { lesson: "68-69", theme: "Lust for money; tzedakah as remedy" }, // Mishpatim
+      19: { lesson: 70, theme: "Power of Tzadik; humility as dust of gold" }, // Terumah
+      20: { lesson: 71, theme: "[To be mapped]" }, // Tetzaveh
+      21: { lesson: 72, theme: "[To be mapped]" },
+      22: { lesson: 73, theme: "[To be mapped]" },
+      23: { lesson: 74, theme: "[To be mapped]" },
+      24: { lesson: 75, theme: "[To be mapped]" },
+      25: { lesson: 76, theme: "[To be mapped]" },
+      26: { lesson: 77, theme: "[To be mapped]" },
+      27: { lesson: 78, theme: "[To be mapped]" },
+      28: { lesson: 79, theme: "[To be mapped]" },
+      29: { lesson: 80, theme: "[To be mapped]" },
+      30: { lesson: 81, theme: "[To be mapped]" },
+      31: { lesson: 82, theme: "[To be mapped]" },
+      32: { lesson: 83, theme: "6 Pehs in Alef-Beit; fighting klippah through tzedakah" },
+      33: { lesson: 84, theme: "Reaching high levels through love" },
+      34: { lesson: 85, theme: "Establishing Malchut via intellectual contemplation" },
+      35: { lesson: 86, theme: "Shabat vs weekdays; walking; truth and tzedakah" },
+      36: { lesson: 87, theme: "Two types of Yirah; sweetening judgments through Emet" },
+      37: { lesson: 88, theme: "Korach - arguments reduce kitrugim; Machloket LeShem Shamayim" },
+      38: { lesson: "89-90", theme: "Chisaron of individual is chisaron of Shechinah" },
+      39: { lesson: 91, theme: "Tumah in hands; washing with Mayim/Sechel; Emunah above intellect" },
+      40: { lesson: 92, theme: "Pacing resurrects dead; Jacob/Joseph; cooling heart's fire" },
+      41: { lesson: 93, theme: "Kiddush Hashem through honesty in business" },
+      42: { lesson: 94, theme: "Holy Tzimtzum to counteract pure Chesed" },
+      43: { lesson: "94 (end)", theme: "Emunah + Chochmah for Chesed; elevating sparks of words" },
+      44: { lesson: "95-96", theme: "Humility in leadership; extraneous thoughts on tzadik" },
+      45: { lesson: "97-99", theme: "Prayer as gift not merit; overwhelming revelation; consistent prayer" },
+      46: { lesson: 100, theme: "Tzadikim with patience vs those with burning Torah" },
+      47: { lesson: 101, theme: "Torah as source; choice between life/death; defining Adam" },
+      48: { lesson: "101 (cont)", theme: "Overcoming darkness by 'killing' oneself over Torah" },
+      49: { lesson: "101 (end)", theme: "Man defined by Chabad - escaping darkness" },
+      50: { lesson: 102, theme: "Blessing brings glory; receiving through Yirah" },
+      51: { lesson: 103, theme: "[To be mapped]" },
+      52: { lesson: 104, theme: "[To be mapped]" },
+      53: { lesson: 105, theme: "[To be mapped]" }, // Haazinu
+      54: { lesson: 106, theme: "[To be mapped]" } // VeZot HaBrachah
     },
     
-    // Mesilat Yesharim: 27 chapters, each covering 2 parshiyot
+    // Mesilat Yesharim: 27 chapters (Intro + 26), each covering 2 parshiyot
     mesilatYesharim: {
-      1: { chapter: "Intro", parshiyot: ["Haazinu", "Bereshit"] },
-      2: { chapter: 1, parshiyot: ["Noach", "Lech Lecha"] },
-      3: { chapter: 2, parshiyot: ["Vayera", "Chayei Sarah"] },
-      4: { chapter: 3, parshiyot: ["Toldot", "Vayetzei"] },
-      5: { chapter: 4, parshiyot: ["Vayishlach", "Vayeshev"] },
-      6: { chapter: 5, parshiyot: ["Miketz", "Vayigash"] },
-      7: { chapter: 6, parshiyot: ["Vayechi", "Shemot"] },
-      8: { chapter: 7, parshiyot: ["Vaera", "Bo"] },
-      9: { chapter: 8, parshiyot: ["Beshalach", "Yitro"] },
-      10: { chapter: 9, parshiyot: ["Mishpatim", "Terumah"] },
-      11: { chapter: 10, parshiyot: ["Tetzaveh", "Ki Tisa"] },
-      12: { chapter: 11, parshiyot: ["Vayakhel", "Pekudei"] },
-      13: { chapter: 12, parshiyot: ["Vayikra", "Tzav"] },
-      14: { chapter: 13, parshiyot: ["Shemini", "Tazria"] },
-      15: { chapter: 14, parshiyot: ["Metzora", "Achrei Mot"] },
-      16: { chapter: 15, parshiyot: ["Kedoshim", "Emor"] },
-      17: { chapter: 16, parshiyot: ["Behar", "Bechukotai"] },
-      18: { chapter: 17, parshiyot: ["Bamidbar", "Nasso"] },
-      19: { chapter: 18, parshiyot: ["Beha'alotcha", "Shelach"] },
-      20: { chapter: 19, parshiyot: ["Korach", "Chukat"] },
-      21: { chapter: 20, parshiyot: ["Balak", "Pinchas"] },
-      22: { chapter: 21, parshiyot: ["Matot", "Massei"] },
-      23: { chapter: 22, parshiyot: ["Devarim", "Va'etchanan"] },
-      24: { chapter: 23, parshiyot: ["Ekev", "Re'eh"] },
-      25: { chapter: 24, parshiyot: ["Shoftim", "Ki Tetzeh"] },
-      26: { chapter: 25, parshiyot: ["Ki Tavo", "Nitzavim"] },
-      27: { chapter: 26, parshiyot: ["Vayelech", "VeZot HaBrachah"] }
+      1: { chapter: "Intro", parshiyot: ["Bereshit", "Noach"], 
+           theme: "Man's Purpose - placed in complex world to purify from worldly attachments" },
+      2: { chapter: 1, parshiyot: ["Lech Lecha", "Vayera"], 
+           theme: "Man's Duty - stepping away from ordinary to pursue extraordinary calling" },
+      3: { chapter: 2, parshiyot: ["Chayei Sarah", "Toldot"], 
+           theme: "Watchfulness - constant mindful awareness; Jacob vs Esau" },
+      4: { chapter: 3, parshiyot: ["Vayetzei", "Vayishlach"], 
+           theme: "Divisions of Watchfulness - intellectual and personal introspection under pressure" },
+      5: { chapter: 4, parshiyot: ["Vayeshev", "Miketz"], 
+           theme: "Acquiring Watchfulness - Joseph's integrity and spiritual foresight" },
+      6: { chapter: 5, parshiyot: ["Vayigash", "Vayechi"], 
+           theme: "Obstacles to Watchfulness - overcoming spiritual blindness, leaving righteous legacy" },
+      7: { chapter: 6, parshiyot: ["Shemot", "Vaera"], 
+           theme: "Alacrity - passionate readiness for mitzvot; swift redemption" },
+      8: { chapter: 7, parshiyot: ["Bo", "Beshalach"], 
+           theme: "Divisions of Alacrity - beginning and completing mitzvot with speed and energy" },
+      9: { chapter: 8, parshiyot: ["Yitro", "Mishpatim"], 
+           theme: "Acquiring Alacrity - contemplating God's greatness; 'We will do and hear'" },
+      10: { chapter: 9, parshiyot: ["Terumah", "Tetzaveh"], 
+           theme: "Obstacles to Alacrity - overcoming laziness through meticulous sacred work" },
+      11: { chapter: 10, parshiyot: ["Ki Tisa", "Vayakhel"], 
+           theme: "Cleanliness - purifying motives beyond external actions; Golden Calf to restoration" },
+      12: { chapter: 11, parshiyot: ["Pekudei", "Vayikra"], 
+           theme: "Particulars of Cleanliness - attention to detail in speech, ethics, integrity" },
+      13: { chapter: 12, parshiyot: ["Tzav", "Shemini"], 
+           theme: "Acquiring Cleanliness - persistence in observance; distinguishing holy from profane" },
+      14: { chapter: 13, parshiyot: ["Tazria", "Metzora"], 
+           theme: "Separation - distancing from excess; ritual separation as spiritual metaphor" },
+      15: { chapter: 14, parshiyot: ["Acharei Mot", "Kedoshim"], 
+           theme: "Divisions of Separation - regulating thoughts and associations; 'Be holy'" },
+      16: { chapter: 15, parshiyot: ["Emor", "Behar"], 
+           theme: "Acquiring Separation - self-denial, detachment from material possessions" },
+      17: { chapter: 16, parshiyot: ["Bechukotai", "Bamidbar"], 
+           theme: "Purity - actions performed purely for heaven's sake, without selfish motive" },
+      18: { chapter: 17, parshiyot: ["Nasso", "Beha'alotcha"], 
+           theme: "Acquiring Purity - overcoming subtle self-interest; Nazirite separation" },
+      19: { chapter: 18, parshiyot: ["Shelach", "Korach"], 
+           theme: "Piety - beyond letter of law from love; true devotion vs self-serving claims" },
+      20: { chapter: 19, parshiyot: ["Chukat", "Balak"], 
+           theme: "Divisions of Piety - faith beyond logic; contrast of true vs false piety" },
+      21: { chapter: 20, parshiyot: ["Pinchas", "Matot"], 
+           theme: "Weighing Piety - ensuring motivation is pure, not pride or self-interest" },
+      22: { chapter: 21, parshiyot: ["Masei", "Devarim"], 
+           theme: "Acquiring Piety - contemplating God's love through spiritual journey" },
+      23: { chapter: 22, parshiyot: ["Va'etchanan", "Ekev"], 
+           theme: "Humility - recognizing lowliness before God; prosperity from grace not merit" },
+      24: { chapter: 23, parshiyot: ["Re'eh", "Shoftim"], 
+           theme: "Acquiring Humility - focusing on deficiencies; justice and integrity in leadership" },
+      25: { chapter: 24, parshiyot: ["Ki Teitzei", "Ki Tavo"], 
+           theme: "Fear of Sin - constant awareness of God's presence in all aspects of life" },
+      26: { chapter: 25, parshiyot: ["Nitzavim", "Vayelech"], 
+           theme: "Acquiring Fear of Sin - recognizing divine control and shared responsibility" },
+      27: { chapter: 26, parshiyot: ["Haazinu", "VeZot HaBrachah"], 
+           theme: "Holiness - highest attainment; transcending physicality, cleaving to God" }
     }
   };
 
@@ -2929,7 +3007,7 @@ transition: transform 0.3s;
     b7_theme:   'The Fly is Saying',
     b7_url:     'https://www.kabbalahoftime.com/2014/01/week-21-to-keep-things-in-perspective.html' },
   // W22
-  { week:22, parasha:'Mishpatim',                month:'Adar',
+  { week:22, parasha:'Terumah',                month:'Adar',
     b1_theme:   'Complement Each Other in Happiness',
     b1_animal:  'Worm', b1_avot: 'Rabbi Dostai, ben Yanai – one who forgets their Torah knowledge…',
     b2_quality: 'Minimized laughter (Miut Schok)',                 b2_prophet: 'Eliezer ben Dodavahu',
@@ -4062,28 +4140,45 @@ transition: transform 0.3s;
 
     // Card face
     // Helper function to get parasha-specific portion for a Malchut text
-    function getParashaMapping(textName, weekNum) {
+    function getParashaMapping(textName, parashaName) {
       const mapping = {};
       
-      if (textName === 'Tanya' && MALCHUT_PARASHA_MAPPINGS.tanya[weekNum]) {
-        const data = MALCHUT_PARASHA_MAPPINGS.tanya[weekNum];
+      // Get parasha number (1-54) from parasha name
+      const parashaNum = PARASHA_TO_NUMBER[parashaName] || PARASHA_TO_NUMBER[parashaName.split(' / ')[1]];
+      if (!parashaNum) return mapping;
+      
+      if (textName === 'Keter Shem Tov') {
+        // Keter Shem Tov: 2 introductions + 428 chapters = 430 total, 8 items per parasha
+        // Parasha 1 (Bereshit): Intro 1, Intro 2, Ch 1-6
+        // Parasha 2 (Noach): Ch 7-14
+        // Parasha N (N>1): Start = 8N - 9, End = 8N - 2
+        if (parashaNum === 1) {
+          mapping.portion = 'Intro 1, Intro 2, Chapters 1-6';
+        } else {
+          const startChapter = 8 * parashaNum - 9;
+          const endChapter = 8 * parashaNum - 2;
+          mapping.portion = `Chapters ${startChapter}-${endChapter}`;
+        }
+      }
+      else if (textName === 'Tanya' && MALCHUT_PARASHA_MAPPINGS.tanya[parashaNum]) {
+        const data = MALCHUT_PARASHA_MAPPINGS.tanya[parashaNum];
         mapping.portion = data.chapter === "Intro" ? "Introduction" : `Chapter ${data.chapter}`;
         mapping.theme = data.theme;
       }
-      else if (textName === 'Likutei Moharan' && MALCHUT_PARASHA_MAPPINGS.likuteiMoharan[weekNum]) {
-        const data = MALCHUT_PARASHA_MAPPINGS.likuteiMoharan[weekNum];
+      else if (textName === 'Likutei Moharan' && MALCHUT_PARASHA_MAPPINGS.likuteiMoharan[parashaNum]) {
+        const data = MALCHUT_PARASHA_MAPPINGS.likuteiMoharan[parashaNum];
         mapping.portion = `Lesson ${data.lesson}`;
         mapping.theme = data.theme;
       }
       else if (textName === 'Mesilat Yesharim') {
-        // Mesilat Yesharim: find which chapter covers this week
-        for (let chNum in MALCHUT_PARASHA_MAPPINGS.mesilatYesharim) {
-          const entry = MALCHUT_PARASHA_MAPPINGS.mesilatYesharim[chNum];
-          if (chNum == weekNum || (parseInt(chNum) === weekNum)) {
-            mapping.portion = entry.chapter === "Intro" ? "Introduction" : `Chapter ${entry.chapter}`;
-            mapping.parshiyot = entry.parshiyot;
-            break;
-          }
+        // Mesilat Yesharim: 27 chapters, follows natural Torah order (Bereshit to VeZot HaBrachah)
+        // Map parasha number (1-54) to chapter (1-27): chapter = ceil(parashaNum / 2)
+        const chapterNum = Math.ceil(parashaNum / 2);
+        const entry = MALCHUT_PARASHA_MAPPINGS.mesilatYesharim[chapterNum];
+        if (entry) {
+          mapping.portion = entry.chapter === "Intro" ? "Introduction" : `Chapter ${entry.chapter}`;
+          mapping.parshiyot = entry.parshiyot;
+          mapping.theme = entry.theme;
         }
       }
       
@@ -4094,7 +4189,7 @@ transition: transform 0.3s;
       `Day ${sef.dayNum} · ${malTxt.day}`;
     
     // Get parasha-specific portion if available
-    const parashaMapping = getParashaMapping(malTxt.name, wk.week);
+    const parashaMapping = getParashaMapping(malTxt.name, wk.parasha);
     let mainText = `<strong>${malTxt.name}</strong>`;
     if (parashaMapping.portion) {
       mainText += ` — ${parashaMapping.portion}`;
@@ -4108,7 +4203,7 @@ transition: transform 0.3s;
     // Show theme if available
     let subText = `${malTxt.author}`;
     if (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]')) {
-      subText += `<br><span style="font-size:11px;color:var(--ink-soft);font-style:italic">${parashaMapping.theme}</span>`;
+      subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
     }
     
     document.getElementById('malchut-sub').innerHTML = subText;
@@ -4146,6 +4241,24 @@ transition: transform 0.3s;
     // Full 7-day week for context
     const weekRows = DAY_BOOKS.map((db, i) => {
       const isCurrent = (i + 1) === sef.dayNum;
+      const textName = TEXTS[i];
+      
+      // Get parasha-specific portion and theme for this text
+      const mapping = getParashaMapping(textName, wk.parasha);
+      let displayName = textName;
+      if (mapping.portion) {
+        displayName += ` — ${mapping.portion}`;
+        if (mapping.parshiyot) {
+          displayName += ` (${mapping.parshiyot.join(' / ')})`;
+        }
+      }
+      
+      // Add theme below text name if available
+      let themeHTML = '';
+      if (mapping.theme && !mapping.theme.includes('[To be mapped]')) {
+        themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${mapping.theme}</div>`;
+      }
+      
       const fieldLines = db.fields.map(f =>
         `<div class="mal-field">` +
           `<span class="mal-field-label">${f.label}</span>` +
@@ -4155,7 +4268,7 @@ transition: transform 0.3s;
       return `<div class="mal-book-row${isCurrent ? ' mal-today' : ''}">` +
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[i]}</span>` +
-          `<span class="mal-text-name">${TEXTS[i]}</span>` +
+          `<span class="mal-text-name">${displayName}${themeHTML}</span>` +
           `<span class="mal-book-label">${db.emoji} ${db.book}</span>` +
         `</div>` +
         `<div class="mal-fields">${fieldLines}</div>` +
