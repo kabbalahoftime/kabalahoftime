@@ -3841,16 +3841,17 @@ transition: transform 0.3s;
 
     // 4. Rambam  
     document.getElementById('keter-rambam-main').innerHTML =
-      `<a href="${chabadBaseURL}/rambam_cdo/aid/682956/jewish/Rambam.htm" target="_blank" style="color:var(--gold)">` +
+      `<a href="https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters/3" target="_blank" style="color:var(--gold)">` +
       `View today's Rambam (3 chapters) ↗</a>`;
     document.getElementById('keter-rambam-meta').innerHTML =
       `<strong>Rambam</strong> · Mishneh Torah · 3 chapters/day`;
 
     // Chok L'Yisrael (both versions on one line)
+    const kolhalashonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
     document.getElementById('keter-chok-main').innerHTML =
-      `<a href="https://www.sefaria.org/Chok_L'Yisrael" target="_blank" style="color:var(--gold)">` +
+      `<a href="https://www.kolhalashon.com/en/regularSite/searchResults/94/21/%D7%97%D7%95%D7%A7%20%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C?urlFilters=2:683%7C&date=${kolhalashonDate}" target="_blank" style="color:var(--gold)">` +
       `Chok L'Yisrael ↗</a> / ` +
-      `<a href="https://www.breslov.org/learning/chok-lyisrael-breslov" target="_blank" style="color:var(--gold)">` +
+      `<a href="https://breslov.org/the-day-by-day-audio-podcasts-2/" target="_blank" style="color:var(--gold)">` +
       `Chok Breslov ↗</a>`;
     document.getElementById('keter-chok-meta').innerHTML =
       `Torah, Prophets, Writings, Midrash, Zohar (+ Breslov teachings)`;
