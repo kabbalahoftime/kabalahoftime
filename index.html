@@ -4089,7 +4089,7 @@ transition: transform 0.3s;
       // KoT Days: 1=Fri→Book1, 2=Shab→Book2, 3=Sun→Book3, 4=Mon→Book4, 5=Tue→Book5, 6=Wed→Book6, 7=Thu→Book7
       { book: 'Book 1 · Song of Nature',        emoji: '🐾',
         fields: [{ label: 'Weekly Theme',      value: wk.b1_theme },
-                 { label: 'Perek Shirah',      value: (() => { const ps = PEREK_SHIRAH_VERSES[wk.b1_animal]; return ps ? wk.b1_animal + ' (' + ps[0] + ') — ' + ps[1] : wk.b1_animal; })() },
+                 { label: 'Perek Shirah',      value: wk.b1_animal },
                  { label: 'Pirkei Avot',       value: wk.b1_avot }] },
       { book: 'Book 2 · Song of Moses',        emoji: '📜',
         fields: [
