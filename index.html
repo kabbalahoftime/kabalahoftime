@@ -3798,7 +3798,7 @@ transition: transform 0.3s;
     document.getElementById('gregorian-date').textContent =
       `${dowName}, ${MONTHS[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
     document.getElementById('day-indicator').textContent =
-      `Last Night: Day ${d} · Tonight Begins: Day ${d + 1}`;
+      `Today, ${dowName}, is Day ${d}`;
 
     // Keter — Chabad Daily Learning
     const hDate  = gregToHebrew(date);
