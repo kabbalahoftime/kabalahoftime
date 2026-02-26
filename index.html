@@ -1754,17 +1754,13 @@ transition: transform 0.3s;
   const BRESLOV_PODCAST_URL = 'https://podcasts.apple.com/us/podcast/a-daily-dose-of-rebbe-nachman-by-breslov-research-institute/id1663247338';
   async function fetchBresloveEpisodeUrl(hDay, hMonth) {
     const monthName = HEB_MONTH_EN_PODCAST[hMonth] || '';
-    const dayOrd = toOrdinal(hDay);
     const pattern = new RegExp(`${hDay}(?:st|nd|rd|th)\\s+of\\s+${monthName}`, 'i');
-    // Use the Search API (searches full catalog, not just recent N episodes)
-    // then filter client-side by collection ID 1663247338
-    const q = encodeURIComponent(`${dayOrd} of ${monthName}`);
     try {
-      const resp = await fetch(`https://itunes.apple.com/search?term=${q}&media=podcast&entity=podcastEpisode&limit=25`);
+      const resp = await fetch(`https://itunes.apple.com/lookup?id=1663247338&entity=podcastEpisode&limit=365`);
       if (!resp.ok) return BRESLOV_PODCAST_URL;
       const data = await resp.json();
       const ep = (data.results || []).find(e =>
-        e.collectionId === 1663247338 && pattern.test(e.trackName)
+        e.kind === 'podcast-episode' && pattern.test(e.trackName)
       );
       return ep && ep.trackViewUrl ? ep.trackViewUrl : BRESLOV_PODCAST_URL;
     } catch(e) { return BRESLOV_PODCAST_URL; }
