@@ -1741,6 +1741,29 @@ transition: transform 0.3s;
     "6-25": "The world was created on 25 Elul — creation begins with a single point.",
   };
 
+  // Hebrew month names in English for Breslov podcast episode lookup
+  const HEB_MONTH_EN_PODCAST = {
+    7:'Tishrei',8:'Cheshvan',9:'Kislev',10:'Tevet',
+    11:'Shevat',12:'Adar',13:'Adar II',
+    1:'Nisan',2:'Iyar',3:'Sivan',4:'Tammuz',5:'Av',6:'Elul'
+  };
+  function toOrdinal(n) {
+    const s = ['th','st','nd','rd'], v = n % 100;
+    return n + (s[(v-20)%10] || s[v] || s[0]);
+  }
+  const BRESLOV_PODCAST_URL = 'https://podcasts.apple.com/us/podcast/a-daily-dose-of-rebbe-nachman-by-breslov-research-institute/id1663247338';
+  async function fetchBresloveEpisodeUrl(hDay, hMonth) {
+    const monthName = HEB_MONTH_EN_PODCAST[hMonth] || '';
+    const pattern = new RegExp(`${hDay}(?:st|nd|rd|th)\\s+of\\s+${monthName}`, 'i');
+    try {
+      const resp = await fetch('https://itunes.apple.com/lookup?id=1663247338&entity=podcastEpisode&limit=200');
+      if (!resp.ok) return BRESLOV_PODCAST_URL;
+      const data = await resp.json();
+      const ep = (data.results || []).find(e => e.kind === 'podcast-episode' && pattern.test(e.trackName));
+      return ep && ep.trackViewUrl ? ep.trackViewUrl : BRESLOV_PODCAST_URL;
+    } catch(e) { return BRESLOV_PODCAST_URL; }
+  }
+
   function getHayomYom(hm, hd) {
     return HAYOM_YOM[`${hm}-${hd}`] || null;
   }
@@ -3851,8 +3874,12 @@ transition: transform 0.3s;
     document.getElementById('keter-chok-main').innerHTML =
       `<a href="https://www.kolhalashon.com/en/regularSite/searchResults/94/21/%D7%97%D7%95%D7%A7%20%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C?urlFilters=2:683%7C&date=${kolhalashonDate}" target="_blank" style="color:var(--gold)">` +
       `Chok L'Yisrael ↗</a> / ` +
-      `<a href="https://breslov.org/the-day-by-day-audio-podcasts-2/" target="_blank" style="color:var(--gold)">` +
+      `<a id="chok-breslov-link" href="${BRESLOV_PODCAST_URL}" target="_blank" style="color:var(--gold)">` +
       `Chok Breslov ↗</a>`;
+    fetchBresloveEpisodeUrl(hDay, hMonth).then(url => {
+      const el = document.getElementById('chok-breslov-link');
+      if (el) el.href = url;
+    });
     document.getElementById('keter-chok-meta').innerHTML =
       `Torah, Prophets, Writings, Midrash, Zohar (+ Breslov teachings)`;
 
