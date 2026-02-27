@@ -1,5 +1,5 @@
 // Service Worker for Kabbalah of Time PWA
-const CACHE_NAME = 'kabbalah-of-time-v2';
+const CACHE_NAME = 'kabbalah-of-time-v3';
 const urlsToCache = [
   '/',
   '/index.html',
