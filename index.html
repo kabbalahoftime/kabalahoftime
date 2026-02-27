@@ -1754,30 +1754,18 @@ transition: transform 0.3s;
   const BRESLOV_PODCAST_URL = 'https://podcasts.apple.com/us/podcast/a-daily-dose-of-rebbe-nachman-by-breslov-research-institute/id1663247338';
   async function fetchBresloveEpisodeUrl(hDay, hMonth) {
     const monthName = HEB_MONTH_EN_PODCAST[hMonth] || '';
-    // Match "9th of Adar", "9 of Adar", "9 Adar", or "Adar 9" — ordinal suffix and "of" are optional
-    const pattern = new RegExp(
-      `(?:\\b${hDay}(?:st|nd|rd|th)?\\s+(?:of\\s+)?${monthName}\\b)|(?:\\b${monthName}\\s+${hDay}\\b)`, 'i'
-    );
+    // Episodes are titled "All 10 Day-by-Day Books - 9 of Adar" (published 2023, no ordinal suffix)
+    const pattern = new RegExp(`\\b${hDay}\\s+of\\s+${monthName}\\b`, 'i');
     function epUrl(ep) {
       if (!ep) return null;
       if (ep.trackViewUrl) return ep.trackViewUrl;
       if (ep.trackId) return `https://podcasts.apple.com/us/podcast/id1663247338?i=${ep.trackId}`;
       return null;
     }
-    // Try Lookup API first
+    // Search API finds episodes regardless of age (episodes are from 2023, beyond Lookup API range)
     try {
-      const resp = await fetch(`https://itunes.apple.com/lookup?id=1663247338&entity=podcastEpisode&limit=365`);
-      if (resp.ok) {
-        const data = await resp.json();
-        const ep = (data.results || []).find(e => e.kind === 'podcast-episode' && pattern.test(e.trackName));
-        const url = epUrl(ep);
-        if (url) return url;
-      }
-    } catch(e) {}
-    // Fallback: Search API
-    try {
-      const term = encodeURIComponent(`${toOrdinal(hDay)} of ${monthName}`);
-      const resp = await fetch(`https://itunes.apple.com/search?term=${term}&entity=podcastEpisode&limit=25`);
+      const term = encodeURIComponent(`All 10 Day-by-Day Books ${hDay} of ${monthName}`);
+      const resp = await fetch(`https://itunes.apple.com/search?term=${term}&entity=podcastEpisode&limit=5`);
       if (resp.ok) {
         const data = await resp.json();
         const ep = (data.results || []).find(e =>
