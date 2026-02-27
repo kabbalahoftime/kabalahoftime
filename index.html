@@ -1752,7 +1752,18 @@ transition: transform 0.3s;
     return n + (s[(v-20)%10] || s[v] || s[0]);
   }
   const BRESLOV_PODCAST_URL = 'https://listen.jewishpodcasts.fm/breslovresearchinstitue';
+  // Google Drive recordings for gap dates not on the jewishpodcasts.fm feed.
+  // Keys use "month-day" (Hebrew month number - Hebrew day), same format as HAYOM_YOM.
+  // Gap 1: 1 Cheshvan (8-1) through 14 Shvat (11-14)
+  // Gap 2: 11 Adar (12-11) through 1 Nisan (1-1)
+  const BRESLOV_GAP_EPISODES = {
+    "12-11": "https://drive.google.com/file/d/1ljhq6o1xGq4sa3q4RQIfG9zp5JctR1ZF/view",
+  };
+  const BRESLOV_GAP_FOLDER = 'https://drive.google.com/drive/folders/1F5vjw3voAVo3ImvMV2LPHsSq76gxz3NT';
   async function fetchBresloveEpisodeUrl(hDay, hMonth) {
+    // Check local Google Drive recordings for gap dates first
+    const gapKey = `${hMonth}-${hDay}`;
+    if (BRESLOV_GAP_EPISODES[gapKey]) return BRESLOV_GAP_EPISODES[gapKey];
     const monthName = HEB_MONTH_EN_PODCAST[hMonth] || '';
     // Episodes are titled "All 10 Day-by-Day Books - 9 of Adar"
     const pattern = new RegExp(`\\b${hDay}\\s+of\\s+${monthName}\\b`, 'i');
@@ -1774,7 +1785,15 @@ transition: transform 0.3s;
         }
       }
     } catch(e) {}
-    return BRESLOV_PODCAST_URL;
+    // For gap date ranges, fall back to the Drive folder; otherwise to the show page.
+    // Gap 1: 1 Cheshvan–14 Shvat  |  Gap 2: 11 Adar–1 Nisan
+    const inGap = (hMonth === 12 && hDay >= 11) ||
+                  (hMonth === 1  && hDay === 1)  ||
+                  (hMonth === 8) ||
+                  (hMonth === 9) ||
+                  (hMonth === 10) ||
+                  (hMonth === 11 && hDay <= 14);
+    return inGap ? BRESLOV_GAP_FOLDER : BRESLOV_PODCAST_URL;
   }
 
   function getHayomYom(hm, hd) {
