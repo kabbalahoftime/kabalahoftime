@@ -1751,28 +1751,27 @@ transition: transform 0.3s;
     const s = ['th','st','nd','rd'], v = n % 100;
     return n + (s[(v-20)%10] || s[v] || s[0]);
   }
-  const BRESLOV_PODCAST_URL = 'https://podcasts.apple.com/us/podcast/a-daily-dose-of-rebbe-nachman-by-breslov-research-institute/id1663247338';
+  const BRESLOV_PODCAST_URL = 'https://listen.jewishpodcasts.fm/breslovresearchinstitue';
   async function fetchBresloveEpisodeUrl(hDay, hMonth) {
     const monthName = HEB_MONTH_EN_PODCAST[hMonth] || '';
-    // Episodes are titled "All 10 Day-by-Day Books - 9 of Adar" (published 2023, no ordinal suffix)
+    // Episodes are titled "All 10 Day-by-Day Books - 9 of Adar"
     const pattern = new RegExp(`\\b${hDay}\\s+of\\s+${monthName}\\b`, 'i');
-    function epUrl(ep) {
-      if (!ep) return null;
-      if (ep.trackViewUrl) return ep.trackViewUrl;
-      if (ep.trackId) return `https://podcasts.apple.com/us/podcast/id1663247338?i=${ep.trackId}`;
-      return null;
-    }
-    // Search API finds episodes regardless of age (episodes are from 2023, beyond Lookup API range)
+    // Try jewishpodcasts.fm RSS feed first
     try {
-      const term = encodeURIComponent(`All 10 Day-by-Day Books ${hDay} of ${monthName}`);
-      const resp = await fetch(`https://itunes.apple.com/search?term=${term}&entity=podcastEpisode&limit=5`);
+      const resp = await fetch('https://rss.jewishpodcasts.fm/rss/548');
       if (resp.ok) {
-        const data = await resp.json();
-        const ep = (data.results || []).find(e =>
-          e.kind === 'podcast-episode' && e.collectionId === 1663247338 && pattern.test(e.trackName)
-        );
-        const url = epUrl(ep);
-        if (url) return url;
+        const text = await resp.text();
+        const xml = new DOMParser().parseFromString(text, 'text/xml');
+        for (const item of xml.querySelectorAll('item')) {
+          const title = item.querySelector('title')?.textContent || '';
+          if (pattern.test(title)) {
+            // <link> in RSS is a text node sibling, not an attribute
+            const linkNode = item.querySelector('link');
+            const link = linkNode?.textContent?.trim() ||
+                         linkNode?.nextSibling?.nodeValue?.trim() || '';
+            if (link.startsWith('http')) return link;
+          }
+        }
       }
     } catch(e) {}
     return BRESLOV_PODCAST_URL;
