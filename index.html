@@ -4349,6 +4349,9 @@ transition: transform 0.3s;
     currentOffset += delta;
     document.querySelectorAll('.sefirah-card.expanded').forEach(c => c.classList.remove('expanded'));
     render();
+    if (typeof sefaria !== 'undefined') {
+      sefaria.link({ dynamic: true });
+    }
   }
 
   function toggleExpand(card) {
@@ -4384,7 +4387,7 @@ transition: transform 0.3s;
 
 <script type="text/javascript" charset="utf-8" src="https://www.sefaria.org/linker.v3.js"></script>
 <script>
-    sefaria.link();
+    sefaria.link({ dynamic: true });
 </script>
 
 </body>
