@@ -2330,7 +2330,7 @@ transition: transform 0.3s;
   }
 
   // 13-day cycle — enriched with 13 Attributes
-  // Micha's 13 Attributes of Mercy (Micah 7:18-20)
+  // Micha's 13 Attributes of Mercy (Micah 7:18-20) — Cycles 1-13
   const THIRTEEN_ATTRIBUTES = [
     { num: 1,  name: 'Mi-El Kamocha', hebrew: 'מִי אֵ-ל כָּמוֹךָ', meaning: 'Who is a G-d like You (in compassion)' },
     { num: 2,  name: 'Noseh Avon', hebrew: 'נֹשֵׂא עָוֹן', meaning: 'Who bears iniquity' },
@@ -2345,6 +2345,23 @@ transition: transform 0.3s;
     { num: 11, name: 'Chesed Le\'Avraham', hebrew: 'חֶסֶד לְאַבְרָהָם', meaning: 'Kindness to Abraham' },
     { num: 12, name: 'Asher Nishba\'ta La\'avoteinu', hebrew: 'אֲשֶׁר נִשְׁבַּעְתָּ לַאֲבֹתֵינוּ', meaning: 'Which You previously swore to our forefathers' },
     { num: 13, name: 'Mimei Kedem', hebrew: 'מִימֵי קֶדֶם', meaning: 'From the earliest days' }
+  ];
+
+  // Moshe's 13 Attributes of Mercy (Exodus 34:6-7) — Cycles 14-26
+  const MOSHE_THIRTEEN_ATTRIBUTES = [
+    { num: 1,  name: 'Hashem', hebrew: 'יְהוָה', meaning: 'The Lord (first invocation)' },
+    { num: 2,  name: 'Hashem', hebrew: 'יְהוָה', meaning: 'The Lord (second invocation — transcendent mercy)' },
+    { num: 3,  name: 'El', hebrew: 'אֵ-ל', meaning: 'God — mighty and powerful' },
+    { num: 4,  name: 'Rachum', hebrew: 'רַחוּם', meaning: 'Compassionate' },
+    { num: 5,  name: "Ve'chanun", hebrew: 'וְחַנּוּן', meaning: 'Gracious' },
+    { num: 6,  name: 'Erech Apayim', hebrew: 'אֶרֶךְ אַפַּיִם', meaning: 'Slow to anger' },
+    { num: 7,  name: "Ve'rav Chesed", hebrew: 'וְרַב חֶסֶד', meaning: 'Abundant in kindness' },
+    { num: 8,  name: "Ve'emet", hebrew: 'וֶאֱמֶת', meaning: 'And truth' },
+    { num: 9,  name: 'Notzer Chesed', hebrew: 'נֹצֵר חֶסֶד', meaning: 'Keeping kindness' },
+    { num: 10, name: "La'alafim", hebrew: 'לָאֲלָפִים', meaning: 'For thousands of generations' },
+    { num: 11, name: 'Noseh Avon', hebrew: 'נֹשֵׂא עָוֹן', meaning: 'Bearing iniquity' },
+    { num: 12, name: 'Vafeshah', hebrew: 'וָפֶשַׁע', meaning: 'And transgression' },
+    { num: 13, name: "VeChata'ah", hebrew: 'וְחַטָּאָה', meaning: 'And sin' }
   ];
 
   // Nassi (tribal prince) for each day 1-13 within a cycle (based on Rosh Chodesh Nissan order)
@@ -2367,11 +2384,12 @@ transition: transform 0.3s;
   function get13DayInfo(d) {
     const cycle = (d % 13 == 0) ? parseInt(d/13) : 1 + parseInt(d/13);
     const day   = (d % 13 == 0) ? 13 : d % 13;
-    const attr  = THIRTEEN_ATTRIBUTES[day - 1];
+    const isMoshe = cycle >= 14 && cycle <= 26;
+    const attr  = isMoshe ? MOSHE_THIRTEEN_ATTRIBUTES[day - 1] : THIRTEEN_ATTRIBUTES[day - 1];
     const nassi = NASSI_NAMES[day - 1];
-    // Which set of 13: inner (Micah) = first half, outer (Moshe) = second half
-    const setType = cycle <= 14 ? 'Inner — Attributes of Micah' : (cycle <= 26 ? 'Outer — Attributes of Moshe' : 'Inner & Outer — Combined');
-    return { cycle, day, attr, nassi, setType };
+    // Which set of 13: inner (Micah) = first 13 cycles, outer (Moshe) = second 13 cycles
+    const setType = cycle <= 13 ? 'Inner — Attributes of Micah' : (cycle <= 26 ? 'Outer — Attributes of Moshe' : 'Inner & Outer — Combined');
+    return { cycle, day, attr, nassi, setType, isMoshe };
   }
 
   // 41-day cycle — enriched
@@ -4203,8 +4221,9 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 52 weeks</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a></span></div>`;
 
-    // TIFERET — 13-day (Micha's 13 Attributes of Mercy)
-    cards[4].querySelector('.sefirah-cycle-name').textContent = 'Micha\'s 13 Attributes — 13-Day Cycle';
+    // TIFERET — 13-day (Micha's or Moshe's 13 Attributes of Mercy, depending on cycle)
+    const tifCycleName = (cy13.cycle <= 13) ? "Micha's 13 Attributes" : (cy13.cycle <= 26 ? "Moshe's 13 Attributes" : "13 Attributes — Combined");
+    cards[4].querySelector('.sefirah-cycle-name').textContent = `${tifCycleName} — 13-Day Cycle`;
     cards[4].querySelector('.sefirah-main-text').innerHTML =
       `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>: ${cy13.attr.name} <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span>`;
     cards[4].querySelector('.sefirah-sub-text').textContent = cy13.attr.meaning;
@@ -4237,7 +4256,7 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Daily Attribute:</span><span class="detail-value">${cy13.attr.name} — ${cy13.attr.meaning}</span></div>
        <div class="detail-row"><span class="detail-label">Hebrew:</span><span class="detail-value">${cy13.attr.hebrew}</span></div>
        <div class="detail-row"><span class="detail-label">${cycleTheme.split(':')[0]}:</span><span class="detail-value">${cycleTheme.split(':')[1]}</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> — Prophet Micha's vision of Divine mercy</span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value">${cy13.cycle <= 13 ? '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> — Prophet Micha\'s vision of Divine mercy' : cy13.cycle <= 26 ? '<a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a> — Moshe\'s 13 Attributes of Divine mercy' : '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> · <a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a>'}</span></div>
        <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>`;
 
     // NETZACH — 41-day (enriched with soul levels + mivtzah + commandment)
