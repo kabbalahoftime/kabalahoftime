@@ -4052,7 +4052,17 @@ transition: transform 0.3s;
       : `Lesson <strong>${lmLesson}</strong>`;
     document.getElementById('keter-lm-meta').innerHTML =
       `<strong>Likutei Moharan</strong> · Rebbe Nachman of Breslov &nbsp;·&nbsp; ` +
-      `<a href="${seferiaURL}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
+      `<a href="${seferiaURL}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>` +
+      `<br><span style="font-size:11px">` +
+      `<strong style="color:var(--ink-mid)">BreslovTorah.com:</strong> ` +
+      `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I (R. Maimon) ↗</a>` +
+      ` &nbsp;·&nbsp; ` +
+      `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II (R. Maimon) ↗</a>` +
+      ` &nbsp;·&nbsp; ` +
+      `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I (R. Rosenfeld) ↗</a>` +
+      ` &nbsp;·&nbsp; ` +
+      `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II (R. Rosenfeld) ↗</a>` +
+      `</span>`;
 
     // 7. Daf Yomi
     const daf = getDafYomi(date);
