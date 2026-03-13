@@ -4040,29 +4040,36 @@ transition: transform 0.3s;
     document.getElementById('keter-hy-meta').innerHTML =
       `<strong>Hayom Yom</strong> · Rebbe Menachem Mendel Schneerson`;
 
-    // 6. Likutei Moharan
-    const lmLesson = d; // LM lesson matches KoT day number
-    const lmData   = LM_THEMES[lmLesson];
-    const seferiaURL = lmData
+    // 6. Likutei Moharan — Part I = lessons 1–286, Part II (Tinyana) = 287–411
+    const lmLesson       = d;
+    const LM_PART1_COUNT = 286;
+    const isLmPartII     = lmLesson > LM_PART1_COUNT;
+    const lmLessonInPart = isLmPartII ? lmLesson - LM_PART1_COUNT : lmLesson;
+    const lmPartLabel    = isLmPartII ? 'Part II — Tinyana' : 'Part I';
+    const lmData         = LM_THEMES[lmLesson];
+    const seferiaURL     = lmData
       ? lmData.url
-      : `https://www.sefaria.org/Likutei_Moharan.${lmLesson}`;
+      : isLmPartII
+        ? `https://www.sefaria.org/Likutei_Moharan%2C_Part_2.${lmLessonInPart}`
+        : `https://www.sefaria.org/Likutei_Moharan.${lmLesson}`;
+
     document.getElementById('keter-lm-main').innerHTML = lmData
-      ? `Lesson <strong>${lmLesson}</strong> — ${lmData.theme}<br>
+      ? `${lmPartLabel} · Lesson <strong>${lmLessonInPart}</strong> — ${lmData.theme}<br>
          <span style="font-size:11px;color:var(--ink-mid);font-style:italic">${lmData.summary}</span>`
-      : `Lesson <strong>${lmLesson}</strong>`;
+      : `${lmPartLabel} · Lesson <strong>${lmLessonInPart}</strong>`;
+
+    const lmLinkI_Maimon    = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I — R. Maimon ↗</a>`;
+    const lmLinkII_Maimon   = `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Maimon ↗</a>`;
+    const lmLinkI_Rosen     = `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I — R. Rosenfeld ↗</a>`;
+    const lmLinkII_Rosen    = `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Rosenfeld ↗</a>`;
+    const lmBreslovLinks    = isLmPartII
+      ? `${lmLinkII_Maimon} &nbsp;·&nbsp; ${lmLinkII_Rosen}`
+      : `${lmLinkI_Maimon} &nbsp;·&nbsp; ${lmLinkI_Rosen}`;
+
     document.getElementById('keter-lm-meta').innerHTML =
       `<strong>Likutei Moharan</strong> · Rebbe Nachman of Breslov &nbsp;·&nbsp; ` +
       `<a href="${seferiaURL}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>` +
-      `<br><span style="font-size:11px">` +
-      `<strong style="color:var(--ink-mid)">BreslovTorah.com:</strong> ` +
-      `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I (R. Maimon) ↗</a>` +
-      ` &nbsp;·&nbsp; ` +
-      `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II (R. Maimon) ↗</a>` +
-      ` &nbsp;·&nbsp; ` +
-      `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I (R. Rosenfeld) ↗</a>` +
-      ` &nbsp;·&nbsp; ` +
-      `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II (R. Rosenfeld) ↗</a>` +
-      `</span>`;
+      `<br><span style="font-size:11px"><strong style="color:var(--ink-mid)">BreslovTorah.com:</strong> ${lmBreslovLinks}</span>`;
 
     // 7. Daf Yomi
     const daf = getDafYomi(date);
