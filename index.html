@@ -4140,7 +4140,7 @@ transition: transform 0.3s;
     const omerDay = ((omerPos - 1) % 7) + 1;
     const weekSef = SEFIROT_NAMES[omerWeek - 1];
     const daySef  = SEFIROT_NAMES[omerDay - 1];
-    const combo   = `${daySef} she'be${weekSef}`;
+    const combo   = `${daySef} she'be${weekSef} she'be${superSef}`;
     // Deeper 7×7×7: which of the 7 "super-cycles" of 49 days (1–7)
     const superCycle = Math.min(omerCycle, 7);
     const superSef   = SEFIROT_NAMES[superCycle - 1];
@@ -4150,12 +4150,13 @@ transition: transform 0.3s;
     document.getElementById('binah-sub').textContent =
       `${daySef} of ${weekSef} — Cycle ${omerCycle}, Week ${omerWeek}, Day ${omerDay}`;
     document.getElementById('binah-tags').innerHTML =
-      `<span class="tag highlight">${weekSef}</span><span class="tag">${daySef}</span><span class="tag">Omer ${omerPos} / Cycle ${omerCycle}</span>`;
+      `<span class="tag highlight">${weekSef}</span><span class="tag">${daySef}</span><span class="tag">${superSef}</span><span class="tag">Omer ${omerPos} / Cycle ${omerCycle}</span>`;
     document.getElementById('binah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Combination:</span><span class="detail-value">${combo}</span></div>
        <div class="detail-row"><span class="detail-label">Week:</span><span class="detail-value">Week ${omerWeek} of 7 — ${weekSef}</span></div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${omerDay} of 7 — ${daySef}</span></div>
        <div class="detail-row"><span class="detail-label">Omer Cycle:</span><span class="detail-value">Cycle ${omerCycle} · Position ${omerPos} of 49</span></div>
+       <div class="detail-row"><span class="detail-label">Cycle Sefirah:</span><span class="detail-value">Cycle ${omerCycle} of 7 — ${superSef}</span></div>
        <div class="detail-row"><span class="detail-label">50 Gates:</span><span class="detail-value">49 Gates of Understanding + 1 (Shavuot / Matan Torah)</span></div>`;
 
     // CHESED — Mishna / Tosefta
