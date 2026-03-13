@@ -3883,6 +3883,53 @@ transition: transform 0.3s;
     return (fix[name] || name).replace(/ /g, '_');
   }
 
+  const DAF_POINTBYPOINT = {
+    'Berakhot':      { folder: 'berachos',  abbrev: 'br' },
+    'Shabbat':       { folder: 'shabbos',   abbrev: 'sh' },
+    'Eruvin':        { folder: 'eruvin',    abbrev: 'ev' },
+    'Pesachim':      { folder: 'pesachim',  abbrev: 'ps' },
+    'Shekalim':      { folder: 'shekalim',  abbrev: 'sk' },
+    'Yoma':          { folder: 'yoma',      abbrev: 'yo' },
+    'Sukkah':        { folder: 'sukah',     abbrev: 'su' },
+    'Beitzah':       { folder: 'beitzah',   abbrev: 'bt' },
+    'Rosh Hashanah': { folder: 'rhashanah', abbrev: 'rh' },
+    'Taanit':        { folder: 'taanis',    abbrev: 'tn' },
+    'Megillah':      { folder: 'megilah',   abbrev: 'mg' },
+    'Moed Katan':    { folder: 'mkatan',    abbrev: 'mo' },
+    'Chagigah':      { folder: 'chagigah',  abbrev: 'cg' },
+    'Yevamot':       { folder: 'yevamos',   abbrev: 'ye' },
+    'Ketubot':       { folder: 'kesuvos',   abbrev: 'ks' },
+    'Nedarim':       { folder: 'nedarim',   abbrev: 'nd' },
+    'Nazir':         { folder: 'nazir',     abbrev: 'nz' },
+    'Sotah':         { folder: 'sotah',     abbrev: 'so' },
+    'Gittin':        { folder: 'gitin',     abbrev: 'gi' },
+    'Kiddushin':     { folder: 'kidushin',  abbrev: 'kd' },
+    'Bava Kamma':    { folder: 'bkama',     abbrev: 'bk' },
+    'Bava Metzia':   { folder: 'bmetzia',   abbrev: 'bm' },
+    'Bava Batra':    { folder: 'bbasra',    abbrev: 'bb' },
+    'Sanhedrin':     { folder: 'sanhedrin', abbrev: 'sn' },
+    'Makkot':        { folder: 'makos',     abbrev: 'ma' },
+    'Shevuot':       { folder: 'shevuos',   abbrev: 'sv' },
+    'Avodah Zarah':  { folder: 'azarah',    abbrev: 'az' },
+    'Horayot':       { folder: 'horayos',   abbrev: 'ho' },
+    'Zevachim':      { folder: 'zevachim',  abbrev: 'zv' },
+    'Menachot':      { folder: 'menachos',  abbrev: 'mn' },
+    'Chulin':        { folder: 'chulin',    abbrev: 'ch' },
+    'Bekhorot':      { folder: 'bechoros',  abbrev: 'be' },
+    'Arakhin':       { folder: 'erchin',    abbrev: 'er' },
+    'Temurah':       { folder: 'temurah',   abbrev: 'tm' },
+    'Keritot':       { folder: 'kerisus',   abbrev: 'kr' },
+    'Meilah':        { folder: 'meilah',    abbrev: 'ml' },
+    'Niddah':        { folder: 'nidah',     abbrev: 'ni' },
+  };
+
+  function dafPointByPointURL(name, daf) {
+    const m = DAF_POINTBYPOINT[name];
+    if (!m) return null;
+    const dafPadded = String(daf).padStart(3, '0');
+    return `https://www.dafyomi.co.il/${m.folder}/points/${m.abbrev}-ps-${dafPadded}.htm`;
+  }
+
   const SEFARIA_LINK = (url) =>
     `&nbsp;·&nbsp; <a href="${url}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
 
@@ -4017,10 +4064,12 @@ transition: transform 0.3s;
       document.getElementById('keter-daf-main').innerHTML =
         `<strong>${daf.name}</strong>, Daf <strong>${daf.daf}</strong>`;
       const dafSeferiaURL = `https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a`;
+      const dafPBPURL = dafPointByPointURL(daf.name, daf.daf);
       document.getElementById('keter-daf-meta').innerHTML =
         `<strong>Daf Yomi</strong> · Cycle 14 &nbsp;·&nbsp; ` +
         `<a href="${ytSearch}" target="_blank" style="color:var(--gold)">MDY Shiur ↗</a>` +
-        SEFARIA_LINK(dafSeferiaURL);
+        SEFARIA_LINK(dafSeferiaURL) +
+        (dafPBPURL ? `&nbsp;·&nbsp; <a href="${dafPBPURL}" target="_blank" style="color:var(--gold)">Point by Point ↗</a>` : '');
     } else {
       document.getElementById('keter-daf-masechet').textContent = 'Daf Yomi';
       document.getElementById('keter-daf-main').textContent    = 'Cycle 14';
