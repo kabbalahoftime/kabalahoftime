@@ -4038,8 +4038,7 @@ transition: transform 0.3s;
         `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read today's Hayom Yom on Chabad.org ↗</a>`;
     }
     document.getElementById('keter-hy-meta').innerHTML =
-      `<strong>Hayom Yom</strong> · Rebbe Menachem Mendel Schneerson` +
-      ` &nbsp;·&nbsp; <a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus ↗</a>`;
+      `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus ↗</a>`;
 
     // 6. Likutei Moharan — Part I = lessons 1–286, Part II (Tinyana) = 287–411
     const lmLesson       = d;
@@ -4070,7 +4069,7 @@ transition: transform 0.3s;
     document.getElementById('keter-lm-meta').innerHTML =
       `<strong>Likutei Moharan</strong> · Rebbe Nachman of Breslov &nbsp;·&nbsp; ` +
       `<a href="${seferiaURL}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>` +
-      `<br><span style="font-size:11px"><strong style="color:var(--ink-mid)">BreslovTorah.com:</strong> ${lmBreslovLinks}</span>`;
+      `<br><span style="font-size:11px">${lmBreslovLinks}</span>`;
 
     // 7. Daf Yomi
     const daf = getDafYomi(date);
