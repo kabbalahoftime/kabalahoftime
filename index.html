@@ -1258,6 +1258,11 @@ transition: transform 0.3s;
         }
     }
     displayParasha();
+    window.getParashaForDate = function(date) {
+        const shabbat = getNextShabbat(date);
+        const found = findCurrentParasha(formatDate(shabbat));
+        return found ? found.name : null;
+    };
 })();
 </script>
 
@@ -4316,8 +4321,9 @@ transition: transform 0.3s;
     document.getElementById('malchut-cycle-name').textContent =
       `Day ${sef.dayNum} · ${malTxt.day}`;
     
-    // Get parasha-specific portion if available
-    const parashaMapping = getParashaMapping(malTxt.name, wk.parasha);
+    // Get parasha-specific portion if available — use actual Torah reading, not WEEKLY_BOOKS parasha
+    const actualParasha = (window.getParashaForDate && window.getParashaForDate(date)) || wk.parasha;
+    const parashaMapping = getParashaMapping(malTxt.name, actualParasha);
     let mainText = `<strong>${malTxt.name}</strong>`;
     if (parashaMapping.portion) {
       mainText += ` — ${parashaMapping.portion}`;
@@ -4374,7 +4380,7 @@ transition: transform 0.3s;
       const textName = TEXTS[i];
       
       // Get parasha-specific portion and theme for this text
-      const mapping = getParashaMapping(textName, wk.parasha);
+      const mapping = getParashaMapping(textName, actualParasha);
       let displayName = textName;
       if (mapping.portion) {
         displayName += ` — ${mapping.portion}`;
