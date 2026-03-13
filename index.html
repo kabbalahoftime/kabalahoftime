@@ -4157,10 +4157,10 @@ transition: transform 0.3s;
     const omerDay = ((omerPos - 1) % 7) + 1;
     const weekSef = SEFIROT_NAMES[omerWeek - 1];
     const daySef  = SEFIROT_NAMES[omerDay - 1];
-    const combo   = `${daySef} she'be${weekSef} she'be${superSef}`;
     // Deeper 7×7×7: which of the 7 "super-cycles" of 49 days (1–7)
     const superCycle = Math.min(omerCycle, 7);
     const superSef   = SEFIROT_NAMES[superCycle - 1];
+    const combo   = `${daySef} she'be${weekSef} she'be${superSef}`;
     document.getElementById('binah-cycle-name').textContent = 'Sefirot — 7×7×7 Omer Cycle';
     document.getElementById('binah-main').innerHTML =
       `<strong>${combo}</strong>`;
