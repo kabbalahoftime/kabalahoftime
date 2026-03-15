@@ -3859,6 +3859,47 @@ transition: transform 0.3s;
     return WEEKLY_BOOKS[idx];
   }
 
+  // ── ZOHAR FOLIO CALCULATOR ──
+  // Mantua edition folio ranges by Torah book (each book resets to 1, except
+  // Bamidbar/Dvarim which share Vol. 3 continuous numbering: 117-259 / 260-299)
+  const ZOHAR_BOOKS = [
+    { name: 'Bereshit', sefaria: 'Bereshit', folios: 251, folioStart: 1   },
+    { name: 'Shemot',   sefaria: 'Shemot',   folios: 269, folioStart: 1   },
+    { name: 'Vayikra',  sefaria: 'Vayikra',  folios: 115, folioStart: 1   },
+    { name: 'Bamidbar', sefaria: 'Bamidbar', folios: 143, folioStart: 117 },
+    { name: 'Dvarim',   sefaria: 'Devarim',  folios: 40,  folioStart: 260 },
+  ];
+  const ZOHAR_TOTAL = 818; // 251 + 269 + 115 + 143 + 40
+
+  function getZoharReading(weekNum) {
+    // Distribute all 818 dafim evenly over 52 weeks; Week 1 = Bereshit 1a
+    const startCum = Math.round((weekNum - 1) * ZOHAR_TOTAL / 52); // 0-indexed
+    const endCum   = Math.min(Math.round(weekNum * ZOHAR_TOTAL / 52) - 1, ZOHAR_TOTAL - 1);
+
+    function resolveBook(cumIdx) {
+      let offset = 0;
+      for (const b of ZOHAR_BOOKS) {
+        if (cumIdx < offset + b.folios) {
+          return { book: b, folio: cumIdx - offset + b.folioStart };
+        }
+        offset += b.folios;
+      }
+      const last = ZOHAR_BOOKS[ZOHAR_BOOKS.length - 1];
+      return { book: last, folio: last.folioStart + last.folios - 1 };
+    }
+
+    const start = resolveBook(startCum);
+    const end   = resolveBook(endCum);
+
+    const seferiaUrl = `https://www.sefaria.org/Zohar,_${start.book.sefaria}.${start.folio}`;
+
+    const portionText = (start.book === end.book)
+      ? `${start.book.name}, Daf ${start.folio}–${end.folio}`
+      : `${start.book.name} Daf ${start.folio} – ${end.book.name} Daf ${end.folio}`;
+
+    return { portionText, seferiaUrl };
+  }
+
   function getMalchutText(kotDay) {
     // kotDay 1–7, Day 1 = KoT week starts Friday eve
     // Map to 0-indexed MALCHUT_TEXTS array
@@ -3952,6 +3993,9 @@ transition: transform 0.3s;
     `&nbsp;·&nbsp; <a href="${url}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
 
   function malchutSeferiaUrl(textName, mapping) {
+    if (textName === 'Chidah (Zohar / Arizal)') {
+      return mapping._zoharUrl || null;
+    }
     if (!mapping.portion) return null;
     if (textName === 'Tanya') {
       if (mapping.portion === 'Introduction') return 'https://www.sefaria.org/Tanya';
@@ -4401,7 +4445,12 @@ transition: transform 0.3s;
           mapping.theme = entry.theme;
         }
       }
-      
+      else if (textName === 'Chidah (Zohar / Arizal)') {
+        const zr = getZoharReading(sef.weekNum);
+        mapping.portion = zr.portionText;
+        mapping._zoharUrl = zr.seferiaUrl;
+      }
+
       return mapping;
     }
 
