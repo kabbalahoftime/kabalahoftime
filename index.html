@@ -4145,6 +4145,9 @@ transition: transform 0.3s;
       const m = mapping.portion.match(/Lesson (\d+)/);
       if (m) return `https://www.sefaria.org/Likutei_Moharan.${m[1]}`;
     }
+    if (textName === 'Keter Shem Tov') {
+      return 'https://www.sefaria.org/Keter_Shem_Tov';
+    }
     return null;
   }
 
@@ -4559,6 +4562,7 @@ transition: transform 0.3s;
           const endChapter = 8 * parashaNum - 2;
           mapping.portion = `Chapters ${startChapter}-${endChapter}`;
         }
+        mapping._kehotUrl = 'https://store.kehotonline.com/mobile/prodinfo.asp?number=HBS-KESSST';
       }
       else if (textName === 'Tanya' && MALCHUT_PARASHA_MAPPINGS.tanya[parashaNum]) {
         const data = MALCHUT_PARASHA_MAPPINGS.tanya[parashaNum];
@@ -4646,6 +4650,9 @@ transition: transform 0.3s;
       if (malchutUrl) {
         const linkLabel = parashaMapping._noamLinkLabel || 'Read on Sefaria ↗';
         subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${linkLabel}</a>`;
+      }
+      if (parashaMapping._kehotUrl) {
+        subText += `&nbsp;·&nbsp; <a href="${parashaMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
       }
       if (parashaMapping._noamNote) {
         subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping._noamNote}</span>`;
