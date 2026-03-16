@@ -3871,10 +3871,20 @@ transition: transform 0.3s;
   ];
   const ZOHAR_TOTAL = 818; // 251 + 269 + 115 + 143 + 40
 
+  // Sefer Yetzirah — 6 chapters, one per day for the last 6 days of the KoT year (Week 52, Days 2-7)
+  const SEFER_YETZIRAH_CHAPTERS = [
+    { ch: 1, theme: 'The 32 paths of wisdom — Sefirot and letters' },
+    { ch: 2, theme: 'The 22 letters — three groups of creation' },
+    { ch: 3, theme: 'The three Mothers — Alef, Mem, Shin' },
+    { ch: 4, theme: 'The seven Doubles — Bet, Gimel, Dalet, Kaf, Peh, Resh, Tav' },
+    { ch: 5, theme: 'The twelve Simples — twelve dimensions of the world' },
+    { ch: 6, theme: 'The seal of creation — covenant of Avraham Avinu' },
+  ];
+
   function getZoharReading(weekNum) {
-    // Distribute all 818 dafim evenly over 52 weeks; Week 1 = Bereshit 1a
-    const startCum = Math.round((weekNum - 1) * ZOHAR_TOTAL / 52); // 0-indexed
-    const endCum   = Math.min(Math.round(weekNum * ZOHAR_TOTAL / 52) - 1, ZOHAR_TOTAL - 1);
+    // 16 dafim per week; weeks 1-51 = dafim 1-816, week 52 = remaining 2 (817-818)
+    const startCum = (weekNum - 1) * 16;
+    const endCum   = Math.min(weekNum * 16 - 1, ZOHAR_TOTAL - 1);
 
     function resolveBook(cumIdx) {
       let offset = 0;
@@ -4345,6 +4355,8 @@ transition: transform 0.3s;
     // ── MALCHUT — Daily text (Day 1–7) each paired with its KoT Book
     const malTxt = getMalchutText(sef.dayNum);
     const wk = getWeeklyData(sef.weekNum);
+    const isSeferYetzirahDay = sef.weekNum === 52 && sef.dayNum >= 2;
+    const syChapter = isSeferYetzirahDay ? SEFER_YETZIRAH_CHAPTERS[sef.dayNum - 2] : null;
 
     // Each KoT day = one daily text = one KoT Book
     // Shown on card face: today's text name + book label + first content line
@@ -4454,29 +4466,36 @@ transition: transform 0.3s;
       return mapping;
     }
 
-    document.getElementById('malchut-cycle-name').textContent =
-      `Day ${sef.dayNum} · ${malTxt.day}`;
+    document.getElementById('malchut-cycle-name').textContent = isSeferYetzirahDay
+      ? `Day ${sef.dayNum} · End of Year`
+      : `Day ${sef.dayNum} · ${malTxt.day}`;
     
     // Get parasha-specific portion if available — use actual Torah reading, not WEEKLY_BOOKS parasha
     const actualParasha = (window.getParashaForDate && window.getParashaForDate(date)) || wk.parasha;
     const parashaMapping = getParashaMapping(malTxt.name, actualParasha);
-    let mainText = `<strong>${malTxt.name}</strong>`;
-    if (parashaMapping.portion) {
-      mainText += ` — ${parashaMapping.portion}`;
-      if (parashaMapping.parshiyot) {
-        mainText += ` (${parashaMapping.parshiyot.join(' / ')})`;
+    let mainText, subText;
+    if (isSeferYetzirahDay) {
+      mainText = `<strong>Sefer Yetzirah</strong> — Chapter ${syChapter.ch}`;
+      subText  = `R. Avraham bar Chiyya / R. Saadiah Gaon / Various`;
+      subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${syChapter.theme}</span>`;
+      subText += SEFARIA_LINK(`https://www.sefaria.org/Sefer_Yetzirah.${syChapter.ch}`);
+    } else {
+      mainText = `<strong>${malTxt.name}</strong>`;
+      if (parashaMapping.portion) {
+        mainText += ` — ${parashaMapping.portion}`;
+        if (parashaMapping.parshiyot) {
+          mainText += ` (${parashaMapping.parshiyot.join(' / ')})`;
+        }
       }
+      subText = `${malTxt.author}`;
+      if (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]')) {
+        subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
+      }
+      const malchutUrl = malchutSeferiaUrl(malTxt.name, parashaMapping);
+      if (malchutUrl) subText += SEFARIA_LINK(malchutUrl);
     }
-    
+
     document.getElementById('malchut-main').innerHTML = mainText;
-    
-    // Show theme if available
-    let subText = `${malTxt.author}`;
-    if (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]')) {
-      subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
-    }
-    const malchutUrl = malchutSeferiaUrl(malTxt.name, parashaMapping);
-    if (malchutUrl) subText += SEFARIA_LINK(malchutUrl);
 
     document.getElementById('malchut-sub').innerHTML = subText;
     document.getElementById('malchut-tags').innerHTML =
@@ -4487,6 +4506,10 @@ transition: transform 0.3s;
     const DAYS_LABELS = ['Friday','Shabbat','Sunday','Monday','Tuesday','Wednesday','Thursday'];
     const TEXTS  = ['Chidah (Zohar / Arizal)','Likutei Sichos','Keter Shem Tov',
                     'Noam Elimelech','Tanya','Likutei Moharan','Mesilat Yesharim'];
+    // For the last week (week 52), days 2-7 display Sefer Yetzirah chapters 1-6
+    const displayTexts = (sef.weekNum === 52)
+      ? ['Chidah (Zohar / Arizal)', ...SEFER_YETZIRAH_CHAPTERS.map(c => `Sefer Yetzirah Ch. ${c.ch}`)]
+      : TEXTS;
 
     // Today's highlighted entry
     const todayMalTxt = getMalchutText(sef.dayNum);
@@ -4503,7 +4526,7 @@ transition: transform 0.3s;
       `<div class="mal-book-row mal-today">` +
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
-          `<span class="mal-text-name">${TEXTS[todayIdx]}</span>` +
+          `<span class="mal-text-name">${displayTexts[todayIdx]}</span>` +
           `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>` +
         `</div>` +
         `<div class="mal-fields">${todayFieldLines}</div>` +
@@ -4513,22 +4536,26 @@ transition: transform 0.3s;
     // Full 7-day week for context
     const weekRows = DAY_BOOKS.map((db, i) => {
       const isCurrent = (i + 1) === sef.dayNum;
-      const textName = TEXTS[i];
-      
-      // Get parasha-specific portion and theme for this text
-      const mapping = getParashaMapping(textName, actualParasha);
+      const textName = displayTexts[i];
+      const syCh = (sef.weekNum === 52 && i >= 1) ? SEFER_YETZIRAH_CHAPTERS[i - 1] : null;
+
       let displayName = textName;
-      if (mapping.portion) {
-        displayName += ` — ${mapping.portion}`;
-        if (mapping.parshiyot) {
-          displayName += ` (${mapping.parshiyot.join(' / ')})`;
-        }
-      }
-      
-      // Add theme below text name if available
       let themeHTML = '';
-      if (mapping.theme && !mapping.theme.includes('[To be mapped]')) {
-        themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${mapping.theme}</div>`;
+      if (syCh) {
+        themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${syCh.theme}</div>`;
+      } else {
+        // Get parasha-specific portion and theme for this text
+        const mapping = getParashaMapping(textName, actualParasha);
+        if (mapping.portion) {
+          displayName += ` — ${mapping.portion}`;
+          if (mapping.parshiyot) {
+            displayName += ` (${mapping.parshiyot.join(' / ')})`;
+          }
+        }
+        // Add theme below text name if available
+        if (mapping.theme && !mapping.theme.includes('[To be mapped]')) {
+          themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${mapping.theme}</div>`;
+        }
       }
       
       const fieldLines = db.fields.map(f =>
