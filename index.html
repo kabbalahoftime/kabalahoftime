@@ -2636,8 +2636,69 @@ transition: transform 0.3s;
            theme: "Fear of Sin - constant awareness of God's presence in all aspects of life" },
       26: { chapter: 25, parshiyot: ["Nitzavim", "Vayelech"], 
            theme: "Acquiring Fear of Sin - recognizing divine control and shared responsibility" },
-      27: { chapter: 26, parshiyot: ["Haazinu", "VeZot HaBrachah"], 
+      27: { chapter: 26, parshiyot: ["Haazinu", "VeZot HaBrachah"],
            theme: "Holiness - highest attainment; transcending physicality, cleaving to God" }
+    },
+
+    // Likutei Sichos (Toras Menachem + Sichos in English)
+    // TM Portion: Bereshit–Vayikra (parshiyot 1–24), chronological study of Rebbe's early leadership
+    // SIE Portion: Tzav–Ha'azinu (parshiyot 25–53), Sichos in English series
+    // VeZot HaBrachah (54) returns to TM 5710 (first year of leadership)
+    likuteiSichos: {
+       1: { series: 'TM', year: 5711 },  // Bereshit
+       2: { series: 'TM', year: 5712 },  // Noach
+       3: { series: 'TM', year: 5713 },  // Lech Lecha
+       4: { series: 'TM', year: 5714 },  // Vayera
+       5: { series: 'TM', year: 5715 },  // Chayei Sarah
+       6: { series: 'TM', year: 5716 },  // Toldot
+       7: { series: 'TM', year: 5717 },  // Vayetzei
+       8: { series: 'TM', year: 5718 },  // Vayishlach
+       9: { series: 'TM', year: 5719 },  // Vayeshev
+      10: { series: 'TM', year: 5720 },  // Miketz
+      11: { series: 'TM', year: 5721 },  // Vayigash
+      12: { series: 'TM', year: 5722 },  // Vayechi
+      13: { series: 'TM', year: 5723 },  // Shemot
+      14: { series: 'TM', year: 5724 },  // Va'eira
+      15: { series: 'TM', year: 5725 },  // Bo
+      16: { series: 'TM', year: 5726 },  // Beshalach
+      17: { series: 'TM', year: 5727 },  // Yitro
+      18: { series: 'TM', year: 5728 },  // Mishpatim
+      19: { series: 'TM', year: 5729 },  // Terumah
+      20: { series: 'TM', year: 5730 },  // Tetzaveh
+      21: { series: 'TM', year: 5731 },  // Ki Tisa
+      22: { series: 'TM', year: 5732 },  // Vayakhel
+      23: { series: 'TM', year: 5733 },  // Pekudei
+      24: { series: 'TM', year: 5734 },  // Vayikra
+      25: { series: 'SIE', year: 5738 }, // Tzav
+      26: { series: 'SIE', year: 5738 }, // Shemini
+      27: { series: 'SIE', year: 5739 }, // Tazria
+      28: { series: 'SIE', year: 5739 }, // Metzora
+      29: { series: 'SIE', year: 5740 }, // Acharei Mot
+      30: { series: 'SIE', year: 5740 }, // Kedoshim
+      31: { series: 'SIE', year: 5741 }, // Emor
+      32: { series: 'SIE', year: 5741 }, // Behar
+      33: { series: 'SIE', year: 5742 }, // Bechukotai
+      34: { series: 'SIE', year: 5742 }, // Bamidbar
+      35: { series: 'SIE', year: 5743 }, // Nasso
+      36: { series: 'SIE', year: 5743 }, // Beha'alotcha
+      37: { series: 'SIE', year: 5744 }, // Shelach
+      38: { series: 'SIE', year: 5744 }, // Korach
+      39: { series: 'SIE', year: 5745 }, // Chukat
+      40: { series: 'SIE', year: 5745 }, // Balak
+      41: { series: 'SIE', year: 5746 }, // Pinchas
+      42: { series: 'SIE', year: 5746 }, // Matot
+      43: { series: 'SIE', year: 5747 }, // Massei
+      44: { series: 'SIE', year: 5747 }, // Devarim
+      45: { series: 'SIE', year: 5748 }, // Va'etchanan
+      46: { series: 'SIE', year: 5748 }, // Ekev
+      47: { series: 'SIE', year: 5749 }, // Re'eh
+      48: { series: 'SIE', year: 5749 }, // Shoftim
+      49: { series: 'SIE', year: 5750 }, // Ki Tetzeh
+      50: { series: 'SIE', year: 5750 }, // Ki Tavo
+      51: { series: 'SIE', year: 5751 }, // Nitzavim
+      52: { series: 'SIE', year: 5751 }, // Vayelech
+      53: { series: 'SIE', year: 5752 }, // Haazinu
+      54: { series: 'TM',  year: 5710 }  // VeZot HaBrachah
     }
   };
 
@@ -4456,6 +4517,14 @@ transition: transform 0.3s;
           mapping.parshiyot = entry.parshiyot;
           mapping.theme = entry.theme;
         }
+      }
+      else if (textName === 'Likutei Sichos' && MALCHUT_PARASHA_MAPPINGS.likuteiSichos[parashaNum]) {
+        const data = MALCHUT_PARASHA_MAPPINGS.likuteiSichos[parashaNum];
+        const seriesName = data.series === 'TM' ? 'Toras Menachem' : 'Sichos in English';
+        mapping.portion = `${seriesName} · ${data.year}`;
+        mapping.theme = data.series === 'TM'
+          ? 'Toras Menachem — Rebbe\'s early years of leadership'
+          : 'Sichos in English series';
       }
       else if (textName === 'Chidah (Zohar / Arizal)') {
         const zr = getZoharReading(sef.weekNum);
