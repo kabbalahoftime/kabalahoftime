@@ -4063,9 +4063,72 @@ transition: transform 0.3s;
   const SEFARIA_LINK = (url) =>
     `&nbsp;·&nbsp; <a href="${url}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
 
+  // Noam Elimelekh Sefaria slugs indexed by parasha number (1–54)
+  // null = no dedicated section in the text; falls back to main page
+  const NE_BOOK_SLUGS = [
+    null,                                   //  0 unused
+    ['Bereshit', 'Bereshit'],               //  1 Bereshit
+    ['Bereshit', 'Noach'],                  //  2 Noach
+    ['Bereshit', 'Lech_Lecha'],             //  3 Lech Lecha
+    ['Bereshit', 'Vayera'],                 //  4 Vayera
+    ['Bereshit', 'Chayye_Sara'],            //  5 Chayei Sarah
+    ['Bereshit', 'Toldot'],                 //  6 Toldot
+    ['Bereshit', 'Vayetzei'],               //  7 Vayetzei
+    ['Bereshit', 'Vayishlach'],             //  8 Vayishlach
+    ['Bereshit', 'Vayeshev'],               //  9 Vayeshev
+    ['Bereshit', 'Miketz'],                 // 10 Miketz
+    ['Bereshit', 'Vayigash'],               // 11 Vayigash
+    ['Bereshit', 'Vayechi'],                // 12 Vayechi
+    ['Shemot',   'Shemot'],                 // 13 Shemot
+    ['Shemot',   'Vaera'],                  // 14 Va'eira
+    ['Shemot',   'Bo'],                     // 15 Bo
+    ['Shemot',   'Beshalach'],              // 16 Beshalach
+    ['Shemot',   'Yitro'],                  // 17 Yitro
+    ['Shemot',   'Mishpatim'],              // 18 Mishpatim
+    ['Shemot',   'Terumah'],                // 19 Terumah
+    ['Shemot',   'Tetzaveh'],               // 20 Tetzaveh
+    ['Shemot',   'Ki_Tisa'],                // 21 Ki Tisa
+    null,                                   // 22 Vayakhel (no dedicated section)
+    ['Shemot',   'Pekudei'],                // 23 Pekudei
+    ['Vayikra',  'Vayikra'],                // 24 Vayikra
+    ['Vayikra',  'Tzav'],                   // 25 Tzav
+    ['Vayikra',  'Shmini'],                 // 26 Shemini
+    ['Vayikra',  'Tazria'],                 // 27 Tazria
+    ['Vayikra',  'Metzora'],                // 28 Metzora
+    ['Vayikra',  'Acharei_Mot'],            // 29 Achrei Mot
+    ['Vayikra',  'Kedoshim'],               // 30 Kedoshim
+    ['Vayikra',  'Emor'],                   // 31 Emor
+    ['Vayikra',  'Behar'],                  // 32 Behar
+    ['Vayikra',  'Bechukotai'],             // 33 Bechukotai
+    ['Bamidbar', 'Bamidbar'],               // 34 Bamidbar
+    ['Bamidbar', 'Nasso'],                  // 35 Nasso
+    ['Bamidbar', "Beha'alotcha"],           // 36 Beha'alotcha
+    ['Bamidbar', "Sh'lach"],               // 37 Shelach
+    ['Bamidbar', 'Korach'],                 // 38 Korach
+    ['Bamidbar', 'Chukat'],                 // 39 Chukat
+    ['Bamidbar', 'Balak'],                  // 40 Balak
+    ['Bamidbar', 'Pinchas'],                // 41 Pinchas
+    ['Bamidbar', 'Matot'],                  // 42 Matot
+    ['Bamidbar', 'Masei'],                  // 43 Massei
+    ['Devarim',  'Devarim'],                // 44 Devarim
+    ['Devarim',  'Vaetchanan'],             // 45 Va'etchanan
+    ['Devarim',  'Eikev'],                  // 46 Ekev
+    ['Devarim',  "Re'eh"],                  // 47 Re'eh
+    ['Devarim',  'Shoftim'],                // 48 Shoftim
+    ['Devarim',  'Ki_Teitzei'],             // 49 Ki Tetzeh
+    ['Devarim',  'Ki_Tavo'],                // 50 Ki Tavo
+    null,                                   // 51 Nitzavim (no dedicated section)
+    null,                                   // 52 Vayelech (no dedicated section)
+    ['Devarim',  "Ha'Azinu"],               // 53 Haazinu
+    null,                                   // 54 VeZot HaBrachah (no dedicated section)
+  ];
+
   function malchutSeferiaUrl(textName, mapping) {
     if (textName === 'Chidah (Zohar / Arizal)') {
       return mapping._zoharUrl || null;
+    }
+    if (textName === 'Noam Elimelech') {
+      return mapping._noamUrl || null;
     }
     if (!mapping.portion) return null;
     if (textName === 'Tanya') {
@@ -4525,6 +4588,12 @@ transition: transform 0.3s;
         mapping.theme = data.series === 'TM'
           ? 'Toras Menachem — Rebbe\'s early years of leadership'
           : 'Sichos in English series';
+      }
+      else if (textName === 'Noam Elimelech') {
+        const entry = NE_BOOK_SLUGS[parashaNum];
+        mapping._noamUrl = entry
+          ? `https://www.sefaria.org/Noam_Elimelekh,_Sefer_${entry[0]},_${entry[1]}`
+          : 'https://www.sefaria.org/Noam_Elimelekh';
       }
       else if (textName === 'Chidah (Zohar / Arizal)') {
         const zr = getZoharReading(sef.weekNum);
