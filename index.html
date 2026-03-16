@@ -4145,6 +4145,12 @@ transition: transform 0.3s;
       const m = mapping.portion.match(/Lesson (\d+)/);
       if (m) return `https://www.sefaria.org/Likutei_Moharan.${m[1]}`;
     }
+    if (textName === 'Keter Shem Tov') {
+      return 'https://www.sefaria.org/Keter_Shem_Tov';
+    }
+    if (textName === 'Likutei Sichos and Toras Menachem') {
+      return mapping._lsUrl || null;
+    }
     return null;
   }
 
@@ -4559,6 +4565,7 @@ transition: transform 0.3s;
           const endChapter = 8 * parashaNum - 2;
           mapping.portion = `Chapters ${startChapter}-${endChapter}`;
         }
+        mapping._kehotUrl = 'https://store.kehotonline.com/mobile/prodinfo.asp?number=HBS-KESSST';
       }
       else if (textName === 'Tanya' && MALCHUT_PARASHA_MAPPINGS.tanya[parashaNum]) {
         const data = MALCHUT_PARASHA_MAPPINGS.tanya[parashaNum];
@@ -4588,6 +4595,13 @@ transition: transform 0.3s;
         mapping.theme = data.series === 'TM'
           ? 'Toras Menachem — Rebbe\'s early years of leadership'
           : 'Sichos in English series';
+        if (data.series === 'TM') {
+          mapping._lsUrl = 'https://www.chabad.org/torah-texts/2988329/Toras-Menachem-Hisvaaduyos';
+          mapping._lsLinkLabel = 'Toras Menachem on Chabad.org ↗';
+        } else {
+          mapping._lsUrl = 'https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm';
+          mapping._lsLinkLabel = 'Sichos in English on Chabad.org ↗';
+        }
       }
       else if (textName === 'Noam Elimelech') {
         const entry = NE_BOOK_SLUGS[parashaNum];
@@ -4644,8 +4658,11 @@ transition: transform 0.3s;
       }
       const malchutUrl = malchutSeferiaUrl(malTxt.name, parashaMapping);
       if (malchutUrl) {
-        const linkLabel = parashaMapping._noamLinkLabel || 'Read on Sefaria ↗';
+        const linkLabel = parashaMapping._noamLinkLabel || parashaMapping._lsLinkLabel || 'Read on Sefaria ↗';
         subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${linkLabel}</a>`;
+      }
+      if (parashaMapping._kehotUrl) {
+        subText += `&nbsp;·&nbsp; <a href="${parashaMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
       }
       if (parashaMapping._noamNote) {
         subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping._noamNote}</span>`;
