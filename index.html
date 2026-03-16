@@ -4117,10 +4117,10 @@ transition: transform 0.3s;
     ['Devarim',  'Shoftim'],                // 48 Shoftim
     ['Devarim',  'Ki_Teitzei'],             // 49 Ki Tetzeh
     ['Devarim',  'Ki_Tavo'],                // 50 Ki Tavo
-    null,                                   // 51 Nitzavim (no dedicated section)
-    null,                                   // 52 Vayelech (no dedicated section)
+    'https://www.sefaria.org/Noam_Elimelekh,_Introduction,_The_Tzetel_Katan', // 51 Nitzavim
+    'https://www.sefaria.org/Noam_Elimelekh,_Additions,_Hanhagot_HaAdam',   // 52 Vayelech
     ['Devarim',  "Ha'Azinu"],               // 53 Haazinu
-    null,                                   // 54 VeZot HaBrachah (no dedicated section)
+    'https://www.sefaria.org/Noam_Elimelekh,_Additions,_A_Prayer_before_Praying', // 54 VeZot HaBrachah
   ];
 
   function malchutSeferiaUrl(textName, mapping) {
@@ -4591,9 +4591,22 @@ transition: transform 0.3s;
       }
       else if (textName === 'Noam Elimelech') {
         const entry = NE_BOOK_SLUGS[parashaNum];
-        mapping._noamUrl = entry
-          ? `https://www.sefaria.org/Noam_Elimelekh,_Sefer_${entry[0]},_${entry[1]}`
-          : 'https://www.sefaria.org/Noam_Elimelekh';
+        if (entry === null) {
+          mapping._noamUrl = 'https://www.sefaria.org/Noam_Elimelekh';
+        } else if (typeof entry === 'string') {
+          mapping._noamUrl = entry;
+        } else {
+          mapping._noamUrl = `https://www.sefaria.org/Noam_Elimelekh,_Sefer_${entry[0]},_${entry[1]}`;
+        }
+        if (parashaNum === 22) {
+          mapping._noamNote = 'Vayakhel — the Parasha of Reb Elimelech\'s passing (21 Adar)';
+        } else if (parashaNum === 51) {
+          mapping._noamLinkLabel = 'Tzetel Katan on Sefaria ↗';
+        } else if (parashaNum === 52) {
+          mapping._noamLinkLabel = 'Hanhagot HaAdam on Sefaria ↗';
+        } else if (parashaNum === 54) {
+          mapping._noamLinkLabel = 'A Prayer before Praying on Sefaria ↗';
+        }
       }
       else if (textName === 'Chidah (Zohar / Arizal)') {
         const zr = getZoharReading(sef.weekNum);
@@ -4630,7 +4643,13 @@ transition: transform 0.3s;
         subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
       }
       const malchutUrl = malchutSeferiaUrl(malTxt.name, parashaMapping);
-      if (malchutUrl) subText += SEFARIA_LINK(malchutUrl);
+      if (malchutUrl) {
+        const linkLabel = parashaMapping._noamLinkLabel || 'Read on Sefaria ↗';
+        subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${linkLabel}</a>`;
+      }
+      if (parashaMapping._noamNote) {
+        subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping._noamNote}</span>`;
+      }
     }
 
     document.getElementById('malchut-main').innerHTML = mainText;
