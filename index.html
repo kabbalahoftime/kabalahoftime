@@ -2636,8 +2636,69 @@ transition: transform 0.3s;
            theme: "Fear of Sin - constant awareness of God's presence in all aspects of life" },
       26: { chapter: 25, parshiyot: ["Nitzavim", "Vayelech"], 
            theme: "Acquiring Fear of Sin - recognizing divine control and shared responsibility" },
-      27: { chapter: 26, parshiyot: ["Haazinu", "VeZot HaBrachah"], 
+      27: { chapter: 26, parshiyot: ["Haazinu", "VeZot HaBrachah"],
            theme: "Holiness - highest attainment; transcending physicality, cleaving to God" }
+    },
+
+    // Likutei Sichos (Toras Menachem + Sichos in English)
+    // TM Portion: Bereshit–Vayikra (parshiyot 1–24), chronological study of Rebbe's early leadership
+    // SIE Portion: Tzav–Ha'azinu (parshiyot 25–53), Sichos in English series
+    // VeZot HaBrachah (54) returns to TM 5710 (first year of leadership)
+    likuteiSichos: {
+       1: { series: 'TM', year: 5711 },  // Bereshit
+       2: { series: 'TM', year: 5712 },  // Noach
+       3: { series: 'TM', year: 5713 },  // Lech Lecha
+       4: { series: 'TM', year: 5714 },  // Vayera
+       5: { series: 'TM', year: 5715 },  // Chayei Sarah
+       6: { series: 'TM', year: 5716 },  // Toldot
+       7: { series: 'TM', year: 5717 },  // Vayetzei
+       8: { series: 'TM', year: 5718 },  // Vayishlach
+       9: { series: 'TM', year: 5719 },  // Vayeshev
+      10: { series: 'TM', year: 5720 },  // Miketz
+      11: { series: 'TM', year: 5721 },  // Vayigash
+      12: { series: 'TM', year: 5722 },  // Vayechi
+      13: { series: 'TM', year: 5723 },  // Shemot
+      14: { series: 'TM', year: 5724 },  // Va'eira
+      15: { series: 'TM', year: 5725 },  // Bo
+      16: { series: 'TM', year: 5726 },  // Beshalach
+      17: { series: 'TM', year: 5727 },  // Yitro
+      18: { series: 'TM', year: 5728 },  // Mishpatim
+      19: { series: 'TM', year: 5729 },  // Terumah
+      20: { series: 'TM', year: 5730 },  // Tetzaveh
+      21: { series: 'TM', year: 5731 },  // Ki Tisa
+      22: { series: 'TM', year: 5732 },  // Vayakhel
+      23: { series: 'TM', year: 5733 },  // Pekudei
+      24: { series: 'TM', year: 5734 },  // Vayikra
+      25: { series: 'SIE', year: 5738 }, // Tzav
+      26: { series: 'SIE', year: 5738 }, // Shemini
+      27: { series: 'SIE', year: 5739 }, // Tazria
+      28: { series: 'SIE', year: 5739 }, // Metzora
+      29: { series: 'SIE', year: 5740 }, // Acharei Mot
+      30: { series: 'SIE', year: 5740 }, // Kedoshim
+      31: { series: 'SIE', year: 5741 }, // Emor
+      32: { series: 'SIE', year: 5741 }, // Behar
+      33: { series: 'SIE', year: 5742 }, // Bechukotai
+      34: { series: 'SIE', year: 5742 }, // Bamidbar
+      35: { series: 'SIE', year: 5743 }, // Nasso
+      36: { series: 'SIE', year: 5743 }, // Beha'alotcha
+      37: { series: 'SIE', year: 5744 }, // Shelach
+      38: { series: 'SIE', year: 5744 }, // Korach
+      39: { series: 'SIE', year: 5745 }, // Chukat
+      40: { series: 'SIE', year: 5745 }, // Balak
+      41: { series: 'SIE', year: 5746 }, // Pinchas
+      42: { series: 'SIE', year: 5746 }, // Matot
+      43: { series: 'SIE', year: 5747 }, // Massei
+      44: { series: 'SIE', year: 5747 }, // Devarim
+      45: { series: 'SIE', year: 5748 }, // Va'etchanan
+      46: { series: 'SIE', year: 5748 }, // Ekev
+      47: { series: 'SIE', year: 5749 }, // Re'eh
+      48: { series: 'SIE', year: 5749 }, // Shoftim
+      49: { series: 'SIE', year: 5750 }, // Ki Tetzeh
+      50: { series: 'SIE', year: 5750 }, // Ki Tavo
+      51: { series: 'SIE', year: 5751 }, // Nitzavim
+      52: { series: 'SIE', year: 5751 }, // Vayelech
+      53: { series: 'SIE', year: 5752 }, // Haazinu
+      54: { series: 'TM',  year: 5710 }  // VeZot HaBrachah
     }
   };
 
@@ -3788,7 +3849,7 @@ transition: transform 0.3s;
   // dayNum 1=Thu→Fri, 2=Fri→Shab, 3=Sat→Sun, 4=Sun→Mon, 5=Mon→Tue, 6=Tue→Wed, 7=Wed→Thu
   const MALCHUT_TEXTS = [
     { name: 'Chidah (Zohar / Arizal)',      author: 'R. Shimon bar Yochai / R. Luria',    shortName: 'Zohar',    day: 'Friday — Erev Shabbat',   desc: 'Mystical depth of the Parasha — the hidden light of Torah' },
-    { name: 'Likutei Sichos',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight' },
+    { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight' },
     { name: 'Keter Shem Tov',      author: 'Baal Shem Tov',                      shortName: 'KST',      day: 'Sunday',                  desc: 'Foundations of Chassidic thought and Divine joy' },
     { name: 'Noam Elimelech',      author: 'R. Elimelech of Lizhensk',           shortName: 'NE',       day: 'Monday',                  desc: 'The Tzadik\'s path: elevating the world through Torah' },
     { name: 'Tanya',               author: 'Alter Rebbe (R. Schneur Zalman)',     shortName: 'Tanya',    day: 'Tuesday',                 desc: 'Likutei Amarim — the Sefer Shel Beinonim' },
@@ -4002,9 +4063,72 @@ transition: transform 0.3s;
   const SEFARIA_LINK = (url) =>
     `&nbsp;·&nbsp; <a href="${url}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
 
+  // Noam Elimelekh Sefaria slugs indexed by parasha number (1–54)
+  // null = no dedicated section in the text; falls back to main page
+  const NE_BOOK_SLUGS = [
+    null,                                   //  0 unused
+    ['Bereshit', 'Bereshit'],               //  1 Bereshit
+    ['Bereshit', 'Noach'],                  //  2 Noach
+    ['Bereshit', 'Lech_Lecha'],             //  3 Lech Lecha
+    ['Bereshit', 'Vayera'],                 //  4 Vayera
+    ['Bereshit', 'Chayye_Sara'],            //  5 Chayei Sarah
+    ['Bereshit', 'Toldot'],                 //  6 Toldot
+    ['Bereshit', 'Vayetzei'],               //  7 Vayetzei
+    ['Bereshit', 'Vayishlach'],             //  8 Vayishlach
+    ['Bereshit', 'Vayeshev'],               //  9 Vayeshev
+    ['Bereshit', 'Miketz'],                 // 10 Miketz
+    ['Bereshit', 'Vayigash'],               // 11 Vayigash
+    ['Bereshit', 'Vayechi'],                // 12 Vayechi
+    ['Shemot',   'Shemot'],                 // 13 Shemot
+    ['Shemot',   'Vaera'],                  // 14 Va'eira
+    ['Shemot',   'Bo'],                     // 15 Bo
+    ['Shemot',   'Beshalach'],              // 16 Beshalach
+    ['Shemot',   'Yitro'],                  // 17 Yitro
+    ['Shemot',   'Mishpatim'],              // 18 Mishpatim
+    ['Shemot',   'Terumah'],                // 19 Terumah
+    ['Shemot',   'Tetzaveh'],               // 20 Tetzaveh
+    ['Shemot',   'Ki_Tisa'],                // 21 Ki Tisa
+    null,                                   // 22 Vayakhel (no dedicated section)
+    ['Shemot',   'Pekudei'],                // 23 Pekudei
+    ['Vayikra',  'Vayikra'],                // 24 Vayikra
+    ['Vayikra',  'Tzav'],                   // 25 Tzav
+    ['Vayikra',  'Shmini'],                 // 26 Shemini
+    ['Vayikra',  'Tazria'],                 // 27 Tazria
+    ['Vayikra',  'Metzora'],                // 28 Metzora
+    ['Vayikra',  'Acharei_Mot'],            // 29 Achrei Mot
+    ['Vayikra',  'Kedoshim'],               // 30 Kedoshim
+    ['Vayikra',  'Emor'],                   // 31 Emor
+    ['Vayikra',  'Behar'],                  // 32 Behar
+    ['Vayikra',  'Bechukotai'],             // 33 Bechukotai
+    ['Bamidbar', 'Bamidbar'],               // 34 Bamidbar
+    ['Bamidbar', 'Nasso'],                  // 35 Nasso
+    ['Bamidbar', "Beha'alotcha"],           // 36 Beha'alotcha
+    ['Bamidbar', "Sh'lach"],               // 37 Shelach
+    ['Bamidbar', 'Korach'],                 // 38 Korach
+    ['Bamidbar', 'Chukat'],                 // 39 Chukat
+    ['Bamidbar', 'Balak'],                  // 40 Balak
+    ['Bamidbar', 'Pinchas'],                // 41 Pinchas
+    ['Bamidbar', 'Matot'],                  // 42 Matot
+    ['Bamidbar', 'Masei'],                  // 43 Massei
+    ['Devarim',  'Devarim'],                // 44 Devarim
+    ['Devarim',  'Vaetchanan'],             // 45 Va'etchanan
+    ['Devarim',  'Eikev'],                  // 46 Ekev
+    ['Devarim',  "Re'eh"],                  // 47 Re'eh
+    ['Devarim',  'Shoftim'],                // 48 Shoftim
+    ['Devarim',  'Ki_Teitzei'],             // 49 Ki Tetzeh
+    ['Devarim',  'Ki_Tavo'],                // 50 Ki Tavo
+    'https://www.sefaria.org/Noam_Elimelekh,_Introduction,_The_Tzetel_Katan', // 51 Nitzavim
+    'https://www.sefaria.org/Noam_Elimelekh,_Additions,_Hanhagot_HaAdam',   // 52 Vayelech
+    ['Devarim',  "Ha'Azinu"],               // 53 Haazinu
+    'https://www.sefaria.org/Noam_Elimelekh,_Additions,_A_Prayer_before_Praying', // 54 VeZot HaBrachah
+  ];
+
   function malchutSeferiaUrl(textName, mapping) {
     if (textName === 'Chidah (Zohar / Arizal)') {
       return mapping._zoharUrl || null;
+    }
+    if (textName === 'Noam Elimelech') {
+      return mapping._noamUrl || null;
     }
     if (!mapping.portion) return null;
     if (textName === 'Tanya') {
@@ -4457,6 +4581,33 @@ transition: transform 0.3s;
           mapping.theme = entry.theme;
         }
       }
+      else if (textName === 'Likutei Sichos and Toras Menachem' && MALCHUT_PARASHA_MAPPINGS.likuteiSichos[parashaNum]) {
+        const data = MALCHUT_PARASHA_MAPPINGS.likuteiSichos[parashaNum];
+        const seriesName = data.series === 'TM' ? 'Toras Menachem' : 'Sichos in English';
+        mapping.portion = `${seriesName} · ${data.year}`;
+        mapping.theme = data.series === 'TM'
+          ? 'Toras Menachem — Rebbe\'s early years of leadership'
+          : 'Sichos in English series';
+      }
+      else if (textName === 'Noam Elimelech') {
+        const entry = NE_BOOK_SLUGS[parashaNum];
+        if (entry === null) {
+          mapping._noamUrl = 'https://www.sefaria.org/Noam_Elimelekh';
+        } else if (typeof entry === 'string') {
+          mapping._noamUrl = entry;
+        } else {
+          mapping._noamUrl = `https://www.sefaria.org/Noam_Elimelekh,_Sefer_${entry[0]},_${entry[1]}`;
+        }
+        if (parashaNum === 22) {
+          mapping._noamNote = 'Vayakhel — the Parasha of Reb Elimelech\'s passing (21 Adar)';
+        } else if (parashaNum === 51) {
+          mapping._noamLinkLabel = 'Tzetel Katan on Sefaria ↗';
+        } else if (parashaNum === 52) {
+          mapping._noamLinkLabel = 'Hanhagot HaAdam on Sefaria ↗';
+        } else if (parashaNum === 54) {
+          mapping._noamLinkLabel = 'A Prayer before Praying on Sefaria ↗';
+        }
+      }
       else if (textName === 'Chidah (Zohar / Arizal)') {
         const zr = getZoharReading(sef.weekNum);
         mapping.portion = zr.portionText;
@@ -4492,7 +4643,13 @@ transition: transform 0.3s;
         subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
       }
       const malchutUrl = malchutSeferiaUrl(malTxt.name, parashaMapping);
-      if (malchutUrl) subText += SEFARIA_LINK(malchutUrl);
+      if (malchutUrl) {
+        const linkLabel = parashaMapping._noamLinkLabel || 'Read on Sefaria ↗';
+        subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${linkLabel}</a>`;
+      }
+      if (parashaMapping._noamNote) {
+        subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping._noamNote}</span>`;
+      }
     }
 
     document.getElementById('malchut-main').innerHTML = mainText;
@@ -4504,7 +4661,7 @@ transition: transform 0.3s;
 
     // Detail panel: today's entry highlighted, then full weekly context
     const DAYS_LABELS = ['Friday','Shabbat','Sunday','Monday','Tuesday','Wednesday','Thursday'];
-    const TEXTS  = ['Chidah (Zohar / Arizal)','Likutei Sichos','Keter Shem Tov',
+    const TEXTS  = ['Chidah (Zohar / Arizal)','Likutei Sichos and Toras Menachem','Keter Shem Tov',
                     'Noam Elimelech','Tanya','Likutei Moharan','Mesilat Yesharim'];
     // For the last week (week 52), days 2-7 display Sefer Yetzirah chapters 1-6
     const displayTexts = (sef.weekNum === 52)
