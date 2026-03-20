@@ -2349,8 +2349,8 @@ transition: transform 0.3s;
 
   // Moshe's 13 Attributes of Mercy (Exodus 34:6-7) — Cycles 14-26
   const MOSHE_THIRTEEN_ATTRIBUTES = [
-    { num: 1,  name: 'Hashem', hebrew: 'יְ-הוָ-ה', meaning: 'Compassion before a person sins' },
-    { num: 2,  name: 'Hashem', hebrew: 'יְ-הוָ-ה', meaning: 'Compassion after a person has sinned' },
+    { num: 1,  name: 'Hashem', hebrew: 'יְ-ה-וָ-ה', meaning: 'Compassion before a person sins' },
+    { num: 2,  name: 'Hashem', hebrew: 'יְ-ה-וָ-ה', meaning: 'Compassion after a person has sinned' },
     { num: 3,  name: 'El', hebrew: 'אֵ-ל', meaning: 'Mighty in compassion, to give all creatures according to their need' },
     { num: 4,  name: 'Rachum', hebrew: 'רַחוּם', meaning: 'Merciful, that humankind may not be distressed' },
     { num: 5,  name: "Ve'chanun", hebrew: 'וְחַנּוּן', meaning: 'Gracious if humankind is already in distress' },
@@ -4424,12 +4424,8 @@ transition: transform 0.3s;
     } else if (cy13.cycle <= 26) {
       // Cycles 14-26: Moshe's attributes (outer vessels)
       const mosheNum = cy13.cycle - 13;
-      const MOSHE_ATTRIBUTES = [
-        'Hashem (1st)', 'Hashem (2nd)', 'El', 'Rachum', "Ve'chanun", 'Erech Apayim',
-        "Ve'rav Chesed", "Ve'emet", 'Notzer Chesed', "La'alafim", 'Noseh Avon',
-        'Vafeshah', "VeChata'ah"
-      ];
-      cycleTheme = `Cycle Theme: ${MOSHE_ATTRIBUTES[mosheNum - 1]} (Moshe's Outer Vessel)`;
+      const mosheAttr = MOSHE_THIRTEEN_ATTRIBUTES[mosheNum - 1];
+      cycleTheme = `Cycle Theme: ${mosheAttr.name} — ${mosheAttr.meaning} (Moshe's Outer Vessel)`;
     } else if (cy13.cycle === 27) {
       cycleTheme = `Cycle Theme: Microcosm of Micha's 13 Attributes (Inner Vessels)`;
     } else {
