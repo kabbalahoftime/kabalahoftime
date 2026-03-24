@@ -2349,19 +2349,32 @@ transition: transform 0.3s;
 
   // Moshe's 13 Attributes of Mercy (Exodus 34:6-7) — Cycles 14-26
   const MOSHE_THIRTEEN_ATTRIBUTES = [
-    { num: 1,  name: 'Hashem', hebrew: 'יְ-ה-וָ-ה', meaning: 'Compassion before a person sins' },
-    { num: 2,  name: 'Hashem', hebrew: 'יְ-ה-וָ-ה', meaning: 'Compassion after a person has sinned' },
-    { num: 3,  name: 'El', hebrew: 'אֵ-ל', meaning: 'Mighty in compassion, to give all creatures according to their need' },
-    { num: 4,  name: 'Rachum', hebrew: 'רַחוּם', meaning: 'Merciful, that humankind may not be distressed' },
-    { num: 5,  name: "Ve'chanun", hebrew: 'וְחַנּוּן', meaning: 'Gracious if humankind is already in distress' },
-    { num: 6,  name: 'Erech Apayim', hebrew: 'אֶרֶךְ אַפַּיִם', meaning: 'Slow to anger' },
-    { num: 7,  name: "Ve'rav Chesed", hebrew: 'וְרַב-חֶסֶד', meaning: 'Plenteous in kindness' },
-    { num: 8,  name: "Ve'emet", hebrew: 'וֶאֱמֶת', meaning: 'And truth' },
-    { num: 9,  name: 'Notzer Chesed Laalafim', hebrew: 'נֹצֵר חֶסֶד לָאֲלָפִים', meaning: 'Keeping kindness unto thousands' },
-    { num: 10, name: 'Noseh Avon', hebrew: 'נֹשֵׂא עָוֹן', meaning: 'Forgiving iniquity' },
-    { num: 11, name: 'Vafeshah', hebrew: 'וָפֶשַׁע', meaning: 'And transgression' },
-    { num: 12, name: "VeChata'ah", hebrew: 'וְחַטָּאָה', meaning: 'And sin' },
-    { num: 13, name: 'VeNakeh', hebrew: 'וְנַקֵּה', meaning: 'And pardoning' }
+    { num: 1,  name: 'Hashem', hebrew: '\u05D9\u05B0-\u05D4-\u05D5\u05B8-\u05D4', meaning: 'Compassion before a person sins',
+      bachya: 'Hashem owes us nothing \u2014 all is grace. He remains compassionate even if He knows a person will sin in the future.' },
+    { num: 2,  name: 'Hashem', hebrew: '\u05D9\u05B0-\u05D4-\u05D5\u05B8-\u05D4', meaning: 'Compassion after a person has sinned',
+      bachya: 'Unlike humans who distance themselves after being wronged, Hashem is eternal and unchanging \u2014 His compassion remains even after one has sinned and repented.' },
+    { num: 3,  name: 'El', hebrew: '\u05D0\u05B5-\u05DC', meaning: 'Mighty in compassion, to give all creatures according to their need',
+      bachya: 'Total mercy. The Vilna Gaon explains that \u05D0-\u05DC denotes power \u2014 the might Hashem uses to restrain His anger and arouse great compassion.' },
+    { num: 4,  name: 'Rachum', hebrew: '\u05E8\u05B7\u05D7\u05D5\u05BC\u05DD', meaning: 'Merciful, that humankind may not be distressed',
+      bachya: 'Merciful to ease the punishment of sinners who call out to Him.' },
+    { num: 5,  name: "Ve'chanun", hebrew: '\u05D5\u05B0\u05D7\u05B7\u05E0\u05BC\u05D5\u05BC\u05DF', meaning: 'Gracious if humankind is already in distress',
+      bachya: 'Acts charitably and bestows goodness upon those who ask, even if they are unworthy.' },
+    { num: 6,  name: 'Erech Apayim', hebrew: '\u05D0\u05B6\u05E8\u05B6\u05DA\u05B0 \u05D0\u05B7\u05E4\u05B7\u05D9\u05B4\u05DD', meaning: 'Slow to anger',
+      bachya: 'Does not hasten to punish, extending patience in the hope that the person will repent.' },
+    { num: 7,  name: "Ve'rav Chesed", hebrew: '\u05D5\u05B0\u05E8\u05B7\u05D1-\u05D7\u05B6\u05E1\u05B6\u05D3', meaning: 'Plenteous in kindness',
+      bachya: 'Abundant in kindness toward those who need it but lack sufficient merit \u2014 He tilts the scales toward chesed.' },
+    { num: 8,  name: "Ve'emet", hebrew: '\u05D5\u05B6\u05D0\u05B1\u05DE\u05B6\u05EA', meaning: 'And truth',
+      bachya: 'Faithful to reward those who do His will \u2014 His truth means His promises are kept.' },
+    { num: 9,  name: 'Notzer Chesed Laalafim', hebrew: '\u05E0\u05B9\u05E6\u05B5\u05E8 \u05D7\u05B6\u05E1\u05B6\u05D3 \u05DC\u05B8\u05D0\u05B2\u05DC\u05B8\u05E4\u05B4\u05D9\u05DD', meaning: 'Keeping kindness unto thousands',
+      bachya: 'Guards the good deeds a person performs, preserving their merit for two thousand generations of descendants.' },
+    { num: 10, name: 'Noseh Avon', hebrew: '\u05E0\u05B9\u05E9\u05B5\u05A2\u05D0 \u05E2\u05B8\u05D5\u05B9\u05DF', meaning: 'Forgiving iniquity',
+      bachya: 'Forgives deliberate sins (avonot) \u2014 transgressions committed knowingly.' },
+    { num: 11, name: 'Vafeshah', hebrew: '\u05D5\u05B8\u05E4\u05B6\u05E9\u05B7\u05A2', meaning: 'And transgression',
+      bachya: 'Forgives rebellious sins \u2014 acts done to defy and provoke.' },
+    { num: 12, name: "VeChata'ah", hebrew: '\u05D5\u05B0\u05D7\u05B7\u05D8\u05B8\u05BC\u05D0\u05B8\u05D4', meaning: 'And sin',
+      bachya: 'Forgives unintentional sins (shegagot) \u2014 which still require repentance once the person becomes aware.' },
+    { num: 13, name: 'VeNakeh', hebrew: '\u05D5\u05B0\u05E0\u05B7\u05E7\u05B5\u05BC\u05D4', meaning: 'And pardoning',
+      bachya: 'Cleanses those who repent completely. Once a sin is forgiven it is not held against the person again \u2014 even if they later sin anew, the previously forgiven sins are not revisited.' }
   ];
 
   // Nassi (tribal prince) for each day 1-13 within a cycle (based on Rosh Chodesh Nissan order)
@@ -4425,17 +4438,21 @@ transition: transform 0.3s;
       // Cycles 14-26: Moshe's attributes (outer vessels)
       const mosheNum = cy13.cycle - 13;
       const mosheAttr = MOSHE_THIRTEEN_ATTRIBUTES[mosheNum - 1];
-      cycleTheme = `Cycle Theme: ${mosheAttr.name} — ${mosheAttr.meaning} (Moshe's Outer Vessel)`;
+      cycleTheme = `Cycle Theme: ${mosheAttr.name} \u2014 ${mosheAttr.meaning} (Moshe's Outer Vessel)`;
     } else if (cy13.cycle === 27) {
       cycleTheme = `Cycle Theme: Microcosm of Micha's 13 Attributes (Inner Vessels)`;
     } else {
       cycleTheme = `Cycle Theme: Microcosm of Moshe's 13 Attributes (Outer Vessels)`;
     }
     
+    const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
+      ? `<div class="detail-row"><span class="detail-label">Rabbeinu Bachya:</span><span class="detail-value">${cy13.attr.bachya}</span></div>`
+      : '';
     cards[4].querySelector('.sefirah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Nassi:</span><span class="detail-value">${cy13.nassi}</span></div>
        <div class="detail-row"><span class="detail-label">Daily Attribute:</span><span class="detail-value">${cy13.attr.name} — ${cy13.attr.meaning}</span></div>
        <div class="detail-row"><span class="detail-label">Hebrew:</span><span class="detail-value">${cy13.attr.hebrew}</span></div>
+       ${bachyaRow}
        <div class="detail-row"><span class="detail-label">${cycleTheme.split(':')[0]}:</span><span class="detail-value">${cycleTheme.split(':')[1]}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value">${cy13.cycle <= 13 ? '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> — Prophet Micha\'s vision of Divine mercy' : cy13.cycle <= 26 ? '<a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a> — Moshe\'s 13 Attributes of Divine mercy' : '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> · <a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a>'}</span></div>
        <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>`;
