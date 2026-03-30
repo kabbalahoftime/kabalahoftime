@@ -3863,20 +3863,20 @@ transition: transform 0.3s;
   ];
 
   // Malchut daily texts — 7 texts cycling through the week
-  // Order (by KoT day 1–7): 
+  // Order (by KoT day 1–7):
   //   Day 1 (Fri eve / Shabbat): Chidah (Zohar / Arizal)
-  //   Day 2 (Sat eve / Sunday): Keter Shem Tov  
-  //   Day 3 (Sun eve / Monday): Noam Elimelech
-  //   Day 4 (Mon eve / Tuesday): Tanya
-  //   Day 5 (Tue eve / Wednesday): Likutei Moharan
-  //   Day 6 (Wed eve / Thursday): Mesilat Yesharim
-  //   Day 7 (Thu eve / Friday): Likutei Sichos / Maamarim
+  //   Day 2 (Sat eve / Sunday): Likutei Sichos and Toras Menachem + Keter Shem Tov
+  //   Day 3 (Sun eve / Monday): Kedushas Levi
+  //   Day 4 (Mon eve / Tuesday): Noam Elimelech
+  //   Day 5 (Tue eve / Wednesday): Tanya
+  //   Day 6 (Wed eve / Thursday): Likutei Moharan
+  //   Day 7 (Thu eve / Friday): Mesilat Yesharim
   // MALCHUT_TEXTS[i] where i = (dayNum - 1) % 7
   // dayNum 1=Thu→Fri, 2=Fri→Shab, 3=Sat→Sun, 4=Sun→Mon, 5=Mon→Tue, 6=Tue→Wed, 7=Wed→Thu
   const MALCHUT_TEXTS = [
     { name: 'Chidah (Zohar / Arizal)',      author: 'R. Shimon bar Yochai / R. Luria',    shortName: 'Zohar',    day: 'Friday — Erev Shabbat',   desc: 'Mystical depth of the Parasha — the hidden light of Torah' },
-    { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight' },
-    { name: 'Keter Shem Tov',      author: 'Baal Shem Tov',                      shortName: 'KST',      day: 'Sunday',                  desc: 'Foundations of Chassidic thought and Divine joy' },
+    { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight',      secondaryName: 'Keter Shem Tov', secondaryAuthor: 'Baal Shem Tov', secondaryDesc: 'Foundations of Chassidic thought and Divine joy' },
+    { name: 'Kedushas Levi',       author: 'R. Levi Yitzhak of Berditchev',      shortName: 'KL',       day: 'Sunday',                  desc: 'Chassidic commentary on Torah — love and joy in divine service' },
     { name: 'Noam Elimelech',      author: 'R. Elimelech of Lizhensk',           shortName: 'NE',       day: 'Monday',                  desc: 'The Tzadik\'s path: elevating the world through Torah' },
     { name: 'Tanya',               author: 'Alter Rebbe (R. Schneur Zalman)',     shortName: 'Tanya',    day: 'Tuesday',                 desc: 'Likutei Amarim — the Sefer Shel Beinonim' },
     { name: 'Likutei Moharan',     author: 'Rebbe Nachman of Breslov',            shortName: 'LM',       day: 'Wednesday',               desc: 'Torah that leads to all virtues and repairs the world' },
@@ -4173,6 +4173,9 @@ transition: transform 0.3s;
     }
     if (textName === 'Keter Shem Tov') {
       return 'https://www.sefaria.org/Keter_Shem_Tov';
+    }
+    if (textName === 'Kedushas Levi') {
+      return 'https://www.sefaria.org/Kedushat_Levi';
     }
     if (textName === 'Likutei Sichos and Toras Menachem') {
       return mapping._lsUrl || null;
@@ -4697,6 +4700,24 @@ transition: transform 0.3s;
       if (parashaMapping._noamNote) {
         subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping._noamNote}</span>`;
       }
+      // Secondary text for Shabbat (Keter Shem Tov)
+      if (malTxt.secondaryName) {
+        const secMapping = getParashaMapping(malTxt.secondaryName, actualParasha);
+        let secMain = `<strong>${malTxt.secondaryName}</strong>`;
+        if (secMapping.portion) {
+          secMain += ` — ${secMapping.portion}`;
+        }
+        let secSub = malTxt.secondaryAuthor;
+        const secUrl = malchutSeferiaUrl(malTxt.secondaryName, secMapping);
+        if (secUrl) {
+          secSub += `&nbsp;·&nbsp; <a href="${secUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
+        }
+        if (secMapping._kehotUrl) {
+          secSub += `&nbsp;·&nbsp; <a href="${secMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
+        }
+        mainText += `<br><span style="font-size:10px;color:var(--ink-dim)">Also:</span> ${secMain}`;
+        subText += `<br>${secSub}`;
+      }
     }
 
     document.getElementById('malchut-main').innerHTML = mainText;
@@ -4708,7 +4729,7 @@ transition: transform 0.3s;
 
     // Detail panel: today's entry highlighted, then full weekly context
     const DAYS_LABELS = ['Friday','Shabbat','Sunday','Monday','Tuesday','Wednesday','Thursday'];
-    const TEXTS  = ['Chidah (Zohar / Arizal)','Likutei Sichos and Toras Menachem','Keter Shem Tov',
+    const TEXTS  = ['Chidah (Zohar / Arizal)','Likutei Sichos and Toras Menachem','Kedushas Levi',
                     'Noam Elimelech','Tanya','Likutei Moharan','Mesilat Yesharim'];
     // For the last week (week 52), days 2-7 display Sefer Yetzirah chapters 1-6
     const displayTexts = (sef.weekNum === 52)
@@ -4725,12 +4746,16 @@ transition: transform 0.3s;
       `</div>`
     ).join('');
     
+    let todayTextDisplay = displayTexts[todayIdx];
+    if (todayMalTxt.secondaryName) {
+      todayTextDisplay += ` & ${todayMalTxt.secondaryName}`;
+    }
     const todayRow = `<div class="mal-today-highlight">` +
       `<div class="mal-today-badge">★ Today's Reading</div>` +
       `<div class="mal-book-row mal-today">` +
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
-          `<span class="mal-text-name">${displayTexts[todayIdx]}</span>` +
+          `<span class="mal-text-name">${todayTextDisplay}</span>` +
           `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>` +
         `</div>` +
         `<div class="mal-fields">${todayFieldLines}</div>` +
@@ -4759,6 +4784,14 @@ transition: transform 0.3s;
         // Add theme below text name if available
         if (mapping.theme && !mapping.theme.includes('[To be mapped]')) {
           themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${mapping.theme}</div>`;
+        }
+        // Show secondary text for Shabbat (Keter Shem Tov)
+        const malchutEntry = MALCHUT_TEXTS[i];
+        if (malchutEntry && malchutEntry.secondaryName) {
+          const secMapping = getParashaMapping(malchutEntry.secondaryName, actualParasha);
+          let secDisplay = malchutEntry.secondaryName;
+          if (secMapping.portion) secDisplay += ` — ${secMapping.portion}`;
+          themeHTML += `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">Also: ${secDisplay}</div>`;
         }
       }
       
