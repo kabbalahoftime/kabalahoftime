@@ -4715,7 +4715,7 @@ transition: transform 0.3s;
         if (secMapping._kehotUrl) {
           secSub += `&nbsp;·&nbsp; <a href="${secMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
         }
-        mainText += `<br><span style="font-size:10px;color:var(--ink-dim)">Also:</span> ${secMain}`;
+        mainText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>${secMain}`;
         subText += `<br>${secSub}`;
       }
     }
@@ -4791,7 +4791,7 @@ transition: transform 0.3s;
           const secMapping = getParashaMapping(malchutEntry.secondaryName, actualParasha);
           let secDisplay = malchutEntry.secondaryName;
           if (secMapping.portion) secDisplay += ` — ${secMapping.portion}`;
-          themeHTML += `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">Also: ${secDisplay}</div>`;
+          themeHTML += `<div style="font-size:9px;color:var(--ink);font-style:normal;margin-top:3px;font-weight:600;">+ ${secDisplay}</div>`;
         }
       }
       
