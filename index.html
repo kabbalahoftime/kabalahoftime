@@ -2134,7 +2134,35 @@ transition: transform 0.3s;
     181: { theme: 'United Glory',              summary: 'Group can unite their "glory" against someone greater. Wicked have no glory. Words against true Tzadik benefit him—they stand him up.',
            blog_url: 'https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html',
            url: 'https://www.sefaria.org/Likutei_Moharan.181' },
-    //  Additional lessons from Nissan onwards can be added from the blog
+    // NISSAN (13-30) - Lessons 194-221
+    194: { theme: 'Foolishness of Honor (194–204)', url: 'https://www.sefaria.org/Likutei_Moharan.194' },
+    195: { theme: 'Relief Within Distress',         url: 'https://www.sefaria.org/Likutei_Moharan.195' },
+    196: { theme: 'Prayer Without Stubbornness',    url: 'https://www.sefaria.org/Likutei_Moharan.196' },
+    197: { theme: 'Lashon Harah Blemishes Humility', url: 'https://www.sefaria.org/Likutei_Moharan.197' },
+    198: { theme: 'Crying Out to G-d',              url: 'https://www.sefaria.org/Likutei_Moharan.198' },
+    199: { theme: 'Sweetness of Torah',             url: 'https://www.sefaria.org/Likutei_Moharan.199' },
+    200: { theme: 'Tzadikim Are Rich Today',        url: 'https://www.sefaria.org/Likutei_Moharan.200' },
+    201: { theme: 'Pesach: Scream in Prayer',       url: 'https://www.sefaria.org/Likutei_Moharan.201' },
+    202: { theme: "Honor & Lack of Da'at",          url: 'https://www.sefaria.org/Likutei_Moharan.202' },
+    203: { theme: 'State of the Shechinah',         url: 'https://www.sefaria.org/Likutei_Moharan.203' },
+    204: { theme: 'Tzedakah to a Torah Scholar',    url: 'https://www.sefaria.org/Likutei_Moharan.204' },
+    205: { theme: 'Tikkun HaKlali',                 url: 'https://www.sefaria.org/Likutei_Moharan.205' },
+    206: { theme: 'Lost Sheep — Return is Possible', url: 'https://www.sefaria.org/Likutei_Moharan.206' },
+    207: { theme: 'Torah of Kindness',              url: 'https://www.sefaria.org/Likutei_Moharan.207' },
+    208: { theme: 'Opposition Benefits the Tzadik', url: 'https://www.sefaria.org/Likutei_Moharan.208' },
+    209: { theme: 'Hosting a Torah Scholar',        url: 'https://www.sefaria.org/Likutei_Moharan.209' },
+    210: { theme: 'Business with Emunah',           url: 'https://www.sefaria.org/Likutei_Moharan.210' },
+    211: { theme: 'Purity of Thought',              url: 'https://www.sefaria.org/Likutei_Moharan.211' },
+    212: { theme: 'Clapping & Divine Portrait',     url: 'https://www.sefaria.org/Likutei_Moharan.212' },
+    213: { theme: 'Hidden Name Against the Accuser', url: 'https://www.sefaria.org/Likutei_Moharan.213' },
+    214: { theme: 'Torah Study Protects from Death', url: 'https://www.sefaria.org/Likutei_Moharan.214' },
+    215: { theme: '24 Types of Redemption',         url: 'https://www.sefaria.org/Likutei_Moharan.215' },
+    216: { theme: 'Prayer Nullifies Nature',        url: 'https://www.sefaria.org/Likutei_Moharan.216' },
+    217: { theme: 'Memory Fixes the Luchot',        url: 'https://www.sefaria.org/Likutei_Moharan.217' },
+    218: { theme: 'The Hidden Tzadik',              url: 'https://www.sefaria.org/Likutei_Moharan.218' },
+    219: { theme: 'Tzimtzum & the Temple',          url: 'https://www.sefaria.org/Likutei_Moharan.219' },
+    220: { theme: 'Being Saved Through Story',      url: 'https://www.sefaria.org/Likutei_Moharan.220' },
+    221: { theme: 'Tithe Brings Concealment',       url: 'https://www.sefaria.org/Likutei_Moharan.221' },
     64:  { theme: 'Prayer Illuminates',        summary: 'Prayer offered with concentration and joy illuminates the world. The quality of one\'s prayer directly affects the spiritual light revealed.',
            url: 'https://www.sefaria.org/Likutei_Moharan.64' },
     282: { theme: 'Begin Again',               summary: 'The final teaching: it is never too late to begin again. No matter where one has fallen, G-d\'s hand is always extended in welcome.',
@@ -4250,7 +4278,8 @@ transition: transform 0.3s;
       ` &nbsp;·&nbsp; <a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">Chitas for Kids ↗</a>`;
 
     // 6. Likutei Moharan — Part I = lessons 1–286, Part II (Tinyana) = 287–411
-    const lmLesson       = d;
+    // Lessons 194–204 all fall on the 13th of Nissan (day 194); from day 195 onward, offset by 10.
+    const lmLesson       = d >= 195 ? d + 10 : d;
     const LM_PART1_COUNT = 286;
     const isLmPartII     = lmLesson > LM_PART1_COUNT;
     const lmLessonInPart = isLmPartII ? lmLesson - LM_PART1_COUNT : lmLesson;
@@ -4263,8 +4292,8 @@ transition: transform 0.3s;
         : `https://www.sefaria.org/Likutei_Moharan.${lmLesson}`;
 
     document.getElementById('keter-lm-main').innerHTML = lmData
-      ? `${lmPartLabel} · Lesson <strong>${lmLessonInPart}</strong> — ${lmData.theme}<br>
-         <span style="font-size:11px;color:var(--ink-mid);font-style:italic">${lmData.summary}</span>`
+      ? `${lmPartLabel} · Lesson <strong>${lmLessonInPart}</strong> — ${lmData.theme}` +
+        (lmData.summary ? `<br><span style="font-size:11px;color:var(--ink-mid);font-style:italic">${lmData.summary}</span>` : '')
       : `${lmPartLabel} · Lesson <strong>${lmLessonInPart}</strong>`;
 
     const lmLinkI_Maimon    = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Maimon ↗</a>`;
