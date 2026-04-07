@@ -4854,19 +4854,6 @@ transition: transform 0.3s;
 
     document.getElementById('malchut-detail').innerHTML =
       todayRow +
-      (() => {
-        const myMapping = getParashaMapping('Mesilat Yesharim', actualParasha);
-        if (!myMapping.portion) return '';
-        const myUrl = malchutSeferiaUrl('Mesilat Yesharim', myMapping);
-        const myParshiyot = myMapping.parshiyot ? ` (${myMapping.parshiyot.join(' / ')})` : '';
-        const myTheme = myMapping.theme && !myMapping.theme.includes('[To be mapped]')
-          ? `<span style="font-style:italic;color:var(--ink-dim);"> — ${myMapping.theme}</span>` : '';
-        const myLink = myUrl
-          ? ` &nbsp;<a href="${myUrl}" target="_blank" style="color:var(--gold);font-size:10px;">Sefaria ↗</a>` : '';
-        return `<div style="font-size:11px;color:var(--ink-mid);padding:6px 12px;border-top:1px solid var(--border);margin-top:4px;">` +
-          `<span style="font-weight:600;color:var(--ink);">Mesilat Yesharim</span> · ${myMapping.portion}${myParshiyot}${myTheme}${myLink}` +
-          `</div>`;
-      })() +
       `<div class="mal-week-divider"></div>` +
       `<div class="mal-parasha-header">` +
         `<span>Week ${sef.weekNum} · ${wk.month}</span>` +
