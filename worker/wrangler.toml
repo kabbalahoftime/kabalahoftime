@@ -1,0 +1,6 @@
+name            = "kabbalahoftime-digest"
+main            = "index.js"
+compatibility_date = "2025-01-01"
+
+# After deploying, set your API key with:
+#   wrangler secret put ANTHROPIC_API_KEY
