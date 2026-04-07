@@ -12,21 +12,17 @@ const SEFARIA_TEXTS    = 'https://www.sefaria.org/api/v3/texts';
 const CLAUDE_API       = 'https://api.anthropic.com/v1/messages';
 const CLAUDE_MODEL     = 'claude-haiku-4-5-20251001';
 
-// Which Sefaria calendar items to include (matched against title.en)
-const WANTED_TITLES = [
-  'Daf Yomi',
-  'Daily Rambam',
-  'Daily Tanya',
-  'Parashat Hashavua',
-];
+// Sefaria calendar items to auto-fetch (Tanya + Rambam chapters are computed here,
+// not client-side, so we pull them directly from the calendar API)
+const CALENDAR_TITLES = ['Daily Tanya', 'Daily Rambam'];
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
 function getCorsHeaders(origin) {
-  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  const ok = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
   return {
-    'Access-Control-Allow-Origin':  allowed,
-    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Origin':  ok,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age':       '86400',
   };
@@ -42,18 +38,10 @@ function flattenText(node) {
   return '';
 }
 
-async function fetchSefariaCalendar(date) {
-  const url = `${SEFARIA_CALENDAR}?date=${date}&diaspora=1&timezone=America%2FNew_York`;
-  const resp = await fetch(url);
-  if (!resp.ok) throw new Error(`Sefaria calendar: ${resp.status}`);
-  return resp.json();
-}
-
-async function fetchSefariaText(ref, maxChars = 4000) {
+async function fetchSefariaText(ref, maxChars = 3000) {
   try {
-    const encoded = encodeURIComponent(ref);
-    const url     = `${SEFARIA_TEXTS}/${encoded}?version=english&context=0&pad=0`;
-    const resp    = await fetch(url);
+    const url  = `${SEFARIA_TEXTS}/${encodeURIComponent(ref)}?version=english&context=0&pad=0`;
+    const resp = await fetch(url);
     if (!resp.ok) return null;
     const data    = await resp.json();
     const version = (data.versions || []).find(v => v.language === 'en');
@@ -65,18 +53,32 @@ async function fetchSefariaText(ref, maxChars = 4000) {
   }
 }
 
+async function fetchCalendarItems(date) {
+  try {
+    const url  = `${SEFARIA_CALENDAR}?date=${date}&diaspora=1&timezone=America%2FNew_York`;
+    const resp = await fetch(url);
+    if (!resp.ok) return [];
+    const data = await resp.json();
+    return (data.calendar_items || []).filter(item =>
+      CALENDAR_TITLES.some(t => (item.title?.en || '').includes(t))
+    );
+  } catch {
+    return [];
+  }
+}
+
 async function summariseWithClaude(items, apiKey) {
   const numbered = items
-    .map((item, i) => `${i + 1}. ${item.title}\n${item.text || '(Text not available)'}`)
+    .map((item, i) => `${i + 1}. ${item.title}\n${item.text || '(Text unavailable — no summary possible)'}`)
     .join('\n\n---\n\n');
 
   const prompt = `You are writing a daily Torah study digest for a Jewish learning site.
-For each numbered text below, write a 2–3 sentence summary in plain, respectful English that captures the main teaching or content.
+For each numbered entry below, write a 2–3 sentence summary in plain, respectful English that captures the main teaching or content. If the text is unavailable, write a brief description of what this study cycle covers based on the title alone.
 
-Return ONLY a valid JSON array in this exact format — no extra text:
-[{"title": "<exact title as given>", "summary": "<2-3 sentence summary>"}]
+Return ONLY a valid JSON array — no extra text, no markdown fences:
+[{"title": "<exact title as given>", "summary": "<your summary>"}]
 
-Today's texts:
+Today's entries:
 
 ${numbered}`;
 
@@ -106,65 +108,53 @@ ${numbered}`;
 
 export default {
   async fetch(request, env) {
-    const url     = new URL(request.url);
-    const origin  = request.headers.get('Origin') || '';
-    const cors    = getCorsHeaders(origin);
+    const origin = request.headers.get('Origin') || '';
+    const cors   = getCorsHeaders(origin);
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: cors });
     }
-    if (request.method !== 'GET') {
+    if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405, headers: cors });
     }
-    if (url.pathname !== '/digest') {
+    if (new URL(request.url).pathname !== '/digest') {
       return new Response('Not found', { status: 404, headers: cors });
     }
 
     try {
-      const date     = url.searchParams.get('date')     || new Date().toISOString().slice(0, 10);
-      const lmLesson = url.searchParams.get('lmLesson') || null;
-      const hayomYom = url.searchParams.get('hayomYom') || null;
+      const body = await request.json();
+      const date  = body.date || new Date().toISOString().slice(0, 10);
 
-      // 1. Sefaria calendar → select wanted items
-      const calData  = await fetchSefariaCalendar(date);
-      const calItems = (calData.calendar_items || []).filter(item =>
-        WANTED_TITLES.some(t => (item.title?.en || '').includes(t))
-      );
+      // Items sent from the client.  Each has:
+      //   { title, url, text? }          — text already known (no fetch needed)
+      //   { title, url, sefariaRef? }    — fetch text from Sefaria
+      const clientItems = body.items || [];
 
-      // 2. Fetch texts in parallel
-      const items = await Promise.all(calItems.map(async item => ({
-        title: `${item.title?.en}: ${item.displayValue?.en}`,
-        url:   item.sefaria_link || `https://www.sefaria.org/${item.url}`,
-        text:  await fetchSefariaText(item.ref),
-      })));
+      // Auto-add Tanya + Rambam from Sefaria calendar
+      const calItems = await fetchCalendarItems(date);
+      const calMapped = calItems.map(item => ({
+        title:      `${item.title?.en}: ${item.displayValue?.en}`,
+        url:        item.sefaria_link || `https://www.sefaria.org/${item.url}`,
+        sefariaRef: item.ref,
+      }));
 
-      // 3. Add Likutei Moharan if lesson number provided
-      if (lmLesson) {
-        const lmText = await fetchSefariaText(`Likutei_Moharan.${lmLesson}`);
-        items.push({
-          title: `Daily Likutei Moharan: Lesson ${lmLesson}`,
-          url:   `https://www.sefaria.org/Likutei_Moharan.${lmLesson}`,
-          text:  lmText,
-        });
-      }
+      const allItems = [...clientItems, ...calMapped];
 
-      // 4. Prepend Hayom Yom (text already known client-side, no fetch needed)
-      if (hayomYom) {
-        items.unshift({
-          title: 'Hayom Yom',
-          url:   `https://www.chabad.org/library/article_cdo/aid/3304/jewish/Hayom-Yom.htm`,
-          text:  decodeURIComponent(hayomYom),
-        });
-      }
+      // Fetch Sefaria text for any item that has a sefariaRef but no text
+      const itemsWithText = await Promise.all(allItems.map(async item => {
+        if (item.text)        return item;
+        if (item.sefariaRef)  return { ...item, text: await fetchSefariaText(item.sefariaRef) };
+        return item;
+      }));
 
-      // 5. Summarise all with one Claude call
-      const summaries = await summariseWithClaude(items, env.ANTHROPIC_API_KEY);
+      // Summarise everything in one Claude call
+      const summaries = await summariseWithClaude(itemsWithText, env.ANTHROPIC_API_KEY);
 
-      // 6. Merge summaries with URLs (align by index)
+      // Merge summaries with URLs
       const result = summaries.map((s, i) => ({
         title:   s.title,
         summary: s.summary,
-        url:     items[i]?.url || null,
+        url:     itemsWithText[i]?.url || null,
       }));
 
       return new Response(JSON.stringify({ date, items: result }), {
