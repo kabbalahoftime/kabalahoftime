@@ -907,8 +907,19 @@ transition: transform 0.3s;
 
   <!-- CROWN — YEARLY CYCLE -->
 
+  <!-- Daily Digest Modal -->
+  <div id="digest-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);overflow-y:auto;padding:24px 12px;" onclick="if(event.target===this)closeDigest()">
+    <div style="max-width:640px;margin:0 auto;background:var(--bg-card,#fffdf7);border-radius:12px;padding:24px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.3);">
+      <button onclick="closeDigest()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink-mid,#888);" aria-label="Close">✕</button>
+      <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2.5px;color:var(--gold,#b8964a);text-transform:uppercase;margin-bottom:4px;">✦ Daily Digest ✦</div>
+      <div id="digest-date" style="font-size:0.85rem;color:var(--ink-mid,#888);margin-bottom:16px;"></div>
+      <div id="digest-body"></div>
+    </div>
+  </div>
+
   <div class="keter-title-row">
     <span class="keter-crown-label">✦ KETER ✦</span>
+    <button id="digest-btn" onclick="openDigest(event)" title="Daily Digest" style="margin-left:10px;background:none;border:1px solid var(--gold,#b8964a);color:var(--gold,#b8964a);border-radius:6px;padding:2px 10px;font-size:0.75rem;cursor:pointer;letter-spacing:0.5px;">Digest</button>
   </div>
   <div class="keter-card" onclick="toggleKeterExpand(this, event)">
     <span class="expand-icon">▾</span>
@@ -4869,6 +4880,63 @@ transition: transform 0.3s;
   }
 
   render();
+
+  // ══════════════════════════════════════════════════════════════
+  // DAILY DIGEST
+  // ══════════════════════════════════════════════════════════════
+
+  const DIGEST_WORKER_URL = 'https://kabbalahoftime-digest.YOUR_SUBDOMAIN.workers.dev/digest';
+
+  function openDigest(event) {
+    event.stopPropagation();
+    const modal = document.getElementById('digest-modal');
+    const body  = document.getElementById('digest-body');
+    const dateEl = document.getElementById('digest-date');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+
+    // Collect current day's data
+    const date     = getDisplayDate(currentOffset).toISOString().slice(0, 10);
+    const lmLesson = (() => {
+      const rawDay = getDaysDiff(currentOffset);
+      return rawDay >= 195 ? rawDay + 10 : rawDay;
+    })();
+    const hyText = document.getElementById('keter-hayomyom')?.innerText?.replace(/full entry.*$/i, '').trim() || '';
+
+    // Show loading state
+    dateEl.textContent = date;
+    body.innerHTML = '<div style="text-align:center;padding:32px;color:var(--ink-mid,#888);">Loading digest…</div>';
+
+    // Build URL
+    const params = new URLSearchParams({ date, lmLesson });
+    if (hyText) params.set('hayomYom', encodeURIComponent(hyText));
+    const workerURL = `${DIGEST_WORKER_URL}?${params}`;
+
+    fetch(workerURL)
+      .then(r => r.json())
+      .then(data => {
+        if (data.error) throw new Error(data.error);
+        body.innerHTML = (data.items || []).map(item => `
+          <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border,#e8dfc8);">
+            <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold,#b8964a);text-transform:uppercase;margin-bottom:6px;">
+              ${item.title}
+            </div>
+            <p style="margin:0 0 8px;font-size:0.9rem;line-height:1.6;color:var(--ink,#2c1a00);">${item.summary}</p>
+            ${item.url ? `<a href="${item.url}" target="_blank" style="font-size:0.8rem;color:var(--gold,#b8964a);">Read full text ↗</a>` : ''}
+          </div>`).join('');
+      })
+      .catch(err => {
+        body.innerHTML = `<div style="color:#c00;padding:16px;">Could not load digest: ${err.message}</div>`;
+      });
+  }
+
+  function closeDigest() {
+    document.getElementById('digest-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDigest(); });
 
   // ══════════════════════════════════════════════════════════════
   // PWA SERVICE WORKER REGISTRATION
