@@ -4320,17 +4320,6 @@ transition: transform 0.3s;
     document.getElementById('keter-chok-meta').innerHTML =
       `Torah, Prophets, Writings, Midrash, Zohar`;
 
-    // Chok Breslov (Netzach card)
-    document.getElementById('netzach-breslov-main').innerHTML =
-      `<a id="chok-breslov-link" href="${BRESLOV_PODCAST_URL}" target="_blank" style="color:var(--gold)">` +
-      `Chok Breslov ↗</a>`;
-    fetchBresloveEpisodeUrl(hDay, hMonth).then(url => {
-      const el = document.getElementById('chok-breslov-link');
-      if (el) el.href = url;
-    });
-    document.getElementById('netzach-breslov-meta').innerHTML =
-      `Daily Breslov teachings`;
-
     // 5. Hayom Yom
     const chabadURL  = `${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}`;
     const hyText = getHayomYom(hMonth, hDay);
@@ -4685,6 +4674,17 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok Breslov</div>
        <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
        <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>`;
+
+    // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
+    document.getElementById('netzach-breslov-main').innerHTML =
+      `<a id="chok-breslov-link" href="${BRESLOV_PODCAST_URL}" target="_blank" style="color:var(--gold)">` +
+      `Chok Breslov ↗</a>`;
+    fetchBresloveEpisodeUrl(hDay, hMonth).then(url => {
+      const el = document.getElementById('chok-breslov-link');
+      if (el) el.href = url;
+    });
+    document.getElementById('netzach-breslov-meta').innerHTML =
+      `Daily Breslov teachings`;
 
     // HOD — Halacha
     if (!hal.chofetz) {
