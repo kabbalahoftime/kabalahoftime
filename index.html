@@ -4603,11 +4603,10 @@ transition: transform 0.3s;
     const jspDay = ((d - 1) % 364) + 1;
     let jspReading;
     if (jspDay === 1) {
-      jspReading = 'Introduction';
+      jspReading = 'Introduction · Page 1';
     } else {
-      const startPage = (jspDay - 2) * 2 + 1;
-      const endPage   = jspDay === 364 ? 727 : startPage + 1;
-      jspReading = `Pages ${startPage}–${endPage}`;
+      const startPage = 2 * (jspDay - 1);
+      jspReading = `Pages ${startPage}–${startPage + 1}`;
     }
 
     document.getElementById('gevurah-detail').innerHTML =
