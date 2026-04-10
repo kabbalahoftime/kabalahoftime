@@ -1128,7 +1128,7 @@ transition: transform 0.3s;
       <div id="yesod-parasha-cycle" style="font-size:14px; line-height:1.7; color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <!-- CHOK L'YISRAEL / CHOK BRESLOV -->
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael / Chok Breslov</div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael</div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
     </div>
@@ -2391,6 +2391,57 @@ transition: transform 0.3s;
     { num: 13, name: 'VeNakeh', hebrew: '\u05D5\u05B0\u05E0\u05B7\u05E7\u05B5\u05BC\u05D4', meaning: 'And pardoning',
       bachya: 'He cleanses those who repent of their sins and absolves them of punishment. After repenting and being forgiven by Hashem, if a person would commit the same sin again, only the new sin will be held against him, for the old sin has already been forgiven and wiped away.',
       sources: '\u05E8\u05E9\u05D9"\u05D9 \u05E9\u05DD, \u05DE\u05D9\u05D5\u05DE\u05D0 \u05E4\u05D5.; \u05D2\u05D5\u05E8 \u05D0\u05E8\u05D9\u05D4 \u05DC\u05DE\u05D4\u05E8"\u05DC; \u05DB\u05D3 \u05D4\u05E7\u05DE\u05D7 \u05DC\u05E8\u05D1\u05D9\u05E0\u05D5 \u05D1\u05D7\u05D9\u05D9 \u05E9\u05DD' }
+  ];
+
+  // Mesillat Yesharim — 13 rungs of the ladder (Mishnah Avodah Zarah 20b)
+  const MESILLAT_YESHARIM_STEPS = [
+    { he: 'תּוֹרָה',               name: 'Torah',            meaning: 'Study of Torah' },
+    { he: 'זְהִירוּת',              name: 'Zehirut',          meaning: 'Watchfulness' },
+    { he: 'זְרִיזוּת',              name: 'Zerizut',          meaning: 'Alacrity' },
+    { he: 'נְקִיּוּת',              name: 'Nekiyut',          meaning: 'Cleanliness' },
+    { he: 'פְּרִישׁוּת',            name: 'Perishut',         meaning: 'Separation' },
+    { he: 'טָהֳרָה',                name: 'Tahara',           meaning: 'Purity' },
+    { he: 'חֲסִידוּת',              name: 'Hasidut',          meaning: 'Piety' },
+    { he: 'עֲנָוָה',                name: 'Anavah',           meaning: 'Humility' },
+    { he: 'יִרְאַת חֵטְא',          name: 'Yirat Chet',       meaning: 'Fear of Sin' },
+    { he: 'קְדֻשָּׁה',              name: 'Kedushah',         meaning: 'Holiness' },
+    { he: 'רוּחַ הַקֹּדֶשׁ',        name: 'Ruach HaKodesh',   meaning: 'Divine Inspiration' },
+    { he: 'תְּחִיַּת הַמֵּתִים',     name: 'Techiyat HaMetim', meaning: 'Resurrection of the Dead' },
+    { he: 'אֵלִיָּהוּ',              name: 'Eliyahu',          meaning: 'The Prophet Elijah', conclusion: true },
+  ];
+
+  // 13 Tales of Rebbe Nachman (Sipurey Maasiyot)
+  const REBBE_NACHMAN_TALES = [
+    'The Lost Princess',
+    'The Emperor and the King',
+    'The Son Who Could Not Walk',
+    'The King Who Decreed Conversion',
+    "The King's Son Who Was Made of Precious Stones",
+    'The Humble King',
+    'The Fly and the Spider',
+    'The Rabbi and His Only Son',
+    'The Clever Man and the Simple Man',
+    'The Burgher and the Pauper',
+    "The King's Son and the Maid's Son Who Were Exchanged",
+    'The Prayer Leader',
+    'The Seven Beggars',
+  ];
+
+  // 13 Books by Rav Shalom Arush
+  const RAV_ARUSH_BOOKS = [
+    'The Garden of Emuna',
+    'The Garden of Peace',
+    "Women's Wisdom",
+    'The Garden of Yearning — A New Light',
+    'In Forest Fields',
+    'The Garden of Riches',
+    'The Garden of Gratitude',
+    'The Garden of Education',
+    'The Garden of Wisdom',
+    'The Garden of Purity',
+    'The Garden of Knowledge',
+    'The Garden of Healing',
+    'Say Thank You and See Miracles',
   ];
 
   // Nassi (tribal prince) for each day 1-13 within a cycle (based on Rosh Chodesh Nissan order)
@@ -4261,19 +4312,24 @@ transition: transform 0.3s;
     document.getElementById('keter-rambam-meta').innerHTML =
       `<strong>Rambam</strong> · Mishneh Torah · 3 chapters/day`;
 
-    // Chok L'Yisrael (both versions on one line)
+    // Chok L'Yisrael (Yesod card)
     const kolhalashonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
     document.getElementById('keter-chok-main').innerHTML =
       `<a href="https://www.kolhalashon.com/en/regularSite/searchResults/94/21/%D7%97%D7%95%D7%A7%20%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C?urlFilters=2:683%7C&date=${kolhalashonDate}" target="_blank" style="color:var(--gold)">` +
-      `Chok L'Yisrael ↗</a> / ` +
+      `Chok L'Yisrael ↗</a>`;
+    document.getElementById('keter-chok-meta').innerHTML =
+      `Torah, Prophets, Writings, Midrash, Zohar`;
+
+    // Chok Breslov (Netzach card)
+    document.getElementById('netzach-breslov-main').innerHTML =
       `<a id="chok-breslov-link" href="${BRESLOV_PODCAST_URL}" target="_blank" style="color:var(--gold)">` +
       `Chok Breslov ↗</a>`;
     fetchBresloveEpisodeUrl(hDay, hMonth).then(url => {
       const el = document.getElementById('chok-breslov-link');
       if (el) el.href = url;
     });
-    document.getElementById('keter-chok-meta').innerHTML =
-      `Torah, Prophets, Writings, Midrash, Zohar (+ Breslov teachings)`;
+    document.getElementById('netzach-breslov-meta').innerHTML =
+      `Daily Breslov teachings`;
 
     // 5. Hayom Yom
     const chabadURL  = `${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}`;
@@ -4387,6 +4443,38 @@ transition: transform 0.3s;
       ? `<div class="detail-row"><span class="detail-label">Acrostic Psalm:</span><span class="detail-value">${acrosticPsalm}</span></div>`
       : '';
     
+    // Alter Rebbe's Torah — 364-day cycle
+    // TO=97 days (opening+96 folios), LTVa=51 days (opening+50 folios),
+    // LTBa=99 days (99 folios), LTDe=100 days (100 folios), SHS=17 days (51 discourses/3 per day)
+    const CHOCHMA_CYCLE = [
+      { name: 'Torah Ohr',     start: 1,   end: 97,  hasOpening: true,  url: 'https://www.sefaria.org/Torah_Ohr?tab=contents' },
+      { name: 'LT Vayikra',    start: 98,  end: 148, hasOpening: true,  url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
+      { name: 'LT Bamidbar',   start: 149, end: 247, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
+      { name: 'LT Devarim',    start: 248, end: 347, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
+      { name: 'Shir HaShirim / Megilas Esther', start: 348, end: 364, perDay: 3,         url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
+    ];
+    const chDay = ((d - 1) % 364) + 1;
+    let chSection = '', chReading = '', chUrl = null;
+    for (const sec of CHOCHMA_CYCLE) {
+      if (chDay >= sec.start && chDay <= sec.end) {
+        const dw = chDay - sec.start + 1;
+        if (sec.perDay) {
+          const first = (dw - 1) * 3 + 1;
+          chReading = `Discourses ${first}–${first + 2}`;
+        } else if (sec.hasOpening && dw === 1) {
+          chReading = 'Opening Page';
+        } else {
+          chReading = `Folio ${sec.hasOpening ? dw - 1 : dw}`;
+        }
+        chSection = sec.name;
+        chUrl = sec.url;
+        break;
+      }
+    }
+    const chSourceRow = chUrl
+      ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${chUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a> — R. Shneur Zalman of Liadi</span></div>`
+      : `<div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">R. Shneur Zalman of Liadi (Alter Rebbe)</span></div>`;
+
     document.getElementById('chochmah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
        <div class="detail-row"><span class="detail-label">Daily Letter:</span><span class="detail-value">Day ${cy22.day} · ${cy22.dailyLetter} ${cy22.dailyHebrew}</span></div>
@@ -4395,7 +4483,12 @@ transition: transform 0.3s;
        ${acrosticRow}
        <div class="detail-row"><span class="detail-label">Sefer Yetzirah:</span><span class="detail-value">32 Paths = 10 Sefirot + 22 Letters (building blocks of Creation)</span></div>
        <div class="detail-row"><span class="detail-label">Three Weeks:</span><span class="detail-value">17 Tammuz → 9 Av = 22 days (internal Alef-Bet cycle)</span></div>
-       <div class="detail-row"><span class="detail-label">Acrostic Structure:</span><span class="detail-value">Cycles 1-7: One Psalm each · Cycle 8: Eshet Chayil · Cycles 9-16: Psalm 119 (8 sections)</span></div>`;
+       <div class="detail-row"><span class="detail-label">Acrostic Structure:</span><span class="detail-value">Cycles 1-7: One Psalm each · Cycle 8: Eshet Chayil · Cycles 9-16: Psalm 119 (8 sections)</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Alter Rebbe's Torah — Day ${chDay} of 364</div>
+       <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
+       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
+       ${chSourceRow}`;
 
     // BINAH — 7×7×7 Sefirot Omer Cycle
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
@@ -4418,13 +4511,40 @@ transition: transform 0.3s;
       `${daySef} of ${weekSef} — Cycle ${omerCycle}, Week ${omerWeek}, Day ${omerDay}`;
     document.getElementById('binah-tags').innerHTML =
       `<span class="tag highlight">${weekSef}</span><span class="tag">${daySef}</span><span class="tag">${superSef}</span><span class="tag">Omer ${omerPos} / Cycle ${omerCycle}</span>`;
+    // Likutei Tefilot — 364-day cycle
+    // Intro (1) + Part 1: 152 prayers × 2 days (304) + Part 2: 59 prayers (59) = 364
+    const ltDay = ((d - 1) % 364) + 1;
+    let ltSection, ltReading, ltUrl;
+    if (ltDay === 1) {
+      ltSection = 'Introduction';
+      ltReading  = 'Introduction';
+      ltUrl = 'https://www.sefaria.org/Likutey_Tefilot';
+    } else if (ltDay <= 305) {
+      const prayerIdx = ltDay - 2;
+      const prayerNum = Math.floor(prayerIdx / 2) + 1;
+      const half = (prayerIdx % 2 === 0) ? 'first half' : 'second half';
+      ltSection = 'Part 1';
+      ltReading  = `Prayer ${prayerNum} — ${half}`;
+      ltUrl = `https://www.sefaria.org/Likutey_Tefilot.1.${prayerNum}`;
+    } else {
+      const prayerNum = ltDay - 305;
+      ltSection = 'Part 2';
+      ltReading  = `Prayer ${prayerNum}`;
+      ltUrl = `https://www.sefaria.org/Likutey_Tefilot.2.${prayerNum}`;
+    }
+
     document.getElementById('binah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Combination:</span><span class="detail-value">${combo}</span></div>
        <div class="detail-row"><span class="detail-label">Week:</span><span class="detail-value">Week ${omerWeek} of 7 — ${weekSef}</span></div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${omerDay} of 7 — ${daySef}</span></div>
        <div class="detail-row"><span class="detail-label">Omer Cycle:</span><span class="detail-value">Cycle ${omerCycle} · Position ${omerPos} of 49</span></div>
        <div class="detail-row"><span class="detail-label">Cycle Sefirah:</span><span class="detail-value">Cycle ${omerCycle} of 7 — ${superSef}</span></div>
-       <div class="detail-row"><span class="detail-label">50 Gates:</span><span class="detail-value">49 Gates of Understanding + 1 (Shavuot / Matan Torah)</span></div>`;
+       <div class="detail-row"><span class="detail-label">50 Gates:</span><span class="detail-value">49 Gates of Understanding + 1 (Shavuot / Matan Torah)</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likutei Tefilot — Day ${ltDay} of 364</div>
+       <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${ltSection}</span></div>
+       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a> — Reb Nosson of Breslov</span></div>`;
 
     // CHESED — Mishna / Tosefta
     const mishnaInfo = getMishnaInfo(d);
@@ -4435,10 +4555,18 @@ transition: transform 0.3s;
       (mishnaInfo.seferiaUrl ? SEFARIA_LINK(mishnaInfo.seferiaUrl) : '');
     document.getElementById('chesed-tags').innerHTML =
       `<span class="tag highlight">${mishnaInfo.tag1}</span><span class="tag">${mishnaInfo.tag2}</span>`;
+    // Light and Fire of the Baal Shem Tov — 364-day cycle (Intro + 363 pages, 1/day)
+    const bshtDay = ((d - 1) % 364) + 1;
+    const bshtReading = bshtDay === 1 ? 'Introduction' : `Page ${bshtDay - 1}`;
+
     document.getElementById('chesed-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">KoT Week:</span><span class="detail-value">Week ${mishnaInfo.week}, Day ${mishnaInfo.day} of 7</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">${mishnaInfo.type === 'mishna' ? '10 chapters/week · Days 1–5' : '8 chapters/week · Days 6–7'}</span></div>` +
-      (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a></span></div>` : '');
+      (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a></span></div>` : '') +
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Light and Fire of the Baal Shem Tov — Day ${bshtDay} of 364</div>
+       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${bshtReading}</span></div>
+       <div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">Rabbi Yitzhak Buxbaum</span></div>`;
 
     // GEVURAH — Tanach
     const tanachInfo = getTanachInfo(d);
@@ -4448,10 +4576,24 @@ transition: transform 0.3s;
       SEFARIA_LINK(tanachInfo.seferiaUrl);
     document.getElementById('gevurah-tags').innerHTML =
       `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>`;
+    // Jewish Spiritual Practices — 364-day cycle (Intro + 727 pages, 2/day)
+    const jspDay = ((d - 1) % 364) + 1;
+    let jspReading;
+    if (jspDay === 1) {
+      jspReading = 'Introduction · Page 1';
+    } else {
+      const startPage = 2 * (jspDay - 1);
+      jspReading = `Pages ${startPage}–${startPage + 1}`;
+    }
+
     document.getElementById('gevurah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 52 weeks</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a></span></div>`;
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a></span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Jewish Spiritual Practices — Day ${jspDay} of 364</div>
+       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${jspReading}</span></div>
+       <div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">Rabbi Yitzhak Buxbaum</span></div>`;
 
     // TIFERET — 13-day (Micha's or Moshe's 13 Attributes of Mercy, depending on cycle)
     const tifCycleName = (cy13.cycle <= 13) ? "Micha's 13 Attributes" : (cy13.cycle <= 26 ? "Moshe's 13 Attributes" : "13 Attributes — Combined");
@@ -4485,6 +4627,24 @@ transition: transform 0.3s;
     const sourcesRow = (cy13.isMoshe && cy13.attr.sources)
       ? `<div class="detail-row"><span class="detail-label">Sources:</span><span class="detail-value" dir="rtl">${cy13.attr.sources}</span></div>`
       : '';
+    // Three 13-element lists indexed by cycle (cycle 1 → item 1, cycle 2 → item 2, wraps at 13)
+    const cycleIdx = (cy13.cycle - 1) % 13;
+    const myStep = MESILLAT_YESHARIM_STEPS[cycleIdx];
+    let myChainHe, myChainEn;
+    if (myStep.conclusion) {
+      myChainHe = 'וּתְחִיַּת הַמֵּתִים בָּא עַל יְדֵי אֵלִיָּהוּ זָכוּר לַטּוֹב, אָמֵן';
+      myChainEn = 'Resurrection comes through Elijah — may he be remembered for good, Amen';
+    } else if (cycleIdx <= 10) {
+      const nextStep = MESILLAT_YESHARIM_STEPS[cycleIdx + 1];
+      myChainHe = `${myStep.he} מְבִיאָה לִידֵי ${nextStep.he}`;
+      myChainEn = `${myStep.name} leads to ${nextStep.name}`;
+    } else {
+      myChainHe = myStep.he;
+      myChainEn = `${myStep.name} — ${myStep.meaning}`;
+    }
+    const myTale = REBBE_NACHMAN_TALES[cycleIdx];
+    const myBook = RAV_ARUSH_BOOKS[cycleIdx];
+
     cards[4].querySelector('.sefirah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Nassi:</span><span class="detail-value">${cy13.nassi}</span></div>
        <div class="detail-row"><span class="detail-label">Daily Attribute:</span><span class="detail-value">${cy13.attr.name} — ${cy13.attr.meaning}</span></div>
@@ -4493,7 +4653,19 @@ transition: transform 0.3s;
        ${sourcesRow}
        <div class="detail-row"><span class="detail-label">${cycleTheme.split(':')[0]}:</span><span class="detail-value">${cycleTheme.split(':')[1]}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value">${cy13.cycle <= 13 ? '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> — Prophet Micha\'s vision of Divine mercy' : cy13.cycle <= 26 ? '<a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a> — Moshe\'s 13 Attributes of Divine mercy' : '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> · <a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a>'}</span></div>
-       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>`;
+       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Pinchas Ben Yair — Rung ${cycleIdx + 1} of 13</div>
+       <div class="detail-row"><span class="detail-label">Hebrew:</span><span class="detail-value" dir="rtl" style="font-size:1.05em;line-height:1.6">${myChainHe}</span></div>
+       <div class="detail-row"><span class="detail-label">English:</span><span class="detail-value">${myChainEn}</span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avodah Zarah 20b ↗</a> · <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15 ↗</a></span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Nachman — Tale ${cycleIdx + 1} of 13</div>
+       <div class="detail-row"><span class="detail-label">Story:</span><span class="detail-value">${myTale}</span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot ↗</a></span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Arush — Book ${cycleIdx + 1} of 13</div>
+       <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value">${myBook}</span></div>`;
 
     // NETZACH — 41-day (enriched with soul levels + mivtzah + commandment)
     const cycleCmd = CYCLE_COMMANDMENTS[cy41.cycle - 1];
@@ -4508,7 +4680,11 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Commandment ${cy41.cycle}:</span><span class="detail-value">${cycleCmd.commandment} — ${cycleCmd.theme}</span></div>
        <div class="detail-row"><span class="detail-label">Soul Level:</span><span class="detail-value">${cy41.soulLevel} · Day ${cy41.dayInLevel} of 10</span></div>
        <div class="detail-row"><span class="detail-label">World:</span><span class="detail-value">${cy41.soulLevel.includes('Nefesh') ? 'Asiyah — Action & Physical' : cy41.soulLevel.includes('Ruach') ? 'Yetzirah — Emotional World' : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World' : cy41.soulLevel.includes('Chayah') ? 'Atzilut — Spiritual World' : 'Adam Kadmon — Yechidah (Day 41)'}</span></div>
-       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">9 cycles × 41 days = 369 days · 7th cycle = Shavuot→17 Tammuz</span></div>`;
+       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">9 cycles × 41 days = 369 days · 7th cycle = Shavuot→17 Tammuz</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok Breslov</div>
+       <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+       <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>`;
 
     // HOD — Halacha
     if (!hal.chofetz) {
