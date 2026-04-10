@@ -4466,6 +4466,34 @@ transition: transform 0.3s;
       ? `<div class="detail-row"><span class="detail-label">Acrostic Psalm:</span><span class="detail-value">${acrosticPsalm}</span></div>`
       : '';
     
+    // Alter Rebbe's Torah — 364-day cycle
+    // TO=97 days (opening+96 folios), LTVa=51 days (opening+50 folios),
+    // LTBa=99 days (99 folios), LTDe=100 days (100 folios), SHS=17 days (51 discourses/3 per day)
+    const CHOCHMA_CYCLE = [
+      { name: 'Torah Ohr',     start: 1,   end: 97,  hasOpening: true  },
+      { name: 'LT Vayikra',    start: 98,  end: 148, hasOpening: true  },
+      { name: 'LT Bamidbar',   start: 149, end: 247, hasOpening: false },
+      { name: 'LT Devarim',    start: 248, end: 347, hasOpening: false },
+      { name: 'Shir HaShirim', start: 348, end: 364, perDay: 3         },
+    ];
+    const chDay = ((d - 1) % 364) + 1;
+    let chSection = '', chReading = '';
+    for (const sec of CHOCHMA_CYCLE) {
+      if (chDay >= sec.start && chDay <= sec.end) {
+        const dw = chDay - sec.start + 1;
+        if (sec.perDay) {
+          const first = (dw - 1) * 3 + 1;
+          chReading = `Discourses ${first}–${first + 2}`;
+        } else if (sec.hasOpening && dw === 1) {
+          chReading = 'Opening Page';
+        } else {
+          chReading = `Folio ${sec.hasOpening ? dw - 1 : dw}`;
+        }
+        chSection = sec.name;
+        break;
+      }
+    }
+
     document.getElementById('chochmah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
        <div class="detail-row"><span class="detail-label">Daily Letter:</span><span class="detail-value">Day ${cy22.day} · ${cy22.dailyLetter} ${cy22.dailyHebrew}</span></div>
@@ -4474,7 +4502,12 @@ transition: transform 0.3s;
        ${acrosticRow}
        <div class="detail-row"><span class="detail-label">Sefer Yetzirah:</span><span class="detail-value">32 Paths = 10 Sefirot + 22 Letters (building blocks of Creation)</span></div>
        <div class="detail-row"><span class="detail-label">Three Weeks:</span><span class="detail-value">17 Tammuz → 9 Av = 22 days (internal Alef-Bet cycle)</span></div>
-       <div class="detail-row"><span class="detail-label">Acrostic Structure:</span><span class="detail-value">Cycles 1-7: One Psalm each · Cycle 8: Eshet Chayil · Cycles 9-16: Psalm 119 (8 sections)</span></div>`;
+       <div class="detail-row"><span class="detail-label">Acrostic Structure:</span><span class="detail-value">Cycles 1-7: One Psalm each · Cycle 8: Eshet Chayil · Cycles 9-16: Psalm 119 (8 sections)</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Alter Rebbe's Torah — Day ${chDay} of 364</div>
+       <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
+       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
+       <div class="detail-row"><span class="detail-label">Works:</span><span class="detail-value">Torah Ohr · Likutei Torah (Vayikra–Devarim) · Shir HaShirim</span></div>`;
 
     // BINAH — 7×7×7 Sefirot Omer Cycle
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
@@ -4497,13 +4530,40 @@ transition: transform 0.3s;
       `${daySef} of ${weekSef} — Cycle ${omerCycle}, Week ${omerWeek}, Day ${omerDay}`;
     document.getElementById('binah-tags').innerHTML =
       `<span class="tag highlight">${weekSef}</span><span class="tag">${daySef}</span><span class="tag">${superSef}</span><span class="tag">Omer ${omerPos} / Cycle ${omerCycle}</span>`;
+    // Likutei Tefilot — 364-day cycle
+    // Intro (1) + Part 1: 152 prayers × 2 days (304) + Part 2: 59 prayers (59) = 364
+    const ltDay = ((d - 1) % 364) + 1;
+    let ltSection, ltReading, ltUrl;
+    if (ltDay === 1) {
+      ltSection = 'Introduction';
+      ltReading  = 'Introduction';
+      ltUrl = 'https://www.sefaria.org/Likutey_Tefilot';
+    } else if (ltDay <= 305) {
+      const prayerIdx = ltDay - 2;
+      const prayerNum = Math.floor(prayerIdx / 2) + 1;
+      const half = (prayerIdx % 2 === 0) ? 'first half' : 'second half';
+      ltSection = 'Part 1';
+      ltReading  = `Prayer ${prayerNum} — ${half}`;
+      ltUrl = `https://www.sefaria.org/Likutey_Tefilot.1.${prayerNum}`;
+    } else {
+      const prayerNum = ltDay - 305;
+      ltSection = 'Part 2';
+      ltReading  = `Prayer ${prayerNum}`;
+      ltUrl = `https://www.sefaria.org/Likutey_Tefilot.2.${prayerNum}`;
+    }
+
     document.getElementById('binah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Combination:</span><span class="detail-value">${combo}</span></div>
        <div class="detail-row"><span class="detail-label">Week:</span><span class="detail-value">Week ${omerWeek} of 7 — ${weekSef}</span></div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${omerDay} of 7 — ${daySef}</span></div>
        <div class="detail-row"><span class="detail-label">Omer Cycle:</span><span class="detail-value">Cycle ${omerCycle} · Position ${omerPos} of 49</span></div>
        <div class="detail-row"><span class="detail-label">Cycle Sefirah:</span><span class="detail-value">Cycle ${omerCycle} of 7 — ${superSef}</span></div>
-       <div class="detail-row"><span class="detail-label">50 Gates:</span><span class="detail-value">49 Gates of Understanding + 1 (Shavuot / Matan Torah)</span></div>`;
+       <div class="detail-row"><span class="detail-label">50 Gates:</span><span class="detail-value">49 Gates of Understanding + 1 (Shavuot / Matan Torah)</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likutei Tefilot — Day ${ltDay} of 364</div>
+       <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${ltSection}</span></div>
+       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a> — Reb Nosson of Breslov</span></div>`;
 
     // CHESED — Mishna / Tosefta
     const mishnaInfo = getMishnaInfo(d);
