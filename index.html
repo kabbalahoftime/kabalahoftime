@@ -4641,6 +4641,7 @@ transition: transform 0.3s;
       myChainEn = `${myStep.name} — ${myStep.meaning}`;
     }
     const myTale = REBBE_NACHMAN_TALES[cycleIdx];
+    const myBook = RAV_ARUSH_BOOKS[cycleIdx];
 
     cards[4].querySelector('.sefirah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Nassi:</span><span class="detail-value">${cy13.nassi}</span></div>
@@ -4659,7 +4660,10 @@ transition: transform 0.3s;
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Nachman — Tale ${cycleIdx + 1} of 13</div>
        <div class="detail-row"><span class="detail-label">Story:</span><span class="detail-value">${myTale}</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot ↗</a></span></div>`;
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot ↗</a></span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Arush — Book ${cycleIdx + 1} of 13</div>
+       <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value">${myBook}</span></div>`;
 
     // M'Eyn Ganim — 368-day cycle (Rav Arush)
     const MEYN_GANIM_SECTIONS = [
