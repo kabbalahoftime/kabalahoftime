@@ -1128,7 +1128,7 @@ transition: transform 0.3s;
       <div id="yesod-parasha-cycle" style="font-size:14px; line-height:1.7; color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <!-- CHOK L'YISRAEL / CHOK BRESLOV -->
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael / Chok Breslov</div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael</div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
     </div>
@@ -4284,19 +4284,24 @@ transition: transform 0.3s;
     document.getElementById('keter-rambam-meta').innerHTML =
       `<strong>Rambam</strong> · Mishneh Torah · 3 chapters/day`;
 
-    // Chok L'Yisrael (both versions on one line)
+    // Chok L'Yisrael (Yesod card)
     const kolhalashonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
     document.getElementById('keter-chok-main').innerHTML =
       `<a href="https://www.kolhalashon.com/en/regularSite/searchResults/94/21/%D7%97%D7%95%D7%A7%20%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C?urlFilters=2:683%7C&date=${kolhalashonDate}" target="_blank" style="color:var(--gold)">` +
-      `Chok L'Yisrael ↗</a> / ` +
+      `Chok L'Yisrael ↗</a>`;
+    document.getElementById('keter-chok-meta').innerHTML =
+      `Torah, Prophets, Writings, Midrash, Zohar`;
+
+    // Chok Breslov (Netzach card)
+    document.getElementById('netzach-breslov-main').innerHTML =
       `<a id="chok-breslov-link" href="${BRESLOV_PODCAST_URL}" target="_blank" style="color:var(--gold)">` +
       `Chok Breslov ↗</a>`;
     fetchBresloveEpisodeUrl(hDay, hMonth).then(url => {
       const el = document.getElementById('chok-breslov-link');
       if (el) el.href = url;
     });
-    document.getElementById('keter-chok-meta').innerHTML =
-      `Torah, Prophets, Writings, Midrash, Zohar (+ Breslov teachings)`;
+    document.getElementById('netzach-breslov-meta').innerHTML =
+      `Daily Breslov teachings`;
 
     // 5. Hayom Yom
     const chabadURL  = `${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}`;
@@ -4531,7 +4536,11 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Commandment ${cy41.cycle}:</span><span class="detail-value">${cycleCmd.commandment} — ${cycleCmd.theme}</span></div>
        <div class="detail-row"><span class="detail-label">Soul Level:</span><span class="detail-value">${cy41.soulLevel} · Day ${cy41.dayInLevel} of 10</span></div>
        <div class="detail-row"><span class="detail-label">World:</span><span class="detail-value">${cy41.soulLevel.includes('Nefesh') ? 'Asiyah — Action & Physical' : cy41.soulLevel.includes('Ruach') ? 'Yetzirah — Emotional World' : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World' : cy41.soulLevel.includes('Chayah') ? 'Atzilut — Spiritual World' : 'Adam Kadmon — Yechidah (Day 41)'}</span></div>
-       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">9 cycles × 41 days = 369 days · 7th cycle = Shavuot→17 Tammuz</span></div>`;
+       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">9 cycles × 41 days = 369 days · 7th cycle = Shavuot→17 Tammuz</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok Breslov</div>
+       <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+       <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>`;
 
     // HOD — Halacha
     if (!hal.chofetz) {
