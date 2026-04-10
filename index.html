@@ -2430,6 +2430,57 @@ transition: transform 0.3s;
       sources: '\u05E8\u05E9\u05D9"\u05D9 \u05E9\u05DD, \u05DE\u05D9\u05D5\u05DE\u05D0 \u05E4\u05D5.; \u05D2\u05D5\u05E8 \u05D0\u05E8\u05D9\u05D4 \u05DC\u05DE\u05D4\u05E8"\u05DC; \u05DB\u05D3 \u05D4\u05E7\u05DE\u05D7 \u05DC\u05E8\u05D1\u05D9\u05E0\u05D5 \u05D1\u05D7\u05D9\u05D9 \u05E9\u05DD' }
   ];
 
+  // Mesillat Yesharim — 13 rungs of the ladder (Mishnah Avodah Zarah 20b)
+  const MESILLAT_YESHARIM_STEPS = [
+    { he: 'תּוֹרָה',               name: 'Torah',            meaning: 'Study of Torah' },
+    { he: 'זְהִירוּת',              name: 'Zehirut',          meaning: 'Watchfulness' },
+    { he: 'זְרִיזוּת',              name: 'Zerizut',          meaning: 'Alacrity' },
+    { he: 'נְקִיּוּת',              name: 'Nekiyut',          meaning: 'Cleanliness' },
+    { he: 'פְּרִישׁוּת',            name: 'Perishut',         meaning: 'Separation' },
+    { he: 'טָהֳרָה',                name: 'Tahara',           meaning: 'Purity' },
+    { he: 'חֲסִידוּת',              name: 'Hasidut',          meaning: 'Piety' },
+    { he: 'עֲנָוָה',                name: 'Anavah',           meaning: 'Humility' },
+    { he: 'יִרְאַת חֵטְא',          name: 'Yirat Chet',       meaning: 'Fear of Sin' },
+    { he: 'קְדֻשָּׁה',              name: 'Kedushah',         meaning: 'Holiness' },
+    { he: 'רוּחַ הַקֹּדֶשׁ',        name: 'Ruach HaKodesh',   meaning: 'Divine Inspiration' },
+    { he: 'תְּחִיַּת הַמֵּתִים',     name: 'Techiyat HaMetim', meaning: 'Resurrection of the Dead' },
+    { he: 'אֵלִיָּהוּ',              name: 'Eliyahu',          meaning: 'The Prophet Elijah', conclusion: true },
+  ];
+
+  // 13 Tales of Rebbe Nachman (Sipurey Maasiyot)
+  const REBBE_NACHMAN_TALES = [
+    'The Lost Princess',
+    'The Emperor and the King',
+    'The Son Who Could Not Walk',
+    'The King Who Decreed Conversion',
+    "The King's Son Who Was Made of Precious Stones",
+    'The Humble King',
+    'The Fly and the Spider',
+    'The Rabbi and His Only Son',
+    'The Clever Man and the Simple Man',
+    'The Burgher and the Pauper',
+    "The King's Son and the Maid's Son Who Were Exchanged",
+    'The Prayer Leader',
+    'The Seven Beggars',
+  ];
+
+  // 13 Books by Rav Shalom Arush
+  const RAV_ARUSH_BOOKS = [
+    'The Garden of Emuna',
+    'The Garden of Peace',
+    "Women's Wisdom",
+    'The Garden of Yearning — A New Light',
+    'In Forest Fields',
+    'The Garden of Riches',
+    'The Garden of Gratitude',
+    'The Garden of Education',
+    'The Garden of Wisdom',
+    'The Garden of Purity',
+    'The Garden of Knowledge',
+    'The Garden of Healing',
+    'Say Thank You and See Miracles',
+  ];
+
   // Nassi (tribal prince) for each day 1-13 within a cycle (based on Rosh Chodesh Nissan order)
   const NASSI_NAMES = [
     'Nachshon ben Aminadav (Yehudah)',
@@ -4513,6 +4564,23 @@ transition: transform 0.3s;
     const sourcesRow = (cy13.isMoshe && cy13.attr.sources)
       ? `<div class="detail-row"><span class="detail-label">Sources:</span><span class="detail-value" dir="rtl">${cy13.attr.sources}</span></div>`
       : '';
+    // Mesillat Yesharim chain for this day
+    const myStep = MESILLAT_YESHARIM_STEPS[cy13.day - 1];
+    let myChainHe, myChainEn;
+    if (myStep.conclusion) {
+      myChainHe = 'וּתְחִיַּת הַמֵּתִים בָּא עַל יְדֵי אֵלִיָּהוּ זָכוּר לַטּוֹב, אָמֵן';
+      myChainEn = 'Resurrection comes through Elijah — may he be remembered for good, Amen';
+    } else if (cy13.day <= 11) {
+      const nextStep = MESILLAT_YESHARIM_STEPS[cy13.day];
+      myChainHe = `${myStep.he} מְבִיאָה לִידֵי ${nextStep.he}`;
+      myChainEn = `${myStep.name} leads to ${nextStep.name}`;
+    } else {
+      myChainHe = myStep.he;
+      myChainEn = `${myStep.name} — ${myStep.meaning}`;
+    }
+    const myTale = REBBE_NACHMAN_TALES[cy13.day - 1];
+    const myBook = RAV_ARUSH_BOOKS[cy13.day - 1];
+
     cards[4].querySelector('.sefirah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Nassi:</span><span class="detail-value">${cy13.nassi}</span></div>
        <div class="detail-row"><span class="detail-label">Daily Attribute:</span><span class="detail-value">${cy13.attr.name} — ${cy13.attr.meaning}</span></div>
@@ -4521,7 +4589,19 @@ transition: transform 0.3s;
        ${sourcesRow}
        <div class="detail-row"><span class="detail-label">${cycleTheme.split(':')[0]}:</span><span class="detail-value">${cycleTheme.split(':')[1]}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value">${cy13.cycle <= 13 ? '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> — Prophet Micha\'s vision of Divine mercy' : cy13.cycle <= 26 ? '<a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a> — Moshe\'s 13 Attributes of Divine mercy' : '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> · <a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a>'}</span></div>
-       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>`;
+       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Pinchas Ben Yair — Rung ${cy13.day} of 13</div>
+       <div class="detail-row"><span class="detail-label">Hebrew:</span><span class="detail-value" dir="rtl" style="font-size:1.05em;line-height:1.6">${myChainHe}</span></div>
+       <div class="detail-row"><span class="detail-label">English:</span><span class="detail-value">${myChainEn}</span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avodah Zarah 20b ↗</a> · <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15 ↗</a></span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Nachman — Tale ${cy13.day} of 13</div>
+       <div class="detail-row"><span class="detail-label">Story:</span><span class="detail-value">${myTale}</span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot ↗</a></span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Arush — Book ${cy13.day} of 13</div>
+       <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value">${myBook}</span></div>`;
 
     // NETZACH — 41-day (enriched with soul levels + mivtzah + commandment)
     const cycleCmd = CYCLE_COMMANDMENTS[cy41.cycle - 1];
