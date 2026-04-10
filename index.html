@@ -1766,9 +1766,8 @@ transition: transform 0.3s;
 
   const CHOFETZ_CHAIM_PODCAST_URL = 'https://feeds.transistor.fm/chofetz-chaim-yomi';
   async function fetchChofetzChaimEpisodeUrl() {
-    // Try jewishpodcasts.fm (same host as Breslov — CORS-enabled)
     for (const feedUrl of [
-      'https://rss.jewishpodcasts.fm/rss/250',
+      'https://media.rss.com/ohr-shlomo-shiurim-podcast-network/feed.xml',
       'https://feeds.transistor.fm/chofetz-chaim-yomi',
     ]) {
       try {
