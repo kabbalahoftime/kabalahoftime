@@ -4470,14 +4470,14 @@ transition: transform 0.3s;
     // TO=97 days (opening+96 folios), LTVa=51 days (opening+50 folios),
     // LTBa=99 days (99 folios), LTDe=100 days (100 folios), SHS=17 days (51 discourses/3 per day)
     const CHOCHMA_CYCLE = [
-      { name: 'Torah Ohr',     start: 1,   end: 97,  hasOpening: true  },
-      { name: 'LT Vayikra',    start: 98,  end: 148, hasOpening: true  },
-      { name: 'LT Bamidbar',   start: 149, end: 247, hasOpening: false },
-      { name: 'LT Devarim',    start: 248, end: 347, hasOpening: false },
-      { name: 'Shir HaShirim', start: 348, end: 364, perDay: 3         },
+      { name: 'Torah Ohr',     start: 1,   end: 97,  hasOpening: true,  url: null },
+      { name: 'LT Vayikra',    start: 98,  end: 148, hasOpening: true,  url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
+      { name: 'LT Bamidbar',   start: 149, end: 247, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
+      { name: 'LT Devarim',    start: 248, end: 347, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
+      { name: 'Shir HaShirim', start: 348, end: 364, perDay: 3,         url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
     ];
     const chDay = ((d - 1) % 364) + 1;
-    let chSection = '', chReading = '';
+    let chSection = '', chReading = '', chUrl = null;
     for (const sec of CHOCHMA_CYCLE) {
       if (chDay >= sec.start && chDay <= sec.end) {
         const dw = chDay - sec.start + 1;
@@ -4490,9 +4490,13 @@ transition: transform 0.3s;
           chReading = `Folio ${sec.hasOpening ? dw - 1 : dw}`;
         }
         chSection = sec.name;
+        chUrl = sec.url;
         break;
       }
     }
+    const chSourceRow = chUrl
+      ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${chUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a> — R. Shneur Zalman of Liadi</span></div>`
+      : `<div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">R. Shneur Zalman of Liadi (Alter Rebbe)</span></div>`;
 
     document.getElementById('chochmah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
@@ -4507,7 +4511,7 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Alter Rebbe's Torah — Day ${chDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
-       <div class="detail-row"><span class="detail-label">Works:</span><span class="detail-value">Torah Ohr · Likutei Torah (Vayikra–Devarim) · Shir HaShirim</span></div>`;
+       ${chSourceRow}`;
 
     // BINAH — 7×7×7 Sefirot Omer Cycle
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
