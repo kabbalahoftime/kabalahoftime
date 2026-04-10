@@ -904,21 +904,7 @@ transition: transform 0.3s;
     </div>
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
   </div>
-  <div style="text-align:center;margin:6px 0 2px;">
-    <button onclick="openDigest()" style="background:none;border:1px solid var(--gold,#b8964a);color:var(--gold,#b8964a);border-radius:6px;padding:3px 14px;font-size:0.78rem;cursor:pointer;letter-spacing:0.5px;">✦ Daily Digest</button>
-  </div>
-
   <!-- CROWN — YEARLY CYCLE -->
-
-  <!-- Daily Digest Modal -->
-  <div id="digest-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);overflow-y:auto;padding:24px 12px;" onclick="if(event.target===this)closeDigest()">
-    <div style="max-width:640px;margin:0 auto;background:var(--bg-card,#fffdf7);border-radius:12px;padding:24px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.3);">
-      <button onclick="closeDigest()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink-mid,#888);" aria-label="Close">✕</button>
-      <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2.5px;color:var(--gold,#b8964a);text-transform:uppercase;margin-bottom:4px;">✦ Daily Digest ✦</div>
-      <div id="digest-date" style="font-size:0.85rem;color:var(--ink-mid,#888);margin-bottom:16px;"></div>
-      <div id="digest-body"></div>
-    </div>
-  </div>
 
   <div class="keter-title-row">
     <span class="keter-crown-label">✦ KETER ✦</span>
@@ -4656,6 +4642,32 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Arush — Book ${cycleIdx + 1} of 13</div>
        <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value">${myBook}</span></div>`;
 
+    // M'Eyn Ganim — 368-day cycle (Rav Arush)
+    const MEYN_GANIM_SECTIONS = [
+      { name: 'Preface',       startDay: 1,   endDay: 3,   startPage: null },
+      { name: 'Emunah',        startDay: 4,   endDay: 26,  startPage: 8   },
+      { name: 'Chochma',       startDay: 27,  endDay: 112, startPage: 32  },
+      { name: 'Hitbodedut',    startDay: 113, endDay: 156, startPage: 120 },
+      { name: "Ha'Osher",      startDay: 157, endDay: 195, startPage: 166 },
+      { name: "Ha'Ga'agu'im",  startDay: 196, endDay: 229, startPage: 206 },
+      { name: 'HaChinuch',     startDay: 230, endDay: 270, startPage: 242 },
+      { name: 'HaRefuah',      startDay: 271, endDay: 302, startPage: 284 },
+      { name: "HaDa'at",       startDay: 303, endDay: 368, startPage: 318 },
+    ];
+    const MEYN_ROMAN = ['i', 'ii', 'iii'];
+    const meynDay = ((d - 1) % 368) + 1;
+    let meynSection = '', meynPage = '';
+    for (const sec of MEYN_GANIM_SECTIONS) {
+      if (meynDay >= sec.startDay && meynDay <= sec.endDay) {
+        const dayInSec = meynDay - sec.startDay + 1;
+        meynSection = sec.name;
+        meynPage = sec.startPage === null
+          ? MEYN_ROMAN[dayInSec - 1]
+          : String(sec.startPage + dayInSec - 1);
+        break;
+      }
+    }
+
     // NETZACH — 41-day (enriched with soul levels + mivtzah + commandment)
     const cycleCmd = CYCLE_COMMANDMENTS[cy41.cycle - 1];
     cards[5].querySelector('.sefirah-cycle-name').textContent = `41-Day Cycle`;
@@ -4673,7 +4685,12 @@ transition: transform 0.3s;
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok Breslov</div>
        <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
-       <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>`;
+       <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ M'Eyn Ganim — Day ${meynDay} of 368</div>
+       <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${meynSection}</span></div>
+       <div class="detail-row"><span class="detail-label">Page:</span><span class="detail-value">${meynPage}</span></div>
+       <div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">Rav Shalom Arush</span></div>`;
 
     // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
     document.getElementById('netzach-breslov-main').innerHTML =
@@ -5034,201 +5051,6 @@ transition: transform 0.3s;
   }
 
   render();
-
-  // ══════════════════════════════════════════════════════════════
-  // DAILY DIGEST
-  // ══════════════════════════════════════════════════════════════
-
-  const DIGEST_WORKER_URL = 'https://kabbalahoftime-digest.YOUR_SUBDOMAIN.workers.dev/digest';
-
-  // Collect study items from every card for the current day
-  function collectDigestItems() {
-    const d    = getDaysDiff(currentOffset);
-    const date = getDisplayDate(currentOffset);
-    const hDate  = gregToHebrew(date);
-    const hMonth = hDate.month, hDay = hDate.day;
-    const sef    = getSefirotInfo(d);
-    const items  = [];
-
-    // ── KETER ───────────────────────────────────────────────────────────────
-
-    // Hayom Yom (text already in memory)
-    const hyText = getHayomYom(hMonth, hDay);
-    if (hyText) {
-      items.push({ title: 'Hayom Yom', text: hyText,
-        url: 'https://www.chabad.org/library/article_cdo/aid/3304/jewish/Hayom-Yom.htm' });
-    }
-
-    // Likutei Moharan
-    const lmLesson = d >= 195 ? d + 10 : d;
-    const lmData   = LM_THEMES[lmLesson];
-    items.push({
-      title:      `Daily Likutei Moharan: Lesson ${lmLesson}` + (lmData ? ` — ${lmData.theme}` : ''),
-      sefariaRef: `Likutei_Moharan.${lmLesson}`,
-      url:        `https://www.sefaria.org/Likutei_Moharan.${lmLesson}`,
-    });
-
-    // Daf Yomi
-    const daf = getDafYomi(date);
-    if (daf) {
-      const slug = dafSlug(daf.name);
-      items.push({
-        title:      `Daf Yomi: ${daf.name} ${daf.daf}`,
-        sefariaRef: `${slug}.${daf.daf}a`,
-        url:        `https://www.sefaria.org/${slug}.${daf.daf}a`,
-      });
-    }
-
-    // Tehillim (5 chapters per day of Gregorian month)
-    const tehDay   = date.getDate();
-    const tehStart = tehDay <= 29 ? (tehDay - 1) * 5 + 1 : 146;
-    const tehEnd   = tehDay <= 29 ? tehDay * 5 : 150;
-    items.push({
-      title:      `Tehillim: Chapters ${tehStart}–${tehEnd}`,
-      sefariaRef: `Psalms.${tehStart}-${tehEnd}`,
-      url:        `https://www.sefaria.org/Psalms.${tehStart}`,
-    });
-
-    // (Tanya + Rambam are added by the Worker from the Sefaria calendar API)
-
-    // ── CHOCHMAH — 22-Day Alef-Bet ──────────────────────────────────────────
-    const cy22 = get22DayInfo(d);
-    items.push({
-      title: `Chochmah · 22-Day Cycle ${cy22.cycle}, Day ${cy22.day}: ${cy22.dailyLetter} (${cy22.dailyHebrew})`,
-      text:  `Today's letter is ${cy22.dailyLetter} (${cy22.dailyHebrew}), part of cycle theme "${cy22.theme}" — letters ${cy22.letters} (${cy22.hebrew}).`,
-      url:   null,
-    });
-
-    // ── BINAH — Omer / Sefirot ───────────────────────────────────────────────
-    items.push({
-      title: `Binah · Sefirot: ${sef.label}`,
-      text:  `Today's Sefirot combination: ${sef.label}. Day Sefirah: ${sef.daySef}. Week Sefirah: ${sef.weekSef}. Cycle Sefirah: ${sef.cycleSef}.`,
-      url:   null,
-    });
-
-    // ── CHESED — Mishna ──────────────────────────────────────────────────────
-    const mishna = getMishnaInfo(d);
-    if (mishna) {
-      const ref = mishna.seferiaUrl
-        ? mishna.seferiaUrl.replace('https://www.sefaria.org/', '')
-        : null;
-      items.push({
-        title:      `Chesed · Mishna: ${mishna.tag1}`,
-        sefariaRef: ref,
-        url:        mishna.seferiaUrl || null,
-      });
-    }
-
-    // ── GEVURAH — Tanach ─────────────────────────────────────────────────────
-    const tanach = getTanachInfo(d);
-    if (tanach) {
-      const ref = tanach.seferiaUrl
-        ? tanach.seferiaUrl.replace('https://www.sefaria.org/', '')
-        : null;
-      items.push({
-        title:      `Gevurah · Tanach: ${tanach.tag1}`,
-        sefariaRef: ref,
-        url:        tanach.seferiaUrl || null,
-      });
-    }
-
-    // ── TIFERET — 13 Attributes ──────────────────────────────────────────────
-    const cy13 = get13DayInfo(d);
-    const attrName = cy13.attr?.name || '';
-    const attrMeaning = cy13.attr?.meaning || '';
-    items.push({
-      title: `Tiferet · 13 Attributes, Cycle ${cy13.cycle} Day ${cy13.day}: ${attrName}`,
-      text:  `Today's divine attribute is "${attrName}" — ${attrMeaning}. Set type: ${cy13.setType}. Nassi: ${cy13.nassi}.`,
-      url:   null,
-    });
-
-    // ── NETZACH — 41-Day Mivtzoyim ───────────────────────────────────────────
-    const cy41 = get41DayInfo(d);
-    items.push({
-      title: `Netzach · Mivtzoyim Cycle ${cy41.cycle}, Day ${cy41.day}: ${cy41.mivtzah}`,
-      text:  `Today's Mivtzah campaign is "${cy41.mivtzah}", at the soul level of ${cy41.soulLevel}.`,
-      url:   null,
-    });
-
-    // ── HOD — Halacha ────────────────────────────────────────────────────────
-    const halacha = getHalachaInfo(d);
-    if (halacha && !halacha.chofetz) {
-      items.push({
-        title:      `Hod · Halacha: Shulchan Aruch, Orach Chaim ${halacha.ch1}–${halacha.ch2}`,
-        sefariaRef: `Shulchan_Arukh,_Orach_Chayim.${halacha.ch1}`,
-        url:        `https://www.sefaria.org/Shulchan_Arukh,_Orach_Chayim.${halacha.ch1}`,
-      });
-    } else if (halacha && halacha.chofetz) {
-      items.push({
-        title: `Hod · Halacha: Sefer Chofetz Chaim, Section ${halacha.section}`,
-        text:  `Today's study is Section ${halacha.section} of the Sefer Chofetz Chaim, covering the laws of proper speech.`,
-        url:   null,
-      });
-    }
-
-    // ── MALCHUT — Weekly Text with Parasha Mapping ───────────────────────────
-    const malTxt = getMalchutText(sef.dayNum);
-    if (malTxt) {
-      // Get parasha mapping for today's text
-      const parasha = findCurrentParasha(
-        (() => { const s = getDisplayDate(currentOffset); const diff = (6 - s.getDay() + 7) % 7;
-                 const ns = new Date(s); ns.setDate(s.getDate() + diff);
-                 return ns.getFullYear() + '-' + String(ns.getMonth()+1).padStart(2,'0') + '-' + String(ns.getDate()).padStart(2,'0'); })()
-      );
-      const parashaNum = parasha && parasha.numbers && parasha.numbers[0];
-      const mapping    = parashaNum ? getParashaMapping(malTxt.name, parashaNum) : null;
-      const malUrl     = mapping ? malchutSeferiaUrl(malTxt.name, mapping) : null;
-      const malRef     = malUrl  ? malUrl.replace('https://www.sefaria.org/', '') : null;
-      const portionStr = mapping ? ` — ${mapping.portion}` : '';
-      items.push({
-        title:      `Malchut · ${malTxt.name}${portionStr}`,
-        sefariaRef: malRef,
-        url:        malUrl,
-      });
-    }
-
-    return items;
-  }
-
-  function openDigest() {
-    const modal  = document.getElementById('digest-modal');
-    const body   = document.getElementById('digest-body');
-    const dateEl = document.getElementById('digest-date');
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-
-    const date  = getDisplayDate(currentOffset).toISOString().slice(0, 10);
-    dateEl.textContent = date;
-    body.innerHTML = '<div style="text-align:center;padding:32px;color:var(--ink-mid,#888);">Generating digest…</div>';
-
-    const items = collectDigestItems();
-
-    fetch(DIGEST_WORKER_URL, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ date, items }),
-    })
-      .then(r => r.json())
-      .then(data => {
-        if (data.error) throw new Error(data.error);
-        body.innerHTML = (data.items || []).map(item => `
-          <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border,#e8dfc8);">
-            <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold,#b8964a);text-transform:uppercase;margin-bottom:6px;">${item.title}</div>
-            <p style="margin:0 0 8px;font-size:0.9rem;line-height:1.6;color:var(--ink,#2c1a00);">${item.summary}</p>
-            ${item.url ? `<a href="${item.url}" target="_blank" style="font-size:0.8rem;color:var(--gold,#b8964a);">Read full text ↗</a>` : ''}
-          </div>`).join('');
-      })
-      .catch(err => {
-        body.innerHTML = `<div style="color:#c00;padding:16px;">Could not load digest: ${err.message}</div>`;
-      });
-  }
-
-  function closeDigest() {
-    document.getElementById('digest-modal').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDigest(); });
 
   // ══════════════════════════════════════════════════════════════
   // PWA SERVICE WORKER REGISTRATION
