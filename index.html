@@ -2355,6 +2355,45 @@ transition: transform 0.3s;
     };
   }
 
+  // Tractate / 11-day half-cycle data (33 entries: 1a–16b = 11 days each; 17a = 12 days)
+  // Each entry covers one half of the 22-day Alef-Bet set (days 1-11 = 'a', days 12-22 = 'b')
+  // Total: 32 × 11 + 12 = 364 days
+  const TRACTATE_CYCLES = [
+    { id:'1a',  tractate:'Brachot',               period:'Rosh Hashanah',               desc:'Brachot opens with Kriat Shema — our daily declaration of G-d\'s unity. Rosh Hashanah is the day we coronate G-d as King, echoing this foundational declaration.' },
+    { id:'1b',  tractate:'Shabbat',               period:'Yom Kippur',                  desc:'Both are days of cessation: Shabbat celebrates G-d\'s completed creation; Yom Kippur is a rest of repentance, when we are released from our sins.' },
+    { id:'2a',  tractate:'Eruvim',                period:'Sukkot',                      desc:'Eruvim unites separate domains into one — mirroring the Arba Minim\'s unity of four types of Jews, surrounded by the sukkah\'s divine protection.' },
+    { id:'2b',  tractate:'Pesachim',              period:'Cheshvan',                    desc:'Pesachim begins Avodat HaBerurim — searching for chametz (ego) by the light of Torah, elevating the physical. The search begins G-d\'s redemptive work.' },
+    { id:'3a',  tractate:'Shekalim',              period:'Cheshvan',                    desc:'The half-shekel elevates a mundane donation into a holy Temple offering, symbolizing the partnership between man and G-d in building the spiritual.' },
+    { id:'3b',  tractate:'Yoma',                  period:'Cheshvan / Kislev',           desc:'Yoma details the Kohen Gadol\'s Yom Kippur service in the Temple — a stark contrast to the desecration the Greeks brought, commemorated by Chanukah.' },
+    { id:'4a',  tractate:'Sukkah',                period:'Kislev / Chanukah',           desc:'Chanukah\'s 8 days parallel Sukkot\'s 8 days. The Gemara notes Chanukah was a "missed" Sukkot celebration during the Maccabean revolt.' },
+    { id:'4b',  tractate:'Beitzah',               period:'Kislev / Chanukah',           desc:'Beitzah — an egg, a concealed item now revealed — mirrors Chanukah: the hidden vial of oil and victory of the few were a miracle revealed in time.' },
+    { id:'5a',  tractate:'Rosh Hashanah',         period:'Chanukah / Tevet',            desc:'Rosh Hashanah covers the Jewish calendar — the very institution the Greeks sought to abolish first, as it anchors all of Israel\'s appointed holy times.' },
+    { id:'5b',  tractate:'Ta\'anit',              period:'Tevet / Fast of Tevet',       desc:'Ta\'anit covers the laws of fasting; the 10th of Tevet — commemorating the Babylonian siege of Jerusalem — falls directly within this period.' },
+    { id:'6a',  tractate:'Megillah',              period:'Tevet',                       desc:'Megillah deals with the Purim Megillah reading and blessings over Written Torah, focusing on the sanctification and power of the sacred written word.' },
+    { id:'6b',  tractate:'Moed Katan',            period:'Yud Shvat',                   desc:'Moed Katan covers Chol HaMoed and mourning laws — completed on Yud Shvat, the yahrzeit of the Frierdiker Rebbe, a day of profound remembrance.' },
+    { id:'7a',  tractate:'Chagigah',              period:'Tu B\'Shvat',                 desc:'Chagigah 14b contains a passage of "trees singing" — a perfect thematic fit for Tu B\'Shvat, dedicated to celebrating trees and their role in creation.' },
+    { id:'7b',  tractate:'Yevamot',               period:'22nd Shvat',                  desc:'Yevamot opens Seder Nashim — the order of family and marriage. The 22nd of Shvat is the yahrzeit of Rebbetzin Chaya Mushka, a day of partnership.' },
+    { id:'8a',  tractate:'Ketubot',               period:'Adar / Purim',                desc:'Ketubot opens with a young virgin about to marry — closely paralleling Megillat Esther, where Esther, a young Jewish virgin, is brought to the palace.' },
+    { id:'8b',  tractate:'Nedarim',               period:'Adar',                        desc:'Nedarim covers vows. The parallel between vow-annulment in Numbers and Mordechai\'s words to Esther: silence can either uphold a vow or doom the people.' },
+    { id:'9a',  tractate:'Nazir',                 period:'Nisan / Pesach / Omer',       desc:'The Nazir\'s vows of abstinence parallel Pesach stringencies: avoiding chametz-wine, ritual impurity, and haircuts — all echoed during the Omer.' },
+    { id:'9b',  tractate:'Sotah',                 period:'Pesach / Omer',               desc:'Sotah has 49 dapim — paralleling the 49 days of the Omer. The Sotah\'s barley offering mirrors the Omer\'s barley sacrifice brought in the Temple.' },
+    { id:'10a', tractate:'Gittin',                period:'Pesach / Omer',               desc:'Gittin\'s "divorce" from a Ba\'al mirrors the Exodus: a national liberation from human masters and pagan gods — freedom to enter a covenant with G-d.' },
+    { id:'10b', tractate:'Kiddushin',             period:'Iyar / Omer',                 desc:'Kiddushin covers betrothal; the Omer is preparation for the "wedding" between G-d and Israel — the giving of the Torah on Shavuot.' },
+    { id:'11a', tractate:'Nezikin',               period:'Lag BaOmer',                  desc:'Bava Kama, Metzia, Basra cover Bein Adam L\'Chavero (man and fellow). Rabbi Akiva\'s students died for lack of respect — the core lesson of Nezikin.' },
+    { id:'11b', tractate:'Sanhedrin / Makkot',    period:'Omer / Rosh Chodesh Sivan',   desc:'Makkot ends with Rabbi Akiva comforting his companions over the Temple\'s destruction — finding hope in despair as we approach the giving of Torah.' },
+    { id:'12a', tractate:'Shvuot',                period:'Shavuot',                     desc:'Shvuot covers oaths — directly connected to Shavuot, when Israel took a collective oath to follow G-d\'s law at Mount Sinai.' },
+    { id:'12b', tractate:'Avodah Zarah',          period:'Sivan',                       desc:'Avodah Zarah covers idolatry — a sobering reflection on the Chet HaEgel (Golden Calf), which occurred shortly after the Torah was given in Sivan.' },
+    { id:'13a', tractate:'Horayot',               period:'Tammuz',                      desc:'Horayot covers a mistaken court ruling leading the community to sin — mirroring the Spies\' tragic error in Tammuz that set off the path to the Temple\'s destruction.' },
+    { id:'13b', tractate:'Zevachim',              period:'Tammuz / Three Weeks',        desc:'Zevachim covers animal sacrifices of atonement. In the Three Weeks, we mourn the Temple and yearn for its restoration and the return of its holy service.' },
+    { id:'14a', tractate:'Menachot',              period:'Three Weeks',                 desc:'Menachot covers the meal offering — a symbol of yichud (oneness). We yearn to reunite with the Divine presence that departed when the Temple was destroyed.' },
+    { id:'14b', tractate:'Chullin',               period:'Tisha B\'Av',                 desc:'Chullin means "secular/profane" — covering animals for non-sacred consumption. On Tisha B\'Av we mourn our fall from holiness; the mundane awaits elevation.' },
+    { id:'15a', tractate:'Bechorot',              period:'Av',                          desc:'Bechorot covers the firstborn — Israel as G-d\'s "firstborn nation." After Tisha B\'Av, we begin rebuilding spiritually and repairing what was lost.' },
+    { id:'15b', tractate:'Arachin / Temura',      period:'Av / Rosh Chodesh Elul',      desc:'Arachin: dedicating one\'s full worth to the Temple (mesirat nefesh). Temura: a mistaken switch elevated through teshuvah — the dual themes of Elul.' },
+    { id:'16a', tractate:'Keritot',               period:'Elul',                        desc:'Keritot lists major sins each requiring specific atonement — a call to precise cheshbon ha\'nefesh. General repentance is not enough; each sin needs its own teshuvah.' },
+    { id:'16b', tractate:'Meilah / Tamid',        period:'Elul',                        desc:'Meilah: repenting for profaning holy things; Tamid: daily, consistent Temple service. Together they define Elul\'s dual call to repair and renew.' },
+    { id:'17a', tractate:'Niddah',                period:'Rosh Hashanah',               desc:'Niddah\'s cycle of separation, purification, and reunion mirrors the High Holiday season — purifying our souls to draw close to G-d as we enter the new year.' },
+  ];
+
   // 13-day cycle — enriched with 13 Attributes
   // Micha's 13 Attributes of Mercy (Micah 7:18-20) — Cycles 1-13
   const THIRTEEN_ATTRIBUTES = [
@@ -4461,6 +4500,12 @@ transition: transform 0.3s;
       ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${chUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a> — R. Shneur Zalman of Liadi</span></div>`
       : `<div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">R. Shneur Zalman of Liadi (Alter Rebbe)</span></div>`;
 
+    // Tractate half-cycle lookup: 'a' = days 1-11, 'b' = days 12-22; cycle 17 has only 'a' (12 days)
+    const tractHalfIdx = cy22.cycle === 17
+      ? 32
+      : (cy22.cycle - 1) * 2 + (cy22.day <= 11 ? 0 : 1);
+    const tractData = TRACTATE_CYCLES[tractHalfIdx];
+
     document.getElementById('chochmah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
        <div class="detail-row"><span class="detail-label">Daily Letter:</span><span class="detail-value">Day ${cy22.day} · ${cy22.dailyLetter} ${cy22.dailyHebrew}</span></div>
@@ -4474,7 +4519,12 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Day ${chDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
-       ${chSourceRow}`;
+       ${chSourceRow}
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractData.id}</div>
+       <div class="detail-row"><span class="detail-label">Tractate:</span><span class="detail-value">${tractData.tractate}</span></div>
+       <div class="detail-row"><span class="detail-label">Period:</span><span class="detail-value">${tractData.period}</span></div>
+       <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${tractData.desc}</span></div>`;
 
     // BINAH — 7×7×7 Sefirot Omer Cycle
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
