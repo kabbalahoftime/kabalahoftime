@@ -927,12 +927,11 @@ transition: transform 0.3s;
     <div class="keter-main" id="keter-lm-main">Loading…</div>
     <div class="keter-meta" id="keter-lm-meta"></div>
   </div>
-  <!-- DAF YOMI section -->
+  <!-- TREASURY OF CHASSIDIC TALES section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Daf Yomi — דַּף יוֹמִי</div>
-    <div class="keter-hdate" id="keter-daf-masechet">Loading…</div>
-    <div class="keter-main" id="keter-daf-main">Loading…</div>
-    <div class="keter-meta" id="keter-daf-meta"></div>
+    <div class="keter-section-label">✦ Treasury of Chassidic Tales</div>
+    <div class="keter-main" id="keter-treasury-main">Loading…</div>
+    <div class="keter-meta" id="keter-treasury-meta"></div>
   </div>
 </div>
 
@@ -4398,27 +4397,15 @@ transition: transform 0.3s;
       `<a href="${seferiaURL}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>` +
       ` &nbsp;·&nbsp; ${lmBreslovLinks}`;
 
-    // 7. Daf Yomi
+    // 7. Treasury of Chassidic Tales (R. S.Y. Zevin)
     const daf = getDafYomi(date);
-    if (daf) {
-      const ytQuery  = encodeURIComponent(`${daf.name} ${daf.daf}`);
-      const ytSearch = `https://www.youtube.com/@mercazdafyomi/search?query=${ytQuery}`;
-      document.getElementById('keter-daf-masechet').innerHTML =
-        `<span style="font-size:1.1em">${daf.heb}</span>`;
-      document.getElementById('keter-daf-main').innerHTML =
-        `<strong>${daf.name}</strong>, Daf <strong>${daf.daf}</strong>`;
-      const dafSeferiaURL = `https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a`;
-      const dafPBPURL = dafPointByPointURL(daf.name, daf.daf);
-      document.getElementById('keter-daf-meta').innerHTML =
-        `<strong>Daf Yomi</strong> · Cycle 14 &nbsp;·&nbsp; ` +
-        `<a href="${ytSearch}" target="_blank" style="color:var(--gold)">MDY Shiur ↗</a>` +
-        SEFARIA_LINK(dafSeferiaURL) +
-        (dafPBPURL ? `&nbsp;·&nbsp; <a href="${dafPBPURL}" target="_blank" style="color:var(--gold)">Point by Point ↗</a>` : '');
-    } else {
-      document.getElementById('keter-daf-masechet').textContent = 'Daf Yomi';
-      document.getElementById('keter-daf-main').textContent    = 'Cycle 14';
-      document.getElementById('keter-daf-meta').textContent    = '';
-    }
+    const treasuryDay = ((d - 1) % 364) + 1;
+    const treasuryParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
+    document.getElementById('keter-treasury-main').innerHTML =
+      `<strong>On the Festivals</strong> — Story ${treasuryDay} of 364` +
+      (treasuryParasha ? `<br><strong>On the Torah</strong> — Parshat ${treasuryParasha}` : '');
+    document.getElementById('keter-treasury-meta').innerHTML =
+      `R. S.Y. Zevin`;
 
     const sef  = getSefirotInfo(d);
     const cy22 = get22DayInfo(d);
@@ -4509,7 +4496,19 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Alter Rebbe's Torah — Day ${chDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
-       ${chSourceRow}`;
+       ${chSourceRow}
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי</div>
+       ${daf
+         ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>
+            <div class="detail-row"><span class="detail-label">Links:</span><span class="detail-value">
+              <a href="https://www.youtube.com/@mercazdafyomi/search?query=${encodeURIComponent(daf.name+' '+daf.daf)}" target="_blank" style="color:var(--gold)">MDY Shiur ↗</a>
+              &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Sefaria ↗</a>
+              ${dafPointByPointURL(daf.name,daf.daf) ? '&nbsp;·&nbsp; <a href="'+dafPointByPointURL(daf.name,daf.daf)+'" target="_blank" style="color:var(--gold)">Point by Point ↗</a>' : ''}
+            </span></div>
+            <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
+         : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
+       }`;
 
     // BINAH — 7×7×7 Sefirot Omer Cycle
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
