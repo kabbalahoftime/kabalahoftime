@@ -4717,6 +4717,11 @@ transition: transform 0.3s;
       `Daily Breslov teachings`;
 
     // HOD — Halacha
+    // Chofetz Chaim podcast class number — 118-day cycle anchored to Tishrei 1, 5786 (Sep 23, 2025)
+    const ccAnchor = new Date(2025, 8, 23);
+    const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
+
     if (!hal.chofetz) {
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `Shulchan Aruch, Orach Chaim <strong>${hal.ch1}</strong> & <strong>${hal.ch2}</strong>`;
@@ -4729,7 +4734,7 @@ transition: transform 0.3s;
         `<div style="font-size:0.88rem;line-height:2;">` +
         `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a><br>` +
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria ↗</a><br>` +
-        `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts ↗</a>` +
+        `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay} ↗</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         `<div class="detail-row"><span class="detail-label">Chapters:</span><span class="detail-value">Orach Chaim ${hal.ch1} & ${hal.ch2}</span></div>` +
@@ -4744,7 +4749,7 @@ transition: transform 0.3s;
         `<div style="font-size:0.88rem;line-height:2;">` +
         `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a><br>` +
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria ↗</a><br>` +
-        `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts ↗</a>` +
+        `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay} ↗</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
