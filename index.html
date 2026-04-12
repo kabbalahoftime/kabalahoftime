@@ -1764,10 +1764,9 @@ transition: transform 0.3s;
     return inGap ? BRESLOV_GAP_FOLDER : BRESLOV_PODCAST_URL;
   }
 
-  const CHOFETZ_CHAIM_PODCAST_URL = 'https://feeds.transistor.fm/chofetz-chaim-yomi';
+  const CHOFETZ_CHAIM_PODCAST_URL = 'https://torahcasts.com/rabbi-bentzy-rosenberg/';
   async function fetchChofetzChaimEpisodeUrl() {
     for (const feedUrl of [
-      'https://media.rss.com/ohr-shlomo-shiurim-podcast-network/feed.xml',
       'https://feeds.transistor.fm/chofetz-chaim-yomi',
     ]) {
       try {
