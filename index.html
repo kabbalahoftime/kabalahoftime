@@ -1763,29 +1763,7 @@ transition: transform 0.3s;
     return inGap ? BRESLOV_GAP_FOLDER : BRESLOV_PODCAST_URL;
   }
 
-  const CHOFETZ_CHAIM_PODCAST_URL = 'https://torahcasts.com/rabbi-bentzy-rosenberg/';
-  async function fetchChofetzChaimEpisodeUrl() {
-    for (const feedUrl of [
-      'https://feeds.transistor.fm/chofetz-chaim-yomi',
-    ]) {
-      try {
-        const resp = await fetch(feedUrl);
-        if (!resp.ok) continue;
-        const xml = new DOMParser().parseFromString(await resp.text(), 'text/xml');
-        const item = xml.querySelector('item');
-        if (item) {
-          const linkNode = item.querySelector('link');
-          const link = linkNode?.textContent?.trim() ||
-                       linkNode?.nextSibling?.nodeValue?.trim() || '';
-          if (link.startsWith('http')) return link;
-          const enc = item.querySelector('enclosure')?.getAttribute('url') || '';
-          if (enc.startsWith('http')) return enc;
-        }
-      } catch (e) {}
-    }
-    return CHOFETZ_CHAIM_PODCAST_URL;
-  }
-
+  const CHOFETZ_CHAIM_PODCAST_URL = null; // replaced by dynamic calendar link
   function getHayomYom(hm, hd) {
     return HAYOM_YOM[`${hm}-${hd}`] || null;
   }
@@ -4379,8 +4357,8 @@ transition: transform 0.3s;
     const treasuryDay = ((d - 1) % 364) + 1;
     const treasuryParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
     document.getElementById('keter-treasury-main').innerHTML =
-      `<strong>On the Festivals</strong> — Story ${treasuryDay} of 364` +
-      (treasuryParasha ? `<br><strong>On the Torah</strong> — Parshat ${treasuryParasha}` : '');
+      `On the Festivals — Story ${treasuryDay}` +
+      (treasuryParasha ? `<br>On the Torah — Parshat ${treasuryParasha}` : '');
     document.getElementById('keter-treasury-meta').innerHTML =
       `R. S.Y. Zevin`;
 
@@ -4473,19 +4451,7 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Alter Rebbe's Torah — Day ${chDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
-       ${chSourceRow}
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי</div>
-       ${daf
-         ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>
-            <div class="detail-row"><span class="detail-label">Links:</span><span class="detail-value">
-              <a href="https://www.youtube.com/@mercazdafyomi/search?query=${encodeURIComponent(daf.name+' '+daf.daf)}" target="_blank" style="color:var(--gold)">MDY Shiur ↗</a>
-              &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Sefaria ↗</a>
-              ${dafPointByPointURL(daf.name,daf.daf) ? '&nbsp;·&nbsp; <a href="'+dafPointByPointURL(daf.name,daf.daf)+'" target="_blank" style="color:var(--gold)">Point by Point ↗</a>' : ''}
-            </span></div>
-            <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
-         : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
-       }`;
+       ${chSourceRow}`;
 
     // BINAH — 7×7×7 Sefirot Omer Cycle
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
@@ -4541,7 +4507,10 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likutei Tefilot — Day ${ltDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${ltSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a> — Reb Nosson of Breslov</span></div>`;
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a> — Reb Nosson of Breslov</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot</div>
+       <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot ↗</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot ↗</a> — inner.org</span></div>`;
 
     // CHESED — Mishna / Tosefta
     const mishnaInfo = getMishnaInfo(d);
@@ -4552,18 +4521,19 @@ transition: transform 0.3s;
       (mishnaInfo.seferiaUrl ? SEFARIA_LINK(mishnaInfo.seferiaUrl) : '');
     document.getElementById('chesed-tags').innerHTML =
       `<span class="tag highlight">${mishnaInfo.tag1}</span><span class="tag">${mishnaInfo.tag2}</span>`;
-    // Light and Fire of the Baal Shem Tov — 364-day cycle (Intro + 363 pages, 1/day)
+    // Buxbaum 364-day cycles
     const bshtDay = ((d - 1) % 364) + 1;
     const bshtReading = bshtDay === 1 ? 'Introduction' : `Page ${bshtDay - 1}`;
+    const jspReading  = bshtDay === 1 ? 'Introduction · Page 1' : `Pages ${2*(bshtDay-1)}–${2*(bshtDay-1)+1}`;
 
     document.getElementById('chesed-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">KoT Week:</span><span class="detail-value">Week ${mishnaInfo.week}, Day ${mishnaInfo.day} of 7</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">${mishnaInfo.type === 'mishna' ? '10 chapters/week · Days 1–5' : '8 chapters/week · Days 6–7'}</span></div>` +
       (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a></span></div>` : '') +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Light and Fire of the Baal Shem Tov — Day ${bshtDay} of 364</div>
-       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${bshtReading}</span></div>
-       <div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">Rabbi Yitzhak Buxbaum</span></div>`;
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rabbi Yitzhak Buxbaum — Day ${bshtDay} of 364</div>
+       <div class="detail-row"><span class="detail-label">Light and Fire of the Baal Shem Tov:</span><span class="detail-value">${bshtReading}</span></div>
+       <div class="detail-row"><span class="detail-label">Jewish Spiritual Practices:</span><span class="detail-value">${jspReading}</span></div>`;
 
     // GEVURAH — Tanach
     const tanachInfo = getTanachInfo(d);
@@ -4573,24 +4543,22 @@ transition: transform 0.3s;
       SEFARIA_LINK(tanachInfo.seferiaUrl);
     document.getElementById('gevurah-tags').innerHTML =
       `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>`;
-    // Jewish Spiritual Practices — 364-day cycle (Intro + 727 pages, 2/day)
-    const jspDay = ((d - 1) % 364) + 1;
-    let jspReading;
-    if (jspDay === 1) {
-      jspReading = 'Introduction · Page 1';
-    } else {
-      const startPage = 2 * (jspDay - 1);
-      jspReading = `Pages ${startPage}–${startPage + 1}`;
-    }
-
     document.getElementById('gevurah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 52 weeks</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Jewish Spiritual Practices — Day ${jspDay} of 364</div>
-       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${jspReading}</span></div>
-       <div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">Rabbi Yitzhak Buxbaum</span></div>`;
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי</div>
+       ${daf
+         ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>
+            <div class="detail-row"><span class="detail-label">Links:</span><span class="detail-value">
+              <a href="https://www.youtube.com/@mercazdafyomi/search?query=${encodeURIComponent(daf.name+' '+daf.daf)}" target="_blank" style="color:var(--gold)">MDY Shiur ↗</a>
+              &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Sefaria ↗</a>
+              ${dafPointByPointURL(daf.name,daf.daf) ? '&nbsp;·&nbsp; <a href="'+dafPointByPointURL(daf.name,daf.daf)+'" target="_blank" style="color:var(--gold)">Point by Point ↗</a>' : ''}
+            </span></div>
+            <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
+         : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
+       }`;
 
     // TIFERET — 13-day (Micha's or Moshe's 13 Attributes of Mercy, depending on cycle)
     const tifCycleName = (cy13.cycle <= 13) ? "Micha's 13 Attributes" : (cy13.cycle <= 26 ? "Moshe's 13 Attributes" : "13 Attributes — Combined");
@@ -4735,7 +4703,7 @@ transition: transform 0.3s;
       const hodCcHtml =
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
-        `<div style="font-size:0.88rem;"><a id="hod-cc-link" href="${CHOFETZ_CHAIM_PODCAST_URL}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a></div>`;
+        `<div style="font-size:0.88rem;"><a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a></div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         `<div class="detail-row"><span class="detail-label">Chapters:</span><span class="detail-value">Orach Chaim ${hal.ch1} & ${hal.ch2}</span></div>` +
         `<div class="detail-row"><span class="detail-label">Commentary:</span><span class="detail-value">Mishnah Berurah by the Chofetz Chaim</span></div>` +
@@ -4746,7 +4714,7 @@ transition: transform 0.3s;
       const hodCcHtml =
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
-        `<div style="font-size:0.88rem;"><a id="hod-cc-link" href="${CHOFETZ_CHAIM_PODCAST_URL}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a></div>`;
+        `<div style="font-size:0.88rem;"><a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a></div>`;
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-sub-text').textContent = 'Laws of proper speech';
@@ -4756,12 +4724,6 @@ transition: transform 0.3s;
         `<div class="detail-row"><span class="detail-label">Days:</span><span class="detail-value">Days 349-364 of the year</span></div>` +
         hodCcHtml;
     }
-
-    // Daily Chofetz Chaim podcast — must run after hod-detail innerHTML is set above
-    fetchChofetzChaimEpisodeUrl().then(url => {
-      const el = document.getElementById('hod-cc-link');
-      if (el) el.href = url;
-    });
 
 
     // ── MALCHUT — Daily text (Day 1–7) each paired with its KoT Book
