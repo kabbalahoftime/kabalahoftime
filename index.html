@@ -1132,6 +1132,10 @@ transition: transform 0.3s;
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ben Ish Chai</div>
       <div id="yesod-bic-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-bic-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Hida</div>
+      <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+      <div id="yesod-hida-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
     </div>
   </div>
 </div>
@@ -4398,6 +4402,10 @@ transition: transform 0.3s;
     // Ben Ish Chai (Yesod card)
     document.getElementById('yesod-bic-main').innerHTML =
       `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria ↗</a>`;
+
+    // Daily Hida (Yesod card)
+    document.getElementById('yesod-hida-main').innerHTML =
+      `<a href="https://apps.apple.com/us/app/daily-hida-%D7%9C%D7%99%D7%9E%D7%95%D7%93-%D7%94%D7%97%D7%99%D7%93-%D7%90-%D7%94%D7%99%D7%95%D7%9E%D7%99/id464890257" target="_blank" style="color:var(--gold)">Daily Hida — App Store ↗</a>`;
 
     // 5. Hayom Yom
     const chabadURL  = `${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}`;
