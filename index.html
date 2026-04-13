@@ -4654,10 +4654,11 @@ transition: transform 0.3s;
 
     // GEVURAH — Tanach
     const tanachInfo = getTanachInfo(d);
-    document.getElementById('gevurah-cycle-name').textContent = 'Tanach — 2 Chapters Daily';
+    document.getElementById('gevurah-cycle-name').textContent = 'Tanach · Daf Yomi';
     document.getElementById('gevurah-main').innerHTML = tanachInfo.text;
     document.getElementById('gevurah-sub').innerHTML = tanachInfo.sub +
-      SEFARIA_LINK(tanachInfo.seferiaUrl);
+      SEFARIA_LINK(tanachInfo.seferiaUrl) +
+      (daf ? `<br>דַּף יוֹמִי · <strong>${daf.name} ${daf.heb}</strong>, Daf ${daf.daf}` : '<br>דַּף יוֹמִי');
     document.getElementById('gevurah-tags').innerHTML =
       `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>`;
     document.getElementById('gevurah-detail').innerHTML =
