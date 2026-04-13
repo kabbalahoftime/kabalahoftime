@@ -4636,7 +4636,7 @@ transition: transform 0.3s;
       tanachInfo.text +
       ` &nbsp;·&nbsp; <a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>`;
     document.getElementById('gevurah-sub').innerHTML = daf
-      ? `${daf.name}, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`
+      ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`
       : 'דַּף יוֹמִי';
     document.getElementById('gevurah-tags').innerHTML =
       `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>`;
