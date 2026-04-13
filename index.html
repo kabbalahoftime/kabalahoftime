@@ -4631,7 +4631,7 @@ transition: transform 0.3s;
 
     // GEVURAH — Tanach
     const tanachInfo = getTanachInfo(d);
-    document.getElementById('gevurah-cycle-name').textContent = 'Tanach (2 Chapters) · Talmud (Daf Yomi)';
+    document.getElementById('gevurah-cycle-name').innerHTML = 'Tanach (2 Chapters)<br>Talmud (Daf Yomi)';
     document.getElementById('gevurah-main').innerHTML =
       tanachInfo.text +
       ` &nbsp;·&nbsp; <a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>`;
@@ -4643,14 +4643,13 @@ transition: transform 0.3s;
     document.getElementById('gevurah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 52 weeks</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a> &nbsp;·&nbsp; <a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth ↗</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth ↗</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי</div>
        ${daf
          ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>
             <div class="detail-row"><span class="detail-label">Links:</span><span class="detail-value">
               <a href="https://www.youtube.com/@mercazdafyomi/search?query=${encodeURIComponent(daf.name+' '+daf.daf)}" target="_blank" style="color:var(--gold)">MDY Shiur ↗</a>
-              &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Sefaria ↗</a>
               ${dafPointByPointURL(daf.name,daf.daf) ? '&nbsp;·&nbsp; <a href="'+dafPointByPointURL(daf.name,daf.daf)+'" target="_blank" style="color:var(--gold)">Point by Point ↗</a>' : ''}
             </span></div>
             <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
