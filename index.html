@@ -965,6 +965,18 @@ transition: transform 0.3s;
     <div class="keter-main" id="keter-rambam-main">Loading…</div>
     <div class="keter-meta" id="keter-rambam-meta"></div>
   </div>
+  <!-- SHULCHAN ARUCH HARAV section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Shulchanaruchharav.com</div>
+    <div class="keter-main" id="keter-sar-main">Loading…</div>
+    <div class="keter-meta" id="keter-sar-meta"></div>
+  </div>
+  <!-- DAILY SICHA section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ The Daily Sicha</div>
+    <div class="keter-main" id="keter-sicha-main">Loading…</div>
+    <div class="keter-meta" id="keter-sicha-meta"></div>
+  </div>
 </div>
 ```
 
@@ -4336,6 +4348,17 @@ transition: transform 0.3s;
       `View today's Rambam (3 chapters) ↗</a>`;
     document.getElementById('keter-rambam-meta').innerHTML =
       `<strong>Rambam</strong> · Mishneh Torah · 3 chapters/day`;
+
+    // Shulchan Aruch HaRav
+    document.getElementById('keter-sar-main').innerHTML =
+      `<a href="https://shulchanaruchharav.com" target="_blank" style="color:var(--gold)">shulchanaruchharav.com ↗</a>`;
+    document.getElementById('keter-sar-meta').innerHTML =
+      `Rabbi Yaakov Goldstein`;
+
+    // Daily Sicha
+    document.getElementById('keter-sicha-main').innerHTML =
+      `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">thedailysicha.com ↗</a>`;
+    document.getElementById('keter-sicha-meta').innerHTML = ``;
 
     // Chok L'Yisrael (Yesod card)
     const kolhalashonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
