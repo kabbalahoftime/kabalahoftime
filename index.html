@@ -1128,6 +1128,10 @@ transition: transform 0.3s;
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael</div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ben Ish Chai</div>
+      <div id="yesod-bic-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+      <div id="yesod-bic-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
     </div>
   </div>
 </div>
@@ -4390,6 +4394,10 @@ transition: transform 0.3s;
       `Chok L'Yisrael ↗</a>`;
     document.getElementById('keter-chok-meta').innerHTML =
       `Torah, Prophets, Writings, Midrash, Zohar`;
+
+    // Ben Ish Chai (Yesod card)
+    document.getElementById('yesod-bic-main').innerHTML =
+      `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria ↗</a>`;
 
     // 5. Hayom Yom
     const chabadURL  = `${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}`;
