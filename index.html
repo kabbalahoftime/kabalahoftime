@@ -4831,7 +4831,7 @@ transition: transform 0.3s;
 
     if (!hal.chofetz) {
       cards[6].querySelector('.sefirah-main-text').innerHTML =
-        `Shulchan Aruch, Orach Chaim <strong>${hal.ch1}</strong> & <strong>${hal.ch2}</strong><br>` +
+        `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}<br>` +
         (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>` : 'דַּף יוֹמִי');
       cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
       const hodCcHtml =
