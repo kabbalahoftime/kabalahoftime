@@ -4604,17 +4604,21 @@ transition: transform 0.3s;
         { name: 'Chataf Kamatz', hebrew: 'אֳ', sefirah: '' },
       ];
       const vowel = VOWELS_17[cyD - 1] || VOWELS_17[0];
-      gatesPrimName = cy22.dailyLetter;
-      gatesPrimHeb  = cy22.dailyHebrew;
-      gatesCompName = vowel.name + (vowel.sefirah ? ` — ${vowel.sefirah}` : '');
-      gatesCompHeb  = vowel.hebrew;
+      gatesPrimName = vowel.name + (vowel.sefirah ? ` — ${vowel.sefirah}` : '');
+      gatesPrimHeb  = vowel.hebrew;
+      gatesCompName = '';
+      gatesCompHeb  = '';
     }
+    const gatesLabel = (cyN === 17) ? 'Vowel' : 'Combination';
+    const gatesValueHtml = (cyN === 17)
+      ? `<strong>${gatesPrimName}</strong> &nbsp;<span style="font-size:1.2em;font-family:serif">${gatesPrimHeb}</span>`
+      : `<strong>${gatesPrimName}</strong> + <strong>${gatesCompName}</strong>` +
+        ` &nbsp;<span style="font-size:1.2em;font-family:serif">${gatesPrimHeb}${gatesCompHeb}</span>`;
     const gatesHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ 231 Gates — שערים</div>` +
-      `<div class="detail-row"><span class="detail-label">Combination:</span><span class="detail-value">` +
-      `<strong>${gatesPrimName}</strong> + <strong>${gatesCompName}</strong>` +
-      ` &nbsp;<span style="font-size:1.2em;font-family:serif">${gatesPrimHeb}${gatesCompHeb}</span>` +
+      `<div class="detail-row"><span class="detail-label">${gatesLabel}:</span><span class="detail-value">` +
+      gatesValueHtml +
       `</span></div>`;
 
     document.getElementById('chochmah-detail').innerHTML =
