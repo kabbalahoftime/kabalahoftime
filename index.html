@@ -4454,11 +4454,82 @@ transition: transform 0.3s;
     const cards = document.querySelectorAll('.sefirah-card');
 
     // CHOCHMAH — 22-Day Alef-Bet
+    // 231 Gates — compute combination before rendering card face
+    let gatesPrimName = '', gatesPrimHeb = '', gatesCompName = '', gatesCompHeb = '';
+    const cyN = cy22.cycle, cyD = cy22.day;
+    if (cyN >= 1 && cyN <= 11) {
+      const Ai = 2*cyN - 2;
+      const Bi = 2*cyN - 1;
+      let pi, ci;
+      if (cyD < 2*cyN - 1) {
+        pi = (cyD % 2 === 1) ? Ai : Bi;
+        ci = cyD - 1;
+      } else if (cyD === 2*cyN - 1) {
+        pi = Ai; ci = Bi;
+      } else if (cyD === 2*cyN) {
+        pi = Bi; ci = Ai;
+      } else {
+        pi = cyD - 1;
+        ci = ((cyD - 2*cyN) % 2 === 1) ? Bi : Ai;
+      }
+      gatesPrimName = SINGLE_LETTERS_22[pi].letter;
+      gatesPrimHeb  = SINGLE_LETTERS_22[pi].hebrew;
+      gatesCompName = SINGLE_LETTERS_22[ci].letter;
+      gatesCompHeb  = SINGLE_LETTERS_22[ci].hebrew;
+    } else if (cyN >= 12 && cyN <= 16) {
+      const finalLetters = [
+        { letter: 'Kaf Sofit',    hebrew: 'ך' },
+        { letter: 'Mem Sofit',    hebrew: 'ם' },
+        { letter: 'Nun Sofit',    hebrew: 'ן' },
+        { letter: 'Peh Sofit',    hebrew: 'ף' },
+        { letter: 'Tzadik Sofit', hebrew: 'ץ' },
+      ];
+      const fl = finalLetters[cyN - 12];
+      gatesPrimName = cy22.dailyLetter;
+      gatesPrimHeb  = cy22.dailyHebrew;
+      gatesCompName = fl.letter;
+      gatesCompHeb  = fl.hebrew;
+    } else if (cyN === 17) {
+      const VOWELS_17 = [
+        { name: 'Kamatz',        hebrew: 'אָ', sefirah: 'Keter' },
+        { name: 'Patach',        hebrew: 'אַ', sefirah: 'Chochmah' },
+        { name: 'Tzere',         hebrew: 'אֵ', sefirah: 'Binah' },
+        { name: 'Segol',         hebrew: 'אֶ', sefirah: 'Chesed' },
+        { name: 'Shva',          hebrew: 'אְ', sefirah: 'Gevurah' },
+        { name: 'Chirik',        hebrew: 'אִ', sefirah: 'Tiferet' },
+        { name: 'Cholam',        hebrew: 'אֹ', sefirah: 'Netzach' },
+        { name: 'Shuruk',        hebrew: 'וּ', sefirah: 'Hod' },
+        { name: 'Kubbutz',       hebrew: 'אֻ', sefirah: 'Yesod' },
+        { name: 'Chataf Patach', hebrew: 'אֲ', sefirah: '' },
+        { name: 'Chataf Segol',  hebrew: 'אֱ', sefirah: '' },
+        { name: 'Chataf Kamatz', hebrew: 'אֳ', sefirah: '' },
+      ];
+      const vowel = VOWELS_17[cyD - 1] || VOWELS_17[0];
+      gatesPrimName = vowel.name + (vowel.sefirah ? ` — ${vowel.sefirah}` : '');
+      gatesPrimHeb  = vowel.hebrew;
+      gatesCompName = '';
+      gatesCompHeb  = '';
+    }
+    const gatesLabel = (cyN === 17) ? 'Vowel' : 'Combination';
+    const gatesFaceLine = (cyN === 17)
+      ? `<strong>${gatesPrimName}</strong> <span style="font-size:1.1em">${gatesPrimHeb}</span>`
+      : `<strong>${gatesPrimName}</strong> + <strong>${gatesCompName}</strong> <span style="font-size:1.1em">${gatesPrimHeb}${gatesCompHeb}</span>`;
+    const gatesValueHtml = (cyN === 17)
+      ? `<strong>${gatesPrimName}</strong> &nbsp;<span style="font-size:1.2em;font-family:serif">${gatesPrimHeb}</span>`
+      : `<strong>${gatesPrimName}</strong> + <strong>${gatesCompName}</strong>` +
+        ` &nbsp;<span style="font-size:1.2em;font-family:serif">${gatesPrimHeb}${gatesCompHeb}</span>`;
+    const gatesHtml =
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ 231 Gates — שערים</div>` +
+      `<div class="detail-row"><span class="detail-label">${gatesLabel}:</span><span class="detail-value">` +
+      gatesValueHtml + `</span></div>`;
+
     document.getElementById('chochmah-cycle-name').textContent = 'Alef-Bet — 22-Day Cycle';
     document.getElementById('chochmah-main').innerHTML =
+      `<strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
       `Set <strong>${cy22.cycle}</strong> — <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
-      `<span style="font-size:0.9em;color:var(--ink-mid)">Day ${cy22.day} · Letter: ${cy22.dailyLetter} ${cy22.dailyHebrew}</span>`;
-    document.getElementById('chochmah-sub').textContent = `Theme: ${cy22.theme}`;
+      gatesFaceLine;
+    document.getElementById('chochmah-sub').innerHTML = '';
     document.getElementById('chochmah-tags').innerHTML =
       `<span class="tag highlight">${cy22.dailyLetter} ${cy22.dailyHebrew}</span><span class="tag">Day ${cy22.day} of 22</span><span class="tag">${cy22.letters}</span>`;
     
@@ -4544,7 +4615,8 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractData.id}</div>
        <div class="detail-row"><span class="detail-label">Tractate:</span><span class="detail-value">${tractData.tractate}</span></div>
        <div class="detail-row"><span class="detail-label">Period:</span><span class="detail-value">${tractData.period}</span></div>
-       <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${tractData.desc}</span></div>`;
+       <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${tractData.desc}</span></div>` +
+      gatesHtml;
 
     // BINAH — 7×7×7 Sefirot Omer Cycle
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
