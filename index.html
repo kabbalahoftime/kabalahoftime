@@ -4589,11 +4589,25 @@ transition: transform 0.3s;
       gatesCompName = fl.letter;
       gatesCompHeb  = fl.hebrew;
     } else if (cyN === 17) {
-      // Vowels — will be added once the list is confirmed
+      const VOWELS_17 = [
+        { name: 'Kamatz',        hebrew: 'אָ', sefirah: 'Keter' },
+        { name: 'Patach',        hebrew: 'אַ', sefirah: 'Chochmah' },
+        { name: 'Tzere',         hebrew: 'אֵ', sefirah: 'Binah' },
+        { name: 'Segol',         hebrew: 'אֶ', sefirah: 'Chesed' },
+        { name: 'Shva',          hebrew: 'אְ', sefirah: 'Gevurah' },
+        { name: 'Chirik',        hebrew: 'אִ', sefirah: 'Tiferet' },
+        { name: 'Cholam',        hebrew: 'אֹ', sefirah: 'Netzach' },
+        { name: 'Shuruk',        hebrew: 'וּ', sefirah: 'Hod' },
+        { name: 'Kubbutz',       hebrew: 'אֻ', sefirah: 'Yesod' },
+        { name: 'Chataf Patach', hebrew: 'אֲ', sefirah: '' },
+        { name: 'Chataf Segol',  hebrew: 'אֱ', sefirah: '' },
+        { name: 'Chataf Kamatz', hebrew: 'אֳ', sefirah: '' },
+      ];
+      const vowel = VOWELS_17[cyD - 1] || VOWELS_17[0];
       gatesPrimName = cy22.dailyLetter;
       gatesPrimHeb  = cy22.dailyHebrew;
-      gatesCompName = '(vowels — coming soon)';
-      gatesCompHeb  = '';
+      gatesCompName = vowel.name + (vowel.sefirah ? ` — ${vowel.sefirah}` : '');
+      gatesCompHeb  = vowel.hebrew;
     }
     const gatesHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
