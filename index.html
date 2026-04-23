@@ -5066,8 +5066,7 @@ transition: transform 0.3s;
           mapping._lsUrl = 'https://www.chabad.org/torah-texts/2988329/Toras-Menachem-Hisvaaduyos';
           mapping._lsLinkLabel = 'Toras Menachem on Chabad.org ↗';
         } else {
-          mapping._lsUrl = 'https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm';
-          mapping._lsLinkLabel = 'Sichos in English on Chabad.org ↗';
+          // no URL — Sichos in English shown as standalone link in detail footer
         }
       }
       else if (textName === 'Noam Elimelech') {
@@ -5253,8 +5252,8 @@ transition: transform 0.3s;
       `</div>` +
       weekRows +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ The Daily Sicha</div>` +
-      `<div style="font-size:0.88rem;"><a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">thedailysicha.com ↗</a></div>`;
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Sichos in English</div>` +
+      `<div style="font-size:0.88rem;"><a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English on Chabad.org ↗</a></div>`;
   }
 
   function changeDay(delta) {
