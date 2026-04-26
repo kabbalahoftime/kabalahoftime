@@ -4872,16 +4872,12 @@ transition: transform 0.3s;
     cards[4].querySelector('.sefirah-cycle-name').textContent = `${tifCycleName} — 13-Day Cycle`;
     cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
       ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
-      : dmTeaching
-      ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${dmTeaching.name}</strong>${dmTeaching.part ? ' · <span style="font-size:0.9em;opacity:0.8">' + dmTeaching.part + '</span>' : ''}<br><span style="font-size:0.88em;opacity:0.72">${dmTeaching.english}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
       : `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
     cards[4].querySelector('.sefirah-sub-text').textContent = '';
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
     _tifTags.innerHTML = cycleThemeAttr
       ? `<span class="tag highlight" style="white-space:nowrap">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
-      : dmTeaching
-      ? `<span class="tag highlight" style="white-space:nowrap">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${dmTeaching.name.split(' / ')[0]}</span><span class="tag">${cy13.attr.name}</span>`
       : `<span class="tag highlight" style="white-space:nowrap">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cy13.attr.name}</span>`;
 
     const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
