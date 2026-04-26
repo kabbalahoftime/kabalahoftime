@@ -4796,7 +4796,42 @@ transition: transform 0.3s;
          : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
        }`;
 
-    // TIFERET — 13-day (Micha's or Moshe's 13 Attributes of Mercy, depending on cycle)
+    // Derech Mitzvosecha — 26 teachings across cycles 27-28 (2 × 13)
+    const DERECH_MITZVOSECHA = [
+      // Cycle 27 — days 1-13
+      { name: 'Mitzvas Vidui U\'Teshuvah',      part: 'Part 1', english: 'The Mitzvah of Confession and Teshuvah' },
+      { name: 'Mitzvas Vidui U\'Teshuvah',      part: 'Part 2', english: 'The Mitzvah of Confession and Teshuvah' },
+      { name: 'Mitzvas Tiglachas Metzora',       part: 'Part 1', english: 'The Mitzvah for a Metzora to Be Shaved' },
+      { name: 'Mitzvas Tiglachas Metzora',       part: 'Part 2', english: 'The Mitzvah for a Metzora to Be Shaved' },
+      { name: 'Mitzvas Birkas Kohanim',          part: '',       english: 'The Mitzvah of the Priestly Blessing' },
+      { name: 'Mitzvas Kiddush Hashem',          part: '',       english: 'The Mitzvah of Sanctifying G\'d\'s Name' },
+      { name: 'Issur Chillul HaShem',            part: '',       english: 'The Prohibition Against Desecrating G\'d\'s Name' },
+      { name: 'Mitzvas Minui Melech',            part: 'Part 1', english: 'The Mitzvah to Appoint a King' },
+      { name: 'Mitzvas Minui Melech',            part: 'Part 2', english: 'The Mitzvah to Appoint a King' },
+      { name: 'Mitzvas Binyan Mikdash',          part: 'Part 1', english: 'The Mitzvah of Building a Sanctuary' },
+      { name: 'Mitzvas Binyan Mikdash',          part: 'Part 2', english: 'The Mitzvah of Building a Sanctuary' },
+      { name: 'Mitzvas Tzitzis',                 part: 'Part 1', english: 'The Mitzvah of Tzitzis' },
+      { name: 'Mitzvas Tzitzis',                 part: 'Part 2', english: 'The Mitzvah of Tzitzis' },
+      // Cycle 28 — days 1-13
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 1',  english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 2',  english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 3',  english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 4',  english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 5',  english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 6',  english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 7',  english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 8',  english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 9',  english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 10', english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 11', english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Mitzvas Haamanas Elokus',         part: 'Section 12', english: 'The Mitzvah to Believe in G\'d' },
+      { name: 'Issur Sinas Yisrael / Mitzvas Ahavas Yisrael', part: '', english: 'The Prohibition Against Hating One\'s Fellow Jew / The Mitzvah of Loving One\'s Fellow Jew' },
+    ];
+    const dmTeaching = cy13.cycle <= 26   ? DERECH_MITZVOSECHA[cy13.cycle - 1]
+                     : cy13.cycle === 27 ? DERECH_MITZVOSECHA[cy13.day - 1]
+                     : DERECH_MITZVOSECHA[13 + cy13.day - 1];
+
+        // TIFERET — 13-day (Micha's or Moshe's 13 Attributes of Mercy, depending on cycle)
     const tifCycleName = (cy13.cycle <= 13) ? "Micha's 13 Attributes" : (cy13.cycle <= 26 ? "Moshe's 13 Attributes" : "13 Attributes — Combined");
     // cycleThemeAttr: the attribute that defines this 13-day cycle (indexed by cycle number)
     let cycleThemeAttr = null, cycleTheme = '';
@@ -4814,7 +4849,7 @@ transition: transform 0.3s;
     cards[4].querySelector('.sefirah-cycle-name').textContent = `${tifCycleName} — 13-Day Cycle`;
     cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
       ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
-      : `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>: ${cy13.attr.name} <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span>`;
+      : `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
     cards[4].querySelector('.sefirah-sub-text').textContent = '';
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
@@ -4832,7 +4867,8 @@ transition: transform 0.3s;
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Derech Mitzvosecha</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha ↗</a></div>
+       <div style="font-size:0.88rem;margin-bottom:${dmTeaching ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha ↗</a></div>
+       ${dmTeaching ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-label">Today:</span><span class="detail-value"><strong>' + dmTeaching.name + '</strong>' + (dmTeaching.part ? ' · ' + dmTeaching.part : '') + '<br><span style=\"font-size:0.88em;opacity:0.72\">' + dmTeaching.english + '</span></span></div>' : ''}
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org ↗</a></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav</div>
