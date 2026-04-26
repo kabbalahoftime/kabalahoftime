@@ -172,8 +172,54 @@ letter-spacing: 4px;
 color: var(–gold);
 text-transform: uppercase;
 }
+.intro-panel {
+position: relative;
+margin: 0 0 12px 0;
+padding: 12px 40px 12px 16px;
+background: var(--bg-card);
+border: 1px solid var(--border);
+border-radius: 4px;
+cursor: pointer;
+user-select: none;
+}
+.intro-label {
+font-family: 'Cinzel', serif;
+font-size: 9px;
+letter-spacing: 2.5px;
+color: var(--gold);
+text-transform: uppercase;
+margin-bottom: 0;
+}
+.intro-expand-icon {
+position: absolute;
+top: 12px;
+right: 14px;
+color: var(--gold);
+font-size: 14px;
+transition: transform 0.2s;
+}
+.intro-panel.expanded .intro-expand-icon {
+transform: rotate(180deg);
+}
+.intro-body {
+display: none;
+margin-top: 12px;
+font-family: 'Cormorant Garamond', serif;
+font-size: 0.95rem;
+line-height: 1.7;
+color: var(--ink);
+}
+.intro-body p {
+margin: 0 0 1em 0;
+}
+.intro-body p:last-child {
+margin-bottom: 0;
+}
+.intro-panel.expanded .intro-body {
+display: block;
+}
 .keter-card {
-border: 2px solid var(–border-strong);
+border: 2px solid var(--border-strong);
 border-radius: 4px;
 margin-bottom: 10px;
 position: relative;
@@ -892,6 +938,17 @@ transition: transform 0.3s;
     <div class="title-main">Kabbalah of Time</div>
     <div class="title-sub">Daily Reading — ספירת הזמן</div>
   </header>
+
+  <!-- INTRODUCTION -->
+  <div class="intro-panel" id="intro-panel" onclick="this.classList.toggle('expanded')">
+    <span class="intro-expand-icon">▾</span>
+    <div class="intro-label">Introduction</div>
+    <div class="intro-body">
+      <p>Rabbi Schneur Zalman of Liadi, the Alter Rebbe, famously stated that we must "live with the times," thereby experiencing the teachings of the Torah related to each day of the year. Every day of the Jewish calendar has a unique meaning.</p>
+      <p>The calendar is the master key to unlock the hidden rationale behind the formal structure of ancient sacred texts, as well as to understand basic mystical concepts. When comprehended within the context of the Jewish calendar, these works reveal the spiritual energy of each day, serving as a practical guide for self-analysis and development.</p>
+      <p>During this daily journey, we learn to live with greater harmony, happiness and gratitude — from the Kabbalah, from age-old Jewish ethical teachings, and even from animals. The objective is to be in touch with the spiritual powers of each day, thereby improving one's daily conduct and rediscovering the universal song within each one of us: the song of the soul.</p>
+    </div>
+  </div>
 
   <!-- DATE BAR -->
 
