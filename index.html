@@ -4850,9 +4850,9 @@ transition: transform 0.3s;
       { name: 'Mitzvas Haamanas Elokus',         part: 'Section 12', english: 'The Mitzvah to Believe in G\'d' },
       { name: 'Issur Sinas Yisrael / Mitzvas Ahavas Yisrael', part: '', english: 'The Prohibition Against Hating One\'s Fellow Jew / The Mitzvah of Loving One\'s Fellow Jew' },
     ];
-    const dmTeaching = cy13.cycle === 27 ? DERECH_MITZVOSECHA[cy13.day - 1]
-                     : cy13.cycle === 28 ? DERECH_MITZVOSECHA[13 + cy13.day - 1]
-                     : null;
+    const dmTeaching = cy13.cycle <= 26   ? DERECH_MITZVOSECHA[cy13.cycle - 1]
+                     : cy13.cycle === 27 ? DERECH_MITZVOSECHA[cy13.day - 1]
+                     : DERECH_MITZVOSECHA[13 + cy13.day - 1];
 
         // TIFERET — 13-day (Micha's or Moshe's 13 Attributes of Mercy, depending on cycle)
     const tifCycleName = (cy13.cycle <= 13) ? "Micha's 13 Attributes" : (cy13.cycle <= 26 ? "Moshe's 13 Attributes" : "13 Attributes — Combined");
