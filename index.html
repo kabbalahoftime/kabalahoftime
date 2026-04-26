@@ -4822,20 +4822,20 @@ transition: transform 0.3s;
     cards[5].querySelector('.sefirah-tags').innerHTML =
       `<span class="tag highlight">${cycleCmd.theme}</span><span class="tag">${cy41.soulLevel}</span><span class="tag">Day ${cy41.day} of 41</span>`;
     cards[5].querySelector('.sefirah-detail').innerHTML =
-      `<div class="detail-row"><span class="detail-label">Mivtzah:</span><span class="detail-value">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
-       <div class="detail-row"><span class="detail-label">Commandment ${cy41.cycle}:</span><span class="detail-value">${cycleCmd.commandment} — ${cycleCmd.theme}</span></div>
-       <div class="detail-row"><span class="detail-label">Soul Level:</span><span class="detail-value">${cy41.soulLevel} · Day ${cy41.dayInLevel} of 10</span></div>
-       <div class="detail-row"><span class="detail-label">World:</span><span class="detail-value">${cy41.soulLevel.includes('Nefesh') ? 'Asiyah — Action & Physical' : cy41.soulLevel.includes('Ruach') ? 'Yetzirah — Emotional World' : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World' : cy41.soulLevel.includes('Chayah') ? 'Atzilut — Spiritual World' : 'Adam Kadmon — Yechidah (Day 41)'}</span></div>
-       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">9 cycles × 41 days = 369 days · 7th cycle = Shavuot→17 Tammuz</span></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok Breslov</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov</div>
+       <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
        <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
-       <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ma'ayan Ganim — Day ${meynDay} of 368</div>
        <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${meynSection}</span></div>
        <div class="detail-row"><span class="detail-label">Page:</span><span class="detail-value">${meynPage}</span></div>
-       <div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">Rav Shalom Arush</span></div>`;
+       <div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">Rav Shalom Arush</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div class="detail-row"><span class="detail-label">Mivtzah:</span><span class="detail-value">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
+       <div class="detail-row"><span class="detail-label">Commandment ${cy41.cycle}:</span><span class="detail-value">${cycleCmd.commandment} — ${cycleCmd.theme}</span></div>
+       <div class="detail-row"><span class="detail-label">Soul Level:</span><span class="detail-value">${cy41.soulLevel} · Day ${cy41.dayInLevel} of 10</span></div>
+       <div class="detail-row"><span class="detail-label">World:</span><span class="detail-value">${cy41.soulLevel.includes('Nefesh') ? 'Asiyah — Action & Physical' : cy41.soulLevel.includes('Ruach') ? 'Yetzirah — Emotional World' : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World' : cy41.soulLevel.includes('Chayah') ? 'Atzilut — Spiritual World' : 'Adam Kadmon — Yechidah (Day 41)'}</span></div>
+       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">9 cycles × 41 days = 369 days · 7th cycle = Shavuot→17 Tammuz</span></div>`;
 
     // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
     document.getElementById('netzach-breslov-main').innerHTML =
