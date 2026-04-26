@@ -4582,7 +4582,7 @@ transition: transform 0.3s;
     };
     let acrosticRow = '';
     const _psName = ACROSTIC_PSALM_NAMES[cy22.cycle] || '';
-    if (_psName) {
+    if (_psName && !(cy22.cycle === 17 && cy22.day > 12)) {
       let _vRef = '', _sefUrl = '';
       if (cy22.cycle >= 9 && cy22.cycle <= 16) {
         const _vn = (cy22.day - 1) * 8 + (cy22.cycle - 9) + 1;
