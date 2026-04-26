@@ -4533,31 +4533,54 @@ transition: transform 0.3s;
     document.getElementById('chochmah-tags').innerHTML =
       `<span class="tag highlight">Set ${cy22.cycle} · Day ${cy22.day} of 22</span>`;
     
-    // Acrostic Psalms mapping to 22-day cycles (based on blog)
-    const ACROSTIC_PSALMS = {
-      1: 'Psalms 9-10',
-      2: 'Psalm 25',
-      3: 'Psalm 34',
-      4: 'Psalm 37',
-      5: 'Psalm 111',
-      6: 'Psalm 112',
-      7: 'Psalm 145',
-      8: 'Proverbs 31:10-31 (Eshet Chayil)',
-      9: 'Psalm 119 (Section 1 of 8)',
-      10: 'Psalm 119 (Section 2 of 8)',
-      11: 'Psalm 119 (Section 3 of 8)',
-      12: 'Psalm 119 (Section 4 of 8)',
-      13: 'Psalm 119 (Section 5 of 8)',
-      14: 'Psalm 119 (Section 6 of 8)',
-      15: 'Psalm 119 (Section 7 of 8)',
-      16: 'Psalm 119 (Section 8 of 8)',
-      17: 'Psalm 150 (Vowels - half cycle)'
+    // Acrostic verse references — day index into each cycle's 22-day journey
+    const ACROSTIC_REFS = {
+      1: ['9:2','9:3','9:4','9:5','9:6','9:8','9:9','9:10','9:11','9:12','9:14',
+          '10:1','10:3','10:4','10:6','10:8','10:7','10:9','10:12','10:14','10:15','10:17'],
+      2: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22].map(d=>`25:${d}`),
+      3: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22].map(d=>`34:${d+1}`),
+      4: ['37:1','37:3','37:5','37:7','37:8','37:10','37:12','37:14','37:16','37:18',
+          '37:20','37:21','37:23','37:25','37:27','37:28','37:30','37:29','37:34','37:35','37:37','37:39'],
+      5: ['111:1','111:1','111:2','111:2','111:3','111:3','111:4','111:4','111:5','111:5',
+          '111:6','111:6','111:7','111:7','111:8','111:8','111:9','111:9','111:9','111:10','111:10','111:10'],
+      6: ['112:1','112:1','112:2','112:2','112:3','112:3','112:4','112:4','112:5','112:5',
+          '112:6','112:6','112:7','112:7','112:8','112:8','112:9','112:9','112:9','112:10','112:10','112:10'],
+      7: ['145:1','145:2','145:3','145:4','145:5','145:6','145:7','145:8','145:9','145:10',
+          '145:11','145:12','145:13','145:14','145:14','145:15','145:16','145:17','145:18','145:19','145:20','145:21'],
+      8: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22].map(d=>`31:${d+9}`),
+      17:[1,2,3,4,5,6,7,8,9,10,11,12].map(d=>`150:${Math.ceil(d/2)}`).concat(Array(10).fill(null))
     };
-    
-    const acrosticPsalm = ACROSTIC_PSALMS[cy22.cycle] || '';
-    const acrosticRow = acrosticPsalm 
-      ? `<div class="detail-row"><span class="detail-label">Acrostic Psalm:</span><span class="detail-value">${acrosticPsalm}</span></div>`
-      : '';
+    const ACROSTIC_PSALM_NAMES = {
+      1:'Psalms 9–10', 2:'Psalm 25', 3:'Psalm 34', 4:'Psalm 37',
+      5:'Psalm 111', 6:'Psalm 112', 7:'Psalm 145', 8:'Proverbs 31 (Eshet Chayil)',
+      9:'Psalm 119', 10:'Psalm 119', 11:'Psalm 119', 12:'Psalm 119',
+      13:'Psalm 119', 14:'Psalm 119', 15:'Psalm 119', 16:'Psalm 119',
+      17:'Psalm 150 (Vowel cycle)'
+    };
+    let acrosticRow = '';
+    const _psName = ACROSTIC_PSALM_NAMES[cy22.cycle] || '';
+    if (_psName && !(cy22.cycle === 17 && cy22.day > 12)) {
+      let _vRef = '', _sefUrl = '';
+      if (cy22.cycle >= 9 && cy22.cycle <= 16) {
+        const _vn = (cy22.day - 1) * 8 + (cy22.cycle - 9) + 1;
+        _vRef = `Ps 119:${_vn}`;
+        _sefUrl = `https://www.sefaria.org/Psalms.119.${_vn}?lang=bi`;
+      } else {
+        const _refs = ACROSTIC_REFS[cy22.cycle];
+        const _raw = _refs && _refs[cy22.day - 1];
+        if (_raw) {
+          _vRef = (cy22.cycle === 8 ? 'Prov ' : 'Ps ') + _raw;
+          const _book = cy22.cycle === 8 ? 'Proverbs' : 'Psalms';
+          const [_ch, _v] = _raw.split(':');
+          _sefUrl = `https://www.sefaria.org/${_book}.${_ch}.${_v}?lang=bi`;
+        }
+      }
+      if (_vRef) {
+        acrosticRow = `<div class="detail-row"><span class="detail-label">Acrostic:</span><span class="detail-value">${_psName} &nbsp;<span style="color:#555;font-size:0.9em">${_vRef}</span>&nbsp;<a href="${_sefUrl}" target="_blank" rel="noopener" style="font-size:0.85em;text-decoration:none" title="Open in Sefaria">📖</a></span></div>`;
+      } else {
+        acrosticRow = `<div class="detail-row"><span class="detail-label">Acrostic:</span><span class="detail-value">${_psName}</span></div>`;
+      }
+    }
     
     // Alter Rebbe's Torah — 364-day cycle
     // TO=97 days (opening+96 folios), LTVa=51 days (opening+50 folios),
@@ -4805,7 +4828,10 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot ↗</a></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Arush — Book ${cycleIdx + 1} of 13</div>
-       <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value">${myBook}</span></div>`;
+       <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value">${myBook}</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
+       <div style="font-size:0.88rem;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>`;
 
     // Ma'ayan Ganim — 368-day cycle (Rav Arush)
     const MEYN_GANIM_SECTIONS = [
