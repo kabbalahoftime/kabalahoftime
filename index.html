@@ -965,18 +965,7 @@ transition: transform 0.3s;
     <div class="keter-main" id="keter-rambam-main">Loading…</div>
     <div class="keter-meta" id="keter-rambam-meta"></div>
   </div>
-  <!-- SHULCHAN ARUCH HARAV section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Shulchanaruchharav.com</div>
-    <div class="keter-main" id="keter-sar-main">Loading…</div>
-    <div class="keter-meta" id="keter-sar-meta"></div>
-  </div>
-  <!-- DAILY SICHA section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ The Daily Sicha</div>
-    <div class="keter-main" id="keter-sicha-main">Loading…</div>
-    <div class="keter-meta" id="keter-sicha-meta"></div>
-  </div>
+
 </div>
 ```
 
@@ -4357,17 +4346,6 @@ transition: transform 0.3s;
     document.getElementById('keter-rambam-meta').innerHTML =
       `<strong>Rambam</strong> · Mishneh Torah · 3 chapters/day`;
 
-    // Shulchan Aruch HaRav
-    document.getElementById('keter-sar-main').innerHTML =
-      `<a href="https://shulchanaruchharav.com" target="_blank" style="color:var(--gold)">shulchanaruchharav.com ↗</a>`;
-    document.getElementById('keter-sar-meta').innerHTML =
-      `Rabbi Yaakov Goldstein`;
-
-    // Daily Sicha
-    document.getElementById('keter-sicha-main').innerHTML =
-      `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">thedailysicha.com ↗</a>`;
-    document.getElementById('keter-sicha-meta').innerHTML = ``;
-
     // Chok L'Yisrael (Yesod card)
     const kolhalashonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
     document.getElementById('keter-chok-main').innerHTML =
@@ -4400,7 +4378,7 @@ transition: transform 0.3s;
     }
     document.getElementById('keter-hy-meta').innerHTML =
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus ↗</a>` +
-      ` &nbsp;·&nbsp; <a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">Chitas for Kids ↗</a>`;
+      ` &nbsp;·&nbsp; <a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha ↗</a>`;
 
     // 6. Likutei Moharan — Part I = lessons 1–286, Part II (Tinyana) = 287–411
     // Lessons 194–204 all fall on the 13th of Nissan (day 194); from day 195 onward, offset by 10.
@@ -4790,24 +4768,6 @@ transition: transform 0.3s;
     const sourcesRow = (cy13.isMoshe && cy13.attr.sources)
       ? `<div class="detail-row"><span class="detail-label">Sources:</span><span class="detail-value" dir="rtl">${cy13.attr.sources}</span></div>`
       : '';
-    // Three 13-element lists indexed by cycle (cycle 1 → item 1, cycle 2 → item 2, wraps at 13)
-    const cycleIdx = (cy13.cycle - 1) % 13;
-    const myStep = MESILLAT_YESHARIM_STEPS[cycleIdx];
-    let myChainHe, myChainEn;
-    if (myStep.conclusion) {
-      myChainHe = 'וּתְחִיַּת הַמֵּתִים בָּא עַל יְדֵי אֵלִיָּהוּ זָכוּר לַטּוֹב, אָמֵן';
-      myChainEn = 'Resurrection comes through Elijah — may he be remembered for good, Amen';
-    } else if (cycleIdx <= 10) {
-      const nextStep = MESILLAT_YESHARIM_STEPS[cycleIdx + 1];
-      myChainHe = `${myStep.he} מְבִיאָה לִידֵי ${nextStep.he}`;
-      myChainEn = `${myStep.name} leads to ${nextStep.name}`;
-    } else {
-      myChainHe = myStep.he;
-      myChainEn = `${myStep.name} — ${myStep.meaning}`;
-    }
-    const myTale = REBBE_NACHMAN_TALES[cycleIdx];
-    const myBook = RAV_ARUSH_BOOKS[cycleIdx];
-
     cards[4].querySelector('.sefirah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Nassi:</span><span class="detail-value">${cy13.nassi}</span></div>
        <div class="detail-row"><span class="detail-label">Daily Attribute:</span><span class="detail-value">${cy13.attr.name} — ${cy13.attr.meaning}</span></div>
@@ -4818,20 +4778,11 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value">${cy13.cycle <= 13 ? '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> — Prophet Micha\'s vision of Divine mercy' : cy13.cycle <= 26 ? '<a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a> — Moshe\'s 13 Attributes of Divine mercy' : '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> · <a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a>'}</span></div>
        <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Pinchas Ben Yair — Rung ${cycleIdx + 1} of 13</div>
-       <div class="detail-row"><span class="detail-label">Hebrew:</span><span class="detail-value" dir="rtl" style="font-size:1.05em;line-height:1.6">${myChainHe}</span></div>
-       <div class="detail-row"><span class="detail-label">English:</span><span class="detail-value">${myChainEn}</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avodah Zarah 20b ↗</a> · <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15 ↗</a></span></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Nachman — Tale ${cycleIdx + 1} of 13</div>
-       <div class="detail-row"><span class="detail-label">Story:</span><span class="detail-value">${myTale}</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot ↗</a></span></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Arush — Book ${cycleIdx + 1} of 13</div>
-       <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value">${myBook}</span></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
-       <div style="font-size:0.88rem;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>`;
+       <div style="font-size:0.88rem;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div class="detail-row"><span class="detail-label">Chitas for Kids:</span><span class="detail-value"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org ↗</a></span></div>
+       <div class="detail-row"><span class="detail-label">Shulchan Aruch HaRav:</span><span class="detail-value"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com ↗</a> · Rabbi Yaakov Goldstein</span></div>`;
 
     // Ma'ayan Ganim — 368-day cycle (Rav Arush)
     const MEYN_GANIM_SECTIONS = [
