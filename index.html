@@ -4788,11 +4788,7 @@ transition: transform 0.3s;
     cards[4].querySelector('.sefirah-cycle-name').textContent = `${tifCycleName} — 13-Day Cycle`;
     cards[4].querySelector('.sefirah-main-text').innerHTML =
       `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>: ${cy13.attr.name} <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span>`;
-    cards[4].querySelector('.sefirah-sub-text').textContent = cy13.attr.meaning;
-    cards[4].querySelector('.sefirah-tags').innerHTML =
-      `<span class="tag highlight">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cy13.attr.name}</span>`;
-    
-    // Determine cycle theme based on which set of 13 it's in
+    // Determine cycle theme so it can appear on the card face
     let cycleTheme = '';
     if (cy13.cycle <= 13) {
       // Cycles 1-13: Micha's attributes (inner vessels)
@@ -4808,7 +4804,11 @@ transition: transform 0.3s;
     } else {
       cycleTheme = `Cycle Theme: Microcosm of Moshe's 13 Attributes (Outer Vessels)`;
     }
-    
+    cards[4].querySelector('.sefirah-sub-text').innerHTML =
+      `${cy13.attr.meaning}<br><span style="font-size:0.88em;opacity:0.72">${cycleTheme}</span>`;
+    cards[4].querySelector('.sefirah-tags').innerHTML =
+      `<span class="tag highlight">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cy13.attr.name}</span>`;
+
     const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
       ? `<div class="detail-row"><span class="detail-label">Irgun<br>Harbotzas<br>HaTorah:</span><span class="detail-value">${cy13.attr.bachya}</span></div>`
       : '';
