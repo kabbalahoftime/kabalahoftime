@@ -4800,9 +4800,9 @@ transition: transform 0.3s;
     }
     cards[4].querySelector('.sefirah-cycle-name').textContent = `${tifCycleName} — 13-Day Cycle`;
     cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
-      ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning}</span><br>${cy13.attr.name} <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span>`
+      ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning}</span><br>${cy13.attr.name} <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
       : `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>: ${cy13.attr.name} <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span>`;
-    cards[4].querySelector('.sefirah-sub-text').textContent = cy13.attr.meaning;
+    cards[4].querySelector('.sefirah-sub-text').textContent = '';
     cards[4].querySelector('.sefirah-tags').innerHTML = cycleThemeAttr
       ? `<span class="tag highlight">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
       : `<span class="tag highlight">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cy13.attr.name}</span>`;
