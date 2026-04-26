@@ -965,18 +965,7 @@ transition: transform 0.3s;
     <div class="keter-main" id="keter-rambam-main">Loading…</div>
     <div class="keter-meta" id="keter-rambam-meta"></div>
   </div>
-  <!-- SHULCHAN ARUCH HARAV section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Shulchanaruchharav.com</div>
-    <div class="keter-main" id="keter-sar-main">Loading…</div>
-    <div class="keter-meta" id="keter-sar-meta"></div>
-  </div>
-  <!-- DAILY SICHA section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ The Daily Sicha</div>
-    <div class="keter-main" id="keter-sicha-main">Loading…</div>
-    <div class="keter-meta" id="keter-sicha-meta"></div>
-  </div>
+
 </div>
 ```
 
@@ -4380,17 +4369,6 @@ transition: transform 0.3s;
     document.getElementById('keter-rambam-meta').innerHTML =
       `<strong>Rambam</strong> · Mishneh Torah · 3 chapters/day`;
 
-    // Shulchan Aruch HaRav
-    document.getElementById('keter-sar-main').innerHTML =
-      `<a href="https://shulchanaruchharav.com" target="_blank" style="color:var(--gold)">shulchanaruchharav.com ↗</a>`;
-    document.getElementById('keter-sar-meta').innerHTML =
-      `Rabbi Yaakov Goldstein`;
-
-    // Daily Sicha
-    document.getElementById('keter-sicha-main').innerHTML =
-      `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">thedailysicha.com ↗</a>`;
-    document.getElementById('keter-sicha-meta').innerHTML = ``;
-
     // Chok L'Yisrael (Yesod card)
     const kolhalashonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
     document.getElementById('keter-chok-main').innerHTML =
@@ -4423,7 +4401,7 @@ transition: transform 0.3s;
     }
     document.getElementById('keter-hy-meta').innerHTML =
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus ↗</a>` +
-      ` &nbsp;·&nbsp; <a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">Chitas for Kids ↗</a>`;
+      ` &nbsp;·&nbsp; <a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha ↗</a>`;
 
     // 6. Likutei Moharan — Part I = lessons 1–286, Part II (Tinyana) = 287–411
     // Lessons 194–204 all fall on the 13th of Nissan (day 194); from day 195 onward, offset by 10.
@@ -4824,7 +4802,10 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
-       <div style="font-size:0.88rem;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>`;
+       <div style="font-size:0.88rem;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div class="detail-row"><span class="detail-label">Chitas for Kids:</span><span class="detail-value"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org ↗</a></span></div>
+       <div class="detail-row"><span class="detail-label">Shulchan Aruch HaRav:</span><span class="detail-value"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com ↗</a> · Rabbi Yaakov Goldstein</span></div>`;
 
     // Ma'ayan Ganim — 368-day cycle (Rav Arush)
     const MEYN_GANIM_SECTIONS = [
