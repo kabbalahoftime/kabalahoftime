@@ -4557,26 +4557,28 @@ transition: transform 0.3s;
       13:'Psalm 119', 14:'Psalm 119', 15:'Psalm 119', 16:'Psalm 119',
       17:'Psalm 150 (Vowel cycle)'
     };
+    // Chabad.org AIDs: cycle→AID; cycle 1 uses chapter-based formula (16221+ch); cycle 17 computed
+    const CHABAD_AIDS = {2:8220,3:8229,4:16258,5:16332,6:16333,7:16366,8:16402,17:16371};
     let acrosticRow = '';
     const _psName = ACROSTIC_PSALM_NAMES[cy22.cycle] || '';
-    if (_psName && !(cy22.cycle === 17 && cy22.day > 12)) {
-      let _vRef = '', _sefUrl = '';
+    if (_psName) {
+      let _vRef = '', _chabadUrl = '';
       if (cy22.cycle >= 9 && cy22.cycle <= 16) {
         const _vn = (cy22.day - 1) * 8 + (cy22.cycle - 9) + 1;
         _vRef = `Ps 119:${_vn}`;
-        _sefUrl = `https://www.sefaria.org/Psalms.119.${_vn}?lang=bi`;
+        _chabadUrl = `https://www.chabad.org/library/bible_cdo/aid/16340#v=${_vn}`;
       } else {
         const _refs = ACROSTIC_REFS[cy22.cycle];
         const _raw = _refs && _refs[cy22.day - 1];
         if (_raw) {
           _vRef = (cy22.cycle === 8 ? 'Prov ' : 'Ps ') + _raw;
-          const _book = cy22.cycle === 8 ? 'Proverbs' : 'Psalms';
           const [_ch, _v] = _raw.split(':');
-          _sefUrl = `https://www.sefaria.org/${_book}.${_ch}.${_v}?lang=bi`;
+          const _aid = cy22.cycle === 1 ? (16221 + parseInt(_ch)) : CHABAD_AIDS[cy22.cycle];
+          _chabadUrl = `https://www.chabad.org/library/bible_cdo/aid/${_aid}#v=${_v}`;
         }
       }
       if (_vRef) {
-        acrosticRow = `<div class="detail-row"><span class="detail-label">Acrostic:</span><span class="detail-value">${_psName} &nbsp;<span style="color:#555;font-size:0.9em">${_vRef}</span>&nbsp;<a href="${_sefUrl}" target="_blank" rel="noopener" style="font-size:0.85em;text-decoration:none" title="Open in Sefaria">📖</a></span></div>`;
+        acrosticRow = `<div class="detail-row"><span class="detail-label">Acrostic:</span><span class="detail-value">${_psName} &nbsp;<span style="color:#555;font-size:0.9em">${_vRef}</span>&nbsp;<a href="${_chabadUrl}" target="_blank" rel="noopener" style="font-size:0.85em;text-decoration:none" title="Open in Chabad.org">📖</a></span></div>`;
       } else {
         acrosticRow = `<div class="detail-row"><span class="detail-label">Acrostic:</span><span class="detail-value">${_psName}</span></div>`;
       }
