@@ -1164,14 +1164,10 @@ transition: transform 0.3s;
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name">Shovavim — Parasha Cycle</div>
-
-    <!-- Exact blog markup, restyled -->
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
+    <div class="sefirah-tags" id="yesod-tags"></div>
     <div class="sefirah-detail">
-      <div id="yesod-parasha-cycle" style="font-size:14px; line-height:1.7; color:var(--ink-mid);"></div>
-      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <!-- CHOK L'YISRAEL / CHOK BRESLOV -->
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael</div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
@@ -1183,6 +1179,8 @@ transition: transform 0.3s;
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Hida</div>
       <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-hida-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div id="yesod-parasha-cycle"></div>
     </div>
   </div>
 </div>
@@ -1265,14 +1263,62 @@ transition: transform 0.3s;
         { cycle: 8, start: 49, end: 54 }
     ];
     const qualitiesData = {
-        1: { letter: "Shin", name: "Moshe", concept: "Torah", service: "Shiviti" },
-        2: { letter: "Vav", name: "Aharon", concept: "Avodah", service: "Ve'Ahavta" },
-        3: { letter: "Beit (1)", name: "Mordechai", concept: "Mesirut Nefesh & Tzedaka", service: "B'chol" },
-        4: { letter: "Beit (2) (Heh)", name: "Esther", concept: "Taanit", service: "Hatzneah" },
-        5: { letter: "Yud", name: "Rashbi", concept: "Tikkun Klali", service: "Tamim" },
-        6: { letter: "Mem Sofit", name: "Ari", concept: "Mikvah", service: "Tamim" },
-        7: { letter: "Tav (1)", name: "Moshiach", concept: "Tikkun Leah", service: "Tamim" },
-        8: { letter: "Tav (2)", name: "Eliyahu", concept: "Tikkun Rachel/Perek Shira", service: "Tamim" }
+        1: { letter: "Shin", name: "Moshe", concept: "Torah", service: "Shiviti",
+             zusha: "Shiviti Hashem l'negdi tamid — I have set Hashem before me always (Tehillim 16:8)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5934/jewish/Hayom-Yom-Tishrei-5.htm",
+             hayomYomDate: "Tishrei 5",
+             hayomYomText: "Teshuva through constant awareness that the universe is continuously brought from ayin (non-being) to yesh (being). Havayeh — transcendent Divinity — bridges this infinite gap in every moment.",
+             tikkunMethod: "Torah study — Shin (ש) = fire, the fire of Torah",
+             tzaddikNote: "First redeemers: Moshe (מ) + Aharon (א). Shin = fire — the fiery law. Moshe is the eternal channel of Torah." },
+        2: { letter: "Vav", name: "Aharon", concept: "Avodah", service: "Ve'Ahavta",
+             zusha: "V'ahavta l'rei'acha kamocha — Love your neighbor as yourself (Vayikra 19:18)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5935/jewish/Hayom-Yom-Tishrei-6.htm",
+             hayomYomDate: "Tishrei 6",
+             hayomYomText: "Teshuva that stems from goodness of heart. Love of neighbor is an instrument for love of G-d — 'Whoever is pleasing to man is pleasing to G-d.'",
+             tikkunMethod: "Personal prayer, hitbodedut, divine connection",
+             tzaddikNote: "First redeemers: Moshe (מ) + Aharon (א). Vav = connection. Aharon loved peace and pursued peace — the essence of divine service." },
+        3: { letter: "Beit (1)", name: "Mordechai", concept: "Mesirut Nefesh & Tzedaka", service: "B'chol",
+             zusha: "B'chol derachecha da'aihu — In all your ways, know Him (Mishlei 3:6)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5936/jewish/Hayom-Yom-Tishrei-7.htm",
+             hayomYomDate: "Tishrei 7",
+             hayomYomText: "Teshuva through perceiving hashgacha pratit — particular Divine Providence — in all that happens. Men of affairs have an advantage over scholars in witnessing actual manifestations of G-dliness.",
+             tikkunMethod: "Self-sacrifice (mesirut nefesh) and tzedaka",
+             tzaddikNote: "Purim redeemers: Mordechai (מ) + Esther (א). Mordechai refused to bow and risked his life — mesirut nefesh. He directed the tzedaka campaign that preceded the salvation." },
+        4: { letter: "Beit (2) (Heh)", name: "Esther", concept: "Taanit", service: "Hatzneah",
+             zusha: "Hatznei'ah lechet im Elokecha — Walk modestly with your God (Micha 6:8)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5937/jewish/Hayom-Yom-Tishrei-8.htm",
+             hayomYomDate: "Tishrei 8",
+             hayomYomText: "Teshuva through discretion — not being conspicuous or ostentatious in one's piety. True piety is artful: it goes entirely unnoticed.",
+             tikkunMethod: "Fasting — of food and of speech; modesty and hiddenness",
+             tzaddikNote: "Purim redeemers: Mordechai (מ) + Esther (א). Heh = the feminine letter of hiddenness and modesty. Esther fasted and concealed herself for three days." },
+        5: { letter: "Yud", name: "Rashbi", concept: "Tikkun Klali", service: "Tamim",
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5933/jewish/Hayom-Yom-Tishrei-4.htm",
+             hayomYomDate: "Tishrei 4",
+             hayomYomText: "Teshuva through sincerity — wholeness of heart, called earnestness. As Torah says of Avraham: 'You found his heart faithful before You.'",
+             tikkunMethod: "Recitation of Tikkun HaKlali — ten Psalms of rectification (Yud = 10)",
+             tzaddikNote: "Kabbalistic redeemers: Rashbi (ש+מ of Shimon) + Arizal (א). Shin = first letter of Shovavim; Mem = its last letter — both in the name Shimon (שמעון). Rashbi is a previous incarnation of Rebbe Nachman, who instituted Tikkun HaKlali. Yud = 10 = ten Psalms." },
+        6: { letter: "Mem Sofit", name: "Ari", concept: "Mikvah", service: "Tamim",
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5933/jewish/Hayom-Yom-Tishrei-4.htm",
+             hayomYomDate: "Tishrei 4",
+             hayomYomText: "Teshuva through sincerity — wholeness of heart, called earnestness. As Torah says of Avraham: 'You found his heart faithful before You.'",
+             tikkunMethod: "Immersion in the mikvah",
+             tzaddikNote: "Kabbalistic redeemers: Rashbi (ש+מ of Shimon) + Arizal (א). The Arizal elevated immersion as the central kabbalistic practice of purification and rectification." },
+        7: { letter: "Tav (1)", name: "Moshiach", concept: "Tikkun Leah", service: "Tamim",
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5933/jewish/Hayom-Yom-Tishrei-4.htm",
+             hayomYomDate: "Tishrei 4",
+             hayomYomText: "Teshuva through sincerity — wholeness of heart, called earnestness. As Torah says of Avraham: 'You found his heart faithful before You.'",
+             tikkunMethod: "Tikkun Leah — preparation for the final redemption",
+             tzaddikNote: "Final redeemers: Moshiach (מ) + Eliyahu (א). Moshiach announces and brings the final redemption." },
+        8: { letter: "Tav (2)", name: "Eliyahu", concept: "Tikkun Rachel/Perek Shira", service: "Tamim",
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5933/jewish/Hayom-Yom-Tishrei-4.htm",
+             hayomYomDate: "Tishrei 4",
+             hayomYomText: "Teshuva through sincerity — wholeness of heart, called earnestness. As Torah says of Avraham: 'You found his heart faithful before You.'",
+             tikkunMethod: "Tikkun Rachel / Perek Shira — completion of the rectification",
+             tzaddikNote: "Final redeemers: Moshiach (מ) + Eliyahu (א). Eliyahu heralds the coming of Moshiach." }
     };
 
     function getNextShabbat(d) { let day = d.getDay(); let diff = (6 - day + 7) % 7; let s = new Date(d); s.setDate(d.getDate() + diff); s.setHours(0,0,0,0); return s; }
@@ -1291,35 +1337,148 @@ transition: transform 0.3s;
         return cp;
     }
 
+    const servicePhrases = {
+        "Shiviti":   "Shiviti Hashem L’negdi Tamid",
+        "Ve'Ahavta": "Ve’Ahavta L’rei’acha Kamocha",
+        "B'chol":    "B’chol Dracheicha De’eoh",
+        "Hatzneah":  "Hatzneah Leches Im Elokecha",
+        "Tamim":     "Tamim Tihiyu Im Hashem Elokeicha"
+    };
+    function getServicePhrase(s) { return servicePhrases[s] || s; }
+
     function displayParasha() {
         const foundParasha = findCurrentParasha(formatDate(getNextShabbat(new Date())));
-        if (foundParasha) {
-            document.getElementById('yesod-parasha-name').textContent = foundParasha.name;
-            document.getElementById('yesod-parasha-numbers').textContent =
-                'Shovavim Week: ' + (foundParasha.numbers.length > 0 ? foundParasha.numbers.join(', ') : 'N/A');
+        if (!foundParasha) return;
 
-            let cycleOutput = foundParasha.numbers.map(num => {
-                const cycleData = getCycleAndRelativeNumberForParasha(num);
-                if (cycleData) {
-                    const pQ = getQualities(cycleData.relativeNumber);
-                    const cQ = getQualities(cycleData.cycle);
-                    let pText = pQ ? `<strong>Parasha ${cycleData.relativeNumber}:</strong> ${pQ.letter}, ${pQ.service}, ${pQ.name}, ${pQ.concept}` : `<strong>Parasha ${cycleData.relativeNumber}</strong>`;
-                    if (cycleData.cycleLength === 6) {
-                        let ex = null;
-                        if (cycleData.relativeNumber === 5) ex = getQualities(7);
-                        if (cycleData.relativeNumber === 6) ex = getQualities(8);
-                        if (ex) pText += `<br>+ ${ex.letter}, ${ex.service}, ${ex.name}, ${ex.concept}`;
-                    }
-                    let cText = cQ
-                        ? `<span class="cycle-label">in <strong>Cycle ${cycleData.cycle}:</strong> ${cQ.letter}, ${cQ.service}, ${cQ.name}, ${cQ.concept}</span>`
-                        : `<span class="cycle-label">in Cycle ${cycleData.cycle}</span>`;
-                    return `<div style="margin-bottom:4px;">${pText}${cText}</div>`;
-                }
-                return `Parasha ${num}`;
-            }).join('<hr style="border:0; border-top:1px dashed var(--border); margin:8px 0;">');
+        const nums = foundParasha.numbers;
+        const primaryNum = nums.length > 0 ? nums[0] : null;
+        const primaryData = primaryNum ? getCycleAndRelativeNumberForParasha(primaryNum) : null;
+        const parashaQ = primaryData ? getQualities(primaryData.relativeNumber) : null;
+        const cycleQ = primaryData ? getQualities(primaryData.cycle) : null;
+        const sameQuality = parashaQ && cycleQ && parashaQ.letter === cycleQ.letter;
 
-            document.getElementById('yesod-parasha-cycle').innerHTML = cycleOutput;
+        // Card face — cycle (theme) first, then parasha (specific attribute)
+        let mainHtml = '';
+        if (primaryData) {
+            mainHtml = `Cycle <strong>${primaryData.cycle}</strong> · Parasha <strong>${primaryData.relativeNumber}</strong>:`;
+            if (cycleQ) {
+                mainHtml += `<br><strong>${cycleQ.letter}</strong>` +
+                            `<br><span style="font-size:0.88em;opacity:0.8">${getServicePhrase(cycleQ.service)}</span>`;
+            }
+            if (parashaQ && !sameQuality) {
+                mainHtml += `<br><br><strong>${parashaQ.letter}</strong>` +
+                            `<br><span style="font-size:0.88em;opacity:0.8">${getServicePhrase(parashaQ.service)}</span>`;
+            }
+        } else {
+            mainHtml = foundParasha.name;
         }
+        document.getElementById('yesod-parasha-name').innerHTML = mainHtml;
+        document.getElementById('yesod-parasha-numbers').textContent = '';
+
+        // Tags
+        const weekNum = nums.length > 0 ? nums.join(' · ') : 'N/A';
+        const tagsEl = document.getElementById('yesod-tags');
+        if (tagsEl) {
+            tagsEl.style.flexWrap = 'nowrap';
+            tagsEl.innerHTML =
+                `<span class="tag highlight" style="white-space:nowrap">${foundParasha.name} · Shovavim Week ${weekNum}</span>` +
+                (cycleQ ? `<span class="tag" style="white-space:nowrap">${cycleQ.letter}</span>` : '') +
+                (parashaQ && !sameQuality ? `<span class="tag" style="white-space:nowrap">${parashaQ.letter}</span>` : '');
+        }
+
+        // Detail: attribute explanation rows
+        function buildAttrRows(num) {
+            const cd = getCycleAndRelativeNumberForParasha(num);
+            if (!cd) return `<div>Parasha ${num}</div>`;
+            const pQ = getQualities(cd.relativeNumber);
+            const cQ = getQualities(cd.cycle);
+            const samQ = pQ && cQ && pQ.letter === cQ.letter;
+            let html = '';
+            if (cQ) {
+                html += `<div class="detail-row"><span class="detail-label">Cycle ${cd.cycle}:</span>` +
+                        `<span class="detail-value"><strong>${cQ.letter}</strong></span></div>`;
+                if (cQ.zusha) {
+                    html += `<div class="detail-row"><span class="detail-label">Meaning:</span>` +
+                            `<span class="detail-value" style="font-style:italic;color:var(--ink-mid)">${cQ.zusha}</span></div>`;
+                }
+                if (cQ.hayomYomUrl) {
+                    html += `<div class="detail-row"><span class="detail-label">Hayom Yom:</span>` +
+                            `<span class="detail-value"><a href="${cQ.hayomYomUrl}" target="_blank" style="color:var(--gold)">${cQ.hayomYomDate} ↗</a></span></div>`;
+                }
+                if (cQ.hayomYomText) {
+                    html += `<div style="font-size:0.8rem;font-style:italic;color:var(--ink-mid);line-height:1.55;margin:2px 0 6px 0;">${cQ.hayomYomText}</div>`;
+                }
+                html += `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
+                        `<span class="detail-value">${cQ.name}</span></div>`;
+                if (cQ.tzaddikNote) {
+                    html += `<div style="font-size:0.8rem;font-style:italic;color:var(--ink-mid);line-height:1.55;margin:2px 0 4px 0;">${cQ.tzaddikNote}</div>`;
+                }
+                if (cQ.tikkunMethod) {
+                    html += `<div class="detail-row"><span class="detail-label">Method:</span>` +
+                            `<span class="detail-value">${cQ.tikkunMethod}</span></div>`;
+                }
+                html += `<div class="detail-row"><span class="detail-label">Concept:</span>` +
+                        `<span class="detail-value">${cQ.concept}</span></div>`;
+            }
+            if (pQ && !samQ) {
+                html += `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">` +
+                        `<div class="detail-row"><span class="detail-label">Parasha ${cd.relativeNumber}:</span>` +
+                        `<span class="detail-value"><strong>${pQ.letter}</strong></span></div>`;
+                if (pQ.zusha) {
+                    html += `<div class="detail-row"><span class="detail-label">Meaning:</span>` +
+                            `<span class="detail-value" style="font-style:italic;color:var(--ink-mid)">${pQ.zusha}</span></div>`;
+                }
+                if (pQ.hayomYomUrl) {
+                    html += `<div class="detail-row"><span class="detail-label">Hayom Yom:</span>` +
+                            `<span class="detail-value"><a href="${pQ.hayomYomUrl}" target="_blank" style="color:var(--gold)">${pQ.hayomYomDate} ↗</a></span></div>`;
+                }
+                if (pQ.hayomYomText) {
+                    html += `<div style="font-size:0.8rem;font-style:italic;color:var(--ink-mid);line-height:1.55;margin:2px 0 6px 0;">${pQ.hayomYomText}</div>`;
+                }
+                html += `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
+                        `<span class="detail-value">${pQ.name}</span></div>`;
+                if (pQ.tzaddikNote) {
+                    html += `<div style="font-size:0.8rem;font-style:italic;color:var(--ink-mid);line-height:1.55;margin:2px 0 4px 0;">${pQ.tzaddikNote}</div>`;
+                }
+                if (pQ.tikkunMethod) {
+                    html += `<div class="detail-row"><span class="detail-label">Method:</span>` +
+                            `<span class="detail-value">${pQ.tikkunMethod}</span></div>`;
+                }
+                html += `<div class="detail-row"><span class="detail-label">Concept:</span>` +
+                        `<span class="detail-value">${pQ.concept}</span></div>` +
+                        `</div>`;
+            }
+            if (cd.cycleLength === 6) {
+                let ex = null;
+                if (cd.relativeNumber === 5) ex = getQualities(7);
+                if (cd.relativeNumber === 6) ex = getQualities(8);
+                if (ex) {
+                    html += `<div class="detail-row"><span class="detail-label">+ Also:</span>` +
+                            `<span class="detail-value"><strong>${ex.letter}</strong> · ${getServicePhrase(ex.service)} · ${ex.name}</span></div>`;
+                }
+            }
+            return html;
+        }
+
+        const attrRows = nums.length > 0
+            ? nums.map(buildAttrRows).join('<hr style="border:0;border-top:1px dashed var(--border);margin:8px 0;">')
+            : foundParasha.name;
+
+        const systemNote =
+            `<div style="font-size:0.8rem;color:var(--ink-mid);line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">` +
+            `The customary <em>Shovavim</em> period spans 6 weeks beginning with Shemot (ש-ו-ב-ב-י-מ: ` +
+            `Shemot, Va'era, Bo, Beshalach, Yitro, Mishpatim). In a leap year it extends to 8 weeks — adding ` +
+            `Terumah and Tetzaveh — and is called <em>Shovavim Tat</em> (שובבים תת). ` +
+            `This system extends that framework across all 54 annual parashot, applying the same 8 spiritual ` +
+            `pathways — rooted in Reb Zusha of Anipoli's teaching on the letters of ` +
+            `<span style="font-family:serif;font-size:1.05em">תשובה</span> — ` +
+            `to the full year in 8 cycles of 6–8 parashot each. ` +
+            `<a href="https://www.chabad.org/therebbe/article_cdo/aid/5932/jewish/Hayom-Yom-Tishrei-3-Shabbat-Teshuva.htm" target="_blank" style="color:var(--gold)">Hayom Yom, Tishrei 3 ↗</a>` +
+            `  ·  <a href="https://inner.org/teshuva-rebbe-zusha-style/" target="_blank" style="color:var(--gold)">inner.org ↗</a>` +
+            `<br><br>Shovavim is particularly associated with <em>Tikkun HaBrit</em> — the rectification of sins of a sexual nature. Each pathway corresponds to a specific method of tikkun, embodied by a Tzaddik, manifesting in four pairs of redeemers: Moshe and Aharon (first redeemers), Mordechai and Esther (Purim redeemers), Rashbi and Arizal (kabbalistic redeemers), and Moshiach and Eliyahu (final redeemers). Each pair combines מ (Mem) and א (Alef) — together spelling אם (Em, mother). For the kabbalistic pair, Rashbi's name Shimon (שמעון) contains both ש (Shin, the first letter of Shovavim) and מ (Mem, its last letter), alongside Arizal (א). Tikkun HaBrit allows for the full revelation of the Shechinah — Em HaBanim Smeicha.` +
+            `</div>`;
+
+        document.getElementById('yesod-parasha-cycle').innerHTML = attrRows + systemNote;
     }
     displayParasha();
     window.getParashaForDate = function(date) {
@@ -4406,9 +4565,10 @@ transition: transform 0.3s;
 
     // Chok L'Yisrael (Yesod card)
     const kolhalashonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+    const _yesodParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
     document.getElementById('keter-chok-main').innerHTML =
       `<a href="https://www.kolhalashon.com/en/regularSite/searchResults/94/21/%D7%97%D7%95%D7%A7%20%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C?urlFilters=2:683%7C&date=${kolhalashonDate}" target="_blank" style="color:var(--gold)">` +
-      `Chok L'Yisrael ↗</a>`;
+      `Chok L'Yisrael${_yesodParasha ? ' — ' + _yesodParasha : ''} ↗</a>`;
     document.getElementById('keter-chok-meta').innerHTML =
       `Torah, Prophets, Writings, Midrash, Zohar`;
 
@@ -4953,7 +5113,7 @@ transition: transform 0.3s;
     cards[6].querySelector('.sefirah-cycle-name').innerHTML = 'Halacha — Daily Law<br>Talmud (Chazarah)';
 
     const hodChazarahHtml =
-      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+      `<div style="margin-bottom:4px;"></div>` +
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Talmud (Chazarah)</div>` +
       (daf
         ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>` +
@@ -4966,7 +5126,6 @@ transition: transform 0.3s;
         (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>` : 'דַּף יוֹמִי');
       cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
       const hodCcHtml =
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
         `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a><br>` +
@@ -4974,15 +5133,15 @@ transition: transform 0.3s;
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay} ↗</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodCcHtml +
+        hodChazarahHtml +
+        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div class="detail-row"><span class="detail-label">Chapters:</span><span class="detail-value">Orach Chaim ${hal.ch1} & ${hal.ch2}</span></div>` +
         `<div class="detail-row"><span class="detail-label">Commentary:</span><span class="detail-value">Mishnah Berurah by the Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · Chapters 1-697 · Days 1-348</span></div>` +
-        `<div class="detail-row"><span class="detail-label">Year end:</span><span class="detail-value">Sefer Chofetz Chaim (Days 349-364)</span></div>` +
-        hodCcHtml +
-        hodChazarahHtml;
+        `<div class="detail-row"><span class="detail-label">Year end:</span><span class="detail-value">Sefer Chofetz Chaim (Days 349-364)</span></div>`;
     } else {
       const hodCcHtml =
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
         `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a><br>` +
@@ -4994,11 +5153,12 @@ transition: transform 0.3s;
         (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>` : 'דַּף יוֹמִי');
       cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodCcHtml +
+        hodChazarahHtml +
+        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">Day ${d} of year · Section ${hal.section} of Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Topic:</span><span class="detail-value">Laws of proper speech (lashon hara, rechilut)</span></div>` +
-        `<div class="detail-row"><span class="detail-label">Days:</span><span class="detail-value">Days 349-364 of the year</span></div>` +
-        hodCcHtml +
-        hodChazarahHtml;
+        `<div class="detail-row"><span class="detail-label">Days:</span><span class="detail-value">Days 349-364 of the year</span></div>`;
     }
 
 
