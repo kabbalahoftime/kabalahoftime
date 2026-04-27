@@ -1263,14 +1263,22 @@ transition: transform 0.3s;
         { cycle: 8, start: 49, end: 54 }
     ];
     const qualitiesData = {
-        1: { letter: "Shin", name: "Moshe", concept: "Torah", service: "Shiviti" },
-        2: { letter: "Vav", name: "Aharon", concept: "Avodah", service: "Ve'Ahavta" },
-        3: { letter: "Beit (1)", name: "Mordechai", concept: "Mesirut Nefesh & Tzedaka", service: "B'chol" },
-        4: { letter: "Beit (2) (Heh)", name: "Esther", concept: "Taanit", service: "Hatzneah" },
-        5: { letter: "Yud", name: "Rashbi", concept: "Tikkun Klali", service: "Tamim" },
-        6: { letter: "Mem Sofit", name: "Ari", concept: "Mikvah", service: "Tamim" },
-        7: { letter: "Tav (1)", name: "Moshiach", concept: "Tikkun Leah", service: "Tamim" },
-        8: { letter: "Tav (2)", name: "Eliyahu", concept: "Tikkun Rachel/Perek Shira", service: "Tamim" }
+        1: { letter: "Shin", name: "Moshe", concept: "Torah", service: "Shiviti",
+             zusha: "Shiviti Hashem l'negdi tamid — I have set Hashem before me always (Tehillim 16:8)" },
+        2: { letter: "Vav", name: "Aharon", concept: "Avodah", service: "Ve'Ahavta",
+             zusha: "V'ahavta l'rei'acha kamocha — Love your neighbor as yourself (Vayikra 19:18)" },
+        3: { letter: "Beit (1)", name: "Mordechai", concept: "Mesirut Nefesh & Tzedaka", service: "B'chol",
+             zusha: "B'chol derachecha da'aihu — In all your ways, know Him (Mishlei 3:6)" },
+        4: { letter: "Beit (2) (Heh)", name: "Esther", concept: "Taanit", service: "Hatzneah",
+             zusha: "Hatznei'ah lechet im Elokecha — Walk modestly with your God (Micha 6:8)" },
+        5: { letter: "Yud", name: "Rashbi", concept: "Tikkun Klali", service: "Tamim",
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)" },
+        6: { letter: "Mem Sofit", name: "Ari", concept: "Mikvah", service: "Tamim",
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)" },
+        7: { letter: "Tav (1)", name: "Moshiach", concept: "Tikkun Leah", service: "Tamim",
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)" },
+        8: { letter: "Tav (2)", name: "Eliyahu", concept: "Tikkun Rachel/Perek Shira", service: "Tamim",
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)" }
     };
 
     function getNextShabbat(d) { let day = d.getDay(); let diff = (6 - day + 7) % 7; let s = new Date(d); s.setDate(d.getDate() + diff); s.setHours(0,0,0,0); return s; }
@@ -1349,6 +1357,10 @@ transition: transform 0.3s;
             if (cQ) {
                 html += `<div class="detail-row"><span class="detail-label">Cycle ${cd.cycle}:</span>` +
                         `<span class="detail-value"><strong>${cQ.letter}</strong> · ${getServicePhrase(cQ.service)}</span></div>`;
+                if (cQ.zusha) {
+                    html += `<div class="detail-row"><span class="detail-label">Meaning:</span>` +
+                            `<span class="detail-value" style="font-style:italic;color:var(--ink-mid)">${cQ.zusha}</span></div>`;
+                }
                 html += `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
                         `<span class="detail-value">${cQ.name}</span></div>`;
                 html += `<div class="detail-row"><span class="detail-label">Concept:</span>` +
@@ -1357,8 +1369,12 @@ transition: transform 0.3s;
             if (pQ && !samQ) {
                 html += `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">` +
                         `<div class="detail-row"><span class="detail-label">Parasha ${cd.relativeNumber}:</span>` +
-                        `<span class="detail-value"><strong>${pQ.letter}</strong> · ${getServicePhrase(pQ.service)}</span></div>` +
-                        `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
+                        `<span class="detail-value"><strong>${pQ.letter}</strong> · ${getServicePhrase(pQ.service)}</span></div>`;
+                if (pQ.zusha) {
+                    html += `<div class="detail-row"><span class="detail-label">Meaning:</span>` +
+                            `<span class="detail-value" style="font-style:italic;color:var(--ink-mid)">${pQ.zusha}</span></div>`;
+                }
+                html += `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
                         `<span class="detail-value">${pQ.name}</span></div>` +
                         `<div class="detail-row"><span class="detail-label">Concept:</span>` +
                         `<span class="detail-value">${pQ.concept}</span></div>` +
@@ -1376,10 +1392,19 @@ transition: transform 0.3s;
             return html;
         }
 
-        const cycleOutput = nums.length > 0
+        const attrRows = nums.length > 0
             ? nums.map(buildAttrRows).join('<hr style="border:0;border-top:1px dashed var(--border);margin:8px 0;">')
             : foundParasha.name;
-        document.getElementById('yesod-parasha-cycle').innerHTML = cycleOutput;
+
+        const systemNote =
+            `<div style="font-size:0.8rem;color:var(--ink-mid);line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">` +
+            `Based on Reb Zusha of Anapoli's teaching on the letters of ` +
+            `<span style="font-family:serif;font-size:1.05em">תשובה</span>, ` +
+            `the 54 annual Torah portions are divided into 8 cycles — each cycle carrying one spiritual pathway of return, ` +
+            `and each parasha within the cycle reflecting one of the 8 pathways in sequence.` +
+            `</div>`;
+
+        document.getElementById('yesod-parasha-cycle').innerHTML = attrRows + systemNote;
     }
     displayParasha();
     window.getParashaForDate = function(date) {
