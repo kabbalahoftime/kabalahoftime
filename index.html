@@ -1264,21 +1264,45 @@ transition: transform 0.3s;
     ];
     const qualitiesData = {
         1: { letter: "Shin", name: "Moshe", concept: "Torah", service: "Shiviti",
-             zusha: "Shiviti Hashem l'negdi tamid — I have set Hashem before me always (Tehillim 16:8)" },
+             zusha: "Shiviti Hashem l'negdi tamid — I have set Hashem before me always (Tehillim 16:8)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5934/jewish/Hayom-Yom-Tishrei-5.htm",
+             hayomYomDate: "Tishrei 5",
+             hayomYomText: "Teshuva through constant awareness that the universe is continuously brought from ayin (non-being) to yesh (being). Havayeh — transcendent Divinity — bridges this infinite gap in every moment." },
         2: { letter: "Vav", name: "Aharon", concept: "Avodah", service: "Ve'Ahavta",
-             zusha: "V'ahavta l'rei'acha kamocha — Love your neighbor as yourself (Vayikra 19:18)" },
+             zusha: "V'ahavta l'rei'acha kamocha — Love your neighbor as yourself (Vayikra 19:18)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5935/jewish/Hayom-Yom-Tishrei-6.htm",
+             hayomYomDate: "Tishrei 6",
+             hayomYomText: "Teshuva that stems from goodness of heart. Love of neighbor is an instrument for love of G-d — 'Whoever is pleasing to man is pleasing to G-d.'" },
         3: { letter: "Beit (1)", name: "Mordechai", concept: "Mesirut Nefesh & Tzedaka", service: "B'chol",
-             zusha: "B'chol derachecha da'aihu — In all your ways, know Him (Mishlei 3:6)" },
+             zusha: "B'chol derachecha da'aihu — In all your ways, know Him (Mishlei 3:6)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5936/jewish/Hayom-Yom-Tishrei-7.htm",
+             hayomYomDate: "Tishrei 7",
+             hayomYomText: "Teshuva through perceiving hashgacha pratit — particular Divine Providence — in all that happens. Men of affairs have an advantage over scholars in witnessing actual manifestations of G-dliness." },
         4: { letter: "Beit (2) (Heh)", name: "Esther", concept: "Taanit", service: "Hatzneah",
-             zusha: "Hatznei'ah lechet im Elokecha — Walk modestly with your God (Micha 6:8)" },
+             zusha: "Hatznei'ah lechet im Elokecha — Walk modestly with your God (Micha 6:8)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5937/jewish/Hayom-Yom-Tishrei-8.htm",
+             hayomYomDate: "Tishrei 8",
+             hayomYomText: "Teshuva through discretion — not being conspicuous or ostentatious in one's piety. True piety is artful: it goes entirely unnoticed." },
         5: { letter: "Yud", name: "Rashbi", concept: "Tikkun Klali", service: "Tamim",
-             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)" },
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5933/jewish/Hayom-Yom-Tishrei-4.htm",
+             hayomYomDate: "Tishrei 4",
+             hayomYomText: "Teshuva through sincerity — wholeness of heart, called earnestness. As Torah says of Avraham: 'You found his heart faithful before You.'" },
         6: { letter: "Mem Sofit", name: "Ari", concept: "Mikvah", service: "Tamim",
-             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)" },
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5933/jewish/Hayom-Yom-Tishrei-4.htm",
+             hayomYomDate: "Tishrei 4",
+             hayomYomText: "Teshuva through sincerity — wholeness of heart, called earnestness. As Torah says of Avraham: 'You found his heart faithful before You.'" },
         7: { letter: "Tav (1)", name: "Moshiach", concept: "Tikkun Leah", service: "Tamim",
-             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)" },
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5933/jewish/Hayom-Yom-Tishrei-4.htm",
+             hayomYomDate: "Tishrei 4",
+             hayomYomText: "Teshuva through sincerity — wholeness of heart, called earnestness. As Torah says of Avraham: 'You found his heart faithful before You.'" },
         8: { letter: "Tav (2)", name: "Eliyahu", concept: "Tikkun Rachel/Perek Shira", service: "Tamim",
-             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)" }
+             zusha: "Tamim tihyeh im Hashem Elokecha — Walk sincerely with Hashem your God (Devarim 18:13)",
+             hayomYomUrl: "https://www.chabad.org/therebbe/article_cdo/aid/5933/jewish/Hayom-Yom-Tishrei-4.htm",
+             hayomYomDate: "Tishrei 4",
+             hayomYomText: "Teshuva through sincerity — wholeness of heart, called earnestness. As Torah says of Avraham: 'You found his heart faithful before You.'" }
     };
 
     function getNextShabbat(d) { let day = d.getDay(); let diff = (6 - day + 7) % 7; let s = new Date(d); s.setDate(d.getDate() + diff); s.setHours(0,0,0,0); return s; }
@@ -1361,6 +1385,13 @@ transition: transform 0.3s;
                     html += `<div class="detail-row"><span class="detail-label">Meaning:</span>` +
                             `<span class="detail-value" style="font-style:italic;color:var(--ink-mid)">${cQ.zusha}</span></div>`;
                 }
+                if (cQ.hayomYomUrl) {
+                    html += `<div class="detail-row"><span class="detail-label">Hayom Yom:</span>` +
+                            `<span class="detail-value"><a href="${cQ.hayomYomUrl}" target="_blank" style="color:var(--gold)">${cQ.hayomYomDate} ↗</a></span></div>`;
+                }
+                if (cQ.hayomYomText) {
+                    html += `<div style="font-size:0.8rem;font-style:italic;color:var(--ink-mid);line-height:1.55;margin:2px 0 6px 0;">${cQ.hayomYomText}</div>`;
+                }
                 html += `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
                         `<span class="detail-value">${cQ.name}</span></div>`;
                 html += `<div class="detail-row"><span class="detail-label">Concept:</span>` +
@@ -1373,6 +1404,13 @@ transition: transform 0.3s;
                 if (pQ.zusha) {
                     html += `<div class="detail-row"><span class="detail-label">Meaning:</span>` +
                             `<span class="detail-value" style="font-style:italic;color:var(--ink-mid)">${pQ.zusha}</span></div>`;
+                }
+                if (pQ.hayomYomUrl) {
+                    html += `<div class="detail-row"><span class="detail-label">Hayom Yom:</span>` +
+                            `<span class="detail-value"><a href="${pQ.hayomYomUrl}" target="_blank" style="color:var(--gold)">${pQ.hayomYomDate} ↗</a></span></div>`;
+                }
+                if (pQ.hayomYomText) {
+                    html += `<div style="font-size:0.8rem;font-style:italic;color:var(--ink-mid);line-height:1.55;margin:2px 0 6px 0;">${pQ.hayomYomText}</div>`;
                 }
                 html += `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
                         `<span class="detail-value">${pQ.name}</span></div>` +
