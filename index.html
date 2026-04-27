@@ -1309,17 +1309,17 @@ transition: transform 0.3s;
         const cycleQ = primaryData ? getQualities(primaryData.cycle) : null;
         const sameQuality = parashaQ && cycleQ && parashaQ.letter === cycleQ.letter;
 
-        // Card face
+        // Card face — cycle (theme) first, then parasha (specific attribute)
         let mainHtml = '';
         if (primaryData) {
             mainHtml = `Cycle <strong>${primaryData.cycle}</strong> · Parasha <strong>${primaryData.relativeNumber}</strong>:`;
-            if (parashaQ) {
-                mainHtml += `<br><strong>${parashaQ.letter}</strong>` +
-                            `<br><span style="font-size:0.88em;opacity:0.8">${getServicePhrase(parashaQ.service)}</span>`;
-            }
-            if (cycleQ && !sameQuality) {
-                mainHtml += `<br><br><strong>${cycleQ.letter}</strong>` +
+            if (cycleQ) {
+                mainHtml += `<br><strong>${cycleQ.letter}</strong>` +
                             `<br><span style="font-size:0.88em;opacity:0.8">${getServicePhrase(cycleQ.service)}</span>`;
+            }
+            if (parashaQ && !sameQuality) {
+                mainHtml += `<br><br><strong>${parashaQ.letter}</strong>` +
+                            `<br><span style="font-size:0.88em;opacity:0.8">${getServicePhrase(parashaQ.service)}</span>`;
             }
         } else {
             mainHtml = foundParasha.name;
@@ -1334,8 +1334,8 @@ transition: transform 0.3s;
             tagsEl.style.flexWrap = 'nowrap';
             tagsEl.innerHTML =
                 `<span class="tag highlight" style="white-space:nowrap">${foundParasha.name} · Shovavim Week ${weekNum}</span>` +
-                (parashaQ ? `<span class="tag" style="white-space:nowrap">${parashaQ.letter}</span>` : '') +
-                (cycleQ && !sameQuality ? `<span class="tag" style="white-space:nowrap">${cycleQ.letter}</span>` : '');
+                (cycleQ ? `<span class="tag" style="white-space:nowrap">${cycleQ.letter}</span>` : '') +
+                (parashaQ && !sameQuality ? `<span class="tag" style="white-space:nowrap">${parashaQ.letter}</span>` : '');
         }
 
         // Detail: attribute explanation rows
@@ -1346,15 +1346,23 @@ transition: transform 0.3s;
             const cQ = getQualities(cd.cycle);
             const samQ = pQ && cQ && pQ.letter === cQ.letter;
             let html = '';
-            if (pQ) {
-                html += `<div class="detail-row"><span class="detail-label">Parasha ${cd.relativeNumber}:</span>` +
-                        `<span class="detail-value"><strong>${pQ.letter}</strong> · ${getServicePhrase(pQ.service)}</span></div>`;
+            if (cQ) {
+                html += `<div class="detail-row"><span class="detail-label">Cycle ${cd.cycle}:</span>` +
+                        `<span class="detail-value"><strong>${cQ.letter}</strong> · ${getServicePhrase(cQ.service)}</span></div>`;
                 html += `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
-                        `<span class="detail-value">${pQ.name}</span></div>`;
+                        `<span class="detail-value">${cQ.name}</span></div>`;
                 html += `<div class="detail-row"><span class="detail-label">Concept:</span>` +
-                        `<span class="detail-value">${pQ.concept}</span></div>`;
-            } else {
-                html += `<div class="detail-row"><span class="detail-label">Parasha ${cd.relativeNumber}</span></div>`;
+                        `<span class="detail-value">${cQ.concept}</span></div>`;
+            }
+            if (pQ && !samQ) {
+                html += `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">` +
+                        `<div class="detail-row"><span class="detail-label">Parasha ${cd.relativeNumber}:</span>` +
+                        `<span class="detail-value"><strong>${pQ.letter}</strong> · ${getServicePhrase(pQ.service)}</span></div>` +
+                        `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
+                        `<span class="detail-value">${pQ.name}</span></div>` +
+                        `<div class="detail-row"><span class="detail-label">Concept:</span>` +
+                        `<span class="detail-value">${pQ.concept}</span></div>` +
+                        `</div>`;
             }
             if (cd.cycleLength === 6) {
                 let ex = null;
@@ -1364,16 +1372,6 @@ transition: transform 0.3s;
                     html += `<div class="detail-row"><span class="detail-label">+ Also:</span>` +
                             `<span class="detail-value"><strong>${ex.letter}</strong> · ${getServicePhrase(ex.service)} · ${ex.name}</span></div>`;
                 }
-            }
-            if (cQ && !samQ) {
-                html += `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">` +
-                        `<div class="detail-row"><span class="detail-label">Cycle ${cd.cycle}:</span>` +
-                        `<span class="detail-value"><strong>${cQ.letter}</strong> · ${getServicePhrase(cQ.service)}</span></div>` +
-                        `<div class="detail-row"><span class="detail-label">Tzaddik:</span>` +
-                        `<span class="detail-value">${cQ.name}</span></div>` +
-                        `<div class="detail-row"><span class="detail-label">Concept:</span>` +
-                        `<span class="detail-value">${cQ.concept}</span></div>` +
-                        `</div>`;
             }
             return html;
         }
