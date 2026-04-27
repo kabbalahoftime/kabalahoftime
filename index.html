@@ -1396,7 +1396,7 @@ transition: transform 0.3s;
             let html = '';
             if (cQ) {
                 html += `<div class="detail-row"><span class="detail-label">Cycle ${cd.cycle}:</span>` +
-                        `<span class="detail-value"><strong>${cQ.letter}</strong> · ${getServicePhrase(cQ.service)}</span></div>`;
+                        `<span class="detail-value"><strong>${cQ.letter}</strong></span></div>`;
                 if (cQ.zusha) {
                     html += `<div class="detail-row"><span class="detail-label">Meaning:</span>` +
                             `<span class="detail-value" style="font-style:italic;color:var(--ink-mid)">${cQ.zusha}</span></div>`;
@@ -1423,7 +1423,7 @@ transition: transform 0.3s;
             if (pQ && !samQ) {
                 html += `<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">` +
                         `<div class="detail-row"><span class="detail-label">Parasha ${cd.relativeNumber}:</span>` +
-                        `<span class="detail-value"><strong>${pQ.letter}</strong> · ${getServicePhrase(pQ.service)}</span></div>`;
+                        `<span class="detail-value"><strong>${pQ.letter}</strong></span></div>`;
                 if (pQ.zusha) {
                     html += `<div class="detail-row"><span class="detail-label">Meaning:</span>` +
                             `<span class="detail-value" style="font-style:italic;color:var(--ink-mid)">${pQ.zusha}</span></div>`;
