@@ -4976,7 +4976,7 @@ transition: transform 0.3s;
     cards[6].querySelector('.sefirah-cycle-name').innerHTML = 'Halacha — Daily Law<br>Talmud (Chazarah)';
 
     const hodChazarahHtml =
-      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+      `<div style="margin-bottom:4px;"></div>` +
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Talmud (Chazarah)</div>` +
       (daf
         ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>` +
@@ -4989,7 +4989,6 @@ transition: transform 0.3s;
         (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>` : 'דַּף יוֹמִי');
       cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
       const hodCcHtml =
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
         `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a><br>` +
@@ -4997,15 +4996,15 @@ transition: transform 0.3s;
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay} ↗</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodCcHtml +
+        hodChazarahHtml +
+        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div class="detail-row"><span class="detail-label">Chapters:</span><span class="detail-value">Orach Chaim ${hal.ch1} & ${hal.ch2}</span></div>` +
         `<div class="detail-row"><span class="detail-label">Commentary:</span><span class="detail-value">Mishnah Berurah by the Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · Chapters 1-697 · Days 1-348</span></div>` +
-        `<div class="detail-row"><span class="detail-label">Year end:</span><span class="detail-value">Sefer Chofetz Chaim (Days 349-364)</span></div>` +
-        hodCcHtml +
-        hodChazarahHtml;
+        `<div class="detail-row"><span class="detail-label">Year end:</span><span class="detail-value">Sefer Chofetz Chaim (Days 349-364)</span></div>`;
     } else {
       const hodCcHtml =
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
         `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a><br>` +
@@ -5017,11 +5016,12 @@ transition: transform 0.3s;
         (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>` : 'דַּף יוֹמִי');
       cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodCcHtml +
+        hodChazarahHtml +
+        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">Day ${d} of year · Section ${hal.section} of Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Topic:</span><span class="detail-value">Laws of proper speech (lashon hara, rechilut)</span></div>` +
-        `<div class="detail-row"><span class="detail-label">Days:</span><span class="detail-value">Days 349-364 of the year</span></div>` +
-        hodCcHtml +
-        hodChazarahHtml;
+        `<div class="detail-row"><span class="detail-label">Days:</span><span class="detail-value">Days 349-364 of the year</span></div>`;
     }
 
 
