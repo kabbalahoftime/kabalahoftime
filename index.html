@@ -4462,15 +4462,19 @@ transition: transform 0.3s;
 
   function ksaYomiLabel(siman, seif) {
     if (siman === 'Klalim') return 'Klalim';
-    const sl = siman.includes('-') ? `Simanim ${siman}` : `Siman ${siman}`;
-    if (!seif) return sl;
+    if (!seif) return `Siman ${siman}`;
+    const simanParts = siman.split('-');
     const parts = seif.split('-');
     const start = parts[0];
     const end = parts[1];
-    if (!end) return `${sl} · Seif ${start}`;
-    if (end === 'E') return `${sl} · Seif ${start}–end`;
-    if (parseInt(end) < parseInt(start)) return `${sl} · Seif ${start}–`;
-    return `${sl} · Seif ${start}–${end}`;
+    if (simanParts.length === 2) {
+      const s0 = simanParts[0], s1 = simanParts[1];
+      if (!end || end === 'E') return `Siman ${s0}:${start} – ${s1}:end`;
+      return `Siman ${s0}:${start} – ${s1}:${end}`;
+    }
+    if (!end) return `Siman ${siman} · Seif ${start}`;
+    if (end === 'E') return `Siman ${siman} · Seif ${start}–end`;
+    return `Siman ${siman} · Seif ${start}–${end}`;
   }
 
 
