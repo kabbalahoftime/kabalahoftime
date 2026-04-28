@@ -4492,7 +4492,7 @@ transition: transform 0.3s;
     const end = parts[1];
     if (!end) return `${sl} · Seif ${start}`;
     if (end === 'E') return `${sl} · Seif ${start}–end`;
-    if (parseInt(end) < parseInt(start)) return `${sl} · Seif ${start}–`;
+    if (parseInt(end) < parseInt(start)) return `${sl} · Seif ${start}–${end}`;
     return `${sl} · Seif ${start}–${end}`;
   }
 
