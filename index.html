@@ -5284,10 +5284,18 @@ transition: transform 0.3s;
 
     if (!hal.chofetz) {
       cards[6].querySelector('.sefirah-main-text').innerHTML =
-        `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}<br>` +
+        `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
+        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh,_Orach_Chaim.${hal.ch1}" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a><br>` +
         (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>` : 'דַּף יוֹמִי');
       cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
+      const hodSaHtml =
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch</div>` +
+        `<div style="font-size:0.88rem;line-height:2;">` +
+        `<a href="https://www.sefaria.org/Shulchan_Arukh,_Orach_Chaim.${hal.ch1}" target="_blank" style="color:var(--gold)">Orach Chaim ${hal.ch1} on Sefaria ↗</a><br>` +
+        `<a href="https://www.sefaria.org/Shulchan_Arukh,_Orach_Chaim.${hal.ch2}" target="_blank" style="color:var(--gold)">Orach Chaim ${hal.ch2} on Sefaria ↗</a>` +
+        `</div>`;
       const hodCcHtml =
+        `<div style="margin-bottom:4px;"></div>` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
         `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a><br>` +
@@ -5295,6 +5303,7 @@ transition: transform 0.3s;
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay} ↗</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodSaHtml +
         hodCcHtml +
         hodChazarahHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
