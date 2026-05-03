@@ -2822,7 +2822,16 @@ transition: transform 0.3s;
     'Rosh Hashana / Haazinu': 53,
     'Yom Kippur / Bereshit': 1,
     'Sukkot': 1, // During Sukkot we read from Bereshit cycle
-    'Shemini Atzeret': 1
+    'Shemini Atzeret': 1,
+    // Alternative spellings from parashotData calendar
+    'Vayeira': 4, 'Chayei Sara': 5, 'Toledot': 6,
+    'Shmini': 26, 'Behaalotecha': 36, 'Shlach': 37,
+    'Vaetchanan': 45, 'Eikev': 46, 'Ki Teitzei': 49,
+    'Vayeilech': 52,
+    // Combined parashiyot (hyphen-separated)
+    'Vayakhel-Pekudei': 22, 'Tazria-Metzora': 27, 'Achrei Mot-Kedoshim': 29,
+    'Behar-Bechukotai': 32, 'Chukat-Balak': 39, 'Matot-Masei': 42,
+    'Nitzavim-Vayeilech': 51
   };
 
   // MALCHUT PARASHA MAPPINGS
@@ -5511,7 +5520,10 @@ transition: transform 0.3s;
       const mapping = {};
       
       // Get parasha number (1-54) from parasha name
-      const parashaNum = PARASHA_TO_NUMBER[parashaName] || PARASHA_TO_NUMBER[parashaName.split(' / ')[1]];
+      const parashaNum = PARASHA_TO_NUMBER[parashaName]
+        || PARASHA_TO_NUMBER[parashaName.split(' / ')[1]]
+        || PARASHA_TO_NUMBER[parashaName.split('-')[0].trim()]
+        || PARASHA_TO_NUMBER[parashaName.split('-').pop().trim()];
       if (!parashaNum) return mapping;
       
       if (textName === 'Stories of the Baal Shem Tov' || textName === 'Keter Shem Tov') {
