@@ -319,6 +319,36 @@ text-transform: uppercase;
 margin-bottom: 6px;
 }
 
+.malchut-visible-content {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 0;
+}
+
+.malchut-section {
+padding: 10px 12px;
+}
+
+.malchut-visible-content .malchut-section:nth-child(odd) {
+background: #fdf9f2;
+}
+
+.malchut-visible-content .malchut-section:nth-child(even) {
+background: #f2ead8;
+}
+
+.malchut-visible-content .malchut-section:not(:last-child) {
+border-right: 1px solid var(–border);
+}
+
+@media (max-width: 540px) {
+.malchut-visible-content { grid-template-columns: 1fr; }
+.malchut-visible-content .malchut-section:not(:last-child) {
+border-right: none;
+border-bottom: 1px solid var(–border);
+}
+}
+
 .keter-hdate {
 font-size: 11px;
 color: var(–gold);
@@ -1493,10 +1523,21 @@ transition: transform 0.3s;
     <div class="sefirah-hebrew">מַלְכוּת</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="malchut-cycle-name">Daily Text</div>
-    <div class="sefirah-main-text" id="malchut-main">Loading…</div>
-    <div class="sefirah-sub-text" id="malchut-sub"></div>
-    <div class="sefirah-tags" id="malchut-tags"></div>
+    <div class="malchut-visible-content">
+      <div class="malchut-section">
+        <div class="keter-section-label" id="malchut-cycle-name">Daily Text</div>
+        <div class="sefirah-main-text" id="malchut-main">Loading…</div>
+        <div class="sefirah-sub-text" id="malchut-sub"></div>
+      </div>
+      <div class="malchut-section">
+        <div class="keter-section-label">✦ KoT Book</div>
+        <div id="malchut-book-face">Loading…</div>
+      </div>
+      <div class="malchut-section">
+        <div class="keter-section-label">✦ Kitzur Shulchan Aruch</div>
+        <div id="malchut-ksa-face">Loading…</div>
+      </div>
+    </div>
     <div class="sefirah-detail" id="malchut-detail">
       <!-- Weekly book content injected by render() -->
     </div>
@@ -4190,7 +4231,7 @@ transition: transform 0.3s;
   // dayNum 1=Thu→Fri, 2=Fri→Shab, 3=Sat→Sun, 4=Sun→Mon, 5=Mon→Tue, 6=Tue→Wed, 7=Wed→Thu
   const MALCHUT_TEXTS = [
     { name: 'Chidah (Zohar / Arizal)',      author: 'R. Shimon bar Yochai / R. Luria',    shortName: 'Zohar',    day: 'Friday — Erev Shabbat',   desc: 'Mystical depth of the Parasha — the hidden light of Torah' },
-    { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight',      secondaryName: 'Keter Shem Tov', secondaryAuthor: 'Baal Shem Tov', secondaryDesc: 'Foundations of Chassidic thought and Divine joy' },
+    { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight',      secondaryName: 'Keter Shem Tov', secondaryAuthor: 'Baal Shem Tov', secondaryDesc: 'Foundations of Chassidic thought and Divine joy', tertiaryName: 'Stories of the Baal Shem Tov', tertiaryAuthor: 'R. Yisrael Yaakov Kaplowitz' },
     { name: 'Kedushas Levi',       author: 'R. Levi Yitzhak of Berditchev',      shortName: 'KL',       day: 'Sunday',                  desc: 'Chassidic commentary on Torah — love and joy in divine service' },
     { name: 'Noam Elimelech',      author: 'R. Elimelech of Lizhensk',           shortName: 'NE',       day: 'Monday',                  desc: 'The Tzadik\'s path: elevating the world through Torah' },
     { name: 'Tanya',               author: 'Alter Rebbe (R. Schneur Zalman)',     shortName: 'Tanya',    day: 'Tuesday',                 desc: 'Likutei Amarim — the Sefer Shel Beinonim' },
@@ -4640,12 +4681,74 @@ transition: transform 0.3s;
     'https://www.sefaria.org/Noam_Elimelekh,_Additions,_A_Prayer_before_Praying', // 54 VeZot HaBrachah
   ];
 
+  // Kedushas Levi Sefaria section slugs indexed by parasha number (1–54)
+  const KL_SLUGS = [
+    null,                    //  0 unused
+    'Bereishit',             //  1 Bereshit
+    'Noach',                 //  2 Noach
+    'Lech_Lecha',            //  3 Lech Lecha
+    'Vayera',                //  4 Vayera
+    'Chayei_Sara',           //  5 Chayei Sarah
+    'Toldot',                //  6 Toldot
+    'Vayetzei',              //  7 Vayetzei
+    'Vayishlach',            //  8 Vayishlach
+    'Vayeshev',              //  9 Vayeshev
+    'Mikeitz',               // 10 Miketz
+    'Vayigash',              // 11 Vayigash
+    'Vayechi',               // 12 Vayechi
+    'Shemot',                // 13 Shemot
+    'Vaera',                 // 14 Va'eira
+    'Bo',                    // 15 Bo
+    'Beshalach',             // 16 Beshalach
+    'Yitro',                 // 17 Yitro
+    'Mishpatim',             // 18 Mishpatim
+    'Terumah',               // 19 Terumah
+    'Tetzaveh',              // 20 Tetzaveh
+    'Ki_Tissa',              // 21 Ki Tisa
+    'Vayakhel',              // 22 Vayakhel
+    'Pekudei',               // 23 Pekudei
+    'Vayikra',               // 24 Vayikra
+    'Tzav',                  // 25 Tzav
+    'Shemini',               // 26 Shemini
+    'Tazria',                // 27 Tazria
+    'Metzora',               // 28 Metzora
+    'Acharei_Mot',           // 29 Achrei Mot
+    'Kedoshim',              // 30 Kedoshim
+    'Emor',                  // 31 Emor
+    'Behar',                 // 32 Behar
+    'Bechukotai',            // 33 Bechukotai
+    'Bamidbar',              // 34 Bamidbar
+    'Nasso',                 // 35 Nasso
+    'Behaalotcha',           // 36 Beha'alotcha
+    'Shelach',               // 37 Shelach
+    'Korach',                // 38 Korach
+    'Chukat',                // 39 Chukat
+    'Balak',                 // 40 Balak
+    'Pinchas',               // 41 Pinchas
+    'Matot',                 // 42 Matot
+    'Massei',                // 43 Massei
+    'Devarim',               // 44 Devarim
+    'Vaetchanan',            // 45 Va'etchanan
+    'Ekev',                  // 46 Ekev
+    'Reeh',                  // 47 Re'eh
+    'Shoftim',               // 48 Shoftim
+    'Ki_Tetzeh',             // 49 Ki Tetzeh
+    'Ki_Tavo',               // 50 Ki Tavo
+    'Nitzavim',              // 51 Nitzavim
+    'Vayelech',              // 52 Vayelech
+    'Haazinu',               // 53 Haazinu
+    'Vezot_Haberakhah',      // 54 VeZot HaBrachah
+  ];
+
   function malchutSeferiaUrl(textName, mapping) {
     if (textName === 'Chidah (Zohar / Arizal)') {
       return mapping._zoharUrl || null;
     }
     if (textName === 'Noam Elimelech') {
       return mapping._noamUrl || null;
+    }
+    if (textName === 'Kedushas Levi') {
+      return mapping._klUrl || 'https://www.sefaria.org/Kedushat_Levi';
     }
     if (!mapping.portion) return null;
     if (textName === 'Tanya') {
@@ -4664,9 +4767,6 @@ transition: transform 0.3s;
     }
     if (textName === 'Keter Shem Tov') {
       return 'https://www.sefaria.org/Keter_Shem_Tov';
-    }
-    if (textName === 'Kedushas Levi') {
-      return 'https://www.sefaria.org/Kedushat_Levi';
     }
     if (textName === 'Likutei Sichos and Toras Menachem') {
       return mapping._lsUrl || null;
@@ -5414,7 +5514,7 @@ transition: transform 0.3s;
       const parashaNum = PARASHA_TO_NUMBER[parashaName] || PARASHA_TO_NUMBER[parashaName.split(' / ')[1]];
       if (!parashaNum) return mapping;
       
-      if (textName === 'Keter Shem Tov') {
+      if (textName === 'Stories of the Baal Shem Tov' || textName === 'Keter Shem Tov') {
         // Keter Shem Tov: 2 introductions + 428 chapters = 430 total, 8 items per parasha
         // Parasha 1 (Bereshit): Intro 1, Intro 2, Ch 1-6
         // Parasha 2 (Noach): Ch 7-14
@@ -5462,6 +5562,13 @@ transition: transform 0.3s;
         } else {
           // no URL — Sichos in English shown as standalone link in detail footer
         }
+      }
+      else if (textName === 'Kedushas Levi') {
+        mapping.portion = parashaName.split(' / ').pop();
+        const slug = KL_SLUGS[parashaNum];
+        mapping._klUrl = slug
+          ? `https://www.sefaria.org/Kedushat_Levi,_${slug}`
+          : 'https://www.sefaria.org/Kedushat_Levi';
       }
       else if (textName === 'Noam Elimelech') {
         const entry = NE_BOOK_SLUGS[parashaNum];
@@ -5557,13 +5664,38 @@ transition: transform 0.3s;
         mainText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>${secMain}`;
         subText += `<br>${secSub}`;
       }
+      // Tertiary text (Stories of the Baal Shem Tov alongside Keter Shem Tov on Shabbat)
+      if (malTxt.tertiaryName) {
+        const terMapping = getParashaMapping(malTxt.tertiaryName, actualParasha);
+        let terMain = `<strong>${malTxt.tertiaryName}</strong>`;
+        if (terMapping.portion) terMain += ` — ${terMapping.portion}`;
+        let terSub = malTxt.tertiaryAuthor;
+        mainText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>${terMain}`;
+        subText += `<br>${terSub}`;
+      }
     }
 
     document.getElementById('malchut-main').innerHTML = mainText;
-
     document.getElementById('malchut-sub').innerHTML = subText;
-    document.getElementById('malchut-tags').innerHTML =
-      `<span class="tag highlight">${todayBook.emoji} ${todayBook.book}</span>`;
+
+    // Panel 2: KoT Book
+    const bookParts = todayBook.book.split(' · ');
+    document.getElementById('malchut-book-face').innerHTML =
+      `<span style="font-size:1.1em">${todayBook.emoji}</span> <strong>${bookParts[0]}</strong>` +
+      (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '');
+
+    // Panel 3: KSA Yomi
+    (() => {
+      const ksaR = getKSAYomiReading(date);
+      const el = document.getElementById('malchut-ksa-face');
+      if (ksaR) {
+        const ksaUrl = ksaYomiSeferiaUrl(ksaR.siman, ksaR.seif);
+        const ksaLbl = ksaYomiLabel(ksaR.siman, ksaR.seif);
+        el.innerHTML = `<a href="${ksaUrl}" target="_blank" style="color:var(--gold);font-size:0.88em">${ksaLbl} ↗</a>`;
+      } else {
+        el.innerHTML = `<a href="https://kitzuryomi.org/calendar/" target="_blank" style="color:var(--gold);font-size:0.88em">Calendar ↗</a>`;
+      }
+    })();
 
     // Detail panel: today's entry highlighted, then full weekly context
     const DAYS_LABELS = ['Friday','Shabbat','Sunday','Monday','Tuesday','Wednesday','Thursday'];
