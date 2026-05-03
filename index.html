@@ -1008,7 +1008,6 @@ transition: transform 0.3s;
     <div class="keter-section-label">✦ Rambam & Hayom Yom</div>
     <div class="keter-main" id="keter-rambam-main">Loading…</div>
     <div class="keter-meta" id="keter-rambam-meta"></div>
-    <div class="keter-section-label" style="margin-top:10px;">✦ Hayom Yom — היום יום</div>
     <div class="keter-main" id="keter-hayomyom">Loading…</div>
     <div class="keter-meta" id="keter-hy-meta"></div>
   </div>
@@ -4843,8 +4842,7 @@ transition: transform 0.3s;
     document.getElementById('keter-rambam-main').innerHTML =
       `<a href="https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters/3" target="_blank" style="color:var(--gold)">` +
       `View today's Rambam (3 chapters) ↗</a>`;
-    document.getElementById('keter-rambam-meta').innerHTML =
-      `<strong>Rambam</strong> · Mishneh Torah · 3 chapters/day`;
+    document.getElementById('keter-rambam-meta').innerHTML = '';
 
     // Chok L'Yisrael (Yesod card)
     const kolhalashonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
