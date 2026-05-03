@@ -5743,7 +5743,6 @@ transition: transform 0.3s;
       if (syCh) {
         themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${syCh.theme}</div>`;
       } else {
-        // Get parasha-specific portion and theme for this text
         const mapping = getParashaMapping(textName, actualParasha);
         if (mapping.portion) {
           displayName += ` — ${mapping.portion}`;
@@ -5751,17 +5750,36 @@ transition: transform 0.3s;
             displayName += ` (${mapping.parshiyot.join(' / ')})`;
           }
         }
-        // Add theme below text name if available
         if (mapping.theme && !mapping.theme.includes('[To be mapped]')) {
           themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${mapping.theme}</div>`;
         }
-        // Show secondary text for Shabbat (Keter Shem Tov)
+        // Sefaria link for this text
+        const rowUrl = malchutSeferiaUrl(textName, mapping);
+        if (rowUrl) {
+          const rowLinkLabel = mapping._noamLinkLabel || mapping._lsLinkLabel || 'Sefaria ↗';
+          themeHTML += `<div style="font-size:9px;margin-top:2px;"><a href="${rowUrl}" target="_blank" style="color:var(--gold)">${rowLinkLabel}</a></div>`;
+        }
+        // Etz Chayim link (Friday)
+        if (mapping._etzChayimLabel && mapping._etzChayimUrl) {
+          themeHTML += `<div style="font-size:9px;margin-top:2px;">Etz Chayim — ${mapping._etzChayimLabel} &nbsp;·&nbsp; <a href="${mapping._etzChayimUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a></div>`;
+        }
+        // Secondary text (Keter Shem Tov on Shabbat)
         const malchutEntry = MALCHUT_TEXTS[i];
         if (malchutEntry && malchutEntry.secondaryName) {
           const secMapping = getParashaMapping(malchutEntry.secondaryName, actualParasha);
           let secDisplay = malchutEntry.secondaryName;
           if (secMapping.portion) secDisplay += ` — ${secMapping.portion}`;
-          themeHTML += `<div style="font-size:12px;color:var(--ink);font-style:normal;margin-top:3px;font-weight:600;">+ ${secDisplay}</div>`;
+          const secUrl = malchutSeferiaUrl(malchutEntry.secondaryName, secMapping);
+          themeHTML += `<div style="font-size:12px;color:var(--ink);font-style:normal;margin-top:3px;font-weight:600;">+ ${secDisplay}` +
+            (secUrl ? ` &nbsp;<a href="${secUrl}" target="_blank" style="color:var(--gold);font-weight:400;font-size:9px;">Sefaria ↗</a>` : '') +
+            `</div>`;
+        }
+        // Tertiary text (Stories of BST on Shabbat)
+        if (malchutEntry && malchutEntry.tertiaryName) {
+          const terMapping = getParashaMapping(malchutEntry.tertiaryName, actualParasha);
+          let terDisplay = malchutEntry.tertiaryName;
+          if (terMapping.portion) terDisplay += ` — ${terMapping.portion}`;
+          themeHTML += `<div style="font-size:12px;color:var(--ink);font-style:normal;margin-top:3px;font-weight:600;">+ ${terDisplay}</div>`;
         }
       }
       
