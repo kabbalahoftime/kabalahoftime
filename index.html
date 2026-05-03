@@ -5035,19 +5035,19 @@ transition: transform 0.3s;
     if (ltDay === 1) {
       ltSection = 'Introduction';
       ltReading  = 'Introduction';
-      ltUrl = 'https://www.sefaria.org/Likutey_Tefilot';
+      ltUrl = 'https://www.sefaria.org/Likutei_Tefilot';
     } else if (ltDay <= 305) {
       const prayerIdx = ltDay - 2;
       const prayerNum = Math.floor(prayerIdx / 2) + 1;
       const half = (prayerIdx % 2 === 0) ? 'first half' : 'second half';
       ltSection = 'Part 1';
       ltReading  = `Prayer ${prayerNum} — ${half}`;
-      ltUrl = `https://www.sefaria.org/Likutey_Tefilot.1.${prayerNum}`;
+      ltUrl = 'https://www.sefaria.org/Likutei_Tefilot';
     } else {
       const prayerNum = ltDay - 305;
       ltSection = 'Part 2';
       ltReading  = `Prayer ${prayerNum}`;
-      ltUrl = `https://www.sefaria.org/Likutey_Tefilot.2.${prayerNum}`;
+      ltUrl = 'https://www.sefaria.org/Likutei_Tefilot';
     }
 
     document.getElementById('binah-detail').innerHTML =
