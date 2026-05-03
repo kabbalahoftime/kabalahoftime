@@ -4312,6 +4312,16 @@ transition: transform 0.3s;
     return { portionText, seferiaUrl };
   }
 
+  function getEtzChayimInfo(parashaNum) {
+    if (parashaNum <= 3) {
+      return { label: `Hakdama ${parashaNum}`, url: 'https://www.sefaria.org/Sefer_Etz_Chaim?tab=contents' };
+    }
+    if (parashaNum === 4) {
+      return { label: "Sha'ar HaKlalim", url: 'https://www.sefaria.org/Sefer_Etz_Chaim%2C_Shaar_HaKlalim.1' };
+    }
+    const shaarNum = parashaNum - 4;
+    return { label: `Sha'ar ${shaarNum}`, url: `https://www.sefaria.org/Sefer_Etz_Chaim.${shaarNum}.1` };
+  }
 
   // ── KITZUR SHULCHAN ARUCH YOMI ──────────────────────────────────────────────
   // Month keys: 7=Tishrei,8=Cheshvan,9=Kislev,10=Tevet,11=Shevat,12=Adar(+II)
@@ -5476,6 +5486,11 @@ transition: transform 0.3s;
         const zr = getZoharReading(sef.weekNum);
         mapping.portion = zr.portionText;
         mapping._zoharUrl = zr.seferiaUrl;
+        if (parashaNum) {
+          const ec = getEtzChayimInfo(parashaNum);
+          mapping._etzChayimLabel = ec.label;
+          mapping._etzChayimUrl   = ec.url;
+        }
       }
 
       return mapping;
@@ -5516,6 +5531,13 @@ transition: transform 0.3s;
       }
       if (parashaMapping._noamNote) {
         subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping._noamNote}</span>`;
+      }
+      // Etz Chayim secondary for Friday (Zohar / Arizal)
+      if (parashaMapping._etzChayimLabel) {
+        mainText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>` +
+          `<strong>Etz Chayim</strong> — ${parashaMapping._etzChayimLabel}`;
+        subText += `<br>Arizal (R. Yitzhak Luria)` +
+          ` &nbsp;·&nbsp; <a href="${parashaMapping._etzChayimUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
       }
       // Secondary text for Shabbat (Keter Shem Tov)
       if (malTxt.secondaryName) {
