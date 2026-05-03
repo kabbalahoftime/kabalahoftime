@@ -5677,8 +5677,9 @@ transition: transform 0.3s;
         if (secMapping._kehotUrl) {
           secSub += `&nbsp;·&nbsp; <a href="${secMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
         }
-        mainText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>${secMain}`;
-        subText += `<br>${secSub}`;
+        subText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>` +
+          `<span style="color:var(--ink);font-weight:600">${secMain}</span>` +
+          `<br>${secSub}`;
       }
     }
 
