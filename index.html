@@ -251,6 +251,17 @@ transform: rotate(180deg);
 
 .keter-visible-content {
 display: grid;
+grid-template-columns: 1fr;
+gap: 0;
+}
+
+.keter-rambam-row {
+background: #f2ead8 !important;
+border-bottom: 1px solid var(–border);
+}
+
+.keter-inner-row {
+display: grid;
 grid-template-columns: repeat(3, 1fr);
 gap: 0;
 }
@@ -279,7 +290,6 @@ z-index: 1;
 }
 
 @media (max-width: 540px) {
-.keter-visible-content { grid-template-columns: 1fr; }
 .keter-card .expand-icon { top: 12px; right: 16px; }
 }
 
@@ -287,11 +297,11 @@ z-index: 1;
 padding: 16px 20px;
 }
 
-.keter-visible-content .keter-section:nth-child(odd) {
+.keter-inner-row .keter-section:nth-child(odd) {
 background: #fdf9f2 !important;
 }
 
-.keter-visible-content .keter-section:nth-child(even) {
+.keter-inner-row .keter-section:nth-child(even) {
 background: #f2ead8 !important;
 }
 
@@ -299,12 +309,13 @@ background: #f2ead8 !important;
 background: var(–bg-card) !important;
 }
 
-.keter-visible-content .keter-section:not(:last-child) {
+.keter-inner-row .keter-section:not(:last-child) {
 border-right: 1px solid var(–border);
 }
 
 @media (max-width: 540px) {
-.keter-visible-content .keter-section:not(:last-child) {
+.keter-inner-row { grid-template-columns: 1fr; }
+.keter-inner-row .keter-section:not(:last-child) {
 border-right: none;
 border-bottom: 1px solid var(–border);
 }
@@ -321,29 +332,41 @@ margin-bottom: 6px;
 
 .malchut-visible-content {
 display: grid;
+grid-template-columns: 1fr;
+gap: 0;
+}
+
+.malchut-inner-row {
+display: grid;
 grid-template-columns: repeat(3, 1fr);
 gap: 0;
+}
+
+.malchut-ksa-row {
+background: #f2ead8;
+border-top: 1px solid var(–border);
+padding: 10px 12px;
 }
 
 .malchut-section {
 padding: 10px 12px;
 }
 
-.malchut-visible-content .malchut-section:nth-child(odd) {
+.malchut-inner-row .malchut-section:nth-child(odd) {
 background: #fdf9f2;
 }
 
-.malchut-visible-content .malchut-section:nth-child(even) {
+.malchut-inner-row .malchut-section:nth-child(even) {
 background: #f2ead8;
 }
 
-.malchut-visible-content .malchut-section:not(:last-child) {
+.malchut-inner-row .malchut-section:not(:last-child) {
 border-right: 1px solid var(–border);
 }
 
 @media (max-width: 540px) {
-.malchut-visible-content { grid-template-columns: 1fr; }
-.malchut-visible-content .malchut-section:not(:last-child) {
+.malchut-inner-row { grid-template-columns: 1fr; }
+.malchut-inner-row .malchut-section:not(:last-child) {
 border-right: none;
 border-bottom: 1px solid var(–border);
 }
@@ -1003,28 +1026,35 @@ transition: transform 0.3s;
 ```
 <!-- Always visible sections -->
 <div class="keter-visible-content">
-  <!-- RAMBAM + HAYOM YOM section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Rambam & Hayom Yom</div>
-    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich</div>
+  <!-- RAMBAM row — Arich Anpin -->
+  <div class="keter-rambam-row keter-section">
+    <div class="keter-section-label">✦ Rambam · Mishneh Torah</div>
     <div class="keter-main" id="keter-rambam-main">Loading…</div>
     <div class="keter-meta" id="keter-rambam-meta"></div>
-    <div class="keter-main" id="keter-hayomyom">Loading…</div>
-    <div class="keter-meta" id="keter-hy-meta"></div>
   </div>
-  <!-- DAILY LM section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Daily Likutei Moharan</div>
-    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
-    <div class="keter-main" id="keter-lm-main">Loading…</div>
-    <div class="keter-meta" id="keter-lm-meta"></div>
-  </div>
-  <!-- TREASURY OF CHASSIDIC TALES section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Treasury of Chassidic Tales</div>
-    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin</div>
-    <div class="keter-main" id="keter-treasury-main">Loading…</div>
-    <div class="keter-meta" id="keter-treasury-meta"></div>
+  <!-- Atik Yomin — Three Heads -->
+  <div class="keter-inner-row">
+    <!-- HAYOM YOM section -->
+    <div class="keter-section">
+      <div class="keter-section-label">✦ Hayom Yom</div>
+      <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich</div>
+      <div class="keter-main" id="keter-hayomyom">Loading…</div>
+      <div class="keter-meta" id="keter-hy-meta"></div>
+    </div>
+    <!-- DAILY LM section -->
+    <div class="keter-section">
+      <div class="keter-section-label">✦ Daily Likutei Moharan</div>
+      <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
+      <div class="keter-main" id="keter-lm-main">Loading…</div>
+      <div class="keter-meta" id="keter-lm-meta"></div>
+    </div>
+    <!-- TREASURY OF CHASSIDIC TALES section -->
+    <div class="keter-section">
+      <div class="keter-section-label">✦ Treasury of Chassidic Tales</div>
+      <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin</div>
+      <div class="keter-main" id="keter-treasury-main">Loading…</div>
+      <div class="keter-meta" id="keter-treasury-meta"></div>
+    </div>
   </div>
 </div>
 
@@ -1525,18 +1555,25 @@ transition: transform 0.3s;
   </div>
   <div class="sefirah-content-col">
     <div class="malchut-visible-content">
-      <div class="malchut-section">
-        <div class="keter-section-label" id="malchut-cycle-name">Daily Text</div>
-        <div class="sefirah-main-text" id="malchut-main">Loading…</div>
-        <div class="sefirah-sub-text" id="malchut-sub"></div>
+      <div class="malchut-inner-row">
+        <div class="malchut-section">
+          <div class="keter-section-label" id="malchut-cycle-name">Daily Text</div>
+          <div class="sefirah-main-text" id="malchut-main">Loading…</div>
+          <div class="sefirah-sub-text" id="malchut-sub"></div>
+        </div>
+        <div class="malchut-section">
+          <div class="keter-section-label">✦ KoT Book</div>
+          <div id="malchut-book-face">Loading…</div>
+        </div>
+        <div class="malchut-section">
+          <div class="keter-section-label">✦ Sichos in English</div>
+          <div id="malchut-ksa-face">Loading…</div>
+        </div>
       </div>
-      <div class="malchut-section">
-        <div class="keter-section-label">✦ KoT Book</div>
-        <div id="malchut-book-face">Loading…</div>
-      </div>
-      <div class="malchut-section">
-        <div class="keter-section-label">✦ Sichos in English & Kitzur Shulchan Aruch</div>
-        <div id="malchut-ksa-face">Loading…</div>
+      <!-- KSA row — Arich Anpin -->
+      <div class="malchut-ksa-row">
+        <div class="keter-section-label">✦ Kitzur Shulchan Aruch</div>
+        <div id="malchut-ksa-bottom">Loading…</div>
       </div>
     </div>
     <div class="sefirah-detail" id="malchut-detail">
@@ -5770,11 +5807,14 @@ transition: transform 0.3s;
       `<span style="font-size:1.1em">${todayBook.emoji}</span> <strong>${bookParts[0]}</strong>` +
       (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '');
 
-    // Panel 3: Sichos in English + KSA Yomi
+    // Panel 3: Sichos in English
+    document.getElementById('malchut-ksa-face').innerHTML =
+      `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold);font-size:0.88em">Sichos in English ↗</a>`;
+
+    // KSA row: Kitzur Shulchan Aruch Yomi
     (() => {
       const ksaR = getKSAYomiReading(date);
-      const el = document.getElementById('malchut-ksa-face');
-      const sieLink = `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold);font-size:0.88em">Sichos in English ↗</a>`;
+      const el = document.getElementById('malchut-ksa-bottom');
       let ksaLink;
       if (ksaR) {
         const ksaUrl = ksaYomiSeferiaUrl(ksaR.siman, ksaR.seif);
@@ -5783,7 +5823,7 @@ transition: transform 0.3s;
       } else {
         ksaLink = `<a href="https://kitzuryomi.org/calendar/" target="_blank" style="color:var(--gold);font-size:0.88em">KSA Calendar ↗</a>`;
       }
-      el.innerHTML = `${sieLink}<br>${ksaLink}`;
+      el.innerHTML = ksaLink;
     })();
 
     // Detail panel: today's entry highlighted, then full weekly context
