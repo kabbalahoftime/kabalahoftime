@@ -2718,7 +2718,7 @@ transition: transform 0.3s;
     'The Garden of Emuna',
     'The Garden of Peace',
     "Women's Wisdom",
-    'The Garden of Yearning — A New Light',
+    'The Garden of Yearning — A New Light (In the Garden of Yearning and Will)',
     'In Forest Fields',
     'The Garden of Riches',
     'The Garden of Gratitude',
@@ -2727,7 +2727,7 @@ transition: transform 0.3s;
     'The Garden of Purity',
     'The Garden of Knowledge',
     'The Garden of Healing',
-    'Say Thank You and See Miracles',
+    'Say Thank You and See Miracles (The Garden of Miracles)',
   ];
 
   // Nassi (tribal prince) for each day 1-13 within a cycle (based on Rosh Chodesh Nissan order)
@@ -5325,10 +5325,27 @@ transition: transform 0.3s;
       ? `<div class="detail-row"><span class="detail-label">Sources:</span><span class="detail-value" dir="rtl">${cy13.attr.sources}</span></div>`
       : '';
     const pbyStep = MESILLAT_YESHARIM_STEPS[cy13.day - 1];
+    const pbyNext = MESILLAT_YESHARIM_STEPS[cy13.day] || null;
+    const pbyChain = pbyNext
+      ? `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he} מביאה לידי ${pbyNext.he}</div>`
+      : `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he}</div>`;
+    const nachmanTale = REBBE_NACHMAN_TALES[cy13.day - 1];
+    const arushBook   = RAV_ARUSH_BOOKS[cy13.day - 1];
     cards[4].querySelector('.sefirah-detail').innerHTML =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Steps of Pinchas Ben Yair</div>
-       <div class="detail-row"><span class="detail-label">Rung ${cy13.day}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> <span dir="rtl">${pbyStep.he}</span><br><span style="font-size:0.88em;opacity:0.72">${pbyStep.meaning}</span></span></div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Source: Avoda Zara 20b ↗</a> &nbsp;·&nbsp; <a href="https://www.sefaria.org/Mesilat_Yesharim" target="_blank" style="color:var(--gold)">Mesilat Yesharim ↗</a></div>
+       <div class="detail-row"><span class="detail-label">Rung ${cy13.day}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;">
+         <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b ↗</a> &nbsp;·&nbsp;
+         <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15 ↗</a> &nbsp;·&nbsp;
+         <a href="https://www.sefaria.org/Mesilat_Yesharim" target="_blank" style="color:var(--gold)">Mesilat Yesharim ↗</a>
+       </div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tale ${cy13.day} of Rebbe Nachman</div>
+       <div style="font-size:0.88rem;margin-bottom:4px;"><strong>${nachmanTale}</strong></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot on Sefaria ↗</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shalom Arush — Book ${cy13.day}</div>
+       <div style="font-size:0.88rem;margin-bottom:14px;"><strong>${arushBook}</strong></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>
