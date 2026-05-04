@@ -1205,6 +1205,10 @@ transition: transform 0.3s;
       <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-hida-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar — Daily Reading</div>
+      <div id="yesod-zohar-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+      <div id="yesod-zohar-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div id="yesod-parasha-cycle"></div>
     </div>
   </div>
@@ -4858,6 +4862,29 @@ transition: transform 0.3s;
     document.getElementById('yesod-hida-meta').innerHTML =
       `Rabbi Chaim Yosef David Azulai`;
 
+    // Zohar daily reading (Yesod card) — in honor of R. Shimon bar Yochai
+    // 16 folios/week: 2 per weekday (Sun–Fri), 4 on Shabbat
+    // Cycle begins Lag B'Omer 5785 = May 18, 2025
+    (() => {
+      const ZOHAR_ANCHOR = new Date(2025, 4, 18); // May 18, 2025 (Sunday)
+      const dateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      const daysDiff = Math.round((dateNorm - ZOHAR_ANCHOR) / 86400000);
+      if (daysDiff < 0) return;
+      const anchorDow = ZOHAR_ANCHOR.getDay();
+      const fullWeeks = Math.floor(daysDiff / 7);
+      const rem = daysDiff % 7;
+      let cumFolios = fullWeeks * 16;
+      for (let i = 0; i < rem; i++) cumFolios += ((anchorDow + i) % 7 === 6) ? 4 : 2;
+      const todayFolios = (dateNorm.getDay() === 6) ? 4 : 2;
+      const start = cumFolios + 1;
+      const end = cumFolios + todayFolios;
+      const label = start === end ? `Folio\xa0${start}` : `Folios\xa0${start}–${end}`;
+      document.getElementById('yesod-zohar-main').innerHTML =
+        `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label} ↗</a>`;
+      document.getElementById('yesod-zohar-meta').innerHTML =
+        `R. Shimon bar Yochai · ${todayFolios} folios today`;
+    })();
+
     // 5. Hayom Yom
     const chabadURL  = `${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}`;
     const hyText = getHayomYom(hMonth, hDay);
@@ -5297,8 +5324,13 @@ transition: transform 0.3s;
     const sourcesRow = (cy13.isMoshe && cy13.attr.sources)
       ? `<div class="detail-row"><span class="detail-label">Sources:</span><span class="detail-value" dir="rtl">${cy13.attr.sources}</span></div>`
       : '';
+    const pbyStep = MESILLAT_YESHARIM_STEPS[cy13.day - 1];
     cards[4].querySelector('.sefirah-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Steps of Pinchas Ben Yair</div>
+       <div class="detail-row"><span class="detail-label">Rung ${cy13.day}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> <span dir="rtl">${pbyStep.he}</span><br><span style="font-size:0.88em;opacity:0.72">${pbyStep.meaning}</span></span></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Source: Avoda Zara 20b ↗</a> &nbsp;·&nbsp; <a href="https://www.sefaria.org/Mesilat_Yesharim" target="_blank" style="color:var(--gold)">Mesilat Yesharim ↗</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Derech Mitzvosecha</div>
        <div style="font-size:0.88rem;margin-bottom:${dmTeaching ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha ↗</a></div>
