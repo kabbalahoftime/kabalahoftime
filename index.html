@@ -1205,6 +1205,10 @@ transition: transform 0.3s;
       <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-hida-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar — Daily Reading</div>
+      <div id="yesod-zohar-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+      <div id="yesod-zohar-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div id="yesod-parasha-cycle"></div>
     </div>
   </div>
@@ -2714,7 +2718,7 @@ transition: transform 0.3s;
     'The Garden of Emuna',
     'The Garden of Peace',
     "Women's Wisdom",
-    'The Garden of Yearning — A New Light',
+    'The Garden of Yearning — A New Light (In the Garden of Yearning and Will)',
     'In Forest Fields',
     'The Garden of Riches',
     'The Garden of Gratitude',
@@ -2723,7 +2727,7 @@ transition: transform 0.3s;
     'The Garden of Purity',
     'The Garden of Knowledge',
     'The Garden of Healing',
-    'Say Thank You and See Miracles',
+    'Say Thank You and See Miracles (The Garden of Miracles)',
   ];
 
   // Nassi (tribal prince) for each day 1-13 within a cycle (based on Rosh Chodesh Nissan order)
@@ -4858,6 +4862,59 @@ transition: transform 0.3s;
     document.getElementById('yesod-hida-meta').innerHTML =
       `Rabbi Chaim Yosef David Azulai`;
 
+    // Zohar + Sefer Yetzirah annual cycle — in honor of R. Shimon bar Yochai
+    // Vol 1: 251 folios, Vol 2: 269 folios, Vol 3: 300 folios = 820 total
+    // Then 6 chapters of Sefer Yetzirah (1/day days 360-363, 2 on day 364)
+    // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
+    // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
+    (() => {
+      const ANCHOR      = KOT_YEAR_START; // same anchor as all KoT cycles
+      const ZOHAR_TOTAL = 820; // 251 + 269 + 300
+      const CYCLE       = 364; // 52 weeks exactly
+
+      const dateNorm  = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      const totalDays = Math.round((dateNorm - ANCHOR) / 86400000);
+      if (totalDays < 0) return;
+
+      const cycleOffset = totalDays % CYCLE;          // 0-indexed, 0-363
+      const fullWeeks   = Math.floor(cycleOffset / 7);
+      const rem         = cycleOffset % 7;             // 0-6; partial week never includes Sat
+      const cumFolios   = fullWeeks * 16 + rem * 2;   // folios completed before today
+      const todayDow    = cycleOffset % 7;             // 0=Sun…6=Sat (anchor=Sunday)
+      const todayFolios = (todayDow === 6) ? 4 : 2;
+
+      const el     = document.getElementById('yesod-zohar-main');
+      const metaEl = document.getElementById('yesod-zohar-meta');
+
+      if (cumFolios < ZOHAR_TOTAL) {
+        const startAbs = cumFolios + 1;
+        const endAbs   = cumFolios + todayFolios;
+        function volInfo(f) {
+          if (f <= 251) return { vol: 1, folio: f };
+          if (f <= 520) return { vol: 2, folio: f - 251 };
+          return { vol: 3, folio: f - 520 };
+        }
+        const si = volInfo(startAbs), ei = volInfo(endAbs);
+        let label;
+        if (si.vol === ei.vol) {
+          label = si.folio === ei.folio
+            ? `Vol\xa0${si.vol}\xa0·\xa0Folio\xa0${si.folio}`
+            : `Vol\xa0${si.vol}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
+        } else {
+          label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
+        }
+        el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label} ↗</a>`;
+        metaEl.innerHTML = `R. Shimon bar Yochai · ${todayFolios} folios today`;
+      } else {
+        // Sefer Yetzirah (cycleOffset 359-363 = days 360-364)
+        const syDay = cycleOffset - 358; // 1-5
+        const chapters = (syDay === 5) ? 'Chapters\xa05\xa0&\xa06' : `Chapter\xa0${syDay}`;
+        const syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${syDay === 5 ? 5 : syDay}`;
+        el.innerHTML = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters} ↗</a>`;
+        metaEl.innerHTML = `Day ${cycleOffset + 1} of cycle · completing the year`;
+      }
+    })();
+
     // 5. Hayom Yom
     const chabadURL  = `${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}`;
     const hyText = getHayomYom(hMonth, hDay);
@@ -5297,8 +5354,30 @@ transition: transform 0.3s;
     const sourcesRow = (cy13.isMoshe && cy13.attr.sources)
       ? `<div class="detail-row"><span class="detail-label">Sources:</span><span class="detail-value" dir="rtl">${cy13.attr.sources}</span></div>`
       : '';
+    const pbyStep = MESILLAT_YESHARIM_STEPS[cy13.day - 1];
+    const pbyNext = MESILLAT_YESHARIM_STEPS[cy13.day] || null;
+    const pbyChain = pbyNext
+      ? `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he} מביאה לידי ${pbyNext.he}</div>`
+      : `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he}</div>`;
+    const nachmanTale = REBBE_NACHMAN_TALES[cy13.day - 1];
+    const arushBook   = RAV_ARUSH_BOOKS[cy13.day - 1];
     cards[4].querySelector('.sefirah-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Steps of Pinchas Ben Yair</div>
+       <div class="detail-row"><span class="detail-label">Rung ${cy13.day}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;">
+         <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b ↗</a> &nbsp;·&nbsp;
+         <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15 ↗</a> &nbsp;·&nbsp;
+         <a href="https://www.sefaria.org/Mesilat_Yesharim" target="_blank" style="color:var(--gold)">Mesilat Yesharim ↗</a>
+       </div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tale ${cy13.day} of Rebbe Nachman</div>
+       <div style="font-size:0.88rem;margin-bottom:4px;"><strong>${nachmanTale}</strong></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot on Sefaria ↗</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shalom Arush — Book ${cy13.day}</div>
+       <div style="font-size:0.88rem;margin-bottom:14px;"><strong>${arushBook}</strong></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Derech Mitzvosecha</div>
        <div style="font-size:0.88rem;margin-bottom:${dmTeaching ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha ↗</a></div>
