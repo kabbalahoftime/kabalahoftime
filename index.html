@@ -4361,6 +4361,27 @@ transition: transform 0.3s;
   ];
   const ZOHAR_TOTAL = 818; // 251 + 269 + 115 + 143 + 40
 
+  // Parasha → Sefaria Zohar section name
+  const ZOHAR_PARASHA_SECTIONS = {
+    'Bereshit': 'Bereshit', 'Noach': 'Noach', 'Lech Lecha': 'Lech_Lecha',
+    'Vayeira': 'Vayera', 'Chayei Sara': 'Chayei_Sarah',
+    'Toledot': 'Toldot', 'Vayetzei': 'Vayetzei', 'Vayishlach': 'Vayishlach',
+    'Vayeshev': 'Vayeshev', 'Miketz': 'Miketz', 'Vayigash': 'Vayigash', 'Vayechi': 'Vayechi',
+    'Shemot': 'Shemot', 'Vaera': 'Vaera', 'Bo': 'Bo', 'Beshalach': 'Beshalach',
+    'Yitro': 'Yitro', 'Mishpatim': 'Mishpatim', 'Terumah': 'Terumah', 'Tetzaveh': 'Tetzaveh',
+    'Ki Tisa': 'Ki_Tissa', 'Vayakhel-Pekudei': 'Vayakhel',
+    'Vayikra': 'Vayikra', 'Tzav': 'Tzav', 'Shmini': 'Shmini',
+    'Tazria-Metzora': 'Tazria', 'Achrei Mot-Kedoshim': 'Acharei_Mot',
+    'Emor': 'Emor', 'Behar-Bechukotai': 'Behar',
+    'Bamidbar': 'Bamidbar', 'Nasso': 'Nasso', 'Behaalotecha': 'Behaalotcha',
+    'Shlach': 'Shelach', 'Korach': 'Korach', 'Chukat-Balak': 'Chukat',
+    'Pinchas': 'Pinchas', 'Matot-Masei': 'Matot',
+    'Devarim': 'Devarim', 'Vaetchanan': 'Vaetchanan', 'Eikev': 'Eikev',
+    "Re'eh": 'Reeh', 'Shoftim': 'Shoftim', 'Ki Teitzei': 'Ki_Teitzei',
+    'Ki Tavo': 'Ki_Tavo', 'Nitzavim-Vayeilech': 'Nitzavim',
+    'Vayeilech': 'Vayeilech', 'Haazinu': 'Haazinu',
+  };
+
   // Sefer Yetzirah — 6 chapters, one per day for the last 6 days of the KoT year (Week 52, Days 2-7)
   const SEFER_YETZIRAH_CHAPTERS = [
     { ch: 1, theme: 'The 32 paths of wisdom — Sefirot and letters' },
@@ -5710,9 +5731,11 @@ transition: transform 0.3s;
         }
       }
       else if (textName === 'Chidah (Zohar / Arizal)') {
-        const zr = getZoharReading(sef.weekNum);
-        mapping.portion = zr.portionText;
-        mapping._zoharUrl = zr.seferiaUrl;
+        const section = ZOHAR_PARASHA_SECTIONS[parashaName];
+        mapping.portion = `Parashat ${parashaName}`;
+        mapping._zoharUrl = section
+          ? `https://www.sefaria.org/Zohar%2C_${section}?lang=bi`
+          : 'https://www.sefaria.org/Zohar?tab=contents';
         if (parashaNum) {
           const ec = getEtzChayimInfo(parashaNum);
           mapping._etzChayimLabel = ec.label;
