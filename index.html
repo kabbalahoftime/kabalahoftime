@@ -4865,10 +4865,10 @@ transition: transform 0.3s;
     // Zohar + Sefer Yetzirah annual cycle — in honor of R. Shimon bar Yochai
     // Vol 1: 251 folios, Vol 2: 269 folios, Vol 3: 300 folios = 820 total
     // Then 6 chapters of Sefer Yetzirah (1/day days 360-363, 2 on day 364)
-    // 16 folios/week: 2 per weekday (Sun-Fri), 4 on Shabbat = 364-day cycle
-    // Anchor: Lag B'Omer 5785 = May 18, 2025 (Sunday, day 1)
+    // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
+    // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
     (() => {
-      const ANCHOR      = new Date(2025, 4, 18); // Sun May 18, 2025
+      const ANCHOR      = KOT_YEAR_START; // same anchor as all KoT cycles
       const ZOHAR_TOTAL = 820; // 251 + 269 + 300
       const CYCLE       = 364; // 52 weeks exactly
 
