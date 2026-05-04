@@ -5518,15 +5518,14 @@ transition: transform 0.3s;
 
     if (!hal.chofetz) {
       cards[6].querySelector('.sefirah-main-text').innerHTML =
-        `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
-        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh,_Orach_Chaim.${hal.ch1}.1" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a><br>` +
+        `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}<br>` +
         (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>` : 'דַּף יוֹמִי');
       cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
       const hodSaHtml =
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch</div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
-        `<a href="https://www.sefaria.org/Shulchan_Arukh,_Orach_Chaim.${hal.ch1}.1" target="_blank" style="color:var(--gold)">Orach Chaim ${hal.ch1} on Sefaria ↗</a><br>` +
-        `<a href="https://www.sefaria.org/Shulchan_Arukh,_Orach_Chaim.${hal.ch2}.1" target="_blank" style="color:var(--gold)">Orach Chaim ${hal.ch2} on Sefaria ↗</a>` +
+        `<a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chaim.${hal.ch1}" target="_blank" style="color:var(--gold)">Orach Chaim ${hal.ch1} on Sefaria ↗</a><br>` +
+        `<a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chaim.${hal.ch2}" target="_blank" style="color:var(--gold)">Orach Chaim ${hal.ch2} on Sefaria ↗</a>` +
         `</div>`;
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
