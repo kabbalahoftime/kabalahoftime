@@ -4862,27 +4862,57 @@ transition: transform 0.3s;
     document.getElementById('yesod-hida-meta').innerHTML =
       `Rabbi Chaim Yosef David Azulai`;
 
-    // Zohar daily reading (Yesod card) — in honor of R. Shimon bar Yochai
-    // 16 folios/week: 2 per weekday (Sun–Fri), 4 on Shabbat
-    // Cycle begins Lag B'Omer 5785 = May 18, 2025
+    // Zohar + Sefer Yetzirah annual cycle — in honor of R. Shimon bar Yochai
+    // Vol 1: 251 folios, Vol 2: 269 folios, Vol 3: 300 folios = 820 total
+    // Then 6 chapters of Sefer Yetzirah (1/day days 360-363, 2 on day 364)
+    // 16 folios/week: 2 per weekday (Sun-Fri), 4 on Shabbat = 364-day cycle
+    // Anchor: Lag B'Omer 5785 = May 18, 2025 (Sunday, day 1)
     (() => {
-      const ZOHAR_ANCHOR = new Date(2025, 4, 18); // May 18, 2025 (Sunday)
-      const dateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      const daysDiff = Math.round((dateNorm - ZOHAR_ANCHOR) / 86400000);
-      if (daysDiff < 0) return;
-      const anchorDow = ZOHAR_ANCHOR.getDay();
-      const fullWeeks = Math.floor(daysDiff / 7);
-      const rem = daysDiff % 7;
-      let cumFolios = fullWeeks * 16;
-      for (let i = 0; i < rem; i++) cumFolios += ((anchorDow + i) % 7 === 6) ? 4 : 2;
-      const todayFolios = (dateNorm.getDay() === 6) ? 4 : 2;
-      const start = cumFolios + 1;
-      const end = cumFolios + todayFolios;
-      const label = start === end ? `Folio\xa0${start}` : `Folios\xa0${start}–${end}`;
-      document.getElementById('yesod-zohar-main').innerHTML =
-        `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label} ↗</a>`;
-      document.getElementById('yesod-zohar-meta').innerHTML =
-        `R. Shimon bar Yochai · ${todayFolios} folios today`;
+      const ANCHOR      = new Date(2025, 4, 18); // Sun May 18, 2025
+      const ZOHAR_TOTAL = 820; // 251 + 269 + 300
+      const CYCLE       = 364; // 52 weeks exactly
+
+      const dateNorm  = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      const totalDays = Math.round((dateNorm - ANCHOR) / 86400000);
+      if (totalDays < 0) return;
+
+      const cycleOffset = totalDays % CYCLE;          // 0-indexed, 0-363
+      const fullWeeks   = Math.floor(cycleOffset / 7);
+      const rem         = cycleOffset % 7;             // 0-6; partial week never includes Sat
+      const cumFolios   = fullWeeks * 16 + rem * 2;   // folios completed before today
+      const todayDow    = cycleOffset % 7;             // 0=Sun…6=Sat (anchor=Sunday)
+      const todayFolios = (todayDow === 6) ? 4 : 2;
+
+      const el     = document.getElementById('yesod-zohar-main');
+      const metaEl = document.getElementById('yesod-zohar-meta');
+
+      if (cumFolios < ZOHAR_TOTAL) {
+        const startAbs = cumFolios + 1;
+        const endAbs   = cumFolios + todayFolios;
+        function volInfo(f) {
+          if (f <= 251) return { vol: 1, folio: f };
+          if (f <= 520) return { vol: 2, folio: f - 251 };
+          return { vol: 3, folio: f - 520 };
+        }
+        const si = volInfo(startAbs), ei = volInfo(endAbs);
+        let label;
+        if (si.vol === ei.vol) {
+          label = si.folio === ei.folio
+            ? `Vol\xa0${si.vol}\xa0·\xa0Folio\xa0${si.folio}`
+            : `Vol\xa0${si.vol}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
+        } else {
+          label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
+        }
+        el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label} ↗</a>`;
+        metaEl.innerHTML = `R. Shimon bar Yochai · ${todayFolios} folios today`;
+      } else {
+        // Sefer Yetzirah (cycleOffset 359-363 = days 360-364)
+        const syDay = cycleOffset - 358; // 1-5
+        const chapters = (syDay === 5) ? 'Chapters\xa05\xa0&\xa06' : `Chapter\xa0${syDay}`;
+        const syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${syDay === 5 ? 5 : syDay}`;
+        el.innerHTML = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters} ↗</a>`;
+        metaEl.innerHTML = `Day ${cycleOffset + 1} of cycle · completing the year`;
+      }
     })();
 
     // 5. Hayom Yom
