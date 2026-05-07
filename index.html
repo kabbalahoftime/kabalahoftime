@@ -5488,10 +5488,13 @@ transition: transform 0.3s;
 
     // NETZACH — 41-day (enriched with soul levels + mivtzah + commandment)
     const cycleCmd = CYCLE_COMMANDMENTS[cy41.cycle - 1];
+    const dayCmd   = TEN_COMMANDMENTS[cy41.commandmentDay - 1];
     cards[5].querySelector('.sefirah-cycle-name').textContent = `41-Day Cycle`;
     cards[5].querySelector('.sefirah-main-text').innerHTML =
       `Cycle <strong>${cy41.cycle}</strong> · Day <strong>${cy41.day}</strong> of 41`;
-    cards[5].querySelector('.sefirah-sub-text').textContent = `${cycleCmd.theme} · ${cy41.soulLevel}`;
+    cards[5].querySelector('.sefirah-sub-text').innerHTML =
+      `<span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${cycleCmd.commandment}` +
+      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Today:</span> Commandment ${cy41.commandmentDay} · ${dayCmd.commandment}`;
     cards[5].querySelector('.sefirah-tags').innerHTML =
       `<span class="tag highlight">${cycleCmd.theme}</span><span class="tag">${cy41.soulLevel}</span><span class="tag">Day ${cy41.day} of 41</span>`;
     cards[5].querySelector('.sefirah-detail').innerHTML =
@@ -5505,7 +5508,8 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">Rav Shalom Arush</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Mivtzah:</span><span class="detail-value">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
-       <div class="detail-row"><span class="detail-label">Commandment ${cy41.cycle}:</span><span class="detail-value">${cycleCmd.commandment} — ${cycleCmd.theme}</span></div>
+       <div class="detail-row"><span class="detail-label">Cycle Commandment ${cy41.cycle}:</span><span class="detail-value">${cycleCmd.commandment} — ${cycleCmd.theme}</span></div>
+       <div class="detail-row"><span class="detail-label">Daily Commandment ${cy41.commandmentDay}:</span><span class="detail-value">${dayCmd.commandment} — ${dayCmd.theme}</span></div>
        <div class="detail-row"><span class="detail-label">Soul Level:</span><span class="detail-value">${cy41.soulLevel} · Day ${cy41.dayInLevel} of 10</span></div>
        <div class="detail-row"><span class="detail-label">World:</span><span class="detail-value">${cy41.soulLevel.includes('Nefesh') ? 'Asiyah — Action & Physical' : cy41.soulLevel.includes('Ruach') ? 'Yetzirah — Emotional World' : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World' : cy41.soulLevel.includes('Chayah') ? 'Atzilut — Spiritual World' : 'Adam Kadmon — Yechidah (Day 41)'}</span></div>
        <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">9 cycles × 41 days = 369 days · 7th cycle = Shavuot→17 Tammuz</span></div>`;
