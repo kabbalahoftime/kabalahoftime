@@ -1028,7 +1028,7 @@ transition: transform 0.3s;
 <div class="keter-visible-content">
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section">
-    <div class="keter-section-label">✦ Keter Shem Tov · Baal Shem Tov</div>
+    <div class="keter-section-label" id="keter-kst-label">✦ Keter Shem Tov</div>
     <div class="keter-main" id="keter-kst-main">Loading…</div>
     <div class="keter-meta" id="keter-kst-meta"></div>
   </div>
@@ -4862,14 +4862,19 @@ transition: transform 0.3s;
   function getDailyKST(parashaNum, dow) {
     if (!parashaNum) return null;
     if (parashaNum === 1) {
-      if (dow === 0) return 'הסכמה';
-      if (dow === 1) return 'צוואה מהבעש"ט';
-      if (dow === 6) return '§ 5 & § 6';
-      return `§ ${dow - 1}`; // Tue=§1, Wed=§2, Thu=§3, Fri=§4
+      if (dow === 0) return { arabic: 'הסכמה',      hebrew: null };
+      if (dow === 1) return { arabic: 'צוואה מהבעש"ט', hebrew: null };
+      if (dow === 6) return { arabic: '§ 5 & § 6',   hebrew: `ה׳ & ו׳` };
+      const sec = dow - 1; // Tue→1, Wed→2, Thu→3, Fri→4
+      return { arabic: `§ ${sec}`, hebrew: toHebrewNumerals(sec) };
     }
     const start = 8 * parashaNum - 9;
-    if (dow === 6) return `§ ${start + 6} & § ${start + 7}`;
-    return `§ ${start + dow}`;
+    if (dow === 6) {
+      const s1 = start + 6, s2 = start + 7;
+      return { arabic: `§ ${s1} & § ${s2}`, hebrew: `${toHebrewNumerals(s1)} & ${toHebrewNumerals(s2)}` };
+    }
+    const sec = start + dow;
+    return { arabic: `§ ${sec}`, hebrew: toHebrewNumerals(sec) };
   }
 
   // ── RENDER ──
@@ -4941,10 +4946,16 @@ transition: transform 0.3s;
            || PARASHA_TO_NUMBER[(kstParasha).split('-').pop().trim()])
         : null;
       const kstDow = date.getDay(); // 0=Sun … 6=Shabbat
-      const kstSection = getDailyKST(kstParashaNum, kstDow);
-      document.getElementById('keter-kst-main').innerHTML = kstSection
-        ? `<strong>${kstSection}</strong>`
-        : '<em style="color:var(--ink-dim)">—</em>';
+      const kst = getDailyKST(kstParashaNum, kstDow);
+      if (kst) {
+        document.getElementById('keter-kst-label').textContent = `✦ Keter Shem Tov  ${kst.arabic}`;
+        document.getElementById('keter-kst-main').innerHTML = kst.hebrew
+          ? `<span style="font-size:1.1em;letter-spacing:0.05em">${kst.hebrew}</span>`
+          : '';
+      } else {
+        document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
+        document.getElementById('keter-kst-main').innerHTML = '';
+      }
       document.getElementById('keter-kst-meta').innerHTML =
         (kstParasha ? `Parashat ${kstParasha} &nbsp;·&nbsp; ` : '') +
         `<a href="https://store.kehotonline.com/mobile/prodinfo.asp?number=HBS-KESSST" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
