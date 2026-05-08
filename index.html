@@ -5782,15 +5782,16 @@ transition: transform 0.3s;
           mainText += ` (${parashaMapping.parshiyot.join(' / ')})`;
         }
       }
-      subText = `${malTxt.author}`;
+      subText = parashaMapping._zoharUrl ? `` : `${malTxt.author}`;
       if (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]')) {
         subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
       }
       const malchutUrl = malchutSeferiaUrl(malTxt.name, parashaMapping);
       if (malchutUrl) {
         if (parashaMapping._zoharUrl) {
-          // Zohar link goes inline with its title, keeping order above Etz Chayim
+          // Zohar link and author go inline with its title, keeping order above Etz Chayim
           mainText += ` &nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria ↗</a>`;
+          mainText += `<br><span style="font-size:0.85em;color:var(--ink-dim)">R. Shimon bar Yochai</span>`;
         } else {
           const linkLabel = parashaMapping._noamLinkLabel || parashaMapping._lsLinkLabel || 'Read on Sefaria ↗';
           subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${linkLabel}</a>`;
@@ -5807,7 +5808,7 @@ transition: transform 0.3s;
         mainText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>` +
           `<strong>Etz Chayim</strong> — ${parashaMapping._etzChayimLabel}` +
           ` &nbsp;·&nbsp; <a href="${parashaMapping._etzChayimUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria ↗</a>`;
-        subText += `<br>Arizal (R. Yitzhak Luria)`;
+        subText += (subText ? `<br>` : ``) + `Arizal (R. Yitzhak Luria)`;
       }
       // Secondary text (Keter Shem Tov on Shabbat), merged with tertiary if present
       if (malTxt.secondaryName) {
