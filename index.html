@@ -5774,7 +5774,8 @@ transition: transform 0.3s;
       subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${syChapter.theme}</span>`;
       subText += SEFARIA_LINK(`https://www.sefaria.org/Sefer_Yetzirah.${syChapter.ch}`);
     } else {
-      mainText = `<strong>${malTxt.name}</strong>`;
+      const displayName = malTxt.shortName || malTxt.name;
+      mainText = `<strong>${displayName}</strong>`;
       if (parashaMapping.portion) {
         mainText += ` — ${parashaMapping.portion}`;
         if (parashaMapping.parshiyot) {
@@ -5787,8 +5788,13 @@ transition: transform 0.3s;
       }
       const malchutUrl = malchutSeferiaUrl(malTxt.name, parashaMapping);
       if (malchutUrl) {
-        const linkLabel = parashaMapping._noamLinkLabel || parashaMapping._lsLinkLabel || 'Read on Sefaria ↗';
-        subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${linkLabel}</a>`;
+        if (parashaMapping._zoharUrl) {
+          // Zohar link goes inline with its title, keeping order above Etz Chayim
+          mainText += ` &nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria ↗</a>`;
+        } else {
+          const linkLabel = parashaMapping._noamLinkLabel || parashaMapping._lsLinkLabel || 'Read on Sefaria ↗';
+          subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${linkLabel}</a>`;
+        }
       }
       if (parashaMapping._kehotUrl) {
         subText += `&nbsp;·&nbsp; <a href="${parashaMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
@@ -5799,9 +5805,9 @@ transition: transform 0.3s;
       // Etz Chayim secondary for Friday (Zohar / Arizal)
       if (parashaMapping._etzChayimLabel) {
         mainText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>` +
-          `<strong>Etz Chayim</strong> — ${parashaMapping._etzChayimLabel}`;
-        subText += `<br>Arizal (R. Yitzhak Luria)` +
-          ` &nbsp;·&nbsp; <a href="${parashaMapping._etzChayimUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
+          `<strong>Etz Chayim</strong> — ${parashaMapping._etzChayimLabel}` +
+          ` &nbsp;·&nbsp; <a href="${parashaMapping._etzChayimUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria ↗</a>`;
+        subText += `<br>Arizal (R. Yitzhak Luria)`;
       }
       // Secondary text (Keter Shem Tov on Shabbat), merged with tertiary if present
       if (malTxt.secondaryName) {
