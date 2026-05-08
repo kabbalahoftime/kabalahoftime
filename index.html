@@ -1064,6 +1064,11 @@ transition: transform 0.3s;
   <div class="section-divider" style="margin: 16px 0">
     <span class="divider-symbol">◆</span>
   </div>
+  <!-- HAYOM YOM resources -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Chassidus Further Study</div>
+    <div class="keter-main" id="keter-hy-links">Loading…</div>
+  </div>
   <!-- CHUMASH section -->
   <div class="keter-section">
     <div class="keter-section-label">✦ Chumash with Rashi</div>
@@ -5485,7 +5490,8 @@ transition: transform 0.3s;
       document.getElementById('keter-hayomyom').innerHTML =
         `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read today's Hayom Yom on Chabad.org ↗</a>`;
     }
-    document.getElementById('keter-hy-meta').innerHTML =
+    document.getElementById('keter-hy-meta').innerHTML = '';
+    document.getElementById('keter-hy-links').innerHTML =
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus ↗</a>` +
       ` &nbsp;·&nbsp; <a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha ↗</a>`;
 
