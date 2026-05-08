@@ -1034,12 +1034,13 @@ transition: transform 0.3s;
   </div>
   <!-- Atik Yomin — Three Heads -->
   <div class="keter-inner-row">
-    <!-- HAYOM YOM section -->
+    <!-- HAYOM YOM + SEFER HAMITZVOS section -->
     <div class="keter-section">
-      <div class="keter-section-label">✦ Hayom Yom</div>
+      <div class="keter-section-label">✦ Hayom Yom &amp; Rambam</div>
       <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich</div>
       <div class="keter-main" id="keter-hayomyom">Loading…</div>
       <div class="keter-meta" id="keter-hy-meta"></div>
+      <div class="keter-main" id="keter-rambam-face" style="margin-top:6px">Loading…</div>
     </div>
     <!-- DAILY LM section -->
     <div class="keter-section">
@@ -1082,11 +1083,16 @@ transition: transform 0.3s;
     <div class="keter-main" id="keter-tanya-main">Loading…</div>
     <div class="keter-meta" id="keter-tanya-meta"></div>
   </div>
-  <!-- RAMBAM section -->
+  <!-- RAMBAM 3 chapters section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Rambam · Mishneh Torah</div>
+    <div class="keter-section-label">✦ Rambam · 3 Chapters</div>
     <div class="keter-main" id="keter-rambam-main">Loading…</div>
     <div class="keter-meta" id="keter-rambam-meta"></div>
+  </div>
+  <!-- RAMBAM 1 chapter section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Rambam · 1 Chapter</div>
+    <div class="keter-main" id="keter-rambam1-main">Loading…</div>
   </div>
 </div>
 ```
@@ -5357,11 +5363,15 @@ transition: transform 0.3s;
     document.getElementById('keter-tanya-meta').innerHTML =
       `<strong>Tanya</strong> · Likutei Amarim by the Alter Rebbe`;
 
-    // 4. Rambam (detail section)
+    // 4. Rambam — three cycles
+    const chabadRambam = `https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters`;
+    document.getElementById('keter-rambam-face').innerHTML =
+      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">View today's Sefer HaMitzvos ↗</a>`;
     document.getElementById('keter-rambam-main').innerHTML =
-      `<a href="https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters/3" target="_blank" style="color:var(--gold)">` +
-      `View today's Rambam (3 chapters) ↗</a>`;
+      `<a href="${chabadRambam}/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters) ↗</a>`;
     document.getElementById('keter-rambam-meta').innerHTML = '';
+    document.getElementById('keter-rambam1-main').innerHTML =
+      `<a href="${chabadRambam}/1" target="_blank" style="color:var(--gold)">View today's Rambam (1 chapter) ↗</a>`;
 
     // 5. Keter Shem Tov — daily section (face)
     {
