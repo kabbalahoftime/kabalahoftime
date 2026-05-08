@@ -255,7 +255,7 @@ grid-template-columns: 1fr;
 gap: 0;
 }
 
-.keter-rambam-row {
+.keter-kst-row {
 background: #f2ead8 !important;
 border-bottom: 1px solid var(–border);
 }
@@ -1026,11 +1026,11 @@ transition: transform 0.3s;
 ```
 <!-- Always visible sections -->
 <div class="keter-visible-content">
-  <!-- RAMBAM row — Arich Anpin -->
-  <div class="keter-rambam-row keter-section">
-    <div class="keter-section-label">✦ Rambam · Mishneh Torah</div>
-    <div class="keter-main" id="keter-rambam-main">Loading…</div>
-    <div class="keter-meta" id="keter-rambam-meta"></div>
+  <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
+  <div class="keter-kst-row keter-section">
+    <div class="keter-section-label">✦ Keter Shem Tov · Baal Shem Tov</div>
+    <div class="keter-main" id="keter-kst-main">Loading…</div>
+    <div class="keter-meta" id="keter-kst-meta"></div>
   </div>
   <!-- Atik Yomin — Three Heads -->
   <div class="keter-inner-row">
@@ -1062,6 +1062,12 @@ transition: transform 0.3s;
 <div class="keter-detail">
   <div class="section-divider" style="margin: 16px 0">
     <span class="divider-symbol">◆</span>
+  </div>
+  <!-- RAMBAM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Rambam · Mishneh Torah</div>
+    <div class="keter-main" id="keter-rambam-main">Loading…</div>
+    <div class="keter-meta" id="keter-rambam-meta"></div>
   </div>
   <!-- CHUMASH section -->
   <div class="keter-section">
@@ -4850,6 +4856,22 @@ transition: transform 0.3s;
     return null;
   }
 
+  // Keter Shem Tov — daily section calculator
+  // 432 entries: Intro1 + Intro2 + sections 1–430, distributed 8 per parasha week
+  // Week starts Sunday; Shabbat receives the final 2 sections of each week's 8
+  function getDailyKST(parashaNum, dow) {
+    if (!parashaNum) return null;
+    if (parashaNum === 1) {
+      if (dow === 0) return 'הסכמה';
+      if (dow === 1) return 'צוואה מהבעש"ט';
+      if (dow === 6) return '§ 5 & § 6';
+      return `§ ${dow - 1}`; // Tue=§1, Wed=§2, Thu=§3, Fri=§4
+    }
+    const start = 8 * parashaNum - 9;
+    if (dow === 6) return `§ ${start + 6} & § ${start + 7}`;
+    return `§ ${start + dow}`;
+  }
+
   // ── RENDER ──
   function render() {
     const rawDay = getDaysDiff(currentOffset); // Days since Rosh Hashanah
@@ -4904,11 +4926,29 @@ transition: transform 0.3s;
     document.getElementById('keter-tanya-meta').innerHTML =
       `<strong>Tanya</strong> · Likutei Amarim by the Alter Rebbe`;
 
-    // 4. Rambam  
+    // 4. Rambam (detail section)
     document.getElementById('keter-rambam-main').innerHTML =
       `<a href="https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters/3" target="_blank" style="color:var(--gold)">` +
       `View today's Rambam (3 chapters) ↗</a>`;
     document.getElementById('keter-rambam-meta').innerHTML = '';
+
+    // 5. Keter Shem Tov — daily section (face)
+    {
+      const kstParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
+      const kstParashaNum = kstParasha
+        ? (PARASHA_TO_NUMBER[kstParasha]
+           || PARASHA_TO_NUMBER[(kstParasha).split('-')[0].trim()]
+           || PARASHA_TO_NUMBER[(kstParasha).split('-').pop().trim()])
+        : null;
+      const kstDow = date.getDay(); // 0=Sun … 6=Shabbat
+      const kstSection = getDailyKST(kstParashaNum, kstDow);
+      document.getElementById('keter-kst-main').innerHTML = kstSection
+        ? `<strong>${kstSection}</strong>`
+        : '<em style="color:var(--ink-dim)">—</em>';
+      document.getElementById('keter-kst-meta').innerHTML =
+        (kstParasha ? `Parashat ${kstParasha} &nbsp;·&nbsp; ` : '') +
+        `<a href="https://store.kehotonline.com/mobile/prodinfo.asp?number=HBS-KESSST" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
+    }
 
     // Chok L'Yisrael (Yesod card)
     const kolhalashonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
