@@ -5284,23 +5284,23 @@ transition: transform 0.3s;
       if (dow === 6) {
         const s1 = 5, s2 = 6;
         const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
-        return { page: d1.p, label: `p. ${d1.p||s1} & p. ${d2.p||s2}`,
+        return { page: d1.p, label: `§ ${s1}–${s2}  p. ${d1.p||s1}`,
                  titleEn: d1.e || '', titleHe: d1.h || '' };
       }
       const sec = dow - 1;
       const d = KST_DATA[sec] || {};
-      return { page: d.p, label: `p. ${d.p||sec}`, titleEn: d.e||'', titleHe: d.h||'' };
+      return { page: d.p, label: `§ ${sec}  p. ${d.p||sec}`, titleEn: d.e||'', titleHe: d.h||'' };
     }
     const start = 8 * parashaNum - 9;
     if (dow === 6) {
       const s1 = start + 6, s2 = start + 7;
       const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
-      return { page: d1.p, label: `p. ${d1.p||s1} & p. ${d2.p||s2}`,
+      return { page: d1.p, label: `§ ${s1}–${s2}  p. ${d1.p||s1}`,
                titleEn: d1.e || '', titleHe: d1.h || '' };
     }
     const sec = start + dow;
     const d = KST_DATA[sec] || {};
-    return { page: d.p, label: `p. ${d.p||sec}`, titleEn: d.e||'', titleHe: d.h||'' };
+    return { page: d.p, label: `§ ${sec}  p. ${d.p||sec}`, titleEn: d.e||'', titleHe: d.h||'' };
   }
 
   // ── RENDER ──
