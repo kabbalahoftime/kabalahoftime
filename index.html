@@ -5122,9 +5122,9 @@ transition: transform 0.3s;
 
     document.getElementById('chochmah-cycle-name').textContent = 'Alef-Bet — 22-Day Cycle';
     document.getElementById('chochmah-main').innerHTML =
-      `<strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
-      `<strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
-      gatesFaceLine;
+      `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
+      `<span style="font-size:0.8em;color:var(--ink-dim)">Cycle:</span> <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
+      `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine;
     document.getElementById('chochmah-sub').innerHTML = '';
     document.getElementById('chochmah-tags').innerHTML =
       `<span class="tag highlight">Set ${cy22.cycle} · Day ${cy22.day} of 22</span>`;
