@@ -1056,6 +1056,11 @@ transition: transform 0.3s;
       <div class="keter-meta" id="keter-treasury-meta"></div>
     </div>
   </div>
+  <!-- RAMBAM row — closes Keter visible face with Halacha -->
+  <div class="keter-section" style="border-top:1px solid var(--border)">
+    <div class="keter-section-label">✦ Rambam · Mishneh Torah</div>
+    <div class="keter-main" id="keter-rambam-face">Loading…</div>
+  </div>
 </div>
 
 <!-- Expandable detail sections -->
@@ -5357,10 +5362,10 @@ transition: transform 0.3s;
     document.getElementById('keter-tanya-meta').innerHTML =
       `<strong>Tanya</strong> · Likutei Amarim by the Alter Rebbe`;
 
-    // 4. Rambam (detail section)
-    document.getElementById('keter-rambam-main').innerHTML =
-      `<a href="https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters/3" target="_blank" style="color:var(--gold)">` +
-      `View today's Rambam (3 chapters) ↗</a>`;
+    // 4. Rambam (face + detail)
+    const rambamLink = `<a href="https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters) ↗</a>`;
+    document.getElementById('keter-rambam-face').innerHTML = rambamLink;
+    document.getElementById('keter-rambam-main').innerHTML = rambamLink;
     document.getElementById('keter-rambam-meta').innerHTML = '';
 
     // 5. Keter Shem Tov — daily section (face)
