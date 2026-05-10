@@ -5516,11 +5516,10 @@ transition: transform 0.3s;
 
     const lmLinkI_Maimon    = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Maimon ↗</a>`;
     const lmLinkII_Maimon   = `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Maimon ↗</a>`;
-    const lmLinkI_Rosen     = `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Rosenfeld ↗</a>`;
-    const lmLinkII_Rosen    = `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Rosenfeld ↗</a>`;
+    const lmLinkLiving      = `<a href="https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html?m=1" target="_blank" style="color:var(--gold)">Living Likutei Moharan ↗</a>`;
     const lmBreslovLinks    = isLmPartII
-      ? `${lmLinkII_Maimon} &nbsp;·&nbsp; ${lmLinkII_Rosen}`
-      : `${lmLinkI_Maimon} &nbsp;·&nbsp; ${lmLinkI_Rosen}`;
+      ? `${lmLinkII_Maimon} &nbsp;·&nbsp; ${lmLinkLiving}`
+      : `${lmLinkI_Maimon} &nbsp;·&nbsp; ${lmLinkLiving}`;
 
     document.getElementById('keter-lm-meta').innerHTML =
       `<strong>Likutei Moharan</strong> · Rebbe Nachman of Breslov &nbsp;·&nbsp; ` +
