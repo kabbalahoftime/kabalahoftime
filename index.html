@@ -5385,8 +5385,8 @@ transition: transform 0.3s;
       const kstParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
       const kstParashaNum = kstParasha
         ? (PARASHA_TO_NUMBER[kstParasha]
-           || PARASHA_TO_NUMBER[(kstParasha).split('-')[0].trim()]
-           || PARASHA_TO_NUMBER[(kstParasha).split('-').pop().trim()])
+           || PARASHA_TO_NUMBER[(kstParasha).split('-').pop().trim()]
+           || PARASHA_TO_NUMBER[(kstParasha).split('-')[0].trim()])
         : null;
       const kstDow = date.getDay(); // 0=Sun … 6=Shabbat
       const kst = getDailyKST(kstParashaNum, kstDow);
