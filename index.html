@@ -5383,27 +5383,37 @@ transition: transform 0.3s;
     // 5. Keter Shem Tov — daily section (face)
     {
       const kstParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
-      const kstParashaNum = kstParasha
-        ? (PARASHA_TO_NUMBER[kstParasha]
-           || PARASHA_TO_NUMBER[(kstParasha).split('-').pop().trim()]
-           || PARASHA_TO_NUMBER[(kstParasha).split('-')[0].trim()])
+      const kstParts = kstParasha ? kstParasha.split('-').map(p => p.trim()) : [];
+      const kstParashaNum  = kstParasha
+        ? (PARASHA_TO_NUMBER[kstParasha] || PARASHA_TO_NUMBER[kstParts[0]])
+        : null;
+      const kstParashaNum2 = (!PARASHA_TO_NUMBER[kstParasha] && kstParts.length > 1)
+        ? PARASHA_TO_NUMBER[kstParts[1]]
         : null;
       const kstDow = date.getDay(); // 0=Sun … 6=Shabbat
-      const kst = getDailyKST(kstParashaNum, kstDow);
+      const kst  = getDailyKST(kstParashaNum, kstDow);
+      const kst2 = kstParashaNum2 ? getDailyKST(kstParashaNum2, kstDow) : null;
       if (kst) {
         document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
-        const refHtml = `<span style="color:var(--ink-mid);font-size:0.9em">${kst.label}:</span> `;
         function kstTitleHtml(he, en) {
           const heHtml = he ? `<span dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1em;line-height:1.4">${he}</span>` : '';
           const enHtml = en ? `<span style="font-size:0.88em;color:var(--ink-soft);font-style:italic">${en}</span>` : '';
           const sep = heHtml && enHtml ? `<span style="color:var(--ink-dim);padding:0 0.3em">·</span>` : '';
           return heHtml + sep + enHtml;
         }
-        let titlesHtml = kstTitleHtml(kst.titleHe, kst.titleEn);
-        if (kst.title2He || kst.title2En) {
-          titlesHtml += `<br>` + kstTitleHtml(kst.title2He, kst.title2En);
+        function kstEntryHtml(entry) {
+          const refHtml = `<span style="color:var(--ink-mid);font-size:0.9em">${entry.label}:</span> `;
+          let titlesHtml = kstTitleHtml(entry.titleHe, entry.titleEn);
+          if (entry.title2He || entry.title2En) {
+            titlesHtml += `<br>` + kstTitleHtml(entry.title2He, entry.title2En);
+          }
+          return refHtml + titlesHtml;
         }
-        document.getElementById('keter-kst-main').innerHTML = refHtml + titlesHtml;
+        let html = kstEntryHtml(kst);
+        if (kst2) {
+          html += `<br>` + kstEntryHtml(kst2);
+        }
+        document.getElementById('keter-kst-main').innerHTML = html;
       } else {
         document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
         document.getElementById('keter-kst-main').innerHTML = '';
