@@ -6103,10 +6103,12 @@ transition: transform 0.3s;
       // Index 0-6 matches MALCHUT_TEXTS and day order (0=Fri, 1=Shab, 2=Sun, 3=Mon, 4=Tue, 5=Wed, 6=Thu)
       // KoT Days: 1=Fri→Book1, 2=Shab→Book2, 3=Sun→Book3, 4=Mon→Book4, 5=Tue→Book5, 6=Wed→Book6, 7=Thu→Book7
       { book: 'Book 1 · Song of Nature',        emoji: '🐾',
+        url: 'https://drive.google.com/file/d/1ZrQ4cd0pDe_tuFMwkCU79H1x431lyW-0/view?usp=drivesdk',
         fields: [{ label: 'Weekly Theme',      value: wk.b1_theme },
                  { label: 'Perek Shirah',      value: wk.b1_animal },
                  { label: 'Pirkei Avot',       value: wk.b1_avot }] },
       { book: 'Book 2 · Song of Moses',        emoji: '📜',
+        url: 'https://drive.google.com/file/d/14inXTz6KRLUF7m5X130DSzWvaUUyaTsj/view?usp=drivesdk',
         fields: [
           { label: '48 Qualities',      value: wk.b2_quality },
           { label: 'Prophet',           value: wk.b2_prophet },
@@ -6115,6 +6117,7 @@ transition: transform 0.3s;
           { label: 'Levitical City',   value: wk.b2_city }
         ] },
       { book: 'Book 3 · Song of the Sea',      emoji: '🌾',
+        url: 'https://drive.google.com/file/d/1x6JhUwY8D1pd4HnBWymn5J11fMM4SBra/view?usp=drivesdk',
         fields: [
           { label: 'Genealogy',        value: wk.b3_ruth },
           { label: 'Haftara',          value: wk.b3_haftara },
@@ -6123,6 +6126,7 @@ transition: transform 0.3s;
         ] },
       // BOOK 4: Song of Hannah (Saved in 2016)
       { book: 'Book 4 · Song of Hannah',       emoji: '💎',
+        url: 'https://drive.google.com/file/d/1gW4vbY2T2_LWViwYNP5Anx6XhKVsPIva/view?usp=drivesdk',
         fields: [
           { label: 'Writings of<br>King Solomon', value: wk.b4_proverbs },
           { label: 'Hannah\'s Song',     value: wk.b4_hannah },
@@ -6130,6 +6134,7 @@ transition: transform 0.3s;
           { label: 'Yahrzeit',           value: wk.b4_yahrzeit }
         ] },
       { book: 'Book 5 · Song of Songs',      emoji: '🌹',
+        url: 'https://drive.google.com/file/d/1-ukVcYEN-Nykj2FezjoCb2DWM1U_EXj9/view?usp=drivesdk',
         fields: [
           { label: 'Song of Songs',     value: wk.b5_shir },
           { label: 'Seventy Souls',     value: wk.b5_souls },
@@ -6137,6 +6142,7 @@ transition: transform 0.3s;
           { label: 'Shevuos',           value: wk.b5_talmud }
         ] },
       { book: 'Book 6 · General Remedy',      emoji: '🎵',
+        url: 'https://drive.google.com/file/d/1i601oP9U0rGc6oiPM-HhCczXPDYKsaR8/view?usp=drivesdk',
         fields: [
           { label: 'Tehilim/Perek Shirah',  value: wk.b6_psalms },
           { label: 'Tikkun HaKlali',        value: wk.b6_tikkun },
@@ -6338,7 +6344,8 @@ transition: transform 0.3s;
     const bookParts = todayBook.book.split(' · ');
     document.getElementById('malchut-book-face').innerHTML =
       `<span style="font-size:1.1em">${todayBook.emoji}</span> <strong>${bookParts[0]}</strong>` +
-      (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '');
+      (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '') +
+      (todayBook.url ? `<br><a href="${todayBook.url}" target="_blank" style="color:var(--gold);font-size:0.85em">Read ↗</a>` : '');
 
     // Panel 3: Sichos in English + Selections from Likkutei Sichos by book
     (() => {
