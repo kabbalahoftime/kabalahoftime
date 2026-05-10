@@ -5296,7 +5296,8 @@ transition: transform 0.3s;
         const s1 = 5, s2 = 6;
         const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
         return { page: d1.p, label: `§ ${s1}–${s2} (p. ${d1.p||s1})`,
-                 titleEn: d1.e || '', titleHe: d1.h || '' };
+                 titleEn: d1.e || '', titleHe: d1.h || '',
+                 title2En: d2.e || '', title2He: d2.h || '' };
       }
       const sec = dow - 1;
       const d = KST_DATA[sec] || {};
@@ -5307,7 +5308,8 @@ transition: transform 0.3s;
       const s1 = start + 6, s2 = start + 7;
       const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
       return { page: d1.p, label: `§ ${s1}–${s2} (p. ${d1.p||s1})`,
-               titleEn: d1.e || '', titleHe: d1.h || '' };
+               titleEn: d1.e || '', titleHe: d1.h || '',
+               title2En: d2.e || '', title2He: d2.h || '' };
     }
     const sec = start + dow;
     const d = KST_DATA[sec] || {};
@@ -5391,14 +5393,17 @@ transition: transform 0.3s;
       if (kst) {
         document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
         const refHtml = `<span style="color:var(--ink-mid);font-size:0.9em">${kst.label}:</span> `;
-        const heHtml = kst.titleHe
-          ? `<span dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1em;line-height:1.4">${kst.titleHe}</span>`
-          : '';
-        const enHtml = kst.titleEn
-          ? `<span style="font-size:0.88em;color:var(--ink-soft);font-style:italic">${kst.titleEn}</span>`
-          : '';
-        const sep = heHtml && enHtml ? `<span style="color:var(--ink-dim);padding:0 0.3em">·</span>` : '';
-        document.getElementById('keter-kst-main').innerHTML = refHtml + heHtml + sep + enHtml;
+        function kstTitleHtml(he, en) {
+          const heHtml = he ? `<span dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1em;line-height:1.4">${he}</span>` : '';
+          const enHtml = en ? `<span style="font-size:0.88em;color:var(--ink-soft);font-style:italic">${en}</span>` : '';
+          const sep = heHtml && enHtml ? `<span style="color:var(--ink-dim);padding:0 0.3em">·</span>` : '';
+          return heHtml + sep + enHtml;
+        }
+        let titlesHtml = kstTitleHtml(kst.titleHe, kst.titleEn);
+        if (kst.title2He || kst.title2En) {
+          titlesHtml += `<br>` + kstTitleHtml(kst.title2He, kst.title2En);
+        }
+        document.getElementById('keter-kst-main').innerHTML = refHtml + titlesHtml;
       } else {
         document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
         document.getElementById('keter-kst-main').innerHTML = '';
