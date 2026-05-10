@@ -6183,7 +6183,6 @@ transition: transform 0.3s;
           const endChapter = 8 * parashaNum - 2;
           mapping.portion = `Chapters ${startChapter}-${endChapter}`;
         }
-        mapping._kehotUrl = 'https://store.kehotonline.com/mobile/prodinfo.asp?number=HBS-KESSST';
       }
       else if (textName === 'Tanya' && MALCHUT_PARASHA_MAPPINGS.tanya[parashaNum]) {
         const data = MALCHUT_PARASHA_MAPPINGS.tanya[parashaNum];
@@ -6210,9 +6209,10 @@ transition: transform 0.3s;
         const data = MALCHUT_PARASHA_MAPPINGS.likuteiSichos[parashaNum];
         const seriesName = data.series === 'TM' ? 'Toras Menachem' : 'Sichos in English';
         mapping.portion = `${seriesName} · ${data.year}`;
-        mapping.theme = data.series === 'TM'
-          ? 'Toras Menachem — Rebbe\'s early years of leadership'
-          : 'Sichos in English series';
+        mapping._skipPrefix = true;
+        if (data.series === 'TM') {
+          mapping.theme = 'Toras Menachem — Rebbe\'s early years of leadership';
+        }
         if (data.series === 'TM') {
           mapping._lsUrl = 'https://www.chabad.org/torah-texts/2988329/Toras-Menachem-Hisvaaduyos';
           mapping._lsLinkLabel = 'Toras Menachem on Chabad.org ↗';
@@ -6277,11 +6277,15 @@ transition: transform 0.3s;
       subText += SEFARIA_LINK(`https://www.sefaria.org/Sefer_Yetzirah.${syChapter.ch}`);
     } else {
       const displayName = malTxt.shortName || malTxt.name;
-      mainText = `<strong>${displayName}</strong>`;
-      if (parashaMapping.portion) {
-        mainText += ` — ${parashaMapping.portion}`;
-        if (parashaMapping.parshiyot) {
-          mainText += ` (${parashaMapping.parshiyot.join(' / ')})`;
+      if (parashaMapping._skipPrefix && parashaMapping.portion) {
+        mainText = `<strong>${parashaMapping.portion}</strong>`;
+      } else {
+        mainText = `<strong>${displayName}</strong>`;
+        if (parashaMapping.portion) {
+          mainText += ` — ${parashaMapping.portion}`;
+          if (parashaMapping.parshiyot) {
+            mainText += ` (${parashaMapping.parshiyot.join(' / ')})`;
+          }
         }
       }
       subText = parashaMapping._zoharUrl ? `` : `${malTxt.author}`;
