@@ -6411,6 +6411,7 @@ transition: transform 0.3s;
           `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
           `<span class="mal-text-name">${todayTextDisplay}</span>` +
           `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>` +
+          (todayBook.url ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold);font-size:0.82em;margin-left:6px">Read ↗</a>` : '') +
         `</div>` +
         `<div class="mal-fields">${todayFieldLines}</div>` +
       `</div>` +
@@ -6474,6 +6475,7 @@ transition: transform 0.3s;
           `<span class="mal-night">${DAYS_LABELS[i]}</span>` +
           `<span class="mal-text-name">${displayName}${themeHTML}</span>` +
           `<span class="mal-book-label">${db.emoji} ${db.book}</span>` +
+          (db.url ? `<a href="${db.url}" target="_blank" style="color:var(--gold);font-size:0.82em;margin-left:6px">Read ↗</a>` : '') +
         `</div>` +
         `<div class="mal-fields">${fieldLines}</div>` +
         `</div>`;
