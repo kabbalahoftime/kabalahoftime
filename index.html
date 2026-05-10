@@ -4303,7 +4303,7 @@ transition: transform 0.3s;
   // dayNum 1=Thu→Fri, 2=Fri→Shab, 3=Sat→Sun, 4=Sun→Mon, 5=Mon→Tue, 6=Tue→Wed, 7=Wed→Thu
   const MALCHUT_TEXTS = [
     { name: 'Chidah (Zohar / Arizal)',      author: 'R. Shimon bar Yochai / R. Luria',    shortName: 'Zohar',    day: 'Friday — Erev Shabbat',   desc: 'Mystical depth of the Parasha — the hidden light of Torah' },
-    { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight',      secondaryName: 'Keter Shem Tov', secondaryAuthor: 'Baal Shem Tov', secondaryDesc: 'Foundations of Chassidic thought and Divine joy', tertiaryName: 'Stories of the Besht', tertiaryAuthor: 'R. YY Kaplowitz' },
+    { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight',      secondaryName: 'Stories of the Besht', secondaryAuthor: 'R. YY Kaplowitz', secondaryDesc: 'Stories of the Baal Shem Tov' },
     { name: 'Kedushas Levi',       author: 'R. Levi Yitzhak of Berditchev',      shortName: 'KL',       day: 'Sunday',                  desc: 'Chassidic commentary on Torah — love and joy in divine service' },
     { name: 'Noam Elimelech',      author: 'R. Elimelech of Lizhensk',           shortName: 'NE',       day: 'Monday',                  desc: 'The Tzadik\'s path: elevating the world through Torah' },
     { name: 'Tanya',               author: 'Alter Rebbe (R. Schneur Zalman)',     shortName: 'Tanya',    day: 'Tuesday',                 desc: 'Likutei Amarim — the Sefer Shel Beinonim' },
@@ -5516,11 +5516,10 @@ transition: transform 0.3s;
 
     const lmLinkI_Maimon    = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Maimon ↗</a>`;
     const lmLinkII_Maimon   = `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Maimon ↗</a>`;
-    const lmLinkI_Rosen     = `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Rosenfeld ↗</a>`;
-    const lmLinkII_Rosen    = `<a href="https://www.breslovtorah.com/series/r-rosenfeld-likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Rosenfeld ↗</a>`;
+    const lmLinkLiving      = `<a href="https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html?m=1" target="_blank" style="color:var(--gold)">Living Likutei Moharan ↗</a>`;
     const lmBreslovLinks    = isLmPartII
-      ? `${lmLinkII_Maimon} &nbsp;·&nbsp; ${lmLinkII_Rosen}`
-      : `${lmLinkI_Maimon} &nbsp;·&nbsp; ${lmLinkI_Rosen}`;
+      ? `${lmLinkII_Maimon} &nbsp;·&nbsp; ${lmLinkLiving}`
+      : `${lmLinkI_Maimon} &nbsp;·&nbsp; ${lmLinkLiving}`;
 
     document.getElementById('keter-lm-meta').innerHTML =
       `<strong>Likutei Moharan</strong> · Rebbe Nachman of Breslov &nbsp;·&nbsp; ` +
@@ -6307,7 +6306,7 @@ transition: transform 0.3s;
           ` &nbsp;·&nbsp; <a href="${parashaMapping._etzChayimUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria ↗</a>`;
         subText += (subText ? `<br>` : ``) + `Arizal (R. Yitzhak Luria)`;
       }
-      // Secondary text (Keter Shem Tov on Shabbat), merged with tertiary if present
+      // Secondary text (e.g. Stories of the Besht on Shabbat)
       if (malTxt.secondaryName) {
         const secMapping = getParashaMapping(malTxt.secondaryName, actualParasha);
         const combinedName = malTxt.tertiaryName
@@ -6441,7 +6440,7 @@ transition: transform 0.3s;
         if (mapping._etzChayimLabel && mapping._etzChayimUrl) {
           themeHTML += `<div style="font-size:9px;margin-top:2px;">Etz Chayim — ${mapping._etzChayimLabel} &nbsp;·&nbsp; <a href="${mapping._etzChayimUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a></div>`;
         }
-        // Secondary text (Keter Shem Tov on Shabbat), merged with tertiary if present
+        // Secondary text (e.g. Stories of the Besht on Shabbat)
         const malchutEntry = MALCHUT_TEXTS[i];
         if (malchutEntry && malchutEntry.secondaryName) {
           const secMapping = getParashaMapping(malchutEntry.secondaryName, actualParasha);
