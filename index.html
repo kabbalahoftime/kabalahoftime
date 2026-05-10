@@ -1481,7 +1481,7 @@ transition: transform 0.3s;
                 }
                 if (cQ.hayomYomUrl) {
                     html += `<div class="detail-row"><span class="detail-label">Hayom Yom:</span>` +
-                            `<span class="detail-value"><a href="${cQ.hayomYomUrl}" target="_blank" style="color:var(--gold)">${cQ.hayomYomDate} ↗</a></span></div>`;
+                            `<span class="detail-value"><a href="${cQ.hayomYomUrl}" target="_blank" style="color:var(--gold)">${cQ.hayomYomDate}</a></span></div>`;
                 }
                 if (cQ.hayomYomText) {
                     html += `<div style="font-size:0.8rem;font-style:italic;color:var(--ink-mid);line-height:1.55;margin:2px 0 6px 0;">${cQ.hayomYomText}</div>`;
@@ -1506,7 +1506,7 @@ transition: transform 0.3s;
                 }
                 if (pQ.hayomYomUrl) {
                     html += `<div class="detail-row"><span class="detail-label">Hayom Yom:</span>` +
-                            `<span class="detail-value"><a href="${pQ.hayomYomUrl}" target="_blank" style="color:var(--gold)">${pQ.hayomYomDate} ↗</a></span></div>`;
+                            `<span class="detail-value"><a href="${pQ.hayomYomUrl}" target="_blank" style="color:var(--gold)">${pQ.hayomYomDate}</a></span></div>`;
                 }
                 if (pQ.hayomYomText) {
                     html += `<div style="font-size:0.8rem;font-style:italic;color:var(--ink-mid);line-height:1.55;margin:2px 0 6px 0;">${pQ.hayomYomText}</div>`;
@@ -1547,8 +1547,8 @@ transition: transform 0.3s;
             `pathways — rooted in Reb Zusha of Anipoli's teaching on the letters of ` +
             `<span style="font-family:serif;font-size:1.05em">תשובה</span> — ` +
             `to the full year in 8 cycles of 6–8 parashot each. ` +
-            `<a href="https://www.chabad.org/therebbe/article_cdo/aid/5932/jewish/Hayom-Yom-Tishrei-3-Shabbat-Teshuva.htm" target="_blank" style="color:var(--gold)">Hayom Yom, Tishrei 3 ↗</a>` +
-            `  ·  <a href="https://inner.org/teshuva-rebbe-zusha-style/" target="_blank" style="color:var(--gold)">inner.org ↗</a>` +
+            `<a href="https://www.chabad.org/therebbe/article_cdo/aid/5932/jewish/Hayom-Yom-Tishrei-3-Shabbat-Teshuva.htm" target="_blank" style="color:var(--gold)">Hayom Yom, Tishrei 3</a>` +
+            `  ·  <a href="https://inner.org/teshuva-rebbe-zusha-style/" target="_blank" style="color:var(--gold)">inner.org</a>` +
             `<br><br>Shovavim is particularly associated with <em>Tikkun HaBrit</em> — the rectification of sins of a sexual nature. Each pathway corresponds to a specific method of tikkun, embodied by a Tzaddik, manifesting in four pairs of redeemers: Moshe and Aharon (first redeemers), Mordechai and Esther (Purim redeemers), Rashbi and Arizal (kabbalistic redeemers — continued through Rebbe Nachman of Breslov and the Baal Shem Tov), and Moshiach and Eliyahu (final redeemers). Each pair combines מ (Mem) and א (Alef) — together spelling אם (Em, mother). For the kabbalistic pair, Rashbi's name Shimon (שמעון) contains both ש (Shin, the first letter of Shovavim) and מ (Mem, its last letter), alongside Arizal (א). Tikkun HaBrit allows for the full revelation of the Shechinah — Em HaBanim Smeicha.` +
             `</div>`;
 
@@ -4712,7 +4712,7 @@ transition: transform 0.3s;
   }
 
   const SEFARIA_LINK = (url) =>
-    `&nbsp;·&nbsp; <a href="${url}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
+    `&nbsp;·&nbsp; <a href="${url}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
 
   // Noam Elimelekh Sefaria slugs indexed by parasha number (1–54)
   // null = no dedicated section in the text; falls back to main page
@@ -5296,7 +5296,8 @@ transition: transform 0.3s;
         const s1 = 5, s2 = 6;
         const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
         return { page: d1.p, label: `§ ${s1}–${s2} (p. ${d1.p||s1})`,
-                 titleEn: d1.e || '', titleHe: d1.h || '' };
+                 titleEn: d1.e || '', titleHe: d1.h || '',
+                 title2En: d2.e || '', title2He: d2.h || '' };
       }
       const sec = dow - 1;
       const d = KST_DATA[sec] || {};
@@ -5307,7 +5308,8 @@ transition: transform 0.3s;
       const s1 = start + 6, s2 = start + 7;
       const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
       return { page: d1.p, label: `§ ${s1}–${s2} (p. ${d1.p||s1})`,
-               titleEn: d1.e || '', titleHe: d1.h || '' };
+               titleEn: d1.e || '', titleHe: d1.h || '',
+               title2En: d2.e || '', title2He: d2.h || '' };
     }
     const sec = start + dow;
     const d = KST_DATA[sec] || {};
@@ -5343,7 +5345,7 @@ transition: transform 0.3s;
     document.getElementById('keter-chumash-date').textContent = hDateStr;
     document.getElementById('keter-chumash-main').innerHTML = 
       `<a href="https://www.chabad.org/dailystudy/torahreading.htm" target="_blank" style="color:var(--gold)">` +
-      `View today's Chumash portion with Rashi ↗</a>`;
+      `View today's Chumash portion with Rashi</a>`;
     document.getElementById('keter-chumash-meta').innerHTML =
       `<strong>Daily Chumash</strong> · Divided into 7 daily sections`;
 
@@ -5355,7 +5357,7 @@ transition: transform 0.3s;
     document.getElementById('keter-tehillim-main').innerHTML =
       `<strong>${tehillimChapter}</strong><br>` +
       `<a href="${chabadBaseURL}/tehillim_cdo/aid/1455591/jewish/Psalms.htm" target="_blank" style="color:var(--gold);font-size:11px">` +
-      `Read on Chabad.org ↗</a>`;
+      `Read on Chabad.org</a>`;
     const tehillimStartCh = tehillimDayOfMonth <= 29 ? (tehillimDayOfMonth - 1) * 5 + 1 : 146;
     document.getElementById('keter-tehillim-meta').innerHTML =
       `<strong>Psalms</strong> · Day ${tehillimDayOfMonth} of month` +
@@ -5364,19 +5366,19 @@ transition: transform 0.3s;
     // 3. Tanya
     document.getElementById('keter-tanya-main').innerHTML =
       `<a href="${chabadBaseURL}/tanya_cdo/aid/7876/jewish/Daily-Tanya.htm" target="_blank" style="color:var(--gold)">` +
-      `View today's Tanya lesson ↗</a>`;
+      `View today's Tanya lesson</a>`;
     document.getElementById('keter-tanya-meta').innerHTML =
       `<strong>Tanya</strong> · Likutei Amarim by the Alter Rebbe`;
 
     // 4. Rambam — three cycles
     const chabadRambam = `https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters`;
     document.getElementById('keter-rambam-face').innerHTML =
-      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">View today's Sefer HaMitzvos ↗</a>`;
+      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">View today's Sefer HaMitzvos</a>`;
     document.getElementById('keter-rambam-main').innerHTML =
-      `<a href="${chabadRambam}/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters) ↗</a>`;
+      `<a href="${chabadRambam}/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters)</a>`;
     document.getElementById('keter-rambam-meta').innerHTML = '';
     document.getElementById('keter-rambam1-main').innerHTML =
-      `<a href="${chabadRambam}/1" target="_blank" style="color:var(--gold)">View today's Rambam (1 chapter) ↗</a>`;
+      `<a href="${chabadRambam}/1" target="_blank" style="color:var(--gold)">View today's Rambam (1 chapter)</a>`;
 
     // 5. Keter Shem Tov — daily section (face)
     {
@@ -5391,14 +5393,17 @@ transition: transform 0.3s;
       if (kst) {
         document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
         const refHtml = `<span style="color:var(--ink-mid);font-size:0.9em">${kst.label}:</span> `;
-        const heHtml = kst.titleHe
-          ? `<span dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1em;line-height:1.4">${kst.titleHe}</span>`
-          : '';
-        const enHtml = kst.titleEn
-          ? `<span style="font-size:0.88em;color:var(--ink-soft);font-style:italic">${kst.titleEn}</span>`
-          : '';
-        const sep = heHtml && enHtml ? `<span style="color:var(--ink-dim);padding:0 0.3em">·</span>` : '';
-        document.getElementById('keter-kst-main').innerHTML = refHtml + heHtml + sep + enHtml;
+        function kstTitleHtml(he, en) {
+          const heHtml = he ? `<span dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1em;line-height:1.4">${he}</span>` : '';
+          const enHtml = en ? `<span style="font-size:0.88em;color:var(--ink-soft);font-style:italic">${en}</span>` : '';
+          const sep = heHtml && enHtml ? `<span style="color:var(--ink-dim);padding:0 0.3em">·</span>` : '';
+          return heHtml + sep + enHtml;
+        }
+        let titlesHtml = kstTitleHtml(kst.titleHe, kst.titleEn);
+        if (kst.title2He || kst.title2En) {
+          titlesHtml += `<br>` + kstTitleHtml(kst.title2He, kst.title2En);
+        }
+        document.getElementById('keter-kst-main').innerHTML = refHtml + titlesHtml;
       } else {
         document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
         document.getElementById('keter-kst-main').innerHTML = '';
@@ -5411,19 +5416,19 @@ transition: transform 0.3s;
     const _yesodParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
     document.getElementById('keter-chok-main').innerHTML =
       `<a href="https://www.kolhalashon.com/en/regularSite/searchResults/94/21/%D7%97%D7%95%D7%A7%20%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C?urlFilters=2:683%7C&date=${kolhalashonDate}" target="_blank" style="color:var(--gold)">` +
-      `Chok L'Yisrael${_yesodParasha ? ' — ' + _yesodParasha : ''} ↗</a>`;
+      `Chok L'Yisrael${_yesodParasha ? ' — ' + _yesodParasha : ''}</a>`;
     document.getElementById('keter-chok-meta').innerHTML =
       `Torah, Prophets, Writings, Midrash, Zohar`;
 
     // Ben Ish Chai (Yesod card)
     document.getElementById('yesod-bic-main').innerHTML =
-      `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria ↗</a>`;
+      `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
     document.getElementById('yesod-bic-meta').innerHTML =
       `Rabbi Yosef Chaim of Baghdad`;
 
     // Daily Hida (Yesod card)
     document.getElementById('yesod-hida-main').innerHTML =
-      `<a href="https://apps.apple.com/us/app/daily-hida-%D7%9C%D7%99%D7%9E%D7%95%D7%93-%D7%94%D7%97%D7%99%D7%93-%D7%90-%D7%94%D7%99%D7%95%D7%9E%D7%99/id464890257" target="_blank" style="color:var(--gold)">Daily Hida — App Store ↗</a>`;
+      `<a href="https://apps.apple.com/us/app/daily-hida-%D7%9C%D7%99%D7%9E%D7%95%D7%93-%D7%94%D7%97%D7%99%D7%93-%D7%90-%D7%94%D7%99%D7%95%D7%9E%D7%99/id464890257" target="_blank" style="color:var(--gold)">Daily Hida — App Store</a>`;
     document.getElementById('yesod-hida-meta').innerHTML =
       `Rabbi Chaim Yosef David Azulai`;
 
@@ -5468,14 +5473,14 @@ transition: transform 0.3s;
         } else {
           label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
         }
-        el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label} ↗</a>`;
+        el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>`;
         metaEl.innerHTML = `R. Shimon bar Yochai · ${todayFolios} folios today`;
       } else {
         // Sefer Yetzirah (cycleOffset 359-363 = days 360-364)
         const syDay = cycleOffset - 358; // 1-5
         const chapters = (syDay === 5) ? 'Chapters\xa05\xa0&\xa06' : `Chapter\xa0${syDay}`;
         const syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${syDay === 5 ? 5 : syDay}`;
-        el.innerHTML = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters} ↗</a>`;
+        el.innerHTML = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters}</a>`;
         metaEl.innerHTML = `Day ${cycleOffset + 1} of cycle · completing the year`;
       }
     })();
@@ -5485,15 +5490,15 @@ transition: transform 0.3s;
     const hyText = getHayomYom(hMonth, hDay);
     if (hyText) {
       document.getElementById('keter-hayomyom').innerHTML =
-        `"${hyText}" &nbsp;<a href="${chabadURL}" target="_blank" style="color:var(--gold);font-style:normal;font-size:11px">full entry ↗</a>`;
+        `"${hyText}" &nbsp;<a href="${chabadURL}" target="_blank" style="color:var(--gold);font-style:normal;font-size:11px">full entry</a>`;
     } else {
       document.getElementById('keter-hayomyom').innerHTML =
-        `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read today's Hayom Yom on Chabad.org ↗</a>`;
+        `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read today's Hayom Yom on Chabad.org</a>`;
     }
     document.getElementById('keter-hy-meta').innerHTML = '';
     document.getElementById('keter-hy-links').innerHTML =
-      `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus ↗</a>` +
-      ` &nbsp;·&nbsp; <a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha ↗</a>`;
+      `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>` +
+      ` &nbsp;·&nbsp; <a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha</a>`;
 
     // 6. Likutei Moharan — Part I = lessons 1–286, Part II (Tinyana) = 287–411
     // Lessons 194–204 all fall on the 13th of Nissan (day 194); from day 195 onward, offset by 10.
@@ -5514,16 +5519,16 @@ transition: transform 0.3s;
         (lmData.summary ? `<br><span style="font-size:11px;color:var(--ink-mid);font-style:italic">${lmData.summary}</span>` : '')
       : `${lmPartLabel} · Lesson <strong>${lmLessonInPart}</strong>`;
 
-    const lmLinkI_Maimon    = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Maimon ↗</a>`;
-    const lmLinkII_Maimon   = `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Maimon ↗</a>`;
-    const lmLinkLiving      = `<a href="https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html?m=1" target="_blank" style="color:var(--gold)">Living Likutei Moharan ↗</a>`;
+    const lmLinkI_Maimon    = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Maimon</a>`;
+    const lmLinkII_Maimon   = `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Maimon</a>`;
+    const lmLinkLiving      = `<a href="https://www.kabbalahoftime.com/2024/03/rebbe-nachman-bkol-hashanah-liluy.html?m=1" target="_blank" style="color:var(--gold)">Living Likutei Moharan</a>`;
     const lmBreslovLinks    = isLmPartII
       ? `${lmLinkII_Maimon} &nbsp;·&nbsp; ${lmLinkLiving}`
       : `${lmLinkI_Maimon} &nbsp;·&nbsp; ${lmLinkLiving}`;
 
     document.getElementById('keter-lm-meta').innerHTML =
       `<strong>Likutei Moharan</strong> · Rebbe Nachman of Breslov &nbsp;·&nbsp; ` +
-      `<a href="${seferiaURL}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>` +
+      `<a href="${seferiaURL}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>` +
       ` &nbsp;·&nbsp; ${lmBreslovLinks}`;
 
     // 7. Treasury of Chassidic Tales (R. S.Y. Zevin)
@@ -5705,7 +5710,7 @@ transition: transform 0.3s;
       }
     }
     const chSourceRow = chUrl
-      ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${chUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a> — R. Shneur Zalman of Liadi</span></div>`
+      ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${chUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — R. Shneur Zalman of Liadi</span></div>`
       : `<div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">R. Shneur Zalman of Liadi (Alter Rebbe)</span></div>`;
 
     // Tractate half-cycle lookup: 'a' = days 1-11, 'b' = days 12-22; cycle 17 has only 'a' (12 days)
@@ -5720,8 +5725,8 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${cy22.theme}</span></div>
        <div class="detail-row"><span class="detail-label">Set:</span><span class="detail-value">Set ${cy22.cycle} of 17 · Day ${cy22.day} of 22</span></div>
        ${acrosticRow}
-       <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light ↗</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
-       <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value"><a href="https://www.kabbalahoftime.com/2024/12/cycles-of-alef-beit.html?m=1" target="_blank" style="color:var(--gold)">Cycles of Alef-Bet ↗</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Kabbalah of Time</span></span></div>
+       <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
+       <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value"><a href="https://www.kabbalahoftime.com/2024/12/cycles-of-alef-beit.html?m=1" target="_blank" style="color:var(--gold)">Cycles of Alef-Bet</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Kabbalah of Time</span></span></div>
        <div class="detail-row"><span class="detail-label">Sefer Yetzirah:</span><span class="detail-value">32 Paths = 10 Sefirot + 22 Letters (building blocks of Creation)</span></div>
        <div class="detail-row"><span class="detail-label">Three Weeks:</span><span class="detail-value">17 Tammuz → 9 Av = 22 days (internal Alef-Bet cycle)</span></div>
        <div class="detail-row"><span class="detail-label">Acrostic Structure:</span><span class="detail-value">Cycles 1-7: One Psalm each · Cycle 8: Eshet Chayil · Cycles 9-16: Psalm 119 (8 sections)</span></div>
@@ -5731,9 +5736,9 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
        ${chSourceRow}
        <div class="detail-row"><span class="detail-label">Recordings:</span><span class="detail-value">
-         <a href="https://www.torahrecordings.com/torah-ohr/" target="_blank" style="color:var(--gold)">Torah Ohr ↗</a>
+         <a href="https://www.torahrecordings.com/torah-ohr/" target="_blank" style="color:var(--gold)">Torah Ohr</a>
          &nbsp;·&nbsp;
-         <a href="https://www.torahrecordings.com/likutei-torah/" target="_blank" style="color:var(--gold)">Likutei Torah ↗</a>
+         <a href="https://www.torahrecordings.com/likutei-torah/" target="_blank" style="color:var(--gold)">Likutei Torah</a>
        </span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractData.id}</div>
@@ -5796,10 +5801,10 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likutei Tefilot — Day ${ltDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${ltSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a> — Reb Nosson of Breslov</span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot</div>
-       <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot ↗</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot ↗</a> — inner.org</span></div>`;
+       <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>`;
 
     // CHESED — Mishna / Tosefta
     const mishnaInfo = getMishnaInfo(d);
@@ -5818,7 +5823,7 @@ transition: transform 0.3s;
     document.getElementById('chesed-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">KoT Week:</span><span class="detail-value">Week ${mishnaInfo.week}, Day ${mishnaInfo.day} of 7</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">${mishnaInfo.type === 'mishna' ? '10 chapters/week · Days 1–5' : '8 chapters/week · Days 6–7'}</span></div>` +
-      (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a></span></div>` : '') +
+      (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a></span></div>` : '') +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Light and Fire of the Baal Shem Tov &amp; Jewish Spiritual Practices</div>
        <div class="detail-row"><span class="detail-label">Light and Fire:</span><span class="detail-value">${bshtReading}</span></div>
@@ -5830,9 +5835,9 @@ transition: transform 0.3s;
     document.getElementById('gevurah-cycle-name').innerHTML = 'Tanach (2 Chapters)<br>Talmud (Daf Yomi)';
     document.getElementById('gevurah-main').innerHTML =
       tanachInfo.text +
-      ` &nbsp;·&nbsp; <a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a><br>` +
+      ` &nbsp;·&nbsp; <a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a><br>` +
       (daf
-        ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>`
+        ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`
         : 'דַּף יוֹמִי');
     document.getElementById('gevurah-sub').innerHTML = '';
     document.getElementById('gevurah-tags').innerHTML =
@@ -5840,14 +5845,14 @@ transition: transform 0.3s;
     document.getElementById('gevurah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 52 weeks</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth ↗</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי</div>
        ${daf
          ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>
             <div class="detail-row"><span class="detail-label">Links:</span><span class="detail-value">
-              <a href="https://www.youtube.com/@mercazdafyomi/search?query=${encodeURIComponent(daf.name+' '+daf.daf)}" target="_blank" style="color:var(--gold)">MDY Shiur ↗</a>
-              ${dafPointByPointURL(daf.name,daf.daf) ? '&nbsp;·&nbsp; <a href="'+dafPointByPointURL(daf.name,daf.daf)+'" target="_blank" style="color:var(--gold)">Point by Point ↗</a>' : ''}
+              <a href="https://www.youtube.com/@mercazdafyomi/search?query=${encodeURIComponent(daf.name+' '+daf.daf)}" target="_blank" style="color:var(--gold)">MDY Shiur</a>
+              ${dafPointByPointURL(daf.name,daf.daf) ? '&nbsp;·&nbsp; <a href="'+dafPointByPointURL(daf.name,daf.daf)+'" target="_blank" style="color:var(--gold)">Point by Point</a>' : ''}
             </span></div>
             <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
          : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
@@ -5929,28 +5934,28 @@ transition: transform 0.3s;
     const arushBook   = RAV_ARUSH_BOOKS[cy13.day - 1];
     cards[4].querySelector('.sefirah-detail').innerHTML =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria ↗</a></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Derech Mitzvosecha</div>
-       <div style="font-size:0.88rem;margin-bottom:${dmTeaching ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha ↗</a></div>
+       <div style="font-size:0.88rem;margin-bottom:${dmTeaching ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha</a></div>
        ${dmTeaching ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-label">Today:</span><span class="detail-value"><strong>' + dmTeaching.name + '</strong>' + (dmTeaching.part ? ' · ' + dmTeaching.part : '') + '<br><span style=\"font-size:0.88em;opacity:0.72\">' + dmTeaching.english + '</span></span></div>' : ''}
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org ↗</a></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav</div>
-       <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com ↗</a></div>
+       <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${cy13.day}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;">
-         <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b ↗</a> &nbsp;·&nbsp;
-         <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15 ↗</a>
+         <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b</a> &nbsp;·&nbsp;
+         <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15</a>
        </div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tale ${cy13.day} of Rebbe Nachman</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><strong>${nachmanTale}</strong></div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot on Sefaria ↗</a></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot on Sefaria</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Orot HaTorah — Chapter ${cy13.day}</div>
-       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Orot_HaTorah.${cy13.day}" target="_blank" style="color:var(--gold)">Orot HaTorah on Sefaria ↗</a></div>
+       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Orot_HaTorah.${cy13.day}" target="_blank" style="color:var(--gold)">Orot HaTorah on Sefaria</a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Avraham Yitzhak HaKohen Kook</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shalom Arush — Book ${cy13.day}</div>
@@ -5962,7 +5967,7 @@ transition: transform 0.3s;
        ${bachyaRow}
        ${sourcesRow}
        <div class="detail-row"><span class="detail-label">${cycleTheme.split(':')[0]}:</span><span class="detail-value">${cycleTheme.split(':')[1]}</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value">${cy13.cycle <= 13 ? '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> — Prophet Micha\'s vision of Divine mercy' : cy13.cycle <= 26 ? '<a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a> — Moshe\'s 13 Attributes of Divine mercy' : '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20 ↗</a> · <a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7 ↗</a>'}</span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value">${cy13.cycle <= 13 ? '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20</a> — Prophet Micha\'s vision of Divine mercy' : cy13.cycle <= 26 ? '<a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7</a> — Moshe\'s 13 Attributes of Divine mercy' : '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20</a> · <a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7</a>'}</span></div>
        <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>`;
 
     // Ma'ayan Ganim — 368-day cycle (Rav Arush)
@@ -6023,7 +6028,7 @@ transition: transform 0.3s;
     // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
     document.getElementById('netzach-breslov-main').innerHTML =
       `<a id="chok-breslov-link" href="${BRESLOV_PODCAST_URL}" target="_blank" style="color:var(--gold)">` +
-      `Chok Breslov ↗</a>`;
+      `Chok Breslov</a>`;
     fetchBresloveEpisodeUrl(hDay, hMonth).then(url => {
       const el = document.getElementById('chok-breslov-link');
       if (el) el.href = url;
@@ -6044,22 +6049,22 @@ transition: transform 0.3s;
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Talmud (Chazarah)</div>` +
       (daf
         ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>` +
-          `<div class="detail-row"><span class="detail-label">Playlist:</span><span class="detail-value"><a href="https://youtube.com/playlist?list=PLZ25YnO3sEpExDguTOmn6hVXQOAweMH_c&si=K9P4qwh5yjOJgEdL" target="_blank" style="color:var(--gold)">Chazarah Playlist ↗</a></span></div>`
+          `<div class="detail-row"><span class="detail-label">Playlist:</span><span class="detail-value"><a href="https://youtube.com/playlist?list=PLZ25YnO3sEpExDguTOmn6hVXQOAweMH_c&si=K9P4qwh5yjOJgEdL" target="_blank" style="color:var(--gold)">Chazarah Playlist</a></span></div>`
         : '');
 
     if (!hal.chofetz) {
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
-        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a><br>` +
-        (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>` : 'דַּף יוֹמִי');
+        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a><br>` +
+        (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>` : 'דַּף יוֹמִי');
       cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
-        `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a><br>` +
-        `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria ↗</a><br>` +
-        `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay} ↗</a>` +
+        `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim</a><br>` +
+        `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
+        `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodCcHtml +
@@ -6073,13 +6078,13 @@ transition: transform 0.3s;
       const hodCcHtml =
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
-        `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim ↗</a><br>` +
-        `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria ↗</a><br>` +
-        `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay} ↗</a>` +
+        `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim</a><br>` +
+        `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
+        `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong><br>` +
-        (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria ↗</a>` : 'דַּף יוֹמִי');
+        (daf ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>` : 'דַּף יוֹמִי');
       cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodCcHtml +
@@ -6152,7 +6157,7 @@ transition: transform 0.3s;
       { book: 'Book 7 · Gathering of Songs',    emoji: '🪜',
         fields: [
           { label: 'Gathering of Songs', value: wk.b7_theme 
-            ? `<a href="${wk.b7_url}" target="_blank" style="color:var(--gold)">${wk.b7_theme} ↗</a>`
+            ? `<a href="${wk.b7_url}" target="_blank" style="color:var(--gold)">${wk.b7_theme}</a>`
             : '(See blog for this week\'s gathering)' }
         ] },
     ];
@@ -6215,7 +6220,7 @@ transition: transform 0.3s;
         }
         if (data.series === 'TM') {
           mapping._lsUrl = 'https://www.chabad.org/torah-texts/2988329/Toras-Menachem-Hisvaaduyos';
-          mapping._lsLinkLabel = 'Toras Menachem on Chabad.org ↗';
+          mapping._lsLinkLabel = 'Toras Menachem on Chabad.org';
         } else {
           // no URL — Sichos in English shown as standalone link in detail footer
         }
@@ -6239,11 +6244,11 @@ transition: transform 0.3s;
         if (parashaNum === 22) {
           mapping._noamNote = 'Vayakhel — the Parasha of Reb Elimelech\'s passing (21 Adar)';
         } else if (parashaNum === 51) {
-          mapping._noamLinkLabel = 'Tzetel Katan on Sefaria ↗';
+          mapping._noamLinkLabel = 'Tzetel Katan on Sefaria';
         } else if (parashaNum === 52) {
-          mapping._noamLinkLabel = 'Hanhagot HaAdam on Sefaria ↗';
+          mapping._noamLinkLabel = 'Hanhagot HaAdam on Sefaria';
         } else if (parashaNum === 54) {
-          mapping._noamLinkLabel = 'A Prayer before Praying on Sefaria ↗';
+          mapping._noamLinkLabel = 'A Prayer before Praying on Sefaria';
         }
       }
       else if (textName === 'Chidah (Zohar / Arizal)') {
@@ -6296,15 +6301,15 @@ transition: transform 0.3s;
       if (malchutUrl) {
         if (parashaMapping._zoharUrl) {
           // Zohar link and author go inline with its title, keeping order above Etz Chayim
-          mainText += ` &nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria ↗</a>`;
+          mainText += ` &nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
           mainText += `<br><span style="font-size:0.85em;color:var(--ink-dim)">R. Shimon bar Yochai</span>`;
         } else {
-          const linkLabel = parashaMapping._noamLinkLabel || parashaMapping._lsLinkLabel || 'Read on Sefaria ↗';
+          const linkLabel = parashaMapping._noamLinkLabel || parashaMapping._lsLinkLabel || 'Read on Sefaria';
           subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${linkLabel}</a>`;
         }
       }
       if (parashaMapping._kehotUrl) {
-        subText += `&nbsp;·&nbsp; <a href="${parashaMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
+        subText += `&nbsp;·&nbsp; <a href="${parashaMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot</a>`;
       }
       if (parashaMapping._noamNote) {
         subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping._noamNote}</span>`;
@@ -6313,7 +6318,7 @@ transition: transform 0.3s;
       if (parashaMapping._etzChayimLabel) {
         mainText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>` +
           `<strong>Etz Chayim</strong> — ${parashaMapping._etzChayimLabel}` +
-          ` &nbsp;·&nbsp; <a href="${parashaMapping._etzChayimUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria ↗</a>`;
+          ` &nbsp;·&nbsp; <a href="${parashaMapping._etzChayimUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
         subText += (subText ? `<br>` : ``) + `Arizal (R. Yitzhak Luria)`;
       }
       // Secondary text (e.g. Stories of the Besht on Shabbat)
@@ -6330,10 +6335,10 @@ transition: transform 0.3s;
         let secSub = combinedAuthor;
         const secUrl = malchutSeferiaUrl(malTxt.secondaryName, secMapping);
         if (secUrl) {
-          secSub += `&nbsp;·&nbsp; <a href="${secUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria ↗</a>`;
+          secSub += `&nbsp;·&nbsp; <a href="${secUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
         }
         if (secMapping._kehotUrl) {
-          secSub += `&nbsp;·&nbsp; <a href="${secMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot ↗</a>`;
+          secSub += `&nbsp;·&nbsp; <a href="${secMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot</a>`;
         }
         subText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>` +
           `<span style="color:var(--ink);font-weight:600">${secMain}</span>` +
@@ -6349,7 +6354,7 @@ transition: transform 0.3s;
     document.getElementById('malchut-book-face').innerHTML =
       `<span style="font-size:1.1em">${todayBook.emoji}</span> <strong>${bookParts[0]}</strong>` +
       (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '') +
-      (todayBook.url ? `<br><a href="${todayBook.url}" target="_blank" style="color:var(--gold);font-size:0.85em">Read ↗</a>` : '');
+      (todayBook.url ? `<br><a href="${todayBook.url}" target="_blank" style="color:var(--gold);font-size:0.85em">Read</a>` : '');
 
     // Panel 3: Sichos in English + Selections from Likkutei Sichos by book
     (() => {
@@ -6363,9 +6368,9 @@ transition: transform 0.3s;
       const pNum = PARASHA_TO_NUMBER[actualParasha]
         || PARASHA_TO_NUMBER[(actualParasha || '').split('-')[0].trim()];
       const lsBook = pNum && LS_BOOKS.find(b => pNum <= b.max);
-      let html = `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold);font-size:0.88em">Sichos in English ↗</a>`;
+      let html = `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold);font-size:0.88em">Sichos in English</a>`;
       if (lsBook) {
-        html += `<br><a href="${lsBook.url}" target="_blank" style="color:var(--gold);font-size:0.88em">Likkutei Sichos — ${lsBook.book} ↗</a>`;
+        html += `<br><a href="${lsBook.url}" target="_blank" style="color:var(--gold);font-size:0.88em">Likkutei Sichos — ${lsBook.book}</a>`;
       }
       document.getElementById('malchut-ksa-face').innerHTML = html;
     })();
@@ -6378,9 +6383,9 @@ transition: transform 0.3s;
       if (ksaR) {
         const ksaUrl = ksaYomiSeferiaUrl(ksaR.siman, ksaR.seif);
         const ksaLbl = ksaYomiLabel(ksaR.siman, ksaR.seif);
-        ksaLink = `<a href="${ksaUrl}" target="_blank" style="color:var(--gold);font-size:0.88em">${ksaLbl} ↗</a>`;
+        ksaLink = `<a href="${ksaUrl}" target="_blank" style="color:var(--gold);font-size:0.88em">${ksaLbl}</a>`;
       } else {
-        ksaLink = `<a href="https://kitzuryomi.org/calendar/" target="_blank" style="color:var(--gold);font-size:0.88em">KSA Calendar ↗</a>`;
+        ksaLink = `<a href="https://kitzuryomi.org/calendar/" target="_blank" style="color:var(--gold);font-size:0.88em">KSA Calendar</a>`;
       }
       el.innerHTML = ksaLink;
     })();
@@ -6415,7 +6420,7 @@ transition: transform 0.3s;
           `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
           `<span class="mal-text-name">${todayTextDisplay}</span>` +
           `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>` +
-          (todayBook.url ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold);font-size:0.82em;margin-left:6px">Read ↗</a>` : '') +
+          (todayBook.url ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold);font-size:0.82em;margin-left:6px">Read</a>` : '') +
         `</div>` +
         `<div class="mal-fields">${todayFieldLines}</div>` +
       `</div>` +
@@ -6445,12 +6450,12 @@ transition: transform 0.3s;
         // Sefaria link for this text
         const rowUrl = malchutSeferiaUrl(textName, mapping);
         if (rowUrl) {
-          const rowLinkLabel = mapping._noamLinkLabel || mapping._lsLinkLabel || 'Sefaria ↗';
+          const rowLinkLabel = mapping._noamLinkLabel || mapping._lsLinkLabel || 'Sefaria';
           themeHTML += `<div style="font-size:9px;margin-top:2px;"><a href="${rowUrl}" target="_blank" style="color:var(--gold)">${rowLinkLabel}</a></div>`;
         }
         // Etz Chayim link (Friday)
         if (mapping._etzChayimLabel && mapping._etzChayimUrl) {
-          themeHTML += `<div style="font-size:9px;margin-top:2px;">Etz Chayim — ${mapping._etzChayimLabel} &nbsp;·&nbsp; <a href="${mapping._etzChayimUrl}" target="_blank" style="color:var(--gold)">Sefaria ↗</a></div>`;
+          themeHTML += `<div style="font-size:9px;margin-top:2px;">Etz Chayim — ${mapping._etzChayimLabel} &nbsp;·&nbsp; <a href="${mapping._etzChayimUrl}" target="_blank" style="color:var(--gold)">Sefaria</a></div>`;
         }
         // Secondary text (e.g. Stories of the Besht on Shabbat)
         const malchutEntry = MALCHUT_TEXTS[i];
@@ -6463,7 +6468,7 @@ transition: transform 0.3s;
           if (secMapping.portion) secDisplay += ` — ${secMapping.portion}`;
           const secUrl = malchutSeferiaUrl(malchutEntry.secondaryName, secMapping);
           themeHTML += `<div style="font-size:12px;color:var(--ink);font-style:normal;margin-top:3px;font-weight:600;">+ ${secDisplay}` +
-            (secUrl ? ` &nbsp;<a href="${secUrl}" target="_blank" style="color:var(--gold);font-weight:400;font-size:9px;">Sefaria ↗</a>` : '') +
+            (secUrl ? ` &nbsp;<a href="${secUrl}" target="_blank" style="color:var(--gold);font-weight:400;font-size:9px;">Sefaria</a>` : '') +
             `</div>`;
         }
       }
@@ -6479,7 +6484,7 @@ transition: transform 0.3s;
           `<span class="mal-night">${DAYS_LABELS[i]}</span>` +
           `<span class="mal-text-name">${displayName}${themeHTML}</span>` +
           `<span class="mal-book-label">${db.emoji} ${db.book}</span>` +
-          (db.url ? `<a href="${db.url}" target="_blank" style="color:var(--gold);font-size:0.82em;margin-left:6px">Read ↗</a>` : '') +
+          (db.url ? `<a href="${db.url}" target="_blank" style="color:var(--gold);font-size:0.82em;margin-left:6px">Read</a>` : '') +
         `</div>` +
         `<div class="mal-fields">${fieldLines}</div>` +
         `</div>`;
