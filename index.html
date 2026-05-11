@@ -5457,6 +5457,30 @@ transition: transform 0.3s;
     // Zohar + Sefer Yetzirah annual cycle — in honor of R. Shimon bar Yochai
     // Vol 1: 251 folios, Vol 2: 269 folios, Vol 3: 300 folios = 820 total
     // Then 6 chapters of Sefer Yetzirah (1/day days 360-363, 2 on day 364)
+
+    // Chabad Daily Zohar (Chok L'Yisrael English) — AIDs by parasha number + day (1=Sun…6=Fri)
+    const CHABAD_ZOHAR_AIDS = {
+       1: { slug:'Breishit',    days:{1:1302666} },
+       4: { slug:'Vayeira',     days:{3:1295425} },
+      17: { slug:'Yitro',       days:{2:1404532} },
+      26: { slug:'Shemini',     days:{1:1471356} },
+      30: { slug:'Kedoshim',    days:{6:1505217} },
+      34: { slug:'Bamidbar',    days:{1:1527712,2:1527718,3:1527723,4:1529084,5:1529085,6:1529086} },
+      45: { slug:'Vaetchanan',  days:{5:1580410} },
+    };
+    const CHABAD_ZOHAR_FALLBACK = 'https://www.chabad.org/kabbalah/article_cdo/aid/1270227/jewish/Daily-Zohar-Hok-LYisrael.htm';
+    function getChabadZoharUrl(parashaNum, dow) {
+      if (dow === 6) return null; // no Shabbat entry
+      const day = dow + 1; // 0=Sun→Day1 … 5=Fri→Day6
+      const entry = parashaNum && CHABAD_ZOHAR_AIDS[parashaNum];
+      if (!entry || !entry.days[day]) return CHABAD_ZOHAR_FALLBACK;
+      return `https://www.chabad.org/kabbalah/article_cdo/aid/${entry.days[day]}/jewish/Daily-Zohar-${entry.slug}-Day-${day}.htm`;
+    }
+    const _zoharParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
+    const _zoharParashaNum = _zoharParasha
+      ? (PARASHA_TO_NUMBER[_zoharParasha] || PARASHA_TO_NUMBER[(_zoharParasha).split('-').pop().trim()])
+      : null;
+    const _chabadZoharUrl = getChabadZoharUrl(_zoharParashaNum, date.getDay());
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
     // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
     (() => {
@@ -5495,8 +5519,10 @@ transition: transform 0.3s;
         } else {
           label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
         }
-        el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>`+
-          ` &nbsp;·&nbsp; <a href="https://www.chabad.org/kabbalah/article_cdo/aid/1270227/jewish/Daily-Zohar-Hok-LYisrael.htm" target="_blank" style="color:var(--gold)">Chok L'Yisrael (English)</a>`;
+        const _chabadZoharLink = _chabadZoharUrl
+          ? ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Chok L'Yisrael (English)</a>`
+          : '';
+        el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>` + _chabadZoharLink;
         metaEl.innerHTML = `R. Shimon bar Yochai · ${todayFolios} folios today`;
       } else {
         // Sefer Yetzirah (cycleOffset 359-363 = days 360-364)
