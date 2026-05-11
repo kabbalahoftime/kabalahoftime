@@ -1593,7 +1593,7 @@ transition: transform 0.3s;
           <div id="malchut-book-face">Loading…</div>
         </div>
         <div class="malchut-section">
-          <div class="keter-section-label">✦ Sichos in English</div>
+          <div class="keter-section-label">✦ Daily Sicha</div>
           <div id="malchut-ksa-face">Loading…</div>
         </div>
       </div>
@@ -5518,7 +5518,7 @@ transition: transform 0.3s;
     document.getElementById('keter-hy-meta').innerHTML = '';
     document.getElementById('keter-hy-links').innerHTML =
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>` +
-      ` &nbsp;·&nbsp; <a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha</a>`;
+      ` &nbsp;·&nbsp; <a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a>`;
 
     // 6. Likutei Moharan — Part I = lessons 1–286, Part II (Tinyana) = 287–411
     // Lessons 194–204 all fall on the 13th of Nissan (day 194); from day 195 onward, offset by 10.
@@ -6304,7 +6304,7 @@ transition: transform 0.3s;
       subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${syChapter.theme}</span>`;
       subText += SEFARIA_LINK(`https://www.sefaria.org/Sefer_Yetzirah.${syChapter.ch}`);
     } else {
-      const displayName = malTxt.shortName || malTxt.name;
+      const displayName = malTxt.name;
       if (parashaMapping._skipPrefix && parashaMapping.portion) {
         mainText = `<strong>${parashaMapping.portion}</strong>`;
       } else {
@@ -6391,7 +6391,7 @@ transition: transform 0.3s;
       const pNum = PARASHA_TO_NUMBER[actualParasha]
         || PARASHA_TO_NUMBER[(actualParasha || '').split('-')[0].trim()];
       const lsBook = pNum && LS_BOOKS.find(b => pNum <= b.max);
-      let html = `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold);font-size:0.88em">Sichos in English</a>`;
+      let html = `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold);font-size:0.88em">Daily Sicha</a>`;
       if (lsBook) {
         html += `<br><a href="${lsBook.url}" target="_blank" style="color:var(--gold);font-size:0.88em">Likkutei Sichos — ${lsBook.book}</a>`;
       }
