@@ -6304,7 +6304,7 @@ transition: transform 0.3s;
       subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${syChapter.theme}</span>`;
       subText += SEFARIA_LINK(`https://www.sefaria.org/Sefer_Yetzirah.${syChapter.ch}`);
     } else {
-      const displayName = malTxt.shortName || malTxt.name;
+      const displayName = malTxt.name;
       if (parashaMapping._skipPrefix && parashaMapping.portion) {
         mainText = `<strong>${parashaMapping.portion}</strong>`;
       } else {
