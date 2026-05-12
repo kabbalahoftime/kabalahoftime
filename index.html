@@ -1251,12 +1251,11 @@ transition: transform 0.3s;
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
-    <div style="margin-top:8px;">
+    <div class="sefirah-detail">
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;">✦ Zohar — Daily Reading</div>
       <div id="yesod-zohar-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
-      <div id="yesod-zohar-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
-    </div>
-    <div class="sefirah-detail">
+      <div id="yesod-zohar-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael</div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
@@ -6036,7 +6035,7 @@ transition: transform 0.3s;
     cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
       ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
       : `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
-    cards[4].querySelector('.sefirah-sub-text').innerHTML = `<a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">Chitas for Kids</a>`;
+    cards[4].querySelector('.sefirah-sub-text').textContent = '';
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
     _tifTags.innerHTML = cycleThemeAttr
@@ -6130,8 +6129,7 @@ transition: transform 0.3s;
     cards[5].querySelector('.sefirah-sub-text').innerHTML =
       `<span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${cycleCmd.commandment}` +
       `<br><span style="font-size:0.9em;color:var(--ink-dim)">Commandment:</span> ${dayCmd.commandment}` +
-      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}` +
-      `<br><a id="chok-breslov-face-link" href="${BRESLOV_PODCAST_URL}" target="_blank" style="color:var(--gold)">Chok Breslov</a>`;
+      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}`;
     cards[5].querySelector('.sefirah-tags').innerHTML =
       `<span class="tag highlight">${cycleCmd.theme}</span><span class="tag">${cy41.soulLevel}</span><span class="tag">Day ${cy41.day} of 41</span>`;
     cards[5].querySelector('.sefirah-detail').innerHTML =
@@ -6158,8 +6156,6 @@ transition: transform 0.3s;
     fetchBresloveEpisodeUrl(hDay, hMonth).then(url => {
       const el = document.getElementById('chok-breslov-link');
       if (el) el.href = url;
-      const faceEl = document.getElementById('chok-breslov-face-link');
-      if (faceEl) faceEl.href = url;
     });
     document.getElementById('netzach-breslov-meta').innerHTML =
       `Daily Breslov teachings`;
