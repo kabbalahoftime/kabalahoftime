@@ -5889,26 +5889,6 @@ transition: transform 0.3s;
     }
 
     // Rav Arush series rotation — 91 classes × 4 days = 364-day cycle
-    const RAV_ARUSH_SERIES = [
-      { url: 'https://youtu.be/S5mipslo48c',                                              label: 'KoT Day 1' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL5POVo17w3Fv4JeEjoHxUm',    label: 'Series 2' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpKt3i093sxKbab3cECMkQMq',    label: 'Series 3' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL5POVo17w3Fv4JeEjoHxUm',    label: 'Series 4' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL2ECVtBMb-xRyDKEjR9-nD',    label: 'Series 5' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJbwUjjmtHxXQcyPfwjcL7O',    label: 'Series 6' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpKt3i093sxKbab3cECMkQMq',    label: 'Series 7' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpK7dhzdcN4ub0-FVTu8VNk7',    label: 'Series 8' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpK7dhzdcN4ub0-FVTu8VNk7',    label: 'Series 9' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJoL0fsqMMI2P3S-S4L1T9i',    label: 'Series 10' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJ-XvJ__pFITtZxRoMM2nFR',    label: 'Series 11' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJDkxetTs0Byx8_X7rqdV9_',    label: 'Series 12' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpIPNbiuoL2v3B72eMa56jha',    label: 'Series 13' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z',    label: 'Series 14' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL2ECVtBMb-xRyDKEjR9-nD',    label: 'Series 15' },
-    ];
-    const ravArushClassNum = Math.floor((d - 1) / 4) % 91 + 1;
-    const ravArushUrlIdx   = Math.floor((ravArushClassNum - 1) * RAV_ARUSH_SERIES.length / 91);
-    const ravArushEntry    = RAV_ARUSH_SERIES[ravArushUrlIdx];
     document.getElementById('binah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Combination:</span><span class="detail-value">${combo}</span></div>
        <div class="detail-row"><span class="detail-label">Week:</span><span class="detail-value">Week ${omerWeek} of 7 — ${weekSef}</span></div>
@@ -5922,9 +5902,7 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Arush Series — Class ${ravArushClassNum} of 91</div>
-       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="${ravArushEntry.url}" target="_blank" style="color:var(--gold)">Watch on YouTube</a></div>
-       <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">4 days per class · 364-day cycle · Rav Shalom Arush</div>
+       <div class="detail-row"><span class="detail-label">Breslev Israel CDs:</span><span class="detail-value"><a href="https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z" target="_blank" style="color:var(--gold)">Listen on YouTube</a></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot</div>
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>`;
