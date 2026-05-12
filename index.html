@@ -1251,12 +1251,11 @@ transition: transform 0.3s;
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
-    <div style="margin-top:8px;">
+    <div class="sefirah-detail">
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;">✦ Zohar — Daily Reading</div>
       <div id="yesod-zohar-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
-      <div id="yesod-zohar-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
-    </div>
-    <div class="sefirah-detail">
+      <div id="yesod-zohar-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael</div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
@@ -5890,26 +5889,6 @@ transition: transform 0.3s;
     }
 
     // Rav Arush series rotation — 91 classes × 4 days = 364-day cycle
-    const RAV_ARUSH_SERIES = [
-      { url: 'https://youtu.be/S5mipslo48c',                                              label: 'KoT Day 1' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL5POVo17w3Fv4JeEjoHxUm',    label: 'Series 2' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpKt3i093sxKbab3cECMkQMq',    label: 'Series 3' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL5POVo17w3Fv4JeEjoHxUm',    label: 'Series 4' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL2ECVtBMb-xRyDKEjR9-nD',    label: 'Series 5' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJbwUjjmtHxXQcyPfwjcL7O',    label: 'Series 6' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpKt3i093sxKbab3cECMkQMq',    label: 'Series 7' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpK7dhzdcN4ub0-FVTu8VNk7',    label: 'Series 8' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpK7dhzdcN4ub0-FVTu8VNk7',    label: 'Series 9' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJoL0fsqMMI2P3S-S4L1T9i',    label: 'Series 10' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJ-XvJ__pFITtZxRoMM2nFR',    label: 'Series 11' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJDkxetTs0Byx8_X7rqdV9_',    label: 'Series 12' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpIPNbiuoL2v3B72eMa56jha',    label: 'Series 13' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z',    label: 'Series 14' },
-      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL2ECVtBMb-xRyDKEjR9-nD',    label: 'Series 15' },
-    ];
-    const ravArushClassNum = Math.floor((d - 1) / 4) % 91 + 1;
-    const ravArushUrlIdx   = Math.floor((ravArushClassNum - 1) * RAV_ARUSH_SERIES.length / 91);
-    const ravArushEntry    = RAV_ARUSH_SERIES[ravArushUrlIdx];
     document.getElementById('binah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Combination:</span><span class="detail-value">${combo}</span></div>
        <div class="detail-row"><span class="detail-label">Week:</span><span class="detail-value">Week ${omerWeek} of 7 — ${weekSef}</span></div>
@@ -5923,9 +5902,7 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Arush Series — Class ${ravArushClassNum} of 91</div>
-       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="${ravArushEntry.url}" target="_blank" style="color:var(--gold)">Watch on YouTube</a></div>
-       <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">4 days per class · 364-day cycle · Rav Shalom Arush</div>
+       <div class="detail-row"><span class="detail-label">Breslev Israel CDs:</span><span class="detail-value"><a href="https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z&si=wwSErujrXCASMAXz" target="_blank" style="color:var(--gold)">Listen on YouTube</a></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot</div>
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>`;
@@ -6036,7 +6013,7 @@ transition: transform 0.3s;
     cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
       ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
       : `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
-    cards[4].querySelector('.sefirah-sub-text').innerHTML = `<a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">Chitas for Kids</a>`;
+    cards[4].querySelector('.sefirah-sub-text').textContent = '';
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
     _tifTags.innerHTML = cycleThemeAttr
@@ -6130,8 +6107,7 @@ transition: transform 0.3s;
     cards[5].querySelector('.sefirah-sub-text').innerHTML =
       `<span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${cycleCmd.commandment}` +
       `<br><span style="font-size:0.9em;color:var(--ink-dim)">Commandment:</span> ${dayCmd.commandment}` +
-      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}` +
-      `<br><a id="chok-breslov-face-link" href="${BRESLOV_PODCAST_URL}" target="_blank" style="color:var(--gold)">Chok Breslov</a>`;
+      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}`;
     cards[5].querySelector('.sefirah-tags').innerHTML =
       `<span class="tag highlight">${cycleCmd.theme}</span><span class="tag">${cy41.soulLevel}</span><span class="tag">Day ${cy41.day} of 41</span>`;
     cards[5].querySelector('.sefirah-detail').innerHTML =
@@ -6158,8 +6134,6 @@ transition: transform 0.3s;
     fetchBresloveEpisodeUrl(hDay, hMonth).then(url => {
       const el = document.getElementById('chok-breslov-link');
       if (el) el.href = url;
-      const faceEl = document.getElementById('chok-breslov-face-link');
-      if (faceEl) faceEl.href = url;
     });
     document.getElementById('netzach-breslov-meta').innerHTML =
       `Daily Breslov teachings`;
