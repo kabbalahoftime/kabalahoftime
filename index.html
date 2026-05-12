@@ -1251,10 +1251,12 @@ transition: transform 0.3s;
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
-    <div class="sefirah-detail">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar — Daily Reading</div>
+    <div style="margin-top:8px;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;">✦ Zohar — Daily Reading</div>
       <div id="yesod-zohar-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-zohar-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+    </div>
+    <div class="sefirah-detail">
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael</div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
@@ -5455,6 +5457,77 @@ transition: transform 0.3s;
     // Zohar + Sefer Yetzirah annual cycle — in honor of R. Shimon bar Yochai
     // Vol 1: 251 folios, Vol 2: 269 folios, Vol 3: 300 folios = 820 total
     // Then 6 chapters of Sefer Yetzirah (1/day days 360-363, 2 on day 364)
+
+    // Chabad Daily Zohar (Chok L'Yisrael English) — AIDs by parasha number + day (1=Sun…6=Fri)
+    const CHABAD_ZOHAR_AIDS = {
+       1: { slug:'Breishit',       days:{1:1302666} },
+       2: { slug:'Noah',           days:{1:1285209} },
+       3: { slug:'Lech-Lecha',     days:{1:1289627} },
+       4: { slug:'Vayeira',        days:{3:1295425} },
+       5: { slug:'Chayei-Sara',    days:{1:1306789} },
+       6: { slug:'Toldot',         days:{1:1318180} },
+       7: { slug:'Vayeitze',       days:{1:1334771} },
+       8: { slug:'Vayishlach',     days:{1:1341162,5:1342723,6:1342725} },
+       9: { slug:'Vayeshev',       days:{1:1348533} },
+      10: { slug:'Miketz',         days:{1:1355560,3:1355569,5:1356602} },
+      11: { slug:'Vayigash',       days:{1:1357973} },
+      12: { slug:'Vayechi',        days:{1:1375483,4:1375488} },
+      13: { slug:'Shemot',         days:{1:1384837,4:1384851} },
+      14: { slug:'Vaeira',         days:{1:1390999,3:1391001,5:1391003,6:1391004} },
+      15: { slug:'Bo',             days:{1:1395934} },
+      16: { slug:'Beshalach',      days:{1:1400317} },
+      17: { slug:'Yitro',          days:{1:1404528,2:1404532} },
+      18: { slug:'Mishpatim',      days:{1:1413555} },
+      19: { slug:'Teruma',         days:{1:1413564} },
+      20: { slug:'Tetzave',        days:{1:1427370} },
+      21: { slug:'Ki-Tisa',        days:{1:1436588} },
+      22: { slug:'Vayakhel',       days:{1:1442904} },
+      23: { slug:'Pekudei',        days:{1:1444312} },
+      24: { slug:'Vayikra',        days:{1:1453190} },
+      25: { slug:'Tzav',           days:{1:1460459,2:1460470,4:1460474,5:1463379} },
+      26: { slug:'Shemini',        days:{1:1471356} },
+      27: { slug:'Tazria',         days:{1:1473689} },
+      28: { slug:'Metzora',        days:{1:1482983} },
+      29: { slug:'Acharei',        days:{1:1490219} },
+      30: { slug:'Kedoshim',       days:{1:1503387,6:1505217} },
+      31: { slug:'Emor',           days:{1:1510325} },
+      32: { slug:'Behar',          days:{1:1513491,4:1513507,5:1516558} },
+      33: { slug:'Bechukotai',     days:{1:1516568,3:1516570} },
+      34: { slug:'Bamidbar',       days:{1:1527712,2:1527718,3:1527723,4:1529084,5:1529085,6:1529086} },
+      35: { slug:'Naso',           days:{1:1531342,2:1531343,3:1531344,4:1531345,5:1531346,6:1531347} },
+      36: { slug:'Behaalotecha',   days:{1:1535399,2:1535400,3:1535401,4:1535402,5:1535403,6:1535404} },
+      37: { slug:'Shelach',        days:{1:1543330,2:1543329,3:1543331,4:1543332,5:1543333,6:1543334} },
+      38: { slug:'Korach',         days:{1:1548988,2:1548990,3:1548991,4:1548993,5:1548994,6:1548995} },
+      39: { slug:'Chukat',         days:{1:1555968,2:1555969,3:1555970,4:1555971,5:1555972,6:1555973} },
+      40: { slug:'Balak',          days:{1:1559117,2:1559118,3:1559119,4:1559120,5:1559121,6:1559122} },
+      41: { slug:'Pinchas',        days:{1:1563763,2:1563764,3:1563765,4:1563766,5:1563767,6:1563768} },
+      42: { slug:'Matot',          days:{1:1569490,2:1571745,3:1571755,4:1571756,5:1571757,6:1571758} },
+      43: { slug:'Masei',          days:{1:1573976,2:1573977,3:1573978,4:1573979,5:1573980,6:1573981} },
+      44: { slug:'Devarim',        days:{1:1573990} },
+      45: { slug:'Vaetchanan',     days:{1:1580406,5:1580410} },
+      46: { slug:'Eikev',          days:{1:1585664} },
+      47: { slug:'Reeh',           days:{1:1585670} },
+      48: { slug:'Shoftim',        days:{1:1585679,3:1585681,5:1585677} },
+      49: { slug:'Ki-Teitzei',     days:{1:1585684} },
+      50: { slug:'Ki-Tavo',        days:{1:1585690} },
+      51: { slug:'Nitzavim',       days:{1:1585697} },
+      52: { slug:'Vayelech',       days:{1:1585703} },
+      53: { slug:'Haazinu',        days:{1:1585657} },
+      54: { slug:'VZot-HaBerachah',days:{1:1585651} },
+    };
+    const CHABAD_ZOHAR_FALLBACK = 'https://www.chabad.org/kabbalah/article_cdo/aid/1270227/jewish/Daily-Zohar-Hok-LYisrael.htm';
+    function getChabadZoharUrl(parashaNum, dow) {
+      if (dow === 6) return null; // no Shabbat entry
+      const day = dow + 1; // 0=Sun→Day1 … 5=Fri→Day6
+      const entry = parashaNum && CHABAD_ZOHAR_AIDS[parashaNum];
+      if (!entry || !entry.days[day]) return CHABAD_ZOHAR_FALLBACK;
+      return `https://www.chabad.org/kabbalah/article_cdo/aid/${entry.days[day]}/jewish/Daily-Zohar-${entry.slug}-Day-${day}.htm`;
+    }
+    const _zoharParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
+    const _zoharParashaNum = _zoharParasha
+      ? (PARASHA_TO_NUMBER[_zoharParasha] || PARASHA_TO_NUMBER[(_zoharParasha).split('-').pop().trim()])
+      : null;
+    const _chabadZoharUrl = getChabadZoharUrl(_zoharParashaNum, date.getDay());
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
     // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
     (() => {
@@ -5493,7 +5566,10 @@ transition: transform 0.3s;
         } else {
           label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
         }
-        el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>`;
+        const _chabadZoharLink = _chabadZoharUrl
+          ? ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Chok L'Yisrael (English)</a>`
+          : '';
+        el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>` + _chabadZoharLink;
         metaEl.innerHTML = `R. Shimon bar Yochai · ${todayFolios} folios today`;
       } else {
         // Sefer Yetzirah (cycleOffset 359-363 = days 360-364)
@@ -5751,6 +5827,9 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Three Weeks:</span><span class="detail-value">17 Tammuz → 9 Av = 22 days (internal Alef-Bet cycle)</span></div>
        <div class="detail-row"><span class="detail-label">Acrostic Structure:</span><span class="detail-value">Cycles 1-7: One Psalm each · Cycle 8: Eshet Chayil · Cycles 9-16: Psalm 119 (8 sections)</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav</div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Day ${chDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
@@ -5784,7 +5863,7 @@ transition: transform 0.3s;
     document.getElementById('binah-cycle-name').textContent = 'Sefirot — 7×7×7 Omer Cycle';
     document.getElementById('binah-main').innerHTML =
       `<strong>${combo}</strong>`;
-    document.getElementById('binah-sub').textContent =
+    document.getElementById('binah-sub').innerHTML =
       `${daySef} of ${weekSef} — Cycle ${omerCycle}, Week ${omerWeek}, Day ${omerDay}`;
     document.getElementById('binah-tags').innerHTML =
       `<span class="tag highlight">${weekSef}</span><span class="tag">${daySef}</span><span class="tag">${superSef}</span><span class="tag">Omer ${omerPos} / Cycle ${omerCycle}</span>`;
@@ -5810,6 +5889,27 @@ transition: transform 0.3s;
       ltUrl = 'https://www.sefaria.org/Likutei_Tefilot';
     }
 
+    // Rav Arush series rotation — 91 classes × 4 days = 364-day cycle
+    const RAV_ARUSH_SERIES = [
+      { url: 'https://youtu.be/S5mipslo48c',                                              label: 'KoT Day 1' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL5POVo17w3Fv4JeEjoHxUm',    label: 'Series 2' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpKt3i093sxKbab3cECMkQMq',    label: 'Series 3' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL5POVo17w3Fv4JeEjoHxUm',    label: 'Series 4' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL2ECVtBMb-xRyDKEjR9-nD',    label: 'Series 5' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJbwUjjmtHxXQcyPfwjcL7O',    label: 'Series 6' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpKt3i093sxKbab3cECMkQMq',    label: 'Series 7' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpK7dhzdcN4ub0-FVTu8VNk7',    label: 'Series 8' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpK7dhzdcN4ub0-FVTu8VNk7',    label: 'Series 9' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJoL0fsqMMI2P3S-S4L1T9i',    label: 'Series 10' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJ-XvJ__pFITtZxRoMM2nFR',    label: 'Series 11' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpJDkxetTs0Byx8_X7rqdV9_',    label: 'Series 12' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpIPNbiuoL2v3B72eMa56jha',    label: 'Series 13' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z',    label: 'Series 14' },
+      { url: 'https://youtube.com/playlist?list=PL5WSOW0FtVpL2ECVtBMb-xRyDKEjR9-nD',    label: 'Series 15' },
+    ];
+    const ravArushClassNum = Math.floor((d - 1) / 4) % 91 + 1;
+    const ravArushUrlIdx   = Math.floor((ravArushClassNum - 1) * RAV_ARUSH_SERIES.length / 91);
+    const ravArushEntry    = RAV_ARUSH_SERIES[ravArushUrlIdx];
     document.getElementById('binah-detail').innerHTML =
       `<div class="detail-row"><span class="detail-label">Combination:</span><span class="detail-value">${combo}</span></div>
        <div class="detail-row"><span class="detail-label">Week:</span><span class="detail-value">Week ${omerWeek} of 7 — ${weekSef}</span></div>
@@ -5822,6 +5922,10 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${ltSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Arush Series — Class ${ravArushClassNum} of 91</div>
+       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="${ravArushEntry.url}" target="_blank" style="color:var(--gold)">Watch on YouTube</a></div>
+       <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">4 days per class · 364-day cycle · Rav Shalom Arush</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot</div>
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>`;
@@ -5932,7 +6036,7 @@ transition: transform 0.3s;
     cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
       ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
       : `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
-    cards[4].querySelector('.sefirah-sub-text').textContent = '';
+    cards[4].querySelector('.sefirah-sub-text').innerHTML = `<a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">Chitas for Kids</a>`;
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
     _tifTags.innerHTML = cycleThemeAttr
@@ -5950,8 +6054,8 @@ transition: transform 0.3s;
     const pbyChain = pbyNext
       ? `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he} מביאה לידי ${pbyNext.he}</div>`
       : `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he}</div>`;
-    const nachmanTale = REBBE_NACHMAN_TALES[cy13.day - 1];
-    const arushBook   = RAV_ARUSH_BOOKS[cy13.day - 1];
+    const nachmanTale = REBBE_NACHMAN_TALES[(cy13.cycle - 1) % 13];
+    const arushBook   = RAV_ARUSH_BOOKS[(cy13.cycle - 1) % 13];
     cards[4].querySelector('.sefirah-detail').innerHTML =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
@@ -5960,8 +6064,6 @@ transition: transform 0.3s;
        ${dmTeaching ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-label">Today:</span><span class="detail-value"><strong>' + dmTeaching.name + '</strong>' + (dmTeaching.part ? ' · ' + dmTeaching.part : '') + '<br><span style=\"font-size:0.88em;opacity:0.72\">' + dmTeaching.english + '</span></span></div>' : ''}
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav</div>
-       <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${cy13.day}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
@@ -5970,7 +6072,7 @@ transition: transform 0.3s;
          <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15</a>
        </div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tale ${cy13.day} of Rebbe Nachman</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Nachman's Tale — Cycle ${cy13.cycle}</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><strong>${nachmanTale}</strong></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot on Sefaria</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
@@ -5981,7 +6083,7 @@ transition: transform 0.3s;
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Orot_HaTorah.${cy13.day}" target="_blank" style="color:var(--gold)">Orot HaTorah on Sefaria</a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Avraham Yitzhak HaKohen Kook</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shalom Arush — Book ${cy13.day}</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shalom Arush — Cycle ${cy13.cycle}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><strong>${arushBook}</strong></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Nassi:</span><span class="detail-value">${cy13.nassi}</span></div>
@@ -6028,7 +6130,8 @@ transition: transform 0.3s;
     cards[5].querySelector('.sefirah-sub-text').innerHTML =
       `<span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${cycleCmd.commandment}` +
       `<br><span style="font-size:0.9em;color:var(--ink-dim)">Commandment:</span> ${dayCmd.commandment}` +
-      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}`;
+      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}` +
+      `<br><a id="chok-breslov-face-link" href="${BRESLOV_PODCAST_URL}" target="_blank" style="color:var(--gold)">Chok Breslov</a>`;
     cards[5].querySelector('.sefirah-tags').innerHTML =
       `<span class="tag highlight">${cycleCmd.theme}</span><span class="tag">${cy41.soulLevel}</span><span class="tag">Day ${cy41.day} of 41</span>`;
     cards[5].querySelector('.sefirah-detail').innerHTML =
@@ -6055,6 +6158,8 @@ transition: transform 0.3s;
     fetchBresloveEpisodeUrl(hDay, hMonth).then(url => {
       const el = document.getElementById('chok-breslov-link');
       if (el) el.href = url;
+      const faceEl = document.getElementById('chok-breslov-face-link');
+      if (faceEl) faceEl.href = url;
     });
     document.getElementById('netzach-breslov-meta').innerHTML =
       `Daily Breslov teachings`;
