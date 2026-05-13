@@ -5954,6 +5954,44 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>`;
 
     // CHESED — Mishna / Tosefta
+    // Carlebach Stories — parasha-based rotation (like Binah card)
+    // 99 general stories + 9 Devarim-range stories = 108 total
+    // Parashot 42–46 (Matot, Massei, Devarim, Va'etchanan, Eikev) use the Devarim pool (2 per parasha, 9th story shown solo at Eikev)
+    // All other parashot map sequentially into the general pool (slot 0–48 → indices 0–97)
+    const CARLEBACH_GENERAL = (() => {
+      const arr = [];
+      const add = (base, count) => {
+        for (let i = 1; i <= count; i++) arr.push({ url: base + '&index=' + i, label: 'Story ' + (arr.length + 1) });
+      };
+      add('https://youtube.com/playlist?list=PLXjaen9x6NsvdXsqnIQMYGcsevw4PFSwd', 67);
+      add('https://youtube.com/playlist?list=PLnuftEmfAbZw7Rl1AKkYkb_w_Wga9pzDr', 32);
+      return arr;
+    })();
+    const CARLEBACH_DEVARIM = (() => {
+      const arr = [];
+      const add = (base, count) => {
+        for (let i = 1; i <= count; i++) arr.push({ url: base + '&index=' + i, label: 'Devarim Story ' + (arr.length + 1) });
+      };
+      add('https://youtube.com/playlist?list=PLBXH0idvgCx4y2FRSjjiEe9O0WCxnQtRU', 7);
+      add('https://youtube.com/playlist?list=PLBXH0idvgCx5jn6EUZ1dcDmny1s1LnxeA', 2);
+      return arr;
+    })();
+    let clbVideo1, clbVideo2;
+    if (_zoharParashaNum >= 42 && _zoharParashaNum <= 46) {
+      const _dIdx = (_zoharParashaNum - 42) * 2;
+      clbVideo1 = CARLEBACH_DEVARIM[_dIdx] || null;
+      clbVideo2 = CARLEBACH_DEVARIM[_dIdx + 1] || null;
+    } else if (_zoharParashaNum) {
+      // Sequential slot: parashot 1–41 → slots 0–40; parashot 47–54 → slots 41–48
+      const _clbSlot = _zoharParashaNum <= 41 ? (_zoharParashaNum - 1) : (_zoharParashaNum - 6);
+      clbVideo1 = CARLEBACH_GENERAL[_clbSlot * 2];
+      clbVideo2 = CARLEBACH_GENERAL[_clbSlot * 2 + 1];
+    } else {
+      const _clbFb = ((kotWeek - 1) * 2) % CARLEBACH_GENERAL.length;
+      clbVideo1 = CARLEBACH_GENERAL[_clbFb];
+      clbVideo2 = CARLEBACH_GENERAL[(_clbFb + 1) % CARLEBACH_GENERAL.length];
+    }
+
     const mishnaInfo = getMishnaInfo(d);
     document.getElementById('chesed-cycle-name').textContent =
       mishnaInfo.type === 'mishna' ? 'Mishna — Oral Torah' : 'Tosefta — Expanded Oral Torah';
@@ -5975,7 +6013,10 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Light and Fire of the Baal Shem Tov &amp; Jewish Spiritual Practices</div>
        <div class="detail-row"><span class="detail-label">Light and Fire:</span><span class="detail-value">${bshtReading}</span></div>
        <div class="detail-row"><span class="detail-label">Spiritual Practices:</span><span class="detail-value">${jspReading}</span></div>
-       <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">R. Yitzhak Buxbaum</div>`;
+       <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">R. Yitzhak Buxbaum</div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Reb Shlomo Carlebach Stories</div>
+       <div class="detail-row"><span class="detail-label">Stories:</span><span class="detail-value">${clbVideo1 ? `<a href="${clbVideo1.url}" target="_blank" style="color:var(--gold)">${clbVideo1.label}</a>` : ''}${clbVideo1 && clbVideo2 ? ' &nbsp;·&nbsp; ' : ''}${clbVideo2 ? `<a href="${clbVideo2.url}" target="_blank" style="color:var(--gold)">${clbVideo2.label}</a>` : ''}</span></div>`;
 
     // Noam Elimelech — Reb Elimelech of Lizhensk — 52 weekly entries (one per KoT week)
     function getNoamElimelechEntry(week) {
