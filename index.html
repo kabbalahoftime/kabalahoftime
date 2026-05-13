@@ -5536,10 +5536,11 @@ transition: transform 0.3s;
       return `https://www.chabad.org/kabbalah/article_cdo/aid/${entry.days[day]}/jewish/Daily-Zohar-${entry.slug}-Day-${day}.htm`;
     }
     const _zoharParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
-    const _zoharParashaNum = _zoharParasha
-      ? (PARASHA_TO_NUMBER[_zoharParasha] || PARASHA_TO_NUMBER[(_zoharParasha).split('-').pop().trim()])
-      : null;
-    const _chabadZoharUrl = getChabadZoharUrl(_zoharParashaNum, date.getDay());
+    const _zoharParts = _zoharParasha ? _zoharParasha.split('-').map(p => p.trim()) : [];
+    const _zoharParashaNum  = _zoharParts.length ? (PARASHA_TO_NUMBER[_zoharParts[0]] || PARASHA_TO_NUMBER[_zoharParasha]) : null;
+    const _zoharParashaNum2 = _zoharParts.length > 1 ? PARASHA_TO_NUMBER[_zoharParts[1]] : null;
+    const _chabadZoharUrl  = getChabadZoharUrl(_zoharParashaNum, date.getDay());
+    const _chabadZoharUrl2 = _zoharParashaNum2 ? getChabadZoharUrl(_zoharParashaNum2, date.getDay()) : null;
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
     // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
     (() => {
@@ -5578,9 +5579,9 @@ transition: transform 0.3s;
         } else {
           label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
         }
-        const _chabadZoharLink = _chabadZoharUrl
-          ? ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Chok L'Yisrael (English)</a>`
-          : '';
+        let _chabadZoharLink = '';
+        if (_chabadZoharUrl)  _chabadZoharLink += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl}"  target="_blank" style="color:var(--gold)">Chok L'Yisrael${_chabadZoharUrl2 ? ' (I)'   : ' (English)'}</a>`;
+        if (_chabadZoharUrl2) _chabadZoharLink += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Chok L'Yisrael (II)</a>`;
         el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>` + _chabadZoharLink;
         metaEl.innerHTML = `R. Shimon bar Yochai · ${todayFolios} folios today`;
       } else {
@@ -5897,9 +5898,12 @@ transition: transform 0.3s;
       add('https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z&si=JVvbM6UYIDLqU34p', 'Gratitude', 27, [4, 6, 21]);
       return arr;
     })();
-    const breslevIdx = Math.min((_zoharParashaNum ? _zoharParashaNum - 1 : kotWeek - 1) * 2, 106);
+    const breslevIdx  = Math.min((_zoharParashaNum  ? _zoharParashaNum  - 1 : kotWeek - 1) * 2, 106);
+    const breslevIdx2 = _zoharParashaNum2 ? Math.min((_zoharParashaNum2 - 1) * 2, 106) : null;
     const breslevCD1 = BRESLEV_CDS[breslevIdx];
     const breslevCD2 = BRESLEV_CDS[breslevIdx + 1];
+    const breslevCD3 = breslevIdx2 !== null ? BRESLEV_CDS[breslevIdx2]     : null;
+    const breslevCD4 = breslevIdx2 !== null ? BRESLEV_CDS[breslevIdx2 + 1] : null;
 
     document.getElementById('binah-cycle-name').textContent = 'Sefirot — 7×7×7 Omer Cycle';
     document.getElementById('binah-main').innerHTML =
@@ -5944,7 +5948,7 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div class="detail-row"><span class="detail-label">Breslev Israel CDs:</span><span class="detail-value"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a></span></div>
+       <div class="detail-row"><span class="detail-label">Breslev Israel CDs:</span><span class="detail-value"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a>${breslevCD3 ? ` &nbsp;·&nbsp; <a href="${breslevCD3.url}" target="_blank" style="color:var(--gold)">${breslevCD3.label}</a> &nbsp;·&nbsp; <a href="${breslevCD4.url}" target="_blank" style="color:var(--gold)">${breslevCD4.label}</a>` : ''}</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot</div>
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>`;
