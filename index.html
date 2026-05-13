@@ -5945,16 +5945,27 @@ transition: transform 0.3s;
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">R. Yitzhak Buxbaum</div>`;
 
     // Noam Elimelech — Reb Elimelech of Lizhensk — 52 weekly entries (one per KoT week)
-    const NOAM_ELIMELECH_WEEKS = [
-      { title: 'A Prayer before Praying',  url: 'https://www.sefaria.org/Noam_Elimelekh%2C_Additions%2C_A_Prayer_before_Praying.1?lang=bi' }, // W1
-      { title: 'The Tzetel Katan',         url: 'https://www.sefaria.org/Noam_Elimelekh%2C_Introduction%2C_The_Tzetel_Katan?lang=bi' },       // W2
-      { title: 'Hanhagot HaAdam',         url: 'https://www.sefaria.org/Noam_Elimelekh%2C_Additions%2C_Hanhagot_HaAdam?lang=bi' },           // W3
-      null,null,null,null,null,null,null,null,null,null, // W4–13
-      null,null,null,null,null,null,null,null,null,null, // W14–23
-      null,null,null,null,null,null,null,null,null,null, // W24–33
-      null,null,null,null,null,null,null,null,null,null, // W34–43
-      null,null,null,null,null,null,null,null,null,       // W44–52
-    ];
+    function getNoamElimelechEntry(week) {
+      if (week >= 1 && week <= 10) {
+        const v = week;
+        return { title: `A Prayer before Praying — §${v}`, url: `https://www.sefaria.org/Noam_Elimelekh%2C_Additions%2C_A_Prayer_before_Praying.${v}?lang=bi` };
+      }
+      if (week >= 11 && week <= 27) {
+        const v = week - 10;
+        return { title: `The Tzetel Katan — §${v}`, url: `https://www.sefaria.org/Noam_Elimelekh%2C_Introduction%2C_The_Tzetel_Katan.${v}?lang=bi` };
+      }
+      if (week >= 28 && week <= 48) {
+        const v = week - 27;
+        return { title: `Hanhagot HaAdam — §${v}`, url: `https://www.sefaria.org/Noam_Elimelekh%2C_Additions%2C_Hanhagot_HaAdam.${v}?lang=bi` };
+      }
+      const sonNotes = [
+        { title: "A Note from the Author's Son — §1–4",   url: "https://www.sefaria.org/Noam_Elimelekh%2C_Introduction%2C_A_Note_from_the_Author's_Son.1-4?lang=bi" },
+        { title: "A Note from the Author's Son — §5–7",   url: "https://www.sefaria.org/Noam_Elimelekh%2C_Introduction%2C_A_Note_from_the_Author's_Son.5-7?lang=bi" },
+        { title: "A Note from the Author's Son — §8–10",  url: "https://www.sefaria.org/Noam_Elimelekh%2C_Introduction%2C_A_Note_from_the_Author's_Son.8-10?lang=bi" },
+        { title: "A Note from the Author's Son — §11–14", url: "https://www.sefaria.org/Noam_Elimelekh%2C_Introduction%2C_A_Note_from_the_Author's_Son.11-14?lang=bi" },
+      ];
+      return sonNotes[Math.min(week - 49, 3)] || null;
+    }
 
     // GEVURAH — Tanach
     const tanachInfo = getTanachInfo(d);
@@ -5984,7 +5995,7 @@ transition: transform 0.3s;
          : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
        }` +
        (() => {
-         const noamEntry = NOAM_ELIMELECH_WEEKS[Math.min(Math.max(kotWeek - 1, 0), 51)];
+         const noamEntry = getNoamElimelechEntry(kotWeek);
          return `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
            <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Noam Elimelech — ר׳ אלימלך מליז׳נסק</div>` +
            (noamEntry
