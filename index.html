@@ -5472,38 +5472,38 @@ transition: transform 0.3s;
 
     // Chabad Daily Zohar (Chok L'Yisrael English) — AIDs by parasha number + day (1=Sun…6=Fri)
     const CHABAD_ZOHAR_AIDS = {
-       1: { slug:'Breishit',       days:{1:1302666} },
-       2: { slug:'Noah',           days:{1:1285209} },
-       3: { slug:'Lech-Lecha',     days:{1:1289627} },
-       4: { slug:'Vayeira',        days:{3:1295425} },
-       5: { slug:'Chayei-Sara',    days:{1:1306789} },
+       1: { slug:'Breishit',       days:{1:1302666,2:1272162,3:1272164,4:1302664,5:1276444,6:1276446} },
+       2: { slug:'Noah',           days:{1:1285209,2:1277454,3:1277458,4:1274728,5:1277462,6:1285220} },
+       3: { slug:'Lech-Lecha',     days:{1:1289627,2:1289632,3:1289633,4:1289642,5:1289644,6:1289649} },
+       4: { slug:'Vayeira',        days:{1:1295397,2:1295402,3:1295425,4:1295427,5:1295475,6:1295476} },
+       5: { slug:'Chayei-Sara',    days:{1:1306789,2:1306795,3:1306798,4:1306799,5:1306801,6:1306802} },
        6: { slug:'Toldot',         days:{1:1318180,2:1318181,3:1318182,4:1318183,5:1318184,6:1318185} },
        7: { slug:'Vayeitze',       days:{1:1334771,2:1334772,3:1334773,4:1334774,5:1334775,6:1334776} },
-       8: { slug:'Vayishlach',     days:{1:1341162,5:1342723,6:1342725} },
-       9: { slug:'Vayeshev',       days:{1:1348533} },
-      10: { slug:'Miketz',         days:{1:1355560,3:1355569,5:1356602} },
+       8: { slug:'Vayishlach',     days:{1:1341162,2:1341166,3:1341173,4:1342719,5:1342723,6:1342725} },
+       9: { slug:'Vayeshev',       days:{1:1348533,2:1348537,3:1348538,4:1348539,5:1348540,6:1348552} },
+      10: { slug:'Miketz',         days:{1:1355560,2:1355565,3:1355569,4:1356598,5:1356602,6:1356604} },
       11: { slug:'Vayigash',       days:{1:1357973,2:1361308,3:1361310,4:1361316,5:1361319,6:1361323} },
-      12: { slug:'Vayechi',        days:{1:1375483,2:1375485,4:1375488} },
-      13: { slug:'Shemot',         days:{1:1384837,4:1384851} },
+      12: { slug:'Vayechi',        days:{1:1375483,2:1375485,3:1375487,4:1375488,5:1376041,6:1376043} },
+      13: { slug:'Shemot',         days:{1:1384837,2:1384844,3:1384845,4:1384851,5:1384855,6:1384859} },
       14: { slug:'Vaeira',         days:{1:1390999,2:1391000,3:1391001,4:1391002,5:1391003,6:1391004} },
       15: { slug:'Bo',             days:{1:1395934,2:1395935,3:1395936,4:1395937,5:1395938,6:1395939} },
-      16: { slug:'Beshalach',      days:{1:1400317} },
-      17: { slug:'Yitro',          days:{1:1404528,2:1404532} },
-      18: { slug:'Mishpatim',      days:{1:1413555} },
-      19: { slug:'Teruma',         days:{1:1413564} },
-      20: { slug:'Tetzave',        days:{1:1427370} },
+      16: { slug:'Beshalach',      days:{1:1400317,2:1400319,3:1400320,4:1400321,5:1400322,6:1400323} },
+      17: { slug:'Yitro',          days:{1:1404528,2:1404532,3:1404534,4:1404535,5:1404541,6:1404546} },
+      18: { slug:'Mishpatim',      days:{1:1413555,2:1413562,3:1413563,4:1413565,5:1413566,6:1413567} },
+      19: { slug:'Teruma',         days:{1:1413564,2:1417245,3:1419761,4:1417253,5:1417255,6:1417263} },
+      20: { slug:'Tetzave',        days:{1:1427370,2:1427379,3:1427382,4:1427386,5:1427392,6:1427395} },
       21: { slug:'Ki-Tisa',        days:{1:1436588,2:1436589,3:1436590,4:1436591,5:1436592,6:1436593} },
-      22: { slug:'Vayakhel',       days:{1:1442904} },
+      22: { slug:'Vayakhel',       days:{1:1442904,2:1443378,3:1443379,4:1443381,5:1443382,6:1443366} },
       23: { slug:'Pekudei',        days:{1:1444312,2:1449507,3:1449508,4:1449509,5:1449510,6:1449511} },
-      24: { slug:'Vayikra',        days:{1:1453190,2:1453191,3:1453192,4:1456084} },
-      25: { slug:'Tzav',           days:{1:1460459,2:1460470,4:1460474,5:1463379} },
+      24: { slug:'Vayikra',        days:{1:1453190,2:1453191,3:1453192,4:1456084,5:1456087,6:1456100} },
+      25: { slug:'Tzav',           days:{1:1460459,2:1460470,3:1460472,4:1460474,5:1463379,6:1463380} },
       26: { slug:'Shemini',        days:{1:1471356,2:1471357,3:1471358,4:1471359,5:1471360,6:1471361} },
       27: { slug:'Tazria',         days:{1:1473689,2:1473690,3:1473691,4:1473692,5:1473693,6:1473694} },
       28: { slug:'Metzora',        days:{1:1482983,2:1482984,3:1482985,4:1482986,5:1482987,6:1482988} },
-      29: { slug:'Acharei',        days:{1:1490219} },
-      30: { slug:'Kedoshim',       days:{1:1503387,6:1505217} },
+      29: { slug:'Acharei',        days:{1:1490219,2:1490220,3:1490222,4:1490223,5:1490224,6:1490225} },
+      30: { slug:'Kedoshim',       days:{1:1503387,2:1503830,3:1503838,4:1503843,5:1503850,6:1505217} },
       31: { slug:'Emor',           days:{1:1510325,2:1510326,3:1510327,4:1510328,5:1510329,6:1510330} },
-      32: { slug:'Behar',          days:{1:1513491,4:1513507,5:1516558} },
+      32: { slug:'Behar',          days:{1:1513491,2:1513504,3:1513506,4:1513507,5:1516558,6:1516559} },
       33: { slug:'Bechukotai',     days:{1:1516568,2:1516569,3:1516570,4:1516571,5:1516572,6:1516573} },
       34: { slug:'Bamidbar',       days:{1:1527712,2:1527718,3:1527723,4:1529084,5:1529085,6:1529086} },
       35: { slug:'Naso',           days:{1:1531342,2:1531343,3:1531344,4:1531345,5:1531346,6:1531347} },
@@ -5515,11 +5515,11 @@ transition: transform 0.3s;
       41: { slug:'Pinchas',        days:{1:1563763,2:1563764,3:1563765,4:1563766,5:1563767,6:1563768} },
       42: { slug:'Matot',          days:{1:1569490,2:1571745,3:1571755,4:1571756,5:1571757,6:1571758} },
       43: { slug:'Masei',          days:{1:1573976,2:1573977,3:1573978,4:1573979,5:1573980,6:1573981} },
-      44: { slug:'Devarim',        days:{1:1573990,2:1573991,3:1573992,4:1573993,5:1573995} },
+      44: { slug:'Devarim',        days:{1:1573990,2:1573991,3:1573992,4:1573993,5:1573995,6:1573996} },
       45: { slug:'Vaetchanan',     days:{1:1580406,2:1580407,3:1580408,4:1580409,5:1580410,6:1580411} },
       46: { slug:'Eikev',          days:{1:1585664,2:1585665,3:1585666,4:1585667,5:1585668,6:1585669} },
-      47: { slug:'Reeh',           days:{1:1585670,2:1585671,3:1585672,4:1585675,5:1585676} },
-      48: { slug:'Shoftim',        days:{1:1585679,3:1585681,5:1585677} },
+      47: { slug:'Reeh',           days:{1:1585670,2:1585671,3:1585672,4:1585675,5:1585676,6:1585678} },
+      48: { slug:'Shoftim',        days:{1:1585679,2:1585680,3:1585681,4:1585682,5:1585677,6:1585683} },
       49: { slug:'Ki-Teitzei',     days:{1:1585684,2:1585685,3:1585686,4:1585687,5:1585688,6:1585689} },
       50: { slug:'Ki-Tavo',        days:{1:1585690,2:1585691,3:1585692,4:1585693,5:1585695,6:1585696} },
       51: { slug:'Nitzavim',       days:{1:1585697,2:1585698,3:1585699,4:1585700,5:1585701,6:1585702} },
@@ -5536,10 +5536,11 @@ transition: transform 0.3s;
       return `https://www.chabad.org/kabbalah/article_cdo/aid/${entry.days[day]}/jewish/Daily-Zohar-${entry.slug}-Day-${day}.htm`;
     }
     const _zoharParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
-    const _zoharParashaNum = _zoharParasha
-      ? (PARASHA_TO_NUMBER[_zoharParasha] || PARASHA_TO_NUMBER[(_zoharParasha).split('-').pop().trim()])
-      : null;
-    const _chabadZoharUrl = getChabadZoharUrl(_zoharParashaNum, date.getDay());
+    const _zoharParts = _zoharParasha ? _zoharParasha.split('-').map(p => p.trim()) : [];
+    const _zoharParashaNum  = _zoharParts.length ? (PARASHA_TO_NUMBER[_zoharParts[0]] || PARASHA_TO_NUMBER[_zoharParasha]) : null;
+    const _zoharParashaNum2 = _zoharParts.length > 1 ? PARASHA_TO_NUMBER[_zoharParts[1]] : null;
+    const _chabadZoharUrl  = getChabadZoharUrl(_zoharParashaNum, date.getDay());
+    const _chabadZoharUrl2 = _zoharParashaNum2 ? getChabadZoharUrl(_zoharParashaNum2, date.getDay()) : null;
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
     // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
     (() => {
@@ -5578,9 +5579,9 @@ transition: transform 0.3s;
         } else {
           label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
         }
-        const _chabadZoharLink = _chabadZoharUrl
-          ? ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Chok L'Yisrael (English)</a>`
-          : '';
+        let _chabadZoharLink = '';
+        if (_chabadZoharUrl)  _chabadZoharLink += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl}"  target="_blank" style="color:var(--gold)">Chok L'Yisrael${_chabadZoharUrl2 ? ' (I)'   : ' (English)'}</a>`;
+        if (_chabadZoharUrl2) _chabadZoharLink += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Chok L'Yisrael (II)</a>`;
         el.innerHTML = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>` + _chabadZoharLink;
         metaEl.innerHTML = `R. Shimon bar Yochai · ${todayFolios} folios today`;
       } else {
@@ -5872,6 +5873,38 @@ transition: transform 0.3s;
     const superCycle = Math.min(omerCycle, 7);
     const superSef   = SEFIROT_NAMES[superCycle - 1];
     const combo   = `${daySef} she'be${weekSef} she'be${superSef}`;
+    // Breslev Israel CDs — 108-recording rotation (1 per KoT day, cycles every 108 days)
+    const BRESLEV_CDS = (() => {
+      const arr = [];
+      const add = (url, label, count, skip) => {
+        skip = skip || [];
+        let added = 0;
+        for (let i = 1; added < count; i++) {
+          if (skip.indexOf(i) === -1) {
+            arr.push({ url: url + '&index=' + i, label: count > 1 ? label + ' — ' + (added+1) + '/' + count : label });
+            added++;
+          }
+        }
+      };
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpI538xWesNUA9ZKWp3wM4pm&si=PIz0Zvb_HufU9fQg', 'Purim', 1);
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpL5POVo17w3Fv4JeEjoHxUm&si=MeA4MPYUSKGIllbm', 'Children', 1);
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpKt3i093sxKbab3cECMkQMq&si=fuZ2NqOWEowkTiYR', 'No to Drugs', 2);
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpK7dhzdcN4ub0-FVTu8VNk7&si=sHjKhLMeu1QFuHKp', 'Strengthening', 17);
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpJbwUjjmtHxXQcyPfwjcL7O&si=lxr3Znks2Xrx11Q3', 'Emunah', 27);
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpJoL0fsqMMI2P3S-S4L1T9i&si=kpt0ZrzbVlFH1IMc', 'Making a Living', 4);
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpJ-XvJ__pFITtZxRoMM2nFR&si=YFydeHxMsIxCm06e', 'Treatment of Others', 5);
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpJDkxetTs0Byx8_X7rqdV9_&si=YwmWblITqFRmoq9C', 'Happiness', 20);
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpIPNbiuoL2v3B72eMa56jha&si=bV8PZ6ySXB3GPdSd', 'Self-Confidence', 4);
+      add('https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z&si=JVvbM6UYIDLqU34p', 'Gratitude', 27, [4, 6, 21]);
+      return arr;
+    })();
+    const breslevIdx  = Math.min((_zoharParashaNum  ? _zoharParashaNum  - 1 : kotWeek - 1) * 2, 106);
+    const breslevIdx2 = _zoharParashaNum2 ? Math.min((_zoharParashaNum2 - 1) * 2, 106) : null;
+    const breslevCD1 = BRESLEV_CDS[breslevIdx];
+    const breslevCD2 = BRESLEV_CDS[breslevIdx + 1];
+    const breslevCD3 = breslevIdx2 !== null ? BRESLEV_CDS[breslevIdx2]     : null;
+    const breslevCD4 = breslevIdx2 !== null ? BRESLEV_CDS[breslevIdx2 + 1] : null;
+
     document.getElementById('binah-cycle-name').textContent = 'Sefirot — 7×7×7 Omer Cycle';
     document.getElementById('binah-main').innerHTML =
       `<strong>${combo}</strong>`;
@@ -5915,7 +5948,7 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div class="detail-row"><span class="detail-label">Breslev Israel CDs:</span><span class="detail-value"><a href="https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z&si=wwSErujrXCASMAXz" target="_blank" style="color:var(--gold)">Listen on YouTube</a></span></div>
+       <div class="detail-row"><span class="detail-label">Breslev Israel CDs:</span><span class="detail-value"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a>${breslevCD3 ? ` &nbsp;·&nbsp; <a href="${breslevCD3.url}" target="_blank" style="color:var(--gold)">${breslevCD3.label}</a> &nbsp;·&nbsp; <a href="${breslevCD4.url}" target="_blank" style="color:var(--gold)">${breslevCD4.label}</a>` : ''}</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot</div>
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>`;
