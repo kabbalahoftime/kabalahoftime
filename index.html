@@ -5897,7 +5897,9 @@ transition: transform 0.3s;
       add('https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z&si=JVvbM6UYIDLqU34p', 'Gratitude', 27, [4, 6, 21]);
       return arr;
     })();
-    const breslevCD = BRESLEV_CDS[(d - 1) % BRESLEV_CDS.length];
+    const breslevIdx = Math.min((_zoharParashaNum ? _zoharParashaNum - 1 : kotWeek - 1) * 2, 106);
+    const breslevCD1 = BRESLEV_CDS[breslevIdx];
+    const breslevCD2 = BRESLEV_CDS[breslevIdx + 1];
 
     document.getElementById('binah-cycle-name').textContent = 'Sefirot — 7×7×7 Omer Cycle';
     document.getElementById('binah-main').innerHTML =
@@ -5942,7 +5944,7 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div class="detail-row"><span class="detail-label">Breslev Israel CDs:</span><span class="detail-value"><a href="${breslevCD.url}" target="_blank" style="color:var(--gold)">${breslevCD.label}</a></span></div>
+       <div class="detail-row"><span class="detail-label">Breslev Israel CDs:</span><span class="detail-value"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot</div>
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>`;
