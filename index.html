@@ -6111,7 +6111,7 @@ transition: transform 0.3s;
     const dmTeaching = cy13.cycle <= 26   ? DERECH_MITZVOSECHA[cy13.cycle - 1]
                      : cy13.cycle === 27 ? DERECH_MITZVOSECHA[cy13.day - 1]
                      : DERECH_MITZVOSECHA[13 + cy13.day - 1];
-    const _cy13mod = ((cy13.cycle - 1) % 13) + 1;
+    const _cy13mod = cy13.cycle >= 27 ? cy13.day : ((cy13.cycle - 1) % 13) + 1;
 
         // TIFERET — 13-day (Micha's or Moshe's 13 Attributes of Mercy, depending on cycle)
     const tifCycleName = (cy13.cycle <= 13) ? "Micha's 13 Attributes" : (cy13.cycle <= 26 ? "Moshe's 13 Attributes" : "13 Attributes — Combined");
