@@ -5349,8 +5349,9 @@ transition: transform 0.3s;
     // Date bar
     document.getElementById('gregorian-date').textContent =
       `${dowName}, ${MONTHS[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    const kotWeek = d % 7 === 0 ? Math.floor(d/7) : Math.floor(d/7) + 1;
     document.getElementById('day-indicator').textContent =
-      `Day ${d}`;
+      `Week ${kotWeek} · Day ${d}`;
 
     // Keter — Chabad Daily Learning
     const hDate  = gregToHebrew(date);
@@ -5943,6 +5944,18 @@ transition: transform 0.3s;
        <div class="detail-row"><span class="detail-label">Spiritual Practices:</span><span class="detail-value">${jspReading}</span></div>
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">R. Yitzhak Buxbaum</div>`;
 
+    // Noam Elimelech — Reb Elimelech of Lizhensk — 52 weekly entries (one per KoT week)
+    const NOAM_ELIMELECH_WEEKS = [
+      { title: 'A Prayer before Praying',  url: 'https://www.sefaria.org/Noam_Elimelekh%2C_Additions%2C_A_Prayer_before_Praying.1?lang=bi' }, // W1
+      { title: 'The Tzetel Katan',         url: 'https://www.sefaria.org/Noam_Elimelekh%2C_Introduction%2C_The_Tzetel_Katan?lang=bi' },       // W2
+      { title: 'Hanhagot HaAdam',         url: 'https://www.sefaria.org/Noam_Elimelekh%2C_Additions%2C_Hanhagot_HaAdam?lang=bi' },           // W3
+      null,null,null,null,null,null,null,null,null,null, // W4–13
+      null,null,null,null,null,null,null,null,null,null, // W14–23
+      null,null,null,null,null,null,null,null,null,null, // W24–33
+      null,null,null,null,null,null,null,null,null,null, // W34–43
+      null,null,null,null,null,null,null,null,null,       // W44–52
+    ];
+
     // GEVURAH — Tanach
     const tanachInfo = getTanachInfo(d);
     document.getElementById('gevurah-cycle-name').innerHTML = 'Tanach (2 Chapters)<br>Talmud (Daf Yomi)';
@@ -5969,7 +5982,15 @@ transition: transform 0.3s;
             </span></div>
             <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
          : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
-       }`;
+       }` +
+       (() => {
+         const noamEntry = NOAM_ELIMELECH_WEEKS[Math.min(Math.max(kotWeek - 1, 0), 51)];
+         return `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+           <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Noam Elimelech — ר׳ אלימלך מליז׳נסק</div>` +
+           (noamEntry
+             ? `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="${noamEntry.url}" target="_blank" style="color:var(--gold)">${noamEntry.title}</a></div>`
+             : `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Noam_Elimelekh?lang=bi" target="_blank" style="color:var(--gold)">Noam Elimelech on Sefaria</a></div>`);
+       })();
 
     // Derech Mitzvosecha — 26 teachings across cycles 27-28 (2 × 13)
     const DERECH_MITZVOSECHA = [
