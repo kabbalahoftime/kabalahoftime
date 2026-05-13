@@ -6111,6 +6111,7 @@ transition: transform 0.3s;
     const dmTeaching = cy13.cycle <= 26   ? DERECH_MITZVOSECHA[cy13.cycle - 1]
                      : cy13.cycle === 27 ? DERECH_MITZVOSECHA[cy13.day - 1]
                      : DERECH_MITZVOSECHA[13 + cy13.day - 1];
+    const _cy13mod = ((cy13.cycle - 1) % 13) + 1;
 
         // TIFERET — 13-day (Micha's or Moshe's 13 Attributes of Mercy, depending on cycle)
     const tifCycleName = (cy13.cycle <= 13) ? "Micha's 13 Attributes" : (cy13.cycle <= 26 ? "Moshe's 13 Attributes" : "13 Attributes — Combined");
@@ -6167,19 +6168,19 @@ transition: transform 0.3s;
          <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15</a>
        </div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Nachman's Tale — Cycle ${cy13.cycle}</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Nachman's Tale — Cycle ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><strong>${nachmanTale}</strong></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot on Sefaria</a></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ From the New Moon to the Next — Phase ${cy13.day}</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">Read on KabbalahOfTime</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Orot HaTorah — Chapter ${cy13.day}</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Orot_HaTorah.${cy13.day}" target="_blank" style="color:var(--gold)">Orot HaTorah on Sefaria</a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Avraham Yitzhak HaKohen Kook</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shalom Arush — Cycle ${cy13.cycle}</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shalom Arush — Cycle ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><strong>${arushBook}</strong></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ From the New Moon to the Next — Phase ${cy13.day}</div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">Read on KabbalahOfTime</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Nassi:</span><span class="detail-value">${cy13.nassi}</span></div>
        <div class="detail-row"><span class="detail-label">Daily Attribute:</span><span class="detail-value">${cy13.attr.name} — ${cy13.attr.meaning}</span></div>
