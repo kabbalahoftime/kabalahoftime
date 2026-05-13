@@ -6140,10 +6140,10 @@ transition: transform 0.3s;
       : `<span class="tag highlight" style="white-space:nowrap">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cy13.attr.name}</span>`;
 
     const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
-      ? `<div class="detail-row"><span class="detail-label">Irgun<br>Harbotzas<br>HaTorah:</span><span class="detail-value">${cy13.attr.bachya}</span></div>`
+      ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Irgun Harbotzas HaTorah</div><div style="color:var(--ink-mid);font-size:0.88rem;line-height:1.5;">${cy13.attr.bachya}</div></div>`
       : '';
     const sourcesRow = (cy13.isMoshe && cy13.attr.sources)
-      ? `<div class="detail-row"><span class="detail-label">Sources:</span><span class="detail-value" dir="rtl">${cy13.attr.sources}</span></div>`
+      ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Sources</div><div style="color:var(--ink-mid);font-size:0.88rem;" dir="rtl">${cy13.attr.sources}</div></div>`
       : '';
     const pbyStep = MESILLAT_YESHARIM_STEPS[_cy13mod - 1];
     const pbyNext = MESILLAT_YESHARIM_STEPS[_cy13mod] || null;
@@ -6182,14 +6182,14 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ From the New Moon to the Next — Phase ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">Read on KabbalahOfTime</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div class="detail-row"><span class="detail-label">Nassi:</span><span class="detail-value">${cy13.nassi}</span></div>
-       <div class="detail-row"><span class="detail-label">Daily Attribute:</span><span class="detail-value">${cy13.attr.name} — ${cy13.attr.meaning}</span></div>
-       <div class="detail-row"><span class="detail-label">Hebrew:</span><span class="detail-value">${cy13.attr.hebrew}</span></div>
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Nassi</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.nassi}</div></div>
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Daily Attribute</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.attr.name} — ${cy13.attr.meaning}</div></div>
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Hebrew</div><div style="color:var(--ink-mid);font-size:0.88rem;" dir="rtl">${cy13.attr.hebrew}</div></div>
        ${bachyaRow}
        ${sourcesRow}
-       <div class="detail-row"><span class="detail-label">${cycleTheme.split(':')[0]}:</span><span class="detail-value">${cycleTheme.split(':')[1]}</span></div>
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value">${cy13.cycle <= 13 ? '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20</a> — Prophet Micha\'s vision of Divine mercy' : cy13.cycle <= 26 ? '<a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7</a> — Moshe\'s 13 Attributes of Divine mercy' : '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20</a> · <a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7</a>'}</span></div>
-       <div class="detail-row"><span class="detail-label">Structure:</span><span class="detail-value">Cycles 1-13 (Micha/Inner) · 14-26 (Moshe/Outer) · 27-28 (Microcosm)</span></div>`;
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">${cycleTheme.split(':')[0]}</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cycleTheme.split(':')[1]}</div></div>
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Source</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.cycle <= 13 ? '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20</a> — Prophet Micha\'s vision of Divine mercy' : cy13.cycle <= 26 ? '<a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7</a> — Moshe\'s 13 Attributes of Divine mercy' : '<a href="https://www.sefaria.org/Micah.7.18" target="_blank" style="color:var(--gold)">Micah 7:18-20</a> · <a href="https://www.sefaria.org/Exodus.34.6" target="_blank" style="color:var(--gold)">Exodus 34:6-7</a>'}</div></div>
+       <div style="margin-bottom:6px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Structure</div><div style="color:var(--ink-mid);font-size:0.88rem;">Cycles 1–13 (Micha/Inner) · 14–26 (Moshe/Outer) · 27–28 (Microcosm)</div></div>`;
 
     // Ma'ayan Ganim — 368-day cycle (Rav Arush)
     const MEYN_GANIM_SECTIONS = [
