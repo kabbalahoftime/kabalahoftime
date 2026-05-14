@@ -1870,16 +1870,16 @@ transition: transform 0.3s;
   };
 
   const TEN_COMMANDMENTS = [
-    { num: 1,  commandment: 'I Am the Lord',              theme: 'Divine Closeness' },
-    { num: 2,  commandment: 'No Other Gods',              theme: 'Worldly Interaction' },
-    { num: 3,  commandment: 'Not to Profane G-d\'s Name', theme: 'Holiness Above Nature' },
-    { num: 4,  commandment: 'The Sabbath',                theme: 'Holiness in Nature' },
-    { num: 5,  commandment: 'Honor Parents',              theme: 'Jewish Connection' },
-    { num: 6,  commandment: 'Do Not Murder',              theme: 'Refining the Divine Image' },
-    { num: 7,  commandment: 'Faithfulness',               theme: 'Marriage to Hashem' },
-    { num: 8,  commandment: 'Do Not Steal',               theme: 'Human Dignity / Baseless Love' },
-    { num: 9,  commandment: 'Truth / No False Witness',   theme: 'Testifying/Confessing' },
-    { num: 10, commandment: 'Do Not Covet',               theme: 'Complete Trust in G-d' }
+    { num: 1,  commandment: 'I Am the Lord',              theme: 'Divine Closeness',             text: 'I am the Lord your God, who brought you out of the land of Egypt, out of the house of bondage' },
+    { num: 2,  commandment: 'No Other Gods',              theme: 'Worldly Interaction',           text: 'You shall have no other gods before Me' },
+    { num: 3,  commandment: 'Not to Profane G-d\'s Name', theme: 'Holiness Above Nature',         text: 'You shall not take the name of the Lord your God in vain' },
+    { num: 4,  commandment: 'The Sabbath',                theme: 'Holiness in Nature',            text: 'Remember the Sabbath day to keep it holy' },
+    { num: 5,  commandment: 'Honor Parents',              theme: 'Jewish Connection',             text: 'Honor your father and your mother' },
+    { num: 6,  commandment: 'Do Not Murder',              theme: 'Refining the Divine Image',     text: 'You shall not murder' },
+    { num: 7,  commandment: 'Faithfulness',               theme: 'Marriage to Hashem',            text: 'You shall not commit adultery' },
+    { num: 8,  commandment: 'Do Not Steal',               theme: 'Human Dignity / Baseless Love', text: 'You shall not steal' },
+    { num: 9,  commandment: 'Truth / No False Witness',   theme: 'Testifying/Confessing',         text: 'You shall not bear false witness against your neighbor' },
+    { num: 10, commandment: 'Do Not Covet',               theme: 'Complete Trust in G-d',         text: 'You shall not covet your neighbor\'s house' }
   ];
 
   // Exact daysDiff from blog — mirrors Math.round(microDiff/ms_per_day - 28)
@@ -6237,12 +6237,12 @@ transition: transform 0.3s;
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ma'ayan Ganim — Day ${meynDay} of 368</div>
        <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Section</div><div style="color:var(--ink-mid);font-size:0.88rem;">${meynSection} — p. ${meynPage} · Rav Shalom Arush</div></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Mivtzah</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</div></div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Cycle</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.cycle}. ${cycleCmd.theme}</div></div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Commandment</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.commandmentDay}. ${dayCmd.theme}</div></div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Tikkun HaKlali</div><div style="color:var(--ink-mid);font-size:0.88rem;"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> — Psalm ${cy41.commandmentDay} of 10</div></div>
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Commandment</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.commandmentDay}. ${dayCmd.theme}<br><span style="font-size:0.88em;font-style:italic;">${dayCmd.text}</span></div></div>
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Cycle</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.cycle}. ${cycleCmd.theme}<br><span style="font-size:0.88em;font-style:italic;">${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : ''}</span></div></div>
        <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Soul Level</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.soulLevel.split(' / ')[0]} · ${['','1st','2nd','3rd','4th','5th'][cy41.day === 41 ? 5 : Math.ceil(cy41.day / 10)]} level<br><span style="font-size:0.85em;font-style:italic;">${SOUL_LEVEL_DESCRIPTIONS[cy41.soulLevel.split(' / ')[0]] || ''}</span></div></div>
        <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">World</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.soulLevel.includes('Nefesh') ? 'Asiyah — Action & Physical' : cy41.soulLevel.includes('Ruach') ? 'Yetzirah — Emotional World' : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World' : cy41.soulLevel.includes('Chayah') ? 'Atzilut — Spiritual World' : 'Adam Kadmon — Yechidah (Day 41)'}</div></div>
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Mivtzah</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</div></div>
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Tikkun HaKlali</div><div style="color:var(--ink-mid);font-size:0.88rem;"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> — Psalm ${cy41.commandmentDay} of 10</div></div>
        <div style="margin-bottom:6px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Structure</div><div style="color:var(--ink-mid);font-size:0.88rem;">9 cycles × 41 days = 369 days · 7th cycle = Shavuot → 17 Tammuz</div></div>`;
 
     // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
