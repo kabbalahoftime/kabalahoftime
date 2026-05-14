@@ -1908,13 +1908,24 @@ transition: transform 0.3s;
     return jdnToGreg(rhJDN + offset + hd - 1);
   }
 
-  // Auto-calibration: 18 Iyar (month 2, day 18) must equal KoT day 229.
-  // Runs at startup and adjusts DAY_OFFSET if drift is detected.
+  // Returns local-midnight Date for any Date object (strips the time component).
+  function localMidnight(d) {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+
+  // Returns the number of local calendar days between two local-midnight Dates.
+  // Math.round absorbs the ±1-hour DST shift that can appear across spring/fall transitions.
+  function localCalendarDays(from, to) {
+    return Math.round((to - from) / (1000 * 60 * 60 * 24));
+  }
+
+  // Auto-calibration: 18 Iyar (month 2, day 18) must equal KoT day 229 in local calendar days.
+  // Runs at startup; auto-corrects DAY_OFFSET so the count is always right regardless of timezone.
   function calibrateOffset() {
     const h = gregToHebrew(new Date());
-    const iyar18 = hebrewToGreg(h.year, 2, 18);
-    const ms = Math.abs(new Date(DATE_FROM_API).getTime() - iyar18.getTime());
-    const needed = Math.round(ms / (1000 * 60 * 60 * 24) - 229);
+    const anchorMid = localMidnight(new Date(DATE_FROM_API));
+    const iyar18Mid = localMidnight(hebrewToGreg(h.year, 2, 18));
+    const needed = localCalendarDays(anchorMid, iyar18Mid) - 229;
     if (needed !== DAY_OFFSET) {
       console.warn('[KoT] DAY_OFFSET recalibrated: ' + DAY_OFFSET + ' → ' + needed +
                    ' (18 Iyar ' + h.year + ')');
@@ -1923,13 +1934,12 @@ transition: transform 0.3s;
   }
   calibrateOffset();
 
-  // Day counter: Math.floor so the day advances at midnight Israel time (anchor is midnight IDT).
+  // Day counter: advances at local midnight (same for every user in their own timezone).
   function getDaysDiff(offsetDays) {
-    const apiTime = (new Date(DATE_FROM_API)).getTime();
+    const anchorMid = localMidnight(new Date(DATE_FROM_API));
     const now = new Date();
     now.setDate(now.getDate() + offsetDays);
-    const microDiff = Math.abs(apiTime - now.getTime());
-    return Math.floor(microDiff / (1000 * 60 * 60 * 24) - DAY_OFFSET);
+    return localCalendarDays(anchorMid, localMidnight(now)) - DAY_OFFSET;
   }
 
   function getDisplayDate(offsetDays) {
