@@ -1808,7 +1808,7 @@ transition: transform 0.3s;
   // ── SHOVAVIM / PARASHA DATA (from blog) ──
   // ── EXACT CALCULATION ENGINE (from kabbalahoftime.com blog) ──
   const DATE_FROM_API = "2025-08-20T21:00:00Z";
-  const DAY_OFFSET = 28;
+  let DAY_OFFSET = 28;
 
   let currentOffset = 0;
 
@@ -1882,13 +1882,54 @@ transition: transform 0.3s;
     { num: 10, commandment: 'Do Not Covet',               theme: 'Complete Trust in G-d',         text: 'You shall not covet your neighbor\'s house' }
   ];
 
-  // Exact daysDiff from blog — mirrors Math.round(microDiff/ms_per_day - 28)
+  // Inverse of gregToJDN: converts a Julian Day Number to a Gregorian Date object.
+  function jdnToGreg(jdn) {
+    const a = jdn + 32044;
+    const b = Math.floor((4 * a + 3) / 146097);
+    const c = a - Math.floor(b * 146097 / 4);
+    const d = Math.floor((4 * c + 3) / 1461);
+    const e = c - Math.floor(1461 * d / 4);
+    const m = Math.floor((5 * e + 2) / 153);
+    return new Date(100 * b + d - 4800 + Math.floor(m / 10),
+                    m + 3 - 12 * Math.floor(m / 10) - 1,
+                    e - Math.floor((153 * m + 2) / 5) + 1);
+  }
+
+  // Converts a Hebrew date (year, month 1=Nisan…7=Tishrei…, day) to a Gregorian Date.
+  function hebrewToGreg(hy, hm, hd) {
+    const rhJDN = hebrewElapsedDays(hy) + (2460942 - hebrewElapsedDays(5786));
+    const monthOrder = [7,8,9,10,11,12,13,1,2,3,4,5,6];
+    let offset = 0;
+    for (const mo of monthOrder) {
+      if (mo === 13 && !hebrewLeapYear(hy)) continue;
+      if (mo === hm) break;
+      offset += daysInHebMonth(mo, hy);
+    }
+    return jdnToGreg(rhJDN + offset + hd - 1);
+  }
+
+  // Auto-calibration: 18 Iyar (month 2, day 18) must equal KoT day 229.
+  // Runs at startup and adjusts DAY_OFFSET if drift is detected.
+  function calibrateOffset() {
+    const h = gregToHebrew(new Date());
+    const iyar18 = hebrewToGreg(h.year, 2, 18);
+    const ms = Math.abs(new Date(DATE_FROM_API).getTime() - iyar18.getTime());
+    const needed = Math.round(ms / (1000 * 60 * 60 * 24) - 229);
+    if (needed !== DAY_OFFSET) {
+      console.warn('[KoT] DAY_OFFSET recalibrated: ' + DAY_OFFSET + ' → ' + needed +
+                   ' (18 Iyar ' + h.year + ')');
+      DAY_OFFSET = needed;
+    }
+  }
+  calibrateOffset();
+
+  // Day counter: Math.floor so the day advances at midnight Israel time (anchor is midnight IDT).
   function getDaysDiff(offsetDays) {
     const apiTime = (new Date(DATE_FROM_API)).getTime();
     const now = new Date();
     now.setDate(now.getDate() + offsetDays);
     const microDiff = Math.abs(apiTime - now.getTime());
-    return Math.round(microDiff / (1000 * 60 * 60 * 24) - DAY_OFFSET);
+    return Math.floor(microDiff / (1000 * 60 * 60 * 24) - DAY_OFFSET);
   }
 
   function getDisplayDate(offsetDays) {
