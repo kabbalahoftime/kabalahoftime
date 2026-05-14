@@ -5878,10 +5878,11 @@ transition: transform 0.3s;
       const arr = [];
       const add = (url, label, count, skip) => {
         skip = skip || [];
+        const listId = url.match(/list=([^&]+)/)[1];
         let added = 0;
         for (let i = 1; added < count; i++) {
           if (skip.indexOf(i) === -1) {
-            arr.push({ url: url + '&index=' + i, label: count > 1 ? label + ' — ' + (added+1) + '/' + count : label });
+            arr.push({ url: 'https://www.youtube.com/watch?list=' + listId + '&index=' + i, label: count > 1 ? label + ' — ' + (added+1) + '/' + count : label });
             added++;
           }
         }
@@ -5961,7 +5962,8 @@ transition: transform 0.3s;
     const CARLEBACH_GENERAL = (() => {
       const arr = [];
       const add = (base, count) => {
-        for (let i = 1; i <= count; i++) arr.push({ url: base + '&index=' + i, label: 'Story ' + (arr.length + 1) });
+        const listId = base.match(/list=([^&]+)/)[1];
+        for (let i = 1; i <= count; i++) arr.push({ url: 'https://www.youtube.com/watch?list=' + listId + '&index=' + i, label: 'Story ' + (arr.length + 1) });
       };
       add('https://youtube.com/playlist?list=PLXjaen9x6NsvdXsqnIQMYGcsevw4PFSwd', 67);
       add('https://youtube.com/playlist?list=PLnuftEmfAbZw7Rl1AKkYkb_w_Wga9pzDr', 32);
@@ -5970,7 +5972,8 @@ transition: transform 0.3s;
     const CARLEBACH_DEVARIM = (() => {
       const arr = [];
       const add = (base, count) => {
-        for (let i = 1; i <= count; i++) arr.push({ url: base + '&index=' + i, label: 'Devarim Story ' + (arr.length + 1) });
+        const listId = base.match(/list=([^&]+)/)[1];
+        for (let i = 1; i <= count; i++) arr.push({ url: 'https://www.youtube.com/watch?list=' + listId + '&index=' + i, label: 'Devarim Story ' + (arr.length + 1) });
       };
       add('https://youtube.com/playlist?list=PLBXH0idvgCx4y2FRSjjiEe9O0WCxnQtRU', 7);
       add('https://youtube.com/playlist?list=PLBXH0idvgCx5jn6EUZ1dcDmny1s1LnxeA', 2);
