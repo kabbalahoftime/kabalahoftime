@@ -6132,12 +6132,14 @@ transition: transform 0.3s;
        })() +
        (() => {
          const BY_MONTHS = {
-           1:'Nisan',2:'Iyar',3:'Sivan',4:'Tammuz',5:'Av',6:'Elul',
-           7:'Tishrei',8:'Marcheshvan',9:'Kislev',10:'Tevet',11:'Shevat',
-           12:'Adar',13:'Adar_II'
+           1:'Nisan', 2:'Iyar', 3:'Sivan', 4:'Tamuz_and_Av', 5:'Tamuz_and_Av',
+           6:'Elul', 7:'Tishrei', 8:'Cheshvan', 9:'Kislev_and_Tevet',
+           10:'Kislev_and_Tevet', 11:'Shevat', 12:'Adar', 13:'Adar'
          };
          const bySlug = BY_MONTHS[hMonth];
-         const byUrl = bySlug ? 'https://www.sefaria.org/Bnei_Yissaschar.' + bySlug : 'https://www.sefaria.org/Bnei_Yissaschar';
+         const byUrl = bySlug
+           ? 'https://www.sefaria.org/Bnei_Yissaschar,_' + bySlug + '.1.1?lang=bi&with=Navigation'
+           : 'https://www.sefaria.org/Bnei_Yissaschar';
          return `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
            <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Bnei Yissaschar — בני יששכר</div>
            <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${byUrl}" target="_blank" style="color:var(--gold)">${HEB_MONTH_NAMES[hMonth]} — Bnei Yissaschar on Sefaria</a></div>`;
