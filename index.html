@@ -5870,8 +5870,12 @@ transition: transform 0.3s;
       }
       if (_vRef) {
         acrosticRow = `<div class="detail-row"><span class="detail-label">Acrostic:</span><span class="detail-value">${_psName} &nbsp;<span style="color:#555;font-size:0.9em">${_vRef}</span>&nbsp;<a href="${_chabadUrl}" target="_blank" rel="noopener" style="font-size:0.85em;text-decoration:none" title="Open in Chabad.org">📖</a></span></div>`;
+        document.getElementById('chochmah-sub').innerHTML =
+          `<span style="font-size:0.8em;color:var(--ink-dim)">Acrostic:</span> ${_psName} <span style="color:var(--ink-dim);font-size:0.85em">${_vRef}</span> <a href="${_chabadUrl}" target="_blank" rel="noopener" style="font-size:0.85em;text-decoration:none" title="Open in Chabad.org">📖</a>`;
       } else {
         acrosticRow = `<div class="detail-row"><span class="detail-label">Acrostic:</span><span class="detail-value">${_psName}</span></div>`;
+        document.getElementById('chochmah-sub').innerHTML =
+          `<span style="font-size:0.8em;color:var(--ink-dim)">Acrostic:</span> ${_psName}`;
       }
     }
     
