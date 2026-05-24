@@ -1458,13 +1458,14 @@ transition: transform 0.3s;
         const _shovavimDay = (_now.getDay() === 6 && _now.getHours() >= 19) ? 8 : _now.getDay() + 1;
         let mainHtml = '';
         if (primaryData) {
-            mainHtml = `<strong>${foundParasha.name}</strong><br>Parasha <strong>${primaryData.relativeNumber}</strong> · Cycle <strong>${primaryData.cycle}</strong> · Day <strong>${_shovavimDay}</strong> of 8:`;
+            mainHtml = `<strong>${foundParasha.name}</strong><br>` +
+                       `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${primaryData.relativeNumber}</strong> · Cycle <strong>${primaryData.cycle}</strong>`;
             if (cycleQ) {
-                mainHtml += `<br><strong>${cycleQ.name}</strong>` +
+                mainHtml += `<br><br>${cycleQ.letter}<br><strong>${cycleQ.name}</strong>` +
                             `<br><span style="font-size:0.88em;opacity:0.8">${cycleQ.tikkunMethod}</span>`;
             }
             if (parashaQ && !sameQuality) {
-                mainHtml += `<br><br><strong>${parashaQ.name}</strong>` +
+                mainHtml += `<br><br>${parashaQ.letter}<br><strong>${parashaQ.name}</strong>` +
                             `<br><span style="font-size:0.88em;opacity:0.8">${parashaQ.tikkunMethod}</span>`;
             }
         } else {
