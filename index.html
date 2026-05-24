@@ -1453,10 +1453,10 @@ transition: transform 0.3s;
         const cycleQ = primaryData ? getQualities(primaryData.cycle) : null;
         const sameQuality = parashaQ && cycleQ && parashaQ.letter === cycleQ.letter;
 
-        // Card face — cycle (theme) first, then parasha (specific attribute)
+        // Card face — parasha name first, then parasha · cycle
         let mainHtml = '';
         if (primaryData) {
-            mainHtml = `Cycle <strong>${primaryData.cycle}</strong> · Parasha <strong>${primaryData.relativeNumber}</strong>:`;
+            mainHtml = `<strong>${foundParasha.name}</strong><br>Parasha <strong>${primaryData.relativeNumber}</strong> · Cycle <strong>${primaryData.cycle}</strong>:`;
             if (cycleQ) {
                 mainHtml += `<br><strong>${cycleQ.letter}</strong>` +
                             `<br><span style="font-size:0.88em;opacity:0.8">${getServicePhrase(cycleQ.service)}</span>`;
