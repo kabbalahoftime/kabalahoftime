@@ -5892,10 +5892,7 @@ transition: transform 0.3s;
         } else {
           label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
         }
-        let _chabadZoharLink = '';
-        if (_chabadZoharUrl)  _chabadZoharLink += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl}"  target="_blank" style="color:var(--gold)">Chok L'Yisrael${_chabadZoharUrl2 ? ' (I)'   : ' (English)'}</a>`;
-        if (_chabadZoharUrl2) _chabadZoharLink += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Chok L'Yisrael (II)</a>`;
-        _hodZoharMainHtml = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>` + _chabadZoharLink;
+        _hodZoharMainHtml = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>`;
         _hodZoharMetaHtml = `R. Shimon bar Yochai · ${todayFolios} folios today`;
         if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong>, ${label} &nbsp;·&nbsp; <a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
       } else {
