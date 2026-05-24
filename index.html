@@ -6476,14 +6476,14 @@ transition: transform 0.3s;
     }
     cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes of Mercy — 13-Day Cycle`;
     cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
-      ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
-      : `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
+      ? `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
+      : `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
     cards[4].querySelector('.sefirah-sub-text').textContent = '';
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
     _tifTags.innerHTML = cycleThemeAttr
-      ? `<span class="tag highlight" style="white-space:nowrap">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
-      : `<span class="tag highlight" style="white-space:nowrap">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cy13.attr.name}</span>`;
+      ? `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
+      : `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cy13.attr.name}</span>`;
 
     const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
       ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Irgun Harbotzas HaTorah</div><div style="color:var(--ink-mid);font-size:0.88rem;line-height:1.5;">${cy13.attr.bachya}</div></div>`
@@ -6570,7 +6570,7 @@ transition: transform 0.3s;
     const dayCmd   = TEN_COMMANDMENTS[cy41.commandmentDay - 1];
     cards[5].querySelector('.sefirah-cycle-name').textContent = `41-Day Cycle: Receiving the Torah`;
     cards[5].querySelector('.sefirah-main-text').innerHTML =
-      `Cycle <strong>${cy41.cycle}</strong> · Day <strong>${cy41.day}</strong>`;
+      `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>`;
     cards[5].querySelector('.sefirah-sub-text').innerHTML =
       `<span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${cycleCmd.commandment}` +
       `<br><span style="font-size:0.9em;color:var(--ink-dim)">Commandment:</span> ${dayCmd.commandment}` +
