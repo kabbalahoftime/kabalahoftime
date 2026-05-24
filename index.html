@@ -1234,6 +1234,11 @@ transition: transform 0.3s;
     <div class="sefirah-main-text">Loading…</div>
     <div class="sefirah-sub-text">Loading…</div>
     <div class="sefirah-tags"></div>
+    <div style="margin-top:6px;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;">✦ Zohar — Daily Reading</div>
+      <div id="hod-zohar-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+      <div id="hod-zohar-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:4px;"></div>
+    </div>
     <div class="sefirah-detail"></div>
   </div>
 </div>
@@ -1252,10 +1257,6 @@ transition: transform 0.3s;
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
     <div class="sefirah-detail">
-      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;">✦ Zohar — Daily Reading</div>
-      <div id="yesod-zohar-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
-      <div id="yesod-zohar-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael</div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
@@ -5874,8 +5875,8 @@ transition: transform 0.3s;
       const todayDow    = cycleOffset % 7;             // 0=Sun…6=Sat (anchor=Sunday)
       const todayFolios = (todayDow === 6) ? 4 : 2;
 
-      const el     = document.getElementById('yesod-zohar-main');
-      const metaEl = document.getElementById('yesod-zohar-meta');
+      const el     = document.getElementById('hod-zohar-main');
+      const metaEl = document.getElementById('hod-zohar-meta');
 
       if (cumFolios < ZOHAR_TOTAL) {
         const startAbs = cumFolios + 1;
@@ -6597,7 +6598,7 @@ transition: transform 0.3s;
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    cards[6].querySelector('.sefirah-cycle-name').innerHTML = 'Halacha — Daily Law<br>Talmud (Chazarah)';
+    cards[6].querySelector('.sefirah-cycle-name').innerHTML = 'Halacha — Daily Law';
 
     const hodChazarahHtml =
       `<div style="margin-bottom:4px;"></div>` +
