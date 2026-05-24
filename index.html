@@ -5865,8 +5865,8 @@ transition: transform 0.3s;
     const _chabadZoharUrl  = getChabadZoharUrl(_zoharParashaNum, date.getDay());
     const _chabadZoharUrl2 = _zoharParashaNum2 ? getChabadZoharUrl(_zoharParashaNum2, date.getDay()) : null;
     if (_chabadZoharUrl) {
-      let _chokEnglishHtml = `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Chok L'Yisrael${_chabadZoharUrl2 ? ' (I)' : ' (English)'}</a>`;
-      if (_chabadZoharUrl2) _chokEnglishHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Chok L'Yisrael (II)</a>`;
+      let _chokEnglishHtml = `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Zohar Chok L'Yisrael${_chabadZoharUrl2 ? ' (I)' : ' (English)'}</a>`;
+      if (_chabadZoharUrl2) _chokEnglishHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Zohar Chok L'Yisrael (II)</a>`;
       document.getElementById('yesod-chok-english').innerHTML = _chokEnglishHtml;
     }
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
@@ -6633,10 +6633,6 @@ transition: transform 0.3s;
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
-      const hodZoharDetailHtml =
-        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar — Daily Reading</div>` +
-        `<div style="font-size:0.88rem;margin-bottom:4px;">${_hodZoharMainHtml}</div>` +
-        `<div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">${_hodZoharMetaHtml}</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodCcHtml +
         hodChazarahHtml +
