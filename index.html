@@ -1454,9 +1454,11 @@ transition: transform 0.3s;
         const sameQuality = parashaQ && cycleQ && parashaQ.letter === cycleQ.letter;
 
         // Card face — parasha name first, then parasha · cycle
+        const _now = new Date();
+        const _shovavimDay = (_now.getDay() === 6 && _now.getHours() >= 19) ? 8 : _now.getDay() + 1;
         let mainHtml = '';
         if (primaryData) {
-            mainHtml = `<strong>${foundParasha.name}</strong><br>Parasha <strong>${primaryData.relativeNumber}</strong> · Cycle <strong>${primaryData.cycle}</strong>:`;
+            mainHtml = `<strong>${foundParasha.name}</strong><br>Parasha <strong>${primaryData.relativeNumber}</strong> · Cycle <strong>${primaryData.cycle}</strong> · Day <strong>${_shovavimDay}</strong> of 8:`;
             if (cycleQ) {
                 mainHtml += `<br><strong>${cycleQ.letter}</strong>` +
                             `<br><span style="font-size:0.88em;opacity:0.8">${getServicePhrase(cycleQ.service)}</span>`;
