@@ -1257,6 +1257,7 @@ transition: transform 0.3s;
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael</div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <div id="yesod-chok-english" style="font-size:0.88rem;margin-top:4px;"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ben Ish Chai</div>
       <div id="yesod-bic-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
@@ -5853,6 +5854,11 @@ transition: transform 0.3s;
     const _zoharParashaNum2 = _zoharParts.length > 1 ? PARASHA_TO_NUMBER[_zoharParts[1]] : null;
     const _chabadZoharUrl  = getChabadZoharUrl(_zoharParashaNum, date.getDay());
     const _chabadZoharUrl2 = _zoharParashaNum2 ? getChabadZoharUrl(_zoharParashaNum2, date.getDay()) : null;
+    if (_chabadZoharUrl) {
+      let _chokEnglishHtml = `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Chok L'Yisrael${_chabadZoharUrl2 ? ' (I)' : ' (English)'}</a>`;
+      if (_chabadZoharUrl2) _chokEnglishHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Chok L'Yisrael (II)</a>`;
+      document.getElementById('yesod-chok-english').innerHTML = _chokEnglishHtml;
+    }
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
     // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
     let _hodZoharMainHtml = '';
