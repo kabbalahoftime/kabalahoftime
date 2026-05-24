@@ -1450,21 +1450,24 @@ transition: transform 0.3s;
         const primaryNum = nums.length > 0 ? nums[0] : null;
         const primaryData = primaryNum ? getCycleAndRelativeNumberForParasha(primaryNum) : null;
         const parashaQ = primaryData ? getQualities(primaryData.relativeNumber) : null;
-        const cycleQ = primaryData ? getQualities(primaryData.cycle) : null;
-        const sameQuality = parashaQ && cycleQ && parashaQ.letter === cycleQ.letter;
+        const cycleQ   = primaryData ? getQualities(primaryData.cycle) : null;
 
-        // Card face — cycle (theme) first, then parasha (specific attribute)
+        // Card face — parasha name, then three independent blocks: day / parasha / cycle
+        const _now = new Date();
+        const _shovavimDay = (_now.getDay() === 6 && _now.getHours() >= 19) ? 8 : _now.getDay() + 1;
+        const dayQ = getQualities(_shovavimDay);
+        function qualityBlock(q) {
+            if (!q) return '';
+            return `<br><br>${q.letter}<br><strong>${q.name}</strong>` +
+                   `<br><span style="font-size:0.88em;opacity:0.8">${q.tikkunMethod}</span>`;
+        }
         let mainHtml = '';
         if (primaryData) {
-            mainHtml = `Cycle <strong>${primaryData.cycle}</strong> · Parasha <strong>${primaryData.relativeNumber}</strong>:`;
-            if (cycleQ) {
-                mainHtml += `<br><strong>${cycleQ.letter}</strong>` +
-                            `<br><span style="font-size:0.88em;opacity:0.8">${getServicePhrase(cycleQ.service)}</span>`;
-            }
-            if (parashaQ && !sameQuality) {
-                mainHtml += `<br><br><strong>${parashaQ.letter}</strong>` +
-                            `<br><span style="font-size:0.88em;opacity:0.8">${getServicePhrase(parashaQ.service)}</span>`;
-            }
+            mainHtml = `<strong>${foundParasha.name}</strong><br>` +
+                       `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${primaryData.relativeNumber}</strong> · Cycle <strong>${primaryData.cycle}</strong>` +
+                       qualityBlock(dayQ) +
+                       qualityBlock(parashaQ) +
+                       qualityBlock(cycleQ);
         } else {
             mainHtml = foundParasha.name;
         }
@@ -1567,6 +1570,18 @@ transition: transform 0.3s;
             `<a href="https://www.chabad.org/therebbe/article_cdo/aid/5932/jewish/Hayom-Yom-Tishrei-3-Shabbat-Teshuva.htm" target="_blank" style="color:var(--gold)">Hayom Yom, Tishrei 3</a>` +
             `  ·  <a href="https://inner.org/teshuva-rebbe-zusha-style/" target="_blank" style="color:var(--gold)">inner.org</a>` +
             `<br><br>Shovavim is particularly associated with <em>Tikkun HaBrit</em> — the rectification of sins of a sexual nature. Each pathway corresponds to a specific method of tikkun, embodied by a Tzaddik, manifesting in four pairs of redeemers: Moshe and Aharon (first redeemers), Mordechai and Esther (Purim redeemers), Rashbi and Arizal (kabbalistic redeemers — continued through Rebbe Nachman of Breslov and the Baal Shem Tov), and Moshiach and Eliyahu (final redeemers). Each pair combines מ (Mem) and א (Alef) — together spelling אם (Em, mother). For the kabbalistic pair, Rashbi's name Shimon (שמעון) contains both ש (Shin, the first letter of Shovavim) and מ (Mem, its last letter), alongside Arizal (א). Tikkun HaBrit allows for the full revelation of the Shechinah — Em HaBanim Smeicha.` +
+            `<br><br>Each original Shovavim parasha embodies its quality: Shemot (the burning bush — fire, Torah), ` +
+            `Va'era (God's name revealed — divine connection, Aharon), Bo (<em>Bo el Paro</em> — coming directly to Pharaoh, Mordechai), ` +
+            `Beshalach (Miriam leading the women in song — Esther), ` +
+            `Yitro (Ten Commandments — Yud\xa0=\xa010, Rashbi/Tikkun HaKlali), ` +
+            `Mishpatim (<em>Na'aseh v'nishma</em> — immersion in covenant, Arizal), ` +
+            `Terumah (building the Mishkan — elevating matter into holiness, Moshiach), ` +
+            `Tetzaveh (ner tamid, Moshe's name absent — Eliyahu).` +
+            `<br><br>The structure of 8 is itself significant: <em>Brit Milah</em> is performed on the 8th day, ` +
+            `because 8 transcends the 7 of natural creation. Shovavim — Tikkun HaBrit — therefore has 8 pathways, not 7. ` +
+            `The 7th quality (Moshiach) completes the tikkun of the natural world; the 8th (Eliyahu) breaks beyond it entirely — ` +
+            `Eliyahu, who never died, heralds what lies beyond nature altogether. ` +
+            `This mirrors the structure of the week: the 7th day (Shabbat) completes creation, and at its close we call Eliyahu by name.` +
             `</div>`;
 
         document.getElementById('yesod-parasha-cycle').innerHTML = attrRows + systemNote;
@@ -6476,14 +6491,14 @@ transition: transform 0.3s;
     }
     cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes of Mercy — 13-Day Cycle`;
     cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
-      ? `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
-      : `Cycle <strong>${cy13.cycle}</strong> · Attribute <strong>${cy13.day}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
+      ? `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span><br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`
+      : `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
     cards[4].querySelector('.sefirah-sub-text').textContent = '';
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
     _tifTags.innerHTML = cycleThemeAttr
-      ? `<span class="tag highlight" style="white-space:nowrap">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
-      : `<span class="tag highlight" style="white-space:nowrap">Cycle ${cy13.cycle} · Day ${cy13.day}</span><span class="tag">${cy13.attr.name}</span>`;
+      ? `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
+      : `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cy13.attr.name}</span>`;
 
     const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
       ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Irgun Harbotzas HaTorah</div><div style="color:var(--ink-mid);font-size:0.88rem;line-height:1.5;">${cy13.attr.bachya}</div></div>`
@@ -6570,7 +6585,7 @@ transition: transform 0.3s;
     const dayCmd   = TEN_COMMANDMENTS[cy41.commandmentDay - 1];
     cards[5].querySelector('.sefirah-cycle-name').textContent = `41-Day Cycle: Receiving the Torah`;
     cards[5].querySelector('.sefirah-main-text').innerHTML =
-      `Cycle <strong>${cy41.cycle}</strong> · Day <strong>${cy41.day}</strong>`;
+      `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>`;
     cards[5].querySelector('.sefirah-sub-text').innerHTML =
       `<span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${cycleCmd.commandment}` +
       `<br><span style="font-size:0.9em;color:var(--ink-dim)">Commandment:</span> ${dayCmd.commandment}` +
