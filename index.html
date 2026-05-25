@@ -6243,7 +6243,10 @@ transition: transform 0.3s;
     const tractData = TRACTATE_CYCLES[tractHalfIdx];
 
     document.getElementById('chochmah-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Day ${chDay} of 364</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+       <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://www.sefaria.org/Ohr_Torah?tab=contents" target="_blank" style="color:var(--gold)">Ohr Torah on Sefaria</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Day ${chDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
        ${chSourceRow}
@@ -6349,7 +6352,10 @@ transition: transform 0.3s;
 
     // Rav Arush series rotation — 91 classes × 4 days = 364-day cycle
     document.getElementById('binah-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likutei Tefilot — Day ${ltDay} of 364</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Meor Einayim${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+       <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://www.sefaria.org/Me'or_Einayim?tab=contents" target="_blank" style="color:var(--gold)">Meor Einayim on Sefaria</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Menachem Nachum of Chernobyl</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likutei Tefilot — Day ${ltDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${ltSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
