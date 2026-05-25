@@ -1471,6 +1471,7 @@ transition: transform 0.3s;
 
         // Tags
         const weekNum = nums.length > 0 ? nums.join(' · ') : 'N/A';
+        const sameQuality = parashaQ && cycleQ && parashaQ.letter === cycleQ.letter;
         const tagsEl = document.getElementById('yesod-tags');
         if (tagsEl) {
             tagsEl.innerHTML =
