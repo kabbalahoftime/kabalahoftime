@@ -1077,11 +1077,6 @@ transition: transform 0.3s;
     <div class="keter-main" id="keter-kst-main">Loading…</div>
     <div class="keter-meta" id="keter-kst-meta"></div>
   </div>
-  <!-- OHR HACHAIM row — Weekly Parasha -->
-  <div class="keter-kst-row keter-section">
-    <div class="keter-section-label" id="keter-oh-label">✦ Ohr HaChaim</div>
-    <div class="keter-meta" id="keter-oh-meta"></div>
-  </div>
   <!-- Atik Yomin — Three Heads -->
   <div class="keter-inner-row">
     <!-- HAYOM YOM + SEFER HAMITZVOS section -->
@@ -5822,10 +5817,18 @@ transition: transform 0.3s;
       const kstDow = date.getDay(); // 0=Sun … 6=Shabbat
       const kst  = getDailyKST(kstParashaNum, kstDow);
       const kst2 = kstParashaNum2 ? getDailyKST(kstParashaNum2, kstDow) : null;
+      const ohUrlParasha = kstParasha ? kstParts[0].replace(/ /g, '_') : null;
+      const ohUrl = ohUrlParasha
+        ? `https://www.sefaria.org/Ohr_HaChaim.${ohUrlParasha}`
+        : `https://www.sefaria.org/Ohr_HaChaim?tab=contents`;
+      const ohLine = `<br><span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
+        ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
+
+      document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov and Ohr HaChaim HaKadosh';
+
       if (kst) {
         _kstTitleEn = kst.titleEn || null;
         _kstLabel   = kst.label   || null;
-        document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
         function kstTitleHtml(he, en) {
           const heHtml = he ? `<span dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1em;line-height:1.4">${he}</span>` : '';
           const enHtml = en ? `<span style="font-size:0.88em;color:var(--ink-soft);font-style:italic">${en}</span>` : '';
@@ -5841,29 +5844,15 @@ transition: transform 0.3s;
           return refHtml + titlesHtml;
         }
         let html = kstEntryHtml(kst);
-        if (kst2) {
-          html += `<br>` + kstEntryHtml(kst2);
-        }
+        if (kst2) html += `<br>` + kstEntryHtml(kst2);
+        html += ` — <a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>`;
+        html += ohLine;
         document.getElementById('keter-kst-main').innerHTML = html;
       } else {
-        document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
-        document.getElementById('keter-kst-main').innerHTML = '';
+        document.getElementById('keter-kst-main').innerHTML =
+          `<a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>` + ohLine;
       }
-      document.getElementById('keter-kst-meta').innerHTML =
-        `<a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>`;
-
-      // Ohr HaChaim — weekly parasha
-      {
-        const ohParasha = kstParasha || null;
-        const ohUrlParasha = ohParasha ? kstParts[0].replace(/ /g, '_') : null;
-        const ohUrl = ohUrlParasha
-          ? `https://www.sefaria.org/Ohr_HaChaim.${ohUrlParasha}`
-          : `https://www.sefaria.org/Ohr_HaChaim?tab=contents`;
-        document.getElementById('keter-oh-label').textContent =
-          `✦ Ohr HaChaim${ohParasha ? ' — ' + ohParasha : ''}`;
-        document.getElementById('keter-oh-meta').innerHTML =
-          `<a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
-      }
+      document.getElementById('keter-kst-meta').innerHTML = '';
     }
 
     // Chok L'Yisrael (Yesod card)
