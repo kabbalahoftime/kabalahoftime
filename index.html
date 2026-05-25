@@ -1233,7 +1233,7 @@ transition: transform 0.3s;
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Gr"a</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name">Halacha — Daily Law</div>
+    <div class="sefirah-cycle-name" id="hod-cycle-name">Zohar<br>Shulchan Aruch<br>Talmud (Chazarah)</div>
     <div id="hod-zohar-face" style="margin-bottom:6px;">Loading…</div>
     <div class="sefirah-main-text">Loading…</div>
     <div id="hod-chazarah-face" class="sefirah-main-text" style="margin-top:4px;">Loading…</div>
@@ -6623,7 +6623,7 @@ transition: transform 0.3s;
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    cards[6].querySelector('.sefirah-cycle-name').innerHTML = 'Zohar<br>Shulchan Aruch<br>Talmud (Chazarah)';
+    document.getElementById('hod-cycle-name').innerHTML = 'Zohar<br>Shulchan Aruch<br>Talmud (Chazarah)';
 
     const hodChazarahHtml =
       `<div style="margin-bottom:4px;"></div>` +
