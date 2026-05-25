@@ -979,29 +979,6 @@ transition: transform 0.3s;
 }
 
 /* ── DAILY SCRIPT PANEL ── */
-.daily-script-panel {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  margin: 0 16px 12px;
-  overflow: hidden;
-}
-.daily-script-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  cursor: pointer;
-  user-select: none;
-}
-.daily-script-title {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: var(--gold);
-  text-transform: uppercase;
-  flex: 1;
-}
 .daily-script-lang-bar { display: flex; gap: 4px; }
 .lang-btn {
   background: none;
@@ -1082,27 +1059,6 @@ transition: transform 0.3s;
     </div>
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
   </div>
-  <!-- DAILY SCRIPT -->
-  <div class="daily-script-panel" id="daily-script-panel">
-    <div class="daily-script-header" onclick="toggleDailyScript()">
-      <span class="daily-script-title">✦ Daily Script</span>
-      <div class="daily-script-lang-bar" onclick="event.stopPropagation()">
-        <button class="lang-btn active" id="lang-btn-en" onclick="setScriptLang('en')">EN</button>
-        <button class="lang-btn" id="lang-btn-he" onclick="setScriptLang('he')">HE</button>
-        <button class="lang-btn" id="lang-btn-es" onclick="setScriptLang('es')">ES</button>
-        <button class="lang-btn" id="lang-btn-fr" onclick="setScriptLang('fr')">FR</button>
-        <button class="lang-btn" id="lang-btn-pt" onclick="setScriptLang('pt')">PT</button>
-      </div>
-      <span id="daily-script-expand-icon" style="color:var(--gold);font-size:14px">▾</span>
-    </div>
-    <div id="daily-script-body" style="display:none">
-      <div class="daily-script-inner">
-        <div id="daily-script-content">Loading…</div>
-        <button class="copy-script-btn" onclick="copyDailyScript()">Copy Script</button>
-      </div>
-    </div>
-  </div>
-
   <!-- CROWN — YEARLY CYCLE -->
 
   <div class="keter-title-row">
@@ -1721,6 +1677,27 @@ transition: transform 0.3s;
   </div>
 
   <!-- FOOTER -->
+
+  <!-- DAILY SCRIPT — personal tool, below main content -->
+  <div id="daily-script-panel" style="margin:8px 16px 4px;border:1px solid var(--border);border-radius:6px;opacity:0.6;">
+    <div style="display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;" onclick="toggleDailyScript()">
+      <span style="font-size:10px;color:var(--ink-dim);letter-spacing:1.5px;flex:1;">daily script</span>
+      <div class="daily-script-lang-bar" onclick="event.stopPropagation()">
+        <button class="lang-btn active" id="lang-btn-en" onclick="setScriptLang('en')">EN</button>
+        <button class="lang-btn" id="lang-btn-he" onclick="setScriptLang('he')">HE</button>
+        <button class="lang-btn" id="lang-btn-es" onclick="setScriptLang('es')">ES</button>
+        <button class="lang-btn" id="lang-btn-fr" onclick="setScriptLang('fr')">FR</button>
+        <button class="lang-btn" id="lang-btn-pt" onclick="setScriptLang('pt')">PT</button>
+      </div>
+      <span id="daily-script-expand-icon" style="color:var(--ink-dim);font-size:12px">▾</span>
+    </div>
+    <div id="daily-script-body" style="display:none">
+      <div class="daily-script-inner">
+        <div id="daily-script-content">Loading…</div>
+        <button class="copy-script-btn" onclick="copyDailyScript()">Copy Script</button>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="footer-text">Based on the book</div>
