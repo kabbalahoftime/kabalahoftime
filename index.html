@@ -1233,10 +1233,11 @@ transition: transform 0.3s;
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Gr"a</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name">Halacha — Daily Law</div>
+    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Zohar</span><span style="display:block">Shulchan Aruch</span><span style="display:block">Talmud (Chazarah)</span></div>
     <div id="hod-zohar-face" style="margin-bottom:6px;">Loading…</div>
     <div class="sefirah-main-text">Loading…</div>
-    <div class="sefirah-sub-text">Loading…</div>
+    <div id="hod-chazarah-face" class="sefirah-main-text" style="margin-top:4px;">Loading…</div>
+    <div class="sefirah-sub-text" style="display:none;"></div>
     <div class="sefirah-tags"></div>
     <div class="sefirah-detail"></div>
   </div>
@@ -6622,7 +6623,7 @@ transition: transform 0.3s;
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    cards[6].querySelector('.sefirah-cycle-name').innerHTML = 'Zohar · Shulchan Aruch · Daf Yomi Chazarah';
+    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar</span><span style="display:block">Shulchan Aruch</span><span style="display:block">Talmud (Chazarah)</span>';
 
     const hodChazarahHtml =
       `<div style="margin-bottom:4px;"></div>` +
@@ -6636,8 +6637,8 @@ transition: transform 0.3s;
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
         ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`;
-      cards[6].querySelector('.sefirah-sub-text').innerHTML = daf
-        ? `<span style="font-size:0.82em;color:var(--ink-dim)">Talmud (Chazarah)</span><br><strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`
+      document.getElementById('hod-chazarah-face').innerHTML = daf
+        ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`
         : '';
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
@@ -6665,8 +6666,8 @@ transition: transform 0.3s;
         `</div>`;
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
-      cards[6].querySelector('.sefirah-sub-text').innerHTML = daf
-        ? `<span style="font-size:0.82em;color:var(--ink-dim)">Talmud (Chazarah)</span><br><strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`
+      document.getElementById('hod-chazarah-face').innerHTML = daf
+        ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`
         : '';
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodCcHtml +
