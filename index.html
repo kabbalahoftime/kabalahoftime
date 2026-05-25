@@ -5844,7 +5844,9 @@ transition: transform 0.3s;
         document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
         document.getElementById('keter-kst-main').innerHTML = '';
       }
-      document.getElementById('keter-kst-meta').innerHTML = '';
+      document.getElementById('keter-kst-meta').innerHTML =
+        `<a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Keter Shem Tov on HebrewBooks</a>` +
+        ` <span style="color:var(--ink-mid);font-size:0.85em">— teachings of the Ba'al Shem Tov</span>`;
     }
 
     // Chok L'Yisrael (Yesod card)
