@@ -977,6 +977,50 @@ transition: transform 0.3s;
 .crown-text { font-size: 17px; }
 .sefirah-main-text { font-size: 16px; }
 }
+
+/* ── DAILY SCRIPT PANEL ── */
+.daily-script-lang-bar { display: flex; gap: 4px; }
+.lang-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--ink-soft);
+  font-size: 11px;
+  padding: 2px 7px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.lang-btn.active {
+  background: var(--gold);
+  color: var(--bg);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+.daily-script-inner {
+  padding: 0 16px 14px;
+  border-top: 1px solid var(--border);
+}
+#daily-script-content {
+  font-size: 0.88rem;
+  line-height: 2;
+  color: var(--ink);
+  white-space: pre-wrap;
+  padding: 12px 0 10px;
+  font-family: Georgia, serif;
+}
+.copy-script-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--gold);
+  font-size: 10px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+}
+.copy-script-btn:hover { background: var(--gold); color: var(--bg); }
 </style>
 
 </head>
@@ -1633,6 +1677,27 @@ transition: transform 0.3s;
   </div>
 
   <!-- FOOTER -->
+
+  <!-- DAILY SCRIPT — personal tool, below main content -->
+  <div id="daily-script-panel" style="margin:8px 16px 4px;border:1px solid var(--border);border-radius:6px;opacity:0.6;">
+    <div style="display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;" onclick="toggleDailyScript()">
+      <span style="font-size:10px;color:var(--ink-dim);letter-spacing:1.5px;flex:1;">daily script</span>
+      <div class="daily-script-lang-bar" onclick="event.stopPropagation()">
+        <button class="lang-btn active" id="lang-btn-en" onclick="setScriptLang('en')">EN</button>
+        <button class="lang-btn" id="lang-btn-he" onclick="setScriptLang('he')">HE</button>
+        <button class="lang-btn" id="lang-btn-es" onclick="setScriptLang('es')">ES</button>
+        <button class="lang-btn" id="lang-btn-fr" onclick="setScriptLang('fr')">FR</button>
+        <button class="lang-btn" id="lang-btn-pt" onclick="setScriptLang('pt')">PT</button>
+      </div>
+      <span id="daily-script-expand-icon" style="color:var(--ink-dim);font-size:12px">▾</span>
+    </div>
+    <div id="daily-script-body" style="display:none">
+      <div class="daily-script-inner">
+        <div id="daily-script-content">Loading…</div>
+        <button class="copy-script-btn" onclick="copyDailyScript()">Copy Script</button>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="footer-text">Based on the book</div>
@@ -5739,6 +5804,7 @@ transition: transform 0.3s;
       `<a href="${chabadRambam}/1" target="_blank" style="color:var(--gold)">View today's Rambam (1 chapter)</a>`;
 
     // 5. Keter Shem Tov — daily section (face)
+    let _kstTitleEn = null, _kstLabel = null;
     {
       const kstParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
       const kstParts = kstParasha ? kstParasha.split('-').map(p => p.trim()) : [];
@@ -5752,6 +5818,8 @@ transition: transform 0.3s;
       const kst  = getDailyKST(kstParashaNum, kstDow);
       const kst2 = kstParashaNum2 ? getDailyKST(kstParashaNum2, kstDow) : null;
       if (kst) {
+        _kstTitleEn = kst.titleEn || null;
+        _kstLabel   = kst.label   || null;
         document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov';
         function kstTitleHtml(he, en) {
           const heHtml = he ? `<span dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1em;line-height:1.4">${he}</span>` : '';
@@ -5884,6 +5952,7 @@ transition: transform 0.3s;
     // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
     let _hodZoharMainHtml = '';
     let _hodZoharMetaHtml = '';
+    let _hodZoharLabel = '';
     (() => {
       const ANCHOR      = KOT_YEAR_START; // same anchor as all KoT cycles
       const ZOHAR_TOTAL = 820; // 251 + 269 + 300
@@ -5919,6 +5988,7 @@ transition: transform 0.3s;
         } else {
           label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
         }
+        _hodZoharLabel    = label;
         _hodZoharMainHtml = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>`;
         _hodZoharMetaHtml = `R. Shimon bar Yochai · ${todayFolios} folios today`;
         if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong>, ${label} &nbsp;·&nbsp; <a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
@@ -5927,6 +5997,7 @@ transition: transform 0.3s;
         const syDay = cycleOffset - 358; // 1-5
         const chapters = (syDay === 5) ? 'Chapters\xa05\xa0&\xa06' : `Chapter\xa0${syDay}`;
         const syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${syDay === 5 ? 5 : syDay}`;
+        _hodZoharLabel    = 'Sefer Yetzirah ' + chapters;
         _hodZoharMainHtml = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters}</a>`;
         _hodZoharMetaHtml = `Day ${cycleOffset + 1} of cycle · completing the year`;
         if (faceEl) faceEl.innerHTML = `<strong>Sefer Yetzirah</strong>, ${chapters} &nbsp;·&nbsp; <a href="${syUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
@@ -7097,12 +7168,244 @@ transition: transform 0.3s;
         `<strong>${wk.b1_theme}</strong>` +
       `</div>` +
       weekRows;
+
+    // Pack data for Daily Script
+    _scriptData = {
+      d, kotWeek, hDateStr,
+      lmPartLabel, lmLessonInPart,
+      lmTheme: lmData ? lmData.theme : null,
+      kstTitleEn: _kstTitleEn,
+      kstLabel:   _kstLabel,
+      cy22Letter: cy22.dailyLetter,
+      cy22Heb:    cy22.dailyHebrew,
+      cy22Cycle:  cy22.cycle,
+      cy22Day:    cy22.day,
+      chSection, chReading,
+      combo,
+      omerCycle, omerPos,
+      ltSection, ltReading,
+      mishnaType: mishnaInfo.type,
+      mishnaTag1: mishnaInfo.tag1,
+      tanachTag1: tanachInfo.tag1,
+      dafName:    daf ? daf.name : null,
+      dafNum:     daf ? daf.daf  : null,
+      cy13Day:    cy13.day,
+      cy13Cycle:  cy13.cycle,
+      cy13AttrName:  cy13.attr.name,
+      cy13CycleAttr: cycleThemeAttr ? cycleThemeAttr.name : null,
+      cy41Day:    cy41.day,
+      cy41Cycle:  cy41.cycle,
+      cycleTheme: cycleCmd.theme,
+      dayCommandment: dayCmd.commandment,
+      hodZoharLabel: _hodZoharLabel,
+      halChofetz: hal.chofetz,
+      halCh1:    hal.ch1,
+      halCh2:    hal.ch2,
+      halSection: hal.section,
+      parasha:    _yesodParasha,
+      malchutName:  malTxt.name,
+      malchutTheme: wk.b1_theme,
+    };
+    document.getElementById('daily-script-content').textContent =
+      buildDailyScript(_scriptLang, _scriptData);
   }
 
   function changeDay(delta) {
     currentOffset += delta;
     document.querySelectorAll('.sefirah-card.expanded').forEach(c => c.classList.remove('expanded'));
     render();
+  }
+
+  // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
+  let _scriptLang = 'en';
+  let _scriptData = null;
+
+  function toggleDailyScript() {
+    const body = document.getElementById('daily-script-body');
+    const icon = document.getElementById('daily-script-expand-icon');
+    if (body.style.display === 'none') {
+      body.style.display = 'block';
+      icon.textContent = '▴';
+    } else {
+      body.style.display = 'none';
+      icon.textContent = '▾';
+    }
+  }
+
+  function setScriptLang(lang) {
+    _scriptLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById('lang-btn-' + lang);
+    if (btn) btn.classList.add('active');
+    if (_scriptData) {
+      document.getElementById('daily-script-content').textContent =
+        buildDailyScript(_scriptLang, _scriptData);
+    }
+  }
+
+  function copyDailyScript() {
+    const el = document.getElementById('daily-script-content');
+    if (!el) return;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(el.textContent).then(() => {
+        const btn = document.querySelector('.copy-script-btn');
+        if (btn) {
+          btn.textContent = 'Copied!';
+          setTimeout(() => { btn.textContent = 'Copy Script'; }, 2000);
+        }
+      });
+    }
+  }
+
+  const SCRIPT_T = {
+    en: {
+      opening:   'Ladies and Gentlemen, Baruch Hashem, Almighty, Omnipresent. May everyone receive together ultimate blessings, and virtue.',
+      today:     (d, w, h) => `Today is Day ${d} of the Kabbalah of Time calendar, Week ${w}. The Hebrew date is ${h}.`,
+      yesterday: (d, w)    => `Yesterday was Day ${d} — Week ${w} of the Kabbalah of Time calendar.`,
+      keter:    'In Keter (Crown):',
+      chochmah: 'In Chochmah (Wisdom):',
+      binah:    'In Binah (Understanding):',
+      chesed:   'In Chesed (Kindness):',
+      gevurah:  'In Gevurah (Strength):',
+      tiferet:  'In Tiferet (Beauty):',
+      netzach:  'In Netzach (Victory):',
+      hod:      'In Hod (Splendor):',
+      yesod:    'In Yesod (Foundation):',
+      malchut:  'In Malchut (Kingdom):',
+      closing:  'Have a wonderful evening and day!',
+    },
+    he: {
+      opening:   'ערב ובוקר מצוינים גבירותיי ורבותיי לעילוי נשמת רחל בת דוד',
+      today:     (d, w, h) => `היום הוא יום ${d} בלוח הקבלת הזמן, שבוע ${w}. התאריך העברי: ${h}.`,
+      yesterday: (d, w)    => `אתמול היה יום ${d} — שבוע ${w} בלוח הקבלת הזמן.`,
+      keter:    'בכתר:',
+      chochmah: 'בחכמה:',
+      binah:    'בבינה:',
+      chesed:   'בחסד:',
+      gevurah:  'בגבורה:',
+      tiferet:  'בתפארת:',
+      netzach:  'בנצח:',
+      hod:      'בהוד:',
+      yesod:    'ביסוד:',
+      malchut:  'במלכות:',
+      closing:  'שיהיה לכם ערב ויום נפלאים!',
+    },
+    es: {
+      opening:   'Por un Rio, Inmenso Mar',
+      today:     (d, w, h) => `Hoy es el Día ${d} del calendario Kabalá del Tiempo, Semana ${w}. La fecha hebrea es ${h}.`,
+      yesterday: (d, w)    => `Ayer fue el Día ${d} — Semana ${w} del calendario Kabalá del Tiempo.`,
+      keter:    'En Kéter (Corona):',
+      chochmah: 'En Jojmá (Sabiduría):',
+      binah:    'En Biná (Comprensión):',
+      chesed:   'En Jésed (Bondad):',
+      gevurah:  'En Gevurá (Fuerza):',
+      tiferet:  'En Tiféret (Belleza):',
+      netzach:  'En Nétzaj (Victoria):',
+      hod:      'En Hod (Esplendor):',
+      yesod:    'En Yesod (Fundamento):',
+      malchut:  'En Maljut (Reino):',
+      closing:  '¡Que tengan una tarde y un día maravillosos!',
+    },
+    fr: {
+      opening:   'Mesdammes et Messiers, Racontons Nous Comment Purifier.',
+      today:     (d, w, h) => `Aujourd'hui est le Jour ${d} du calendrier Kabbale du Temps, Semaine ${w}. La date hébraïque est ${h}.`,
+      yesterday: (d, w)    => `Hier était le Jour ${d} — Semaine ${w} du calendrier Kabbale du Temps.`,
+      keter:    'Dans Kéter (Couronne) :',
+      chochmah: "Dans 'Hokhmah (Sagesse) :",
+      binah:    'Dans Binah (Compréhension) :',
+      chesed:   'Dans Hessed (Bonté) :',
+      gevurah:  'Dans Gevourah (Force) :',
+      tiferet:  'Dans Tiferet (Beauté) :',
+      netzach:  'Dans Nétsah (Victoire) :',
+      hod:      'Dans Hod (Splendeur) :',
+      yesod:    'Dans Yesod (Fondement) :',
+      malchut:  'Dans Malkhout (Royauté) :',
+      closing:  'Passez une merveilleuse soirée et journée !',
+    },
+    pt: {
+      opening:   'Por Um Rio, Imenso Mar',
+      today:     (d, w, h) => `Hoje é o Dia ${d} do calendário Cabala do Tempo, Semana ${w}. A data hebraica é ${h}.`,
+      yesterday: (d, w)    => `Ontem foi o Dia ${d} — Semana ${w} do calendário Cabala do Tempo.`,
+      keter:    'Em Keter (Coroa):',
+      chochmah: 'Em Chochmá (Sabedoria):',
+      binah:    'Em Biná (Compreensão):',
+      chesed:   'Em Chesed (Bondade):',
+      gevurah:  'Em Gevurá (Força):',
+      tiferet:  'Em Tiferet (Beleza):',
+      netzach:  'Em Netzach (Vitória):',
+      hod:      'Em Hod (Esplendor):',
+      yesod:    'Em Yesod (Fundamento):',
+      malchut:  'Em Malchut (Reino):',
+      closing:  'Tenham uma tarde e um dia maravilhosos!',
+    },
+  };
+
+  function buildDailyScript(lang, data) {
+    const L = SCRIPT_T[lang] || SCRIPT_T.en;
+    const lines = [];
+
+    lines.push(L.opening);
+    lines.push('');
+
+    lines.push(L.today(data.d, data.kotWeek, data.hDateStr));
+    lines.push('');
+
+    if (data.d > 1) {
+      const yd = data.d - 1;
+      const yw = yd % 7 === 0 ? Math.floor(yd / 7) : Math.floor(yd / 7) + 1;
+      lines.push(L.yesterday(yd, yw));
+      lines.push('');
+    }
+
+    // Keter
+    let keterLine = L.keter;
+    if (data.lmTheme) keterLine += ` Likutei Moharan, ${data.lmPartLabel}, Lesson ${data.lmLessonInPart} — ${data.lmTheme}.`;
+    else              keterLine += ` Likutei Moharan, ${data.lmPartLabel}, Lesson ${data.lmLessonInPart}.`;
+    if (data.kstTitleEn) keterLine += ` Keter Shem Tov — ${data.kstTitleEn}.`;
+    lines.push(keterLine);
+
+    // Chochmah
+    lines.push(`${L.chochmah} Letter ${data.cy22Letter} (${data.cy22Heb}), Set ${data.cy22Cycle} · Day ${data.cy22Day} of 22. ${data.chSection}, ${data.chReading}.`);
+
+    // Binah
+    lines.push(`${L.binah} ${data.combo}. Omer Cycle ${data.omerCycle}, Position ${data.omerPos} of 49. Likutei Tefilot, ${data.ltSection}, ${data.ltReading}.`);
+
+    // Chesed
+    lines.push(`${L.chesed} ${data.mishnaType === 'tosefta' ? 'Tosefta' : 'Mishna'} — ${data.mishnaTag1}.`);
+
+    // Gevurah
+    let gevLine = `${L.gevurah} Tanach — ${data.tanachTag1}.`;
+    if (data.dafName) gevLine += ` Daf Yomi — ${data.dafName}, Daf ${data.dafNum}.`;
+    lines.push(gevLine);
+
+    // Tiferet
+    let tifLine = `${L.tiferet} 13 Attributes, Day ${data.cy13Day} · Cycle ${data.cy13Cycle}`;
+    if (data.cy13CycleAttr) tifLine += ` — ${data.cy13CycleAttr} / ${data.cy13AttrName}`;
+    else                    tifLine += ` — ${data.cy13AttrName}`;
+    tifLine += '.';
+    lines.push(tifLine);
+
+    // Netzach
+    lines.push(`${L.netzach} 41-Day Cycle, Day ${data.cy41Day} · Cycle ${data.cy41Cycle} — ${data.cycleTheme}. Commandment: ${data.dayCommandment}.`);
+
+    // Hod
+    let hodLine = L.hod;
+    if (data.hodZoharLabel) hodLine += ` Zohar — ${data.hodZoharLabel}.`;
+    if (!data.halChofetz)   hodLine += ` Shulchan Aruch, Orach Chaim ${data.halCh1} & ${data.halCh2}.`;
+    else                    hodLine += ` Sefer Chofetz Chaim, Section ${data.halSection}.`;
+    if (data.dafName)       hodLine += ` Talmud (Chazarah) — ${data.dafName}, Daf ${data.dafNum}.`;
+    lines.push(hodLine);
+
+    // Yesod
+    lines.push(`${L.yesod} Parasha ${data.parasha || 'of the week'}. Chok L'Yisrael.`);
+
+    // Malchut
+    lines.push(`${L.malchut} ${data.malchutName} — ${data.malchutTheme}.`);
+
+    lines.push('');
+    lines.push(L.closing);
+
+    return lines.join('\n');
   }
 
   function toggleExpand(card) {
