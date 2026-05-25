@@ -5818,11 +5818,27 @@ transition: transform 0.3s;
       const kst  = getDailyKST(kstParashaNum, kstDow);
       const kst2 = kstParashaNum2 ? getDailyKST(kstParashaNum2, kstDow) : null;
       const ohParashaNum = kstParasha ? (PARASHA_TO_NUMBER[kstParasha] || PARASHA_TO_NUMBER[kstParts[0]]) : null;
-      const ohBook = ohParashaNum
-        ? (ohParashaNum <= 12 ? 'Genesis' : ohParashaNum <= 23 ? 'Exodus' : ohParashaNum <= 33 ? 'Leviticus' : ohParashaNum <= 43 ? 'Numbers' : 'Deuteronomy')
-        : null;
-      const ohUrl = ohBook
-        ? `https://www.sefaria.org/Or_HaChaim_on_${ohBook}?tab=contents`
+      const OH_FIRST_VERSE = [
+        null,
+        ['Genesis',     1,  1], ['Genesis',     6,  9], ['Genesis',    12,  1], ['Genesis',    18,  1],
+        ['Genesis',    23,  1], ['Genesis',    25, 19], ['Genesis',    28, 10], ['Genesis',    32,  4],
+        ['Genesis',    37,  1], ['Genesis',    41,  1], ['Genesis',    44, 18], ['Genesis',    47, 28],
+        ['Exodus',      1,  1], ['Exodus',      6,  2], ['Exodus',     10,  1], ['Exodus',     13, 17],
+        ['Exodus',     18,  1], ['Exodus',     21,  1], ['Exodus',     25,  1], ['Exodus',     27, 20],
+        ['Exodus',     30, 11], ['Exodus',     35,  1], ['Exodus',     38, 21],
+        ['Leviticus',   1,  1], ['Leviticus',   6,  1], ['Leviticus',   9,  1], ['Leviticus',  12,  1],
+        ['Leviticus',  14,  1], ['Leviticus',  16,  1], ['Leviticus',  19,  1], ['Leviticus',  21,  1],
+        ['Leviticus',  25,  1], ['Leviticus',  26,  3],
+        ['Numbers',     1,  1], ['Numbers',     4, 21], ['Numbers',     8,  1], ['Numbers',    13,  1],
+        ['Numbers',    16,  1], ['Numbers',    19,  1], ['Numbers',    22,  2], ['Numbers',    25, 10],
+        ['Numbers',    30,  2], ['Numbers',    33,  1],
+        ['Deuteronomy', 1,  1], ['Deuteronomy', 3, 23], ['Deuteronomy', 7, 12], ['Deuteronomy',11, 26],
+        ['Deuteronomy',16, 18], ['Deuteronomy',21, 10], ['Deuteronomy',26,  1], ['Deuteronomy',29,  9],
+        ['Deuteronomy',31,  1], ['Deuteronomy',32,  1], ['Deuteronomy',33,  1],
+      ];
+      const ohVerse = ohParashaNum ? OH_FIRST_VERSE[ohParashaNum] : null;
+      const ohUrl = ohVerse
+        ? `https://www.sefaria.org/${ohVerse[0]}.${ohVerse[1]}.${ohVerse[2]}?lang=bi&with=Or%20HaChaim`
         : `https://www.sefaria.org/texts/Tanakh/Acharonim%20on%20Tanakh/Or%20HaChaim/Torah`;
       const ohLine = `; <span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
         ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
