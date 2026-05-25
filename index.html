@@ -5817,10 +5817,13 @@ transition: transform 0.3s;
       const kstDow = date.getDay(); // 0=Sun … 6=Shabbat
       const kst  = getDailyKST(kstParashaNum, kstDow);
       const kst2 = kstParashaNum2 ? getDailyKST(kstParashaNum2, kstDow) : null;
-      const ohUrlParasha = kstParasha ? kstParts[0].replace(/ /g, '_') : null;
-      const ohUrl = ohUrlParasha
-        ? `https://www.sefaria.org/Ohr_HaChaim.${ohUrlParasha}`
-        : `https://www.sefaria.org/Ohr_HaChaim?tab=contents`;
+      const ohParashaNum = kstParasha ? (PARASHA_TO_NUMBER[kstParasha] || PARASHA_TO_NUMBER[kstParts[0]]) : null;
+      const ohBook = ohParashaNum
+        ? (ohParashaNum <= 12 ? 'Genesis' : ohParashaNum <= 23 ? 'Exodus' : ohParashaNum <= 33 ? 'Leviticus' : ohParashaNum <= 43 ? 'Numbers' : 'Deuteronomy')
+        : null;
+      const ohUrl = ohBook
+        ? `https://www.sefaria.org/Or_HaChaim_on_${ohBook}?tab=contents`
+        : `https://www.sefaria.org/texts/Tanakh/Acharonim%20on%20Tanakh/Or%20HaChaim/Torah`;
       const ohLine = `; <span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
         ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
 
