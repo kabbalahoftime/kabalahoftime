@@ -7230,6 +7230,8 @@ transition: transform 0.3s;
       cy41Cycle:  cy41.cycle,
       cycleTheme: cycleCmd.theme,
       dayCommandment: dayCmd.commandment,
+      dayCommandmentText:   dayCmd.text,
+      cycleCommandmentText: TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : '',
       hodZoharLabel: _hodZoharLabel,
       halChofetz: hal.chofetz,
       halCh1:    hal.ch1,
@@ -7392,53 +7394,55 @@ transition: transform 0.3s;
 
     // Keter
     let keterLine = L.keter;
-    if (data.lmTheme) keterLine += ` Likutei Moharan, ${data.lmPartLabel}, Lesson ${data.lmLessonInPart} — ${data.lmTheme}.`;
-    else              keterLine += ` Likutei Moharan, ${data.lmPartLabel}, Lesson ${data.lmLessonInPart}.`;
-    if (data.kstTitleEn) keterLine += ` Keter Shem Tov — ${data.kstTitleEn}.`;
+    keterLine += ` Today's Likutei Moharan is Lesson ${data.lmLessonInPart} (${data.lmPartLabel})`;
+    if (data.lmTheme) keterLine += ` — ${data.lmTheme}`;
+    keterLine += '.';
+    if (data.kstTitleEn) keterLine += ` From Keter Shem Tov, ${data.kstLabel}: "${data.kstTitleEn}."`;
     lines.push(keterLine);
     lines.push('');
 
     // Chochmah
-    lines.push(`${L.chochmah} Letter ${data.cy22Letter} (${data.cy22Heb}), Set ${data.cy22Cycle} · Day ${data.cy22Day} of 22. ${data.chSection}, ${data.chReading}.`);
+    lines.push(`${L.chochmah} Today's letter in the Alef-Bet cycle is ${data.cy22Letter} (${data.cy22Heb}), Day ${data.cy22Day} of 22, Set ${data.cy22Cycle}. Torah Ohr reading: ${data.chSection}, ${data.chReading}.`);
     lines.push('');
 
     // Binah
-    lines.push(`${L.binah} ${data.combo}. Omer Cycle ${data.omerCycle}, Position ${data.omerPos} of 49. Likutei Tefilot, ${data.ltSection}, ${data.ltReading}.`);
+    lines.push(`${L.binah} ${data.combo}. We are at position ${data.omerPos} of 49 in Omer Cycle ${data.omerCycle}. Likutei Tefilot reading: ${data.ltSection}, ${data.ltReading}.`);
     lines.push('');
 
     // Chesed
-    lines.push(`${L.chesed} ${data.mishnaType === 'tosefta' ? 'Tosefta' : 'Mishna'} — ${data.mishnaTag1}.`);
+    lines.push(`${L.chesed} Today's ${data.mishnaType === 'tosefta' ? 'Tosefta' : 'Mishna'} portion is ${data.mishnaTag1}.`);
     lines.push('');
 
     // Gevurah
-    let gevLine = `${L.gevurah} Tanach — ${data.tanachTag1}.`;
-    if (data.dafName) gevLine += ` Daf Yomi — ${data.dafName}, Daf ${data.dafNum}.`;
+    let gevLine = `${L.gevurah} Today's Tanach portion is ${data.tanachTag1}.`;
+    if (data.dafName) gevLine += ` Daf Yomi: ${data.dafName}, Daf ${data.dafNum}.`;
     lines.push(gevLine);
     lines.push('');
 
     // Tiferet
-    let tifLine = `${L.tiferet} 13 Attributes, Day ${data.cy13Day} · Cycle ${data.cy13Cycle}`;
-    if (data.cy13CycleAttr) tifLine += ` — ${data.cy13CycleAttr} / ${data.cy13AttrName}`;
-    else                    tifLine += ` — ${data.cy13AttrName}`;
-    tifLine += '.';
+    let tifLine = `${L.tiferet} Day ${data.cy13Day} of the 13 Divine Attributes cycle (Cycle ${data.cy13Cycle}), focusing on `;
+    tifLine += data.cy13CycleAttr ? `${data.cy13CycleAttr} — ${data.cy13AttrName}.` : `${data.cy13AttrName}.`;
     lines.push(tifLine);
     lines.push('');
 
     // Netzach
-    lines.push(`${L.netzach} 41-Day Cycle, Day ${data.cy41Day} · Cycle ${data.cy41Cycle} — ${data.cycleTheme}. Commandment: ${data.dayCommandment}.`);
+    let netzLine = `${L.netzach} Day ${data.cy41Day} of Cycle ${data.cy41Cycle} in the 41-Day cycle.`;
+    netzLine += ` The commandment of the day: "${data.dayCommandmentText}."`;
+    if (data.cycleCommandmentText) netzLine += ` The cycle commandment: "${data.cycleCommandmentText}."`;
+    lines.push(netzLine);
     lines.push('');
 
     // Hod
     let hodLine = L.hod;
     if (data.hodZoharLabel) hodLine += ` Zohar — ${data.hodZoharLabel}.`;
-    if (!data.halChofetz)   hodLine += ` Shulchan Aruch, Orach Chaim ${data.halCh1} & ${data.halCh2}.`;
+    if (!data.halChofetz)   hodLine += ` Halacha reading: Shulchan Aruch, Orach Chaim, chapters ${data.halCh1} and ${data.halCh2}.`;
     else                    hodLine += ` Sefer Chofetz Chaim, Section ${data.halSection}.`;
-    if (data.dafName)       hodLine += ` Talmud (Chazarah) — ${data.dafName}, Daf ${data.dafNum}.`;
+    if (data.dafName)       hodLine += ` Talmud review: ${data.dafName}, Daf ${data.dafNum}.`;
     lines.push(hodLine);
     lines.push('');
 
     // Yesod
-    lines.push(`${L.yesod} Parasha ${data.parasha || 'of the week'}. Chok L'Yisrael.`);
+    lines.push(`${L.yesod} This week's parasha is ${data.parasha || 'of the week'}. Today's Chok L'Yisrael portion continues the weekly Torah cycle.`);
     lines.push('');
 
     // Malchut
