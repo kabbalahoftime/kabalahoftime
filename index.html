@@ -6622,7 +6622,7 @@ transition: transform 0.3s;
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    cards[6].querySelector('.sefirah-cycle-name').innerHTML = 'Zohar (2 Folios)<br>Mishnah Berurah (2 Chapters)';
+    cards[6].querySelector('.sefirah-cycle-name').innerHTML = 'Zohar · Shulchan Aruch · Daf Yomi Chazarah';
 
     const hodChazarahHtml =
       `<div style="margin-bottom:4px;"></div>` +
@@ -6636,7 +6636,9 @@ transition: transform 0.3s;
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
         ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`;
-      cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
+      cards[6].querySelector('.sefirah-sub-text').innerHTML = daf
+        ? `<strong>Daf Yomi Chazarah</strong> &nbsp;·&nbsp; ${daf.name} ${daf.heb}, Daf ${daf.daf}`
+        : '';
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
@@ -6663,7 +6665,9 @@ transition: transform 0.3s;
         `</div>`;
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
-      cards[6].querySelector('.sefirah-sub-text').innerHTML = '';
+      cards[6].querySelector('.sefirah-sub-text').innerHTML = daf
+        ? `<strong>Daf Yomi Chazarah</strong> &nbsp;·&nbsp; ${daf.name} ${daf.heb}, Daf ${daf.daf}`
+        : '';
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodCcHtml +
         hodChazarahHtml +
