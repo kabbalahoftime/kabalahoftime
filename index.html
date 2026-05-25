@@ -5821,7 +5821,7 @@ transition: transform 0.3s;
       const ohUrl = ohUrlParasha
         ? `https://www.sefaria.org/Ohr_HaChaim.${ohUrlParasha}`
         : `https://www.sefaria.org/Ohr_HaChaim?tab=contents`;
-      const ohLine = `<br><span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
+      const ohLine = `; <span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
         ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
 
       document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov and Ohr HaChaim HaKadosh';
