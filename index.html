@@ -5822,8 +5822,8 @@ transition: transform 0.3s;
         ? (ohParashaNum <= 12 ? 'Genesis' : ohParashaNum <= 23 ? 'Exodus' : ohParashaNum <= 33 ? 'Leviticus' : ohParashaNum <= 43 ? 'Numbers' : 'Deuteronomy')
         : null;
       const ohUrl = ohBook
-        ? `https://www.sefaria.org/Or_HaChaim_on_${ohBook}`
-        : `https://www.sefaria.org/Or_HaChaim_on_Genesis`;
+        ? `https://www.sefaria.org/Or_HaChaim_on_${ohBook}?tab=contents`
+        : `https://www.sefaria.org/texts/Tanakh/Acharonim%20on%20Tanakh/Or%20HaChaim/Torah`;
       const ohLine = `; <span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
         ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
 
