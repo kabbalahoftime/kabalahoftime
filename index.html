@@ -7396,20 +7396,25 @@ transition: transform 0.3s;
     else              keterLine += ` Likutei Moharan, ${data.lmPartLabel}, Lesson ${data.lmLessonInPart}.`;
     if (data.kstTitleEn) keterLine += ` Keter Shem Tov — ${data.kstTitleEn}.`;
     lines.push(keterLine);
+    lines.push('');
 
     // Chochmah
     lines.push(`${L.chochmah} Letter ${data.cy22Letter} (${data.cy22Heb}), Set ${data.cy22Cycle} · Day ${data.cy22Day} of 22. ${data.chSection}, ${data.chReading}.`);
+    lines.push('');
 
     // Binah
     lines.push(`${L.binah} ${data.combo}. Omer Cycle ${data.omerCycle}, Position ${data.omerPos} of 49. Likutei Tefilot, ${data.ltSection}, ${data.ltReading}.`);
+    lines.push('');
 
     // Chesed
     lines.push(`${L.chesed} ${data.mishnaType === 'tosefta' ? 'Tosefta' : 'Mishna'} — ${data.mishnaTag1}.`);
+    lines.push('');
 
     // Gevurah
     let gevLine = `${L.gevurah} Tanach — ${data.tanachTag1}.`;
     if (data.dafName) gevLine += ` Daf Yomi — ${data.dafName}, Daf ${data.dafNum}.`;
     lines.push(gevLine);
+    lines.push('');
 
     // Tiferet
     let tifLine = `${L.tiferet} 13 Attributes, Day ${data.cy13Day} · Cycle ${data.cy13Cycle}`;
@@ -7417,9 +7422,11 @@ transition: transform 0.3s;
     else                    tifLine += ` — ${data.cy13AttrName}`;
     tifLine += '.';
     lines.push(tifLine);
+    lines.push('');
 
     // Netzach
     lines.push(`${L.netzach} 41-Day Cycle, Day ${data.cy41Day} · Cycle ${data.cy41Cycle} — ${data.cycleTheme}. Commandment: ${data.dayCommandment}.`);
+    lines.push('');
 
     // Hod
     let hodLine = L.hod;
@@ -7428,9 +7435,11 @@ transition: transform 0.3s;
     else                    hodLine += ` Sefer Chofetz Chaim, Section ${data.halSection}.`;
     if (data.dafName)       hodLine += ` Talmud (Chazarah) — ${data.dafName}, Daf ${data.dafNum}.`;
     lines.push(hodLine);
+    lines.push('');
 
     // Yesod
     lines.push(`${L.yesod} Parasha ${data.parasha || 'of the week'}. Chok L'Yisrael.`);
+    lines.push('');
 
     // Malchut
     lines.push(`${L.malchut} ${data.malchutName} — ${data.malchutTheme}.`);
