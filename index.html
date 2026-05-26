@@ -1501,6 +1501,16 @@ transition: transform 0.3s;
             return `<br><br>${q.letter}<br><strong>${q.name}</strong>` +
                    `<br><span style="font-size:0.88em;opacity:0.8">${q.tikkunMethod}</span>`;
         }
+        // Expose shovavim data for script builder
+        window._shovavimScriptData = primaryData ? {
+            day:      _shovavimDay,
+            parashaNum: primaryData.relativeNumber,
+            cycle:    primaryData.cycle,
+            dayLet:   dayQ ? dayQ.letter : null,
+            dayName:  dayQ ? dayQ.name   : null,
+            dayTik:   dayQ ? dayQ.tikkunMethod : null,
+        } : null;
+
         let mainHtml = '';
         if (primaryData) {
             mainHtml = `<strong>${foundParasha.name}</strong><br>` +
@@ -7211,10 +7221,15 @@ transition: transform 0.3s;
       kstLabel:   _kstLabel,
       tehillimChapter,
       treasuryDay,
-      cy22Letter: cy22.dailyLetter,
-      cy22Heb:    cy22.dailyHebrew,
-      cy22Cycle:  cy22.cycle,
-      cy22Day:    cy22.day,
+      cy22Letter:       cy22.dailyLetter,
+      cy22Heb:          cy22.dailyHebrew,
+      cy22Cycle:        cy22.cycle,
+      cy22Day:          cy22.day,
+      cy22CycleLetters: cy22.letters,
+      cy22CycleHeb:     cy22.hebrew,
+      gatePrim:         gatesPrimName,
+      gateComp:         gatesCompName || null,
+      gatesIsVowel:     cyN === 17,
       chSection, chReading,
       tractTractate: tractData ? tractData.tractate : null,
       tractPeriod:   tractData ? tractData.period   : null,
@@ -7267,6 +7282,12 @@ transition: transform 0.3s;
       halCh2:    hal.ch2,
       halSection: hal.section,
       parasha:    _yesodParasha,
+      shovavimDay:      window._shovavimScriptData ? window._shovavimScriptData.day      : null,
+      shovavimParasha:  window._shovavimScriptData ? window._shovavimScriptData.parashaNum : null,
+      shovavimCycle:    window._shovavimScriptData ? window._shovavimScriptData.cycle     : null,
+      shovavimDayLet:   window._shovavimScriptData ? window._shovavimScriptData.dayLet    : null,
+      shovavimDayName:  window._shovavimScriptData ? window._shovavimScriptData.dayName   : null,
+      shovavimDayTik:   window._shovavimScriptData ? window._shovavimScriptData.dayTik    : null,
       malchutName:  malTxt.name,
       malchutTheme: wk.b1_theme,
       malchutAnimal: wk.b1_animal,
@@ -7336,7 +7357,8 @@ transition: transform 0.3s;
       keterKst:      (lb, ti, pa) => `From Keter Shem Tov — the daily treasury of Ba'al Shem Tov teachings — ${lb}: "${ti}." This week's Ohr HaChaim HaKadosh illuminates Parashat ${pa}.`,
       keterTehillim: (ch)         => `Today's Tehillim spans Chapters ${ch}.`,
       keterTreasury: (d)          => `The Treasury of Chassidic Tales brings Story ${d} for today's reflection.`,
-      chAlef:   (le, h, d, s) => `we turn to the 22-Day Alef-Bet cycle. Today's letter is ${le} (${h}), Day ${d} of 22 in Set ${s}.`,
+      chAlef:   (le, h, d, s, cycLet, cycHeb) => `we turn to the 22-Day Alef-Bet cycle. Today's letter is ${le} (${h}), Day ${d} of 22 in Set ${s}. The letters of this set are ${cycLet} (${cycHeb}).`,
+      chGate:   (prim, comp, isVowel) => isVowel ? `Through the 231 Gates — the foundational letter-combinations of creation — today's vowel point is ${prim}.` : `Through the 231 Gates — the foundational letter-combinations of creation — today's combination is ${prim}${comp ? ' + ' + comp : ''}.`,
       chTorah:  (s, r)        => `Our Torah Ohr / Likutei Torah reading comes from ${s}: ${r}.`,
       chTract:  (t, p, d)     => `This half-cycle we study ${t} (${p}), which explores: ${d}.`,
       binahCombo: (c, cy, p)  => `we contemplate the Sefirot combination of ${c}, at position ${p} of 49 in Omer Cycle ${cy}.`,
@@ -7364,7 +7386,7 @@ transition: transform 0.3s;
       hodHal:    (c1, c2)    => `Our Halacha study covers Shulchan Aruch, Orach Chaim, Chapters ${c1} and ${c2}.`,
       hodChof:   (s)         => `We study Sefer Chofetz Chaim, Section ${s} — the laws of proper speech.`,
       hodDaf:    (n, d)      => `For Talmud review, we revisit ${n}, Daf ${d}.`,
-      yesodText: (p)         => `this week's parasha is ${p}. The Chok L'Yisrael portion draws from Torah, Prophets, Writings, Midrash, and Zohar in a single unified daily reading.`,
+      yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `this week's parasha is ${p}. In the Shovavim system of spiritual rectification — the six (or eight) parashot of Shemot associated with Tikkun HaBrit — today is Day ${day} of the week, Parasha ${pNum} within Cycle ${pCyc}. The quality for today is ${dayLet} — ${dayName}: ${dayTik}. The Chok L'Yisrael portion unifies Torah, Prophets, Writings, Midrash, and Zohar in a single daily reading.`,
       malPerek:  (a)         => `In Perek Shirah — the Song of Creation — today's voice belongs to ${a}.`,
       malAvot:   (a)         => `From Pirkei Avot: ${a}.`,
     },
@@ -7380,7 +7402,8 @@ transition: transform 0.3s;
       keterKst:      (lb, ti, pa) => `מכתר שם טוב — אוצר תורות הבעל שם טוב — ${lb}: "${ti}." פרשת השבוע באור החיים הקדוש היא פרשת ${pa}.`,
       keterTehillim: (ch)         => `קריאת התהלים של היום: פרקים ${ch}.`,
       keterTreasury: (d)          => `מאוצר אגדות החסידות: סיפור ${d} לתפקיד היום.`,
-      chAlef:   (le, h, d, s) => `פונים למחזור עשרים ושתיים ימים של האלף-בית. אות היום היא ${le} (${h}), יום ${d} מתוך 22 במערכה ${s}.`,
+      chAlef:   (le, h, d, s, cycLet, cycHeb) => `פונים למחזור האלף-בית בן 22 הימים. אות היום היא ${le} (${h}), יום ${d} מתוך 22 במערכה ${s}. אותיות הסט הן ${cycLet} (${cycHeb}).`,
+      chGate:   (prim, comp, isVowel) => isVowel ? `בשערי ה-231 — צירופי האותיות הבסיסיים של הבריאה — הניקוד של היום הוא ${prim}.` : `בשערי ה-231 — צירופי האותיות הבסיסיים של הבריאה — הצירוף של היום הוא ${prim}${comp ? ' + ' + comp : ''}.`,
       chTorah:  (s, r)        => `קריאת אור תורה / ליקוטי תורה מגיעה מ${s}: ${r}.`,
       chTract:  (t, p, d)     => `בחצי מחזור זה אנו לומדים את המסכת ${t} (${p}), העוסקת ב: ${d}.`,
       binahCombo: (c, cy, p)  => `מתבוננים בצירוף הספירות של ${c}, במיקום ${p} מתוך 49 במחזור עומר ${cy}.`,
@@ -7408,7 +7431,7 @@ transition: transform 0.3s;
       hodHal:    (c1, c2)    => `לימוד ההלכה כולל שולחן ערוך, אורח חיים, סימנים ${c1} ו-${c2}.`,
       hodChof:   (s)         => `לומדים ספר חפץ חיים, חלק ${s} — הלכות שמירת הלשון.`,
       hodDaf:    (n, d)      => `לחזרה על הגמרא, חוזרים על ${n}, דף ${d}.`,
-      yesodText: (p)         => `פרשת השבוע היא ${p}. חוק לישראל של היום שואב מתורה, נביאים, כתובים, מדרש וזוהר בלימוד יומי אחד ומאוחד.`,
+      yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `פרשת השבוע היא ${p}. במסגרת שובבי"ם — שש (או שמונה) פרשות שמות הקשורות לתיקון הברית — היום הוא יום ${day} בשבוע, פרשה ${pNum} במחזור ${pCyc}. האיכות של יום זה היא ${dayLet} — ${dayName}: ${dayTik}. חוק לישראל מאחד תורה, נביאים, כתובים, מדרש וזוהר בקריאה יומית אחת ומשולבת.`,
       malPerek:  (a)         => `בפרק שירה — שיר הבריאה — הקול של היום שייך ל${a}.`,
       malAvot:   (a)         => `מפרקי אבות: ${a}.`,
     },
@@ -7424,7 +7447,8 @@ transition: transform 0.3s;
       keterKst:      (lb, ti, pa) => `Del Keter Shem Tov — el tesoro diario de enseñanzas del Baal Shem Tov — ${lb}: "${ti}." El comentario de esta semana del Ohr HaChaim HaKadosh ilumina Parashat ${pa}.`,
       keterTehillim: (ch)         => `Los Tehilim de hoy abarcan los Capítulos ${ch}.`,
       keterTreasury: (d)          => `El Tesoro de Cuentos Jasídicos nos trae la Historia ${d} para la reflexión de hoy.`,
-      chAlef:   (le, h, d, s) => `nos dirigimos al ciclo Alef-Bet de 22 días. La letra de hoy es ${le} (${h}), Día ${d} de 22 en la Serie ${s}.`,
+      chAlef:   (le, h, d, s, cycLet, cycHeb) => `nos dirigimos al ciclo Alef-Bet de 22 días. La letra de hoy es ${le} (${h}), Día ${d} de 22 en la Serie ${s}. Las letras de esta serie son ${cycLet} (${cycHeb}).`,
+      chGate:   (prim, comp, isVowel) => isVowel ? `A través de las 231 Puertas — las combinaciones de letras fundamentales de la creación — la vocal de hoy es ${prim}.` : `A través de las 231 Puertas — las combinaciones de letras fundamentales de la creación — la combinación de hoy es ${prim}${comp ? ' + ' + comp : ''}.`,
       chTorah:  (s, r)        => `Nuestra lectura de Ohr Torá / Likutei Torá proviene de ${s}: ${r}.`,
       chTract:  (t, p, d)     => `En este medio ciclo estudiamos ${t} (${p}), que explora: ${d}.`,
       binahCombo: (c, cy, p)  => `contemplamos la combinación de Sefirot de ${c}, en la posición ${p} de 49 en el Ciclo del Ómer ${cy}.`,
@@ -7452,7 +7476,7 @@ transition: transform 0.3s;
       hodHal:    (c1, c2)    => `Nuestro estudio de Halachá abarca el Shulján Aruj, Oraj Jaim, Capítulos ${c1} y ${c2}.`,
       hodChof:   (s)         => `Estudiamos el Sefer Jofetz Jaim, Sección ${s} — las leyes del habla adecuada.`,
       hodDaf:    (n, d)      => `Para el repaso del Talmud, revisamos ${n}, Daf ${d}.`,
-      yesodText: (p)         => `la parashá de esta semana es ${p}. La porción del Jok LeIsrael toma de Torá, Profetas, Escrituras, Midrash y Zohar en una sola lectura diaria unificada.`,
+      yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `la parashá de esta semana es ${p}. En el sistema espiritual del Shovavim — las seis (u ocho) parashot de Shemot asociadas al Tikún HaBrit — hoy es el Día ${day} de la semana, Parashá ${pNum} del Ciclo ${pCyc}. La cualidad del día es ${dayLet} — ${dayName}: ${dayTik}. La porción del Jok LeIsrael unifica Torá, Profetas, Escrituras, Midrash y Zohar en una única lectura diaria.`,
       malPerek:  (a)         => `En el Pérek Shirá — el Canto de la Creación — la voz de hoy pertenece a ${a}.`,
       malAvot:   (a)         => `De Pirké Avot: ${a}.`,
     },
@@ -7468,7 +7492,8 @@ transition: transform 0.3s;
       keterKst:      (lb, ti, pa) => `Du Keter Chem Tov — le trésor quotidien des enseignements du Baal Chem Tov — ${lb} : "${ti}." Le commentaire de cette semaine de l'Ohr HaChaïm HaKadoch illumine la Paracha ${pa}.`,
       keterTehillim: (ch)         => `Les Tehilim d'aujourd'hui s'étendent aux Chapitres ${ch}.`,
       keterTreasury: (d)          => `Le Trésor des Récits Hassidiques nous apporte l'Histoire ${d} pour la réflexion d'aujourd'hui.`,
-      chAlef:   (le, h, d, s) => `nous nous tournons vers le cycle Alef-Bet de 22 jours. La lettre d'aujourd'hui est ${le} (${h}), Jour ${d} sur 22 dans la Série ${s}.`,
+      chAlef:   (le, h, d, s, cycLet, cycHeb) => `nous nous tournons vers le cycle Alef-Bet de 22 jours. La lettre d'aujourd'hui est ${le} (${h}), Jour ${d} sur 22 dans la Série ${s}. Les lettres de cette série sont ${cycLet} (${cycHeb}).`,
+      chGate:   (prim, comp, isVowel) => isVowel ? `À travers les 231 Portes — les combinaisons de lettres fondamentales de la création — la voyelle d'aujourd'hui est ${prim}.` : `À travers les 231 Portes — les combinaisons de lettres fondamentales de la création — la combinaison d'aujourd'hui est ${prim}${comp ? ' + ' + comp : ''}.`,
       chTorah:  (s, r)        => `Notre lecture de l'Ohr Torah / Likoutei Torah provient de ${s} : ${r}.`,
       chTract:  (t, p, d)     => `En ce demi-cycle, nous étudions ${t} (${p}), qui explore : ${d}.`,
       binahCombo: (c, cy, p)  => `nous contemplons la combinaison des Séfirot de ${c}, à la position ${p} sur 49 dans le Cycle du Omer ${cy}.`,
@@ -7496,7 +7521,7 @@ transition: transform 0.3s;
       hodHal:    (c1, c2)    => `Notre étude de la Halakha couvre le Choulhan Aroukh, Orah Haïm, Chapitres ${c1} et ${c2}.`,
       hodChof:   (s)         => `Nous étudions le Séfer Hofets Haïm, Section ${s} — les lois de la parole adéquate.`,
       hodDaf:    (n, d)      => `Pour la révision du Talmud, nous revisitons ${n}, Daf ${d}.`,
-      yesodText: (p)         => `la Paracha de cette semaine est ${p}. La portion du Hok LeIsraël puise dans la Torah, les Prophètes, les Écrits, le Midrach et le Zohar en une seule lecture quotidienne unifiée.`,
+      yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `la Paracha de cette semaine est ${p}. Dans le système spirituel du Chovavim — les six (ou huit) Parachot de Chémot liées au Tikoun HaBrit — aujourd'hui est le Jour ${day} de la semaine, Paracha ${pNum} du Cycle ${pCyc}. La qualité de la journée est ${dayLet} — ${dayName} : ${dayTik}. La portion du Hok LeIsraël unifie Torah, Prophètes, Écrits, Midrach et Zohar en une seule lecture quotidienne.`,
       malPerek:  (a)         => `Dans le Pérek Chirah — le Chant de la Création — la voix d'aujourd'hui appartient à ${a}.`,
       malAvot:   (a)         => `Des Pirké Avot : ${a}.`,
     },
@@ -7512,7 +7537,8 @@ transition: transform 0.3s;
       keterKst:      (lb, ti, pa) => `Do Keter Shem Tov — o tesouro diário dos ensinamentos do Baal Shem Tov — ${lb}: "${ti}." O comentário desta semana do Ohr HaChaim HaKadosh ilumina a Parashat ${pa}.`,
       keterTehillim: (ch)         => `O Tehilim de hoje abrange os Capítulos ${ch}.`,
       keterTreasury: (d)          => `O Tesouro de Histórias Hassídicas nos traz a História ${d} para a reflexão de hoje.`,
-      chAlef:   (le, h, d, s) => `voltamo-nos para o ciclo Alef-Bet de 22 dias. A letra de hoje é ${le} (${h}), Dia ${d} de 22 na Série ${s}.`,
+      chAlef:   (le, h, d, s, cycLet, cycHeb) => `voltamo-nos para o ciclo Alef-Bet de 22 dias. A letra de hoje é ${le} (${h}), Dia ${d} de 22 na Série ${s}. As letras desta série são ${cycLet} (${cycHeb}).`,
+      chGate:   (prim, comp, isVowel) => isVowel ? `Através das 231 Portas — as combinações de letras fundamentais da criação — a vogal de hoje é ${prim}.` : `Através das 231 Portas — as combinações de letras fundamentais da criação — a combinação de hoje é ${prim}${comp ? ' + ' + comp : ''}.`,
       chTorah:  (s, r)        => `Nossa leitura do Ohr Torá / Likutei Torá vem de ${s}: ${r}.`,
       chTract:  (t, p, d)     => `Neste meio ciclo estudamos ${t} (${p}), que explora: ${d}.`,
       binahCombo: (c, cy, p)  => `contemplamos a combinação das Sefirot de ${c}, na posição ${p} de 49 no Ciclo do Ômer ${cy}.`,
@@ -7540,7 +7566,7 @@ transition: transform 0.3s;
       hodHal:    (c1, c2)    => `Nosso estudo de Halachá abrange o Shulchan Aruch, Orach Chaim, Capítulos ${c1} e ${c2}.`,
       hodChof:   (s)         => `Estudamos o Sefer Chofetz Chaim, Seção ${s} — as leis do discurso adequado.`,
       hodDaf:    (n, d)      => `Para a revisão do Talmude, revisitamos ${n}, Daf ${d}.`,
-      yesodText: (p)         => `a parashá desta semana é ${p}. A porção de Chok LeIsrael extrai da Torá, Profetas, Escritos, Midrash e Zohar em uma única leitura diária unificada.`,
+      yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `a parashá desta semana é ${p}. No sistema espiritual do Shovavim — as seis (ou oito) parashot de Shemot associadas ao Tikkun HaBrit — hoje é o Dia ${day} da semana, Parashá ${pNum} do Ciclo ${pCyc}. A qualidade do dia é ${dayLet} — ${dayName}: ${dayTik}. A porção de Chok LeIsrael unifica Torá, Profetas, Escritos, Midrash e Zohar em uma única leitura diária.`,
       malPerek:  (a)         => `No Perek Shirah — o Canto da Criação — a voz de hoje pertence a ${a}.`,
       malAvot:   (a)         => `Dos Pirkei Avot: ${a}.`,
     },
@@ -7574,7 +7600,8 @@ transition: transform 0.3s;
 
     // Chochmah
     let chLines = [L.chochmah];
-    chLines.push(L.chAlef(data.cy22Letter, data.cy22Heb, data.cy22Day, data.cy22Cycle));
+    chLines.push(L.chAlef(data.cy22Letter, data.cy22Heb, data.cy22Day, data.cy22Cycle, data.cy22CycleLetters, data.cy22CycleHeb));
+    chLines.push(L.chGate(data.gatePrim, data.gateComp, data.gatesIsVowel));
     chLines.push(L.chTorah(data.chSection, data.chReading));
     if (data.tractTractate) chLines.push(L.chTract(data.tractTractate, data.tractPeriod, data.tractDesc));
     lines.push(chLines.join(' '));
@@ -7636,7 +7663,15 @@ transition: transform 0.3s;
     lines.push('');
 
     // Yesod
-    lines.push(`${L.yesod} ${L.yesodText(data.parasha || '')}`);
+    lines.push(`${L.yesod} ${L.yesodText(
+      data.parasha || '',
+      data.shovavimDay   || '—',
+      data.shovavimParasha || '—',
+      data.shovavimCycle || '—',
+      data.shovavimDayLet  || '',
+      data.shovavimDayName || '',
+      data.shovavimDayTik  || ''
+    )}`);
     lines.push('');
 
     // Malchut
