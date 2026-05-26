@@ -7299,8 +7299,8 @@ transition: transform 0.3s;
       ksaLabel:      _ksaLabel,
       malchutName:  malTxt.name,
       malchutTheme: wk.b1_theme,
-      malchutAnimal: wk.b1_animal,
-      malchutAvot:   wk.b1_avot,
+      malchutAnimal: todayBook === DAY_BOOKS[0] ? wk.b1_animal : null,
+      malchutAvot:   todayBook === DAY_BOOKS[0] ? wk.b1_avot   : null,
     };
     document.getElementById('daily-script-content').textContent =
       _scriptBeginner ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
