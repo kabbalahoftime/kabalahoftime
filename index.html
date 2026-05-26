@@ -7328,81 +7328,221 @@ transition: transform 0.3s;
       opening:   'Ladies and Gentlemen, Baruch Hashem, Almighty, Omnipresent. May everyone receive together ultimate blessings, and virtue.',
       today:     (d, w, h) => `Today is Day ${d} of the Kabbalah of Time calendar, Week ${w}. The Hebrew date is ${h}.`,
       yesterday: (d, w)    => `Yesterday was Day ${d} — Week ${w} of the Kabbalah of Time calendar.`,
-      keter:    'In Keter (Crown):',
-      chochmah: 'In Chochmah (Wisdom):',
-      binah:    'In Binah (Understanding):',
-      chesed:   'In Chesed (Kindness):',
-      gevurah:  'In Gevurah (Strength):',
-      tiferet:  'In Tiferet (Beauty):',
-      netzach:  'In Netzach (Victory):',
-      hod:      'In Hod (Splendor):',
-      yesod:    'In Yesod (Foundation):',
-      malchut:  'In Malchut (Kingdom):',
-      closing:  'Have a wonderful evening and day!',
+      keter: 'In Keter (Crown):', chochmah: 'In Chochmah (Wisdom):', binah: 'In Binah (Understanding):',
+      chesed: 'In Chesed (Kindness):', gevurah: 'In Gevurah (Strength):', tiferet: 'In Tiferet (Beauty):',
+      netzach: 'In Netzach (Victory):', hod: 'In Hod (Splendor):', yesod: 'In Yesod (Foundation):', malchut: 'In Malchut (Kingdom):',
+      closing: 'Have a wonderful evening and day!',
+      keterLm:       (l, p, t)    => `Today's Likutei Moharan is Lesson ${l} (${p})${t ? ' — ' + t : ''}.`,
+      keterKst:      (lb, ti, pa) => `Keter Shem Tov and Ohr HaChaim HaKadosh — ${lb}: "${ti}." This week's Ohr HaChaim follows Parashat ${pa}.`,
+      keterTehillim: (ch)         => `Tehillim: Chapters ${ch}.`,
+      keterTreasury: (d)          => `Treasury of Chassidic Tales, Story ${d}.`,
+      chAlef:   (le, h, d, s) => `Today's letter in the Alef-Bet cycle is ${le} (${h}), Day ${d} of 22, Set ${s}.`,
+      chTorah:  (s, r)        => `Torah Ohr / Likutei Torah reading: ${s}, ${r}.`,
+      chTract:  (t, p, d)     => `Tractate Cycle — ${t} (${p}): ${d}.`,
+      binahCombo: (c, cy, p)  => `${c} — Omer Cycle ${cy}, position ${p} of 49.`,
+      binahLt:    (s, r)      => `Likutei Tefilot reading: ${s}, ${r}.`,
+      chesedMishna: (ty, tx, t1, t2) => `Today's ${ty === 'tosefta' ? 'Tosefta' : 'Mishna'} portion: ${tx} — ${t1}${t2 ? ', ' + t2 : ''}.`,
+      chesedBsht:   (r)            => `Light and Fire of the Baal Shem Tov: ${r}.`,
+      gevTanach: (t1, t2)   => `Today's Tanach portion: ${t1}${t2 ? ' — ' + t2 : ''}.`,
+      gevDaf:    (n, d)      => `Daf Yomi: ${n}, Daf ${d}.`,
+      gevNoam:   (t)         => `Noam Elimelech this week: ${t}.`,
+      tifCycle:  (d, c)      => `Day ${d} of the 13 Divine Attributes cycle, Cycle ${c}.`,
+      tifTheme:  (n, m)      => `Cycle theme: ${n} — ${m}.`,
+      tifAttr:   (n, h, m)   => `Today's attribute: ${n} (${h}) — ${m}.`,
+      tifPby:    (r, n, m)   => `Steps of Pinchas ben Yair, Rung ${r}: ${n} — ${m}.`,
+      tifTale:   (t)         => `Rebbe Nachman's tale: "${t}."`,
+      tifArush:  (b)         => `Rav Arush: ${b}.`,
+      tifDm:     (n, p, e)   => `Derech Mitzvosecha: ${n}${p ? ' · ' + p : ''} — ${e}.`,
+      netzCycle: (d, c)      => `Day ${d} of Cycle ${c} in the 41-Day cycle.`,
+      netzCmd:   (t)         => `The commandment of the day: "${t}."`,
+      netzCCmd:  (t)         => `The cycle commandment: "${t}."`,
+      netzSoul:  (l, w)      => `Soul level: ${l} — ${w}.`,
+      netzMivtz: (n)         => `Mivtzah: ${n}.`,
+      netzTikkun:(p)         => `Tikkun HaKlali: Psalm ${p}.`,
+      netzMaayan:(s, p, d)   => `Ma'ayan Ganim: ${s}, p. ${p} (Day ${d} of 368).`,
+      hodZohar:  (l)         => `Zohar — ${l}.`,
+      hodHal:    (c1, c2)    => `Halacha: Shulchan Aruch, Orach Chaim, chapters ${c1} and ${c2}.`,
+      hodChof:   (s)         => `Sefer Chofetz Chaim, Section ${s}.`,
+      hodDaf:    (n, d)      => `Talmud review: ${n}, Daf ${d}.`,
+      yesodText: (p)         => `This week's parasha is ${p}. Today's Chok L'Yisrael portion continues the weekly Torah cycle, spanning Torah, Prophets, Writings, Midrash, and Zohar.`,
+      malPerek:  (a)         => `Perek Shirah: ${a}.`,
+      malAvot:   (a)         => `Pirkei Avot: ${a}.`,
     },
     he: {
       opening:   'ערב ובוקר מצוינים גבירותיי ורבותיי לעילוי נשמת רחל בת דוד',
       today:     (d, w, h) => `היום הוא יום ${d} בלוח הקבלת הזמן, שבוע ${w}. התאריך העברי: ${h}.`,
       yesterday: (d, w)    => `אתמול היה יום ${d} — שבוע ${w} בלוח הקבלת הזמן.`,
-      keter:    'בכתר:',
-      chochmah: 'בחכמה:',
-      binah:    'בבינה:',
-      chesed:   'בחסד:',
-      gevurah:  'בגבורה:',
-      tiferet:  'בתפארת:',
-      netzach:  'בנצח:',
-      hod:      'בהוד:',
-      yesod:    'ביסוד:',
-      malchut:  'במלכות:',
-      closing:  'שיהיה לכם ערב ויום נפלאים!',
+      keter: 'בכתר:', chochmah: 'בחכמה:', binah: 'בבינה:', chesed: 'בחסד:',
+      gevurah: 'בגבורה:', tiferet: 'בתפארת:', netzach: 'בנצח:', hod: 'בהוד:',
+      yesod: 'ביסוד:', malchut: 'במלכות:',
+      closing: 'שיהיה לכם ערב ויום נפלאים!',
+      keterLm:       (l, p, t)    => `לימוד ליקוטי מוהר"ן של היום: שיעור ${l} (${p})${t ? ' — ' + t : ''}.`,
+      keterKst:      (lb, ti, pa) => `כתר שם טוב ואור החיים הקדוש — ${lb}: "${ti}" — פרשת ${pa}.`,
+      keterTehillim: (ch)         => `תהלים: פרקים ${ch}.`,
+      keterTreasury: (d)          => `אוצר אגדות החסידות, סיפור ${d}.`,
+      chAlef:   (le, h, d, s) => `האות של היום במחזור האלף-בית: ${le} (${h}), יום ${d} מתוך 22, מערכה ${s}.`,
+      chTorah:  (s, r)        => `קריאת אור תורה / ליקוטי תורה: ${s}, ${r}.`,
+      chTract:  (t, p, d)     => `מחזור המסכת — ${t} (${p}): ${d}.`,
+      binahCombo: (c, cy, p)  => `${c} — מחזור ספירת העומר ${cy}, מיקום ${p} מתוך 49.`,
+      binahLt:    (s, r)      => `קריאת ליקוטי תפילות: ${s}, ${r}.`,
+      chesedMishna: (ty, tx, t1, t2) => `קטע ה${ty === 'tosefta' ? 'תוספתא' : 'משנה'} של היום: ${tx} — ${t1}${t2 ? ', ' + t2 : ''}.`,
+      chesedBsht:   (r)            => `אור ואש של הבעל שם טוב: ${r}.`,
+      gevTanach: (t1, t2)   => `קטע התנ"ך של היום: ${t1}${t2 ? ' — ' + t2 : ''}.`,
+      gevDaf:    (n, d)      => `דף יומי: ${n}, דף ${d}.`,
+      gevNoam:   (t)         => `נועם אלימלך השבוע: ${t}.`,
+      tifCycle:  (d, c)      => `יום ${d} במחזור 13 מידות הרחמים, מחזור ${c}.`,
+      tifTheme:  (n, m)      => `נושא המחזור: ${n} — ${m}.`,
+      tifAttr:   (n, h, m)   => `המידה של היום: ${n} (${h}) — ${m}.`,
+      tifPby:    (r, n, m)   => `מסילת ישרים, שלב ${r}: ${n} — ${m}.`,
+      tifTale:   (t)         => `סיפור מרבי נחמן: "${t}."`,
+      tifArush:  (b)         => `רב שלום ארוש: ${b}.`,
+      tifDm:     (n, p, e)   => `דרך מצוותיך: ${n}${p ? ' · ' + p : ''} — ${e}.`,
+      netzCycle: (d, c)      => `יום ${d} ממחזור ${c} במחזור 41 הימים.`,
+      netzCmd:   (t)         => `מצוות היום: "${t}."`,
+      netzCCmd:  (t)         => `מצוות המחזור: "${t}."`,
+      netzSoul:  (l, w)      => `רמת הנשמה: ${l} — ${w}.`,
+      netzMivtz: (n)         => `מבצע: ${n}.`,
+      netzTikkun:(p)         => `תיקון הכללי: תהלים ${p}.`,
+      netzMaayan:(s, p, d)   => `מעיין גנים: ${s}, עמ' ${p} (יום ${d} מתוך 368).`,
+      hodZohar:  (l)         => `זוהר — ${l}.`,
+      hodHal:    (c1, c2)    => `הלכה: שולחן ערוך, אורח חיים, סימנים ${c1} ו-${c2}.`,
+      hodChof:   (s)         => `ספר חפץ חיים, חלק ${s}.`,
+      hodDaf:    (n, d)      => `חזרה על הגמרא: ${n}, דף ${d}.`,
+      yesodText: (p)         => `פרשת השבוע: ${p}. קטע חוק לישראל של היום ממשיך את מחזור התורה השבועי: תורה, נביאים, כתובים, מדרש וזוהר.`,
+      malPerek:  (a)         => `פרק שירה: ${a}.`,
+      malAvot:   (a)         => `פרקי אבות: ${a}.`,
     },
     es: {
       opening:   'Por un Rio, Inmenso Mar',
       today:     (d, w, h) => `Hoy es el Día ${d} del calendario Kabalá del Tiempo, Semana ${w}. La fecha hebrea es ${h}.`,
       yesterday: (d, w)    => `Ayer fue el Día ${d} — Semana ${w} del calendario Kabalá del Tiempo.`,
-      keter:    'En Kéter (Corona):',
-      chochmah: 'En Jojmá (Sabiduría):',
-      binah:    'En Biná (Comprensión):',
-      chesed:   'En Jésed (Bondad):',
-      gevurah:  'En Gevurá (Fuerza):',
-      tiferet:  'En Tiféret (Belleza):',
-      netzach:  'En Nétzaj (Victoria):',
-      hod:      'En Hod (Esplendor):',
-      yesod:    'En Yesod (Fundamento):',
-      malchut:  'En Maljut (Reino):',
-      closing:  '¡Que tengan una tarde y un día maravillosos!',
+      keter: 'En Kéter (Corona):', chochmah: 'En Jojmá (Sabiduría):', binah: 'En Biná (Comprensión):',
+      chesed: 'En Jésed (Bondad):', gevurah: 'En Gevurá (Fuerza):', tiferet: 'En Tiféret (Belleza):',
+      netzach: 'En Nétzaj (Victoria):', hod: 'En Hod (Esplendor):', yesod: 'En Yesod (Fundamento):', malchut: 'En Maljut (Reino):',
+      closing: '¡Que tengan una tarde y un día maravillosos!',
+      keterLm:       (l, p, t)    => `La lección de hoy del Likutei Moharán es la Lección ${l} (${p})${t ? ' — ' + t : ''}.`,
+      keterKst:      (lb, ti, pa) => `Keter Shem Tov y Ohr HaChaim HaKadosh — ${lb}: "${ti}." El Ohr HaChaim de esta semana corresponde a Parashat ${pa}.`,
+      keterTehillim: (ch)         => `Tehilim: Capítulos ${ch}.`,
+      keterTreasury: (d)          => `Tesoro de Cuentos Jasídicos, Historia ${d}.`,
+      chAlef:   (le, h, d, s) => `La letra de hoy en el ciclo Alef-Bet es ${le} (${h}), Día ${d} de 22, Serie ${s}.`,
+      chTorah:  (s, r)        => `Lectura del Ohr Torá / Likutei Torá: ${s}, ${r}.`,
+      chTract:  (t, p, d)     => `Ciclo de Tratado — ${t} (${p}): ${d}.`,
+      binahCombo: (c, cy, p)  => `${c} — Ciclo del Ómer ${cy}, posición ${p} de 49.`,
+      binahLt:    (s, r)      => `Lectura de Likutei Tefilot: ${s}, ${r}.`,
+      chesedMishna: (ty, tx, t1, t2) => `La porción de ${ty === 'tosefta' ? 'Tosefta' : 'Mishná'} de hoy: ${tx} — ${t1}${t2 ? ', ' + t2 : ''}.`,
+      chesedBsht:   (r)            => `Luz y Fuego del Baal Shem Tov: ${r}.`,
+      gevTanach: (t1, t2)   => `La porción de Tanaj de hoy: ${t1}${t2 ? ' — ' + t2 : ''}.`,
+      gevDaf:    (n, d)      => `Daf Yomi: ${n}, Daf ${d}.`,
+      gevNoam:   (t)         => `Noam Elimelej esta semana: ${t}.`,
+      tifCycle:  (d, c)      => `Día ${d} del ciclo de los 13 Atributos Divinos, Ciclo ${c}.`,
+      tifTheme:  (n, m)      => `Tema del ciclo: ${n} — ${m}.`,
+      tifAttr:   (n, h, m)   => `El atributo de hoy: ${n} (${h}) — ${m}.`,
+      tifPby:    (r, n, m)   => `Peldaños de Pinjás ben Yair, Peldaño ${r}: ${n} — ${m}.`,
+      tifTale:   (t)         => `El cuento de Rabi Najmán: "${t}."`,
+      tifArush:  (b)         => `Rav Shalom Arush: ${b}.`,
+      tifDm:     (n, p, e)   => `Derej Mitzvoteja: ${n}${p ? ' · ' + p : ''} — ${e}.`,
+      netzCycle: (d, c)      => `Día ${d} del Ciclo ${c} en el ciclo de 41 días.`,
+      netzCmd:   (t)         => `El mandamiento del día: "${t}."`,
+      netzCCmd:  (t)         => `El mandamiento del ciclo: "${t}."`,
+      netzSoul:  (l, w)      => `Nivel del alma: ${l} — ${w}.`,
+      netzMivtz: (n)         => `Campaña (Mivtzah): ${n}.`,
+      netzTikkun:(p)         => `Tikún HaKlali: Salmo ${p}.`,
+      netzMaayan:(s, p, d)   => `Ma'ayan Ganim: ${s}, p. ${p} (Día ${d} de 368).`,
+      hodZohar:  (l)         => `Zohar — ${l}.`,
+      hodHal:    (c1, c2)    => `Halachá: Shulján Aruj, Oraj Jaim, capítulos ${c1} y ${c2}.`,
+      hodChof:   (s)         => `Sefer Jofetz Jaim, Sección ${s}.`,
+      hodDaf:    (n, d)      => `Repaso del Talmud: ${n}, Daf ${d}.`,
+      yesodText: (p)         => `La parashá de esta semana es ${p}. La porción de Jok LeIsrael de hoy continúa el ciclo semanal de la Torá: Torá, Profetas, Escrituras, Midrash y Zohar.`,
+      malPerek:  (a)         => `Pérek Shirá: ${a}.`,
+      malAvot:   (a)         => `Pirké Avot: ${a}.`,
     },
     fr: {
       opening:   'Mesdammes et Messiers, Racontons Nous Comment Purifier.',
       today:     (d, w, h) => `Aujourd'hui est le Jour ${d} du calendrier Kabbale du Temps, Semaine ${w}. La date hébraïque est ${h}.`,
       yesterday: (d, w)    => `Hier était le Jour ${d} — Semaine ${w} du calendrier Kabbale du Temps.`,
-      keter:    'Dans Kéter (Couronne) :',
-      chochmah: "Dans 'Hokhmah (Sagesse) :",
-      binah:    'Dans Binah (Compréhension) :',
-      chesed:   'Dans Hessed (Bonté) :',
-      gevurah:  'Dans Gevourah (Force) :',
-      tiferet:  'Dans Tiferet (Beauté) :',
-      netzach:  'Dans Nétsah (Victoire) :',
-      hod:      'Dans Hod (Splendeur) :',
-      yesod:    'Dans Yesod (Fondement) :',
-      malchut:  'Dans Malkhout (Royauté) :',
-      closing:  'Passez une merveilleuse soirée et journée !',
+      keter: 'Dans Kéter (Couronne) :', chochmah: "Dans 'Hokhmah (Sagesse) :", binah: 'Dans Binah (Compréhension) :',
+      chesed: 'Dans Hessed (Bonté) :', gevurah: 'Dans Gevourah (Force) :', tiferet: 'Dans Tiferet (Beauté) :',
+      netzach: 'Dans Nétsah (Victoire) :', hod: 'Dans Hod (Splendeur) :', yesod: 'Dans Yesod (Fondement) :', malchut: 'Dans Malkhout (Royauté) :',
+      closing: 'Passez une merveilleuse soirée et journée !',
+      keterLm:       (l, p, t)    => `La leçon du jour du Likoutei Moharan est la Leçon ${l} (${p})${t ? ' — ' + t : ''}.`,
+      keterKst:      (lb, ti, pa) => `Keter Chem Tov et Ohr HaChaïm HaKadoch — ${lb} : "${ti}." Le Ohr HaChaïm de cette semaine suit la Paracha ${pa}.`,
+      keterTehillim: (ch)         => `Tehilim : Chapitres ${ch}.`,
+      keterTreasury: (d)          => `Trésor des Récits Hassidiques, Histoire ${d}.`,
+      chAlef:   (le, h, d, s) => `La lettre d'aujourd'hui dans le cycle Alef-Bet est ${le} (${h}), Jour ${d} sur 22, Série ${s}.`,
+      chTorah:  (s, r)        => `Lecture de l'Ohr Torah / Likoutei Torah : ${s}, ${r}.`,
+      chTract:  (t, p, d)     => `Cycle de Traité — ${t} (${p}) : ${d}.`,
+      binahCombo: (c, cy, p)  => `${c} — Cycle du Omer ${cy}, position ${p} sur 49.`,
+      binahLt:    (s, r)      => `Lecture du Likoutei Tefilot : ${s}, ${r}.`,
+      chesedMishna: (ty, tx, t1, t2) => `La portion de ${ty === 'tosefta' ? 'Tossefta' : 'Michna'} d'aujourd'hui : ${tx} — ${t1}${t2 ? ', ' + t2 : ''}.`,
+      chesedBsht:   (r)            => `Lumière et Feu du Baal Chem Tov : ${r}.`,
+      gevTanach: (t1, t2)   => `La portion de Tanakh d'aujourd'hui : ${t1}${t2 ? ' — ' + t2 : ''}.`,
+      gevDaf:    (n, d)      => `Daf Yomi : ${n}, Daf ${d}.`,
+      gevNoam:   (t)         => `Noam Elimelekh cette semaine : ${t}.`,
+      tifCycle:  (d, c)      => `Jour ${d} du cycle des 13 Attributs Divins, Cycle ${c}.`,
+      tifTheme:  (n, m)      => `Thème du cycle : ${n} — ${m}.`,
+      tifAttr:   (n, h, m)   => `L'attribut d'aujourd'hui : ${n} (${h}) — ${m}.`,
+      tifPby:    (r, n, m)   => `Échelons de Pinhas ben Yaïr, Échelon ${r} : ${n} — ${m}.`,
+      tifTale:   (t)         => `Le conte de Rabbi Nahman : "${t}."`,
+      tifArush:  (b)         => `Rav Chalom Arouch : ${b}.`,
+      tifDm:     (n, p, e)   => `Derekh Mitsvotekha : ${n}${p ? ' · ' + p : ''} — ${e}.`,
+      netzCycle: (d, c)      => `Jour ${d} du Cycle ${c} dans le cycle de 41 jours.`,
+      netzCmd:   (t)         => `Le commandement du jour : "${t}."`,
+      netzCCmd:  (t)         => `Le commandement du cycle : "${t}."`,
+      netzSoul:  (l, w)      => `Niveau de l'âme : ${l} — ${w}.`,
+      netzMivtz: (n)         => `Campagne (Mivtzah) : ${n}.`,
+      netzTikkun:(p)         => `Tikkoun HaKlali : Psaume ${p}.`,
+      netzMaayan:(s, p, d)   => `Ma'ayan Ganim : ${s}, p. ${p} (Jour ${d} sur 368).`,
+      hodZohar:  (l)         => `Zohar — ${l}.`,
+      hodHal:    (c1, c2)    => `Halakha : Choulhan Aroukh, Orah Haïm, chapitres ${c1} et ${c2}.`,
+      hodChof:   (s)         => `Séfer Hofets Haïm, Section ${s}.`,
+      hodDaf:    (n, d)      => `Révision du Talmud : ${n}, Daf ${d}.`,
+      yesodText: (p)         => `La Paracha de cette semaine est ${p}. La portion du Hok LeIsraël d'aujourd'hui continue le cycle hebdomadaire de la Torah : Torah, Prophètes, Écrits, Midrach et Zohar.`,
+      malPerek:  (a)         => `Pérek Chirah : ${a}.`,
+      malAvot:   (a)         => `Pirké Avot : ${a}.`,
     },
     pt: {
       opening:   'Por Um Rio, Imenso Mar',
       today:     (d, w, h) => `Hoje é o Dia ${d} do calendário Cabala do Tempo, Semana ${w}. A data hebraica é ${h}.`,
       yesterday: (d, w)    => `Ontem foi o Dia ${d} — Semana ${w} do calendário Cabala do Tempo.`,
-      keter:    'Em Keter (Coroa):',
-      chochmah: 'Em Chochmá (Sabedoria):',
-      binah:    'Em Biná (Compreensão):',
-      chesed:   'Em Chesed (Bondade):',
-      gevurah:  'Em Gevurá (Força):',
-      tiferet:  'Em Tiferet (Beleza):',
-      netzach:  'Em Netzach (Vitória):',
-      hod:      'Em Hod (Esplendor):',
-      yesod:    'Em Yesod (Fundamento):',
-      malchut:  'Em Malchut (Reino):',
-      closing:  'Tenham uma tarde e um dia maravilhosos!',
+      keter: 'Em Keter (Coroa):', chochmah: 'Em Chochmá (Sabedoria):', binah: 'Em Biná (Compreensão):',
+      chesed: 'Em Chesed (Bondade):', gevurah: 'Em Gevurá (Força):', tiferet: 'Em Tiferet (Beleza):',
+      netzach: 'Em Netzach (Vitória):', hod: 'Em Hod (Esplendor):', yesod: 'Em Yesod (Fundamento):', malchut: 'Em Malchut (Reino):',
+      closing: 'Tenham uma tarde e um dia maravilhosos!',
+      keterLm:       (l, p, t)    => `O estudo de hoje do Likutei Moharán é a Lição ${l} (${p})${t ? ' — ' + t : ''}.`,
+      keterKst:      (lb, ti, pa) => `Keter Shem Tov e Ohr HaChaim HaKadosh — ${lb}: "${ti}." O Ohr HaChaim desta semana segue a Parashat ${pa}.`,
+      keterTehillim: (ch)         => `Tehilim: Capítulos ${ch}.`,
+      keterTreasury: (d)          => `Tesouro de Histórias Hassídicas, História ${d}.`,
+      chAlef:   (le, h, d, s) => `A letra de hoje no ciclo Alef-Bet é ${le} (${h}), Dia ${d} de 22, Série ${s}.`,
+      chTorah:  (s, r)        => `Leitura do Ohr Torá / Likutei Torá: ${s}, ${r}.`,
+      chTract:  (t, p, d)     => `Ciclo de Tratado — ${t} (${p}): ${d}.`,
+      binahCombo: (c, cy, p)  => `${c} — Ciclo do Ômer ${cy}, posição ${p} de 49.`,
+      binahLt:    (s, r)      => `Leitura de Likutei Tefilot: ${s}, ${r}.`,
+      chesedMishna: (ty, tx, t1, t2) => `A porção de ${ty === 'tosefta' ? 'Tosefta' : 'Mishná'} de hoje: ${tx} — ${t1}${t2 ? ', ' + t2 : ''}.`,
+      chesedBsht:   (r)            => `Luz e Fogo do Baal Shem Tov: ${r}.`,
+      gevTanach: (t1, t2)   => `A porção do Tanach de hoje: ${t1}${t2 ? ' — ' + t2 : ''}.`,
+      gevDaf:    (n, d)      => `Daf Yomi: ${n}, Daf ${d}.`,
+      gevNoam:   (t)         => `Noam Elimelech esta semana: ${t}.`,
+      tifCycle:  (d, c)      => `Dia ${d} do ciclo dos 13 Atributos Divinos, Ciclo ${c}.`,
+      tifTheme:  (n, m)      => `Tema do ciclo: ${n} — ${m}.`,
+      tifAttr:   (n, h, m)   => `O atributo de hoje: ${n} (${h}) — ${m}.`,
+      tifPby:    (r, n, m)   => `Degraus de Pinchas ben Yair, Degrau ${r}: ${n} — ${m}.`,
+      tifTale:   (t)         => `O conto do Rabi Nachman: "${t}."`,
+      tifArush:  (b)         => `Rav Shalom Arush: ${b}.`,
+      tifDm:     (n, p, e)   => `Derech Mitzvotecha: ${n}${p ? ' · ' + p : ''} — ${e}.`,
+      netzCycle: (d, c)      => `Dia ${d} do Ciclo ${c} no ciclo de 41 dias.`,
+      netzCmd:   (t)         => `O mandamento do dia: "${t}."`,
+      netzCCmd:  (t)         => `O mandamento do ciclo: "${t}."`,
+      netzSoul:  (l, w)      => `Nível da alma: ${l} — ${w}.`,
+      netzMivtz: (n)         => `Campanha (Mivtzah): ${n}.`,
+      netzTikkun:(p)         => `Tikkun HaKlali: Salmo ${p}.`,
+      netzMaayan:(s, p, d)   => `Ma'ayan Ganim: ${s}, p. ${p} (Dia ${d} de 368).`,
+      hodZohar:  (l)         => `Zohar — ${l}.`,
+      hodHal:    (c1, c2)    => `Halachá: Shulchan Aruch, Orach Chaim, capítulos ${c1} e ${c2}.`,
+      hodChof:   (s)         => `Sefer Chofetz Chaim, Seção ${s}.`,
+      hodDaf:    (n, d)      => `Revisão do Talmude: ${n}, Daf ${d}.`,
+      yesodText: (p)         => `A parashá desta semana é ${p}. A porção de Chok LeIsrael de hoje continua o ciclo semanal da Torá: Torá, Profetas, Escritos, Midrash e Zohar.`,
+      malPerek:  (a)         => `Perek Shirah: ${a}.`,
+      malAvot:   (a)         => `Pirkei Avot: ${a}.`,
     },
   };
 
@@ -7424,86 +7564,86 @@ transition: transform 0.3s;
     }
 
     // Keter
-    let keterLines = [`${L.keter}`];
-    keterLines.push(`Today's Likutei Moharan is Lesson ${data.lmLessonInPart} (${data.lmPartLabel})${data.lmTheme ? ' — ' + data.lmTheme : ''}.`);
-    if (data.kstTitleEn) keterLines.push(`Keter Shem Tov and Ohr HaChaim HaKadosh — ${data.kstLabel}: "${data.kstTitleEn}." This week's Ohr HaChaim HaKadosh follows Parashat ${data.parasha || 'the week'}.`);
-    if (data.tehillimChapter) keterLines.push(`Tehillim: Chapters ${data.tehillimChapter}.`);
-    if (data.treasuryDay) keterLines.push(`Treasury of Chassidic Tales, Story ${data.treasuryDay}.`);
+    let keterLines = [L.keter];
+    keterLines.push(L.keterLm(data.lmLessonInPart, data.lmPartLabel, data.lmTheme));
+    if (data.kstTitleEn) keterLines.push(L.keterKst(data.kstLabel, data.kstTitleEn, data.parasha || ''));
+    if (data.tehillimChapter) keterLines.push(L.keterTehillim(data.tehillimChapter));
+    if (data.treasuryDay) keterLines.push(L.keterTreasury(data.treasuryDay));
     lines.push(keterLines.join(' '));
     lines.push('');
 
     // Chochmah
-    let chLines = [`${L.chochmah}`];
-    chLines.push(`Today's letter in the Alef-Bet cycle is ${data.cy22Letter} (${data.cy22Heb}), Day ${data.cy22Day} of 22, Set ${data.cy22Cycle}.`);
-    chLines.push(`Torah Ohr / Likutei Torah reading: ${data.chSection}, ${data.chReading}.`);
-    if (data.tractTractate) chLines.push(`Tractate Cycle — ${data.tractTractate} (${data.tractPeriod}): ${data.tractDesc}.`);
+    let chLines = [L.chochmah];
+    chLines.push(L.chAlef(data.cy22Letter, data.cy22Heb, data.cy22Day, data.cy22Cycle));
+    chLines.push(L.chTorah(data.chSection, data.chReading));
+    if (data.tractTractate) chLines.push(L.chTract(data.tractTractate, data.tractPeriod, data.tractDesc));
     lines.push(chLines.join(' '));
     lines.push('');
 
     // Binah
-    let binahLines = [`${L.binah}`];
-    binahLines.push(`${data.combo} — Omer Cycle ${data.omerCycle}, position ${data.omerPos} of 49.`);
-    binahLines.push(`Likutei Tefilot reading: ${data.ltSection}, ${data.ltReading}.`);
+    let binahLines = [L.binah];
+    binahLines.push(L.binahCombo(data.combo, data.omerCycle, data.omerPos));
+    binahLines.push(L.binahLt(data.ltSection, data.ltReading));
     lines.push(binahLines.join(' '));
     lines.push('');
 
     // Chesed
-    let chesedLines = [`${L.chesed}`];
-    chesedLines.push(`Today's ${data.mishnaType === 'tosefta' ? 'Tosefta' : 'Mishna'} portion: ${data.mishnaText} — ${data.mishnaTag1}${data.mishnaTag2 ? ', ' + data.mishnaTag2 : ''}.`);
-    if (data.bshtReading) chesedLines.push(`Light and Fire of the Baal Shem Tov: ${data.bshtReading}.`);
+    let chesedLines = [L.chesed];
+    chesedLines.push(L.chesedMishna(data.mishnaType, data.mishnaText, data.mishnaTag1, data.mishnaTag2));
+    if (data.bshtReading) chesedLines.push(L.chesedBsht(data.bshtReading));
     lines.push(chesedLines.join(' '));
     lines.push('');
 
     // Gevurah
-    let gevLines = [`${L.gevurah}`];
-    gevLines.push(`Today's Tanach portion: ${data.tanachTag1}${data.tanachTag2 ? ' — ' + data.tanachTag2 : ''}.`);
-    if (data.dafName) gevLines.push(`Daf Yomi: ${data.dafName}, Daf ${data.dafNum}.`);
-    if (data.noamTitle) gevLines.push(`Noam Elimelech this week: ${data.noamTitle}.`);
+    let gevLines = [L.gevurah];
+    gevLines.push(L.gevTanach(data.tanachTag1, data.tanachTag2));
+    if (data.dafName) gevLines.push(L.gevDaf(data.dafName, data.dafNum));
+    if (data.noamTitle) gevLines.push(L.gevNoam(data.noamTitle));
     lines.push(gevLines.join(' '));
     lines.push('');
 
     // Tiferet
-    let tifLines = [`${L.tiferet}`];
-    tifLines.push(`Day ${data.cy13Day} of the 13 Divine Attributes cycle, Cycle ${data.cy13Cycle}.`);
-    if (data.cy13CycleAttr) tifLines.push(`Cycle theme: ${data.cy13CycleAttr} — ${data.cy13CycleAttrMeaning}.`);
-    tifLines.push(`Today's attribute: ${data.cy13AttrName} (${data.cy13AttrHebrew}) — ${data.cy13AttrMeaning}.`);
-    if (data.pbyName) tifLines.push(`Steps of Pinchas ben Yair, Rung ${data.pbyRung}: ${data.pbyName} — ${data.pbyMeaning}.`);
-    if (data.nachmanTale) tifLines.push(`Rebbe Nachman's tale: "${data.nachmanTale}."`);
-    if (data.arushBook) tifLines.push(`Rav Arush: ${data.arushBook}.`);
-    if (data.dmName) tifLines.push(`Derech Mitzvosecha: ${data.dmName}${data.dmPart ? ' · ' + data.dmPart : ''} — ${data.dmEnglish}.`);
+    let tifLines = [L.tiferet];
+    tifLines.push(L.tifCycle(data.cy13Day, data.cy13Cycle));
+    if (data.cy13CycleAttr) tifLines.push(L.tifTheme(data.cy13CycleAttr, data.cy13CycleAttrMeaning));
+    tifLines.push(L.tifAttr(data.cy13AttrName, data.cy13AttrHebrew, data.cy13AttrMeaning));
+    if (data.pbyName) tifLines.push(L.tifPby(data.pbyRung, data.pbyName, data.pbyMeaning));
+    if (data.nachmanTale) tifLines.push(L.tifTale(data.nachmanTale));
+    if (data.arushBook) tifLines.push(L.tifArush(data.arushBook));
+    if (data.dmName) tifLines.push(L.tifDm(data.dmName, data.dmPart, data.dmEnglish));
     lines.push(tifLines.join(' '));
     lines.push('');
 
     // Netzach
-    let netzLines = [`${L.netzach}`];
-    netzLines.push(`Day ${data.cy41Day} of Cycle ${data.cy41Cycle} in the 41-Day cycle.`);
-    netzLines.push(`The commandment of the day: "${data.dayCommandmentText}."`);
-    if (data.cycleCommandmentText) netzLines.push(`The cycle commandment: "${data.cycleCommandmentText}."`);
-    netzLines.push(`Soul level: ${data.cy41SoulLevelShort} — ${data.cy41World}.`);
-    if (data.cy41Mivtzah) netzLines.push(`Mivtzah: ${data.cy41Mivtzah}.`);
-    if (data.tikkunPsalm) netzLines.push(`Tikkun HaKlali: Psalm ${data.tikkunPsalm}.`);
-    if (data.meynSection) netzLines.push(`Ma'ayan Ganim: ${data.meynSection}, p. ${data.meynPage} (Day ${data.meynDay} of 368).`);
+    let netzLines = [L.netzach];
+    netzLines.push(L.netzCycle(data.cy41Day, data.cy41Cycle));
+    netzLines.push(L.netzCmd(data.dayCommandmentText));
+    if (data.cycleCommandmentText) netzLines.push(L.netzCCmd(data.cycleCommandmentText));
+    netzLines.push(L.netzSoul(data.cy41SoulLevelShort, data.cy41World));
+    if (data.cy41Mivtzah) netzLines.push(L.netzMivtz(data.cy41Mivtzah));
+    if (data.tikkunPsalm) netzLines.push(L.netzTikkun(data.tikkunPsalm));
+    if (data.meynSection) netzLines.push(L.netzMaayan(data.meynSection, data.meynPage, data.meynDay));
     lines.push(netzLines.join(' '));
     lines.push('');
 
     // Hod
-    let hodLines = [`${L.hod}`];
-    if (data.hodZoharLabel) hodLines.push(`Zohar — ${data.hodZoharLabel}.`);
-    if (!data.halChofetz)   hodLines.push(`Halacha: Shulchan Aruch, Orach Chaim, chapters ${data.halCh1} and ${data.halCh2}.`);
-    else                    hodLines.push(`Sefer Chofetz Chaim, Section ${data.halSection}.`);
-    if (data.dafName)       hodLines.push(`Talmud review: ${data.dafName}, Daf ${data.dafNum}.`);
+    let hodLines = [L.hod];
+    if (data.hodZoharLabel) hodLines.push(L.hodZohar(data.hodZoharLabel));
+    if (!data.halChofetz)   hodLines.push(L.hodHal(data.halCh1, data.halCh2));
+    else                    hodLines.push(L.hodChof(data.halSection));
+    if (data.dafName)       hodLines.push(L.hodDaf(data.dafName, data.dafNum));
     lines.push(hodLines.join(' '));
     lines.push('');
 
     // Yesod
-    lines.push(`${L.yesod} This week's parasha is ${data.parasha || 'the week\'s portion'}. Today's Chok L'Yisrael portion continues the weekly Torah cycle, spanning Torah, Prophets, Writings, Midrash, and Zohar.`);
+    lines.push(`${L.yesod} ${L.yesodText(data.parasha || '')}`);
     lines.push('');
 
     // Malchut
-    let malLines = [`${L.malchut}`];
+    let malLines = [L.malchut];
     malLines.push(`${data.malchutName} — ${data.malchutTheme}.`);
-    if (data.malchutAnimal) malLines.push(`Perek Shirah: ${data.malchutAnimal}.`);
-    if (data.malchutAvot)   malLines.push(`Pirkei Avot: ${data.malchutAvot}.`);
+    if (data.malchutAnimal) malLines.push(L.malPerek(data.malchutAnimal));
+    if (data.malchutAvot)   malLines.push(L.malAvot(data.malchutAvot));
     lines.push(malLines.join(' '));
 
     lines.push('');
