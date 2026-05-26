@@ -7209,29 +7209,58 @@ transition: transform 0.3s;
       lmTheme: lmData ? lmData.theme : null,
       kstTitleEn: _kstTitleEn,
       kstLabel:   _kstLabel,
+      tehillimChapter,
+      treasuryDay,
       cy22Letter: cy22.dailyLetter,
       cy22Heb:    cy22.dailyHebrew,
       cy22Cycle:  cy22.cycle,
       cy22Day:    cy22.day,
       chSection, chReading,
+      tractTractate: tractData ? tractData.tractate : null,
+      tractPeriod:   tractData ? tractData.period   : null,
+      tractDesc:     tractData ? tractData.desc      : null,
       combo,
       omerCycle, omerPos,
       ltSection, ltReading,
       mishnaType: mishnaInfo.type,
+      mishnaText: mishnaInfo.text,
       mishnaTag1: mishnaInfo.tag1,
+      mishnaTag2: mishnaInfo.tag2,
+      bshtReading,
       tanachTag1: tanachInfo.tag1,
+      tanachTag2: tanachInfo.tag2,
+      noamTitle:  (() => { const e = getNoamElimelechEntry(kotWeek); return e ? e.title : null; })(),
       dafName:    daf ? daf.name : null,
       dafNum:     daf ? daf.daf  : null,
       cy13Day:    cy13.day,
       cy13Cycle:  cy13.cycle,
-      cy13AttrName:  cy13.attr.name,
-      cy13CycleAttr: cycleThemeAttr ? cycleThemeAttr.name : null,
+      cy13AttrName:    cy13.attr.name,
+      cy13AttrHebrew:  cy13.attr.hebrew,
+      cy13AttrMeaning: cy13.attr.meaning,
+      cy13CycleAttr:        cycleThemeAttr ? cycleThemeAttr.name    : null,
+      cy13CycleAttrMeaning: cycleThemeAttr ? cycleThemeAttr.meaning : null,
+      pbyRung:    _cy13mod,
+      pbyName:    pbyStep ? pbyStep.name    : null,
+      pbyMeaning: pbyStep ? pbyStep.meaning : null,
+      nachmanTale, arushBook,
+      dmName:    dmTeaching ? dmTeaching.name    : null,
+      dmPart:    dmTeaching ? dmTeaching.part    : null,
+      dmEnglish: dmTeaching ? dmTeaching.english : null,
       cy41Day:    cy41.day,
       cy41Cycle:  cy41.cycle,
       cycleTheme: cycleCmd.theme,
       dayCommandment: dayCmd.commandment,
       dayCommandmentText:   dayCmd.text,
       cycleCommandmentText: TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : '',
+      cy41SoulLevelShort: cy41.soulLevel.split(' / ')[0],
+      cy41World: cy41.soulLevel.includes('Nefesh')   ? 'Asiyah — Action & Physical'
+               : cy41.soulLevel.includes('Ruach')    ? 'Yetzirah — Emotional World'
+               : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World'
+               : cy41.soulLevel.includes('Chayah')   ? 'Atzilut — Spiritual World'
+               : 'Adam Kadmon — Yechidah (Day 41)',
+      cy41Mivtzah: cy41.mivtzah,
+      meynDay, meynSection, meynPage,
+      tikkunPsalm: _tikkunPsalm,
       hodZoharLabel: _hodZoharLabel,
       halChofetz: hal.chofetz,
       halCh1:    hal.ch1,
@@ -7240,6 +7269,8 @@ transition: transform 0.3s;
       parasha:    _yesodParasha,
       malchutName:  malTxt.name,
       malchutTheme: wk.b1_theme,
+      malchutAnimal: wk.b1_animal,
+      malchutAvot:   wk.b1_avot,
     };
     document.getElementById('daily-script-content').textContent =
       buildDailyScript(_scriptLang, _scriptData);
@@ -7393,60 +7424,87 @@ transition: transform 0.3s;
     }
 
     // Keter
-    let keterLine = L.keter;
-    keterLine += ` Today's Likutei Moharan is Lesson ${data.lmLessonInPart} (${data.lmPartLabel})`;
-    if (data.lmTheme) keterLine += ` — ${data.lmTheme}`;
-    keterLine += '.';
-    if (data.kstTitleEn) keterLine += ` From Keter Shem Tov, ${data.kstLabel}: "${data.kstTitleEn}."`;
-    lines.push(keterLine);
+    let keterLines = [`${L.keter}`];
+    keterLines.push(`Today's Likutei Moharan is Lesson ${data.lmLessonInPart} (${data.lmPartLabel})${data.lmTheme ? ' — ' + data.lmTheme : ''}.`);
+    if (data.kstTitleEn) keterLines.push(`Keter Shem Tov and Ohr HaChaim HaKadosh — ${data.kstLabel}: "${data.kstTitleEn}." This week's Ohr HaChaim HaKadosh follows Parashat ${data.parasha || 'the week'}.`);
+    if (data.tehillimChapter) keterLines.push(`Tehillim: Chapters ${data.tehillimChapter}.`);
+    if (data.treasuryDay) keterLines.push(`Treasury of Chassidic Tales, Story ${data.treasuryDay}.`);
+    lines.push(keterLines.join(' '));
     lines.push('');
 
     // Chochmah
-    lines.push(`${L.chochmah} Today's letter in the Alef-Bet cycle is ${data.cy22Letter} (${data.cy22Heb}), Day ${data.cy22Day} of 22, Set ${data.cy22Cycle}. Torah Ohr reading: ${data.chSection}, ${data.chReading}.`);
+    let chLines = [`${L.chochmah}`];
+    chLines.push(`Today's letter in the Alef-Bet cycle is ${data.cy22Letter} (${data.cy22Heb}), Day ${data.cy22Day} of 22, Set ${data.cy22Cycle}.`);
+    chLines.push(`Torah Ohr / Likutei Torah reading: ${data.chSection}, ${data.chReading}.`);
+    if (data.tractTractate) chLines.push(`Tractate Cycle — ${data.tractTractate} (${data.tractPeriod}): ${data.tractDesc}.`);
+    lines.push(chLines.join(' '));
     lines.push('');
 
     // Binah
-    lines.push(`${L.binah} ${data.combo}. We are at position ${data.omerPos} of 49 in Omer Cycle ${data.omerCycle}. Likutei Tefilot reading: ${data.ltSection}, ${data.ltReading}.`);
+    let binahLines = [`${L.binah}`];
+    binahLines.push(`${data.combo} — Omer Cycle ${data.omerCycle}, position ${data.omerPos} of 49.`);
+    binahLines.push(`Likutei Tefilot reading: ${data.ltSection}, ${data.ltReading}.`);
+    lines.push(binahLines.join(' '));
     lines.push('');
 
     // Chesed
-    lines.push(`${L.chesed} Today's ${data.mishnaType === 'tosefta' ? 'Tosefta' : 'Mishna'} portion is ${data.mishnaTag1}.`);
+    let chesedLines = [`${L.chesed}`];
+    chesedLines.push(`Today's ${data.mishnaType === 'tosefta' ? 'Tosefta' : 'Mishna'} portion: ${data.mishnaText} — ${data.mishnaTag1}${data.mishnaTag2 ? ', ' + data.mishnaTag2 : ''}.`);
+    if (data.bshtReading) chesedLines.push(`Light and Fire of the Baal Shem Tov: ${data.bshtReading}.`);
+    lines.push(chesedLines.join(' '));
     lines.push('');
 
     // Gevurah
-    let gevLine = `${L.gevurah} Today's Tanach portion is ${data.tanachTag1}.`;
-    if (data.dafName) gevLine += ` Daf Yomi: ${data.dafName}, Daf ${data.dafNum}.`;
-    lines.push(gevLine);
+    let gevLines = [`${L.gevurah}`];
+    gevLines.push(`Today's Tanach portion: ${data.tanachTag1}${data.tanachTag2 ? ' — ' + data.tanachTag2 : ''}.`);
+    if (data.dafName) gevLines.push(`Daf Yomi: ${data.dafName}, Daf ${data.dafNum}.`);
+    if (data.noamTitle) gevLines.push(`Noam Elimelech this week: ${data.noamTitle}.`);
+    lines.push(gevLines.join(' '));
     lines.push('');
 
     // Tiferet
-    let tifLine = `${L.tiferet} Day ${data.cy13Day} of the 13 Divine Attributes cycle (Cycle ${data.cy13Cycle}), focusing on `;
-    tifLine += data.cy13CycleAttr ? `${data.cy13CycleAttr} — ${data.cy13AttrName}.` : `${data.cy13AttrName}.`;
-    lines.push(tifLine);
+    let tifLines = [`${L.tiferet}`];
+    tifLines.push(`Day ${data.cy13Day} of the 13 Divine Attributes cycle, Cycle ${data.cy13Cycle}.`);
+    if (data.cy13CycleAttr) tifLines.push(`Cycle theme: ${data.cy13CycleAttr} — ${data.cy13CycleAttrMeaning}.`);
+    tifLines.push(`Today's attribute: ${data.cy13AttrName} (${data.cy13AttrHebrew}) — ${data.cy13AttrMeaning}.`);
+    if (data.pbyName) tifLines.push(`Steps of Pinchas ben Yair, Rung ${data.pbyRung}: ${data.pbyName} — ${data.pbyMeaning}.`);
+    if (data.nachmanTale) tifLines.push(`Rebbe Nachman's tale: "${data.nachmanTale}."`);
+    if (data.arushBook) tifLines.push(`Rav Arush: ${data.arushBook}.`);
+    if (data.dmName) tifLines.push(`Derech Mitzvosecha: ${data.dmName}${data.dmPart ? ' · ' + data.dmPart : ''} — ${data.dmEnglish}.`);
+    lines.push(tifLines.join(' '));
     lines.push('');
 
     // Netzach
-    let netzLine = `${L.netzach} Day ${data.cy41Day} of Cycle ${data.cy41Cycle} in the 41-Day cycle.`;
-    netzLine += ` The commandment of the day: "${data.dayCommandmentText}."`;
-    if (data.cycleCommandmentText) netzLine += ` The cycle commandment: "${data.cycleCommandmentText}."`;
-    lines.push(netzLine);
+    let netzLines = [`${L.netzach}`];
+    netzLines.push(`Day ${data.cy41Day} of Cycle ${data.cy41Cycle} in the 41-Day cycle.`);
+    netzLines.push(`The commandment of the day: "${data.dayCommandmentText}."`);
+    if (data.cycleCommandmentText) netzLines.push(`The cycle commandment: "${data.cycleCommandmentText}."`);
+    netzLines.push(`Soul level: ${data.cy41SoulLevelShort} — ${data.cy41World}.`);
+    if (data.cy41Mivtzah) netzLines.push(`Mivtzah: ${data.cy41Mivtzah}.`);
+    if (data.tikkunPsalm) netzLines.push(`Tikkun HaKlali: Psalm ${data.tikkunPsalm}.`);
+    if (data.meynSection) netzLines.push(`Ma'ayan Ganim: ${data.meynSection}, p. ${data.meynPage} (Day ${data.meynDay} of 368).`);
+    lines.push(netzLines.join(' '));
     lines.push('');
 
     // Hod
-    let hodLine = L.hod;
-    if (data.hodZoharLabel) hodLine += ` Zohar — ${data.hodZoharLabel}.`;
-    if (!data.halChofetz)   hodLine += ` Halacha reading: Shulchan Aruch, Orach Chaim, chapters ${data.halCh1} and ${data.halCh2}.`;
-    else                    hodLine += ` Sefer Chofetz Chaim, Section ${data.halSection}.`;
-    if (data.dafName)       hodLine += ` Talmud review: ${data.dafName}, Daf ${data.dafNum}.`;
-    lines.push(hodLine);
+    let hodLines = [`${L.hod}`];
+    if (data.hodZoharLabel) hodLines.push(`Zohar — ${data.hodZoharLabel}.`);
+    if (!data.halChofetz)   hodLines.push(`Halacha: Shulchan Aruch, Orach Chaim, chapters ${data.halCh1} and ${data.halCh2}.`);
+    else                    hodLines.push(`Sefer Chofetz Chaim, Section ${data.halSection}.`);
+    if (data.dafName)       hodLines.push(`Talmud review: ${data.dafName}, Daf ${data.dafNum}.`);
+    lines.push(hodLines.join(' '));
     lines.push('');
 
     // Yesod
-    lines.push(`${L.yesod} This week's parasha is ${data.parasha || 'of the week'}. Today's Chok L'Yisrael portion continues the weekly Torah cycle.`);
+    lines.push(`${L.yesod} This week's parasha is ${data.parasha || 'the week\'s portion'}. Today's Chok L'Yisrael portion continues the weekly Torah cycle, spanning Torah, Prophets, Writings, Midrash, and Zohar.`);
     lines.push('');
 
     // Malchut
-    lines.push(`${L.malchut} ${data.malchutName} — ${data.malchutTheme}.`);
+    let malLines = [`${L.malchut}`];
+    malLines.push(`${data.malchutName} — ${data.malchutTheme}.`);
+    if (data.malchutAnimal) malLines.push(`Perek Shirah: ${data.malchutAnimal}.`);
+    if (data.malchutAvot)   malLines.push(`Pirkei Avot: ${data.malchutAvot}.`);
+    lines.push(malLines.join(' '));
 
     lines.push('');
     lines.push(L.closing);
