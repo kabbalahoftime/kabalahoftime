@@ -6712,8 +6712,8 @@ transition: transform 0.3s;
 
     // NETZACH — 41-day (enriched with soul levels + mivtzah + commandment)
     const TIKKUN_PSALMS = [16, 32, 41, 42, 59, 77, 90, 105, 137, 150];
-    const _tikkunPsalm = TIKKUN_PSALMS[cy41.commandmentDay - 1];
-    const _tikkunUrl   = 'https://www.sefaria.org/Tikkun_HaKlali.' + (cy41.commandmentDay + 1) + '?lang=bi&with=Navigation';
+    const _tikkunPsalm = TIKKUN_PSALMS[cy41.cycle - 1];
+    const _tikkunUrl   = 'https://www.sefaria.org/Tikkun_HaKlali.' + cy41.cycle + '?lang=bi&with=Navigation';
     const cycleCmd = CYCLE_COMMANDMENTS[cy41.cycle - 1];
     const dayCmd   = TEN_COMMANDMENTS[cy41.commandmentDay - 1];
     cards[5].querySelector('.sefirah-cycle-name').textContent = `41-Day Cycle: Receiving the Torah`;
@@ -6726,7 +6726,11 @@ transition: transform 0.3s;
     cards[5].querySelector('.sefirah-tags').innerHTML =
       `<span class="tag highlight">Day ${cy41.day} of 41</span>`;
     cards[5].querySelector('.sefirah-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
+       <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
+       <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Cycle ${cy41.cycle} of 9)</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov</div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
        <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
        <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
@@ -6737,9 +6741,8 @@ transition: transform 0.3s;
        <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Cycle</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.cycle}. ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : ''}</div></div>
        <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Soul Level</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.soulLevel.split(' / ')[0]} · ${['','1st','2nd','3rd','4th','5th'][cy41.day === 41 ? 5 : Math.ceil(cy41.day / 10)]} level<br><span style="font-size:0.85em;font-style:italic;">${SOUL_LEVEL_DESCRIPTIONS[cy41.soulLevel.split(' / ')[0]] || ''}</span></div></div>
        <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">World</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.soulLevel.includes('Nefesh') ? 'Asiyah — Action & Physical' : cy41.soulLevel.includes('Ruach') ? 'Yetzirah — Emotional World' : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World' : cy41.soulLevel.includes('Chayah') ? 'Atzilut — Spiritual World' : 'Adam Kadmon — Yechidah (Day 41)'}</div></div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Mivtzah</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</div></div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Tikkun HaKlali</div><div style="color:var(--ink-mid);font-size:0.88rem;"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> — Psalm ${cy41.commandmentDay} of 10</div></div>
-       <div style="margin-bottom:6px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Structure</div><div style="color:var(--ink-mid);font-size:0.88rem;">9 cycles × 41 days = 369 days · 7th cycle = Shavuot → 17 Tammuz</div></div>`;
+       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Structure</div><div style="color:var(--ink-mid);font-size:0.88rem;">9 cycles × 41 days = 369 days · 7th cycle = Shavuot → 17 Tammuz</div></div>
+       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;">Encompassing: Emunah (Lo Tachmod) · Talmud Torah · Psalm 150 — Halleluyah<br>"The Tzadik lives by his faith" (Hab. 2:4 · Makkot 24a)</div>`;
 
     // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
     document.getElementById('netzach-breslov-main').innerHTML =
