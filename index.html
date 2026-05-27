@@ -6720,11 +6720,11 @@ transition: transform 0.3s;
     cards[5].querySelector('.sefirah-main-text').innerHTML =
       `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>`;
     cards[5].querySelector('.sefirah-sub-text').innerHTML =
-      `<span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${cycleCmd.commandment}` +
-      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Commandment:</span> ${dayCmd.commandment}` +
+      `<span style="font-size:0.9em;color:var(--ink-dim)">Day:</span> ${dayCmd.text}` +
+      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : cycleCmd.commandment}` +
       `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}`;
     cards[5].querySelector('.sefirah-tags').innerHTML =
-      `<span class="tag highlight">${cycleCmd.theme}</span><span class="tag">${cy41.soulLevel}</span><span class="tag">Day ${cy41.day} of 41</span>`;
+      `<span class="tag highlight">Day ${cy41.day} of 41</span>`;
     cards[5].querySelector('.sefirah-detail').innerHTML =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov</div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
