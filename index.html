@@ -5777,14 +5777,25 @@ transition: transform 0.3s;
     document.getElementById('gregorian-date').textContent =
       `${dowName}, ${MONTHS[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
     const kotWeek = d % 7 === 0 ? Math.floor(d/7) : Math.floor(d/7) + 1;
-    document.getElementById('day-indicator').textContent =
-      `Week ${kotWeek} · Day ${d}`;
 
     // Keter — Chabad Daily Learning
     const hDate  = gregToHebrew(date);
     const hMonth = hDate.month, hDay = hDate.day, hYear = hDate.year;
     const hMname = HEB_MONTH_NAMES[hMonth] || '';
     const hDateStr = `${hDay} ${hMname} ${hYear}`;
+
+    // Leap year adaptation
+    const isLeapYear     = hDate.leapYear;
+    const inAdarII       = isLeapYear && hMonth === 13;
+    const adarIIDay      = inAdarII ? hDay : 0;
+    // During Adar II, repeat weeks 22-25 (Adar I content)
+    const effectiveKotWeek = inAdarII
+      ? Math.min(22 + Math.floor((adarIIDay - 1) / 7), 25)
+      : kotWeek;
+
+    document.getElementById('day-indicator').textContent = inAdarII
+      ? `Week ${effectiveKotWeek} (Adar II · Day ${adarIIDay} of 28) · Day ${d}`
+      : `Week ${kotWeek} · Day ${d}`;
 
     // Update Hebrew date in top bar
     document.getElementById('hebrew-date').textContent = formatHebrewDate(hDay, hMonth, hYear);
@@ -6120,6 +6131,47 @@ transition: transform 0.3s;
     const cy22 = get22DayInfo(d);
     const cy13 = get13DayInfo(d);
     const cy41 = get41DayInfo(d);
+
+    // ── LEAP YEAR MICROCOSM OVERRIDES (Adar II = 28-day microcosm) ──
+    const FINAL_LETTERS_MIC = [
+      { letter: 'Kaf Sofit',    hebrew: 'ך' },
+      { letter: 'Mem Sofit',    hebrew: 'ם' },
+      { letter: 'Nun Sofit',    hebrew: 'ן' },
+      { letter: 'Peh Sofit',    hebrew: 'ף' },
+      { letter: 'Tzadik Sofit', hebrew: 'ץ' }
+    ];
+    // cy22 microcosm: 22 letters → 5 finals → 1 vowel day
+    const cy22Mic = inAdarII ? (() => {
+      if (adarIIDay <= 22) {
+        const l = SINGLE_LETTERS_22[adarIIDay - 1];
+        return { day: adarIIDay, total: 28, type: 'letter',
+                 label: l.letter, hebrew: l.hebrew, setLabel: 'Microcosm — 22 Letters', setHebrew: 'כב אותיות' };
+      } else if (adarIIDay <= 27) {
+        const fl = FINAL_LETTERS_MIC[adarIIDay - 23];
+        return { day: adarIIDay, total: 28, type: 'final',
+                 label: fl.letter, hebrew: fl.hebrew, setLabel: 'Microcosm — Final Letters', setHebrew: 'אותיות סופיות' };
+      } else {
+        return { day: 28, total: 28, type: 'vowel',
+                 label: 'Vowels', hebrew: 'נקודות', setLabel: 'Microcosm — Vowels', setHebrew: 'נקודות' };
+      }
+    })() : null;
+
+    // cy13 microcosm: each of the 28 Adar II days = one 13-day cycle
+    const cy13Mic = inAdarII ? {
+      day: adarIIDay,
+      total: 28,
+      representsCycle: adarIIDay,
+      setType: adarIIDay <= 13 ? 'Inner — Attributes of Micah' : (adarIIDay <= 26 ? 'Outer — Attributes of Moshe' : 'Inner & Outer — Combined'),
+      attr: adarIIDay <= 13 ? THIRTEEN_ATTRIBUTES[adarIIDay - 1] : (adarIIDay <= 26 ? MOSHE_THIRTEEN_ATTRIBUTES[adarIIDay - 14] : THIRTEEN_ATTRIBUTES[adarIIDay - 27])
+    } : null;
+
+    // cy41 microcosm: detect if current cycle spans Adar II → 54-day cycle
+    const adarIIStart_d = inAdarII ? d - adarIIDay + 1 : 0;
+    const adarIIEnd_d   = inAdarII ? adarIIStart_d + 27 : 0;
+    const cy41CycleStart = (cy41.cycle - 1) * 41 + 1;
+    const cy41CycleEnd   = cy41.cycle * 41;
+    const cy41IsExtended = inAdarII && cy41CycleStart <= adarIIEnd_d && cy41CycleEnd >= adarIIStart_d;
+    const cy41ExtDay     = cy41IsExtended ? (d - cy41CycleStart + 1) : 0;
     const hal  = getHalachaInfo(d);
     const txt  = getDailyText(date);
 
@@ -6196,14 +6248,24 @@ transition: transform 0.3s;
       `<div class="detail-row"><span class="detail-label">${gatesLabel}:</span><span class="detail-value">` +
       gatesValueHtml + `</span></div>`;
 
-    document.getElementById('chochmah-cycle-name').textContent = 'Alef-Bet — 22-Day Cycle';
-    document.getElementById('chochmah-main').innerHTML =
-      `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
-      `<span style="font-size:0.8em;color:var(--ink-dim)">Cycle:</span> <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
-      `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine;
-    document.getElementById('chochmah-sub').innerHTML = '';
-    document.getElementById('chochmah-tags').innerHTML =
-      `<span class="tag highlight">Set ${cy22.cycle} · Day ${cy22.day} of 22</span>`;
+    if (inAdarII && cy22Mic) {
+      document.getElementById('chochmah-cycle-name').textContent = cy22Mic.setLabel;
+      document.getElementById('chochmah-main').innerHTML =
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22Mic.label}</strong> <span style="font-size:1.1em">${cy22Mic.hebrew}</span><br>` +
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>`;
+      document.getElementById('chochmah-sub').innerHTML = '';
+      document.getElementById('chochmah-tags').innerHTML =
+        `<span class="tag highlight">Adar II · Day ${cy22Mic.day} of ${cy22Mic.total}</span><span class="tag">${cy22Mic.label}</span>`;
+    } else {
+      document.getElementById('chochmah-cycle-name').textContent = 'Alef-Bet — 22-Day Cycle';
+      document.getElementById('chochmah-main').innerHTML =
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Cycle:</span> <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine;
+      document.getElementById('chochmah-sub').innerHTML = '';
+      document.getElementById('chochmah-tags').innerHTML =
+        `<span class="tag highlight">Set ${cy22.cycle} · Day ${cy22.day} of 22</span>`;
+    }
     
     // Acrostic verse references — day index into each cycle's 22-day journey
     const ACROSTIC_REFS = {
@@ -6298,7 +6360,17 @@ transition: transform 0.3s;
       : (cy22.cycle - 1) * 2 + (cy22.day <= 11 ? 0 : 1);
     const tractData = TRACTATE_CYCLES[tractHalfIdx];
 
-    document.getElementById('chochmah-detail').innerHTML =
+    document.getElementById('chochmah-detail').innerHTML = (inAdarII && cy22Mic) ?
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Adar II Microcosm — 28-Day Cycle</div>
+       <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy22Mic.day} of ${cy22Mic.total}</span></div>
+       <div class="detail-row"><span class="detail-label">Set:</span><span class="detail-value">${cy22Mic.setLabel} — ${cy22Mic.setHebrew}</span></div>
+       <div class="detail-row"><span class="detail-label">${cy22Mic.type === 'letter' ? 'Letter' : cy22Mic.type === 'final' ? 'Final Letter' : 'Vowels'}:</span><span class="detail-value"><strong>${cy22Mic.label}</strong> <span style="font-size:1.2em;font-family:serif">${cy22Mic.hebrew}</span></span></div>
+       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The 28 days of Adar II form a microcosm of the Alef-Bet:<br>Days 1–22: the 22 Hebrew letters · Days 23–27: the 5 final letters · Day 28: vowels (נקודות)</div>` +
+      gatesHtml +
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
+       <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value"><a href="https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/edit?usp=drivesdk&ouid=107762921026290173420&rtpof=true&sd=true" target="_blank" style="color:var(--gold)">Hebrew Alphabet, Perek Shirah, and Pikei Avot</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Kabbalah of Time</span></span></div>
+       <div class="detail-row"><span class="detail-label">Sefer Yetzirah:</span><span class="detail-value">32 Paths = 10 Sefirot + 22 Letters (building blocks of Creation)</span></div>` :
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
@@ -6370,7 +6442,7 @@ transition: transform 0.3s;
       add('https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z&si=JVvbM6UYIDLqU34p', 'Gratitude', 27, [4, 6, 21]);
       return arr;
     })();
-    const breslevIdx  = Math.min((_zoharParashaNum  ? _zoharParashaNum  - 1 : kotWeek - 1) * 2, 106);
+    const breslevIdx  = Math.min((_zoharParashaNum  ? _zoharParashaNum  - 1 : effectiveKotWeek - 1) * 2, 106);
     const breslevIdx2 = _zoharParashaNum2 ? Math.min((_zoharParashaNum2 - 1) * 2, 106) : null;
     const breslevCD1 = BRESLEV_CDS[breslevIdx];
     const breslevCD2 = BRESLEV_CDS[breslevIdx + 1];
@@ -6465,7 +6537,7 @@ transition: transform 0.3s;
       clbVideo1 = CARLEBACH_GENERAL[_clbSlot * 2];
       clbVideo2 = CARLEBACH_GENERAL[_clbSlot * 2 + 1];
     } else {
-      const _clbFb = ((kotWeek - 1) * 2) % CARLEBACH_GENERAL.length;
+      const _clbFb = ((effectiveKotWeek - 1) * 2) % CARLEBACH_GENERAL.length;
       clbVideo1 = CARLEBACH_GENERAL[_clbFb];
       clbVideo2 = CARLEBACH_GENERAL[(_clbFb + 1) % CARLEBACH_GENERAL.length];
     }
@@ -6536,7 +6608,7 @@ transition: transform 0.3s;
       `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>`;
     document.getElementById('gevurah-detail').innerHTML =
        (() => {
-         const noamEntry = getNoamElimelechEntry(kotWeek);
+         const noamEntry = getNoamElimelechEntry(effectiveKotWeek);
          return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Noam Elimelech — ר׳ אלימלך מליז׳נסק</div>` +
            (noamEntry
              ? `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="${noamEntry.url}" target="_blank" style="color:var(--gold)">${noamEntry.title}</a></div>`
@@ -6644,16 +6716,28 @@ transition: transform 0.3s;
     } else {
       cycleTheme = `Cycle Theme: Microcosm of Moshe's 13 Attributes (Outer Vessels)`;
     }
-    cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes of Mercy — 13-Day Cycle`;
-    cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
-      ? `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span><br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span>`
-      : `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
-    cards[4].querySelector('.sefirah-sub-text').textContent = '';
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
-    _tifTags.innerHTML = cycleThemeAttr
-      ? `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
-      : `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cy13.attr.name}</span>`;
+    if (inAdarII && cy13Mic) {
+      cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes — Adar II Microcosm`;
+      cards[4].querySelector('.sefirah-main-text').innerHTML =
+        `Microcosm Day <strong>${cy13Mic.day}</strong> — Cycle <strong>${cy13Mic.representsCycle}</strong>:<br>` +
+        `<strong>${cy13Mic.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13Mic.attr.hebrew}</span><br>` +
+        `<span style="font-size:0.88em;opacity:0.72">${cy13Mic.attr.meaning}</span><br>` +
+        `<span style="font-size:0.85em;color:var(--ink-dim)">${cy13Mic.setType}</span>`;
+      cards[4].querySelector('.sefirah-sub-text').textContent = '';
+      _tifTags.innerHTML =
+        `<span class="tag highlight" style="white-space:nowrap">Adar II · Day ${cy13Mic.day} of ${cy13Mic.total}</span><span class="tag">${cy13Mic.attr.name}</span>`;
+    } else {
+      cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes of Mercy — 13-Day Cycle`;
+      cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
+        ? `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span><br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span>`
+        : `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
+      cards[4].querySelector('.sefirah-sub-text').textContent = '';
+      _tifTags.innerHTML = cycleThemeAttr
+        ? `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
+        : `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cy13.attr.name}</span>`;
+    }
 
     const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
       ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Irgun Harbotzas HaTorah</div><div style="color:var(--ink-mid);font-size:0.88rem;line-height:1.5;">${cy13.attr.bachya}</div></div>`
@@ -6668,7 +6752,23 @@ transition: transform 0.3s;
       : `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he}</div>`;
     const nachmanTale = REBBE_NACHMAN_TALES[(cy13.cycle - 1) % 13];
     const arushBook   = RAV_ARUSH_BOOKS[(cy13.cycle - 1) % 13];
-    cards[4].querySelector('.sefirah-detail').innerHTML =
+    cards[4].querySelector('.sefirah-detail').innerHTML = (inAdarII && cy13Mic) ?
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Adar II Microcosm — 28-Day Cycle</div>
+       <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy13Mic.day} of ${cy13Mic.total}</span></div>
+       <div class="detail-row"><span class="detail-label">Represents:</span><span class="detail-value">13-Day Cycle ${cy13Mic.representsCycle} — ${cy13Mic.setType}</span></div>
+       <div class="detail-row"><span class="detail-label">Attribute:</span><span class="detail-value"><strong>${cy13Mic.attr.name}</strong> ${cy13Mic.attr.hebrew}</span></div>
+       <div class="detail-row"><span class="detail-label">Meaning:</span><span class="detail-value">${cy13Mic.attr.meaning}</span></div>
+       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The 28 days of Adar II form a microcosm of the 28-cycle 13-Attribute year:<br>Days 1–13: Inner Vessels (Micha) · Days 14–26: Outer Vessels (Moshe) · Days 27–28: Combined</div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Steps of Pinchas Ben Yair</div>
+       <div class="detail-row"><span class="detail-label">Rung ${_cy13mod}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;">
+         <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b</a> &nbsp;·&nbsp;
+         <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15</a>
+       </div>` :
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav</div>
@@ -6738,33 +6838,77 @@ transition: transform 0.3s;
     const _tikkunUrl   = 'https://www.sefaria.org/Tikkun_HaKlali.' + cy41.cycle + '?lang=bi&with=Navigation';
     const cycleCmd = CYCLE_COMMANDMENTS[cy41.cycle - 1];
     const dayCmd   = TEN_COMMANDMENTS[cy41.commandmentDay - 1];
-    cards[5].querySelector('.sefirah-cycle-name').textContent = `41-Day Cycle: Receiving the Torah`;
-    cards[5].querySelector('.sefirah-main-text').innerHTML =
-      `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>`;
-    cards[5].querySelector('.sefirah-sub-text').innerHTML =
-      `<span style="font-size:0.9em;color:var(--ink-dim)">Day:</span> ${dayCmd.text}` +
-      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : cycleCmd.commandment}` +
-      `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}`;
-    cards[5].querySelector('.sefirah-tags').innerHTML =
-      `<span class="tag highlight">Day ${cy41.day} of 41</span>`;
-    cards[5].querySelector('.sefirah-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
-       <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
-       <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Cycle ${cy41.cycle} of 9)</span></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov</div>
-       <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
-       <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
-       <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ma'ayan Ganim — Day ${meynDay} of 368</div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Section</div><div style="color:var(--ink-mid);font-size:0.88rem;">${meynSection} — p. ${meynPage} · Rav Shalom Arush</div></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Commandment</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.commandmentDay}. ${dayCmd.text}</div></div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Cycle</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.cycle}. ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : ''}</div></div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Soul Level</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.soulLevel.split(' / ')[0]} · ${['','1st','2nd','3rd','4th','5th'][cy41.day === 41 ? 5 : Math.ceil(cy41.day / 10)]} level<br><span style="font-size:0.85em;font-style:italic;">${SOUL_LEVEL_DESCRIPTIONS[cy41.soulLevel.split(' / ')[0]] || ''}</span></div></div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">World</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.soulLevel.includes('Nefesh') ? 'Asiyah — Action & Physical' : cy41.soulLevel.includes('Ruach') ? 'Yetzirah — Emotional World' : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World' : cy41.soulLevel.includes('Chayah') ? 'Atzilut — Spiritual World' : 'Adam Kadmon — Yechidah (Day 41)'}</div></div>
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Structure</div><div style="color:var(--ink-mid);font-size:0.88rem;">9 cycles × 41 days = 369 days · 7th cycle = Shavuot → 17 Tammuz</div></div>
-       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;">Encompassing: Emunah (Lo Tachmod) · Talmud Torah · Psalm 150 — Halleluyah<br>"The Tzadik lives by his faith" (Hab. 2:4 · Makkot 24a)</div>`;
+
+    // 54-parasha list for leap year extended cycle (53 parashiyot + VeZot HaBrachah as day 54)
+    const NETZACH_54_PARASHIYOT = [
+      'Bereshit','Noach','Lech Lecha','Vayera','Chayei Sarah',
+      'Toldot','Vayetzei','Vayishlach','Vayeshev','Miketz',
+      'Vayigash','Vayechi','Shemot','Vaera','Bo',
+      'Beshalach','Yitro','Mishpatim','Terumah','Tetzaveh',
+      'Ki Tisa','Vayakhel','Pekudei','Vayikra','Tzav',
+      'Shemini','Tazria','Metzora','Achrei Mot','Kedoshim',
+      'Emor','Behar','Bechukotai','Bamidbar','Nasso',
+      "Beha'alotcha",'Shelach','Korach','Chukat','Balak',
+      'Pinchas','Matot','Massei','Devarim',"Va'etchanan",
+      'Ekev',"Re'eh",'Shoftim','Ki Tetzeh','Ki Tavo',
+      'Nitzavim','Vayelech','Haazinu','VeZot HaBrachah'
+    ];
+    const extDay54  = cy41IsExtended ? Math.min(cy41ExtDay, 54) : 0;
+    const extParasha = cy41IsExtended ? NETZACH_54_PARASHIYOT[extDay54 - 1] : '';
+    const extIsFinal = cy41IsExtended && extDay54 === 54;
+
+    if (cy41IsExtended) {
+      cards[5].querySelector('.sefirah-cycle-name').textContent = `Extended 54-Day Cycle: Torah Parshiyot`;
+      cards[5].querySelector('.sefirah-main-text').innerHTML =
+        `Day <strong>${extDay54}</strong> of <strong>54</strong> · Cycle <strong>${cy41.cycle}</strong>`;
+      cards[5].querySelector('.sefirah-sub-text').innerHTML =
+        `<span style="font-size:0.9em;color:var(--ink-dim)">Parasha:</span> <strong>${extParasha}</strong>` +
+        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Type:</span> ${extIsFinal ? 'Final Day — VeZot HaBrachah' : `Parasha ${extDay54} of 53`}`;
+      cards[5].querySelector('.sefirah-tags').innerHTML =
+        `<span class="tag highlight">Adar II · Day ${extDay54} of 54</span><span class="tag">${extParasha}</span>`;
+      cards[5].querySelector('.sefirah-detail').innerHTML =
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Extended Leap Year Cycle — 53 Parashiyot + 1</div>
+         <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${extDay54} of 54 (Adar II extended)</span></div>
+         <div class="detail-row"><span class="detail-label">Parasha:</span><span class="detail-value"><strong>${extParasha}</strong>${extIsFinal ? ' — Final Day' : ` — Parasha ${extDay54} of 53`}</span></div>
+         <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">In a leap year, cycles overlapping Adar II expand to 54 days:<br>Days 1–53 correspond to the 53 weekly Torah portions · Day 54: VeZot HaBrachah</div>
+         <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
+         <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
+         <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Cycle ${cy41.cycle} of 9)</span></div>
+         <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov</div>
+         <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
+         <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+         <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>`;
+    } else {
+      cards[5].querySelector('.sefirah-cycle-name').textContent = `41-Day Cycle: Receiving the Torah`;
+      cards[5].querySelector('.sefirah-main-text').innerHTML =
+        `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>`;
+      cards[5].querySelector('.sefirah-sub-text').innerHTML =
+        `<span style="font-size:0.9em;color:var(--ink-dim)">Day:</span> ${dayCmd.text}` +
+        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : cycleCmd.commandment}` +
+        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}`;
+      cards[5].querySelector('.sefirah-tags').innerHTML =
+        `<span class="tag highlight">Day ${cy41.day} of 41</span>`;
+      cards[5].querySelector('.sefirah-detail').innerHTML =
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
+         <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
+         <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Cycle ${cy41.cycle} of 9)</span></div>
+         <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov</div>
+         <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
+         <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+         <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
+         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ma'ayan Ganim — Day ${meynDay} of 368</div>
+         <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Section</div><div style="color:var(--ink-mid);font-size:0.88rem;">${meynSection} — p. ${meynPage} · Rav Shalom Arush</div></div>
+         <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+         <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Commandment</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.commandmentDay}. ${dayCmd.text}</div></div>
+         <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Cycle</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.cycle}. ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : ''}</div></div>
+         <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Soul Level</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.soulLevel.split(' / ')[0]} · ${['','1st','2nd','3rd','4th','5th'][cy41.day === 41 ? 5 : Math.ceil(cy41.day / 10)]} level<br><span style="font-size:0.85em;font-style:italic;">${SOUL_LEVEL_DESCRIPTIONS[cy41.soulLevel.split(' / ')[0]] || ''}</span></div></div>
+         <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">World</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.soulLevel.includes('Nefesh') ? 'Asiyah — Action & Physical' : cy41.soulLevel.includes('Ruach') ? 'Yetzirah — Emotional World' : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World' : cy41.soulLevel.includes('Chayah') ? 'Atzilut — Spiritual World' : 'Adam Kadmon — Yechidah (Day 41)'}</div></div>
+         <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Structure</div><div style="color:var(--ink-mid);font-size:0.88rem;">9 cycles × 41 days = 369 days · 7th cycle = Shavuot → 17 Tammuz</div></div>
+         <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;">Encompassing: Emunah (Lo Tachmod) · Talmud Torah · Psalm 150 — Halleluyah<br>"The Tzadik lives by his faith" (Hab. 2:4 · Makkot 24a)</div>`;
+    }
 
     // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
     document.getElementById('netzach-breslov-main').innerHTML =
@@ -6841,7 +6985,7 @@ transition: transform 0.3s;
 
     // ── MALCHUT — Daily text (Day 1–7) each paired with its KoT Book
     const malTxt = getMalchutText(sef.dayNum);
-    const wk = getWeeklyData(sef.weekNum);
+    const wk = getWeeklyData(inAdarII ? effectiveKotWeek : sef.weekNum);
     const isSeferYetzirahDay = sef.weekNum === 52 && sef.dayNum >= 2;
     const syChapter = isSeferYetzirahDay ? SEFER_YETZIRAH_CHAPTERS[sef.dayNum - 2] : null;
 
@@ -7270,7 +7414,7 @@ transition: transform 0.3s;
 
     // Pack data for Daily Script
     _scriptData = {
-      d, kotWeek, hDateStr,
+      d, kotWeek: effectiveKotWeek, hDateStr,
       lmPartLabel, lmLessonInPart,
       lmTheme: lmData ? lmData.theme : null,
       kstTitleEn: _kstTitleEn,
@@ -7300,7 +7444,7 @@ transition: transform 0.3s;
       bshtReading,
       tanachTag1: tanachInfo.tag1,
       tanachTag2: tanachInfo.tag2,
-      noamTitle:  (() => { const e = getNoamElimelechEntry(kotWeek); return e ? e.title : null; })(),
+      noamTitle:  (() => { const e = getNoamElimelechEntry(effectiveKotWeek); return e ? e.title : null; })(),
       dafName:    daf ? daf.name : null,
       dafNum:     daf ? daf.daf  : null,
       cy13Day:    cy13.day,
