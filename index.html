@@ -2019,6 +2019,11 @@ transition: transform 0.3s;
     return jdnToGreg(rhJDN + offset + hd - 1);
   }
 
+  function hebrewToD(hy, hm, hd) {
+    const anchorMid = localMidnight(new Date(DATE_FROM_API));
+    return localCalendarDays(anchorMid, localMidnight(hebrewToGreg(hy, hm, hd))) - DAY_OFFSET;
+  }
+
   // Returns local-midnight Date for any Date object (strips the time component).
   function localMidnight(d) {
     return new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -3000,7 +3005,7 @@ transition: transform 0.3s;
   function get41DayInfo(d) {
     const cycle = (d % 41 == 0) ? parseInt(d/41) : 1 + parseInt(d/41);
     const day   = (d % 41 == 0) ? 41 : d % 41;
-    const mivtzah = MIVTZOYIM[Math.min(cycle - 1, 8)];
+    const mivtzah = MIVTZOYIM[(cycle - 1) % 9];
     let soulLevel;
     if (day == 41)      soulLevel = 'Yechidah / Adam Kadmon';
     else if (day <= 10) soulLevel = 'Nefesh / Assiyah';
@@ -4819,7 +4824,7 @@ transition: transform 0.3s;
 
 
   function getWeeklyData(week) {
-    const idx = Math.min(Math.max(week - 1, 0), 51);
+    const idx = ((week - 1) % 52 + 52) % 52;
     return WEEKLY_BOOKS[idx];
   }
 
@@ -5789,17 +5794,21 @@ transition: transform 0.3s;
     const isLeapYear   = hDate.leapYear;
     const inExtra      = isLeapYear && ((hMonth === 11 && hDay >= 28) || (hMonth === 12 && hDay <= 25));
     const extraDay     = inExtra ? (hMonth === 11 ? hDay - 27 : hDay + 3) : 0;
-    // During extra weeks, map extraDay 1-28 back to content weeks 22-25
-    const effectiveKotWeek = inExtra
-      ? Math.min(22 + Math.floor((extraDay - 1) / 7), 25)
-      : kotWeek;
     // For Chesed/Gevurah/Hod (52-week KoT cycle): during extra weeks look up d+28,
     // so Weeks 22 I–25 I show identical content to Weeks 22 II–25 II
     const dEff = inExtra ? d + 28 : d;
 
+    // KoT year anchor: Day 1 of Omer (16 Nisan) = Day 1 of Week 29 (regular year)
+    // or Day 1 of Week 33 (leap year, since extra weeks 22-25 shift Nisan forward by 4 weeks)
+    const d_year1 = hebrewToD(hYear, 1, 16) - (isLeapYear ? 224 : 196);
+    const weekOfYear = Math.ceil((d - d_year1 + 1) / 7);
+    // In a leap year weeks 22-25 are extra; regular content weeks 22-52 occupy positions 26-56.
+    // Map back so effectiveKotWeek is always 1-52 for 52-week content lookups:
+    const effectiveKotWeek = (isLeapYear && weekOfYear > 25) ? weekOfYear - 4 : weekOfYear;
+
     document.getElementById('day-indicator').textContent = inExtra
       ? `Week ${effectiveKotWeek} (${hMonth === 11 ? 'Shevat' : 'Adar I'} · Extra Day ${extraDay} of 28) · Day ${d}`
-      : `Week ${kotWeek} · Day ${d}`;
+      : `Week ${effectiveKotWeek} · Day ${d}`;
 
     // Update Hebrew date in top bar
     document.getElementById('hebrew-date').textContent = formatHebrewDate(hDay, hMonth, hYear);
@@ -6453,8 +6462,8 @@ transition: transform 0.3s;
       add('https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z&si=JVvbM6UYIDLqU34p', 'Gratitude', 27, [4, 6, 21]);
       return arr;
     })();
-    const breslevIdx  = Math.min((_zoharParashaNum  ? _zoharParashaNum  - 1 : effectiveKotWeek - 1) * 2, 106);
-    const breslevIdx2 = _zoharParashaNum2 ? Math.min((_zoharParashaNum2 - 1) * 2, 106) : null;
+    const breslevIdx  = Math.min((_zoharParashaNum  ? _zoharParashaNum  - 1 : effectiveKotWeek - 1) * 2, BRESLEV_CDS.length - 2);
+    const breslevIdx2 = _zoharParashaNum2 ? Math.min((_zoharParashaNum2 - 1) * 2, BRESLEV_CDS.length - 2) : null;
     const breslevCD1 = BRESLEV_CDS[breslevIdx];
     const breslevCD2 = BRESLEV_CDS[breslevIdx + 1];
     const breslevCD3 = breslevIdx2 !== null ? BRESLEV_CDS[breslevIdx2]     : null;
@@ -7024,8 +7033,8 @@ transition: transform 0.3s;
 
     // ── MALCHUT — Daily text (Day 1–7) each paired with its KoT Book
     const malTxt = getMalchutText(sef.dayNum);
-    const wk = getWeeklyData(inExtra ? effectiveKotWeek : sef.weekNum);
-    const isSeferYetzirahDay = sef.weekNum === 52 && sef.dayNum >= 2;
+    const wk = getWeeklyData(effectiveKotWeek);
+    const isSeferYetzirahDay = effectiveKotWeek === 52 && sef.dayNum >= 2;
     const syChapter = isSeferYetzirahDay ? SEFER_YETZIRAH_CHAPTERS[sef.dayNum - 2] : null;
 
     // Each KoT day = one daily text = one KoT Book
@@ -7341,7 +7350,7 @@ transition: transform 0.3s;
     const TEXTS  = ['Chidah (Zohar / Arizal)','Likutei Sichos and Toras Menachem','Kedushas Levi',
                     'Noam Elimelech','Tanya','Likutei Moharan','Mesilat Yesharim'];
     // For the last week (week 52), days 2-7 display Sefer Yetzirah chapters 1-6
-    const displayTexts = (sef.weekNum === 52)
+    const displayTexts = (effectiveKotWeek === 52)
       ? ['Chidah (Zohar / Arizal)', ...SEFER_YETZIRAH_CHAPTERS.map(c => `Sefer Yetzirah Ch. ${c.ch}`)]
       : TEXTS;
 
@@ -7377,7 +7386,7 @@ transition: transform 0.3s;
     const weekRows = DAY_BOOKS.map((db, i) => {
       const isCurrent = (i + 1) === sef.dayNum;
       const textName = displayTexts[i];
-      const syCh = (sef.weekNum === 52 && i >= 1) ? SEFER_YETZIRAH_CHAPTERS[i - 1] : null;
+      const syCh = (effectiveKotWeek === 52 && i >= 1) ? SEFER_YETZIRAH_CHAPTERS[i - 1] : null;
 
       let displayName = textName;
       let themeHTML = '';
@@ -7446,7 +7455,7 @@ transition: transform 0.3s;
       todayRow +
       `<div class="mal-week-divider"></div>` +
       `<div class="mal-parasha-header">` +
-        `<span>Week ${sef.weekNum} · ${wk.month}</span>` +
+        `<span>Week ${effectiveKotWeek} · ${wk.month}</span>` +
         `<strong>${wk.b1_theme}</strong>` +
       `</div>` +
       weekRows;
