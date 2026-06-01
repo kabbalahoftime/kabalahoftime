@@ -5793,6 +5793,9 @@ transition: transform 0.3s;
     const effectiveKotWeek = inExtra
       ? Math.min(22 + Math.floor((extraDay - 1) / 7), 25)
       : kotWeek;
+    // For Chesed/Gevurah/Hod (52-week KoT cycle): during extra weeks look up d+28,
+    // so Weeks 22 I–25 I show identical content to Weeks 22 II–25 II
+    const dEff = inExtra ? d + 28 : d;
 
     document.getElementById('day-indicator').textContent = inExtra
       ? `Week ${effectiveKotWeek} (${hMonth === 11 ? 'Shevat' : 'Adar I'} · Extra Day ${extraDay} of 28) · Day ${d}`
@@ -6173,7 +6176,7 @@ transition: transform 0.3s;
     const cy41CycleEnd   = cy41.cycle * 41;
     const cy41IsExtended = inExtra && cy41CycleStart <= extraEnd_d && cy41CycleEnd >= extraStart_d;
     const cy41ExtDay     = cy41IsExtended ? (d - cy41CycleStart + 1) : 0;
-    const hal  = getHalachaInfo(d);
+    const hal  = getHalachaInfo(dEff);
     const txt  = getDailyText(date);
 
     const cards = document.querySelectorAll('.sefirah-card');
@@ -6543,7 +6546,7 @@ transition: transform 0.3s;
       clbVideo2 = CARLEBACH_GENERAL[(_clbFb + 1) % CARLEBACH_GENERAL.length];
     }
 
-    const mishnaInfo = getMishnaInfo(d);
+    const mishnaInfo = getMishnaInfo(dEff);
     document.getElementById('chesed-cycle-name').textContent =
       mishnaInfo.type === 'mishna' ? 'Mishna — Oral Torah' : 'Tosefta — Expanded Oral Torah';
     document.getElementById('chesed-main').innerHTML = mishnaInfo.text;
@@ -6552,7 +6555,7 @@ transition: transform 0.3s;
     document.getElementById('chesed-tags').innerHTML =
       `<span class="tag highlight">${mishnaInfo.tag1}</span><span class="tag">${mishnaInfo.tag2}</span>`;
     // Buxbaum 364-day cycles
-    const bshtDay = ((d - 1) % 364) + 1;
+    const bshtDay = ((dEff - 1) % 364) + 1;
     const bshtReading = bshtDay === 1 ? 'Introduction' : `Page ${bshtDay - 1}`;
     const jspReading  = bshtDay === 1 ? 'Introduction · Page 1' : `Pages ${2*(bshtDay-1)}–${2*(bshtDay-1)+1}`;
 
@@ -6596,7 +6599,7 @@ transition: transform 0.3s;
     }
 
     // GEVURAH — Tanach
-    const tanachInfo = getTanachInfo(d);
+    const tanachInfo = getTanachInfo(dEff);
     document.getElementById('gevurah-cycle-name').innerHTML = 'Tanach (2 Chapters)<br>Talmud (Daf Yomi)';
     document.getElementById('gevurah-main').innerHTML =
       tanachInfo.text +
