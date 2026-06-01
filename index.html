@@ -5784,17 +5784,17 @@ transition: transform 0.3s;
     const hMname = HEB_MONTH_NAMES[hMonth] || '';
     const hDateStr = `${hDay} ${hMname} ${hYear}`;
 
-    // Leap year adaptation
-    const isLeapYear     = hDate.leapYear;
-    const inAdarII       = isLeapYear && hMonth === 13;
-    const adarIIDay      = inAdarII ? hDay : 0;
-    // During Adar II, repeat weeks 22-25 (Adar I content)
-    const effectiveKotWeek = inAdarII
-      ? Math.min(22 + Math.floor((adarIIDay - 1) / 7), 25)
+    // Leap year adaptation — Adar I (month 12) is the extra intercalated month
+    const isLeapYear   = hDate.leapYear;
+    const inAdarI      = isLeapYear && hMonth === 12;
+    const adarIDay     = inAdarI ? hDay : 0;
+    // During Adar I, repeat weeks 22-25 (regular Adar content; Rosh Chodesh Adar I = week 22)
+    const effectiveKotWeek = inAdarI
+      ? Math.min(22 + Math.floor((adarIDay - 1) / 7), 25)
       : kotWeek;
 
-    document.getElementById('day-indicator').textContent = inAdarII
-      ? `Week ${effectiveKotWeek} (Adar II · Day ${adarIIDay} of 28) · Day ${d}`
+    document.getElementById('day-indicator').textContent = inAdarI
+      ? `Week ${effectiveKotWeek} (Adar I · Day ${adarIDay} of 28) · Day ${d}`
       : `Week ${kotWeek} · Day ${d}`;
 
     // Update Hebrew date in top bar
@@ -6132,7 +6132,7 @@ transition: transform 0.3s;
     const cy13 = get13DayInfo(d);
     const cy41 = get41DayInfo(d);
 
-    // ── LEAP YEAR MICROCOSM OVERRIDES (Adar II = 28-day microcosm) ──
+    // ── LEAP YEAR MICROCOSM OVERRIDES (Adar I = extra intercalated month, 28-day microcosm) ──
     const FINAL_LETTERS_MIC = [
       { letter: 'Kaf Sofit',    hebrew: 'ך' },
       { letter: 'Mem Sofit',    hebrew: 'ם' },
@@ -6141,14 +6141,14 @@ transition: transform 0.3s;
       { letter: 'Tzadik Sofit', hebrew: 'ץ' }
     ];
     // cy22 microcosm: 22 letters → 5 finals → 1 vowel day
-    const cy22Mic = inAdarII ? (() => {
-      if (adarIIDay <= 22) {
-        const l = SINGLE_LETTERS_22[adarIIDay - 1];
-        return { day: adarIIDay, total: 28, type: 'letter',
+    const cy22Mic = inAdarI ? (() => {
+      if (adarIDay <= 22) {
+        const l = SINGLE_LETTERS_22[adarIDay - 1];
+        return { day: adarIDay, total: 28, type: 'letter',
                  label: l.letter, hebrew: l.hebrew, setLabel: 'Microcosm — 22 Letters', setHebrew: 'כב אותיות' };
-      } else if (adarIIDay <= 27) {
-        const fl = FINAL_LETTERS_MIC[adarIIDay - 23];
-        return { day: adarIIDay, total: 28, type: 'final',
+      } else if (adarIDay <= 27) {
+        const fl = FINAL_LETTERS_MIC[adarIDay - 23];
+        return { day: adarIDay, total: 28, type: 'final',
                  label: fl.letter, hebrew: fl.hebrew, setLabel: 'Microcosm — Final Letters', setHebrew: 'אותיות סופיות' };
       } else {
         return { day: 28, total: 28, type: 'vowel',
@@ -6156,21 +6156,21 @@ transition: transform 0.3s;
       }
     })() : null;
 
-    // cy13 microcosm: each of the 28 Adar II days = one 13-day cycle
-    const cy13Mic = inAdarII ? {
-      day: adarIIDay,
+    // cy13 microcosm: each of the 28 Adar I days = one 13-day cycle
+    const cy13Mic = inAdarI ? {
+      day: adarIDay,
       total: 28,
-      representsCycle: adarIIDay,
-      setType: adarIIDay <= 13 ? 'Inner — Attributes of Micah' : (adarIIDay <= 26 ? 'Outer — Attributes of Moshe' : 'Inner & Outer — Combined'),
-      attr: adarIIDay <= 13 ? THIRTEEN_ATTRIBUTES[adarIIDay - 1] : (adarIIDay <= 26 ? MOSHE_THIRTEEN_ATTRIBUTES[adarIIDay - 14] : THIRTEEN_ATTRIBUTES[adarIIDay - 27])
+      representsCycle: adarIDay,
+      setType: adarIDay <= 13 ? 'Inner — Attributes of Micah' : (adarIDay <= 26 ? 'Outer — Attributes of Moshe' : 'Inner & Outer — Combined'),
+      attr: adarIDay <= 13 ? THIRTEEN_ATTRIBUTES[adarIDay - 1] : (adarIDay <= 26 ? MOSHE_THIRTEEN_ATTRIBUTES[adarIDay - 14] : THIRTEEN_ATTRIBUTES[adarIDay - 27])
     } : null;
 
-    // cy41 microcosm: detect if current cycle spans Adar II → 54-day cycle
-    const adarIIStart_d = inAdarII ? d - adarIIDay + 1 : 0;
-    const adarIIEnd_d   = inAdarII ? adarIIStart_d + 27 : 0;
+    // cy41 microcosm: detect if current cycle spans Adar I → 54-day cycle
+    const adarIStart_d = inAdarI ? d - adarIDay + 1 : 0;
+    const adarIEnd_d   = inAdarI ? adarIStart_d + 27 : 0;
     const cy41CycleStart = (cy41.cycle - 1) * 41 + 1;
     const cy41CycleEnd   = cy41.cycle * 41;
-    const cy41IsExtended = inAdarII && cy41CycleStart <= adarIIEnd_d && cy41CycleEnd >= adarIIStart_d;
+    const cy41IsExtended = inAdarI && cy41CycleStart <= adarIEnd_d && cy41CycleEnd >= adarIStart_d;
     const cy41ExtDay     = cy41IsExtended ? (d - cy41CycleStart + 1) : 0;
     const hal  = getHalachaInfo(d);
     const txt  = getDailyText(date);
@@ -6248,14 +6248,14 @@ transition: transform 0.3s;
       `<div class="detail-row"><span class="detail-label">${gatesLabel}:</span><span class="detail-value">` +
       gatesValueHtml + `</span></div>`;
 
-    if (inAdarII && cy22Mic) {
+    if (inAdarI && cy22Mic) {
       document.getElementById('chochmah-cycle-name').textContent = cy22Mic.setLabel;
       document.getElementById('chochmah-main').innerHTML =
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22Mic.label}</strong> <span style="font-size:1.1em">${cy22Mic.hebrew}</span><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>`;
       document.getElementById('chochmah-sub').innerHTML = '';
       document.getElementById('chochmah-tags').innerHTML =
-        `<span class="tag highlight">Adar II · Day ${cy22Mic.day} of ${cy22Mic.total}</span><span class="tag">${cy22Mic.label}</span>`;
+        `<span class="tag highlight">Adar I · Day ${cy22Mic.day} of ${cy22Mic.total}</span><span class="tag">${cy22Mic.label}</span>`;
     } else {
       document.getElementById('chochmah-cycle-name').textContent = 'Alef-Bet — 22-Day Cycle';
       document.getElementById('chochmah-main').innerHTML =
@@ -6360,12 +6360,12 @@ transition: transform 0.3s;
       : (cy22.cycle - 1) * 2 + (cy22.day <= 11 ? 0 : 1);
     const tractData = TRACTATE_CYCLES[tractHalfIdx];
 
-    document.getElementById('chochmah-detail').innerHTML = (inAdarII && cy22Mic) ?
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Adar II Microcosm — 28-Day Cycle</div>
+    document.getElementById('chochmah-detail').innerHTML = (inAdarI && cy22Mic) ?
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Adar I Microcosm — 28-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy22Mic.day} of ${cy22Mic.total}</span></div>
        <div class="detail-row"><span class="detail-label">Set:</span><span class="detail-value">${cy22Mic.setLabel} — ${cy22Mic.setHebrew}</span></div>
        <div class="detail-row"><span class="detail-label">${cy22Mic.type === 'letter' ? 'Letter' : cy22Mic.type === 'final' ? 'Final Letter' : 'Vowels'}:</span><span class="detail-value"><strong>${cy22Mic.label}</strong> <span style="font-size:1.2em;font-family:serif">${cy22Mic.hebrew}</span></span></div>
-       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The 28 days of Adar II form a microcosm of the Alef-Bet:<br>Days 1–22: the 22 Hebrew letters · Days 23–27: the 5 final letters · Day 28: vowels (נקודות)</div>` +
+       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The 28 days of Adar I form a microcosm of the Alef-Bet:<br>Days 1–22: the 22 Hebrew letters · Days 23–27: the 5 final letters · Day 28: vowels (נקודות)</div>` +
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
@@ -6718,8 +6718,8 @@ transition: transform 0.3s;
     }
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
-    if (inAdarII && cy13Mic) {
-      cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes — Adar II Microcosm`;
+    if (inAdarI && cy13Mic) {
+      cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes — Adar I Microcosm`;
       cards[4].querySelector('.sefirah-main-text').innerHTML =
         `Microcosm Day <strong>${cy13Mic.day}</strong> — Cycle <strong>${cy13Mic.representsCycle}</strong>:<br>` +
         `<strong>${cy13Mic.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13Mic.attr.hebrew}</span><br>` +
@@ -6727,7 +6727,7 @@ transition: transform 0.3s;
         `<span style="font-size:0.85em;color:var(--ink-dim)">${cy13Mic.setType}</span>`;
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
       _tifTags.innerHTML =
-        `<span class="tag highlight" style="white-space:nowrap">Adar II · Day ${cy13Mic.day} of ${cy13Mic.total}</span><span class="tag">${cy13Mic.attr.name}</span>`;
+        `<span class="tag highlight" style="white-space:nowrap">Adar I · Day ${cy13Mic.day} of ${cy13Mic.total}</span><span class="tag">${cy13Mic.attr.name}</span>`;
     } else {
       cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes of Mercy — 13-Day Cycle`;
       cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
@@ -6752,13 +6752,13 @@ transition: transform 0.3s;
       : `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he}</div>`;
     const nachmanTale = REBBE_NACHMAN_TALES[(cy13.cycle - 1) % 13];
     const arushBook   = RAV_ARUSH_BOOKS[(cy13.cycle - 1) % 13];
-    cards[4].querySelector('.sefirah-detail').innerHTML = (inAdarII && cy13Mic) ?
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Adar II Microcosm — 28-Day Cycle</div>
+    cards[4].querySelector('.sefirah-detail').innerHTML = (inAdarI && cy13Mic) ?
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Adar I Microcosm — 28-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy13Mic.day} of ${cy13Mic.total}</span></div>
        <div class="detail-row"><span class="detail-label">Represents:</span><span class="detail-value">13-Day Cycle ${cy13Mic.representsCycle} — ${cy13Mic.setType}</span></div>
        <div class="detail-row"><span class="detail-label">Attribute:</span><span class="detail-value"><strong>${cy13Mic.attr.name}</strong> ${cy13Mic.attr.hebrew}</span></div>
        <div class="detail-row"><span class="detail-label">Meaning:</span><span class="detail-value">${cy13Mic.attr.meaning}</span></div>
-       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The 28 days of Adar II form a microcosm of the 28-cycle 13-Attribute year:<br>Days 1–13: Inner Vessels (Micha) · Days 14–26: Outer Vessels (Moshe) · Days 27–28: Combined</div>
+       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The 28 days of Adar I form a microcosm of the 28-cycle 13-Attribute year:<br>Days 1–13: Inner Vessels (Micha) · Days 14–26: Outer Vessels (Moshe) · Days 27–28: Combined</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
@@ -6865,12 +6865,12 @@ transition: transform 0.3s;
         `<span style="font-size:0.9em;color:var(--ink-dim)">Parasha:</span> <strong>${extParasha}</strong>` +
         `<br><span style="font-size:0.9em;color:var(--ink-dim)">Type:</span> ${extIsFinal ? 'Final Day — VeZot HaBrachah' : `Parasha ${extDay54} of 53`}`;
       cards[5].querySelector('.sefirah-tags').innerHTML =
-        `<span class="tag highlight">Adar II · Day ${extDay54} of 54</span><span class="tag">${extParasha}</span>`;
+        `<span class="tag highlight">Adar I · Day ${extDay54} of 54</span><span class="tag">${extParasha}</span>`;
       cards[5].querySelector('.sefirah-detail').innerHTML =
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Extended Leap Year Cycle — 53 Parashiyot + 1</div>
-         <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${extDay54} of 54 (Adar II extended)</span></div>
+         <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${extDay54} of 54 (Adar I extended)</span></div>
          <div class="detail-row"><span class="detail-label">Parasha:</span><span class="detail-value"><strong>${extParasha}</strong>${extIsFinal ? ' — Final Day' : ` — Parasha ${extDay54} of 53`}</span></div>
-         <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">In a leap year, cycles overlapping Adar II expand to 54 days:<br>Days 1–53 correspond to the 53 weekly Torah portions · Day 54: VeZot HaBrachah</div>
+         <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">In a leap year, cycles overlapping Adar I expand to 54 days:<br>Days 1–53 correspond to the 53 weekly Torah portions · Day 54: VeZot HaBrachah</div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
          <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
@@ -6985,7 +6985,7 @@ transition: transform 0.3s;
 
     // ── MALCHUT — Daily text (Day 1–7) each paired with its KoT Book
     const malTxt = getMalchutText(sef.dayNum);
-    const wk = getWeeklyData(inAdarII ? effectiveKotWeek : sef.weekNum);
+    const wk = getWeeklyData(inAdarI ? effectiveKotWeek : sef.weekNum);
     const isSeferYetzirahDay = sef.weekNum === 52 && sef.dayNum >= 2;
     const syChapter = isSeferYetzirahDay ? SEFER_YETZIRAH_CHAPTERS[sef.dayNum - 2] : null;
 
