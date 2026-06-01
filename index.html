@@ -6559,21 +6559,21 @@ transition: transform 0.3s;
       (() => {
          const BA_SECTIONS = [
            { count: 15, rebbe: "R’ Aharon the Great of Karlin",  slug: "R’_Aharon_(the_Great)_of_Karlin" },
-           { count: 25, rebbe: "R’ Asher the First of Stolin",   slug: "R’_Asher_(the_First)_of_Stolin" },
-           { count: 23, rebbe: "R’ Aharon the Second of Karlin", slug: "R’_Aharon_(the_Second)_of_Karlin" },
+           { count: 45, rebbe: "R’ Asher the First of Stolin",   slug: "R’_Asher_(the_First)_of_Stolin" },
+           { count: 22, rebbe: "R’ Aharon the Second of Karlin", slug: "R’_Aharon_(the_Second)_of_Karlin" },
            { count: 12, rebbe: "R’ Asher the Second of Stolin",  slug: "R’_Asher_(the_Second)_of_Stolin" }
          ];
-         const cyclePos = (d - 1) % 74;
+         const cyclePos = (d - 1) % 94;
          let baSection, baEntry;
          if (cyclePos < 15)      { baSection = BA_SECTIONS[0]; baEntry = cyclePos + 1; }
-         else if (cyclePos < 40) { baSection = BA_SECTIONS[1]; baEntry = cyclePos - 14; }
-         else if (cyclePos < 62) { baSection = BA_SECTIONS[2]; baEntry = cyclePos - 38; }
-         else                    { baSection = BA_SECTIONS[3]; baEntry = cyclePos - 60; }
+         else if (cyclePos < 60) { baSection = BA_SECTIONS[1]; baEntry = cyclePos - 14; }
+         else if (cyclePos < 82) { baSection = BA_SECTIONS[2]; baEntry = cyclePos - 58; }
+         else                    { baSection = BA_SECTIONS[3]; baEntry = cyclePos - 80; }
          const baUrl = `https://www.sefaria.org/Beit_Aharon,_Daily_Conduct_and_Exhortations,_${baSection.slug}.${baEntry}?lang=bi`;
          return `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
            <div style="font-family:’Cinzel’,serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Beit Aharon — בֵּית אַהֲרֹן</div>
            <div style="margin-bottom:4px;font-size:0.78rem;color:var(--gold-mid);">${baSection.rebbe}</div>
-           <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${baUrl}" target="_blank" style="color:var(--gold)">Daily Conduct — Entry ${baEntry}</a> <span style="color:var(--ink-dim);font-size:0.85em;">· Day ${cyclePos + 1} of 74</span></div>
+           <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${baUrl}" target="_blank" style="color:var(--gold)">Daily Conduct — Entry ${baEntry}</a> <span style="color:var(--ink-dim);font-size:0.85em;">· Day ${cyclePos + 1} of 94</span></div>
            <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
        })() +
        <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
