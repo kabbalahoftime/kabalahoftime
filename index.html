@@ -5788,7 +5788,8 @@ transition: transform 0.3s;
     const isLeapYear   = hDate.leapYear;
     const inAdarI      = isLeapYear && hMonth === 12;
     const adarIDay     = inAdarI ? hDay : 0;
-    // During Adar I, repeat weeks 22-25 (regular Adar content; Rosh Chodesh Adar I = week 22)
+    // During Adar I, repeat weeks 22-25 (regular Adar content; week 22 begins on 28 Shevat,
+    // Rosh Chodesh Adar I falls on the 4th day of week 22)
     const effectiveKotWeek = inAdarI
       ? Math.min(22 + Math.floor((adarIDay - 1) / 7), 25)
       : kotWeek;
