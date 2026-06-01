@@ -6169,13 +6169,20 @@ transition: transform 0.3s;
       attr: extraDay <= 13 ? THIRTEEN_ATTRIBUTES[extraDay - 1] : (extraDay <= 26 ? MOSHE_THIRTEEN_ATTRIBUTES[extraDay - 14] : THIRTEEN_ATTRIBUTES[extraDay - 27])
     } : null;
 
-    // cy41 microcosm: detect if current cycle spans the extra weeks → 54-day cycle
-    const extraStart_d = inExtra ? d - extraDay + 1 : 0;
-    const extraEnd_d   = inExtra ? extraStart_d + 27 : 0;
-    const cy41CycleStart = (cy41.cycle - 1) * 41 + 1;
-    const cy41CycleEnd   = cy41.cycle * 41;
-    const cy41IsExtended = inExtra && cy41CycleStart <= extraEnd_d && cy41CycleEnd >= extraStart_d;
-    const cy41ExtDay     = cy41IsExtended ? (d - cy41CycleStart + 1) : 0;
+    // 55-day leap year cycles (each 41-day cycle 4 and 5 expand to 55 in a leap year)
+    // Cycle 4: 4 Shevat (year-day 124) through 28 Adar I (year-day 178)
+    // Cycle 5: 29 Adar I (year-day 179) through 24 Nisan (year-day 233)
+    const inLeapCycle4 = isLeapYear && ((hMonth === 11 && hDay >= 4) || (hMonth === 12 && hDay <= 28));
+    const inLeapCycle5 = isLeapYear && ((hMonth === 12 && hDay >= 29) || hMonth === 13 || (hMonth === 1 && hDay <= 24));
+    const inLeapCycle  = inLeapCycle4 || inLeapCycle5;
+    const leapCycleNum = inLeapCycle4 ? 4 : (inLeapCycle5 ? 5 : 0);
+    // Shevat 4→day1 ... Shevat 30→day27; Adar I 1→day28 ... Adar I 28→day55
+    // Adar I 29→day1 ... Adar I 30→day2; Adar II 1→day3 ... Adar II 29→day31; Nisan 1→day32 ... Nisan 24→day55
+    const leapCycleDay = inLeapCycle4
+      ? (hMonth === 11 ? hDay - 3 : hDay + 27)
+      : inLeapCycle5
+        ? (hMonth === 12 ? hDay - 28 : hMonth === 13 ? hDay + 2 : hDay + 31)
+        : 0;
     const hal  = getHalachaInfo(dEff);
     const txt  = getDailyText(date);
 
@@ -6838,12 +6845,15 @@ transition: transform 0.3s;
 
     // NETZACH — 41-day (enriched with soul levels + mivtzah + commandment)
     const TIKKUN_PSALMS = [16, 32, 41, 42, 59, 77, 90, 105, 137, 150];
-    const _tikkunPsalm = TIKKUN_PSALMS[cy41.cycle - 1];
-    const _tikkunUrl   = 'https://www.sefaria.org/Tikkun_HaKlali.' + cy41.cycle + '?lang=bi&with=Navigation';
+    const _tikkunPsalm = inLeapCycle
+      ? TIKKUN_PSALMS[(leapCycleNum - 1) % 10]
+      : TIKKUN_PSALMS[(cy41.cycle - 1) % 10];
+    const _tikkunCycleNum = inLeapCycle ? leapCycleNum : cy41.cycle;
+    const _tikkunUrl   = 'https://www.sefaria.org/Tikkun_HaKlali.' + _tikkunCycleNum + '?lang=bi&with=Navigation';
     const cycleCmd = CYCLE_COMMANDMENTS[cy41.cycle - 1];
     const dayCmd   = TEN_COMMANDMENTS[cy41.commandmentDay - 1];
 
-    // 54-parasha list for leap year extended cycle (53 parashiyot + VeZot HaBrachah as day 54)
+    // 54 parashiyot for leap year 55-day cycles (days 1–54); day 55 = Yechidah
     const NETZACH_54_PARASHIYOT = [
       'Bereshit','Noach','Lech Lecha','Vayera','Chayei Sarah',
       'Toldot','Vayetzei','Vayishlach','Vayeshev','Miketz',
@@ -6857,28 +6867,53 @@ transition: transform 0.3s;
       'Ekev',"Re'eh",'Shoftim','Ki Tetzeh','Ki Tavo',
       'Nitzavim','Vayelech','Haazinu','VeZot HaBrachah'
     ];
-    const extDay54  = cy41IsExtended ? Math.min(cy41ExtDay, 54) : 0;
-    const extParasha = cy41IsExtended ? NETZACH_54_PARASHIYOT[extDay54 - 1] : '';
-    const extIsFinal = cy41IsExtended && extDay54 === 54;
 
-    if (cy41IsExtended) {
-      cards[5].querySelector('.sefirah-cycle-name').textContent = `Extended 54-Day Cycle: Torah Parshiyot`;
+    // Level/world per book; Devarim (days 44–54) reviews all 4 in groups of 3+3+3+2
+    function getLeapCycleLevel(day) {
+      if (day <= 12) return { book: 'Bereshit', level: 'Nefesh', world: 'Asiyah', review: false };
+      if (day <= 23) return { book: 'Shemot',   level: 'Ruach',   world: 'Yetzirah', review: false };
+      if (day <= 33) return { book: 'Vayikra',  level: 'Neshamah',world: 'Beriah',   review: false };
+      if (day <= 43) return { book: 'Bamidbar', level: 'Chayah',  world: 'Atzilut',  review: false };
+      if (day <= 46) return { book: 'Devarim',  level: 'Nefesh',  world: 'Asiyah',   review: true };
+      if (day <= 49) return { book: 'Devarim',  level: 'Ruach',   world: 'Yetzirah', review: true };
+      if (day <= 52) return { book: 'Devarim',  level: 'Neshamah',world: 'Beriah',   review: true };
+      if (day <= 54) return { book: 'Devarim',  level: 'Chayah',  world: 'Atzilut',  review: true };
+      return               { book: 'Devarim',   level: 'Yechidah',world: 'Adam Kadmon', review: true, yechidah: true };
+    }
+
+    const lcParasha  = inLeapCycle && leapCycleDay <= 54 ? NETZACH_54_PARASHIYOT[leapCycleDay - 1] : '';
+    const lcIsYechidah = inLeapCycle && leapCycleDay === 55;
+    const lcLevel    = inLeapCycle ? getLeapCycleLevel(leapCycleDay) : null;
+
+    if (inLeapCycle) {
+      const lcBookLabel = lcLevel.review
+        ? `Devarim — ${lcLevel.level} / ${lcLevel.world} (Review)`
+        : `${lcLevel.book} — ${lcLevel.level} / ${lcLevel.world}`;
+      cards[5].querySelector('.sefirah-cycle-name').textContent = `55-Day Cycle: Torah Parashiyot`;
       cards[5].querySelector('.sefirah-main-text').innerHTML =
-        `Day <strong>${extDay54}</strong> of <strong>54</strong> · Cycle <strong>${cy41.cycle}</strong>`;
-      cards[5].querySelector('.sefirah-sub-text').innerHTML =
-        `<span style="font-size:0.9em;color:var(--ink-dim)">Parasha:</span> <strong>${extParasha}</strong>` +
-        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Type:</span> ${extIsFinal ? 'Final Day — VeZot HaBrachah' : `Parasha ${extDay54} of 53`}`;
+        `Day <strong>${leapCycleDay}</strong> of <strong>55</strong> · Year-Cycle <strong>${leapCycleNum}</strong>`;
+      cards[5].querySelector('.sefirah-sub-text').innerHTML = lcIsYechidah
+        ? `<span style="font-size:0.9em;color:var(--ink-dim)">Yechidah:</span> <strong>Coming Down from Mount Sinai</strong>` +
+          `<br><span style="font-size:0.9em;color:var(--ink-dim)">World:</span> Adam Kadmon`
+        : `<span style="font-size:0.9em;color:var(--ink-dim)">Parasha:</span> <strong>${lcParasha}</strong>` +
+          `<br><span style="font-size:0.9em;color:var(--ink-dim)">Book / World:</span> ${lcBookLabel}`;
       cards[5].querySelector('.sefirah-tags').innerHTML =
-        `<span class="tag highlight">Adar I · Day ${extDay54} of 54</span><span class="tag">${extParasha}</span>`;
+        `<span class="tag highlight">Day ${leapCycleDay} of 55</span>` +
+        `<span class="tag">${lcIsYechidah ? 'Yechidah' : lcParasha}</span>`;
       cards[5].querySelector('.sefirah-detail').innerHTML =
-        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Extended Leap Year Cycle — 53 Parashiyot + 1</div>
-         <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${extDay54} of 54 (Adar I extended)</span></div>
-         <div class="detail-row"><span class="detail-label">Parasha:</span><span class="detail-value"><strong>${extParasha}</strong>${extIsFinal ? ' — Final Day' : ` — Parasha ${extDay54} of 53`}</span></div>
-         <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">In a leap year, cycles overlapping Adar I expand to 54 days:<br>Days 1–53 correspond to the 53 weekly Torah portions · Day 54: VeZot HaBrachah</div>
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year — 55-Day Cycle · Torah Parashiyot</div>
+         <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${leapCycleDay} of 55 · Year-Cycle ${leapCycleNum}</span></div>
+         ${lcIsYechidah
+           ? `<div class="detail-row"><span class="detail-label">Yechidah:</span><span class="detail-value"><strong>Coming Down from Mount Sinai</strong></span></div>
+              <div class="detail-row"><span class="detail-label">World:</span><span class="detail-value">Adam Kadmon</span></div>`
+           : `<div class="detail-row"><span class="detail-label">Parasha:</span><span class="detail-value"><strong>${lcParasha}</strong></span></div>
+              <div class="detail-row"><span class="detail-label">Book:</span><span class="detail-value">${lcLevel.book}${lcLevel.review ? ' (Devarim — Review)' : ''}</span></div>
+              <div class="detail-row"><span class="detail-label">Level / World:</span><span class="detail-value">${lcLevel.level} / ${lcLevel.world}</span></div>`}
+         <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">In a leap year, cycles 4 &amp; 5 expand to 55 days: Days 1–54 = the 54 Torah parashiyot (each book = one soul level) · Day 55 = Yechidah — Coming Down from Mount Sinai<br>Devarim reviews all 4 levels: 3 · 3 · 3 · 2</div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
-         <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
-         <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Cycle ${cy41.cycle} of 9)</span></div>
+         <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Year-Cycle ${leapCycleNum})</span></div>
+         <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Year-Cycle ${leapCycleNum})</span></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov</div>
          <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
