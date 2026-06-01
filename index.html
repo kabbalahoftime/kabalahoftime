@@ -155,7 +155,9 @@ font-family: ‘Frank Ruhl Libre’, serif;
 font-size: 15px;
 color: var(–ink-soft);
 margin-top: 2px;
+transition: color 0.15s;
 }
+.date-hebrew:hover { color: var(–gold); }
 
 .date-day-indicator {
 font-size: 11px;
@@ -187,6 +189,80 @@ background: var(–gold);
 color: var(–bg-card);
 font-weight: 600;
 }
+
+/* ── HEBREW DATE PICKER ── */
+.heb-picker-card {
+background: var(–bg-card);
+border: 1px solid var(–border-strong);
+border-radius: 6px;
+padding: 22px 24px 18px;
+width: 280px;
+box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+.heb-picker-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 18px;
+}
+.heb-picker-title {
+font-family: 'Cinzel', serif;
+font-size: 12px;
+letter-spacing: 2px;
+color: var(–gold);
+text-transform: uppercase;
+}
+.heb-picker-close {
+background: none;
+border: none;
+color: var(–ink-mid);
+font-size: 20px;
+cursor: pointer;
+line-height: 1;
+padding: 0 2px;
+}
+.heb-picker-close:hover { color: var(–ink); }
+.heb-picker-body { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+.heb-picker-row { display: flex; align-items: center; gap: 12px; }
+.heb-picker-label {
+font-family: 'Cinzel', serif;
+font-size: 10px;
+letter-spacing: 1.5px;
+color: var(–ink-mid);
+text-transform: uppercase;
+width: 46px;
+flex-shrink: 0;
+}
+.heb-picker-input, .heb-picker-select {
+flex: 1;
+background: var(–bg-card-alt);
+border: 1px solid var(–border);
+border-radius: 3px;
+color: var(–ink);
+font-family: 'Cinzel', serif;
+font-size: 12px;
+padding: 6px 8px;
+cursor: pointer;
+}
+.heb-picker-input:focus, .heb-picker-select:focus {
+outline: none;
+border-color: var(–gold);
+}
+.heb-picker-submit {
+width: 100%;
+background: var(–gold);
+border: none;
+border-radius: 3px;
+color: var(–bg-card);
+font-family: 'Cinzel', serif;
+font-size: 12px;
+letter-spacing: 2px;
+padding: 9px;
+cursor: pointer;
+font-weight: 600;
+transition: opacity 0.15s;
+}
+.heb-picker-submit:hover { opacity: 0.88; }
 
 /* ── CROWN ── */
 .keter-title-row {
@@ -1088,7 +1164,7 @@ transition: transform 0.3s;
     <div class="date-info">
       <div class="date-gregorian" id="gregorian-date" onclick="jumpToDate()" title="Click to jump to a date" style="cursor:pointer;">Monday, February 10, 2026</div>
       <input type="date" id="date-jump-input" style="position:absolute;opacity:0;pointer-events:none;width:0;height:0;" onchange="applyDateJump(this.value)">
-      <div class="date-hebrew" id="hebrew-date">…</div>
+      <div class="date-hebrew" id="hebrew-date" onclick="openHebPicker()" title="Click to jump to a Hebrew date" style="cursor:pointer;">…</div>
       <div class="date-day-indicator" id="day-indicator">Last Night: Day X · Tonight Begins: Day Y</div>
       <div id="year-toggle" style="display:none; text-align:center;">
         <div class="year-toggle-pill">
@@ -7691,6 +7767,86 @@ transition: transform 0.3s;
     render();
   }
 
+  // ── HEBREW DATE PICKER ──────────────────────────────────────────────────────
+  const _HEB_MONTH_ORDER = [7,8,9,10,11,12,13,1,2,3,4,5,6];
+
+  function _hebMonthName(m, isLeap) {
+    const names = {
+      1:'Nissan', 2:'Iyar', 3:'Sivan', 4:'Tammuz', 5:'Av', 6:'Elul',
+      7:'Tishrei', 8:'Cheshvan', 9:'Kislev', 10:'Tevet', 11:'Shvat',
+      12: isLeap ? 'Adar I' : 'Adar', 13:'Adar II'
+    };
+    return names[m] || '';
+  }
+
+  function _buildMonthOptions(hy, selectedMonth) {
+    const isLeap = hebrewLeapYear(hy);
+    return _HEB_MONTH_ORDER
+      .filter(m => m !== 13 || isLeap)
+      .map(m => {
+        const sel = m === selectedMonth ? ' selected' : '';
+        return `<option value="${m}"${sel}>${_hebMonthName(m, isLeap)}</option>`;
+      }).join('');
+  }
+
+  function _buildDayOptions(hy, hm, selectedDay) {
+    const max = daysInHebMonth(hm, hy);
+    const clampedDay = Math.min(selectedDay, max);
+    let html = '';
+    for (let d = 1; d <= max; d++) {
+      html += `<option value="${d}"${d === clampedDay ? ' selected' : ''}>${d}</option>`;
+    }
+    return html;
+  }
+
+  function updateHebDays() {
+    const hy = parseInt(document.getElementById('heb-pick-year').value) || 5786;
+    const hm = parseInt(document.getElementById('heb-pick-month').value);
+    const hd = parseInt(document.getElementById('heb-pick-day').value) || 1;
+    document.getElementById('heb-pick-day').innerHTML = _buildDayOptions(hy, hm, hd);
+  }
+
+  function updateHebMonths() {
+    const hy  = parseInt(document.getElementById('heb-pick-year').value) || 5786;
+    const hm  = parseInt(document.getElementById('heb-pick-month').value);
+    const isLeap = hebrewLeapYear(hy);
+    const newHm = (hm === 13 && !isLeap) ? 12 : hm;
+    document.getElementById('heb-pick-month').innerHTML = _buildMonthOptions(hy, newHm);
+    updateHebDays();
+  }
+
+  function openHebPicker() {
+    const hDate = gregToHebrew(getDisplayDate(currentOffset));
+    document.getElementById('heb-pick-year').value = hDate.year;
+    document.getElementById('heb-pick-month').innerHTML = _buildMonthOptions(hDate.year, hDate.month);
+    document.getElementById('heb-pick-day').innerHTML   = _buildDayOptions(hDate.year, hDate.month, hDate.day);
+    document.getElementById('heb-date-modal').style.display = 'flex';
+  }
+
+  function closeHebPicker() {
+    document.getElementById('heb-date-modal').style.display = 'none';
+  }
+
+  function applyHebDateJump() {
+    const hy = parseInt(document.getElementById('heb-pick-year').value);
+    const hm = parseInt(document.getElementById('heb-pick-month').value);
+    const hd = parseInt(document.getElementById('heb-pick-day').value);
+    if (!hy || !hm || !hd) return;
+    const gregDate = hebrewToGreg(hy, hm, hd);
+    const selected = localMidnight(gregDate);
+    const today    = localMidnight(new Date());
+    currentOffset  = Math.round((selected - today) / 86400000);
+    kotYearAlt = false;
+    closeHebPicker();
+    document.querySelectorAll('.sefirah-card.expanded').forEach(c => c.classList.remove('expanded'));
+    render();
+  }
+
+  // Close on backdrop click
+  document.getElementById('heb-date-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeHebPicker();
+  });
+
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
   let _scriptLang = 'en';
   let _scriptBeginner = false;
@@ -8246,6 +8402,30 @@ transition: transform 0.3s;
   }
 </script>
 
+<!-- HEBREW DATE PICKER MODAL -->
+<div id="heb-date-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
+  <div class="heb-picker-card">
+    <div class="heb-picker-header">
+      <span class="heb-picker-title">Jump to Hebrew Date</span>
+      <button class="heb-picker-close" onclick="closeHebPicker()">×</button>
+    </div>
+    <div class="heb-picker-body">
+      <div class="heb-picker-row">
+        <label class="heb-picker-label">Year</label>
+        <input type="number" id="heb-pick-year" class="heb-picker-input" min="5700" max="6200" onchange="updateHebMonths()" oninput="updateHebMonths()">
+      </div>
+      <div class="heb-picker-row">
+        <label class="heb-picker-label">Month</label>
+        <select id="heb-pick-month" class="heb-picker-select" onchange="updateHebDays()"></select>
+      </div>
+      <div class="heb-picker-row">
+        <label class="heb-picker-label">Day</label>
+        <select id="heb-pick-day" class="heb-picker-select"></select>
+      </div>
+    </div>
+    <button class="heb-picker-submit" onclick="applyHebDateJump()">Go ›</button>
+  </div>
+</div>
 
 </body>
 </html>
