@@ -160,6 +160,30 @@ font-style: italic;
 margin-top: 3px;
 }
 
+.year-toggle-pill {
+display: inline-flex;
+border: 1px solid var(–gold);
+border-radius: 20px;
+overflow: hidden;
+margin-top: 6px;
+}
+.year-pill-btn {
+background: none;
+border: none;
+color: var(–ink-mid);
+padding: 3px 11px;
+cursor: pointer;
+font-family: 'Cinzel', serif;
+letter-spacing: 1px;
+font-size: 9px;
+transition: all 0.15s;
+}
+.year-pill-btn.year-pill-active {
+background: var(–gold);
+color: var(–bg-card);
+font-weight: 600;
+}
+
 /* ── CROWN ── */
 .keter-title-row {
 text-align: center;
@@ -1061,6 +1085,12 @@ transition: transform 0.3s;
       <div class="date-gregorian" id="gregorian-date">Monday, February 10, 2026</div>
       <div class="date-hebrew" id="hebrew-date">…</div>
       <div class="date-day-indicator" id="day-indicator">Last Night: Day X · Tonight Begins: Day Y</div>
+      <div id="year-toggle" style="display:none; text-align:center;">
+        <div class="year-toggle-pill">
+          <button id="year-pill-a" class="year-pill-btn year-pill-active" onclick="setKotYear(false)">Year A</button>
+          <button id="year-pill-b" class="year-pill-btn" onclick="setKotYear(true)">Year B</button>
+        </div>
+      </div>
     </div>
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
   </div>
@@ -1922,6 +1952,7 @@ transition: transform 0.3s;
   let DAY_OFFSET = 28;
 
   let currentOffset = 0;
+  let kotYearAlt = false; // When true, show the adjacent KoT year during the overlap window
 
   const MONTHS = ['January','February','March','April','May','June',
                   'July','August','September','October','November','December'];
@@ -5800,11 +5831,50 @@ transition: transform 0.3s;
 
     // KoT year anchor: Day 1 of Omer (16 Nisan) = Day 1 of Week 29 (regular year)
     // or Day 1 of Week 33 (leap year, since extra weeks 22-25 shift Nisan forward by 4 weeks)
-    const d_year1 = hebrewToD(hYear, 1, 16) - (isLeapYear ? 224 : 196);
-    const weekOfYear = Math.ceil((d - d_year1 + 1) / 7);
-    // In a leap year weeks 22-25 are extra; regular content weeks 22-52 occupy positions 26-56.
-    // Map back so effectiveKotWeek is always 1-52 for 52-week content lookups:
-    const effectiveKotWeek = (isLeapYear && weekOfYear > 25) ? weekOfYear - 4 : weekOfYear;
+    const _priD_year1    = hebrewToD(hYear, 1, 16) - (isLeapYear ? 224 : 196);
+    const _priWeekOfYear = Math.ceil((d - _priD_year1 + 1) / 7);
+    const _priEffKotWk   = (isLeapYear && _priWeekOfYear > 25) ? _priWeekOfYear - 4 : _priWeekOfYear;
+
+    // Adjacent KoT year anchors — for detecting the ~10-day year-end overlap
+    const _hYN = hYear + 1, _isLN = hebrewLeapYear(_hYN);
+    const _dy1N = hebrewToD(_hYN, 1, 16) - (_isLN ? 224 : 196);
+    const _hYP = hYear - 1, _isLP = hebrewLeapYear(_hYP);
+    const _dy1P = hebrewToD(_hYP, 1, 16) - (_isLP ? 224 : 196);
+    const _kdP  = _isLP ? 392 : 364;
+
+    // Overlap: days 355-364 of current year coincide with days 1-10 of next year (and vice versa)
+    const _overlapNext = d >= _dy1N;           // next KoT year has already started
+    const _overlapPrev = d < _dy1P + _kdP;     // previous KoT year is still running
+    const inYearOverlap = _overlapNext || _overlapPrev;
+    if (!inYearOverlap) kotYearAlt = false;
+    // If hYear just incremented but the new KoT year hasn't begun (priWeekOfYear ≤ 0),
+    // auto-default to the previous year which is still running:
+    if (_priWeekOfYear <= 0 && _overlapPrev) kotYearAlt = true;
+
+    const _altIsLeap  = _overlapNext ? _isLN : _isLP;
+    const _altD_year1 = _overlapNext ? _dy1N : _dy1P;
+    const _altHYear   = _overlapNext ? _hYN  : _hYP;
+    const _altWeekOfYear = inYearOverlap ? Math.ceil((d - _altD_year1 + 1) / 7) : 0;
+    const _altEffKotWk   = (_altIsLeap && _altWeekOfYear > 25) ? _altWeekOfYear - 4 : _altWeekOfYear;
+
+    // Active year — swaps when the toggle is on
+    const d_year1         = (kotYearAlt && inYearOverlap) ? _altD_year1    : _priD_year1;
+    const weekOfYear      = (kotYearAlt && inYearOverlap) ? _altWeekOfYear : _priWeekOfYear;
+    const effectiveKotWeek = (kotYearAlt && inYearOverlap) ? _altEffKotWk  : _priEffKotWk;
+
+    // Update year-toggle pill
+    const _ytEl = document.getElementById('year-toggle');
+    const _ypA  = document.getElementById('year-pill-a');
+    const _ypB  = document.getElementById('year-pill-b');
+    if (inYearOverlap) {
+      _ytEl.style.display = 'block';
+      _ypA.textContent = `Year ${hYear}`;
+      _ypB.textContent = `Year ${_altHYear}`;
+      _ypA.className = 'year-pill-btn' + (kotYearAlt ? '' : ' year-pill-active');
+      _ypB.className = 'year-pill-btn' + (kotYearAlt ? ' year-pill-active' : '');
+    } else {
+      _ytEl.style.display = 'none';
+    }
 
     document.getElementById('day-indicator').textContent = inExtra
       ? `Week ${effectiveKotWeek} (${hMonth === 11 ? 'Shevat' : 'Adar I'} · Extra Day ${extraDay} of 28) · Day ${d}`
@@ -7585,7 +7655,13 @@ transition: transform 0.3s;
 
   function changeDay(delta) {
     currentOffset += delta;
+    kotYearAlt = false;
     document.querySelectorAll('.sefirah-card.expanded').forEach(c => c.classList.remove('expanded'));
+    render();
+  }
+
+  function setKotYear(alt) {
+    kotYearAlt = alt;
     render();
   }
 
