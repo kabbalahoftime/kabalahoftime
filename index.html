@@ -153,6 +153,20 @@ color: var(–ink-soft);
 margin-top: 2px;
 }
 
+.date-jump-trigger {
+background: none;
+border: none;
+color: var(–ink-dim);
+font-size: 10px;
+font-style: italic;
+cursor: pointer;
+margin-top: 5px;
+padding: 0;
+letter-spacing: 0.5px;
+transition: color 0.15s;
+}
+.date-jump-trigger:hover { color: var(–gold); }
+
 .date-day-indicator {
 font-size: 11px;
 color: var(–ink-mid);
@@ -182,6 +196,104 @@ transition: all 0.15s;
 background: var(–gold);
 color: var(–bg-card);
 font-weight: 600;
+}
+
+/* ── HEBREW DATE PICKER ── */
+.heb-picker-card {
+background: var(–bg-card);
+border: 1px solid var(–border-strong);
+border-radius: 6px;
+padding: 22px 24px 18px;
+width: 280px;
+box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+.heb-picker-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 18px;
+}
+.heb-picker-title {
+font-family: 'Cinzel', serif;
+font-size: 12px;
+letter-spacing: 2px;
+color: var(–gold);
+text-transform: uppercase;
+}
+.heb-picker-close {
+background: none;
+border: none;
+color: var(–ink-mid);
+font-size: 20px;
+cursor: pointer;
+line-height: 1;
+padding: 0 2px;
+}
+.heb-picker-close:hover { color: var(–ink); }
+.heb-picker-body { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+.heb-picker-row { display: flex; align-items: center; gap: 12px; }
+.heb-picker-label {
+font-family: 'Cinzel', serif;
+font-size: 10px;
+letter-spacing: 1.5px;
+color: var(–ink-mid);
+text-transform: uppercase;
+width: 46px;
+flex-shrink: 0;
+}
+.heb-picker-input, .heb-picker-select {
+flex: 1;
+background: var(–bg-card-alt);
+border: 1px solid var(–border);
+border-radius: 3px;
+color: var(–ink);
+font-family: 'Cinzel', serif;
+font-size: 12px;
+padding: 6px 8px;
+cursor: pointer;
+}
+.heb-picker-input:focus, .heb-picker-select:focus {
+outline: none;
+border-color: var(–gold);
+}
+.heb-picker-submit {
+width: 100%;
+background: var(–gold);
+border: none;
+border-radius: 3px;
+color: var(–bg-card);
+font-family: 'Cinzel', serif;
+font-size: 12px;
+letter-spacing: 2px;
+padding: 9px;
+cursor: pointer;
+font-weight: 600;
+transition: opacity 0.15s;
+}
+.heb-picker-submit:hover { opacity: 0.88; }
+.date-picker-tabs {
+display: flex;
+border-bottom: 1px solid var(–border);
+margin-bottom: 16px;
+}
+.date-tab-btn {
+flex: 1;
+background: none;
+border: none;
+border-bottom: 2px solid transparent;
+color: var(–ink-mid);
+font-family: 'Cinzel', serif;
+font-size: 10px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+padding: 7px 0;
+cursor: pointer;
+margin-bottom: -1px;
+transition: all 0.15s;
+}
+.date-tab-btn.date-tab-active {
+color: var(–gold);
+border-bottom-color: var(–gold);
 }
 
 /* ── CROWN ── */
@@ -1091,6 +1203,7 @@ transition: transform 0.3s;
           <button id="year-pill-b" class="year-pill-btn" onclick="setKotYear(true)">Year B</button>
         </div>
       </div>
+      <button class="date-jump-trigger" onclick="openDatePicker()">jump to date ↗</button>
     </div>
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
   </div>
@@ -7665,6 +7778,98 @@ transition: transform 0.3s;
     render();
   }
 
+  // ── DATE PICKER (combined Gregorian + Hebrew) ───────────────────────────────
+  let _datePickerTab = 'greg';
+  const _HEB_MONTH_ORDER = [7,8,9,10,11,12,13,1,2,3,4,5,6];
+
+  function _hebMonthName(m, isLeap) {
+    return ({1:'Nissan',2:'Iyar',3:'Sivan',4:'Tammuz',5:'Av',6:'Elul',
+             7:'Tishrei',8:'Cheshvan',9:'Kislev',10:'Tevet',11:'Shvat',
+             12:isLeap?'Adar I':'Adar',13:'Adar II'})[m] || '';
+  }
+
+  function _buildMonthOptions(hy, selectedMonth) {
+    const isLeap = hebrewLeapYear(hy);
+    return _HEB_MONTH_ORDER.filter(m => m !== 13 || isLeap)
+      .map(m => `<option value="${m}"${m===selectedMonth?' selected':''}>${_hebMonthName(m,isLeap)}</option>`)
+      .join('');
+  }
+
+  function _buildDayOptions(hy, hm, selectedDay) {
+    const max = daysInHebMonth(hm, hy), clamp = Math.min(selectedDay, max);
+    let h = '';
+    for (let d = 1; d <= max; d++) h += `<option value="${d}"${d===clamp?' selected':''}>${d}</option>`;
+    return h;
+  }
+
+  function switchDateTab(tab) {
+    _datePickerTab = tab;
+    document.getElementById('date-tab-greg').style.display = tab === 'greg' ? '' : 'none';
+    document.getElementById('date-tab-heb').style.display  = tab === 'heb'  ? '' : 'none';
+    document.getElementById('date-tab-btn-greg').className = 'date-tab-btn' + (tab==='greg'?' date-tab-active':'');
+    document.getElementById('date-tab-btn-heb').className  = 'date-tab-btn' + (tab==='heb' ?' date-tab-active':'');
+  }
+
+  function updateHebDays() {
+    const hy = parseInt(document.getElementById('heb-pick-year').value) || 5786;
+    const hm = parseInt(document.getElementById('heb-pick-month').value);
+    const hd = parseInt(document.getElementById('heb-pick-day').value) || 1;
+    document.getElementById('heb-pick-day').innerHTML = _buildDayOptions(hy, hm, hd);
+  }
+
+  function updateHebMonths() {
+    const hy = parseInt(document.getElementById('heb-pick-year').value) || 5786;
+    const hm = parseInt(document.getElementById('heb-pick-month').value);
+    const newHm = (hm === 13 && !hebrewLeapYear(hy)) ? 12 : hm;
+    document.getElementById('heb-pick-month').innerHTML = _buildMonthOptions(hy, newHm);
+    updateHebDays();
+  }
+
+  function openDatePicker() {
+    const date = getDisplayDate(currentOffset);
+    // Pre-fill Gregorian tab
+    const y = date.getFullYear(), mo = date.getMonth()+1, dd = date.getDate();
+    document.getElementById('date-greg-input').value =
+      `${y}-${String(mo).padStart(2,'0')}-${String(dd).padStart(2,'0')}`;
+    // Pre-fill Hebrew tab
+    const hDate = gregToHebrew(date);
+    document.getElementById('heb-pick-year').value = hDate.year;
+    document.getElementById('heb-pick-month').innerHTML = _buildMonthOptions(hDate.year, hDate.month);
+    document.getElementById('heb-pick-day').innerHTML   = _buildDayOptions(hDate.year, hDate.month, hDate.day);
+    // Show on last-used tab
+    switchDateTab(_datePickerTab);
+    document.getElementById('date-picker-modal').style.display = 'flex';
+  }
+
+  function closeDatePicker() {
+    document.getElementById('date-picker-modal').style.display = 'none';
+  }
+
+  function applyDatePickerJump() {
+    let selected;
+    if (_datePickerTab === 'greg') {
+      const v = document.getElementById('date-greg-input').value;
+      if (!v) return;
+      const [y, mo, dd] = v.split('-').map(Number);
+      selected = localMidnight(new Date(y, mo - 1, dd));
+    } else {
+      const hy = parseInt(document.getElementById('heb-pick-year').value);
+      const hm = parseInt(document.getElementById('heb-pick-month').value);
+      const hd = parseInt(document.getElementById('heb-pick-day').value);
+      if (!hy || !hm || !hd) return;
+      selected = localMidnight(hebrewToGreg(hy, hm, hd));
+    }
+    currentOffset = Math.round((selected - localMidnight(new Date())) / 86400000);
+    kotYearAlt = false;
+    closeDatePicker();
+    document.querySelectorAll('.sefirah-card.expanded').forEach(c => c.classList.remove('expanded'));
+    render();
+  }
+
+  document.getElementById('date-picker-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeDatePicker();
+  });
+
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
   let _scriptLang = 'en';
   let _scriptBeginner = false;
@@ -8220,6 +8425,49 @@ transition: transform 0.3s;
   }
 </script>
 
+<!-- DATE PICKER MODAL (Gregorian + Hebrew tabs) -->
+<div id="date-picker-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
+  <div class="heb-picker-card">
+    <div class="heb-picker-header">
+      <span class="heb-picker-title">Jump to Date</span>
+      <button class="heb-picker-close" onclick="closeDatePicker()">×</button>
+    </div>
+    <div class="date-picker-tabs">
+      <button id="date-tab-btn-greg" class="date-tab-btn date-tab-active" onclick="switchDateTab('greg')">Gregorian</button>
+      <button id="date-tab-btn-heb"  class="date-tab-btn"                onclick="switchDateTab('heb')">Hebrew</button>
+    </div>
+
+    <!-- Gregorian tab -->
+    <div id="date-tab-greg">
+      <div class="heb-picker-body">
+        <div class="heb-picker-row">
+          <label class="heb-picker-label">Date</label>
+          <input type="date" id="date-greg-input" class="heb-picker-input" style="flex:1;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Hebrew tab -->
+    <div id="date-tab-heb" style="display:none;">
+      <div class="heb-picker-body">
+        <div class="heb-picker-row">
+          <label class="heb-picker-label">Year</label>
+          <input type="number" id="heb-pick-year" class="heb-picker-input" min="5700" max="6200" onchange="updateHebMonths()" oninput="updateHebMonths()">
+        </div>
+        <div class="heb-picker-row">
+          <label class="heb-picker-label">Month</label>
+          <select id="heb-pick-month" class="heb-picker-select" onchange="updateHebDays()"></select>
+        </div>
+        <div class="heb-picker-row">
+          <label class="heb-picker-label">Day</label>
+          <select id="heb-pick-day" class="heb-picker-select"></select>
+        </div>
+      </div>
+    </div>
+
+    <button class="heb-picker-submit" onclick="applyDatePickerJump()">Go ›</button>
+  </div>
+</div>
 
 </body>
 </html>
