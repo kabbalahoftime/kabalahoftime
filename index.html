@@ -7866,8 +7866,8 @@ transition: transform 0.3s;
     render();
   }
 
-  document.getElementById('date-picker-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeDatePicker();
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'date-picker-modal') closeDatePicker();
   });
 
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
