@@ -1639,8 +1639,9 @@ transition: transform 0.3s;
     };
     function getServicePhrase(s) { return servicePhrases[s] || s; }
 
-    function displayParasha() {
-        const foundParasha = findCurrentParasha(formatDate(getNextShabbat(new Date())));
+    function displayParasha(forDate) {
+        const _ref = forDate || new Date();
+        const foundParasha = findCurrentParasha(formatDate(getNextShabbat(_ref)));
         if (!foundParasha) return;
 
         const nums = foundParasha.numbers;
@@ -1650,7 +1651,7 @@ transition: transform 0.3s;
         const cycleQ   = primaryData ? getQualities(primaryData.cycle) : null;
 
         // Card face — parasha name, then three independent blocks: day / parasha / cycle
-        const _now = new Date();
+        const _now = _ref;
         const _shovavimDay = (_now.getDay() === 6 && _now.getHours() >= 19) ? 8 : _now.getDay() + 1;
         const dayQ = getQualities(_shovavimDay);
         function qualityBlock(q) {
@@ -1795,6 +1796,7 @@ transition: transform 0.3s;
         document.getElementById('yesod-parasha-cycle').innerHTML = attrRows + systemNote;
     }
     displayParasha();
+    window.displayParasha = displayParasha;
     window.getParashaForDate = function(date) {
         const shabbat = getNextShabbat(date);
         const found = findCurrentParasha(formatDate(shabbat));
@@ -6117,6 +6119,9 @@ transition: transform 0.3s;
       `Chok L'Yisrael${_yesodParasha ? ' — ' + _yesodParasha : ''}</a>`;
     document.getElementById('keter-chok-meta').innerHTML =
       `Torah, Prophets, Writings, Midrash, Zohar`;
+
+    // Yesod parasha card — update for navigated date
+    if (window.displayParasha) window.displayParasha(date);
 
     // Ben Ish Chai (Yesod card)
     document.getElementById('yesod-bic-main').innerHTML =
