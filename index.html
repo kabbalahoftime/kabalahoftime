@@ -6843,7 +6843,7 @@ transition: transform 0.3s;
            { count: 25, rebbe: "R’ Asher the First of Stolin",  slug: "R’_Asher_(the_First)_of_Stolin" },
            { count: 12, rebbe: "R’ Asher the Second of Stolin", slug: "R’_Asher_(the_Second)_of_Stolin" }
          ];
-         const cyclePos = (d - 1) % 52;
+         const cyclePos = effectiveKotWeek - 1;
          let baSection, baEntry;
          if (cyclePos < 15)      { baSection = BA_SECTIONS[0]; baEntry = cyclePos + 1; }
          else if (cyclePos < 40) { baSection = BA_SECTIONS[1]; baEntry = cyclePos - 14; }
@@ -6854,7 +6854,7 @@ transition: transform 0.3s;
          return `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
            <div style="font-family:’Cinzel’,serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Beit Aharon — בֵּית אַהֲרֹן</div>
            <div style="margin-bottom:4px;font-size:0.78rem;color:var(--gold-mid);">${baSection.rebbe}</div>
-           <div style="font-size:0.88rem;margin-bottom:6px;"><a href="${baUrl}" target="_blank" style="color:var(--gold)">Daily Conduct — Entry ${baEntry}</a> <span style="color:var(--ink-dim);font-size:0.85em;">· Day ${cyclePos + 1} of 52</span></div>
+           <div style="font-size:0.88rem;margin-bottom:6px;"><a href="${baUrl}" target="_blank" style="color:var(--gold)">Daily Conduct — Entry ${baEntry}</a> <span style="color:var(--ink-dim);font-size:0.85em;">· Week ${cyclePos + 1} of 52</span></div>
            <div style="margin-bottom:4px;font-size:0.78rem;color:var(--gold-mid);">R’ Aharon the Second of Karlin <span style="color:var(--ink-dim);font-size:0.85em;">· 22-day cycle</span></div>
            <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${ba2Url}" target="_blank" style="color:var(--gold)">Daily Conduct — Entry ${ba2Entry}</a> <span style="color:var(--ink-dim);font-size:0.85em;">· Day ${cy22.day} of 22</span></div>
            <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
