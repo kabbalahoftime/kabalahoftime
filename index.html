@@ -6765,19 +6765,16 @@ transition: transform 0.3s;
     const jspReading  = bshtDay === 1 ? 'Introduction · Page 1' : `Pages ${2*(bshtDay-1)}–${2*(bshtDay-1)+1}`;
 
     document.getElementById('chesed-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Light and Fire of the Baal Shem Tov &amp; Jewish Spiritual Practices</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids</div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Light and Fire of the Baal Shem Tov &amp; Jewish Spiritual Practices</div>
        <div class="detail-row"><span class="detail-label">Light and Fire:</span><span class="detail-value">${bshtReading}</span></div>
        <div class="detail-row"><span class="detail-label">Spiritual Practices:</span><span class="detail-value">${jspReading}</span></div>
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">R. Yitzhak Buxbaum</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Reb Shlomo Carlebach Stories</div>
        <div class="detail-row"><span class="detail-value">${clbVideo1 ? `<a href="${clbVideo1.url}" target="_blank" style="color:var(--gold)">${clbVideo1.label}</a>` : ''}${clbVideo1 && clbVideo2 ? ' &nbsp;·&nbsp; ' : ''}${clbVideo2 ? `<a href="${clbVideo2.url}" target="_blank" style="color:var(--gold)">${clbVideo2.label}</a>` : ''}</span></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shlomo Katz — רב שלמה כץ</div>
-       <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://ravshlomokatz.com/" target="_blank" style="color:var(--gold)">Resources</a> &nbsp;·&nbsp; <a href="https://youtube.com/@ravshlomokatz" target="_blank" style="color:var(--gold)">Videos</a></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">KoT Week:</span><span class="detail-value">Week ${mishnaInfo.week}, Day ${mishnaInfo.day} of 7</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">${mishnaInfo.type === 'mishna' ? '10 chapters/week · Days 1–5' : '8 chapters/week · Days 6–7'}</span></div>` +
@@ -7641,6 +7638,9 @@ transition: transform 0.3s;
       `<hr style="border:0;border-top:1px solid var(--border);margin:0 0 14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Sicha</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:0 0 14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shlomo Katz — רב שלמה כץ</div>
+       <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://ravshlomokatz.com/" target="_blank" style="color:var(--gold)">Resources</a> &nbsp;·&nbsp; <a href="https://youtube.com/@ravshlomokatz" target="_blank" style="color:var(--gold)">Videos</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:0 0 14px 0;">` +
       todayRow +
       `<div class="mal-week-divider"></div>` +
