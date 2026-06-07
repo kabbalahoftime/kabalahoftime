@@ -1474,10 +1474,10 @@ transition: transform 0.3s;
       <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-hida-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div id="yesod-parasha-cycle"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.chabad.org/library/article_cdo/aid/6277697/jewish/Likkutei-Dibburim.htm" target="_blank" style="color:var(--gold)">Likkutei Dibburim — Chabad.org</a></div>
-      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div id="yesod-parasha-cycle"></div>
     </div>
   </div>
 </div>
@@ -6771,9 +6771,6 @@ transition: transform 0.3s;
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tanya" target="_blank" style="color:var(--gold)">Tanya on Sefaria</a></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Light and Fire of the Baal Shem Tov &amp; Jewish Spiritual Practices</div>
        <div class="detail-row"><span class="detail-label">Light and Fire:</span><span class="detail-value">${bshtReading}</span></div>
        <div class="detail-row"><span class="detail-label">Spiritual Practices:</span><span class="detail-value">${jspReading}</span></div>
@@ -6784,7 +6781,10 @@ transition: transform 0.3s;
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">KoT Week:</span><span class="detail-value">Week ${mishnaInfo.week}, Day ${mishnaInfo.day} of 7</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">${mishnaInfo.type === 'mishna' ? '10 chapters/week · Days 1–5' : '8 chapters/week · Days 6–7'}</span></div>` +
-      (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a></span></div>` : '') + `\``;
+      (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a></span></div>` : '') +
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tanya" target="_blank" style="color:var(--gold)">Tanya on Sefaria</a></div>`;
 
     // Noam Elimelech — Reb Elimelech of Lizhensk — 52 weekly entries (one per KoT week)
     function getNoamElimelechEntry(week) {
@@ -6822,9 +6822,6 @@ transition: transform 0.3s;
     document.getElementById('gevurah-tags').innerHTML =
       `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>`;
     document.getElementById('gevurah-detail').innerHTML =
-       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
-        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Kuntres_HaHitpa'alut" target="_blank" style="color:var(--gold)">Kuntres HaHitpa'alut on Sefaria</a></div>
-        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
        (() => {
          const noamEntry = getNoamElimelechEntry(effectiveKotWeek);
          return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Noam Elimelech — ר׳ אלימלך מליז׳נסק</div>` +
@@ -6881,7 +6878,10 @@ transition: transform 0.3s;
             </span></div>
             <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
          : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
-       }`;
+       }` +
+       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
+        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Kuntres_HaHitpa'alut" target="_blank" style="color:var(--gold)">Kuntres HaHitpa'alut on Sefaria</a></div>`;
 
     // Derech Mitzvosecha — 26 teachings across cycles 27-28 (2 × 13)
     const DERECH_MITZVOSECHA = [
