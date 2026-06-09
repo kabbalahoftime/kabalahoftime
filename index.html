@@ -1346,6 +1346,25 @@ transition: transform 0.3s;
 
   <div class="sefirot-grid" id="sefirot-grid">
 
+<!-- NOW: Sefirah of the Hour -->
+<div id="now-sefirah-featured" class="sefirah-card" onclick="toggleExpand(this)"
+     style="display:none;border-left:2px solid var(--gold);margin-bottom:8px;">
+  <span class="expand-icon">▾</span>
+  <div class="sefirah-label-col">
+    <div id="now-sf-name" class="sefirah-name"></div>
+    <div id="now-sf-hebrew" class="sefirah-hebrew"></div>
+    <div id="now-sf-time" style="font-size:9px;color:var(--ink-dim);margin-top:3px;"></div>
+    <div style="font-size:8px;color:var(--gold);margin-top:2px;letter-spacing:1.5px;opacity:0.9;">NOW</div>
+  </div>
+  <div class="sefirah-content-col">
+    <div id="now-sf-cycle" class="sefirah-cycle-name"></div>
+    <div id="now-sf-main" class="sefirah-main-text"></div>
+    <div id="now-sf-sub" class="sefirah-sub-text"></div>
+    <div id="now-sf-tags" class="sefirah-tags"></div>
+    <div id="now-sf-detail" class="sefirah-detail"></div>
+  </div>
+</div>
+
 <!-- CHESED: Mishna / Tosefta -->
 <div class="sefirah-card" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
@@ -5921,6 +5940,52 @@ transition: transform 0.3s;
     return { page: d.p, label: `§ ${sec} (p. ${d.p||sec})`, titleEn: d.e||'', titleHe: d.h||'' };
   }
 
+  // ── SEFIRAH OF THE HOUR ──
+  const SEFIRAH_TIMES = [
+    { name: 'Malchut',  hebrew: 'מַלְכוּת',    start: 22*60+18, end: 1*60+43,  range: '10:18–1:43'  },
+    { name: 'Chesed',   hebrew: 'חֶסֶד',        start: 1*60+43,  end: 5*60+9,   range: '1:43–5:09'   },
+    { name: 'Gevurah',  hebrew: 'גְּבוּרָה',    start: 5*60+9,   end: 8*60+35,  range: '5:09–8:35'   },
+    { name: 'Tiferet',  hebrew: 'תִּפְאֶרֶת',  start: 8*60+35,  end: 12*60,    range: '8:35–12:00'  },
+    { name: 'Netzach',  hebrew: 'נֶצַח',        start: 12*60,    end: 15*60+26, range: '12:00–3:26'  },
+    { name: 'Hod',      hebrew: 'הוֹד',         start: 15*60+26, end: 18*60+52, range: '3:26–6:52'   },
+    { name: 'Yesod',    hebrew: 'יְסוֹד',       start: 18*60+52, end: 22*60+18, range: '6:52–10:18'  },
+  ];
+
+  function getActiveSefirahTime() {
+    const now = new Date();
+    const mins = now.getHours() * 60 + now.getMinutes();
+    if (mins >= 22*60+18 || mins < 1*60+43) return SEFIRAH_TIMES[0];
+    for (let i = 1; i < SEFIRAH_TIMES.length; i++) {
+      if (mins >= SEFIRAH_TIMES[i].start && mins < SEFIRAH_TIMES[i].end) return SEFIRAH_TIMES[i];
+    }
+    return SEFIRAH_TIMES[0];
+  }
+
+  function updateNowSefirah() {
+    const active = getActiveSefirahTime();
+    const allCards = document.querySelectorAll('.sefirah-card');
+    const sourceCard = Array.from(allCards).find(c =>
+      c.id !== 'now-sefirah-featured' &&
+      c.querySelector('.sefirah-name') &&
+      c.querySelector('.sefirah-name').textContent === active.name
+    );
+    if (!sourceCard) return;
+    document.getElementById('now-sf-name').textContent   = active.name;
+    document.getElementById('now-sf-hebrew').textContent = active.hebrew;
+    document.getElementById('now-sf-time').textContent   = active.range;
+    const copy = (sel, id) => {
+      const src = sourceCard.querySelector(sel);
+      const dst = document.getElementById(id);
+      if (src && dst) dst.innerHTML = src.innerHTML;
+    };
+    copy('.sefirah-cycle-name', 'now-sf-cycle');
+    copy('.sefirah-main-text',  'now-sf-main');
+    copy('.sefirah-sub-text',   'now-sf-sub');
+    copy('.sefirah-tags',       'now-sf-tags');
+    copy('.sefirah-detail',     'now-sf-detail');
+    document.getElementById('now-sefirah-featured').style.display = '';
+  }
+
   // ── RENDER ──
   function render() {
     const rawDay = getDaysDiff(currentOffset); // Days since Rosh Hashanah
@@ -7794,6 +7859,7 @@ transition: transform 0.3s;
     };
     document.getElementById('daily-script-content').textContent =
       _scriptBeginner ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
+    updateNowSefirah();
   }
 
   function changeDay(delta) {
