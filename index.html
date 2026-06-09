@@ -5967,7 +5967,7 @@ transition: transform 0.3s;
     const sourceCard = Array.from(allCards).find(c =>
       c.id !== 'now-sefirah-featured' &&
       c.querySelector('.sefirah-name') &&
-      c.querySelector('.sefirah-name').textContent === active.name
+      c.querySelector('.sefirah-name').textContent.trim() === active.name
     );
     if (!sourceCard) return;
     document.getElementById('now-sf-name').textContent   = active.name;
@@ -5983,7 +5983,7 @@ transition: transform 0.3s;
     copy('.sefirah-sub-text',   'now-sf-sub');
     copy('.sefirah-tags',       'now-sf-tags');
     copy('.sefirah-detail',     'now-sf-detail');
-    document.getElementById('now-sefirah-featured').style.display = '';
+    document.getElementById('now-sefirah-featured').style.display = 'grid';
   }
 
   // ── RENDER ──
