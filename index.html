@@ -1283,6 +1283,9 @@ transition: transform 0.3s;
     </div>
   </div>
 
+  <!-- WHEEL OF TIME -->
+  <div id="kotw-root"></div>
+
   <!-- NOW: Sefirah of the Hour -->
   <div id="now-sefirah-featured" class="sefirah-card" onclick="toggleExpand(this)"
        style="display:none;border-left:2px solid var(--gold);margin-bottom:8px;">
@@ -1301,9 +1304,6 @@ transition: transform 0.3s;
       <div id="now-sf-detail" class="sefirah-detail"></div>
     </div>
   </div>
-
-  <!-- WHEEL OF TIME -->
-  <div id="kotw-root"></div>
 
   <!-- DATE BAR -->
 
@@ -8736,8 +8736,7 @@ transition: transform 0.3s;
     var mo=MOCH[n-50];return {s:mo.s,e:mo.e};}
 
   var h=document.createElement('div');
-  h.innerHTML='<div class="kotw-title">גַּלְגַּל הַזְּמַן</div>'+
-    '<div class="kotw-sub">The Year as a Single Day — Kabbalah of Time</div>';
+  h.innerHTML='<div class="kotw-sub">The Year as a Single Day — Kabbalah of Time</div>';
   root.appendChild(h);
 
   var svg=mk('svg',{viewBox:'0 0 420 420',role:'img',
