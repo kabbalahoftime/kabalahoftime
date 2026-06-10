@@ -1302,6 +1302,9 @@ transition: transform 0.3s;
     </div>
   </div>
 
+  <!-- WHEEL OF TIME -->
+  <div id="kotw-root"></div>
+
   <!-- DATE BAR -->
 
   <div class="date-bar">
@@ -1320,9 +1323,6 @@ transition: transform 0.3s;
     </div>
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
   </div>
-  <!-- WHEEL OF TIME -->
-  <div id="kotw-root"></div>
-
   <!-- CROWN — YEARLY CYCLE -->
 
   <div class="keter-title-row">
@@ -8715,8 +8715,8 @@ transition: transform 0.3s;
     {he:'כֶּתֶר / דַּעַת',en:'Keter / Da’at',s:112,e:142,c:'#e3c25f'}
   ];
 
-  function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.round(m%60);
-    if(mm===60){mm=0;h=(h+1)%24}var ap=h<12?'AM':'PM';var hh=h%12;if(hh===0)hh=12;
+  function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.floor(m%60);
+    var ap=h<12?'AM':'PM';var hh=h%12;if(hh===0)hh=12;
     return hh+':'+('0'+mm).slice(-2)+' '+ap;}
   var CX=210,CY=210;
   function pol(r,m){var a=(m/DAY)*2*Math.PI-Math.PI/2;
