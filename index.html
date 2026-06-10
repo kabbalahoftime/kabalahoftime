@@ -1280,6 +1280,7 @@ transition: transform 0.3s;
 
   <div class="keter-title-row">
     <span class="keter-crown-label">✦ KETER ✦</span>
+    <div style="font-family:'Frank Ruhl Libre',serif;font-size:22px;color:var(--gold);text-align:center;margin-top:2px;">כֶּתֶר</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;text-align:center;">1:52–2:22</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;text-align:center;font-style:italic;">Baal Shem Tov</div>
     <div style="font-size:8px;color:var(--gold);margin-top:1px;text-align:center;opacity:0.85;">Hitbodedut (Meditation)</div>
@@ -6518,7 +6519,7 @@ transition: transform 0.3s;
     const hal  = getHalachaInfo(dEff);
     const txt  = getDailyText(date);
 
-    const cards = document.querySelectorAll('.sefirah-card');
+    const cards = Array.from(document.querySelectorAll('.sefirah-card')).filter(c => c.id !== 'now-sefirah-featured');
 
     // CHOCHMAH — 22-Day Alef-Bet
     // 231 Gates — compute combination before rendering card face
