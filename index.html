@@ -6518,7 +6518,7 @@ transition: transform 0.3s;
     const hal  = getHalachaInfo(dEff);
     const txt  = getDailyText(date);
 
-    const cards = document.querySelectorAll('.sefirah-card');
+    const cards = Array.from(document.querySelectorAll('.sefirah-card')).filter(c => c.id !== 'now-sefirah-featured');
 
     // CHOCHMAH — 22-Day Alef-Bet
     // 231 Gates — compute combination before rendering card face
