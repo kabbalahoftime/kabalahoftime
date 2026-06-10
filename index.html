@@ -1189,6 +1189,25 @@ transition: transform 0.3s;
     </div>
   </div>
 
+  <!-- NOW: Sefirah of the Hour -->
+  <div id="now-sefirah-featured" class="sefirah-card" onclick="toggleExpand(this)"
+       style="display:none;border-left:2px solid var(--gold);margin-bottom:8px;">
+    <span class="expand-icon">▾</span>
+    <div class="sefirah-label-col">
+      <div id="now-sf-name" class="sefirah-name"></div>
+      <div id="now-sf-hebrew" class="sefirah-hebrew"></div>
+      <div id="now-sf-time" style="font-size:9px;color:var(--ink-dim);margin-top:3px;"></div>
+      <div style="font-size:8px;color:var(--gold);margin-top:2px;letter-spacing:1.5px;opacity:0.9;">NOW</div>
+    </div>
+    <div class="sefirah-content-col">
+      <div id="now-sf-cycle" class="sefirah-cycle-name"></div>
+      <div id="now-sf-main" class="sefirah-main-text"></div>
+      <div id="now-sf-sub" class="sefirah-sub-text"></div>
+      <div id="now-sf-tags" class="sefirah-tags"></div>
+      <div id="now-sf-detail" class="sefirah-detail"></div>
+    </div>
+  </div>
+
   <!-- DATE BAR -->
 
   <div class="date-bar">
@@ -1345,25 +1364,6 @@ transition: transform 0.3s;
   <!-- 7 SEFIROT CARDS -->
 
   <div class="sefirot-grid" id="sefirot-grid">
-
-<!-- NOW: Sefirah of the Hour -->
-<div id="now-sefirah-featured" class="sefirah-card" onclick="toggleExpand(this)"
-     style="display:none;border-left:2px solid var(--gold);margin-bottom:8px;">
-  <span class="expand-icon">▾</span>
-  <div class="sefirah-label-col">
-    <div id="now-sf-name" class="sefirah-name"></div>
-    <div id="now-sf-hebrew" class="sefirah-hebrew"></div>
-    <div id="now-sf-time" style="font-size:9px;color:var(--ink-dim);margin-top:3px;"></div>
-    <div style="font-size:8px;color:var(--gold);margin-top:2px;letter-spacing:1.5px;opacity:0.9;">NOW</div>
-  </div>
-  <div class="sefirah-content-col">
-    <div id="now-sf-cycle" class="sefirah-cycle-name"></div>
-    <div id="now-sf-main" class="sefirah-main-text"></div>
-    <div id="now-sf-sub" class="sefirah-sub-text"></div>
-    <div id="now-sf-tags" class="sefirah-tags"></div>
-    <div id="now-sf-detail" class="sefirah-detail"></div>
-  </div>
-</div>
 
 <!-- CHESED: Mishna / Tosefta -->
 <div class="sefirah-card" onclick="toggleExpand(this)">
