@@ -1199,6 +1199,50 @@ transition: transform 0.3s;
   letter-spacing: 1px;
 }
 .copy-script-btn:hover { background: var(--gold); color: var(--bg); }
+
+/* ── WHEEL OF TIME ── */
+#kotw-root{
+  --kotw-night:#0d1122; --kotw-gold:#d4af37; --kotw-golddim:#9a7e2a;
+  --kotw-parch:#f0e6c9;
+  font-family:'Cormorant Garamond',serif;
+  background:radial-gradient(ellipse at 50% 30%,#161d38 0%,#0d1122 75%);
+  border:1px solid var(--kotw-golddim); border-radius:10px;
+  color:var(--kotw-parch); padding:14px 12px 16px; max-width:420px;
+  margin:0 auto 20px; box-sizing:border-box;
+}
+#kotw-root *{box-sizing:border-box;margin:0;padding:0}
+#kotw-root .kotw-title{
+  font-family:'Frank Ruhl Libre',serif; color:var(--kotw-gold);
+  text-align:center; font-size:22px; font-weight:500; letter-spacing:.04em;
+}
+#kotw-root .kotw-sub{
+  text-align:center; font-style:italic; font-size:13px; opacity:.75; margin:2px 0 10px;
+}
+#kotw-root svg{width:100%; height:auto; display:block}
+#kotw-root .kotw-seg{cursor:pointer}
+#kotw-root .kotw-panel{
+  margin-top:12px; border-top:1px solid rgba(212,175,55,.35); padding-top:10px;
+  font-size:14.5px; line-height:1.5;
+}
+#kotw-root .kotw-wk{
+  font-family:'Frank Ruhl Libre',serif; color:var(--kotw-gold);
+  font-size:16px; font-weight:500;
+}
+#kotw-root .kotw-heb{
+  font-family:'Frank Ruhl Libre',serif; font-size:17px; direction:rtl; text-align:right;
+  color:var(--kotw-parch); float:right; margin-left:8px;
+}
+#kotw-root .kotw-theme{font-style:italic; margin-top:4px}
+#kotw-root .kotw-meta{opacity:.78; font-size:13.5px; margin-top:5px}
+#kotw-root .kotw-now-badge{
+  display:inline-block; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+  border:1px solid var(--kotw-golddim); border-radius:3px; padding:1px 7px;
+  color:var(--kotw-gold); margin-left:6px; vertical-align:2px; font-style:normal;
+}
+#kotw-root .kotw-foot{
+  margin-top:10px; font-size:11.5px; text-align:center; opacity:.55; font-style:italic;
+}
+#kotw-root a{color:var(--kotw-gold); text-decoration:none}
 </style>
 
 </head>
@@ -1276,6 +1320,9 @@ transition: transform 0.3s;
     </div>
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
   </div>
+  <!-- WHEEL OF TIME -->
+  <div id="kotw-root"></div>
+
   <!-- CROWN — YEARLY CYCLE -->
 
   <div class="keter-title-row">
@@ -8592,6 +8639,194 @@ transition: transform 0.3s;
         });
     });
   }
+</script>
+
+<script>
+(function(){
+  var root=document.getElementById('kotw-root');
+  if(!root) return;
+  var NS='http://www.w3.org/2000/svg', DAY=1440, SEAM=103; /* 1:43 AM */
+  var SEF=[
+    {en:'Chesed',he:'חֶסֶד',c:'#ddd6c2'},
+    {en:'Gevurah',he:'גְּבוּרָה',c:'#9e3030'},
+    {en:'Tiferet',he:'תִּפְאֶרֶת',c:'#c9a227'},
+    {en:'Netzach',he:'נֶצַח',c:'#4d8b6c'},
+    {en:'Hod',he:'הוֹד',c:'#b06a3f'},
+    {en:'Yesod',he:'יְסוֹד',c:'#6f579e'},
+    {en:'Malchut',he:'מַלְכוּת',c:'#2e4a8f'}
+  ];
+  var W=[
+   {a:'Rooster (first bird)',r:'Introduction & 14 rabbis (7 pairs) — acquiring a master',t:'To Raise our Heads, Choose a Master, and Recognize G’d’s Oneness'},
+   {a:'Hen',r:'Shimon ben Rabban Gamliel — “silence” of the body',t:'To Relate Well to Others and to Our Own Body'},
+   {a:'Dove',r:'Rabban Shimon ben Gamliel — justice, truth and peace',t:'To Be Happy, Balanced, and Secure in G’d'},
+   {a:'Eagle',r:'Rabbi Yehudah HaNassi — an Eye that sees, an Ear that hears',t:'To Take Responsibility for All, Yet Protecting Oneself from Bad Influences'},
+   {a:'Crane',r:'Rabban Gamliel ben R. Yehudah HaNassi — Torah study with work',t:'To Use All Tools Available in order to Elevate the World'},
+   {a:'Songbird',r:'Rabban Yochanan ben Zakai — claim no credit for your learning',t:'To Impact the World, Laying a Foundation for Future Generations'},
+   {a:'Swallow',r:'Rabbi Eliezer — your neighbor’s honor as precious as your own',t:'To Recognize and Reveal the Divine Presence within Us and the World'},
+   {a:'Swift',r:'Rabbi Yehoshua — the evil eye and hatred remove one from the world',t:'Not to Lose Focus on our Spirituality and Relationship with G’d'},
+   {a:'Stormy Petrel',r:'Rabbi Yossi — your neighbor’s possessions as dear as your own',t:'Fighting Darkness with Light'},
+   {a:'Bat',r:'Rabbi Shimon — care in the Shemah; prayer is not routine',t:'To Trust in G’d’s Mercy'},
+   {a:'Stork',r:'Rabbi Elazar — know what to answer the heretic',t:'Fighting Evil and Heresy, Yet Knowing How to Forgive'},
+   {a:'Raven',r:'Rabbi Tarfon — the day is short, the work is great',t:'Revealing Warmth to Those that Are Cold and Indifferent'},
+   {a:'Starling',r:'Rabbi Akaviah ben Mahalalel — know from where you come',t:'To Publicize Miracles with Pride and Humility'},
+   {a:'Domestic Goose',r:'Rabbi Chaninah, Segan HaKohanim — pray for the government’s welfare',t:'To Believe in Our Own Strength, which Comes from G’d'},
+   {a:'Wild Goose',r:'Rabbi Chaninah ben Teradion — two who exchange words of Torah',t:'Giving Proper Value to Torah and to the Presence of the Shechinah'},
+   {a:'Ducks',r:'Rabbi Shimon [Bar Yochai] — three who ate and said Torah',t:'To Use Adversity as a Way to Grow, Relying on G’d for Support'},
+   {a:'Bee-Eater (last bird)',r:'Rabbi Chaninah ben Chachinai — awake at night, guard the heart',t:'To Pay Attention to G’d’s Guidance and to Trust in Our Redemption'},
+   {a:'Grasshopper (first insect)',r:'Rabbi Nechuniah — the yoke of Torah removes other yokes',t:'To Live in Harmony with Nature in a Manner that is Above Nature'},
+   {a:'Locust',r:'Rabbi Chalaftah — ten gathered in Torah, the Shechinah dwells',t:'To Feel that G’d is Close Even When He Seems Far Away'},
+   {a:'Spider',r:'Rabbi Elazar of Bartota — give to Him what is His',t:'To Be Solid and Giving in Our Relationships'},
+   {a:'Fly',r:'Rabbi Yaakov — do not interrupt your study for the beautiful tree',t:'To Keep Things in Perspective'},
+   {a:'Sea Monsters',r:'Rabbi Dostai ben Yanai — guard your Torah from forgetfulness',t:'To Complement Each Other in Happiness'},
+   {a:'Leviathan',r:'Rabbi Chaninah ben Dossah — fear of sin before wisdom',t:'To Be Happy Even Without Knowing Why Things Are the Way They Are'},
+   {a:'Fish',r:'Rabbi Dossah ben Harkinas — morning sleep, afternoon wine…',t:'To Live Above Our Worldly Concerns'},
+   {a:'Frog',r:'Rabbi Elazar HaModai — do not profane the sacred',t:'To Have Self-Sacrifice in order to Fulfill Our Mission in Life'},
+   {a:'Sheep & Goat (first farm animals)',r:'Rabbi Yishmael — receive every person with joy',t:'To Be Humble and Let G’d Guide Us'},
+   {a:'Cow',r:'Rabbi Akiva — everything is prepared for the banquet',t:'To Purify Ourselves in order to Change'},
+   {a:'Pig & Rabbit',r:'Rabbi Elazar ben Azariah — without flour there is no Torah',t:'To Recognize our Limits in order to Free Ourselves from Them'},
+   {a:'Beast of Burden',r:'Rabbi Elazar ben Chismah — even “small” laws are essential',t:'After the Initial Inspiration, To Get to Work'},
+   {a:'Camel',r:'Ben Zomah — who is wise? One who learns from everyone',t:'To Know that the World Needs More Love and Respect'},
+   {a:'Horse',r:'Ben Azai — run to pursue a mitzvah',t:'To Be Proud of Our Humble Connection with G’d'},
+   {a:'Mule',r:'Rabbi Levitas of Yavneh — be extremely humble',t:'To Recognize Deep in Our Heart How Small We Are, How Great G’d Is'},
+   {a:'Donkey',r:'Rabbi Yochanan ben Berokah — the Divine Name is never profaned in vain',t:'To Recognize the Spiritual Treasures Hidden within Each One of Us'},
+   {a:'Ox (last farm animal)',r:'Rabbi Yishmael b. R. Yossi — study in order to practice',t:'To Work in a Focused Manner and without Ego'},
+   {a:'Wild Animals',r:'Rabbi Tzadok — do not separate from the community',t:'To Thank G’d in Unison'},
+   {a:'Gazelle',r:'Rabbi Yossi — one who honors the Torah will be honored',t:'To Have Emunah'},
+   {a:'Elephant',r:'Rabbi Yishmael — judge with care, avoid hatred and theft',t:'To Maintain our Humility and Not Forget the Greatness We Experienced'},
+   {a:'Lion',r:'Rabbi Yonatan — fulfill the Torah in poverty, fulfill it in wealth',t:'To Be Strong and Courageous in order to Defend the Common Good'},
+   {a:'Bear',r:'Rabbi Meir — engage minimally in business, occupy yourself with Torah',t:'To See the World in a Positive Light in Order to Elevate It'},
+   {a:'Wolf',r:'Rabbi Eliezer — one mitzvah acquires an advocate',t:'To Fight for Truth'},
+   {a:'Fox',r:'Rabbi Yochanan HaSandlar — gatherings for the sake of Heaven endure',t:'Not to Become Corrupt'},
+   {a:'Hound',r:'Rabbi Eliezer ben Shammuah — your student’s honor as your own',t:'To Be Loyal and Pursue Justice'},
+   {a:'Cat',r:'Rabbi Yehudah — an error in learning is tantamount to willful sin',t:'To Pursue the Enemy and to Pursue Peace'},
+   {a:'Mouse (last house animal)',r:'Rabbi Nehorai — exile yourself to a place of Torah',t:'To Recognize Our Mistakes and Change'},
+   {a:'Creeping Creatures',r:'Rabbi Yanai — we cannot comprehend the tranquility of the wicked',t:'To Raise Ourselves Up Through Love and Humility'},
+   {a:'Prolific Creeping Creatures',r:'Rabbi Matiah ben Charash — be a tail to lions',t:'To Know Our Place in Order to Be Truly Happy'},
+   {a:'Snake',r:'Rabbi Yaakov — this world is an antechamber for the World to Come',t:'Time for Teshuvah (Return to G’d)!'},
+   {a:'Scorpion',r:'Rabbi Shimon ben Elazar — do not appease your friend in his anger',t:'To Fight Coldness with Warmth'},
+   {a:'Snail',r:'Shmuel the Small — when your enemy falls, do not rejoice',t:'To Bring More Light in Order to Extinguish Darkness Altogether'},
+   {a:'Ant',r:'Elishah ben Avuyah — Torah in childhood is ink on fresh paper',t:'To Know That There Are No Limits to Our Growth and Closeness'},
+   {a:'Weasel (Chulda)',r:'Rabbi Yossi ben Yehudah of Kfar Bavli — learning from the young and the old',t:'To Understand That We Are All One Soul'},
+   {a:'Dogs (last animals)',r:'Rabbi Elazar HaKappar — He is the Knower, He is the Judge',t:'To Crown G’d as Our King'}
+  ];
+  var MOCH=[
+    {he:'חָכְמָה',en:'Chochmah',s:54,e:83,c:'#8fa8d8'},
+    {he:'בִּינָה',en:'Binah',s:83,e:112,c:'#b08cc4'},
+    {he:'כֶּתֶר / דַּעַת',en:'Keter / Da’at',s:112,e:142,c:'#e3c25f'}
+  ];
+
+  function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.round(m%60);
+    if(mm===60){mm=0;h=(h+1)%24}var ap=h<12?'AM':'PM';var hh=h%12;if(hh===0)hh=12;
+    return hh+':'+('0'+mm).slice(-2)+' '+ap;}
+  var CX=210,CY=210;
+  function pol(r,m){var a=(m/DAY)*2*Math.PI-Math.PI/2;
+    return [CX+r*Math.cos(a),CY+r*Math.sin(a)];}
+  function donut(r1,r2,m1,m2){if(m2<m1)m2+=DAY;var L=(m2-m1)>DAY/2?1:0;
+    var p1=pol(r2,m1),p2=pol(r2,m2),p3=pol(r1,m2),p4=pol(r1,m1);
+    return 'M '+p1[0]+' '+p1[1]+' A '+r2+' '+r2+' 0 '+L+' 1 '+p2[0]+' '+p2[1]+
+           ' L '+p3[0]+' '+p3[1]+' A '+r1+' '+r1+' 0 '+L+' 0 '+p4[0]+' '+p4[1]+' Z';}
+  function mk(n,at,par){var e=document.createElementNS(NS,n);
+    for(var k in at)e.setAttribute(k,at[k]);par.appendChild(e);return e;}
+
+  function combo(n){var k=Math.floor((n-1)/7),p=(n-1)%7;
+    return {he:SEF[p].he+' שֶׁבְּ'+SEF[k].he,en:SEF[p].en+' of '+SEF[k].en,
+            color:SEF[k].c};}
+  function weekTimes(n){
+    if(n<=49){var s=SEAM+(n-1)*DAY/49;return {s:s%DAY,e:(s+DAY/49)%DAY};}
+    var mo=MOCH[n-50];return {s:mo.s,e:mo.e};}
+
+  var h=document.createElement('div');
+  h.innerHTML='<div class="kotw-title">גַּלְגַּל הַזְּמַן</div>'+
+    '<div class="kotw-sub">The Year as a Single Day — Kabbalah of Time</div>';
+  root.appendChild(h);
+
+  var svg=mk('svg',{viewBox:'0 0 420 420',role:'img',
+    'aria-label':'24-hour wheel mapping the 52 weeks of the Kabbalah of Time year onto a single day'},root);
+
+  mk('circle',{cx:CX,cy:CY,r:200,fill:'none',stroke:'#9a7e2a','stroke-width':1,opacity:.4},svg);
+  for(var hh=0;hh<24;hh++){
+    var m=hh*60,big=hh%6===0,p1=pol(big?188:192,m),p2=pol(198,m);
+    mk('line',{x1:p1[0],y1:p1[1],x2:p2[0],y2:p2[1],stroke:'#d4af37',
+      'stroke-width':big?1.8:.9,opacity:big?.9:.45},svg);
+    if(big){var tp=pol(177,m),
+      t=mk('text',{x:tp[0],y:tp[1],'text-anchor':'middle','dominant-baseline':'central',
+      'font-size':11,fill:'#d4af37','font-style':'italic',
+      'font-family':"'Cormorant Garamond',serif"},svg);
+      t.textContent=(hh===0)?'12a':(hh===12)?'12p':(hh%12)+(hh<12?'a':'p');}
+  }
+
+  var blk=DAY/7;
+  for(var k=0;k<7;k++){
+    mk('path',{d:donut(120,165,(SEAM+k*blk)%DAY,(SEAM+(k+1)*blk)%DAY),
+      fill:SEF[k].c,stroke:'#0d1122','stroke-width':2,opacity:.92},svg);
+  }
+  var segs=[],detail;
+  function select(n){
+    var w=W[n-1],tm=weekTimes(n),isM=n>=50;
+    var cm=isM?{he:MOCH[n-50].he,en:MOCH[n-50].en}:combo(n);
+    var nowBadge=(n===curWeek())?'<span class="kotw-now-badge">Now</span>':'';
+    detail.innerHTML='<span class="kotw-heb">'+cm.he+'</span>'+
+      '<span class="kotw-wk">Week '+n+nowBadge+'</span>'+
+      '<div class="kotw-theme">“'+w.t+'”</div>'+
+      '<div class="kotw-meta">🐾 '+w.a+'<br>📜 '+w.r+
+      '<br>⏱ '+fmt(tm.s)+' – '+fmt(tm.e)+' · '+cm.en+'</div>';
+    segs.forEach(function(o){o.el.setAttribute('stroke',o.n===n?'#f0e6c9':'#0d1122');});
+  }
+  for(var n=1;n<=49;n++){
+    (function(n){
+      var tm=weekTimes(n);
+      var el=mk('path',{d:donut(82,116,tm.s,tm.e),fill:combo(n).color,
+        stroke:'#0d1122','stroke-width':1.2,opacity:.6,'class':'kotw-seg'},svg);
+      el.addEventListener('click',function(){select(n)});
+      segs.push({n:n,el:el});
+    })(n);
+  }
+  MOCH.forEach(function(mo,i){
+    var el=mk('path',{d:donut(150,170,mo.s,mo.e),fill:mo.c,stroke:'#0d1122',
+      'stroke-width':1.5,opacity:.97,'class':'kotw-seg'},svg);
+    el.addEventListener('click',function(){select(50+i)});
+    segs.push({n:50+i,el:el});
+  });
+  var s1=pol(78,SEAM),s2=pol(200,SEAM);
+  mk('line',{x1:s1[0],y1:s1[1],x2:s2[0],y2:s2[1],stroke:'#f0e6c9',
+    'stroke-width':1,'stroke-dasharray':'4 3',opacity:.7},svg);
+
+  mk('circle',{cx:CX,cy:CY,r:76,fill:'#10162c',stroke:'#9a7e2a','stroke-width':1},svg);
+  var hand=mk('line',{x1:CX,y1:CY,x2:CX,y2:CY-165,stroke:'#d4af37',
+    'stroke-width':2,'stroke-linecap':'round'},svg);
+  mk('circle',{cx:CX,cy:CY,r:3.5,fill:'#d4af37'},svg);
+  var cT=mk('text',{x:CX,y:CY-18,'text-anchor':'middle','font-size':24,fill:'#f0e6c9',
+    'font-family':"'Cormorant Garamond',serif",'font-weight':600},svg);
+  var cW=mk('text',{x:CX,y:CY+6,'text-anchor':'middle','font-size':13.5,fill:'#f0e6c9',
+    'font-family':"'Cormorant Garamond',serif"},svg);
+  var cS=mk('text',{x:CX,y:CY+30,'text-anchor':'middle','font-size':15,fill:'#d4af37',
+    'font-family':"'Frank Ruhl Libre',serif"},svg);
+
+  detail=document.createElement('div');
+  detail.className='kotw-panel';
+  root.appendChild(detail);
+  var foot=document.createElement('div');
+  foot.className='kotw-foot';
+  foot.innerHTML='Tap any segment · Weeks 50–52 hover above the 1:43 AM seam · '+
+    '<a href="https://www.kabbalahoftime.com/2013/06/the-entire-book-in-nutshell-table-i-of.html">From “The Kabbalah of Time”</a>';
+  root.appendChild(foot);
+
+  function nowMins(){var d=new Date();
+    return d.getHours()*60+d.getMinutes()+d.getSeconds()/60;}
+  function curWeek(){var rel=nowMins()-SEAM;if(rel<0)rel+=DAY;
+    return Math.min(49,Math.floor(rel/(DAY/49))+1);}
+  var lastSel=null;
+  function tick(){
+    var m=nowMins(),n=curWeek();
+    hand.setAttribute('transform','rotate('+(m/DAY*360)+' '+CX+' '+CY+')');
+    cT.textContent=fmt(m);
+    cW.textContent='Week '+n+' of the inner year';
+    cS.textContent=combo(n).he;
+    if(lastSel===null){select(n);lastSel=n;}
+  }
+  tick();
+  setInterval(tick,20000);
+})();
 </script>
 
 <!-- DATE PICKER MODAL (Gregorian + Hebrew tabs) -->
