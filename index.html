@@ -99,6 +99,43 @@ color: var(–ink-soft);
 letter-spacing: 1px;
 }
 
+/* ── DUAL CLOCK ── */
+#dual-clock {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 14px 0 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.dc-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 72px;
+}
+.dc-time {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  line-height: 1;
+}
+.dc-label {
+  font-size: 8px;
+  color: var(--ink-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.dc-sep {
+  font-size: 18px;
+  color: var(--border-strong);
+  padding-top: 4px;
+  opacity: 0.6;
+}
+
 /* ── DATE SELECTOR ── */
 .date-bar {
 background: var(–bg-card);
@@ -1186,6 +1223,19 @@ transition: transform 0.3s;
       <p>Rabbi Schneur Zalman of Liadi, the Alter Rebbe, famously stated that we must "live with the times," thereby experiencing the teachings of the Torah related to each day of the year. Every day of the Jewish calendar has a unique meaning.</p>
       <p>The calendar is the master key to unlock the hidden rationale behind the formal structure of ancient sacred texts, as well as to understand basic mystical concepts. When comprehended within the context of the Jewish calendar, these works reveal the spiritual energy of each day, serving as a practical guide for self-analysis and development.</p>
       <p>During this daily journey, we learn to live with greater harmony, happiness and gratitude — from the Kabbalah, from age-old Jewish ethical teachings, and even from animals. The objective is to be in touch with the spiritual powers of each day, thereby improving one's daily conduct and rediscovering the universal song within each one of us: the song of the soul.</p>
+    </div>
+  </div>
+
+  <!-- DUAL CLOCK -->
+  <div id="dual-clock">
+    <div class="dc-col">
+      <div class="dc-time" id="clock-local">--:--</div>
+      <div class="dc-label">Local</div>
+    </div>
+    <div class="dc-sep">·</div>
+    <div class="dc-col">
+      <div class="dc-time" id="clock-jerusalem">--:--</div>
+      <div class="dc-label">Jerusalem &nbsp;ירושלים</div>
     </div>
   </div>
 
@@ -5961,6 +6011,22 @@ transition: transform 0.3s;
     return SEFIRAH_TIMES[0];
   }
 
+  function updateDualClock() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const lEl = document.getElementById('clock-local');
+    const jEl = document.getElementById('clock-jerusalem');
+    if (lEl) lEl.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes());
+    if (jEl) {
+      try {
+        const parts = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Asia/Jerusalem', hourCycle: 'h23', hour: '2-digit', minute: '2-digit'
+        }).formatToParts(now);
+        jEl.textContent = parts.find(p => p.type === 'hour').value + ':' + parts.find(p => p.type === 'minute').value;
+      } catch(e) { jEl.textContent = '--:--'; }
+    }
+  }
+
   function updateNowSefirah() {
     const active = getActiveSefirahTime();
     const allCards = document.querySelectorAll('.sefirah-card');
@@ -8507,6 +8573,8 @@ transition: transform 0.3s;
   }
 
   render();
+  updateDualClock();
+  setInterval(updateDualClock, 30000);
 
   // ══════════════════════════════════════════════════════════════
   // PWA SERVICE WORKER REGISTRATION
