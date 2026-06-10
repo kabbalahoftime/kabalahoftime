@@ -99,6 +99,43 @@ color: var(–ink-soft);
 letter-spacing: 1px;
 }
 
+/* ── DUAL CLOCK ── */
+#dual-clock {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 14px 0 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.dc-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 72px;
+}
+.dc-time {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  line-height: 1;
+}
+.dc-label {
+  font-size: 8px;
+  color: var(--ink-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.dc-sep {
+  font-size: 18px;
+  color: var(--border-strong);
+  padding-top: 4px;
+  opacity: 0.6;
+}
+
 /* ── DATE SELECTOR ── */
 .date-bar {
 background: var(–bg-card);
@@ -1189,6 +1226,38 @@ transition: transform 0.3s;
     </div>
   </div>
 
+  <!-- DUAL CLOCK -->
+  <div id="dual-clock">
+    <div class="dc-col">
+      <div class="dc-time" id="clock-local">--:--</div>
+      <div class="dc-label">Local</div>
+    </div>
+    <div class="dc-sep">·</div>
+    <div class="dc-col">
+      <div class="dc-time" id="clock-jerusalem">--:--</div>
+      <div class="dc-label">Jerusalem &nbsp;ירושלים</div>
+    </div>
+  </div>
+
+  <!-- NOW: Sefirah of the Hour -->
+  <div id="now-sefirah-featured" class="sefirah-card" onclick="toggleExpand(this)"
+       style="display:none;border-left:2px solid var(--gold);margin-bottom:8px;">
+    <span class="expand-icon">▾</span>
+    <div class="sefirah-label-col">
+      <div id="now-sf-name" class="sefirah-name"></div>
+      <div id="now-sf-hebrew" class="sefirah-hebrew"></div>
+      <div id="now-sf-time" style="font-size:9px;color:var(--ink-dim);margin-top:3px;"></div>
+      <div style="font-size:8px;color:var(--gold);margin-top:2px;letter-spacing:1.5px;opacity:0.9;">NOW</div>
+    </div>
+    <div class="sefirah-content-col">
+      <div id="now-sf-cycle" class="sefirah-cycle-name"></div>
+      <div id="now-sf-main" class="sefirah-main-text"></div>
+      <div id="now-sf-sub" class="sefirah-sub-text"></div>
+      <div id="now-sf-tags" class="sefirah-tags"></div>
+      <div id="now-sf-detail" class="sefirah-detail"></div>
+    </div>
+  </div>
+
   <!-- DATE BAR -->
 
   <div class="date-bar">
@@ -1345,25 +1414,6 @@ transition: transform 0.3s;
   <!-- 7 SEFIROT CARDS -->
 
   <div class="sefirot-grid" id="sefirot-grid">
-
-<!-- NOW: Sefirah of the Hour -->
-<div id="now-sefirah-featured" class="sefirah-card" onclick="toggleExpand(this)"
-     style="display:none;border-left:2px solid var(--gold);margin-bottom:8px;">
-  <span class="expand-icon">▾</span>
-  <div class="sefirah-label-col">
-    <div id="now-sf-name" class="sefirah-name"></div>
-    <div id="now-sf-hebrew" class="sefirah-hebrew"></div>
-    <div id="now-sf-time" style="font-size:9px;color:var(--ink-dim);margin-top:3px;"></div>
-    <div style="font-size:8px;color:var(--gold);margin-top:2px;letter-spacing:1.5px;opacity:0.9;">NOW</div>
-  </div>
-  <div class="sefirah-content-col">
-    <div id="now-sf-cycle" class="sefirah-cycle-name"></div>
-    <div id="now-sf-main" class="sefirah-main-text"></div>
-    <div id="now-sf-sub" class="sefirah-sub-text"></div>
-    <div id="now-sf-tags" class="sefirah-tags"></div>
-    <div id="now-sf-detail" class="sefirah-detail"></div>
-  </div>
-</div>
 
 <!-- CHESED: Mishna / Tosefta -->
 <div class="sefirah-card" onclick="toggleExpand(this)">
@@ -5961,6 +6011,22 @@ transition: transform 0.3s;
     return SEFIRAH_TIMES[0];
   }
 
+  function updateDualClock() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const lEl = document.getElementById('clock-local');
+    const jEl = document.getElementById('clock-jerusalem');
+    if (lEl) lEl.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes());
+    if (jEl) {
+      try {
+        const parts = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Asia/Jerusalem', hourCycle: 'h23', hour: '2-digit', minute: '2-digit'
+        }).formatToParts(now);
+        jEl.textContent = parts.find(p => p.type === 'hour').value + ':' + parts.find(p => p.type === 'minute').value;
+      } catch(e) { jEl.textContent = '--:--'; }
+    }
+  }
+
   function updateNowSefirah() {
     const active = getActiveSefirahTime();
     const allCards = document.querySelectorAll('.sefirah-card');
@@ -8507,6 +8573,8 @@ transition: transform 0.3s;
   }
 
   render();
+  updateDualClock();
+  setInterval(updateDualClock, 30000);
 
   // ══════════════════════════════════════════════════════════════
   // PWA SERVICE WORKER REGISTRATION
