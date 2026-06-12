@@ -1283,6 +1283,20 @@ transition: transform 0.3s;
     </div>
   </div>
 
+  <!-- TIME MODE: Fixed vs Sha'ot Zmaniyot -->
+  <div id="time-mode-row" style="text-align:center;margin:0 0 14px;">
+    <div class="year-toggle-pill" style="margin-top:0;">
+      <button id="tm-fixed-btn" class="year-pill-btn year-pill-active" onclick="setTimeMode('fixed')">Fixed Hours</button>
+      <button id="tm-zman-btn" class="year-pill-btn" onclick="setTimeMode('zmaniyot')">Sha'ot Zmaniyot</button>
+    </div>
+    <div id="city-select-wrap" style="display:none;margin-top:7px;">
+      <select id="city-select" onchange="setZmanCity(this.value)"
+        style="font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--ink-mid);background:var(--bg-card);border:1px solid var(--border-strong);border-radius:4px;padding:3px 8px;">
+      </select>
+      <div id="zman-sun-info" style="font-size:9px;color:var(--ink-dim);margin-top:4px;"></div>
+    </div>
+  </div>
+
   <!-- WHEEL OF TIME -->
   <div id="kotw-root"></div>
 
@@ -6049,7 +6063,148 @@ transition: transform 0.3s;
     { name: 'Yesod',    hebrew: 'יְסוֹד',       start: 18*60+52, end: 22*60+18, range: '6:52–10:18'  },
   ];
 
+  // ── SHA'OT ZMANIYOT ──
+  // Sefirah windows computed from real sunrise/sunset: each sefirah spans
+  // 24/7 halachic hours, with Chesed anchored at Chatzot HaLailah.
+  const ZMAN_CITIES = [
+    { name: 'Jerusalem',     lat: 31.7683,  lon: 35.2137,   tz: 'Asia/Jerusalem' },
+    { name: 'Tel Aviv',      lat: 32.0853,  lon: 34.7818,   tz: 'Asia/Jerusalem' },
+    { name: 'Haifa',         lat: 32.7940,  lon: 34.9896,   tz: 'Asia/Jerusalem' },
+    { name: 'Tzfat',         lat: 32.9646,  lon: 35.4960,   tz: 'Asia/Jerusalem' },
+    { name: 'New York',      lat: 40.7128,  lon: -74.0060,  tz: 'America/New_York' },
+    { name: 'Miami',         lat: 25.7617,  lon: -80.1918,  tz: 'America/New_York' },
+    { name: 'Boston',        lat: 42.3601,  lon: -71.0589,  tz: 'America/New_York' },
+    { name: 'Baltimore',     lat: 39.2904,  lon: -76.6122,  tz: 'America/New_York' },
+    { name: 'Chicago',       lat: 41.8781,  lon: -87.6298,  tz: 'America/Chicago' },
+    { name: 'Dallas',        lat: 32.7767,  lon: -96.7970,  tz: 'America/Chicago' },
+    { name: 'Denver',        lat: 39.7392,  lon: -104.9903, tz: 'America/Denver' },
+    { name: 'Los Angeles',   lat: 34.0522,  lon: -118.2437, tz: 'America/Los_Angeles' },
+    { name: 'San Francisco', lat: 37.7749,  lon: -122.4194, tz: 'America/Los_Angeles' },
+    { name: 'Toronto',       lat: 43.6532,  lon: -79.3832,  tz: 'America/Toronto' },
+    { name: 'Montreal',      lat: 45.5019,  lon: -73.5674,  tz: 'America/Toronto' },
+    { name: 'Mexico City',   lat: 19.4326,  lon: -99.1332,  tz: 'America/Mexico_City' },
+    { name: 'Buenos Aires',  lat: -34.6037, lon: -58.3816,  tz: 'America/Argentina/Buenos_Aires' },
+    { name: 'São Paulo',     lat: -23.5505, lon: -46.6333,  tz: 'America/Sao_Paulo' },
+    { name: 'Rio de Janeiro',lat: -22.9068, lon: -43.1729,  tz: 'America/Sao_Paulo' },
+    { name: 'London',        lat: 51.5074,  lon: -0.1278,   tz: 'Europe/London' },
+    { name: 'Manchester',    lat: 53.4808,  lon: -2.2426,   tz: 'Europe/London' },
+    { name: 'Paris',         lat: 48.8566,  lon: 2.3522,    tz: 'Europe/Paris' },
+    { name: 'Antwerp',       lat: 51.2194,  lon: 4.4025,    tz: 'Europe/Brussels' },
+    { name: 'Amsterdam',     lat: 52.3676,  lon: 4.9041,    tz: 'Europe/Amsterdam' },
+    { name: 'Zurich',        lat: 47.3769,  lon: 8.5417,    tz: 'Europe/Zurich' },
+    { name: 'Vienna',        lat: 48.2082,  lon: 16.3738,   tz: 'Europe/Vienna' },
+    { name: 'Budapest',      lat: 47.4979,  lon: 19.0402,   tz: 'Europe/Budapest' },
+    { name: 'Moscow',        lat: 55.7558,  lon: 37.6173,   tz: 'Europe/Moscow' },
+    { name: 'Johannesburg',  lat: -26.2041, lon: 28.0473,   tz: 'Africa/Johannesburg' },
+    { name: 'Melbourne',     lat: -37.8136, lon: 144.9631,  tz: 'Australia/Melbourne' },
+    { name: 'Sydney',        lat: -33.8688, lon: 151.2093,  tz: 'Australia/Sydney' },
+    { name: 'Hong Kong',     lat: 22.3193,  lon: 114.1694,  tz: 'Asia/Hong_Kong' },
+  ];
+
+  let zmanMode = 'fixed';
+  let zmanCityIdx = 0;
+  try {
+    if (localStorage.getItem('kotTimeMode') === 'zmaniyot') zmanMode = 'zmaniyot';
+    const ci = parseInt(localStorage.getItem('kotZmanCity'), 10);
+    if (ci >= 0 && ci < ZMAN_CITIES.length) zmanCityIdx = ci;
+  } catch(e) {}
+
+  // NOAA sunrise equation; returns absolute Date objects for the given
+  // calendar date (y/m/d as observed in the city's timezone).
+  function solarRiseSet(y, m, d, lat, lon) {
+    const a = Math.floor((14 - m) / 12), yy = y + 4800 - a, mm = m + 12*a - 3;
+    const jdn = d + Math.floor((153*mm+2)/5) + 365*yy + Math.floor(yy/4)
+              - Math.floor(yy/100) + Math.floor(yy/400) - 32045; // noon JD
+    const n = jdn - 2451545.0 + 0.0008;
+    const Jstar = n - lon/360;
+    const M = ((357.5291 + 0.98560028*Jstar) % 360 + 360) % 360;
+    const Mr = M * Math.PI/180;
+    const C = 1.9148*Math.sin(Mr) + 0.0200*Math.sin(2*Mr) + 0.0003*Math.sin(3*Mr);
+    const lam = ((M + C + 180 + 102.9372) % 360) * Math.PI/180;
+    const Jtransit = 2451545.0 + Jstar + 0.0053*Math.sin(Mr) - 0.0069*Math.sin(2*lam);
+    const sind = Math.sin(lam) * Math.sin(23.4397*Math.PI/180);
+    const cosd = Math.cos(Math.asin(sind));
+    const latr = lat * Math.PI/180;
+    let cosw = (Math.sin(-0.833*Math.PI/180) - Math.sin(latr)*sind) / (Math.cos(latr)*cosd);
+    cosw = Math.max(-1, Math.min(1, cosw)); // clamp for polar latitudes
+    const w = Math.acos(cosw) * 180/Math.PI;
+    const jd2date = j => new Date((j - 2440587.5) * 86400000);
+    return { rise: jd2date(Jtransit - w/360), set: jd2date(Jtransit + w/360) };
+  }
+
+  function cityToday(city) {
+    // y/m/d of "now" as observed in the city's timezone
+    const s = new Intl.DateTimeFormat('en-CA', { timeZone: city.tz }).format(new Date());
+    const p = s.split('-');
+    return { y: +p[0], m: +p[1], d: +p[2] };
+  }
+
+  function shiftDay(y, m, d, delta) {
+    const t = new Date(Date.UTC(y, m-1, d) + delta * 86400000);
+    return { y: t.getUTCFullYear(), m: t.getUTCMonth()+1, d: t.getUTCDate() };
+  }
+
+  // Returns { bounds: Date[8], sunrise, sunset } — bounds[i] is the start of
+  // sefirah i (Chesed..Malchut), bounds[7] the next Chatzot.
+  function zmaniyotBoundaries(city) {
+    const now = new Date();
+    let base = cityToday(city);
+    for (let tries = 0; tries < 3; tries++) {
+      const prev = shiftDay(base.y, base.m, base.d, -1);
+      const next = shiftDay(base.y, base.m, base.d, +1);
+      const sPrev = solarRiseSet(prev.y, prev.m, prev.d, city.lat, city.lon);
+      const sBase = solarRiseSet(base.y, base.m, base.d, city.lat, city.lon);
+      const sNext = solarRiseSet(next.y, next.m, next.d, city.lat, city.lon);
+      const chatzot1 = new Date((sPrev.set.getTime() + sBase.rise.getTime()) / 2);
+      const chatzot2 = new Date((sBase.set.getTime() + sNext.rise.getTime()) / 2);
+      if (now < chatzot1) { base = prev; continue; }
+      if (now >= chatzot2) { base = next; continue; }
+      const nightHr1 = (sBase.rise - sPrev.set) / 12;
+      const dayHr    = (sBase.set - sBase.rise) / 12;
+      const nightHr2 = (sNext.rise - sBase.set) / 12;
+      const hToTime = h => {
+        if (h <= 6)  return new Date(chatzot1.getTime() + h * nightHr1);
+        if (h <= 18) return new Date(sBase.rise.getTime() + (h - 6) * dayHr);
+        return new Date(sBase.set.getTime() + (h - 18) * nightHr2);
+      };
+      const bounds = [];
+      for (let i = 0; i <= 7; i++) bounds.push(hToTime(i * 24/7));
+      return { bounds, sunrise: sBase.rise, sunset: sBase.set };
+    }
+    return null;
+  }
+
+  function fmtZmanTime(date, tz) {
+    try {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz, hour12: true, hour: 'numeric', minute: '2-digit'
+      }).formatToParts(date);
+      return parts.find(p => p.type === 'hour').value + ':' +
+             parts.find(p => p.type === 'minute').value;
+    } catch(e) { return '--:--'; }
+  }
+
+  // Sefirah order within the zmaniyot cycle (Chesed begins at Chatzot)
+  const ZMAN_ORDER = ['Chesed','Gevurah','Tiferet','Netzach','Hod','Yesod','Malchut'];
+
   function getActiveSefirahTime() {
+    if (zmanMode === 'zmaniyot') {
+      const city = ZMAN_CITIES[zmanCityIdx];
+      const z = zmaniyotBoundaries(city);
+      if (z) {
+        const now = new Date();
+        let idx = 6;
+        for (let i = 0; i < 7; i++) {
+          if (now >= z.bounds[i] && now < z.bounds[i+1]) { idx = i; break; }
+        }
+        const name = ZMAN_ORDER[idx];
+        const fixed = SEFIRAH_TIMES.find(s => s.name === name);
+        return {
+          name, hebrew: fixed.hebrew,
+          range: fmtZmanTime(z.bounds[idx], city.tz) + '–' + fmtZmanTime(z.bounds[idx+1], city.tz)
+        };
+      }
+    }
     const now = new Date();
     const mins = now.getHours() * 60 + now.getMinutes();
     if (mins >= 22*60+18 || mins < 1*60+43) return SEFIRAH_TIMES[0];
@@ -6057,6 +6212,62 @@ transition: transform 0.3s;
       if (mins >= SEFIRAH_TIMES[i].start && mins < SEFIRAH_TIMES[i].end) return SEFIRAH_TIMES[i];
     }
     return SEFIRAH_TIMES[0];
+  }
+
+  // Update the small time label on each of the 7 sefirah cards
+  function updateSefirahTimeLabels() {
+    const labels = {};
+    if (zmanMode === 'zmaniyot') {
+      const city = ZMAN_CITIES[zmanCityIdx];
+      const z = zmaniyotBoundaries(city);
+      if (z) {
+        for (let i = 0; i < 7; i++) {
+          labels[ZMAN_ORDER[i]] =
+            fmtZmanTime(z.bounds[i], city.tz) + '–' + fmtZmanTime(z.bounds[i+1], city.tz);
+        }
+        const info = document.getElementById('zman-sun-info');
+        if (info) info.textContent =
+          '☀ ' + fmtZmanTime(z.sunrise, city.tz) + ' – ' + fmtZmanTime(z.sunset, city.tz) +
+          ' · ' + city.name;
+      }
+    } else {
+      SEFIRAH_TIMES.forEach(s => { labels[s.name] = s.range; });
+    }
+    document.querySelectorAll('.sefirah-card').forEach(card => {
+      if (card.id === 'now-sefirah-featured') return;
+      const nameEl = card.querySelector('.sefirah-name');
+      if (!nameEl) return;
+      const lbl = labels[nameEl.textContent.trim()];
+      if (!lbl) return;
+      const timeEl = card.querySelector('.sefirah-label-col > div:nth-child(3)');
+      if (timeEl) timeEl.textContent = lbl;
+    });
+  }
+
+  function setTimeMode(mode) {
+    zmanMode = mode;
+    try { localStorage.setItem('kotTimeMode', mode); } catch(e) {}
+    document.getElementById('tm-fixed-btn').classList.toggle('year-pill-active', mode === 'fixed');
+    document.getElementById('tm-zman-btn').classList.toggle('year-pill-active', mode === 'zmaniyot');
+    document.getElementById('city-select-wrap').style.display = mode === 'zmaniyot' ? '' : 'none';
+    updateSefirahTimeLabels();
+    updateNowSefirah();
+  }
+
+  function setZmanCity(idx) {
+    zmanCityIdx = parseInt(idx, 10) || 0;
+    try { localStorage.setItem('kotZmanCity', String(zmanCityIdx)); } catch(e) {}
+    updateSefirahTimeLabels();
+    updateNowSefirah();
+  }
+
+  function initTimeMode() {
+    const sel = document.getElementById('city-select');
+    if (sel) {
+      sel.innerHTML = ZMAN_CITIES.map((c, i) =>
+        `<option value="${i}"${i === zmanCityIdx ? ' selected' : ''}>${c.name}</option>`).join('');
+    }
+    setTimeMode(zmanMode);
   }
 
   function updateDualClock() {
@@ -8621,8 +8832,13 @@ transition: transform 0.3s;
   }
 
   render();
+  initTimeMode();
   updateDualClock();
-  setInterval(updateDualClock, 30000);
+  setInterval(function() {
+    updateDualClock();
+    updateSefirahTimeLabels();
+    updateNowSefirah();
+  }, 30000);
 
   // ══════════════════════════════════════════════════════════════
   // PWA SERVICE WORKER REGISTRATION
