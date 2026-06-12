@@ -1200,7 +1200,7 @@ transition: transform 0.3s;
 }
 .copy-script-btn:hover { background: var(--gold); color: var(--bg); }
 
-/* ── WHEEL OF TIME ── */
+/* ── MA'ALOT HAZMAN — STEPS OF TIME ── */
 #kotw-root{
   --kotw-night:#0d1122; --kotw-gold:#d4af37; --kotw-golddim:#9a7e2a;
   --kotw-parch:#f0e6c9;
@@ -1283,7 +1283,21 @@ transition: transform 0.3s;
     </div>
   </div>
 
-  <!-- WHEEL OF TIME -->
+  <!-- TIME MODE: Fixed vs Sha'ot Zmaniyot -->
+  <div id="time-mode-row" style="text-align:center;margin:0 0 14px;">
+    <div class="year-toggle-pill" style="margin-top:0;">
+      <button id="tm-fixed-btn" class="year-pill-btn year-pill-active" onclick="setTimeMode('fixed')">Fixed Hours</button>
+      <button id="tm-zman-btn" class="year-pill-btn" onclick="setTimeMode('zmaniyot')">Sha'ot Zmaniyot</button>
+    </div>
+    <div id="city-select-wrap" style="display:none;margin-top:7px;">
+      <select id="city-select" onchange="setZmanCity(this.value)"
+        style="font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--ink-mid);background:var(--bg-card);border:1px solid var(--border-strong);border-radius:4px;padding:3px 8px;">
+      </select>
+      <div id="zman-sun-info" style="font-size:9px;color:var(--ink-dim);margin-top:4px;"></div>
+    </div>
+  </div>
+
+  <!-- MA'ALOT HAZMAN — STEPS OF TIME -->
   <div id="kotw-root"></div>
 
   <!-- NOW: Sefirah of the Hour -->
@@ -6049,7 +6063,148 @@ transition: transform 0.3s;
     { name: 'Yesod',    hebrew: 'יְסוֹד',       start: 18*60+52, end: 22*60+18, range: '6:52–10:18'  },
   ];
 
+  // ── SHA'OT ZMANIYOT ──
+  // Sefirah windows computed from real sunrise/sunset: each sefirah spans
+  // 24/7 halachic hours, with Chesed anchored at Chatzot HaLailah.
+  const ZMAN_CITIES = [
+    { name: 'Jerusalem',     lat: 31.7683,  lon: 35.2137,   tz: 'Asia/Jerusalem' },
+    { name: 'Tel Aviv',      lat: 32.0853,  lon: 34.7818,   tz: 'Asia/Jerusalem' },
+    { name: 'Haifa',         lat: 32.7940,  lon: 34.9896,   tz: 'Asia/Jerusalem' },
+    { name: 'Tzfat',         lat: 32.9646,  lon: 35.4960,   tz: 'Asia/Jerusalem' },
+    { name: 'New York',      lat: 40.7128,  lon: -74.0060,  tz: 'America/New_York' },
+    { name: 'Miami',         lat: 25.7617,  lon: -80.1918,  tz: 'America/New_York' },
+    { name: 'Boston',        lat: 42.3601,  lon: -71.0589,  tz: 'America/New_York' },
+    { name: 'Baltimore',     lat: 39.2904,  lon: -76.6122,  tz: 'America/New_York' },
+    { name: 'Chicago',       lat: 41.8781,  lon: -87.6298,  tz: 'America/Chicago' },
+    { name: 'Dallas',        lat: 32.7767,  lon: -96.7970,  tz: 'America/Chicago' },
+    { name: 'Denver',        lat: 39.7392,  lon: -104.9903, tz: 'America/Denver' },
+    { name: 'Los Angeles',   lat: 34.0522,  lon: -118.2437, tz: 'America/Los_Angeles' },
+    { name: 'San Francisco', lat: 37.7749,  lon: -122.4194, tz: 'America/Los_Angeles' },
+    { name: 'Toronto',       lat: 43.6532,  lon: -79.3832,  tz: 'America/Toronto' },
+    { name: 'Montreal',      lat: 45.5019,  lon: -73.5674,  tz: 'America/Toronto' },
+    { name: 'Mexico City',   lat: 19.4326,  lon: -99.1332,  tz: 'America/Mexico_City' },
+    { name: 'Buenos Aires',  lat: -34.6037, lon: -58.3816,  tz: 'America/Argentina/Buenos_Aires' },
+    { name: 'São Paulo',     lat: -23.5505, lon: -46.6333,  tz: 'America/Sao_Paulo' },
+    { name: 'Rio de Janeiro',lat: -22.9068, lon: -43.1729,  tz: 'America/Sao_Paulo' },
+    { name: 'London',        lat: 51.5074,  lon: -0.1278,   tz: 'Europe/London' },
+    { name: 'Manchester',    lat: 53.4808,  lon: -2.2426,   tz: 'Europe/London' },
+    { name: 'Paris',         lat: 48.8566,  lon: 2.3522,    tz: 'Europe/Paris' },
+    { name: 'Antwerp',       lat: 51.2194,  lon: 4.4025,    tz: 'Europe/Brussels' },
+    { name: 'Amsterdam',     lat: 52.3676,  lon: 4.9041,    tz: 'Europe/Amsterdam' },
+    { name: 'Zurich',        lat: 47.3769,  lon: 8.5417,    tz: 'Europe/Zurich' },
+    { name: 'Vienna',        lat: 48.2082,  lon: 16.3738,   tz: 'Europe/Vienna' },
+    { name: 'Budapest',      lat: 47.4979,  lon: 19.0402,   tz: 'Europe/Budapest' },
+    { name: 'Moscow',        lat: 55.7558,  lon: 37.6173,   tz: 'Europe/Moscow' },
+    { name: 'Johannesburg',  lat: -26.2041, lon: 28.0473,   tz: 'Africa/Johannesburg' },
+    { name: 'Melbourne',     lat: -37.8136, lon: 144.9631,  tz: 'Australia/Melbourne' },
+    { name: 'Sydney',        lat: -33.8688, lon: 151.2093,  tz: 'Australia/Sydney' },
+    { name: 'Hong Kong',     lat: 22.3193,  lon: 114.1694,  tz: 'Asia/Hong_Kong' },
+  ];
+
+  let zmanMode = 'fixed';
+  let zmanCityIdx = 0;
+  try {
+    if (localStorage.getItem('kotTimeMode') === 'zmaniyot') zmanMode = 'zmaniyot';
+    const ci = parseInt(localStorage.getItem('kotZmanCity'), 10);
+    if (ci >= 0 && ci < ZMAN_CITIES.length) zmanCityIdx = ci;
+  } catch(e) {}
+
+  // NOAA sunrise equation; returns absolute Date objects for the given
+  // calendar date (y/m/d as observed in the city's timezone).
+  function solarRiseSet(y, m, d, lat, lon) {
+    const a = Math.floor((14 - m) / 12), yy = y + 4800 - a, mm = m + 12*a - 3;
+    const jdn = d + Math.floor((153*mm+2)/5) + 365*yy + Math.floor(yy/4)
+              - Math.floor(yy/100) + Math.floor(yy/400) - 32045; // noon JD
+    const n = jdn - 2451545.0 + 0.0008;
+    const Jstar = n - lon/360;
+    const M = ((357.5291 + 0.98560028*Jstar) % 360 + 360) % 360;
+    const Mr = M * Math.PI/180;
+    const C = 1.9148*Math.sin(Mr) + 0.0200*Math.sin(2*Mr) + 0.0003*Math.sin(3*Mr);
+    const lam = ((M + C + 180 + 102.9372) % 360) * Math.PI/180;
+    const Jtransit = 2451545.0 + Jstar + 0.0053*Math.sin(Mr) - 0.0069*Math.sin(2*lam);
+    const sind = Math.sin(lam) * Math.sin(23.4397*Math.PI/180);
+    const cosd = Math.cos(Math.asin(sind));
+    const latr = lat * Math.PI/180;
+    let cosw = (Math.sin(-0.833*Math.PI/180) - Math.sin(latr)*sind) / (Math.cos(latr)*cosd);
+    cosw = Math.max(-1, Math.min(1, cosw)); // clamp for polar latitudes
+    const w = Math.acos(cosw) * 180/Math.PI;
+    const jd2date = j => new Date((j - 2440587.5) * 86400000);
+    return { rise: jd2date(Jtransit - w/360), set: jd2date(Jtransit + w/360) };
+  }
+
+  function cityToday(city) {
+    // y/m/d of "now" as observed in the city's timezone
+    const s = new Intl.DateTimeFormat('en-CA', { timeZone: city.tz }).format(new Date());
+    const p = s.split('-');
+    return { y: +p[0], m: +p[1], d: +p[2] };
+  }
+
+  function shiftDay(y, m, d, delta) {
+    const t = new Date(Date.UTC(y, m-1, d) + delta * 86400000);
+    return { y: t.getUTCFullYear(), m: t.getUTCMonth()+1, d: t.getUTCDate() };
+  }
+
+  // Returns { bounds: Date[8], sunrise, sunset } — bounds[i] is the start of
+  // sefirah i (Chesed..Malchut), bounds[7] the next Chatzot.
+  function zmaniyotBoundaries(city) {
+    const now = new Date();
+    let base = cityToday(city);
+    for (let tries = 0; tries < 3; tries++) {
+      const prev = shiftDay(base.y, base.m, base.d, -1);
+      const next = shiftDay(base.y, base.m, base.d, +1);
+      const sPrev = solarRiseSet(prev.y, prev.m, prev.d, city.lat, city.lon);
+      const sBase = solarRiseSet(base.y, base.m, base.d, city.lat, city.lon);
+      const sNext = solarRiseSet(next.y, next.m, next.d, city.lat, city.lon);
+      const chatzot1 = new Date((sPrev.set.getTime() + sBase.rise.getTime()) / 2);
+      const chatzot2 = new Date((sBase.set.getTime() + sNext.rise.getTime()) / 2);
+      if (now < chatzot1) { base = prev; continue; }
+      if (now >= chatzot2) { base = next; continue; }
+      const nightHr1 = (sBase.rise - sPrev.set) / 12;
+      const dayHr    = (sBase.set - sBase.rise) / 12;
+      const nightHr2 = (sNext.rise - sBase.set) / 12;
+      const hToTime = h => {
+        if (h <= 6)  return new Date(chatzot1.getTime() + h * nightHr1);
+        if (h <= 18) return new Date(sBase.rise.getTime() + (h - 6) * dayHr);
+        return new Date(sBase.set.getTime() + (h - 18) * nightHr2);
+      };
+      const bounds = [];
+      for (let i = 0; i <= 7; i++) bounds.push(hToTime(i * 24/7));
+      return { bounds, sunrise: sBase.rise, sunset: sBase.set };
+    }
+    return null;
+  }
+
+  function fmtZmanTime(date, tz) {
+    try {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz, hour12: true, hour: 'numeric', minute: '2-digit'
+      }).formatToParts(date);
+      return parts.find(p => p.type === 'hour').value + ':' +
+             parts.find(p => p.type === 'minute').value;
+    } catch(e) { return '--:--'; }
+  }
+
+  // Sefirah order within the zmaniyot cycle (Chesed begins at Chatzot)
+  const ZMAN_ORDER = ['Chesed','Gevurah','Tiferet','Netzach','Hod','Yesod','Malchut'];
+
   function getActiveSefirahTime() {
+    if (zmanMode === 'zmaniyot') {
+      const city = ZMAN_CITIES[zmanCityIdx];
+      const z = zmaniyotBoundaries(city);
+      if (z) {
+        const now = new Date();
+        let idx = 6;
+        for (let i = 0; i < 7; i++) {
+          if (now >= z.bounds[i] && now < z.bounds[i+1]) { idx = i; break; }
+        }
+        const name = ZMAN_ORDER[idx];
+        const fixed = SEFIRAH_TIMES.find(s => s.name === name);
+        return {
+          name, hebrew: fixed.hebrew,
+          range: fmtZmanTime(z.bounds[idx], city.tz) + '–' + fmtZmanTime(z.bounds[idx+1], city.tz)
+        };
+      }
+    }
     const now = new Date();
     const mins = now.getHours() * 60 + now.getMinutes();
     if (mins >= 22*60+18 || mins < 1*60+43) return SEFIRAH_TIMES[0];
@@ -6057,6 +6212,64 @@ transition: transform 0.3s;
       if (mins >= SEFIRAH_TIMES[i].start && mins < SEFIRAH_TIMES[i].end) return SEFIRAH_TIMES[i];
     }
     return SEFIRAH_TIMES[0];
+  }
+
+  // Update the small time label on each of the 7 sefirah cards
+  function updateSefirahTimeLabels() {
+    const labels = {};
+    if (zmanMode === 'zmaniyot') {
+      const city = ZMAN_CITIES[zmanCityIdx];
+      const z = zmaniyotBoundaries(city);
+      if (z) {
+        for (let i = 0; i < 7; i++) {
+          labels[ZMAN_ORDER[i]] =
+            fmtZmanTime(z.bounds[i], city.tz) + '–' + fmtZmanTime(z.bounds[i+1], city.tz);
+        }
+        const info = document.getElementById('zman-sun-info');
+        if (info) info.textContent =
+          '☀ ' + fmtZmanTime(z.sunrise, city.tz) + ' – ' + fmtZmanTime(z.sunset, city.tz) +
+          ' · ' + city.name;
+      }
+    } else {
+      SEFIRAH_TIMES.forEach(s => { labels[s.name] = s.range; });
+    }
+    document.querySelectorAll('.sefirah-card').forEach(card => {
+      if (card.id === 'now-sefirah-featured') return;
+      const nameEl = card.querySelector('.sefirah-name');
+      if (!nameEl) return;
+      const lbl = labels[nameEl.textContent.trim()];
+      if (!lbl) return;
+      const timeEl = card.querySelector('.sefirah-label-col > div:nth-child(3)');
+      if (timeEl) timeEl.textContent = lbl;
+    });
+  }
+
+  function setTimeMode(mode) {
+    zmanMode = mode;
+    try { localStorage.setItem('kotTimeMode', mode); } catch(e) {}
+    document.getElementById('tm-fixed-btn').classList.toggle('year-pill-active', mode === 'fixed');
+    document.getElementById('tm-zman-btn').classList.toggle('year-pill-active', mode === 'zmaniyot');
+    document.getElementById('city-select-wrap').style.display = mode === 'zmaniyot' ? '' : 'none';
+    updateSefirahTimeLabels();
+    updateNowSefirah();
+    if (window.kotwRefresh) window.kotwRefresh();
+  }
+
+  function setZmanCity(idx) {
+    zmanCityIdx = parseInt(idx, 10) || 0;
+    try { localStorage.setItem('kotZmanCity', String(zmanCityIdx)); } catch(e) {}
+    updateSefirahTimeLabels();
+    updateNowSefirah();
+    if (window.kotwRefresh) window.kotwRefresh();
+  }
+
+  function initTimeMode() {
+    const sel = document.getElementById('city-select');
+    if (sel) {
+      sel.innerHTML = ZMAN_CITIES.map((c, i) =>
+        `<option value="${i}"${i === zmanCityIdx ? ' selected' : ''}>${c.name}</option>`).join('');
+    }
+    setTimeMode(zmanMode);
   }
 
   function updateDualClock() {
@@ -8621,8 +8834,13 @@ transition: transform 0.3s;
   }
 
   render();
+  initTimeMode();
   updateDualClock();
-  setInterval(updateDualClock, 30000);
+  setInterval(function() {
+    updateDualClock();
+    updateSefirahTimeLabels();
+    updateNowSefirah();
+  }, 30000);
 
   // ══════════════════════════════════════════════════════════════
   // PWA SERVICE WORKER REGISTRATION
@@ -8709,10 +8927,12 @@ transition: transform 0.3s;
    {a:'Weasel (Chulda)',r:'Rabbi Yossi ben Yehudah of Kfar Bavli — learning from the young and the old',t:'To Understand That We Are All One Soul'},
    {a:'Dogs (last animals)',r:'Rabbi Elazar HaKappar — He is the Knower, He is the Judge',t:'To Crown G’d as Our King'}
   ];
+  /* Mochin weeks in halachic hours relative to Chatzot (h=0). In fixed
+     mode (60-min hours, Chatzot 1:43 AM) these reproduce 12:54-2:22 AM. */
   var MOCH=[
-    {he:'חָכְמָה',en:'Chochmah',s:54,e:83,c:'#8fa8d8'},
-    {he:'בִּינָה',en:'Binah',s:83,e:112,c:'#b08cc4'},
-    {he:'כֶּתֶר / דַּעַת',en:'Keter / Da’at',s:112,e:142,c:'#e3c25f'}
+    {he:'חָכְמָה',en:'Chochmah',h1:-49/60,h2:-20/60,c:'#8fa8d8'},
+    {he:'בִּינָה',en:'Binah',h1:-20/60,h2:9/60,c:'#b08cc4'},
+    {he:'כֶּתֶר / דַּעַת',en:'Keter / Da’at',h1:9/60,h2:39/60,c:'#e3c25f'}
   ];
 
   function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.floor(m%60);
@@ -8731,9 +8951,53 @@ transition: transform 0.3s;
   function combo(n){var k=Math.floor((n-1)/7),p=(n-1)%7;
     return {he:SEF[p].he+' שֶׁבְּ'+SEF[k].he,en:SEF[p].en+' of '+SEF[k].en,
             color:SEF[k].c};}
-  function weekTimes(n){
-    if(n<=49){var s=SEAM+(n-1)*DAY/49;return {s:s%DAY,e:(s+DAY/49)%DAY};}
-    var mo=MOCH[n-50];return {s:mo.s,e:mo.e};}
+  function tzMin(date,tz){
+    try{
+      var p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',
+        hour:'2-digit',minute:'2-digit'}).formatToParts(date);
+      return (+p.find(function(x){return x.type==='hour'}).value)*60+
+             (+p.find(function(x){return x.type==='minute'}).value);
+    }catch(e){return date.getHours()*60+date.getMinutes();}
+  }
+  /* Maps halachic hours after Chatzot to clock minutes on the dial.
+     In zmaniyot mode the steps stretch and compress with the real sun
+     of the selected city; otherwise fixed 60-minute hours, seam 1:43. */
+  function timeMap(){
+    if(typeof zmanMode!=='undefined'&&zmanMode==='zmaniyot'&&
+       typeof zmaniyotBoundaries==='function'){
+      var city=ZMAN_CITIES[zmanCityIdx], z=zmaniyotBoundaries(city);
+      if(z){
+        var chz=z.bounds[0].getTime(), sr=z.sunrise.getTime(), ss=z.sunset.getTime();
+        var n1=(sr-chz)/6, dh=(ss-sr)/12, n2=(z.bounds[7].getTime()-ss)/6;
+        return {
+          zman:true,
+          hToMin:function(h){
+            var t; if(h<=6)t=chz+h*n1; else if(h<=18)t=sr+(h-6)*dh; else t=ss+(h-18)*n2;
+            return tzMin(new Date(t),city.tz);
+          },
+          nowMin:function(){return tzMin(new Date(),city.tz);},
+          nowH:function(){
+            var t=Date.now();
+            if(t<sr)return (t-chz)/n1;
+            if(t<ss)return 6+(t-sr)/dh;
+            return 18+(t-ss)/n2;
+          }
+        };
+      }
+    }
+    return {
+      zman:false,
+      hToMin:function(h){return ((SEAM+h*60)%DAY+DAY)%DAY;},
+      nowMin:function(){var d=new Date();
+        return d.getHours()*60+d.getMinutes()+d.getSeconds()/60;},
+      nowH:function(){var d=new Date(),m=d.getHours()*60+d.getMinutes()+d.getSeconds()/60;
+        var rel=m-SEAM;if(rel<0)rel+=DAY;return rel/60;}
+    };
+  }
+  function weekHours(n){
+    if(n<=49)return {h1:(n-1)*24/49,h2:n*24/49};
+    return {h1:MOCH[n-50].h1,h2:MOCH[n-50].h2};
+  }
 
   var h=document.createElement('div');
   h.innerHTML='<div class="kotw-title">מַעֲלוֹת הַזְּמַן</div>'+
@@ -8741,7 +9005,7 @@ transition: transform 0.3s;
   root.appendChild(h);
 
   var svg=mk('svg',{viewBox:'0 0 420 420',role:'img',
-    'aria-label':'24-hour wheel mapping the 52 weeks of the Kabbalah of Time year onto a single day'},root);
+    'aria-label':'Ma\u2019alot HaZman \u2014 the 52 weeks of the year ascending through a single day'},root);
 
   mk('circle',{cx:CX,cy:CY,r:200,fill:'none',stroke:'#9a7e2a','stroke-width':1,opacity:.4},svg);
   for(var hh=0;hh<24;hh++){
@@ -8755,41 +9019,50 @@ transition: transform 0.3s;
       t.textContent=(hh===0)?'12a':(hh===12)?'12p':(hh%12)+(hh<12?'a':'p');}
   }
 
-  var blk=DAY/7;
-  for(var k=0;k<7;k++){
-    mk('path',{d:donut(120,165,(SEAM+k*blk)%DAY,(SEAM+(k+1)*blk)%DAY),
-      fill:SEF[k].c,stroke:'#0d1122','stroke-width':2,opacity:.92},svg);
-  }
-  var segs=[],detail;
+  var gDyn=mk('g',{},svg);
+  var segs=[],detail,curSel=null;
   function select(n){
-    var w=W[n-1],tm=weekTimes(n),isM=n>=50;
+    var map=timeMap();
+    var w=W[n-1],wh=weekHours(n),isM=n>=50;
+    var m1=map.hToMin(wh.h1),m2=map.hToMin(wh.h2);
     var cm=isM?{he:MOCH[n-50].he,en:MOCH[n-50].en}:combo(n);
     var nowBadge=(n===curWeek())?'<span class="kotw-now-badge">Now</span>':'';
     detail.innerHTML='<span class="kotw-heb">'+cm.he+'</span>'+
       '<span class="kotw-wk">Week '+n+nowBadge+'</span>'+
-      '<div class="kotw-theme">“'+w.t+'”</div>'+
-      '<div class="kotw-meta">🐾 '+w.a+'<br>📜 '+w.r+
-      '<br>⏱ '+fmt(tm.s)+' – '+fmt(tm.e)+' · '+cm.en+'</div>';
+      '<div class="kotw-theme">\u201c'+w.t+'\u201d</div>'+
+      '<div class="kotw-meta">\uD83D\uDC3E '+w.a+'<br>\uD83D\uDCDC '+w.r+
+      '<br>\u23F1 '+fmt(m1)+' \u2013 '+fmt(m2)+' \u00b7 '+cm.en+'</div>';
     segs.forEach(function(o){o.el.setAttribute('stroke',o.n===n?'#f0e6c9':'#0d1122');});
+    curSel=n;
   }
-  for(var n=1;n<=49;n++){
-    (function(n){
-      var tm=weekTimes(n);
-      var el=mk('path',{d:donut(82,116,tm.s,tm.e),fill:combo(n).color,
-        stroke:'#0d1122','stroke-width':1.2,opacity:.6,'class':'kotw-seg'},svg);
-      el.addEventListener('click',function(){select(n)});
-      segs.push({n:n,el:el});
-    })(n);
+  function redraw(map){
+    while(gDyn.firstChild)gDyn.removeChild(gDyn.firstChild);
+    segs=[];
+    var step=24/7;
+    for(var k=0;k<7;k++){
+      mk('path',{d:donut(120,165,map.hToMin(k*step),map.hToMin((k+1)*step)),
+        fill:SEF[k].c,stroke:'#0d1122','stroke-width':2,opacity:.92},gDyn);
+    }
+    for(var n=1;n<=49;n++){
+      (function(n){
+        var wh=weekHours(n);
+        var el=mk('path',{d:donut(82,116,map.hToMin(wh.h1),map.hToMin(wh.h2)),
+          fill:combo(n).color,stroke:'#0d1122','stroke-width':1.2,opacity:.6,'class':'kotw-seg'},gDyn);
+        el.addEventListener('click',function(){select(n)});
+        segs.push({n:n,el:el});
+      })(n);
+    }
+    MOCH.forEach(function(mo,i){
+      var el=mk('path',{d:donut(150,170,map.hToMin(mo.h1),map.hToMin(mo.h2)),
+        fill:mo.c,stroke:'#0d1122','stroke-width':1.5,opacity:.97,'class':'kotw-seg'},gDyn);
+      el.addEventListener('click',function(){select(50+i)});
+      segs.push({n:50+i,el:el});
+    });
+    var sm=map.hToMin(0),s1=pol(78,sm),s2=pol(200,sm);
+    mk('line',{x1:s1[0],y1:s1[1],x2:s2[0],y2:s2[1],stroke:'#f0e6c9',
+      'stroke-width':1,'stroke-dasharray':'4 3',opacity:.7},gDyn);
+    if(curSel!==null&&detail)select(curSel);
   }
-  MOCH.forEach(function(mo,i){
-    var el=mk('path',{d:donut(150,170,mo.s,mo.e),fill:mo.c,stroke:'#0d1122',
-      'stroke-width':1.5,opacity:.97,'class':'kotw-seg'},svg);
-    el.addEventListener('click',function(){select(50+i)});
-    segs.push({n:50+i,el:el});
-  });
-  var s1=pol(78,SEAM),s2=pol(200,SEAM);
-  mk('line',{x1:s1[0],y1:s1[1],x2:s2[0],y2:s2[1],stroke:'#f0e6c9',
-    'stroke-width':1,'stroke-dasharray':'4 3',opacity:.7},svg);
 
   mk('circle',{cx:CX,cy:CY,r:76,fill:'#10162c',stroke:'#9a7e2a','stroke-width':1},svg);
   var hand=mk('line',{x1:CX,y1:CY,x2:CX,y2:CY-165,stroke:'#d4af37',
@@ -8807,23 +9080,27 @@ transition: transform 0.3s;
   root.appendChild(detail);
   var foot=document.createElement('div');
   foot.className='kotw-foot';
-  foot.innerHTML='Tap any segment · Weeks 50–52 hover above the 1:43 AM seam · '+
+  foot.innerHTML='Tap any step \u00b7 Weeks 50\u201352 hover above the Chatzot seam · '+
     '<a href="https://www.kabbalahoftime.com/2013/06/the-entire-book-in-nutshell-table-i-of.html">From “The Kabbalah of Time”</a>';
   root.appendChild(foot);
 
-  function nowMins(){var d=new Date();
-    return d.getHours()*60+d.getMinutes()+d.getSeconds()/60;}
-  function curWeek(){var rel=nowMins()-SEAM;if(rel<0)rel+=DAY;
-    return Math.min(49,Math.floor(rel/(DAY/49))+1);}
-  var lastSel=null;
+  function curWeek(){
+    return Math.min(49,Math.max(1,Math.floor(timeMap().nowH()/(24/49))+1));
+  }
+  var lastSig=null;
   function tick(){
-    var m=nowMins(),n=curWeek();
+    var map=timeMap();
+    var sig=(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
+      '|'+map.hToMin(0)+'|'+map.hToMin(12);
+    if(sig!==lastSig){lastSig=sig;redraw(map);}
+    var m=map.nowMin(),n=Math.min(49,Math.max(1,Math.floor(map.nowH()/(24/49))+1));
     hand.setAttribute('transform','rotate('+(m/DAY*360)+' '+CX+' '+CY+')');
     cT.textContent=fmt(m);
     cW.textContent='Week '+n+' of the inner year';
     cS.textContent=combo(n).he;
-    if(lastSel===null){select(n);lastSel=n;}
+    if(curSel===null)select(n);
   }
+  window.kotwRefresh=tick;
   tick();
   setInterval(tick,20000);
 })();
