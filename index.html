@@ -9100,7 +9100,7 @@ transition: transform 0.3s;
     cS.textContent=combo(n).he;
     if(curSel===null)select(n);
   }
-  window.kotwRefresh=tick;
+  window.kotwRefresh=function(){curSel=null;tick();};
   tick();
   setInterval(tick,20000);
 })();
