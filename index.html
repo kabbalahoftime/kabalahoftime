@@ -1353,7 +1353,13 @@ transition: transform 0.3s;
 <div class="keter-visible-content">
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section">
-    <div class="keter-section-label" id="keter-kst-label">✦ Keter Shem Tov</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;">
+      <div class="keter-section-label" id="keter-kst-label" style="margin-bottom:0">✦ Keter Shem Tov</div>
+      <div class="year-toggle-pill" style="margin:0;display:inline-flex;">
+        <button id="pr-diaspora-btn" class="year-pill-btn year-pill-active" onclick="setParashaRegion('diaspora')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Diaspora</button>
+        <button id="pr-israel-btn" class="year-pill-btn" onclick="setParashaRegion('israel')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Israel</button>
+      </div>
+    </div>
     <div class="keter-main" id="keter-kst-main">Loading…</div>
     <div class="keter-meta" id="keter-kst-meta"></div>
   </div>
@@ -1587,12 +1593,6 @@ transition: transform 0.3s;
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name">Shovavim — Parasha Cycle</div>
-    <div style="margin:2px 0 5px;display:flex;gap:3px;align-items:center;">
-      <div class="year-toggle-pill" style="margin:0;display:inline-flex;">
-        <button id="pr-diaspora-btn" class="year-pill-btn year-pill-active" onclick="setParashaRegion('diaspora')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Diaspora</button>
-        <button id="pr-israel-btn" class="year-pill-btn" onclick="setParashaRegion('israel')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Israel</button>
-      </div>
-    </div>
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
