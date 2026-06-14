@@ -1587,6 +1587,12 @@ transition: transform 0.3s;
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name">Shovavim — Parasha Cycle</div>
+    <div style="margin:2px 0 5px;display:flex;gap:3px;align-items:center;">
+      <div class="year-toggle-pill" style="margin:0;display:inline-flex;">
+        <button id="pr-diaspora-btn" class="year-pill-btn year-pill-active" onclick="setParashaRegion('diaspora')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Diaspora</button>
+        <button id="pr-israel-btn" class="year-pill-btn" onclick="setParashaRegion('israel')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Israel</button>
+      </div>
+    </div>
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
@@ -1663,12 +1669,12 @@ transition: transform 0.3s;
         { date: "2026-05-02", name: "Emor", numbers: [31], isHoliday: false },
         { date: "2026-05-09", name: "Behar-Bechukotai", numbers: [32, 33], isHoliday: false },
         { date: "2026-05-16", name: "Bamidbar", numbers: [34], isHoliday: false },
-        { date: "2026-05-23", name: "Shavuot II", numbers: [], isHoliday: true },
-        { date: "2026-05-30", name: "Nasso", numbers: [35], isHoliday: false },
-        { date: "2026-06-06", name: "Behaalotecha", numbers: [36], isHoliday: false },
-        { date: "2026-06-13", name: "Shlach", numbers: [37], isHoliday: false },
-        { date: "2026-06-20", name: "Korach", numbers: [38], isHoliday: false },
-        { date: "2026-06-27", name: "Chukat-Balak", numbers: [39, 40], isHoliday: false },
+        { date: "2026-05-23", name: "Shavuot II", numbers: [], isHoliday: true, israel: { name: "Nasso", numbers: [35] } },
+        { date: "2026-05-30", name: "Nasso", numbers: [35], isHoliday: false, israel: { name: "Behaalotecha", numbers: [36] } },
+        { date: "2026-06-06", name: "Behaalotecha", numbers: [36], isHoliday: false, israel: { name: "Shlach", numbers: [37] } },
+        { date: "2026-06-13", name: "Shlach", numbers: [37], isHoliday: false, israel: { name: "Korach", numbers: [38] } },
+        { date: "2026-06-20", name: "Korach", numbers: [38], isHoliday: false, israel: { name: "Chukat", numbers: [39] } },
+        { date: "2026-06-27", name: "Chukat-Balak", numbers: [39, 40], isHoliday: false, israel: { name: "Balak", numbers: [40] } },
         { date: "2026-07-04", name: "Pinchas", numbers: [41], isHoliday: false },
         { date: "2026-07-11", name: "Matot-Masei", numbers: [42, 43], isHoliday: false },
         { date: "2026-07-18", name: "Devarim", numbers: [44], isHoliday: false },
@@ -1761,7 +1767,11 @@ transition: transform 0.3s;
     function findCurrentParasha(f) {
         let cp = null, ci = -1;
         for (let i=0; i<parashotData.length; i++) { if (parashotData[i].date <= f) { cp = parashotData[i]; ci = i; } else break; }
-        if (cp && cp.isHoliday) { for (let i=ci+1; i<parashotData.length; i++) { if (!parashotData[i].isHoliday) return parashotData[i]; } }
+        if (!cp) return null;
+        if (typeof parashaRegion !== 'undefined' && parashaRegion === 'israel' && cp.israel) {
+            return { date: cp.date, name: cp.israel.name, numbers: cp.israel.numbers, isHoliday: false };
+        }
+        if (cp.isHoliday) { for (let i=ci+1; i<parashotData.length; i++) { if (!parashotData[i].isHoliday) return parashotData[i]; } }
         return cp;
     }
 
@@ -6103,10 +6113,12 @@ transition: transform 0.3s;
 
   let zmanMode = 'fixed';
   let zmanCityIdx = 0;
+  let parashaRegion = 'diaspora';
   try {
     if (localStorage.getItem('kotTimeMode') === 'zmaniyot') zmanMode = 'zmaniyot';
     const ci = parseInt(localStorage.getItem('kotZmanCity'), 10);
     if (ci >= 0 && ci < ZMAN_CITIES.length) zmanCityIdx = ci;
+    if (localStorage.getItem('kotParashaRegion') === 'israel') parashaRegion = 'israel';
   } catch(e) {}
 
   // NOAA sunrise equation; returns absolute Date objects for the given
@@ -6261,6 +6273,16 @@ transition: transform 0.3s;
     updateSefirahTimeLabels();
     updateNowSefirah();
     if (window.kotwRefresh) window.kotwRefresh();
+  }
+
+  function setParashaRegion(region) {
+    parashaRegion = region;
+    try { localStorage.setItem('kotParashaRegion', region); } catch(e) {}
+    const db = document.getElementById('pr-diaspora-btn');
+    const ib = document.getElementById('pr-israel-btn');
+    if (db) db.classList.toggle('year-pill-active', region === 'diaspora');
+    if (ib) ib.classList.toggle('year-pill-active', region === 'israel');
+    render();
   }
 
   function initTimeMode() {
@@ -8835,6 +8857,13 @@ transition: transform 0.3s;
 
   render();
   initTimeMode();
+  // Sync parasha region button state with localStorage value
+  (function() {
+    const db = document.getElementById('pr-diaspora-btn');
+    const ib = document.getElementById('pr-israel-btn');
+    if (db) db.classList.toggle('year-pill-active', parashaRegion === 'diaspora');
+    if (ib) ib.classList.toggle('year-pill-active', parashaRegion === 'israel');
+  })();
   updateDualClock();
   setInterval(function() {
     updateDualClock();
@@ -9100,7 +9129,7 @@ transition: transform 0.3s;
     cS.textContent=combo(n).he;
     if(curSel===null)select(n);
   }
-  window.kotwRefresh=tick;
+  window.kotwRefresh=function(){curSel=null;tick();};
   tick();
   setInterval(tick,20000);
 })();
