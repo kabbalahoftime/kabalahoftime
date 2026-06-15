@@ -2596,26 +2596,37 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const gapKey = `${hMonth}-${hDay}`;
     if (BRESLOV_GAP_EPISODES[gapKey]) return BRESLOV_GAP_EPISODES[gapKey];
     const monthName = HEB_MONTH_EN_PODCAST[hMonth] || '';
-    // Episodes are titled "All 10 Day-by-Day Books - 9 of Adar"
-    const pattern = new RegExp(`\\b${hDay}\\s+of\\s+${monthName}\\b`, 'i');
-    // Try jewishpodcasts.fm RSS feed first
-    try {
-      const resp = await fetch('https://rss.jewishpodcasts.fm/rss/548');
-      if (resp.ok) {
-        const text = await resp.text();
-        const xml = new DOMParser().parseFromString(text, 'text/xml');
-        for (const item of xml.querySelectorAll('item')) {
-          const title = item.querySelector('title')?.textContent || '';
-          if (pattern.test(title)) {
-            // <link> in RSS is a text node sibling, not an attribute
-            const linkNode = item.querySelector('link');
-            const link = linkNode?.textContent?.trim() ||
-                         linkNode?.nextSibling?.nodeValue?.trim() || '';
-            if (link.startsWith('http')) return link;
-          }
+    // Match "9 of Adar" and "9th of Adar" (ordinal or plain)
+    const pattern = new RegExp(`\\b${hDay}(?:st|nd|rd|th)?\\s+of\\s+${monthName}\\b`, 'i');
+    function parseRssForEpisode(text) {
+      const xml = new DOMParser().parseFromString(text, 'text/xml');
+      for (const item of xml.querySelectorAll('item')) {
+        const title = item.querySelector('title')?.textContent || '';
+        if (pattern.test(title)) {
+          const linkNode = item.querySelector('link');
+          const link = linkNode?.textContent?.trim() ||
+                       linkNode?.nextSibling?.nodeValue?.trim() ||
+                       item.querySelector('guid')?.textContent?.trim() || '';
+          if (link.startsWith('http')) return link;
         }
       }
-    } catch(e) {}
+      return null;
+    }
+    // Try direct RSS, then CORS proxy fallback
+    const rssUrl = 'https://rss.jewishpodcasts.fm/rss/548';
+    const attempts = [
+      () => fetch(rssUrl),
+      () => fetch('https://corsproxy.io/?' + encodeURIComponent(rssUrl)),
+    ];
+    for (const attempt of attempts) {
+      try {
+        const resp = await attempt();
+        if (resp.ok) {
+          const url = parseRssForEpisode(await resp.text());
+          if (url) return url;
+        }
+      } catch(e) {}
+    }
     // For gap date ranges, fall back to the Drive folder; otherwise to the show page.
     // Gap 1: 1 Cheshvan–14 Shvat  |  Gap 2: 11 Adar–1 Nisan
     const inGap = (hMonth === 12 && hDay >= 11) ||
