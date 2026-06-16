@@ -7694,7 +7694,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar</span><span style="display:block">Shulchan Aruch</span><span style="display:block">Talmud (Chazarah)</span>';
+    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Shulchan Aruch</span><span style="display:block">Talmud (Chazarah)</span>';
+
+    const hodZoharHtml =
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar</div>` +
+      `<div style="font-size:0.88rem;margin-bottom:10px;">${_hodZoharMainHtml} <span style="color:var(--ink-dim);font-size:0.85em;">— ${_hodZoharMetaHtml}</span></div>` +
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
 
     const hodChazarahHtml =
       `<div style="margin-bottom:4px;"></div>` +
@@ -7720,6 +7725,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodZoharHtml +
         hodCcHtml +
         hodChazarahHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
@@ -7744,6 +7750,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`
         : '';
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodZoharHtml +
         hodCcHtml +
         hodChazarahHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
