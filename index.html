@@ -2600,32 +2600,42 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const pattern = new RegExp(`\\b${hDay}(?:st|nd|rd|th)?\\s+of\\s+${monthName}\\b`, 'i');
     function parseRssForEpisode(text) {
       const xml = new DOMParser().parseFromString(text, 'text/xml');
-      for (const item of xml.querySelectorAll('item')) {
+      const items = xml.querySelectorAll('item');
+      console.log('[ChokBreslov] parsed', items.length, 'RSS items, looking for pattern', pattern);
+      for (const item of items) {
         const title = item.querySelector('title')?.textContent || '';
         if (pattern.test(title)) {
           const linkNode = item.querySelector('link');
           const link = linkNode?.textContent?.trim() ||
                        linkNode?.nextSibling?.nodeValue?.trim() ||
                        item.querySelector('guid')?.textContent?.trim() || '';
+          console.log('[ChokBreslov] matched title:', title, '-> link:', link);
           if (link.startsWith('http')) return link;
         }
+      }
+      if (items.length) {
+        console.log('[ChokBreslov] no match. First few titles:', Array.from(items).slice(0,5).map(i => i.querySelector('title')?.textContent));
       }
       return null;
     }
     // Try direct RSS, then CORS proxy fallback
     const rssUrl = 'https://rss.jewishpodcasts.fm/rss/548';
     const attempts = [
-      () => fetch(rssUrl),
-      () => fetch('https://corsproxy.io/?' + encodeURIComponent(rssUrl)),
+      ['direct', () => fetch(rssUrl)],
+      ['corsproxy.io', () => fetch('https://corsproxy.io/?' + encodeURIComponent(rssUrl))],
+      ['allorigins', () => fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl))],
     ];
-    for (const attempt of attempts) {
+    for (const [name, attempt] of attempts) {
       try {
         const resp = await attempt();
+        console.log('[ChokBreslov]', name, 'response status:', resp.status);
         if (resp.ok) {
           const url = parseRssForEpisode(await resp.text());
           if (url) return url;
         }
-      } catch(e) {}
+      } catch(e) {
+        console.log('[ChokBreslov]', name, 'fetch threw:', e.message);
+      }
     }
     // For gap date ranges, fall back to the Drive folder; otherwise to the show page.
     // Gap 1: 1 Cheshvan–14 Shvat  |  Gap 2: 11 Adar–1 Nisan
