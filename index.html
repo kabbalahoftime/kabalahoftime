@@ -2583,49 +2583,61 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return n + (s[(v-20)%10] || s[v] || s[0]);
   }
   const BRESLOV_PODCAST_URL = 'https://listen.jewishpodcasts.fm/breslovresearchinstitue';
-  // Google Drive recordings for gap dates not on the jewishpodcasts.fm feed.
+  // Manually-uploaded Google Drive recordings, used as an override before
+  // trying the (unreliable) jewishpodcasts.fm RSS feed. Originally added for
+  // gap dates not on the feed, but any date can be added here.
   // Keys use "month-day" (Hebrew month number - Hebrew day), same format as HAYOM_YOM.
   // Gap 1: 1 Cheshvan (8-1) through 14 Shvat (11-14)
   // Gap 2: 11 Adar (12-11) through 1 Nisan (1-1)
-  const BRESLOV_GAP_EPISODES = {
+  const BRESLOV_MANUAL_EPISODES = {
     "12-11": "https://drive.google.com/file/d/1ljhq6o1xGq4sa3q4RQIfG9zp5JctR1ZF/view",
   };
   const BRESLOV_GAP_FOLDER = 'https://drive.google.com/drive/folders/1F5vjw3voAVo3ImvMV2LPHsSq76gxz3NT';
   async function fetchBresloveEpisodeUrl(hDay, hMonth) {
-    // Check local Google Drive recordings for gap dates first
+    // Check manually-uploaded Google Drive recordings first
     const gapKey = `${hMonth}-${hDay}`;
-    if (BRESLOV_GAP_EPISODES[gapKey]) return BRESLOV_GAP_EPISODES[gapKey];
+    if (BRESLOV_MANUAL_EPISODES[gapKey]) return BRESLOV_MANUAL_EPISODES[gapKey];
     const monthName = HEB_MONTH_EN_PODCAST[hMonth] || '';
     // Match "9 of Adar" and "9th of Adar" (ordinal or plain)
     const pattern = new RegExp(`\\b${hDay}(?:st|nd|rd|th)?\\s+of\\s+${monthName}\\b`, 'i');
     function parseRssForEpisode(text) {
       const xml = new DOMParser().parseFromString(text, 'text/xml');
-      for (const item of xml.querySelectorAll('item')) {
+      const items = xml.querySelectorAll('item');
+      console.log('[ChokBreslov] parsed', items.length, 'RSS items, looking for pattern', pattern);
+      for (const item of items) {
         const title = item.querySelector('title')?.textContent || '';
         if (pattern.test(title)) {
           const linkNode = item.querySelector('link');
           const link = linkNode?.textContent?.trim() ||
                        linkNode?.nextSibling?.nodeValue?.trim() ||
                        item.querySelector('guid')?.textContent?.trim() || '';
+          console.log('[ChokBreslov] matched title:', title, '-> link:', link);
           if (link.startsWith('http')) return link;
         }
+      }
+      if (items.length) {
+        console.log('[ChokBreslov] no match. First few titles:', Array.from(items).slice(0,5).map(i => i.querySelector('title')?.textContent));
       }
       return null;
     }
     // Try direct RSS, then CORS proxy fallback
     const rssUrl = 'https://rss.jewishpodcasts.fm/rss/548';
     const attempts = [
-      () => fetch(rssUrl),
-      () => fetch('https://corsproxy.io/?' + encodeURIComponent(rssUrl)),
+      ['direct', () => fetch(rssUrl)],
+      ['corsproxy.io', () => fetch('https://corsproxy.io/?' + encodeURIComponent(rssUrl))],
+      ['allorigins', () => fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl))],
     ];
-    for (const attempt of attempts) {
+    for (const [name, attempt] of attempts) {
       try {
         const resp = await attempt();
+        console.log('[ChokBreslov]', name, 'response status:', resp.status);
         if (resp.ok) {
           const url = parseRssForEpisode(await resp.text());
           if (url) return url;
         }
-      } catch(e) {}
+      } catch(e) {
+        console.log('[ChokBreslov]', name, 'fetch threw:', e.message);
+      }
     }
     // For gap date ranges, fall back to the Drive folder; otherwise to the show page.
     // Gap 1: 1 Cheshvan–14 Shvat  |  Gap 2: 11 Adar–1 Nisan
@@ -7682,7 +7694,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar</span><span style="display:block">Shulchan Aruch</span><span style="display:block">Talmud (Chazarah)</span>';
+    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Shulchan Aruch</span><span style="display:block">Talmud (Chazarah)</span>';
+
+    const hodZoharHtml =
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar</div>` +
+      `<div style="font-size:0.88rem;margin-bottom:10px;">${_hodZoharMainHtml} <span style="color:var(--ink-dim);font-size:0.85em;">— ${_hodZoharMetaHtml}</span></div>` +
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
 
     const hodChazarahHtml =
       `<div style="margin-bottom:4px;"></div>` +
@@ -7691,6 +7708,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>` +
           `<div class="detail-row"><span class="detail-label">Playlist:</span><span class="detail-value"><a href="https://youtube.com/playlist?list=PLZ25YnO3sEpExDguTOmn6hVXQOAweMH_c&si=K9P4qwh5yjOJgEdL" target="_blank" style="color:var(--gold)">Chazarah Playlist</a></span></div>`
         : '');
+
+    const hodResourcesHtml =
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Resources</div>` +
+      `<div style="font-size:0.88rem;line-height:2;">` +
+      `<a href="https://dafhalacha.com/" target="_blank" style="color:var(--gold)">Daf Halacha</a><br>` +
+      `<a href="https://alldaf.org/" target="_blank" style="color:var(--gold)">All Daf</a><br>` +
+      `<a href="https://allparsha.org/" target="_blank" style="color:var(--gold)">All Parsha</a>` +
+      `</div>`;
 
     if (!hal.chofetz) {
       cards[6].querySelector('.sefirah-main-text').innerHTML =
@@ -7708,6 +7734,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodZoharHtml +
         hodCcHtml +
         hodChazarahHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
@@ -7717,7 +7744,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div class="detail-row"><span class="detail-label">Year end:</span><span class="detail-value">Sefer Chofetz Chaim (Days 349-364)</span></div>` +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
-        `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
+        `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>` +
+        hodResourcesHtml;
     } else {
       const hodCcHtml =
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
@@ -7732,6 +7760,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? `<strong>${daf.name}</strong>, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`
         : '';
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodZoharHtml +
         hodCcHtml +
         hodChazarahHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
@@ -7740,7 +7769,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div class="detail-row"><span class="detail-label">Days:</span><span class="detail-value">Days 349-364 of the year</span></div>` +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
-        `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
+        `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>` +
+        hodResourcesHtml;
     }
 
 
@@ -8994,9 +9024,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { key:'liktefilot', label:'Likutei Tefilot',  sefirah:'Binah'    },
     { key:'mishna',     label:'Mishna',           sefirah:'Chesed'   },
     { key:'tanach',     label:'Tanach',           sefirah:'Gevurah'  },
+    { key:'dafyomi',    label:'Daf Yomi',         sefirah:'Gevurah'  },
     { key:'chitaskids', label:'Chitas for Kids',  sefirah:'Tiferet'  },
     { key:'chokbres',   label:'Chok Breslov',     sefirah:'Netzach'  },
-    { key:'dafyomi',    label:'Daf Yomi',         sefirah:'Hod'      },
+    { key:'sa',         label:'Shulchan Aruch',   sefirah:'Hod'      },
+    { key:'chazarah',   label:'Chazarah',         sefirah:'Hod'      },
     { key:'chok',       label:"Chok L'Yisrael",   sefirah:'Yesod'    },
     { key:'sichos',     label:'Daily Sicha',      sefirah:'Malchut'  },
   ];
