@@ -6601,6 +6601,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
       document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov & Or HaChaim HaKadosh';
 
+      // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40)
+      const KST_HB_PAGE_OFFSET = 36;
+      function kstHebrewBooksUrl(page) {
+        return page
+          ? `https://hebrewbooks.org/pdfpager.aspx?req=16081&pgnum=${page + KST_HB_PAGE_OFFSET}`
+          : `https://hebrewbooks.org/16081`;
+      }
+
       if (kst) {
         _kstTitleEn = kst.titleEn || null;
         _kstLabel   = kst.label   || null;
@@ -6620,7 +6628,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
         let html = kstEntryHtml(kst);
         if (kst2) html += `<br>` + kstEntryHtml(kst2);
-        html += ` — <a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>`;
+        html += ` — <a href="${kstHebrewBooksUrl(kst.page)}" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>`;
         html += ohLine;
         document.getElementById('keter-kst-main').innerHTML = html;
       } else {
