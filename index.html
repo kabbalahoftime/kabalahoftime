@@ -5254,25 +5254,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { ch: 6, theme: 'The seal of creation — covenant of Avraham Avinu' },
   ];
 
+  // 0-indexed absolute folio count across the whole Zohar -> { book, folio }
+  function resolveZoharFolio(cumIdx) {
+    let offset = 0;
+    for (const b of ZOHAR_BOOKS) {
+      if (cumIdx < offset + b.folios) {
+        return { book: b, folio: cumIdx - offset + b.folioStart };
+      }
+      offset += b.folios;
+    }
+    const last = ZOHAR_BOOKS[ZOHAR_BOOKS.length - 1];
+    return { book: last, folio: last.folioStart + last.folios - 1 };
+  }
+
   function getZoharReading(weekNum) {
     // 16 dafim per week; weeks 1-51 = dafim 1-816, week 52 = remaining 2 (817-818)
     const startCum = (weekNum - 1) * 16;
     const endCum   = Math.min(weekNum * 16 - 1, ZOHAR_TOTAL - 1);
 
-    function resolveBook(cumIdx) {
-      let offset = 0;
-      for (const b of ZOHAR_BOOKS) {
-        if (cumIdx < offset + b.folios) {
-          return { book: b, folio: cumIdx - offset + b.folioStart };
-        }
-        offset += b.folios;
-      }
-      const last = ZOHAR_BOOKS[ZOHAR_BOOKS.length - 1];
-      return { book: last, folio: last.folioStart + last.folios - 1 };
-    }
-
-    const start = resolveBook(startCum);
-    const end   = resolveBook(endCum);
+    const start = resolveZoharFolio(startCum);
+    const end   = resolveZoharFolio(endCum);
 
     const seferiaUrl = `https://www.sefaria.org/Zohar,_${start.book.sefaria}.${start.folio}`;
 
@@ -6601,6 +6602,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
       document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov & Or HaChaim HaKadosh';
 
+      // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40)
+      const KST_HB_PAGE_OFFSET = 36;
+      function kstHebrewBooksUrl(page) {
+        return page
+          ? `https://hebrewbooks.org/pdfpager.aspx?req=16081&pgnum=${page + KST_HB_PAGE_OFFSET}`
+          : `https://hebrewbooks.org/16081`;
+      }
+
       if (kst) {
         _kstTitleEn = kst.titleEn || null;
         _kstLabel   = kst.label   || null;
@@ -6620,7 +6629,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
         let html = kstEntryHtml(kst);
         if (kst2) html += `<br>` + kstEntryHtml(kst2);
-        html += ` — <a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>`;
+        html += ` — <a href="${kstHebrewBooksUrl(kst.page)}" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>`;
         html += ohLine;
         document.getElementById('keter-kst-main').innerHTML = html;
       } else {
@@ -6740,9 +6749,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     let _hodZoharMetaHtml = '';
     let _hodZoharLabel = '';
     (() => {
-      const ANCHOR      = KOT_YEAR_START; // same anchor as all KoT cycles
-      const ZOHAR_TOTAL = 820; // 251 + 269 + 300
-      const CYCLE       = 364; // 52 weeks exactly
+      const ANCHOR = KOT_YEAR_START; // same anchor as all KoT cycles
+      const CYCLE  = 364; // 52 weeks exactly
 
       const dateNorm  = new Date(date.getFullYear(), date.getMonth(), date.getDate());
       const totalDays = Math.round((dateNorm - ANCHOR) / 86400000);
@@ -6758,31 +6766,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const faceEl = document.getElementById('hod-zohar-face');
 
       if (cumFolios < ZOHAR_TOTAL) {
-        const startAbs = cumFolios + 1;
-        const endAbs   = cumFolios + todayFolios;
-        function volInfo(f) {
-          if (f <= 251) return { vol: 1, folio: f };
-          if (f <= 520) return { vol: 2, folio: f - 251 };
-          return { vol: 3, folio: f - 520 };
-        }
-        const si = volInfo(startAbs), ei = volInfo(endAbs);
+        // resolveZoharFolio takes a 0-indexed absolute folio count
+        const si = resolveZoharFolio(cumFolios);
+        const ei = resolveZoharFolio(cumFolios + todayFolios - 1);
+        const sefariaUrl = `https://www.sefaria.org/Zohar,_${si.book.sefaria}.${si.folio}`;
         let label;
-        if (si.vol === ei.vol) {
+        if (si.book === ei.book) {
           label = si.folio === ei.folio
-            ? `Vol\xa0${si.vol}\xa0·\xa0Folio\xa0${si.folio}`
-            : `Vol\xa0${si.vol}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
+            ? `${si.book.name}\xa0·\xa0Folio\xa0${si.folio}`
+            : `${si.book.name}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
         } else {
-          label = `Vol\xa0${si.vol}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol\xa0${ei.vol}\xa0Folio\xa0${ei.folio}`;
+          label = `${si.book.name}\xa0Folio\xa0${si.folio}\xa0–\xa0${ei.book.name}\xa0Folio\xa0${ei.folio}`;
         }
         _hodZoharLabel    = label;
-        _hodZoharMainHtml = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">${label}</a>`;
+        _hodZoharMainHtml = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>`;
         _hodZoharMetaHtml = `R. Shimon bar Yochai · ${todayFolios} folios today`;
-        if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong>, ${label} &nbsp;·&nbsp; <a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
+        if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong>, ${label} &nbsp;·&nbsp; <a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
       } else {
-        // Sefer Yetzirah (cycleOffset 359-363 = days 360-364)
-        const syDay = cycleOffset - 358; // 1-5
-        const chapters = (syDay === 5) ? 'Chapters\xa05\xa0&\xa06' : `Chapter\xa0${syDay}`;
-        const syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${syDay === 5 ? 5 : syDay}`;
+        // Sefer Yetzirah (cycleOffset 358-363 = 6 days, one chapter per day)
+        const syDay = cycleOffset - 357; // 1-6
+        const chapters = `Chapter\xa0${syDay}`;
+        const syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${syDay}`;
         _hodZoharLabel    = 'Sefer Yetzirah ' + chapters;
         _hodZoharMainHtml = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters}</a>`;
         _hodZoharMetaHtml = `Day ${cycleOffset + 1} of cycle · completing the year`;
