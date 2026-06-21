@@ -1448,6 +1448,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
       <div class="keter-main" id="keter-lm-main">Loading…</div>
       <div class="keter-meta" id="keter-lm-meta"></div>
+      <button class="date-jump-trigger" onclick="event.stopPropagation(); openLmDailyModal()">today's dated lesson ↗</button>
     </div>
     <!-- TREASURY OF CHASSIDIC TALES section -->
     <div class="keter-section">
@@ -1463,12 +1464,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="keter-detail">
   <div class="section-divider" style="margin: 16px 0">
     <span class="divider-symbol">◆</span>
-  </div>
-  <!-- LIKUTEI MOHARAN — today's lesson (364-day learning cycle) -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Today's Likutei Moharan</div>
-    <div class="keter-main" id="keter-lm-detail-main">Loading…</div>
-    <div class="keter-meta" id="keter-lm-detail-meta"></div>
   </div>
   <!-- HAYOM YOM resources -->
   <div class="keter-section">
@@ -1508,6 +1503,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 </div>
 
   </div>
+
+  <!-- TODAY'S LIKUTEI MOHARAN MODAL (Hebrew-date-pegged lesson) -->
+  <!-- A sibling of .keter-card rather than nested inside it: .keter-card has a
+       fill-mode "both" transform animation, which (per spec) makes any non-
+       "none" transform on it a permanent containing block for fixed-position
+       descendants, breaking this modal's full-viewport inset:0 overlay. -->
+  <div id="lm-daily-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
+    <div class="heb-picker-card" style="width:300px;">
+      <div class="heb-picker-header">
+        <span class="heb-picker-title">Today's Likutei Moharan</span>
+        <button class="heb-picker-close" onclick="closeLmDailyModal()">×</button>
+      </div>
+      <div class="keter-main" id="keter-lm-detail-main" style="margin-bottom:10px;">Loading…</div>
+      <div class="keter-meta" id="keter-lm-detail-meta"></div>
+    </div>
+  </div>
+
   <div class="upper-sefirot-grid" id="upper-sefirot-grid">
 
 <!-- CHOCHMAH: 22-Day Alef-Bet Cycle -->
@@ -8903,6 +8915,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('date-picker-modal').style.display = 'none';
   }
 
+  function openLmDailyModal() {
+    document.getElementById('lm-daily-modal').style.display = 'flex';
+  }
+
+  function closeLmDailyModal() {
+    document.getElementById('lm-daily-modal').style.display = 'none';
+  }
+
   function applyDatePickerJump() {
     let selected;
     if (_datePickerTab === 'greg') {
@@ -8926,6 +8946,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   document.addEventListener('click', function(e) {
     if (e.target && e.target.id === 'date-picker-modal') closeDatePicker();
+    if (e.target && e.target.id === 'lm-daily-modal') closeLmDailyModal();
   });
 
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
