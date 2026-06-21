@@ -2181,6 +2181,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     for (let c = 1; c <= chs; c++) TANACH_FLAT.push([name, c]);
 
   function getMishnaInfo(d) {
+    d = Math.max(1, d); // cycle begins at the epoch; dates before it have no defined cycle/day
     const dayNum = (d % 7 == 0) ? 7 : d % 7;
     const week   = (d % 7 == 0) ? Math.floor(d/7) : Math.floor(d/7) + 1;
     const day    = dayNum;
@@ -2247,6 +2248,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   function getTanachInfo(d) {
+    d = Math.max(1, d); // cycle begins at the epoch; dates before it have no defined cycle/day
     const dayNum = (d % 7 == 0) ? 7 : d % 7;
     const week   = (d % 7 == 0) ? Math.floor(d/7) : Math.floor(d/7) + 1;
     const day    = dayNum;
@@ -2432,6 +2434,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // Sefirot label — exact logic from blog (handles day/week boundary edge cases)
   function getSefirotInfo(d) {
+    d = Math.max(1, d); // cycle begins at the epoch; dates before it have no defined cycle/day
     const sevenDayCycle = 1 + parseInt(d / 7);
     const sevenWeekCycle = 1 + parseInt(sevenDayCycle / 7);
 
@@ -3648,6 +3651,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // 22-day cycle — enriched
   function get22DayInfo(d) {
+    d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
     const cycle = (d % 22 == 0) ? parseInt(d/22) : 1 + parseInt(d/22);
     const day   = (d % 22 == 0) ? 22 : d % 22;
     // Daily letter (1-22)
@@ -3835,6 +3839,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   ];
 
   function get13DayInfo(d) {
+    d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
     const cycle = (d % 13 == 0) ? parseInt(d/13) : 1 + parseInt(d/13);
     const day   = (d % 13 == 0) ? 13 : d % 13;
     const isMoshe = cycle >= 14 && cycle <= 26;
@@ -3847,6 +3852,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // 41-day cycle — enriched
   function get41DayInfo(d) {
+    d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
     const cycle = (d % 41 == 0) ? parseInt(d/41) : 1 + parseInt(d/41);
     const day   = (d % 41 == 0) ? 41 : d % 41;
     const mivtzah = MIVTZOYIM[(cycle - 1) % 9];
@@ -3866,6 +3872,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // Halacha — exact from blog (ch1 = d*2-1, ch2 = d*2)
   function getHalachaInfo(d) {
+    d = Math.max(1, d); // cycle begins at the epoch; dates before it have no defined cycle/day
     const ch1 = d * 2 - 1;
     const ch2 = d * 2;
     if (ch1 > 697) return { chofetz: true, section: d - 348 };
@@ -7569,7 +7576,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : `<div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">R. Shneur Zalman of Liadi (Alter Rebbe)</span></div>`;
 
     // Tractate half-cycle lookup: 'a' = days 1-11, 'b' = days 12-22; cycle 17 has only 'a' (12 days)
-    const tractHalfIdx = cy22.cycle === 17
+    const tractHalfIdx = cy22.cycle >= 17
       ? 32
       : (cy22.cycle - 1) * 2 + (cy22.day <= 11 ? 0 : 1);
     const tractData = TRACTATE_CYCLES[tractHalfIdx];
