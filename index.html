@@ -3480,6 +3480,41 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     30: {lesson: "Likutei Moharan II, Torah 125", summary: "Likutei Moharan Tinyana, Torah 125, for the 30th of Adar I, Rosh Chodesh, is about the reciting of Tehilim (Psalms). The first part of the teaching reflects what is written in Torah 101, about finding oneself in the Tehilim and seeing the wars mentioned there as primarily the war against the evil inclination. Someone asked him how to find oneself in the Psalms in which King David praises himself (such as, &ldquo;I am pious&rdquo;), and Rebbe Nachman answered that this too should apply to oneself, and a person must judge themselves favorably, and find some merit and good point, regarding which the person is considered pious, etc. (See Lesson 282) Adar is about prayer and Divine service, and it is also about destroying evil and finding joy. Rebbe Nachman's advice is to do this is by finding good points in others and in yourself."},
   };
 
+  // ── LIKUTEI MOHARAN — direct Hebrew-date lookup for LM_DAILY_CYCLE ─────────
+  // Every entry in LM_DAILY_CYCLE is pegged to a specific, named Hebrew date,
+  // not a floating day-count, so lookup must go by (month, day) rather than
+  // by elapsed days. Two independent tracks run through the data: "Track A"
+  // (Part I Lessons, entries 6-272) covers Tishrei 1 - Tammuz 2; "Track B"
+  // (Tinyana, entries 273-364) covers Tammuz 3 - Tishrei 6 of the following
+  // year. Their wraparounds around Rosh Hashanah overlap on Elul 25-29 and
+  // Tishrei 1-6, where both tracks have an entry for the same calendar day
+  // (Track A's entries 1-5/6-11 and Track B's entries 354-358/359-364).
+  // Adar I (leap years only) is handled separately via LM_DAILY_CYCLE_ADAR1.
+  function lmTrackAEntry(month, day) {
+    if (month === 7) return day + 5;                          // Tishrei 1-30   -> 6-35
+    if (month === 8) return day <= 29 ? day + 35 : 65;          // Cheshvan 1-29  -> 36-64 (30th borrows 1 Kislev)
+    if (month === 9) return day <= 29 ? day + 64 : 94;          // Kislev 1-29    -> 65-93 (30th borrows 1 Teveth)
+    if (month === 10) return day + 93;                          // Teveth 1-29    -> 94-122
+    if (month === 11) return day + 122;                         // Shvat 1-30     -> 123-152
+    if (month === 12 || month === 13) return day + 152;         // Adar/Adar II   -> 153-181
+    if (month === 1) return day + 181;                          // Nissan 1-30    -> 182-211
+    if (month === 2) return day + 211;                          // Iyar 1-29      -> 212-240
+    if (month === 3) return day + 240;                          // Sivan 1-30     -> 241-270
+    if (month === 4 && day <= 2) return day + 270;               // Tammuz 1-2     -> 271-272
+    if (month === 6 && day >= 25 && day <= 29) return day - 24;  // Elul 25-29     -> 1-5
+    return null;
+  }
+  function lmTrackBEntry(month, day) {
+    if (month === 4 && day >= 3) return day + 270;               // Tammuz 3-29    -> 273-299
+    if (month === 5) return day + 299;                          // Av 1-30        -> 300-329
+    if (month === 6) return day + 329;                          // Elul 1-29      -> 330-358
+    if (month === 7 && day <= 6) return day + 358;               // Tishrei 1-6    -> 359-364
+    return null;
+  }
+  function lmEntriesForDate(month, day) {
+    return [lmTrackAEntry(month, day), lmTrackBEntry(month, day)].filter(n => n !== null);
+  }
+
   // ── DAF YOMI — Cycle 14 (Jan 5 2020 → July 7 2027) ──────────────────────────
   // Each entry: [days_since_Jan1_2020, tractate_name, hebrew_name, last_daf_number]
   // Daf on a given date = 2 + (days_since_epoch - tractate_start_day)
@@ -7267,22 +7302,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<a href="${seferiaURL}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>` +
       ` &nbsp;·&nbsp; ${lmBreslovLinks}`;
 
-    // 6b. Today's Likutei Moharan — 364-day learning-cycle lesson (Keter detail section)
-    // Leap years insert Adar I (30 days) before Adar II; Adar I uses its own
-    // supplement (later additions to Likutei Moharan), and everything from
-    // Adar II onward is shifted back by 30 days to stay aligned with the
-    // regular-year cycle above.
-    const isAdarI    = isLeapYear && hMonth === 12;
-    const dAdj        = (isLeapYear && (hMonth === 13 || hMonth <= 6)) ? d - 30 : d;
-    const lmDailyIdx = ((dAdj - 1) % 364) + 1;
-    const lmDaily     = isAdarI ? LM_DAILY_CYCLE_ADAR1[hDay] : LM_DAILY_CYCLE[lmDailyIdx];
-    if (lmDaily) {
-      const lmDailyInfo = parseLmDailyLabel(lmDaily.lesson);
-      document.getElementById('keter-lm-detail-main').innerHTML =
-        `${lmDailyInfo.label}<br><span style="font-size:11px;color:var(--ink-mid)">${lmDaily.summary}</span>`;
-      document.getElementById('keter-lm-detail-meta').innerHTML = lmDailyInfo.url
-        ? `<a href="${lmDailyInfo.url}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`
-        : '';
+    // 6b. Today's Likutei Moharan — Hebrew-date-pegged lesson (Keter detail section)
+    // Every LM_DAILY_CYCLE entry names a specific Hebrew date, so lookup is by
+    // (month, day), not a floating day count. Adar I (leap years only) uses
+    // its own supplement, separate from the cycle below. On Elul 25-29 and
+    // Tishrei 1-6, two entries (one from each track) fall on the same date.
+    const isAdarI  = isLeapYear && hMonth === 12;
+    const lmDailies = isAdarI
+      ? [LM_DAILY_CYCLE_ADAR1[hDay]].filter(Boolean)
+      : lmEntriesForDate(hMonth, hDay).map(n => LM_DAILY_CYCLE[n]).filter(Boolean);
+    if (lmDailies.length) {
+      document.getElementById('keter-lm-detail-main').innerHTML = lmDailies.map(lmDaily => {
+        const lmDailyInfo = parseLmDailyLabel(lmDaily.lesson);
+        return `${lmDailyInfo.label}<br><span style="font-size:11px;color:var(--ink-mid)">${lmDaily.summary}</span>`;
+      }).join('<br><br>');
+      document.getElementById('keter-lm-detail-meta').innerHTML = lmDailies.map(lmDaily => {
+        const lmDailyInfo = parseLmDailyLabel(lmDaily.lesson);
+        return lmDailyInfo.url
+          ? `<a href="${lmDailyInfo.url}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`
+          : '';
+      }).filter(Boolean).join(' &nbsp;·&nbsp; ');
     }
 
     // 7. Treasury of Chassidic Tales (R. S.Y. Zevin)
