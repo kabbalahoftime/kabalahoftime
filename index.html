@@ -1430,6 +1430,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
     <div class="keter-main" id="keter-kst-main">Loading…</div>
     <div class="keter-meta" id="keter-kst-meta"></div>
+    <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Ohr KiTov ↗</button>
   </div>
   <!-- Atik Yomin — Three Heads -->
   <div class="keter-inner-row">
@@ -1447,7 +1448,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
       <div class="keter-main" id="keter-lm-main">Loading…</div>
       <div class="keter-meta" id="keter-lm-meta"></div>
-      <button class="date-jump-trigger" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
+      <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
     </div>
     <!-- TREASURY OF CHASSIDIC TALES section -->
     <div class="keter-section">
@@ -1503,19 +1504,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   </div>
 
-  <!-- TODAY'S LIKUTEI MOHARAN MODAL (Hebrew-date-pegged lesson) -->
+  <!-- GENERIC INFO POPUP (Hebrew-date-pegged daily summaries: Likutei Moharan, Ohr KiTov, …) -->
   <!-- A sibling of .keter-card rather than nested inside it: .keter-card has a
        fill-mode "both" transform animation, which (per spec) makes any non-
        "none" transform on it a permanent containing block for fixed-position
        descendants, breaking this modal's full-viewport inset:0 overlay. -->
-  <div id="lm-daily-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
+  <div id="info-popup-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
     <div class="heb-picker-card" style="width:300px;">
       <div class="heb-picker-header">
-        <span class="heb-picker-title">Today's Likutei Moharan</span>
-        <button class="heb-picker-close" onclick="closeLmDailyModal()">×</button>
+        <span class="heb-picker-title" id="info-popup-title"></span>
+        <button class="heb-picker-close" onclick="closeInfoPopup()">×</button>
       </div>
-      <div class="keter-main" id="keter-lm-detail-main" style="margin-bottom:10px;">Loading…</div>
-      <div class="keter-meta" id="keter-lm-detail-meta"></div>
+      <div class="keter-main" id="info-popup-main" style="margin-bottom:10px;"></div>
+      <div class="keter-meta" id="info-popup-meta"></div>
     </div>
   </div>
 
@@ -2301,6 +2302,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   let currentOffset = 0;
   let kotYearAlt = false; // When true, show the adjacent KoT year during the overlap window
+
+  // Content for the generic info popup (#info-popup-modal), refreshed each render() cycle.
+  let _lmDetailMain = '', _lmDetailMeta = '';
+  let _oktDetailMain = '', _oktDetailMeta = '';
 
   const MONTHS = ['January','February','March','April','May','June',
                   'July','August','September','October','November','December'];
@@ -6613,22 +6618,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (parashaNum === 1) {
       if (dow === 0) {
         const d = KST_DATA['haskamah'];
-        return { page: d.p, label: 'הסכמה', titleEn: d.e, titleHe: d.h };
+        return { page: d.p, label: 'הסכמה', titleEn: d.e, titleHe: d.h, key: 'haskamah' };
       }
       if (dow === 1) {
         const d = KST_DATA['tzavaat'];
-        return { page: d.p, label: 'צוואה', titleEn: d.e, titleHe: d.h };
+        return { page: d.p, label: 'צוואה', titleEn: d.e, titleHe: d.h, key: 'tzavaat' };
       }
       if (dow === 6) {
         const s1 = 5, s2 = 6;
         const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
         return { page: d1.p, label: `§ ${s1}–${s2} (p. ${d1.p||s1})`,
                  titleEn: d1.e || '', titleHe: d1.h || '',
-                 title2En: d2.e || '', title2He: d2.h || '' };
+                 title2En: d2.e || '', title2He: d2.h || '',
+                 key: s1, key2: s2 };
       }
       const sec = dow - 1;
       const d = KST_DATA[sec] || {};
-      return { page: d.p, label: `§ ${sec} (p. ${d.p||sec})`, titleEn: d.e||'', titleHe: d.h||'' };
+      return { page: d.p, label: `§ ${sec} (p. ${d.p||sec})`, titleEn: d.e||'', titleHe: d.h||'', key: sec };
     }
     const start = 8 * parashaNum - 9;
     if (dow === 6) {
@@ -6636,12 +6642,28 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
       return { page: d1.p, label: `§ ${s1}–${s2} (p. ${d1.p||s1})`,
                titleEn: d1.e || '', titleHe: d1.h || '',
-               title2En: d2.e || '', title2He: d2.h || '' };
+               title2En: d2.e || '', title2He: d2.h || '',
+               key: s1, key2: s2 };
     }
     const sec = start + dow;
     const d = KST_DATA[sec] || {};
-    return { page: d.p, label: `§ ${sec} (p. ${d.p||sec})`, titleEn: d.e||'', titleHe: d.h||'' };
+    return { page: d.p, label: `§ ${sec} (p. ${d.p||sec})`, titleEn: d.e||'', titleHe: d.h||'', key: sec };
   }
+
+  // ── OHR KITOV — daily synthesis: Keter Shem Tov + Or HaChaim HaKadosh ──────
+  // "Ohr...Ki Tov" (Genesis 1:4) — Ohr (HaChaim) joined with (Baal Shem) Tov,
+  // fittingly paired with Keter, the first/topmost Sefirah, echoing "in the
+  // beginning." A single hand-written entry connects that day's Keter Shem
+  // Tov section with the Or HaChaim HaKadosh on the corresponding verses.
+  //
+  // Keyed identically to KST_DATA ('haskamah', 'tzavaat', 1–430) — see
+  // getDailyKST() above. Each key is one weekday aliyah of that week's
+  // Torah portion: Sun–Fri = aliyot 1–6 (one key/day), and Shabbat carries
+  // two keys together = aliyah 7 + maftir/haftorah.
+  //
+  // Intentionally empty: entries are authored by hand, one key at a time.
+  // Shape: OHR_KITOV_DAILY[key] = { summary: "…" };
+  const OHR_KITOV_DAILY = {};
 
   // ── SEFIRAH OF THE HOUR ──
   const SEFIRAH_TIMES = [
@@ -7116,6 +7138,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           `<a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>` + ohLine;
       }
       document.getElementById('keter-kst-meta').innerHTML = '';
+
+      // 5b. Ohr KiTov — daily synthesis (Keter Shem Tov + Or HaChaim HaKadosh)
+      // Collects every KST_DATA key active today (kst/kst2, plus their Shabbat
+      // title2 partner) and looks each up in OHR_KITOV_DAILY — see comment
+      // above that data structure for the key scheme.
+      const oktKeys = [];
+      if (kst)  { oktKeys.push(kst.key);  if (kst.key2)  oktKeys.push(kst.key2); }
+      if (kst2) { oktKeys.push(kst2.key); if (kst2.key2) oktKeys.push(kst2.key2); }
+      const oktDailies = oktKeys.map(k => OHR_KITOV_DAILY[k]).filter(Boolean);
+      document.getElementById('okt-trigger').style.display = oktDailies.length ? '' : 'none';
+      if (oktDailies.length) {
+        _oktDetailMain = oktDailies.map(d => d.summary).join('<br><br>');
+        _oktDetailMeta = `<a href="${kstHebrewBooksUrl(kst ? kst.page : null)}" target="_blank" style="color:var(--gold)">Read Keter Shem Tov</a>` +
+          ` &nbsp;·&nbsp; <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read Or HaChaim HaKadosh</a>`;
+      }
     }
 
     // Chok L'Yisrael (Yesod card)
@@ -7329,12 +7366,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const lmDailies = isAdarI
       ? [LM_DAILY_CYCLE_ADAR1[hDay]].filter(Boolean)
       : lmEntriesForDate(hMonth, hDay).map(n => LM_DAILY_CYCLE[n]).filter(Boolean);
+    document.getElementById('lm-trigger').style.display = lmDailies.length ? '' : 'none';
     if (lmDailies.length) {
-      document.getElementById('keter-lm-detail-main').innerHTML = lmDailies.map(lmDaily => {
+      _lmDetailMain = lmDailies.map(lmDaily => {
         const lmDailyInfo = parseLmDailyLabel(lmDaily.lesson);
         return `${lmDailyInfo.label}<br><span style="font-size:11px;color:var(--ink-mid)">${lmDaily.summary}</span>`;
       }).join('<br><br>');
-      document.getElementById('keter-lm-detail-meta').innerHTML = lmDailies.map(lmDaily => {
+      _lmDetailMeta = lmDailies.map(lmDaily => {
         const lmDailyInfo = parseLmDailyLabel(lmDaily.lesson);
         return lmDailyInfo.url
           ? `<a href="${lmDailyInfo.url}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`
@@ -8914,12 +8952,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('date-picker-modal').style.display = 'none';
   }
 
-  function openLmDailyModal() {
-    document.getElementById('lm-daily-modal').style.display = 'flex';
+  // Generic popup: shared by all daily-summary triggers (Likutei Moharan,
+  // Ohr KiTov, …). Each feature keeps its own openXModal() wrapper so its
+  // button's onclick stays simple, but all of them open the same modal.
+  function openInfoPopup(title, mainHtml, metaHtml) {
+    document.getElementById('info-popup-title').textContent = title;
+    document.getElementById('info-popup-main').innerHTML = mainHtml || '';
+    document.getElementById('info-popup-meta').innerHTML = metaHtml || '';
+    document.getElementById('info-popup-modal').style.display = 'flex';
   }
 
-  function closeLmDailyModal() {
-    document.getElementById('lm-daily-modal').style.display = 'none';
+  function closeInfoPopup() {
+    document.getElementById('info-popup-modal').style.display = 'none';
+  }
+
+  function openLmDailyModal() {
+    openInfoPopup("Today's Likutei Moharan", _lmDetailMain, _lmDetailMeta);
+  }
+
+  function openOhrKiTovModal() {
+    openInfoPopup('Ohr KiTov', _oktDetailMain, _oktDetailMeta);
   }
 
   function applyDatePickerJump() {
@@ -8945,7 +8997,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   document.addEventListener('click', function(e) {
     if (e.target && e.target.id === 'date-picker-modal') closeDatePicker();
-    if (e.target && e.target.id === 'lm-daily-modal') closeLmDailyModal();
+    if (e.target && e.target.id === 'info-popup-modal') closeInfoPopup();
   });
 
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
