@@ -1441,7 +1441,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div class="keter-main" id="keter-rambam-face" style="margin-bottom:6px">Loading…</div>
       <div class="keter-main" id="keter-hayomyom">Loading…</div>
       <div class="keter-meta" id="keter-hy-meta"></div>
-      <button class="date-jump-trigger" id="yc-trigger" style="display:none;" onclick="event.stopPropagation(); openYomChazakModal()">Yom Chazak ↗</button>
     </div>
     <!-- DAILY LM section -->
     <div class="keter-section">
@@ -2596,12 +2595,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // ── HAYOM YOM ────────────────────────────────────────────────────────────────
-  // Keyed '<hebrew month>-<hebrew day>' (month numbers: Nisan=1…Elul=6,
-  // Tishrei=7…Adar=12, Adar II=13). Intentionally sparse — filled in by hand,
-  // one date at a time; falls back to a Chabad.org link when absent.
-  const HAYOM_YOM = {
-    '4-6': `(The effect of) each particular mitzva-act is called forth by (doing) those (other) mitzva-acts which are makif - general and all-encompassing in nature. The mitzva of tzedaka, for example, is one of those all-encompassing makif mitzvot, as evident from the reference to all mitzvot by the term "tzedaka." For this reason it is most appropriate to give a coin to tzedaka before performing any mitzva. This has the effect of bringing the general makif-aura into the p'nimi, the "inner aspect," (the particular mitzva). Nonetheless, this type of makif is a "close aura," whereas the makif of Torah is a "distant aura," whose effect is superior.`,
-  };
+  // Links live to Chabad.org — no embedded quotes
+  const HAYOM_YOM = {};
 
   // ── YOM CHAZAK — daily synthesis: Hayom Yom + Yad HaChazakah (Rambam) ──────
   // "Yom Chazak" — Yom from Hayom Yom, Chazak from Yad HaChazakah (Mishneh
@@ -7789,19 +7784,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read today's Hayom Yom on Chabad.org</a>`;
     }
     document.getElementById('keter-hy-meta').innerHTML = '';
-
-    // 5b. Yom Chazak — daily pairing (Hayom Yom + Yad HaChazakah/Rambam)
-    // See comment above getLoTaasehInfo() for the cycle this draws from.
-    const ycMitzvot = getLoTaasehInfo(dEff);
-    document.getElementById('yc-trigger').style.display = ycMitzvot.length ? '' : 'none';
-    if (ycMitzvot.length) {
-      _ycDetailMain = (hyText ? `<strong>Hayom Yom:</strong> "${hyText}"<br><br>` : '') +
-        ycMitzvot.map(m => `<strong>Negative Mitzvah ${m.n}:</strong> ${m.title}`).join('<br>');
-      const ycLinks = [`<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read Hayom Yom</a>`]
-        .concat(ycMitzvot.filter(m => m.url).map(m =>
-          `<a href="${m.url}" target="_blank" style="color:var(--gold)">Negative Mitzvah ${m.n} on Sefaria</a>`));
-      _ycDetailMeta = ycLinks.join(' &nbsp;·&nbsp; ');
-    }
 
     document.getElementById('keter-hy-links').innerHTML =
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>` +
