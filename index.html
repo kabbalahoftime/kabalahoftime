@@ -2601,20 +2601,35 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // ── YOM CHAZAK — daily synthesis: Hayom Yom + Yad HaChazakah (Rambam) ──────
   // "Yom Chazak" — Yom from Hayom Yom, Chazak from Yad HaChazakah (Mishneh
-  // Torah's own name, "the strong hand"). Unlike Ohr KiTov, this is NOT tied
-  // to that day's specific Rambam/Sefer HaMitzvos reading — the 3-chapter,
-  // 1-chapter, and Sefer HaMitzvos cycles are perpetual day-count cycles that
-  // never resync to the Hebrew calendar, so "today's chapter" lands on a
-  // different Rambam passage every year. Instead, each entry hand-picks
-  // whichever Rambam teaching is thematically resonant with that day's
-  // Hayom Yom, independent of the daily cycle.
+  // Torah's own name, "the strong hand"). This does NOT touch the Rebbe's
+  // established Rambam study cycles (3-chapter, 1-chapter, Sefer HaMitzvos
+  // Yomi) in any way — those are perpetual day-count cycles, untouched and
+  // unaffected by anything here.
   //
-  // Keyed identically to HAYOM_YOM ('<hebrew month>-<hebrew day>'), so the
-  // pairing recurs unchanged every Hebrew year.
+  // Instead, the Rambam side of Yom Chazak is a separate, original cycle:
+  // Rambam's own 365 Negative Commandments (Sefer HaMitzvot's Lo Ta'aseh, in
+  // his own enumeration order — the numbering used everywhere, e.g. "Lo
+  // Sa'aseh 142"), distributed one per day across the Kabbalah of Time's
+  // 52-week/364-day year — see getLoTaasehInfo() below, which reuses the
+  // same leap-year-collapsing day count (dEff/effectiveKotWeek) that Tanach
+  // Yomi and Beit Aharon already rely on to recur identically every Hebrew
+  // year. Since 365 doesn't divide evenly into 364 days, the final day of
+  // the KoT year (Week 52, Day 7) carries the last two (#364 and #365).
   //
-  // Intentionally empty: entries are authored by hand, one key at a time.
-  // Shape: YOM_CHAZAK_DAILY[key] = { summary: "…", url: "…" }; // url optional
-  const YOM_CHAZAK_DAILY = {};
+  // Because both halves of the pairing — Hayom Yom (keyed by Hebrew
+  // month/day) and this cycle (keyed by KoT day, itself anchored to the
+  // Hebrew calendar every year) — recur identically every Hebrew year, the
+  // pairing never drifts the way it would with the actual Rambam cycles.
+  const LO_TAASEH_365 = new Array(365).fill(null); // [{n, title, url}, …] — n=1..365, index n-1
+
+  function getLoTaasehInfo(d) {
+    d = Math.max(1, d);
+    const dayIdx0 = (d - 1) % 364; // 0-363, collapsed KoT day-of-year
+    const entries = dayIdx0 === 363
+      ? [LO_TAASEH_365[363], LO_TAASEH_365[364]]
+      : [LO_TAASEH_365[dayIdx0]];
+    return entries.filter(Boolean);
+  }
 
   // Hebrew month names in English for Breslov podcast episode lookup
   const HEB_MONTH_EN_PODCAST = {
@@ -7405,15 +7420,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
     document.getElementById('keter-hy-meta').innerHTML = '';
 
-    // 5b. Yom Chazak — daily synthesis (Hayom Yom + Yad HaChazakah/Rambam)
-    // See comment above YOM_CHAZAK_DAILY for why this is keyed by Hebrew
-    // month/day rather than by the (perpetually drifting) Rambam cycles.
-    const ycEntry = YOM_CHAZAK_DAILY[`${hMonth}-${hDay}`];
-    document.getElementById('yc-trigger').style.display = ycEntry ? '' : 'none';
-    if (ycEntry) {
-      _ycDetailMain = ycEntry.summary;
-      _ycDetailMeta = `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read Hayom Yom</a>` +
-        (ycEntry.url ? ` &nbsp;·&nbsp; <a href="${ycEntry.url}" target="_blank" style="color:var(--gold)">Read Rambam</a>` : '');
+    // 5b. Yom Chazak — daily pairing (Hayom Yom + Yad HaChazakah/Rambam)
+    // See comment above getLoTaasehInfo() for the cycle this draws from.
+    const ycMitzvot = getLoTaasehInfo(dEff);
+    document.getElementById('yc-trigger').style.display = ycMitzvot.length ? '' : 'none';
+    if (ycMitzvot.length) {
+      _ycDetailMain = (hyText ? `<strong>Hayom Yom:</strong> "${hyText}"<br><br>` : '') +
+        ycMitzvot.map(m => `<strong>Negative Mitzvah ${m.n}:</strong> ${m.title}`).join('<br>');
+      const ycLinks = [`<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read Hayom Yom</a>`]
+        .concat(ycMitzvot.filter(m => m.url).map(m =>
+          `<a href="${m.url}" target="_blank" style="color:var(--gold)">Negative Mitzvah ${m.n} on Sefaria</a>`));
+      _ycDetailMeta = ycLinks.join(' &nbsp;·&nbsp; ');
     }
 
     document.getElementById('keter-hy-links').innerHTML =
