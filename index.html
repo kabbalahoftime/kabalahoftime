@@ -1441,6 +1441,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div class="keter-main" id="keter-rambam-face" style="margin-bottom:6px">Loading…</div>
       <div class="keter-main" id="keter-hayomyom">Loading…</div>
       <div class="keter-meta" id="keter-hy-meta"></div>
+      <button class="date-jump-trigger" id="yc-trigger" style="display:none;" onclick="event.stopPropagation(); openYomChazakModal()">Yom Chazak ↗</button>
     </div>
     <!-- DAILY LM section -->
     <div class="keter-section">
@@ -2306,6 +2307,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Content for the generic info popup (#info-popup-modal), refreshed each render() cycle.
   let _lmDetailMain = '', _lmDetailMeta = '';
   let _oktDetailMain = '', _oktDetailMeta = '';
+  let _ycDetailMain = '', _ycDetailMeta = '';
 
   const MONTHS = ['January','February','March','April','May','June',
                   'July','August','September','October','November','December'];
@@ -2596,6 +2598,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // ── HAYOM YOM ────────────────────────────────────────────────────────────────
   // Links live to Chabad.org — no embedded quotes
   const HAYOM_YOM = {};
+
+  // ── YOM CHAZAK — daily synthesis: Hayom Yom + Yad HaChazakah (Rambam) ──────
+  // "Yom Chazak" — Yom from Hayom Yom, Chazak from Yad HaChazakah (Mishneh
+  // Torah's own name, "the strong hand"). Unlike Ohr KiTov, this is NOT tied
+  // to that day's specific Rambam/Sefer HaMitzvos reading — the 3-chapter,
+  // 1-chapter, and Sefer HaMitzvos cycles are perpetual day-count cycles that
+  // never resync to the Hebrew calendar, so "today's chapter" lands on a
+  // different Rambam passage every year. Instead, each entry hand-picks
+  // whichever Rambam teaching is thematically resonant with that day's
+  // Hayom Yom, independent of the daily cycle.
+  //
+  // Keyed identically to HAYOM_YOM ('<hebrew month>-<hebrew day>'), so the
+  // pairing recurs unchanged every Hebrew year.
+  //
+  // Intentionally empty: entries are authored by hand, one key at a time.
+  // Shape: YOM_CHAZAK_DAILY[key] = { summary: "…", url: "…" }; // url optional
+  const YOM_CHAZAK_DAILY = {};
 
   // Hebrew month names in English for Breslov podcast episode lookup
   const HEB_MONTH_EN_PODCAST = {
@@ -7385,6 +7404,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read today's Hayom Yom on Chabad.org</a>`;
     }
     document.getElementById('keter-hy-meta').innerHTML = '';
+
+    // 5b. Yom Chazak — daily synthesis (Hayom Yom + Yad HaChazakah/Rambam)
+    // See comment above YOM_CHAZAK_DAILY for why this is keyed by Hebrew
+    // month/day rather than by the (perpetually drifting) Rambam cycles.
+    const ycEntry = YOM_CHAZAK_DAILY[`${hMonth}-${hDay}`];
+    document.getElementById('yc-trigger').style.display = ycEntry ? '' : 'none';
+    if (ycEntry) {
+      _ycDetailMain = ycEntry.summary;
+      _ycDetailMeta = `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read Hayom Yom</a>` +
+        (ycEntry.url ? ` &nbsp;·&nbsp; <a href="${ycEntry.url}" target="_blank" style="color:var(--gold)">Read Rambam</a>` : '');
+    }
+
     document.getElementById('keter-hy-links').innerHTML =
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>` +
       ` &nbsp;·&nbsp; <a href="https://www.theyeshiva.net/" target="_blank" style="color:var(--gold)">The Yeshiva</a>` +
@@ -9036,6 +9067,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function openOhrKiTovModal() {
     openInfoPopup('Ohr KiTov', _oktDetailMain, _oktDetailMeta);
+  }
+
+  function openYomChazakModal() {
+    openInfoPopup('Yom Chazak', _ycDetailMain, _ycDetailMeta);
   }
 
   function applyDatePickerJump() {
