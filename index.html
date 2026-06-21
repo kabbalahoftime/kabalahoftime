@@ -8059,7 +8059,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : TIKKUN_PSALMS[(cy41.cycle - 1) % 10];
     const _tikkunCycleNum = inLeapCycle ? leapCycleNum : cy41.cycle;
     const _tikkunUrl   = 'https://www.sefaria.org/Tikkun_HaKlali.' + _tikkunCycleNum + '?lang=bi&with=Navigation';
-    const cycleCmd = CYCLE_COMMANDMENTS[cy41.cycle - 1];
+    const cycleCmd = CYCLE_COMMANDMENTS[(cy41.cycle - 1) % 9];
     const dayCmd   = TEN_COMMANDMENTS[cy41.commandmentDay - 1];
 
     // 54 parashiyot for leap year 55-day cycles (days 1–54); day 55 = Yechidah
