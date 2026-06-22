@@ -7806,38 +7806,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ` &nbsp;·&nbsp; <a href="https://www.theyeshiva.net/" target="_blank" style="color:var(--gold)">The Yeshiva</a>` +
       ` &nbsp;·&nbsp; <a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a>`;
 
-    // 6. Likutei Moharan — Part I = lessons 1–286, Part II (Tinyana) = 287–411
-    // Lessons 194–204 all fall on the 13th of Nissan (day 194); from day 195 onward, offset by 10.
-    const lmLesson       = d >= 195 ? d + 10 : d;
-    const LM_PART1_COUNT = 286;
-    const isLmPartII     = lmLesson > LM_PART1_COUNT;
-    const lmLessonInPart = isLmPartII ? lmLesson - LM_PART1_COUNT : lmLesson;
-    const lmPartLabel    = isLmPartII ? 'Part II — Tinyana' : 'Part I';
-    const lmData         = LM_THEMES[lmLesson];
-    const seferiaURL     = lmData
-      ? lmData.url
-      : isLmPartII
-        ? `https://www.sefaria.org/Likutei_Moharan%2C_Part_2.${lmLessonInPart}`
-        : `https://www.sefaria.org/Likutei_Moharan.${lmLesson}`;
-
-    document.getElementById('keter-lm-main').innerHTML = lmData
-      ? `${lmPartLabel} · Lesson <strong>${lmLessonInPart}</strong> — ${lmData.theme}` +
-        (lmData.summary ? `<br><span style="font-size:11px;color:var(--ink-mid);font-style:italic">${lmData.summary}</span>` : '')
-      : `${lmPartLabel} · Lesson <strong>${lmLessonInPart}</strong>`;
-
-    const lmLinkI_Maimon    = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Maimon</a>`;
-    const lmLinkII_Maimon   = `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Maimon</a>`;
-    const lmLinkLiving      = `<a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold)">Living Likutei Moharan</a>`;
-    const lmBreslovLinks    = isLmPartII
-      ? `${lmLinkII_Maimon} &nbsp;·&nbsp; ${lmLinkLiving}`
-      : `${lmLinkI_Maimon} &nbsp;·&nbsp; ${lmLinkLiving}`;
-
-    document.getElementById('keter-lm-meta').innerHTML =
-      `<strong>Likutei Moharan</strong> · Rebbe Nachman of Breslov &nbsp;·&nbsp; ` +
-      `<a href="${seferiaURL}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>` +
-      ` &nbsp;·&nbsp; ${lmBreslovLinks}`;
-
-    // 6b. Today's Likutei Moharan — Hebrew-date-pegged lesson (Keter detail section)
+    // 6. Likutei Moharan — Hebrew-date-pegged lesson (Keter summary + popup)
     // Every LM_DAILY_CYCLE entry names a specific Hebrew date, so lookup is by
     // (month, day), not a floating day count. Adar I (leap years only) uses
     // its own supplement, separate from the cycle below. On Elul 25-29 and
@@ -7846,19 +7815,40 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const lmDailies = isAdarI
       ? [LM_DAILY_CYCLE_ADAR1[hDay]].filter(Boolean)
       : lmEntriesForDate(hMonth, hDay).map(n => LM_DAILY_CYCLE[n]).filter(Boolean);
-    document.getElementById('lm-trigger').style.display = lmDailies.length ? '' : 'none';
-    if (lmDailies.length) {
-      _lmDetailMain = lmDailies.map(lmDaily => {
-        const lmDailyInfo = parseLmDailyLabel(lmDaily.lesson);
-        return `${lmDailyInfo.label}<br><span style="font-size:11px;color:var(--ink-mid)">${lmDaily.summary}</span>`;
-      }).join('<br><br>');
-      _lmDetailMeta = lmDailies.map(lmDaily => {
-        const lmDailyInfo = parseLmDailyLabel(lmDaily.lesson);
-        return lmDailyInfo.url
-          ? `<a href="${lmDailyInfo.url}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`
-          : '';
-      }).filter(Boolean).join(' &nbsp;·&nbsp; ');
+    const lmInfos = lmDailies.map(lmDaily => ({ daily: lmDaily, info: parseLmDailyLabel(lmDaily.lesson) }));
+
+    document.getElementById('keter-lm-main').innerHTML =
+      lmInfos.map(({ info }) => info.label).join('<br>') || 'Likutei Moharan';
+
+    const lmLinkI_Maimon  = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Maimon</a>`;
+    const lmLinkII_Maimon = `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Maimon</a>`;
+    const lmLinkLiving    = `<a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold)">Living Likutei Moharan</a>`;
+    const lmHasPartI  = lmInfos.some(({ daily }) => !daily.lesson.startsWith('Likutei Moharan II'));
+    const lmHasPartII = lmInfos.some(({ daily }) => daily.lesson.startsWith('Likutei Moharan II'));
+    const lmBreslovLinks = [lmHasPartI ? lmLinkI_Maimon : null, lmHasPartII ? lmLinkII_Maimon : null, lmLinkLiving]
+      .filter(Boolean).join(' &nbsp;·&nbsp; ');
+    const lmSefariaLinks = lmInfos.map(({ info }) =>
+      info.url ? `<a href="${info.url}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>` : ''
+    ).filter(Boolean).join(' &nbsp;·&nbsp; ');
+
+    document.getElementById('keter-lm-meta').innerHTML = lmInfos.length
+      ? `<strong>Likutei Moharan</strong> · Rebbe Nachman of Breslov &nbsp;·&nbsp; ${lmSefariaLinks} &nbsp;·&nbsp; ${lmBreslovLinks}`
+      : '';
+
+    document.getElementById('lm-trigger').style.display = lmInfos.length ? '' : 'none';
+    if (lmInfos.length) {
+      _lmDetailMain = lmInfos.map(({ daily, info }) =>
+        `${info.label}<br><span style="font-size:11px;color:var(--ink-mid)">${daily.summary}</span>`
+      ).join('<br><br>');
+      _lmDetailMeta = lmSefariaLinks;
     }
+
+    // For the Daily Script share text — summarize just the first lesson of the day
+    const lmFirst        = lmInfos[0];
+    const lmIsPartII     = lmFirst ? lmFirst.daily.lesson.startsWith('Likutei Moharan II') : false;
+    const lmPartLabel    = lmFirst ? (lmIsPartII ? 'Part II — Tinyana' : 'Part I') : null;
+    const lmLessonInPart = lmFirst ? +lmFirst.daily.lesson.match(/(\d+)$/)[1] : null;
+    const lmTheme        = (lmFirst && !lmIsPartII && LM_THEMES[lmLessonInPart]) ? LM_THEMES[lmLessonInPart].theme : null;
 
     // 7. Treasury of Chassidic Tales (R. S.Y. Zevin)
     const daf = getDafYomi(date);
@@ -9232,8 +9222,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Pack data for Daily Script
     _scriptData = {
       d, kotWeek: effectiveKotWeek, hDateStr,
-      lmPartLabel, lmLessonInPart,
-      lmTheme: lmData ? lmData.theme : null,
+      lmPartLabel, lmLessonInPart, lmTheme,
       kstTitleEn: _kstTitleEn,
       kstLabel:   _kstLabel,
       tehillimChapter,
