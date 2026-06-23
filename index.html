@@ -3012,6 +3012,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return entries.filter(Boolean);
   }
 
+  // Daily synthesis: leads with that day's Hayom Yom, then brings in a
+  // resonant idea from Yad HaChazakah (Rambam) — same shape and authoring
+  // approach as OHR_KITOV_DAILY above. Keyed identically to HAYOM_YOM
+  // ("month-day", Hebrew month number-day), since Hayom Yom is the anchor.
+  // Intentionally empty: entries are authored by hand, one key at a time.
+  // Shape: YOM_CHAZAK_DAILY[key] = { summary: "…" };
+  const YOM_CHAZAK_DAILY = {};
+
   // Hebrew month names in English for Breslov podcast episode lookup
   const HEB_MONTH_EN_PODCAST = {
     7:'Tishrei',8:'Cheshvan',9:'Kislev',10:'Tevet',
