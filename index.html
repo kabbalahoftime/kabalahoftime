@@ -1945,17 +1945,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         document.getElementById('yesod-parasha-name').innerHTML = mainHtml;
         document.getElementById('yesod-parasha-numbers').textContent = '';
 
-        // Tags
+        // Tags — one per unique quality letter shown above (day, then parasha(s), then cycle(s))
         const weekNum = nums.length > 0 ? nums.join(' · ') : 'N/A';
-        const cycleLetters = new Set(cycleQs.filter(Boolean).map(q => q.letter));
-        const parashaLetters = [...new Set(parashaQs.filter(Boolean).map(q => q.letter))]
-            .filter(l => !cycleLetters.has(l));
+        const seenLetters = new Set();
+        const tagLetters = [];
+        [dayQ, ...parashaQs, ...cycleQs].forEach(q => {
+            if (q && !seenLetters.has(q.letter)) { seenLetters.add(q.letter); tagLetters.push(q.letter); }
+        });
         const tagsEl = document.getElementById('yesod-tags');
         if (tagsEl) {
             tagsEl.innerHTML =
                 `<span class="tag highlight" style="white-space:nowrap">${foundParasha.name} · Shovavim Week ${weekNum}</span>` +
-                cycleQs.filter(Boolean).map(q => `<span class="tag" style="white-space:nowrap">${q.letter}</span>`).join('') +
-                parashaLetters.map(l => `<span class="tag" style="white-space:nowrap">${l}</span>`).join('');
+                tagLetters.map(l => `<span class="tag" style="white-space:nowrap">${l}</span>`).join('');
         }
 
         // Detail: attribute explanation rows
