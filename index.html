@@ -1901,12 +1901,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         if (!foundParasha) return;
 
         const nums = foundParasha.numbers;
-        const primaryNum = nums.length > 0 ? nums[0] : null;
-        const primaryData = primaryNum ? getCycleAndRelativeNumberForParasha(primaryNum) : null;
-        const parashaQ = primaryData ? getQualities(primaryData.relativeNumber) : null;
-        const cycleQ   = primaryData ? getQualities(primaryData.cycle) : null;
+        // For a double (or multi-) parasha week, every number gets its own cycle/relativeNumber
+        // and quality — not just nums[0] — so e.g. Chukat-Balak shows both Parasha 3 (Beit (1) /
+        // Mordechai) and Parasha 4 (Beit (2) / Esther), not just the first.
+        const parashaInfos = nums.map(getCycleAndRelativeNumberForParasha).filter(Boolean);
+        const primaryData = parashaInfos.length > 0 ? parashaInfos[0] : null;
+        const parashaQs = parashaInfos.map(pd => getQualities(pd.relativeNumber));
+        const cycleQs = [...new Map(parashaInfos.map(pd => [pd.cycle, getQualities(pd.cycle)])).values()];
+        const parashaQ = parashaQs.length > 0 ? parashaQs[0] : null;
+        const cycleQ   = cycleQs.length > 0 ? cycleQs[0] : null;
 
-        // Card face — parasha name, then three independent blocks: day / parasha / cycle
+        // Card face — parasha name, then independent blocks: day / parasha(s) / cycle(s)
         const _now = _ref;
         const _shovavimDay = (_now.getDay() === 6 && _now.getHours() >= 19) ? 8 : _now.getDay() + 1;
         const dayQ = getQualities(_shovavimDay);
@@ -1927,26 +1932,31 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
         let mainHtml = '';
         if (primaryData) {
+            const relNumsStr   = parashaInfos.map(pd => pd.relativeNumber).join(' and ');
+            const cycleNumsStr = [...new Set(parashaInfos.map(pd => pd.cycle))].join(' and ');
             mainHtml = `<strong>${foundParasha.name}</strong><br>` +
-                       `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${primaryData.relativeNumber}</strong> · Cycle <strong>${primaryData.cycle}</strong>` +
+                       `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${relNumsStr}</strong> · Cycle <strong>${cycleNumsStr}</strong>` +
                        qualityBlock(dayQ) +
-                       qualityBlock(parashaQ) +
-                       qualityBlock(cycleQ);
+                       parashaQs.map(qualityBlock).join('') +
+                       cycleQs.map(qualityBlock).join('');
         } else {
             mainHtml = foundParasha.name;
         }
         document.getElementById('yesod-parasha-name').innerHTML = mainHtml;
         document.getElementById('yesod-parasha-numbers').textContent = '';
 
-        // Tags
+        // Tags — one per unique quality letter shown above (day, then parasha(s), then cycle(s))
         const weekNum = nums.length > 0 ? nums.join(' · ') : 'N/A';
-        const sameQuality = parashaQ && cycleQ && parashaQ.letter === cycleQ.letter;
+        const seenLetters = new Set();
+        const tagLetters = [];
+        [dayQ, ...parashaQs, ...cycleQs].forEach(q => {
+            if (q && !seenLetters.has(q.letter)) { seenLetters.add(q.letter); tagLetters.push(q.letter); }
+        });
         const tagsEl = document.getElementById('yesod-tags');
         if (tagsEl) {
             tagsEl.innerHTML =
                 `<span class="tag highlight" style="white-space:nowrap">${foundParasha.name} · Shovavim Week ${weekNum}</span>` +
-                (cycleQ ? `<span class="tag" style="white-space:nowrap">${cycleQ.letter}</span>` : '') +
-                (parashaQ && !sameQuality ? `<span class="tag" style="white-space:nowrap">${parashaQ.letter}</span>` : '');
+                tagLetters.map(l => `<span class="tag" style="white-space:nowrap">${l}</span>`).join('');
         }
 
         // Detail: attribute explanation rows
