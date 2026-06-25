@@ -1572,6 +1572,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-main-text" id="binah-main">Loading…</div>
     <div class="sefirah-sub-text" id="binah-sub"></div>
     <div class="sefirah-tags" id="binah-tags"></div>
+    <div class="malchut-ksa-row" style="margin-top:8px">
+      <div class="keter-section-label">✦ KoT Book</div>
+      <div id="binah-kot-book">Loading…</div>
+    </div>
     <div class="sefirah-detail" id="binah-detail"></div>
   </div>
 </div>
@@ -2072,8 +2076,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           <div class="sefirah-sub-text" id="malchut-sub"></div>
         </div>
         <div class="malchut-section">
-          <div class="keter-section-label">✦ KoT Book</div>
-          <div id="malchut-book-face">Loading…</div>
+          <div class="keter-section-label">✦ Likutei Halachot</div>
+          <div id="malchut-lh-face">Loading…</div>
         </div>
         <div class="malchut-section">
           <div class="keter-section-label">✦ Sichos in English</div>
@@ -2084,11 +2088,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div class="malchut-ksa-row">
         <div class="keter-section-label">✦ Kitzur Shulchan Aruch</div>
         <div id="malchut-ksa-bottom">Loading…</div>
-      </div>
-      <!-- Likutei Halachot row -->
-      <div class="malchut-ksa-row">
-        <div class="keter-section-label">✦ Likutei Halachot</div>
-        <div id="malchut-lh-bottom">Loading…</div>
       </div>
     </div>
     <div class="sefirah-detail" id="malchut-detail">
@@ -9964,9 +9963,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('malchut-main').innerHTML = mainText;
     document.getElementById('malchut-sub').innerHTML = subText;
 
-    // Panel 2: KoT Book
+    // KoT Book — displayed on the Binah card face
     const bookParts = todayBook.book.split(' · ');
-    document.getElementById('malchut-book-face').innerHTML =
+    document.getElementById('binah-kot-book').innerHTML =
       `<span style="font-size:1.1em">${todayBook.emoji}</span> <strong>${bookParts[0]}</strong>` +
       (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '') +
       (todayBook.url ? `<br><a href="${todayBook.url}" target="_blank" style="color:var(--gold);font-size:0.85em">Read</a>` : '') +
@@ -10014,7 +10013,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // drip-fed in every 4th day of that stretch)
     (() => {
       const lhEntries = getLikuteiHalachotInfo(dEff);
-      const el = document.getElementById('malchut-lh-bottom');
+      const el = document.getElementById('malchut-lh-face');
       el.innerHTML = lhEntries.map(e => {
         const tag = e.source === 'SA' ? ' <span style="opacity:0.6;font-size:0.85em">(Shulchan Aruch)</span>' : '';
         return `<a href="${e.url}" target="_blank" style="color:var(--gold);font-size:0.88em">${e.label}</a>${tag}`;
