@@ -1481,11 +1481,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="section-divider" style="margin: 16px 0">
     <span class="divider-symbol">◆</span>
   </div>
-  <!-- HAYOM YOM resources -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Chassidus Further Study</div>
-    <div class="keter-main" id="keter-hy-links">Loading…</div>
-  </div>
   <!-- CHUMASH section -->
   <div class="keter-section">
     <div class="keter-section-label">✦ Chumash with Rashi</div>
@@ -8774,11 +8769,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       document.getElementById('keter-hayomyom').innerHTML =
         `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read today's Hayom Yom on Chabad.org</a>`;
     }
-    document.getElementById('keter-hy-meta').innerHTML = '';
-
-    document.getElementById('keter-hy-links').innerHTML =
+    document.getElementById('keter-hy-meta').innerHTML =
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>` +
-      ` &nbsp;·&nbsp; <a href="https://www.theyeshiva.net/" target="_blank" style="color:var(--gold)">The Yeshiva</a>` +
       ` &nbsp;·&nbsp; <a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a>`;
 
     // 6. Likutei Moharan — Hebrew-date-pegged lesson (Keter summary + popup)
