@@ -1714,6 +1714,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <div id="yesod-chok-english" style="font-size:0.88rem;margin-top:4px;"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Midrash</div>
+      <div id="yesod-midrash-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+      <div id="yesod-midrash-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ben Ish Chai</div>
       <div id="yesod-bic-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-bic-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
@@ -8659,6 +8663,62 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (_chabadZoharUrl2) _chokEnglishHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Zohar Chok L'Yisrael (II)</a>`;
       document.getElementById('yesod-chok-english').innerHTML = _chokEnglishHtml;
     }
+
+    // Midrash (Yesod card) — Midrash Rabbah (by chumash book) + Midrash Tanchuma
+    // (parasha-specific, both halves of a double parasha) on the weekly parasha.
+    // Reuses _zoharParasha / _zoharParashaNum / _zoharParashaNum2 / _zoharParts
+    // (already double-parasha-aware) computed for the Chok L'Yisrael Zohar links.
+    (() => {
+      const mainEl = document.getElementById('yesod-midrash-main');
+      const metaEl = document.getElementById('yesod-midrash-meta');
+      if (!mainEl) return;
+      const RABBAH = [
+        { max: 12, name: 'Bereishit Rabbah', slug: 'Bereishit_Rabbah' },
+        { max: 23, name: 'Shemot Rabbah',    slug: 'Shemot_Rabbah' },
+        { max: 33, name: 'Vayikra Rabbah',   slug: 'Vayikra_Rabbah' },
+        { max: 43, name: 'Bamidbar Rabbah',  slug: 'Bamidbar_Rabbah' },
+        { max: 54, name: 'Devarim Rabbah',   slug: 'Devarim_Rabbah' },
+      ];
+      // Sefaria Midrash Tanchuma parasha section slug, keyed by parasha number 1-54
+      const TANCHUMA = {
+        1:'Bereshit',2:'Noach',3:'Lech_Lecha',4:'Vayera',5:'Chayei_Sara',6:'Toldot',
+        7:'Vayetzei',8:'Vayishlach',9:'Vayeshev',10:'Miketz',11:'Vayigash',12:'Vayechi',
+        13:'Shemot',14:'Vaera',15:'Bo',16:'Beshalach',17:'Yitro',18:'Mishpatim',
+        19:'Terumah',20:'Tetzaveh',21:'Ki_Tisa',22:'Vayakhel',23:'Pekudei',24:'Vayikra',
+        25:'Tzav',26:'Shmini',27:'Tazria',28:'Metzora',29:'Achrei_Mot',30:'Kedoshim',
+        31:'Emor',32:'Behar',33:'Bechukotai',34:'Bamidbar',35:'Nasso',36:'Behaalotcha',
+        37:"Sh'lach",38:'Korach',39:'Chukat',40:'Balak',41:'Pinchas',42:'Matot',43:'Masei',
+        44:'Devarim',45:'Vaetchanan',46:'Eikev',47:"Re'eh",48:'Shoftim',49:'Ki_Teitzei',
+        50:'Ki_Tavo',51:'Nitzavim',52:'Vayelech',53:'Haazinu',54:"V'Zot_HaBerachah",
+      };
+      const goldA = (href, txt) => `<a href="${href}" target="_blank" style="color:var(--gold)">${txt}</a>`;
+
+      // Rabbah line — linked at the chumash-book level (Sefaria's Rabbah is chapter-, not parasha-indexed)
+      const vol = _zoharParashaNum ? RABBAH.find(b => _zoharParashaNum <= b.max) : null;
+      const rv = vol || RABBAH[0];
+      const rabbahLine = goldA(`https://www.sefaria.org/${rv.slug}?tab=contents`,
+        vol ? rv.name + (_zoharParasha ? ' — ' + _zoharParasha : '') : 'Midrash Rabbah on Sefaria');
+
+      // Tanchuma line — parasha-specific; both halves of a double parasha get their own link
+      const tanName = (num, label) => {
+        const slug = TANCHUMA[num];
+        return (slug && label) ? goldA(`https://www.sefaria.org/Midrash_Tanchuma,_${slug}`, label) : null;
+      };
+      const names = [];
+      const n1 = tanName(_zoharParashaNum, (_zoharParts[0] || _zoharParasha || '').trim());
+      if (n1) names.push(n1);
+      if (_zoharParashaNum2) {
+        const n2 = tanName(_zoharParashaNum2, (_zoharParts[1] || '').trim());
+        if (n2) names.push(n2);
+      }
+      const tanchumaLine = names.length
+        ? 'Tanchuma — ' + names.join(' &nbsp;·&nbsp; ')
+        : goldA('https://www.sefaria.org/Midrash_Tanchuma?tab=contents', 'Midrash Tanchuma on Sefaria');
+
+      mainEl.innerHTML = rabbahLine + '<br>' + tanchumaLine;
+      if (metaEl) metaEl.innerHTML = 'Midrash Rabbah · Midrash Tanchuma on the weekly parasha';
+    })();
+
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
     // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
     let _hodZoharMainHtml = '';
