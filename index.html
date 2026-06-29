@@ -1481,11 +1481,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="section-divider" style="margin: 16px 0">
     <span class="divider-symbol">◆</span>
   </div>
-  <!-- HAYOM YOM resources -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Chassidus Further Study</div>
-    <div class="keter-main" id="keter-hy-links">Loading…</div>
-  </div>
   <!-- CHUMASH section -->
   <div class="keter-section">
     <div class="keter-section-label">✦ Chumash with Rashi</div>
@@ -4928,6 +4923,367 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     },
   };
 
+  // Book 1 ("Song of Nature") — weekly "This Week" blog posts on
+  // kabbalahoftime.com, indexed by KoT week 1-52 (index 0 = week 1).
+  const BOOK1_WEEK_URLS = [
+    'https://www.kabbalahoftime.com/2013/09/week-1-book-1-to-raise-our-heads-choose.html',
+    'https://www.kabbalahoftime.com/2013/09/week-2-to-relate-well-to-others-and-to.html',
+    'https://www.kabbalahoftime.com/2013/09/week-3-from-book-to-be-happy-balanced.html',
+    'https://www.kabbalahoftime.com/2013/09/week-4-from-book-to-take-responsibility.html',
+    'https://www.kabbalahoftime.com/2013/10/week-5-from-book-to-use-all-tools.html',
+    'https://www.kabbalahoftime.com/2013/10/week-6-to-impact-world-laying.html',
+    'https://www.kabbalahoftime.com/2013/10/week-7-from-book-to-recognize-and.html',
+    'https://www.kabbalahoftime.com/2013/10/week-8-from-book-not-to-lose-focus-on.html',
+    'https://www.kabbalahoftime.com/2013/10/week-9-from-book-fighting-darkness-with.html',
+    'https://www.kabbalahoftime.com/2013/11/week-10-from-book-to-trust-in-g-ds-mercy.html',
+    'https://www.kabbalahoftime.com/2013/11/week-11-from-book-fighting-evil-and.html',
+    'https://www.kabbalahoftime.com/2013/11/week-12-from-book-revealing-warmth-to.html',
+    'https://www.kabbalahoftime.com/2013/11/week-13-from-book-to-publicize-miracles.html',
+    'https://www.kabbalahoftime.com/2013/12/week-14-from-book-to-believe-in-our-own.html',
+    'https://www.kabbalahoftime.com/2013/12/week-15-from-book-giving-proper-value.html',
+    'https://www.kabbalahoftime.com/2013/12/week-16-to-use-adversity-as-way-to-grow.html',
+    'https://www.kabbalahoftime.com/2013/12/week-17-from-book-to-pay-attention-to-g.html',
+    'https://www.kabbalahoftime.com/2013/12/week-18-from-book-to-live-in-harmony.html',
+    'https://www.kabbalahoftime.com/2014/01/week-19-from-book-to-feel-that-g-d-is.html',
+    'https://www.kabbalahoftime.com/2014/01/week-20-from-book-to-be-solid-and.html',
+    'https://www.kabbalahoftime.com/2014/01/week-21-from-book-to-keep-things-in.html',
+    'https://www.kabbalahoftime.com/2014/01/week-22-from-book-to-complement-each.html',
+    'https://www.kabbalahoftime.com/2014/02/week-23-from-book-to-be-happy-even.html',
+    'https://www.kabbalahoftime.com/2014/02/week-24-from-book-to-live-above-our.html',
+    'https://www.kabbalahoftime.com/2014/02/week-25-from-book-to-have-self.html',
+    'https://www.kabbalahoftime.com/2014/03/week-26-from-book-to-be-humble-and-let.html',
+    'https://www.kabbalahoftime.com/2014/04/week-27-from-book-to-purify-ourselves.html',
+    'https://www.kabbalahoftime.com/2014/04/week-28-from-book-to-recognize-our.html',
+    'https://www.kabbalahoftime.com/2014/04/week-29-from-book-after-initial.html',
+    'https://www.kabbalahoftime.com/2014/04/week-30-from-book-to-know-that-world.html',
+    'https://www.kabbalahoftime.com/2014/04/week-31-from-book-to-be-proud-of-our.html',
+    'https://www.kabbalahoftime.com/2014/05/week-32-to-recognize-deep-in-our-heart.html',
+    'https://www.kabbalahoftime.com/2014/05/week-33-to-recognize-spiritual.html',
+    'https://www.kabbalahoftime.com/2014/05/week-34-from-book-to-work-in-focused.html',
+    'https://www.kabbalahoftime.com/2014/05/week-35-from-book-to-thank-g-d-in-unison.html',
+    'https://www.kabbalahoftime.com/2014/06/week-36-from-book-to-have-emunah.html',
+    'https://www.kabbalahoftime.com/2014/06/week-37-from-book-to-maintain-our.html',
+    'https://www.kabbalahoftime.com/2014/06/week-38-from-book-to-be-strong-and.html',
+    'https://www.kabbalahoftime.com/2014/06/week-39-from-book-to-see-world-in.html',
+    'https://www.kabbalahoftime.com/2014/07/week-40-from-book-to-fight-for-truth.html',
+    'https://www.kabbalahoftime.com/2014/07/week-41-from-book-not-to-become-corrupt.html',
+    'https://www.kabbalahoftime.com/2014/07/week-42-to-be-loyal-and-pursue-justice.html',
+    'https://www.kabbalahoftime.com/2014/07/week-43-from-book-to-pursue-enemy-and.html',
+    'https://www.kabbalahoftime.com/2014/07/week-44-from-book-to-recognize-our.html',
+    'https://www.kabbalahoftime.com/2014/08/week-45-from-book-to-raise-ourselves-up.html',
+    'https://www.kabbalahoftime.com/2014/08/week-46-from-book-to-know-our-place-in.html',
+    'https://www.kabbalahoftime.com/2014/08/week-47-from-book-time-for-teshuvah.html',
+    'https://www.kabbalahoftime.com/2014/08/week-48-from-book-to-fight-coldness.html',
+    'https://www.kabbalahoftime.com/2014/09/week-49-from-book-to-bring-more-light.html',
+    'https://www.kabbalahoftime.com/2014/09/week-50-from-book-to-know-that-there.html',
+    'https://www.kabbalahoftime.com/2014/09/week-51-from-book-to-understand-that-we.html',
+    'https://www.kabbalahoftime.com/2014/09/week-52-from-book-to-crown-g-d-as-our.html',
+  ];
+  // Book 2 ("Song of Moses") — weekly "This Week" blog posts on
+  // kabbalahoftime.com, indexed by KoT week 1-52 (index 0 = week 1).
+  const BOOK2_WEEK_URLS = [
+    'https://www.kabbalahoftime.com/2013/09/week-1-book-2-rosh-hashanah-draft.html',
+    'https://www.kabbalahoftime.com/2013/09/week-2-book-2-yom-kippur-rain-and.html',
+    'https://www.kabbalahoftime.com/2013/09/week-3-book-2-calling-out-to-g-d-and.html',
+    'https://www.kabbalahoftime.com/2013/09/week-4-book-2-justice-speech-moses-beit.html',
+    'https://www.kabbalahoftime.com/2013/10/week-5-book-2-flood-aharon-and.html',
+    'https://www.kabbalahoftime.com/2013/10/week-6-book-2-being-pressed-to-perform.html',
+    'https://www.kabbalahoftime.com/2013/10/week-7-book-2-hearing-cry-of-rachel.html',
+    'https://www.kabbalahoftime.com/2013/10/week-8-book-2-humility-is-key.html',
+    'https://www.kabbalahoftime.com/2013/10/week-9-book-2-choosing-joy.html',
+    'https://www.kabbalahoftime.com/2013/11/week-10-book-2-samuel-and-purity.html',
+    'https://www.kabbalahoftime.com/2013/11/week-11-book-2-ministering-sages.html',
+    'https://www.kabbalahoftime.com/2013/11/week-12-book-2-nathan-and-friendship.html',
+    'https://www.kabbalahoftime.com/2013/11/week-13-book-2-david-and-avigail-and.html',
+    'https://www.kabbalahoftime.com/2013/12/week-14-book-2-solomon-and-having.html',
+    'https://www.kabbalahoftime.com/2013/12/week-5-book-2-prophet-iddo-and.html',
+    'https://www.kabbalahoftime.com/2013/12/week-16-michaiah-and-oral-torah.html',
+    'https://www.kabbalahoftime.com/2013/12/obadiah-and-minimized-business-activity.html',
+    'https://www.kabbalahoftime.com/2014/01/week-18-book-2-achia-hashiloni-and.html',
+    'https://www.kabbalahoftime.com/2014/01/week-19-book-2-jehu-and-minimized.html',
+    'https://www.kabbalahoftime.com/2014/01/week-20-book-2-azariah-and-minimized.html',
+    'https://www.kabbalahoftime.com/2014/01/week-21-book-2-jahaziel-and-minimized.html',
+    'https://www.kabbalahoftime.com/2014/01/week-22-book-2-adar-eliezer-son-of.html',
+    'https://www.kabbalahoftime.com/2014/02/week-23-book-2-slowness-to-anger.html',
+    'https://www.kabbalahoftime.com/2014/02/week-24-book-2-amos-and-good-heart.html',
+    'https://www.kabbalahoftime.com/2014/02/week-25-book-2-micah-morashite-and.html',
+    'https://www.kabbalahoftime.com/2014/03/week-26-book-2-destroying-our-arrogance.html',
+    'https://www.kabbalahoftime.com/2014/04/week-27-book-2-knowing-ones-place.html',
+    'https://www.kabbalahoftime.com/2014/04/week-28-book-2-elisha-and-being-happy.html',
+    'https://www.kabbalahoftime.com/2014/04/week-29-book-2-jonah-gechazi-and.html',
+    'https://www.kabbalahoftime.com/2014/04/week-30-book-2-giving-all-credit-to-g-d.html',
+    'https://www.kabbalahoftime.com/2014/04/week-31-book-2-rock-of-israel.html',
+    'https://www.kabbalahoftime.com/2014/05/week-32-book-2-light-that-comes-from.html',
+    'https://www.kabbalahoftime.com/2014/05/week-33-book-2-torah-that-comes-from.html',
+    'https://www.kabbalahoftime.com/2014/05/week-34-book-2-zephaniah-and-loving.html',
+    'https://www.kabbalahoftime.com/2014/05/week-35-book-2-uriah-and-loving-just.html',
+    'https://www.kabbalahoftime.com/2014/06/week-36-book-2-accepting-truth.html',
+    'https://www.kabbalahoftime.com/2014/06/week-37-book-2-strength-and-stability.html',
+    'https://www.kabbalahoftime.com/2014/06/week-38-book-2-daniel-and-not-acting.html',
+    'https://www.kabbalahoftime.com/2014/06/week-39-book-2-baruch-and-not-being.html',
+    'https://www.kabbalahoftime.com/2014/07/week-40-book-2-neriah-and-bearing.html',
+    'https://www.kabbalahoftime.com/2014/07/week-41-book-2-judgement-followed-by.html',
+    'https://www.kabbalahoftime.com/2014/07/week-42-book-2-mehsiah-and-being-placed.html',
+    'https://www.kabbalahoftime.com/2014/07/week-43-book-2-destruction-that-leads.html',
+    'https://www.kabbalahoftime.com/2014/08/week-44-book-2-zechariah-and-settling.html',
+    'https://www.kabbalahoftime.com/2014/08/week-45-book-2-malachi-and-quality-of.html',
+    'https://www.kabbalahoftime.com/2014/08/week-46-book-2-mordechai-and-quality-of.html',
+    'https://www.kabbalahoftime.com/2014/08/week-47-book-2-mashiach-ben-yosef-and.html',
+    'https://www.kabbalahoftime.com/2014/08/week-48-book-2-mashiach-ben-david-and.html',
+    'https://www.kabbalahoftime.com/2014/09/week-49-book-2-miriam-and-increasing.html',
+    'https://www.kabbalahoftime.com/2014/09/week-50-book-2-devorah-and-properly.html',
+    'https://www.kabbalahoftime.com/2014/09/week-51-book-2-chuldah-and-relating.html',
+    'https://www.kabbalahoftime.com/2014/09/week-52-book-2-esther-and-bringing.html',
+  ];
+  // Book 3 ("Song of the Sea") — weekly "This Week" blog posts on
+  // kabbalahoftime.com, indexed by KoT week 1-52 (index 0 = week 1).
+  const BOOK3_WEEK_URLS = [
+    'https://www.kabbalahoftime.com/2013/09/week-1-book-3-adam-draft.html',
+    'https://www.kabbalahoftime.com/2013/09/week-2-book-3-casting-our-ego-into.html',
+    'https://www.kabbalahoftime.com/2013/09/week-3-book-3-making-habitation-for-g-d.html',
+    'https://www.kabbalahoftime.com/2013/09/week-4-book-3-being-secluded-with-g-d.html',
+    'https://www.kabbalahoftime.com/2013/10/week-5-book-3-field-and-flood.html',
+    'https://www.kabbalahoftime.com/2013/10/week-6-book-2-descending-in-order-to.html',
+    'https://www.kabbalahoftime.com/2013/10/week-7-book-3-more-references-to-rachel.html',
+    'https://www.kabbalahoftime.com/2013/10/week-8-book-3-methuselah-and-affirming.html',
+    'https://www.kabbalahoftime.com/2013/10/week-9-book-3-lamech-and-avoiding-greek.html',
+    'https://www.kabbalahoftime.com/2013/11/week-10-noah-and-seeking-comfort.html',
+    'https://www.kabbalahoftime.com/2013/11/week-11-book-3-shem-and-being-truthful.html',
+    'https://www.kabbalahoftime.com/2017/10/week-12-book-3-arpachshad-and-fiery.html',
+    'https://www.kabbalahoftime.com/2013/11/week-13-book-3-shelah-and-chanukah.html',
+    'https://www.kabbalahoftime.com/2013/12/week-14-book-3-eber-and-fighting-off.html',
+    'https://www.kabbalahoftime.com/2013/12/week-15-book-3-peleg-and-evil-speech.html',
+    'https://www.kabbalahoftime.com/2013/12/week-16-book-3-overcoming-setbacks.html',
+    'https://www.kabbalahoftime.com/2013/12/week-17-book-3-avraham-serug-and-alter.html',
+    'https://www.kabbalahoftime.com/2014/01/week-18-book-3-nahor-and-continuity.html',
+    'https://www.kabbalahoftime.com/2014/01/week-19-book-3-terah-and-nature.html',
+    'https://www.kabbalahoftime.com/2014/01/week-20-book-3-avraham-and-potential.html',
+    'https://www.kabbalahoftime.com/2014/01/week-21-book-3-isaac-and-emunah.html',
+    'https://www.kabbalahoftime.com/2014/01/week-22-book-3-adar-and-ratzon-will.html',
+    'https://www.kabbalahoftime.com/2014/02/week-23-book-3-being-emissary.html',
+    'https://www.kabbalahoftime.com/2014/02/week-24-book-3-peretz-and-power-of-joy.html',
+    'https://www.kabbalahoftime.com/2014/02/week-25-book-3-hezron-and-sweetening.html',
+    'https://www.kabbalahoftime.com/2014/03/week-26-book-3-connecting-to-head.html',
+    'https://www.kabbalahoftime.com/2014/04/week-27-book-3-amminadab-emunah-self.html',
+    'https://www.kabbalahoftime.com/2014/04/week-28-book-3-nachshon-and-help-from.html',
+    'https://www.kabbalahoftime.com/2014/05/week-29-book-3-salmah-and-leaving-our.html',
+    'https://www.kabbalahoftime.com/2014/04/week-30-book-3-destruction-and-conquest.html',
+    'https://www.kabbalahoftime.com/2014/05/week-31-book-3-obed-and-working-hard.html',
+    'https://www.kabbalahoftime.com/2014/05/week-32-book-3-battling-for-land-laying.html',
+    'https://www.kabbalahoftime.com/2014/05/week-33-book-3-blessed-above-all-others.html',
+    'https://www.kabbalahoftime.com/2014/05/week-34-book-3-feeling-shalem-whole.html',
+    'https://www.kabbalahoftime.com/2014/05/week-35-book-3-to-be-united-and-not.html',
+    'https://www.kabbalahoftime.com/2014/06/week-36-book-3-not-leaving-learning-for.html',
+    'https://www.kabbalahoftime.com/2014/06/week-37-book-3-remembering-shavuot.html',
+    'https://www.kabbalahoftime.com/2014/06/week-38-book-3-preparing-for-summer.html',
+    'https://www.kabbalahoftime.com/2014/06/week-39-book-3-challenges-to-faith-in.html',
+    'https://www.kabbalahoftime.com/2014/07/week-40-book-3-returning-to-ourselves.html',
+    'https://www.kabbalahoftime.com/2014/07/week-41-book-3-standing-ones-ground.html',
+    'https://www.kabbalahoftime.com/2014/07/week-42-book-3-remembering-to-repent-in.html',
+    'https://www.kabbalahoftime.com/2014/07/week-43-book-3-facing-esau-edom.html',
+    'https://www.kabbalahoftime.com/2014/08/week-44-book-3-war-and-conquest.html',
+    'https://www.kabbalahoftime.com/2014/08/week-45-book-3-unity-and-upright.html',
+    'https://www.kabbalahoftime.com/2014/08/week-46-book-3-handling-crisis-with.html',
+    'https://www.kabbalahoftime.com/2014/08/week-47-book-3-hezekiah-and-teshuvah.html',
+    'https://www.kabbalahoftime.com/2014/08/week-48-book-3-manasseh-and-asking.html',
+    'https://www.kabbalahoftime.com/2014/09/week-49-book-3-amon-and-raising-lowest.html',
+    'https://www.kabbalahoftime.com/2014/09/week-50-book-3-josiah-and-emunah.html',
+    'https://www.kabbalahoftime.com/2014/09/week-51-book-3-using-understanding.html',
+    'https://www.kabbalahoftime.com/2014/09/week-52-book-3-crowning-g-d-as-our-king.html',
+  ];
+  // Book 4 ("Song of Hannah") — weekly "This Week" blog posts on
+  // kabbalahoftime.com, indexed by KoT week 1-52 (index 0 = week 1).
+  const BOOK4_WEEK_URLS = [
+    'https://www.kabbalahoftime.com/2013/09/week-1-book-4a-yenukah-draft.html',
+    'https://www.kabbalahoftime.com/2013/09/week-2-book-4a-chen-merit-life-and.html',
+    'https://www.kabbalahoftime.com/2013/09/week-3-book-4a-pilgrimage-and.html',
+    'https://www.kabbalahoftime.com/2013/09/week-4-book-4a-thinking-of-others.html',
+    'https://www.kabbalahoftime.com/2013/10/week-5-book-4a-loving-g-d-and-bringing.html',
+    'https://www.kabbalahoftime.com/2013/10/week-6-book-4a-dealing-with-difficult.html',
+    'https://www.kabbalahoftime.com/2013/10/week-7-book-4a-elevating-and-being.html',
+    'https://www.kabbalahoftime.com/2013/10/week-8-book-4a-rejoicing-with-creation.html',
+    'https://www.kabbalahoftime.com/2013/11/week-9-book-4a-enclothed-with-humility.html',
+    'https://www.kabbalahoftime.com/2013/11/week-10-book-4a-prayer-out-of-fear-of-g.html',
+    'https://www.kabbalahoftime.com/2013/11/week-11-book-4a-creating-kosher.html',
+    'https://www.kabbalahoftime.com/2013/11/week-12-book-4a-rosh-hashanah-of.html',
+    'https://www.kabbalahoftime.com/2013/11/week-13-book-4a-being-straightforward.html',
+    'https://www.kabbalahoftime.com/2013/12/week-14-book-4a-being-faithful.html',
+    'https://www.kabbalahoftime.com/2013/12/week-15-book-4a-handling-reproof.html',
+    'https://www.kabbalahoftime.com/2013/12/week-16-book-4a-bringing-oneself-close.html',
+    'https://www.kabbalahoftime.com/2013/12/week-17-book-4a-going-to-peace.html',
+    'https://www.kabbalahoftime.com/2014/01/week-18-book-4a-wisdom-that-brings.html',
+    'https://www.kabbalahoftime.com/2014/01/week-19-book-4a-wisdom-understanding.html',
+    'https://www.kabbalahoftime.com/2014/01/week-20-book-4a-hanging-in-there.html',
+    'https://www.kabbalahoftime.com/2014/01/week-21-book-4a-malchut-kingship.html',
+    'https://www.kabbalahoftime.com/2014/01/week-22-book-4a-male-power-versus.html',
+    'https://www.kabbalahoftime.com/2014/02/week-23-book-4a-coming-to-good-decision.html',
+    'https://www.kabbalahoftime.com/2014/02/week-24-book-4a-when-wine-comes-in.html',
+    'https://www.kabbalahoftime.com/2014/02/week-25-book-4a-ever-increasing.html',
+    'https://www.kabbalahoftime.com/2014/03/week-26-book-4a-big-picture.html',
+    'https://www.kabbalahoftime.com/2014/04/week-27-book-4a-he-becomes-modest.html',
+    'https://www.kabbalahoftime.com/2014/04/week-28-book-4a-being-patient-and-long.html',
+    'https://www.kabbalahoftime.com/2014/04/week-29-book-4a-forgiving-of-personal.html',
+    'https://www.kabbalahoftime.com/2014/04/week-3-book-4a-yehoshuah-and-being.html',
+    'https://www.kabbalahoftime.com/2014/05/week-31-book-4a-accepting-greatness.html',
+    'https://www.kabbalahoftime.com/2014/05/week-32-book-4a-ups-and-downs.html',
+    'https://www.kabbalahoftime.com/2014/05/week-33-book-4a-health-and-wealth.html',
+    'https://www.kabbalahoftime.com/2014/05/week-34-book-4a-tree-of-life.html',
+    'https://www.kabbalahoftime.com/2014/05/week-35-book-4a-true-wealth-and-honor.html',
+    'https://www.kabbalahoftime.com/2014/06/week-36-book-4a-crowns-of-torah.html',
+    'https://www.kabbalahoftime.com/2014/06/week-37-4a-years-of-life-and-length-of.html',
+    'https://www.kabbalahoftime.com/2014/06/week-38-book-4a-strength-and-long-life.html',
+    'https://www.kabbalahoftime.com/2014/07/week-39-book-4a-years-of-fullness-and.html',
+    'https://www.kabbalahoftime.com/2014/07/week-40-book-4a-getting-to-root-of.html',
+    'https://www.kabbalahoftime.com/2014/07/week-41-book-4a-not-corrupting-g-ds.html',
+    'https://www.kabbalahoftime.com/2014/07/week-42-book-4a-importance-of-giving.html',
+    'https://www.kabbalahoftime.com/2014/07/week-43-book-4a-israef-acquisition-of-g.html',
+    'https://www.kabbalahoftime.com/2014/08/week-44-book-4a-building-g-ds-house.html',
+    'https://www.kabbalahoftime.com/2014/08/week-45-book-4a-appreciating-true-beauty.html',
+    'https://www.kabbalahoftime.com/2014/08/week-46-book-4a-serving-g-d-with.html',
+    'https://www.kabbalahoftime.com/2014/08/week-47-book-4a-purpose-of-wealth.html',
+    'https://www.kabbalahoftime.com/2014/08/week-48-book-4a-to-honor-righteous.html',
+    'https://www.kabbalahoftime.com/2014/09/week-49-book-4a-g-ds-wisdom.html',
+    'https://www.kabbalahoftime.com/2014/09/week-50-book-4a-wisdom-that-comes-with.html',
+    'https://www.kabbalahoftime.com/2014/09/week-51-book-4a-wholeness-and-long-life.html',
+    'https://www.kabbalahoftime.com/2014/09/week-52-book-4a-parent-and-child.html',
+  ];
+  // Book 5 ("Song of Songs") — weekly "This Week" blog posts on
+  // kabbalahoftime.com, indexed by KoT week 1-52 (index 0 = week 1).
+  // (Source permalinks are slugged "4b" but belong to Book 5.)
+  const BOOK5_WEEK_URLS = [
+    'https://www.kabbalahoftime.com/2013/09/week-1-book-4b-reuven-draft.html',
+    'https://www.kabbalahoftime.com/2013/09/week-2-book-4b-yom-kippur-entering.html',
+    'https://www.kabbalahoftime.com/2013/09/week-3-book-4b-shepherds-dwellings.html',
+    'https://www.kabbalahoftime.com/2013/09/week-4-book-4b-crown-of-angel-metat.html',
+    'https://www.kabbalahoftime.com/2013/10/week-5-book-4b-temple-and-world-field.html',
+    'https://www.kabbalahoftime.com/2013/10/week-6-book-4b-temple-shimon-and.html',
+    'https://www.kabbalahoftime.com/2013/10/week-7-book-4b-love-and-temple.html',
+    'https://www.kabbalahoftime.com/2013/10/week-8-4b-lovesick.html',
+    'https://www.kabbalahoftime.com/2013/11/week-9-book-4b-beloved.html',
+    'https://www.kabbalahoftime.com/2013/11/week-10-book-4b-connecting-to-holiness.html',
+    'https://www.kabbalahoftime.com/2013/11/week-11-book-4b-staying-true-to-covenant.html',
+    'https://www.kabbalahoftime.com/2013/11/week-12-book-4b-longing-for-g-d.html',
+    'https://www.kabbalahoftime.com/2013/11/week-13-book-4b-finding-g-d-in-exile.html',
+    'https://www.kabbalahoftime.com/2013/12/week-14-book-4b-sticking-with-torah-and.html',
+    'https://www.kabbalahoftime.com/2013/12/week-15-book-4b-jerusalem-and-motherhood.html',
+    'https://www.kabbalahoftime.com/2013/12/week-16-book-4b-being-wife-and-midwife.html',
+    'https://www.kabbalahoftime.com/2013/12/week-17-book-4b-our-intimate-connection.html',
+    'https://www.kabbalahoftime.com/2014/01/week-18-book-4b-nature-as-metaphor-and.html',
+    'https://www.kabbalahoftime.com/2014/01/week-19-book-4b-pleasure-in-nature.html',
+    'https://www.kabbalahoftime.com/2014/01/week-20-book-4bperez-and-bursting-out.html',
+    'https://www.kabbalahoftime.com/2014/01/week-21book-4b-celebrating-sweet-fruit.html',
+    'https://www.kabbalahoftime.com/2014/01/week-22-book-4b-test-of-being-without.html',
+    'https://www.kabbalahoftime.com/2014/02/week-23-book-4b-when-hashem-and-our.html',
+    'https://www.kabbalahoftime.com/2014/02/week-24-book-4b-intoxicating-power-of.html',
+    'https://www.kabbalahoftime.com/2014/02/week-25-book-4b-learning-torah-and.html',
+    'https://www.kabbalahoftime.com/2014/03/week-26-book-4b-importance-of-speech.html',
+    'https://www.kabbalahoftime.com/2014/04/week-27-book-4b-faith-in-shepherd.html',
+    'https://www.kabbalahoftime.com/2014/04/week-28-book-4b-shimron-and-night-of.html',
+    'https://www.kabbalahoftime.com/2014/04/week-29-book-4b-feeling-chosen-our.html',
+    'https://www.kabbalahoftime.com/2014/04/week-30-book-4b-sered-nets-and-chains.html',
+    'https://www.kabbalahoftime.com/2014/05/week-31-book-4b-strong-and-praiseworthy.html',
+    'https://www.kabbalahoftime.com/2014/05/week-32-4b-securing-our-connection-to.html',
+    'https://www.kabbalahoftime.com/2014/05/week-33-book-4b-tzadik.html',
+    'https://www.kabbalahoftime.com/2014/05/week-34-book-4b-healing-and-rabbi.html',
+    'https://www.kabbalahoftime.com/2014/05/week-35-book-4b-feeling-hashems-desire.html',
+    'https://www.kabbalahoftime.com/2014/06/week-36-book-4b-chag-festival.html',
+    'https://www.kabbalahoftime.com/2014/06/week-38-book-4b-first-fruits.html',
+    'https://www.kabbalahoftime.com/2014/06/week-38-book-4b-unity-and-captivity.html',
+    'https://www.kabbalahoftime.com/2014/07/week-39-book-4b-feeling-harshness-of.html',
+    'https://www.kabbalahoftime.com/2014/07/week-40-book-4b-upholding-our-morality.html',
+    'https://www.kabbalahoftime.com/2014/07/week-41-book-4b-g-ds-right-and-left.html',
+    'https://www.kabbalahoftime.com/2014/07/week-42-book-4b-faithfulness-in-exile.html',
+    'https://www.kabbalahoftime.com/2014/07/week-43-book-4b-holding-on-through.html',
+    'https://www.kabbalahoftime.com/2014/08/week-44-book-4b-love-is-as-strong-as.html',
+    'https://www.kabbalahoftime.com/2014/08/week-45-book-4b-our-enduring-love-for-g.html',
+    'https://www.kabbalahoftime.com/2014/08/week-46-book-4b-enduring-through.html',
+    'https://www.kabbalahoftime.com/2014/08/week-47-book-4b-serach-and-month-of.html',
+    'https://www.kabbalahoftime.com/2014/08/week-48-book-4b-heber-and-to-be.html',
+    'https://www.kabbalahoftime.com/2014/09/week-49-book-4b-king-is-in-field.html',
+    'https://www.kabbalahoftime.com/2014/09/week-50-book-4b-kings-field.html',
+    'https://www.kabbalahoftime.com/2014/09/week-51-book-4b-speaking-to-king.html',
+    'https://www.kabbalahoftime.com/2014/09/week-52-book-4b-transforming-world-and.html',
+  ];
+  // Book 6 ("General Remedy") — weekly "This Week" blog posts on
+  // kabbalahoftime.com, indexed by KoT week 1-52 (index 0 = week 1).
+  // (Source permalinks are slugged "book-5"/"book-7" but belong to Book 6;
+  //  slug week-numbers are unreliable, so order is authoritative.)
+  const BOOK6_WEEK_URLS = [
+    'https://www.kabbalahoftime.com/2013/09/week-1-book-5-reviewing-week-of-rosh.html',
+    'https://www.kabbalahoftime.com/2013/09/book-5-review-of-week-of-yom-kippur.html',
+    'https://www.kabbalahoftime.com/2013/09/week-3-book-5-reviewing-week-of-first.html',
+    'https://www.kabbalahoftime.com/2013/09/week-4-book-5-reviewing-week-of.html',
+    'https://www.kabbalahoftime.com/2013/10/week-5-book-5-reviewing-week-of-rosh.html',
+    'https://www.kabbalahoftime.com/2013/10/week-6-book-5-reviewing-second-week-of.html',
+    'https://www.kabbalahoftime.com/2013/10/week-6-book-7-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2013/10/week-8-book-5-reviewing-fourth-week-of.html',
+    'https://www.kabbalahoftime.com/2013/11/week-8-book-5-reviewing-last-week-of.html',
+    'https://www.kabbalahoftime.com/2013/11/week-10-book-5-reviewing-second-week-of.html',
+    'https://www.kabbalahoftime.com/2013/11/week-11-book-5-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2013/11/week-12-book-5-reviewing-fourth-week-of.html',
+    'https://www.kabbalahoftime.com/2013/11/week-13-book-5-reviewing-fifth-week-of.html',
+    'https://www.kabbalahoftime.com/2013/12/week-14-book-5-reviewing-first-week-of.html',
+    'https://www.kabbalahoftime.com/2013/12/week-15-book-5-reviewing-second-week-of.html',
+    'https://www.kabbalahoftime.com/2013/12/week-16-book-5-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2013/12/week-17-book-5-reviewing-fourth-week-of.html',
+    'https://www.kabbalahoftime.com/2014/01/week-18-book-5-reviewing-first-week-of.html',
+    'https://www.kabbalahoftime.com/2014/01/week-19-book-5-reviewing-second-week-of.html',
+    'https://www.kabbalahoftime.com/2014/01/week-20-book-5-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2014/01/week-21-book-5-reviewing-last-week-of.html',
+    'https://www.kabbalahoftime.com/2014/02/week-22-book-5-reviewing-first-week-of.html',
+    'https://www.kabbalahoftime.com/2014/02/week-23-book-5-reviewing-second-week-of.html',
+    'https://www.kabbalahoftime.com/2014/02/week-24-book-5-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2014/02/week-24-book-5-reviewing-fourth-week-of.html',
+    'https://www.kabbalahoftime.com/2014/03/week-25-book-5-reviewing-week-of-rosh.html',
+    'https://www.kabbalahoftime.com/2014/04/week-26-book-5-reviewing-second-week-of.html',
+    'https://www.kabbalahoftime.com/2014/04/week-28-book-5-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2014/04/week-29-book-5-reviewing-fourth-week-of.html',
+    'https://www.kabbalahoftime.com/2014/04/week-30-book-5-reviewing-fifth-week-of.html',
+    'https://www.kabbalahoftime.com/2014/05/week-31-book-5-reviewing-first-week-of.html',
+    'https://www.kabbalahoftime.com/2014/05/week-32-book-5-reviewing-second-week-of.html',
+    'https://www.kabbalahoftime.com/2014/05/week-33-book-5-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2014/05/week-34-book-5-reviewing-fourth-week-of.html',
+    'https://www.kabbalahoftime.com/2014/06/week-35-book-5-reviewing-week-of-rosh.html',
+    'https://www.kabbalahoftime.com/2014/06/week-36-book-5-reviewing-second-week-of.html',
+    'https://www.kabbalahoftime.com/2014/06/week-36-book-5-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2014/06/week-38-book-5-reviewing-last-week-of.html',
+    'https://www.kabbalahoftime.com/2014/07/week-38-book-5-reviewing-week-of-rosh.html',
+    'https://www.kabbalahoftime.com/2014/07/week-39-book-5-reviewing-week-of-rosh.html',
+    'https://www.kabbalahoftime.com/2014/07/week-41-book-5-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2014/07/week-42-book-5-reviewing-last-week-of.html',
+    'https://www.kabbalahoftime.com/2014/07/week-43-book-5-reviewing-week-of-rosh.html',
+    'https://www.kabbalahoftime.com/2014/08/week-44-book-5-reviewing-week-of-tisha.html',
+    'https://www.kabbalahoftime.com/2014/08/week-45-book-5-reviewing-week-of-tu-bav.html',
+    'https://www.kabbalahoftime.com/2014/08/week-46-book-5-reviewing-last-week-of.html',
+    'https://www.kabbalahoftime.com/2014/08/week-47-book-5-reviewing-week-of-rosh.html',
+    'https://www.kabbalahoftime.com/2014/09/week-48-book-5-reviewing-second-week-of.html',
+    'https://www.kabbalahoftime.com/2014/09/week-49-book-5-reviewing-third-week-of.html',
+    'https://www.kabbalahoftime.com/2014/09/week-50-book-5-reviewing-fourth-week-of.html',
+    'https://www.kabbalahoftime.com/2014/09/week-51-book-5-reviewing-fourth-week-of.html',
+    'https://www.kabbalahoftime.com/2014/09/week-52-book-5-reviewing-week-of-rosh.html',
+  ];
+  // Chochmah KoT Book ("Hebrew Alphabet, Perek Shirah, and Pirkei Avot") —
+  // one blog post per 22-day Alef-Bet set, indexed by cy22.cycle 1-17
+  // (index 0 = set 1). Set 17 is the half-set of vowels.
+  const CHOCHMA_KOT_URLS = [
+    'https://www.kabbalahoftime.com/2014/09/first-set-of-22-days-alef-bet-heavens.html',
+    'https://www.kabbalahoftime.com/2013/09/second-set-of-22-days-gimmel-dalet-eden.html',
+    'https://www.kabbalahoftime.com/2013/10/third-set-of-22-days-heh-vav-desert.html',
+    'https://www.kabbalahoftime.com/2013/11/fourth-set-of-22-days-zayin-chet-waters.html',
+    'https://www.kabbalahoftime.com/2013/12/fifth-set-of-22-days-tet-yud-rivers.html',
+    'https://www.kabbalahoftime.com/2013/12/sixth-set-of-22-days-kaf-lamed-day-and.html',
+    'https://www.kabbalahoftime.com/2014/01/seventh-set-of-22-days-mem-nun-sun-and.html',
+    'https://www.kabbalahoftime.com/2014/03/eighth-set-of-22-days-samech-ayin-and.html',
+    'https://www.kabbalahoftime.com/2014/03/ninth-set-of-22-days-peh-and-tzaddik.html',
+    'https://www.kabbalahoftime.com/2014/04/tenth-set-of-22-days-kuf-and-reish-wind.html',
+    'https://www.kabbalahoftime.com/2014/05/eleventh-set-of-22-days-shin-and-tav.html',
+    'https://www.kabbalahoftime.com/2014/06/twelfth-set-of-22-days-kaf-sofit-trees.html',
+    'https://www.kabbalahoftime.com/2014/06/thirteenth-set-of-22-days-mem-sofit-fig.html',
+    'https://www.kabbalahoftime.com/2014/07/fourteenth-set-of-22-days-nun-sofit.html',
+    'https://www.kabbalahoftime.com/2014/08/twelfth-set-of-22-days-peh-sofit.html',
+    'https://www.kabbalahoftime.com/2014/08/sixteenth-set-of-22-days-tzadik-sofit.html',
+    'https://www.kabbalahoftime.com/2014/09/additional-half-set-vowels-and-grass.html',
+  ];
   const WEEKLY_BOOKS = [
   // W1
   { week:1, parasha:'Rosh Hashana / Haazinu',   month:'Tishrei',
@@ -8774,11 +9130,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       document.getElementById('keter-hayomyom').innerHTML =
         `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read today's Hayom Yom on Chabad.org</a>`;
     }
-    document.getElementById('keter-hy-meta').innerHTML = '';
-
-    document.getElementById('keter-hy-links').innerHTML =
+    document.getElementById('keter-hy-meta').innerHTML =
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>` +
-      ` &nbsp;·&nbsp; <a href="https://www.theyeshiva.net/" target="_blank" style="color:var(--gold)">The Yeshiva</a>` +
       ` &nbsp;·&nbsp; <a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a>`;
 
     // 6. Likutei Moharan — Hebrew-date-pegged lesson (Keter summary + popup)
@@ -9077,7 +9430,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // KoT Book — displayed on the Chochmah card face
     document.getElementById('chochmah-kot-book').innerHTML =
-      `<a href="https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/edit?usp=drivesdk&ouid=107762921026290173420&rtpof=true&sd=true" target="_blank" style="color:var(--gold);font-size:0.88em">Hebrew Alphabet, Perek Shirah, and Pirkei Avot</a>`;
+      `<a href="https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/edit?usp=drivesdk&ouid=107762921026290173420&rtpof=true&sd=true" target="_blank" style="color:var(--gold);font-size:0.88em">Hebrew Alphabet, Perek Shirah, and Pirkei Avot</a>` +
+      (CHOCHMA_KOT_URLS[cy22.cycle - 1]
+        ? ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_URLS[cy22.cycle - 1]}" target="_blank" style="color:var(--gold);font-size:0.88em">This Set</a>`
+        : '');
 
     document.getElementById('chochmah-detail').innerHTML = (inExtra && cy22Mic) ?
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year Microcosm — 28-Day Cycle</div>
@@ -9690,12 +10046,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
 
     const hodChazarahHtml =
-      `<div style="margin-bottom:4px;"></div>` +
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Talmud (Chazarah)</div>` +
       (daf
-        ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Read on Sefaria</a></span></div>` +
-          `<div class="detail-row"><span class="detail-label">Playlist:</span><span class="detail-value"><a href="https://youtube.com/playlist?list=PLZ25YnO3sEpExDguTOmn6hVXQOAweMH_c&si=K9P4qwh5yjOJgEdL" target="_blank" style="color:var(--gold)">Chazarah Playlist</a></span></div>`
-        : '');
+        ? `<div style="font-size:0.88rem;margin-bottom:10px;">${daf.name} ${daf.heb}, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Read on Sefaria</a></div>` +
+          `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://youtube.com/playlist?list=PLZ25YnO3sEpExDguTOmn6hVXQOAweMH_c&si=K9P4qwh5yjOJgEdL" target="_blank" style="color:var(--gold)">MDY Chazarah</a></div>`
+        : '') +
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
 
     const hodResourcesHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
@@ -9720,8 +10076,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
-        hodCcHtml +
         hodChazarahHtml +
+        hodCcHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div class="detail-row"><span class="detail-label">Chapters:</span><span class="detail-value">Orach Chaim ${hal.ch1} & ${hal.ch2}</span></div>` +
         `<div class="detail-row"><span class="detail-label">Commentary:</span><span class="detail-value">Mishnah Berurah by the Chofetz Chaim</span></div>` +
@@ -9743,8 +10099,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
-        hodCcHtml +
         hodChazarahHtml +
+        hodCcHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">Day ${d} of year · Section ${hal.section} of Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Topic:</span><span class="detail-value">Laws of proper speech (lashon hara, rechilut)</span></div>` +
@@ -9769,13 +10125,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // KoT Days: 1=Fri→Book1, 2=Shab→Book2, 3=Sun→Book3, 4=Mon→Book4, 5=Tue→Book5, 6=Wed→Book6, 7=Thu→Book7
       { book: 'Book 1 · Song of Nature',        emoji: '🐾',
         url: 'https://drive.google.com/file/d/1ZrQ4cd0pDe_tuFMwkCU79H1x431lyW-0/view?usp=drivesdk',
-        weekUrl: wk.b1_url || null,
+        weekUrl: BOOK1_WEEK_URLS[wk.week - 1] || null,
         fields: [{ label: 'Weekly Theme',      value: wk.b1_theme },
                  { label: 'Perek Shirah',      value: wk.b1_animal },
                  { label: 'Pirkei Avot',       value: wk.b1_avot }] },
       { book: 'Book 2 · Song of Moses',        emoji: '📜',
         url: 'https://drive.google.com/file/d/14inXTz6KRLUF7m5X130DSzWvaUUyaTsj/view?usp=drivesdk',
-        weekUrl: wk.b2_url || null,
+        weekUrl: BOOK2_WEEK_URLS[wk.week - 1] || null,
         fields: [
           { label: '48 Qualities',      value: wk.b2_quality },
           { label: 'Prophet',           value: wk.b2_prophet },
@@ -9785,7 +10141,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ] },
       { book: 'Book 3 · Song of the Sea',      emoji: '🌾',
         url: 'https://drive.google.com/file/d/1x6JhUwY8D1pd4HnBWymn5J11fMM4SBra/view?usp=drivesdk',
-        weekUrl: wk.b3_url || null,
+        weekUrl: BOOK3_WEEK_URLS[wk.week - 1] || null,
         fields: [
           { label: 'Genealogy',        value: wk.b3_ruth },
           { label: 'Haftara',          value: wk.b3_haftara },
@@ -9795,7 +10151,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // BOOK 4: Song of Hannah (Saved in 2016)
       { book: 'Book 4 · Song of Hannah',       emoji: '💎',
         url: 'https://drive.google.com/file/d/1gW4vbY2T2_LWViwYNP5Anx6XhKVsPIva/view?usp=drivesdk',
-        weekUrl: wk.b4_url || null,
+        weekUrl: BOOK4_WEEK_URLS[wk.week - 1] || null,
         fields: [
           { label: 'Writings of<br>King Solomon', value: wk.b4_proverbs },
           { label: 'Hannah\'s Song',     value: wk.b4_hannah },
@@ -9804,7 +10160,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ] },
       { book: 'Book 5 · Song of Songs',      emoji: '🌹',
         url: 'https://drive.google.com/file/d/1-ukVcYEN-Nykj2FezjoCb2DWM1U_EXj9/view?usp=drivesdk',
-        weekUrl: wk.b5_url || null,
+        weekUrl: BOOK5_WEEK_URLS[wk.week - 1] || null,
         fields: [
           { label: 'Song of Songs',     value: wk.b5_shir },
           { label: 'Seventy Souls',     value: wk.b5_souls },
@@ -9813,7 +10169,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ] },
       { book: 'Book 6 · General Remedy',      emoji: '🎵',
         url: 'https://drive.google.com/file/d/1i601oP9U0rGc6oiPM-HhCczXPDYKsaR8/view?usp=drivesdk',
-        weekUrl: wk.b6_url || null,
+        weekUrl: BOOK6_WEEK_URLS[wk.week - 1] || null,
         fields: [
           { label: 'Tehilim/Perek Shirah',  value: wk.b6_psalms },
           { label: 'Tikkun HaKlali',        value: wk.b6_tikkun },
