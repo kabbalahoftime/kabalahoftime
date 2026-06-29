@@ -5262,6 +5262,28 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'https://www.kabbalahoftime.com/2014/09/week-51-book-5-reviewing-fourth-week-of.html',
     'https://www.kabbalahoftime.com/2014/09/week-52-book-5-reviewing-week-of-rosh.html',
   ];
+  // Chochmah KoT Book ("Hebrew Alphabet, Perek Shirah, and Pirkei Avot") —
+  // one blog post per 22-day Alef-Bet set, indexed by cy22.cycle 1-17
+  // (index 0 = set 1). Set 17 is the half-set of vowels.
+  const CHOCHMA_KOT_URLS = [
+    'https://www.kabbalahoftime.com/2014/09/first-set-of-22-days-alef-bet-heavens.html',
+    'https://www.kabbalahoftime.com/2013/09/second-set-of-22-days-gimmel-dalet-eden.html',
+    'https://www.kabbalahoftime.com/2013/10/third-set-of-22-days-heh-vav-desert.html',
+    'https://www.kabbalahoftime.com/2013/11/fourth-set-of-22-days-zayin-chet-waters.html',
+    'https://www.kabbalahoftime.com/2013/12/fifth-set-of-22-days-tet-yud-rivers.html',
+    'https://www.kabbalahoftime.com/2013/12/sixth-set-of-22-days-kaf-lamed-day-and.html',
+    'https://www.kabbalahoftime.com/2014/01/seventh-set-of-22-days-mem-nun-sun-and.html',
+    'https://www.kabbalahoftime.com/2014/03/eighth-set-of-22-days-samech-ayin-and.html',
+    'https://www.kabbalahoftime.com/2014/03/ninth-set-of-22-days-peh-and-tzaddik.html',
+    'https://www.kabbalahoftime.com/2014/04/tenth-set-of-22-days-kuf-and-reish-wind.html',
+    'https://www.kabbalahoftime.com/2014/05/eleventh-set-of-22-days-shin-and-tav.html',
+    'https://www.kabbalahoftime.com/2014/06/twelfth-set-of-22-days-kaf-sofit-trees.html',
+    'https://www.kabbalahoftime.com/2014/06/thirteenth-set-of-22-days-mem-sofit-fig.html',
+    'https://www.kabbalahoftime.com/2014/07/fourteenth-set-of-22-days-nun-sofit.html',
+    'https://www.kabbalahoftime.com/2014/08/twelfth-set-of-22-days-peh-sofit.html',
+    'https://www.kabbalahoftime.com/2014/08/sixteenth-set-of-22-days-tzadik-sofit.html',
+    'https://www.kabbalahoftime.com/2014/09/additional-half-set-vowels-and-grass.html',
+  ];
   const WEEKLY_BOOKS = [
   // W1
   { week:1, parasha:'Rosh Hashana / Haazinu',   month:'Tishrei',
@@ -9408,7 +9430,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // KoT Book — displayed on the Chochmah card face
     document.getElementById('chochmah-kot-book').innerHTML =
-      `<a href="https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/edit?usp=drivesdk&ouid=107762921026290173420&rtpof=true&sd=true" target="_blank" style="color:var(--gold);font-size:0.88em">Hebrew Alphabet, Perek Shirah, and Pirkei Avot</a>`;
+      `<a href="https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/edit?usp=drivesdk&ouid=107762921026290173420&rtpof=true&sd=true" target="_blank" style="color:var(--gold);font-size:0.88em">Hebrew Alphabet, Perek Shirah, and Pirkei Avot</a>` +
+      (CHOCHMA_KOT_URLS[cy22.cycle - 1]
+        ? ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_URLS[cy22.cycle - 1]}" target="_blank" style="color:var(--gold);font-size:0.88em">This Set</a>`
+        : '');
 
     document.getElementById('chochmah-detail').innerHTML = (inExtra && cy22Mic) ?
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year Microcosm — 28-Day Cycle</div>
