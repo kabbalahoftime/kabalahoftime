@@ -9690,12 +9690,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
 
     const hodChazarahHtml =
-      `<div style="margin-bottom:4px;"></div>` +
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Talmud (Chazarah)</div>` +
       (daf
-        ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Read on Sefaria</a></span></div>` +
-          `<div class="detail-row"><span class="detail-label">Playlist:</span><span class="detail-value"><a href="https://youtube.com/playlist?list=PLZ25YnO3sEpExDguTOmn6hVXQOAweMH_c&si=K9P4qwh5yjOJgEdL" target="_blank" style="color:var(--gold)">Chazarah Playlist</a></span></div>`
-        : '');
+        ? `<div style="font-size:0.88rem;margin-bottom:10px;">${daf.name} ${daf.heb}, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Read on Sefaria</a></div>` +
+          `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://youtube.com/playlist?list=PLZ25YnO3sEpExDguTOmn6hVXQOAweMH_c&si=K9P4qwh5yjOJgEdL" target="_blank" style="color:var(--gold)">MDY Chazarah</a></div>`
+        : '') +
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
 
     const hodResourcesHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
@@ -9720,8 +9720,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
-        hodCcHtml +
         hodChazarahHtml +
+        hodCcHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div class="detail-row"><span class="detail-label">Chapters:</span><span class="detail-value">Orach Chaim ${hal.ch1} & ${hal.ch2}</span></div>` +
         `<div class="detail-row"><span class="detail-label">Commentary:</span><span class="detail-value">Mishnah Berurah by the Chofetz Chaim</span></div>` +
@@ -9743,8 +9743,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
-        hodCcHtml +
         hodChazarahHtml +
+        hodCcHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">Day ${d} of year · Section ${hal.section} of Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Topic:</span><span class="detail-value">Laws of proper speech (lashon hara, rechilut)</span></div>` +
