@@ -1714,6 +1714,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <div id="yesod-chok-english" style="font-size:0.88rem;margin-top:4px;"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Midrash</div>
+      <div id="yesod-midrash-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+      <div id="yesod-midrash-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ben Ish Chai</div>
       <div id="yesod-bic-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-bic-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
@@ -8659,6 +8663,28 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (_chabadZoharUrl2) _chokEnglishHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Zohar Chok L'Yisrael (II)</a>`;
       document.getElementById('yesod-chok-english').innerHTML = _chokEnglishHtml;
     }
+
+    // Midrash Rabbah (Yesod card) — the Midrash on the weekly parasha, by chumash book.
+    // Reuses _zoharParasha / _zoharParashaNum (already double-parasha-aware) from above.
+    (() => {
+      const mainEl = document.getElementById('yesod-midrash-main');
+      const metaEl = document.getElementById('yesod-midrash-meta');
+      if (!mainEl) return;
+      const RABBAH = [
+        { max: 12, name: 'Bereishit Rabbah', slug: 'Bereishit_Rabbah' },
+        { max: 23, name: 'Shemot Rabbah',    slug: 'Shemot_Rabbah' },
+        { max: 33, name: 'Vayikra Rabbah',   slug: 'Vayikra_Rabbah' },
+        { max: 43, name: 'Bamidbar Rabbah',  slug: 'Bamidbar_Rabbah' },
+        { max: 54, name: 'Devarim Rabbah',   slug: 'Devarim_Rabbah' },
+      ];
+      const vol = _zoharParashaNum ? RABBAH.find(b => _zoharParashaNum <= b.max) : null;
+      const v = vol || RABBAH[0];
+      mainEl.innerHTML =
+        `<a href="https://www.sefaria.org/${v.slug}?tab=contents" target="_blank" style="color:var(--gold)">` +
+        `${vol ? v.name + (_zoharParasha ? ' — ' + _zoharParasha : '') : 'Midrash Rabbah on Sefaria'}</a>`;
+      if (metaEl) metaEl.innerHTML = 'Midrash Rabbah on the weekly parasha';
+    })();
+
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
     // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
     let _hodZoharMainHtml = '';
