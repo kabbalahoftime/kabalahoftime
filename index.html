@@ -8756,7 +8756,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // 4. Rambam — three cycles
     const chabadRambam = `https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters`;
     document.getElementById('keter-rambam-face').innerHTML =
-      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">View today's Sefer HaMitzvos</a>`;
+      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">Sefer HaMitzvos</a>` +
+      ` &nbsp;·&nbsp; <a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">Hayom Yom</a>`;
     document.getElementById('keter-rambam-main').innerHTML =
       `<a href="${chabadRambam}/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters)</a>`;
     document.getElementById('keter-rambam-meta').innerHTML = '';
@@ -9129,15 +9130,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     })();
 
     // 5. Hayom Yom
-    const chabadURL  = `${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}`;
     const hyText = getHayomYom(hMonth, hDay);
-    if (hyText) {
-      document.getElementById('keter-hayomyom').innerHTML =
-        `"${hyText}" &nbsp;<a href="${chabadURL}" target="_blank" style="color:var(--gold);font-style:normal;font-size:11px">full entry</a>`;
-    } else {
-      document.getElementById('keter-hayomyom').innerHTML =
-        `<a href="${chabadURL}" target="_blank" style="color:var(--gold)">Read today's Hayom Yom on Chabad.org</a>`;
-    }
+    document.getElementById('keter-hayomyom').innerHTML =
+      hyText ? `<span style="font-size:11px">"${hyText}"</span>` : '';
     document.getElementById('keter-hy-meta').innerHTML =
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>` +
       ` &nbsp;·&nbsp; <a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a>`;
