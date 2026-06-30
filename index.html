@@ -9379,22 +9379,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         document.getElementById('keter-kst-main').innerHTML =
           `<a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>` + ohLine;
       }
-      // Parsha & Haftorah music (Chabad) — keyed to the current parasha; both halves on a
-      // double week (resolved from the split name, since a combined name maps to one number).
+      // Parasha & Haftorah recordings (Chabad) — keyed to the current parasha; both halves
+      // on a double week (resolved from the split name, since a combined name maps to one).
       const _pmNum1 = kstParts[0] ? PARASHA_TO_NUMBER[kstParts[0]] : null;
       const _pmNum2 = kstParts.length > 1 ? PARASHA_TO_NUMBER[kstParts[1]] : null;
-      const _musicLine = (label, map) => {
-        const _A = (href, txt) => `<a href="${href}" target="_blank" style="color:var(--gold)">${txt}</a>`;
-        const u1 = _pmNum1 ? (map[_pmNum1] || null) : null;
-        const u2 = _pmNum2 ? (map[_pmNum2] || null) : null;
-        if (u1 && u2) return `🎵 ${label}: ${_A(u1, kstParts[0])} &nbsp;·&nbsp; ${_A(u2, kstParts[1])}`;
-        if (u1) return _A(u1, `🎵 ${label}`);
-        if (u2) return _A(u2, `🎵 ${label} (${kstParts[1]})`);
-        return '';
-      };
-      document.getElementById('keter-kst-meta').innerHTML =
-        [_musicLine('Parsha Music', PARASHA_MUSIC_URLS), _musicLine('Haftorah', PARASHA_HAFTORAH_URLS)]
-          .filter(Boolean).join('<br>');
+      const _recA = (href, txt) => `<a href="${href}" target="_blank" style="color:var(--gold)">${txt}</a>`;
+      const _rt1 = _pmNum1 ? (PARASHA_MUSIC_URLS[_pmNum1] || null) : null;
+      const _rt2 = _pmNum2 ? (PARASHA_MUSIC_URLS[_pmNum2] || null) : null;
+      const _rh1 = _pmNum1 ? (PARASHA_HAFTORAH_URLS[_pmNum1] || null) : null;
+      const _rh2 = _pmNum2 ? (PARASHA_HAFTORAH_URLS[_pmNum2] || null) : null;
+      let _recHtml = '';
+      if (_rt1 || _rt2 || _rh1 || _rh2) {
+        _recHtml = '🎵 Parasha &amp; Haftorah Recordings';
+        if (_pmNum2) {
+          const _tL = [_rt1 && _recA(_rt1, kstParts[0]), _rt2 && _recA(_rt2, kstParts[1])].filter(Boolean).join(' &nbsp;·&nbsp; ');
+          const _hL = [_rh1 && _recA(_rh1, kstParts[0]), _rh2 && _recA(_rh2, kstParts[1])].filter(Boolean).join(' &nbsp;·&nbsp; ');
+          if (_tL) _recHtml += `<br>Parasha: ${_tL}`;
+          if (_hL) _recHtml += `<br>Haftorah: ${_hL}`;
+        } else {
+          const _parts = [_rt1 && _recA(_rt1, 'Parasha'), _rh1 && _recA(_rh1, 'Haftorah')].filter(Boolean).join(' &nbsp;·&nbsp; ');
+          _recHtml += `<br>${_parts}`;
+        }
+      }
+      document.getElementById('keter-kst-meta').innerHTML = _recHtml;
 
       // 5b. Ohr KiTov — daily synthesis (Keter Shem Tov + Or HaChaim HaKadosh)
       // Collects every KST_DATA key active today (kst/kst2, plus their Shabbat
