@@ -5660,6 +5660,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     5: 'https://www.chabad.org/multimedia/music_cdo/aid/982085/jewish/Chayei-Sarah.htm',
     6: 'https://www.chabad.org/multimedia/music_cdo/aid/982086/jewish/Toldos.htm',
     7: 'https://www.chabad.org/multimedia/music_cdo/aid/982087/jewish/Vayeitzei.htm',
+    8: 'https://www.chabad.org/multimedia/music_cdo/aid/982088/jewish/Vayishlach.htm',
     9: 'https://www.chabad.org/multimedia/music_cdo/aid/982089/jewish/Vayeishev.htm',
     10: 'https://www.chabad.org/multimedia/music_cdo/aid/982090/jewish/Mikeitz.htm',
     11: 'https://www.chabad.org/multimedia/music_cdo/aid/982091/jewish/Vayigash.htm',
@@ -5706,6 +5707,63 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     52: 'https://www.chabad.org/multimedia/music_cdo/aid/1014833/jewish/Vayelech.htm',
     53: 'https://www.chabad.org/multimedia/music_cdo/aid/1014846/jewish/Haazinu.htm',
     54: 'https://www.chabad.org/multimedia/music_cdo/aid/1014849/jewish/VZos-HaBerachah.htm',
+  };
+  // Chabad haftorah-music pages, keyed by parasha number 1-54 (Tetzaveh #20 pending).
+  const PARASHA_HAFTORAH_URLS = {
+    1: 'https://www.chabad.org/multimedia/music_cdo/aid/1022123/jewish/Haftorah-Bereishis.htm',
+    2: 'https://www.chabad.org/multimedia/music_cdo/aid/1022127/jewish/Haftorah-Noach.htm',
+    3: 'https://www.chabad.org/multimedia/music_cdo/aid/1022131/jewish/Haftorah-Lech-Lecha.htm',
+    4: 'https://www.chabad.org/multimedia/music_cdo/aid/1022133/jewish/Haftorah-Vayeira.htm',
+    5: 'https://www.chabad.org/multimedia/music_cdo/aid/1022134/jewish/Haftorah-Chayei-Sarah.htm',
+    6: 'https://www.chabad.org/multimedia/music_cdo/aid/4323612/jewish/Haftorah-Toldos.htm',
+    7: 'https://www.chabad.org/multimedia/music_cdo/aid/5005280/jewish/Haftorah-Vayeitzei.htm',
+    8: 'https://www.chabad.org/multimedia/music_cdo/aid/1098437/jewish/Haftorah-Vayishlach.htm',
+    9: 'https://www.chabad.org/multimedia/music_cdo/aid/6287796/jewish/Haftorah-Vayeshev.htm',
+    10: 'https://www.chabad.org/multimedia/music_cdo/aid/6287829/jewish/Haftorah-Miketz.htm',
+    11: 'https://www.chabad.org/multimedia/music_cdo/aid/1098444/jewish/Haftorah-Vayigash.htm',
+    12: 'https://www.chabad.org/multimedia/music_cdo/aid/1098445/jewish/Haftorah-Vayechi.htm',
+    13: 'https://www.chabad.org/multimedia/music_cdo/aid/1098452/jewish/Haftorah-Shemos.htm',
+    14: 'https://www.chabad.org/multimedia/music_cdo/aid/1098454/jewish/Haftorah-Vaeira.htm',
+    15: 'https://www.chabad.org/multimedia/music_cdo/aid/1098455/jewish/Haftorah-Bo.htm',
+    16: 'https://www.chabad.org/multimedia/music_cdo/aid/1098457/jewish/Haftorah-Beshalach.htm',
+    17: 'https://www.chabad.org/multimedia/music_cdo/aid/1098459/jewish/Haftorah-Yisro.htm',
+    18: 'https://www.chabad.org/multimedia/music_cdo/aid/3237717/jewish/Haftorah-Mishpatim.htm',
+    19: 'https://www.chabad.org/multimedia/music_cdo/aid/1098461/jewish/Haftorah-Terumah.htm',
+    20: 'https://www.chabad.org/multimedia/music_cdo/aid/3237734/jewish/Haftorah-Tetzaveh.htm',
+    21: 'https://www.chabad.org/multimedia/music_cdo/aid/3237743/jewish/Haftorah-Ki-Sisa.htm',
+    22: 'https://www.chabad.org/multimedia/music_cdo/aid/3237750/jewish/Haftorah-Vayakhel.htm',
+    23: 'https://www.chabad.org/multimedia/music_cdo/aid/6287843/jewish/Haftorah-Pekudei.htm',
+    24: 'https://www.chabad.org/multimedia/music_cdo/aid/6287849/jewish/Haftorah-Vayikra.htm',
+    25: 'https://www.chabad.org/multimedia/music_cdo/aid/1098462/jewish/Haftorah-Tzav.htm',
+    26: 'https://www.chabad.org/multimedia/music_cdo/aid/6287905/jewish/Haftorah-Shemini.htm',
+    27: 'https://www.chabad.org/multimedia/music_cdo/aid/6287907/jewish/Haftorah-Tazria.htm',
+    28: 'https://www.chabad.org/multimedia/music_cdo/aid/6287909/jewish/Haftorah-Metzora.htm',
+    29: 'https://www.chabad.org/multimedia/music_cdo/aid/3237773/jewish/Haftorah-Acharei.htm',
+    30: 'https://www.chabad.org/multimedia/music_cdo/aid/6287911/jewish/Haftorah-Kedoshim.htm',
+    31: 'https://www.chabad.org/multimedia/music_cdo/aid/5005288/jewish/Haftorah-Emor.htm',
+    32: 'https://www.chabad.org/multimedia/music_cdo/aid/6287916/jewish/Haftorah-Behar.htm',
+    33: 'https://www.chabad.org/multimedia/music_cdo/aid/3237778/jewish/Haftorah-Bechukosai.htm',
+    34: 'https://www.chabad.org/multimedia/music_cdo/aid/3237783/jewish/Haftorah-Bamidbar.htm',
+    35: 'https://www.chabad.org/multimedia/music_cdo/aid/6287984/jewish/Haftorah-Naso.htm',
+    36: 'https://www.chabad.org/multimedia/music_cdo/aid/3237795/jewish/Haftorah-Behaalosecha.htm',
+    37: 'https://www.chabad.org/multimedia/music_cdo/aid/3237841/jewish/Haftorah-Shelach.htm',
+    38: 'https://www.chabad.org/multimedia/music_cdo/aid/5005439/jewish/Haftorah-Korach.htm',
+    39: 'https://www.chabad.org/multimedia/music_cdo/aid/6287986/jewish/Haftorah-Chukat.htm',
+    40: 'https://www.chabad.org/multimedia/music_cdo/aid/3237850/jewish/Haftorah-Balak.htm',
+    41: 'https://www.chabad.org/multimedia/music_cdo/aid/6287988/jewish/Haftorah-Pinchas.htm',
+    42: 'https://www.chabad.org/multimedia/music_cdo/aid/6287989/jewish/Haftorah-Matot.htm',
+    43: 'https://www.chabad.org/multimedia/music_cdo/aid/3237852/jewish/Haftorah-Masei.htm',
+    44: 'https://www.chabad.org/multimedia/music_cdo/aid/3237861/jewish/Haftorah-Devarim.htm',
+    45: 'https://www.chabad.org/multimedia/music_cdo/aid/3237863/jewish/Haftorah-Vaeschanan.htm',
+    46: 'https://www.chabad.org/multimedia/music_cdo/aid/3237864/jewish/Haftorah-Eikev.htm',
+    47: 'https://www.chabad.org/multimedia/music_cdo/aid/3237865/jewish/Haftorah-Reeh.htm',
+    48: 'https://www.chabad.org/multimedia/music_cdo/aid/3237872/jewish/Haftorah-Shoftim.htm',
+    49: 'https://www.chabad.org/multimedia/music_cdo/aid/3237889/jewish/Haftorah-Ki-Seitzei.htm',
+    50: 'https://www.chabad.org/multimedia/music_cdo/aid/3237893/jewish/Haftorah-Ki-Savo.htm',
+    51: 'https://www.chabad.org/multimedia/music_cdo/aid/6289691/jewish/Haftorah-Nitzavim.htm',
+    52: 'https://www.chabad.org/multimedia/music_cdo/aid/6289716/jewish/Haftorah-Vayelech.htm',
+    53: 'https://www.chabad.org/multimedia/music_cdo/aid/6289735/jewish/Haftorah-Haazinu.htm',
+    54: 'https://www.chabad.org/multimedia/music_cdo/aid/6289760/jewish/Haftorah-VZot-HaBerachah.htm',
   };
   const WEEKLY_BOOKS = [
   // W1
@@ -9321,21 +9379,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         document.getElementById('keter-kst-main').innerHTML =
           `<a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>` + ohLine;
       }
-      // Parsha music (Chabad) — keyed to the current parasha; both halves on a double week.
-      // Resolve each half from the split name (a combined name maps to one number otherwise).
+      // Parsha & Haftorah music (Chabad) — keyed to the current parasha; both halves on a
+      // double week (resolved from the split name, since a combined name maps to one number).
       const _pmNum1 = kstParts[0] ? PARASHA_TO_NUMBER[kstParts[0]] : null;
       const _pmNum2 = kstParts.length > 1 ? PARASHA_TO_NUMBER[kstParts[1]] : null;
-      const _pm1 = _pmNum1 ? (PARASHA_MUSIC_URLS[_pmNum1] || null) : null;
-      const _pm2 = _pmNum2 ? (PARASHA_MUSIC_URLS[_pmNum2] || null) : null;
-      let _pmHtml = '';
-      if (_pm1 && _pm2) {
-        _pmHtml = `🎵 Parsha Music: <a href="${_pm1}" target="_blank" style="color:var(--gold)">${kstParts[0]}</a> &nbsp;·&nbsp; <a href="${_pm2}" target="_blank" style="color:var(--gold)">${kstParts[1]}</a>`;
-      } else if (_pm1) {
-        _pmHtml = `<a href="${_pm1}" target="_blank" style="color:var(--gold)">🎵 Parsha Music</a>`;
-      } else if (_pm2) {
-        _pmHtml = `<a href="${_pm2}" target="_blank" style="color:var(--gold)">🎵 Parsha Music (${kstParts[1]})</a>`;
-      }
-      document.getElementById('keter-kst-meta').innerHTML = _pmHtml;
+      const _musicLine = (label, map) => {
+        const _A = (href, txt) => `<a href="${href}" target="_blank" style="color:var(--gold)">${txt}</a>`;
+        const u1 = _pmNum1 ? (map[_pmNum1] || null) : null;
+        const u2 = _pmNum2 ? (map[_pmNum2] || null) : null;
+        if (u1 && u2) return `🎵 ${label}: ${_A(u1, kstParts[0])} &nbsp;·&nbsp; ${_A(u2, kstParts[1])}`;
+        if (u1) return _A(u1, `🎵 ${label}`);
+        if (u2) return _A(u2, `🎵 ${label} (${kstParts[1]})`);
+        return '';
+      };
+      document.getElementById('keter-kst-meta').innerHTML =
+        [_musicLine('Parsha Music', PARASHA_MUSIC_URLS), _musicLine('Haftorah', PARASHA_HAFTORAH_URLS)]
+          .filter(Boolean).join('<br>');
 
       // 5b. Ohr KiTov — daily synthesis (Keter Shem Tov + Or HaChaim HaKadosh)
       // Collects every KST_DATA key active today (kst/kst2, plus their Shabbat
