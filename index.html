@@ -1438,12 +1438,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:4px;">
-      <div class="keter-section-label" id="keter-kst-label" style="margin-bottom:0">✦ Keter Shem Tov</div>
+      <div class="keter-section-label" id="keter-kst-label" style="margin-bottom:0">✦ Ohr KiTov</div>
       <div class="year-toggle-pill" style="margin:0;display:inline-flex;flex-shrink:0;">
         <button id="pr-diaspora-btn" class="year-pill-btn year-pill-active" onclick="setParashaRegion('diaspora')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Diaspora</button>
         <button id="pr-israel-btn" class="year-pill-btn" onclick="setParashaRegion('israel')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Israel</button>
       </div>
     </div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Keter Shem Tov &amp; Or HaChaim HaKadosh</div>
     <div class="keter-main" id="keter-kst-main">Loading…</div>
     <div class="keter-meta" id="keter-kst-meta"></div>
     <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Ohr KiTov ↗</button>
@@ -1452,7 +1453,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="keter-inner-row">
     <!-- HAYOM YOM + SEFER HAMITZVOS section -->
     <div class="keter-section">
-      <div class="keter-section-label">✦ Hayom Yom &amp; Rambam</div>
+      <div class="keter-section-label">✦ Yom Chazak · Hayom Yom &amp; Rambam</div>
       <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich</div>
       <div class="keter-main" id="keter-rambam-face" style="margin-bottom:6px">Loading…</div>
       <div class="keter-main" id="keter-hayomyom">Loading…</div>
@@ -8866,7 +8867,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const ohLine = `; <span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
         ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
 
-      document.getElementById('keter-kst-label').textContent = '✦ Keter Shem Tov & Or HaChaim HaKadosh';
+      document.getElementById('keter-kst-label').textContent = '✦ Ohr KiTov';
 
       // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40)
       const KST_HB_PAGE_OFFSET = 36;
