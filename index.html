@@ -8209,7 +8209,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   const SEFARIA_LINK = (url) =>
-    `&nbsp;·&nbsp; <a href="${url}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
+    `&nbsp;·&nbsp; <a href="${url}" target="_blank" style="color:var(--gold)">Sefaria</a>`;
 
   // Noam Elimelekh Sefaria slugs indexed by parasha number (1–54)
   // null = no dedicated section in the text; falls back to main page
@@ -9213,7 +9213,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('keter-tehillim-main').innerHTML =
       `<strong>${tehillimChapter}</strong><br>` +
       `<a href="${chabadBaseURL}/tehillim_cdo/aid/1455591/jewish/Psalms.htm" target="_blank" style="color:var(--gold);font-size:11px">` +
-      `Read on Chabad.org</a>`;
+      `Chabad.org</a>`;
     const tehillimStartCh = tehillimDayOfMonth <= 29 ? (tehillimDayOfMonth - 1) * 5 + 1 : 146;
     document.getElementById('keter-tehillim-meta').innerHTML =
       `<strong>Psalms</strong> · Day ${tehillimDayOfMonth} of month` +
@@ -9341,7 +9341,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? `https://www.sefaria.org/Or_HaChaim_on_${ohVerse[0]}.${ohVerse[1]}.${ohVerse[2]}?lang=bi`
         : `https://www.sefaria.org/texts/Tanakh/Acharonim%20on%20Tanakh/Or%20HaChaim/Torah`;
       const ohLine = `; <span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
-        ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
+        ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Sefaria</a>`;
 
       document.getElementById('keter-kst-label').textContent = '✦ Ohr KiTov';
 
@@ -9372,12 +9372,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
         let html = kstEntryHtml(kst);
         if (kst2) html += `<br>` + kstEntryHtml(kst2);
-        html += ` — <a href="${kstHebrewBooksUrl(kst.page)}" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>`;
+        html += ` — <a href="${kstHebrewBooksUrl(kst.page)}" target="_blank" style="color:var(--gold)">HebrewBooks</a>`;
         html += ohLine;
         document.getElementById('keter-kst-main').innerHTML = html;
       } else {
         document.getElementById('keter-kst-main').innerHTML =
-          `<a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">Read in HebrewBooks</a>` + ohLine;
+          `<a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">HebrewBooks</a>` + ohLine;
       }
       // Parasha & Haftorah recordings (Chabad) — keyed to the current parasha; both halves
       // on a double week (resolved from the split name, since a combined name maps to one).
@@ -9414,8 +9414,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       document.getElementById('okt-trigger').style.display = oktDailies.length ? '' : 'none';
       if (oktDailies.length) {
         _oktDetailMain = oktDailies.map(d => d.summary).join('<br><br>');
-        _oktDetailMeta = `<a href="${kstHebrewBooksUrl(kst ? kst.page : null)}" target="_blank" style="color:var(--gold)">Read Keter Shem Tov</a>` +
-          ` &nbsp;·&nbsp; <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Read Or HaChaim HaKadosh</a>`;
+        _oktDetailMeta = `<a href="${kstHebrewBooksUrl(kst ? kst.page : null)}" target="_blank" style="color:var(--gold)">Keter Shem Tov</a>` +
+          ` &nbsp;·&nbsp; <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Or HaChaim HaKadosh</a>`;
       }
     }
 
@@ -9658,7 +9658,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const lmBreslovLinks = [lmHasPartI ? lmLinkI_Maimon : null, lmHasPartII ? lmLinkII_Maimon : null, lmLinkLiving]
       .filter(Boolean).join(' &nbsp;·&nbsp; ');
     const lmSefariaLinks = lmInfos.map(({ info }) =>
-      info.url ? `<a href="${info.url}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>` : ''
+      info.url ? `<a href="${info.url}" target="_blank" style="color:var(--gold)">Sefaria</a>` : ''
     ).filter(Boolean).join(' &nbsp;·&nbsp; ');
 
     document.getElementById('keter-lm-meta').innerHTML = lmInfos.length
@@ -10148,7 +10148,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">KoT Week:</span><span class="detail-value">Week ${mishnaInfo.week}, Day ${mishnaInfo.day} of 7</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">${mishnaInfo.type === 'mishna' ? '10 chapters/week · Days 1–5' : '8 chapters/week · Days 6–7'}</span></div>` +
-      (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a></span></div>` : '') +
+      (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">Sefaria</a></span></div>` : '') +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/texts/Halakhah/Shulchan%20Arukh%20HaRav" target="_blank" style="color:var(--gold)">Shulchan Aruch HaRav on Sefaria</a></div>`;
@@ -10181,7 +10181,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('gevurah-cycle-name').innerHTML = 'Tanach (2 Chapters)';
     document.getElementById('gevurah-main').innerHTML =
       tanachInfo.text +
-      ` &nbsp;·&nbsp; <a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>` +
+      ` &nbsp;·&nbsp; <a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>` +
       ` &nbsp;·&nbsp; <a href="https://mechon-mamre.org/p/pt/ptmp3prq.htm" target="_blank" style="color:var(--gold);font-size:0.85em" title="Tanach audio — Mechon Mamre">Audio</a>`;
     document.getElementById('gevurah-sub').innerHTML = '';
     document.getElementById('gevurah-tags').innerHTML =
@@ -10238,7 +10238,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        ${daf
          ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>
             <div class="detail-row"><span class="detail-label">Links:</span><span class="detail-value">
-              <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Read on Sefaria</a>
+              <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Sefaria</a>
               &nbsp;·&nbsp; <a href="https://www.youtube.com/@mercazdafyomi/search?query=${encodeURIComponent(daf.name+' '+daf.daf)}" target="_blank" style="color:var(--gold)">MDY Shiur</a>
               ${dafPointByPointURL(daf.name,daf.daf) ? '&nbsp;·&nbsp; <a href="'+dafPointByPointURL(daf.name,daf.daf)+'" target="_blank" style="color:var(--gold)">Point by Point</a>' : ''}
             </span></div>
@@ -10377,7 +10377,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-size:0.88rem;margin-bottom:14px;"><strong>${arushBook}</strong></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ From the New Moon to the Next — Phase ${_cy13mod}</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">Read on KabbalahOfTime</a></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Nassi</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.nassi}</div></div>
        <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Daily Attribute</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.attr.name} — ${cy13.attr.meaning}</div></div>
@@ -10555,7 +10555,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const hodChazarahHtml =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Talmud (Chazarah)</div>` +
       (daf
-        ? `<div style="font-size:0.88rem;margin-bottom:10px;">${daf.name} ${daf.heb}, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Read on Sefaria</a></div>` +
+        ? `<div style="font-size:0.88rem;margin-bottom:10px;">${daf.name} ${daf.heb}, Daf ${daf.daf} &nbsp;·&nbsp; <a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">Sefaria</a></div>` +
           `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://youtube.com/playlist?list=PLZ25YnO3sEpExDguTOmn6hVXQOAweMH_c&si=K9P4qwh5yjOJgEdL" target="_blank" style="color:var(--gold)">MDY Chazarah</a></div>`
         : '') +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
@@ -10572,7 +10572,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (!hal.chofetz) {
       cards[6].querySelector('.sefirah-main-text').innerHTML =
         `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
-        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Read on Sefaria</a>`;
+        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
@@ -10843,7 +10843,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           mainText += ` &nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
           mainText += `<br><span style="font-size:0.85em;color:var(--ink-dim)">R. Shimon bar Yochai</span>`;
         } else {
-          const linkLabel = parashaMapping._noamLinkLabel || parashaMapping._lsLinkLabel || 'Read on Sefaria';
+          const linkLabel = parashaMapping._noamLinkLabel || parashaMapping._lsLinkLabel || 'Sefaria';
           subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${linkLabel}</a>`;
         }
       }
@@ -10874,7 +10874,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         let secSub = combinedAuthor;
         const secUrl = malchutSeferiaUrl(malTxt.secondaryName, secMapping);
         if (secUrl) {
-          secSub += `&nbsp;·&nbsp; <a href="${secUrl}" target="_blank" style="color:var(--gold)">Read on Sefaria</a>`;
+          secSub += `&nbsp;·&nbsp; <a href="${secUrl}" target="_blank" style="color:var(--gold)">Sefaria</a>`;
         }
         if (secMapping._kehotUrl) {
           secSub += `&nbsp;·&nbsp; <a href="${secMapping._kehotUrl}" target="_blank" style="color:var(--gold)">Purchase at Kehot</a>`;
