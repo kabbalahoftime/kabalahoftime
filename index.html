@@ -9136,8 +9136,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('keter-hayomyom').innerHTML =
       hyText ? `<span style="font-size:11px">"${hyText}"</span>` : '';
     document.getElementById('keter-hy-meta').innerHTML =
+      `<span style="font-size:9px;white-space:nowrap">` +
       `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>` +
-      ` &nbsp;·&nbsp; <a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a>`;
+      ` &nbsp;·&nbsp; <a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a>` +
+      `</span>`;
 
     // 6. Likutei Moharan — Hebrew-date-pegged lesson (Keter summary + popup)
     // Every LM_DAILY_CYCLE entry names a specific Hebrew date, so lookup is by
