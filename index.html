@@ -9390,7 +9390,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const _rh2 = _pmNum2 ? (PARASHA_HAFTORAH_URLS[_pmNum2] || null) : null;
       let _recHtml = '';
       if (_rt1 || _rt2 || _rh1 || _rh2) {
-        _recHtml = '🎵 Parasha &amp; Haftorah Recordings';
+        _recHtml = `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em">שׁ</span> Parasha &amp; Haftorah Recordings`;
         if (_pmNum2) {
           const _tL = [_rt1 && _recA(_rt1, kstParts[0]), _rt2 && _recA(_rt2, kstParts[1])].filter(Boolean).join(' &nbsp;·&nbsp; ');
           const _hL = [_rh1 && _recA(_rh1, kstParts[0]), _rh2 && _recA(_rh2, kstParts[1])].filter(Boolean).join(' &nbsp;·&nbsp; ');
