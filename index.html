@@ -1920,11 +1920,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const _now = _ref;
         const _shovavimDay = (_now.getDay() === 6 && _now.getHours() >= 19) ? 8 : _now.getDay() + 1;
         const dayQ = getQualities(_shovavimDay);
-        // Compact: one line per quality — "Letter: Name - short method"
-        function qLine(q) {
+        // Compact: one labeled line per quality — "Role N: Letter · Name — short method"
+        function qLine(label, q) {
             if (!q) return '';
-            return `<br>${q.letter}: <strong>${q.name}</strong>` +
-                   ` <span style="font-size:0.9em;opacity:0.7">- ${q.tikkunShort || q.tikkunMethod}</span>`;
+            return `<br><span style="opacity:0.6">${label}:</span> ${q.letter} · <strong>${q.name}</strong>` +
+                   ` <span style="font-size:0.85em;opacity:0.65">— ${q.tikkunShort || q.tikkunMethod}</span>`;
         }
         // Expose shovavim data for script builder
         window._shovavimScriptData = primaryData ? {
@@ -1938,12 +1938,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
         let mainHtml = '';
         if (primaryData) {
-            const relNumsStr   = parashaInfos.map(pd => pd.relativeNumber).join(' and ');
-            const cycleNumsStr = [...new Set(parashaInfos.map(pd => pd.cycle))].join(' and ');
-            mainHtml = `<strong>${foundParasha.name}</strong>: Day <strong>${_shovavimDay}</strong> · Parasha <strong>${relNumsStr}</strong> · Cycle <strong>${cycleNumsStr}</strong>` +
-                       qLine(dayQ) +
-                       parashaQs.map(qLine).join('') +
-                       cycleQs.map(qLine).join('');
+            const uniqueCycles = [...new Set(parashaInfos.map(pd => pd.cycle))];
+            mainHtml = `<strong>${foundParasha.name}</strong>` +
+                       qLine(`Day ${_shovavimDay}`, dayQ) +
+                       parashaInfos.map((pd, i) => qLine(`Parasha ${pd.relativeNumber}`, parashaQs[i])).join('') +
+                       uniqueCycles.map((c, i) => qLine(`Cycle ${c}`, cycleQs[i])).join('');
         } else {
             mainHtml = foundParasha.name;
         }
