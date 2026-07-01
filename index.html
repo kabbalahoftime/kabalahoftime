@@ -1444,7 +1444,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <button id="pr-israel-btn" class="year-pill-btn" onclick="setParashaRegion('israel')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Israel</button>
       </div>
     </div>
-    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Keter Shem Tov &amp; Or HaChaim HaKadosh</div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Keter Shem Tov &amp; Ohr HaChaim HaKadosh</div>
     <div class="keter-main" id="keter-kst-main">Loading…</div>
     <div class="keter-meta" id="keter-kst-meta"></div>
     <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Ohr KiTov ↗</button>
@@ -8825,11 +8825,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return { page: d.p, label: `§ ${sec} (p. ${d.p||sec})`, titleEn: d.e||'', titleHe: d.h||'', key: sec };
   }
 
-  // ── OHR KITOV — daily synthesis: Keter Shem Tov + Or HaChaim HaKadosh ──────
+  // ── OHR KITOV — daily synthesis: Keter Shem Tov + Ohr HaChaim HaKadosh ──────
   // "Ohr...Ki Tov" (Genesis 1:4) — Ohr (HaChaim) joined with (Baal Shem) Tov,
   // fittingly paired with Keter, the first/topmost Sefirah, echoing "in the
   // beginning." A single hand-written entry connects that day's Keter Shem
-  // Tov section with the Or HaChaim HaKadosh on the corresponding verses.
+  // Tov section with the Ohr HaChaim HaKadosh on the corresponding verses.
   //
   // Keyed identically to KST_DATA ('haskamah', 'tzavaat', 1–430) — see
   // getDailyKST() above. Each key is one weekday aliyah of that week's
@@ -9231,7 +9231,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('keter-rambam-face').innerHTML =
       `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">Sefer HaMitzvos</a>` +
       ` <span style="font-size:0.82em;color:var(--ink-mid)">— Maimonides' count of the 613 commandments (248 positive, 365 negative)</span>` +
-      ` &nbsp;·&nbsp; <a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">Hayom Yom</a>` +
+      `<br><a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">Hayom Yom</a>` +
       ` <span style="font-size:0.82em;color:var(--ink-mid)">— a daily Chassidic teaching, compiled by the Rebbe</span>`;
     document.getElementById('keter-rambam-main').innerHTML =
       `<a href="${chabadRambam}/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters)</a>`;
@@ -9340,7 +9340,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const ohUrl = ohVerse
         ? `https://www.sefaria.org/Or_HaChaim_on_${ohVerse[0]}.${ohVerse[1]}.${ohVerse[2]}?lang=bi`
         : `https://www.sefaria.org/texts/Tanakh/Acharonim%20on%20Tanakh/Or%20HaChaim/Torah`;
-      const ohLine = `; <span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
+      const ohLine = `<br><span style="color:var(--ink-mid);font-size:0.9em">Ohr HaChaim · Parashat ${kstParasha || '—'}</span>` +
         ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Sefaria</a>`;
 
       document.getElementById('keter-kst-label').textContent = '✦ Ohr KiTov';
@@ -9403,7 +9403,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       }
       document.getElementById('keter-kst-meta').innerHTML = _recHtml;
 
-      // 5b. Ohr KiTov — daily synthesis (Keter Shem Tov + Or HaChaim HaKadosh)
+      // 5b. Ohr KiTov — daily synthesis (Keter Shem Tov + Ohr HaChaim HaKadosh)
       // Collects every KST_DATA key active today (kst/kst2, plus their Shabbat
       // title2 partner) and looks each up in OHR_KITOV_DAILY — see comment
       // above that data structure for the key scheme.
@@ -9415,7 +9415,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (oktDailies.length) {
         _oktDetailMain = oktDailies.map(d => d.summary).join('<br><br>');
         _oktDetailMeta = `<a href="${kstHebrewBooksUrl(kst ? kst.page : null)}" target="_blank" style="color:var(--gold)">Keter Shem Tov</a>` +
-          ` &nbsp;·&nbsp; <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Or HaChaim HaKadosh</a>`;
+          ` &nbsp;·&nbsp; <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Ohr HaChaim HaKadosh</a>`;
       }
     }
 
