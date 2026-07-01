@@ -9231,7 +9231,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('keter-rambam-face').innerHTML =
       `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">Sefer HaMitzvos</a>` +
       ` <span style="font-size:0.82em;color:var(--ink-mid)">— Maimonides' count of the 613 commandments (248 positive, 365 negative)</span>` +
-      ` &nbsp;·&nbsp; <a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">Hayom Yom</a>` +
+      `<br><a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">Hayom Yom</a>` +
       ` <span style="font-size:0.82em;color:var(--ink-mid)">— a daily Chassidic teaching, compiled by the Rebbe</span>`;
     document.getElementById('keter-rambam-main').innerHTML =
       `<a href="${chabadRambam}/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters)</a>`;
@@ -9340,7 +9340,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const ohUrl = ohVerse
         ? `https://www.sefaria.org/Or_HaChaim_on_${ohVerse[0]}.${ohVerse[1]}.${ohVerse[2]}?lang=bi`
         : `https://www.sefaria.org/texts/Tanakh/Acharonim%20on%20Tanakh/Or%20HaChaim/Torah`;
-      const ohLine = `; <span style="color:var(--ink-mid);font-size:0.9em">Parashat ${kstParasha || '—'}</span>` +
+      const ohLine = `<br><span style="color:var(--ink-mid);font-size:0.9em">Or HaChaim · Parashat ${kstParasha || '—'}</span>` +
         ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Sefaria</a>`;
 
       document.getElementById('keter-kst-label').textContent = '✦ Ohr KiTov';
