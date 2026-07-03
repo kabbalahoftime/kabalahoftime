@@ -10901,7 +10901,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       (todayBook.weekUrl ? ` &nbsp;·&nbsp; <a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
-    let _lsSichosBook = null, _ksaLabel = null;
+    let _lsSichosBook = null, _lsSichosUrl = null, _ksaLabel = null;
     (() => {
       const LS_BOOKS = [
         { max: 12, book: 'Bereishit', url: 'https://www.chabad.org/therebbe/article_cdo/aid/4542996/jewish/Bereishit.htm' },
@@ -10914,11 +10914,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         || PARASHA_TO_NUMBER[(actualParasha || '').split('-')[0].trim()];
       const lsBook = pNum && LS_BOOKS.find(b => pNum <= b.max);
       _lsSichosBook = lsBook ? lsBook.book : null;
-      let html = `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold);font-size:0.88em">Daily Sicha</a>`;
-      if (lsBook) {
-        html += `<br><a href="${lsBook.url}" target="_blank" style="color:var(--gold);font-size:0.88em">Likkutei Sichos — ${lsBook.book}</a>`;
-      }
-      document.getElementById('malchut-ksa-face').innerHTML = html;
+      _lsSichosUrl  = lsBook ? lsBook.url  : null;
+      document.getElementById('malchut-ksa-face').innerHTML =
+        `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold);font-size:0.88em">Daily Sicha</a>` +
+        `<br><a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold);font-size:0.88em">Sichos in English</a>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
@@ -11065,7 +11064,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       weekRows +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ The Rebbe</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a> &nbsp;·&nbsp; <a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
+       <div style="font-size:0.88rem;margin-bottom:10px;">` +
+      (_lsSichosUrl ? `<a href="${_lsSichosUrl}" target="_blank" style="color:var(--gold)">Likkutei Sichos — ${_lsSichosBook}</a> &nbsp;·&nbsp; ` : '') +
+      `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
 
     // Pack data for Daily Script
     _scriptData = {
