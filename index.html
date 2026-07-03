@@ -435,7 +435,7 @@ border-bottom: 1px solid var(--border);
 
 .keter-inner-row {
 display: grid;
-grid-template-columns: repeat(3, 1fr);
+grid-template-columns: repeat(2, 1fr);
 gap: 0;
 }
 
@@ -1467,13 +1467,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div class="keter-meta" id="keter-lm-meta"></div>
       <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
     </div>
-    <!-- TREASURY OF CHASSIDIC TALES section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Treasury of Chassidic Tales</div>
-      <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin</div>
-      <div class="keter-main" id="keter-treasury-main">Loading…</div>
-      <div class="keter-meta" id="keter-treasury-meta"></div>
-    </div>
   </div>
 </div>
 
@@ -1481,6 +1474,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="keter-detail">
   <div class="section-divider" style="margin: 16px 0">
     <span class="divider-symbol">◆</span>
+  </div>
+  <!-- TREASURY OF CHASSIDIC TALES section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Treasury of Chassidic Tales</div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin</div>
+    <div class="keter-main" id="keter-treasury-main">Loading…</div>
+    <div class="keter-meta" id="keter-treasury-meta"></div>
   </div>
   <!-- CHUMASH section -->
   <div class="keter-section">
@@ -2105,14 +2105,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           <div id="malchut-ksa-face">Loading…</div>
         </div>
       </div>
+    </div>
+    <div class="sefirah-detail">
       <!-- KSA row — Arich Anpin -->
-      <div class="malchut-ksa-row">
+      <div class="malchut-ksa-row" style="margin-bottom:14px;">
         <div class="keter-section-label">✦ Kitzur Shulchan Aruch</div>
         <div id="malchut-ksa-bottom">Loading…</div>
       </div>
-    </div>
-    <div class="sefirah-detail" id="malchut-detail">
-      <!-- Weekly book content injected by render() -->
+      <div id="malchut-detail">
+        <!-- Weekly book content injected by render() -->
+      </div>
     </div>
   </div>
 </div>
