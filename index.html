@@ -433,12 +433,6 @@ background: #f2ead8 !important;
 border-bottom: 1px solid var(--border);
 }
 
-.keter-inner-row {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 0;
-}
-
 .keter-detail {
 display: none;
 animation: fadeIn 0.25s ease;
@@ -470,28 +464,8 @@ z-index: 1;
 padding: 16px 20px;
 }
 
-.keter-inner-row .keter-section:nth-child(odd) {
-background: #fdf9f2 !important;
-}
-
-.keter-inner-row .keter-section:nth-child(even) {
-background: #f2ead8 !important;
-}
-
 .keter-detail .keter-section {
 background: var(--bg-card) !important;
-}
-
-.keter-inner-row .keter-section:not(:last-child) {
-border-right: 1px solid var(--border);
-}
-
-@media (max-width: 540px) {
-.keter-inner-row { grid-template-columns: 1fr; }
-.keter-inner-row .keter-section:not(:last-child) {
-border-right: none;
-border-bottom: 1px solid var(--border);
-}
 }
 
 .keter-section-label {
@@ -1435,6 +1409,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
 <!-- Always visible sections -->
 <div class="keter-visible-content">
+  <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
+  <!-- DAILY LM section -->
+  <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
+    <div class="keter-section-label">✦ Daily Likutei Moharan</div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
+    <div class="keter-main" id="keter-lm-main">Loading…</div>
+    <div class="keter-meta" id="keter-lm-meta"></div>
+    <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
+  </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:4px;">
@@ -1444,36 +1427,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <button id="pr-israel-btn" class="year-pill-btn" onclick="setParashaRegion('israel')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Israel</button>
       </div>
     </div>
-    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Keter Shem Tov &amp; Ohr HaChaim HaKadosh</div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin — Keter Shem Tov &amp; Ohr HaChaim HaKadosh</div>
     <div class="keter-main" id="keter-kst-main">Loading…</div>
     <div class="keter-meta" id="keter-kst-meta"></div>
     <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Ohr KiTov ↗</button>
   </div>
-  <!-- Atik Yomin — Three Heads -->
-  <div class="keter-inner-row">
-    <!-- HAYOM YOM + SEFER HAMITZVOS section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Yom Chazak · Hayom Yom &amp; Rambam</div>
-      <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich</div>
-      <div class="keter-main" id="keter-rambam-face" style="margin-bottom:6px">Loading…</div>
-      <div class="keter-main" id="keter-hayomyom">Loading…</div>
-      <div class="keter-meta" id="keter-hy-meta"></div>
-    </div>
-    <!-- DAILY LM section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Daily Likutei Moharan</div>
-      <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
-      <div class="keter-main" id="keter-lm-main">Loading…</div>
-      <div class="keter-meta" id="keter-lm-meta"></div>
-      <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
-    </div>
-    <!-- TREASURY OF CHASSIDIC TALES section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Treasury of Chassidic Tales</div>
-      <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin</div>
-      <div class="keter-main" id="keter-treasury-main">Loading…</div>
-      <div class="keter-meta" id="keter-treasury-meta"></div>
-    </div>
+  <!-- HAYOM YOM + SEFER HAMITZVOS section -->
+  <div class="keter-section" style="background:#fdf9f2;">
+    <div class="keter-section-label">✦ Yom Chazak · Hayom Yom &amp; Rambam</div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich</div>
+    <div class="keter-main" id="keter-rambam-face" style="margin-bottom:6px">Loading…</div>
+    <div class="keter-main" id="keter-hayomyom">Loading…</div>
+    <div class="keter-meta" id="keter-hy-meta"></div>
   </div>
 </div>
 
@@ -1481,6 +1446,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="keter-detail">
   <div class="section-divider" style="margin: 16px 0">
     <span class="divider-symbol">◆</span>
+  </div>
+  <!-- TREASURY OF CHASSIDIC TALES section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Treasury of Chassidic Tales</div>
+    <div class="keter-main" id="keter-treasury-main">Loading…</div>
+    <div class="keter-meta" id="keter-treasury-meta"></div>
   </div>
   <!-- CHUMASH section -->
   <div class="keter-section">
@@ -1678,8 +1649,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Mincha</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Shulchan Aruch</span></div>
-    <div class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Zohar</span></div>
+    <div id="hod-zohar-face" class="sefirah-main-text">Loading…</div>
     <div class="sefirah-sub-text" style="display:none;"></div>
     <div class="sefirah-tags"></div>
     <div class="sefirah-detail"></div>
@@ -2088,29 +2059,34 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <div class="sefirah-content-col">
     <div class="malchut-visible-content">
+      <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
         <div class="malchut-section">
-          <div class="keter-section-label" id="malchut-cycle-name">Daily Text</div>
+          <div class="keter-section-label">✦ Daily Likutei Sichos</div>
+          <div id="malchut-ksa-face">Loading…</div>
+        </div>
+        <div class="malchut-section">
+          <div class="keter-section-label">✦ MiPri Yadeiah — מפרי ידיה</div>
+          <div id="malchut-cycle-name" style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Daily Text</div>
           <div class="sefirah-main-text" id="malchut-main">Loading…</div>
           <div class="sefirah-sub-text" id="malchut-sub"></div>
         </div>
         <div class="malchut-section">
-          <div class="keter-section-label">✦ Likutei Halachot</div>
+          <div class="keter-section-label">✦ BaShaarim Maaseiah — בשערים מעשיה</div>
+          <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Likutei Halachot</div>
           <div id="malchut-lh-face">Loading…</div>
         </div>
-        <div class="malchut-section">
-          <div class="keter-section-label">✦ Sichos of the Rebbe</div>
-          <div id="malchut-ksa-face">Loading…</div>
-        </div>
       </div>
+    </div>
+    <div class="sefirah-detail">
       <!-- KSA row — Arich Anpin -->
-      <div class="malchut-ksa-row">
+      <div class="malchut-ksa-row" style="margin-bottom:14px;">
         <div class="keter-section-label">✦ Kitzur Shulchan Aruch</div>
         <div id="malchut-ksa-bottom">Loading…</div>
       </div>
-    </div>
-    <div class="sefirah-detail" id="malchut-detail">
-      <!-- Weekly book content injected by render() -->
+      <div id="malchut-detail">
+        <!-- Weekly book content injected by render() -->
+      </div>
     </div>
   </div>
 </div>
@@ -9615,6 +9591,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _hodZoharLabel    = label;
         _hodZoharMainHtml = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>`;
         _hodZoharMetaHtml = `R. Shimon bar Yochai · ${todayFolios} folios today`;
+        const faceEl = document.getElementById('hod-zohar-face');
+        if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong>, ${label} &nbsp;·&nbsp; <a href="${sefariaUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
       } else {
         // Sefer Yetzirah (cycleOffset 358-363 = 6 days, one chapter per day)
         const syDay = cycleOffset - 357; // 1-6
@@ -9623,6 +9601,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _hodZoharLabel    = 'Sefer Yetzirah ' + chapters;
         _hodZoharMainHtml = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters}</a>`;
         _hodZoharMetaHtml = `Day ${cycleOffset + 1} of cycle · completing the year`;
+        const faceEl = document.getElementById('hod-zohar-face');
+        if (faceEl) faceEl.innerHTML = `<strong>Sefer Yetzirah</strong>, ${chapters} &nbsp;·&nbsp; <a href="${syUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
       }
     })();
 
@@ -10545,7 +10525,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Shulchan Aruch</span>';
+    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar</span>';
 
     const hodZoharHtml =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar</div>` +
@@ -10569,10 +10549,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<a href="https://allparsha.org/" target="_blank" style="color:var(--gold)">All Parsha</a>` +
       `</div>`;
 
+    const hodRashabHtml =
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
+      `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
+
     if (!hal.chofetz) {
-      cards[6].querySelector('.sefirah-main-text').innerHTML =
-        `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
-        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
+      const hodSaHtml =
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch</div>` +
+        `<div style="font-size:0.88rem;margin-bottom:10px;"><strong>Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
+        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold)">Sefaria</a></div>`;
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
@@ -10584,16 +10570,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
         hodChazarahHtml +
-        hodCcHtml +
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-        `<div class="detail-row"><span class="detail-label">Chapters:</span><span class="detail-value">Orach Chaim ${hal.ch1} & ${hal.ch2}</span></div>` +
+        hodSaHtml +
         `<div class="detail-row"><span class="detail-label">Commentary:</span><span class="detail-value">Mishnah Berurah by the Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · Chapters 1-697 · Days 1-348</span></div>` +
         `<div class="detail-row"><span class="detail-label">Year end:</span><span class="detail-value">Sefer Chofetz Chaim (Days 349-364)</span></div>` +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
-        `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>` +
-        hodResourcesHtml;
+        hodCcHtml +
+        hodResourcesHtml +
+        hodRashabHtml;
     } else {
       const hodCcHtml =
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
@@ -10602,20 +10586,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
-      cards[6].querySelector('.sefirah-main-text').innerHTML =
-        `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
         hodChazarahHtml +
-        hodCcHtml +
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Sefer Chofetz Chaim</div>` +
+        `<div style="font-size:0.88rem;margin-bottom:10px;">Sefer Chofetz Chaim — Section <strong>${hal.section}</strong></div>` +
         `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">Day ${d} of year · Section ${hal.section} of Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Topic:</span><span class="detail-value">Laws of proper speech (lashon hara, rechilut)</span></div>` +
         `<div class="detail-row"><span class="detail-label">Days:</span><span class="detail-value">Days 349-364 of the year</span></div>` +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
-        `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>` +
-        hodResourcesHtml;
+        hodCcHtml +
+        hodResourcesHtml +
+        hodRashabHtml;
     }
 
 
@@ -10897,7 +10879,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       (todayBook.weekUrl ? ` &nbsp;·&nbsp; <a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
-    let _lsSichosBook = null, _ksaLabel = null;
+    let _lsSichosBook = null, _lsSichosUrl = null, _ksaLabel = null;
     (() => {
       const LS_BOOKS = [
         { max: 12, book: 'Bereishit', url: 'https://www.chabad.org/therebbe/article_cdo/aid/4542996/jewish/Bereishit.htm' },
@@ -10910,11 +10892,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         || PARASHA_TO_NUMBER[(actualParasha || '').split('-')[0].trim()];
       const lsBook = pNum && LS_BOOKS.find(b => pNum <= b.max);
       _lsSichosBook = lsBook ? lsBook.book : null;
-      let html = `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold);font-size:0.88em">Daily Sicha</a>`;
-      if (lsBook) {
-        html += `<br><a href="${lsBook.url}" target="_blank" style="color:var(--gold);font-size:0.88em">Likkutei Sichos — ${lsBook.book}</a>`;
-      }
-      document.getElementById('malchut-ksa-face').innerHTML = html;
+      _lsSichosUrl  = lsBook ? lsBook.url  : null;
+      document.getElementById('malchut-ksa-face').innerHTML =
+        `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold);font-size:0.88em">Daily Sicha</a>` +
+        `<br><a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold);font-size:0.88em">Sichos in English</a>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
@@ -11061,7 +11042,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       weekRows +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ The Rebbe</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a> &nbsp;·&nbsp; <a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
+       <div style="font-size:0.88rem;margin-bottom:10px;">` +
+      (_lsSichosUrl ? `<a href="${_lsSichosUrl}" target="_blank" style="color:var(--gold)">Likkutei Sichos — ${_lsSichosBook}</a> &nbsp;·&nbsp; ` : '') +
+      `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
 
     // Pack data for Daily Script
     _scriptData = {
