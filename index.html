@@ -1662,8 +1662,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Zohar <span class="maalah">מעלה י׳</span></span><span style="display:block">Shulchan Aruch <span class="maalah">מעלה י״א</span></span></div>
-    <div id="hod-zohar-face" style="margin-bottom:6px;">Loading…</div>
-    <div class="sefirah-main-text">Loading…</div>
+    <div id="hod-zohar-face" class="sefirah-main-text" style="margin-bottom:6px;">Loading…</div>
+    <div id="hod-sa-face" class="sefirah-main-text">Loading…</div>
     <div class="sefirah-sub-text" style="display:none;"></div>
     <div class="sefirah-tags"></div>
     <div class="sefirah-detail"></div>
@@ -9089,15 +9089,35 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('now-sf-name').textContent   = active.name;
     document.getElementById('now-sf-hebrew').textContent = active.hebrew;
     document.getElementById('now-sf-time').textContent   = active.range;
+    // Clears dst when the source card lacks the element, so nothing stale
+    // lingers from the previous hour's card.
     const copy = (sel, id) => {
       const src = sourceCard.querySelector(sel);
       const dst = document.getElementById(id);
-      if (src && dst) dst.innerHTML = src.innerHTML;
+      if (dst) dst.innerHTML = src ? src.innerHTML : '';
     };
-    copy('.sefirah-cycle-name', 'now-sf-cycle');
-    copy('.sefirah-main-text',  'now-sf-main');
-    copy('.sefirah-sub-text',   'now-sf-sub');
-    copy('.sefirah-tags',       'now-sf-tags');
+    // Mirrors every matching block (Hod's face has two: Zohar + Shulchan Aruch)
+    const copyAll = (sel, id) => {
+      const els = Array.from(sourceCard.querySelectorAll(sel));
+      const dst = document.getElementById(id);
+      if (!dst) return;
+      dst.innerHTML = els.length === 1
+        ? els[0].innerHTML
+        : els.map(e => `<div style="margin-bottom:6px;">${e.innerHTML}</div>`).join('');
+    };
+    const malchutFace = sourceCard.querySelector('.malchut-visible-content');
+    if (malchutFace) {
+      // Malchut's face is its own three-section layout — mirror it whole.
+      document.getElementById('now-sf-cycle').innerHTML = '';
+      document.getElementById('now-sf-main').innerHTML  = malchutFace.innerHTML;
+      document.getElementById('now-sf-sub').innerHTML   = '';
+      document.getElementById('now-sf-tags').innerHTML  = '';
+    } else {
+      copy('.sefirah-cycle-name', 'now-sf-cycle');
+      copyAll('.sefirah-main-text', 'now-sf-main');
+      copy('.sefirah-sub-text',   'now-sf-sub');
+      copy('.sefirah-tags',       'now-sf-tags');
+    }
     copy('.sefirah-detail',     'now-sf-detail');
     document.getElementById('now-sefirah-featured').style.display = 'grid';
   }
@@ -10568,7 +10588,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
 
     if (!hal.chofetz) {
-      cards[6].querySelector('.sefirah-main-text').innerHTML =
+      document.getElementById('hod-sa-face').innerHTML =
         `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
         ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
       const hodCcHtml =
@@ -10598,7 +10618,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
-      cards[6].querySelector('.sefirah-main-text').innerHTML =
+      document.getElementById('hod-sa-face').innerHTML =
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
