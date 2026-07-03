@@ -1649,9 +1649,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Mincha</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Zohar</span><span style="display:block">Shulchan Aruch</span></div>
-    <div id="hod-zohar-face" style="margin-bottom:6px;">Loading…</div>
-    <div class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Zohar</span></div>
+    <div id="hod-zohar-face" class="sefirah-main-text">Loading…</div>
     <div class="sefirah-sub-text" style="display:none;"></div>
     <div class="sefirah-tags"></div>
     <div class="sefirah-detail"></div>
@@ -10526,7 +10525,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar</span><span style="display:block">Shulchan Aruch</span>';
+    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar</span>';
 
     const hodZoharHtml =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar</div>` +
@@ -10556,9 +10555,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
 
     if (!hal.chofetz) {
-      cards[6].querySelector('.sefirah-main-text').innerHTML =
-        `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
-        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
+      const hodSaHtml =
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch</div>` +
+        `<div style="font-size:0.88rem;margin-bottom:10px;"><strong>Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
+        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold)">Sefaria</a></div>`;
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
@@ -10570,12 +10570,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
         hodChazarahHtml +
-        hodCcHtml +
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-        `<div class="detail-row"><span class="detail-label">Chapters:</span><span class="detail-value">Orach Chaim ${hal.ch1} & ${hal.ch2}</span></div>` +
+        hodSaHtml +
         `<div class="detail-row"><span class="detail-label">Commentary:</span><span class="detail-value">Mishnah Berurah by the Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · Chapters 1-697 · Days 1-348</span></div>` +
         `<div class="detail-row"><span class="detail-label">Year end:</span><span class="detail-value">Sefer Chofetz Chaim (Days 349-364)</span></div>` +
+        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+        hodCcHtml +
         hodResourcesHtml +
         hodRashabHtml;
     } else {
@@ -10586,16 +10586,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
-      cards[6].querySelector('.sefirah-main-text').innerHTML =
-        `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
         hodChazarahHtml +
-        hodCcHtml +
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Sefer Chofetz Chaim</div>` +
+        `<div style="font-size:0.88rem;margin-bottom:10px;">Sefer Chofetz Chaim — Section <strong>${hal.section}</strong></div>` +
         `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">Day ${d} of year · Section ${hal.section} of Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Topic:</span><span class="detail-value">Laws of proper speech (lashon hara, rechilut)</span></div>` +
         `<div class="detail-row"><span class="detail-label">Days:</span><span class="detail-value">Days 349-364 of the year</span></div>` +
+        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+        hodCcHtml +
         hodResourcesHtml +
         hodRashabHtml;
     }
