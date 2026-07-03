@@ -433,12 +433,6 @@ background: #f2ead8 !important;
 border-bottom: 1px solid var(--border);
 }
 
-.keter-inner-row {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 0;
-}
-
 .keter-detail {
 display: none;
 animation: fadeIn 0.25s ease;
@@ -470,28 +464,8 @@ z-index: 1;
 padding: 16px 20px;
 }
 
-.keter-inner-row .keter-section:nth-child(odd) {
-background: #fdf9f2 !important;
-}
-
-.keter-inner-row .keter-section:nth-child(even) {
-background: #f2ead8 !important;
-}
-
 .keter-detail .keter-section {
 background: var(--bg-card) !important;
-}
-
-.keter-inner-row .keter-section:not(:last-child) {
-border-right: 1px solid var(--border);
-}
-
-@media (max-width: 540px) {
-.keter-inner-row { grid-template-columns: 1fr; }
-.keter-inner-row .keter-section:not(:last-child) {
-border-right: none;
-border-bottom: 1px solid var(--border);
-}
 }
 
 .keter-section-label {
@@ -1435,6 +1409,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
 <!-- Always visible sections -->
 <div class="keter-visible-content">
+  <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
+  <!-- DAILY LM section -->
+  <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
+    <div class="keter-section-label">✦ Daily Likutei Moharan</div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
+    <div class="keter-main" id="keter-lm-main">Loading…</div>
+    <div class="keter-meta" id="keter-lm-meta"></div>
+    <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
+  </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:4px;">
@@ -1449,24 +1432,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="keter-meta" id="keter-kst-meta"></div>
     <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Ohr KiTov ↗</button>
   </div>
-  <!-- Atik Yomin — Three Heads -->
-  <div class="keter-inner-row">
-    <!-- HAYOM YOM + SEFER HAMITZVOS section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Yom Chazak · Hayom Yom &amp; Rambam</div>
-      <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich</div>
-      <div class="keter-main" id="keter-rambam-face" style="margin-bottom:6px">Loading…</div>
-      <div class="keter-main" id="keter-hayomyom">Loading…</div>
-      <div class="keter-meta" id="keter-hy-meta"></div>
-    </div>
-    <!-- DAILY LM section -->
-    <div class="keter-section">
-      <div class="keter-section-label">✦ Daily Likutei Moharan</div>
-      <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
-      <div class="keter-main" id="keter-lm-main">Loading…</div>
-      <div class="keter-meta" id="keter-lm-meta"></div>
-      <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
-    </div>
+  <!-- HAYOM YOM + SEFER HAMITZVOS section -->
+  <div class="keter-section" style="background:#fdf9f2;">
+    <div class="keter-section-label">✦ Yom Chazak · Hayom Yom &amp; Rambam</div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich</div>
+    <div class="keter-main" id="keter-rambam-face" style="margin-bottom:6px">Loading…</div>
+    <div class="keter-main" id="keter-hayomyom">Loading…</div>
+    <div class="keter-meta" id="keter-hy-meta"></div>
   </div>
 </div>
 
@@ -2087,7 +2059,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <div class="sefirah-content-col">
     <div class="malchut-visible-content">
+      <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
+        <div class="malchut-section">
+          <div class="keter-section-label">✦ Daily Likutei Sichos</div>
+          <div id="malchut-ksa-face">Loading…</div>
+        </div>
         <div class="malchut-section">
           <div class="keter-section-label">✦ MiPri Yadeiah — מפרי ידיה</div>
           <div id="malchut-cycle-name" style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Daily Text</div>
@@ -2098,10 +2075,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           <div class="keter-section-label">✦ BaShaarim Maaseiah — בשערים מעשיה</div>
           <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Likutei Halachot</div>
           <div id="malchut-lh-face">Loading…</div>
-        </div>
-        <div class="malchut-section">
-          <div class="keter-section-label">✦ Sichos of the Rebbe</div>
-          <div id="malchut-ksa-face">Loading…</div>
         </div>
       </div>
     </div>
