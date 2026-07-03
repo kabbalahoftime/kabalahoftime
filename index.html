@@ -680,6 +680,9 @@ opacity: 0.85;
 .sefirah-content-col { padding-left: 2px; }
 
 .maalah {
+cursor: pointer;
+user-select: none;
+display: inline-block;
 font-size: 8px;
 color: var(--gold);
 opacity: 0.8;
@@ -689,6 +692,23 @@ font-family: 'Frank Ruhl Libre', serif;
 font-weight: normal;
 text-transform: none;
 white-space: nowrap;
+}
+
+.maalah.done {
+background: var(--gold);
+color: #fdf9f2;
+opacity: 1;
+padding: 0 4px;
+border-radius: 3px;
+}
+
+.maalah.shake {
+animation: maalahShake 0.3s;
+}
+
+@keyframes maalahShake {
+25% { transform: translateX(-2px); }
+75% { transform: translateX(2px); }
 }
 
 .sefirah-cycle-name {
@@ -1350,6 +1370,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="dc-col">
       <div class="dc-time" id="clock-jerusalem">--:--</div>
       <div class="dc-label">Jerusalem &nbsp;ירושלים</div>
+    </div>
+    <div class="dc-sep">·</div>
+    <div class="dc-col" id="maalot-moon" title="Today's ma'alot — tap each מעלה tag in order">
+      <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
+        <svg id="maalot-moon-svg" width="18" height="18" viewBox="0 0 22 22" style="display:block"><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
+        <span id="maalot-moon-count" style="font-size:11px;color:var(--gold);">0/15</span>
+      </div>
+      <div class="dc-label">Ma'alot &nbsp;מעלות</div>
     </div>
   </div>
 
@@ -9077,6 +9105,80 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
   }
 
+  // ── FIFTEEN MA'ALOT — strictly sequential daily checklist + waxing moon ──
+  // State: the highest completed step (0-15), stored per displayed Jewish
+  // date in localStorage. Only step k+1 can be marked; only step k unmarked.
+  const MAALOT_HEB = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ז׳','ח׳','ט׳','י׳','י״א','י״ב','י״ג','י״ד','ט״ו'];
+  let _maalotKey = null;
+
+  function maalotDone() {
+    try { return Math.min(15, Math.max(0, parseInt(localStorage.getItem(_maalotKey), 10) || 0)); }
+    catch (e) { return 0; }
+  }
+
+  function maalotIndexOf(el) {
+    return MAALOT_HEB.indexOf(el.textContent.replace('מעלה', '').trim()) + 1;
+  }
+
+  // Waxing moon: lit region bounded by the right limb and a terminator whose
+  // x-radius sweeps r→0→r as the phase goes new→half→full.
+  function updateMaalotMoon(k) {
+    const fill = document.getElementById('maalot-moon-fill');
+    const cnt  = document.getElementById('maalot-moon-count');
+    if (!fill) return;
+    const f = k / 15, r = 9, cx = 11, cy = 11;
+    const rx = r * Math.abs(Math.cos(Math.PI * f));
+    const sweep = f <= 0.5 ? 0 : 1;
+    fill.setAttribute('d', k === 0 ? '' :
+      `M ${cx} ${cy - r} A ${r} ${r} 0 0 1 ${cx} ${cy + r} A ${rx} ${r} 0 0 ${sweep} ${cx} ${cy - r} Z`);
+    if (cnt) cnt.textContent = k + '/15';
+    // At ט״ו the light of the moon becomes like the light of the sun (Isaiah 30:26)
+    const sun  = k === 15;
+    const SUN_GOLD = '#dfa016';
+    const rays = document.getElementById('maalot-sun-rays');
+    const rim  = document.getElementById('maalot-moon-rim');
+    const svg  = document.getElementById('maalot-moon-svg');
+    const wrap = document.getElementById('maalot-moon');
+    if (rays) { rays.style.display = sun ? '' : 'none'; rays.setAttribute('stroke', SUN_GOLD); }
+    if (rim)  rim.setAttribute('stroke', sun ? SUN_GOLD : 'var(--gold)');
+    fill.setAttribute('fill', sun ? SUN_GOLD : 'var(--gold)');
+    if (svg)  svg.style.filter = sun ? 'drop-shadow(0 0 2.5px rgba(223,160,22,0.85))' : '';
+    if (wrap) wrap.title = sun
+      ? 'והיה אור הלבנה כאור החמה — the light of the moon shall be as the light of the sun (Isaiah 30:26)'
+      : "Today's ma'alot — tap each מעלה tag in order";
+  }
+
+  function applyMaalotState() {
+    if (!_maalotKey) return;
+    const k = maalotDone();
+    document.querySelectorAll('.maalah').forEach(el => {
+      const n = maalotIndexOf(el);
+      el.classList.toggle('done', n >= 1 && n <= k);
+    });
+    updateMaalotMoon(k);
+  }
+
+  // Capture-phase so a tap on the tag never expands the card underneath.
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest && e.target.closest('.maalah');
+    if (!el || !_maalotKey) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const n = maalotIndexOf(el);
+    if (!n) return;
+    const k = maalotDone();
+    if (n === k + 1) {          // climb the next step
+      try { localStorage.setItem(_maalotKey, String(n)); } catch (err) {}
+    } else if (n === k) {       // undo the topmost step
+      try { localStorage.setItem(_maalotKey, String(n - 1)); } catch (err) {}
+    } else {                    // out of order — the steps are climbed in order
+      el.classList.add('shake');
+      setTimeout(() => el.classList.remove('shake'), 350);
+      return;
+    }
+    applyMaalotState();
+  }, true);
+
   function updateNowSefirah() {
     const active = getActiveSefirahTime();
     const allCards = document.querySelectorAll('.sefirah-card');
@@ -9120,6 +9222,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
     copy('.sefirah-detail',     'now-sf-detail');
     document.getElementById('now-sefirah-featured').style.display = 'grid';
+    applyMaalotState();
   }
 
   // ── RENDER ──
@@ -9137,6 +9240,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Keter — Chabad Daily Learning
     const hDate  = gregToHebrew(date);
     const hMonth = hDate.month, hDay = hDate.day, hYear = hDate.year;
+    _maalotKey = 'kotMaalot:' + hYear + '-' + hMonth + '-' + hDay;
+    setTimeout(applyMaalotState, 0); // after this render's innerHTML writes settle
     const hMname = HEB_MONTH_NAMES[hMonth] || '';
     const hDateStr = `${hDay} ${hMname} ${hYear}`;
 
