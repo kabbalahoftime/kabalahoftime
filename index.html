@@ -679,6 +679,18 @@ opacity: 0.85;
 
 .sefirah-content-col { padding-left: 2px; }
 
+.maalah {
+font-size: 8px;
+color: var(--gold);
+opacity: 0.8;
+letter-spacing: 0.5px;
+margin-left: 6px;
+font-family: 'Frank Ruhl Libre', serif;
+font-weight: normal;
+text-transform: none;
+white-space: nowrap;
+}
+
 .sefirah-cycle-name {
 font-family: ‘Cinzel’, serif;
 font-size: 10px;
@@ -1412,7 +1424,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
   <!-- DAILY LM section -->
   <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
-    <div class="keter-section-label">✦ Daily Likutei Moharan</div>
+    <div class="keter-section-label">✦ Daily Likutei Moharan <span class="maalah">מעלה א׳</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
     <div class="keter-main" id="keter-lm-main">Loading…</div>
     <div class="keter-meta" id="keter-lm-meta"></div>
@@ -1421,7 +1433,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:4px;">
-      <div class="keter-section-label" id="keter-kst-label" style="margin-bottom:0">✦ Ohr KiTov</div>
+      <div class="keter-section-label" id="keter-kst-label" style="margin-bottom:0">✦ Ohr KiTov <span class="maalah">מעלה ב׳</span></div>
       <div class="year-toggle-pill" style="margin:0;display:inline-flex;flex-shrink:0;">
         <button id="pr-diaspora-btn" class="year-pill-btn year-pill-active" onclick="setParashaRegion('diaspora')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Diaspora</button>
         <button id="pr-israel-btn" class="year-pill-btn" onclick="setParashaRegion('israel')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Israel</button>
@@ -1434,7 +1446,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <!-- HAYOM YOM + SEFER HAMITZVOS section -->
   <div class="keter-section" style="background:#fdf9f2;">
-    <div class="keter-section-label">✦ Yom Chazak · Hayom Yom &amp; Rambam</div>
+    <div class="keter-section-label">✦ Yom Chazak · Hayom Yom &amp; Rambam <span class="maalah">מעלה ג׳</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich</div>
     <div class="keter-main" id="keter-rambam-face" style="margin-bottom:6px">Loading…</div>
     <div class="keter-main" id="keter-hayomyom">Loading…</div>
@@ -1516,7 +1528,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Cheshbon HaNefesh</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef-Bet — 22-Day Cycle</div>
+    <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef-Bet — 22-Day Cycle <span class="maalah">מעלה ד׳</span></div>
     <div class="sefirah-main-text" id="chochmah-main">Loading…</div>
     <div class="sefirah-sub-text" id="chochmah-sub"></div>
     <div class="sefirah-tags" id="chochmah-tags"></div>
@@ -1539,7 +1551,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tikkun Leah</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="binah-cycle-name">Sefirot — 7×7×7 Cycle</div>
+    <div class="sefirah-cycle-name" id="binah-cycle-name">Sefirot — 7×7×7 Cycle <span class="maalah">מעלה ה׳</span></div>
     <div class="sefirah-main-text" id="binah-main">Loading…</div>
     <div class="sefirah-sub-text" id="binah-sub"></div>
     <div class="sefirah-tags" id="binah-tags"></div>
@@ -1572,7 +1584,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">KoT Song</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="chesed-cycle-name">Mishna — Oral Torah</div>
+    <div class="sefirah-cycle-name" id="chesed-cycle-name">Mishna — Oral Torah <span class="maalah">מעלה ו׳</span></div>
     <div class="sefirah-main-text" id="chesed-main">Loading…</div>
     <div class="sefirah-sub-text" id="chesed-sub"></div>
     <div class="sefirah-tags" id="chesed-tags"></div>
@@ -1592,7 +1604,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tehilim</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
+    <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim <span class="maalah">מעלה ז׳</span></div>
     <div class="sefirah-main-text" id="gevurah-main">Loading…</div>
     <div class="sefirah-sub-text" id="gevurah-sub"></div>
     <div class="sefirah-tags" id="gevurah-tags"></div>
@@ -1611,7 +1623,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Shacharit</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name">13 Attributes — 13-Day Cycle</div>
+    <div class="sefirah-cycle-name">13 Attributes — 13-Day Cycle <span class="maalah">מעלה ח׳</span></div>
     <div class="sefirah-main-text">Loading…</div>
     <div class="sefirah-sub-text"></div>
     <div class="sefirah-tags"></div>
@@ -1630,7 +1642,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tikkun HaKlali</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name">41-Day Cycle — Mivtzoyim</div>
+    <div class="sefirah-cycle-name">41-Day Cycle — Mivtzoyim <span class="maalah">מעלה ט׳</span></div>
     <div class="sefirah-main-text">Loading…</div>
     <div class="sefirah-sub-text"></div>
     <div class="sefirah-tags"></div>
@@ -1649,8 +1661,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Mincha</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Zohar</span></div>
-    <div id="hod-zohar-face" class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Zohar <span class="maalah">מעלה י׳</span></span><span style="display:block">Shulchan Aruch <span class="maalah">מעלה י״א</span></span></div>
+    <div id="hod-zohar-face" style="margin-bottom:6px;">Loading…</div>
+    <div class="sefirah-main-text">Loading…</div>
     <div class="sefirah-sub-text" style="display:none;"></div>
     <div class="sefirah-tags"></div>
     <div class="sefirah-detail"></div>
@@ -1668,7 +1681,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Maariv</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name">Shovavim — Parasha Cycle</div>
+    <div class="sefirah-cycle-name">Shovavim — Parasha Cycle <span class="maalah">מעלה י״ב</span></div>
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
@@ -2062,17 +2075,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
         <div class="malchut-section">
-          <div class="keter-section-label">✦ Daily Likutei Sichos</div>
+          <div class="keter-section-label">✦ Daily Likutei Sichos <span class="maalah">מעלה י״ג</span></div>
           <div id="malchut-ksa-face">Loading…</div>
         </div>
         <div class="malchut-section">
-          <div class="keter-section-label">✦ MiPri Yadeiah — מפרי ידיה</div>
+          <div class="keter-section-label">✦ MiPri Yadeiah — מפרי ידיה <span class="maalah">מעלה י״ד</span></div>
           <div id="malchut-cycle-name" style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Daily Text</div>
           <div class="sefirah-main-text" id="malchut-main">Loading…</div>
           <div class="sefirah-sub-text" id="malchut-sub"></div>
         </div>
         <div class="malchut-section">
-          <div class="keter-section-label">✦ BaShaarim Maaseiah — בשערים מעשיה</div>
+          <div class="keter-section-label">✦ BaShaarim Maaseiah — בשערים מעשיה <span class="maalah">מעלה ט״ו</span></div>
           <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Likutei Halachot</div>
           <div id="malchut-lh-face">Loading…</div>
         </div>
@@ -9319,7 +9332,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const ohLine = `<br><span style="color:var(--ink-mid);font-size:0.9em">Ohr HaChaim · Parashat ${kstParasha || '—'}</span>` +
         ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Sefaria</a>`;
 
-      document.getElementById('keter-kst-label').textContent = '✦ Ohr KiTov';
+      document.getElementById('keter-kst-label').innerHTML = '✦ Ohr KiTov <span class="maalah">מעלה ב׳</span>';
 
       // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40)
       const KST_HB_PAGE_OFFSET = 36;
@@ -9799,7 +9812,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       gatesValueHtml + `</span></div>`;
 
     if (inExtra && cy22Mic) {
-      document.getElementById('chochmah-cycle-name').textContent = cy22Mic.setLabel;
+      document.getElementById('chochmah-cycle-name').innerHTML = cy22Mic.setLabel + ' <span class="maalah">מעלה ד׳</span>';
       document.getElementById('chochmah-main').innerHTML =
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22Mic.label}</strong> <span style="font-size:1.1em">${cy22Mic.hebrew}</span><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>`;
@@ -9807,7 +9820,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       document.getElementById('chochmah-tags').innerHTML =
         `<span class="tag highlight">Adar I · Day ${cy22Mic.day} of ${cy22Mic.total}</span><span class="tag">${cy22Mic.label}</span>`;
     } else {
-      document.getElementById('chochmah-cycle-name').textContent = 'Alef-Bet — 22-Day Cycle';
+      document.getElementById('chochmah-cycle-name').innerHTML = 'Alef-Bet — 22-Day Cycle <span class="maalah">מעלה ד׳</span>';
       document.getElementById('chochmah-main').innerHTML =
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Cycle:</span> <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
@@ -10008,7 +10021,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const breslevCD3 = breslevIdx2 !== null ? BRESLEV_CDS[breslevIdx2]     : null;
     const breslevCD4 = breslevIdx2 !== null ? BRESLEV_CDS[breslevIdx2 + 1] : null;
 
-    document.getElementById('binah-cycle-name').textContent = 'Sefirot — 7×7×7 Omer Cycle';
+    document.getElementById('binah-cycle-name').innerHTML = 'Sefirot — 7×7×7 Omer Cycle <span class="maalah">מעלה ה׳</span>';
     document.getElementById('binah-main').innerHTML =
       `<strong>${combo}</strong>`;
     document.getElementById('binah-sub').innerHTML =
@@ -10102,8 +10115,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
 
     const mishnaInfo = getMishnaInfo(dEff);
-    document.getElementById('chesed-cycle-name').textContent =
-      mishnaInfo.type === 'mishna' ? 'Mishna — Oral Torah' : 'Tosefta — Expanded Oral Torah';
+    document.getElementById('chesed-cycle-name').innerHTML =
+      (mishnaInfo.type === 'mishna' ? 'Mishna — Oral Torah' : 'Tosefta — Expanded Oral Torah') + ' <span class="maalah">מעלה ו׳</span>';
     document.getElementById('chesed-main').innerHTML = mishnaInfo.text;
     document.getElementById('chesed-sub').innerHTML = mishnaInfo.sub +
       (mishnaInfo.seferiaUrl ? SEFARIA_LINK(mishnaInfo.seferiaUrl) : '');
@@ -10158,7 +10171,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // GEVURAH — Tanach
     const tanachInfo = getTanachInfo(dEff);
-    document.getElementById('gevurah-cycle-name').innerHTML = 'Tanach (2 Chapters)';
+    document.getElementById('gevurah-cycle-name').innerHTML = 'Tanach (2 Chapters) <span class="maalah">מעלה ז׳</span>';
     document.getElementById('gevurah-main').innerHTML =
       tanachInfo.text +
       ` &nbsp;·&nbsp; <a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>` +
@@ -10283,7 +10296,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     _tifTags.style.flexWrap = 'nowrap';
     if (inExtra && cy13Mic) {
-      cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes — Leap Year Microcosm`;
+      cards[4].querySelector('.sefirah-cycle-name').innerHTML = `13 Attributes — Leap Year Microcosm <span class="maalah">מעלה ח׳</span>`;
       cards[4].querySelector('.sefirah-main-text').innerHTML =
         `Microcosm Day <strong>${cy13Mic.day}</strong> — Cycle <strong>${cy13Mic.representsCycle}</strong>:<br>` +
         `<strong>${cy13Mic.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13Mic.attr.hebrew}</span><br>` +
@@ -10293,7 +10306,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       _tifTags.innerHTML =
         `<span class="tag highlight" style="white-space:nowrap">${hMonth === 11 ? 'Shevat' : 'Adar I'} · Day ${cy13Mic.day} of ${cy13Mic.total}</span><span class="tag">${cy13Mic.attr.name}</span>`;
     } else {
-      cards[4].querySelector('.sefirah-cycle-name').textContent = `13 Attributes of Mercy — 13-Day Cycle`;
+      cards[4].querySelector('.sefirah-cycle-name').innerHTML = `13 Attributes of Mercy — 13-Day Cycle <span class="maalah">מעלה ח׳</span>`;
       cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
         ? `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span><br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span>`
         : `Attribute <strong>${cy13.day}</strong> · Cycle <strong>${cy13.cycle}</strong>:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
@@ -10442,7 +10455,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const lcBookLabel = lcLevel.review
         ? `Devarim — ${lcLevel.level} / ${lcLevel.world} (Review)`
         : `${lcLevel.book} — ${lcLevel.level} / ${lcLevel.world}`;
-      cards[5].querySelector('.sefirah-cycle-name').textContent = `55-Day Cycle: Torah Parashiyot`;
+      cards[5].querySelector('.sefirah-cycle-name').innerHTML = `55-Day Cycle: Torah Parashiyot <span class="maalah">מעלה ט׳</span>`;
       cards[5].querySelector('.sefirah-main-text').innerHTML =
         `Day <strong>${leapCycleDay}</strong> of <strong>55</strong> · Year-Cycle <strong>${leapCycleNum}</strong>`;
       cards[5].querySelector('.sefirah-sub-text').innerHTML = lcIsYechidah
@@ -10476,7 +10489,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     } else {
-      cards[5].querySelector('.sefirah-cycle-name').textContent = `41-Day Cycle: Receiving the Torah`;
+      cards[5].querySelector('.sefirah-cycle-name').innerHTML = `41-Day Cycle: Receiving the Torah <span class="maalah">מעלה ט׳</span>`;
       cards[5].querySelector('.sefirah-main-text').innerHTML =
         `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>`;
       cards[5].querySelector('.sefirah-sub-text').innerHTML =
@@ -10525,7 +10538,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar</span>';
+    document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar <span class="maalah">מעלה י׳</span></span><span style="display:block">Shulchan Aruch <span class="maalah">מעלה י״א</span></span>';
 
     const hodZoharHtml =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar</div>` +
@@ -10555,10 +10568,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
 
     if (!hal.chofetz) {
-      const hodSaHtml =
-        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch</div>` +
-        `<div style="font-size:0.88rem;margin-bottom:10px;"><strong>Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
-        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold)">Sefaria</a></div>`;
+      cards[6].querySelector('.sefirah-main-text').innerHTML =
+        `<strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}` +
+        ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim</div>` +
@@ -10570,12 +10582,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
         hodChazarahHtml +
-        hodSaHtml +
+        hodCcHtml +
+        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+        `<div class="detail-row"><span class="detail-label">Chapters:</span><span class="detail-value">Orach Chaim ${hal.ch1} & ${hal.ch2}</span></div>` +
         `<div class="detail-row"><span class="detail-label">Commentary:</span><span class="detail-value">Mishnah Berurah by the Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · Chapters 1-697 · Days 1-348</span></div>` +
         `<div class="detail-row"><span class="detail-label">Year end:</span><span class="detail-value">Sefer Chofetz Chaim (Days 349-364)</span></div>` +
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-        hodCcHtml +
         hodResourcesHtml +
         hodRashabHtml;
     } else {
@@ -10586,16 +10598,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
+      cards[6].querySelector('.sefirah-main-text').innerHTML =
+        `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodZoharHtml +
         hodChazarahHtml +
-        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Sefer Chofetz Chaim</div>` +
-        `<div style="font-size:0.88rem;margin-bottom:10px;">Sefer Chofetz Chaim — Section <strong>${hal.section}</strong></div>` +
+        hodCcHtml +
+        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
         `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">Day ${d} of year · Section ${hal.section} of Chofetz Chaim</span></div>` +
         `<div class="detail-row"><span class="detail-label">Topic:</span><span class="detail-value">Laws of proper speech (lashon hara, rechilut)</span></div>` +
         `<div class="detail-row"><span class="detail-label">Days:</span><span class="detail-value">Days 349-364 of the year</span></div>` +
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-        hodCcHtml +
         hodResourcesHtml +
         hodRashabHtml;
     }
