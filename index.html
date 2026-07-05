@@ -5790,11 +5790,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   };
   // V'Atah Tetzaveh — the Rebbe's last ma'amar (distributed Purim Katan 5752),
   // 12 se'ifim riding the Tiferet 13-day tribe/month cycle: Adar I (day 11,
-  // Naftali) and Adar II (day 12, Levi) both carry Se'if 1, Nissan (day 13,
+  // Naftali — Purim Katan's month, when the whole ma'amar was given) carries
+  // the OVERVIEW (0), Adar II (day 12, Levi) opens Se'if 1, Nissan (day 13,
   // Yehudah) carries Se'if 2, and Iyar-Shevat (days 1-10) carry Se'ifim 3-12.
-  // The ma'amar completes every 13 days — 28 times a year. urls: per-se'if
-  // part pages (null renders unlinked until provided).
-  const VATAH_SEIF_BY_DAY = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 1, 2];
+  // The ma'amar completes every 13 days — 28 times a year.
+  const VATAH_OVERVIEW_URL = 'https://www.chabad.org/therebbe/article_cdo/aid/145191/jewish/Maamar-Veatah-Tetzaveh.htm';
+  const VATAH_SEIF_BY_DAY = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 1, 2];
   const VATAH_MONTH_BY_DAY = ['Iyar','Sivan','Tammuz','Av','Elul','Tishrei','Cheshvan','Kislev','Teves','Shevat','Adar I','Adar II','Nissan'];
   const VATAH_HEB = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ז׳','ח׳','ט׳','י׳','י״א','י״ב'];
   const VATAH_TITLES = [
@@ -11072,14 +11073,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         || PARASHA_TO_NUMBER[(actualParasha || '').split('-')[0].trim()];
       const lsBook = pNum && LS_BOOKS.find(b => pNum <= b.max);
       _lsSichosBook = lsBook ? lsBook.book : null;
-      const _vtSeif  = VATAH_SEIF_BY_DAY[cy13.day - 1];
-      const _vtUrl   = VATAH_URLS[_vtSeif - 1];
-      const _vtText  = `ואתה תצוה — Se'if ${VATAH_HEB[_vtSeif - 1]}`;
+      const _vtSeif  = VATAH_SEIF_BY_DAY[cy13.day - 1]; // 0 = overview (Adar I day)
+      const _vtUrl   = _vtSeif === 0 ? VATAH_OVERVIEW_URL : VATAH_URLS[_vtSeif - 1];
+      const _vtText  = _vtSeif === 0 ? `ואתה תצוה — Overview` : `ואתה תצוה — Se'if ${VATAH_HEB[_vtSeif - 1]}`;
+      const _vtTitle = _vtSeif === 0 ? 'the complete ma\'amar — Purim Katan' : VATAH_TITLES[_vtSeif - 1];
       document.getElementById('malchut-ksa-face').innerHTML =
         (_vtUrl
           ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold);font-size:0.88em">${_vtText}</a>`
           : `<span style="color:var(--gold);font-size:0.88em">${_vtText}</span>`) +
-        ` <span style="font-size:0.78em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]} — ${VATAH_TITLES[_vtSeif - 1]}</span>`;
+        ` <span style="font-size:0.78em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]} — ${_vtTitle}</span>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
