@@ -2666,7 +2666,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Rambam's own 365 Negative Commandments (Sefer HaMitzvot's Lo Ta'aseh, in
   // his own enumeration order — the numbering used everywhere, e.g. "Lo
   // Sa'aseh 142"), distributed one per day across the Kabbalah of Time's
-  // 52-week/364-day year — see getLoTaasehInfo() below, which reuses the
+  // 52-week/364-day year — see getSeferHamitzvosInfo() below, which reuses the
   // same leap-year-collapsing day count (dEff/effectiveKotWeek) that Tanach
   // Yomi and Beit Aharon already rely on to recur identically every Hebrew
   // year. Since 365 doesn't divide evenly into 364 days, the final day of
@@ -3044,13 +3044,285 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     {n:365, title:"Not for the king to amass excessive personal silver and gold.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Negative_Commandments.365"},
   ]; // [{n, title, url}, …] — n=1..365, index n-1; Rambam's Sefer HaMitzvot, Negative Commandments
 
-  function getLoTaasehInfo(d) {
+  // Rambam's 248 Positive Commandments (Sefer HaMitzvot's Mitzvos Aseh, his
+  // enumeration order) — the aseh-tov half of the KoT Sefer HaMitzvos wheel.
+  const ASEH_248 = [
+    {n:1, title:"To know and believe in the existence of Hashem.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.1"},
+    {n:2, title:"To know His unity — Hashem is One.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.2"},
+    {n:3, title:"To love Hashem.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.3"},
+    {n:4, title:"To fear Hashem.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.4"},
+    {n:5, title:"To serve Hashem — the service of prayer.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.5"},
+    {n:6, title:"To cleave to Hashem, attaching oneself to the sages.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.6"},
+    {n:7, title:"To swear in His name when an oath is required.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.7"},
+    {n:8, title:"To emulate His ways — \"and you shall walk in His ways.\"", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.8"},
+    {n:9, title:"To sanctify His name (kiddush Hashem).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.9"},
+    {n:10, title:"To recite the Shema twice daily.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.10"},
+    {n:11, title:"To study Torah and to teach it.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.11"},
+    {n:12, title:"To bind tefillin on the head.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.12"},
+    {n:13, title:"To bind tefillin on the arm.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.13"},
+    {n:14, title:"To attach tzitzit to four-cornered garments.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.14"},
+    {n:15, title:"To affix a mezuzah on the doorpost.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.15"},
+    {n:16, title:"Hakhel — to assemble the whole people to hear Torah after shemitah.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.16"},
+    {n:17, title:"The king writes his own Torah scroll.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.17"},
+    {n:18, title:"Every Jew writes a Torah scroll for himself.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.18"},
+    {n:19, title:"To bless Hashem after eating (Birkat HaMazon).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.19"},
+    {n:20, title:"To build the Beit HaBechirah — the Sanctuary.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.20"},
+    {n:21, title:"To revere the Sanctuary.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.21"},
+    {n:22, title:"To guard the Sanctuary continually.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.22"},
+    {n:23, title:"The Levites are to serve in the Sanctuary.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.23"},
+    {n:24, title:"The kohanim sanctify their hands and feet before the service.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.24"},
+    {n:25, title:"To kindle the lamps of the Menorah.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.25"},
+    {n:26, title:"The kohanim bless Israel (Birkat Kohanim).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.26"},
+    {n:27, title:"To set the showbread (lechem hapanim) before Hashem.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.27"},
+    {n:28, title:"To burn the incense twice daily.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.28"},
+    {n:29, title:"To keep a perpetual fire burning on the altar.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.29"},
+    {n:30, title:"To remove the ashes from the altar daily.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.30"},
+    {n:31, title:"To send the impure out of the camp of the Shechinah.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.31"},
+    {n:32, title:"To honor the kohanim.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.32"},
+    {n:33, title:"The kohanim wear the priestly garments for the service.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.33"},
+    {n:34, title:"To carry the Ark on the shoulders.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.34"},
+    {n:35, title:"To anoint with the sacred anointing oil.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.35"},
+    {n:36, title:"The kohanim serve in rotations, and together on the festivals.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.36"},
+    {n:37, title:"The kohanim become impure (mourn) for their close relatives.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.37"},
+    {n:38, title:"The Kohen Gadol marries a virgin.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.38"},
+    {n:39, title:"To offer the daily tamid offerings, morning and afternoon.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.39"},
+    {n:40, title:"The Kohen Gadol offers a minchah every day.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.40"},
+    {n:41, title:"The Shabbat musaf offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.41"},
+    {n:42, title:"The Rosh Chodesh musaf offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.42"},
+    {n:43, title:"The Pesach musaf offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.43"},
+    {n:44, title:"The omer minchah of barley on the second day of Pesach.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.44"},
+    {n:45, title:"The Shavuot musaf offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.45"},
+    {n:46, title:"To bring the two loaves (shtei halechem) on Shavuot.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.46"},
+    {n:47, title:"The Rosh Hashanah musaf offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.47"},
+    {n:48, title:"The Yom Kippur musaf offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.48"},
+    {n:49, title:"The Yom Kippur avodah — the order of the day's service.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.49"},
+    {n:50, title:"The Sukkot musaf offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.50"},
+    {n:51, title:"The Shemini Atzeret musaf offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.51"},
+    {n:52, title:"To celebrate the three festivals with a chagigah offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.52"},
+    {n:53, title:"To appear before Hashem on the three festivals.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.53"},
+    {n:54, title:"To rejoice on the festivals.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.54"},
+    {n:55, title:"To slaughter the Pesach offering on the fourteenth of Nissan.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.55"},
+    {n:56, title:"To eat the Pesach offering roasted, on the night of the fifteenth.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.56"},
+    {n:57, title:"To slaughter the Pesach Sheni on the fourteenth of Iyar.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.57"},
+    {n:58, title:"To eat the Pesach Sheni with matzah and maror.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.58"},
+    {n:59, title:"To sound the trumpets over the offerings and in times of distress.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.59"},
+    {n:60, title:"Offerings must be at least eight days old.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.60"},
+    {n:61, title:"Offerings must be unblemished and perfect.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.61"},
+    {n:62, title:"To salt every offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.62"},
+    {n:63, title:"The procedure of the olah — the burnt offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.63"},
+    {n:64, title:"The procedure of the chatat — the sin offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.64"},
+    {n:65, title:"The procedure of the asham — the guilt offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.65"},
+    {n:66, title:"The procedure of the shelamim — the peace offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.66"},
+    {n:67, title:"The procedure of the minchah — the meal offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.67"},
+    {n:68, title:"The court brings an offering if the community erred in its ruling.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.68"},
+    {n:69, title:"One who sinned unknowingly brings a fixed chatat.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.69"},
+    {n:70, title:"The asham talui, for one uncertain whether he transgressed.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.70"},
+    {n:71, title:"The asham vadai, for specified certain guilt.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.71"},
+    {n:72, title:"The korban oleh v'yored — the sliding-scale offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.72"},
+    {n:73, title:"To confess one's sins before Hashem (viduy).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.73"},
+    {n:74, title:"The zav brings an offering upon purification.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.74"},
+    {n:75, title:"The zavah brings an offering upon purification.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.75"},
+    {n:76, title:"A woman after childbirth brings an offering.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.76"},
+    {n:77, title:"The metzora brings an offering upon purification.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.77"},
+    {n:78, title:"To tithe the animals (maaser behemah).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.78"},
+    {n:79, title:"To sanctify the firstborn of kosher animals.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.79"},
+    {n:80, title:"To redeem the firstborn son (pidyon haben).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.80"},
+    {n:81, title:"To redeem the firstborn donkey with a lamb.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.81"},
+    {n:82, title:"To break the neck of the firstborn donkey if it is not redeemed.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.82"},
+    {n:83, title:"To bring all vowed and free-will offerings by the first festival.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.83"},
+    {n:84, title:"To offer all offerings in the chosen House.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.84"},
+    {n:85, title:"To bring offerings consecrated abroad to the chosen House.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.85"},
+    {n:86, title:"To redeem consecrated animals that became blemished.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.86"},
+    {n:87, title:"The exchanged animal of temurah is also holy.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.87"},
+    {n:88, title:"The kohanim eat the remainder of the menachot.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.88"},
+    {n:89, title:"The kohanim eat the meat of the chatat and asham.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.89"},
+    {n:90, title:"To burn consecrated meat that became impure.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.90"},
+    {n:91, title:"To burn the notar — consecrated meat left past its time.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.91"},
+    {n:92, title:"The nazir lets his hair grow.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.92"},
+    {n:93, title:"The nazir shaves and brings his offerings at completion.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.93"},
+    {n:94, title:"To fulfill whatever one's lips have vowed.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.94"},
+    {n:95, title:"To judge the annulment of vows by the laws of the Torah.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.95"},
+    {n:96, title:"The impurity of animal carcasses (neveilah).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.96"},
+    {n:97, title:"The impurity of the eight creeping creatures (sheratzim).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.97"},
+    {n:98, title:"The impurity of foods and drinks.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.98"},
+    {n:99, title:"The impurity of the niddah.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.99"},
+    {n:100, title:"The impurity of a woman after childbirth.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.100"},
+    {n:101, title:"The impurity of the metzora.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.101"},
+    {n:102, title:"The impurity of garments stricken with tzaraat.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.102"},
+    {n:103, title:"The impurity of houses stricken with tzaraat.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.103"},
+    {n:104, title:"The impurity of the zav.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.104"},
+    {n:105, title:"The impurity of shichvat zera.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.105"},
+    {n:106, title:"The impurity of the zavah.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.106"},
+    {n:107, title:"The impurity of the dead.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.107"},
+    {n:108, title:"The laws of the sprinkling waters (mei niddah), which purify and defile.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.108"},
+    {n:109, title:"To immerse in a mikveh for purification.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.109"},
+    {n:110, title:"The purification procedure of tzaraat — cedar, hyssop, scarlet, and birds.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.110"},
+    {n:111, title:"The metzora shaves on the seventh day of his purification.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.111"},
+    {n:112, title:"The metzora must be recognizable — torn garments, calling \"impure, impure.\"", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.112"},
+    {n:113, title:"To prepare the ashes of the parah adumah — the red heifer.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.113"},
+    {n:114, title:"The valuations (arachin) of persons.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.114"},
+    {n:115, title:"The valuations of animals.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.115"},
+    {n:116, title:"The valuations of houses.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.116"},
+    {n:117, title:"The valuations of fields.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.117"},
+    {n:118, title:"One who misused consecrated property repays with an added fifth (me'ilah).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.118"},
+    {n:119, title:"Neta revai — the fourth-year fruit is holy, eaten in Yerushalayim.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.119"},
+    {n:120, title:"To leave pe'ah — the corner of the field — for the poor.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.120"},
+    {n:121, title:"To leave leket — the fallen gleanings.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.121"},
+    {n:122, title:"To leave the forgotten sheaf (shich'chah).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.122"},
+    {n:123, title:"To leave olelot — the small clusters of the vineyard.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.123"},
+    {n:124, title:"To leave peret — the fallen single grapes.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.124"},
+    {n:125, title:"To bring bikkurim — the first fruits — to the Sanctuary.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.125"},
+    {n:126, title:"To separate terumah gedolah for the kohen.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.126"},
+    {n:127, title:"To separate maaser rishon for the Levi.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.127"},
+    {n:128, title:"To separate maaser sheni, eaten in Yerushalayim.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.128"},
+    {n:129, title:"The Levites give terumat maaser to the kohanim.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.129"},
+    {n:130, title:"To separate maaser ani in the third and sixth years.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.130"},
+    {n:131, title:"To recite the viduy maaser declaration.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.131"},
+    {n:132, title:"To recite the declaration over the bikkurim.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.132"},
+    {n:133, title:"To separate challah from the dough for the kohen.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.133"},
+    {n:134, title:"To renounce ownership (hefker) of shemitah produce.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.134"},
+    {n:135, title:"To rest the land in the shemitah year.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.135"},
+    {n:136, title:"To sanctify the yovel — the fiftieth year.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.136"},
+    {n:137, title:"To sound the shofar on Yom Kippur of the yovel.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.137"},
+    {n:138, title:"In the yovel, land returns to its original owners.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.138"},
+    {n:139, title:"Houses in walled cities may be redeemed within a year.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.139"},
+    {n:140, title:"To count the years of the yovel cycle.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.140"},
+    {n:141, title:"To release all debts in shemitah (shemitat kesafim).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.141"},
+    {n:142, title:"To press the foreign debtor for payment, while releasing one's fellow.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.142"},
+    {n:143, title:"To give the kohen the foreleg, the jaws, and the stomach.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.143"},
+    {n:144, title:"To give the kohen the first of the shearing.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.144"},
+    {n:145, title:"The laws of cherem dedications — to Hashem and to the kohen.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.145"},
+    {n:146, title:"To slaughter (shechitah) before eating meat.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.146"},
+    {n:147, title:"To cover the blood of slaughtered beast and fowl.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.147"},
+    {n:148, title:"Shiluach haken — to send away the mother bird before taking the young.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.148"},
+    {n:149, title:"To examine the signs of kosher animals.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.149"},
+    {n:150, title:"To examine the signs of kosher fowl.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.150"},
+    {n:151, title:"To examine the signs of kosher locusts.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.151"},
+    {n:152, title:"To examine the signs of kosher fish.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.152"},
+    {n:153, title:"To sanctify the new moon — the court fixes the months and years.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.153"},
+    {n:154, title:"To rest on Shabbat.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.154"},
+    {n:155, title:"To sanctify Shabbat with words — Kiddush and Havdalah.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.155"},
+    {n:156, title:"To remove chametz on the fourteenth of Nissan.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.156"},
+    {n:157, title:"To relate the Exodus on the night of the fifteenth of Nissan.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.157"},
+    {n:158, title:"To eat matzah on the night of Pesach.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.158"},
+    {n:159, title:"To rest on the first day of Pesach.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.159"},
+    {n:160, title:"To rest on the seventh day of Pesach.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.160"},
+    {n:161, title:"To count the omer — forty-nine days.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.161"},
+    {n:162, title:"To rest on Shavuot.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.162"},
+    {n:163, title:"To rest on Rosh Hashanah.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.163"},
+    {n:164, title:"To afflict oneself (fast) on Yom Kippur.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.164"},
+    {n:165, title:"To rest on Yom Kippur.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.165"},
+    {n:166, title:"To rest on the first day of Sukkot.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.166"},
+    {n:167, title:"To rest on Shemini Atzeret.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.167"},
+    {n:168, title:"To dwell in the sukkah for seven days.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.168"},
+    {n:169, title:"To take the four species on Sukkot.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.169"},
+    {n:170, title:"To hear the shofar on Rosh Hashanah.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.170"},
+    {n:171, title:"To give the half-shekel each year.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.171"},
+    {n:172, title:"To heed the prophet of Hashem.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.172"},
+    {n:173, title:"To appoint a king over Israel.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.173"},
+    {n:174, title:"To obey the Great Sanhedrin.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.174"},
+    {n:175, title:"To follow the majority in disputes of law.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.175"},
+    {n:176, title:"To appoint judges and officers in every community.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.176"},
+    {n:177, title:"To treat litigants equally before the law.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.177"},
+    {n:178, title:"To testify in court if one has knowledge.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.178"},
+    {n:179, title:"To examine witnesses thoroughly.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.179"},
+    {n:180, title:"To do to scheming witnesses as they plotted to do.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.180"},
+    {n:181, title:"Eglah arufah — the calf of the unsolved murder.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.181"},
+    {n:182, title:"To establish six cities of refuge.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.182"},
+    {n:183, title:"To give the Levites cities to dwell in.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.183"},
+    {n:184, title:"To build a guardrail on one's roof (maakeh).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.184"},
+    {n:185, title:"To destroy idolatry and all that serves it.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.185"},
+    {n:186, title:"The law of the subverted city (ir hanidachat).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.186"},
+    {n:187, title:"To destroy the seven nations of Canaan.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.187"},
+    {n:188, title:"To wipe out the seed of Amalek.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.188"},
+    {n:189, title:"To remember what Amalek did to us.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.189"},
+    {n:190, title:"The laws of optional war — peace is offered first.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.190"},
+    {n:191, title:"The kohen anointed for war addresses the people.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.191"},
+    {n:192, title:"To prepare a place outside the camp.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.192"},
+    {n:193, title:"To carry a spade among one's weapons.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.193"},
+    {n:194, title:"To return that which was stolen.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.194"},
+    {n:195, title:"To give tzedakah to the poor.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.195"},
+    {n:196, title:"To give a parting gift to the freed Hebrew servant (ha'anakah).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.196"},
+    {n:197, title:"To lend to the poor without interest.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.197"},
+    {n:198, title:"To lend to the foreigner at interest, per its laws.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.198"},
+    {n:199, title:"To restore the pledged garment to its owner when he needs it.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.199"},
+    {n:200, title:"To pay the worker his wages on the same day.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.200"},
+    {n:201, title:"The worker may eat of the produce among which he works.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.201"},
+    {n:202, title:"To help unload a burdened animal (perikah).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.202"},
+    {n:203, title:"To help load one's fellow's animal (te'inah).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.203"},
+    {n:204, title:"To return lost property to its owner.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.204"},
+    {n:205, title:"To rebuke one's fellow who acts wrongly (tochachah).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.205"},
+    {n:206, title:"To love one's fellow as oneself.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.206"},
+    {n:207, title:"To love the convert.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.207"},
+    {n:208, title:"To keep accurate scales, weights, and measures.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.208"},
+    {n:209, title:"To rise before the elderly and honor the sage.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.209"},
+    {n:210, title:"To honor one's father and mother.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.210"},
+    {n:211, title:"To revere one's father and mother.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.211"},
+    {n:212, title:"To be fruitful and multiply.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.212"},
+    {n:213, title:"To marry through kiddushin.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.213"},
+    {n:214, title:"The groom rejoices with his wife for the first year, free from duty.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.214"},
+    {n:215, title:"To circumcise every male on the eighth day (brit milah).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.215"},
+    {n:216, title:"Yibum — levirate marriage with the childless brother's widow.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.216"},
+    {n:217, title:"Chalitzah — the release from yibum.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.217"},
+    {n:218, title:"The violator must marry his victim and may never divorce her.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.218"},
+    {n:219, title:"The wife of the defamer (motzi shem ra) remains with him forever.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.219"},
+    {n:220, title:"The laws of the seducer — the fifty shekels and marriage terms.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.220"},
+    {n:221, title:"The laws of the captive woman (yefat toar).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.221"},
+    {n:222, title:"Divorce is by a written bill — the get.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.222"},
+    {n:223, title:"The sotah procedure for the suspected wife.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.223"},
+    {n:224, title:"To lash the wicked as prescribed (malkot).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.224"},
+    {n:225, title:"To exile the accidental killer to a city of refuge.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.225"},
+    {n:226, title:"Execution by the sword, where prescribed.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.226"},
+    {n:227, title:"Execution by strangulation, where prescribed.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.227"},
+    {n:228, title:"Execution by burning, where prescribed.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.228"},
+    {n:229, title:"Execution by stoning, where prescribed.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.229"},
+    {n:230, title:"To hang certain of the executed, as prescribed.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.230"},
+    {n:231, title:"To bury the executed — and every dead — on the same day.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.231"},
+    {n:232, title:"The laws of the Hebrew servant (eved ivri).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.232"},
+    {n:233, title:"The master betroths the Hebrew maidservant (yi'ud).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.233"},
+    {n:234, title:"To redeem the Hebrew maidservant.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.234"},
+    {n:235, title:"The laws of the Canaanite servant.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.235"},
+    {n:236, title:"One who injures another pays compensation (chovel).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.236"},
+    {n:237, title:"The damages of the goring ox.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.237"},
+    {n:238, title:"The damages of the pit (bor).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.238"},
+    {n:239, title:"The laws of the thief — double payment and its penalties.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.239"},
+    {n:240, title:"The damages of grazing and trampling (shen v'regel).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.240"},
+    {n:241, title:"The damages of fire (esh).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.241"},
+    {n:242, title:"The laws of the unpaid guardian (shomer chinam).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.242"},
+    {n:243, title:"The laws of the paid guardian and the renter.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.243"},
+    {n:244, title:"The laws of the borrower (sho'el).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.244"},
+    {n:245, title:"The laws of buying and selling (kinyan).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.245"},
+    {n:246, title:"To judge the claims of plaintiff and defendant (to'en v'nit'an).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.246"},
+    {n:247, title:"To save the pursued, even at the cost of the pursuer's life.", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.247"},
+    {n:248, title:"The laws of inheritance (nachalot).", url:"https://www.sefaria.org/Sefer_HaMitzvot,_Positive_Commandments.248"},
+  ]; // [{n, title, url}, …] — n=1..248, index n-1
+
+  // The KoT Sefer HaMitzvos wheel, year-anchored: from Rosh Hashanah (day 1)
+  // through 3 Sivan (day 243), the 365 Negative Commandments at 1.5/day —
+  // odd days carry two, even days one (122×2 + 121×1 = 365 exactly), the
+  // restraint completing as the yemei hagbalah open. From 4 Sivan (day 244)
+  // through year's end, the 248 Positive Commandments at 2/day; the final
+  // six spill into days 1-3 of the new year — the KoT calendars' natural
+  // overlap — so Rosh Hashanah carries both the completion of aseh-tov and
+  // the beginning of sur-me'ra.
+  function getSeferHamitzvosInfo(d) {
     d = Math.max(1, d);
-    const dayIdx0 = (d - 1) % 364; // 0-363, collapsed KoT day-of-year
-    const entries = dayIdx0 === 363
-      ? [LO_TAASEH_365[363], LO_TAASEH_365[364]]
-      : [LO_TAASEH_365[dayIdx0]];
-    return entries.filter(Boolean);
+    const k = ((d - 1) % 364) + 1; // KoT day-of-year 1..364
+    const out = { day: k, neg: [], pos: [] };
+    if (k <= 243) {
+      const prev = (k - 1) + Math.ceil((k - 1) / 2); // negatives completed before today
+      const size = (k % 2 === 1) ? 2 : 1;
+      for (let i = 0; i < size; i++) if (LO_TAASEH_365[prev + i]) out.neg.push(LO_TAASEH_365[prev + i]);
+    }
+    if (k >= 244) {
+      const i = k - 243; // 1..121
+      out.pos.push(ASEH_248[2 * i - 2], ASEH_248[2 * i - 1]);
+    } else if (k <= 3) {
+      const i = 121 + k; // 122..124 — the outgoing year's final positives
+      out.pos.push(ASEH_248[2 * i - 2], ASEH_248[2 * i - 1]);
+    }
+    out.pos = out.pos.filter(Boolean);
+    return out;
   }
 
   // Daily synthesis: leads with that day's Hayom Yom, then brings in a
@@ -9386,9 +9658,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // 4. Rambam — three cycles
     const chabadRambam = `https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters`;
+    const shm = getSeferHamitzvosInfo(d);
+    const shmA = (m, pfx) => `<a href="${m.url}" target="_blank" style="color:var(--gold)">${pfx} ${m.n}</a>`;
+    const shmParts = [];
+    if (shm.neg.length) shmParts.push(shm.neg.map(m => shmA(m, "Lo Ta'aseh")).join(' & '));
+    if (shm.pos.length) shmParts.push(shm.pos.map(m => shmA(m, 'Aseh')).join(' & '));
+    const shmTitles = [...shm.neg, ...shm.pos].map(m => m.title).join(' ');
     document.getElementById('keter-rambam-face').innerHTML =
-      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">Sefer HaMitzvos</a>` +
-      ` <span style="font-size:0.82em;color:var(--ink-mid)">— Maimonides' count of the 613 commandments (248 positive, 365 negative)</span>` +
+      `<strong>Sefer HaMitzvos</strong> — ` + shmParts.join(' &nbsp;·&nbsp; ') +
+      `<br><span style="font-size:0.82em;color:var(--ink-mid)">${shmTitles}</span>` +
       `<br><a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">Hayom Yom</a>` +
       ` <span style="font-size:0.82em;color:var(--ink-mid)">— a daily Chassidic teaching, compiled by the Rebbe</span>`;
     document.getElementById('keter-rambam-main').innerHTML =
