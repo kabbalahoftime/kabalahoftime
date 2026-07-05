@@ -5787,6 +5787,30 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     53: 'https://www.chabad.org/multimedia/music_cdo/aid/6289735/jewish/Haftorah-Haazinu.htm',
     54: 'https://www.chabad.org/multimedia/music_cdo/aid/6289760/jewish/Haftorah-VZot-HaBerachah.htm',
   };
+  // V'Atah Tetzaveh — the Rebbe's last ma'amar (distributed Purim Katan 5752),
+  // 12 se'ifim riding the Tiferet 13-day tribe/month cycle: Adar I (day 11,
+  // Naftali) and Adar II (day 12, Levi) both carry Se'if 1, Nissan (day 13,
+  // Yehudah) carries Se'if 2, and Iyar-Shevat (days 1-10) carry Se'ifim 3-12.
+  // The ma'amar completes every 13 days — 28 times a year. urls: per-se'if
+  // part pages (null renders unlinked until provided).
+  const VATAH_SEIF_BY_DAY = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 1, 2];
+  const VATAH_MONTH_BY_DAY = ['Iyar','Sivan','Tammuz','Av','Elul','Tishrei','Cheshvan','Kislev','Teves','Shevat','Adar I','Adar II','Nissan'];
+  const VATAH_HEB = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ז׳','ח׳','ט׳','י׳','י״א','י״ב'];
+  const VATAH_TITLES = [
+    'The verse and its questions',
+    'The head and the feet',
+    'Raya Meheimna — shepherd of faith',
+    'They accepted what they had begun',
+    'The two roots of faith',
+    'Mesirus nefesh from the essence',
+    'Mordechai in his generation',
+    'The sequence of the maamar',
+    'Crushed by exile — nothing but You',
+    'The higher light',
+    'They shall bring you — ner tamid',
+    'The Moshe of our generation',
+  ];
+  const VATAH_URLS = [null, null, null, null, null, null, null, null, null, null, null, null];
   const WEEKLY_BOOKS = [
   // W1
   { week:1, parasha:'Rosh Hashana / Haazinu',   month:'Tishrei',
@@ -11034,10 +11058,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         || PARASHA_TO_NUMBER[(actualParasha || '').split('-')[0].trim()];
       const lsBook = pNum && LS_BOOKS.find(b => pNum <= b.max);
       _lsSichosBook = lsBook ? lsBook.book : null;
+      const _vtSeif  = VATAH_SEIF_BY_DAY[cy13.day - 1];
+      const _vtUrl   = VATAH_URLS[_vtSeif - 1];
+      const _vtText  = `ואתה תצוה — Se'if ${VATAH_HEB[_vtSeif - 1]}`;
       document.getElementById('malchut-ksa-face').innerHTML =
         `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold);font-size:0.88em">Daily Sicha</a>` +
-        `<br><a href="https://projectlikkuteisichos.org/" target="_blank" style="color:var(--gold);font-size:0.88em">Project Likkutei Sichos</a>` +
-        ` <span style="font-size:0.78em;color:var(--ink-mid)">— the worldwide weekly sicha cycle</span>`;
+        `<br>` + (_vtUrl
+          ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold);font-size:0.88em">${_vtText}</a>`
+          : `<span style="color:var(--gold);font-size:0.88em">${_vtText}</span>`) +
+        ` <span style="font-size:0.78em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]} — ${VATAH_TITLES[_vtSeif - 1]}</span>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
