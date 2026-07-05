@@ -4368,21 +4368,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Say Thank You and See Miracles (The Garden of Miracles)',
   ];
 
-  // Nassi (tribal prince) for each day 1-13 within a cycle (based on Rosh Chodesh Nissan order)
+  // Nassi (tribal prince) for each day 1-13 within a cycle, phase-aligned to the
+  // actual offering days: the KoT year is built so 1 Nissan = day 182 = 14×13,
+  // i.e. CYCLE DAY 13 — the day Nachshon ben Aminadav offered. Days 1-12 of the
+  // following cycle then fall on 2-13 Nissan. Day 12 (13 Nissan) is Levi, who
+  // brought no offering — the tribe of Moshe and Aharon, whose consolation was
+  // the Menorah; Levi corresponds to Adar II. Each entry carries its month.
   const NASSI_NAMES = [
-    'Nachshon ben Aminadav (Yehudah)',
-    'Netanel ben Tzuar (Yissachar)',
-    'Eliav ben Chelon (Zevulun)',
-    'Elitzur ben Shedeur (Reuven)',
-    'Shlumiel ben Tzurishaddai (Shimon)',
-    'Elyasaf ben Deuel (Gad)',
-    'Elishama ben Amihud (Ephraim)',
-    'Gamliel ben Pedahtzur (Menashe)',
-    'Avidan ben Gideoni (Binyamin)',
-    'Achiezer ben Amishadai (Dan)',
-    'Pagiel ben Ochran (Asher)',
-    'Achira ben Einan (Naftali)',
-    'Day 13 — Synthesis of All Tribes'
+    'Netanel ben Tzuar (Yissachar) · Iyar',
+    'Eliav ben Chelon (Zevulun) · Sivan',
+    'Elitzur ben Shedeur (Reuven) · Tammuz',
+    'Shlumiel ben Tzurishaddai (Shimon) · Av',
+    'Elyasaf ben Deuel (Gad) · Elul',
+    'Elishama ben Amihud (Ephraim) · Tishrei',
+    'Gamliel ben Pedahtzur (Menashe) · Cheshvan',
+    'Avidan ben Gideoni (Binyamin) · Kislev',
+    'Achiezer ben Amishadai (Dan) · Teves',
+    'Pagiel ben Ochran (Asher) · Shevat',
+    'Achira ben Einan (Naftali) · Adar I',
+    'Levi — no offering; the tribe of Moshe & Aharon · Adar II',
+    'Nachshon ben Aminadav (Yehudah) · Nissan'
   ];
 
   function get13DayInfo(d) {
