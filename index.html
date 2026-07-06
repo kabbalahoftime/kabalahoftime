@@ -3322,10 +3322,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   const MISHNEH_TORAH_URL = 'https://www.sefaria.org/texts/Halakhah/Mishneh%20Torah';
 
   // The KoT Sefer HaMitzvos wheel — date-pegged like Daily Likutei Moharan.
-  // NEGATIVES: from 25 Elul (the day of creation) through 3 Sivan, at ~1.5/day:
-  // the first stretch alternates two-and-one, then singles, calibrated to the
-  // actual length of the cycle year (Cheshvan/Kislev vary) so that mitzvah
-  // #365 falls on Gimmel Sivan EVERY year, as the yemei hagbalah open.
+  // NEGATIVES: from 25 Elul (the day of creation) through 3 Sivan, at ~1.5/day,
+  // calibrated to the actual length of the cycle year (Cheshvan/Kislev vary) so
+  // that mitzvah #365 falls on Gimmel Sivan EVERY year, as the yemei hagbalah
+  // open. Every day carries TWO negatives: on a day that advances by one, the
+  // first is a review — yesterday's last mitzvah, picking up where we left off
+  // — and the second is the day's new one; on a day that advances by two, both
+  // are new. So there are no lone-mitzvah days; the pace still averages ~1.5.
   // POSITIVES: two per day from 4 Sivan through 9 Tishrei — Sivan-Elul are
   // fixed-length months, so the 124 days are exact every year and Aseh #248
   // always falls on Erev Yom Kippur. The tracks overlap from 25 Elul to
@@ -3393,7 +3396,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         prev = 3 * t + (k - 2 * t - 1);
         size = 1;
       }
-      for (let i = 0; i < size; i++) if (LO_TAASEH_365[prev + i]) out.neg.push(LO_TAASEH_365[prev + i]);
+      if (size === 2) {
+        // a two-mitzvah day: both are new
+        for (let i = 0; i < 2; i++) if (LO_TAASEH_365[prev + i]) out.neg.push(LO_TAASEH_365[prev + i]);
+      } else {
+        // a one-new-mitzvah day: rather than a lone mitzvah, we re-open with
+        // yesterday's last mitzvah as a review — picking up from where we left
+        // off — then learn today's new one. Every day thus holds two.
+        if (prev - 1 >= 0 && LO_TAASEH_365[prev - 1]) out.neg.push({ ...LO_TAASEH_365[prev - 1], review: true });
+        if (LO_TAASEH_365[prev]) out.neg.push(LO_TAASEH_365[prev]);
+      }
     }
     return out;
   }
@@ -9749,10 +9761,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // 4. Rambam — three cycles
     const chabadRambam = `https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters`;
     const shm = getSeferHamitzvosInfo(hMonth, hDay, hYear, isLeapYear);
-    const shmA = (m, pfx) => `<a href="${m.url}" target="_blank" style="color:var(--gold)">${pfx} ${m.n}</a>`;
+    const shmA = (m, pfx) => `<a href="${m.url}" target="_blank" style="color:var(--gold)${m.review ? ';opacity:0.55' : ''}">${pfx} ${m.n}${m.review ? ' (review)' : ''}</a>`;
     const shmParts = [];
     if (shm.neg.length) shmParts.push(shm.neg.map(m => shmA(m, "Lo Ta'aseh")).join(' & '));
-    if (shm.pos.length) shmParts.push(shm.pos.map(m => shmA(m, 'Aseh')).join(' & '));
+    if (shm.pos.length) shmParts.push(shm.pos.map(m => shmA(m, 'Positive')).join(' & '));
     let shmBody;
     if (shm.mt) {
       shmBody = `<strong>Sefer HaMitzvos</strong> — <a href="${shm.mt.url}" target="_blank" style="color:var(--gold)">Mishneh Torah${shm.mt.book ? ' · Book ' + shm.mt.book : ''}</a>` +
