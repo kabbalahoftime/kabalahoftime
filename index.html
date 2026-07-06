@@ -1520,12 +1520,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="keter-section">
     <div class="keter-section-label">✦ Rambam · 3 Chapters</div>
     <div class="keter-main" id="keter-rambam-main">Loading…</div>
-    <div class="keter-meta" id="keter-rambam-meta"></div>
   </div>
   <!-- RAMBAM 1 chapter section -->
   <div class="keter-section">
     <div class="keter-section-label">✦ Rambam · 1 Chapter</div>
     <div class="keter-main" id="keter-rambam1-main">Loading…</div>
+  </div>
+  <!-- RAMBAM Sefer HaMitzvos section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Rambam · Sefer HaMitzvos</div>
+    <div class="keter-main" id="keter-rambam-shm-main">Loading…</div>
   </div>
   <!-- DVAR MALCHUS & CHAYENU section -->
   <div class="keter-section">
@@ -9787,10 +9791,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ` <span style="font-size:0.82em;color:var(--ink-mid)">— a daily Chassidic teaching, compiled by the Rebbe</span>`;
     document.getElementById('keter-rambam-main').innerHTML =
       `<a href="${chabadRambam}/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters)</a>`;
-    document.getElementById('keter-rambam-meta').innerHTML =
-      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">Sefer HaMitzvos — Chabad.org daily</a>`;
     document.getElementById('keter-rambam1-main').innerHTML =
       `<a href="${chabadRambam}/1" target="_blank" style="color:var(--gold)">View today's Rambam (1 chapter)</a>`;
+    document.getElementById('keter-rambam-shm-main').innerHTML =
+      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">View today's Sefer HaMitzvos</a>`;
 
     // 5. Keter Shem Tov — daily section (face)
     let _kstTitleEn = null, _kstLabel = null;
