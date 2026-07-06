@@ -9763,7 +9763,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const shm = getSeferHamitzvosInfo(hMonth, hDay, hYear, isLeapYear);
     const shmA = (m, pfx) => `<a href="${m.url}" target="_blank" style="color:var(--gold)${m.review ? ';opacity:0.55' : ''}">${pfx} ${m.n}${m.review ? ' (review)' : ''}</a>`;
     const shmParts = [];
-    if (shm.neg.length) shmParts.push(shm.neg.map(m => shmA(m, "Lo Ta'aseh")).join(' & '));
+    if (shm.neg.length) shmParts.push(shm.neg.map(m => shmA(m, 'Negative')).join(' & '));
     if (shm.pos.length) shmParts.push(shm.pos.map(m => shmA(m, 'Positive')).join(' & '));
     let shmBody;
     if (shm.mt) {
