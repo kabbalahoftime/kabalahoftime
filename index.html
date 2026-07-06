@@ -2133,8 +2133,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       </div>
     </div>
     <div class="sefirah-detail">
-      <!-- Daily Connection — first section, above KSA -->
-      <div id="malchut-connection-detail" style="margin-bottom:14px;"></div>
       <!-- KSA row — Arich Anpin -->
       <div class="malchut-ksa-row" style="margin-bottom:14px;">
         <div class="keter-section-label">✦ Kitzur Shulchan Aruch</div>
@@ -6173,7 +6171,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'They accepted what they had begun',
     'The two roots of faith',
     'Mesirus nefesh from the essence',
-    'Mordechai in his generation',
+    'revealing the quality of mesirus nefesh in every member of the generation',
     'The sequence of the maamar',
     'Crushed by exile — nothing but You',
     'The higher light',
@@ -11637,15 +11635,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-size:0.88rem;margin-bottom:10px;">` +
       `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a> &nbsp;·&nbsp; ` +
       `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
-
-    document.getElementById('malchut-connection-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Connection — ואתה תצוה</div>
-       <div style="font-size:0.88rem;margin-bottom:6px;">` +
-      (_vtUrl ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold)">${_vtText}</a>` : _vtText) +
-      ` <span style="color:var(--ink-mid);font-size:0.9em">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]} — ${_vtTitle}</span></div>` +
-      (VATAH_RESONANCE[cy13.day]
-        ? `<div style="font-size:0.82rem;color:var(--ink-mid);line-height:1.55;margin-bottom:0;">${VATAH_RESONANCE[cy13.day]}</div>`
-        : '');
 
     // Pack data for Daily Script
     _scriptData = {
