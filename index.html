@@ -2104,7 +2104,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div class="malchut-inner-row">
         <div class="malchut-section">
           <div class="keter-section-label">✦ Daily Connection — ואתה תצוה <span class="maalah">מעלה י״ג</span></div>
-          <div style="font-size:9px;font-style:italic;margin-bottom:6px;"><a href="https://www.chabad.org/therebbe/article_cdo/aid/145191/jewish/Maamar-Veatah-Tetzaveh.htm" target="_blank" style="color:var(--ink-dim);" onclick="event.stopPropagation()">The Rebbe's last ma'amar · Purim Katan 5752</a></div>
           <div id="malchut-ksa-face">Loading…</div>
         </div>
         <div class="malchut-section">
@@ -6168,6 +6167,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'https://www.chabad.org/therebbe/article_cdo/aid/145426/jewish/Veatah-Tetzaveh-Part-XI.htm',
     'https://www.chabad.org/therebbe/article_cdo/aid/145427/jewish/Veatah-Tetzaveh-Part-XII.htm',
   ];
+  // Month/tribe resonances for the Daily Connection cycle — approved text,
+  // keyed by the Tiferet 13-day cycle's day (1-13; matches VATAH_SEIF_BY_DAY).
+  const VATAH_RESONANCE = {
+    11: `On Purim Katan 5752, in Adar I, the Rebbe distributed this ma'amar with his own hand — the whole given before its parts are learned. This day holds the complete ma'amar: everything received at once, as a gift precedes labor. Naftali, the אַיָּלָה שְׁלֻחָה — the sent runner — carries the whole word swiftly, in the month whose joy is doubled.`,
+    12: `The questions: why is Moshe's name hidden from the entire parasha — only "ואתה"? Why is the oil brought to Moshe when Aharon lights? Why "crushed <em>for</em> the light," and how is the lamp "constant"? Adar holds ז' אדר, Moshe's birth and passing, always beside Tetzaveh's reading — and Purim's עד דלא ידע reaches the same place the ma'amar will: the not-knowing above knowledge. Levi, Moshe's own tribe, brought no offering among the Nessi'im; Aharon's consolation was the Menorah — the very lamp of this verse.`,
+    13: `Tetzaveh means tzavta — connection: Moshe binds Israel to the Or Ein Sof, and Israel, his "600,000 feet," carry the head where it cannot go alone, adding light to Moshe himself: "and they shall bring <em>you</em>." Nissan is רֹאשׁ חֳדָשִׁים — the head of the months carries the se'if of the head and the feet. Its Nassi is Nachshon, whose feet entered the sea first and carried a nation into geulah.`,
+    1: `Moshe is Raya Meheimna — the faithful shepherd, and the shepherd <em>of</em> faith, feeding Israel's emunah until it lives inside their thought, speech, and deed. Raya Meheimna is also the Zohar's own book in which Moshe speaks — and Iyar is Rashbi's month, Lag BaOmer, Hod she'beHod. In Iyar the mon began to fall: Moshe feeding the people daily, as he feeds their faith; Yissachar, the tribe of יוֹדְעֵי בִינָה לַעִתִּים, receives first.`,
+    2: `The astonishing teaching: Matan Torah — Sivan's own event — was only the <em>beginning</em>; the acceptance came under Haman's decree, when Torah and mitzvos ran on pure mesirus nefesh: קִיְּמוּ מַה שֶּׁקִּבְּלוּ. Sivan carries the se'if that names its gift a הַתְחָלָה awaiting completion. Zevulun, who goes to sea so Yissachar can learn, embodies the deed that completes the study — נַעֲשֶׂה before נִשְׁמָע.`,
+    3: `Two roots of faith: the faith of מַזָּלַיְהוּ חָזוּ — the soul above that <em>sees</em>, whose light remains encompassing — and the faith rooted in the soul's essence, which needs no sight and can penetrate everything. Tammuz is the month of the sense of sight; the spies went out in Tammuz to see the land and fell by trusting their eyes; Reuven is רְאוּ־בֵן, the seeing tribe. The month whose test is sight carries the se'if of faith beyond sight — and "mazal" whispers both meanings: the soul's root above, and the mazalos of the months this wheel turns on.`,
+    4: `Why does a Jew die rather than deny? Not from the faith of sight — however overwhelming, it is still outside him — but because faith <em>is</em> his essence, and an essence cannot contradict itself. Av, the crushed month of churban and kiddush Hashem, is where that essence has shone throughout history. And Av's sense is <em>hearing</em> — Shimon, "for Hashem heard" — the faith beyond seeing is the faith of שְׁמַע יִשְׂרָאֵל, the words on the lips of every Jew who gave everything.`,
+    5: `The shepherd of faith stands openly among his entire generation: Mordechai, gathering Jews to learn Torah publicly under the decree — "Mordechai in his generation as Moshe in his generation" — and the Frierdiker Rebbe, in citing it, described himself. Elul is the King in the field, receiving every Jew where he is; Chai Elul gives the month the Baal Shem Tov and the Alter Rebbe, shepherds of the generations. And Moshe himself rests in the portion of Gad — the tribe that carries Moshe within it, as every generation does.`,
+    6: `The first half of the ma'amar is gathered into its order — and then a new question opens everything deeper: the ma'amar's own Rosh Hashanah, renewal that comes not as an answer but as a question, like the shofar's wordless cry. The year's second head begins the ma'amar's second half.`,
+    7: `Not only decrees crush: the very fact of exile crushes a Jew, even amid full prosperity — for his deepest desire is the revelation of G-dliness, and he is חוֹלֶה, sick for the fiftieth gate, wanting (in the Alter Rebbe's words) "nothing but You alone." Cheshvan is the one month with no festival — pure exile-time — and the month destined for the dedication of the Third Beis HaMikdash: its emptiness <em>is</em> the yearning. Menashe, named for exile's forgetting — כִּי נַשַּׁנִי — is the tribe that turns forgetting into the ache of remembering.`,
+    8: `This se'if speaks in the language of light itself: the ma'amar calls the essence of the soul "the light" — and asks <em>which</em> revelation of that light is higher. The light revealed through mesirus nefesh under decrees shines from beyond, leaving the inner powers unchanged; the light revealed through exile's crushedness is the essence as it is rooted in G-d's essence, and it makes the revealed powers themselves luminous — one with their source. Kislev is the month that lives this distinction: Chanukah's lamps, kindled in darkness and <em>ascending</em> night after night, and י"ט כסלו, when pnimiyus haTorah went out to illuminate the inner powers themselves — light not hovering above the person, but transforming him. The Beis HaMikdash stood in Binyamin's portion: the essence-light dwelling <em>inside</em> vessels.`,
+    9: `When Israel's own avodah makes even their functional powers one with the essence, they add to Moshe — "and they shall bring <em>you</em>" — and the lamp becomes truly constant, beyond evening and morning. Dan, the lowliest camp, the מְאַסֵּף לְכָל הַמַּחֲנוֹת, shows the essence in its purest: Shimshon's תָּמוֹת נַפְשִׁי, and Ohaliav of Dan beside Betzalel of Yehudah — greatest and lowest equal at the essence. And in Teves came דִּידָן נָצַח: the world's own courts, ruling on material seforim, could only conclude that a Rebbe is not a private person — the bond of Rebbe and chassid ratified within the vessels of the world, the essence reaching even material matters.`,
+    10: `The Moshe of our generation, the Frierdiker Rebbe, aroused the essence-faith of every Jew so that each continues on his own initiative — a lamp that knows no change — until the oil is brought and the Menorah kindled physically in the Third Beis HaMikdash. Shevat is Yud Shevat: the hilula, Basi L'Gani, the leadership carried forward. And Asher's blessing is the oil itself — וְטֹבֵל בַּשֶּׁמֶן רַגְלוֹ, "he dips his foot in oil" — the ma'amar of olive oil closes with the tribe of oil, in the month of the trees: the feet of Israel, soaked in oil, bringing it to the head.`,
+  };
   const WEEKLY_BOOKS = [
   // W1
   { week:1, parasha:'Rosh Hashana / Haazinu',   month:'Tishrei',
@@ -11417,6 +11433,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
     let _lsSichosBook = null, _ksaLabel = null;
+    let _vtSeif = null, _vtUrl = null, _vtText = null, _vtTitle = null;
     (() => {
       const LS_BOOKS = [
         { max: 12, book: 'Bereishit', url: 'https://www.chabad.org/therebbe/article_cdo/aid/4542996/jewish/Bereishit.htm' },
@@ -11429,10 +11446,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         || PARASHA_TO_NUMBER[(actualParasha || '').split('-')[0].trim()];
       const lsBook = pNum && LS_BOOKS.find(b => pNum <= b.max);
       _lsSichosBook = lsBook ? lsBook.book : null;
-      const _vtSeif  = VATAH_SEIF_BY_DAY[cy13.day - 1]; // 0 = overview (Adar I day)
-      const _vtUrl   = _vtSeif === 0 ? VATAH_OVERVIEW_URL : VATAH_URLS[_vtSeif - 1];
-      const _vtText  = _vtSeif === 0 ? `ואתה תצוה — Overview` : `ואתה תצוה — Se'if ${VATAH_HEB[_vtSeif - 1]}`;
-      const _vtTitle = _vtSeif === 0 ? 'the complete ma\'amar — Purim Katan' : VATAH_TITLES[_vtSeif - 1];
+      _vtSeif  = VATAH_SEIF_BY_DAY[cy13.day - 1]; // 0 = overview (Adar I day)
+      _vtUrl   = _vtSeif === 0 ? VATAH_OVERVIEW_URL : VATAH_URLS[_vtSeif - 1];
+      _vtText  = _vtSeif === 0 ? `ואתה תצוה — Overview` : `ואתה תצוה — Se'if ${VATAH_HEB[_vtSeif - 1]}`;
+      _vtTitle = _vtSeif === 0 ? 'the complete ma\'amar — Purim Katan' : VATAH_TITLES[_vtSeif - 1];
       document.getElementById('malchut-ksa-face').innerHTML =
         (_vtUrl
           ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold);font-size:0.88em">${_vtText}</a>`
@@ -11582,6 +11599,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<strong>${wk.b1_theme}</strong>` +
       `</div>` +
       weekRows +
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Connection — ואתה תצוה</div>
+       <div style="font-size:0.88rem;margin-bottom:6px;">` +
+      (_vtUrl ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold)">${_vtText}</a>` : _vtText) +
+      ` <span style="color:var(--ink-mid);font-size:0.9em">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]} — ${_vtTitle}</span></div>` +
+      (VATAH_RESONANCE[cy13.day]
+        ? `<div style="font-size:0.82rem;color:var(--ink-mid);line-height:1.55;margin-bottom:14px;">${VATAH_RESONANCE[cy13.day]}</div>`
+        : '') +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ The Rebbe</div>
        <div style="font-size:0.88rem;margin-bottom:10px;">` +
