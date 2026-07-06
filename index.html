@@ -504,6 +504,10 @@ padding: 10px 12px;
 padding: 10px 12px;
 }
 
+/* Harmonize Malchut face type scale with Keter's (13.5px main / 11px sub) */
+.malchut-visible-content .sefirah-main-text { font-size: 13.5px; line-height: 1.55; }
+.malchut-visible-content .sefirah-sub-text { font-size: 11px; }
+
 .malchut-inner-row .malchut-section:nth-child(odd) {
 background: #fdf9f2;
 }
@@ -11452,9 +11456,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       _vtTitle = _vtSeif === 0 ? 'the complete ma\'amar — Purim Katan' : VATAH_TITLES[_vtSeif - 1];
       document.getElementById('malchut-ksa-face').innerHTML =
         (_vtUrl
-          ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold);font-size:0.88em">${_vtText}</a>`
-          : `<span style="color:var(--gold);font-size:0.88em">${_vtText}</span>`) +
-        ` <span style="font-size:0.78em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]} — ${_vtTitle}</span>`;
+          ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold);font-size:13.5px">${_vtText}</a>`
+          : `<span style="color:var(--gold);font-size:13.5px">${_vtText}</span>`) +
+        ` <span style="font-size:11px;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]} — ${_vtTitle}</span>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
@@ -11466,9 +11470,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const ksaUrl = ksaYomiSeferiaUrl(ksaR.siman, ksaR.seif);
         const ksaLbl = ksaYomiLabel(ksaR.siman, ksaR.seif);
         _ksaLabel = ksaLbl;
-        ksaLink = `<a href="${ksaUrl}" target="_blank" style="color:var(--gold);font-size:0.88em">${ksaLbl}</a>`;
+        ksaLink = `<a href="${ksaUrl}" target="_blank" style="color:var(--gold);font-size:13.5px">${ksaLbl}</a>`;
       } else {
-        ksaLink = `<a href="https://kitzuryomi.org/calendar/" target="_blank" style="color:var(--gold);font-size:0.88em">KSA Calendar</a>`;
+        ksaLink = `<a href="https://kitzuryomi.org/calendar/" target="_blank" style="color:var(--gold);font-size:13.5px">KSA Calendar</a>`;
       }
       el.innerHTML = ksaLink;
     })();
@@ -11480,8 +11484,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const lhEntries = getLikuteiHalachotInfo(dEff);
       const el = document.getElementById('malchut-lh-face');
       el.innerHTML = lhEntries.map(e => {
-        const tag = e.source === 'SA' ? ' <span style="opacity:0.6;font-size:0.85em">(Shulchan Aruch)</span>' : '';
-        return `<a href="${e.url}" target="_blank" style="color:var(--gold);font-size:0.88em">${e.label}</a>${tag}`;
+        const tag = e.source === 'SA' ? ' <span style="opacity:0.6;font-size:11px">(Shulchan Aruch)</span>' : '';
+        return `<a href="${e.url}" target="_blank" style="color:var(--gold);font-size:13.5px">${e.label}</a>${tag}`;
       }).join(' · ');
     })();
 
