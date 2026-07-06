@@ -1520,12 +1520,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="keter-section">
     <div class="keter-section-label">✦ Rambam · 3 Chapters</div>
     <div class="keter-main" id="keter-rambam-main">Loading…</div>
-    <div class="keter-meta" id="keter-rambam-meta"></div>
   </div>
   <!-- RAMBAM 1 chapter section -->
   <div class="keter-section">
     <div class="keter-section-label">✦ Rambam · 1 Chapter</div>
     <div class="keter-main" id="keter-rambam1-main">Loading…</div>
+  </div>
+  <!-- RAMBAM Sefer HaMitzvos section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Rambam · Sefer HaMitzvos</div>
+    <div class="keter-main" id="keter-rambam-shm-main">Loading…</div>
   </div>
   <!-- DVAR MALCHUS & CHAYENU section -->
   <div class="keter-section">
@@ -9768,17 +9772,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // 4. Rambam — three cycles
     const chabadRambam = `https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters`;
     const shm = getSeferHamitzvosInfo(hMonth, hDay, hYear, isLeapYear);
-    const shmA = (m, pfx) => `<a href="${m.url}" target="_blank" style="color:var(--gold)${m.review ? ';opacity:0.55' : ''}">${pfx} ${m.n}${m.review ? ' (review)' : ''}</a>`;
+    const shmA = (m) => `<a href="${m.url}" target="_blank" style="color:var(--gold)${m.review ? ';opacity:0.55' : ''}">${m.n}${m.review ? ' (review)' : ''}</a>`;
     const shmParts = [];
-    if (shm.neg.length) shmParts.push(shm.neg.map(m => shmA(m, 'Negative')).join(' & '));
-    if (shm.pos.length) shmParts.push(shm.pos.map(m => shmA(m, 'Positive')).join(' & '));
+    if (shm.neg.length) shmParts.push('Negative: ' + shm.neg.map(shmA).join(' & '));
+    if (shm.pos.length) shmParts.push('Positive: ' + shm.pos.map(shmA).join(' & '));
+    const shmLabel = `<span style="color:var(--ink-mid);font-size:0.9em">Sefer HaMitzvos:</span> `;
     let shmBody;
     if (shm.mt) {
-      shmBody = `<strong>Sefer HaMitzvos</strong> — <a href="${shm.mt.url}" target="_blank" style="color:var(--gold)">Mishneh Torah${shm.mt.book ? ' · Book ' + shm.mt.book : ''}</a>` +
+      shmBody = shmLabel + `<a href="${shm.mt.url}" target="_blank" style="color:var(--gold)">Mishneh Torah${shm.mt.book ? ' · Book ' + shm.mt.book : ''}</a>` +
         `<br><span style="font-size:0.82em;color:var(--ink-mid)">${shm.mt.book ? shm.mt.name + ' — its ' + shm.mt.half + ' mitzvos' : shm.mt.name}</span>`;
     } else {
       const shmTitles = [...shm.neg, ...shm.pos].map(m => m.title).join(' ');
-      shmBody = `<strong>Sefer HaMitzvos</strong> — ` + shmParts.join(' &nbsp;·&nbsp; ') +
+      shmBody = shmLabel + shmParts.join(' &nbsp;·&nbsp; ') +
         `<br><span style="font-size:0.82em;color:var(--ink-mid)">${shmTitles}</span>`;
     }
     document.getElementById('keter-rambam-face').innerHTML =
@@ -9787,10 +9792,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ` <span style="font-size:0.82em;color:var(--ink-mid)">— a daily Chassidic teaching, compiled by the Rebbe</span>`;
     document.getElementById('keter-rambam-main').innerHTML =
       `<a href="${chabadRambam}/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters)</a>`;
-    document.getElementById('keter-rambam-meta').innerHTML =
-      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">Sefer HaMitzvos — Chabad.org daily</a>`;
     document.getElementById('keter-rambam1-main').innerHTML =
       `<a href="${chabadRambam}/1" target="_blank" style="color:var(--gold)">View today's Rambam (1 chapter)</a>`;
+    document.getElementById('keter-rambam-shm-main').innerHTML =
+      `<a href="https://www.chabad.org/dailystudy/seferhamitzvos.htm" target="_blank" style="color:var(--gold)">View today's Sefer HaMitzvos</a>`;
 
     // 5. Keter Shem Tov — daily section (face)
     let _kstTitleEn = null, _kstLabel = null;
