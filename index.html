@@ -10423,7 +10423,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     };
     // Chabad.org AIDs: cycle→AID; cycle 1 uses chapter-based formula (16221+ch); cycle 17 computed
     const CHABAD_AIDS = {2:8220,3:8229,4:16258,5:16332,6:16333,7:16366,8:16402,17:16371};
-    let acrosticRow = '';
     const _psName = ACROSTIC_PSALM_NAMES[cy22.cycle] || '';
     if (_psName) {
       let _vRef = '', _chabadUrl = '', _verseText = '', _verseHe = '';
@@ -10444,13 +10443,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
       }
       if (_vRef) {
-        acrosticRow = `<div class="detail-row"><span class="detail-label">Acrostic:</span><span class="detail-value">${_psName} &nbsp;<span style="color:#555;font-size:0.9em">${_vRef}</span>&nbsp;<a href="${_chabadUrl}" target="_blank" rel="noopener" style="font-size:0.85em;text-decoration:none" title="Open in Chabad.org">📖</a></span></div>` +
+        document.getElementById('chochmah-sub').innerHTML =
+          `<span style="font-size:0.8em;color:var(--ink-dim)">Acrostic:</span> ${_psName} <span style="color:var(--ink-dim);font-size:0.85em">${_vRef}</span> <a href="${_chabadUrl}" target="_blank" rel="noopener" style="font-size:0.85em;text-decoration:none" title="Open in Chabad.org">📖</a>` +
           (_verseHe ? `<div style="font-size:1.05em;color:var(--ink);line-height:1.7;margin:2px 0;direction:rtl" lang="he">${_verseHe}</div>` : '') +
           (_verseText ? `<div style="font-size:0.82rem;font-style:italic;color:var(--ink-mid);line-height:1.5;margin:0 0 6px;">"${_verseText}"</div>` : '');
-        document.getElementById('chochmah-sub').innerHTML =
-          `<span style="font-size:0.8em;color:var(--ink-dim)">Acrostic:</span> ${_psName} <span style="color:var(--ink-dim);font-size:0.85em">${_vRef}</span> <a href="${_chabadUrl}" target="_blank" rel="noopener" style="font-size:0.85em;text-decoration:none" title="Open in Chabad.org">📖</a>`;
       } else {
-        acrosticRow = `<div class="detail-row"><span class="detail-label">Acrostic:</span><span class="detail-value">${_psName}</span></div>`;
         document.getElementById('chochmah-sub').innerHTML =
           `<span style="font-size:0.8em;color:var(--ink-dim)">Acrostic:</span> ${_psName}`;
       }
@@ -10535,7 +10532,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Daily Letter:</span><span class="detail-value">Day ${cy22.day} · ${cy22.dailyLetter} ${cy22.dailyHebrew}</span></div>
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${cy22.theme}</span></div>
        <div class="detail-row"><span class="detail-label">Set:</span><span class="detail-value">Set ${cy22.cycle} of 17 · Day ${cy22.day} of 22</span></div>
-       ${acrosticRow}
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
        <div class="detail-row"><span class="detail-label">Sefer Yetzirah:</span><span class="detail-value">32 Paths = 10 Sefirot + 22 Letters (building blocks of Creation)</span></div>
        <div class="detail-row"><span class="detail-label">Three Weeks:</span><span class="detail-value">17 Tammuz → 9 Av = 22 days (internal Alef-Bet cycle)</span></div>
