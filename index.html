@@ -9777,7 +9777,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (shm.pos.length) shmParts.push(shmLbl('Positive Mitzvot') + shm.pos.map(shmA).join(' & '));
     let shmBody;
     if (shm.mt) {
-      shmBody = shmLbl('Sefer HaMitzvos') + `<a href="${shm.mt.url}" target="_blank" style="color:var(--gold)">Mishneh Torah${shm.mt.book ? ' · Book ' + shm.mt.book : ''}</a>` +
+      shmBody = shmLbl('Yad HaChazakah') + `<a href="${shm.mt.url}" target="_blank" style="color:var(--gold)">Mishneh Torah${shm.mt.book ? ' · Book ' + shm.mt.book : ''}</a>` +
         `<br><span style="font-size:0.82em;color:var(--ink-mid)">${shm.mt.book ? shm.mt.name + ' — its ' + shm.mt.half + ' mitzvos' : shm.mt.name}</span>`;
     } else {
       const shmTitles = [...shm.neg, ...shm.pos].map(m => m.title).join(' ');
