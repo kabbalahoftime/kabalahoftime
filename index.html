@@ -8618,9 +8618,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // Tosefta reuses most Mishnah slugs, but names a couple of tractates
-  // differently: the Vilna-era "Yom Tov" is the Tosefta's Beitzah, and the
-  // three Tosefta Kelim sub-tractates spell "Kama" as "Kamma" like Bava Kama.
-  const TOSEFTA_NAME_OVERRIDES = { 'Yom Tov': 'Beitzah', 'Kelim Bava Kama': 'Kelim_Bava_Kamma' };
+  // differently: the Vilna-era "Yom Tov" is the Tosefta's Beitzah. The three
+  // split Tosefta Kelim sub-tractates are a compound "Book, Part" title on
+  // Sefaria (like Zohar,_Book or Sefer_HaMitzvot,_Part elsewhere in this
+  // file) rather than a single underscore-joined name — and "Kama" there is
+  // spelled "Kamma," like Bava Kama.
+  const TOSEFTA_NAME_OVERRIDES = {
+    'Yom Tov': 'Beitzah',
+    'Kelim Bava Kama':    'Kelim%2C_Bava_Kamma',
+    'Kelim Bava Metzia':  'Kelim%2C_Bava_Metzia',
+    'Kelim Bava Batra':   'Kelim%2C_Bava_Batra'
+  };
   function toseftaSlug(name) {
     return TOSEFTA_NAME_OVERRIDES[name] || mishnaSlug(name);
   }
