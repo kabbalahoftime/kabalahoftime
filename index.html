@@ -2329,7 +2329,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           ? `Tosefta <strong>${first[0]}</strong> ${chs.map(c=>c[1]).join(', ')}`
           : `Tosefta <strong>${first[0]}</strong> ${first[1]}–… &amp; <strong>${last[0]}</strong> …${last[1]}`,
         sub: `Tosefta — the expanded Oral Torah`,
-        tag1: 'Tosefta · ' + first[0], tag2: `Week ${week} · Day ${day}`
+        tag1: 'Tosefta · ' + first[0], tag2: `Week ${week} · Day ${day}`,
+        seferiaUrl: `https://www.sefaria.org/Tosefta_${toseftaSlug(first[0])}.${first[1]}`
       };
     }
   }
@@ -8614,6 +8615,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   };
   function mishnaSlug(name) {
     return MISHNA_TO_SEFARIA[name] || name.replace(/ /g, '_');
+  }
+
+  // Tosefta reuses most Mishnah slugs, but names a couple of tractates
+  // differently: the Vilna-era "Yom Tov" is the Tosefta's Beitzah, and the
+  // three Tosefta Kelim sub-tractates spell "Kama" as "Kamma" like Bava Kama.
+  const TOSEFTA_NAME_OVERRIDES = { 'Yom Tov': 'Beitzah', 'Kelim Bava Kama': 'Kelim_Bava_Kamma' };
+  function toseftaSlug(name) {
+    return TOSEFTA_NAME_OVERRIDES[name] || mishnaSlug(name);
   }
 
   const TANACH_TO_SEFARIA = {
