@@ -12853,14 +12853,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         var wh=weekHours(n);
         var el=mk('path',{d:donut(82,116,map.hToMin(wh.h1),map.hToMin(wh.h2)),
           fill:combo(n).color,stroke:'#0d1122','stroke-width':1.2,opacity:.6,'class':'kotw-seg'},gDyn);
-        el.addEventListener('click',function(){select(n)});
+        el.addEventListener('click',function(){userSelected=true;select(n)});
         segs.push({n:n,el:el});
       })(n);
     }
     MOCH.forEach(function(mo,i){
       var el=mk('path',{d:donut(150,170,map.hToMin(mo.h1),map.hToMin(mo.h2)),
         fill:mo.c,stroke:'#0d1122','stroke-width':1.5,opacity:.97,'class':'kotw-seg'},gDyn);
-      el.addEventListener('click',function(){select(50+i)});
+      el.addEventListener('click',function(){userSelected=true;select(50+i)});
       segs.push({n:50+i,el:el});
     });
     var sm=map.hToMin(0),s1=pol(78,sm),s2=pol(200,sm);
@@ -12893,6 +12893,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return Math.min(49,Math.max(1,Math.floor(timeMap().nowH()/(24/49))+1));
   }
   var lastSig=null;
+  // Whether the visitor has pinned a specific week/day by tapping a segment.
+  // While false, the caption panel below the dial keeps following "now" on
+  // every tick; once true, it stays on the tapped segment until kotwRefresh()
+  // is called (e.g. after a time-mode change) to return to auto-follow.
+  var userSelected=false;
   function tick(){
     var map=timeMap();
     var sig=(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
@@ -12903,9 +12908,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     cT.textContent=fmt(m);
     cW.textContent='Week '+n+' of the inner year';
     cS.textContent=combo(n).he;
-    if(curSel===null)select(n);
+    if(!userSelected&&n!==curSel)select(n);
   }
-  window.kotwRefresh=function(){curSel=null;tick();};
+  window.kotwRefresh=function(){userSelected=false;curSel=null;tick();};
   window.kotwWeekData=function(n){return W[n-1]||null;};
   window.kotwCombo=combo;
   tick();
