@@ -2272,6 +2272,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   for (const [name, chs] of TOSEFTA_TRACTATES)
     for (let c = 1; c <= chs; c++) TOSEFTA_FLAT.push([name, c]);
 
+  // Normalizes a Tosefta-only tractate name to its Mishnah equivalent, for
+  // Seder lookup only (getMishnaSeder's keys are Mishnah names: "Beitzah",
+  // "Kelim" — not "Yom Tov" or the three split Tosefta Kelim sub-tractates).
+  const TOSEFTA_SEDER_LOOKUP_NAME = {
+    'Yom Tov': 'Beitzah', 'Kelim Bava Kama': 'Kelim', 'Kelim Bava Metzia': 'Kelim', 'Kelim Bava Batra': 'Kelim'
+  };
+
   // ── TANACH DATA (52 weeks × 7 days × 2 chapters = 364 days, 728 chapters) ──
   const TANACH_TRACTATES = [
     ["Joshua",24],["Judges",21],["Shmuel I",31],["Shmuel II",24],
@@ -2328,7 +2335,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         text: sameBook
           ? `Tosefta <strong>${first[0]}</strong> ${chs.map(c=>c[1]).join(', ')}`
           : `Tosefta <strong>${first[0]}</strong> ${first[1]}–… &amp; <strong>${last[0]}</strong> …${last[1]}`,
-        sub: `Tosefta — the expanded Oral Torah`,
+        sub: `Seder ${getMishnaSeder(TOSEFTA_SEDER_LOOKUP_NAME[first[0]] || first[0])}`,
         tag1: 'Tosefta · ' + first[0], tag2: `Week ${week} · Day ${day}`,
         seferiaUrl: `https://www.sefaria.org/Tosefta_${toseftaSlug(first[0])}.${first[1]}`
       };
@@ -8618,16 +8625,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // Tosefta reuses most Mishnah slugs, but names a couple of tractates
-  // differently: the Vilna-era "Yom Tov" is the Tosefta's Beitzah. The three
-  // split Tosefta Kelim sub-tractates are a compound "Book, Part" title on
-  // Sefaria (like Zohar,_Book or Sefer_HaMitzvot,_Part elsewhere in this
-  // file) rather than a single underscore-joined name — and "Kama" there is
-  // spelled "Kamma," like Bava Kama.
+  // differently: the Vilna-era "Yom Tov" is the Tosefta's Beitzah, and
+  // Sefaria's three split Tosefta Kelim sub-tractates drop "Bava" entirely
+  // (Tosefta_Kelim_Kamma / _Metzia / _Batra — confirmed against Sefaria).
   const TOSEFTA_NAME_OVERRIDES = {
     'Yom Tov': 'Beitzah',
-    'Kelim Bava Kama':    'Kelim%2C_Bava_Kamma',
-    'Kelim Bava Metzia':  'Kelim%2C_Bava_Metzia',
-    'Kelim Bava Batra':   'Kelim%2C_Bava_Batra'
+    'Kelim Bava Kama':    'Kelim_Kamma',
+    'Kelim Bava Metzia':  'Kelim_Metzia',
+    'Kelim Bava Batra':   'Kelim_Batra'
   };
   function toseftaSlug(name) {
     return TOSEFTA_NAME_OVERRIDES[name] || mishnaSlug(name);
