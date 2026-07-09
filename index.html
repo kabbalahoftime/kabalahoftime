@@ -9967,12 +9967,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
       document.getElementById('keter-kst-label').innerHTML = '✦ Light that is Good — אור כי טוב <span class="maalah">מעלה ב׳</span>';
 
-      // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40)
-      const KST_HB_PAGE_OFFSET = 36;
+      // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40).
+      // Somewhere around printed p.200 an extra, unnumbered page appears to
+      // have been inserted (p.207 was landing 2 pages ahead), so pages from
+      // 200 on need +34 instead. Boundary is a placeholder pending exact
+      // confirmation of where the insertion falls.
+      const KST_HB_PAGE_OFFSET_BEFORE = 36;
+      const KST_HB_PAGE_OFFSET_AFTER  = 34;
+      const KST_HB_PAGE_OFFSET_SPLIT  = 200;
       function kstHebrewBooksUrl(page) {
-        return page
-          ? `https://hebrewbooks.org/pdfpager.aspx?req=16081&pgnum=${page + KST_HB_PAGE_OFFSET}`
-          : `https://hebrewbooks.org/16081`;
+        if (!page) return `https://hebrewbooks.org/16081`;
+        const offset = page >= KST_HB_PAGE_OFFSET_SPLIT ? KST_HB_PAGE_OFFSET_AFTER : KST_HB_PAGE_OFFSET_BEFORE;
+        return `https://hebrewbooks.org/pdfpager.aspx?req=16081&pgnum=${page + offset}`;
       }
 
       if (kst) {
