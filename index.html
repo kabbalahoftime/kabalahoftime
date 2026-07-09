@@ -1514,6 +1514,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="section-divider" style="margin: 16px 0">
     <span class="divider-symbol">◆</span>
   </div>
+  <!-- PARASHA & HAFTORAH RECORDINGS section (moved from the face) -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Parasha &amp; Haftorah Recordings <span class="study-check" data-study="parashahaftorah" title="Mark as studied"></span></div>
+    <div class="keter-meta" id="keter-kst-meta"></div>
+  </div>
   <!-- TREASURY OF CHASSIDIC TALES section -->
   <div class="keter-section">
     <div class="keter-section-label">✦ Treasury of Chassidic Tales <span class="study-check" data-study="treasury" title="Mark as studied"></span></div>
@@ -1559,11 +1564,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="keter-section-label">✦ Dvar Malchus &amp; Chayenu <span class="study-check" data-study="dvarmalchus" title="Mark as studied"></span></div>
     <div class="keter-main"><a href="https://www.dvarmalchus.org/" target="_blank" style="color:var(--gold)">Dvar Malchus</a> &nbsp;·&nbsp; <a href="https://chayenu.org/" target="_blank" style="color:var(--gold)">Chayenu</a></div>
   </div>
-  <!-- RECORDINGS & MEDIA section (moved from the face) -->
+  <!-- INSIDECHASSIDUS section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Recordings &amp; Media <span class="study-check" data-study="recordings" title="Mark as studied"></span></div>
-    <div class="keter-meta" id="keter-kst-meta"></div>
-    <div class="keter-meta" id="keter-hy-meta"></div>
+    <div class="keter-section-label">✦ InsideChassidus <span class="study-check" data-study="insidechassidus" title="Mark as studied"></span></div>
+    <div class="keter-meta" id="keter-insidechassidus-main"></div>
+  </div>
+  <!-- JEM.TV section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ JEM.TV <span class="study-check" data-study="jemtv" title="Mark as studied"></span></div>
+    <div class="keter-meta" id="keter-jemtv-main"></div>
   </div>
 </div>
 
@@ -2162,6 +2171,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       </div>
     </div>
     <div class="sefirah-detail">
+      <!-- Likkutei Sichos — first section, above KSA -->
+      <div id="malchut-sichos-detail" style="margin-bottom:14px;"></div>
       <!-- KSA row — Arich Anpin -->
       <div class="malchut-ksa-row" style="margin-bottom:14px;">
         <div class="keter-section-label">✦ Kitzur Shulchan Aruch</div>
@@ -10284,11 +10295,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const hyText = getHayomYom(hMonth, hDay);
     document.getElementById('keter-hayomyom').innerHTML =
       hyText ? `<span style="font-size:11px">"${hyText}"</span>` : '';
-    document.getElementById('keter-hy-meta').innerHTML =
-      `<span style="font-size:9px;white-space:nowrap">` +
-      `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>` +
-      ` &nbsp;·&nbsp; <a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a>` +
-      `</span>`;
+    document.getElementById('keter-insidechassidus-main').innerHTML =
+      `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>`;
+    document.getElementById('keter-jemtv-main').innerHTML =
+      `<a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a>`;
 
     // 6. Likutei Moharan — Hebrew-date-pegged lesson (Keter summary + popup)
     // Every LM_DAILY_CYCLE entry names a specific Hebrew date, so lookup is by
@@ -10718,7 +10728,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
 
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div class="detail-row"><span class="detail-label">Breslev Israel CDs:</span><span class="detail-value"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a>${breslevCD3 ? ` &nbsp;·&nbsp; <a href="${breslevCD3.url}" target="_blank" style="color:var(--gold)">${breslevCD3.label}</a> &nbsp;·&nbsp; <a href="${breslevCD4.url}" target="_blank" style="color:var(--gold)">${breslevCD4.label}</a>` : ''}</span></div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Breslov Israel Recordings <span class="study-check" data-study="breslevisrael" title="Mark as studied"></span></div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a>${breslevCD3 ? ` &nbsp;·&nbsp; <a href="${breslevCD3.url}" target="_blank" style="color:var(--gold)">${breslevCD3.label}</a> &nbsp;·&nbsp; <a href="${breslevCD4.url}" target="_blank" style="color:var(--gold)">${breslevCD4.label}</a>` : ''}</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot <span class="study-check" data-study="foundationssefirot" title="Mark as studied"></span></div>
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>
@@ -11716,15 +11727,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `</div>` +
       weekRows +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likkutei Sichos <span class="study-check" data-study="likkuteisichos" title="Mark as studied"></span></div>
-       <div style="font-size:0.88rem;margin-bottom:10px;">` +
-      `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha</a> &nbsp;·&nbsp; ` +
-      `<a href="https://projectlikkuteisichos.org/" target="_blank" style="color:var(--gold)">Project Likkutei Sichos</a></div>` +
-      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ The Rebbe <span class="study-check" data-study="therebbe" title="Mark as studied"></span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;">` +
       `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a> &nbsp;·&nbsp; ` +
       `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
+
+    document.getElementById('malchut-sichos-detail').innerHTML =
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likkutei Sichos <span class="study-check" data-study="likkuteisichos" title="Mark as studied"></span></div>
+       <div style="font-size:0.88rem;margin-bottom:0;">` +
+      `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha</a> &nbsp;·&nbsp; ` +
+      `<a href="https://projectlikkuteisichos.org/" target="_blank" style="color:var(--gold)">Project Likkutei Sichos</a></div>`;
 
     // Pack data for Daily Script
     _scriptData = {
