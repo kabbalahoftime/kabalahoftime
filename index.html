@@ -710,6 +710,11 @@ border-radius: 3px;
 animation: maalahShake 0.3s;
 }
 
+/* Waning-step day tags (יום ט״ז–ל׳) — maalah look, but not tappable steps */
+.maalah.yom {
+cursor: default;
+}
+
 .study-check {
 cursor: pointer;
 user-select: none;
@@ -1527,7 +1532,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <!-- CHUMASH section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Chumash with Rashi <span class="study-check" data-study="chumash" title="Mark as studied"></span></div>
+    <div class="keter-section-label">✦ Chumash with Rashi <span class="maalah yom" data-wane="15">יום ל׳</span> <span class="study-check" data-study="chumash" title="Mark as studied"></span></div>
     <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
     <div class="keter-main" id="keter-chumash-main">Loading…</div>
     <div class="keter-meta" id="keter-chumash-meta"></div>
@@ -1540,39 +1545,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <!-- TANYA section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Tanya <span class="study-check" data-study="tanya" title="Mark as studied"></span></div>
+    <div class="keter-section-label">✦ Tanya <span class="maalah yom" data-wane="14">יום כ״ט</span> <span class="study-check" data-study="tanya" title="Mark as studied"></span></div>
     <div class="keter-main" id="keter-tanya-main">Loading…</div>
     <div class="keter-meta" id="keter-tanya-meta"></div>
   </div>
   <!-- RAMBAM 3 chapters section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Rambam · 3 Chapters <span class="study-check" data-study="rambam3" title="Mark as studied"></span></div>
+    <div class="keter-section-label">✦ Rambam · 3 Chapters <span class="maalah yom" data-wane="13">יום כ״ח</span> <span class="study-check" data-study="rambam3" title="Mark as studied"></span></div>
     <div class="keter-main" id="keter-rambam-main">Loading…</div>
   </div>
   <!-- RAMBAM 1 chapter section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Rambam · 1 Chapter <span class="study-check" data-study="rambam1" title="Mark as studied"></span></div>
+    <div class="keter-section-label">✦ Rambam · 1 Chapter <span class="maalah yom" data-wane="13">יום כ״ח</span> <span class="study-check" data-study="rambam1" title="Mark as studied"></span></div>
     <div class="keter-main" id="keter-rambam1-main">Loading…</div>
   </div>
   <!-- RAMBAM Sefer HaMitzvos section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Rambam · Sefer HaMitzvos <span class="study-check" data-study="rambamshm" title="Mark as studied"></span></div>
+    <div class="keter-section-label">✦ Rambam · Sefer HaMitzvos <span class="maalah yom" data-wane="13">יום כ״ח</span> <span class="study-check" data-study="rambamshm" title="Mark as studied"></span></div>
     <div class="keter-main" id="keter-rambam-shm-main">Loading…</div>
   </div>
   <!-- DVAR MALCHUS & CHAYENU section -->
   <div class="keter-section">
     <div class="keter-section-label">✦ Dvar Malchus &amp; Chayenu <span class="study-check" data-study="dvarmalchus" title="Mark as studied"></span></div>
     <div class="keter-main"><a href="https://www.dvarmalchus.org/" target="_blank" style="color:var(--gold)">Dvar Malchus</a> &nbsp;·&nbsp; <a href="https://chayenu.org/" target="_blank" style="color:var(--gold)">Chayenu</a></div>
-  </div>
-  <!-- INSIDECHASSIDUS section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ InsideChassidus <span class="study-check" data-study="insidechassidus" title="Mark as studied"></span></div>
-    <div class="keter-meta" id="keter-insidechassidus-main"></div>
-  </div>
-  <!-- JEM.TV section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ JEM.TV <span class="study-check" data-study="jemtv" title="Mark as studied"></span></div>
-    <div class="keter-meta" id="keter-jemtv-main"></div>
   </div>
 </div>
 
@@ -1766,7 +1761,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-tags" id="yesod-tags"></div>
     <div class="sefirah-detail">
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael <span class="study-check" data-study="chokyisrael" title="Mark as studied"></span></div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael <span class="maalah yom" data-wane="4">יום י״ט</span> <span class="study-check" data-study="chokyisrael" title="Mark as studied"></span></div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <div id="yesod-chok-english" style="font-size:0.88rem;margin-top:4px;"></div>
@@ -2173,6 +2168,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-detail">
       <!-- Likkutei Sichos — first section, above KSA -->
       <div id="malchut-sichos-detail" style="margin-bottom:14px;"></div>
+      <!-- Living Chassidus — InsideChassidus & JEM.TV (moved from Keter) -->
+      <div style="margin-bottom:14px;">
+        <div class="keter-section-label">✦ Living Chassidus <span class="maalah yom" data-wane="2">יום י״ז</span> <span class="study-check" data-study="livingchassidus" title="Mark as studied"></span></div>
+        <div style="font-size:0.88rem;"><a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a> &nbsp;·&nbsp; <a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a></div>
+      </div>
       <!-- KSA row — Arich Anpin -->
       <div class="malchut-ksa-row" style="margin-bottom:14px;">
         <div class="keter-section-label">✦ Kitzur Shulchan Aruch</div>
@@ -9610,19 +9610,34 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // Waxing moon: lit region bounded by the right limb and a terminator whose
-  // x-radius sweeps r→0→r as the phase goes new→half→full.
+  // x-radius sweeps r→0→r as the phase goes new→half→full. Once full (all 15
+  // face ma'alot), the sun's rays appear and REMAIN; the disc inside then
+  // wanes back to new as the 15 detail steps (days 16-30) complete — the
+  // waning path mirrors the waxing one (lit on the left, Or Chozer).
   function updateMaalotMoon(k) {
     const fill = document.getElementById('maalot-moon-fill');
     const cnt  = document.getElementById('maalot-moon-count');
     if (!fill) return;
-    const f = k / 15, r = 9, cx = 11, cy = 11;
-    const rx = r * Math.abs(Math.cos(Math.PI * f));
-    const sweep = f <= 0.5 ? 0 : 1;
-    fill.setAttribute('d', k === 0 ? '' :
-      `M ${cx} ${cy - r} A ${r} ${r} 0 0 1 ${cx} ${cy + r} A ${rx} ${r} 0 0 ${sweep} ${cx} ${cy - r} Z`);
-    if (cnt) cnt.textContent = k + '/15';
+    const r = 9, cx = 11, cy = 11;
+    const sun = k === 15;
+    const w = sun ? waneDone() : 0;
+    let d;
+    if (!sun) {
+      const f = k / 15;
+      const rx = r * Math.abs(Math.cos(Math.PI * f));
+      const sweep = f <= 0.5 ? 0 : 1;
+      d = k === 0 ? '' :
+        `M ${cx} ${cy - r} A ${r} ${r} 0 0 1 ${cx} ${cy + r} A ${rx} ${r} 0 0 ${sweep} ${cx} ${cy - r} Z`;
+    } else {
+      const g = 1 - w / 15; // lit fraction while waning: full→new
+      const rx = r * Math.abs(Math.cos(Math.PI * g));
+      const sweep = g <= 0.5 ? 1 : 0;
+      d = w === 15 ? '' :
+        `M ${cx} ${cy - r} A ${r} ${r} 0 0 0 ${cx} ${cy + r} A ${rx} ${r} 0 0 ${sweep} ${cx} ${cy - r} Z`;
+    }
+    fill.setAttribute('d', d);
+    if (cnt) cnt.textContent = sun ? (15 + w) + '/30' : k + '/15';
     // At ט״ו the light of the moon becomes like the light of the sun (Isaiah 30:26)
-    const sun  = k === 15;
     const SUN_GOLD = '#dfa016';
     const rays = document.getElementById('maalot-sun-rays');
     const rim  = document.getElementById('maalot-moon-rim');
@@ -9633,7 +9648,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     fill.setAttribute('fill', sun ? SUN_GOLD : 'var(--gold)');
     if (svg)  svg.style.filter = sun ? 'drop-shadow(0 0 2.5px rgba(223,160,22,0.85))' : '';
     if (wrap) wrap.title = sun
-      ? 'והיה אור הלבנה כאור החמה — the light of the moon shall be as the light of the sun (Isaiah 30:26)'
+      ? 'והיה אור הלבנה כאור החמה — the light of the moon shall be as the light of the sun (Isaiah 30:26) · Or Chozer: fifteen waning steps climb from Malchut back to Keter'
       : "Today's ma'alot — tap each מעלה tag in order";
   }
 
@@ -9641,6 +9656,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (!_maalotKey) return;
     const k = maalotDone();
     document.querySelectorAll('.maalah').forEach(el => {
+      if (el.classList.contains('yom')) return; // waning day-tags are lit by applyStudyState
       const n = maalotIndexOf(el);
       el.classList.toggle('done', n >= 1 && n <= k);
     });
@@ -9689,6 +9705,48 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.querySelectorAll('.study-check').forEach(el => {
       el.classList.toggle('done', done.has(el.dataset.study));
     });
+    // Light the waning day-tags (יום ט״ז–ל׳) up to the current unbroken step,
+    // and let the moon wane accordingly.
+    const w = waneDone();
+    document.querySelectorAll('.maalah.yom').forEach(el => {
+      el.classList.toggle('done', +el.dataset.wane <= w);
+    });
+    if (_maalotKey) updateMaalotMoon(maalotDone());
+  }
+
+  // ── THE FIFTEEN WANING STEPS — Or Chozer, Malchut back up to Keter ──
+  // The face's 15 ma'alot descend Keter→Malchut as the moon waxes (days
+  // 1–15); these retrace the path upward as it wanes (days 16–30). Steps
+  // count only in unbroken order from the first — the study checkboxes stay
+  // freely toggleable, but the moon only recedes through consecutive steps.
+  // Inner arrays are flexible steps: any one key satisfies the day.
+  const WANING_STEPS = [
+    ['ravshlomokatz'],                    // 16 Malchut — Rav Shlomo Katz
+    ['livingchassidus'],                  // 17 Malchut — InsideChassidus / JEM.TV
+    ['likkuteisichos'],                   // 18 Malchut — Daily Sicha / Project LS
+    ['chokyisrael'],                      // 19 Yesod — Chok L'Yisrael
+    ['chofetzchaim'],                     // 20 Hod — Daily Chofetz Chaim
+    ['chokbreslov'],                      // 21 Netzach — Chok Breslov
+    ['chitaskids'],                       // 22 Tiferet — Chitas for Kids
+    ['dafyomi'],                          // 23 Gevurah — Daf Yomi
+    ['carlebach'],                        // 24 Chesed — Reb Shlomo Carlebach
+    ['sahr'],                             // 25 Chesed — Shulchan Aruch HaRav
+    ['breslevisrael'],                    // 26 Binah — Breslov Israel Recordings
+    ['torahohr'],                         // 27 Chochmah — Torah Ohr / Likutei Torah
+    ['rambam3', 'rambam1', 'rambamshm'],  // 28 Keter — Rambam, any track
+    ['tanya'],                            // 29 Keter — Tanya
+    ['chumash'],                          // 30 Keter — Chumash with Rashi
+  ];
+
+  function waneDone() {
+    if (!_studyKey) return 0;
+    const done = studyDoneSet();
+    let w = 0;
+    for (const step of WANING_STEPS) {
+      if (step.some(k => done.has(k))) w++;
+      else break;
+    }
+    return w;
   }
 
   document.addEventListener('click', (e) => {
@@ -10051,15 +10109,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const _rh2 = _pmNum2 ? (PARASHA_HAFTORAH_URLS[_pmNum2] || null) : null;
       let _recHtml = '';
       if (_rt1 || _rt2 || _rh1 || _rh2) {
-        _recHtml = `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em">שׁ</span> Parasha &amp; Haftorah Recordings`;
+        // The section label already reads "Parasha & Haftorah Recordings" — no in-body header.
         if (_pmNum2) {
           const _tL = [_rt1 && _recA(_rt1, kstParts[0]), _rt2 && _recA(_rt2, kstParts[1])].filter(Boolean).join(' &nbsp;·&nbsp; ');
           const _hL = [_rh1 && _recA(_rh1, kstParts[0]), _rh2 && _recA(_rh2, kstParts[1])].filter(Boolean).join(' &nbsp;·&nbsp; ');
-          if (_tL) _recHtml += `<br>Parasha: ${_tL}`;
-          if (_hL) _recHtml += `<br>Haftorah: ${_hL}`;
+          if (_tL) _recHtml += `Parasha: ${_tL}`;
+          if (_hL) _recHtml += `${_tL ? '<br>' : ''}Haftorah: ${_hL}`;
         } else {
-          const _parts = [_rt1 && _recA(_rt1, 'Parasha'), _rh1 && _recA(_rh1, 'Haftorah')].filter(Boolean).join(' &nbsp;·&nbsp; ');
-          _recHtml += `<br>${_parts}`;
+          _recHtml = [_rt1 && _recA(_rt1, 'Parasha'), _rh1 && _recA(_rh1, 'Haftorah')].filter(Boolean).join(' &nbsp;·&nbsp; ');
         }
       }
       document.getElementById('keter-kst-meta').innerHTML = _recHtml;
@@ -10295,10 +10352,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const hyText = getHayomYom(hMonth, hDay);
     document.getElementById('keter-hayomyom').innerHTML =
       hyText ? `<span style="font-size:11px">"${hyText}"</span>` : '';
-    document.getElementById('keter-insidechassidus-main').innerHTML =
-      `<a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a>`;
-    document.getElementById('keter-jemtv-main').innerHTML =
-      `<a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a>`;
 
     // 6. Likutei Moharan — Hebrew-date-pegged lesson (Keter summary + popup)
     // Every LM_DAILY_CYCLE entry names a specific Hebrew date, so lookup is by
@@ -10615,7 +10668,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''} <span class="study-check" data-study="ohrtorah" title="Mark as studied"></span></div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Day ${chDay} of 364 <span class="study-check" data-study="torahohr" title="Mark as studied"></span></div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Day ${chDay} of 364 <span class="maalah yom" data-wane="12">יום כ״ז</span> <span class="study-check" data-study="torahohr" title="Mark as studied"></span></div>
        <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
        ${chSourceRow}
@@ -10728,7 +10781,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Sefaria</a> — Reb Nosson of Breslov</span></div>
 
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Breslov Israel Recordings <span class="study-check" data-study="breslevisrael" title="Mark as studied"></span></div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Breslov Israel Recordings <span class="maalah yom" data-wane="11">יום כ״ו</span> <span class="study-check" data-study="breslevisrael" title="Mark as studied"></span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a>${breslevCD3 ? ` &nbsp;·&nbsp; <a href="${breslevCD3.url}" target="_blank" style="color:var(--gold)">${breslevCD3.label}</a> &nbsp;·&nbsp; <a href="${breslevCD4.url}" target="_blank" style="color:var(--gold)">${breslevCD4.label}</a>` : ''}</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot <span class="study-check" data-study="foundationssefirot" title="Mark as studied"></span></div>
@@ -10796,7 +10849,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const jspReading  = bshtDay === 1 ? 'Introduction · Page 1' : `Pages ${2*(bshtDay-1)}–${2*(bshtDay-1)+1}`;
 
     document.getElementById('chesed-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav <span class="study-check" data-study="sahr" title="Mark as studied"></span></div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav <span class="maalah yom" data-wane="10">יום כ״ה</span> <span class="study-check" data-study="sahr" title="Mark as studied"></span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Light and Fire of the Baal Shem Tov &amp; Jewish Spiritual Practices <span class="study-check" data-study="lightfire" title="Mark as studied"></span></div>
@@ -10804,7 +10857,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Spiritual Practices:</span><span class="detail-value">${jspReading}</span></div>
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">R. Yitzhak Buxbaum</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Reb Shlomo Carlebach Stories <span class="study-check" data-study="carlebach" title="Mark as studied"></span></div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Reb Shlomo Carlebach Stories <span class="maalah yom" data-wane="9">יום כ״ד</span> <span class="study-check" data-study="carlebach" title="Mark as studied"></span></div>
        <div class="detail-row"><span class="detail-value">${clbVideo1 ? `<a href="${clbVideo1.url}" target="_blank" style="color:var(--gold)">${clbVideo1.label}</a>` : ''}${clbVideo1 && clbVideo2 ? ' &nbsp;·&nbsp; ' : ''}${clbVideo2 ? `<a href="${clbVideo2.url}" target="_blank" style="color:var(--gold)">${clbVideo2.label}</a>` : ''}</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">KoT Week:</span><span class="detail-value">Week ${mishnaInfo.week}, Day ${mishnaInfo.day} of 7</span></div>
@@ -10895,7 +10948,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 52 weeks</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי <span class="study-check" data-study="dafyomi" title="Mark as studied"></span></div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי <span class="maalah yom" data-wane="8">יום כ״ג</span> <span class="study-check" data-study="dafyomi" title="Mark as studied"></span></div>
        ${daf
          ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value">${daf.name} ${daf.heb}, Daf ${daf.daf}</span></div>
             <div class="detail-row"><span class="detail-label">Links:</span><span class="detail-value">
@@ -11014,7 +11067,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b</a> &nbsp;·&nbsp;
          <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15</a>
        </div>` :
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="study-check" data-study="chitaskids" title="Mark as studied"></span></div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="7">יום כ״ב</span> <span class="study-check" data-study="chitaskids" title="Mark as studied"></span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah <span class="study-check" data-study="tomerdevorah" title="Mark as studied"></span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
@@ -11149,7 +11202,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Year-Cycle ${leapCycleNum})</span></div>
          <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Year-Cycle ${leapCycleNum})</span></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="study-check" data-study="chokbreslov" title="Mark as studied"></span></div>
+         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="maalah yom" data-wane="6">יום כ״א</span> <span class="study-check" data-study="chokbreslov" title="Mark as studied"></span></div>
          <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
          <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
          <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
@@ -11171,7 +11224,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
          <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Cycle ${cy41.cycle} of 9)</span></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="study-check" data-study="chokbreslov" title="Mark as studied"></span></div>
+         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="maalah yom" data-wane="6">יום כ״א</span> <span class="study-check" data-study="chokbreslov" title="Mark as studied"></span></div>
          <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
          <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
          <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
@@ -11241,7 +11294,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ` &nbsp;·&nbsp; <a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
-        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim <span class="study-check" data-study="chofetzchaim" title="Mark as studied"></span></div>` +
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim <span class="maalah yom" data-wane="5">יום כ׳</span> <span class="study-check" data-study="chofetzchaim" title="Mark as studied"></span></div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
         `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim</a><br>` +
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
@@ -11260,7 +11313,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         hodRashabHtml;
     } else {
       const hodCcHtml =
-        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim <span class="study-check" data-study="chofetzchaim" title="Mark as studied"></span></div>` +
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim <span class="maalah yom" data-wane="5">יום כ׳</span> <span class="study-check" data-study="chofetzchaim" title="Mark as studied"></span></div>` +
         `<div style="font-size:0.88rem;line-height:2;">` +
         `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim</a><br>` +
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
@@ -11716,7 +11769,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     document.getElementById('malchut-detail').innerHTML =
       `<hr style="border:0;border-top:1px solid var(--border);margin:0 0 14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shlomo Katz — רב שלמה כץ <span class="study-check" data-study="ravshlomokatz" title="Mark as studied"></span></div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shlomo Katz — רב שלמה כץ <span class="maalah yom" data-wane="1">יום ט״ז</span> <span class="study-check" data-study="ravshlomokatz" title="Mark as studied"></span></div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://ravshlomokatz.com/" target="_blank" style="color:var(--gold)">Resources</a> &nbsp;·&nbsp; <a href="https://youtube.com/@ravshlomokatz" target="_blank" style="color:var(--gold)">Videos</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:0 0 14px 0;">` +
       todayRow +
@@ -11733,7 +11786,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
 
     document.getElementById('malchut-sichos-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likkutei Sichos <span class="study-check" data-study="likkuteisichos" title="Mark as studied"></span></div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likkutei Sichos <span class="maalah yom" data-wane="3">יום י״ח</span> <span class="study-check" data-study="likkuteisichos" title="Mark as studied"></span></div>
        <div style="font-size:0.88rem;margin-bottom:0;">` +
       `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha</a> &nbsp;·&nbsp; ` +
       `<a href="https://projectlikkuteisichos.org/" target="_blank" style="color:var(--gold)">Project Likkutei Sichos</a></div>`;
