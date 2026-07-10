@@ -715,6 +715,24 @@ animation: maalahShake 0.3s;
 cursor: default;
 }
 
+/* "About this cycle" info buttons beside cycle names */
+.cycle-info-btn {
+cursor: pointer;
+user-select: none;
+display: inline-block;
+margin-left: 5px;
+font-size: 11px;
+font-style: normal;
+letter-spacing: 0;
+color: var(--gold);
+opacity: 0.55;
+vertical-align: middle;
+}
+
+.cycle-info-btn:hover {
+opacity: 1;
+}
+
 .study-check {
 cursor: pointer;
 user-select: none;
@@ -1486,7 +1504,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
   <!-- DAILY LM section -->
   <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
-    <div class="keter-section-label">✦ Rebbe Nachman Year-Round — רבי נחמן בכל השנה <span class="maalah">מעלה א׳</span></div>
+    <div class="keter-section-label">✦ Rebbe Nachman Year-Round — רבי נחמן בכל השנה <span class="maalah">מעלה א׳</span> <span class="cycle-info-btn" data-cycle="keterlm" title="About this cycle">ⓘ</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
     <div class="keter-main" id="keter-lm-main">Loading…</div>
     <div class="keter-meta" id="keter-lm-meta"></div>
@@ -1755,7 +1773,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Maariv</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name">Shovavim — Parasha Cycle <span class="maalah">מעלה י״ב</span></div>
+    <div class="sefirah-cycle-name">Shovavim — Parasha Cycle <span class="maalah">מעלה י״ב</span> <span class="cycle-info-btn" data-cycle="yesod" title="About this cycle">ⓘ</span></div>
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
@@ -2149,7 +2167,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
         <div class="malchut-section">
-          <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah">מעלה י״ג</span></div>
+          <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah">מעלה י״ג</span> <span class="cycle-info-btn" data-cycle="malchut" title="About this cycle">ⓘ</span></div>
           <div id="malchut-ksa-face">Loading…</div>
         </div>
         <div class="malchut-section">
@@ -9749,6 +9767,93 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return w;
   }
 
+  // ── ABOUT THE CYCLES — tap-ⓘ explanations of each card's headline cycle ──
+  const CYCLE_INFO = {
+    keterlm: {
+      title: 'Rebbe Nachman Year-Round — רבי נחמן בכל השנה',
+      main: "Rebbe Nachman's Likutei Moharan spread across the entire Jewish year, each lesson pegged to its own Hebrew date and resonating with that day's character. רבי נחמן = 360 = השנה; בכל = 52, the weeks of the year: the Torah of Breslov carried through all the year's days.",
+      meta: 'An original Kabbalah of Time cycle · Likutei Moharan, Rebbe Nachman of Breslov'
+    },
+    chochmah: {
+      title: 'Alef-Bet — 22-Day Cycle',
+      main: 'Sefer Yetzirah teaches that Hashem created the world through the 22 Hebrew letters. This cycle dwells on one letter each day, completing the Alef-Bet 17 times a year (17 = טוב, "good") — creation\'s alphabet reviewed again and again in the Sefirah of the first creative flash.',
+      meta: 'An original Kabbalah of Time cycle · Sefer Yetzirah'
+    },
+    binah: {
+      title: 'Sefirot — 7×7×7 Cycle',
+      main: "The Omer count's 49 combinations (each of the seven emotional Sefirot within each other) extended across the whole year, seven cycles deep — 7×7×7 = 343 days plus three weeks for the three intellectual Sefirot. Understanding (Binah) is where structure unfolds: every quality examined inside every other.",
+      meta: 'An original Kabbalah of Time cycle · Sefirat HaOmer extended'
+    },
+    chesed: {
+      title: 'Mishna & Tosefta — the KoT Week',
+      main: 'Ten Mishna chapters over days 1–5 of each KoT week, then eight Tosefta chapters on days 6–7: the Oral Torah and its expansion completed in a yearly rhythm. Torah learning as pure giving — Chesed — flowing from teacher to student across generations.',
+      meta: 'An original Kabbalah of Time cycle · Mishna & Tosefta'
+    },
+    gevurah: {
+      title: 'Tanach — Two Chapters a Day',
+      main: "The Prophets and Writings in 364 days, two chapters daily: 728 chapters of Israel's discipline, history, and rebuke — the strong voice of the Nevi'im in the Sefirah of strength.",
+      meta: "An original Kabbalah of Time cycle · Nevi'im & Ketuvim"
+    },
+    tiferet: {
+      title: '13 Attributes — 13-Day Cycle',
+      main: "One of Hashem's Thirteen Attributes of Mercy each day, the cycle completing 28 times a year (28 = כח, \"strength\"): cycles 1–13 follow Micha's inner vessels, 14–26 Moshe's outer ones. Mercy is Tiferet's essence — beauty as compassion balanced.",
+      meta: 'An original Kabbalah of Time cycle · Micha 7:18–20 · Shemot 34:6–7'
+    },
+    netzach: {
+      title: '41-Day Cycle — Receiving the Torah',
+      main: "Nine cycles of 41 days (9 × 41 = 369): each cycle carries one of the Ten Commandments, each ten-day span one soul-level and world, with the Rebbe's mivtzoyim and Tikkun HaKlali woven in. 41 days = the count from Rosh Chodesh Elul through Yom Kippur, the original 40 days Moshe stood on Sinai plus the day of receiving — endurance (Netzach) as the march toward receiving the Torah.",
+      meta: 'An original Kabbalah of Time cycle'
+    },
+    hod: {
+      title: 'Zohar & Shulchan Aruch',
+      main: "The Zohar's light paired with practical law: two chapters of Shulchan Aruch/Mishnah Berurah daily through the year, sealed by the Chofetz Chaim's laws of speech. Hod is acknowledgment and precision — the splendor of getting the details right.",
+      meta: 'Zohar · Shulchan Aruch & Mishnah Berurah · Chofetz Chaim'
+    },
+    yesod: {
+      title: 'Shovavim — Parasha Cycle',
+      main: 'The weekly parasha as a year-round tikkun-cycle, extending the Shovavim weeks (Shemot–Mishpatim, the classic season of rectifying Yesod) across all 52 weeks: the foundation guarded all year.',
+      meta: 'An original Kabbalah of Time cycle · the Shovavim tikkun extended'
+    },
+    malchut: {
+      title: 'Year-Round Connection & the Weekly Books',
+      main: "The Rebbe's last ma'amar, V'Atah Tetzaveh, completed every 13 days (28 times a year), alongside seven daily texts that crown each week — Malchut receiving from all the Sefirot above it, as the moon receives the sun.",
+      meta: "An original Kabbalah of Time cycle · V'Atah Tetzaveh, Purim Katan 5752"
+    },
+    wheel: {
+      title: 'Ma\'alot HaZman — מעלות הזמן',
+      main: 'The year as a single day: the 52 weeks of the Kabbalah of Time year mapped onto the 24 hours of one day, each week a step ascending through the seven Sefirot — with weeks 50–52, the three Mochin, hovering above the Chatzot seam. Tap any step to see its week; the hand shows where "now" falls in the inner year.',
+      meta: 'From "The Kabbalah of Time" by Daniel Kahane & Ann Helen Wainer'
+    }
+  };
+
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest && e.target.closest('.cycle-info-btn');
+    if (!el) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const info = CYCLE_INFO[el.dataset.cycle];
+    if (info) openInfoPopup(info.title, info.main, info.meta);
+  }, true);
+
+  // Cycle-name elements rewritten by render() get their ⓘ re-appended after
+  // each render; statically-safe labels carry theirs in the HTML directly.
+  function injectCycleInfoButtons() {
+    const btn = (key) => ` <span class="cycle-info-btn" data-cycle="${key}" title="About this cycle">ⓘ</span>`;
+    [['chochmah-cycle-name', 'chochmah'],
+     ['binah-cycle-name', 'binah'],
+     ['chesed-cycle-name', 'chesed'],
+     ['gevurah-cycle-name', 'gevurah'],
+     ['hod-cycle-name', 'hod']].forEach(([id, key]) => {
+      const el = document.getElementById(id);
+      if (el && !el.querySelector('.cycle-info-btn')) el.insertAdjacentHTML('beforeend', btn(key));
+    });
+    const cards = Array.from(document.querySelectorAll('.sefirah-card')).filter(c => c.id !== 'now-sefirah-featured');
+    [[4, 'tiferet'], [5, 'netzach']].forEach(([i, key]) => {
+      const el = cards[i] && cards[i].querySelector('.sefirah-cycle-name');
+      if (el && !el.querySelector('.cycle-info-btn')) el.insertAdjacentHTML('beforeend', btn(key));
+    });
+  }
+
   document.addEventListener('click', (e) => {
     const el = e.target.closest && e.target.closest('.study-check');
     if (!el || !_studyKey) return;
@@ -9826,6 +9931,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     setTimeout(applyMaalotState, 0); // after this render's innerHTML writes settle
     _studyKey = 'kotStudy:' + hYear + '-' + hMonth + '-' + hDay;
     setTimeout(applyStudyState, 0);
+    setTimeout(injectCycleInfoButtons, 0); // re-append ⓘ after this render's rewrites
     const hMname = HEB_MONTH_NAMES[hMonth] || '';
     const hDateStr = `${hDay} ${hMname} ${hYear}`;
 
@@ -12902,7 +13008,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   var h=document.createElement('div');
   h.innerHTML='<div class="kotw-title">מַעֲלוֹת הַזְּמַן</div>'+
-    '<div class="kotw-sub">The Year as a Single Day — Kabbalah of Time</div>';
+    '<div class="kotw-sub">The Year as a Single Day — Kabbalah of Time <span class="cycle-info-btn" data-cycle="wheel" title="About this cycle">ⓘ</span></div>';
   root.appendChild(h);
 
   var svg=mk('svg',{viewBox:'0 0 420 420',role:'img',
