@@ -4969,7 +4969,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Vayeira': 4, 'Chayei Sara': 5, 'Toledot': 6,
     'Shmini': 26, 'Behaalotecha': 36, 'Shlach': 37,
     'Vaetchanan': 45, 'Eikev': 46, 'Ki Teitzei': 49,
-    'Vayeilech': 52,
+    'Vayeilech': 52, 'Masei': 43,
     // Combined parashiyot (hyphen-separated)
     'Vayakhel-Pekudei': 22, 'Tazria-Metzora': 27, 'Achrei Mot-Kedoshim': 29,
     'Behar-Bechukotai': 32, 'Chukat-Balak': 39, 'Matot-Masei': 42,
@@ -10242,8 +10242,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const kstParashaNum  = kstParasha
         ? (PARASHA_TO_NUMBER[kstParasha] || PARASHA_TO_NUMBER[kstParts[0]])
         : null;
-      const kstParashaNum2 = (!PARASHA_TO_NUMBER[kstParasha] && kstParts.length > 1)
-        ? PARASHA_TO_NUMBER[kstParts[1]]
+      // On a double parasha, always resolve the second half too, so both
+      // parashiyot's Keter Shem Tov sections appear. (Previously this was
+      // guarded by !PARASHA_TO_NUMBER[kstParasha] — but every combined name
+      // IS in the map, so the second entry could never render.)
+      const kstParashaNum2 = kstParts.length > 1
+        ? (PARASHA_TO_NUMBER[kstParts[1]] || null)
         : null;
       const kstDow = date.getDay(); // 0=Sun … 6=Shabbat
       const kst  = getDailyKST(kstParashaNum, kstDow);
@@ -10371,9 +10375,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           }
           return refHtml + titlesHtml;
         }
-        let html = `<span style="color:var(--ink-mid);font-size:0.9em">Keter Shem Tov · </span>` + kstEntryHtml(kst);
-        if (kst2) html += `<br>` + kstEntryHtml(kst2);
-        html += ` — <a href="${kstHebrewBooksUrl(kst.page)}" target="_blank" style="color:var(--gold)">HebrewBooks</a>`;
+        let html = `<span style="color:var(--ink-mid);font-size:0.9em">Keter Shem Tov · </span>` + kstEntryHtml(kst) +
+          ` — <a href="${kstHebrewBooksUrl(kst.page)}" target="_blank" style="color:var(--gold)">HebrewBooks</a>`;
+        if (kst2) html += `<br>` + kstEntryHtml(kst2) +
+          ` — <a href="${kstHebrewBooksUrl(kst2.page)}" target="_blank" style="color:var(--gold)">HebrewBooks</a>`;
         html += ohLine;
         document.getElementById('keter-kst-main').innerHTML = html;
       } else {
