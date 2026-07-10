@@ -1369,6 +1369,51 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 }
 .wr-btn-save{background:var(--gold);color:#fff;border-color:var(--gold);}
 .wr-btn-close{background:var(--bg);color:var(--ink-mid);}
+
+/* ── TODAY'S PATH — the day's 30 steps in one tappable list ── */
+#todays-path-body { font-size: 12.5px; }
+.path-section-title {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px;
+  color:var(--gold); text-transform:uppercase; margin:8px 0 5px;
+}
+.path-row {
+  display:flex; align-items:center; gap:7px; padding:5px 6px;
+  border-radius:5px; cursor:pointer; color:var(--ink-mid);
+}
+.path-row:hover { background:#f2ead8; }
+.path-row.done { opacity:.55; }
+.path-row.next { background:#f7efdd; box-shadow: inset 0 0 0 1px var(--gold); }
+.path-check { color:var(--gold); font-size:13px; }
+.path-day { font-family:'Frank Ruhl Libre',serif; font-size:10px; color:var(--gold); white-space:nowrap; min-width:52px; text-align:right; }
+.path-name { flex:1; }
+.path-sef { font-size:10px; color:var(--ink-dim); font-style:italic; }
+.path-next-tag {
+  font-family:'Cinzel',serif; font-size:8px; letter-spacing:1.5px;
+  color:#fdf9f2; background:var(--gold); border-radius:3px; padding:1px 5px; text-transform:uppercase;
+}
+.path-complete { text-align:center; color:var(--gold); margin-top:10px; font-style:italic; }
+
+/* Gentle pulse on the next actionable step */
+@keyframes nextPulse { 0%,100% { opacity:.95; } 50% { opacity:.3; } }
+.maalah.next-step { animation: nextPulse 2.4s ease-in-out infinite; }
+
+/* ── PHONE ERGONOMICS — larger type and touch targets ── */
+@media (max-width: 600px) {
+  .maalah { font-size: 10.5px; padding: 2px 5px; }
+  .study-check { font-size: 17px; padding: 2px 6px; }
+  .cycle-info-btn { font-size: 15px; padding: 2px 6px; }
+  .sefirah-main-text { font-size: 17px; }
+  .sefirah-sub-text { font-size: 15px; }
+  .keter-main { font-size: 15px; }
+  .keter-meta { font-size: 12.5px; }
+  .keter-section-label { font-size: 10.5px; }
+  .sefirah-cycle-name { font-size: 11px; }
+  .detail-row { font-size: 15px; }
+  .malchut-visible-content .sefirah-main-text { font-size: 15px; }
+  .malchut-visible-content .sefirah-sub-text { font-size: 12.5px; }
+  #todays-path-body { font-size: 14px; }
+  .path-row { padding: 8px 6px; }
+}
 </style>
 
 </head>
@@ -1412,6 +1457,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
   </div>
 
+  <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
+  <div id="kot-welcome" style="display:none; margin:12px 16px 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:13px; color:var(--ink-mid); line-height:1.7; position:relative;">
+    <button onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:18px; cursor:pointer; line-height:1;">×</button>
+    <strong style="color:var(--gold);">Welcome!</strong> Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
+    Tap the small gold <strong>מעלה</strong> tags in order to fill tonight's moon; when it becomes the sun, climb back from Malchut to Keter through the <strong>יום</strong> tags inside the cards.
+    <a href="#" onclick="event.preventDefault(); openTodaysPath()" style="color:var(--gold); font-weight:600;">Tap the moon 🌙 above anytime to see Today's Path.</a>
+  </div>
+
   <!-- DUAL CLOCK -->
   <div id="dual-clock">
     <div class="dc-col">
@@ -1424,7 +1477,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div class="dc-label">Jerusalem &nbsp;ירושלים</div>
     </div>
     <div class="dc-sep">·</div>
-    <div class="dc-col" id="maalot-moon" title="Today's ma'alot — tap each מעלה tag in order">
+    <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag in order · tap for Today's Path">
       <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
         <svg id="maalot-moon-svg" width="18" height="18" viewBox="0 0 22 22" style="display:block"><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
         <span id="maalot-moon-count" style="font-size:11px;color:var(--gold);">0/15</span>
@@ -1451,6 +1504,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div id="kotw-root"></div>
 
   <!-- NOW: Sefirah of the Hour -->
+  <div id="now-caption" style="display:none; margin:2px 20px 4px; font-size:11px; color:var(--ink-dim); text-align:center; font-style:italic;">Each hour of the day belongs to one of the ten Sefirot — this card mirrors the one shining <span style="color:var(--gold);">now</span>. You'll find the same card in its place below.</div>
   <div id="now-sefirah-featured" class="sefirah-card" onclick="toggleExpand(this)"
        style="display:none;border-left:2px solid var(--gold);margin-bottom:8px;">
     <span class="expand-icon">▾</span>
@@ -1604,6 +1658,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       </div>
       <div class="keter-main" id="info-popup-main" style="margin-bottom:10px;"></div>
       <div class="keter-meta" id="info-popup-meta"></div>
+    </div>
+  </div>
+
+  <!-- TODAY'S PATH MODAL — all 30 steps of the day's moon -->
+  <div id="todays-path-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
+    <div class="heb-picker-card" style="width:min(360px, 92vw); max-height:82vh; overflow-y:auto;">
+      <div class="heb-picker-header">
+        <span class="heb-picker-title">Today's Path — דרך היום</span>
+        <button class="heb-picker-close" onclick="closeTodaysPath()">×</button>
+      </div>
+      <div id="todays-path-body"></div>
     </div>
   </div>
 
@@ -9677,6 +9742,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (el.classList.contains('yom')) return; // waning day-tags are lit by applyStudyState
       const n = maalotIndexOf(el);
       el.classList.toggle('done', n >= 1 && n <= k);
+      el.classList.toggle('next-step', n === k + 1); // gentle pulse on the next step
     });
     updateMaalotMoon(k);
   }
@@ -9700,6 +9766,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       return;
     }
     applyMaalotState();
+    applyStudyState(); // refresh waning day-tag pulse when the sun state changes
   }, true);
 
   // ── TEN STUDY CHECKS — independent per-detail-section completions ──
@@ -9724,10 +9791,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       el.classList.toggle('done', done.has(el.dataset.study));
     });
     // Light the waning day-tags (יום ט״ז–ל׳) up to the current unbroken step,
-    // and let the moon wane accordingly.
+    // and let the moon wane accordingly. The next step pulses once the sun
+    // has been reached (all 15 face ma'alot done).
     const w = waneDone();
+    const sunNow = _maalotKey && maalotDone() === 15;
     document.querySelectorAll('.maalah.yom').forEach(el => {
       el.classList.toggle('done', +el.dataset.wane <= w);
+      el.classList.toggle('next-step', !!sunNow && +el.dataset.wane === w + 1);
     });
     if (_maalotKey) updateMaalotMoon(maalotDone());
   }
@@ -9854,6 +9924,107 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     });
   }
 
+  // ── TODAY'S PATH — the day's 30 steps in one tappable list ──
+  // Tap the moon in the dual clock to open. Each row shows its live state;
+  // the next actionable step is highlighted; tapping a row scrolls to (and
+  // for waning steps, expands) the right card.
+  const PATH_WAXING = [
+    ['א׳', 'Rebbe Nachman Year-Round', 'Keter'],
+    ['ב׳', 'Light that is Good — אור כי טוב', 'Keter'],
+    ['ג׳', 'Strong Day — Hayom Yom & Rambam', 'Keter'],
+    ['ד׳', 'Alef-Bet — 22-Day Cycle', 'Chochmah'],
+    ['ה׳', 'Sefirot — 7×7×7 Cycle', 'Binah'],
+    ['ו׳', 'Mishna & Tosefta', 'Chesed'],
+    ['ז׳', 'Tanach — 2 Chapters', 'Gevurah'],
+    ['ח׳', '13 Attributes', 'Tiferet'],
+    ['ט׳', '41-Day Cycle', 'Netzach'],
+    ['י׳', 'Zohar', 'Hod'],
+    ['י״א', 'Shulchan Aruch', 'Hod'],
+    ['י״ב', 'Shovavim — Parasha', 'Yesod'],
+    ['י״ג', 'Year-Round Connection', 'Malchut'],
+    ['י״ד', 'Fruits of Her Labor', 'Malchut'],
+    ['ט״ו', 'Works of Her Praise', 'Malchut'],
+  ];
+  const PATH_WANING = [
+    ['ט״ז', 'Rav Shlomo Katz', 'Malchut'],
+    ['י״ז', 'Living Chassidus', 'Malchut'],
+    ['י״ח', 'Likkutei Sichos', 'Malchut'],
+    ['י״ט', "Chok L'Yisrael", 'Yesod'],
+    ['כ׳', 'Daily Chofetz Chaim', 'Hod'],
+    ['כ״א', 'Chok Breslov', 'Netzach'],
+    ['כ״ב', 'Chitas for Kids', 'Tiferet'],
+    ['כ״ג', 'Daf Yomi', 'Gevurah'],
+    ['כ״ד', 'Reb Shlomo Carlebach', 'Chesed'],
+    ['כ״ה', 'Shulchan Aruch HaRav', 'Chesed'],
+    ['כ״ו', 'Breslov Israel Recordings', 'Binah'],
+    ['כ״ז', 'Likutei Torah', 'Chochmah'],
+    ['כ״ח', 'Rambam — any track', 'Keter'],
+    ['כ״ט', 'Tanya', 'Keter'],
+    ['ל׳', 'Chumash with Rashi', 'Keter'],
+  ];
+
+  function openTodaysPath() {
+    const k = _maalotKey ? maalotDone() : 0;
+    const w = waneDone();
+    const sun = k === 15;
+    const done = _studyKey ? studyDoneSet() : new Set();
+    const nextIdx = !sun ? k : (w < 15 ? 15 + w : -1);
+    const row = (idx, name, sef, isDone, dayLabel) => {
+      const next = idx === nextIdx;
+      return `<div class="path-row${isDone ? ' done' : ''}${next ? ' next' : ''}" onclick="pathGo(${idx})">` +
+        `<span class="path-check">${isDone ? '☑' : '☐'}</span>` +
+        `<span class="path-day">${dayLabel}</span>` +
+        `<span class="path-name">${name}</span>` +
+        `<span class="path-sef">${sef}</span>` +
+        (next ? `<span class="path-next-tag">next</span>` : '') +
+        `</div>`;
+    };
+    let html = `<div class="path-section-title">☽ Waxing — the light descends, Keter → Malchut</div>`;
+    PATH_WAXING.forEach((p, i) => { html += row(i, p[1], p[2], i < k, 'מעלה ' + p[0]); });
+    html += `<div class="path-section-title" style="margin-top:12px;">☀ Waning — the return, Malchut → Keter · listening, bitul</div>`;
+    PATH_WANING.forEach((p, j) => {
+      html += row(15 + j, p[1], p[2], WANING_STEPS[j].some(key => done.has(key)), 'יום ' + p[0]);
+    });
+    if (nextIdx === -1) html += `<div class="path-complete">30/30 — the month complete: the new moon crowned in rays.</div>`;
+    document.getElementById('todays-path-body').innerHTML = html;
+    document.getElementById('todays-path-modal').style.display = 'flex';
+  }
+
+  function closeTodaysPath() {
+    document.getElementById('todays-path-modal').style.display = 'none';
+  }
+
+  function pathGo(idx) {
+    closeTodaysPath();
+    if (idx < 15) {
+      const el = Array.from(document.querySelectorAll('.maalah')).find(e =>
+        !e.classList.contains('yom') && !e.closest('#now-sefirah-featured') &&
+        e.textContent.replace('מעלה', '').trim() === MAALOT_HEB[idx]);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      const keys = WANING_STEPS[idx - 15];
+      const el = Array.from(document.querySelectorAll('.study-check')).find(e =>
+        keys.indexOf(e.dataset.study) !== -1 && !e.closest('#now-sefirah-featured'));
+      if (!el) return;
+      const card = el.closest('.sefirah-card') || el.closest('.keter-card');
+      if (card) card.classList.add('expanded');
+      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+    }
+  }
+
+  // ── FIRST-VISIT WELCOME HINT ──
+  function dismissWelcome() {
+    const el = document.getElementById('kot-welcome');
+    if (el) el.style.display = 'none';
+    try { localStorage.setItem('kotWelcomeDismissed', '1'); } catch (e) {}
+  }
+  try {
+    if (!localStorage.getItem('kotWelcomeDismissed')) {
+      const el = document.getElementById('kot-welcome');
+      if (el) el.style.display = '';
+    }
+  } catch (e) {}
+
   document.addEventListener('click', (e) => {
     const el = e.target.closest && e.target.closest('.study-check');
     if (!el || !_studyKey) return;
@@ -9909,6 +10080,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
     copy('.sefirah-detail',     'now-sf-detail');
     document.getElementById('now-sefirah-featured').style.display = 'grid';
+    const nowCap = document.getElementById('now-caption');
+    if (nowCap) nowCap.style.display = '';
     applyMaalotState();
   }
 
