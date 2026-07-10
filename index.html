@@ -1558,10 +1558,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
   <!-- DAILY LM section -->
   <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
-    <div class="keter-section-label">✦ Rebbe Nachman Year-Round — רבי נחמן בכל השנה <span class="maalah">מעלה א׳</span> <span class="cycle-info-btn" data-cycle="keterlm" title="About this cycle">ⓘ</span></div>
+    <div class="keter-section-label">✦ Rebbe Nachman &amp; Rashbi Year-Round — רבי נחמן ורשב״י בכל השנה <span class="maalah">מעלה א׳</span> <span class="cycle-info-btn" data-cycle="keterlm" title="About this cycle">ⓘ</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
     <div class="keter-main" id="keter-lm-main">Loading…</div>
     <div class="keter-meta" id="keter-lm-meta"></div>
+    <div class="keter-meta" id="keter-daily-zohar"></div>
     <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
@@ -1847,7 +1848,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael <span class="maalah yom" data-wane="4">יום י״ט</span> <span class="study-check" data-study="chokyisrael" title="Mark as studied"></span></div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
-      <div id="yesod-chok-english" style="font-size:0.88rem;margin-top:4px;"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Midrash <span class="study-check" data-study="midrash" title="Mark as studied"></span></div>
       <div id="yesod-midrash-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
@@ -9845,9 +9845,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // ── ABOUT THE CYCLES — tap-ⓘ explanations of each card's headline cycle ──
   const CYCLE_INFO = {
     keterlm: {
-      title: 'Rebbe Nachman Year-Round — רבי נחמן בכל השנה',
-      main: "Rebbe Nachman's Likutei Moharan spread across the entire Jewish year, each lesson pegged to its own Hebrew date and resonating with that day's character. רבי נחמן = 360 = השנה; בכל = 52, the weeks of the year: the Torah of Breslov carried through all the year's days.",
-      meta: 'An original Kabbalah of Time cycle · Likutei Moharan, Rebbe Nachman of Breslov'
+      title: 'Rebbe Nachman & Rashbi Year-Round — רבי נחמן ורשב״י בכל השנה',
+      main: "Rebbe Nachman's Likutei Moharan spread across the entire Jewish year, each lesson pegged to its own Hebrew date and resonating with that day's character (רבי נחמן = 360 = השנה; בכל = 52, the weeks of the year) — paired with Rashbi's Zohar in its Chok L'Yisrael order, the Daily Zohar. The revealed fire and the hidden light together: Rashbi's channel continues through Rebbe Nachman, whose Tikkun HaKlali extends Rashbi's work of rectification.",
+      meta: "An original Kabbalah of Time cycle · Likutei Moharan & the Zohar (Chok L'Yisrael)"
     },
     chochmah: {
       title: 'Alef-Bet — 22-Day Cycle',
@@ -9934,7 +9934,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // the next actionable step is highlighted; tapping a row scrolls to (and
   // for waning steps, expands) the right card.
   const PATH_WAXING = [
-    ['א׳', 'Rebbe Nachman Year-Round', 'Keter'],
+    ['א׳', 'Rebbe Nachman & Rashbi Year-Round', 'Keter'],
     ['ב׳', 'Light that is Good — אור כי טוב', 'Keter'],
     ['ג׳', 'Strong Day — Hayom Yom & Rambam', 'Keter'],
     ['ד׳', 'Alef-Bet — 22-Day Cycle', 'Chochmah'],
@@ -10534,10 +10534,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const _zoharParashaNum2 = _zoharParts.length > 1 ? PARASHA_TO_NUMBER[_zoharParts[1]] : null;
     const _chabadZoharUrl  = getChabadZoharUrl(_zoharParashaNum, date.getDay());
     const _chabadZoharUrl2 = _zoharParashaNum2 ? getChabadZoharUrl(_zoharParashaNum2, date.getDay()) : null;
-    if (_chabadZoharUrl) {
-      let _chokEnglishHtml = `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Zohar Chok L'Yisrael${_chabadZoharUrl2 ? ' (I)' : ' (English)'}</a>`;
-      if (_chabadZoharUrl2) _chokEnglishHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Zohar Chok L'Yisrael (II)</a>`;
-      document.getElementById('yesod-chok-english').innerHTML = _chokEnglishHtml;
+    // Daily Zohar — Rashbi's pairing in the Keter head "Rebbe Nachman & Rashbi
+    // Year-Round" (moved from the Yesod Chok L'Yisrael section; "Daily Zohar"
+    // is Chabad.org's own name for this series). No entry on Shabbat.
+    {
+      let _dzHtml = '';
+      if (_chabadZoharUrl) {
+        _dzHtml = `<strong>Zohar</strong> · Rabbi Shimon bar Yochai &nbsp;·&nbsp; ` +
+          `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Daily Zohar${_chabadZoharUrl2 ? ' (I)' : ''}</a>`;
+        if (_chabadZoharUrl2) _dzHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Daily Zohar (II)</a>`;
+      }
+      document.getElementById('keter-daily-zohar').innerHTML = _dzHtml;
     }
 
     // Midrash (Yesod card) — Midrash Rabbah (by chumash book) + Midrash Tanchuma
