@@ -733,6 +733,23 @@ vertical-align: middle;
 opacity: 1;
 }
 
+/* Corner placement — top-right of each card, beside the expand arrow */
+.cycle-info-btn.corner {
+position: absolute;
+top: 12px;
+right: 32px;
+margin: 0;
+padding: 0 2px;
+font-size: 13px;
+line-height: 1;
+z-index: 2;
+}
+
+.keter-card > .cycle-info-btn.corner {
+top: 10px;
+right: 38px;
+}
+
 .study-check {
 cursor: pointer;
 user-select: none;
@@ -1558,7 +1575,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
   <!-- DAILY LM section -->
   <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
-    <div class="keter-section-label">✦ Rebbe Nachman &amp; Rashbi Year-Round — רבי נחמן ורשב״י בכל השנה <span class="maalah">מעלה א׳</span> <span class="cycle-info-btn" data-cycle="keterlm" title="About this cycle">ⓘ</span></div>
+    <div class="keter-section-label">✦ Rebbe Nachman &amp; Rashbi Year-Round — רבי נחמן ורשב״י בכל השנה <span class="maalah">מעלה א׳</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada</div>
     <div class="keter-main" id="keter-lm-main">Loading…</div>
     <div class="keter-meta" id="keter-lm-meta"></div>
@@ -1839,7 +1856,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Maariv</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name">Shovavim — Parasha Cycle <span class="maalah">מעלה י״ב</span> <span class="cycle-info-btn" data-cycle="yesod" title="About this cycle">ⓘ</span></div>
+    <div class="sefirah-cycle-name">Shovavim — Parasha Cycle <span class="maalah">מעלה י״ב</span></div>
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
@@ -2232,7 +2249,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
         <div class="malchut-section">
-          <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah">מעלה י״ג</span> <span class="cycle-info-btn" data-cycle="malchut" title="About this cycle">ⓘ</span></div>
+          <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah">מעלה י״ג</span></div>
           <div id="malchut-ksa-face">Loading…</div>
         </div>
         <div class="malchut-section">
@@ -9910,22 +9927,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (info) openInfoPopup(info.title, info.main, info.meta);
   }, true);
 
-  // Cycle-name elements rewritten by render() get their ⓘ re-appended after
-  // each render; statically-safe labels carry theirs in the HTML directly.
+  // Each card carries its ⓘ at the top-right corner, beside the expand
+  // arrow. Card roots are never innerHTML-rewritten, so one injection
+  // sticks; the guard makes repeat calls harmless.
   function injectCycleInfoButtons() {
-    const btn = (key) => ` <span class="cycle-info-btn" data-cycle="${key}" title="About this cycle">ⓘ</span>`;
-    [['chochmah-cycle-name', 'chochmah'],
-     ['binah-cycle-name', 'binah'],
-     ['chesed-cycle-name', 'chesed'],
-     ['gevurah-cycle-name', 'gevurah'],
-     ['hod-cycle-name', 'hod']].forEach(([id, key]) => {
-      const el = document.getElementById(id);
-      if (el && !el.querySelector('.cycle-info-btn')) el.insertAdjacentHTML('beforeend', btn(key));
-    });
+    const btn = (key) => `<span class="cycle-info-btn corner" data-cycle="${key}" title="About this cycle">ⓘ</span>`;
+    const keter = document.querySelector('.keter-card');
+    if (keter && !keter.querySelector(':scope > .cycle-info-btn')) keter.insertAdjacentHTML('beforeend', btn('keterlm'));
     const cards = Array.from(document.querySelectorAll('.sefirah-card')).filter(c => c.id !== 'now-sefirah-featured');
-    [[4, 'tiferet'], [5, 'netzach']].forEach(([i, key]) => {
-      const el = cards[i] && cards[i].querySelector('.sefirah-cycle-name');
-      if (el && !el.querySelector('.cycle-info-btn')) el.insertAdjacentHTML('beforeend', btn(key));
+    ['chochmah', 'binah', 'chesed', 'gevurah', 'tiferet', 'netzach', 'hod', 'yesod', 'malchut'].forEach((key, i) => {
+      const c = cards[i];
+      if (c && !c.querySelector(':scope > .cycle-info-btn')) c.insertAdjacentHTML('beforeend', btn(key));
     });
   }
 
