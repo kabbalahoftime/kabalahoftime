@@ -10368,14 +10368,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           }
           return refHtml + titlesHtml;
         }
-        let html = kstEntryHtml(kst);
+        let html = `<span style="color:var(--ink-mid);font-size:0.9em">Keter Shem Tov · </span>` + kstEntryHtml(kst);
         if (kst2) html += `<br>` + kstEntryHtml(kst2);
         html += ` — <a href="${kstHebrewBooksUrl(kst.page)}" target="_blank" style="color:var(--gold)">HebrewBooks</a>`;
         html += ohLine;
         document.getElementById('keter-kst-main').innerHTML = html;
       } else {
         document.getElementById('keter-kst-main').innerHTML =
-          `<a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">HebrewBooks</a>` + ohLine;
+          `<span style="color:var(--ink-mid);font-size:0.9em">Keter Shem Tov</span> — <a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">HebrewBooks</a>` + ohLine;
       }
       // Parasha & Haftorah recordings (Chabad) — keyed to the current parasha; both halves
       // on a double week (resolved from the split name, since a combined name maps to one).
