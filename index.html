@@ -10332,15 +10332,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ];
       // Daily aliyah convention (matches getDailyKST): Sun–Fri = aliyot 1–6, Shabbat = aliyah 7.
       const ohAliyahIdx = kstDow === 6 ? 6 : kstDow;
-      const ohAliyahVerse = ohParashaNum ? (OH_ALIYAH_VERSES[ohParashaNum] || [])[ohAliyahIdx] : null;
-      const ohVerse = ohAliyahVerse
-        ? [OH_FIRST_VERSE[ohParashaNum][0], ohAliyahVerse[0], ohAliyahVerse[1]]
-        : (ohParashaNum ? OH_FIRST_VERSE[ohParashaNum] : null);
-      const ohUrl = ohVerse
-        ? `https://www.sefaria.org/Or_HaChaim_on_${ohVerse[0]}.${ohVerse[1]}.${ohVerse[2]}?lang=bi`
-        : `https://www.sefaria.org/texts/Tanakh/Acharonim%20on%20Tanakh/Or%20HaChaim/Torah`;
-      const ohLine = `<br><span style="color:var(--ink-mid);font-size:0.9em">Ohr HaChaim · Parashat ${kstParasha || '—'}</span>` +
-        ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Sefaria</a>`;
+      const ohUrlFor = (num) => {
+        const av = num ? (OH_ALIYAH_VERSES[num] || [])[ohAliyahIdx] : null;
+        const v = av
+          ? [OH_FIRST_VERSE[num][0], av[0], av[1]]
+          : (num ? OH_FIRST_VERSE[num] : null);
+        return v
+          ? `https://www.sefaria.org/Or_HaChaim_on_${v[0]}.${v[1]}.${v[2]}?lang=bi`
+          : `https://www.sefaria.org/texts/Tanakh/Acharonim%20on%20Tanakh/Or%20HaChaim/Torah`;
+      };
+      const ohUrl = ohUrlFor(ohParashaNum);
+      // On a double parasha, each half links to its own aliyah of the day.
+      const ohLine = kstParashaNum2
+        ? `<br><span style="color:var(--ink-mid);font-size:0.9em">Ohr HaChaim · Parashat ${kstParasha}</span>` +
+          ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">${kstParts[0]}</a>` +
+          ` &nbsp;·&nbsp; <a href="${ohUrlFor(kstParashaNum2)}" target="_blank" style="color:var(--gold)">${kstParts[1]}</a>` +
+          ` <span style="color:var(--ink-dim);font-size:0.85em">— Sefaria</span>`
+        : `<br><span style="color:var(--ink-mid);font-size:0.9em">Ohr HaChaim · Parashat ${kstParasha || '—'}</span>` +
+          ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Sefaria</a>`;
 
       document.getElementById('keter-kst-label').innerHTML = '✦ Light that is Good — אור כי טוב <span class="maalah">מעלה ב׳</span>';
 
