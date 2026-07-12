@@ -505,8 +505,8 @@ padding: 10px 12px;
 }
 
 /* Harmonize Malchut face type scale with Keter's (13.5px main / 11px sub) */
-.malchut-visible-content .sefirah-main-text { font-size: 13.5px; line-height: 1.55; }
-.malchut-visible-content .sefirah-sub-text { font-size: 11px; }
+.malchut-visible-content .sefirah-main-text { font-size: 16px; line-height: 1.5; }
+.malchut-visible-content .sefirah-sub-text { font-size: 12.5px; }
 
 .malchut-inner-row .malchut-section:nth-child(odd) {
 background: #fdf9f2;
@@ -1426,8 +1426,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   .keter-section-label { font-size: 10.5px; }
   .sefirah-cycle-name { font-size: 11px; }
   .detail-row { font-size: 15px; }
-  .malchut-visible-content .sefirah-main-text { font-size: 15px; }
-  .malchut-visible-content .sefirah-sub-text { font-size: 12.5px; }
+  .malchut-visible-content .sefirah-main-text { font-size: 17px; }
+  .malchut-visible-content .sefirah-sub-text { font-size: 13px; }
   #todays-path-body { font-size: 14px; }
   .path-row { padding: 8px 6px; }
 }
@@ -2265,7 +2265,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div class="malchut-inner-row">
         <div class="malchut-section">
           <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah">מעלה י״ג</span></div>
-          <div id="malchut-ksa-face">Loading…</div>
+          <div class="sefirah-main-text" id="malchut-ksa-face">Loading…</div>
         </div>
         <div class="malchut-section">
           <div class="keter-section-label">✦ Fruits of Her Labor — מפרי ידיה <span class="maalah">מעלה י״ד</span></div>
@@ -2276,7 +2276,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <div class="malchut-section">
           <div class="keter-section-label">✦ Works of Her Praise — בשערים מעשיה <span class="maalah">מעלה ט״ו</span></div>
           <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Likutei Halachot</div>
-          <div id="malchut-lh-face">Loading…</div>
+          <div class="sefirah-main-text" id="malchut-lh-face">Loading…</div>
         </div>
       </div>
     </div>
@@ -11976,13 +11976,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       _lsSichosBook = lsBook ? lsBook.book : null;
       _vtSeif  = VATAH_SEIF_BY_DAY[cy13.day - 1]; // 0 = overview (Adar I day)
       _vtUrl   = _vtSeif === 0 ? VATAH_OVERVIEW_URL : VATAH_URLS[_vtSeif - 1];
-      _vtText  = _vtSeif === 0 ? `ואתה תצוה — Overview` : `ואתה תצוה — Se'if ${VATAH_HEB[_vtSeif - 1]}`;
+      _vtText  = _vtSeif === 0 ? `Overview` : `Se'if ${VATAH_HEB[_vtSeif - 1]}`;
       _vtTitle = _vtSeif === 0 ? 'the complete ma\'amar — Purim Katan' : VATAH_TITLES[_vtSeif - 1];
       document.getElementById('malchut-ksa-face').innerHTML =
         (_vtUrl
-          ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold);font-size:13.5px">${_vtText}</a>`
-          : `<span style="color:var(--gold);font-size:13.5px">${_vtText}</span>`) +
-        ` <span style="font-size:11px;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]} — ${_vtTitle}</span>`;
+          ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold)">${_vtText}</a>`
+          : `<span style="color:var(--gold)">${_vtText}</span>`) +
+        ` <span style="font-size:0.72em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
@@ -12008,8 +12008,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const lhEntries = getLikuteiHalachotInfo(dEff);
       const el = document.getElementById('malchut-lh-face');
       el.innerHTML = lhEntries.map(e => {
-        const tag = e.source === 'SA' ? ' <span style="opacity:0.6;font-size:11px">(Shulchan Aruch)</span>' : '';
-        return `<a href="${e.url}" target="_blank" style="color:var(--gold);font-size:13.5px">${e.label}</a>${tag}`;
+        const tag = e.source === 'SA' ? ' <span style="opacity:0.6;font-size:0.72em">(Shulchan Aruch)</span>' : '';
+        return `<a href="${e.url}" target="_blank" style="color:var(--gold)">${e.label}</a>${tag}`;
       }).join(' · ');
     })();
 
@@ -12039,8 +12039,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
           `<span class="mal-text-name">${todayTextDisplay}</span>` +
-          `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>` +
-          (todayBook.url ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold);font-size:0.82em;margin-left:6px">Read</a>` : '') +
+          (todayBook.url
+            ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span></a>`
+            : `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>`) +
           (todayBook.weekUrl ? ` &nbsp;<a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.82em">This Week</a>` : '') +
         `</div>` +
         `<div class="mal-fields">${todayFieldLines}</div>` +
@@ -12105,8 +12106,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[i]}</span>` +
           `<span class="mal-text-name">${displayName}${themeHTML}</span>` +
-          `<span class="mal-book-label">${db.emoji} ${db.book}</span>` +
-          (db.url ? `<a href="${db.url}" target="_blank" style="color:var(--gold);font-size:0.82em;margin-left:6px">Read</a>` : '') +
+          (db.url
+            ? `<a href="${db.url}" target="_blank" style="color:var(--gold)"><span class="mal-book-label">${db.emoji} ${db.book}</span></a>`
+            : `<span class="mal-book-label">${db.emoji} ${db.book}</span>`) +
           (db.weekUrl ? ` &nbsp;<a href="${db.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.82em">This Week</a>` : '') +
         `</div>` +
         `<div class="mal-fields">${fieldLines}</div>` +
