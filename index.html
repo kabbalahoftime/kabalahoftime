@@ -5359,6 +5359,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       54: '', // 54 VeZot HaBrachah
     },
 
+    // Zohar insights per parasha — displayed under the Mesilat Yesharim
+    // (Thursday) entry beside the Ramchal, Rashbi's heir through R. Pinchas
+    // ben Yair's ladder. Author entries here and they appear automatically.
     zoharThemes: {
        1: '', //  1 Bereshit
        2: '', //  2 Noach
@@ -11804,6 +11807,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           mapping.parshiyot = entry.parshiyot;
           mapping.theme = entry.theme;
         }
+        // The week's Zohar insight travels with the Ramchal — Rashbi's heir
+        const zoharInsight = MALCHUT_PARASHA_MAPPINGS.zoharThemes[parashaNum];
+        if (zoharInsight) mapping._zoharInsight = zoharInsight;
       }
       else if (textName === 'Likutei Sichos and Toras Menachem' && MALCHUT_PARASHA_MAPPINGS.likuteiSichos[parashaNum]) {
         const data = MALCHUT_PARASHA_MAPPINGS.likuteiSichos[parashaNum];
@@ -11891,6 +11897,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       subText = parashaMapping._zoharUrl ? `` : `${malTxt.author}`;
       if (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]')) {
         subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
+      }
+      if (parashaMapping._zoharInsight) {
+        subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400"><span style="color:var(--gold-mid)">Zohar — </span>${parashaMapping._zoharInsight}</span>`;
       }
       if (malchutUrl && customLabel) {
         subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${customLabel}</a>`;
@@ -12045,6 +12054,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
         if (mapping.theme && !mapping.theme.includes('[To be mapped]')) {
           themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${mapping.theme}</div>`;
+        }
+        if (mapping._zoharInsight) {
+          themeHTML += `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:2px;font-weight:400;"><span style="color:var(--gold-mid)">Zohar — </span>${mapping._zoharInsight}</div>`;
         }
         // Sefaria link for this text
         const rowUrl = malchutSeferiaUrl(textName, mapping);
