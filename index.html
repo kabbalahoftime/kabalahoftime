@@ -1869,6 +1869,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael <span class="maalah yom" data-wane="4">יום י״ט</span> <span class="study-check" data-study="chokyisrael" title="Mark as studied"></span></div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <div id="yesod-chok-english" style="font-size:0.88rem;margin-top:4px;"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Midrash <span class="study-check" data-study="midrash" title="Mark as studied"></span></div>
       <div id="yesod-midrash-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
@@ -2539,7 +2540,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Tanya',                    // Tuesday
     'Likutei Moharan',          // Wednesday
     'Mesilat Yesharim',         // Thursday
-    'Zohar / Kitvei Arizal',    // Friday
+    'Arizal',                   // Friday
     "Rebbe's Sichos & Maamarim" // Shabbat
   ];
 
@@ -2549,7 +2550,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Alter Rebbe · Tiferet · Chabad Philosophy',
     'Rebbe Nachman of Breslov · Netzach · Story & Depth',
     'Ramchal · Hod · Mussar & Character',
-    'Rashbi / Arizal · Yesod · Kabbalistic Foundation',
+    'Arizal · Yesod · Kabbalistic Foundation',
     "The Lubavitcher Rebbe · Malchut · Contemporary Chassidus"
   ];
 
@@ -7557,7 +7558,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // Malchut daily texts — 7 texts cycling through the week
   // Order (by KoT day 1–7):
-  //   Day 1 (Fri eve / Shabbat): Chidah (Zohar / Arizal)
+  //   Day 1 (Fri eve / Shabbat): Arizal (Etz Chayim)
   //   Day 2 (Sat eve / Sunday): Likutei Sichos and Toras Menachem + Keter Shem Tov
   //   Day 3 (Sun eve / Monday): Kedushas Levi
   //   Day 4 (Mon eve / Tuesday): Noam Elimelech
@@ -7567,7 +7568,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // MALCHUT_TEXTS[i] where i = (dayNum - 1) % 7
   // dayNum 1=Thu→Fri, 2=Fri→Shab, 3=Sat→Sun, 4=Sun→Mon, 5=Mon→Tue, 6=Tue→Wed, 7=Wed→Thu
   const MALCHUT_TEXTS = [
-    { name: 'Chidah (Zohar / Arizal)',      author: 'R. Shimon bar Yochai / R. Luria',    shortName: 'Zohar',    day: 'Friday — Erev Shabbat',   desc: 'Mystical depth of the Parasha — the hidden light of Torah' },
+    { name: 'Arizal',      author: 'R. Yitzhak Luria (Arizal)',    shortName: 'Arizal',    day: 'Friday — Erev Shabbat',   desc: 'Etz Chayim — the Arizal\'s map of creation, the hidden architecture of the worlds' },
     { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight',      secondaryName: 'Stories of the Besht', secondaryAuthor: 'R. YY Kaplowitz', secondaryDesc: 'Stories of the Baal Shem Tov' },
     { name: 'Kedushas Levi',       author: 'R. Levi Yitzhak of Berditchev',      shortName: 'KL',       day: 'Sunday',                  desc: 'Chassidic commentary on Torah — love and joy in divine service' },
     { name: 'Noam Elimelech',      author: 'R. Elimelech of Lizhensk',           shortName: 'NE',       day: 'Monday',                  desc: 'The Tzadik\'s path: elevating the world through Torah' },
@@ -9867,8 +9868,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   const CYCLE_INFO = {
     keterlm: {
       title: 'Rashbi & Rebbe Nachman Year-Round — רשב״י ורבי נחמן בכל השנה',
-      main: "Rebbe Nachman's Likutei Moharan spread across the entire Jewish year, each lesson pegged to its own Hebrew date and resonating with that day's character — paired with Rashbi's Zohar in its Chok L'Yisrael order, the Daily Zohar. Both names carry the year: רבי נחמן = 360 = השנה, and בכל = 52, the weeks of the year; while שמעון בן יוחאי yields the same 360 through ש־ן־י, one letter from each word of his name. Rebbe Nachman extends Rashbi's work of rectification.",
-      meta: "An original Kabbalah of Time cycle · Likutei Moharan & the Zohar (Chok L'Yisrael)"
+      main: "Rebbe Nachman's Likutei Moharan spread across the entire Jewish year, each lesson pegged to its own Hebrew date and resonating with that day's character — paired with Rashbi's Zohar carried through the whole year — two folios a day, four on Thursday, completing the Zohar in a single year and sealing it with Sefer Yetzirah. Both names carry the year: רבי נחמן = 360 = השנה, and בכל = 52, the weeks of the year; while שמעון בן יוחאי yields the same 360 through ש־ן־י, one letter from each word of his name. Rebbe Nachman extends Rashbi's work of rectification.",
+      meta: "An original Kabbalah of Time cycle · Likutei Moharan & the Zohar"
     },
     chochmah: {
       title: 'Alef-Bet — 22-Day Cycle',
@@ -9902,7 +9903,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     },
     hod: {
       title: 'Zohar & Shulchan Aruch',
-      main: "The Zohar's light paired with practical law: two chapters of Shulchan Aruch/Mishnah Berurah daily through the year, sealed by the Chofetz Chaim's laws of speech. Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day complete Orach Chaim\'s 697 chapters in 348 days; days 349–364 seal the year with the laws of speech.",
+      main: "The Zohar on the weekly parasha — its hidden light following the Torah reading — paired with practical law: two chapters of Shulchan Aruch/Mishnah Berurah daily through the year, sealed by the Chofetz Chaim's laws of speech. Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day complete Orach Chaim\'s 697 chapters in 348 days; days 349–364 seal the year with the laws of speech.",
       meta: 'Zohar · Shulchan Aruch & Mishnah Berurah · Chofetz Chaim'
     },
     yesod: {
@@ -10550,17 +10551,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const _zoharParashaNum2 = _zoharParts.length > 1 ? PARASHA_TO_NUMBER[_zoharParts[1]] : null;
     const _chabadZoharUrl  = getChabadZoharUrl(_zoharParashaNum, date.getDay());
     const _chabadZoharUrl2 = _zoharParashaNum2 ? getChabadZoharUrl(_zoharParashaNum2, date.getDay()) : null;
-    // Daily Zohar — Rashbi's pairing in the Keter head "Rebbe Nachman & Rashbi
-    // Year-Round" (moved from the Yesod Chok L'Yisrael section; "Daily Zohar"
-    // is Chabad.org's own name for this series). No entry on Shabbat.
+    // Chok L'Yisrael Zohar (English) — Chabad's English rendering of the Chok
+    // L'Yisrael Zohar portion, beside the Chok L'Yisrael section in Yesod.
+    // Six days a week (no Shabbat entry); both halves on a double parasha.
     {
-      let _dzHtml = '';
+      let _chokEnglishHtml = '';
       if (_chabadZoharUrl) {
-        _dzHtml = `<strong>Zohar</strong> · Rabbi Shimon bar Yochai &nbsp;·&nbsp; ` +
-          `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Daily Zohar${_chabadZoharUrl2 ? ' (I)' : ''}</a>`;
-        if (_chabadZoharUrl2) _dzHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Daily Zohar (II)</a>`;
+        _chokEnglishHtml = `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Chok L'Yisrael Zohar (English${_chabadZoharUrl2 ? ' · I' : ''})</a>`;
+        if (_chabadZoharUrl2) _chokEnglishHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Chok L'Yisrael Zohar (English · II)</a>`;
       }
-      document.getElementById('keter-daily-zohar').innerHTML = _dzHtml;
+      const yce = document.getElementById('yesod-chok-english');
+      if (yce) yce.innerHTML = _chokEnglishHtml;
     }
 
     // Midrash (Yesod card) — Midrash Rabbah (by chumash book) + Midrash Tanchuma
@@ -10654,8 +10655,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _hodZoharLabel    = label;
         _hodZoharMainHtml = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>`;
         _hodZoharMetaHtml = `R. Shimon bar Yochai · ${todayFolios} folios today`;
-        const faceEl = document.getElementById('hod-zohar-face');
-        if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong>, ${label} &nbsp;·&nbsp; <a href="${sefariaUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
+        // The year-round folio cycle lives in the Keter Rashbi & Rebbe Nachman
+        // head — Rashbi's Zohar carried through the whole year, like the
+        // date-pegged Likutei Moharan beside it.
+        const kdz = document.getElementById('keter-daily-zohar');
+        if (kdz) kdz.innerHTML = `<strong>Zohar</strong> · Rabbi Shimon bar Yochai &nbsp;·&nbsp; ` + _hodZoharMainHtml +
+          ` <span style="color:var(--ink-dim);font-size:0.9em">· ${todayFolios} folios today</span>`;
       } else {
         // Sefer Yetzirah (cycleOffset 358-363 = 6 days, one chapter per day)
         const syDay = cycleOffset - 357; // 1-6
@@ -10664,9 +10669,35 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _hodZoharLabel    = 'Sefer Yetzirah ' + chapters;
         _hodZoharMainHtml = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters}</a>`;
         _hodZoharMetaHtml = `Day ${cycleOffset + 1} of cycle · completing the year`;
-        const faceEl = document.getElementById('hod-zohar-face');
-        if (faceEl) faceEl.innerHTML = `<strong>Sefer Yetzirah</strong>, ${chapters} &nbsp;·&nbsp; <a href="${syUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
+        const kdz = document.getElementById('keter-daily-zohar');
+        if (kdz) kdz.innerHTML = `<strong>Zohar</strong> · Rabbi Shimon bar Yochai &nbsp;·&nbsp; ` + _hodZoharMainHtml +
+          ` <span style="color:var(--ink-dim);font-size:0.9em">· completing the year</span>`;
       }
+    })();
+
+    // HOD — Zohar on the weekly parasha (moved from the Malchut Friday text):
+    // the same reading all week, following the Torah portion, with each half
+    // of a double parasha linked separately.
+    let _hodParashaZoharMainHtml = '', _hodParashaZoharLabel = '';
+    (() => {
+      const pName = (window.getParashaForDate && window.getParashaForDate(date)) || null;
+      const faceEl = document.getElementById('hod-zohar-face');
+      if (!pName) {
+        _hodParashaZoharLabel = 'Zohar';
+        _hodParashaZoharMainHtml = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">Zohar on Sefaria</a>`;
+      } else {
+        const parts = pName.split('-').map(p => p.trim());
+        const links = [];
+        for (const part of (parts.length > 1 ? parts : [pName])) {
+          const section = ZOHAR_PARASHA_SECTIONS[part] || ZOHAR_PARASHA_SECTIONS[pName];
+          if (section) links.push(`<a href="https://www.sefaria.org/Zohar%2C_${section}?lang=bi" target="_blank" style="color:var(--gold)">${parts.length > 1 ? part : 'Sefaria'}</a>`);
+        }
+        _hodParashaZoharLabel = `Parashat ${pName}`;
+        _hodParashaZoharMainHtml = links.length
+          ? links.join(' &nbsp;·&nbsp; ')
+          : `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">Sefaria</a>`;
+      }
+      if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong> — ${_hodParashaZoharLabel} &nbsp;·&nbsp; <span style="font-size:0.85em">${_hodParashaZoharMainHtml}</span>`;
     })();
 
     // 5. Hayom Yom
@@ -11587,7 +11618,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     const hodZoharHtml =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar <span class="study-check" data-study="zohar" title="Mark as studied"></span></div>` +
-      `<div style="font-size:0.88rem;margin-bottom:10px;">${_hodZoharMainHtml} <span style="color:var(--ink-dim);font-size:0.85em;">— ${_hodZoharMetaHtml}</span></div>` +
+      `<div style="font-size:0.88rem;margin-bottom:10px;">${_hodParashaZoharLabel} &nbsp;·&nbsp; ${_hodParashaZoharMainHtml} <span style="color:var(--ink-dim);font-size:0.85em;">— R. Shimon bar Yochai · on the weekly parasha</span></div>` +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
 
     const hodChazarahHtml =
@@ -11827,19 +11858,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           mapping._noamLinkLabel = 'A Prayer before Praying on Sefaria';
         }
       }
-      else if (textName === 'Chidah (Zohar / Arizal)') {
-        const section = ZOHAR_PARASHA_SECTIONS[parashaName];
-        mapping.portion = `Parashat ${parashaName}`;
-        mapping._zoharUrl = section
-          ? `https://www.sefaria.org/Zohar%2C_${section}?lang=bi`
-          : 'https://www.sefaria.org/Zohar?tab=contents';
+      else if (textName === 'Arizal') {
+        // The Zohar-on-the-parasha half of the old Friday pairing now lives in
+        // the Hod card; Friday keeps the Arizal alone — Etz Chayim as primary.
         if (parashaNum) {
           const ec = getEtzChayimInfo(parashaNum);
           mapping._etzChayimLabel = ec.label;
           mapping._etzChayimUrl   = ec.url;
         }
-        const zoharTheme = MALCHUT_PARASHA_MAPPINGS.zoharThemes[parashaNum];
-        if (zoharTheme) mapping.theme = zoharTheme;
       }
 
       return mapping;
@@ -11892,12 +11918,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (parashaMapping._noamNote) {
         subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping._noamNote}</span>`;
       }
-      // Etz Chayim secondary for Friday (Zohar / Arizal)
+      // Friday — Arizal: Etz Chayim as the day's primary text
       if (parashaMapping._etzChayimLabel) {
-        mainText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>` +
-          `<strong>Etz Chayim</strong> — ${parashaMapping._etzChayimLabel}` +
+        mainText = `<strong>Etz Chayim</strong> — ${parashaMapping._etzChayimLabel}` +
           ` &nbsp;·&nbsp; <a href="${parashaMapping._etzChayimUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">Sefaria</a>`;
-        subText += (subText ? `<br>` : ``) + `Arizal (R. Yitzhak Luria)`;
+        subText = `Arizal (R. Yitzhak Luria)`;
       }
       // Secondary text (e.g. Stories of the Besht on Shabbat)
       if (malTxt.secondaryName) {
@@ -12178,7 +12203,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       cy41Mivtzah: cy41.mivtzah,
       meynDay, meynSection, meynPage,
       tikkunPsalm: _tikkunPsalm,
-      hodZoharLabel: _hodZoharLabel,
+      hodZoharLabel: _hodParashaZoharLabel,
       halChofetz: hal.chofetz,
       halCh1:    hal.ch1,
       halCh2:    hal.ch2,
@@ -12441,7 +12466,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       yesod: 'In Yesod — Foundation, the channel of covenant through which divine blessing flows into the world —',
       malchut: 'In Malchut — Kingdom, the Shekhinah dwelling in our world, receiving and giving form to all the light above —',
       closing: 'Have a wonderful evening and day!',
-      keterLm:            (l, p, t) => `Rashbi & Rebbe Nachman Year-Round: Likutei Moharan — Rebbe Nachman of Breslov's collected Torah teachings, each lesson pegged to its own Hebrew date — today is Lesson ${l} of ${p}${t ? ', exploring: ' + t : ''}. Beside it, the Daily Zohar of Rabbi Shimon bar Yochai in the Chok L'Yisrael order — the revealed fire and the hidden light of the day.`,
+      keterLm:            (l, p, t) => `Rashbi & Rebbe Nachman Year-Round: Likutei Moharan — Rebbe Nachman of Breslov's collected Torah teachings, each lesson pegged to its own Hebrew date — today is Lesson ${l} of ${p}${t ? ', exploring: ' + t : ''}. Beside it, Rashbi's Zohar — two folios a day, completing the whole Zohar in a year — the revealed fire and the hidden light of the day.`,
       keterKst:      (lb, ti, pa) => `In Light that is Good — Ohr Ki Tov: from Keter Shem Tov, the treasury of the Baal Shem Tov's oral teachings (1698–1760) — ${lb}: "${ti}." With it, the Ohr HaChaim HaKadosh (Rabbi Chaim ibn Attar, 1696–1743) on this week's portion, Parashat ${pa} — two great lights of one generation joined in a single section.`,
       keterHayomRambam:      (hy) => `Strong Day — Yom Chazak: HaYom Yom, the Lubavitcher Rebbe's Chassidic calendar with a teaching for each day${hy ? ': "' + hy + '"' : ''}, together with the Rambam — three chapters (or one) of Mishneh Torah daily, and the Kabbalah of Time's own Sefer HaMitzvos cycle: the 365 negative commandments carried from the 25th of Elul to the 3rd of Sivan, and the 248 positive commandments, two each day, from the 4th of Sivan to Erev Yom Kippur.`,
       keterTehillim: (ch)         => `Today's Tehillim spans Chapters ${ch}; the 150 Psalms of King David cycle through the month in a 30-day pattern, each psalm a prayer forged in the full range of human experience.`,
@@ -12477,7 +12502,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `The Mivtzah (outreach campaign) for this cycle: ${n}.`,
       netzTikkun:(p)         => `Tikkun HaKlali — the "Complete Remedy," ten Psalms designated by Rebbe Nachman as a comprehensive spiritual healing for the soul — today: Psalm ${p}.`,
       netzMaayan:(s, p, d)   => `Ma'ayan Ganim — a Kabbalistic guide for daily spiritual growth — today: ${s}, page ${p}, Day ${d} of 368.`,
-      hodZohar:  (l)         => `the Zohar — the foundational masterwork of Jewish mysticism, its teachings attributed to Rabbi Shimon bar Yochai (2nd century CE) and first disseminated in 13th-century Spain; considered the "Bible of Kabbalah" — today's portion: ${l}.`,
+      hodZohar:  (l)         => `the Zohar — the foundational masterwork of Jewish mysticism, its teachings attributed to Rabbi Shimon bar Yochai (2nd century CE) and first disseminated in 13th-century Spain; considered the "Bible of Kabbalah" — this week: ${l}.`,
       hodHal:    (c1, c2)    => `Halacha study: Shulchan Aruch, Orach Chaim — the authoritative code of Jewish daily practice compiled by Rabbi Yosef Karo (1565), covering prayer, Shabbat, and the rhythm of Jewish life — Chapters ${c1} and ${c2}.`,
       hodChof:   (s)         => `Sefer Chofetz Chaim — Rabbi Yisrael Meir Kagan's (1838–1933) landmark guide to holy speech, teaching that guarding the tongue from slander and gossip is a cornerstone of spiritual life — Section ${s}.`,
       hodDaf:    (n, d)      => `Talmud review: ${n}, Daf ${d}.`,
@@ -12493,7 +12518,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       gevurah: 'בגבורה —', tiferet: 'בתפארת —', netzach: 'בנצח —', hod: 'בהוד —',
       yesod: 'ביסוד —', malchut: 'במלכות —',
       closing: 'שיהיה לכם ערב ויום נפלאים!',
-      keterLm:            (l, p, t) => `רשב"י ורבי נחמן בכל השנה: ליקוטי מוהר"ן, שיעור ${l} מ${p}${t ? ', העוסק בנושא ' + t : ''}. ולצדו הזוהר היומי של רבי שמעון בר יוחאי בסדר חק לישראל.`,
+      keterLm:            (l, p, t) => `רשב"י ורבי נחמן בכל השנה: ליקוטי מוהר"ן, שיעור ${l} מ${p}${t ? ', העוסק בנושא ' + t : ''}. ולצדו הזוהר של רשב"י — שני דפים בכל יום, המשלימים את הזוהר כולו בשנה אחת.`,
       keterKst:      (lb, ti, pa) => `באור כי טוב: מכתר שם טוב — אוצר תורות הבעל שם טוב — ${lb}: "${ti}." ועמו האור החיים הקדוש על פרשת השבוע, פרשת ${pa}.`,
       keterHayomRambam:      (hy) => `ביום חזק: היום יום — ${hy ? '"' + hy + '"' : 'ראו ב-Chabad.org'} — יחד עם הרמב"ם: שלושה פרקים (או פרק אחד) במשנה תורה, ומחזור ספר המצוות של קבלת הזמן — שס"ה מצוות לא תעשה מכ"ה אלול עד ג' סיון, ורמ"ח מצוות עשה, שתיים בכל יום, מד' סיון עד ערב יום כיפור.`,
       keterTehillim: (ch)         => `קריאת התהלים של היום: פרקים ${ch}.`,
@@ -12529,7 +12554,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `מבצע החסד של מחזור זה הוא ${n}.`,
       netzTikkun:(p)         => `לתיקון הכללי, אנו אומרים היום תהלים ${p}.`,
       netzMaayan:(s, p, d)   => `מעיין גנים: ${s}, עמ' ${p} — יום ${d} מתוך 368.`,
-      hodZohar:  (l)         => `קטע הזוהר של היום: ${l}.`,
+      hodZohar:  (l)         => `הזוהר על פרשת השבוע: ${l}.`,
       hodHal:    (c1, c2)    => `לימוד ההלכה כולל שולחן ערוך, אורח חיים, סימנים ${c1} ו-${c2}.`,
       hodChof:   (s)         => `לומדים ספר חפץ חיים, חלק ${s} — הלכות שמירת הלשון.`,
       hodDaf:    (n, d)      => `לחזרה על הגמרא, חוזרים על ${n}, דף ${d}.`,
@@ -12545,7 +12570,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       chesed: 'En Jésed — la Bondad —', gevurah: 'En Gevurá — la Fuerza —', tiferet: 'En Tiféret — la Belleza —',
       netzach: 'En Nétzaj — la Victoria —', hod: 'En Hod — el Esplendor —', yesod: 'En Yesod — el Fundamento —', malchut: 'En Maljut — el Reino —',
       closing: '¡Que tengan una tarde y un día maravillosos!',
-      keterLm:            (l, p, t) => `Rashbi y Rebe Najmán Todo el Año: Likutei Moharán, Lección ${l} de ${p}${t ? ', explorando el tema de ' + t : ''}. Junto a él, el Zóhar Diario de Rabí Shimón bar Yojai en el orden de Jok LeIsrael.`,
+      keterLm:            (l, p, t) => `Rashbi y Rebe Najmán Todo el Año: Likutei Moharán, Lección ${l} de ${p}${t ? ', explorando el tema de ' + t : ''}. Junto a él, el Zóhar de Rashbi — dos folios por día, completando todo el Zóhar en un año.`,
       keterKst:      (lb, ti, pa) => `En Luz que es Buena — Or Ki Tov: del Keter Shem Tov — el tesoro de enseñanzas del Baal Shem Tov — ${lb}: "${ti}." Con él, el Ohr HaChaim HaKadosh sobre la porción de esta semana, Parashat ${pa}.`,
       keterHayomRambam:      (hy) => `Día Fuerte — Yom Jazak: HaYom Yom${hy ? ': "' + hy + '"' : ''}, junto con el Rambam — tres capítulos (o uno) del Mishné Torá cada día, y el ciclo propio del Sefer HaMitzvot de la Kabalá del Tiempo: los 365 preceptos negativos del 25 de Elul al 3 de Siván, y los 248 positivos, dos por día, del 4 de Siván hasta la víspera de Iom Kipur.`,
       keterTehillim: (ch)         => `Los Tehilim de hoy abarcan los Capítulos ${ch}.`,
@@ -12581,7 +12606,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `La campaña Mivtzah de este ciclo es ${n}.`,
       netzTikkun:(p)         => `Para el Tikún HaKlali, hoy recitamos el Salmo ${p}.`,
       netzMaayan:(s, p, d)   => `Ma'ayan Ganim: ${s}, página ${p} — Día ${d} de 368.`,
-      hodZohar:  (l)         => `la porción del Zohar de hoy es ${l}.`,
+      hodZohar:  (l)         => `el Zóhar sobre la porción semanal: ${l}.`,
       hodHal:    (c1, c2)    => `Nuestro estudio de Halachá abarca el Shulján Aruj, Oraj Jaim, Capítulos ${c1} y ${c2}.`,
       hodChof:   (s)         => `Estudiamos el Sefer Jofetz Jaim, Sección ${s} — las leyes del habla adecuada.`,
       hodDaf:    (n, d)      => `Para el repaso del Talmud, revisamos ${n}, Daf ${d}.`,
@@ -12597,7 +12622,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       chesed: 'Dans Hessed — la Bonté —', gevurah: 'Dans Gevourah — la Force —', tiferet: 'Dans Tiferet — la Beauté —',
       netzach: 'Dans Nétsah — la Victoire —', hod: 'Dans Hod — la Splendeur —', yesod: 'Dans Yesod — le Fondement —', malchut: 'Dans Malkhout — la Royauté —',
       closing: 'Passez une merveilleuse soirée et journée !',
-      keterLm:            (l, p, t) => `Rachbi et Rabbi Na'hman toute l'année : Likoutei Moharan, Leçon ${l} de ${p}${t ? ', explorant le thème de ' + t : ''}. À ses côtés, le Zohar quotidien de Rabbi Chimon bar Yo'haï dans l'ordre du 'Hok LeIsraël.`,
+      keterLm:            (l, p, t) => `Rachbi et Rabbi Na'hman toute l'année : Likoutei Moharan, Leçon ${l} de ${p}${t ? ', explorant le thème de ' + t : ''}. À ses côtés, le Zohar de Rachbi — deux folios par jour, achevant tout le Zohar en une année.`,
       keterKst:      (lb, ti, pa) => `Dans Lumière qui est Bonne — Or Ki Tov : du Keter Chem Tov — le trésor des enseignements du Baal Chem Tov — ${lb} : "${ti}." Avec lui, l'Ohr HaChaïm HaKadoch sur la paracha de la semaine, ${pa}.`,
       keterHayomRambam:      (hy) => `Jour Fort — Yom 'Hazak : HaYom Yom${hy ? ' : « ' + hy + ' »' : ''}, avec le Rambam — trois chapitres (ou un) du Michneh Torah chaque jour, et le cycle propre du Sefer HaMitsvot de la Kabbale du Temps : les 365 commandements négatifs du 25 Eloul au 3 Sivan, et les 248 positifs, deux par jour, du 4 Sivan à la veille de Yom Kippour.`,
       keterTehillim: (ch)         => `Les Tehilim d'aujourd'hui s'étendent aux Chapitres ${ch}.`,
@@ -12633,7 +12658,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `La campagne Mivtzah de ce cycle est ${n}.`,
       netzTikkun:(p)         => `Pour le Tikkoun HaKlali, nous récitons aujourd'hui le Psaume ${p}.`,
       netzMaayan:(s, p, d)   => `Ma'ayan Ganim : ${s}, page ${p} — Jour ${d} sur 368.`,
-      hodZohar:  (l)         => `la portion du Zohar d'aujourd'hui est ${l}.`,
+      hodZohar:  (l)         => `le Zohar sur la paracha de la semaine : ${l}.`,
       hodHal:    (c1, c2)    => `Notre étude de la Halakha couvre le Choulhan Aroukh, Orah Haïm, Chapitres ${c1} et ${c2}.`,
       hodChof:   (s)         => `Nous étudions le Séfer Hofets Haïm, Section ${s} — les lois de la parole adéquate.`,
       hodDaf:    (n, d)      => `Pour la révision du Talmud, nous revisitons ${n}, Daf ${d}.`,
@@ -12649,7 +12674,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       chesed: 'Em Chesed — a Bondade —', gevurah: 'Em Gevurá — a Força —', tiferet: 'Em Tiferet — a Beleza —',
       netzach: 'Em Netzach — a Vitória —', hod: 'Em Hod — o Esplendor —', yesod: 'Em Yesod — o Fundamento —', malchut: 'Em Malchut — o Reino —',
       closing: 'Tenham uma tarde e um dia maravilhosos!',
-      keterLm:            (l, p, t) => `Rashbi e Rebe Nachman o Ano Inteiro: Likutei Moharán, Lição ${l} de ${p}${t ? ', explorando o tema de ' + t : ''}. Ao seu lado, o Zohar Diário de Rabi Shimon bar Yochai na ordem do Chok LeIsrael.`,
+      keterLm:            (l, p, t) => `Rashbi e Rebe Nachman o Ano Inteiro: Likutei Moharán, Lição ${l} de ${p}${t ? ', explorando o tema de ' + t : ''}. Ao seu lado, o Zohar de Rashbi — dois fólios por dia, completando todo o Zohar em um ano.`,
       keterKst:      (lb, ti, pa) => `Em Luz que é Boa — Or Ki Tov: do Keter Shem Tov — o tesouro dos ensinamentos do Baal Shem Tov — ${lb}: "${ti}." Com ele, o Ohr HaChaim HaKadosh sobre a porção desta semana, Parashat ${pa}.`,
       keterHayomRambam:      (hy) => `Dia Forte — Yom Chazak: HaYom Yom${hy ? ': "' + hy + '"' : ''}, junto com o Rambam — três capítulos (ou um) do Mishné Torá por dia, e o ciclo próprio do Sefer HaMitzvot da Cabalá do Tempo: os 365 preceitos negativos de 25 de Elul a 3 de Sivan, e os 248 positivos, dois por dia, de 4 de Sivan até a véspera de Yom Kipur.`,
       keterTehillim: (ch)         => `O Tehilim de hoje abrange os Capítulos ${ch}.`,
@@ -12685,7 +12710,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `A campanha Mivtzah deste ciclo é ${n}.`,
       netzTikkun:(p)         => `Para o Tikkun HaKlali, hoje recitamos o Salmo ${p}.`,
       netzMaayan:(s, p, d)   => `Ma'ayan Ganim: ${s}, página ${p} — Dia ${d} de 368.`,
-      hodZohar:  (l)         => `a porção do Zohar de hoje é ${l}.`,
+      hodZohar:  (l)         => `o Zohar sobre a porção semanal: ${l}.`,
       hodHal:    (c1, c2)    => `Nosso estudo de Halachá abrange o Shulchan Aruch, Orach Chaim, Capítulos ${c1} e ${c2}.`,
       hodChof:   (s)         => `Estudamos o Sefer Chofetz Chaim, Seção ${s} — as leis do discurso adequado.`,
       hodDaf:    (n, d)      => `Para a revisão do Talmude, revisitamos ${n}, Daf ${d}.`,
@@ -12823,7 +12848,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     en: {
       opening: (data) => `Welcome to today's Kabbalah of Time. The Kabbalah of Time is a daily spiritual practice that maps each day onto the ten Sefirot — the ten divine qualities through which God's infinite light flows into our world. Think of the Sefirot as ten facets of one diamond: each one reveals a different dimension of the divine. Today is Day ${data.d || '—'} of the Kabbalah of Time calendar, Week ${data.kotWeek || '—'}. The Hebrew date is ${data.hDateStr || '—'}.`,
       today: (_data) => '',
-      keter: (data) => `Keter — the Crown — is the highest of the ten Sefirot, representing pure divine will: the source of all blessing that exists before thought even begins.\n\nLight that is Good — Ohr Ki Tov: Keter Shem Tov is a treasury of oral teachings from Rabbi Israel Ba'al Shem Tov (1698–1760), founder of the Chassidic movement; today's entry is ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}." The Ohr HaChaim HaKadosh — the revered Kabbalistic Torah commentary by Rabbi Chaim ibn Attar of Morocco (1696–1743) — illuminates Parashat ${data.parasha || '—'} this week.\n\nStrong Day — Yom Chazak: Rambam (Mishneh Torah), Rabbi Moshe ben Maimon's monumental 12th-century code covering all of Jewish law, is studied in a three-chapter daily cycle; his Sefer HaMitzvot — the enumeration of all 613 commandments — follows the Kabbalah of Time's own cycle: the 365 negative commandments from the 25th of Elul to the 3rd of Sivan, and the 248 positive commandments, two each day, from the 4th of Sivan to Erev Yom Kippur. HaYom Yom ("From Day to Day") is a Chassidic calendar compiled by the Lubavitcher Rebbe in 1942, with a brief, profound teaching for each day of the year${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — see Chabad.org for today\'s entry'}.\n\nRashbi & Rebbe Nachman Year-Round: the collected Torah teachings of Rabbi Nachman of Breslov (1772–1810), great-grandson of the Ba'al Shem Tov — today is Lesson ${data.lmLessonInPart || '—'} of ${data.lmPartLabel || '—'}${data.lmTheme ? ', theme: ' + data.lmTheme : ''}. Beside it, the Daily Zohar of Rabbi Shimon bar Yochai in the Chok L'Yisrael order.\n\nTreasury of Chassidic Tales: Story ${data.treasuryDay || '—'} from a collection of mystical stories from the great Chassidic masters.`,
+      keter: (data) => `Keter — the Crown — is the highest of the ten Sefirot, representing pure divine will: the source of all blessing that exists before thought even begins.\n\nLight that is Good — Ohr Ki Tov: Keter Shem Tov is a treasury of oral teachings from Rabbi Israel Ba'al Shem Tov (1698–1760), founder of the Chassidic movement; today's entry is ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}." The Ohr HaChaim HaKadosh — the revered Kabbalistic Torah commentary by Rabbi Chaim ibn Attar of Morocco (1696–1743) — illuminates Parashat ${data.parasha || '—'} this week.\n\nStrong Day — Yom Chazak: Rambam (Mishneh Torah), Rabbi Moshe ben Maimon's monumental 12th-century code covering all of Jewish law, is studied in a three-chapter daily cycle; his Sefer HaMitzvot — the enumeration of all 613 commandments — follows the Kabbalah of Time's own cycle: the 365 negative commandments from the 25th of Elul to the 3rd of Sivan, and the 248 positive commandments, two each day, from the 4th of Sivan to Erev Yom Kippur. HaYom Yom ("From Day to Day") is a Chassidic calendar compiled by the Lubavitcher Rebbe in 1942, with a brief, profound teaching for each day of the year${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — see Chabad.org for today\'s entry'}.\n\nRashbi & Rebbe Nachman Year-Round: the collected Torah teachings of Rabbi Nachman of Breslov (1772–1810), great-grandson of the Ba'al Shem Tov — today is Lesson ${data.lmLessonInPart || '—'} of ${data.lmPartLabel || '—'}${data.lmTheme ? ', theme: ' + data.lmTheme : ''}. Beside it, Rashbi's Zohar — two folios a day through the whole year.\n\nTreasury of Chassidic Tales: Story ${data.treasuryDay || '—'} from a collection of mystical stories from the great Chassidic masters.`,
       chochmah: (data) => `Chochmah — Wisdom — is the second Sefirah, the first flash of divine insight, where pure thought arises before taking any form. In Chochmah, we work with the 22-Day Alef-Bet cycle — a contemplative practice moving through each of the 22 Hebrew letters. Sefer Yetzirah ('Book of Formation'), Judaism's oldest mystical text, teaches that God created the entire world through these 22 letters, organized in three groups: 3 Mothers (Alef, Mem, Shin — the cosmic foundations of air, water, and fire), 7 Doubles (one for each day of the week and its corresponding celestial body), and 12 Simples (the 12 months and 12 tribes of Israel). Together they form 22 living channels of divine creative energy. Today's letter is ${data.cy22Letter || '—'} (${data.cy22Heb || '—'}), Day ${data.cy22Day || '—'} of 22 in Set ${data.cy22Cycle || '—'}; the letters of this set are ${data.cy22CycleLetters || '—'} (${data.cy22CycleHeb || '—'}). We also work with the 231 Gates — a system from Sefer Yetzirah which reveals that the 22 letters generate exactly 231 possible two-letter pairings (22 × 21 ÷ 2 = 231). Every possible pair is a unique "gate" through which a specific quality of divine creative speech flows into the world; together the 231 gates form the complete vocabulary through which God spoke reality into existence. Today's ${data.gatesIsVowel ? 'vowel is ' + data.gatePrim : 'combination is ' + (data.gatePrim || '—') + (data.gateComp ? ' + ' + data.gateComp : '')}. Our Torah Ohr / Likutei Torah reading — the Chassidic Torah commentaries of Rabbi Schneur Zalman of Liadi (1745–1812), founder of Chabad-Lubavitch, who revealed the inner Kabbalistic dimension of each weekly Torah portion — comes from ${data.chSection || '—'}: ${data.chReading || '—'}.${data.tractTractate ? ' This half-cycle we also study the tractate ' + data.tractTractate + ' (' + data.tractPeriod + ') — a section of the Mishna or Talmud, the vast literature of Oral Torah — exploring: ' + data.tractDesc + '.' : ''}`,
       binah: (data) => `Binah — Understanding — is the third Sefirah, where divine insight is developed into structured thought; it is called the divine womb of creation, the place where potential becomes form. In Binah, we meditate on the Sefirot combination — one of 49 divine-quality pairings contemplated during the Omer count, the 49-day spiritual journey from Passover (freedom from Egypt) to Shavuot (the giving of the Torah at Sinai). The number 49 carries a profound mathematical secret: it equals 7 × 7. The seven emotional Sefirot — Chesed, Gevurah, Tiferet, Netzach, Hod, Yesod, and Malchut — are each examined within themselves and within every other, producing 49 unique pairings (such as Kindness within Kindness on Day 1, Strength within Kindness on Day 2, all the way through). This 7-by-7 matrix represents the complete inner refinement of every divine quality at every level of depth. The 50th level — beyond human counting — is Binah itself: pure divine Understanding, which is received at Shavuot as the gift of Torah and cannot be reached through effort alone, only through grace. Today's pairing is ${data.combo || '—'}, position ${data.omerPos || '—'} of 49 in Omer Cycle ${data.omerCycle || '—'}. We also study Likutei Tefilot — a collection of prayers composed by Rabbi Nathan of Breslov (1780–1844), the devoted student and scribe of Rebbe Nachman, who wove his master's teachings into prayers for every situation in life; today's portion is ${data.ltSection || '—'}, ${data.ltReading || '—'}.`,
       chesed: (data) => `Chesed — Lovingkindness — is the fourth Sefirah, the quality of unlimited compassion, generosity, and reaching out to others without condition; it is the first great expression of divine love flowing into creation. In Chesed, we study the Mishna${data.mishnaType === 'tosefta' ? ' (here in the form of the Tosefta, a companion text)' : ''} — from the Oral Torah, the body of Jewish law and wisdom passed down alongside the written Torah and codified by Rabbi Yehuda HaNasi around 200 CE; today's portion is ${data.mishnaText || '—'}, drawn from the realm of ${data.mishnaTag1 || '—'}${data.mishnaTag2 ? ', ' + data.mishnaTag2 : ''}. We also draw from the Light and Fire of the Baal Shem Tov — a compilation of the Ba'al Shem Tov's Torah insights, radiating the warmth of Chassidic love and joy; today's teaching: ${data.bshtReading || '—'}.`,
@@ -12838,7 +12863,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     he: {
       opening: (data) => `ברוכים הבאים לקבלת הזמן של היום. קבלת הזמן היא תרגול רוחני יומי המשייך את כל יום לעשר הספירות — עשר המידות האלוהיות שדרכן אור ה' האינסופי זורם לעולמנו. חשבו על הספירות כעשר פאות של יהלום אחד: כל אחת מגלה ממד שונה של האלוהי. היום הוא יום ${data.d || '—'} בלוח קבלת הזמן, שבוע ${data.kotWeek || '—'}. התאריך העברי הוא ${data.hDateStr || '—'}.`,
       today: (_data) => '',
-      keter: (data) => `כתר — עליון בעשר הספירות — מייצג את הרצון האלוהי הטהור: מקור כל הברכה הקיים עוד לפני שהמחשבה מתחילה.\n\nאור כי טוב: כתר שם טוב הוא אוסף תורות שבעל פה של רבי ישראל בעל שם טוב (1698–1760), מייסד החסידות; הערך של היום הוא ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}". אור החיים הקדוש — פירוש הרב חיים בן עטר ממרוקו (1696–1743) — מאיר השבוע את פרשת ${data.parasha || '—'}.\n\nיום חזק: הרמב"ם (משנה תורה), הקודקס ההלכתי המונומנטלי של הרב משה בן מיימון מהמאה ה-12, נלמד במחזור של שלושה פרקים יומיים; ספר המצוות שלו — מניית כל תרי"ג המצוות עם מקורותיהן ועקרונותיהן — נלמד במחזור של קבלת הזמן: שס"ה מצוות לא תעשה מכ"ה אלול עד ג' סיון, ורמ"ח מצוות עשה, שתיים בכל יום, מד' סיון עד ערב יום כיפור. היום יום ("מיום ליום") הוא לוח שנה חסידי שנערך על ידי הרבי מלובביץ' בשנת 1942, עם לימוד קצר ועמוק לכל יום בשנה${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — ראו ב-Chabad.org'}.\n\nרשב"י ורבי נחמן בכל השנה: קובץ תורות הרב נחמן מברסלב (1772–1810) — היום תורה ${data.lmLessonInPart || '—'} מ${data.lmPartLabel || '—'}${data.lmTheme ? ', נושא: ' + data.lmTheme : ''}. ולצדו הזוהר היומי של רבי שמעון בר יוחאי בסדר חק לישראל.\n\nאוצר הסיפורים החסידיים: סיפור ${data.treasuryDay || '—'} מאוסף סיפורים מיסטיים מגדולי המקובלים החסידיים.`,
+      keter: (data) => `כתר — עליון בעשר הספירות — מייצג את הרצון האלוהי הטהור: מקור כל הברכה הקיים עוד לפני שהמחשבה מתחילה.\n\nאור כי טוב: כתר שם טוב הוא אוסף תורות שבעל פה של רבי ישראל בעל שם טוב (1698–1760), מייסד החסידות; הערך של היום הוא ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}". אור החיים הקדוש — פירוש הרב חיים בן עטר ממרוקו (1696–1743) — מאיר השבוע את פרשת ${data.parasha || '—'}.\n\nיום חזק: הרמב"ם (משנה תורה), הקודקס ההלכתי המונומנטלי של הרב משה בן מיימון מהמאה ה-12, נלמד במחזור של שלושה פרקים יומיים; ספר המצוות שלו — מניית כל תרי"ג המצוות עם מקורותיהן ועקרונותיהן — נלמד במחזור של קבלת הזמן: שס"ה מצוות לא תעשה מכ"ה אלול עד ג' סיון, ורמ"ח מצוות עשה, שתיים בכל יום, מד' סיון עד ערב יום כיפור. היום יום ("מיום ליום") הוא לוח שנה חסידי שנערך על ידי הרבי מלובביץ' בשנת 1942, עם לימוד קצר ועמוק לכל יום בשנה${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — ראו ב-Chabad.org'}.\n\nרשב"י ורבי נחמן בכל השנה: קובץ תורות הרב נחמן מברסלב (1772–1810) — היום תורה ${data.lmLessonInPart || '—'} מ${data.lmPartLabel || '—'}${data.lmTheme ? ', נושא: ' + data.lmTheme : ''}. ולצדו הזוהר של רשב"י — שני דפים בכל יום לאורך כל השנה.\n\nאוצר הסיפורים החסידיים: סיפור ${data.treasuryDay || '—'} מאוסף סיפורים מיסטיים מגדולי המקובלים החסידיים.`,
       chochmah: (data) => `חכמה — השנייה בספירות — היא הברק הראשון של התובנה האלוהית, שם המחשבה הטהורה עולה בטרם קיבלה צורה. בחכמה, אנו עובדים עם מחזור עשרים ושניים הימים של האלף-בית — תרגול מדיטטיבי המתקדם בין כ"ב אותיות האלף-בית העברי, שהמיסטיקה היהודית מלמדת שכל אחת מהן היא כלי לאנרגיה יצירתית אלוהית. אות היום היא ${data.cy22Letter || '—'} (${data.cy22Heb || '—'}), יום ${data.cy22Day || '—'} מתוך 22 בסט ${data.cy22Cycle || '—'}; שתי אותות הסט הן ${data.cy22CycleLetters || '—'} (${data.cy22CycleHeb || '—'}). עובדים גם עם 231 שערים — שיטה מספר יצירה, אחד הטקסטים המיסטיים העתיקים ביהדות, המלמד ש-231 צירופי שתי האותות האפשריים הם אבני הבניין של כל הבריאה; ${data.gatesIsVowel ? 'התנועה של היום היא ' + data.gatePrim : 'הצירוף של היום הוא ' + (data.gatePrim || '—') + (data.gateComp ? ' + ' + data.gateComp : '')}. לימוד תורה אור / לקוטי תורה — פירושי הרב שניאור זלמן מלאדי (1745–1812), מייסד חב"ד-לובביץ' — מגיע מ${data.chSection || '—'}: ${data.chReading || '—'}.${data.tractTractate ? ' במחצית מחזור זה לומדים גם את מסכת ' + data.tractTractate + ' (' + data.tractPeriod + ') — מקטע ממשנה או תלמוד — ועוסקים ב: ' + data.tractDesc + '.' : ''}`,
       binah: (data) => `בינה — השלישית בספירות — היא הרחם האלוהית של הבריאה, המקום שבו הפוטנציאל הופך לצורה. בבינה, אנו מתמקדים בצירוף הספירות — אחד מ-49 צמדי מידות אלוהיות (כגון חסד שבחסד, או גבורה שבתפארת) הנחשבים בספירת העומר, המסע הרוחני של 49 יום מפסח ועד שבועות. צירוף היום הוא ${data.combo || '—'}, עמדה ${data.omerPos || '—'} מתוך 49 במחזור עומר ${data.omerCycle || '—'}. לומדים גם לקוטי תפילות — אוסף תפילות שחיבר רבי נתן מברסלב (1780–1844), תלמידו הנאמן של רבי נחמן, אשר שזר את תורות רבו לתפילות לכל מצב בחיים; המקטע של היום הוא ${data.ltSection || '—'}, ${data.ltReading || '—'}.`,
       chesed: (data) => `חסד — הרביעי בספירות — הוא מידת האהבה והנדיבות הבלתי מוגבלת, ההושטה לאחרים ללא תנאי; זהו הביטוי הראשון הגדול של האהבה האלוהית הזורמת לבריאה. בחסד, לומדים את המשנה${data.mishnaType === 'tosefta' ? ' (כאן בצורת התוספתא, טקסט נלווה)' : ''} — מהתורה שבעל פה, שנחתמה על ידי רבי יהודה הנשיא כ-200 לספירה; מקטע היום הוא ${data.mishnaText || '—'}, מתחום ${data.mishnaTag1 || '—'}${data.mishnaTag2 ? ', ' + data.mishnaTag2 : ''}. שואבים גם מ"אור וחום לבעל שם טוב" — קובץ תורות הבעל שם טוב, המקרין את חום האהבה החסידית; תורת היום: ${data.bshtReading || '—'}.`,
@@ -12853,7 +12878,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     es: {
       opening: (data) => `Bienvenidos a la Kabalá del Tiempo de hoy. La Kabalá del Tiempo es una práctica espiritual diaria que asigna cada día a las diez Sefirot — las diez cualidades divinas a través de las cuales la luz infinita de Dios fluye hacia nuestro mundo. Piensen en las Sefirot como diez facetas de un solo diamante: cada una revela una dimensión distinta de lo divino. Hoy es el Día ${data.d || '—'} del calendario de la Kabalá del Tiempo, Semana ${data.kotWeek || '—'}. La fecha hebrea es ${data.hDateStr || '—'}.`,
       today: (_data) => '',
-      keter: (data) => `Keter — la Corona — es la más elevada de las diez Sefirot, representando la voluntad divina pura: la fuente de toda bendición que existe antes de que el pensamiento comience.\n\nLuz que es Buena — Or Ki Tov: el Keter Shem Tov es un tesoro de enseñanzas orales del Rabí Israel Baal Shem Tov (1698–1760), fundador del movimiento jasídico; la entrada de hoy es ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}". El Ohr HaJaim HaKadosh — el venerable comentario de la Torá del Rabí Jaim ibn Attar de Marruecos (1696–1743) — ilumina esta semana la Parashá ${data.parasha || '—'}.\n\nDía Fuerte — Yom Jazak: el Rambam (Mishné Torá), el monumental código jurídico del siglo XII del Rambam, se estudia en un ciclo diario de tres capítulos; su Sefer HaMitzvot — la enumeración de los 613 mandamientos con sus principios y fuentes — sigue el ciclo propio de la Kabalá del Tiempo: los 365 preceptos negativos del 25 de Elul al 3 de Siván, y los 248 positivos, dos por día, del 4 de Siván hasta la víspera de Iom Kipur. El HaYom Yom ("De día en día") es un calendario jasídico compilado por el Rebe de Lubavitch en 1942, con una enseñanza breve y profunda para cada día del año${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — ver en Chabad.org'}.\n\nRashbi y Rebe Najmán Todo el Año: las enseñanzas de Torá del Rabí Najmán de Breslov (1772–1810) — hoy es la Lección ${data.lmLessonInPart || '—'} de ${data.lmPartLabel || '—'}${data.lmTheme ? ', tema: ' + data.lmTheme : ''}. Junto a él, el Zóhar Diario de Rabí Shimón bar Yojai en el orden de Jok LeIsrael.\n\nTesoro de Cuentos Jasídicos: Historia ${data.treasuryDay || '—'} de una colección de cuentos místicos de los grandes maestros jasídicos.`,
+      keter: (data) => `Keter — la Corona — es la más elevada de las diez Sefirot, representando la voluntad divina pura: la fuente de toda bendición que existe antes de que el pensamiento comience.\n\nLuz que es Buena — Or Ki Tov: el Keter Shem Tov es un tesoro de enseñanzas orales del Rabí Israel Baal Shem Tov (1698–1760), fundador del movimiento jasídico; la entrada de hoy es ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}". El Ohr HaJaim HaKadosh — el venerable comentario de la Torá del Rabí Jaim ibn Attar de Marruecos (1696–1743) — ilumina esta semana la Parashá ${data.parasha || '—'}.\n\nDía Fuerte — Yom Jazak: el Rambam (Mishné Torá), el monumental código jurídico del siglo XII del Rambam, se estudia en un ciclo diario de tres capítulos; su Sefer HaMitzvot — la enumeración de los 613 mandamientos con sus principios y fuentes — sigue el ciclo propio de la Kabalá del Tiempo: los 365 preceptos negativos del 25 de Elul al 3 de Siván, y los 248 positivos, dos por día, del 4 de Siván hasta la víspera de Iom Kipur. El HaYom Yom ("De día en día") es un calendario jasídico compilado por el Rebe de Lubavitch en 1942, con una enseñanza breve y profunda para cada día del año${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — ver en Chabad.org'}.\n\nRashbi y Rebe Najmán Todo el Año: las enseñanzas de Torá del Rabí Najmán de Breslov (1772–1810) — hoy es la Lección ${data.lmLessonInPart || '—'} de ${data.lmPartLabel || '—'}${data.lmTheme ? ', tema: ' + data.lmTheme : ''}. Junto a él, el Zóhar de Rashbi — dos folios por día durante todo el año.\n\nTesoro de Cuentos Jasídicos: Historia ${data.treasuryDay || '—'} de una colección de cuentos místicos de los grandes maestros jasídicos.`,
       chochmah: (data) => `Jojmá — Sabiduría — es la segunda Sefiráh, el primer destello de percepción divina, donde surge el pensamiento puro antes de tomar ninguna forma. En Jojmá, trabajamos con el ciclo de 22 Días del Álef-Bet — una práctica contemplativa que recorre cada una de las 22 letras del alfabeto hebreo, ya que el misticismo judío enseña que cada letra es un recipiente de energía creativa divina. La letra de hoy es ${data.cy22Letter || '—'} (${data.cy22Heb || '—'}), Día ${data.cy22Day || '—'} de 22 en el Conjunto ${data.cy22Cycle || '—'}; las dos letras de este conjunto son ${data.cy22CycleLetters || '—'} (${data.cy22CycleHeb || '—'}). También trabajamos con las 231 Puertas — un sistema del Sefer Yetziráh ('Libro de la Formación'), uno de los textos místicos más antiguos del judaísmo, que enseña que las 231 posibles combinaciones de dos letras del alfabeto hebreo son los bloques constructivos de toda la creación; la combinación de hoy es ${data.gatesIsVowel ? 'la vocal ' + data.gatePrim : data.gatePrim + (data.gateComp ? ' + ' + data.gateComp : '')}. Nuestra lectura de Torá Or / Likutei Torá — los comentarios jasídicos de la Torá del Rabí Shneur Zalmán de Liadi (1745–1812), fundador de Jabad-Lubavitch — proviene de ${data.chSection || '—'}: ${data.chReading || '—'}.${data.tractTractate ? ' En este medio ciclo también estudiamos el tratado ' + data.tractTractate + ' (' + data.tractPeriod + ') — una sección de la Mishná o el Talmud — explorando: ' + data.tractDesc + '.' : ''}`,
       binah: (data) => `Biná — Comprensión — es la tercera Sefiráh, donde la percepción divina se desarrolla en pensamiento estructurado; se llama la matriz divina de la creación, el lugar donde el potencial se convierte en forma. En Biná, meditamos sobre la combinación de Sefirot — uno de los 49 pares de cualidades divinas contemplados durante el conteo del Omer, el viaje espiritual de 49 días desde Pésaj hasta Shavuot. La combinación de hoy es ${data.combo || '—'}, posición ${data.omerPos || '—'} de 49 en el Ciclo del Omer ${data.omerCycle || '—'}. También estudiamos Likutei Tefilot — una colección de oraciones compuestas por el Rabí Natán de Breslov (1780–1844), el devoto estudiante y escriba del Rebe Najmán, quien tejió las enseñanzas de su maestro en oraciones para cada situación de la vida; la porción de hoy es ${data.ltSection || '—'}, ${data.ltReading || '—'}.`,
       chesed: (data) => `Jésed — Bondad Amorosa — es la cuarta Sefiráh, la cualidad de compasión ilimitada, generosidad y acercamiento a los demás sin condiciones; es la primera gran expresión del amor divino que fluye hacia la creación. En Jésed, estudiamos la Mishná${data.mishnaType === 'tosefta' ? ' (aquí en forma de Toseftá, un texto complementario)' : ''} — de la Torá Oral, el cuerpo de ley y sabiduría judía codificado por el Rabí Yehudá HaNasí alrededor del 200 d.C.; la porción de hoy es ${data.mishnaText || '—'}, del ámbito de ${data.mishnaTag1 || '—'}${data.mishnaTag2 ? ', ' + data.mishnaTag2 : ''}. También tomamos de la Luz y el Fuego del Baal Shem Tov — una compilación de las percepciones de la Torá del Baal Shem Tov; la enseñanza de hoy: ${data.bshtReading || '—'}.`,
@@ -12868,7 +12893,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     fr: {
       opening: (data) => `Bienvenue dans la Kabbale du Temps d'aujourd'hui. La Kabbale du Temps est une pratique spirituelle quotidienne qui associe chaque jour aux dix Sefirot — les dix qualités divines à travers lesquelles la lumière infinie de Dieu se déverse dans notre monde. Imaginez les Sefirot comme dix facettes d'un seul diamant : chacune révèle une dimension différente du divin. Aujourd'hui est le Jour ${data.d || '—'} du calendrier de la Kabbale du Temps, Semaine ${data.kotWeek || '—'}. La date hébraïque est ${data.hDateStr || '—'}.`,
       today: (_data) => '',
-      keter: (data) => `Keter — la Couronne — est la plus haute des dix Sefirot, représentant la volonté divine pure : la source de toute bénédiction qui existe avant même que la pensée ne commence.\n\nLumière qui est Bonne — Or Ki Tov : le Keter Chem Tov est un trésor d'enseignements oraux du Rabbin Israël Baal Shem Tov (1698–1760), fondateur du mouvement hassidique ; l'entrée d'aujourd'hui est ${data.kstLabel || '—'} : « ${data.kstTitleEn || '—'} ». L'Ohr HaHaïm HaKadosh — le vénéré commentaire kabbalistique de la Torah du Rabbin Haïm ibn Attar du Maroc (1696–1743) — illumine cette semaine la Paracha ${data.parasha || '—'}.\n\nJour Fort — Yom 'Hazak : le Rambam (Michneh Torah), le monumental code juridique du XIIe siècle couvrant toute la loi juive, est étudié dans un cycle quotidien de trois chapitres ; son Sefer HaMitsvot — l'énumération des 613 commandements avec leurs principes et sources — suit le cycle propre de la Kabbale du Temps : les 365 commandements négatifs du 25 Eloul au 3 Sivan, et les 248 positifs, deux par jour, du 4 Sivan à la veille de Yom Kippour. Le HaYom Yom (« De jour en jour ») est un calendrier hassidique compilé par le Rebbe de Loubavitch en 1942, avec un enseignement bref et profond pour chaque jour de l'année${data.hayomYomText ? ' : « ' + data.hayomYomText + ' »' : ' — voir sur Chabad.org'}.\n\nRachbi et Rabbi Na'hman toute l'année : les enseignements de Torah du Rabbin Najman de Breslov (1772–1810) — la leçon d'aujourd'hui est la Leçon ${data.lmLessonInPart || '—'} de ${data.lmPartLabel || '—'}${data.lmTheme ? ', thème : ' + data.lmTheme : ''}. À ses côtés, le Zohar quotidien de Rabbi Chimon bar Yo'haï dans l'ordre du 'Hok LeIsraël.\n\nTrésor des Contes Hassidiques : Histoire ${data.treasuryDay || '—'} d'une collection de récits mystiques des grands maîtres hassidiques.`,
+      keter: (data) => `Keter — la Couronne — est la plus haute des dix Sefirot, représentant la volonté divine pure : la source de toute bénédiction qui existe avant même que la pensée ne commence.\n\nLumière qui est Bonne — Or Ki Tov : le Keter Chem Tov est un trésor d'enseignements oraux du Rabbin Israël Baal Shem Tov (1698–1760), fondateur du mouvement hassidique ; l'entrée d'aujourd'hui est ${data.kstLabel || '—'} : « ${data.kstTitleEn || '—'} ». L'Ohr HaHaïm HaKadosh — le vénéré commentaire kabbalistique de la Torah du Rabbin Haïm ibn Attar du Maroc (1696–1743) — illumine cette semaine la Paracha ${data.parasha || '—'}.\n\nJour Fort — Yom 'Hazak : le Rambam (Michneh Torah), le monumental code juridique du XIIe siècle couvrant toute la loi juive, est étudié dans un cycle quotidien de trois chapitres ; son Sefer HaMitsvot — l'énumération des 613 commandements avec leurs principes et sources — suit le cycle propre de la Kabbale du Temps : les 365 commandements négatifs du 25 Eloul au 3 Sivan, et les 248 positifs, deux par jour, du 4 Sivan à la veille de Yom Kippour. Le HaYom Yom (« De jour en jour ») est un calendrier hassidique compilé par le Rebbe de Loubavitch en 1942, avec un enseignement bref et profond pour chaque jour de l'année${data.hayomYomText ? ' : « ' + data.hayomYomText + ' »' : ' — voir sur Chabad.org'}.\n\nRachbi et Rabbi Na'hman toute l'année : les enseignements de Torah du Rabbin Najman de Breslov (1772–1810) — la leçon d'aujourd'hui est la Leçon ${data.lmLessonInPart || '—'} de ${data.lmPartLabel || '—'}${data.lmTheme ? ', thème : ' + data.lmTheme : ''}. À ses côtés, le Zohar de Rachbi — deux folios par jour tout au long de l'année.\n\nTrésor des Contes Hassidiques : Histoire ${data.treasuryDay || '—'} d'une collection de récits mystiques des grands maîtres hassidiques.`,
       chochmah: (data) => `Hokhma — Sagesse — est la deuxième Sefira, le premier éclair de perception divine, où la pensée pure surgit avant de prendre forme. En Hokhma, nous travaillons avec le cycle de 22 Jours de l'Alef-Bet — une pratique contemplative parcourant chacune des 22 lettres de l'alphabet hébreu, car le mysticisme juif enseigne que chaque lettre est un récipient d'énergie créatrice divine. La lettre d'aujourd'hui est ${data.cy22Letter || '—'} (${data.cy22Heb || '—'}), Jour ${data.cy22Day || '—'} sur 22 dans le Groupe ${data.cy22Cycle || '—'} ; les deux lettres de ce groupe sont ${data.cy22CycleLetters || '—'} (${data.cy22CycleHeb || '—'}). Nous travaillons également avec les 231 Portes — un système issu du Sefer Yetsira ('Livre de la Formation'), l'un des textes mystiques les plus anciens du judaïsme, qui enseigne que les 231 combinaisons possibles de deux lettres de l'alphabet hébreu sont les blocs constitutifs de toute la création ; la combinaison d'aujourd'hui est ${data.gatesIsVowel ? 'la voyelle ' + data.gatePrim : data.gatePrim + (data.gateComp ? ' + ' + data.gateComp : '')}. Notre lecture de Torah Or / Likoutei Torah — les commentaires hassidiques de la Torah du Rabbin Shneour Zalman de Liadi (1745–1812), fondateur de Habad-Loubavitch — vient de ${data.chSection || '—'} : ${data.chReading || '—'}.${data.tractTractate ? ' Dans cette demi-période, nous étudions également le traité ' + data.tractTractate + ' (' + data.tractPeriod + ') — une section de la Michna ou du Talmud — explorant : ' + data.tractDesc + '.' : ''}`,
       binah: (data) => `Bina — Compréhension — est la troisième Sefira, où la perception divine se développe en pensée structurée ; elle est appelée la matrice divine de la création, le lieu où le potentiel devient forme. En Bina, nous méditons sur la combinaison des Sefirot — l'une des 49 paires de qualités divines contemplées lors du comptage de l'Omer, le voyage spirituel de 49 jours de Pessah à Chavouot. La combinaison d'aujourd'hui est ${data.combo || '—'}, position ${data.omerPos || '—'} sur 49 dans le Cycle de l'Omer ${data.omerCycle || '—'}. Nous étudions également le Likoutei Tefilot — un recueil de prières composées par le Rabbin Nathan de Breslov (1780–1844), le dévoué disciple et scribe du Rebbe Najman, qui a tissé les enseignements de son maître en prières pour chaque situation de la vie ; la portion d'aujourd'hui est ${data.ltSection || '—'}, ${data.ltReading || '—'}.`,
       chesed: (data) => `Hessed — Bonté Aimante — est la quatrième Sefira, la qualité de compassion illimitée, de générosité et d'ouverture vers les autres sans condition ; c'est la première grande expression de l'amour divin qui se déverse dans la création. En Hessed, nous étudions la Michna${data.mishnaType === 'tosefta' ? ' (ici sous forme de Tossefta, un texte complémentaire)' : ''} — de la Torah Orale, codifiée par le Rabbin Yéhouda HaNassi vers 200 de l'ère commune ; la portion d'aujourd'hui est ${data.mishnaText || '—'}, tirée du domaine de ${data.mishnaTag1 || '—'}${data.mishnaTag2 ? ', ' + data.mishnaTag2 : ''}. Nous puisons également dans la Lumière et le Feu du Baal Shem Tov — une compilation des aperçus de Torah du Baal Shem Tov ; l'enseignement d'aujourd'hui : ${data.bshtReading || '—'}.`,
@@ -12883,7 +12908,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     pt: {
       opening: (data) => `Bem-vindos à Cabala do Tempo de hoje. A Cabala do Tempo é uma prática espiritual diária que associa cada dia às dez Sefirot — as dez qualidades divinas através das quais a luz infinita de Deus flui para o nosso mundo. Pense nas Sefirot como dez facetas de um único diamante: cada uma revela uma dimensão diferente do divino. Hoje é o Dia ${data.d || '—'} do calendário da Cabala do Tempo, Semana ${data.kotWeek || '—'}. A data hebraica é ${data.hDateStr || '—'}.`,
       today: (_data) => '',
-      keter: (data) => `Keter — a Coroa — é a mais elevada das dez Sefirot, representando a vontade divina pura: a fonte de toda bênção que existe antes mesmo de o pensamento começar.\n\nLuz que é Boa — Or Ki Tov: Keter Shem Tov é um tesouro de ensinamentos orais do Rabi Israel Baal Shem Tov (1698–1760), fundador do movimento chassídico; a entrada de hoje é ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}". O Ohr HaChaim HaKadosh — o venerado comentário cabalístico da Torá do Rabi Chaim ibn Attar do Marrocos (1696–1743) — ilumina esta semana a Parashá ${data.parasha || '—'}.\n\nDia Forte — Yom Chazak: Rambam (Mishné Torá), o monumental código de lei judaica do século XII do Rambam, é estudado em um ciclo diário de três capítulos; seu Sefer HaMitzvot — a enumeração dos 613 mandamentos com seus princípios e fontes — segue o ciclo próprio da Cabalá do Tempo: os 365 preceitos negativos de 25 de Elul a 3 de Sivan, e os 248 positivos, dois por dia, de 4 de Sivan até a véspera de Yom Kipur. HaYom Yom ("De dia em dia") é um calendário chassídico compilado pelo Rebe de Lubavitch em 1942, com um ensinamento breve e profundo para cada dia do ano${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — ver em Chabad.org'}.\n\nRashbi e Rebe Nachman o Ano Inteiro: os ensinamentos de Torá do Rabi Nachman de Breslov (1772–1810) — a lição de hoje é a Lição ${data.lmLessonInPart || '—'} de ${data.lmPartLabel || '—'}${data.lmTheme ? ', tema: ' + data.lmTheme : ''}. Ao seu lado, o Zohar Diário de Rabi Shimon bar Yochai na ordem do Chok LeIsrael.\n\nTesouro dos Contos Chassídicos: História ${data.treasuryDay || '—'} de uma coleção de histórias místicas dos grandes mestres chassídicos.`,
+      keter: (data) => `Keter — a Coroa — é a mais elevada das dez Sefirot, representando a vontade divina pura: a fonte de toda bênção que existe antes mesmo de o pensamento começar.\n\nLuz que é Boa — Or Ki Tov: Keter Shem Tov é um tesouro de ensinamentos orais do Rabi Israel Baal Shem Tov (1698–1760), fundador do movimento chassídico; a entrada de hoje é ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}". O Ohr HaChaim HaKadosh — o venerado comentário cabalístico da Torá do Rabi Chaim ibn Attar do Marrocos (1696–1743) — ilumina esta semana a Parashá ${data.parasha || '—'}.\n\nDia Forte — Yom Chazak: Rambam (Mishné Torá), o monumental código de lei judaica do século XII do Rambam, é estudado em um ciclo diário de três capítulos; seu Sefer HaMitzvot — a enumeração dos 613 mandamentos com seus princípios e fontes — segue o ciclo próprio da Cabalá do Tempo: os 365 preceitos negativos de 25 de Elul a 3 de Sivan, e os 248 positivos, dois por dia, de 4 de Sivan até a véspera de Yom Kipur. HaYom Yom ("De dia em dia") é um calendário chassídico compilado pelo Rebe de Lubavitch em 1942, com um ensinamento breve e profundo para cada dia do ano${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — ver em Chabad.org'}.\n\nRashbi e Rebe Nachman o Ano Inteiro: os ensinamentos de Torá do Rabi Nachman de Breslov (1772–1810) — a lição de hoje é a Lição ${data.lmLessonInPart || '—'} de ${data.lmPartLabel || '—'}${data.lmTheme ? ', tema: ' + data.lmTheme : ''}. Ao seu lado, o Zohar de Rashbi — dois fólios por dia ao longo de todo o ano.\n\nTesouro dos Contos Chassídicos: História ${data.treasuryDay || '—'} de uma coleção de histórias místicas dos grandes mestres chassídicos.`,
       chochmah: (data) => `Chochmá — Sabedoria — é a segunda Sefiráh, o primeiro lampejo de percepção divina, onde o pensamento puro surge antes de tomar qualquer forma. Em Chochmá, trabalhamos com o ciclo de 22 Dias do Alef-Bet — uma prática contemplativa percorrendo cada uma das 22 letras do alfabeto hebraico, pois o misticismo judeu ensina que cada letra é um recipiente de energia criativa divina. A letra de hoje é ${data.cy22Letter || '—'} (${data.cy22Heb || '—'}), Dia ${data.cy22Day || '—'} de 22 no Conjunto ${data.cy22Cycle || '—'}; as duas letras deste conjunto são ${data.cy22CycleLetters || '—'} (${data.cy22CycleHeb || '—'}). Também trabalhamos com os 231 Portões — um sistema do Sefer Yetziráh ('Livro da Formação'), um dos textos místicos mais antigos do judaísmo, que ensina que as 231 possíveis combinações de duas letras do alfabeto hebraico são os blocos de construção de toda a criação; a combinação de hoje é ${data.gatesIsVowel ? 'a vogal ' + data.gatePrim : data.gatePrim + (data.gateComp ? ' + ' + data.gateComp : '')}. Nossa leitura de Torá Or / Likutei Torá — os comentários chassídicos da Torá do Rabi Schneur Zalman de Liadi (1745–1812), fundador do Chabad-Lubavitch — vem de ${data.chSection || '—'}: ${data.chReading || '—'}.${data.tractTractate ? ' Nesta meia-volta, também estudamos o tratado ' + data.tractTractate + ' (' + data.tractPeriod + ') — uma seção da Mishná ou do Talmude — explorando: ' + data.tractDesc + '.' : ''}`,
       binah: (data) => `Biná — Compreensão — é a terceira Sefiráh, onde a percepção divina se desenvolve em pensamento estruturado; é chamada de matriz divina da criação, o lugar onde o potencial se torna forma. Em Biná, meditamos sobre a combinação das Sefirot — um dos 49 pares de qualidades divinas contemplados durante a contagem do Omer, a jornada espiritual de 49 dias da Páscoa até Shavuot. A combinação de hoje é ${data.combo || '—'}, posição ${data.omerPos || '—'} de 49 no Ciclo do Omer ${data.omerCycle || '—'}. Também estudamos o Likutei Tefilot — uma coleção de orações compostas pelo Rabi Natán de Breslov (1780–1844), o dedicado discípulo e escriba do Rebe Nachman, que teceu os ensinamentos de seu mestre em orações para cada situação da vida; a porção de hoje é ${data.ltSection || '—'}, ${data.ltReading || '—'}.`,
       chesed: (data) => `Chessed — Bondade Amorosa — é a quarta Sefiráh, a qualidade de compaixão ilimitada, generosidade e alcance ao próximo sem condições; é a primeira grande expressão do amor divino fluindo para a criação. Em Chessed, estudamos a Mishná${data.mishnaType === 'tosefta' ? ' (aqui na forma da Toseftá, um texto complementar)' : ''} — da Torá Oral, codificada pelo Rabi Yehudá HaNassi por volta de 200 EC; a porção de hoje é ${data.mishnaText || '—'}, do campo de ${data.mishnaTag1 || '—'}${data.mishnaTag2 ? ', ' + data.mishnaTag2 : ''}. Também nos inspiramos na Luz e Fogo do Baal Shem Tov — uma compilação das percepções de Torá do Baal Shem Tov; o ensinamento de hoje: ${data.bshtReading || '—'}.`,
