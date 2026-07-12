@@ -4513,7 +4513,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     let m = text.match(/Likutei Moharan II, Torah (\d+)/);
     if (m) {
       const n = +m[1];
-      return { label: `Part II — Tinyana · Torah <strong>${n}</strong>`, url: `https://www.sefaria.org/Likutei_Moharan%2C_Part_II.${n}` };
+      return { label: `Tinyana · Torah <strong>${n}</strong>`, url: `https://www.sefaria.org/Likutei_Moharan%2C_Part_II.${n}` };
     }
     m = text.match(/Likutei Moharan, Lesson (\d+)/);
     if (m) {
@@ -10751,7 +10751,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // For the Daily Script share text — summarize just the first lesson of the day
     const lmFirst        = lmInfos[0];
     const lmIsPartII     = lmFirst ? lmFirst.daily.lesson.startsWith('Likutei Moharan II') : false;
-    const lmPartLabel    = lmFirst ? (lmIsPartII ? 'Part II — Tinyana' : 'Part I') : null;
+    const lmPartLabel    = lmFirst ? (lmIsPartII ? 'Tinyana' : 'Part I') : null;
     const lmLessonInPart = lmFirst ? +lmFirst.daily.lesson.match(/(\d+)$/)[1] : null;
     const lmTheme        = (lmFirst && !lmIsPartII && LM_THEMES[lmLessonInPart]) ? LM_THEMES[lmLessonInPart].theme : null;
 
