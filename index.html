@@ -1589,11 +1589,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="keter-section-label">✦ Year-Round — בכל השנה <span class="maalah">מעלה א׳</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada — Rashbi &amp; Rebbe Nachman</div>
     <div class="sefirah-main-text" id="keter-lm-main">Loading…</div>
-    <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
     <div class="sefirah-main-text" id="keter-daily-zohar" style="margin-top:4px;"></div>
     <div class="malchut-ksa-row" style="margin-top:10px">
       <div class="keter-section-label">✦ KoT Book</div>
-      <div><a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a></div>
+      <div><a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a> &nbsp;·&nbsp; <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button></div>
     </div>
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
@@ -11953,10 +11952,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // KoT Book — displayed on the Binah card face
     const bookParts = todayBook.book.split(' · ');
     document.getElementById('binah-kot-book').innerHTML =
-      `<span style="font-size:1.1em">${todayBook.emoji}</span> <strong>${bookParts[0]}</strong>` +
+      `<span style="font-size:1.1em">${todayBook.emoji}</span> ` +
+      (todayBook.url
+        ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><strong>${bookParts[0]}</strong></a>`
+        : `<strong>${bookParts[0]}</strong>`) +
       (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '') +
-      (todayBook.url ? `<br><a href="${todayBook.url}" target="_blank" style="color:var(--gold);font-size:0.85em">Read</a>` : '') +
-      (todayBook.weekUrl ? ` &nbsp;·&nbsp; <a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
+      (todayBook.weekUrl ? `<br><a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
     let _lsSichosBook = null, _ksaLabel = null;
