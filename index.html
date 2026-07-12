@@ -1588,24 +1588,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
     <div class="keter-section-label">✦ Year-Round — בכל השנה <span class="maalah">מעלה א׳</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada — Rashbi &amp; Rebbe Nachman</div>
-    <div class="keter-main" id="keter-lm-main">Loading…</div>
-    <div class="keter-meta" id="keter-lm-meta"></div>
+    <div class="sefirah-main-text" id="keter-lm-main">Loading…</div>
     <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button>
-    <div class="keter-meta" id="keter-daily-zohar"></div>
+    <div class="sefirah-main-text" id="keter-daily-zohar" style="margin-top:4px;"></div>
+    <div class="malchut-ksa-row" style="margin-top:10px">
+      <div class="keter-section-label">✦ KoT Book</div>
+      <div><a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a></div>
+    </div>
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section">
     <div class="keter-section-label" id="keter-kst-label">✦ Light that is Good — אור כי טוב <span class="maalah">מעלה ב׳</span></div>
-    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin — the Baal Shem Tov &amp; Ohr HaChaim HaKadosh</div>
-    <div class="keter-main" id="keter-kst-main">Loading…</div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin — Baal Shem Tov &amp; Ohr HaChaim HaKadosh</div>
+    <div class="sefirah-main-text" id="keter-kst-main">Loading…</div>
     <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Ohr KiTov ↗</button>
   </div>
   <!-- HAYOM YOM + SEFER HAMITZVOS section -->
   <div class="keter-section" style="background:#fdf9f2;">
     <div class="keter-section-label">✦ Strong Day — יום חזק <span class="maalah">מעלה ג׳</span></div>
-    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich — the Lubavitcher Rebbe &amp; the Rambam</div>
-    <div class="keter-main" id="keter-rambam-face" style="margin-bottom:6px">Loading…</div>
-    <div class="keter-main" id="keter-hayomyom">Loading…</div>
+    <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich — Rambam &amp; Lubavitcher Rebbe</div>
+    <div class="sefirah-main-text" id="keter-rambam-face">Loading…</div>
+    <div class="sefirah-main-text" id="keter-hayomyom" style="margin-top:4px;">Loading…</div>
   </div>
 </div>
 
@@ -1658,6 +1661,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="keter-section">
     <div class="keter-section-label">✦ Rambam · Sefer HaMitzvos <span class="maalah yom" data-wane="13">יום כ״ח</span> <span class="study-check" data-study="rambamshm" title="Mark as studied"></span></div>
     <div class="keter-main" id="keter-rambam-shm-main">Loading…</div>
+    <div class="keter-meta" id="keter-rambam-shm-titles"></div>
+  </div>
+  <!-- HAYOM YOM section — today's teaching in full -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Hayom Yom</div>
+    <div class="keter-main" id="keter-hy-quote">Loading…</div>
+    <div class="keter-meta" id="keter-hy-link"></div>
   </div>
   <!-- DVAR MALCHUS & CHAYENU section -->
   <div class="keter-section">
@@ -10220,23 +10230,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const chabadRambam = `https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters`;
     const shm = getSeferHamitzvosInfo(hMonth, hDay, hYear, isLeapYear);
     const shmA = (m) => `<a href="${m.url}" target="_blank" style="color:var(--gold)${m.review ? ';opacity:0.55' : ''}">${m.n}${m.review ? ' (review)' : ''}</a>`;
-    const shmLbl = (t) => `<span style="color:var(--ink-mid);font-size:0.9em">${t}:</span> `;
+    const shmLbl = (t) => `<span style="color:var(--ink-mid);font-size:0.72em">${t}:</span> `;
     const shmParts = [];
     if (shm.neg.length) shmParts.push(shmLbl('Negative Mitzvot') + shm.neg.map(shmA).join(' & '));
     if (shm.pos.length) shmParts.push(shmLbl('Positive Mitzvot') + shm.pos.map(shmA).join(' & '));
-    let shmBody;
+    let shmBody, shmDetailNote;
     if (shm.mt) {
-      shmBody = shmLbl('Yad HaChazakah') + `<a href="${shm.mt.url}" target="_blank" style="color:var(--gold)">Mishneh Torah${shm.mt.book ? ' · Book ' + shm.mt.book : ''}</a>` +
-        `<br><span style="font-size:0.82em;color:var(--ink-mid)">${shm.mt.book ? shm.mt.name + ' — its ' + shm.mt.half + ' mitzvos' : shm.mt.name}</span>`;
+      shmBody = shmLbl('Yad HaChazakah') + `<a href="${shm.mt.url}" target="_blank" style="color:var(--gold)">Mishneh Torah${shm.mt.book ? ' · Book ' + shm.mt.book : ''}</a>`;
+      shmDetailNote = shm.mt.book ? shm.mt.name + ' — its ' + shm.mt.half + ' mitzvos' : shm.mt.name;
     } else {
-      const shmTitles = [...shm.neg, ...shm.pos].map(m => m.title).join(' ');
-      shmBody = shmParts.join(' &nbsp;·&nbsp; ') +
-        `<br><span style="font-size:0.82em;color:var(--ink-mid)">${shmTitles}</span>`;
+      shmBody = shmParts.join(' &nbsp;·&nbsp; ');
+      shmDetailNote = [...shm.neg, ...shm.pos].map(m => m.title).join(' ');
     }
-    document.getElementById('keter-rambam-face').innerHTML =
-      shmBody +
-      `<br><a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">Hayom Yom</a>` +
-      ` <span style="font-size:0.82em;color:var(--ink-mid)">— a daily Chassidic teaching, compiled by the Rebbe</span>`;
+    // The face keeps just the numbers; the mitzvah titles live in the detail
+    document.getElementById('keter-rambam-face').innerHTML = shmBody;
+    document.getElementById('keter-rambam-shm-titles').innerHTML = shmDetailNote;
+    // Hayom Yom — the date itself is the link; the full teaching sits in the detail
+    document.getElementById('keter-hayomyom').innerHTML =
+      `<span style="color:var(--ink-mid);font-size:0.72em">Hayom Yom · </span>` +
+      `<a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">${hDateStr}</a>`;
     document.getElementById('keter-rambam-main').innerHTML =
       `<a href="${chabadRambam}/3" target="_blank" style="color:var(--gold)">View today's Rambam (3 chapters)</a>`;
     document.getElementById('keter-rambam1-main').innerHTML =
@@ -10356,11 +10368,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const ohUrl = ohUrlFor(ohParashaNum);
       // On a double parasha, each half links to its own aliyah of the day.
       const ohLine = kstParashaNum2
-        ? `<br><span style="color:var(--ink-mid);font-size:0.9em">Ohr HaChaim · Parashat ${kstParasha}</span>` +
+        ? `<br><span style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim · Parashat ${kstParasha}</span>` +
           ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">${kstParts[0]}</a>` +
           ` &nbsp;·&nbsp; <a href="${ohUrlFor(kstParashaNum2)}" target="_blank" style="color:var(--gold)">${kstParts[1]}</a>` +
           ``
-        : `<br><span style="color:var(--ink-mid);font-size:0.9em">Ohr HaChaim ·</span> <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Parashat ${kstParasha || '—'}</a>`;
+        : `<br><span style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim ·</span> <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Parashat ${kstParasha || '—'}</a>`;
 
       document.getElementById('keter-kst-label').innerHTML = '✦ Light that is Good — אור כי טוב <span class="maalah">מעלה ב׳</span>';
 
@@ -10388,22 +10400,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           return heHtml + sep + enHtml;
         }
         function kstEntryHtml(entry) {
-          const refHtml = `<span style="color:var(--ink-mid);font-size:0.9em">${entry.label}:</span> `;
+          // The § reference itself is the HebrewBooks link
+          const refHtml = `<a href="${kstHebrewBooksUrl(entry.page)}" target="_blank" style="color:var(--gold)">${entry.label}</a>: `;
           let titlesHtml = kstTitleHtml(entry.titleHe, entry.titleEn);
           if (entry.title2He || entry.title2En) {
             titlesHtml += `<br>` + kstTitleHtml(entry.title2He, entry.title2En);
           }
           return refHtml + titlesHtml;
         }
-        let html = `<span style="color:var(--ink-mid);font-size:0.9em">Keter Shem Tov · </span>` + kstEntryHtml(kst) +
-          ` — <a href="${kstHebrewBooksUrl(kst.page)}" target="_blank" style="color:var(--gold)">HebrewBooks</a>`;
-        if (kst2) html += `<br>` + kstEntryHtml(kst2) +
-          ` — <a href="${kstHebrewBooksUrl(kst2.page)}" target="_blank" style="color:var(--gold)">HebrewBooks</a>`;
+        let html = `<span style="color:var(--ink-mid);font-size:0.72em">Keter Shem Tov · </span>` + kstEntryHtml(kst);
+        if (kst2) html += `<br>` + kstEntryHtml(kst2);
         html += ohLine;
         document.getElementById('keter-kst-main').innerHTML = html;
       } else {
         document.getElementById('keter-kst-main').innerHTML =
-          `<span style="color:var(--ink-mid);font-size:0.9em">Keter Shem Tov</span> — <a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">HebrewBooks</a>` + ohLine;
+          `<span style="color:var(--ink-mid);font-size:0.72em">Keter Shem Tov · </span><a href="https://hebrewbooks.org/16081" target="_blank" style="color:var(--gold)">HebrewBooks</a>` + ohLine;
       }
       // Parasha & Haftorah recordings (Chabad) — keyed to the current parasha; both halves
       // on a double week (resolved from the split name, since a combined name maps to one).
@@ -10651,8 +10662,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // head — Rashbi's Zohar carried through the whole year, like the
         // date-pegged Likutei Moharan beside it.
         const kdz = document.getElementById('keter-daily-zohar');
-        if (kdz) kdz.innerHTML = `<strong>Zohar</strong> · Rabbi Shimon bar Yochai &nbsp;·&nbsp; ` + _hodZoharMainHtml +
-          ` <span style="color:var(--ink-dim);font-size:0.9em">· ${todayFolios} folios today</span>`;
+        if (kdz) kdz.innerHTML = `<span style="color:var(--ink-mid);font-size:0.72em">Zohar · </span>` + _hodZoharMainHtml;
       } else {
         // Sefer Yetzirah (cycleOffset 358-363 = 6 days, one chapter per day)
         const syDay = cycleOffset - 357; // 1-6
@@ -10662,8 +10672,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _hodZoharMainHtml = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters}</a>`;
         _hodZoharMetaHtml = `Day ${cycleOffset + 1} of cycle · completing the year`;
         const kdz = document.getElementById('keter-daily-zohar');
-        if (kdz) kdz.innerHTML = `<strong>Zohar</strong> · Rabbi Shimon bar Yochai &nbsp;·&nbsp; ` + _hodZoharMainHtml +
-          ` <span style="color:var(--ink-dim);font-size:0.9em">· completing the year</span>`;
+        if (kdz) kdz.innerHTML = `<span style="color:var(--ink-mid);font-size:0.72em">Zohar · </span>` + _hodZoharMainHtml;
       }
     })();
 
@@ -10699,10 +10708,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong> — ${_hodParashaZoharMainHtml}`;
     })();
 
-    // 5. Hayom Yom
+    // 5. Hayom Yom — the full teaching lives in the detail section
     const hyText = getHayomYom(hMonth, hDay);
-    document.getElementById('keter-hayomyom').innerHTML =
-      hyText ? `<span style="font-size:11px">"${hyText}"</span>` : '';
+    document.getElementById('keter-hy-quote').innerHTML =
+      hyText ? `"${hyText}"`
+             : `<a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">View today's Hayom Yom</a>`;
+    document.getElementById('keter-hy-link').innerHTML =
+      `<a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">Hayom Yom — Chabad.org daily</a>` +
+      ` <span style="color:var(--ink-mid)">— a daily Chassidic teaching, compiled by the Rebbe</span>`;
 
     // 6. Likutei Moharan — Hebrew-date-pegged lesson (Keter summary + popup)
     // Every LM_DAILY_CYCLE entry names a specific Hebrew date, so lookup is by
@@ -10716,20 +10729,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const lmInfos = lmDailies.map(lmDaily => ({ daily: lmDaily, info: parseLmDailyLabel(lmDaily.lesson) }));
 
     document.getElementById('keter-lm-main').innerHTML =
-      lmInfos.map(({ info }) => info.url
+      `<span style="color:var(--ink-mid);font-size:0.72em">Likutei Moharan · </span>` +
+      (lmInfos.map(({ info }) => info.url
         ? `<a href="${info.url}" target="_blank" style="color:var(--gold)">${info.label}</a>`
-        : info.label).join('<br>') || 'Likutei Moharan';
+        : info.label).join(' &nbsp;·&nbsp; ') || 'Likutei Moharan');
 
-    const lmLinkI_Maimon  = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I : R. Maimon</a>`;
+    // R. Maimon's recorded shiurim live beside Chok Breslov in the Netzach
+    // card — the Breslov audio gathered in one home (see netzach-breslov-meta).
+    const lmLinkI_Maimon  = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I — R. Maimon</a>`;
     const lmLinkII_Maimon = `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Maimon</a>`;
-    const lmLinkLiving    = `<a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold)">Living Likutei Moharan</a>`;
-    const lmHasPartI  = lmInfos.some(({ daily }) => !daily.lesson.startsWith('Likutei Moharan II'));
-    const lmHasPartII = lmInfos.some(({ daily }) => daily.lesson.startsWith('Likutei Moharan II'));
-    const lmBreslovLinks = [lmHasPartI ? lmLinkI_Maimon : null, lmHasPartII ? lmLinkII_Maimon : null, lmLinkLiving]
-      .filter(Boolean).join(' &nbsp;·&nbsp; ');
-    document.getElementById('keter-lm-meta').innerHTML = lmInfos.length
-      ? `<strong>Likutei Moharan</strong> · Rebbe Nachman of Breslov &nbsp;·&nbsp; ${lmBreslovLinks}`
-      : '';
 
     document.getElementById('lm-trigger').style.display = lmInfos.length ? '' : 'none';
     if (lmInfos.length) {
@@ -11604,7 +11612,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (el) el.href = url;
     });
     document.getElementById('netzach-breslov-meta').innerHTML =
-      `Daily Breslov teachings`;
+      `Daily Breslov teachings<br>Likutei Moharan recordings — ${lmLinkI_Maimon} &nbsp;·&nbsp; ${lmLinkII_Maimon}`;
 
     // HOD — Halacha
     // Chofetz Chaim podcast class number — 118-day cycle anchored to Tishrei 1, 5786 (Sep 23, 2025)
