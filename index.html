@@ -7673,16 +7673,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Vayeilech': 'Vayeilech', 'Haazinu': 'Haazinu',
   };
 
-  // Sefer Yetzirah — 6 chapters, one per day for the last 6 days of the KoT year (Week 52, Days 2-7)
-  const SEFER_YETZIRAH_CHAPTERS = [
-    { ch: 1, theme: 'The 32 paths of wisdom — Sefirot and letters' },
-    { ch: 2, theme: 'The 22 letters — three groups of creation' },
-    { ch: 3, theme: 'The three Mothers — Alef, Mem, Shin' },
-    { ch: 4, theme: 'The seven Doubles — Bet, Gimel, Dalet, Kaf, Peh, Resh, Tav' },
-    { ch: 5, theme: 'The twelve Simples — twelve dimensions of the world' },
-    { ch: 6, theme: 'The seal of creation — covenant of Avraham Avinu' },
-  ];
-
   // 0-indexed absolute folio count across the whole Zohar -> { book, folio }
   function resolveZoharFolio(cumIdx) {
     let offset = 0;
@@ -11692,8 +11682,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // ── MALCHUT — Daily text (Day 1–7) each paired with its KoT Book
     const malTxt = getMalchutText(sef.dayNum);
     const wk = getWeeklyData(effectiveKotWeek);
-    const isSeferYetzirahDay = effectiveKotWeek === 52 && sef.dayNum >= 2;
-    const syChapter = isSeferYetzirahDay ? SEFER_YETZIRAH_CHAPTERS[sef.dayNum - 2] : null;
+    // The seven daily texts rotate through all 52 weeks — no end-of-year
+    // override (Sefer Yetzirah remains only as the Keter Zohar cycle's seal).
 
     // Each KoT day = one daily text = one KoT Book
     // Shown on card face: today's text name + book label + first content line
@@ -11871,20 +11861,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       return mapping;
     }
 
-    document.getElementById('malchut-cycle-name').textContent = isSeferYetzirahDay
-      ? `Day ${sef.dayNum} · End of Year`
-      : `Day ${sef.dayNum} · ${malTxt.day}`;
-    
+    document.getElementById('malchut-cycle-name').textContent = `Day ${sef.dayNum} · ${malTxt.day}`;
+
     // Get parasha-specific portion if available — use actual Torah reading, not WEEKLY_BOOKS parasha
     const actualParasha = (window.getParashaForDate && window.getParashaForDate(date)) || wk.parasha;
     const parashaMapping = getParashaMapping(malTxt.name, actualParasha);
     let mainText, subText;
-    if (isSeferYetzirahDay) {
-      mainText = `<strong>Sefer Yetzirah</strong> — Chapter ${syChapter.ch}`;
-      subText  = `R. Avraham bar Chiyya / R. Saadiah Gaon / Various`;
-      subText += `<br><span style="font-size:10px;color:var(--ink-dim);font-style:italic;font-weight:400">${syChapter.theme}</span>`;
-      subText += SEFARIA_LINK(`https://www.sefaria.org/Sefer_Yetzirah.${syChapter.ch}`);
-    } else {
+    {
       const displayName = malTxt.name;
       if (parashaMapping._skipPrefix && parashaMapping.portion) {
         mainText = `<strong>${parashaMapping.portion}</strong>`;
@@ -12016,12 +11999,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // Detail panel: today's entry highlighted, then full weekly context
     const DAYS_LABELS = ['Friday','Shabbat','Sunday','Monday','Tuesday','Wednesday','Thursday'];
-    const TEXTS  = ['Chidah (Zohar / Arizal)','Likutei Sichos and Toras Menachem','Kedushas Levi',
+    const TEXTS  = ['Arizal','Likutei Sichos and Toras Menachem','Kedushas Levi',
                     'Noam Elimelech','Tanya','Likutei Moharan','Mesilat Yesharim'];
-    // For the last week (week 52), days 2-7 display Sefer Yetzirah chapters 1-6
-    const displayTexts = (effectiveKotWeek === 52)
-      ? ['Chidah (Zohar / Arizal)', ...SEFER_YETZIRAH_CHAPTERS.map(c => `Sefer Yetzirah Ch. ${c.ch}`)]
-      : TEXTS;
+    const displayTexts = TEXTS;
 
     // Today's highlighted entry
     const todayMalTxt = getMalchutText(sef.dayNum);
@@ -12055,13 +12035,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const weekRows = DAY_BOOKS.map((db, i) => {
       const isCurrent = (i + 1) === sef.dayNum;
       const textName = displayTexts[i];
-      const syCh = (effectiveKotWeek === 52 && i >= 1) ? SEFER_YETZIRAH_CHAPTERS[i - 1] : null;
-
       let displayName = textName;
       let themeHTML = '';
-      if (syCh) {
-        themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${syCh.theme}</div>`;
-      } else {
+      {
         const mapping = getParashaMapping(textName, actualParasha);
         if (mapping.portion) {
           displayName += ` — ${mapping.portion}`;
