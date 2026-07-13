@@ -2529,6 +2529,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   let _lmDetailMain = '', _lmDetailMeta = '';
   let _oktDetailMain = '', _oktDetailMeta = '';
   let _ycDetailMain = '', _ycDetailMeta = '';
+  let _syDetailMain = '', _syDetailMeta = '';
 
   const MONTHS = ['January','February','March','April','May','June',
                   'July','August','September','October','November','December'];
@@ -7676,6 +7677,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Vayeilech': 'Vayeilech', 'Haazinu': 'Haazinu',
   };
 
+  // Sefer Yetzirah — one verse per parasha (Bereshit → VeZot HaBrachah), shown
+  // in the Hod slot on Shabbat, when Chok L'Yisrael has no daily Zohar portion.
+  // Keyed by parasha number (1–54); `ref` is the Sefer Yetzirah chapter:mishnah.
+  const SEFER_YETZIRAH_VERSES = {
+    1: { ref: '1:1', he: "בשלשים ושתים נתיבות פליאות חכמה חקק יה יהוה צבאות אלהי ישראל אלהים חיים ומלך עולם אל שדי רחום וחנון רם ונשא שוכן עד וקדוש שמו מרום וקדוש הוא וברא את עולמו בשלשה ספרים בספר וספר וספור:",
+      en: ['With 32 mystical paths of Wisdom','engraved Yah','the Lord of Hosts','the God of Israel','the living God','King of the universe','El Shaddai','Merciful and Gracious','High and Exalted','Dwelling in eternity','Whose name is Holy —','He is lofty and holy —','And He created His universe','with three books (Sepharim),','with text (Sepher)','with number (Sephar)','and with communication (Sippur).'] },
+    2: { ref: '1:2', he: "עשר ספירות בלי מה ועשרים ושתים אותיות יסוד שלש אמות ושבע כפולות ושתים עשרה פשוטות:",
+      en: ['Ten Sefirot of Nothingness','And 22 Foundation Letters:','Three Mothers,','Seven Doubles','And twelve Elementals.'] },
+    3: { ref: '1:3', he: "עשר ספירות בלימה במספר עשר אצבעות חמש כנגד חמש וברית יחיד מכוון באמצע במילת הלשון ובמילת המעור:",
+      en: ['Ten Sefirot of Nothingness','in the number of ten fingers','five opposite five','with a singular covenant','precisely in the middle','in the circumcision of the tongue','and in the circumcision of the membrum.'] },
+    4: { ref: '1:4', he: "עשר ספירות בלימה עשר ולא תשע עשר ולא אחת עשרה הבן בחכמה וחכם בבינה בחון בהם וחקור מהם והעמד דבר על בוריו והשב יוצר על מכונו:",
+      en: ['Ten Sefirot of Nothingness','ten and not nine','ten and not eleven','Understand with Wisdom','Be wise with Understanding','Examine with them','and probe from them','Make [each] thing stand on its essence','And make the Creator sit on His base.'] },
+    5: { ref: '1:5', he: "עשר ספירות בלימה מדתן עשר שאין להם סוף עומק ראשית ועומק אחרית עומק טוב ועומק רע עומק רום ועומק תחת עומק מזרח ועומק מערב עומק צפון ועומק דרום אדון יחיד אל מלך נאמן מושל בכולם ממעון קדשו עד עדי עד:",
+      en: ['Ten Sefirot of Nothingness:','Their measure is ten','which have no end','A depth of beginning','A depth of end','A depth of good','A depth of evil','A depth of above','A depth of below','A depth of east','A depth of west','A depth of north','A depth of south','The singular Master','God faithful King','dominates over them all','from His holy dwelling','until eternity of eternities.'] },
+    6: { ref: '1:6', he: "עשר ספירות בלי מה צפייתן כמראה הבזק ותכליתן אין להם קץ ודברו בהן ברצוא ושוב ולמאמרו כסופה ירדופו ולפני כסאו הם משתחוים:",
+      en: ['Ten Sefirot of Nothingness','Their vision is like the "appearance of lightning"','Their limit has no end','And His Word in them is "running and returning"','They rush to His saying like a whirlwind','And before His throne they prostrate themselves.'] },
+  };
+
   // 0-indexed absolute folio count across the whole Zohar -> { book, folio }
   function resolveZoharFolio(cumIdx) {
     let offset = 0;
@@ -10611,6 +10630,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     (() => {
       const pName = (window.getParashaForDate && window.getParashaForDate(date)) || null;
       _hodParashaZoharLabel = pName ? `Parashat ${pName}` : 'Zohar';
+      // On Shabbat, Chok L'Yisrael has no daily Zohar portion — the Hod slot
+      // instead carries the week's Sefer Yetzirah verse (one per parasha).
+      const _syVerse = (date.getDay() === 6 && _zoharParashaNum) ? SEFER_YETZIRAH_VERSES[_zoharParashaNum] : null;
+      if (_syVerse) {
+        const _syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${_syVerse.ref.replace(':', '.')}`;
+        _syDetailMain =
+          `<div dir="rtl" style="font-size:1.05rem;line-height:1.95;margin-bottom:12px;">${_syVerse.he}</div>` +
+          `<div style="line-height:1.7;">${_syVerse.en.join('<br>')}</div>`;
+        _syDetailMeta = `<a href="${_syUrl}" target="_blank" style="color:var(--gold)">Sefer Yetzirah ${_syVerse.ref} on Sefaria</a>`;
+        const _syFace = document.getElementById('hod-zohar-face');
+        if (_syFace) _syFace.innerHTML = `<strong>Sefer Yetzirah</strong> — <span onclick="openSeferYetzirahModal()" style="cursor:pointer;color:var(--gold)">${_syVerse.ref}${pName ? ' · Parashat ' + pName : ''}</span>`;
+        return;
+      }
       const parts = pName ? pName.split('-').map(p => p.trim()) : [];
       if (_chabadZoharUrl && _chabadZoharUrl2) {
         _hodParashaZoharMainHtml =
@@ -12320,6 +12352,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function openYomChazakModal() {
     openInfoPopup('Strong Day — יום חזק', _ycDetailMain, _ycDetailMeta);
+  }
+
+  function openSeferYetzirahModal() {
+    openInfoPopup('Sefer Yetzirah — ספר יצירה', _syDetailMain, _syDetailMeta);
   }
 
   function applyDatePickerJump() {
