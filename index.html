@@ -11735,10 +11735,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
         // The Zohar divided by parasha, and its insight, travel with the
         // Ramchal — Rashbi's heir. The classic Zohar has no section for some
-        // parshiyot (e.g. Devarim), so we link only where one genuinely
-        // exists; the insight (when authored) shows regardless.
+        // parshiyot (e.g. Devarim); where a section exists we deep-link to it,
+        // otherwise we fall back to the general Zohar index so the link always
+        // works. The insight (when authored) shows regardless.
         const zSection = ZOHAR_PARASHA_SECTIONS[parashaName];
-        if (zSection) mapping._zoharLink = `https://www.sefaria.org/Zohar%2C_${zSection}?lang=bi`;
+        mapping._zoharLink = zSection
+          ? `https://www.sefaria.org/Zohar%2C_${zSection}?lang=bi`
+          : 'https://www.sefaria.org/Zohar?lang=bi';
         const zoharInsight = MALCHUT_PARASHA_MAPPINGS.zoharThemes[parashaNum];
         if (zoharInsight) mapping._zoharInsight = zoharInsight;
       }
