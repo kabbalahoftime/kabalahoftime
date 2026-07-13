@@ -11966,30 +11966,43 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (todayMalTxt.secondaryName) {
       todayTextDisplay += ` & ${todayMalTxt.secondaryName}`;
     }
-    // The Zohar divided by parasha travels with today's text (Mesilat Yesharim
-    // on Thursday). In the Today's Reading card it sits inline with the day
-    // label — Thursday · Zohar — with Mesilat Yesharim dropping to the line
-    // below (a full-width flex break forces the wrap).
-    const zoharInline = (parashaMapping._zoharLink || parashaMapping._zoharInsight)
-      ? `<span style="font-size:12px;font-weight:600;font-family:serif;color:var(--gold);">` +
+    // Today's Reading: the day label sits to the left; the Zohar (paired with
+    // Mesilat Yesharim), the text with its chapter/parshiyot, and its theme
+    // stack in a left-aligned column beside it, so the Zohar and Mesilat
+    // Yesharim line up.
+    let todayNameLine = displayTexts[todayIdx];
+    if (parashaMapping.portion) {
+      todayNameLine += ` — ${parashaMapping.portion}`;
+      if (parashaMapping.parshiyot) todayNameLine += ` (${parashaMapping.parshiyot.join(' / ')})`;
+    }
+    if (todayMalTxt.secondaryName) todayNameLine += ` & ${todayMalTxt.secondaryName}`;
+    const todayThemeHtml = (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]'))
+      ? `<div style="font-size:11px;color:var(--ink-dim);font-style:italic;font-weight:400;">${parashaMapping.theme}</div>`
+      : '';
+    const zoharLineHtml = (parashaMapping._zoharLink || parashaMapping._zoharInsight)
+      ? `<div style="font-size:12px;font-weight:600;font-family:serif;color:var(--gold);">` +
           (parashaMapping._zoharLink
             ? `<a href="${parashaMapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar · Parashat ${actualParasha}</a>`
             : `Zohar`) +
           (parashaMapping._zoharInsight ? `<span style="font-weight:400;font-style:italic;color:var(--ink-dim);"> — ${parashaMapping._zoharInsight}</span>` : '') +
-        `</span>` +
-        `<div style="flex-basis:100%;height:0;"></div>`
+        `</div>`
       : '';
+    const todayBookLabelHtml =
+      (todayBook.url
+        ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span></a>`
+        : `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>`) +
+      (todayBook.weekUrl ? ` &nbsp;<a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.82em">This Week</a>` : '');
     const todayRow = `<div class="mal-today-highlight">` +
       `<div class="mal-today-badge">★ Today's Reading</div>` +
       `<div class="mal-book-row mal-today">` +
-        `<div class="mal-book-header">` +
+        `<div class="mal-book-header" style="flex-wrap:nowrap;align-items:baseline;">` +
           `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
-          zoharInline +
-          `<span class="mal-text-name">${todayTextDisplay}</span>` +
-          (todayBook.url
-            ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span></a>`
-            : `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>`) +
-          (todayBook.weekUrl ? ` &nbsp;<a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.82em">This Week</a>` : '') +
+          `<div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;">` +
+            zoharLineHtml +
+            `<span class="mal-text-name" style="flex:none;">${todayNameLine}</span>` +
+            todayThemeHtml +
+            `<div>${todayBookLabelHtml}</div>` +
+          `</div>` +
         `</div>` +
         `<div class="mal-fields">${todayFieldLines}</div>` +
       `</div>` +
