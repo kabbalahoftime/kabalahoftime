@@ -7676,7 +7676,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Bamidbar': 'Bamidbar', 'Nasso': 'Nasso', 'Behaalotecha': 'Behaalotcha',
     'Shlach': 'Shelach', 'Korach': 'Korach', 'Chukat-Balak': 'Chukat',
     'Pinchas': 'Pinchas', 'Matot-Masei': 'Matot',
-    'Devarim': 'Devarim', 'Vaetchanan': 'Vaetchanan', 'Eikev': 'Eikev',
+    'Vaetchanan': 'Vaetchanan', 'Eikev': 'Eikev',
     "Re'eh": 'Reeh', 'Shoftim': 'Shoftim', 'Ki Teitzei': 'Ki_Teitzei',
     'Ki Tavo': 'Ki_Tavo', 'Nitzavim-Vayeilech': 'Nitzavim',
     'Vayeilech': 'Vayeilech', 'Haazinu': 'Haazinu',
@@ -11738,7 +11738,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           mapping.parshiyot = entry.parshiyot;
           mapping.theme = entry.theme;
         }
-        // The week's Zohar insight travels with the Ramchal — Rashbi's heir
+        // The Zohar divided by parasha, and its insight, travel with the
+        // Ramchal — Rashbi's heir. The classic Zohar has no section for some
+        // parshiyot (e.g. Devarim), so we link only where one genuinely
+        // exists; the insight (when authored) shows regardless.
+        const zSection = ZOHAR_PARASHA_SECTIONS[parashaName];
+        if (zSection) mapping._zoharLink = `https://www.sefaria.org/Zohar%2C_${zSection}?lang=bi`;
         const zoharInsight = MALCHUT_PARASHA_MAPPINGS.zoharThemes[parashaNum];
         if (zoharInsight) mapping._zoharInsight = zoharInsight;
       }
@@ -11829,8 +11834,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]')) {
         subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
       }
-      if (parashaMapping._zoharInsight) {
-        subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400"><span style="color:var(--gold-mid)">Zohar — </span>${parashaMapping._zoharInsight}</span>`;
+      if (parashaMapping._zoharLink || parashaMapping._zoharInsight) {
+        const zLabel = parashaMapping._zoharLink
+          ? `<a href="${parashaMapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar · Parashat ${actualParasha}</a>`
+          : `<span style="color:var(--gold-mid)">Zohar</span>`;
+        subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400">${zLabel}${parashaMapping._zoharInsight ? ' — ' + parashaMapping._zoharInsight : ''}</span>`;
       }
       if (malchutUrl && customLabel) {
         subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${customLabel}</a>`;
@@ -11989,8 +11997,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         if (mapping.theme && !mapping.theme.includes('[To be mapped]')) {
           themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${mapping.theme}</div>`;
         }
-        if (mapping._zoharInsight) {
-          themeHTML += `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:2px;font-weight:400;"><span style="color:var(--gold-mid)">Zohar — </span>${mapping._zoharInsight}</div>`;
+        if (mapping._zoharLink || mapping._zoharInsight) {
+          const zLbl = mapping._zoharLink
+            ? `<a href="${mapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar</a>`
+            : `<span style="color:var(--gold-mid)">Zohar</span>`;
+          themeHTML += `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:2px;font-weight:400;">${zLbl}${mapping._zoharInsight ? ' — ' + mapping._zoharInsight : ''}</div>`;
         }
         // Sefaria link for this text
         const rowUrl = malchutSeferiaUrl(textName, mapping);
