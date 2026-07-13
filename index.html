@@ -11828,15 +11828,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           }
         }
       }
+      // The Zohar (paired with Mesilat Yesharim) leads the card at the same
+      // size as Mesilat Yesharim, sitting just before it.
+      if (parashaMapping._zoharLink) {
+        mainText = `<a href="${parashaMapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar · Parashat ${actualParasha}</a><br>` + mainText;
+      }
       subText = parashaMapping._zoharUrl ? `` : `${malTxt.author}`;
       if (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]')) {
         subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
       }
-      if (parashaMapping._zoharLink || parashaMapping._zoharInsight) {
-        const zLabel = parashaMapping._zoharLink
-          ? `<a href="${parashaMapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar · Parashat ${actualParasha}</a>`
-          : `<span style="color:var(--gold-mid)">Zohar</span>`;
-        subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400">${zLabel}${parashaMapping._zoharInsight ? ' — ' + parashaMapping._zoharInsight : ''}</span>`;
+      // The Zohar link now leads the card above; keep only its insight here.
+      if (parashaMapping._zoharInsight) {
+        subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400"><span style="color:var(--gold-mid)">Zohar</span> — ${parashaMapping._zoharInsight}</span>`;
       }
       if (malchutUrl && customLabel) {
         subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${customLabel}</a>`;
@@ -11964,18 +11967,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       todayTextDisplay += ` & ${todayMalTxt.secondaryName}`;
     }
     // The Zohar divided by parasha travels with today's text (Mesilat Yesharim
-    // on Thursday) — mirror the card face here in the detail's Today's Reading.
+    // on Thursday) — mirror the card face: it leads at Mesilat Yesharim's size,
+    // just before it.
     const todayZoharHtml = (parashaMapping._zoharLink || parashaMapping._zoharInsight)
-      ? `<div style="font-size:11px;color:var(--ink-dim);font-style:italic;margin-top:4px;font-weight:400;">` +
+      ? `<div style="font-size:12px;font-weight:600;font-family:serif;color:var(--gold);padding:8px 12px 0;">` +
           (parashaMapping._zoharLink
             ? `<a href="${parashaMapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar · Parashat ${actualParasha}</a>`
-            : `<span style="color:var(--gold-mid)">Zohar</span>`) +
-          (parashaMapping._zoharInsight ? ' — ' + parashaMapping._zoharInsight : '') +
+            : `Zohar`) +
+          (parashaMapping._zoharInsight ? `<span style="font-weight:400;font-style:italic;color:var(--ink-dim);"> — ${parashaMapping._zoharInsight}</span>` : '') +
         `</div>`
       : '';
     const todayRow = `<div class="mal-today-highlight">` +
       `<div class="mal-today-badge">★ Today's Reading</div>` +
       `<div class="mal-book-row mal-today">` +
+        todayZoharHtml +
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
           `<span class="mal-text-name">${todayTextDisplay}</span>` +
@@ -11984,7 +11989,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             : `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>`) +
           (todayBook.weekUrl ? ` &nbsp;<a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.82em">This Week</a>` : '') +
         `</div>` +
-        todayZoharHtml +
         `<div class="mal-fields">${todayFieldLines}</div>` +
       `</div>` +
       `</div>`;
