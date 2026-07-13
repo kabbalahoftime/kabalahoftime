@@ -1876,7 +1876,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael <span class="maalah yom" data-wane="4">מיעוט ד׳</span></div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
-      <div id="yesod-chok-english" style="font-size:0.88rem;margin-top:4px;"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Midrash</div>
       <div id="yesod-midrash-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
@@ -10496,18 +10495,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const _zoharParashaNum2 = _zoharParts.length > 1 ? PARASHA_TO_NUMBER[_zoharParts[1]] : null;
     const _chabadZoharUrl  = getChabadZoharUrl(_zoharParashaNum, date.getDay());
     const _chabadZoharUrl2 = _zoharParashaNum2 ? getChabadZoharUrl(_zoharParashaNum2, date.getDay()) : null;
-    // Chok L'Yisrael Zohar (English) — Chabad's English rendering of the Chok
-    // L'Yisrael Zohar portion, beside the Chok L'Yisrael section in Yesod.
-    // Six days a week (no Shabbat entry); both halves on a double parasha.
-    {
-      let _chokEnglishHtml = '';
-      if (_chabadZoharUrl) {
-        _chokEnglishHtml = `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">Chok L'Yisrael Zohar (English${_chabadZoharUrl2 ? ' · I' : ''})</a>`;
-        if (_chabadZoharUrl2) _chokEnglishHtml += ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">Chok L'Yisrael Zohar (English · II)</a>`;
-      }
-      const yce = document.getElementById('yesod-chok-english');
-      if (yce) yce.innerHTML = _chokEnglishHtml;
-    }
+    // (The Chok L'Yisrael Zohar (English) — _chabadZoharUrl — now surfaces as
+    // Hod's reliable daily Zohar; see the HOD block below.)
 
     // Midrash (Yesod card) — Midrash Rabbah (by chumash book) + Midrash Tanchuma
     // (parasha-specific, both halves of a double parasha) on the weekly parasha.
@@ -10618,36 +10607,28 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       }
     })();
 
-    // HOD — Zohar on the weekly parasha (moved from the Malchut Friday text):
-    // the same reading all week, following the Torah portion, with each half
-    // of a double parasha linked separately.
+    // HOD — Zohar following the weekly parasha, via the Chok L'Yisrael Zohar
+    // (Chabad's English daily Zohar). Reliable for all 54 parshiyot, unlike
+    // the classic Zohar's own parasha divisions — the Zohar simply doesn't
+    // comment on every parasha (e.g. Devarim), so those sections don't exist.
+    // Both halves link separately on a double parasha; on Shabbat (no daily
+    // entry) it opens the Chok L'Yisrael Zohar landing page.
     let _hodParashaZoharMainHtml = '', _hodParashaZoharLabel = '';
     (() => {
       const pName = (window.getParashaForDate && window.getParashaForDate(date)) || null;
-      const faceEl = document.getElementById('hod-zohar-face');
-      if (!pName) {
-        _hodParashaZoharLabel = 'Zohar';
-        _hodParashaZoharMainHtml = `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">Zohar on Sefaria</a>`;
+      _hodParashaZoharLabel = pName ? `Parashat ${pName}` : 'Zohar';
+      const parts = pName ? pName.split('-').map(p => p.trim()) : [];
+      if (_chabadZoharUrl && _chabadZoharUrl2) {
+        _hodParashaZoharMainHtml =
+          `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">${parts[0]}</a>` +
+          ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">${parts[1]}</a>`;
+      } else if (_chabadZoharUrl) {
+        _hodParashaZoharMainHtml = `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">${pName ? 'Parashat ' + pName : 'Daily Zohar'}</a>`;
       } else {
-        const parts = pName.split('-').map(p => p.trim());
-        _hodParashaZoharLabel = `Parashat ${pName}`;
-        if (parts.length > 1) {
-          const links = [];
-          for (const part of parts) {
-            const section = ZOHAR_PARASHA_SECTIONS[part];
-            if (section) links.push(`<a href="https://www.sefaria.org/Zohar%2C_${section}?lang=bi" target="_blank" style="color:var(--gold)">${part}</a>`);
-          }
-          _hodParashaZoharMainHtml = links.length
-            ? `Parashat ${pName} &nbsp;·&nbsp; ` + links.join(' &nbsp;·&nbsp; ')
-            : `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">Parashat ${pName}</a>`;
-        } else {
-          const section = ZOHAR_PARASHA_SECTIONS[pName];
-          _hodParashaZoharMainHtml = section
-            ? `<a href="https://www.sefaria.org/Zohar%2C_${section}?lang=bi" target="_blank" style="color:var(--gold)">Parashat ${pName}</a>`
-            : `<a href="https://www.sefaria.org/Zohar?tab=contents" target="_blank" style="color:var(--gold)">Parashat ${pName}</a>`;
-        }
+        _hodParashaZoharMainHtml = `<a href="${CHABAD_ZOHAR_FALLBACK}" target="_blank" style="color:var(--gold)">${pName ? 'Parashat ' + pName : "Chok L'Yisrael Zohar"}</a>`;
       }
-      if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong> — ${_hodParashaZoharMainHtml}`;
+      const faceEl = document.getElementById('hod-zohar-face');
+      if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong> — ${_hodParashaZoharMainHtml} <span style="color:var(--ink-dim);font-size:0.72em">· Chok L'Yisrael (English)</span>`;
     })();
 
     // 5. Hayom Yom — the full teaching lives in the detail section
@@ -11566,7 +11547,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     const hodZoharHtml =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar</div>` +
-      `<div style="font-size:0.88rem;margin-bottom:10px;">${_hodParashaZoharMainHtml} <span style="color:var(--ink-dim);font-size:0.85em;">— R. Shimon bar Yochai · on the weekly parasha</span></div>` +
+      `<div style="font-size:0.88rem;margin-bottom:10px;">${_hodParashaZoharMainHtml} <span style="color:var(--ink-dim);font-size:0.85em;">— R. Shimon bar Yochai · Chok L'Yisrael Zohar (English)</span></div>` +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
 
     const hodChazarahHtml =
