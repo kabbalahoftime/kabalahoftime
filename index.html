@@ -1659,12 +1659,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="keter-main" id="keter-rambam-shm-main">Loading…</div>
     <div class="keter-meta" id="keter-rambam-shm-titles"></div>
   </div>
-  <!-- HAYOM YOM section — today's teaching in full -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Hayom Yom</div>
-    <div class="keter-main" id="keter-hy-quote">Loading…</div>
-    <div class="keter-meta" id="keter-hy-link"></div>
-  </div>
   <!-- DVAR MALCHUS & CHAYENU section -->
   <div class="keter-section">
     <div class="keter-section-label">✦ Dvar Malchus &amp; Chayenu</div>
@@ -10631,14 +10625,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong> — ${_hodParashaZoharMainHtml}`;
     })();
 
-    // 5. Hayom Yom — the full teaching lives in the detail section
+    // Hayom Yom: the visible Keter-detail section was removed, but the text is
+    // still carried in the data (hayomYomText) for the narrative/popup.
     const hyText = getHayomYom(hMonth, hDay);
-    document.getElementById('keter-hy-quote').innerHTML =
-      hyText ? `"${hyText}"`
-             : `<a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">View today's Hayom Yom</a>`;
-    document.getElementById('keter-hy-link').innerHTML =
-      `<a href="${chabadBaseURL}/hayomyom.asp?tdate=${chabadDate}" target="_blank" style="color:var(--gold)">Hayom Yom — Chabad.org daily</a>` +
-      ` <span style="color:var(--ink-mid)">— a daily Chassidic teaching, compiled by the Rebbe</span>`;
 
     // 6. Likutei Moharan — Hebrew-date-pegged lesson (Keter summary + popup)
     // Every LM_DAILY_CYCLE entry names a specific Hebrew date, so lookup is by
