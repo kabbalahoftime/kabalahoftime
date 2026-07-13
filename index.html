@@ -11967,22 +11967,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       todayTextDisplay += ` & ${todayMalTxt.secondaryName}`;
     }
     // The Zohar divided by parasha travels with today's text (Mesilat Yesharim
-    // on Thursday) — mirror the card face: it leads at Mesilat Yesharim's size,
-    // just before it.
-    const todayZoharHtml = (parashaMapping._zoharLink || parashaMapping._zoharInsight)
-      ? `<div style="font-size:12px;font-weight:600;font-family:serif;color:var(--gold);padding:8px 12px 0;">` +
+    // on Thursday). In the Today's Reading card it sits inline with the day
+    // label — Thursday · Zohar — with Mesilat Yesharim dropping to the line
+    // below (a full-width flex break forces the wrap).
+    const zoharInline = (parashaMapping._zoharLink || parashaMapping._zoharInsight)
+      ? `<span style="font-size:12px;font-weight:600;font-family:serif;color:var(--gold);">` +
           (parashaMapping._zoharLink
             ? `<a href="${parashaMapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar · Parashat ${actualParasha}</a>`
             : `Zohar`) +
           (parashaMapping._zoharInsight ? `<span style="font-weight:400;font-style:italic;color:var(--ink-dim);"> — ${parashaMapping._zoharInsight}</span>` : '') +
-        `</div>`
+        `</span>` +
+        `<div style="flex-basis:100%;height:0;"></div>`
       : '';
     const todayRow = `<div class="mal-today-highlight">` +
       `<div class="mal-today-badge">★ Today's Reading</div>` +
       `<div class="mal-book-row mal-today">` +
-        todayZoharHtml +
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
+          zoharInline +
           `<span class="mal-text-name">${todayTextDisplay}</span>` +
           (todayBook.url
             ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span></a>`
