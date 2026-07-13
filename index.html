@@ -1841,9 +1841,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Mincha</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Zohar — Chok L'Yisrael <span class="maalah">מעלה י׳</span></span><span style="display:block">Shulchan Aruch <span class="maalah">מעלה י״א</span></span></div>
-    <div id="hod-zohar-face" class="sefirah-main-text" style="margin-bottom:6px;">Loading…</div>
-    <div id="hod-sa-face" class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Shulchan Aruch <span class="maalah">מעלה י׳</span></span><span style="display:block">Zohar — Chok L'Yisrael <span class="maalah">מעלה י״א</span></span></div>
+    <div id="hod-sa-face" class="sefirah-main-text" style="margin-bottom:6px;">Loading…</div>
+    <div id="hod-zohar-face" class="sefirah-main-text">Loading…</div>
     <div class="sefirah-sub-text" style="display:none;"></div>
     <div class="sefirah-tags"></div>
     <div class="sefirah-detail"></div>
@@ -11811,10 +11811,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // on the six weekdays, Sefer Yetzirah on Shabbat.
     const _hodSY = date.getDay() === 6 && _zoharParashaNum && SEFER_YETZIRAH_VERSES[_zoharParashaNum];
     document.getElementById('hod-cycle-name').innerHTML =
+      '<span style="display:block">Shulchan Aruch <span class="maalah">מעלה י׳</span></span>' +
       (_hodSY
-        ? '<span style="display:block">Sefer Yetzirah <span class="maalah">מעלה י׳</span></span>'
-        : '<span style="display:block">Zohar — Chok L\'Yisrael <span class="maalah">מעלה י׳</span></span>') +
-      '<span style="display:block">Shulchan Aruch <span class="maalah">מעלה י״א</span></span>';
+        ? '<span style="display:block">Sefer Yetzirah <span class="maalah">מעלה י״א</span></span>'
+        : '<span style="display:block">Zohar — Chok L\'Yisrael <span class="maalah">מעלה י״א</span></span>');
 
     // (The Zohar shows on the Hod face; no need to repeat it in the detail.)
 
