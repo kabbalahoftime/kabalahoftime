@@ -11545,10 +11545,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar <span class="maalah">מעלה י׳</span></span><span style="display:block">Shulchan Aruch <span class="maalah">מעלה י״א</span></span>';
 
-    const hodZoharHtml =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Zohar</div>` +
-      `<div style="font-size:0.88rem;margin-bottom:10px;">${_hodParashaZoharMainHtml} <span style="color:var(--ink-dim);font-size:0.85em;">— R. Shimon bar Yochai · Chok L'Yisrael Zohar (English)</span></div>` +
-      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
+    // (The Zohar shows on the Hod face; no need to repeat it in the detail.)
 
     const hodChazarahHtml =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Talmud (Chazarah)</div>` +
@@ -11584,7 +11581,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
-        hodZoharHtml +
         hodChazarahHtml +
         hodCcHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
@@ -11605,7 +11601,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       document.getElementById('hod-sa-face').innerHTML =
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
-        hodZoharHtml +
         hodChazarahHtml +
         hodCcHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
