@@ -10628,7 +10628,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _hodParashaZoharMainHtml = `<a href="${CHABAD_ZOHAR_FALLBACK}" target="_blank" style="color:var(--gold)">${pName ? 'Parashat ' + pName : "Chok L'Yisrael Zohar"}</a>`;
       }
       const faceEl = document.getElementById('hod-zohar-face');
-      if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong> — ${_hodParashaZoharMainHtml} <span style="color:var(--ink-dim);font-size:0.72em">· Chok L'Yisrael (English)</span>`;
+      if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong> — ${_hodParashaZoharMainHtml}`;
     })();
 
     // 5. Hayom Yom — the full teaching lives in the detail section
@@ -11545,7 +11545,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     document.getElementById('hod-cycle-name').innerHTML = '<span style="display:block">Zohar <span class="maalah">מעלה י׳</span></span><span style="display:block">Shulchan Aruch <span class="maalah">מעלה י״א</span></span>';
 
-    // (The Zohar shows on the Hod face; no need to repeat it in the detail.)
+    // The Zohar shows on the Hod face; here in the detail we carry only its
+    // edition/sourcing note (Chok L'Yisrael, English) — not the path itself.
+    const hodZoharNoteHtml =
+      `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;margin-bottom:12px;">Zohar — via Chok L'Yisrael (English)</div>`;
 
     const hodChazarahHtml =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Talmud (Chazarah)</div>` +
@@ -11581,6 +11584,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodZoharNoteHtml +
         hodChazarahHtml +
         hodCcHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
@@ -11601,6 +11605,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       document.getElementById('hod-sa-face').innerHTML =
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
+        hodZoharNoteHtml +
         hodChazarahHtml +
         hodCcHtml +
         `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
