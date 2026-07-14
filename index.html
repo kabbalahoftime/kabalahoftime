@@ -10829,7 +10829,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // resolveZoharFolio takes a 0-indexed absolute folio count
         const si = resolveZoharFolio(cumFolios);
         const ei = resolveZoharFolio(cumFolios + todayFolios - 1);
-        const sefariaUrl = `https://www.sefaria.org/Zohar.${si.book.vol}.${si.folio}a`;
+        // Link the whole span (e.g. 162a–163b) so Sefaria bounds today's
+        // portion — the reader sees exactly where to stop. Same-volume only;
+        // a rare cross-volume day just links the start folio.
+        const sefariaUrl = (si.book.vol === ei.book.vol)
+          ? `https://www.sefaria.org/Zohar.${si.book.vol}.${si.folio}a-${ei.folio}b`
+          : `https://www.sefaria.org/Zohar.${si.book.vol}.${si.folio}a`;
         let label;
         if (si.book === ei.book) {
           label = si.folio === ei.folio
