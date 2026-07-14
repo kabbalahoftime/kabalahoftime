@@ -7755,12 +7755,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // ── ZOHAR FOLIO CALCULATOR ──
   // Mantua edition folio ranges by Torah book (each book resets to 1, except
   // Bamidbar/Dvarim which share Vol. 3 continuous numbering: 117-259 / 260-299)
+  // vol = the Zohar's three printed volumes on Sefaria (I=Bereshit, II=Shemot,
+  // III=Vayikra+Bamidbar+Devarim). folioStart values are the absolute daf
+  // numbers within each volume, so Sefaria refs are Zohar.<vol>.<folio>a.
   const ZOHAR_BOOKS = [
-    { name: 'Bereshit', sefaria: 'Bereshit', folios: 251, folioStart: 1   },
-    { name: 'Shemot',   sefaria: 'Shemot',   folios: 269, folioStart: 1   },
-    { name: 'Vayikra',  sefaria: 'Vayikra',  folios: 115, folioStart: 1   },
-    { name: 'Bamidbar', sefaria: 'Bamidbar', folios: 143, folioStart: 117 },
-    { name: 'Dvarim',   sefaria: 'Devarim',  folios: 40,  folioStart: 260 },
+    { name: 'Bereshit', sefaria: 'Bereshit', vol: 1, folios: 251, folioStart: 1   },
+    { name: 'Shemot',   sefaria: 'Shemot',   vol: 2, folios: 269, folioStart: 1   },
+    { name: 'Vayikra',  sefaria: 'Vayikra',  vol: 3, folios: 115, folioStart: 1   },
+    { name: 'Bamidbar', sefaria: 'Bamidbar', vol: 3, folios: 143, folioStart: 117 },
+    { name: 'Dvarim',   sefaria: 'Devarim',  vol: 3, folios: 40,  folioStart: 260 },
   ];
   const ZOHAR_TOTAL = 818; // 251 + 269 + 115 + 143 + 40
 
@@ -10826,7 +10829,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // resolveZoharFolio takes a 0-indexed absolute folio count
         const si = resolveZoharFolio(cumFolios);
         const ei = resolveZoharFolio(cumFolios + todayFolios - 1);
-        const sefariaUrl = `https://www.sefaria.org/Zohar,_${si.book.sefaria}.${si.folio}`;
+        const sefariaUrl = `https://www.sefaria.org/Zohar.${si.book.vol}.${si.folio}a`;
         let label;
         if (si.book === ei.book) {
           label = si.folio === ei.folio
