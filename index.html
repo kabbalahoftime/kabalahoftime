@@ -10377,8 +10377,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // ── GEVURAH: FOUR SEASONS — 4 × 91-Day Cycle (Ilan = 91 = Hashem 26 + Adni 65) ──
+  // Call with the day of the KoT year (1–364): dEff − d_year1 + 1, so the
+  // seasons share the main 52-week calendar's start date every year, and fold
+  // the leap year's four extra weeks exactly as Chesed/Gevurah/Hod do.
   function getSeasonInfo(d) {
-    const dN     = ((d - 1) % 364) + 1;        // safe wrap, 1–364
+    const dN     = (((d - 1) % 364) + 364) % 364 + 1; // safe wrap, 1–364
     const season = Math.ceil(dN / 91);          // 1–4
     const dayIn  = ((dN - 1) % 91) + 1;         // 1–91
     const weekIn = Math.ceil(dayIn / 7);        // 1–13
@@ -11564,7 +11567,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>` +
       ` &nbsp;·&nbsp; <a href="https://mechon-mamre.org/p/pt/ptmp3prq.htm" target="_blank" style="color:var(--gold);font-size:0.85em" title="Tanach audio — Mechon Mamre">Audio</a>`;
     document.getElementById('gevurah-sub').innerHTML = '';
-    const seasonInfo = getSeasonInfo(d);
+    const seasonInfo = getSeasonInfo(dEff - d_year1 + 1);
     document.getElementById('gevurah-tags').innerHTML =
       `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>` +
       `<span class="tag highlight">Season ${seasonInfo.season} · ${seasonInfo.name}</span>` +
