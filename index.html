@@ -2474,20 +2474,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     for (let c = 1; c <= chs; c++) MISHNA_FLAT.push([name, c]);
 
   // ── TOSEFTA DATA (52 weeks × 8 chapters = 416, days 6-7 of each KoT week) ──
+  // Chapter counts and order follow the original KoT calendar (5775): Demai 8,
+  // Eruvin 8, Yoma 4, Megillah 3 (before Moed Katan), Makkot 4, Me'ilah 3, no
+  // Tosefta Tamid, Kelim 7/11/7 = 25. Total = 421 chapters.
   const TOSEFTA_TRACTATES = [
-    ["Brachot",6],["Peah",4],["Demai",6],["Kilayim",5],["Shvi'it",8],
+    ["Brachot",6],["Peah",4],["Demai",8],["Kilayim",5],["Shvi'it",8],
     ["Trumot",10],["Maasrot",3],["Maaser Sheni",5],["Chalah",2],["Orlah",1],["Bikkurim",2],
-    ["Shabat",18],["Eruvin",11],["Pesachim",10],["Shekalim",3],["Yoma",5],
-    ["Sukkah",4],["Yom Tov",4],["Rosh Hashana",2],["Taanit",3],["Megillah",4],
-    ["Chagigah",3],["Moed Katan",2],
+    ["Shabat",18],["Eruvin",8],["Pesachim",10],["Shekalim",3],["Yoma",4],
+    ["Sukkah",4],["Yom Tov",4],["Rosh Hashana",2],["Taanit",3],["Megillah",3],
+    ["Moed Katan",2],["Chagigah",3],
     ["Yevamot",14],["Ketubot",12],["Nedarim",7],["Nazir",6],
     ["Sotah",15],["Gittin",7],["Kiddushin",5],
     ["Bava Kama",11],["Bava Metzia",11],["Bava Batra",11],
-    ["Sanhedrin",14],["Makkot",5],["Shvuot",6],["Eduyot",3],
+    ["Sanhedrin",14],["Makkot",4],["Shvuot",6],["Eduyot",3],
     ["Avodah Zarah",9],["Horayot",2],
     ["Zevachim",13],["Menachot",13],["Chulin",10],["Bechorot",7],
-    ["Erchin",5],["Temurah",4],["Keritut",4],["Me'ilah",2],["Tamid",3],
-    ["Kelim Bava Kama",6],["Kelim Bava Metzia",6],["Kelim Bava Batra",8],
+    ["Erchin",5],["Temurah",4],["Keritut",4],["Me'ilah",3],
+    ["Kelim Bava Kama",7],["Kelim Bava Metzia",11],["Kelim Bava Batra",7],
     ["Ohalot",18],["Nega'im",9],["Parah",12],["Taharot",11],
     ["Mikva'ot",8],["Niddah",9],["Machshirim",3],["Zavim",5],
     ["Tevul Yom",2],["Yadayim",2],["Uktzin",3]
@@ -2522,15 +2525,41 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   for (const [name, chs] of TANACH_TRACTATES)
     for (let c = 1; c <= chs; c++) TANACH_FLAT.push([name, c]);
 
+  // Chapters per Tosefta day (104 days = 52 weeks × 2), per the original KoT
+  // calendar: normally 4, with hand-placed adjustment days — day 29 (Megillah 3,
+  // Moed Katan 1-2, Chagigah 1-2), days 51-52 (8 each: Bava Metzia and Bava
+  // Batra cleared before 1 Nisan), day 68 (Menachot 10-13 & Chulin 1), day 97
+  // (Mikva'ot 6-8 & Niddah 1-2), and the Week-52 finale: day 103 carries no
+  // Tosefta (the Mishnah finishes Yadayim 4 & Uktzin 1 there) and day 104 seals
+  // both — Mishnah Uktzin 2-3 with Tosefta Uktzin 2-3. Sum = 421 = all chapters.
+  const TOSEFTA_DAY_CHAPTERS = (() => {
+    const c = new Array(104).fill(4);
+    c[28] = 5; c[50] = 8; c[51] = 8; c[67] = 5; c[96] = 5; c[102] = 0; c[103] = 2;
+    return c;
+  })();
+  const TOSEFTA_DAY_START = (() => {
+    const s = [0];
+    for (let i = 0; i < 103; i++) s.push(s[i] + TOSEFTA_DAY_CHAPTERS[i]);
+    return s;
+  })();
+  // Render a run of [tractate, chapter] pairs as "Book a, b & Book2 c, d"
+  function chapterRunHtml(chs, prefix) {
+    const parts = [];
+    for (const [book, ch] of chs) {
+      const last = parts[parts.length - 1];
+      if (last && last.book === book) last.chs.push(ch);
+      else parts.push({ book, chs: [ch] });
+    }
+    return parts.map(p => `${prefix}<strong>${p.book}</strong> ${p.chs.join(', ')}`).join(' &amp; ');
+  }
   function getMishnaInfo(d) {
     d = Math.max(1, d); // cycle begins at the epoch; dates before it have no defined cycle/day
-    const dayNum = (d % 7 == 0) ? 7 : d % 7;
-    const week   = (d % 7 == 0) ? Math.floor(d/7) : Math.floor(d/7) + 1;
-    const day    = dayNum;
+    const dN   = ((d - 1) % 364) + 1;   // 364-day cycle, 52 weeks exactly
+    const week = Math.ceil(dN / 7);
+    const day  = dN - (week - 1) * 7;
     if (day <= 5) {
-      // Mishna: days 1-5, 2 chapters per day
-      const weeksComplete = week - 1;
-      const mishnaDayNum = weeksComplete * 5 + day;
+      // Mishna: days 1-5, 2 chapters per day (Brachot 1 through Yadayim 3)
+      const mishnaDayNum = (week - 1) * 5 + day;
       const idx = (mishnaDayNum - 1) * 2;
       const ch1 = MISHNA_FLAT[idx % MISHNA_FLAT.length];
       const ch2 = MISHNA_FLAT[(idx + 1) % MISHNA_FLAT.length];
@@ -2545,26 +2574,43 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         tag1: ch1[0], tag2: `Week ${week} · Day ${day}`,
         seferiaUrl: `https://www.sefaria.org/Mishnah_${mishnaSlug(ch1[0])}.${ch1[1]}`
       };
-    } else {
-      // Tosefta: days 6-7, 4 chapters per day
-      const weeksComplete = week - 1;
-      const toseftaDayNum = weeksComplete * 2 + (day - 5); // 1 or 2
-      const idx = (toseftaDayNum - 1) * 4;
-      const chs = [0,1,2,3].map(i => TOSEFTA_FLAT[(idx+i) % TOSEFTA_FLAT.length]);
-      // Group by tractate
-      const first = chs[0], last = chs[3];
-      const sameBook = chs.every(c => c[0] === first[0]);
+    }
+    const toseftaDayNum = (week - 1) * 2 + (day - 5); // 1..104
+    if (toseftaDayNum === 103) {
+      // Week 52, day 6 — the Mishnah's own finale: Yadayim 4 & Uktzin 1
+      return {
+        type: 'mishna',
+        week, day,
+        text: `<strong>Yadayim</strong> 4 &amp; <strong>Uktzin</strong> 1`,
+        sub: `Seder Taharot · the Mishnah's final chapters`,
+        tag1: 'Yadayim', tag2: `Week ${week} · Day ${day}`,
+        seferiaUrl: `https://www.sefaria.org/Mishnah_Yadayim.4`
+      };
+    }
+    if (toseftaDayNum === 104) {
+      // Week 52, day 7 — both seal together: Mishnah & Tosefta Uktzin 2-3
       return {
         type: 'tosefta',
         week, day,
-        text: sameBook
-          ? `Tosefta <strong>${first[0]}</strong> ${chs.map(c=>c[1]).join(', ')}`
-          : `Tosefta <strong>${first[0]}</strong> ${first[1]}–… &amp; <strong>${last[0]}</strong> …${last[1]}`,
-        sub: `Seder ${getMishnaSeder(TOSEFTA_SEDER_LOOKUP_NAME[first[0]] || first[0])}`,
-        tag1: 'Tosefta · ' + first[0], tag2: `Week ${week} · Day ${day}`,
-        seferiaUrl: `https://www.sefaria.org/Tosefta_${toseftaSlug(first[0])}.${first[1]}`
+        text: `<strong>Uktzin</strong> 2 & 3 &nbsp;·&nbsp; Tosefta <strong>Uktzin</strong> 2, 3`,
+        sub: `Seder Taharot · Mishnah and Tosefta seal the year together`,
+        tag1: 'Uktzin', tag2: `Week ${week} · Day ${day}`,
+        seferiaUrl: `https://www.sefaria.org/Mishnah_Uktzin.2`
       };
     }
+    const count = TOSEFTA_DAY_CHAPTERS[toseftaDayNum - 1];
+    const start = TOSEFTA_DAY_START[toseftaDayNum - 1];
+    const chs = [];
+    for (let i = 0; i < count; i++) chs.push(TOSEFTA_FLAT[(start + i) % TOSEFTA_FLAT.length]);
+    const first = chs[0];
+    return {
+      type: 'tosefta',
+      week, day,
+      text: chapterRunHtml(chs, 'Tosefta '),
+      sub: `Seder ${getMishnaSeder(TOSEFTA_SEDER_LOOKUP_NAME[first[0]] || first[0])}`,
+      tag1: 'Tosefta · ' + first[0], tag2: `Week ${week} · Day ${day}`,
+      seferiaUrl: `https://www.sefaria.org/Tosefta_${toseftaSlug(first[0])}.${first[1]}`
+    };
   }
 
   function getMishnaSeder(tractate) {
@@ -11521,7 +11567,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       clbVideo2 = CARLEBACH_GENERAL[(_clbFb + 1) % CARLEBACH_GENERAL.length];
     }
 
-    const mishnaInfo = getMishnaInfo(dEff);
+    // Keyed to the day of the KoT year (like Tanach and the Four Seasons), so
+    // Brachot 1 always opens Week 1 Day 1 of each new year.
+    const mishnaInfo = getMishnaInfo(dEff - d_year1 + 1);
     document.getElementById('chesed-cycle-name').innerHTML =
       (mishnaInfo.type === 'mishna' ? 'Mishna — Oral Torah' : 'Tosefta — Expanded Oral Torah') + ' <span class="maalah">מעלה ו׳</span>';
     document.getElementById('chesed-main').innerHTML = mishnaInfo.seferiaUrl
