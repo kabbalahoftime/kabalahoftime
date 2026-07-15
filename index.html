@@ -1469,6 +1469,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Keter down to Malchut) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
         <li style="margin-bottom:0.7em;">Then climb back: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Malchut up to Keter — the moon wanes as you ascend, completing a month in a single day.</li>
         <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
+        <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✧</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, who accompany the day but are never counted.</li>
         <li style="margin-bottom:0.7em;">Badges like "Week 40 · Day 4" show where you are in that section's own cycle; the linked title beside them opens the full source text.</li>
         <li>Fixed Hours vs. Sha'ot Zmaniyot switches the day's sefirah-times between standard clock hours and halachic "proportional hours" for your chosen city.</li>
       </ul>
@@ -1588,7 +1589,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-main-text" id="keter-daily-zohar"></div>
     <div class="sefirah-main-text" id="keter-lm-main" style="margin-top:4px;">Loading…</div>
     <div class="malchut-ksa-row" style="margin-top:10px">
-      <div class="keter-section-label">✦ KoT Book</div>
+      <div class="keter-section-label">✧ KoT Book</div>
       <div><a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a> &nbsp;·&nbsp; <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button></div>
     </div>
   </div>
@@ -1615,12 +1616,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <!-- PARASHA & HAFTORAH RECORDINGS section (moved from the face) -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Parasha &amp; Haftorah Recordings</div>
+    <div class="keter-section-label">✧ Parasha &amp; Haftorah Recordings</div>
     <div class="keter-meta" id="keter-kst-meta"></div>
   </div>
   <!-- TREASURY OF CHASSIDIC TALES section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Treasury of Chassidic Tales</div>
+    <div class="keter-section-label">✧ Treasury of Chassidic Tales</div>
     <div class="keter-main" id="keter-treasury-main">Loading…</div>
     <div class="keter-meta" id="keter-treasury-meta"></div>
   </div>
@@ -1633,7 +1634,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <!-- TEHILLIM section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Tehillim</div>
+    <div class="keter-section-label">✧ Tehillim</div>
     <div class="keter-main" id="keter-tehillim-main">Loading…</div>
     <div class="keter-meta" id="keter-tehillim-meta"></div>
   </div>
@@ -1661,7 +1662,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <!-- DVAR MALCHUS & CHAYENU section -->
   <div class="keter-section">
-    <div class="keter-section-label">✦ Dvar Malchus &amp; Chayenu</div>
+    <div class="keter-section-label">✧ Dvar Malchus &amp; Chayenu</div>
     <div class="keter-main"><a href="https://www.dvarmalchus.org/" target="_blank" style="color:var(--gold)">Dvar Malchus</a> &nbsp;·&nbsp; <a href="https://chayenu.org/" target="_blank" style="color:var(--gold)">Chayenu</a></div>
   </div>
 </div>
@@ -1713,7 +1714,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-sub-text" id="chochmah-sub"></div>
     <div class="sefirah-tags" id="chochmah-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label">✦ KoT Book</div>
+      <div class="keter-section-label">✧ KoT Book</div>
       <div id="chochmah-kot-book">Loading…</div>
     </div>
     <div class="sefirah-detail" id="chochmah-detail"></div>
@@ -1736,7 +1737,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-sub-text" id="binah-sub"></div>
     <div class="sefirah-tags" id="binah-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label">✦ KoT Book</div>
+      <div class="keter-section-label">✧ KoT Book</div>
       <div id="binah-kot-book">Loading…</div>
     </div>
     <div class="sefirah-detail" id="binah-detail"></div>
@@ -1871,21 +1872,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Midrash</div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Midrash</div>
       <div id="yesod-midrash-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-midrash-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ben Ish Chai</div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Ben Ish Chai</div>
       <div id="yesod-bic-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-bic-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Hida</div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Daily Hida</div>
       <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-hida-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div id="yesod-parasha-cycle"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.chabad.org/library/article_cdo/aid/6277697/jewish/Likkutei-Dibburim.htm" target="_blank" style="color:var(--gold)">Likkutei Dibburim — Chabad.org</a></div>
     </div>
   </div>
@@ -2388,7 +2389,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       </div>
       <!-- KSA row — Arich Anpin -->
       <div class="malchut-ksa-row" style="margin-bottom:14px;">
-        <div class="keter-section-label">✦ Kitzur Shulchan Aruch</div>
+        <div class="keter-section-label">✧ Kitzur Shulchan Aruch</div>
         <div id="malchut-ksa-bottom">Loading…</div>
       </div>
       <div id="malchut-detail">
@@ -11306,7 +11307,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
        ` :
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Day ${chDay} of 364 <span class="maalah yom" data-wane="12">מיעוט י״ב</span></div>
@@ -11413,10 +11414,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // Rav Arush series rotation — 91 classes × 4 days = 364-day cycle
     document.getElementById('binah-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Meor Einayim${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Meor Einayim${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://www.sefaria.org/Me'or_Einayim?tab=contents" target="_blank" style="color:var(--gold)">Meor Einayim on Sefaria</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Menachem Nachum of Chernobyl</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likutei Tefilot — Day ${ltDay} of 364</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Likutei Tefilot — Day ${ltDay} of 364</div>
        <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${ltSection}</span></div>
        <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${ltReading}</span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${ltUrl}" target="_blank" style="color:var(--gold)">Likutei Tefilot on Sefaria</a> — Reb Nosson of Breslov</span></div>
@@ -11425,7 +11426,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Breslov Israel Recordings <span class="maalah yom" data-wane="11">מיעוט י״א</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a>${breslevCD3 ? ` &nbsp;·&nbsp; <a href="${breslevCD3.url}" target="_blank" style="color:var(--gold)">${breslevCD3.label}</a> &nbsp;·&nbsp; <a href="${breslevCD4.url}" target="_blank" style="color:var(--gold)">${breslevCD4.label}</a>` : ''}</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Foundations of the Sefirot</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Foundations of the Sefirot</div>
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Combination:</span><span class="detail-value">${combo}</span></div>
@@ -11494,7 +11495,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav <span class="maalah yom" data-wane="10">מיעוט י׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Light and Fire of the Baal Shem Tov &amp; Jewish Spiritual Practices</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Light and Fire of the Baal Shem Tov &amp; Jewish Spiritual Practices</div>
        <div class="detail-row"><span class="detail-label">Light and Fire:</span><span class="detail-value">${bshtReading}</span></div>
        <div class="detail-row"><span class="detail-label">Spiritual Practices:</span><span class="detail-value">${jspReading}</span></div>
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">R. Yitzhak Buxbaum</div>
@@ -11506,7 +11507,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        ` +
       (mishnaInfo.seferiaUrl ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} on Sefaria</a></span></div>` : '') +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/texts/Halakhah/Shulchan%20Arukh%20HaRav" target="_blank" style="color:var(--gold)">Shulchan Aruch HaRav on Sefaria</a></div>`;
 
     // Noam Elimelech — Reb Elimelech of Lizhensk — 52 weekly entries (one per KoT week)
@@ -11544,7 +11545,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('gevurah-detail').innerHTML =
        (() => {
          const noamEntry = getNoamElimelechEntry(effectiveKotWeek);
-         return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Noam Elimelech — ר׳ אלימלך מליז׳נסק</div>` +
+         return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Noam Elimelech — ר׳ אלימלך מליז׳נסק</div>` +
            (noamEntry
              ? `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="${noamEntry.url}" target="_blank" style="color:var(--gold)">${noamEntry.title}</a></div>`
              : `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Noam_Elimelekh?lang=bi" target="_blank" style="color:var(--gold)">Noam Elimelech on Sefaria</a></div>`);
@@ -11560,7 +11561,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
            ? 'https://www.sefaria.org/Bnei_Yissaschar,_' + bySlug + '.1.1?lang=bi&with=Navigation'
            : 'https://www.sefaria.org/Bnei_Yissaschar';
          return `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-           <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Bnei Yissaschar — בני יששכר</div>
+           <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Bnei Yissaschar — בני יששכר</div>
            <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${byUrl}" target="_blank" style="color:var(--gold)">${HEB_MONTH_NAMES[hMonth]} — Bnei Yissaschar on Sefaria</a></div>`;
        })() +
       (() => {
@@ -11578,7 +11579,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          const ba2Entry = cy22.day + 1;
          const ba2Url = `https://www.sefaria.org/Beit_Aharon%2C_Daily_Conduct_and_Exhortations%2C_R’_Aharon_(the_Second)_of_Karlin?lang=bi`;
          return `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-           <div style="font-family:’Cinzel’,serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Beit Aharon — בֵּית אַהֲרֹן</div>
+           <div style="font-family:’Cinzel’,serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Beit Aharon — בֵּית אַהֲרֹן</div>
            <div style="margin-bottom:4px;font-size:0.78rem;color:var(--gold-mid);">${baSection.rebbe}</div>
            <div style="font-size:0.88rem;margin-bottom:6px;"><a href="${baUrl}" target="_blank" style="color:var(--gold)">Daily Conduct — Entry ${baEntry}</a> <span style="color:var(--ink-dim);font-size:0.85em;">· Week ${cyclePos + 1} of 52</span></div>
            <div style="margin-bottom:4px;font-size:0.78rem;color:var(--gold-mid);">R’ Aharon the Second of Karlin <span style="color:var(--ink-dim);font-size:0.85em;">· 22-day cycle</span></div>
@@ -11600,7 +11601,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
        }` +
        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
+        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
         <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Kuntres_HaHitpa'alut" target="_blank" style="color:var(--gold)">Kuntres HaHitpa'alut on Sefaria</a></div>`;
 
     // Derech Mitzvosecha — 26 teachings across cycles 27-28 (2 × 13)
@@ -11701,10 +11702,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="7">מיעוט ז׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Steps of Pinchas Ben Yair</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${_cy13mod}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;">
          <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b</a> &nbsp;·&nbsp;
@@ -11712,28 +11713,28 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        </div>` :
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="7">מיעוט ז׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tomer Devorah</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Steps of Pinchas Ben Yair</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${_cy13mod}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;">
          <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b</a> &nbsp;·&nbsp;
          <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15</a>
        </div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Nachman's Tale — Cycle ${_cy13mod}</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Rebbe Nachman's Tale — Cycle ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><strong>${nachmanTale}</strong></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Sippurey_Maasiyot" target="_blank" style="color:var(--gold)">Sipurey Maasiyot on Sefaria</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Orot HaTorah — Chapter ${_cy13mod}</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Orot HaTorah — Chapter ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Orot_HaTorah.${_cy13mod}" target="_blank" style="color:var(--gold)">Orot HaTorah on Sefaria</a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Avraham Yitzhak HaKohen Kook</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shalom Arush — Cycle ${_cy13mod}</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Rav Shalom Arush — Cycle ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><strong>${arushBook}</strong></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ From the New Moon to the Next — Phase ${_cy13mod}</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ From the New Moon to the Next — Phase ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Nassi</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.nassi}</div></div>
@@ -11742,8 +11743,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        ${bachyaRow}
        
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Derech Mitzvosecha</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Derech Mitzvosecha</div>
        <div style="font-size:0.88rem;margin-bottom:${dmTeaching ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha</a></div>
        ${dmTeaching ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-value"><strong>' + dmTeaching.name + '</strong>' + (dmTeaching.part ? ' · ' + dmTeaching.part : '') + '<br><span style=\"font-size:0.88em;opacity:0.72\">' + dmTeaching.english + '</span></span></div>' : ''}`;
 
@@ -11850,7 +11851,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
          <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
+         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     } else {
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `41-Day Cycle: Receiving the Torah <span class="maalah">מעלה ט׳</span>`;
@@ -11871,7 +11872,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
          <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
          <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
-         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Ma'ayan Ganim — Day ${meynDay} of 368</div>
+         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Ma'ayan Ganim — Day ${meynDay} of 368</div>
          <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Section</div><div style="color:var(--ink-mid);font-size:0.88rem;">${meynSection} — p. ${meynPage} · Rav Shalom Arush</div></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          
@@ -11881,7 +11882,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          
          
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
+         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     }
 
@@ -11914,7 +11915,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // (The Zohar shows on the Hod face; no need to repeat it in the detail.)
 
     const hodChazarahHtml =
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Talmud (Chazarah)</div>` +
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Talmud (Chazarah)</div>` +
       (daf
         ? `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">${daf.name} ${daf.heb}, Daf ${daf.daf}</a></div>` +
           `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://youtube.com/playlist?list=PLZ25YnO3sEpExDguTOmn6hVXQOAweMH_c&si=K9P4qwh5yjOJgEdL" target="_blank" style="color:var(--gold)">MDY Chazarah</a></div>`
@@ -11923,7 +11924,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     const hodResourcesHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Resources</div>` +
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Resources</div>` +
       `<div style="font-size:0.88rem;line-height:2;">` +
       `<a href="https://dafhalacha.com/" target="_blank" style="color:var(--gold)">Daf Halacha</a><br>` +
       `<a href="https://alldaf.org/" target="_blank" style="color:var(--gold)">All Daf</a><br>` +
@@ -11932,7 +11933,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     const hodRashabHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
       `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
 
     if (!hal.chofetz) {
@@ -12457,7 +12458,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `</div>` +
       weekRows +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ The Rebbe</div>
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ The Rebbe</div>
        <div style="font-size:0.88rem;margin-bottom:10px;">` +
       `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a> &nbsp;·&nbsp; ` +
       `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
