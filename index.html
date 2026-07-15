@@ -2590,12 +2590,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return sedarim[tractate] || '';
   }
 
+  // The cycle is exactly 364 days (52 weeks): 2 chapters a day, except that
+  // Psalms 119–134 — Psalm 119 with all fifteen Shirei HaMaalot — are read in
+  // a single day. 742 chapters − 16 that day = 726 = 363 × 2, so the year
+  // seals on Divrei HaYamim II 35–36 ("…veya'al") every year.
+  const TANACH_MAALOT_IDX = TANACH_FLAT.findIndex(c => c[0] === 'Psalms' && c[1] === 119); // 498
+  const TANACH_MAALOT_DAY = TANACH_MAALOT_IDX / 2 + 1;                                     // day 250
   function getTanachInfo(d) {
     d = Math.max(1, d); // cycle begins at the epoch; dates before it have no defined cycle/day
-    const dayNum = (d % 7 == 0) ? 7 : d % 7;
-    const week   = (d % 7 == 0) ? Math.floor(d/7) : Math.floor(d/7) + 1;
-    const day    = dayNum;
-    const idx = (d - 1) * 2;
+    const dN   = ((d - 1) % 364) + 1;
+    const week = Math.ceil(dN / 7);
+    const day  = dN - (week - 1) * 7;
+    if (dN === TANACH_MAALOT_DAY) {
+      return {
+        week, day, isMaalotDay: true,
+        text: `<strong>Psalms</strong> 119–134`,
+        sub: `Ketuvim — Sacred Writings · שיר המעלות — the 15 Songs of Ascents in one day`,
+        tag1: 'Psalms', tag2: `Week ${week} · Day ${day}`,
+        seferiaUrl: `https://www.sefaria.org/Psalms.119`
+      };
+    }
+    const idx = dN < TANACH_MAALOT_DAY
+      ? (dN - 1) * 2
+      : TANACH_MAALOT_IDX + 16 + (dN - TANACH_MAALOT_DAY - 1) * 2;
     const ch1 = TANACH_FLAT[idx % TANACH_FLAT.length];
     const ch2 = TANACH_FLAT[(idx + 1) % TANACH_FLAT.length];
     const sameBook = ch1[0] === ch2[0];
@@ -11561,7 +11578,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
 
     // GEVURAH — Tanach
-    const tanachInfo = getTanachInfo(dEff);
+    // Keyed to the day of the KoT year (like the Four Seasons), so Joshua 1
+    // always opens Week 1 Day 1 of each new year.
+    const tanachInfo = getTanachInfo(dEff - d_year1 + 1);
     document.getElementById('gevurah-cycle-name').innerHTML = 'Tanach (2 Chapters) <span class="maalah">מעלה ז׳</span>';
     document.getElementById('gevurah-main').innerHTML =
       `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>` +
