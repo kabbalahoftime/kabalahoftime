@@ -7755,9 +7755,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // ── ZOHAR FOLIO CALCULATOR ──
   // Mantua edition folio ranges by Torah book (each book resets to 1, except
   // Bamidbar/Dvarim which share Vol. 3 continuous numbering: 117-259 / 260-299)
-  // vol = the Zohar's three printed volumes on Sefaria (I=Bereshit, II=Shemot,
+  // vol = the Zohar's three printed volumes (I=Bereshit, II=Shemot,
   // III=Vayikra+Bamidbar+Devarim). folioStart values are the absolute daf
-  // numbers within each volume, so Sefaria refs are Zohar.<vol>.<folio>a.
+  // numbers within each volume (Vilna edition).
   const ZOHAR_BOOKS = [
     { name: 'Bereshit', sefaria: 'Bereshit', vol: 1, folios: 251, folioStart: 1   },
     { name: 'Shemot',   sefaria: 'Shemot',   vol: 2, folios: 269, folioStart: 1   },
@@ -7766,6 +7766,74 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { name: 'Dvarim',   sefaria: 'Devarim',  vol: 3, folios: 40,  folioStart: 260 },
   ];
   const ZOHAR_TOTAL = 818; // 251 + 269 + 115 + 143 + 40
+
+  // Sefaria's Zohar is addressed by parasha section ("Zohar, Sh'lach"), not by
+  // volume/daf — so the daily folio links resolve through this table: for each
+  // volume, [firstDaf, display name, Sefaria URL slug], the section running
+  // until the next entry. Daf boundaries follow the standard Vilna print
+  // (a section that ends mid-daf cedes that daf to whichever side holds most).
+  const ZOHAR_DAF_SECTIONS = {
+    1: [
+      [1,   'Haqdamah',      'Haqdamat_Sefer_HaZohar'],
+      [15,  'Bereshit',      'Bereshit'],
+      [59,  'Noach',         'Noach'],
+      [77,  'Lech Lecha',    'Lech_Lecha'],
+      [97,  'Vayera',        'Vayera'],
+      [121, 'Chayei Sara',   'Chayei_Sara'],
+      [134, 'Toldot',        'Toldot'],
+      [147, 'Vayetzei',      'Vayetzei'],
+      [166, 'Vayishlach',    'Vayishlach'],
+      [179, 'Vayeshev',      'Vayeshev'],
+      [193, 'Miketz',        'Miketz'],
+      [205, 'Vayigash',      'Vayigash'],
+      [212, 'Vayechi',       'Vayechi'],
+    ],
+    2: [
+      [1,   'Shemot',        'Shemot'],
+      [22,  'Vaera',         'Vaera'],
+      [33,  'Bo',            'Bo'],
+      [44,  'Beshalach',     'Beshalach'],
+      [67,  'Yitro',         'Yitro'],
+      [94,  'Mishpatim',     'Mishpatim'],
+      [127, 'Terumah',       'Terumah'],
+      [180, 'Tetzaveh',      'Tetzaveh'],
+      [188, 'Ki Tisa',       'Ki_Tisa'],
+      [195, 'Vayakhel',      'Vayakhel'],
+      [221, 'Pekudei',       'Pekudei'],
+    ],
+    3: [
+      [1,   'Vayikra',       'Vayikra'],
+      [27,  'Tzav',          'Tzav'],
+      [36,  'Shmini',        'Shmini'],
+      [42,  'Tazria',        'Tazria'],
+      [53,  'Metzora',       'Metzora'],
+      [57,  'Achrei Mot',    'Achrei_Mot'],
+      [80,  'Kedoshim',      'Kedoshim'],
+      [88,  'Emor',          'Emor'],
+      [108, 'Behar',         'Behar'],
+      [112, 'Bechukotai',    'Bechukotai'],
+      [117, 'Bamidbar',      'Bamidbar'],
+      [122, 'Nasso',         'Nasso'],
+      [149, "Beha'alotcha",  "Beha'alotcha"],
+      [157, "Sh'lach",       "Sh'lach"],
+      [176, 'Korach',        'Korach'],
+      [180, 'Chukat',        'Chukat'],
+      [185, 'Balak',         'Balak'],
+      [213, 'Pinchas',       'Pinchas'],
+      [260, 'Vaetchanan',    'Vaetchanan'],
+      [271, 'Eikev',         'Eikev'],
+      [274, 'Shoftim',       'Shoftim'],
+      [276, 'Ki Teitzei',    'Ki_Teitzei'],
+      [283, 'Vayeilech',     'Vayeilech'],
+      [286, "Ha'azinu",      "Ha'azinu"],
+    ],
+  };
+  function zoharSectionForDaf(vol, folio) {
+    const list = ZOHAR_DAF_SECTIONS[vol] || [];
+    let hit = null;
+    for (const row of list) { if (row[0] <= folio) hit = row; else break; }
+    return hit ? { display: hit[1], slug: hit[2] } : null;
+  }
 
   // Parasha → Sefaria Zohar section name
   const ZOHAR_PARASHA_SECTIONS = {
@@ -10844,19 +10912,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // resolveZoharFolio takes a 0-indexed absolute folio count
         const si = resolveZoharFolio(cumFolios);
         const ei = resolveZoharFolio(cumFolios + todayFolios - 1);
-        // Link the whole span (e.g. 162a–163b) so Sefaria bounds today's
-        // portion — the reader sees exactly where to stop. Same-volume only;
-        // a rare cross-volume day just links the start folio.
-        const sefariaUrl = (si.book.vol === ei.book.vol)
-          ? `https://www.sefaria.org/Zohar.${si.book.vol}.${si.folio}a-${ei.folio}b`
-          : `https://www.sefaria.org/Zohar.${si.book.vol}.${si.folio}a`;
+        // Sefaria's Zohar is addressed by parasha section, so the link opens
+        // today's section ("Zohar, Sh'lach"); the label carries the folios so
+        // the reader knows the span within it.
+        const sec = zoharSectionForDaf(si.book.vol, si.folio);
+        const sefariaUrl = sec
+          ? `https://www.sefaria.org/Zohar%2C_${sec.slug}?lang=bi`
+          : `https://www.sefaria.org/Zohar?lang=bi`;
+        const secName = sec ? sec.display : si.book.name;
         let label;
         if (si.book === ei.book) {
           label = si.folio === ei.folio
-            ? `${si.book.name}\xa0·\xa0Folio\xa0${si.folio}`
-            : `${si.book.name}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
+            ? `${secName}\xa0·\xa0Folio\xa0${si.folio}`
+            : `${secName}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
         } else {
-          label = `${si.book.name}\xa0Folio\xa0${si.folio}\xa0–\xa0${ei.book.name}\xa0Folio\xa0${ei.folio}`;
+          label = `${secName}\xa0Folio\xa0${si.folio}\xa0–\xa0${ei.book.name}\xa0Folio\xa0${ei.folio}`;
         }
         _hodZoharLabel    = label;
         _hodZoharMainHtml = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>`;
