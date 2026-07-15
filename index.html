@@ -10448,18 +10448,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const season = Math.ceil(dN / 91);          // 1–4
     const dayIn  = ((dN - 1) % 91) + 1;         // 1–91
     const weekIn = Math.ceil(dayIn / 7);        // 1–13
+    // Each season pairs a Chayah of the Merkavah (Ezekiel 1) with Yehuda ben
+    // Teima's animal (Avot 5:20) — the eagle doubles in fall, the lion in summer.
     const SEASONS = [
       { name:'Fall',   hebrew:'תִּשְׁרֵי–כִּסְלֵו', cup:'Red receding to white',
-        animal:'Bold as a leopard (az kanamer)', angel:'Refael',
-        note:'Azut d\'kedushah — the boldness to stand in judgment and return' },
+        chayah:'Eagle — נשר', animal:'Light as an eagle (kal kanesher)', angel:'Uriel',
+        note:'Renewal in return — "your youth renews like the eagle"' },
       { name:'Winter', hebrew:'טֵבֵת–אֲדָר', cup:'All white',
-        animal:'Light as an eagle (kal kanesher)', angel:'Michael',
-        note:'Renewal hidden in dormancy — "your youth renews like the eagle"' },
+        chayah:'Ox — שור', animal:'Bold as a leopard (az kanamer)', angel:'Michael',
+        note:'Azut d\'kedushah — the boldness to stand through the dark of the year' },
       { name:'Spring', hebrew:'נִיסָן–סִיוָן', cup:'White with red rising',
-        animal:'Swift as a deer (ratz katzvi)', angel:'Uriel',
+        chayah:'Man — אדם', animal:'Swift as a gazelle (ratz katzvi)', angel:'Refael',
         note:'Chipazon — the haste of redemption' },
       { name:'Summer', hebrew:'תַּמּוּז–אֱלוּל', cup:'All red',
-        animal:'Mighty as a lion (gibor ka\'ari)', angel:'Gavriel',
+        chayah:'Lion — אריה', animal:'Mighty as a lion (gibor ka\'ari)', angel:'Gavriel',
         note:'The Lion in the mazal of the lion — Gevurah and its rebuilding' }
     ];
     const isTuBShvat = (season === 2 && dayIn === 46); // exact center day of winter
@@ -11690,9 +11692,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Four Seasons — 4 × 91-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${seasonInfo.season} of 4 — ${seasonInfo.name} ${seasonInfo.hebrew} · Week ${seasonInfo.weekIn} of 13 · Day ${seasonInfo.dayIn} of 91</span></div>
-       <div class="detail-row"><span class="detail-label">Cup of Wine:</span><span class="detail-value">${seasonInfo.cup}</span></div>
+       <div class="detail-row"><span class="detail-label">Chayot HaKodesh:</span><span class="detail-value">${seasonInfo.chayah}</span></div>
        <div class="detail-row"><span class="detail-label">Yehuda ben Teima:</span><span class="detail-value">${seasonInfo.animal}</span></div>
        <div class="detail-row"><span class="detail-label">Angel:</span><span class="detail-value">${seasonInfo.angel}</span></div>
+       <div class="detail-row"><span class="detail-label">Cup of Wine:</span><span class="detail-value">${seasonInfo.cup}</span></div>
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${seasonInfo.note}</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 4 seasons × 91 (Ilan = 91)</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
