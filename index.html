@@ -10376,6 +10376,30 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     applyMaalotState();
   }
 
+  // ── GEVURAH: FOUR SEASONS — 4 × 91-Day Cycle (Ilan = 91 = Hashem 26 + Adni 65) ──
+  function getSeasonInfo(d) {
+    const dN     = ((d - 1) % 364) + 1;        // safe wrap, 1–364
+    const season = Math.ceil(dN / 91);          // 1–4
+    const dayIn  = ((dN - 1) % 91) + 1;         // 1–91
+    const weekIn = Math.ceil(dayIn / 7);        // 1–13
+    const SEASONS = [
+      { name:'Fall',   hebrew:'תִּשְׁרֵי–כִּסְלֵו', cup:'Red receding to white',
+        animal:'Bold as a leopard (az kanamer)', angel:'Refael',
+        note:'Azut d\'kedushah — the boldness to stand in judgment and return' },
+      { name:'Winter', hebrew:'טֵבֵת–אֲדָר', cup:'All white',
+        animal:'Light as an eagle (kal kanesher)', angel:'Michael',
+        note:'Renewal hidden in dormancy — "your youth renews like the eagle"' },
+      { name:'Spring', hebrew:'נִיסָן–סִיוָן', cup:'White with red rising',
+        animal:'Swift as a deer (ratz katzvi)', angel:'Uriel',
+        note:'Chipazon — the haste of redemption' },
+      { name:'Summer', hebrew:'תַּמּוּז–אֱלוּל', cup:'All red',
+        animal:'Mighty as a lion (gibor ka\'ari)', angel:'Gavriel',
+        note:'The Lion in the mazal of the lion — Gevurah and its rebuilding' }
+    ];
+    const isTuBShvat = (season === 2 && dayIn === 46); // exact center day of winter
+    return { season, dayIn, weekIn, isTuBShvat, ...SEASONS[season - 1] };
+  }
+
   // ── RENDER ──
   function render() {
     const rawDay = getDaysDiff(currentOffset); // Days since Rosh Hashanah
@@ -11540,8 +11564,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>` +
       ` &nbsp;·&nbsp; <a href="https://mechon-mamre.org/p/pt/ptmp3prq.htm" target="_blank" style="color:var(--gold);font-size:0.85em" title="Tanach audio — Mechon Mamre">Audio</a>`;
     document.getElementById('gevurah-sub').innerHTML = '';
+    const seasonInfo = getSeasonInfo(d);
     document.getElementById('gevurah-tags').innerHTML =
-      `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>`;
+      `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>` +
+      `<span class="tag highlight">Season ${seasonInfo.season} · ${seasonInfo.name}</span>` +
+      `<span class="tag">Day ${seasonInfo.dayIn} of 91</span>` +
+      (seasonInfo.isTuBShvat ? `<span class="tag highlight">✦ Tu B'Shvat — heart of the season</span>` : ``);
     document.getElementById('gevurah-detail').innerHTML =
        (() => {
          const noamEntry = getNoamElimelechEntry(effectiveKotWeek);
@@ -11589,6 +11617,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
        
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Four Seasons — 4 × 91-Day Cycle</div>
+       <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${seasonInfo.season} of 4 — ${seasonInfo.name} ${seasonInfo.hebrew} · Week ${seasonInfo.weekIn} of 13 · Day ${seasonInfo.dayIn} of 91</span></div>
+       <div class="detail-row"><span class="detail-label">Cup of Wine:</span><span class="detail-value">${seasonInfo.cup}</span></div>
+       <div class="detail-row"><span class="detail-label">Yehuda ben Teima:</span><span class="detail-value">${seasonInfo.animal}</span></div>
+       <div class="detail-row"><span class="detail-label">Angel:</span><span class="detail-value">${seasonInfo.angel}</span></div>
+       <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${seasonInfo.note}</span></div>
+       <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 4 seasons × 91 (Ilan = 91)</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי <span class="maalah yom" data-wane="8">מיעוט ח׳</span></div>
        ${daf
