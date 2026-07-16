@@ -10455,7 +10455,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         chayah:'Eagle — נשר', animal:'Light as an eagle (kal kanesher)', angel:'Uriel',
         note:'Renewal in return — "your youth renews like the eagle"' },
       { name:'Winter', hebrew:'טֵבֵת–אֲדָר', cup:'All white',
-        chayah:'Man — אדם', animal:'Bold as a leopard (az kanamer)', angel:'Michael',
+        chayah:'Man — אדם · bearing the fish, the hidden ones', animal:'Bold as a leopard (az kanamer)', angel:'Michael',
         note:'Azut d\'kedushah — the boldness to stand through the dark of the year' },
       { name:'Spring', hebrew:'נִיסָן–סִיוָן', cup:'White with red rising',
         chayah:'Ox — שור', animal:'Swift as a gazelle (ratz katzvi)', angel:'Refael',
@@ -11640,6 +11640,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('gevurah-tags').innerHTML =
       `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>` +
       `<span class="tag highlight">Season ${seasonInfo.season} · ${seasonInfo.name}</span>` +
+      `<span class="tag">${seasonInfo.chayah.split(' · ')[0]}</span>` +
       `<span class="tag">Day ${seasonInfo.dayIn} of 91</span>` +
       (seasonInfo.isTuBShvat ? `<span class="tag highlight">✦ Tu B'Shvat — heart of the season</span>` : ``);
     document.getElementById('gevurah-detail').innerHTML =
