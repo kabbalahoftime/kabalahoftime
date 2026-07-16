@@ -11101,10 +11101,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
       const cycleOffset = totalDays % CYCLE;          // 0-indexed, 0-363
       const fullWeeks   = Math.floor(cycleOffset / 7);
-      const rem         = cycleOffset % 7;             // 0-6; partial week never includes Sat
+      const rem         = cycleOffset % 7;             // 0-6 within the KoT week (day 1 = Friday)
       const cumFolios   = fullWeeks * 16 + rem * 2;   // folios completed before today
-      const todayDow    = cycleOffset % 7;             // 0=Sun…6=Sat (anchor=Sunday)
-      const todayFolios = (todayDow === 6) ? 4 : 2;
+      // The doubled 4-folio reading sits on KoT day 7 (Thursday), the week's
+      // seal — kept fixed so the rhythm stays identical from year to year.
+      const todayFolios = (rem === 6) ? 4 : 2;
 
       if (cumFolios < ZOHAR_TOTAL) {
         // resolveZoharFolio takes a 0-indexed absolute folio count
