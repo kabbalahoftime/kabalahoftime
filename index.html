@@ -11638,6 +11638,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        `;
 
     // CHESED — Mishna / Tosefta
+    // The Nine Days (1-9 Av) as Chesed's own microcosm: 9 = 72/8, so each day
+    // stands for a full 72-day cycle. Counting only the odd days (5 marked,
+    // 4 unmarked between them) reproduces the year's 5-cycle/4-gap shape in
+    // miniature. The five marked days carry Rebbe Nachman's five holy souls
+    // (Moshe-Rashbi-Arizal-Besht-Nachman) in sequence; two of the five are
+    // also literal yahrzeits (Aharon, 1 Av; the Arizal, 5 Av). The avodah of
+    // the nine days: the Temple fell for sinat chinam, and is rebuilt through
+    // ahavat chinam (Yoma 9b; Rav Kook) — Chesed poured directly into Din's
+    // own wound.
+    const NINE_DAYS_SOULS = {
+      1: { soul: 'Moshe Rabbeinu',    note: "Aharon HaKohen's own yahrzeit (Bamidbar 33:38) — Ish Chesed opening the Nine Days; Moshe, his brother, 1st of the five" },
+      3: { soul: 'Rashbi',            note: '2nd of the five' },
+      5: { soul: 'the Arizal',        note: 'his own yahrzeit, at the exact heart of the nine — 3rd of the five' },
+      7: { soul: 'the Baal Shem Tov', note: '4th of the five' },
+      9: { soul: 'Rebbe Nachman',     note: "Tisha B'Av — 5th of the five, sealing the nine" },
+    };
+    const inNineDays = (hMonth === 5 && hDay >= 1 && hDay <= 9);
+    const nineDaysToday = inNineDays ? (NINE_DAYS_SOULS[hDay] || null) : null;
+
     // Carlebach Stories — parasha-based rotation (like Binah card)
     // 99 general stories + 9 Devarim-range stories = 108 total
     // Parashot 42–46 (Matot, Massei, Devarim, Va'etchanan, Eikev) use the Devarim pool (2 per parasha, 9th story shown solo at Eikev)
@@ -11688,13 +11707,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : mishnaInfo.text;
     document.getElementById('chesed-sub').innerHTML = mishnaInfo.sub;
     document.getElementById('chesed-tags').innerHTML =
-      `<span class="tag highlight">${mishnaInfo.tag1}</span><span class="tag">${mishnaInfo.tag2}</span>`;
+      `<span class="tag highlight">${mishnaInfo.tag1}</span><span class="tag">${mishnaInfo.tag2}</span>` +
+      (nineDaysToday
+        ? `<span class="tag highlight">✧ Nine Days · Day ${hDay} — ${nineDaysToday.soul} (Cycle ${(hDay + 1) / 2} of 5)</span>`
+        : (inNineDays ? `<span class="tag">✧ Nine Days · Day ${hDay} — between the souls</span>` : ``));
     // Buxbaum 364-day cycles
     const bshtDay = ((dEff - 1) % 364) + 1;
     const bshtReading = bshtDay === 1 ? 'Introduction' : `Page ${bshtDay - 1}`;
     const jspReading  = bshtDay === 1 ? 'Introduction · Page 1' : `Pages ${2*(bshtDay-1)}–${2*(bshtDay-1)+1}`;
 
     document.getElementById('chesed-detail').innerHTML =
+      (inNineDays ? `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ The Nine Days — Chesed's Microcosm</div>
+       <div style="font-size:0.88rem;margin-bottom:6px;">The Temple fell for sinat chinam; it is rebuilt through ahavat chinam — the avodah of these nine days.</div>` +
+       (nineDaysToday
+         ? `<div class="detail-row"><span class="detail-label">Day ${hDay}:</span><span class="detail-value">${nineDaysToday.soul} — Cycle ${(hDay + 1) / 2} of 5</span></div>
+            <div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">${nineDaysToday.note}</div>`
+         : `<div class="detail-row"><span class="detail-label">Day ${hDay}:</span><span class="detail-value">a pause between the souls</span></div>`) +
+       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` : '') +
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav <span class="maalah yom" data-wane="10">מיעוט י׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
