@@ -11014,14 +11014,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const sefariaUrl = sec
           ? `https://www.sefaria.org/Zohar%2C_${sec.slug}?lang=bi`
           : `https://www.sefaria.org/Zohar?lang=bi`;
-        const secName = sec ? sec.display : si.book.name;
+        // The label names the volume's Chumash book, not the Zohar section —
+        // a section name (e.g. Sh'lach) on the face reads like a wrong-week
+        // parasha. The link still opens the right section on Sefaria.
         let label;
         if (si.book === ei.book) {
           label = si.folio === ei.folio
-            ? `${secName}\xa0·\xa0Folio\xa0${si.folio}`
-            : `${secName}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
+            ? `${si.book.name}\xa0·\xa0Folio\xa0${si.folio}`
+            : `${si.book.name}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
         } else {
-          label = `${secName}\xa0Folio\xa0${si.folio}\xa0–\xa0${ei.book.name}\xa0Folio\xa0${ei.folio}`;
+          label = `${si.book.name}\xa0Folio\xa0${si.folio}\xa0–\xa0${ei.book.name}\xa0Folio\xa0${ei.folio}`;
         }
         _hodZoharLabel    = label;
         _hodZoharMainHtml = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>`;
