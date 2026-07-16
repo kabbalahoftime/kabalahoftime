@@ -11014,16 +11014,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const sefariaUrl = sec
           ? `https://www.sefaria.org/Zohar%2C_${sec.slug}?lang=bi`
           : `https://www.sefaria.org/Zohar?lang=bi`;
-        // The label names the volume's Chumash book, not the Zohar section —
-        // a section name (e.g. Sh'lach) on the face reads like a wrong-week
-        // parasha. The link still opens the right section on Sefaria.
+        // The label carries only the volume and folio numbers — no parasha or
+        // Chumash name, which read like wrong-week references on the face.
+        // The link still opens the correct Zohar section on Sefaria.
+        const ROMAN = ['', 'I', 'II', 'III'];
         let label;
-        if (si.book === ei.book) {
+        if (si.book.vol === ei.book.vol) {
           label = si.folio === ei.folio
-            ? `${si.book.name}\xa0·\xa0Folio\xa0${si.folio}`
-            : `${si.book.name}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
+            ? `Vol.\xa0${ROMAN[si.book.vol]}\xa0·\xa0Folio\xa0${si.folio}`
+            : `Vol.\xa0${ROMAN[si.book.vol]}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
         } else {
-          label = `${si.book.name}\xa0Folio\xa0${si.folio}\xa0–\xa0${ei.book.name}\xa0Folio\xa0${ei.folio}`;
+          label = `Vol.\xa0${ROMAN[si.book.vol]}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol.\xa0${ROMAN[ei.book.vol]}\xa0Folio\xa0${ei.folio}`;
         }
         _hodZoharLabel    = label;
         _hodZoharMainHtml = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>`;
