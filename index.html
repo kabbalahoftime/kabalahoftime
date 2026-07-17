@@ -10576,8 +10576,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // between them (73, 146, 219, 292) = 364. 72 = chesed by gematria; the four
   // gaps are the charakim of Shir HaShirim 2:9 ("He peers through the
   // lattice") — five apertures, four dividers, exactly as a lattice is built.
-  // NOTE: cycle/day-position tracking only for now — the specific Name text
-  // for each of the 72 days is not yet wired in (see chesed-detail comment).
+  // The 72 three-letter roots (no suffix — the array as transmitted, per the
+  // Zohar II:270a, Vilna edition) transcribed from chabad.org/kabbalah,
+  // article "72 'Names' of G-d" by R. Moshe Yakov Wisnefsky, cross-checked
+  // against a second, overlapping capture of the same table. Three roots
+  // recur (וה"ו at 1 & 49, לא"ו at 11 & 17, מב"ה at 14 & 55) — verified, not
+  // a transcription artifact.
+  const AYIN_BET_NAMES = [
+    'והו','ילי','סיט','עלם','מהש','ללה','אכא','כהת',
+    'הזי','אלד','לאו','ההע','יזל','מבה','הרי','הקם',
+    'לאו','כלי','לוו','פהל','נלך','ייי','מלה','חהו',
+    'נתה','האא','ירת','שאה','ריי','אום','לכב','ושר',
+    'יחו','להח','כוק','מנד','אני','חעם','רעה','ייז',
+    'ההה','מיכ','וול','ילה','סאל','ערי','עשל','מיה',
+    'והו','דני','החש','עמם','ננא','נית','מבה','פוי',
+    'נמם','ייל','הרח','מצר','ומב','יהה','ענו','מחי',
+    'דמב','מנק','איע','חבו','ראה','יבמ','היי','מום',
+  ];
   const AYIN_BET_BREAKS = [73, 146, 219, 292];
   function getAyinBetInfo(d) {
     const dN = (((d - 1) % 364) + 364) % 364 + 1; // safe wrap, 1-364
@@ -10589,7 +10604,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     else if (dN <= 218) { cycle = 3; dayInCycle = dN - 146; }
     else if (dN <= 291) { cycle = 4; dayInCycle = dN - 219; }
     else                { cycle = 5; dayInCycle = dN - 292; }
-    return { isBreak: false, cycle, dayInCycle };
+    return { isBreak: false, cycle, dayInCycle, name: AYIN_BET_NAMES[dayInCycle - 1], nameNum: dayInCycle };
   }
 
   // ── RENDER ──
@@ -11745,7 +11760,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // when this was built; reconstructing 216 letters of Shemot 14:19-21
       // from memory alone was judged too risky for daily sacred-Name use).
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shem Ayin-Bet — The 72-Fold Name</div>
-       <div class="detail-row"><span class="detail-label">${ayinBetInfo.isBreak ? 'Today:' : 'Cycle:'}</span><span class="detail-value">${ayinBetInfo.isBreak ? `A silent day — between Cycle ${ayinBetInfo.afterCycle} and Cycle ${ayinBetInfo.afterCycle + 1}` : `Cycle ${ayinBetInfo.cycle} of 5 · Day ${ayinBetInfo.dayInCycle} of 72`}</span></div>
+       <div class="detail-row"><span class="detail-label">${ayinBetInfo.isBreak ? 'Today:' : `Name ${ayinBetInfo.nameNum}:`}</span><span class="detail-value">${ayinBetInfo.isBreak ? `A silent day — between Cycle ${ayinBetInfo.afterCycle} and Cycle ${ayinBetInfo.afterCycle + 1}` : ayinBetInfo.name}</span></div>
+       ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Cycle ${ayinBetInfo.cycle} of 5 · Day ${ayinBetInfo.dayInCycle} of 72</div>`}
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Shemot 14:19–21 · חסד = 72</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
       (inNineDays ? `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ The Nine Days — Chesed's Microcosm</div>
