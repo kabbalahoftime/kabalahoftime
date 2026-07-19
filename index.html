@@ -10723,13 +10723,43 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { name: 'Evel',                     book: 'Shoftim' },
     { name: 'Melachim u\'Milchamos',    book: 'Shoftim' },
   ];
-  function getYadInfo(doy) {
+  // Kohelet's 28 ittim (3:2-8) as fourteen pairs — one pair per 28-day cycle,
+  // each cycle holding a time and its opposite. In a common year (13 cycles)
+  // the Adar cycle (6th) carries two pairs, exactly as it carries two books
+  // of the Yad; in a leap year (14 cycles) every pair stands alone. Because
+  // the two extra pairs enter at the same point where the leap year inserts
+  // its month, the alignments hold in all years: the pair of embrace seals
+  // on Pesach (196 = 7×28 common; 224 = 8×28 leap), the pair of silence
+  // seals on Tisha B'Av (308 = 11×28; 336 = 12×28), and the year's last
+  // word is shalom.
+  const KOHELET_ITTIM = [
+    { he: 'עת ללדת ועת למות',                 en: 'a time to be born, and a time to die' },
+    { he: 'עת לטעת ועת לעקור נטוע',           en: 'a time to plant, and a time to uproot' },
+    { he: 'עת להרוג ועת לרפוא',               en: 'a time to kill, and a time to heal' },
+    { he: 'עת לפרוץ ועת לבנות',               en: 'a time to break down, and a time to build' },
+    { he: 'עת לבכות ועת לשחוק',               en: 'a time to weep, and a time to laugh' },
+    { he: 'עת ספוד ועת רקוד',                 en: 'a time to mourn, and a time to dance' },
+    { he: 'עת להשליך אבנים ועת כנוס אבנים',   en: 'a time to cast away stones, and a time to gather stones' },
+    { he: 'עת לחבוק ועת לרחק מחבק',           en: 'a time to embrace, and a time to refrain from embracing' },
+    { he: 'עת לבקש ועת לאבד',                 en: 'a time to seek, and a time to lose' },
+    { he: 'עת לשמור ועת להשליך',              en: 'a time to keep, and a time to cast away' },
+    { he: 'עת לקרוע ועת לתפור',               en: 'a time to rend, and a time to sew' },
+    { he: 'עת לחשות ועת לדבר',                en: 'a time to keep silence, and a time to speak' },
+    { he: 'עת לאהב ועת לשנא',                 en: 'a time to love, and a time to hate' },
+    { he: 'עת מלחמה ועת שלום',                en: 'a time of war, and a time of peace' },
+  ];
+  function getYadInfo(doy, isLeap) {
     const D = Math.max(1, doy);
     const dayInCycle = ((D - 1) % 28) + 1;      // 1–28
     const cycle      = Math.floor((D - 1) / 28) + 1;
     const i0 = (dayInCycle - 1) * 3;            // 0-based start into the 84
     const subs = [YAD_SUBSECTIONS[i0], YAD_SUBSECTIONS[i0 + 1], YAD_SUBSECTIONS[i0 + 2]];
-    return { cycle, dayInCycle, subs };
+    let pairNums;
+    if (isLeap)             pairNums = [Math.min(cycle, 14)];
+    else if (cycle === 6)   pairNums = [6, 7];
+    else                    pairNums = [Math.min(cycle < 6 ? cycle : cycle + 1, 14)];
+    const ittim = pairNums.map(n => KOHELET_ITTIM[n - 1]);
+    return { cycle, dayInCycle, subs, ittim };
   }
 
   // ── RENDER ──
@@ -12876,10 +12906,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       (() => {
         // Yad HaChazakah — 28-day overview, unfolded day-of-year (13 cycles
         // common / 14 leap; the Adar cycle splits on its own).
-        const yad = getYadInfo(d - d_year1 + 1);
+        const yad = getYadInfo(d - d_year1 + 1, isLeapYear);
         const sub = s => `${s.name} <span style="color:var(--ink-dim);font-size:0.85em">· ${s.book}</span>`;
+        const et = p => `<span style="font-size:1.05em">${p.he}</span> <span style="color:var(--ink-dim);font-size:0.85em">— ${p.en}</span>`;
         return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Yad HaChazakah — the 28-Day Overview</div>
          <div class="sefirah-tags" style="margin-bottom:6px;"><span class="tag highlight">Cycle ${yad.cycle} · Day ${yad.dayInCycle} of 28</span></div>
+         <div class="detail-row"><span class="detail-label">This cycle's ittim:</span><span class="detail-value">${yad.ittim.map(et).join('<br>')}</span></div>
          <div class="detail-row"><span class="detail-label">Today (3 of 84):</span><span class="detail-value">${yad.subs.map(sub).join('<br>')}</span></div>
          <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">The whole Rambam every 28 days · <a href="https://www.sefaria.org/texts/Halakhah/Mishneh%20Torah" target="_blank" style="color:var(--gold)">Mishneh Torah</a></div>
          <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:6px 0 0;padding-left:2px;">13 cycles a year, the Adar cycle carrying two of the 14 books; in a leap year, 14 cycles — David's own number (דוד = 14), each of 28 = 2 × 14 days: Malchut de-David.</div>
