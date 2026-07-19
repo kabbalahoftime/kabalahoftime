@@ -11751,7 +11751,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('binah-sub').innerHTML =
       `${daySef} of ${weekSef} — Cycle ${omerCycle}, Week ${omerWeek}, Day ${omerDay}`;
     document.getElementById('binah-tags').innerHTML =
-      `<span class="tag highlight">${weekSef}</span><span class="tag">${daySef}</span><span class="tag">${superSef}</span><span class="tag">Omer ${omerPos} / Cycle ${omerCycle}</span>`;
+      `<span class="tag highlight">${weekSef}</span><span class="tag">${daySef}</span><span class="tag">${superSef}</span><span class="tag">Cycle ${omerCycle} · Day ${omerPos} of 49</span>`;
     // Likutei Tefilot — 364-day cycle
     // Intro (1) + Part 1: 152 prayers × 2 days (304) + Part 2: 59 prayers (59) = 364
     const ltDay = ((d - 1) % 364) + 1;
@@ -11884,7 +11884,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // to Sefaria/mechon-mamre/Wikipedia was blocked by the sandbox proxy
       // when this was built; reconstructing 216 letters of Shemot 14:19-21
       // from memory alone was judged too risky for daily sacred-Name use).
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shem Ayin-Bet — The 72-Fold Name</div>
+      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Shem Ayin-Bet — The 72-Fold Name</div>
        <div class="detail-row"><span class="detail-label">${ayinBetInfo.isBreak ? 'Today:' : `Name ${ayinBetInfo.nameNum}:`}</span><span class="detail-value">${ayinBetInfo.isBreak ? `A silent day — between Cycle ${ayinBetInfo.afterCycle} and Cycle ${ayinBetInfo.afterCycle + 1}` : ayinBetInfo.name}</span></div>
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Cycle ${ayinBetInfo.cycle} of 5 · Day ${ayinBetInfo.dayInCycle} of 72</div>`}
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Birkat Kohanim · this cycle: <span style="font-size:1.15em;color:var(--ink)">${BIRKAT_KOHANIM_CYCLES[ayinBetInfo.cycle - 1]}</span></div>`}
@@ -11998,21 +11998,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
            <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${ba2Url}" target="_blank" style="color:var(--gold)">Daily Conduct — Entry ${ba2Entry}</a> <span style="color:var(--ink-dim);font-size:0.85em;">· Day ${cy22.day} of 22</span></div>
            <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
        })() +
-       `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
-       
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Four Seasons — 4 × 91-Day Cycle</div>
-       <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${seasonInfo.season} of 4 — ${seasonInfo.name} ${seasonInfo.hebrew} · Week ${seasonInfo.weekIn} of 13 · Day ${seasonInfo.dayIn} of 91</span></div>
-       <div class="detail-row"><span class="detail-label">Chayot HaKodesh:</span><span class="detail-value">${seasonInfo.chayah}</span></div>
-       <div class="detail-row"><span class="detail-label">Yehuda ben Teima:</span><span class="detail-value">${seasonInfo.animal}</span></div>
-       <div class="detail-row"><span class="detail-label">Angel:</span><span class="detail-value">${seasonInfo.angel}</span></div>
-       <div class="detail-row"><span class="detail-label">House of Levi:</span><span class="detail-value">${seasonInfo.levi}</span></div>
-       <div class="detail-row"><span class="detail-label">Cup of Wine:</span><span class="detail-value">${seasonInfo.cup}</span></div>
-       <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${seasonInfo.note}</span></div>
-       <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 4 seasons × 91 (Ilan = 91)</span></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי <span class="maalah yom" data-wane="8">מיעוט ח׳</span></div>
+       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי <span class="maalah yom" data-wane="8">מיעוט ח׳</span></div>
        ${daf
          ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value"><a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">${daf.name} ${daf.heb}, Daf ${daf.daf}</a></span></div>
             <div class="detail-row"><span class="detail-label">Links:</span><span class="detail-value">
@@ -12021,7 +12007,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             </span></div>
             <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
          : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
-       }` +
+       }
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
+
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Four Seasons — 4 × 91-Day Cycle</div>
+       <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${seasonInfo.season} of 4 — ${seasonInfo.name} ${seasonInfo.hebrew} · Week ${seasonInfo.weekIn} of 13 · Day ${seasonInfo.dayIn} of 91</span></div>
+       <div class="detail-row"><span class="detail-label">Chayot HaKodesh:</span><span class="detail-value">${seasonInfo.chayah}</span></div>
+       <div class="detail-row"><span class="detail-label">Yehuda ben Teima:</span><span class="detail-value">${seasonInfo.animal}</span></div>
+       <div class="detail-row"><span class="detail-label">Angel:</span><span class="detail-value">${seasonInfo.angel}</span></div>
+       <div class="detail-row"><span class="detail-label">House of Levi:</span><span class="detail-value">${seasonInfo.levi}</span></div>
+       <div class="detail-row"><span class="detail-label">Cup of Wine:</span><span class="detail-value">${seasonInfo.cup}</span></div>
+       <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${seasonInfo.note}</span></div>
+       <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 4 seasons × 91 (Ilan = 91)</span></div>` +
        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
         <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Kuntres_HaHitpa'alut" target="_blank" style="color:var(--gold)">Kuntres HaHitpa'alut on Sefaria</a></div>`;
@@ -12877,9 +12877,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // common / 14 leap; the Adar cycle splits on its own).
         const yad = getYadInfo(d - d_year1 + 1);
         const sub = s => `${s.name} <span style="color:var(--ink-dim);font-size:0.85em">· ${s.book}</span>`;
-        return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Yad HaChazakah — the 28-Day Overview</div>
+        return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Yad HaChazakah — the 28-Day Overview</div>
+         <div class="sefirah-tags" style="margin-bottom:6px;"><span class="tag highlight">Cycle ${yad.cycle} · Day ${yad.dayInCycle} of 28</span></div>
          <div class="detail-row"><span class="detail-label">Today (3 of 84):</span><span class="detail-value">${yad.subs.map(sub).join('<br>')}</span></div>
-         <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">Cycle ${yad.cycle} · Day ${yad.dayInCycle} of 28 — the whole Rambam every 28 days · <a href="https://www.sefaria.org/texts/Halakhah/Mishneh%20Torah" target="_blank" style="color:var(--gold)">Mishneh Torah</a></div>
+         <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">The whole Rambam every 28 days · <a href="https://www.sefaria.org/texts/Halakhah/Mishneh%20Torah" target="_blank" style="color:var(--gold)">Mishneh Torah</a></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
       })() +
       todayRow +
