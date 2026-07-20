@@ -10733,20 +10733,48 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // seals on Tisha B'Av (308 = 11×28; 336 = 12×28), and the year's last
   // word is shalom.
   const KOHELET_ITTIM = [
-    { he: 'עת ללדת ועת למות',                 en: 'a time to be born, and a time to die' },
-    { he: 'עת לטעת ועת לעקור נטוע',           en: 'a time to plant, and a time to uproot' },
-    { he: 'עת להרוג ועת לרפוא',               en: 'a time to kill, and a time to heal' },
-    { he: 'עת לפרוץ ועת לבנות',               en: 'a time to break down, and a time to build' },
-    { he: 'עת לבכות ועת לשחוק',               en: 'a time to weep, and a time to laugh' },
-    { he: 'עת ספוד ועת רקוד',                 en: 'a time to mourn, and a time to dance' },
-    { he: 'עת להשליך אבנים ועת כנוס אבנים',   en: 'a time to cast away stones, and a time to gather stones' },
-    { he: 'עת לחבוק ועת לרחק מחבק',           en: 'a time to embrace, and a time to refrain from embracing' },
-    { he: 'עת לבקש ועת לאבד',                 en: 'a time to seek, and a time to lose' },
-    { he: 'עת לשמור ועת להשליך',              en: 'a time to keep, and a time to cast away' },
-    { he: 'עת לקרוע ועת לתפור',               en: 'a time to rend, and a time to sew' },
-    { he: 'עת לחשות ועת לדבר',                en: 'a time to keep silence, and a time to speak' },
-    { he: 'עת לאהב ועת לשנא',                 en: 'a time to love, and a time to hate' },
-    { he: 'עת מלחמה ועת שלום',                en: 'a time of war, and a time of peace' },
+    { he: 'עת ללדת ועת למות',
+      en: 'a time to be born, and a time to die',
+      note: "The Yamim Noraim: hayom harat olam — the world born on Rosh Hashanah — and U'netaneh Tokef's \"who shall live and who shall die,\" sealing into Sukkot's joy." },
+    { he: 'עת לטעת ועת לעקור נטוע',
+      en: 'a time to plant, and a time to uproot',
+      note: "The planting rains begin (tal u'matar, 7 Cheshvan in Eretz Yisrael); on 17 Cheshvan the Mabul began — the great uprooting." },
+    { he: 'עת להרוג ועת לרפוא',
+      en: 'a time to kill, and a time to heal',
+      note: "The year's darkest descent turning toward healing — sealing at 19 Kislev, captivity turned to release: padah v'shalom nafshi." },
+    { he: 'עת לפרוץ ועת לבנות',
+      en: 'a time to break down, and a time to build',
+      note: "The Mikdash broken and rededicated (Chanukat HaMizbeach); then 10 Tevet, the siege begins — rebuilding and breach in one hand." },
+    { he: 'עת לבכות ועת לשחוק',
+      en: 'a time to weep, and a time to laugh',
+      note: "Deep winter's weeping, and Tu B'Shvat near the seal — the sap rising unseen, the trees' new year laughing under the frost." },
+    { he: 'עת ספוד ועת רקוד',
+      en: 'a time to mourn, and a time to dance',
+      note: "Purim at the seal: hafachta mispedi l'machol li (Tehillim 30) — Esther's fast turned to feast, v'nahafoch hu." },
+    { he: 'עת להשליך אבנים ועת כנוס אבנים',
+      en: 'a time to cast away stones, and a time to gather stones',
+      note: "The pur cast by Haman and overturned; and the gathering is Esther's own word — lech kenos et kol haYehudim." },
+    { he: 'עת לחבוק ועת לרחק מחבק',
+      en: 'a time to embrace, and a time to refrain from embracing',
+      note: "Rosh Chodesh Nissan (day 182, the year's midpoint): the Nesi'im draw near, each prince embracing the altar with his offering (Bamidbar 7); and as Pesach seals the cycle, the time to refrain — distancing from chametz, the leaven of the self." },
+    { he: 'עת לבקש ועת לאבד',
+      en: 'a time to seek, and a time to lose',
+      note: "The Omer: the count as a seeking toward Sinai; and the loss of Rabbi Akiva's twenty-four thousand in these weeks." },
+    { he: 'עת לשמור ועת להשליך',
+      en: 'a time to keep, and a time to cast away',
+      note: "Shavuot within it — the Torah received to keep, na'aseh v'nishma; and the casting off of what cannot stand with it." },
+    { he: 'עת לקרוע ועת לתפור',
+      en: 'a time to rend, and a time to sew',
+      note: "The spies sent (29 Sivan); the walls first breached (9 Tammuz, the First Churban) — the tear before the silence, and the promise of mending." },
+    { he: 'עת לחשות ועת לדבר',
+      en: 'a time to keep silence, and a time to speak',
+      note: "The Three Weeks, sealing on Tisha B'Av: vayidom Aharon; yeshev badad v'yidom (Eichah 3:28) — and the time to speak: Eichah and the kinot." },
+    { he: 'עת לאהב ועת לשנא',
+      en: 'a time to love, and a time to hate',
+      note: "Tu B'Av's dancing; sinat chinam that destroyed, ahavat chinam that rebuilds; Elul opens — Ani l'Dodi v'Dodi li." },
+    { he: 'עת מלחמה ועת שלום',
+      en: 'a time of war, and a time of peace',
+      note: "Elul's final battle of teshuvah, the King in the field — and the year seals on shalom, as Birkat Kohanim seals on shalom." },
   ];
   function getYadInfo(doy, isLeap) {
     const D = Math.max(1, doy);
@@ -12912,6 +12940,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Yad HaChazakah — the 28-Day Overview</div>
          <div class="sefirah-tags" style="margin-bottom:6px;"><span class="tag highlight">Cycle ${yad.cycle} · Day ${yad.dayInCycle} of 28</span></div>
          <div class="detail-row"><span class="detail-label">This cycle's ittim:</span><span class="detail-value">${yad.ittim.map(et).join('<br>')}</span></div>
+         <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:2px 0 8px;">${yad.ittim.map(p => p.note).join('<br>')}</div>
          <div class="detail-row"><span class="detail-label">Today (3 of 84):</span><span class="detail-value">${yad.subs.map(sub).join('<br>')}</span></div>
          <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">The whole Rambam every 28 days · <a href="https://www.sefaria.org/texts/Halakhah/Mishneh%20Torah" target="_blank" style="color:var(--gold)">Mishneh Torah</a></div>
          <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:6px 0 0;padding-left:2px;">13 cycles a year, the Adar cycle carrying two of the 14 books; in a leap year, 14 cycles — David's own number (דוד = 14), each of 28 = 2 × 14 days: Malchut de-David.</div>
