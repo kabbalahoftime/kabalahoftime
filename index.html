@@ -12656,12 +12656,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       return mapping;
     }
 
-    {
-      const yadFace = getYadInfo(d - d_year1 + 1, isLeapYear);
-      document.getElementById('malchut-cycle-name').innerHTML =
-        `Day ${sef.dayNum} · ${malTxt.day}` +
-        ` <span style="color:var(--ink-dim)">· ✧ Yad ${yadFace.cycle}/${isLeapYear ? 14 : 13} · Day ${yadFace.dayInCycle}/28</span>`;
-    }
+    document.getElementById('malchut-cycle-name').textContent = `Day ${sef.dayNum} · ${malTxt.day}`;
 
     // Get parasha-specific portion if available — use actual Torah reading, not WEEKLY_BOOKS parasha
     const actualParasha = (window.getParashaForDate && window.getParashaForDate(date)) || wk.parasha;
@@ -12767,11 +12762,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       _vtUrl   = _vtSeif === 0 ? VATAH_OVERVIEW_URL : VATAH_URLS[_vtSeif - 1];
       _vtText  = _vtSeif === 0 ? `Overview` : `Se'if ${VATAH_HEB[_vtSeif - 1]}`;
       _vtTitle = _vtSeif === 0 ? 'the complete ma\'amar — Purim Katan' : VATAH_TITLES[_vtSeif - 1];
+      // The Rambam joins the Rebbe on the face, as in Keter: the Yad's
+      // 28-day position and this cycle's ittim sit with Ve'atah Tetzaveh.
+      const _yadFace = getYadInfo(d - d_year1 + 1, isLeapYear);
       document.getElementById('malchut-ksa-face').innerHTML =
         (_vtUrl
           ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold)">${_vtText}</a>`
           : `<span style="color:var(--gold)">${_vtText}</span>`) +
-        ` <span style="font-size:0.72em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span>`;
+        ` <span style="font-size:0.72em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span>` +
+        `<div style="margin-top:6px;">${_yadFace.ittim.map(p =>
+          `<span style="font-size:0.95em">${p.he}</span><br><span style="font-size:0.72em;color:var(--ink-mid)">${p.en}</span>`
+        ).join('<br>')}</div>` +
+        `<div style="font-size:0.72em;color:var(--ink-mid);margin-top:4px;">✧ Yad HaChazakah · Cycle ${_yadFace.cycle} of ${isLeapYear ? 14 : 13} · Day ${_yadFace.dayInCycle} of 28</div>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
@@ -12944,10 +12946,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // common / 14 leap; the Adar cycle splits on its own).
         const yad = getYadInfo(d - d_year1 + 1, isLeapYear);
         const sub = s => `${s.name} <span style="color:var(--ink-dim);font-size:0.85em">· ${s.book}</span>`;
-        const et = p => `<span style="font-size:1.05em">${p.he}</span> <span style="color:var(--ink-dim);font-size:0.85em">— ${p.en}</span>`;
         return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Yad HaChazakah — the 28-Day Overview</div>
-         <div class="sefirah-tags" style="margin-bottom:6px;"><span class="tag highlight">Cycle ${yad.cycle} · Day ${yad.dayInCycle} of 28</span></div>
-         <div class="detail-row"><span class="detail-label">This cycle's ittim:</span><span class="detail-value">${yad.ittim.map(et).join('<br>')}</span></div>
          <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:2px 0 8px;">${yad.ittim.map(p => p.note).join('<br>')}</div>
          <div class="detail-row"><span class="detail-label">Today (3 of 84):</span><span class="detail-value">${yad.subs.map(sub).join('<br>')}</span></div>
          <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">The whole Rambam every 28 days · <a href="https://www.sefaria.org/texts/Halakhah/Mishneh%20Torah" target="_blank" style="color:var(--gold)">Mishneh Torah</a></div>
