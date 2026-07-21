@@ -12770,7 +12770,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold)">${_vtText}</a>`
           : `<span style="color:var(--gold)">${_vtText}</span>`) +
         ` <span style="font-size:0.72em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span>` +
-        `<div style="font-size:0.72em;color:var(--ink-mid);margin-top:4px;">✧ Yad HaChazakah · Cycle ${_yadFace.cycle} of ${isLeapYear ? 14 : 13} · Day ${_yadFace.dayInCycle} of 28</div>`;
+        `<div style="font-size:0.72em;color:var(--ink-mid);margin-top:4px;">✧ Yad HaChazakah · Cycle ${_yadFace.cycle} of ${isLeapYear ? 14 : 13} · Day ${_yadFace.dayInCycle} of 28 — <em>${_yadFace.ittim.map(p => p.en).join(' · ')}</em></div>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
