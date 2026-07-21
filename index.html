@@ -11921,6 +11921,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Brachot 1 always opens Week 1 Day 1 of each new year.
     const mishnaInfo = getMishnaInfo(dEff - d_year1 + 1);
     const ayinBetInfo = getAyinBetInfo(dEff - d_year1 + 1);
+    // Birkat Kohanim: one word per third of the 72-day cycle (24 days each) —
+    // 3 words per cycle, 15 words across the five cycles.
+    const bkWords = ayinBetInfo.isBreak ? [] : BIRKAT_KOHANIM_CYCLES[ayinBetInfo.cycle - 1].split(' ');
+    const bkIdx = ayinBetInfo.isBreak ? -1 : Math.floor((ayinBetInfo.dayInCycle - 1) / 24);
     document.getElementById('chesed-cycle-name').innerHTML =
       (mishnaInfo.type === 'mishna' ? 'Mishna — Oral Torah' : 'Tosefta — Expanded Oral Torah') + ' <span class="maalah">מעלה ו׳</span>';
     document.getElementById('chesed-main').innerHTML = mishnaInfo.seferiaUrl
@@ -11931,7 +11935,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<span class="tag highlight">${mishnaInfo.tag1}</span><span class="tag">${mishnaInfo.tag2}</span>` +
       (ayinBetInfo.isBreak
         ? `<span class="tag">✧ Shem Ayin-Bet · between cycles</span>`
-        : `<span class="tag">✧ Shem Ayin-Bet · Name ${ayinBetInfo.nameNum} of 72</span>`) +
+        : `<span class="tag">✧ Shem Ayin-Bet · Name ${ayinBetInfo.nameNum} of 72 · ${bkWords[bkIdx]}</span>`) +
       (nineDaysToday
         ? `<span class="tag highlight">✧ Nine Days · Day ${hDay} — ${nineDaysToday.soul} (Cycle ${(hDay + 1) / 2} of 5)</span>`
         : (inNineDays ? `<span class="tag">✧ Nine Days · Day ${hDay} — between the souls</span>` : ``));
@@ -11949,7 +11953,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Shem Ayin-Bet — The 72-Fold Name</div>
        <div class="detail-row"><span class="detail-label">${ayinBetInfo.isBreak ? 'Today:' : `Name ${ayinBetInfo.nameNum}:`}</span><span class="detail-value">${ayinBetInfo.isBreak ? `A silent day — between Cycle ${ayinBetInfo.afterCycle} and Cycle ${ayinBetInfo.afterCycle + 1}` : ayinBetInfo.name}</span></div>
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Cycle ${ayinBetInfo.cycle} of 5 · Day ${ayinBetInfo.dayInCycle} of 72</div>`}
-       ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Birkat Kohanim · this cycle: <span style="font-size:1.15em;color:var(--ink)">${BIRKAT_KOHANIM_CYCLES[ayinBetInfo.cycle - 1]}</span></div>`}
+       ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Birkat Kohanim · this cycle: <span style="font-size:1.15em;color:var(--ink)">${bkWords.map((w, i) => i === bkIdx ? `<span style="color:var(--gold)">${w}</span>` : w).join(' ')}</span> <span style="font-size:0.9em">· one word each 24 days</span></div>`}
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Shemot 14:19–21 · חסד = 72</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
       (inNineDays ? `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ The Nine Days — Chesed's Microcosm</div>
