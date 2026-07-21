@@ -10756,7 +10756,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       note: "The pur cast by Haman and overturned; and the gathering is Esther's own word — lech kenos et kol haYehudim." },
     { he: 'עת לחבוק ועת לרחק מחבק',
       en: 'a time to embrace, and a time to refrain from embracing',
-      note: "Rosh Chodesh Nissan (day 182, the year's midpoint): the Nesi'im draw near, each prince embracing the altar with his offering (Bamidbar 7); and as Pesach seals the cycle, the time to refrain — distancing from chametz, the leaven of the self." },
+      note: "Rosh Chodesh Nissan (day 182, the year's midpoint): the Nesi'im draw near, each prince embracing the altar with his offering (Bamidbar 7) — yet that same day Nadav and Avihu drew too near and died, b'karvatam: the one day holding both the embrace and the nearness that must be refrained from; and Pesach seals the cycle with a further refraining — distancing from chametz, the leaven of the self." },
     { he: 'עת לבקש ועת לאבד',
       en: 'a time to seek, and a time to lose',
       note: "The Omer: the count as a seeking toward Sinai; and the loss of Rabbi Akiva's twenty-four thousand in these weeks." },
@@ -10774,7 +10774,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       note: "Tu B'Av's dancing; sinat chinam that destroyed, ahavat chinam that rebuilds; Elul opens — Ani l'Dodi v'Dodi li." },
     { he: 'עת מלחמה ועת שלום',
       en: 'a time of war, and a time of peace',
-      note: "Elul's final battle of teshuvah, the King in the field — and the year seals on shalom, as Birkat Kohanim seals on shalom." },
+      note: "Elul's final battle of teshuvah, the King in the field; and the year seals on shalom — the days before Yom Kippur, when people make peace with one another (bein adam la'chaveiro), as Birkat Kohanim seals on shalom." },
   ];
   function getYadInfo(doy, isLeap) {
     const D = Math.max(1, doy);
@@ -11929,6 +11929,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('chesed-sub').innerHTML = mishnaInfo.sub;
     document.getElementById('chesed-tags').innerHTML =
       `<span class="tag highlight">${mishnaInfo.tag1}</span><span class="tag">${mishnaInfo.tag2}</span>` +
+      (ayinBetInfo.isBreak
+        ? `<span class="tag">✧ Shem Ayin-Bet · between cycles</span>`
+        : `<span class="tag">✧ Shem Ayin-Bet · Name ${ayinBetInfo.nameNum} of 72</span>`) +
       (nineDaysToday
         ? `<span class="tag highlight">✧ Nine Days · Day ${hDay} — ${nineDaysToday.soul} (Cycle ${(hDay + 1) / 2} of 5)</span>`
         : (inNineDays ? `<span class="tag">✧ Nine Days · Day ${hDay} — between the souls</span>` : ``));
@@ -12653,7 +12656,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       return mapping;
     }
 
-    document.getElementById('malchut-cycle-name').textContent = `Day ${sef.dayNum} · ${malTxt.day}`;
+    {
+      const yadFace = getYadInfo(d - d_year1 + 1, isLeapYear);
+      document.getElementById('malchut-cycle-name').innerHTML =
+        `Day ${sef.dayNum} · ${malTxt.day}` +
+        ` <span style="color:var(--ink-dim)">· ✧ Yad ${yadFace.cycle}/${isLeapYear ? 14 : 13} · Day ${yadFace.dayInCycle}/28</span>`;
+    }
 
     // Get parasha-specific portion if available — use actual Torah reading, not WEEKLY_BOOKS parasha
     const actualParasha = (window.getParashaForDate && window.getParashaForDate(date)) || wk.parasha;
