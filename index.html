@@ -10615,6 +10615,35 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'ה׳ פָּנָיו אֵלֶיךָ',
     'וְיָשֵׂם לְךָ שָׁלוֹם',
   ];
+  // The 24 mishmarot — the family guards of the Kehunah, in the order of the
+  // lots of I Divrei HaYamim 24:7-18. Each 24-day word-period of Birkat
+  // Kohanim carries all 24 watches, one guard per day.
+  const MISHMAROT_24 = [
+    { he: 'יְהוֹיָרִיב', en: 'Yehoyariv' },
+    { he: 'יְדַעְיָה',    en: 'Yedayah' },
+    { he: 'חָרִם',        en: 'Charim' },
+    { he: 'שְׂעֹרִים',    en: 'Seorim' },
+    { he: 'מַלְכִּיָּה',  en: 'Malkiyah' },
+    { he: 'מִיָּמִן',     en: 'Miyamin' },
+    { he: 'הַקּוֹץ',      en: 'Hakotz' },
+    { he: 'אֲבִיָּה',     en: 'Aviyah' },
+    { he: 'יֵשׁוּעַ',     en: 'Yeshua' },
+    { he: 'שְׁכַנְיָהוּ', en: 'Shechanyahu' },
+    { he: 'אֶלְיָשִׁיב',  en: 'Elyashiv' },
+    { he: 'יָקִים',       en: 'Yakim' },
+    { he: 'חֻפָּה',       en: 'Chupah' },
+    { he: 'יֶשֶׁבְאָב',   en: 'Yeshevav' },
+    { he: 'בִּלְגָּה',    en: 'Bilgah' },
+    { he: 'אִמֵּר',       en: 'Immer' },
+    { he: 'חֵזִיר',       en: 'Chezir' },
+    { he: 'הַפִּצֵּץ',    en: 'Hapitzetz' },
+    { he: 'פְּתַחְיָה',   en: 'Petachyah' },
+    { he: 'יְחֶזְקֵאל',   en: 'Yechezkel' },
+    { he: 'יָכִין',       en: 'Yachin' },
+    { he: 'גָּמוּל',      en: 'Gamul' },
+    { he: 'דְּלָיָהוּ',   en: 'Delayahu' },
+    { he: 'מַעַזְיָהוּ',  en: 'Maazyahu' },
+  ];
   function getAyinBetInfo(d) {
     const dN = (((d - 1) % 364) + 364) % 364 + 1; // safe wrap, 1-364
     const breakIdx = AYIN_BET_BREAKS.indexOf(dN);
@@ -11925,6 +11954,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // 3 words per cycle, 15 words across the five cycles.
     const bkWords = ayinBetInfo.isBreak ? [] : BIRKAT_KOHANIM_CYCLES[ayinBetInfo.cycle - 1].split(' ');
     const bkIdx = ayinBetInfo.isBreak ? -1 : Math.floor((ayinBetInfo.dayInCycle - 1) / 24);
+    // Day within the 24-day word-period → one of the 24 mishmarot (detail only)
+    const bkMishmar = ayinBetInfo.isBreak ? null : MISHMAROT_24[(ayinBetInfo.dayInCycle - 1) % 24];
+    const bkMishmarNum = ayinBetInfo.isBreak ? 0 : ((ayinBetInfo.dayInCycle - 1) % 24) + 1;
     document.getElementById('chesed-cycle-name').innerHTML =
       (mishnaInfo.type === 'mishna' ? 'Mishna — Oral Torah' : 'Tosefta — Expanded Oral Torah') + ' <span class="maalah">מעלה ו׳</span>';
     document.getElementById('chesed-main').innerHTML = mishnaInfo.seferiaUrl
@@ -11954,6 +11986,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">${ayinBetInfo.isBreak ? 'Today:' : `Name ${ayinBetInfo.nameNum}:`}</span><span class="detail-value">${ayinBetInfo.isBreak ? `A silent day — between Cycle ${ayinBetInfo.afterCycle} and Cycle ${ayinBetInfo.afterCycle + 1}` : ayinBetInfo.name}</span></div>
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Cycle ${ayinBetInfo.cycle} of 5 · Day ${ayinBetInfo.dayInCycle} of 72</div>`}
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Birkat Kohanim · this cycle: <span style="font-size:1.15em;color:var(--ink)">${bkWords.map((w, i) => i === bkIdx ? `<span style="color:var(--gold)">${w}</span>` : w).join(' ')}</span> <span style="font-size:0.9em">· one word each 24 days</span></div>`}
+       ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Mishmar ${bkMishmarNum} of 24: <span style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</span> — ${bkMishmar.en} · <a href="https://www.sefaria.org/I_Chronicles.24" target="_blank" style="color:var(--gold)">I Divrei HaYamim 24</a></div>`}
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Shemot 14:19–21 · חסד = 72</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
       (inNineDays ? `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ The Nine Days — Chesed's Microcosm</div>
