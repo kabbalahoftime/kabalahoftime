@@ -11712,25 +11712,42 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Alter Rebbe's Torah — 364-day cycle
     // TO=97 days (opening+96 folios), LTVa=51 days (opening+50 folios),
     // LTBa=99 days (99 folios), LTDe=100 days (100 folios), SHS=17 days (51 discourses/3 per day)
+    // HebrewBooks page anchors (calibrated from the printed edition):
+    //   req  = HebrewBooks sefer id · pg0/pg1 = PDF pgnum of the section's
+    //   first folio (1a) and last folio (Nb) · fMax = real last folio.
+    // Torah Ohr = req 16069; all Likutei Torah volumes = req 16093.
     const CHOCHMA_CYCLE = [
-      { name: 'Torah Ohr',     start: 1,   end: 97,  hasOpening: true,  url: 'https://www.sefaria.org/Torah_Ohr?tab=contents' },
-      { name: 'LT Vayikra',    start: 98,  end: 148, hasOpening: true,  url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
-      { name: 'LT Bamidbar',   start: 149, end: 247, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
-      { name: 'LT Devarim',    start: 248, end: 347, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
-      { name: 'Shir HaShirim / Megilas Esther', start: 348, end: 364, perDay: 3,         url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents' },
+      { name: 'Torah Ohr',     start: 1,   end: 97,  hasOpening: true,  url: 'https://www.sefaria.org/Torah_Ohr?tab=contents',      req: 16069, pg0: 9,   pg1: 255, fMax: 124 },
+      { name: 'LT Vayikra',    start: 98,  end: 148, hasOpening: true,  url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 14,  pg1: 137, fMax: 52  },
+      { name: 'LT Bamidbar',   start: 149, end: 247, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 140, pg1: 331, fMax: 96  },
+      { name: 'LT Devarim',    start: 248, end: 347, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 334, pg1: 531, fMax: 100 },
+      { name: 'Shir HaShirim / Megilas Esther', start: 348, end: 364, perDay: 3,         url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 534, pg1: 633, fMax: 51 },
     ];
     const chDay = ((d - 1) % 364) + 1;
-    let chSection = '', chReading = '', chUrl = null;
+    let chSection = '', chReading = '', chUrl = null, chHbUrl = null;
     for (const sec of CHOCHMA_CYCLE) {
       if (chDay >= sec.start && chDay <= sec.end) {
         const dw = chDay - sec.start + 1;
+        const days = sec.end - sec.start + 1;
+        // Proportional page: pins the section's first and last day to the exact
+        // anchor pages, interpolating between (self-corrects the app's folio
+        // count vs. the real edition, so Bamidbar never spills into Devarim).
+        const hbPage = pg => `https://hebrewbooks.org/pdfpager.aspx?req=${sec.req}&pgnum=${Math.round(pg)}`;
+        const lerp = (i, n) => sec.pg0 + (n > 1 ? i / (n - 1) : 0) * (sec.pg1 - sec.pg0);
         if (sec.perDay) {
-          const first = (dw - 1) * 3 + 1;
-          chReading = `Discourses ${first}–${first + 2}`;
+          const first = (dw - 1) * sec.perDay + 1;   // first discourse of the day
+          const dMax  = days * sec.perDay;           // 51 discourses
+          chReading = `Discourses ${first}–${first + sec.perDay - 1}`;
+          chHbUrl = hbPage(lerp(first - 1, dMax));
         } else if (sec.hasOpening && dw === 1) {
           chReading = 'Opening Page';
+          chHbUrl = hbPage(sec.pg0);
         } else {
-          chReading = `Folio ${sec.hasOpening ? dw - 1 : dw}`;
+          const appF = sec.hasOpening ? dw - 1 : dw;             // 1..appFmax
+          const appFmax = days - (sec.hasOpening ? 1 : 0);
+          const realF = Math.round(1 + (appF - 1) * (sec.fMax - 1) / (appFmax - 1));
+          chReading = `Folio ${realF}`;
+          chHbUrl = hbPage(lerp(appF - 1, appFmax));
         }
         chSection = sec.name;
         chUrl = sec.url;
@@ -11742,12 +11759,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : `<div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">R. Shneur Zalman of Liadi (Alter Rebbe)</span></div>`;
 
     // Torah Ohr / Likutei Torah on the Chochmah face — the day's reading, linking
-    // to Sefaria (precise) and to the sefer on HebrewBooks (Torah Ohr = req 16069,
-    // Likutei Torah = req 16093).
-    const chHbReq = (chSection === 'Torah Ohr') ? 16069 : 16093;
+    // to Sefaria and to the exact folio page on HebrewBooks.
     document.getElementById('chochmah-lt-face').innerHTML = chSection
       ? `<a href="${chUrl}" target="_blank" style="color:var(--gold)">${chSection} · ${chReading}</a>` +
-        ` <a href="https://hebrewbooks.org/${chHbReq}" target="_blank" style="color:var(--gold);font-size:0.85em" title="${chSection === 'Torah Ohr' ? 'Torah Ohr' : 'Likutei Torah'} on HebrewBooks">HB</a>` +
+        (chHbUrl ? ` <a href="${chHbUrl}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This folio on HebrewBooks">HB</a>` : ``) +
         `<span style="color:var(--ink-dim);font-size:0.85em"> · Day ${chDay} of 364</span>`
       : `<span style="color:var(--ink-dim)">—</span>`;
 
