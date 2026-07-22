@@ -170,19 +170,29 @@ function drawn small.
 - **Halachot 2nd Year** — 47, deliberately **partial** (skips the Bamidbar
   parasha; ends at Ki Tavo — Rav Yosef Chaim never finished the 2nd cycle)
 
-**Mapping — complete the whole work every year, distinct daily:**
-- Each parasha-week reads that parasha's *full* Ben Ish Chai — **Drash + Shanah
-  Alef + Shanah Bet** — with the week's total **ot** distributed **one portion per
-  day** (distinct daily readings; whole work finishes once a year).
-- **Gaps handle themselves:** where Shanah Bet is silent (Bamidbar parasha;
-  Devarim → V'Zot HaBerachah) the week carries Drash + Shanah Alef only. The
-  Chanukah section reads on Chanukah (Vayeshev–Miketz = Kislev).
-- **Common/leap auto-distributes:** combined-parsha weeks (common year) take both
-  parshiyos' halachot at once; leap-year separate weeks spread lighter — the same
-  combined-vs-separate seam seen between Shanah Alef and Shanah Bet.
+**Mapping — complete the whole work every year, distinct daily, by COMPONENT
+(no ot-counts needed — Sefaria doesn't expose labeled ot for this work):**
 
-**To verify:** per-parasha ot-counts (Drash, Year 1, Year 2) from Sefaria, so each
-week's total divides evenly across its days.
+The week builds toward Shabbat, as the drush + halachot were originally delivered
+as one Shabbat discourse. The three components (Drash, Halachot Year 1, Halachot
+Year 2) are split across the six weekdays; Shabbat carries all of them.
+
+- **All three present (most parshiyot):** Sun–Mon = Drash · Tue–Wed = Year 1 ·
+  Thu–Fri = Year 2 · **Shabbat = all three**.
+- **Year 2 absent** (Bamidbar parasha; Devarim → V'Zot HaBerachah): Sun–Tue =
+  Drash · Wed–Fri = Year 1 · **Shabbat = both**.
+- **Chanukah** section slots into its week (Vayeshev–Miketz = Kislev).
+- **Combined-parsha weeks** (common years) fold two parshiyos' components into the
+  six days — settle at build time.
+
+Within the 2–3 days a component spans: if Sefaria exposes **segment-level
+addressing** (e.g., `…,_Bereshit.5`), split the component evenly across its days
+for fully-distinct dailies; otherwise the component is the day's unit (both its
+days point to it; the learner advances through it).
+
+**To supply when building:** the Sefaria URL structure for the three components
+per parasha (Drashot / Halachot 1st Year / Halachot 2nd Year). **No ot-counts
+required.**
 
 ---
 
@@ -197,4 +207,6 @@ Chabad (Chochmah, Tiferet ½), Breslov (Binah, Netzach, Tiferet ½), Sephardi
   Sichos HaRan = 308.
 - **Tiferet:** Seder Birkas HaNehenin intro + per-chapter seif counts; Sippurei
   Ma'asiyot tale order; cycle→calendar date map.
-- **Yesod:** Ben Ish Chai per-parasha ot-counts (Drash / Year 1 / Year 2).
+- **Yesod:** Ben Ish Chai per-parasha URL structure for the three components
+  (Drashot / Halachot 1st Year / Halachot 2nd Year). No ot-counts needed —
+  the day-split is by component (see Yesod section).
