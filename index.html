@@ -11765,12 +11765,36 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : `<div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">R. Shneur Zalman of Liadi (Alter Rebbe)</span></div>`;
 
     // Torah Ohr / Likutei Torah on the Chochmah face — the day's reading, linking
-    // to Sefaria and to the exact folio page on HebrewBooks.
-    document.getElementById('chochmah-lt-face').innerHTML = chSection
-      ? `<a href="${chUrl}" target="_blank" style="color:var(--gold)">${chSection} · ${chReading}</a>` +
-        (chHbUrl ? ` <a href="${chHbUrl}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This folio on HebrewBooks">HB</a>` : ``) +
-        `<span style="color:var(--ink-dim);font-size:0.85em"> · Day ${chDay} of 364</span>`
-      : `<span style="color:var(--ink-dim)">—</span>`;
+    // to Sefaria and to the exact folio page on HebrewBooks. In a leap year's
+    // 28-day Adar I microcosm the face reads the Hosafot instead — the addenda
+    // as the added month: ½ (Vayikra 8b) + 4 (Vayikra 50b→) + 23½ (Torah Ohr,
+    // Page 203–248) = 28.
+    if (inExtra) {
+      let hoReq, hoPg, hoLabel, hoUrl;
+      if (extraDay === 1) {
+        hoReq = 16093; hoPg = 29;
+        hoLabel = 'LT Vayikra · Hosafa — folio 8b';
+        hoUrl = 'https://www.sefaria.org/Likkutei_Torah?tab=contents';
+      } else if (extraDay <= 5) {
+        hoReq = 16093; hoPg = 130 + (extraDay - 2) * 2;
+        hoLabel = `LT Vayikra · Hosafa folio ${extraDay - 1} of 4`;
+        hoUrl = 'https://www.sefaria.org/Likkutei_Torah?tab=contents';
+      } else {
+        hoReq = 16069; hoPg = Math.round(211 + (extraDay - 6) * 2);
+        hoLabel = `Torah Ohr · Hosafa folio ${extraDay - 5} of 23`;
+        hoUrl = 'https://www.sefaria.org/Torah_Ohr?tab=contents';
+      }
+      document.getElementById('chochmah-lt-face').innerHTML =
+        `<a href="${hoUrl}" target="_blank" style="color:var(--gold)">${hoLabel}</a>` +
+        ` <a href="https://hebrewbooks.org/pdfpager.aspx?req=${hoReq}&pgnum=${hoPg}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This folio on HebrewBooks">HB</a>` +
+        `<span style="color:var(--ink-dim);font-size:0.85em"> · Hosafa ${extraDay} of 28</span>`;
+    } else {
+      document.getElementById('chochmah-lt-face').innerHTML = chSection
+        ? `<a href="${chUrl}" target="_blank" style="color:var(--gold)">${chSection} · ${chReading}</a>` +
+          (chHbUrl ? ` <a href="${chHbUrl}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This folio on HebrewBooks">HB</a>` : ``) +
+          `<span style="color:var(--ink-dim);font-size:0.85em"> · Day ${chDay} of 364</span>`
+        : `<span style="color:var(--ink-dim)">—</span>`;
+    }
 
     // Tractate half-cycle lookup: 'a' = days 1-11, 'b' = days 12-22; cycle 17 has only 'a' (12 days)
     const tractHalfIdx = cy22.cycle >= 17
