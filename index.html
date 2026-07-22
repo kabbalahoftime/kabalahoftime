@@ -11715,13 +11715,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // HebrewBooks page anchors (calibrated from the printed edition):
     //   req  = HebrewBooks sefer id · pg0/pg1 = PDF pgnum of the section's
     //   first folio (1a) and last MAIN-TEXT folio (Nb) · fMax = that folio.
-    // The common year reads the main text only; the Hosafot (leap microcosm)
-    // sit past pg1: Torah Ohr's 23.5-folio Hosafa is Page 203–248 (main ends
-    // Page 200 = folio 100b = pgnum 208). Torah Ohr = req 16069; all Likutei
-    // Torah volumes = req 16093.
+    // The common year reads the main text only; the Hosafot (leap microcosm,
+    // 4 + 23.5 + .5 = 28 folios) sit past pg1:
+    //   · Torah Ohr — 23.5-folio Hosafa, Page 203–248 (main ends Page 200 =
+    //     folio 100b = pgnum 208).
+    //   · LT Vayikra — main ends folio 50b (Page 100 = pgnum 129); its Hosafot
+    //     are the .5 folio at 8b and the 4 folios at 50b→.
+    // Torah Ohr = req 16069; all Likutei Torah volumes = req 16093.
     const CHOCHMA_CYCLE = [
       { name: 'Torah Ohr',     start: 1,   end: 97,  hasOpening: true,  url: 'https://www.sefaria.org/Torah_Ohr?tab=contents',      req: 16069, pg0: 9,   pg1: 208, fMax: 100 },
-      { name: 'LT Vayikra',    start: 98,  end: 148, hasOpening: true,  url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 14,  pg1: 137, fMax: 52  },
+      { name: 'LT Vayikra',    start: 98,  end: 148, hasOpening: true,  url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 14,  pg1: 129, fMax: 50  },
       { name: 'LT Bamidbar',   start: 149, end: 247, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 140, pg1: 331, fMax: 96  },
       { name: 'LT Devarim',    start: 248, end: 347, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 334, pg1: 531, fMax: 100 },
       { name: 'Shir HaShirim / Megilas Esther', start: 348, end: 364, perDay: 3,         url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 534, pg1: 633, fMax: 51 },
