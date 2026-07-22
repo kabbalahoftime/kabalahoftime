@@ -11709,51 +11709,47 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       }
     }
     
-    // Alter Rebbe's Torah — 364-day cycle
-    // TO=97 days (opening+96 folios), LTVa=51 days (opening+50 folios),
-    // LTBa=99 days (99 folios), LTDe=100 days (100 folios), SHS=17 days (51 discourses/3 per day)
-    // HebrewBooks page anchors (calibrated from the printed edition):
-    //   req  = HebrewBooks sefer id · pg0/pg1 = PDF pgnum of the section's
-    //   first folio (1a) and last MAIN-TEXT folio (Nb) · fMax = that folio.
-    // The common year reads the main text only; the Hosafot (leap microcosm,
-    // 4 + 23.5 + .5 = 28 folios) sit past pg1:
-    //   · Torah Ohr — 23.5-folio Hosafa, Page 203–248 (main ends Page 200 =
-    //     folio 100b = pgnum 208).
-    //   · LT Vayikra — main ends folio 50b (Page 100 = pgnum 129); its Hosafot
-    //     are the .5 folio at 8b and the 4 folios at 50b→.
+    // Alter Rebbe's Torah — 364-day cycle, one folio a day (three discourses a
+    // day for Shir HaShirim). Two paired "cover days" carry the four cover pages
+    // (Torah Ohr + Vayikra; Bamidbar + Devarim), so each sefer is read folio-for-
+    // day. Layout: cover¹(1) · Torah Ohr 99(2–100) · Vayikra 50(101–150) ·
+    // cover²(151) · Bamidbar 96(152–247) · Devarim 100(248–347) ·
+    // Shir HaShirim 17(348–364) = 364.
+    //   pg0/pgLast = PDF pgnum of the section's folio 1a and its last main
+    //   folio's a-side · fMax = last main folio. Linear sections land exactly;
+    //   Vayikra (inserted Hosafot) interpolates within a page.
+    // The Hosafot (½ + 4 + 23½ = 28 folios) are the leap-year microcosm (below).
     // Torah Ohr = req 16069; all Likutei Torah volumes = req 16093.
+    const TO_URL = 'https://www.sefaria.org/Torah_Ohr?tab=contents';
+    const LT_URL = 'https://www.sefaria.org/Likkutei_Torah?tab=contents';
     const CHOCHMA_CYCLE = [
-      { name: 'Torah Ohr',     start: 1,   end: 97,  hasOpening: true,  url: 'https://www.sefaria.org/Torah_Ohr?tab=contents',      req: 16069, pg0: 9,   pg1: 208, fMax: 100 },
-      { name: 'LT Vayikra',    start: 98,  end: 148, hasOpening: true,  url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 14,  pg1: 129, fMax: 50  },
-      { name: 'LT Bamidbar',   start: 149, end: 247, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 140, pg1: 331, fMax: 96  },
-      { name: 'LT Devarim',    start: 248, end: 347, hasOpening: false, url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 334, pg1: 531, fMax: 100 },
-      { name: 'Shir HaShirim / Megilas Esther', start: 348, end: 364, perDay: 3,         url: 'https://www.sefaria.org/Likkutei_Torah?tab=contents', req: 16093, pg0: 534, pg1: 633, fMax: 51 },
+      { cover: [ { name: 'Torah Ohr',   req: 16069, pg: 1,  url: TO_URL },
+                 { name: 'LT Vayikra',  req: 16093, pg: 12, url: LT_URL } ], start: 1,   end: 1   },
+      { name: 'Torah Ohr',   start: 2,   end: 100, req: 16069, pg0: 9,   pgLast: 205, fMax: 99,  url: TO_URL },
+      { name: 'LT Vayikra',  start: 101, end: 150, req: 16093, pg0: 14,  pgLast: 128, fMax: 50,  url: LT_URL },
+      { cover: [ { name: 'LT Bamidbar', req: 16093, pg: 138, url: LT_URL },
+                 { name: 'LT Devarim',  req: 16093, pg: 332, url: LT_URL } ], start: 151, end: 151 },
+      { name: 'LT Bamidbar', start: 152, end: 247, req: 16093, pg0: 140, pgLast: 330, fMax: 96,  url: LT_URL },
+      { name: 'LT Devarim',  start: 248, end: 347, req: 16093, pg0: 334, pgLast: 530, fMax: 100, url: LT_URL },
+      { name: 'Shir HaShirim / Megilas Esther', start: 348, end: 364, perDay: 3, req: 16093, pg0: 534, pgLast: 632, fMax: 51, url: LT_URL },
     ];
     const chDay = ((d - 1) % 364) + 1;
-    let chSection = '', chReading = '', chUrl = null, chHbUrl = null;
+    let chSection = '', chReading = '', chUrl = null, chHbUrl = null, chCovers = null;
     for (const sec of CHOCHMA_CYCLE) {
       if (chDay >= sec.start && chDay <= sec.end) {
+        if (sec.cover) { chCovers = sec.cover; chSection = 'Covers'; break; }
         const dw = chDay - sec.start + 1;
-        const days = sec.end - sec.start + 1;
-        // Proportional page: pins the section's first and last day to the exact
-        // anchor pages, interpolating between (self-corrects the app's folio
-        // count vs. the real edition, so Bamidbar never spills into Devarim).
         const hbPage = pg => `https://hebrewbooks.org/pdfpager.aspx?req=${sec.req}&pgnum=${Math.round(pg)}`;
-        const lerp = (i, n) => sec.pg0 + (n > 1 ? i / (n - 1) : 0) * (sec.pg1 - sec.pg0);
+        // folio (a-side) → pgnum, pinned exactly at folio 1 and folio fMax
+        const folioPg = f => sec.pg0 + (sec.fMax > 1 ? (f - 1) / (sec.fMax - 1) : 0) * (sec.pgLast - sec.pg0);
         if (sec.perDay) {
           const first = (dw - 1) * sec.perDay + 1;   // first discourse of the day
-          const dMax  = days * sec.perDay;           // 51 discourses
           chReading = `Discourses ${first}–${first + sec.perDay - 1}`;
-          chHbUrl = hbPage(lerp(first - 1, dMax));
-        } else if (sec.hasOpening && dw === 1) {
-          chReading = 'Opening Page';
-          chHbUrl = hbPage(sec.pg0);
+          chHbUrl = hbPage(folioPg(first));
         } else {
-          const appF = sec.hasOpening ? dw - 1 : dw;             // 1..appFmax
-          const appFmax = days - (sec.hasOpening ? 1 : 0);
-          const realF = Math.round(1 + (appF - 1) * (sec.fMax - 1) / (appFmax - 1));
-          chReading = `Folio ${realF}`;
-          chHbUrl = hbPage(lerp(appF - 1, appFmax));
+          const f = dw;                              // one folio per day
+          chReading = `Folio ${f}`;
+          chHbUrl = hbPage(folioPg(f));
         }
         chSection = sec.name;
         chUrl = sec.url;
@@ -11788,6 +11784,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="${hoUrl}" target="_blank" style="color:var(--gold)">${hoLabel}</a>` +
         ` <a href="https://hebrewbooks.org/pdfpager.aspx?req=${hoReq}&pgnum=${hoPg}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This folio on HebrewBooks">HB</a>` +
         `<span style="color:var(--ink-dim);font-size:0.85em"> · Hosafa ${extraDay} of 28</span>`;
+    } else if (chCovers) {
+      document.getElementById('chochmah-lt-face').innerHTML =
+        chCovers.map(c =>
+          `<a href="${c.url}" target="_blank" style="color:var(--gold)">${c.name} · Cover</a>` +
+          ` <a href="https://hebrewbooks.org/pdfpager.aspx?req=${c.req}&pgnum=${c.pg}" target="_blank" style="color:var(--gold);font-size:0.85em" title="Cover on HebrewBooks">HB</a>`
+        ).join('<br>') +
+        `<div style="color:var(--ink-dim);font-size:0.85em;margin-top:2px;">Cover day · Day ${chDay} of 364</div>`;
     } else {
       document.getElementById('chochmah-lt-face').innerHTML = chSection
         ? `<a href="${chUrl}" target="_blank" style="color:var(--gold)">${chSection} · ${chReading}</a>` +
