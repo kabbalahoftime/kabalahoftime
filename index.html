@@ -1714,6 +1714,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-sub-text" id="chochmah-sub"></div>
     <div class="sefirah-tags" id="chochmah-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
+      <div class="keter-section-label">✧ Torah Ohr / Likutei Torah</div>
+      <div id="chochmah-lt-face" class="sefirah-main-text">Loading…</div>
+    </div>
+    <div class="malchut-ksa-row" style="margin-top:8px">
       <div class="keter-section-label">✧ KoT Book</div>
       <div id="chochmah-kot-book">Loading…</div>
     </div>
@@ -11737,6 +11741,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ? `<div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="${chUrl}" target="_blank" style="color:var(--gold)">${chSection} on Sefaria</a> — R. Shneur Zalman of Liadi</span></div>`
       : `<div class="detail-row"><span class="detail-label">Author:</span><span class="detail-value">R. Shneur Zalman of Liadi (Alter Rebbe)</span></div>`;
 
+    // Torah Ohr / Likutei Torah on the Chochmah face — the day's reading, linking
+    // to Sefaria (precise) and to the sefer on HebrewBooks (Torah Ohr = req 16069,
+    // Likutei Torah = req 16093).
+    const chHbReq = (chSection === 'Torah Ohr') ? 16069 : 16093;
+    document.getElementById('chochmah-lt-face').innerHTML = chSection
+      ? `<a href="${chUrl}" target="_blank" style="color:var(--gold)">${chSection} · ${chReading}</a>` +
+        ` <a href="https://hebrewbooks.org/${chHbReq}" target="_blank" style="color:var(--gold);font-size:0.85em" title="${chSection === 'Torah Ohr' ? 'Torah Ohr' : 'Likutei Torah'} on HebrewBooks">HB</a>` +
+        `<span style="color:var(--ink-dim);font-size:0.85em"> · Day ${chDay} of 364</span>`
+      : `<span style="color:var(--ink-dim)">—</span>`;
+
     // Tractate half-cycle lookup: 'a' = days 1-11, 'b' = days 12-22; cycle 17 has only 'a' (12 days)
     const tractHalfIdx = cy22.cycle >= 17
       ? 32
@@ -11764,8 +11778,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Day ${chDay} of 364 <span class="maalah yom" data-wane="12">מיעוט י״ב</span></div>
-       <div class="detail-row"><span class="detail-label">Sefer:</span><span class="detail-value">${chSection}</span></div>
-       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value">${chReading}</span></div>
        ${chSourceRow}
        <div class="detail-row"><span class="detail-label">Recordings:</span><span class="detail-value">
          <a href="https://www.torahrecordings.com/torah-ohr/" target="_blank" style="color:var(--gold)">Torah Ohr</a>
