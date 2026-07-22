@@ -77,8 +77,11 @@ Defining cycle: Sefirot 7×7×7 Omer, 49-day (מעלה ה׳). Overlay: **Likutei
 ## Netzach — Sichos HaRan + Likutei Etzot  **(DESIGNED)**
 
 Defining cycle: 41-day, "receiving the Torah" (מעלה ט׳). Netzach's number is
-**369** (with a 5-day doubling at the year seam — no drift). Two Rebbe Nachman
-works, the narrative + the distilled counsel, sum to it:
+**369**. It does not drift: like the 364-day KoT calendar, which overlaps at the
+year seam from ~25 Elul (year-dependent) to ~6 Tishrei, the **369-day calendar
+overlaps from ~25 Elul to ~11 Tishrei** — 5 days deeper into Tishrei (369 = 364 +
+5). That extended overlap is the "doubling" that re-syncs Netzach each year. Two
+Rebbe Nachman works, the narrative + the distilled counsel, sum to 369:
 
 | Work | Count |
 |---|---|
@@ -108,14 +111,22 @@ countable introduction; Sichos HaRan = 308 sections.
 
 ## Tiferet — Seder Birkas HaNehenin + Rebbe Nachman's Tales  **(DESIGNED)**
 
-Defining cycle: 13-day, 13 Attributes of Mercy (מעלה ח׳). **Structure: 26
-thirteen-day cycles + a 26-day microcosm of the 26** (26×13 = 338 + 26 = 364).
-Two works, one per 13-day cycle, read **once each** (no repetition):
+Defining cycle: 13-day, 13 Attributes of Mercy (מעלה ח׳). **Structure: 28
+thirteen-day cycles** (28 × 13 = 364, matching the existing `get13DayInfo`).
+The 26 *content* cycles carry the two works; the **last two cycles (27–28) are a
+26-day microcosm of the previous 26** (one microcosm-day per content cycle). Each
+work read **once** (no repetition):
 
-- **First half (cycles 1–13):** Seder Birkas HaNehenin, chapters **1→13 in order**
+- **Cycles 1–13** (days 1–169): Seder Birkas HaNehenin, chapters **1→13 in order**
   (13 chapters — confirmed via Chabad).
-- **Second half (cycles 14–26):** Sippurei Ma'asiyot (Rebbe Nachman's Tales),
+- **Cycles 14–26** (days 170–338): Sippurei Ma'asiyot (Rebbe Nachman's Tales),
   tales **1→13 in printed order** (no rearranging).
+- **Cycles 27–28** (days 339–364): microcosm reviewing the 26, one per day.
+
+Note: the 13 tale titles already exist in the code as `REBBE_NACHMAN_TALES`
+(Lost Princess → Seven Beggars), currently cycling mod 13 in the Tiferet detail —
+the build reassigns them to cycles 14–26 and adds Birkas HaNehenin to 1–13. Only
+the Sefaria *links* need supplying.
 
 **26 = יהוה** (the Name Tiferet embodies) · **13 = אחד / אהבה** — two thirteens
 making the Name.
