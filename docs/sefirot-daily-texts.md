@@ -215,10 +215,19 @@ keyed to the 54 parshiyot instead of Chesed's 52 KoT weeks:**
   (sealing two streams on the final day) is the template for combined-week packing.
 - No ot-counts needed — Rav Pe'alim's own sections are the daily unit.
 
-**To supply when building:** the Sefaria URL structure for the three Ben Ish Chai
-components per parasha (Drashot / Halachot 1st Year / Halachot 2nd Year), and for
-Rav Pe'alim (structure confirmed above — 540 = 54 × 10 minus the 4 prefaces,
-pending the two editorial calls). **No ot-counts required.**
+**Rav Pe'alim URL pattern — CONFIRMED (Vol I examples):**
+`https://www.sefaria.org/Responsa_Rav_Pealim,_Volume_<I–IV>,_<Section>.<N>?lang=bi`
+Sections: `Introduction` · `Preface` · `Index` · `Orach_Chayim` · `Yoreh_Deah` ·
+`Even_HaEzer` · `Choshen_Mishpat` · `Sod_Yesharim` · `Kuntres_Beit_Tefillah`.
+Per-volume order + counts: I = Index 4 / OC 35 / YD 57 / EH 13 / SY 17 (126);
+II = 5 / 65 / 41 / 34 / CM 15 / 14 (174); III = 5 / 45 / 32 / 12 / 8 / 13 /
+Kuntres 1 (116); IV = 4 / 40 (OC skips 36–38) / 39 / 13 / 8 / 20 (124). Total 540.
+Still to spot-check: the extrapolated `Choshen_Mishpat` and `Kuntres_Beit_Tefillah`
+slugs.
+
+**Still to supply:** the Sefaria URL structure for the three Ben Ish Chai
+components per parasha (Drashot / Halachot 1st Year / Halachot 2nd Year).
+**No ot-counts required.**
 
 ---
 
