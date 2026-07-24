@@ -124,7 +124,14 @@ the ~25 Elul–11 Tishrei overlap.
 
 ---
 
-## Tiferet — Seder Birkas HaNehenin + Rebbe Nachman's Tales  **(DESIGNED)**
+## Tiferet — Seder Birkas HaNehenin + Rebbe Nachman's Tales  **(LIVE)**
+
+Built into the 13-day-cycle render (`tifText` off `cy13.cycle`): 1–13
+`Seder_Birkat_HaNehenin.1-13`, 14–26 `Sippurei_Maasiyot.1-13`, 27–28 the microcosm
+review (cycle 27 chapters by day, cycle 28 tales by day). Structured detail block
++ face tag; leap Adar I adds `Sippurei_Maasiyot,_Talks_Following_the_Story_Tales`.
+All URLs confirmed. (Seder Birkas HaNehenin `,_Introduction` exists for the leap
+intro if wanted later.)
 
 Defining cycle: 13-day, 13 Attributes of Mercy (מעלה ח׳). **Structure: 28
 thirteen-day cycles** (28 × 13 = 364, matching the existing `get13DayInfo`).
