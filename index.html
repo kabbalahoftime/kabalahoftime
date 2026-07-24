@@ -2230,19 +2230,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         document.getElementById('yesod-parasha-name').innerHTML = mainHtml;
         document.getElementById('yesod-parasha-numbers').textContent = '';
 
-        // Tags — one per unique quality letter shown above (day, then parasha(s), then cycle(s))
-        const weekNum = nums.length > 0 ? nums.join(' · ') : 'N/A';
-        const seenLetters = new Set();
-        const tagLetters = [];
-        [dayQ, ...parashaQs, ...cycleQs].forEach(q => {
-            if (q && !seenLetters.has(q.letter)) { seenLetters.add(q.letter); tagLetters.push(q.letter); }
-        });
         const tagsEl = document.getElementById('yesod-tags');
-        if (tagsEl) {
-            tagsEl.innerHTML =
-                `<span class="tag highlight" style="white-space:nowrap">${foundParasha.name} · Shovavim Week ${weekNum}</span>` +
-                tagLetters.map(l => `<span class="tag" style="white-space:nowrap">${l}</span>`).join('');
-        }
+        if (tagsEl) tagsEl.innerHTML = '';
 
         // Detail: attribute explanation rows
         function buildAttrRows(num) {
@@ -11361,11 +11350,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             `<div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;margin-bottom:4px;">${_rd.kind==='rp' ? `Rav Pe’alim · ${_DOW[_wd]} (2 a day, 10 a parasha)` : _rd.label}</div>` +
             _links(_rd.items);
         }
-        const _tagsEl = document.getElementById('yesod-tags');
-        if (_tagsEl) _tagsEl.innerHTML += `<span class="tag">✧ ${_rd.kind==='rp' ? 'Rav Pe’alim' : _rd.label}</span>`;
+        const _faceLinks = items => items
+          .map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`)
+          .join(' &amp; ');
+        document.getElementById('yesod-parasha-numbers').innerHTML =
+          `<span style="color:var(--gold-mid)">✧</span> ${_rd.kind==='rp' ? 'Rav Pe’alim' : _rd.label} — ` +
+          (_rd.kind === 'hal' ? _faceLinks(_rd.y1) : _faceLinks(_rd.items));
       } else {
         document.getElementById('yesod-bic-main').innerHTML =
           `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
+        document.getElementById('yesod-parasha-numbers').innerHTML =
+          `<span style="color:var(--gold-mid)">✧</span> <a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
       }
       document.getElementById('yesod-bic-meta').innerHTML =
         `Rav Yosef Chaim of Baghdad · Rav Pe’alim (Sun–Thu) · Ben Ish Chai — Halachot (Fri), Drash (Shabbat)`;
