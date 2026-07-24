@@ -1773,7 +1773,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">KoT Song</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" style="opacity:0.85;">72 Names · 15 Words · 24 Mishmarot</div>
     <div class="sefirah-cycle-name" id="chesed-cycle-name">Mishna — Oral Torah <span class="maalah">מעלה ו׳</span></div>
     <div class="sefirah-main-text" id="chesed-main">Loading…</div>
     <div class="sefirah-sub-text" id="chesed-sub"></div>
@@ -12190,16 +12189,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const bkMishmar = ayinBetInfo.isBreak ? null : MISHMAROT_24[(ayinBetInfo.dayInCycle - 1) % 24];
     const bkMishmarNum = ayinBetInfo.isBreak ? 0 : ((ayinBetInfo.dayInCycle - 1) % 24) + 1;
     document.getElementById('chesed-cycle-name').innerHTML =
-      (mishnaInfo.type === 'mishna' ? 'Mishna — Oral Torah' : 'Tosefta — Expanded Oral Torah') + ' <span class="maalah">מעלה ו׳</span>';
-    document.getElementById('chesed-main').innerHTML = mishnaInfo.seferiaUrl
-      ? `<a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${mishnaInfo.text}</a>`
-      : mishnaInfo.text;
-    document.getElementById('chesed-sub').innerHTML = mishnaInfo.sub;
+      'Shem Ayin-Bet — 72-Day Cycle <span class="maalah">מעלה ו׳</span>';
+    document.getElementById('chesed-main').innerHTML = ayinBetInfo.isBreak
+      ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
+      : `Name <strong>${ayinBetInfo.nameNum}</strong> of 72, Cycle ${ayinBetInfo.cycle} of 5:<br>` +
+        `<strong>${ayinBetInfo.name}</strong><br>` +
+        `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords[bkIdx]}</span><br>` +
+        `<span style="font-size:0.85em;color:var(--ink-dim)">${bkMishmar.he} — ${bkMishmar.en}</span>`;
+    document.getElementById('chesed-sub').innerHTML =
+      `<span style="color:var(--gold-mid)">✧</span> ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} — ${mishnaInfo.text} <span style="opacity:0.7">· ${mishnaInfo.sub}</span>`;
     document.getElementById('chesed-tags').innerHTML =
-      `<span class="tag highlight">${mishnaInfo.tag1}</span><span class="tag">${mishnaInfo.tag2}</span>` +
-      (ayinBetInfo.isBreak
-        ? `<span class="tag">✧ Shem Ayin-Bet · between cycles</span>`
-        : `<span class="tag">✧ Shem Ayin-Bet · Name ${ayinBetInfo.nameNum} of 72 · ${bkWords[bkIdx]} · ${bkMishmar.he}</span>`) +
+      `<span class="tag highlight" style="white-space:nowrap">${ayinBetInfo.isBreak ? `Cycle ${ayinBetInfo.afterCycle} → ${ayinBetInfo.afterCycle + 1}` : `Day ${ayinBetInfo.dayInCycle} · Cycle ${ayinBetInfo.cycle}`}</span>` +
+      `<span class="tag">${mishnaInfo.tag1}</span><span class="tag">${mishnaInfo.tag2}</span>` +
       (nineDaysToday
         ? `<span class="tag highlight">✧ Nine Days · Day ${hDay} — ${nineDaysToday.soul} (Cycle ${(hDay + 1) / 2} of 5)</span>`
         : (inNineDays ? `<span class="tag">✧ Nine Days · Day ${hDay} — between the souls</span>` : ``));
