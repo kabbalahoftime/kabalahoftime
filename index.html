@@ -704,7 +704,7 @@ line-height: 1;
 opacity: 0.85;
 }
 
-.sefirah-content-col { padding-left: 2px; }
+.sefirah-content-col { padding-left: 2px; min-width: 0; }
 
 .maalah {
 cursor: pointer;
@@ -12453,7 +12453,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (c === 27) return { ...bh(cy13.day),   review:true };
       return { ...tale(cy13.day), review:true }; // c === 28
     })();
-    if (tifText) _tifTags.innerHTML += `<span class="tag">✧ ${tifText.tag}</span>`;
+    if (tifText) {
+      const _tifSub = cards[4].querySelector('.sefirah-sub-text');
+      if (_tifSub) _tifSub.innerHTML = `<span style="color:var(--gold-mid)">✧</span> ${tifText.label}`;
+    }
     cards[4].querySelector('.sefirah-detail').innerHTML = (inExtra && cy13Mic) ?
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year Microcosm — 28-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy13Mic.day} of ${cy13Mic.total}</span></div>
