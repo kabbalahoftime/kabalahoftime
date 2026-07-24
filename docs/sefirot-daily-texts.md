@@ -222,8 +222,12 @@ Sections: `Introduction` · `Preface` · `Index` · `Orach_Chayim` · `Yoreh_Dea
 Per-volume order + counts: I = Index 4 / OC 35 / YD 57 / EH 13 / SY 17 (126);
 II = 5 / 65 / 41 / 34 / CM 15 / 14 (174); III = 5 / 45 / 32 / 12 / 8 / 13 /
 Kuntres 1 (116); IV = 4 / 40 (OC skips 36–38) / 39 / 13 / 8 / 20 (124). Total 540.
-Still to spot-check: the extrapolated `Choshen_Mishpat` and `Kuntres_Beit_Tefillah`
-slugs.
+`Choshen_Mishpat` and `Kuntres_Beit_Tefillah` slugs **both confirmed**.
+
+**Full 540-section stream generated and verified** (sequential, 10 per parasha,
+2/day × 5 weekdays): opens on Parasha 1 = Vol I Index (the threshold carrying the
+Intro + Preface), seals on Parasha 54 (V'Zot HaBerachah) = Vol IV Sod Yesharim
+11–20. Ready to wire.
 
 **Still to supply:** the Sefaria URL structure for the three Ben Ish Chai
 components per parasha (Drashot / Halachot 1st Year / Halachot 2nd Year).
