@@ -2397,7 +2397,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   const Y2_MISS = new Set([34,44,51,52,53,54]); // Bamidbar, Devarim, Nitzavim, Vayeilech, Ha'Azinu, V'Zot HaBerachah
   const y1slug = num => Y1C[num] || SLUG[num];
   const y2slug = num => Y2_MISS.has(num) ? null : (Y2C[num] || SLUG[num]);
-  const bicUrl = (kind,slug) => `https://www.sefaria.org/Ben_Ish_Hai,_${kind},_${slug}?lang=bi`;
+  const bicUrl = (kind,slug,suffix) => `https://www.sefaria.org/Ben_Ish_Hai,_${kind},_${slug}${suffix||''}?lang=bi`;
   const pName  = num => (SLUG[num]||'').replace(/_/g,' ');
 
   window.RAV_PEALIM = RP; // 540 entries (for verification)
@@ -2412,10 +2412,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       return { kind:'rp', label:'Rav Pe’alim', items: today.map(e => ({url:rpUrl(e), label:rpLbl(e)})) };
     }
     if (weekday === 6) {
-      const items = [];
+      const items = [], seen = new Set();
+      const add = (url, label) => { if (!seen.has(url)) { seen.add(url); items.push({url, label}); } };
       for (const num of nums) {
-        items.push({url:bicUrl('Halachot_1st_Year', y1slug(num)), label:`${pName(num)} · Year 1`});
-        const s2 = y2slug(num); if (s2) items.push({url:bicUrl('Halachot_2nd_Year', s2), label:`${pName(num)} · Year 2`});
+        const s1 = y1slug(num);
+        add(bicUrl('Halachot_1st_Year', s1, ',_Introduction'), `${s1.replace(/_/g,' ')} · Year 1`);
+        const s2 = y2slug(num);
+        if (s2) add(bicUrl('Halachot_2nd_Year', s2, ',_Introduction'), `${s2.replace(/_/g,' ')} · Year 2`);
       }
       return { kind:'hal', label:'Ben Ish Chai · Halachot', items };
     }
