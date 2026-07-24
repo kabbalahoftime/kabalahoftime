@@ -12402,7 +12402,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       cycleTheme = `Cycle Theme: Microcosm of Moshe's 13 Attributes (Outer Vessels)`;
     }
     const _tifTags = cards[4].querySelector('.sefirah-tags');
-    _tifTags.style.flexWrap = 'nowrap';
     if (inExtra && cy13Mic) {
       cards[4].querySelector('.sefirah-cycle-name').innerHTML = `13 Attributes — Leap Year Microcosm <span class="maalah">מעלה ח׳</span>`;
       cards[4].querySelector('.sefirah-main-text').innerHTML =
@@ -12411,8 +12410,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<span style="font-size:0.88em;opacity:0.72">${cy13Mic.attr.meaning}</span><br>` +
         `<span style="font-size:0.85em;color:var(--ink-dim)">${cy13Mic.setType}</span>`;
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
-      _tifTags.innerHTML =
-        `<span class="tag highlight" style="white-space:nowrap">${hMonth === 11 ? 'Shevat' : 'Adar I'} · Day ${cy13Mic.day} of ${cy13Mic.total}</span><span class="tag">${cy13Mic.attr.name}</span>`;
+      _tifTags.innerHTML = '';
     } else {
       // Express the raw 1–28 cycle as its round + position: cycles 1–13 = 1st,
       // 14–26 = 2nd, 27–28 = the microcosm.
@@ -12424,9 +12422,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? `Attribute <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span><br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span>`
         : `Attribute <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
-      _tifTags.innerHTML = cycleThemeAttr
-        ? `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
-        : `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cy13.attr.name}</span>`;
+      _tifTags.innerHTML = '';
     }
 
     const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
