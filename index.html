@@ -13082,11 +13082,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           : `<span style="color:var(--gold)">${_vtText}</span>`) +
         ` <span style="font-size:0.72em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span>`;
       document.getElementById('malchut-yad-tags').innerHTML =
-        `<span class="tag highlight">✧ Yad HaChazakah</span>` +
+        `<span class="tag highlight">✧ Koheles 3:2–8</span>` +
         `<span class="tag">Cycle ${_yadFace.cycle} of ${isLeapYear ? 14 : 13}</span>` +
         `<span class="tag">Day ${_yadFace.dayInCycle} of 28</span>`;
       document.getElementById('malchut-yad-ittim').innerHTML =
-        `<span style="color:var(--gold-mid);font-style:normal;">✧ Koheles 3</span> — ` +
         _yadFace.ittim.map(p => `<em>${p.he}</em> · ${p.en}`).join('  &nbsp;&nbsp;·&nbsp;&nbsp;  ');
     })();
 
