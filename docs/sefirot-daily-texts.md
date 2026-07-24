@@ -151,7 +151,13 @@ day 197).
 
 ---
 
-## Yesod — Ben Ish Chai + Rav Pe'alim (both years, every year)  **(DESIGNED)**
+## Yesod — Ben Ish Chai + Rav Pe'alim (both years, every year)  **(LIVE)**
+
+Built via `window.getYesodReading(nums, weekday)` + the 540-section Rav Pe'alim
+stream, wired into the `yesod-bic` slot + a face tag. Decisions built in: combined
+weeks read BOTH decades (4/day); detail block + face tag. Halachot link to the
+`,_Introduction` leaf (Sefaria's readable node); combined Year-1 deduped. All URL
+patterns confirmed by author spot-check.
 
 Defining cycle: Shovavim / Parasha (מעלה י״ב) — **parasha-native**, follows the
 real weekly Torah reading. Ben Ish Chai is already parasha-shaped, so text and
@@ -241,10 +247,9 @@ Intro + Preface), seals on Parasha 54 (V'Zot HaBerachah) = Vol IV Sod Yesharim
 (`date.getDay()+1`, 1=Sun…7=Shabbat, motzei Shabbat→8), so the 5+2 maps directly:
 Sun–Thu Rav Pe'alim (2/day), Fri Halachot (both years), Shabbat Drash.
 
-**Two build decisions still open** (see chat): (a) combined-parsha weeks — read
-BOTH decades to keep 540 complete every year (heavier weeks) vs. follow the real
-reading (~500 in common years); (b) card placement of the new Ben Ish Chai +
-Rav Pe'alim block (face tag + detail, keeping the Shovavim defining content).
+Both build decisions resolved and shipped: (a) combined-parsha weeks read BOTH
+decades (540 complete every year); (b) detail block + face tag, Shovavim stays the
+face's defining content.
 
 ---
 
@@ -259,7 +264,4 @@ Chabad (Chochmah, Tiferet ½), Breslov (Binah, Netzach, Tiferet ½), Sephardi
   Sichos HaRan = 308.
 - **Tiferet:** Seder Birkas HaNehenin intro + per-chapter seif counts; Sippurei
   Ma'asiyot tale order; cycle→calendar date map.
-- **Yesod:** Ben Ish Chai per-parasha URL structure for the three components
-  (Drashot / Halachot 1st Year / Halachot 2nd Year); Rav Pe'alim URL structure
-  (composition fully settled: 540 = full body, index nodes as volume thresholds
-  carrying the 4 short prefaces). No ot-counts needed (see Yesod section).
+- **Yesod:** ✅ BUILT & LIVE. (Netzach and Tiferet remain — below.)
