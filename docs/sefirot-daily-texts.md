@@ -104,8 +104,23 @@ author's pairing:
 (one to Sichos HaRan, one to Likutei Etzot) — the disciple's two prefaces are
 exactly what complete the year to 369.
 
-**To verify on Sefaria:** exact Likutei Etzot topic list; that both works carry a
-countable introduction; Sichos HaRan = 308 sections.
+**Sefaria patterns — CONFIRMED:**
+- Sichos HaRan: `Sichot_HaRan.1` … `.308` (308 sections). Hakdamah exists (Reb
+  Noson's, with Oteh Or commentary) — provided as an image; whether it's a
+  separate node (`Sichot_HaRan,_Introduction`?) or lives on §1 is TBD.
+- Likutei Etzot: `Likkutei_Etzot,_<Topic>` (named slugs — Truth_and_Faith,
+  Sighing, Eating … Completeness) plus **two** intros: `Introduction_to_First_Edition`
+  and `Introduction_to_Second_Edition`.
+
+**Count resolution (3 intros available, only 2 fit 369):** 308 + 59 topics = 367;
++2 intros = 369. Two options (author to pick): (A) both Likutei Etzot intros count,
+Sichos Hakdamah rides §1 (Sichos = 308); (B) Sichos Hakdamah (309) + LE First
+Edition intro, LE Second Edition rides on First — keeps "one hakdama per work,"
+needs the Hakdamah to be its own node.
+
+**Still to build:** full ordered Likutei Etzot topic-slug list (65 → 59 after the
+holiday combination; multi-word slugs need spot-check); the 369-day sequencing with
+the ~25 Elul–11 Tishrei overlap.
 
 ---
 
