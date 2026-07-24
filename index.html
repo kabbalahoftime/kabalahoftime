@@ -12592,21 +12592,28 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const lcIsYechidah = inLeapCycle && leapCycleDay === 55;
     const lcLevel    = inLeapCycle ? getLeapCycleLevel(leapCycleDay) : null;
 
+    // Netzach primary text — Sichos HaRan + Likutei Etzot (369-unit cycle)
+    const _pos = ((cy41.cycle - 1) % 9) * 41 + cy41.day; // 1–369
+    const _nr = window.getNetzachReading ? window.getNetzachReading(_pos) : null;
+    const _nrSub = _nr
+      ? `<span style="color:var(--gold-mid)">✧</span> ${_nr.work} — ` +
+        (_nr.items.length === 1
+          ? `<a href="${_nr.items[0].url}" target="_blank" style="color:var(--gold)">${_nr.name}</a>`
+          : _nr.items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`).join(' &amp; '))
+      : '';
+
     if (inLeapCycle) {
       const lcBookLabel = lcLevel.review
         ? `Devarim — ${lcLevel.level} / ${lcLevel.world} (Review)`
         : `${lcLevel.book} — ${lcLevel.level} / ${lcLevel.world}`;
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `55-Day Cycle: Torah Parashiyot <span class="maalah">מעלה ט׳</span>`;
       cards[5].querySelector('.sefirah-main-text').innerHTML =
-        `Day <strong>${leapCycleDay}</strong> of <strong>55</strong> · Year-Cycle <strong>${leapCycleNum}</strong>`;
-      cards[5].querySelector('.sefirah-sub-text').innerHTML = lcIsYechidah
-        ? `<span style="font-size:0.9em;color:var(--ink-dim)">Yechidah:</span> <strong>Coming Down from Mount Sinai</strong>` +
-          `<br><span style="font-size:0.9em;color:var(--ink-dim)">World:</span> Adam Kadmon`
-        : `<span style="font-size:0.9em;color:var(--ink-dim)">Parasha:</span> <strong>${lcParasha}</strong>` +
-          `<br><span style="font-size:0.9em;color:var(--ink-dim)">Book / World:</span> ${lcBookLabel}`;
-      cards[5].querySelector('.sefirah-tags').innerHTML =
-        `<span class="tag highlight">Day ${leapCycleDay} of 55</span>` +
-        `<span class="tag">${lcIsYechidah ? 'Yechidah' : lcParasha}</span>`;
+        `Day <strong>${leapCycleDay}</strong> of <strong>55</strong> · Year-Cycle <strong>${leapCycleNum}</strong>:<br>` +
+        (lcIsYechidah
+          ? `<strong>Coming Down from Mount Sinai</strong><br><span style="font-size:0.88em;opacity:0.72">World: Adam Kadmon</span>`
+          : `<strong>${lcParasha}</strong><br><span style="font-size:0.88em;opacity:0.72">${lcBookLabel}</span>`);
+      cards[5].querySelector('.sefirah-sub-text').innerHTML = _nrSub;
+      cards[5].querySelector('.sefirah-tags').innerHTML = '';
       cards[5].querySelector('.sefirah-detail').innerHTML =
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year — 55-Day Cycle · Torah Parashiyot</div>
          <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${leapCycleDay} of 55 · Year-Cycle ${leapCycleNum}</span></div>
@@ -12632,13 +12639,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     } else {
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `41-Day Cycle: Receiving the Torah <span class="maalah">מעלה ט׳</span>`;
       cards[5].querySelector('.sefirah-main-text').innerHTML =
-        `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>`;
-      cards[5].querySelector('.sefirah-sub-text').innerHTML =
-        `<span style="font-size:0.9em;color:var(--ink-dim)">Day:</span> ${dayCmd.text}` +
-        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}` +
-        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : cycleCmd.commandment}`;
-      cards[5].querySelector('.sefirah-tags').innerHTML =
-        `<span class="tag highlight">Day ${cy41.day} of 41</span>`;
+        `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>:<br>` +
+        `<strong>${dayCmd.text}</strong><br>` +
+        `<span style="font-size:0.88em;opacity:0.72">${cy41.soulLevel.replace(' / ', '/')} · ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : cycleCmd.commandment}</span>`;
+      cards[5].querySelector('.sefirah-sub-text').innerHTML = _nrSub;
+      cards[5].querySelector('.sefirah-tags').innerHTML = '';
       cards[5].querySelector('.sefirah-detail').innerHTML =
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
          <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Cycle ${cy41.cycle} of 9)</span></div>
@@ -12662,24 +12667,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     }
 
-    // Netzach primary text — Sichos HaRan + Likutei Etzot (369-unit cycle),
-    // prepended to the detail with a face tag.
-    (function () {
-      const _pos = ((cy41.cycle - 1) % 9) * 41 + cy41.day; // 1–369
-      const _nr = window.getNetzachReading ? window.getNetzachReading(_pos) : null;
-      if (_nr) {
-        const _links = _nr.items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`).join(' &nbsp;·&nbsp; ');
-        const _block =
-          `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ ${_nr.work}</div>` +
-          `<div style="font-size:0.88rem;margin-bottom:4px;"><span style="color:var(--ink)">${_nr.name}</span> &nbsp; ${_links}</div>` +
-          `<div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">Netzach cycle · day ${_pos} of 369${_pos===369?' — Completeness, the seal':''}</div>` +
-          `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
-        const _det = cards[5].querySelector('.sefirah-detail');
-        if (_det) _det.innerHTML = _block + _det.innerHTML;
-        const _tg = cards[5].querySelector('.sefirah-tags');
-        if (_tg) _tg.innerHTML += `<span class="tag">✧ ${_nr.tag}</span>`;
-      }
-    })();
+    // Netzach primary text — Sichos HaRan + Likutei Etzot (369-unit cycle);
+    // now shown on the face sub-text (_nrSub, above), repeated here in the
+    // detail with the full link breakdown.
+    if (_nr) {
+      const _links = _nr.items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`).join(' &nbsp;·&nbsp; ');
+      const _block =
+        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ ${_nr.work}</div>` +
+        `<div style="font-size:0.88rem;margin-bottom:4px;"><span style="color:var(--ink)">${_nr.name}</span> &nbsp; ${_links}</div>` +
+        `<div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">Netzach cycle · day ${_pos} of 369${_pos===369?' — Completeness, the seal':''}</div>` +
+        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
+      const _det = cards[5].querySelector('.sefirah-detail');
+      if (_det) _det.innerHTML = _block + _det.innerHTML;
+    }
 
     // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
     document.getElementById('netzach-breslov-main').innerHTML =
