@@ -2508,6 +2508,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah">מעלה י״ג</span></div>
           <div class="sefirah-main-text" id="malchut-ksa-face">Loading…</div>
           <div class="sefirah-tags" id="malchut-yad-source-tag"></div>
+          <div class="sefirah-sub-text" id="malchut-yad-subs" style="font-size:0.85em;margin-top:3px;"></div>
         </div>
         <div class="malchut-section">
           <div class="keter-section-label">✦ Fruits of Her Labor — מפרי ידיה <span class="maalah">מעלה י״ד</span></div>
@@ -13090,6 +13091,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _yadFace.ittim.map(p => `<em>${p.he}</em> · ${p.en}`).join('  &nbsp;&nbsp;·&nbsp;&nbsp;  ');
       document.getElementById('malchut-yad-source-tag').innerHTML =
         `<span class="tag highlight">✧ Yad HaChazakah</span>`;
+      document.getElementById('malchut-yad-subs').innerHTML =
+        _yadFace.subs.map(s => `${s.name} <span style="color:var(--ink-dim);font-size:0.85em">· ${s.book}</span>`).join(' &nbsp;·&nbsp; ');
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
