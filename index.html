@@ -2413,8 +2413,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return { kind:'drash', label:'Ben Ish Chai · Drash', items: nums.map(num => ({url:bicUrl('Drashot', SLUG[num]), label:`${pName(num)} · Drash`})) };
   };
 
-  // Year 1 / Year 2 toggle for the Halachot day — keeps the face copy and the
-  // detail copy of the toggle in sync, since both render the same choice.
+  // Year 1 / Year 2 toggle for the Halachot day (detail section only — the
+  // face shows both years as separate links, no toggle needed).
   window.yesodBicYear = function (y) {
     const b1 = document.getElementById('bic-y1-box'), b2 = document.getElementById('bic-y2-box');
     const t1 = document.getElementById('bic-y1-btn'), t2 = document.getElementById('bic-y2-btn');
@@ -2422,12 +2422,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (b2) b2.style.display = y === 2 ? '' : 'none';
     if (t1) t1.classList.toggle('year-pill-active', y === 1);
     if (t2) t2.classList.toggle('year-pill-active', y === 2);
-    const fb1 = document.getElementById('bic-face-y1-box'), fb2 = document.getElementById('bic-face-y2-box');
-    const ft1 = document.getElementById('bic-face-y1-btn'), ft2 = document.getElementById('bic-face-y2-btn');
-    if (fb1) fb1.style.display = y === 1 ? '' : 'none';
-    if (fb2) fb2.style.display = y === 2 ? '' : 'none';
-    if (ft1) ft1.classList.toggle('year-pill-active', y === 1);
-    if (ft2) ft2.classList.toggle('year-pill-active', y === 2);
   };
 })();
 </script>
@@ -11360,13 +11354,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const _faceLinks = items => items
           .map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`)
           .join(' &amp; ');
+        const _yearLinks = (items, yearLabel) => items.length === 1
+          ? `<a href="${items[0].url}" target="_blank" style="color:var(--gold)">${yearLabel}</a>`
+          : items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${yearLabel} · ${it.label}</a>`).join(' &amp; ');
         let _faceSub = `<span style="color:var(--gold-mid)">✧</span> ${_rd.kind==='rp' ? 'Rav Pe’alim' : _rd.label}`;
         if (_rd.kind === 'hal' && _rd.y2.length) {
-          _faceSub +=
-            ` &nbsp; <button class="year-pill-btn year-pill-active" id="bic-face-y1-btn" onclick="event.stopPropagation(); yesodBicYear(1)">Year 1</button> ` +
-            `<button class="year-pill-btn" id="bic-face-y2-btn" onclick="event.stopPropagation(); yesodBicYear(2)">Year 2</button>` +
-            `<div id="bic-face-y1-box">${_faceLinks(_rd.y1)}</div>` +
-            `<div id="bic-face-y2-box" style="display:none">${_faceLinks(_rd.y2)}</div>`;
+          _faceSub += ` — ${_yearLinks(_rd.y1, 'Year 1')} &nbsp;·&nbsp; ${_yearLinks(_rd.y2, 'Year 2')}`;
         } else if (_rd.kind === 'hal') {
           _faceSub += ` — ${_faceLinks(_rd.y1)}`;
         } else {
