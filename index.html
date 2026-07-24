@@ -2436,6 +2436,57 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 })();
 </script>
 
+<script>
+/* ── NETZACH daily reading: Sichos HaRan + Likutei Etzot — 369-unit cycle ──
+   position = ((cy41.cycle-1) % 9) * 41 + cy41.day  (9 × 41 = 369).
+   1–308: Sichos HaRan §N.  309–369: Likutei Etzot — 2 intros, 31 topics,
+   7 holiday units (Moadei Hashem nested), 21 Section-2 topics, ending on
+   Completeness in the Elul–Tishrei overlap. */
+(function () {
+  const S = 'https://www.sefaria.org/';
+  const le = (label, ...slugs) => ({ label, urls: slugs.map(s => `${S}Likkutei_Etzot,_${s}?lang=bi`) });
+  const LE = [
+    le('Introduction — First Edition', 'Introduction_to_First_Edition'),
+    le('Introduction — Second Edition', 'Introduction_to_Second_Edition'),
+    le('Truth and Faith','Truth_and_Faith'), le('Sighing','Sighing'), le('Eating','Eating'),
+    le('Hospitality','Hospitality'), le('Eretz Israel','Eretz_Israel'), le('Berit','Berit'),
+    le('Children','Children'), le('Trust','Trust'), le('Shame','Shame'), le('Clothing','Clothing'),
+    le('Arrogance and Humility','Arrogance_and_Humility'), le('Knowledge','Knowledge'),
+    le('Speech','Speech'), le('Hitbodedut','Hitbodedut'), le('Strengthening','Strengthening'),
+    le('Divine Attainments','Divine_Attainments'), le('Confession','Confession'), le('Memory','Memory'),
+    le('Philosophy and Secular Wisdom','Philosophy_and_Secular_Wisdom'), le('Marriage','Marriage'),
+    le('Midnight','Midnight'), le('Travel','Travel'), le('Fear of God','Fear_of_God'),
+    le('Anger','Anger'), le('Honor','Honor'), le('Scoffing','Scoffing'),
+    le('Money and Livelihood','Money_and_Livelihood'), le('Thoughts','Thoughts'),
+    le('Dispute and Discord','Dispute_and_Discord'), le('Obstacles and Inhibitions','Obstacles_and_Inhibitions'),
+    le('Mikveh','Mikveh'),
+    le('Shabbat','Moadei_Hashem,_Shabbat'),
+    le('Rosh Chodesh & Three Festivals','Moadei_Hashem,_Rosh_Chodesh','Moadei_Hashem,_Three_Festivals'),
+    le('Nisan-Passover & Omer-Shavuot','Moadei_Hashem,_Nisan_and_Passover','Moadei_Hashem,_Omer_and_Shavuot'),
+    le('Three Weeks & Elul','Moadei_Hashem,_Three_Weeks','Moadei_Hashem,_Elul'),
+    le('Rosh Hashana','Moadei_Hashem,_Rosh_Hashana'),
+    le('Yom Kippur & Sukkot','Moadei_Hashem,_Yom_Kippur','Moadei_Hashem,_Sukkot'),
+    le('Chanukah & Purim','Moadei_Hashem,_Chanukah','Moadei_Hashem,_Purim'),
+    le('Music','Music'), le('Patience','Patience'), le('Brazenness','Brazenness'), le('Advice','Advice'),
+    le('Eyes','Eyes'), le('Redeeming Prisoners','Redeeming_Prisoners'), le('Tzadik','Tzadik'),
+    le('Charity','Charity'), le('Tzitzit','Tzitzit'), le('Sanctity','Sanctity'),
+    le('Desire and Yearning','Desire_and_Yearning'), le('Healing','Healing'), le('Happiness','Happiness'),
+    le('Peace','Peace'), le('Torah Learning','Torah_Learning'), le('Prayer','Prayer'),
+    le('Discipline','Discipline'), le('Tefillin','Tefillin'), le('Fasting','Fasting'),
+    le('Repentance','Repentance'), le('Completeness','Completeness'),
+  ];
+  window.NETZACH_LE_COUNT = LE.length; // expect 61
+  window.getNetzachReading = function (pos) {
+    if (!pos || pos < 1) return null;
+    if (pos <= 308) return { work:'Sichos HaRan', name:`§${pos} of 308`, tag:`Sichos HaRan · §${pos}`, items:[{label:`§${pos}`, url:`${S}Sichot_HaRan.${pos}?lang=bi`}] };
+    const u = LE[pos - 309];
+    if (!u) return null;
+    const parts = u.label.split(' & ');
+    return { work:'Likutei Etzot', name:u.label, tag:`Likutei Etzot · ${u.label}`, items:u.urls.map((url,i)=>({label:parts[i]||u.label, url})) };
+  };
+})();
+</script>
+
 <!-- MALCHUT: Daily Text + Weekly Book -->
 <div class="sefirah-card malchut-card" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
@@ -12600,6 +12651,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     }
+
+    // Netzach primary text — Sichos HaRan + Likutei Etzot (369-unit cycle),
+    // prepended to the detail with a face tag.
+    (function () {
+      const _pos = ((cy41.cycle - 1) % 9) * 41 + cy41.day; // 1–369
+      const _nr = window.getNetzachReading ? window.getNetzachReading(_pos) : null;
+      if (_nr) {
+        const _links = _nr.items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`).join(' &nbsp;·&nbsp; ');
+        const _block =
+          `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ ${_nr.work}</div>` +
+          `<div style="font-size:0.88rem;margin-bottom:4px;"><span style="color:var(--ink)">${_nr.name}</span> &nbsp; ${_links}</div>` +
+          `<div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">Netzach cycle · day ${_pos} of 369${_pos===369?' — Completeness, the seal':''}</div>` +
+          `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
+        const _det = cards[5].querySelector('.sefirah-detail');
+        if (_det) _det.innerHTML = _block + _det.innerHTML;
+        const _tg = cards[5].querySelector('.sefirah-tags');
+        if (_tg) _tg.innerHTML += `<span class="tag">✧ ${_nr.tag}</span>`;
+      }
+    })();
 
     // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
     document.getElementById('netzach-breslov-main').innerHTML =
