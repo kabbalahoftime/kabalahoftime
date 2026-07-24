@@ -12192,8 +12192,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       'Shem Ayin-Bet — 72-Day Cycle <span class="maalah">מעלה ו׳</span>';
     document.getElementById('chesed-main').innerHTML = ayinBetInfo.isBreak
       ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
-      : `<strong>${ayinBetInfo.nameNum}</strong> of 72, Cycle ${ayinBetInfo.cycle} of 5:<br>` +
-        `<strong>${ayinBetInfo.name}</strong><br>` +
+      : `<strong>${ayinBetInfo.nameNum}</strong> of 72, Cycle ${ayinBetInfo.cycle} of 5: <strong>${ayinBetInfo.name}</strong><br>` +
         `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>`;
     document.getElementById('chesed-sub').innerHTML =
       `<span style="color:var(--gold-mid)">✧</span> ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} — ${mishnaInfo.text} <span style="opacity:0.7">· ${mishnaInfo.sub}</span>`;
