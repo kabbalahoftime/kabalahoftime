@@ -151,17 +151,29 @@ day 197).
 
 ---
 
-## Yesod — Ben Ish Chai (both years, every year)  **(DESIGNED)**
+## Yesod — Ben Ish Chai + Rav Pe'alim (both years, every year)  **(DESIGNED)**
 
 Defining cycle: Shovavim / Parasha (מעלה י״ב) — **parasha-native**, follows the
 real weekly Torah reading. Ben Ish Chai is already parasha-shaped, so text and
 container are the same shape; nothing to fit.
 
-**Name resonance:** Ben Ish *Chai* ("son of a living man") ↔ Yesod = *chai
-olamim* (Zohar: the life of the worlds), the tzaddik *yesod olam*; his responsa
-*Rav Pe'alim* ("abundant in deeds") = Yesod channeling light into deed. His
-weekly method — open with a **drush** (sod), descend into **halacha** — is Yesod's
-function drawn small.
+**Name resonance — the two works reunite one pasuk.** *Ben Ish Chai* and *Rav
+Pe'alim* are both phrases of Shmuel II 23:20 (Benayahu ben Yehoyada: "*ben ish
+chai rav pe'alim mi-Kavtze'el*"); Rav Yosef Chaim titled both works from that one
+verse. Yesod is the sefirah of *connection* — it re-joins the phrase it carries.
+Ben Ish *Chai* ↔ *chai olamim* (Zohar: the life of the worlds), the tzaddik
+*yesod olam*; *Rav Pe'alim* ("abundant in deeds") = Yesod channeling light into
+deed. His method — open with a **drush** (sod), descend into **halacha** — is
+Yesod's function drawn small.
+
+**Two layers:**
+- **Weekly backbone — Ben Ish Chai:** Drash + Halachot Year 1 + Year 2, split by
+  component across the week (below), building to Shabbat.
+- **Daily grain — Rav Pe'alim:** the responsa give the fine daily unit Ben Ish
+  Chai lacked. **539 sections + 1 introduction = 540 = 54 × 10** — a clean *ten
+  per parasha*, ~1–2 responsa a day. (The intro as counter, as elsewhere.)
+  Combined-parsha weeks take both parshiyos' ten (common year); leap weeks take
+  ten — the same doubling as the Ben Ish Chai halachot.
 
 **Sefaria structure** (`Ben_Ish_Hai`):
 - Introduction
@@ -190,9 +202,11 @@ addressing** (e.g., `…,_Bereshit.5`), split the component evenly across its da
 for fully-distinct dailies; otherwise the component is the day's unit (both its
 days point to it; the learner advances through it).
 
-**To supply when building:** the Sefaria URL structure for the three components
-per parasha (Drashot / Halachot 1st Year / Halachot 2nd Year). **No ot-counts
-required.**
+**To supply when building:** the Sefaria URL structure for the three Ben Ish Chai
+components per parasha (Drashot / Halachot 1st Year / Halachot 2nd Year), and for
+Rav Pe'alim (539 sections + intro → 540, ten per parasha). **No ot-counts
+required.** Confirm the 539 count, the intro that lands 540, and the 54-parasha
+alignment.
 
 ---
 
@@ -208,5 +222,6 @@ Chabad (Chochmah, Tiferet ½), Breslov (Binah, Netzach, Tiferet ½), Sephardi
 - **Tiferet:** Seder Birkas HaNehenin intro + per-chapter seif counts; Sippurei
   Ma'asiyot tale order; cycle→calendar date map.
 - **Yesod:** Ben Ish Chai per-parasha URL structure for the three components
-  (Drashot / Halachot 1st Year / Halachot 2nd Year). No ot-counts needed —
-  the day-split is by component (see Yesod section).
+  (Drashot / Halachot 1st Year / Halachot 2nd Year); Rav Pe'alim URL structure +
+  confirm 539 + intro = 540 (ten per parasha). No ot-counts needed — Ben Ish Chai
+  splits by component, Rav Pe'alim gives the daily grain (see Yesod section).
