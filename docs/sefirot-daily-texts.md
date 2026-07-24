@@ -170,10 +170,23 @@ Yesod's function drawn small.
 - **Weekly backbone — Ben Ish Chai:** Drash + Halachot Year 1 + Year 2, split by
   component across the week (below), building to Shabbat.
 - **Daily grain — Rav Pe'alim:** the responsa give the fine daily unit Ben Ish
-  Chai lacked. **539 sections + 1 introduction = 540 = 54 × 10** — a clean *ten
-  per parasha*, ~1–2 responsa a day. (The intro as counter, as elsewhere.)
-  Combined-parsha weeks take both parshiyos' ten (common year); leap weeks take
-  ten — the same doubling as the Ben Ish Chai halachot.
+  Chai lacked, ~1–2 a day, **ten per parasha**. Actual composition (from the
+  Sefaria contents, 4 volumes):
+
+  | | Responsa (OC/YD/EH/CM) | Sod Yesharim | Index | Front matter |
+  |---|---|---|---|---|
+  | Vol I | 105 | 17 | 4 | Introduction, Preface |
+  | Vol II | 155 | 14 | 5 | Introduction |
+  | Vol III | 97 | 13 | 5 | Introduction · +Kuntres Beit Tefillah |
+  | Vol IV | 100 | 20 | 4 | — |
+  | **Total** | **457** | **64** | **18** | 4 prefaces + 1 Kuntres |
+
+  (Vol IV OC skips 36–38 → 40, not 43.) **Everything but the 4 prefaces =
+  457 + 64 + 18 + 1 = 540 = 54 × 10.** Open editorial calls: (a) keep the 18
+  index nodes as per-volume overview days (→ clean 540) or drop them as
+  non-content (→ 522, ~9–10/parasha); (b) Sod Yesharim (the *sod* responsa)
+  mixed into the ten-per-parasha stream or as its own layer. Same common/leap
+  doubling as the Ben Ish Chai halachot.
 
 **Sefaria structure** (`Ben_Ish_Hai`):
 - Introduction
@@ -204,9 +217,8 @@ days point to it; the learner advances through it).
 
 **To supply when building:** the Sefaria URL structure for the three Ben Ish Chai
 components per parasha (Drashot / Halachot 1st Year / Halachot 2nd Year), and for
-Rav Pe'alim (539 sections + intro → 540, ten per parasha). **No ot-counts
-required.** Confirm the 539 count, the intro that lands 540, and the 54-parasha
-alignment.
+Rav Pe'alim (structure confirmed above — 540 = 54 × 10 minus the 4 prefaces,
+pending the two editorial calls). **No ot-counts required.**
 
 ---
 
@@ -222,6 +234,7 @@ Chabad (Chochmah, Tiferet ½), Breslov (Binah, Netzach, Tiferet ½), Sephardi
 - **Tiferet:** Seder Birkas HaNehenin intro + per-chapter seif counts; Sippurei
   Ma'asiyot tale order; cycle→calendar date map.
 - **Yesod:** Ben Ish Chai per-parasha URL structure for the three components
-  (Drashot / Halachot 1st Year / Halachot 2nd Year); Rav Pe'alim URL structure +
-  confirm 539 + intro = 540 (ten per parasha). No ot-counts needed — Ben Ish Chai
-  splits by component, Rav Pe'alim gives the daily grain (see Yesod section).
+  (Drashot / Halachot 1st Year / Halachot 2nd Year); Rav Pe'alim URL structure
+  (composition confirmed: 540 = 54 × 10 minus prefaces). Two editorial calls
+  pending: index nodes in/out (540 vs 522); Sod Yesharim mixed vs. its own layer.
+  No ot-counts needed (see Yesod section).
