@@ -13092,7 +13092,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       document.getElementById('malchut-yad-source-tag').innerHTML =
         `<span class="tag highlight">✧ Yad HaChazakah</span>`;
       document.getElementById('malchut-yad-subs').innerHTML =
-        _yadFace.subs.map(s => `${s.name} <span style="color:var(--ink-dim);font-size:0.85em">· ${s.book}</span>`).join(' &nbsp;·&nbsp; ');
+        _yadFace.subs.map(s => s.name).join(' &nbsp;·&nbsp; ');
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
