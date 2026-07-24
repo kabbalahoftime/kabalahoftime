@@ -229,9 +229,22 @@ Kuntres 1 (116); IV = 4 / 40 (OC skips 36–38) / 39 / 13 / 8 / 20 (124). Total 
 Intro + Preface), seals on Parasha 54 (V'Zot HaBerachah) = Vol IV Sod Yesharim
 11–20. Ready to wire.
 
-**Still to supply:** the Sefaria URL structure for the three Ben Ish Chai
-components per parasha (Drashot / Halachot 1st Year / Halachot 2nd Year).
-**No ot-counts required.**
+**Ben Ish Chai URL pattern — CONFIRMED:**
+- Drashot (day 7): `Ben_Ish_Hai,_Drashot,_<Parasha>` — one node per parasha.
+- Halachot 1st / 2nd Year (day 6): `Ben_Ish_Hai,_Halachot_<1st|2nd>_Year,_<Parasha>,_Introduction`
+  and `…,_<Parasha>.<N>` — a per-parasha introduction plus numbered halachos.
+- Parasha slugs = Sefaria spellings (`Bereshit` … `V'Zot_HaBerachah`), already
+  tracked by the app via `getParashaForDate`.
+
+**All URL data for Yesod is now in hand.** The app supplies both the parasha
+(`getParashaForDate`, resolves to the coming Shabbat's parasha) and the weekday
+(`date.getDay()+1`, 1=Sun…7=Shabbat, motzei Shabbat→8), so the 5+2 maps directly:
+Sun–Thu Rav Pe'alim (2/day), Fri Halachot (both years), Shabbat Drash.
+
+**Two build decisions still open** (see chat): (a) combined-parsha weeks — read
+BOTH decades to keep 540 complete every year (heavier weeks) vs. follow the real
+reading (~500 in common years); (b) card placement of the new Ben Ish Chai +
+Rav Pe'alim block (face tag + detail, keeping the Shovavim defining content).
 
 ---
 
