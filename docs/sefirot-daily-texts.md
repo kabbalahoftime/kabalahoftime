@@ -112,15 +112,24 @@ exactly what complete the year to 369.
   Sighing, Eating … Completeness) plus **two** intros: `Introduction_to_First_Edition`
   and `Introduction_to_Second_Edition`.
 
-**Count resolution (3 intros available, only 2 fit 369):** 308 + 59 topics = 367;
-+2 intros = 369. Two options (author to pick): (A) both Likutei Etzot intros count,
-Sichos Hakdamah rides §1 (Sichos = 308); (B) Sichos Hakdamah (309) + LE First
-Edition intro, LE Second Edition rides on First — keeps "one hakdama per work,"
-needs the Hakdamah to be its own node.
+**Count resolution — SETTLED:** no Sichos HaRan Hakdamah on Sefaria, so the **two
+Likutei Etzot introductions** (First + Second Edition) are the counters.
+308 (Sichos) + 2 intros + 59 topics = **369**.
 
-**Still to build:** full ordered Likutei Etzot topic-slug list (65 → 59 after the
-holiday combination; multi-word slugs need spot-check); the 369-day sequencing with
-the ~25 Elul–11 Tishrei overlap.
+**Sequencing (proposed):** Netzach position = `(cy41.cycle−1)×41 + cy41.day`
+(9 cycles × 41 = 369; a common year reaches cycle 9 day 36, and positions 365–369
+spill into next year's opening — the ~25 Elul→11 Tishrei overlap). Order: **Sichos
+HaRan §1–308 (positions 1–308), then Likutei Etzot 309–369** (2 intros, 31 non-
+holiday topics, 7 combined holidays, Section 2) — so the cycle *ends* on Section 2's
+close (…Fasting, Repentance, **Completeness**) landing in the Elul–Tishrei teshuva/
+new-year overlap. Author to confirm order.
+
+**Still to build:** spot-check the translated Likutei Etzot slugs (Eretz_Israel,
+Hitbodedut, Moadei_Hashem, Redeeming_Prisoners, Divine_Attainments, Tzadik…), then
+wire. Slug prefix = `Likkutei_Etzot,_<Topic>`; intros = `,_Introduction_to_First_Edition`
+/ `,_Introduction_to_Second_Edition`. Holiday combination (13→7): Moadei Hashem &
+Shabbat · Rosh Chodesh & Three Festivals · Nisan-Passover & Omer-Shavuot · Three
+Weeks & Elul · Rosh Hashana (alone) · Yom Kippur & Sukkot · Chanukah & Purim.
 
 ---
 
