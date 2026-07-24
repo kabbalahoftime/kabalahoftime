@@ -181,12 +181,13 @@ Yesod's function drawn small.
   | Vol IV | 100 | 20 | 4 | — |
   | **Total** | **457** | **64** | **18** | 4 prefaces + 1 Kuntres |
 
-  (Vol IV OC skips 36–38 → 40, not 43.) **Everything but the 4 prefaces =
-  457 + 64 + 18 + 1 = 540 = 54 × 10.** Open editorial calls: (a) keep the 18
-  index nodes as per-volume overview days (→ clean 540) or drop them as
-  non-content (→ 522, ~9–10/parasha); (b) Sod Yesharim (the *sod* responsa)
-  mixed into the ten-per-parasha stream or as its own layer. Same common/leap
-  doubling as the Ben Ish Chai halachot.
+  (Vol IV OC skips 36–38 → 40, not 43.) **457 + 64 + 18 + 1 = 540 = 54 × 10**
+  (settled). The full body flows in the ten-per-parasha stream: responsa, Sod
+  Yesharim (the *sod* responsa — fits Yesod), and Kuntres Beit Tefillah. The 18
+  **index nodes serve as per-volume threshold days**, and the four short
+  intros/prefaces (Vol I Intro + Preface, Vol II Intro, Vol III Intro) **fold
+  into those index days** — no extra count, 540 holds. Same common/leap doubling
+  as the Ben Ish Chai halachot.
 
 **Sefaria structure** (`Ben_Ish_Hai`):
 - Introduction
@@ -234,6 +235,5 @@ Chabad (Chochmah, Tiferet ½), Breslov (Binah, Netzach, Tiferet ½), Sephardi
   Ma'asiyot tale order; cycle→calendar date map.
 - **Yesod:** Ben Ish Chai per-parasha URL structure for the three components
   (Drashot / Halachot 1st Year / Halachot 2nd Year); Rav Pe'alim URL structure
-  (composition confirmed: 540 = 54 × 10 minus prefaces). Two editorial calls
-  pending: index nodes in/out (540 vs 522); Sod Yesharim mixed vs. its own layer.
-  No ot-counts needed (see Yesod section).
+  (composition fully settled: 540 = full body, index nodes as volume thresholds
+  carrying the 4 short prefaces). No ot-counts needed (see Yesod section).
