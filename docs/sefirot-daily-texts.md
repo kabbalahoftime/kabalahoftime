@@ -26,6 +26,11 @@ sign it's real.
 Status legend: **LIVE** = built and deployed · **DESIGNED** = worked out, not yet
 built.
 
+**ALL FIVE LIVE** (as of this session): Chochmah (Torah Ohr / Likutei Torah),
+Binah (Likutei Tefilot), Tiferet (Seder Birkas HaNehenin + the Tales), Netzach
+(Sichos HaRan + Likutei Etzot), Yesod (Ben Ish Chai + Rav Pe'alim). The design
+is fully realized.
+
 ---
 
 ## Chochmah — Torah Ohr / Likutei Torah  **(LIVE)**
@@ -74,7 +79,15 @@ Defining cycle: Sefirot 7×7×7 Omer, 49-day (מעלה ה׳). Overlay: **Likutei
 
 ---
 
-## Netzach — Sichos HaRan + Likutei Etzot  **(DESIGNED)**
+## Netzach — Sichos HaRan + Likutei Etzot  **(LIVE)**
+
+Built via `window.getNetzachReading(pos)` + the 61-unit Likutei Etzot list; the
+Netzach detail prepends the reading with a face tag. position =
+`((cy41.cycle-1) % 9) * 41 + cy41.day` (1–369). All slugs confirmed by author
+spot-check (top-level `Likkutei_Etzot,_<Topic>`, holidays nested
+`Likkutei_Etzot,_Moadei_Hashem,_<Holiday>`, two edition intros, Sichos
+`Sichot_HaRan.<N>`). Shabbat stands solo. Order: Sichos 1–308 → Likutei Etzot
+309–369, sealing on Completeness in the Elul–Tishrei overlap.
 
 Defining cycle: 41-day, "receiving the Torah" (מעלה ט׳). Netzach's number is
 **369**. It does not drift: like the 364-day KoT calendar, which overlaps at the
