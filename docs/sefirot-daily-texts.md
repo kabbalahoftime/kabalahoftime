@@ -124,12 +124,22 @@ holiday topics, 7 combined holidays, Section 2) — so the cycle *ends* on Secti
 close (…Fasting, Repentance, **Completeness**) landing in the Elul–Tishrei teshuva/
 new-year overlap. Author to confirm order.
 
-**Still to build:** spot-check the translated Likutei Etzot slugs (Eretz_Israel,
-Hitbodedut, Moadei_Hashem, Redeeming_Prisoners, Divine_Attainments, Tzadik…), then
-wire. Slug prefix = `Likkutei_Etzot,_<Topic>`; intros = `,_Introduction_to_First_Edition`
-/ `,_Introduction_to_Second_Edition`. Holiday combination (13→7): Moadei Hashem &
-Shabbat · Rosh Chodesh & Three Festivals · Nisan-Passover & Omer-Shavuot · Three
-Weeks & Elul · Rosh Hashana (alone) · Yom Kippur & Sukkot · Chanukah & Purim.
+**Slug structure:** top-level topics = `Likkutei_Etzot,_<Topic>` (Eretz_Israel,
+Hitbodedut confirmed; Truth_and_Faith / Sighing / Eating / Knowledge / Mikveh /
+Discipline / Completeness confirmed earlier). Intros = `,_Introduction_to_First_Edition`
+/ `,_Introduction_to_Second_Edition`. **Holidays are NESTED under Moadei Hashem**
+(no readable Moadei Hashem node): `Likkutei_Etzot,_Moadei_Hashem,_<Holiday>`
+(Shabbat, Rosh_Chodesh confirmed).
+
+**Holiday units (12 holidays → 7, count still = 59 → 369):** Shabbat (alone) ·
+Rosh Chodesh & Three Festivals · Nisan-Passover & Omer-Shavuot · Three Weeks & Elul ·
+Rosh Hashana (alone) · Yom Kippur & Sukkot · Chanukah & Purim. (Moadei Hashem being
+a category, the old "Moadei Hashem & Shabbat" pair becomes Shabbat solo — same 7
+units, so 31 + 7 + 21 = 59 holds.)
+
+**Still to spot-check:** Redeeming_Prisoners, Divine_Attainments, Tzadik; nested
+holiday multi-words (Three_Festivals, Nisan_and_Passover, Omer_and_Shavuot,
+Three_Weeks). Then wire.
 
 ---
 
