@@ -13086,7 +13086,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<span class="tag">Cycle ${_yadFace.cycle} of ${isLeapYear ? 14 : 13}</span>` +
         `<span class="tag">Day ${_yadFace.dayInCycle} of 28</span>`;
       document.getElementById('malchut-yad-ittim').innerHTML =
-        _yadFace.ittim.map(p => `<em>${p.he}</em> — ${p.en}`).join(' &nbsp;·&nbsp; ');
+        `<span style="color:var(--gold-mid);font-style:normal;">✧ Koheles 3</span> — ` +
+        _yadFace.ittim.map(p => `<em>${p.he}</em> · ${p.en}`).join('  &nbsp;&nbsp;·&nbsp;&nbsp;  ');
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
