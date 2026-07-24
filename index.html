@@ -12639,10 +12639,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     } else {
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `40-Day Cycle: Receiving the Torah <span class="maalah">מעלה ט׳</span>`;
       cards[5].querySelector('.sefirah-main-text').innerHTML =
-        `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>:<br>` +
-        `<strong>${dayCmd.text}</strong><br>` +
-        `<span style="font-size:0.88em;opacity:0.72">${cy41.soulLevel.replace(' / ', '/')} · ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : cycleCmd.commandment}</span>`;
-      cards[5].querySelector('.sefirah-sub-text').innerHTML = _nrSub;
+        `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>`;
+      cards[5].querySelector('.sefirah-sub-text').innerHTML =
+        `<span style="font-size:0.9em;color:var(--ink-dim)">Day:</span> ${dayCmd.text}` +
+        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}` +
+        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : cycleCmd.commandment}` +
+        (_nrSub ? `<br>${_nrSub}` : '');
       cards[5].querySelector('.sefirah-tags').innerHTML = '';
       cards[5].querySelector('.sefirah-detail').innerHTML =
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
