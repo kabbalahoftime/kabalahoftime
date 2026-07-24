@@ -2500,14 +2500,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name">28-Day Cycle: Et LaKol</div>
     <div class="sefirah-sub-text" id="malchut-yad-ittim"></div>
-    <div class="sefirah-tags" id="malchut-yad-tags"></div>
+    <div class="sefirah-sub-text" id="malchut-yad-tags" style="font-size:0.85em;"></div>
     <div class="malchut-visible-content">
       <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
         <div class="malchut-section">
           <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah">מעלה י״ג</span></div>
           <div class="sefirah-main-text" id="malchut-ksa-face">Loading…</div>
-          <div class="sefirah-tags" id="malchut-yad-source-tag"></div>
           <div class="sefirah-sub-text" id="malchut-yad-subs" style="font-size:0.85em;margin-top:3px;"></div>
         </div>
         <div class="malchut-section">
@@ -13085,13 +13084,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           : `<span style="color:var(--gold)">${_vtText}</span>`) +
         ` <span style="font-size:0.72em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span>`;
       document.getElementById('malchut-yad-tags').innerHTML =
-        `<span class="tag highlight">Cycle ${_yadFace.cycle} of ${isLeapYear ? 14 : 13}</span>` +
-        `<span class="tag">Day ${_yadFace.dayInCycle} of 28</span>`;
+        `Cycle ${_yadFace.cycle} of ${isLeapYear ? 14 : 13} &nbsp;·&nbsp; Day ${_yadFace.dayInCycle} of 28`;
       document.getElementById('malchut-yad-ittim').innerHTML =
         _yadFace.ittim.map(p => `<em>${p.he}</em> · ${p.en}`).join('  &nbsp;&nbsp;·&nbsp;&nbsp;  ');
-      document.getElementById('malchut-yad-source-tag').innerHTML =
-        `<span class="tag highlight">✧ Yad HaChazakah</span>`;
       document.getElementById('malchut-yad-subs').innerHTML =
+        `<span style="color:var(--gold-mid);font-style:normal;">✧ Yad HaChazakah</span> — ` +
         _yadFace.subs.map(s => s.name).join(' &nbsp;·&nbsp; ');
     })();
 
