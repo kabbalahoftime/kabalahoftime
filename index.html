@@ -2412,17 +2412,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       return { kind:'rp', label:'Rav Pe’alim', items: today.map(e => ({url:rpUrl(e), label:rpLbl(e)})) };
     }
     if (weekday === 6) {
-      const items = [], seen = new Set();
-      const add = (url, label) => { if (!seen.has(url)) { seen.add(url); items.push({url, label}); } };
+      const y1 = [], y2 = [], s1seen = new Set(), s2seen = new Set();
       for (const num of nums) {
         const s1 = y1slug(num);
-        add(bicUrl('Halachot_1st_Year', s1, ',_Introduction'), `${s1.replace(/_/g,' ')} · Year 1`);
+        if (!s1seen.has(s1)) { s1seen.add(s1); y1.push({url:bicUrl('Halachot_1st_Year', s1, ',_Introduction'), label:s1.replace(/_/g,' ')}); }
         const s2 = y2slug(num);
-        if (s2) add(bicUrl('Halachot_2nd_Year', s2, ',_Introduction'), `${s2.replace(/_/g,' ')} · Year 2`);
+        if (s2 && !s2seen.has(s2)) { s2seen.add(s2); y2.push({url:bicUrl('Halachot_2nd_Year', s2, ',_Introduction'), label:s2.replace(/_/g,' ')}); }
       }
-      return { kind:'hal', label:'Ben Ish Chai · Halachot', items };
+      return { kind:'hal', label:'Ben Ish Chai · Halachot', y1, y2 };
     }
     return { kind:'drash', label:'Ben Ish Chai · Drash', items: nums.map(num => ({url:bicUrl('Drashot', SLUG[num]), label:`${pName(num)} · Drash`})) };
+  };
+
+  // Year 1 / Year 2 toggle for the Halachot day.
+  window.yesodBicYear = function (y) {
+    const b1 = document.getElementById('bic-y1-box'), b2 = document.getElementById('bic-y2-box');
+    const t1 = document.getElementById('bic-y1-btn'), t2 = document.getElementById('bic-y2-btn');
+    if (b1) b1.style.display = y === 1 ? '' : 'none';
+    if (b2) b2.style.display = y === 2 ? '' : 'none';
+    if (t1) t1.classList.toggle('year-pill-active', y === 1);
+    if (t2) t2.classList.toggle('year-pill-active', y === 2);
   };
 })();
 </script>
@@ -11280,9 +11289,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         .map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`)
         .join('<br>');
       if (_rd) {
-        document.getElementById('yesod-bic-main').innerHTML =
-          `<div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;margin-bottom:4px;">${_rd.kind==='rp' ? `Rav Pe’alim · ${_DOW[_wd]} (2 a day, 10 a parasha)` : _rd.label}</div>` +
-          _links(_rd.items);
+        let _body;
+        if (_rd.kind === 'hal') {
+          const _y1 = _links(_rd.y1);
+          if (_rd.y2.length) {
+            _body =
+              `<div style="margin-bottom:5px;">` +
+                `<button class="year-pill-btn year-pill-active" id="bic-y1-btn" onclick="yesodBicYear(1)">Year 1</button> ` +
+                `<button class="year-pill-btn" id="bic-y2-btn" onclick="yesodBicYear(2)">Year 2</button>` +
+              `</div>` +
+              `<div id="bic-y1-box">${_y1}</div>` +
+              `<div id="bic-y2-box" style="display:none">${_links(_rd.y2)}</div>`;
+          } else {
+            _body = _y1 + `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;margin-top:3px;">Year 2 — not extant for this parasha</div>`;
+          }
+          document.getElementById('yesod-bic-main').innerHTML =
+            `<div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;margin-bottom:4px;">${_rd.label}</div>` + _body;
+        } else {
+          document.getElementById('yesod-bic-main').innerHTML =
+            `<div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;margin-bottom:4px;">${_rd.kind==='rp' ? `Rav Pe’alim · ${_DOW[_wd]} (2 a day, 10 a parasha)` : _rd.label}</div>` +
+            _links(_rd.items);
+        }
         const _tagsEl = document.getElementById('yesod-tags');
         if (_tagsEl) _tagsEl.innerHTML += `<span class="tag">✧ ${_rd.kind==='rp' ? 'Rav Pe’alim' : _rd.label}</span>`;
       } else {
