@@ -167,8 +167,8 @@ deed. His method — open with a **drush** (sod), descend into **halacha** — i
 Yesod's function drawn small.
 
 **Two layers:**
-- **Weekly backbone — Ben Ish Chai:** Drash + Halachot Year 1 + Year 2, split by
-  component across the week (below), building to Shabbat.
+- **Weekly backbone — Ben Ish Chai:** Drash + Halachot Year 1 + Year 2, on the
+  two Ben Ish Chai days of the week (days 6–7, below), building to Shabbat.
 - **Daily grain — Rav Pe'alim:** the responsa give the fine daily unit Ben Ish
   Chai lacked, ~1–2 a day, **ten per parasha**. Actual composition (from the
   Sefaria contents, 4 volumes):
@@ -195,25 +195,24 @@ Yesod's function drawn small.
 - **Halachot 2nd Year** — 47, deliberately **partial** (skips the Bamidbar
   parasha; ends at Ki Tavo — Rav Yosef Chaim never finished the 2nd cycle)
 
-**Mapping — complete the whole work every year, distinct daily, by COMPONENT
-(no ot-counts needed — Sefaria doesn't expose labeled ot for this work):**
+**Weekly structure — mirrors Chesed's Mishna/Tosefta (5 days × 2 + 2 days),
+keyed to the 54 parshiyot instead of Chesed's 52 KoT weeks:**
 
-The week builds toward Shabbat, as the drush + halachot were originally delivered
-as one Shabbat discourse. The three components (Drash, Halachot Year 1, Halachot
-Year 2) are split across the six weekdays; Shabbat carries all of them.
+| Slot | Chesed (Mishna) | Yesod |
+|---|---|---|
+| Days 1–5, ×2 | Mishna, 2 ch/day | **Rav Pe'alim**, 2 sections/day = 10/parasha × 54 = **540** |
+| Day 6 | Tosefta | **Ben Ish Chai Halachot** — Year 1 + Year 2 (Year 1 only where Year 2 is silent) |
+| Day 7 (Shabbat) | Tosefta | **Ben Ish Chai Drash** — 54, one per parasha, the Shabbat discourse |
 
-- **All three present (most parshiyot):** Sun–Mon = Drash · Tue–Wed = Year 1 ·
-  Thu–Fri = Year 2 · **Shabbat = all three**.
-- **Year 2 absent** (Bamidbar parasha; Devarim → V'Zot HaBerachah): Sun–Tue =
-  Drash · Wed–Fri = Year 1 · **Shabbat = both**.
+- The 540 uses the **full** Rav Pe'alim body (responsa + Sod Yesharim + index +
+  Kuntres) — reaching 540 is what decides the earlier editorial calls.
 - **Chanukah** section slots into its week (Vayeshev–Miketz = Kislev).
-- **Combined-parsha weeks** (common years) fold two parshiyos' components into the
-  six days — settle at build time.
-
-Within the 2–3 days a component spans: if Sefaria exposes **segment-level
-addressing** (e.g., `…,_Bereshit.5`), split the component evenly across its days
-for fully-distinct dailies; otherwise the component is the day's unit (both its
-days point to it; the learner advances through it).
+- **Structural difference from Chesed:** Chesed rides a fixed 52-week/364-day KoT
+  grid; Yesod is **parasha-native** — it rides the real Torah-reading year (~50
+  weeks common, ~54 leap), so common/leap breathing (combined weeks take two
+  parshiyos', separate weeks one) happens by itself. Chesed's edge-handling
+  (sealing two streams on the final day) is the template for combined-week packing.
+- No ot-counts needed — Rav Pe'alim's own sections are the daily unit.
 
 **To supply when building:** the Sefaria URL structure for the three Ben Ish Chai
 components per parasha (Drashot / Halachot 1st Year / Halachot 2nd Year), and for
