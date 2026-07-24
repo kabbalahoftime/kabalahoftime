@@ -12425,12 +12425,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const _tifCyc   = _tifRound === 3 ? `Microcosm · Cycle ${_tifCycN} of 2` : `${['','1st','2nd'][_tifRound]} Cycle ${_tifCycN}`;
       cards[4].querySelector('.sefirah-cycle-name').innerHTML = `13 Attributes of Mercy — 13-Day Cycle <span class="maalah">מעלה ח׳</span>`;
       cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
-        ? `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span><br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span>`
-        : `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
+        ? `Attribute <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span><br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span>`
+        : `Attribute <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
       _tifTags.innerHTML = cycleThemeAttr
-        ? `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · ${_tifCyc}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
-        : `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · ${_tifCyc}</span><span class="tag">${cy13.attr.name}</span>`;
+        ? `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cycleThemeAttr.name}</span><span class="tag">${cy13.attr.name}</span>`
+        : `<span class="tag highlight" style="white-space:nowrap">Day ${cy13.day} · Cycle ${cy13.cycle}</span><span class="tag">${cy13.attr.name}</span>`;
     }
 
     const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
