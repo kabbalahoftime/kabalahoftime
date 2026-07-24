@@ -1793,7 +1793,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tehilim</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" style="opacity:0.85;">Four Seasons · Four Angels · Four Animals</div>
     <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim <span class="maalah">מעלה ז׳</span></div>
     <div class="sefirah-main-text" id="gevurah-main">Loading…</div>
     <div class="sefirah-sub-text" id="gevurah-sub"></div>
@@ -12267,18 +12266,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Keyed to the day of the KoT year (like the Four Seasons), so Joshua 1
     // always opens Week 1 Day 1 of each new year.
     const tanachInfo = getTanachInfo(dEff - d_year1 + 1);
-    document.getElementById('gevurah-cycle-name').innerHTML = 'Tanach (2 Chapters) <span class="maalah">מעלה ז׳</span>';
-    document.getElementById('gevurah-main').innerHTML =
-      `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>` +
-      ` &nbsp;·&nbsp; <a href="https://mechon-mamre.org/p/pt/ptmp3prq.htm" target="_blank" style="color:var(--gold);font-size:0.85em" title="Tanach audio — Mechon Mamre">Audio</a>`;
-    document.getElementById('gevurah-sub').innerHTML = '';
     const seasonInfo = getSeasonInfo(dEff - d_year1 + 1);
-    document.getElementById('gevurah-tags').innerHTML =
-      `<span class="tag highlight">${tanachInfo.tag1}</span><span class="tag">${tanachInfo.tag2}</span>` +
-      `<span class="tag highlight">Season ${seasonInfo.season} · ${seasonInfo.name}</span>` +
-      `<span class="tag">${seasonInfo.chayah.split(' · ')[0]}</span>` +
-      `<span class="tag">Day ${seasonInfo.dayIn} of 91</span>` +
-      (seasonInfo.isTuBShvat ? `<span class="tag highlight">✦ Tu B'Shvat — heart of the season</span>` : ``);
+    document.getElementById('gevurah-cycle-name').innerHTML = 'Four Seasons — 4 × 91-Day Cycle <span class="maalah">מעלה ז׳</span>';
+    document.getElementById('gevurah-main').innerHTML =
+      `Season <strong>${seasonInfo.season}</strong> of 4 — ${seasonInfo.name} <span style="font-size:0.9em">${seasonInfo.hebrew}</span>, Week ${seasonInfo.weekIn} of 13, Day ${seasonInfo.dayIn} of 91:<br>` +
+      `<strong>${seasonInfo.chayah}</strong><br>` +
+      `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>` +
+      (seasonInfo.isTuBShvat ? `<br><span style="font-size:0.85em;color:var(--gold-mid)">✦ Tu B'Shvat — heart of the season</span>` : ``);
+    document.getElementById('gevurah-sub').innerHTML =
+      `<span style="color:var(--gold-mid)">✧</span> Tanach — ${tanachInfo.text} <span style="opacity:0.7">· ${tanachInfo.sub}</span>`;
+    document.getElementById('gevurah-tags').innerHTML = '';
     document.getElementById('gevurah-detail').innerHTML =
        (() => {
          const noamEntry = getNoamElimelechEntry(effectiveKotWeek);
@@ -12335,6 +12332,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        }
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
+       <div class="detail-row"><span class="detail-label">Text:</span><span class="detail-value"><a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text} on Sefaria</a></span></div>
+       <div class="detail-row"><span class="detail-label">Audio:</span><span class="detail-value"><a href="https://mechon-mamre.org/p/pt/ptmp3prq.htm" target="_blank" style="color:var(--gold)">Mechon Mamre</a></span></div>
 
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
