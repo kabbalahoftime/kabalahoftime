@@ -1884,7 +1884,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="yesod-midrash-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-midrash-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Ben Ish Chai</div>
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Ben Ish Chai · Rav Pe’alim</div>
       <div id="yesod-bic-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-bic-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
@@ -2353,6 +2353,74 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const found = findCurrentParasha(formatDate(shabbat));
         return found ? found.name : null;
     };
+})();
+</script>
+
+<script>
+/* ── YESOD daily reading: Ben Ish Chai + Rav Pe'alim, 5+2 over the 54 parshiyot ──
+   (mirrors Chesed's Mishna/Tosefta; parasha-native, keyed to the parasha number.)
+   weekday 1–5 (Sun–Thu): Rav Pe'alim, 2 sections/day = 10 per parasha (540 total).
+   weekday 6 (Fri): Ben Ish Chai Halachot — Year 1 + Year 2 (Y1 only where Y2 absent).
+   weekday 7 (Shabbat): Ben Ish Chai Drash.
+   A combined week (e.g. Tazria-Metzora) reads BOTH parshiyos' decades. */
+(function () {
+  // Sefaria Ben Ish Hai parasha slugs, indexed by parasha number 1–54.
+  const SLUG = [null,'Bereshit','Noach','Lech_Lecha','Vayera','Chayei_Sara','Toldot',
+    'Vayetzei','Vayishlach','Vayeshev','Miketz','Vayigash','Vayechi','Shemot','Vaera',
+    'Bo','Beshalach','Yitro','Mishpatim','Terumah','Tetzaveh','Ki_Tisa','Vayakhel',
+    'Pekudei','Vayikra','Tzav','Shmini','Tazria','Metzora','Achrei_Mot','Kedoshim',
+    'Emor','Behar','Bechukotai','Bamidbar','Nasso',"Beha'alotcha","Sh'lach",'Korach',
+    'Chukat','Balak','Pinchas','Matot','Masei','Devarim','Vaetchanan','Eikev',"Re'eh",
+    'Shoftim','Ki_Teitzei','Ki_Tavo','Nitzavim','Vayeilech',"Ha'Azinu","V'Zot_HaBerachah"];
+
+  // Rav Pe'alim — the ordered 540-section stream (Sefaria contents order).
+  const RP_ORDER = ['Index','Orach_Chayim','Yoreh_Deah','Even_HaEzer','Choshen_Mishpat','Sod_Yesharim','Kuntres_Beit_Tefillah'];
+  const RP_VOL = {
+    I:   {Index:4,Orach_Chayim:35,Yoreh_Deah:57,Even_HaEzer:13,Sod_Yesharim:17},
+    II:  {Index:5,Orach_Chayim:65,Yoreh_Deah:41,Even_HaEzer:34,Choshen_Mishpat:15,Sod_Yesharim:14},
+    III: {Index:5,Orach_Chayim:45,Yoreh_Deah:32,Even_HaEzer:12,Choshen_Mishpat:8,Sod_Yesharim:13,Kuntres_Beit_Tefillah:1},
+    IV:  {Index:4,Orach_Chayim:{run:[[1,35],[39,43]]},Yoreh_Deah:39,Even_HaEzer:13,Choshen_Mishpat:8,Sod_Yesharim:20},
+  };
+  const RP = [];
+  for (const vol of ['I','II','III','IV']) for (const sec of RP_ORDER) {
+    const spec = RP_VOL[vol][sec]; if (spec === undefined) continue;
+    if (typeof spec === 'object' && spec.run) { for (const [a,b] of spec.run) for (let n=a;n<=b;n++) RP.push({vol,sec,n}); }
+    else if (sec === 'Kuntres_Beit_Tefillah') RP.push({vol,sec,n:null});
+    else for (let n=1;n<=spec;n++) RP.push({vol,sec,n});
+  }
+  const rpUrl = e => `https://www.sefaria.org/Responsa_Rav_Pealim,_Volume_${e.vol},_${e.sec}` + (e.n?`.${e.n}`:'') + '?lang=bi';
+  const rpLbl = e => `Vol ${e.vol} · ${e.sec.replace(/_/g,' ')}` + (e.n?` ${e.n}`:'');
+
+  // Ben Ish Chai Halachot: Year-1 combined entries; Year-2 combined + missing.
+  const Y1C = {27:'Tazria_Metzora',28:'Tazria_Metzora',29:'Achrei_Mot_Kedoshim',30:'Achrei_Mot_Kedoshim',32:'Behar_Bechukotai',33:'Behar_Bechukotai'};
+  const Y2C = {32:'Behar_Bechukotai',33:'Behar_Bechukotai'};
+  const Y2_MISS = new Set([34,44,51,52,53,54]); // Bamidbar, Devarim, Nitzavim, Vayeilech, Ha'Azinu, V'Zot HaBerachah
+  const y1slug = num => Y1C[num] || SLUG[num];
+  const y2slug = num => Y2_MISS.has(num) ? null : (Y2C[num] || SLUG[num]);
+  const bicUrl = (kind,slug) => `https://www.sefaria.org/Ben_Ish_Hai,_${kind},_${slug}?lang=bi`;
+  const pName  = num => (SLUG[num]||'').replace(/_/g,' ');
+
+  window.RAV_PEALIM = RP; // 540 entries (for verification)
+  window.getYesodReading = function (nums, weekday) {
+    if (!nums || !nums.length) return null;
+    if (weekday >= 1 && weekday <= 5) {
+      const slots = [];
+      for (const num of nums) { const base = (num-1)*10; for (let i=0;i<10;i++) slots.push(RP[base+i]); }
+      const perDay = slots.length / 5;               // 2 single, 4 combined
+      const start  = (weekday-1) * perDay;
+      const today  = slots.slice(start, start+perDay).filter(Boolean);
+      return { kind:'rp', label:'Rav Pe’alim', items: today.map(e => ({url:rpUrl(e), label:rpLbl(e)})) };
+    }
+    if (weekday === 6) {
+      const items = [];
+      for (const num of nums) {
+        items.push({url:bicUrl('Halachot_1st_Year', y1slug(num)), label:`${pName(num)} · Year 1`});
+        const s2 = y2slug(num); if (s2) items.push({url:bicUrl('Halachot_2nd_Year', s2), label:`${pName(num)} · Year 2`});
+      }
+      return { kind:'hal', label:'Ben Ish Chai · Halachot', items };
+    }
+    return { kind:'drash', label:'Ben Ish Chai · Drash', items: nums.map(num => ({url:bicUrl('Drashot', SLUG[num]), label:`${pName(num)} · Drash`})) };
+  };
 })();
 </script>
 
@@ -11197,11 +11265,30 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Yesod parasha card — update for navigated date
     if (window.displayParasha) window.displayParasha(date);
 
-    // Ben Ish Chai (Yesod card)
-    document.getElementById('yesod-bic-main').innerHTML =
-      `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
-    document.getElementById('yesod-bic-meta').innerHTML =
-      `Rabbi Yosef Chaim of Baghdad`;
+    // Ben Ish Chai + Rav Pe'alim (Yesod card) — 5+2 daily reading over the parasha
+    (function () {
+      const _bicNums = _yesodParasha
+        ? _yesodParasha.split('-').map(s => PARASHA_TO_NUMBER[s.trim()]).filter(Boolean)
+        : null;
+      const _wd = date.getDay() + 1; // 1 = Sun … 7 = Shabbat
+      const _rd = window.getYesodReading ? window.getYesodReading(_bicNums, _wd) : null;
+      const _DOW = ['','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Shabbat'];
+      const _links = items => items
+        .map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`)
+        .join('<br>');
+      if (_rd) {
+        document.getElementById('yesod-bic-main').innerHTML =
+          `<div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;margin-bottom:4px;">${_rd.kind==='rp' ? `Rav Pe’alim · ${_DOW[_wd]} (2 a day, 10 a parasha)` : _rd.label}</div>` +
+          _links(_rd.items);
+        const _tagsEl = document.getElementById('yesod-tags');
+        if (_tagsEl) _tagsEl.innerHTML += `<span class="tag">✧ ${_rd.kind==='rp' ? 'Rav Pe’alim' : _rd.label}</span>`;
+      } else {
+        document.getElementById('yesod-bic-main').innerHTML =
+          `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
+      }
+      document.getElementById('yesod-bic-meta').innerHTML =
+        `Rav Yosef Chaim of Baghdad · Rav Pe’alim (Sun–Thu) · Ben Ish Chai — Halachot (Fri), Drash (Shabbat)`;
+    })();
 
     // Daily Hida (Yesod card)
     document.getElementById('yesod-hida-main').innerHTML =
