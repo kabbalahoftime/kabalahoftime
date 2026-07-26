@@ -12763,8 +12763,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
       `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
 
+    // Position in the 364-day sweep — derived from the same data the face shows,
+    // so the two can never disagree (chapters are half-days 2n−1 and 2n).
+    const _hodDay = hal.chofetz ? hal.section + 348 : (hal.ch1 + 1) / 2;
+    const _hodPos = `Day <strong>${_hodDay}</strong> of 364<br>`;
+
     if (!hal.chofetz) {
-      document.getElementById('hod-sa-face').innerHTML =
+      document.getElementById('hod-sa-face').innerHTML = _hodPos +
         `<a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold)"><strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}</a>`;
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
@@ -12792,7 +12797,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
-      document.getElementById('hod-sa-face').innerHTML =
+      document.getElementById('hod-sa-face').innerHTML = _hodPos +
         `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodChazarahHtml +
