@@ -11888,7 +11888,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : inLeapCycle5
         ? (hMonth === 12 ? hDay - 28 : hMonth === 13 ? hDay + 2 : hDay + 31)
         : 0;
-    const hal  = getHalachaInfo(dEff);
+    // Day of the KoT year, like Chesed and Gevurah — so Hod follows the
+    // year toggle through the seam and its first and last days are reachable.
+    const hal  = getHalachaInfo(dEff - d_year1 + 1);
     const txt  = getDailyText(date);
 
     const cards = Array.from(document.querySelectorAll('.sefirah-card')).filter(c => c.id !== 'now-sefirah-featured');
