@@ -12287,10 +12287,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // own midpoint, the day Tu B'Shvat falls on in winter.
     const _seasonHalf = seasonInfo.dayIn === 46 ? 'Midpoint'
       : (seasonInfo.dayIn < 46 ? 'First Half' : 'Second Half');
-    const _seasonLine = `Day ${seasonInfo.dayIn} of 91 · ${_seasonHalf} of Season ${seasonInfo.season} — ${seasonInfo.name}`;
+    const _seasonLine = `Day ${seasonInfo.dayIn} of 91 · ${_seasonHalf} of ${seasonInfo.name}`;
     document.getElementById('gevurah-cycle-name').innerHTML = 'Four Seasons — 91-Day Cycle <span class="maalah">מעלה ז׳</span>';
     document.getElementById('gevurah-main').innerHTML =
-      `Day <strong>${seasonInfo.dayIn}</strong> of 91 · ${_seasonHalf} of Season <strong>${seasonInfo.season}</strong> — ${seasonInfo.name}:<br>` +
+      `Day <strong>${seasonInfo.dayIn}</strong> of 91 · ${_seasonHalf} of <strong>${seasonInfo.name}</strong>:<br>` +
       `<strong>${seasonInfo.chayah}</strong><br>` +
       `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>` +
       (seasonInfo.isTuBShvat ? `<br><span style="font-size:0.85em;color:var(--gold-mid)">✦ Tu B'Shvat — heart of the season</span>` : ``);
