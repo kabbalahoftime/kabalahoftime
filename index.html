@@ -2965,13 +2965,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return Math.round((to - from) / (1000 * 60 * 60 * 24));
   }
 
-  // Auto-calibration: 18 Iyar (month 2, day 18) must equal KoT day 229 in local calendar days.
+  // Auto-calibration: 18 Iyar (month 2, day 18) must equal KoT day 229 in local
+  // calendar days — 257 in a leap year, since the extra 28 days (28 Shevat–25
+  // Adar I) fall before Nisan and push everything after them forward by four
+  // weeks. This is the same 28-day shift the year anchor applies with
+  // `isLeapYear ? 224 : 196`; without it a leap year's count runs 28 days short
+  // and Rosh Hashanah lands on a negative day number.
   // Runs at startup; auto-corrects DAY_OFFSET so the count is always right regardless of timezone.
   function calibrateOffset() {
     const h = gregToHebrew(new Date());
     const anchorMid = localMidnight(new Date(DATE_FROM_API));
     const iyar18Mid = localMidnight(hebrewToGreg(h.year, 2, 18));
-    const needed = localCalendarDays(anchorMid, iyar18Mid) - 229;
+    const needed = localCalendarDays(anchorMid, iyar18Mid) - (hebrewLeapYear(h.year) ? 257 : 229);
     if (needed !== DAY_OFFSET) {
       console.warn('[KoT] DAY_OFFSET recalibrated: ' + DAY_OFFSET + ' → ' + needed +
                    ' (18 Iyar ' + h.year + ')');
