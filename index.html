@@ -1746,7 +1746,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew" style="color:var(--accent-blue)">חָכְמָה</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">12:54–1:23</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Maggid of Mezritch</div>
-    <div class="prayer-tag" data-prayer="2" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Cheshbon HaNefesh</div>
+    <div class="prayer-tag" data-prayer="2" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tikkun Rachel</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef-Bet — 22-Day Cycle</div>
@@ -2555,7 +2555,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew">מַלְכוּת</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">10:18–1:43</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Rebbe</div>
-    <div class="prayer-tag" data-prayer="10" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Kri'at Shema · Tikkun Rachel</div>
+    <div class="prayer-tag" data-prayer="10" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Kri'at Shema</div>
   </div>
   <div class="sefirah-content-col">
     <div class="malchut-visible-content">
@@ -10467,8 +10467,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Unlike the ma'alot these are not sequential: each prayer has its own hour,
   // and a day may be entered at any point in it. State is a 10-bit mask kept
   // per displayed Jewish date, so it resets with the day like the ma'alot do.
-  const PRAYER_NAMES = ['Hitbodedut','Cheshbon HaNefesh','Tikkun Leah','KoT Song','Tehilim',
-                        'Shacharit','Tikkun HaKlali','Mincha','Maariv',"Kri'at Shema · Tikkun Rachel"];
+  const PRAYER_NAMES = ['Hitbodedut','Tikkun Rachel','Tikkun Leah','KoT Song','Tehilim',
+                        'Shacharit','Tikkun HaKlali','Mincha','Maariv',"Kri'at Shema"];
   let _prayerKey = null;
 
   function prayersMask() {
@@ -11489,12 +11489,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (window.displayParasha) window.displayParasha(date);
 
     // Ben Ish Chai + Rav Pe'alim (Yesod card) — 5+2 daily reading over the parasha
+    let _yesodReadingForScript = null;
     (function () {
       const _bicNums = _yesodParasha
         ? _yesodParasha.split('-').map(s => PARASHA_TO_NUMBER[s.trim()]).filter(Boolean)
         : null;
       const _wd = date.getDay() + 1; // 1 = Sun … 7 = Shabbat
       const _rd = window.getYesodReading ? window.getYesodReading(_bicNums, _wd) : null;
+      _yesodReadingForScript = _rd;
       document.getElementById('yesod-parasha-numbers').innerHTML = '';
       if (_rd) {
         const _faceLinks = items => items
@@ -13545,6 +13547,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       meynDay, meynSection, meynPage,
       tikkunPsalm: _tikkunPsalm,
       hodZoharLabel: _hodParashaZoharLabel,
+      tifTextWork: tifText ? tifText.work : null,
+      tifTextItem: tifText ? tifText.item : null,
+      netzTextWork: _nr ? _nr.work : null,
+      netzTextName: _nr ? _nr.name : null,
+      yesodBicLabel: _yesodReadingForScript
+        ? (_yesodReadingForScript.kind === 'rp' ? 'Rav Pe\u2019alim' : _yesodReadingForScript.label) : null,
+      yesodBicItems: _yesodReadingForScript
+        ? (_yesodReadingForScript.kind === 'hal'
+            ? [].concat(_yesodReadingForScript.y1, _yesodReadingForScript.y2).map(i => i.label).join(', ')
+            : _yesodReadingForScript.items.map(i => i.label).join(', '))
+        : null,
       halChofetz: hal.chofetz,
       halCh1:    hal.ch1,
       halCh2:    hal.ch2,
@@ -13840,6 +13853,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       tifTale:   (t)         => `Rebbe Nachman's tale for this cycle: "${t}."`,
       tifArush:  (b)         => `From Rav Shalom Arush: "${b}."`,
       tifDm:     (n, p, e)   => `Derech Mitzvosecha (Tzemach Tzedek, 3rd Chabad Rebbe — Kabbalistic explanations of the commandments): ${n}${p ? ' (' + p + ')' : ''} — ${e}.`,
+      tifTextLine:(w, i)     => `Today's text from ${w}: ${i}.`,
       netzCycle: (d, c)      => `we are on Day ${d} of Cycle ${c} in the 40-Day cycle of Receiving the Torah — weaving together the Ten Commandments, the four Kabbalistic worlds, and the levels of the soul into a structured arc of inner Torah reception.`,
       netzCmd:   (t)         => `The Torah commandment we focus on today: "${t}."`,
       netzCCmd:  (t)         => `The guiding commandment for this cycle: "${t}."`,
@@ -13847,11 +13861,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `The Mivtzah (outreach campaign) for this cycle: ${n}.`,
       netzTikkun:(p)         => `Tikkun HaKlali — the "Complete Remedy," ten Psalms designated by Rebbe Nachman as a comprehensive spiritual healing for the soul — today: Psalm ${p}.`,
       netzMaayan:(s, p, d)   => `Ma'ayan Ganim — a Kabbalistic guide for daily spiritual growth — today: ${s}, page ${p}, Day ${d} of 368.`,
+      netzText:  (w, n)      => `From ${w}, today: ${n}.`,
       hodZohar:  (l)         => `the Zohar — the foundational masterwork of Jewish mysticism, its teachings attributed to Rabbi Shimon bar Yochai (2nd century CE) and first disseminated in 13th-century Spain; considered the "Bible of Kabbalah" — this week: ${l}.`,
       hodHal:    (c1, c2)    => `Halacha study: Shulchan Aruch, Orach Chaim — the authoritative code of Jewish daily practice compiled by Rabbi Yosef Karo (1565), covering prayer, Shabbat, and the rhythm of Jewish life — Chapters ${c1} and ${c2}.`,
       hodChof:   (s)         => `Sefer Chofetz Chaim — Rabbi Yisrael Meir Kagan's (1838–1933) landmark guide to holy speech, teaching that guarding the tongue from slander and gossip is a cornerstone of spiritual life — Section ${s}.`,
       hodDaf:    (n, d)      => `Talmud review: ${n}, Daf ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `this week's parasha is ${p}. The Shovavim system — a traditional period of spiritual purification during the winter readings of Shemot, focused on Tikkun HaBrit (renewal of the soul's covenant with God) — today is Day ${day} of the week, Parasha ${pNum} of Cycle ${pCyc}, quality ${dayLet} — ${dayName}: ${dayTik}. Chok L'Yisrael weaves daily readings from Torah, Nevi'im, Ketuvim, Mishnah, Talmud, Halacha, and Zohar into one unified reading.`,
+      yesodBic:  (l, i)      => `From Rav Yosef Chaim of Baghdad — ${l}: ${i}.`,
       malPerek:  (a)         => `In Perek Shirah — the ancient text recording the song each creature "sings" to its Creator — today's voice belongs to ${a}.`,
       malAvot:   (a)         => `From Pirkei Avot — the Mishna's unique tractate of moral and spiritual wisdom from the Sages: ${a}.`,
     },
@@ -13892,6 +13908,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       tifTale:   (t)         => `סיפורו של רבי נחמן למחזור זה: "${t}."`,
       tifArush:  (b)         => `מרב שלום ארוש לומדים: "${b}."`,
       tifDm:     (n, p, e)   => `דרך מצוותיך: ${n}${p ? ' (' + p + ')' : ''} — ${e}.`,
+      tifTextLine:(w, i)     => `הטקסט של היום מתוך ${w}: ${i}.`,
       netzCycle: (d, c)      => `אנחנו ביום ${d} של מחזור ${c} במחזור 40 הימים של קבלת התורה.`,
       netzCmd:   (t)         => `המצווה שאנו מתמקדים בה היום: "${t}."`,
       netzCCmd:  (t)         => `המצווה המנחה של מחזור זה: "${t}."`,
@@ -13899,11 +13916,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `מבצע החסד של מחזור זה הוא ${n}.`,
       netzTikkun:(p)         => `לתיקון הכללי, אנו אומרים היום תהלים ${p}.`,
       netzMaayan:(s, p, d)   => `מעיין גנים: ${s}, עמ' ${p} — יום ${d} מתוך 368.`,
+      netzText:  (w, n)      => `מתוך ${w}, היום: ${n}.`,
       hodZohar:  (l)         => `הזוהר על פרשת השבוע: ${l}.`,
       hodHal:    (c1, c2)    => `לימוד ההלכה כולל שולחן ערוך, אורח חיים, סימנים ${c1} ו-${c2}.`,
       hodChof:   (s)         => `לומדים ספר חפץ חיים, חלק ${s} — הלכות שמירת הלשון.`,
       hodDaf:    (n, d)      => `לחזרה על הגמרא, חוזרים על ${n}, דף ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `פרשת השבוע היא ${p}. במסגרת שובבי"ם — שש (או שמונה) פרשות שמות הקשורות לתיקון הברית — היום הוא יום ${day} בשבוע, פרשה ${pNum} במחזור ${pCyc}. האיכות של יום זה היא ${dayLet} — ${dayName}: ${dayTik}. חוק לישראל מאחד תורה, נביאים, כתובים, מדרש וזוהר בקריאה יומית אחת ומשולבת.`,
+      yesodBic:  (l, i)      => `מרב יוסף חיים מבגדאד — ${l}: ${i}.`,
       malPerek:  (a)         => `בפרק שירה — שיר הבריאה — הקול של היום שייך ל${a}.`,
       malAvot:   (a)         => `מפרקי אבות: ${a}.`,
     },
@@ -13944,6 +13963,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       tifTale:   (t)         => `El cuento de Rabi Najmán para este ciclo es "${t}."`,
       tifArush:  (b)         => `De Rav Shalom Arush estudiamos "${b}."`,
       tifDm:     (n, p, e)   => `Derej Mitzvoteja: ${n}${p ? ' (' + p + ')' : ''} — ${e}.`,
+      tifTextLine:(w, i)     => `El texto de hoy de ${w}: ${i}.`,
       netzCycle: (d, c)      => `estamos en el Día ${d} del Ciclo ${c} del ciclo de 40 días de Recibir la Torá.`,
       netzCmd:   (t)         => `El mandamiento en el que nos enfocamos hoy: "${t}."`,
       netzCCmd:  (t)         => `El mandamiento rector de este ciclo: "${t}."`,
@@ -13951,11 +13971,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `La campaña Mivtzah de este ciclo es ${n}.`,
       netzTikkun:(p)         => `Para el Tikún HaKlali, hoy recitamos el Salmo ${p}.`,
       netzMaayan:(s, p, d)   => `Ma'ayan Ganim: ${s}, página ${p} — Día ${d} de 368.`,
+      netzText:  (w, n)      => `De ${w}, hoy: ${n}.`,
       hodZohar:  (l)         => `el Zóhar sobre la porción semanal: ${l}.`,
       hodHal:    (c1, c2)    => `Nuestro estudio de Halachá abarca el Shulján Aruj, Oraj Jaim, Capítulos ${c1} y ${c2}.`,
       hodChof:   (s)         => `Estudiamos el Sefer Jofetz Jaim, Sección ${s} — las leyes del habla adecuada.`,
       hodDaf:    (n, d)      => `Para el repaso del Talmud, revisamos ${n}, Daf ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `la parashá de esta semana es ${p}. En el sistema espiritual del Shovavim — las seis (u ocho) parashot de Shemot asociadas al Tikún HaBrit — hoy es el Día ${day} de la semana, Parashá ${pNum} del Ciclo ${pCyc}. La cualidad del día es ${dayLet} — ${dayName}: ${dayTik}. La porción del Jok LeIsrael unifica Torá, Profetas, Escrituras, Midrash y Zohar en una única lectura diaria.`,
+      yesodBic:  (l, i)      => `Del Rav Yosef Jaim de Bagdad — ${l}: ${i}.`,
       malPerek:  (a)         => `En el Pérek Shirá — el Canto de la Creación — la voz de hoy pertenece a ${a}.`,
       malAvot:   (a)         => `De Pirké Avot: ${a}.`,
     },
@@ -13996,6 +14018,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       tifTale:   (t)         => `Le conte de Rabbi Nahman pour ce cycle est "${t}."`,
       tifArush:  (b)         => `Avec Rav Chalom Arouch, nous étudions "${b}."`,
       tifDm:     (n, p, e)   => `Derekh Mitsvotekha : ${n}${p ? ' (' + p + ')' : ''} — ${e}.`,
+      tifTextLine:(w, i)     => `Le texte du jour tiré de ${w} : ${i}.`,
       netzCycle: (d, c)      => `nous sommes au Jour ${d} du Cycle ${c} dans le cycle de 40 jours de la Réception de la Torah.`,
       netzCmd:   (t)         => `Le commandement sur lequel nous nous concentrons aujourd'hui : "${t}."`,
       netzCCmd:  (t)         => `Le commandement directeur de ce cycle : "${t}."`,
@@ -14003,11 +14026,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `La campagne Mivtzah de ce cycle est ${n}.`,
       netzTikkun:(p)         => `Pour le Tikkoun HaKlali, nous récitons aujourd'hui le Psaume ${p}.`,
       netzMaayan:(s, p, d)   => `Ma'ayan Ganim : ${s}, page ${p} — Jour ${d} sur 368.`,
+      netzText:  (w, n)      => `De ${w}, aujourd'hui : ${n}.`,
       hodZohar:  (l)         => `le Zohar sur la paracha de la semaine : ${l}.`,
       hodHal:    (c1, c2)    => `Notre étude de la Halakha couvre le Choulhan Aroukh, Orah Haïm, Chapitres ${c1} et ${c2}.`,
       hodChof:   (s)         => `Nous étudions le Séfer Hofets Haïm, Section ${s} — les lois de la parole adéquate.`,
       hodDaf:    (n, d)      => `Pour la révision du Talmud, nous revisitons ${n}, Daf ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `la Paracha de cette semaine est ${p}. Dans le système spirituel du Chovavim — les six (ou huit) Parachot de Chémot liées au Tikoun HaBrit — aujourd'hui est le Jour ${day} de la semaine, Paracha ${pNum} du Cycle ${pCyc}. La qualité de la journée est ${dayLet} — ${dayName} : ${dayTik}. La portion du Hok LeIsraël unifie Torah, Prophètes, Écrits, Midrach et Zohar en une seule lecture quotidienne.`,
+      yesodBic:  (l, i)      => `Du Rav Yossef Haim de Bagdad — ${l} : ${i}.`,
       malPerek:  (a)         => `Dans le Pérek Chirah — le Chant de la Création — la voix d'aujourd'hui appartient à ${a}.`,
       malAvot:   (a)         => `Des Pirké Avot : ${a}.`,
     },
@@ -14048,6 +14073,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       tifTale:   (t)         => `O conto do Rabi Nachman para este ciclo é "${t}."`,
       tifArush:  (b)         => `Com Rav Shalom Arush estudamos "${b}."`,
       tifDm:     (n, p, e)   => `Derech Mitzvotecha: ${n}${p ? ' (' + p + ')' : ''} — ${e}.`,
+      tifTextLine:(w, i)     => `O texto de hoje de ${w}: ${i}.`,
       netzCycle: (d, c)      => `estamos no Dia ${d} do Ciclo ${c} no ciclo de 40 dias de Receber a Torá.`,
       netzCmd:   (t)         => `O mandamento em que nos concentramos hoje: "${t}."`,
       netzCCmd:  (t)         => `O mandamento condutor deste ciclo: "${t}."`,
@@ -14055,11 +14081,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzMivtz: (n)         => `A campanha Mivtzah deste ciclo é ${n}.`,
       netzTikkun:(p)         => `Para o Tikkun HaKlali, hoje recitamos o Salmo ${p}.`,
       netzMaayan:(s, p, d)   => `Ma'ayan Ganim: ${s}, página ${p} — Dia ${d} de 368.`,
+      netzText:  (w, n)      => `De ${w}, hoje: ${n}.`,
       hodZohar:  (l)         => `o Zohar sobre a porção semanal: ${l}.`,
       hodHal:    (c1, c2)    => `Nosso estudo de Halachá abrange o Shulchan Aruch, Orach Chaim, Capítulos ${c1} e ${c2}.`,
       hodChof:   (s)         => `Estudamos o Sefer Chofetz Chaim, Seção ${s} — as leis do discurso adequado.`,
       hodDaf:    (n, d)      => `Para a revisão do Talmude, revisitamos ${n}, Daf ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `a parashá desta semana é ${p}. No sistema espiritual do Shovavim — as seis (ou oito) parashot de Shemot associadas ao Tikkun HaBrit — hoje é o Dia ${day} da semana, Parashá ${pNum} do Ciclo ${pCyc}. A qualidade do dia é ${dayLet} — ${dayName}: ${dayTik}. A porção de Chok LeIsrael unifica Torá, Profetas, Escritos, Midrash e Zohar em uma única leitura diária.`,
+      yesodBic:  (l, i)      => `Do Rav Yosef Chaim de Bagdá — ${l}: ${i}.`,
       malPerek:  (a)         => `No Perek Shirah — o Canto da Criação — a voz de hoje pertence a ${a}.`,
       malAvot:   (a)         => `Dos Pirkei Avot: ${a}.`,
     },
@@ -14129,6 +14157,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     tifLines.push(L.tifAttr(data.cy13AttrName, data.cy13AttrHebrew, data.cy13AttrMeaning));
     if (data.pbyName) tifLines.push(L.tifPby(data.pbyRung, data.pbyName, data.pbyMeaning));
     if (data.nachmanTale) tifLines.push(L.tifTale(data.nachmanTale));
+    if (data.tifTextWork) tifLines.push(L.tifTextLine(data.tifTextWork, data.tifTextItem));
     if (data.arushBook) tifLines.push(L.tifArush(data.arushBook));
     if (data.dmName) tifLines.push(L.tifDm(data.dmName, data.dmPart, data.dmEnglish));
     lines.push(tifLines.join(' '));
@@ -14140,6 +14169,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     netzLines.push(L.netzCmd(data.dayCommandmentText));
     if (data.cycleCommandmentText) netzLines.push(L.netzCCmd(data.cycleCommandmentText));
     netzLines.push(L.netzSoul(data.cy41SoulLevelShort, data.cy41World));
+    if (data.netzTextWork) netzLines.push(L.netzText(data.netzTextWork, data.netzTextName));
     if (data.cy41Mivtzah) netzLines.push(L.netzMivtz(data.cy41Mivtzah));
     if (data.tikkunPsalm) netzLines.push(L.netzTikkun(data.tikkunPsalm));
     if (data.meynSection) netzLines.push(L.netzMaayan(data.meynSection, data.meynPage, data.meynDay));
@@ -14164,7 +14194,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       data.shovavimDayLet  || '',
       data.shovavimDayName || '',
       data.shovavimDayTik  || ''
-    )}`);
+    )}${data.yesodBicLabel ? ' ' + L.yesodBic(data.yesodBicLabel, data.yesodBicItems) : ''}`);
     lines.push('');
 
     // Malchut
