@@ -12285,7 +12285,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const seasonInfo = getSeasonInfo(dEff - d_year1 + 1);
     document.getElementById('gevurah-cycle-name').innerHTML = 'Four Seasons — 91-Day Cycle <span class="maalah">מעלה ז׳</span>';
     document.getElementById('gevurah-main').innerHTML =
-      `Season <strong>${seasonInfo.season}</strong> of 4 — ${seasonInfo.name}:<br>` +
+      `Day <strong>${seasonInfo.dayIn}</strong> of Season <strong>${seasonInfo.season}</strong> — ${seasonInfo.name}:<br>` +
       `<strong>${seasonInfo.chayah}</strong><br>` +
       `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>` +
       (seasonInfo.isTuBShvat ? `<br><span style="font-size:0.85em;color:var(--gold-mid)">✦ Tu B'Shvat — heart of the season</span>` : ``);
