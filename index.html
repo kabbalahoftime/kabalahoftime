@@ -1904,10 +1904,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="yesod-midrash-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-midrash-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Ben Ish Chai · Rav Pe’alim</div>
-      <div id="yesod-bic-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
-      <div id="yesod-bic-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
-      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Daily Hida</div>
       <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-hida-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
@@ -2433,16 +2429,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return { kind:'drash', label:'Ben Ish Chai · Drash', items: nums.map(num => ({url:bicUrl('Drashot', SLUG[num]), label:`${pName(num)} · Drash`})) };
   };
 
-  // Year 1 / Year 2 toggle for the Halachot day (detail section only — the
-  // face shows both years as separate links, no toggle needed).
-  window.yesodBicYear = function (y) {
-    const b1 = document.getElementById('bic-y1-box'), b2 = document.getElementById('bic-y2-box');
-    const t1 = document.getElementById('bic-y1-btn'), t2 = document.getElementById('bic-y2-btn');
-    if (b1) b1.style.display = y === 1 ? '' : 'none';
-    if (b2) b2.style.display = y === 2 ? '' : 'none';
-    if (t1) t1.classList.toggle('year-pill-active', y === 1);
-    if (t2) t2.classList.toggle('year-pill-active', y === 2);
-  };
 })();
 </script>
 
@@ -11353,55 +11339,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         : null;
       const _wd = date.getDay() + 1; // 1 = Sun … 7 = Shabbat
       const _rd = window.getYesodReading ? window.getYesodReading(_bicNums, _wd) : null;
-      const _DOW = ['','Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Shabbat'];
-      const _links = items => items
-        .map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`)
-        .join('<br>');
+      document.getElementById('yesod-parasha-numbers').innerHTML = '';
       if (_rd) {
-        let _body;
-        if (_rd.kind === 'hal') {
-          const _y1 = _links(_rd.y1);
-          if (_rd.y2.length) {
-            _body =
-              `<div style="margin-bottom:5px;">` +
-                `<button class="year-pill-btn year-pill-active" id="bic-y1-btn" onclick="yesodBicYear(1)">Year 1</button> ` +
-                `<button class="year-pill-btn" id="bic-y2-btn" onclick="yesodBicYear(2)">Year 2</button>` +
-              `</div>` +
-              `<div id="bic-y1-box">${_y1}</div>` +
-              `<div id="bic-y2-box" style="display:none">${_links(_rd.y2)}</div>`;
-          } else {
-            _body = _y1 + `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;margin-top:3px;">Year 2 — not extant for this parasha</div>`;
-          }
-          document.getElementById('yesod-bic-main').innerHTML =
-            `<div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;margin-bottom:4px;">${_rd.label}</div>` + _body;
-        } else {
-          document.getElementById('yesod-bic-main').innerHTML =
-            `<div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;margin-bottom:4px;">${_rd.kind==='rp' ? `Rav Pe’alim · ${_DOW[_wd]} (2 a day, 10 a parasha)` : _rd.label}</div>` +
-            _links(_rd.items);
-        }
         const _faceLinks = items => items
           .map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label.replace(/ · Drash$/, '')}</a>`)
           .join(' &amp; ');
         const _yearLinks = (items, yearLabel) => items.length === 1
           ? `<a href="${items[0].url}" target="_blank" style="color:var(--gold)">${yearLabel}</a>`
           : items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${yearLabel} · ${it.label}</a>`).join(' &amp; ');
-        document.getElementById('yesod-parasha-numbers').innerHTML = '';
         document.getElementById('yesod-text-label').innerHTML =
           `✧ ${_rd.kind === 'rp' ? 'Rav Pe’alim' : _rd.label}`;
         document.getElementById('yesod-text-face').innerHTML =
-          (_rd.kind === 'hal' && _rd.y2.length)
-            ? `${_yearLinks(_rd.y1, 'Year 1')} &nbsp;·&nbsp; ${_yearLinks(_rd.y2, 'Year 2')}`
-            : _faceLinks(_rd.kind === 'hal' ? _rd.y1 : _rd.items);
+          _rd.kind !== 'hal'
+            ? _faceLinks(_rd.items)
+            : (_rd.y2.length
+                ? `${_yearLinks(_rd.y1, 'Year 1')} &nbsp;·&nbsp; ${_yearLinks(_rd.y2, 'Year 2')}`
+                : `${_yearLinks(_rd.y1, 'Year 1')} <span style="font-size:0.85em;color:var(--ink-dim);font-style:italic;">· Year 2 — not extant for this parasha</span>`);
       } else {
-        document.getElementById('yesod-bic-main').innerHTML =
-          `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
-        document.getElementById('yesod-parasha-numbers').innerHTML = '';
         document.getElementById('yesod-text-label').innerHTML = `✧ Ben Ish Chai`;
         document.getElementById('yesod-text-face').innerHTML =
           `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
       }
-      document.getElementById('yesod-bic-meta').innerHTML =
-        `Rav Yosef Chaim of Baghdad · Rav Pe’alim (Sun–Thu) · Ben Ish Chai — Halachot (Fri), Drash (Shabbat)`;
     })();
 
     // Daily Hida (Yesod card)
