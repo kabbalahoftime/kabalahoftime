@@ -1893,7 +1893,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Maariv</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name">Shovavim — Parasha Cycle <span class="maalah">מעלה י״ב</span></div>
+    <div class="sefirah-cycle-name">Shovavim Cycles <span class="maalah">מעלה י״ב</span></div>
     <div id="yesod-parasha-name" class="sefirah-main-text">Loading...</div>
     <div id="yesod-parasha-numbers" class="sefirah-sub-text"></div>
     <div class="sefirah-tags" id="yesod-tags"></div>
@@ -10522,7 +10522,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       meta: 'Shulchan Aruch & Mishnah Berurah · Chofetz Chaim · Zohar · Sefer Yetzirah'
     },
     yesod: {
-      title: 'Shovavim — Parasha Cycle',
+      title: 'Shovavim Cycles',
       main: 'The weekly parasha as a year-round tikkun-cycle, extending the Shovavim weeks (Shemot–Mishpatim, the classic season of rectifying Yesod) across all 52 weeks: the foundation guarded all year.',
       meta: 'An original Kabbalah of Time cycle · the Shovavim tikkun extended'
     },
@@ -11626,14 +11626,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         return;
       }
       const parts = pName ? pName.split('-').map(p => p.trim()) : [];
+      // Chok L'Yisrael runs a portion for each of the six weekdays (Sun = Day 1
+      // … Fri = Day 6); Shabbat has none and is handled by Sefer Yetzirah above.
+      const _czDay = date.getDay() + 1;
+      const _czDayLabel = _czDay <= 6 ? ` <span style="font-size:0.85em;color:var(--ink-mid)">· Day ${_czDay}</span>` : '';
       if (_chabadZoharUrl && _chabadZoharUrl2) {
         _hodParashaZoharMainHtml =
           `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">${parts[0]}</a>` +
-          ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">${parts[1]}</a>`;
+          ` &nbsp;·&nbsp; <a href="${_chabadZoharUrl2}" target="_blank" style="color:var(--gold)">${parts[1]}</a>` +
+          _czDayLabel;
       } else if (_chabadZoharUrl) {
-        _hodParashaZoharMainHtml = `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">${pName ? 'Parashat ' + pName : 'Daily Zohar'}</a>`;
+        _hodParashaZoharMainHtml = `<a href="${_chabadZoharUrl}" target="_blank" style="color:var(--gold)">${pName || 'Daily Zohar'}</a>` + _czDayLabel;
       } else {
-        _hodParashaZoharMainHtml = `<a href="${CHABAD_ZOHAR_FALLBACK}" target="_blank" style="color:var(--gold)">${pName ? 'Parashat ' + pName : "Chok L'Yisrael Zohar"}</a>`;
+        _hodParashaZoharMainHtml = `<a href="${CHABAD_ZOHAR_FALLBACK}" target="_blank" style="color:var(--gold)">${pName || "Chok L'Yisrael Zohar"}</a>`;
       }
       const faceEl = document.getElementById('hod-zohar-face');
       if (faceEl) faceEl.innerHTML = _hodParashaZoharMainHtml;
