@@ -1866,9 +1866,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Mincha</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name" id="hod-cycle-name"><span style="display:block">Shulchan Aruch — 728 Half-Days <span class="maalah">מעלה י׳</span></span><span style="display:block">Zohar — Chok L'Yisrael <span class="maalah">מעלה י״א</span></span></div>
-    <div id="hod-sa-face" class="sefirah-main-text" style="margin-bottom:6px;">Loading…</div>
-    <div id="hod-zohar-face" class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-cycle-name">728 Half-Day Cycle</div>
+    <div id="hod-pos" class="sefirah-main-text">Loading…</div>
+    <div class="malchut-ksa-row" style="margin-top:8px">
+      <div class="keter-section-label" id="hod-sa-label">✧ Shulchan Aruch <span class="maalah">מעלה י׳</span></div>
+      <div id="hod-sa-face" class="sefirah-main-text">Loading…</div>
+    </div>
+    <div class="malchut-ksa-row" style="margin-top:8px">
+      <div class="keter-section-label" id="hod-zohar-label">✧ Zohar — Chok L'Yisrael <span class="maalah">מעלה י״א</span></div>
+      <div id="hod-zohar-face" class="sefirah-main-text">Loading…</div>
+    </div>
     <div class="sefirah-sub-text" style="display:none;"></div>
     <div class="sefirah-tags"></div>
     <div class="sefirah-detail"></div>
@@ -11610,7 +11617,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const _syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${_syVs[0].ref.replace(':', '.')}`;
         _syDetailMeta = `<a href="${_syUrl}" target="_blank" style="color:var(--gold)">Sefer Yetzirah ${_syRefLabel} on Sefaria</a>`;
         const _syFace = document.getElementById('hod-zohar-face');
-        if (_syFace) _syFace.innerHTML = `<strong>Sefer Yetzirah</strong> — <span onclick="openSeferYetzirahModal()" style="cursor:pointer;color:var(--gold)">${_syRefLabel}</span>`;
+        if (_syFace) _syFace.innerHTML = `<span onclick="openSeferYetzirahModal()" style="cursor:pointer;color:var(--gold)">${_syRefLabel}</span>`;
         return;
       }
       const parts = pName ? pName.split('-').map(p => p.trim()) : [];
@@ -11624,7 +11631,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _hodParashaZoharMainHtml = `<a href="${CHABAD_ZOHAR_FALLBACK}" target="_blank" style="color:var(--gold)">${pName ? 'Parashat ' + pName : "Chok L'Yisrael Zohar"}</a>`;
       }
       const faceEl = document.getElementById('hod-zohar-face');
-      if (faceEl) faceEl.innerHTML = `<strong>Zohar</strong> — ${_hodParashaZoharMainHtml}`;
+      if (faceEl) faceEl.innerHTML = _hodParashaZoharMainHtml;
     })();
 
     // Hayom Yom: the visible Keter-detail section was removed, but the text is
@@ -12736,14 +12743,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    // Title switches like Chesed's Mishna/Tosefta: the Zohar (Chok L'Yisrael)
-    // on the six weekdays, Sefer Yetzirah on Shabbat.
+    // Subheader switches like Chesed's Mishna/Tosefta: the Zohar (Chok
+    // L'Yisrael) on the six weekdays, Sefer Yetzirah on Shabbat.
     const _hodSY = date.getDay() === 6 && _zoharParashaNum && SEFER_YETZIRAH_VERSES[_zoharParashaNum];
-    document.getElementById('hod-cycle-name').innerHTML =
-      '<span style="display:block">Shulchan Aruch — 728 Half-Days <span class="maalah">מעלה י׳</span></span>' +
-      (_hodSY
-        ? '<span style="display:block">Sefer Yetzirah <span class="maalah">מעלה י״א</span></span>'
-        : '<span style="display:block">Zohar — Chok L\'Yisrael <span class="maalah">מעלה י״א</span></span>');
+    document.getElementById('hod-zohar-label').innerHTML =
+      (_hodSY ? '✧ Sefer Yetzirah ' : '✧ Zohar — Chok L\'Yisrael ') +
+      '<span class="maalah">מעלה י״א</span>';
 
     // (The Zohar shows on the Hod face; no need to repeat it in the detail.)
 
@@ -12772,11 +12777,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Position in the 364-day sweep — derived from the same data the face shows,
     // so the two can never disagree (chapters are half-days 2n−1 and 2n).
     const _hodDay = hal.chofetz ? hal.section + 348 : (hal.ch1 + 1) / 2;
-    const _hodPos = `Day <strong>${_hodDay}</strong> of 364<br>`;
+    // The two halves of the day are half-days 2n−1 and 2n of the 728 — one
+    // studied in the morning, one in the afternoon.
+    document.getElementById('hod-pos').innerHTML =
+      `Half-Day <strong>${_hodDay * 2 - 1}</strong> &amp; <strong>${_hodDay * 2}</strong> of 728`;
+    const _saUrl = ch => `https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${ch}?lang=bi`;
+    // Days 350–364 leave the Shulchan Aruch for the Chofetz Chaim; the
+    // subheader follows the text.
+    document.getElementById('hod-sa-label').innerHTML =
+      (hal.chofetz ? '✧ Sefer Chofetz Chaim ' : '✧ Shulchan Aruch ') +
+      '<span class="maalah">מעלה י׳</span>';
 
     if (!hal.chofetz) {
-      document.getElementById('hod-sa-face').innerHTML = _hodPos +
-        `<a href="https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${hal.ch1}?lang=bi" target="_blank" style="color:var(--gold)"><strong>Shulchan Aruch, Orach Chaim</strong> ${hal.ch1} & ${hal.ch2}</a>`;
+      document.getElementById('hod-sa-face').innerHTML =
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Morning:</span> <a href="${_saUrl(hal.ch1)}" target="_blank" style="color:var(--gold)">Orach Chaim ${hal.ch1}</a><br>` +
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Afternoon:</span> <a href="${_saUrl(hal.ch2)}" target="_blank" style="color:var(--gold)">Orach Chaim ${hal.ch2}</a>`;
       const hodCcHtml =
         `<div style="margin-bottom:4px;"></div>` +
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daily Chofetz Chaim <span class="maalah yom" data-wane="5">מיעוט ה׳</span></div>` +
@@ -12803,8 +12818,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
         `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg — TorahCasts · Class ${ccDay}</a>` +
         `</div>`;
-      document.getElementById('hod-sa-face').innerHTML = _hodPos +
-        `Sefer Chofetz Chaim — Section <strong>${hal.section}</strong>`;
+      document.getElementById('hod-sa-face').innerHTML =
+        `Section <strong>${hal.section}</strong>`;
       cards[6].querySelector('.sefirah-detail').innerHTML =
         hodChazarahHtml +
         hodCcHtml +
