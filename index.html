@@ -2236,7 +2236,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         let mainHtml = '';
         if (primaryData) {
             const uniqueCycles = [...new Set(parashaInfos.map(pd => pd.cycle))];
-            // Lead with the position, as Chochmah/Binah and Chesed–Netzach do.
+            // The parasha names the week, then the position line, as
+            // Chochmah/Binah and Chesed–Netzach lead with theirs.
             // On a double parasha both numbers show: "Parasha 3 & 4".
             const _pNums = parashaInfos.map(pd => pd.relativeNumber).join(' &amp; ');
             const _cNums = uniqueCycles.join(' &amp; ');
@@ -2244,8 +2245,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             // it's what tells the lines apart.
             const _pLabel = pd => parashaInfos.length > 1 ? `Parasha ${pd.relativeNumber}` : 'Parasha';
             const _cLabel = c  => uniqueCycles.length  > 1 ? `Cycle ${c}` : 'Cycle';
-            mainHtml = `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${_pNums}</strong> · Cycle <strong>${_cNums}</strong><br>` +
-                       `<strong>${foundParasha.name}</strong>` +
+            mainHtml = `<strong>${foundParasha.name}</strong><br>` +
+                       `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${_pNums}</strong> · Cycle <strong>${_cNums}</strong>` +
                        qLine('Day', dayQ) +
                        parashaInfos.map((pd, i) => qLine(_pLabel(pd), parashaQs[i])).join('') +
                        uniqueCycles.map((c, i) => qLine(_cLabel(c), cycleQs[i])).join('');
