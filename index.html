@@ -2225,9 +2225,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const _shovavimDay = (_now.getDay() === 6 && _now.getHours() >= 19) ? 8 : _now.getDay() + 1;
         const dayQ = getQualities(_shovavimDay);
         // Compact: one labeled line per quality — "Role N: Letter · Name — short method"
+        // Styled to match Netzach's labelled Day:/Level:/Cycle: lines — the
+        // caller wraps the set in a .sefirah-sub-text block.
         function qLine(label, q) {
             if (!q) return '';
-            return `<br><span style="opacity:0.6">${label}:</span> ${q.letter} · <strong>${q.name}</strong>` +
+            return `<span style="font-size:0.9em;color:var(--ink-dim)">${label}:</span> ${q.letter} · <strong>${q.name}</strong>` +
                    ` <span style="font-size:0.85em;opacity:0.65">— ${q.tikkunShort || q.tikkunMethod}</span>`;
         }
         // Expose shovavim data for script builder
@@ -2252,11 +2254,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             // it's what tells the lines apart.
             const _pLabel = pd => parashaInfos.length > 1 ? `Parasha ${pd.relativeNumber}` : 'Parasha';
             const _cLabel = c  => uniqueCycles.length  > 1 ? `Cycle ${c}` : 'Cycle';
+            const _qLines = [
+                qLine('Day', dayQ),
+                ...parashaInfos.map((pd, i) => qLine(_pLabel(pd), parashaQs[i])),
+                ...uniqueCycles.map((c, i) => qLine(_cLabel(c), cycleQs[i])),
+            ].filter(Boolean).join('<br>');
             mainHtml = `<strong>${foundParasha.name}</strong><br>` +
                        `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${_pNums}</strong> · Cycle <strong>${_cNums}</strong>` +
-                       qLine('Day', dayQ) +
-                       parashaInfos.map((pd, i) => qLine(_pLabel(pd), parashaQs[i])).join('') +
-                       uniqueCycles.map((c, i) => qLine(_cLabel(c), cycleQs[i])).join('');
+                       (_qLines ? `<div class="sefirah-sub-text">${_qLines}</div>` : '');
         } else {
             mainHtml = foundParasha.name;
         }
