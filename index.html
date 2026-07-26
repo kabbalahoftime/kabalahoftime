@@ -241,6 +241,30 @@ border-radius: 20px;
 overflow: hidden;
 margin-top: 6px;
 }
+/* ── THE TEN PRAYERS — a daily heart, one prayer per Sefirah ── */
+.prayer-tag {
+transition: color 0.25s, opacity 0.25s, text-shadow 0.25s;
+}
+.prayer-tag:hover { opacity: 1 !important; }
+.prayer-tag.done {
+color: var(--accent-red) !important;
+opacity: 1 !important;
+font-weight: 600;
+}
+.prayer-tag.done::after { content: ' \2665'; font-size: 0.95em; }
+/* Its own hour, still unsaid — a slow pulse, not a blink */
+.prayer-tag.now-flash {
+animation: prayerPulse 2.2s ease-in-out infinite;
+}
+@keyframes prayerPulse {
+0%, 100% { opacity: 0.45; text-shadow: none; }
+50%      { opacity: 1; text-shadow: 0 0 6px rgba(223,160,22,0.9); }
+}
+@media (prefers-reduced-motion: reduce) {
+.prayer-tag.now-flash { animation: none; opacity: 1; text-shadow: 0 0 5px rgba(223,160,22,0.85); }
+}
+#now-sf-heart { margin-top: 5px; cursor: pointer; }
+
 .year-pill-btn {
 background: none;
 border: none;
@@ -1556,7 +1580,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="now-sf-name" class="sefirah-name"></div>
       <div id="now-sf-hebrew" class="sefirah-hebrew"></div>
       <div id="now-sf-time" style="font-size:9px;color:var(--ink-dim);margin-top:3px;"></div>
+      <div id="now-sf-tzadik" style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;"></div>
+      <div id="now-sf-prayer" style="margin-top:1px;"></div>
       <div style="font-size:8px;color:var(--gold);margin-top:2px;letter-spacing:1.5px;opacity:0.9;">NOW</div>
+      <div id="now-sf-heart" onclick="event.stopPropagation(); openTodaysPath()" title="The ten daily prayers">
+        <svg id="prayer-heart-svg" width="20" height="19" viewBox="0 0 22 20" style="display:block;margin:0 auto;">
+          <defs>
+            <clipPath id="prayer-heart-clip"><rect id="prayer-heart-rect" x="0" y="20" width="22" height="20"/></clipPath>
+          </defs>
+          <path id="prayer-heart-fill"
+                d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
+                fill="var(--accent-red)" clip-path="url(#prayer-heart-clip)"/>
+          <path id="prayer-heart-rim"
+                d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
+                fill="none" stroke="var(--gold)" stroke-width="1.1"/>
+        </svg>
+        <div id="prayer-heart-count" style="font-size:9px;color:var(--gold);text-align:center;margin-top:1px;">0/10</div>
+      </div>
     </div>
     <div class="sefirah-content-col">
       <div id="now-sf-cycle" class="sefirah-cycle-name"></div>
@@ -1574,7 +1614,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-family:'Frank Ruhl Libre',serif;font-size:22px;color:var(--gold);text-align:center;margin-top:2px;">כֶּתֶר / דַּעַת</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;text-align:center;">1:52–2:22</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;text-align:center;font-style:italic;">Baal Shem Tov</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;text-align:center;opacity:0.85;">Hitbodedut</div>
+    <div class="prayer-tag" data-prayer="1" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;text-align:center;opacity:0.85;">Hitbodedut</div>
   </div>
   <div class="keter-card" onclick="toggleKeterExpand(this, event)">
     <span class="expand-icon">▾</span>
@@ -1706,7 +1746,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew" style="color:var(--accent-blue)">חָכְמָה</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">12:54–1:23</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Maggid of Mezritch</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Cheshbon HaNefesh</div>
+    <div class="prayer-tag" data-prayer="2" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Cheshbon HaNefesh</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef-Bet — 22-Day Cycle</div>
@@ -1733,7 +1773,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew" style="color:var(--accent-red)">בִּינָה</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">1:23–1:52</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Meor Einayim</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tikkun Leah</div>
+    <div class="prayer-tag" data-prayer="3" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tikkun Leah</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="binah-cycle-name">Sefirot — 7×7×7 Cycle</div>
@@ -1770,7 +1810,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew">חֶסֶד</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">1:43–5:09</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Kedushas Levi</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">KoT Song</div>
+    <div class="prayer-tag" data-prayer="4" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">KoT Song</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="chesed-cycle-name">Mishna — Oral Torah</div>
@@ -1794,7 +1834,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">5:09–8:35</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Noam Elimelech</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Beis Aharon</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tehilim</div>
+    <div class="prayer-tag" data-prayer="5" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tehilim</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
@@ -1817,7 +1857,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew">תִּפְאֶרֶת</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">8:35–12:00</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Alter Rebbe</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Shacharit</div>
+    <div class="prayer-tag" data-prayer="6" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Shacharit</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name">13 Attributes — 13-Day Cycle</div>
@@ -1840,7 +1880,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew">נֶצַח</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">12:00–3:26</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Rebbe Nachman</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tikkun HaKlali</div>
+    <div class="prayer-tag" data-prayer="7" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tikkun HaKlali</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name">40-Day Cycle — Mivtzoyim</div>
@@ -1863,7 +1903,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew">הוֹד</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">3:26–6:52</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Gr"a</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Mincha</div>
+    <div class="prayer-tag" data-prayer="8" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Mincha</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name">728 Half-Day Cycle</div>
@@ -1890,7 +1930,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew">יְסוֹד</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">6:52–10:18</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Chida</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Maariv</div>
+    <div class="prayer-tag" data-prayer="9" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Maariv</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name">Shovavim Cycles</div>
@@ -2515,7 +2555,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew">מַלְכוּת</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:3px;">10:18–1:43</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Rebbe</div>
-    <div style="font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Kri'at Shema · Tikkun Rachel</div>
+    <div class="prayer-tag" data-prayer="10" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Kri'at Shema · Tikkun Rachel</div>
   </div>
   <div class="sefirah-content-col">
     <div class="malchut-visible-content">
@@ -10423,6 +10463,74 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : "Today's ma'alot — tap each מעלה tag in order";
   }
 
+  // ── THE TEN PRAYERS — one per Sefirah, a heart that fills through the day ──
+  // Unlike the ma'alot these are not sequential: each prayer has its own hour,
+  // and a day may be entered at any point in it. State is a 10-bit mask kept
+  // per displayed Jewish date, so it resets with the day like the ma'alot do.
+  const PRAYER_NAMES = ['Hitbodedut','Cheshbon HaNefesh','Tikkun Leah','KoT Song','Tehilim',
+                        'Shacharit','Tikkun HaKlali','Mincha','Maariv',"Kri'at Shema · Tikkun Rachel"];
+  let _prayerKey = null;
+
+  function prayersMask() {
+    try { return Math.max(0, parseInt(localStorage.getItem(_prayerKey), 10) || 0) & 1023; }
+    catch (e) { return 0; }
+  }
+  function prayersDone() {
+    let m = prayersMask(), n = 0;
+    while (m) { n += m & 1; m >>= 1; }
+    return n;
+  }
+
+  // The heart fills bottom-up as the prayers are said, and glows once whole.
+  function updatePrayerHeart(n) {
+    const rect = document.getElementById('prayer-heart-rect');
+    const cnt  = document.getElementById('prayer-heart-count');
+    const svg  = document.getElementById('prayer-heart-svg');
+    const fill = document.getElementById('prayer-heart-fill');
+    if (!rect) return;
+    // viewBox y: the heart occupies roughly y=3..19
+    const top = 3, bot = 19, f = n / 10;
+    rect.setAttribute('y', String(bot - (bot - top) * f));
+    rect.setAttribute('height', String((bot - top) * f + 1));
+    if (fill) fill.setAttribute('fill-opacity', n ? '1' : '0');
+    if (cnt) cnt.textContent = n + '/10';
+    const whole = n === 10;
+    if (svg) svg.style.filter = whole ? 'drop-shadow(0 0 3px rgba(179,58,58,0.85))' : '';
+    const wrap = document.getElementById('now-sf-heart');
+    if (wrap) wrap.title = whole
+      ? 'All ten prayers said — "and you shall love Hashem your God with all your heart"'
+      : 'The ten daily prayers — tap each one in its Sefirah to mark it said';
+  }
+
+  function applyPrayerState() {
+    if (!_prayerKey) return;
+    const mask = prayersMask();
+    const active = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
+    const activeIdx = active ? PRAYER_SEFIRAH.indexOf(active.name) + 1 : 0;
+    document.querySelectorAll('.prayer-tag').forEach(el => {
+      const n = +el.dataset.prayer;
+      const done = !!(mask & (1 << (n - 1)));
+      el.classList.toggle('done', done);
+      el.classList.toggle('now-flash', !done && n === activeIdx);
+    });
+    updatePrayerHeart(prayersDone());
+  }
+  const PRAYER_SEFIRAH = ['Keter','Chochmah','Binah','Chesed','Gevurah',
+                          'Tiferet','Netzach','Hod','Yesod','Malchut'];
+
+  // Capture-phase so a tap on a prayer never expands the card underneath.
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest && e.target.closest('.prayer-tag');
+    if (!el || !_prayerKey) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const n = +el.dataset.prayer;
+    if (!(n >= 1 && n <= 10)) return;
+    try { localStorage.setItem(_prayerKey, String(prayersMask() ^ (1 << (n - 1)))); } catch (err) {}
+    shakeTag(el);
+    applyPrayerState();
+  }, true);
+
   function applyMaalotState() {
     if (!_maalotKey) return;
     const k = maalotDone();
@@ -10707,10 +10815,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       copy('.sefirah-tags',       'now-sf-tags');
     }
     copy('.sefirah-detail',     'now-sf-detail');
+    // Left margin: the Tzadik of this hour and its prayer. The prayer keeps its
+    // data-prayer, so this copy is tappable too and both stay in step.
+    const _lblCol = sourceCard.querySelector('.sefirah-label-col');
+    const _tzEl = document.getElementById('now-sf-tzadik');
+    const _prEl = document.getElementById('now-sf-prayer');
+    if (_tzEl) _tzEl.innerHTML = _lblCol
+      ? Array.from(_lblCol.querySelectorAll('div'))
+          .filter(d => /font-style:\s*italic/.test(d.getAttribute('style') || ''))
+          .map(d => d.innerHTML).join('<br>')
+      : '';
+    if (_prEl) {
+      const src = _lblCol && _lblCol.querySelector('.prayer-tag');
+      _prEl.innerHTML = src ? src.outerHTML : '';
+    }
     document.getElementById('now-sefirah-featured').style.display = 'grid';
     const nowCap = document.getElementById('now-caption');
     if (nowCap) nowCap.style.display = '';
     applyMaalotState();
+    applyPrayerState();
   }
 
   // ── GEVURAH: FOUR SEASONS — 4 × 91-Day Cycle (Ilan = 91 = Hashem 26 + Adni 65) ──
@@ -11010,7 +11133,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const hMonth = hDate.month, hDay = hDate.day, hYear = hDate.year;
     _maalotKey = 'kotMaalot:' + hYear + '-' + hMonth + '-' + hDay;
     _yomKey    = 'kotYom:' + hYear + '-' + hMonth + '-' + hDay;
+    _prayerKey = 'kotPrayers:' + hYear + '-' + hMonth + '-' + hDay;
     setTimeout(applyMaalotState, 0); // after this render's innerHTML writes settle
+    setTimeout(applyPrayerState, 0);
     setTimeout(injectCycleInfoButtons, 0); // re-append ⓘ after this render's rewrites
     const hMname = HEB_MONTH_NAMES[hMonth] || '';
     const hDateStr = `${hDay} ${hMname} ${hYear}`;
