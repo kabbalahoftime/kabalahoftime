@@ -10117,6 +10117,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Keter Shem Tov — daily section calculator
   // 432 entries: Intro1 + Intro2 + sections 1–430, distributed 8 per parasha week
   // Week starts Sunday; Shabbat receives the final 2 sections of each week's 8
+  // Sixteen of the 430 sections have no entry in KST_DATA. Rather than fall back
+  // to the section number as if it were a page — which sent the link hundreds of
+  // pages off — take the nearest preceding known page, and omit the page from
+  // the label when we do not actually have it.
+  function kstPageFor(sec) {
+    for (let n = sec; n >= 1; n--) {
+      const e = KST_DATA[n];
+      if (e && e.p) return e.p;
+    }
+    return null;
+  }
+  const kstLabel = (sec, d) => `§ ${sec}` + (d && d.p ? ` (p. ${d.p})` : '');
+  const kstLabel2 = (s1, s2, d1) => `§ ${s1}–${s2}` + (d1 && d1.p ? ` (p. ${d1.p})` : '');
+
   function getDailyKST(parashaNum, dow) {
     if (!parashaNum) return null;
     if (parashaNum === 1) {
@@ -10131,27 +10145,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (dow === 6) {
         const s1 = 5, s2 = 6;
         const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
-        return { page: d1.p, label: `§ ${s1}–${s2} (p. ${d1.p||s1})`,
+        return { page: d1.p || kstPageFor(s1), label: kstLabel2(s1, s2, d1),
                  titleEn: d1.e || '', titleHe: d1.h || '',
                  title2En: d2.e || '', title2He: d2.h || '',
                  key: s1, key2: s2 };
       }
       const sec = dow - 1;
       const d = KST_DATA[sec] || {};
-      return { page: d.p, label: `§ ${sec} (p. ${d.p||sec})`, titleEn: d.e||'', titleHe: d.h||'', key: sec };
+      return { page: d.p || kstPageFor(sec), label: kstLabel(sec, d), titleEn: d.e||'', titleHe: d.h||'', key: sec };
     }
     const start = 8 * parashaNum - 9;
     if (dow === 6) {
       const s1 = start + 6, s2 = start + 7;
       const d1 = KST_DATA[s1] || {}, d2 = KST_DATA[s2] || {};
-      return { page: d1.p, label: `§ ${s1}–${s2} (p. ${d1.p||s1})`,
+      return { page: d1.p || kstPageFor(s1), label: kstLabel2(s1, s2, d1),
                titleEn: d1.e || '', titleHe: d1.h || '',
                title2En: d2.e || '', title2He: d2.h || '',
                key: s1, key2: s2 };
     }
     const sec = start + dow;
     const d = KST_DATA[sec] || {};
-    return { page: d.p, label: `§ ${sec} (p. ${d.p||sec})`, titleEn: d.e||'', titleHe: d.h||'', key: sec };
+    return { page: d.p || kstPageFor(sec), label: kstLabel(sec, d), titleEn: d.e||'', titleHe: d.h||'', key: sec };
   }
 
   // ── OHR KITOV — daily synthesis: Keter Shem Tov + Ohr HaChaim HaKadosh ──────
