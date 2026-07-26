@@ -11637,7 +11637,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const _syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${_syVs[0].ref.replace(':', '.')}`;
         _syDetailMeta = `<a href="${_syUrl}" target="_blank" style="color:var(--gold)">Sefer Yetzirah ${_syRefLabel} on Sefaria</a>`;
         const _syFace = document.getElementById('hod-zohar-face');
-        if (_syFace) _syFace.innerHTML = `<strong>Sefer Yetzirah</strong> — <span onclick="openSeferYetzirahModal()" style="cursor:pointer;color:var(--gold)">${_syRefLabel}${pName ? ' · Parashat ' + pName : ''}</span>`;
+        if (_syFace) _syFace.innerHTML = `<strong>Sefer Yetzirah</strong> — <span onclick="openSeferYetzirahModal()" style="cursor:pointer;color:var(--gold)">${_syRefLabel}</span>`;
         return;
       }
       const parts = pName ? pName.split('-').map(p => p.trim()) : [];
