@@ -11796,6 +11796,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (inExtra && cy22Mic) {
       document.getElementById('chochmah-cycle-name').innerHTML = cy22Mic.setLabel + ' <span class="maalah">מעלה ד׳</span>';
       document.getElementById('chochmah-main').innerHTML =
+        `Microcosm Day <strong>${cy22Mic.day}</strong> of ${cy22Mic.total}<br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22Mic.label}</strong> <span style="font-size:1.1em">${cy22Mic.hebrew}</span><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>`;
       document.getElementById('chochmah-sub').innerHTML = '';
@@ -11804,6 +11805,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     } else {
       document.getElementById('chochmah-cycle-name').innerHTML = 'Alef-Bet — 22-Day Cycle <span class="maalah">מעלה ד׳</span>';
       document.getElementById('chochmah-main').innerHTML =
+        `Day <strong>${cy22.day}</strong> · Cycle <strong>${cy22.cycle}</strong><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Cycle:</span> <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine;
@@ -12058,9 +12060,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     document.getElementById('binah-cycle-name').innerHTML = 'Sefirot — 7×7×7 Omer Cycle <span class="maalah">מעלה ה׳</span>';
     document.getElementById('binah-main').innerHTML =
+      `Day <strong>${omerDay}</strong> · Week <strong>${omerWeek}</strong> · Cycle <strong>${omerCycle}</strong><br>` +
       `<strong>${combo}</strong>`;
-    document.getElementById('binah-sub').innerHTML =
-      `${daySef} of ${weekSef} — Cycle ${omerCycle}, Week ${omerWeek}, Day ${omerDay}`;
+    document.getElementById('binah-sub').innerHTML = `${daySef} of ${weekSef}`;
     document.getElementById('binah-tags').innerHTML =
       `<span class="tag highlight">Cycle ${omerCycle} · Day ${omerPos} of 49</span>`;
     // Likutei Tefilot — 364-day cycle
