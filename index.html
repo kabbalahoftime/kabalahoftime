@@ -12500,8 +12500,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const _tifSub = cards[4].querySelector('.sefirah-sub-text');
       if (_tifSub) _tifSub.innerHTML = '';
       const _tifRow = document.getElementById('tiferet-text-face').parentElement;
+      _tifRow.style.display = '';
       if (tifText) {
-        _tifRow.style.display = '';
         document.getElementById('tiferet-text-label').innerHTML =
           `✧ ${tifText.work}${tifText.review ? ' · Microcosm Review' : ''}`;
         document.getElementById('tiferet-text-face').innerHTML =
@@ -12509,7 +12509,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             ? `<a href="${tifText.url}" target="_blank" style="color:var(--gold)">${tifText.item}</a>`
             : tifText.item;
       } else {
-        _tifRow.style.display = 'none';
+        // Leap-year microcosm (28 Shevat–25 Adar I): the Tales' closing talks
+        // are the reading for all 28 of those days.
+        document.getElementById('tiferet-text-label').innerHTML = `✧ Rebbe Nachman’s Tales`;
+        document.getElementById('tiferet-text-face').innerHTML =
+          `<a href="https://www.sefaria.org/Sippurei_Maasiyot,_Talks_Following_the_Story_Tales?lang=bi" target="_blank" style="color:var(--gold)">Talks Following the Story Tales</a>`;
       }
     }
     cards[4].querySelector('.sefirah-detail').innerHTML = (inExtra && cy13Mic) ?
