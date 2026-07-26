@@ -2259,8 +2259,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                 ...parashaInfos.map((pd, i) => qLine(_pLabel(pd), parashaQs[i])),
                 ...uniqueCycles.map((c, i) => qLine(_cLabel(c), cycleQs[i])),
             ].filter(Boolean).join('<br>');
-            mainHtml = `<strong>${foundParasha.name}</strong><br>` +
-                       `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${_pNums}</strong> · Cycle <strong>${_cNums}</strong>` +
+            // The parasha itself is named on the Hod face (Chok L'Yisrael) and,
+            // on Shabbat, by the Ben Ish Chai Drash row below — no need to head
+            // this card with it too.
+            mainHtml = `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${_pNums}</strong> · Cycle <strong>${_cNums}</strong>` +
                        (_qLines ? `<div class="sefirah-sub-text">${_qLines}</div>` : '');
         } else {
             mainHtml = foundParasha.name;
