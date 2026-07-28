@@ -138,6 +138,10 @@ letter-spacing: 1px;
   align-items: center;
   min-width: 72px;
 }
+/* Narrow phones: close the gaps rather than let the three columns overhang */
+@media (max-width: 380px) {
+  #dual-clock { gap: 10px; }
+}
 .dc-time {
   font-family: 'Cinzel', serif;
   font-size: 22px;
@@ -1255,6 +1259,10 @@ transition: transform 0.3s;
 
 /* ── DAILY SCRIPT PANEL ── */
 .daily-script-lang-bar { display: flex; gap: 4px; }
+/* Narrow phones: wrap the language buttons rather than push the header wider */
+@media (max-width: 374px) {
+  .daily-script-lang-bar { flex-wrap: wrap; justify-content: flex-end; }
+}
 .lang-btn {
   background: none;
   border: 1px solid var(--border);
