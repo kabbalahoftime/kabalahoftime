@@ -12173,20 +12173,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         hoUrl = 'https://www.sefaria.org/Torah_Ohr?tab=contents';
       }
       document.getElementById('chochmah-lt-face').innerHTML =
-        `<a href="${hoUrl}" target="_blank" style="color:var(--gold)">${hoLabel}</a>` +
-        ` <a href="https://hebrewbooks.org/pdfpager.aspx?req=${hoReq}&pgnum=${hoPg}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This folio on HebrewBooks">HB</a>` +
+        `<a href="https://hebrewbooks.org/pdfpager.aspx?req=${hoReq}&pgnum=${hoPg}" target="_blank" style="color:var(--gold)" title="This folio on HebrewBooks">${hoLabel}</a>` +
+        ` <a href="${hoUrl}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This sefer on Sefaria">Sefaria</a>` +
         `<span style="color:var(--ink-dim);font-size:0.85em"> · Hosafa ${extraDay} of 28</span>`;
     } else if (chCovers) {
       document.getElementById('chochmah-lt-face').innerHTML =
         chCovers.map(c =>
-          `<a href="${c.url}" target="_blank" style="color:var(--gold)">${c.name} · Cover</a>` +
-          ` <a href="https://hebrewbooks.org/pdfpager.aspx?req=${c.req}&pgnum=${c.pg}" target="_blank" style="color:var(--gold);font-size:0.85em" title="Cover on HebrewBooks">HB</a>`
+          `<a href="https://hebrewbooks.org/pdfpager.aspx?req=${c.req}&pgnum=${c.pg}" target="_blank" style="color:var(--gold)" title="Cover on HebrewBooks">${c.name} · Cover</a>` +
+          ` <a href="${c.url}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This sefer on Sefaria">Sefaria</a>`
         ).join('<br>') +
         `<div style="color:var(--ink-dim);font-size:0.85em;margin-top:2px;">Cover day · Day ${chDay} of 364</div>`;
     } else {
       document.getElementById('chochmah-lt-face').innerHTML = chSection
-        ? `<a href="${chUrl}" target="_blank" style="color:var(--gold)">${chSection} · ${chReading}</a>` +
-          (chHbUrl ? ` <a href="${chHbUrl}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This folio on HebrewBooks">HB</a>` : ``) +
+        ? `<a href="${chHbUrl || chUrl}" target="_blank" style="color:var(--gold)" title="${chHbUrl ? 'This folio on HebrewBooks' : 'This sefer on Sefaria'}">${chSection} · ${chReading}</a>` +
+          (chHbUrl ? ` <a href="${chUrl}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This sefer on Sefaria">Sefaria</a>` : ``) +
           `<span style="color:var(--ink-dim);font-size:0.85em"> · Day ${chDay} of 364</span>`
         : `<span style="color:var(--ink-dim)">—</span>`;
     }
