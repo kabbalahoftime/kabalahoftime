@@ -12530,20 +12530,43 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const seasonInfo = getSeasonInfo(dEff - d_year1 + 1);
     // Day 46 is the exact centre of the 91 (45 before, 45 after) — the season's
     // own midpoint, the day Tu B'Shvat falls on in winter.
-    const _seasonHalf = seasonInfo.dayIn === 46 ? 'Midpoint'
-      : (seasonInfo.dayIn < 46 ? 'First Half' : 'Second Half');
+    // Each season is one ratzo v'shov of its Chayah (Yechezkel 1:14): 45 days
+    // running in toward the season's heart, the heart itself, and 45 returning
+    // out. Both halves are the same measure — 45 = מ"ה = אדם — so nothing is
+    // divided between them; only the direction changes.
+    const _seasonHalf = seasonInfo.dayIn === 46 ? 'Heart'
+      : (seasonInfo.dayIn < 46 ? 'Ratzo' : 'Shov');
+    const _seasonHalfHeb = seasonInfo.dayIn === 46 ? 'לֵב'
+      : (seasonInfo.dayIn < 46 ? 'רָצוֹא' : 'שׁוֹב');
+    const _seasonMotion = seasonInfo.dayIn === 46
+      ? 'the turn — 45 days behind, 45 ahead'
+      : (seasonInfo.dayIn < 46
+          ? 'running in toward the heart of the season'
+          : 'returning outward from the heart of the season');
+    // The calibration fixes winter's heart to 15 Shevat, spring's to 17 Iyar and
+    // summer's to 20 Av in every ordinary year; fall's drifts across 11-13
+    // Cheshvan with the lengths of Cheshvan and Kislev, and a leap year moves
+    // all four. So the heart is named only on the years it actually lands.
+    const _heartName = seasonInfo.dayIn !== 46 ? null
+      : (hMonth === 8  && hDay === 11) ? 'Rachel Imeinu’s yahrzeit'
+      : (hMonth === 11 && hDay === 15) ? 'Tu B’Shvat'
+      : (hMonth === 2  && hDay === 17) ? 'Erev Lag BaOmer'
+      : (hMonth === 5  && hDay === 20) ? 'Kaf Av'
+      : null;
     // The face abbreviates the half and sets it a shade smaller so day + season
     // + half stay on one line at 375px for every day of the season (measured:
     // at full size "2nd Half" and "Midpoint" wrap while "1st Half" fits, which
     // would make the layout shift mid-season). The detail keeps the full wording.
-    const _seasonHalfShort = _seasonHalf.replace('First', '1st').replace('Second', '2nd');
+    const _seasonHalfShort = _seasonHalf;
     const _seasonLine = `Day ${seasonInfo.dayIn} of 91 · ${_seasonHalf} of ${seasonInfo.name}`;
     document.getElementById('gevurah-cycle-name').innerHTML = 'Four Seasons — 91-Day Cycle';
     document.getElementById('gevurah-main').innerHTML =
       `Day <strong>${seasonInfo.dayIn}</strong> · <strong>${seasonInfo.name}</strong><span style="font-size:0.85em">, ${_seasonHalfShort}</span>:<br>` +
       `<strong>${seasonInfo.chayah}</strong><br>` +
       `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>` +
-      (seasonInfo.isTuBShvat ? `<br><span style="font-size:0.85em;color:var(--gold-mid)">✦ Tu B'Shvat — heart of the season</span>` : ``);
+      (seasonInfo.dayIn === 46
+        ? `<br><span style="font-size:0.85em;color:var(--gold-mid)">✦ Heart of ${seasonInfo.name}${_heartName ? ' — ' + _heartName : ''}</span>`
+        : ``);
     document.getElementById('gevurah-sub').innerHTML = '';
     document.getElementById('gevurah-text-face').innerHTML =
       tanachInfo.seferiaUrl
@@ -12613,6 +12636,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Four Seasons — 91-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${_seasonLine} ${seasonInfo.hebrew}</span></div>
+       <div class="detail-row"><span class="detail-label">Motion:</span><span class="detail-value">${_seasonHalf} — ${_seasonHalfHeb}: ${_seasonMotion}${_heartName ? ' · ' + _heartName : ''}</span></div>
+       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Each season is one רצוא ושוב of its Chayah (Yechezkel 1:14) — 45 days in, the heart, 45 days out. Both halves are the same measure, 45 = מ״ה = אדם, so nothing is divided between them; only the direction changes. Winter shows it plainly: its heart is Tu B’Shvat, the day the sap turns and begins its return.</div>
        <div class="detail-row"><span class="detail-label">Chayot HaKodesh:</span><span class="detail-value">${seasonInfo.chayah}</span></div>
        <div class="detail-row"><span class="detail-label">Yehuda ben Teima:</span><span class="detail-value">${seasonInfo.animal}</span></div>
        <div class="detail-row"><span class="detail-label">Angel:</span><span class="detail-value">${seasonInfo.angel}</span></div>
