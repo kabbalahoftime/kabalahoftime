@@ -526,8 +526,9 @@ margin-bottom: 6px;
 #keter-kst-label {
 letter-spacing: 2px;
 font-size: 9px;
-white-space: nowrap;
 }
+/* Keep each phrase whole, but let the label wrap rather than widen the card */
+.kl-part { white-space: nowrap; }
 
 .malchut-visible-content {
 display: grid;
@@ -1640,7 +1641,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section">
-    <div class="keter-section-label" id="keter-kst-label">✦ Light that is Good — אור כי טוב <span class="maalah">מעלה ב׳</span></div>
+    <div class="keter-section-label" id="keter-kst-label">✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part">אור כי טוב</span> <span class="maalah">מעלה ב׳</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin — Baal Shem Tov &amp; Ohr HaChaim HaKadosh</div>
     <div class="sefirah-main-text" id="keter-kst-main">Loading…</div>
     <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Ohr KiTov ↗</button>
@@ -11454,7 +11455,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           ``
         : `<br><span style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim ·</span> <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Parashat ${kstParasha || '—'}</a>`;
 
-      document.getElementById('keter-kst-label').innerHTML = '✦ Light that is Good — אור כי טוב <span class="maalah">מעלה ב׳</span>';
+      document.getElementById('keter-kst-label').innerHTML = '✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part">אור כי טוב</span> <span class="maalah">מעלה ב׳</span>';
 
       // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40).
       // Somewhere around printed p.200 an extra, unnumbered page appears to
