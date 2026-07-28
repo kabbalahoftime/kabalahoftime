@@ -12197,7 +12197,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const tractHalfIdx = cy22.cycle >= 17
       ? 32
       : (cy22.cycle - 1) * 2 + (cy22.day <= 11 ? 0 : 1);
-    const tractData = TRACTATE_CYCLES[tractHalfIdx];
+    // In a leap year's 28-day Adar I microcosm the tractate cycle is compressed
+    // exactly as the Alef-Bet is: days 1-22 take one study unit each, days 23-27
+    // — the five finals, the doubled letters — take two, and day 28, the vowels,
+    // takes the last. 22 + 10 + 1 = 33, the whole year's cycle within the month.
+    let tractMicro = null;
+    if (inExtra && cy22Mic) {
+      const md = cy22Mic.day;
+      const idx = md <= 22 ? [md - 1]
+                : md <= 27 ? [22 + (md - 23) * 2, 23 + (md - 23) * 2]
+                : [32];
+      tractMicro = idx.map(i => TRACTATE_CYCLES[i]).filter(Boolean);
+      if (!tractMicro.length) tractMicro = null;
+    }
+    const tractData = tractMicro ? tractMicro[0] : TRACTATE_CYCLES[tractHalfIdx];
 
     // KoT Book — displayed on the Chochmah card face
     document.getElementById('chochmah-kot-book').innerHTML =
@@ -12220,7 +12233,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <a href="https://www.torahrecordings.com/torah-ohr/" target="_blank" style="color:var(--gold)">Torah Ohr</a>
          &nbsp;·&nbsp;
          <a href="https://www.torahrecordings.com/likutei-torah/" target="_blank" style="color:var(--gold)">Likutei Torah</a>
-       </span></div>` +
+       </span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractMicro ? tractMicro.map(t => t.id).join(' · ') : ''}</div>
+       ${tractMicro ? tractMicro.map(t =>
+         `<div class="detail-row"><span class="detail-label">Tractate:</span><span class="detail-value">${t.tractate}</span></div>
+          <div class="detail-row"><span class="detail-label">Period:</span><span class="detail-value">${t.period}</span></div>
+          <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${t.desc}</span></div>`
+       ).join('<div style="height:8px"></div>') : ''}
+       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The year's 33 tractate units are compressed into the 28 as the Alef-Bet is: one a day for the 22 letters, two a day for the five finals — the doubled letters — and one for the vowels.</div>` +
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
