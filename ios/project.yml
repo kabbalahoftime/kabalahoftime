@@ -8,7 +8,9 @@ name: KabbalahOfTime
 options:
   bundleIdPrefix: com.kabbalahoftime
   deploymentTarget:
-    iOS: "16.0"
+    # 17.0 because the widget uses containerBackground(for:), which WidgetKit
+    # requires from 17 and which does not exist on 16.
+    iOS: "17.0"
   createIntermediateGroups: true
 
 settings:
