@@ -6764,6 +6764,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'https://www.chabad.org/therebbe/article_cdo/aid/145426/jewish/Veatah-Tetzaveh-Part-XI.htm',
     'https://www.chabad.org/therebbe/article_cdo/aid/145427/jewish/Veatah-Tetzaveh-Part-XII.htm',
   ];
+  // The Rebbe's Twelve Pesukim on the twelve se'ifim of the ma'amar. The ma'amar
+  // is the Moshe of the generation arousing the essence-faith of every Jew so
+  // that each continues on his own initiative; the Twelve Pesukim are how he put
+  // that faith into every child's mouth. Se'if N carries pasuk N.
+  const VATAH_PESUKIM = [
+    { he:"תּוֹרָה צִוָּה לָנוּ מֹשֶׁה מוֹרָשָׁה קְהִלַּת יַעֲקֹב", src:"דברים לג:ד" },
+    { he:"שְׁמַע יִשְׂרָאֵל ה׳ אֱלֹקֵינוּ ה׳ אֶחָד", src:"דברים ו:ד" },
+    { he:"בְּכָל דּוֹר וָדוֹר חַיָּב אָדָם לִרְאוֹת אֶת עַצְמוֹ כְּאִלּוּ הוּא יָצָא מִמִּצְרַיִם", src:"פסחים קטז,ב" },
+    { he:"כָּל יִשְׂרָאֵל יֵשׁ לָהֶם חֵלֶק לְעוֹלָם הַבָּא", src:"סנהדרין צ,א" },
+    { he:"כִּי קָרוֹב אֵלֶיךָ הַדָּבָר מְאֹד בְּפִיךָ וּבִלְבָבְךָ לַעֲשׂתוֹ", src:"דברים ל:יד" },
+    { he:"וְהִנֵּה ה׳ נִצָּב עָלָיו וּמְלֹא כָל הָאָרֶץ כְּבוֹדוֹ", src:"תניא פרק מא" },
+    { he:"בְּרֵאשִׁית בָּרָא אֱלֹקִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ", src:"בראשית א:א" },
+    { he:"וְשִׁנַּנְתָּם לְבָנֶיךָ וְדִבַּרְתָּ בָּם", src:"דברים ו:ז" },
+    { he:"יָגַעְתִּי וּמָצָאתִי תַּאֲמֵן", src:"מגילה ו,ב" },
+    { he:"וְאָהַבְתָּ לְרֵעֲךָ כָּמוֹךָ — זֶה כְּלָל גָּדוֹל בַּתּוֹרָה", src:"ויקרא יט:יח" },
+    { he:"וְזֶה כָּל הָאָדָם וְתַכְלִית בְּרִיאָתוֹ — לִהְיוֹת לוֹ דִּירָה בְּתַחְתּוֹנִים", src:"תניא פרק לג" },
+    { he:"יִשְׂמַח יִשְׂרָאֵל בְּעוֹשָׂיו", src:"תניא פרק לג" },
+  ];
+
   // Month/tribe resonances for the Year-Round Connection cycle — approved text,
   // keyed by the Tiferet 13-day cycle's day (1-13; matches VATAH_SEIF_BY_DAY).
   const VATAH_RESONANCE = {
@@ -13429,7 +13448,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         (_vtUrl
           ? `<a href="${_vtUrl}" target="_blank" style="color:var(--gold)">${_vtText}</a>`
           : `<span style="color:var(--gold)">${_vtText}</span>`) +
-        ` <span style="font-size:0.72em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span>`;
+        ` <span style="font-size:0.72em;color:var(--ink-mid)">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span>` +
+        (_vtSeif > 0 && VATAH_PESUKIM[_vtSeif - 1]
+          ? `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;line-height:1.5;">${VATAH_PESUKIM[_vtSeif - 1].he}` +
+            ` <span style="color:var(--ink-dim);font-size:0.85em">— פסוק ${VATAH_HEB[_vtSeif - 1]} · ${VATAH_PESUKIM[_vtSeif - 1].src}</span></div>`
+          : ``);
       // Today's three of the 84, each linked; the subheader names the work, so
       // the general Mishneh Torah link it used to carry is redundant.
       document.getElementById('malchut-yad-face').innerHTML =
