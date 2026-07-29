@@ -2963,7 +2963,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Tefillin',
     'Mezuzah',
     'Ahavat Yisrael',
-    'Taharat HaMishpachah'
+    'Taharat HaMishpachah',
+    'Torah'
   ];
 
   // Map each of the 9 Mivtzoyim cycles to commandments 1-9
@@ -2976,7 +2977,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { cycle: 6, mivtzah: 'Tefillin',                    commandment: 'Do Not Murder',              theme: 'Refining the Divine Image' },
     { cycle: 7, mivtzah: 'Mezuzah',                     commandment: 'Faithfulness',               theme: 'Marriage to Hashem' },
     { cycle: 8, mivtzah: 'Ahavat Yisrael',              commandment: 'Do Not Steal',               theme: 'Human Dignity / Baseless Love' },
-    { cycle: 9, mivtzah: 'Taharat HaMishpachah',        commandment: 'Truth / No False Witness',   theme: 'Testifying/Confessing' }
+    { cycle: 9, mivtzah: 'Taharat HaMishpachah',        commandment: 'Truth / No False Witness',   theme: 'Testifying/Confessing' },
+    { cycle: 10, mivtzah: 'Torah',                      commandment: 'Do Not Covet',                theme: 'Torah as the remedy for desire' }
   ];
 
   const SOUL_LEVEL_DESCRIPTIONS = {
@@ -12930,6 +12932,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : TIKKUN_PSALMS[(cy41.cycle - 1) % 10];
     const _tikkunCycleNum = inLeapCycle ? leapCycleNum : cy41.cycle;
     const _tikkunUrl   = 'https://www.sefaria.org/Tikkun_HaKlali.' + _tikkunCycleNum + '?lang=bi&with=Navigation';
+    // Nine cycles, ten of everything — the Mivtzoyim, the Tikkun HaKlali's
+    // Psalms and the Ten Commandments. Rather than shift the nine, which are
+    // fixed deliberately, the ninth carries the tenth alongside its own: 137 and
+    // 150 are the Tikkun HaKlali's own last two, consecutive, and cycle 9 opens
+    // on 30 Av — the first day of Rosh Chodesh Elul — and runs through the Days
+    // of Awe, so the year closes on the final Halleluyah and Lo Tachmod.
+    const _cycleItems  = cy41.cycle === 9 ? [9, 10] : [cy41.cycle];
+    const _tikkunHref  = n => 'https://www.sefaria.org/Tikkun_HaKlali.' + n + '?lang=bi&with=Navigation';
+    const _mivtzahText = _cycleItems.map(i => MIVTZOYIM[i - 1]).filter(Boolean).join(' &amp; ');
+    const _psalmLinks  = _cycleItems.map(i =>
+      `<a href="${_tikkunHref(i)}" target="_blank" style="color:var(--gold)">Psalm ${TIKKUN_PSALMS[i - 1]}</a>`).join(' &amp; ');
+    const _cycleCmdText = _cycleItems.map(i => TEN_COMMANDMENTS[i - 1] && TEN_COMMANDMENTS[i - 1].text).filter(Boolean).join(' · ');
+    const _cycleLabel  = _cycleItems.length > 1
+      ? `Cycles ${_cycleItems[0]} &amp; ${_cycleItems[1]} of 10`
+      : `Cycle ${cy41.cycle} of 10`;
     const cycleCmd = CYCLE_COMMANDMENTS[(cy41.cycle - 1) % 9];
     const dayCmd   = TEN_COMMANDMENTS[cy41.commandmentDay - 1];
 
@@ -13023,12 +13040,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       cards[5].querySelector('.sefirah-sub-text').innerHTML =
         `<span style="font-size:0.9em;color:var(--ink-dim)">Day:</span> ${dayCmd.text}` +
         `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}` +
-        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : cycleCmd.commandment}`;
+        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${_cycleCmdText || cycleCmd.commandment}`;
       cards[5].querySelector('.sefirah-tags').innerHTML = '';
       cards[5].querySelector('.sefirah-detail').innerHTML =
         `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
-         <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Cycle ${cy41.cycle} of 10)</span></div>
-         <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Cycle ${cy41.cycle} of 10)</span></div>
+         <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${_mivtzahText} (${_cycleLabel})</span></div>
+         <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${_psalmLinks} (${_cycleLabel})</span></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="maalah yom" data-wane="6">מיעוט ו׳</span></div>
          <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
