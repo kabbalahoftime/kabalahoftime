@@ -144,7 +144,7 @@ complete in a year.
 ### Malchut · Year-Round Connection & the Weekly Books
 The Rebbe's last ma'amar, V'Atah Tetzaveh, completed every 13 days — its twelve
 se'ifim riding the cycle with a month apiece, Adar I carrying the whole ma'amar
-before its parts, since that is the month the Rebbe gave it.
+at once, since that is the month the Rebbe gave it.
 
 Each se'if also carries one of the Rebbe's **Twelve Pesukim**, se'if for pasuk.
 The ma'amar's subject is the Moshe of the generation arousing the essence-faith
