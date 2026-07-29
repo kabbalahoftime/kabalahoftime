@@ -45,16 +45,38 @@ Links to Sefaria, HebrewBooks, Chabad.org and the recordings open in
 `SFSafariViewController`, so a tap doesn't navigate the app away from the
 day's page.
 
-## Still to build
+## The bridge
 
-The shell alone is a repackaged website, which App Review rejects under
-guideline 4.2. Two things earn it past, and both are worth having:
+No dates are computed in Swift. The Hebrew calendar, the cycles and the
+Sefirah hours all live in the page, and a second implementation would drift
+from the first. Instead the page posts a snapshot — `kotSnapshot()` in
+`index.html` — and the app stores and displays it.
 
-- **Prayer notifications.** The ten prayers already have their Sefirah hours
-  in `SEFIRAH_TIMES`. A local notification when each hour opens is what the
-  flashing tag does now, except it reaches you with the app closed.
-- **A widget.** The ma'alot moon and its count, the KoT day, the Sefirah of
-  the hour. The widget cannot run a web view, so the app should compute a week
-  ahead on each launch and write it to a shared App Group container for the
-  widget to read — rather than porting `gregToHebrew` and `calibrateOffset` to
-  Swift, where the two implementations would eventually disagree.
+The snapshot carries the Hebrew and civil dates, the ma'alot and prayer
+counts, the Sefirah of the hour, the seven Sefirah windows with their start
+and end times, and the ten prayers with the hour each falls in. It is posted
+on load, whenever a ma'alah or prayer is marked, and once a minute. In a
+browser `window.webkit` is undefined and none of it runs.
+
+Both targets share `Snapshot.swift` and the App Group
+`group.com.kabbalahoftime.shared`, so there is one model and one store.
+
+## Prayer notifications
+
+A local notification when each prayer's Sefirah hour opens — the flashing tag
+on the card, reaching you with the app closed. Seven of the ten are scheduled:
+Hitbodedut, Tikkun Rachel and Tikkun Leah belong to the three Mochin, which
+have no clock window, exactly as in the app.
+
+Triggers repeat daily and are rewritten every time the app runs, so sha'ot
+zmaniyot — which drift a few minutes a day — stay close without the app having
+to be opened at any particular moment.
+
+## The widget
+
+Small and medium: the Hebrew date, the Sefirah of the hour, and the two
+counts — ma'alot out of fifteen, prayers out of ten. The timeline turns over
+at each Sefirah window boundary, so the hour stays current on its own.
+
+A snapshot from a previous day shows the counts as zero rather than carrying
+yesterday's over, since both reset with the Jewish day.
