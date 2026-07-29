@@ -42,6 +42,14 @@ targets:
         type: file
       - path: ../fonts
         type: folder
+    dependencies:
+      - target: KabbalahOfTimeWidget
+        embed: true
+    entitlements:
+      path: KabbalahOfTime/KabbalahOfTime.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.kabbalahoftime.shared
     info:
       path: KabbalahOfTime/Info.plist
       properties:
@@ -54,3 +62,24 @@ targets:
         ITSAppUsesNonExemptEncryption: false
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: false
+
+  # The widget cannot run a web view, so it reads the snapshot the app wrote to
+  # the shared App Group rather than computing any dates of its own.
+  KabbalahOfTimeWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: KabbalahOfTimeWidget
+      # Shared with the app so there is one model and one store, not two.
+      - path: KabbalahOfTime/Snapshot.swift
+    entitlements:
+      path: KabbalahOfTimeWidget/KabbalahOfTimeWidget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.kabbalahoftime.shared
+    info:
+      path: KabbalahOfTimeWidget/Info.plist
+      properties:
+        CFBundleDisplayName: Kabbalah of Time
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension

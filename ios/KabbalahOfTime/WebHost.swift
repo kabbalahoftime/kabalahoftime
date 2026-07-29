@@ -14,6 +14,7 @@ struct WebHost: UIViewRepresentable {
         // the day's ma'alot, miutim and prayers are kept.
         config.websiteDataStore = .default()
         config.allowsInlineMediaPlayback = true
+        config.userContentController.add(context.coordinator.bridge, name: Bridge.name)
 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = context.coordinator
@@ -29,6 +30,7 @@ struct WebHost: UIViewRepresentable {
                           for: .valueChanged)
         webView.scrollView.refreshControl = refresh
 
+        PrayerNotifications.requestAuthorization()
         webView.load(URLRequest(url: Site.liveURL))
         return webView
     }
@@ -37,6 +39,7 @@ struct WebHost: UIViewRepresentable {
 
     final class Coordinator: NSObject, WKNavigationDelegate {
         weak var webView: WKWebView?
+        let bridge = Bridge()
         private var didFallBack = false
 
         @objc func reload(_ sender: UIRefreshControl) {
