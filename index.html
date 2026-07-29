@@ -2581,7 +2581,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
         <div class="malchut-section">
-          <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה and the Twelve Psukim <span class="maalah">מעלה י״ג</span></div>
+          <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה and the Twelve Pesukim <span class="maalah">מעלה י״ג</span></div>
           <div class="sefirah-main-text" id="malchut-ksa-face">Loading…</div>
           <div class="keter-section-label" style="margin-top:10px;">✧ Yad HaChazakah</div>
           <div class="sefirah-sub-text" id="malchut-yad-face" style="margin-top:2px;"></div>
@@ -13622,7 +13622,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('malchut-detail').innerHTML =
       (() => {
         const pk = _vtSeif > 0 ? VATAH_PESUKIM[_vtSeif - 1] : null;
-        return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Year-Round Connection — ואתה תצוה and the Twelve Psukim</div>
+        return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Year-Round Connection — ואתה תצוה and the Twelve Pesukim</div>
          <div class="detail-row"><span class="detail-label">${_vtSeif === 0 ? 'Overview' : "Se'if " + VATAH_HEB[_vtSeif - 1]}:</span><span class="detail-value"><a href="${_vtUrl}" target="_blank" style="color:var(--gold)">${_vtTitle}</a> <span style="color:var(--ink-mid);font-size:0.85em">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span></span></div>` +
          (pk ? `<div class="detail-row"><span class="detail-label">Pasuk ${VATAH_HEB[_vtSeif - 1]}:</span><span class="detail-value">${pk.he}<br><span style="color:var(--ink-mid);font-size:0.88em">${pk.en}</span> <span style="color:var(--ink-dim);font-size:0.82em">· ${pk.src}</span></span></div>` : ``) +
          (VATAH_RESONANCE[cy13.day] ? `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.55;margin:8px 0 0;">${VATAH_RESONANCE[cy13.day]}</div>` : ``);
