@@ -1,9 +1,20 @@
 // Service Worker for Kabbalah of Time PWA
-const CACHE_NAME = 'kabbalah-of-time-v4';
+const CACHE_NAME = 'kabbalah-of-time-v5';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/manifest.json'
+  '/manifest.json',
+  // Fonts are bundled now rather than fetched from Google, so pre-cache them
+  // — otherwise the first offline load falls back to system serifs.
+  '/fonts/cinzel-latin-ext.woff2',
+  '/fonts/cinzel-latin.woff2',
+  '/fonts/cormorant-garamond-italic-latin-ext.woff2',
+  '/fonts/cormorant-garamond-italic-latin.woff2',
+  '/fonts/cormorant-garamond-latin-ext.woff2',
+  '/fonts/cormorant-garamond-latin.woff2',
+  '/fonts/frank-ruhl-libre-hebrew.woff2',
+  '/fonts/frank-ruhl-libre-latin-ext.woff2',
+  '/fonts/frank-ruhl-libre-latin.woff2'
 ];
 
 // Install — pre-cache the shell, then take over immediately

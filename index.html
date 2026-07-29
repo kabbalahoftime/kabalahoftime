@@ -39,7 +39,84 @@
 <meta name="twitter:description" content="Daily Counting, Daily Calling — a daily spiritual practice mapping each day onto the ten Sefirot.">
 <meta name="twitter:image" content="https://www.reflectionsofitall.com/icon-512.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Frank+Ruhl+Libre:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Bundled locally — three variable fonts, one file per family, style and
+   subset. Previously fetched from fonts.googleapis.com on every cold load,
+   which the service worker could not cache and an offline app could not
+   reach at all. Weights are ranges because each file is variable. */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(fonts/cinzel-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(fonts/cinzel-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300 400;
+  font-display: swap;
+  src: url(fonts/cormorant-garamond-italic-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300 400;
+  font-display: swap;
+  src: url(fonts/cormorant-garamond-italic-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url(fonts/cormorant-garamond-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url(fonts/cormorant-garamond-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Frank Ruhl Libre';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(fonts/frank-ruhl-libre-hebrew.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Frank Ruhl Libre';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(fonts/frank-ruhl-libre-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Frank Ruhl Libre';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(fonts/frank-ruhl-libre-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
 <style>
   :root {
     --bg:            #f7f2e8;
@@ -69,7 +146,7 @@
 body {
 background: var(--bg);
 color: var(--ink);
-font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-family: 'Cormorant Garamond', Georgia, serif;
 min-height: 100vh;
 overflow-x: hidden;
 }
@@ -97,7 +174,7 @@ margin-bottom: 14px;
 }
 
 .title-hebrew {
-font-family: ‘Frank Ruhl Libre’, serif;
+font-family: 'Frank Ruhl Libre', serif;
 font-size: 24px;
 color: var(--gold);
 letter-spacing: 3px;
@@ -105,7 +182,7 @@ margin-bottom: 6px;
 }
 
 .title-main {
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 font-size: 26px;
 font-weight: 600;
 color: var(--ink);
@@ -115,7 +192,7 @@ margin-bottom: 4px;
 }
 
 .title-sub {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-style: italic;
 font-size: 16px;
 color: var(--ink-soft);
@@ -202,7 +279,7 @@ border-color: var(--gold);
 .date-info { text-align: center; flex: 1; }
 
 .date-gregorian {
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 font-size: 13px;
 letter-spacing: 2px;
 color: var(--ink);
@@ -211,7 +288,7 @@ font-weight: 600;
 }
 
 .date-hebrew {
-font-family: ‘Frank Ruhl Libre’, serif;
+font-family: 'Frank Ruhl Libre', serif;
 font-size: 15px;
 color: var(--ink-soft);
 margin-top: 2px;
@@ -390,7 +467,7 @@ text-align: center;
 margin-bottom: 6px;
 }
 .keter-crown-label {
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 font-size: 11px;
 letter-spacing: 4px;
 color: var(--gold);
@@ -498,7 +575,7 @@ border-bottom: 1px solid var(--border);
 }
 
 .keter-card::before {
-content: ‘’;
+content: '';
 position: absolute;
 top: 0; left: 0; right: 0;
 height: 3px;
@@ -520,7 +597,7 @@ background: var(--bg-card) !important;
 }
 
 .keter-section-label {
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 font-size: 9px;
 letter-spacing: 2.5px;
 color: var(--ink-dim);
@@ -716,7 +793,7 @@ padding-right: 12px;
 }
 
 .sefirah-name {
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 font-size: 11px;
 letter-spacing: 2px;
 text-transform: uppercase;
@@ -726,7 +803,7 @@ font-weight: 600;
 }
 
 .sefirah-hebrew {
-font-family: ‘Frank Ruhl Libre’, serif;
+font-family: 'Frank Ruhl Libre', serif;
 font-size: 22px;
 color: var(--sefirah-color, var(--gold));
 line-height: 1;
@@ -808,7 +885,7 @@ right: 38px;
 }
 
 .sefirah-cycle-name {
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 font-size: 10px;
 letter-spacing: 2px;
 text-transform: uppercase;
@@ -851,7 +928,7 @@ background: var(--bg-card-alt);
 border: 1px solid var(--border);
 color: var(--ink-mid);
 letter-spacing: 0.3px;
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 }
 
 .tag.highlight {
@@ -902,7 +979,7 @@ margin: 20px 0 14px;
 
 .section-divider::before,
 .section-divider::after {
-content: ‘’;
+content: '';
 flex: 1;
 height: 1px;
 background: var(--border-strong);
@@ -934,7 +1011,7 @@ gap: 8px;
 }
 
 .weekly-title {
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 font-size: 10px;
 letter-spacing: 3px;
 text-transform: uppercase;
@@ -947,7 +1024,7 @@ padding: 3px 10px;
 border: 1px solid var(--border-strong);
 color: var(--gold);
 border-radius: 2px;
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-style: italic;
 background: var(--bg-card-alt);
 }
@@ -971,7 +1048,7 @@ letter-spacing: 2px;
 text-transform: uppercase;
 color: var(--ink-dim);
 margin-bottom: 5px;
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 }
 
 .weekly-item-value {
@@ -1002,7 +1079,7 @@ font-size: 10px;
 letter-spacing: 1.5px;
 text-transform: uppercase;
 color: var(--gold);
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 min-width: 62px;
 padding-top: 2px;
 opacity: 0.85;
@@ -1037,7 +1114,7 @@ padding: 8px;
 margin-bottom: 12px;
 }
 .mal-today-badge {
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 font-size: 9px;
 letter-spacing: 2px;
 color: var(--gold);
@@ -1064,7 +1141,7 @@ color: var(--text-dim);
 .mal-parasha-header strong {
 color: var(--gold);
 font-size: 13px;
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 letter-spacing: 0.5px;
 }
 
@@ -1102,7 +1179,7 @@ white-space: nowrap;
 font-size: 12px;
 font-weight: 600;
 color: var(--text-main);
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 flex: 1;
 }
 .mal-today .mal-text-name {
@@ -1157,7 +1234,7 @@ text-transform: uppercase;
 color: var(--gold);
 opacity: 0.8;
 margin-bottom: 2px;
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 }
 
 .detail-today {
@@ -1215,7 +1292,7 @@ letter-spacing: 1px;
 }
 
 .footer-authors {
-font-family: ‘Cinzel’, serif;
+font-family: 'Cinzel', serif;
 font-size: 11px;
 letter-spacing: 2px;
 color: var(--gold);
@@ -10706,7 +10783,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     },
     gevurah: {
       title: 'Four Seasons — 91-Day Cycle',
-      main: "The Prophets and Writings in 364 days, two chapters daily: 728 chapters of Israel's discipline, history, and rebuke — the strong voice of the Nevi'im in the Sefirah of strength. The Written Torah is Gevurah's mode — fixed letters, black fire on white fire. Alongside it runs the Four Seasons: 364 divided evenly into four 91-day quarters, with no gaps between them — the cleanest possible division of the year. Each season carries one of the four Chayot HaKodesh of Yechezkel's Merkavah and one of Yehuda ben Teima's animal-postures (Avot 5:20): Fall's Eagle under Uriel, Winter's Man — bearing the fish, the hidden ones — under Michael, Spring's Ox under Refael, Summer's Lion under Gavriel, each paired with its own cup of wine, from red receding to white through to all red again. Wine is Gevurah's own element, and the cycle belongs to the tribe of Gevurah: each season carries one of the four houses of Levi, matched to its cup by what each bore in the Mishkan — Winter's all-white cup to the Kohanim, who wrapped the vessels and blessed; Spring's rising red to Kehat, who carried the wrapped vessels on the shoulder under strict discipline; Fall's receding red to Gershon, who carried the woven coverings; Summer's all-red to Merari, who carried the boards and sockets, the bare standing frame. Each season is one רצוא ושוב of its Chayah — \"the Chayot running and returning\" (Yechezkel 1:14): 45 days running in toward the season's heart, the heart itself on day 46, and 45 returning out. Both halves are the same measure, 45 = מ\"ה = אדם, so nothing is divided between them — only the direction changes. And 91 = 7 × 13 is the least span in which a whole number of weeks and a whole number of 13-day cycles both complete, so the four seasons are the four times a year Binah's week and Tiferet's thirteen come back into phase, closing and opening together. The season is a 7 × 13 field readable either way — 13 weeks of 7 days, or 7 cycles of 13 attributes — and day 46 is the centre of the centre in both: the middle day of the middle week, and the middle day of the middle cycle. What lands there says it plainly: the heart is always a Netzach day of the Omer count, and always the seventh Attribute — יָשׁוּב יְרַחֲמֵנוּ, \"He will return and have compassion on us,\" in Fall and Winter, וְרַב־חֶסֶד in Spring and Summer. The turning day carries the attribute of turning. Winter's heart shows it plainest of all, falling on Tu B'Shvat, the day the sap turns and begins its return — fitting for a cycle numbered אילן, the tree, and אמן, the Name as written joined to the Name as read: 91 = יהוה (26) + אדני (65). 91 is also the thirteenth triangular number, 1 through 13 summed: the season is not thirteen repeated but thirteen fully counted out. And the two Names of the tikkun are in the count itself: each half is 45 = מ\"ה, and the four seasons together are 52 weeks = ב\"ן — the pair whose union is the whole work of repair, מ\"ה the rectifying light going out to raise ב\"ן, the vessels of the shattering. Ratzo and shov are that going out and that raising, four times in a year.",
+      main: "The Prophets and Writings in 364 days, two chapters daily: 728 chapters of Israel's discipline, history, and rebuke — the strong voice of the Nevi'im in the Sefirah of strength. The Written Torah is Gevurah's mode — fixed letters, black fire on white fire. Alongside it runs the Four Seasons: 364 divided evenly into four 91-day quarters, with no gaps between them — the cleanest possible division of the year. Each season carries one of the four Chayot HaKodesh of Yechezkel's Merkavah and one of Yehuda ben Teima's animal-postures (Avot 5:20): Fall's Eagle under Uriel, Winter's Man — bearing the fish, the hidden ones — under Michael, Spring's Ox under Refael, Summer's Lion under Gavriel, each paired with its own cup of wine, from red receding to white through to all red again. Wine is Gevurah's own element, and the cycle belongs to the tribe of Gevurah: each season carries one of the four houses of Levi, matched to its cup by what each bore in the Mishkan — Winter's all-white cup to the Kohanim, who wrapped the vessels and blessed; Spring's rising red to Kehat, who carried the wrapped vessels on the shoulder under strict discipline; Fall's receding red to Gershon, who carried the woven coverings; Summer's all-red to Merari, who carried the boards and sockets, the bare standing frame. And the Levi'im were the singers as well as the bearers: the thirteen weeks of each season carry the Rebbe's thirteen niggunim, one a week, four times over — 4 × 13 = 52, the year's own weeks. Ten of the thirteen were taught on Simchat Torah, 1955 to 1963 unbroken. Week 7, the season's heart, carries Shamil — the captive chieftain at his cell window, the soul in the body longing for home — the one melody without words, on the day the season turns. Each season is one רצוא ושוב of its Chayah — \"the Chayot running and returning\" (Yechezkel 1:14): 45 days running in toward the season's heart, the heart itself on day 46, and 45 returning out. Both halves are the same measure, 45 = מ\"ה = אדם, so nothing is divided between them — only the direction changes. And 91 = 7 × 13 is the least span in which a whole number of weeks and a whole number of 13-day cycles both complete, so the four seasons are the four times a year Binah's week and Tiferet's thirteen come back into phase, closing and opening together. The season is a 7 × 13 field readable either way — 13 weeks of 7 days, or 7 cycles of 13 attributes — and day 46 is the centre of the centre in both: the middle day of the middle week, and the middle day of the middle cycle. What lands there says it plainly: the heart is always a Netzach day of the Omer count, and always the seventh Attribute — יָשׁוּב יְרַחֲמֵנוּ, \"He will return and have compassion on us,\" in Fall and Winter, וְרַב־חֶסֶד in Spring and Summer. The turning day carries the attribute of turning. Winter's heart shows it plainest of all, falling on Tu B'Shvat, the day the sap turns and begins its return — and Tu B'Shvat is the Mishnah's own ראש השנה לאילן, the New Year for the tree, sitting at the heart of a cycle numbered אילן. Of the Mishnah's four Rosh Hashanahs only two fall on a structural point of the cycle, and both are hearts: the tree's at the centre of a season, and the kings' — 1 Nisan — at winter's seal, which is the exact midpoint of the 364. Fitting for a cycle numbered אילן, the tree, and אמן, the Name as written joined to the Name as read: 91 = יהוה (26) + אדני (65). 91 is also the thirteenth triangular number, 1 through 13 summed: the season is not thirteen repeated but thirteen fully counted out. And the two Names of the tikkun are in the count itself: each half is 45 = מ\"ה, and the four seasons together are 52 weeks = ב\"ן — the pair whose union is the whole work of repair, מ\"ה the rectifying light going out to raise ב\"ן, the vessels of the shattering. Ratzo and shov are that going out and that raising, four times in a year.",
       meta: "An original Kabbalah of Time cycle · Nevi'im & Ketuvim · The Four Seasons"
     },
     tiferet: {
