@@ -13550,10 +13550,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // Overview day carries the whole ma'amar rather than a se'if, so it has no
       // pasuk and the subtitle is hidden with it.
       const _pk = _vtSeif > 0 ? VATAH_PESUKIM[_vtSeif - 1] : null;
-      document.getElementById('malchut-pesukim-label').style.display = _pk ? '' : 'none';
+      document.getElementById('malchut-pesukim-label').style.display = '';
       document.getElementById('malchut-pesukim-face').innerHTML = _pk
         ? `${_pk.he} <span style="color:var(--ink-dim);font-size:0.85em">— פסוק ${VATAH_HEB[_vtSeif - 1]} · ${_pk.src}</span>`
-        : '';
+        : `All twelve together <span style="color:var(--ink-dim);font-size:0.85em">— the whole before its parts · Mivtza Chinuch, 5736</span>`;
       // Today's three of the 84, each linked; the subheader names the work, so
       // the general Mishneh Torah link it used to carry is redundant.
       document.getElementById('malchut-yad-face').innerHTML =
@@ -13725,7 +13725,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const pk = _vtSeif > 0 ? VATAH_PESUKIM[_vtSeif - 1] : null;
         return `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Year-Round Connection — ואתה תצוה</div>
          <div class="detail-row"><span class="detail-label">${_vtSeif === 0 ? 'Overview' : "Se'if " + VATAH_HEB[_vtSeif - 1]}:</span><span class="detail-value"><a href="${_vtUrl}" target="_blank" style="color:var(--gold)">${_vtTitle}</a> <span style="color:var(--ink-mid);font-size:0.85em">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span></span></div>` +
-         (pk ? `<div class="detail-row"><span class="detail-label">Pasuk ${VATAH_HEB[_vtSeif - 1]}:</span><span class="detail-value">${pk.he}<br><span style="color:var(--ink-mid);font-size:0.88em">${pk.en}</span> <span style="color:var(--ink-dim);font-size:0.82em">· ${pk.src}</span></span></div>` : ``) +
+         (pk ? `<div class="detail-row"><span class="detail-label">Pasuk ${VATAH_HEB[_vtSeif - 1]}:</span><span class="detail-value">${pk.he}<br><span style="color:var(--ink-mid);font-size:0.88em">${pk.en}</span> <span style="color:var(--ink-dim);font-size:0.82em">· ${pk.src}</span></span></div>` :
+          `<div class="detail-row"><span class="detail-label">The Twelve Pesukim:</span><span class="detail-value">All twelve together — the whole before its parts</span></div>
+           <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.55;margin:6px 0 0;">At the farbrengen of Parshas Acharei 5736, after Pesach, the Rebbe declared it the Year of Chinuch and launched Mivtza Chinuch on <em>וְהִגַּדְתָּ לְבִנְךָ</em> — that no Jewish child be denied a true Jewish education. At the start of Iyar he asked that every Jewish boy and girl know the Twelve Pesukim and maamarei Chazal by heart, so that a child away from a sefer still carries Torah with him, and can say it to a friend. Six were given first, and hung on the buildings by 770 for the Lag B'Omer parade. At the parade the Rebbe added six more — two pesukim, two maamarei Chazal, and two sayings of the Alter Rebbe from chapter 33 of Tanya — and afterwards those were hung beside the first. He asked that all twelve be printed pocket-sized, to be reviewed again and again, and gave three sichot on how each one alone is protection, defence and salvation.</div>` ) +
          (VATAH_RESONANCE[cy13.day] ? `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.55;margin:8px 0 0;">${VATAH_RESONANCE[cy13.day]}</div>` : ``);
       })() +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
