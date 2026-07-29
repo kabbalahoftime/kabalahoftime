@@ -51,10 +51,36 @@ text is the **Mishna**, ten chapters over days 1–5 of each week, then eight of
 364 divided evenly into four 91-day quarters, no gaps — the cleanest division of
 the year. Each season carries one of the four Chayot HaKodesh of Yechezkel's
 Merkavah, one of Yehuda ben Teima's animal-postures, an archangel, a house of
-Levi, and its own cup of wine, from red receding to white and back to red. Every
-season has a quiet heart at day 46 — winter's falls on Tu B'Shvat. The text is
+Levi, and its own cup of wine, from red receding to white and back to red. The text is
 **Tanach**, two chapters a day: 728 chapters of Nevi'im and Ketuvim, the Written
 Torah, whose mode is Gevurah — fixed letters, black fire on white.
+
+Each season is one **ratzo v'shov** of its Chayah — *"the Chayot running and
+returning"* (Yechezkel 1:14). Forty-five days run in toward the season's heart on
+day 46, and forty-five return out from it. Nothing is divided between the halves:
+the Chayah, the animal, the angel, the house of Levi and the cup all belong to
+the whole season. Only the direction changes, and both halves are the same
+measure — 45 = מ״ה = אדם.
+
+Winter shows it plainly: its heart is **Tu B'Shvat**, the day the sap turns and
+begins its return — which is also the Mishnah's own ראש השנה לאילן, the New Year
+for the tree, at the heart of a cycle numbered אילן = 91.
+
+And 91 = 7 × 13 is the shortest span in which a whole number of weeks and a whole
+number of 13-day cycles both complete, so the four seasons are the four times a
+year Binah's week and Tiferet's thirteen come back into phase. The season reads
+either way — thirteen weeks of seven days, or seven cycles of thirteen attributes
+— and day 46 is the centre of the centre in both. What lands there says it: the
+heart is always the seventh Attribute, *יָשׁוּב יְרַחֲמֵנוּ*, "He will return and have
+compassion on us," in Fall and Winter.
+
+The Levi'im were the singers as well as the bearers, and the thirteen weeks carry
+the Rebbe's **thirteen niggunim**, one a week, four times a year — 4 × 13 = 52,
+the year's own weeks. Ten of the thirteen were taught on Simchat Torah, 1955 to
+1963 unbroken. The season opens on *Tzama Lecha Nafshi*, "my soul thirsts for
+You"; week 7, the heart, carries **Shamil** — the captive chieftain at his cell
+window, the soul in the body longing for home, the one melody without words; and
+week 13 seals on *Hu Elokeinu*, "He will redeem us once more, shortly."
 
 ### Tiferet · 13 Attributes of Mercy — 13-Day Cycle
 One of the Thirteen Attributes each day, the cycle completing 28 times a year
@@ -78,6 +104,16 @@ on *Completeness*.
 Because 369 is five days longer than the year, each turn leaves the closing
 cycle five days to finish while the new one has already begun — the doubling
 from about 25 Elul to 11 Tishrei. A toggle on the card reaches those days.
+
+Each cycle also carries one of the Rebbe's ten **Mivtzoyim**, one of the ten
+Psalms of the **Tikkun HaKlali**, and one of the Ten Commandments. But the year
+holds only nine cycles, so the tenth of each — Torah, Psalm 150, and *Lo Tachmod*
+— could never be reached. The nine are fixed deliberately and stay as they are;
+the ninth now carries the tenth beside its own. Psalms 137 and 150 are the Tikkun
+HaKlali's own last two, consecutive, so the cycle closes it rather than stopping
+one short. And cycle 9 opens on 30 Av, the first day of Rosh Chodesh Elul, and
+runs through the Days of Awe — so the year ends on the last Halleluyah and on the
+commandment of the heart.
 
 ### Hod · 728 Half-Day Cycle
 The year split in half-days, one halachah in the morning and one in the
@@ -106,9 +142,19 @@ by side, and Drash on Shabbat. All 540 responsa and the whole Ben Ish Chai
 complete in a year.
 
 ### Malchut · Year-Round Connection & the Weekly Books
-The Rebbe's last ma'amar, V'Atah Tetzaveh, completed every 13 days, with seven
-daily texts crowning each week — Malchut receiving from all above it, as the
-moon receives the sun. Malchut also carries the **Yad HaChazakah**: the Rambam's
+The Rebbe's last ma'amar, V'Atah Tetzaveh, completed every 13 days — its twelve
+se'ifim riding the cycle with a month apiece, Adar I carrying the whole ma'amar
+before its parts, since that is the month the Rebbe gave it.
+
+Each se'if also carries one of the Rebbe's **Twelve Pesukim**, se'if for pasuk.
+The ma'amar's subject is the Moshe of the generation arousing the essence-faith
+of every Jew so that each continues on his own initiative; the Twelve Pesukim are
+how he put that faith into every child's mouth. The two sequences end together —
+the ma'amar's last se'if is "The Moshe of our generation," and the last pasuk is
+*ישמח ישראל בעושיו*, every Jew sharing in G-d's joy in His dwelling below.
+
+Seven daily texts crown each week alongside it — Malchut receiving from all above
+it, as the moon receives the sun. Malchut also carries the **Yad HaChazakah**: the Rambam's
 Mishneh Torah surveyed whole every 28 days, three of its 84 subsections a day,
 each cycle opening on the enumeration of the 613 and sealing on Hilchos Melachim
 and Moshiach. Thirteen cycles a year; in a leap year fourteen — David's own
