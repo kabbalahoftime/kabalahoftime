@@ -10908,6 +10908,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Call with the day of the KoT year (1–364): dEff − d_year1 + 1, so the
   // seasons share the main 52-week calendar's start date every year, and fold
   // the leap year's four extra weeks exactly as Chesed/Gevurah/Hod do.
+  // The Rebbe's thirteen niggunim (1954-1963) on the thirteen weeks of each
+  // season — the Levi'im's other service. Each season carries a house of Levi
+  // for what it bore in the Mishkan; the Levi'im were also the singers, and the
+  // thirteen weeks were the one part of the 91 carrying nothing. One niggun a
+  // week, four times a year: 4 x 13 = 52. Ten were taught on Simchat Torah,
+  // 1955-1963 unbroken; three on other days. Week 7 — the season's heart, the
+  // turn from ratzo to shov — carries Shamil, the one melody without words.
+  const NIGGUNIM = [
+    { name:"Tzama Lecha Nafshi", heb:"צמאה לך נפשי", taught:"1 May 1954", text:"My soul thirsts for You, my flesh longs for You, in a dry and weary land without water", url:"https://www.chabad.org/multimedia/music_cdo/aid/140800/jewish/Tzomo-Lecho-Nafshi.htm" },
+    { name:"Vehi She’amdah", heb:"והיא שעמדה", taught:"Pesach 1955", text:"And this has stood by our fathers and us — in every generation they rise against us, and the Holy One saves us from their hands", url:"https://www.chabad.org/multimedia/music_cdo/aid/140778/jewish/Vehi-Sheomdo.htm" },
+    { name:"Darkecha Elokeinu", heb:"דרכך אלוקינו", taught:"Simchat Torah 1955", text:"Your way, our G-d, is to be forgiving toward the evil and the good; and that is Your praise", url:"https://www.chabad.org/multimedia/music_cdo/aid/140672/jewish/Darkecho-Elokeinu.htm" },
+    { name:"Asader Lesudasah", heb:"אסדר לסעודתא", taught:"Shabbat, 6 July 1957", text:"I shall offer praise at the Shabbat morning meal, and shall herewith invite the holy Ancient One", url:"https://www.chabad.org/140813" },
+    { name:"Ki Anu Amecha", heb:"כי אנו עמך", taught:"Simchat Torah 1956", text:"For we are Your people and You are our G-d; we are Your children and You are our Father", url:"https://www.chabad.org/140678" },
+    { name:"Tzama Lecha Nafshi — the foolish peasant", heb:"צמאה לך נפשי", taught:"Simchat Torah 1957", text:"Hey, you, foolish Marko! Why are you going to the market? You don’t buy, you don’t sell — all you do is stir the stew", url:"https://www.chabad.org/140744" },
+    { name:"Shamil", heb:"שמיל", taught:"Simchat Torah 1958", text:"Wordless — the captive chieftain at his cell window remembering the mountains: the soul in the body, longing for home", url:"https://www.chabad.org/140724" },
+    { name:"Rachamana", heb:"רחמנא", taught:"Simchat Torah 1959", text:"O Merciful One, Who answers the broken-hearted, answer us", url:"https://www.chabad.org/140676" },
+    { name:"Ata Vechartanu", heb:"אתה בחרתנו", taught:"Simchat Torah 1960", text:"You chose us from all the nations, You loved us and wanted us — a song with no ending, for the returnee is never content", url:"https://www.chabad.org/140688" },
+    { name:"Anim Zemiros", heb:"אנעים זמירות", taught:"Simchat Torah 1961", text:"I sing hymns and compose songs, because my soul longs for You", url:"https://www.chabad.org/140702" },
+    { name:"Stav Ya Pitu", heb:"סטאוו יא פיטו", taught:"Simchat Torah 1962", text:"One must know how to be merry, and how to give a just reckoning — and You, please listen to us from heaven", url:"https://www.chabad.org/140728" },
+    { name:"Ki Anu Amecha — the second", heb:"כי אנו עמך", taught:"Simchat Torah 1963", text:"We are Your servants and You are our Master; we are Your congregation and You are our portion", url:"https://www.chabad.org/140743" },
+    { name:"Hu Elokeinu", heb:"הוא אלוקינו", taught:"Simchat Torah 1963", text:"He is our G-d, our Father, our King, our Redeemer — He will redeem us once more, shortly", url:"https://www.chabad.org/140731" },
+  ];
+
   function getSeasonInfo(d) {
     const dN     = (((d - 1) % 364) + 364) % 364 + 1; // safe wrap, 1–364
     const season = Math.ceil(dN / 91);          // 1–4
@@ -12640,6 +12663,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Yehuda ben Teima:</span><span class="detail-value">${seasonInfo.animal}</span></div>
        <div class="detail-row"><span class="detail-label">Angel:</span><span class="detail-value">${seasonInfo.angel}</span></div>
        <div class="detail-row"><span class="detail-label">House of Levi:</span><span class="detail-value">${seasonInfo.levi}</span></div>
+       ${(() => { const ng = NIGGUNIM[seasonInfo.weekIn - 1]; return ng
+         ? `<div class="detail-row"><span class="detail-label">Niggun:</span><span class="detail-value"><a href="${ng.url}" target="_blank" style="color:var(--gold)">${ng.name}</a> ${ng.heb} <span style="color:var(--ink-mid);font-size:0.85em">· week ${seasonInfo.weekIn} of 13 · taught ${ng.taught}</span></span></div>
+            <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:2px 0 10px;">${ng.text}</div>`
+         : ``; })()}
        <div class="detail-row"><span class="detail-label">Cup of Wine:</span><span class="detail-value">${seasonInfo.cup}</span></div>
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${seasonInfo.note}</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 4 seasons × 91 (Ilan = 91)</span></div>` +
