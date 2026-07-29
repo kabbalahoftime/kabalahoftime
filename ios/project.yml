@@ -1,0 +1,56 @@
+# XcodeGen spec — the .xcodeproj is generated, not committed, so it never
+# conflicts and never drifts from what is actually in the tree.
+#
+#   brew install xcodegen
+#   cd ios && xcodegen generate && open KabbalahOfTime.xcodeproj
+#
+name: KabbalahOfTime
+options:
+  bundleIdPrefix: com.kabbalahoftime
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.9"
+    # Set DEVELOPMENT_TEAM in Xcode, or override here once you have the team id.
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+  KabbalahOfTime:
+    type: application
+    platform: iOS
+    sources:
+      - path: KabbalahOfTime
+    # The web app is the single source of truth: these are referenced in place
+    # at the repository root rather than copied, so there is only ever one
+    # index.html. They ship as the cold-start fallback for a first launch with
+    # no network; once online the app loads the live site.
+    resources:
+      - path: ../index.html
+        type: file
+      - path: ../manifest.json
+        type: file
+      - path: ../service-worker.js
+        type: file
+      - path: ../icon-192.png
+        type: file
+      - path: ../icon-512.png
+        type: file
+      - path: ../fonts
+        type: folder
+    info:
+      path: KabbalahOfTime/Info.plist
+      properties:
+        CFBundleDisplayName: Kabbalah of Time
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIUserInterfaceStyle: Light
+        ITSAppUsesNonExemptEncryption: false
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: false
