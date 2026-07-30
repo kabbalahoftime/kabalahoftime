@@ -511,6 +511,19 @@ font-size: 0.95rem;
 line-height: 1.7;
 color: var(--ink);
 }
+.start-line {
+font-family: 'Cormorant Garamond', serif;
+font-size: 1rem;
+line-height: 1.6;
+color: var(--ink);
+}
+.start-cue {
+color: var(--gold);
+font-style: italic;
+}
+.start-panel.expanded .start-cue { display: none; }
+.start-panel .intro-body { text-align: left; }
+.start-panel .intro-body strong { color: var(--gold); }
 .intro-body p {
 margin: 0 0 1em 0;
 }
@@ -1553,6 +1566,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="title-main">Kabbalah of Time</div>
     <div class="title-sub">Daily Counting, Daily Calling — ספירת הזמן</div>
   </header>
+
+  <!-- START HERE — collapsed to one line so it never blocks a returning reader -->
+  <div class="intro-panel start-panel" id="start-panel" onclick="this.classList.toggle('expanded')">
+    <span class="intro-expand-icon">▾</span>
+    <div class="start-line">A daily practice that maps the Jewish year onto Kabbalistic structure — each day carries its own texts, prayers, and meaning. <span class="start-cue">New here? Tap to learn how it works.</span></div>
+    <div class="intro-body">
+      <p><strong>What you're looking at.</strong> Today's date maps onto several nested cycles at once — a week, a month, a season, a year — each drawn from a different Kabbalistic or textual structure. Every card below is one of those cycles.</p>
+      <p><strong>What to do.</strong> Tap any card to open its texts. Tap the gold tags in order to track your progress through the day; tap the moon to see the full path.</p>
+      <p><strong>Where to start.</strong> Try the Now card first — it shows what is current at this hour.</p>
+    </div>
+  </div>
 
   <!-- INTRODUCTION -->
   <div class="intro-panel" id="intro-panel" onclick="this.classList.toggle('expanded')">
