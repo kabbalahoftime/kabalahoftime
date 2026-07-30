@@ -10653,8 +10653,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const svg  = document.getElementById('prayer-heart-svg');
     const fill = document.getElementById('prayer-heart-fill');
     if (!rect) return;
-    // viewBox y: the heart occupies roughly y=3..19
-    const top = 3, bot = 19, f = n / 10;
+    // The lobes reach the very top of the viewBox: each arc is a semicircle
+    // about the chord midpoint (5.8, 5.3) with radius 5.28, so the crown sits
+    // at y ≈ 0.02, not at 3. Clipping from 3 left a sliver of both lobes
+    // unfilled even when all ten had been said.
+    const top = 0, bot = 19, f = n / 10;
     rect.setAttribute('y', String(bot - (bot - top) * f));
     rect.setAttribute('height', String((bot - top) * f + 1));
     if (fill) fill.setAttribute('fill-opacity', n ? '1' : '0');
