@@ -10357,6 +10357,36 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { name: 'Yesod',    hebrew: 'יְסוֹד',       start: 18*60+52, end: 22*60+18, range: '6:52–10:18'  },
   ];
 
+  // The seven Sefirot tile the day, so the three Mochin have no window among
+  // them. Ma'alot HaZman already places them: hovering about the Chatzot seam,
+  // at these offsets in minutes from Chatzot. In fixed mode Chatzot is 1:43 AM,
+  // which gives 12:54-2:22 — Chochmah and Binah before it, Keter/Da'at after.
+  // This is also what gives the first three prayers their hour: Tikkun Rachel
+  // and Tikkun Leah at Chatzot, and Hitbodedut in the small hours past it.
+  const MOCHIN_TIMES = [
+    { name: 'Chochmah',       hebrew: 'חָכְמָה',          from: -49, to: -20 },
+    { name: 'Binah',          hebrew: 'בִּינָה',           from: -20, to:   9 },
+    { name: 'Keter / Da\'at', hebrew: 'כֶּתֶר / דַּעַת',  from:   9, to:  39 },
+  ];
+
+  // Today's three Mochin windows as real times, from whichever Chatzot is in
+  // force — the zmaniyot one for the chosen city, or 1:43 AM in fixed mode.
+  function mochinWindows() {
+    let chatzot = null;
+    if (typeof zmanMode !== 'undefined' && zmanMode === 'zmaniyot') {
+      try {
+        const z = zmaniyotBoundaries(ZMAN_CITIES[zmanCityIdx]);
+        if (z && z.bounds) chatzot = z.bounds[0];   // Chesed begins at Chatzot
+      } catch (e) {}
+    }
+    if (!chatzot) { chatzot = new Date(); chatzot.setHours(1, 43, 0, 0); }
+    return MOCHIN_TIMES.map(m => ({
+      name: m.name, hebrew: m.hebrew,
+      start: new Date(chatzot.getTime() + m.from * 60000),
+      end:   new Date(chatzot.getTime() + m.to   * 60000)
+    }));
+  }
+
   // ── SHA'OT ZMANIYOT ──
   // Sefirah windows computed from real sunrise/sunset: each sefirah spans
   // 24/7 halachic hours, with Chesed anchored at Chatzot HaLailah.
@@ -10484,6 +10514,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   const ZMAN_ORDER = ['Chesed','Gevurah','Tiferet','Netzach','Hod','Yesod','Malchut'];
 
   function getActiveSefirahTime() {
+    // The Mochin overlay the seam rather than dividing it, so they are checked
+    // before the seven.
+    const _fmtHM = d => {
+      const h = d.getHours(), m = d.getMinutes(), ap = h < 12 ? 'AM' : 'PM';
+      return ((h % 12) || 12) + ':' + ('0' + m).slice(-2) + ' ' + ap;
+    };
+    {
+      const now = new Date();
+      for (const w of mochinWindows()) {
+        for (const shift of [-1, 0, 1]) {           // the window can sit either side of midnight
+          const a = new Date(w.start.getTime() + shift * 86400000);
+          const b = new Date(w.end.getTime()   + shift * 86400000);
+          if (now >= a && now < b) {
+            return { name: w.name, hebrew: w.hebrew, range: _fmtHM(a) + '–' + _fmtHM(b) };
+          }
+        }
+      }
+    }
     if (zmanMode === 'zmaniyot') {
       const city = ZMAN_CITIES[zmanCityIdx];
       const z = zmaniyotBoundaries(city);
@@ -10702,7 +10750,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (!_prayerKey) return;
     const mask = prayersMask();
     const active = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
-    const activeIdx = active ? PRAYER_SEFIRAH.indexOf(active.name) + 1 : 0;
+    const activeIdx = active ? PRAYER_SEFIRAH.indexOf(active.name.split(' /')[0]) + 1 : 0;
     document.querySelectorAll('.prayer-tag').forEach(el => {
       const n = +el.dataset.prayer;
       const done = !!(mask & (1 << (n - 1)));
@@ -10972,11 +11020,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   function updateNowSefirah() {
     const active = getActiveSefirahTime();
     const allCards = document.querySelectorAll('.sefirah-card');
-    const sourceCard = Array.from(allCards).find(c =>
-      c.id !== 'now-sefirah-featured' &&
-      c.querySelector('.sefirah-name') &&
-      c.querySelector('.sefirah-name').textContent.trim() === active.name
-    );
+    // Keter has its own card class and its own face layout, so it is found and
+    // mirrored differently from the seven.
+    const sourceCard = active.name.indexOf('Keter') === 0
+      ? document.querySelector('.keter-card')
+      : Array.from(allCards).find(c =>
+          c.id !== 'now-sefirah-featured' &&
+          c.querySelector('.sefirah-name') &&
+          c.querySelector('.sefirah-name').textContent.trim() === active.name
+        );
     if (!sourceCard) return;
     document.getElementById('now-sf-name').textContent   = active.name;
     document.getElementById('now-sf-hebrew').textContent = active.hebrew;
@@ -10997,8 +11049,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? els[0].innerHTML
         : els.map(e => `<div style="margin-bottom:6px;">${e.innerHTML}</div>`).join('');
     };
+    const keterFace = sourceCard.querySelector('.keter-visible-content');
     const malchutFace = sourceCard.querySelector('.malchut-visible-content');
-    if (malchutFace) {
+    if (keterFace) {
+      // Keter's face is its own three-section layout — mirror it whole, as Malchut's is.
+      document.getElementById('now-sf-cycle').innerHTML = '';
+      document.getElementById('now-sf-main').innerHTML  = keterFace.innerHTML;
+      document.getElementById('now-sf-sub').innerHTML   = '';
+      document.getElementById('now-sf-tags').innerHTML  = '';
+    } else if (malchutFace) {
       // Malchut's face is its own three-section layout — mirror it whole.
       document.getElementById('now-sf-cycle').innerHTML = '';
       document.getElementById('now-sf-main').innerHTML  = malchutFace.innerHTML;
@@ -11010,10 +11069,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       copy('.sefirah-sub-text',   'now-sf-sub');
       copy('.sefirah-tags',       'now-sf-tags');
     }
-    copy('.sefirah-detail',     'now-sf-detail');
+    copy(keterFace ? '.keter-detail' : '.sefirah-detail', 'now-sf-detail');
     // Left margin: the Tzadik of this hour and its prayer. The prayer keeps its
     // data-prayer, so this copy is tappable too and both stay in step.
-    const _lblCol = sourceCard.querySelector('.sefirah-label-col');
+    const _lblCol = keterFace
+      ? document.querySelector('.keter-title-row')
+      : sourceCard.querySelector('.sefirah-label-col');
     const _tzEl = document.getElementById('now-sf-tzadik');
     const _prEl = document.getElementById('now-sf-prayer');
     if (_tzEl) _tzEl.innerHTML = _lblCol
@@ -11022,7 +11083,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           .map(d => d.innerHTML).join('<br>')
       : '';
     if (_prEl) {
-      const src = _lblCol && _lblCol.querySelector('.prayer-tag');
+      const src = (_lblCol && _lblCol.querySelector('.prayer-tag'))
+        || sourceCard.querySelector('.prayer-tag');
       _prEl.innerHTML = src ? src.outerHTML : '';
     }
     document.getElementById('now-sefirah-featured').style.display = 'grid';
@@ -14859,8 +14921,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         windows.push({ name: sf.name, start: st.toISOString(), end: en.toISOString() });
       });
     }
+    // The three Mochin overlay the seam, so they are listed first and the app
+    // resolving a time takes the first match.
+    try {
+      mochinWindows().forEach(w => windows.unshift({
+        name: w.name.split(' /')[0], start: w.start.toISOString(), end: w.end.toISOString()
+      }));
+    } catch (e) {}
     const byName = {};
-    windows.forEach(w => { byName[w.name] = w; });
+    windows.forEach(w => { if (!byName[w.name]) byName[w.name] = w; });
     // Prayers 1-3 sit in the three Mochin, which have no clock window of their
     // own, so they carry no time — the same reason their tags never flash.
     const prayers = PRAYER_NAMES.map((nm, i) => ({

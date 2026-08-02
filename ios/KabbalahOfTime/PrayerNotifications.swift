@@ -4,10 +4,11 @@ import UserNotifications
 /// A notification when each prayer's Sefirah hour opens — the flashing tag on
 /// the card, reaching you with the app closed.
 ///
-/// Only seven of the ten are scheduled: Hitbodedut, Tikkun Rachel and Tikkun
-/// Leah belong to the three Mochin, which have no clock window, exactly as in
-/// the app. Triggers repeat daily and are rewritten whenever the app runs, so
-/// sha'ot zmaniyot — which drift a few minutes a day — stay close.
+/// All ten are scheduled. The three Mochin — Hitbodedut, Tikkun Rachel and
+/// Tikkun Leah — have no window among the seven, which tile the day; they take
+/// the half hour either side of Chatzot, as Ma'alot HaZman places them.
+/// Triggers repeat daily and are rewritten whenever the app runs, so sha'ot
+/// zmaniyot — which drift a few minutes a day — stay close.
 enum PrayerNotifications {
     private static let prefix = "kot.prayer."
 

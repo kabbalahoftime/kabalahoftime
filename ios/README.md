@@ -64,9 +64,9 @@ Both targets share `Snapshot.swift` and the App Group
 ## Prayer notifications
 
 A local notification when each prayer's Sefirah hour opens — the flashing tag
-on the card, reaching you with the app closed. Seven of the ten are scheduled:
-Hitbodedut, Tikkun Rachel and Tikkun Leah belong to the three Mochin, which
-have no clock window, exactly as in the app.
+on the card, reaching you with the app closed. All ten are scheduled: the three
+Mochin take the half hour either side of Chatzot, where Ma'alot HaZman places
+them, so Hitbodedut, Tikkun Rachel and Tikkun Leah have hours of their own.
 
 Triggers repeat daily and are rewritten every time the app runs, so sha'ot
 zmaniyot — which drift a few minutes a day — stay close without the app having
