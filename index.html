@@ -11670,11 +11670,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const ohUrl = ohUrlFor(ohParashaNum);
       // On a double parasha, each half links to its own aliyah of the day.
       const ohLine = kstParashaNum2
-        ? `<br><span style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim · Parashat ${kstParasha}</span>` +
+        ? `<br><span style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim HaKadosh · Parashat ${kstParasha}</span>` +
           ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">${kstParts[0]}</a>` +
           ` &nbsp;·&nbsp; <a href="${ohUrlFor(kstParashaNum2)}" target="_blank" style="color:var(--gold)">${kstParts[1]}</a>` +
           ``
-        : `<br><span style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim ·</span> <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Parashat ${kstParasha || '—'}</a>`;
+        : `<br><span style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim HaKadosh ·</span> <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Parashat ${kstParasha || '—'}</a>`;
 
       document.getElementById('keter-kst-label').innerHTML = '✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part">אור כי טוב</span> <span class="maalah">מעלה ב׳</span>';
 
