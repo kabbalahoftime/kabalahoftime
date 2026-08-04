@@ -11130,8 +11130,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     ['ז׳', 'Tanach — 2 Chapters', 'Gevurah'],
     ['ח׳', '13 Attributes', 'Tiferet'],
     ['ט׳', '40-Day Cycle', 'Netzach'],
-    ['י׳', 'Zohar', 'Hod'],
-    ['י״א', 'Shulchan Aruch', 'Hod'],
+    ['י׳', 'Shulchan Aruch', 'Hod'],
+    ['י״א', 'Zohar — Chok L\'Yisrael', 'Hod'],
     ['י״ב', 'Shovavim — Parasha', 'Yesod'],
     ['י״ג', 'Year-Round Connection', 'Malchut'],
     ['י״ד', 'Fruits of Her Labor', 'Malchut'],
@@ -13553,7 +13553,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (hal.m.kind === 'sa' || hal.a.kind === 'sa') _hodWorks.push('Shulchan Aruch');
     if (hal.m.kind === 'cc' || hal.a.kind === 'cc') _hodWorks.push('Sefer Chofetz Chaim');
     document.getElementById('hod-sa-label').innerHTML =
-      '\u2727 ' + _hodWorks.join(' \u00b7 ') + ' <span class="maalah">\u05de\u05e2\u05dc\u05d4 \u05d9\u05f3</span>';
+      '\u2726 ' + _hodWorks.join(' \u00b7 ') + ' <span class="maalah">\u05de\u05e2\u05dc\u05d4 \u05d9\u05f3</span>';
     document.getElementById('hod-sa-face').innerHTML =
       `<span style="font-size:0.8em;color:var(--ink-dim)">Morning:</span> ${_hodUnit(hal.m)}<br>` +
       `<span style="font-size:0.8em;color:var(--ink-dim)">Afternoon:</span> ${_hodUnit(hal.a)}`;
