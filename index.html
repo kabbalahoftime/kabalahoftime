@@ -215,9 +215,38 @@ letter-spacing: 1px;
   align-items: center;
   min-width: 72px;
 }
-/* Narrow phones: close the gaps rather than let the three columns overhang */
-@media (max-width: 380px) {
-  #dual-clock { gap: 10px; }
+/* Phones: close the gaps rather than let the four columns overhang */
+@media (max-width: 470px) {
+  #dual-clock { gap: 8px; }
+  .dc-col { min-width: 60px; }
+}
+/* Below that the row wraps rather than shrinking the clocks */
+@media (max-width: 360px) {
+  #dual-clock { flex-wrap: wrap; gap: 8px 12px; }
+  .dc-col { min-width: 62px; }
+}
+
+/* ── STARS — the surrounding light (Or Makif) ──
+   Every ✧ in the cards is a text that is not one of the thirty counted steps.
+   Tapping one gathers it for the day; there is no total to reach. */
+.star-mark {
+  cursor: pointer;
+  display: inline-block;
+  color: var(--ink-dim);
+  transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.25s ease;
+  padding: 0 1px;
+}
+.star-mark:hover { color: var(--gold-mid); }
+/* Lit in the sun's own gold — brighter than the heading it sits in, so a
+   gathered star separates from the gold text around it. */
+.star-mark.lit {
+  color: #dfa016;
+  text-shadow: 0 0 6px rgba(223, 160, 22, 0.9);
+  transform: scale(1.25);
+}
+#stars-glyph.lit {
+  color: #dfa016;
+  text-shadow: 0 0 6px rgba(223, 160, 22, 0.85);
 }
 .dc-time {
   font-family: 'Cinzel', serif;
@@ -1573,7 +1602,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="start-line">A daily practice that maps the Jewish year onto Kabbalistic structure. <span class="start-cue">New here? Tap to learn how it works.</span></div>
     <div class="intro-body">
       <p><strong>What you're looking at.</strong> Today's date maps onto several nested cycles at once — a week, a month, a season, a year — each drawn from a different Kabbalistic or textual structure. Every card below is one of those cycles.</p>
-      <p><strong>What to do.</strong> Tap any card to open its texts. Tap the gold tags in order to track your progress through the day; tap the moon to see the full path.</p>
+      <p><strong>What to do.</strong> Tap any card to open its texts. Tap the gold tags in order to track your progress through the day; tap a ✧ to gather what you learn beyond them; tap the moon to see the full path.</p>
       <p><strong>Where to start.</strong> Try the Now card first — it shows what is current at this hour.</p>
     </div>
   </div>
@@ -1606,7 +1635,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Keter down to Malchut) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
         <li style="margin-bottom:0.7em;">Then climb back: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Malchut up to Keter — the moon wanes as you ascend, completing a month in a single day.</li>
         <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
-        <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✧</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, who accompany the day but are never counted.</li>
+        <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✧</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps.</li>
+        <li style="margin-bottom:0.7em;">Tap any <strong>✧</strong> to gather it as a <strong>star</strong>, and the count beside the moon rises. The stars have no total to reach: what is on offer changes with the day, so the count says how many you reached, never how many you missed.</li>
         <li style="margin-bottom:0.7em;">Badges like "Week 40 · Day 4" show where you are in that section's own cycle; the linked title beside them opens the full source text.</li>
         <li style="margin-bottom:0.7em;">Gevurah's season reads <strong>Ratzo</strong> for its first forty-five days and <strong>Shov</strong> for its last — running in toward the season's <strong>Heart</strong> on day 46, then returning out. Nothing is divided between the halves; only the direction changes. Winter's Heart falls on Tu B'Shvat, the day the sap turns.</li>
         <li style="margin-bottom:0.7em;">Around Rosh Hashana two Kabbalah of Time years overlap; the <strong>year pills</strong> under the date switch between the one closing and the one begun. Netzach's cycle of 369 runs five days longer than the year, so on the first days of a cycle it offers its own toggle to reach days 365–369 of the one still finishing.</li>
@@ -1667,6 +1697,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <span id="maalot-moon-count" style="font-size:11px;color:var(--gold);">0/15</span>
       </div>
       <div class="dc-label">Ma'alot &nbsp;מעלות</div>
+    </div>
+    <div class="dc-sep">·</div>
+    <div class="dc-col" id="stars-col" title="The surrounding light — tap any ✧ in the cards to gather it">
+      <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
+        <span id="stars-glyph" style="font-size:15px;color:var(--ink-dim);line-height:1;">✧</span>
+        <span id="stars-count" style="font-size:11px;color:var(--gold);">0</span>
+      </div>
+      <div class="dc-label">Stars &nbsp;כּוֹכָבִים</div>
     </div>
   </div>
 
@@ -1871,7 +1909,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-sub-text" id="chochmah-sub"></div>
     <div class="sefirah-tags" id="chochmah-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label">✧ Torah Ohr / Likutei Torah <span class="maalah">מעלה ד׳</span></div>
+      <div class="keter-section-label">✦ Torah Ohr / Likutei Torah <span class="maalah">מעלה ד׳</span></div>
       <div id="chochmah-lt-face" class="sefirah-main-text">Loading…</div>
     </div>
     <div class="malchut-ksa-row" style="margin-top:8px">
@@ -1898,7 +1936,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-sub-text" id="binah-sub"></div>
     <div class="sefirah-tags" id="binah-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label">✧ Likutei Tefilot <span class="maalah">מעלה ה׳</span></div>
+      <div class="keter-section-label">✦ Likutei Tefilot <span class="maalah">מעלה ה׳</span></div>
       <div id="binah-lt-face" class="sefirah-main-text">Loading…</div>
     </div>
     <div class="malchut-ksa-row" style="margin-top:8px">
@@ -1959,7 +1997,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-sub-text" id="gevurah-sub"></div>
     <div class="sefirah-tags" id="gevurah-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label">✧ Tanach <span class="maalah">מעלה ז׳</span></div>
+      <div class="keter-section-label">✦ Tanach <span class="maalah">מעלה ז׳</span></div>
       <div id="gevurah-text-face" class="sefirah-main-text">Loading…</div>
     </div>
     <div class="sefirah-detail" id="gevurah-detail"></div>
@@ -2031,11 +2069,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-cycle-name">728 Half-Day Cycle</div>
     <div id="hod-pos" class="sefirah-main-text">Loading…</div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label" id="hod-sa-label">✧ Shulchan Aruch <span class="maalah">מעלה י׳</span></div>
+      <div class="keter-section-label" id="hod-sa-label">✦ Shulchan Aruch <span class="maalah">מעלה י׳</span></div>
       <div id="hod-sa-face" class="sefirah-main-text">Loading…</div>
     </div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label" id="hod-zohar-label">✧ Zohar — Chok L'Yisrael <span class="maalah">מעלה י״א</span></div>
+      <div class="keter-section-label" id="hod-zohar-label">✦ Zohar — Chok L'Yisrael <span class="maalah">מעלה י״א</span></div>
       <div id="hod-zohar-face" class="sefirah-main-text">Loading…</div>
     </div>
     <div class="sefirah-sub-text" style="display:none;"></div>
@@ -10805,6 +10843,90 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     applyPrayerState();
   }, true);
 
+  // ── THE STARS — the surrounding light (Or Makif) ──
+  // The thirty counted steps wear ✦ and are tracked by the moon; every other
+  // text in the cards wears ✧ — "companion texts, resources, and the Rebbeim,
+  // who accompany the day but are never counted". Tapping a ✧ gathers it as a
+  // star for the day. There is no denominator: what is on offer changes with
+  // the day (a Shabbat carries different texts from a Tuesday), so the count
+  // says how many were reached, not how many were missed. State is a list of
+  // star ids per displayed Jewish date, resetting with the day like the rest.
+  let _starsKey = null;
+
+  function starsSet() {
+    try { return new Set(JSON.parse(localStorage.getItem(_starsKey) || '[]')); }
+    catch (e) { return new Set(); }
+  }
+  function starsSave(set) {
+    try { localStorage.setItem(_starsKey, JSON.stringify(Array.from(set))); } catch (e) {}
+  }
+
+  // A star's id is its card and its label, with digits blanked so a heading
+  // that carries the day's number ("Orot HaTorah — Chapter 12") keeps one id
+  // rather than a new one each day. The Now card's clone of a card produces
+  // the same ids as the card itself, so marking in one place lights both.
+  function starIdFor(el) {
+    const card = el.closest('.sefirah-card, .keter-card');
+    const name = card
+      ? ((card.querySelector('.sefirah-name') || {}).textContent || 'Keter').trim()
+      : 'Page';
+    const txt = (el.textContent || '').replace(/\s+/g, ' ').trim()
+      .replace(/^✧\s*/, '').replace(/\d+/g, '#');
+    return name + '|' + txt.slice(0, 60);
+  }
+
+  // Wrap the ✧ of every uncounted section label in a tappable span. Labels
+  // that carry a מעלה or מיעוט tag are counted steps and are left alone.
+  function markStarGlyphs() {
+    const labels = [];
+    const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (n.nodeValue.trimStart().startsWith('✧')) labels.push(n.parentElement);
+    }
+    labels.forEach(el => {
+      if (!el || el.querySelector('.star-mark')) return;
+      // The wrapper span's own ✧ would otherwise be wrapped again on the next pass
+      if (el.closest('.star-mark')) return;
+      if (el.querySelector('.maalah')) return;
+      if (!el.closest('.sefirah-card, .keter-card')) return;
+      el.innerHTML = el.innerHTML.replace('✧',
+        '<span class="star-mark" data-star="">✧</span>');
+      const mark = el.querySelector('.star-mark');
+      if (mark) mark.dataset.star = starIdFor(el);
+    });
+  }
+
+  function applyStarState() {
+    if (!_starsKey) return;
+    markStarGlyphs();
+    const set = starsSet();
+    const lit = new Set();
+    document.querySelectorAll('.star-mark').forEach(el => {
+      const on = set.has(el.dataset.star);
+      el.classList.toggle('lit', on);
+      if (on) lit.add(el.dataset.star);
+    });
+    const cnt = document.getElementById('stars-count');
+    const glyph = document.getElementById('stars-glyph');
+    if (cnt) cnt.textContent = String(lit.size);
+    if (glyph) glyph.classList.toggle('lit', lit.size > 0);
+  }
+
+  // Capture-phase, like the prayer tags: a tap on a star must not expand or
+  // collapse the card it sits in.
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest && e.target.closest('.star-mark');
+    if (!el || !_starsKey) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const id = el.dataset.star;
+    if (!id) return;
+    const set = starsSet();
+    if (set.has(id)) set.delete(id); else set.add(id);
+    starsSave(set);
+    applyStarState();
+  }, true);
+
   function applyMaalotState() {
     if (!_maalotKey) return;
     const k = maalotDone();
@@ -11445,8 +11567,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     _maalotKey = 'kotMaalot:' + hYear + '-' + hMonth + '-' + hDay;
     _yomKey    = 'kotYom:' + hYear + '-' + hMonth + '-' + hDay;
     _prayerKey = 'kotPrayers:' + hYear + '-' + hMonth + '-' + hDay;
+    _starsKey  = 'kotStars:' + hYear + '-' + hMonth + '-' + hDay;
     setTimeout(applyMaalotState, 0); // after this render's innerHTML writes settle
     setTimeout(applyPrayerState, 0);
+    setTimeout(applyStarState, 0);
     setTimeout(injectCycleInfoButtons, 0); // re-append ⓘ after this render's rewrites
     const hMname = HEB_MONTH_NAMES[hMonth] || '';
     const hDateStr = `${hDay} ${hMname} ${hYear}`;
@@ -11817,7 +11941,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           ? `<a href="${items[0].url}" target="_blank" style="color:var(--gold)">${yearLabel}</a>`
           : items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${yearLabel} · ${it.label}</a>`).join(' &amp; ');
         document.getElementById('yesod-text-label').innerHTML =
-          `✧ ${_rd.kind === 'rp' ? 'Rav Pe’alim' : _rd.label} <span class="maalah">מעלה י״ב</span>`;
+          `✦ ${_rd.kind === 'rp' ? 'Rav Pe’alim' : _rd.label} <span class="maalah">מעלה י״ב</span>`;
         document.getElementById('yesod-text-face').innerHTML =
           _rd.kind !== 'hal'
             ? _faceLinks(_rd.items)
@@ -11825,7 +11949,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                 ? `${_yearLinks(_rd.y1, 'Year 1')} &nbsp;·&nbsp; ${_yearLinks(_rd.y2, 'Year 2')}`
                 : `${_yearLinks(_rd.y1, 'Year 1')} <span style="font-size:0.85em;color:var(--ink-dim);font-style:italic;">· Year 2 — not extant for this parasha</span>`);
       } else {
-        document.getElementById('yesod-text-label').innerHTML = `✧ Ben Ish Chai <span class="maalah">מעלה י״ב</span>`;
+        document.getElementById('yesod-text-label').innerHTML = `✦ Ben Ish Chai <span class="maalah">מעלה י״ב</span>`;
         document.getElementById('yesod-text-face').innerHTML =
           `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
       }
@@ -12715,7 +12839,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>`;
     document.getElementById('chesed-sub').innerHTML = '';
     document.getElementById('chesed-text-label').innerHTML =
-      `✧ ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} <span class="maalah">מעלה ו׳</span>`;
+      `✦ ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} <span class="maalah">מעלה ו׳</span>`;
     document.getElementById('chesed-text-face').innerHTML =
       (mishnaInfo.seferiaUrl
         ? `<a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${mishnaInfo.text}</a>`
@@ -13044,7 +13168,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       _tifRow.style.display = '';
       if (tifText) {
         document.getElementById('tiferet-text-label').innerHTML =
-          `✧ ${tifText.work}${tifText.review ? ' · Microcosm Review' : ''} <span class="maalah">מעלה ח׳</span>`;
+          `✦ ${tifText.work}${tifText.review ? ' · Microcosm Review' : ''} <span class="maalah">מעלה ח׳</span>`;
         document.getElementById('tiferet-text-face').innerHTML =
           tifText.url
             ? `<a href="${tifText.url}" target="_blank" style="color:var(--gold)">${tifText.item}</a>`
@@ -13052,7 +13176,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       } else {
         // Leap-year microcosm (28 Shevat–25 Adar I): the Tales' closing talks
         // are the reading for all 28 of those days.
-        document.getElementById('tiferet-text-label').innerHTML = `✧ Rebbe Nachman’s Tales <span class="maalah">מעלה ח׳</span>`;
+        document.getElementById('tiferet-text-label').innerHTML = `✦ Rebbe Nachman’s Tales <span class="maalah">מעלה ח׳</span>`;
         document.getElementById('tiferet-text-face').innerHTML =
           `<a href="https://www.sefaria.org/Sippurei_Maasiyot,_Talks_Following_the_Story_Tales?lang=bi" target="_blank" style="color:var(--gold)">Talks Following the Story Tales</a>`;
       }
@@ -13228,7 +13352,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const _nrRow = document.getElementById('netzach-text-face').parentElement;
       if (_nr) {
         _nrRow.style.display = '';
-        document.getElementById('netzach-text-label').innerHTML = `✧ ${_nr.work} <span class="maalah">מעלה ט׳</span>`;
+        document.getElementById('netzach-text-label').innerHTML = `✦ ${_nr.work} <span class="maalah">מעלה ט׳</span>`;
         document.getElementById('netzach-text-face').innerHTML =
           _nr.items.length === 1
             ? `<a href="${_nr.items[0].url}" target="_blank" style="color:var(--gold)">${_nr.name}</a>`
