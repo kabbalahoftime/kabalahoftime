@@ -5438,11 +5438,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
     const cycle = (d % 13 == 0) ? parseInt(d/13) : 1 + parseInt(d/13);
     const day   = (d % 13 == 0) ? 13 : d % 13;
-    const isMoshe = cycle >= 14 && cycle <= 26;
+    // Cycles 27 and 28 are the year's microcosm, and they divide as the year
+    // does: 27 reviews Micha's thirteen by day, 28 reviews Moshe's — the same
+    // split the readings follow (27 the chapters, 28 the tales).
+    const isMoshe = (cycle >= 14 && cycle <= 26) || cycle === 28;
     const attr  = isMoshe ? MOSHE_THIRTEEN_ATTRIBUTES[day - 1] : THIRTEEN_ATTRIBUTES[day - 1];
     const nassi = NASSI_NAMES[day - 1];
     // Which set of 13: inner (Micah) = first 13 cycles, outer (Moshe) = second 13 cycles
-    const setType = cycle <= 13 ? 'Inner — Attributes of Micah' : (cycle <= 26 ? 'Outer — Attributes of Moshe' : 'Inner & Outer — Combined');
+    const setType = cycle <= 13 ? 'Inner — Attributes of Micah'
+      : (cycle <= 26 ? 'Outer — Attributes of Moshe'
+      : (cycle === 27 ? 'Microcosm — Inner, Attributes of Micah'
+                      : 'Microcosm — Outer, Attributes of Moshe'));
     return { cycle, day, attr, nassi, setType, isMoshe };
   }
 
@@ -12182,8 +12188,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       day: extraDay,
       total: 28,
       representsCycle: extraDay,
-      setType: extraDay <= 13 ? 'Inner — Attributes of Micah' : (extraDay <= 26 ? 'Outer — Attributes of Moshe' : 'Inner & Outer — Combined'),
-      attr: extraDay <= 13 ? THIRTEEN_ATTRIBUTES[extraDay - 1] : (extraDay <= 26 ? MOSHE_THIRTEEN_ATTRIBUTES[extraDay - 14] : THIRTEEN_ATTRIBUTES[extraDay - 27])
+      // Days 27 and 28 represent the two microcosm cycles, which review whole
+      // sets rather than single Attributes — so they carry the set itself.
+      setType: extraDay <= 13 ? 'Inner — Attributes of Micah'
+        : (extraDay <= 26 ? 'Outer — Attributes of Moshe'
+        : (extraDay === 27 ? 'Microcosm — Inner, Attributes of Micah'
+                           : 'Microcosm — Outer, Attributes of Moshe')),
+      attr: extraDay <= 13 ? THIRTEEN_ATTRIBUTES[extraDay - 1]
+        : (extraDay <= 26 ? MOSHE_THIRTEEN_ATTRIBUTES[extraDay - 14]
+        : (extraDay === 27
+            ? { name: 'Micha’s Thirteen',  hebrew: 'י״ג מִדּוֹת מִיכָה', meaning: 'The inner vessels — all thirteen together' }
+            : { name: 'Moshe’s Thirteen',  hebrew: 'י״ג מִדּוֹת מֹשֶׁה', meaning: 'The outer vessels — all thirteen together' }))
     } : null;
 
     // 55-day leap year cycles (each 41-day cycle 4 and 5 expand to 55 in a leap year)
@@ -12973,7 +12988,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       cards[4].querySelector('.sefirah-cycle-name').innerHTML = `13 Attributes of Mercy — 13-Day Cycle`;
       cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
         ? `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span><br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span>`
-        : `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>`;
+        : `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>` +
+          // The two microcosm cycles have no single cycle Attribute; name the
+          // set each one is reviewing instead, since that is what tells them apart.
+          `<br><span style="font-size:0.85em;color:var(--ink-dim)">${cy13.setType}</span>`;
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
       _tifTags.innerHTML = '';
     }
