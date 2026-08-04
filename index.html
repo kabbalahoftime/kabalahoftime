@@ -11155,10 +11155,34 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     ['ט״ו', 'Chumash with Rashi', 'Keter'],
   ];
 
+  // The rows are named by the card itself, so the path always says what the
+  // day is actually holding — Tiferet's work alternates through the year,
+  // Netzach's Breslov volume rotates, Yesod turns from Ben Ish Chai to Rav
+  // Pe'alim. The table's name is kept where a step has no single tag on the
+  // page (the three Rambam tracks all wear מיעוט י״ג) or where none is drawn.
+  function _pathLiveNames() {
+    const map = {};
+    document.querySelectorAll('.maalah').forEach(el => {
+      if (el.closest('#now-sefirah-featured')) return;
+      const kind = el.classList.contains('yom') ? 'y' : 'm';
+      const key  = kind + '|' + el.textContent.replace(/מעלה|מיעוט/, '').trim();
+      const label = (el.parentElement.textContent || '')
+        .replace(el.textContent, '')
+        .replace(/^\s*[\u2726\u2721\uFE0E]\s*/, '')
+        // Position badges belong to the card, not to the name of the text
+        .replace(/\s*[—·]\s*(Day|Hosafa|Chapter|Cycle|Week)\s+\d.*$/, '')
+        .replace(/\s+/g, ' ').trim();
+      if (!label) return;
+      map[key] = (key in map && map[key] !== label) ? null : label;  // ambiguous → keep the table's name
+    });
+    return map;
+  }
+
   function openTodaysPath() {
     const k = _maalotKey ? maalotDone() : 0;
     const w = yomDone();
     const sun = k === 15;
+    const live = _pathLiveNames();
     const nextIdx = !sun ? k : (w < 15 ? 15 + w : -1);
     const row = (idx, name, sef, isDone, dayLabel) => {
       const next = idx === nextIdx;
@@ -11171,10 +11195,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `</div>`;
     };
     let html = `<div class="path-section-title">☽ Waxing — the light descends, Keter → Malchut</div>`;
-    PATH_WAXING.forEach((p, i) => { html += row(i, p[1], p[2], i < k, 'מעלה ' + p[0]); });
+    PATH_WAXING.forEach((p, i) => { html += row(i, live['m|' + p[0]] || p[1], p[2], i < k, 'מעלה ' + p[0]); });
     html += `<div class="path-section-title" style="margin-top:12px;">☀ Waning — the return, Malchut → Keter · listening, bitul</div>`;
     PATH_WANING.forEach((p, j) => {
-      html += row(15 + j, p[1], p[2], j < w, 'מיעוט ' + p[0]);
+      html += row(15 + j, live['y|' + p[0]] || p[1], p[2], j < w, 'מיעוט ' + p[0]);
     });
     if (nextIdx === -1) html += `<div class="path-complete">30/30 — the month complete: the new moon crowned in rays.</div>`;
     document.getElementById('todays-path-body').innerHTML = html;
