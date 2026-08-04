@@ -11688,6 +11688,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const weekOfYear      = (kotYearAlt && inYearOverlap) ? _altWeekOfYear : _priWeekOfYear;
     const effectiveKotWeek = (kotYearAlt && inYearOverlap) ? _altEffKotWk  : _priEffKotWk;
 
+    // Published for the Weekly Journal, which has to number its weeks exactly
+    // as the rest of the app does. The KoT year is anchored to 16 Nisan, not
+    // to a fixed count of days from a Gregorian date, and a leap year runs 392
+    // days rather than 364 — so the journal reads the anchor from here rather
+    // than keeping a second, drifting one of its own.
+    window.kotYear = {
+      hYear:   (kotYearAlt && inYearOverlap) ? _altHYear : hYear,
+      day:     d,
+      day1:    d_year1,
+      week:    weekOfYear,
+      effWeek: effectiveKotWeek,
+      weeks:   ((kotYearAlt && inYearOverlap) ? _altIsLeap : isLeapYear) ? 56 : 52,
+      date:    date,
+    };
+
     // Update year-toggle pill
     const _ytEl = document.getElementById('year-toggle');
     const _ypA  = document.getElementById('year-pill-a');
@@ -15054,13 +15069,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   let _wrCurrentDay = null;
   let _wrData = {};
 
-  // The journal runs on the KoT year itself: 52 weeks of 7 days from
-  // KOT_YEAR_START, rolling into a new year rather than stopping at the end of
-  // one, and following the date on screen so a week can be opened after it has
-  // passed. Days are stepped by calendar date, not by adding milliseconds, so
-  // a daylight-saving change cannot shift a week onto the wrong day.
-  const WR_WEEKS_IN_YEAR = 52;   // 364 days — the KoT year
-  const WR_SEFIRAH_WEEKS = 49;   // the 7x7 inner year; weeks 50-52 have no pairing
+  // The journal runs on the KoT year itself, taking its anchor from the render
+  // that draws the cards (window.kotYear): the year begins where 16 Nisan puts
+  // it, runs 52 weeks — or 56 in a leap year — and follows the date on screen,
+  // so a week can be opened after it has passed. Days are stepped by calendar
+  // date, not by adding milliseconds, so a daylight-saving change cannot shift
+  // a week onto the wrong day.
+  const WR_SEFIRAH_WEEKS = 49;        // the 7x7 inner year; the last weeks have no pairing
+  const WR_SEFIRAH_WEEKS_TOTAL = 52;  // the week the cards name — a leap year's four extra weeks fold back onto 22-25
 
   function _wrAddDays(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
   function _wrDateKey(d) {
@@ -15069,26 +15085,35 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   function _wrWeekInfo() {
+    const k = window.kotYear;
     const base = (typeof getDisplayDate === 'function')
       ? getDisplayDate(currentOffset) : new Date();
     const day0 = new Date(base.getFullYear(), base.getMonth(), base.getDate());
-    const total = Math.max(0, Math.round((day0 - KOT_YEAR_START) / 86400000));
-    const year  = Math.floor(total / 364) + 1;              // KoT year 1 = 5786
-    const week  = Math.floor((total % 364) / 7) + 1;        // 1-52
-    const start = _wrAddDays(KOT_YEAR_START, (year - 1) * 364 + (week - 1) * 7);
-    return { year, week, start };
+    if (!k || !k.date) {   // before the first render — fall back to the epoch
+      const total = Math.max(0, Math.round((day0 - KOT_YEAR_START) / 86400000));
+      return { hYear: 5786, week: Math.floor((total % 364) / 7) + 1, effWeek: 0,
+               weeks: 52, start: _wrAddDays(KOT_YEAR_START, Math.floor(total / 7) * 7),
+               yearStart: KOT_YEAR_START };
+    }
+    // Days elapsed in this KoT year, taken from the anchor the cards use.
+    const into = Math.max(0, k.day - k.day1);
+    const shownDay0 = new Date(k.date.getFullYear(), k.date.getMonth(), k.date.getDate());
+    const yearStart = _wrAddDays(shownDay0, -into);
+    const week = Math.max(1, k.week);
+    return { hYear: k.hYear, week, effWeek: k.effWeek, weeks: k.weeks,
+             start: _wrAddDays(yearStart, (week - 1) * 7), yearStart };
   }
 
-  // Keyed by KoT year and week, so week 1 of the next year cannot overwrite
-  // week 1 of this one. Entries written before the year was part of the key
-  // belong to year 1 and are still read from there.
+  // Keyed by the Hebrew year and the week within it, so no two KoT years can
+  // collide. Entries written under the two earlier key shapes — the bare week
+  // number, then year 1 — are still read, and carry forward when saved.
   function _wrStorageKey(info) {
     const w = info || _wrWeekInfo();
-    return 'kotWeeklyReport_y' + w.year + 'w' + w.week;
+    return 'kotWeeklyReport_h' + w.hYear + 'w' + w.week;
   }
-  function _wrLegacyKey(info) {
+  function _wrLegacyKeys(info) {
     const w = info || _wrWeekInfo();
-    return w.year === 1 ? 'kotWeeklyReport_' + w.week : null;
+    return w.hYear === 5786 ? ['kotWeeklyReport_y1w' + w.week, 'kotWeeklyReport_' + w.week] : [];
   }
 
   function _wrGetDays() {
@@ -15104,7 +15129,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const info = _wrWeekInfo();
     try {
       let s = localStorage.getItem(_wrStorageKey(info));
-      if (!s) { const legacy = _wrLegacyKey(info); if (legacy) s = localStorage.getItem(legacy); }
+      if (!s) for (const legacy of _wrLegacyKeys(info)) { s = localStorage.getItem(legacy); if (s) break; }
       return s ? JSON.parse(s) : {days:{},reflection:''};
     }
     catch(e) { return {days:{},reflection:''}; }
@@ -15237,9 +15262,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const today = _wrDateKey(new Date());
     const tot = { path: 0, prayers: 0, stars: 0, whole: 0, hearts: 0, marked: 0 };
     let cells = '';
-    for (let w = 0; w < WR_WEEKS_IN_YEAR; w++) {
+    for (let w = 0; w < info.weeks; w++) {
       for (let i = 0; i < 7; i++) {
-        const d   = _wrAddDays(KOT_YEAR_START, (info.year - 1) * 364 + w * 7 + i);
+        const d   = _wrAddDays(info.yearStart, w * 7 + i);
         const key = _wrDateKey(d);
         const st  = _wrDayState(d);
         const any = st.path || st.prayers || st.stars.length;
@@ -15262,15 +15287,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div class="wr-tally-box"><div class="wr-tally-n">${n.toLocaleString()}</div>` +
       `<div class="wr-tally-l">${label}</div></div>`;
     document.getElementById('wr-view-year').innerHTML =
-      `<div class="wr-week-info"><strong>KoT Year ${info.year}</strong> — ` +
-        `from ${_wrAddDays(KOT_YEAR_START, (info.year - 1) * 364).toDateString().slice(4)}, ` +
-        `364 days in 52 weeks</div>` +
+      `<div class="wr-week-info"><strong>KoT Year ${info.hYear}</strong> — ` +
+        `from ${info.yearStart.toDateString().slice(4)}, ` +
+        `${info.weeks * 7} days in ${info.weeks} weeks` +
+        (info.weeks > 52 ? ' — the four extra weeks of a leap year fold back onto 22–25' : '') +
+        `</div>` +
       '<div class="wr-tally">' + box(tot.path, 'Steps') + box(tot.prayers, 'Prayers') +
         box(tot.stars, 'Stars') + '</div>' +
       `<div class="wr-line" style="margin-bottom:10px;">${tot.whole} whole days — the moon full and ` +
         `made small again &nbsp;·&nbsp; ${tot.hearts} whole hearts &nbsp;·&nbsp; ${tot.marked} days marked</div>` +
       `<div class="wr-year-scroll"><div class="wr-year-grid">${cells}</div>` +
-      `<div class="wr-year-axis"><span>Week 1</span><span>Week ${WR_WEEKS_IN_YEAR}</span></div></div>` +
+      `<div class="wr-year-axis"><span>Week 1</span><span>Week ${info.weeks}</span></div></div>` +
       '<div class="wr-legend">Each column is a week, each cell a day — Friday at the top, Thursday at the ' +
         'bottom, as the KoT week runs.<br>' +
         '<span class="wr-swatch" style="background:rgba(139,105,20,.14)"></span>a step or two &nbsp;' +
@@ -15304,18 +15331,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const shown = (typeof getDisplayDate === 'function')
       ? _wrDateKey(getDisplayDate(currentOffset)) : today;
 
+    // The 52-week tables are read by the effective week, which folds the leap
+    // year's four extra weeks back onto 22-25, exactly as the cards do.
+    const tableWeek = info.effWeek || week;
     document.getElementById('wr-subtitle').textContent =
-      'KoT Week ' + week + ' of ' + WR_WEEKS_IN_YEAR + (info.year > 1 ? ' · Year ' + info.year : '');
+      'KoT Week ' + tableWeek + ' of ' + WR_SEFIRAH_WEEKS_TOTAL + ' · ' + info.hYear;
 
-    let infoHtml = '<strong>Week ' + week + '</strong>';
-    // The Sefirah pairing is the 7x7 inner year; the last three weeks of the
-    // 52 stand outside it and carry the week's Perek Shirah alone.
-    if (week <= WR_SEFIRAH_WEEKS && typeof window.kotwCombo === 'function') {
-      const cm = window.kotwCombo(week);
+    let infoHtml = '<strong>Week ' + tableWeek + '</strong>';
+    // The Sefirah pairing is the 7x7 inner year; the last weeks of the year
+    // stand outside it and carry the week's Perek Shirah alone.
+    if (tableWeek >= 1 && tableWeek <= WR_SEFIRAH_WEEKS && typeof window.kotwCombo === 'function') {
+      const cm = window.kotwCombo(tableWeek);
       infoHtml += ' — <span style="font-family:\'Frank Ruhl Libre\',serif">' + cm.he + '</span> · ' + cm.en;
     }
     if (typeof window.kotwWeekData === 'function') {
-      const wk = window.kotwWeekData(week);
+      const wk = window.kotwWeekData(tableWeek);
       if (wk) infoHtml += '<br><em>“' + wk.t + '”</em><br><span style="font-size:12px;color:var(--ink-dim)">' + wk.a + '</span>';
     }
     document.getElementById('wr-week-info').innerHTML = infoHtml;
