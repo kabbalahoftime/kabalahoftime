@@ -12965,11 +12965,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       _tifTags.innerHTML = '';
     }
 
-    // Irgun Harbotzas HaTorah's explanation of the day's Attribute. It sits at
-    // the head of the detail, above the day's readings, so the label names the
-    // Attribute it is explaining rather than only its source.
-    const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
-      ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Attribute ${cy13.attr.num} — ${cy13.attr.name} <span style="font-style:normal;">${cy13.attr.hebrew}</span> <span style="color:var(--ink-dim);font-weight:400;white-space:nowrap;">· Irgun Harbotzas HaTorah</span></div><div style="color:var(--ink-mid);font-size:0.88rem;line-height:1.5;">${cy13.attr.bachya}</div></div>`
+    // Irgun Harbotzas HaTorah's explanations, at the head of the detail: the
+    // day's Attribute and the Attribute that defines the cycle, each named so
+    // the paragraph is not read against the wrong one. Only Moshe's thirteen
+    // carry these explanations, so cycles 1-13 (Micha's) show none; when the
+    // day and the cycle land on the same Attribute it is given once.
+    const _bachyaItem = (kind, a) => (a && a.bachya)
+      ? `<div style="margin-bottom:8px;"><div style="font-size:0.8rem;font-weight:600;margin-bottom:2px;">${kind} Attribute ${a.num} — ${a.name} <span style="font-weight:400;opacity:0.85;">${a.hebrew}</span></div>` +
+        `<div style="color:var(--ink-mid);font-size:0.88rem;line-height:1.5;">${a.bachya}</div></div>`
+      : '';
+    const _bachyaItems = (cy13.isMoshe && cycleThemeAttr === cy13.attr)
+      ? _bachyaItem('Day &amp; Cycle', cy13.attr)
+      : _bachyaItem('Day', cy13.isMoshe ? cy13.attr : null) + _bachyaItem('Cycle', cycleThemeAttr);
+    const bachyaRow = _bachyaItems
+      ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:4px;">Irgun Harbotzas HaTorah</div>${_bachyaItems}</div>`
       : '';
     const sourcesRow = (cy13.isMoshe && cy13.attr.sources)
       ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Sources</div><div style="color:var(--ink-mid);font-size:0.88rem;" dir="rtl">${cy13.attr.sources}</div></div>`
