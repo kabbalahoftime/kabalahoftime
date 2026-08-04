@@ -1484,7 +1484,7 @@ transition: transform 0.3s;
 }
 .wr-panel{
   background:var(--bg-card);border:1px solid var(--border);
-  border-radius:10px;width:min(600px,96vw);
+  border-radius:10px;width:min(600px,100%);box-sizing:border-box;
   margin:auto;padding:20px;font-family:'Cormorant Garamond',serif;
 }
 .wr-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
@@ -1536,6 +1536,50 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 }
 .wr-btn-save{background:var(--gold);color:#fff;border-color:var(--gold);}
 .wr-btn-close{background:var(--bg);color:var(--ink-mid);}
+
+/* The accounting — what the day actually holds, read from the marks the cards
+   themselves take, rather than a second set of boxes to tick. */
+.wr-tabs{display:flex;gap:6px;margin-bottom:12px;}
+.wr-tab{
+  flex:1;padding:5px 0;text-align:center;cursor:pointer;
+  font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.04em;
+  border:1px solid var(--border);border-radius:4px;
+  background:var(--bg);color:var(--ink-mid);
+}
+.wr-tab.active{background:var(--gold);color:#fff;border-color:var(--gold);font-weight:600;}
+.wr-tally{
+  display:flex;gap:6px;margin:2px 0 4px;
+}
+.wr-tally-box{
+  flex:1;text-align:center;padding:7px 2px;
+  border:1px solid var(--border);border-radius:5px;background:var(--bg);
+}
+.wr-tally-n{font-family:'Cinzel',serif;font-size:17px;color:var(--gold);line-height:1.1;}
+.wr-tally-l{font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-dim);margin-top:3px;}
+.wr-tally-box.full{border-color:var(--gold);background:rgba(223,160,22,.09);}
+.wr-line{font-size:13px;color:var(--ink-mid);line-height:1.7;}
+.wr-pill{
+  display:inline-block;font-size:11.5px;padding:1px 7px;margin:0 4px 4px 0;
+  border:1px solid var(--border);border-radius:9px;color:var(--ink-dim);
+}
+.wr-pill.on{border-color:var(--gold);color:var(--gold);background:rgba(223,160,22,.08);}
+.wr-pill.tap{cursor:pointer;}
+.wr-empty{font-size:12.5px;color:var(--ink-dim);font-style:italic;}
+
+/* The year: 52 weeks across, the seven days of the KoT week down. */
+.wr-year-scroll{overflow-x:auto;padding-bottom:4px;}
+.wr-year-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,10px);gap:2px;width:max-content;}
+.wr-cell{
+  width:10px;height:10px;border-radius:2px;
+  background:rgba(139,105,20,.07);box-sizing:border-box;
+}
+.wr-cell.stars{outline:1px solid rgba(223,160,22,.85);outline-offset:-1px;}
+.wr-cell.heart{box-shadow:inset 0 -3px 0 rgba(178,58,49,.85);}
+.wr-cell.now{border:1px solid var(--ink-mid);}
+.wr-cell.future{background:transparent;}
+.wr-year-axis{display:flex;justify-content:space-between;font-size:9px;color:var(--ink-dim);margin-top:3px;}
+.wr-legend{font-size:11px;color:var(--ink-dim);line-height:1.8;margin-top:8px;}
+.wr-swatch{display:inline-block;width:10px;height:10px;border-radius:2px;vertical-align:-1px;margin:0 3px;}
 
 /* ── TODAY'S PATH — the day's 30 steps in one tappable list ── */
 #todays-path-body { font-size: 12.5px; }
@@ -1637,6 +1681,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
         <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps.</li>
         <li style="margin-bottom:0.7em;">Tap any <strong>✡</strong> — six-pointed, a Magen David — to gather it as a <strong>star</strong>, and the count beside the moon rises. The stars have no total to reach: what is on offer changes with the day, so the count says how many you reached, never how many you missed.</li>
+        <li style="margin-bottom:0.7em;">The <strong>Weekly Journal</strong> keeps the accounting. Each day it reports what was actually marked — the thirty steps, the ten prayers, the stars gathered — and <em>The Year</em> lays all 364 days out at once, a column to a week, so nothing is lost at midnight.</li>
         <li style="margin-bottom:0.7em;">Badges like "Week 40 · Day 4" show where you are in that section's own cycle; the linked title beside them opens the full source text.</li>
         <li style="margin-bottom:0.7em;">Gevurah's season reads <strong>Ratzo</strong> for its first forty-five days and <strong>Shov</strong> for its last — running in toward the season's <strong>Heart</strong> on day 46, then returning out. Nothing is divided between the halves; only the direction changes. Winter's Heart falls on Tu B'Shvat, the day the sap turns.</li>
         <li style="margin-bottom:0.7em;">Around Rosh Hashana two Kabbalah of Time years overlap; the <strong>year pills</strong> under the date switch between the one closing and the one begun. Netzach's cycle of 369 runs five days longer than the year, so on the first days of a cycle it offers its own toggle to reach days 365–369 of the one still finishing.</li>
@@ -14952,6 +14997,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // ── WEEKLY JOURNAL ──
+  // These two lists are no longer offered as checkboxes — the day is read from
+  // the marks the cards take. They remain so that entries made under the old
+  // checkboxes can still be named and shown.
   const WR_PRAYERS = [
     { key:'hitbodedut',    label:'Hitbodedut',              sefirah:'Keter'           },
     { key:'cheshbon',      label:'Cheshbon HaNefesh',       sefirah:'Chochmah'        },
@@ -15038,34 +15086,182 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     catch(e) { return {days:{},reflection:''}; }
   }
 
+  // Only the reflection is the journal's own; the day itself is read from the
+  // marks the cards take. Days written before the accounting existed still
+  // hold their checkbox entries, and are left untouched — the guard below
+  // keeps a save from replacing them with an empty object.
   function _wrSaveCurrent() {
     if (!_wrCurrentDay) return;
+    const boxes = document.querySelectorAll('#wr-day-content input[type=checkbox]');
+    if (!boxes.length) return;
     _wrData.days = _wrData.days || {};
     _wrData.days[_wrCurrentDay] = {};
-    document.querySelectorAll('#wr-day-content input[type=checkbox]').forEach(cb => {
-      _wrData.days[_wrCurrentDay][cb.dataset.key] = cb.checked;
-    });
+    boxes.forEach(cb => { _wrData.days[_wrCurrentDay][cb.dataset.key] = cb.checked; });
   }
+
+  // ── THE ACCOUNTING ──
+  // The moon's thirty steps, the heart's ten prayers and the night's stars are
+  // all already written per Hebrew date by the cards. The journal reads them
+  // back rather than asking for the same day a second time.
+  function _wrDayState(d) {
+    const empty = { maalot: 0, yom: 0, path: 0, mask: 0, prayers: 0, stars: [] };
+    if (typeof gregToHebrew !== 'function') return empty;
+    const h = gregToHebrew(d);
+    if (!h) return empty;
+    const suf = h.year + '-' + h.month + '-' + h.day;
+    const num = k => {
+      try { return Math.max(0, parseInt(localStorage.getItem(k), 10) || 0); } catch (e) { return 0; }
+    };
+    let stars = [];
+    try { stars = JSON.parse(localStorage.getItem('kotStars:' + suf) || '[]'); } catch (e) {}
+    const maalot = Math.min(15, num('kotMaalot:' + suf));
+    const yom    = Math.min(15, num('kotYom:' + suf));   // only reachable once the moon is full
+    const mask   = num('kotPrayers:' + suf) & 1023;
+    let prayers = 0;
+    for (let m = mask; m; m >>= 1) prayers += m & 1;
+    return { maalot, yom, path: maalot + yom, mask, prayers, stars: Array.isArray(stars) ? stars : [], key: suf };
+  }
+
+  function _wrDateFromKey(dateKey) {
+    const [y, m, d] = dateKey.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
+
+  // A prayer marked here writes the same key the gold tag in the card writes,
+  // so the heart and the journal can never disagree.
+  function wrTogglePrayer(dateKey, n) {
+    if (!(n >= 1 && n <= 10)) return;
+    const h = gregToHebrew(_wrDateFromKey(dateKey));
+    const key = 'kotPrayers:' + h.year + '-' + h.month + '-' + h.day;
+    let mask = 0;
+    try { mask = (parseInt(localStorage.getItem(key), 10) || 0) & 1023; } catch (e) {}
+    try { localStorage.setItem(key, String(mask ^ (1 << (n - 1)))); } catch (e) {}
+    _wrRenderDay(dateKey);
+    _wrPaintDayTabs();
+    if (typeof applyPrayerState === 'function') applyPrayerState();
+  }
+
+  const WR_MAALOT_HEB = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ז׳','ח׳','ט׳','י׳','י״א','י״ב','י״ג','י״ד','ט״ו'];
 
   function _wrRenderDay(dateKey) {
     _wrSaveCurrent();
     _wrCurrentDay = dateKey;
-    const dd = (_wrData.days && _wrData.days[dateKey]) || {};
-    const makeItems = list => list.map(item => {
-      const chk = dd[item.key] ? ' checked' : '';
-      const cls = dd[item.key] ? ' wr-checked' : '';
-      return `<label class="wr-item${cls}"><input type="checkbox" data-key="${item.key}"${chk}><span>${item.label}</span><span class="wr-sefirah">${item.sefirah}</span></label>`;
+    const st = _wrDayState(_wrDateFromKey(dateKey));
+
+    const box = (n, label, full) =>
+      `<div class="wr-tally-box${full ? ' full' : ''}"><div class="wr-tally-n">${n}</div>` +
+      `<div class="wr-tally-l">${label}</div></div>`;
+
+    // Where the day stopped on the thirty — the moon waxing, then waning.
+    let pathLine;
+    if (st.path === 30)      pathLine = 'The moon rose full and made itself small again — all thirty.';
+    else if (st.maalot === 15) pathLine = `Full at ט״ו, climbing back — ${st.yom} of the fifteen מיעוט.`;
+    else if (st.maalot > 0)  pathLine = `Waxing — up to מעלה ${WR_MAALOT_HEB[st.maalot - 1]}.`;
+    else                     pathLine = 'Not begun.';
+
+    const prayerPills = PRAYER_NAMES.map((nm, i) => {
+      const on = !!(st.mask & (1 << i));
+      return `<span class="wr-pill tap${on ? ' on' : ''}" onclick="wrTogglePrayer('${dateKey}',${i + 1})">${nm}</span>`;
     }).join('');
+
+    const starList = st.stars.length
+      ? st.stars.map(id => `<span class="wr-pill on">${id.split('|').pop()}</span>`).join('')
+      : '<div class="wr-empty">None gathered.</div>';
+
+    // Anything recorded under the old checkboxes is still shown, so no entry
+    // made before the accounting existed disappears from view.
+    const dd = (_wrData.days && _wrData.days[dateKey]) || {};
+    const legacy = WR_PRAYERS.concat(WR_LEARNING).filter(it => dd[it.key]).map(it => it.label);
+    const legacyHtml = legacy.length
+      ? '<div class="wr-section-title" style="margin-top:14px">Earlier Entries</div>' +
+        '<div class="wr-line">' + legacy.map(l => `<span class="wr-pill on">${l}</span>`).join('') + '</div>'
+      : '';
+
     document.getElementById('wr-day-content').innerHTML =
-      '<div class="wr-section-title">Prayers</div>' + makeItems(WR_PRAYERS) +
-      '<div class="wr-section-title" style="margin-top:14px">Learning</div>' + makeItems(WR_LEARNING);
-    document.querySelectorAll('#wr-day-content input[type=checkbox]').forEach(cb => {
-      cb.addEventListener('change', function() {
-        this.closest('.wr-item').classList.toggle('wr-checked', this.checked);
-      });
-    });
+      '<div class="wr-tally">' +
+        box(st.maalot + ' / 15', "Ma'alot", st.maalot === 15) +
+        box(st.yom + ' / 15', 'Miutim', st.yom === 15) +
+        box(st.prayers + ' / 10', 'Prayers', st.prayers === 10) +
+        box(st.stars.length, 'Stars', st.stars.length > 0) +
+      '</div>' +
+      `<div class="wr-line" style="margin-bottom:4px;">${pathLine}</div>` +
+      '<div class="wr-section-title" style="margin-top:12px">The Ten Prayers</div>' +
+      `<div class="wr-line">${prayerPills}</div>` +
+      '<div class="wr-section-title" style="margin-top:14px">Stars Gathered</div>' +
+      `<div class="wr-line">${starList}</div>` +
+      legacyHtml;
+
     document.querySelectorAll('.wr-day-tab').forEach(t =>
       t.classList.toggle('active', t.dataset.date === dateKey));
+  }
+
+  // A day tab is lit when the day holds anything at all.
+  function _wrPaintDayTabs() {
+    document.querySelectorAll('.wr-day-tab').forEach(t => {
+      const st = _wrDayState(_wrDateFromKey(t.dataset.date));
+      const dd = (_wrData.days && _wrData.days[t.dataset.date]) || {};
+      const any = st.path || st.prayers || st.stars.length || Object.values(dd).some(Boolean);
+      t.classList.toggle('wr-has-data', !!any);
+    });
+  }
+
+  // The year: one column per week, the seven days of the KoT week down each
+  // column. A cell deepens with the day's thirty steps, is underlined in red
+  // when all ten prayers were said, and ringed in gold when stars were gathered.
+  function _wrRenderYear() {
+    const info = _wrWeekInfo();
+    const today = _wrDateKey(new Date());
+    const tot = { path: 0, prayers: 0, stars: 0, whole: 0, hearts: 0, marked: 0 };
+    let cells = '';
+    for (let w = 0; w < WR_WEEKS_IN_YEAR; w++) {
+      for (let i = 0; i < 7; i++) {
+        const d   = _wrAddDays(KOT_YEAR_START, (info.year - 1) * 364 + w * 7 + i);
+        const key = _wrDateKey(d);
+        const st  = _wrDayState(d);
+        const any = st.path || st.prayers || st.stars.length;
+        tot.path += st.path; tot.prayers += st.prayers; tot.stars += st.stars.length;
+        if (st.path === 30) tot.whole++;
+        if (st.prayers === 10) tot.hearts++;
+        if (any) tot.marked++;
+        const cls = ['wr-cell'];
+        if (!any && key > today) cls.push('future');
+        if (st.stars.length) cls.push('stars');
+        if (st.prayers === 10) cls.push('heart');
+        if (key === today) cls.push('now');
+        const bg = st.path
+          ? `background:rgba(139,105,20,${(0.14 + 0.86 * (st.path / 30)).toFixed(2)});` : '';
+        cells += `<div class="${cls.join(' ')}" style="${bg}" title="${key} — ${st.path}/30 · ` +
+                 `${st.prayers}/10 · ${st.stars.length} stars"></div>`;
+      }
+    }
+    const box = (n, label) =>
+      `<div class="wr-tally-box"><div class="wr-tally-n">${n.toLocaleString()}</div>` +
+      `<div class="wr-tally-l">${label}</div></div>`;
+    document.getElementById('wr-view-year').innerHTML =
+      `<div class="wr-week-info"><strong>KoT Year ${info.year}</strong> — ` +
+        `from ${_wrAddDays(KOT_YEAR_START, (info.year - 1) * 364).toDateString().slice(4)}, ` +
+        `364 days in 52 weeks</div>` +
+      '<div class="wr-tally">' + box(tot.path, 'Steps') + box(tot.prayers, 'Prayers') +
+        box(tot.stars, 'Stars') + '</div>' +
+      `<div class="wr-line" style="margin-bottom:10px;">${tot.whole} whole days — the moon full and ` +
+        `made small again &nbsp;·&nbsp; ${tot.hearts} whole hearts &nbsp;·&nbsp; ${tot.marked} days marked</div>` +
+      `<div class="wr-year-scroll"><div class="wr-year-grid">${cells}</div>` +
+      `<div class="wr-year-axis"><span>Week 1</span><span>Week ${WR_WEEKS_IN_YEAR}</span></div></div>` +
+      '<div class="wr-legend">Each column is a week, each cell a day — Friday at the top, Thursday at the ' +
+        'bottom, as the KoT week runs.<br>' +
+        '<span class="wr-swatch" style="background:rgba(139,105,20,.14)"></span>a step or two &nbsp;' +
+        '<span class="wr-swatch" style="background:rgba(139,105,20,1)"></span>all thirty &nbsp;' +
+        '<span class="wr-swatch stars" style="background:rgba(139,105,20,.3)"></span>stars gathered &nbsp;' +
+        '<span class="wr-swatch heart" style="background:rgba(139,105,20,.3)"></span>ten prayers</div>';
+  }
+
+  function wrShowView(view) {
+    const year = view === 'year';
+    document.getElementById('wr-view-week').style.display = year ? 'none' : '';
+    document.getElementById('wr-view-year').style.display = year ? '' : 'none';
+    document.getElementById('wr-tab-week').classList.toggle('active', !year);
+    document.getElementById('wr-tab-year').classList.toggle('active', year);
+    if (year) _wrRenderYear();
   }
 
   function _wrPersist() {
@@ -15100,12 +15296,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
     document.getElementById('wr-week-info').innerHTML = infoHtml;
 
-    document.getElementById('wr-days').innerHTML = days.map(d => {
-      const hasData = _wrData.days && _wrData.days[d.date] &&
-        Object.values(_wrData.days[d.date]).some(Boolean);
-      return `<button class="wr-day-tab${hasData?' wr-has-data':''}" data-date="${d.date}"
-        onclick="_wrRenderDay('${d.date}')">${d.label}</button>`;
-    }).join('');
+    document.getElementById('wr-days').innerHTML = days.map(d =>
+      `<button class="wr-day-tab" data-date="${d.date}"
+        onclick="_wrRenderDay('${d.date}')">${d.label}</button>`).join('');
 
     document.getElementById('wr-notes').value = _wrData.reflection || '';
 
@@ -15113,6 +15306,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const defaultDay = days.find(d => d.date === shown) ? shown
       : (days.find(d => d.date === today) ? today : days[0].date);
     _wrRenderDay(defaultDay);
+    _wrPaintDayTabs();
+    wrShowView('week');
 
     document.getElementById('wr-modal').style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -15120,10 +15315,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function saveWeeklyReport() {
     _wrPersist();
-    document.querySelectorAll('.wr-day-tab').forEach(t => {
-      const dd = _wrData.days && _wrData.days[t.dataset.date];
-      t.classList.toggle('wr-has-data', !!(dd && Object.values(dd).some(Boolean)));
-    });
+    _wrPaintDayTabs();
   }
 
   function closeWeeklyReport() {
@@ -15526,12 +15718,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       </div>
       <button class="wr-close" onclick="closeWeeklyReport()" aria-label="Close">✕</button>
     </div>
-    <div class="wr-week-info" id="wr-week-info"></div>
-    <div class="wr-days" id="wr-days"></div>
-    <div id="wr-day-content"></div>
-    <hr class="wr-hr">
-    <div class="wr-section-title">Weekly Reflection</div>
-    <textarea class="wr-notes" id="wr-notes" placeholder="Insights, intentions, gratitude for this week..."></textarea>
+    <div class="wr-tabs">
+      <div class="wr-tab active" id="wr-tab-week" onclick="wrShowView('week')">This Week</div>
+      <div class="wr-tab" id="wr-tab-year" onclick="wrShowView('year')">The Year</div>
+    </div>
+    <div id="wr-view-week">
+      <div class="wr-week-info" id="wr-week-info"></div>
+      <div class="wr-days" id="wr-days"></div>
+      <div id="wr-day-content"></div>
+      <hr class="wr-hr">
+      <div class="wr-section-title">Weekly Reflection</div>
+      <textarea class="wr-notes" id="wr-notes" placeholder="Insights, intentions, gratitude for this week..."></textarea>
+    </div>
+    <div id="wr-view-year" style="display:none;"></div>
     <div class="wr-footer">
       <button class="wr-btn wr-btn-close" onclick="closeWeeklyReport()">Close</button>
       <button class="wr-btn wr-btn-save" onclick="saveWeeklyReport()">Save</button>
