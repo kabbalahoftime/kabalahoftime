@@ -13540,19 +13540,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     }
 
-    // Netzach primary text — Sichos HaRan + Likutei Etzot (369-unit cycle);
-    // now shown in its own face row (netzach-text-face, above), repeated here in the
-    // detail with the full link breakdown.
-    if (_nr) {
-      const _links = _nr.items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`).join(' &nbsp;·&nbsp; ');
-      const _block =
-        `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ ${_nr.work}</div>` +
-        `<div style="font-size:0.88rem;margin-bottom:4px;"><span style="color:var(--ink)">${_nr.name}</span> &nbsp; ${_links}</div>` +
-        `<div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">Netzach cycle · day ${_pos} of 369${_pos===369?' — Completeness, the seal':''}</div>` +
-        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
-      const _det = cards[5].querySelector('.sefirah-detail');
-      if (_det) _det.innerHTML = _block + _det.innerHTML;
-    }
+    // The day's Sichos HaRan / Likutei Etzot reading was repeated at the head of
+    // the detail, under the text's own name — the same reading already standing
+    // in the face row above it as מעלה ט׳. Only the face row carries it now.
 
     // Chok Breslov (Netzach card) — must run after netzach-detail innerHTML is set above
     document.getElementById('netzach-breslov-main').innerHTML =
