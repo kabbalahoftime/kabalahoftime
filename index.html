@@ -1743,6 +1743,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="keter-section-label">✦ Year-Round — בכל השנה <span class="maalah">מעלה א׳</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada — Rashbi &amp; Rebbe Nachman</div>
     <div class="sefirah-main-text" id="keter-daily-zohar"></div>
+    <button class="date-jump-trigger" id="zohar-trigger" style="display:none;" onclick="event.stopPropagation(); openZoharDailyModal()">Zohar summary ↗</button>
     <div class="sefirah-main-text" id="keter-lm-main" style="margin-top:4px;">Loading…</div>
     <div class="malchut-ksa-row" style="margin-top:10px">
       <div class="keter-section-label">✧ KoT Book</div>
@@ -3031,6 +3032,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   let _oktDetailMain = '', _oktDetailMeta = '';
   let _ycDetailMain = '', _ycDetailMeta = '';
   let _syDetailMain = '', _syDetailMeta = '';
+  let _zoharDetailMain = '', _zoharDetailMeta = '';
 
   const MONTHS = ['January','February','March','April','May','June',
                   'July','August','September','October','November','December'];
@@ -8199,6 +8201,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   ];
   const ZOHAR_TOTAL = 818; // 251 + 269 + 115 + 143 + 40
 
+  // Summaries for the year-round folio cycle, keyed by the exact reading the
+  // cycle lands on: volume in roman numerals, then the folio or folio range —
+  // 'III:210-211', 'I:44'. A day that crosses volumes keys both sides
+  // ('II:269-III:1'). Keying by folio rather than by date means the summary
+  // travels with the text, so it stays right whichever day brings it around.
+  const ZOHAR_FOLIO_SUMMARIES = {
+    'III:210-211': "The close of Balak. Why did the Holy One open the mouth of Balaam&rsquo;s ass? So that this master of enchantments should learn that speech was never his: a dumb beast speaks when it is given words, and so does he. Balak&rsquo;s seven altars are read through a parable — a gift prepared for the king and handed instead to the dogs; the offerings were fit, the intent was not, and what was meant to rise was thrown below. Even the verse that meets him is marked: וַיִּקָּר, &ldquo;and He chanced upon him&rdquo; — a word of uncleanness, and of uprooting — not the וַיִּקְרָא of love with which Moshe was called. Balaam is left a mouthpiece for כֹּה, the grade from which both blessing and curse issue; but כֹּה was long since promised to Israel — כֹּה יִהְיֶה זַרְעֶךָ — so his mouth could only bless. From the top of the rocks he sees the fathers, from the hills the mothers, a people rooted where no curse reaches. &ldquo;Who can count the dust of Jacob&rdquo; — even their dust is beyond number. &ldquo;Behold, the people riseth up as a lioness&rdquo; — rising in the morning like lions to seize tzitzit, tefillin and Shema. The three blessings answer the three blows he struck the ass. At the last his one weapon is the evil eye, and against it: &ldquo;the spirit of God was upon him&rdquo; — spread over Israel as a mother spreads her scarf over her child&rsquo;s head, so that no eye can rule over them.",
+  };
+
   // Sefaria's Zohar is addressed by parasha section ("Zohar, Sh'lach"), not by
   // volume/daf — so the daily folio links resolve through this table: for each
   // volume, [firstDaf, display name, Sefaria URL slug], the section running
@@ -11989,6 +12000,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _hodZoharLabel    = label;
         _hodZoharMainHtml = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>`;
         _hodZoharMetaHtml = `R. Shimon bar Yochai · ${todayFolios} folios today`;
+        // Summary for today's folios, if one has been written — see
+        // ZOHAR_FOLIO_SUMMARIES for the key scheme.
+        const zKey = si.book.vol === ei.book.vol
+          ? `${ROMAN[si.book.vol]}:${si.folio}` + (si.folio === ei.folio ? '' : `-${ei.folio}`)
+          : `${ROMAN[si.book.vol]}:${si.folio}-${ROMAN[ei.book.vol]}:${ei.folio}`;
+        const zSummary = ZOHAR_FOLIO_SUMMARIES[zKey];
+        const zTrigger = document.getElementById('zohar-trigger');
+        if (zTrigger) zTrigger.style.display = zSummary ? '' : 'none';
+        if (zSummary) {
+          _zoharDetailMain = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>` +
+            `<br><span style="font-size:11px;color:var(--ink-mid)">${zSummary}</span>`;
+          _zoharDetailMeta = `R. Shimon bar Yochai · ${todayFolios} folios today`;
+        }
         // The year-round folio cycle lives in the Keter Rashbi & Rebbe Nachman
         // head — Rashbi's Zohar carried through the whole year, like the
         // date-pegged Likutei Moharan beside it.
@@ -11999,6 +12023,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const syDay = cycleOffset - 357; // 1-6
         const chapters = `Chapter\xa0${syDay}`;
         const syUrl = `https://www.sefaria.org/Sefer_Yetzirah_Gra_Version.${syDay}?lang=bi`;
+        const zTrigger = document.getElementById('zohar-trigger');
+        if (zTrigger) zTrigger.style.display = 'none';
         _hodZoharLabel    = 'Sefer Yetzirah ' + chapters;
         _hodZoharMainHtml = `<strong>Sefer Yetzirah</strong> — <a href="${syUrl}" target="_blank" style="color:var(--gold)">${chapters}</a>`;
         _hodZoharMetaHtml = `Day ${cycleOffset + 1} of cycle · completing the year`;
@@ -14102,6 +14128,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function openYomChazakModal() {
     openInfoPopup('Strong Day — יום חזק', _ycDetailMain, _ycDetailMeta);
+  }
+
+  function openZoharDailyModal() {
+    openInfoPopup('Zohar — זוהר', _zoharDetailMain, _zoharDetailMeta);
   }
 
   function openSeferYetzirahModal() {
