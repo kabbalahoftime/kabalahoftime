@@ -12965,8 +12965,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       _tifTags.innerHTML = '';
     }
 
+    // Irgun Harbotzas HaTorah's explanation of the day's Attribute. It sits at
+    // the head of the detail, above the day's readings, so the label names the
+    // Attribute it is explaining rather than only its source.
     const bachyaRow = (cy13.isMoshe && cy13.attr.bachya)
-      ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Irgun Harbotzas HaTorah</div><div style="color:var(--ink-mid);font-size:0.88rem;line-height:1.5;">${cy13.attr.bachya}</div></div>`
+      ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Attribute ${cy13.attr.num} — ${cy13.attr.name} <span style="font-style:normal;">${cy13.attr.hebrew}</span> <span style="color:var(--ink-dim);font-weight:400;white-space:nowrap;">· Irgun Harbotzas HaTorah</span></div><div style="color:var(--ink-mid);font-size:0.88rem;line-height:1.5;">${cy13.attr.bachya}</div></div>`
       : '';
     const sourcesRow = (cy13.isMoshe && cy13.attr.sources)
       ? `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Sources</div><div style="color:var(--ink-mid);font-size:0.88rem;" dir="rtl">${cy13.attr.sources}</div></div>`
@@ -13033,7 +13036,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b</a> &nbsp;·&nbsp;
          <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15</a>
        </div>` :
-      `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="7">מיעוט ז׳</span></div>
+      `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Nassi</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.nassi}</div></div>
+       ${bachyaRow}
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="7">מיעוט ז׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
@@ -13058,12 +13064,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ From the New Moon to the Next — Phase ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Nassi</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.nassi}</div></div>
-       
-       
-       ${bachyaRow}
-       
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✧ Derech Mitzvosecha</div>
