@@ -14856,25 +14856,59 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   let _wrCurrentDay = null;
   let _wrData = {};
 
-  function _wrCalKotWeek() {
-    const days = Math.floor((Date.now() - new Date(2025,8,19)) / 86400000);
-    return Math.min(49, Math.max(1, Math.floor(days / 7) + 1));
+  // The journal runs on the KoT year itself: 52 weeks of 7 days from
+  // KOT_YEAR_START, rolling into a new year rather than stopping at the end of
+  // one, and following the date on screen so a week can be opened after it has
+  // passed. Days are stepped by calendar date, not by adding milliseconds, so
+  // a daylight-saving change cannot shift a week onto the wrong day.
+  const WR_WEEKS_IN_YEAR = 52;   // 364 days — the KoT year
+  const WR_SEFIRAH_WEEKS = 49;   // the 7x7 inner year; weeks 50-52 have no pairing
+
+  function _wrAddDays(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+  function _wrDateKey(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') +
+           '-' + String(d.getDate()).padStart(2, '0');
   }
 
-  function _wrStorageKey() { return 'kotWeeklyReport_' + _wrCalKotWeek(); }
+  function _wrWeekInfo() {
+    const base = (typeof getDisplayDate === 'function')
+      ? getDisplayDate(currentOffset) : new Date();
+    const day0 = new Date(base.getFullYear(), base.getMonth(), base.getDate());
+    const total = Math.max(0, Math.round((day0 - KOT_YEAR_START) / 86400000));
+    const year  = Math.floor(total / 364) + 1;              // KoT year 1 = 5786
+    const week  = Math.floor((total % 364) / 7) + 1;        // 1-52
+    const start = _wrAddDays(KOT_YEAR_START, (year - 1) * 364 + (week - 1) * 7);
+    return { year, week, start };
+  }
+
+  // Keyed by KoT year and week, so week 1 of the next year cannot overwrite
+  // week 1 of this one. Entries written before the year was part of the key
+  // belong to year 1 and are still read from there.
+  function _wrStorageKey(info) {
+    const w = info || _wrWeekInfo();
+    return 'kotWeeklyReport_y' + w.year + 'w' + w.week;
+  }
+  function _wrLegacyKey(info) {
+    const w = info || _wrWeekInfo();
+    return w.year === 1 ? 'kotWeeklyReport_' + w.week : null;
+  }
 
   function _wrGetDays() {
-    const week = _wrCalKotWeek();
-    const weekStart = new Date(new Date(2025,8,19).getTime() + (week-1)*7*86400000);
+    const start = _wrWeekInfo().start;
     const names = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
     return Array.from({length:7}, (_,i) => {
-      const d = new Date(weekStart.getTime() + i*86400000);
-      return { date: d.toISOString().slice(0,10), label: names[d.getDay()]+'\n'+d.getDate() };
+      const d = _wrAddDays(start, i);
+      return { date: _wrDateKey(d), label: names[d.getDay()]+'\n'+d.getDate() };
     });
   }
 
   function _wrLoad() {
-    try { const s = localStorage.getItem(_wrStorageKey()); return s ? JSON.parse(s) : {days:{},reflection:''}; }
+    const info = _wrWeekInfo();
+    try {
+      let s = localStorage.getItem(_wrStorageKey(info));
+      if (!s) { const legacy = _wrLegacyKey(info); if (legacy) s = localStorage.getItem(legacy); }
+      return s ? JSON.parse(s) : {days:{},reflection:''};
+    }
     catch(e) { return {days:{},reflection:''}; }
   }
 
@@ -14917,14 +14951,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   function openWeeklyReport() {
     _wrData = _wrLoad();
     _wrCurrentDay = null;
-    const week = _wrCalKotWeek();
+    const info = _wrWeekInfo();
+    const week = info.week;
     const days = _wrGetDays();
-    const today = new Date().toISOString().slice(0,10);
+    const today = _wrDateKey(new Date());
+    const shown = (typeof getDisplayDate === 'function')
+      ? _wrDateKey(getDisplayDate(currentOffset)) : today;
 
-    document.getElementById('wr-subtitle').textContent = 'KoT Week ' + week + ' of 49';
+    document.getElementById('wr-subtitle').textContent =
+      'KoT Week ' + week + ' of ' + WR_WEEKS_IN_YEAR + (info.year > 1 ? ' · Year ' + info.year : '');
 
     let infoHtml = '<strong>Week ' + week + '</strong>';
-    if (typeof window.kotwCombo === 'function') {
+    // The Sefirah pairing is the 7x7 inner year; the last three weeks of the
+    // 52 stand outside it and carry the week's Perek Shirah alone.
+    if (week <= WR_SEFIRAH_WEEKS && typeof window.kotwCombo === 'function') {
       const cm = window.kotwCombo(week);
       infoHtml += ' — <span style="font-family:\'Frank Ruhl Libre\',serif">' + cm.he + '</span> · ' + cm.en;
     }
@@ -14943,7 +14983,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     document.getElementById('wr-notes').value = _wrData.reflection || '';
 
-    const defaultDay = days.find(d => d.date === today) ? today : days[0].date;
+    // Open on the day being viewed, or on today when today is in this week.
+    const defaultDay = days.find(d => d.date === shown) ? shown
+      : (days.find(d => d.date === today) ? today : days[0].date);
     _wrRenderDay(defaultDay);
 
     document.getElementById('wr-modal').style.display = 'block';
