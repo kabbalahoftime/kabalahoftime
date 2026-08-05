@@ -11467,6 +11467,42 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { name:"Hu Elokeinu", heb:"הוא אלוקינו", taught:"Simchat Torah 1963", text:"He is our G-d, our Father, our King, our Redeemer — He will redeem us once more, shortly", url:"https://www.chabad.org/140731" },
   ];
 
+  // Each season divides again: 91 = 22 + 1 + 22 + 1 + 22 + 1 + 22 — four
+  // quarters of the alef-bet with three hearts between them, 88 counted days
+  // and three days of turning. The hearts fall on 23, 46 and 69, a beat of 23
+  // — חיה, the season's own Chayah — and the fourth beat, 92, is day 1 of the
+  // season following, so the seasons chain heart to heart. The great heart,
+  // day 46, is לוי: the tribe of song, where the thirteen niggunim already sit.
+  // Four quarters and three hearts make seven parts to a season, twenty-eight
+  // to the year.
+  const GEVURAH_SEASONS = [
+    { name:'Fall',   hebrew:'תִּשְׁרֵי–כִּסְלֵו', cup:'Red receding to white',
+      chayah:'Eagle — נשר', animal:'Light as an eagle (kal kanesher)', angel:'Uriel',
+      levi:'Gershon — the coverings and curtains: the soft boundary, Din easing into Chesed',
+      note:'Renewal in return — "your youth renews like the eagle"' },
+    { name:'Winter', hebrew:'טֵבֵת–אֲדָר', cup:'All white',
+      chayah:'Man — אדם · bearing the fish, the hidden ones', animal:'Bold as a leopard (az kanamer)', angel:'Michael',
+      levi:'Kohanim — wrapping the vessels, blessing the people: unadulterated Chesed',
+      note:'Azut d\'kedushah — the boldness to stand through the dark of the year' },
+    { name:'Spring', hebrew:'נִיסָן–סִיוָן', cup:'White with red rising',
+      chayah:'Ox — שור', animal:'Swift as a gazelle (ratz katzvi)', angel:'Refael',
+      levi:'Kehat — the vessels borne on the shoulder, no wagon: Chesed under Din\'s discipline',
+      note:'Chipazon — the haste of redemption' },
+    { name:'Summer', hebrew:'תַּמּוּז–אֱלוּל', cup:'All red',
+      chayah:'Lion — אריה', animal:'Mighty as a lion (gibor ka\'ari)', angel:'Gavriel',
+      levi:'Merari — the boards and sockets, the bare standing frame: Gevurah itself',
+      note:'The Lion in the mazal of the lion — Gevurah and its rebuilding' }
+  ];
+
+  const SEASON_HEARTS = [23, 46, 69];
+  function seasonPlace(dayIn) {
+    const h = SEASON_HEARTS.indexOf(dayIn);
+    if (h >= 0) return { heart: h + 1, quarter: null, inQuarter: 0, part: (h + 1) * 2 };
+    const quarter = dayIn < 23 ? 1 : dayIn < 46 ? 2 : dayIn < 69 ? 3 : 4;
+    return { heart: null, quarter, inQuarter: dayIn - [0, 0, 23, 46, 69][quarter],
+             part: quarter * 2 - 1 };
+  }
+
   function getSeasonInfo(d) {
     const dN     = (((d - 1) % 364) + 364) % 364 + 1; // safe wrap, 1–364
     const season = Math.ceil(dN / 91);          // 1–4
@@ -11481,26 +11517,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // — Chesed under Din's discipline; Gershon carried the woven coverings —
     // the soft boundary; Merari carried boards and sockets, the bare frame —
     // all red.
-    const SEASONS = [
-      { name:'Fall',   hebrew:'תִּשְׁרֵי–כִּסְלֵו', cup:'Red receding to white',
-        chayah:'Eagle — נשר', animal:'Light as an eagle (kal kanesher)', angel:'Uriel',
-        levi:'Gershon — the coverings and curtains: the soft boundary, Din easing into Chesed',
-        note:'Renewal in return — "your youth renews like the eagle"' },
-      { name:'Winter', hebrew:'טֵבֵת–אֲדָר', cup:'All white',
-        chayah:'Man — אדם · bearing the fish, the hidden ones', animal:'Bold as a leopard (az kanamer)', angel:'Michael',
-        levi:'Kohanim — wrapping the vessels, blessing the people: unadulterated Chesed',
-        note:'Azut d\'kedushah — the boldness to stand through the dark of the year' },
-      { name:'Spring', hebrew:'נִיסָן–סִיוָן', cup:'White with red rising',
-        chayah:'Ox — שור', animal:'Swift as a gazelle (ratz katzvi)', angel:'Refael',
-        levi:'Kehat — the vessels borne on the shoulder, no wagon: Chesed under Din\'s discipline',
-        note:'Chipazon — the haste of redemption' },
-      { name:'Summer', hebrew:'תַּמּוּז–אֱלוּל', cup:'All red',
-        chayah:'Lion — אריה', animal:'Mighty as a lion (gibor ka\'ari)', angel:'Gavriel',
-        levi:'Merari — the boards and sockets, the bare standing frame: Gevurah itself',
-        note:'The Lion in the mazal of the lion — Gevurah and its rebuilding' }
-    ];
+    const SEASONS = GEVURAH_SEASONS;
     const isTuBShvat = (season === 2 && dayIn === 46); // exact center day of winter
-    return { season, dayIn, weekIn, isTuBShvat, ...SEASONS[season - 1] };
+    return { season, dayIn, weekIn, isTuBShvat, ...seasonPlace(dayIn), ...SEASONS[season - 1] };
   }
 
   // Shem Ayin-Bet — the 72-fold Name (Shemot 14:19-21) as a year-long cycle:
@@ -13156,7 +13175,31 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Keyed to the day of the KoT year (like the Four Seasons), so Joshua 1
     // always opens Week 1 Day 1 of each new year.
     const tanachInfo = getTanachInfo(dEff - d_year1 + 1);
-    const seasonInfo = getSeasonInfo(dEff - d_year1 + 1);
+    // A leap year's extra 28 days (28 Shevat–25 Adar I) stand outside the four
+    // seasons: the count of 364 pauses for them and resumes after. Without
+    // that pause the whole grid ran 28 days ahead for the rest of the year and
+    // no heart landed where it should — spring's fell on 19 Nisan rather than
+    // 17 Iyar, summer's on 21 Tammuz rather than 20 Av.
+    const _gevExtraStart = isLeapYear ? hebrewToD(hYear, 11, 28) : 0;  // 28 Shevat
+    const _gevExtraEnd   = isLeapYear ? hebrewToD(hYear, 12, 25) : 0;  // 25 Adar I
+    const _seasonRaw = d - d_year1 + 1;
+    const _seasonPos = !isLeapYear ? _seasonRaw
+      : (d < _gevExtraStart ? _seasonRaw
+        : (d <= _gevExtraEnd ? _gevExtraStart - d_year1   // held at the day before the pause
+          : _seasonRaw - 28));
+    const seasonInfo = getSeasonInfo(_seasonPos);
+    // Those 28 days are the year's seasons in miniature: four seasons of seven
+    // parts each — quarter, heart, quarter, heart, quarter, heart, quarter —
+    // one part to a day, so the four Chayot pass in a single Adar I.
+    const gevMic = (inExtra && extraDay >= 1 && extraDay <= 28) ? (() => {
+      const season = Math.ceil(extraDay / 7);
+      const part   = ((extraDay - 1) % 7) + 1;
+      const isHeart = part % 2 === 0;
+      return { day: extraDay, total: 28, season, part,
+               quarter: isHeart ? null : (part + 1) / 2,
+               heart:   isHeart ? part / 2 : null,
+               ...GEVURAH_SEASONS[season - 1] };
+    })() : null;
     // Day 46 is the exact centre of the 91 (45 before, 45 after) — the season's
     // own midpoint, the day Tu B'Shvat falls on in winter.
     // Each season is one ratzo v'shov of its Chayah (Yechezkel 1:14): 45 days
@@ -13188,14 +13231,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // would make the layout shift mid-season). The detail keeps the full wording.
     const _seasonHalfShort = _seasonHalf;
     const _seasonLine = `Day ${seasonInfo.dayIn} of 91 · ${_seasonHalf} of ${seasonInfo.name}`;
-    document.getElementById('gevurah-cycle-name').innerHTML = 'Four Seasons — 91-Day Cycle';
-    document.getElementById('gevurah-main').innerHTML =
-      `Day <strong>${seasonInfo.dayIn}</strong> · <strong>${seasonInfo.name}</strong><span style="font-size:0.85em">, ${_seasonHalfShort}</span>:<br>` +
-      `<strong>${seasonInfo.chayah}</strong><br>` +
-      `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>` +
-      (seasonInfo.dayIn === 46
-        ? `<br><span style="font-size:0.85em;color:var(--gold-mid)">✦ Heart of ${seasonInfo.name}${_heartName ? ' — ' + _heartName : ''}</span>`
-        : ``);
+    const _gevPart = gevMic
+      ? (gevMic.heart ? `Heart ${gevMic.heart} of 3` : `Quarter ${gevMic.quarter} of 4`)
+      : (seasonInfo.heart ? `Heart ${seasonInfo.heart} of 3`
+                          : `Quarter ${seasonInfo.quarter} of 4 · day ${seasonInfo.inQuarter} of 22`);
+    document.getElementById('gevurah-cycle-name').innerHTML = gevMic
+      ? 'Four Seasons — Leap Year Microcosm'
+      : 'Four Seasons — 91-Day Cycle';
+    document.getElementById('gevurah-main').innerHTML = gevMic
+      ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} — <strong>${gevMic.name}</strong>, ${_gevPart}:<br>` +
+        `<strong>${gevMic.chayah}</strong><br>` +
+        `<span style="font-size:0.88em;opacity:0.72">${gevMic.animal} · Angel ${gevMic.angel}</span><br>` +
+        `<span style="font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</span>`
+      : `Day <strong>${seasonInfo.dayIn}</strong> · <strong>${seasonInfo.name}</strong><span style="font-size:0.85em">, ${_seasonHalfShort}</span>:<br>` +
+        `<strong>${seasonInfo.chayah}</strong><br>` +
+        `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>` +
+        (seasonInfo.dayIn === 46
+          ? `<br><span style="font-size:0.85em;color:var(--gold-mid)">✦ Heart of ${seasonInfo.name}${_heartName ? ' — ' + _heartName : ''}</span>`
+          : ``);
     document.getElementById('gevurah-sub').innerHTML = '';
     document.getElementById('gevurah-text-face').innerHTML =
       tanachInfo.seferiaUrl
@@ -13264,19 +13317,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Four Seasons — 91-Day Cycle</div>
-       <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${_seasonLine} ${seasonInfo.hebrew}</span></div>
+       <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${gevMic ? `held at Day ${seasonInfo.dayIn} of 91 · ${seasonInfo.name} — the count of 364 pauses for these 28 days and resumes on 26 Adar I` : `${_seasonLine} ${seasonInfo.hebrew}`}</span></div>
+       <div class="detail-row"><span class="detail-label">Within the 91:</span><span class="detail-value">${_gevPart} — 22 + 1 + 22 + 1 + 22 + 1 + 22, four quarters of the alef-bet and three hearts</span></div>${gevMic ? `
+       <div class="detail-row"><span class="detail-label">Microcosm:</span><span class="detail-value">Day ${gevMic.day} of 28 — the four seasons in miniature, seven parts to each: today stands for ${gevMic.name}, ${gevMic.heart ? 'heart ' + gevMic.heart : 'quarter ' + gevMic.quarter}</span></div>` : ''}
        <div class="detail-row"><span class="detail-label">Motion:</span><span class="detail-value">${_seasonHalf} — ${_seasonHalfHeb}: ${_seasonMotion}${_heartName ? ' · ' + _heartName : ''}</span></div>
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Each season is one רצוא ושוב of its Chayah (Yechezkel 1:14) — 45 days in, the heart, 45 days out. Both halves are the same measure, 45 = מ״ה = אדם, so nothing is divided between them; only the direction changes. Winter shows it plainly: its heart is Tu B’Shvat, the day the sap turns and begins its return.</div>
-       <div class="detail-row"><span class="detail-label">Chayot HaKodesh:</span><span class="detail-value">${seasonInfo.chayah}</span></div>
-       <div class="detail-row"><span class="detail-label">Yehuda ben Teima:</span><span class="detail-value">${seasonInfo.animal}</span></div>
-       <div class="detail-row"><span class="detail-label">Angel:</span><span class="detail-value">${seasonInfo.angel}</span></div>
-       <div class="detail-row"><span class="detail-label">House of Levi:</span><span class="detail-value">${seasonInfo.levi}</span></div>
+       <div class="detail-row"><span class="detail-label">Chayot HaKodesh:</span><span class="detail-value">${(gevMic || seasonInfo).chayah}</span></div>
+       <div class="detail-row"><span class="detail-label">Yehuda ben Teima:</span><span class="detail-value">${(gevMic || seasonInfo).animal}</span></div>
+       <div class="detail-row"><span class="detail-label">Angel:</span><span class="detail-value">${(gevMic || seasonInfo).angel}</span></div>
+       <div class="detail-row"><span class="detail-label">House of Levi:</span><span class="detail-value">${(gevMic || seasonInfo).levi}</span></div>
        ${(() => { const ng = NIGGUNIM[seasonInfo.weekIn - 1]; return ng
          ? `<div class="detail-row"><span class="detail-label">Niggun:</span><span class="detail-value"><a href="${ng.url}" target="_blank" style="color:var(--gold)">${ng.name}</a> ${ng.heb} <span style="color:var(--ink-mid);font-size:0.85em">· week ${seasonInfo.weekIn} of 13 · taught ${ng.taught}</span></span></div>
             <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:2px 0 10px;">${ng.text}</div>`
          : ``; })()}
-       <div class="detail-row"><span class="detail-label">Cup of Wine:</span><span class="detail-value">${seasonInfo.cup}</span></div>
-       <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${seasonInfo.note}</span></div>
+       <div class="detail-row"><span class="detail-label">Cup of Wine:</span><span class="detail-value">${(gevMic || seasonInfo).cup}</span></div>
+       <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${(gevMic || seasonInfo).note}</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 4 seasons × 91 (Ilan = 91)</span></div>` +
        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
         <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
