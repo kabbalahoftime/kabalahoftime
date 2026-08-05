@@ -8390,6 +8390,43 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       [286, "Ha'azinu",      "Ha'azinu"],
     ],
   };
+  // Parasha → Sefaria Zohar section. The folio cycle's own table is the
+  // authority — every daily link is resolved through it — so it is asked
+  // first, and ZOHAR_PARASHA_SECTIONS covers a few the printed volumes fold
+  // into a neighbour. A double parasha is asked for each half. Some weeks
+  // have no section at all: the Zohar does not comment on every parasha.
+  let _zoharSectionByParasha = null;
+  function zoharSectionForParashaName(name) {
+    if (!name) return null;
+    if (!_zoharSectionByParasha) {
+      _zoharSectionByParasha = {};
+      Object.values(ZOHAR_DAF_SECTIONS).forEach(list =>
+        list.forEach(([, label, slug]) => { _zoharSectionByParasha[label] = slug; }));
+    }
+    const norm = t => t.replace(/[’'`]/g, "'").trim();
+    const direct = _zoharSectionByParasha[norm(name)] || ZOHAR_PARASHA_SECTIONS[name];
+    if (direct) return direct;
+    // Sefaria and the printed volumes spell a handful differently
+    const alt = { "Vayeira": 'Vayera', "Chayei Sarah": 'Chayei_Sara', "Toledot": 'Toldot',
+                  "Ki Tissa": 'Ki_Tisa', "Behaalotecha": "Beha'alotcha", "Shlach": "Sh'lach",
+                  "Haazinu": "Ha'azinu", "Vayelech": 'Vayeilech' };
+    return alt[name] || null;
+  }
+  // One link per half of a double parasha, each to its own section; a half with
+  // no section of its own is named without a link rather than sent elsewhere.
+  function zoharParashaLinks(pName) {
+    if (!pName) return null;
+    // A double parasha is asked for whole first — the printed Zohar keeps some
+    // pairs under one section — and only then split into its halves.
+    const whole = zoharSectionForParashaName(pName);
+    const parts = whole ? [pName] : pName.split('-').map(p => p.trim());
+    const found = parts.map(p => ({ name: p, slug: whole || zoharSectionForParashaName(p) }));
+    if (!found.some(f => f.slug)) return null;
+    return found.map(f => f.slug
+      ? `<a href="https://www.sefaria.org/Zohar%2C_${f.slug}?lang=bi" target="_blank" style="color:var(--gold)">${f.name}</a>`
+      : `<span style="color:var(--ink-mid)">${f.name}</span>`).join(' &nbsp;·&nbsp; ');
+  }
+
   function zoharSectionForDaf(vol, folio) {
     const list = ZOHAR_DAF_SECTIONS[vol] || [];
     let hit = null;
@@ -8522,7 +8559,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   };
 
   // Sefer Yetzirah — one verse per parasha (Bereshit → VeZot HaBrachah), shown
-  // in the Hod slot on Shabbat, when Chok L'Yisrael has no daily Zohar portion.
+  // beside Chok L'Yisrael on Shabbat, when it has no daily Zohar portion.
   // Keyed by parasha number (1–54); `ref` is the Sefer Yetzirah chapter:mishnah.
   const SEFER_YETZIRAH_VERSES = {
     1: { ref: '1:1', he: "בשלשים ושתים נתיבות פליאות חכמה חקק יה יהוה צבאות אלהי ישראל אלהים חיים ומלך עולם אל שדי רחום וחנון רם ונשא שוכן עד וקדוש שמו מרום וקדוש הוא וברא את עולמו בשלשה ספרים בספר וספר וספור:",
@@ -12349,18 +12386,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       }
     })();
 
-    // HOD — Zohar following the weekly parasha, via the Chok L'Yisrael Zohar
-    // (Chabad's English daily Zohar). Reliable for all 54 parshiyot, unlike
+    // The Chok L'Yisrael Zohar (Chabad's English daily Zohar), which follows
+    // the weekly parasha and has a portion for all 54 of them, unlike
     // the classic Zohar's own parasha divisions — the Zohar simply doesn't
     // comment on every parasha (e.g. Devarim), so those sections don't exist.
-    // Both halves link separately on a double parasha; on Shabbat (no daily
-    // entry) it opens the Chok L'Yisrael Zohar landing page.
+    // Both halves link separately on a double parasha. It sits with Chok
+    // L'Yisrael in the Yesod detail, under the same מיעוט ד׳.
     let _hodParashaZoharMainHtml = '', _hodParashaZoharLabel = '';
+    let _chokZoharHtml = '';   // for the Chok L'Yisrael block in the Yesod detail
     (() => {
       const pName = (window.getParashaForDate && window.getParashaForDate(date)) || null;
       _hodParashaZoharLabel = pName ? `Parashat ${pName}` : 'Zohar';
-      // On Shabbat, Chok L'Yisrael has no daily Zohar portion — the Hod slot
-      // instead carries the week's Sefer Yetzirah verse (one per parasha).
+      // On Shabbat, Chok L'Yisrael has no daily Zohar portion — the week's
+      // Sefer Yetzirah verse (one per parasha) stands in its place.
       // An entry may be one verse (object) or several (array) — Chapter 4, the
       // Seven Doubles, pairs its verses so the sefer completes in 54 weeks.
       const _syEntry = (date.getDay() === 6 && _zoharParashaNum) ? SEFER_YETZIRAH_VERSES[_zoharParashaNum] : null;
@@ -12375,8 +12413,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const _syRefLabel = _multi ? `${_syVs[0].ref}–${_syVs[_syVs.length - 1].ref}` : _syVs[0].ref;
         const _syUrl = `https://www.sefaria.org/Sefer_Yetzirah.${_syVs[0].ref.replace(':', '.')}`;
         _syDetailMeta = `<a href="${_syUrl}" target="_blank" style="color:var(--gold)">Sefer Yetzirah ${_syRefLabel} on Sefaria</a>`;
-        const _syFace = document.getElementById('hod-zohar-face');
-        if (_syFace) _syFace.innerHTML = `<span onclick="openSeferYetzirahModal()" style="cursor:pointer;color:var(--gold)">${_syRefLabel}</span>`;
+        _chokZoharHtml = '<span style="color:var(--ink-mid)">Sefer Yetzirah · </span>' +
+          `<span onclick="openSeferYetzirahModal()" style="cursor:pointer;color:var(--gold)">${_syRefLabel}</span>`;
         return;
       }
       const parts = pName ? pName.split('-').map(p => p.trim()) : [];
@@ -12394,8 +12432,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       } else {
         _hodParashaZoharMainHtml = `<a href="${CHABAD_ZOHAR_FALLBACK}" target="_blank" style="color:var(--gold)">${pName || "Chok L'Yisrael Zohar"}</a>`;
       }
+      _chokZoharHtml = '<span style="color:var(--ink-mid)">Zohar · </span>' + _hodParashaZoharMainHtml;
+    })();
+
+    // The Chok L'Yisrael Zohar (English) belongs with Chok L'Yisrael, under the
+    // same מיעוט ד׳ in the Yesod detail — the sixth of that day's six readings.
+    // Filled here rather than with the rest of the block, which is written out
+    // before the day's Zohar has been worked out.
+    (() => {
+      const el = document.getElementById('keter-chok-meta');
+      if (el && _chokZoharHtml) el.innerHTML = `<div style="margin-bottom:3px;">${_chokZoharHtml}</div>` + el.innerHTML;
+    })();
+
+    // Hod's face — the Zohar's own section for the week's parasha.
+    (() => {
       const faceEl = document.getElementById('hod-zohar-face');
-      if (faceEl) faceEl.innerHTML = _hodParashaZoharMainHtml;
+      if (!faceEl) return;
+      const pName = (window.getParashaForDate && window.getParashaForDate(date)) || null;
+      const links = zoharParashaLinks(pName);
+      faceEl.innerHTML = links
+        || `<a href="https://www.sefaria.org/Zohar?lang=bi" target="_blank" style="color:var(--gold)">Zohar</a>` +
+           (pName ? ` <span style="font-size:0.85em;color:var(--ink-mid)">· no section for ${pName}</span>` : '');
     })();
 
     // Hayom Yom: the visible Keter-detail section was removed, but the text is
@@ -13622,14 +13679,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const ccDateNorm = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     const ccDay = (((Math.round((ccDateNorm - ccAnchor) / 86400000)) % 118) + 118) % 118 + 1;
 
-    // Subheader switches like Chesed's Mishna/Tosefta: the Zohar (Chok
-    // L'Yisrael) on the six weekdays, Sefer Yetzirah on Shabbat.
-    const _hodSY = date.getDay() === 6 && _zoharParashaNum && SEFER_YETZIRAH_VERSES[_zoharParashaNum];
+    // Hod's face carries the Zohar by parasha — the Zohar's own division of
+    // the Torah, one section a week, which stands whether or not Chok
+    // L'Yisrael has a portion that day. A counted step, so ✦.
     document.getElementById('hod-zohar-label').innerHTML =
-      (_hodSY ? '✡ Sefer Yetzirah ' : '✡ Zohar — Chok L\'Yisrael ') +
-      '<span class="maalah">מעלה י״א</span>';
-
-    // (The Zohar shows on the Hod face; no need to repeat it in the detail.)
+      '✦ Zohar — Parasha <span class="maalah">מעלה י״א</span>';
 
     const hodChazarahHtml =
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Talmud (Chazarah)</div>` +
@@ -13810,17 +13864,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           mapping.parshiyot = entry.parshiyot;
           mapping.theme = entry.theme;
         }
-        // The Zohar divided by parasha, and its insight, travel with the
-        // Ramchal — Rashbi's heir. The classic Zohar has no section for some
-        // parshiyot (e.g. Devarim); where a section exists we deep-link to it,
-        // otherwise we fall back to the general Zohar index so the link always
-        // works. The insight (when authored) shows regardless.
-        const zSection = ZOHAR_PARASHA_SECTIONS[parashaName];
-        mapping._zoharLink = zSection
-          ? `https://www.sefaria.org/Zohar%2C_${zSection}?lang=bi`
-          : 'https://www.sefaria.org/Zohar?lang=bi';
-        const zoharInsight = MALCHUT_PARASHA_MAPPINGS.zoharThemes[parashaNum];
-        if (zoharInsight) mapping._zoharInsight = zoharInsight;
+        // The Zohar by parasha moved to Hod's face, where it is מעלה י״א and
+        // stands on its own; Thursday here keeps the Ramchal alone.
       }
       else if (textName === 'Likutei Sichos and Toras Menachem' && MALCHUT_PARASHA_MAPPINGS.likuteiSichos[parashaNum]) {
         const data = MALCHUT_PARASHA_MAPPINGS.likuteiSichos[parashaNum];
@@ -13905,18 +13950,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           }
         }
       }
-      // The Zohar (paired with Mesilat Yesharim) leads the card at the same
-      // size as Mesilat Yesharim, sitting just before it.
-      if (parashaMapping._zoharLink) {
-        mainText = `<a href="${parashaMapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar · Parashat ${actualParasha}</a><br>` + mainText;
-      }
       subText = parashaMapping._zoharUrl ? `` : `${malTxt.author}`;
       if (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]')) {
         subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400">${parashaMapping.theme}</span>`;
-      }
-      // The Zohar link now leads the card above; keep only its insight here.
-      if (parashaMapping._zoharInsight) {
-        subText += `<br><span style="color:var(--ink-dim);font-style:italic;font-weight:400"><span style="color:var(--gold-mid)">Zohar</span> — ${parashaMapping._zoharInsight}</span>`;
       }
       if (malchutUrl && customLabel) {
         subText += `&nbsp;·&nbsp; <a href="${malchutUrl}" target="_blank" style="color:var(--gold)">${customLabel}</a>`;
@@ -14069,14 +14105,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const todayThemeHtml = (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]'))
       ? `<div style="font-size:11px;color:var(--ink-dim);font-style:italic;font-weight:400;">${parashaMapping.theme}</div>`
       : '';
-    const zoharLineHtml = (parashaMapping._zoharLink || parashaMapping._zoharInsight)
-      ? `<div style="font-size:12px;font-weight:600;font-family:serif;color:var(--gold);">` +
-          (parashaMapping._zoharLink
-            ? `<a href="${parashaMapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar · Parashat ${actualParasha}</a>`
-            : `Zohar`) +
-          (parashaMapping._zoharInsight ? `<span style="font-weight:400;font-style:italic;color:var(--ink-dim);"> — ${parashaMapping._zoharInsight}</span>` : '') +
-        `</div>`
-      : '';
     const todayBookLabelHtml =
       (todayBook.url
         ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span></a>`
@@ -14088,7 +14116,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div class="mal-book-header" style="flex-wrap:nowrap;align-items:baseline;">` +
           `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
           `<div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;">` +
-            zoharLineHtml +
             `<span class="mal-text-name" style="flex:none;">${todayNameLine}</span>` +
             todayThemeHtml +
             `<div>${todayBookLabelHtml}</div>` +
@@ -14114,12 +14141,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
         if (mapping.theme && !mapping.theme.includes('[To be mapped]')) {
           themeHTML = `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:3px;font-weight:400;">${mapping.theme}</div>`;
-        }
-        if (mapping._zoharLink || mapping._zoharInsight) {
-          const zLbl = mapping._zoharLink
-            ? `<a href="${mapping._zoharLink}" target="_blank" style="color:var(--gold)">Zohar</a>`
-            : `<span style="color:var(--gold-mid)">Zohar</span>`;
-          themeHTML += `<div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-top:2px;font-weight:400;">${zLbl}${mapping._zoharInsight ? ' — ' + mapping._zoharInsight : ''}</div>`;
         }
         // Sefaria link for this text
         const rowUrl = malchutSeferiaUrl(textName, mapping);
