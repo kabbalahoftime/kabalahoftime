@@ -12295,16 +12295,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const main = document.getElementById('yesod-abu-main');
       const meta = document.getElementById('yesod-abu-meta');
       if (!main) return;
+      // On an ordinary day the section is only its readings; the line about the
+      // house is kept for the days that are its own.
+      main.style.display = today ? '' : 'none';
       main.innerHTML = today
         ? `<strong style="color:var(--gold-mid)">Hilula — ${today.name}</strong>` +
           (today.piyut ? ` <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold);font-size:0.9em">· אָעוּפָה אֶשְׁכֹּנָה ↗</span>` : '')
-        : 'From R. Shmuel Elbaz to Netivot — the tzaddik is the foundation of the world';
-      meta.innerHTML = (today ? today.note
-        : 'Refused passage, he spread his mat on the shore and travelled the sea on it; from '
-          + 'that day Avi-Chatzera, father of the mat. He learned the hidden wisdom from '
-          + 'R. Chaim Vital in Damascus and carried it to Morocco. Ten hilulot, from 14 '
-          + 'Kislev round to 27 Tammuz.')
-        + '<br>' + ABU_LINKS;
+        : '';
+      meta.innerHTML = (today ? today.note + '<br>' : '') + ABU_LINKS;
     })();
 
     // Daily Hida (Yesod card)
