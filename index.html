@@ -2176,6 +2176,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-hida-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Abuchatzeira — אַבוּחַצִּירָא</div>
+      <div id="yesod-abu-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+      <div id="yesod-abu-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div id="yesod-parasha-cycle"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
@@ -12242,6 +12246,30 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         document.getElementById('yesod-text-face').innerHTML =
           `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
       }
+    })();
+
+    // The Abuchatzeira line, in the card of Yesod — the sefirah of the tzaddik,
+    // who is the foundation of the world. It sits with the Ben Ish Chai and the
+    // Chida, the same Sephardic stream, and its hilula is named on the day.
+    // Only the dates this app can vouch for are here: the Baba Sali's, which
+    // Likutei Moharan 126 is already placed on, and the Abir Yaakov's.
+    const ABUCHATZEIRA = [
+      { m: 10, d: 20, name: 'R. Yaakov Abuchatzeira — the Abir Yaakov',
+        note: 'Tafilalt, buried in Damanhur · 20 Tevet 5640' },
+      { m: 11, d: 4,  name: 'R. Yisrael Abuchatzeira — the Baba Sali',
+        note: 'Netivot · 4 Shevat 5744' },
+    ];
+    (() => {
+      const today = ABUCHATZEIRA.find(a => a.m === hMonth && a.d === hDay);
+      const main = document.getElementById('yesod-abu-main');
+      const meta = document.getElementById('yesod-abu-meta');
+      if (!main) return;
+      main.innerHTML = today
+        ? `<strong style="color:var(--gold-mid)">Hilula — ${today.name}</strong>`
+        : 'Four generations of tzaddikim from Tafilalt to Netivot';
+      meta.innerHTML = today
+        ? today.note
+        : 'The Abir Yaakov · the Baba Sali — the tzaddik is the foundation of the world';
     })();
 
     // Daily Hida (Yesod card)
