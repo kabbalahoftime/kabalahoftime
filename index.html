@@ -11165,7 +11165,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     },
     chesed: {
       title: 'Shem Ayin-Bet — 72-Day Cycle',
-      main: 'Ten Mishna chapters over days 1–5 of each KoT week, then eight Tosefta chapters on days 6–7: the Oral Torah and its expansion completed in a yearly rhythm. Torah learning as pure giving — Chesed — flowing from teacher to student across generations: the Oral Torah\'s mode is Chesed itself — Torah as giving. Alongside it runs a second Chesed cycle: the 72-fold Name of Hashem, drawn from the three 72-letter verses at the splitting of the sea (Shemot 14:19–21) — five 72-day readings (360 days) with four silent days between them (364), since חֶסֶד itself equals 72 in gematria. This is the Kohanim\'s cycle — Aharon the ish chesed, water their element, washed from the Kiyor before every blessing (as wine, Gevurah\'s element, belongs to the Levi\'im and the Four Seasons). The four silences aren\'t empty; they\'re the apertures of Birkat Kohanim\'s own raised hands — five openings, four dividers, the shape the blessing has always made. During the Nine Days of Av, the whole cycle compresses into miniature: the five odd days (1, 3, 5, 7, 9 Av) carry Rebbe Nachman\'s five holy souls in sequence, and the tikkun of those days is named outright — sinat chinam rectified by ahavat chinam.',
+      main: 'Ten Mishna chapters over days 1–5 of each KoT week, then eight Tosefta chapters on days 6–7: the Oral Torah and its expansion completed in a yearly rhythm. Torah learning as pure giving — Chesed — flowing from teacher to student across generations: the Oral Torah\'s mode is Chesed itself — Torah as giving. Alongside it runs a second Chesed cycle: the 72-fold Name of Hashem, drawn from the three 72-letter verses at the splitting of the sea (Shemot 14:19–21) — five 72-day readings (360 days) with four silent days between them (364), since חֶסֶד itself equals 72 in gematria. This is the Kohanim\'s cycle — Aharon the ish chesed, water their element, washed from the Kiyor before every blessing (as wine, Gevurah\'s element, belongs to the Levi\'im and the Four Seasons). The four silences aren\'t empty; they\'re the apertures of Birkat Kohanim\'s own raised hands — five openings, four dividers, the shape the blessing has always made. The five readings are also the five lobes of the lung — three on the right, two on the left (Chullin 47a) — which Rebbe Nachman sets against the Five Books of Moshe: Shavuot is a cure for the lungs, since the five lobes parallel the five chumashim (Likutei Moharan 267). The lung breathes and draws in all liquid, which is why this cycle is the Kohanim\'s and its element water; the four silent days are the fissures that part the lobes; and the middle lobe is Vayikra, Torat Kohanim, at the centre of the priests\' own cycle. During the Nine Days of Av, the whole cycle compresses into miniature: the five odd days (1, 3, 5, 7, 9 Av) carry Rebbe Nachman\'s five holy souls in sequence, and the tikkun of those days is named outright — sinat chinam rectified by ahavat chinam.',
       meta: 'An original Kabbalah of Time cycle · Mishna & Tosefta · Shem Ayin-Bet'
     },
     gevurah: {
@@ -11576,6 +11576,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // against a second, overlapping capture of the same table. Three roots
   // recur (וה"ו at 1 & 49, לא"ו at 11 & 17, מב"ה at 14 & 55) — verified, not
   // a transcription artifact.
+  // The five 72-day readings are the five lobes of the lung — three on the
+  // right and two on the left (Chullin 47a) — which Rebbe Nachman sets against
+  // the Five Books of Moshe: Shavuot is a cure for the lungs, since the five
+  // lobes parallel the five chumashim (Likutei Moharan 267, read here on 17
+  // Sivan). The lung is the organ of breath and of drawing in liquid, which is
+  // why the cycle is the Kohanim's and its element is water; and the four
+  // silent days between the readings are the fissures that part the lobes.
+  // The middle lobe is Vayikra, Torat Kohanim, at the centre of the priests'
+  // own cycle.
+  const CHESED_LOBES = [
+    { book: 'Bereshit', he: 'בְּרֵאשִׁית', side: 'right', nth: 'first'  },
+    { book: 'Shemot',   he: 'שְׁמוֹת',    side: 'right', nth: 'second' },
+    { book: 'Vayikra',  he: 'וַיִּקְרָא',  side: 'right', nth: 'third'  },
+    { book: 'Bamidbar', he: 'בְּמִדְבַּר', side: 'left',  nth: 'first'  },
+    { book: 'Devarim',  he: 'דְּבָרִים',   side: 'left',  nth: 'second' },
+  ];
+
   const AYIN_BET_NAMES = [
     'והו','ילי','סיט','עלם','מהש','ללה','אכא','כהת',
     'הזי','אלד','לאו','ההע','יזל','מבה','הרי','הקם',
@@ -13133,11 +13150,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Day within the 24-day word-period → one of the 24 mishmarot (detail only)
     const bkMishmar = ayinBetInfo.isBreak ? null : MISHMAROT_24[(ayinBetInfo.dayInCycle - 1) % 24];
     const bkMishmarNum = ayinBetInfo.isBreak ? 0 : ((ayinBetInfo.dayInCycle - 1) % 24) + 1;
+    const _lobe = ayinBetInfo.isBreak ? null : CHESED_LOBES[ayinBetInfo.cycle - 1];
     document.getElementById('chesed-cycle-name').innerHTML =
       'Shem Ayin-Bet — 72-Day Cycle';
     document.getElementById('chesed-main').innerHTML = ayinBetInfo.isBreak
       ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
       : `Day <strong>${ayinBetInfo.nameNum}</strong> &middot; Cycle ${ayinBetInfo.cycle} of 5: <strong>${ayinBetInfo.name}</strong><br>` +
+        `<span style="font-size:0.85em;color:var(--ink-mid)">${_lobe ? `${_lobe.book} — the ${_lobe.nth} lobe of the ${_lobe.side}` : ''}</span><br>` +
         `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>`;
     document.getElementById('chesed-sub').innerHTML = '';
     document.getElementById('chesed-text-label').innerHTML =
@@ -13161,6 +13180,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // from memory alone was judged too risky for daily sacred-Name use).
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Shem Ayin-Bet — The 72-Fold Name</div>
        <div class="detail-row"><span class="detail-label">${ayinBetInfo.isBreak ? 'Today:' : `Name ${ayinBetInfo.nameNum}:`}</span><span class="detail-value">${ayinBetInfo.isBreak ? `A silent day — between Cycle ${ayinBetInfo.afterCycle} and Cycle ${ayinBetInfo.afterCycle + 1}` : ayinBetInfo.name}</span></div>
+       <div class="detail-row"><span class="detail-label">Lobe of the Lung:</span><span class="detail-value">${_lobe
+         ? `the ${_lobe.nth} of the ${_lobe.side} — <strong>${_lobe.book}</strong> <span style="font-size:1.05em">${_lobe.he}</span>`
+         : `a fissure — the parting between the ${CHESED_LOBES[ayinBetInfo.afterCycle - 1].book} lobe and the ${CHESED_LOBES[ayinBetInfo.afterCycle].book}`}</span></div>
+       <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Five readings, five lobes, five books: three lobes on the right and two on the left (Chullin 47a), and Shavuot is a cure for the lungs since the five lobes parallel the Five Books of Moshe (<a href="https://www.sefaria.org/Likutei_Moharan.267" target="_blank" style="color:var(--gold)">Likutei Moharan 267</a>, read here on 17 Sivan). The lung is the organ of breath and draws in all liquid — which is why this is the Kohanim’s cycle and its element is water — and the four silent days are the fissures that part the lobes. The middle lobe is Vayikra, Torat Kohanim, at the centre of the priests’ own cycle.</div>
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Cycle ${ayinBetInfo.cycle} of 5 · Day ${ayinBetInfo.dayInCycle} of 72</div>`}
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Birkat Kohanim · this cycle: <span style="font-size:1.15em;color:var(--ink)">${bkWords.map((w, i) => i === bkIdx ? `<span style="color:var(--gold)">${w}</span>` : w).join(' ')}</span> <span style="font-size:0.9em">· one word each 24 days</span></div>`}
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Mishmar ${bkMishmarNum} of 24: <span style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</span> — ${bkMishmar.en} · <a href="https://www.sefaria.org/I_Chronicles.24" target="_blank" style="color:var(--gold)">I Divrei HaYamim 24</a></div>`}
