@@ -12432,7 +12432,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       } else {
         _hodParashaZoharMainHtml = `<a href="${CHABAD_ZOHAR_FALLBACK}" target="_blank" style="color:var(--gold)">${pName || "Chok L'Yisrael Zohar"}</a>`;
       }
-      _chokZoharHtml = '<span style="color:var(--ink-mid)">Zohar · </span>' + _hodParashaZoharMainHtml;
+      // Named in full: the Hebrew Chok L'Yisrael is linked just above it, and
+      // the two should not be mistaken for one another.
+      _chokZoharHtml = '<span style="color:var(--ink-mid)">Zohar Chok L\u2019Yisrael (English) · </span>' +
+        _hodParashaZoharMainHtml;
     })();
 
     // The Chok L'Yisrael Zohar (English) belongs with Chok L'Yisrael, under the
