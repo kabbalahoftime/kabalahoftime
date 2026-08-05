@@ -13215,16 +13215,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : (seasonInfo.dayIn < 46
           ? 'running in toward the heart of the season'
           : 'returning outward from the heart of the season');
-    // The calibration fixes winter's heart to 15 Shevat, spring's to 17 Iyar and
-    // summer's to 20 Av in every ordinary year; fall's drifts across 11-13
-    // Cheshvan with the lengths of Cheshvan and Kislev, and a leap year moves
-    // all four. So the heart is named only on the years it actually lands.
-    const _heartName = seasonInfo.dayIn !== 46 ? null
-      : (hMonth === 8  && hDay === 11) ? 'Rachel Imeinu’s yahrzeit'
-      : (hMonth === 11 && hDay === 15) ? 'Tu B’Shvat'
-      : (hMonth === 2  && hDay === 17) ? 'Erev Lag BaOmer'
-      : (hMonth === 5  && hDay === 20) ? 'Kaf Av'
-      : null;
+    // Each season's heart has a day of its own. Spring's and summer's land on
+    // it exactly in every year now that the leap year's 28 days stand outside
+    // the count; winter's slips to 17 Shevat in a leap year, and fall's moves
+    // across 11-15 Cheshvan with the lengths of Cheshvan and Kislev. The day
+    // is named either way — the heart falls in its vicinity, and that is what
+    // it is for — but only claimed when the date is the date.
+    const HEART_DAYS = [
+      { name: 'Rachel Imeinu’s yahrzeit', m: 8,  d: 11 },
+      { name: 'Tu B’Shvat',               m: 11, d: 15 },
+      { name: 'Erev Lag BaOmer',          m: 2,  d: 17 },
+      { name: 'Kaf Av',                   m: 5,  d: 20 },
+    ];
+    const _heartDay = HEART_DAYS[seasonInfo.season - 1];
+    const _heartName = (seasonInfo.dayIn !== 46 || !_heartDay) ? null
+      : ((hMonth === _heartDay.m && hDay === _heartDay.d)
+          ? _heartDay.name : 'near ' + _heartDay.name);
     // The face abbreviates the half and sets it a shade smaller so day + season
     // + half stay on one line at 375px for every day of the season (measured:
     // at full size "2nd Half" and "Midpoint" wrap while "1st Half" fits, which
