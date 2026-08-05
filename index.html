@@ -12260,7 +12260,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ['Baba Sali',    'https://www.dafyomi.co.il/general/info/torahau/hidden_tzadikim.php?d=16'],
       ['R. Meir',      'https://www.dafyomi.co.il/general/info/torahau/hidden_tzadikim.php?d=17'],
     ].map(([n, u]) => `<a href="${u}" target="_blank" style="color:var(--gold)">${n}</a>`)
-     .join(' &nbsp;·&nbsp; ');
+     .join(' &nbsp;·&nbsp; ')
+     + ' &nbsp;·&nbsp; <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold)">A\u2019ufa Eshkona ↗</span>';
 
     // Ten of them, from 14 Kislev round to 27 Tammuz. The Adar yahrzeit falls
     // in Adar I when the year has two — Sephardic practice follows the Mechaber
@@ -12276,7 +12277,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         note: 'Damanhour, Egypt · 20 Tevet — the patriarch of the line' },
       { m: 11, d: 4,  name: 'R. Yisrael Abuchatzeira — the Baba Sali',
         note: 'Netivot · 4 Shevat' },
-      { m: 11, d: 14, name: 'R. Yitzchak Abuchatzeira',
+      { m: 11, d: 14, name: 'R. Yitzchak Abuchatzeira', piyut: true,
         note: 'Toulal, Morocco · 14 Shevat — youngest son of the Abir Yaakov and uncle to the Baba Sali, who composed A\u2019ufa Eshkona' },
       { m: 12, d: 25, name: 'R. Yitzchak Abuchatzeira — the Baba Khaki',
         note: 'Ramla · 25 Adar — Chief Sephardic Rabbi of Ramla and Lod' },
@@ -12295,7 +12296,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const meta = document.getElementById('yesod-abu-meta');
       if (!main) return;
       main.innerHTML = today
-        ? `<strong style="color:var(--gold-mid)">Hilula — ${today.name}</strong>`
+        ? `<strong style="color:var(--gold-mid)">Hilula — ${today.name}</strong>` +
+          (today.piyut ? ` <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold);font-size:0.9em">· אָעוּפָה אֶשְׁכֹּנָה ↗</span>` : '')
         : 'From R. Shmuel Elbaz to Netivot — the tzaddik is the foundation of the world';
       meta.innerHTML = (today ? today.note
         : 'Refused passage, he spread his mat on the shore and travelled the sea on it; from '
@@ -14702,6 +14704,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function openYomChazakModal() {
     openInfoPopup('Strong Day — יום חזק', _ycDetailMain, _ycDetailMeta);
+  }
+
+  // A'ufa Eshkona — the piyut of the Abuchatzeira house, sung at its hilulot.
+  // Ten couplets in the voice of Shir HaShirim: the soul flies out to the
+  // desert after a beloved who has gone, is struck by the watchmen who should
+  // have helped her, and is answered from the other side — rise, my sister,
+  // your redeemer is coming. Its ninth couplet is Yirmiyahu 2:2, "I remember
+  // for you the kindness of your youth", which is Micha's thirteenth Attribute
+  // — מִימֵי קֶדֶם, the days of old — as Tomer Devorah reads it in Tiferet:
+  // when no merit is left, He reaches back to the love of the first days.
+  const AUFA_ESHKONA = `<div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">אָעוּפָה אֶשְׁכֹּנָה וְאַרְחִיקָה נְדֹד<br>בַּמִּדְבָּר אָלִינָה וְאוּלַי אֶמְצָא דּוֹד</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">נֶשֶׁק אַהֲבָתוֹ בְּלִבִּי בֹּעֵרָה<br>מִיּוֹם פְּרֵדָתוֹ נַפְשִׁי עָלַי מָרָה</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">יְדִיד מֶנִי בָּרַח הָלַךְ עֲזָבַנִי<br>אֵיזוֹ דֶּרֶךְ אָרַח וְאֵלְכָה גַּם אֲנִי</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">יָצָאתִי לְבַקֵּשׁ דּוֹדִי בֵּין חֲבֵרִים<br>נִלְכַּדְתִּי בְּמוֹקֵשׁ הִכּוּנִי הַשֹּׁמְרִים</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">צִפִּיתִי לְדוֹדִי מָתַי יָבוֹא אֵלַי<br>יַלְבִּישֵׁנִי עֶדְיִי וִירַחֵם עָלַי</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">חֲשֹׂף זְרוֹעֲךָ לְקַבֵּץ פְּזוּרִים<br>גַּלֵּה קֵץ יִשְׁעֲךָ וְדִגְלְךָ הָרֵם</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">קוּמִי יְחִידָתִי וְשׁוּבִי בִּתְשׁוּבָה<br>אֲחוֹתִי רַעְיָתִי הִנֵּה גוֹאֲלֵךְ בָּא</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">חֲמוּדָה יְקָרָה רַבַּת הַמַּעֲלוֹת<br>גַּם מִפָּז נִבְחָרָה צְאִי נָא בִמְחוֹלוֹת</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">זָכַרְתִּי לָךְ חֶסֶד נְעוּרַיִךְ נְעוּרִים<br>הֵיכָלֵךְ אֲיַסֵּד בְּאַבְנֵי סַפִּירִים</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">קוֹל דּוֹדִי הִנֵּה בָּא מְדַלֵּג עַל הֶהָרִים<br>קוּמִי לָךְ אֲהוּבָה כִּי בָּא קֵץ דְּרוֹרִים</div>`;
+  function openAufaModal() {
+    openInfoPopup('אָעוּפָה אֶשְׁכֹּנָה — A\u2019ufa Eshkona', AUFA_ESHKONA,
+      '<a href="https://youtu.be/ApXR2xxn29I" target="_blank" style="color:var(--gold)">Sung</a>' +
+      ' &nbsp;·&nbsp; <a href="https://www.nli.org.il/en/discover/music/jewish-music/piyut/piyut/aufa-eshkona" target="_blank" style="color:var(--gold)">National Library of Israel</a>' +
+      ' &nbsp;·&nbsp; R. Yitzchak Abuchatzeira · 14 Shevat');
   }
 
   function openZoharDailyModal() {
