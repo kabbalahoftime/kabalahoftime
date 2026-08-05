@@ -11169,7 +11169,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     },
     chesed: {
       title: 'Shem Ayin-Bet — 72-Day Cycle',
-      main: 'Ten Mishna chapters over days 1–5 of each KoT week, then eight Tosefta chapters on days 6–7: the Oral Torah and its expansion completed in a yearly rhythm. Torah learning as pure giving — Chesed — flowing from teacher to student across generations: the Oral Torah\'s mode is Chesed itself — Torah as giving. Alongside it runs a second Chesed cycle: the 72-fold Name of Hashem, drawn from the three 72-letter verses at the splitting of the sea (Shemot 14:19–21) — five 72-day readings (360 days) with four silent days between them (364), since חֶסֶד itself equals 72 in gematria. This is the Kohanim\'s cycle — Aharon the ish chesed, water their element, washed from the Kiyor before every blessing (as wine, Gevurah\'s element, belongs to the Levi\'im and the Four Seasons). The four silences aren\'t empty; they\'re the apertures of Birkat Kohanim\'s own raised hands — five openings, four dividers, the shape the blessing has always made. The five readings are also the five lobes of the lung — three on the right, two on the left (Chullin 47a) — which Rebbe Nachman sets against the Five Books of Moshe: Shavuot is a cure for the lungs, since the five lobes parallel the five chumashim (Likutei Moharan 267). The lung breathes and draws in all liquid, which is why this cycle is the Kohanim\'s and its element water; the four silent days are the fissures that part the lobes; and the middle lobe is Vayikra, Torat Kohanim, at the centre of the priests\' own cycle. What the lungs do is fan the heart and keep the body from being consumed — the Five Books, Yaakov, fanning Yosef — and they do it by going out and returning, nah venad (Likutei Moharan 92); which is the same ratzo v\'shov that measures Gevurah\'s season, whose own centre is a heart. So Chesed breathes over Gevurah: five lobes fanning one heart. And whole lungs make whole trust — their moisture is the oil for the mind\'s wick, and it is on the breath that sound becomes speech (Likutei Moharan 225). During the Nine Days of Av, the whole cycle compresses into miniature: the five odd days (1, 3, 5, 7, 9 Av) carry Rebbe Nachman\'s five holy souls in sequence, and the tikkun of those days is named outright — sinat chinam rectified by ahavat chinam.',
+      main: 'Ten Mishna chapters over days 1–5 of each KoT week, then eight Tosefta chapters on days 6–7: the Oral Torah and its expansion completed in a yearly rhythm. Torah learning as pure giving — Chesed — flowing from teacher to student across generations: the Oral Torah\'s mode is Chesed itself — Torah as giving. Alongside it runs a second Chesed cycle: the 72-fold Name of Hashem, drawn from the three 72-letter verses at the splitting of the sea (Shemot 14:19–21) — five 72-day readings (360 days) with four silent days between them (364), since חֶסֶד itself equals 72 in gematria. This is the Kohanim\'s cycle — Aharon the ish chesed, water their element, washed from the Kiyor before every blessing (as wine, Gevurah\'s element, belongs to the Levi\'im and the Four Seasons). The four silences aren\'t empty; they\'re the apertures of Birkat Kohanim\'s own raised hands — five openings, four dividers, the shape the blessing has always made. The five readings are also the five lobes of the lung — three on the right, two on the left (Chullin 47a) — which Rebbe Nachman sets against the Five Books of Moshe: Shavuot is a cure for the lungs, since the five lobes parallel the five chumashim (Likutei Moharan 267). The lung breathes and draws in all liquid, which is why this cycle is the Kohanim\'s and its element water; the four silent days are the fissures that part the lobes; and the middle lobe is Vayikra, Torat Kohanim, at the centre of the priests\' own cycle. What the lungs do is fan the heart and keep the body from being consumed — the Five Books, Yaakov, fanning Yosef — and they do it by going out and returning, nah venad (Likutei Moharan 92); which is the same ratzo v\'shov that measures Gevurah\'s season, whose own centre is a heart. So Chesed breathes over Gevurah: five lobes fanning one heart. And whole lungs make whole trust — their moisture is the oil for the mind\'s wick, and it is on the breath that sound becomes speech (Likutei Moharan 225). A leap year\'s extra 28 days are this cycle in miniature: five blocks parted by four silences, as the year is, and the twenty-four priestly watches running once through them — five to a lobe and four to the last, 24 + 4 = 28. While they run, the cycle of 72s holds where it stood and resumes on 26 Adar I, so no Name is said twice and none is missed. During the Nine Days of Av, the whole cycle compresses into miniature: the five odd days (1, 3, 5, 7, 9 Av) carry Rebbe Nachman\'s five holy souls in sequence, and the tikkun of those days is named outright — sinat chinam rectified by ahavat chinam.',
       meta: 'An original Kabbalah of Time cycle · Mishna & Tosefta · Shem Ayin-Bet'
     },
     gevurah: {
@@ -11858,9 +11858,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const isLeapYear   = hDate.leapYear;
     const inExtra      = isLeapYear && ((hMonth === 11 && hDay >= 28) || (hMonth === 12 && hDay <= 25));
     const extraDay     = inExtra ? (hMonth === 11 ? hDay - 27 : hDay + 3) : 0;
-    // For Chesed/Gevurah/Hod (52-week KoT cycle): during extra weeks look up d+28,
-    // so Weeks 22 I–25 I show identical content to Weeks 22 II–25 II
-    const dEff = inExtra ? d + 28 : d;
+    // For the 52-week cycles: the extra 28 days carry the days that follow them,
+    // and Weeks 22 II–25 II then carry the same days again — so a leap year
+    // reads 28 days twice, which it must, having 28 days too many. Stepping
+    // back 28 after the window rather than forward 28 within it is what keeps
+    // it to that: the older form jumped the count on 28 Shevat and dropped it
+    // again on 26 Adar I, which read 28 days twice but skipped 28 others
+    // altogether — a month of Mishna and 28 of the Names never said at all.
+    const _extraEnd = isLeapYear ? hebrewToD(hYear, 12, 25) : 0;
+    const dEff = (isLeapYear && d > _extraEnd) ? d - 28 : d;
 
     // KoT year anchor: Day 1 of Omer (16 Nisan) = Day 1 of Week 29 (regular year)
     // or Day 1 of Week 33 (leap year, since extra weeks 22-25 shift Nisan forward by 4 weeks)
@@ -13179,9 +13185,35 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const bkMishmar = ayinBetInfo.isBreak ? null : MISHMAROT_24[(ayinBetInfo.dayInCycle - 1) % 24];
     const bkMishmarNum = ayinBetInfo.isBreak ? 0 : ((ayinBetInfo.dayInCycle - 1) % 24) + 1;
     const _lobe = ayinBetInfo.isBreak ? null : CHESED_LOBES[ayinBetInfo.cycle - 1];
-    document.getElementById('chesed-cycle-name').innerHTML =
-      'Shem Ayin-Bet — 72-Day Cycle';
-    document.getElementById('chesed-main').innerHTML = ayinBetInfo.isBreak
+    // The leap year's 28 days are Chesed's own shape in miniature: five blocks
+    // parted by four silences, exactly as the year is — and the twenty-four
+    // priestly watches run once through them, five to a lobe and four to the
+    // last. 24 + 4 = 28. The year says the watches fifteen times over and is
+    // parted four times; the microcosm says them once and is parted four times.
+    // While it runs, the cycle of 72s holds where it stood and resumes after,
+    // so no Name is said twice and none is missed.
+    const chesedMic = (inExtra && extraDay >= 1 && extraDay <= 28) ? (() => {
+      const BLOCK = [[1, 5], [7, 11], [13, 17], [19, 23], [25, 28]];  // day ranges of the five
+      const SILENCE = [6, 12, 18, 24];
+      const sIdx = SILENCE.indexOf(extraDay);
+      if (sIdx >= 0) return { day: extraDay, total: 28, silence: sIdx + 1,
+        after: CHESED_LOBES[sIdx], next: CHESED_LOBES[sIdx + 1] };
+      const b = BLOCK.findIndex(([a, z]) => extraDay >= a && extraDay <= z);
+      const watch = extraDay - SILENCE.filter(x => x < extraDay).length;   // 1-24
+      return { day: extraDay, total: 28, silence: 0, lobe: CHESED_LOBES[b],
+               block: b + 1, watch, mishmar: MISHMAROT_24[watch - 1] };
+    })() : null;
+    document.getElementById('chesed-cycle-name').innerHTML = chesedMic
+      ? 'Shem Ayin-Bet — Leap Year Microcosm'
+      : 'Shem Ayin-Bet — 72-Day Cycle';
+    document.getElementById('chesed-main').innerHTML = chesedMic
+      ? (chesedMic.silence
+          ? `Microcosm Day <strong>${chesedMic.day}</strong> of 28 — a silent day<br>` +
+            `<span style="font-size:0.88em;opacity:0.72">between the ${chesedMic.after.book} lobe and the ${chesedMic.next.book}</span>`
+          : `Microcosm Day <strong>${chesedMic.day}</strong> of 28 — <strong>${chesedMic.lobe.book}</strong>, the ${chesedMic.lobe.nth} lobe of the ${chesedMic.lobe.side}<br>` +
+            `<span style="font-size:0.88em;opacity:0.72">Mishmar ${chesedMic.watch} of 24: <span style="font-size:1.1em;color:var(--ink)">${chesedMic.mishmar.he}</span> — ${chesedMic.mishmar.en}</span>`) +
+        `<br><span style="font-size:0.85em;color:var(--ink-dim)">The five lobes in 28 days — the twenty-four watches once through</span>`
+      : ayinBetInfo.isBreak
       ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
       : `Day <strong>${ayinBetInfo.nameNum}</strong> &middot; Cycle ${ayinBetInfo.cycle} of 5: <strong>${ayinBetInfo.name}</strong><br>` +
         `<span style="font-size:0.85em;color:var(--ink-mid)">${_lobe ? `${_lobe.book} — the ${_lobe.nth} lobe of the ${_lobe.side}` : ''}</span><br>` +
@@ -13207,6 +13239,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // when this was built; reconstructing 216 letters of Shemot 14:19-21
       // from memory alone was judged too risky for daily sacred-Name use).
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Shem Ayin-Bet — The 72-Fold Name</div>
+       ${chesedMic ? `<div class="detail-row"><span class="detail-label">Microcosm:</span><span class="detail-value">Day ${chesedMic.day} of 28 — the five lobes in miniature, parted by four silences as the year is, and the twenty-four watches once through. ${chesedMic.silence ? `Today is silent, between the ${chesedMic.after.book} lobe and the ${chesedMic.next.book}.` : `Today stands in ${chesedMic.lobe.book}, Mishmar ${chesedMic.watch} of 24 — ${chesedMic.mishmar.en}.`} The cycle of 72s holds where it stood and resumes on 26 Adar I.</span></div>` : ''}
        <div class="detail-row"><span class="detail-label">${ayinBetInfo.isBreak ? 'Today:' : `Name ${ayinBetInfo.nameNum}:`}</span><span class="detail-value">${ayinBetInfo.isBreak ? `A silent day — between Cycle ${ayinBetInfo.afterCycle} and Cycle ${ayinBetInfo.afterCycle + 1}` : ayinBetInfo.name}</span></div>
        <div class="detail-row"><span class="detail-label">Lobe of the Lung:</span><span class="detail-value">${_lobe
          ? `the ${_lobe.nth} of the ${_lobe.side} — <strong>${_lobe.book}</strong> <span style="font-size:1.05em">${_lobe.he}</span>`
