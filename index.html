@@ -234,7 +234,13 @@ letter-spacing: 1px;
   display: inline-block;
   color: var(--ink-dim);
   transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.25s ease;
-  padding: 0 1px;
+  /* The headings are 9px; the star is drawn well above that and padded out,
+     so there is something to aim at without moving the line it sits in. */
+  font-size: 1.55em;
+  line-height: 0;
+  vertical-align: -0.14em;
+  padding: 10px 6px;
+  margin: -10px -2px -10px -6px;
 }
 .star-mark:hover { color: var(--gold-mid); }
 /* Lit in the sun's own gold — brighter than the heading it sits in, so a
@@ -242,11 +248,7 @@ letter-spacing: 1px;
 .star-mark.lit {
   color: #dfa016;
   text-shadow: 0 0 6px rgba(223, 160, 22, 0.9);
-  transform: scale(1.25);
-}
-#stars-glyph.lit {
-  color: #dfa016;
-  text-shadow: 0 0 6px rgba(223, 160, 22, 0.85);
+  transform: scale(1.15);
 }
 .dc-time {
   font-family: 'Cinzel', serif;
@@ -1738,18 +1740,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="dc-sep">·</div>
     <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag in order · tap for Today's Path">
       <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
-        <svg id="maalot-moon-svg" width="18" height="18" viewBox="0 0 22 22" style="display:block"><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
+        <svg id="maalot-moon-svg" width="27" height="27" viewBox="-6 -6 34 34" style="display:block;overflow:visible">
+          <g id="maalot-stars"></g><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
         <span id="maalot-moon-count" style="font-size:11px;color:var(--gold);">0/15</span>
+        <span id="stars-count" style="font-size:10px;color:var(--gold-mid);opacity:0.85;"></span>
       </div>
       <div class="dc-label">Ma'alot &nbsp;מעלות</div>
-    </div>
-    <div class="dc-sep">·</div>
-    <div class="dc-col" id="stars-col" title="The surrounding light — tap any ✡ in the cards to gather it">
-      <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
-        <span id="stars-glyph" style="font-size:15px;color:var(--ink-dim);line-height:1;">✡&#xFE0E;</span>
-        <span id="stars-count" style="font-size:11px;color:var(--gold);">0</span>
-      </div>
-      <div class="dc-label">Stars &nbsp;כּוֹכָבִים</div>
     </div>
   </div>
 
@@ -10943,6 +10939,33 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     });
   }
 
+  // A ring of eight small stars around the moon — the surrounding light, drawn
+  // where it belongs. Each is three crossed strokes, which reads as a star at
+  // this size where a hexagram would only smudge. They light one by one with
+  // the first eight gathered; past eight the sky simply stands full, and the
+  // exact number is beside the count.
+  const STARS_IN_RING = 8;
+  function buildStarRing() {
+    const g = document.getElementById('maalot-stars');
+    if (!g || g.childNodes.length) return;
+    const cx = 11, cy = 11, r = 15.5, arm = 2.3;
+    let html = '';
+    for (let i = 0; i < STARS_IN_RING; i++) {
+      const a = (i / STARS_IN_RING) * Math.PI * 2 - Math.PI / 2;
+      const x = (cx + r * Math.cos(a)).toFixed(2), y = (cy + r * Math.sin(a)).toFixed(2);
+      let rays = '';
+      for (let k = 0; k < 3; k++) {              // three strokes = six points
+        const t = (k / 3) * Math.PI + (i % 2 ? Math.PI / 6 : 0);
+        const dx = (arm * Math.cos(t)).toFixed(2), dy = (arm * Math.sin(t)).toFixed(2);
+        rays += `<line x1="${(+x - dx).toFixed(2)}" y1="${(+y - dy).toFixed(2)}" ` +
+                `x2="${(+x + +dx).toFixed(2)}" y2="${(+y + +dy).toFixed(2)}"/>`;
+      }
+      html += `<g class="ring-star" data-i="${i}" stroke="var(--gold)" stroke-width="0.62" ` +
+              `stroke-linecap="round" opacity="0.13">${rays}</g>`;
+    }
+    g.innerHTML = html;
+  }
+
   function applyStarState() {
     if (!_starsKey) return;
     markStarGlyphs();
@@ -10953,10 +10976,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       el.classList.toggle('lit', on);
       if (on) lit.add(el.dataset.star);
     });
+    buildStarRing();
+    const n = lit.size;
+    document.querySelectorAll('#maalot-stars .ring-star').forEach((g, i) => {
+      const on = i < Math.min(STARS_IN_RING, n);
+      g.setAttribute('opacity', on ? '0.95' : '0.13');
+      g.setAttribute('stroke', on ? '#dfa016' : 'var(--gold)');
+    });
     const cnt = document.getElementById('stars-count');
-    const glyph = document.getElementById('stars-glyph');
-    if (cnt) cnt.textContent = String(lit.size);
-    if (glyph) glyph.classList.toggle('lit', lit.size > 0);
+    if (cnt) cnt.textContent = n ? '✡\uFE0E' + n : '';
+    const wrap = document.getElementById('maalot-moon');
+    if (wrap) wrap.title = "Today's ma'alot — tap each מעלה tag in order · tap for Today's Path" +
+      (n ? ` · ${n} star${n === 1 ? '' : 's'} gathered` : '');
   }
 
   // Capture-phase, like the prayer tags: a tap on a star must not expand or
