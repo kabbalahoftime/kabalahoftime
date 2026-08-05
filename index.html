@@ -11498,8 +11498,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Day 46 is the heart, לוי; the days at 23 and 69 are the כְּלָיוֹת — "the
   // kidneys counsel and the heart understands" (Berachot 61a), and it is the
   // kidneys and the heart together that are tested (Yirmiyahu 11:20). One
-  // counsels for good and one for ill, and these two sit one in the running
-  // out and one in the returning.
+  // counsels for good and one for ill. The first falls in the running out and
+  // is the right, Netzach; the second in the returning and is the left, Hod —
+  // the two counsellors standing either side of the heart, as they stand
+  // either side of the body.
   //
   // What the day does is unspell the letters: a quarter is twenty-two of them,
   // and between two alphabets falls what is no letter and yet is what lets a
@@ -13280,7 +13282,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const _seasonHalfShort = _seasonHalf;
     const _seasonLine = `Day ${seasonInfo.dayIn} of 91 · ${_seasonHalf} of ${seasonInfo.name}`;
     const _partName = pl => pl.heart ? 'The Heart'
-      : (pl.silent ? `Kidney ${pl.silent} of 2` : `Quarter ${pl.quarter} of 4`);
+      : (pl.silent ? `${pl.silent === 1 ? 'Right' : 'Left'} Kidney` : `Quarter ${pl.quarter} of 4`);
     const _gevPart = gevMic ? _partName(gevMic)
       : (seasonInfo.breakAt ? _partName(seasonInfo)
                             : `Quarter ${seasonInfo.quarter} of 4 · day ${seasonInfo.inQuarter} of 22`);
@@ -13294,7 +13296,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const _heartLine = (() => {
       const pl = gevMic || seasonInfo;
       if (pl.heart) return `✦ Heart of ${(gevMic || seasonInfo).name}${_heartName ? ' — ' + _heartName : ''}`;
-      if (pl.silent) return `✦ Kidney כִּלְיָה — between quarters ${pl.silent === 1 ? '1 and 2' : '3 and 4'}`;
+      if (pl.silent) return pl.silent === 1
+        ? `✦ Right Kidney · Netzach — between quarters 1 and 2`
+        : `✦ Left Kidney · Hod — between quarters 3 and 4`;
       return '';
     })();
     document.getElementById('gevurah-cycle-name').innerHTML = gevMic
@@ -13383,8 +13387,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Four Seasons — 91-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${gevMic ? `held at Day ${seasonInfo.dayIn} of 91 · ${seasonInfo.name} — the count of 364 pauses for these 28 days and resumes on 26 Adar I` : `${_seasonLine} ${seasonInfo.hebrew}`}</span></div>
        ${_eicha ? `<div class="detail-row"><span class="detail-label">Eicha:</span><span class="detail-value">${_eichaLink} — ${_eicha.note}. Its four acrostics are the four quarters: chapters 1, 2 and 4 one verse to a letter, chapter 3 three, and chapter 5 — which has no acrostic — on the hearts.</span></div>` : ''}
-       <div class="detail-row"><span class="detail-label">Within the 91:</span><span class="detail-value">${_gevPart} — 22 + 1 + 22 + 1 + 22 + 1 + 22, four quarters of the alef-bet, two kidneys and the heart between them. The kidneys counsel and the heart understands (Berachot 61a). On all three the letters go unspelt — vowels are the life of letters (Keter Shem Tov 207) — and the chapter read is Eicha 5, which keeps its twenty-two verses and will not spell them</span></div>${gevMic ? `
-       <div class="detail-row"><span class="detail-label">Microcosm:</span><span class="detail-value">Day ${gevMic.day} of 28 — the four seasons in miniature, seven parts to each: today stands for ${gevMic.name}, ${gevMic.heart ? 'its heart' : (gevMic.silent ? 'its kidney ' + gevMic.silent : 'quarter ' + gevMic.quarter)}</span></div>` : ''}
+       <div class="detail-row"><span class="detail-label">Within the 91:</span><span class="detail-value">${_gevPart} — 22 + 1 + 22 + 1 + 22 + 1 + 22, four quarters of the alef-bet, two kidneys and the heart between them. The kidneys counsel and the heart understands (Berachot 61a): the right — כִּלְיָה יְמָנִית, Netzach — counsels on the way out, the left — כִּלְיָה שְׂמָאלִית, Hod — on the way back. On all three the letters go unspelt — vowels are the life of letters (Keter Shem Tov 207) — and the chapter read is Eicha 5, which keeps its twenty-two verses and will not spell them</span></div>${gevMic ? `
+       <div class="detail-row"><span class="detail-label">Microcosm:</span><span class="detail-value">Day ${gevMic.day} of 28 — the four seasons in miniature, seven parts to each: today stands for ${gevMic.name}, ${gevMic.heart ? 'its heart' : (gevMic.silent ? (gevMic.silent === 1 ? 'its right kidney' : 'its left kidney') : 'quarter ' + gevMic.quarter)}</span></div>` : ''}
        <div class="detail-row"><span class="detail-label">Motion:</span><span class="detail-value">${_seasonHalf} — ${_seasonHalfHeb}: ${_seasonMotion}${_heartName ? ' · ' + _heartName : ''}</span></div>
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Each season is one רצוא ושוב of its Chayah (Yechezkel 1:14) — 45 days in, the heart, 45 days out. Both halves are the same measure, 45 = מ״ה = אדם, so nothing is divided between them; only the direction changes. Winter shows it plainly: its heart is Tu B’Shvat, the day the sap turns and begins its return.</div>
        <div class="detail-row"><span class="detail-label">Chayot HaKodesh:</span><span class="detail-value">${(gevMic || seasonInfo).chayah}</span></div>
