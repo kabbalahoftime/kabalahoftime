@@ -12257,25 +12257,58 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // The Abuchatzeira line, in the card of Yesod — the sefirah of the tzaddik,
     // who is the foundation of the world. It sits with the Ben Ish Chai and the
     // Chida, the same Sephardic stream, and its hilula is named on the day.
-    // Only the dates this app can vouch for are here: the Baba Sali's, which
-    // Likutei Moharan 126 is already placed on, and the Abir Yaakov's.
+    // Four instalments of Hidden Tzadikim, each drawn from R. Avraham Mugrabi's
+    // Maase Nissim — he married a daughter of R. Avraham Abuchatzeira and heard
+    // these from the family itself. Part 15 is the dafyomireview mirror.
+    const ABU_LINKS = [
+      ['The Family',   'https://www.dafyomi.co.il/general/info/torahau/hidden_tzadikim.php?d=14'],
+      ['Abir Yaakov',  'https://dafyomireview.com/hidden_tzadikim.php?d=15'],
+      ['Baba Sali',    'https://www.dafyomi.co.il/general/info/torahau/hidden_tzadikim.php?d=16'],
+      ['R. Meir',      'https://www.dafyomi.co.il/general/info/torahau/hidden_tzadikim.php?d=17'],
+    ].map(([n, u]) => `<a href="${u}" target="_blank" style="color:var(--gold)">${n}</a>`)
+     .join(' &nbsp;·&nbsp; ')
+     + ' &nbsp;·&nbsp; <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold)">A\u2019ufa Eshkona ↗</span>';
+
+    // Ten of them, from 14 Kislev round to 27 Tammuz. The Adar yahrzeit falls
+    // in Adar I when the year has two — Sephardic practice follows the Mechaber
+    // (Shulchan Aruch, Orach Chaim 568:7), against the Rema's Adar II, and this
+    // is a Moroccan house. Month 12 is Adar in an ordinary year and Adar I in a
+    // leap year, so it needs no special case.
     const ABUCHATZEIRA = [
+      { m: 9,  d: 14, name: 'R. David Abuchatzeira — the Ateret Tiferet',
+        note: 'Tafilalet, Morocco · 14 Kislev — elder brother of the Baba Sali' },
+      { m: 9,  d: 15, name: 'R. Avraham Abuchatzeira — the Baba Baba',
+        note: 'Tiberias · 15 Kislev — son of the Baba Sali' },
       { m: 10, d: 20, name: 'R. Yaakov Abuchatzeira — the Abir Yaakov',
-        note: 'Tafilalt, buried in Damanhur · 20 Tevet 5640' },
+        note: 'Damanhour, Egypt · 20 Tevet — the patriarch of the line' },
       { m: 11, d: 4,  name: 'R. Yisrael Abuchatzeira — the Baba Sali',
-        note: 'Netivot · 4 Shevat 5744' },
+        note: 'Netivot · 4 Shevat' },
+      { m: 11, d: 14, name: 'R. Yitzchak Abuchatzeira', piyut: true,
+        note: 'Toulal, Morocco · 14 Shevat — fourth and youngest son of the Abir Yaakov, uncle to the Baba Sali, who composed A\u2019ufa Eshkona' },
+      { m: 12, d: 25, name: 'R. Yitzchak Abuchatzeira — the Baba Khaki',
+        note: 'Ramla · 25 Adar — Chief Sephardic Rabbi of Ramla and Lod' },
+      { m: 1,  d: 17, name: 'R. Meir Abuchatzeira — the Baba Meir',
+        note: 'Ashdod · 17 Nissan — eldest son and heir to the Baba Sali' },
+      { m: 2,  d: 2,  name: 'R. Shmuel Abuchatzeira',
+        note: 'Erfoud, Morocco · 2 Iyar — grandson of the Abir Yaakov, first cousin to the Baba Sali' },
+      { m: 2,  d: 12, name: 'R. Masoud Abuchatzeira',
+        note: 'Rissani, Morocco · 12 Iyar — elder son of the Abir Yaakov and father of the Baba Sali, who passed him the leadership in 1908' },
+      { m: 4,  d: 27, name: 'R. Elazar Abuchatzeira — the Baba Elazar',
+        note: 'Netivot, beside the Baba Sali · 27 Tammuz — son of the Baba Meir, grandson of the Baba Sali' },
     ];
     (() => {
       const today = ABUCHATZEIRA.find(a => a.m === hMonth && a.d === hDay);
       const main = document.getElementById('yesod-abu-main');
       const meta = document.getElementById('yesod-abu-meta');
       if (!main) return;
+      // On an ordinary day the section is only its readings; the line about the
+      // house is kept for the days that are its own.
+      main.style.display = today ? '' : 'none';
       main.innerHTML = today
-        ? `<strong style="color:var(--gold-mid)">Hilula — ${today.name}</strong>`
-        : 'Four generations of tzaddikim from Tafilalt to Netivot';
-      meta.innerHTML = today
-        ? today.note
-        : 'The Abir Yaakov · the Baba Sali — the tzaddik is the foundation of the world';
+        ? `<strong style="color:var(--gold-mid)">Hilula — ${today.name}</strong>` +
+          (today.piyut ? ` <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold);font-size:0.9em">· אָעוּפָה אֶשְׁכֹּנָה ↗</span>` : '')
+        : '';
+      meta.innerHTML = (today ? today.note + '<br>' : '') + ABU_LINKS;
     })();
 
     // Daily Hida (Yesod card)
@@ -14702,6 +14735,30 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function openYomChazakModal() {
     openInfoPopup('Strong Day — יום חזק', _ycDetailMain, _ycDetailMeta);
+  }
+
+  // A'ufa Eshkona — the piyut of the Abuchatzeira house, sung at its hilulot.
+  // R. Yitzchak, fourth and youngest son of the Abir Yaakov, wrote it in
+  // Morocco at the turn of the twentieth century. Ten couplets in the voice of
+  // Shir HaShirim, quoting it outright, but ending where that book does not —
+  // in the meeting. The soul flies out to the
+  // desert after a beloved who has gone, is struck by the watchmen who should
+  // have helped her, and is answered from the other side — rise, my sister,
+  // your redeemer is coming. Its ninth couplet is Yirmiyahu 2:2, "I remember
+  // for you the kindness of your youth", which is Micha's thirteenth Attribute
+  // — מִימֵי קֶדֶם, the days of old — as Tomer Devorah reads it in Tiferet:
+  // when no merit is left, He reaches back to the love of the first days.
+  //
+  // The Hebrew alone is carried here — the piyut itself, from the 1800s. The
+  // English translation on the National Library's page is Abigail Denemark's
+  // own work, so it is credited and linked rather than copied in.
+  const AUFA_ESHKONA = `<div style="font-size:0.82rem;color:var(--ink-mid);font-style:italic;line-height:1.6;margin-bottom:12px;">Morocco, at the turn of the twentieth century. It speaks in the language of Shir HaShirim and quotes it outright — but where that book leaves the lovers still seeking, this one ends in their meeting.</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">אָעוּפָה אֶשְׁכֹּנָה וְאַרְחִיקָה נְדֹד<br>בַּמִּדְבָּר אָלִינָה וְאוּלַי אֶמְצָא דּוֹד</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">נֶשֶׁק אַהֲבָתוֹ בְּלִבִּי בֹּעֵרָה<br>מִיּוֹם פְּרֵדָתוֹ נַפְשִׁי עָלַי מָרָה</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">יְדִיד מֶנִי בָּרַח הָלַךְ עֲזָבַנִי<br>אֵיזוֹ דֶּרֶךְ אָרַח וְאֵלְכָה גַּם אֲנִי</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">יָצָאתִי לְבַקֵּשׁ דּוֹדִי בֵּין חֲבֵרִים<br>נִלְכַּדְתִּי בְּמוֹקֵשׁ הִכּוּנִי הַשֹּׁמְרִים</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">צִפִּיתִי לְדוֹדִי מָתַי יָבוֹא אֵלַי<br>יַלְבִּישֵׁנִי עֶדְיִי וִירַחֵם עָלַי</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">חֲשֹׂף זְרוֹעֲךָ לְקַבֵּץ פְּזוּרִים<br>גַּלֵּה קֵץ יִשְׁעֲךָ וְדִגְלְךָ הָרֵם</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">קוּמִי יְחִידָתִי וְשׁוּבִי בִּתְשׁוּבָה<br>אֲחוֹתִי רַעְיָתִי הִנֵּה גוֹאֲלֵךְ בָּא</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">חֲמוּדָה יְקָרָה רַבַּת הַמַּעֲלוֹת<br>גַּם מִפָּז נִבְחָרָה צְאִי נָא בִמְחוֹלוֹת</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">זָכַרְתִּי לָךְ חֶסֶד נְעוּרַיִךְ נְעוּרִים<br>הֵיכָלֵךְ אֲיַסֵּד בְּאַבְנֵי סַפִּירִים</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">קוֹל דּוֹדִי הִנֵּה בָּא מְדַלֵּג עַל הֶהָרִים<br>קוּמִי לָךְ אֲהוּבָה כִּי בָּא קֵץ דְּרוֹרִים</div>`;
+  function openAufaModal() {
+    openInfoPopup('אָעוּפָה אֶשְׁכֹּנָה — A\u2019ufa Eshkona', AUFA_ESHKONA,
+      '<a href="https://youtu.be/ApXR2xxn29I" target="_blank" style="color:var(--gold)">Listen ↗</a>' +
+      ' &nbsp;·&nbsp; <a href="https://www.nli.org.il/en/discover/music/jewish-music/piyut/piyut/aufa-eshkona" target="_blank" style="color:var(--gold)">National Library of Israel</a>' +
+      '<br>R. Yitzchak Abuchatzeira, fourth and youngest son of the Abir Yaakov · 14 Shevat' +
+      '<br>English translation there by Abigail Denemark');
   }
 
   function openZoharDailyModal() {
