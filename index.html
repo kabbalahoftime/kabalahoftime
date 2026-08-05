@@ -722,6 +722,22 @@ color: var(--ink-dim);
 margin-top: 6px;
 }
 
+/* The daily-summary popup carries paragraphs, not a line or two: upright
+   rather than italic, larger, and with the leading to be read at length. */
+#info-popup-main {
+font-size: 14.5px;
+font-style: normal;
+line-height: 1.72;
+}
+#info-popup-meta { font-size: 12px; }
+.dsum {
+display: block;
+margin-top: 7px;
+font-size: 14.5px;
+color: var(--ink-mid);
+line-height: 1.72;
+}
+
 .keter-meta strong {
 color: var(--gold);
 }
@@ -1618,6 +1634,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   .sefirah-sub-text { font-size: 15px; }
   .keter-main { font-size: 15px; }
   .keter-meta { font-size: 12.5px; }
+  #info-popup-main, .dsum { font-size: 15.5px; }
   .keter-section-label { font-size: 10.5px; }
   .sefirah-cycle-name { font-size: 11px; }
   .detail-row { font-size: 15px; }
@@ -1911,13 +1928,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        "none" transform on it a permanent containing block for fixed-position
        descendants, breaking this modal's full-viewport inset:0 overlay. -->
   <div id="info-popup-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
-    <div class="heb-picker-card" style="width:300px;">
-      <div class="heb-picker-header">
+    <div class="heb-picker-card" style="width:min(560px,94vw); max-height:86vh; box-sizing:border-box; display:flex; flex-direction:column;">
+      <div class="heb-picker-header" style="flex:0 0 auto; margin-bottom:12px;">
         <span class="heb-picker-title" id="info-popup-title"></span>
         <button class="heb-picker-close" onclick="closeInfoPopup()">×</button>
       </div>
-      <div class="keter-main" id="info-popup-main" style="margin-bottom:10px;"></div>
-      <div class="keter-meta" id="info-popup-meta"></div>
+      <!-- The header stays put; only the reading scrolls -->
+      <div style="overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1 1 auto;">
+        <div class="keter-main" id="info-popup-main" style="margin-bottom:10px;"></div>
+        <div class="keter-meta" id="info-popup-meta"></div>
+      </div>
     </div>
   </div>
 
@@ -12297,7 +12317,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         if (zTrigger) zTrigger.style.display = zSummary ? '' : 'none';
         if (zSummary) {
           _zoharDetailMain = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>` +
-            `<br><span style="font-size:11px;color:var(--ink-mid)">${zSummary}</span>`;
+            `<span class="dsum">${zSummary}</span>`;
           _zoharDetailMeta = `R. Shimon bar Yochai · ${todayFolios} folios today`;
         }
         // The year-round folio cycle lives in the Keter Rashbi & Rebbe Nachman
@@ -12400,7 +12420,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // The lesson label itself is the link, matching the card face
       _lmDetailMain = lmInfos.map(({ daily, info }) =>
         `${info.url ? `<a href="${info.url}" target="_blank" style="color:var(--gold)">${info.label}</a>` : info.label}` +
-        `<br><span style="font-size:11px;color:var(--ink-mid)">${daily.summary}</span>`
+        `<span class="dsum">${daily.summary}</span>`
       ).join('<br><br>');
       _lmDetailMeta = '';
     }
