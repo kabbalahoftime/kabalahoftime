@@ -12253,6 +12253,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Chida, the same Sephardic stream, and its hilula is named on the day.
     // Only the dates this app can vouch for are here: the Baba Sali's, which
     // Likutei Moharan 126 is already placed on, and the Abir Yaakov's.
+    // Hidden Tzadikim, the instalments that carry this line. The four are as
+    // given; part 15 is the dafyomireview mirror of the same series.
+    const ABU_LINKS = ['Hidden Tzadikim: '].concat([
+      ['14', 'https://www.dafyomi.co.il/general/info/torahau/hidden_tzadikim.php?d=14'],
+      ['15', 'https://dafyomireview.com/hidden_tzadikim.php?d=15'],
+      ['16', 'https://www.dafyomi.co.il/general/info/torahau/hidden_tzadikim.php?d=16'],
+      ['17', 'https://www.dafyomi.co.il/general/info/torahau/hidden_tzadikim.php?d=17'],
+    ].map(([n, u]) => `<a href="${u}" target="_blank" style="color:var(--gold)">${n}</a>`)
+     .join(' &nbsp;·&nbsp; ')).join('');
+
     const ABUCHATZEIRA = [
       { m: 10, d: 20, name: 'R. Yaakov Abuchatzeira — the Abir Yaakov',
         note: 'Tafilalt, buried in Damanhur · 20 Tevet 5640' },
@@ -12267,9 +12277,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       main.innerHTML = today
         ? `<strong style="color:var(--gold-mid)">Hilula — ${today.name}</strong>`
         : 'Four generations of tzaddikim from Tafilalt to Netivot';
-      meta.innerHTML = today
-        ? today.note
-        : 'The Abir Yaakov · the Baba Sali — the tzaddik is the foundation of the world';
+      meta.innerHTML = (today ? today.note
+        : 'The Abir Yaakov · the Baba Sali — the tzaddik is the foundation of the world')
+        + '<br>' + ABU_LINKS;
     })();
 
     // Daily Hida (Yesod card)
