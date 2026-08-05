@@ -11494,13 +11494,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       note:'The Lion in the mazal of the lion — Gevurah and its rebuilding' }
   ];
 
-  const SEASON_HEARTS = [23, 46, 69];
+  // Day 46 alone is the heart. The two days that part the other quarters are
+  // silent days — the word Chesed's 72s already use for a divider carrying no
+  // count of its own, and the right one here: the letters stop, and the chapter
+  // read on them is the one with no acrostic. It is Eicha's own motif —
+  // יֵשֵׁב בָּדָד וְיִדֹּם, he sits alone and is silent.
+  const SEASON_BREAKS = [23, 46, 69];
 
   // Eicha across the four quarters. Its four acrostic chapters are exactly the
   // four quarters of a season: chapters 1, 2 and 4 give one verse to a letter,
   // and chapter 3 gives three — so every quarter runs one letter a day for its
   // twenty-two days, whatever the weight of the day. Chapter 5 has 22 verses
-  // and no acrostic at all, which puts it on the three hearts, where the
+  // and no acrostic at all, which puts it on the two silent days and the heart, where the
   // counting stops. Chapter 1 keeps the ordinary order of the letters; 2, 3
   // and 4 all set פ before ע.
   const EICHA_LETTERS      = ['א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת'];
@@ -11508,7 +11513,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   const eichaUrl = ref => `https://www.sefaria.org/Lamentations.${ref}?lang=bi`;
   function eichaFor(place) {
     if (!place) return null;
-    if (place.heart) return { whole: true, chapter: 5, label: 'Eicha 5', ref: '5',
+    if (place.breakAt) return { whole: true, chapter: 5, label: 'Eicha 5', ref: '5',
       note: 'the chapter with no acrostic, on the day the letters stop' };
     const ch = place.quarter, n = place.inQuarter;
     if (!ch || !n) return null;
@@ -11522,11 +11527,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       note: 'one verse to the letter' };
   }
   function seasonPlace(dayIn) {
-    const h = SEASON_HEARTS.indexOf(dayIn);
-    if (h >= 0) return { heart: h + 1, quarter: null, inQuarter: 0, part: (h + 1) * 2 };
+    const b = SEASON_BREAKS.indexOf(dayIn);
+    if (b >= 0) return { heart: b === 1 ? 1 : null, silent: b === 1 ? null : (b === 0 ? 1 : 2),
+                         breakAt: b + 1, quarter: null, inQuarter: 0, part: (b + 1) * 2 };
     const quarter = dayIn < 23 ? 1 : dayIn < 46 ? 2 : dayIn < 69 ? 3 : 4;
-    return { heart: null, quarter, inQuarter: dayIn - [0, 0, 23, 46, 69][quarter],
-             part: quarter * 2 - 1 };
+    return { heart: null, silent: null, breakAt: 0, quarter,
+             inQuarter: dayIn - [0, 0, 23, 46, 69][quarter], part: quarter * 2 - 1 };
   }
 
   function getSeasonInfo(d) {
@@ -13220,10 +13226,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const gevMic = (inExtra && extraDay >= 1 && extraDay <= 28) ? (() => {
       const season = Math.ceil(extraDay / 7);
       const part   = ((extraDay - 1) % 7) + 1;
-      const isHeart = part % 2 === 0;
-      return { day: extraDay, total: 28, season, part,
-               quarter: isHeart ? null : (part + 1) / 2,
-               heart:   isHeart ? part / 2 : null,
+      const b = part % 2 === 0 ? part / 2 : 0;   // 1, 2, 3 — the season's three breaks
+      return { day: extraDay, total: 28, season, part, breakAt: b,
+               quarter: b ? null : (part + 1) / 2,
+               heart:   b === 2 ? 1 : null,
+               silent:  b === 1 ? 1 : (b === 3 ? 2 : null),
                ...GEVURAH_SEASONS[season - 1] };
     })() : null;
     // Day 46 is the exact centre of the 91 (45 before, 45 after) — the season's
@@ -13263,10 +13270,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // would make the layout shift mid-season). The detail keeps the full wording.
     const _seasonHalfShort = _seasonHalf;
     const _seasonLine = `Day ${seasonInfo.dayIn} of 91 · ${_seasonHalf} of ${seasonInfo.name}`;
-    const _gevPart = gevMic
-      ? (gevMic.heart ? `Heart ${gevMic.heart} of 3` : `Quarter ${gevMic.quarter} of 4`)
-      : (seasonInfo.heart ? `Heart ${seasonInfo.heart} of 3`
-                          : `Quarter ${seasonInfo.quarter} of 4 · day ${seasonInfo.inQuarter} of 22`);
+    const _partName = pl => pl.heart ? 'The Heart'
+      : (pl.silent ? `Silent Day ${pl.silent} of 2` : `Quarter ${pl.quarter} of 4`);
+    const _gevPart = gevMic ? _partName(gevMic)
+      : (seasonInfo.breakAt ? _partName(seasonInfo)
+                            : `Quarter ${seasonInfo.quarter} of 4 · day ${seasonInfo.inQuarter} of 22`);
     const _eicha = eichaFor(gevMic || seasonInfo);
     const _eichaLink = _eicha
       ? `<a href="${eichaUrl(_eicha.ref)}" target="_blank" style="color:var(--gold)">${_eicha.label}</a>` +
@@ -13276,9 +13284,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // quarters they stand between, so all three read as the same kind of day.
     const _heartLine = (() => {
       const pl = gevMic || seasonInfo;
-      if (!pl.heart) return '';
-      if (pl.heart === 2) return `✦ Heart of ${(gevMic || seasonInfo).name}${_heartName ? ' — ' + _heartName : ''}`;
-      return `✦ Heart ${pl.heart} of 3 — between quarters ${pl.heart === 1 ? '1 and 2' : '3 and 4'}`;
+      if (pl.heart) return `✦ Heart of ${(gevMic || seasonInfo).name}${_heartName ? ' — ' + _heartName : ''}`;
+      if (pl.silent) return `✦ Silent Day — between quarters ${pl.silent === 1 ? '1 and 2' : '3 and 4'}`;
+      return '';
     })();
     document.getElementById('gevurah-cycle-name').innerHTML = gevMic
       ? 'Four Seasons — Leap Year Microcosm'
@@ -13287,7 +13295,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} — <strong>${gevMic.name}</strong>, ${_gevPart}:<br>` +
         `<strong>${gevMic.chayah}</strong><br>` +
         `<span style="font-size:0.88em;opacity:0.72">${gevMic.animal} · Angel ${gevMic.angel}</span><br>` +
-        (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${gevMic.heart ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}</span><br>` : '') +
+        (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}</span><br>` : '') +
         `<span style="font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</span>`
       : `Day <strong>${seasonInfo.dayIn}</strong> · <strong>${seasonInfo.name}</strong><span style="font-size:0.85em">, ${_seasonHalfShort}</span>:<br>` +
         `<strong>${seasonInfo.chayah}</strong><br>` +
@@ -13366,8 +13374,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Four Seasons — 91-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${gevMic ? `held at Day ${seasonInfo.dayIn} of 91 · ${seasonInfo.name} — the count of 364 pauses for these 28 days and resumes on 26 Adar I` : `${_seasonLine} ${seasonInfo.hebrew}`}</span></div>
        ${_eicha ? `<div class="detail-row"><span class="detail-label">Eicha:</span><span class="detail-value">${_eichaLink} — ${_eicha.note}. Its four acrostics are the four quarters: chapters 1, 2 and 4 one verse to a letter, chapter 3 three, and chapter 5 — which has no acrostic — on the hearts.</span></div>` : ''}
-       <div class="detail-row"><span class="detail-label">Within the 91:</span><span class="detail-value">${_gevPart} — 22 + 1 + 22 + 1 + 22 + 1 + 22, four quarters of the alef-bet and three hearts</span></div>${gevMic ? `
-       <div class="detail-row"><span class="detail-label">Microcosm:</span><span class="detail-value">Day ${gevMic.day} of 28 — the four seasons in miniature, seven parts to each: today stands for ${gevMic.name}, ${gevMic.heart ? 'heart ' + gevMic.heart : 'quarter ' + gevMic.quarter}</span></div>` : ''}
+       <div class="detail-row"><span class="detail-label">Within the 91:</span><span class="detail-value">${_gevPart} — 22 + 1 + 22 + 1 + 22 + 1 + 22, four quarters of the alef-bet, two silent days, and the heart between them</span></div>${gevMic ? `
+       <div class="detail-row"><span class="detail-label">Microcosm:</span><span class="detail-value">Day ${gevMic.day} of 28 — the four seasons in miniature, seven parts to each: today stands for ${gevMic.name}, ${gevMic.heart ? 'its heart' : (gevMic.silent ? 'its silent day ' + gevMic.silent : 'quarter ' + gevMic.quarter)}</span></div>` : ''}
        <div class="detail-row"><span class="detail-label">Motion:</span><span class="detail-value">${_seasonHalf} — ${_seasonHalfHeb}: ${_seasonMotion}${_heartName ? ' · ' + _heartName : ''}</span></div>
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Each season is one רצוא ושוב of its Chayah (Yechezkel 1:14) — 45 days in, the heart, 45 days out. Both halves are the same measure, 45 = מ״ה = אדם, so nothing is divided between them; only the direction changes. Winter shows it plainly: its heart is Tu B’Shvat, the day the sap turns and begins its return.</div>
        <div class="detail-row"><span class="detail-label">Chayot HaKodesh:</span><span class="detail-value">${(gevMic || seasonInfo).chayah}</span></div>
