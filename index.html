@@ -11333,41 +11333,50 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('now-sf-name').textContent   = active.name;
     document.getElementById('now-sf-hebrew').textContent = active.hebrew;
     document.getElementById('now-sf-time').textContent   = active.range;
+    // This card is a mirror, and a mirror must not answer to the original's
+    // name: ids are stripped from everything copied here, or getElementById —
+    // which takes the first match in the document, and this card stands above
+    // the others — would hand the next render this copy instead of the card.
+    const mirror = (html) => {
+      const t = document.createElement('div');
+      t.innerHTML = html || '';
+      t.querySelectorAll('[id]').forEach(e => e.removeAttribute('id'));
+      return t.innerHTML;
+    };
     // Clears dst when the source card lacks the element, so nothing stale
     // lingers from the previous hour's card.
     const copy = (sel, id) => {
       const src = sourceCard.querySelector(sel);
       const dst = document.getElementById(id);
-      if (dst) dst.innerHTML = src ? src.innerHTML : '';
-    };
-    // Mirrors every matching block (Hod's face has two: Zohar + Shulchan Aruch)
-    const copyAll = (sel, id) => {
-      const els = Array.from(sourceCard.querySelectorAll(sel));
-      const dst = document.getElementById(id);
-      if (!dst) return;
-      dst.innerHTML = els.length === 1
-        ? els[0].innerHTML
-        : els.map(e => `<div style="margin-bottom:6px;">${e.innerHTML}</div>`).join('');
+      if (dst) dst.innerHTML = src ? mirror(src.innerHTML) : '';
     };
     const keterFace = sourceCard.querySelector('.keter-visible-content');
     const malchutFace = sourceCard.querySelector('.malchut-visible-content');
+    // Every face is mirrored whole. Copying only the text rows left the ✦
+    // headings behind — and those headings carry the מעלה tags, so the card of
+    // the hour was the one card in which the day's counted step could not be
+    // seen or marked.
+    const wholeFace = (el) => {
+      document.getElementById('now-sf-cycle').innerHTML = '';
+      document.getElementById('now-sf-main').innerHTML  = mirror(el ? el.innerHTML : '');
+      document.getElementById('now-sf-sub').innerHTML   = '';
+      document.getElementById('now-sf-tags').innerHTML  = '';
+    };
     if (keterFace) {
-      // Keter's face is its own three-section layout — mirror it whole, as Malchut's is.
-      document.getElementById('now-sf-cycle').innerHTML = '';
-      document.getElementById('now-sf-main').innerHTML  = keterFace.innerHTML;
-      document.getElementById('now-sf-sub').innerHTML   = '';
-      document.getElementById('now-sf-tags').innerHTML  = '';
+      wholeFace(keterFace);
     } else if (malchutFace) {
-      // Malchut's face is its own three-section layout — mirror it whole.
+      wholeFace(malchutFace);
+    } else {
+      // The seven have no wrapper around their face: it is everything in the
+      // content column except the detail, which is mirrored separately below.
+      const col = sourceCard.querySelector('.sefirah-content-col');
+      const face = col ? Array.from(col.children)
+        .filter(n => !n.classList.contains('sefirah-detail'))
+        .map(n => n.outerHTML).join('') : '';
       document.getElementById('now-sf-cycle').innerHTML = '';
-      document.getElementById('now-sf-main').innerHTML  = malchutFace.innerHTML;
+      document.getElementById('now-sf-main').innerHTML  = mirror(face);
       document.getElementById('now-sf-sub').innerHTML   = '';
       document.getElementById('now-sf-tags').innerHTML  = '';
-    } else {
-      copy('.sefirah-cycle-name', 'now-sf-cycle');
-      copyAll('.sefirah-main-text', 'now-sf-main');
-      copy('.sefirah-sub-text',   'now-sf-sub');
-      copy('.sefirah-tags',       'now-sf-tags');
     }
     copy(keterFace ? '.keter-detail' : '.sefirah-detail', 'now-sf-detail');
     // Left margin: the Tzadik of this hour and its prayer. The prayer keeps its
@@ -11385,7 +11394,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (_prEl) {
       const src = (_lblCol && _lblCol.querySelector('.prayer-tag'))
         || sourceCard.querySelector('.prayer-tag');
-      _prEl.innerHTML = src ? src.outerHTML : '';
+      _prEl.innerHTML = src ? mirror(src.outerHTML) : '';
     }
     document.getElementById('now-sefirah-featured').style.display = 'grid';
     const nowCap = document.getElementById('now-caption');
