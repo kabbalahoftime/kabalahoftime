@@ -12393,7 +12393,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Both halves link separately on a double parasha. It sits with Chok
     // L'Yisrael in the Yesod detail, under the same מיעוט ד׳.
     let _hodParashaZoharMainHtml = '', _hodParashaZoharLabel = '';
-    let _chokZoharHtml = '';   // for the Chok L'Yisrael block in the Yesod detail
+    let _chokZoharHtml = '';     // for the Chok L'Yisrael block in the Yesod detail
+    let _chokZoharScript = '';   // and for the Daily Script's Yesod paragraph
+    let _chokZoharIsSY = false;  // Shabbat: Sefer Yetzirah stands in its place
+    let _hodZoharParasha = '';   // the Zohar's own section, on Hod's face
     (() => {
       const pName = (window.getParashaForDate && window.getParashaForDate(date)) || null;
       _hodParashaZoharLabel = pName ? `Parashat ${pName}` : 'Zohar';
@@ -12415,6 +12418,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         _syDetailMeta = `<a href="${_syUrl}" target="_blank" style="color:var(--gold)">Sefer Yetzirah ${_syRefLabel} on Sefaria</a>`;
         _chokZoharHtml = '<span style="color:var(--ink-mid)">Sefer Yetzirah · </span>' +
           `<span onclick="openSeferYetzirahModal()" style="cursor:pointer;color:var(--gold)">${_syRefLabel}</span>`;
+        _chokZoharScript = 'Sefer Yetzirah ' + _syRefLabel;
+        _chokZoharIsSY = true;
         return;
       }
       const parts = pName ? pName.split('-').map(p => p.trim()) : [];
@@ -12436,6 +12441,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // the two should not be mistaken for one another.
       _chokZoharHtml = '<span style="color:var(--ink-mid)">Zohar Chok L\u2019Yisrael (English) · </span>' +
         _hodParashaZoharMainHtml;
+      _chokZoharScript = (pName || 'the parasha') + (_czDay <= 6 ? ` · Day ${_czDay}` : '');
     })();
 
     // The Chok L'Yisrael Zohar (English) belongs with Chok L'Yisrael, under the
@@ -12453,6 +12459,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (!faceEl) return;
       const pName = (window.getParashaForDate && window.getParashaForDate(date)) || null;
       const links = zoharParashaLinks(pName);
+      _hodZoharParasha = links ? (pName || '') : '';
       faceEl.innerHTML = links
         || `<a href="https://www.sefaria.org/Zohar?lang=bi" target="_blank" style="color:var(--gold)">Zohar</a>` +
            (pName ? ` <span style="font-size:0.85em;color:var(--ink-mid)">· no section for ${pName}</span>` : '');
@@ -14308,7 +14315,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       cy41Mivtzah: cy41.mivtzah,
       meynDay, meynSection, meynPage, meynPagePhrase,
       tikkunPsalm: _tikkunPsalm,
-      hodZoharLabel: _hodParashaZoharLabel,
+      hodZoharLabel: _hodZoharParasha ? `Parashat ${_hodZoharParasha}` : null,
+      chokZohar: _chokZoharScript || null,
+      chokZoharIsSY: _chokZoharIsSY,
       tifTextWork: tifText ? tifText.work : null,
       tifTextItem: tifText ? tifText.item : null,
       netzTextWork: _nr ? _nr.work : null,
@@ -14638,10 +14647,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzTikkun:(p)         => `Tikkun HaKlali — the "Complete Remedy," ten Psalms designated by Rebbe Nachman as a comprehensive spiritual healing for the soul — today: Psalm ${p}.`,
       netzMaayan:(s, p, d, ph) => `Ma'ayan Ganim — a Kabbalistic guide for daily spiritual growth — today: ${s}${p ? ', ' + (ph ? p : 'page ' + p) : ''}, Day ${d} of 369.`,
       netzText:  (w, n)      => `From ${w}, today: ${n}.`,
-      hodZohar:  (l)         => `the Zohar — the foundational masterwork of Jewish mysticism, its teachings attributed to Rabbi Shimon bar Yochai (2nd century CE) and first disseminated in 13th-century Spain; considered the "Bible of Kabbalah" — this week: ${l}.`,
+      hodZohar:  (l)         => `the Zohar — the foundational masterwork of Jewish mysticism, its teachings attributed to Rabbi Shimon bar Yochai (2nd century CE) and first disseminated in 13th-century Spain; considered the "Bible of Kabbalah" — read in the Zohar's own division of the Torah, ${l}.`,
       hodHalacha:(m, a)      => `Halacha study runs two half-days: this morning ${m}, this afternoon ${a} — the year's 728 halves carry the Shulchan Aruch's Orach Chaim and then the Chofetz Chaim's laws of speech.`,
       hodDaf:    (n, d)      => `Talmud review: ${n}, Daf ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `this week's parasha is ${p}. The Shovavim system — a traditional period of spiritual purification during the winter readings of Shemot, focused on Tikkun HaBrit (renewal of the soul's covenant with God) — today is Day ${day} of the week, Parasha ${pNum} of Cycle ${pCyc}, quality ${dayLet} — ${dayName}: ${dayTik}. Chok L'Yisrael weaves daily readings from Torah, Nevi'im, Ketuvim, Mishnah, Talmud, Halacha, and Zohar into one unified reading.`,
+      yesodChokZohar: (l)    => `Its Zohar, in English: ${l}.`,
+      yesodChokSY: (l)       => `On Shabbat it has no Zohar portion, and ${l} stands in its place.`,
       yesodBic:  (l, i)      => `From Rav Yosef Chaim of Baghdad — ${l}: ${i}.`,
       malPerek:  (a)         => `In Perek Shirah — the ancient text recording the song each creature "sings" to its Creator — today's voice belongs to ${a}.`,
       malAvot:   (a)         => `From Pirkei Avot — the Mishna's unique tractate of moral and spiritual wisdom from the Sages: ${a}.`,
@@ -14694,10 +14705,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzTikkun:(p)         => `לתיקון הכללי, אנו אומרים היום תהלים ${p}.`,
       netzMaayan:(s, p, d, ph) => `מעיין גנים: ${s}${p ? ', ' + (ph ? p : "עמ' " + p) : ''} — יום ${d} מתוך 369.`,
       netzText:  (w, n)      => `מתוך ${w}, היום: ${n}.`,
-      hodZohar:  (l)         => `הזוהר על פרשת השבוע: ${l}.`,
+      hodZohar:  (l)         => `הזוהר כחלוקתו שלו לפרשיות התורה: ${l}.`,
       hodHalacha:(m, a)      => `לימוד ההלכה בשני חצאי יום: בבוקר ${m}, אחר הצהריים ${a}.`,
       hodDaf:    (n, d)      => `לחזרה על הגמרא, חוזרים על ${n}, דף ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `פרשת השבוע היא ${p}. במסגרת שובבי"ם — שש (או שמונה) פרשות שמות הקשורות לתיקון הברית — היום הוא יום ${day} בשבוע, פרשה ${pNum} במחזור ${pCyc}. האיכות של יום זה היא ${dayLet} — ${dayName}: ${dayTik}. חוק לישראל מאחד תורה, נביאים, כתובים, מדרש וזוהר בקריאה יומית אחת ומשולבת.`,
+      yesodChokZohar: (l)    => `והזוהר שבו, באנגלית: ${l}.`,
+      yesodChokSY: (l)       => `בשבת אין בו חלק זוהר, ובמקומו ${l}.`,
       yesodBic:  (l, i)      => `מרב יוסף חיים מבגדאד — ${l}: ${i}.`,
       malPerek:  (a)         => `בפרק שירה — שיר הבריאה — הקול של היום שייך ל${a}.`,
       malAvot:   (a)         => `מפרקי אבות: ${a}.`,
@@ -14750,10 +14763,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzTikkun:(p)         => `Para el Tikún HaKlali, hoy recitamos el Salmo ${p}.`,
       netzMaayan:(s, p, d, ph) => `Ma'ayan Ganim: ${s}${p ? ', ' + (ph ? p : 'página ' + p) : ''} — Día ${d} de 369.`,
       netzText:  (w, n)      => `De ${w}, hoy: ${n}.`,
-      hodZohar:  (l)         => `el Zóhar sobre la porción semanal: ${l}.`,
+      hodZohar:  (l)         => `el Zóhar en su propia división de la Torá: ${l}.`,
       hodHalacha:(m, a)      => `El estudio de Halajá corre en dos medios días: esta mañana ${m}, esta tarde ${a}.`,
       hodDaf:    (n, d)      => `Para el repaso del Talmud, revisamos ${n}, Daf ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `la parashá de esta semana es ${p}. En el sistema espiritual del Shovavim — las seis (u ocho) parashot de Shemot asociadas al Tikún HaBrit — hoy es el Día ${day} de la semana, Parashá ${pNum} del Ciclo ${pCyc}. La cualidad del día es ${dayLet} — ${dayName}: ${dayTik}. La porción del Jok LeIsrael unifica Torá, Profetas, Escrituras, Midrash y Zohar en una única lectura diaria.`,
+      yesodChokZohar: (l)    => `Su Zohar, en inglés: ${l}.`,
+      yesodChokSY: (l)       => `En Shabat no tiene porción del Zohar, y en su lugar: ${l}.`,
       yesodBic:  (l, i)      => `Del Rav Yosef Jaim de Bagdad — ${l}: ${i}.`,
       malPerek:  (a)         => `En el Pérek Shirá — el Canto de la Creación — la voz de hoy pertenece a ${a}.`,
       malAvot:   (a)         => `De Pirké Avot: ${a}.`,
@@ -14806,10 +14821,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzTikkun:(p)         => `Pour le Tikkoun HaKlali, nous récitons aujourd'hui le Psaume ${p}.`,
       netzMaayan:(s, p, d, ph) => `Ma'ayan Ganim : ${s}${p ? ', ' + (ph ? p : 'page ' + p) : ''} — Jour ${d} sur 369.`,
       netzText:  (w, n)      => `De ${w}, aujourd'hui : ${n}.`,
-      hodZohar:  (l)         => `le Zohar sur la paracha de la semaine : ${l}.`,
+      hodZohar:  (l)         => `le Zohar dans sa propre division de la Torah : ${l}.`,
       hodHalacha:(m, a)      => `L'étude de la Halakha se fait en deux demi-journées : ce matin ${m}, cet après-midi ${a}.`,
       hodDaf:    (n, d)      => `Pour la révision du Talmud, nous revisitons ${n}, Daf ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `la Paracha de cette semaine est ${p}. Dans le système spirituel du Chovavim — les six (ou huit) Parachot de Chémot liées au Tikoun HaBrit — aujourd'hui est le Jour ${day} de la semaine, Paracha ${pNum} du Cycle ${pCyc}. La qualité de la journée est ${dayLet} — ${dayName} : ${dayTik}. La portion du Hok LeIsraël unifie Torah, Prophètes, Écrits, Midrach et Zohar en une seule lecture quotidienne.`,
+      yesodChokZohar: (l)    => `Son Zohar, en anglais : ${l}.`,
+      yesodChokSY: (l)       => `Le Chabbat, il n'a pas de portion du Zohar : ${l} prend sa place.`,
       yesodBic:  (l, i)      => `Du Rav Yossef Haim de Bagdad — ${l} : ${i}.`,
       malPerek:  (a)         => `Dans le Pérek Chirah — le Chant de la Création — la voix d'aujourd'hui appartient à ${a}.`,
       malAvot:   (a)         => `Des Pirké Avot : ${a}.`,
@@ -14862,10 +14879,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       netzTikkun:(p)         => `Para o Tikkun HaKlali, hoje recitamos o Salmo ${p}.`,
       netzMaayan:(s, p, d, ph) => `Ma'ayan Ganim: ${s}${p ? ', ' + (ph ? p : 'página ' + p) : ''} — Dia ${d} de 369.`,
       netzText:  (w, n)      => `De ${w}, hoje: ${n}.`,
-      hodZohar:  (l)         => `o Zohar sobre a porção semanal: ${l}.`,
+      hodZohar:  (l)         => `o Zohar em sua própria divisão da Torá: ${l}.`,
       hodHalacha:(m, a)      => `O estudo de Halachá corre em duas metades do dia: esta manhã ${m}, esta tarde ${a}.`,
       hodDaf:    (n, d)      => `Para a revisão do Talmude, revisitamos ${n}, Daf ${d}.`,
       yesodText: (p, day, pNum, pCyc, dayLet, dayName, dayTik) => `a parashá desta semana é ${p}. No sistema espiritual do Shovavim — as seis (ou oito) parashot de Shemot associadas ao Tikkun HaBrit — hoje é o Dia ${day} da semana, Parashá ${pNum} do Ciclo ${pCyc}. A qualidade do dia é ${dayLet} — ${dayName}: ${dayTik}. A porção de Chok LeIsrael unifica Torá, Profetas, Escritos, Midrash e Zohar em uma única leitura diária.`,
+      yesodChokZohar: (l)    => `Seu Zohar, em inglês: ${l}.`,
+      yesodChokSY: (l)       => `No Shabat não há porção do Zohar, e em seu lugar: ${l}.`,
       yesodBic:  (l, i)      => `Do Rav Yosef Chaim de Bagdá — ${l}: ${i}.`,
       malPerek:  (a)         => `No Perek Shirah — o Canto da Criação — a voz de hoje pertence a ${a}.`,
       malAvot:   (a)         => `Dos Pirkei Avot: ${a}.`,
@@ -14974,7 +14993,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       data.shovavimDayLet  || '',
       data.shovavimDayName || '',
       data.shovavimDayTik  || ''
-    )}${data.yesodBicLabel ? ' ' + L.yesodBic(data.yesodBicLabel, data.yesodBicItems) : ''}`);
+    )}${data.chokZohar && L.yesodChokZohar ? ' ' + (data.chokZoharIsSY && L.yesodChokSY ? L.yesodChokSY(data.chokZohar) : L.yesodChokZohar(data.chokZohar)) : ''}${data.yesodBicLabel ? ' ' + L.yesodBic(data.yesodBicLabel, data.yesodBicItems) : ''}`);
     lines.push('');
 
     // Malchut
@@ -15267,13 +15286,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const maalot = Math.min(15, num('kotMaalot:' + suf));
     // The מיעוט are a 15-bit mask; days written under the old counter still read.
     const rawMask = localStorage.getItem('kotYomMask:' + suf);
-    let yom = 0;
-    if (rawMask !== null) { for (let m = (parseInt(rawMask, 10) || 0) & 32767; m; m >>= 1) yom += m & 1; }
-    else yom = Math.min(15, num('kotYom:' + suf));
+    let yom = 0, yomBits = 0;
+    if (rawMask !== null) {
+      yomBits = (parseInt(rawMask, 10) || 0) & 32767;
+      for (let m = yomBits; m; m >>= 1) yom += m & 1;
+    } else {
+      yom = Math.min(15, num('kotYom:' + suf));
+      yomBits = yom ? (1 << yom) - 1 : 0;
+    }
     const mask   = num('kotPrayers:' + suf) & 1023;
     let prayers = 0;
     for (let m = mask; m; m >>= 1) prayers += m & 1;
-    return { maalot, yom, path: maalot + yom, mask, prayers, stars: Array.isArray(stars) ? stars : [], key: suf };
+    return { maalot, yom, yomBits, path: maalot + yom, mask, prayers,
+             stars: Array.isArray(stars) ? stars : [], key: suf };
   }
 
   function _wrDateFromKey(dateKey) {
@@ -15318,6 +15343,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       return `<span class="wr-pill tap${on ? ' on' : ''}" onclick="wrTogglePrayer('${dateKey}',${i + 1})">${nm}</span>`;
     }).join('');
 
+    // The thirty steps by name, taken from the cards as Today's Path takes them
+    // — so a reading that moves from one card to another is named here too,
+    // and no list has to be kept in step by hand. The names belong to the day
+    // the cards are showing, so they are offered only for that day.
+    const shownKey = (typeof getDisplayDate === 'function')
+      ? _wrDateKey(getDisplayDate(currentOffset)) : null;
+    let stepsHtml;
+    if (dateKey !== shownKey) {
+      stepsHtml = '<div class="wr-empty">Open this day on the cards to see its thirty by name.</div>';
+    } else {
+      const live = (typeof _pathLiveNames === 'function') ? _pathLiveNames() : {};
+      const pill = (word, key, num, fallback, on) =>
+        `<span class="wr-pill${on ? ' on' : ''}">${word} ${num} · ${live[key + num] || fallback}</span>`;
+      stepsHtml =
+        PATH_WAXING.map((pp, i) => pill('מעלה', 'm|', pp[0], pp[1], i < st.maalot)).join('') +
+        PATH_WANING.map((pp, i) => pill('מיעוט', 'y|', pp[0], pp[1], !!(st.yomBits & (1 << i)))).join('');
+    }
+
     const starList = st.stars.length
       ? st.stars.map(id => `<span class="wr-pill on">${id.split('|').pop()}</span>`).join('')
       : '<div class="wr-empty">None gathered.</div>';
@@ -15339,7 +15382,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         box(st.stars.length, 'Stars', st.stars.length > 0) +
       '</div>' +
       `<div class="wr-line" style="margin-bottom:4px;">${pathLine}</div>` +
-      '<div class="wr-section-title" style="margin-top:12px">The Ten Prayers</div>' +
+      '<div class="wr-section-title" style="margin-top:12px">The Thirty Steps</div>' +
+      `<div class="wr-line">${stepsHtml}</div>` +
+      '<div class="wr-section-title" style="margin-top:14px">The Ten Prayers</div>' +
       `<div class="wr-line">${prayerPills}</div>` +
       '<div class="wr-section-title" style="margin-top:14px">Stars Gathered</div>' +
       `<div class="wr-line">${starList}</div>` +
