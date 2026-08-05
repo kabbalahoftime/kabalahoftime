@@ -12251,8 +12251,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // The Abuchatzeira line, in the card of Yesod — the sefirah of the tzaddik,
     // who is the foundation of the world. It sits with the Ben Ish Chai and the
     // Chida, the same Sephardic stream, and its hilula is named on the day.
-    // Only the dates this app can vouch for are here: the Baba Sali's, which
-    // Likutei Moharan 126 is already placed on, and the Abir Yaakov's.
     // Four instalments of Hidden Tzadikim, each drawn from R. Avraham Mugrabi's
     // Maase Nissim — he married a daughter of R. Avraham Abuchatzeira and heard
     // these from the family itself. Part 15 is the dafyomireview mirror.
@@ -12264,11 +12262,28 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     ].map(([n, u]) => `<a href="${u}" target="_blank" style="color:var(--gold)">${n}</a>`)
      .join(' &nbsp;·&nbsp; ');
 
+    // Eight of them, from 14 Kislev round to 27 Tammuz. The Adar yahrzeit falls
+    // in Adar I when the year has two — Sephardic practice follows the Mechaber
+    // (Shulchan Aruch, Orach Chaim 568:7), against the Rema's Adar II, and this
+    // is a Moroccan house. Month 12 is Adar in an ordinary year and Adar I in a
+    // leap year, so it needs no special case.
     const ABUCHATZEIRA = [
+      { m: 9,  d: 14, name: 'R. David Abuchatzeira — the Ateret Tiferet',
+        note: 'Tafilalet, Morocco · 14 Kislev — elder brother of the Baba Sali' },
+      { m: 9,  d: 15, name: 'R. Avraham Abuchatzeira — the Baba Baba',
+        note: 'Tiberias · 15 Kislev' },
       { m: 10, d: 20, name: 'R. Yaakov Abuchatzeira — the Abir Yaakov',
-        note: 'Tafilalt, buried in Damanhur · 20 Tevet 5640' },
+        note: 'Damanhour, Egypt · 20 Tevet — the patriarch of the line' },
       { m: 11, d: 4,  name: 'R. Yisrael Abuchatzeira — the Baba Sali',
-        note: 'Netivot · 4 Shevat 5744' },
+        note: 'Netivot · 4 Shevat' },
+      { m: 11, d: 14, name: 'R. Yitzchak Abuchatzeira',
+        note: 'Toulal, Morocco · 14 Shevat — youngest son of the Abir Yaakov, who composed A\u2019ufa Eshkona' },
+      { m: 12, d: 25, name: 'R. Yitzchak Abuchatzeira — the Baba Khaki',
+        note: 'Ramla · 25 Adar — Chief Sephardic Rabbi of Ramla and Lod' },
+      { m: 1,  d: 17, name: 'R. Meir Abuchatzeira — the Baba Meir',
+        note: 'Ashdod · 17 Nissan — eldest son and heir to the Baba Sali' },
+      { m: 4,  d: 27, name: 'R. Elazar Abuchatzeira — the Baba Elazar',
+        note: 'Netivot, beside the Baba Sali · 27 Tammuz — son of the Baba Meir' },
     ];
     (() => {
       const today = ABUCHATZEIRA.find(a => a.m === hMonth && a.d === hDay);
@@ -12280,7 +12295,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         : 'From R. Shmuel Elbaz to Netivot — the tzaddik is the foundation of the world';
       meta.innerHTML = (today ? today.note
         : 'Refused passage, he spread his mat on the shore and travelled the sea on it; from '
-          + 'that day Avi-Chatzera, father of the mat. A disciple of R. Chaim Vital.')
+          + 'that day Avi-Chatzera, father of the mat. A disciple of R. Chaim Vital. '
+          + 'Eight hilulot, from 14 Kislev round to 27 Tammuz.')
         + '<br>' + ABU_LINKS;
     })();
 
