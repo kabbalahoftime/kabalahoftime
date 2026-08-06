@@ -12482,7 +12482,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         : goldA('https://www.sefaria.org/Midrash_Tanchuma?tab=contents', 'Midrash Tanchuma on Sefaria');
 
       mainEl.innerHTML = rabbahLine + '<br>' + tanchumaLine;
-      if (metaEl) metaEl.innerHTML = 'Midrash Rabbah · Midrash Tanchuma on the weekly parasha';
+      // The two links above name themselves; the line under them only repeated it.
+      if (metaEl) metaEl.innerHTML = '';
     })();
 
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
