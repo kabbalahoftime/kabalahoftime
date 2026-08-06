@@ -12460,11 +12460,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       };
       const goldA = (href, txt) => `<a href="${href}" target="_blank" style="color:var(--gold)">${txt}</a>`;
 
-      // Rabbah line — linked at the chumash-book level (Sefaria's Rabbah is chapter-, not parasha-indexed)
+      // Rabbah is chapter-indexed on Sefaria, not parasha-indexed, and only
+      // Devarim Rabbah happens to run one section to a parasha — so the link
+      // can only reach the book. It is named for the book alone: the label
+      // used to end "— Ki Teitzei" and open the whole of Devarim Rabbah, which
+      // promised a portion the link could not give. Tanchuma below it does
+      // reach the parasha, and names it.
       const vol = _zoharParashaNum ? RABBAH.find(b => _zoharParashaNum <= b.max) : null;
       const rv = vol || RABBAH[0];
       const rabbahLine = goldA(`https://www.sefaria.org/${rv.slug}?tab=contents`,
-        vol ? rv.name + (_zoharParasha ? ' — ' + _zoharParasha : '') : 'Midrash Rabbah on Sefaria');
+        vol ? rv.name : 'Midrash Rabbah on Sefaria');
 
       // Tanchuma line — parasha-specific; both halves of a double parasha get their own link
       const tanName = (num, label) => {
