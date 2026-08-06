@@ -2180,6 +2180,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="yesod-abu-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-abu-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Zera Shimshon — זֶרַע שִׁמְשׁוֹן</div>
+      <div id="yesod-zs-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
+      <div id="yesod-zs-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div id="yesod-parasha-cycle"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
@@ -12322,6 +12326,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           (today.piyut ? ` <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold);font-size:0.9em">· אָעוּפָה אֶשְׁכֹּנָה ↗</span>` : '')
         : '';
       meta.innerHTML = (today ? today.note + '<br>' : '') + ABU_LINKS;
+    })();
+
+    // Zera Shimshon, in Yesod because that is what it is: R. Shimshon Chaim
+    // Nachmani of northern Italy outlived his children, and asked that his book
+    // stand as his seed — whoever learns it and makes it known is promised
+    // offspring, sustenance and honour. Seed and covenant are Yesod itself.
+    (() => {
+      const main = document.getElementById('yesod-zs-main');
+      const meta = document.getElementById('yesod-zs-meta');
+      if (!main) return;
+      const hilula = (hMonth === 6 && hDay === 6);
+      main.innerHTML = hilula
+        ? '<strong style="color:var(--gold-mid)">Hilula — R. Shimshon Chaim Nachmani</strong>'
+        : 'R. Shimshon Chaim Nachmani';
+      meta.innerHTML = hilula
+        ? 'Northern Italy · 6 Elul 5539 — rabbi, kabbalist and poet, who left his book for his seed'
+        : 'Northern Italy, 1706–1779 · 6 Elul — he left his book for his seed';
     })();
 
     // Daily Hida (Yesod card)
