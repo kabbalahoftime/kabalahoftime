@@ -2883,25 +2883,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          prayer itself was learned, and Shlomo is who brought the Shechinah down
          at the inauguration of the first Temple — so the two names between them
          hold both halves of what is being asked. -->
-    <div id="dedication" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border);">
-      <!-- Sized to hold each line whole down to a 320px phone: the second line is
-           long, and it reads badly broken. clamp lets it shrink with the screen
-           rather than wrap, and the ceiling keeps it from growing past the
-           Hebrew beneath it. Measured against Georgia, the fallback, which is
-           wider than Cormorant Garamond. -->
-      <div style="font-size:clamp(8.6px,2.75vw,10.5px);color:var(--ink-dim);font-style:italic;line-height:1.85;">
+    <div id="dedication" style="position:relative;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);">
+      <!-- Broken into three lines by hand rather than left to wrap: at this size
+           the second sentence is too long for one line, and where it breaks on
+           its own it leaves a word standing alone. -->
+      <div style="font-size:11.5px;color:var(--ink-dim);font-style:italic;line-height:1.75;">
         For the return of the Divine Presence to Zion,<br>
-        and for the redemption of Heleni Orna, daughter of Chen Chana and Shlomo Ezra
+        and for the redemption of Heleni Orna,<br>
+        daughter of Chen Chana and Shlomo Ezra
       </div>
       <div style="font-family:'Frank Ruhl Libre',serif;font-size:15px;color:var(--gold-mid);line-height:2.1;margin-top:9px;">
         לְשִׁיבַת הַשְּׁכִינָה לְצִיּוֹן<br>וְלִגְאֻלַּת הֶלֵנִי אוֹרְנָה בַּת חֵן חַנָּה וּשְׁלֹמֹה עֶזְרָא
       </div>
       <!-- What the names carry is kept behind the ℹ️ rather than set on the page,
-           so the dedication itself stays as short as it was given. -->
-      <div style="margin-top:8px;">
-        <span onclick="openDedicationNote()" title="On the names"
-              style="cursor:pointer;font-size:12px;opacity:0.55;padding:6px 10px;margin:-6px -10px;display:inline-block;">ℹ️</span>
-      </div>
+           so the dedication itself stays as short as it was given. It sits in the
+           corner, out of the way of the centred lines; the padding gives it a
+           finger-sized target without taking up any room of its own. -->
+      <span onclick="openDedicationNote()" title="On the names"
+            style="position:absolute;top:8px;right:0;cursor:pointer;font-size:11px;opacity:0.5;padding:8px 6px;line-height:1;">ℹ️</span>
     </div>
     <div id="eliyahu-signature" style="margin-top:20px;">
       <div style="font-family:'Frank Ruhl Libre',serif;font-size:20px;color:var(--gold);letter-spacing:1px;">אֱלִיָּהוּ חַי</div>
