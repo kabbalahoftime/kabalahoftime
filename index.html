@@ -2891,10 +2891,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
            wider than Cormorant Garamond. -->
       <div style="font-size:clamp(8.6px,2.75vw,10.5px);color:var(--ink-dim);font-style:italic;line-height:1.85;">
         For the return of the Divine Presence to Zion,<br>
-        and for the redemption of Heleni Orna, daughter of Chen Chana and Shlomi Ezra
+        and for the redemption of Heleni Orna, daughter of Chen Chana and Shlomo Ezra
       </div>
       <div style="font-family:'Frank Ruhl Libre',serif;font-size:15px;color:var(--gold-mid);line-height:2.1;margin-top:9px;">
-        לְשִׁיבַת הַשְּׁכִינָה לְצִיּוֹן<br>וְלִגְאֻלַּת הֶלֵנִי אוֹרְנָה בַּת חֵן חַנָּה וּשְׁלֹמִי עֶזְרָא
+        לְשִׁיבַת הַשְּׁכִינָה לְצִיּוֹן<br>וְלִגְאֻלַּת הֶלֵנִי אוֹרְנָה בַּת חֵן חַנָּה וּשְׁלֹמֹה עֶזְרָא
+      </div>
+      <!-- What the names carry is kept behind the ℹ️ rather than set on the page,
+           so the dedication itself stays as short as it was given. -->
+      <div style="margin-top:8px;">
+        <span onclick="openDedicationNote()" title="On the names"
+              style="cursor:pointer;font-size:12px;opacity:0.55;padding:6px 10px;margin:-6px -10px;display:inline-block;">ℹ️</span>
       </div>
     </div>
     <div id="eliyahu-signature" style="margin-top:20px;">
@@ -14833,6 +14839,50 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function openSeferYetzirahModal() {
     openInfoPopup('Sefer Yetzirah — ספר יצירה', _syDetailMain, _syDetailMeta);
+  }
+
+  // The note behind the dedication in the footer. Four names, and each one
+  // already holds a piece of what the two lines ask for — so the note only
+  // points at what is there, and says plainly where a reading is heard rather
+  // than descended, so nothing is claimed that the language will not carry.
+  const DEDICATION_NOTE =
+    '<div style="font-size:0.82rem;color:var(--ink-mid);font-style:italic;line-height:1.6;margin-bottom:14px;">' +
+      'Two lines, and the same thing asked twice — לְשִׁיבַת answered by וְלִגְאֻלַּת, once for the ' +
+      'Shechinah and once for her. The names between them turn out to hold both halves of the asking.' +
+    '</div>' +
+    '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);">הֶלֵנִי</span> ' +
+      '<span style="color:var(--ink-mid);font-size:0.9em;">— Heleni</span><br>' +
+      'From the Greek for a torch. It is also the name of a queen the Mishna remembers for exactly ' +
+      'that: Heleni HaMalka of Adiabene, who converted and came up to Jerusalem, and set a lamp of ' +
+      'gold above the entrance of the Heichal. When the sun rose and struck it, it threw off sparks, ' +
+      'and the city knew the hour for Kriat Shema had come.</div>' +
+    '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);">אוֹרְנָה</span> ' +
+      '<span style="color:var(--ink-mid);font-size:0.9em;">— Orna</span><br>' +
+      'The feminine of אֹרֶן, the evergreen — the tree that does not change with the season. The ear ' +
+      'hears אוֹר in it, light; the grammarians tie אֹרֶן to an older word for cedar rather than to ' +
+      'אוֹר, so the light is heard in the name rather than descended from it. Either way it stands ' +
+      'beside Heleni saying the same thing twice.</div>' +
+    '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);">חַנָּה</span> ' +
+      '<span style="color:var(--ink-mid);font-size:0.9em;">— Chana</span><br>' +
+      'Where prayer itself was learned. From the way she stood at Shiloh the Gemara draws how a person ' +
+      'must pray — that it be spoken to the heart, that the lips move, that the voice not be raised.</div>' +
+    '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);">שְׁלֹמֹה</span> ' +
+      '<span style="color:var(--ink-mid);font-size:0.9em;">— Shlomo</span><br>' +
+      'Who brought the Shechinah into the house. At the inauguration the cloud filled it until the ' +
+      'kohanim could not stand to serve, and the fire came down. At home he is called שְׁלֹמִי — and ' +
+      'שְׁלֹמִי חֵן חַנָּה falls close to שְׁכִינָה, the word the line above them asks for.</div>' +
+    '<div style="margin-bottom:14px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);">עֶזְרָא</span> ' +
+      '<span style="color:var(--ink-mid);font-size:0.9em;">— Ezra</span><br>' +
+      'The family name is עֵזֶר, help — which is the whole of what is being asked here.</div>' +
+    '<div style="font-size:0.86rem;color:var(--ink-mid);font-style:italic;line-height:1.65;">' +
+      'So the names hold it between them: the light set over the door of the house, the prayer that ' +
+      'learned how to ask, the one who brought the Presence down into it, and the help to do it again.' +
+    '</div>';
+
+  function openDedicationNote() {
+    openInfoPopup('On the Names — עַל הַשֵּׁמוֹת', DEDICATION_NOTE,
+      'Yoma 3:10 &nbsp;·&nbsp; Berachot 31a &nbsp;·&nbsp; Melachim I 8 &nbsp;·&nbsp; ' +
+      'Divrei HaYamim II 7 &nbsp;·&nbsp; Yeshayahu 44:14');
   }
 
   function applyDatePickerJump() {
