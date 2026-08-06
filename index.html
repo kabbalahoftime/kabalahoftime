@@ -2171,6 +2171,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Midrash</div>
       <div id="yesod-midrash-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-midrash-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
+      <div id="yesod-zs-main" style="font-size:0.88rem;margin-top:8px;">Loading…</div>
+      <div id="yesod-zs-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Daily Hida</div>
       <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
@@ -2179,10 +2181,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Abuchatzeira — אַבוּחַצִּירָא</div>
       <div id="yesod-abu-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-abu-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
-      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Zera Shimshon — זֶרַע שִׁמְשׁוֹן</div>
-      <div id="yesod-zs-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
-      <div id="yesod-zs-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div id="yesod-parasha-cycle"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
@@ -12328,21 +12326,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       meta.innerHTML = (today ? today.note + '<br>' : '') + ABU_LINKS;
     })();
 
-    // Zera Shimshon, in Yesod because that is what it is: R. Shimshon Chaim
-    // Nachmani of northern Italy outlived his children, and asked that his book
-    // stand as his seed — whoever learns it and makes it known is promised
-    // offspring, sustenance and honour. Seed and covenant are Yesod itself.
+    // Zera Shimshon sits with the Midrash, being derashot on the parasha as the
+    // Rabbah and the Tanchuma beside it are. And it sits in Yesod because of
+    // what it is: R. Shimshon Chaim Nachmani of northern Italy outlived his
+    // children and asked that his book stand as his seed — whoever learns it
+    // and makes it known is promised offspring, sustenance and honour. Seed and
+    // covenant are Yesod itself.
     (() => {
       const main = document.getElementById('yesod-zs-main');
       const meta = document.getElementById('yesod-zs-meta');
       if (!main) return;
       const hilula = (hMonth === 6 && hDay === 6);
       main.innerHTML = hilula
-        ? '<strong style="color:var(--gold-mid)">Hilula — R. Shimshon Chaim Nachmani</strong>'
-        : 'R. Shimshon Chaim Nachmani';
+        ? '<strong style="color:var(--gold-mid)">Hilula — R. Shimshon Chaim Nachmani</strong> · זֶרַע שִׁמְשׁוֹן'
+        : 'Zera Shimshon <span style="font-size:1.05em">זֶרַע שִׁמְשׁוֹן</span>';
       meta.innerHTML = hilula
         ? 'Northern Italy · 6 Elul 5539 — rabbi, kabbalist and poet, who left his book for his seed'
-        : 'Northern Italy, 1706–1779 · 6 Elul — he left his book for his seed';
+        : 'R. Shimshon Chaim Nachmani · northern Italy, 1706–1779 · 6 Elul — derashot on the parasha, left for his seed';
     })();
 
     // Daily Hida (Yesod card)
