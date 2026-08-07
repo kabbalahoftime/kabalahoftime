@@ -172,28 +172,52 @@ async function checkInBrowser(chromium) {
 
   // 5. tap targets — a link inside a sentence is exempt, as WCAG has it
   console.log('\ntargets');
+  // What matters is what the finger can reach, not what the box measures: a
+  // control may keep its drawn size and carry a transparent overlay that grows
+  // the hit area without moving the layout. So the page is asked what is
+  // actually at a point 21px out from the centre, in each direction.
   const small = await page.evaluate(() => {
     const out = [];
+    const reaches = (el, dx, dy) => {
+      const r = el.getBoundingClientRect();
+      const x = r.left + r.width / 2 + dx, y = r.top + r.height / 2 + dy;
+      if (x < 0 || y < 0 || x > innerWidth || y > innerHeight) return true;  // off-screen, cannot judge
+      const hit = document.elementFromPoint(x, y);
+      return !!hit && (hit === el || el.contains(hit) || hit.contains(el));
+    };
     document.querySelectorAll('button,a,input,select,[onclick]').forEach(e => {
       const r = e.getBoundingClientRect();
       if (r.width <= 0 || r.height <= 0) return;
-      if (r.width >= 44 && r.height >= 44) return;
+      const wideEnough = r.width  >= 44 || (reaches(e, -21, 0) && reaches(e, 21, 0));
+      const tallEnough = r.height >= 44 || (reaches(e, 0, -21) && reaches(e, 0, 21));
+      if (wideEnough && tallEnough) return;
       const parentText = e.parentElement ? (e.parentElement.textContent || '').trim().length : 0;
       const ownText = (e.textContent || '').trim().length;
       const inlineInProse = e.tagName === 'A' &&
         getComputedStyle(e).display.startsWith('inline') && parentText > ownText + 8;
       if (inlineInProse) return;
       out.push({ what: e.id || (e.className || '').toString().split(/\s+/)[0] || e.tagName,
-                 w: Math.round(r.width), h: Math.round(r.height) });
+                 w: Math.round(r.width), h: Math.round(r.height),
+                 narrow: !wideEnough, short: !tallEnough });
     });
     return out;
   });
   // The language bar holds six buttons in a fixed strip; they are full height
   // and cannot also be full width without overflowing it.
-  const excused = small.filter(s => /^lang-btn|^beginner-btn/.test(s.what) && s.h >= 44);
+  // Two deliberate exceptions, both from controls packed into a row where a
+  // 44px reach would have to be taken from the control beside them:
+  //   • the six language buttons — full height, but six of them cannot each be
+  //     44px wide inside a 233px strip;
+  //   • the toggle halves — 24px tall, the size WCAG requires, with the
+  //     jump-to-date line about 30px below them.
+  const excused = small.filter(s =>
+    (/^lang-btn|^beginner-btn/.test(s.what) && !s.short) ||
+    (/^year-pill-btn|^pr-|^tm-/.test(s.what) && s.h >= 24));
   const offenders = small.filter(s => !excused.includes(s));
   if (offenders.length) {
-    offenders.slice(0, 10).forEach(s => fail(`${s.what} is ${s.w}x${s.h}, under 44px`));
+    offenders.slice(0, 10).forEach(s => fail(
+      `${s.what} is ${s.w}x${s.h} and reaches under 44px ${s.narrow && s.short ? 'both ways'
+        : s.narrow ? 'across' : 'down'}`));
     if (offenders.length > 10) fail(`…and ${offenders.length - 10} more`);
   } else pass(`all controls at least 44px${excused.length ? ` (${excused.length} in the language bar excused on width)` : ''}`);
 

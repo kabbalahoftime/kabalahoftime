@@ -1706,16 +1706,44 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    Links inside a sentence are deliberately left alone: WCAG exempts them,
    and giving them 44px would break the line they sit in. */
 
-.date-nav-btn { width: 44px; height: 44px; }
-
-.year-pill-btn, .lang-btn {
-  min-height: 44px;
-  display: inline-flex; align-items: center; justify-content: center;
+/* The control keeps the size it was drawn at. A transparent overlay centred
+   on it gives the finger its 44px — a pseudo-element counts as part of the
+   element for hit-testing, so the tap still lands on the button. Growing the
+   controls themselves instead put empty space inside the collapsed panels and
+   turned the Diaspora/Israel pill into a slab. */
+.date-nav-btn { position: relative; }
+.date-nav-btn::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); width: 44px; height: 44px;
 }
 
-#wr-trigger { min-height: 44px; }
+/* Controls sitting side by side grow upward and downward only, never
+   sideways, so none of them reaches across a neighbour. */
+/* The two halves of a toggle sit a little over 30px from the jump-to-date
+   line beneath them, so both cannot have 44px of reach — one would have to
+   take it from the other. They are given a true 24px instead, which is the
+   size WCAG actually requires, and the overlay adds what is free above. */
+.year-pill-btn {
+  min-height: 24px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.year-pill-btn, .lang-btn, #wr-trigger { position: relative; }
+.year-pill-btn::after, .lang-btn::after, #wr-trigger::after {
+  content: ''; position: absolute; left: 0; right: 0; top: 50%;
+  transform: translateY(-50%); height: 44px;
+}
 
-.intro-panel > .intro-toggle, .intro-panel { min-height: 44px; }
+/* The toggle clipped its two halves to the rounded border with overflow —
+   which also cut off the overlay above, leaving the hit area no taller than
+   the 16px pill. The halves are rounded themselves instead, so the shape is
+   the same and nothing is clipped. */
+.year-toggle-pill { overflow: visible; }
+.year-toggle-pill > .year-pill-btn:first-child { border-radius: 20px 0 0 20px; }
+.year-toggle-pill > .year-pill-btn:last-child  { border-radius: 0 20px 20px 0; }
+
+/* The Introduction and How-to panels are full-width rows already — 346px by
+   38px is a generous target, and forcing 44px only opened a gap under the
+   label. Left as they were drawn. */
 
 /* Standing on their own — grown without moving anything. */
 .date-jump-trigger {
