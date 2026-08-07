@@ -361,7 +361,14 @@ letter-spacing: 2px;
 color: var(--ink);
 text-transform: uppercase;
 font-weight: 600;
+/* If it must break, break it evenly rather than leaving "2026" alone. */
+text-wrap: balance;
 }
+/* A long date — FRIDAY, SEPTEMBER 27, 2026 — runs past the middle column on a
+   narrow phone once the arrows either side are allowed for. The tracking gives
+   way before the size does, and the size before the line does. */
+@media (max-width: 400px) { .date-gregorian { letter-spacing: 1.3px; } }
+@media (max-width: 345px) { .date-gregorian { font-size: 12px; letter-spacing: .6px; } }
 
 .date-hebrew {
 font-family: 'Frank Ruhl Libre', serif;
@@ -1849,8 +1856,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           <button id="year-pill-b" class="year-pill-btn" onclick="setKotYear(true)">Year B</button>
         </div>
       </div>
-      <div style="margin-top:5px; display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap;">
+      <!-- The card is a centred column — date, Hebrew date, week and day. The
+           parasha belongs to that column and keeps its own line; the region
+           toggle is a control, not part of the reading, so it sits under it
+           rather than shouldering the parasha off centre. -->
+      <div id="date-parasha-line" style="margin-top:4px;">
         <span id="date-parasha" style="font-size:12.5px; color:var(--ink-mid); font-style:italic;"></span>
+      </div>
+      <div style="margin-top:5px; display:flex; justify-content:center;">
         <div class="year-toggle-pill" style="margin:0;display:inline-flex;flex-shrink:0;">
           <button id="pr-diaspora-btn" class="year-pill-btn year-pill-active" onclick="setParashaRegion('diaspora')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Diaspora</button>
           <button id="pr-israel-btn" class="year-pill-btn" onclick="setParashaRegion('israel')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Israel</button>
@@ -12172,7 +12185,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     {
       const kstParasha = window.getParashaForDate ? window.getParashaForDate(date) : null;
       const _dpEl = document.getElementById('date-parasha');
-      if (_dpEl) _dpEl.textContent = kstParasha ? `Parashat ${kstParasha}` : '';
+      if (_dpEl) {
+        _dpEl.textContent = kstParasha ? `Parashat ${kstParasha}` : '';
+        const _dpLine = document.getElementById('date-parasha-line');
+        if (_dpLine) _dpLine.style.display = kstParasha ? '' : 'none';
+      }
       const kstParts = kstParasha ? kstParasha.split('-').map(p => p.trim()) : [];
       const kstParashaNum  = kstParasha
         ? (PARASHA_TO_NUMBER[kstParasha] || PARASHA_TO_NUMBER[kstParts[0]])
