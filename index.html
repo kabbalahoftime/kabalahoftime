@@ -1643,6 +1643,57 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   #todays-path-body { font-size: 14px; }
   .path-row { padding: 8px 6px; }
 }
+
+/* ── TAP TARGETS ──
+   A finger is about 44px across, and several controls were drawn at a third
+   of that — the language pills at 19px tall, the date-jump line at 11. Two
+   ways of fixing it, chosen per control:
+
+   • Rows of controls sitting side by side grow for real, on the vertical,
+     where there is room to spare and no neighbour to collide with.
+   • A control standing on its own grows by padding with the same amount
+     taken back as negative margin, so the box the finger finds is bigger
+     while nothing around it moves.
+
+   Links inside a sentence are deliberately left alone: WCAG exempts them,
+   and giving them 44px would break the line they sit in. */
+
+.date-nav-btn { width: 44px; height: 44px; }
+
+.year-pill-btn, .lang-btn {
+  min-height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+#wr-trigger { min-height: 44px; }
+
+.intro-panel > .intro-toggle, .intro-panel { min-height: 44px; }
+
+/* Standing on their own — grown without moving anything. */
+.date-jump-trigger {
+  padding: 17px 12px; margin: -17px -12px;
+  position: relative; z-index: 1;
+}
+#now-sf-heart {
+  padding: 7px 12px; margin: 5px -12px 0;
+}
+#maalot-moon { min-height: 44px; }
+/* Both users of this are absolutely positioned in a corner, so the box can be
+   given its full 44px outright — it grows inward, away from the edge it is
+   pinned to, and nothing reflows. */
+.tap-grow {
+  box-sizing: border-box; min-width: 44px; min-height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  z-index: 1;
+}
+
+/* The one link on a card's face is the day's reading, not a word inside a
+   sentence — it is the thing you came to tap, so it gets the finger's worth
+   of height while the line it sits on stays where it was. */
+[id$="-face"] > a, #keter-daily-zohar > a, .sefirah-main-text > a, a.tap-line {
+  display: inline-block; padding: 12px 6px; margin: -12px -6px;
+  position: relative; z-index: 1;
+}
 </style>
 
 </head>
@@ -1736,7 +1787,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
   <div id="kot-welcome" style="display:none; margin:12px 16px 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:13px; color:var(--ink-mid); line-height:1.7; position:relative;">
-    <button onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:18px; cursor:pointer; line-height:1;">×</button>
+    <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:18px; cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
     Tap the small gold <strong>מעלה</strong> tags in order to fill tonight's moon; when it becomes the sun, climb back from Malchut to Keter through the <strong>מיעוט</strong> tags inside the cards.
     Each Sefirah also holds one of the day's ten <strong>prayers</strong> — tap it when you have prayed, and watch the heart in the Now card fill.
@@ -2899,8 +2950,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
            so the dedication itself stays as short as it was given. It sits in the
            corner, out of the way of the centred lines; the padding gives it a
            finger-sized target without taking up any room of its own. -->
-      <span onclick="openDedicationNote()" title="On the names"
-            style="position:absolute;top:8px;right:0;cursor:pointer;font-size:11px;opacity:0.5;padding:8px 6px;line-height:1;">ℹ️</span>
+      <span class="tap-grow" onclick="openDedicationNote()" title="On the names"
+            style="position:absolute;top:8px;right:0;cursor:pointer;font-size:11px;opacity:0.5;line-height:1;">ℹ️</span>
     </div>
     <div id="eliyahu-signature" style="margin-top:20px;">
       <div style="font-family:'Frank Ruhl Libre',serif;font-size:20px;color:var(--gold);letter-spacing:1px;">אֱלִיָּהוּ חַי</div>
@@ -13124,8 +13175,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
     // 364 / 49 ≈ 7.43 full Omer cycles. We show position within the continuous 343-day (7×7×7) structure
     const SEFIROT_NAMES = ['Chesed','Gevurah','Tiferet','Netzach','Hod','Yesod','Malchut'];
-    const omerPos = ((d - 1) % 49) + 1; // position within current 49-day Omer cycle (1–49)
-    const omerCycle = Math.floor((d - 1) / 49) + 1;
+    // The remainder is taken the long way round so it stays 0–48 for days
+    // before the anchor as well: JS gives a negative result for a negative
+    // dividend, which walked the Sefirot arrays off their front end and put
+    // "undefined she'beundefined" on the card for any date earlier than the
+    // first day of KoT year 1. The cycle number is held at 1 there, as the
+    // other cards hold theirs.
+    const omerPos = (((d - 1) % 49) + 49) % 49 + 1;   // 1–49 within the Omer cycle
+    const omerCycle = Math.max(1, Math.floor((d - 1) / 49) + 1);
     const omerWeek = Math.ceil(omerPos / 7);
     const omerDay = ((omerPos - 1) % 7) + 1;
     const weekSef = SEFIROT_NAMES[omerWeek - 1];
@@ -13476,7 +13533,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                             : `Quarter ${seasonInfo.quarter} of 4 · day ${seasonInfo.inQuarter} of 22`);
     const _eicha = eichaFor(gevMic || seasonInfo);
     const _eichaLink = _eicha
-      ? `<a href="${eichaUrl(_eicha.ref)}" target="_blank" style="color:var(--gold)">${_eicha.label}</a>` +
+      ? `<a class="tap-line" href="${eichaUrl(_eicha.ref)}" target="_blank" style="color:var(--gold)">${_eicha.label}</a>` +
         (_eicha.letter ? ` <span style="font-family:'Frank Ruhl Libre',serif;">${_eicha.letter}</span>` : '')
       : '';
     // The great heart keeps its own name; the two quarter-hearts say which
@@ -15833,7 +15890,154 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         '<span class="wr-swatch" style="background:rgba(139,105,20,.14)"></span>a step or two &nbsp;' +
         '<span class="wr-swatch" style="background:rgba(139,105,20,1)"></span>all thirty &nbsp;' +
         '<span class="wr-swatch stars" style="background:rgba(139,105,20,.3)"></span>stars gathered &nbsp;' +
-        '<span class="wr-swatch heart" style="background:rgba(139,105,20,.3)"></span>ten prayers</div>';
+        '<span class="wr-swatch heart" style="background:rgba(139,105,20,.3)"></span>ten prayers</div>' +
+      _kotBackupHtml();
+  }
+
+  // ── THE RECORD: a way out, and a way back in ──
+  // Everything the app remembers is written to localStorage under keys that
+  // begin "kot" — a handful for each day, kept for as long as the browser
+  // keeps them. That is the only copy there is: clearing site data, moving to
+  // another phone, or the storage being evicted takes years of counting with
+  // it. These two give the record a door out and a door back in.
+  const KOT_BACKUP_VERSION = 1;
+
+  function _kotRecordKeys() {
+    const out = [];
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.slice(0, 3) === 'kot') out.push(k);
+      }
+    } catch (e) {}
+    return out.sort();
+  }
+
+  function _kotBackupSay(msg) {
+    const el = document.getElementById('kot-backup-status');
+    if (el) el.textContent = msg;
+  }
+
+  function kotExportRecord() {
+    const data = {};
+    _kotRecordKeys().forEach(k => { try { data[k] = localStorage.getItem(k); } catch (e) {} });
+    const n = Object.keys(data).length;
+    if (!n) { _kotBackupSay('Nothing recorded yet — there is nothing to save.'); return; }
+    const d = new Date();
+    const pad = v => String(v).padStart(2, '0');
+    const stamp = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    const payload = { app: 'Kabbalah of Time', version: KOT_BACKUP_VERSION,
+                      saved: d.toISOString(), entries: n, data };
+    try {
+      const blob = new Blob([JSON.stringify(payload, null, 1)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'kabbalah-of-time-' + stamp + '.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      _kotBackupSay(n + ' entries saved. Keep the file somewhere it will outlast this phone.');
+    } catch (e) {
+      _kotBackupSay('This browser would not let the file be saved.');
+    }
+  }
+
+  // Restoring adds; it never takes away. Marks are joined, counts keep
+  // whichever went further, and two reflections for one week are kept both —
+  // so restoring an older copy can never undo a later day's work.
+  function _kotMergeValue(key, incoming) {
+    const cur = localStorage.getItem(key);
+    if (cur === null) return incoming;
+    if (cur === incoming) return cur;
+    const num = v => parseInt(v, 10) || 0;
+    if (/^kot(YomMask|Prayers):/.test(key)) return String(num(cur) | num(incoming));
+    if (/^kot(Maalot|Yom):/.test(key))      return String(Math.max(num(cur), num(incoming)));
+    if (/^kotStars:/.test(key)) {
+      try {
+        const a = JSON.parse(cur), b = JSON.parse(incoming);
+        if (!Array.isArray(a) || !Array.isArray(b)) return cur;
+        return JSON.stringify(Array.from(new Set(a.concat(b))));
+      } catch (e) { return cur; }
+    }
+    if (/^kotWeeklyReport_/.test(key)) {
+      try {
+        const a = JSON.parse(cur) || {}, b = JSON.parse(incoming) || {};
+        const days = Object.assign({}, b.days || {});
+        Object.keys(a.days || {}).forEach(d => {
+          days[d] = Object.assign({}, (b.days || {})[d], a.days[d]);
+        });
+        let reflection = a.reflection || '';
+        const other = b.reflection || '';
+        if (other && other !== reflection) {
+          reflection = reflection ? reflection + '\n\n' + other : other;
+        }
+        return JSON.stringify(Object.assign({}, b, a, { days, reflection }));
+      } catch (e) { return cur; }
+    }
+    return cur;   // a setting already chosen on this device stands
+  }
+
+  function kotImportRecord(input) {
+    const file = input && input.files && input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onerror = () => _kotBackupSay('That file could not be opened.');
+    reader.onload = () => {
+      let payload;
+      try { payload = JSON.parse(reader.result); }
+      catch (e) { _kotBackupSay('That is not a Kabbalah of Time record.'); input.value = ''; return; }
+      const data = payload && payload.data;
+      if (!data || typeof data !== 'object') {
+        _kotBackupSay('No record found in that file.'); input.value = ''; return;
+      }
+      let restored = 0, joined = 0, skipped = 0;
+      Object.keys(data).forEach(k => {
+        if (k.slice(0, 3) !== 'kot' || typeof data[k] !== 'string') { skipped++; return; }
+        const had = localStorage.getItem(k) !== null;
+        try {
+          localStorage.setItem(k, _kotMergeValue(k, data[k]));
+          if (had) joined++; else restored++;
+        } catch (e) { skipped++; }
+      });
+      input.value = '';
+      // Show the restored record at once, wherever it is on screen. The year
+      // view is redrawn here, which builds a fresh status line — so the
+      // message is written after the redraw, not before, or it is lost.
+      try {
+        if (typeof render === 'function') render();
+        _wrData = _wrLoad();
+        const notes = document.getElementById('wr-notes');
+        if (notes) notes.value = _wrData.reflection || '';
+        if (typeof _wrPaintDayTabs === 'function') _wrPaintDayTabs();
+        if (_wrCurrentDay) _wrRenderDay(_wrCurrentDay);
+        _wrRenderYear();
+      } catch (e) {}
+      _kotBackupSay(restored + ' restored, ' + joined + ' joined with what was already here' +
+                    (skipped ? ', ' + skipped + ' skipped' : '') + '.');
+    };
+    reader.readAsText(file);
+  }
+
+  // The backup block, shown under the year. Written as its own function so the
+  // year view can be redrawn after an import without losing the message.
+  function _kotBackupHtml() {
+    const n = _kotRecordKeys().length;
+    return '<hr class="wr-hr">' +
+      '<div class="wr-section-title">Your Record</div>' +
+      `<div class="wr-line" style="margin-bottom:8px;">Everything counted here lives only in this ` +
+        `browser — ${n.toLocaleString()} entries. Save a copy, and it can be carried to another phone.</div>` +
+      '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">' +
+        '<button class="wr-btn wr-btn-save" onclick="kotExportRecord()">Download a copy</button>' +
+        '<label class="wr-btn wr-btn-close" style="cursor:pointer;position:relative;overflow:hidden;">Restore from a file' +
+          '<input type="file" accept="application/json,.json" onchange="kotImportRecord(this)" ' +
+                 'style="position:absolute;width:1px;height:1px;opacity:0;">' +
+        '</label>' +
+      '</div>' +
+      '<div id="kot-backup-status" class="wr-line" style="margin-top:8px;min-height:1.2em;"></div>' +
+      '<div class="wr-legend" style="margin-top:6px;">Restoring only ever adds: marks are joined ' +
+        'together and counts keep whichever went further, so an older copy can never undo a later day.</div>';
   }
 
   function wrShowView(view) {
