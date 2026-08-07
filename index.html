@@ -100,6 +100,48 @@
   src: url(fonts/frank-ruhl-libre-hebrew.woff2) format('woff2');
   unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
 }
+
+/* ── ONE HEBREW FACE, EVERYWHERE ──
+   Cinzel and Cormorant Garamond hold no Hebrew letters, so every Hebrew word
+   set in them fell through to whatever serif the device happened to own —
+   Times on an iPhone, Liberation on Linux, something else again elsewhere.
+   Three different faces were drawing Hebrew across one page, and none of them
+   was the one chosen for it.
+
+   Rather than rewrite a hundred and forty font-family declarations, the
+   Hebrew block is attached to those two family names as a further face: a
+   family is assembled out of several files by unicode-range, so the Latin
+   keeps its own letters and every Hebrew character — anywhere in the app,
+   including anything added later — is drawn by Frank Ruhl Libre. The italic
+   is declared as well, pointing at the same upright file, so Hebrew inside an
+   italic English line is not slanted by the browser to fake one it lacks.
+
+   The range is kept to Hebrew proper. The wider range above also claims some
+   punctuation, which belongs to the Latin face in a mixed line. */
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(fonts/frank-ruhl-libre-hebrew.woff2) format('woff2');
+  unicode-range: U+0590-05FF, U+20AA, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url(fonts/frank-ruhl-libre-hebrew.woff2) format('woff2');
+  unicode-range: U+0590-05FF, U+20AA, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300 400;
+  font-display: swap;
+  src: url(fonts/frank-ruhl-libre-hebrew.woff2) format('woff2');
+  unicode-range: U+0590-05FF, U+20AA, U+FB1D-FB4F;
+}
 @font-face {
   font-family: 'Frank Ruhl Libre';
   font-style: normal;
@@ -177,7 +219,10 @@ margin-bottom: 14px;
 font-family: 'Frank Ruhl Libre', serif;
 font-size: 24px;
 color: var(--gold);
-letter-spacing: 3px;
+/* Hebrew is not letterspaced — the square letters are drawn to sit close,
+   and pulling them apart loosens the word and strands its nikud. Tracking
+   belongs to the Latin small-caps beside it, not here. */
+letter-spacing: 0;
 margin-bottom: 6px;
 }
 
@@ -654,6 +699,9 @@ font-size: 9px;
 }
 /* Keep each phrase whole, but let the label wrap rather than widen the card */
 .kl-part { white-space: nowrap; }
+/* Hebrew inside a letterspaced Latin label keeps its own spacing —
+   the tracking is there for the small-caps, and Hebrew does not take it. */
+.heb { letter-spacing: 0; }
 
 .malchut-visible-content {
 display: grid;
@@ -879,7 +927,7 @@ display: inline-block;
 font-size: 8px;
 color: var(--gold);
 opacity: 0.8;
-letter-spacing: 0.5px;
+letter-spacing: 0;
 margin-left: 6px;
 font-family: 'Frank Ruhl Libre', serif;
 font-weight: normal;
@@ -1455,7 +1503,7 @@ transition: transform 0.3s;
 #kotw-root *{box-sizing:border-box;margin:0;padding:0}
 #kotw-root .kotw-title{
   font-family:'Frank Ruhl Libre',serif; color:var(--kotw-gold);
-  text-align:center; font-size:22px; font-weight:500; letter-spacing:.04em;
+  text-align:center; font-size:22px; font-weight:500; letter-spacing:0;
 }
 #kotw-root .kotw-sub{
   text-align:center; font-style:italic; font-size:13px; opacity:.75; margin:2px 0 10px;
@@ -1899,7 +1947,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section">
-    <div class="keter-section-label" id="keter-kst-label">✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part">אור כי טוב</span> <span class="maalah">מעלה ב׳</span></div>
+    <div class="keter-section-label" id="keter-kst-label">✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה ב׳</span></div>
     <div style="font-size:9px;color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin — Baal Shem Tov &amp; Ohr HaChaim HaKadosh</div>
     <div class="sefirah-main-text" id="keter-kst-main">Loading…</div>
     <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Ohr KiTov ↗</button>
@@ -2672,7 +2720,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             `Terumah and Tetzaveh — and is called <em>Shovavim Tat</em> (שובבים תת). ` +
             `This system extends that framework across all 54 annual parashot, applying the same 8 spiritual ` +
             `pathways — rooted in Reb Zusha of Anipoli's teaching on the letters of ` +
-            `<span style="font-family:serif;font-size:1.05em">תשובה</span> — ` +
+            `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.05em">תשובה</span> — ` +
             `to the full year in 8 cycles of 6–8 parashot each. ` +
             `<a href="https://www.chabad.org/therebbe/article_cdo/aid/5932/jewish/Hayom-Yom-Tishrei-3-Shabbat-Teshuva.htm" target="_blank" style="color:var(--gold)">Hayom Yom, Tishrei 3</a>` +
             `  ·  <a href="https://inner.org/teshuva-rebbe-zusha-style/" target="_blank" style="color:var(--gold)">inner.org</a>` +
@@ -2954,7 +3002,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             style="position:absolute;top:8px;right:0;cursor:pointer;font-size:11px;opacity:0.5;line-height:1;">ℹ️</span>
     </div>
     <div id="eliyahu-signature" style="margin-top:20px;">
-      <div style="font-family:'Frank Ruhl Libre',serif;font-size:20px;color:var(--gold);letter-spacing:1px;">אֱלִיָּהוּ חַי</div>
+      <div style="font-family:'Frank Ruhl Libre',serif;font-size:20px;color:var(--gold);">אֱלִיָּהוּ חַי</div>
     </div>
   </footer>
 
@@ -5543,10 +5591,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { num: 9,  name: 'Notzer Chesed Laalafim', hebrew: '\u05E0\u05B9\u05E6\u05B5\u05E8 \u05D7\u05B6\u05E1\u05B6\u05D3 \u05DC\u05B8\u05D0\u05B2\u05DC\u05B8\u05E4\u05B4\u05D9\u05DD', meaning: 'Keeping kindness unto thousands',
       expl: 'He guards the good deeds that a person does for two thousand generations (for the benefit of those descendants).',
       sources: '\u05E8\u05E9\u05D9"\u05D9 \u05E9\u05DD \u05D6\'' },
-    { num: 10, name: 'Noseh Avon', hebrew: '\u05E0\u05B9\u05E9\u05B5\u05A2\u05D0 \u05E2\u05B8\u05D5\u05B9\u05DF', meaning: 'Forgiving iniquity',
+    { num: 10, name: 'Noseh Avon', hebrew: '\u05E0\u05B9\u05E9\u05B5\u05C2\u05D0 \u05E2\u05B8\u05D5\u05B9\u05DF', meaning: 'Forgiving iniquity',
       expl: 'He forgives deliberate sins.',
       sources: '\u05D0\u05D1\u05DF \u05E2\u05D6\u05E8\u05D0 \u05DC\u05D9\u05D5\u05E0\u05D4 \u05D3\' \u05D1\'; \u05E9\u05E2\u05E8\u05D9 \u05EA\u05E9\u05D5\u05D1\u05D4 \u05E9\u05E2\u05E8 \u05D0\' \u05DB"\u05D7; \u05E8\u05E9\u05D9"\u05D9 \u05E9\u05DD' },
-    { num: 11, name: 'Vafeshah', hebrew: '\u05D5\u05B8\u05E4\u05B6\u05E9\u05B7\u05A2', meaning: 'And transgression',
+    { num: 11, name: 'Vafeshah', hebrew: '\u05D5\u05B8\u05E4\u05B6\u05E9\u05B7\u05C1\u05E2', meaning: 'And transgression',
       expl: 'He forgives rebellious sins.',
       sources: '\u05E8\u05E9\u05D9"\u05D9 \u05E9\u05DD' },
     { num: 12, name: "VeChata'ah", hebrew: '\u05D5\u05B0\u05D7\u05B7\u05D8\u05B8\u05BC\u05D0\u05B8\u05D4', meaning: 'And sin',
@@ -12222,7 +12270,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           ``
         : `<br><span style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim HaKadosh ·</span> <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Parashat ${kstParasha || '—'}</a>`;
 
-      document.getElementById('keter-kst-label').innerHTML = '✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part">אור כי טוב</span> <span class="maalah">מעלה ב׳</span>';
+      document.getElementById('keter-kst-label').innerHTML = '✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה ב׳</span>';
 
       // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40).
       // Somewhere around printed p.200 an extra, unnumbered page appears to
@@ -12677,7 +12725,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const _syVs = Array.isArray(_syEntry) ? _syEntry : [_syEntry];
         const _multi = _syVs.length > 1;
         _syDetailMain = _syVs.map((v) =>
-          (_multi ? `<div style="font-family:serif;font-weight:600;color:var(--gold-mid);font-size:0.82rem;margin-bottom:4px;">${v.ref}</div>` : '') +
+          (_multi ? `<div style="font-family:'Frank Ruhl Libre',serif;font-weight:600;color:var(--gold-mid);font-size:0.82rem;margin-bottom:4px;">${v.ref}</div>` : '') +
           `<div dir="rtl" style="font-size:1.05rem;line-height:1.95;margin-bottom:10px;">${v.he}</div>` +
           `<div style="line-height:1.7;">${v.en.join('<br>')}</div>`
         ).join('<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">');
@@ -12916,9 +12964,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ? `<strong>${gatesPrimName}</strong> <span style="font-size:1.1em">${gatesPrimHeb}</span>`
       : `<strong>${gatesPrimName}</strong> + <strong>${gatesCompName}</strong> <span style="font-size:1.1em">${gatesPrimHeb}${gatesCompHeb}</span>`;
     const gatesValueHtml = (cyN === 17)
-      ? `<strong>${gatesPrimName}</strong> &nbsp;<span style="font-size:1.2em;font-family:serif">${gatesPrimHeb}</span>`
+      ? `<strong>${gatesPrimName}</strong> &nbsp;<span style="font-size:1.2em;font-family:'Frank Ruhl Libre',serif">${gatesPrimHeb}</span>`
       : `<strong>${gatesPrimName}</strong> + <strong>${gatesCompName}</strong>` +
-        ` &nbsp;<span style="font-size:1.2em;font-family:serif">${gatesPrimHeb}${gatesCompHeb}</span>`;
+        ` &nbsp;<span style="font-size:1.2em;font-family:'Frank Ruhl Libre',serif">${gatesPrimHeb}${gatesCompHeb}</span>`;
     const gatesHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ 231 Gates — שערים</div>` +
@@ -13120,7 +13168,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year Microcosm — 28-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy22Mic.day} of ${cy22Mic.total}</span></div>
        <div class="detail-row"><span class="detail-label">Set:</span><span class="detail-value">${cy22Mic.setLabel} — ${cy22Mic.setHebrew}</span></div>
-       <div class="detail-row"><span class="detail-label">${cy22Mic.type === 'letter' ? 'Letter' : cy22Mic.type === 'final' ? 'Final Letter' : 'Vowels'}:</span><span class="detail-value"><strong>${cy22Mic.label}</strong> <span style="font-size:1.2em;font-family:serif">${cy22Mic.hebrew}</span></span></div>
+       <div class="detail-row"><span class="detail-label">${cy22Mic.type === 'letter' ? 'Letter' : cy22Mic.type === 'final' ? 'Final Letter' : 'Vowels'}:</span><span class="detail-value"><strong>${cy22Mic.label}</strong> <span style="font-size:1.2em;font-family:'Frank Ruhl Libre',serif">${cy22Mic.hebrew}</span></span></div>
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The extra 28 days (28 Shevat–25 Adar I) form a microcosm of the Alef-Bet:<br>Days 1–22: the 22 Hebrew letters · Days 23–27: the 5 final letters · Day 28: vowels (נקודות)</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Hosafa ${extraDay} of 28 <span class="maalah yom" data-wane="12">מיעוט י״ב</span></div>
@@ -15893,6 +15941,55 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         '<span class="wr-swatch heart" style="background:rgba(139,105,20,.3)"></span>ten prayers</div>' +
       _kotBackupHtml();
   }
+
+  // ── HEBREW INSIDE A LETTERSPACED LABEL ──
+  // A handful of labels are set in Cinzel small-caps with wide tracking, and
+  // carry a Hebrew phrase alongside the English — "✦ Year-Round — בכל השנה".
+  // The tracking is there for the small-caps; Hebrew does not take it, and
+  // pulling the square letters apart loosens the word. CSS cannot select by
+  // script, so each Hebrew run inside those labels is wrapped in .heb, which
+  // sets the spacing back to none. Run after every render, since most of
+  // these labels are rewritten each day.
+  const HEB_TRACKED_LABELS =
+    '.title-sub, .dc-label, .sefirah-detail, .keter-section-label, .heb-picker-title';
+  // A run is Hebrew letters plus whatever holds a phrase together — spaces,
+  // geresh, gershayim, maqaf — so "בכל השנה" is treated as one piece.
+  const HEB_RUN = /([֐-׿]+(?:[ ׳״'"־-]+[֐-׿]+)*)/;
+
+  function untrackHebrew(root) {
+    (root || document).querySelectorAll(HEB_TRACKED_LABELS).forEach(label => {
+      const walker = document.createTreeWalker(label, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => {
+        if (!/[֐-׿]/.test(node.nodeValue)) return;
+        const parent = node.parentElement;
+        if (!parent || parent.classList.contains('heb')) return;   // already done
+        const frag = document.createDocumentFragment();
+        node.nodeValue.split(HEB_RUN).forEach(part => {
+          if (!part) return;
+          if (/[֐-׿]/.test(part)) {
+            const span = document.createElement('span');
+            span.className = 'heb';
+            span.textContent = part;
+            frag.appendChild(span);
+          } else frag.appendChild(document.createTextNode(part));
+        });
+        parent.replaceChild(frag, node);
+      });
+    });
+  }
+
+  // Wrapped rather than called from inside render, which is long enough
+  // already, and this has to happen after everything it writes.
+  (function () {
+    const _render = render;
+    render = function () {
+      const out = _render.apply(this, arguments);
+      try { untrackHebrew(); } catch (e) {}
+      return out;
+    };
+  })();
 
   // ── THE RECORD: a way out, and a way back in ──
   // Everything the app remembers is written to localStorage under keys that

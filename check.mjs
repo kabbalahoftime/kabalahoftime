@@ -23,6 +23,11 @@
 //                   Now card once cloned 23 ids and quietly broke both.
 //   5. targets    — no control under 44px that isn't a link inside a sentence.
 //   6. overflow   — the page never scrolls sideways, at any phone width.
+//   7. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
+//                   browser, not the stylesheet: a family with no Hebrew in it
+//                   falls through silently to whatever the device happens to
+//                   own, which differs on every device.
+//   8. tracking   — no Hebrew-only text is letterspaced.
 //
 // Exits non-zero if any check fails, so it can gate a commit.
 
@@ -42,6 +47,8 @@ const FIXED_NOW = process.env.CHECK_DATE || '2026-08-07T09:00:00';
 const SWEEP_FORWARD = Number(process.env.SWEEP_FORWARD || 1500);
 const SWEEP_BACK    = Number(process.env.SWEEP_BACK    || 1500);
 const WIDTHS = [320, 390, 430];
+// The one face every Hebrew letter in the app should be drawn with.
+const HEBREW_FACE = process.env.HEBREW_FACE || 'Frank Ruhl Libre';
 
 let failures = 0;
 const pass = m => console.log('  \x1b[32mok\x1b[0m   ' + m);
@@ -189,6 +196,89 @@ async function checkInBrowser(chromium) {
     offenders.slice(0, 10).forEach(s => fail(`${s.what} is ${s.w}x${s.h}, under 44px`));
     if (offenders.length > 10) fail(`…and ${offenders.length - 10} more`);
   } else pass(`all controls at least 44px${excused.length ? ` (${excused.length} in the language bar excused on width)` : ''}`);
+
+  // 7. one Hebrew face — asked of the browser, not of the stylesheet
+  //
+  // Declaring a font is not the same as getting it. Cinzel and Cormorant
+  // Garamond carry no Hebrew, so Hebrew set in them silently fell through to
+  // whatever serif the device owned — Times on an iPhone, Liberation here.
+  // Three faces were drawing Hebrew on one page. Chromium is asked which font
+  // actually put each glyph on the screen, so the answer cannot be wishful.
+  console.log('\nhebrew');
+  const runs = await page.evaluate(() => {
+    let i = 0;
+    const nodes = [];
+    const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    while (walk.nextNode()) nodes.push(walk.currentNode);
+    for (const node of nodes) {
+      if (!/[֐-׿]/.test(node.nodeValue)) continue;
+      if (!node.parentElement || /SCRIPT|STYLE/.test(node.parentElement.tagName)) continue;
+      const frag = document.createDocumentFragment();
+      for (const part of node.nodeValue.split(/([֐-׿]+)/)) {
+        if (!part) continue;
+        if (/^[֐-׿]+$/.test(part)) {
+          const s = document.createElement('span');
+          s.setAttribute('data-heb-check', String(i++));
+          s.textContent = part;
+          frag.appendChild(s);
+        } else frag.appendChild(document.createTextNode(part));
+      }
+      node.parentNode.replaceChild(frag, node);
+    }
+    return i;
+  });
+
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+  const { root } = await cdp.send('DOM.getDocument', { depth: -1 });
+  const { nodeIds } = await cdp.send('DOM.querySelectorAll',
+    { nodeId: root.nodeId, selector: '[data-heb-check]' });
+
+  const faces = {};
+  const strays = [];
+  for (const nodeId of nodeIds) {
+    let fonts;
+    try { ({ fonts } = await cdp.send('CSS.getPlatformFontsForNode', { nodeId })); } catch (e) { continue; }
+    for (const f of (fonts || [])) {
+      if (!f.glyphCount) continue;
+      faces[f.familyName] = (faces[f.familyName] || 0) + f.glyphCount;
+      if (f.familyName !== HEBREW_FACE && strays.length < 8) {
+        const attrs = (await cdp.send('DOM.getAttributes', { nodeId })).attributes;
+        const idx = attrs[attrs.indexOf('data-heb-check') + 1];
+        const info = await page.evaluate(j => {
+          const el = document.querySelector(`[data-heb-check="${j}"]`);
+          const cs = getComputedStyle(el);
+          return { text: el.textContent.slice(0, 14), declared: cs.fontFamily,
+                   where: (el.closest('[id]') || {}).id || el.parentElement.tagName };
+        }, idx);
+        strays.push({ face: f.familyName, ...info });
+      }
+    }
+  }
+  if (strays.length) {
+    strays.forEach(s => fail(`"${s.text}" in ${s.where} drawn by ${s.face}, declared ${s.declared}`));
+  } else {
+    pass(`all Hebrew (${runs} runs, ${faces[HEBREW_FACE] || 0} glyphs) drawn by ${HEBREW_FACE}`);
+  }
+
+  // 8. Hebrew is not letterspaced — tracking belongs to the Latin small-caps
+  console.log('\ntracking');
+  const tracked = await page.evaluate(() => {
+    const out = [];
+    document.querySelectorAll('*').forEach(el => {
+      const own = [...el.childNodes].filter(c => c.nodeType === 3).map(c => c.nodeValue).join('').trim();
+      if (!own || !/[֐-׿]/.test(own) || /[A-Za-z]/.test(own)) return;
+      const cs = getComputedStyle(el);
+      if (parseFloat(cs.letterSpacing)) {
+        out.push({ where: el.id || (el.className || '').toString().split(/\s+/)[0] || el.tagName,
+                   ls: cs.letterSpacing, text: own.slice(0, 16) });
+      }
+    });
+    return out;
+  });
+  if (tracked.length) tracked.slice(0, 6).forEach(t =>
+    fail(`Hebrew "${t.text}" in ${t.where} is letterspaced ${t.ls}`));
+  else pass('no Hebrew-only text is letterspaced');
 
   // 6. sideways scroll at phone widths
   console.log('\noverflow');
