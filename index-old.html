@@ -1868,13 +1868,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* The one link on a card's face is the day's reading, not a word inside a
    sentence — it is the thing you came to tap, so it gets the finger's worth
    of height while the line it sits on stays where it was. */
-[id$="-face"] > a, #keter-daily-zohar > a, .sefirah-main-text > a, a.tap-line,
-.kot-summary {
+[id$="-face"] > a, #keter-daily-zohar > a, .sefirah-main-text > a, a.tap-line {
   display: inline-block; padding: 12px 6px; margin: -12px -6px;
   position: relative; z-index: 1;
 }
-/* Opens the book's week; a control rather than a link, so it says so. */
-.kot-summary { color: var(--gold); font-size: 0.85em; cursor: pointer; }
 </style>
 
 </head>
@@ -5691,42 +5688,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { letter: 'Tav', hebrew: 'ת' }        // Day 22
   ];
 
-  // ── WHAT EACH LETTER STANDS FOR ──
-  // One sentence for each of the 27 — the 22 and the five finals — drawn from
-  // the Kabbalah of Time appendix the Chochmah card links to, which reads the
-  // letters two at a time across the year and gives the finals their own five
-  // sets. Keyed by the names SINGLE_LETTERS_22 and FINAL_LETTERS_MIC use, so
-  // the day's letter finds its own line.
-  const LETTER_MEANINGS = {
-    'Alef': 'Stands for Aluf\'oh Shel Olam, the Master of the World — two yuds, G-d above and the Jew below, joined by the vav of Emunah, faith.',
-    'Bet': 'Stands for Bayit, home, for the dwelling in the lower realms that G-d desired — and it is the letter the Torah itself opens with.',
-    'Gimmel': 'The giver, shaped as though running toward the poor: Gomel Dalim, bestowing kindness on the destitute.',
-    'Dalet': 'The Dal, the poor one who has nothing of her own — the one the Gimmel runs toward.',
-    'Heh': 'The feminine letter of Malchut, a Dalet with a Yud set inside it, and the letter of Herayon, pregnancy — as Sarai became Sarah and conceived.',
-    'Vav': 'The hook, a straight line that joins: the letter that means \'and\', and that turns a verb from past into future.',
-    'Zayin': 'A weapon, and Zan, to provide — the same struggle in earning Lechem, bread, as in Milchama, war.',
-    'Chet': 'Power above nature: Chet stands for Cheit, sin, and for the strength to overcome it and live — Chaim, and the Chiut, the vitality, within.',
-    'Tet': 'Tov, good — and a snake in Aramaic: the good that lies hidden inside desire and the physical.',
-    'Yud': 'A single dot on the page: spirituality and wisdom, the letter Heaven was made with, the Pintele Yid in every Jew.',
-    'Kaf': 'Keter, the crown above intellect — and the palm of the hand, bent to become a Kli, a vessel that can receive.',
-    'Lamed': 'The root of Lilmod and Lelamed, to learn and to teach — the letter of the Oral Torah, carried from teacher to student.',
-    'Mem': 'The middle letter and a mother-letter: Em, mother, and Mayim, water, at the root of the world\'s foundations.',
-    'Nun': 'Malchut, kingship, and Yinon, a name of Mashiach — a fish in Aramaic, and the faithful servant.',
-    'Samech': 'Somech Noflim, He supports the fallen — a closed circle, turning through every high and every low.',
-    'Ayin': 'An eye, and a wellspring: the window to the soul, revealing the inner and hidden depths.',
-    'Peh': 'A mouth — Pesach is Peh Sach, a mouth that tells — and a Kaf holding a Yud, so that speech reveals G-dliness.',
-    'Tzaddik': 'Righteousness: a bent Nun with a Yud, the humility of Moshe, and it is by bending that the Yud is revealed.',
-    'Kuf': 'A monkey, an imperfect imitation of the Heh — and Kedushah, holiness: the letter of sparks raised out of the husk.',
-    'Reish': 'Rash, poor, and Rosh, head — Nisan is both, first of the months and the month of the bread of poverty.',
-    'Shin': 'A tooth, the hardest bone, and Esh, fire — a mother-letter of three arms, whose number is 300.',
-    'Tav': 'Completion: Tmimut, wholeness and stability, the last letter, which with Alef and Mem spells Emet, truth.',
-    'Kaf Sofit': 'The bent palm gone straight — as the Torah came straight down without an echo, and as Hashem straightens the bent.',
-    'Mem Sofit': 'The sealed mother-letter: what the open Mem reveals, this one conceals — Moshe the first redeemer, Mashiach the last.',
-    'Nun Sofit': 'The bent servant stood upright, a line reaching below where the other letters rest: Mashiach filling even the lowest realm.',
-    'Peh Sofit': 'A mouth opened wide — the month the King is in the field, when prayer and supplication are poured out without measure.',
-    'Tzadik Sofit': 'The righteous one who went down in order to climb back up: the Ba\'al Teshuvah, and Mashiach, who lifts even the lowest realms.',
-  };
-
   const ALEF_BET = [
     { letters: 'Alef & Bet', hebrew: 'א & ב', theme: 'Heavens & Earth', cycle: 1 },
     { letters: 'Gimmel & Dalet', hebrew: 'ג & ד', theme: 'Eden & Gehennom', cycle: 2 },
@@ -5735,27 +5696,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { letters: 'Tet & Yud', hebrew: 'ט & י', theme: 'Rivers & Wellsprings', cycle: 5 },
     { letters: 'Kaf & Lamed', hebrew: 'כ & ל', theme: 'Day & Night', cycle: 6 },
     { letters: 'Mem & Nun', hebrew: 'מ & נ', theme: 'Sun & Moon', cycle: 7 },
-    { letters: 'Samech & Ayin', hebrew: 'ס & ע', theme: 'The Stars — both halves', cycle: 8 },
+    { letters: 'Samech & Ayin', hebrew: 'ס & ע', theme: 'Stars & Constellations', cycle: 8 },
     { letters: 'Peh & Tzaddik', hebrew: 'פ & צ', theme: 'Clouds — Thick & Light', cycle: 9 },
     { letters: 'Kuf & Reish', hebrew: 'ק & ר', theme: 'Wind & Lightning', cycle: 10 },
     { letters: 'Shin & Tav', hebrew: 'ש & ת', theme: 'Dew & Rain', cycle: 11 },
     { letters: 'Kaf Sofit', hebrew: 'ך', theme: 'Trees & Vine', cycle: 12 },
     { letters: 'Mem Sofit', hebrew: 'ם', theme: 'Fig & Pomegranate', cycle: 13 },
     { letters: 'Nun Sofit', hebrew: 'ן', theme: 'Palm & Etrog', cycle: 14 },
-    { letters: 'Peh Sofit', hebrew: 'ף', theme: 'Sheaves of Wheat & Barley', cycle: 15 },
+    { letters: 'Peh Sofit', hebrew: 'ף', theme: 'Sheaves of Barley & Wheat', cycle: 15 },
     { letters: 'Tzadik Sofit', hebrew: 'ץ', theme: 'Sheaves & Vegetables', cycle: 16 },
     { letters: 'Vowels', hebrew: 'נקודות', theme: 'Vowels & Grass', cycle: 17 }
   ];
 
   // 22-day cycle — enriched
-  // Call with the day of the KoT year (1–364), as the seasons and the tractates
-  // are called. The seventeen sets are 16 × 22 + 12 = 364, so the count folds at
-  // 364 and the alphabet begins again with the year. It used to run on the
-  // epoch count and clamp at the last set instead, which froze the card on the
-  // vowels for anyone who read forward past a Rosh Hashanah without reloading.
   function get22DayInfo(d) {
     d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
-    d = ((d - 1) % 364) + 1;
     const cycle = (d % 22 == 0) ? parseInt(d/22) : 1 + parseInt(d/22);
     const day   = (d % 22 == 0) ? 22 : d % 22;
     // Daily letter (1-22)
@@ -5773,84 +5728,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       dailyHebrew: dailyLetter.hebrew       // Day Hebrew
     };
   }
-
-  // ── PEREK SHIRAH — the elements of Chapters 1-3 ──
-  // The Kabbalah of Time appendix "Hebrew Alphabet, Perek Shirah, and Pirkei
-  // Avot" gives each 11-day half of an Alef-Bet set its element: the sky and
-  // its waters for the 22 letters, the trees and grains for the finals, the
-  // grasses for the vowels. So these run one for one with TRACTATE_CYCLES
-  // below, and the ids are kept alongside to say so. Set 8 — Samech and Ayin
-  // — is the one set the appendix gives a single element, the Stars, and both
-  // of its halves carry it.
-  // Text and citations are the Perek Shirah booklet's own.
-  const PEREK_SHIRAH_ELEMENTS = [
-    { id:'1a', el:'Heavens', heb:'הַשָּׁמַיִם', ch:'Ch 1', src:'Psalms 19:2',
-      verse:'The heavens speak of God\'s glory, and the skies tell of His handiwork.' },
-    { id:'1b', el:'Earth', heb:'אֶרֶץ', ch:'Ch 1', src:'Psalms 24:1',
-      verse:'The earth and everything in it are God\'s; the inhabited area and all that dwell within it.' },
-    { id:'2a', el:'Garden of Eden', heb:'גַּן עֵדֶן', ch:'Ch 1', src:'Song of Songs 4:16',
-      verse:'Arouse yourself, O north [wind], and come, O south! Blow upon my garden, let its spices flow out; let my Beloved come to His garden and eat of its precious fruit.' },
-    { id:'2b', el:'Gehinnom', heb:'גֵּיהִנֹּם', ch:'Ch 1', src:'Psalms 107:9',
-      verse:'For He has satisfied the longing soul, and has filled the hungry soul with good.' },
-    { id:'3a', el:'Wilderness', heb:'מִדְבָּר', ch:'Ch 1', src:'Isaiah 35:1',
-      verse:'The wilderness and the desert shall rejoice, and the arid region shall exult, and blossom like the rose.' },
-    { id:'3b', el:'Fields', heb:'שָׂדוֹת', ch:'Ch 1', src:'Proverbs 3:19',
-      verse:'God founded the land with wisdom; He established the heavens with understanding.' },
-    { id:'4a', el:'Waters', heb:'מַיִם', ch:'Ch 1', src:'Jeremiah 51:16',
-      verse:'When His voice resounds with a great mass of water in the heavens, and He raises vapors from the ends of the Earth; when He makes lightning amongst the rain, and He brings out the wind from its storehouses.' },
-    { id:'4b', el:'Seas', heb:'יַמִּים', ch:'Ch 1', src:'Psalms 93:4',
-      verse:'More than the voices of many waters, than the mighty waves of the sea, God on high is mighty.' },
-    { id:'5a', el:'Rivers', heb:'נְהָרוֹת', ch:'Ch 1', src:'Psalms 98:8',
-      verse:'Let the rivers clap their hands, let the mountains sing for joy together!' },
-    { id:'5b', el:'Wellsprings', heb:'מַעְיָנוֹת', ch:'Ch 1', src:'Psalms 87:7',
-      verse:'And as singers who are like dancers are all those who study You.' },
-    { id:'6a', el:'Day', heb:'יוֹם', ch:'Ch 2', src:'Psalms 19:3',
-      verse:'Day to day utters speech, and night to night relates knowledge.' },
-    { id:'6b', el:'Night', heb:'לַיְלָה', ch:'Ch 2', src:'Psalms 92:3',
-      verse:'To speak of His kindness in the morning, and of His faithfulness by nights.' },
-    { id:'7a', el:'Sun', heb:'שֶׁמֶשׁ', ch:'Ch 2', src:'Habakuk 3:11',
-      verse:'The sun, [when covered by] the moon, stood in its abode; they speed at the light of Your arrows, and at the shining of Your glittering spear.' },
-    { id:'7b', el:'Moon', heb:'יָרֵחַ', ch:'Ch 2', src:'Psalms 104:19',
-      verse:'He made the moon for the festivals; the sun knows the time of its coming.' },
-    { id:'8a', el:'Stars', heb:'כּוֹכָבִים', ch:'Ch 2', src:'Nehemiah 9:6',
-      verse:'You, only You, are God; You made heaven, the heaven of heavens, with all their host; the earth, and everything that is in it; the seas, and everything that is in them; and You preserve them all; and the host of heaven prostrate themselves to You.' },
-    { id:'8b', el:'Stars', heb:'כּוֹכָבִים', ch:'Ch 2', src:'Nehemiah 9:6',
-      verse:'You, only You, are God; You made heaven, the heaven of heavens, with all their host; the earth, and everything that is in it; the seas, and everything that is in them; and You preserve them all; and the host of heaven prostrate themselves to You.' },
-    { id:'9a', el:'Thick Clouds', heb:'עָבִים', ch:'Ch 2', src:'Psalms 18:12',
-      verse:'He made darkness His secret place; His pavilion around Him was dark with waters and thick clouds of the skies.' },
-    { id:'9b', el:'Light Clouds', heb:'עַנְנֵי כָבוֹד', ch:'Ch 2', src:'Job 37:11',
-      verse:'Also He burdens the thick cloud with an overflow; the cloud scatters its light.' },
-    { id:'10a', el:'Wind', heb:'רוּחַ', ch:'Ch 2', src:'Isaiah 43:6',
-      verse:'I will say to the north, Give up; and to the south, Do not withhold; bring My sons from far, and My daughters from the ends of the earth.' },
-    { id:'10b', el:'Lightning Bolts', heb:'בְּרָקִים', ch:'Ch 2', src:'Psalms 135:7',
-      verse:'He causes the vapors to ascend from the ends of the earth; He makes lightning for the rain; He brings forth the wind from His storehouses.' },
-    { id:'11a', el:'Dew', heb:'טַל', ch:'Ch 2', src:'Hoshea 14:6',
-      verse:'I shall be as the dew to Israel, he shall blossom as a rose, he shall spread forth his roots as the Lebanon.' },
-    { id:'11b', el:'Rains', heb:'גְּשָׁמִים', ch:'Ch 2', src:'Psalms 68:10',
-      verse:'You, O Lord, poured a generous rain, to strengthen Your heritage when it languished.' },
-    { id:'12a', el:'Wild Trees', heb:'אִילָנוֹת שֶׁבַּשָּׂדֶה', ch:'Ch 3', src:'Chronicles I 16:33',
-      verse:'Then shall the trees of the forest sing out at the presence of God, because He comes to judge the earth.' },
-    { id:'12b', el:'Vine', heb:'גֶּפֶן', ch:'Ch 3', src:'Isaiah 65:8',
-      verse:'So says God: As the wine is found in the cluster, and one says: Do not destroy it, for a blessing is in it - so shall I do for the sake of my servants, so as not to destroy everything.' },
-    { id:'13a', el:'Fig', heb:'תְּאֵנָה', ch:'Ch 3', src:'Proverbs 27:18',
-      verse:'The one who guards the fig shall eat of her fruits.' },
-    { id:'13b', el:'Pomegranate', heb:'רִמּוֹן', ch:'Ch 3', src:'Song of Songs 4:3',
-      verse:'Your cheeks are like a piece of a pomegranate behind your veil.' },
-    { id:'14a', el:'Palm', heb:'תָּמָר', ch:'Ch 3', src:'Psalms 92:13',
-      verse:'The righteous flourish like the palm tree; they grow like a cedar in Lebanon.' },
-    { id:'14b', el:'Esrog', heb:'תַּפּוּחַ', ch:'Ch 3', src:'Song of Songs 2:3',
-      verse:'Like the esrog tree among the trees of the wood, so is my beloved among young men. I sat down under his shadow with delight, and his fruit was sweet to my taste.' },
-    { id:'15a', el:'Sheaves of Wheat', heb:'שִׁבֹּלֶת חִטִּים', ch:'Ch 3', src:'Psalms 130:1',
-      verse:'A song of ascents: Out of the depths have I cried to You, O God.' },
-    { id:'15b', el:'Sheaves of Barley', heb:'שִׁבֹּלֶת שְׂעוֹרִים', ch:'Ch 3', src:'Psalms 102:1',
-      verse:'A prayer of the pauper, when he swoons, and pours out his speech before God.' },
-    { id:'16a', el:'Other Sheaves', heb:'שְׁאָר הַשִּׁבֳּלִים', ch:'Ch 3', src:'Psalms 65:14',
-      verse:'The meadows are clothed with flocks; the valleys also are covered over with grain; they shout for joy, they also sing.' },
-    { id:'16b', el:'Vegetables of the Field', heb:'יְרָקוֹת שֶׁבַּשָּׂדֶה', ch:'Ch 3', src:'Psalms 65:11',
-      verse:'You water its furrows abundantly; You settle its ridges; you make it soft with showers; You bless its growth.' },
-    { id:'17a', el:'Grasses', heb:'דְּשָׁאִים', ch:'Ch 3', src:'Psalms 104:31',
-      verse:'May the glory of God endure forever; may God rejoice in His works.' },
-  ];
 
   // Tractate / 11-day half-cycle data (33 entries: 1a–16b = 11 days each; 17a = 12 days)
   // Each entry covers one half of the 22-day Alef-Bet set (days 1-11 = 'a', days 12-22 = 'b')
@@ -6965,9 +6842,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Chochmah KoT Book ("Hebrew Alphabet, Perek Shirah, and Pirkei Avot") —
   // one blog post per 22-day Alef-Bet set, indexed by cy22.cycle 1-17
   // (index 0 = set 1). Set 17 is the half-set of vowels.
-  // The appendix itself — the source of the letters, the elements and the
-  // mishnayot the Chochmah card reads by.
-  const CHOCHMA_KOT_DOC = 'https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/edit?usp=drivesdk&ouid=107762921026290173420&rtpof=true&sd=true';
   const CHOCHMA_KOT_URLS = [
     'https://www.kabbalahoftime.com/2014/09/first-set-of-22-days-alef-bet-heavens.html',
     'https://www.kabbalahoftime.com/2013/09/second-set-of-22-days-gimmel-dalet-eden.html',
@@ -8749,64 +8623,60 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { name: 'Mesilat Yesharim',    author: 'Ramchal (R. Moshe Chaim Luzzatto)',   shortName: 'MY',       day: 'Thursday',                desc: 'The Path of the Upright — the ladder of holiness' },
   ];
 
-  // ── PEREK SHIRAH — the song of each of the year's 52 creatures ──
-  // Text and citations follow the Perek Shirah booklet, whose creature
-  // verses begin at Chapter 4 and run in the same order as the weekly
-  // table, so the keys below are the weekly table's own names.
-  //   [ chapter, source, verse, qualifier? ]
+  // ── PEREK SHIRAH — Chapter + verse for each creature ──
   const PEREK_SHIRAH_VERSES = {
-    'Rooster': ['Ch 4', 'Zohar, Vayakhel 195b', 'When the Holy One, blessed be He, comes to the righteous in the Garden of Eden, all the trees in the Garden of Eden scatter their spices, and they rejoice and praise, and then He, too, is aroused and praises.'],
-    'Hen': ['Ch 4', 'Psalms 136:25', 'He gives bread to all flesh, for His kindness endures forever.'],
-    'Dove': ['Ch 4', 'Isaiah 38:14', 'Like a swift or crane, so do I chatter; I moan like a dove; my eyes fail with looking upward; O God, I am oppressed, be my security.'],
-    'Eagle': ['Ch 4', 'Psalms 59:6', 'And You, God, Lord of Hosts, Lord of Israel, awake to punish all the nations; do not be gracious to any wicked traitors, sela!'],
-    'Crane': ['Ch 4', 'Psalms 33:2', 'Give thanks to God with the lyre, make music for Him with the ten-stringed harp.'],
-    'Songbird': ['Ch 4', 'Psalms 84:4', 'The songbird has also found her home, and the sparrow a nest for herself, where she may lay her young - Your altars, God of Hosts, my King and my Lord.'],
-    'Swallow': ['Ch 4', 'Psalms 30:13', 'So that my soul shall praise You, and shall not be silent, God my Lord, I shall give thanks to You forever.'],
-    'Swift': ['Ch 4', 'Psalms 121:2', 'My help is from God, Maker of Heaven and earth.'],
-    'Stormy Petrel': ['Ch 4', 'Psalms 97:11', 'Light is sown for the righteous, and joy for the straight-hearted.'],
-    'Bat': ['Ch 4', 'Isaiah 40:1', 'Comfort My people, comfort them, says your Lord.'],
-    'Stork': ['Ch 4', 'Isaiah 40:2', 'Speak to the heart of Jerusalem, and call to her, for her time has arrived, for her sins have been pardoned, for she has taken double from God\'s hand for all her sins.'],
-    'Raven': ['Ch 4', 'Job 38:41', 'Who prepares food for the raven, when his young ones cry out to God?'],
-    'Starling': ['Ch 4', 'Isaiah 61:9', 'Their seed shall be known among the nations, and their offspring among the peoples; all who see them shall acknowledge them, that they are the seed which God has blessed.'],
-    'Domestic Goose': ['Ch 4', 'Psalms 105:1-2', 'Give thanks to God, call upon His Name, make His works known amongst the peoples, sing to Him, make music for Him, speak of all His wonders.'],
-    'Wild Goose': ['Ch 4', 'Isaiah 40:3', 'A voice cries, Prepare in the wilderness the way of God, make straight in the desert a path for our God.', 'flying in the wilderness, when it sees Israel busy with Torah'],
-    'Ducks': ['Ch 4', 'Isaiah 26:4', 'Trust in God forever and ever, for God, the Eternal, is the strength of worlds.'],
-    'Bee-Eater': ['Ch 4', 'Zechariah 10:8', 'I will whistle to them and gather them, for I have redeemed them, and they shall increase as they have before increased.'],
-    'Grasshopper': ['Ch 4', 'Psalms 121:1', 'I lift my eyes up to the mountains, where shall my help come from?'],
-    'Locust': ['Ch 4', 'Isaiah 25:1', 'O God, You are my Lord; I will exalt You, I will praise Your Name; for You have done wondrous things; Your counsels of old are faithfulness and truth.'],
-    'Spider': ['Ch 4', 'Psalms 150:5', 'Praise Him with sounding cymbals! Praise Him with loud clashing cymbals!'],
-    'Fly': ['Ch 4', 'Isaiah 40:6,8; 57:19', 'The voice said, \'Call out.\' And he said, \'What shall I call out? All flesh is grass, and all its grace is as the flower of the field.\' \'…The grass withers, the flower fades; but the word of our Lord shall endure forever.\' I will create a new expression of the lips; Peace, peace for him who is far off and for him who is near, says God; and I will heal him.', 'when Israel is not busying itself with Torah'],
-    'Sea Monsters': ['Ch 4', 'Psalms 148:7', 'Praise God from the land, the sea monsters and all the depths.'],
-    'Leviathan': ['Ch 4', 'Psalms 136:1', 'Give thanks to God for He is good, for His kindness endures forever.'],
-    'Fish': ['Ch 4', 'Psalms 29:3', 'The voice of God is upon the waters, the God of glory thunders, God is upon many waters.'],
-    'Frog': ['Ch 4', 'Talmud, Pesachim 56a', 'Blessed is the Name of the honor of His Kingdom for all eternity.'],
-    'Sheep and Goat': ['Ch 5', 'Exodus 15:11', 'Who is like You among the mighty ones, God, who is like You, mighty in holiness, awesome in praise, worker of wonders.'],
-    'Cow': ['Ch 5', 'Psalms 81:2', 'Rejoice to the Lord over our strength, trumpet to the Lord of Yaakov!'],
-    'Pig and Rabbit': ['Ch 5', 'Psalms 125:4', 'God is good to the good, and to the straight-hearted.'],
-    'Beast of Burden': ['Ch 5', 'Psalms 128:2', 'When you eat the fruit of your labors, happy are you and good is your lot.'],
-    'Camel': ['Ch 5', 'Jeremiah 25:30', 'God shall roar from upon high and cause His voice to sound forth from His holy place, His shout echoes profoundly over His dwelling place.'],
-    'Horse': ['Ch 5', 'Psalms 123:2', 'Behold, as the eyes of the servants to the hand of their master, as the eyes of the maidservant to the hand of her mistress, so are our eyes to God our Lord until He will favor us.'],
-    'Mule': ['Ch 5', 'Psalms 138:4', 'All the kings of the earth shall acknowledge You, God, for they have heard the sayings of Your mouth.'],
-    'Donkey': ['Ch 5', 'Chronicles I 29:11', 'Yours, God, is the greatness, and the might, and the splendor, and the victory, and the glory, for everything in the Heavens and earth [is Yours]; Yours, God, is the kingship, and the exaltation over all.'],
-    'Ox': ['Ch 5', 'Exodus 15:1', 'Then Moshe and the Children of Israel sang this song to God, and they said, I shall sing to God, for He has triumphed; He has thrown the horse and its rider into the sea.'],
-    'Wild Animals': ['Ch 5', 'Talmud, Berachos 48b', 'Blessed is the One Who is good and bestows good.'],
-    'Gazelle': ['Ch 5', 'Psalms 59:17', 'And I shall sing of Your strength, I shall rejoice of Your kindness in the morning, for You were a refuge to me, and a hiding place on the day of my oppression.'],
-    'Elephant': ['Ch 5', 'Psalms 92:6', 'How great are Your works, God; Your thoughts are tremendously deep.'],
-    'Lion': ['Ch 5', 'Isaiah 42:13', 'God shall go out as a mighty man, He shall arouse zeal, He shall cry, even roar, He shall prevail over His enemies.'],
-    'Bear': ['Ch 5', 'Isaiah 42:11-12', 'Let the wilderness and its cities lift up their voice, the village that Kedar inhabits; let the inhabitants of the rocks sing, let them shout from the peaks of the mountains. Let them give glory to God, and tell of His praise in the islands.'],
-    'Wolf': ['Ch 5', 'Exodus 22:8', 'For every matter of iniquity, for the ox, the donkey, the lamb, the garment, for every lost item about which he says, \'This is it,\' the matter of both of them shall come before the judge; he who the judge finds guilty shall pay double to the other.'],
-    'Fox': ['Ch 5', 'Jeremiah 22:13', 'Woe to him that builds his house without justice, and his chambers without lawfulness; that uses his friend\'s service without wages, and does not give him for his hire.'],
-    'Hound': ['Ch 5', 'Psalms 33:1', 'Let the righteous rejoice in God, praise is befitting to the straight.'],
-    'Cat': ['Ch 5', 'Obadiah 1:4', 'If you rise up like a vulture, and place your nest among the stars, from there I shall bring you down, says God.'],
-    'Mouse': ['Ch 5', 'Cf. Nehemiah 9:33', 'You are just for all that comes upon me, for You have acted truthfully, and I have been wicked.'],
-    'Creeping Creatures': ['Ch 6', 'Psalms 149:2', 'Let Israel rejoice in He Who made him; let the children of Zion be joyful in their King.'],
-    'Prolific Creeping Creatures': ['Ch 6', 'Psalms 128:3', 'Your wife shall be like a fruitful vine in the recesses of your house; your children like olive shoots around your table.'],
-    'Snake': ['Ch 6', 'Psalms 145:14', 'God supports all the fallen, and straightens all the bent.'],
-    'Scorpion': ['Ch 6', 'Psalms 145:9', 'God is good to all, and His mercy is upon all of His handiwork.'],
-    'Snail': ['Ch 6', 'Psalms 58:9', 'Like the snail that melts away, the stillborn of a mole that does not see the sun.'],
-    'Ant': ['Ch 6', 'Proverbs 6:6', 'Go to the ant, you sluggard; consider her ways, and be wise.'],
-    'Weasel': ['Ch 6', 'Psalms 150:6', 'Let every soul praise God, Hallelukah!'],
-    'Dogs': ['Ch 6', 'Psalms 95:6', 'Come, let us worship and bow down; let us kneel before God our Maker.'],
+    'Rooster': ['Ch 4', 'Who has given the heart wisdom? (Job 38:36)'],
+    'Hen': ['Ch 4', 'He gives bread to all flesh (Ps 136:25)'],
+    'Dove': ['Ch 4', 'O my dove, in the clefts of the rock (Shir 2:14)'],
+    'Turtledove': ['Ch 4', 'The voice of the turtledove is heard in our land (Shir 2:12)'],
+    'Eagle': ['Ch 4', 'They that wait upon the L-rd shall renew their strength (Isa 40:31)'],
+    'Crane (Agur)': ['Ch 4', 'Like a crane or a swallow, so did I chatter (Isa 38:14)'],
+    'Swallow (Dror)': ['Ch 4', 'The swallow and the crane observe the time of their migration (Jer 8:7)'],
+    'Swift (Sis)': ['Ch 4', 'Even the sparrow has found a home (Ps 84:4)'],
+    'Stork (Chasidah)': ['Ch 4', 'Praise G-d from the heavens, praise Him in the heights (Ps 148:1)'],
+    'Bat': ['Ch 4', 'Comfort, comfort My people, says your G-d (Isa 40:1)'],
+    'Raven': ['Ch 4', 'Who provides nourishment for the raven (Job 38:41)'],
+    'Starling': ['Ch 4', 'The worker\'s sleep is sweet (Eccl 5:11)'],
+    'Grasshopper': ['Ch 4', 'I am young and despised (Ps 119:141)'],
+    'Snail': ['Ch 4', 'As a snail that melts away (Ps 58:9)'],
+    'Ant': ['Ch 4', 'Go to the ant, you sluggard (Prov 6:6)'],
+    'Bee': ['Ch 4', 'How sweet are Your words to my palate! (Ps 119:103)'],
+    'Spider': ['Ch 4', 'The spider spreads her web in palaces (Prov 30:28)'],
+    'Scorpion': ['Ch 4', 'The L-rd preserves the simple (Ps 116:6)'],
+    'Snake': ['Ch 4', 'The L-rd supports all who fall (Ps 145:14)'],
+    'Frog': ['Ch 4', 'Blessed is the Name of the honor of His Kingdom for all eternity (Talmud, Pesachim 56a)'],
+    'Fly': ['Ch 4', 'Call out! All flesh is grass (Isa 40:6)'],
+    'Worm': ['Ch 4', 'But I am a worm, not a man (Ps 22:7)'],
+    'Mouse': ['Ch 4', 'Open for me the gates of righteousness (Ps 118:19)'],
+    'Cat': ['Ch 4', 'I will pursue my enemies and overtake them (Ps 18:38)'],
+    'Ox': ['Ch 5', 'An ox knows its owner (Isa 1:3)'],
+    'Wild Ox (Re\'em)': ['Ch 5', 'G-d brings him out of Egypt (Num 23:22)'],
+    'Horse': ['Ch 5', 'Have you given the horse strength? (Job 39:19)'],
+    'Mule': ['Ch 5', 'I will instruct you and teach you the way (Ps 32:8)'],
+    'Camel': ['Ch 5', 'Your righteousness is like the mighty mountains (Ps 36:7)'],
+    'Sheep / Lamb': ['Ch 5', 'Know that the L-rd is G-d (Ps 100:3)'],
+    'Goat': ['Ch 5', 'Your hair is like a flock of goats (Shir 4:1)'],
+    'Ram': ['Ch 5', 'Praise His name in the dance (Ps 149:3)'],
+    'Donkey': ['Ch 5', 'Yours, G-d, is the greatness and the might (Chron I 29:11)'],
+    'Lion': ['Ch 5', 'The L-rd is a mighty man of war (Exod 15:3)'],
+    'Bear': ['Ch 5', 'Let every soul praise the L-rd (Ps 150:6)'],
+    'Wolf': ['Ch 5', 'Give strength to G-d; His majesty is over Israel (Ps 68:35)'],
+    'Fox': ['Ch 5', 'Catch the foxes for us, the small foxes (Shir 2:15)'],
+    'Wild Deer (Tzvi)': ['Ch 5', 'G-d, my Strength, I will play music to You (Ps 59:18)'],
+    'Gazelle': ['Ch 5', 'My beloved is like a gazelle or a young deer (Shir 2:9)'],
+    'Ibex (Ya\'el)': ['Ch 5', 'Do you know the time of the birth of ibexes? (Job 39:1)'],
+    'Hare (Arnevet)': ['Ch 5', 'Open for me the gates of righteousness (Ps 118:19)'],
+    'Hedgehog (Kipod)': ['Ch 5', 'Praise Him according to His abundant greatness (Ps 150:2)'],
+    'Pig (Chazir)': ['Ch 5', 'The earth and all who dwell upon it will recognize G-d (Ps 98:9)'],
+    'Leviathan': ['Ch 6', 'Give thanks to G-d for He is good, for His kindness endures forever (Ps 136:1)'],
+    'Fish': ['Ch 6', 'The voice of G-d is upon the waters, the G-d of glory thunders, G-d is upon many waters (Ps 29:3)'],
+    'Great Whale': ['Ch 6', 'These are the seas, great and wide (Ps 104:25)'],
+    'Sea / Waves': ['Ch 6', 'More than the voices of many waters (Ps 93:4)'],
+    'Rivers (Naharot)': ['Ch 6', 'Let the rivers clap their hands (Ps 98:8)'],
+    'Frogs (aquatic)': ['Ch 6', 'Praise the L-rd, all nations (Ps 117:1)'],
+    'Swamp (Agam)': ['Ch 6', 'G-d is my shepherd, I shall not want (Ps 23:1)'],
+    'Heavenly Creatures': ['Ch 6', 'Bless the L-rd, all His hosts (Ps 103:21)'],
+    'Dogs': ['Ch 6', 'Come, let us worship and bow down (Ps 95:6)'],
   };
 
 
@@ -13206,11 +13076,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `R. S.Y. Zevin &nbsp;·&nbsp; <a href="https://ascentofsafed.com/cgi-bin/ascent.cgi?Name=stories" target="_blank" style="color:var(--gold)">Stories — Ascent of Safed</a>`;
 
     const sef  = getSefirotInfo(d);
-    // The alphabet is counted from the year's own first day, and with the leap
-    // year's 28 collapsed out of it — the same count the tractates, the halacha
-    // and the Tanach are read by. Reading it off the epoch instead only agreed
-    // with the year the page happened to be opened in.
-    const cy22 = get22DayInfo(dEff - d_year1 + 1);
+    const cy22 = get22DayInfo(d);
     const cy13 = get13DayInfo(d);
     const cy41 = get41DayInfo(d);
 
@@ -13292,39 +13158,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ 231 Gates — שערים</div>` +
       `<div class="detail-row"><span class="detail-label">${gatesLabel}:</span><span class="detail-value">` +
       gatesValueHtml + `</span></div>`;
-
-    // Every letter the card is showing stands for something, so every one of
-    // them says so: the day's letter, and the one or two the set is named for
-    // — two or three each day, and one in the leap month's microcosm, which
-    // names a single letter or final letter on 27 of its 28 days. A day whose
-    // letter is also its set's, Alef on the first day of Alef & Bet, is
-    // named once.
-    const _ltShown = [];
-    const _ltAdd = (name, heb) => {
-      name = (name || '').trim();
-      if (!name || _ltShown.some(l => l.name === name)) return;
-      const meaning = LETTER_MEANINGS[name];
-      if (meaning) _ltShown.push({ name, heb: (heb || '').trim(), meaning });
-    };
-    if (inExtra && cy22Mic) {
-      _ltAdd(cy22Mic.label, cy22Mic.hebrew);
-    } else {
-      _ltAdd(cy22.dailyLetter, cy22.dailyHebrew);
-      const _setHeb = cy22.hebrew.split('&');
-      cy22.letters.split('&').forEach((n, i) => _ltAdd(n, _setHeb[i]));
-    }
-    // The sentences live behind the KoT Book they come from rather than on the
-    // face: the face already names the letters, and three paragraphs under
-    // them crowded out everything else the card has to say.
-    _ltDetailMain = _ltShown.length
-      ? `<div class="lt-notes">` + _ltShown.map(l =>
-          `<div class="detail-row" data-letter="${l.name}"><span class="detail-label">${l.name} ` +
-          `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.25em">${l.heb}</span>:</span>` +
-          `<span class="detail-value">${l.meaning}</span></div>`).join('') + `</div>`
-      : '';
-    _ltDetailMeta = _ltShown.map(l => l.name).join(' &nbsp;·&nbsp; ') +
-      ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_DOC}" target="_blank" style="color:var(--gold)">Hebrew Alphabet, Perek Shirah, and Pirkei Avot ↗</a>`;
-    const _ltNames = _ltShown.map(l => `${l.name} <span style="font-family:'Frank Ruhl Libre',serif">${l.heb}</span>`).join(' · ');
 
     if (inExtra && cy22Mic) {
       document.getElementById('chochmah-cycle-name').innerHTML = cy22Mic.setLabel;
@@ -13499,7 +13332,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // exactly as the Alef-Bet is: days 1-22 take one study unit each, days 23-27
     // — the five finals, the doubled letters — take two, and day 28, the vowels,
     // takes the last. 22 + 10 + 1 = 33, the whole year's cycle within the month.
-    let tractMicro = null, halfIdx = [tractHalfIdx];
+    let tractMicro = null;
     if (inExtra && cy22Mic) {
       const md = cy22Mic.day;
       const idx = md <= 22 ? [md - 1]
@@ -13507,43 +13340,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                 : [32];
       tractMicro = idx.map(i => TRACTATE_CYCLES[i]).filter(Boolean);
       if (!tractMicro.length) tractMicro = null;
-      else halfIdx = idx;
     }
     const tractData = tractMicro ? tractMicro[0] : TRACTATE_CYCLES[tractHalfIdx];
-    // The half's element of Perek Shirah, from the same appendix as the letters
-    // and the mishnah. In the microcosm a day can hold two halves, and so two
-    // elements — the trees and the vine on one day.
-    const psElems = halfIdx.map(i => PEREK_SHIRAH_ELEMENTS[i]).filter(Boolean);
 
     // KoT Book — displayed on the Chochmah card face
     document.getElementById('chochmah-kot-book').innerHTML =
-      `<a href="${CHOCHMA_KOT_DOC}" target="_blank" style="color:var(--gold);font-size:0.88em">Hebrew Alphabet, Perek Shirah, and Pirkei Avot</a>` +
+      `<a href="https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/edit?usp=drivesdk&ouid=107762921026290173420&rtpof=true&sd=true" target="_blank" style="color:var(--gold);font-size:0.88em">Hebrew Alphabet, Perek Shirah, and Pirkei Avot</a>` +
       (CHOCHMA_KOT_URLS[cy22.cycle - 1]
         ? ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_URLS[cy22.cycle - 1]}" target="_blank" style="color:var(--gold);font-size:0.88em">This Set</a>`
-        : '') +
-      (psElems.length
-        ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Perek Shirah:</span> ` +
-          psElems.map(p => `<strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif">${p.heb}</span>`).join(' &amp; ') +
-          ` <span style="color:var(--ink-dim);font-size:0.9em">· ${psElems[0].ch}</span></div>`
-        : '') +
-      // What today's letters stand for — the same appendix, one sentence each,
-      // behind a tap because the face has already named them.
-      (_ltNames
-        ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Letters:</span> ` +
-          `<span class="kot-summary" role="button" tabindex="0" onclick="openLettersModal()">${_ltNames} ▾</span></div>`
         : '');
-
-    // The element and its song, shown under the tractate in either branch —
-    // the appendix keeps letter, mishnah and element on the same eleven days.
-    const psElemHtml = psElems.length
-      ? `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Perek Shirah — ${psElems.map(p => p.ch).filter((c, i, a) => a.indexOf(c) === i).join(' · ')}</div>
-       ` + psElems.map(p =>
-        `<div class="detail-row"><span class="detail-label">Element:</span><span class="detail-value"><strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em">${p.heb}</span></span></div>
-         <div class="detail-row"><span class="detail-label">Song:</span><span class="detail-value"><span style="font-style:italic">${p.verse}</span> <span style="color:var(--ink-dim);font-size:0.85em">${p.src}</span></span></div>`
-      ).join('<div style="height:8px"></div>') +
-        `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Chapters 1–3 of Perek Shirah sing before any creature does — the sky and its waters through the 22 letters, the trees and the grains through the five finals, the grasses at the vowels. One element to each half of a set, eleven days apiece.</div>`
-      : '';
 
     document.getElementById('chochmah-detail').innerHTML = (inExtra && cy22Mic) ?
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year Microcosm — 28-Day Cycle</div>
@@ -13568,7 +13373,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${t.desc}</span></div>`
        ).join('<div style="height:8px"></div>') : ''}
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The year's 33 tractate units are compressed into the 28 as the Alef-Bet is: one a day for the 22 letters, two a day for the five finals — the doubled letters — and one for the vowels.</div>` +
-      psElemHtml +
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
@@ -13589,7 +13393,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Tractate:</span><span class="detail-value">${tractData.tractate}</span></div>
        <div class="detail-row"><span class="detail-label">Period:</span><span class="detail-value">${tractData.period}</span></div>
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${tractData.desc}</span></div>` +
-      psElemHtml +
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
@@ -14797,24 +14600,39 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // KoT Book — displayed on the Binah card face
     const bookParts = todayBook.book.split(' · ');
     // Binah names the same book; one door more, the same room.
-    // The week's creature and its song. Every one of the 52 weekly creatures
-    // has an entry keyed by the weekly table's own name, so the lookup is
-    // exact; the guard below is only for a name that has yet to be given one.
+    // The week's creature and its verse. The animal names in the weekly table
+    // and in PEREK_SHIRAH_VERSES do not always match word for word — Crane and
+    // Crane (Agur) — so the lookup falls back to a leading-word match rather
+    // than showing the name with no song.
     (() => {
       const el = document.getElementById('perek-shirah-week');
       const line = document.getElementById('ps-line');
       if (!el || !line) return;
       const animal = wk && wk.b1_animal;
+      let verse = animal ? PEREK_SHIRAH_VERSES[animal] : null;
+      if (!verse && animal) {
+        // The weekly table and the verse table name the creatures differently:
+        // Crane against Crane (Agur), Sheep and Goat against Sheep / Lamb. Both
+        // are compared as sets of bare words, so a shared word is a match.
+        const words = t => t.toLowerCase().replace(/\(.*?\)/g, '')
+                            .split(/\s+and\s+|\s*\/\s*/).map(x => x.trim()).filter(Boolean);
+        const want = words(animal);
+        const key = Object.keys(PEREK_SHIRAH_VERSES)
+          .find(k => words(k).some(w => want.includes(w)));
+        if (key) verse = PEREK_SHIRAH_VERSES[key];
+      }
       if (!animal) { el.style.display = 'none'; return; }
-      const verse = PEREK_SHIRAH_VERSES[animal];
       el.style.display = '';
-      // A few creatures sing only under a condition — the wild goose when it
-      // sees Israel busy with Torah, the fly when it does not.
-      const who = verse && verse[3] ? `${animal}, ${verse[3]},` : animal;
-      line.innerHTML = `<span class="ps-who">The ${who} is saying:</span> ` +
-        (verse ? `${verse[2]} <span class="ps-src">${verse[1]} · Perek Shirah ${verse[0]}</span>`
+      line.innerHTML = `<span class="ps-who">The ${animal} is saying:</span> ` +
+        (verse ? `${verse[1]} <span class="ps-src">· Perek Shirah ${verse[0]}</span>`
                : `<span class="ps-src">— its song is not recorded here</span>`);
     })();
+
+    // The song of the day's book, under its name — one line each, so the seven
+    // songs turn with the seven books instead of waiting behind a tap.
+    const _bookSong = [wk && wk.b1_theme, wk && wk.b2_haazinu, wk && wk.b3_journeys,
+                       wk && wk.b4_hannah, wk && wk.b5_shir, wk && wk.b6_psalms,
+                       wk && wk.b7_theme][(sef.dayNum - 1) % 7];
 
     document.getElementById('binah-kot-book').innerHTML =
       `<span style="font-size:1.1em">${todayBook.emoji}</span> ` +
@@ -14822,12 +14640,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><strong>${bookParts[0]}</strong></a>`
         : `<strong>${bookParts[0]}</strong>`) +
       (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '') +
-      // The week's reading for this book, behind a tap rather than set out on
-      // the face — the same pop-up a book's name opens in Malchut, on the same
-      // book and the same day.
-      `<br><span class="kot-summary" role="button" tabindex="0" ` +
-        `onclick="openKotBookModal(${sef.dayNum - 1})">Summary ▾</span>` +
-      (todayBook.weekUrl ? ` &nbsp;·&nbsp; <a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
+      (_bookSong ? `<div style="margin-top:4px;font-size:0.92em;color:var(--ink);line-height:1.5;">${_bookSong}</div>` : '') +
+      (todayBook.weekUrl ? `<br><a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
     let _lsSichosBook = null, _ksaLabel = null;
@@ -15339,15 +15153,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       b.day +
       (b.url ? ` &nbsp;·&nbsp; <a href="${b.url}" target="_blank" style="color:var(--gold)">The book ↗</a>` : '') +
       (b.weekUrl ? ` &nbsp;·&nbsp; <a href="${b.weekUrl}" target="_blank" style="color:var(--gold)">This week ↗</a>` : ''));
-  }
-
-  // Today's letters and what each one stands for — the day's, and the one or
-  // two the set is named after. Filled by render; opened from the KoT Book on
-  // the Chochmah face, which is the book these sentences are drawn from.
-  let _ltDetailMain = '', _ltDetailMeta = '';
-  function openLettersModal() {
-    if (!_ltDetailMain) return;
-    openInfoPopup('The Letters — הָאוֹתִיּוֹת', _ltDetailMain, _ltDetailMeta);
   }
 
   function openSeferYetzirahModal() {
@@ -16438,7 +16243,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           const m=D.extraDay<=22?SINGLE_LETTERS_22[D.extraDay-1].hebrew
                  :D.extraDay<=27?FINAL_LETTERS_MIC[D.extraDay-23].hebrew:'נקודות';
           return {n:8,label:'Adar I microcosm — '+t,mic:true,cell:m+' · microcosm'}; }
-        const i = get22DayInfo(D.yearDay);
+        const i = get22DayInfo(D.abs);
         const g = gates231(i.cycle, i.day);
         // The gate is given in Hebrew alone — two letters, or the vowel point
         // where the seventeenth set leaves the letters behind.

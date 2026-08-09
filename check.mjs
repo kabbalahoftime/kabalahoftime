@@ -239,8 +239,8 @@ async function checkInBrowser(chromium) {
       currentOffset = o; render();
       const face = document.getElementById('chochmah-main').innerText;
       // Every letter the face names — the day's and the set's — must carry its
-      // sentence; a letter shown with nothing under it is the whole point of
-      // having them. Vowels are not a letter and are excused.
+      // sentence in the pop-up the KoT Book opens; a letter named with nothing
+      // behind it is the whole point of having them. Vowels are not a letter.
       const named = new Set();
       const dayLt = (face.match(/Day:\s*(.+?)\s+[֐-׿]/) || [])[1];
       const setLt = (face.match(/Cycle:\s*(.+?)\s+[֐-׿]/) || [])[1];
@@ -249,11 +249,16 @@ async function checkInBrowser(chromium) {
       named.delete('Vowels');
       if (named.size) {
         out.shown.days++;
-        const lines = new Set([...document.querySelectorAll('#chochmah-main .lt-notes > [data-letter]')]
-          .map(e => e.dataset.letter));
+        const box = document.createElement('div');
+        box.innerHTML = _ltDetailMain;
+        const lines = new Set([...box.querySelectorAll('[data-letter]')].map(e => e.dataset.letter));
         out.shown.least = Math.min(out.shown.least, lines.size);
         named.forEach(n => { if (!lines.has(n)) out.shown.bad.push(`offset ${o}: ${n} named with no sentence`); });
         lines.forEach(n => { if (!named.has(n)) out.shown.bad.push(`offset ${o}: a sentence for ${n}, which is not on the face`); });
+        // and the control that opens them must be there, naming the same letters
+        const ctl = document.querySelector('#chochmah-kot-book .kot-summary');
+        if (!ctl) out.shown.bad.push(`offset ${o}: the letters are explained but nothing opens them`);
+        else named.forEach(n => { if (!ctl.innerText.includes(n)) out.shown.bad.push(`offset ${o}: the control omits ${n}`); });
       }
       const m = face.match(/Day (\d+) · Cycle (\d+)/);
       if (!m) continue;               // the leap year's microcosm names no set
