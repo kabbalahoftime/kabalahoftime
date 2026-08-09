@@ -1731,18 +1731,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    tinted alternately, so a week reads as one band even where it runs across
    two rows of the Gregorian grid. */
 .cal-scroll { overflow-x:auto; margin-top:10px; }
-.cal-mo { margin:0 0 18px; min-width:560px; }
+/* A month fits the screen by default. Scrolling a wide table sideways on a
+   phone means dragging in two directions at once to read a week, so the
+   default is to fit and the size control below offers the wider views. */
+.cal-mo { margin:0 0 18px; min-width:var(--cal-min, 0); }
 .cal-mo h3 { font-family:'Cinzel',serif; font-size:13px; letter-spacing:2px; text-align:center;
   color:var(--gold); margin:0 0 6px; text-transform:uppercase; }
 .cal-tbl { width:100%; border-collapse:collapse; table-layout:fixed; }
 .cal-tbl th { border:1px solid var(--border); font-size:8.5px; padding:3px 2px;
   font-family:'Cinzel',serif; letter-spacing:.6px; color:var(--ink-mid); text-transform:uppercase; }
-.cal-tbl td { border:1px solid var(--border); vertical-align:top; height:86px;
-  padding:2px 3px; font-size:8.5px; line-height:1.25; color:var(--ink-mid); }
+.cal-tbl td { border:1px solid var(--border); vertical-align:top;
+  height:auto; min-height:var(--cal-h, 74px);
+  padding:2px 3px; font-size:var(--cal-fs, 8.5px); line-height:1.25; color:var(--ink-mid); }
 .cal-tbl td.band { background:rgba(139,105,20,.055); }
 .cal-tbl td.out  { background:var(--bg); }
 .cal-tbl td.now  { outline:2px solid var(--gold); outline-offset:-2px; }
-.cal-num  { font-weight:700; color:var(--ink); font-size:10px; }
+.cal-num  { font-weight:700; color:var(--ink); font-size:calc(var(--cal-fs, 8.5px) + 1.5px); }
+.cal-sizes { display:flex; gap:6px; align-items:center; margin-top:6px; }
+.cal-size { border:1px solid var(--border); background:var(--bg); color:var(--ink-mid);
+  border-radius:12px; padding:5px 11px; font-size:11px; cursor:pointer; min-height:30px;
+  position:relative; }
+.cal-size::after { content:''; position:absolute; left:0; right:0; top:50%;
+  transform:translateY(-50%); height:44px; }
+.cal-size.on { background:var(--gold); color:#fff; border-color:var(--gold); }
 .cal-wk   { font-size:7.5px; color:var(--gold); letter-spacing:.4px; }
 .cal-heb  { font-size:8px; }
 .cal-fest { font-size:7.5px; color:var(--gold-mid); }
@@ -16335,12 +16346,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  cell: sh.name || D.parasha || '',
                  cell2:'D' + sh.day + ' · P' + p + ' · C' + c }; } },
 
-    { card:'Malchut', cycle:'Yad HaChazakah — 28 days a set',
-      // Counts straight through the year, leap or not — fourteen sets in a
-      // leap year, thirteen and a shared one otherwise.
-      seg:(D)=>{ const y=getYadInfo(D.yPos,D.leap);
-        return {n:(y.cycle-1)%7,label:'Set '+y.cycle+' — 28 days',
-                cell:'set '+y.cycle+' · day '+y.dayInCycle+' of 28'}; } },
+    { card:'Malchut', cycle:'Yad HaChazakah · V’Atah Tetzaveh',
+      // Two of Malchut's counts: the Rambam whole every 28 days, and the
+      // Rebbe's last ma'amar completed every thirteen — its se'if keyed to the
+      // same 13-day cycle Tiferet keeps, each se'if carrying a month of the
+      // year. Both run straight through; neither folds for a leap year.
+      seg:(D)=>{ const y = getYadInfo(D.yPos, D.leap);
+        const t = get13DayInfo(D.abs);
+        const sf = VATAH_SEIF_BY_DAY[t.day - 1];
+        const vt = sf === 0 ? 'V’Atah — the whole ma’amar'
+                            : 'Se’if ' + VATAH_HEB[sf - 1] + ' · ' + VATAH_MONTH_BY_DAY[t.day - 1];
+        return { n:(y.cycle-1)%7,
+                 label:'Set ' + y.cycle + ' — the Rambam whole every 28 days',
+                 cell:'set ' + y.cycle + ' · day ' + y.dayInCycle + ' of 28',
+                 cell2: vt }; } },
   ];
 
   let _yrLens = 4;              // Gevurah opens it — its seasons read most clearly
@@ -16425,6 +16444,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('yr-lenses').innerHTML = YR_LENSES.map((l, i) =>
       `<button class="yr-lens${i === _yrLens ? ' on' : ''}" onclick="yrSetLens(${i})">${l.card}</button>`).join('');
     yrDraw();
+    _calSizeInit();
     document.getElementById('year-modal').classList.add('open');
   }
   function closeYearView() { document.getElementById('year-modal').classList.remove('open'); }
@@ -16493,6 +16513,31 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `Each day carries its Hebrew date, what the day is, and where it falls in ${lens.card}'s cycle. ` +
       `Alternate weeks of the Kabbalah of Time year are tinted, and <b>W1…</b> marks where each begins. ` +
       `Tap a day to go to it. <span class="yr-jump" onclick="window.print()">print ↗</span>`;
+  }
+
+  // Three sizes: fit the screen, or two wider views that scroll sideways for
+  // anyone who wants the text bigger. Remembered, so it is chosen once.
+  const CAL_SIZES = [
+    { min: '0',     fs: '7px',   h: '58px' },
+    { min: '620px', fs: '9px',   h: '78px' },
+    { min: '880px', fs: '11px',  h: '96px' },
+  ];
+  function calSize(i) {
+    const s = CAL_SIZES[i] || CAL_SIZES[0];
+    const r = document.documentElement.style;
+    r.setProperty('--cal-min', s.min);
+    r.setProperty('--cal-fs', s.fs);
+    r.setProperty('--cal-h', s.h);
+    for (let j = 0; j < CAL_SIZES.length; j++) {
+      const b = document.getElementById('cal-size-' + j);
+      if (b) b.classList.toggle('on', j === i);
+    }
+    try { localStorage.setItem('kotCalSize', String(i)); } catch (e) {}
+  }
+  function _calSizeInit() {
+    let i = 0;
+    try { i = Math.min(2, Math.max(0, parseInt(localStorage.getItem('kotCalSize'), 10) || 0)); } catch (e) {}
+    calSize(i);
   }
 
   function _calIso(d) { return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
@@ -17188,6 +17233,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
     <div class="yr-lenses" id="yr-lenses"></div>
     <div class="yr-detail" id="yr-detail" style="margin-top:8px;padding-top:8px;"></div>
+    <div class="cal-sizes">
+      <span style="font-size:11px;color:var(--ink-dim);">Size</span>
+      <button class="cal-size on" id="cal-size-0" onclick="calSize(0)">Fit</button>
+      <button class="cal-size" id="cal-size-1" onclick="calSize(1)">Wide</button>
+      <button class="cal-size" id="cal-size-2" onclick="calSize(2)">Wider</button>
+    </div>
     <div class="cal-scroll" id="cal-body"></div>
   </div>
 </div>
