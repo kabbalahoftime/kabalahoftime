@@ -21,15 +21,19 @@
 //                   for every date before the anchor.
 //   4. ids        — no duplicated element id. Mirroring a card's face into the
 //                   Now card once cloned 23 ids and quietly broke both.
-//   5. targets    — no control under 44px that isn't a link inside a sentence.
-//   6. overflow   — the page never scrolls sideways, at any phone width,
+//   5. perek      — each of the 52 weekly creatures resolves to a song, and no
+//                   song sits in the table that no week ever reaches. The verses
+//                   are keyed by the weekly table's own creature names, and a
+//                   renamed creature would otherwise fall silent unnoticed.
+//   6. targets    — no control under 44px that isn't a link inside a sentence.
+//   7. overflow   — the page never scrolls sideways, at any phone width,
 //                   with the cards shut and with every one of them open.
-//   7. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
+//   8. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
 //                   browser, not the stylesheet: a family with no Hebrew in it
 //                   falls through silently to whatever the device happens to
 //                   own, which differs on every device.
-//   8. tracking   — no Hebrew-only text is letterspaced.
-//   9. calendar   — each of the ten monthly calendars is compared against the
+//   9. tracking   — no Hebrew-only text is letterspaced.
+//  10. calendar   — each of the ten monthly calendars is compared against the
 //                   card whose cycle it draws. They are two readings of one
 //                   count, and if they part company the reader cannot tell
 //                   which is wrong. This has caught two real faults already.
@@ -174,6 +178,31 @@ async function checkInBrowser(chromium) {
   });
   if (dups.length) fail(`duplicated id: ${dups.slice(0, 8).join(', ')}`);
   else pass('every element id is unique');
+
+  // perek shirah — every week's creature has its song, keyed by the same name
+  console.log('\nperek shirah');
+  const ps = await page.evaluate(() => {
+    const out = { weeks: 0, missing: [], thin: [], unused: [] };
+    const used = new Set();
+    for (let w = 1; w <= 52; w++) {
+      const a = getWeeklyData(w).b1_animal;
+      out.weeks++;
+      const v = PEREK_SHIRAH_VERSES[a];
+      if (!v) { out.missing.push(`week ${w}: ${a}`); continue; }
+      used.add(a);
+      // [chapter, source, verse, qualifier?] — a verse under 20 characters or
+      // a citation with no number in it is extraction damage, not a song.
+      if (!/^Ch [456]$/.test(v[0]) || !/\d/.test(v[1]) || !v[2] || v[2].length < 20)
+        out.thin.push(`${a}: ${JSON.stringify(v).slice(0, 70)}`);
+    }
+    out.unused = Object.keys(PEREK_SHIRAH_VERSES).filter(k => !used.has(k));
+    return out;
+  });
+  ps.missing.forEach(m => fail(`no Perek Shirah verse for ${m}`));
+  ps.thin.forEach(m => fail(`Perek Shirah entry looks damaged — ${m}`));
+  ps.unused.forEach(m => fail(`Perek Shirah verse for "${m}" is never reached by any week`));
+  if (!ps.missing.length && !ps.thin.length && !ps.unused.length)
+    pass(`all ${ps.weeks} weekly creatures have their song, and none is unreachable`);
 
   // 5. tap targets — a link inside a sentence is exempt, as WCAG has it
   console.log('\ntargets');

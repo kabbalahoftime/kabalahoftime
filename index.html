@@ -8623,60 +8623,64 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { name: 'Mesilat Yesharim',    author: 'Ramchal (R. Moshe Chaim Luzzatto)',   shortName: 'MY',       day: 'Thursday',                desc: 'The Path of the Upright — the ladder of holiness' },
   ];
 
-  // ── PEREK SHIRAH — Chapter + verse for each creature ──
+  // ── PEREK SHIRAH — the song of each of the year's 52 creatures ──
+  // Text and citations follow the Perek Shirah booklet, whose creature
+  // verses begin at Chapter 4 and run in the same order as the weekly
+  // table, so the keys below are the weekly table's own names.
+  //   [ chapter, source, verse, qualifier? ]
   const PEREK_SHIRAH_VERSES = {
-    'Rooster': ['Ch 4', 'Who has given the heart wisdom? (Job 38:36)'],
-    'Hen': ['Ch 4', 'He gives bread to all flesh (Ps 136:25)'],
-    'Dove': ['Ch 4', 'O my dove, in the clefts of the rock (Shir 2:14)'],
-    'Turtledove': ['Ch 4', 'The voice of the turtledove is heard in our land (Shir 2:12)'],
-    'Eagle': ['Ch 4', 'They that wait upon the L-rd shall renew their strength (Isa 40:31)'],
-    'Crane (Agur)': ['Ch 4', 'Like a crane or a swallow, so did I chatter (Isa 38:14)'],
-    'Swallow (Dror)': ['Ch 4', 'The swallow and the crane observe the time of their migration (Jer 8:7)'],
-    'Swift (Sis)': ['Ch 4', 'Even the sparrow has found a home (Ps 84:4)'],
-    'Stork (Chasidah)': ['Ch 4', 'Praise G-d from the heavens, praise Him in the heights (Ps 148:1)'],
-    'Bat': ['Ch 4', 'Comfort, comfort My people, says your G-d (Isa 40:1)'],
-    'Raven': ['Ch 4', 'Who provides nourishment for the raven (Job 38:41)'],
-    'Starling': ['Ch 4', 'The worker\'s sleep is sweet (Eccl 5:11)'],
-    'Grasshopper': ['Ch 4', 'I am young and despised (Ps 119:141)'],
-    'Snail': ['Ch 4', 'As a snail that melts away (Ps 58:9)'],
-    'Ant': ['Ch 4', 'Go to the ant, you sluggard (Prov 6:6)'],
-    'Bee': ['Ch 4', 'How sweet are Your words to my palate! (Ps 119:103)'],
-    'Spider': ['Ch 4', 'The spider spreads her web in palaces (Prov 30:28)'],
-    'Scorpion': ['Ch 4', 'The L-rd preserves the simple (Ps 116:6)'],
-    'Snake': ['Ch 4', 'The L-rd supports all who fall (Ps 145:14)'],
-    'Frog': ['Ch 4', 'Blessed is the Name of the honor of His Kingdom for all eternity (Talmud, Pesachim 56a)'],
-    'Fly': ['Ch 4', 'Call out! All flesh is grass (Isa 40:6)'],
-    'Worm': ['Ch 4', 'But I am a worm, not a man (Ps 22:7)'],
-    'Mouse': ['Ch 4', 'Open for me the gates of righteousness (Ps 118:19)'],
-    'Cat': ['Ch 4', 'I will pursue my enemies and overtake them (Ps 18:38)'],
-    'Ox': ['Ch 5', 'An ox knows its owner (Isa 1:3)'],
-    'Wild Ox (Re\'em)': ['Ch 5', 'G-d brings him out of Egypt (Num 23:22)'],
-    'Horse': ['Ch 5', 'Have you given the horse strength? (Job 39:19)'],
-    'Mule': ['Ch 5', 'I will instruct you and teach you the way (Ps 32:8)'],
-    'Camel': ['Ch 5', 'Your righteousness is like the mighty mountains (Ps 36:7)'],
-    'Sheep / Lamb': ['Ch 5', 'Know that the L-rd is G-d (Ps 100:3)'],
-    'Goat': ['Ch 5', 'Your hair is like a flock of goats (Shir 4:1)'],
-    'Ram': ['Ch 5', 'Praise His name in the dance (Ps 149:3)'],
-    'Donkey': ['Ch 5', 'Yours, G-d, is the greatness and the might (Chron I 29:11)'],
-    'Lion': ['Ch 5', 'The L-rd is a mighty man of war (Exod 15:3)'],
-    'Bear': ['Ch 5', 'Let every soul praise the L-rd (Ps 150:6)'],
-    'Wolf': ['Ch 5', 'Give strength to G-d; His majesty is over Israel (Ps 68:35)'],
-    'Fox': ['Ch 5', 'Catch the foxes for us, the small foxes (Shir 2:15)'],
-    'Wild Deer (Tzvi)': ['Ch 5', 'G-d, my Strength, I will play music to You (Ps 59:18)'],
-    'Gazelle': ['Ch 5', 'My beloved is like a gazelle or a young deer (Shir 2:9)'],
-    'Ibex (Ya\'el)': ['Ch 5', 'Do you know the time of the birth of ibexes? (Job 39:1)'],
-    'Hare (Arnevet)': ['Ch 5', 'Open for me the gates of righteousness (Ps 118:19)'],
-    'Hedgehog (Kipod)': ['Ch 5', 'Praise Him according to His abundant greatness (Ps 150:2)'],
-    'Pig (Chazir)': ['Ch 5', 'The earth and all who dwell upon it will recognize G-d (Ps 98:9)'],
-    'Leviathan': ['Ch 6', 'Give thanks to G-d for He is good, for His kindness endures forever (Ps 136:1)'],
-    'Fish': ['Ch 6', 'The voice of G-d is upon the waters, the G-d of glory thunders, G-d is upon many waters (Ps 29:3)'],
-    'Great Whale': ['Ch 6', 'These are the seas, great and wide (Ps 104:25)'],
-    'Sea / Waves': ['Ch 6', 'More than the voices of many waters (Ps 93:4)'],
-    'Rivers (Naharot)': ['Ch 6', 'Let the rivers clap their hands (Ps 98:8)'],
-    'Frogs (aquatic)': ['Ch 6', 'Praise the L-rd, all nations (Ps 117:1)'],
-    'Swamp (Agam)': ['Ch 6', 'G-d is my shepherd, I shall not want (Ps 23:1)'],
-    'Heavenly Creatures': ['Ch 6', 'Bless the L-rd, all His hosts (Ps 103:21)'],
-    'Dogs': ['Ch 6', 'Come, let us worship and bow down (Ps 95:6)'],
+    'Rooster': ['Ch 4', 'Zohar, Vayakhel 195b', 'When the Holy One, blessed be He, comes to the righteous in the Garden of Eden, all the trees in the Garden of Eden scatter their spices, and they rejoice and praise, and then He, too, is aroused and praises.'],
+    'Hen': ['Ch 4', 'Psalms 136:25', 'He gives bread to all flesh, for His kindness endures forever.'],
+    'Dove': ['Ch 4', 'Isaiah 38:14', 'Like a swift or crane, so do I chatter; I moan like a dove; my eyes fail with looking upward; O God, I am oppressed, be my security.'],
+    'Eagle': ['Ch 4', 'Psalms 59:6', 'And You, God, Lord of Hosts, Lord of Israel, awake to punish all the nations; do not be gracious to any wicked traitors, sela!'],
+    'Crane': ['Ch 4', 'Psalms 33:2', 'Give thanks to God with the lyre, make music for Him with the ten-stringed harp.'],
+    'Songbird': ['Ch 4', 'Psalms 84:4', 'The songbird has also found her home, and the sparrow a nest for herself, where she may lay her young - Your altars, God of Hosts, my King and my Lord.'],
+    'Swallow': ['Ch 4', 'Psalms 30:13', 'So that my soul shall praise You, and shall not be silent, God my Lord, I shall give thanks to You forever.'],
+    'Swift': ['Ch 4', 'Psalms 121:2', 'My help is from God, Maker of Heaven and earth.'],
+    'Stormy Petrel': ['Ch 4', 'Psalms 97:11', 'Light is sown for the righteous, and joy for the straight-hearted.'],
+    'Bat': ['Ch 4', 'Isaiah 40:1', 'Comfort My people, comfort them, says your Lord.'],
+    'Stork': ['Ch 4', 'Isaiah 40:2', 'Speak to the heart of Jerusalem, and call to her, for her time has arrived, for her sins have been pardoned, for she has taken double from God\'s hand for all her sins.'],
+    'Raven': ['Ch 4', 'Job 38:41', 'Who prepares food for the raven, when his young ones cry out to God?'],
+    'Starling': ['Ch 4', 'Isaiah 61:9', 'Their seed shall be known among the nations, and their offspring among the peoples; all who see them shall acknowledge them, that they are the seed which God has blessed.'],
+    'Domestic Goose': ['Ch 4', 'Psalms 105:1-2', 'Give thanks to God, call upon His Name, make His works known amongst the peoples, sing to Him, make music for Him, speak of all His wonders.'],
+    'Wild Goose': ['Ch 4', 'Isaiah 40:3', 'A voice cries, Prepare in the wilderness the way of God, make straight in the desert a path for our God.', 'flying in the wilderness, when it sees Israel busy with Torah'],
+    'Ducks': ['Ch 4', 'Isaiah 26:4', 'Trust in God forever and ever, for God, the Eternal, is the strength of worlds.'],
+    'Bee-Eater': ['Ch 4', 'Zechariah 10:8', 'I will whistle to them and gather them, for I have redeemed them, and they shall increase as they have before increased.'],
+    'Grasshopper': ['Ch 4', 'Psalms 121:1', 'I lift my eyes up to the mountains, where shall my help come from?'],
+    'Locust': ['Ch 4', 'Isaiah 25:1', 'O God, You are my Lord; I will exalt You, I will praise Your Name; for You have done wondrous things; Your counsels of old are faithfulness and truth.'],
+    'Spider': ['Ch 4', 'Psalms 150:5', 'Praise Him with sounding cymbals! Praise Him with loud clashing cymbals!'],
+    'Fly': ['Ch 4', 'Isaiah 40:6,8; 57:19', 'The voice said, \'Call out.\' And he said, \'What shall I call out? All flesh is grass, and all its grace is as the flower of the field.\' \'…The grass withers, the flower fades; but the word of our Lord shall endure forever.\' I will create a new expression of the lips; Peace, peace for him who is far off and for him who is near, says God; and I will heal him.', 'when Israel is not busying itself with Torah'],
+    'Sea Monsters': ['Ch 4', 'Psalms 148:7', 'Praise God from the land, the sea monsters and all the depths.'],
+    'Leviathan': ['Ch 4', 'Psalms 136:1', 'Give thanks to God for He is good, for His kindness endures forever.'],
+    'Fish': ['Ch 4', 'Psalms 29:3', 'The voice of God is upon the waters, the God of glory thunders, God is upon many waters.'],
+    'Frog': ['Ch 4', 'Talmud, Pesachim 56a', 'Blessed is the Name of the honor of His Kingdom for all eternity.'],
+    'Sheep and Goat': ['Ch 5', 'Exodus 15:11', 'Who is like You among the mighty ones, God, who is like You, mighty in holiness, awesome in praise, worker of wonders.'],
+    'Cow': ['Ch 5', 'Psalms 81:2', 'Rejoice to the Lord over our strength, trumpet to the Lord of Yaakov!'],
+    'Pig and Rabbit': ['Ch 5', 'Psalms 125:4', 'God is good to the good, and to the straight-hearted.'],
+    'Beast of Burden': ['Ch 5', 'Psalms 128:2', 'When you eat the fruit of your labors, happy are you and good is your lot.'],
+    'Camel': ['Ch 5', 'Jeremiah 25:30', 'God shall roar from upon high and cause His voice to sound forth from His holy place, His shout echoes profoundly over His dwelling place.'],
+    'Horse': ['Ch 5', 'Psalms 123:2', 'Behold, as the eyes of the servants to the hand of their master, as the eyes of the maidservant to the hand of her mistress, so are our eyes to God our Lord until He will favor us.'],
+    'Mule': ['Ch 5', 'Psalms 138:4', 'All the kings of the earth shall acknowledge You, God, for they have heard the sayings of Your mouth.'],
+    'Donkey': ['Ch 5', 'Chronicles I 29:11', 'Yours, God, is the greatness, and the might, and the splendor, and the victory, and the glory, for everything in the Heavens and earth [is Yours]; Yours, God, is the kingship, and the exaltation over all.'],
+    'Ox': ['Ch 5', 'Exodus 15:1', 'Then Moshe and the Children of Israel sang this song to God, and they said, I shall sing to God, for He has triumphed; He has thrown the horse and its rider into the sea.'],
+    'Wild Animals': ['Ch 5', 'Talmud, Berachos 48b', 'Blessed is the One Who is good and bestows good.'],
+    'Gazelle': ['Ch 5', 'Psalms 59:17', 'And I shall sing of Your strength, I shall rejoice of Your kindness in the morning, for You were a refuge to me, and a hiding place on the day of my oppression.'],
+    'Elephant': ['Ch 5', 'Psalms 92:6', 'How great are Your works, God; Your thoughts are tremendously deep.'],
+    'Lion': ['Ch 5', 'Isaiah 42:13', 'God shall go out as a mighty man, He shall arouse zeal, He shall cry, even roar, He shall prevail over His enemies.'],
+    'Bear': ['Ch 5', 'Isaiah 42:11-12', 'Let the wilderness and its cities lift up their voice, the village that Kedar inhabits; let the inhabitants of the rocks sing, let them shout from the peaks of the mountains. Let them give glory to God, and tell of His praise in the islands.'],
+    'Wolf': ['Ch 5', 'Exodus 22:8', 'For every matter of iniquity, for the ox, the donkey, the lamb, the garment, for every lost item about which he says, \'This is it,\' the matter of both of them shall come before the judge; he who the judge finds guilty shall pay double to the other.'],
+    'Fox': ['Ch 5', 'Jeremiah 22:13', 'Woe to him that builds his house without justice, and his chambers without lawfulness; that uses his friend\'s service without wages, and does not give him for his hire.'],
+    'Hound': ['Ch 5', 'Psalms 33:1', 'Let the righteous rejoice in God, praise is befitting to the straight.'],
+    'Cat': ['Ch 5', 'Obadiah 1:4', 'If you rise up like a vulture, and place your nest among the stars, from there I shall bring you down, says God.'],
+    'Mouse': ['Ch 5', 'Cf. Nehemiah 9:33', 'You are just for all that comes upon me, for You have acted truthfully, and I have been wicked.'],
+    'Creeping Creatures': ['Ch 6', 'Psalms 149:2', 'Let Israel rejoice in He Who made him; let the children of Zion be joyful in their King.'],
+    'Prolific Creeping Creatures': ['Ch 6', 'Psalms 128:3', 'Your wife shall be like a fruitful vine in the recesses of your house; your children like olive shoots around your table.'],
+    'Snake': ['Ch 6', 'Psalms 145:14', 'God supports all the fallen, and straightens all the bent.'],
+    'Scorpion': ['Ch 6', 'Psalms 145:9', 'God is good to all, and His mercy is upon all of His handiwork.'],
+    'Snail': ['Ch 6', 'Psalms 58:9', 'Like the snail that melts away, the stillborn of a mole that does not see the sun.'],
+    'Ant': ['Ch 6', 'Proverbs 6:6', 'Go to the ant, you sluggard; consider her ways, and be wise.'],
+    'Weasel': ['Ch 6', 'Psalms 150:6', 'Let every soul praise God, Hallelukah!'],
+    'Dogs': ['Ch 6', 'Psalms 95:6', 'Come, let us worship and bow down; let us kneel before God our Maker.'],
   };
 
 
@@ -14600,31 +14604,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // KoT Book — displayed on the Binah card face
     const bookParts = todayBook.book.split(' · ');
     // Binah names the same book; one door more, the same room.
-    // The week's creature and its verse. The animal names in the weekly table
-    // and in PEREK_SHIRAH_VERSES do not always match word for word — Crane and
-    // Crane (Agur) — so the lookup falls back to a leading-word match rather
-    // than showing the name with no song.
+    // The week's creature and its song. Every one of the 52 weekly creatures
+    // has an entry keyed by the weekly table's own name, so the lookup is
+    // exact; the guard below is only for a name that has yet to be given one.
     (() => {
       const el = document.getElementById('perek-shirah-week');
       const line = document.getElementById('ps-line');
       if (!el || !line) return;
       const animal = wk && wk.b1_animal;
-      let verse = animal ? PEREK_SHIRAH_VERSES[animal] : null;
-      if (!verse && animal) {
-        // The weekly table and the verse table name the creatures differently:
-        // Crane against Crane (Agur), Sheep and Goat against Sheep / Lamb. Both
-        // are compared as sets of bare words, so a shared word is a match.
-        const words = t => t.toLowerCase().replace(/\(.*?\)/g, '')
-                            .split(/\s+and\s+|\s*\/\s*/).map(x => x.trim()).filter(Boolean);
-        const want = words(animal);
-        const key = Object.keys(PEREK_SHIRAH_VERSES)
-          .find(k => words(k).some(w => want.includes(w)));
-        if (key) verse = PEREK_SHIRAH_VERSES[key];
-      }
       if (!animal) { el.style.display = 'none'; return; }
+      const verse = PEREK_SHIRAH_VERSES[animal];
       el.style.display = '';
-      line.innerHTML = `<span class="ps-who">The ${animal} is saying:</span> ` +
-        (verse ? `${verse[1]} <span class="ps-src">· Perek Shirah ${verse[0]}</span>`
+      // A few creatures sing only under a condition — the wild goose when it
+      // sees Israel busy with Torah, the fly when it does not.
+      const who = verse && verse[3] ? `${animal}, ${verse[3]},` : animal;
+      line.innerHTML = `<span class="ps-who">The ${who} is saying:</span> ` +
+        (verse ? `${verse[2]} <span class="ps-src">${verse[1]} · Perek Shirah ${verse[0]}</span>`
                : `<span class="ps-src">— its song is not recorded here</span>`);
     })();
 
