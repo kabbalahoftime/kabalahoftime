@@ -1066,9 +1066,17 @@ display: block;
 animation: fadeIn 0.25s ease;
 }
 
+/* Label beside value where there is room for both, label above it where there
+   is not. On a 320px phone the row is 145px wide and the label alone claimed
+   110 of them, leaving the value 25px — one character a line, so "Torah Ohr"
+   came down the page a letter at a time. The value asks for 150px; when the
+   two cannot have that between them the value wraps to its own line and takes
+   the row's full width. No breakpoint decides it — the row does, at whatever
+   width it happens to have. */
 .detail-row {
 display: flex;
-gap: 10px;
+flex-wrap: wrap;
+gap: 1px 10px;
 margin-bottom: 6px;
 font-size: 14px;
 line-height: 1.4;
@@ -1084,7 +1092,7 @@ font-weight: 500;
 
 /* Long unbroken titles — Avodat Yom HaKippurim in the Yad's list — pushed the
    page sideways on a 320px phone. Values wrap inside their column now. */
-.detail-value { color: var(--ink-mid); overflow-wrap: anywhere; }
+.detail-value { color: var(--ink-mid); overflow-wrap: anywhere; flex: 1 1 150px; min-width: 0; }
 
 /* ── DIVIDER ── */
 .section-divider {

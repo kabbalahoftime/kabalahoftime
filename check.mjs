@@ -32,7 +32,8 @@
 //                   the name the card shows — a rename loses it silently.
 //   7. targets    — no control under 44px that isn't a link inside a sentence.
 //   8. overflow   — the page never scrolls sideways, at any phone width,
-//                   with the cards shut and with every one of them open.
+//                   with the cards shut and with every one of them open, and
+//                   no detail value is squeezed too narrow to hold a word.
 //   9. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
 //                   browser, not the stylesheet: a family with no Hebrew in it
 //                   falls through silently to whatever the device happens to
@@ -582,12 +583,23 @@ async function checkInBrowser(chromium) {
       const already = cards.filter(c => c.classList.contains('expanded'));
       cards.forEach(c => c.classList.add('expanded'));
       const open = document.documentElement.scrollWidth - document.documentElement.clientWidth;
+      // A value column too narrow to hold a word is not a sideways scroll, so
+      // nothing above would catch it: at 320px the label claimed 110 of the
+      // row's 145 and "Torah Ohr" came down the page a letter at a time.
+      const vals = [...document.querySelectorAll('.detail-row')]
+        .filter(r => r.children.length === 2)
+        .map(r => Math.round(r.querySelector('.detail-value').getBoundingClientRect().width));
+      const narrowest = vals.length ? Math.min(...vals) : null;
       cards.forEach(c => { if (!already.includes(c)) c.classList.remove('expanded'); });
-      return { shut, open };
+      return { shut, open, narrowest, rows: vals.length };
     });
     if (over.shut > 0) fail(`${w}px wide, cards shut: page scrolls sideways by ${over.shut}px`);
     else if (over.open > 0) fail(`${w}px wide, cards open: page scrolls sideways by ${over.open}px`);
     else pass(`${w}px wide: no sideways scroll, shut or open`);
+    if (over.narrowest !== null && over.narrowest < 120)
+      fail(`${w}px wide: the narrowest of ${over.rows} detail values is ${over.narrowest}px — too narrow to hold a word`);
+    else if (over.narrowest !== null)
+      pass(`${w}px wide: every detail value at least ${over.narrowest}px across ${over.rows} rows`);
   }
 
   if (crashes.length) crashes.slice(0, 5).forEach(c => fail('uncaught: ' + c));
