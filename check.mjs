@@ -347,7 +347,7 @@ async function checkInBrowser(chromium) {
         cell: s => combo((s.cell || '') + ' ' + (s.cell2 || '')) },
       { lens: 3, name: 'Chesed',
         card: () => pair(m(main(2), /Day (\d+) · Cycle \d+ of 5: (\S+)/), 2, 1),
-        cell: s => pair(m(s.cell, /^(\S+) · (\d+)$/), 1, 2) },
+        cell: s => pair(m(s.cell, /^(\S+) · (\d+) of 72$/), 1, 2) },
       { lens: 4, name: 'Gevurah',
         card: () => pair(m(main(3), /Day (\d+) · (\w+)/), 2, 1),
         cell: s => pair(m(s.cell, /^(\w+) · (\d+) of 91$/), 1, 2) },

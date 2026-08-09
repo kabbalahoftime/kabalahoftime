@@ -16184,7 +16184,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const gate = g.isVowel ? g.primHeb : (g.primHeb + g.compHeb);
         return { n:(i.cycle-1)%7,
                  label:'Set '+i.cycle+(g.isVowel ? ' — the vowels' : ' — '+i.letters),
-                 cell: i.dailyHebrew+' '+i.dailyLetter+(gate ? ' · '+gate : '') }; } },
+                 cell: i.dailyHebrew+' '+i.dailyLetter+(gate ? ' · '+gate : ''),
+                 cell2:'set '+i.cycle+' · day '+i.day+' of 22' }; } },
 
     { card:'Binah', cycle:'Sefirot — 7 × 7 × 7',
       // Counts unbroken from the epoch; nothing folds. Reads through the same
@@ -16220,7 +16221,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const mn = ((a.dayInCycle - 1) % 24) + 1;
         const bk = BIRKAT_KOHANIM_CYCLES[a.cycle - 1].split(' ')[Math.floor((a.dayInCycle - 1) / 24)];
         return { n:a.cycle-1, label:'Cycle '+a.cycle+' of 5 — seventy-two days',
-                 cell:  a.name + ' · ' + a.nameNum,
+                 cell:  a.name + ' · ' + a.nameNum + ' of 72',
                  cell2: m.he + ' ' + mn,
                  cell3: bk || '' }; } },
 
@@ -16330,8 +16331,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const cell = (h.m.kind==='sa' && h.a.kind==='sa')
           ? 'OC ' + h.m.ch + '–' + h.a.ch
           : both(h.m) + ' · ' + both(h.a);
+        // The two units a day climb from 1 to 728 across the year — the 697
+        // chapters of Orach Chaim, then the thirty-one of the Chofetz Chaim —
+        // so the day names the work it is in and how far the count has come.
+        const work = kinds.every(k=>k==='sa') ? 'Orach Chaim'
+                   : kinds.every(k=>k==='cc') ? 'Chofetz Chaim' : 'into the Chofetz Chaim';
         return { n: kinds.every(k=>k==='sa') ? 4 : kinds.every(k=>k==='cc') ? 5 : 6,
-                 label, cell }; } },
+                 label, cell, cell2: work, cell3: (h.day * 2 - 1) + ' of 728' }; } },
 
     { card:'Yesod', cycle:'Shovavim — day, parasha, cycle',
       seg:(D)=>{ const sh = window.getShovavimForDate && window.getShovavimForDate(D.date);
