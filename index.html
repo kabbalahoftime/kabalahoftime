@@ -1737,7 +1737,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .cal-tbl { width:100%; border-collapse:collapse; table-layout:fixed; }
 .cal-tbl th { border:1px solid var(--border); font-size:8.5px; padding:3px 2px;
   font-family:'Cinzel',serif; letter-spacing:.6px; color:var(--ink-mid); text-transform:uppercase; }
-.cal-tbl td { border:1px solid var(--border); vertical-align:top; height:62px;
+.cal-tbl td { border:1px solid var(--border); vertical-align:top; height:70px;
   padding:2px 3px; font-size:8.5px; line-height:1.25; color:var(--ink-mid); }
 .cal-tbl td.band { background:rgba(139,105,20,.055); }
 .cal-tbl td.out  { background:var(--bg); }
@@ -16218,7 +16218,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const p = sh.parashaNums.join(' & '), c = sh.cycles.join(' & ');
         return { n:(sh.cycles[0]-1)%7,
                  label:'Cycle ' + c + (sh.cycles.length>1?'':' of the eight pathways'),
-                 cell:'D' + sh.day + ' · P' + p + ' · C' + c }; } },
+                 cell: sh.name || D.parasha || '',
+                 cell2:'D' + sh.day + ' · P' + p + ' · C' + c }; } },
 
     { card:'Malchut', cycle:'Yad HaChazakah — 28 days a set',
       // Counts straight through the year, leap or not — fourteen sets in a
@@ -16341,7 +16342,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             `<div class="cal-num">${date}${d.doy % 7 === 1 ? ` <span class="cal-wk">W${wkNo}</span>` : ''}</div>` +
             `<div class="cal-heb">${d.heb.day} ${CAL_HEB_MON[d.heb.month] || d.heb.month}</div>` +
             (d.fest ? `<div class="cal-fest">${_calEsc(d.fest)}</div>` : '') +
-            (d._seg.cell ? `<div class="cal-cyc">${_calEsc(d._seg.cell)}</div>` : '') +
+            (d._seg.cell  ? `<div class="cal-cyc">${_calEsc(d._seg.cell)}</div>`  : '') +
+            (d._seg.cell2 ? `<div class="cal-cyc">${_calEsc(d._seg.cell2)}</div>` : '') +
             '</td>';
         }
         col++;
