@@ -16088,13 +16088,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // this, and what is that block called. `doy` is the day within the KoT year,
   // `abs` the day since the epoch, which is what the 7×7×7 counts from.
   const YR_LENSES = [
-    { card:'Keter', cycle:'Sefer HaMitzvos — 365 and 248',
-      // Keyed to Hebrew dates, so a leap year needs no adjustment: the added
-      // month simply falls inside the negative commandments' long stretch.
-      seg:(D)=>{ const h=D.heb;
-        const neg = (h.month===6&&h.day>=25)||h.month>=7||h.month<=2||(h.month===3&&h.day<=3);
-        return neg ? {n:0,label:'365 Lo Taaseh — 25 Elul to 3 Sivan',cell:'Lo Taaseh'}
-                   : {n:1,label:'248 Aseh — 4 Sivan to Erev Yom Kippur',cell:'Aseh'}; } },
+    { card:'Keter', cycle:'Likutei Moharan — a lesson a day',
+      // The same lookup the card uses: every entry is pegged to a named Hebrew
+      // date rather than a floating count, Adar I has its own supplement, and
+      // on Elul 25–29 and Tishrei 1–6 two lessons fall on the one date.
+      seg:(D)=>{
+        const h = D.heb;
+        const isAdarI = D.leap && h.month === 12;
+        const dailies = isAdarI
+          ? [LM_DAILY_CYCLE_ADAR1[h.day]].filter(Boolean)
+          : lmEntriesForDate(h.month, h.day).map(n => LM_DAILY_CYCLE[n]).filter(Boolean);
+        if (!dailies.length) return {n:-1,label:'No lesson set for this day',brk:true,cell:''};
+        const shorten = t => {
+          let m = t.match(/Likutei Moharan II, Torah (\d+)/);
+          if (m) return 'Tinyana ' + m[1];
+          m = t.match(/Likutei Moharan, Lesson (\d+)/);
+          return m ? 'Torah ' + m[1] : t;
+        };
+        const isII = dailies[0].lesson.startsWith('Likutei Moharan II');
+        return { n: isAdarI ? 8 : (isII ? 1 : 0),
+                 label: isAdarI ? 'Adar I supplement — Torah 283 onward'
+                                : (isII ? 'Tinyana — Part II' : 'Part I'),
+                 cell: dailies.map(x => shorten(x.lesson)).join(' + ') };
+      } },
 
     { card:'Chochmah', cycle:'Alef-Bet — 22 days a set',
       seg:(D)=>{ if (D.inExtra) {
@@ -16282,7 +16298,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         } else {
           const wkNo = Math.floor((d.doy - 1) / 7) + 1;
           cells += `<td class="${wkNo % 2 ? 'band' : ''}${d.abs === today ? ' now' : ''}${
-              d._seg.brk ? ' cal-sil' : ''}" onclick="yrPick(${d.doy - 1})">` +
+              d._seg.brk ? ' cal-sil' : ''}" onclick="yrPick(${d.doy - 1})" ` +
+            `title="${_calEsc(d._seg.label)} · KoT week ${wkNo}, day ${d.doy}">` +
             `<div class="cal-num">${date}${d.doy % 7 === 1 ? ` <span class="cal-wk">W${wkNo}</span>` : ''}</div>` +
             `<div class="cal-heb">${d.heb.day} ${CAL_HEB_MON[d.heb.month] || d.heb.month}</div>` +
             (d.fest ? `<div class="cal-fest">${_calEsc(d.fest)}</div>` : '') +
