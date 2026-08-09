@@ -1868,10 +1868,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* The one link on a card's face is the day's reading, not a word inside a
    sentence — it is the thing you came to tap, so it gets the finger's worth
    of height while the line it sits on stays where it was. */
-[id$="-face"] > a, #keter-daily-zohar > a, .sefirah-main-text > a, a.tap-line {
+[id$="-face"] > a, #keter-daily-zohar > a, .sefirah-main-text > a, a.tap-line,
+.kot-summary {
   display: inline-block; padding: 12px 6px; margin: -12px -6px;
   position: relative; z-index: 1;
 }
+/* Opens the book's week; a control rather than a link, so it says so. */
+.kot-summary { color: var(--gold); font-size: 0.85em; cursor: pointer; }
 </style>
 
 </head>
@@ -14735,20 +14738,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                : `<span class="ps-src">— its song is not recorded here</span>`);
     })();
 
-    // The song of the day's book, under its name — one line each, so the seven
-    // songs turn with the seven books instead of waiting behind a tap.
-    const _bookSong = [wk && wk.b1_theme, wk && wk.b2_haazinu, wk && wk.b3_journeys,
-                       wk && wk.b4_hannah, wk && wk.b5_shir, wk && wk.b6_psalms,
-                       wk && wk.b7_theme][(sef.dayNum - 1) % 7];
-
     document.getElementById('binah-kot-book').innerHTML =
       `<span style="font-size:1.1em">${todayBook.emoji}</span> ` +
       (todayBook.url
         ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><strong>${bookParts[0]}</strong></a>`
         : `<strong>${bookParts[0]}</strong>`) +
       (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '') +
-      (_bookSong ? `<div style="margin-top:4px;font-size:0.92em;color:var(--ink);line-height:1.5;">${_bookSong}</div>` : '') +
-      (todayBook.weekUrl ? `<br><a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
+      // The week's reading for this book, behind a tap rather than set out on
+      // the face — the same pop-up a book's name opens in Malchut, on the same
+      // book and the same day.
+      `<br><span class="kot-summary" role="button" tabindex="0" ` +
+        `onclick="openKotBookModal(${sef.dayNum - 1})">Summary ▾</span>` +
+      (todayBook.weekUrl ? ` &nbsp;·&nbsp; <a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
     let _lsSichosBook = null, _ksaLabel = null;
