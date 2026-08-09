@@ -1786,6 +1786,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   .cal-mo { min-width:0; page-break-inside:avoid; }
 }
 
+#perek-shirah-week { margin:14px 16px 0; padding:10px 14px; border:1px solid var(--border-strong);
+  border-left:3px solid var(--gold); border-radius:4px; background:var(--bg-card); }
+.ps-label { font-family:'Cinzel',serif; font-size:8.5px; letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+.ps-line { font-size:14px; color:var(--ink); line-height:1.6; }
+.ps-line .ps-who { font-weight:600; }
+.ps-line .ps-src { color:var(--ink-mid); font-size:0.86em; font-style:italic; }
+
 /* ── TAP TARGETS ──
    A finger is about 44px across, and several controls were drawn at a third
    of that — the language pills at 19px tall, the date-jump line at 11. Two
@@ -1965,6 +1973,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
 
   <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
+  <!-- The week's creature from Perek Shirah, with the verse it sings. The
+       book began here, and until now the verses sat in the file unused while
+       only the animal's name was shown, inside a field of Book 1. -->
+  <div id="perek-shirah-week" style="display:none;">
+    <div class="ps-label">Perek Shirah · this week</div>
+    <div class="ps-line" id="ps-line"></div>
+  </div>
+
   <div id="kot-welcome" style="display:none; margin:12px 16px 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:13px; color:var(--ink-mid); line-height:1.7; position:relative;">
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:18px; cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
@@ -14584,12 +14600,47 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // KoT Book — displayed on the Binah card face
     const bookParts = todayBook.book.split(' · ');
     // Binah names the same book; one door more, the same room.
+    // The week's creature and its verse. The animal names in the weekly table
+    // and in PEREK_SHIRAH_VERSES do not always match word for word — Crane and
+    // Crane (Agur) — so the lookup falls back to a leading-word match rather
+    // than showing the name with no song.
+    (() => {
+      const el = document.getElementById('perek-shirah-week');
+      const line = document.getElementById('ps-line');
+      if (!el || !line) return;
+      const animal = wk && wk.b1_animal;
+      let verse = animal ? PEREK_SHIRAH_VERSES[animal] : null;
+      if (!verse && animal) {
+        // The weekly table and the verse table name the creatures differently:
+        // Crane against Crane (Agur), Sheep and Goat against Sheep / Lamb. Both
+        // are compared as sets of bare words, so a shared word is a match.
+        const words = t => t.toLowerCase().replace(/\(.*?\)/g, '')
+                            .split(/\s+and\s+|\s*\/\s*/).map(x => x.trim()).filter(Boolean);
+        const want = words(animal);
+        const key = Object.keys(PEREK_SHIRAH_VERSES)
+          .find(k => words(k).some(w => want.includes(w)));
+        if (key) verse = PEREK_SHIRAH_VERSES[key];
+      }
+      if (!animal) { el.style.display = 'none'; return; }
+      el.style.display = '';
+      line.innerHTML = `<span class="ps-who">The ${animal} is saying:</span> ` +
+        (verse ? `${verse[1]} <span class="ps-src">· Perek Shirah ${verse[0]}</span>`
+               : `<span class="ps-src">— its song is not recorded here</span>`);
+    })();
+
+    // The song of the day's book, under its name — one line each, so the seven
+    // songs turn with the seven books instead of waiting behind a tap.
+    const _bookSong = [wk && wk.b1_theme, wk && wk.b2_haazinu, wk && wk.b3_journeys,
+                       wk && wk.b4_hannah, wk && wk.b5_shir, wk && wk.b6_psalms,
+                       wk && wk.b7_theme][(sef.dayNum - 1) % 7];
+
     document.getElementById('binah-kot-book').innerHTML =
       `<span style="font-size:1.1em">${todayBook.emoji}</span> ` +
       (todayBook.url
         ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><strong>${bookParts[0]}</strong></a>`
         : `<strong>${bookParts[0]}</strong>`) +
       (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '') +
+      (_bookSong ? `<div style="margin-top:4px;font-size:0.92em;color:var(--ink);line-height:1.5;">${_bookSong}</div>` : '') +
       (todayBook.weekUrl ? `<br><a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
