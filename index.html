@@ -16214,20 +16214,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { card:'Tiferet', cycle:'13 Attributes — 13 days',
       // The card expresses the raw 1-28 cycle as its round and position —
       // 1st, 2nd, then the microcosm of two — so the calendar says it the same
-      // way, or the same day would be told two different numbers.
+      // way, or the same day would be told two different numbers. The day's
+      // Attribute is named beneath, with its Hebrew, its meaning and the Nassi
+      // of that day on hover.
       seg:(D)=>{ if (D.inExtra) {
           const set = D.extraDay<=13 ? 'Micha’s thirteen'
                     : D.extraDay<=26 ? 'Moshe’s thirteen' : 'both sets whole';
-          return {n:8,label:'Adar I microcosm — a cycle a day ('+set+')',mic:true,
-                  cell:'microcosm · cycle '+D.extraDay}; }
+          const a = D.extraDay<=13 ? THIRTEEN_ATTRIBUTES[D.extraDay-1]
+                  : D.extraDay<=26 ? MOSHE_THIRTEEN_ATTRIBUTES[D.extraDay-14] : null;
+          return {n:8,mic:true,
+                  label:'Adar I microcosm — a cycle a day ('+set+')'+(a?' · '+a.meaning:''),
+                  cell:'microcosm · cycle '+D.extraDay,
+                  cell2:'day '+D.extraDay+' of 28',
+                  cell3:a ? a.name : set}; }
         const i = get13DayInfo(D.abs);
         const round = i.cycle <= 13 ? 1 : (i.cycle <= 26 ? 2 : 3);
         const n = round === 3 ? i.cycle - 26 : (round === 2 ? i.cycle - 13 : i.cycle);
         const name = round === 3 ? 'microcosm cycle ' + n + ' of 2'
                                  : ['', '1st', '2nd'][round] + ' cycle ' + n;
         return { n:(i.cycle-1)%7,
-                 label:'Cycle '+i.cycle+' — '+(i.cycle<=13?'Micha':i.cycle<=26?'Moshe':'the microcosm'),
-                 cell:name, cell2:'day '+i.day+' of 13' }; } },
+                 label:(i.attr ? i.attr.name + ' ' + i.attr.hebrew + ' — ' + i.attr.meaning : '') +
+                       (i.nassi ? ' · Nassi ' + i.nassi : ''),
+                 cell:name, cell2:'day '+i.day+' of 13',
+                 cell3:i.attr ? i.attr.name : '' }; } },
 
     { card:'Netzach', cycle:'369 — nine cycles of 41',
       // The card's own count: get41DayInfo from the epoch, as render calls it.
