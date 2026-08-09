@@ -1699,6 +1699,47 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   .path-row { padding: 8px 6px; }
 }
 
+/* ── THE YEAR — one card's cycle laid over all 364 (or 392) days ──
+   A column to a week, seven days down each column, exactly as the Journal's
+   year view runs. The tint is not decoration: it is the cycle's own division,
+   so a season, a lobe, a set of 22 reads as one block of colour and the shape
+   of the year is visible at a glance. */
+#year-modal { display:none; position:fixed; inset:0; z-index:1400;
+  background:rgba(0,0,0,.55); align-items:flex-start; justify-content:center;
+  padding:16px 10px; overflow-y:auto; }
+#year-modal.open { display:flex; }
+.yr-panel { background:var(--bg-card); border:1px solid var(--border-strong); border-radius:8px;
+  width:100%; max-width:760px; padding:16px 14px 18px; }
+.yr-head { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.yr-title { font-family:'Cinzel',serif; font-size:14px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--gold); }
+.yr-sub { font-size:12px; color:var(--ink-mid); font-style:italic; margin-top:3px; }
+.yr-close { background:none; border:none; color:var(--ink-mid); font-size:20px; cursor:pointer;
+  min-width:44px; min-height:44px; }
+.yr-lenses { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 10px; }
+.yr-lens { border:1px solid var(--border); background:var(--bg); color:var(--ink-mid);
+  border-radius:14px; padding:7px 12px; font-family:'Cinzel',serif; font-size:9.5px;
+  letter-spacing:1px; text-transform:uppercase; cursor:pointer; min-height:32px; position:relative; }
+.yr-lens::after { content:''; position:absolute; left:0; right:0; top:50%;
+  transform:translateY(-50%); height:44px; }
+.yr-lens.on { background:var(--gold); color:#fff; border-color:var(--gold); }
+.yr-grid-wrap { overflow-x:auto; padding-bottom:4px; }
+.yr-grid { display:grid; grid-auto-flow:column; grid-template-rows:repeat(7,1fr);
+  gap:1px; }
+.yr-cell { aspect-ratio:1; border-radius:2px; background:var(--border); cursor:pointer;
+  position:relative; }
+.yr-cell.today { outline:2px solid var(--gold); outline-offset:1px; }
+.yr-cell.brk { opacity:.35; }
+.yr-axis { display:flex; justify-content:space-between; font-size:10px; color:var(--ink-dim);
+  margin-top:5px; }
+.yr-legend { display:flex; flex-wrap:wrap; gap:8px 14px; margin-top:12px; }
+.yr-key { display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ink-mid); }
+.yr-swatch { width:12px; height:12px; border-radius:2px; flex-shrink:0; }
+.yr-detail { margin-top:12px; padding-top:10px; border-top:1px solid var(--border);
+  font-size:12.5px; color:var(--ink-mid); min-height:3.2em; line-height:1.6; }
+.yr-detail b { color:var(--ink); }
+.yr-jump { margin-left:8px; color:var(--gold); cursor:pointer; }
+
 /* ── TAP TARGETS ──
    A finger is about 44px across, and several controls were drawn at a third
    of that — the language pills at 19px tall, the date-jump line at 11. Two
@@ -1869,7 +1910,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           <button id="pr-israel-btn" class="year-pill-btn" onclick="setParashaRegion('israel')" style="font-size:9px;padding:2px 8px;letter-spacing:.5px;">Israel</button>
         </div>
       </div>
-      <button class="date-jump-trigger" onclick="openDatePicker()">jump to date ↗</button>
+      <div style="display:flex; justify-content:center; align-items:center; gap:14px;">
+        <button class="date-jump-trigger" onclick="openDatePicker()">jump to date ↗</button>
+        <button class="date-jump-trigger" onclick="openYearView()">the year ↗</button>
+      </div>
     </div>
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
   </div>
@@ -15987,6 +16031,151 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       _kotBackupHtml();
   }
 
+  // ── THE YEAR ──
+  // Each card measures the year by its own cycle. Laid over all 364 days (392
+  // in a leap year) those cycles become shapes: Gevurah's four seasons of 91,
+  // Chesed's five lobes of 72 with a silent day between them, Binah's seven
+  // cycles of 49, Malchut's fourteen of 28. The lens is the card; the tint is
+  // that card's own division of the year, taken from the same functions the
+  // cards themselves use, so the two can never disagree.
+  const YR_PALETTE = ['#8b6914','#6b8e5a','#7b6ea8','#a8603f','#4f7f8b',
+                      '#9a7b3f','#7a5c7d','#5f7d5f','#8b5a5a','#4a6b8a',
+                      '#7d7d4a','#6a5a8b','#8b7355','#5a7a7a'];
+
+  // Every lens answers one question for a day: which block of its cycle is
+  // this, and what is that block called. `doy` is the day within the KoT year,
+  // `abs` the day since the epoch, which is what the 7×7×7 counts from.
+  const YR_LENSES = [
+    { card:'Keter', cycle:'Sefer HaMitzvos — 365 and 248',
+      seg:(doy,abs,ctx)=>{
+        // The negative commandments run from 25 Elul, the positive from 4 Sivan.
+        const h = ctx.heb;
+        const neg = (h.month===6&&h.day>=25)||h.month===7||h.month===8||h.month===9||
+                    h.month===10||h.month===11||h.month===12||h.month===13||
+                    (h.month===1)||(h.month===2)||(h.month===3&&h.day<=3);
+        return neg ? {n:0,label:'365 Lo Taaseh — 25 Elul to 3 Sivan'}
+                   : {n:1,label:'248 Aseh — 4 Sivan to Erev Yom Kippur'};
+      } },
+    { card:'Chochmah', cycle:'Alef-Bet — 22 days a set',
+      seg:doy=>{ const c=Math.floor((doy-1)/22)+1;
+        return {n:c-1,label:'Set '+c+' — 22 letters'}; } },
+    { card:'Binah', cycle:'Sefirot — 7 × 7 × 7',
+      seg:(doy,abs)=>{ const i=getSefirotInfo(abs);
+        const c=Math.floor((abs-1)/49)+1;
+        return {n:(c-1)%7,label:'Cycle '+c+' — shebe'+i.cycleSef}; } },
+    { card:'Chesed', cycle:'Shem Ayin-Bet — five of 72',
+      seg:doy=>{ const a=getAyinBetInfo(doy);
+        if(a.isBreak) return {n:-1,label:'A silent day between the lobes',brk:true};
+        return {n:a.cycle-1,label:'Lobe '+a.cycle+' of 5 — '+
+          ['Bereshit','Shemot','Vayikra','Bamidbar','Devarim'][a.cycle-1]}; } },
+    { card:'Gevurah', cycle:'Four seasons of 91',
+      seg:doy=>{ const s=getSeasonInfo(doy);
+        return {n:s.season-1,label:'Season '+s.season+' — '+(s.name||'')}; } },
+    { card:'Tiferet', cycle:'13 Attributes — 13 days',
+      seg:doy=>{ const c=Math.floor((doy-1)/13)+1;
+        return {n:(c-1)%7,label:'Cycle '+c+' of 28 — thirteen days'}; } },
+    { card:'Netzach', cycle:'Likutei Etzot — 369 days',
+      // The 369 overruns the year, so it reads as bands of 41 — nine to a
+      // cycle — rather than one flat colour that says nothing.
+      seg:doy=>{ const d=((doy-1)%369)+1, band=Math.floor((d-1)/41)+1;
+        return {n:(band-1)%7,label:'Ninth '+band+' of the 369 — days '+
+          ((band-1)*41+1)+'–'+Math.min(band*41,369)}; } },
+    { card:'Hod', cycle:'The Zohar by parasha',
+      seg:(doy,abs,ctx)=>({n:ctx.parashaIdx%7,label:ctx.parasha?('Parashat '+ctx.parasha):'—'}) },
+    { card:'Yesod', cycle:'The weekly parasha',
+      seg:(doy,abs,ctx)=>({n:ctx.parashaIdx%7,label:ctx.parasha?('Parashat '+ctx.parasha):'—'}) },
+    { card:'Malchut', cycle:'Yad HaChazakah — 28 days a set',
+      seg:(doy,abs,ctx)=>{ const y=getYadInfo(doy,ctx.leap);
+        return {n:(y.cycle-1)%7,label:'Set '+y.cycle+' — day '+y.dayInCycle+' of 28'}; } },
+  ];
+
+  let _yrLens = 4;              // Gevurah opens it — its seasons read most clearly
+  let _yrDays = null;
+
+  // Every day of the year, resolved once per opening.
+  function _yrBuild() {
+    const k = window.kotYear;
+    if (!k) return null;
+    const total = k.weeks * 7;
+    const base = new Date(k.date);
+    base.setDate(base.getDate() - (k.day - k.day1));      // back to day 1
+    const days = [];
+    let lastPar = null, parIdx = 0;
+    for (let i = 0; i < total; i++) {
+      const d = new Date(base); d.setDate(d.getDate() + i);
+      const heb = gregToHebrew(d);
+      const par = (window.getParashaForDate && window.getParashaForDate(d)) || null;
+      if (par !== lastPar) { parIdx++; lastPar = par; }
+      days.push({ doy: i + 1, abs: k.day1 + i, date: d, heb,
+                  parasha: par, parashaIdx: parIdx, leap: k.weeks > 52 });
+    }
+    return { days, weeks: k.weeks, hYear: k.hYear };
+  }
+
+  function openYearView() {
+    _yrDays = _yrBuild();
+    if (!_yrDays) return;
+    document.getElementById('yr-lenses').innerHTML = YR_LENSES.map((l, i) =>
+      `<button class="yr-lens${i === _yrLens ? ' on' : ''}" onclick="yrSetLens(${i})">${l.card}</button>`).join('');
+    document.getElementById('yr-axis-b').textContent = 'Week ' + _yrDays.weeks;
+    yrDraw();
+    document.getElementById('year-modal').classList.add('open');
+  }
+  function closeYearView() { document.getElementById('year-modal').classList.remove('open'); }
+  function yrSetLens(i) {
+    _yrLens = i;
+    document.querySelectorAll('.yr-lens').forEach((b, j) => b.classList.toggle('on', j === i));
+    yrDraw();
+  }
+
+  function yrDraw() {
+    const lens = YR_LENSES[_yrLens];
+    const today = window.kotYear ? window.kotYear.day : -1;
+    const seen = [];
+    const cells = _yrDays.days.map(day => {
+      const s = lens.seg(day.doy, day.abs, day);
+      day._seg = s;
+      if (!seen.some(x => x.label === s.label)) seen.push({ label: s.label, n: s.n });
+      const col = s.n < 0 ? 'var(--ink-dim)' : YR_PALETTE[s.n % YR_PALETTE.length];
+      return `<div class="yr-cell${s.brk ? ' brk' : ''}${day.abs === today ? ' today' : ''}" ` +
+             `style="background:${col}" onclick="yrPick(${day.doy - 1})" ` +
+             `title="${day.date.toDateString()}"></div>`;
+    }).join('');
+    document.getElementById('yr-grid').innerHTML = cells;
+    document.getElementById('yr-sub').textContent =
+      `${lens.card} — ${lens.cycle} · ${_yrDays.weeks} weeks, ${_yrDays.weeks * 7} days`;
+    const shown = seen.slice(0, 14);
+    document.getElementById('yr-legend').innerHTML = shown.map(k =>
+      `<div class="yr-key"><span class="yr-swatch" style="background:${
+        k.n < 0 ? 'var(--ink-dim)' : YR_PALETTE[k.n % YR_PALETTE.length]}"></span>${k.label}</div>`).join('') +
+      (seen.length > shown.length
+        ? `<div class="yr-key" style="font-style:italic">…and ${seen.length - shown.length} more — tap a day to name it</div>`
+        : '');
+    document.getElementById('yr-detail').innerHTML = 'Tap any day.';
+  }
+
+  const YR_MONTHS = {1:'Nisan',2:'Iyar',3:'Sivan',4:'Tammuz',5:'Av',6:'Elul',7:'Tishrei',
+                     8:'Cheshvan',9:'Kislev',10:'Tevet',11:'Shvat',12:'Adar I',13:'Adar II'};
+  function yrPick(i) {
+    const day = _yrDays.days[i];
+    if (!day) return;
+    const wk = Math.floor((day.doy - 1) / 7) + 1;
+    document.getElementById('yr-detail').innerHTML =
+      `<b>${day.date.toDateString().slice(0, 3)}, ${day.date.toDateString().slice(4)}</b> · ` +
+      `${day.heb.day} ${YR_MONTHS[day.heb.month] || day.heb.month} ${day.heb.year} · ` +
+      `week ${wk}, day ${day.doy}<br>${day._seg.label}` +
+      (day.parasha ? ` · Parashat ${day.parasha}` : '') +
+      `<br><span class="yr-jump" style="margin-left:0" onclick="yrGoto(${i})">go to this day ↗</span>`;
+  }
+  function yrGoto(i) {
+    const day = _yrDays.days[i];
+    if (!day) return;
+    currentOffset = Math.round((localMidnight(day.date) - localMidnight(new Date())) / 86400000);
+    closeYearView();
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   // ── HEBREW INSIDE A LETTERSPACED LABEL ──
   // A handful of labels are set in Cinzel small-caps with wide tracking, and
   // carry a Hebrew phrase alongside the English — "✦ Year-Round — בכל השנה".
@@ -15996,7 +16185,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // sets the spacing back to none. Run after every render, since most of
   // these labels are rewritten each day.
   const HEB_TRACKED_LABELS =
-    '.title-sub, .dc-label, .sefirah-detail, .keter-section-label, .heb-picker-title';
+    '.title-sub, .dc-label, .sefirah-detail, .keter-section-label, .heb-picker-title, .yr-title';
   // A run is Hebrew letters plus whatever holds a phrase together — spaces,
   // geresh, gershayim, maqaf — so "בכל השנה" is treated as one piece.
   const HEB_RUN = /([֐-׿]+(?:[ ׳״'"־-]+[֐-׿]+)*)/;
@@ -16632,6 +16821,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
 
     <button class="heb-picker-submit" onclick="applyDatePickerJump()">Go ›</button>
+  </div>
+</div>
+
+<!-- The Year — a card's cycle across all its days -->
+<div id="year-modal" onclick="if(event.target===this)closeYearView()">
+  <div class="yr-panel">
+    <div class="yr-head">
+      <div>
+        <div class="yr-title">The Year — הַשָּׁנָה</div>
+        <div class="yr-sub" id="yr-sub"></div>
+      </div>
+      <button class="yr-close" onclick="closeYearView()" aria-label="Close">✕</button>
+    </div>
+    <div class="yr-lenses" id="yr-lenses"></div>
+    <div class="yr-grid-wrap">
+      <div class="yr-grid" id="yr-grid"></div>
+      <div class="yr-axis"><span id="yr-axis-a">Week 1</span><span id="yr-axis-b"></span></div>
+    </div>
+    <div class="yr-legend" id="yr-legend"></div>
+    <div class="yr-detail" id="yr-detail">Tap any day.</div>
   </div>
 </div>
 
