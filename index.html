@@ -1737,7 +1737,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .cal-tbl { width:100%; border-collapse:collapse; table-layout:fixed; }
 .cal-tbl th { border:1px solid var(--border); font-size:8.5px; padding:3px 2px;
   font-family:'Cinzel',serif; letter-spacing:.6px; color:var(--ink-mid); text-transform:uppercase; }
-.cal-tbl td { border:1px solid var(--border); vertical-align:top; height:70px;
+.cal-tbl td { border:1px solid var(--border); vertical-align:top; height:86px;
   padding:2px 3px; font-size:8.5px; line-height:1.25; color:var(--ink-mid); }
 .cal-tbl td.band { background:rgba(139,105,20,.055); }
 .cal-tbl td.out  { background:var(--bg); }
@@ -16148,20 +16148,34 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         return {n:(c-1)%7,label:'Cycle '+c+' — shebe'+i.cycleSef,
                 cell:i.daySef+' shebe'+i.weekSef+' shebe'+i.cycleSef}; } },
 
-    { card:'Chesed', cycle:'Shem Ayin-Bet — five of 72',
-      // The cycle itself is the seventy-two-fold Name, so the day carries its
-      // Name and its number. The lungs and the Five Books belong to the card's
-      // reading of the five lobes, not to the count of the days.
-      seg:(D)=>{ if (D.inExtra) {
-          const SIL=[6,12,18,24];
-          if (SIL.indexOf(D.extraDay)>=0)
+    { card:'Chesed', cycle:'Shem Ayin-Bet — the Names, the watches, the blessing',
+      // Three counts run together here, as they do on the card: the seventy-two
+      // Names one a day; the twenty-four mishmarot, the family guards of the
+      // Kehunah, turning three times in each cycle of 72; and the fifteen words
+      // of Birkat Kohanim, one to each period of 24 — three to a cycle, fifteen
+      // across the five.
+      seg:(D)=>{
+        const SIL = [6, 12, 18, 24];
+        if (D.inExtra) {
+          if (SIL.indexOf(D.extraDay) >= 0)
             return {n:-1,label:'Adar I microcosm — a silent day',brk:true,mic:true,cell:'a silent day'};
-          return {n:8,label:'Adar I microcosm — the five cycles in 28 days',mic:true,
-                  cell:'microcosm',cell2:'day '+D.extraDay+' of 28'}; }
-        const a=getAyinBetInfo(D.yearDay);
-        if(a.isBreak) return {n:-1,label:'A silent day between the cycles',brk:true,cell:'a silent day'};
-        return {n:a.cycle-1,label:'Cycle '+a.cycle+' of 5 — seventy-two days',
-                cell:a.name+' · '+a.nameNum,cell2:'cycle '+a.cycle+' of 5'}; } },
+          // The 24 watches run once through the 28 days: 24 spoken, 4 silent.
+          let watch = 0;
+          for (let k = 1; k <= D.extraDay; k++) if (SIL.indexOf(k) < 0) watch++;
+          const m = MISHMAROT_24[watch - 1];
+          return {n:8,label:'Adar I microcosm — the twenty-four watches once through',mic:true,
+                  cell:'microcosm · ' + D.extraDay + ' of 28',
+                  cell2:(m ? m.he + ' ' + watch : '')}; }
+        const a = getAyinBetInfo(D.yearDay);
+        if (a.isBreak)
+          return {n:-1,label:'A silent day between the cycles',brk:true,cell:'a silent day'};
+        const m  = MISHMAROT_24[(a.dayInCycle - 1) % 24];
+        const mn = ((a.dayInCycle - 1) % 24) + 1;
+        const bk = BIRKAT_KOHANIM_CYCLES[a.cycle - 1].split(' ')[Math.floor((a.dayInCycle - 1) / 24)];
+        return { n:a.cycle-1, label:'Cycle '+a.cycle+' of 5 — seventy-two days',
+                 cell:  a.name + ' · ' + a.nameNum,
+                 cell2: m.he + ' ' + mn,
+                 cell3: bk || '' }; } },
 
     { card:'Gevurah', cycle:'Four seasons of 91',
       seg:(D)=>{ if (D.inExtra) {
@@ -16347,6 +16361,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             (d.fest ? `<div class="cal-fest">${_calEsc(d.fest)}</div>` : '') +
             (d._seg.cell  ? `<div class="cal-cyc">${_calEsc(d._seg.cell)}</div>`  : '') +
             (d._seg.cell2 ? `<div class="cal-cyc">${_calEsc(d._seg.cell2)}</div>` : '') +
+            (d._seg.cell3 ? `<div class="cal-cyc">${_calEsc(d._seg.cell3)}</div>` : '') +
             '</td>';
         }
         col++;
