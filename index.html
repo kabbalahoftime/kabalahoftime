@@ -16149,16 +16149,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                 cell:i.daySef+' shebe'+i.weekSef+' shebe'+i.cycleSef}; } },
 
     { card:'Chesed', cycle:'Shem Ayin-Bet — five of 72',
+      // The cycle itself is the seventy-two-fold Name, so the day carries its
+      // Name and its number. The lungs and the Five Books belong to the card's
+      // reading of the five lobes, not to the count of the days.
       seg:(D)=>{ if (D.inExtra) {
-          const SIL=[6,12,18,24], i=SIL.indexOf(D.extraDay);
-          if (i>=0) return {n:-1,label:'Adar I microcosm — a silent day',brk:true,mic:true};
-          return {n:8,label:'Adar I microcosm — the five lobes in 28 days',mic:true,
-                  cell:'microcosm day '+D.extraDay+' of 28'}; }
+          const SIL=[6,12,18,24];
+          if (SIL.indexOf(D.extraDay)>=0)
+            return {n:-1,label:'Adar I microcosm — a silent day',brk:true,mic:true,cell:'a silent day'};
+          return {n:8,label:'Adar I microcosm — the five cycles in 28 days',mic:true,
+                  cell:'microcosm',cell2:'day '+D.extraDay+' of 28'}; }
         const a=getAyinBetInfo(D.yearDay);
-        if(a.isBreak) return {n:-1,label:'A silent day between the lobes',brk:true,cell:'a silent day'};
-        const BK=['Bereshit','Shemot','Vayikra','Bamidbar','Devarim'];
-        return {n:a.cycle-1,label:'Lobe '+a.cycle+' of 5 — '+BK[a.cycle-1],
-                cell:BK[a.cycle-1]+' · '+a.dayInCycle+' of 72'}; } },
+        if(a.isBreak) return {n:-1,label:'A silent day between the cycles',brk:true,cell:'a silent day'};
+        return {n:a.cycle-1,label:'Cycle '+a.cycle+' of 5 — seventy-two days',
+                cell:a.name+' · '+a.nameNum,cell2:'cycle '+a.cycle+' of 5'}; } },
 
     { card:'Gevurah', cycle:'Four seasons of 91',
       seg:(D)=>{ if (D.inExtra) {
