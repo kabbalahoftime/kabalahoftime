@@ -16047,46 +16047,72 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // `abs` the day since the epoch, which is what the 7×7×7 counts from.
   const YR_LENSES = [
     { card:'Keter', cycle:'Sefer HaMitzvos — 365 and 248',
-      seg:(doy,abs,ctx)=>{
-        // The negative commandments run from 25 Elul, the positive from 4 Sivan.
-        const h = ctx.heb;
-        const neg = (h.month===6&&h.day>=25)||h.month===7||h.month===8||h.month===9||
-                    h.month===10||h.month===11||h.month===12||h.month===13||
-                    (h.month===1)||(h.month===2)||(h.month===3&&h.day<=3);
+      // Keyed to Hebrew dates, so a leap year needs no adjustment: the added
+      // month simply falls inside the negative commandments' long stretch.
+      seg:(D)=>{ const h=D.heb;
+        const neg = (h.month===6&&h.day>=25)||h.month>=7||h.month<=2||(h.month===3&&h.day<=3);
         return neg ? {n:0,label:'365 Lo Taaseh — 25 Elul to 3 Sivan'}
-                   : {n:1,label:'248 Aseh — 4 Sivan to Erev Yom Kippur'};
-      } },
+                   : {n:1,label:'248 Aseh — 4 Sivan to Erev Yom Kippur'}; } },
+
     { card:'Chochmah', cycle:'Alef-Bet — 22 days a set',
-      seg:doy=>{ const c=Math.floor((doy-1)/22)+1;
-        return {n:c-1,label:'Set '+c+' — 22 letters'}; } },
+      seg:(D)=>{ if (D.inExtra) {
+          const t = D.extraDay<=22 ? 'the 22 letters'
+                  : D.extraDay<=27 ? 'the 5 final letters' : 'the vowels';
+          return {n:8,label:'Adar I microcosm — '+t,mic:true}; }
+        const c=get22DayInfo(D.abs).cycle;
+        return {n:(c-1)%7,label:'Set '+c+' — 22 letters'}; } },
+
     { card:'Binah', cycle:'Sefirot — 7 × 7 × 7',
-      seg:(doy,abs)=>{ const i=getSefirotInfo(abs);
-        const c=Math.floor((abs-1)/49)+1;
-        return {n:(c-1)%7,label:'Cycle '+c+' — shebe'+i.cycleSef}; } },
+      // Counts unbroken from the epoch; nothing folds.
+      seg:(D)=>{ const c=Math.floor((D.abs-1)/49)+1;
+        return {n:(c-1)%7,label:'Cycle '+c+' — shebe'+getSefirotInfo(D.abs).cycleSef}; } },
+
     { card:'Chesed', cycle:'Shem Ayin-Bet — five of 72',
-      seg:doy=>{ const a=getAyinBetInfo(doy);
+      seg:(D)=>{ if (D.inExtra) {
+          const SIL=[6,12,18,24], i=SIL.indexOf(D.extraDay);
+          if (i>=0) return {n:-1,label:'Adar I microcosm — a silent day',brk:true,mic:true};
+          return {n:8,label:'Adar I microcosm — the five lobes in 28 days',mic:true}; }
+        const a=getAyinBetInfo(D.yearDay);
         if(a.isBreak) return {n:-1,label:'A silent day between the lobes',brk:true};
         return {n:a.cycle-1,label:'Lobe '+a.cycle+' of 5 — '+
           ['Bereshit','Shemot','Vayikra','Bamidbar','Devarim'][a.cycle-1]}; } },
+
     { card:'Gevurah', cycle:'Four seasons of 91',
-      seg:doy=>{ const s=getSeasonInfo(doy);
+      seg:(D)=>{ if (D.inExtra) {
+          // The 28 days hold the four seasons in miniature, so they are given
+          // four shades of their own — the miniature reads as a year.
+          const season=Math.ceil(D.extraDay/7);
+          return {n:7+season,label:'Adar I microcosm — season '+season+' of four in 28 days',mic:true}; }
+        const s=getSeasonInfo(D.seasonPos);
         return {n:s.season-1,label:'Season '+s.season+' — '+(s.name||'')}; } },
+
     { card:'Tiferet', cycle:'13 Attributes — 13 days',
-      seg:doy=>{ const c=Math.floor((doy-1)/13)+1;
-        return {n:(c-1)%7,label:'Cycle '+c+' of 28 — thirteen days'}; } },
-    { card:'Netzach', cycle:'Likutei Etzot — 369 days',
-      // The 369 overruns the year, so it reads as bands of 41 — nine to a
-      // cycle — rather than one flat colour that says nothing.
-      seg:doy=>{ const d=((doy-1)%369)+1, band=Math.floor((d-1)/41)+1;
-        return {n:(band-1)%7,label:'Ninth '+band+' of the 369 — days '+
-          ((band-1)*41+1)+'–'+Math.min(band*41,369)}; } },
+      seg:(D)=>{ if (D.inExtra) {
+          const set = D.extraDay<=13 ? 'Micha’s thirteen'
+                    : D.extraDay<=26 ? 'Moshe’s thirteen' : 'both sets whole';
+          return {n:8,label:'Adar I microcosm — a cycle a day ('+set+')',mic:true}; }
+        const c=get13DayInfo(D.abs).cycle;
+        return {n:(c-1)%7,label:'Cycle '+c+' — '+(c<=13?'Micha':c<=26?'Moshe':'microcosm')}; } },
+
+    { card:'Netzach', cycle:'369 — nine cycles of 41',
+      seg:(D)=>{ if (D.leapCycle) return {n:8,
+          label:'Cycle '+D.leapCycle+' — opened out to 55 days for the leap year',mic:true};
+        const d=((D.yearDay-1)%369)+1, band=Math.floor((d-1)/41)+1;
+        const inBand=((d-1)%41)+1;
+        if (inBand===41) return {n:-1,label:'The 41st — a day of Yechidah between cycles',brk:true};
+        return {n:(band-1)%7,label:'Cycle '+band+' of 9 — forty days'}; } },
+
     { card:'Hod', cycle:'The Zohar by parasha',
-      seg:(doy,abs,ctx)=>({n:ctx.parashaIdx%7,label:ctx.parasha?('Parashat '+ctx.parasha):'—'}) },
+      seg:(D)=>({n:D.parashaIdx%7,label:D.parasha?('Parashat '+D.parasha):'—'}) },
+
     { card:'Yesod', cycle:'The weekly parasha',
-      seg:(doy,abs,ctx)=>({n:ctx.parashaIdx%7,label:ctx.parasha?('Parashat '+ctx.parasha):'—'}) },
+      seg:(D)=>({n:D.parashaIdx%7,label:D.parasha?('Parashat '+D.parasha):'—'}) },
+
     { card:'Malchut', cycle:'Yad HaChazakah — 28 days a set',
-      seg:(doy,abs,ctx)=>{ const y=getYadInfo(doy,ctx.leap);
-        return {n:(y.cycle-1)%7,label:'Set '+y.cycle+' — day '+y.dayInCycle+' of 28'}; } },
+      // Counts straight through the year, leap or not — fourteen sets in a
+      // leap year, thirteen and a shared one otherwise.
+      seg:(D)=>{ const y=getYadInfo(D.doy,D.leap);
+        return {n:(y.cycle-1)%7,label:'Set '+y.cycle+' — 28 days'}; } },
   ];
 
   let _yrLens = 4;              // Gevurah opens it — its seasons read most clearly
@@ -16101,13 +16127,41 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     base.setDate(base.getDate() - (k.day - k.day1));      // back to day 1
     const days = [];
     let lastPar = null, parIdx = 0;
+    const bounds = {};        // the leap window, cached per Hebrew year
     for (let i = 0; i < total; i++) {
       const d = new Date(base); d.setDate(d.getDate() + i);
       const heb = gregToHebrew(d);
       const par = (window.getParashaForDate && window.getParashaForDate(d)) || null;
       if (par !== lastPar) { parIdx++; lastPar = par; }
-      days.push({ doy: i + 1, abs: k.day1 + i, date: d, heb,
-                  parasha: par, parashaIdx: parIdx, leap: k.weeks > 52 });
+      const abs = k.day1 + i;
+
+      // The same leap arithmetic the cards use, day by day. In a leap year the
+      // 28 days from 28 Shevat to 25 Adar I stand outside the ordinary count:
+      // the cycles that fold hold still through them and resume after, and the
+      // cards show a microcosm in their place. Reproduced here rather than
+      // approximated, so a lens shows the year the cards actually keep.
+      const isLeapY = hebrewLeapYear(heb.year);
+      if (!bounds[heb.year]) bounds[heb.year] = isLeapY
+        ? { gevStart: hebrewToD(heb.year, 11, 28), extraEnd: hebrewToD(heb.year, 12, 25) }
+        : { gevStart: 0, extraEnd: 0 };
+      const bd = bounds[heb.year];
+      const inExtra  = isLeapY && ((heb.month === 11 && heb.day >= 28) ||
+                                   (heb.month === 12 && heb.day <= 25));
+      const extraDay = inExtra ? (heb.month === 11 ? heb.day - 27 : heb.day + 3) : 0;
+      const dEff = (isLeapY && abs > bd.extraEnd) ? abs - 28 : abs;
+      const seasonRaw = abs - k.day1 + 1;
+      const seasonPos = !isLeapY ? seasonRaw
+        : (abs < bd.gevStart ? seasonRaw
+          : (abs <= bd.extraEnd ? bd.gevStart - k.day1 : seasonRaw - 28));
+      // Netzach's fourth and fifth cycles of 41 open out to 55 in a leap year.
+      const inLeap4 = isLeapY && ((heb.month === 11 && heb.day >= 4) || (heb.month === 12 && heb.day <= 28));
+      const inLeap5 = isLeapY && ((heb.month === 12 && heb.day >= 29) || heb.month === 13 ||
+                                  (heb.month === 1 && heb.day <= 24));
+
+      days.push({ doy: i + 1, abs, date: d, heb, parasha: par, parashaIdx: parIdx,
+                  leap: isLeapY, inExtra, extraDay, dEff, seasonPos,
+                  leapCycle: inLeap4 ? 4 : (inLeap5 ? 5 : 0),
+                  yearDay: dEff - k.day1 + 1, day1: k.day1 });
     }
     return { days, weeks: k.weeks, hYear: k.hYear };
   }
@@ -16133,7 +16187,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const today = window.kotYear ? window.kotYear.day : -1;
     const seen = [];
     const cells = _yrDays.days.map(day => {
-      const s = lens.seg(day.doy, day.abs, day);
+      const s = lens.seg(day);
       day._seg = s;
       if (!seen.some(x => x.label === s.label)) seen.push({ label: s.label, n: s.n });
       const col = s.n < 0 ? 'var(--ink-dim)' : YR_PALETTE[s.n % YR_PALETTE.length];
