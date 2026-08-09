@@ -5696,14 +5696,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { letters: 'Tet & Yud', hebrew: 'ט & י', theme: 'Rivers & Wellsprings', cycle: 5 },
     { letters: 'Kaf & Lamed', hebrew: 'כ & ל', theme: 'Day & Night', cycle: 6 },
     { letters: 'Mem & Nun', hebrew: 'מ & נ', theme: 'Sun & Moon', cycle: 7 },
-    { letters: 'Samech & Ayin', hebrew: 'ס & ע', theme: 'Stars & Constellations', cycle: 8 },
+    { letters: 'Samech & Ayin', hebrew: 'ס & ע', theme: 'The Stars — both halves', cycle: 8 },
     { letters: 'Peh & Tzaddik', hebrew: 'פ & צ', theme: 'Clouds — Thick & Light', cycle: 9 },
     { letters: 'Kuf & Reish', hebrew: 'ק & ר', theme: 'Wind & Lightning', cycle: 10 },
     { letters: 'Shin & Tav', hebrew: 'ש & ת', theme: 'Dew & Rain', cycle: 11 },
     { letters: 'Kaf Sofit', hebrew: 'ך', theme: 'Trees & Vine', cycle: 12 },
     { letters: 'Mem Sofit', hebrew: 'ם', theme: 'Fig & Pomegranate', cycle: 13 },
     { letters: 'Nun Sofit', hebrew: 'ן', theme: 'Palm & Etrog', cycle: 14 },
-    { letters: 'Peh Sofit', hebrew: 'ף', theme: 'Sheaves of Barley & Wheat', cycle: 15 },
+    { letters: 'Peh Sofit', hebrew: 'ף', theme: 'Sheaves of Wheat & Barley', cycle: 15 },
     { letters: 'Tzadik Sofit', hebrew: 'ץ', theme: 'Sheaves & Vegetables', cycle: 16 },
     { letters: 'Vowels', hebrew: 'נקודות', theme: 'Vowels & Grass', cycle: 17 }
   ];
@@ -5728,6 +5728,84 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       dailyHebrew: dailyLetter.hebrew       // Day Hebrew
     };
   }
+
+  // ── PEREK SHIRAH — the elements of Chapters 1-3 ──
+  // The Kabbalah of Time appendix "Hebrew Alphabet, Perek Shirah, and Pirkei
+  // Avot" gives each 11-day half of an Alef-Bet set its element: the sky and
+  // its waters for the 22 letters, the trees and grains for the finals, the
+  // grasses for the vowels. So these run one for one with TRACTATE_CYCLES
+  // below, and the ids are kept alongside to say so. Set 8 — Samech and Ayin
+  // — is the one set the appendix gives a single element, the Stars, and both
+  // of its halves carry it.
+  // Text and citations are the Perek Shirah booklet's own.
+  const PEREK_SHIRAH_ELEMENTS = [
+    { id:'1a', el:'Heavens', heb:'הַשָּׁמַיִם', ch:'Ch 1', src:'Psalms 19:2',
+      verse:'The heavens speak of God\'s glory, and the skies tell of His handiwork.' },
+    { id:'1b', el:'Earth', heb:'אֶרֶץ', ch:'Ch 1', src:'Psalms 24:1',
+      verse:'The earth and everything in it are God\'s; the inhabited area and all that dwell within it.' },
+    { id:'2a', el:'Garden of Eden', heb:'גַּן עֵדֶן', ch:'Ch 1', src:'Song of Songs 4:16',
+      verse:'Arouse yourself, O north [wind], and come, O south! Blow upon my garden, let its spices flow out; let my Beloved come to His garden and eat of its precious fruit.' },
+    { id:'2b', el:'Gehinnom', heb:'גֵּיהִנֹּם', ch:'Ch 1', src:'Psalms 107:9',
+      verse:'For He has satisfied the longing soul, and has filled the hungry soul with good.' },
+    { id:'3a', el:'Wilderness', heb:'מִדְבָּר', ch:'Ch 1', src:'Isaiah 35:1',
+      verse:'The wilderness and the desert shall rejoice, and the arid region shall exult, and blossom like the rose.' },
+    { id:'3b', el:'Fields', heb:'שָׂדוֹת', ch:'Ch 1', src:'Proverbs 3:19',
+      verse:'God founded the land with wisdom; He established the heavens with understanding.' },
+    { id:'4a', el:'Waters', heb:'מַיִם', ch:'Ch 1', src:'Jeremiah 51:16',
+      verse:'When His voice resounds with a great mass of water in the heavens, and He raises vapors from the ends of the Earth; when He makes lightning amongst the rain, and He brings out the wind from its storehouses.' },
+    { id:'4b', el:'Seas', heb:'יַמִּים', ch:'Ch 1', src:'Psalms 93:4',
+      verse:'More than the voices of many waters, than the mighty waves of the sea, God on high is mighty.' },
+    { id:'5a', el:'Rivers', heb:'נְהָרוֹת', ch:'Ch 1', src:'Psalms 98:8',
+      verse:'Let the rivers clap their hands, let the mountains sing for joy together!' },
+    { id:'5b', el:'Wellsprings', heb:'מַעְיָנוֹת', ch:'Ch 1', src:'Psalms 87:7',
+      verse:'And as singers who are like dancers are all those who study You.' },
+    { id:'6a', el:'Day', heb:'יוֹם', ch:'Ch 2', src:'Psalms 19:3',
+      verse:'Day to day utters speech, and night to night relates knowledge.' },
+    { id:'6b', el:'Night', heb:'לַיְלָה', ch:'Ch 2', src:'Psalms 92:3',
+      verse:'To speak of His kindness in the morning, and of His faithfulness by nights.' },
+    { id:'7a', el:'Sun', heb:'שֶׁמֶשׁ', ch:'Ch 2', src:'Habakuk 3:11',
+      verse:'The sun, [when covered by] the moon, stood in its abode; they speed at the light of Your arrows, and at the shining of Your glittering spear.' },
+    { id:'7b', el:'Moon', heb:'יָרֵחַ', ch:'Ch 2', src:'Psalms 104:19',
+      verse:'He made the moon for the festivals; the sun knows the time of its coming.' },
+    { id:'8a', el:'Stars', heb:'כּוֹכָבִים', ch:'Ch 2', src:'Nehemiah 9:6',
+      verse:'You, only You, are God; You made heaven, the heaven of heavens, with all their host; the earth, and everything that is in it; the seas, and everything that is in them; and You preserve them all; and the host of heaven prostrate themselves to You.' },
+    { id:'8b', el:'Stars', heb:'כּוֹכָבִים', ch:'Ch 2', src:'Nehemiah 9:6',
+      verse:'You, only You, are God; You made heaven, the heaven of heavens, with all their host; the earth, and everything that is in it; the seas, and everything that is in them; and You preserve them all; and the host of heaven prostrate themselves to You.' },
+    { id:'9a', el:'Thick Clouds', heb:'עָבִים', ch:'Ch 2', src:'Psalms 18:12',
+      verse:'He made darkness His secret place; His pavilion around Him was dark with waters and thick clouds of the skies.' },
+    { id:'9b', el:'Light Clouds', heb:'עַנְנֵי כָבוֹד', ch:'Ch 2', src:'Job 37:11',
+      verse:'Also He burdens the thick cloud with an overflow; the cloud scatters its light.' },
+    { id:'10a', el:'Wind', heb:'רוּחַ', ch:'Ch 2', src:'Isaiah 43:6',
+      verse:'I will say to the north, Give up; and to the south, Do not withhold; bring My sons from far, and My daughters from the ends of the earth.' },
+    { id:'10b', el:'Lightning Bolts', heb:'בְּרָקִים', ch:'Ch 2', src:'Psalms 135:7',
+      verse:'He causes the vapors to ascend from the ends of the earth; He makes lightning for the rain; He brings forth the wind from His storehouses.' },
+    { id:'11a', el:'Dew', heb:'טַל', ch:'Ch 2', src:'Hoshea 14:6',
+      verse:'I shall be as the dew to Israel, he shall blossom as a rose, he shall spread forth his roots as the Lebanon.' },
+    { id:'11b', el:'Rains', heb:'גְּשָׁמִים', ch:'Ch 2', src:'Psalms 68:10',
+      verse:'You, O Lord, poured a generous rain, to strengthen Your heritage when it languished.' },
+    { id:'12a', el:'Wild Trees', heb:'אִילָנוֹת שֶׁבַּשָּׂדֶה', ch:'Ch 3', src:'Chronicles I 16:33',
+      verse:'Then shall the trees of the forest sing out at the presence of God, because He comes to judge the earth.' },
+    { id:'12b', el:'Vine', heb:'גֶּפֶן', ch:'Ch 3', src:'Isaiah 65:8',
+      verse:'So says God: As the wine is found in the cluster, and one says: Do not destroy it, for a blessing is in it - so shall I do for the sake of my servants, so as not to destroy everything.' },
+    { id:'13a', el:'Fig', heb:'תְּאֵנָה', ch:'Ch 3', src:'Proverbs 27:18',
+      verse:'The one who guards the fig shall eat of her fruits.' },
+    { id:'13b', el:'Pomegranate', heb:'רִמּוֹן', ch:'Ch 3', src:'Song of Songs 4:3',
+      verse:'Your cheeks are like a piece of a pomegranate behind your veil.' },
+    { id:'14a', el:'Palm', heb:'תָּמָר', ch:'Ch 3', src:'Psalms 92:13',
+      verse:'The righteous flourish like the palm tree; they grow like a cedar in Lebanon.' },
+    { id:'14b', el:'Esrog', heb:'תַּפּוּחַ', ch:'Ch 3', src:'Song of Songs 2:3',
+      verse:'Like the esrog tree among the trees of the wood, so is my beloved among young men. I sat down under his shadow with delight, and his fruit was sweet to my taste.' },
+    { id:'15a', el:'Sheaves of Wheat', heb:'שִׁבֹּלֶת חִטִּים', ch:'Ch 3', src:'Psalms 130:1',
+      verse:'A song of ascents: Out of the depths have I cried to You, O God.' },
+    { id:'15b', el:'Sheaves of Barley', heb:'שִׁבֹּלֶת שְׂעוֹרִים', ch:'Ch 3', src:'Psalms 102:1',
+      verse:'A prayer of the pauper, when he swoons, and pours out his speech before God.' },
+    { id:'16a', el:'Other Sheaves', heb:'שְׁאָר הַשִּׁבֳּלִים', ch:'Ch 3', src:'Psalms 65:14',
+      verse:'The meadows are clothed with flocks; the valleys also are covered over with grain; they shout for joy, they also sing.' },
+    { id:'16b', el:'Vegetables of the Field', heb:'יְרָקוֹת שֶׁבַּשָּׂדֶה', ch:'Ch 3', src:'Psalms 65:11',
+      verse:'You water its furrows abundantly; You settle its ridges; you make it soft with showers; You bless its growth.' },
+    { id:'17a', el:'Grasses', heb:'דְּשָׁאִים', ch:'Ch 3', src:'Psalms 104:31',
+      verse:'May the glory of God endure forever; may God rejoice in His works.' },
+  ];
 
   // Tractate / 11-day half-cycle data (33 entries: 1a–16b = 11 days each; 17a = 12 days)
   // Each entry covers one half of the 22-day Alef-Bet set (days 1-11 = 'a', days 12-22 = 'b')
@@ -13336,7 +13414,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // exactly as the Alef-Bet is: days 1-22 take one study unit each, days 23-27
     // — the five finals, the doubled letters — take two, and day 28, the vowels,
     // takes the last. 22 + 10 + 1 = 33, the whole year's cycle within the month.
-    let tractMicro = null;
+    let tractMicro = null, halfIdx = [tractHalfIdx];
     if (inExtra && cy22Mic) {
       const md = cy22Mic.day;
       const idx = md <= 22 ? [md - 1]
@@ -13344,15 +13422,37 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                 : [32];
       tractMicro = idx.map(i => TRACTATE_CYCLES[i]).filter(Boolean);
       if (!tractMicro.length) tractMicro = null;
+      else halfIdx = idx;
     }
     const tractData = tractMicro ? tractMicro[0] : TRACTATE_CYCLES[tractHalfIdx];
+    // The half's element of Perek Shirah, from the same appendix as the letters
+    // and the mishnah. In the microcosm a day can hold two halves, and so two
+    // elements — the trees and the vine on one day.
+    const psElems = halfIdx.map(i => PEREK_SHIRAH_ELEMENTS[i]).filter(Boolean);
 
     // KoT Book — displayed on the Chochmah card face
     document.getElementById('chochmah-kot-book').innerHTML =
       `<a href="https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/edit?usp=drivesdk&ouid=107762921026290173420&rtpof=true&sd=true" target="_blank" style="color:var(--gold);font-size:0.88em">Hebrew Alphabet, Perek Shirah, and Pirkei Avot</a>` +
       (CHOCHMA_KOT_URLS[cy22.cycle - 1]
         ? ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_URLS[cy22.cycle - 1]}" target="_blank" style="color:var(--gold);font-size:0.88em">This Set</a>`
+        : '') +
+      (psElems.length
+        ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Perek Shirah:</span> ` +
+          psElems.map(p => `<strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif">${p.heb}</span>`).join(' &amp; ') +
+          ` <span style="color:var(--ink-dim);font-size:0.9em">· ${psElems[0].ch}</span></div>`
         : '');
+
+    // The element and its song, shown under the tractate in either branch —
+    // the appendix keeps letter, mishnah and element on the same eleven days.
+    const psElemHtml = psElems.length
+      ? `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Perek Shirah — ${psElems.map(p => p.ch).filter((c, i, a) => a.indexOf(c) === i).join(' · ')}</div>
+       ` + psElems.map(p =>
+        `<div class="detail-row"><span class="detail-label">Element:</span><span class="detail-value"><strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em">${p.heb}</span></span></div>
+         <div class="detail-row"><span class="detail-label">Song:</span><span class="detail-value"><span style="font-style:italic">${p.verse}</span> <span style="color:var(--ink-dim);font-size:0.85em">${p.src}</span></span></div>`
+      ).join('<div style="height:8px"></div>') +
+        `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Chapters 1–3 of Perek Shirah sing before any creature does — the sky and its waters through the 22 letters, the trees and the grains through the five finals, the grasses at the vowels. One element to each half of a set, eleven days apiece.</div>`
+      : '';
 
     document.getElementById('chochmah-detail').innerHTML = (inExtra && cy22Mic) ?
       `<div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year Microcosm — 28-Day Cycle</div>
@@ -13377,6 +13477,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${t.desc}</span></div>`
        ).join('<div style="height:8px"></div>') : ''}
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The year's 33 tractate units are compressed into the 28 as the Alef-Bet is: one a day for the 22 letters, two a day for the five finals — the doubled letters — and one for the vowels.</div>` +
+      psElemHtml +
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
@@ -13397,6 +13498,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Tractate:</span><span class="detail-value">${tractData.tractate}</span></div>
        <div class="detail-row"><span class="detail-label">Period:</span><span class="detail-value">${tractData.period}</span></div>
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${tractData.desc}</span></div>` +
+      psElemHtml +
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>

@@ -196,6 +196,18 @@ async function checkInBrowser(chromium) {
         out.thin.push(`${a}: ${JSON.stringify(v).slice(0, 70)}`);
     }
     out.unused = Object.keys(PEREK_SHIRAH_VERSES).filter(k => !used.has(k));
+    // The elements of Chapters 1-3 run one for one with the 33 tractate halves;
+    // if the two lists ever slip apart the Chochmah card names the wrong element
+    // for the wrong eleven days, and nothing on the page would say so.
+    out.elems = { n: PEREK_SHIRAH_ELEMENTS.length, halves: TRACTATE_CYCLES.length, bad: [] };
+    PEREK_SHIRAH_ELEMENTS.forEach((p, i) => {
+      const t = TRACTATE_CYCLES[i];
+      if (!t || t.id !== p.id) out.elems.bad.push(`slot ${i}: element ${p.id} against tractate ${t ? t.id : '—'}`);
+      if (!/^Ch [123]$/.test(p.ch)) out.elems.bad.push(`${p.id}: chapter "${p.ch}" is not 1-3`);
+      if (!p.el || !p.heb || !/\d/.test(p.src || '') || !p.verse || p.verse.length < 20)
+        out.elems.bad.push(`${p.id}: incomplete — ${JSON.stringify(p).slice(0, 70)}`);
+      if (!/^[֐-׿\s]+$/.test(p.heb || '')) out.elems.bad.push(`${p.id}: "${p.heb}" is not Hebrew`);
+    });
     return out;
   });
   ps.missing.forEach(m => fail(`no Perek Shirah verse for ${m}`));
@@ -203,6 +215,11 @@ async function checkInBrowser(chromium) {
   ps.unused.forEach(m => fail(`Perek Shirah verse for "${m}" is never reached by any week`));
   if (!ps.missing.length && !ps.thin.length && !ps.unused.length)
     pass(`all ${ps.weeks} weekly creatures have their song, and none is unreachable`);
+  if (ps.elems.n !== ps.elems.halves)
+    fail(`${ps.elems.n} Perek Shirah elements against ${ps.elems.halves} eleven-day halves`);
+  ps.elems.bad.forEach(m => fail(`Perek Shirah element — ${m}`));
+  if (ps.elems.n === ps.elems.halves && !ps.elems.bad.length)
+    pass(`all ${ps.elems.n} eleven-day halves have their element, aligned with the tractate cycle`);
 
   // 5. tap targets — a link inside a sentence is exempt, as WCAG has it
   console.log('\ntargets');
