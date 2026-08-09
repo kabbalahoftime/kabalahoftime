@@ -1740,6 +1740,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .cal-tbl { width:100%; border-collapse:collapse; table-layout:fixed; }
 .cal-tbl th { border:1px solid var(--border); font-size:8.5px; padding:3px 2px;
   font-family:'Cinzel',serif; letter-spacing:.6px; color:var(--ink-mid); text-transform:uppercase; }
+.cal-head-sub { display:block; font-family:'Cormorant Garamond',serif; text-transform:none;
+  letter-spacing:0; font-style:italic; font-size:calc(var(--cal-fs, 8.5px) + 0.5px);
+  color:var(--ink); margin-top:2px; }
 .cal-tbl td { border:1px solid var(--border); vertical-align:top;
   height:auto; min-height:var(--cal-h, 74px);
   padding:2px 3px; font-size:var(--cal-fs, 8.5px); line-height:1.25; color:var(--ink-mid); }
@@ -16353,15 +16356,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  cell2:'D' + sh.day + ' · P' + p + ' · C' + c }; } },
 
     { card:'Malchut', cycle:'Yad HaChazakah · the seven · Likutei Halachos',
-      // Three of Malchut's counts: the Rambam whole every 28 days; the seven
-      // connections to the week's portion, one to each day of the Kabbalah of
-      // Time week; and Likutei Halachos, Reb Noson's Chassidic depths within
-      // practical law. The parasha is named once a week, beside the Shabbat
-      // text, rather than repeated in all seven squares.
+      // The seven connections to the week's portion fall on fixed days — the
+      // Kabbalah of Time week opens on Friday, so Sunday is always Kedushas
+      // Levi — and naming them over the columns says it once instead of fifty
+      // two times. The day itself then carries the Rambam's 28-day count, the
+      // Likutei Halachos reading, and on Shabbat the portion they are all on.
+      head:(D)=>{ const t = getMalchutText(getSefirotInfo(D.abs).dayNum);
+                  return t ? t.name.replace(' and Toras Menachem', '') : ''; },
       seg:(D)=>{ const y = getYadInfo(D.yPos, D.leap);
         const t = getMalchutText(getSefirotInfo(D.abs).dayNum);
-        const name = t ? t.name.replace(' and Toras Menachem', '') : '';
-        const shabbat = D.date.getDay() === 6;
         let lh = '';
         try { lh = (getLikuteiHalachotInfo(D.yearDay) || []).map(e => e.label).join(' · '); }
         catch (e) {}
@@ -16369,8 +16372,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  label:'Set ' + y.cycle + ' — the Rambam whole every 28 days' +
                        (t ? ' · ' + t.name + ' — ' + t.author : ''),
                  cell:'set ' + y.cycle + ' · day ' + y.dayInCycle + ' of 28',
-                 cell2: name + (shabbat && D.parasha ? ' · ' + D.parasha : ''),
-                 cell3: lh }; } },
+                 cell2: lh,
+                 cell3: (D.date.getDay() === 6 && D.parasha) ? D.parasha : '' }; } },
   ];
 
   let _yrLens = 4;              // Gevurah opens it — its seasons read most clearly
@@ -16481,6 +16484,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const byIso = {};
     _yrDays.days.forEach(d => { d._seg = lens.seg(d); byIso[_calIso(d.date)] = d; });
 
+    // Where a lens holds the same thing every week — Malchut's seven, one to
+    // each day — it belongs over the column, not repeated in fifty-two squares.
+    const heads = lens.head
+      ? CAL_DOW.map((_, dow) => {
+          const d = _yrDays.days.find(x => x.date.getDay() === dow);
+          return d ? lens.head(d) : '';
+        })
+      : null;
+
     const months = [];
     _yrDays.days.forEach(d => {
       const k = d.date.getFullYear() + '-' + d.date.getMonth();
@@ -16514,7 +16526,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       }
       if (col) { while (col++ < 7) cells += '<td class="out"></td>'; rows += `<tr>${cells}</tr>`; }
       return `<div class="cal-mo"><h3>${CAL_MON[mo.m]} ${mo.y}</h3><table class="cal-tbl">` +
-             `<thead><tr>${CAL_DOW.map(x => `<th>${x}</th>`).join('')}</tr></thead>` +
+             `<thead><tr>${CAL_DOW.map((x, dow) =>
+                `<th>${x}${heads && heads[dow] ? `<span class="cal-head-sub">${_calEsc(heads[dow])}</span>` : ''}</th>`
+              ).join('')}</tr></thead>` +
              `<tbody>${rows}</tbody></table></div>`;
     }).join('');
 
