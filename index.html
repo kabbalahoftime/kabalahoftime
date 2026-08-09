@@ -16108,28 +16108,55 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // this, and what is that block called. `doy` is the day within the KoT year,
   // `abs` the day since the epoch, which is what the 7×7×7 counts from.
   const YR_LENSES = [
-    { card:'Keter', cycle:'Likutei Moharan — a lesson a day',
-      // The same lookup the card uses: every entry is pegged to a named Hebrew
-      // date rather than a floating count, Adar I has its own supplement, and
-      // on Elul 25–29 and Tishrei 1–6 two lessons fall on the one date.
+    { card:'Keter', cycle:'Likutei Moharan · Keter Shem Tov · Sefer HaMitzvos',
+      // Three of Keter's counts. The lesson is pegged to a named Hebrew date,
+      // Adar I having its own supplement, and on Elul 25-29 and Tishrei 1-6
+      // two lessons fall on one day. The Keter Shem Tov section follows the
+      // week's parasha and the weekday, as the card reads it. The Sefer
+      // HaMitzvos gives two a day — negative from 25 Elul, positive from
+      // 4 Sivan — and in a leap year Adar I carries a book of the Mishneh
+      // Torah instead.
       seg:(D)=>{
         const h = D.heb;
         const isAdarI = D.leap && h.month === 12;
         const dailies = isAdarI
           ? [LM_DAILY_CYCLE_ADAR1[h.day]].filter(Boolean)
           : lmEntriesForDate(h.month, h.day).map(n => LM_DAILY_CYCLE[n]).filter(Boolean);
-        if (!dailies.length) return {n:-1,label:'No lesson set for this day',brk:true,cell:''};
         const shorten = t => {
           let m = t.match(/Likutei Moharan II, Torah (\d+)/);
           if (m) return 'Tinyana ' + m[1];
           m = t.match(/Likutei Moharan, Lesson (\d+)/);
           return m ? 'Torah ' + m[1] : t;
         };
-        const isII = dailies[0].lesson.startsWith('Likutei Moharan II');
+
+        // Keter Shem Tov — the week's parasha, then the day's aliyah
+        let kstCell = '';
+        try {
+          const parts = (D.parasha || '').split('-').map(x => x.trim());
+          const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
+          const kst = num ? getDailyKST(num, D.date.getDay()) : null;
+          if (kst && kst.label) kstCell = 'KST ' + kst.label;
+        } catch (e) {}
+
+        // Sefer HaMitzvos — two a day, or a book of the Mishneh Torah in Adar I
+        let mitz = '';
+        try {
+          const sh = getSeferHamitzvosInfo(h.month, h.day, h.year, D.leap);
+          const span = a => a.length > 1 ? a[0].n + '–' + a[a.length - 1].n : String(a[0].n);
+          if (sh.mt) mitz = sh.mt.book ? 'MT ' + sh.mt.book + ' of 14' : 'MT — all fourteen';
+          else if (sh.pos.length) mitz = 'Aseh ' + span(sh.pos);
+          else if (sh.neg.length) mitz = 'Lo Taaseh ' + span(sh.neg);
+        } catch (e) {}
+
+        if (!dailies.length && !kstCell && !mitz)
+          return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        const isII = dailies.length && dailies[0].lesson.startsWith('Likutei Moharan II');
         return { n: isAdarI ? 8 : (isII ? 1 : 0),
                  label: isAdarI ? 'Adar I supplement — Torah 283 onward'
                                 : (isII ? 'Tinyana — Part II' : 'Part I'),
-                 cell: dailies.map(x => shorten(x.lesson)).join(' + ') };
+                 cell:  dailies.map(x => shorten(x.lesson)).join(' + '),
+                 cell2: kstCell,
+                 cell3: mitz };
       } },
 
     { card:'Chochmah', cycle:'Alef-Bet — the letters and the 231 Gates',
@@ -16232,11 +16259,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const n = round === 3 ? i.cycle - 26 : (round === 2 ? i.cycle - 13 : i.cycle);
         const name = round === 3 ? 'microcosm cycle ' + n + ' of 2'
                                  : ['', '1st', '2nd'][round] + ' cycle ' + n;
+        // The Attribute named here is the cycle's — the one that gives these
+        // thirteen days their theme. The day's own Attribute turns too fast to
+        // be the thing a month is read by, so it goes on hover with the Nassi.
+        const cycAttr = i.cycle <= 13 ? THIRTEEN_ATTRIBUTES[i.cycle - 1]
+                      : i.cycle <= 26 ? MOSHE_THIRTEEN_ATTRIBUTES[i.cycle - 14] : null;
         return { n:(i.cycle-1)%7,
-                 label:(i.attr ? i.attr.name + ' ' + i.attr.hebrew + ' — ' + i.attr.meaning : '') +
+                 label:(cycAttr ? 'Cycle theme: ' + cycAttr.name + ' — ' + cycAttr.meaning + ' · ' : '') +
+                       (i.attr ? 'today ' + i.attr.name + ' ' + i.attr.hebrew : '') +
                        (i.nassi ? ' · Nassi ' + i.nassi : ''),
                  cell:name, cell2:'day '+i.day+' of 13',
-                 cell3:i.attr ? i.attr.name : '' }; } },
+                 cell3:cycAttr ? cycAttr.name : (i.cycle === 27 ? 'Micha, all thirteen'
+                                                                : 'Moshe, all thirteen') }; } },
 
     { card:'Netzach', cycle:'369 — nine cycles of 41',
       // The card's own count: get41DayInfo from the epoch, as render calls it.
