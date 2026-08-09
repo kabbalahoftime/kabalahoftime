@@ -16177,16 +16177,30 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  cell2: m.he + ' ' + mn,
                  cell3: bk || '' }; } },
 
-    { card:'Gevurah', cycle:'Four seasons of 91',
-      seg:(D)=>{ if (D.inExtra) {
-          // The 28 days hold the four seasons in miniature, so they are given
-          // four shades of their own — the miniature reads as a year.
-          const season=Math.ceil(D.extraDay/7);
-          return {n:7+season,label:'Adar I microcosm — season '+season+' of four in 28 days',mic:true,
-                  cell:'microcosm · season '+season}; }
-        const s=getSeasonInfo(D.seasonPos);
-        return {n:s.season-1,label:'Season '+s.season+' — '+(s.name||''),
-                cell:(s.name||'')+' · '+s.dayIn+' of 91'}; } },
+    { card:'Gevurah', cycle:'Four seasons of 91 — Ratzo and Shov, and Eicha',
+      // What holds for a whole season — the Chayah, the angel, the house of
+      // Levi — is named on hover; the cells carry what changes with the day:
+      // where the season stands, whether it is running out or returning, and
+      // the letter of Eicha that quarter is spelling.
+      seg:(D)=>{
+        if (D.inExtra) {
+          const season = Math.ceil(D.extraDay / 7), part = ((D.extraDay - 1) % 7) + 1;
+          return {n:7+season,mic:true,
+                  label:'Adar I microcosm — season '+season+' of four in 28 days',
+                  cell:'microcosm · season '+season, cell2:'part '+part+' of 7'}; }
+        const s = getSeasonInfo(D.seasonPos);
+        const e = eichaFor(s);
+        // Days 23, 46 and 69 stand outside the quarters: the two kidneys and,
+        // between them, the heart of the season.
+        const place = s.breakAt
+          ? (s.heart ? 'Heart of the season'
+             : s.silent === 1 ? 'Right Kidney — Netzach' : 'Left Kidney — Hod')
+          : (s.dayIn <= 45 ? 'Ratzo' : 'Shov') + ' · Q' + s.quarter + ' ' + s.inQuarter + ' of 22';
+        return { n:s.season-1,
+                 label:s.name + ' — ' + (s.chayah || '') + ' · ' + (s.angel || ''),
+                 cell:s.name + ' · ' + s.dayIn + ' of 91',
+                 cell2:place,
+                 cell3:e ? (e.label + (e.letter ? ' · ' + e.letter : '')) : '' }; } },
 
     { card:'Tiferet', cycle:'13 Attributes — 13 days',
       seg:(D)=>{ if (D.inExtra) {
@@ -16241,7 +16255,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { card:'Malchut', cycle:'Yad HaChazakah — 28 days a set',
       // Counts straight through the year, leap or not — fourteen sets in a
       // leap year, thirteen and a shared one otherwise.
-      seg:(D)=>{ const y=getYadInfo(D.doy,D.leap);
+      seg:(D)=>{ const y=getYadInfo(D.yPos,D.leap);
         return {n:(y.cycle-1)%7,label:'Set '+y.cycle+' — 28 days',
                 cell:'set '+y.cycle+' · day '+y.dayInCycle+' of 28'}; } },
   ];
@@ -16280,10 +16294,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                                    (heb.month === 12 && heb.day <= 25));
       const extraDay = inExtra ? (heb.month === 11 ? heb.day - 27 : heb.day + 3) : 0;
       const dEff = (isLeapY && abs > bd.extraEnd) ? abs - 28 : abs;
-      const seasonRaw = abs - k.day1 + 1;
+
+      // Each day is measured from the anchor the cards would use for it, not
+      // from the anchor of the year this calendar opened on. A leap year runs
+      // 392 days and so overruns the next year's first day by eleven; on those
+      // days the app has already turned the year, and the calendar must turn
+      // with it or it will disagree with the card it is describing.
+      if (!bounds[heb.year].anchor)
+        bounds[heb.year].anchor = hebrewToD(heb.year, 1, 16) - (isLeapY ? 224 : 196);
+      const anchor = bounds[heb.year].anchor;
+      const yPos = abs - anchor + 1;                    // day of that year, as render counts it
+      const seasonRaw = yPos;
       const seasonPos = !isLeapY ? seasonRaw
         : (abs < bd.gevStart ? seasonRaw
-          : (abs <= bd.extraEnd ? bd.gevStart - k.day1 : seasonRaw - 28));
+          : (abs <= bd.extraEnd ? bd.gevStart - anchor : seasonRaw - 28));
       // Netzach's fourth and fifth cycles of 41 open out to 55 in a leap year.
       const inLeap4 = isLeapY && ((heb.month === 11 && heb.day >= 4) || (heb.month === 12 && heb.day <= 28));
       const inLeap5 = isLeapY && ((heb.month === 12 && heb.day >= 29) || heb.month === 13 ||
@@ -16300,7 +16324,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       days.push({ doy: i + 1, abs, date: d, heb, parasha: par, parashaIdx: parIdx, fest,
                   leap: isLeapY, inExtra, extraDay, dEff, seasonPos,
                   leapCycle: inLeap4 ? 4 : (inLeap5 ? 5 : 0),
-                  yearDay: dEff - k.day1 + 1, day1: k.day1 });
+                  yearDay: dEff - anchor + 1, yPos, day1: k.day1 });
     }
     return { days, weeks: k.weeks, hYear: k.hYear };
   }
