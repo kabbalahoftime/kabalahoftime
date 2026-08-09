@@ -1,5 +1,9 @@
 // Service Worker for Kabbalah of Time PWA
-const CACHE_NAME = 'kabbalah-of-time-v5';
+// Bumped so the activate handler below drops everything held under the old
+// name and the shell is fetched again. A cache that has gone stale in a way
+// the network-first rule cannot correct is the one failure this app has that
+// leaves every card reading "Loading…" with nothing to say why.
+const CACHE_NAME = 'kabbalah-of-time-v6';
 const urlsToCache = [
   '/',
   '/index.html',
