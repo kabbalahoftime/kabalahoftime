@@ -234,10 +234,28 @@ async function checkInBrowser(chromium) {
   // so nothing else on the page would have shown it.
   console.log('\nalef-bet');
   const ab = await page.evaluate(() => {
-    const out = { card: { days: 0, bad: [] }, cal: [] };
+    const out = { card: { days: 0, bad: [] }, cal: [], shown: { days: 0, bad: [], least: 99 } };
     for (let o = -400; o <= 800; o++) {
       currentOffset = o; render();
-      const m = document.getElementById('chochmah-main').innerText.match(/Day (\d+) · Cycle (\d+)/);
+      const face = document.getElementById('chochmah-main').innerText;
+      // Every letter the face names — the day's and the set's — must carry its
+      // sentence; a letter shown with nothing under it is the whole point of
+      // having them. Vowels are not a letter and are excused.
+      const named = new Set();
+      const dayLt = (face.match(/Day:\s*(.+?)\s+[֐-׿]/) || [])[1];
+      const setLt = (face.match(/Cycle:\s*(.+?)\s+[֐-׿]/) || [])[1];
+      if (dayLt) named.add(dayLt.trim());
+      (setLt || '').split('&').forEach(x => x.trim() && named.add(x.trim()));
+      named.delete('Vowels');
+      if (named.size) {
+        out.shown.days++;
+        const lines = new Set([...document.querySelectorAll('#chochmah-main .lt-notes > [data-letter]')]
+          .map(e => e.dataset.letter));
+        out.shown.least = Math.min(out.shown.least, lines.size);
+        named.forEach(n => { if (!lines.has(n)) out.shown.bad.push(`offset ${o}: ${n} named with no sentence`); });
+        lines.forEach(n => { if (!named.has(n)) out.shown.bad.push(`offset ${o}: a sentence for ${n}, which is not on the face`); });
+      }
+      const m = face.match(/Day (\d+) · Cycle (\d+)/);
       if (!m) continue;               // the leap year's microcosm names no set
       out.card.days++;
       if (+m[2] > 17 || +m[2] < 1 || +m[1] > 22 || +m[1] < 1)
@@ -285,6 +303,9 @@ async function checkInBrowser(chromium) {
   ab.meanings.unused.forEach(m => fail(`a sentence for "${m}", which is no letter the card names`));
   if (!ab.meanings.missing.length && !ab.meanings.thin.length && !ab.meanings.unused.length)
     pass(`all ${ab.meanings.n} letters stand for something, one sentence each`);
+  ab.shown.bad.slice(0, 5).forEach(m => fail(`the face and its sentences disagree — ${m}`));
+  if (!ab.shown.bad.length)
+    pass(`on ${ab.shown.days.toLocaleString()} days every letter the face names has its sentence, and no other does`);
 
   // 5. tap targets — a link inside a sentence is exempt, as WCAG has it
   console.log('\ntargets');

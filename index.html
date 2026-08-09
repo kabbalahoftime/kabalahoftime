@@ -13290,24 +13290,42 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div class="detail-row"><span class="detail-label">${gatesLabel}:</span><span class="detail-value">` +
       gatesValueHtml + `</span></div>`;
 
-    // What the day's letter stands for — the leap month's microcosm names a
-    // letter or a final letter on 27 of its 28 days, and a letter either way
-    // is the same letter, so one lookup serves both faces.
-    const _ltName = (inExtra && cy22Mic) ? cy22Mic.label : cy22.dailyLetter;
-    const _ltMeaning = LETTER_MEANINGS[_ltName] || '';
-    const _ltHeb = (inExtra && cy22Mic) ? cy22Mic.hebrew : cy22.dailyHebrew;
-    const _ltLine = _ltMeaning
-      ? `<div style="margin-top:5px;font-size:0.78rem;color:var(--ink-mid);font-style:italic;line-height:1.5;">${_ltMeaning}</div>`
+    // Every letter the card is showing stands for something, so every one of
+    // them says so: the day's letter, and the one or two the set is named for
+    // — two or three each day, and one in the leap month's microcosm, which
+    // names a single letter or final letter on 27 of its 28 days. A day whose
+    // letter is also its set's, Alef on the first day of Alef & Bet, is
+    // named once.
+    const _ltShown = [];
+    const _ltAdd = (name, heb) => {
+      name = (name || '').trim();
+      if (!name || _ltShown.some(l => l.name === name)) return;
+      const meaning = LETTER_MEANINGS[name];
+      if (meaning) _ltShown.push({ name, heb: (heb || '').trim(), meaning });
+    };
+    if (inExtra && cy22Mic) {
+      _ltAdd(cy22Mic.label, cy22Mic.hebrew);
+    } else {
+      _ltAdd(cy22.dailyLetter, cy22.dailyHebrew);
+      const _setHeb = cy22.hebrew.split('&');
+      cy22.letters.split('&').forEach((n, i) => _ltAdd(n, _setHeb[i]));
+    }
+    const _ltLine = _ltShown.length
+      ? `<div class="lt-notes" style="margin-top:6px;font-size:0.78rem;color:var(--ink-mid);line-height:1.5;">` +
+        _ltShown.map(l =>
+          `<div data-letter="${l.name}" style="margin-top:3px;"><strong style="color:var(--ink)">${l.name}</strong> ` +
+          `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em">${l.heb}</span>` +
+          `<span style="font-style:italic"> — ${l.meaning}</span></div>`).join('') +
+        `</div>`
       : '';
-    // The detail names the letter in full; the microcosm's own detail has
-    // already named it above, so there it takes the meaning alone.
-    const _ltRow = _ltMeaning
-      ? `<div class="detail-row"><span class="detail-label">Today's Letter:</span><span class="detail-value">` +
-        `<strong>${_ltName}</strong> <span style="font-family:'Frank Ruhl Libre',serif;font-size:1.2em">${_ltHeb}</span>` +
-        ` — ${_ltMeaning}</span></div>`
-      : '';
-    const _ltMeaningRow = _ltMeaning
-      ? `<div class="detail-row"><span class="detail-label">Stands for:</span><span class="detail-value">${_ltMeaning}</span></div>`
+    // The detail names each letter in its own row. The microcosm's detail has
+    // already named its one letter above, so there it takes the meaning alone.
+    const _ltRows = _ltShown.map(l =>
+      `<div class="detail-row"><span class="detail-label">${l.name} ` +
+      `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.2em">${l.heb}</span>:</span>` +
+      `<span class="detail-value">${l.meaning}</span></div>`).join('');
+    const _ltMeaningRow = _ltShown.length
+      ? `<div class="detail-row"><span class="detail-label">Stands for:</span><span class="detail-value">${_ltShown[0].meaning}</span></div>`
       : '';
 
     if (inExtra && cy22Mic) {
@@ -13573,7 +13591,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       psElemHtml +
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       ${_ltRow}
+       ${_ltRows}
        <div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
        
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${cy22.theme}</span></div>
