@@ -5709,8 +5709,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   ];
 
   // 22-day cycle — enriched
+  // Call with the day of the KoT year (1–364), as the seasons and the tractates
+  // are called. The seventeen sets are 16 × 22 + 12 = 364, so the count folds at
+  // 364 and the alphabet begins again with the year. It used to run on the
+  // epoch count and clamp at the last set instead, which froze the card on the
+  // vowels for anyone who read forward past a Rosh Hashanah without reloading.
   function get22DayInfo(d) {
     d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
+    d = ((d - 1) % 364) + 1;
     const cycle = (d % 22 == 0) ? parseInt(d/22) : 1 + parseInt(d/22);
     const day   = (d % 22 == 0) ? 22 : d % 22;
     // Daily letter (1-22)
@@ -13158,7 +13164,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `R. S.Y. Zevin &nbsp;·&nbsp; <a href="https://ascentofsafed.com/cgi-bin/ascent.cgi?Name=stories" target="_blank" style="color:var(--gold)">Stories — Ascent of Safed</a>`;
 
     const sef  = getSefirotInfo(d);
-    const cy22 = get22DayInfo(d);
+    // The alphabet is counted from the year's own first day, and with the leap
+    // year's 28 collapsed out of it — the same count the tractates, the halacha
+    // and the Tanach are read by. Reading it off the epoch instead only agreed
+    // with the year the page happened to be opened in.
+    const cy22 = get22DayInfo(dEff - d_year1 + 1);
     const cy13 = get13DayInfo(d);
     const cy41 = get41DayInfo(d);
 
@@ -16340,7 +16350,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           const m=D.extraDay<=22?SINGLE_LETTERS_22[D.extraDay-1].hebrew
                  :D.extraDay<=27?FINAL_LETTERS_MIC[D.extraDay-23].hebrew:'נקודות';
           return {n:8,label:'Adar I microcosm — '+t,mic:true,cell:m+' · microcosm'}; }
-        const i = get22DayInfo(D.abs);
+        const i = get22DayInfo(D.yearDay);
         const g = gates231(i.cycle, i.day);
         // The gate is given in Hebrew alone — two letters, or the vowel point
         // where the seventeenth set leaves the letters behind.

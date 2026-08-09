@@ -25,15 +25,18 @@
 //                   song sits in the table that no week ever reaches. The verses
 //                   are keyed by the weekly table's own creature names, and a
 //                   renamed creature would otherwise fall silent unnoticed.
-//   6. targets    — no control under 44px that isn't a link inside a sentence.
-//   7. overflow   — the page never scrolls sideways, at any phone width,
+//   6. alef-bet   — the 22-day cycle stays inside its 17 sets on every day of
+//                   several years, on the card and in the calendar. 16 × 22 + 12
+//                   = 364; a set above 17 means the year failed to roll over.
+//   7. targets    — no control under 44px that isn't a link inside a sentence.
+//   8. overflow   — the page never scrolls sideways, at any phone width,
 //                   with the cards shut and with every one of them open.
-//   8. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
+//   9. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
 //                   browser, not the stylesheet: a family with no Hebrew in it
 //                   falls through silently to whatever the device happens to
 //                   own, which differs on every device.
-//   9. tracking   — no Hebrew-only text is letterspaced.
-//  10. calendar   — each of the ten monthly calendars is compared against the
+//  10. tracking   — no Hebrew-only text is letterspaced.
+//  11. calendar   — each of the ten monthly calendars is compared against the
 //                   card whose cycle it draws. They are two readings of one
 //                   count, and if they part company the reader cannot tell
 //                   which is wrong. This has caught two real faults already.
@@ -220,6 +223,48 @@ async function checkInBrowser(chromium) {
   ps.elems.bad.forEach(m => fail(`Perek Shirah element — ${m}`));
   if (ps.elems.n === ps.elems.halves && !ps.elems.bad.length)
     pass(`all ${ps.elems.n} eleven-day halves have their element, aligned with the tractate cycle`);
+
+  // ── alef-bet — the 22-day cycle stays inside its 17 sets, every day of every
+  // year. The count is 16 × 22 + 12 = 364, so a set number above 17 means the
+  // year did not roll over: the card read the alphabet off a count that only
+  // reset when the page was reloaded, and froze on the vowels for anyone who
+  // read forward past a Rosh Hashanah. The last set clamps rather than throws,
+  // so nothing else on the page would have shown it.
+  console.log('\nalef-bet');
+  const ab = await page.evaluate(() => {
+    const out = { card: { days: 0, bad: [] }, cal: [] };
+    for (let o = -400; o <= 800; o++) {
+      currentOffset = o; render();
+      const m = document.getElementById('chochmah-main').innerText.match(/Day (\d+) · Cycle (\d+)/);
+      if (!m) continue;               // the leap year's microcosm names no set
+      out.card.days++;
+      if (+m[2] > 17 || +m[2] < 1 || +m[1] > 22 || +m[1] < 1)
+        out.card.bad.push(`offset ${o}: ${m[0]}`);
+    }
+    currentOffset = 0; render();
+    // and the calendar's own lens, over a whole year — the card and the lens
+    // are two readings of one count, and both were reading it from the epoch.
+    const built = _yrBuild();
+    if (built) {
+      const bad = [], sets = new Set();
+      for (const D of built.days) {
+        const s = YR_LENSES[1].seg(D);
+        if (s.mic) continue;
+        const m = (s.cell2 || '').match(/set (\d+) · day (\d+) of 22/);
+        if (!m) { bad.push(`${D.date.toDateString()}: the lens named no set`); continue; }
+        sets.add(+m[1]);
+        if (+m[1] > 17 || +m[2] > 22) bad.push(`${D.date.toDateString()}: ${m[0]}`);
+      }
+      out.cal.push({ hYear: built.hYear, days: built.days.length, sets: sets.size, bad });
+    }
+    return out;
+  });
+  ab.card.bad.slice(0, 5).forEach(m => fail(`the 22-day cycle left its 17 sets — ${m}`));
+  if (!ab.card.bad.length) pass(`${ab.card.days.toLocaleString()} days on the card, every one inside sets 1–17`);
+  ab.cal.forEach(c => {
+    c.bad.slice(0, 5).forEach(m => fail(`the Chochmah calendar left its 17 sets — ${m}`));
+    if (!c.bad.length) pass(`the Chochmah calendar for ${c.hYear} draws ${c.days} days across all ${c.sets} sets`);
+  });
 
   // 5. tap targets — a link inside a sentence is exempt, as WCAG has it
   console.log('\ntargets');
