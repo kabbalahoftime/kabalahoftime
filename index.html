@@ -16371,7 +16371,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         return { n:(y.cycle-1)%7,
                  label:'Set ' + y.cycle + ' — the Rambam whole every 28 days' +
                        (t ? ' · ' + t.name + ' — ' + t.author : ''),
-                 cell:'set ' + y.cycle + ' · day ' + y.dayInCycle + ' of 28',
+                 // "day 6 of 28" spilled to a second line in a 41px square, so
+                 // the day is given as a fraction — the shortest form that still
+                 // says which of the 28 it is.
+                 cell:'set ' + y.cycle + ' · ' + y.dayInCycle + '/28',
                  cell2: lh,
                  cell3: (D.date.getDay() === 6 && D.parasha) ? D.parasha : '' }; } },
   ];

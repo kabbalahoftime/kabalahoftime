@@ -377,7 +377,7 @@ async function checkInBrowser(chromium) {
         // textContent sees it whether the card is open or shut.
         card: () => pair(m((document.getElementById('malchut-detail') || {}).textContent,
                            /Cycle (\d+) · Day (\d+) of 28/), 1, 2),
-        cell: s => pair(m(s.cell, /set (\d+) · day (\d+) of 28/), 1, 2) },
+        cell: s => pair(m(s.cell, /set (\d+) · (\d+)\/28/), 1, 2) },
     ];
 
     if (typeof openYearView !== 'function') return { missing: true };
