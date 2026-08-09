@@ -16213,15 +16213,38 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                 cell:'cycle '+i.cycle+' · day '+i.day+' of 13'}; } },
 
     { card:'Netzach', cycle:'369 — nine cycles of 41',
-      seg:(D)=>{ if (D.leapCycle) return {n:8,
-          label:'Cycle '+D.leapCycle+' — opened out to 55 days for the leap year',mic:true,
-          cell:'cycle '+D.leapCycle+' · of 55'};
-        const d=((D.yearDay-1)%369)+1, band=Math.floor((d-1)/41)+1;
-        const inBand=((d-1)%41)+1;
-        if (inBand===41) return {n:-1,label:'The 41st — a day of Yechidah between cycles',brk:true,
-                                 cell:'the 41st — Yechidah'};
-        return {n:(band-1)%7,label:'Cycle '+band+' of 9 — forty days',
-                cell:'cycle '+band+' · day '+inBand+' of 40'}; } },
+      // The card's own count: get41DayInfo from the epoch, as render calls it.
+      // Forty days in four soul-levels of ten, then a forty-first of Yechidah
+      // standing between the cycles. The cycle's commandment and its mivtzah
+      // hold for all forty-one, so they are named on hover; the day carries
+      // its level and its own commandment.
+      seg:(D)=>{
+        // In a leap year the fourth and fifth cycles open out to 55 days, and
+        // the card counts them that way — so the calendar does too, or the two
+        // would tell the same day differently.
+        if (D.leapCycle) return {
+          n: 8, mic: true,
+          label: 'Leap year — cycle ' + D.leapCycle + ' opened out to 55 days',
+          cell: 'Year-Cycle ' + D.leapCycle + ' · day ' + D.leapCycleDay + ' of 55',
+          cell2: D.leapCycleDay === 55 ? 'Yechidah — Adam Kadmon' : '',
+          cell3: '' };
+        const c = get41DayInfo(D.abs);
+        const cyc = CYCLE_COMMANDMENTS[(c.cycle - 1) % 9];
+        const dayCmd = TEN_COMMANDMENTS[c.commandmentDay - 1];
+        const level = c.day === 41 ? 'Yechidah'
+                    : c.soulLevel.split(' / ')[0] + ' ' + c.dayInLevel + ' of 10';
+        return {
+          n: c.day === 41 ? -1 : ((c.cycle - 1) % 9) % 7,
+          brk: c.day === 41,
+          label: 'Cycle ' + (((c.cycle - 1) % 9) + 1) + ' of 9 — ' + (cyc ? cyc.commandment : '') +
+                 (cyc ? ' · ' + cyc.mivtzah : '') +
+                 (D.leapCycle ? ' · leap year-cycle ' + D.leapCycle + ', opened to 55' : ''),
+          // The card names the cycle by its running number, so the calendar
+          // does too; where it stands in the round of nine is on hover.
+          cell:  'Cycle ' + c.cycle + ' · day ' + c.day + ' of 41',
+          cell2: level,
+          cell3: c.day === 41 ? 'between the cycles' : (dayCmd ? dayCmd.commandment : '')
+        }; } },
 
     { card:'Hod', cycle:'Halacha — two chapters a day',
       // Two units a day, morning and afternoon: the Shulchan Aruch's Orach
@@ -16321,7 +16344,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  : (fkey === '12-14' ? 'Purim' : fkey === '12-15' ? 'Shushan Purim' : '')) ||
         (heb.day === 1 && heb.month !== 7 ? 'Rosh Chodesh ' + (CAL_HEB_MON[heb.month] || '') : '');
 
-      days.push({ doy: i + 1, abs, date: d, heb, parasha: par, parashaIdx: parIdx, fest,
+      // Days 1-55 within an expanded cycle, counted as render counts them.
+      const leapCycleDay = inLeap4
+        ? (heb.month === 11 ? heb.day - 3 : heb.day + 27)
+        : inLeap5
+          ? (heb.month === 12 ? heb.day - 28 : heb.month === 13 ? heb.day + 2 : heb.day + 31)
+          : 0;
+
+      days.push({ doy: i + 1, abs, date: d, heb, parasha: par, parashaIdx: parIdx, fest, leapCycleDay,
                   leap: isLeapY, inExtra, extraDay, dEff, seasonPos,
                   leapCycle: inLeap4 ? 4 : (inLeap5 ? 5 : 0),
                   yearDay: dEff - anchor + 1, yPos, day1: k.day1 });
