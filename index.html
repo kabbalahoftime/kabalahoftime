@@ -16352,20 +16352,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  cell: sh.name || D.parasha || '',
                  cell2:'D' + sh.day + ' · P' + p + ' · C' + c }; } },
 
-    { card:'Malchut', cycle:'Yad HaChazakah · the seven on the parasha',
-      // Two of Malchut's counts: the Rambam whole every 28 days, and the seven
-      // connections to the week's parasha — one to each day of the Kabbalah of
-      // Time week, Arizal through to Mesilat Yesharim, taken from the card's
-      // own getMalchutText so the two name the same one.
+    { card:'Malchut', cycle:'Yad HaChazakah · the seven · Likutei Halachos',
+      // Three of Malchut's counts: the Rambam whole every 28 days; the seven
+      // connections to the week's portion, one to each day of the Kabbalah of
+      // Time week; and Likutei Halachos, Reb Noson's Chassidic depths within
+      // practical law. The parasha is named once a week, beside the Shabbat
+      // text, rather than repeated in all seven squares.
       seg:(D)=>{ const y = getYadInfo(D.yPos, D.leap);
         const t = getMalchutText(getSefirotInfo(D.abs).dayNum);
         const name = t ? t.name.replace(' and Toras Menachem', '') : '';
+        const shabbat = D.date.getDay() === 6;
+        let lh = '';
+        try { lh = (getLikuteiHalachotInfo(D.yearDay) || []).map(e => e.label).join(' · '); }
+        catch (e) {}
         return { n:(y.cycle-1)%7,
                  label:'Set ' + y.cycle + ' — the Rambam whole every 28 days' +
                        (t ? ' · ' + t.name + ' — ' + t.author : ''),
                  cell:'set ' + y.cycle + ' · day ' + y.dayInCycle + ' of 28',
-                 cell2: name,
-                 cell3: D.parasha || '' }; } },
+                 cell2: name + (shabbat && D.parasha ? ' · ' + D.parasha : ''),
+                 cell3: lh }; } },
   ];
 
   let _yrLens = 4;              // Gevurah opens it — its seasons read most clearly
