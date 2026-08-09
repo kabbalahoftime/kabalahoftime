@@ -2857,6 +2857,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const found = findCurrentParasha(formatDate(shabbat));
         return found ? found.name : null;
     };
+
+    // The Shovavim position for a date — day of the week, the parasha's number
+    // within its cycle, and the cycle itself. The card reads the same three,
+    // so the monthly calendar can show them without a second reckoning. A
+    // double parasha carries two numbers, as it does on the card.
+    window.getShovavimForDate = function(date) {
+        const found = findCurrentParasha(formatDate(getNextShabbat(date)));
+        if (!found) return null;
+        const infos = (found.numbers || []).map(getCycleAndRelativeNumberForParasha).filter(Boolean);
+        return {
+            day: date.getDay() + 1,                       // 1 = Sunday … 7 = Shabbat
+            name: found.name,
+            parashaNums: infos.map(i => i.relativeNumber),
+            cycles: [...new Set(infos.map(i => i.cycle))],
+        };
+    };
 })();
 </script>
 
@@ -16174,13 +16190,33 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         return {n:(band-1)%7,label:'Cycle '+band+' of 9 — forty days',
                 cell:'cycle '+band+' · day '+inBand+' of 40'}; } },
 
-    { card:'Hod', cycle:'The Zohar by parasha',
-      seg:(D)=>({n:D.parashaIdx%7,label:D.parasha?('Parashat '+D.parasha):'—',
-                 cell:D.parasha||''}) },
+    { card:'Hod', cycle:'Halacha — two chapters a day',
+      // Two units a day, morning and afternoon: the Shulchan Aruch's Orach
+      // Chaim to chapter 697, then the Sefer Chofetz Chaim. Same count the
+      // card keeps, folded for the leap year.
+      seg:(D)=>{ const h=getHalachaInfo(D.yearDay);
+        const both = u => u.kind==='sa' ? 'OC '+u.ch : u.label;
+        const kinds = [h.m.kind,h.a.kind];
+        const label = kinds.every(k=>k==='sa') ? 'Shulchan Aruch — Orach Chaim'
+                    : kinds.every(k=>k==='cc') ? 'Sefer Chofetz Chaim'
+                    : 'Orach Chaim into the Chofetz Chaim';
+        const cell = (h.m.kind==='sa' && h.a.kind==='sa')
+          ? 'OC ' + h.m.ch + '–' + h.a.ch
+          : both(h.m) + ' · ' + both(h.a);
+        return { n: kinds.every(k=>k==='sa') ? 4 : kinds.every(k=>k==='cc') ? 5 : 6,
+                 label, cell }; } },
 
-    { card:'Yesod', cycle:'The weekly parasha',
-      seg:(D)=>({n:D.parashaIdx%7,label:D.parasha?('Parashat '+D.parasha):'—',
-                 cell:D.parasha||''}) },
+    { card:'Yesod', cycle:'Shovavim — day, parasha, cycle',
+      seg:(D)=>{ const sh = window.getShovavimForDate && window.getShovavimForDate(D.date);
+        // The parasha table starts a little after the KoT year does, so its
+        // first days have no entry. Say so rather than leave the square blank.
+        if (!sh || !sh.cycles.length)
+          return {n:-1,label:'Before the recorded parashiyot begin',brk:true,
+                  cell:D.parasha || '—'};
+        const p = sh.parashaNums.join(' & '), c = sh.cycles.join(' & ');
+        return { n:(sh.cycles[0]-1)%7,
+                 label:'Cycle ' + c + (sh.cycles.length>1?'':' of the eight pathways'),
+                 cell:'D' + sh.day + ' · P' + p + ' · C' + c }; } },
 
     { card:'Malchut', cycle:'Yad HaChazakah — 28 days a set',
       // Counts straight through the year, leap or not — fourteen sets in a
