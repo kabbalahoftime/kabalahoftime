@@ -28,6 +28,8 @@
 //   6. alef-bet   — the 22-day cycle stays inside its 17 sets on every day of
 //                   several years, on the card and in the calendar. 16 × 22 + 12
 //                   = 364; a set above 17 means the year failed to roll over.
+//                   Each of the 27 letters also has its one sentence, keyed by
+//                   the name the card shows — a rename loses it silently.
 //   7. targets    — no control under 44px that isn't a link inside a sentence.
 //   8. overflow   — the page never scrolls sideways, at any phone width,
 //                   with the cards shut and with every one of them open.
@@ -257,6 +259,19 @@ async function checkInBrowser(chromium) {
       }
       out.cal.push({ hYear: built.hYear, days: built.days.length, sets: sets.size, bad });
     }
+    // and each of the 27 letters has its sentence, keyed by the name the card
+    // shows. A renamed letter would silently lose its meaning, since the face
+    // simply omits the line when the lookup misses.
+    const names = SINGLE_LETTERS_22.map(l => l.letter).concat(FINAL_LETTERS_MIC.map(l => l.letter));
+    out.meanings = { n: names.length, missing: [], thin: [], unused: [] };
+    names.forEach(n => {
+      const m = LETTER_MEANINGS[n];
+      if (!m) { out.meanings.missing.push(n); return; }
+      // one sentence: some length, and no full stop before the last character
+      if (m.length < 40) out.meanings.thin.push(`${n}: "${m}"`);
+      if (/\.\s+\S/.test(m)) out.meanings.thin.push(`${n}: more than one sentence`);
+    });
+    out.meanings.unused = Object.keys(LETTER_MEANINGS).filter(k => !names.includes(k));
     return out;
   });
   ab.card.bad.slice(0, 5).forEach(m => fail(`the 22-day cycle left its 17 sets — ${m}`));
@@ -265,6 +280,11 @@ async function checkInBrowser(chromium) {
     c.bad.slice(0, 5).forEach(m => fail(`the Chochmah calendar left its 17 sets — ${m}`));
     if (!c.bad.length) pass(`the Chochmah calendar for ${c.hYear} draws ${c.days} days across all ${c.sets} sets`);
   });
+  ab.meanings.missing.forEach(m => fail(`the letter ${m} has no sentence`));
+  ab.meanings.thin.forEach(m => fail(`letter meaning — ${m}`));
+  ab.meanings.unused.forEach(m => fail(`a sentence for "${m}", which is no letter the card names`));
+  if (!ab.meanings.missing.length && !ab.meanings.thin.length && !ab.meanings.unused.length)
+    pass(`all ${ab.meanings.n} letters stand for something, one sentence each`);
 
   // 5. tap targets — a link inside a sentence is exempt, as WCAG has it
   console.log('\ntargets');

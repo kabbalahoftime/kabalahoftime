@@ -5691,6 +5691,42 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { letter: 'Tav', hebrew: 'ת' }        // Day 22
   ];
 
+  // ── WHAT EACH LETTER STANDS FOR ──
+  // One sentence for each of the 27 — the 22 and the five finals — drawn from
+  // the Kabbalah of Time appendix the Chochmah card links to, which reads the
+  // letters two at a time across the year and gives the finals their own five
+  // sets. Keyed by the names SINGLE_LETTERS_22 and FINAL_LETTERS_MIC use, so
+  // the day's letter finds its own line.
+  const LETTER_MEANINGS = {
+    'Alef': 'Stands for Aluf\'oh Shel Olam, the Master of the World — two yuds, G-d above and the Jew below, joined by the vav of Emunah, faith.',
+    'Bet': 'Stands for Bayit, home, for the dwelling in the lower realms that G-d desired — and it is the letter the Torah itself opens with.',
+    'Gimmel': 'The giver, shaped as though running toward the poor: Gomel Dalim, bestowing kindness on the destitute.',
+    'Dalet': 'The Dal, the poor one who has nothing of her own — the one the Gimmel runs toward.',
+    'Heh': 'The feminine letter of Malchut, a Dalet with a Yud set inside it, and the letter of Herayon, pregnancy — as Sarai became Sarah and conceived.',
+    'Vav': 'The hook, a straight line that joins: the letter that means \'and\', and that turns a verb from past into future.',
+    'Zayin': 'A weapon, and Zan, to provide — the same struggle in earning Lechem, bread, as in Milchama, war.',
+    'Chet': 'Power above nature: Chet stands for Cheit, sin, and for the strength to overcome it and live — Chaim, and the Chiut, the vitality, within.',
+    'Tet': 'Tov, good — and a snake in Aramaic: the good that lies hidden inside desire and the physical.',
+    'Yud': 'A single dot on the page: spirituality and wisdom, the letter Heaven was made with, the Pintele Yid in every Jew.',
+    'Kaf': 'Keter, the crown above intellect — and the palm of the hand, bent to become a Kli, a vessel that can receive.',
+    'Lamed': 'The root of Lilmod and Lelamed, to learn and to teach — the letter of the Oral Torah, carried from teacher to student.',
+    'Mem': 'The middle letter and a mother-letter: Em, mother, and Mayim, water, at the root of the world\'s foundations.',
+    'Nun': 'Malchut, kingship, and Yinon, a name of Mashiach — a fish in Aramaic, and the faithful servant.',
+    'Samech': 'Somech Noflim, He supports the fallen — a closed circle, turning through every high and every low.',
+    'Ayin': 'An eye, and a wellspring: the window to the soul, revealing the inner and hidden depths.',
+    'Peh': 'A mouth — Pesach is Peh Sach, a mouth that tells — and a Kaf holding a Yud, so that speech reveals G-dliness.',
+    'Tzaddik': 'Righteousness: a bent Nun with a Yud, the humility of Moshe, and it is by bending that the Yud is revealed.',
+    'Kuf': 'A monkey, an imperfect imitation of the Heh — and Kedushah, holiness: the letter of sparks raised out of the husk.',
+    'Reish': 'Rash, poor, and Rosh, head — Nisan is both, first of the months and the month of the bread of poverty.',
+    'Shin': 'A tooth, the hardest bone, and Esh, fire — a mother-letter of three arms, whose number is 300.',
+    'Tav': 'Completion: Tmimut, wholeness and stability, the last letter, which with Alef and Mem spells Emet, truth.',
+    'Kaf Sofit': 'The bent palm gone straight — as the Torah came straight down without an echo, and as Hashem straightens the bent.',
+    'Mem Sofit': 'The sealed mother-letter: what the open Mem reveals, this one conceals — Moshe the first redeemer, Mashiach the last.',
+    'Nun Sofit': 'The bent servant stood upright, a line reaching below where the other letters rest: Mashiach filling even the lowest realm.',
+    'Peh Sofit': 'A mouth opened wide — the month the King is in the field, when prayer and supplication are poured out without measure.',
+    'Tzadik Sofit': 'The righteous one who went down in order to climb back up: the Ba\'al Teshuvah, and Mashiach, who lifts even the lowest realms.',
+  };
+
   const ALEF_BET = [
     { letters: 'Alef & Bet', hebrew: 'א & ב', theme: 'Heavens & Earth', cycle: 1 },
     { letters: 'Gimmel & Dalet', hebrew: 'ג & ד', theme: 'Eden & Gehennom', cycle: 2 },
@@ -13254,12 +13290,33 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div class="detail-row"><span class="detail-label">${gatesLabel}:</span><span class="detail-value">` +
       gatesValueHtml + `</span></div>`;
 
+    // What the day's letter stands for — the leap month's microcosm names a
+    // letter or a final letter on 27 of its 28 days, and a letter either way
+    // is the same letter, so one lookup serves both faces.
+    const _ltName = (inExtra && cy22Mic) ? cy22Mic.label : cy22.dailyLetter;
+    const _ltMeaning = LETTER_MEANINGS[_ltName] || '';
+    const _ltHeb = (inExtra && cy22Mic) ? cy22Mic.hebrew : cy22.dailyHebrew;
+    const _ltLine = _ltMeaning
+      ? `<div style="margin-top:5px;font-size:0.78rem;color:var(--ink-mid);font-style:italic;line-height:1.5;">${_ltMeaning}</div>`
+      : '';
+    // The detail names the letter in full; the microcosm's own detail has
+    // already named it above, so there it takes the meaning alone.
+    const _ltRow = _ltMeaning
+      ? `<div class="detail-row"><span class="detail-label">Today's Letter:</span><span class="detail-value">` +
+        `<strong>${_ltName}</strong> <span style="font-family:'Frank Ruhl Libre',serif;font-size:1.2em">${_ltHeb}</span>` +
+        ` — ${_ltMeaning}</span></div>`
+      : '';
+    const _ltMeaningRow = _ltMeaning
+      ? `<div class="detail-row"><span class="detail-label">Stands for:</span><span class="detail-value">${_ltMeaning}</span></div>`
+      : '';
+
     if (inExtra && cy22Mic) {
       document.getElementById('chochmah-cycle-name').innerHTML = cy22Mic.setLabel;
       document.getElementById('chochmah-main').innerHTML =
         `Microcosm Day <strong>${cy22Mic.day}</strong> of ${cy22Mic.total}<br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22Mic.label}</strong> <span style="font-size:1.1em">${cy22Mic.hebrew}</span><br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>`;
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>` +
+        _ltLine;
       document.getElementById('chochmah-sub').innerHTML = '';
       document.getElementById('chochmah-tags').innerHTML = '';
     } else {
@@ -13268,7 +13325,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `Day <strong>${cy22.day}</strong> · Cycle <strong>${cy22.cycle}</strong><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Cycle:</span> <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine;
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine +
+        _ltLine;
       document.getElementById('chochmah-sub').innerHTML = '';
       document.getElementById('chochmah-tags').innerHTML = '';
     }
@@ -13472,6 +13530,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy22Mic.day} of ${cy22Mic.total}</span></div>
        <div class="detail-row"><span class="detail-label">Set:</span><span class="detail-value">${cy22Mic.setLabel} — ${cy22Mic.setHebrew}</span></div>
        <div class="detail-row"><span class="detail-label">${cy22Mic.type === 'letter' ? 'Letter' : cy22Mic.type === 'final' ? 'Final Letter' : 'Vowels'}:</span><span class="detail-value"><strong>${cy22Mic.label}</strong> <span style="font-size:1.2em;font-family:'Frank Ruhl Libre',serif">${cy22Mic.hebrew}</span></span></div>
+       ${_ltMeaningRow}
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The extra 28 days (28 Shevat–25 Adar I) form a microcosm of the Alef-Bet:<br>Days 1–22: the 22 Hebrew letters · Days 23–27: the 5 final letters · Day 28: vowels (נקודות)</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Torah Ohr / Likutei Torah — Hosafa ${extraDay} of 28 <span class="maalah yom" data-wane="12">מיעוט י״ב</span></div>
@@ -13514,6 +13573,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       psElemHtml +
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       ${_ltRow}
        <div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
        
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${cy22.theme}</span></div>
