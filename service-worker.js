@@ -29,10 +29,20 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
+// How long the network gets to answer a page request before the cached copy
+// is served instead. Long enough that a merely slow connection still delivers
+// the newest page; short enough that a bad one is not something you sit and
+// watch. The request is not abandoned — it keeps running, and refreshes the
+// cache whenever it lands.
+const HTML_NETWORK_TIMEOUT = 3000;
+
 // Fetch:
-//   • HTML / navigations → NETWORK-FIRST, so the latest page always shows
-//     when online (cache is only a fallback for offline). This is the fix
-//     for the old cache-first behaviour that pinned the app to a stale copy.
+//   • HTML / navigations → NETWORK-FIRST WITH A CLOCK, so the latest page
+//     shows when the network answers, and the cached one shows when it does
+//     not. A failed request rejects and falls back on its own; a request that
+//     merely hangs never rejects at all, and on weak wifi that left every card
+//     reading "Loading…" indefinitely with a perfectly good copy in the cache.
+//     Hence the timer: a fallback that waits on failure needs its own clock.
 //   • Everything else (manifest, icons) → cache-first, they rarely change.
 self.addEventListener('fetch', (event) => {
   const req = event.request;
@@ -42,15 +52,23 @@ self.addEventListener('fetch', (event) => {
     (req.headers.get('accept') || '').includes('text/html');
 
   if (isHTML) {
-    event.respondWith(
-      fetch(req)
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
-          return response;
-        })
-        .catch(() => caches.match(req).then((r) => r || caches.match('/index.html')))
-    );
+    event.respondWith((async () => {
+      const network = fetch(req).then((response) => {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+        return response;
+      });
+      // Keep the worker alive for the update even once the cached copy has
+      // been handed over, so the next load has the newer page.
+      event.waitUntil(network.catch(() => {}));
+
+      const cached = (await caches.match(req)) || (await caches.match('/index.html'));
+      if (!cached) return network;      // nothing to fall back to — let it fail as it would
+
+      const timeout = new Promise((resolve) => setTimeout(resolve, HTML_NETWORK_TIMEOUT));
+      const winner = await Promise.race([network.catch(() => null), timeout]);
+      return winner || cached;
+    })());
     return;
   }
 
