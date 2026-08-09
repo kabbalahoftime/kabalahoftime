@@ -1082,7 +1082,9 @@ flex-shrink: 0;
 font-weight: 500;
 }
 
-.detail-value { color: var(--ink-mid); }
+/* Long unbroken titles — Avodat Yom HaKippurim in the Yad's list — pushed the
+   page sideways on a 320px phone. Values wrap inside their column now. */
+.detail-value { color: var(--ink-mid); overflow-wrap: anywhere; }
 
 /* ── DIVIDER ── */
 .section-divider {
@@ -1300,6 +1302,10 @@ flex: 1;
 .mal-today .mal-text-name {
 color: var(--gold);
 }
+/* The book's name is the control that opens its week, so it is allowed to
+   wrap — held on one line it was cut off inside the Today's Reading box. */
+.mal-book-label.mal-book-open { cursor:pointer; white-space:normal; display:inline-block; }
+.mal-book-more { font-size:0.8em; opacity:.6; }
 .mal-book-label {
 font-size: 9px;
 letter-spacing: 0.8px;
@@ -14577,6 +14583,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // KoT Book — displayed on the Binah card face
     const bookParts = todayBook.book.split(' · ');
+    // Binah names the same book; one door more, the same room.
     document.getElementById('binah-kot-book').innerHTML =
       `<span style="font-size:1.1em">${todayBook.emoji}</span> ` +
       (todayBook.url
@@ -14661,13 +14668,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Today's highlighted entry
     const todayMalTxt = getMalchutText(sef.dayNum);
     const todayIdx = sef.dayNum - 1;
-    const todayFieldLines = todayBook.fields.map(f =>
-      `<div class="mal-field">` +
-        `<span class="mal-field-label">${f.label}</span>` +
-        `<span class="mal-field-value">${f.value}</span>` +
-      `</div>`
-    ).join('');
-    
     let todayTextDisplay = displayTexts[todayIdx];
     if (todayMalTxt.secondaryName) {
       todayTextDisplay += ` & ${todayMalTxt.secondaryName}`;
@@ -14686,10 +14686,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ? `<div style="font-size:11px;color:var(--ink-dim);font-style:italic;font-weight:400;">${parashaMapping.theme}</div>`
       : '';
     const todayBookLabelHtml =
-      (todayBook.url
-        ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span></a>`
-        : `<span class="mal-book-label">${todayBook.emoji} ${todayBook.book}</span>`) +
-      (todayBook.weekUrl ? ` &nbsp;<a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.82em">This Week</a>` : '');
+      `<span class="mal-book-label mal-book-open" onclick="openKotBookModal(${todayIdx})">` +
+        `${todayBook.emoji} ${todayBook.book} <span class="mal-book-more">▾</span></span>`;
     const todayRow = `<div class="mal-today-highlight">` +
       `<div class="mal-today-badge">★ Today's Reading</div>` +
       `<div class="mal-book-row mal-today">` +
@@ -14701,7 +14699,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             `<div>${todayBookLabelHtml}</div>` +
           `</div>` +
         `</div>` +
-        `<div class="mal-fields">${todayFieldLines}</div>` +
       `</div>` +
       `</div>`;
 
@@ -14750,22 +14747,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
       }
       
-      const fieldLines = db.fields.map(f =>
-        `<div class="mal-field">` +
-          `<span class="mal-field-label">${f.label}</span>` +
-          `<span class="mal-field-value">${f.value}</span>` +
-        `</div>`
-      ).join('');
+      // The week's reading for that book is kept behind its name rather than
+      // set out in full seven times over — it was the bulk of this card, and
+      // the same book already stands on Binah's face.
+      _malBooks[i] = { day: DAYS_LABELS[i], emoji: db.emoji, book: db.book,
+                       url: db.url || '', weekUrl: db.weekUrl || '', fields: db.fields || [] };
       return `<div class="mal-book-row${isCurrent ? ' mal-today' : ''}">` +
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[i]}</span>` +
           `<span class="mal-text-name">${displayName}${themeHTML}</span>` +
-          (db.url
-            ? `<a href="${db.url}" target="_blank" style="color:var(--gold)"><span class="mal-book-label">${db.emoji} ${db.book}</span></a>`
-            : `<span class="mal-book-label">${db.emoji} ${db.book}</span>`) +
-          (db.weekUrl ? ` &nbsp;<a href="${db.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.82em">This Week</a>` : '') +
+          `<span class="mal-book-label mal-book-open" onclick="openKotBookModal(${i})">` +
+            `${db.emoji} ${db.book} <span class="mal-book-more">▾</span></span>` +
         `</div>` +
-        `<div class="mal-fields">${fieldLines}</div>` +
         `</div>`;
     }).join('');
 
@@ -15092,6 +15085,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function openZoharDailyModal() {
     openInfoPopup('Zohar — זוהר', _zoharDetailMain, _zoharDetailMeta);
+  }
+
+  // The seven Kabbalah of Time books, one to each day of the week, kept for
+  // the pop-up that opens from a book's name in Malchut — and from the book
+  // named on Binah's face, which is the same book on the same day.
+  const _malBooks = [];
+  function openKotBookModal(i) {
+    const b = _malBooks[i];
+    if (!b) return;
+    const rows = (b.fields || []).map(f =>
+      `<div class="detail-row"><span class="detail-label">${f.label}:</span>` +
+      `<span class="detail-value">${f.value}</span></div>`).join('');
+    openInfoPopup(`${b.emoji} ${b.book}`,
+      rows || '<div style="color:var(--ink-mid);font-style:italic">Nothing set for this week.</div>',
+      b.day +
+      (b.url ? ` &nbsp;·&nbsp; <a href="${b.url}" target="_blank" style="color:var(--gold)">The book ↗</a>` : '') +
+      (b.weekUrl ? ` &nbsp;·&nbsp; <a href="${b.weekUrl}" target="_blank" style="color:var(--gold)">This week ↗</a>` : ''));
   }
 
   function openSeferYetzirahModal() {
