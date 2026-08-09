@@ -22,7 +22,8 @@
 //   4. ids        — no duplicated element id. Mirroring a card's face into the
 //                   Now card once cloned 23 ids and quietly broke both.
 //   5. targets    — no control under 44px that isn't a link inside a sentence.
-//   6. overflow   — the page never scrolls sideways, at any phone width.
+//   6. overflow   — the page never scrolls sideways, at any phone width,
+//                   with the cards shut and with every one of them open.
 //   7. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
 //                   browser, not the stylesheet: a family with no Hebrew in it
 //                   falls through silently to whatever the device happens to
@@ -428,15 +429,28 @@ async function checkInBrowser(chromium) {
     }
   }
 
-  // 6. sideways scroll at phone widths
+  // 6. sideways scroll at phone widths, shut and open
+  //
+  // Measuring only with the cards shut missed a real one: a long unbreakable
+  // title in the Yad HaChazakah list pushed the page 7px sideways, but only
+  // once Malchut was expanded. Most of the app's text lives inside a card that
+  // has to be opened to be seen, so both states are measured.
   console.log('\noverflow');
   for (const w of WIDTHS) {
     await page.setViewportSize({ width: w, height: 844 });
     await page.waitForTimeout(250);
-    const over = await page.evaluate(() =>
-      document.documentElement.scrollWidth - document.documentElement.clientWidth);
-    if (over > 0) fail(`${w}px wide: page scrolls sideways by ${over}px`);
-    else pass(`${w}px wide: no sideways scroll`);
+    const over = await page.evaluate(() => {
+      const cards = [...document.querySelectorAll('.sefirah-card')];
+      const shut = document.documentElement.scrollWidth - document.documentElement.clientWidth;
+      const already = cards.filter(c => c.classList.contains('expanded'));
+      cards.forEach(c => c.classList.add('expanded'));
+      const open = document.documentElement.scrollWidth - document.documentElement.clientWidth;
+      cards.forEach(c => { if (!already.includes(c)) c.classList.remove('expanded'); });
+      return { shut, open };
+    });
+    if (over.shut > 0) fail(`${w}px wide, cards shut: page scrolls sideways by ${over.shut}px`);
+    else if (over.open > 0) fail(`${w}px wide, cards open: page scrolls sideways by ${over.open}px`);
+    else pass(`${w}px wide: no sideways scroll, shut or open`);
   }
 
   if (crashes.length) crashes.slice(0, 5).forEach(c => fail('uncaught: ' + c));
