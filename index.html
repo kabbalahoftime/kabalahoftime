@@ -5551,6 +5551,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // ── ALEF-BET DATA (22 sets × 2 letters each = 16.5 full sets in 364-day year) ──
   // Single letters for each day 1-22 within any cycle
+  // The 7 × 7 × 7 that Binah keeps: a Sefirah for the day, one for the week of
+  // seven, and one for the cycle of forty-nine. The remainder is taken the long
+  // way round so days before the epoch stay in range, and the super-cycle is
+  // held at seven — there are only seven names to reach. Lifted out of render
+  // so the monthly calendar reads the same three the card does.
+  const SEFIROT_777 = ['Chesed', 'Gevurah', 'Tiferet', 'Netzach', 'Hod', 'Yesod', 'Malchut'];
+  function sefirot777(d) {
+    const pos   = (((d - 1) % 49) + 49) % 49 + 1;      // 1-49 within the cycle
+    const cycle = Math.max(1, Math.floor((d - 1) / 49) + 1);
+    const week  = Math.ceil(pos / 7);
+    const day   = ((pos - 1) % 7) + 1;
+    const sup   = Math.min(cycle, 7);
+    return { pos, cycle, week, day,
+             daySef: SEFIROT_777[day - 1], weekSef: SEFIROT_777[week - 1],
+             cycleSef: SEFIROT_777[sup - 1],
+             combo: `${SEFIROT_777[day - 1]} she'be${SEFIROT_777[week - 1]} she'be${SEFIROT_777[sup - 1]}` };
+  }
+
   // The twelve vowel points, for the seventeenth set — where the cycle turns
   // from letters to the marks that voice them, nine of them named for a Sefirah.
   const VOWELS_17 = [
@@ -13352,23 +13370,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // BINAH — 7×7×7 Sefirot Omer Cycle
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
     // 364 / 49 ≈ 7.43 full Omer cycles. We show position within the continuous 343-day (7×7×7) structure
-    const SEFIROT_NAMES = ['Chesed','Gevurah','Tiferet','Netzach','Hod','Yesod','Malchut'];
-    // The remainder is taken the long way round so it stays 0–48 for days
-    // before the anchor as well: JS gives a negative result for a negative
-    // dividend, which walked the Sefirot arrays off their front end and put
-    // "undefined she'beundefined" on the card for any date earlier than the
-    // first day of KoT year 1. The cycle number is held at 1 there, as the
-    // other cards hold theirs.
-    const omerPos = (((d - 1) % 49) + 49) % 49 + 1;   // 1–49 within the Omer cycle
-    const omerCycle = Math.max(1, Math.floor((d - 1) / 49) + 1);
-    const omerWeek = Math.ceil(omerPos / 7);
-    const omerDay = ((omerPos - 1) % 7) + 1;
-    const weekSef = SEFIROT_NAMES[omerWeek - 1];
-    const daySef  = SEFIROT_NAMES[omerDay - 1];
-    // Deeper 7×7×7: which of the 7 "super-cycles" of 49 days (1–7)
-    const superCycle = Math.min(omerCycle, 7);
-    const superSef   = SEFIROT_NAMES[superCycle - 1];
-    const combo   = `${daySef} she'be${weekSef} she'be${superSef}`;
+    const _b777 = sefirot777(d);
+    const omerPos = _b777.pos, omerCycle = _b777.cycle;
+    const omerWeek = _b777.week, omerDay = _b777.day;
+    const weekSef = _b777.weekSef, daySef = _b777.daySef;
+    const superCycle = Math.min(omerCycle, 7), superSef = _b777.cycleSef;
+    const combo = _b777.combo;
     // Breslev Israel CDs — 108-recording rotation (1 per KoT day, cycles every 108 days)
     const BRESLEV_CDS = (() => {
       const arr = [];
@@ -16142,11 +16149,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  cell: i.dailyHebrew+' '+i.dailyLetter+(gate ? ' · '+gate : '') }; } },
 
     { card:'Binah', cycle:'Sefirot — 7 × 7 × 7',
-      // Counts unbroken from the epoch; nothing folds.
-      seg:(D)=>{ const c=Math.floor((D.abs-1)/49)+1;
-        const i=getSefirotInfo(D.abs);
-        return {n:(c-1)%7,label:'Cycle '+c+' — shebe'+i.cycleSef,
-                cell:i.daySef+' shebe'+i.weekSef+' shebe'+i.cycleSef}; } },
+      // Counts unbroken from the epoch; nothing folds. Reads through the same
+      // sefirot777 the card reads, so the three names cannot part company.
+      seg:(D)=>{ const i = sefirot777(D.abs);
+        return { n:(i.cycle-1)%7,
+                 label:'Cycle '+i.cycle+' — shebe'+i.cycleSef,
+                 cell:i.daySef+' shebe'+i.weekSef,
+                 cell2:'shebe'+i.cycleSef+' · day '+i.pos+' of 49' }; } },
 
     { card:'Chesed', cycle:'Shem Ayin-Bet — the Names, the watches, the blessing',
       // Three counts run together here, as they do on the card: the seventy-two
@@ -16203,14 +16212,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  cell3:e ? (e.label + (e.letter ? ' · ' + e.letter : '')) : '' }; } },
 
     { card:'Tiferet', cycle:'13 Attributes — 13 days',
+      // The card expresses the raw 1-28 cycle as its round and position —
+      // 1st, 2nd, then the microcosm of two — so the calendar says it the same
+      // way, or the same day would be told two different numbers.
       seg:(D)=>{ if (D.inExtra) {
           const set = D.extraDay<=13 ? 'Micha’s thirteen'
                     : D.extraDay<=26 ? 'Moshe’s thirteen' : 'both sets whole';
           return {n:8,label:'Adar I microcosm — a cycle a day ('+set+')',mic:true,
                   cell:'microcosm · cycle '+D.extraDay}; }
-        const i=get13DayInfo(D.abs);
-        return {n:(i.cycle-1)%7,label:'Cycle '+i.cycle+' — '+(i.cycle<=13?'Micha':i.cycle<=26?'Moshe':'microcosm'),
-                cell:'cycle '+i.cycle+' · day '+i.day+' of 13'}; } },
+        const i = get13DayInfo(D.abs);
+        const round = i.cycle <= 13 ? 1 : (i.cycle <= 26 ? 2 : 3);
+        const n = round === 3 ? i.cycle - 26 : (round === 2 ? i.cycle - 13 : i.cycle);
+        const name = round === 3 ? 'microcosm cycle ' + n + ' of 2'
+                                 : ['', '1st', '2nd'][round] + ' cycle ' + n;
+        return { n:(i.cycle-1)%7,
+                 label:'Cycle '+i.cycle+' — '+(i.cycle<=13?'Micha':i.cycle<=26?'Moshe':'the microcosm'),
+                 cell:name, cell2:'day '+i.day+' of 13' }; } },
 
     { card:'Netzach', cycle:'369 — nine cycles of 41',
       // The card's own count: get41DayInfo from the epoch, as render calls it.

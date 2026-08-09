@@ -28,6 +28,10 @@
 //                   falls through silently to whatever the device happens to
 //                   own, which differs on every device.
 //   8. tracking   — no Hebrew-only text is letterspaced.
+//   9. calendar   — each of the ten monthly calendars is compared against the
+//                   card whose cycle it draws. They are two readings of one
+//                   count, and if they part company the reader cannot tell
+//                   which is wrong. This has caught two real faults already.
 //
 // Exits non-zero if any check fails, so it can gate a commit.
 
@@ -303,6 +307,126 @@ async function checkInBrowser(chromium) {
   if (tracked.length) tracked.slice(0, 6).forEach(t =>
     fail(`Hebrew "${t.text}" in ${t.where} is letterspaced ${t.ls}`));
   else pass('no Hebrew-only text is letterspaced');
+
+  // 9. the monthly calendars against the cards
+  //
+  // Each calendar draws a card's cycle. If the two ever disagree, one of them
+  // is lying to the reader and there is no way to tell which from the outside.
+  // So every lens is asked, on sampled days, to produce a value the card also
+  // states, and the two are compared. This has already caught two real faults:
+  // Gevurah measuring from the wrong year across the leap-year seam, and
+  // Netzach still counting to 41 where the card had opened out to 55.
+  console.log('\ncalendar');
+  const agree = await page.evaluate(() => {
+    const cards = [...document.querySelectorAll('.sefirah-card')].filter(c => c.id !== 'now-sefirah-featured');
+    const flat = el => el ? el.innerText.replace(/\s+/g, ' ').trim() : '';
+    const main = i => flat(cards[i] && cards[i].querySelector('.sefirah-main-text'));
+    const m = (s, re) => (s || '').match(re);
+    const pair = (x, a, b) => x ? x[a] + '|' + x[b] : '';
+    // every match of a repeating pattern, order-independent
+    const sig = (s, re, norm) => {
+      const out = []; const r = new RegExp(re.source, 'g'); let x;
+      while ((x = r.exec(s || ''))) out.push(x.slice(1).map(v => (norm && norm[v]) || v).join(':'));
+      return out.sort().join(' , ');
+    };
+    const combo = s => { const x = m((s || '').replace(/'/g, ''), /(\w+) shebe(\w+) shebe(\w+)/); 
+                         return x ? x[1] + '|' + x[2] + '|' + x[3] : ''; };
+
+    // For each lens: what the card says, and what the calendar cell says.
+    const PROBES = [
+      { lens: 0, name: 'Keter',
+        card: () => sig(flat(document.getElementById('keter-lm-main')),
+                        /(Part I · Lesson|Tinyana · Torah) (\d+)/,
+                        { 'Part I · Lesson': 'I', 'Tinyana · Torah': 'II' }),
+        cell: s => sig(s.cell, /(Torah|Tinyana) (\d+)/, { Torah: 'I', Tinyana: 'II' }) },
+      { lens: 1, name: 'Chochmah',
+        card: () => (m(main(0), /Day: (\w+)/) || [])[1] || '',
+        cell: s => (m(s.cell, /^\S+ (\w+)/) || [])[1] || '' },
+      { lens: 2, name: 'Binah',
+        card: () => combo(main(1)),
+        cell: s => combo((s.cell || '') + ' ' + (s.cell2 || '')) },
+      { lens: 3, name: 'Chesed',
+        card: () => pair(m(main(2), /Day (\d+) · Cycle \d+ of 5: (\S+)/), 2, 1),
+        cell: s => pair(m(s.cell, /^(\S+) · (\d+)$/), 1, 2) },
+      { lens: 4, name: 'Gevurah',
+        card: () => pair(m(main(3), /Day (\d+) · (\w+)/), 2, 1),
+        cell: s => pair(m(s.cell, /^(\w+) · (\d+) of 91$/), 1, 2) },
+      { lens: 5, name: 'Tiferet',
+        card: () => { const x = m(main(4), /Day (\d+), (?:(\d)(?:st|nd|rd|th)|Microcosm ·) Cycle (\d+)/);
+                      return x ? (x[2] || '3') + '|' + x[3] + '|' + x[1] : ''; },
+        cell: s => { const x = m((s.cell || '') + ' ' + (s.cell2 || ''),
+                                 /(?:(\d)(?:st|nd|rd|th)|microcosm) cycle (\d+)(?: of 2)? day (\d+) of 13/);
+                     return x ? (x[1] || '3') + '|' + x[2] + '|' + x[3] : ''; } },
+      { lens: 6, name: 'Netzach',
+        card: () => pair(m(main(5), /Day (\d+) · Cycle (\d+)/), 2, 1) ||
+                    pair(m(main(5), /Day (\d+) of 55 · Year-Cycle (\d+)/), 2, 1),
+        cell: s => pair(m(s.cell, /Cycle (\d+) · day (\d+) of 41/), 1, 2) ||
+                   pair(m(s.cell, /Year-Cycle (\d+) · day (\d+) of 55/), 1, 2) },
+      { lens: 7, name: 'Hod',
+        card: () => pair(m(main(6), /Half-Days (\d+) & (\d+)/), 1, 2),
+        cell: s => pair(m(s.cell, /OC (\d+)–(\d+)/), 1, 2) },
+      { lens: 8, name: 'Yesod',
+        // A double parasha carries two numbers on each side — "Cycle 6 & 7" —
+        // so the run has to be taken whole, not up to the first space.
+        card: () => { const x = m(main(7), /Day (\d+) · Parasha (\d+(?: & \d+)*) · Cycle (\d+(?: & \d+)*)/);
+                      return x ? x[1] + '|' + x[2] + '|' + x[3] : ''; },
+        cell: s => { const x = m(s.cell2, /D(\d+) · P(\d+(?: & \d+)*) · C(\d+(?: & \d+)*)/);
+                     return x ? x[1] + '|' + x[2] + '|' + x[3] : ''; } },
+      { lens: 9, name: 'Malchut',
+        // The Yad tag sits in the collapsed detail, which innerText skips —
+        // textContent sees it whether the card is open or shut.
+        card: () => pair(m((document.getElementById('malchut-detail') || {}).textContent,
+                           /Cycle (\d+) · Day (\d+) of 28/), 1, 2),
+        cell: s => pair(m(s.cell, /set (\d+) · day (\d+) of 28/), 1, 2) },
+    ];
+
+    if (typeof openYearView !== 'function') return { missing: true };
+    openYearView();
+    const days = _yrDays.days;
+    // Every lens's reading of every day, gathered before any card is drawn.
+    const segs = PROBES.map(p => { yrSetLens(p.lens); return days.map(d => ({ ...d._seg })); });
+    closeYearView();
+
+    // Sample across the year, and take the last stretch whole — the year seam
+    // is where the two have disagreed before.
+    const idx = new Set();
+    for (let i = 0; i < days.length; i += 11) idx.add(i);
+    for (let i = Math.max(0, days.length - 15); i < days.length; i++) idx.add(i);
+
+    const tally = PROBES.map(p => ({ name: p.name, compared: 0, skipped: 0 }));
+    const bad = [];
+    const held = currentOffset;
+    [...idx].forEach(i => {
+      const d = days[i];
+      currentOffset = Math.round((localMidnight(d.date) - localMidnight(new Date())) / 86400000);
+      render();
+      PROBES.forEach((p, j) => {
+        const a = p.card(), b = p.cell(segs[j][i]);
+        if (!a || !b) { tally[j].skipped++; return; }
+        tally[j].compared++;
+        if (a !== b && bad.length < 8)
+          bad.push(`${p.name} on ${d.date.toDateString()}: card "${a}" vs calendar "${b}"`);
+        else if (a !== b) tally[j].mismatch = (tally[j].mismatch || 0) + 1;
+      });
+    });
+    currentOffset = held; render();
+    return { days: idx.size, tally, bad };
+  });
+
+  if (agree.missing) {
+    fail('the monthly calendars are not present — openYearView is missing');
+  } else {
+    const dead = agree.tally.filter(t => t.compared === 0);
+    if (agree.bad.length) agree.bad.forEach(x => fail(x));
+    // A probe that never compared anything is a broken probe, not a pass.
+    dead.forEach(t => fail(`${t.name}: nothing could be compared — the probe no longer matches`));
+    if (!agree.bad.length && !dead.length) {
+      const total = agree.tally.reduce((n, t) => n + t.compared, 0);
+      const skipped = agree.tally.reduce((n, t) => n + t.skipped, 0);
+      pass(`${total} readings across ${agree.tally.length} calendars match their cards ` +
+           `(${agree.days} days sampled${skipped ? `, ${skipped} not comparable` : ''})`);
+    }
+  }
 
   // 6. sideways scroll at phone widths
   console.log('\noverflow');
