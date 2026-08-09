@@ -16352,20 +16352,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  cell: sh.name || D.parasha || '',
                  cell2:'D' + sh.day + ' · P' + p + ' · C' + c }; } },
 
-    { card:'Malchut', cycle:'Yad HaChazakah · V’Atah Tetzaveh',
-      // Two of Malchut's counts: the Rambam whole every 28 days, and the
-      // Rebbe's last ma'amar completed every thirteen — its se'if keyed to the
-      // same 13-day cycle Tiferet keeps, each se'if carrying a month of the
-      // year. Both run straight through; neither folds for a leap year.
+    { card:'Malchut', cycle:'Yad HaChazakah · the seven on the parasha',
+      // Two of Malchut's counts: the Rambam whole every 28 days, and the seven
+      // connections to the week's parasha — one to each day of the Kabbalah of
+      // Time week, Arizal through to Mesilat Yesharim, taken from the card's
+      // own getMalchutText so the two name the same one.
       seg:(D)=>{ const y = getYadInfo(D.yPos, D.leap);
-        const t = get13DayInfo(D.abs);
-        const sf = VATAH_SEIF_BY_DAY[t.day - 1];
-        const vt = sf === 0 ? 'V’Atah — the whole ma’amar'
-                            : 'Se’if ' + VATAH_HEB[sf - 1] + ' · ' + VATAH_MONTH_BY_DAY[t.day - 1];
+        const t = getMalchutText(getSefirotInfo(D.abs).dayNum);
+        const name = t ? t.name.replace(' and Toras Menachem', '') : '';
         return { n:(y.cycle-1)%7,
-                 label:'Set ' + y.cycle + ' — the Rambam whole every 28 days',
+                 label:'Set ' + y.cycle + ' — the Rambam whole every 28 days' +
+                       (t ? ' · ' + t.name + ' — ' + t.author : ''),
                  cell:'set ' + y.cycle + ' · day ' + y.dayInCycle + ' of 28',
-                 cell2: vt }; } },
+                 cell2: name,
+                 cell3: D.parasha || '' }; } },
   ];
 
   let _yrLens = 4;              // Gevurah opens it — its seasons read most clearly
