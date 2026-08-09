@@ -1737,6 +1737,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .cal-mo { margin:0 0 18px; min-width:var(--cal-min, 0); }
 .cal-mo h3 { font-family:'Cinzel',serif; font-size:13px; letter-spacing:2px; text-align:center;
   color:var(--gold); margin:0 0 6px; text-transform:uppercase; }
+.cal-mo-he { font-family:'Frank Ruhl Libre',serif; letter-spacing:0; text-transform:none;
+  font-size:0.95em; color:var(--gold-mid); margin-left:6px; }
 .cal-tbl { width:100%; border-collapse:collapse; table-layout:fixed; }
 .cal-tbl th { border:1px solid var(--border); font-size:8.5px; padding:3px 2px;
   font-family:'Cinzel',serif; letter-spacing:.6px; color:var(--ink-mid); text-transform:uppercase; }
@@ -16481,6 +16483,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // One ordinary Gregorian month at a time, every month the KoT year touches.
   // A day outside the year keeps its number and nothing else — the year has
   // not begun there, and saying so is truer than leaving the square blank.
+  // Hebrew month names, with the leap year's two Adars told apart — the app's
+  // own formatHebrewDate calls them both אֲדָר, which is right on a date line
+  // but not over a calendar that shows the two months side by side.
+  const CAL_HEB_MON_HE = { 1:'נִיסָן', 2:'אִיָּר', 3:'סִיוָן', 4:'תַּמּוּז', 5:'אָב', 6:'אֱלוּל',
+                           7:'תִּשְׁרֵי', 8:'חֶשְׁוָן', 9:'כִּסְלֵו', 10:'טֵבֵת', 11:'שְׁבָט',
+                           12:'אֲדָר א׳', 13:'אֲדָר ב׳' };
+
+  // How many days a Hebrew month holds — asked of the calendar itself rather
+  // than tabulated, since 29 or 30 depends on the year.
+  function _calHebMonthLen(y, m) {
+    for (const len of [30, 29]) {
+      const g = hebrewToGreg(y, m, len);
+      const h = g && gregToHebrew(g);
+      if (h && h.year === y && h.month === m && h.day === len) return len;
+    }
+    return 29;
+  }
+
   function yrDraw() {
     const lens = YR_LENSES[_yrLens];
     const today = window.kotYear ? window.kotYear.day : -1;
@@ -16496,44 +16516,86 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         })
       : null;
 
-    const months = [];
-    _yrDays.days.forEach(d => {
-      const k = d.date.getFullYear() + '-' + d.date.getMonth();
-      if (!months.some(m => m.k === k)) months.push({ k, y: d.date.getFullYear(), m: d.date.getMonth() });
-    });
+    // One square. The two calendars differ only in which number leads it: the
+    // Gregorian date over the Hebrew one, or the Hebrew over the Gregorian.
+    const square = (d, lead, under) => {
+      const wkNo = Math.floor((d.doy - 1) / 7) + 1;
+      return `<td class="${wkNo % 2 ? 'band' : ''}${d.abs === today ? ' now' : ''}${
+          d._seg.brk ? ' cal-sil' : ''}" onclick="yrPick(${d.doy - 1})" ` +
+        `title="${_calEsc(d._seg.label)} · KoT week ${wkNo}, day ${d.doy}">` +
+        `<div class="cal-num">${lead}${d.doy % 7 === 1 ? ` <span class="cal-wk">W${wkNo}</span>` : ''}</div>` +
+        `<div class="cal-heb">${_calEsc(under)}</div>` +
+        (d.fest ? `<div class="cal-fest">${_calEsc(d.fest)}</div>` : '') +
+        (d._seg.cell  ? `<div class="cal-cyc">${_calEsc(d._seg.cell)}</div>`  : '') +
+        (d._seg.cell2 ? `<div class="cal-cyc">${_calEsc(d._seg.cell2)}</div>` : '') +
+        (d._seg.cell3 ? `<div class="cal-cyc">${_calEsc(d._seg.cell3)}</div>` : '') +
+        '</td>';
+    };
 
-    document.getElementById('cal-body').innerHTML = months.map(mo => {
-      const first = new Date(mo.y, mo.m, 1).getDay();
-      const last  = new Date(mo.y, mo.m + 1, 0).getDate();
-      let rows = '', cells = '', col = 0;
-      for (let i = 0; i < first; i++) { cells += '<td class="out"></td>'; col++; }
-      for (let date = 1; date <= last; date++) {
-        const d = byIso[mo.y + '-' + (mo.m + 1) + '-' + date];
-        if (!d) {
-          cells += `<td class="out"><div class="cal-num">${date}</div></td>`;
-        } else {
-          const wkNo = Math.floor((d.doy - 1) / 7) + 1;
-          cells += `<td class="${wkNo % 2 ? 'band' : ''}${d.abs === today ? ' now' : ''}${
-              d._seg.brk ? ' cal-sil' : ''}" onclick="yrPick(${d.doy - 1})" ` +
-            `title="${_calEsc(d._seg.label)} · KoT week ${wkNo}, day ${d.doy}">` +
-            `<div class="cal-num">${date}${d.doy % 7 === 1 ? ` <span class="cal-wk">W${wkNo}</span>` : ''}</div>` +
-            `<div class="cal-heb">${d.heb.day} ${CAL_HEB_MON[d.heb.month] || d.heb.month}</div>` +
-            (d.fest ? `<div class="cal-fest">${_calEsc(d.fest)}</div>` : '') +
-            (d._seg.cell  ? `<div class="cal-cyc">${_calEsc(d._seg.cell)}</div>`  : '') +
-            (d._seg.cell2 ? `<div class="cal-cyc">${_calEsc(d._seg.cell2)}</div>` : '') +
-            (d._seg.cell3 ? `<div class="cal-cyc">${_calEsc(d._seg.cell3)}</div>` : '') +
-            '</td>';
+    const table = (title, rows) =>
+      `<div class="cal-mo"><h3>${title}</h3><table class="cal-tbl">` +
+      `<thead><tr>${CAL_DOW.map((x, dow) =>
+        `<th>${x}${heads && heads[dow] ? `<span class="cal-head-sub">${_calEsc(heads[dow])}</span>` : ''}</th>`
+       ).join('')}</tr></thead><tbody>${rows}</tbody></table></div>`;
+
+    // Lay a month out in weeks, whatever kind of month it is: `days` is an
+    // array of one entry per date in the month, in order, each either a day of
+    // the year or a bare number outside it.
+    const weeks = (firstDow, cells) => {
+      let rows = '', row = '', col = 0;
+      for (let i = 0; i < firstDow; i++) { row += '<td class="out"></td>'; col++; }
+      cells.forEach(c => {
+        row += c; col++;
+        if (col === 7) { rows += `<tr>${row}</tr>`; row = ''; col = 0; }
+      });
+      if (col) { while (col++ < 7) row += '<td class="out"></td>'; rows += `<tr>${row}</tr>`; }
+      return rows;
+    };
+
+    let html;
+    if (_calMode === 1) {
+      // ── the Jewish year ──
+      const months = [];
+      _yrDays.days.forEach(d => {
+        const k = d.heb.year + '-' + d.heb.month;
+        if (!months.some(x => x.k === k)) months.push({ k, y: d.heb.year, m: d.heb.month });
+      });
+      html = months.map(mo => {
+        const len = _calHebMonthLen(mo.y, mo.m);
+        const firstDow = hebrewToGreg(mo.y, mo.m, 1).getDay();
+        const cells = [];
+        for (let hd = 1; hd <= len; hd++) {
+          const g = hebrewToGreg(mo.y, mo.m, hd);
+          const d = byIso[_calIso(g)];
+          const heb = toHebrewNumerals(hd);
+          if (!d) cells.push(`<td class="out"><div class="cal-num">${heb}</div></td>`);
+          else cells.push(square(d, heb, CAL_MON[g.getMonth()].slice(0, 3) + ' ' + g.getDate()));
         }
-        col++;
-        if (col === 7) { rows += `<tr>${cells}</tr>`; cells = ''; col = 0; }
-      }
-      if (col) { while (col++ < 7) cells += '<td class="out"></td>'; rows += `<tr>${cells}</tr>`; }
-      return `<div class="cal-mo"><h3>${CAL_MON[mo.m]} ${mo.y}</h3><table class="cal-tbl">` +
-             `<thead><tr>${CAL_DOW.map((x, dow) =>
-                `<th>${x}${heads && heads[dow] ? `<span class="cal-head-sub">${_calEsc(heads[dow])}</span>` : ''}</th>`
-              ).join('')}</tr></thead>` +
-             `<tbody>${rows}</tbody></table></div>`;
-    }).join('');
+        const title = `${CAL_HEB_MON[mo.m] || mo.m} ${mo.y} ` +
+                      `<span class="cal-mo-he">${CAL_HEB_MON_HE[mo.m] || ''} ${toHebrewYear(mo.y)}</span>`;
+        return table(title, weeks(firstDow, cells));
+      }).join('');
+    } else {
+      // ── the Gregorian year ──
+      const months = [];
+      _yrDays.days.forEach(d => {
+        const k = d.date.getFullYear() + '-' + d.date.getMonth();
+        if (!months.some(x => x.k === k)) months.push({ k, y: d.date.getFullYear(), m: d.date.getMonth() });
+      });
+      html = months.map(mo => {
+        const firstDow = new Date(mo.y, mo.m, 1).getDay();
+        const last = new Date(mo.y, mo.m + 1, 0).getDate();
+        const cells = [];
+        for (let date = 1; date <= last; date++) {
+          const d = byIso[mo.y + '-' + (mo.m + 1) + '-' + date];
+          if (!d) cells.push(`<td class="out"><div class="cal-num">${date}</div></td>`);
+          else cells.push(square(d, String(date),
+                                 d.heb.day + ' ' + (CAL_HEB_MON[d.heb.month] || d.heb.month)));
+        }
+        return table(`${CAL_MON[mo.m]} ${mo.y}`, weeks(firstDow, cells));
+      }).join('');
+    }
+    document.getElementById('cal-body').innerHTML = html;
 
     document.getElementById('yr-sub').textContent =
       `${lens.card} — ${lens.cycle} · ${_yrDays.weeks} weeks, ${_yrDays.weeks * 7} days`;
@@ -16541,6 +16603,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `Each day carries its Hebrew date, what the day is, and where it falls in ${lens.card}'s cycle. ` +
       `Alternate weeks of the Kabbalah of Time year are tinted, and <b>W1…</b> marks where each begins. ` +
       `Tap a day to go to it. <span class="yr-jump" onclick="window.print()">print ↗</span>`;
+  }
+
+  // Gregorian months, or the Jewish months of the same year. The days and
+  // everything on them are identical either way; only the grouping and which
+  // date leads the square change.
+  let _calMode = 0;
+  function calMode(i) {
+    _calMode = i ? 1 : 0;
+    for (let j = 0; j < 2; j++) {
+      const b = document.getElementById('cal-mode-' + j);
+      if (b) b.classList.toggle('on', j === _calMode);
+    }
+    try { localStorage.setItem('kotCalMode', String(_calMode)); } catch (e) {}
+    if (_yrDays) yrDraw();
   }
 
   // Three sizes: fit the screen, or two wider views that scroll sideways for
@@ -16566,6 +16642,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     let i = 0;
     try { i = Math.min(2, Math.max(0, parseInt(localStorage.getItem('kotCalSize'), 10) || 0)); } catch (e) {}
     calSize(i);
+    let m = 0;
+    try { m = parseInt(localStorage.getItem('kotCalMode'), 10) === 1 ? 1 : 0; } catch (e) {}
+    _calMode = m;
+    for (let j = 0; j < 2; j++) {
+      const b = document.getElementById('cal-mode-' + j);
+      if (b) b.classList.toggle('on', j === m);
+    }
   }
 
   function _calIso(d) { return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
@@ -17262,7 +17345,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="yr-lenses" id="yr-lenses"></div>
     <div class="yr-detail" id="yr-detail" style="margin-top:8px;padding-top:8px;"></div>
     <div class="cal-sizes">
-      <span style="font-size:11px;color:var(--ink-dim);">Size</span>
+      <button class="cal-size on" id="cal-mode-0" onclick="calMode(0)">Gregorian</button>
+      <button class="cal-size" id="cal-mode-1" onclick="calMode(1)">Jewish</button>
+      <span style="font-size:11px;color:var(--ink-dim);margin-left:8px;">Size</span>
       <button class="cal-size on" id="cal-size-0" onclick="calSize(0)">Fit</button>
       <button class="cal-size" id="cal-size-1" onclick="calSize(1)">Wide</button>
       <button class="cal-size" id="cal-size-2" onclick="calSize(2)">Wider</button>
