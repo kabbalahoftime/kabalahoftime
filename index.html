@@ -6049,8 +6049,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Nachshon ben Aminadav (Yehudah) · Nissan'
   ];
 
+  // Call with the day of the KoT year (1–364). 28 × 13 = 364 exactly, so the
+  // count folds at 364 and the twenty-eight cycles begin again with the year.
+  // It read the epoch count until now and ran to cycle 93, which named itself
+  // the microcosm of Moshe's thirteen while reading Micha's — see get22DayInfo,
+  // which had the same fault and the same cause.
   function get13DayInfo(d) {
     d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
+    d = ((d - 1) % 364) + 1;
     const cycle = (d % 13 == 0) ? parseInt(d/13) : 1 + parseInt(d/13);
     const day   = (d % 13 == 0) ? 13 : d % 13;
     // Cycles 27 and 28 are the year's microcosm, and they divide as the year
@@ -6068,8 +6074,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // 41-day cycle — enriched
+  // Call with the day of the KoT year (1–364). Nine cycles of 41 would be 369,
+  // so the ninth is short — 36 days — which is why it carries the tenth item as
+  // well as its own. The count folds at 364 with the year; it ran to cycle 30
+  // before, against a card that says "of 10".
   function get41DayInfo(d) {
     d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
+    d = ((d - 1) % 364) + 1;
     const cycle = (d % 41 == 0) ? parseInt(d/41) : 1 + parseInt(d/41);
     const day   = (d % 41 == 0) ? 41 : d % 41;
     const mivtzah = MIVTZOYIM[(cycle - 1) % 9];
@@ -13415,8 +13426,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // and the Tanach are read by. Reading it off the epoch instead only agreed
     // with the year the page happened to be opened in.
     const cy22 = get22DayInfo(dEff - d_year1 + 1);
-    const cy13 = get13DayInfo(d);
-    const cy41 = get41DayInfo(d);
+    const cy13 = get13DayInfo(dEff - d_year1 + 1);
+    const cy41 = get41DayInfo(dEff - d_year1 + 1);
 
     // ── LEAP YEAR MICROCOSM OVERRIDES (extra 28 days: 28 Shevat–25 Adar I) ──
     // cy22 microcosm: 22 letters → 5 finals → 1 vowel day
@@ -16763,7 +16774,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                   cell:'microcosm · cycle '+D.extraDay,
                   cell2:'day '+D.extraDay+' of 28',
                   cell3:a ? a.name : set}; }
-        const i = get13DayInfo(D.abs);
+        const i = get13DayInfo(D.yearDay);
         const round = i.cycle <= 13 ? 1 : (i.cycle <= 26 ? 2 : 3);
         const n = round === 3 ? i.cycle - 26 : (round === 2 ? i.cycle - 13 : i.cycle);
         const name = round === 3 ? 'microcosm cycle ' + n + ' of 2'
@@ -16797,7 +16808,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           cell: 'Year-Cycle ' + D.leapCycle + ' · day ' + D.leapCycleDay + ' of 55',
           cell2: D.leapCycleDay === 55 ? 'Yechidah — Adam Kadmon' : '',
           cell3: '' };
-        const c = get41DayInfo(D.abs);
+        const c = get41DayInfo(D.yearDay);
         const cyc = CYCLE_COMMANDMENTS[(c.cycle - 1) % 9];
         const dayCmd = TEN_COMMANDMENTS[c.commandmentDay - 1];
         const level = c.day === 41 ? 'Yechidah'

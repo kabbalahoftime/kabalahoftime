@@ -28,6 +28,10 @@
 //   6. alef-bet   — the 22-day cycle stays inside its 17 sets on every day of
 //                   several years, on the card and in the calendar. 16 × 22 + 12
 //                   = 364; a set above 17 means the year failed to roll over.
+//                   Every other folded cycle is held to its bound the same way
+//                   — the 13 Attributes to 28, the 41-day to 9, the 72 Names to
+//                   5 — since all three of the faults found so far were one
+//                   fault: a year-long count handed the count from the epoch.
 //                   Each of the 27 letters also has its one sentence, keyed by
 //                   the name the card shows — a rename loses it silently.
 //   7. targets    — no control under 44px that isn't a link inside a sentence.
@@ -283,6 +287,24 @@ async function checkInBrowser(chromium) {
       }
       out.cal.push({ hYear: built.hYear, days: built.days.length, sets: sets.size, bad });
     }
+    // Every cycle that is bounded rather than rolling must stay inside its
+    // bound on every day of the year. Each of these folds at 364 and each was
+    // once handed the epoch count instead, which is a wrong reading and not an
+    // error — the alef-bet froze on the vowels, the thirteen named itself a
+    // microcosm it had left behind, and the forty-one reported cycle 30 of 10.
+    out.bounds = [];
+    const bound = (name, fn, max) => {
+      let worst = 0, first = null;
+      for (let day = 1; day <= 1200; day++) {
+        const c = fn(day);
+        if (c > max || c < 1) { worst = Math.max(worst, c); if (first === null) first = day; }
+      }
+      out.bounds.push({ name, max, worst, first });
+    };
+    bound('the 22-day alef-bet', d => get22DayInfo(d).cycle, 17);
+    bound('the 13 Attributes',   d => get13DayInfo(d).cycle, 28);
+    bound('the 41-day cycle',    d => get41DayInfo(d).cycle, 9);
+    bound('the 72 Names',        d => getAyinBetInfo(d).cycle || 1, 5);
     // and each of the 27 letters has its sentence, keyed by the name the card
     // shows. A renamed letter would silently lose its meaning, since the face
     // simply omits the line when the lookup misses.
@@ -304,6 +326,12 @@ async function checkInBrowser(chromium) {
     c.bad.slice(0, 5).forEach(m => fail(`the Chochmah calendar left its 17 sets — ${m}`));
     if (!c.bad.length) pass(`the Chochmah calendar for ${c.hYear} draws ${c.days} days across all ${c.sets} sets`);
   });
+  ab.bounds.forEach(c => {
+    if (c.first !== null)
+      fail(`${c.name} runs to cycle ${c.worst} against a bound of ${c.max} — first at day ${c.first}`);
+  });
+  if (ab.bounds.every(c => c.first === null))
+    pass(`all ${ab.bounds.length} folded cycles stay inside their bounds across 1,200 days`);
   ab.meanings.missing.forEach(m => fail(`the letter ${m} has no sentence`));
   ab.meanings.thin.forEach(m => fail(`letter meaning — ${m}`));
   ab.meanings.unused.forEach(m => fail(`a sentence for "${m}", which is no letter the card names`));
