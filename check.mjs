@@ -34,16 +34,20 @@
 //                   fault: a year-long count handed the count from the epoch.
 //                   Each of the 27 letters also has its one sentence, keyed by
 //                   the name the card shows — a rename loses it silently.
-//   7. targets    — no control under 44px that isn't a link inside a sentence.
-//   8. overflow   — the page never scrolls sideways, at any phone width,
+//   7. seo        — canonical, description and JSON-LD on every page, and a
+//                   sitemap on the right namespace naming only pages that
+//                   exist. All of it is served to crawlers and never to a
+//                   reader, so nothing else would ever notice it rot.
+//   8. targets    — no control under 44px that isn't a link inside a sentence.
+//   9. overflow   — the page never scrolls sideways, at any phone width,
 //                   with the cards shut and with every one of them open, and
 //                   no detail value is squeezed too narrow to hold a word.
-//   9. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
+//  10. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
 //                   browser, not the stylesheet: a family with no Hebrew in it
 //                   falls through silently to whatever the device happens to
 //                   own, which differs on every device.
-//  10. tracking   — no Hebrew-only text is letterspaced.
-//  11. calendar   — each of the ten monthly calendars is compared against the
+//  11. tracking   — no Hebrew-only text is letterspaced.
+//  12. calendar   — each of the ten monthly calendars is compared against the
 //                   card whose cycle it draws. They are two readings of one
 //                   count, and if they part company the reader cannot tell
 //                   which is wrong. This has caught two real faults already.
@@ -75,10 +79,13 @@ const fail = m => { failures++; console.log('  \x1b[31mFAIL\x1b[0m ' + m); };
 const note = m => console.log('  \x1b[2m--\x1b[0m   ' + m);
 
 // ── 1. parse ────────────────────────────────────────────────────────────────
+// Every inline script must be JavaScript that parses — except the JSON-LD,
+// which is data wearing a script tag. That one is JSON.parsed by checkSeo
+// instead; running new Function() over it fails on the first colon.
 function checkParse() {
   console.log('\nparse');
   const src = fs.readFileSync(path.join(ROOT, FILE), 'utf8');
-  const re = /<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/g;
+  const re = /<script(?![^>]*src=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g;
   let m, n = 0, bad = 0;
   while ((m = re.exec(src))) {
     n++;
@@ -87,6 +94,52 @@ function checkParse() {
   }
   if (!bad) pass(`${n} inline script blocks parse`);
   return src;
+}
+
+// ── seo — the things that are wrong only where nobody looks ────────────────
+// A canonical pointing at the wrong host, a sitemap listing a page that was
+// renamed, a JSON-LD block with a trailing comma: all silent, all served to
+// crawlers rather than to people, so nothing in the app ever complains.
+const SITE = 'https://www.reflectionsofitall.com';
+function checkSeo() {
+  console.log('\nseo');
+  const read = f => fs.readFileSync(path.join(ROOT, f), 'utf8');
+  const pages = [['index.html', SITE + '/'],
+                 ['kot-structure.html', SITE + '/kot-structure.html'],
+                 ['maalot.html', SITE + '/maalot.html']];
+  let bad = 0;
+  for (const [file, want] of pages) {
+    const src = read(file);
+    const can = (src.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
+    if (can !== want) { bad++; fail(`${file}: canonical is ${can || 'missing'}, expected ${want}`); }
+    const desc = (src.match(/<meta name="description" content="([^"]*)"/) || [])[1];
+    if (!desc || desc.length < 40) { bad++; fail(`${file}: description ${desc ? 'is too thin' : 'is missing'}`); }
+    for (const m of src.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+      try { JSON.parse(m[1]); } catch (e) { bad++; fail(`${file}: ld+json does not parse — ${e.message}`); }
+    }
+  }
+  if (!bad) pass(`${pages.length} pages: canonical, description and any JSON-LD all sound`);
+
+  // the sitemap must be well-formed, on the right namespace, and every page it
+  // names must actually be here
+  const sm = read('sitemap.xml');
+  let smBad = 0;
+  if (!sm.includes('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"')) {
+    smBad++; fail('sitemap.xml: wrong or missing namespace (it is sitemaps.org, plural)');
+  }
+  const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+  if (!locs.length) { smBad++; fail('sitemap.xml names no pages'); }
+  for (const loc of locs) {
+    if (!loc.startsWith(SITE + '/')) { smBad++; fail(`sitemap.xml: ${loc} is not on ${SITE}`); continue; }
+    const rel = loc.slice(SITE.length + 1) || 'index.html';
+    if (!fs.existsSync(path.join(ROOT, rel))) { smBad++; fail(`sitemap.xml names ${rel}, which is not here`); }
+  }
+  if (!fs.existsSync(path.join(ROOT, 'robots.txt'))) { smBad++; fail('robots.txt is missing'); }
+  else if (!read('robots.txt').includes(SITE + '/sitemap.xml')) {
+    smBad++; fail('robots.txt does not point at the sitemap');
+  }
+  if (!smBad) pass(`sitemap names ${locs.length} pages, all present, and robots points at it`);
+  return bad + smBad;
 }
 
 // ── a static server, so no python or global install is needed ───────────────
@@ -638,6 +691,7 @@ async function checkInBrowser(chromium) {
 // ── run ─────────────────────────────────────────────────────────────────────
 console.log(`checking ${FILE}`);
 checkParse();
+checkSeo();
 
 const chromium = loadPlaywright();
 if (!chromium) {

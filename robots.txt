@@ -1,0 +1,6 @@
+# Kabbalah of Time — https://www.reflectionsofitall.com/
+# Everything here is meant to be read. Nothing is disallowed.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.reflectionsofitall.com/sitemap.xml
