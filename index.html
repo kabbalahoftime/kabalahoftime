@@ -12174,18 +12174,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   const GEVURAH_SEASONS = [
     { name:'Fall',   hebrew:'תִּשְׁרֵי–כִּסְלֵו', cup:'Red receding to white',
       chayah:'Eagle — נשר', animal:'Light as an eagle (kal kanesher)', angel:'Uriel',
+      element:'Air — רוּחַ',
       levi:'Gershon — the coverings and curtains: the soft boundary, Din easing into Chesed',
       note:'Renewal in return — "your youth renews like the eagle"' },
     { name:'Winter', hebrew:'טֵבֵת–אֲדָר', cup:'All white',
       chayah:'Man — אדם · bearing the fish, the hidden ones', animal:'Bold as a leopard (az kanamer)', angel:'Michael',
+      element:'Water — מַיִם',
       levi:'Kohanim — wrapping the vessels, blessing the people: unadulterated Chesed',
       note:'Azut d\'kedushah — the boldness to stand through the dark of the year' },
     { name:'Spring', hebrew:'נִיסָן–סִיוָן', cup:'White with red rising',
       chayah:'Ox — שור', animal:'Swift as a gazelle (ratz katzvi)', angel:'Refael',
+      element:'Earth — עָפָר',
       levi:'Kehat — the vessels borne on the shoulder, no wagon: Chesed under Din\'s discipline',
       note:'Chipazon — the haste of redemption' },
     { name:'Summer', hebrew:'תַּמּוּז–אֱלוּל', cup:'All red',
       chayah:'Lion — אריה', animal:'Mighty as a lion (gibor ka\'ari)', angel:'Gavriel',
+      element:'Fire — אֵשׁ',
       levi:'Merari — the boards and sockets, the bare standing frame: Gevurah itself',
       note:'The Lion in the mazal of the lion — Gevurah and its rebuilding' }
   ];
@@ -12249,6 +12253,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const weekIn = Math.ceil(dayIn / 7);        // 1–13
     // Each season pairs a Chayah of the Merkavah (Ezekiel 1) with Yehuda ben
     // Teima's animal (Avot 5:20) — the eagle doubles in fall, the lion in summer.
+    // Those two doublings fix the elements, and the rest follow. Fall is the
+    // eagle twice over and Avot calls it kal, light — air. Summer is the lion
+    // twice and calls it gibor, mighty — fire, which is Gavriel's. Winter takes
+    // water with Michael, and spring earth with Refael and the ox that works the
+    // adamah. Only Avot's other two are read rather than named: kal is lightness
+    // and belongs to air, so ratz — running — is left the ground.
+    // This departs from the Greek scheme of spring-air and autumn-earth. That
+    // scheme is a foreign import, and where it disagrees the Chayot are followed:
+    // an eagle on earth and an ox on air would be wrong in a way no seasonal
+    // convention could make right. Sefer Yetzirah in any case divides the year
+    // three ways and not four — shin hot, mem cold, alef temperate between them.
     // Each season also carries one of the four houses of Levi, matched to the
     // cup's Chesed-Din gradient by what each house bore in the Mishkan
     // (Bamidbar 3-4, 7:6-9): the Kohanim wrapped the vessels and blessed —
@@ -14167,7 +14182,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} — <strong>${gevMic.name}</strong>, ${_gevPart}:<br>` +
         (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}</span><br>` : '') +
         `<strong>${gevMic.chayah}</strong><br>` +
-        `<span style="font-size:0.88em;opacity:0.72">${gevMic.animal} · Angel ${gevMic.angel}</span><br>` +
+        `<span style="font-size:0.88em;opacity:0.72">${gevMic.animal} · Angel ${gevMic.angel}` +
+        (gevMic.element ? ` · ${gevMic.element}` : '') + `</span><br>` +
         `<span style="font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</span>`
       : `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong> — <strong>${seasonInfo.name}</strong>:<br>` +
         (_heartLine
@@ -14175,7 +14191,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           : `<span style="font-size:0.85em;color:var(--ink-mid)">${_wingLine} · Face ${seasonInfo.quarter} of 4 · letter ${seasonInfo.inQuarter}</span><br>`) +
         (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${_eichaLink}</span><br>` : ``) +
         `<strong>${seasonInfo.chayah}</strong><br>` +
-        `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>`;
+        `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}` +
+        (seasonInfo.element ? ` · ${seasonInfo.element}` : '') + `</span>`;
     document.getElementById('gevurah-sub').innerHTML = '';
     document.getElementById('gevurah-text-face').innerHTML =
       tanachInfo.seferiaUrl
