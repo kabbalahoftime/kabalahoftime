@@ -14134,7 +14134,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : (pl.silent ? `${pl.silent === 1 ? 'Right' : 'Left'} Kidney` : `Quarter ${pl.quarter} of 4`);
     const _gevPart = gevMic ? _partName(gevMic)
       : (seasonInfo.breakAt ? _partName(seasonInfo)
-                            : `Quarter ${seasonInfo.quarter} of 4 · day ${seasonInfo.inQuarter} of 22`);
+                            : `Quarter ${seasonInfo.quarter} of 4 · letter ${seasonInfo.inQuarter} of 22`);
     const _eicha = eichaFor(gevMic || seasonInfo);
     const _eichaLink = _eicha
       ? `<a class="tap-line" href="${eichaUrl(_eicha.ref)}" target="_blank" style="color:var(--gold)">${_eicha.label}</a>` +
@@ -14164,7 +14164,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : `Day <strong>${seasonInfo.dayIn}</strong> · <strong>${seasonInfo.name}</strong><span style="font-size:0.85em">, ${_seasonHalfShort}</span>:<br>` +
         (_heartLine
           ? `<span style="font-size:0.85em;color:var(--gold-mid)">${_heartLine}</span><br>`
-          : `<span style="font-size:0.85em;color:var(--ink-mid)">Quarter ${seasonInfo.quarter} · day ${seasonInfo.inQuarter} of 22</span><br>`) +
+          : `<span style="font-size:0.85em;color:var(--ink-mid)">Quarter ${seasonInfo.quarter} of 4 · letter ${seasonInfo.inQuarter} of 22</span><br>`) +
         (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${_eichaLink}</span><br>` : ``) +
         `<strong>${seasonInfo.chayah}</strong><br>` +
         `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>`;
