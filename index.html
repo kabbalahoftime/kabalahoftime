@@ -1936,7 +1936,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">The <strong>heart</strong> in the Now card fills as those ten accumulate, and glows when the day's prayers are whole.</li>
         <li style="margin-bottom:0.7em;">Tap a step on Ma'alot HaZman — the spiral of the year above — for that week's theme, animal, and teaching.</li>
         <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Keter down to Malchut) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
-        <li style="margin-bottom:0.7em;">Then climb back: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. The descent must be taken in order, each step the vessel for the next; the climb need not be — a person hears what he is given to hear, when he is given it, so the מיעוט may be marked in any order once the moon is full.</li>
+        <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. The descent must be taken in order, each step the vessel for the next; the return need not be — a person hears what he is given to hear, when he is given it, so the מיעוט may be marked in any order once the moon is full.</li>
         <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
         <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps.</li>
         <li style="margin-bottom:0.7em;">Tap any <strong>✡</strong> — six-pointed, a Magen David — to gather it as a <strong>star</strong>, and the count beside the moon rises. The stars have no total to reach: what is on offer changes with the day, so the count says how many you reached, never how many you missed.</li>
@@ -11636,10 +11636,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Strictly sequential like the ma'alot, climbable only once the sun is
   // reached; state is the highest completed step (0–15) per Jewish date.
   let _yomKey = null;       // legacy: the highest מיעוט reached, 0-15
-  let _yomMaskKey = null;   // now: a 15-bit mask, since the climb need not be in order
+  let _yomMaskKey = null;   // now: a 15-bit mask, since the return need not be in order
 
   // The ma'alot descend in order — each step is the vessel for the next. The
-  // climb back is listening, and a person hears what he is given to hear when
+  // return is listening, and a person hears what he is given to hear when
   // he is given it, so the מיעוט may be marked in any order once the moon is
   // full. A day written under the old counter is converted the first time it
   // is read: n steps become the first n bits.
