@@ -14178,21 +14178,35 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : 'Four Seasons — 91-Day Cycle';
     // Where the day falls in the count comes before what the day is: the
     // quarter and its verse of Eicha, and then the Chayah and its angel.
+    // The face in three groups: what the season is, then what its Chayah
+    // carries, then where the day falls in the count. The Chayah is named in
+    // the heading beside the season, so its own long gloss — the Man bearing
+    // the fish — comes away and sits under it rather than stretching the line.
+    const _gevWho = pl => {
+      const parts = (pl.chayah || '').split(' · ');
+      return { name: parts[0], note: parts.slice(1).join(' · ') };
+    };
+    const _gevBody = pl => {
+      const who = _gevWho(pl);
+      return (who.note ? `<div style="font-size:0.82em;color:var(--ink-dim);font-style:italic">${who.note}</div>` : '') +
+        `<div style="font-size:0.88em;opacity:0.72;margin-top:4px">${pl.animal}<br>Angel ${pl.angel}` +
+        (pl.element ? ` · ${pl.element}` : '') + `</div>`;
+    };
     document.getElementById('gevurah-main').innerHTML = gevMic
-      ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} — <strong>${gevMic.name}</strong>, ${_gevPart}:<br>` +
-        (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}</span><br>` : '') +
-        `<strong>${gevMic.chayah}</strong><br>` +
-        `<span style="font-size:0.88em;opacity:0.72">${gevMic.animal} · Angel ${gevMic.angel}` +
-        (gevMic.element ? ` · ${gevMic.element}` : '') + `</span><br>` +
-        `<span style="font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</span>`
-      : `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong> — <strong>${seasonInfo.name}</strong>:<br>` +
+      ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} <span style="font-size:0.92em">(${gevMic.name}, <strong>${_gevWho(gevMic).name}</strong>)</span>:` +
+        _gevBody(gevMic) +
+        `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-mid)">${_gevPart}` +
+        (_eichaLink ? `<br>${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}` : '') +
+        `</div>` +
+        `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</div>`
+      : `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong> <span style="font-size:0.92em">(${seasonInfo.name}, <strong>${_gevWho(seasonInfo).name}</strong>)</span>:` +
+        _gevBody(seasonInfo) +
+        `<div style="margin-top:6px;font-size:0.85em;">` +
         (_heartLine
-          ? `<span style="font-size:0.85em;color:var(--gold-mid)">${_wingLine ? _wingLine + ' · ' : ''}${_heartLine}</span><br>`
-          : `<span style="font-size:0.85em;color:var(--ink-mid)">${_wingLine} · Face ${seasonInfo.quarter} of 4 · letter ${seasonInfo.inQuarter}</span><br>`) +
-        (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${_eichaLink}</span><br>` : ``) +
-        `<strong>${seasonInfo.chayah}</strong><br>` +
-        `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}` +
-        (seasonInfo.element ? ` · ${seasonInfo.element}` : '') + `</span>`;
+          ? `<span style="color:var(--gold-mid)">${_wingLine ? _wingLine + ' · ' : ''}${_heartLine}</span>`
+          : `<span style="color:var(--ink-mid)">${_wingLine} · Face ${seasonInfo.quarter} of 4 · letter ${seasonInfo.inQuarter}</span>`) +
+        (_eichaLink ? `<br><span style="color:var(--ink-mid)">${_eichaLink}</span>` : ``) +
+        `</div>`;
     document.getElementById('gevurah-sub').innerHTML = '';
     document.getElementById('gevurah-text-face').innerHTML =
       tanachInfo.seferiaUrl
