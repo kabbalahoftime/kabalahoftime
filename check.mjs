@@ -488,7 +488,7 @@ async function checkInBrowser(chromium) {
         card: () => pair(m(main(2), /Day (\d+) · Cycle \d+ of 5: (\S+)/), 2, 1),
         cell: s => pair(m(s.cell, /^(\S+) · (\d+) of 72$/), 1, 2) },
       { lens: 4, name: 'Gevurah',
-        card: () => pair(m(main(3), /Day (\d+) · (\w+)/), 2, 1),
+        card: () => pair(m(main(3), /Day (\d+) · Season \d+ — (\w+)/), 2, 1),
         cell: s => pair(m(s.cell, /^(\w+) · (\d+) of 91$/), 1, 2) },
       { lens: 5, name: 'Tiferet',
         card: () => { const x = m(main(4), /Day (\d+), (?:(\d)(?:st|nd|rd|th)|Microcosm ·) Cycle (\d+)/);
