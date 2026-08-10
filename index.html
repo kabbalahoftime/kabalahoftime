@@ -11201,13 +11201,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // ── THE DAY'S ZMANIM ──────────────────────────────────────────────────────
   // The hours the halacha measures the day by, for the city chosen above. The
-  // proportional hour here is the GRA's — sunrise to sunset divided by twelve
-  // — and the two twilights are taken by the sun's depression: 16.1° for Alot,
-  // 10.2° for Misheyakir, 8.5° for Tzeit. Other calendars hold other opinions
-  // and reckon elevation, so a minute or two either way is expected; this is
-  // for orientation within the day, and a local calendar governs practice.
+  // proportional hour here is the GRA's — sunrise to sunset divided by twelve.
+  // The three twilights follow Chabad.org, whose depressions were read off two
+  // of its own days six months apart (Miami, 10 Aug and 15 Dec 2026): 17.15°
+  // for Alot, 10.2° for Misheyakir, 5.9° for Tzeit. A single angle reproduced
+  // each to the minute on both dates, which is what says the rule is degrees
+  // and not a fixed count of minutes. The hours between them still differ from
+  // Chabad's by up to three minutes, and that residual is a constant two-minute
+  // offset in solar noon — different coordinates for the same city — rather
+  // than a different reckoning. A local calendar governs practice.
   const ZMANIM_ROWS = [
-    { key: 'alot',    en: 'Dawn',                  sub: 'Alot Hashachar',   he: 'עֲלוֹת הַשַּׁחַר',    note: '16.1° before sunrise' },
+    { key: 'alot',    en: 'Dawn',                  sub: 'Alot Hashachar',   he: 'עֲלוֹת הַשַּׁחַר',    note: '17.15° before sunrise' },
     { key: 'mishe',   en: 'Earliest Tallit',       sub: 'Misheyakir',       he: 'מִשֶּׁיַּכִּיר',        note: '10.2° before sunrise' },
     { key: 'sunrise', en: 'Sunrise',               sub: 'Hanetz HaChamah',  he: 'הָנֵץ הַחַמָּה',      note: '' },
     { key: 'shema',   en: 'Latest Shema',          sub: 'Sof Zman Kri\'at Shema', he: 'סוֹף זְמַן קְרִיאַת שְׁמַע', note: 'three hours from sunrise' },
@@ -11217,7 +11221,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { key: 'ketanah', en: 'Mincha Ketanah',        sub: 'Small Mincha',     he: 'מִנְחָה קְטַנָּה',     note: 'nine and a half hours from sunrise' },
     { key: 'plag',    en: 'Plag HaMincha',         sub: 'Half of Mincha',   he: 'פְּלַג הַמִּנְחָה',     note: 'an hour and a quarter before sunset' },
     { key: 'shkiah',  en: 'Sunset',                sub: 'Shkiah',           he: 'שְׁקִיעָה',           note: '' },
-    { key: 'tzeit',   en: 'Nightfall',             sub: 'Tzeit HaKochavim', he: 'צֵאת הַכּוֹכָבִים',   note: '8.5° after sunset' },
+    { key: 'tzeit',   en: 'Nightfall',             sub: 'Tzeit HaKochavim', he: 'צֵאת הַכּוֹכָבִים',   note: '5.9° after sunset' },
     { key: 'chatzotN',en: 'Midnight',              sub: 'Chatzot HaLailah', he: 'חֲצוֹת הַלַּיְלָה',    note: 'midway from sunset to sunrise' },
   ];
 
@@ -11240,7 +11244,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const from = (base, hours) => new Date(base + hours * hr);
       return {
         hourMs: hr,
-        alot:    at(-16.1, 'rise'),
+        alot:    at(-17.15, 'rise'),
         mishe:   at(-10.2, 'rise'),
         sunrise: day.rise,
         shema:   from(rise, 3),
@@ -11250,7 +11254,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ketanah: from(rise, 9.5),
         plag:    from(rise, 10.75),
         shkiah:  day.set,
-        tzeit:   at(-8.5, 'set'),
+        tzeit:   at(-5.9, 'set'),
         chatzotN: new Date((set + next.rise.getTime()) / 2),
       };
     } catch (e) { return null; }
@@ -11420,9 +11424,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }).join('') + '</div>' +
       `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.55;margin:8px 0 0;">` +
       `The proportional hour — שָׁעָה זְמַנִּית — runs ${Math.round(z.hourMs / 60000)} minutes today: ` +
-      `sunrise to sunset divided by twelve, the reckoning of the Gra. Dawn, Misheyakir and nightfall are ` +
-      `taken by the sun's depression — 16.1°, 10.2° and 8.5°. Other calendars hold other opinions and ` +
-      `reckon elevation, so a minute or two either way is expected. This is for finding your place in the ` +
+      `sunrise to sunset divided by twelve, the reckoning of the Gra. Dawn, Misheyakir and nightfall follow ` +
+      `Chabad.org — the sun at 17.15°, 10.2° and 5.9° below the horizon. The hours between can run a ` +
+      `couple of minutes either way against another calendar. This is for finding your place in the ` +
       `day; for practice, follow your own community's calendar.</div>`;
     _zmanimMeta = `${city.name} &nbsp;·&nbsp; sunrise ${fmtZmanTime(z.sunrise, city.tz)} · sunset ${fmtZmanTime(z.shkiah, city.tz)}` +
       ` &nbsp;·&nbsp; <span style="opacity:.8">set the city under Sha'ot Zmaniyot</span>`;
