@@ -14153,19 +14153,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('gevurah-cycle-name').innerHTML = gevMic
       ? 'Four Seasons — Leap Year Microcosm'
       : 'Four Seasons — 91-Day Cycle';
+    // Where the day falls in the count comes before what the day is: the
+    // quarter and its verse of Eicha, and then the Chayah and its angel.
     document.getElementById('gevurah-main').innerHTML = gevMic
       ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} — <strong>${gevMic.name}</strong>, ${_gevPart}:<br>` +
+        (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}</span><br>` : '') +
         `<strong>${gevMic.chayah}</strong><br>` +
         `<span style="font-size:0.88em;opacity:0.72">${gevMic.animal} · Angel ${gevMic.angel}</span><br>` +
-        (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}</span><br>` : '') +
         `<span style="font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</span>`
       : `Day <strong>${seasonInfo.dayIn}</strong> · <strong>${seasonInfo.name}</strong><span style="font-size:0.85em">, ${_seasonHalfShort}</span>:<br>` +
-        `<strong>${seasonInfo.chayah}</strong><br>` +
-        `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>` +
         (_heartLine
-          ? `<br><span style="font-size:0.85em;color:var(--gold-mid)">${_heartLine}</span>`
-          : `<br><span style="font-size:0.85em;color:var(--ink-mid)">Quarter ${seasonInfo.quarter} · day ${seasonInfo.inQuarter} of 22</span>`) +
-        (_eichaLink ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${_eichaLink}</span>` : ``);
+          ? `<span style="font-size:0.85em;color:var(--gold-mid)">${_heartLine}</span><br>`
+          : `<span style="font-size:0.85em;color:var(--ink-mid)">Quarter ${seasonInfo.quarter} · day ${seasonInfo.inQuarter} of 22</span><br>`) +
+        (_eichaLink ? `<span style="font-size:0.85em;color:var(--ink-mid)">${_eichaLink}</span><br>` : ``) +
+        `<strong>${seasonInfo.chayah}</strong><br>` +
+        `<span style="font-size:0.88em;opacity:0.72">${seasonInfo.animal} · Angel ${seasonInfo.angel}</span>`;
     document.getElementById('gevurah-sub').innerHTML = '';
     document.getElementById('gevurah-text-face').innerHTML =
       tanachInfo.seferiaUrl
