@@ -115,7 +115,13 @@ function checkSeo() {
     const desc = (src.match(/<meta name="description" content="([^"]*)"/) || [])[1];
     if (!desc || desc.length < 40) { bad++; fail(`${file}: description ${desc ? 'is too thin' : 'is missing'}`); }
     for (const m of src.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
-      try { JSON.parse(m[1]); } catch (e) { bad++; fail(`${file}: ld+json does not parse — ${e.message}`); }
+      let ld = null;
+      try { ld = JSON.parse(m[1]); }
+      catch (e) { bad++; fail(`${file}: ld+json does not parse — ${e.message}`); continue; }
+      // Authorship is the one field a search engine reads as a claim about a
+      // person, so it must name one and must not quietly go missing.
+      if (!ld.author || ld.author['@type'] !== 'Person' || !ld.author.name)
+        { bad++; fail(`${file}: ld+json names no Person as author`); }
     }
   }
   if (!bad) pass(`${pages.length} pages: canonical, description and any JSON-LD all sound`);
