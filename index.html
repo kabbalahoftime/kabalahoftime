@@ -11214,12 +11214,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { key: 'alot',    en: 'Dawn',                  sub: 'Alot Hashachar',   he: 'עֲלוֹת הַשַּׁחַר',    note: '17.15° before sunrise' },
     { key: 'mishe',   en: 'Earliest Tallit',       sub: 'Misheyakir',       he: 'מִשֶּׁיַּכִּיר',        note: '10.2° before sunrise' },
     { key: 'sunrise', en: 'Sunrise',               sub: 'Hanetz HaChamah',  he: 'הָנֵץ הַחַמָּה',      note: '' },
-    { key: 'shema',   en: 'Latest Shema',          sub: 'Sof Zman Kri\'at Shema', he: 'סוֹף זְמַן קְרִיאַת שְׁמַע', note: 'three hours from sunrise' },
-    { key: 'tefila',  en: 'Latest Shacharit',      sub: 'Sof Zman Tefilah', he: 'סוֹף זְמַן תְּפִלָּה',  note: 'four hours from sunrise' },
-    { key: 'chatzot', en: 'Midday',                sub: 'Chatzot HaYom',    he: 'חֲצוֹת הַיּוֹם',       note: 'midway from sunrise to sunset' },
+    { key: 'shema',   en: 'Latest Shema',          sub: 'Sof Zman Kri\'at Shema', he: 'סוֹף זְמַן קְרִיאַת שְׁמַע', note: 'three proportional hours into the day' },
+    { key: 'tefila',  en: 'Latest Shacharit',      sub: 'Sof Zman Tefilah', he: 'סוֹף זְמַן תְּפִלָּה',  note: 'four proportional hours into the day' },
+    { key: 'chatzot', en: 'Midday',                sub: 'Chatzot HaYom',    he: 'חֲצוֹת הַיּוֹם',       note: 'midway through the day' },
     { key: 'gedolah', en: 'Earliest Mincha',       sub: 'Mincha Gedolah',   he: 'מִנְחָה גְּדוֹלָה',    note: 'half an hour past midday' },
-    { key: 'ketanah', en: 'Mincha Ketanah',        sub: 'Small Mincha',     he: 'מִנְחָה קְטַנָּה',     note: 'nine and a half hours from sunrise' },
-    { key: 'plag',    en: 'Plag HaMincha',         sub: 'Half of Mincha',   he: 'פְּלַג הַמִּנְחָה',     note: 'an hour and a quarter before sunset' },
+    { key: 'ketanah', en: 'Mincha Ketanah',        sub: 'Small Mincha',     he: 'מִנְחָה קְטַנָּה',     note: 'nine and a half hours into the day' },
+    { key: 'plag',    en: 'Plag HaMincha',         sub: 'Half of Mincha',   he: 'פְּלַג הַמִּנְחָה',     note: 'an hour and a quarter before the day ends' },
     { key: 'shkiah',  en: 'Sunset',                sub: 'Shkiah',           he: 'שְׁקִיעָה',           note: '' },
     { key: 'tzeit',   en: 'Nightfall',             sub: 'Tzeit HaKochavim', he: 'צֵאת הַכּוֹכָבִים',   note: '5.9° after sunset' },
     { key: 'chatzotN',en: 'Midnight',              sub: 'Chatzot HaLailah', he: 'חֲצוֹת הַלַּיְלָה',    note: 'midway from sunset to sunrise' },
@@ -11239,23 +11239,41 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const r = solarRiseSet(t.y, t.m, t.d, city.lat, city.lon, angle);
         return r.ok ? r[which] : null;
       };
-      const rise = day.rise.getTime(), set = day.set.getTime();
-      const hr = (set - rise) / 12;              // the proportional hour, in ms
-      const from = (base, hours) => new Date(base + hours * hr);
+      const set = day.set.getTime();
+      // Chatzot HaLailah, which is also what stands in for a twilight the sun
+      // never reaches — the Chabad custom at latitudes where 17.15° never
+      // arrives, as its own footnote says on a London day in June.
+      const chatzotN = new Date((set + next.rise.getTime()) / 2);
+      const atOr = (angle, which) => {
+        const r = solarRiseSet(t.y, t.m, t.d, city.lat, city.lon, angle);
+        return r.ok ? r[which] : chatzotN;
+      };
+      // The proportional day is not sunrise to sunset. Measured against three
+      // of Chabad's own days — Miami in August and December, London in June —
+      // it runs between the sun at 1.67° below the horizon, twice the 0.833°
+      // of refraction that fixes the visible sunrise. That one angle carries
+      // eighteen of their times to within a minute and reproduces the Shaah
+      // Zmanit they print for London, 84:10, to seven seconds; the plain
+      // sunrise-to-sunset hour is a full minute out on the same day.
+      const prop = solarRiseSet(t.y, t.m, t.d, city.lat, city.lon, -1.67);
+      const p0 = (prop.ok ? prop.rise : day.rise).getTime();
+      const p1 = (prop.ok ? prop.set  : day.set).getTime();
+      const hr = (p1 - p0) / 12;                 // the proportional hour, in ms
+      const from = hours => new Date(p0 + hours * hr);
       return {
         hourMs: hr,
-        alot:    at(-17.15, 'rise'),
-        mishe:   at(-10.2, 'rise'),
+        alot:    atOr(-17.15, 'rise'),
+        mishe:   atOr(-10.2, 'rise'),
         sunrise: day.rise,
-        shema:   from(rise, 3),
-        tefila:  from(rise, 4),
-        chatzot: from(rise, 6),
-        gedolah: from(rise, 6.5),
-        ketanah: from(rise, 9.5),
-        plag:    from(rise, 10.75),
+        shema:   from(3),
+        tefila:  from(4),
+        chatzot: from(6),
+        gedolah: from(6.5),
+        ketanah: from(9.5),
+        plag:    from(10.75),
         shkiah:  day.set,
-        tzeit:   at(-5.9, 'set'),
-        chatzotN: new Date((set + next.rise.getTime()) / 2),
+        tzeit:   atOr(-5.9, 'set'),
+        chatzotN: chatzotN,
       };
     } catch (e) { return null; }
   }
@@ -17603,7 +17621,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     '<div class="kotw-sub">The Year as a Single Day — Kabbalah of Time <span class="cycle-info-btn" data-cycle="wheel" title="About this cycle">ⓘ</span></div>';
   root.appendChild(h);
 
-  var svg=mk('svg',{viewBox:'0 0 420 420',role:'img',
+  var svg=mk('svg',{viewBox:'-24 -24 468 468',role:'img',
     'aria-label':'Ma\u2019alot HaZman \u2014 the 52 weeks of the year ascending through a single day'},root);
 
   mk('circle',{cx:CX,cy:CY,r:200,fill:'none',stroke:'#9a7e2a','stroke-width':1,opacity:.4},svg);
@@ -17619,6 +17637,47 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   var gDyn=mk('g',{},svg);
+  /* The day's halachic hours, laid on the same dial as the ma'alot: a tick
+     where each one falls, outside the ring of clock hours so the two are not
+     confused. Labels are given in order of consequence and any that would
+     collide with one already placed is left off — Shkiah and Tzeit can be
+     twenty minutes apart, which is five degrees of arc. The tick is always
+     there and carries its name and time on hover. */
+  var gZman=mk('g',{},svg);
+  var ZTICK=[
+    {k:'sunrise', s:'Netz',  p:1}, {k:'shkiah',  s:'Shkia', p:1},
+    {k:'chatzot', s:'Chtzt', p:2}, {k:'tzeit',   s:'Tzeit', p:2},
+    {k:'alot',    s:'Alot',  p:3}, {k:'mishe',   s:'Mish',  p:4},
+    {k:'shema',   s:'Shma',  p:4}, {k:'tefila',  s:'Tfila', p:5},
+    {k:'gedolah', s:'M.Gdl', p:5}, {k:'ketanah', s:'M.Ktn', p:5},
+    {k:'plag',    s:'Plag',  p:5}, {k:'chatzotN',s:'Chtzt', p:6}
+  ];
+  function drawZmanim(){
+    while(gZman.firstChild)gZman.removeChild(gZman.firstChild);
+    if(typeof dayZmanim!=='function'||typeof ZMAN_CITIES==='undefined')return;
+    var city=ZMAN_CITIES[typeof zmanCityIdx!=='undefined'?zmanCityIdx:0];
+    var z=dayZmanim(city); if(!z)return;
+    var placed=[];
+    ZTICK.slice().sort(function(a,b){return a.p-b.p;}).forEach(function(t){
+      var when=z[t.k]; if(!when)return;
+      var m=tzMin(when,city.tz);
+      var strong=t.p===1;
+      var p1=pol(202,m),p2=pol(strong?216:212,m);
+      var ln=mk('line',{x1:p1[0],y1:p1[1],x2:p2[0],y2:p2[1],stroke:'#f0e6c9',
+        'stroke-width':strong?1.8:1.1,opacity:strong?.95:.72},gZman);
+      var ti=document.createElementNS(NS,'title');
+      ti.textContent=t.s+' \u00b7 '+fmt(m); ln.appendChild(ti);
+      var deg=m/DAY*360;
+      var clash=placed.some(function(d){var x=Math.abs(d-deg);return Math.min(x,360-x)<11;});
+      if(clash)return;
+      placed.push(deg);
+      var lp=pol(224,m);
+      var tx=mk('text',{x:lp[0],y:lp[1],'text-anchor':'middle','dominant-baseline':'central',
+        'font-size':9.5,fill:'#f0e6c9',opacity:.8,'font-style':'italic',
+        'font-family':"'Cormorant Garamond',serif"},gZman);
+      tx.textContent=t.s;
+    });
+  }
   var segs=[],detail,curSel=null;
   function select(n){
     var map=timeMap();
@@ -17697,6 +17756,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     var sig=(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
+    drawZmanim();
     var m=map.nowMin(),n=Math.min(49,Math.max(1,Math.floor(map.nowH()/(24/49))+1));
     hand.setAttribute('transform','rotate('+(m/DAY*360)+' '+CX+' '+CY+')');
     cT.textContent=fmt(m);
