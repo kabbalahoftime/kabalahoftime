@@ -2331,6 +2331,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Noam Elimelech</div>
     <div style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;">Beis Aharon</div>
     <div class="prayer-tag" data-prayer="5" title="Tap when you have prayed" style="cursor:pointer;font-size:8px;color:var(--gold);margin-top:1px;opacity:0.85;">Tehilim</div>
+    <div id="gevurah-kot-song" style="font-size:9px;color:var(--ink-dim);margin-top:2px;font-style:italic;"></div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
@@ -8791,6 +8792,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { name: 'Mesilat Yesharim',    author: 'Ramchal (R. Moshe Chaim Luzzatto)',   shortName: 'MY',       day: 'Thursday',                desc: 'The Path of the Upright — the ladder of holiness' },
   ];
 
+  // ── THE KoT SONG — one of the seven songs a day, shown beside Tehilim in
+  // the Gevurah card. Indexed by dayNum exactly as MALCHUT_TEXTS and DAY_BOOKS
+  // are (dayNum 1 = Friday … 7 = Thursday), so the song is always the song of
+  // the book the Malchut card is already showing that day. Display only: the
+  // ten-prayer heart still counts ten.
+  const KOT_SONGS = [
+    { song: 'Perek Shirah',       book: 'Book 1 · Song of Nature'      },
+    { song: 'Haazinu',            book: 'Book 2 · Song of Moses'       },
+    { song: 'Shirat HaYam',       book: 'Book 3 · Song of the Sea'     },
+    { song: 'Shirat Channah',     book: 'Book 4 · Song of Hannah'      },
+    { song: 'Shir HaShirim',      book: 'Book 5 · Song of Songs'       },
+    { song: 'Psalm 89',           book: 'Book 6 · General Remedy'      },
+    { song: 'Gathering of Songs', book: 'Book 7 · Gathering of Songs'  }
+  ];
+
   // ── PEREK SHIRAH — the song of each of the year's 52 creatures ──
   // Text and citations follow the Perek Shirah booklet, whose creature
   // verses begin at Chapter 4 and run in the same order as the weekly
@@ -14262,6 +14278,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>`
         : tanachInfo.text;
     document.getElementById('gevurah-tags').innerHTML = '';
+    const _kotSong = KOT_SONGS[(sef.dayNum - 1) % 7];
+    const _kotSongEl = document.getElementById('gevurah-kot-song');
+    if (_kotSongEl && _kotSong) {
+      _kotSongEl.textContent = '\u266a ' + _kotSong.song;
+      _kotSongEl.title = 'KoT Song \u00b7 ' + _kotSong.book;
+    }
     document.getElementById('gevurah-detail').innerHTML =
        (() => {
          const noamEntry = getNoamElimelechEntry(effectiveKotWeek);
