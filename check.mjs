@@ -51,6 +51,20 @@
 //                   card whose cycle it draws. They are two readings of one
 //                   count, and if they part company the reader cannot tell
 //                   which is wrong. This has caught two real faults already.
+//  13. leap       — the 392-day year and its 28-day Adar I microcosm: the window
+//                   falls once per leap year and runs 1–28; every card face
+//                   that speaks on either side of it still speaks inside it;
+//                   the 24 priestly watches run once through with four
+//                   silences; and both the KoT day-count and the 72 Names
+//                   resume one step on when it ends. That last pair is the
+//                   assertion that matters. A bound cannot make it — the
+//                   day-of-year is read back off a folded display and so can
+//                   never exceed 364 however wrong the feed is — and against
+//                   the naive dEff (no step back over the extra 28) a bound
+//                   passes while the seam check fails, 29 Names swallowed.
+//                   Seven years in nineteen, one month in each: the least
+//                   walked path here, and the same shape as the three faults
+//                   already found.
 //
 // Exits non-zero if any check fails, so it can gate a commit.
 
@@ -399,6 +413,150 @@ async function checkInBrowser(chromium) {
   ab.shown.bad.slice(0, 5).forEach(m => fail(`the face and its sentences disagree — ${m}`));
   if (!ab.shown.bad.length)
     pass(`on ${ab.shown.days.toLocaleString()} days every letter the face names has its sentence, and no other does`);
+
+  // ── leap ──────────────────────────────────────────────────────────────────
+  // The 392-day year and its 28-day Adar I microcosm. This is the least-walked
+  // path in the app — seven years in nineteen, one month in each — and it is
+  // the same shape as the three faults already found here: a count that does
+  // not know about the extra days. The sweep is widened past the usual 1,200
+  // so that more than one leap year is crossed; being accidentally right for
+  // 5787 alone would prove nothing.
+  console.log('\nleap');
+  const leap = await page.evaluate(() => {
+    // Every card face, found by class rather than by a list of ids — a list
+    // gets stale silently, and an id that has gone away reads as "nothing is
+    // wrong" instead of "nothing was looked at".
+    const faces = () => {
+      const out = {};
+      document.querySelectorAll('.sefirah-main-text[id]').forEach(el => {
+        out[el.id] = el.innerText.trim();
+      });
+      return out;
+    };
+    const hollowIn = f => Object.keys(f).filter(id =>
+      !f[id] || f[id] === 'Loading…' || /undefined|NaN/.test(f[id]));
+    const rows = [];
+    for (let o = 0; o <= 1400; o++) {
+      currentOffset = o; render();
+      const ind = document.getElementById('day-indicator').innerText.replace(/\s+/g, ' ');
+      const face = document.getElementById('chochmah-main').innerText;
+      const chesed = document.getElementById('chesed-main').innerText.replace(/\s+/g, ' ');
+      const xm = ind.match(/Extra Day (\d+) of 28/);
+      const cm = face.match(/Day (\d+) · Cycle (\d+)/);
+      const row = {
+        o,
+        extra: xm ? +xm[1] : 0,
+        // the day of the KoT year, read back off the 22-day cycle: sixteen sets
+        // of 22 and then the twelve vowels, 16 × 22 + 12 = 364. It is the value
+        // every folded cycle is handed, and the one that ran from the epoch.
+        yearDay: cm ? (+cm[2] - 1) * 22 + (+cm[1]) : null,
+        name: (chesed.match(/Day (\d+) · Cycle (\d+) of 5/) || []).slice(1, 3).join('/') || null,
+        mishmar: (chesed.match(/Mishmar (\d+) of 24/) || [])[1] || null,
+        silent: /a silent day/i.test(chesed)
+      };
+      rows.push(row);
+    }
+
+    // Second pass, only around each window: does the microcosm leave a card
+    // with nothing to say? Asked differentially — a face that is blank on the
+    // day before and the day after is blank by design, and only a face that
+    // speaks on both sides and falls silent between them is a fault.
+    const wins = [];
+    for (const r of rows) {
+      if (!r.extra) continue;
+      const last = wins[wins.length - 1];
+      if (last && r.o === last.lastO + 1) last.lastO = r.o;
+      else wins.push({ startO: r.o, lastO: r.o });
+    }
+    const wentHollow = [];
+    for (const w of wins) {
+      currentOffset = w.startO - 1; render();
+      const before = faces();
+      currentOffset = w.lastO + 1; render();
+      const after = faces();
+      const speaks = Object.keys(before).filter(id =>
+        !hollowIn(before).includes(id) && !hollowIn(after).includes(id));
+      for (let o = w.startO; o <= w.lastO; o++) {
+        currentOffset = o; render();
+        const f = faces();
+        const gone = hollowIn(f).filter(id => speaks.includes(id));
+        if (gone.length) wentHollow.push({ o, extra: rows.find(r => r.o === o).extra, gone });
+      }
+    }
+    currentOffset = 0; render();
+    return { rows, wentHollow, faceCount: Object.keys(faces()).length };
+  });
+  const { rows: leapRows, wentHollow } = leap;
+
+  // (a) the window: 28 consecutive days, numbered 1..28 in order, once a leap year
+  const windows = [];
+  for (const r of leapRows) {
+    if (!r.extra) continue;
+    const last = windows[windows.length - 1];
+    if (last && r.o === last.lastO + 1) { last.lastO = r.o; last.days.push(r.extra); }
+    else windows.push({ startO: r.o, lastO: r.o, days: [r.extra] });
+  }
+  const badWin = windows.filter(w => w.days.length !== 28 || !w.days.every((v, i) => v === i + 1));
+  badWin.slice(0, 3).forEach(w => fail(`the Adar I microcosm ran ${w.days.length} days, not 28, from offset ${w.startO}`));
+  if (windows.length < 2) fail(`only ${windows.length} leap window(s) in 1,400 days — the sweep must cross more than one`);
+  else if (!badWin.length) pass(`${windows.length} Adar I microcosms, each 28 days numbered 1–28 in order`);
+
+  // (b) the count resumes one step on. A bound cannot make this assertion: the
+  //     day-of-year is read back off a folded display, so it can never exceed
+  //     364 however wrong the feed is — a bound here passes even against the
+  //     naive dEff, which was checked. Only the step across the seam shows
+  //     whether the 28 days were held or swallowed.
+  const stepBad = [];
+  for (const w of windows) {
+    const before = leapRows.find(r => r.o === w.startO - 1);
+    const after  = leapRows.find(r => r.o === w.lastO + 1);
+    if (!before || !after || before.yearDay === null || after.yearDay === null) continue;
+    const want = before.yearDay % 364 + 1;
+    if (after.yearDay !== want)
+      stepBad.push(`offset ${w.startO}: day ${before.yearDay} before it, ${after.yearDay} after, expected ${want}`);
+  }
+  stepBad.forEach(m => fail(`the KoT count lost its place across the microcosm — ${m}`));
+  if (!stepBad.length && windows.length)
+    pass(`the KoT day-of-year resumes one step on after each microcosm, nothing skipped`);
+
+  // (c) no card falls silent inside the window that speaks on either side of it
+  wentHollow.slice(0, 3).forEach(r =>
+    fail(`offset ${r.o} (extra day ${r.extra}): ${r.gone.join(', ')} speaks either side of the microcosm but not inside it`));
+  if (!wentHollow.length) {
+    const n = leapRows.filter(r => r.extra).length;
+    pass(`all ${leap.faceCount} card faces hold across every one of the ${n} microcosm days`);
+  }
+
+  // (d) the 72 Names hold across the window and resume — "no Name is said twice
+  //     and none is missed" is the claim the cycle note makes, so it is checked.
+  const resumeBad = [];
+  for (const w of windows) {
+    const before = leapRows.find(r => r.o === w.startO - 1);
+    const after = leapRows.find(r => r.o === w.lastO + 1);
+    if (!before || !after || !before.name || !after.name) continue;
+    const [bd, bc] = before.name.split('/').map(Number);
+    const [ad, ac] = after.name.split('/').map(Number);
+    const stepped = (ac === bc && ad === bd + 1) || (ac === bc + 1 && ad === 1) || (bd === 72 && ad === 1);
+    if (!stepped) resumeBad.push(`offset ${w.startO}: held at ${before.name}, resumed at ${after.name}`);
+  }
+  resumeBad.forEach(m => fail(`the 72 Names lost their place across the microcosm — ${m}`));
+  if (!resumeBad.length && windows.length)
+    pass(`the 72 Names hold across each microcosm and resume one step on, none said twice`);
+
+  // (e) the 24 priestly watches run once through the 28 days, four silences
+  //     parting them — 24 + 4 = 28, five to a lobe and four to the last.
+  const watchBad = [];
+  for (const w of windows) {
+    const inWin = leapRows.filter(r => r.o >= w.startO && r.o <= w.lastO);
+    const watches = inWin.map(r => r.mishmar).filter(Boolean).map(Number);
+    const silences = inWin.filter(r => r.silent).length;
+    if (watches.length !== 24 || !watches.every((v, i) => v === i + 1))
+      watchBad.push(`offset ${w.startO}: ${watches.length} watches, in order ${watches.every((v, i) => v === i + 1)}`);
+    if (silences !== 4) watchBad.push(`offset ${w.startO}: ${silences} silent days, not 4`);
+  }
+  watchBad.slice(0, 3).forEach(m => fail(`the priestly watches — ${m}`));
+  if (!watchBad.length && windows.length)
+    pass(`24 watches in order and 4 silences in each microcosm, 24 + 4 = 28`);
 
   // 5. tap targets — a link inside a sentence is exempt, as WCAG has it
   console.log('\ntargets');
