@@ -3467,7 +3467,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   let DAY_OFFSET = 28;
 
   let currentOffset = 0;
-  let kotYearAlt = false; // When true, show the adjacent KoT year during the overlap window
+  let kotYearAlt = null; // true/false = the reader's choice; null = follow the day's default
 
   // Content for the generic info popup (#info-popup-modal), refreshed each render() cycle.
   let _lmDetailMain = '', _lmDetailMeta = '';
@@ -12655,9 +12655,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const _overlapPrev = d < _dy1P + _kdP;     // previous KoT year is still running
     const inYearOverlap = _overlapNext || _overlapPrev;
     if (!inYearOverlap) kotYearAlt = false;
-    // If hYear just incremented but the new KoT year hasn't begun (priWeekOfYear ≤ 0),
-    // auto-default to the previous year which is still running:
-    if (_priWeekOfYear <= 0 && _overlapPrev) kotYearAlt = true;
+    // The overlap is not a tie to be broken arbitrarily. A common Hebrew year is
+    // 354 days and the KoT year is 364, so roughly ten days always belong to two
+    // KoT years at once. The new year wins them: once it has begun it is what
+    // the day is, and the old year's tail stays reachable behind the toggle.
+    // Defaulting to the old year instead left day 1 — the alef — and days
+    // 359-364 unreachable in every year unless the reader thought to toggle.
+    // The second clause is the other direction: hYear has incremented but the
+    // new KoT year has not begun yet (priWeekOfYear ≤ 0), so the previous year
+    // is the only one running and the primary reading would be nonsense.
+    else if (kotYearAlt === null)
+      kotYearAlt = _overlapNext || (_priWeekOfYear <= 0 && _overlapPrev);
 
     const _altIsLeap  = _overlapNext ? _isLN : _isLP;
     const _altD_year1 = _overlapNext ? _dy1N : _dy1P;
@@ -15490,7 +15498,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function changeDay(delta) {
     currentOffset += delta;
-    kotYearAlt = false;
+    kotYearAlt = null;      // let the new day choose its own year again
     document.querySelectorAll('.sefirah-card.expanded').forEach(c => c.classList.remove('expanded'));
     render();
   }
@@ -15710,7 +15718,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       selected = localMidnight(hebrewToGreg(hy, hm, hd));
     }
     currentOffset = Math.round((selected - localMidnight(new Date())) / 86400000);
-    kotYearAlt = false;
+    kotYearAlt = null;      // let the jumped-to day choose its own year
     closeDatePicker();
     document.querySelectorAll('.sefirah-card.expanded').forEach(c => c.classList.remove('expanded'));
     render();

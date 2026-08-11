@@ -51,7 +51,13 @@
 //                   card whose cycle it draws. They are two readings of one
 //                   count, and if they part company the reader cannot tell
 //                   which is wrong. This has caught two real faults already.
-//  13. leap       — the 392-day year and its 28-day Adar I microcosm: the window
+//  13. year seam  — the ~10 days that belong to two KoT years at once. Which
+//                   year a day defaults to is a decision, and it was silently
+//                   the wrong one: every year opened on day 2, 4, 5 or 6 and
+//                   the alef was never reached. Each seam must open on day 1,
+//                   and the tail the new year displaces must still be reachable
+//                   through the toggle, so nothing is lost either way.
+//  14. leap       — the 392-day year and its 28-day Adar I microcosm: the window
 //                   falls once per leap year and runs 1–28; every card face
 //                   that speaks on either side of it still speaks inside it;
 //                   the 24 priestly watches run once through with four
@@ -557,6 +563,59 @@ async function checkInBrowser(chromium) {
   watchBad.slice(0, 3).forEach(m => fail(`the priestly watches — ${m}`));
   if (!watchBad.length && windows.length)
     pass(`24 watches in order and 4 silences in each microcosm, 24 + 4 = 28`);
+
+  // ── year seam ─────────────────────────────────────────────────────────────
+  // A common Hebrew year is 354 days and the KoT year is 364, so about ten days
+  // belong to two KoT years at once. That is not an error to remove, it is what
+  // the toggle is for — but which year the day *defaults* to is a decision, and
+  // it was silently the wrong one: defaulting to the old year left day 1, the
+  // alef, unreached in every year, and started each year raggedly at day 2, 4,
+  // 5 or 6 depending on how the calendar fell. The rule is that the new year
+  // wins its own days; the old year's tail stays behind the toggle.
+  console.log('\nyear seam');
+  const seam = await page.evaluate(() => {
+    const yd = () => {
+      const m = document.getElementById('chochmah-main').innerText.match(/Day (\d+) · Cycle (\d+)/);
+      return m ? (+m[2] - 1) * 22 + (+m[1]) : null;
+    };
+    const rows = [];
+    for (let o = -400; o <= 800; o++) {
+      // kotYearAlt = null is what changeDay() leaves behind, so this is the
+      // reading a person actually gets when they walk day to day.
+      currentOffset = o; kotYearAlt = null; render();
+      const pill = document.getElementById('year-toggle');
+      const overlap = pill ? getComputedStyle(pill).display !== 'none' : false;
+      const def = yd();
+      let other = null;
+      if (overlap) { setKotYear(!kotYearAlt); other = yd(); }
+      rows.push({ o, overlap, def, other });
+    }
+    currentOffset = 0; kotYearAlt = null; render();
+    return rows;
+  });
+
+  // every year begins at day 1 in the default reading
+  const seams = [];
+  for (let i = 1; i < seam.length; i++) {
+    const a = seam[i - 1], c = seam[i];
+    if (a.def === null || c.def === null) continue;
+    if (c.def < a.def) seams.push({ o: c.o, from: a.def, to: c.def });
+  }
+  const ragged = seams.filter(x => x.to !== 1);
+  ragged.slice(0, 3).forEach(x =>
+    fail(`the KoT year opens on day ${x.to}, not day 1, at offset ${x.o} (previous day was ${x.from})`));
+  if (!seams.length) fail('no year seam in 1,200 days — the sweep must cross one');
+  else if (!ragged.length) pass(`all ${seams.length} year seams open on day 1`);
+
+  // and the tail the new year displaces is still reachable, so nothing is lost
+  const viaToggle = new Set(seam.filter(r => r.other !== null).map(r => r.other));
+  const byDefault = new Set(seam.filter(r => r.def !== null).map(r => r.def));
+  const unreachable = [];
+  for (let v = 1; v <= 364; v++) if (!byDefault.has(v) && !viaToggle.has(v)) unreachable.push(v);
+  if (unreachable.length)
+    fail(`year-days reachable by neither the default nor the toggle: ${unreachable.slice(0, 12).join(',')}`);
+  else
+    pass(`all 364 year-days reachable — ${byDefault.size} by default, ${viaToggle.size} of the tail behind the toggle`);
 
   // 5. tap targets — a link inside a sentence is exempt, as WCAG has it
   console.log('\ntargets');
