@@ -970,6 +970,14 @@ padding: 0 4px;
 border-radius: 3px;
 }
 
+/* Keyboard focus. Everything below is reachable by tab now, and a focus ring
+   that cannot be seen is the same as no focus ring. :focus-visible so a mouse
+   tap does not leave one behind. */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
 .maalah.shake {
 animation: maalahShake 0.3s;
 }
@@ -11635,9 +11643,113 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       el.classList.toggle('now-flash', !done && n === activeIdx);
     });
     updatePrayerHeart(prayersDone());
+    syncA11yState();
   }
   const PRAYER_SEFIRAH = ['Keter','Chochmah','Binah','Chesed','Gevurah',
                           'Tiferet','Netzach','Hod','Yesod','Malchut'];
+
+  // ── ACCESSIBILITY — said once, for everything tappable ──
+  // The app grew 80-odd click handlers on divs and spans. A div with an onclick
+  // is invisible to a keyboard and silent to a screen reader: it cannot be
+  // tabbed to, and when its state changes nothing is announced. Rather than
+  // edit every call site, each render annotates what is there — role so it is
+  // reported as a control, tabindex so it can be reached, and aria-pressed /
+  // aria-expanded so its state is spoken rather than merely coloured.
+  // Hebrew is marked too: unmarked, a screen reader pronounces it with an
+  // English voice, which is not a reading of it at all.
+  const HE_RE = /[\u0590-\u05FF]/;
+  // The state classes are toggled without a render — marking a prayer calls
+  // applyPrayerState, not render() — so the aria attribute has to be written
+  // where the class is written. Setting it once per render left the screen
+  // reader announcing "not pressed" over a prayer the reader had just marked,
+  // which is worse than saying nothing at all.
+  const A11Y_STATE = [
+    ['.prayer-tag',    'done',             'aria-pressed'],
+    ['.maalah',        'done',             'aria-pressed'],
+    ['.star-mark',     'lit',              'aria-pressed'],
+    ['.sefirah-card',  'expanded',         'aria-expanded'],
+    ['.year-pill-btn', 'year-pill-active', 'aria-pressed'],
+    ['.lang-btn',      'active',           'aria-pressed']
+  ];
+  function syncA11yState() {
+    for (const [sel, cls, attr] of A11Y_STATE)
+      document.querySelectorAll(sel).forEach(el =>
+        el.setAttribute(attr, el.classList.contains(cls) ? 'true' : 'false'));
+  }
+  function applyA11y() {
+    // toggles that carry a state class
+    const state = [
+      ['.prayer-tag', 'done',     'aria-pressed'],
+      ['.maalah',     'done',     'aria-pressed'],
+      ['.star-mark',  'lit',      'aria-pressed'],
+      ['.sefirah-card', 'expanded', 'aria-expanded']
+    ].concat(A11Y_STATE);
+    for (const [sel, cls, attr] of state) {
+      document.querySelectorAll(sel).forEach(el => {
+        if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+        if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+        el.setAttribute(attr, el.classList.contains(cls) ? 'true' : 'false');
+      });
+    }
+    // anything else that is clicked but is not natively a control
+    document.querySelectorAll('[onclick]').forEach(el => {
+      if (['BUTTON','A','INPUT','SELECT','TEXTAREA'].includes(el.tagName)) return;
+      if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    });
+    // Hebrew, marked where an element's own text is mostly Hebrew. Mixed
+    // English-and-Hebrew elements are left alone: labelling those "he" would
+    // mispronounce the English half, which is no better than the problem.
+    document.querySelectorAll('body *:not(script):not(style)').forEach(el => {
+      if (el.hasAttribute('lang')) return;
+      let own = '';
+      for (const n of el.childNodes) if (n.nodeType === 3) own += n.nodeValue;
+      own = own.trim();
+      if (!own || !HE_RE.test(own)) return;
+      const letters = own.replace(/[^\p{L}]/gu, '');
+      const heb = own.replace(/[^\u0590-\u05FF]/g, '');
+      if (letters.length && heb.length / letters.length >= 0.6) el.setAttribute('lang', 'he');
+    });
+    // What is left is mixed — "Year-Round — בכל השנה", "Jerusalem ירושלים".
+    // Marking the element would mispronounce the English, so the Hebrew run
+    // inside the text node is wrapped instead. Text nodes only: no element is
+    // moved and no listener is disturbed, and innerText is unchanged.
+    const runs = /[\u0590-\u05FF][\u0590-\u05FF\s\u0591-\u05C7"'\u05F3\u05F4-]*/g;
+    const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const todo = [];
+    for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+      if (!HE_RE.test(n.nodeValue)) continue;
+      const p = n.parentElement;
+      if (!p || p.closest('[lang="he"]') || p.tagName === 'SCRIPT' || p.tagName === 'STYLE') continue;
+      todo.push(n);
+    }
+    for (const n of todo) {
+      const frag = document.createDocumentFragment();
+      let last = 0, m;
+      runs.lastIndex = 0;
+      while ((m = runs.exec(n.nodeValue))) {
+        if (m.index > last) frag.appendChild(document.createTextNode(n.nodeValue.slice(last, m.index)));
+        const sp = document.createElement('span');
+        sp.setAttribute('lang', 'he');
+        sp.textContent = m[0];
+        frag.appendChild(sp);
+        last = m.index + m[0].length;
+      }
+      if (last < n.nodeValue.length) frag.appendChild(document.createTextNode(n.nodeValue.slice(last)));
+      n.parentNode.replaceChild(frag, n);
+    }
+  }
+
+  // Enter and Space work the keyboard the way a button does. Capture phase and
+  // the same guard the click handlers use, so a key never does more than a tap.
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+    const el = e.target;
+    if (!el || !el.getAttribute || el.getAttribute('role') !== 'button') return;
+    if (['BUTTON','A','INPUT','SELECT','TEXTAREA'].includes(el.tagName)) return;
+    e.preventDefault();
+    el.click();
+  });
 
   // Capture-phase so a tap on a prayer never expands the card underneath.
   document.addEventListener('click', (e) => {
@@ -11756,6 +11868,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const wrap = document.getElementById('maalot-moon');
     if (wrap) wrap.title = "Today's ma'alot — tap each מעלה tag in order · tap for Today's Path" +
       (n ? ` · ${n} star${n === 1 ? '' : 's'} gathered` : '');
+    syncA11yState();
   }
 
   // Capture-phase, like the prayer tags: a tap on a star must not expand or
@@ -11790,6 +11903,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       }
     });
     updateMaalotMoon(k);
+    syncA11yState();
   }
 
   const shakeTag = (el) => { el.classList.add('shake'); setTimeout(() => el.classList.remove('shake'), 350); };
@@ -12619,6 +12733,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     setTimeout(applyPrayerState, 0);
     setTimeout(applyStarState, 0);
     setTimeout(injectCycleInfoButtons, 0); // re-append ⓘ after this render's rewrites
+    setTimeout(applyA11y, 0);        // name, role and state for anything tappable
     const hMname = HEB_MONTH_NAMES[hMonth] || '';
     const hDateStr = `${hDay} ${hMname} ${hYear}`;
 
@@ -16312,6 +16427,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function toggleExpand(card) {
     card.classList.toggle('expanded');
+    card.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
   }
 
   function toggleKeterExpand(card, event) {
@@ -16320,6 +16436,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       return;
     }
     card.classList.toggle('expanded');
+    card.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
   }
 
   render();

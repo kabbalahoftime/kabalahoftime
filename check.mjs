@@ -51,13 +51,20 @@
 //                   card whose cycle it draws. They are two readings of one
 //                   count, and if they part company the reader cannot tell
 //                   which is wrong. This has caught two real faults already.
-//  13. year seam  — the ~10 days that belong to two KoT years at once. Which
+//  13. a11y       — every control named, reachable by keyboard, and announcing
+//                   its state; every Hebrew run marked lang="he". 46 controls
+//                   were divs no keyboard could reach and 64 Hebrew runs went
+//                   unmarked. The state assertion caught a fault in the fix
+//                   itself: the attribute was written once per render while the
+//                   class it mirrors is toggled without one, so a marked prayer
+//                   still announced "not pressed" — worse than announcing none.
+//  14. year seam  — the ~10 days that belong to two KoT years at once. Which
 //                   year a day defaults to is a decision, and it was silently
 //                   the wrong one: every year opened on day 2, 4, 5 or 6 and
 //                   the alef was never reached. Each seam must open on day 1,
 //                   and the tail the new year displaces must still be reachable
 //                   through the toggle, so nothing is lost either way.
-//  14. leap       — the 392-day year and its 28-day Adar I microcosm: the window
+//  15. leap       — the 392-day year and its 28-day Adar I microcosm: the window
 //                   falls once per leap year and runs 1–28; every card face
 //                   that speaks on either side of it still speaks inside it;
 //                   the 24 priestly watches run once through with four
@@ -616,6 +623,77 @@ async function checkInBrowser(chromium) {
     fail(`year-days reachable by neither the default nor the toggle: ${unreachable.slice(0, 12).join(',')}`);
   else
     pass(`all 364 year-days reachable — ${byDefault.size} by default, ${viaToggle.size} of the tail behind the toggle`);
+
+  // ── a11y ──────────────────────────────────────────────────────────────────
+  // The app grew 80-odd click handlers on divs. Every one was unreachable by
+  // keyboard and silent to a screen reader, and 64 of 148 Hebrew runs were
+  // unmarked, so a screen reader read them in an English voice. The state
+  // assertion is the one that caught a real fault in the fix itself: the aria
+  // attribute was written once per render, while the class it mirrors is
+  // toggled without one — so a marked prayer still announced "not pressed".
+  console.log('\na11y');
+  const a11y = await page.evaluate(() => {
+    const vis = el => {
+      const s = getComputedStyle(el);
+      return s.display !== 'none' && s.visibility !== 'hidden' && el.offsetParent !== null;
+    };
+    const sel = 'button, a[href], [onclick], [role="button"], .prayer-tag, .maalah, .star-mark, .kot-summary, .year-pill-btn';
+    const controls = [...document.querySelectorAll(sel)].filter(vis);
+    const named = el => (el.getAttribute('aria-label') || el.innerText || el.getAttribute('title') || '').trim();
+    const focusable = el => el.hasAttribute('tabindex')
+      ? +el.getAttribute('tabindex') >= 0
+      : ['BUTTON','A','INPUT','SELECT','TEXTAREA'].includes(el.tagName);
+
+    const out = { controls: controls.length, unnamed: [], unreachable: [], stateless: [], hebrew: 0, unmarkedHe: [] };
+    for (const el of controls) {
+      const id = el.tagName.toLowerCase() + (el.id ? '#' + el.id : '.' + String(el.className).split(' ')[0]);
+      if (!named(el)) out.unnamed.push(id);
+      if (!focusable(el)) out.unreachable.push(id);
+    }
+    for (const [s2, cls, attr] of [['.prayer-tag','done','aria-pressed'], ['.maalah','done','aria-pressed'],
+                                   ['.star-mark','lit','aria-pressed'], ['.sefirah-card','expanded','aria-expanded']])
+      document.querySelectorAll(s2).forEach(el => {
+        if (!el.hasAttribute(attr)) { out.stateless.push(s2 + ' has no ' + attr); return; }
+        const want = el.classList.contains(cls) ? 'true' : 'false';
+        if (el.getAttribute(attr) !== want) out.stateless.push(`${s2} says ${attr}=${el.getAttribute(attr)} but is ${want}`);
+      });
+
+    const HE = /[\u0590-\u05FF]/;
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    for (let n = w.nextNode(); n; n = w.nextNode()) {
+      if (!HE.test(n.nodeValue) || !n.nodeValue.trim()) continue;
+      const el = n.parentElement;
+      if (!el || !vis(el)) continue;
+      out.hebrew++;
+      const lang = el.closest('[lang]');
+      if (!lang || !/^he/i.test(lang.getAttribute('lang'))) out.unmarkedHe.push(n.nodeValue.trim().slice(0, 30));
+    }
+
+    // and the state must follow the class when the class is toggled without a
+    // render — which is how every marking in this app actually happens
+    const tag = document.querySelector('.prayer-tag');
+    let follows = 'no prayer tag found';
+    if (tag) {
+      const was = tag.getAttribute('aria-pressed');
+      tag.click();
+      const mid = tag.getAttribute('aria-pressed');
+      const cls = tag.classList.contains('done') ? 'true' : 'false';
+      tag.click();
+      follows = (mid === cls && mid !== was) ? null : `aria-pressed went ${was} -> ${mid} while the class says ${cls}`;
+    }
+    out.follows = follows;
+    return out;
+  });
+  a11y.unnamed.slice(0, 3).forEach(m => fail(`a control with no accessible name — ${m}`));
+  a11y.unreachable.slice(0, 3).forEach(m => fail(`a control no keyboard can reach — ${m}`));
+  a11y.stateless.slice(0, 3).forEach(m => fail(`state not announced — ${m}`));
+  a11y.unmarkedHe.slice(0, 3).forEach(m => fail(`Hebrew not marked as Hebrew — "${m}"`));
+  if (a11y.follows) fail(`the announced state does not follow the class — ${a11y.follows}`);
+  if (!a11y.unnamed.length && !a11y.unreachable.length)
+    pass(`all ${a11y.controls} controls are named and keyboard-reachable`);
+  if (!a11y.stateless.length && !a11y.follows)
+    pass(`every toggle announces its state, and it follows the class when marked`);
+  if (!a11y.unmarkedHe.length) pass(`all ${a11y.hebrew} Hebrew runs marked lang="he"`);
 
   // 5. tap targets — a link inside a sentence is exempt, as WCAG has it
   console.log('\ntargets');
