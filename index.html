@@ -14404,10 +14404,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // two covering in the return (Yechezkel 1:11, 1:24). Forty-five days to
     // each, and day 46 — the heart — is the turn itself, neither one nor the
     // other, so it has no count.
+    // \u00A0 inside each clause, so a line only ever breaks at a " · " — never
+    // between a label and its own number. At 375-390px the plain-space version
+    // wrapped after "letter", stranding the number alone on its own line.
     const _wingLine = (seasonInfo.dayIn === 46) ? ''
       : (seasonInfo.dayIn < 46
-          ? `Ratzo wings ${seasonInfo.dayIn} of 45`
-          : `Shov wings ${seasonInfo.dayIn - 46} of 45`);
+          ? `Ratzo\u00A0wings\u00A0${seasonInfo.dayIn}\u00A0of\u00A045`
+          : `Shov\u00A0wings\u00A0${seasonInfo.dayIn - 46}\u00A0of\u00A045`);
     // The great heart keeps its own name; the two quarter-hearts say which
     // quarters they stand between, so all three read as the same kind of day.
     const _heartLine = (() => {
@@ -14452,7 +14455,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div style="margin-top:6px;font-size:0.85em;">` +
         (_heartLine
           ? `<span style="color:var(--gold-mid)">${_wingLine ? _wingLine + ' · ' : ''}${_heartLine}</span>`
-          : `<span style="color:var(--ink-mid)">${_wingLine} · Face ${seasonInfo.quarter} of 4 · letter ${seasonInfo.inQuarter}</span>`) +
+          : `<span style="color:var(--ink-mid)">${_wingLine} · Face\u00A0${seasonInfo.quarter}\u00A0of\u00A04 · letter\u00A0${seasonInfo.inQuarter}</span>`) +
         (_eichaLink ? `<br><span style="color:var(--ink-mid)">${_eichaLink}</span>` : ``) +
         `</div>`;
     document.getElementById('gevurah-sub').innerHTML = '';
