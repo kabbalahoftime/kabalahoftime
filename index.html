@@ -17967,7 +17967,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     {k:'alot',    s:'Alot',  p:3}, {k:'mishe',   s:'Mish',  p:4},
     {k:'shema',   s:'Shma',  p:4}, {k:'tefila',  s:'Tfila', p:5},
     {k:'gedolah', s:'M.Gdl', p:5}, {k:'ketanah', s:'M.Ktn', p:5},
-    {k:'plag',    s:'Plag',  p:5}, {k:'chatzotN',s:'Chtzt', p:6}
+    {k:'plag',    s:'Plag',  p:5}, {k:'chatzotN',s:'Chtz.L',p:2}
   ];
   function drawZmanim(){
     while(gZman.firstChild)gZman.removeChild(gZman.firstChild);
@@ -17983,7 +17983,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       var ln=mk('line',{x1:p1[0],y1:p1[1],x2:p2[0],y2:p2[1],stroke:'#f0e6c9',
         'stroke-width':strong?1.8:1.1,opacity:strong?.95:.72},gZman);
       var ti=document.createElementNS(NS,'title');
-      ti.textContent=t.s+' \u00b7 '+fmt(m); ln.appendChild(ti);
+      /* The full name, taken from ZMANIM_ROWS so there is one source for it:
+         the abbreviation alone gave two ticks reading "Chtzt" twelve hours
+         apart, which is no way to tell midday from midnight. */
+      var row=(typeof ZMANIM_ROWS!=='undefined')
+        ? ZMANIM_ROWS.filter(function(r){return r.key===t.k;})[0] : null;
+      ti.textContent=(row?row.en+' \u00b7 '+row.sub:t.s)+' \u00b7 '+fmt(m);
+      ln.appendChild(ti);
       var deg=m/DAY*360;
       var clash=placed.some(function(d){var x=Math.abs(d-deg);return Math.min(x,360-x)<11;});
       if(clash)return;
