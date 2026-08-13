@@ -11678,16 +11678,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // On a day Tachanun is not said, Tikkun Rachel is not said either — this
   // swaps the tag for Perek Shira instead, in the same tracked slot (#2),
   // so the heart still counts ten and nothing about the other nine changes.
+  // querySelectorAll, not querySelector: the Now card mirrors whichever sefirah
+  // is current, so while Chochmah is active there are two copies of this tag.
+  // Swapping only the first left the Chochmah card itself still reading
+  // "Tikkun Rachel" on a day it is not said, disagreeing with its own mirror.
   function applyTachanunSwap() {
-    const el = document.querySelector('.prayer-tag[data-prayer="2"]');
-    if (!el) return;
-    if (_noTachanunToday) {
-      el.textContent = 'Perek Shira';
-      el.title = 'No Tachanun today — Perek Shira instead of Tikkun Rachel. Tap when said.';
-    } else {
-      el.textContent = 'Tikkun Rachel';
-      el.title = 'Tap when you have prayed';
-    }
+    document.querySelectorAll('.prayer-tag[data-prayer="2"]').forEach(el => {
+      if (_noTachanunToday) {
+        el.textContent = 'Perek Shira';
+        el.title = 'No Tachanun today — Perek Shira instead of Tikkun Rachel. Tap when said.';
+      } else {
+        el.textContent = 'Tikkun Rachel';
+        el.title = 'Tap when you have prayed';
+      }
+    });
   }
 
   function applyPrayerState() {
