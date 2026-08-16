@@ -1916,6 +1916,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    the 16px pill. The halves are rounded themselves instead, so the shape is
    the same and nothing is clipped. */
 .year-toggle-pill { overflow: visible; }
+/* Each half at least 44px across. The middle button of the three-way text
+   size toggle drew 37px, so a reach to either side landed on its neighbour
+   rather than on itself — the overlay above is full-bleed left to right and
+   so is only ever as wide as the button under it. */
+.year-toggle-pill > .year-pill-btn { min-width: 44px; }
 .year-toggle-pill > .year-pill-btn:first-child { border-radius: 20px 0 0 20px; }
 .year-toggle-pill > .year-pill-btn:last-child  { border-radius: 0 20px 20px 0; }
 
@@ -1949,6 +1954,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   display: inline-block; padding: 12px 6px; margin: -12px -6px;
   position: relative; z-index: 1;
 }
+/* The padding above gives it 36-39px of height, a few short of the 44px
+   reach, so a tap just below the word landed on the line beneath. The same
+   full-height overlay the toggle halves use, which grows the target without
+   moving anything drawn. */
+.kot-summary::after {
+  content: ''; position: absolute; left: 0; right: 0; top: 50%;
+  transform: translateY(-50%); height: 44px;
+}
 /* Opens the book's week; a control rather than a link, so it says so. */
 .kot-summary { color: var(--gold); font-size: 0.85em; cursor: pointer; }
 </style>
@@ -1966,6 +1979,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="title-main">Kabbalah of Time</div>
     <div class="title-sub">Daily Counting, Daily Calling — ספירת הזמן</div>
   </header>
+
+  <!-- READING CONTROLS — first thing under the header rule. Someone who finds
+       the page hard to read should not have to scroll past the whole
+       introduction to find the two settings that fix it. -->
+  <div id="reading-controls" style="text-align:center;margin:12px 0 4px;">
+    <div class="year-toggle-pill" style="margin-top:0;">
+      <button id="ct-high-btn" class="year-pill-btn year-pill-active" onclick="setContrast('high')">High Contrast</button>
+      <button id="ct-normal-btn" class="year-pill-btn" onclick="setContrast('normal')">Parchment</button>
+    </div>
+    <!-- 20px, not the 7px used elsewhere: each row's tap overlay stands 22px
+         above and below its centre, so a closer gap has the lower row taking
+         taps meant for the upper one. -->
+    <div class="year-toggle-pill" style="margin-top:20px;">
+      <button id="ts-normal-btn" class="year-pill-btn year-pill-active" onclick="setTextSize('normal')">Text A</button>
+      <button id="ts-large-btn" class="year-pill-btn" onclick="setTextSize('large')">A+</button>
+      <button id="ts-larger-btn" class="year-pill-btn" onclick="setTextSize('larger')">A++</button>
+    </div>
+  </div>
 
   <!-- START HERE — collapsed to one line so it never blocks a returning reader -->
   <div class="intro-panel start-panel" id="start-panel" onclick="this.classList.toggle('expanded')">
@@ -2100,15 +2131,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="year-toggle-pill" style="margin-top:0;">
       <button id="tm-fixed-btn" class="year-pill-btn year-pill-active" onclick="setTimeMode('fixed')">Fixed Hours</button>
       <button id="tm-zman-btn" class="year-pill-btn" onclick="setTimeMode('zmaniyot')">Sha'ot Zmaniyot</button>
-    </div>
-    <div class="year-toggle-pill" style="margin-top:7px;">
-      <button id="ct-high-btn" class="year-pill-btn year-pill-active" onclick="setContrast('high')">High Contrast</button>
-      <button id="ct-normal-btn" class="year-pill-btn" onclick="setContrast('normal')">Parchment</button>
-    </div>
-    <div class="year-toggle-pill" style="margin-top:7px;">
-      <button id="ts-normal-btn" class="year-pill-btn year-pill-active" onclick="setTextSize('normal')">Text A</button>
-      <button id="ts-large-btn" class="year-pill-btn" onclick="setTextSize('large')">A+</button>
-      <button id="ts-larger-btn" class="year-pill-btn" onclick="setTextSize('larger')">A++</button>
     </div>
     <div id="city-select-wrap" style="display:none;margin-top:7px;">
       <select id="city-select" onchange="setZmanCity(this.value)"

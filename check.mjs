@@ -39,6 +39,10 @@
 //                   exist. All of it is served to crawlers and never to a
 //                   reader, so nothing else would ever notice it rot.
 //   8. targets    — no control under 44px that isn't a link inside a sentence.
+//                   Each is scrolled into view before it is measured: the
+//                   reach test reads an off-screen probe as "cannot judge"
+//                   and passes it, and on this page 65 of 79 controls sat
+//                   below the fold and so were never actually tested.
 //   9. overflow   — the page never scrolls sideways, at any phone width, at
 //                   any of the three reader text sizes, with the cards shut
 //                   and with every one of them open, and no detail value is
@@ -707,6 +711,12 @@ async function checkInBrowser(chromium) {
   // actually at a point 21px out from the centre, in each direction.
   const small = await page.evaluate(() => {
     const out = [];
+    // Each control is brought into view before it is probed. Without this the
+    // reach test silently passed anything below the fold: elementFromPoint
+    // returns null outside the viewport, which the off-screen guard below
+    // reads as "cannot judge" and lets through. Measured on this page, 65 of
+    // 79 controls were never actually tested — including, for a while, the
+    // reading controls themselves.
     const reaches = (el, dx, dy) => {
       const r = el.getBoundingClientRect();
       const x = r.left + r.width / 2 + dx, y = r.top + r.height / 2 + dy;
@@ -715,8 +725,10 @@ async function checkInBrowser(chromium) {
       return !!hit && (hit === el || el.contains(hit) || hit.contains(el));
     };
     document.querySelectorAll('button,a,input,select,[onclick]').forEach(e => {
-      const r = e.getBoundingClientRect();
+      let r = e.getBoundingClientRect();
       if (r.width <= 0 || r.height <= 0) return;
+      e.scrollIntoView({ block: 'center' });
+      r = e.getBoundingClientRect();
       const wideEnough = r.width  >= 44 || (reaches(e, -21, 0) && reaches(e, 21, 0));
       const tallEnough = r.height >= 44 || (reaches(e, 0, -21) && reaches(e, 0, 21));
       if (wideEnough && tallEnough) return;
