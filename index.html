@@ -908,7 +908,7 @@ background: var(--bg-card);
 border-radius: 3px;
 padding: 14px 18px;
 display: grid;
-grid-template-columns: 100px 1fr;
+grid-template-columns: 86px 1fr;
 gap: 14px;
 align-items: start;
 position: relative;
@@ -1535,12 +1535,11 @@ transition: transform 0.3s;
 
 /* ── RESPONSIVE ── */
 @media (max-width: 480px) {
-/* 84px, not 70. The Hebrew name has always overflowed a 70px track — 76px
-   for תפארת at the largest text — so the column already looked this wide
-   while the Latin above it was being hyphenated to fit 57px of usable
-   space. Sized to what was on the page anyway: the Hebrew now sits inside
-   its own column, and only Chochmah, genuinely the longest, still breaks. */
-.sefirah-card { grid-template-columns: 84px 1fr; gap: 10px; }
+/* 70px. The column is sized to the space it should occupy, not to the
+   longest name: at this width Chochmah, Gevurah, Netzach and Malchut break
+   at their soft hyphens rather than the column standing wide and half empty
+   for their sake. Chesed and Tiferet still fit whole. */
+.sefirah-card { grid-template-columns: 70px 1fr; gap: 10px; }
 .weekly-items { grid-template-columns: 1fr; }
 .title-main { font-size: calc(20px * var(--ts, 1)); }
 .crown-text { font-size: calc(17px * var(--ts, 1)); }
