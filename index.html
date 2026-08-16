@@ -1921,6 +1921,32 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    rather than on itself — the overlay above is full-bleed left to right and
    so is only ever as wide as the button under it. */
 .year-toggle-pill > .year-pill-btn { min-width: 44px; }
+
+/* ── READING CONTROLS ──
+   Contrast and text size, set under the header rule so a reader who cannot
+   read the page meets them first. They should be findable, not loud: both
+   groups on one line, drawn smaller and quieter than the settings further
+   down the page.
+
+   Only the drawing shrinks. min-width stays 44px and the ::after above still
+   lays a 44px-tall hit area over each button, so the finger target is exactly
+   what it was — smaller to the eye, not to the hand. They wrap to a second
+   line rather than overflow when the largest text size widens them past a
+   narrow phone. */
+#reading-controls {
+  display: flex; justify-content: center; align-items: center;
+  flex-wrap: wrap; gap: 8px; margin: 10px 0 2px;
+}
+#reading-controls .year-toggle-pill { margin-top: 0; border-color: var(--border-strong); }
+#reading-controls .year-pill-btn {
+  font-size: calc(9px * var(--ts, 1));
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  color: var(--ink-dim);
+}
+#reading-controls .year-pill-btn.year-pill-active {
+  background: var(--gold-mid); color: var(--bg-card);
+}
 .year-toggle-pill > .year-pill-btn:first-child { border-radius: 20px 0 0 20px; }
 .year-toggle-pill > .year-pill-btn:last-child  { border-radius: 0 20px 20px 0; }
 
@@ -1983,16 +2009,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- READING CONTROLS — first thing under the header rule. Someone who finds
        the page hard to read should not have to scroll past the whole
        introduction to find the two settings that fix it. -->
-  <div id="reading-controls" style="text-align:center;margin:12px 0 4px;">
-    <div class="year-toggle-pill" style="margin-top:0;">
-      <button id="ct-high-btn" class="year-pill-btn year-pill-active" onclick="setContrast('high')">High Contrast</button>
-      <button id="ct-normal-btn" class="year-pill-btn" onclick="setContrast('normal')">Parchment</button>
+  <!-- Side by side, which also settles the overlay collision the stacked
+       version needed a 20px gap for: rows no longer sit above one another,
+       so neither can take a tap meant for the other. -->
+  <div id="reading-controls">
+    <div class="year-toggle-pill">
+      <button id="ct-high-btn" class="year-pill-btn year-pill-active" onclick="setContrast('high')">Contrast</button>
+      <button id="ct-normal-btn" class="year-pill-btn" onclick="setContrast('normal')">Soft</button>
     </div>
-    <!-- 20px, not the 7px used elsewhere: each row's tap overlay stands 22px
-         above and below its centre, so a closer gap has the lower row taking
-         taps meant for the upper one. -->
-    <div class="year-toggle-pill" style="margin-top:20px;">
-      <button id="ts-normal-btn" class="year-pill-btn year-pill-active" onclick="setTextSize('normal')">Text A</button>
+    <div class="year-toggle-pill">
+      <button id="ts-normal-btn" class="year-pill-btn year-pill-active" onclick="setTextSize('normal')">A</button>
       <button id="ts-large-btn" class="year-pill-btn" onclick="setTextSize('large')">A+</button>
       <button id="ts-larger-btn" class="year-pill-btn" onclick="setTextSize('larger')">A++</button>
     </div>
@@ -2044,7 +2070,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">Gevurah's season reads <strong>Ratzo</strong> for its first forty-five days and <strong>Shov</strong> for its last — running in toward the season's <strong>Heart</strong> on day 46, then returning out. Nothing is divided between the halves; only the direction changes. Winter's Heart falls on Tu B'Shvat, the day the sap turns.</li>
         <li style="margin-bottom:0.7em;">Around Rosh Hashana two Kabbalah of Time years overlap; the <strong>year pills</strong> under the date switch between the one closing and the one begun. Netzach's cycle of 369 runs five days longer than the year, so on the first days of a cycle it offers its own toggle to reach days 365–369 of the one still finishing.</li>
         <li>Fixed Hours vs. Sha'ot Zmaniyot switches the day's sefirah-times between standard clock hours and halachic "proportional hours" for your chosen city.</li>
-        <li>High Contrast vs. Parchment switches the page between the darker, more legible grade and the softer warm one. High Contrast is the default; both are readable, the parchment is simply gentler on the eye.</li>
+        <li>Under the title sit two small settings for reading. <strong>Contrast</strong> / <strong>Soft</strong> switches the page between the darker, more legible grade and the warmer one — Contrast is the default; both are readable, Soft is simply gentler on the eye. <strong>A</strong> / <strong>A+</strong> / <strong>A++</strong> sets the size of the text. Both are remembered.</li>
       </ul>
     </div>
   </div>
