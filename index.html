@@ -181,15 +181,19 @@
 </style>
 <style>
   :root {
-    --bg:            #f7f2e8;
-    --bg-card:       #fdf9f2;
-    --bg-card-alt:   #f2ead8;
-    --ink:           #1e1a14;
-    --ink-mid:       #3d3526;
-    --ink-soft:      #6b5e45;
-    --ink-dim:       #746854;
-    --gold:          #7a5d11;
-    --gold-mid:      #86651b;
+    /* Reading first. Every tone here clears WCAG AAA (7:1 or better) on the
+       palest ground it ever sits on, and the grounds sit near white so the
+       ink has room. A reader told us the parchment was beautiful but hard
+       to read on a phone; beautiful it can stay, but not at that price. */
+    --bg:            #fffdf8;
+    --bg-card:       #ffffff;
+    --bg-card-alt:   #f6f1e4;
+    --ink:           #1e1a14;   /* 15.3:1 */
+    --ink-mid:       #3d3526;   /* 10.7:1 */
+    --ink-soft:      #4d4432;   /*  8.5:1 */
+    --ink-dim:       #595041;   /*  7.0:1 */
+    --gold:          #5f490d;   /*  7.6:1 */
+    --gold-mid:      #664d15;   /*  7.1:1 */
     --gold-light:    #c49a2a;
     --gold-pale:     #e8d9a0;
     --border:        #d4c49a;
@@ -203,43 +207,24 @@
     --accent-brown:  #5a3a1a;
   }
 
-  /* ── HIGH CONTRAST ─────────────────────────────────────────────────────
-     A reader wrote that the parchment is beautiful but hard to read on a
-     phone. AA at 4.5:1 is a floor, not a comfort: in daylight, cream on
-     cream is still work. This grade takes every tone to AAA — 7:1 or
-     better — on the palest ground it ever sits on, and lifts the grounds
-     themselves toward white so the ink has more room to work.
+  /* ── PARCHMENT ─────────────────────────────────────────────────────────
+     The softer grade, kept as an opt-out for anyone who prefers the warmer
+     page. Not a step down into inaccessibility: every tone here still
+     clears AA at 4.5:1 — it is the AAA margin that is given up, not the
+     standard. Colour only; no size, spacing or layout, so switching grade
+     cannot shift the page or break a line.
 
-     Colour only. No size, no spacing, no layout, so nothing here can shift
-     the page or break a line, and the default grade is untouched.
-
-     Each tone keeps its place in the order: ink darker than ink-mid darker
-     than ink-soft darker than ink-dim, gold darker than gold-mid. At one
-     flat 7:1 target the last pair collapse into the same value, so they are
-     given separate targets and stay four distinct tones rather than two. */
-  :root[data-contrast="high"] {
-    --bg:            #fffdf8;
-    --bg-card:       #ffffff;
-    --bg-card-alt:   #f6f1e4;
-    --ink-soft:      #4d4432;   /*  8.5:1 */
-    --ink-dim:       #595041;   /*  7.0:1 */
-    --gold:          #5f490d;   /*  7.6:1 */
-    --gold-mid:      #664d15;   /*  7.1:1 */
+     Each tone keeps its rank in both grades — ink darker than ink-mid
+     darker than ink-soft darker than ink-dim, gold darker than gold-mid. */
+  :root[data-contrast="normal"] {
+    --bg:            #f7f2e8;
+    --bg-card:       #fdf9f2;
+    --bg-card-alt:   #f2ead8;
+    --ink-soft:      #6b5e45;   /* 5.6:1 */
+    --ink-dim:       #746854;   /* 4.8:1 */
+    --gold:          #7a5d11;   /* 5.5:1 */
+    --gold-mid:      #86651b;   /* 4.8:1 */
   }
-
-  /* A phone already set to "increase contrast" is asking for this without
-     having to find a control. Honoured unless the reader has explicitly
-     chosen the softer grade. */
-  @media (prefers-contrast: more) {
-    :root:not([data-contrast="normal"]) {
-      --bg:          #fffdf8;
-      --bg-card:     #ffffff;
-      --bg-card-alt: #f6f1e4;
-      --ink-soft:    #4d4432;
-      --ink-dim:     #595041;
-      --gold:        #5f490d;
-      --gold-mid:    #664d15;
-    }
   }
 
 - { margin: 0; padding: 0; box-sizing: border-box; }
@@ -2014,6 +1999,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">Gevurah's season reads <strong>Ratzo</strong> for its first forty-five days and <strong>Shov</strong> for its last — running in toward the season's <strong>Heart</strong> on day 46, then returning out. Nothing is divided between the halves; only the direction changes. Winter's Heart falls on Tu B'Shvat, the day the sap turns.</li>
         <li style="margin-bottom:0.7em;">Around Rosh Hashana two Kabbalah of Time years overlap; the <strong>year pills</strong> under the date switch between the one closing and the one begun. Netzach's cycle of 369 runs five days longer than the year, so on the first days of a cycle it offers its own toggle to reach days 365–369 of the one still finishing.</li>
         <li>Fixed Hours vs. Sha'ot Zmaniyot switches the day's sefirah-times between standard clock hours and halachic "proportional hours" for your chosen city.</li>
+        <li>High Contrast vs. Parchment switches the page between the darker, more legible grade and the softer warm one. High Contrast is the default; both are readable, the parchment is simply gentler on the eye.</li>
       </ul>
     </div>
   </div>
@@ -2102,8 +2088,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <button id="tm-zman-btn" class="year-pill-btn" onclick="setTimeMode('zmaniyot')">Sha'ot Zmaniyot</button>
     </div>
     <div class="year-toggle-pill" style="margin-top:7px;">
-      <button id="ct-normal-btn" class="year-pill-btn year-pill-active" onclick="setContrast('normal')">Parchment</button>
-      <button id="ct-high-btn" class="year-pill-btn" onclick="setContrast('high')">High Contrast</button>
+      <button id="ct-high-btn" class="year-pill-btn year-pill-active" onclick="setContrast('high')">High Contrast</button>
+      <button id="ct-normal-btn" class="year-pill-btn" onclick="setContrast('normal')">Parchment</button>
     </div>
     <div id="city-select-wrap" style="display:none;margin-top:7px;">
       <select id="city-select" onchange="setZmanCity(this.value)"
@@ -11510,9 +11496,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     });
   }
 
-  // The reader's own choice outranks the phone's setting in both directions:
-  // "normal" is stored explicitly so that prefers-contrast: more can be
-  // declined, not only accepted.
+  // High contrast is the default, so prefers-contrast: more needs no special
+  // handling — the page already gives it. Only the opt-out is stored, and it
+  // is stored explicitly so that choosing the softer grade survives a reload
+  // rather than being re-defaulted back to high on every visit.
   function setContrast(mode) {
     try { localStorage.setItem('kotContrast', mode); } catch (e) {}
     document.documentElement.setAttribute('data-contrast', mode);
@@ -11523,15 +11510,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   (function () {
     var saved = null;
     try { saved = localStorage.getItem('kotContrast'); } catch (e) {}
-    if (saved === 'high' || saved === 'normal') setContrast(saved);
-    else if (window.matchMedia && matchMedia('(prefers-contrast: more)').matches) {
-      // Reflect the phone's setting in the pills without storing a choice the
-      // reader never made.
-      var h = document.getElementById('ct-high-btn'), n = document.getElementById('ct-normal-btn');
-      if (h) h.classList.add('year-pill-active');
-      if (n) n.classList.remove('year-pill-active');
-    }
+    setContrast(saved === 'normal' ? 'normal' : 'high');
   })();
+
 
   function setTimeMode(mode) {
     zmanMode = mode;
