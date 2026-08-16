@@ -908,7 +908,7 @@ background: var(--bg-card);
 border-radius: 3px;
 padding: 14px 18px;
 display: grid;
-grid-template-columns: 86px 1fr;
+grid-template-columns: 100px 1fr;
 gap: 14px;
 align-items: start;
 position: relative;
@@ -985,7 +985,10 @@ font-weight: 600;
 
 .sefirah-hebrew {
 font-family: 'Frank Ruhl Libre', serif;
-font-size: calc(22px * var(--ts, 1));
+/* Eased like the Latin name above it, and for the same reason: it is the
+   card's label, not its reading. At the full rate תפארת reached 76px in a
+   71px column at the largest text and spilled over the divider. */
+font-size: calc(22px * (1 + (var(--ts, 1) - 1) * 0.5));
 color: var(--sefirah-color, var(--gold));
 line-height: 1;
 opacity: 1;
@@ -1532,7 +1535,12 @@ transition: transform 0.3s;
 
 /* ── RESPONSIVE ── */
 @media (max-width: 480px) {
-.sefirah-card { grid-template-columns: 70px 1fr; gap: 10px; }
+/* 84px, not 70. The Hebrew name has always overflowed a 70px track — 76px
+   for תפארת at the largest text — so the column already looked this wide
+   while the Latin above it was being hyphenated to fit 57px of usable
+   space. Sized to what was on the page anyway: the Hebrew now sits inside
+   its own column, and only Chochmah, genuinely the longest, still breaks. */
+.sefirah-card { grid-template-columns: 84px 1fr; gap: 10px; }
 .weekly-items { grid-template-columns: 1fr; }
 .title-main { font-size: calc(20px * var(--ts, 1)); }
 .crown-text { font-size: calc(17px * var(--ts, 1)); }
