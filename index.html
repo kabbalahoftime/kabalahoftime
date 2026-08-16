@@ -1779,6 +1779,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 }
 .path-complete { text-align:center; color:var(--gold); margin-top:10px; font-style:italic; }
 
+/* ── THE THIRTY-FIRST ──
+   Shown only once all thirty are marked. It is not a step and carries no
+   checkbox: the thirty are the month, and this stands outside it. */
+.path-31 {
+  margin-top: 14px; padding: 12px 14px; border-radius: 4px;
+  background: var(--bg-card-alt); border: 1px solid var(--border);
+  text-align: center;
+}
+.path-31-title {
+  font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2px;
+  color:var(--gold); text-transform:uppercase; margin-bottom:7px;
+}
+.path-31-verse {
+  font-family:'Frank Ruhl Libre',serif; font-size:calc(17px * var(--ts, 1));
+  color:var(--ink); line-height:1.7; letter-spacing:0;
+}
+.path-31-en { font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); font-style:italic; margin-top:5px; }
+.path-31-note { font-size:calc(12.5px * var(--ts, 1)); color:var(--ink-soft); line-height:1.65; margin-top:9px; text-align:left; }
+
 /* Gentle pulse on the next actionable step */
 @keyframes nextPulse { 0%,100% { opacity:.95; } 50% { opacity:.3; } }
 .maalah.next-step { animation: nextPulse 2.4s ease-in-out infinite; }
@@ -12392,7 +12411,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     PATH_WANING.forEach((p, j) => {
       html += row(15 + j, live['y|' + p[0]] || p[1], p[2], !!(yMask & (1 << j)), 'מיעוט ' + p[0]);
     });
-    if (nextIdx === -1) html += `<div class="path-complete">30/30 — the month complete: the new moon crowned in rays.</div>`;
+    if (nextIdx === -1) {
+      html += `<div class="path-complete">30/30 — the month complete: the new moon crowned in rays.</div>`;
+      // The thirty-first, kept back until the thirty are done. Thirty steps
+      // complete a month in a single day; this one stands outside the month,
+      // where the luminaries have nothing left to count — which is what
+      // Yehoshua asked of them. No checkbox: it is not a step to be taken.
+      html += `<div class="path-31">` +
+        `<div class="path-31-title">ל״א · The Song of Yehoshua</div>` +
+        `<div class="path-31-verse" lang="he">שֶׁמֶשׁ בְּגִבְעוֹן דּוֹם וְיָרֵחַ בְּעֵמֶק אַיָּלוֹן</div>` +
+        `<div class="path-31-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo; ` +
+        `<a href="https://www.sefaria.org/Joshua.10.12" target="_blank" style="color:var(--gold)">Yehoshua 10:12</a></div>` +
+        `<div class="path-31-note">The thirty complete a month in a day — the moon full at ט״ו and made small again. ` +
+        `The thirty-first stands outside the month, when the sun and the moon have nothing left to count. ` +
+        `Yehoshua took the land from thirty-one kings (<a href="https://www.sefaria.org/Joshua.12.24" target="_blank" style="color:var(--gold)">Yehoshua 12:24</a>), ` +
+        `and thirty-one is אֵל. His is one of the ten songs, and the one the seven Books do not carry.</div>` +
+        `</div>`;
+    }
     document.getElementById('todays-path-body').innerHTML = html;
     document.getElementById('todays-path-modal').style.display = 'flex';
   }
