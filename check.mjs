@@ -39,9 +39,13 @@
 //                   exist. All of it is served to crawlers and never to a
 //                   reader, so nothing else would ever notice it rot.
 //   8. targets    — no control under 44px that isn't a link inside a sentence.
-//   9. overflow   — the page never scrolls sideways, at any phone width,
-//                   with the cards shut and with every one of them open, and
-//                   no detail value is squeezed too narrow to hold a word.
+//   9. overflow   — the page never scrolls sideways, at any phone width, at
+//                   any of the three reader text sizes, with the cards shut
+//                   and with every one of them open, and no detail value is
+//                   squeezed too narrow to hold a word. The text scale is
+//                   included because it is exactly the setting that would push
+//                   a tight row sideways and the one nobody would re-test
+//                   after an unrelated layout change.
 //  10. hebrew     — every Hebrew glyph is drawn by one face. Asked of the
 //                   browser, not the stylesheet: a family with no Hebrew in it
 //                   falls through silently to whatever the device happens to
@@ -956,10 +960,16 @@ async function checkInBrowser(chromium) {
   // once Malchut was expanded. Most of the app's text lives inside a card that
   // has to be opened to be seen, so both states are measured.
   console.log('\noverflow');
+  // Every text size, not only the default: the reader-controlled scale is
+  // exactly the setting that would push a tight row sideways, and it is the
+  // one nobody would think to re-test after an unrelated layout change.
+  const TEXT_SIZES = ['normal', 'large', 'larger'];
   for (const w of WIDTHS) {
+   for (const ts of TEXT_SIZES) {
     await page.setViewportSize({ width: w, height: 844 });
     await page.waitForTimeout(250);
-    const over = await page.evaluate(() => {
+    const over = await page.evaluate((tsz) => {
+      if (typeof setTextSize === 'function') setTextSize(tsz);
       const cards = [...document.querySelectorAll('.sefirah-card')];
       const shut = document.documentElement.scrollWidth - document.documentElement.clientWidth;
       const already = cards.filter(c => c.classList.contains('expanded'));
@@ -974,15 +984,18 @@ async function checkInBrowser(chromium) {
       const narrowest = vals.length ? Math.min(...vals) : null;
       cards.forEach(c => { if (!already.includes(c)) c.classList.remove('expanded'); });
       return { shut, open, narrowest, rows: vals.length };
-    });
-    if (over.shut > 0) fail(`${w}px wide, cards shut: page scrolls sideways by ${over.shut}px`);
-    else if (over.open > 0) fail(`${w}px wide, cards open: page scrolls sideways by ${over.open}px`);
-    else pass(`${w}px wide: no sideways scroll, shut or open`);
+    }, ts);
+    const at = `${w}px wide, text ${ts}`;
+    if (over.shut > 0) fail(`${at}, cards shut: page scrolls sideways by ${over.shut}px`);
+    else if (over.open > 0) fail(`${at}, cards open: page scrolls sideways by ${over.open}px`);
+    else pass(`${at}: no sideways scroll, shut or open`);
     if (over.narrowest !== null && over.narrowest < 120)
-      fail(`${w}px wide: the narrowest of ${over.rows} detail values is ${over.narrowest}px — too narrow to hold a word`);
+      fail(`${at}: the narrowest of ${over.rows} detail values is ${over.narrowest}px — too narrow to hold a word`);
     else if (over.narrowest !== null)
-      pass(`${w}px wide: every detail value at least ${over.narrowest}px across ${over.rows} rows`);
+      pass(`${at}: every detail value at least ${over.narrowest}px across ${over.rows} rows`);
+   }
   }
+  await page.evaluate(() => { if (typeof setTextSize === 'function') setTextSize('normal'); });
 
   if (crashes.length) crashes.slice(0, 5).forEach(c => fail('uncaught: ' + c));
 
