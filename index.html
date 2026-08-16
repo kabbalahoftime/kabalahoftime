@@ -885,7 +885,7 @@ padding-right: 6px;
    font-size, so it went on scaling at the full rate after the others were
    eased — and with overflow:hidden below it clipped the name rather than
    showing that it no longer fitted. Chochmah is the longest of the ten. */
-font-size: calc(11px * (1 + (var(--ts, 1) - 1) * 0.3));
+font-size: 11px;
 letter-spacing: 0.8px;
 /* was white-space:nowrap with overflow:hidden, which clipped the name in
    silence rather than letting it break. It may break now, and only at the
@@ -893,7 +893,7 @@ letter-spacing: 0.8px;
 overflow-wrap: break-word;
 }
 .upper-sefirah .sefirah-hebrew {
-font-size: calc(16px * var(--ts, 1));
+font-size: 16px;
 }
 
 .sefirot-grid {
@@ -967,16 +967,24 @@ flex-direction: column;
 align-items: flex-start;
 padding-top: 2px;
 border-right: 1px solid var(--border);
-padding-right: 12px;
+/* 6px, not 12. Half the gap to the divider is enough, and the 6px it
+   returns is most of what the longest names were short by. */
+padding-right: 6px;
 }
 
 .sefirah-name {
 font-family: 'Cinzel', serif;
-font-size: calc(11px * (1 + (var(--ts, 1) - 1) * 0.3));
+font-size: 11px;
 /* Tracking tightens as the type grows: 2px between letters is right at 11px
    and wasteful at 14px, where it is the spacing rather than the glyphs that
    pushes an eight-letter name past its column. */
-letter-spacing: calc(1.15px / var(--ts, 1));
+/* The name is set once and does not grow with the reader's text size, nor
+   does the Hebrew below it. They are the card's label, not its reading:
+   every text the card carries still scales, and holding these two still is
+   what lets a 70px column keep every name whole at every size. Growing them
+   — even at a reduced rate — put Gevurah, Netzach and Malchut back over the
+   edge at the larger settings, which was the whole of the complaint. */
+letter-spacing: 0.5px;
 text-transform: uppercase;
 color: var(--sefirah-color, var(--gold));
 margin-bottom: 5px;
@@ -985,10 +993,7 @@ font-weight: 600;
 
 .sefirah-hebrew {
 font-family: 'Frank Ruhl Libre', serif;
-/* Eased like the Latin name above it, and for the same reason: it is the
-   card's label, not its reading. At the full rate תפארת reached 76px in a
-   71px column at the largest text and spilled over the divider. */
-font-size: calc(22px * (1 + (var(--ts, 1) - 1) * 0.5));
+font-size: 22px;
 color: var(--sefirah-color, var(--gold));
 line-height: 1;
 opacity: 1;
