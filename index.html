@@ -885,7 +885,7 @@ padding-right: 6px;
    font-size, so it went on scaling at the full rate after the others were
    eased — and with overflow:hidden below it clipped the name rather than
    showing that it no longer fitted. Chochmah is the longest of the ten. */
-font-size: calc(11px * (1 + (var(--ts, 1) - 1) * 0.55));
+font-size: calc(11px * (1 + (var(--ts, 1) - 1) * 0.3));
 letter-spacing: 0.8px;
 /* was white-space:nowrap with overflow:hidden, which clipped the name in
    silence rather than letting it break. It may break now, and only at the
@@ -972,11 +972,11 @@ padding-right: 12px;
 
 .sefirah-name {
 font-family: 'Cinzel', serif;
-font-size: calc(11px * (1 + (var(--ts, 1) - 1) * 0.55));
+font-size: calc(11px * (1 + (var(--ts, 1) - 1) * 0.3));
 /* Tracking tightens as the type grows: 2px between letters is right at 11px
    and wasteful at 14px, where it is the spacing rather than the glyphs that
    pushes an eight-letter name past its column. */
-letter-spacing: calc(2px / var(--ts, 1));
+letter-spacing: calc(1.15px / var(--ts, 1));
 text-transform: uppercase;
 color: var(--sefirah-color, var(--gold));
 margin-bottom: 5px;
