@@ -2213,7 +2213,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sy-verse" lang="he">שֶׁמֶשׁ בְּגִבְעוֹן דּוֹם וְיָרֵחַ בְּעֵמֶק אַיָּלוֹן</div>
     <div class="sy-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo;
       <a href="https://www.sefaria.org/Joshua.10.12" target="_blank" style="color:var(--gold)">Yehoshua 10:12</a></div>
-    <button class="sy-check" onclick="toggleSong(event)" aria-pressed="false"><span class="sy-box">☐</span> said</button>
+    <button class="sy-check" onclick="toggleSong(event)" aria-pressed="false" aria-label="Mark the Song of Yehoshua as said"><span class="sy-box">☐</span></button>
   </div>
 
   <!-- THE DAY'S ZMANIM — the hour now, the hour next, and all twelve behind a tap -->
@@ -12478,7 +12478,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div class="path-31-verse" lang="he">שֶׁמֶשׁ בְּגִבְעוֹן דּוֹם וְיָרֵחַ בְּעֵמֶק אַיָּלוֹן</div>` +
         `<div class="path-31-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo; ` +
         `<a href="https://www.sefaria.org/Joshua.10.12" target="_blank" style="color:var(--gold)">Yehoshua 10:12</a></div>` +
-        `<button class="sy-check" onclick="toggleSong(event)" aria-pressed="false"><span class="sy-box">${songDone() ? '☑' : '☐'}</span> said</button>` +
+        `<button class="sy-check" onclick="toggleSong(event)" aria-pressed="false" aria-label="Mark the Song of Yehoshua as said"><span class="sy-box">${songDone() ? '☑' : '☐'}</span></button>` +
         `</div>`;
     }
     document.getElementById('todays-path-body').innerHTML = html;
