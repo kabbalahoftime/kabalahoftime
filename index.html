@@ -881,7 +881,11 @@ overflow: hidden;
 padding-right: 6px;
 }
 .upper-sefirah .sefirah-name {
-font-size: calc(11px * var(--ts, 1));
+/* Same half-rate growth as the other cards. This rule carried its own
+   font-size, so it went on scaling at the full rate after the others were
+   eased — and with overflow:hidden below it clipped the name rather than
+   showing that it no longer fitted. Chochmah is the longest of the ten. */
+font-size: calc(11px * (1 + (var(--ts, 1) - 1) * 0.55));
 letter-spacing: 0.8px;
 white-space: nowrap;
 overflow: hidden;
@@ -901,9 +905,14 @@ margin-bottom: 24px;
 .sefirah-card {
 background: var(--bg-card);
 border-radius: 3px;
-padding: 14px 18px;
+/* The left inset gives up 10px and the label track takes exactly that, so
+   the names get room without the reading column losing any. The track also
+   grows with the text scale: it was a flat 86px, which the longest names
+   overran even at the default size — Chochmah by 9px — and by 31px at the
+   largest. */
+padding: 14px 13px 14px 8px;
 display: grid;
-grid-template-columns: 86px 1fr;
+grid-template-columns: calc(96px + (var(--ts, 1) - 1) * 62px) 1fr;
 gap: 14px;
 align-items: start;
 position: relative;
@@ -962,13 +971,16 @@ flex-direction: column;
 align-items: flex-start;
 padding-top: 2px;
 border-right: 1px solid var(--border);
-padding-right: 12px;
+padding-right: 9px;
 }
 
 .sefirah-name {
 font-family: 'Cinzel', serif;
-font-size: calc(11px * var(--ts, 1));
-letter-spacing: 2px;
+font-size: calc(11px * (1 + (var(--ts, 1) - 1) * 0.55));
+/* Tracking tightens as the type grows: 2px between letters is right at 11px
+   and wasteful at 14px, where it is the spacing rather than the glyphs that
+   pushes an eight-letter name past its column. */
+letter-spacing: calc(2px / var(--ts, 1));
 text-transform: uppercase;
 color: var(--sefirah-color, var(--gold));
 margin-bottom: 5px;
@@ -1524,7 +1536,12 @@ transition: transform 0.3s;
 
 /* ── RESPONSIVE ── */
 @media (max-width: 480px) {
-.sefirah-card { grid-template-columns: 70px 1fr; gap: 10px; }
+/* The label track, which was a flat 70px on phones while the longest name
+   wanted 79 at the default size and 101 at the largest — the names had been
+   crossing their own divider all along, the larger text only made it plain.
+   It grows with the scale, but at a lower rate than the text: the reading
+   column has to be paid for out of the same 320px. */
+.sefirah-card { grid-template-columns: calc(89px + (var(--ts, 1) - 1) * 46px) 1fr; gap: 8px; }
 .weekly-items { grid-template-columns: 1fr; }
 .title-main { font-size: calc(20px * var(--ts, 1)); }
 .crown-text { font-size: calc(17px * var(--ts, 1)); }
