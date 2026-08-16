@@ -887,9 +887,10 @@ padding-right: 6px;
    showing that it no longer fitted. Chochmah is the longest of the ten. */
 font-size: calc(11px * (1 + (var(--ts, 1) - 1) * 0.55));
 letter-spacing: 0.8px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: clip;
+/* was white-space:nowrap with overflow:hidden, which clipped the name in
+   silence rather than letting it break. It may break now, and only at the
+   soft hyphen the name carries. */
+overflow-wrap: break-word;
 }
 .upper-sefirah .sefirah-hebrew {
 font-size: calc(16px * var(--ts, 1));
@@ -905,14 +906,9 @@ margin-bottom: 24px;
 .sefirah-card {
 background: var(--bg-card);
 border-radius: 3px;
-/* The left inset gives up 10px and the label track takes exactly that, so
-   the names get room without the reading column losing any. The track also
-   grows with the text scale: it was a flat 86px, which the longest names
-   overran even at the default size — Chochmah by 9px — and by 31px at the
-   largest. */
-padding: 14px 13px 14px 8px;
+padding: 14px 18px;
 display: grid;
-grid-template-columns: calc(96px + (var(--ts, 1) - 1) * 62px) 1fr;
+grid-template-columns: 86px 1fr;
 gap: 14px;
 align-items: start;
 position: relative;
@@ -971,7 +967,7 @@ flex-direction: column;
 align-items: flex-start;
 padding-top: 2px;
 border-right: 1px solid var(--border);
-padding-right: 9px;
+padding-right: 12px;
 }
 
 .sefirah-name {
@@ -1536,12 +1532,7 @@ transition: transform 0.3s;
 
 /* ── RESPONSIVE ── */
 @media (max-width: 480px) {
-/* The label track, which was a flat 70px on phones while the longest name
-   wanted 79 at the default size and 101 at the largest — the names had been
-   crossing their own divider all along, the larger text only made it plain.
-   It grows with the scale, but at a lower rate than the text: the reading
-   column has to be paid for out of the same 320px. */
-.sefirah-card { grid-template-columns: calc(89px + (var(--ts, 1) - 1) * 46px) 1fr; gap: 8px; }
+.sefirah-card { grid-template-columns: 70px 1fr; gap: 10px; }
 .weekly-items { grid-template-columns: 1fr; }
 .title-main { font-size: calc(20px * var(--ts, 1)); }
 .crown-text { font-size: calc(17px * var(--ts, 1)); }
@@ -2361,7 +2352,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
   <div class="sefirah-label-col">
-    <div class="sefirah-name" style="color:var(--accent-blue)">Chochmah</div>
+    <div class="sefirah-name" style="color:var(--accent-blue)">Choch­mah</div>
     <div class="sefirah-hebrew" style="color:var(--accent-blue)">חָכְמָה</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">12:54–1:23</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Maggid of Mezritch</div>
@@ -2388,7 +2379,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
   <div class="sefirah-label-col">
-    <div class="sefirah-name" style="color:var(--accent-red)">Binah</div>
+    <div class="sefirah-name" style="color:var(--accent-red)">Bi­nah</div>
     <div class="sefirah-hebrew" style="color:var(--accent-red)">בִּינָה</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">1:23–1:52</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Meor Einayim</div>
@@ -2425,7 +2416,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="sefirah-card" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
   <div class="sefirah-label-col">
-    <div class="sefirah-name">Chesed</div>
+    <div class="sefirah-name">Che­sed</div>
     <div class="sefirah-hebrew">חֶסֶד</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">1:43–5:09</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Kedushas Levi</div>
@@ -2448,7 +2439,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="sefirah-card" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
   <div class="sefirah-label-col">
-    <div class="sefirah-name">Gevurah</div>
+    <div class="sefirah-name">Gevu­rah</div>
     <div class="sefirah-hebrew">גְּבוּרָה</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">5:09–8:35</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Noam Elimelech</div>
@@ -2473,7 +2464,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="sefirah-card" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
   <div class="sefirah-label-col">
-    <div class="sefirah-name">Tiferet</div>
+    <div class="sefirah-name">Tife­ret</div>
     <div class="sefirah-hebrew">תִּפְאֶרֶת</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">8:35–12:00</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Alter Rebbe</div>
@@ -2496,7 +2487,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="sefirah-card" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
   <div class="sefirah-label-col">
-    <div class="sefirah-name">Netzach</div>
+    <div class="sefirah-name">Net­zach</div>
     <div class="sefirah-hebrew">נֶצַח</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">12:00–3:26</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Rebbe Nachman</div>
@@ -2551,7 +2542,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="sefirah-card" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
   <div class="sefirah-label-col">
-    <div class="sefirah-name">Yesod</div>
+    <div class="sefirah-name">Ye­sod</div>
     <div class="sefirah-hebrew">יְסוֹד</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">6:52–10:18</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Chida</div>
@@ -3198,7 +3189,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 <div class="sefirah-card malchut-card" onclick="toggleExpand(this)">
   <span class="expand-icon">▾</span>
   <div class="sefirah-label-col">
-    <div class="sefirah-name">Malchut</div>
+    <div class="sefirah-name">Mal­chut</div>
     <div class="sefirah-hebrew">מַלְכוּת</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">10:18–1:43</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Rebbe</div>
