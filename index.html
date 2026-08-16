@@ -1917,6 +1917,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   color:var(--ink); line-height:1.7; letter-spacing:0; }
 #song-yehoshua .sy-en { font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid);
   font-style:italic; margin-top:4px; }
+.sy-check { background:none; border:none; cursor:pointer; display:inline-block;
+  font-family:'Cormorant Garamond',serif; font-size:calc(13px * var(--ts, 1));
+  color:var(--gold); margin-top:6px; padding:3px 10px; position:relative; }
+/* the same invisible 44px band the other controls carry, so the drawn size
+   stays small without the finger having to be accurate */
+.sy-check::after { content:''; position:absolute; left:0; right:0; top:50%;
+  transform:translateY(-50%); height:44px; }
+.sy-check .sy-box { font-size:1.15em; }
+.sy-check.done { color:var(--gold-mid); }
 
 /* ── TAP TARGETS ──
    A finger is about 44px across, and several controls were drawn at a third
@@ -2204,6 +2213,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sy-verse" lang="he">שֶׁמֶשׁ בְּגִבְעוֹן דּוֹם וְיָרֵחַ בְּעֵמֶק אַיָּלוֹן</div>
     <div class="sy-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo;
       <a href="https://www.sefaria.org/Joshua.10.12" target="_blank" style="color:var(--gold)">Yehoshua 10:12</a></div>
+    <button class="sy-check" onclick="toggleSong(event)" aria-pressed="false"><span class="sy-box">☐</span> said</button>
   </div>
 
   <!-- THE DAY'S ZMANIM — the hour now, the hour next, and all twelve behind a tap -->
@@ -11930,6 +11940,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     ['.maalah',        'done',             'aria-pressed'],
     ['.star-mark',     'lit',              'aria-pressed'],
     ['.sefirah-card',  'expanded',         'aria-expanded'],
+    ['.sy-check',      'done',             'aria-pressed'],
     ['.year-pill-btn', 'year-pill-active', 'aria-pressed'],
     ['.lang-btn',      'active',           'aria-pressed']
   ];
@@ -12211,6 +12222,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // bottom, so it reads (1 << n) - 1.
   let _yomKey = null;       // legacy: the highest מיעוט reached, 0-15
   let _yomMaskKey = null;   // a 15-bit mask, filled from the bottom in order
+  // Whether the day's thirty-first — the Song of Yehoshua — has been said.
+  // Its own key, and it feeds nothing: not the count, not whether the day
+  // reads as complete. The thirty are the month; this stands outside it.
+  let _songKey = null;
+  function songDone() {
+    try { return localStorage.getItem(_songKey) === '1'; } catch (e) { return false; }
+  }
+  function toggleSong(e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    if (!_songKey) return;
+    try { localStorage.setItem(_songKey, songDone() ? '0' : '1'); } catch (err) {}
+    applySongState();
+    if (document.getElementById('todays-path-modal').style.display === 'flex') openTodaysPath();
+  }
+  function applySongState() {
+    const done = songDone();
+    document.querySelectorAll('.sy-check').forEach(el => {
+      el.classList.toggle('done', done);
+      const b = el.querySelector('.sy-box');
+      if (b) b.textContent = done ? '☑' : '☐';
+    });
+    if (typeof syncA11yState === 'function') syncA11yState();
+  }
 
   // The ma'alot descend in order — each step is the vessel for the next — and
   // the return is taken the same way, once the moon is full. A day written
@@ -12444,6 +12478,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div class="path-31-verse" lang="he">שֶׁמֶשׁ בְּגִבְעוֹן דּוֹם וְיָרֵחַ בְּעֵמֶק אַיָּלוֹן</div>` +
         `<div class="path-31-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo; ` +
         `<a href="https://www.sefaria.org/Joshua.10.12" target="_blank" style="color:var(--gold)">Yehoshua 10:12</a></div>` +
+        `<button class="sy-check" onclick="toggleSong(event)" aria-pressed="false"><span class="sy-box">${songDone() ? '☑' : '☐'}</span> said</button>` +
         `</div>`;
     }
     document.getElementById('todays-path-body').innerHTML = html;
@@ -13002,6 +13037,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     _maalotKey = 'kotMaalot:' + hYear + '-' + hMonth + '-' + hDay;
     _yomKey     = 'kotYom:' + hYear + '-' + hMonth + '-' + hDay;
     _yomMaskKey = 'kotYomMask:' + hYear + '-' + hMonth + '-' + hDay;
+    _songKey    = 'kotSong:' + hYear + '-' + hMonth + '-' + hDay;
     _prayerKey = 'kotPrayers:' + hYear + '-' + hMonth + '-' + hDay;
     _starsKey  = 'kotStars:' + hYear + '-' + hMonth + '-' + hDay;
     setTimeout(applyMaalotState, 0); // after this render's innerHTML writes settle
@@ -13009,6 +13045,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     setTimeout(applyStarState, 0);
     setTimeout(injectCycleInfoButtons, 0); // re-append ⓘ after this render's rewrites
     setTimeout(applyA11y, 0);        // name, role and state for anything tappable
+    setTimeout(applySongState, 0);   // the thirty-first's own mark, per day
     const hMname = HEB_MONTH_NAMES[hMonth] || '';
     const hDateStr = `${hDay} ${hMname} ${hYear}`;
 
