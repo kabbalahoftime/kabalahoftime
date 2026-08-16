@@ -1908,6 +1908,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .ps-line .ps-who { font-weight:600; }
 .ps-line .ps-src { color:var(--ink-mid); font-size:0.86em; font-style:italic; }
 
+/* The thirty-first, under the clock: shown only once the day's thirty steps
+   are done. Same box as Perek Shirah above it, centred, since it is a seal
+   rather than a reading. */
+#song-yehoshua { margin:12px 16px 0; padding:10px 14px; border:1px solid var(--border-strong);
+  border-left:3px solid var(--gold); border-radius:4px; background:var(--bg-card); text-align:center; }
+#song-yehoshua .sy-verse { font-family:'Frank Ruhl Libre',serif; font-size:calc(16px * var(--ts, 1));
+  color:var(--ink); line-height:1.7; letter-spacing:0; }
+#song-yehoshua .sy-en { font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid);
+  font-style:italic; margin-top:4px; }
+
 /* ── TAP TARGETS ──
    A finger is about 44px across, and several controls were drawn at a third
    of that — the language pills at 19px tall, the date-jump line at 11. Two
@@ -2185,6 +2195,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       </div>
       <div class="dc-label">Ma'alot &nbsp;מעלות</div>
     </div>
+  </div>
+
+  <!-- THE THIRTY-FIRST — the seal of a completed path. Hidden until the day's
+       thirty steps are all marked; updateMaalotMoon shows it. -->
+  <div id="song-yehoshua" style="display:none;">
+    <div class="ps-label"><span style="letter-spacing:0">ל״א</span> · The Song of Yehoshua</div>
+    <div class="sy-verse" lang="he">שֶׁמֶשׁ בְּגִבְעוֹן דּוֹם וְיָרֵחַ בְּעֵמֶק אַיָּלוֹן</div>
+    <div class="sy-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo;
+      <a href="https://www.sefaria.org/Joshua.10.12" target="_blank" style="color:var(--gold)">Yehoshua 10:12</a></div>
   </div>
 
   <!-- THE DAY'S ZMANIM — the hour now, the hour next, and all twelve behind a tap -->
@@ -11802,6 +11821,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (wrap) wrap.title = sun
       ? 'והיה אור הלבנה כאור החמה — the light of the moon shall be as the light of the sun (Isaiah 30:26) · Or Chozer: fifteen waning steps return from Keter to Malchut'
       : "Today's ma'alot — tap each מעלה tag in order";
+    // The thirty-first appears when the thirty are complete, and goes again if
+    // a step is unmarked — it is the seal of a finished path, not a trophy.
+    const song = document.getElementById('song-yehoshua');
+    if (song) song.style.display = (sun && w === 15) ? '' : 'none';
   }
 
   // ── THE TEN PRAYERS — one per Sefirah, a heart that fills through the day ──
@@ -12417,7 +12440,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // where the luminaries have nothing left to count — which is what
       // Yehoshua asked of them. No checkbox: it is not a step to be taken.
       html += `<div class="path-31">` +
-        `<div class="path-31-title">ל״א · The Song of Yehoshua</div>` +
+        `<div class="path-31-title"><span style="letter-spacing:0">ל״א</span> · The Song of Yehoshua</div>` +
         `<div class="path-31-verse" lang="he">שֶׁמֶשׁ בְּגִבְעוֹן דּוֹם וְיָרֵחַ בְּעֵמֶק אַיָּלוֹן</div>` +
         `<div class="path-31-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo; ` +
         `<a href="https://www.sefaria.org/Joshua.10.12" target="_blank" style="color:var(--gold)">Yehoshua 10:12</a></div>` +
