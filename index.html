@@ -2549,6 +2549,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Beis Aharon</div>
     <div class="prayer-tag" data-prayer="5" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Tehilim</div>
     <div id="gevurah-kot-song" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;"></div>
+    <div id="gevurah-kot-song-8" style="display:none;font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;"></div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
@@ -14870,11 +14871,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>`
         : tanachInfo.text;
     document.getElementById('gevurah-tags').innerHTML = '';
-    const _kotSong = KOT_SONGS[(sef.dayNum - 1) % 7];
+    const _kotDay = ((sef.dayNum - 1) % 7) + 1;
+    const _kotSong = KOT_SONGS[_kotDay - 1];
     const _kotSongEl = document.getElementById('gevurah-kot-song');
     if (_kotSongEl && _kotSong) {
       _kotSongEl.textContent = '\u266a ' + _kotSong.song;
       _kotSongEl.title = 'KoT Song \u00b7 ' + _kotSong.book;
+    }
+    // The eighth. It is not one of the seven and is not indexed among them —
+    // it stands on the seam, so it is shown on the two days that touch it: the
+    // seventh, where the week's songs are gathered, and the first, where they
+    // begin again. Thirty-two words of the Well and twenty of Yehoshua, which
+    // is fifty-two, the weeks of the year the seven days run through.
+    const _eighthEl = document.getElementById('gevurah-kot-song-8');
+    if (_eighthEl) {
+      const onSeam = _kotDay === 7 || _kotDay === 1;
+      _eighthEl.style.display = onSeam ? '' : 'none';
+      if (onSeam) {
+        _eighthEl.textContent = '\u266a Day 8 \u00b7 Well & Yehoshua';
+        _eighthEl.title = 'KoT Song \u00b7 Day 8 \u2014 the Song of the Well (32 words) '
+          + 'with the Song of Yehoshua (20): fifty-two, joining Book 7 to Book 1';
+      }
     }
     document.getElementById('gevurah-detail').innerHTML =
        (() => {
