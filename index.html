@@ -2215,7 +2215,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        book began here, and until now the verses sat in the file unused while
        only the animal's name was shown, inside a field of Book 1. -->
   <div id="perek-shirah-week" style="display:none;">
-    <div class="ps-label">Perek Shirah · this week</div>
+    <div class="ps-label"><a id="ps-doc-link" target="_blank" style="color:inherit">Perek Shirah</a> · this week</div>
     <div class="ps-line" id="ps-line"></div>
   </div>
 
@@ -9147,11 +9147,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // pattern the rest of the app uses; the seventh is not a text but a KoT book,
   // so it opens the week's own Book 7 page instead, and its url is filled in at
   // render time from getWeeklyData.
+  // Perek Shirah's own text. Named here rather than written out twice: the
+  // KoT Song line in Gevurah and the banner under the clock both open it, and
+  // an address kept in two places drifts apart at the first edit.
+  const PEREK_SHIRAH_DOC = 'https://drive.google.com/file/d/1xxapONpPFZ5jZrUqnMrcgY0zUOWqZl5V/view?usp=drivesdk';
+
   const KOT_SONGS = [
     { song: 'Perek Shirah',       book: 'Book 1 · Song of Nature',
       // Given rather than derived — the Sefaria slug here was a guess, since
       // Perek Shirah is a work's title and not a book of Tanach like the rest.
-      url: 'https://drive.google.com/file/d/1xxapONpPFZ5jZrUqnMrcgY0zUOWqZl5V/view?usp=drivesdk' },
+      url: PEREK_SHIRAH_DOC                                       },
     { song: 'Haazinu',            book: 'Book 2 · Song of Moses',
       url: 'https://www.sefaria.org/Deuteronomy.32?lang=bi'        },
     { song: 'Shirat HaYam',       book: 'Book 3 · Song of the Sea',
@@ -15735,6 +15740,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const el = document.getElementById('perek-shirah-week');
       const line = document.getElementById('ps-line');
       if (!el || !line) return;
+      // The href is set here rather than written into the markup so the one
+      // address above stays the only one. Until then the anchor has none, and
+      // an anchor without an href is not a link — which is right, because the
+      // banner is hidden until there is a creature to name.
+      const docLink = document.getElementById('ps-doc-link');
+      if (docLink) docLink.href = PEREK_SHIRAH_DOC;
       const animal = wk && wk.b1_animal;
       if (!animal) { el.style.display = 'none'; return; }
       const verse = PEREK_SHIRAH_VERSES[animal];
