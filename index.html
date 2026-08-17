@@ -762,6 +762,21 @@ margin-bottom: 6px;
 letter-spacing: 2px;
 font-size: calc(10.5px * var(--ts, 1));
 }
+/* Two source lines — "Living Likutei Moharan · today's summary" and
+   "Ohr HaChaim HaKadosh · Parashat …" — are a name beside the thing it opens,
+   and they read as one line or not at all. Enlarged they were breaking in the
+   middle: at the largest setting on a 390px phone the first wanted 293px of
+   266, the second 345px of 290. They are eased at the same half rate as the
+   headings, and the parasha link is brought down to the size of the label
+   naming it so the pair scales together.
+   This helps rather than settles it: it holds one line at 430 at every size
+   and at 390 up to "large", and shortens the overrun elsewhere without
+   closing it. Closing it entirely needed words removed, and the words stay. */
+:root[data-textsize] .src-line {
+  font-size: calc(1em * (1 + (var(--ts, 1) - 1) * 0.5) / var(--ts, 1));
+}
+:root[data-textsize] a.src-line { font-size: calc(0.72em * (1 + (var(--ts, 1) - 1) * 0.5) / var(--ts, 1)); }
+
 /* Section headings are eased when the reader enlarges the text: half the rate
    of growth, and the tracking cut to the 0.8px the sefirah names use. They are
    small-capital labels rather than reading matter, and at the full rate they
@@ -2355,7 +2370,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-main-text" id="keter-lm-main" style="margin-top:4px;">Loading…</div>
     <div class="malchut-ksa-row" style="margin-top:10px">
       <div class="keter-section-label">✡ KoT Book</div>
-      <div><a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a> &nbsp;·&nbsp; <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button></div>
+      <div class="src-line"><a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a> &nbsp;·&nbsp; <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button></div>
     </div>
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
@@ -13520,7 +13535,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           ` — <a href="${ohUrl}" target="_blank" style="color:var(--gold)">${kstParts[0]}</a>` +
           ` &nbsp;·&nbsp; <a href="${ohUrlFor(kstParashaNum2)}" target="_blank" style="color:var(--gold)">${kstParts[1]}</a>` +
           ``
-        : `<br><span style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim HaKadosh ·</span> <a href="${ohUrl}" target="_blank" style="color:var(--gold)">Parashat ${kstParasha || '—'}</a>`;
+        : `<br><span class="src-line" style="color:var(--ink-mid);font-size:0.72em">Ohr HaChaim HaKadosh ·</span> <a class="src-line" href="${ohUrl}" target="_blank" style="color:var(--gold)">Parashat ${kstParasha || '—'}</a>`;
 
       document.getElementById('keter-kst-label').innerHTML = '✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה ב׳</span>';
 
