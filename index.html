@@ -1566,13 +1566,29 @@ transition: transform 0.3s;
    flex-wrap is kept as a floor, not a plan. */
 .daily-script-lang-bar { flex-basis: 100%; flex-wrap: wrap;
   justify-content: flex-end; row-gap: 6px; }
-/* The smallest phones give the line 206px and the buttons want 216. Ten pixels
-   out of the gaps and the padding keeps them on one row, which matters more
-   than it looks: wrapped, each 19px button's 44px reach lands on the button
-   above it, and neither can be tapped reliably. */
+/* Keeping the buttons on one row matters more than it looks: wrapped, each
+   19px button's 44px reach lands on the one above it and neither can be
+   tapped reliably. So where the row is a few pixels short, the pixels come
+   out of the gaps and the padding rather than out of the layout.
+   At the largest text the bar is 4px too wide for a 375px phone — */
+/* The separator's own box lives here rather than inline: an inline margin
+   outranks every selector, so the trimming below could not reach it. */
+.lang-bar-sep { width: 1px; height: 14px; background: var(--border);
+  display: inline-block; margin: 0 3px; vertical-align: middle; }
+:root[data-textsize="larger"] .daily-script-lang-bar { column-gap: 2px; }
+:root[data-textsize="larger"] .daily-script-lang-bar .lang-btn { padding: 2px 5px; }
+/* — and on the smallest phones it is short at every size, so it is trimmed
+   harder there. Each selector is doubled with the attribute form: a media
+   query adds no specificity, so a bare .daily-script-lang-bar inside one
+   still loses to the :root[data-textsize] rule above it however late it
+   comes, and the tighter value was being thrown away. */
 @media (max-width: 360px) {
-  .daily-script-lang-bar { column-gap: 2px; }
-  .daily-script-lang-bar .lang-btn { padding: 2px 5px; }
+  .daily-script-lang-bar,
+  :root[data-textsize] .daily-script-lang-bar { column-gap: 1px; }
+  .daily-script-lang-bar .lang-btn,
+  :root[data-textsize] .daily-script-lang-bar .lang-btn { padding: 2px 5px; }
+  .daily-script-lang-bar .lang-bar-sep,
+  :root[data-textsize] .daily-script-lang-bar .lang-bar-sep { margin: 0; }
 }
 .lang-btn {
   background: none;
@@ -3339,14 +3355,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;" onclick="toggleDailyScript()">
       <span style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);letter-spacing:1.5px;flex:1;text-transform:uppercase;">Daily Script</span>
       <span id="daily-script-expand-icon" style="color:var(--gold);font-size:calc(16px * var(--ts, 1));line-height:1;">▾</span>
-      <div class="daily-script-lang-bar" onclick="event.stopPropagation()">
+      <div class="daily-script-lang-bar">
         <button class="lang-btn active" id="lang-btn-en" onclick="setScriptLang('en')">EN</button>
         <button class="lang-btn" id="lang-btn-he" onclick="setScriptLang('he')">HE</button>
         <button class="lang-btn" id="lang-btn-es" onclick="setScriptLang('es')">ES</button>
         <button class="lang-btn" id="lang-btn-fr" onclick="setScriptLang('fr')">FR</button>
         <button class="lang-btn" id="lang-btn-pt" onclick="setScriptLang('pt')">PT</button>
-        <span style="width:1px;height:14px;background:var(--border);display:inline-block;margin:0 3px;vertical-align:middle;"></span>
-        <button class="lang-btn" id="beginner-btn" onclick="toggleBeginnerMode()" style="letter-spacing:0.3px;">Basic</button>
+        <span class="lang-bar-sep"></span>
+        <button class="lang-btn" id="beginner-btn" onclick="toggleBeginnerMode()" style="letter-spacing:0.3px;">Beginner</button>
       </div>
     </div>
     <div id="daily-script-body" style="display:none">
@@ -16189,6 +16205,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     window.netzachOverlap = !!on;
     render();
   }
+
+  // Taps inside the language strip must not reach the header that opens the
+  // panel. This is a listener rather than an onclick attribute: the attribute
+  // made the strip look like a control to applyA11y, which duly announced it
+  // as a button named "EN HE ES FR PT Beginner" and put it in the tab order.
+  (function () {
+    const bar = document.querySelector('.daily-script-lang-bar');
+    if (bar) bar.addEventListener('click', e => e.stopPropagation());
+  })();
 
   function toggleDailyScript() {
     const body = document.getElementById('daily-script-body');
