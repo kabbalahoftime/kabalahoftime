@@ -896,9 +896,12 @@ letter-spacing: 0.8px;
    soft hyphen the name carries. */
 overflow-wrap: break-word;
 }
-.upper-sefirah .sefirah-hebrew {
-font-size: 16px;
-}
+/* The upper two used to draw their Hebrew at 16px against the other eight's
+   22px, which read as a different rank rather than a different pair. They
+   have the same 70px label column on a phone and the same 63px of room
+   inside it, and חָכְמָה — the widest of the two — needs 46px of that at the
+   full size. So there is nothing to buy by shrinking them, and they are
+   left to inherit. */
 
 .sefirot-grid {
 display: flex;
