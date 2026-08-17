@@ -14319,10 +14319,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       else halfIdx = idx;
     }
     const tractData = tractMicro ? tractMicro[0] : TRACTATE_CYCLES[tractHalfIdx];
+    // Unlabelled, like the reference beside it: the link at the head of this
+    // block already reads "Hebrew Alphabet, Perek Shirah, and Pirkei Avot", so
+    // naming it again on the line only cost the width the element needed.
     // The half's element of Perek Shirah, from the same appendix as the letters
     // and the mishnah. In the microcosm a day can hold two halves, and so two
     // elements — the trees and the vine on one day.
     const psElems = halfIdx.map(i => PEREK_SHIRAH_ELEMENTS[i]).filter(Boolean);
+    // The reference is bare — 21:20, not Bamidbar 21:20 — for the same reason
+    // the Perek Shirah line above it reads "Ch 3": the label has already named
+    // the book. Naming it here pushed the reference onto a line of its own and
+    // left the middot hanging off the end of the Hebrew.
     // The half's word of the Song of the Well, on that same index. Thirty-two
     // words fill thirty-three halves because במחקק is held across both halves
     // of the stars, 15 and 16, as Perek Shirah holds the stars across them.
@@ -14335,14 +14342,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_URLS[cy22.cycle - 1]}" target="_blank" style="color:var(--gold);font-size:0.88em">This Set</a>`
         : '') +
       (psElems.length
-        ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Perek Shirah:</span> ` +
+        ? `<div style="margin-top:3px;font-size:0.88em;">` +
           psElems.map(p => `<strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif" lang="he">${p.heb}</span>`).join(' &amp; ') +
-          ` <span style="color:var(--ink-dim);font-size:0.9em">· ${psElems[0].ch}</span></div>`
+          ` <span style="color:var(--ink-dim);font-size:0.9em">&middot;&nbsp;${psElems[0].ch.replace(' ', '\u00a0')}</span></div>`
         : '') +
       (sbWords.length
         ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Song of the Well:</span> ` +
           sbWords.map(b => `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em" lang="he">${b.w}</span>`).join(' &amp; ') +
-          ` <span style="color:var(--ink-dim);font-size:0.9em">· ${sbWords.map(b => b.v).filter((v,i,a) => a.indexOf(v) === i).map(v => 'Bamidbar 21:' + v).join(', ')}</span></div>`
+          ` <span style="font-size:0.9em">&middot;&nbsp;</span>${(() => {
+              const vs = sbWords.map(b => b.v).filter((v, i, a) => a.indexOf(v) === i);
+              // A day in the microcosm can take two halves from two verses; the
+              // link then opens the span rather than either end of it.
+              const range = vs.length > 1 ? `${vs[0]}-${vs[vs.length - 1]}` : `${vs[0]}`;
+              // The anchor sits in the line itself rather than inside a span of
+              // its own: it is an inline citation in a run of text, like the
+              // one under the Song of Yehoshua, and the tap-target check reads
+              // that from how much text its parent carries beside it.
+              return `<a href="https://www.sefaria.org/Numbers.21.${range}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.9em">${vs.map(v => '21:' + v).join(',\u00a0')}</a>`;
+            })()}</div>`
         : '') +
       // What today's letters stand for — the same appendix, one sentence each,
       // behind a tap because the face has already named them.
