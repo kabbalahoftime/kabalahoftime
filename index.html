@@ -762,6 +762,22 @@ margin-bottom: 6px;
 letter-spacing: 2px;
 font-size: calc(10.5px * var(--ts, 1));
 }
+/* Section headings are eased when the reader enlarges the text: half the rate
+   of growth, and the tracking cut to the 0.8px the sefirah names use. They are
+   small-capital labels rather than reading matter, and at the full rate they
+   were spending the width without carrying more meaning — "מעלה ב׳" was being
+   pushed onto a line of its own with two hundred empty pixels beside it, and
+   the same was happening to half the headings in the app. Eased, that label
+   holds one line again: 41px tall becomes 23px, and the headings together take
+   553px at the largest setting where they took 800.
+   Content is untouched; only the labels are damped. The ID is named because
+   #keter-kst-label sets its own letter-spacing and a class cannot reach past
+   it. The half-rate form is the one .sefirah-name already uses. */
+:root[data-textsize] .keter-section-label,
+:root[data-textsize] #keter-kst-label {
+  letter-spacing: 0.8px;
+  font-size: calc(10.5px * (1 + (var(--ts, 1) - 1) * 0.5));
+}
 /* Keep each phrase whole, but let the label wrap rather than widen the card */
 .kl-part { white-space: nowrap; }
 /* …unless the reader has enlarged the text, where "Light that is Good" with
