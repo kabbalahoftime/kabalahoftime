@@ -6069,7 +6069,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // grasses for the vowels. So these run one for one with TRACTATE_CYCLES
   // below, and the ids are kept alongside to say so. Set 8 — Samech and Ayin
   // — is the one set the appendix gives a single element, the Stars, and both
-  // of its halves carry it.
+  // of its halves carry it. Chapter 2 is the reason: eleven entries, every one
+  // paired but that one, and it falls in Adar, the month that doubles. Chapter
+  // 3 has the mirror of it — eleven again, five pairs and the Grasses alone,
+  // which is why the thirty-third half stands by itself.
+  //
+  // Checked against the booklet itself, in full: all 33 elements here and all
+  // 52 creature songs in PEREK_SHIRAH_VERSES, verse text and citation both,
+  // and in the booklet's own order. One citation differs, and this list is the
+  // one that is right: for the bat the booklet prints Isaiah 1:40, where the
+  // verse — Nachamu nachamu ami — is 40:1, and the booklet's own next entries
+  // run 40:2, 40:3, 40:6. Do not "correct" it back.
   // Text and citations are the Perek Shirah booklet's own.
   const PEREK_SHIRAH_ELEMENTS = [
     { id:'1a', el:'Heavens', heb:'הַשָּׁמַיִם', ch:'Ch 1', src:'Psalms 19:2',
@@ -6152,9 +6162,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // the song is thirty-five. No consistent rule yields thirty-three.
   //
   // The half that makes up the difference is the one Perek Shirah itself
-  // doubles. Halves 15 and 16 are both the stars — the single stars, then the
-  // constellations — and במחקק, which falls on the first of them, is held for
-  // the second as well. One word read twice where the sky is named twice,
+  // doubles. Chapter 2 runs to eleven entries where chapter 1 runs to ten, and
+  // every one of them pairs — Day with Night, Sun with Moon, Thick Clouds with
+  // Light Clouds, Wind with Lightning, Dew with Rains — except the stars, which
+  // stand alone and so take both halves of their set. That set falls in Adar,
+  // the month that doubles in a leap year. Not, as this comment once said,
+  // stars and then constellations: no מזלות entry exists in the source, and
+  // half 16 repeats half 15 exactly. So במחקק, falling on the first of the two,
+  // is held for the second. One word read twice where the sky is named twice,
   // rather than a word dropped or a maqqef split inconsistently to make the
   // number come out.
   //
