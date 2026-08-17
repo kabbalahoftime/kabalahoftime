@@ -2456,6 +2456,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">12:54–1:23</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Maggid of Mezritch</div>
     <div class="prayer-tag" data-prayer="2" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Tikkun Rachel</div>
+    <div title="Shirat HaBe'er &middot; Bamidbar 21:17-20 &middot; one word to each of the 33 halves, the vowels none" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">&#9834; Shirat HaBe&rsquo;er</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef-Bet — 22-Day Cycle</div>
@@ -6134,6 +6135,66 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       verse:'You water its furrows abundantly; You settle its ridges; you make it soft with showers; You bless its growth.' },
     { id:'17a', el:'Grasses', heb:'דְּשָׁאִים', ch:'Ch 3', src:'Psalms 104:31',
       verse:'May the glory of God endure forever; may God rejoice in His works.' },
+  ];
+
+  // ── SHIRAT HABE'ER — the Song of the Well, Bamidbar 21:17-20 ──
+  // One word to each of the 33 eleven-day halves, in the same order and on the
+  // same index as PEREK_SHIRAH_ELEMENTS above: halves 1-22 the open letters,
+  // 23-32 the ten that fall on the five finals, 33 the vowels.
+  //
+  // Thirty-two words, not thirty-three. Counted as accentual units, a maqqef
+  // pair reading as the one unit its accent makes it: את־השירה, ענו־לה and
+  // על־פני each stand as one. Counted the other way, every תיבה its own, the
+  // song is thirty-five. There is no consistent rule that yields thirty-three,
+  // and thirty-two is לב.
+  //
+  // So the last half has no word, and that is the point of it rather than a
+  // gap: the vowels are the breath that sounds the thirty-two vessels, not a
+  // thirty-third vessel beside them. Grasses take that half in Perek Shirah,
+  // and they take it unaccompanied.
+  //
+  // Pointed but not cantillated. The te'amim were in the text as given and are
+  // dropped here for two reasons: a word standing alone has no phrase for a
+  // cantillation mark to divide, and the Hebrew face cannot draw them — Frank
+  // Ruhl Libre declares U+0590-05FF but ships no glyphs for U+0591-05AF, so
+  // every ta'am falls back to whatever serif the device has and the marks come
+  // out in a different hand from the letters they sit on.
+  //
+  // Transcribed from the text supplied. sefaria.org and chabad.org are blocked
+  // from this environment; this is right because it was given, not checked.
+  const SHIRAT_HABEER = [
+    { w:'אָז', v:17 },  //  1 · אז
+    { w:'יָשִׁיר', v:17 },  //  2 · ישיר
+    { w:'יִשְׂרָאֵל', v:17 },  //  3 · ישראל
+    { w:'אֶת־הַשִּׁירָה', v:17 },  //  4 · את־השירה
+    { w:'הַזֹּאת', v:17 },  //  5 · הזאת
+    { w:'עֲלִי', v:17 },  //  6 · עלי
+    { w:'בְאֵר', v:17 },  //  7 · באר
+    { w:'עֱנוּ־לָהּ', v:17 },  //  8 · ענו־לה
+    { w:'בְּאֵר', v:18 },  //  9 · באר
+    { w:'חֲפָרוּהָ', v:18 },  // 10 · חפרוה
+    { w:'שָׂרִים', v:18 },  // 11 · שרים
+    { w:'כָּרוּהָ', v:18 },  // 12 · כרוה
+    { w:'נְדִיבֵי', v:18 },  // 13 · נדיבי
+    { w:'הָעָם', v:18 },  // 14 · העם
+    { w:'בִּמְחֹקֵק', v:18 },  // 15 · במחקק
+    { w:'בְּמִשְׁעֲנֹתָם', v:18 },  // 16 · במשענתם
+    { w:'וּמִמִּדְבָּר', v:18 },  // 17 · וממדבר
+    { w:'מַתָּנָה', v:18 },  // 18 · מתנה
+    { w:'וּמִמַּתָּנָה', v:19 },  // 19 · וממתנה
+    { w:'נַחֲלִיאֵל', v:19 },  // 20 · נחליאל
+    { w:'וּמִנַּחֲלִיאֵל', v:19 },  // 21 · ומנחליאל
+    { w:'בָּמוֹת', v:19 },  // 22 · במות
+    { w:'וּמִבָּמוֹת', v:20 },  // 23 · ומבמות
+    { w:'הַגַּיְא', v:20 },  // 24 · הגיא
+    { w:'אֲשֶׁר', v:20 },  // 25 · אשר
+    { w:'בִּשְׂדֵה', v:20 },  // 26 · בשדה
+    { w:'מוֹאָב', v:20 },  // 27 · מואב
+    { w:'רֹאשׁ', v:20 },  // 28 · ראש
+    { w:'הַפִּסְגָּה', v:20 },  // 29 · הפסגה
+    { w:'וְנִשְׁקָפָה', v:20 },  // 30 · ונשקפה
+    { w:'עַל־פְּנֵי', v:20 },  // 31 · על־פני
+    { w:'הַיְשִׁימֹן', v:20 },  // 32 · הישימן
   ];
 
   // Tractate / 11-day half-cycle data (33 entries: 1a–16b = 11 days each; 17a = 12 days)
@@ -14245,6 +14306,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // and the mishnah. In the microcosm a day can hold two halves, and so two
     // elements — the trees and the vine on one day.
     const psElems = halfIdx.map(i => PEREK_SHIRAH_ELEMENTS[i]).filter(Boolean);
+    // The half's word of the Song of the Well, on that same index. The 33rd
+    // half returns nothing — the song is 32 words and the vowels carry none.
+    const sbWords = halfIdx.map(i => SHIRAT_HABEER[i]).filter(Boolean);
 
     // KoT Book — displayed on the Chochmah card face
     document.getElementById('chochmah-kot-book').innerHTML =
@@ -14254,8 +14318,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         : '') +
       (psElems.length
         ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Perek Shirah:</span> ` +
-          psElems.map(p => `<strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif">${p.heb}</span>`).join(' &amp; ') +
+          psElems.map(p => `<strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif" lang="he">${p.heb}</span>`).join(' &amp; ') +
           ` <span style="color:var(--ink-dim);font-size:0.9em">· ${psElems[0].ch}</span></div>`
+        : '') +
+      (sbWords.length
+        ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Shirat HaBe'er:</span> ` +
+          sbWords.map(b => `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em" lang="he">${b.w}</span>`).join(' &amp; ') +
+          ` <span style="color:var(--ink-dim);font-size:0.9em">· ${sbWords.map(b => b.v).filter((v,i,a) => a.indexOf(v) === i).map(v => 'Bamidbar 21:' + v).join(', ')}</span></div>`
         : '') +
       // What today's letters stand for — the same appendix, one sentence each,
       // behind a tap because the face has already named them.
