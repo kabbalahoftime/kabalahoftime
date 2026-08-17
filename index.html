@@ -14343,12 +14343,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         : '') +
       (psElems.length
         ? `<div style="margin-top:3px;font-size:0.88em;">` +
-          psElems.map(p => `<strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif" lang="he">${p.heb}</span>`).join(' &amp; ') +
+          psElems.map(p => `<strong>${p.el}</strong> <bdi style="font-family:'Frank Ruhl Libre',serif" lang="he">${p.heb}</bdi>`).join(' &amp; ') +
           ` <span style="color:var(--ink-dim);font-size:0.9em">&middot;&nbsp;${psElems[0].ch.replace(' ', '\u00a0')}</span></div>`
         : '') +
       (sbWords.length
         ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Song of the Well:</span> ` +
-          sbWords.map(b => `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em" lang="he">${b.w}</span>`).join(' &amp; ') +
+          sbWords.map(b => `<bdi style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em" lang="he">${b.w}</bdi>`).join(' &amp; ') +
           ` <span style="font-size:0.9em">&middot;&nbsp;</span>${(() => {
               const vs = sbWords.map(b => b.v).filter((v, i, a) => a.indexOf(v) === i);
               // A day in the microcosm can take two halves from two verses; the
