@@ -1796,8 +1796,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   color:var(--ink); line-height:1.7; letter-spacing:0;
 }
 .path-31-en { font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); font-style:italic; margin-top:5px; }
-.path-31-then { font-size:calc(12px * var(--ts, 1)); color:var(--ink-soft); line-height:1.6;
-  margin-top:7px; padding-top:7px; border-top:1px solid var(--border); }
+.path-31-then { margin-top:7px; padding-top:7px; border-top:1px solid var(--border); }
+.path-31-then-he { font-family:'Frank Ruhl Libre',serif; font-size:calc(15px * var(--ts, 1));
+  color:var(--ink-mid); line-height:1.85; letter-spacing:0; }
+.path-31-then-en { font-size:calc(12px * var(--ts, 1)); color:var(--ink-soft); line-height:1.6;
+  margin-top:5px; }
 
 /* Gentle pulse on the next actionable step */
 @keyframes nextPulse { 0%,100% { opacity:.95; } 50% { opacity:.3; } }
@@ -1921,8 +1924,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   font-style:italic; margin-top:4px; }
 /* Verse 13 — not the song but its answer, so it is set as narration:
    upright, a shade smaller, under a hairline. */
-#song-yehoshua .sy-then { font-size:calc(12px * var(--ts, 1)); color:var(--ink-soft);
-  line-height:1.6; margin-top:7px; padding-top:7px; border-top:1px solid var(--border); }
+#song-yehoshua .sy-then { margin-top:7px; padding-top:7px; border-top:1px solid var(--border); }
+#song-yehoshua .sy-then-he { font-family:'Frank Ruhl Libre',serif; font-size:calc(14px * var(--ts, 1));
+  color:var(--ink-mid); line-height:1.85; letter-spacing:0; }
+#song-yehoshua .sy-then-en { font-size:calc(12px * var(--ts, 1)); color:var(--ink-soft);
+  line-height:1.6; margin-top:5px; }
 .sy-check { background:none; border:none; cursor:pointer; display:inline-block;
   font-family:'Cormorant Garamond',serif; font-size:calc(13px * var(--ts, 1));
   color:var(--gold); margin-top:6px; padding:3px 10px; position:relative; }
@@ -2218,8 +2224,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="ps-label"><span style="letter-spacing:0">ל״א</span> · The Song of Yehoshua</div>
     <div class="sy-verse" lang="he">שֶׁ֚מֶשׁ בְּגִבְע֣וֹן דּ֔וֹם וְיָרֵ֖חַ בְּעֵ֥מֶק אַיָּלֽוֹן</div>
     <div class="sy-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo;</div>
-    <div class="sy-then">And the sun stood still, and the moon stayed, until the people had avenged themselves upon their enemies. Is this not written in the book of Jashar? So the sun stood still in the midst of the heaven, and it did not hasten to go down exactly a whole day.
-      <a href="https://www.sefaria.org/Joshua.10.12-13" target="_blank" style="color:var(--gold)">Yehoshua&nbsp;10:12&ndash;13</a></div>
+    <div class="sy-then">
+      <div class="sy-then-he" lang="he">וַיִּדֹּ֨ם הַשֶּׁ֜מֶשׁ וְיָרֵ֣חַ עָמָ֗ד עַד־יִקֹּ֥ם גּוֹי֙ אֹֽיְבָ֔יו הֲלֹא־הִ֥יא כְתוּבָ֖ה עַל־סֵ֣פֶר הַיָּשָׁ֑ר וַיַּֽעֲמֹ֚ד הַשֶּׁ֙מֶשׁ֙ בַּֽחֲצִ֣י הַשָּׁמַ֔יִם וְלֹא־אָ֥ץ לָב֖וֹא כְּי֥וֹם תָּמִֽים:</div>
+      <div class="sy-then-en">And the sun stood still, and the moon stayed, until the people had avenged themselves upon their enemies. Is this not written in the book of Jashar? So the sun stood still in the midst of the heaven, and it did not hasten to go down exactly a whole day.
+        <a href="https://www.sefaria.org/Joshua.10.12-13" target="_blank" style="color:var(--gold)">Yehoshua&nbsp;10:12&ndash;13</a></div>
+    </div>
     <button class="sy-check" onclick="toggleSong(event)" aria-pressed="false" aria-label="Mark the Song of Yehoshua as said"><span class="sy-box">☐</span></button>
   </div>
 
@@ -12484,8 +12493,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div class="path-31-title"><span style="letter-spacing:0">ל״א</span> · The Song of Yehoshua</div>` +
         `<div class="path-31-verse" lang="he">שֶׁ֚מֶשׁ בְּגִבְע֣וֹן דּ֔וֹם וְיָרֵ֖חַ בְּעֵ֥מֶק אַיָּלֽוֹן</div>` +
         `<div class="path-31-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo;</div>` +
-        `<div class="path-31-then">And the sun stood still, and the moon stayed, until the people had avenged themselves upon their enemies. Is this not written in the book of Jashar? So the sun stood still in the midst of the heaven, and it did not hasten to go down exactly a whole day. ` +
-        `<a href="https://www.sefaria.org/Joshua.10.12-13" target="_blank" style="color:var(--gold)">Yehoshua&nbsp;10:12&ndash;13</a></div>` +
+        `<div class="path-31-then">` +
+        `<div class="path-31-then-he" lang="he">וַיִּדֹּ֨ם הַשֶּׁ֜מֶשׁ וְיָרֵ֣חַ עָמָ֗ד עַד־יִקֹּ֥ם גּוֹי֙ אֹֽיְבָ֔יו הֲלֹא־הִ֥יא כְתוּבָ֖ה עַל־סֵ֣פֶר הַיָּשָׁ֑ר וַיַּֽעֲמֹ֚ד הַשֶּׁ֙מֶשׁ֙ בַּֽחֲצִ֣י הַשָּׁמַ֔יִם וְלֹא־אָ֥ץ לָב֖וֹא כְּי֥וֹם תָּמִֽים:</div>` +
+        `<div class="path-31-then-en">And the sun stood still, and the moon stayed, until the people had avenged themselves upon their enemies. Is this not written in the book of Jashar? So the sun stood still in the midst of the heaven, and it did not hasten to go down exactly a whole day. ` +
+        `<a href="https://www.sefaria.org/Joshua.10.12-13" target="_blank" style="color:var(--gold)">Yehoshua&nbsp;10:12&ndash;13</a></div></div>` +
         `<button class="sy-check" onclick="toggleSong(event)" aria-pressed="false" aria-label="Mark the Song of Yehoshua as said"><span class="sy-box">${songDone() ? '☑' : '☐'}</span></button>` +
         `</div>`;
     }
