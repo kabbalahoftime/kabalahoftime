@@ -14878,7 +14878,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       _kotSongEl.textContent = '\u266a ' + _kotSong.song;
       _kotSongEl.title = 'KoT Song \u00b7 ' + _kotSong.book;
     }
-    // The eighth. It is not one of the seven and is not indexed among them —
+    // The eighth song. Not named as a day on the face: the KoT week has seven,
+    // and a line reading "Day 8" would read as a claim about the week rather
+    // than about where this song sits.
+    // It is not one of the seven and is not indexed among them —
     // it stands on the seam, so it is shown on the two days that touch it: the
     // seventh, where the week's songs are gathered, and the first, where they
     // begin again. Thirty-two words of the Well and twenty of Yehoshua, which
@@ -14888,9 +14891,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const onSeam = _kotDay === 7 || _kotDay === 1;
       _eighthEl.style.display = onSeam ? '' : 'none';
       if (onSeam) {
-        _eighthEl.textContent = '\u266a Day 8 \u00b7 Well & Yehoshua';
-        _eighthEl.title = 'KoT Song \u00b7 Day 8 \u2014 the Song of the Well (32 words) '
-          + 'with the Song of Yehoshua (20): fifty-two, joining Book 7 to Book 1';
+        _eighthEl.textContent = '\u266a Well & Yehoshua';
+        _eighthEl.title = 'KoT Song \u00b7 the Song of the Well (32 words) with the Song '
+          + 'of Yehoshua (20): fifty-two, joining Book 7 to Book 1';
       }
     }
     document.getElementById('gevurah-detail').innerHTML =
