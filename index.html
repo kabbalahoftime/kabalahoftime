@@ -2548,8 +2548,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Noam Elimelech</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Beis Aharon</div>
     <div class="prayer-tag" data-prayer="5" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Tehilim</div>
-    <div id="gevurah-kot-song" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;"></div>
-    <div id="gevurah-kot-song-8" style="display:none;font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;"></div>
+    <div id="gevurah-kot-song" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:16px;font-style:italic;"></div>
+    <div id="gevurah-kot-song-8" style="display:none;font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:16px;font-style:italic;"></div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
@@ -9144,14 +9144,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // are (dayNum 1 = Friday … 7 = Thursday), so the song is always the song of
   // the book the Malchut card is already showing that day. Display only: the
   // ten-prayer heart still counts ten.
+  // Each song opens to its text. Six are Sefaria references built on the same
+  // pattern the rest of the app uses; the seventh is not a text but a KoT book,
+  // so it opens the week's own Book 7 page instead, and its url is filled in at
+  // render time from getWeeklyData.
   const KOT_SONGS = [
-    { song: 'Perek Shirah',       book: 'Book 1 · Song of Nature'      },
-    { song: 'Haazinu',            book: 'Book 2 · Song of Moses'       },
-    { song: 'Shirat HaYam',       book: 'Book 3 · Song of the Sea'     },
-    { song: 'Shirat Channah',     book: 'Book 4 · Song of Hannah'      },
-    { song: 'Shir HaShirim',      book: 'Book 5 · Song of Songs'       },
-    { song: 'Psalm 89',           book: 'Book 6 · General Remedy'      },
-    { song: 'Gathering of Songs', book: 'Book 7 · Gathering of Songs'  }
+    { song: 'Perek Shirah',       book: 'Book 1 · Song of Nature',
+      url: 'https://www.sefaria.org/Perek_Shirah?lang=bi'          },
+    { song: 'Haazinu',            book: 'Book 2 · Song of Moses',
+      url: 'https://www.sefaria.org/Deuteronomy.32?lang=bi'        },
+    { song: 'Shirat HaYam',       book: 'Book 3 · Song of the Sea',
+      url: 'https://www.sefaria.org/Exodus.15.1-19?lang=bi'        },
+    { song: 'Shirat Channah',     book: 'Book 4 · Song of Hannah',
+      url: 'https://www.sefaria.org/I_Samuel.2.1-10?lang=bi'       },
+    { song: 'Shir HaShirim',      book: 'Book 5 · Song of Songs',
+      url: 'https://www.sefaria.org/Song_of_Songs?lang=bi'         },
+    { song: 'Psalm 89',           book: 'Book 6 · General Remedy',
+      url: 'https://www.sefaria.org/Psalms.89?lang=bi'             },
+    { song: 'Gathering of Songs', book: 'Book 7 · Gathering of Songs' }
   ];
 
   // ── PEREK SHIRAH — the song of each of the year's 52 creatures ──
@@ -14875,23 +14885,34 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const _kotSong = KOT_SONGS[_kotDay - 1];
     const _kotSongEl = document.getElementById('gevurah-kot-song');
     if (_kotSongEl && _kotSong) {
-      _kotSongEl.textContent = '\u266a ' + _kotSong.song;
+      // Book 7 is a KoT book rather than a text, so it opens the week's own
+      // Book 7 page; the other six open the text they name.
+      const _songUrl = _kotSong.url
+        || (getWeeklyData(effectiveKotWeek) || {}).b7_url || null;
+      _kotSongEl.innerHTML = '\u266a ' + (_songUrl
+        ? `<a href="${_songUrl}" target="_blank" style="color:var(--gold)">${_kotSong.song}</a>`
+        : _kotSong.song);
       _kotSongEl.title = 'KoT Song \u00b7 ' + _kotSong.book;
     }
     // The eighth song. Not named as a day on the face: the KoT week has seven,
     // and a line reading "Day 8" would read as a claim about the week rather
     // than about where this song sits.
     // It is not one of the seven and is not indexed among them —
-    // it stands on the seam, so it is shown on the two days that touch it: the
-    // seventh, where the week's songs are gathered, and the first, where they
-    // begin again. Thirty-two words of the Well and twenty of Yehoshua, which
-    // is fifty-two, the weeks of the year the seven days run through.
+    // it stands after them, on the seventh, where the week's songs are already
+    // being gathered. Thirty-two words of the Well and twenty of Yehoshua,
+    // which is fifty-two, the weeks of the year the seven days run through.
     const _eighthEl = document.getElementById('gevurah-kot-song-8');
     if (_eighthEl) {
-      const onSeam = _kotDay === 7 || _kotDay === 1;
+      const onSeam = _kotDay === 7;
       _eighthEl.style.display = onSeam ? '' : 'none';
       if (onSeam) {
-        _eighthEl.textContent = '\u266a Well & Yehoshua';
+        // Two songs, so two links — each to where that text is already linked
+        // elsewhere in the app: the Well on Sefaria, as the Chochmah line has
+        // it, and Yehoshua on Chabad, as the verse under the clock has it.
+        _eighthEl.innerHTML = '\u266a '
+          + '<a href="https://www.sefaria.org/Numbers.21.17-20?lang=bi" target="_blank" style="color:var(--gold)">Well</a>'
+          + ' &amp; '
+          + '<a href="https://www.chabad.org/library/bible_cdo/aid/15794/jewish/Chapter-10.htm#v12" target="_blank" style="color:var(--gold)">Yehoshua</a>';
         _eighthEl.title = 'KoT Song \u00b7 the Song of the Well (32 words) with the Song '
           + 'of Yehoshua (20): fifty-two, joining Book 7 to Book 1';
       }
