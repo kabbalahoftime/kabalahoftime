@@ -6181,23 +6181,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { w:'נְדִיבֵי', v:18 },  // 13 · נדיבי
     { w:'הָעָם', v:18 },  // 14 · העם
     { w:'בִּמְחֹקֵק', v:18 },  // 15 · במחקק
-    { w:'בְּמִשְׁעֲנֹתָם', v:18 },  // 16 · במשענתם
-    { w:'וּמִמִּדְבָּר', v:18 },  // 17 · וממדבר
-    { w:'מַתָּנָה', v:18 },  // 18 · מתנה
-    { w:'וּמִמַּתָּנָה', v:19 },  // 19 · וממתנה
-    { w:'נַחֲלִיאֵל', v:19 },  // 20 · נחליאל
-    { w:'וּמִנַּחֲלִיאֵל', v:19 },  // 21 · ומנחליאל
-    { w:'בָּמוֹת', v:19 },  // 22 · במות
-    { w:'וּמִבָּמוֹת', v:20 },  // 23 · ומבמות
-    { w:'הַגַּיְא', v:20 },  // 24 · הגיא
-    { w:'אֲשֶׁר', v:20 },  // 25 · אשר
-    { w:'בִּשְׂדֵה', v:20 },  // 26 · בשדה
-    { w:'מוֹאָב', v:20 },  // 27 · מואב
-    { w:'רֹאשׁ', v:20 },  // 28 · ראש
-    { w:'הַפִּסְגָּה', v:20 },  // 29 · הפסגה
-    { w:'וְנִשְׁקָפָה', v:20 },  // 30 · ונשקפה
-    { w:'עַל־פְּנֵי', v:20 },  // 31 · על־פני
-    { w:'הַיְשִׁימֹן', v:20 },  // 32 · הישימן
+    { w:'בִּמְחֹקֵק', v:18 },  // 16 · במחקק
+    { w:'בְּמִשְׁעֲנֹתָם', v:18 },  // 17 · במשענתם
+    { w:'וּמִמִּדְבָּר', v:18 },  // 18 · וממדבר
+    { w:'מַתָּנָה', v:18 },  // 19 · מתנה
+    { w:'וּמִמַּתָּנָה', v:19 },  // 20 · וממתנה
+    { w:'נַחֲלִיאֵל', v:19 },  // 21 · נחליאל
+    { w:'וּמִנַּחֲלִיאֵל', v:19 },  // 22 · ומנחליאל
+    { w:'בָּמוֹת', v:19 },  // 23 · במות
+    { w:'וּמִבָּמוֹת', v:20 },  // 24 · ומבמות
+    { w:'הַגַּיְא', v:20 },  // 25 · הגיא
+    { w:'אֲשֶׁר', v:20 },  // 26 · אשר
+    { w:'בִּשְׂדֵה', v:20 },  // 27 · בשדה
+    { w:'מוֹאָב', v:20 },  // 28 · מואב
+    { w:'רֹאשׁ', v:20 },  // 29 · ראש
+    { w:'הַפִּסְגָּה', v:20 },  // 30 · הפסגה
+    { w:'וְנִשְׁקָפָה', v:20 },  // 31 · ונשקפה
+    { w:'עַל־פְּנֵי', v:20 },  // 32 · על־פני
+    { w:'הַיְשִׁימֹן', v:20 },  // 33 · הישימן
   ];
 
   // Tractate / 11-day half-cycle data (33 entries: 1a–16b = 11 days each; 17a = 12 days)
@@ -14309,8 +14310,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // and the mishnah. In the microcosm a day can hold two halves, and so two
     // elements — the trees and the vine on one day.
     const psElems = halfIdx.map(i => PEREK_SHIRAH_ELEMENTS[i]).filter(Boolean);
-    // The half's word of the Song of the Well, on that same index. The 33rd
-    // half returns nothing — the song is 32 words and the vowels carry none.
+    // The half's word of the Song of the Well, on that same index. Thirty-two
+    // words fill thirty-three halves because במחקק is held across both halves
+    // of the stars, 15 and 16, as Perek Shirah holds the stars across them.
     const sbWords = halfIdx.map(i => SHIRAT_HABEER[i]).filter(Boolean);
 
     // KoT Book — displayed on the Chochmah card face
