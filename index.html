@@ -9165,7 +9165,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Perek Shirah's own text. Named here rather than written out twice: the
   // KoT Song line in Gevurah and the banner under the clock both open it, and
   // an address kept in two places drifts apart at the first edit.
-  const PEREK_SHIRAH_DOC = 'https://drive.google.com/file/d/1xxapONpPFZ5jZrUqnMrcgY0zUOWqZl5V/view?usp=drivesdk';
+  //
+  // Served from this site rather than from Drive. It is the same booklet, and
+  // it is the source the elements and the creature songs below were taken
+  // from — so the text the reader opens and the text the app was built on are
+  // now one file. It is deliberately not in the service worker's pre-cache
+  // list: the shell should not carry 200KB nobody has asked for yet. The
+  // fetch handler is cache-first for anything that is not HTML, so it is kept
+  // after the first time it is opened, and available offline from then on.
+  const PEREK_SHIRAH_DOC = '/perek_shirah_booklet.pdf';
 
   const KOT_SONGS = [
     { song: 'Perek Shirah',       book: 'Book 1 · Song of Nature',
