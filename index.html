@@ -1917,15 +1917,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   color:var(--ink); line-height:1.7; letter-spacing:0; }
 #song-yehoshua .sy-en { font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid);
   font-style:italic; margin-top:4px; }
-.sy-check { background:none; border:none; cursor:pointer; display:inline-block;
-  font-family:'Cormorant Garamond',serif; font-size:calc(13px * var(--ts, 1));
-  color:var(--gold); margin-top:6px; padding:3px 10px; position:relative; }
+/* The thirty-first's mark is the ל״א itself. The app's grammar for a step is
+   the מעלה tag — gold while it waits, gold-filled once it is taken — and this
+   is that tag, kept clear of the .maalah machinery, whose numbering stops at
+   fifteen and would read ל״א as a step thirty-one that does not exist. */
+.sy-la { cursor:pointer; user-select:none; display:inline-block; position:relative;
+  font-family:'Frank Ruhl Libre',serif; font-size:1.15em; letter-spacing:0;
+  text-transform:none; color:var(--gold); padding:0 4px; border-radius:3px; }
+.sy-la:not(.done) { animation: nextPulse 2.4s ease-in-out infinite; }
+.sy-la.done { background:var(--gold); color:#fdf9f2; animation:none; }
 /* the same invisible 44px band the other controls carry, so the drawn size
-   stays small without the finger having to be accurate */
-.sy-check::after { content:''; position:absolute; left:0; right:0; top:50%;
-  transform:translateY(-50%); height:44px; }
-.sy-check .sy-box { font-size:1.15em; }
-.sy-check.done { color:var(--gold-mid); }
+   stays small without the finger having to be accurate. It sits in the
+   positioned layer, so it stays above the verse that follows it. */
+.sy-la::after { content:''; position:absolute; left:50%; top:50%;
+  transform:translate(-50%,-50%); width:44px; height:44px; }
+@media (prefers-reduced-motion: reduce) {
+  .sy-la:not(.done) { animation:none; opacity:1; text-shadow:0 0 5px rgba(223,160,22,0.85); }
+}
 
 /* ── TAP TARGETS ──
    A finger is about 44px across, and several controls were drawn at a third
@@ -2209,11 +2217,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- THE THIRTY-FIRST — the seal of a completed path. Hidden until the day's
        thirty steps are all marked; updateMaalotMoon shows it. -->
   <div id="song-yehoshua" style="display:none;">
-    <div class="ps-label"><span style="letter-spacing:0">ל״א</span> · The Song of Yehoshua</div>
+    <div class="ps-label"><span class="sy-la" onclick="toggleSong(event)" lang="he" role="button" tabindex="0" aria-label="Mark the Song of Yehoshua as said">ל״א</span> · The Song of Yehoshua</div>
     <div class="sy-verse" lang="he">שֶׁ֚מֶשׁ בְּגִבְע֣וֹן דּ֔וֹם וְיָרֵ֖חַ בְּעֵ֥מֶק אַיָּלֽוֹן</div>
     <div class="sy-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo;
       <a href="https://www.chabad.org/library/bible_cdo/aid/15794/jewish/Chapter-10.htm#v12" target="_blank" style="color:var(--gold)">Yehoshua&nbsp;10:12&ndash;13</a></div>
-    <button class="sy-check" onclick="toggleSong(event)" aria-pressed="false" aria-label="Mark the Song of Yehoshua as said"><span class="sy-box">☐</span></button>
   </div>
 
   <!-- THE DAY'S ZMANIM — the hour now, the hour next, and all twelve behind a tap -->
@@ -11940,7 +11947,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     ['.maalah',        'done',             'aria-pressed'],
     ['.star-mark',     'lit',              'aria-pressed'],
     ['.sefirah-card',  'expanded',         'aria-expanded'],
-    ['.sy-check',      'done',             'aria-pressed'],
+    ['.sy-la',         'done',             'aria-pressed'],
     ['.year-pill-btn', 'year-pill-active', 'aria-pressed'],
     ['.lang-btn',      'active',           'aria-pressed']
   ];
@@ -12238,11 +12245,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
   function applySongState() {
     const done = songDone();
-    document.querySelectorAll('.sy-check').forEach(el => {
-      el.classList.toggle('done', done);
-      const b = el.querySelector('.sy-box');
-      if (b) b.textContent = done ? '☑' : '☐';
-    });
+    document.querySelectorAll('.sy-la').forEach(el => el.classList.toggle('done', done));
     if (typeof syncA11yState === 'function') syncA11yState();
   }
 
@@ -12474,11 +12477,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // where the luminaries have nothing left to count — which is what
       // Yehoshua asked of them. No checkbox: it is not a step to be taken.
       html += `<div class="path-31">` +
-        `<div class="path-31-title"><span style="letter-spacing:0">ל״א</span> · The Song of Yehoshua</div>` +
+        `<div class="path-31-title"><span class="sy-la${songDone() ? ' done' : ''}" onclick="toggleSong(event)" lang="he" role="button" tabindex="0" aria-label="Mark the Song of Yehoshua as said" aria-pressed="${songDone()}">ל״א</span> · The Song of Yehoshua</div>` +
         `<div class="path-31-verse" lang="he">שֶׁ֚מֶשׁ בְּגִבְע֣וֹן דּ֔וֹם וְיָרֵ֖חַ בְּעֵ֥מֶק אַיָּלֽוֹן</div>` +
         `<div class="path-31-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo; ` +
         `<a href="https://www.chabad.org/library/bible_cdo/aid/15794/jewish/Chapter-10.htm#v12" target="_blank" style="color:var(--gold)">Yehoshua&nbsp;10:12&ndash;13</a></div>` +
-        `<button class="sy-check" onclick="toggleSong(event)" aria-pressed="false" aria-label="Mark the Song of Yehoshua as said"><span class="sy-box">${songDone() ? '☑' : '☐'}</span></button>` +
         `</div>`;
     }
     document.getElementById('todays-path-body').innerHTML = html;
