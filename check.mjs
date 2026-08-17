@@ -104,7 +104,11 @@ const FILE = 'index.html';
 const FIXED_NOW = process.env.CHECK_DATE || '2026-08-07T09:00:00';
 const SWEEP_FORWARD = Number(process.env.SWEEP_FORWARD || 1500);
 const SWEEP_BACK    = Number(process.env.SWEEP_BACK    || 1500);
-const WIDTHS = [320, 390, 430];
+// 375 earns its place: it is the iPhone SE / mini width, and it is the worst
+// case for anything that wraps below 375px — one pixel too wide for the relief
+// and 15px narrower than the next size up. The Daily Script bar broke here
+// before it broke at 390.
+const WIDTHS = [320, 375, 390, 430];
 // The one face every Hebrew letter in the app should be drawn with.
 const HEBREW_FACE = process.env.HEBREW_FACE || 'Frank Ruhl Libre';
 
@@ -980,12 +984,29 @@ async function checkInBrowser(chromium) {
    for (const ts of TEXT_SIZES) {
     await page.setViewportSize({ width: w, height: 844 });
     await page.waitForTimeout(250);
-    const over = await page.evaluate((tsz) => {
-      if (typeof setTextSize === 'function') setTextSize(tsz);
+    // The text size is set in its own turn, and two frames are let by before
+    // anything is measured. Reading scrollWidth in the same task that changed
+    // --ts returns the OLD scrolling area: the computed value is already the
+    // new one, the layout is already the new one, and the document's overflow
+    // region is not. This check reported nine clean widths for months while
+    // the page really did scroll sideways at the largest text — the ▾ on the
+    // Daily Script hung 14px off a 390px phone the whole time.
+    const settle = () => page.evaluate(() => new Promise(r =>
+      requestAnimationFrame(() => requestAnimationFrame(r)))).then(() => page.waitForTimeout(120));
+
+    await page.evaluate((tsz) => { if (typeof setTextSize === 'function') setTextSize(tsz); }, ts);
+    await settle();
+    const shut = await page.evaluate(() =>
+      document.documentElement.scrollWidth - document.documentElement.clientWidth);
+
+    // Opening the cards is a layout change too, and gets the same treatment.
+    await page.evaluate(() => {
       const cards = [...document.querySelectorAll('.sefirah-card')];
-      const shut = document.documentElement.scrollWidth - document.documentElement.clientWidth;
-      const already = cards.filter(c => c.classList.contains('expanded'));
+      window.__wasOpen = cards.filter(c => c.classList.contains('expanded'));
       cards.forEach(c => c.classList.add('expanded'));
+    });
+    await settle();
+    const over = await page.evaluate(() => {
       const open = document.documentElement.scrollWidth - document.documentElement.clientWidth;
       // A value column too narrow to hold a word is not a sideways scroll, so
       // nothing above would catch it: at 320px the label claimed 110 of the
@@ -994,12 +1015,26 @@ async function checkInBrowser(chromium) {
         .filter(r => r.children.length === 2)
         .map(r => Math.round(r.querySelector('.detail-value').getBoundingClientRect().width));
       const narrowest = vals.length ? Math.min(...vals) : null;
-      cards.forEach(c => { if (!already.includes(c)) c.classList.remove('expanded'); });
-      return { shut, open, narrowest, rows: vals.length };
-    }, ts);
+      // Whatever is sticking out is worth naming — "scrolls sideways by 14px"
+      // sends you hunting, "#daily-script-expand-icon" does not.
+      const lim = document.documentElement.clientWidth;
+      const culprits = [...document.querySelectorAll('body *')].filter(e => {
+        const cs = getComputedStyle(e);
+        if (cs.position === 'fixed' || cs.display === 'none' || cs.visibility === 'hidden') return false;
+        const r = e.getBoundingClientRect();
+        return r.width > 0 && r.height > 0 && r.right > lim + 1;
+      }).map(e => e.id || (e.className || '').toString().trim().split(/\s+/)[0] || e.tagName)
+        .filter((v, i, a) => a.indexOf(v) === i).slice(0, 4);
+      document.querySelectorAll('.sefirah-card').forEach(c => {
+        if (!window.__wasOpen.includes(c)) c.classList.remove('expanded');
+      });
+      return { open, narrowest, rows: vals.length, culprits };
+    });
+    over.shut = shut;
+    const blame = over.culprits.length ? ` — ${over.culprits.join(', ')}` : '';
     const at = `${w}px wide, text ${ts}`;
-    if (over.shut > 0) fail(`${at}, cards shut: page scrolls sideways by ${over.shut}px`);
-    else if (over.open > 0) fail(`${at}, cards open: page scrolls sideways by ${over.open}px`);
+    if (over.shut > 0) fail(`${at}, cards shut: page scrolls sideways by ${over.shut}px${blame}`);
+    else if (over.open > 0) fail(`${at}, cards open: page scrolls sideways by ${over.open}px${blame}`);
     else pass(`${at}: no sideways scroll, shut or open`);
     if (over.narrowest !== null && over.narrowest < 120)
       fail(`${at}: the narrowest of ${over.rows} detail values is ${over.narrowest}px — too narrow to hold a word`);

@@ -764,6 +764,10 @@ font-size: calc(10.5px * var(--ts, 1));
 }
 /* Keep each phrase whole, but let the label wrap rather than widen the card */
 .kl-part { white-space: nowrap; }
+/* …unless the reader has enlarged the text, where "Light that is Good" with
+   its tracking is wider than a 320px phone can hold. Whole is the nicety;
+   on-screen is the requirement. */
+:root[data-textsize] .kl-part { white-space: normal; }
 /* Hebrew inside a letterspaced Latin label keeps its own spacing —
    the tracking is there for the small-caps, and Hebrew does not take it. */
 .heb { letter-spacing: 0; }
@@ -1553,9 +1557,22 @@ transition: transform 0.3s;
 
 /* ── DAILY SCRIPT PANEL ── */
 .daily-script-lang-bar { display: flex; gap: 4px; }
-/* Narrow phones: wrap the language buttons rather than push the header wider */
-@media (max-width: 374px) {
-  .daily-script-lang-bar { flex-wrap: wrap; justify-content: flex-end; }
+/* The buttons take the line under the title rather than share it. Six of
+   them plus "Daily Script" plus the ▾ never fitted 278px — the row was
+   over-full at every text size, and at the largest one it pushed the ▾ clean
+   off a 390px phone. Wrapping inside the bar only moved the damage: two short
+   rows of 19px buttons put each one's 44px reach on top of its neighbour
+   above. A full line to itself gives the bar the width to stay one row.
+   flex-wrap is kept as a floor, not a plan. */
+.daily-script-lang-bar { flex-basis: 100%; flex-wrap: wrap;
+  justify-content: flex-end; row-gap: 6px; }
+/* The smallest phones give the line 206px and the buttons want 216. Ten pixels
+   out of the gaps and the padding keeps them on one row, which matters more
+   than it looks: wrapped, each 19px button's 44px reach lands on the button
+   above it, and neither can be tapped reliably. */
+@media (max-width: 360px) {
+  .daily-script-lang-bar { column-gap: 2px; }
+  .daily-script-lang-bar .lang-btn { padding: 2px 5px; }
 }
 .lang-btn {
   background: none;
@@ -1917,10 +1934,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   color:var(--ink); line-height:1.7; letter-spacing:0; }
 #song-yehoshua .sy-en { font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid);
   font-style:italic; margin-top:4px; }
-/* The thirty-first's mark is the ל״א itself. The app's grammar for a step is
+/* The thirty-first's mark is the א״ל itself. The app's grammar for a step is
    the מעלה tag — gold while it waits, gold-filled once it is taken — and this
    is that tag, kept clear of the .maalah machinery, whose numbering stops at
-   fifteen and would read ל״א as a step thirty-one that does not exist. */
+   fifteen and would read א״ל as a step thirty-one that does not exist. */
 .sy-la { cursor:pointer; user-select:none; display:inline-block; position:relative;
   font-family:'Frank Ruhl Libre',serif; font-size:1.15em; letter-spacing:0;
   text-transform:none; color:var(--gold); padding:0 4px; border-radius:3px; }
@@ -2217,7 +2234,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- THE THIRTY-FIRST — the seal of a completed path. Hidden until the day's
        thirty steps are all marked; updateMaalotMoon shows it. -->
   <div id="song-yehoshua" style="display:none;">
-    <div class="ps-label"><span class="sy-la" onclick="toggleSong(event)" lang="he" role="button" tabindex="0" aria-label="Mark the Song of Yehoshua as said">ל״א</span> · The Song of Yehoshua</div>
+    <div class="ps-label"><span class="sy-la" onclick="toggleSong(event)" lang="he" role="button" tabindex="0" aria-label="Mark the Song of Yehoshua as said">א״ל</span> · The Song of Yehoshua</div>
     <div class="sy-verse" lang="he">שֶׁ֚מֶשׁ בְּגִבְע֣וֹן דּ֔וֹם וְיָרֵ֖חַ בְּעֵ֥מֶק אַיָּלֽוֹן</div>
     <div class="sy-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo;
       <a href="https://www.chabad.org/library/bible_cdo/aid/15794/jewish/Chapter-10.htm#v12" target="_blank" style="color:var(--gold)">Yehoshua&nbsp;10:12&ndash;13</a></div>
@@ -3319,8 +3336,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   <!-- DAILY SCRIPT — personal tool, below main content -->
   <div id="daily-script-panel" style="margin:8px 16px 4px;border:1px solid var(--gold);border-radius:6px;">
-    <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;" onclick="toggleDailyScript()">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;" onclick="toggleDailyScript()">
       <span style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);letter-spacing:1.5px;flex:1;text-transform:uppercase;">Daily Script</span>
+      <span id="daily-script-expand-icon" style="color:var(--gold);font-size:calc(16px * var(--ts, 1));line-height:1;">▾</span>
       <div class="daily-script-lang-bar" onclick="event.stopPropagation()">
         <button class="lang-btn active" id="lang-btn-en" onclick="setScriptLang('en')">EN</button>
         <button class="lang-btn" id="lang-btn-he" onclick="setScriptLang('he')">HE</button>
@@ -3328,9 +3346,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <button class="lang-btn" id="lang-btn-fr" onclick="setScriptLang('fr')">FR</button>
         <button class="lang-btn" id="lang-btn-pt" onclick="setScriptLang('pt')">PT</button>
         <span style="width:1px;height:14px;background:var(--border);display:inline-block;margin:0 3px;vertical-align:middle;"></span>
-        <button class="lang-btn" id="beginner-btn" onclick="toggleBeginnerMode()" style="letter-spacing:0.3px;">Beginner</button>
+        <button class="lang-btn" id="beginner-btn" onclick="toggleBeginnerMode()" style="letter-spacing:0.3px;">Basic</button>
       </div>
-      <span id="daily-script-expand-icon" style="color:var(--gold);font-size:calc(16px * var(--ts, 1));line-height:1;">▾</span>
     </div>
     <div id="daily-script-body" style="display:none">
       <div class="daily-script-inner">
@@ -12477,7 +12494,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // where the luminaries have nothing left to count — which is what
       // Yehoshua asked of them. No checkbox: it is not a step to be taken.
       html += `<div class="path-31">` +
-        `<div class="path-31-title"><span class="sy-la${songDone() ? ' done' : ''}" onclick="toggleSong(event)" lang="he" role="button" tabindex="0" aria-label="Mark the Song of Yehoshua as said" aria-pressed="${songDone()}">ל״א</span> · The Song of Yehoshua</div>` +
+        `<div class="path-31-title"><span class="sy-la${songDone() ? ' done' : ''}" onclick="toggleSong(event)" lang="he" role="button" tabindex="0" aria-label="Mark the Song of Yehoshua as said" aria-pressed="${songDone()}">א״ל</span> · The Song of Yehoshua</div>` +
         `<div class="path-31-verse" lang="he">שֶׁ֚מֶשׁ בְּגִבְע֣וֹן דּ֔וֹם וְיָרֵ֖חַ בְּעֵ֥מֶק אַיָּלֽוֹן</div>` +
         `<div class="path-31-en">&ldquo;Sun, be still at Giv&rsquo;on; and moon, in the valley of Ayalon.&rdquo; ` +
         `<a href="https://www.chabad.org/library/bible_cdo/aid/15794/jewish/Chapter-10.htm#v12" target="_blank" style="color:var(--gold)">Yehoshua&nbsp;10:12&ndash;13</a></div>` +
@@ -13730,10 +13747,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         let label;
         if (si.book.vol === ei.book.vol) {
           label = si.folio === ei.folio
-            ? `Vol.\xa0${ROMAN[si.book.vol]}\xa0·\xa0Folio\xa0${si.folio}`
-            : `Vol.\xa0${ROMAN[si.book.vol]}\xa0·\xa0Folios\xa0${si.folio}–${ei.folio}`;
+            ? `Vol.\xa0${ROMAN[si.book.vol]}\xa0· Folio\xa0${si.folio}`
+            : `Vol.\xa0${ROMAN[si.book.vol]}\xa0· Folios\xa0${si.folio}–${ei.folio}`;
         } else {
-          label = `Vol.\xa0${ROMAN[si.book.vol]}\xa0Folio\xa0${si.folio}\xa0–\xa0Vol.\xa0${ROMAN[ei.book.vol]}\xa0Folio\xa0${ei.folio}`;
+          label = `Vol.\xa0${ROMAN[si.book.vol]}\xa0Folio\xa0${si.folio}\xa0– Vol.\xa0${ROMAN[ei.book.vol]}\xa0Folio\xa0${ei.folio}`;
         }
         _hodZoharLabel    = label;
         _hodZoharMainHtml = `<a href="${sefariaUrl}" target="_blank" style="color:var(--gold)">${label}</a>`;
