@@ -12694,16 +12694,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // ── THE HOURS OF THE PATH ──
-  // The fifteen מעלות are climbed inside weeks 45 and 46 of the dial: 23:16 to
-  // 00:15, fifty-nine minutes, just under four minutes a step. The fifteen
-  // מיעוטים then follow the cards — each is due while its own Sefirah holds the
-  // hour, and where a Sefirah carries more than one they are due together.
+  // The fifteen מעלות are climbed inside week 45 of the dial: 23:16 to 23:45,
+  // twenty-nine minutes, two minutes a step. The fifteen מיעוטים then follow the
+  // cards — each is due while its own Sefirah holds the hour, and where a
+  // Sefirah carries more than one they are due together.
   //
-  // Weeks 45 and 46 and not two others: they are the weeks of Av that hold the
-  // fifteenth of it. Counting from 1 Tishrei, 15 Av falls on day 310, and week
-  // 45 runs 309 to 315. Fifteen steps climbing to the full moon, set in the
-  // weeks of the month whose fifteenth is the full moon. Week 45's own theme
-  // on the dial reads "To Raise Ourselves Up Through Love and Humility".
+  // Week 45 and no other: it is the week of Av that holds the fifteenth.
+  // Counting from 1 Tishrei, 15 Av falls on day 310, and week 45 runs 309 to
+  // 315 — the day lands inside it however the months fall that year. Week 46
+  // is days 316 to 322, past Tu B'Av entirely, which is why it went. Fifteen
+  // steps climbing to the full moon, set in the one week whose fifteenth is
+  // the full moon. Week 45's own theme on the dial reads "To Raise Ourselves
+  // Up Through Love and Humility".
+  //
+  // Twenty-nine minutes is not a budget for fifteen readings and is not meant
+  // as one. Nothing is locked; the window says when the climb belongs, and a
+  // step still marks whenever it was actually done.
   //
   // Not the Mochin band, though the band is the obvious home for an ascent
   // across the seam. Those eighty-eight minutes already carry the three longest
@@ -12716,7 +12722,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Nothing is locked by any of this. The hour says what it is asking for; a
   // step can still be marked whenever it was actually done, and a step already
   // marked is never offered again.
-  const PATH_MAALOT_WEEKS = [45, 46];
+  const PATH_MAALOT_WEEK = 45;
   const PATH_SEF_ORDER = ['Chesed','Gevurah','Tiferet','Netzach','Hod','Yesod','Malchut'];
   const _hNorm = h => ((h % 24) + 24) % 24;
   // A window may straddle the seam, so containment is asked the long way round.
@@ -12751,8 +12757,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const now = _hNorm(H.nowH());
     if (idx < 15) {
       if (typeof H.week !== 'function') return false;
-      return _hIn(now, _hNorm(H.week(PATH_MAALOT_WEEKS[0]).h1),
-                       _hNorm(H.week(PATH_MAALOT_WEEKS[1]).h2));
+      const wk = H.week(PATH_MAALOT_WEEK);
+      return _hIn(now, _hNorm(wk.h1), _hNorm(wk.h2));
     }
     const win = _pathHourWindows();
     const v = win && win[PATH_WANING[idx - 15][2]];
