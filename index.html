@@ -2005,8 +2005,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    25px tall, so a probe 21px above its centre clears its top by 8.5, and this
    is the least that keeps it off the button above. The rest of what was here
    was not paying for anything. */
+.today-ahead { display:block; width:100%; text-align:left; background:none; border:none;
+  font-family:inherit; font-size:calc(11px * var(--ts, 1)); color:var(--gold);
+  cursor:pointer; padding:5px 0; margin-top:11px; }
 .today-foot { display:flex; justify-content:space-between; align-items:center; gap:10px;
-  margin-top:9px; }
+  margin-top:11px; }
 .today-count { font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
 .today-more { background:none; border:none; font-family:inherit; cursor:pointer;
   font-size:calc(11px * var(--ts, 1)); color:var(--gold); padding:6px 0; white-space:nowrap; }
@@ -2283,6 +2286,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div id="today-block">
     <div class="today-label">Today</div>
     <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to today's next step">…</button>
+    <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
+            aria-label="Step forward a day to climb tomorrow's ma'alot">Week 45 &middot; tomorrow&rsquo;s climb &rarr;</button>
     <div class="today-foot">
       <span id="today-count" class="today-count"></span>
       <button class="today-more" onclick="openTodaysPath()" aria-label="Open today's path, all thirty steps">all thirty ↗</button>
@@ -12790,6 +12795,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (nextIdx === -1) {
       delete el.dataset.idx;
       el.textContent = '30 of 30 — the month complete.';
+      const done = document.getElementById('today-ahead');
+      if (done) done.style.display =
+        (pathStepIsDue(0) && currentOffset === 0) ? '' : 'none';
       return;
     }
     const live = (typeof _pathLiveNames === 'function') ? _pathLiveNames() : {};
@@ -12800,11 +12808,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // sits in its own bidi run — the same care the rest of the app takes.
     const nameHtml = name.replace(/([\u0590-\u05FF][\u0590-\u05FF\s\u05F3\u05F4'\u2019-]*)/g,
       '<bdi lang="he" class="t-heb">$1</bdi>');
+    // The climb hour belongs to the following day's fifteen, and those live on
+    // the following day's key — so when today's own climb is already done there
+    // is nothing here to offer and the hour would pass without a word. This
+    // says it has come, and steps to where the climbing is done. Hidden while
+    // today's climb is unfinished, because then the line above is already
+    // offering it, and hidden once the reader has stepped forward.
+    const ahead = document.getElementById('today-ahead');
+    if (ahead) ahead.style.display =
+      (pathStepIsDue(0) && k === 15 && currentOffset === 0) ? '' : 'none';
     el.dataset.idx = nextIdx;
     el.innerHTML = '<span class="t-lead' + (due ? ' t-now' : '') + '">' + lead + '</span> ' +
       '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
       nameHtml + ' <span class="t-sef">· ' + p[2] + '</span>';
   }
+  function todayAhead() {
+    if (typeof changeDay === 'function') changeDay(1);
+  }
+
   function todayGo() {
     const el = document.getElementById('today-next');
     if (el && el.dataset.idx !== undefined) pathGo(+el.dataset.idx);
