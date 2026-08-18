@@ -1986,13 +1986,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
 /* TODAY — the same box as the Perek Shirah banner below it, because it is the
    same kind of thing: one line of what today asks, with a way in. */
-#today-block { margin:14px 16px 0; padding:10px 14px; border:1px solid var(--border-strong);
+#today-block { margin:14px 16px 0; padding:9px 14px 8px; border:1px solid var(--border-strong);
   border-left:3px solid var(--gold); border-radius:4px; background:var(--bg-card); }
 .today-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
   text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
 .today-next { display:block; width:100%; text-align:left; background:none; border:none;
   font-family:inherit; font-size:calc(15px * var(--ts, 1)); color:var(--ink);
-  line-height:1.5; padding:6px 0; cursor:pointer; }
+  line-height:1.5; padding:3px 0; cursor:pointer; }
 .today-next .t-lead { color:var(--ink-dim); font-size:0.8em; text-transform:uppercase;
   letter-spacing:1.5px; }
 .today-next .t-step { color:var(--gold); }
@@ -2001,9 +2001,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* Clear of the button above it. A 44px reach probe from "all thirty" lands on
    the next-step button otherwise, which is the trap the song lines hit: an
    invisible band would sit on the neighbouring control and take its taps, so
-   the space is real instead. */
+   the space is real instead. Nine pixels is what that costs: the button is
+   25px tall, so a probe 21px above its centre clears its top by 8.5, and this
+   is the least that keeps it off the button above. The rest of what was here
+   was not paying for anything. */
 .today-foot { display:flex; justify-content:space-between; align-items:center; gap:10px;
-  margin-top:12px; }
+  margin-top:9px; }
 .today-count { font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
 .today-more { background:none; border:none; font-family:inherit; cursor:pointer;
   font-size:calc(11px * var(--ts, 1)); color:var(--gold); padding:6px 0; white-space:nowrap; }
