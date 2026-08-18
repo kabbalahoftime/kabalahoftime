@@ -12721,35 +12721,28 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return w;
   }
 
-  // What the hour is asking for, or null if it asks for nothing. k = מעלות
-  // marked, yMask = the מיעוט bits.
-  function pathDueNow(k, yMask) {
+  // The order is the spine. What comes next is always the lowest unmarked —
+  // the hour never reaches past an unclimbed step to a later one.
+  function pathNextIdx(k, yMask) {
+    if (k < 15) return k;
+    for (let j = 0; j < 15; j++) if (!(yMask & (1 << j))) return 15 + j;
+    return -1;
+  }
+
+  // Whether that step's hour is the hour now. A מעלה is due inside the climb's
+  // one hour; a מיעוט while its own Sefirah holds the clock. This only decides
+  // whether the block says Now or Next — it never decides which step.
+  function pathStepIsDue(idx) {
     const H = window.kotwHours;
-    if (!H || typeof H.nowH !== 'function') return null;
+    if (!H || typeof H.nowH !== 'function' || idx < 0) return false;
     const now = _hNorm(H.nowH());
-    const A = _hNorm(H.week(PATH_MAALOT_WEEKS[0]).h1);
-    const B = _hNorm(H.week(PATH_MAALOT_WEEKS[1]).h2);
-    // Inside the hour, what is due is simply the next unclimbed. The מעלות are
-    // a count rather than a set — steps below k are taken — so k is always the
-    // one to offer. The clock says that the climb is now; it does not get to
-    // say which rung, or someone who fell behind would be handed a step with
-    // three unclimbed beneath it.
-    if (k < 15 && _hIn(now, A, B)) return { idx: k, kind: 'maalah' };
-    const win = _pathHourWindows();
-    if (!win) return null;
-    // The Mochin overlay the seam rather than dividing it, so they answer first
-    // — the same order getActiveSefirahTime asks in.
-    for (const name of ['Chochmah', 'Binah', 'Keter'].concat(PATH_SEF_ORDER)) {
-      const v = win[name];
-      if (!v || !_hIn(now, v[0], v[1])) continue;
-      for (let j = 0; j < 15; j++) {
-        if (PATH_WANING[j][2] !== name) continue;
-        if (yMask & (1 << j)) continue;
-        return { idx: 15 + j, kind: 'miut', sef: name };
-      }
-      return null;                 // this Sefirah's מיעוטים are all marked
+    if (idx < 15) {
+      return _hIn(now, _hNorm(H.week(PATH_MAALOT_WEEKS[0]).h1),
+                       _hNorm(H.week(PATH_MAALOT_WEEKS[1]).h2));
     }
-    return null;
+    const win = _pathHourWindows();
+    const v = win && win[PATH_WANING[idx - 15][2]];
+    return !!v && _hIn(now, v[0], v[1]);
   }
 
   // TODAY — the next step, worked out from the same three pieces of state
@@ -12763,9 +12756,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const sun = k === 15;
     // The hour first; the lowest unmarked only when the hour asks for nothing
     // — between the מיעוט windows, or once this one's are all marked.
-    const due = pathDueNow(k, yomMask());
+    const nextIdx = pathNextIdx(k, yomMask());
+    const due = pathStepIsDue(nextIdx);
     const lead = due ? 'Now' : 'Next';
-    const nextIdx = due ? due.idx : (!sun ? k : (w < 15 ? 14 + yomNext() : -1));
     const count = document.getElementById('today-count');
     if (count) count.textContent = (k + w) + ' of 30 marked';
     if (nextIdx === -1) {
@@ -12799,10 +12792,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const live = _pathLiveNames();
     // The climb is free-order, so the row offered next is the lowest unmarked.
     const nextIdx = !sun ? k : (w < 15 ? 14 + yomNext() : -1);
-    const dueNow = pathDueNow(k, yMask);
+    const dueNow = pathStepIsDue(nextIdx);
     const row = (idx, name, sef, isDone, dayLabel) => {
       const next = idx === nextIdx;
-      const isDue = !isDone && dueNow && dueNow.idx === idx;
+      const isDue = next && dueNow;
       return `<div class="path-row${isDone ? ' done' : ''}${next ? ' next' : ''}${isDue ? ' due' : ''}" onclick="pathGo(${idx})">` +
         `<span class="path-check">${isDone ? '☑' : '☐'}</span>` +
         `<span class="path-day">${dayLabel}</span>` +
