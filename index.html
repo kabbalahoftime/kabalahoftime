@@ -1975,6 +1975,30 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .ps-line .ps-who { font-weight:600; }
 .ps-line .ps-src { color:var(--ink-mid); font-size:0.86em; font-style:italic; }
 
+/* TODAY — the same box as the Perek Shirah banner below it, because it is the
+   same kind of thing: one line of what today asks, with a way in. */
+#today-block { margin:14px 16px 0; padding:10px 14px; border:1px solid var(--border-strong);
+  border-left:3px solid var(--gold); border-radius:4px; background:var(--bg-card); }
+.today-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
+  text-transform:uppercase; color:var(--gold); margin-bottom:2px; }
+.today-next { display:block; width:100%; text-align:left; background:none; border:none;
+  font-family:inherit; font-size:calc(15px * var(--ts, 1)); color:var(--ink);
+  line-height:1.5; padding:6px 0; cursor:pointer; }
+.today-next .t-lead { color:var(--ink-dim); font-size:0.8em; text-transform:uppercase;
+  letter-spacing:1.5px; }
+.today-next .t-step { color:var(--gold); }
+.today-next .t-sef  { color:var(--ink-mid); font-size:0.85em; }
+.today-next .t-heb, .today-next .t-step { font-family:'Frank Ruhl Libre',serif; letter-spacing:0; }
+/* Clear of the button above it. A 44px reach probe from "all thirty" lands on
+   the next-step button otherwise, which is the trap the song lines hit: an
+   invisible band would sit on the neighbouring control and take its taps, so
+   the space is real instead. */
+.today-foot { display:flex; justify-content:space-between; align-items:center; gap:10px;
+  margin-top:12px; }
+.today-count { font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
+.today-more { background:none; border:none; font-family:inherit; cursor:pointer;
+  font-size:calc(11px * var(--ts, 1)); color:var(--gold); padding:6px 0; white-space:nowrap; }
+
 /* The thirty-first, under the clock: shown only once the day's thirty steps
    are done. Same box as Perek Shirah above it, centred, since it is a seal
    rather than a reading. */
@@ -2239,6 +2263,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       </div>
     </div>
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
+  </div>
+
+  <!-- TODAY — the one question the page did not answer above the fold: what
+       now. The date and the position are in the bar directly above, so this
+       adds only the step that is next and a way straight to it. -->
+  <div id="today-block">
+    <div class="today-label">Today</div>
+    <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to today's next step">…</button>
+    <div class="today-foot">
+      <span id="today-count" class="today-count"></span>
+      <button class="today-more" onclick="openTodaysPath()" aria-label="Open today's path, all thirty steps">all thirty ↗</button>
+    </div>
   </div>
 
   <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
@@ -12381,6 +12417,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       }
     });
     updateMaalotMoon(k);
+    renderTodayBlock();
     syncA11yState();
   }
 
@@ -12642,6 +12679,41 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       map[key] = (key in map && map[key] !== label) ? null : label;  // ambiguous → keep the table's name
     });
     return map;
+  }
+
+  // TODAY — the next step, worked out from the same three pieces of state
+  // Today's Path uses and by the same rule, so the two cannot disagree: the
+  // climb is free-order, so what is offered is the lowest unmarked.
+  function renderTodayBlock() {
+    const el = document.getElementById('today-next');
+    if (!el) return;
+    const k = _maalotKey ? maalotDone() : 0;
+    const w = yomDone();
+    const sun = k === 15;
+    const nextIdx = !sun ? k : (w < 15 ? 14 + yomNext() : -1);
+    const count = document.getElementById('today-count');
+    if (count) count.textContent = (k + w) + ' of 30 marked';
+    if (nextIdx === -1) {
+      delete el.dataset.idx;
+      el.textContent = '30 of 30 — the month complete.';
+      return;
+    }
+    const live = (typeof _pathLiveNames === 'function') ? _pathLiveNames() : {};
+    const waxing = nextIdx < 15;
+    const p = waxing ? PATH_WAXING[nextIdx] : PATH_WANING[nextIdx - 15];
+    const name = live[(waxing ? 'm|' : 'y|') + p[0]] || p[1];
+    // Hebrew inside the name is wrapped so it is drawn in the Hebrew face and
+    // sits in its own bidi run — the same care the rest of the app takes.
+    const nameHtml = name.replace(/([\u0590-\u05FF][\u0590-\u05FF\s\u05F3\u05F4'\u2019-]*)/g,
+      '<bdi lang="he" class="t-heb">$1</bdi>');
+    el.dataset.idx = nextIdx;
+    el.innerHTML = '<span class="t-lead">Next</span> ' +
+      '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
+      nameHtml + ' <span class="t-sef">· ' + p[2] + '</span>';
+  }
+  function todayGo() {
+    const el = document.getElementById('today-next');
+    if (el && el.dataset.idx !== undefined) pathGo(+el.dataset.idx);
   }
 
   function openTodaysPath() {
