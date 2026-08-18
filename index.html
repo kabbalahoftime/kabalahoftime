@@ -12778,7 +12778,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // — between the מיעוט windows, or once this one's are all marked.
     const nextIdx = pathNextIdx(k, yomMask());
     const due = pathStepIsDue(nextIdx);
-    const lead = due ? 'Now' : 'Next';
+    // The climb prepares the day that follows it, so during its hour the block
+    // says so — but only while the reader is standing on today. Step forward a
+    // day with the arrows and the marks land on that day's count, which is the
+    // whole of what "for tomorrow" was asking for; saying it again there would
+    // be telling someone to go where they already are.
+    const preparing = due && nextIdx < 15 && currentOffset === 0;
+    const lead = due ? (preparing ? 'Now · for tomorrow' : 'Now') : 'Next';
     const count = document.getElementById('today-count');
     if (count) count.textContent = (k + w) + ' of 30 marked';
     if (nextIdx === -1) {
