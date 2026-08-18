@@ -1975,12 +1975,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .ps-line .ps-who { font-weight:600; }
 .ps-line .ps-src { color:var(--ink-mid); font-size:0.86em; font-style:italic; }
 
+/* The step whose hour it is — in the block and in the path — keeps the same
+   slow pulse a prayer tag keeps in its own hour, so the two read as one idea. */
+.today-next .t-now { color:var(--gold); }
+.today-next .t-now, .path-row.due .path-next-tag { animation: prayerPulse 2.2s ease-in-out infinite; }
+.path-row.due { border-left:2px solid var(--gold); }
+@media (prefers-reduced-motion: reduce) {
+  .today-next .t-now, .path-row.due .path-next-tag { animation:none; opacity:1; }
+}
+
 /* TODAY — the same box as the Perek Shirah banner below it, because it is the
    same kind of thing: one line of what today asks, with a way in. */
 #today-block { margin:14px 16px 0; padding:10px 14px; border:1px solid var(--border-strong);
   border-left:3px solid var(--gold); border-radius:4px; background:var(--bg-card); }
 .today-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
-  text-transform:uppercase; color:var(--gold); margin-bottom:2px; }
+  text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
 .today-next { display:block; width:100%; text-align:left; background:none; border:none;
   font-family:inherit; font-size:calc(15px * var(--ts, 1)); color:var(--ink);
   line-height:1.5; padding:6px 0; cursor:pointer; }
@@ -12681,6 +12690,65 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return map;
   }
 
+  // ── THE HOURS OF THE PATH ──
+  // The fifteen מעלות are climbed inside weeks 45 and 46 of the dial: one hour
+  // together, just under four minutes a step, closing before the Mochin band
+  // and the seam. The fifteen מיעוטים then follow the cards — each is due while
+  // its own Sefirah holds the hour, and where a Sefirah carries more than one
+  // they are due together in it.
+  //
+  // Nothing is locked by any of this. The hour says what it is asking for; a
+  // step can still be marked whenever it was actually done, and a step already
+  // marked is never offered again.
+  const PATH_MAALOT_WEEKS = [45, 46];
+  const PATH_SEF_ORDER = ['Chesed','Gevurah','Tiferet','Netzach','Hod','Yesod','Malchut'];
+  const _hNorm = h => ((h % 24) + 24) % 24;
+  // A window may straddle the seam, so containment is asked the long way round.
+  const _hIn = (h, a, b) => (a <= b) ? (h >= a && h < b) : (h >= a || h < b);
+
+  function _pathHourWindows() {
+    const H = window.kotwHours;
+    if (!H) return null;
+    const w = {}, mo = H.moch || [];
+    // The three that overlay the seam keep the dial's own numbers.
+    if (mo[0]) w.Chochmah = [_hNorm(mo[0].h1), _hNorm(mo[0].h2)];
+    if (mo[1]) w.Binah    = [_hNorm(mo[1].h1), _hNorm(mo[1].h2)];
+    if (mo[2]) w.Keter    = [_hNorm(mo[2].h1), _hNorm(mo[2].h2)];
+    PATH_SEF_ORDER.forEach((n, i) => { w[n] = [i * 24 / 7, (i + 1) * 24 / 7]; });
+    return w;
+  }
+
+  // What the hour is asking for, or null if it asks for nothing. k = מעלות
+  // marked, yMask = the מיעוט bits.
+  function pathDueNow(k, yMask) {
+    const H = window.kotwHours;
+    if (!H || typeof H.nowH !== 'function') return null;
+    const now = _hNorm(H.nowH());
+    const A = _hNorm(H.week(PATH_MAALOT_WEEKS[0]).h1);
+    const B = _hNorm(H.week(PATH_MAALOT_WEEKS[1]).h2);
+    // Inside the hour, what is due is simply the next unclimbed. The מעלות are
+    // a count rather than a set — steps below k are taken — so k is always the
+    // one to offer. The clock says that the climb is now; it does not get to
+    // say which rung, or someone who fell behind would be handed a step with
+    // three unclimbed beneath it.
+    if (k < 15 && _hIn(now, A, B)) return { idx: k, kind: 'maalah' };
+    const win = _pathHourWindows();
+    if (!win) return null;
+    // The Mochin overlay the seam rather than dividing it, so they answer first
+    // — the same order getActiveSefirahTime asks in.
+    for (const name of ['Chochmah', 'Binah', 'Keter'].concat(PATH_SEF_ORDER)) {
+      const v = win[name];
+      if (!v || !_hIn(now, v[0], v[1])) continue;
+      for (let j = 0; j < 15; j++) {
+        if (PATH_WANING[j][2] !== name) continue;
+        if (yMask & (1 << j)) continue;
+        return { idx: 15 + j, kind: 'miut', sef: name };
+      }
+      return null;                 // this Sefirah's מיעוטים are all marked
+    }
+    return null;
+  }
+
   // TODAY — the next step, worked out from the same three pieces of state
   // Today's Path uses and by the same rule, so the two cannot disagree: the
   // climb is free-order, so what is offered is the lowest unmarked.
@@ -12690,7 +12758,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const k = _maalotKey ? maalotDone() : 0;
     const w = yomDone();
     const sun = k === 15;
-    const nextIdx = !sun ? k : (w < 15 ? 14 + yomNext() : -1);
+    // The hour first; the lowest unmarked only when the hour asks for nothing
+    // — between the מיעוט windows, or once this one's are all marked.
+    const due = pathDueNow(k, yomMask());
+    const lead = due ? 'Now' : 'Next';
+    const nextIdx = due ? due.idx : (!sun ? k : (w < 15 ? 14 + yomNext() : -1));
     const count = document.getElementById('today-count');
     if (count) count.textContent = (k + w) + ' of 30 marked';
     if (nextIdx === -1) {
@@ -12707,7 +12779,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const nameHtml = name.replace(/([\u0590-\u05FF][\u0590-\u05FF\s\u05F3\u05F4'\u2019-]*)/g,
       '<bdi lang="he" class="t-heb">$1</bdi>');
     el.dataset.idx = nextIdx;
-    el.innerHTML = '<span class="t-lead">Next</span> ' +
+    el.innerHTML = '<span class="t-lead' + (due ? ' t-now' : '') + '">' + lead + '</span> ' +
       '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
       nameHtml + ' <span class="t-sef">· ' + p[2] + '</span>';
   }
@@ -12724,14 +12796,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const live = _pathLiveNames();
     // The climb is free-order, so the row offered next is the lowest unmarked.
     const nextIdx = !sun ? k : (w < 15 ? 14 + yomNext() : -1);
+    const dueNow = pathDueNow(k, yMask);
     const row = (idx, name, sef, isDone, dayLabel) => {
       const next = idx === nextIdx;
-      return `<div class="path-row${isDone ? ' done' : ''}${next ? ' next' : ''}" onclick="pathGo(${idx})">` +
+      const isDue = !isDone && dueNow && dueNow.idx === idx;
+      return `<div class="path-row${isDone ? ' done' : ''}${next ? ' next' : ''}${isDue ? ' due' : ''}" onclick="pathGo(${idx})">` +
         `<span class="path-check">${isDone ? '☑' : '☐'}</span>` +
         `<span class="path-day">${dayLabel}</span>` +
         `<span class="path-name">${name}</span>` +
         `<span class="path-sef">${sef}</span>` +
-        (next ? `<span class="path-next-tag">next</span>` : '') +
+        (isDue ? `<span class="path-next-tag">now</span>`
+               : next ? `<span class="path-next-tag">next</span>` : '') +
         `</div>`;
     };
     let html = `<div class="path-section-title">☽ Waxing — the light descends, Keter → Malchut</div>`;
@@ -18675,10 +18750,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     cW.textContent='Week '+n+' of the inner year';
     cS.textContent=combo(n).he;
     if(!userSelected&&n!==curSel)select(n);
+    // The Today block names the hour, so it is re-read here rather than on a
+    // timer of its own: this runs after kotwHours exists, which a timer started
+    // during the card render does not — the block was falling back to the
+    // lowest unmarked and staying there for the rest of the visit.
+    if(typeof renderTodayBlock==='function')renderTodayBlock();
   }
   window.kotwRefresh=function(){userSelected=false;curSel=null;tick();};
   window.kotwWeekData=function(n){return W[n-1]||null;};
   window.kotwCombo=combo;
+  // The path keeps its hours here rather than computing its own: weeks in
+  // inner hours from the seam, the Mochin overlaying it, and "now" in the same
+  // terms. One clock, so the dial and the path cannot drift apart, and both
+  // follow Fixed or Sha'ot Zmaniyot without knowing which is on.
+  window.kotwHours={
+    week:weekHours,
+    moch:MOCH.map(function(m){return {en:m.en,h1:m.h1,h2:m.h2};}),
+    nowH:function(){return timeMap().nowH();},
+    toMin:function(h){return timeMap().hToMin(h);}
+  };
   tick();
   setInterval(tick,20000);
 })();
