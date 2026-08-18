@@ -12694,16 +12694,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // ── THE HOURS OF THE PATH ──
-  // The fifteen מעלות are climbed inside weeks 45 and 46 of the dial: one hour
-  // together, just under four minutes a step, closing before the Mochin band
-  // and the seam. The fifteen מיעוטים then follow the cards — each is due while
-  // its own Sefirah holds the hour, and where a Sefirah carries more than one
-  // they are due together in it.
+  // The fifteen מעלות are climbed inside the Mochin band — Chochmah, Binah and
+  // Keter/Da'at together, 12:54 to 2:22, eighty-eight minutes across the seam,
+  // just under six minutes a step. The fifteen מיעוטים then follow the cards:
+  // each is due while its own Sefirah holds the hour, and where a Sefirah
+  // carries more than one they are due together in it.
+  //
+  // The band holds מיעוטים of its own — three on Keter, one on Chochmah, one on
+  // Binah — and they do not collide with the climb, because order decides and
+  // the climb comes first. Once the fifteen are marked the next step is a
+  // מיעוט, and the band it is standing in is that מיעוט's own hour, so it reads
+  // Now without anything being said twice.
   //
   // Nothing is locked by any of this. The hour says what it is asking for; a
   // step can still be marked whenever it was actually done, and a step already
   // marked is never offered again.
-  const PATH_MAALOT_WEEKS = [45, 46];
   const PATH_SEF_ORDER = ['Chesed','Gevurah','Tiferet','Netzach','Hod','Yesod','Malchut'];
   const _hNorm = h => ((h % 24) + 24) % 24;
   // A window may straddle the seam, so containment is asked the long way round.
@@ -12737,8 +12742,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (!H || typeof H.nowH !== 'function' || idx < 0) return false;
     const now = _hNorm(H.nowH());
     if (idx < 15) {
-      return _hIn(now, _hNorm(H.week(PATH_MAALOT_WEEKS[0]).h1),
-                       _hNorm(H.week(PATH_MAALOT_WEEKS[1]).h2));
+      const mo = H.moch || [];
+      if (mo.length < 3) return false;
+      // First Mochin window to last — the band straddles the seam, which _hIn
+      // reads the long way round.
+      return _hIn(now, _hNorm(mo[0].h1), _hNorm(mo[2].h2));
     }
     const win = _pathHourWindows();
     const v = win && win[PATH_WANING[idx - 15][2]];
@@ -18760,7 +18768,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // terms. One clock, so the dial and the path cannot drift apart, and both
   // follow Fixed or Sha'ot Zmaniyot without knowing which is on.
   window.kotwHours={
-    week:weekHours,
     moch:MOCH.map(function(m){return {en:m.en,h1:m.h1,h2:m.h2};}),
     nowH:function(){return timeMap().nowH();},
     toMin:function(h){return timeMap().hToMin(h);}
