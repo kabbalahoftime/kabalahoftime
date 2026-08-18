@@ -12797,7 +12797,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       el.textContent = '30 of 30 — the month complete.';
       const done = document.getElementById('today-ahead');
       if (done) done.style.display =
-        (pathStepIsDue(0) && currentOffset === 0) ? '' : 'none';
+        (todayAheadDue() && currentOffset === 0) ? '' : 'none';
       return;
     }
     const live = (typeof _pathLiveNames === 'function') ? _pathLiveNames() : {};
@@ -12816,12 +12816,31 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // offering it, and hidden once the reader has stepped forward.
     const ahead = document.getElementById('today-ahead');
     if (ahead) ahead.style.display =
-      (pathStepIsDue(0) && k === 15 && currentOffset === 0) ? '' : 'none';
+      (todayAheadDue() && k === 15 && currentOffset === 0) ? '' : 'none';
     el.dataset.idx = nextIdx;
     el.innerHTML = '<span class="t-lead' + (due ? ' t-now' : '') + '">' + lead + '</span> ' +
       '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
       nameHtml + ' <span class="t-sef">· ' + p[2] + '</span>';
   }
+  // The invitation to climb for tomorrow stands from the hour's opening until
+  // the date rolls at midnight, not only for the twenty-nine minutes of the
+  // hour itself: it is a short hour, and someone still awake at 23:50 has not
+  // missed the chance. After the roll there is nothing to step forward to —
+  // the block is standing on the new day already.
+  //
+  // Week 45 opens in the late evening in both time modes, 23:16 fixed and
+  // 22:32 zmaniyot, so start-to-midnight is under ninety minutes either way.
+  // Were it ever to move into the morning that would stop being true, so the
+  // extension is only taken when the hour opens after midday.
+  function todayAheadDue() {
+    const H = window.kotwHours;
+    if (!H || typeof H.week !== 'function' || typeof H.toMin !== 'function') return false;
+    const start = H.toMin(H.week(PATH_MAALOT_WEEK).h1);
+    if (start < 720) return pathStepIsDue(0);
+    const d = new Date();
+    return (d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60) >= start;
+  }
+
   function todayAhead() {
     if (typeof changeDay === 'function') changeDay(1);
   }
