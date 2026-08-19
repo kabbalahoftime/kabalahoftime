@@ -2287,7 +2287,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="today-label">Today</div>
     <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to today's next step">…</button>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
-            aria-label="Step forward a day to climb tomorrow's ma'alot">Week 45 &middot; tomorrow&rsquo;s climb &rarr;</button>
+            aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
     <div class="today-foot">
       <span id="today-count" class="today-count"></span>
       <button class="today-more" onclick="openTodaysPath()" aria-label="Open today's path, all thirty steps">all thirty ↗</button>
@@ -12823,6 +12823,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
       nameHtml + ' <span class="t-sef">· ' + p[2] + '</span>';
   }
+  // The line does not name the week it runs in. The date bar directly above it
+  // reads "Week 48 · Day 334" — the week of the year — and the dial's week 45
+  // is a different count entirely, the position of an hour inside a single day.
+  // Two week numbers on one screen meaning two different things is a question
+  // the block should not be raising.
+  //
   // The invitation to climb for tomorrow stands from the hour's opening until
   // the date rolls at midnight, not only for the twenty-nine minutes of the
   // hour itself: it is a short hour, and someone still awake at 23:50 has not
