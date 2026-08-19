@@ -12762,6 +12762,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const now = _hNorm(H.nowH());
     if (idx < 15) {
       if (typeof H.week !== 'function') return false;
+      // The hour prepares the day that follows it, and that day's fifteen live
+      // on that day's key. So a מעלה is due now only when the day on screen is
+      // the one being prepared — step forward and it is Now; standing on today
+      // it is Next, because today's own climb had its hour last night.
+      if (currentOffset !== 1) return false;
       const wk = H.week(PATH_MAALOT_WEEK);
       return _hIn(now, _hNorm(wk.h1), _hNorm(wk.h2));
     }
@@ -12783,13 +12788,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // — between the מיעוט windows, or once this one's are all marked.
     const nextIdx = pathNextIdx(k, yomMask());
     const due = pathStepIsDue(nextIdx);
-    // The climb prepares the day that follows it, so during its hour the block
-    // says so — but only while the reader is standing on today. Step forward a
-    // day with the arrows and the marks land on that day's count, which is the
-    // whole of what "for tomorrow" was asking for; saying it again there would
-    // be telling someone to go where they already are.
-    const preparing = due && nextIdx < 15 && currentOffset === 0;
-    const lead = due ? (preparing ? 'Now · for tomorrow' : 'Now') : 'Next';
+    const lead = due ? 'Now' : 'Next';
     const count = document.getElementById('today-count');
     if (count) count.textContent = (k + w) + ' of 30 marked';
     if (nextIdx === -1) {
@@ -12815,8 +12814,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // today's climb is unfinished, because then the line above is already
     // offering it, and hidden once the reader has stepped forward.
     const ahead = document.getElementById('today-ahead');
+    // Not gated on today's climb: the line is about tomorrow's fifteen, which
+    // stand at nought whatever today has reached.
     if (ahead) ahead.style.display =
-      (todayAheadDue() && k === 15 && currentOffset === 0) ? '' : 'none';
+      (todayAheadDue() && currentOffset === 0) ? '' : 'none';
     el.dataset.idx = nextIdx;
     el.innerHTML = '<span class="t-lead' + (due ? ' t-now' : '') + '">' + lead + '</span> ' +
       '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
