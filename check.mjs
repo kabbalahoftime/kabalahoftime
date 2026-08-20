@@ -916,9 +916,11 @@ async function checkInBrowser(chromium) {
       { lens: 9, name: 'Malchut',
         // The Yad tag sits in the collapsed detail, which innerText skips —
         // textContent sees it whether the card is open or shut.
+        // The round can be a double — "Cycles 6 & 7" in a common year — so the
+        // run is taken whole, as the Chochmah probe above takes its parasha.
         card: () => pair(m((document.getElementById('malchut-detail') || {}).textContent,
-                           /Cycle (\d+) · Day (\d+) of 28/), 1, 2),
-        cell: s => pair(m(s.cell, /set (\d+) · (\d+)\/28/), 1, 2) },
+                           /Cycles? (\d+(?: & \d+)*) of 14 · Day (\d+) of 28/), 1, 2),
+        cell: s => pair(m(s.cell, /set (\d+(?: & \d+)*) · (\d+)\/28/), 1, 2) },
     ];
 
     if (typeof openYearView !== 'function') return { missing: true };

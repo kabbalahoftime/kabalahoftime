@@ -16096,10 +16096,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // the pairs and the line reads "Cycles 6 & 7 of 14" there.
       document.getElementById('malchut-yad-face').innerHTML =
         _yadFace.subs.map(s => `<a href="${yadSefariaUrl(s)}" target="_blank" style="color:var(--gold)">${s.name}</a>`).join('<br>') +
-        `<div style="color:var(--ink-dim);font-size:0.85em;margin-top:3px;">Day ${_yadFace.dayInCycle} of 28 &middot; ` +
+        `<div style="color:var(--ink-dim);font-size:0.85em;margin-top:3px;">Day ${_yadFace.dayInCycle} &middot; ` +
         (_yadFace.nums.length > 1
           ? `Cycles ${_yadFace.nums[0]} &amp; ${_yadFace.nums[1]} of 14`
-          : `Cycle ${_yadFace.nums[0]} of 14`) + `</div>`;
+          : `Cycle ${_yadFace.nums[0]} of 14`) + `</div>` +
+        // The round's own pair from Kohelet 3 — what the twenty-eight days are
+        // a time for. On the doubled round both are named, one to a line.
+        `<div style="font-size:0.85em;line-height:1.5;margin-top:2px;">` +
+        _yadFace.ittim.map(p =>
+          `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif">${p.he}</bdi>` +
+          ` <span style="color:var(--ink-dim)">&mdash; ${p.en}</span>`).join('<br>') +
+        `</div>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
@@ -16248,13 +16255,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://ravshlomokatz.com/" target="_blank" style="color:var(--gold)">Resources</a> &nbsp;·&nbsp; <a href="https://youtube.com/@ravshlomokatz" target="_blank" style="color:var(--gold)">Videos</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:0 0 14px 0;">` +
       (() => {
-        // Yad HaChazakah — 28-day overview, unfolded day-of-year (13 cycles
-        // common / 14 leap; the Adar cycle splits on its own).
+        // Yad HaChazakah — 28-day overview, unfolded day-of-year. Fourteen
+        // rounds, one to each pair of Kohelet 3: a leap year's 392 days give
+        // fourteen blocks of 28, a common year's 364 give thirteen, and the
+        // round across Shevat into Adar carries two pairs. The tag names the
+        // round rather than the block, which are not the same number from the
+        // seventh on.
         const yad = getYadInfo(d - d_year1 + 1, isLeapYear);
         const sub = s => `<a href="${yadSefariaUrl(s)}" target="_blank" style="color:var(--gold)">${s.name}</a> <span style="color:var(--ink-dim);font-size:0.85em">· ${s.book}</span>`;
         const et = p => `<span style="font-size:1.05em">${p.he}</span> <span style="color:var(--ink-dim);font-size:0.85em">— ${p.en}</span>`;
         return `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Yad HaChazakah — the 28-Day Overview</div>
-         <div class="sefirah-tags" style="margin-bottom:6px;"><span class="tag highlight">Cycle ${yad.cycle} · Day ${yad.dayInCycle} of 28</span></div>
+         <div class="sefirah-tags" style="margin-bottom:6px;"><span class="tag highlight">${yad.nums.length > 1 ? 'Cycles ' + yad.nums[0] + ' &amp; ' + yad.nums[1] : 'Cycle ' + yad.nums[0]} of 14 · Day ${yad.dayInCycle} of 28</span></div>
          <div class="detail-row"><span class="detail-label">This cycle's ittim:</span><span class="detail-value">${yad.ittim.map(et).join('<br>')}</span></div>
          <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:2px 0 8px;">${yad.ittim.map(p => p.note).join('<br>')}</div>
          <div class="detail-row"><span class="detail-label">Today (3 of 84):</span><span class="detail-value">${yad.subs.map(sub).join('<br>')}</span></div>
@@ -17879,17 +17890,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       head:(D)=>{ const t = getMalchutText(getSefirotInfo(D.abs).dayNum);
                   return t ? t.name.replace(' and Toras Menachem', '') : ''; },
       seg:(D)=>{ const y = getYadInfo(D.yPos, D.leap);
+        // The round's name, not the block's number — the same thing the card
+        // face and the detail tag now say, so the calendar and the card cannot
+        // report different sets for one day. n stays on the block index: it is
+        // only the colour band, and banding by round would merge the doubled
+        // one into its neighbour.
+        const ySet = y.nums.join(' & ');
         const t = getMalchutText(getSefirotInfo(D.abs).dayNum);
         let lh = '';
         try { lh = (getLikuteiHalachotInfo(D.yearDay) || []).map(e => e.label).join(' · '); }
         catch (e) {}
         return { n:(y.cycle-1)%7,
-                 label:'Set ' + y.cycle + ' — the Rambam whole every 28 days' +
+                 label:'Set ' + ySet + ' of 14 — the Rambam whole every 28 days' +
                        (t ? ' · ' + t.name + ' — ' + t.author : ''),
                  // "day 6 of 28" spilled to a second line in a 41px square, so
                  // the day is given as a fraction — the shortest form that still
                  // says which of the 28 it is.
-                 cell:'set ' + y.cycle + ' · ' + y.dayInCycle + '/28',
+                 cell:'set ' + ySet + ' · ' + y.dayInCycle + '/28',
                  cell2: lh,
                  cell3: (D.date.getDay() === 6 && D.parasha) ? D.parasha : '' }; } },
   ];
