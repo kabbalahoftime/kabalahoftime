@@ -15739,7 +15739,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-size:0.88rem;line-height:2;">` +
       `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim</a><br>` +
       `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
-      `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg \u2014 TorahCasts \u00b7 Class ${ccDay}</a>` +
+      `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg \u2014 TorahCasts \u00b7 Class ${ccDay}</a><br>` +
+      // Given rather than derived, and not opened from here — youtu.be is
+      // blocked at this environment's proxy. The address is exactly as supplied.
+      `<a href="https://youtu.be/x1Xt2go46Hs?is=l11mh0iLbB2WAkZb" target="_blank" style="color:var(--gold)">Chofetz Chaim \u2014 video class</a>` +
       `</div>`;
     cards[6].querySelector('.sefirah-detail').innerHTML =
       hodChazarahHtml +
@@ -16077,8 +16080,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         : `All twelve, as they were given <span style="color:var(--ink-dim);font-size:0.85em">· Mivtza Chinuch, 5736</span>`;
       // Today's three of the 84, each linked; the subheader names the work, so
       // the general Mishneh Torah link it used to carry is redundant.
+      //
+      // With the count beneath them. The 84 subsections are read three a day
+      // over 28 days, and the year holds thirteen such rounds — 13 × 28 = 364.
+      // getYadInfo has both numbers already and nothing was showing them, so
+      // the one cycle in the app whose position was invisible now says where
+      // it stands, the way every other cycle does.
       document.getElementById('malchut-yad-face').innerHTML =
-        _yadFace.subs.map(s => `<a href="${yadSefariaUrl(s)}" target="_blank" style="color:var(--gold)">${s.name}</a>`).join('<br>');
+        _yadFace.subs.map(s => `<a href="${yadSefariaUrl(s)}" target="_blank" style="color:var(--gold)">${s.name}</a>`).join('<br>') +
+        `<div style="color:var(--ink-dim);font-size:0.85em;margin-top:3px;">Day ${_yadFace.dayInCycle} of 28 &middot; Cycle ${_yadFace.cycle} of 13</div>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
