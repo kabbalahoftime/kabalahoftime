@@ -13433,7 +13433,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     else if (cycle === 6)   pairNums = [6, 7];
     else                    pairNums = [Math.min(cycle < 6 ? cycle : cycle + 1, 14)];
     const ittim = pairNums.map(n => KOHELET_ITTIM[n - 1]);
-    return { cycle, dayInCycle, subs, ittim };
+    // pairNums is what the round is actually called: the year has fourteen of
+    // these, one to each pair of Kohelet 3, and a leap year's 392 days give
+    // exactly fourteen rounds of 28. A common year has only thirteen, so the
+    // round that falls in Adar carries two — mourning and dancing, casting
+    // stones and gathering them, which is Purim either way. The raw cycle
+    // index is not the round's name after that point and must not be shown as
+    // one; from the seventh round on, the two differ by one.
+    return { cycle, dayInCycle, subs, ittim, nums: pairNums };
   }
 
   // ── RENDER ──
@@ -16083,13 +16090,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // the general Mishneh Torah link it used to carry is redundant.
       //
       // With the count beneath them. The 84 subsections are read three a day
-      // over 28 days, and the year holds thirteen such rounds — 13 × 28 = 364.
-      // getYadInfo has both numbers already and nothing was showing them, so
-      // the one cycle in the app whose position was invisible now says where
-      // it stands, the way every other cycle does.
+      // over 28 days, and the year holds fourteen such rounds, one to each pair
+      // of Kohelet 3. A leap year's 392 days give exactly fourteen; a common
+      // year's 364 give thirteen, so the round falling in Adar carries two of
+      // the pairs and the line reads "Cycles 6 & 7 of 14" there.
       document.getElementById('malchut-yad-face').innerHTML =
         _yadFace.subs.map(s => `<a href="${yadSefariaUrl(s)}" target="_blank" style="color:var(--gold)">${s.name}</a>`).join('<br>') +
-        `<div style="color:var(--ink-dim);font-size:0.85em;margin-top:3px;">Day ${_yadFace.dayInCycle} of 28 &middot; Cycle ${_yadFace.cycle} of 13</div>`;
+        `<div style="color:var(--ink-dim);font-size:0.85em;margin-top:3px;">Day ${_yadFace.dayInCycle} of 28 &middot; ` +
+        (_yadFace.nums.length > 1
+          ? `Cycles ${_yadFace.nums[0]} &amp; ${_yadFace.nums[1]} of 14`
+          : `Cycle ${_yadFace.nums[0]} of 14`) + `</div>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
