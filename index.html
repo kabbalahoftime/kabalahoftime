@@ -15740,9 +15740,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim</a><br>` +
       `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
       `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg \u2014 TorahCasts \u00b7 Class ${ccDay}</a><br>` +
-      // Given rather than derived, and not opened from here — youtu.be is
-      // blocked at this environment's proxy. The address is exactly as supplied.
-      `<a href="https://youtu.be/x1Xt2go46Hs?is=l11mh0iLbB2WAkZb" target="_blank" style="color:var(--gold)">Chofetz Chaim \u2014 video class</a>` +
+      // Given rather than derived. youtube.com is blocked at this environment's
+      // proxy, so the address has not been opened from here; it is as supplied,
+      // with the ampersand escaped so the attribute is well formed.
+      `<a href="https://youtube.com/playlist?list=PLJpenQiEURu2UENIdxVTZsQd_dWaUMsAO&amp;si=fFs9z6cvJObmevc8" target="_blank" style="color:var(--gold)">Chofetz Chaim Yomi</a>` +
       `</div>`;
     cards[6].querySelector('.sefirah-detail').innerHTML =
       hodChazarahHtml +
