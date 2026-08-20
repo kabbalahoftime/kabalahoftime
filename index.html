@@ -1119,6 +1119,12 @@ right: 38px;
 75% { transform: translateX(2px); }
 }
 
+/* The ⓘ is pinned to the card's top-right corner, and this is the only cycle
+   name long enough to reach it — measured at 28px of overlap on a 390px phone,
+   32px at the largest text. The name is held clear of it rather than shortened,
+   since what it says is the point. */
+.malchut-cycle-name { padding-right: 46px; }
+
 .sefirah-cycle-name {
 font-family: 'Cinzel', serif;
 font-size: calc(11px * var(--ts, 1));
@@ -3384,6 +3390,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   </div>
   <div class="sefirah-content-col">
     <div class="malchut-visible-content">
+      <!-- Malchut was the only card that never named its own cycle. This is it:
+           the Yad whole every 28 days, fourteen rounds to the year, one to each
+           pair of Kohelet 3 — the strong hand and the times, which is where the
+           name comes from. The count and the pair sit here now rather than
+           under the subsections below, where they read as a footnote to three
+           links instead of as what the card is counting. -->
+      <div class="sefirah-cycle-name malchut-cycle-name">Times of Strength (14 / 28)</div>
+      <div id="malchut-yad-top" style="margin-bottom:12px;"></div>
       <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
         <div class="malchut-section">
@@ -16095,17 +16109,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // year's 364 give thirteen, so the round falling in Adar carries two of
       // the pairs and the line reads "Cycles 6 & 7 of 14" there.
       document.getElementById('malchut-yad-face').innerHTML =
-        _yadFace.subs.map(s => `<a href="${yadSefariaUrl(s)}" target="_blank" style="color:var(--gold)">${s.name}</a>`).join('<br>') +
-        `<div style="color:var(--ink-dim);font-size:0.85em;margin-top:3px;">Day ${_yadFace.dayInCycle} &middot; ` +
+        _yadFace.subs.map(s => `<a href="${yadSefariaUrl(s)}" target="_blank" style="color:var(--gold)">${s.name}</a>`).join('<br>');
+
+      // The head of the card: where the round stands, and the pair of Kohelet 3
+      // it is a time for. On the doubled round both are named, one to a line.
+      document.getElementById('malchut-yad-top').innerHTML =
+        `<div style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));">Day ${_yadFace.dayInCycle} &middot; ` +
         (_yadFace.nums.length > 1
           ? `Cycles ${_yadFace.nums[0]} &amp; ${_yadFace.nums[1]} of 14`
           : `Cycle ${_yadFace.nums[0]} of 14`) + `</div>` +
-        // The round's own pair from Kohelet 3 — what the twenty-eight days are
-        // a time for. On the doubled round both are named, one to a line.
-        `<div style="font-size:0.85em;line-height:1.5;margin-top:2px;">` +
+        `<div style="line-height:1.6;margin-top:3px;">` +
         _yadFace.ittim.map(p =>
-          `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif">${p.he}</bdi>` +
-          ` <span style="color:var(--ink-dim)">&mdash; ${p.en}</span>`).join('<br>') +
+          `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.05em">${p.he}</bdi>` +
+          ` <span style="color:var(--ink-mid)">&mdash; ${p.en}</span>`).join('<br>') +
         `</div>`;
     })();
 
