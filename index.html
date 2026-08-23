@@ -371,7 +371,7 @@ letter-spacing: 1px;
    and identical on every device rather than at the mercy of an emoji font. */
 .star-mark[data-rebbe] { font-size: 1em; padding: 10px 5px; margin: -10px -1px -10px -5px; }
 .star-mark[data-rebbe] .menorah {
-  width: 26px; height: 20.6px; display: block;
+  width: 21px; height: 19px; display: block;
   transition: color 0.25s ease, filter 0.25s ease;
 }
 .star-mark[data-rebbe].lit {
@@ -379,8 +379,8 @@ letter-spacing: 1px;
   text-shadow: none;
   filter: drop-shadow(0 0 3px rgba(42, 74, 122, 0.5));
 }
-:root[data-textsize="large"]  .star-mark[data-rebbe] .menorah { width: 29px; height: 23px; }
-:root[data-textsize="larger"] .star-mark[data-rebbe] .menorah { width: 32px; height: 25.3px; }
+:root[data-textsize="large"]  .star-mark[data-rebbe] .menorah { width: 24px; height: 21.6px; }
+:root[data-textsize="larger"] .star-mark[data-rebbe] .menorah { width: 26px; height: 23.4px; }
 .dc-time {
   font-family: 'Cinzel', serif;
   font-size: calc(22px * var(--ts, 1));
@@ -2268,7 +2268,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Keter down to Malchut) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
         <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. The descent must be taken in order, each step the vessel for the next, and so must the return — which cannot begin until the moon is full. A little is a step: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</li>
         <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
-        <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps. Gathered stars light in the sun's gold and fill the ring around the moon. The seven Chabad Rebbeim — one to each Sefirah from Chesed to Malchut — are the one closed set among them, and they wear a seven-branched menorah rather than a star: they are the ground the companions stand on. A gathered Rebbe lights blue and fills his own link in the chain of seven that hangs beside the moon, rather than a star in the ring.</li>
+        <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps. Each companion gathered lights in the sun's gold and fills half a star in the ring around the moon &mdash; two to a star, so a full day&rsquo;s twenty-two make the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars. The seven Chabad Rebbeim — one to each Sefirah from Chesed to Malchut — are the one closed set among them, and they wear a seven-branched menorah rather than a star: they are the ground the companions stand on. A gathered Rebbe lights blue and fills his own link in the chain of seven that hangs beside the moon, rather than a star in the ring.</li>
         <li style="margin-bottom:0.7em;">Tap any <strong>✡</strong> — six-pointed, a Magen David — to gather it as a <strong>star</strong>, and the count beside the moon rises. The stars have no total to reach: what is on offer changes with the day, so the count says how many you reached, never how many you missed.</li>
         <li style="margin-bottom:0.7em;">The <strong>Weekly Journal</strong> keeps the accounting. Each day it reports what was actually marked — the thirty steps, the ten prayers, the stars gathered — and <em>The Year</em> lays all 364 days out at once, a column to a week, so nothing is lost at midnight.</li>
         <li style="margin-bottom:0.7em;">Badges like "Week 40 · Day 4" show where you are in that section's own cycle; the linked title beside them opens the full source text.</li>
@@ -12386,23 +12386,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // the shaft lower than the last, every lamp level along the top. Stroked in
   // currentColor, so it takes the lit colour as any other mark does.
   const MENORAH_SVG =
-    '<svg class="menorah" viewBox="0 0 24 19" fill="none" stroke="currentColor" ' +
-    'stroke-width="1" stroke-linecap="round" stroke-linejoin="round" ' +
+    '<svg class="menorah" viewBox="0 0 20 18" fill="none" stroke="currentColor" ' +
+    'stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" ' +
     'aria-hidden="true" focusable="false">' +
-    // the eight arms, one angle, each meeting the shaft lower than the last
-    '<path d="M2 4.8L12 12"/><path d="M4.5 4.8L12 10.2"/>' +
-    '<path d="M7 4.8L12 8.4"/><path d="M9.5 4.8L12 6.6"/>' +
-    '<path d="M22 4.8L12 12"/><path d="M19.5 4.8L12 10.2"/>' +
-    '<path d="M17 4.8L12 8.4"/><path d="M14.5 4.8L12 6.6"/>' +
-    // nine cups, level along the top
-    // Cups are 1 unit wide against a 2.5 spacing: a round cap paints half the
-    // stroke past each end, so anything wider closes the gaps and the nine
-    // read as one bar.
-    '<path stroke-width="0.9" d="M1.5 4.05h1M4 4.05h1M6.5 4.05h1M9 4.05h1M11.5 4.05h1' +
-    'M14 4.05h1M16.5 4.05h1M19 4.05h1M21.5 4.05h1"/>' +
-    // shaft, the flare of the foot, and the plinth it stands on
-    '<path d="M12 4.8V15.1"/><path d="M10.1 17.2L12 15.1l1.9 2.1"/>' +
-    '<path d="M9.4 17.7h5.2"/></svg>';
+    // Six arms at one angle, three to a side, each meeting the shaft lower
+    // than the last; with the shaft's own lamp that is seven, level along the
+    // top and evenly spaced — the Temple's number, and the Rebbeim's.
+    '<path d="M2 4.8L10 11.6"/><path d="M4.7 4.8L10 9.7"/><path d="M7.4 4.8L10 7.8"/>' +
+    '<path d="M18 4.8L10 11.6"/><path d="M15.3 4.8L10 9.7"/><path d="M12.6 4.8L10 7.8"/>' +
+    '<path d="M10 4.8V15.1"/><path d="M7.6 17.2h4.8"/></svg>';
 
   // Wrap the leading ✡ of every uncounted section label in a tappable span.
   // Labels that carry a מעלה or מיעוט tag are counted steps and are left
@@ -12455,12 +12447,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     });
   }
 
-  // A ring of eight small stars around the moon — the surrounding light, drawn
-  // where it belongs. Each is three crossed strokes, which reads as a star at
-  // this size where a hexagram would only smudge. They light one by one with
-  // the first eight gathered; past eight the sky simply stands full, and the
-  // exact number is beside the count.
-  const STARS_IN_RING = 8;
+  // A ring of eleven small stars around the moon — the surrounding light,
+  // drawn where it belongs, and the eleven of Yosef's dream: the sun and the
+  // moon and eleven stars. Each is three crossed strokes, which reads as a
+  // star at this size where a hexagram would only smudge. Every companion
+  // gathered fills half a star, so the day's twenty-two make the eleven
+  // exactly. A geometric half would be under two pixels across, so the half
+  // state is carried by brightness instead: dark, kindled, full.
+  const STARS_IN_RING = 11;
   function buildStarRing() {
     const g = document.getElementById('maalot-stars');
     if (!g || g.childNodes.length) return;
@@ -12535,16 +12529,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     });
     buildStarRing();
     const n = lit.size;
+    // Two companions to a star: star i takes the (2i)th and (2i+1)th gathered.
+    const halves = Math.min(n, STARS_IN_RING * 2);
     document.querySelectorAll('#maalot-stars .ring-star').forEach((g, i) => {
-      const on = i < Math.min(STARS_IN_RING, n);
-      g.setAttribute('opacity', on ? '0.95' : '0.13');
-      g.setAttribute('stroke', on ? '#dfa016' : 'var(--gold)');
+      const state = Math.max(0, Math.min(2, halves - i * 2));   // 0, 1 or 2
+      g.setAttribute('opacity', state === 2 ? '0.95' : state === 1 ? '0.5' : '0.13');
+      g.setAttribute('stroke', state ? '#dfa016' : 'var(--gold)');
+      g.setAttribute('stroke-width', state === 2 ? '0.78' : '0.62');
     });
     const cnt = document.getElementById('stars-count');
-    if (cnt) cnt.textContent = n ? '✡\uFE0E' + n : '';
+    const starFig = (halves >> 1) + (halves % 2 ? '\u00BD' : '');
+    if (cnt) cnt.textContent = n ? '✡\uFE0E' + starFig : '';
     const wrap = document.getElementById('maalot-moon');
     if (wrap) wrap.title = "Today's ma'alot — tap each מעלה tag in order · tap for Today's Path" +
-      (n ? ` · ${n} star${n === 1 ? '' : 's'} gathered` : '') +
+      (n ? ` · ${starFig} of ${STARS_IN_RING} stars — ${n} gathered, two to a star` : '') +
       (nR ? ` · ${nR} of ${REBBE_LINKS} Rebbeim` : '');
     syncA11yState();
   }
