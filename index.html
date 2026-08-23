@@ -12451,12 +12451,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       el.classList.toggle('lit', on);
       // A Rebbe's star belongs to the chain, not to the ring: counted there
       // and nowhere else, so the seven cannot crowd out the day's companions.
-      if (on) (el.dataset.rebbe ? litRebbeim : lit).add(el.dataset.star);
+      // Gathered by ordinal rather than by mark, so a Rebbe whose heading is
+      // written twice in the page still owns exactly one link.
+      if (on) {
+        if (el.dataset.rebbe) litRebbeim.add(+el.dataset.rebbe);
+        else lit.add(el.dataset.star);
+      }
     });
     buildRebbeChain();
     const nR = litRebbeim.size;
     document.querySelectorAll('#rebbe-chain .chain-link').forEach((g, i) => {
-      const on = i < nR;
+      // Each link belongs to its own Rebbe and lights in place, so the chain
+      // says which of the seven are gathered and not merely how many. Malchut
+      // marked alone lights the foot of the chain, where Malchut stands.
+      const on = litRebbeim.has(i + 1);
       g.setAttribute('opacity', on ? '0.95' : '0.16');
       g.setAttribute('stroke-width', on ? '1.15' : '0.9');
     });
