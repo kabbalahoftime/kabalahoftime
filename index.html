@@ -6561,8 +6561,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   //
   // Gate names are the ones the Pardes's own Index gives each gate; chapter
   // counts run from 3 to 27, which is why a gate takes a day rather than a
-  // chapter taking one. Addresses are derived, not opened: sefaria.org is
-  // blocked at this environment's proxy.
+  // chapter taking one.
+  //
+  // sefaria.org is blocked at this environment's proxy, so the addresses were
+  // built from the one form that was supplied rather than opened from here.
+  // Pardes_Rimmonim.N has since been confirmed by hand. The Ohr Ne'erav refs
+  // have not: they drop the trailing segment the supplied example carried
+  // (Ohr_Ne'erav%2C_PART_I%2C_Subject.1), on the assumption that a node ref
+  // resolves to the node. If it does not, they need a .1 on the end.
   const RAMAK_39 = [
     { g: 1, he: "עשר ולא תשע", en: "Ten and Not Nine" },
     { g: 2, he: "טעם האצילות", en: "The Reason for Emanation" },
