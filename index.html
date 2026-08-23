@@ -6520,6 +6520,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   ];
 
   // 13 Books by Rav Shalom Arush
+  // The thirteen books, one to each 13-day cycle. There is no per-book
+  // address, so all thirteen point at the complete set. Given rather than
+  // derived: breslev.com is blocked at this environment's proxy, so the
+  // address has not been opened from here; it is as supplied.
   const RAV_ARUSH_BOOKS = [
     'The Garden of Emuna',
     'The Garden of Peace',
@@ -15531,8 +15535,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const pbyChain = pbyNext
       ? `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he} מביאה לידי ${pbyNext.he}</div>`
       : `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he}</div>`;
-    const nachmanTale = REBBE_NACHMAN_TALES[(cy13.cycle - 1) % 13];
-    const arushBook   = RAV_ARUSH_BOOKS[(cy13.cycle - 1) % 13];
+    // Both walk in thirteens, so both take _cy13mod rather than the raw cycle.
+    // The difference shows only on cycles 27 and 28, the review: there the
+    // heading counts by the day within the cycle, and indexing off the cycle
+    // number instead pinned the book to the first or second of the thirteen —
+    // a card that said "Cycle 6" over The Garden of Peace.
+    const nachmanTale = REBBE_NACHMAN_TALES[_cy13mod - 1];
+    const arushBook   = RAV_ARUSH_BOOKS[_cy13mod - 1];
 
     // A leap year's extra 28 days are the year's 28 cycles in miniature: day N
     // stands for cycle N. So every section of this card shows on day N what it
@@ -15609,7 +15618,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Avraham Yitzhak HaKohen Kook</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Shalom Arush — Cycle ${_micMod}</div>
-       <div style="font-size:0.88rem;margin-bottom:14px;"><strong>${_micArush}</strong></div>
+       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://breslev.com/product/complete-set-of-rabbi-shalom-arushs-books/" target="_blank" style="color:var(--gold)"><strong>${_micArush}</strong></a></div>
+       <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:14px;">Breslev.com — the complete set</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ From the New Moon to the Next — Phase ${_micMod}</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
@@ -15643,7 +15653,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Avraham Yitzhak HaKohen Kook</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Shalom Arush — Cycle ${_cy13mod}</div>
-       <div style="font-size:0.88rem;margin-bottom:14px;"><strong>${arushBook}</strong></div>
+       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://breslev.com/product/complete-set-of-rabbi-shalom-arushs-books/" target="_blank" style="color:var(--gold)"><strong>${arushBook}</strong></a></div>
+       <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:14px;">Breslev.com — the complete set</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ From the New Moon to the Next — Phase ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
