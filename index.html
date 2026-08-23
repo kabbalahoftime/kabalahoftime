@@ -14861,6 +14861,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+       <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
        ` :
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
@@ -15530,6 +15533,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${pbyStep.he}</div>`;
     const nachmanTale = REBBE_NACHMAN_TALES[(cy13.cycle - 1) % 13];
     const arushBook   = RAV_ARUSH_BOOKS[(cy13.cycle - 1) % 13];
+
+    // A leap year's extra 28 days are the year's 28 cycles in miniature: day N
+    // stands for cycle N. So every section of this card shows on day N what it
+    // showed in cycle N — the counts that run in thirteens simply wrap on, and
+    // Derech Mitzvosecha, which runs in twenty-sixes, wraps on its own length.
+    const _micCyc   = cy13Mic ? cy13Mic.representsCycle : 0;      // 1–28
+    const _micMod   = _micCyc ? ((_micCyc - 1) % 13) + 1 : 0;     // 1–13
+    const _micArush = _micCyc ? RAV_ARUSH_BOOKS[(_micCyc - 1) % 13] : '';
+    const _micDm    = _micCyc ? DERECH_MITZVOSECHA[(_micCyc - 1) % 26] : null;
+    const _micStep  = _micCyc ? MESILLAT_YESHARIM_STEPS[_micMod - 1] : null;
+    const _micNext  = _micCyc ? (MESILLAT_YESHARIM_STEPS[_micMod] || null) : null;
+    const _micChain = _micStep
+      ? `<div dir="rtl" style="font-size:0.88em;color:var(--ink-mid);margin-top:3px;">${_micStep.he}` +
+        (_micNext ? ` מביאה לידי ${_micNext.he}` : '') + `</div>`
+      : '';
     // Tiferet primary text — cycles 1–13: Seder Birkas HaNehenin (13 chapters);
     // 14–26: Sippurei Ma'asiyot (13 tales); 27–28: the 26-day microcosm of the 26
     // (cycle 27 reviews the chapters by day, cycle 28 the tales by day).
@@ -15581,11 +15599,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Moshe Cordovero — the Ramak</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Steps of Pinchas Ben Yair</div>
-       <div class="detail-row"><span class="detail-label">Rung ${_cy13mod}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
+       <div class="detail-row"><span class="detail-label">Rung ${_micMod}:</span><span class="detail-value"><strong>${_micStep.name}</strong> — ${_micStep.meaning}${_micChain}</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;">
          <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b</a> &nbsp;·&nbsp;
          <a href="https://www.sefaria.org/Mishnah_Sotah.9.15" target="_blank" style="color:var(--gold)">Sotah 9:15</a>
-       </div>` :
+       </div>       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Orot HaTorah — Chapter ${_micMod}</div>
+       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Orot_HaTorah.${_micMod}" target="_blank" style="color:var(--gold)">Orot HaTorah on Sefaria</a></div>
+       <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Avraham Yitzhak HaKohen Kook</div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Shalom Arush — Cycle ${_micMod}</div>
+       <div style="font-size:0.88rem;margin-bottom:14px;"><strong>${_micArush}</strong></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ From the New Moon to the Next — Phase ${_micMod}</div>
+       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="3">Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Derech Mitzvosecha</div>
+       <div style="font-size:0.88rem;margin-bottom:${_micDm ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha</a></div>
+       ${_micDm ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-value"><strong>' + _micDm.name + '</strong>' + (_micDm.part ? ' · ' + _micDm.part : '') + '<br><span style="color:var(--ink-mid);font-size:0.9em">' + _micDm.english + '</span></span></div>' : ''}` :
       `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Nassi</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.nassi}</div></div>
        ${explRow}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
