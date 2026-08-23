@@ -371,7 +371,7 @@ letter-spacing: 1px;
    and identical on every device rather than at the mercy of an emoji font. */
 .star-mark[data-rebbe] { font-size: 1em; padding: 10px 5px; margin: -10px -1px -10px -5px; }
 .star-mark[data-rebbe] .menorah {
-  width: 22px; height: 16.5px; display: block;
+  width: 26px; height: 20.6px; display: block;
   transition: color 0.25s ease, filter 0.25s ease;
 }
 .star-mark[data-rebbe].lit {
@@ -379,8 +379,8 @@ letter-spacing: 1px;
   text-shadow: none;
   filter: drop-shadow(0 0 3px rgba(42, 74, 122, 0.5));
 }
-:root[data-textsize="large"]  .star-mark[data-rebbe] .menorah { width: 25px; height: 18.7px; }
-:root[data-textsize="larger"] .star-mark[data-rebbe] .menorah { width: 28px; height: 21px; }
+:root[data-textsize="large"]  .star-mark[data-rebbe] .menorah { width: 29px; height: 23px; }
+:root[data-textsize="larger"] .star-mark[data-rebbe] .menorah { width: 32px; height: 25.3px; }
 .dc-time {
   font-family: 'Cinzel', serif;
   font-size: calc(22px * var(--ts, 1));
@@ -12386,14 +12386,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // the shaft lower than the last, every lamp level along the top. Stroked in
   // currentColor, so it takes the lit colour as any other mark does.
   const MENORAH_SVG =
-    '<svg class="menorah" viewBox="0 0 24 18" fill="none" stroke="currentColor" ' +
-    'stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" ' +
+    '<svg class="menorah" viewBox="0 0 24 19" fill="none" stroke="currentColor" ' +
+    'stroke-width="1" stroke-linecap="round" stroke-linejoin="round" ' +
     'aria-hidden="true" focusable="false">' +
-    '<path d="M2 4.4L12 11.6"/><path d="M4.5 4.4L12 9.8"/>' +
-    '<path d="M7 4.4L12 8"/><path d="M9.5 4.4L12 6.2"/>' +
-    '<path d="M22 4.4L12 11.6"/><path d="M19.5 4.4L12 9.8"/>' +
-    '<path d="M17 4.4L12 8"/><path d="M14.5 4.4L12 6.2"/>' +
-    '<path d="M12 4.4V15.4"/><path d="M8.6 16.2h6.8"/></svg>';
+    // the eight arms, one angle, each meeting the shaft lower than the last
+    '<path d="M2 4.8L12 12"/><path d="M4.5 4.8L12 10.2"/>' +
+    '<path d="M7 4.8L12 8.4"/><path d="M9.5 4.8L12 6.6"/>' +
+    '<path d="M22 4.8L12 12"/><path d="M19.5 4.8L12 10.2"/>' +
+    '<path d="M17 4.8L12 8.4"/><path d="M14.5 4.8L12 6.6"/>' +
+    // nine cups, level along the top
+    // Cups are 1 unit wide against a 2.5 spacing: a round cap paints half the
+    // stroke past each end, so anything wider closes the gaps and the nine
+    // read as one bar.
+    '<path stroke-width="0.9" d="M1.5 4.05h1M4 4.05h1M6.5 4.05h1M9 4.05h1M11.5 4.05h1' +
+    'M14 4.05h1M16.5 4.05h1M19 4.05h1M21.5 4.05h1"/>' +
+    // shaft, the flare of the foot, and the plinth it stands on
+    '<path d="M12 4.8V15.1"/><path d="M10.1 17.2L12 15.1l1.9 2.1"/>' +
+    '<path d="M9.4 17.7h5.2"/></svg>';
 
   // Wrap the leading ✡ of every uncounted section label in a tappable span.
   // Labels that carry a מעלה or מיעוט tag are counted steps and are left
