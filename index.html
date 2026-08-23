@@ -6555,9 +6555,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Tomer Devorah is already on the face of the Tiferet card: it is the
   // thirteen attributes themselves. What is left of the Ramak's shelf comes to
   // thirty-nine — Pardes Rimmonim's thirty-two gates and Ohr Ne'erav's seven
-  // parts — which is 3 x 13. So three consecutive turns of the 13-day cycle
-  // carry the whole of it, a unit a day, and the doctrine runs underneath the
-  // conduct the card already keeps.
+  // parts — which is 3 x 13. So each turn of the 13-day cycle carries the whole
+  // of it, three units a day, and the doctrine runs underneath the conduct the
+  // card already keeps, completing as often as the attributes do.
   //
   // Gate names are the ones the Pardes's own Index gives each gate; chapter
   // counts run from 3 to 27, which is why a gate takes a day rather than a
@@ -6604,20 +6604,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { p: "VI", en: "The preparation necessary for beginners" },
     { p: "VII", en: "The divine appellations, letter by letter" },
   ];
-  function ramakUnit(cycle, day) {
-    const i = ((((cycle - 1) % 3) * 13) + day - 1 + 39) % 39;   // 0-38
-    return RAMAK_39[i] || null;
-  }
-  function ramakRow(u, n) {
-    if (!u) return '';
-    const href = u.g
-      ? `https://www.sefaria.org/Pardes_Rimmonim.${u.g}?lang=bi`
-      : `https://www.sefaria.org/Ohr_Ne'erav%2C_PART_${u.p}?lang=bi`;
-    const name = u.g ? `Pardes Rimmonim &middot; Gate ${u.g}` : `Ohr Ne'erav &middot; Part ${u.p}`;
-    return `<div class="detail-row"><span class="detail-label">The Ramak ${n} of 39:</span>` +
-      `<span class="detail-value"><a href="${href}" target="_blank" style="color:var(--gold)">${name}</a>` +
-      (u.he ? ` <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif">${u.he}</bdi>` : '') +
-      ` <span style="color:var(--ink-mid);font-size:0.85em">&mdash; ${u.en}</span></span></div>`;
+  // Three a day, so the whole of it completes in one turn of the thirteen —
+  // 3 x 13 = 39 — and the year's twenty-eight cycles carry it twenty-eight
+  // times over with nothing left at the seam.
+  function ramakRow(day) {
+    const d = ((day - 1) % 13) + 1;
+    const u = [0, 1, 2].map(k => RAMAK_39[(d - 1) * 3 + k]).filter(Boolean);
+    if (!u.length) return '';
+    const line = x => {
+      const href = x.g
+        ? `https://www.sefaria.org/Pardes_Rimmonim.${x.g}?lang=bi`
+        : `https://www.sefaria.org/Ohr_Ne'erav%2C_PART_${x.p}?lang=bi`;
+      const name = x.g ? `Pardes Rimmonim &middot; Gate ${x.g}` : `Ohr Ne'erav &middot; Part ${x.p}`;
+      return `<a href="${href}" target="_blank" style="color:var(--gold)">${name}</a>` +
+        (x.he ? ` <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif">${x.he}</bdi>` : '') +
+        ` <span style="color:var(--ink-mid);font-size:0.85em">&mdash; ${x.en}</span>`;
+    };
+    return `<div class="detail-row"><span class="detail-label">The Ramak ${(d - 1) * 3 + 1}&ndash;${(d - 1) * 3 + u.length} of 39:</span>` +
+      `<span class="detail-value">${u.map(line).join('<br>')}</span></div>`;
   }
 
   const RAV_ARUSH_BOOKS = [
@@ -15704,7 +15708,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Moshe Cordovero — the Ramak</div>
-       ${ramakRow(RAMAK_39[(extraDay - 1) % 39], ((extraDay - 1) % 39) + 1)}
+       ${ramakRow(extraDay)}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${_micMod}:</span><span class="detail-value"><strong>${_micStep.name}</strong> — ${_micStep.meaning}${_micChain}</span></div>
@@ -15735,7 +15739,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Moshe Cordovero — the Ramak</div>
-       ${ramakRow(ramakUnit(cy13.cycle, cy13.day), ((((cy13.cycle - 1) % 3) * 13) + cy13.day))}
+       ${ramakRow(cy13.day)}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${_cy13mod}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
