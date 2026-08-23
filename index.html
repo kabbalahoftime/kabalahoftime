@@ -364,14 +364,21 @@ letter-spacing: 1px;
   vertical-align: -0.16em;
   margin-right: 2px;
 }
-/* The seven Rebbeim keep the same ✡ as everything else in the surrounding
-   light — they are Or Makif like the rest. What separates them is what they
-   light to: not the sun's gold but the blue of the chain they belong to, so
-   a gathered Rebbe reads at a glance as one of the seven and not as one of
-   the day's forty-odd companions. */
+/* The seven Rebbeim wear a menorah rather than a star: they are the ground
+   the day's companions stand on, not one of them. 🕎 is a colour emoji and
+   has no text-presentation form, so `color` cannot touch it — the gathered
+   state is carried by saturation instead. Drained and dimmed until marked,
+   then full colour with the chain's own blue behind it. */
+.star-mark[data-rebbe] {
+  font-size: 1.32em;
+  vertical-align: -0.2em;
+  filter: grayscale(1) opacity(0.5);
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+.star-mark[data-rebbe]:hover { filter: grayscale(0.55) opacity(0.8); }
 .star-mark[data-rebbe].lit {
-  color: var(--accent-blue);
-  text-shadow: 0 0 6px rgba(42, 74, 122, 0.55);
+  filter: none;
+  text-shadow: 0 0 7px rgba(42, 74, 122, 0.5);
 }
 .dc-time {
   font-family: 'Cinzel', serif;
@@ -2260,7 +2267,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Keter down to Malchut) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
         <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. The descent must be taken in order, each step the vessel for the next, and so must the return — which cannot begin until the moon is full. A little is a step: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</li>
         <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
-        <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps. Gathered stars light in the sun's gold and fill the ring around the moon. The seven Chabad Rebbeim — one to each Sefirah from Chesed to Malchut — are the one closed set among them: their ✡ lights blue instead, and fills the chain of seven beside the moon rather than the ring.</li>
+        <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps. Gathered stars light in the sun's gold and fill the ring around the moon. The seven Chabad Rebbeim — one to each Sefirah from Chesed to Malchut — are the one closed set among them, and they wear a menorah <strong>🕎</strong> rather than a star: they are the ground the companions stand on. A gathered Rebbe comes into full colour and fills his own link in the chain of seven that hangs beside the moon, rather than a star in the ring.</li>
         <li style="margin-bottom:0.7em;">Tap any <strong>✡</strong> — six-pointed, a Magen David — to gather it as a <strong>star</strong>, and the count beside the moon rises. The stars have no total to reach: what is on offer changes with the day, so the count says how many you reached, never how many you missed.</li>
         <li style="margin-bottom:0.7em;">The <strong>Weekly Journal</strong> keeps the accounting. Each day it reports what was actually marked — the thirty steps, the ten prayers, the stars gathered — and <em>The Year</em> lays all 364 days out at once, a column to a week, so nothing is lost at midnight.</li>
         <li style="margin-bottom:0.7em;">Badges like "Week 40 · Day 4" show where you are in that section's own cycle; the linked title beside them opens the full source text.</li>
@@ -2799,7 +2806,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div id="yesod-parasha-cycle"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="6">✡ Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
+      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="6">🕎 Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.chabad.org/library/article_cdo/aid/6277697/jewish/Likkutei-Dibburim.htm" target="_blank" style="color:var(--gold)">Likkutei Dibburim — Chabad.org</a></div>
     </div>
   </div>
@@ -12363,18 +12370,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const name = card
       ? ((card.querySelector('.sefirah-name') || {}).textContent || 'Keter').trim()
       : 'Page';
+    // Both glyphs are stripped, so a Rebbe's id is the same as it was when he
+    // wore a star and a day already gathered does not come back empty.
     const txt = (el.textContent || '').replace(/\s+/g, ' ').trim()
-      .replace(/^✡\uFE0E?\s*/, '').replace(/\d+/g, '#');
+      .replace(/^(?:✡\uFE0E?|🕎)\s*/, '').replace(/\d+/g, '#');
     return name + '|' + txt.slice(0, 60);
   }
 
-  // Wrap the ✡ of every uncounted section label in a tappable span. Labels
-  // that carry a מעלה or מיעוט tag are counted steps and are left alone.
+  // Wrap the leading glyph of every uncounted section label in a tappable
+  // span: ✡ for the day's companions, 🕎 for the seven Rebbeim. Labels that
+  // carry a מעלה or מיעוט tag are counted steps and are left alone.
+  const REBBE_GLYPH = '🕎';
   function markStarGlyphs() {
     const labels = [];
     const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
     for (let n = walk.nextNode(); n; n = walk.nextNode()) {
-      if (n.nodeValue.trimStart().startsWith('✡')) labels.push(n.parentElement);
+      const t = n.nodeValue.trimStart();
+      if (t.startsWith('✡') || t.startsWith(REBBE_GLYPH)) labels.push(n.parentElement);
     }
     labels.forEach(el => {
       if (!el || el.querySelector('.star-mark')) return;
@@ -12383,9 +12395,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (el.querySelector('.maalah')) return;
       if (!el.closest('.sefirah-card, .keter-card')) return;
       // \uFE0E keeps the Magen David in text presentation — without it some
-      // platforms substitute a colour emoji for the drawn glyph.
-      el.innerHTML = el.innerHTML.replace('✡',
-        '<span class="star-mark" data-star="">✡\uFE0E</span>');
+      // platforms substitute a colour emoji for the drawn glyph. The menorah
+      // has no text form at all, so it is left as it is and its gathered state
+      // is carried by saturation rather than by colour.
+      el.innerHTML = el.dataset.rebbe
+        ? el.innerHTML.replace(REBBE_GLYPH,
+            `<span class="star-mark" data-star="">${REBBE_GLYPH}</span>`)
+        : el.innerHTML.replace('✡',
+            '<span class="star-mark" data-star="">✡\uFE0E</span>');
       const mark = el.querySelector('.star-mark');
       if (mark) {
         mark.dataset.star = starIdFor(el);
@@ -15080,7 +15097,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Reb Shlomo Carlebach Stories <span class="maalah yom" data-wane="7">מיעוט ז׳</span></div>
        <div class="detail-row"><span class="detail-value">${clbVideo1 ? `<a href="${clbVideo1.url}" target="_blank" style="color:var(--gold)">${clbVideo1.label}</a>` : ''}${clbVideo1 && clbVideo2 ? ' &nbsp;·&nbsp; ' : ''}${clbVideo2 ? `<a href="${clbVideo2.url}" target="_blank" style="color:var(--gold)">${clbVideo2.label}</a>` : ''}</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="1">✡ Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="1">🕎 Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/texts/Halakhah/Shulchan%20Arukh%20HaRav" target="_blank" style="color:var(--gold)">Shulchan Aruch HaRav on Sefaria</a></div>`;
 
     // Noam Elimelech — Reb Elimelech of Lizhensk — 52 weekly entries (one per KoT week)
@@ -15364,7 +15381,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${(gevMic || seasonInfo).note}</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 4 seasons × 91 (Ilan = 91)</span></div>` +
        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="2">✡ Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
+        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="2">🕎 Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
         <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Kuntres_HaHitpa'alut" target="_blank" style="color:var(--gold)">Kuntres HaHitpa'alut on Sefaria</a></div>`;
 
     // Derech Mitzvosecha — 26 teachings across cycles 27-28 (2 × 13)
@@ -15560,7 +15577,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ From the New Moon to the Next — Phase ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="3">✡ Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="3">🕎 Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Derech Mitzvosecha</div>
        <div style="font-size:0.88rem;margin-bottom:${dmTeaching ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha</a></div>
        ${dmTeaching ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-value"><strong>' + dmTeaching.name + '</strong>' + (dmTeaching.part ? ' · ' + dmTeaching.part : '') + '<br><span style=\"font-size:0.88em;opacity:0.72\">' + dmTeaching.english + '</span></span></div>' : ''}`;
@@ -15719,7 +15736,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
          <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="4">✡ Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
+         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="4">🕎 Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     } else {
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `40-Day Cycle: Receiving the Torah`;
@@ -15748,7 +15765,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          
          
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="4">✡ Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
+         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="4">🕎 Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     }
 
@@ -15798,7 +15815,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     const hodRashabHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="5">✡ Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="5">🕎 Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
       `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
 
     // Position in the 364-day sweep — derived from the same data the face shows,
@@ -16364,7 +16381,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `</div>` +
       weekRows +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="7">✡ The Rebbe</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="7">🕎 The Rebbe</div>
        <div style="font-size:0.88rem;margin-bottom:10px;">` +
       `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a> &nbsp;·&nbsp; ` +
       `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
