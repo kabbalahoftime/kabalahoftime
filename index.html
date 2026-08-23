@@ -6551,6 +6551,75 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // address, so all thirteen point at the complete set. Given rather than
   // derived: breslev.com is blocked at this environment's proxy, so the
   // address has not been opened from here; it is as supplied.
+  // ── THE RAMAK'S OTHER TWO — 39 units in three turns of thirteen ──
+  // Tomer Devorah is already on the face of the Tiferet card: it is the
+  // thirteen attributes themselves. What is left of the Ramak's shelf comes to
+  // thirty-nine — Pardes Rimmonim's thirty-two gates and Ohr Ne'erav's seven
+  // parts — which is 3 x 13. So three consecutive turns of the 13-day cycle
+  // carry the whole of it, a unit a day, and the doctrine runs underneath the
+  // conduct the card already keeps.
+  //
+  // Gate names are the ones the Pardes's own Index gives each gate; chapter
+  // counts run from 3 to 27, which is why a gate takes a day rather than a
+  // chapter taking one. Addresses are derived, not opened: sefaria.org is
+  // blocked at this environment's proxy.
+  const RAMAK_39 = [
+    { g: 1, he: "עשר ולא תשע", en: "Ten and Not Nine" },
+    { g: 2, he: "טעם האצילות", en: "The Reason for Emanation" },
+    { g: 3, he: "אם האין סוף הוא הכתר", en: "Whether the Ein Sof is Keter" },
+    { g: 4, he: "עצמות וכלים", en: "Essence and Vessels" },
+    { g: 5, he: "סדר האצילות", en: "The Order of Emanation" },
+    { g: 6, he: "סדר עמידתן", en: "The Order of Their Standing" },
+    { g: 7, he: "צנורות", en: "The Channels" },
+    { g: 8, he: "מהות והנהגה", en: "Essence and Governance" },
+    { g: 9, he: "שער המכריעים", en: "The Deciding Ones" },
+    { g: 10, he: "שער הגוונים", en: "The Colours" },
+    { g: 11, he: "צחצחות", en: "The Radiances" },
+    { g: 12, he: "נתיבות", en: "The Thirty-Two Paths" },
+    { g: 13, he: "שערים", en: "The Fifty Gates" },
+    { g: 14, he: "שער המציאיות", en: "The Existences" },
+    { g: 15, he: "ממטה למעלה", en: "From Below Upward" },
+    { g: 16, he: "אבי\"ע", en: "Atzilut, Beriah, Yetzirah, Asiyah" },
+    { g: 17, he: "ירך יעקב", en: "The Thigh of Yaakov" },
+    { g: 18, he: "מיעוט הירח", en: "The Diminishing of the Moon" },
+    { g: 19, he: "בן ד'", en: "The Four-Letter Name" },
+    { g: 20, he: "שער השמות", en: "The Names" },
+    { g: 21, he: "פרטי השמות", en: "The Particulars of the Names" },
+    { g: 22, he: "שער הכנויים", en: "The Appellations" },
+    { g: 23, he: "ערכי הכנויים", en: "The Values of the Appellations" },
+    { g: 24, he: "היכלות", en: "The Palaces" },
+    { g: 25, he: "שער התמורות", en: "The Permutations" },
+    { g: 26, he: "היכלי התמורות", en: "The Palaces of Permutation" },
+    { g: 27, he: "שער האותיות", en: "The Letters" },
+    { g: 28, he: "שער הנקודות", en: "The Vowels" },
+    { g: 29, he: "שער הטעמים", en: "The Cantillations" },
+    { g: 30, he: "שער הצירוף", en: "The Combination" },
+    { g: 31, he: "שער הנשמה", en: "The Soul" },
+    { g: 32, he: "שער הכונה", en: "Intention" },
+    { p: "I", en: "The harm done by those who stay away" },
+    { p: "II", en: "The obligation of the enlightened to study" },
+    { p: "III", en: "The manner and the time of study" },
+    { p: "IV", en: "Its superiority to the other portions of Torah" },
+    { p: "V", en: "Its virtues beyond them" },
+    { p: "VI", en: "The preparation necessary for beginners" },
+    { p: "VII", en: "The divine appellations, letter by letter" },
+  ];
+  function ramakUnit(cycle, day) {
+    const i = ((((cycle - 1) % 3) * 13) + day - 1 + 39) % 39;   // 0-38
+    return RAMAK_39[i] || null;
+  }
+  function ramakRow(u, n) {
+    if (!u) return '';
+    const href = u.g
+      ? `https://www.sefaria.org/Pardes_Rimmonim.${u.g}?lang=bi`
+      : `https://www.sefaria.org/Ohr_Ne'erav%2C_PART_${u.p}?lang=bi`;
+    const name = u.g ? `Pardes Rimmonim &middot; Gate ${u.g}` : `Ohr Ne'erav &middot; Part ${u.p}`;
+    return `<div class="detail-row"><span class="detail-label">The Ramak ${n} of 39:</span>` +
+      `<span class="detail-value"><a href="${href}" target="_blank" style="color:var(--gold)">${name}</a>` +
+      (u.he ? ` <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif">${u.he}</bdi>` : '') +
+      ` <span style="color:var(--ink-mid);font-size:0.85em">&mdash; ${u.en}</span></span></div>`;
+  }
+
   const RAV_ARUSH_BOOKS = [
     'The Garden of Emuna',
     'The Garden of Peace',
@@ -15635,6 +15704,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Moshe Cordovero — the Ramak</div>
+       ${ramakRow(RAMAK_39[(extraDay - 1) % 39], ((extraDay - 1) % 39) + 1)}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${_micMod}:</span><span class="detail-value"><strong>${_micStep.name}</strong> — ${_micStep.meaning}${_micChain}</span></div>
@@ -15665,6 +15735,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Tomer Devorah</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;">R. Moshe Cordovero — the Ramak</div>
+       ${ramakRow(ramakUnit(cy13.cycle, cy13.day), ((((cy13.cycle - 1) % 3) * 13) + cy13.day))}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${_cy13mod}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
