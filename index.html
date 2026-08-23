@@ -6162,6 +6162,33 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     { letters: 'Vowels', hebrew: 'נקודות', theme: 'Vowels & Grass', cycle: 17 }
   ];
 
+  // Ohr Ne'erav, Part VII — the Ramak's lexicon of the divine appellations,
+  // one section to each letter Alef through Tav. Twenty-two sections against a
+  // 22-day cycle, so the day's letter names its own reading. Sefaria spells
+  // seven of the names differently from the way this page does — Gimel, Daled,
+  // Yod, Samekh, Tzadi, Kof, Resh — so the mapping is written out rather than
+  // derived, the way MISHNA_TO_SEFARIA is.
+  const OHR_NEERAV_LETTERS = {
+    Alef: 'Alef',   Bet: 'Bet',       Gimmel: 'Gimel', Dalet: 'Daled',
+    Heh: 'Heh',     Vav: 'Vav',       Zayin: 'Zayin',  Chet: 'Chet',
+    Tet: 'Tet',     Yud: 'Yod',       Kaf: 'Kaf',      Lamed: 'Lamed',
+    Mem: 'Mem',     Nun: 'Nun',       Samech: 'Samekh', Ayin: 'Ayin',
+    Peh: 'Peh',     Tzaddik: 'Tzadi', Kuf: 'Kof',      Reish: 'Resh',
+    Shin: 'Shin',   Tav: 'Tav'
+  };
+  function ohrNeeravUrl(letter) {
+    const n = OHR_NEERAV_LETTERS[letter];
+    return n ? `https://www.sefaria.org/Ohr_Ne'erav%2C_PART_VII%2C_Letter_${n}?lang=bi` : null;
+  }
+  function ohrNeeravRow(letter, hebrew) {
+    const u = ohrNeeravUrl(letter);
+    return u
+      ? `<div class="detail-row"><span class="detail-label">Ohr Ne'erav:</span><span class="detail-value">` +
+        `<a href="${u}" target="_blank" style="color:var(--gold)">Letter ${letter} ${hebrew}</a>` +
+        ` <span style="color:var(--ink-mid);font-size:0.85em">&mdash; the Ramak&rsquo;s names of the Holy One under today&rsquo;s letter</span></span></div>`
+      : '';
+  }
+
   // 22-day cycle — enriched
   // Call with the day of the KoT year (1–364), as the seasons and the tractates
   // are called. The seventeen sets are 16 × 22 + 12 = 364, so the count folds at
@@ -14842,6 +14869,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year Microcosm — 28-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy22Mic.day} of ${cy22Mic.total}</span></div>
        <div class="detail-row"><span class="detail-label">Set:</span><span class="detail-value">${cy22Mic.setLabel} — ${cy22Mic.setHebrew}</span></div>
+       ${cy22Mic.type === 'letter' ? ohrNeeravRow(cy22Mic.label, cy22Mic.hebrew) : ''}
        <div class="detail-row"><span class="detail-label">${cy22Mic.type === 'letter' ? 'Letter' : cy22Mic.type === 'final' ? 'Final Letter' : 'Vowels'}:</span><span class="detail-value"><strong>${cy22Mic.label}</strong> <span style="font-size:1.2em;font-family:'Frank Ruhl Libre',serif">${cy22Mic.hebrew}</span></span></div>
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The extra 28 days (28 Shevat–25 Adar I) form a microcosm of the Alef-Bet:<br>Days 1–22: the 22 Hebrew letters · Days 23–27: the 5 final letters · Day 28: vowels (נקודות)</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
@@ -14889,6 +14917,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
+       ${ohrNeeravRow(cy22.dailyLetter, cy22.dailyHebrew)}
        
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${cy22.theme}</span></div>
 
