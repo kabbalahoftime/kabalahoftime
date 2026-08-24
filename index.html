@@ -9726,27 +9726,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
     return null;
   }
-  // Ranged Sefaria URL from the first folio's opening segment to the last
-  // folio's closing segment. Falls back to a start-only link when the day
-  // crosses a section boundary (Sefaria ranges cannot span sections).
-  function zoharExactUrl(vol, folioStart, endVol, folioEnd) {
-    let first = null, last = null;
+  // Sefaria URL for the first folio's opening segment. It used to ask for a
+  // range, first segment to last, so the reader could see where to stop —
+  // but a range that crosses chapters is refused: Zohar, Pinchas.121.9-124.9
+  // returns Page Not Found although both ends are real segments. A single
+  // ref resolves, so that is what is asked for; the label beside it already
+  // says which folios the day covers.
+  function zoharExactUrl(vol, folioStart) {
+    let first = null;
     for (const a of [folioStart * 2, folioStart * 2 + 1]) {
       first = zoharAmudCell(vol, a); if (first) break;
     }
     if (!first) return null;
-    if (endVol === vol && folioEnd !== undefined) {
-      for (const a of [folioEnd * 2 + 1, folioEnd * 2]) {
-        last = zoharAmudCell(vol, a); if (last) break;
-      }
-    }
     const base = ('Zohar, ' + first.book).replace(/ /g, '_');
-    let path;
-    if (last && last.book === first.book && last.end !== first.start) {
-      path = base + '.' + first.start.replace(':', '.') + '-' + last.end.replace(':', '.');
-    } else {
-      path = base + '.' + first.start.replace(':', '.');
-    }
+    const path = base + '.' + first.start.replace(':', '.');
     return 'https://www.sefaria.org/' + encodeURIComponent(path) + '?lang=bi';
   }
 
@@ -14416,7 +14409,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // boundary the link carries the start only; if a folio has no mapped
         // segment, fall back to the section page, then to the Zohar.
         const sec = zoharSectionForDaf(si.book.vol, si.folio);
-        const sefariaUrl = zoharExactUrl(si.book.vol, si.folio, ei.book.vol, ei.folio)
+        const sefariaUrl = zoharExactUrl(si.book.vol, si.folio)
           || (sec ? `https://www.sefaria.org/Zohar%2C_${sec.slug}?lang=bi`
                   : `https://www.sefaria.org/Zohar?lang=bi`);
         // The label carries only the volume and folio numbers — no parasha or
