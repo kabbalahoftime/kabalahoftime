@@ -9691,6 +9691,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ref = zoharAmudCell(vol, a); if (ref) break;
     }
     if (!ref) return null;
+    // One of Sefaria's own references runs backwards — Bereshit 49:479-51:6,
+    // volume I folio 38a — so a range whose end paragraph is lower than its
+    // start is trimmed to the start rather than handed over as it stands.
+    const r = ref.match(/^(.+ \d+):(\d+)-(?:\d+:)?(\d+)$/);
+    if (r && +r[3] < +r[2]) ref = r[1] + ':' + r[2];
     // "Pinchas 120:811-121:822" -> "Zohar,_Pinchas.120.811-121.822"
     const path = 'Zohar, ' + ref;
     return 'https://www.sefaria.org/' +
