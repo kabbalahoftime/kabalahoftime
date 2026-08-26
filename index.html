@@ -394,6 +394,13 @@ letter-spacing: 1px;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-top: 4px;
+  /* Two names to a column — Jerusalem ירושלים, Ma'alot מעלות — and when the
+     column is too narrow to hold them side by side they wrap. Without this
+     the wrapped line aligns to the start of the block and the Hebrew sits off
+     to the left of the time above it. The trailing letter-space of the last
+     glyph is pulled back so the tracking does not shift the centre right. */
+  text-align: center;
+  padding-left: 2px;
 }
 .dc-sep {
   font-size: calc(18px * var(--ts, 1));
