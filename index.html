@@ -988,6 +988,50 @@ gap: 6px;
 margin-bottom: 24px;
 }
 
+/* ── THE HOUR'S CARD ──
+   It used to be a card like the nine below it, distinguished only by a gold
+   left edge, and a reader had no way to tell why it stood above them. It is
+   boxed now, and a band across its top carries the dial's own NOW badge and
+   names what it is: the hour the dial is pointing at. Band and card share one
+   border, so the two read as a single block rather than as a caption that
+   happens to sit above a card. */
+#now-header {
+  /* No horizontal margin: the app already insets this column, and adding
+     more put the box 20px inside every other card and the dial above it. */
+  margin: 12px 0 0;
+  padding: 7px 12px;
+  border: 1px solid var(--gold);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  background: var(--bg-card-alt);
+  font-size: calc(11px * var(--ts, 1));
+  color: var(--ink-mid);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#now-header .now-badge {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: calc(10px * var(--ts, 1));
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  padding: 1px 7px;
+  color: var(--gold);
+  white-space: nowrap;
+}
+#now-header-range { color: var(--gold-mid); white-space: nowrap; }
+#now-sefirah-featured {
+  margin: 0;
+  border: 1px solid var(--gold);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 10px rgba(95, 73, 13, 0.10);
+}
+
 .sefirah-card {
 background: var(--bg-card);
 border-radius: 3px;
@@ -2424,9 +2468,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div id="kotw-root"></div>
 
   <!-- NOW: Sefirah of the Hour -->
-  <div id="now-caption" style="display:none; margin:2px 20px 4px; font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); text-align:center; font-style:italic;">Each hour of the day belongs to one of the ten Sefirot — this card mirrors the one shining <span style="color:var(--gold);">now</span>. You'll find the same card in its place below.</div>
+  <!-- The band that ties this card to the dial above it: the dial's own NOW
+       badge, and the hours the Sefirah holds — which the dial is pointing at. -->
+  <div id="now-header" style="display:none;">
+    <span class="now-badge">Now</span>
+    <span>the hour the dial above is pointing at<span id="now-header-range"></span></span>
+  </div>
   <div id="now-sefirah-featured" class="sefirah-card" onclick="toggleExpand(this)"
-       style="display:none;border-left:2px solid var(--gold);margin-bottom:8px;">
+       style="display:none;">
     <span class="expand-icon">▾</span>
     <div class="sefirah-label-col">
       <div id="now-sf-name" class="sefirah-name"></div>
@@ -2434,7 +2483,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="now-sf-time" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;"></div>
       <div id="now-sf-tzadik" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;"></div>
       <div id="now-sf-prayer" style="margin-top:1px;"></div>
-      <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:2px;letter-spacing:1.5px;opacity:0.9;">NOW</div>
       <div id="now-sf-heart" onclick="event.stopPropagation(); openTodaysPath()" title="The ten daily prayers">
         <svg id="prayer-heart-svg" width="20" height="19" viewBox="0 0 22 20" style="display:block;margin:0 auto;">
           <defs>
@@ -2458,6 +2506,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="now-sf-detail" class="sefirah-detail"></div>
     </div>
   </div>
+
+  <div id="now-caption" style="display:none; margin:6px 22px 14px; font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); text-align:center; font-style:italic;">Each hour of the day belongs to one of the ten Sefirot — this card mirrors the one shining <span style="color:var(--gold);">now</span>. You'll find the same card in its place below.</div>
 
   <!-- CROWN — YEARLY CYCLE -->
 
@@ -13188,12 +13238,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const allCards = document.querySelectorAll('.sefirah-card');
     // Keter has its own card class and its own face layout, so it is found and
     // mirrored differently from the seven.
+    // The names on the cards carry soft hyphens so they break where they should
+    // — Che\u00ADsed, Tife\u00ADret, Mal\u00ADchut — and getActiveSefirahTime returns
+    // them clean. Comparing the two as they stand matched only Hod, the one
+    // name with nowhere to break, so this card stayed hidden for eight of the
+    // ten Sefirot. Both sides are stripped before comparing.
+    const _bare = t => (t || '').replace(/\u00AD/g, '').trim();
     const sourceCard = active.name.indexOf('Keter') === 0
       ? document.querySelector('.keter-card')
       : Array.from(allCards).find(c =>
           c.id !== 'now-sefirah-featured' &&
           c.querySelector('.sefirah-name') &&
-          c.querySelector('.sefirah-name').textContent.trim() === active.name
+          _bare(c.querySelector('.sefirah-name').textContent) === _bare(active.name)
         );
     if (!sourceCard) return;
     document.getElementById('now-sf-name').textContent   = active.name;
@@ -13265,6 +13321,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('now-sefirah-featured').style.display = 'grid';
     const nowCap = document.getElementById('now-caption');
     if (nowCap) nowCap.style.display = '';
+    // The band names the same hours the card does, so the tie to the dial is
+    // a fact on the page and not only a position on it.
+    const nowHead = document.getElementById('now-header');
+    if (nowHead) nowHead.style.display = '';
+    const nowRange = document.getElementById('now-header-range');
+    if (nowRange) nowRange.textContent = active.range ? ' \u00b7 ' + active.range : '';
     applyMaalotState();
     applyPrayerState();
   }
