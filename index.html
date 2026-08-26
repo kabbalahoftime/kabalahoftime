@@ -15359,22 +15359,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           : `Shov\u00A0wings\u00A0${seasonInfo.dayIn - 46}\u00A0of\u00A045`);
     // The great heart keeps its own name; the two quarter-hearts say which
     // quarters they stand between, so all three read as the same kind of day.
-    const _heartLine = (() => {
-      const pl = gevMic || seasonInfo;
-      if (pl.heart) return `✦ Heart of ${(gevMic || seasonInfo).name}${_heartName ? ' — ' + _heartName : ''}`;
-      if (pl.silent) return pl.silent === 1
-        ? `✦ Right Kidney · Netzach — between faces 1 and 2`
-        : `✦ Left Kidney · Hod — between faces 3 and 4`;
-      return '';
-    })();
     // The same three days named plainly, for the detail — the face carries
     // only what the day is, and where it falls is read inside.
     const _placeLine = (() => {
       const pl = gevMic || seasonInfo;
       if (pl.heart)  return `The Heart of ${pl.name}${_heartName ? ' — ' + _heartName : ''}`;
       if (pl.silent) return pl.silent === 1
-        ? 'Right Kidney · Netzach — between faces 1 and 2'
-        : 'Left Kidney · Hod — between faces 3 and 4';
+        ? 'Right Kidney — between faces 1 and 2'
+        : 'Left Kidney — between faces 3 and 4';
       return '';
     })();
     document.getElementById('gevurah-cycle-name').innerHTML = gevMic
@@ -15517,7 +15509,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Four Seasons — 91-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${gevMic ? `held at Day ${seasonInfo.dayIn} of 91 · ${seasonInfo.name} — the count of 364 pauses for these 28 days and resumes on 26 Adar I` : `${_seasonLine} ${seasonInfo.hebrew}`}</span></div>
        ${_eicha ? `<div class="detail-row"><span class="detail-label">Eicha:</span><span class="detail-value">${_eichaLink} — ${_eicha.note}. Its four acrostics are the four faces: chapters 1, 2 and 4 one verse to a letter, chapter 3 three, and chapter 5 — which has no acrostic — on the hearts.</span></div>` : ''}
-       <div class="detail-row"><span class="detail-label">Within the 91:</span><span class="detail-value">${_gevPart} — 22 + 1 + 22 + 1 + 22 + 1 + 22, four faces of the Chayah, each turning the whole alef-bet, two kidneys and the heart between them. Every Chayah bore all four faces — \u05dc\u05b0\u05d0\u05b7\u05e8\u05b0\u05d1\u05bc\u05b7\u05e2\u05b0\u05ea\u05bc\u05b8\u05dd, to all four of them (Yechezkel 1:10) — and what set one Chayah from another was which way it stood; so the season names the face that leads, and the four within it are the same four turning. The kidneys counsel and the heart understands (Berachot 61a): the right — כִּלְיָה יְמָנִית, Netzach — counsels on the way out, the left — כִּלְיָה שְׂמָאלִית, Hod — on the way back. On all three the letters go unspelt — vowels are the life of letters (Keter Shem Tov 207) — and the chapter read is Eicha 5, which keeps its twenty-two verses and will not spell them</span></div>${gevMic ? `
+       <div class="detail-row"><span class="detail-label">Within the 91:</span><span class="detail-value">${_gevPart} — 22 + 1 + 22 + 1 + 22 + 1 + 22, four faces of the Chayah, each turning the whole alef-bet, two kidneys and the heart between them. Every Chayah bore all four faces — \u05dc\u05b0\u05d0\u05b7\u05e8\u05b0\u05d1\u05bc\u05b7\u05e2\u05b0\u05ea\u05bc\u05b8\u05dd, to all four of them (Yechezkel 1:10) — and what set one Chayah from another was which way it stood; so the season names the face that leads, and the four within it are the same four turning. The kidneys counsel and the heart understands (Berachot 61a): the right — כִּלְיָה יְמָנִית — counsels on the way out, the left — כִּלְיָה שְׂמָאלִית — on the way back. On all three the letters go unspelt — vowels are the life of letters (Keter Shem Tov 207) — and the chapter read is Eicha 5, which keeps its twenty-two verses and will not spell them</span></div>${gevMic ? `
        <div class="detail-row"><span class="detail-label">Microcosm:</span><span class="detail-value">Day ${gevMic.day} of 28 — the four seasons in miniature, seven parts to each: today stands for ${gevMic.name}, ${gevMic.heart ? 'its heart' : (gevMic.silent ? (gevMic.silent === 1 ? 'its right kidney' : 'its left kidney') : 'quarter ' + gevMic.quarter)}</span></div>` : ''}
        <div class="detail-row"><span class="detail-label">Motion:</span><span class="detail-value">${_seasonHalf} — ${_seasonHalfHeb}: ${_seasonMotion}${_heartName ? ' · ' + _heartName : ''}</span></div>
        <div class="detail-row"><span class="detail-label">Wings:</span><span class="detail-value">${_wingLine ? _wingLine.replace(/\u00A0/g, ' ') : 'day 46 — the turn itself, belonging to neither half'}</span></div>
@@ -18069,7 +18061,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // between them, the heart of the season.
         const place = s.breakAt
           ? (s.heart ? 'Heart of the season'
-             : s.silent === 1 ? 'Right Kidney — Netzach' : 'Left Kidney — Hod')
+             : s.silent === 1 ? 'Right Kidney' : 'Left Kidney')
           : (s.dayIn <= 45 ? 'Ratzo' : 'Shov') + ' · F' + s.quarter + ' letter ' + s.inQuarter;
         return { n:s.season-1,
                  label:s.name + ' — ' + (s.chayah || '') + ' · ' + (s.angel || ''),
