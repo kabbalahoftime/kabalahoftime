@@ -16094,13 +16094,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const hodCcHtml =
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">\u2726 Daily Chofetz Chaim <span class="maalah yom" data-wane="11">\u05de\u05d9\u05e2\u05d5\u05d8 \u05d9\u05f4\u05d0</span></div>` +
       `<div style="font-size:0.88rem;line-height:2;">` +
-      `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim</a><br>` +
-      `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
-      `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg \u2014 TorahCasts \u00b7 Class ${ccDay}</a><br>` +
       // Given rather than derived. youtube.com is blocked at this environment's
       // proxy, so the address has not been opened from here; it is as supplied,
       // with the ampersand escaped so the attribute is well formed.
-      `<a href="https://youtube.com/playlist?list=PLJpenQiEURu2UENIdxVTZsQd_dWaUMsAO&amp;si=fFs9z6cvJObmevc8" target="_blank" style="color:var(--gold)">Chofetz Chaim Yomi</a>` +
+      `<a href="https://youtube.com/playlist?list=PLJpenQiEURu2UENIdxVTZsQd_dWaUMsAO&amp;si=fFs9z6cvJObmevc8" target="_blank" style="color:var(--gold)">Chofetz Chaim Yomi</a><br>` +
+      `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim</a><br>` +
+      `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
+      `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg \u2014 TorahCasts \u00b7 Class ${ccDay}</a>` +
       `</div>`;
     cards[6].querySelector('.sefirah-detail').innerHTML =
       hodChazarahHtml +
