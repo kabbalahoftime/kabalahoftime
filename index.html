@@ -2324,7 +2324,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <ul style="margin:0;padding-left:1.1em;text-align:left;">
         <li style="margin-bottom:0.7em;">Use <strong>‹ ›</strong> to move a day at a time, or <strong>jump to date ↗</strong> to go straight to any date.</li>
         <li style="margin-bottom:0.7em;">Tap any card below — Keter, a Sefirah, Malchut — to expand it for the full texts and source links; tap <strong>ⓘ</strong> at a card's top-right corner to learn what its cycle means.</li>
-        <li style="margin-bottom:0.7em;">Each card opens with its own structure — where today falls in its cycle — and beneath it, under a <strong>✦</strong> heading, the text that cycle is measuring. The linked title opens the source.</li>
+        <li style="margin-bottom:0.7em;">Each card opens with its own structure — where today falls in its cycle — and beneath it the text that cycle is measuring, under its own heading. A heading marked <strong>✦</strong> carries a counted step, and its מעלה or מיעוט badge sits beside it; the rest are read without being counted. The linked title opens the source.</li>
         <li style="margin-bottom:0.7em;">Each Sefirah carries one of the day's ten <strong>prayers</strong>, in the left margin beside its hours. The one whose hour has come pulses until it is said; tap it to mark it, and tap again to undo. They may be marked in any order — unlike the ma'alot, each prayer has its own time.</li>
         <li style="margin-bottom:0.7em;">The <strong>heart</strong> in the Now card fills as those ten accumulate, and glows when the day's prayers are whole.</li>
         <li style="margin-bottom:0.7em;">Tap a step on Ma'alot HaZman — the spiral of the year above — for that week's theme, animal, and teaching.</li>
@@ -14717,7 +14717,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ` &nbsp;<span style="font-size:1.2em;font-family:'Frank Ruhl Libre',serif">${gatesPrimHeb}${gatesCompHeb}</span>`;
     const gatesHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ 231 Gates — שערים</div>` +
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">231 Gates — שערים</div>` +
       `<div class="detail-row"><span class="detail-label">${gatesLabel}:</span><span class="detail-value">` +
       gatesValueHtml + `</span></div>`;
 
@@ -14990,7 +14990,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // the appendix keeps letter, mishnah and element on the same eleven days.
     const psElemHtml = psElems.length
       ? `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Perek Shirah — ${psElems.map(p => p.ch).filter((c, i, a) => a.indexOf(c) === i).join(' · ')}</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Perek Shirah — ${psElems.map(p => p.ch).filter((c, i, a) => a.indexOf(c) === i).join(' · ')}</div>
        ` + psElems.map(p =>
         `<div class="detail-row"><span class="detail-label">Element:</span><span class="detail-value"><strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em">${p.heb}</span></span></div>
          <div class="detail-row"><span class="detail-label">Song:</span><span class="detail-value"><span style="font-style:italic">${p.verse}</span> <span style="color:var(--ink-dim);font-size:0.85em">${p.src}</span></span></div>`
@@ -14999,7 +14999,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : '';
 
     document.getElementById('chochmah-detail').innerHTML = (inExtra && cy22Mic) ?
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year Microcosm — 28-Day Cycle</div>
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Leap Year Microcosm — 28-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy22Mic.day} of ${cy22Mic.total}</span></div>
        <div class="detail-row"><span class="detail-label">Set:</span><span class="detail-value">${cy22Mic.setLabel} — ${cy22Mic.setHebrew}</span></div>
        ${cy22Mic.type === 'letter' ? ohrNeeravRow(cy22Mic.label, cy22Mic.hebrew) : ''}
@@ -15015,7 +15015,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <a href="https://www.torahrecordings.com/likutei-torah/" target="_blank" style="color:var(--gold)">Likutei Torah</a>
        </span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractMicro ? tractMicro.map(t => t.id).join(' · ') : ''}</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Tractate Cycle — ${tractMicro ? tractMicro.map(t => t.id).join(' · ') : ''}</div>
        ${tractMicro ? tractMicro.map(t =>
          `<div class="detail-row"><span class="detail-label">Tractate:</span><span class="detail-value">${t.tractate}</span></div>
           <div class="detail-row"><span class="detail-label">Period:</span><span class="detail-value">${t.period}</span></div>
@@ -15042,7 +15042,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        </span></div>
 
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractData.id}</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Tractate Cycle — ${tractData.id}</div>
        <div class="detail-row"><span class="detail-label">Tractate:</span><span class="detail-value">${tractData.tractate}</span></div>
        <div class="detail-row"><span class="detail-label">Period:</span><span class="detail-value">${tractData.period}</span></div>
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${tractData.desc}</span></div>` +
@@ -15754,7 +15754,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       }
     }
     cards[4].querySelector('.sefirah-detail').innerHTML = (inExtra && cy13Mic) ?
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year Microcosm — 28-Day Cycle</div>
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Leap Year Microcosm — 28-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy13Mic.day} of ${cy13Mic.total}</span></div>
        <div class="detail-row"><span class="detail-label">Represents:</span><span class="detail-value">13-Day Cycle ${cy13Mic.representsCycle} — ${cy13Mic.setType}</span></div>
        <div class="detail-row"><span class="detail-label">Attribute:</span><span class="detail-value"><strong>${cy13Mic.attr.name}</strong> ${cy13Mic.attr.hebrew}</span></div>
@@ -15967,7 +15967,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       cards[5].querySelector('.sefirah-sub-text').innerHTML = '';
       cards[5].querySelector('.sefirah-tags').innerHTML = '';
       cards[5].querySelector('.sefirah-detail').innerHTML =
-        `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Leap Year — 55-Day Cycle · Torah Parashiyot</div>
+        `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Leap Year — 55-Day Cycle · Torah Parashiyot</div>
          <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${leapCycleDay} of 55 · Year-Cycle ${leapCycleNum}</span></div>
          ${lcIsYechidah
            ? `<div class="detail-row"><span class="detail-label">Yechidah:</span><span class="detail-value"><strong>Coming Down from Mount Sinai</strong></span></div>
@@ -15977,7 +15977,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
               <div class="detail-row"><span class="detail-label">Level / World:</span><span class="detail-value">${lcLevel.level} / ${lcLevel.world}</span></div>`}
          <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">In a leap year, cycles 4 &amp; 5 expand to 55 days: Days 1–54 = the 54 Torah parashiyot (each book = one soul level) · Day 55 = Yechidah — Coming Down from Mount Sinai<br>Devarim reviews all 4 levels: 3 · 3 · 3 · 2</div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
+         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Mivtzah · Tikkun HaKlali</div>
          <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Year-Cycle ${leapCycleNum})</span></div>
          <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Year-Cycle ${leapCycleNum})</span></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
@@ -16000,7 +16000,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${_cycleCmdText || cycleCmd.commandment}`;
       cards[5].querySelector('.sefirah-tags').innerHTML = '';
       cards[5].querySelector('.sefirah-detail').innerHTML =
-        `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Mivtzah · Tikkun HaKlali</div>
+        `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Mivtzah · Tikkun HaKlali</div>
          <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${_mivtzahText} (${_cycleLabel})</span></div>
          <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${_psalmLinks} (${_cycleLabel})</span></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
@@ -16614,7 +16614,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       })() +
       (() => {
         const pk = _vtSeif > 0 ? VATAH_PESUKIM[_vtSeif - 1] : null;
-        return `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Year-Round Connection — ואתה תצוה</div>
+        return `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Year-Round Connection — ואתה תצוה</div>
          <div class="detail-row"><span class="detail-label">${_vtSeif === 0 ? 'Overview' : "Se'if " + VATAH_HEB[_vtSeif - 1]}:</span><span class="detail-value"><a href="${_vtUrl}" target="_blank" style="color:var(--gold)">${_vtTitle}</a> <span style="color:var(--ink-mid);font-size:0.85em">· ${VATAH_MONTH_BY_DAY[cy13.day - 1]}</span></span></div>` +
          (pk ? `<div class="detail-row"><span class="detail-label">Pasuk ${VATAH_HEB[_vtSeif - 1]}:</span><span class="detail-value">${pk.he}<br><span style="color:var(--ink-mid);font-size:0.88em">${pk.en}</span> <span style="color:var(--ink-dim);font-size:0.82em">· ${pk.src}</span></span></div>` :
           `<div class="detail-row"><span class="detail-label">The Twelve Pesukim:</span><span class="detail-value">All twelve, as they were given</span></div>
