@@ -14444,11 +14444,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // resolveZoharFolio takes a 0-indexed absolute folio count
         const si = resolveZoharFolio(cumFolios);
         const ei = resolveZoharFolio(cumFolios + todayFolios - 1);
-        // The link opens today's exact reading as a Sefaria range — from the
-        // first folio's opening segment to the last folio's closing segment —
-        // so the reader sees where to stop. If the day crosses a section
-        // boundary the link carries the start only; if a folio has no mapped
-        // segment, fall back to the section page, then to the Zohar.
+        // The link opens the first amud of the day's reading — see
+        // zoharExactUrl, which asks for one amud rather than a range. The
+        // label beside it says which folios the day covers. If that folio
+        // has no mapped segment — volume III 1 and 297b-299b carry no text —
+        // fall back to the section page, then to the Zohar.
         const sec = zoharSectionForDaf(si.book.vol, si.folio);
         const sefariaUrl = zoharExactUrl(si.book.vol, si.folio)
           || (sec ? `https://www.sefaria.org/Zohar%2C_${sec.slug}?lang=bi`
