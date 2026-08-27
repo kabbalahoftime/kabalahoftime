@@ -14886,6 +14886,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // 28-day Adar I microcosm the face reads the Hosafot instead — the addenda
     // as the added month: ½ (Vayikra 8b) + 4 (Vayikra 50b→) + 23½ (Torah Ohr,
     // Page 203–248) = 28.
+    // Which of the two seforim the day is in decides where Listen points.
+    const _ltRecUrl = nm => /^LT\b|Lik+utei/i.test(nm || '')
+      ? 'https://www.torahrecordings.com/likutei-torah/'
+      : 'https://www.torahrecordings.com/torah-ohr/';
+    const _listen = nm =>
+      ` <a href="${_ltRecUrl(nm)}" target="_blank" style="color:var(--gold);font-size:0.85em" title="Recordings at TorahRecordings">Listen</a>`;
     let hoReq = null, hoPg = null, hoLabel = '', hoUrl = '';
     if (inExtra) {
       if (extraDay === 1) {
@@ -14904,18 +14910,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       document.getElementById('chochmah-lt-face').innerHTML =
         `<a href="https://hebrewbooks.org/pdfpager.aspx?req=${hoReq}&pgnum=${hoPg}" target="_blank" style="color:var(--gold)" title="This folio on HebrewBooks">${hoLabel}</a>` +
         ` <a href="${hoUrl}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This sefer on Sefaria">Sefaria</a>` +
+        _listen(hoLabel) +
         `<span style="color:var(--ink-dim);font-size:0.85em"> · Hosafa ${extraDay} of 28</span>`;
     } else if (chCovers) {
       document.getElementById('chochmah-lt-face').innerHTML =
         chCovers.map(c =>
           `<a href="https://hebrewbooks.org/pdfpager.aspx?req=${c.req}&pgnum=${c.pg}" target="_blank" style="color:var(--gold)" title="Cover on HebrewBooks">${c.name} · Cover</a>` +
-          ` <a href="${c.url}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This sefer on Sefaria">Sefaria</a>`
+          ` <a href="${c.url}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This sefer on Sefaria">Sefaria</a>` +
+          _listen(c.name)
         ).join('<br>') +
         `<div style="color:var(--ink-dim);font-size:0.85em;margin-top:2px;">Cover day</div>`;
     } else {
       document.getElementById('chochmah-lt-face').innerHTML = chSection
         ? `<a href="${chHbUrl || chUrl}" target="_blank" style="color:var(--gold)" title="${chHbUrl ? 'This folio on HebrewBooks' : 'This sefer on Sefaria'}">${chSection} · ${chReading}</a>` +
-          (chHbUrl ? ` <a href="${chUrl}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This sefer on Sefaria">Sefaria</a>` : ``)
+          (chHbUrl ? ` <a href="${chUrl}" target="_blank" style="color:var(--gold);font-size:0.85em" title="This sefer on Sefaria">Sefaria</a>` : ``) +
+          _listen(chSection)
         : `<span style="color:var(--ink-dim)">—</span>`;
     }
 
@@ -15008,13 +15017,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The extra 28 days (28 Shevat–25 Adar I) form a microcosm of the Alef-Bet:<br>Days 1–22: the 22 Hebrew letters · Days 23–27: the 5 final letters · Day 28: vowels (נקודות)</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Torah Ohr / Likutei Torah — Hosafa ${extraDay} of 28</div>
-       <div class="detail-row"><span class="detail-label">Reading:</span><span class="detail-value"><a href="${hoUrl}" target="_blank" style="color:var(--gold)">${hoLabel}</a> — R. Shneur Zalman of Liadi</span></div>
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The added month reads the addenda: the Hosafot run ½ folio (Vayikra 8b) + 4 (Vayikra) + 23½ (Torah Ohr) = 28, a folio for each of the extra days.</div>
-       <div class="detail-row"><span class="detail-label">Recordings:</span><span class="detail-value">
-         <a href="https://www.torahrecordings.com/torah-ohr/" target="_blank" style="color:var(--gold)">Torah Ohr</a>
-         &nbsp;·&nbsp;
-         <a href="https://www.torahrecordings.com/likutei-torah/" target="_blank" style="color:var(--gold)">Likutei Torah</a>
-       </span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractMicro ? tractMicro.map(t => t.id).join(' · ') : ''} <span class="maalah yom" data-wane="4">מיעוט ד׳</span></div>
        ${tractMicro ? tractMicro.map(t =>
@@ -15034,14 +15037,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        ` :
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Torah Ohr / Likutei Torah — Day ${chDay} of 364</div>
-       ${chSourceRow}
-       <div class="detail-row"><span class="detail-label">Recordings:</span><span class="detail-value">
-         <a href="https://www.torahrecordings.com/torah-ohr/" target="_blank" style="color:var(--gold)">Torah Ohr</a>
-         &nbsp;·&nbsp;
-         <a href="https://www.torahrecordings.com/likutei-torah/" target="_blank" style="color:var(--gold)">Likutei Torah</a>
-       </span></div>
 
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractData.id} <span class="maalah yom" data-wane="4">מיעוט ד׳</span></div>
@@ -15050,7 +15045,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${tractData.desc}</span></div>
        <div class="detail-row"><span class="detail-label">Recordings:</span><span class="detail-value"><a href="https://www.yutorah.org/mobileNav?showNav=Gemara" target="_blank" style="color:var(--gold)">Gemara Shiurim</a> <span style="color:var(--ink-mid);font-size:0.85em;">&mdash; YUTorah</span></span></div>` +
       psElemHtml +
-      gatesHtml +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Cycle Letters:</span><span class="detail-value">${cy22.letters} — ${cy22.hebrew}</span></div>
        ${ohrNeeravRow(cy22.dailyLetter, cy22.dailyHebrew)}
