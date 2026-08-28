@@ -13201,8 +13201,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<span class="path-day">${dayLabel}</span>` +
         `<span class="path-name">${name}</span>` +
         `<span class="path-sef">${sef}</span>` +
-        (isDue ? `<span class="path-next-tag">now</span>`
-               : next ? `<span class="path-next-tag">next</span>` : '') +
+        // The tag reads next whether or not the hour has come — the row pulses
+        // when it has, the same way the Today line does.
+        (next ? `<span class="path-next-tag">next</span>` : '') +
         `</div>`;
     };
     let html = `<div class="path-section-title">☽ Waxing — the light descends, Keter → Malchut</div>`;
