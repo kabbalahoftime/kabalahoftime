@@ -2074,11 +2074,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
 /* The step whose hour it is — in the block and in the path — keeps the same
    slow pulse a prayer tag keeps in its own hour, so the two read as one idea. */
-.today-next .t-now { color:var(--gold); }
-.today-next .t-now, .path-row.due .path-next-tag { animation: prayerPulse 2.2s ease-in-out infinite; }
+.today-next .t-due { color:var(--gold); }
+.today-next .t-due, .path-row.due .path-next-tag { animation: prayerPulse 2.2s ease-in-out infinite; }
 .path-row.due { border-left:2px solid var(--gold); }
 @media (prefers-reduced-motion: reduce) {
-  .today-next .t-now, .path-row.due .path-next-tag { animation:none; opacity:1; }
+  .today-next .t-due, .path-row.due .path-next-tag { animation:none; opacity:1; }
 }
 
 /* TODAY — the same box as the Perek Shirah banner below it, because it is the
@@ -13112,7 +13112,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // — between the מיעוט windows, or once this one's are all marked.
     const nextIdx = pathNextIdx(k, yomMask());
     const due = pathStepIsDue(nextIdx);
-    const lead = due ? 'Now' : 'Next';
+    // The line always reads Next — it names the step still to be taken, and
+    // the NOW card above already owns the word Now. When the hour for it has
+    // come the word pulses rather than changing.
+    const lead = 'Next';
     const count = document.getElementById('today-count');
     if (count) count.textContent = (k + w) + ' of 30 marked';
     if (nextIdx === -1) {
@@ -13143,7 +13146,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
     el.dataset.idx = nextIdx;
-    el.innerHTML = '<span class="t-lead' + (due ? ' t-now' : '') + '">' + lead + '</span> ' +
+    el.innerHTML = '<span class="t-lead' + (due ? ' t-due' : '') + '">' + lead + '</span> ' +
       '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
       nameHtml + ' <span class="t-sef">· ' + p[2] + '</span>';
   }
