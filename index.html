@@ -6140,6 +6140,32 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return { primName, primHeb, compName, compHeb, isVowel: cyN === 17 };
   }
 
+  // In the added month the gates follow the microcosm's own letters rather
+  // than the running 231 count: each letter with the one it shares a cycle
+  // with — Alef with Bet, Bet with Alef, Gimmel with Dalet — the eleven pairs
+  // the 22-day cycles are named for. The five finals take the letter they are
+  // the final form of. The vowels close the month and form no gate.
+  const FINAL_LETTER_BASE = {
+    'Kaf Sofit': 'Kaf', 'Mem Sofit': 'Mem', 'Nun Sofit': 'Nun',
+    'Peh Sofit': 'Peh', 'Tzadik Sofit': 'Tzaddik'
+  };
+  function gatesMicrocosm(mic) {
+    if (!mic || mic.type === 'vowel') return null;
+    let prim, comp;
+    if (mic.type === 'letter') {
+      const i = SINGLE_LETTERS_22.findIndex(l => l.letter === mic.label);
+      if (i < 0) return null;
+      prim = SINGLE_LETTERS_22[i];
+      comp = SINGLE_LETTERS_22[i ^ 1];        // the other half of its pair
+    } else {
+      prim = { letter: mic.label, hebrew: mic.hebrew };
+      comp = SINGLE_LETTERS_22.find(l => l.letter === FINAL_LETTER_BASE[mic.label]);
+    }
+    if (!prim || !comp) return null;
+    return `<strong>${prim.letter}</strong> + <strong>${comp.letter}</strong>` +
+           ` <span style="font-size:1.1em">${prim.hebrew}${comp.hebrew}</span>`;
+  }
+
   // The five final letters, for the leap year's 28-day microcosm: the 22 run
   // through, then these five, then a day for the vowels. Kept at module scope
   // so the monthly calendars can name them as the card does.
@@ -14745,13 +14771,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_DOC}" target="_blank" style="color:var(--gold)">Hebrew Alphabet, Perek Shirah, and Pirkei Avot ↗</a>`;
     const _ltNames = _ltShown.map(l => `${l.name} <span style="font-family:'Frank Ruhl Libre',serif">${l.heb}</span>`).join(' · ');
 
+    const _micGate = gatesMicrocosm(cy22Mic);
     if (inExtra && cy22Mic) {
       document.getElementById('chochmah-cycle-name').innerHTML = cy22Mic.setLabel;
       document.getElementById('chochmah-main').innerHTML =
         `Microcosm Day <strong>${cy22Mic.day}</strong> of ${cy22Mic.total}<br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22Mic.label}</strong> <span style="font-size:1.1em">${cy22Mic.hebrew}</span><br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span><br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine;
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>` +
+        (_micGate ? `<br><span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + _micGate : '');
       document.getElementById('chochmah-sub').innerHTML = '';
       document.getElementById('chochmah-tags').innerHTML = '';
     } else {
