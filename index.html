@@ -9724,7 +9724,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const whole = zoharSectionForParashaName(pName);
     const parts = whole ? [pName] : pName.split('-').map(p => p.trim());
     const found = parts.map(p => ({ name: p, slug: whole || zoharSectionForParashaName(p) }));
-    if (!found.some(f => f.slug)) return null;
     return found.map(f => f.slug
       ? `<a href="https://www.sefaria.org/Zohar%2C_${f.slug}?lang=bi" target="_blank" style="color:var(--gold)">${f.name}</a>`
       : `<span style="color:var(--ink-mid)">${f.name}</span>`).join(' &nbsp;·&nbsp; ');
@@ -9802,22 +9801,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Parasha → Sefaria Zohar section name
   const ZOHAR_PARASHA_SECTIONS = {
     'Bereshit': 'Bereshit', 'Noach': 'Noach', 'Lech Lecha': 'Lech_Lecha',
-    'Vayeira': 'Vayera', 'Chayei Sara': 'Chayei_Sarah',
+    'Vayeira': 'Vayera', 'Chayei Sara': 'Chayei_Sara',
     'Toledot': 'Toldot', 'Vayetzei': 'Vayetzei', 'Vayishlach': 'Vayishlach',
     'Vayeshev': 'Vayeshev', 'Miketz': 'Miketz', 'Vayigash': 'Vayigash', 'Vayechi': 'Vayechi',
     'Shemot': 'Shemot', 'Vaera': 'Vaera', 'Bo': 'Bo', 'Beshalach': 'Beshalach',
     'Yitro': 'Yitro', 'Mishpatim': 'Mishpatim', 'Terumah': 'Terumah', 'Tetzaveh': 'Tetzaveh',
-    'Ki Tisa': 'Ki_Tissa', 'Vayakhel-Pekudei': 'Vayakhel',
+    'Ki Tisa': 'Ki_Tisa', 'Vayakhel-Pekudei': 'Vayakhel',
     'Vayikra': 'Vayikra', 'Tzav': 'Tzav', 'Shmini': 'Shmini',
-    'Tazria-Metzora': 'Tazria', 'Achrei Mot-Kedoshim': 'Acharei_Mot',
+    'Tazria-Metzora': 'Tazria', 'Achrei Mot-Kedoshim': 'Achrei_Mot',
     'Emor': 'Emor', 'Behar-Bechukotai': 'Behar',
     'Bamidbar': 'Bamidbar', 'Nasso': 'Nasso', 'Behaalotecha': 'Behaalotcha',
-    'Shlach': 'Shelach', 'Korach': 'Korach', 'Chukat-Balak': 'Chukat',
-    'Pinchas': 'Pinchas', 'Matot-Masei': 'Matot',
+    'Shlach': "Sh'lach", 'Korach': 'Korach', 'Chukat-Balak': 'Chukat',
+    'Pinchas': 'Pinchas',
     'Vaetchanan': 'Vaetchanan', 'Eikev': 'Eikev',
-    "Re'eh": 'Reeh', 'Shoftim': 'Shoftim', 'Ki Teitzei': 'Ki_Teitzei',
-    'Ki Tavo': 'Ki_Tavo', 'Nitzavim-Vayeilech': 'Nitzavim',
+    'Shoftim': 'Shoftim', 'Ki Teitzei': 'Ki_Teitzei',
     'Vayeilech': 'Vayeilech', 'Haazinu': 'Haazinu',
+    // Matot, Masei, Devarim, Re'eh, Ki Tavo, Nitzavim and VeZot HaBerachah are
+    // deliberately absent: the printed Zohar has no section for them (Matot
+    // carries a fragment at 259b, no more). A double parasha with one half
+    // missing is split so the half that exists still links and the half that
+    // does not is named plainly.
   };
 
   // Sefer Yetzirah — one verse per parasha (Bereshit → VeZot HaBrachah), shown
@@ -14605,10 +14608,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (!faceEl) return;
       const pName = (window.getParashaForDate && window.getParashaForDate(date)) || null;
       const links = zoharParashaLinks(pName);
-      _hodZoharParasha = links ? (pName || '') : '';
-      faceEl.innerHTML = links
-        || `<a href="https://www.sefaria.org/Zohar?lang=bi" target="_blank" style="color:var(--gold)">Zohar</a>` +
-           (pName ? ` <span style="font-size:0.85em;color:var(--ink-mid)">· no section for ${pName}</span>` : '');
+      // Which halves of the week the Zohar has nothing for. A double parasha is
+      // asked whole first, exactly as zoharParashaLinks asks it.
+      const _zParts = pName
+        ? (zoharSectionForParashaName(pName) ? [pName] : pName.split('-').map(x => x.trim()))
+        : [];
+      const _zGap = _zParts.filter(x => !zoharSectionForParashaName(x));
+      _hodZoharParasha = (links && !_zGap.length) ? (pName || '') : '';
+      faceEl.innerHTML = (links
+        || `<a href="https://www.sefaria.org/Zohar?lang=bi" target="_blank" style="color:var(--gold)">Zohar</a>`) +
+        // The Zohar does not comment on all fifty-four. Where it is silent the
+        // week still has a Zohar to read: the one Chok L'Yisrael carries, in
+        // English, and on Shabbat the parasha's verse of Sefer Yetzirah — the
+        // same reading the Yesod detail offers, offered here too rather than
+        // leaving the week with nothing.
+        (_zGap.length && _chokZoharHtml
+          ? `<div style="font-size:0.85em;color:var(--ink-mid);margin-top:3px;">` +
+            `no Zohar for ${_zGap.length === _zParts.length ? 'this parasha' : _zGap.join(' · ')}</div>` +
+            `<div style="margin-top:1px;">${_chokZoharHtml}</div>`
+          : '');
     })();
 
     // Hayom Yom: the visible Keter-detail section was removed, but the text is
