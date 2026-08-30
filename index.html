@@ -17637,7 +17637,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       .replace(/&rsquo;/g, '\u2019').replace(/&lsquo;/g, '\u2018')
       .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&hellip;/g, '\u2026')
       .replace(/"{2,}/g, '"')                                     // a title already quoted
-      .replace(/\.{2,}/g, '.')                                    // a value that ended in one
+      // Only a genuine doubled full stop — a value that already ended in one,
+      // met by the template's own. An ellipsis marking omitted text is left
+      // alone, whether it is written with three dots ("in those many days...
+      // and they groaned") or, in the Hebrew, with two set off by spaces
+      // ("נק' איש .. וישראל"). Both say something; "declaration.." does not.
+      .replace(/([^.\s])\.\.(?!\.)/g, '$1.')
+      .replace(/\u2026\./g, '\u2026')                                // an ellipsis needs no stop
       .replace(/[ \t]+([.,;:!?])/g, '$1')                          // a clause that came out empty
       .replace(/[ \t]{2,}/g, ' ')
       .split('\n').map(l => l.replace(/[ \t]+$/, '')).join('\n');
