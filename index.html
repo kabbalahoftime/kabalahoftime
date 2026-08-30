@@ -9697,6 +9697,34 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       [300, "Addenda, Volume III", "Addenda"],
     ]
   };
+  // The Breslov Israel recordings, hoisted to module scope so the monthly
+  // calendar can name the same recording the Binah card names.
+  const BRESLEV_CDS = (() => {
+    const arr = [];
+    const add = (url, label, count, skip) => {
+      skip = skip || [];
+      const listId = url.match(/list=([^&]+)/)[1];
+      let added = 0;
+      for (let i = 1; added < count; i++) {
+        if (skip.indexOf(i) === -1) {
+          arr.push({ url: 'https://www.youtube.com/watch?list=' + listId + '&index=' + i, label: count > 1 ? label + ' — ' + (added+1) + '/' + count : label });
+          added++;
+        }
+      }
+    };
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpI538xWesNUA9ZKWp3wM4pm&si=PIz0Zvb_HufU9fQg', 'Purim', 1);
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpL5POVo17w3Fv4JeEjoHxUm&si=MeA4MPYUSKGIllbm', 'Children', 1);
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpKt3i093sxKbab3cECMkQMq&si=fuZ2NqOWEowkTiYR', 'No to Drugs', 2);
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpK7dhzdcN4ub0-FVTu8VNk7&si=sHjKhLMeu1QFuHKp', 'Strengthening', 17);
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpJbwUjjmtHxXQcyPfwjcL7O&si=lxr3Znks2Xrx11Q3', 'Emunah', 27);
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpJoL0fsqMMI2P3S-S4L1T9i&si=kpt0ZrzbVlFH1IMc', 'Making a Living', 4);
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpJ-XvJ__pFITtZxRoMM2nFR&si=YFydeHxMsIxCm06e', 'Treatment of Others', 5);
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpJDkxetTs0Byx8_X7rqdV9_&si=YwmWblITqFRmoq9C', 'Happiness', 20);
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpIPNbiuoL2v3B72eMa56jha&si=bV8PZ6ySXB3GPdSd', 'Self-Confidence', 4);
+    add('https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z&si=JVvbM6UYIDLqU34p', 'Gratitude', 27, [4, 6, 21]);
+    return arr;
+  })();
+
   // The Chochmah year of Torah Ohr / Likutei Torah, hoisted to module scope
   // so the monthly calendar can walk the same table the card walks.
   const TO_URL = 'https://www.sefaria.org/Torah_Ohr?tab=contents';
@@ -15114,31 +15142,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const superCycle = Math.min(omerCycle, 7), superSef = _b777.cycleSef;
     const combo = _b777.combo;
     // Breslev Israel CDs — 108-recording rotation (1 per KoT day, cycles every 108 days)
-    const BRESLEV_CDS = (() => {
-      const arr = [];
-      const add = (url, label, count, skip) => {
-        skip = skip || [];
-        const listId = url.match(/list=([^&]+)/)[1];
-        let added = 0;
-        for (let i = 1; added < count; i++) {
-          if (skip.indexOf(i) === -1) {
-            arr.push({ url: 'https://www.youtube.com/watch?list=' + listId + '&index=' + i, label: count > 1 ? label + ' — ' + (added+1) + '/' + count : label });
-            added++;
-          }
-        }
-      };
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpI538xWesNUA9ZKWp3wM4pm&si=PIz0Zvb_HufU9fQg', 'Purim', 1);
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpL5POVo17w3Fv4JeEjoHxUm&si=MeA4MPYUSKGIllbm', 'Children', 1);
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpKt3i093sxKbab3cECMkQMq&si=fuZ2NqOWEowkTiYR', 'No to Drugs', 2);
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpK7dhzdcN4ub0-FVTu8VNk7&si=sHjKhLMeu1QFuHKp', 'Strengthening', 17);
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpJbwUjjmtHxXQcyPfwjcL7O&si=lxr3Znks2Xrx11Q3', 'Emunah', 27);
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpJoL0fsqMMI2P3S-S4L1T9i&si=kpt0ZrzbVlFH1IMc', 'Making a Living', 4);
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpJ-XvJ__pFITtZxRoMM2nFR&si=YFydeHxMsIxCm06e', 'Treatment of Others', 5);
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpJDkxetTs0Byx8_X7rqdV9_&si=YwmWblITqFRmoq9C', 'Happiness', 20);
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpIPNbiuoL2v3B72eMa56jha&si=bV8PZ6ySXB3GPdSd', 'Self-Confidence', 4);
-      add('https://youtube.com/playlist?list=PL5WSOW0FtVpLQYfj0dSb_tV0OrdwB46_z&si=JVvbM6UYIDLqU34p', 'Gratitude', 27, [4, 6, 21]);
-      return arr;
-    })();
     const breslevIdx  = Math.min((_zoharParashaNum  ? _zoharParashaNum  - 1 : effectiveKotWeek - 1) * 2, BRESLEV_CDS.length - 2);
     const breslevIdx2 = _zoharParashaNum2 ? Math.min((_zoharParashaNum2 - 1) * 2, BRESLEV_CDS.length - 2) : null;
     const breslevCD1 = BRESLEV_CDS[breslevIdx];
@@ -18490,6 +18493,87 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         return { n:5, label:'מעלה ט״ו — Likutei Halachos',
                  cell:e.map(x => x.label).join(' · '),
                  cell2:e.some(x => x.source === 'SA') ? 'with the Shulchan Aruch' : '' }; } },
+
+    // ── A calendar for each מיעוט that has a daily reading ──
+    // Nine of the fifteen return steps are standing links — Chumash with
+    // Rashi, Tanya, the Rambam, Shulchan Aruch HaRav, Chitas for Kids, Chok
+    // Breslov, Likkutei Sichos, Living Chassidus, Rav Shlomo Katz — whose
+    // sites resolve the day themselves. The app holds no portion for them, so
+    // a calendar would print one identical square 364 times, and they are left
+    // out rather than filled with a repetition.
+    { group:'miut', card:'ד׳ · Tractate Cycle', cycle:'מיעוט ד׳ — the tractates, a half-cycle at a time',
+      seg:(D)=>{
+        if (D.inExtra) return { n:8, mic:true, label:'Adar I — the 33 units compressed into 28',
+                                cell:'microcosm' };
+        const c = get22DayInfo(D.yearDay);
+        const i = c.cycle >= 17 ? 32 : (c.cycle - 1) * 2 + (c.day <= 11 ? 0 : 1);
+        const t = TRACTATE_CYCLES[i];
+        if (!t) return {n:-1,label:'Outside the tractate cycle',brk:true,cell:''};
+        return { n:0, label:'מיעוט ד׳ — ' + t.tractate + ' · ' + t.period,
+                 cell:t.tractate, cell2:t.id + ' · ' + t.period }; } },
+
+    { group:'miut', card:'ה׳ · Breslov Israel', cycle:'מיעוט ה׳ — the recordings, two to a parasha',
+      seg:(D)=>{
+        const parts = (D.parasha || '').split('-').map(x => x.trim());
+        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
+        if (!num) return {n:-1,label:'No parasha for this day',brk:true,cell:''};
+        const i = Math.min((num - 1) * 2, BRESLEV_CDS.length - 2);
+        const a = BRESLEV_CDS[i], b = BRESLEV_CDS[i + 1];
+        if (!a) return {n:-1,label:'Outside the recordings',brk:true,cell:''};
+        return { n:1, label:'מיעוט ה׳ — ' + a.label + (b ? ' · ' + b.label : ''),
+                 cell:a.label, cell2:b ? b.label : '' }; } },
+
+    { group:'miut', card:'ז׳ · Carlebach Stories', cycle:'מיעוט ז׳ — the stories, two to a parasha',
+      seg:(D)=>{
+        const parts = (D.parasha || '').split('-').map(x => x.trim());
+        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
+        if (!num) return {n:-1,label:'No parasha for this day',brk:true,cell:''};
+        // Parashot 42-46 draw on the nine Devarim stories; the rest run
+        // sequentially through the ninety-nine general ones, two a week.
+        if (num >= 42 && num <= 46) {
+          const d = (num - 42) * 2;
+          const one = d + 1, two = d + 2;
+          return { n:2, label:'מיעוט ז׳ — the Devarim stories',
+                   cell:'Devarim Story ' + one + (two <= 9 ? ' · ' + two : ''),
+                   cell2:D.parasha || '' };
+        }
+        const slot = num <= 41 ? (num - 1) : (num - 6);
+        return { n:2, label:'מיעוט ז׳ — Reb Shlomo Carlebach',
+                 cell:'Story ' + (slot * 2 + 1) + ' · ' + (slot * 2 + 2),
+                 cell2:D.parasha || '' }; } },
+
+    { group:'miut', card:'ח׳ · Daf Yomi', cycle:'מיעוט ח׳ — the daf of the day',
+      seg:(D)=>{
+        let f = null; try { f = getDafYomi(D.date); } catch (e) {}
+        if (!f) return {n:-1,label:'No daf for this day',brk:true,cell:''};
+        return { n:3, label:'מיעוט ח׳ — ' + f.name + ' ' + f.daf,
+                 cell:f.name + ' ' + f.daf, cell2:f.heb || '' }; } },
+
+    { group:'miut', card:'י״א · Daily Chofetz Chaim', cycle:'מיעוט י״א — the 118-day round of classes',
+      seg:(D)=>{
+        const anchor = new Date(2025, 8, 23);
+        const nrm = new Date(D.date.getFullYear(), D.date.getMonth(), D.date.getDate());
+        const n = Math.round((nrm - anchor) / 86400000);
+        const cls = ((n % 118) + 118) % 118 + 1;
+        return { n:4, label:'מיעוט י״א — class ' + cls + ' of 118',
+                 cell:'Class ' + cls, cell2:'of 118' }; } },
+
+    { group:'miut', card:'י״ב · Chok L’Yisrael', cycle:'מיעוט י״ב — a portion for each of the six weekdays',
+      seg:(D)=>{
+        const parts = (D.parasha || '').split('-').map(x => x.trim());
+        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
+        // Shabbat has no daily portion; the week's verse of Sefer Yetzirah
+        // stands in its place, exactly as the card reads it.
+        if (D.date.getDay() === 6) {
+          const e = num ? SEFER_YETZIRAH_VERSES[num] : null;
+          const vs = e ? (Array.isArray(e) ? e : [e]) : null;
+          if (!vs) return {n:-1,label:'Shabbat — no portion',brk:true,cell:'Shabbat'};
+          const ref = vs.length > 1 ? vs[0].ref + '–' + vs[vs.length - 1].ref : vs[0].ref;
+          return { n:8, label:'מיעוט י״ב — Shabbat: Sefer Yetzirah ' + ref,
+                   cell:'Sefer Yetzirah', cell2:ref };
+        }
+        return { n:5, label:'מיעוט י״ב — ' + (D.parasha || '') + ' · day ' + (D.date.getDay() + 1) + ' of 6',
+                 cell:D.parasha || '', cell2:'Day ' + (D.date.getDay() + 1) }; } },
   ];
 
   let _yrLens = 4;              // Gevurah opens it — its seasons read most clearly
