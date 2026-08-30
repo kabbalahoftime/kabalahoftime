@@ -2296,6 +2296,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
   </div>
 
+  <!-- The Chochmah page from the book, set under the title, where the
+       book sets it: the ant it sends the sluggard to, the sheaves and the
+       vegetables of the field, and Elisha ben Avuyah on ink upon fresh
+       paper. The page names its own texts, so it carries no caption; the
+       alt text describes it for anyone who cannot see it. It opens the page, so it is
+       fetched eagerly rather than lazily, and its width and height are
+       declared so the page does not shift under the reader as it arrives. -->
+  <div style="margin:16px;text-align:center;">
+    <img src="chochmah-ant.jpg" width="900" height="895" fetchpriority="high"
+         alt="Chochmah, a page from the Kabbalah of Time: an ant carrying a leaf along a branch, with Perek Shirah's songs of the ant, the sheaves and the vegetables of the field, and Elisha ben Avuyah in Pirkei Avot on learning Torah in childhood."
+         style="max-width:100%;height:auto;border-radius:6px;">
+  </div>
+
   <!-- START HERE — collapsed to one line so it never blocks a returning reader -->
   <div class="intro-panel start-panel" id="start-panel" onclick="this.classList.toggle('expanded')">
     <span class="intro-expand-icon">▾</span>
@@ -2397,18 +2410,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <span id="today-count" class="today-count"></span>
       <button class="today-more" onclick="openTodaysPath()" aria-label="Open today's path, all thirty steps">all thirty ↗</button>
     </div>
-  </div>
-
-  <!-- The Chochmah page from the book, set between Today and the week's
-       creature: the ant it sends the sluggard to, the sheaves and the
-       vegetables of the field, and Elisha ben Avuyah on ink upon fresh
-       paper. The page names its own texts, so it carries no caption; the
-       alt text describes it for anyone who cannot see it. Reserved by width
-       and height so nothing shifts as it loads. -->
-  <div style="margin:16px;text-align:center;">
-    <img src="chochmah-ant.jpg" width="900" height="895" loading="lazy"
-         alt="Chochmah, a page from the Kabbalah of Time: an ant carrying a leaf along a branch, with Perek Shirah's songs of the ant, the sheaves and the vegetables of the field, and Elisha ben Avuyah in Pirkei Avot on learning Torah in childhood."
-         style="max-width:100%;height:auto;border-radius:6px;">
   </div>
 
   <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
