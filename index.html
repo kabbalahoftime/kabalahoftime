@@ -2000,7 +2000,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .yr-sub { font-size:calc(12px * var(--ts, 1)); color:var(--ink-mid); font-style:italic; margin-top:3px; }
 .yr-close { background:none; border:none; color:var(--ink-mid); font-size:calc(20px * var(--ts, 1)); cursor:pointer;
   min-width:44px; min-height:44px; }
-.yr-lenses { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 4px; }
+.yr-lenses { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 4px; align-items:center; }
+.yr-lens-sel { font-family:'Cinzel',serif; font-size:calc(11px * var(--ts, 1));
+  color:var(--ink-mid); background:var(--bg-card-alt); border:1px solid var(--border);
+  border-radius:4px; padding:4px 8px; min-height:44px; max-width:100%; cursor:pointer; }
+.yr-lens-sel:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
 .yr-lens { border:1px solid var(--border); background:var(--bg); color:var(--ink-mid);
   border-radius:14px; padding:7px 12px; font-family:'Cinzel',serif; font-size:calc(11px * var(--ts, 1));
   letter-spacing:1px; text-transform:uppercase; cursor:pointer; min-height:32px; position:relative; }
@@ -9693,6 +9697,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       [300, "Addenda, Volume III", "Addenda"],
     ]
   };
+  // The Chochmah year of Torah Ohr / Likutei Torah, hoisted to module scope
+  // so the monthly calendar can walk the same table the card walks.
+  const TO_URL = 'https://www.sefaria.org/Torah_Ohr?tab=contents';
+  const LT_URL = 'https://www.sefaria.org/Likkutei_Torah?tab=contents';
+  const CHOCHMA_CYCLE = [
+    { cover: [ { name: 'Torah Ohr',   req: 16069, pg: 1,  url: TO_URL },
+               { name: 'LT Vayikra',  req: 16093, pg: 12, url: LT_URL } ], start: 1,   end: 1   },
+    { name: 'Torah Ohr',   start: 2,   end: 100, req: 16069, pg0: 9,   pgLast: 205, fMax: 99,  url: TO_URL },
+    { name: 'LT Vayikra',  start: 101, end: 150, req: 16093, pg0: 14,  pgLast: 128, fMax: 50,  url: LT_URL },
+    { cover: [ { name: 'LT Bamidbar', req: 16093, pg: 138, url: LT_URL },
+               { name: 'LT Devarim',  req: 16093, pg: 332, url: LT_URL } ], start: 151, end: 151 },
+    { name: 'LT Bamidbar', start: 152, end: 247, req: 16093, pg0: 140, pgLast: 330, fMax: 96,  url: LT_URL },
+    { name: 'LT Devarim',  start: 248, end: 347, req: 16093, pg0: 334, pgLast: 530, fMax: 100, url: LT_URL },
+    { name: 'Shir HaShirim / Megilas Esther', start: 348, end: 364, perDay: 3, req: 16093, pg0: 534, pgLast: 632, fMax: 51, url: LT_URL },
+  ];
+
+
   // Parasha → Sefaria Zohar section. The folio cycle's own table is the
   // authority — every daily link is resolved through it — so it is asked
   // first, and ZOHAR_PARASHA_SECTIONS covers a few the printed volumes fold
@@ -14881,19 +14902,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     //   Vayikra (inserted Hosafot) interpolates within a page.
     // The Hosafot (½ + 4 + 23½ = 28 folios) are the leap-year microcosm (below).
     // Torah Ohr = req 16069; all Likutei Torah volumes = req 16093.
-    const TO_URL = 'https://www.sefaria.org/Torah_Ohr?tab=contents';
-    const LT_URL = 'https://www.sefaria.org/Likkutei_Torah?tab=contents';
-    const CHOCHMA_CYCLE = [
-      { cover: [ { name: 'Torah Ohr',   req: 16069, pg: 1,  url: TO_URL },
-                 { name: 'LT Vayikra',  req: 16093, pg: 12, url: LT_URL } ], start: 1,   end: 1   },
-      { name: 'Torah Ohr',   start: 2,   end: 100, req: 16069, pg0: 9,   pgLast: 205, fMax: 99,  url: TO_URL },
-      { name: 'LT Vayikra',  start: 101, end: 150, req: 16093, pg0: 14,  pgLast: 128, fMax: 50,  url: LT_URL },
-      { cover: [ { name: 'LT Bamidbar', req: 16093, pg: 138, url: LT_URL },
-                 { name: 'LT Devarim',  req: 16093, pg: 332, url: LT_URL } ], start: 151, end: 151 },
-      { name: 'LT Bamidbar', start: 152, end: 247, req: 16093, pg0: 140, pgLast: 330, fMax: 96,  url: LT_URL },
-      { name: 'LT Devarim',  start: 248, end: 347, req: 16093, pg0: 334, pgLast: 530, fMax: 100, url: LT_URL },
-      { name: 'Shir HaShirim / Megilas Esther', start: 348, end: 364, perDay: 3, req: 16093, pg0: 534, pgLast: 632, fMax: 51, url: LT_URL },
-    ];
     const chDay = ((d - 1) % 364) + 1;
     let chSection = '', chReading = '', chUrl = null, chHbUrl = null, chCovers = null;
     for (const sec of CHOCHMA_CYCLE) {
@@ -18297,6 +18305,191 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  cell:'set ' + ySet + ' · ' + y.dayInCycle + '/28',
                  cell2: lh,
                  cell3: (D.date.getDay() === 6 && D.parasha) ? D.parasha : '' }; } },
+
+    // ── A calendar for each of the fifteen מעלות ──
+    // The counted steps of the descent, one lens apiece. Each reads the same
+    // helper its card reads, so a square and a card face cannot part company —
+    // the fault the calendar check exists to catch. Appended after the ten
+    // card lenses because the checks address lenses by index.
+    { group:'maalah', card:'א׳ · Year-Round', cycle:'מעלה א׳ — the daily Zohar folios and Likutei Moharan',
+      seg:(D)=>{
+        const _t = t => { let m = t.match(/Likutei Moharan II, Torah (\d+)/); if (m) return 'Tinyana ' + m[1];
+                          m = t.match(/Likutei Moharan, Lesson (\d+)/); return m ? 'Torah ' + m[1] : t; };
+        const h = D.heb;
+        const dailies = (D.leap && h.month === 12)
+          ? [LM_DAILY_CYCLE_ADAR1[h.day]].filter(Boolean)
+          : lmEntriesForDate(h.month, h.day).map(n => LM_DAILY_CYCLE[n]).filter(Boolean);
+        const lm = dailies.map(x => _t(x.lesson)).join(' + ');
+        // The Zohar's sixteen folios a week, as Keter's face counts them
+        let zo = '';
+        const nrm = new Date(D.date.getFullYear(), D.date.getMonth(), D.date.getDate());
+        const tot = Math.round((nrm - KOT_YEAR_START) / 86400000);
+        if (tot >= 0) {
+          const off = tot % 364, rem = off % 7;
+          const cum = Math.floor(off / 7) * 16 + rem * 2;
+          if (cum < ZOHAR_TOTAL) {
+            const si = resolveZoharFolio(cum), ei = resolveZoharFolio(cum + (rem === 6 ? 4 : 2) - 1);
+            const R = ['', 'I', 'II', 'III'];
+            zo = si.book.vol === ei.book.vol
+              ? 'Zohar ' + R[si.book.vol] + ' ' + si.folio + (si.folio === ei.folio ? '' : '–' + ei.folio)
+              : 'Zohar ' + R[si.book.vol] + ' ' + si.folio + ' – ' + R[ei.book.vol] + ' ' + ei.folio;
+          }
+        }
+        if (!lm && !zo) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:0, label:'מעלה א׳ — Year-Round · בכל השנה', cell:lm, cell2:zo }; } },
+
+    { group:'maalah', card:'ב׳ · Light that is Good', cycle:'מעלה ב׳ — Keter Shem Tov, by parasha and weekday',
+      seg:(D)=>{
+        const parts = (D.parasha || '').split('-').map(x => x.trim());
+        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
+        let k = null; try { k = num ? getDailyKST(num, D.date.getDay()) : null; } catch (e) {}
+        if (!k) return {n:-1,label:'No Keter Shem Tov reading for this day',brk:true,cell:''};
+        return { n:1, label:'מעלה ב׳ — ' + (k.titleEn || k.label), cell:k.label, cell2:D.parasha || '' }; } },
+
+    { group:'maalah', card:'ג׳ · Strong Day', cycle:'מעלה ג׳ — Sefer HaMitzvos, two a day',
+      seg:(D)=>{
+        const h = D.heb; let cell = '', title = '';
+        try {
+          const sh = getSeferHamitzvosInfo(h.month, h.day, h.year, D.leap);
+          const span = a => a.length > 1 ? a[0].n + '–' + a[a.length - 1].n : String(a[0].n);
+          if (sh.mt) { cell = sh.mt.book ? 'MT ' + sh.mt.book + ' of 14' : 'MT — all fourteen'; title = 'Mishneh Torah'; }
+          else {
+            const bits = [];
+            if (sh.neg.length) bits.push('Lo Taaseh ' + span(sh.neg));
+            if (sh.pos.length) bits.push('Aseh ' + span(sh.pos));
+            cell = bits.join(' · ');
+            title = (sh.neg[0] && sh.neg[0].title) || (sh.pos[0] && sh.pos[0].title) || '';
+          }
+        } catch (e) {}
+        if (!cell) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:2, label:'מעלה ג׳ — ' + (title || 'Strong Day'), cell }; } },
+
+    { group:'maalah', card:'ד׳ · Torah Ohr / Likutei Torah', cycle:'מעלה ד׳ — the Alter Rebbe on the parasha, 364 days',
+      seg:(D)=>{
+        if (D.inExtra) return { n:8, mic:true, label:'Adar I — the Hosafot stand in for the year',
+                                cell:'Hosafa ' + D.extraDay + ' of 28' };
+        const cd = ((D.abs - 1) % 364) + 1;
+        for (const sec of CHOCHMA_CYCLE) {
+          if (cd < sec.start || cd > sec.end) continue;
+          if (sec.cover) return { n:3, label:'מעלה ד׳ — a cover day, the sefer opened',
+                                  cell:'Cover', cell2:'day ' + cd + ' of 364' };
+          const dw = cd - sec.start + 1;
+          const read = sec.perDay
+            ? 'Discourses ' + ((dw - 1) * sec.perDay + 1) + '–' + ((dw - 1) * sec.perDay + sec.perDay)
+            : 'Folio ' + dw;
+          return { n:3, label:'מעלה ד׳ — ' + sec.name, cell:sec.name + ' · ' + read,
+                   cell2:'day ' + cd + ' of 364' };
+        }
+        return {n:-1,label:'Outside the cycle',brk:true,cell:''}; } },
+
+    { group:'maalah', card:'ה׳ · Likutei Tefilot', cycle:'מעלה ה׳ — Reb Nosson’s prayers, 364 days',
+      seg:(D)=>{
+        const ld = ((D.abs - 1) % 364) + 1;
+        let sect, read;
+        if (ld === 1) { sect = 'Introduction'; read = 'Introduction'; }
+        else if (ld <= 305) { const i = ld - 2; sect = 'Part 1';
+          read = 'Prayer ' + (Math.floor(i / 2) + 1) + ' — ' + (i % 2 === 0 ? 'first half' : 'second half'); }
+        else { sect = 'Part 2'; read = 'Prayer ' + (ld - 305); }
+        return { n:4, label:'מעלה ה׳ — Likutei Tefilot · ' + sect, cell:read,
+                 cell2:'day ' + ld + ' of 364' }; } },
+
+    { group:'maalah', card:'ו׳ · Mishna / Tosefta', cycle:'מעלה ו׳ — the Mishna through the year',
+      seg:(D)=>{
+        const i = getMishnaInfo(D.yearDay);
+        if (!i) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:5, label:'מעלה ו׳ — ' + (i.sub || i.tag1 || ''),
+                 cell:String(i.text).replace(/<[^>]*>/g, ''), cell2:i.tag2 || '' }; } },
+
+    { group:'maalah', card:'ז׳ · Tanach', cycle:'מעלה ז׳ — Tanach through the year',
+      seg:(D)=>{
+        const i = getTanachInfo(D.yearDay);
+        if (!i) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:6, label:'מעלה ז׳ — ' + (i.sub || i.tag1 || ''),
+                 cell:String(i.text).replace(/<[^>]*>/g, ''), cell2:i.tag2 || '' }; } },
+
+    { group:'maalah', card:'ח׳ · Tiferet’s text', cycle:'מעלה ח׳ — Birkas HaNehenin, then Rebbe Nachman’s Tales',
+      seg:(D)=>{
+        if (D.inExtra) return { n:8, mic:true, label:'Adar I — the Tales’ closing talks, all 28 days',
+                                cell:'Talks Following the Tales' };
+        const c = get13DayInfo(D.yearDay);
+        const bh = ch => ({ work:'Seder Birkas HaNehenin', item:'Chapter ' + ch });
+        const tl = t  => ({ work:'Rebbe Nachman’s Tales', item:'Tale ' + t + ' — ' + REBBE_NACHMAN_TALES[t - 1] });
+        const x = c.cycle <= 13 ? bh(c.cycle)
+                : c.cycle <= 26 ? tl(c.cycle - 13)
+                : c.cycle === 27 ? { ...bh(c.day), review:true } : { ...tl(c.day), review:true };
+        return { n:7, label:'מעלה ח׳ — ' + x.work + (x.review ? ' · microcosm review' : ''),
+                 cell:x.item, cell2:'cycle ' + c.cycle + ' · day ' + c.day + ' of 13' }; } },
+
+    { group:'maalah', card:'ט׳ · Netzach’s text', cycle:'מעלה ט׳ — Sichos HaRan and Likutei Etzot, 369 days',
+      seg:(D)=>{
+        const c = get41DayInfo(D.yearDay);
+        const pos = ((c.cycle - 1) % 9) * 41 + c.day;
+        let r = null; try { r = window.getNetzachReading && window.getNetzachReading(pos); } catch (e) {}
+        if (!r) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:8, label:'מעלה ט׳ — ' + r.work, cell:r.work + ' · ' + r.name,
+                 cell2:'day ' + pos + ' of 369' }; } },
+
+    { group:'maalah', card:'י׳ · Shulchan Aruch', cycle:'מעלה י׳ — Orach Chaim, then the Chofetz Chaim',
+      seg:(D)=>{
+        const h = getHalachaInfo(D.yearDay);
+        const one = u => u.kind === 'sa' ? 'OC ' + u.ch : u.label;
+        return { n:0, label:'מעלה י׳ — morning and afternoon',
+                 cell:(h.m.kind === 'sa' && h.a.kind === 'sa') ? 'OC ' + h.m.ch + '–' + h.a.ch
+                                                              : one(h.m) + ' · ' + one(h.a),
+                 cell2:'half-days ' + (h.day * 2 - 1) + ' & ' + (h.day * 2) }; } },
+
+    { group:'maalah', card:'י״א · Zohar — Parasha', cycle:'מעלה י״א — the Zohar’s own section for the week',
+      seg:(D)=>{
+        const p = D.parasha;
+        if (!p) return {n:-1,label:'No parasha for this day',brk:true,cell:''};
+        const whole = zoharSectionForParashaName(p);
+        const parts = whole ? [p] : p.split('-').map(x => x.trim());
+        const has = parts.filter(x => zoharSectionForParashaName(x));
+        const gap = parts.filter(x => !zoharSectionForParashaName(x));
+        if (!has.length) return { n:-1, brk:true,
+          label:'The Zohar has no section for ' + p + ' — Chok L’Yisrael stands in its place',
+          cell:p, cell2:'no Zohar' };
+        return { n:1, label:'מעלה י״א — Zohar, ' + has.join(' · ') +
+                            (gap.length ? ' (none for ' + gap.join(' · ') + ')' : ''),
+                 cell:has.join(' · '), cell2:gap.length ? 'none for ' + gap.join(' · ') : '' }; } },
+
+    { group:'maalah', card:'י״ב · Ben Ish Chai', cycle:'מעלה י״ב — the Ben Ish Chai and Rav Pe’alim, by parasha and weekday',
+      seg:(D)=>{
+        const nums = D.parasha
+          ? D.parasha.split('-').map(x => PARASHA_TO_NUMBER[x.trim()]).filter(Boolean) : null;
+        let r = null;
+        try { r = window.getYesodReading && window.getYesodReading(nums, D.date.getDay() + 1); } catch (e) {}
+        if (!r) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        const items = (r.items || []).map(x => x.label).join(' · ');
+        return { n:2, label:'מעלה י״ב — ' + (r.label || ''), cell:r.label || '',
+                 cell2:items.slice(0, 60) }; } },
+
+    { group:'maalah', card:'י״ג · Year-Round Connection', cycle:'מעלה י״ג — ואתה תצוה, a se’if to each of the thirteen',
+      seg:(D)=>{
+        const c = get13DayInfo(D.yearDay);
+        const sf = VATAH_SEIF_BY_DAY[c.day - 1];
+        if (sf === undefined) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:3, label:'מעלה י״ג — ' + (sf === 0 ? 'the complete ma’amar — Purim Katan'
+                                                      : (VATAH_TITLES[sf - 1] || '')),
+                 cell:sf === 0 ? 'Overview' : 'Se’if ' + VATAH_HEB[sf - 1],
+                 cell2:'day ' + c.day + ' of 13' }; } },
+
+    { group:'maalah', card:'י״ד · Fruits of Her Labor', cycle:'מעלה י״ד — מפרי ידיה, the verse of the day',
+      seg:(D)=>{
+        const c = get13DayInfo(D.yearDay);
+        const sf = VATAH_SEIF_BY_DAY[c.day - 1];
+        const pk = sf > 0 ? VATAH_PESUKIM[sf - 1] : null;
+        if (!pk) return { n:3, label:'מעלה י״ד — all twelve, as they were given',
+                          cell:'All twelve', cell2:'Mivtza Chinuch, 5736' };
+        return { n:4, label:'מעלה י״ד — ' + (pk.en || ''), cell:pk.he || '', cell2:pk.src || '' }; } },
+
+    { group:'maalah', card:'ט״ו · Works of Her Praise', cycle:'מעלה ט״ו — Likutei Halachos through the year',
+      seg:(D)=>{
+        const e = getLikuteiHalachotInfo(D.yearDay);
+        if (!e || !e.length) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:5, label:'מעלה ט״ו — Likutei Halachos',
+                 cell:e.map(x => x.label).join(' · '),
+                 cell2:e.some(x => x.source === 'SA') ? 'with the Shulchan Aruch' : '' }; } },
   ];
 
   let _yrLens = 4;              // Gevurah opens it — its seasons read most clearly
@@ -18378,8 +18571,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   function openYearView() {
     _yrDays = _yrBuild();
     if (!_yrDays) return;
-    document.getElementById('yr-lenses').innerHTML = YR_LENSES.map((l, i) =>
-      `<button class="yr-lens${i === _yrLens ? ' on' : ''}" onclick="yrSetLens(${i})">${l.card}</button>`).join('');
+    // Ten card buttons as before. The counted steps are too many to sit in a
+    // row, so each section gets a menu of its own — a native select, which is
+    // the control a phone already knows how to open.
+    const _grp = (g, label) => {
+      const rows = YR_LENSES.map((l, i) => [l, i]).filter(([l]) => l.group === g);
+      if (!rows.length) return '';
+      return `<select class="yr-lens-sel" aria-label="${label}" onchange="yrSetLens(+this.value)">` +
+        `<option value="">${label}</option>` +
+        rows.map(([l, i]) =>
+          `<option value="${i}"${i === _yrLens ? ' selected' : ''}>${l.card}</option>`).join('') +
+        `</select>`;
+    };
+    document.getElementById('yr-lenses').innerHTML =
+      YR_LENSES.map((l, i) => l.group
+        ? ''
+        : `<button class="yr-lens${i === _yrLens ? ' on' : ''}" onclick="yrSetLens(${i})">${l.card}</button>`).join('') +
+      _grp('maalah', 'מעלות') + _grp('miut', 'מיעוטים') + _grp('star', 'Stars');
     yrDraw();
     _calSizeInit();
     document.getElementById('year-modal').classList.add('open');
@@ -18387,7 +18595,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   function closeYearView() { document.getElementById('year-modal').classList.remove('open'); }
   function yrSetLens(i) {
     _yrLens = i;
-    document.querySelectorAll('.yr-lens').forEach((b, j) => b.classList.toggle('on', j === i));
+    // The buttons are the card lenses in order, so the nth button is the nth
+    // lens without a group.
+    const cardIdx = YR_LENSES.map((l, k) => l.group ? -1 : k).filter(k => k >= 0);
+    document.querySelectorAll('.yr-lens').forEach((b, j) => b.classList.toggle('on', cardIdx[j] === i));
+    // A menu holding the chosen lens keeps it; the others fall back to their
+    // own heading, so one reading is lit at a time.
+    document.querySelectorAll('.yr-lens-sel').forEach(sel => {
+      sel.value = [...sel.options].some(o => o.value === String(i)) ? String(i) : '';
+    });
     yrDraw();
   }
 
