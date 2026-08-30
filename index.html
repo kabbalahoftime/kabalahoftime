@@ -18574,6 +18574,79 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
         return { n:5, label:'מיעוט י״ב — ' + (D.parasha || '') + ' · day ' + (D.date.getDay() + 1) + ' of 6',
                  cell:D.parasha || '', cell2:'Day ' + (D.date.getDay() + 1) }; } },
+
+    // ── A calendar for each companion that keeps a count of its own ──
+    // Nine of the twenty-two are keyed to the week's parasha and nothing else
+    // — Light and Fire, Beit Aharon, Noam Elimelech, Parasha & Haftorah, Meor
+    // Einayim, Ohr Torah, Midrash, and the two Kitzur halves — so their
+    // calendar would print the parasha seven times a week, which the Yesod
+    // lens already draws. Four more are standing links. What is left are the
+    // companions that count something the year does not otherwise show.
+    { group:'star', card:'Ma’ayan Ganim', cycle:'✡ a day of its own 369, beside Netzach’s',
+      seg:(D)=>{
+        const c = get41DayInfo(D.yearDay);
+        const pos = ((c.cycle - 1) % 9) * 41 + c.day;
+        return { n:0, label:'Ma’ayan Ganim — day ' + pos + ' of 369',
+                 cell:'Day ' + pos, cell2:'of 369' }; } },
+
+    { group:'star', card:'Orot HaTorah', cycle:'✡ a chapter to each turn of the thirteen',
+      seg:(D)=>{
+        const c = get13DayInfo(D.yearDay);
+        const m = D.inExtra ? D.extraDay : (c.cycle >= 27 ? c.day : ((c.cycle - 1) % 13) + 1);
+        return { n:1, label:'Orot HaTorah — Chapter ' + m, cell:'Chapter ' + m,
+                 cell2:D.inExtra ? 'Adar I microcosm' : 'cycle ' + c.cycle }; } },
+
+    { group:'star', card:'Rav Shalom Arush', cycle:'✡ the thirteen books, one to each cycle of thirteen',
+      seg:(D)=>{
+        const c = get13DayInfo(D.yearDay);
+        const m = D.inExtra ? D.extraDay : (c.cycle >= 27 ? c.day : ((c.cycle - 1) % 13) + 1);
+        const bk = RAV_ARUSH_BOOKS[m - 1];
+        if (!bk) return {n:-1,label:'Outside the thirteen books',brk:true,cell:''};
+        return { n:2, label:'Rav Shalom Arush — ' + bk,
+                 cell:bk.split(' — ')[0], cell2:'cycle ' + m + ' of 13' }; } },
+
+    { group:'star', card:'From the New Moon', cycle:'✡ the moon’s phase across the thirteen',
+      seg:(D)=>{
+        const c = get13DayInfo(D.yearDay);
+        const m = D.inExtra ? D.extraDay : (c.cycle >= 27 ? c.day : ((c.cycle - 1) % 13) + 1);
+        return { n:3, label:'From the New Moon to the Next — Phase ' + m,
+                 cell:'Phase ' + m, cell2:'day ' + c.day + ' of 13' }; } },
+
+    { group:'star', card:'The Ramak', cycle:'✡ Pardes Rimmonim and Ohr Ne’erav — 39 in three turns of 13',
+      seg:(D)=>{
+        const c = get13DayInfo(D.yearDay);
+        const day = D.inExtra ? D.extraDay : c.day;
+        const d = ((day - 1) % 13) + 1;
+        const u = [0, 1, 2].map(k => RAMAK_39[(d - 1) * 3 + k]).filter(Boolean);
+        if (!u.length) return {n:-1,label:'Outside the thirty-nine',brk:true,cell:''};
+        const nm = x => x.g ? 'Gate ' + x.g : 'Ohr Ne’erav ' + x.p;
+        return { n:4, label:'The Ramak — ' + u.map(x => x.t || nm(x)).join(' · '),
+                 cell:u.map(nm).join(' · '), cell2:'day ' + d + ' of 13' }; } },
+
+    { group:'star', card:'Yad HaChazakah', cycle:'✡ the Rambam’s fourteen, in rounds of 28 days',
+      seg:(D)=>{
+        let y = null; try { y = getYadInfo(D.yPos, D.leap); } catch (e) {}
+        if (!y) return {n:-1,label:'Outside the round',brk:true,cell:''};
+        // The round can be a double — "Cycles 6 & 7" — so nums is taken whole,
+        // as the Malchut lens takes it.
+        const set = (y.nums || [y.cycle]).join(' & ');
+        const subs = (y.subs || []).map(x => x.name).join(' · ');
+        return { n:5, label:'Yad HaChazakah — ' + (subs || 'the fourteen'),
+                 cell:subs.slice(0, 58),
+                 cell2:'set ' + set + ' of 14 · day ' + y.dayInCycle + ' of 28' }; } },
+
+    { group:'star', card:'Talmud (Chazarah)', cycle:'✡ the daf again, for review',
+      seg:(D)=>{
+        let f = null; try { f = getDafYomi(D.date); } catch (e) {}
+        if (!f) return {n:-1,label:'No daf for this day',brk:true,cell:''};
+        return { n:6, label:'Chazarah — ' + f.name + ' ' + f.daf,
+                 cell:f.name + ' ' + f.daf, cell2:'review' }; } },
+
+    { group:'star', card:'Treasury of Chassidic Tales', cycle:'✡ a story a day, and the week’s portion',
+      seg:(D)=>{
+        const n = ((D.abs - 1) % 364) + 1;
+        return { n:7, label:'Treasury of Chassidic Tales — story ' + n,
+                 cell:'Story ' + n, cell2:D.parasha ? 'Parshat ' + D.parasha : '' }; } },
   ];
 
   let _yrLens = 4;              // Gevurah opens it — its seasons read most clearly
