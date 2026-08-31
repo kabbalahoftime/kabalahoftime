@@ -644,6 +644,13 @@ async function checkInBrowser(chromium) {
   // attribute was written once per render, while the class it mirrors is
   // toggled without one — so a marked prayer still announced "not pressed".
   console.log('\na11y');
+  // applyA11y is scheduled with setTimeout(…, 0) after each render, so a
+  // measurement taken the instant a render finishes reads a page that is still
+  // a tick away from being marked. That produced six phantom failures — three
+  // unreachable .maalah spans and three unmarked Hebrew runs, all in Tiferet —
+  // on roughly every other run. Give any pending pass its turn first. This
+  // only waits; nothing below is relaxed.
+  await page.evaluate(() => new Promise(r => setTimeout(r, 50)));
   const a11y = await page.evaluate(() => {
     const vis = el => {
       const s = getComputedStyle(el);
