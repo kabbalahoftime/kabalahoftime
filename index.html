@@ -2296,18 +2296,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
   </div>
 
-  <!-- The Chochmah page from the book, set under the title, where the
-       book sets it: the ant it sends the sluggard to, the sheaves and the
-       vegetables of the field, and Elisha ben Avuyah on ink upon fresh
-       paper. The page names its own texts, so it carries no caption; the
-       alt text describes it for anyone who cannot see it. It opens the page, so it is
-       fetched eagerly rather than lazily, and its width and height are
-       declared so the page does not shift under the reader as it arrives. -->
-  <div style="margin:16px;text-align:center;">
-    <img src="chochmah-ant.jpg" width="900" height="895" fetchpriority="high"
-         alt="Chochmah, a page from the Kabbalah of Time: an ant carrying a leaf along a branch, with Perek Shirah's songs of the ant, the sheaves and the vegetables of the field, and Elisha ben Avuyah in Pirkei Avot on learning Torah in childhood."
-         style="max-width:100%;height:auto;border-radius:6px;">
-  </div>
+  <!-- The week's page from the book, set under the title where the book sets
+       it. Which page is decided in render() from the Kabbalah of Time week;
+       the block hides itself on a week whose page we do not yet hold, rather
+       than leaving a broken image at the top of the app. -->
+  <div id="week-art" style="margin:16px;text-align:center;display:none;"></div>
 
   <!-- START HERE — collapsed to one line so it never blocks a returning reader -->
   <div class="intro-panel start-panel" id="start-panel" onclick="this.classList.toggle('expanded')">
@@ -9758,6 +9751,43 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   ];
 
 
+  // ── THE WEEK'S PAGE FROM THE BOOK ──
+  // One artwork to each week of the Kabbalah of Time year. The table is also
+  // the manifest: a week absent from it has no page yet, and the block hides
+  // rather than asking for a file that is not there. Each entry carries the
+  // drawn size, because the pages are not all the same shape, and the space
+  // has to be reserved before the image arrives or the title jumps.
+  const WEEK_ART = {
+    '1':  [900, 965],
+    '50': [900, 895],
+  };
+
+  // A leap year runs 56 weeks and the artwork runs 52, because weeks 22-25
+  // come twice — once through Adar I and again through Adar II. The Adar I
+  // run has pages of its own; the second run, and a common year's single
+  // Adar, use the plain 22-25.
+  function artKeyForWeek(week, weeks) {
+    if (!week) return null;
+    if (weeks <= 52) return String(week);          // a common year: as numbered
+    if (week <= 21)  return String(week);
+    if (week <= 25)  return week + '-adar1';       // the Adar I run
+    return String(week - 4);                       // Adar II, then 26-52
+  }
+
+  function renderWeekArt(week, weeks) {
+    const el = document.getElementById('week-art');
+    if (!el) return;
+    const key = artKeyForWeek(week, weeks);
+    const size = key && WEEK_ART[key];
+    if (!size) { el.style.display = 'none'; el.innerHTML = ''; return; }
+    const src = 'art/week-' + (key.length === 1 ? '0' + key : key) + '.jpg';
+    // It opens the page, so it is fetched eagerly rather than lazily.
+    el.innerHTML = '<img src="' + src + '" width="' + size[0] + '" height="' + size[1] + '"' +
+      ' fetchpriority="high" alt="Week ' + week + ' of the Kabbalah of Time — the page from the book."' +
+      ' style="max-width:100%;height:auto;border-radius:6px;">';
+    el.style.display = '';
+  }
+
   // Parasha → Sefaria Zohar section. The folio cycle's own table is the
   // authority — every daily link is resolved through it — so it is asked
   // first, and ZOHAR_PARASHA_SECTIONS covers a few the printed volumes fold
@@ -14666,6 +14696,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const el = document.getElementById('keter-chok-meta');
       if (el && _chokZoharHtml) el.innerHTML = `<div style="margin-bottom:3px;">${_chokZoharHtml}</div>` + el.innerHTML;
     })();
+
+    // The week's page from the book, above everything.
+    renderWeekArt(effectiveKotWeek, (window.kotYear && window.kotYear.weeks) || 52);
 
     // Hod's face — the Zohar's own section for the week's parasha.
     (() => {
