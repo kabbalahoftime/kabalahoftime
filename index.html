@@ -9779,6 +9779,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     '19':  [900, 827],
     '20':  [900, 897],
     '21':  [900, 835],
+    '22':  [900, 827],
     '50':  [900, 897],
     '51':  [900, 868],
     '52':  [900, 909],
@@ -14719,8 +14720,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       if (el && _chokZoharHtml) el.innerHTML = `<div style="margin-bottom:3px;">${_chokZoharHtml}</div>` + el.innerHTML;
     })();
 
-    // The week's page from the book, above everything.
-    renderWeekArt(effectiveKotWeek, (window.kotYear && window.kotYear.weeks) || 52);
+    // The week's page from the book, above everything. This takes the raw
+    // weekOfYear, not effectiveKotWeek: the latter has already folded a leap
+    // year's 56 weeks down to 52 by subtracting four past week 25, which is
+    // the very distinction the artwork needs — weeks 22-25 are Adar I and have
+    // pages of their own, 26-29 are Adar II and share the plain ones.
+    renderWeekArt(weekOfYear, (window.kotYear && window.kotYear.weeks) || 52);
 
     // Hod's face — the Zohar's own section for the week's parasha.
     (() => {
