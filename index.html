@@ -13242,10 +13242,49 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60;
   }
 
-  // Which day the climb standing now is for. The band belongs to the day that
-  // begins at the Chatzot it wraps: reached in the evening it is preparing
-  // tomorrow, reached in the small hours it is the day already on screen.
-  function _maalotOffset() { return _pathNowMin() >= 720 ? 1 : 0; }
+  // ── WHICH DAY AN HOUR BELONGS TO ──
+  // The dial's own day runs Chatzot to Chatzot, and the Gregorian one runs
+  // midnight to midnight, so between the two there is a stretch every night
+  // where they disagree. In Fixed mode the seam is 1:43 AM and the stretch is
+  // 00:00–01:43: the date has already turned but the dial is still in Malchut,
+  // weeks 46–49 of the cycle that opened the previous morning. Exactly one
+  // Sefirah straddles the calendar seam at a time — Malchut where Chatzot
+  // falls after midnight, Chesed where it falls before.
+  //
+  // A step's day follows the ring it sits on. The 49 belong to the cycle they
+  // are inside: that is _cycleOffset, and before Chatzot it points back a day.
+  // The Mochin hover above the seam and face forward into the cycle they open:
+  // that is _maalotOffset, the climb's day, and מיעוטים א׳–ה׳ share it, since
+  // they sit on Keter, Chochmah and Binah rather than on the seven.
+
+  // The day the cycle now running is named by — the day that begins at its
+  // Chatzot. A Chatzot past noon opens the following day; one before noon
+  // opens the day it falls in. Returned as an offset from today.
+  function _cycleOffset() {
+    const H = window.kotwHours;
+    if (!H || typeof H.toMin !== 'function') return 0;
+    const seam = H.toMin(0);
+    // The cycle began at the most recent Chatzot — today's if that minute has
+    // already gone by, otherwise yesterday's.
+    return (seam >= 720 ? 1 : 0) - (_pathNowMin() < seam ? 1 : 0);
+  }
+
+  // Which side of the seam the moment stands on: past the middle of the dial's
+  // day is still climbing towards Chatzot, before it has already crossed.
+  function _beforeSeam() {
+    const H = window.kotwHours;
+    return !!H && typeof H.nowH === 'function' && _hNorm(H.nowH()) >= 12;
+  }
+
+  // The Mochin's day: the cycle they open, which is the one after the cycle
+  // running while they are still short of the seam.
+  function _maalotOffset() { return _cycleOffset() + (_beforeSeam() ? 1 : 0); }
+
+  const _MOCHIN_RING = { Keter: 1, Chochmah: 1, Binah: 1 };
+  function _stepDayOffset(idx) {
+    if (idx < 15) return _maalotOffset();
+    return _MOCHIN_RING[PATH_WANING[idx - 15][2]] ? _maalotOffset() : _cycleOffset();
+  }
 
   // Whether the band is open at this moment.
   function _inMaalotBand() {
@@ -13255,26 +13294,66 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return ws.some(v => _hIn(now, v[0], v[1]));
   }
 
-  // How far the Today block must step to reach the day the open band is
-  // climbing for. Nought when the band is shut, when it is already for the day
-  // on screen, or when the reader has walked off to some other date — that
-  // last because the block is about the reader's own now, and a day they have
-  // navigated to is not it.
-  function _maalotJump() {
-    if (currentOffset !== 0 || !_inMaalotBand()) return 0;
-    return _maalotOffset();
+  // A day's marks read straight from its own keys. Each day's thirty live
+  // under its own Hebrew date, and render() only ever sets the keys for the
+  // day on screen, so any other day is read directly.
+  function _keyFor(prefix, off) {
+    const h = gregToHebrew(getDisplayDate(currentOffset + off));
+    return prefix + h.year + '-' + h.month + '-' + h.day;
   }
-
-  // The climb's tally for a day the block is not standing on. Each day's
-  // fifteen live under its own Hebrew date, and render() only ever sets the
-  // key for the day on screen, so the band's day is read directly.
-  function _maalotDoneFor(jump) {
-    if (!jump) return _maalotKey ? maalotDone() : 0;
+  function _maalotDoneFor(off) {
+    if (!off) return _maalotKey ? maalotDone() : 0;
     try {
-      const h = gregToHebrew(getDisplayDate(currentOffset + jump));
-      const v = localStorage.getItem('kotMaalot:' + h.year + '-' + h.month + '-' + h.day);
+      const v = localStorage.getItem(_keyFor('kotMaalot:', off));
       return Math.min(15, Math.max(0, parseInt(v, 10) || 0));
     } catch (e) { return 0; }
+  }
+  function _yomMaskFor(off) {
+    if (!off) return yomMask();
+    try {
+      const raw = localStorage.getItem(_keyFor('kotYomMask:', off));
+      if (raw !== null) return Math.max(0, parseInt(raw, 10) || 0) & 32767;
+      // The old count-only key, read the same way yomMask reads it — but not
+      // written back, because that day is not the one being rendered.
+      const legacy = Math.min(15, Math.max(0,
+        parseInt(localStorage.getItem(_keyFor('kotYom:', off)), 10) || 0));
+      return legacy ? (1 << legacy) - 1 : 0;
+    } catch (e) { return 0; }
+  }
+
+  // What the hour is asking for and on which day, when that day is not the one
+  // on screen. Nought when the reader has walked off to some other date — the
+  // block is about their own now, and a day they navigated to is not it.
+  //
+  // It only ever fills a silence. The day on screen is asked first, and only
+  // when this hour has nothing to say to it does the block look across a seam.
+  // So the jump never competes with the spine — the spine answers "what comes
+  // next", and this answers "what is this hour for", which are different
+  // questions and only one of them can be asked at a time.
+  function _pathJump() {
+    if (currentOffset !== 0) return null;
+    const H = window.kotwHours;
+    if (!H || typeof H.nowH !== 'function') return null;
+    if (pathStepIsDue(pathNextIdx(_maalotDoneFor(0), yomMask()))) return null;
+    const now = _hNorm(H.nowH());
+    // The climb first — its band is the narrower hour, and takes precedence.
+    const mo = _maalotOffset();
+    if (mo !== 0 && _inMaalotBand()) {
+      const k = _maalotDoneFor(mo);
+      if (k < 15) return { off: mo, idx: k };
+    }
+    // Then whatever מיעוט this hour asks for, on the day that hour belongs to.
+    const win = _pathHourWindows();
+    if (!win) return null;
+    for (let i = 0; i < 15; i++) {
+      const off = _stepDayOffset(15 + i);
+      if (off === 0) continue;
+      const v = win[PATH_WANING[i][2]];
+      if (!v || !_hIn(now, v[0], v[1])) continue;
+      if (_yomMaskFor(off) & (1 << i)) continue;      // already marked there
+      return { off, idx: 15 + i };
+    }
+    return null;
   }
 
   // The order is the spine. What comes next is always the lowest unmarked —
@@ -13292,14 +13371,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const H = window.kotwHours;
     if (!H || typeof H.nowH !== 'function' || idx < 0) return false;
     const now = _hNorm(H.nowH());
+    // Each step's thirty live on the key of the day that step belongs to, so
+    // it reads Now only when that day is the one on screen. Where they differ
+    // — the climb in a band that opens before midnight, a מיעוט of the seven
+    // in the stretch after midnight but before Chatzot — the Today block
+    // carries the reader across, and this stays quiet until it has.
+    if (currentOffset !== _stepDayOffset(idx)) return false;
     if (idx < 15) {
       if (typeof H.week !== 'function') return false;
-      // The climb's fifteen live on the key of the day it is for, so a מעלה is
-      // due now only when that day is the one on screen. In Fixed mode that is
-      // today and the block reads Now where it stands; where the band opens
-      // before midnight it is tomorrow, and Now waits until the reader steps
-      // forward — the line beneath offers that step.
-      if (currentOffset !== _maalotOffset()) return false;
       const ws = _pathMaalotWindows();
       return !!ws && ws.some(v => _hIn(now, v[0], v[1]));
     }
@@ -13317,19 +13396,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const k = _maalotKey ? maalotDone() : 0;
     const w = yomDone();
     const sun = k === 15;
-    // Where Chatzot falls before midnight — Israel through the winter, and any
-    // city whose seam has drifted back that far — the band opens in the late
-    // evening and the climb it carries is tomorrow's. The block offers that
-    // climb where the reader stands rather than asking them to step forward
-    // first, and the tap carries them over; only once that day's fifteen are
-    // whole does it go back to reading the day on screen.
-    let jump = _maalotJump();
-    const kBand = jump ? _maalotDoneFor(jump) : k;
-    if (jump && kBand >= 15) jump = 0;
+    // The hour may be asking for a step on a day other than the one on screen:
+    // a climb in a band that opens before midnight belongs to tomorrow, and a
+    // מיעוט of the seven between midnight and Chatzot still belongs to
+    // yesterday's cycle. The block offers it where the reader stands and
+    // carries them over on the tap, rather than making them find the day.
+    const jmp = _pathJump();
+    const jump = jmp ? jmp.off : 0;
     // The hour first; the lowest unmarked only when the hour asks for nothing
     // — between the מיעוט windows, or once this one's are all marked.
-    const nextIdx = jump ? kBand : pathNextIdx(k, yomMask());
-    const due = jump ? true : pathStepIsDue(nextIdx);
+    const nextIdx = jmp ? jmp.idx : pathNextIdx(k, yomMask());
+    const due = jmp ? true : pathStepIsDue(nextIdx);
     // The line always reads Next — it names the step still to be taken, and
     // the NOW card above already owns the word Now. When the hour for it has
     // come the word pulses rather than changing.
@@ -13365,9 +13442,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
     el.dataset.idx = nextIdx;
     if (jump) el.dataset.jump = jump; else delete el.dataset.jump;
+    // A step on another day is named as such, so that being carried backwards
+    // to yesterday's Malchut — or forwards into tomorrow's climb — is never a
+    // surprise. Beyond a day either way the date itself is clearer than a word.
+    const dayNote = !jump ? '' :
+      (jump === -1 ? ' · yesterday' : jump === 1 ? ' · tomorrow'
+        : ' · ' + getDisplayDate(currentOffset + jump)
+            .toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
     el.innerHTML = '<span class="t-lead' + (due ? ' t-due' : '') + '">' + lead + '</span> ' +
       '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
-      nameHtml + ' <span class="t-sef">· ' + p[2] + '</span>';
+      nameHtml + ' <span class="t-sef">· ' + p[2] + dayNote + '</span>';
   }
   // The line does not name the week it runs in. The date bar directly above it
   // reads "Week 48 · Day 334" — the week of the year — and the dial's week 45
@@ -13392,7 +13476,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const H = window.kotwHours;
     if (!H || typeof H.toMin !== 'function') return false;
     if (_maalotOffset() !== 1) return false;   // the band is not for tomorrow
-    if (_maalotJump()) return false;           // it is open — the line above has it
+    if (_inMaalotBand()) return false;         // it is open — the line above has it
     const ws = _pathMaalotWindows();
     if (!ws || !ws.length) return false;
     const start = H.toMin(ws[0][0]);           // when Chochmah opens
