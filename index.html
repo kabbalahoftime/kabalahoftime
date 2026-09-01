@@ -2079,10 +2079,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* The step whose hour it is — in the block and in the path — keeps the same
    slow pulse a prayer tag keeps in its own hour, so the two read as one idea. */
 .today-next .t-due { color:var(--gold); }
-.today-next .t-due, .path-row.due .path-next-tag { animation: prayerPulse 2.2s ease-in-out infinite; }
+.path-row.due .path-next-tag { animation: prayerPulse 2.2s ease-in-out infinite; }
+/* The step's own tag now carries the whole signal, the lead word having gone,
+   so it pulses on a gentler curve than the small tags do: prayerPulse drops to
+   0.45, which is fine for a label fading but not for the line the reader has
+   to read. It holds above two-thirds and lets the glow do the work. */
+@keyframes stepPulse {
+  0%, 100% { opacity: 0.72; text-shadow: none; }
+  50%      { opacity: 1;    text-shadow: 0 0 5px rgba(223,160,22,0.85); }
+}
+.today-next .t-due { animation: stepPulse 2.4s ease-in-out infinite; }
 .path-row.due { border-left:2px solid var(--gold); }
 @media (prefers-reduced-motion: reduce) {
-  .today-next .t-due, .path-row.due .path-next-tag { animation:none; opacity:1; }
+  .path-row.due .path-next-tag { animation:none; opacity:1; }
+  /* The step tag keeps the glow standing still. With the lead word gone the
+     pulse is the only thing saying the hour has come, and switching it off
+     without putting something in its place would say nothing at all — the
+     same trade .prayer-tag.now-flash already makes here. */
+  .today-next .t-due { animation:none; opacity:1; text-shadow:0 0 5px rgba(223,160,22,0.85); }
 }
 
 /* TODAY — the same box as the Perek Shirah banner below it, because it is the
@@ -13512,7 +13526,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         '<span class="t-sef">· fifteen of fifteen' + note + '</span>';
       return;
     }
-    el.setAttribute('aria-label', base ? 'Go to the next mi’ut' : 'Go to the next ma’alah');
     const p = table[st.idx - base];
     // The live names are read off the cards now drawn, which are the day on
     // screen's. On another day they would be the wrong readings, so the
@@ -13525,11 +13538,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       '<bdi lang="he" class="t-heb">$1</bdi>');
     el.dataset.idx = st.idx;
     if (st.off) el.dataset.jump = st.off; else delete el.dataset.jump;
-    // The line always reads Next — it names the step still to be taken, and
-    // the NOW card above already owns the word Now. When the hour for it has
-    // come the word pulses rather than changing.
-    el.innerHTML = '<span class="t-lead' + (st.due ? ' t-due' : '') + '">Next</span> ' +
-      '<bdi class="t-step" lang="he">' + tagOne + ' ' + p[0] + '</bdi> · ' +
+    // No lead word. It said nothing the card was not already saying — TODAY
+    // above it, "of 30 marked" and "all thirty" below — and with two lines it
+    // said that nothing twice. So the step's own tag carries the pulse when
+    // the hour has come, and the word is kept for Done, which does say
+    // something: the same rule the prayer list follows with NOW, where the
+    // word appears only where it is true.
+    //
+    // The word is not lost to a reader who cannot see the card. It was never
+    // announced to begin with, and neither was the pulse — both now go into
+    // the label, which says what the line is and whether its hour is running.
+    el.setAttribute('aria-label', 'Go to the next ' + (base ? 'mi’ut' : 'ma’alah') +
+      (st.due ? ' — its hour is now' : ''));
+    el.innerHTML =
+      '<bdi class="t-step' + (st.due ? ' t-due' : '') + '" lang="he">' + tagOne + ' ' + p[0] + '</bdi> · ' +
       nameHtml + ' <span class="t-sef">· ' + p[2] + note + '</span>';
   }
 
