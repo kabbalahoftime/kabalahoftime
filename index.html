@@ -2343,7 +2343,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">The <strong>heart</strong> in the Now card fills as those ten accumulate, and glows when the day's prayers are whole.</li>
         <li style="margin-bottom:0.7em;">Tap a step on Ma'alot HaZman — the spiral of the year above — for that week's theme, animal, and teaching.</li>
         <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Keter down to Malchut) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
-        <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. The descent must be taken in order, each step the vessel for the next, and so must the return — which cannot begin until the moon is full. A little is a step: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</li>
+        <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. The descent must be taken in order, each step the vessel for the next. The return need not: a מיעוט may be marked whenever it was actually done, in any order, and without waiting for the moon to fill — though the path still offers you the lowest you have not yet taken, and the moon only begins to wane once the climb is whole. A little is a step: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</li>
         <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
         <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps. Each companion gathered lights in the sun's gold and fills half a star in the ring around the moon &mdash; two to a star, so a full day&rsquo;s twenty-two make the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars. The seven Chabad Rebbeim — one to each Sefirah from Chesed to Malchut — are the one closed set among them, and they wear a seven-branched menorah rather than a star: they are the ground the companions stand on. A gathered Rebbe lights blue and fills his own link in the chain of seven that hangs beside the moon, rather than a star in the ring.</li>
         <li style="margin-bottom:0.7em;">Tap any <strong>✡</strong> — six-pointed, a Magen David — to gather it as a <strong>star</strong>, and the count beside the moon rises. The stars have no total to reach: what is on offer changes with the day, so the count says how many you reached, never how many you missed.</li>
@@ -12923,19 +12923,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     e.preventDefault();
     e.stopPropagation();
     if (el.classList.contains('yom')) {
-      // Waning step — taken only once the moon is full (all 15 ma'alot), and
-      // then in order, as the descent is. The step offered is the lowest not
-      // yet marked; the one before it is the one that can be given back. A
-      // day left gapped by the older free-order marking still fills in from
-      // its lowest gap, so nothing anyone marked is lost.
+      // Waning step — marked whenever it was actually done: in any order, and
+      // without waiting for the moon to fill. The path still offers the lowest
+      // unmarked, and the moon still wanes only once the climb is whole; what
+      // has gone is the refusal. State is a 15-bit mask, which has always been
+      // able to hold gaps, so nothing about the storage changes.
       const n = +el.dataset.wane;
       if (!n) return;
-      if (maalotDone() < 15) return shakeTag(el);   // fill the moon first
-      const nx = yomNext() || 16;                   // 16 once all fifteen are marked
-      let mask = yomMask();
-      if (n === nx)          mask |= 1 << (n - 1);
-      else if (n === nx - 1) mask &= ~(1 << (n - 1));
-      else                   return shakeTag(el);
+      const mask = yomMask() ^ (1 << (n - 1));      // tap to mark, tap to give back
       try { localStorage.setItem(_yomMaskKey, String(mask & 32767)); } catch (err) {}
       applyMaalotState();
       return;
@@ -12951,10 +12946,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }, true);
 
   // ── THE FIFTEEN WANING STEPS (מיעוט א׳–ט״ו) — Or Chozer, Keter → Malchut ──
-  // After the moon is full, fifteen tags retrace the path as it wanes. Taken
-  // in order, as the ma'alot are, and only once the sun is reached; state is
-  // a 15-bit mask per Jewish date, which a sequential day fills from the
-  // bottom, so it reads (1 << n) - 1.
+  // Fifteen tags retrace the path as it wanes. Unlike the ma'alot they are
+  // free — any of them, in any order, before or after the climb is finished —
+  // because a return step is marked when it was done, not when the app is
+  // ready for it. State is a 15-bit mask per Jewish date; a day walked in
+  // order fills from the bottom and reads (1 << n) - 1, and a day walked out
+  // of order simply carries its gaps.
   let _yomKey = null;       // legacy: the highest מיעוט reached, 0-15
   let _yomMaskKey = null;   // a 15-bit mask, filled from the bottom in order
   // Whether the day's thirty-first — the Song of Yehoshua — has been said.
@@ -13175,35 +13172,43 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   // ── THE HOURS OF THE PATH ──
-  // The fifteen מעלות are climbed inside week 45 of the dial: 23:16 to 23:45,
-  // twenty-nine minutes, two minutes a step. The fifteen מיעוטים then follow the
-  // cards — each is due while its own Sefirah holds the hour, and where a
-  // Sefirah carries more than one they are due together.
+  // The fifteen מעלות are climbed inside the Mochin band — Chochmah, Binah and
+  // Keter together, the three that overlay the seam. About eighty-eight
+  // minutes, wrapped around Chatzot: from forty-nine before it to thirty-nine
+  // after. The fifteen מיעוטים then follow the cards: each is due while its
+  // own Sefirah holds the hour, and where a Sefirah carries more than one they
+  // are due together.
   //
-  // Week 45 and no other: it is the week of Av that holds the fifteenth.
-  // Counting from 1 Tishrei, 15 Av falls on day 310, and week 45 runs 309 to
-  // 315 — the day lands inside it however the months fall that year. Week 46
-  // is days 316 to 322, past Tu B'Av entirely, which is why it went. Fifteen
-  // steps climbing to the full moon, set in the one week whose fifteenth is
-  // the full moon. Week 45's own theme on the dial reads "To Raise Ourselves
-  // Up Through Love and Humility".
+  // The band is fixed to the seam, but the seam's own place in the Gregorian
+  // day is not. In Fixed mode Chatzot is 1:43 AM and the band runs 12:54 to
+  // 2:22 — the small hours of the very day it prepares, so the climb belongs
+  // to the day already on screen. In Sha'ot Zmaniyot the seam follows the sun
+  // of the chosen city and can fall before midnight, and then the band opens
+  // in the late evening of the day before. Either way the day the climb
+  // prepares is the one that begins at that Chatzot: past noon it is tomorrow,
+  // in the small hours it is today. _maalotOffset says which.
   //
-  // Twenty-nine minutes is not a budget for fifteen readings and is not meant
-  // as one. Nothing is locked; the window says when the climb belongs, and a
-  // step still marks whenever it was actually done.
+  // Likutei Moharan I:1 is the reason. The sechel — the inner intelligence —
+  // is the sun, shining in all his ways (§3, on Proverbs 4:18); the ches is
+  // chiyut, wisdom the vitality of all things (§4); that light is reached only
+  // through the nun, which is Malchut (§5); and Malchut is the moon, which has
+  // no light of her own but what she receives from the sun, so that "the light
+  // of the moon shall be as the light of the sun", Isaiah 30:26 (§6). The
+  // climb is the sechel, and Chochmah, Binah and Keter are its hours. The moon
+  // on the dial fills as it is walked and turns to the sun at the fifteenth,
+  // which is that verse and no other.
   //
-  // Not the Mochin band, though the band is the obvious home for an ascent
-  // across the seam. Those eighty-eight minutes already carry the three longest
-  // prayers in the day — Tikkun Rachel on Chochmah, Tikkun Leah on Binah,
-  // Hitbodedut on Keter — and fifteen readings on top of Tikkun Chatzot is more
-  // than an hour holds. This hour sits in Malchut's stretch instead, whose only
-  // prayer is Kri'at Shema, and closes thirty-nine minutes before Tikkun Rachel
-  // opens: the climb finishes, then the prayers begin.
+  // This was once set to week 45 of the dial instead — 23:16 to 23:45, inside
+  // Malchut's own stretch — on the reasoning that the Mochin already carry the
+  // three longest prayers of the day: Tikkun Rachel on Chochmah, Tikkun Leah
+  // on Binah, Hitbodedut on Keter. That crowding is real, and the band falls
+  // near one in the morning rather than before midnight. But it put the ascent
+  // at the moon's end of the very verse the app is built on, which is why it
+  // has gone back.
   //
   // Nothing is locked by any of this. The hour says what it is asking for; a
   // step can still be marked whenever it was actually done, and a step already
   // marked is never offered again.
-  const PATH_MAALOT_WEEK = 45;
   const PATH_SEF_ORDER = ['Chesed','Gevurah','Tiferet','Netzach','Hod','Yesod','Malchut'];
   const _hNorm = h => ((h % 24) + 24) % 24;
   // A window may straddle the seam, so containment is asked the long way round.
@@ -13220,6 +13225,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     PATH_SEF_ORDER.forEach((n, i) => { w[n] = [i * 24 / 7, (i + 1) * 24 / 7]; });
     return w;
   }
+
+  // The climb's hour: the three Mochin taken together, in the order they run.
+  function _pathMaalotWindows() {
+    const w = _pathHourWindows();
+    if (!w) return null;
+    return ['Chochmah', 'Binah', 'Keter'].map(n => w[n]).filter(Boolean);
+  }
+
+  // The wall clock in the terms the hours use — the chosen city's clock in
+  // Sha'ot Zmaniyot, this device's otherwise.
+  function _pathNowMin() {
+    const H = window.kotwHours;
+    if (H && typeof H.nowMin === 'function') return H.nowMin();
+    const d = new Date();
+    return d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60;
+  }
+
+  // Which day the climb standing now is for. The band belongs to the day that
+  // begins at the Chatzot it wraps: reached in the evening it is preparing
+  // tomorrow, reached in the small hours it is the day already on screen.
+  function _maalotOffset() { return _pathNowMin() >= 720 ? 1 : 0; }
 
   // The order is the spine. What comes next is always the lowest unmarked —
   // the hour never reaches past an unclimbed step to a later one.
@@ -13238,13 +13264,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const now = _hNorm(H.nowH());
     if (idx < 15) {
       if (typeof H.week !== 'function') return false;
-      // The hour prepares the day that follows it, and that day's fifteen live
-      // on that day's key. So a מעלה is due now only when the day on screen is
-      // the one being prepared — step forward and it is Now; standing on today
-      // it is Next, because today's own climb had its hour last night.
-      if (currentOffset !== 1) return false;
-      const wk = H.week(PATH_MAALOT_WEEK);
-      return _hIn(now, _hNorm(wk.h1), _hNorm(wk.h2));
+      // The climb's fifteen live on the key of the day it is for, so a מעלה is
+      // due now only when that day is the one on screen. In Fixed mode that is
+      // today and the block reads Now where it stands; where the band opens
+      // before midnight it is tomorrow, and Now waits until the reader steps
+      // forward — the line beneath offers that step.
+      if (currentOffset !== _maalotOffset()) return false;
+      const ws = _pathMaalotWindows();
+      return !!ws && ws.some(v => _hIn(now, v[0], v[1]));
     }
     const win = _pathHourWindows();
     const v = win && win[PATH_WANING[idx - 15][2]];
@@ -13308,23 +13335,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Two week numbers on one screen meaning two different things is a question
   // the block should not be raising.
   //
-  // The invitation to climb for tomorrow stands from the hour's opening until
-  // the date rolls at midnight, not only for the twenty-nine minutes of the
-  // hour itself: it is a short hour, and someone still awake at 23:50 has not
-  // missed the chance. After the roll there is nothing to step forward to —
-  // the block is standing on the new day already.
+  // The invitation to step forward and climb for tomorrow stands from the
+  // band's opening until the date rolls at midnight, not only for the
+  // eighty-eight minutes of the band itself: it is short, and someone still
+  // awake at 23:50 has not missed the chance. After the roll there is nothing
+  // to step forward to — the block is standing on the new day already.
   //
-  // Week 45 opens in the late evening in both time modes, 23:16 fixed and
-  // 22:32 zmaniyot, so start-to-midnight is under ninety minutes either way.
-  // Were it ever to move into the morning that would stop being true, so the
-  // extension is only taken when the hour opens after midday.
+  // It appears only when the band opens in the evening, which is to say only
+  // when Chatzot itself falls before midnight. In Fixed mode it never does —
+  // the seam is 1:43 AM and the whole band lies in the small hours of the day
+  // it is for, so the line above offers the climb where it stands and there is
+  // nothing ahead to point at.
   function todayAheadDue() {
     const H = window.kotwHours;
-    if (!H || typeof H.week !== 'function' || typeof H.toMin !== 'function') return false;
-    const start = H.toMin(H.week(PATH_MAALOT_WEEK).h1);
-    if (start < 720) return pathStepIsDue(0);
-    const d = new Date();
-    return (d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60) >= start;
+    if (!H || typeof H.toMin !== 'function') return false;
+    const ws = _pathMaalotWindows();
+    if (!ws || !ws.length) return false;
+    const start = H.toMin(ws[0][0]);          // when Chochmah opens
+    if (start < 720) return false;            // the band opens after midnight
+    return _pathNowMin() >= start;
   }
 
   function todayAhead() {
@@ -19939,6 +19968,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     week:weekHours,
     moch:MOCH.map(function(m){return {en:m.en,h1:m.h1,h2:m.h2};}),
     nowH:function(){return timeMap().nowH();},
+    nowMin:function(){return timeMap().nowMin();},
     toMin:function(h){return timeMap().hToMin(h);}
   };
   tick();
