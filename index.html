@@ -2096,18 +2096,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   line-height:1.5; padding:3px 0; cursor:pointer; }
 .today-next .t-lead { color:var(--ink-dim); font-size:0.8em; text-transform:uppercase;
   letter-spacing:1.5px; }
-/* The waning's line, clear of the climb's above it. Each is about 30px tall,
-   so a 44px reach probe from one lands 6px inside the other and takes its
+/* Each line clear of the one above it. All three are about 30px tall, so a
+   44px reach probe from one lands 6px inside its neighbour and takes its
    taps — the same trap "all thirty" hits, and answered the same way: the gap
    is real space rather than an invisible band over the neighbour. Ten pixels
    is the least that clears it at every text size. */
-#today-wane { margin-top:10px; }
+#today-wane, #today-pray { margin-top:10px; }
 .today-next .t-step { color:var(--gold); }
 .today-next .t-sef  { color:var(--ink-mid); font-size:0.85em; }
 /* A finished set. The word stands where Next stands, in gold rather than dim,
    and does not pulse — it is a state, not a call. */
 .today-next .t-whole { color:var(--gold); }
 .today-next .t-heb, .today-next .t-step { font-family:'Frank Ruhl Libre',serif; letter-spacing:0; }
+/* The prayers have no numbered tag — the prayer's own name is what anchors the
+   line, so it takes the gold the tag would have had. In the body face, not the
+   Hebrew one .t-step carries: Frank Ruhl Libre's x-height is built for Hebrew
+   and set "Shacharit" a size larger than the readings beside it. */
+.today-next .t-pray { color:var(--gold); }
 /* Clear of the button above it. A 44px reach probe from "all thirty" lands on
    the next-step button otherwise, which is the trap the song lines hit: an
    invisible band would sit on the neighbouring control and take its taps, so
@@ -2410,6 +2415,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="today-label">Today</div>
     <button id="today-next" class="today-next" onclick="todayGo('m')" aria-label="Go to the next ma'alah">…</button>
     <button id="today-wane" class="today-next" onclick="todayGo('y')" aria-label="Go to the next mi'ut">…</button>
+    <button id="today-pray" class="today-next" onclick="todayGo('p')" aria-label="Go to the next prayer">…</button>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
             aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
     <div class="today-foot">
@@ -13407,6 +13413,49 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return { off: 0, done: true };
   }
 
+  // The prayers' line. One prayer to a Sefirah, so the same two rings decide
+  // its day: Hitbodedut, Tikkun Rachel and Tikkun Leah sit on Keter, Chochmah
+  // and Binah — the ring that hovers above the seam and faces forward, which
+  // is where Tikkun Chatzot belongs — and the other seven belong to the cycle
+  // they are inside. Unlike the thirty they were never sequential to begin
+  // with: each has had its own hour since the day the heart was drawn.
+  function _prayerDayOffset(n) {
+    return _MOCHIN_RING[PRAYER_SEFIRAH[n - 1]] ? _maalotOffset() : _cycleOffset();
+  }
+  function _prayersMaskFor(off) {
+    if (!off) return prayersMask();
+    try {
+      return Math.max(0, parseInt(localStorage.getItem(_keyFor('kotPrayers:', off)), 10) || 0) & 1023;
+    } catch (e) { return 0; }
+  }
+  // Tikkun Rachel gives way to Perek Shira on a day Tachanun is not said. That
+  // is settled per day, and the flag render() keeps speaks only for the day on
+  // screen, so any other day is asked directly.
+  function _prayerName(n, off) {
+    if (n !== 2) return PRAYER_NAMES[n - 1];
+    if (!off) return _noTachanunToday ? 'Perek Shira' : PRAYER_NAMES[1];
+    try {
+      const d = getDisplayDate(currentOffset + off), h = gregToHebrew(d);
+      return isNoTachanunDay(h.year, h.month, h.day, d.getDay()) ? 'Perek Shira' : PRAYER_NAMES[1];
+    } catch (e) { return PRAYER_NAMES[1]; }
+  }
+  function _prayerNow() {
+    const H = window.kotwHours, win = _pathHourWindows();
+    if (currentOffset === 0 && H && win && typeof H.nowH === 'function') {
+      const now = _hNorm(H.nowH());
+      for (let n = 1; n <= 10; n++) {
+        const v = win[PRAYER_SEFIRAH[n - 1]];
+        if (!v || !_hIn(now, v[0], v[1])) continue;
+        const off = _prayerDayOffset(n);
+        if (_prayersMaskFor(off) & (1 << (n - 1))) continue;
+        return { off, n, due: true };
+      }
+    }
+    const mask = prayersMask();
+    for (let n = 1; n <= 10; n++) if (!(mask & (1 << (n - 1)))) return { off: 0, n };
+    return { off: 0, done: true };
+  }
+
   // A step standing on another day is named as such, so that being carried
   // back to yesterday's Malchut — or forward into tomorrow's climb — is never
   // a surprise. Beyond a day either way the date itself is clearer than a word.
@@ -13457,14 +13506,44 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       nameHtml + ' <span class="t-sef">· ' + p[2] + note + '</span>';
   }
 
+  // The prayers' line, in the same shape as the two above it. It carries its
+  // own tally, because the foot's thirty is the two fifteens and the ten are
+  // a separate count — a heart beside the ladder, not another rung of it.
+  function _todayPrayerLine(el, st) {
+    if (!el) return;
+    const note = _todayDayNote(st.off);
+    if (st.done) {
+      delete el.dataset.pray; delete el.dataset.jump;
+      el.setAttribute('aria-label', 'All ten prayers said — open today’s path');
+      el.innerHTML = '<span class="t-lead t-whole">Done</span> ' +
+        '<bdi class="t-step" lang="he">תפילות</bdi> ' +
+        '<span class="t-sef">· ten of ten' + note + '</span>';
+      return;
+    }
+    el.setAttribute('aria-label', 'Go to the next prayer');
+    el.dataset.pray = st.n;
+    if (st.off) el.dataset.jump = st.off; else delete el.dataset.jump;
+    el.innerHTML = '<span class="t-lead' + (st.due ? ' t-due' : '') + '">Next</span> ' +
+      '<span class="t-pray">' + _prayerName(st.n, st.off) + '</span>' +
+      ' <span class="t-sef">· ' + PRAYER_SEFIRAH[st.n - 1] +
+      ' · ' + _prayersDoneFor(st.off) + ' of 10' + note + '</span>';
+  }
+  function _prayersDoneFor(off) {
+    let m = _prayersMaskFor(off), n = 0;
+    while (m) { n += m & 1; m >>= 1; }
+    return n;
+  }
+
   function renderTodayBlock() {
     const elM = document.getElementById('today-next');
     const elY = document.getElementById('today-wane');
+    const elP = document.getElementById('today-pray');
     if (!elM || !elY) return;
     const k = _maalotKey ? maalotDone() : 0;
     const w = yomDone();
     _todayLine(elM, _climbNow(), 'מעלה', 'מעלות', PATH_WAXING, 0);
     _todayLine(elY, _waneNow(),  'מיעוט', 'מיעוטים', PATH_WANING, 15);
+    _todayPrayerLine(elP, _prayerNow());
     const count = document.getElementById('today-count');
     if (count) count.textContent = (k + w === 30)
       ? '30 of 30 — the month complete'
@@ -13519,8 +13598,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // go waits a beat. A finished line has no step to go to, so it opens the
   // path instead, where all thirty and their marks can be seen at once.
   function todayGo(which) {
-    const el = document.getElementById(which === 'y' ? 'today-wane' : 'today-next');
+    const el = document.getElementById(
+      which === 'y' ? 'today-wane' : which === 'p' ? 'today-pray' : 'today-next');
     if (!el) return;
+    if (which === 'p') {
+      if (el.dataset.pray === undefined) { openTodaysPath(); return; }
+      const n = +el.dataset.pray, off = +(el.dataset.jump || 0);
+      if (off && typeof changeDay === 'function') {
+        changeDay(off);
+        setTimeout(() => prayerGo(n), 80);
+        return;
+      }
+      prayerGo(n);
+      return;
+    }
     if (el.dataset.idx === undefined) { openTodaysPath(); return; }
     const idx = +el.dataset.idx, jump = +(el.dataset.jump || 0);
     if (jump && typeof changeDay === 'function') {
@@ -13578,6 +13669,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function closeTodaysPath() {
     document.getElementById('todays-path-modal').style.display = 'none';
+  }
+
+  // To a prayer's own tag in its Sefirah's card. The Now card mirrors whichever
+  // Sefirah is current, so there can be two copies of the tag on the page — the
+  // mirror is skipped, the same way pathGo skips it, so the reader is taken to
+  // the card the prayer actually lives in.
+  function prayerGo(n) {
+    closeTodaysPath();
+    const el = Array.from(document.querySelectorAll('.prayer-tag')).find(e =>
+      +e.dataset.prayer === n && !e.closest('#now-sefirah-featured'));
+    if (!el) return;
+    const card = el.closest('.sefirah-card') || el.closest('.keter-card');
+    if (card) card.classList.add('expanded');
+    setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
   }
 
   function pathGo(idx) {
