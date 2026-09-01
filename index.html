@@ -13247,6 +13247,36 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // tomorrow, reached in the small hours it is the day already on screen.
   function _maalotOffset() { return _pathNowMin() >= 720 ? 1 : 0; }
 
+  // Whether the band is open at this moment.
+  function _inMaalotBand() {
+    const H = window.kotwHours, ws = _pathMaalotWindows();
+    if (!ws || !H || typeof H.nowH !== 'function') return false;
+    const now = _hNorm(H.nowH());
+    return ws.some(v => _hIn(now, v[0], v[1]));
+  }
+
+  // How far the Today block must step to reach the day the open band is
+  // climbing for. Nought when the band is shut, when it is already for the day
+  // on screen, or when the reader has walked off to some other date — that
+  // last because the block is about the reader's own now, and a day they have
+  // navigated to is not it.
+  function _maalotJump() {
+    if (currentOffset !== 0 || !_inMaalotBand()) return 0;
+    return _maalotOffset();
+  }
+
+  // The climb's tally for a day the block is not standing on. Each day's
+  // fifteen live under its own Hebrew date, and render() only ever sets the
+  // key for the day on screen, so the band's day is read directly.
+  function _maalotDoneFor(jump) {
+    if (!jump) return _maalotKey ? maalotDone() : 0;
+    try {
+      const h = gregToHebrew(getDisplayDate(currentOffset + jump));
+      const v = localStorage.getItem('kotMaalot:' + h.year + '-' + h.month + '-' + h.day);
+      return Math.min(15, Math.max(0, parseInt(v, 10) || 0));
+    } catch (e) { return 0; }
+  }
+
   // The order is the spine. What comes next is always the lowest unmarked —
   // the hour never reaches past an unclimbed step to a later one.
   function pathNextIdx(k, yMask) {
@@ -13287,10 +13317,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const k = _maalotKey ? maalotDone() : 0;
     const w = yomDone();
     const sun = k === 15;
+    // Where Chatzot falls before midnight — Israel through the winter, and any
+    // city whose seam has drifted back that far — the band opens in the late
+    // evening and the climb it carries is tomorrow's. The block offers that
+    // climb where the reader stands rather than asking them to step forward
+    // first, and the tap carries them over; only once that day's fifteen are
+    // whole does it go back to reading the day on screen.
+    let jump = _maalotJump();
+    const kBand = jump ? _maalotDoneFor(jump) : k;
+    if (jump && kBand >= 15) jump = 0;
     // The hour first; the lowest unmarked only when the hour asks for nothing
     // — between the מיעוט windows, or once this one's are all marked.
-    const nextIdx = pathNextIdx(k, yomMask());
-    const due = pathStepIsDue(nextIdx);
+    const nextIdx = jump ? kBand : pathNextIdx(k, yomMask());
+    const due = jump ? true : pathStepIsDue(nextIdx);
     // The line always reads Next — it names the step still to be taken, and
     // the NOW card above already owns the word Now. When the hour for it has
     // come the word pulses rather than changing.
@@ -13305,7 +13344,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         (todayAheadDue() && currentOffset === 0) ? '' : 'none';
       return;
     }
-    const live = (typeof _pathLiveNames === 'function') ? _pathLiveNames() : {};
+    // The live names are read off the cards now drawn, which are the day on
+    // screen's. On a jump they would be the wrong day's readings, so the
+    // table's own name is used instead.
+    const live = (!jump && typeof _pathLiveNames === 'function') ? _pathLiveNames() : {};
     const waxing = nextIdx < 15;
     const p = waxing ? PATH_WAXING[nextIdx] : PATH_WANING[nextIdx - 15];
     const name = live[(waxing ? 'm|' : 'y|') + p[0]] || p[1];
@@ -13313,18 +13355,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // sits in its own bidi run — the same care the rest of the app takes.
     const nameHtml = name.replace(/([\u0590-\u05FF][\u0590-\u05FF\s\u05F3\u05F4'\u2019-]*)/g,
       '<bdi lang="he" class="t-heb">$1</bdi>');
-    // The climb hour belongs to the following day's fifteen, and those live on
-    // the following day's key — so when today's own climb is already done there
-    // is nothing here to offer and the hour would pass without a word. This
-    // says it has come, and steps to where the climbing is done. Hidden while
-    // today's climb is unfinished, because then the line above is already
-    // offering it, and hidden once the reader has stepped forward.
+    // The band can shut before midnight while the day it climbed for is still
+    // a day away. The hour has passed but the date has not, and someone still
+    // awake has not missed the chance — this offers the step forward. While
+    // the band is open it stays out of the way, because the line above is
+    // already offering the climb itself and carries the reader over.
     const ahead = document.getElementById('today-ahead');
-    // Not gated on today's climb: the line is about tomorrow's fifteen, which
-    // stand at nought whatever today has reached.
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
     el.dataset.idx = nextIdx;
+    if (jump) el.dataset.jump = jump; else delete el.dataset.jump;
     el.innerHTML = '<span class="t-lead' + (due ? ' t-due' : '') + '">' + lead + '</span> ' +
       '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
       nameHtml + ' <span class="t-sef">· ' + p[2] + '</span>';
@@ -13341,18 +13381,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // awake at 23:50 has not missed the chance. After the roll there is nothing
   // to step forward to — the block is standing on the new day already.
   //
-  // It appears only when the band opens in the evening, which is to say only
-  // when Chatzot itself falls before midnight. In Fixed mode it never does —
-  // the seam is 1:43 AM and the whole band lies in the small hours of the day
-  // it is for, so the line above offers the climb where it stands and there is
-  // nothing ahead to point at.
+  // It can only arise when the band opens in the evening, which is to say when
+  // Chatzot itself falls before midnight. In Fixed mode it never does: the
+  // seam is 1:43 AM and the whole band lies in the small hours of the day it
+  // is for. And while the band is open the block offers the climb directly and
+  // carries the reader over on the tap, so this line waits for the band to
+  // shut — in most cities that opens the band past midnight too, and it never
+  // appears at all.
   function todayAheadDue() {
     const H = window.kotwHours;
     if (!H || typeof H.toMin !== 'function') return false;
+    if (_maalotOffset() !== 1) return false;   // the band is not for tomorrow
+    if (_maalotJump()) return false;           // it is open — the line above has it
     const ws = _pathMaalotWindows();
     if (!ws || !ws.length) return false;
-    const start = H.toMin(ws[0][0]);          // when Chochmah opens
-    if (start < 720) return false;            // the band opens after midnight
+    const start = H.toMin(ws[0][0]);           // when Chochmah opens
+    if (start < 720) return false;             // the band opens after midnight
     return _pathNowMin() >= start;
   }
 
@@ -13360,9 +13404,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (typeof changeDay === 'function') changeDay(1);
   }
 
+  // A tap on the line goes to the step it names — stepping the block over to
+  // the band's day first where that is the day being offered. render() has to
+  // finish laying out that day before the row exists to scroll to, so the go
+  // waits a beat.
   function todayGo() {
     const el = document.getElementById('today-next');
-    if (el && el.dataset.idx !== undefined) pathGo(+el.dataset.idx);
+    if (!el || el.dataset.idx === undefined) return;
+    const idx = +el.dataset.idx, jump = +(el.dataset.jump || 0);
+    if (jump && typeof changeDay === 'function') {
+      changeDay(jump);
+      setTimeout(() => pathGo(idx), 80);
+      return;
+    }
+    pathGo(idx);
   }
 
   function openTodaysPath() {
