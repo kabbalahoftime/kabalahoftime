@@ -13506,9 +13506,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       nameHtml + ' <span class="t-sef">· ' + p[2] + note + '</span>';
   }
 
-  // The prayers' line, in the same shape as the two above it. It carries its
-  // own tally, because the foot's thirty is the two fifteens and the ten are
-  // a separate count — a heart beside the ladder, not another rung of it.
+  // The prayers' line, in the same shape as the two above it. No running
+  // tally: the foot's thirty is the two fifteens, and the ten already have a
+  // count of their own in the heart on the Now card, which fills as they are
+  // said. Saying it twice only added a nought to read past.
   function _todayPrayerLine(el, st) {
     if (!el) return;
     const note = _todayDayNote(st.off);
@@ -13525,13 +13526,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (st.off) el.dataset.jump = st.off; else delete el.dataset.jump;
     el.innerHTML = '<span class="t-lead' + (st.due ? ' t-due' : '') + '">Next</span> ' +
       '<span class="t-pray">' + _prayerName(st.n, st.off) + '</span>' +
-      ' <span class="t-sef">· ' + PRAYER_SEFIRAH[st.n - 1] +
-      ' · ' + _prayersDoneFor(st.off) + ' of 10' + note + '</span>';
-  }
-  function _prayersDoneFor(off) {
-    let m = _prayersMaskFor(off), n = 0;
-    while (m) { n += m & 1; m >>= 1; }
-    return n;
+      ' <span class="t-sef">· ' + PRAYER_SEFIRAH[st.n - 1] + note + '</span>';
   }
 
   function renderTodayBlock() {
