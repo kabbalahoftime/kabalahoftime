@@ -2096,8 +2096,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   line-height:1.5; padding:3px 0; cursor:pointer; }
 .today-next .t-lead { color:var(--ink-dim); font-size:0.8em; text-transform:uppercase;
   letter-spacing:1.5px; }
+/* The waning's line, clear of the climb's above it. Each is about 30px tall,
+   so a 44px reach probe from one lands 6px inside the other and takes its
+   taps — the same trap "all thirty" hits, and answered the same way: the gap
+   is real space rather than an invisible band over the neighbour. Ten pixels
+   is the least that clears it at every text size. */
+#today-wane { margin-top:10px; }
 .today-next .t-step { color:var(--gold); }
 .today-next .t-sef  { color:var(--ink-mid); font-size:0.85em; }
+/* A finished set. The word stands where Next stands, in gold rather than dim,
+   and does not pulse — it is a state, not a call. */
+.today-next .t-whole { color:var(--gold); }
 .today-next .t-heb, .today-next .t-step { font-family:'Frank Ruhl Libre',serif; letter-spacing:0; }
 /* Clear of the button above it. A 44px reach probe from "all thirty" lands on
    the next-step button otherwise, which is the trap the song lines hit: an
@@ -2393,10 +2402,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   <!-- TODAY — the one question the page did not answer above the fold: what
        now. The date and the position are in the bar directly above, so this
-       adds only the step that is next and a way straight to it. -->
+       adds only the two steps that are next and a way straight to each.
+       Two lines rather than one because the waxing and the waning are two
+       counts, not one queue: each has its own fifteen and its own hours, and
+       either can be whole while the other is barely begun. -->
   <div id="today-block">
     <div class="today-label">Today</div>
-    <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to today's next step">…</button>
+    <button id="today-next" class="today-next" onclick="todayGo('m')" aria-label="Go to the next ma'alah">…</button>
+    <button id="today-wane" class="today-next" onclick="todayGo('y')" aria-label="Go to the next mi'ut">…</button>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
             aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
     <div class="today-foot">
@@ -13321,41 +13334,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     } catch (e) { return 0; }
   }
 
-  // What the hour is asking for and on which day, when that day is not the one
-  // on screen. Nought when the reader has walked off to some other date — the
-  // block is about their own now, and a day they navigated to is not it.
-  //
-  // It only ever fills a silence. The day on screen is asked first, and only
-  // when this hour has nothing to say to it does the block look across a seam.
-  // So the jump never competes with the spine — the spine answers "what comes
-  // next", and this answers "what is this hour for", which are different
-  // questions and only one of them can be asked at a time.
-  function _pathJump() {
-    if (currentOffset !== 0) return null;
-    const H = window.kotwHours;
-    if (!H || typeof H.nowH !== 'function') return null;
-    if (pathStepIsDue(pathNextIdx(_maalotDoneFor(0), yomMask()))) return null;
-    const now = _hNorm(H.nowH());
-    // The climb first — its band is the narrower hour, and takes precedence.
-    const mo = _maalotOffset();
-    if (mo !== 0 && _inMaalotBand()) {
-      const k = _maalotDoneFor(mo);
-      if (k < 15) return { off: mo, idx: k };
-    }
-    // Then whatever מיעוט this hour asks for, on the day that hour belongs to.
-    const win = _pathHourWindows();
-    if (!win) return null;
-    for (let i = 0; i < 15; i++) {
-      const off = _stepDayOffset(15 + i);
-      if (off === 0) continue;
-      const v = win[PATH_WANING[i][2]];
-      if (!v || !_hIn(now, v[0], v[1])) continue;
-      if (_yomMaskFor(off) & (1 << i)) continue;      // already marked there
-      return { off, idx: 15 + i };
-    }
-    return null;
-  }
-
   // The order is the spine. What comes next is always the lowest unmarked —
   // the hour never reaches past an unclimbed step to a later one.
   function pathNextIdx(k, yMask) {
@@ -13390,68 +13368,115 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // TODAY — the next step, worked out from the same three pieces of state
   // Today's Path uses and by the same rule, so the two cannot disagree: the
   // climb is free-order, so what is offered is the lowest unmarked.
-  function renderTodayBlock() {
-    const el = document.getElementById('today-next');
+  // ── THE TWO LINES OF THE TODAY BLOCK ──
+  // The waxing and the waning are two counts, not one queue. Each has its own
+  // fifteen, its own hours and its own ring on the dial, so each gets a line
+  // and each says plainly when it is whole. Either can be pointing at a day
+  // other than the one on screen — the climb forward into the cycle the Mochin
+  // are opening, a מיעוט of the seven back into the cycle still running behind
+  // the date — and each names the day it means.
+
+  // The climb's line. Its day is the band's while the band is open, and the
+  // day on screen otherwise; off the reader's own now there is no hour at all,
+  // because a date they navigated to is not the hour they are standing in.
+  function _climbNow() {
+    const open = currentOffset === 0 && _inMaalotBand();
+    const off  = open ? _maalotOffset() : 0;
+    const k    = _maalotDoneFor(off);
+    return k >= 15 ? { off, done: true } : { off, idx: k, due: open };
+  }
+
+  // The waning's line. The hour first: several מיעוטים can share a Sefirah —
+  // Malchut carries three — so the lowest unmarked of those now running is the
+  // one named, on the day that hour belongs to. Only when the hour is asking
+  // for nothing does it fall back to the lowest unmarked on the day on screen.
+  function _waneNow() {
+    const H = window.kotwHours, win = _pathHourWindows();
+    if (currentOffset === 0 && H && win && typeof H.nowH === 'function') {
+      const now = _hNorm(H.nowH());
+      for (let i = 0; i < 15; i++) {
+        const v = win[PATH_WANING[i][2]];
+        if (!v || !_hIn(now, v[0], v[1])) continue;
+        const off = _stepDayOffset(15 + i);
+        if (_yomMaskFor(off) & (1 << i)) continue;
+        return { off, idx: 15 + i, due: true };
+      }
+    }
+    const mask = yomMask();
+    for (let i = 0; i < 15; i++) if (!(mask & (1 << i))) return { off: 0, idx: 15 + i };
+    return { off: 0, done: true };
+  }
+
+  // A step standing on another day is named as such, so that being carried
+  // back to yesterday's Malchut — or forward into tomorrow's climb — is never
+  // a surprise. Beyond a day either way the date itself is clearer than a word.
+  function _todayDayNote(off) {
+    if (!off) return '';
+    if (off === -1) return ' · yesterday';
+    if (off === 1)  return ' · tomorrow';
+    return ' · ' + getDisplayDate(currentOffset + off)
+      .toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  }
+
+  // One line. A step names itself, its reading and its Sefirah; a finished set
+  // says so in the same shape, with the word standing where Next stands.
+  function _todayLine(el, st, tagOne, tagAll, table, base) {
     if (!el) return;
-    const k = _maalotKey ? maalotDone() : 0;
-    const w = yomDone();
-    const sun = k === 15;
-    // The hour may be asking for a step on a day other than the one on screen:
-    // a climb in a band that opens before midnight belongs to tomorrow, and a
-    // מיעוט of the seven between midnight and Chatzot still belongs to
-    // yesterday's cycle. The block offers it where the reader stands and
-    // carries them over on the tap, rather than making them find the day.
-    const jmp = _pathJump();
-    const jump = jmp ? jmp.off : 0;
-    // The hour first; the lowest unmarked only when the hour asks for nothing
-    // — between the מיעוט windows, or once this one's are all marked.
-    const nextIdx = jmp ? jmp.idx : pathNextIdx(k, yomMask());
-    const due = jmp ? true : pathStepIsDue(nextIdx);
+    const note = _todayDayNote(st.off);
+    if (st.done) {
+      // Still a live control — there is no step left to go to, so it opens the
+      // path, where all thirty and their marks can be seen at once. Which is
+      // why it is not marked disabled: it does something, and saying otherwise
+      // would hide that from anyone reading the page rather than seeing it.
+      delete el.dataset.idx; delete el.dataset.jump;
+      el.setAttribute('aria-label', (base ? 'The waning' : 'The climb') +
+        ' is complete, fifteen of fifteen — open today’s path');
+      el.innerHTML = '<span class="t-lead t-whole">Done</span> ' +
+        '<bdi class="t-step" lang="he">' + tagAll + '</bdi> ' +
+        '<span class="t-sef">· fifteen of fifteen' + note + '</span>';
+      return;
+    }
+    el.setAttribute('aria-label', base ? 'Go to the next mi’ut' : 'Go to the next ma’alah');
+    const p = table[st.idx - base];
+    // The live names are read off the cards now drawn, which are the day on
+    // screen's. On another day they would be the wrong readings, so the
+    // table's own name is used instead.
+    const live = (!st.off && typeof _pathLiveNames === 'function') ? _pathLiveNames() : {};
+    const name = live[(base ? 'y|' : 'm|') + p[0]] || p[1];
+    // Hebrew inside the name is wrapped so it is drawn in the Hebrew face and
+    // sits in its own bidi run — the same care the rest of the app takes.
+    const nameHtml = name.replace(/([֐-׿][֐-׿\s׳״'’-]*)/g,
+      '<bdi lang="he" class="t-heb">$1</bdi>');
+    el.dataset.idx = st.idx;
+    if (st.off) el.dataset.jump = st.off; else delete el.dataset.jump;
     // The line always reads Next — it names the step still to be taken, and
     // the NOW card above already owns the word Now. When the hour for it has
     // come the word pulses rather than changing.
-    const lead = 'Next';
+    el.innerHTML = '<span class="t-lead' + (st.due ? ' t-due' : '') + '">Next</span> ' +
+      '<bdi class="t-step" lang="he">' + tagOne + ' ' + p[0] + '</bdi> · ' +
+      nameHtml + ' <span class="t-sef">· ' + p[2] + note + '</span>';
+  }
+
+  function renderTodayBlock() {
+    const elM = document.getElementById('today-next');
+    const elY = document.getElementById('today-wane');
+    if (!elM || !elY) return;
+    const k = _maalotKey ? maalotDone() : 0;
+    const w = yomDone();
+    _todayLine(elM, _climbNow(), 'מעלה', 'מעלות', PATH_WAXING, 0);
+    _todayLine(elY, _waneNow(),  'מיעוט', 'מיעוטים', PATH_WANING, 15);
     const count = document.getElementById('today-count');
-    if (count) count.textContent = (k + w) + ' of 30 marked';
-    if (nextIdx === -1) {
-      delete el.dataset.idx;
-      el.textContent = '30 of 30 — the month complete.';
-      const done = document.getElementById('today-ahead');
-      if (done) done.style.display =
-        (todayAheadDue() && currentOffset === 0) ? '' : 'none';
-      return;
-    }
-    // The live names are read off the cards now drawn, which are the day on
-    // screen's. On a jump they would be the wrong day's readings, so the
-    // table's own name is used instead.
-    const live = (!jump && typeof _pathLiveNames === 'function') ? _pathLiveNames() : {};
-    const waxing = nextIdx < 15;
-    const p = waxing ? PATH_WAXING[nextIdx] : PATH_WANING[nextIdx - 15];
-    const name = live[(waxing ? 'm|' : 'y|') + p[0]] || p[1];
-    // Hebrew inside the name is wrapped so it is drawn in the Hebrew face and
-    // sits in its own bidi run — the same care the rest of the app takes.
-    const nameHtml = name.replace(/([\u0590-\u05FF][\u0590-\u05FF\s\u05F3\u05F4'\u2019-]*)/g,
-      '<bdi lang="he" class="t-heb">$1</bdi>');
+    if (count) count.textContent = (k + w === 30)
+      ? '30 of 30 — the month complete'
+      : (k + w) + ' of 30 marked';
     // The band can shut before midnight while the day it climbed for is still
     // a day away. The hour has passed but the date has not, and someone still
     // awake has not missed the chance — this offers the step forward. While
-    // the band is open it stays out of the way, because the line above is
-    // already offering the climb itself and carries the reader over.
+    // the band is open it stays out of the way, because the climb's line is
+    // already offering it and carries the reader over.
     const ahead = document.getElementById('today-ahead');
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
-    el.dataset.idx = nextIdx;
-    if (jump) el.dataset.jump = jump; else delete el.dataset.jump;
-    // A step on another day is named as such, so that being carried backwards
-    // to yesterday's Malchut — or forwards into tomorrow's climb — is never a
-    // surprise. Beyond a day either way the date itself is clearer than a word.
-    const dayNote = !jump ? '' :
-      (jump === -1 ? ' · yesterday' : jump === 1 ? ' · tomorrow'
-        : ' · ' + getDisplayDate(currentOffset + jump)
-            .toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
-    el.innerHTML = '<span class="t-lead' + (due ? ' t-due' : '') + '">' + lead + '</span> ' +
-      '<bdi class="t-step" lang="he">' + (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
-      nameHtml + ' <span class="t-sef">· ' + p[2] + dayNote + '</span>';
   }
   // The line does not name the week it runs in. The date bar directly above it
   // reads "Week 48 · Day 334" — the week of the year — and the dial's week 45
@@ -13488,13 +13513,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (typeof changeDay === 'function') changeDay(1);
   }
 
-  // A tap on the line goes to the step it names — stepping the block over to
-  // the band's day first where that is the day being offered. render() has to
-  // finish laying out that day before the row exists to scroll to, so the go
-  // waits a beat.
-  function todayGo() {
-    const el = document.getElementById('today-next');
-    if (!el || el.dataset.idx === undefined) return;
+  // A tap on a line goes to the step it names — stepping the block over to
+  // that step's own day first where it is not the day on screen. render() has
+  // to finish laying out that day before the row exists to scroll to, so the
+  // go waits a beat. A finished line has no step to go to, so it opens the
+  // path instead, where all thirty and their marks can be seen at once.
+  function todayGo(which) {
+    const el = document.getElementById(which === 'y' ? 'today-wane' : 'today-next');
+    if (!el) return;
+    if (el.dataset.idx === undefined) { openTodaysPath(); return; }
     const idx = +el.dataset.idx, jump = +(el.dataset.jump || 0);
     if (jump && typeof changeDay === 'function') {
       changeDay(jump);
