@@ -15455,6 +15455,39 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     "P31:31": "תנו לה מפרי ידיה ויהללוה בשערים מעשיה"
     };
 
+    // The English for those same verses, keyed alike. Psalm 119 has its own
+    // table (PS119_EN); this holds the other nine texts, and fills as they
+    // arrive — a verse with no line here simply shows Hebrew, reference and
+    // link, which is what the card did for all of them until now.
+    //
+    // Rendered inside quotation marks by the line below, so speech within a
+    // verse takes single curly marks rather than a second pair of doubles.
+    const ACROSTIC_EN = {
+    // ── Cycle 1 · Psalms 9–10 ──
+    "9:2":   "I will thank the Lord with all my heart; I will tell all Your wonders.",
+    "9:3":   "I will rejoice and exult with You; I will sing praises to Your most high name.",
+    "9:4":   "When my enemies draw backward, they stumble and are destroyed from before You.",
+    "9:5":   "For You have performed my judgment and my cause; You sat on the throne, O Judge of righteousness.",
+    "9:6":   "You rebuked nations, You destroyed a wicked man; You erased their name forever and ever.",
+    "9:8":   "But the Lord shall sit forever; He has established His throne for judgment.",
+    "9:9":   "But He judges the world with righteousness, kingdoms with equity.",
+    "9:10":  "And the Lord shall be a fortress for the crushed, a fortress for times of distress.",
+    "9:11":  "And those who know Your name shall trust in You, for You have not forsaken those who seek You, O Lord.",
+    "9:12":  "Sing praises to the Lord, Who dwells in Zion; relate His deeds among the peoples.",
+    "9:14":  "Be gracious to me, O Lord, see my affliction from my enemies, You Who raise me up from the gates of death,",
+    "10:1":  "O Lord, why do You stand from afar? [Why do] You hide in times of distress?",
+    "10:3":  "For the wicked man boasts about the desire of his soul, and the robber congratulates himself for having blasphemed the Lord.",
+    "10:4":  "A wicked man at the height of his anger; ‘He will not seek; there is no God,’ [say] all his thoughts.",
+    "10:6":  "He says to himself, ‘I will not fall; for all generations I will not be in adversity.’",
+    "10:7":  "His mouth is full of oaths and deceits and guile; under his tongue is mischief and iniquity.",
+    "10:8":  "He sits in the lurking-places of the villages; in hidden places he slays the innocent; his eyes spy on Your army.",
+    "10:9":  "He lurks in a hidden place; like a lion in his den, he lurks to seize a poor man; he seizes a poor man when he draws his net.",
+    "10:12": "Arise, O Lord God, lift up Your hand; do not forget the humble.",
+    "10:14": "You saw, for You look at mischief and provocation to give with Your power; upon You Your army leaves [its burden]; You would help the orphan.",
+    "10:15": "Break the arm of the wicked, but as for the evil one—You will seek his wickedness and not find [it].",
+    "10:17": "You shall hear the desire of the humble, O Lord; may You prepare their heart, may Your ear hearken."
+    };
+
     const _psName = ACROSTIC_PSALM_NAMES[cy22.cycle] || '';
     if (_psName) {
       let _vRef = '', _chabadUrl = '', _verseText = '', _verseHe = '';
@@ -15472,9 +15505,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           const [_ch, _v] = _raw.split(':');
           const _aid = cy22.cycle === 1 ? (16221 + parseInt(_ch)) : CHABAD_AIDS[cy22.cycle];
           _chabadUrl = `https://www.chabad.org/library/bible_cdo/aid/${_aid}#v=${_v}`;
-          // The verse itself, where we hold it. The English is still to come,
-          // so the line shows the Hebrew over the reference and its link.
-          _verseHe = ACROSTIC_HE[(cy22.cycle === 8 ? 'P' : '') + _raw] || '';
+          // The verse itself, where we hold it. Where the English has not yet
+          // arrived the line shows the Hebrew over the reference and its link,
+          // and takes the translation the moment there is one.
+          const _aKey = (cy22.cycle === 8 ? 'P' : '') + _raw;
+          _verseHe   = ACROSTIC_HE[_aKey] || '';
+          _verseText = ACROSTIC_EN[_aKey] || '';
         }
       }
       if (_vRef) {
