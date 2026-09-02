@@ -2068,12 +2068,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   .cal-mo { min-width:0; page-break-inside:avoid; }
 }
 
-/* The artists' names, under the two pieces of artwork the page carries. Set
-   quietly and alike, so a credit reads as a credit rather than as a caption
-   competing with the picture above it. */
-.art-credit { font-size:calc(10.5px * var(--ts, 1)); color:var(--ink-dim);
-  font-style:italic; margin-top:7px; line-height:1.5; }
-
 #perek-shirah-week { margin:14px 16px 0; padding:10px 14px; border:1px solid var(--border-strong);
   border-left:3px solid var(--gold); border-radius:4px; background:var(--bg-card); }
 .ps-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
@@ -3643,13 +3637,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div style="margin:16px;text-align:center;">
     <img src="28-times-28-cycles.jpg" width="900" height="1350" alt="The 28 Times &amp; The 28 Cycles of the Jewish Year — Ecclesiastes 3:1–8" style="max-width:100%;height:auto;border-radius:6px;border:1px solid var(--border);" loading="lazy">
     <div style="font-size:0.78rem;color:var(--ink-mid);margin-top:8px;line-height:1.5;">The 28 Times &amp; The 28 Cycles of the Jewish Year — Koheles 3:1–8. On the 14th cycle, War / Peace: the days before Yom Kippur, when we make peace with one another.</div>
-    <div class="art-credit">Art by Alan Najman</div>
   </div>
 
   <footer class="footer">
     <div class="footer-text">Based on the book</div>
     <div class="footer-authors">Kabbalah of Time · by Ann Helen Wainer and Rabbi Daniel Kahane</div>
     <div class="footer-text" style="margin-top:8px;">kabbalahoftime.com</div>
+    <!-- The artists, credited here rather than under each picture. A name set
+         beneath the artwork read as a caption competing with it, and the
+         weekly page carries one every day of the year. -->
+    <div class="footer-text" style="margin-top:8px;">Perek Shirah Art by Sandra Felzen and Ecclesiastes Art by Alan Najman</div>
     <!-- Signed אֱלִיָּהוּ חַי, as given: 52, and the year is 52 weeks, so the count
          carries his name; חַי is said of him plainly, since he did not die but
          went up in the whirlwind. He stands wherever a thing is finished and not yet
@@ -9884,10 +9881,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // It opens the page, so it is fetched eagerly rather than lazily.
     el.innerHTML = '<img src="' + src + '" width="' + size[0] + '" height="' + size[1] + '"' +
       ' fetchpriority="high" alt="Week ' + week + ' of the Kabbalah of Time — the page from the book."' +
-      ' style="max-width:100%;height:auto;border-radius:6px;">' +
-      // One hand drew all fifty-six pages, so the credit stands under whichever
-      // of them the week has brought up, and goes when the artwork does.
-      '<div class="art-credit">Art by Sandra Felzen</div>';
+      ' style="max-width:100%;height:auto;border-radius:6px;">';
     el.style.display = '';
   }
 
