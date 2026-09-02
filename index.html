@@ -1639,6 +1639,17 @@ font-style: italic;
 letter-spacing: 1px;
 }
 
+/* The artists' line, meant to sit on one line. It is the longest string in the
+   footer, so it is set smaller and without the tracking the other lines carry
+   — that tracking alone was costing it some sixty pixels. It is allowed to
+   wrap rather than forced not to: at 320px with the text scaled up nothing
+   fits on one line, and nowrap there would push the page sideways. */
+.footer-credit {
+margin-top: 8px;
+font-size: calc(10px * var(--ts, 1));
+letter-spacing: 0;
+}
+
 .footer-authors {
 font-family: 'Cinzel', serif;
 font-size: calc(11px * var(--ts, 1));
@@ -3646,7 +3657,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <!-- The artists, credited here rather than under each picture. A name set
          beneath the artwork read as a caption competing with it, and the
          weekly page carries one every day of the year. -->
-    <div class="footer-text" style="margin-top:8px;">Perek Shirah Art by Sandra Felzen and Ecclesiastes Art by Alan Najman</div>
+    <div class="footer-text footer-credit">Perek Shirah Art by Sandra Felzen and Kohelet Art by Alan Najman</div>
     <!-- Signed אֱלִיָּהוּ חַי, as given: 52, and the year is 52 weeks, so the count
          carries his name; חַי is said of him plainly, since he did not die but
          went up in the whirlwind. He stands wherever a thing is finished and not yet
