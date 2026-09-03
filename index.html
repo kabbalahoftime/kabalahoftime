@@ -6893,13 +6893,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // 697 + 31 = 728 exactly, so day 349 pairs the last siman with the Chofetz
   // Chaim's introduction and the year closes on the eleventh illustration.
   const CHOFETZ_INTRO_URL = 'https://www.sefaria.org/Chafetz_Chaim,_Introduction_to_the_Laws_of_the_Prohibition_of_Lashon_Hara_and_Rechilut,_Opening_Comments';
+  // The nineteen klalim had no link at all — only the Introduction carried one,
+  // so the last fifteen days of the year named their reading without opening it.
+  // Sefaria keeps them in two parts, each numbered from one: ten against Lashon
+  // Hara, nine against Rechilut. The count here runs straight through 1 to 19,
+  // as the sefer's own halves are usually counted separately, so klal 11 is
+  // Part Two's first Principle. The eleven illustrations sit in a part of their
+  // own. Node names taken from Sefaria's schema, not guessed.
+  function chofetzKlalUrl(n) {
+    return 'https://www.sefaria.org/Chafetz_Chaim,_' + (n <= 10
+      ? 'Part_One,_The_Prohibition_Against_Lashon_Hara,_Principle_' + n
+      : 'Part_Two,_The_Prohibition_Against_Rechilut,_Principle_' + (n - 10)) + '?lang=bi';
+  }
   function halachaUnit(u) {
     if (u <= 697) return { kind: 'sa', ch: u, label: `Orach Chaim ${u}`,
                            url: `https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${u}?lang=bi` };
     const c = u - 697;                        // 1-31 within the Chofetz Chaim
     if (c === 1)  return { kind: 'cc', label: 'Introduction', url: CHOFETZ_INTRO_URL };
-    if (c <= 20)  return { kind: 'cc', label: `Klal ${c - 1}` };
-    return              { kind: 'cc', label: `Illustration ${c - 20}` };
+    if (c <= 20)  return { kind: 'cc', label: `Klal ${c - 1}`, url: chofetzKlalUrl(c - 1) };
+    return              { kind: 'cc', label: `Illustration ${c - 20}`,
+                          url: `https://www.sefaria.org/Chafetz_Chaim,_Illustrations,_Illustration_${c - 20}?lang=bi` };
   }
   function getHalachaInfo(d) {
     d = Math.max(1, d); // cycle begins at the epoch; dates before it have no defined cycle/day
@@ -10003,11 +10016,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // 49:479-51:6, volume I folio 38a — and is cut back the same way.
     const r = ref.match(/^(.+ \d+):(\d+)-(?:(\d+):)?(\d+)$/);
     if (r && (r[3] || +r[4] < +r[2])) ref = r[1] + ':' + r[2];
+    // Sefaria joins the words of a title with underscores and the numbers of
+    // the address with dots — Zohar,_Ki_Teitzei.6.43 — which is the form every
+    // other Sefaria link in this file uses: Avodah_Zarah.20b, Ben_Ish_Hai,
+    // Shulchan_Arukh,_Orach_Chayim.697, the Chofetz Chaim's Introduction.
+    // This builder alone turned every space into a dot, so a parasha of one
+    // word came out right and a parasha of two did not — Zohar,_Ki.Teitzei.6.43
+    // rather than Zohar,_Ki_Teitzei.6.43. 1,429 of the 1,693 amudim name a
+    // one-word section and were unaffected, which is why it read as working.
+    // The 264 that do not are Lech Lecha, Chayei Sara, Ki Tisa, Achrei Mot,
+    // Ki Teitzei, Sifra DiTzniuta, the two Idras and the three Addenda volumes.
     // "Pinchas 120:811-121:822" -> "Zohar,_Pinchas.120.811-121.822"
-    const path = 'Zohar, ' + ref;
-    return 'https://www.sefaria.org/' +
-      encodeURIComponent(path.replace(/, /g, ',_').replace(/ /g, '.').replace(/:/g, '.')) +
-      '?lang=bi';
+    const m = ref.match(/^(.*?) (\d+[:\d-]*)$/);
+    const title = ('Zohar, ' + (m ? m[1] : ref)).replace(/, /g, ',_').replace(/ /g, '_');
+    return 'https://www.sefaria.org/' + title +
+      (m ? '.' + m[2].replace(/:/g, '.') : '') + '?lang=bi';
   }
 
   // Parasha → Sefaria Zohar section name
