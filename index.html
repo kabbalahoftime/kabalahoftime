@@ -9980,23 +9980,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const list = cells.split('|');
     return (i < list.length && list[i]) ? list[i] : null;   // "Pinchas 120:811-121:822"
   }
-  // Sefaria URL for the first folio's opening segment. It used to ask for a
-  // range, first segment to last, so the reader could see where to stop —
-  // but a range that crosses chapters is refused: Zohar, Pinchas.121.9-124.9
-  // returns Page Not Found although both ends are real segments. A single
-  // ref resolves, so that is what is asked for; the label beside it already
-  // says which folios the day covers.
+  // Sefaria URL for the first folio's opening segment. The cell holds Sefaria's
+  // own range for the amud, first paragraph to last, so the reader can see
+  // where to stop — but a range that crosses chapters is refused: Zohar,
+  // Pinchas.121.9-124.9 returns Page Not Found although both ends are real
+  // segments. Those are cut back to the paragraph the reading opens on, which
+  // does resolve; the label beside the link says which folios the day covers
+  // either way. A range inside one chapter is left as it stands.
+  //
+  // This is most of them. The Zohar's paragraph numbers run on through a
+  // parasha while its chapters divide it, so an amud lands inside one chapter
+  // only when the chapter is long: 1,030 of the 1,693 amudim cross, and 226 of
+  // the year's 364 days open on one. The rule had been written for the
+  // backwards reference alone and let every crossing range through.
   function zoharExactUrl(vol, folioStart) {
     let ref = null;
     for (const a of [folioStart * 2, folioStart * 2 + 1]) {
       ref = zoharAmudCell(vol, a); if (ref) break;
     }
     if (!ref) return null;
-    // One of Sefaria's own references runs backwards — Bereshit 49:479-51:6,
-    // volume I folio 38a — so a range whose end paragraph is lower than its
-    // start is trimmed to the start rather than handed over as it stands.
-    const r = ref.match(/^(.+ \d+):(\d+)-(?:\d+:)?(\d+)$/);
-    if (r && +r[3] < +r[2]) ref = r[1] + ':' + r[2];
+    // One of Sefaria's own references also runs backwards — Bereshit
+    // 49:479-51:6, volume I folio 38a — and is cut back the same way.
+    const r = ref.match(/^(.+ \d+):(\d+)-(?:(\d+):)?(\d+)$/);
+    if (r && (r[3] || +r[4] < +r[2])) ref = r[1] + ':' + r[2];
     // "Pinchas 120:811-121:822" -> "Zohar,_Pinchas.120.811-121.822"
     const path = 'Zohar, ' + ref;
     return 'https://www.sefaria.org/' +
