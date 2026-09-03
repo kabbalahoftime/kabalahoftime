@@ -2121,12 +2121,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   line-height:1.5; padding:3px 0; cursor:pointer; }
 .today-next .t-lead { color:var(--ink-dim); font-size:0.8em; text-transform:uppercase;
   letter-spacing:1.5px; }
-/* The waning's line, clear of the climb's above it. Each is about 30px tall,
-   so a 44px reach probe from one lands 6px inside the other and takes its
-   taps — the same trap "all thirty" hits, and answered the same way: the gap
-   is real space rather than an invisible band over the neighbour. Ten pixels
-   is the least that clears it at every text size. */
-#today-wane { margin-top:10px; }
 .today-next .t-step { color:var(--gold); }
 .today-next .t-sef  { color:var(--ink-mid); font-size:0.85em; }
 /* A finished set. The word stands where Next stands, in gold rather than dim,
@@ -2377,7 +2371,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">The <strong>heart</strong> in the Now card fills as those ten accumulate, and glows when the day's prayers are whole.</li>
         <li style="margin-bottom:0.7em;">Tap a step on Ma'alot HaZman — the spiral of the year above — for that week's theme, animal, and teaching.</li>
         <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Keter down to Malchut) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
-        <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. The descent must be taken in order, each step the vessel for the next. The return need not: a מיעוט may be marked whenever it was actually done, in any order, and without waiting for the moon to fill — though the path still offers you the lowest you have not yet taken, and the moon only begins to wane once the climb is whole. A little is a step: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</li>
+        <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. Both halves are taken in order, each step the vessel for the next, and the return does not begin until the moon is full — all fifteen climbed. The thirty are one path, so at any moment there is exactly one step being asked for, and tapping any other will not take. A little is a step: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</li>
         <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
         <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps. Each companion gathered lights in the sun's gold and fills half a star in the ring around the moon &mdash; two to a star, so a full day&rsquo;s twenty-two make the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars. The seven Chabad Rebbeim — one to each Sefirah from Chesed to Malchut — are the one closed set among them, and they wear a seven-branched menorah rather than a star: they are the ground the companions stand on. A gathered Rebbe lights blue and fills his own link in the chain of seven that hangs beside the moon, rather than a star in the ring.</li>
         <li style="margin-bottom:0.7em;">Tap any <strong>✡</strong> — six-pointed, a Magen David — to gather it as a <strong>star</strong>, and the count beside the moon rises. The stars have no total to reach: what is on offer changes with the day, so the count says how many you reached, never how many you missed.</li>
@@ -2425,16 +2419,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
   </div>
 
-  <!-- TODAY — the one question the page did not answer above the fold: what
-       now. The date and the position are in the bar directly above, so this
-       adds only the two steps that are next and a way straight to each.
-       Two lines rather than one because the waxing and the waning are two
-       counts, not one queue: each has its own fifteen and its own hours, and
-       either can be whole while the other is barely begun. -->
+  <!-- TODAY'S PATH — the one question the page did not answer above the fold:
+       what now. The date and the position are in the bar directly above, so
+       this adds only the step that is next and a way straight to it.
+       One line, because the thirty are one path and not two counts: the
+       waning does not begin until the climb is whole, so at any moment there
+       is exactly one step being asked for. Two lines said otherwise, and
+       reading them side by side suggested a choice that the order does not
+       offer. The name is the modal's name too — "all thirty" opens the same
+       path in full, and this is its next step. -->
   <div id="today-block">
-    <div class="today-label">Today</div>
-    <button id="today-next" class="today-next" onclick="todayGo('m')" aria-label="Go to the next ma'alah">…</button>
-    <button id="today-wane" class="today-next" onclick="todayGo('y')" aria-label="Go to the next mi'ut">…</button>
+    <div class="today-label">Today&rsquo;s Path</div>
+    <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
             aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
     <div class="today-foot">
@@ -13043,15 +13039,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     e.preventDefault();
     e.stopPropagation();
     if (el.classList.contains('yom')) {
-      // Waning step — marked whenever it was actually done: in any order, and
-      // without waiting for the moon to fill. The path still offers the lowest
-      // unmarked, and the moon still wanes only once the climb is whole; what
-      // has gone is the refusal. State is a 15-bit mask, which has always been
-      // able to hold gaps, so nothing about the storage changes.
+      // Waning step. The thirty are one path walked in order, so the waning
+      // cannot begin until the moon is full — all fifteen מעלות climbed — and
+      // then only its own next step answers. The one before it gives itself
+      // back; anything else shakes and refuses, exactly as the climb does.
       const n = +el.dataset.wane;
       if (!n) return;
-      const mask = yomMask() ^ (1 << (n - 1));      // tap to mark, tap to give back
-      try { localStorage.setItem(_yomMaskKey, String(mask & 32767)); } catch (err) {}
+      if (maalotDone() < 15) return shakeTag(el);
+      const nx = yomNext();
+      const bit = m => { try { localStorage.setItem(_yomMaskKey, String(m & 32767)); } catch (err) {} };
+      if (n === nx)          bit(yomMask() |  (1 << (n - 1)));
+      else if (n === nx - 1) bit(yomMask() & ~(1 << (n - 1)));
+      else                   return shakeTag(el);
       applyMaalotState();
       return;
     }
@@ -13066,12 +13065,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }, true);
 
   // ── THE FIFTEEN WANING STEPS (מיעוט א׳–ט״ו) — Or Chozer, Keter → Malchut ──
-  // Fifteen tags retrace the path as it wanes. Unlike the ma'alot they are
-  // free — any of them, in any order, before or after the climb is finished —
-  // because a return step is marked when it was done, not when the app is
-  // ready for it. State is a 15-bit mask per Jewish date; a day walked in
-  // order fills from the bottom and reads (1 << n) - 1, and a day walked out
-  // of order simply carries its gaps.
+  // Fifteen tags retrace the path as it wanes, in order, and not before the
+  // moon is full: the thirty are one path, and the return is its second half
+  // rather than a second count kept alongside the first. State is a 15-bit
+  // mask per Jewish date, which fills from the bottom and reads (1 << n) - 1.
+  // The mask can hold gaps and briefly did, so a day left over from then is
+  // read as it stands rather than repaired — yomNext still answers the lowest
+  // unmarked, which is where such a day resumes.
   let _yomKey = null;       // legacy: the highest מיעוט reached, 0-15
   let _yomMaskKey = null;   // a 15-bit mask, filled from the bottom in order
   // Whether the day's thirty-first — the Song of Yehoshua — has been said.
@@ -13475,43 +13475,40 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // TODAY — the next step, worked out from the same three pieces of state
   // Today's Path uses and by the same rule, so the two cannot disagree: the
   // climb is free-order, so what is offered is the lowest unmarked.
-  // ── THE TWO LINES OF THE TODAY BLOCK ──
-  // The waxing and the waning are two counts, not one queue. Each has its own
-  // fifteen, its own hours and its own ring on the dial, so each gets a line
-  // and each says plainly when it is whole. Either can be pointing at a day
-  // other than the one on screen — the climb forward into the cycle the Mochin
-  // are opening, a מיעוט of the seven back into the cycle still running behind
-  // the date — and each names the day it means.
-
-  // The climb's line. Its day is the band's while the band is open, and the
-  // day on screen otherwise; off the reader's own now there is no hour at all,
-  // because a date they navigated to is not the hour they are standing in.
-  function _climbNow() {
-    const open = currentOffset === 0 && _inMaalotBand();
-    const off  = open ? _maalotOffset() : 0;
-    const k    = _maalotDoneFor(off);
-    return k >= 15 ? { off, done: true } : { off, idx: k, due: open };
-  }
-
-  // The waning's line. The hour first: several מיעוטים can share a Sefirah —
-  // Malchut carries three — so the lowest unmarked of those now running is the
-  // one named, on the day that hour belongs to. Only when the hour is asking
-  // for nothing does it fall back to the lowest unmarked on the day on screen.
-  function _waneNow() {
-    const H = window.kotwHours, win = _pathHourWindows();
-    if (currentOffset === 0 && H && win && typeof H.nowH === 'function') {
-      const now = _hNorm(H.nowH());
-      for (let i = 0; i < 15; i++) {
-        const v = win[PATH_WANING[i][2]];
-        if (!v || !_hIn(now, v[0], v[1])) continue;
-        const off = _stepDayOffset(15 + i);
-        if (_yomMaskFor(off) & (1 << i)) continue;
-        return { off, idx: 15 + i, due: true };
+  // ── THE STEP THE PATH IS ASKING FOR ──
+  // The thirty are one path walked in order, so at any moment exactly one step
+  // is being asked for: the lowest unmarked, climb first and then the waning.
+  // That is the spine, and pathNextIdx is where it lives.
+  //
+  // The only complication is which day's spine. Two seams put an hour on a day
+  // other than the one on screen — the Mochin facing forward into the cycle
+  // they open, a מיעוט of the seven still inside the cycle running behind the
+  // date — so when this hour is asking for that day's next step, the block
+  // offers it there and carries the reader over on the tap. It only ever fills
+  // a silence: the day on screen is asked first, and another day is looked at
+  // only when this hour has nothing to say to it.
+  function _pathNow() {
+    const idx = pathNextIdx(_maalotDoneFor(0), yomMask());
+    if (idx === -1) return { off: 0, done: true };
+    if (pathStepIsDue(idx)) return { off: 0, idx, due: true };
+    if (currentOffset === 0) {
+      const H = window.kotwHours, win = _pathHourWindows();
+      if (H && win && typeof H.nowH === 'function') {
+        const now = _hNorm(H.nowH());
+        // Nearest first: the cycle still running behind the date, then the one
+        // the Mochin are opening ahead of it.
+        for (const off of [_cycleOffset(), _maalotOffset()]) {
+          if (!off) continue;
+          const j = pathNextIdx(_maalotDoneFor(off), _yomMaskFor(off));
+          if (j === -1 || _stepDayOffset(j) !== off) continue;
+          const live = j < 15 ? _inMaalotBand()
+                              : (() => { const v = win[PATH_WANING[j - 15][2]];
+                                         return !!v && _hIn(now, v[0], v[1]); })();
+          if (live) return { off, idx: j, due: true };
+        }
       }
     }
-    const mask = yomMask();
-    for (let i = 0; i < 15; i++) if (!(mask & (1 << i))) return { off: 0, idx: 15 + i };
-    return { off: 0, done: true };
+    return { off: 0, idx, due: false };
   }
 
   // A step standing on another day is named as such, so that being carried
@@ -13527,7 +13524,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // One line. A step names itself, its reading and its Sefirah; a finished set
   // says so in the same shape, with the word standing where Next stands.
-  function _todayLine(el, st, tagOne, tagAll, table, base) {
+  function _todayLine(el, st) {
     if (!el) return;
     const note = _todayDayNote(st.off);
     if (st.done) {
@@ -13536,59 +13533,58 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // why it is not marked disabled: it does something, and saying otherwise
       // would hide that from anyone reading the page rather than seeing it.
       delete el.dataset.idx; delete el.dataset.jump;
-      el.setAttribute('aria-label', (base ? 'The waning' : 'The climb') +
-        ' is complete, fifteen of fifteen — open today’s path');
+      el.setAttribute('aria-label', 'The path is complete, thirty of thirty — open it in full');
+      // The count is the foot's job, two lines below, so this says only what
+      // the foot cannot: that the path is finished.
       el.innerHTML = '<span class="t-lead t-whole">Done</span> ' +
-        '<bdi class="t-step" lang="he">' + tagAll + '</bdi> ' +
-        '<span class="t-sef">· fifteen of fifteen' + note + '</span>';
+        '<span class="t-sef">the month complete' + note + '</span>';
       return;
     }
-    const p = table[st.idx - base];
+    const waxing = st.idx < 15;
+    const p = waxing ? PATH_WAXING[st.idx] : PATH_WANING[st.idx - 15];
     // The live names are read off the cards now drawn, which are the day on
     // screen's. On another day they would be the wrong readings, so the
     // table's own name is used instead.
     const live = (!st.off && typeof _pathLiveNames === 'function') ? _pathLiveNames() : {};
-    const name = live[(base ? 'y|' : 'm|') + p[0]] || p[1];
+    const name = live[(waxing ? 'm|' : 'y|') + p[0]] || p[1];
     // Hebrew inside the name is wrapped so it is drawn in the Hebrew face and
     // sits in its own bidi run — the same care the rest of the app takes.
-    const nameHtml = name.replace(/([֐-׿][֐-׿\s׳״'’-]*)/g,
+    const nameHtml = name.replace(/([\u0590-\u05FF][\u0590-\u05FF\s\u05F3\u05F4'\u2019-]*)/g,
       '<bdi lang="he" class="t-heb">$1</bdi>');
     el.dataset.idx = st.idx;
     if (st.off) el.dataset.jump = st.off; else delete el.dataset.jump;
-    // No lead word. It said nothing the card was not already saying — TODAY
-    // above it, "of 30 marked" and "all thirty" below — and with two lines it
-    // said that nothing twice. So the step's own tag carries the pulse when
-    // the hour has come, and the word is kept for Done, which does say
-    // something: the same rule the prayer list follows with NOW, where the
-    // word appears only where it is true.
+    // No lead word. It said nothing the card was not already saying — the name
+    // above it, "of 30 marked" and "all thirty" below. So the step's own tag
+    // carries the pulse when the hour has come, and the word is kept for Done,
+    // which does say something: the same rule the prayer list follows with NOW,
+    // where the word appears only where it is true.
     //
     // The word is not lost to a reader who cannot see the card. It was never
-    // announced to begin with, and neither was the pulse — both now go into
-    // the label, which says what the line is and whether its hour is running.
-    el.setAttribute('aria-label', 'Go to the next ' + (base ? 'mi’ut' : 'ma’alah') +
-      (st.due ? ' — its hour is now' : ''));
+    // announced to begin with, and neither was the pulse — both go into the
+    // label, which names the step and says whether its hour is running.
+    el.setAttribute('aria-label', 'Go to ' + (waxing ? 'ma’alah ' : 'mi’ut ') +
+      (st.idx % 15 + 1) + ', ' + name + (st.due ? ' — its hour is now' : ''));
     el.innerHTML =
-      '<bdi class="t-step' + (st.due ? ' t-due' : '') + '" lang="he">' + tagOne + ' ' + p[0] + '</bdi> · ' +
+      '<bdi class="t-step' + (st.due ? ' t-due' : '') + '" lang="he">' +
+      (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
       nameHtml + ' <span class="t-sef">· ' + p[2] + note + '</span>';
   }
 
   function renderTodayBlock() {
-    const elM = document.getElementById('today-next');
-    const elY = document.getElementById('today-wane');
-    if (!elM || !elY) return;
+    const el = document.getElementById('today-next');
+    if (!el) return;
     const k = _maalotKey ? maalotDone() : 0;
     const w = yomDone();
-    _todayLine(elM, _climbNow(), 'מעלה', 'מעלות', PATH_WAXING, 0);
-    _todayLine(elY, _waneNow(),  'מיעוט', 'מיעוטים', PATH_WANING, 15);
+    _todayLine(el, _pathNow());
+    // The line itself says so when the path is whole, so the foot keeps to the
+    // plain tally and does not say it twice.
     const count = document.getElementById('today-count');
-    if (count) count.textContent = (k + w === 30)
-      ? '30 of 30 — the month complete'
-      : (k + w) + ' of 30 marked';
+    if (count) count.textContent = (k + w) + ' of 30 marked';
     // The band can shut before midnight while the day it climbed for is still
     // a day away. The hour has passed but the date has not, and someone still
     // awake has not missed the chance — this offers the step forward. While
-    // the band is open it stays out of the way, because the climb's line is
-    // already offering it and carries the reader over.
+    // the band is open it stays out of the way, because the line above is
+    // already offering the climb and carries the reader over.
     const ahead = document.getElementById('today-ahead');
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
@@ -13633,8 +13629,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // to finish laying out that day before the row exists to scroll to, so the
   // go waits a beat. A finished line has no step to go to, so it opens the
   // path instead, where all thirty and their marks can be seen at once.
-  function todayGo(which) {
-    const el = document.getElementById(which === 'y' ? 'today-wane' : 'today-next');
+  function todayGo() {
+    const el = document.getElementById('today-next');
     if (!el) return;
     if (el.dataset.idx === undefined) { openTodaysPath(); return; }
     const idx = +el.dataset.idx, jump = +(el.dataset.jump || 0);
