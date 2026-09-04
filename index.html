@@ -6153,16 +6153,39 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // held at seven — there are only seven names to reach. Lifted out of render
   // so the monthly calendar reads the same three the card does.
   const SEFIROT_777 = ['Chesed', 'Gevurah', 'Tiferet', 'Netzach', 'Hod', 'Yesod', 'Malchut'];
+  // The three that stand above the seven, for the year's last three weeks.
+  const MOCHIN_777 = ['Chochmah', 'Binah', 'Keter / Da\u2019at'];
+  // 7 \u00d7 7 \u00d7 7 is 343 days \u2014 the year's first forty-nine weeks \u2014 and then
+  // three weeks more for the three intellectual Sefirot, which is the whole
+  // 364. So weeks 50, 51 and 52 are Chochmah, Binah and Keter/Da'at, and they
+  // stand outside the sevens: there is no eighth cycle, and no third she'be
+  // for those days, the Mochin being above the seven rather than one of them.
+  // The dial says the same at the other end of the app, where weeks 50-52
+  // hover over the Chatzot seam instead of joining the forty-nine.
+  //
+  // Both of those were wrong here. The count ran on unbroken from the epoch,
+  // so days 344-364 came out as an eighth cycle carrying its own weeks 1-3,
+  // and the year's end did not stop it either \u2014 day 365 read as week 4 of
+  // that eighth cycle rather than as the first day of a new first one. The
+  // third name had been pinned at Malchut from cycle 7 onward, which is the
+  // design saying in its own way that it only ever had seven.
   function sefirot777(d) {
-    const pos   = (((d - 1) % 49) + 49) % 49 + 1;      // 1-49 within the cycle
-    const cycle = Math.max(1, Math.floor((d - 1) / 49) + 1);
-    const week  = Math.ceil(pos / 7);
-    const day   = ((pos - 1) % 7) + 1;
-    const sup   = Math.min(cycle, 7);
-    return { pos, cycle, week, day,
-             daySef: SEFIROT_777[day - 1], weekSef: SEFIROT_777[week - 1],
-             cycleSef: SEFIROT_777[sup - 1],
-             combo: `${SEFIROT_777[day - 1]} she'be${SEFIROT_777[week - 1]} she'be${SEFIROT_777[sup - 1]}` };
+    const yd = ((((d - 1) % 364) + 364) % 364) + 1;   // 1-364 within the year
+    const day = ((yd - 1) % 7) + 1;
+    const daySef = SEFIROT_777[day - 1];
+    if (yd > 343) {                                   // the three Mochin weeks
+      const week = Math.ceil(yd / 7);                 // 50, 51 or 52 of the year
+      const weekSef = MOCHIN_777[week - 50];
+      return { pos: yd - 343, cycle: null, week, day, mochin: true,
+               daySef, weekSef, cycleSef: null,
+               combo: `${daySef} she'be${weekSef}` };
+    }
+    const pos   = ((yd - 1) % 49) + 1;                // 1-49 within the cycle
+    const cycle = Math.floor((yd - 1) / 49) + 1;      // 1-7, and no more
+    const week  = Math.ceil(pos / 7);                 // 1-7 within the cycle
+    const weekSef = SEFIROT_777[week - 1], cycleSef = SEFIROT_777[cycle - 1];
+    return { pos, cycle, week, day, mochin: false, daySef, weekSef, cycleSef,
+             combo: `${daySef} she'be${weekSef} she'be${cycleSef}` };
   }
 
   // The twelve vowel points, for the seventeenth set — where the cycle turns
@@ -15958,11 +15981,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     document.getElementById('binah-cycle-name').innerHTML = 'Sefirot — 7×7×7 Omer Cycle';
     document.getElementById('binah-main').innerHTML =
-      `Day <strong>${omerDay}</strong> · Week <strong>${omerWeek}</strong> · Cycle <strong>${omerCycle}</strong><br>` +
+      // In the Mochin weeks there is no cycle to name and no third she'be, so
+      // the line names the week of the year — which is the same number the
+      // date bar above is already showing — and the Sefirah it belongs to.
+      (_b777.mochin
+        ? `Day <strong>${omerDay}</strong> · Week <strong>${omerWeek}</strong> — <strong>${_b777.weekSef}</strong><br>`
+        : `Day <strong>${omerDay}</strong> · Week <strong>${omerWeek}</strong> · Cycle <strong>${omerCycle}</strong><br>`) +
       `<strong>${combo}</strong>`;
     document.getElementById('binah-sub').innerHTML = '';
-    document.getElementById('binah-tags').innerHTML =
-      `<span class="tag highlight">Cycle ${omerCycle} · Day ${omerPos} of 49</span>`;
+    document.getElementById('binah-tags').innerHTML = _b777.mochin
+      ? `<span class="tag highlight">Mochin · Day ${omerPos} of 21</span>`
+      : `<span class="tag highlight">Cycle ${omerCycle} · Day ${omerPos} of 49</span>`;
     // Likutei Tefilot — 364-day cycle
     // Intro (1) + Part 1: 152 prayers × 2 days (304) + Part 2: 59 prayers (59) = 364
     const ltDay = ((d - 1) % 364) + 1;
@@ -18949,13 +18978,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
                  cell2:'set '+i.cycle+' · day '+i.day+' of 22' }; } },
 
     { card:'Binah', cycle:'Sefirot — 7 × 7 × 7',
-      // Counts unbroken from the epoch; nothing folds. Reads through the same
-      // sefirot777 the card reads, so the three names cannot part company.
+      // Reads through the same sefirot777 the card reads, so the three names
+      // cannot part company — the year's last three weeks included, where
+      // there is no cycle and no third name to give.
       seg:(D)=>{ const i = sefirot777(D.abs);
-        return { n:(i.cycle-1)%7,
-                 label:'Cycle '+i.cycle+' — shebe'+i.cycleSef,
-                 cell:i.daySef+' shebe'+i.weekSef,
-                 cell2:'shebe'+i.cycleSef+' · day '+i.pos+' of 49' }; } },
+        return i.mochin
+          ? { n:6,
+              label:'Mochin — ' + i.weekSef,
+              cell:i.daySef+' shebe'+i.weekSef,
+              cell2:'week '+i.week+' · day '+i.pos+' of 21' }
+          : { n:(i.cycle-1)%7,
+              label:'Cycle '+i.cycle+' — shebe'+i.cycleSef,
+              cell:i.daySef+' shebe'+i.weekSef,
+              cell2:'shebe'+i.cycleSef+' · day '+i.pos+' of 49' }; } },
 
     { card:'Chesed', cycle:'Shem Ayin-Bet — the Names, the watches, the blessing',
       // Three counts run together here, as they do on the card: the seventy-two
