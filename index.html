@@ -12096,11 +12096,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // which gives 12:54-2:22 — Chochmah and Binah before it, Keter/Da'at after.
   // This is also what gives the first three prayers their hour: Tikkun Rachel
   // and Tikkun Leah at Chatzot, and Hitbodedut in the small hours past it.
+  // One step for all fifty-two — the three Mochin are as long as any of the
+  // forty-nine, as weeks 50-52 of the year are as long as weeks 1-49. They had
+  // been 29, 29 and 30 minutes, which was one week's length before the seven
+  // were compressed and a minute over it after. Equal again, the forward
+  // overlap comes to 8.92 days against a lived mean of 9.05; solving for the
+  // step from that mean instead of from the opening gives 28.398 minutes
+  // rather than 28.388, which is half a second.
+  const MOCHIN_STEP_MIN = (24 * 60 + MOCHIN_OPEN_MIN) / 49;
   const MOCHIN_TIMES = [
-    { name: 'Chochmah',       hebrew: 'חָכְמָה',          from: MOCHIN_OPEN_MIN, to: -20 },
-    { name: 'Binah',          hebrew: 'בִּינָה',           from: -20, to:   9 },
-    { name: 'Keter / Da\'at', hebrew: 'כֶּתֶר / דַּעַת',  from:   9, to:  39 },
-  ];
+    { name: 'Chochmah',       hebrew: 'חָכְמָה' },
+    { name: 'Binah',          hebrew: 'בִּינָה' },
+    { name: 'Keter / Da\'at', hebrew: 'כֶּתֶר / דַּעַת' },
+  ].map((m, i) => Object.assign(m, { from: MOCHIN_OPEN_MIN + i * MOCHIN_STEP_MIN,
+                                     to:   MOCHIN_OPEN_MIN + (i + 1) * MOCHIN_STEP_MIN }));
 
   // Today's three Mochin windows as real times, from whichever Chatzot is in
   // force — the zmaniyot one for the chosen city, or 1:43 AM in fixed mode.
@@ -12109,6 +12118,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (typeof zmanMode !== 'undefined' && zmanMode === 'zmaniyot') {
       try {
         const z = zmaniyotBoundaries(ZMAN_CITIES[zmanCityIdx]);
+        // Taken whole from the boundaries, so the Now card places the three
+        // exactly where the dial and the path do.
+        if (z && z.mochin) return MOCHIN_TIMES.map((m, i) => ({
+          name: m.name, hebrew: m.hebrew, start: z.mochin[i], end: z.mochin[i + 1] }));
         if (z && z.bounds) chatzot = z.bounds[0];   // Chesed begins at Chatzot
       } catch (e) {}
     }
@@ -12238,7 +12251,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       };
       const bounds = [];
       for (let i = 0; i <= 7; i++) bounds.push(hToTime(i * SEVEN_END_H / 7));
-      return { bounds, sunrise: sBase.rise, sunset: sBase.set,
+      // The Mochin in the same proportional hours as everything else here.
+      // They had been placed by literal clock minutes from Chatzot, which in
+      // this mode is a different measure — a night hour is not sixty minutes
+      // — so the Now card and the dial disagreed by a minute or two at the
+      // seam. One placement now.
+      const step = SEVEN_END_H / 49;
+      const mochin = [0, 1, 2, 3].map(i => hToTime(SEVEN_END_H + i * step));
+      return { bounds, mochin, sunrise: sBase.rise, sunset: sBase.set,
                nextChatzot: hToTime(24) };
     }
     return null;
@@ -20298,11 +20318,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   ];
   /* Mochin weeks in halachic hours relative to Chatzot (h=0). In fixed
      mode (60-min hours, Chatzot 1:43 AM) these reproduce 12:54-2:22 AM. */
+  /* All fifty-two steps are one length, as the year's weeks are: the
+     forty-nine run from the seam to the band's opening, and the three Mochin
+     carry on from there and across it. So there is one number here and the
+     rest follows — no table of offsets to keep in step with anything. */
+  var MOCHIN_OPEN=-49/60;                      // where the forty-nine end
+  var SEVEN_END=24+MOCHIN_OPEN;                // 23.183… hours
+  var STEP=SEVEN_END/49;                       // 28.39 min, one of the fifty-two
   var MOCH=[
-    {he:'חָכְמָה',en:'Chochmah',h1:-49/60,h2:-20/60,c:'#8fa8d8'},
-    {he:'בִּינָה',en:'Binah',h1:-20/60,h2:9/60,c:'#b08cc4'},
-    {he:'כֶּתֶר / דַּעַת',en:'Keter / Da’at',h1:9/60,h2:39/60,c:'#e3c25f'}
-  ];
+    {he:'חָכְמָה',en:'Chochmah',c:'#8fa8d8'},
+    {he:'בִּינָה',en:'Binah',c:'#b08cc4'},
+    {he:'כֶּתֶר / דַּעַת',en:'Keter / Da’at',c:'#e3c25f'}
+  ].map(function(m,i){m.h1=MOCHIN_OPEN+i*STEP;m.h2=MOCHIN_OPEN+(i+1)*STEP;return m;});
 
   function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.floor(m%60);
     var ap=h<12?'AM':'PM';var hh=h%12;if(hh===0)hh=12;
@@ -20368,7 +20395,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // year as lived, where nothing runs alongside Chochmah or Binah and only
   // Keter/Da'at overlaps the year that follows. Derived from MOCH so the
   // dial and the day cannot drift apart.
-  var SEVEN_END=24+MOCH[0].h1;                 // 23.183… hours
   function weekHours(n){
     if(n<=49)return {h1:(n-1)*SEVEN_END/49,h2:n*SEVEN_END/49};
     return {h1:MOCH[n-50].h1,h2:MOCH[n-50].h2};
