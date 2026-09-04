@@ -6905,12 +6905,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       ? 'Part_One,_The_Prohibition_Against_Lashon_Hara,_Principle_' + n
       : 'Part_Two,_The_Prohibition_Against_Rechilut,_Principle_' + (n - 10)) + '?lang=bi';
   }
+  // The label names the part the klal belongs to, because the page it opens is
+  // headed by the part's own number rather than this one: klal 11 arrives at
+  // Principle 1. That number is given where it differs and left out where it
+  // does not — through Lashon Hara the two counts agree, so repeating it would
+  // only be the same digit twice.
+  function chofetzKlalLabel(n) {
+    return 'Klal ' + n + (n <= 10 ? ' · Lashon Hara' : ' · Rechilut ' + (n - 10));
+  }
   function halachaUnit(u) {
     if (u <= 697) return { kind: 'sa', ch: u, label: `Orach Chaim ${u}`,
                            url: `https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.${u}?lang=bi` };
     const c = u - 697;                        // 1-31 within the Chofetz Chaim
     if (c === 1)  return { kind: 'cc', label: 'Introduction', url: CHOFETZ_INTRO_URL };
-    if (c <= 20)  return { kind: 'cc', label: `Klal ${c - 1}`, url: chofetzKlalUrl(c - 1) };
+    if (c <= 20)  return { kind: 'cc', label: chofetzKlalLabel(c - 1), url: chofetzKlalUrl(c - 1) };
     return              { kind: 'cc', label: `Illustration ${c - 20}`,
                           url: `https://www.sefaria.org/Chafetz_Chaim,_Illustrations,_Illustration_${c - 20}?lang=bi` };
   }
