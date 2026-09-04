@@ -20500,11 +20500,36 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         segs.push({n:n,el:el});
       })(n);
     }
+    /* The three close the ring the seven leave open. Each is cut at the seam:
+       what falls before it is that Mochin week's own time, and is drawn solid
+       into the gap; what falls past it lies over a Chesed that has already
+       begun, and is drawn through, so the two can be seen at once. That is
+       what the overlap is, and the year does the same — Keter/Da'at running
+       alongside the next year's first week while Chochmah runs alongside
+       nothing. Negative hours are before the seam. */
     MOCH.forEach(function(mo,i){
-      var el=mk('path',{d:donut(150,170,map.hToMin(mo.h1),map.hToMin(mo.h2)),
-        fill:mo.c,stroke:'#0d1122','stroke-width':1.5,opacity:.97,'class':'kotw-seg'},gDyn);
-      el.addEventListener('click',function(){userSelected=true;select(50+i)});
-      segs.push({n:50+i,el:el});
+      var cuts=[];
+      if(mo.h1<0) cuts.push([mo.h1,Math.min(mo.h2,0),false]);
+      if(mo.h2>0) cuts.push([Math.max(mo.h1,0),mo.h2,true]);
+      cuts.forEach(function(c){
+        if(c[1]-c[0]<1e-9)return;
+        var over=c[2];                                   // past the seam?
+        var a=map.hToMin(c[0]),b=map.hToMin(c[1]);
+        // the ring of the seven, and the ring of the weeks below it — both are
+        // left open by 49 and 7 that no longer reach the seam
+        mk('path',{d:donut(120,165,a,b),
+          fill:mo.c,stroke:'#0d1122','stroke-width':2,opacity:over?.34:.92},gDyn);
+        var wk=mk('path',{d:donut(82,116,a,b),
+          fill:mo.c,stroke:'#0d1122','stroke-width':1.2,opacity:over?.3:.6,
+          'class':'kotw-seg'},gDyn);
+        var el=mk('path',{d:donut(150,170,a,b),
+          fill:mo.c,stroke:'#0d1122','stroke-width':1.5,opacity:over?.45:.97,
+          'class':'kotw-seg'},gDyn);
+        [wk,el].forEach(function(x){
+          x.addEventListener('click',function(){userSelected=true;select(50+i)});
+          segs.push({n:50+i,el:x});
+        });
+      });
     });
     var sm=map.hToMin(0),s1=pol(78,sm),s2=pol(200,sm);
     mk('line',{x1:s1[0],y1:s1[1],x2:s2[0],y2:s2[1],stroke:'#f0e6c9',
