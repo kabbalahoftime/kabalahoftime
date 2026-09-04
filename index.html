@@ -12062,24 +12062,42 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   };
 
   // ── SEFIRAH OF THE HOUR ──
-  const SEFIRAH_TIMES = [
-    { name: 'Malchut',  hebrew: 'מַלְכוּת',    start: 22*60+18, end: 1*60+43,  range: '10:18–1:43'  },
-    { name: 'Chesed',   hebrew: 'חֶסֶד',        start: 1*60+43,  end: 5*60+9,   range: '1:43–5:09'   },
-    { name: 'Gevurah',  hebrew: 'גְּבוּרָה',    start: 5*60+9,   end: 8*60+35,  range: '5:09–8:35'   },
-    { name: 'Tiferet',  hebrew: 'תִּפְאֶרֶת',  start: 8*60+35,  end: 12*60,    range: '8:35–12:00'  },
-    { name: 'Netzach',  hebrew: 'נֶצַח',        start: 12*60,    end: 15*60+26, range: '12:00–3:26'  },
-    { name: 'Hod',      hebrew: 'הוֹד',         start: 15*60+26, end: 18*60+52, range: '3:26–6:52'   },
-    { name: 'Yesod',    hebrew: 'יְסוֹד',       start: 18*60+52, end: 22*60+18, range: '6:52–10:18'  },
-  ];
+  // The seven no longer tile the day. They run from Chatzot to the opening of
+  // the Mochin band — 49 minutes short of the next Chatzot — and the three
+  // Mochin hold that gap and spill past the seam into the day that follows.
+  //
+  // This is the year as it is actually lived rather than as the dial draws it.
+  // Measured over forty years, the KoT year's last weeks overlap the next
+  // year's first by 7 to 11 days, a mean of 9.05: Keter/Da'at always overlaps
+  // in full, Binah overlaps in 32 of the 40 (2.05 of its 7 days on average),
+  // and Chochmah never overlaps at all. The band's forward reach of 39 minutes
+  // is 9.29 days at this scale, and its split of Binah is 31% against a lived
+  // 29% — so the band was already calibrated to that overlap. What it also did
+  // was reach 49 minutes backward into Yesod and Malchut she'beMalchut, and
+  // nothing in any of those forty years corresponds to that. Ending the seven
+  // where the band opens removes the reach that was never lived and keeps the
+  // one that is.
+  const MOCHIN_OPEN_MIN = -49;                       // the band opens here
+  const SEVEN_END_H = 24 + MOCHIN_OPEN_MIN / 60;     // 23.183… dial hours
+  const SEVEN_SEAM_MIN = 1 * 60 + 43;                // Chatzot in fixed mode
+  const SEFIRAH_TIMES = (() => {
+    const seven = [['Chesed','חֶסֶד'], ['Gevurah','גְּבוּרָה'], ['Tiferet','תִּפְאֶרֶת'],
+                   ['Netzach','נֶצַח'], ['Hod','הוֹד'], ['Yesod','יְסוֹד'], ['Malchut','מַלְכוּת']];
+    const step = (24 * 60 + MOCHIN_OPEN_MIN) / 7;    // 198.71 min, was 205.71
+    const at = i => Math.round(SEVEN_SEAM_MIN + i * step) % 1440;
+    const hm = m => (((Math.floor(m / 60)) % 12) || 12) + ':' + ('0' + (m % 60)).slice(-2);
+    const rows = seven.map((o, i) => ({ name: o[0], hebrew: o[1],
+      start: at(i), end: at(i + 1), range: hm(at(i)) + '–' + hm(at(i + 1)) }));
+    return [rows[6]].concat(rows.slice(0, 6));       // Malchut first, as before
+  })();
 
-  // The seven Sefirot tile the day, so the three Mochin have no window among
-  // them. Ma'alot HaZman already places them: hovering about the Chatzot seam,
+  // Ma'alot HaZman places the Mochin: about the Chatzot seam,
   // at these offsets in minutes from Chatzot. In fixed mode Chatzot is 1:43 AM,
   // which gives 12:54-2:22 — Chochmah and Binah before it, Keter/Da'at after.
   // This is also what gives the first three prayers their hour: Tikkun Rachel
   // and Tikkun Leah at Chatzot, and Hitbodedut in the small hours past it.
   const MOCHIN_TIMES = [
-    { name: 'Chochmah',       hebrew: 'חָכְמָה',          from: -49, to: -20 },
+    { name: 'Chochmah',       hebrew: 'חָכְמָה',          from: MOCHIN_OPEN_MIN, to: -20 },
     { name: 'Binah',          hebrew: 'בִּינָה',           from: -20, to:   9 },
     { name: 'Keter / Da\'at', hebrew: 'כֶּתֶר / דַּעַת',  from:   9, to:  39 },
   ];
@@ -12192,8 +12210,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return { y: t.getUTCFullYear(), m: t.getUTCMonth()+1, d: t.getUTCDate() };
   }
 
-  // Returns { bounds: Date[8], sunrise, sunset } — bounds[i] is the start of
-  // sefirah i (Chesed..Malchut), bounds[7] the next Chatzot.
+  // Returns { bounds: Date[8], sunrise, sunset, nextChatzot } — bounds[i] is
+  // the start of sefirah i (Chesed..Malchut), and bounds[7] is now where the
+  // seven end, which is the Mochin band's opening rather than the next
+  // Chatzot. That Chatzot is still wanted for the night hour, so it is
+  // returned in its own right.
   function zmaniyotBoundaries(city) {
     const now = new Date();
     let base = cityToday(city);
@@ -12216,8 +12237,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         return new Date(sBase.set.getTime() + (h - 18) * nightHr2);
       };
       const bounds = [];
-      for (let i = 0; i <= 7; i++) bounds.push(hToTime(i * 24/7));
-      return { bounds, sunrise: sBase.rise, sunset: sBase.set };
+      for (let i = 0; i <= 7; i++) bounds.push(hToTime(i * SEVEN_END_H / 7));
+      return { bounds, sunrise: sBase.rise, sunset: sBase.set,
+               nextChatzot: hToTime(24) };
     }
     return null;
   }
@@ -12352,7 +12374,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
     const now = new Date();
     const mins = now.getHours() * 60 + now.getMinutes();
-    if (mins >= 22*60+18 || mins < 1*60+43) return SEFIRAH_TIMES[0];
+    const _mal = SEFIRAH_TIMES[0];                 // Malchut, which straddles midnight
+    if (mins >= _mal.start || mins < _mal.end) return _mal;
     for (let i = 1; i < SEFIRAH_TIMES.length; i++) {
       if (mins >= SEFIRAH_TIMES[i].start && mins < SEFIRAH_TIMES[i].end) return SEFIRAH_TIMES[i];
     }
@@ -13411,7 +13434,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (mo[0]) w.Chochmah = [_hNorm(mo[0].h1), _hNorm(mo[0].h2)];
     if (mo[1]) w.Binah    = [_hNorm(mo[1].h1), _hNorm(mo[1].h2)];
     if (mo[2]) w.Keter    = [_hNorm(mo[2].h1), _hNorm(mo[2].h2)];
-    PATH_SEF_ORDER.forEach((n, i) => { w[n] = [i * 24 / 7, (i + 1) * 24 / 7]; });
+    PATH_SEF_ORDER.forEach((n, i) => {
+      w[n] = [i * SEVEN_END_H / 7, (i + 1) * SEVEN_END_H / 7];
+    });
     return w;
   }
 
@@ -20312,7 +20337,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       var city=ZMAN_CITIES[zmanCityIdx], z=zmaniyotBoundaries(city);
       if(z){
         var chz=z.bounds[0].getTime(), sr=z.sunrise.getTime(), ss=z.sunset.getTime();
-        var n1=(sr-chz)/6, dh=(ss-sr)/12, n2=(z.bounds[7].getTime()-ss)/6;
+        var n1=(sr-chz)/6, dh=(ss-sr)/12, n2=(z.nextChatzot.getTime()-ss)/6;
         return {
           zman:true,
           hToMin:function(h){
@@ -20338,8 +20363,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         var rel=m-SEAM;if(rel<0)rel+=DAY;return rel/60;}
     };
   }
+  // The forty-nine no longer fill the revolution: they end where the Mochin
+  // band opens, and weeks 50-52 hold the rest and spill past the seam — the
+  // year as lived, where nothing runs alongside Chochmah or Binah and only
+  // Keter/Da'at overlaps the year that follows. Derived from MOCH so the
+  // dial and the day cannot drift apart.
+  var SEVEN_END=24+MOCH[0].h1;                 // 23.183… hours
   function weekHours(n){
-    if(n<=49)return {h1:(n-1)*24/49,h2:n*24/49};
+    if(n<=49)return {h1:(n-1)*SEVEN_END/49,h2:n*SEVEN_END/49};
     return {h1:MOCH[n-50].h1,h2:MOCH[n-50].h2};
   }
 
@@ -20429,7 +20460,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   function redraw(map){
     while(gDyn.firstChild)gDyn.removeChild(gDyn.firstChild);
     segs=[];
-    var step=24/7;
+    var step=SEVEN_END/7;
     for(var k=0;k<7;k++){
       mk('path',{d:donut(120,165,map.hToMin(k*step),map.hToMin((k+1)*step)),
         fill:SEF[k].c,stroke:'#0d1122','stroke-width':2,opacity:.92},gDyn);
@@ -20476,7 +20507,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   root.appendChild(foot);
 
   function curWeek(){
-    return Math.min(49,Math.max(1,Math.floor(timeMap().nowH()/(24/49))+1));
+    return Math.min(49,Math.max(1,Math.floor(timeMap().nowH()/(SEVEN_END/49))+1));
   }
   var lastSig=null;
   // Whether the visitor has pinned a specific week/day by tapping a segment.
@@ -20490,7 +20521,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
     drawZmanim();
-    var m=map.nowMin(),n=Math.min(49,Math.max(1,Math.floor(map.nowH()/(24/49))+1));
+    var m=map.nowMin(),n=Math.min(49,Math.max(1,Math.floor(map.nowH()/(SEVEN_END/49))+1));
     hand.setAttribute('transform','rotate('+(m/DAY*360)+' '+CX+' '+CY+')');
     cT.textContent=fmt(m);
     cW.textContent='Week '+n+' of the inner year';
