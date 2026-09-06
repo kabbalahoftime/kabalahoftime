@@ -20330,6 +20330,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      forty-nine run from the seam to the band's opening, and the three Mochin
      carry on from there and across it. So there is one number here and the
      rest follows — no table of offsets to keep in step with anything. */
+  /* ── THE SECOND FACE: the alef-bet sets as a single day ──
+     The same question the weeks face asks — where in the year does this hour
+     fall — answered in Chochmah's units instead of Malchut's. The year holds
+     sixteen full sets of twenty-two days and then a short one: set 17 is the
+     vowels and runs twelve days, so it draws as a stunted arc closing the
+     circle, which is true of the year and worth seeing. Eighty-seven minutes
+     to a full set, forty-seven and a half to the last.
+     Colour runs with the sequence, as it must on a circle: eleven sets of
+     paired open letters, five of finals, one of vowels — 11 + 5 + 1, which is
+     the same 22 + 5 + 1 the leap month's microcosm is built on. */
+  var AB_KIND={open :{en:'Open letters', he:'אוֹתִיּוֹת',        c:'#2e4a8f'},
+               final:{en:'Final letters',he:'אוֹתִיּוֹת סוֹפִיּוֹת',c:'#6f579e'},
+               vowel:{en:'Vowels',       he:'נְקֻדּוֹת',          c:'#c9a227'}};
+  function abKind(n){return n<=11?'open':(n<=16?'final':'vowel');}
+  function abDays(n){return n<=16?{from:(n-1)*22+1,to:n*22}:{from:353,to:364};}
+  function abHours(n){var d=abDays(n);return {h1:(d.from-1)/364*24,h2:d.to/364*24};}
+  function curSet(){
+    var h=timeMap().nowH();
+    for(var n=1;n<=17;n++){var a=abHours(n);if(h>=a.h1&&h<a.h2)return n;}
+    return 17;
+  }
+  var FACE='weeks';                              // 'weeks' | 'sets'
+
   var MOCHIN_OPEN=-49/60;                      // where the forty-nine end
   var SEVEN_END=24+MOCHIN_OPEN;                // 23.183… hours
   var STEP=SEVEN_END/49;                       // 28.39 min, one of the fifty-two
@@ -20409,8 +20432,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   var h=document.createElement('div');
+  var SUB={weeks:'52 weeks',sets:'17 alef-bet sets'};
+  function faceSub(){
+    var e=h.querySelector('.kotw-sub');
+    if(e) e.innerHTML='The Year as a Single Day \u00b7 '+SUB[FACE]+' '+
+      '<span class="cycle-info-btn" data-cycle="wheel" title="About this cycle">ⓘ</span>';
+  }
   h.innerHTML='<div class="kotw-title">מַעֲלוֹת הַזְּמַן</div>'+
-    '<div class="kotw-sub">The Year as a Single Day — Kabbalah of Time <span class="cycle-info-btn" data-cycle="wheel" title="About this cycle">ⓘ</span></div>';
+    '<div class="kotw-sub"></div>';
+  faceSub();                                   // so the first draw reads as a toggled one does
   root.appendChild(h);
 
   var svg=mk('svg',{viewBox:'-24 -24 468 468',role:'img',
@@ -20479,6 +20509,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var segs=[],detail,curSel=null;
   function select(n){
     var map=timeMap();
+    if(FACE==='sets'){
+      var ab=ALEF_BET[n-1],ah=abHours(n),dd=abDays(n),kd=AB_KIND[abKind(n)];
+      var s1=map.hToMin(ah.h1),s2=map.hToMin(ah.h2);
+      var nb=(n===curSet())?'<span class="kotw-now-badge">Now</span>':'';
+      detail.innerHTML='<span class="kotw-heb">'+ab.hebrew+'</span>'+
+        '<span class="kotw-wk">Set '+n+nb+'</span>'+
+        '<div class="kotw-theme">\u201c'+ab.theme+'\u201d</div>'+
+        '<div class="kotw-meta">'+ab.letters+' \u00b7 '+kd.he+
+        '<br>\uD83D\uDCC5 days '+dd.from+'\u2013'+dd.to+' of the year'+
+        ' \u00b7 '+(dd.to-dd.from+1)+' days'+
+        '<br>\u23F1 '+fmt(s1)+' \u2013 '+fmt(s2)+'</div>';
+      segs.forEach(function(o){o.el.setAttribute('stroke',o.n===n?'#f0e6c9':'#0d1122');});
+      curSel=n; return;
+    }
     var w=W[n-1],wh=weekHours(n),isM=n>=50;
     var m1=map.hToMin(wh.h1),m2=map.hToMin(wh.h2);
     var cm=isM?{he:MOCH[n-50].he,en:MOCH[n-50].en}:combo(n);
@@ -20499,6 +20543,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       mk('path',{d:donut(120,165,map.hToMin(k*step),map.hToMin((k+1)*step)),
         fill:SEF[k].c,stroke:'#0d1122','stroke-width':2,opacity:.92},gDyn);
     }
+    if(FACE==='sets'){
+      for(var q=1;q<=17;q++){
+        (function(q){
+          var ah=abHours(q);
+          var el=mk('path',{d:donut(82,116,map.hToMin(ah.h1),map.hToMin(ah.h2)),
+            fill:AB_KIND[abKind(q)].c,stroke:'#0d1122','stroke-width':1.2,
+            opacity:.62,'class':'kotw-seg'},gDyn);
+          el.addEventListener('click',function(){userSelected=true;select(q)});
+          segs.push({n:q,el:el});
+        })(q);
+      }
+    } else
     for(var n=1;n<=49;n++){
       (function(n){
         var wh=weekHours(n);
@@ -20527,13 +20583,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // left open by 49 and 7 that no longer reach the seam
         mk('path',{d:donut(120,165,a,b),
           fill:mo.c,stroke:'#0d1122','stroke-width':2,opacity:over?.34:.92},gDyn);
-        var wk=mk('path',{d:donut(82,116,a,b),
-          fill:mo.c,stroke:'#0d1122','stroke-width':1.2,opacity:over?.3:.6,
-          'class':'kotw-seg'},gDyn);
+        var wk=(FACE==='sets')?mk('path',{d:'M0 0'},gDyn)
+          :mk('path',{d:donut(82,116,a,b),
+            fill:mo.c,stroke:'#0d1122','stroke-width':1.2,opacity:over?.3:.6,
+            'class':'kotw-seg'},gDyn);
         var el=mk('path',{d:donut(150,170,a,b),
           fill:mo.c,stroke:'#0d1122','stroke-width':1.5,opacity:over?.45:.97,
           'class':'kotw-seg'},gDyn);
-        [wk,el].forEach(function(x){
+        if(FACE!=='sets') [wk,el].forEach(function(x){
           x.addEventListener('click',function(){userSelected=true;select(50+i)});
           segs.push({n:50+i,el:x});
         });
@@ -20561,9 +20618,31 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   root.appendChild(detail);
   var foot=document.createElement('div');
   foot.className='kotw-foot';
-  foot.innerHTML='Tap any step \u00b7 Weeks 50\u201352 hover above the Chatzot seam · '+
-    '<a href="https://www.kabbalahoftime.com/2013/06/the-entire-book-in-nutshell-table-i-of.html">From “The Kabbalah of Time”</a>';
+  function faceFoot(){
+    foot.innerHTML=(FACE==='sets'
+      ? 'Tap any set \u00b7 eleven of paired letters, five of finals, one of vowels \u00b7 set 17 runs twelve days, not twenty-two'
+      : 'Tap any step \u00b7 Weeks 50\u201352 hover above the Chatzot seam')+' · '+
+      '<a href="https://www.kabbalahoftime.com/2013/06/the-entire-book-in-nutshell-table-i-of.html">From “The Kabbalah of Time”</a>';
+  }
+  faceFoot();
   root.appendChild(foot);
+
+  /* Only the inner ring turns over: the seven Sefirot and the Mochin above
+     them are the day's own hours, true whichever cycle is laid inside them. */
+  var fr=document.createElement('div');
+  fr.style.cssText='text-align:center;margin:2px 0 4px;';
+  fr.innerHTML='<div class="year-toggle-pill" style="margin-top:0;">'+
+    '<button class="year-pill-btn year-pill-active" data-face="weeks">52 weeks</button>'+
+    '<button class="year-pill-btn" data-face="sets">17 sets</button></div>';
+  fr.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-face]');
+    if(!b)return;
+    FACE=b.dataset.face;
+    fr.querySelectorAll('[data-face]').forEach(function(x){
+      x.className='year-pill-btn'+(x.dataset.face===FACE?' year-pill-active':'');});
+    faceFoot(); faceSub(); userSelected=false; curSel=null; tick();
+  });
+  root.insertBefore(fr,foot);
 
   function curWeek(){
     return Math.min(49,Math.max(1,Math.floor(timeMap().nowH()/(SEVEN_END/49))+1));
@@ -20576,15 +20655,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var userSelected=false;
   function tick(){
     var map=timeMap();
-    var sig=(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
+    var sig=FACE+'|'+(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
     drawZmanim();
-    var m=map.nowMin(),n=Math.min(49,Math.max(1,Math.floor(map.nowH()/(SEVEN_END/49))+1));
+    var m=map.nowMin(),n=(FACE==='sets')?curSet()
+      :Math.min(49,Math.max(1,Math.floor(map.nowH()/(SEVEN_END/49))+1));
     hand.setAttribute('transform','rotate('+(m/DAY*360)+' '+CX+' '+CY+')');
     cT.textContent=fmt(m);
-    cW.textContent='Week '+n+' of the inner year';
-    cS.textContent=combo(n).he;
+    cW.textContent=(FACE==='sets')
+      ? 'Set '+n+' of the inner year' : 'Week '+n+' of the inner year';
+    cS.textContent=(FACE==='sets')?ALEF_BET[n-1].hebrew:combo(n).he;
     if(!userSelected&&n!==curSel)select(n);
     // The Today block names the hour, so it is re-read here rather than on a
     // timer of its own: this runs after kotwHours exists, which a timer started
