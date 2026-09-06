@@ -20340,10 +20340,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      Colour runs with the sequence, as it must on a circle: eleven sets of
      paired open letters, five of finals, one of vowels — 11 + 5 + 1, which is
      the same 22 + 5 + 1 the leap month's microcosm is built on. */
-  var AB_KIND={open :{en:'Open letters', he:'אוֹתִיּוֹת',        c:'#2e4a8f'},
-               final:{en:'Final letters',he:'אוֹתִיּוֹת סוֹפִיּוֹת',c:'#6f579e'},
-               vowel:{en:'Vowels',       he:'נְקֻדּוֹת',          c:'#c9a227'}};
+  var AB_KIND={open :{en:'Open letters', he:'אוֹתִיּוֹת',        h:222,s:52,l0:26,l1:52,n:11},
+               final:{en:'Final letters',he:'אוֹתִיּוֹת סוֹפִיּוֹת',h:264,s:32,l0:36,l1:60,n:5},
+               vowel:{en:'Vowels',       he:'נְקֻדּוֹת',          h:45, s:66,l0:47,l1:47,n:1}};
   function abKind(n){return n<=11?'open':(n<=16?'final':'vowel');}
+  /* Each set its own shade, so one can be told from the next while the three
+     bands still read as three. The eleven run through the blues and the five
+     through the purples, darkest at the start of the year and lightening as
+     it goes, so the ring brightens from Chatzot round to the vowels' gold and
+     drops back at the seam where the year begins again. */
+  function abColor(n){
+    var k=AB_KIND[abKind(n)],i=(n<=11)?n-1:(n<=16?n-12:0);
+    var t=k.n>1?i/(k.n-1):0;
+    return 'hsl('+k.h+','+k.s+'%,'+(k.l0+(k.l1-k.l0)*t).toFixed(1)+'%)';
+  }
   function abDays(n){return n<=16?{from:(n-1)*22+1,to:n*22}:{from:353,to:364};}
   function abHours(n){var d=abDays(n);return {h1:(d.from-1)/364*24,h2:d.to/364*24};}
   function curSet(){
@@ -20548,8 +20558,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         (function(q){
           var ah=abHours(q);
           var el=mk('path',{d:donut(82,116,map.hToMin(ah.h1),map.hToMin(ah.h2)),
-            fill:AB_KIND[abKind(q)].c,stroke:'#0d1122','stroke-width':1.2,
-            opacity:.62,'class':'kotw-seg'},gDyn);
+            fill:abColor(q),stroke:'#0d1122','stroke-width':1.2,
+            opacity:.85,'class':'kotw-seg'},gDyn);
           el.addEventListener('click',function(){userSelected=true;select(q)});
           segs.push({n:q,el:el});
         })(q);
