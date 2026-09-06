@@ -20330,6 +20330,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      forty-nine run from the seam to the band's opening, and the three Mochin
      carry on from there and across it. So there is one number here and the
      rest follows — no table of offsets to keep in step with anything. */
+  /* ── THE SECOND FACE: the alef-bet as a single day ──
+     Chochmah's cycle is twenty-two days, one letter each, and it maps onto the
+     revolution the way the year's weeks do: Alef opens at Chatzot and Tav
+     closes on it, so the circle both ends and begins at the seam. Sixty-five
+     and a half minutes to a letter.
+     Sefer Yetzirah's own division gives the ring its shape — three mothers
+     (א מ ש), seven doubles (ב ג ד כ פ ר ת), twelve simples — and they are not
+     contiguous, so the pattern is read in the colouring rather than in blocks.
+     The seven Sefirot of the outer ring do not change with the face: they are
+     the day's own hours, true whichever cycle is laid inside them. */
+  var LETTER_CLASS={1:'m',13:'m',21:'m',2:'d',3:'d',4:'d',11:'d',17:'d',20:'d',22:'d'};
+  var LETTER_KIND={m:{en:'Mother',he:'אֵם',c:'#c9a227'},
+                   d:{en:'Double',he:'כְּפוּלָה',c:'#6f579e'},
+                   s:{en:'Simple',he:'פְּשׁוּטָה',c:'#4d8b6c'}};
+  function letterKind(n){return LETTER_CLASS[n]||'s';}
+  function letterHours(n){var L=24/22;return {h1:(n-1)*L,h2:n*L};}
+  function curLetter(){return Math.min(22,Math.max(1,Math.floor(timeMap().nowH()/(24/22))+1));}
+  var FACE='weeks';                              // 'weeks' | 'letters'
+
   var MOCHIN_OPEN=-49/60;                      // where the forty-nine end
   var SEVEN_END=24+MOCHIN_OPEN;                // 23.183… hours
   var STEP=SEVEN_END/49;                       // 28.39 min, one of the fifty-two
@@ -20409,6 +20428,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   var h=document.createElement('div');
+  var SUB={weeks:'The Year as a Single Day',letters:'The Alef-Bet as a Single Day'};
+  function faceSub(){
+    var e=h.querySelector('.kotw-sub');
+    if(e) e.innerHTML=SUB[FACE]+' — Kabbalah of Time '+
+      '<span class="cycle-info-btn" data-cycle="wheel" title="About this cycle">ⓘ</span>';
+  }
   h.innerHTML='<div class="kotw-title">מַעֲלוֹת הַזְּמַן</div>'+
     '<div class="kotw-sub">The Year as a Single Day — Kabbalah of Time <span class="cycle-info-btn" data-cycle="wheel" title="About this cycle">ⓘ</span></div>';
   root.appendChild(h);
@@ -20479,6 +20504,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var segs=[],detail,curSel=null;
   function select(n){
     var map=timeMap();
+    if(FACE==='letters'){
+      var L=SINGLE_LETTERS_22[n-1],lh=letterHours(n),k=LETTER_KIND[letterKind(n)];
+      var a1=map.hToMin(lh.h1),a2=map.hToMin(lh.h2);
+      var nb=(n===curLetter())?'<span class="kotw-now-badge">Now</span>':'';
+      detail.innerHTML='<span class="kotw-heb">'+L.hebrew+'</span>'+
+        '<span class="kotw-wk">Letter '+n+nb+'</span>'+
+        '<div class="kotw-theme">\u201c'+L.letter+'\u201d</div>'+
+        '<div class="kotw-meta">'+k.he+' \u00b7 '+k.en+
+        '<br>\u23F1 '+fmt(a1)+' \u2013 '+fmt(a2)+'</div>';
+      segs.forEach(function(o){o.el.setAttribute('stroke',o.n===n?'#f0e6c9':'#0d1122');});
+      curSel=n; return;
+    }
     var w=W[n-1],wh=weekHours(n),isM=n>=50;
     var m1=map.hToMin(wh.h1),m2=map.hToMin(wh.h2);
     var cm=isM?{he:MOCH[n-50].he,en:MOCH[n-50].en}:combo(n);
@@ -20499,6 +20536,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       mk('path',{d:donut(120,165,map.hToMin(k*step),map.hToMin((k+1)*step)),
         fill:SEF[k].c,stroke:'#0d1122','stroke-width':2,opacity:.92},gDyn);
     }
+    if(FACE==='letters'){
+      for(var q=1;q<=22;q++){
+        (function(q){
+          var lh=letterHours(q);
+          var el=mk('path',{d:donut(82,116,map.hToMin(lh.h1),map.hToMin(lh.h2)),
+            fill:LETTER_KIND[letterKind(q)].c,stroke:'#0d1122','stroke-width':1.2,
+            opacity:.62,'class':'kotw-seg'},gDyn);
+          el.addEventListener('click',function(){userSelected=true;select(q)});
+          segs.push({n:q,el:el});
+        })(q);
+      }
+    } else {
     for(var n=1;n<=49;n++){
       (function(n){
         var wh=weekHours(n);
@@ -20507,6 +20556,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         el.addEventListener('click',function(){userSelected=true;select(n)});
         segs.push({n:n,el:el});
       })(n);
+    }
     }
     /* The three close the ring the seven leave open. Each is cut at the seam:
        what falls before it is that Mochin week's own time, and is drawn solid
@@ -20527,13 +20577,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // left open by 49 and 7 that no longer reach the seam
         mk('path',{d:donut(120,165,a,b),
           fill:mo.c,stroke:'#0d1122','stroke-width':2,opacity:over?.34:.92},gDyn);
-        var wk=mk('path',{d:donut(82,116,a,b),
-          fill:mo.c,stroke:'#0d1122','stroke-width':1.2,opacity:over?.3:.6,
-          'class':'kotw-seg'},gDyn);
+        var wk=(FACE==='letters')?mk('path',{d:'M0 0'},gDyn)
+          :mk('path',{d:donut(82,116,a,b),
+            fill:mo.c,stroke:'#0d1122','stroke-width':1.2,opacity:over?.3:.6,
+            'class':'kotw-seg'},gDyn);
         var el=mk('path',{d:donut(150,170,a,b),
           fill:mo.c,stroke:'#0d1122','stroke-width':1.5,opacity:over?.45:.97,
           'class':'kotw-seg'},gDyn);
-        [wk,el].forEach(function(x){
+        // On the letters face there is no week 50-52 to select, so the arcs
+        // are drawn and left inert rather than pointing at a step that the
+        // face does not have.
+        if(FACE!=='letters') [wk,el].forEach(function(x){
           x.addEventListener('click',function(){userSelected=true;select(50+i)});
           segs.push({n:50+i,el:x});
         });
@@ -20561,9 +20615,31 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   root.appendChild(detail);
   var foot=document.createElement('div');
   foot.className='kotw-foot';
-  foot.innerHTML='Tap any step \u00b7 Weeks 50\u201352 hover above the Chatzot seam · '+
-    '<a href="https://www.kabbalahoftime.com/2013/06/the-entire-book-in-nutshell-table-i-of.html">From “The Kabbalah of Time”</a>';
+  function faceFoot(){
+    foot.innerHTML=(FACE==='letters'
+      ? 'Tap any letter \u00b7 three mothers, seven doubles, twelve simples \u00b7 Alef opens at Chatzot and Tav closes on it'
+      : 'Tap any step \u00b7 Weeks 50\u201352 hover above the Chatzot seam')+' · '+
+      '<a href="https://www.kabbalahoftime.com/2013/06/the-entire-book-in-nutshell-table-i-of.html">From “The Kabbalah of Time”</a>';
+  }
+  faceFoot();
   root.appendChild(foot);
+
+  /* The face selector. The outer ring of Sefirot stays whichever is chosen —
+     it is the day's own, not the cycle's — so only the inner ring turns over. */
+  var fr=document.createElement('div');
+  fr.style.cssText='text-align:center;margin:2px 0 4px;';
+  fr.innerHTML='<div class="year-toggle-pill" style="margin-top:0;">'+
+    '<button class="year-pill-btn year-pill-active" data-face="weeks">52 weeks</button>'+
+    '<button class="year-pill-btn" data-face="letters">22 letters</button></div>';
+  fr.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-face]');
+    if(!b)return;
+    FACE=b.dataset.face;
+    fr.querySelectorAll('[data-face]').forEach(function(x){
+      x.className='year-pill-btn'+(x.dataset.face===FACE?' year-pill-active':'');});
+    faceFoot(); faceSub(); userSelected=false; curSel=null; tick();
+  });
+  root.insertBefore(fr,foot);
 
   function curWeek(){
     return Math.min(49,Math.max(1,Math.floor(timeMap().nowH()/(SEVEN_END/49))+1));
@@ -20576,15 +20652,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var userSelected=false;
   function tick(){
     var map=timeMap();
-    var sig=(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
+    var sig=FACE+'|'+(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
     drawZmanim();
-    var m=map.nowMin(),n=Math.min(49,Math.max(1,Math.floor(map.nowH()/(SEVEN_END/49))+1));
+    var m=map.nowMin(),n=(FACE==='letters')?curLetter()
+      :Math.min(49,Math.max(1,Math.floor(map.nowH()/(SEVEN_END/49))+1));
     hand.setAttribute('transform','rotate('+(m/DAY*360)+' '+CX+' '+CY+')');
     cT.textContent=fmt(m);
-    cW.textContent='Week '+n+' of the inner year';
-    cS.textContent=combo(n).he;
+    cW.textContent=(FACE==='letters')
+      ? 'Letter '+n+' of the inner cycle' : 'Week '+n+' of the inner year';
+    cS.textContent=(FACE==='letters')?SINGLE_LETTERS_22[n-1].hebrew:combo(n).he;
     if(!userSelected&&n!==curSel)select(n);
     // The Today block names the hour, so it is re-read here rather than on a
     // timer of its own: this runs after kotwHours exists, which a timer started
