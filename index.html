@@ -15272,6 +15272,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // and the Tanach are read by. Reading it off the epoch instead only agreed
     // with the year the page happened to be opened in.
     const cy22 = get22DayInfo(dEff - d_year1 + 1);
+    // The dial's letters face pairs the hour's letter with the set the day is
+    // actually in — the gate and the Perek Shirah element both need it, and
+    // the dial has no date of its own. Set here rather than beside kotYear,
+    // which is written before cy22 exists.
+    window.kotAlefBet = { set: cy22.cycle, day: cy22.day };
     const cy13 = get13DayInfo(dEff - d_year1 + 1);
     const cy41 = get41DayInfo(dEff - d_year1 + 1);
 
@@ -20508,10 +20513,34 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       var L=SINGLE_LETTERS_22[n-1],lh=letterHours(n),k=LETTER_KIND[letterKind(n)];
       var a1=map.hToMin(lh.h1),a2=map.hToMin(lh.h2);
       var nb=(n===curLetter())?'<span class="kotw-now-badge">Now</span>':'';
+      /* The gate and the element both need the set the day is actually in —
+         the hour gives the letter, the date gives the set, and the gate is the
+         pair of the two. Set 17 is the vowels and runs only twelve days, so
+         letters past the twelfth have no gate to name and none is claimed;
+         nor does that set have a second half, so its element ends there too.
+         Where there is nothing the line is simply left out. */
+      var ab=window.kotAlefBet,gate='',elem='';
+      if(ab){
+        try{
+          var g=gates231(ab.set,n);
+          if(g && !(g.isVowel && n>12))
+            gate=g.isVowel
+              ? g.primName+' <span style="font-size:1.1em">'+g.primHeb+'</span>'
+              : g.primName+' + '+g.compName+
+                ' <span style="font-size:1.1em">'+g.primHeb+g.compHeb+'</span>';
+        }catch(e){}
+        try{
+          var pe=PEREK_SHIRAH_ELEMENTS.filter(function(x){
+            return x.id===ab.set+(n<=11?'a':'b');})[0];
+          if(pe) elem=pe.el+' <span style="font-size:1.1em">'+pe.heb+'</span> \u00b7 '+pe.ch;
+        }catch(e){}
+      }
       detail.innerHTML='<span class="kotw-heb">'+L.hebrew+'</span>'+
         '<span class="kotw-wk">Letter '+n+nb+'</span>'+
         '<div class="kotw-theme">\u201c'+L.letter+'\u201d</div>'+
         '<div class="kotw-meta">'+k.he+' \u00b7 '+k.en+
+        (gate?'<br>Gate: '+gate:'')+
+        (elem?'<br>\uD83C\uDF3F '+elem:'')+
         '<br>\u23F1 '+fmt(a1)+' \u2013 '+fmt(a2)+'</div>';
       segs.forEach(function(o){o.el.setAttribute('stroke',o.n===n?'#f0e6c9':'#0d1122');});
       curSel=n; return;
