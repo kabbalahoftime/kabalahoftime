@@ -560,7 +560,9 @@ margin: 7px 0 2px;
 font-family: 'Cinzel', serif;
 letter-spacing: 1px;
 font-size: calc(10px * var(--ts, 1));
-color: var(--ink-dim);
+/* On the dial's navy, not the page's parchment — so the dial's own ink,
+   for the same reason the toggle above it takes it. */
+color: rgba(240,230,201,.6);
 text-transform: uppercase;
 }
 .kotw-work label { display: flex; align-items: center; gap: 6px; }
@@ -568,11 +570,11 @@ text-transform: uppercase;
 font-family: inherit;
 font-size: calc(11px * var(--ts, 1));
 letter-spacing: 0;
-color: var(--ink);
-background: var(--bg-card);
-border: 1px solid var(--border-strong);
+color: #10162c;
+background: #f0e6c9;
+border: 1px solid rgba(212,175,55,.55);
 border-radius: 3px;
-padding: 2px 5px;
+padding: 3px 6px;
 min-width: 92px;
 }
 .kotw-work button {
@@ -582,12 +584,12 @@ font-family: inherit;
 letter-spacing: 1px;
 text-transform: uppercase;
 font-size: calc(10px * var(--ts, 1));
-color: var(--gold);
+color: #d4af37;
 cursor: pointer;
 padding: 3px 6px;
 }
 .kotw-work input:focus-visible, .kotw-work button:focus-visible {
-outline: 2px solid var(--gold); outline-offset: 1px;
+outline: 2px solid #d4af37; outline-offset: 2px;
 }
 .year-pill-btn.year-pill-active {
 background: var(--gold);
@@ -1838,6 +1840,32 @@ transition: transform 0.3s;
 }
 #kotw-root svg{width:100%; height:auto; display:block}
 #kotw-root .kotw-seg{cursor:pointer}
+/* ── THE DIAL'S OWN TOGGLE ──
+   Every other pill in the page sits on parchment, so the shared rule dresses
+   them in --ink-mid — a dark brown. This one sits on the navy dial face, and
+   there the two unchosen labels were drawing almost into the ground. It takes
+   the dial's own colours instead: its parchment for a label, its gold for the
+   chosen one, on the navy rather than white.
+
+   And a hairline between the halves. Two butted together read as two; three
+   read as one word — "52 WEEKS17 SETS" — so the boundary has to be drawn. It
+   is an inset shadow rather than a border so it costs no width, and the
+   chosen half drops it, having an edge of its own. */
+#kotw-root .year-toggle-pill { border-color: rgba(212,175,55,.55); }
+#kotw-root .year-pill-btn {
+  color: rgba(240,230,201,.68);
+  padding: 5px 12px;
+}
+#kotw-root .year-pill-btn + .year-pill-btn {
+  box-shadow: inset 1px 0 0 rgba(212,175,55,.32);
+}
+#kotw-root .year-pill-btn:hover { color: #f0e6c9; }
+#kotw-root .year-pill-btn.year-pill-active {
+  background: #d4af37; color: #10162c; box-shadow: none;
+}
+#kotw-root .year-pill-btn:focus-visible {
+  outline: 2px solid #d4af37; outline-offset: 2px;
+}
 #kotw-root .kotw-panel{
   margin-top:12px; border-top:1px solid rgba(212,175,55,.35); padding-top:10px;
   font-size:calc(14.5px * var(--ts, 1)); line-height:1.5;
@@ -13550,7 +13578,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       '<bdi lang="he" style="font-family:\'Frank Ruhl Libre\',serif;">חֲצוֹת לַיְלָה אָקוּם</bdi>, at ' +
       'midnight I rise (Tehilim 119:62), and <em style="font-style:normal;color:var(--ink)">אָקוּם</em> ' +
       'is said by one who has been lying down. The Gemara hangs David’s harp above his bed, where the ' +
-      'north wind sounded it at midnight and woke him to his Torah (Berachot 3b) — the vigil that runs ' +
+      'north wind sounded it at midnight and woke him to his Torah (Berachot 3b) — the mishmar that runs ' +
       'straight through belongs to the long nights, not the short ones. Two pieces of a night can come ' +
       'to more rest than one, not less.';
 
@@ -20632,11 +20660,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      sub-sefirah of an hour; they are one unit, so every point below is named
      twice.
 
+     The stretch after the band is a mishmar and not a vigil: the Gemara's own
+     word for a watch of the night is משמר — שָׁלֹשׁ מִשְׁמָרוֹת הָוֵי הַלַּיְלָה,
+     the night is three watches (Berachot 3a) — and it is the word a yeshiva
+     still uses for a night given to learning.
+
      Nothing here is set by hand except the working hours, which no structure
      can know. The rest is read off the band:
 
        the band          weeks 50-52   Elul, and Selichot at Chatzot
-       the vigil         weeks 1-4     Rosh Hashanah through Shmini Atzeret
+       the mishmar       weeks 1-4     Rosh Hashanah through Shmini Atzeret
        night sleep       weeks 5-13    Cheshvan, waking in Chanukah's week
        midday sleep      weeks 24-26   Purim to Rosh Chodesh Nisan
        evening sleep     weeks 45/46   the Shratzim pair, from 10 Av
@@ -20647,7 +20680,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      Creeping Creatures and then Prolific Creeping Creatures, one unit carried
      across two weeks. So the shape steps by a week when the year turns, and
      needs no toggle of its own. */
-  var DAY_C={sleep:'#39445f',nap:'#57648a',band:'#e3c25f',vigil:'#9c8348',day:'#6f6a52'};
+  var DAY_C={sleep:'#39445f',nap:'#57648a',band:'#e3c25f',mishmar:'#9c8348',day:'#6f6a52'};
   function dayShape(map){
     var U=SEVEN_END/49, openMin=map.hToMin(49*U);
     var evening=openMin>=720;                  // the band opens in the evening
@@ -20657,7 +20690,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       {k:'band',en:'The Mochin Band',he:'מֹחִין',c:DAY_C.band,h1:49*U,h2:52*U-24,
        wk:'weeks 50–52',yr:'Elul · Selichot at Chatzot',
        what:'Tikkun Rachel, Tikkun Leah, Hitbodedut · the fifteen climbed'},
-      {k:'vigil',en:'The Vigil',he:'עֵרוּת',c:DAY_C.vigil,h1:52*U-24,h2:4*U,
+      {k:'mishmar',en:'Mishmar',he:'מִשְׁמָר',c:DAY_C.mishmar,h1:52*U-24,h2:4*U,
        wk:'weeks 1–4',yr:'Rosh Hashanah → Shmini Atzeret',
        what:'Awake through the year’s Tishrei, inside Chesed’s hour'},
       {k:'sleep',en:'Night Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:4*U,h2:12.5*U,
@@ -21042,7 +21075,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return Math.min(49,Math.max(1,Math.floor(timeMap().nowH()/(SEVEN_END/49))+1));
   }
   /* Which stretch of the day "now" falls in. Compared in minutes rather than
-     hours because the band's tail is past 24 and the vigil's head is before
+     hours because the band's tail is past 24 and the mishmar's head is before
      one — on the circle they are neighbours, and only the clock says so. */
   function curDaySeg(){
     var map=timeMap(),DS=dayShape(map),now=map.nowMin();
