@@ -3,7 +3,7 @@
 // name and the shell is fetched again. A cache that has gone stale in a way
 // the network-first rule cannot correct is the one failure this app has that
 // leaves every card reading "Loading…" with nothing to say why.
-const CACHE_NAME = 'kabbalah-of-time-v6';
+const CACHE_NAME = 'kabbalah-of-time-v7';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -29,21 +29,25 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// How long the network gets to answer a page request before the cached copy
-// is served instead. Long enough that a merely slow connection still delivers
-// the newest page; short enough that a bad one is not something you sit and
-// watch. The request is not abandoned — it keeps running, and refreshes the
-// cache whenever it lands.
-const HTML_NETWORK_TIMEOUT = 3000;
-
 // Fetch:
-//   • HTML / navigations → NETWORK-FIRST WITH A CLOCK, so the latest page
-//     shows when the network answers, and the cached one shows when it does
-//     not. A failed request rejects and falls back on its own; a request that
-//     merely hangs never rejects at all, and on weak wifi that left every card
-//     reading "Loading…" indefinitely with a perfectly good copy in the cache.
-//     Hence the timer: a fallback that waits on failure needs its own clock.
-//   • Everything else (manifest, icons) → cache-first, they rarely change.
+//   • HTML / navigations → CACHE-FIRST, REVALIDATING BEHIND. The cached page
+//     is handed over at once and the network copy is fetched anyway, so the
+//     next open has the newer one.
+//
+//     This was network-first with a three-second clock, which meant the cache
+//     was only ever a rescue and never a shortcut: every open waited either
+//     for the whole page to come down — half a megabyte compressed — or for
+//     three seconds to pass. There was no path that served a warm cache
+//     immediately, so the app was never quick to open, on any connection.
+//
+//     What it costs: a change to the page reaches the reader on their second
+//     open rather than their first. That is a fair price here because the
+//     page computes every card from the date at run time — a build from
+//     yesterday still shows today correctly — so what waits a load is a fix
+//     to the code, not the day's learning. Bump CACHE_NAME to force the
+//     issue; the activate handler below drops everything under the old name.
+//
+//   • Everything else (manifest, icons, fonts) → cache-first, as before.
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -54,20 +58,18 @@ self.addEventListener('fetch', (event) => {
   if (isHTML) {
     event.respondWith((async () => {
       const network = fetch(req).then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+        if (response && response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+        }
         return response;
       });
-      // Keep the worker alive for the update even once the cached copy has
-      // been handed over, so the next load has the newer page.
+      // The update runs whether or not anyone is waiting on it, so a cached
+      // page that is wrong is replaced by the next open rather than standing.
       event.waitUntil(network.catch(() => {}));
 
       const cached = (await caches.match(req)) || (await caches.match('/index.html'));
-      if (!cached) return network;      // nothing to fall back to — let it fail as it would
-
-      const timeout = new Promise((resolve) => setTimeout(resolve, HTML_NETWORK_TIMEOUT));
-      const winner = await Promise.race([network.catch(() => null), timeout]);
-      return winner || cached;
+      return cached || network;         // nothing cached yet — the first open pays
     })());
     return;
   }
