@@ -13368,7 +13368,33 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // it opens after, keeping it whole would cost the night — so it is kept the
   // older way, sleeping first and rising for it, which is what rising at
   // Chatzot has always meant.
-  const _DS_SEVEN = ['Chesed', 'Gevurah', 'Tiferet', 'Netzach', 'Hod', 'Yesod', 'Malchut'];
+  //
+  // Each hour carries its prayer, and the hours given to sleep are dimmed, so
+  // the table reads in three states: gold is the band, dim is the sleep, and
+  // the plain ink between them is the waking day.
+  //
+  // Which hours those are needs no clock time invented for it. The band closes
+  // inside Chesed and Shacharit's hour is Tiferet, so Chesed and Gevurah are
+  // the night's sleep in either shape. And a shape whose band opens after
+  // midnight sleeps once before it as well — through Malchut, which is the
+  // hour of lying down and whose own prayer is the Shema said upon the bed.
+  // Sleep is therefore read off the same fact that divides the two shapes,
+  // and marked per column rather than per row, since the two do not sleep at
+  // the same hours.
+  const _DS_SEVEN = [
+    ['Chesed',        'Birchot HaShachar'],
+    ['Gevurah',       'Tehilim'],
+    ['Tiferet',       'Shacharit'],
+    ['Netzach',       'Tikkun HaKlali'],
+    ['Hod',           'Mincha'],
+    ['Yesod',         'Maariv'],
+    ['Malchut',       'Kri’at Shema'],
+  ];
+  const _DS_MOCHIN = [
+    ['Chochmah',      'Tikkun Rachel'],
+    ['Binah',         'Tikkun Leah'],
+    ['Keter / Da’at', 'Hitbodedut'],
+  ];
 
   function _dayShapeInfo() {
     const city = (typeof ZMAN_CITIES !== 'undefined' && typeof zmanCityIdx !== 'undefined')
@@ -13403,37 +13429,47 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       '<span style="font-size:0.78em;color:var(--ink-dim);margin-left:2px;">' +
       part(d, 'dayPeriod').toLowerCase().replace(/[\s.]/g, '') + '</span>';
 
-    const row = (label, a, b, lit) =>
-      '<div style="display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:baseline;' +
-      'padding:3px 0;' + (lit ? 'color:var(--gold);' : 'color:var(--ink);') + '">' +
-      '<span style="font-size:0.86rem;">' + label + '</span>' +
-      '<span style="font-size:0.86rem;text-align:right;min-width:74px;font-variant-numeric:tabular-nums;">' + t(a) + '</span>' +
-      '<span style="font-size:0.86rem;text-align:right;min-width:74px;font-variant-numeric:tabular-nums;">' + t(b) + '</span>' +
-      '</div>';
-
-    let table = '<div style="display:grid;grid-template-columns:1fr auto auto;gap:6px;' +
-      'padding-bottom:5px;border-bottom:1px solid var(--border-strong);margin-bottom:4px;">' +
-      '<span></span>' +
-      '<span style="font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-dim);text-align:right;min-width:74px;">☾ Winter</span>' +
-      '<span style="font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-dim);text-align:right;min-width:74px;">☀ Summer</span>' +
-      '</div>';
-    for (let i = 0; i < 7; i++) table += row(_DS_SEVEN[i], win.bounds[i], sum.bounds[i], false);
-    table += row('Chochmah', win.mochin[0], sum.mochin[0], true);
-    table += row('Binah', win.mochin[1], sum.mochin[1], true);
-    table += row('Keter / Da’at', win.mochin[2], sum.mochin[2], true);
-    table += row('<em style="font-style:normal;color:var(--ink-dim);">the band closes</em>',
-                 win.mochin[3], sum.mochin[3], false);
-
     // A band that opens before midnight can be kept in one sitting; one that
     // opens after cannot. That is what divides the two practices, so it is
-    // what is asked of each solstice — and where both answer the same way,
-    // this city has one shape and not two.
+    // what is asked of each solstice — and it is also what says where the
+    // sleep falls, so it is settled before the table is built.
     const evening = d => {
       const h = +part(d, 'hour');
       return part(d, 'dayPeriod').toLowerCase()[0] === 'p' && h !== 12;
     };
     const winEve = evening(win.mochin[0]), sumEve = evening(sum.mochin[0]);
     const two = winEve !== sumEve;
+    // Chesed and Gevurah in either shape; Malchut too where the band is risen
+    // for rather than stayed up for.
+    const asleep = (i, eve) => i === 0 || i === 1 || (i === 6 && !eve);
+
+    const GRID = 'display:grid;grid-template-columns:1fr auto auto;gap:6px;';
+    const CELL = 'font-size:0.86rem;text-align:right;min-width:70px;font-variant-numeric:tabular-nums;';
+    const cell = (d, dim) => '<span style="' + CELL + (dim ? 'color:var(--ink-dim);' : '') + '">' +
+      (dim ? '<span style="font-size:0.8em;margin-right:2px;">☾</span>' : '') + t(d) + '</span>';
+    const row = (name, prayer, a, b, i, lit) =>
+      '<div style="' + GRID + 'align-items:baseline;padding:3px 0;' +
+      (lit ? 'color:var(--gold);' : 'color:var(--ink);') + '">' +
+      '<span style="font-size:0.86rem;line-height:1.25;">' + name +
+      (prayer ? '<br><span style="font-size:0.72rem;color:var(--ink-dim);">' + prayer + '</span>' : '') +
+      '</span>' +
+      cell(a, i >= 0 && asleep(i, winEve)) + cell(b, i >= 0 && asleep(i, sumEve)) +
+      '</div>';
+
+    const HEAD = 'font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-dim);text-align:right;min-width:70px;';
+    let table = '<div style="' + GRID + 'padding-bottom:5px;border-bottom:1px solid var(--border-strong);margin-bottom:4px;">' +
+      '<span></span><span style="' + HEAD + '">☾ Winter</span><span style="' + HEAD + '">☀ Summer</span></div>';
+    for (let i = 0; i < 7; i++)
+      table += row(_DS_SEVEN[i][0], _DS_SEVEN[i][1], win.bounds[i], sum.bounds[i], i, false);
+    for (let i = 0; i < 3; i++)
+      table += row(_DS_MOCHIN[i][0], _DS_MOCHIN[i][1], win.mochin[i], sum.mochin[i], -1, true);
+    table += row('<span style="color:var(--ink-dim);">the band closes</span>', '',
+                 win.mochin[3], sum.mochin[3], -1, false);
+    table += '<div style="font-size:0.74rem;color:var(--ink-dim);line-height:1.5;margin-top:7px;' +
+      'padding-top:6px;border-top:1px solid var(--border-strong);">Each hour carries its prayer. ' +
+      'Gold is the band; ☾ marks the hours given to sleep. The night’s sleep runs from the band’s ' +
+      'close to Shacharit at Tiferet — and the shape that rises for the band sleeps through Malchut ' +
+      'before it as well.</div>';
 
     // Fixed Hours has no shape to be in — the band stands at the same two
     // times all year — so it says that instead rather than quoting a zmaniyot
@@ -13455,12 +13491,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const head = s => '<div style="font-family:\'Cinzel\',serif;font-size:0.74rem;letter-spacing:2px;' +
       'text-transform:uppercase;color:var(--gold);margin-bottom:6px;">' + s + '</div>';
     const STAY = 'The band opens before midnight and closes in the small hours, so it can be kept in ' +
-      'one sitting. Maariv and Kri’at Shema in the evening, the fifteen climbed as the band opens, ' +
-      'Keter’s three at the end — and then the night.';
+      'one sitting. Maariv at Yesod, Kri’at Shema at Malchut, the fifteen climbed as the band opens, ' +
+      'Keter’s three at the end — and then one unbroken night, Chesed and Gevurah slept through to ' +
+      'Shacharit at Tiferet.';
     const RISE = 'The band opens after midnight, and staying up for it would cost the whole night. So ' +
-      'it is kept the older way: sleep from Malchut’s own hours, rise for the band, and sleep again ' +
-      'after. That is what rising at Chatzot has always meant — the vigil that runs straight through ' +
-      'belongs to the long nights, not the short ones.';
+      'it is kept the older way, in two sleeps: Kri’at Shema said at Malchut and slept on, up for the ' +
+      'band, then Chesed and Gevurah slept through to Shacharit. That is what rising at Chatzot has ' +
+      'always meant — the vigil that runs straight through belongs to the long nights, not the short ' +
+      'ones. Two pieces of a night can come to more rest than one, not less.';
 
     const shapes = two
       ? head('☾ Winter — stay up for it') + p(STAY) +
