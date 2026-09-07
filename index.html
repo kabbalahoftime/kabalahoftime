@@ -545,6 +545,50 @@ letter-spacing: 1px;
 font-size: calc(10.5px * var(--ts, 1));
 transition: all 0.15s;
 }
+
+/* The working hours, under the face toggle and only on the day face. Kept to
+   the toggle's own register — small, centred, and quiet, since it is a setting
+   rather than part of the reading. The inputs stay wide enough for a time in
+   either 12- or 24-hour form, which is the browser's choice and not ours. */
+.kotw-work {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+gap: 4px 12px;
+margin: 7px 0 2px;
+font-family: 'Cinzel', serif;
+letter-spacing: 1px;
+font-size: calc(10px * var(--ts, 1));
+color: var(--ink-dim);
+text-transform: uppercase;
+}
+.kotw-work label { display: flex; align-items: center; gap: 6px; }
+.kotw-work input[type="time"] {
+font-family: inherit;
+font-size: calc(11px * var(--ts, 1));
+letter-spacing: 0;
+color: var(--ink);
+background: var(--bg-card);
+border: 1px solid var(--border-strong);
+border-radius: 3px;
+padding: 2px 5px;
+min-width: 92px;
+}
+.kotw-work button {
+background: none;
+border: none;
+font-family: inherit;
+letter-spacing: 1px;
+text-transform: uppercase;
+font-size: calc(10px * var(--ts, 1));
+color: var(--gold);
+cursor: pointer;
+padding: 3px 6px;
+}
+.kotw-work input:focus-visible, .kotw-work button:focus-visible {
+outline: 2px solid var(--gold); outline-offset: 1px;
+}
 .year-pill-btn.year-pill-active {
 background: var(--gold);
 color: var(--bg-card);
@@ -20580,6 +20624,73 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     {he:'כֶּתֶר / דַּעַת',en:'Keter / Da’at',c:'#e3c25f'}
   ].map(function(m,i){m.h1=MOCHIN_OPEN+i*STEP;m.h2=MOCHIN_OPEN+(i+1)*STEP;return m;});
 
+  /* ── THE THIRD FACE: the day's own shape ──
+     The other two lay the year inside the day. This one draws the day itself
+     — where the sleep falls, where the band stands, where the midday sleep
+     sits — and then reads each stretch back against the year, because the
+     boundaries are the same forty-nine either way. A week of the year is a
+     sub-sefirah of an hour; they are one unit, so every point below is named
+     twice.
+
+     Nothing here is set by hand except the working hours, which no structure
+     can know. The rest is read off the band:
+
+       the band          weeks 50-52   Elul, and Selichot at Chatzot
+       the vigil         weeks 1-4     Rosh Hashanah through Shmini Atzeret
+       night sleep       weeks 5-13    Cheshvan, waking in Chanukah's week
+       midday sleep      weeks 24-26   Purim to Rosh Chodesh Nisan
+       evening sleep     weeks 45/46   the Shratzim pair, from 10 Av
+
+     The season is not a setting either. A band that opens before midnight is
+     one a person stays up for, and the evening sleep then starts a week later
+     — week 46 rather than 45 — which is the same creature in Perek Shirah,
+     Creeping Creatures and then Prolific Creeping Creatures, one unit carried
+     across two weeks. So the shape steps by a week when the year turns, and
+     needs no toggle of its own. */
+  var DAY_C={sleep:'#39445f',nap:'#57648a',band:'#e3c25f',vigil:'#9c8348',day:'#6f6a52'};
+  function dayShape(map){
+    var U=SEVEN_END/49, openMin=map.hToMin(49*U);
+    var evening=openMin>=720;                  // the band opens in the evening
+    var bed=(evening?45:44)*U;                 // week 46 if stayed up for, else 45
+    var w=evening?46:45;
+    return [
+      {k:'band',en:'The Mochin Band',he:'מֹחִין',c:DAY_C.band,h1:49*U,h2:52*U-24,
+       wk:'weeks 50–52',yr:'Elul · Selichot at Chatzot',
+       what:'Tikkun Rachel, Tikkun Leah, Hitbodedut · the fifteen climbed'},
+      {k:'vigil',en:'The Vigil',he:'עֵרוּת',c:DAY_C.vigil,h1:52*U-24,h2:4*U,
+       wk:'weeks 1–4',yr:'Rosh Hashanah → Shmini Atzeret',
+       what:'Awake through the year’s Tishrei, inside Chesed’s hour'},
+      {k:'sleep',en:'Night Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:4*U,h2:12.5*U,
+       wk:'weeks 5–13',yr:'Cheshvan → Chanukah',
+       what:'Hod shebeChesed to the middle of Yesod shebeGevurah'},
+      {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:12.5*U,h2:23*U,
+       wk:'weeks 13–23',yr:'Chanukah → Adar',
+       what:'Shacharit at Tiferet · Tikkun HaKlali at Netzach'},
+      {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:23*U,h2:26*U,
+       wk:'weeks 24–26',yr:'Purim → Rosh Chodesh Nisan',
+       what:'Straddles Chatzot HaYom as the band straddles Chatzot HaLailah'},
+      {k:'day2',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:26*U,h2:bed,
+       wk:'weeks 27–'+w,yr:'Nisan → Av',
+       what:'Mincha at Hod · Maariv at Yesod · Kri’at Shema at Malchut'},
+      {k:'bed',en:'Evening Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:bed,h2:49*U,
+       wk:'weeks '+w+'–49',yr:(evening?'17 Av':'10 Av')+' → Elul',
+       what:evening?'From Netzach shebeMalchut — the band is stayed up for'
+                   :'From Tiferet shebeMalchut, as Tisha B’Av ends'}
+    ];
+  }
+  /* The one thing no structure can supply. Stored like the city and the text
+     size; empty until someone sets it, and no arc is drawn until then. */
+  function workHours(){
+    try{var s=localStorage.getItem('kotWork');if(!s)return null;
+      var p=s.split('-'),a=+p[0],b=+p[1];
+      if(!isFinite(a)||!isFinite(b)||a===b)return null;
+      return {from:((a%DAY)+DAY)%DAY,to:((b%DAY)+DAY)%DAY};}catch(e){return null;}
+  }
+  function setWorkHours(a,b){
+    try{ if(a==null)localStorage.removeItem('kotWork');
+         else localStorage.setItem('kotWork',a+'-'+b); }catch(e){}
+  }
+
   function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.floor(m%60);
     var ap=h<12?'AM':'PM';var hh=h%12;if(hh===0)hh=12;
     return hh+':'+('0'+mm).slice(-2)+' '+ap;}
@@ -20650,10 +20761,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
 
   var h=document.createElement('div');
-  var SUB={weeks:'52 weeks',sets:'17 alef-bet sets'};
+  var SUB={weeks:'52 weeks',sets:'17 alef-bet sets',day:'the day\u2019s own shape'};
   function faceSub(){
     var e=h.querySelector('.kotw-sub');
-    if(e) e.innerHTML='The Year as a Single Day \u00b7 '+SUB[FACE]+' '+
+    if(e) e.innerHTML=(FACE==='day'?'A Single Day, and the Year in it'
+                                   :'The Year as a Single Day')+' \u00b7 '+SUB[FACE]+' '+
       '<span class="cycle-info-btn" data-cycle="wheel" title="About this cycle">ⓘ</span>';
   }
   h.innerHTML='<div class="kotw-title">מַעֲלוֹת הַזְּמַן</div>'+
@@ -20727,6 +20839,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var segs=[],detail,curSel=null;
   function select(n){
     var map=timeMap();
+    if(FACE==='day'){
+      var DS=dayShape(map),s=DS[n-1];
+      if(!s)return;
+      var a=map.hToMin(s.h1),b=map.hToMin(s.h2);
+      var span=((b-a)%DAY+DAY)%DAY;
+      var nb=(n===curDaySeg())?'<span class="kotw-now-badge">Now</span>':'';
+      detail.innerHTML='<span class="kotw-heb">'+s.he+'</span>'+
+        '<span class="kotw-wk">'+s.en+nb+'</span>'+
+        '<div class="kotw-theme">“'+s.what+'”</div>'+
+        '<div class="kotw-meta">⏱ '+fmt(a)+' – '+fmt(b)+
+        ' · '+Math.floor(span/60)+'h'+('0'+Math.round(span%60)).slice(-2)+
+        '<br>📅 '+s.wk+' · '+s.yr+'</div>';
+      segs.forEach(function(o){o.el.setAttribute('stroke',o.n===n?'#f0e6c9':'#0d1122');});
+      curSel=n; return;
+    }
     if(FACE==='sets'){
       var ab=ALEF_BET[n-1],ah=abHours(n),dd=abDays(n),kd=AB_KIND[abKind(n)];
       var s1=map.hToMin(ah.h1),s2=map.hToMin(ah.h2);
@@ -20761,7 +20888,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       mk('path',{d:donut(120,165,map.hToMin(k*step),map.hToMin((k+1)*step)),
         fill:SEF[k].c,stroke:'#0d1122','stroke-width':2,opacity:.92},gDyn);
     }
-    if(FACE==='sets'){
+    if(FACE==='day'){
+      var DS=dayShape(map);
+      DS.forEach(function(s,i){
+        var el=mk('path',{d:donut(82,116,map.hToMin(s.h1),map.hToMin(s.h2)),
+          fill:s.c,stroke:'#0d1122','stroke-width':1.2,opacity:.9,'class':'kotw-seg'},gDyn);
+        el.addEventListener('click',function(){userSelected=true;select(i+1)});
+        segs.push({n:i+1,el:el});
+      });
+      /* Work rides outside the seven rather than inside them: it is the only
+         stretch here measured in ordinary clock hours, so it is drawn from
+         wall minutes straight and kept off the ring the day's own units own. */
+      var wkh=workHours();
+      if(wkh) mk('path',{d:donut(169,176,wkh.from,wkh.to),fill:'#b08968',
+        stroke:'#0d1122','stroke-width':1,opacity:.85},gDyn);
+    } else if(FACE==='sets'){
       for(var q=1;q<=17;q++){
         (function(q){
           var ah=abHours(q);
@@ -20801,14 +20942,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         // left open by 49 and 7 that no longer reach the seam
         mk('path',{d:donut(120,165,a,b),
           fill:mo.c,stroke:'#0d1122','stroke-width':2,opacity:over?.34:.92},gDyn);
-        var wk=(FACE==='sets')?mk('path',{d:'M0 0'},gDyn)
+        // The inner ring belongs to whichever cycle is laid inside the day,
+        // and neither the sets nor the day face wants the Mochin drawn there
+        // — the day face already carries the band as one of its own stretches.
+        var inner=(FACE==='sets'||FACE==='day');
+        var wk=inner?mk('path',{d:'M0 0'},gDyn)
           :mk('path',{d:donut(82,116,a,b),
             fill:mo.c,stroke:'#0d1122','stroke-width':1.2,opacity:over?.3:.6,
             'class':'kotw-seg'},gDyn);
+        // The class carries cursor:pointer, so it is only worn where the tap
+        // is actually wired. On the faces that do not register the Mochin it
+        // was showing a pointer over an arc that answered nothing.
         var el=mk('path',{d:donut(150,170,a,b),
           fill:mo.c,stroke:'#0d1122','stroke-width':1.5,opacity:over?.45:.97,
-          'class':'kotw-seg'},gDyn);
-        if(FACE!=='sets') [wk,el].forEach(function(x){
+          'class':inner?'':'kotw-seg'},gDyn);
+        if(!inner) [wk,el].forEach(function(x){
           x.addEventListener('click',function(){userSelected=true;select(50+i)});
           segs.push({n:50+i,el:x});
         });
@@ -20837,7 +20985,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var foot=document.createElement('div');
   foot.className='kotw-foot';
   function faceFoot(){
-    foot.innerHTML=(FACE==='sets'
+    foot.innerHTML=(FACE==='day'
+      ? 'Tap any stretch \u00b7 the shape follows the season on its own \u2014 the evening sleep steps back a week when the band opens before midnight'
+      : FACE==='sets'
       ? 'Tap any set \u00b7 eleven of paired letters, five of finals, one of vowels \u00b7 set 17 runs twelve days, not twenty-two'
       : 'Tap any step \u00b7 Weeks 50\u201352 hover above the Chatzot seam')+' · '+
       '<a href="https://www.kabbalahoftime.com/2013/06/the-entire-book-in-nutshell-table-i-of.html">From “The Kabbalah of Time”</a>';
@@ -20851,19 +21001,57 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   fr.style.cssText='text-align:center;margin:2px 0 4px;';
   fr.innerHTML='<div class="year-toggle-pill" style="margin-top:0;">'+
     '<button class="year-pill-btn year-pill-active" data-face="weeks">52 weeks</button>'+
-    '<button class="year-pill-btn" data-face="sets">17 sets</button></div>';
+    '<button class="year-pill-btn" data-face="sets">17 sets</button>'+
+    '<button class="year-pill-btn" data-face="day">the day</button></div>'+
+    '<div class="kotw-work" style="display:none;"></div>';
+  /* The working hours, offered only on the face that draws them. Two plain
+     time inputs and a way to clear them — the day face is complete without
+     them, so nothing here is required and nothing is drawn until it is set. */
+  function workRow(){
+    var e=fr.querySelector('.kotw-work'); if(!e)return;
+    e.style.display=(FACE==='day')?'':'none';
+    if(FACE!=='day')return;
+    var w=workHours();
+    var hhmm=function(m){return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+(m%60)).slice(-2);};
+    e.innerHTML='<label>Work <input type="time" class="kw-a" value="'+(w?hhmm(w.from):'')+'"></label>'+
+      '<label>to <input type="time" class="kw-b" value="'+(w?hhmm(w.to):'')+'"></label>'+
+      (w?'<button type="button" class="kw-x">clear</button>':'');
+  }
+  fr.addEventListener('change',function(e){
+    if(!e.target.classList.contains('kw-a')&&!e.target.classList.contains('kw-b'))return;
+    var a=fr.querySelector('.kw-a').value,b=fr.querySelector('.kw-b').value;
+    if(!a||!b)return;
+    var toMin=function(s){var p=s.split(':');return (+p[0])*60+(+p[1]);};
+    setWorkHours(toMin(a),toMin(b)); workRow(); tick();
+  });
   fr.addEventListener('click',function(e){
+    if(e.target.classList&&e.target.classList.contains('kw-x')){
+      setWorkHours(null); workRow(); tick(); return;
+    }
     var b=e.target.closest&&e.target.closest('[data-face]');
     if(!b)return;
     FACE=b.dataset.face;
     fr.querySelectorAll('[data-face]').forEach(function(x){
       x.className='year-pill-btn'+(x.dataset.face===FACE?' year-pill-active':'');});
-    faceFoot(); faceSub(); userSelected=false; curSel=null; tick();
+    faceFoot(); faceSub(); workRow(); userSelected=false; curSel=null; tick();
   });
+  workRow();
   root.insertBefore(fr,foot);
 
   function curWeek(){
     return Math.min(49,Math.max(1,Math.floor(timeMap().nowH()/(SEVEN_END/49))+1));
+  }
+  /* Which stretch of the day "now" falls in. Compared in minutes rather than
+     hours because the band's tail is past 24 and the vigil's head is before
+     one — on the circle they are neighbours, and only the clock says so. */
+  function curDaySeg(){
+    var map=timeMap(),DS=dayShape(map),now=map.nowMin();
+    for(var i=0;i<DS.length;i++){
+      var a=map.hToMin(DS[i].h1),b=map.hToMin(DS[i].h2);
+      var span=((b-a)%DAY+DAY)%DAY, off=((now-a)%DAY+DAY)%DAY;
+      if(off<span)return i+1;
+    }
+    return 1;
   }
   var lastSig=null;
   // Whether the visitor has pinned a specific week/day by tapping a segment.
@@ -20873,17 +21061,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var userSelected=false;
   function tick(){
     var map=timeMap();
-    var sig=FACE+'|'+(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
+    var _wk=workHours();
+    var sig=FACE+'|'+(_wk?_wk.from+'-'+_wk.to:'')+'|'+
+      (map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
     drawZmanim();
-    var m=map.nowMin(),n=(FACE==='sets')?curSet()
+    var m=map.nowMin(),n=(FACE==='day')?curDaySeg():(FACE==='sets')?curSet()
       :Math.min(49,Math.max(1,Math.floor(map.nowH()/(SEVEN_END/49))+1));
     hand.setAttribute('transform','rotate('+(m/DAY*360)+' '+CX+' '+CY+')');
     cT.textContent=fmt(m);
-    cW.textContent=(FACE==='sets')
-      ? 'Set '+n+' of the inner year' : 'Week '+n+' of the inner year';
-    cS.textContent=(FACE==='sets')?ALEF_BET[n-1].hebrew:combo(n).he;
+    var dseg=(FACE==='day')?dayShape(map)[n-1]:null;
+    cW.textContent=(FACE==='day')?dseg.en
+      :(FACE==='sets')?'Set '+n+' of the inner year':'Week '+n+' of the inner year';
+    cS.textContent=(FACE==='day')?dseg.he
+      :(FACE==='sets')?ALEF_BET[n-1].hebrew:combo(n).he;
     if(!userSelected&&n!==curSel)select(n);
     // The Today block names the hour, so it is re-read here rather than on a
     // timer of its own: this runs after kotwHours exists, which a timer started
