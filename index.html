@@ -13365,9 +13365,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   //
   // What the two shapes ask for is not the same practice at a different hour.
   // Where the band opens before midnight it can be kept in one sitting. Where
-  // it opens after, keeping it whole would cost the night — so it is kept the
-  // older way, sleeping first and rising for it, which is what rising at
-  // Chatzot has always meant.
+  // it opens after, keeping it whole would cost the night — so it is slept
+  // before as well as after, and risen for.
+  //
+  // That last had read "kept the older way", which asserted a history without
+  // giving any of it. What it was pointing at is that the verse says אָקוּם,
+  // I rise, which is a word for one who has been lying down (Tehilim 119:62),
+  // and that Berachot 3b hangs David's harp above his bed and has the north
+  // wind sound it at midnight to wake him. So the two sources are named and
+  // the phrase is gone.
   //
   // Each hour carries its prayer, and the hours given to sleep are dimmed, so
   // the table reads in three states: gold is the band, dim is the sleep, and
@@ -13495,10 +13501,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       'Keter’s three at the end — and then one unbroken night, Chesed and Gevurah slept through to ' +
       'Shacharit at Tiferet.';
     const RISE = 'The band opens after midnight, and staying up for it would cost the whole night. So ' +
-      'it is kept the older way, in two sleeps: Kri’at Shema said at Malchut and slept on, up for the ' +
-      'band, then Chesed and Gevurah slept through to Shacharit. That is what rising at Chatzot has ' +
-      'always meant — the vigil that runs straight through belongs to the long nights, not the short ' +
-      'ones. Two pieces of a night can come to more rest than one, not less.';
+      'it is kept in two sleeps: Kri’at Shema said at Malchut and slept on, up for the band, then ' +
+      'Chesed and Gevurah slept through to Shacharit. Rising is what the verse itself describes — ' +
+      '<bdi lang="he" style="font-family:\'Frank Ruhl Libre\',serif;">חֲצוֹת לַיְלָה אָקוּם</bdi>, at ' +
+      'midnight I rise (Tehilim 119:62), and <em style="font-style:normal;color:var(--ink)">אָקוּם</em> ' +
+      'is said by one who has been lying down. The Gemara hangs David’s harp above his bed, where the ' +
+      'north wind sounded it at midnight and woke him to his Torah (Berachot 3b) — the vigil that runs ' +
+      'straight through belongs to the long nights, not the short ones. Two pieces of a night can come ' +
+      'to more rest than one, not less.';
 
     const shapes = two
       ? head('☾ Winter — stay up for it') + p(STAY) +
