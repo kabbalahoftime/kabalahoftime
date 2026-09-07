@@ -546,51 +546,6 @@ font-size: calc(10.5px * var(--ts, 1));
 transition: all 0.15s;
 }
 
-/* The working hours, under the face toggle and only on the day face. Kept to
-   the toggle's own register — small, centred, and quiet, since it is a setting
-   rather than part of the reading. The inputs stay wide enough for a time in
-   either 12- or 24-hour form, which is the browser's choice and not ours. */
-.kotw-work {
-display: flex;
-justify-content: center;
-align-items: center;
-flex-wrap: wrap;
-gap: 4px 12px;
-margin: 7px 0 2px;
-font-family: 'Cinzel', serif;
-letter-spacing: 1px;
-font-size: calc(10px * var(--ts, 1));
-/* On the dial's navy, not the page's parchment — so the dial's own ink,
-   for the same reason the toggle above it takes it. */
-color: rgba(240,230,201,.6);
-text-transform: uppercase;
-}
-.kotw-work label { display: flex; align-items: center; gap: 6px; }
-.kotw-work input[type="time"] {
-font-family: inherit;
-font-size: calc(11px * var(--ts, 1));
-letter-spacing: 0;
-color: #10162c;
-background: #f0e6c9;
-border: 1px solid rgba(212,175,55,.55);
-border-radius: 3px;
-padding: 3px 6px;
-min-width: 92px;
-}
-.kotw-work button {
-background: none;
-border: none;
-font-family: inherit;
-letter-spacing: 1px;
-text-transform: uppercase;
-font-size: calc(10px * var(--ts, 1));
-color: #d4af37;
-cursor: pointer;
-padding: 3px 6px;
-}
-.kotw-work input:focus-visible, .kotw-work button:focus-visible {
-outline: 2px solid #d4af37; outline-offset: 2px;
-}
 .year-pill-btn.year-pill-active {
 background: var(--gold);
 color: var(--bg-card);
@@ -20665,8 +20620,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      the night is three watches (Berachot 3a) — and it is the word a yeshiva
      still uses for a night given to learning.
 
-     Nothing here is set by hand except the working hours, which no structure
-     can know. The rest is read off the band:
+     Nothing here is set by hand. Every boundary is read off the band:
 
        the band          weeks 50-52   Elul, and Selichot at Chatzot
        the mishmar       weeks 1-4     Rosh Hashanah through Shmini Atzeret
@@ -20710,18 +20664,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        what:evening?'From Netzach shebeMalchut — the band is stayed up for'
                    :'From Tiferet shebeMalchut, as Tisha B’Av ends'}
     ];
-  }
-  /* The one thing no structure can supply. Stored like the city and the text
-     size; empty until someone sets it, and no arc is drawn until then. */
-  function workHours(){
-    try{var s=localStorage.getItem('kotWork');if(!s)return null;
-      var p=s.split('-'),a=+p[0],b=+p[1];
-      if(!isFinite(a)||!isFinite(b)||a===b)return null;
-      return {from:((a%DAY)+DAY)%DAY,to:((b%DAY)+DAY)%DAY};}catch(e){return null;}
-  }
-  function setWorkHours(a,b){
-    try{ if(a==null)localStorage.removeItem('kotWork');
-         else localStorage.setItem('kotWork',a+'-'+b); }catch(e){}
   }
 
   function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.floor(m%60);
@@ -20929,12 +20871,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         el.addEventListener('click',function(){userSelected=true;select(i+1)});
         segs.push({n:i+1,el:el});
       });
-      /* Work rides outside the seven rather than inside them: it is the only
-         stretch here measured in ordinary clock hours, so it is drawn from
-         wall minutes straight and kept off the ring the day's own units own. */
-      var wkh=workHours();
-      if(wkh) mk('path',{d:donut(169,176,wkh.from,wkh.to),fill:'#b08968',
-        stroke:'#0d1122','stroke-width':1,opacity:.85},gDyn);
     } else if(FACE==='sets'){
       for(var q=1;q<=17;q++){
         (function(q){
@@ -21035,40 +20971,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   fr.innerHTML='<div class="year-toggle-pill" style="margin-top:0;">'+
     '<button class="year-pill-btn year-pill-active" data-face="weeks">52 weeks</button>'+
     '<button class="year-pill-btn" data-face="sets">17 sets</button>'+
-    '<button class="year-pill-btn" data-face="day">the day</button></div>'+
-    '<div class="kotw-work" style="display:none;"></div>';
-  /* The working hours, offered only on the face that draws them. Two plain
-     time inputs and a way to clear them — the day face is complete without
-     them, so nothing here is required and nothing is drawn until it is set. */
-  function workRow(){
-    var e=fr.querySelector('.kotw-work'); if(!e)return;
-    e.style.display=(FACE==='day')?'':'none';
-    if(FACE!=='day')return;
-    var w=workHours();
-    var hhmm=function(m){return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+(m%60)).slice(-2);};
-    e.innerHTML='<label>Work <input type="time" class="kw-a" value="'+(w?hhmm(w.from):'')+'"></label>'+
-      '<label>to <input type="time" class="kw-b" value="'+(w?hhmm(w.to):'')+'"></label>'+
-      (w?'<button type="button" class="kw-x">clear</button>':'');
-  }
-  fr.addEventListener('change',function(e){
-    if(!e.target.classList.contains('kw-a')&&!e.target.classList.contains('kw-b'))return;
-    var a=fr.querySelector('.kw-a').value,b=fr.querySelector('.kw-b').value;
-    if(!a||!b)return;
-    var toMin=function(s){var p=s.split(':');return (+p[0])*60+(+p[1]);};
-    setWorkHours(toMin(a),toMin(b)); workRow(); tick();
-  });
+    '<button class="year-pill-btn" data-face="day">the day</button></div>';
   fr.addEventListener('click',function(e){
-    if(e.target.classList&&e.target.classList.contains('kw-x')){
-      setWorkHours(null); workRow(); tick(); return;
-    }
     var b=e.target.closest&&e.target.closest('[data-face]');
     if(!b)return;
     FACE=b.dataset.face;
     fr.querySelectorAll('[data-face]').forEach(function(x){
       x.className='year-pill-btn'+(x.dataset.face===FACE?' year-pill-active':'');});
-    faceFoot(); faceSub(); workRow(); userSelected=false; curSel=null; tick();
+    faceFoot(); faceSub(); userSelected=false; curSel=null; tick();
   });
-  workRow();
   root.insertBefore(fr,foot);
 
   function curWeek(){
@@ -21094,9 +21005,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var userSelected=false;
   function tick(){
     var map=timeMap();
-    var _wk=workHours();
-    var sig=FACE+'|'+(_wk?_wk.from+'-'+_wk.to:'')+'|'+
-      (map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
+    var sig=FACE+'|'+(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
     drawZmanim();
