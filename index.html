@@ -9975,11 +9975,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     el.style.display = '';
   }
 
-  // Parasha → Sefaria Zohar section. The folio cycle's own table is the
-  // authority — every daily link is resolved through it — so it is asked
-  // first, and ZOHAR_PARASHA_SECTIONS covers a few the printed volumes fold
-  // into a neighbour. A double parasha is asked for each half. Some weeks
-  // have no section at all: the Zohar does not comment on every parasha.
+  // Parasha → Sefaria Zohar section. ZOHAR_DAF_SECTIONS is asked first for
+  // its label→slug pairs, and ZOHAR_PARASHA_SECTIONS covers a few the printed
+  // volumes fold into a neighbour. A double parasha is asked for each half.
+  // Some weeks have no section at all: the Zohar does not comment on every
+  // parasha.
+  //
+  // These are section links, not addresses into one — a name Sefaria knows,
+  // and nothing after it. That is the whole of what is left pointing into the
+  // Zohar, and all fifty-four slugs were checked against the section titles in
+  // its schema.
   let _zoharSectionByParasha = null;
   function zoharSectionForParashaName(name) {
     if (!name) return null;
@@ -9994,7 +9999,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Sefaria and the printed volumes spell a handful differently
     const alt = { "Vayeira": 'Vayera', "Chayei Sarah": 'Chayei_Sara', "Toledot": 'Toldot',
                   "Ki Tissa": 'Ki_Tisa', "Behaalotecha": "Beha'alotcha", "Shlach": "Sh'lach",
-                  "Haazinu": "Ha'azinu", "Vayelech": 'Vayeilech' };
+                  // Ha'Azinu, not Ha'azinu — Sefaria capitalises the second
+                  // half of the name, and this is the only slug in the table
+                  // that did not match a section title exactly.
+                  "Haazinu": "Ha'Azinu", "Vayelech": 'Vayeilech' };
     return alt[name] || null;
   }
   // One link per half of a double parasha, each to its own section; a half with
