@@ -13334,35 +13334,63 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     dayshape: () => _dayShapeInfo()
   };
 
-  // ── WINTER AND SUMMER — the day's two shapes ──────────────────────────────
-  // The band's hour through the year does not drift so much as it jumps. Where
-  // a place keeps daylight saving the whole reckoning moves an hour on two
-  // nights, and inside each half of the year the opening wanders by less than
-  // half of that — so a year holds two schedules and not four. Which is also
-  // why the two are read off the solstices here: they are the year's own
-  // extremes and belong to no country's rules, and whatever a place does with
-  // its clocks is already inside the answer.
+  // ── WINTER AND SUMMER — the day through the year ──────────────────────────
+  // Read at the two solstices, which are the year's own extremes and belong to
+  // no country's clock rules: whatever a place does with its clocks is already
+  // inside the answer.
+  //
+  // Three things about this were written for one city and are false in others,
+  // so none of them is asserted here any more.
+  //
+  // Which solstice is winter is not the month. Six of the cities in the list
+  // are south of the equator, where December is high summer — and it is not
+  // only the label that turns over. Buenos Aires opens the band at 12:14 AM in
+  // December, which is the shape that wants sleeping first, and would have sat
+  // under a heading telling the reader to stay up. So the two are told apart
+  // by the length of their own day: the shorter day is winter, wherever in the
+  // world it falls.
+  //
+  // Nor does every place have two shapes. Where the clocks are not turned back
+  // and forth and the nights change their length by little, the band never
+  // crosses midnight: Hong Kong opens it at 11:28 PM and 11:43 PM, a quarter
+  // of an hour apart. Five cities are like this, and for them the honest thing
+  // is one schedule rather than a difference that is not there.
+  //
+  // And the mornings do not always hold still while the evenings swing. That
+  // is daylight saving doing it — the clock moving against the sun cancels the
+  // drift in the morning and doubles it at night. Without it the sun rules and
+  // the morning moves most: in Moscow, Tiferet swings 280 minutes against
+  // Malchut's 244. So the text says only that everything moves, which is true
+  // everywhere, and lets the table say by how much.
   //
   // What the two shapes ask for is not the same practice at a different hour.
-  // In winter the band opens before midnight and can be kept in one sitting.
-  // In summer it opens after, and keeping it whole would cost the night — so
-  // it is kept the older way, sleeping first and rising for it, which is what
-  // rising at Chatzot has always meant.
+  // Where the band opens before midnight it can be kept in one sitting. Where
+  // it opens after, keeping it whole would cost the night — so it is kept the
+  // older way, sleeping first and rising for it, which is what rising at
+  // Chatzot has always meant.
   const _DS_SEVEN = ['Chesed', 'Gevurah', 'Tiferet', 'Netzach', 'Hod', 'Yesod', 'Malchut'];
 
   function _dayShapeInfo() {
     const city = (typeof ZMAN_CITIES !== 'undefined' && typeof zmanCityIdx !== 'undefined')
       ? ZMAN_CITIES[zmanCityIdx] : null;
-    const title = 'Winter & Summer — the day’s two shapes';
-    if (!city) return { title: title, main: '', meta: '' };
+    const title = 'Winter & Summer — the day through the year';
+    const nothing = m => ({ title: title,
+      main: '<p style="font-size:0.88rem;line-height:1.62;color:var(--ink-mid);margin:0;">' + m + '</p>',
+      meta: '' });
+    if (!city) return nothing('Choose a city in the clock above and this will read the year in its own hours.');
     // Noon UTC rather than local noon: it lands inside the same calendar day
     // in every timezone the city list holds, so neither solstice can be read
     // off the day before or after by an accident of where the reader is.
     const y = new Date().getFullYear();
-    const win = zmaniyotBoundaries(city, new Date(Date.UTC(y, 11, 21, 12)));
-    const sum = zmaniyotBoundaries(city, new Date(Date.UTC(y, 5, 21, 12)));
+    const dec = zmaniyotBoundaries(city, new Date(Date.UTC(y, 11, 21, 12)));
+    const jun = zmaniyotBoundaries(city, new Date(Date.UTC(y, 5, 21, 12)));
     const nowB = zmaniyotBoundaries(city);
-    if (!win || !sum) return { title: title, main: '', meta: '' };
+    if (!dec || !jun) return nothing('At this latitude the sun does not rise or set on one of the solstices, so the hours cannot be measured against it there.');
+    // The shorter day is winter, which is the same thing in both hemispheres
+    // and needs no list of which cities are south.
+    const decShorter = (dec.sunset - dec.sunrise) <= (jun.sunset - jun.sunrise);
+    const win = decShorter ? dec : jun;
+    const sum = decShorter ? jun : dec;
 
     const part = (d, k) => {
       try {
@@ -13396,38 +13424,58 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     table += row('<em style="font-style:normal;color:var(--ink-dim);">the band closes</em>',
                  win.mochin[3], sum.mochin[3], false);
 
-    // Which shape is in force tonight is the same figure the table shows,
-    // asked of today: a band that opens before midnight is the winter one.
+    // A band that opens before midnight can be kept in one sitting; one that
+    // opens after cannot. That is what divides the two practices, so it is
+    // what is asked of each solstice — and where both answer the same way,
+    // this city has one shape and not two.
+    const evening = d => {
+      const h = +part(d, 'hour');
+      return part(d, 'dayPeriod').toLowerCase()[0] === 'p' && h !== 12;
+    };
+    const winEve = evening(win.mochin[0]), sumEve = evening(sum.mochin[0]);
+    const two = winEve !== sumEve;
+
     // Fixed Hours has no shape to be in — the band stands at the same two
     // times all year — so it says that instead rather than quoting a zmaniyot
     // band the clock is not keeping.
     const fixed = (typeof zmanMode !== 'undefined' && zmanMode !== 'zmaniyot');
+    const box = s => '<div style="margin-top:14px;padding:8px 11px;border-left:2px solid var(--gold);' +
+      'background:var(--bg-card);font-size:0.85rem;color:var(--ink);">' + s + '</div>';
+    const g = s => '<strong style="color:var(--gold)">' + s + '</strong>';
     let standing = '';
     if (fixed) {
-      standing = '<div style="margin-top:14px;padding:8px 11px;border-left:2px solid var(--gold);' +
-        'background:var(--bg-card);font-size:0.85rem;color:var(--ink);">The clock is on Fixed Hours, ' +
-        'where the band opens at <strong style="color:var(--gold)">12:54 AM</strong> and closes at ' +
-        '<strong style="color:var(--gold)">2:19 AM</strong> — tonight and every night. Below are the ' +
-        'hours this city’s own sun would give.</div>';
+      standing = box('The clock is on Fixed Hours, where the band opens at ' + g('12:54 AM') +
+        ' and closes at ' + g('2:19 AM') + ' — tonight and every night. Below are the hours this city’s own sun would give.');
     } else if (nowB && nowB.mochin) {
-      const h = +part(nowB.mochin[0], 'hour'), pm = part(nowB.mochin[0], 'dayPeriod').toLowerCase()[0] === 'p';
-      const isWinter = pm && h !== 12;
-      standing = '<div style="margin-top:14px;padding:8px 11px;border-left:2px solid var(--gold);' +
-        'background:var(--bg-card);font-size:0.85rem;color:var(--ink);">Tonight the band opens at <strong style="color:var(--gold)">' +
-        t(nowB.mochin[0]) + '</strong> and closes at <strong style="color:var(--gold)">' + t(nowB.mochin[3]) +
-        '</strong> — the ' + (isWinter ? 'winter' : 'summer') + ' shape.</div>';
+      standing = box('Tonight the band opens at ' + g(t(nowB.mochin[0])) + ' and closes at ' +
+        g(t(nowB.mochin[3])) + (two ? ' — the ' + (evening(nowB.mochin[0]) ? 'winter' : 'summer') + ' shape.' : '.'));
     }
 
     const p = s => '<p style="font-size:0.88rem;line-height:1.62;color:var(--ink-mid);margin:0 0 11px;">' + s + '</p>';
+    const head = s => '<div style="font-family:\'Cinzel\',serif;font-size:0.74rem;letter-spacing:2px;' +
+      'text-transform:uppercase;color:var(--gold);margin-bottom:6px;">' + s + '</div>';
+    const STAY = 'The band opens before midnight and closes in the small hours, so it can be kept in ' +
+      'one sitting. Maariv and Kri’at Shema in the evening, the fifteen climbed as the band opens, ' +
+      'Keter’s three at the end — and then the night.';
+    const RISE = 'The band opens after midnight, and staying up for it would cost the whole night. So ' +
+      'it is kept the older way: sleep from Malchut’s own hours, rise for the band, and sleep again ' +
+      'after. That is what rising at Chatzot has always meant — the vigil that runs straight through ' +
+      'belongs to the long nights, not the short ones.';
+
+    const shapes = two
+      ? head('☾ Winter — stay up for it') + p(STAY) +
+        head('☀ Summer — sleep first, and rise for it') + p(RISE)
+      : head(winEve ? 'One shape — stay up for it' : 'One shape — sleep first, and rise for it') +
+        p('Here the band stands on the same side of midnight at both ends of the year, so there is one ' +
+          'practice and not two — the hours move, but never far enough to change what they ask for.') +
+        p(winEve ? STAY : RISE);
+
     const main =
-      p('Each row is the hour that begins there. The mornings barely move across the year; the evenings swing by two hours and more, and the band moves with them — which is why there are two schedules and not one.') +
-      table + standing +
-      '<div style="height:14px"></div>' +
-      '<div style="font-family:\'Cinzel\',serif;font-size:0.74rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">☾ Winter — stay up for it</div>' +
-      p('The band opens before midnight and closes in the small hours, so it can be kept in one sitting. Maariv and Kri’at Shema in the evening, the fifteen climbed as the band opens, Keter’s three at the end — and then the night.') +
-      '<div style="font-family:\'Cinzel\',serif;font-size:0.74rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">☀ Summer — sleep first, and rise for it</div>' +
-      p('The band opens after midnight and closes near two, and staying up for it would cost the whole night. So it is kept the older way: sleep from Malchut’s own hours, rise for the band, and sleep again after. That is what rising at Chatzot has always meant — the vigil that runs straight through belongs to the long nights, not the short ones.') +
-      p('On any night that neither shape survives, Keter’s three are the part that cannot be moved. The climb itself can be taken earlier, in Malchut, and still be in order.');
+      p('Each row is the hour that begins there, at the two ends of the year. Everything moves between ' +
+        'them — some hours by minutes, some by hours — and the band moves with the rest.') +
+      table + standing + '<div style="height:14px"></div>' + shapes +
+      p('On any night that the shape does not survive, Keter’s three are the part that cannot be moved. ' +
+        'The climb itself can be taken earlier, in Malchut, and still be in order.');
 
     return { title: title, main: main,
       meta: city.name + ' · Sha’ot Zmaniyot · read at the two solstices' };
