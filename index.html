@@ -20712,9 +20712,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          two words.
 
          Only the Av half was placed for this. The Adar half was placed to make
-         each gathering run up to a rest, and arrived there on its own. */
+         each gathering run up to a rest, and arrived there on its own.
+
+         And both close on a ninth, which is a day of breaking on either side.
+         Orach Chayim 580:2 lists the days it is fitting to fast and ends with
+         two: בז' באדר מת משה רבינו ע"ה, בט' בו נחלקו בית שמאי ובית הלל — on
+         the 7th of Adar Moshe died, on the 9th of it Beit Shammai and Beit
+         Hillel divided. Week 23 runs 3-9 Adar and so holds both, the last two
+         clauses of that siman. The other ninth is Tisha B'Av, when the House
+         itself was divided from us.
+
+         So the fifteen are gathered up to the day the thing broke, and then
+         one rests. But the Adar ninth carries its own repair: on 9 Adar II
+         5700 — 19 March 1940, checked — the Rebbe Rayatz reached America out
+         of Warsaw, and Torah was replanted where it had been said it could
+         not grow. The day of machloket is also the day of a beginning. The
+         ninth of Av is still owed its own. */
       {k:'maalot',en:'Catching up the Ma’alot',he:'מַעֲלוֹת',c:DAY_C.catch,h1:21*U,h2:23*U,
        wk:'weeks 22–23',yr:'the turn into Adar → 9 Adar · מַרְבִּין בְּשִׂמְחָה',
+       note:'9 Adar — the day Beit Shammai and Beit Hillel divided (Orach Chayim 580:2), and the day the Rebbe Rayatz reached America, 5700',
        what:'The two arms open Netzach, whose prayer is the Tikkun HaKlali — the remedy that stands for all'},
       {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:23*U,h2:26*U,
        wk:'weeks 24–26',yr:'Purim → Rosh Chodesh Nisan',
@@ -20724,6 +20740,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        what:'Mincha at Hod · Maariv at Yesod'},
       {k:'miutim',en:'Catching up the Mi’utim',he:'מִיעוּטִים',c:DAY_C.catch,h1:42*U,h2:44*U,
        wk:'weeks 43–44',yr:'the turn into Av → 9 Av · מְמַעֲטִין בְּשִׂמְחָה',
+       note:'9 Av — the day the House was destroyed, whose tikkun is still owed',
        what:'The two arms open Malchut, whose prayer is the Shema upon the bed — the day accounted for'},
       {k:'day2b',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:44*U,h2:bed,
        wk:evening?'week 45':'—',yr:evening?'10–16 Av':'',
@@ -20900,7 +20917,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         '<div class="kotw-theme">“'+s.what+'”</div>'+
         '<div class="kotw-meta">⏱ '+fmt(a)+' – '+fmt(b)+
         ' · '+Math.floor(span/60)+'h'+('0'+Math.round(span%60)).slice(-2)+
-        '<br>📅 '+s.wk+' · '+s.yr+'</div>';
+        '<br>📅 '+s.wk+' · '+s.yr+
+        (s.note?'<br>✦ '+s.note:'')+'</div>';
       segs.forEach(function(o){o.el.setAttribute('stroke',o.n===n?'#f0e6c9':'#0d1122');});
       curSel=n; return;
     }
