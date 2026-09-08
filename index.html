@@ -1860,6 +1860,24 @@ transition: transform 0.3s;
 }
 #kotw-root .ka-row input:focus-visible { outline: 2px solid #d4af37; outline-offset: 1px; }
 #kotw-root .ka-gap { display: block; }
+/* Group headings inside the panel. Sixteen rows in one list is a wall; three
+   short headings make it a thing you can look down. */
+#kotw-root .ka-grp {
+  font-family: 'Cinzel', serif; letter-spacing: 1.6px; text-transform: uppercase;
+  font-size: calc(9px * var(--ts, 1)); color: rgba(212,175,55,.75);
+  margin: 9px 0 1px; padding-bottom: 3px;
+  border-bottom: 1px solid rgba(212,175,55,.22);
+}
+#kotw-root .ka-grp:first-child { margin-top: 0; }
+/* A prayer draws as a tick on the dial, so its swatch is a tick too. */
+#kotw-root .ka-row i.tick { width: 3px; height: 12px; border-radius: 1px; margin-left: 3px; }
+#kotw-root .ka-row input.ka-name {
+  font-family: 'Cinzel', serif; font-size: calc(10px * var(--ts, 1));
+  letter-spacing: .5px; color: #10162c; background: #f0e6c9;
+  border: 1px solid rgba(212,175,55,.5); border-radius: 3px;
+  padding: 3px 5px; width: 100%; min-width: 0; min-height: 26px;
+}
+#kotw-root .ka-row input.ka-name::placeholder { color: #6b6250; font-style: italic; }
 #kotw-root .ka-clear {
   justify-self: center; margin-top: 5px; background: none; border: none;
   font-family: 'Cinzel', serif; letter-spacing: 1px; text-transform: uppercase;
@@ -20625,15 +20643,46 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      a small space, and these five cover the day a person actually keeps. The
      three meals carry a start alone and draw as marks, because a band running
      from breakfast to dinner covers most of the day and says nothing. */
+  /* Three kinds share the one ring, told apart by shape rather than radius —
+     177 is where the hour labels sit and 188 the ticks, so there is nowhere
+     to put a fourth band. A stretch draws as an arc, a meal as a dot, and a
+     prayer as a radial tick that crosses the ring, which reads plainly even
+     when it falls inside a stretch — and a prayer said during work is a thing
+     worth being able to see. */
+  var PRAY_C='#cf6f5e';
   var DAY_ACTS=[
-    {k:'work',    en:'Work',      span:true,  c:'#b08968'},
-    {k:'exercise',en:'Exercise',  span:true,  c:'#7fa07a'},
-    {k:'study',   en:'Study',     span:true,  c:'#8f7fb0'},
-    {k:'family',  en:'Family',    span:true,  c:'#c48a9a'},
-    {k:'breakfast',en:'Breakfast',span:false, c:'#d9a441'},
-    {k:'lunch',   en:'Lunch',     span:false, c:'#d9a441'},
-    {k:'dinner',  en:'Dinner',    span:false, c:'#d9a441'}
+    {g:'act', k:'work',     en:'Work',      span:true,  c:'#b08968'},
+    {g:'act', k:'exercise', en:'Exercise',  span:true,  c:'#7fa07a'},
+    {g:'act', k:'study',    en:'Study',     span:true,  c:'#8f7fb0'},
+    {g:'act', k:'family',   en:'Family',    span:true,  c:'#c48a9a'},
+    {g:'act', k:'breakfast',en:'Breakfast', span:false, c:'#d9a441'},
+    {g:'act', k:'lunch',    en:'Lunch',     span:false, c:'#d9a441'},
+    {g:'act', k:'dinner',   en:'Dinner',    span:false, c:'#d9a441'},
+    /* The day face already says which hour each prayer belongs to. These are
+       for the hour it is actually said in, so the two can be seen against
+       each other — whether the Shacharit of a given morning fell inside
+       Tiferet, and by how much it did not. */
+    {g:'pray',k:'shacharit',en:'Shacharit', span:false, c:PRAY_C, tick:true},
+    {g:'pray',k:'klali',    en:'Tikkun HaKlali',span:false,c:PRAY_C,tick:true},
+    {g:'pray',k:'mincha',   en:'Mincha',    span:false, c:PRAY_C, tick:true},
+    {g:'pray',k:'maariv',   en:'Maariv',    span:false, c:PRAY_C, tick:true},
+    {g:'pray',k:'shema',    en:'Kri’at Shema al haMitah',span:false,c:PRAY_C,tick:true},
+    {g:'pray',k:'chatzot',  en:'Tikkun Chatzot',span:false,c:PRAY_C,tick:true}
   ];
+  /* Named by the reader, for whatever the fixed list does not cover. Kept in
+     their own store so the entries above stay plain arrays and anything
+     already saved keeps working. One time draws a dot, two draw a stretch. */
+  var CUST_C=['#6fa8a0','#a8916f','#7f8fb0'];
+  var CUST_N=3;
+  function readCust(){
+    try{ var a=JSON.parse(localStorage.getItem('kotDayCustom')||'[]');
+         return Array.isArray(a)?a:[]; }catch(e){ return []; }
+  }
+  function writeCust(a){
+    try{ var keep=a.filter(function(x){return x&&(x.n||x.t&&(x.t[0]!=null||x.t[1]!=null));});
+         if(keep.length) localStorage.setItem('kotDayCustom',JSON.stringify(a));
+         else localStorage.removeItem('kotDayCustom'); }catch(e){}
+  }
   function readActs(){
     try{ var o=JSON.parse(localStorage.getItem('kotDayActs')||'{}');
          return (o&&typeof o==='object')?o:{}; }catch(e){ return {}; }
@@ -20646,7 +20695,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      and not otherwise — the same job the city and the face do in the tick. */
   function actsSig(){
     var a=readActs();
-    return DAY_ACTS.map(function(d){var v=a[d.k];return v?d.k+':'+v.join(','):'';}).join('|');
+    return DAY_ACTS.map(function(d){var v=a[d.k];return v?d.k+':'+v.join(','):'';}).join('|')
+      +'#'+readCust().map(function(x){return (x.n||'')+':'+((x.t||[]).join(','));}).join('|');
   }
 
   function dayShape(map){
@@ -20969,18 +21019,33 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          so they are drawn from those directly and kept off the ring the day's
          own units own. A meal is a mark, not a band. */
       var acts=readActs();
+      function drawSpan(a,b,col){
+        mk('path',{d:donut(169,176,a,b),fill:col,stroke:'#0d1122',
+          'stroke-width':1,opacity:.9},gDyn);
+      }
+      function drawDot(m,col){
+        var pt=pol(172.5,m);
+        mk('circle',{cx:pt[0],cy:pt[1],r:4.2,fill:col,stroke:'#0d1122','stroke-width':1},gDyn);
+      }
+      function drawTick(m,col){
+        var a=pol(166,m),b=pol(180,m);
+        mk('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:col,'stroke-width':2.4,
+          'stroke-linecap':'round'},gDyn);
+      }
       DAY_ACTS.forEach(function(d){
         var v=acts[d.k]; if(!v) return;
         if(d.span){
           if(v[0]==null||v[1]==null||v[0]===v[1]) return;
-          mk('path',{d:donut(169,176,v[0],v[1]),fill:d.c,stroke:'#0d1122',
-            'stroke-width':1,opacity:.9},gDyn);
+          drawSpan(v[0],v[1],d.c);
         } else {
           if(v[0]==null) return;
-          var pt=pol(172.5,v[0]);
-          mk('circle',{cx:pt[0],cy:pt[1],r:4.2,fill:d.c,stroke:'#0d1122',
-            'stroke-width':1},gDyn);
+          (d.tick?drawTick:drawDot)(v[0],d.c);
         }
+      });
+      readCust().forEach(function(x,i){
+        var t=x&&x.t; if(!t||t[0]==null) return;
+        var col=CUST_C[i%CUST_C.length];
+        if(t[1]!=null&&t[1]!==t[0]) drawSpan(t[0],t[1],col); else drawDot(t[0],col);
       });
     } else if(FACE==='sets'){
       for(var q=1;q<=17;q++){
@@ -21098,24 +21163,52 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if(FACE!=='day')return;
     var a=readActs();
     var n=DAY_ACTS.filter(function(d){var v=a[d.k];
-      return v && v[0]!=null && (!d.span || (v[1]!=null && v[1]!==v[0]));}).length;
+      return v && v[0]!=null && (!d.span || (v[1]!=null && v[1]!==v[0]));}).length
+      + readCust().filter(function(x){return x&&x.t&&x.t[0]!=null;}).length;
     wrap.querySelector('.ka-open').textContent=
       (actsOpen?'\u2715 done':(n?'your hours \u00b7 '+n+' set':'+ your hours'));
     var pan=wrap.querySelector('.ka-panel');
     pan.hidden=!actsOpen;
     if(!actsOpen){pan.innerHTML='';return;}
-    pan.innerHTML=DAY_ACTS.map(function(d){
+    var cu=readCust();
+    var row=function(d){
       var v=a[d.k]||[];
-      return '<label class="ka-row"><i style="background:'+d.c+'"></i>'+
+      return '<label class="ka-row"><i style="background:'+d.c+'"'+
+        (d.tick?' class="tick"':'')+'></i>'+
         '<span>'+d.en+'</span>'+
         '<input type="time" data-k="'+d.k+'" data-i="0" value="'+(v[0]!=null?hhmm(v[0]):'')+'">'+
         (d.span?'<input type="time" data-k="'+d.k+'" data-i="1" value="'+(v[1]!=null?hhmm(v[1]):'')+'">'
                :'<span class="ka-gap"></span>')+
         '</label>';
-    }).join('')+'<button type="button" class="ka-clear">clear all</button>';
+    };
+    var grp=function(t){return '<div class="ka-grp">'+t+'</div>';};
+    var custRow=function(i){
+      var x=cu[i]||{}, t=x.t||[];
+      return '<label class="ka-row"><i style="background:'+CUST_C[i%CUST_C.length]+'"></i>'+
+        '<input type="text" class="ka-name" data-c="'+i+'" maxlength="18" placeholder="name it" '+
+          'value="'+String(x.n||'').replace(/"/g,'&quot;')+'">'+
+        '<input type="time" data-c="'+i+'" data-i="0" value="'+(t[0]!=null?hhmm(t[0]):'')+'">'+
+        '<input type="time" data-c="'+i+'" data-i="1" value="'+(t[1]!=null?hhmm(t[1]):'')+'">'+
+        '</label>';
+    };
+    pan.innerHTML=
+      grp('Activities')+DAY_ACTS.filter(function(d){return d.g==='act';}).map(row).join('')+
+      grp('Prayers')+DAY_ACTS.filter(function(d){return d.g==='pray';}).map(row).join('')+
+      grp('Your own')+[0,1,2].slice(0,CUST_N).map(custRow).join('')+
+      '<button type="button" class="ka-clear">clear all</button>';
   }
   fr.addEventListener('change',function(e){
-    var t=e.target; if(!t.dataset||!t.dataset.k)return;
+    var t=e.target;
+    if(t.dataset&&t.dataset.c!==undefined){          // a slot the reader named
+      var i=+t.dataset.c, cu=readCust();
+      while(cu.length<=i) cu.push({n:'',t:[null,null]});
+      var x=cu[i]; x.t=x.t||[null,null];
+      if(t.classList.contains('ka-name')) x.n=t.value.trim();
+      else x.t[+t.dataset.i]=toMin(t.value);
+      if(!x.n && x.t[0]==null && x.t[1]==null) cu[i]={n:'',t:[null,null]};
+      writeCust(cu); actsRow(); tick(); return;
+    }
+    if(!t.dataset||!t.dataset.k)return;
     var a=readActs(), d=DAY_ACTS.filter(function(x){return x.k===t.dataset.k;})[0];
     var cur=a[d.k]||[null,null], m=toMin(t.value);
     cur[+t.dataset.i]=m;
@@ -21133,7 +21226,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       actsOpen=!actsOpen; actsRow(); return;
     }
     if(e.target.classList&&e.target.classList.contains('ka-clear')){
-      writeActs({}); actsRow(); tick(); return;
+      writeActs({}); writeCust([]); actsRow(); tick(); return;
     }
     var b=e.target.closest&&e.target.closest('[data-face]');
     if(!b)return;
