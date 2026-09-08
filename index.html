@@ -20613,7 +20613,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      Creeping Creatures and then Prolific Creeping Creatures, one unit carried
      across two weeks. So the shape steps by a week when the year turns, and
      needs no toggle of its own. */
-  var DAY_C={sleep:'#39445f',nap:'#57648a',band:'#e3c25f',mishmar:'#9c8348',day:'#6f6a52'};
+  var DAY_C={sleep:'#39445f',nap:'#57648a',band:'#e3c25f',mishmar:'#9c8348',day:'#6f6a52',
+             catch:'#a8935e'};
   /* The reader's own hours, laid over the day the structure gives.
      Everything else on this face is derived; these are not, and cannot be —
      no cycle knows when a person eats or works. So they are a layer rather
@@ -20663,20 +20664,38 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       {k:'sleep',en:'Night Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:4*U,h2:12.5*U,
        wk:'weeks 5–13',yr:'Cheshvan → Chanukah',
        what:'Hod shebeChesed to the middle of Yesod shebeGevurah'},
-      {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:12.5*U,h2:23*U,
-       wk:'weeks 13–23',yr:'Chanukah → Adar',
-       what:'Shacharit at Tiferet · Tikkun HaKlali at Netzach'},
+      {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:12.5*U,h2:19*U,
+       wk:'weeks 13–19',yr:'Chanukah → Shevat',
+       what:'Shacharit at Tiferet, and the day begins'},
+      {k:'maalot',en:'Catching up the Ma’alot',he:'מַעֲלוֹת',c:DAY_C.catch,h1:19*U,h2:20*U,
+       wk:'week 20',yr:'14–20 Shevat · Tu B’Shvat',
+       what:'The fifteen the band was for, taken again in the hour of Shacharit'},
+      {k:'day1b',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:20*U,h2:23*U,
+       wk:'weeks 21–23',yr:'Shevat → Adar',
+       what:'Tikkun HaKlali at Netzach'},
       {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:23*U,h2:26*U,
        wk:'weeks 24–26',yr:'Purim → Rosh Chodesh Nisan',
        what:'Straddles Chatzot HaYom as the band straddles Chatzot HaLailah'},
-      {k:'day2',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:26*U,h2:bed,
-       wk:'weeks 27–'+w,yr:'Nisan → Av',
-       what:'Mincha at Hod · Maariv at Yesod · Kri’at Shema at Malchut'},
+      {k:'day2',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:26*U,h2:42*U,
+       wk:'weeks 27–42',yr:'Nisan → Tammuz',
+       what:'Mincha at Hod · Maariv at Yesod'},
+      {k:'miutim',en:'Catching up the Mi’utim',he:'מִיעוּטִים',c:DAY_C.catch,h1:42*U,h2:44*U,
+       wk:'weeks 43–44',yr:'25 Tammuz → 9 Av · the diminishing',
+       what:'The fifteen of the day, gathered in the hour of Kri’at Shema'},
+      {k:'day2b',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:44*U,h2:bed,
+       wk:evening?'week 45':'—',yr:evening?'10–16 Av':'',
+       what:'Kri’at Shema at Malchut, and the last of the day'},
       {k:'bed',en:'Evening Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:bed,h2:49*U,
        wk:'weeks '+w+'–49',yr:(evening?'17 Av':'10 Av')+' → Elul',
        what:evening?'From Netzach shebeMalchut — the band is stayed up for'
                    :'From Tiferet shebeMalchut, as Tisha B’Av ends'}
-    ];
+    // In the shape that lies down a week earlier, the evening sleep begins
+    // exactly where the Mi'utim are caught up, leaving the stretch between
+    // them no width at all. A segment of no duration is still drawn and still
+    // answers a tap, so it is dropped rather than shown. Compared as a plain
+    // difference, which is safe here: the band's own ends straddle the seam
+    // and are far apart, never equal.
+    ].filter(function(x){ return Math.abs(x.h2-x.h1)>1e-9; });
   }
 
   function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.floor(m%60);
