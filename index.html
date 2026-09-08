@@ -1821,6 +1821,52 @@ transition: transform 0.3s;
 #kotw-root .year-pill-btn:focus-visible {
   outline: 2px solid #d4af37; outline-offset: 2px;
 }
+
+/* ── THE READER'S OWN HOURS ──
+   A layer over the day face, and it has to read as one: shut by default, a
+   single quiet line when nothing is set, and never the look of a form the
+   page is waiting on. Same navy register as the toggle above it, since it
+   sits on the dial and not on the parchment. */
+#kotw-root .kotw-acts { margin: 6px 0 2px; }
+#kotw-root .ka-open {
+  background: none; border: 1px solid rgba(212,175,55,.4); border-radius: 20px;
+  color: rgba(240,230,201,.72); font-family: 'Cinzel', serif;
+  letter-spacing: 1px; text-transform: uppercase;
+  font-size: calc(9.5px * var(--ts, 1)); padding: 5px 14px; cursor: pointer;
+  min-height: 28px;
+}
+#kotw-root .ka-open:hover { color: #f0e6c9; border-color: rgba(212,175,55,.75); }
+#kotw-root .ka-open:focus-visible { outline: 2px solid #d4af37; outline-offset: 2px; }
+#kotw-root .ka-panel {
+  display: grid; gap: 5px; justify-items: stretch;
+  max-width: 300px; margin: 9px auto 0; text-align: left;
+}
+#kotw-root .ka-row {
+  display: grid; grid-template-columns: 10px 1fr 84px 84px; gap: 8px;
+  align-items: center;
+}
+#kotw-root .ka-row i {
+  width: 10px; height: 10px; border-radius: 2px; display: block;
+}
+#kotw-root .ka-row span {
+  font-family: 'Cinzel', serif; letter-spacing: .5px;
+  font-size: calc(10px * var(--ts, 1)); color: rgba(240,230,201,.72);
+}
+#kotw-root .ka-row input[type="time"] {
+  font-family: 'Cinzel', serif; font-size: calc(10.5px * var(--ts, 1));
+  color: #10162c; background: #f0e6c9;
+  border: 1px solid rgba(212,175,55,.5); border-radius: 3px;
+  padding: 3px 4px; width: 100%; min-height: 26px;
+}
+#kotw-root .ka-row input:focus-visible { outline: 2px solid #d4af37; outline-offset: 1px; }
+#kotw-root .ka-gap { display: block; }
+#kotw-root .ka-clear {
+  justify-self: center; margin-top: 5px; background: none; border: none;
+  font-family: 'Cinzel', serif; letter-spacing: 1px; text-transform: uppercase;
+  font-size: calc(9.5px * var(--ts, 1)); color: #d4af37; cursor: pointer;
+  padding: 6px 10px;
+}
+#kotw-root .ka-clear:focus-visible { outline: 2px solid #d4af37; outline-offset: 2px; }
 #kotw-root .kotw-panel{
   margin-top:12px; border-top:1px solid rgba(212,175,55,.35); padding-top:10px;
   font-size:calc(14.5px * var(--ts, 1)); line-height:1.5;
@@ -20568,6 +20614,40 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      across two weeks. So the shape steps by a week when the year turns, and
      needs no toggle of its own. */
   var DAY_C={sleep:'#39445f',nap:'#57648a',band:'#e3c25f',mishmar:'#9c8348',day:'#6f6a52'};
+  /* The reader's own hours, laid over the day the structure gives.
+     Everything else on this face is derived; these are not, and cannot be —
+     no cycle knows when a person eats or works. So they are a layer rather
+     than a part: nothing is drawn until something is set, and the face is
+     complete without any of it.
+     A fixed list rather than free text. Naming a block is a text field and an
+     add-and-remove list inside a dial, which is a great deal of interface for
+     a small space, and these five cover the day a person actually keeps. The
+     three meals carry a start alone and draw as marks, because a band running
+     from breakfast to dinner covers most of the day and says nothing. */
+  var DAY_ACTS=[
+    {k:'work',    en:'Work',      span:true,  c:'#b08968'},
+    {k:'exercise',en:'Exercise',  span:true,  c:'#7fa07a'},
+    {k:'study',   en:'Study',     span:true,  c:'#8f7fb0'},
+    {k:'family',  en:'Family',    span:true,  c:'#c48a9a'},
+    {k:'breakfast',en:'Breakfast',span:false, c:'#d9a441'},
+    {k:'lunch',   en:'Lunch',     span:false, c:'#d9a441'},
+    {k:'dinner',  en:'Dinner',    span:false, c:'#d9a441'}
+  ];
+  function readActs(){
+    try{ var o=JSON.parse(localStorage.getItem('kotDayActs')||'{}');
+         return (o&&typeof o==='object')?o:{}; }catch(e){ return {}; }
+  }
+  function writeActs(o){
+    try{ if(o&&Object.keys(o).length) localStorage.setItem('kotDayActs',JSON.stringify(o));
+         else localStorage.removeItem('kotDayActs'); }catch(e){}
+  }
+  /* A stable string of everything set, so the dial redraws when it changes
+     and not otherwise — the same job the city and the face do in the tick. */
+  function actsSig(){
+    var a=readActs();
+    return DAY_ACTS.map(function(d){var v=a[d.k];return v?d.k+':'+v.join(','):'';}).join('|');
+  }
+
   function dayShape(map){
     var U=SEVEN_END/49, openMin=map.hToMin(49*U);
     var evening=openMin>=720;                  // the band opens in the evening
@@ -20804,6 +20884,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         el.addEventListener('click',function(){userSelected=true;select(i+1)});
         segs.push({n:i+1,el:el});
       });
+      /* The reader's own hours ride outside the seven rather than inside them.
+         They are the only stretches here measured in ordinary clock minutes,
+         so they are drawn from those directly and kept off the ring the day's
+         own units own. A meal is a mark, not a band. */
+      var acts=readActs();
+      DAY_ACTS.forEach(function(d){
+        var v=acts[d.k]; if(!v) return;
+        if(d.span){
+          if(v[0]==null||v[1]==null||v[0]===v[1]) return;
+          mk('path',{d:donut(169,176,v[0],v[1]),fill:d.c,stroke:'#0d1122',
+            'stroke-width':1,opacity:.9},gDyn);
+        } else {
+          if(v[0]==null) return;
+          var pt=pol(172.5,v[0]);
+          mk('circle',{cx:pt[0],cy:pt[1],r:4.2,fill:d.c,stroke:'#0d1122',
+            'stroke-width':1},gDyn);
+        }
+      });
     } else if(FACE==='sets'){
       for(var q=1;q<=17;q++){
         (function(q){
@@ -20904,15 +21002,67 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   fr.innerHTML='<div class="year-toggle-pill" style="margin-top:0;">'+
     '<button class="year-pill-btn year-pill-active" data-face="weeks">52 weeks</button>'+
     '<button class="year-pill-btn" data-face="sets">17 sets</button>'+
-    '<button class="year-pill-btn" data-face="day">the day</button></div>';
+    '<button class="year-pill-btn" data-face="day">the day</button></div>'+
+    '<div class="kotw-acts" style="display:none;">'+
+      '<button type="button" class="ka-open"></button>'+
+      '<div class="ka-panel" hidden></div></div>';
+  /* Shown only on the face that draws them, and shut until asked for: with
+     nothing set the whole layer is a single quiet line, so the face does not
+     read as a form waiting to be filled. */
+  var actsOpen=false;
+  function hhmm(m){return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+(m%60)).slice(-2);}
+  function toMin(v){var p=(v||'').split(':');return v?(+p[0])*60+(+p[1]):null;}
+  function actsRow(){
+    var wrap=fr.querySelector('.kotw-acts'); if(!wrap)return;
+    wrap.style.display=(FACE==='day')?'':'none';
+    if(FACE!=='day')return;
+    var a=readActs();
+    var n=DAY_ACTS.filter(function(d){var v=a[d.k];
+      return v && v[0]!=null && (!d.span || (v[1]!=null && v[1]!==v[0]));}).length;
+    wrap.querySelector('.ka-open').textContent=
+      (actsOpen?'\u2715 done':(n?'your hours \u00b7 '+n+' set':'+ your hours'));
+    var pan=wrap.querySelector('.ka-panel');
+    pan.hidden=!actsOpen;
+    if(!actsOpen){pan.innerHTML='';return;}
+    pan.innerHTML=DAY_ACTS.map(function(d){
+      var v=a[d.k]||[];
+      return '<label class="ka-row"><i style="background:'+d.c+'"></i>'+
+        '<span>'+d.en+'</span>'+
+        '<input type="time" data-k="'+d.k+'" data-i="0" value="'+(v[0]!=null?hhmm(v[0]):'')+'">'+
+        (d.span?'<input type="time" data-k="'+d.k+'" data-i="1" value="'+(v[1]!=null?hhmm(v[1]):'')+'">'
+               :'<span class="ka-gap"></span>')+
+        '</label>';
+    }).join('')+'<button type="button" class="ka-clear">clear all</button>';
+  }
+  fr.addEventListener('change',function(e){
+    var t=e.target; if(!t.dataset||!t.dataset.k)return;
+    var a=readActs(), d=DAY_ACTS.filter(function(x){return x.k===t.dataset.k;})[0];
+    var cur=a[d.k]||[null,null], m=toMin(t.value);
+    cur[+t.dataset.i]=m;
+    // A half-filled span is kept, not thrown away. Dropping it the moment one
+    // end was empty meant a span could never be completed: the first time set
+    // was discarded for want of the second, and the second then arrived to an
+    // entry that no longer existed. It is the drawing that skips a half-filled
+    // block, not the storing.
+    if(cur[0]==null && cur[1]==null) delete a[d.k];
+    else a[d.k]=d.span?[cur[0],cur[1]]:[cur[0]];
+    writeActs(a); actsRow(); tick();
+  });
   fr.addEventListener('click',function(e){
+    if(e.target.classList&&e.target.classList.contains('ka-open')){
+      actsOpen=!actsOpen; actsRow(); return;
+    }
+    if(e.target.classList&&e.target.classList.contains('ka-clear')){
+      writeActs({}); actsRow(); tick(); return;
+    }
     var b=e.target.closest&&e.target.closest('[data-face]');
     if(!b)return;
     FACE=b.dataset.face;
     fr.querySelectorAll('[data-face]').forEach(function(x){
       x.className='year-pill-btn'+(x.dataset.face===FACE?' year-pill-active':'');});
-    faceFoot(); faceSub(); userSelected=false; curSel=null; tick();
+    faceFoot(); faceSub(); actsRow(); userSelected=false; curSel=null; tick();
   });
+  actsRow();
   root.insertBefore(fr,foot);
 
   function curWeek(){
@@ -20938,7 +21088,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var userSelected=false;
   function tick(){
     var map=timeMap();
-    var sig=FACE+'|'+(map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
+    var sig=FACE+'|'+(FACE==='day'?actsSig():'')+'|'+
+      (map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
     drawZmanim();
