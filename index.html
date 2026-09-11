@@ -14671,6 +14671,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const d_year1         = (kotYearAlt && inYearOverlap) ? _altD_year1    : _priD_year1;
     const weekOfYear      = (kotYearAlt && inYearOverlap) ? _altWeekOfYear : _priWeekOfYear;
     const effectiveKotWeek = (kotYearAlt && inYearOverlap) ? _altEffKotWk  : _priEffKotWk;
+    const _activeIsLeap   = (kotYearAlt && inYearOverlap) ? _altIsLeap     : isLeapYear;
+
+    /* The day of the KoT year, corrected exactly as its week is.
+       The bar used to print the raw count of days since Rosh Hashanah, which
+       is a different number from the one the week is built on, and the two
+       only agree in a plain year that has not yet rolled over. Where they
+       part it showed plainly: on 29 Elul, which is day 1 of the year that has
+       just begun, the bar read "Week 1 · Day 358"; and through the whole back
+       half of a leap year it ran 28 ahead of its own week — "Week 22 · Day
+       179" when week 22 holds days 148-154.
+       Both come from the same place. weekOfYear counts from the year's own
+       first day and then drops four weeks past week 25 to step over the leap
+       month; the day has to count from the same first day and drop the same
+       28 days at the same point. Written as the mirror of the two lines above
+       so the pair cannot drift apart again. */
+    const _dayOfYearRaw   = d - d_year1 + 1;
+    const kotDayOfYear    = (_activeIsLeap && _dayOfYearRaw > 25 * 7)
+                          ? _dayOfYearRaw - 28 : _dayOfYearRaw;
 
     // Published for the Weekly Journal, which has to number its weeks exactly
     // as the rest of the app does. The KoT year is anchored to 16 Nisan, not
@@ -14680,6 +14698,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     window.kotYear = {
       hYear:   (kotYearAlt && inYearOverlap) ? _altHYear : hYear,
       day:     d,
+      dayOfYear: kotDayOfYear,     // 1-364, the number the bar shows
       day1:    d_year1,
       week:    weekOfYear,
       effWeek: effectiveKotWeek,
@@ -14702,8 +14721,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
 
     document.getElementById('day-indicator').textContent = inExtra
-      ? `Week ${effectiveKotWeek} (${hMonth === 11 ? 'Shevat' : 'Adar I'} · Extra Day ${extraDay} of 28) · Day ${d}`
-      : `Week ${effectiveKotWeek} · Day ${d}`;
+      ? `Week ${effectiveKotWeek} (${hMonth === 11 ? 'Shevat' : 'Adar I'} · Extra Day ${extraDay} of 28) · Day ${kotDayOfYear}`
+      : `Week ${effectiveKotWeek} · Day ${kotDayOfYear}`;
 
     // Update Hebrew date in top bar
     document.getElementById('hebrew-date').textContent = formatHebrewDate(hDay, hMonth, hYear);
