@@ -258,19 +258,16 @@ padding: 0 20px 60px;
 }
 
 /* ── HEADER ── */
+/* The masthead was spending 267px of an 844px screen before the first card
+   — 44 above a decorative star, the star itself with 14 under it, then the
+   three title lines and 28 more. The star is gone and the padding is cut to
+   what holds the title together rather than what framed the star. */
 .header {
 text-align: center;
-padding: 44px 0 28px;
+padding: 16px 0 14px;
 border-bottom: 2px solid var(--border-strong);
 margin-bottom: 0;
 background: linear-gradient(to bottom, rgba(212,175,55,0.08), rgba(212,175,55,0.02));
-}
-
-.star-of-david {
-font-size: calc(26px * var(--ts, 1));
-color: var(--gold);
-display: block;
-margin-bottom: 14px;
 }
 
 .title-hebrew {
@@ -2395,7 +2392,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- HEADER -->
 
   <header class="header">
-    <span class="star-of-david">✦</span>
     <div class="title-hebrew">קַבָּלַת הַזְּמַן</div>
     <div class="title-main">Kabbalah of Time</div>
     <div class="title-sub">Daily Counting, Daily Calling — ספירת הזמן</div>
