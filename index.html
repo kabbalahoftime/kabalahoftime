@@ -1792,50 +1792,6 @@ transition: transform 0.3s;
 }
 #kotw-root svg{width:100%; height:auto; display:block}
 #kotw-root .kotw-seg{cursor:pointer}
-
-/* ── LEVELS ──
-   What a level leaves out is set aside, not deleted: .lvl-off hides it and a
-   .lvl-fold line opens it again in place. The line is quiet by design — it is
-   an escape hatch, not an invitation. */
-/* Two scopes, because the two folds mean different things. The cards live in
-   three separate containers — the Keter card directly in .app, Chochmah and
-   Binah in one grid, the seven in another — so a fold that reveals them has to
-   reach across all three and is answered on the root. A card's companions live
-   inside its own detail and must stay there, so that fold is answered where it
-   sits. A '>' on either was the bug: it reached one grid and left six cards
-   hidden behind a line that said it would show them. */
-.lvl-off-card, .lvl-off-comp { display: none !important; }
-:root.lvl-cards-open .lvl-off-card { display: revert !important; }
-.lvl-open .lvl-off-comp { display: revert !important; }
-.lvl-fold {
-  display: block; width: 100%; margin: 8px 0 2px; padding: 7px 0;
-  background: none; border: none; border-top: 1px dashed var(--border-strong);
-  font-family: 'Cinzel', serif; letter-spacing: 1.4px; text-transform: uppercase;
-  font-size: calc(9.5px * var(--ts, 1)); color: var(--ink-dim);
-  cursor: pointer; text-align: center;
-}
-.lvl-fold:hover { color: var(--gold); }
-.lvl-fold:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-.lvl-fold-cards { margin-top: 14px; }
-
-/* The level row sits under the two reading settings, and carries the Sefirah
-   picker only when a Sefirah is what is being kept. */
-/* The gap above is not decoration. The pills in the row above are 24px tall
-   and claim their 44px by an invisible overlay reaching 10px past each edge,
-   so a control that begins within that reach takes taps meant for them — and
-   adjacent margins collapse, so 8px here against their 2px left only 8px of
-   clearance. Eighteen keeps both rows reachable. */
-#level-controls {
-  display: flex; justify-content: center; align-items: center;
-  flex-wrap: wrap; gap: 8px 10px; margin: 18px 0 2px;
-}
-#level-controls select {
-  font-family: 'Cinzel', serif; font-size: calc(10.5px * var(--ts, 1));
-  letter-spacing: 1px; color: var(--ink); background: var(--bg-card);
-  border: 1px solid var(--gold); border-radius: 20px;
-  padding: 4px 10px; min-height: 26px; cursor: pointer;
-}
-#level-controls select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 /* ── THE DIAL'S OWN TOGGLE ──
    Every other pill in the page sits on parchment, so the shared rule dresses
    them in --ink-mid — a dark brown. This one sits on the navy dial face, and
@@ -2457,19 +2413,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <button id="ts-large-btn" class="year-pill-btn" onclick="setTextSize('large')">A+</button>
       <button id="ts-larger-btn" class="year-pill-btn" onclick="setTextSize('larger')">A++</button>
     </div>
-  </div>
-
-  <!-- How much of the day to be shown. The Introduction already says a reader
-       may take a single card and that this is a whole practice; until now the
-       page had no way to let them. Its own row, because the two settings above
-       are about reading and this one is about the day. -->
-  <div id="level-controls">
-    <div class="year-toggle-pill">
-      <button id="lv-all-btn"  class="year-pill-btn year-pill-active" onclick="setLevel('all')">Everything</button>
-      <button id="lv-path-btn" class="year-pill-btn" onclick="setLevel('path')">The Path</button>
-      <button id="lv-one-btn"  class="year-pill-btn" onclick="setLevel('one')">One Sefirah</button>
-    </div>
-    <select id="lv-sef" onchange="setLevelSef(this.value)" aria-label="Which Sefirah to keep"></select>
   </div>
 
   <!-- The week's page from the book, set under the title where the book sets
@@ -12526,141 +12469,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   })();
 
 
-  /* ── LEVELS ────────────────────────────────────────────────────────────
-     How much of the day the page asks for. Everything is what the app has
-     always shown. The Path keeps the thirty counted steps — the ✦ headings —
-     and folds the ✡ companions, the Rebbeim and the loose resources away.
-     One Sefirah keeps a single card.
-
-     Nothing is deleted. What a level leaves out collapses to one quiet line
-     that opens on a tap, so a reader can see what they have set aside and
-     reach it without leaving the level. The Introduction already told them
-     they could take a single card; this is the page finally letting them.
-
-     The companion blocks carry no class of their own — a card's detail is a
-     flat run of headings, rows and <hr>. So they are found the way they read:
-     split the run at each <hr>, and fold the pieces whose heading opens with
-     ✡ or carries a Rebbe's menorah. ✦ pieces always stay. */
-  var SEF_KEYS = ['keter','chochmah','binah','chesed','gevurah','tiferet',
-                  'netzach','hod','yesod','malchut'];
-  var SEF_NAMES = {keter:'Keter / Da’at',chochmah:'Chochmah',binah:'Binah',
-    chesed:'Chesed',gevurah:'Gevurah',tiferet:'Tiferet',netzach:'Netzach',
-    hod:'Hod',yesod:'Yesod',malchut:'Malchut'};
-  function lvlRead(){
-    try { var v = localStorage.getItem('kotLevel');
-          return (v === 'path' || v === 'one') ? v : 'all'; } catch (e) { return 'all'; }
-  }
-  function lvlReadSef(){
-    try { var v = localStorage.getItem('kotLevelSef');
-          return SEF_KEYS.indexOf(v) >= 0 ? v : 'tiferet'; } catch (e) { return 'tiferet'; }
-  }
-  // The name a card carries is soft-hyphenated for wrapping, so it is stripped
-  // before matching — "Che\u00adsed" is Chesed.
-  function lvlKeyOf(card){
-    if (card.classList.contains('keter-card')) return 'keter';
-    var n = card.querySelector('.sefirah-name');
-    if (!n) return null;
-    var t = n.textContent.replace(/[\u00ad\s]/g, '').toLowerCase();
-    for (var i = 0; i < SEF_KEYS.length; i++) {
-      var k = SEF_KEYS[i];
-      if (t.indexOf(k === 'keter' ? 'keter' : k) === 0) return k;
-    }
-    return null;
-  }
-  function lvlCards(){
-    return [].slice.call(document.querySelectorAll('.sefirah-card, .keter-card'))
-      .filter(function(c){ return c.id !== 'now-sefirah-featured'; });
-  }
-  function lvlFold(el, text, cls, global_){
-    var f = document.createElement('button');
-    f.type = 'button'; f.className = 'lvl-fold ' + (cls || '');
-    f.textContent = text;
-    f.addEventListener('click', function(e){
-      e.stopPropagation();
-      var host = global_ ? document.documentElement : f.parentElement;
-      var open = host.classList.toggle(global_ ? 'lvl-cards-open' : 'lvl-open');
-      f.textContent = open ? text.replace(/^show/, 'hide') : text;
-    });
-    el.appendChild(f);
-    return f;
-  }
-  function applyLevel(){
-    var lvl = lvlRead(), sef = lvlReadSef();
-    document.documentElement.setAttribute('data-level', lvl);
-    // clear anything a previous level left behind
-    [].forEach.call(document.querySelectorAll('.lvl-off-card, .lvl-off-comp'), function(e){
-      e.classList.remove('lvl-off-card'); e.classList.remove('lvl-off-comp'); });
-    [].forEach.call(document.querySelectorAll('.lvl-fold'), function(e){ e.remove(); });
-    [].forEach.call(document.querySelectorAll('.lvl-open'), function(e){ e.classList.remove('lvl-open'); });
-    document.documentElement.classList.remove('lvl-cards-open');
-    var wrap = document.getElementById('sefirot-grid') || document.body;
-    if (lvl === 'one') {
-      var kept = 0, cards = lvlCards();
-      cards.forEach(function(c){
-        if (lvlKeyOf(c) === sef) kept++; else c.classList.add('lvl-off-card');
-      });
-      if (!kept) cards.forEach(function(c){ c.classList.remove('lvl-off-card'); });
-      else if (cards.length > 1) {
-        var host = cards[cards.length - 1].parentElement;
-        lvlFold(host, 'show the other ' + (cards.length - 1) + ' Sefirot', 'lvl-fold-cards', true);
-      }
-    } else if (lvl === 'path') {
-      lvlCards().forEach(function(card){
-        var det = card.querySelector('.sefirah-detail, .keter-detail');
-        if (!det) return;
-        /* A new block begins at a heading, not only after an <hr>. Two of them
-           share a run in several cards — the Ramak sits under the same rule as
-           Chitas — so splitting on <hr> alone kept every companion that had a
-           counted step above it. */
-        var seg = null, folded = 0;
-        var norm = function(e){ return (e.textContent || '').replace(/\u00ad/g, '').trim(); };
-        var isHead = function(e){
-          var t = norm(e);
-          return t.charAt(0) === '\u2726' || t.charAt(0) === '\u2721' || !!e.querySelector('.menorah');
-        };
-        var flush = function(){
-          if (seg && seg.fold) {
-            seg.els.forEach(function(e){ e.classList.add('lvl-off-comp'); });
-            folded++;
-          }
-          seg = null;
-        };
-        [].forEach.call(det.children, function(e){
-          if (e.tagName === 'HR') { flush(); return; }
-          if (isHead(e)) {
-            flush();
-            seg = { fold: norm(e).charAt(0) !== '\u2726', els: [e] };
-            return;
-          }
-          if (seg) seg.els.push(e);
-        });
-        flush();
-        if (folded) lvlFold(det, 'show ' + folded + ' companion' + (folded > 1 ? 's' : ''), 'lvl-fold-comp');
-      });
-    }
-    ['all','path','one'].forEach(function(k){
-      var b = document.getElementById('lv-' + k + '-btn');
-      if (b) b.classList.toggle('year-pill-active', k === lvl);
-    });
-    var sel = document.getElementById('lv-sef');
-    if (sel) {
-      if (!sel.options.length)
-        sel.innerHTML = SEF_KEYS.map(function(k){
-          return '<option value="' + k + '">' + SEF_NAMES[k] + '</option>'; }).join('');
-      sel.value = sef;
-      sel.style.display = (lvl === 'one') ? '' : 'none';
-    }
-  }
-  function setLevel(mode){
-    try { localStorage.setItem('kotLevel', mode); } catch (e) {}
-    applyLevel();
-  }
-  function setLevelSef(k){
-    try { localStorage.setItem('kotLevelSef', k); } catch (e) {}
-    applyLevel();
-  }
-  window.applyLevel = applyLevel;
-
   // Text size, kept separate from contrast so a reader can take one without
   // the other. Only the multiplier changes; nothing here moves a box.
   function setTextSize(mode) {
@@ -21488,7 +21296,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // during the card render does not — the block was falling back to the
     // lowest unmarked and staying there for the rest of the visit.
     if(typeof renderTodayBlock==='function')renderTodayBlock();
-    if(typeof applyLevel==='function')applyLevel();
   }
   window.kotwRefresh=function(){userSelected=false;curSel=null;tick();};
   window.kotwWeekData=function(n){return W[n-1]||null;};
