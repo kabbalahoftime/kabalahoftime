@@ -287,6 +287,52 @@ async function checkInBrowser(chromium) {
   if (dups.length) fail(`duplicated id: ${dups.slice(0, 8).join(', ')}`);
   else pass('every element id is unique');
 
+  // zohar — every section name the app links to is a section Sefaria has.
+  // The Zohar links have been wrong three times, and each time the fault was
+  // the same shape: a name written the way the printed volumes spell it rather
+  // than the way Sefaria's schema does, with nothing to tell the difference.
+  // So the schema's own section titles are held here, and every slug the app
+  // can produce — for every parasha name it can produce, across five years of
+  // Shabbatot — is looked for among them. A slug that is not a title is a link
+  // to a page that does not exist.
+  console.log('\nzohar');
+  const ZOHAR_SECTION_TITLES = [
+    'Introduction', 'Bereshit', 'Noach', 'Lech Lecha', 'Vayera', 'Chayei Sara',
+    'Toldot', 'Vayetzei', 'Vayishlach', 'Vayeshev', 'Miketz', 'Vayigash',
+    'Vayechi', 'Shemot', 'Vaera', 'Bo', 'Beshalach', 'Yitro', 'Mishpatim',
+    'Terumah', 'Sifra DiTzniuta', 'Tetzaveh', 'Ki Tisa', 'Vayakhel', 'Pekudei',
+    'Vayikra', 'Tzav', 'Shmini', 'Tazria', 'Metzora', 'Achrei Mot', 'Kedoshim',
+    'Emor', 'Behar', 'Bechukotai', 'Bamidbar', 'Nasso', 'Idra Rabba',
+    "Beha'alotcha", "Sh'lach", 'Korach', 'Chukat', 'Balak', 'Pinchas', 'Matot',
+    'Vaetchanan', 'Eikev', 'Shoftim', 'Ki Teitzei', 'Vayeilech', "Ha'Azinu",
+    'Idra Zuta', 'Addenda',
+  ].map(t => t.replace(/ /g, '_'));
+  const zoh = await page.evaluate(() => {
+    if (typeof zoharParashaLinks !== 'function') return { err: 'zoharParashaLinks is not there' };
+    const names = new Set();
+    const d0 = new Date(2025, 0, 1);
+    for (let i = 0; i < 365 * 5; i++) {
+      const n = window.getParashaForDate && window.getParashaForDate(new Date(d0.getTime() + i * 86400000));
+      if (n) names.add(n);
+    }
+    const linked = [], gaps = [];
+    for (const n of [...names].sort()) {
+      const html = zoharParashaLinks(n) || '';
+      [...html.matchAll(/Zohar%2C_([^?"]+)\?/g)].forEach(m => linked.push({ n, slug: decodeURIComponent(m[1]) }));
+      if (/<span style="color:var\(--ink-mid\)">/.test(html)) gaps.push(n);
+    }
+    return { names: names.size, linked, gaps: gaps.length };
+  });
+  if (zoh.err) fail(zoh.err);
+  else if (zoh.names < 50) fail(`only ${zoh.names} parasha names swept — the check measured nothing`);
+  else {
+    const strays = zoh.linked.filter(e => !ZOHAR_SECTION_TITLES.includes(e.slug));
+    if (strays.length)
+      strays.slice(0, 8).forEach(e => fail(`Zohar link for ${e.n} points at "${e.slug}", which is not a section of the Zohar`));
+    else pass(`${zoh.linked.length} Zohar section links, every one a section Sefaria has ` +
+              `(${zoh.gaps} weeks the Zohar does not comment on, named without a link)`);
+  }
+
   // perek shirah — every week's creature has its song, keyed by the same name
   console.log('\nperek shirah');
   const ps = await page.evaluate(() => {

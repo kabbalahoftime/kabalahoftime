@@ -10039,27 +10039,42 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   //
   // These are section links, not addresses into one — a name Sefaria knows,
   // and nothing after it. That is the whole of what is left pointing into the
-  // Zohar, and all fifty-four slugs were checked against the section titles in
-  // its schema.
+  // Zohar. Every slug either table can produce is checked against the section
+  // titles in the Zohar's schema by check.mjs, on every run, for every parasha
+  // name the app can produce — a claim that was made here once before without
+  // anything behind it, and was wrong for two of the fifty-four.
   let _zoharSectionByParasha = null;
+  let _zoharKnownSlugs = null;
   function zoharSectionForParashaName(name) {
     if (!name) return null;
     if (!_zoharSectionByParasha) {
       _zoharSectionByParasha = {};
+      _zoharKnownSlugs = new Set();
       Object.values(ZOHAR_DAF_SECTIONS).forEach(list =>
-        list.forEach(([, label, slug]) => { _zoharSectionByParasha[label] = slug; }));
+        list.forEach(([, label, slug]) => {
+          _zoharSectionByParasha[label] = slug;
+          _zoharKnownSlugs.add(slug);
+        }));
     }
+    // Only a slug ZOHAR_DAF_SECTIONS knows is allowed through. Those were
+    // checked one by one against the section titles in the Zohar's schema, so
+    // they are the names Sefaria answers to; anything else is a typo, and a
+    // typo must fall through to the corrections below rather than be sent out
+    // as a link. It was the missing half of this test that sent Ha'Azinu — the
+    // first parasha of the year — to a page that does not exist: the table
+    // below held 'Haazinu', the correction for it was three lines further on,
+    // and the wrong answer was taken first because it was an answer.
+    const ok = s => (s && _zoharKnownSlugs.has(s)) ? s : null;
     const norm = t => t.replace(/[’'`]/g, "'").trim();
-    const direct = _zoharSectionByParasha[norm(name)] || ZOHAR_PARASHA_SECTIONS[name];
+    const direct = ok(_zoharSectionByParasha[norm(name)]) || ok(ZOHAR_PARASHA_SECTIONS[name]);
     if (direct) return direct;
     // Sefaria and the printed volumes spell a handful differently
     const alt = { "Vayeira": 'Vayera', "Chayei Sarah": 'Chayei_Sara', "Toledot": 'Toldot',
                   "Ki Tissa": 'Ki_Tisa', "Behaalotecha": "Beha'alotcha", "Shlach": "Sh'lach",
                   // Ha'Azinu, not Ha'azinu — Sefaria capitalises the second
-                  // half of the name, and this is the only slug in the table
-                  // that did not match a section title exactly.
+                  // half of the name.
                   "Haazinu": "Ha'Azinu", "Vayelech": 'Vayeilech' };
-    return alt[name] || null;
+    return ok(alt[name]);
   }
   // One link per half of a double parasha, each to its own section; a half with
   // no section of its own is named without a link rather than sent elsewhere.
@@ -10089,12 +10104,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     'Vayikra': 'Vayikra', 'Tzav': 'Tzav', 'Shmini': 'Shmini',
     'Tazria-Metzora': 'Tazria', 'Achrei Mot-Kedoshim': 'Achrei_Mot',
     'Emor': 'Emor', 'Behar-Bechukotai': 'Behar',
-    'Bamidbar': 'Bamidbar', 'Nasso': 'Nasso', 'Behaalotecha': 'Behaalotcha',
+    'Bamidbar': 'Bamidbar', 'Nasso': 'Nasso', 'Behaalotecha': "Beha'alotcha",
     'Shlach': "Sh'lach", 'Korach': 'Korach', 'Chukat-Balak': 'Chukat',
     'Pinchas': 'Pinchas',
     'Vaetchanan': 'Vaetchanan', 'Eikev': 'Eikev',
     'Shoftim': 'Shoftim', 'Ki Teitzei': 'Ki_Teitzei',
-    'Vayeilech': 'Vayeilech', 'Haazinu': 'Haazinu',
+    // Sefaria capitalises the second half of Ha'Azinu and keeps the apostrophe
+    // in Beha'alotcha; both are section titles, so both must be spelled its way.
+    'Vayeilech': 'Vayeilech', 'Haazinu': "Ha'Azinu",
     // Matot, Masei, Devarim, Re'eh, Ki Tavo, Nitzavim and VeZot HaBerachah are
     // deliberately absent: the printed Zohar has no section for them (Matot
     // carries a fragment at 259b, no more). A double parasha with one half
