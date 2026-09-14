@@ -3799,18 +3799,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
 <script>
   // ── KOT YEAR ANCHOR ──
-  // Week 1, Day 1 = Friday before Rosh Hashana = Sep 19, 2025
+  // Week 1, Day 1 of 5786 = Friday before Rosh Hashana = Sep 19, 2025.
+  // This is the epoch of one year, not a cycle to count from: the KoT year is
+  // anchored to 16 Nisan and runs 364 days, while the Hebrew year runs 354 or
+  // 384, so anything measuring days from this date drifts a little further
+  // every year. Everything that needs the day or week of the year takes it
+  // from window.kotYear, which render() publishes. The only use left here is
+  // the journal's fallback for the moment before the first render.
   const KOT_YEAR_START = new Date(2025, 8, 19); // month is 0-indexed
-
-  function getKotWeekDay(offsetDays) {
-    const d = new Date();
-    d.setDate(d.getDate() + offsetDays);
-    const msPerDay = 1000 * 60 * 60 * 24;
-    const delta = Math.floor((d - KOT_YEAR_START) / msPerDay);
-    const week  = Math.floor(delta / 7) + 1;
-    const day   = (delta % 7) + 1; // 1–7
-    return { delta, week, day };
-  }
 
   // ── MISHNA DATA (52 weeks × 10 chapters = 520, days 1-5 of each KoT week) ──
   const MISHNA_TRACTATES = [
@@ -15133,8 +15129,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `Rabbi Chaim Yosef David Azulai`;
 
     // Zohar + Sefer Yetzirah annual cycle — in honor of R. Shimon bar Yochai
-    // Vol 1: 251 folios, Vol 2: 269 folios, Vol 3: 300 folios = 820 total
-    // Then 6 chapters of Sefer Yetzirah (1/day days 360-363, 2 on day 364)
+    // 818 folios in all (ZOHAR_TOTAL — the five books of ZOHAR_BOOKS across
+    // the three volumes: 251 + 269 + 115 + 143 + 40), read 16 a week, which runs
+    // out on day 1 of week 52. The six days that remain — days 359-364 — take
+    // one chapter of Sefer Yetzirah each, and the year is sealed.
 
     // Chabad Daily Zohar (Chok L'Yisrael English) — AIDs by parasha number + day (1=Sun…6=Fri)
     const CHABAD_ZOHAR_AIDS = {
@@ -15272,19 +15270,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     })();
 
     // 16 folios/week: 2 per day (KoT days 1-6), 4 on KoT day 7 (Thursday)
-    // Anchor: KOT_YEAR_START (Fri Sep 19, 2025 = KoT day 1, week of Rosh Hashana 5786)
+    // The cycle is the KoT year itself: day 1 of the year opens Vol. I, and
+    // Sefer Yetzirah closes week 52. It used to count 364 days from a fixed
+    // Gregorian date instead, which is a different calendar: a Hebrew year is
+    // 354 or 384 days, so the two parted a little more every year until, on
+    // day 4 of week 1, the card offered Sefer Yetzirah — the reading of the
+    // last week of the year. Driven from the day of the KoT year it cannot
+    // drift, because it is no longer measuring anything of its own.
     let _hodZoharMainHtml = '';
     let _hodZoharMetaHtml = '';
     let _hodZoharLabel = '';
     (() => {
-      const ANCHOR = KOT_YEAR_START; // same anchor as all KoT cycles
-      const CYCLE  = 364; // 52 weeks exactly
+      if (!(kotDayOfYear >= 1)) return;
 
-      const dateNorm  = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      const totalDays = Math.round((dateNorm - ANCHOR) / 86400000);
-      if (totalDays < 0) return;
-
-      const cycleOffset = totalDays % CYCLE;          // 0-indexed, 0-363
+      const cycleOffset = (kotDayOfYear - 1) % 364;   // 0-indexed, 0-363
       const fullWeeks   = Math.floor(cycleOffset / 7);
       const rem         = cycleOffset % 7;             // 0-6 within the KoT week (day 1 = Friday)
       const cumFolios   = fullWeeks * 16 + rem * 2;   // folios completed before today
@@ -19503,10 +19502,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         const lm = dailies.map(x => _t(x.lesson)).join(' + ');
         // The Zohar's sixteen folios a week, as Keter's face counts them
         let zo = '';
-        const nrm = new Date(D.date.getFullYear(), D.date.getMonth(), D.date.getDate());
-        const tot = Math.round((nrm - KOT_YEAR_START) / 86400000);
-        if (tot >= 0) {
-          const off = tot % 364, rem = off % 7;
+        // The day of the KoT year, exactly as the card counts it — not a count
+        // of days from a fixed Gregorian date, which drifts against the Hebrew
+        // year and would put this square and its card on different folios.
+        if (D.yearDay >= 1) {
+          const off = (D.yearDay - 1) % 364, rem = off % 7;
           const cum = Math.floor(off / 7) * 16 + rem * 2;
           if (cum < ZOHAR_TOTAL) {
             const si = resolveZoharFolio(cum), ei = resolveZoharFolio(cum + (rem === 6 ? 4 : 2) - 1);
