@@ -13561,7 +13561,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       table + standing + '<div style="height:14px"></div>' + shapes +
       p('The dial’s day face will draw three shapes, and the band is stayed up for in all of them. ' +
         '<em style="font-style:normal;color:var(--ink)">Three sleeps</em> is the one described above — the night ' +
-        'broken around the band, with an evening rest before it and a third piece at midday. ' +
+        'broken around the band, with an evening rest before it and a short third piece at midday: one sub-unit, ' +
+        'twenty-five to thirty-two minutes, the one that holds Chatzot HaYom. ' +
         '<em style="font-style:normal;color:var(--ink)">Two sleeps</em> drops the evening rest and the Mishmar: ' +
         'the sleep begins the moment the band closes, in Gevurah shebeChesed, and because the midday rest is ' +
         'still there it can end early — within minutes of sunrise, at the same point the first shape rises. ' +
@@ -20885,14 +20886,34 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             what:'The two arms open Malchut, whose prayer is the Shema upon the bed — the day accounted for'};
   }
 
-  /* Shared by the two shapes that take a midday rest. Its hours are the year's
-     and not the sleep's, like the gatherings above: weeks 24-26, Purim to Rosh
-     Chodesh Nisan, straddling Chatzot HaYom as the band straddles Chatzot
-     HaLailah. */
-  function _dsNap(U){
-    return {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:23*U,h2:26*U,
-            wk:'weeks 24–26',yr:'Purim → Rosh Chodesh Nisan',
-            what:'Straddles Chatzot HaYom as the band straddles Chatzot HaLailah'};
+  /* The midday rest, in two lengths. Its hours are the year's and not the
+     sleep's, like the gatherings above: weeks 24-26, Purim to Rosh Chodesh
+     Nisan, straddling Chatzot HaYom as the band straddles Chatzot HaLailah.
+
+     The short form keeps one sub-unit of the three, and which one is not a
+     choice: Chatzot HaYom falls at unit 25.363, which is inside week 26 and
+     36% through it. Week 26 alone is therefore the only single unit that still
+     holds midday, and it ends exactly on Rosh Chodesh Nisan — checked in five
+     common years, 24 Adar to 1 Nisan every time. One unit runs 25 to 32
+     minutes across the year in Miami, so "about half an hour" needs no fixed
+     number of clock minutes; it stretches and compresses with the day like
+     everything else here.
+
+     What the short form gives up is that the Ma'alot no longer run straight
+     into it — two units of waking day now stand between them. That property
+     was noticed after the fact and is not why the gathering sits where it
+     does; weeks 22-23 are the turn into Adar, ending on the ninth, and that
+     reason is untouched. The shape that sleeps twice keeps the full three
+     units, where the gathering still abuts the rest. */
+  function _dsNap(U, short){
+    return short
+      ? {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:25*U,h2:26*U,
+         wk:'week 26',yr:'24 Adar → Rosh Chodesh Nisan',
+         note:'The one sub-unit of the three that holds Chatzot HaYom — and it closes as Nisan opens',
+         what:'Half an hour, near enough: one sub-unit, 25–32 minutes as the year turns'}
+      : {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:23*U,h2:26*U,
+         wk:'weeks 24–26',yr:'Purim → Rosh Chodesh Nisan',
+         what:'Straddles Chatzot HaYom as the band straddles Chatzot HaLailah'};
   }
 
   function dayShape(map){
@@ -20914,7 +20935,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        wk:'weeks 13–21',yr:'Chanukah → Shevat',
        what:'Shacharit at Tiferet · Tikkun HaKlali at Netzach'},
       _dsMaalot(U),
-      _dsNap(U),
+      {k:'day1b',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:23*U,h2:25*U,
+       wk:'weeks 24–25',yr:'Purim → 23 Adar',
+       what:'Purim falls in it · the day runs on to the midday rest'},
+      _dsNap(U,true),
       {k:'day2',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:26*U,h2:42*U,
        wk:'weeks 27–42',yr:'Nisan → Tammuz',
        what:'Mincha at Hod · Maariv at Yesod'},
