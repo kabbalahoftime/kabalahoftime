@@ -13552,7 +13552,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       p('The dial’s day face will draw either of two shapes. <em style="font-style:normal;color:var(--ink)">Three ' +
         'sleeps</em> is the one described above — the night broken around the band, and a third piece at midday. ' +
         '<em style="font-style:normal;color:var(--ink)">One sleep</em> drops both the evening sleep and the midday ' +
-        'one and takes the night’s whole rest in a single stretch, from Hod shebeChesed to Tiferet shebeTiferet. ' +
+        'one and takes the night’s whole rest in a single stretch, from Hod shebeChesed to Rosh Chodesh Shevat — ' +
+        'the middle of week 18, and the last point of the morning that still wakes with Kri’at Shema ahead of ' +
+        'its time. ' +
         'The band is still stayed up for and the Mishmar still kept after it: the seam holds week 1 — the Rooster, ' +
         'who is given the understanding to tell day from night — inside the band itself, and weeks 2–4 after it ' +
         'are Yom Kippur, Sukkot and Shmini Atzeret. Neither shape sleeps through the year’s Tishrei. What this ' +
@@ -20905,7 +20907,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      piece at midday — three rests. This one keeps the band, keeps the Mishmar
      after it, and then sleeps once: nothing is slept before the band, nothing
      after noon, and the night's whole rest is taken in a single stretch from
-     Hod shebeChesed to Tiferet shebeTiferet.
+     Hod shebeChesed to the middle of Netzach shebeTiferet.
 
      It sleeps later than the other shape and wakes later, and the Mishmar is
      the last thing before it — which is the only place the sleep can start.
@@ -20925,30 +20927,57 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      hour straight past Chatzot belongs to the bird that wakes and divides,
      and the band is already standing there.
 
-     So what this shape drops is the nap and the evening sleep, and what it
-     keeps is everything the day is measured by. The sleep runs weeks 5-16 —
-     Cheshvan through Tevet — and one wakes into Tiferet shebeTiferet, the
-     truest hour of the day, with Shacharit there and the rest of Tiferet's
-     hour still ahead of it.
+     ── Where the sleep ends ──
 
-     It is the shorter night: one stretch of about five and three quarter hours
-     against the other shape's three pieces of about seven and a quarter. The
-     hours are the structure's and not a recommendation — a person who needs
-     the whole night takes the other shape, or keeps the evening sleep and
-     drops only the nap, which is the same thing with two rests instead of
-     one. */
+     The other shape wakes at the middle of Yesod shebeGevurah, which is
+     Chanukah: light kindled at the darkest turn of the year. That is a reason
+     the year gives. This shape first woke at Tiferet shebeTiferet, which was
+     not a reason at all — it was picked because it was a clean boundary that
+     left a decent night, which is the method backwards.
+
+     The year's own answer is Tu B'Shvat, and it is exact. Checked in every
+     year 5786-5795: 25 Kislev always falls in week 13, Yesod shebeGevurah,
+     and 15 Shevat always falls in week 20, Yesod shebeTiferet — the same
+     Sefirah of the next hour, the same day within the week to within one day,
+     seven weeks apart, which is one whole hour of the day. 12.5 + 7 = 19.5
+     exactly. And the images are one image: Chanukah's light kindled in the
+     dark, and עָלָה הַשְּׂרָף בָּאִילָנוֹת (Rashi, Rosh Hashanah 14a), the
+     sap risen in a tree that stood all winter looking dead. Both are Yesod,
+     which is the hidden beginning to come through.
+
+     It cannot be used, and the reason is not a preference. Measured against
+     the app's own zmanim in seven cities at three points of the year — 21
+     readings, Jerusalem to Rio to Antwerp — 19U falls within three minutes of
+     sof zman Kri'at Shema every single time. Not near it: on it. So week 19
+     is a wall, and everything past it, Tu B'Shvat included, wakes to a Shema
+     whose time has gone.
+
+     That leaves week 18, and week 18 holds Rosh Chodesh Shevat — which is the
+     same New Year for the Tree, one fortnight earlier: בְּאֶחָד בִּשְׁבָט
+     רֹאשׁ הַשָּׁנָה לָאִילָן כְּדִבְרֵי בֵּית שַׁמַּאי (Rosh Hashanah 1:1),
+     where Beit Hillel say the fifteenth. It is also the new moon itself,
+     which is a waking of its own, and the day Moshe הוֹאִיל... בֵּאֵר אֶת
+     הַתּוֹרָה הַזֹּאת, began to make the Torah plain (Devarim 1:3-5). So the
+     sleep ends at 17.5U, the middle of week 18 — which lands on 1 Shevat in
+     every year measured — and the margin before Shema's time runs from 25
+     minutes (Antwerp in December) to 56 (Montreal in June).
+
+     It is the shorter night all the same: about six and a half hours in one
+     stretch against the other shape's three pieces of about seven and a
+     quarter. The hours are the structure's and not a recommendation. */
   function dayShapeOne(U){
     return [
       _dsBand(U),
       {k:'mishmar',en:'Mishmar',he:'מִשְׁמָר',c:DAY_C.mishmar,h1:52*U-24,h2:4*U,
        wk:'weeks 2–4',yr:'Yom Kippur → Shmini Atzeret',
        what:'Kept in this shape too — the year’s Tishrei is not a stretch the day can sleep through'},
-      {k:'sleep',en:'The Night’s Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:4*U,h2:16*U,
-       wk:'weeks 5–16',yr:'Cheshvan → Tevet',
-       what:'One stretch, Hod shebeChesed to Tiferet shebeTiferet — no rest before it and none after'},
-      {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:16*U,h2:21*U,
-       wk:'weeks 17–21',yr:'Tevet → Shevat',
-       what:'Waking into Tiferet shebeTiferet · Shacharit there, inside Tiferet’s own hour'},
+      {k:'sleep',en:'The Night’s Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:4*U,h2:17.5*U,
+       wk:'weeks 5–18',yr:'Cheshvan → Rosh Chodesh Shevat',
+       note:'1 Shevat — the New Year for the Tree of Beit Shammai (Rosh Hashanah 1:1), the new moon, and the day Moshe began to make the Torah plain (Devarim 1:3–5)',
+       what:'One stretch, Hod shebeChesed to the middle of Netzach shebeTiferet — no rest before it and none after'},
+      {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:17.5*U,h2:21*U,
+       wk:'weeks 18–21',yr:'Rosh Chodesh Shevat → Shevat',
+       what:'Waking with Kri’at Shema still ahead of its time, and Shacharit inside Tiferet’s hour'},
       _dsMaalot(U),
       {k:'day2',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:23*U,h2:42*U,
        wk:'weeks 24–42',yr:'Purim → Tammuz',
