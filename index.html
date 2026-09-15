@@ -13553,10 +13553,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         'sleeps</em> is the one described above — the night broken around the band, and a third piece at midday. ' +
         '<em style="font-style:normal;color:var(--ink)">One sleep</em> drops both the evening sleep and the midday ' +
         'one and takes the night’s whole rest in a single stretch, from Hod shebeChesed to Tiferet shebeTiferet. ' +
-        'The band is still stayed up for and the Mishmar still kept after it — the hour straight past Chatzot is ' +
-        'week 1, the Rooster, who is given the understanding to tell day from night, and no shape of the day ' +
-        'sleeps through that. It is the shorter night, and it belongs to whoever would rather have it in one ' +
-        'piece than in three.') +
+        'The band is still stayed up for and the Mishmar still kept after it: the seam holds week 1 — the Rooster, ' +
+        'who is given the understanding to tell day from night — inside the band itself, and weeks 2–4 after it ' +
+        'are Yom Kippur, Sukkot and Shmini Atzeret. Neither shape sleeps through the year’s Tishrei. What this ' +
+        'one gives up is the evening rest and the midday one; it is the shorter night, and it belongs to whoever ' +
+        'would rather have it in one piece than in three.') +
       p('On any night that the shape does not survive, Keter’s three are the part that cannot be moved. ' +
         'The climb itself can be taken earlier, in Malchut, and still be in order.');
 
@@ -20756,9 +20757,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      gatherings are anchored to the year rather than to the sleep: weeks 22-23
      are the turn into Adar and weeks 43-44 the turn into Av, and that holds
      whatever rest does or does not follow them. */
+  /* The band's own three units are weeks 50-52, but the band straddles Chatzot
+     and the seven begin again beneath it, so in clock time it also covers all
+     of week 1 and the head of week 2 — measured in Miami, Chesed shebeChesed
+     runs 12:19-12:51 AM inside a band of 11:25 PM-1:00 AM in December, and
+     1:23-1:47 AM inside 12:41-1:54 AM in June. Which is to say the Rooster's
+     week, and Rosh Hashanah with it, is held by the Mochin itself — in every
+     shape of the day, whatever is done with the sleep. Said here because the
+     stretch that follows used to be labelled "weeks 1-4" and read as though
+     week 1 were in it. */
   function _dsBand(U){
     return {k:'band',en:'The Mochin Band',he:'מֹחִין',c:DAY_C.band,h1:49*U,h2:52*U-24,
-            wk:'weeks 50–52',yr:'Elul · Selichot at Chatzot',
+            wk:'weeks 50–52 · and week 1 beneath it',yr:'Elul · Selichot at Chatzot',
+            note:'The seam carries week 1 inside the band — Chesed shebeChesed, the Rooster, who is given the understanding to tell day from night, and Rosh Hashanah of the year',
             what:'Tikkun Rachel, Tikkun Leah, Hitbodedut · the fifteen climbed'};
   }
 
@@ -20850,8 +20861,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return [
       _dsBand(U),
       {k:'mishmar',en:'Mishmar',he:'מִשְׁמָר',c:DAY_C.mishmar,h1:52*U-24,h2:4*U,
-       wk:'weeks 1–4',yr:'Rosh Hashanah → Shmini Atzeret',
-       what:'Awake through the year’s Tishrei, inside Chesed’s hour'},
+       wk:'weeks 2–4',yr:'Yom Kippur → Shmini Atzeret',
+       what:'Awake through the year’s Tishrei, inside Chesed’s hour — week 1 is already held by the band'},
       {k:'sleep',en:'Night Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:4*U,h2:12.5*U,
        wk:'weeks 5–13',yr:'Cheshvan → Chanukah',
        what:'Hod shebeChesed to the middle of Yesod shebeGevurah'},
@@ -20893,16 +20904,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      It sleeps later than the other shape and wakes later, and the Mishmar is
      the last thing before it — which is the only place the sleep can start.
      The first drawing of this shape began the sleep at the band's close, and
-     that is wrong, for a reason the structure states plainly: the units the
-     Mishmar holds are weeks 1-4, and week 1 is the Rooster. Its song in Perek
-     Shirah is the Zohar's midnight passage — when the Holy One comes to the
-     righteous in the Garden of Eden (Vayakhel 195b) — and the blessing said of
-     it is לַשֶּׂכְוִי בִינָה לְהַבְחִין בֵּין יוֹם וּבֵין לָיְלָה, the
-     understanding to tell day from night. The hour straight after Chatzot
-     belongs to the bird that wakes and divides; there is no shape of the day
-     that can sleep through it. Nor through what stands beside it: weeks 1-4
-     are Rosh Hashanah, Yom Kippur, Sukkot and Shmini Atzeret, the whole of
-     the year's Tishrei inside Chesed's hour.
+     that is wrong: it put weeks 2-4 inside the sleep, and those are Yom
+     Kippur, Sukkot and Shmini Atzeret — the year's Tishrei, which is what the
+     Mishmar is for. (Week 1 itself was never in the sleep; the seam holds it
+     inside the band, as _dsBand says. The stretch was labelled "weeks 1-4"
+     all the same, and a label that says a thing is slept is as good as
+     sleeping it, to anyone reading.)
+
+     What stands just before the sleep is worth knowing for its own sake. Week
+     1 is the Rooster, whose song in Perek Shirah is the Zohar's midnight
+     passage — when the Holy One comes to the righteous in the Garden of Eden
+     (Vayakhel 195b) — and whose blessing is לַשֶּׂכְוִי בִינָה לְהַבְחִין
+     בֵּין יוֹם וּבֵין לָיְלָה, the understanding to tell day from night. The
+     hour straight past Chatzot belongs to the bird that wakes and divides,
+     and the band is already standing there.
 
      So what this shape drops is the nap and the evening sleep, and what it
      keeps is everything the day is measured by. The sleep runs weeks 5-16 —
@@ -20920,8 +20935,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return [
       _dsBand(U),
       {k:'mishmar',en:'Mishmar',he:'מִשְׁמָר',c:DAY_C.mishmar,h1:52*U-24,h2:4*U,
-       wk:'weeks 1–4',yr:'Rosh Hashanah → Shmini Atzeret',
-       what:'Week 1 is the Rooster, who tells day from night — the hour after Chatzot is not slept'},
+       wk:'weeks 2–4',yr:'Yom Kippur → Shmini Atzeret',
+       what:'Kept in this shape too — the year’s Tishrei is not a stretch the day can sleep through'},
       {k:'sleep',en:'The Night’s Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:4*U,h2:16*U,
        wk:'weeks 5–16',yr:'Cheshvan → Tevet',
        what:'One stretch, Hod shebeChesed to Tiferet shebeTiferet — no rest before it and none after'},
