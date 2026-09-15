@@ -13549,6 +13549,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       p('Each row is the hour that begins there, at the two ends of the year. Everything moves between ' +
         'them — some hours by minutes, some by hours — and the band moves with the rest.') +
       table + standing + '<div style="height:14px"></div>' + shapes +
+      p('The dial’s day face will draw either of two shapes. <em style="font-style:normal;color:var(--ink)">Three ' +
+        'sleeps</em> is the one described above — the night broken around the band, and a third piece at midday. ' +
+        '<em style="font-style:normal;color:var(--ink)">One sleep</em> is the staying-up carried all the way: ' +
+        'nothing slept before the band, nothing at midday, and the night taken whole from the band’s close to the ' +
+        'opening of Tiferet. It belongs to the nights the band opens before midnight. On the short nights it costs ' +
+        'an hour and more — in Miami it is 6h37 in December against 5h20 in June — which is the very thing the ' +
+        'broken night exists to avoid.') +
       p('On any night that the shape does not survive, Keter’s three are the part that cannot be moved. ' +
         'The climb itself can be taken earlier, in Malchut, and still be in order.');
 
@@ -20667,6 +20674,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      needs no toggle of its own. */
   var DAY_C={sleep:'#39445f',nap:'#57648a',band:'#e3c25f',mishmar:'#9c8348',day:'#6f6a52',
              catch:'#a8935e'};
+  /* Which of the two shapes the face draws. Not a season and not a city — the
+     one thing here the structure cannot settle, because both shapes keep the
+     band and the two gatherings and differ only in where the sleep is put. So
+     it is the reader's, and it is remembered: a person keeps one shape or the
+     other, and should not have to choose it again on every visit. Three sleeps
+     is the default, being the shape the rest of the app was written around. */
+  var DAY_PLAN='three';                          // 'three' | 'one'
+  try{ var _dp0=localStorage.getItem('kotDayPlan');
+       if(_dp0==='one'||_dp0==='three') DAY_PLAN=_dp0; }catch(e){}
   /* The reader's own hours, laid over the day the structure gives.
      Everything else on this face is derived; these are not, and cannot be —
      no cycle knows when a person eats or works. So they are a layer rather
@@ -20733,15 +20749,105 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       +'#'+readCust().map(function(x){return (x.n||'')+':'+((x.t||[]).join(','));}).join('|');
   }
 
+  /* The three stretches both shapes share, kept in one place so that a change
+     to one is a change to both. The band is the day's fixed point — it is what
+     the whole shape is arranged around, and neither shape moves it. The two
+     gatherings are anchored to the year rather than to the sleep: weeks 22-23
+     are the turn into Adar and weeks 43-44 the turn into Av, and that holds
+     whatever rest does or does not follow them. */
+  function _dsBand(U){
+    return {k:'band',en:'The Mochin Band',he:'מֹחִין',c:DAY_C.band,h1:49*U,h2:52*U-24,
+            wk:'weeks 50–52',yr:'Elul · Selichot at Chatzot',
+            what:'Tikkun Rachel, Tikkun Leah, Hitbodedut · the fifteen climbed'};
+  }
+
+  /* Two units apiece. In the shape with a midday sleep each gathering ends
+     where a rest begins — the same shape the Mi'utim have against the
+     night's sleep — so that neither sits loose in the middle of the waking
+     day. The shape that sleeps once has no midday rest for them to run up
+     to, and they keep their place all the same, because the reason that
+     holds them there in the end is the year's and not the sleep's.
+
+     Week 23 is 3-9 Adar in every year measured, leap or not, so it always
+     holds 7 Adar: Moshe's day, and Moshe is the one who went up.
+
+     The two land in the same place inside their own hour, which was not
+     arranged: weeks 22-23 are Chesed and Gevurah of Netzach and weeks
+     43-44 are Chesed and Gevurah of Malchut, so each gathering opens its
+     Sefirah with the two arms. And those are the two hours whose prayers
+     are already general reckonings — Netzach carries the Tikkun HaKlali,
+     the remedy that stands in for all the rest, and Malchut the Shema
+     said upon the bed, where the day is accounted for. What is caught up
+     is caught up in the hours that exist for catching up.
+
+     And they fall in the two months the Gemara sets against each other:
+
+       מִשֶּׁנִּכְנַס אֲדָר מַרְבִּין בְּשִׂמְחָה   when Adar enters we increase joy
+       מִשֶּׁנִּכְנַס אָב מְמַעֲטִין בְּשִׂמְחָה   when Av enters we diminish it
+
+     Week 22 ends on 2 Adar and week 43 on 2 Av in every year measured,
+     so each gathering spans the turn of its month, and each ends on the
+     ninth of it. In a plain year the two spans are 26 Shevat - 9 Adar and
+     25 Tammuz - 9 Av: one day apart at the start, the same day at the
+     end, fourteen days each.
+
+     From Adar — Adar II in a leap year — through to Tishrei, the dates of
+     the weeks do not move: the extra month is absorbed before that, so
+     everything from Purim's week onward carries the same Hebrew dates
+     whatever kind of year it is. That is why 25 Tammuz - 9 Av came back
+     identical in all five years measured, and why Purim, Rosh Chodesh
+     Nisan, Tu B'Av and Rosh Chodesh Elul each hold their position exactly.
+     Week 23 is the seam itself, the week the leap month is taken up in,
+     which is why it alone reads 5 Adar I - 9 Adar II when the year is
+     full. So the Mi'utim keep their dates always; the Ma'alot keep theirs
+     in a plain year and stretch across the intercalation in a leap one,
+     and the ninth is what holds on both sides.
+     The fifteen that ascend are gathered as the month of increasing comes
+     in, and the fifteen that wane as the month of diminishing does. On
+     that side it is not even a likeness: מִיעוּט and מְמַעֲטִין are one
+     root. The other side rhymes in sense rather than in letters — מַעֲלוֹת
+     is ascent and מַרְבִּין is increase, which are the same motion under
+     two words.
+
+     Only the Av half was placed for this. The Adar half was placed to make
+     each gathering run up to a rest, and arrived there on its own.
+
+     And both close on a ninth, which is a day of breaking on either side.
+     Orach Chayim 580:2 lists the days it is fitting to fast and ends with
+     two: בז' באדר מת משה רבינו ע"ה, בט' בו נחלקו בית שמאי ובית הלל — on
+     the 7th of Adar Moshe died, on the 9th of it Beit Shammai and Beit
+     Hillel divided. Week 23 runs 3-9 Adar and so holds both, the last two
+     clauses of that siman. The other ninth is Tisha B'Av, when the House
+     itself was divided from us.
+
+     So the fifteen are gathered up to the day the thing broke, and then
+     one rests. But the Adar ninth carries its own repair: on 9 Adar II
+     5700 — 19 March 1940, checked — the Rebbe Rayatz reached America out
+     of Warsaw, and Torah was replanted where it had been said it could
+     not grow. The day of machloket is also the day of a beginning. The
+     ninth of Av is still owed its own. */
+  function _dsMaalot(U){
+    return {k:'maalot',en:'Catching up the Ma’alot',he:'מַעֲלוֹת',c:DAY_C.catch,h1:21*U,h2:23*U,
+            wk:'weeks 22–23',yr:'the turn into Adar → 9 Adar · מַרְבִּין בְּשִׂמְחָה',
+            note:'9 Adar — the day Beit Shammai and Beit Hillel divided (Orach Chayim 580:2), and the day the Rebbe Rayatz reached America, 5700',
+            what:'The two arms open Netzach, whose prayer is the Tikkun HaKlali — the remedy that stands for all'};
+  }
+
+  function _dsMiutim(U){
+    return {k:'miutim',en:'Catching up the Mi’utim',he:'מִיעוּטִים',c:DAY_C.catch,h1:42*U,h2:44*U,
+            wk:'weeks 43–44',yr:'the turn into Av → 9 Av · מְמַעֲטִין בְּשִׂמְחָה',
+            note:'9 Av — the day the House was destroyed, whose tikkun is still owed',
+            what:'The two arms open Malchut, whose prayer is the Shema upon the bed — the day accounted for'};
+  }
+
   function dayShape(map){
     var U=SEVEN_END/49, openMin=map.hToMin(49*U);
     var evening=openMin>=720;                  // the band opens in the evening
     var bed=(evening?45:44)*U;                 // week 46 if stayed up for, else 45
     var w=evening?46:45;
+    if(DAY_PLAN==='one') return dayShapeOne(U);
     return [
-      {k:'band',en:'The Mochin Band',he:'מֹחִין',c:DAY_C.band,h1:49*U,h2:52*U-24,
-       wk:'weeks 50–52',yr:'Elul · Selichot at Chatzot',
-       what:'Tikkun Rachel, Tikkun Leah, Hitbodedut · the fifteen climbed'},
+      _dsBand(U),
       {k:'mishmar',en:'Mishmar',he:'מִשְׁמָר',c:DAY_C.mishmar,h1:52*U-24,h2:4*U,
        wk:'weeks 1–4',yr:'Rosh Hashanah → Shmini Atzeret',
        what:'Awake through the year’s Tishrei, inside Chesed’s hour'},
@@ -20751,81 +20857,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:12.5*U,h2:21*U,
        wk:'weeks 13–21',yr:'Chanukah → Shevat',
        what:'Shacharit at Tiferet · Tikkun HaKlali at Netzach'},
-      /* Two units, ending where the midday sleep begins — the same shape the
-         Mi'utim have against the night's sleep. Each gathering runs up to a
-         rest rather than sitting loose in the middle of the waking day.
-         Week 23 is 3-9 Adar in every year measured, leap or not, so it always
-         holds 7 Adar: Moshe's day, and Moshe is the one who went up.
-
-         The two land in the same place inside their own hour, which was not
-         arranged: weeks 22-23 are Chesed and Gevurah of Netzach and weeks
-         43-44 are Chesed and Gevurah of Malchut, so each gathering opens its
-         Sefirah with the two arms. And those are the two hours whose prayers
-         are already general reckonings — Netzach carries the Tikkun HaKlali,
-         the remedy that stands in for all the rest, and Malchut the Shema
-         said upon the bed, where the day is accounted for. What is caught up
-         is caught up in the hours that exist for catching up.
-
-         And they fall in the two months the Gemara sets against each other:
-
-           מִשֶּׁנִּכְנַס אֲדָר מַרְבִּין בְּשִׂמְחָה   when Adar enters we increase joy
-           מִשֶּׁנִּכְנַס אָב מְמַעֲטִין בְּשִׂמְחָה   when Av enters we diminish it
-
-         Week 22 ends on 2 Adar and week 43 on 2 Av in every year measured,
-         so each gathering spans the turn of its month, and each ends on the
-         ninth of it. In a plain year the two spans are 26 Shevat - 9 Adar and
-         25 Tammuz - 9 Av: one day apart at the start, the same day at the
-         end, fourteen days each.
-
-         From Adar — Adar II in a leap year — through to Tishrei, the dates of
-         the weeks do not move: the extra month is absorbed before that, so
-         everything from Purim's week onward carries the same Hebrew dates
-         whatever kind of year it is. That is why 25 Tammuz - 9 Av came back
-         identical in all five years measured, and why Purim, Rosh Chodesh
-         Nisan, Tu B'Av and Rosh Chodesh Elul each hold their position exactly.
-         Week 23 is the seam itself, the week the leap month is taken up in,
-         which is why it alone reads 5 Adar I - 9 Adar II when the year is
-         full. So the Mi'utim keep their dates always; the Ma'alot keep theirs
-         in a plain year and stretch across the intercalation in a leap one,
-         and the ninth is what holds on both sides.
-         The fifteen that ascend are gathered as the month of increasing comes
-         in, and the fifteen that wane as the month of diminishing does. On
-         that side it is not even a likeness: מִיעוּט and מְמַעֲטִין are one
-         root. The other side rhymes in sense rather than in letters — מַעֲלוֹת
-         is ascent and מַרְבִּין is increase, which are the same motion under
-         two words.
-
-         Only the Av half was placed for this. The Adar half was placed to make
-         each gathering run up to a rest, and arrived there on its own.
-
-         And both close on a ninth, which is a day of breaking on either side.
-         Orach Chayim 580:2 lists the days it is fitting to fast and ends with
-         two: בז' באדר מת משה רבינו ע"ה, בט' בו נחלקו בית שמאי ובית הלל — on
-         the 7th of Adar Moshe died, on the 9th of it Beit Shammai and Beit
-         Hillel divided. Week 23 runs 3-9 Adar and so holds both, the last two
-         clauses of that siman. The other ninth is Tisha B'Av, when the House
-         itself was divided from us.
-
-         So the fifteen are gathered up to the day the thing broke, and then
-         one rests. But the Adar ninth carries its own repair: on 9 Adar II
-         5700 — 19 March 1940, checked — the Rebbe Rayatz reached America out
-         of Warsaw, and Torah was replanted where it had been said it could
-         not grow. The day of machloket is also the day of a beginning. The
-         ninth of Av is still owed its own. */
-      {k:'maalot',en:'Catching up the Ma’alot',he:'מַעֲלוֹת',c:DAY_C.catch,h1:21*U,h2:23*U,
-       wk:'weeks 22–23',yr:'the turn into Adar → 9 Adar · מַרְבִּין בְּשִׂמְחָה',
-       note:'9 Adar — the day Beit Shammai and Beit Hillel divided (Orach Chayim 580:2), and the day the Rebbe Rayatz reached America, 5700',
-       what:'The two arms open Netzach, whose prayer is the Tikkun HaKlali — the remedy that stands for all'},
+      _dsMaalot(U),
       {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:23*U,h2:26*U,
        wk:'weeks 24–26',yr:'Purim → Rosh Chodesh Nisan',
        what:'Straddles Chatzot HaYom as the band straddles Chatzot HaLailah'},
       {k:'day2',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:26*U,h2:42*U,
        wk:'weeks 27–42',yr:'Nisan → Tammuz',
        what:'Mincha at Hod · Maariv at Yesod'},
-      {k:'miutim',en:'Catching up the Mi’utim',he:'מִיעוּטִים',c:DAY_C.catch,h1:42*U,h2:44*U,
-       wk:'weeks 43–44',yr:'the turn into Av → 9 Av · מְמַעֲטִין בְּשִׂמְחָה',
-       note:'9 Av — the day the House was destroyed, whose tikkun is still owed',
-       what:'The two arms open Malchut, whose prayer is the Shema upon the bed — the day accounted for'},
+      _dsMiutim(U),
       {k:'day2b',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:44*U,h2:bed,
        wk:evening?'week 45':'—',yr:evening?'10–16 Av':'',
        what:'Kri’at Shema at Malchut, and the last of the day'},
@@ -20840,6 +20879,52 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // difference, which is safe here: the band's own ends straddle the seam
     // and are far apart, never equal.
     ].filter(function(x){ return Math.abs(x.h2-x.h1)>1e-9; });
+  }
+
+  /* The second shape: one sleep, and no midday rest.
+
+     The first shape breaks the night in two around the band and takes a third
+     piece at midday — three rests, about seven and a quarter hours between
+     them. This one keeps the band and sleeps once, straight after it: nothing
+     is slept before the band, nothing after noon, and the sleep runs from the
+     band's close to the opening of Tiferet.
+
+     So the whole of Chesed's hour and the whole of Gevurah's are slept, and
+     one wakes into the pillar that stands between the two arms, with Shacharit
+     at the top of Tiferet's own hour. It is the practice the Winter & Summer ⓘ
+     on Today's Focus already describes, for the nights the band opens before midnight —
+     "one unbroken night, Chesed and Gevurah slept through to Shacharit at
+     Tiferet" — drawn rather than only said.
+
+     Read as the year, the sleep covers weeks 1-14: Rosh Hashanah to the end of
+     Chanukah, the whole of the Days of Awe and the lights of Kislev passing
+     while one is asleep. That is the cost, and it is worth naming: the first
+     shape holds a Mishmar through the year's Tishrei and this one does not.
+     What it gives back is the night in one piece, and a day with no hour
+     owed to sleep between waking and the band.
+
+     It is shorter — about six hours against seven and a quarter — which is
+     what a single sleep starting after Chatzot can be. The hours are the
+     structure's, not a recommendation; a person who needs more takes the other
+     shape, or wakes two units later, at Tiferet shebeTiferet. */
+  function dayShapeOne(U){
+    return [
+      _dsBand(U),
+      {k:'sleep',en:'The Night’s Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:52*U-24,h2:14*U,
+       wk:'weeks 1–14',yr:'Rosh Hashanah → the end of Chanukah',
+       what:'From the band’s close to the opening of Tiferet — Chesed and Gevurah slept through'},
+      {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:14*U,h2:21*U,
+       wk:'weeks 15–21',yr:'Tevet → Shevat',
+       what:'Shacharit as Tiferet opens · the whole of Tiferet’s hour awake'},
+      _dsMaalot(U),
+      {k:'day2',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:23*U,h2:42*U,
+       wk:'weeks 24–42',yr:'Purim → Tammuz',
+       what:'Chatzot HaYom passes inside it · Mincha at Hod · Maariv at Yesod'},
+      _dsMiutim(U),
+      {k:'day2b',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:44*U,h2:49*U,
+       wk:'weeks 45–49',yr:'10 Av → Elul',
+       what:'Malchut kept whole — nothing is slept before the band'}
+    ];
   }
 
   function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.floor(m%60);
@@ -21165,7 +21250,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   foot.className='kotw-foot';
   function faceFoot(){
     foot.innerHTML=(FACE==='day'
-      ? 'Tap any stretch \u00b7 the shape follows the season on its own \u2014 the evening sleep steps back a week when the band opens before midnight'
+      ? (DAY_PLAN==='one'
+         ? 'Tap any stretch \u00b7 one sleep, from the band\u2019s close to the opening of Tiferet \u2014 nothing slept before the band, and no midday rest'
+         : 'Tap any stretch \u00b7 the shape follows the season on its own \u2014 the evening sleep steps back a week when the band opens before midnight')
       : FACE==='sets'
       ? 'Tap any set \u00b7 eleven of paired letters, five of finals, one of vowels \u00b7 set 17 runs twelve days, not twenty-two'
       : 'Tap any step \u00b7 Weeks 50\u201352 hover above the Chatzot seam')+' · '+
@@ -21182,6 +21269,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     '<button class="year-pill-btn year-pill-active" data-face="weeks">52 weeks</button>'+
     '<button class="year-pill-btn" data-face="sets">17 sets</button>'+
     '<button class="year-pill-btn" data-face="day">the day</button></div>'+
+    /* The second toggle sits under the first and turns on the day face alone.
+       Its own margin rather than the row's: the pills carry a transparent
+       44px reach, and two rows closer than that have each other's reach to
+       stand in for their own. */
+    '<div class="year-toggle-pill kotw-plan" style="margin:18px 0;display:none;">'+
+      '<button class="year-pill-btn" data-plan="three">three sleeps</button>'+
+      '<button class="year-pill-btn" data-plan="one">one sleep</button></div>'+
     '<div class="kotw-acts" style="display:none;">'+
       '<button type="button" class="ka-open"></button>'+
       '<div class="ka-panel" hidden></div></div>';
@@ -21191,6 +21285,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var actsOpen=false;
   function hhmm(m){return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+(m%60)).slice(-2);}
   function toMin(v){var p=(v||'').split(':');return v?(+p[0])*60+(+p[1]):null;}
+  function planRow(){
+    var wrap=fr.querySelector('.kotw-plan'); if(!wrap)return;
+    wrap.style.display=(FACE==='day')?'':'none';
+    wrap.querySelectorAll('[data-plan]').forEach(function(x){
+      x.className='year-pill-btn'+(x.dataset.plan===DAY_PLAN?' year-pill-active':'');});
+  }
   function actsRow(){
     var wrap=fr.querySelector('.kotw-acts'); if(!wrap)return;
     wrap.style.display=(FACE==='day')?'':'none';
@@ -21262,14 +21362,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if(e.target.classList&&e.target.classList.contains('ka-clear')){
       writeActs({}); writeCust([]); actsRow(); tick(); return;
     }
+    var pb=e.target.closest&&e.target.closest('[data-plan]');
+    if(pb){
+      DAY_PLAN=pb.dataset.plan;
+      try{ localStorage.setItem('kotDayPlan',DAY_PLAN); }catch(err){}
+      planRow(); faceFoot(); userSelected=false; curSel=null; tick(); return;
+    }
     var b=e.target.closest&&e.target.closest('[data-face]');
     if(!b)return;
     FACE=b.dataset.face;
     fr.querySelectorAll('[data-face]').forEach(function(x){
       x.className='year-pill-btn'+(x.dataset.face===FACE?' year-pill-active':'');});
-    faceFoot(); faceSub(); actsRow(); userSelected=false; curSel=null; tick();
+    faceFoot(); faceSub(); planRow(); actsRow(); userSelected=false; curSel=null; tick();
   });
-  actsRow();
+  planRow(); actsRow();
   root.insertBefore(fr,foot);
 
   function curWeek(){
@@ -21295,7 +21401,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var userSelected=false;
   function tick(){
     var map=timeMap();
-    var sig=FACE+'|'+(FACE==='day'?actsSig():'')+'|'+
+    var sig=FACE+'|'+(FACE==='day'?DAY_PLAN+actsSig():'')+'|'+
       (map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
