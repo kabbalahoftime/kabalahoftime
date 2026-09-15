@@ -20767,10 +20767,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      stretch that follows used to be labelled "weeks 1-4" and read as though
      week 1 were in it. */
   function _dsBand(U){
+    /* Chochmah's prayer follows the same Tachanun swap the live tag and the
+       Daily Script already make: on a day Tachanun is not said, Tikkun Rachel
+       is not said either, and Perek Shira stands in its place. Shabbat is such
+       a day every week, and this caption named a prayer that was not being
+       said on it. */
+    var first=(typeof _noTachanunToday!=='undefined'&&_noTachanunToday)?'Perek Shira':'Tikkun Rachel';
     return {k:'band',en:'The Mochin Band',he:'מֹחִין',c:DAY_C.band,h1:49*U,h2:52*U-24,
             wk:'weeks 50–52 · and week 1 beneath it',yr:'Elul · Selichot at Chatzot',
             note:'The seam carries week 1 inside the band — Chesed shebeChesed, the Rooster, who is given the understanding to tell day from night, and Rosh Hashanah of the year',
-            what:'Tikkun Rachel, Tikkun Leah, Hitbodedut · the fifteen climbed'};
+            what:first+', Tikkun Leah, Hitbodedut · the fifteen climbed'};
   }
 
   /* Two units apiece. In the shape with a midday sleep each gathering ends
