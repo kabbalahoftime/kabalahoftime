@@ -13567,13 +13567,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         '<em style="font-style:normal;color:var(--ink)">Two sleeps</em> drops the evening rest and the Mishmar: ' +
         'the sleep begins the moment the band closes, in Gevurah shebeChesed, and because the midday rest is ' +
         'still there it can end early — within minutes of sunrise, at the same point the first shape rises. ' +
-        '<em style="font-style:normal;color:var(--ink)">One sleep</em> keeps the Mishmar but takes nothing at ' +
-        'midday, so its single stretch must run later, to Rosh Chodesh Shevat — the middle of week 18, and the ' +
-        'last point of the morning that still wakes with Kri’at Shema ahead of its time.') +
-      p('What is given up differs. The two that sleep from the band’s close pass the year’s Tishrei — weeks 2–4, ' +
-        'Yom Kippur, Sukkot and Shmini Atzeret — inside the sleep, where the Mishmar exists to hold them awake. ' +
-        'Week 1 is not at stake in any of them: the seam carries it inside the band itself, and week 1 is the ' +
-        'Rooster, who is given the understanding to tell day from night.') +
+        '<em style="font-style:normal;color:var(--ink)">One sleep</em> begins in the same place and takes nothing ' +
+        'at midday either, so it simply runs on — to Rosh Chodesh Shevat, the middle of week 18 and the last ' +
+        'point of the morning that still wakes with Kri’at Shema ahead of its time. It is the longest night of ' +
+        'the three and the latest morning.') +
+      p('What is given up differs. The two that lie down at the band’s close pass the year’s Tishrei — weeks 2–4, ' +
+        'Yom Kippur, Sukkot and Shmini Atzeret — inside the sleep, and only the three-sleep shape keeps the ' +
+        'Mishmar that holds them awake. Week 1 is not at stake in any of them: the seam carries it inside the ' +
+        'band itself, and week 1 is the Rooster, who is given the understanding to tell day from night.') +
       p('On any night that the shape does not survive, Keter’s three are the part that cannot be moved. ' +
         'The climb itself can be taken earlier, in Malchut, and still be in order.');
 
@@ -21035,22 +21036,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      It is the shorter night all the same: about six and a half hours in one
      stretch against the other shape's three pieces of about seven and a
      quarter. The hours are the structure's and not a recommendation. */
-  /* The shape that sleeps once. The band is stayed up for, the Mishmar kept
-     after it, and the night's whole rest taken in a single stretch from Hod
-     shebeChesed to the middle of week 18 — Rosh Chodesh Shevat, the last point
-     of the morning that still wakes with Kri'at Shema ahead of its time.
-     Nothing before the band and nothing at midday, which is what makes it the
-     shortest night of the three. */
+  /* The shape that sleeps once, and the plainest of the three: up for the
+     band, down the moment it closes, and nothing else until morning. The
+     sleep begins where the two-sleep shape's does — inside week 2, Gevurah
+     shebeChesed, which is where the seam puts the band's close — and runs to
+     the middle of week 18, Rosh Chodesh Shevat, the last point of the morning
+     that still wakes with Kri'at Shema ahead of its time.
+
+     Having no midday rest and no Mishmar, it takes the whole night in one
+     piece and so is the longest of the three, not the shortest: it started
+     out keeping the Mishmar and waking at the same late hour, which made it
+     the shortest for no gain. Only the three-sleep shape holds the Mishmar
+     now, and what these two give up for their earlier bedtime is the year's
+     Tishrei — weeks 2 to 4, Yom Kippur, Sukkot and Shmini Atzeret. Week 1 is
+     inside the band in every shape, so the Rooster is never slept through. */
   function dayShapeOne(U){
     return [
       _dsBand(U),
-      {k:'mishmar',en:'Mishmar',he:'מִשְׁמָר',c:DAY_C.mishmar,h1:52*U-24,h2:4*U,
-       wk:'weeks 2–4',yr:'Yom Kippur → Shmini Atzeret',
-       what:'Kept in this shape — the year’s Tishrei held awake inside Chesed’s hour'},
-      {k:'sleep',en:'The Night’s Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:4*U,h2:17.5*U,
-       wk:'weeks 5–18',yr:'Cheshvan → Rosh Chodesh Shevat',
+      {k:'sleep',en:'The Night’s Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:52*U-24,h2:17.5*U,
+       wk:'weeks 2–18',yr:'Yom Kippur → Rosh Chodesh Shevat',
        note:'1 Shevat — the New Year for the Tree of Beit Shammai (Rosh Hashanah 1:1), the new moon, and the day Moshe began to make the Torah plain (Devarim 1:3–5)',
-       what:'One stretch, Hod shebeChesed to the middle of Netzach shebeTiferet — no rest before it and none after'},
+       what:'From the band’s close, in Gevurah shebeChesed, to the middle of Netzach shebeTiferet — nothing before it and nothing after'},
       {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:17.5*U,h2:21*U,
        wk:'weeks 18–21',yr:'Rosh Chodesh Shevat → Shevat',
        what:'Waking with Kri’at Shema still ahead of its time, and Shacharit inside Tiferet’s hour'},
@@ -21434,7 +21440,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     var dayFoot = (DAY_PLAN==='band')
       ? 'Tap any stretch \u00b7 two sleeps \u2014 down at the band\u2019s close, in Gevurah shebeChesed, up within minutes of sunrise, and the midday rest kept'
       : (DAY_PLAN==='one')
-      ? 'Tap any stretch \u00b7 one sleep and no midday rest \u2014 the band is stayed up for, the Mishmar kept after it, and the night taken whole from Hod shebeChesed'
+      ? 'Tap any stretch \u00b7 one sleep and nothing else \u2014 down at the band\u2019s close and up at Rosh Chodesh Shevat, the longest night of the three and the latest morning'
       : 'Tap any stretch \u00b7 the shape follows the season on its own \u2014 the evening sleep steps back a week when the band opens before midnight';
     foot.innerHTML=(FACE==='day'
       ? dayFoot
