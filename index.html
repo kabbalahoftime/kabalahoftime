@@ -13562,8 +13562,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       p('The dial’s day face will draw three shapes, and the band is stayed up for in all of them. ' +
         '<em style="font-style:normal;color:var(--ink)">Three sleeps</em> is the one described above — the night ' +
         'broken around the band, with an evening rest before it and a third at midday — whose window is the same ' +
-        'three steps as ever, opening where the Ma’alot are caught up, with one of the three slept: ' +
-        'twenty-five to thirty-two minutes, drawn on the step that holds Chatzot HaYom. ' +
+        'three steps as ever, opening where the Ma’alot are caught up, with two of the three slept: ' +
+        'fifty to sixty-four minutes, on the steps that hold Chatzot HaYom between them. ' +
         '<em style="font-style:normal;color:var(--ink)">Two sleeps</em> drops the evening rest and the Mishmar: ' +
         'the sleep begins the moment the band closes, in Gevurah shebeChesed, and because the midday rest is ' +
         'still there it can end early — within minutes of sunrise, at the same point the first shape rises. ' +
@@ -20891,14 +20891,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      sleep's, like the gatherings above: weeks 24-26, Purim to Rosh Chodesh
      Nisan, straddling Chatzot HaYom as the band straddles Chatzot HaLailah.
 
-     The short form keeps one sub-unit of the three, and which one is not a
-     choice: Chatzot HaYom falls at unit 25.363, which is inside week 26 and
-     36% through it. Week 26 alone is therefore the only single unit that still
-     holds midday, and it ends exactly on Rosh Chodesh Nisan — checked in five
-     common years, 24 Adar to 1 Nisan every time. One unit runs 25 to 32
-     minutes across the year in Miami, so "about half an hour" needs no fixed
-     number of clock minutes; it stretches and compresses with the day like
-     everything else here.
+     The short form sleeps two of the three units and leaves the first as
+     window. Which two is not a choice: Chatzot HaYom falls at unit 25.363,
+     inside week 26 and 36% through it, so any form of the rest that still
+     holds midday has to end at 26 — and weeks 25-26 are the two that do.
+     Week 26 also ends exactly on Rosh Chodesh Nisan, checked in five common
+     years, 24 Adar to 1 Nisan every time. Two units run 50 to 64 minutes
+     across the year in Miami, so the length needs no fixed number of clock
+     minutes; it stretches and compresses with the day like everything else
+     here.
 
      Drawn as a window rather than as a shortened block, which is what keeps
      the Ma'alot running into a rest. All three units stay the rest's own hours
@@ -20907,21 +20908,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      the solid one, so the shape is honest about both — that the hours belong
      to the rest, and that only a third of them is spent asleep.
 
-     A person who would rather sleep the first or second step has the window's
-     own hours for it; week 26 is where the unit is drawn because it is the one
-     that holds Chatzot HaYom. The shape that sleeps twice takes all three. */
+     The window that remains is week 24, which is Purim's own — 10 to 16 Adar
+     in every common year measured, and 14 Adar inside it. A person who would
+     rather sleep it than the step after has the window's hours for that; what
+     moves if they do is the straddle of midday, nothing else. The shape that
+     sleeps twice takes all three units. */
   function _dsNapWin(U){
-    return {k:'napwin',en:'Midday — the rest’s window',he:'צָהֳרַיִם',c:DAY_C.napwin,h1:23*U,h2:25*U,
-            wk:'weeks 24–25',yr:'Purim → 23 Adar',
-            what:'The window opens where the Ma’alot are caught up · one of its three steps is slept'};
+    return {k:'napwin',en:'Midday — the rest’s window',he:'צָהֳרַיִם',c:DAY_C.napwin,h1:23*U,h2:24*U,
+            wk:'week 24',yr:'Purim’s own week · 10–16 Adar',
+            what:'The window opens where the Ma’alot are caught up · two of its three steps are slept'};
   }
 
   function _dsNap(U, short){
     return short
-      ? {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:25*U,h2:26*U,
-         wk:'week 26',yr:'24 Adar → Rosh Chodesh Nisan',
-         note:'The one sub-unit of the three that holds Chatzot HaYom — and it closes as Nisan opens',
-         what:'Half an hour, near enough: one sub-unit, 25–32 minutes as the year turns'}
+      ? {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:24*U,h2:26*U,
+         wk:'weeks 25–26',yr:'17 Adar → Rosh Chodesh Nisan',
+         note:'The two sub-units that hold Chatzot HaYom between them — and they close as Nisan opens',
+         what:'Two of the window’s three steps, 50–64 minutes as the year turns'}
       : {k:'nap',en:'The Midday Sleep',he:'שְׁנַת צָהֳרַיִם',c:DAY_C.nap,h1:23*U,h2:26*U,
          wk:'weeks 24–26',yr:'Purim → Rosh Chodesh Nisan',
          what:'Straddles Chatzot HaYom as the band straddles Chatzot HaLailah'};
