@@ -13559,22 +13559,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       p('Each row is the hour that begins there, at the two ends of the year. Everything moves between ' +
         'them — some hours by minutes, some by hours — and the band moves with the rest.') +
       table + standing + '<div style="height:14px"></div>' + shapes +
-      p('The dial’s day face will draw three shapes, and the band is stayed up for in all of them. ' +
+      p('The dial’s day face draws five shapes in three families. ' +
         '<em style="font-style:normal;color:var(--ink)">Three sleeps</em> is the one described above — the night ' +
-        'broken around the band, with an evening rest before it and a third at midday — whose window is the same ' +
-        'three steps as ever, opening where the Ma’alot are caught up, with two of the three slept: ' +
-        'fifty to sixty-four minutes, on the steps that hold Chatzot HaYom between them. ' +
-        '<em style="font-style:normal;color:var(--ink)">Two sleeps</em> drops the evening rest and the Mishmar: ' +
-        'the sleep begins the moment the band closes, in Gevurah shebeChesed, and because the midday rest is ' +
-        'still there it can end early — within minutes of sunrise, at the same point the first shape rises. ' +
-        '<em style="font-style:normal;color:var(--ink)">One sleep</em> begins in the same place and takes nothing ' +
-        'at midday either, so it simply runs on — to Rosh Chodesh Shevat, the middle of week 18 and the last ' +
-        'point of the morning that still wakes with Kri’at Shema ahead of its time. It is the longest night of ' +
-        'the three and the latest morning.') +
-      p('What is given up differs. The two that lie down at the band’s close pass the year’s Tishrei — weeks 2–4, ' +
-        'Yom Kippur, Sukkot and Shmini Atzeret — inside the sleep, and only the three-sleep shape keeps the ' +
-        'Mishmar that holds them awake. Week 1 is not at stake in any of them: the seam carries it inside the ' +
-        'band itself, and week 1 is the Rooster, who is given the understanding to tell day from night.') +
+        'broken around the band, with an evening rest before it and a third at midday, whose window is the same ' +
+        'three steps as ever, opening where the Ma’alot are caught up, with two of the three slept. ' +
+        '<em style="font-style:normal;color:var(--ink)">Two sleeps</em> drops the evening rest and the Mishmar ' +
+        'and goes down the moment the band closes, in Gevurah shebeChesed; keeping the full midday rest, it ' +
+        'rises at the same hour the first shape does.') +
+      p('<em style="font-style:normal;color:var(--ink)">One sleep</em> takes the whole night in one piece and ' +
+        'nothing at midday, and comes in three, told apart by when it lies down. <em style="font-style:normal;' +
+        'color:var(--ink)">Late</em> keeps the Mishmar and goes down after it at Hod shebeChesed, running to ' +
+        'Rosh Chodesh Shevat — the last point of the morning that still wakes with Kri’at Shema ahead of its ' +
+        'time. <em style="font-style:normal;color:var(--ink)">Medium</em> goes down at the band’s close and ' +
+        'wakes as Tiferet opens: Chesed and Gevurah slept through to Shacharit, which is the practice described ' +
+        'above. <em style="font-style:normal;color:var(--ink)">Early</em> goes down at the evening rest’s own ' +
+        'hour and wakes as Gevurah opens.') +
+      p('What each gives up is worth knowing before it is chosen. Four of the five stay up for the band; ' +
+        '<em style="font-style:normal;color:var(--ink)">early</em> alone does not, and the Mochin fall inside ' +
+        'its sleep. It is offered for the night the vigil cannot be kept, not as an equal of the others — ' +
+        'Keter’s three are the part that cannot be moved. Everything that lies down at the band’s close or ' +
+        'before it also passes the year’s Tishrei inside the sleep, weeks 2 to 4, which is what the Mishmar ' +
+        'exists to hold awake; only three sleeps and the late single sleep keep it. Week 1 is inside the band, ' +
+        'so the Rooster — who is given the understanding to tell day from night — is slept through in the early ' +
+        'shape alone, where the band itself is.') +
       p('On any night that the shape does not survive, Keter’s three are the part that cannot be moved. ' +
         'The climb itself can be taken earlier, in Malchut, and still be in order.');
 
@@ -20712,9 +20719,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      it is the reader's, and it is remembered: a person keeps one shape or the
      other, and should not have to choose it again on every visit. Three sleeps
      is the default, being the shape the rest of the app was written around. */
-  var DAY_PLAN='three';                          // 'three' | 'one' | 'band'
+  var DAY_PLAN='three';                          // 'three' | 'band' | 'one'
+  /* The single-sleep shape comes in three, told apart by when it lies down:
+     early at the evening rest's hour, medium at the band's close, late after
+     the Mishmar. Kept in its own store so the plan toggle stays a three-way
+     and anything already saved still reads. A reader who had chosen 'one'
+     before this existed gets 'late', which is the one that shape was. */
+  var DAY_WHEN='late';                           // 'early' | 'medium' | 'late'
   try{ var _dp0=localStorage.getItem('kotDayPlan');
-       if(_dp0==='one'||_dp0==='three'||_dp0==='band') DAY_PLAN=_dp0; }catch(e){}
+       if(_dp0==='one'||_dp0==='three'||_dp0==='band') DAY_PLAN=_dp0;
+       var _dw0=localStorage.getItem('kotDayWhen');
+       if(_dw0==='early'||_dw0==='medium'||_dw0==='late') DAY_WHEN=_dw0; }catch(e){}
   /* The reader's own hours, laid over the day the structure gives.
      Everything else on this face is derived; these are not, and cannot be —
      no cycle knows when a person eats or works. So they are a layer rather
@@ -20936,7 +20951,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     var evening=openMin>=720;                  // the band opens in the evening
     var bed=(evening?45:44)*U;                 // week 46 if stayed up for, else 45
     var w=evening?46:45;
-    if(DAY_PLAN==='one')  return dayShapeOne(U);
+    if(DAY_PLAN==='one')  return dayShapeOne(U,DAY_WHEN,bed,evening);
     if(DAY_PLAN==='band') return dayShapeTwo(U);
     return [
       _dsBand(U),
@@ -21036,39 +21051,83 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      It is the shorter night all the same: about six and a half hours in one
      stretch against the other shape's three pieces of about seven and a
      quarter. The hours are the structure's and not a recommendation. */
-  /* The shape that sleeps once, and the plainest of the three: up for the
-     band, down the moment it closes, and nothing else until morning. The
-     sleep begins where the two-sleep shape's does — inside week 2, Gevurah
-     shebeChesed, which is where the seam puts the band's close — and runs to
-     the middle of week 18, Rosh Chodesh Shevat, the last point of the morning
-     that still wakes with Kri'at Shema ahead of its time.
+  /* The shape that sleeps once, in three forms. They differ only in when the
+     sleep begins, and each ends where an hour of the day does:
 
-     Having no midday rest and no Mishmar, it takes the whole night in one
-     piece and so is the longest of the three, not the shortest: it started
-     out keeping the Mishmar and waking at the same late hour, which made it
-     the shortest for no gain. Only the three-sleep shape holds the Mishmar
-     now, and what these two give up for their earlier bedtime is the year's
-     Tishrei — weeks 2 to 4, Yom Kippur, Sukkot and Shmini Atzeret. Week 1 is
-     inside the band in every shape, so the Rooster is never slept through. */
-  function dayShapeOne(U){
-    return [
-      _dsBand(U),
-      {k:'sleep',en:'The Night’s Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:52*U-24,h2:17.5*U,
-       wk:'weeks 2–18',yr:'Yom Kippur → Rosh Chodesh Shevat',
-       note:'1 Shevat — the New Year for the Tree of Beit Shammai (Rosh Hashanah 1:1), the new moon, and the day Moshe began to make the Torah plain (Devarim 1:3–5)',
-       what:'From the band’s close, in Gevurah shebeChesed, to the middle of Netzach shebeTiferet — nothing before it and nothing after'},
-      {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:17.5*U,h2:21*U,
-       wk:'weeks 18–21',yr:'Rosh Chodesh Shevat → Shevat',
-       what:'Waking with Kri’at Shema still ahead of its time, and Shacharit inside Tiferet’s hour'},
+       early   lies down at the evening rest's own hour and wakes at 7U, as
+               Chesed's hour closes and Gevurah opens. The band falls inside
+               this sleep — it is the only shape here that does not keep the
+               Mochin, and it is offered for the night the vigil cannot be
+               kept rather than as an equal of the others.
+       medium  lies down at the band's close, inside week 2 at Gevurah
+               shebeChesed, and wakes at 14U as Gevurah's hour closes and
+               Tiferet opens. That is the practice the Winter & Summer ⓘ has
+               always described: Chesed and Gevurah slept through to Shacharit
+               at Tiferet.
+       late    keeps the Mishmar and lies down after it at Hod shebeChesed,
+               running to the middle of week 18 — Rosh Chodesh Shevat, the
+               last point of the morning that still wakes with Kri'at Shema
+               ahead of its time.
+
+     Measured in Miami they come to much the same night by different routes:
+     early 5h33-6h45, medium 5h20-6h36, late 6h07-6h37. What moves is the
+     hour it is taken in, and what is given up with it — early gives up the
+     band, early and medium give up the Mishmar and with it the year's Tishrei
+     in weeks 2 to 4. Week 1 is inside the band, so the Rooster is slept
+     through only in the early form, where the band itself is. */
+  function dayShapeOne(U, when, bed, evening){
+    var tail = [
       _dsMaalot(U),
       {k:'day2',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:23*U,h2:42*U,
        wk:'weeks 24–42',yr:'Purim → Tammuz',
        what:'Chatzot HaYom passes inside it · Mincha at Hod · Maariv at Yesod'},
-      _dsMiutim(U),
+      _dsMiutim(U)
+    ];
+    if (when === 'early') return [
+      {k:'sleep',en:'The Night’s Sleep',he:'שֵׁנָה',c:DAY_C.sleep,h1:bed,h2:7*U,
+       wk:'week '+(evening?46:45)+' → week 7',yr:(evening?'17 Av':'10 Av')+' → Cheshvan',
+       note:'The Mochin fall inside this sleep, and week 1 with them. Keter’s three are the part that cannot be moved — this is the shape for a night they cannot be kept',
+       what:'Down at the evening rest’s own hour and through the band — the one shape that sleeps the Mochin'},
+      {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:7*U,h2:21*U,
+       wk:'weeks 8–21',yr:'Cheshvan → Shevat',
+       what:'Waking as Chesed’s hour closes and Gevurah opens · Shacharit at Tiferet'}
+    ].concat(tail, [
+      {k:'day2b',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:44*U,h2:bed,
+       wk:evening?'week 45':'—',yr:evening?'10–16 Av':'',
+       what:'Kri’at Shema at Malchut, and the last of the day'}
+    // On the nights the band opens after midnight the sleep starts at 44U
+    // itself, so this last stretch has no width at all. A segment of no
+    // duration is still drawn and still answers a tap, so it is dropped —
+    // the same filter the three-sleep shape has carried for the same reason.
+    ]).filter(function(x){ return Math.abs(x.h2-x.h1)>1e-9; });
+    var out = [ _dsBand(U) ];
+    if (when === 'late') out.push(
+      {k:'mishmar',en:'Mishmar',he:'מִשְׁמָר',c:DAY_C.mishmar,h1:52*U-24,h2:4*U,
+       wk:'weeks 2–4',yr:'Yom Kippur → Shmini Atzeret',
+       what:'Kept in this form — the year’s Tishrei held awake inside Chesed’s hour'});
+    var wake = (when==='late') ? 17.5 : 14;
+    out.push(
+      {k:'sleep',en:'The Night’s Sleep',he:'שֵׁנָה',c:DAY_C.sleep,
+       h1:(when==='late')?4*U:52*U-24, h2:wake*U,
+       wk:(when==='late')?'weeks 5–18':'weeks 2–14',
+       yr:((when==='late')?'Cheshvan':'Yom Kippur')+' → '+((when==='late')?'Rosh Chodesh Shevat':'Tevet'),
+       note:(when==='late')
+         ? '1 Shevat — the New Year for the Tree of Beit Shammai (Rosh Hashanah 1:1), the new moon, and the day Moshe began to make the Torah plain (Devarim 1:3–5)'
+         : 'Chesed and Gevurah slept through to Shacharit at Tiferet — the practice the Winter & Summer ⓘ describes for the nights the band is stayed up for',
+       what:(when==='late')
+         ? 'From Hod shebeChesed, the Mishmar kept before it, to the middle of Netzach shebeTiferet'
+         : 'From the band’s close, in Gevurah shebeChesed, to the opening of Tiferet’s hour'},
+      {k:'day',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:wake*U,h2:21*U,
+       wk:(when==='late')?'weeks 18–21':'weeks 15–21',
+       yr:(when==='late')?'Rosh Chodesh Shevat → Shevat':'Tevet → Shevat',
+       what:(when==='late')
+         ? 'Waking with Kri’at Shema still ahead of its time, and Shacharit inside Tiferet’s hour'
+         : 'Waking as Tiferet opens · Shacharit at the top of its own hour'});
+    return out.concat(tail, [
       {k:'day2b',en:'The Waking Day',he:'יוֹם',c:DAY_C.day,h1:44*U,h2:49*U,
        wk:'weeks 45–49',yr:'10 Av → Elul',
        what:'Malchut kept whole — nothing is slept before the band'}
-    ];
+    ]);
   }
 
   /* The shape that sleeps twice. Nothing is slept before the band; the sleep
@@ -21440,7 +21499,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     var dayFoot = (DAY_PLAN==='band')
       ? 'Tap any stretch \u00b7 two sleeps \u2014 down at the band\u2019s close, in Gevurah shebeChesed, up within minutes of sunrise, and the midday rest kept'
       : (DAY_PLAN==='one')
-      ? 'Tap any stretch \u00b7 one sleep and nothing else \u2014 down at the band\u2019s close and up at Rosh Chodesh Shevat, the longest night of the three and the latest morning'
+      ? (DAY_WHEN==='early'
+         ? 'Tap any stretch \u00b7 one sleep, taken early \u2014 down at the evening rest\u2019s hour and up as Gevurah opens, and the Mochin fall inside the sleep: the shape for a night the band cannot be kept'
+         : DAY_WHEN==='medium'
+         ? 'Tap any stretch \u00b7 one sleep, taken at the band\u2019s close in Gevurah shebeChesed \u2014 Chesed and Gevurah slept through to Shacharit as Tiferet opens'
+         : 'Tap any stretch \u00b7 one sleep, taken late \u2014 the Mishmar kept, down at Hod shebeChesed and up at Rosh Chodesh Shevat, the latest morning of the three')
       : 'Tap any stretch \u00b7 the shape follows the season on its own \u2014 the evening sleep steps back a week when the band opens before midnight';
     foot.innerHTML=(FACE==='day'
       ? dayFoot
@@ -21468,6 +21531,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       '<button class="year-pill-btn" data-plan="three">3 sleeps</button>'+
       '<button class="year-pill-btn" data-plan="band">2 sleeps</button>'+
       '<button class="year-pill-btn" data-plan="one">1 sleep</button></div>'+
+    /* The single sleep's three bedtimes. Its own row, shown only when that
+       family is chosen: five pills will not sit on one line at 320px, and the
+       choice really is two-tiered — how many sleeps, then when the one is
+       taken. Same 18px as the row above, for the same reason. */
+    '<div class="year-toggle-pill kotw-when" style="margin:18px 0;display:none;">'+
+      '<button class="year-pill-btn" data-when="early">early</button>'+
+      '<button class="year-pill-btn" data-when="medium">medium</button>'+
+      '<button class="year-pill-btn" data-when="late">late</button></div>'+
     '<div class="kotw-acts" style="display:none;">'+
       '<button type="button" class="ka-open"></button>'+
       '<div class="ka-panel" hidden></div></div>';
@@ -21482,6 +21553,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     wrap.style.display=(FACE==='day')?'':'none';
     wrap.querySelectorAll('[data-plan]').forEach(function(x){
       x.className='year-pill-btn'+(x.dataset.plan===DAY_PLAN?' year-pill-active':'');});
+    var w=fr.querySelector('.kotw-when'); if(!w)return;
+    w.style.display=(FACE==='day'&&DAY_PLAN==='one')?'':'none';
+    w.querySelectorAll('[data-when]').forEach(function(x){
+      x.className='year-pill-btn'+(x.dataset.when===DAY_WHEN?' year-pill-active':'');});
   }
   function actsRow(){
     var wrap=fr.querySelector('.kotw-acts'); if(!wrap)return;
@@ -21554,6 +21629,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if(e.target.classList&&e.target.classList.contains('ka-clear')){
       writeActs({}); writeCust([]); actsRow(); tick(); return;
     }
+    var wb=e.target.closest&&e.target.closest('[data-when]');
+    if(wb){
+      DAY_WHEN=wb.dataset.when;
+      try{ localStorage.setItem('kotDayWhen',DAY_WHEN); }catch(err){}
+      planRow(); faceFoot(); userSelected=false; curSel=null; tick(); return;
+    }
     var pb=e.target.closest&&e.target.closest('[data-plan]');
     if(pb){
       DAY_PLAN=pb.dataset.plan;
@@ -21593,7 +21674,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var userSelected=false;
   function tick(){
     var map=timeMap();
-    var sig=FACE+'|'+(FACE==='day'?DAY_PLAN+actsSig():'')+'|'+
+    var sig=FACE+'|'+(FACE==='day'?DAY_PLAN+DAY_WHEN+actsSig():'')+'|'+
       (map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
