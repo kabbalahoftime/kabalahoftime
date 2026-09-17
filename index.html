@@ -2671,7 +2671,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
   <!-- DAILY LM section -->
   <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
-    <div class="keter-section-label">✦ Year-Round — בכל השנה <span class="maalah">מעלה ט״ו</span></div>
+    <div class="keter-section-label">✦ All Year Round — בכל השנה <span class="maalah">מעלה ט״ו</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada — Rashbi &amp; Rebbe Nachman</div>
     <div class="sefirah-main-text" id="keter-daily-zohar"></div>
     <button class="date-jump-trigger" id="zohar-trigger" style="display:none;" onclick="event.stopPropagation(); openZoharDailyModal()">Zohar summary ↗</button>
@@ -12917,7 +12917,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const heb = own.replace(/[^\u0590-\u05FF]/g, '');
       if (letters.length && heb.length / letters.length >= 0.6) el.setAttribute('lang', 'he');
     });
-    // What is left is mixed — "Year-Round — בכל השנה", "Jerusalem ירושלים".
+    // What is left is mixed — "All Year Round — בכל השנה", "Jerusalem ירושלים".
     // Marking the element would mispronounce the English, so the Hebrew run
     // inside the text node is wrapped instead. Text nodes only: no element is
     // moved and no listener is disturbed, and innerText is unchanged.
@@ -13337,7 +13337,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // ── ABOUT THE CYCLES — tap-ⓘ explanations of each card's headline cycle ──
   const CYCLE_INFO = {
     keterlm: {
-      title: 'Year-Round — בכל השנה',
+      title: 'All Year Round — בכל השנה',
       main: "Rebbe Nachman's Likutei Moharan spread across the entire Jewish year, each lesson pegged to its own Hebrew date and resonating with that day's character — paired with Rashbi's Zohar carried through the whole year — two folios a day, four on Thursday, completing the Zohar in a single year and sealing it with Sefer Yetzirah. Both names carry the year: רבי נחמן = 360 = השנה, and בכל = 52, the weeks of the year; while שמעון בן יוחאי yields the same 360 through ש־ן־י, one letter from each word of his name — and the English agrees: a round is 360 degrees, the year's full turn of the spiral, arriving each year one level higher. Rebbe Nachman extends Rashbi's work of rectification.",
       meta: "An original Kabbalah of Time cycle · Likutei Moharan & the Zohar"
     },
@@ -13660,7 +13660,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     ['י״ב', 'Alef-Bet — 22-Day Cycle', 'Chochmah'],
     ['י״ג', 'Strong Day — Hayom Yom & Rambam', 'Keter'],
     ['י״ד', 'Light that is Good — אור כי טוב', 'Keter'],
-    ['ט״ו', 'Year-Round', 'Keter'],
+    ['ט״ו', 'All Year Round', 'Keter'],
   ];
   const PATH_WANING = [
     ['א׳', 'Chumash with Rashi', 'Keter'],
@@ -16750,7 +16750,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         ? `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>`
         : tanachInfo.text;
     // The summary is not on the face. It sits behind "today's summary" the way
-    // the Year-Round one does, so the card stays the length it was and the
+    // the All Year Round one does, so the card stays the length it was and the
     // reading is what the card shows.
     const _tanSum = TANACH_SUMMARY_PREVIEW[dEff - d_year1 + 1];
     _tanachDetailMain = _tanSum
@@ -18402,7 +18402,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       yesod: 'In Yesod — Foundation, the channel of covenant through which divine blessing flows into the world —',
       malchut: 'In Malchut — Kingdom, the Shekhinah dwelling in our world, receiving and giving form to all the light above —',
       closing: 'Have a wonderful evening and day!',
-      keterLm:            (l, p, t) => `Year-Round — Rashbi & Rebbe Nachman: Likutei Moharan — Rebbe Nachman of Breslov's collected Torah teachings, each lesson pegged to its own Hebrew date — today is Lesson ${l} of ${p}${t ? ', exploring: ' + t : ''}. Beside it, Rashbi's Zohar — two folios a day, completing the whole Zohar in a year — the revealed fire and the hidden light of the day.`,
+      keterLm:            (l, p, t) => `All Year Round — Rashbi & Rebbe Nachman: Likutei Moharan — Rebbe Nachman of Breslov's collected Torah teachings, each lesson pegged to its own Hebrew date — today is Lesson ${l} of ${p}${t ? ', exploring: ' + t : ''}. Beside it, Rashbi's Zohar — two folios a day, completing the whole Zohar in a year — the revealed fire and the hidden light of the day.`,
       keterKst:      (lb, ti, pa) => `In Light that is Good — Ohr Ki Tov: from Keter Shem Tov, the treasury of the Baal Shem Tov's oral teachings (1698–1760) — ${lb}: "${ti}." With it, the Ohr HaChaim HaKadosh (Rabbi Chaim ibn Attar, 1696–1743) on this week's portion, Parashat ${pa} — two great lights of one generation joined in a single section.`,
       keterHayomRambam:      (hy) => `Strong Day — Yom Chazak: HaYom Yom, the Lubavitcher Rebbe's Chassidic calendar with a teaching for each day${hy ? ': "' + hy + '"' : ''}, together with the Rambam — three chapters (or one) of Mishneh Torah daily, and the Kabbalah of Time's own Sefer HaMitzvos cycle: the 365 negative commandments carried from the 25th of Elul to the 3rd of Sivan, and the 248 positive commandments, two each day, from the 4th of Sivan to Erev Yom Kippur.`,
       keterTehillim: (ch)         => `Today's Tehillim spans Chapters ${ch}; the 150 Psalms of King David cycle through the month in a 30-day pattern, each psalm a prayer forged in the full range of human experience.`,
@@ -18843,7 +18843,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     en: {
       opening: (data) => `Welcome to today's Kabbalah of Time. The Kabbalah of Time is a daily spiritual practice that maps each day onto the ten Sefirot — the ten divine qualities through which God's infinite light flows into our world. Think of the Sefirot as ten facets of one diamond: each one reveals a different dimension of the divine. Today is Day ${data.d || '—'} of the Kabbalah of Time calendar, Week ${data.kotWeek || '—'}. The Hebrew date is ${data.hDateStr || '—'}.`,
       today: (_data) => '',
-      keter: (data) => `Keter — the Crown — is the highest of the ten Sefirot, representing pure divine will: the source of all blessing that exists before thought even begins.\n\nLight that is Good — Ohr Ki Tov: Keter Shem Tov is a treasury of oral teachings from Rabbi Israel Ba'al Shem Tov (1698–1760), founder of the Chassidic movement; today's entry is ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}." The Ohr HaChaim HaKadosh — the revered Kabbalistic Torah commentary by Rabbi Chaim ibn Attar of Morocco (1696–1743) — illuminates Parashat ${data.parasha || '—'} this week.\n\nStrong Day — Yom Chazak: Rambam (Mishneh Torah), Rabbi Moshe ben Maimon's monumental 12th-century code covering all of Jewish law, is studied in a three-chapter daily cycle; his Sefer HaMitzvot — the enumeration of all 613 commandments — follows the Kabbalah of Time's own cycle: the 365 negative commandments from the 25th of Elul to the 3rd of Sivan, and the 248 positive commandments, two each day, from the 4th of Sivan to Erev Yom Kippur. HaYom Yom ("From Day to Day") is a Chassidic calendar compiled by the Lubavitcher Rebbe in 1942, with a brief, profound teaching for each day of the year${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — see Chabad.org for today\'s entry'}.\n\nYear-Round — Rashbi & Rebbe Nachman: the collected Torah teachings of Rabbi Nachman of Breslov (1772–1810), great-grandson of the Ba'al Shem Tov — today is Lesson ${data.lmLessonInPart || '—'} of ${data.lmPartLabel || '—'}${data.lmTheme ? ', theme: ' + data.lmTheme : ''}. Beside it, Rashbi's Zohar — two folios a day through the whole year.\n\nTreasury of Chassidic Tales: Story ${data.treasuryDay || '—'} from a collection of mystical stories from the great Chassidic masters.`,
+      keter: (data) => `Keter — the Crown — is the highest of the ten Sefirot, representing pure divine will: the source of all blessing that exists before thought even begins.\n\nLight that is Good — Ohr Ki Tov: Keter Shem Tov is a treasury of oral teachings from Rabbi Israel Ba'al Shem Tov (1698–1760), founder of the Chassidic movement; today's entry is ${data.kstLabel || '—'}: "${data.kstTitleEn || '—'}." The Ohr HaChaim HaKadosh — the revered Kabbalistic Torah commentary by Rabbi Chaim ibn Attar of Morocco (1696–1743) — illuminates Parashat ${data.parasha || '—'} this week.\n\nStrong Day — Yom Chazak: Rambam (Mishneh Torah), Rabbi Moshe ben Maimon's monumental 12th-century code covering all of Jewish law, is studied in a three-chapter daily cycle; his Sefer HaMitzvot — the enumeration of all 613 commandments — follows the Kabbalah of Time's own cycle: the 365 negative commandments from the 25th of Elul to the 3rd of Sivan, and the 248 positive commandments, two each day, from the 4th of Sivan to Erev Yom Kippur. HaYom Yom ("From Day to Day") is a Chassidic calendar compiled by the Lubavitcher Rebbe in 1942, with a brief, profound teaching for each day of the year${data.hayomYomText ? ': "' + data.hayomYomText + '"' : ' — see Chabad.org for today\'s entry'}.\n\nAll Year Round — Rashbi & Rebbe Nachman: the collected Torah teachings of Rabbi Nachman of Breslov (1772–1810), great-grandson of the Ba'al Shem Tov — today is Lesson ${data.lmLessonInPart || '—'} of ${data.lmPartLabel || '—'}${data.lmTheme ? ', theme: ' + data.lmTheme : ''}. Beside it, Rashbi's Zohar — two folios a day through the whole year.\n\nTreasury of Chassidic Tales: Story ${data.treasuryDay || '—'} from a collection of mystical stories from the great Chassidic masters.`,
       chochmah: (data) => `Chochmah — Wisdom — is the second Sefirah, the first flash of divine insight, where pure thought arises before taking any form. In Chochmah, we work with the 22-Day Alef-Bet cycle — a contemplative practice moving through each of the 22 Hebrew letters. Sefer Yetzirah ('Book of Formation'), Judaism's oldest mystical text, teaches that God created the entire world through these 22 letters, organized in three groups: 3 Mothers (Alef, Mem, Shin — the cosmic foundations of air, water, and fire), 7 Doubles (one for each day of the week and its corresponding celestial body), and 12 Simples (the 12 months and 12 tribes of Israel). Together they form 22 living channels of divine creative energy. ${data.cy22MicDay ? `This is a leap year, so instead of the ordinary 22-day round we are in the added month's 28-day microcosm, which reviews the whole alphabet at once: 22 days for the 22 letters, 5 for the final letters, and one for the vowels. Today is Day ${data.cy22MicDay} of 28, and today's ${data.cy22MicType === 'letter' ? 'letter' : data.cy22MicType === 'final' ? 'final letter' : 'reading'} is ${data.cy22MicLabel} (${data.cy22MicHeb}).` : `Today's letter is ${data.cy22Letter || '—'} (${data.cy22Heb || '—'}), Day ${data.cy22Day || '—'} of 22 in Set ${data.cy22Cycle || '—'}; the letters of this set are ${data.cy22CycleLetters || '—'} (${data.cy22CycleHeb || '—'}).`} We also work with the 231 Gates — a system from Sefer Yetzirah which reveals that the 22 letters generate exactly 231 possible two-letter pairings (22 × 21 ÷ 2 = 231). Every possible pair is a unique "gate" through which a specific quality of divine creative speech flows into the world; together the 231 gates form the complete vocabulary through which God spoke reality into existence. Today's ${data.gatesIsVowel ? 'vowel is ' + data.gatePrim : 'combination is ' + (data.gatePrim || '—') + (data.gateComp ? ' + ' + data.gateComp : '')}. Our Torah Ohr / Likutei Torah reading — the Chassidic Torah commentaries of Rabbi Schneur Zalman of Liadi (1745–1812), founder of Chabad-Lubavitch, who revealed the inner Kabbalistic dimension of each weekly Torah portion — comes from ${data.chSection || '—'}: ${data.chReading || '—'}.${data.tractTractate ? (data.tractIsDaily ? ' Today we also study the tractate ' : ' This half-cycle we also study the tractate ') + data.tractTractate + ' (' + data.tractPeriod + ') — a section of the Mishna or Talmud, the vast literature of Oral Torah — exploring: ' + data.tractDesc + '.' : ''}`,
       binah: (data) => `Binah — Understanding — is the third Sefirah, where divine insight is developed into structured thought; it is called the divine womb of creation, the place where potential becomes form. In Binah, we meditate on the Sefirot combination — one of 49 divine-quality pairings contemplated during the Omer count, the 49-day spiritual journey from Passover (freedom from Egypt) to Shavuot (the giving of the Torah at Sinai). The number 49 carries a profound mathematical secret: it equals 7 × 7. The seven emotional Sefirot — Chesed, Gevurah, Tiferet, Netzach, Hod, Yesod, and Malchut — are each examined within themselves and within every other, producing 49 unique pairings (such as Kindness within Kindness on Day 1, Strength within Kindness on Day 2, all the way through). This 7-by-7 matrix represents the complete inner refinement of every divine quality at every level of depth. The 50th level — beyond human counting — is Binah itself: pure divine Understanding, which is received at Shavuot as the gift of Torah and cannot be reached through effort alone, only through grace. Today's pairing is ${data.combo || '—'}, position ${data.omerPos || '—'} of 49 in Omer Cycle ${data.omerCycle || '—'}. We also study Likutei Tefilot — a collection of prayers composed by Rabbi Nathan of Breslov (1780–1844), the devoted student and scribe of Rebbe Nachman, who wove his master's teachings into prayers for every situation in life; today's portion is ${data.ltSection || '—'}, ${data.ltReading || '—'}.`,
       chesed: (data) => `Chesed — Lovingkindness — is the fourth Sefirah, the quality of unlimited compassion, generosity, and reaching out to others without condition; it is the first great expression of divine love flowing into creation. In Chesed, we study the Mishna${data.mishnaType === 'tosefta' ? ' (here in the form of the Tosefta, a companion text)' : ''} — from the Oral Torah, the body of Jewish law and wisdom passed down alongside the written Torah and codified by Rabbi Yehuda HaNasi around 200 CE; today's portion is ${data.mishnaText || '—'}, drawn from the realm of ${data.mishnaTag1 || '—'}${data.mishnaTag2 ? ', ' + data.mishnaTag2 : ''}. We also draw from the Light and Fire of the Baal Shem Tov — a compilation of the Ba'al Shem Tov's Torah insights, radiating the warmth of Chassidic love and joy; today's teaching: ${data.bshtReading || '—'}.`,
@@ -19594,7 +19594,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // helper its card reads, so a square and a card face cannot part company —
     // the fault the calendar check exists to catch. Appended after the ten
     // card lenses because the checks address lenses by index.
-    { group:'maalah', card:'א׳ · Year-Round', cycle:'מעלה א׳ — the daily Zohar folios and Likutei Moharan',
+    { group:'maalah', card:'א׳ · All Year Round', cycle:'מעלה א׳ — the daily Zohar folios and Likutei Moharan',
       seg:(D)=>{
         const _t = t => { let m = t.match(/Likutei Moharan II, Torah (\d+)/); if (m) return 'Tinyana ' + m[1];
                           m = t.match(/Likutei Moharan, Lesson (\d+)/); return m ? 'Torah ' + m[1] : t; };
@@ -19620,7 +19620,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           }
         }
         if (!lm && !zo) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
-        return { n:0, label:'מעלה א׳ — Year-Round · בכל השנה', cell:lm, cell2:zo }; } },
+        return { n:0, label:'מעלה א׳ — All Year Round · בכל השנה', cell:lm, cell2:zo }; } },
 
     { group:'maalah', card:'ב׳ · Light that is Good', cycle:'מעלה ב׳ — Keter Shem Tov, by parasha and weekday',
       seg:(D)=>{
@@ -20258,7 +20258,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // ── HEBREW INSIDE A LETTERSPACED LABEL ──
   // A handful of labels are set in Cinzel small-caps with wide tracking, and
-  // carry a Hebrew phrase alongside the English — "✦ Year-Round — בכל השנה".
+  // carry a Hebrew phrase alongside the English — "✦ All Year Round — בכל השנה".
   // The tracking is there for the small-caps; Hebrew does not take it, and
   // pulling the square letters apart loosens the word. CSS cannot select by
   // script, so each Hebrew run inside those labels is wrapped in .heb, which
