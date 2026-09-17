@@ -4001,6 +4001,27 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // seals on Divrei HaYamim II 35–36 ("…veya'al") every year.
   const TANACH_MAALOT_IDX = TANACH_FLAT.findIndex(c => c[0] === 'Psalms' && c[1] === 119); // 498
   const TANACH_MAALOT_DAY = TANACH_MAALOT_IDX / 2 + 1;                                     // day 250
+  /* A preview of the daily Tanach summaries, and only a preview: five days of
+     three hundred and sixty-four, carried inline so the card can be judged in
+     place before anything is built to load the rest. The entries' real home is
+     summaries/tanach.json, which holds these same five and the disclaimer; at
+     826 bytes an entry the finished cycle is ~294 KB and all thirty ~7.9 MB,
+     so the finished thing cannot live in this file and will be fetched per
+     cycle for the day. When that exists, this constant goes.
+
+     Keyed by the day of the KoT year, the same number the Tanach cycle itself
+     is keyed to. A day with no entry shows nothing at all rather than an
+     empty heading. */
+  const TANACH_SUMMARY_PREVIEW = {
+    1: "God charges Joshua after Moses' death: cross the Jordan, every place your foot treads is given. Be strong and resolute \u2014 said three times \u2014 and let this Book of the Teaching not depart from your lips, but recite it day and night. The Reubenites, Gadites and half-Manasseh are held to Moses' condition: families stay, fighting men cross armed at the head. Then two spies to Jericho and the house of Rahab, who hides them under flax on the roof and tells them what the nations have heard \u2014 the Sea of Reeds dried, Sihon and Og doomed, every heart melted. She asks for loyalty and is given it, sealed by a crimson cord in the window.",
+    2: "The crossing. The Ark goes first, two thousand cubits ahead, and the people sanctify themselves. As the priests' feet touch the water the Jordan stands in a single heap as far off as Adam, beside Zarethan, and the nation crosses on dry ground while the priests stand still in the riverbed. Twelve men carry twelve stones from where the priests stood to Gilgal; twelve more are set up in the river itself. They come up on the tenth of the first month. The stones are for the children's question \u2014 what do these stones mean? \u2014 and the answer is that the Jordan was cut off as the Sea of Reeds was, so that all the peoples of the earth should know.",
+    3: "Circumcision at Gibeath-haaraloth: the generation born in the wilderness had not been circumcised, and God says, today I have rolled away the disgrace of Egypt \u2014 Gilgal, from the rolling. They keep Pesach on the fourteenth, eat of the land's own produce the next day, and the manna ceases. Joshua meets the captain of God's host with drawn sword: remove your sandals, the place is holy. Then Jericho \u2014 six days around the city, seven priests with seven ram's horns, seven circuits on the seventh day, the long blast, the shout, and the wall falls. All of it is proscribed; only Rahab's household is spared, and Joshua lays an oath on whoever would rebuild the city.",
+    4: "Achan takes from what was proscribed and Israel is routed at Ai \u2014 thirty-six fall and the people's heart turns to water. Joshua lies on his face until evening; God answers, Arise! Israel has sinned. The lot narrows tribe to clan to house to man, and Achan confesses: a fine Shinar mantle, two hundred shekels of silver, a wedge of gold, buried in his tent. The Valley of Achor. Then Ai is taken by ambush \u2014 Joshua feigns flight, holds out his javelin until the city stands empty and burning, twelve thousand fall, the king impaled until sunset. And at Mount Ebal an altar of unhewn stone, the Teaching copied onto the stones, and the blessing and the curse read to the whole congregation, women, children and strangers included.",
+    5: "The Gibeonites come in worn-out sandals with dry and crumbling bread, claiming a distant country. Israel takes them at their word because of the provisions and does not inquire of God \u2014 and when the deceit is found three days later the oath still binds: they live, as hewers of wood and drawers of water. Then five Amorite kings besiege Gibeon for coming to terms, and Joshua marches all night from Gilgal. God throws them into panic; more die of the hailstones than by the sword. Joshua speaks in the sight of Israel \u2014 Sun, stand still at Gibeon; moon, in the Valley of Aijalon \u2014 and the sun halted in midheaven a whole day, as it is written in the Book of Jashar. The five kings are found hiding in the cave at Makkedah, and the southern campaign follows.",
+  };
+  const TANACH_SUMMARY_NOTE =
+    "Summaries are written by A.I. from the text itself. They are a way in, not a substitute for the chapter.";
+
   function getTanachInfo(d) {
     d = Math.max(1, d); // cycle begins at the epoch; dates before it have no defined cycle/day
     const dN   = ((d - 1) % 364) + 1;
@@ -16721,10 +16742,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           ? `<div style="margin-top:6px;font-size:0.85em;"><span style="color:var(--ink-mid)">${_eichaLink}</span></div>`
           : ``);
     document.getElementById('gevurah-sub').innerHTML = '';
+    const _tanSum = TANACH_SUMMARY_PREVIEW[dEff - d_year1 + 1];
     document.getElementById('gevurah-text-face').innerHTML =
-      tanachInfo.seferiaUrl
+      (tanachInfo.seferiaUrl
         ? `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>`
-        : tanachInfo.text;
+        : tanachInfo.text) +
+      // The note is printed with the summary and never without it: a reader
+      // who meets one of these has to be told what wrote it.
+      (_tanSum
+        ? `<div style="margin-top:7px;font-size:calc(11.5px * var(--ts, 1));line-height:1.6;color:var(--ink-mid);">${_tanSum}</div>` +
+          `<div style="margin-top:5px;font-size:calc(9.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;">${TANACH_SUMMARY_NOTE}</div>`
+        : '');
     document.getElementById('gevurah-tags').innerHTML = '';
     const _kotDay = ((sef.dayNum - 1) % 7) + 1;
     const _kotSong = KOT_SONGS[_kotDay - 1];
