@@ -1,7 +1,10 @@
 # Daily summaries — work in progress
 
-Nothing here is wired into the app yet. These are the first two pieces of the
-per-day summary work, kept so they can be checked and continued.
+The first two pieces of the per-day summary work, kept so they can be checked
+and continued. The five Tanach days below are live in the app, behind a
+"today's summary" button on the Tanach line of Gevurah — the same control the
+Year-Round section uses for Likutei Moharan. A day with no entry shows no
+button. Nothing else here is wired in.
 
 ## reference-map.csv
 

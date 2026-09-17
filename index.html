@@ -2909,6 +2909,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="malchut-ksa-row" style="margin-top:8px">
       <div class="keter-section-label">✦ Tanach <span class="maalah">מעלה ט׳</span></div>
       <div id="gevurah-text-face" class="sefirah-main-text">Loading…</div>
+      <div class="src-line"><button class="date-jump-trigger" id="tanach-trigger" style="display:none;"
+            onclick="event.stopPropagation(); openTanachSummaryModal()">today&rsquo;s summary &#8599;</button></div>
     </div>
     <div class="sefirah-detail" id="gevurah-detail"></div>
   </div>
@@ -4080,6 +4082,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   // Content for the generic info popup (#info-popup-modal), refreshed each render() cycle.
   let _lmDetailMain = '', _lmDetailMeta = '';
+  let _tanachDetailMain = '', _tanachDetailMeta = '';
   let _oktDetailMain = '', _oktDetailMeta = '';
   let _ycDetailMain = '', _ycDetailMeta = '';
   let _syDetailMain = '', _syDetailMeta = '';
@@ -16742,17 +16745,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
           ? `<div style="margin-top:6px;font-size:0.85em;"><span style="color:var(--ink-mid)">${_eichaLink}</span></div>`
           : ``);
     document.getElementById('gevurah-sub').innerHTML = '';
-    const _tanSum = TANACH_SUMMARY_PREVIEW[dEff - d_year1 + 1];
     document.getElementById('gevurah-text-face').innerHTML =
-      (tanachInfo.seferiaUrl
+      tanachInfo.seferiaUrl
         ? `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>`
-        : tanachInfo.text) +
-      // The note is printed with the summary and never without it: a reader
-      // who meets one of these has to be told what wrote it.
-      (_tanSum
-        ? `<div style="margin-top:7px;font-size:calc(11.5px * var(--ts, 1));line-height:1.6;color:var(--ink-mid);">${_tanSum}</div>` +
-          `<div style="margin-top:5px;font-size:calc(9.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;">${TANACH_SUMMARY_NOTE}</div>`
-        : '');
+        : tanachInfo.text;
+    // The summary is not on the face. It sits behind "today's summary" the way
+    // the Year-Round one does, so the card stays the length it was and the
+    // reading is what the card shows.
+    const _tanSum = TANACH_SUMMARY_PREVIEW[dEff - d_year1 + 1];
+    _tanachDetailMain = _tanSum
+      ? `<strong style="color:var(--gold)">${tanachInfo.text.replace(/<[^>]*>/g, '')}</strong>` +
+        `<span class="dsum">${_tanSum}</span>`
+      : '';
+    _tanachDetailMeta = _tanSum ? TANACH_SUMMARY_NOTE : '';
+    document.getElementById('tanach-trigger').style.display = _tanSum ? '' : 'none';
     document.getElementById('gevurah-tags').innerHTML = '';
     const _kotDay = ((sef.dayNum - 1) % 7) + 1;
     const _kotSong = KOT_SONGS[_kotDay - 1];
@@ -18166,6 +18172,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   function openLmDailyModal() {
     openInfoPopup("Today's Likutei Moharan", _lmDetailMain, _lmDetailMeta);
+  }
+
+  /* The note rides in the modal's meta line, which is printed whenever the
+     modal is, so the summary cannot be read without being told what wrote it. */
+  function openTanachSummaryModal() {
+    openInfoPopup("Today's Tanach", _tanachDetailMain, _tanachDetailMeta);
   }
 
   function openOhrKiTovModal() {
