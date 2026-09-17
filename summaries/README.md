@@ -17,11 +17,10 @@ part company.
 Regenerate with `node tools/reference-map.mjs` (serve index.html on :8399
 first). It reads `_yrBuild()` and `YR_LENSES`, which is what the Journal reads.
 
-Two columns come back empty past **23 May 2027**: `ח׳ · Daf Yomi` and
-`Talmud (Chazarah)`. Both call `getDafYomi`, whose table `DAF_YOMI_CYCLE14`
-covers the 14th cycle only — 5 Jan 2020 to 23 May 2027, ending with Niddah.
-In the current year 255 of 392 days have a daf and 137 do not. The 15th cycle
-begins the next day and the table needs extending.
+This is what turned up the Daf Yomi cliff: `ח׳ · Daf Yomi` and
+`Talmud (Chazarah)` came back empty past 23 May 2027, where the stored table
+ran out. Fixed since — the cycle repeats and the day is taken modulo its
+length — and both columns are now full, 392 of 392.
 
 ## tanach.json
 

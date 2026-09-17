@@ -6226,14 +6226,43 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
   const DAF_EPOCH = new Date(2020, 0, 1); // Jan 1 2020
 
+  /* The start days are derived from the daf counts rather than read from the
+     table, and the cycle repeats. Two faults came of the stored starts, each
+     a pair that cancelled so the dates downstream still lined up and nothing
+     showed: Ta'anit began a day late and Megillah a day early, so Ta'anit 31
+     was never learned and 10 February 2022 held no daf at all; Avodah Zarah
+     and Horayot did the same, costing Avodah Zarah 76 and leaving 15 September
+     2025 blank. Accumulated from the first start they cannot happen — a
+     tractate of n dapim occupies exactly n-1 days and the next begins where it
+     ends, by construction rather than by transcription.
+
+     And it wraps. The table held the fourteenth cycle alone, 5 January 2020 to
+     23 May 2027, after which the daf line and its Chazarah star both went
+     blank; 137 of this year's days were already empty in the Journal. The
+     cycle repeats with no break between one and the next, so the day is taken
+     modulo its length and the fifteenth needs no table of its own. */
+  const DAF_CYCLE = (() => {
+    let at = DAF_YOMI_CYCLE14[0][0];
+    const out = DAF_YOMI_CYCLE14.map(([, name, heb, lastDaf]) => {
+      const row = { start: at, name, heb, lastDaf };
+      at += lastDaf - 1;                       // dapim 2..lastDaf, one a day
+      return row;
+    });
+    return { rows: out, first: out[0].start, length: at - out[0].start };
+  })();
+
   function getDafYomi(civilDate) {
-    const days = Math.floor((civilDate - DAF_EPOCH) / 86400000);
-    for (let i = DAF_YOMI_CYCLE14.length - 1; i >= 0; i--) {
-      const [startDay, name, heb, lastDaf] = DAF_YOMI_CYCLE14[i];
-      if (days >= startDay) {
-        const daf = 2 + (days - startDay);
-        if (daf <= lastDaf) return { name, heb, daf };
-        return null; // gap between tractates (shouldn't happen)
+    const raw = Math.floor((civilDate - DAF_EPOCH) / 86400000);
+    // Before the epoch as after it: the cycle has no beginning of its own that
+    // a date can fall outside, so the modulo is taken on both sides of zero.
+    const off = ((raw - DAF_CYCLE.first) % DAF_CYCLE.length + DAF_CYCLE.length)
+                % DAF_CYCLE.length;
+    const days = DAF_CYCLE.first + off;
+    for (let i = DAF_CYCLE.rows.length - 1; i >= 0; i--) {
+      const r = DAF_CYCLE.rows[i];
+      if (days >= r.start) {
+        const daf = 2 + (days - r.start);
+        return daf <= r.lastDaf ? { name: r.name, heb: r.heb, daf } : null;
       }
     }
     return null;
