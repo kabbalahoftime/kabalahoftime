@@ -2970,7 +2970,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="prayer-tag" data-prayer="6" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Shacharit</div>
   </div>
   <div class="sefirah-content-col">
-    <div class="sefirah-cycle-name">13 Attributes — 13-Day Cycle</div>
+    <div class="sefirah-cycle-name">Midot — 13-Day Nesi’im Cycle</div>
     <div class="sefirah-main-text">Loading…</div>
     <div class="sefirah-sub-text"></div>
     <div class="sefirah-tags"></div>
@@ -14329,7 +14329,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       meta: "An original Kabbalah of Time cycle · Nevi'im & Ketuvim · The Four Seasons"
     },
     tiferet: {
-      title: '13 Attributes of Mercy — 13-Day Cycle',
+      title: 'Midot — 13-Day Nesi’im Cycle',
       main: "One of Hashem's Thirteen Attributes of Mercy each day, the cycle completing 28 times a year (28 = כח, \"strength\"): cycles 1–13 follow Micha's inner vessels, 14–26 Moshe's outer ones. Mercy is Tiferet's essence — beauty as compassion balanced. Cycles 27–28 close the year as a microcosm of the whole. Each cycle carries a text of its own: cycles 1–13 a chapter of the Alter Rebbe’s Seder Birkas HaNehenin, 14–26 one of Rebbe Nachman’s thirteen Tales — the Lost Princess opening in Adar, the Seven Beggars falling in Elul — and the closing two review all twenty-six, a chapter or a tale a day. In a leap year the extra 28 days read the Talks Following the Tales.",
       meta: 'An original Kabbalah of Time cycle · Micha 7:18–20 · Shemot 34:6–7'
     },
@@ -17908,7 +17908,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
     const _tifTags = cards[4].querySelector('.sefirah-tags');
     if (inExtra && cy13Mic) {
-      cards[4].querySelector('.sefirah-cycle-name').innerHTML = `13 Attributes — Leap Year Microcosm`;
+      cards[4].querySelector('.sefirah-cycle-name').innerHTML = `Midot — Leap Year Microcosm`;
       cards[4].querySelector('.sefirah-main-text').innerHTML =
         `Microcosm Day <strong>${cy13Mic.day}</strong> — Cycle <strong>${cy13Mic.representsCycle}</strong>:<br>` +
         `<strong>${cy13Mic.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13Mic.attr.hebrew}</span><br>` +
@@ -17922,13 +17922,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const _tifRound = cy13.cycle <= 13 ? 1 : (cy13.cycle <= 26 ? 2 : 3);
       const _tifCycN  = _tifRound === 3 ? cy13.cycle - 26 : (_tifRound === 2 ? cy13.cycle - 13 : cy13.cycle);
       const _tifCyc   = _tifRound === 3 ? `Microcosm · Cycle ${_tifCycN} of 2` : `${['','1st','2nd'][_tifRound]} Cycle ${_tifCycN}`;
-      cards[4].querySelector('.sefirah-cycle-name').innerHTML = `13 Attributes of Mercy — 13-Day Cycle`;
+      cards[4].querySelector('.sefirah-cycle-name').innerHTML = `Midot — 13-Day Nesi’im Cycle`;
       cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
         ? `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span><br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span>`
         : `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>` +
           // The two microcosm cycles have no single cycle Attribute; name the
           // set each one is reviewing instead, since that is what tells them apart.
           `<br><span style="font-size:0.85em;color:var(--ink-dim)">${cy13.setType}</span>`;
+      // The Nassi of the day goes on the face, not behind the expand: the
+      // thirteen days ARE the Nesi'im, which is what the cycle is named for
+      // now, so whose day it is should not have to be dug for. It is appended
+      // rather than written into the sub-text slot, which a later block
+      // empties unconditionally to make room for the Tiferet text row.
+      cards[4].querySelector('.sefirah-main-text').innerHTML +=
+        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Nassi:</span> ${cy13.nassi}`;
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
       _tifTags.innerHTML = '';
     }
@@ -18053,8 +18060,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Derech Mitzvosecha</div>
        <div style="font-size:0.88rem;margin-bottom:${_micDm ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha</a> &nbsp;·&nbsp; <a href="https://www.sefaria.org/Derekh_Mitzvotekha?tab=contents" target="_blank" style="color:var(--gold)">the sefer on Sefaria</a></div>
        ${_micDm ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-value"><strong>' + _micDm.name + '</strong>' + (_micDm.part ? ' · ' + _micDm.part : '') + '<br><span style="color:var(--ink-mid);font-size:0.9em">' + _micDm.english + '</span></span></div>' : ''}` :
-      `<div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Nassi</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy13.nassi}</div></div>
-       ${explRow}
+      `       ${explRow}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="9">מיעוט ט׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
