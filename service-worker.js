@@ -3,7 +3,7 @@
 // name and the shell is fetched again. A cache that has gone stale in a way
 // the network-first rule cannot correct is the one failure this app has that
 // leaves every card reading "Loading…" with nothing to say why.
-const CACHE_NAME = 'kabbalah-of-time-v13';
+const CACHE_NAME = 'kabbalah-of-time-v14';
 const urlsToCache = [
   '/',
   '/index.html',
