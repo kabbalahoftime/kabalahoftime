@@ -1208,11 +1208,30 @@ right: 38px;
 75% { transform: translateX(2px); }
 }
 
-/* The ⓘ is pinned to the card's top-right corner, and this is the only cycle
-   name long enough to reach it — measured at 28px of overlap on a 390px phone,
-   32px at the largest text. The name is held clear of it rather than shortened,
-   since what it says is the point. */
-.malchut-cycle-name { padding-right: 46px; }
+/* The ⓘ is pinned to each card's top-right corner, and the cycle name runs
+   along the same line beneath it. This was once a Malchut-only padding rule,
+   on the reading that Malchut's was the only name long enough to reach the ⓘ.
+   That is not so: measured across 320/375/390/430 at all three text sizes,
+   eight of the names reach it in one combination or another — Alef-Bet,
+   Sefirot, Shem Ayin-Bet, Four Seasons, 13 Attributes, the 40-Day cycle,
+   728 Half-Day and Shovavim — by as much as 33px. A name that wraps puts its
+   FIRST line under the ⓘ, so the ones that overlap are not the ones that look
+   longest on any one screen, and trimming a dash off any single name leaves
+   the other seven.
+
+   A float rather than padding, because the ⓘ sits over the first line only:
+   the float gives way on that line and returns the full width to the rest.
+   padding-right reserved the gap on every line and cost roughly twice the
+   wrapped headings for the same clearance — 44 against 26 across the grid,
+   62 at the 46px it used to carry. 34px is the least that clears the ⓘ at
+   every text size; scaling it with --ts saved nothing measurable.
+
+   The featured Now card mirrors another card and is the one card the injector
+   gives no ⓘ, so it keeps its full width. */
+.sefirah-card .sefirah-cycle-name::before {
+  content: ''; float: right; width: 34px; height: 1em;
+}
+#now-sefirah-featured .sefirah-cycle-name::before { display: none; }
 
 .sefirah-cycle-name {
 font-family: 'Cinzel', serif;
