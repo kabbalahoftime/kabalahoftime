@@ -1226,10 +1226,20 @@ right: 38px;
    62 at the 46px it used to carry. 34px is the least that clears the ⓘ at
    every text size; scaling it with --ts saved nothing measurable.
 
+   34px is the least that clears the ⓘ in this engine — and that is exactly why
+   it is not the number used. The ⓘ is a text glyph, so how wide it draws is
+   the font's business, not the stylesheet's: it measures 17px here at the
+   default text size and 20.9px at the largest, and another engine will not
+   agree. At 34px the tightest card cleared by 1.9px, which is no clearance
+   at all — a glyph a few pixels wider and the text is back under the ⓘ. So
+   46px, which holds ≥12px of daylight everywhere here and still clears a ⓘ
+   drawn 60% wider than this engine draws it. It costs six wrapped heading
+   lines over the 34px it replaced.
+
    The featured Now card mirrors another card and is the one card the injector
    gives no ⓘ, so it keeps its full width. */
 .sefirah-card .sefirah-cycle-name::before {
-  content: ''; float: right; width: 34px; height: 1em;
+  content: ''; float: right; width: 46px; height: 1em;
 }
 #now-sefirah-featured .sefirah-cycle-name::before { display: none; }
 
