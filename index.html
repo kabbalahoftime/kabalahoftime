@@ -7065,12 +7065,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const isMoshe = (cycle >= 14 && cycle <= 26) || cycle === 28;
     const attr  = isMoshe ? MOSHE_THIRTEEN_ATTRIBUTES[day - 1] : THIRTEEN_ATTRIBUTES[day - 1];
     const nassi = NASSI_NAMES[day - 1];
+    // The cycle carries a Nassi as it already carries an Attribute, and by the
+    // same index: cycles 1-13 and 14-26 each run the thirteen in order, and the
+    // two microcosm cycles have none — exactly as they have no cycle Attribute.
+    // Note the asymmetry this inherits: the DAY index is phase-aligned to the
+    // real offering days (see NASSI_NAMES above, 1 Nissan = cycle day 13 =
+    // Nachshon), while the CYCLE index is the cycle's ordinal and carries no
+    // calendrical anchor of its own. That is the same footing the cycle
+    // Attribute stands on, so the pair reads consistently.
+    const cycleNassi = cycle <= 13 ? NASSI_NAMES[cycle - 1]
+      : (cycle <= 26 ? NASSI_NAMES[cycle - 14] : null);
     // Which set of 13: inner (Micah) = first 13 cycles, outer (Moshe) = second 13 cycles
     const setType = cycle <= 13 ? 'Inner — Attributes of Micah'
       : (cycle <= 26 ? 'Outer — Attributes of Moshe'
       : (cycle === 27 ? 'Microcosm — Inner, Attributes of Micah'
                       : 'Microcosm — Outer, Attributes of Moshe'));
-    return { cycle, day, attr, nassi, setType, isMoshe };
+    return { cycle, day, attr, nassi, cycleNassi, setType, isMoshe };
   }
 
   // 41-day cycle — enriched
@@ -17935,7 +17945,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // rather than written into the sub-text slot, which a later block
       // empties unconditionally to make room for the Tiferet text row.
       cards[4].querySelector('.sefirah-main-text').innerHTML +=
-        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Nassi:</span> ${cy13.nassi}`;
+        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Nassi:</span> ${cy13.nassi}` +
+        // Given once when the day's Nassi and the cycle's are the same man —
+        // the same way the Attributes are given once when day and cycle land
+        // on the same one. That happens on 26 days of the year.
+        ((cy13.cycleNassi && cy13.cycleNassi !== cy13.nassi)
+          ? `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle Nassi:</span> ${cy13.cycleNassi}`
+          : '');
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
       _tifTags.innerHTML = '';
     }
