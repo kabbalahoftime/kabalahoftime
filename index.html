@@ -2346,31 +2346,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    38px is a generous target, and forcing 44px only opened a gap under the
    label. Left as they were drawn. */
 
-/* The ℹ️ beside a Keter section label — what the section IS, as against the ↗
-   below it, which is what the section says today.
-
-   It sits in the flow at the end of the label rather than pinned to the
-   corner. Pinned, its 44px box came down on top of the מעלה badge at some
-   widths, and the badge is a toggle: a tap meant for the one would have
-   landed on the other. In the flow it cannot overlap anything, and the
-   margin-left keeps the overlay below clear of the badge's right edge. */
-.keter-info {
-  background: none; border: none; padding: 0; cursor: pointer;
-  font-size: calc(11px * var(--ts, 1)); line-height: 1; opacity: 0.55;
-  margin-left: 16px; position: relative; vertical-align: middle;
-}
-.keter-info:hover { opacity: 0.9; }
-/* Drawn at the size of the label; the finger gets the 44px overlay below,
-   centred on the glyph. The 16px margin is what keeps that overlay clear of
-   the מעלה badge's right edge, so a tap meant for the badge cannot land on
-   the ℹ️ instead. A right float was tried first and reserved 44px on every
-   line of the heading, which pushed the badge onto a line of its own at most
-   widths — this costs the ℹ️ a wrap on a narrow label instead, and leaves
-   the heading as it was drawn. */
-.keter-info::after {
-  content: ''; position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%); width: 44px; height: 44px;
-}
+/* The other two sections of the Keter card carry the same ⓘ the cards do,
+   pinned to the section's own top-right. The card's copy is held off the
+   right edge to clear the expand arrow; a section has no arrow, so these
+   sit at the section's padding edge — the extreme right, level with the
+   label beside them. */
+.keter-section.has-info { position: relative; }
+.keter-section.has-info > .cycle-info-btn.corner { top: 17px; right: 18px; }
+/* Held clear of the ⓘ rather than shortened, exactly as the Malchut cycle
+   name is above — both of these labels end in a מעלה badge, and the badge is
+   a toggle, so the two must not be able to come down on each other. */
+.keter-section.has-info > .keter-section-label { padding-right: 24px; }
 
 /* Standing on their own — grown without moving anything. */
 .date-jump-trigger {
@@ -2708,15 +2694,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
-  <div class="keter-kst-row keter-section">
-    <div class="keter-section-label" id="keter-kst-label">✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה י״ד</span><button class="keter-info" onclick="event.stopPropagation(); openOhrKiTovNote()" aria-label="About Light that is Good" title="About this section">ℹ️</button></div>
+  <div class="keter-kst-row keter-section has-info">
+    <span class="cycle-info-btn corner" data-cycle="ohrkitov" title="About this cycle">ⓘ</span>
+    <div class="keter-section-label" id="keter-kst-label">✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה י״ד</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin — Baal Shem Tov &amp; Ohr HaChaim HaKadosh</div>
     <div class="sefirah-main-text" id="keter-kst-main">Loading…</div>
     <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Today's Keter Shem Tov summary ↗</button>
   </div>
   <!-- HAYOM YOM + SEFER HAMITZVOS section -->
-  <div class="keter-section" style="background:#fdf9f2;">
-    <div class="keter-section-label">✦ Strong Day — יום חזק <span class="maalah">מעלה י״ג</span><button class="keter-info" onclick="event.stopPropagation(); openYomChazakNote()" aria-label="About Strong Day" title="About this section">ℹ️</button></div>
+  <div class="keter-section has-info" style="background:#fdf9f2;">
+    <span class="cycle-info-btn corner" data-cycle="yomchazak" title="About this cycle">ⓘ</span>
+    <div class="keter-section-label">✦ Strong Day — יום חזק <span class="maalah">מעלה י״ג</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich — Rambam &amp; Lubavitcher Rebbe</div>
     <div class="sefirah-main-text" id="keter-rambam-face">Loading…</div>
     <div class="sefirah-main-text" id="keter-hayomyom" style="margin-top:4px;">Loading…</div>
@@ -14221,6 +14209,76 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       main: "Rebbe Nachman's Likutei Moharan spread across the entire Jewish year, each lesson pegged to its own Hebrew date and resonating with that day's character — paired with Rashbi's Zohar carried through the whole year — two folios a day, four on Thursday, completing the Zohar in a single year and sealing it with Sefer Yetzirah. Both names carry the year: רבי נחמן = 360 = השנה, and בכל = 52, the weeks of the year; while שמעון בן יוחאי yields the same 360 through ש־ן־י, one letter from each word of his name — and the English agrees: a round is 360 degrees, the year's full turn of the spiral, arriving each year one level higher. Rebbe Nachman extends Rashbi's work of rectification.",
       meta: "An original Kabbalah of Time cycle · Likutei Moharan & the Zohar"
     },
+    /* The other two sections of the Keter card. They sit under keterlm here
+       because that is the order they stand in on the card — Emunah, Ta'anug,
+       Ratzon — and because all three are reached by the same ⓘ. */
+    ohrkitov: {
+      title: 'Light that is Good — אוֹר כִּי טוֹב',
+      main:
+        '<div style="font-size:0.82rem;color:var(--ink-mid);font-style:italic;line-height:1.6;margin-bottom:14px;">' +
+          'The name is made out of the two books the section carries: <bdi lang="he">אוֹר</bdi> from the ' +
+          'Ohr HaChaim, <bdi lang="he">טוֹב</bdi> from the Keter Shem Tov. Both sit in one verse — ' +
+          '<bdi lang="he">וַיַּרְא אֱלֹהִים אֶת הָאוֹר כִּי טוֹב</bdi>, and God saw the light, that it was good.' +
+        '</div>' +
+        '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">כֶּתֶר שֵׁם טוֹב</bdi></span> ' +
+          '<span style="color:var(--ink-mid);font-size:0.9em;">— Keter Shem Tov</span><br>' +
+          'The oral teachings of R. Yisrael ben Eliezer, the Baal Shem Tov (1698–1760), who wrote no book ' +
+          'of his own. They were gathered by R. Aharon HaKohen of Apta out of what his students had ' +
+          'written down — chiefly the Toldot Yaakov Yosef of R. Yaakov Yosef of Polonne and the Maggid ' +
+          'Devarav L’Yaakov of the Maggid of Mezritch — and first printed in Zolkiew in 1794. The title ' +
+          'is from Avot 4:13, <bdi lang="he">כֶּתֶר שֵׁם טוֹב עוֹלֶה עַל גַּבֵּיהֶן</bdi> — the crown of a good ' +
+          'name rises above them all — and it carries his own name inside it.</div>' +
+        '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">אוֹר הַחַיִּים הַקָּדוֹשׁ</bdi></span> ' +
+          '<span style="color:var(--ink-mid);font-size:0.9em;">— Ohr HaChaim HaKadosh</span><br>' +
+          'R. Chaim ibn Attar (1696–1743), born in Salé in Morocco, who taught in Livorno and reached ' +
+          'Jerusalem in the last year of his life. His commentary on the Torah was printed in Venice in ' +
+          '1742. It runs by the weekly portion, so it is the parasha — not the date — that sets what ' +
+          'appears here.</div>' +
+        '<div style="margin-bottom:14px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);">Two lights of one generation</span><br>' +
+          'They were contemporaries who never met; it is told that the Baal Shem Tov set out for the Land ' +
+          'of Israel to reach him and did not arrive. The section holds them together — one by the day, ' +
+          'one by the week.</div>' +
+        '<div style="font-size:0.86rem;color:var(--ink-mid);font-style:italic;line-height:1.65;">' +
+          'The Kehot edition of the Keter Shem Tov runs to 430 numbered sections, and one comes up each ' +
+          'day. What is behind <span style="font-style:normal;">Today’s Keter Shem Tov summary ↗</span> ' +
+          'is that day’s section in translation, with a line on where it sits and what it is answering.' +
+        '</div>',
+      meta: 'Bereshit 1:4 &nbsp;·&nbsp; Avot 4:13 &nbsp;·&nbsp; ' +
+        'Keter Shem Tov HaShalem (Kehot, New York 5764) &nbsp;·&nbsp; Ohr HaChaim, Venice 1742'
+    },
+    yomchazak: {
+      title: 'Strong Day — יוֹם חָזָק',
+      main:
+        '<div style="font-size:0.82rem;color:var(--ink-mid);font-style:italic;line-height:1.6;margin-bottom:14px;">' +
+          'Strong Day, for the <bdi lang="he">יָד הַחֲזָקָה</bdi> — the Strong Hand, which is what the ' +
+          'Rambam’s code has been called since it appeared: <bdi lang="he">יָד</bdi> is fourteen, and the ' +
+          'Mishneh Torah is fourteen books.' +
+        '</div>' +
+        '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">הַיּוֹם יוֹם</bdi></span> ' +
+          '<span style="color:var(--ink-mid);font-size:0.9em;">— HaYom Yom</span><br>' +
+          'A Chassidic almanac with one teaching to each day of the year, compiled by R. Menachem Mendel ' +
+          'Schneerson in 5703 (1942–43) at the request of his father-in-law, the sixth Lubavitcher Rebbe, ' +
+          'out of the latter’s talks and letters.</div>' +
+        '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">מִשְׁנֵה תּוֹרָה</bdi></span> ' +
+          '<span style="color:var(--ink-mid);font-size:0.9em;">— Rambam</span><br>' +
+          'R. Moshe ben Maimon (1138–1204) wrote the one code that covers the whole of Jewish law, ' +
+          'including everything that cannot be practised without the Temple — which is why it reaches ' +
+          'further than any code after it. It is studied here on the daily cycles the Lubavitcher Rebbe ' +
+          'instituted in 5744 (1984): three chapters a day, with a one-chapter track beside it for those ' +
+          'who keep that pace.</div>' +
+        '<div style="margin-bottom:14px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">סֵפֶר הַמִּצְווֹת</bdi></span> ' +
+          '<span style="color:var(--ink-mid);font-size:0.9em;">— Sefer HaMitzvos</span><br>' +
+          'The Rambam’s reckoning of the 613 commandments. Here it runs on the Kabbalah of Time’s own ' +
+          'cycle rather than the daily one: the 365 negative commandments from the 25th of Elul to the ' +
+          '3rd of Sivan, and the 248 positive, two each day, from the 4th of Sivan to Erev Yom Kippur.</div>' +
+        '<div style="font-size:0.86rem;color:var(--ink-mid);font-style:italic;line-height:1.65;">' +
+          'The section stands at Ratzon — Will — the Reisha d’Arich, uppermost of the three heads of ' +
+          'Atik, and is counted <bdi lang="he">מַעֲלָה י״ג</bdi>. Above it sit Ta’anug and Emunah, which ' +
+          'are the two sections over it on this card.' +
+        '</div>',
+      meta: 'Mishneh Torah, Rambam &nbsp;·&nbsp; HaYom Yom, 5703 &nbsp;·&nbsp; ' +
+        'Sefer HaMitzvos &nbsp;·&nbsp; the daily cycles of 5744'
+    },
     chochmah: {
       title: 'Alef-Bet — 22-Day Cycle',
       main: 'Sefer Yetzirah teaches that Hashem created the world through the 22 Hebrew letters. This cycle dwells on one letter each day, completing the Alef-Bet 17 times a year (17 = טוב, "good") — creation\'s alphabet reviewed again and again in the Sefirah of the first creative flash. Sefer Yetzirah\'s 32 paths of wisdom = 10 Sefirot + 22 letters; the Three Weeks, 17 Tammuz to 9 Av, span exactly 22 days — an Alef-Bet within the year. Each day also carries an acrostic verse: cycles 1–7 one psalm each, cycle 8 Eshet Chayil, cycles 9–16 Psalm 119 in its eight-verse octaves. Alongside the letters runs the Alter Rebbe’s own Torah — Torah Ohr and Likutei Torah — a folio a day through the year, the two seforim cut so that each day turns a single leaf.',
@@ -15889,8 +15947,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // innerHTML on every render, so a button left only in the markup is
       // destroyed on the first draw and never comes back.
       document.getElementById('keter-kst-label').innerHTML =
-        '✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה י״ד</span>' +
-        '<button class="keter-info" onclick="event.stopPropagation(); openOhrKiTovNote()" aria-label="About Light that is Good" title="About this section">ℹ️</button>';
+        '✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה י״ד</span>';
 
       // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40).
       // Somewhere around printed p.200 an extra, unnumbered page appears to
@@ -19171,82 +19228,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     openInfoPopup('On the Names — עַל הַשֵּׁמוֹת', DEDICATION_NOTE,
       'Yoma 3:10 &nbsp;·&nbsp; Berachot 31a &nbsp;·&nbsp; Melachim I 8 &nbsp;·&nbsp; ' +
       'Divrei HaYamim II 7 &nbsp;·&nbsp; Yeshayahu 44:14');
-  }
-
-  /* The two notes below say what a section IS. They are deliberately separate
-     from the ↗ triggers beside them, which carry what the section says TODAY —
-     one is fixed and the other changes every day, so they are not the same
-     popup wearing two labels. */
-  const KST_SECTION_NOTE =
-    '<div style="font-size:0.82rem;color:var(--ink-mid);font-style:italic;line-height:1.6;margin-bottom:14px;">' +
-      'The name is made out of the two books the section carries: <bdi lang="he">אוֹר</bdi> from the ' +
-      'Ohr HaChaim, <bdi lang="he">טוֹב</bdi> from the Keter Shem Tov. Both sit in one verse — ' +
-      '<bdi lang="he">וַיַּרְא אֱלֹהִים אֶת הָאוֹר כִּי טוֹב</bdi>, and God saw the light, that it was good.' +
-    '</div>' +
-    '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">כֶּתֶר שֵׁם טוֹב</bdi></span> ' +
-      '<span style="color:var(--ink-mid);font-size:0.9em;">— Keter Shem Tov</span><br>' +
-      'The oral teachings of R. Yisrael ben Eliezer, the Baal Shem Tov (1698–1760), who wrote no book ' +
-      'of his own. They were gathered by R. Aharon HaKohen of Apta out of what his students had ' +
-      'written down — chiefly the Toldot Yaakov Yosef of R. Yaakov Yosef of Polonne and the Maggid ' +
-      'Devarav L’Yaakov of the Maggid of Mezritch — and first printed in Zolkiew in 1794. The title ' +
-      'is from Avot 4:13, <bdi lang="he">כֶּתֶר שֵׁם טוֹב עוֹלֶה עַל גַּבֵּיהֶן</bdi> — the crown of a good ' +
-      'name rises above them all — and it carries his own name inside it.</div>' +
-    '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">אוֹר הַחַיִּים הַקָּדוֹשׁ</bdi></span> ' +
-      '<span style="color:var(--ink-mid);font-size:0.9em;">— Ohr HaChaim HaKadosh</span><br>' +
-      'R. Chaim ibn Attar (1696–1743), born in Salé in Morocco, who taught in Livorno and reached ' +
-      'Jerusalem in the last year of his life. His commentary on the Torah was printed in Venice in ' +
-      '1742. It runs by the weekly portion, so it is the parasha — not the date — that sets what ' +
-      'appears here.</div>' +
-    '<div style="margin-bottom:14px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);">Two lights of one generation</span><br>' +
-      'They were contemporaries who never met; it is told that the Baal Shem Tov set out for the Land ' +
-      'of Israel to reach him and did not arrive. The section holds them together — one by the day, ' +
-      'one by the week.</div>' +
-    '<div style="font-size:0.86rem;color:var(--ink-mid);font-style:italic;line-height:1.65;">' +
-      'The Kehot edition of the Keter Shem Tov runs to 430 numbered sections, and one comes up each ' +
-      'day. What is behind <span style="font-style:normal;">Today’s Keter Shem Tov summary ↗</span> ' +
-      'is that day’s section in translation, with a line on where it sits and what it is answering.' +
-    '</div>';
-
-  function openOhrKiTovNote() {
-    openInfoPopup('Light that is Good — אוֹר כִּי טוֹב', KST_SECTION_NOTE,
-      'Bereshit 1:4 &nbsp;·&nbsp; Avot 4:13 &nbsp;·&nbsp; ' +
-      'Keter Shem Tov HaShalem (Kehot, New York 5764) &nbsp;·&nbsp; ' +
-      'Ohr HaChaim, Venice 1742');
-  }
-
-  const YOM_CHAZAK_NOTE =
-    '<div style="font-size:0.82rem;color:var(--ink-mid);font-style:italic;line-height:1.6;margin-bottom:14px;">' +
-      'Strong Day, for the <bdi lang="he">יָד הַחֲזָקָה</bdi> — the Strong Hand, which is what the ' +
-      'Rambam’s code has been called since it appeared: <bdi lang="he">יָד</bdi> is fourteen, and the ' +
-      'Mishneh Torah is fourteen books.' +
-    '</div>' +
-    '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">הַיּוֹם יוֹם</bdi></span> ' +
-      '<span style="color:var(--ink-mid);font-size:0.9em;">— HaYom Yom</span><br>' +
-      'A Chassidic almanac with one teaching to each day of the year, compiled by R. Menachem Mendel ' +
-      'Schneerson in 5703 (1942–43) at the request of his father-in-law, the sixth Lubavitcher Rebbe, ' +
-      'out of the latter’s talks and letters.</div>' +
-    '<div style="margin-bottom:12px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">מִשְׁנֵה תּוֹרָה</bdi></span> ' +
-      '<span style="color:var(--ink-mid);font-size:0.9em;">— Rambam</span><br>' +
-      'R. Moshe ben Maimon (1138–1204) wrote the one code that covers the whole of Jewish law, ' +
-      'including everything that cannot be practised without the Temple — which is why it reaches ' +
-      'further than any code after it. It is studied here on the daily cycles the Lubavitcher Rebbe ' +
-      'instituted in 5744 (1984): three chapters a day, with a one-chapter track beside it for those ' +
-      'who keep that pace.</div>' +
-    '<div style="margin-bottom:14px;"><span style="font-family:\'Frank Ruhl Libre\',serif;color:var(--gold);"><bdi lang="he">סֵפֶר הַמִּצְווֹת</bdi></span> ' +
-      '<span style="color:var(--ink-mid);font-size:0.9em;">— Sefer HaMitzvos</span><br>' +
-      'The Rambam’s reckoning of the 613 commandments. Here it runs on the Kabbalah of Time’s own ' +
-      'cycle rather than the daily one: the 365 negative commandments from the 25th of Elul to the ' +
-      '3rd of Sivan, and the 248 positive, two each day, from the 4th of Sivan to Erev Yom Kippur.</div>' +
-    '<div style="font-size:0.86rem;color:var(--ink-mid);font-style:italic;line-height:1.65;">' +
-      'The section stands at Ratzon — Will — the Reisha d’Arich, uppermost of the three heads of ' +
-      'Atik, and is counted <bdi lang="he">מַעֲלָה י״ג</bdi>. Above it sit Ta’anug and Emunah, which ' +
-      'are the two sections over it on this card.' +
-    '</div>';
-
-  function openYomChazakNote() {
-    openInfoPopup('Strong Day — יוֹם חָזָק', YOM_CHAZAK_NOTE,
-      'Mishneh Torah, Rambam &nbsp;·&nbsp; HaYom Yom, 5703 &nbsp;·&nbsp; ' +
-      'Sefer HaMitzvos &nbsp;·&nbsp; the daily cycles of 5744');
   }
 
   function applyDatePickerJump() {
