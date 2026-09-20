@@ -2567,12 +2567,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
               <g id="maalot-stars"></g><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
             <span id="maalot-moon-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/15</span>
             <span id="stars-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold-mid);opacity:0.85;"></span>
-            <!-- The shalsheles — seven links for the seven Chabad Rebbeim, one per
-                 Sefirah. It hangs rather than lies: Chesed at the head and Malchut
-                 at the foot, the order the Sefirot themselves come down in. Drawn
-                 dim and filled as they are gathered. Decorative — the marks are
-                 the controls, and the count is spoken in the column's title. -->
-            <svg id="rebbe-chain" width="8" height="34" viewBox="0 0 8 34"
+            <!-- The chanukiah — nine lights for the ten who carry the menorah.
+                 A chain of seven was right while the seven Chabad Rebbeim were
+                 all of them; with the Baal Shem Tov, the Maggid and the Meor
+                 Einayim before them there are ten, and ten is the shape of
+                 Chanukah rather than of a chain: eight branches, a shamash,
+                 and one more who lights them all. Drawn dim and lit as they
+                 are gathered. Decorative — the marks are the controls, and
+                 the count is spoken in the column's title. -->
+            <svg id="rebbe-menorah" width="29" height="23" viewBox="0 0 44 34"
                  style="display:block;overflow:visible" aria-hidden="true"></svg>
           </div>
           <div class="dc-label">Ma'alot &nbsp;מעלות</div>
@@ -2765,10 +2768,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- STORIES OF THE BESHT — the menorah of this card. It was a second text
        under Malchut's Shabbat book, read one day in seven; it is the Baal
        Shem Tov's own, and Keter is his card, so it is here and every day.
-       data-rebbe="0" gives it the branched lamp without a link in the chain:
-       the seven are the Chabad Rebbeim, and he stands before them. -->
+       He is the first of the ten who carry the menorah — the light this one
+       is lit from — so he takes the first of the chanukiah's branches. -->
   <div class="keter-section">
-    <div class="keter-section-label" data-rebbe="0">Stories of the Besht</div>
+    <div class="keter-section-label" data-rebbe="1">Stories of the Besht</div>
     <div class="keter-main" id="keter-besht-main">Loading…</div>
     <div class="keter-meta" id="keter-besht-meta">R. Yisrael Yaakov Kaplowitz &middot; Shivchei HaBaal Shem Tov</div>
   </div>
@@ -3048,7 +3051,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div id="yesod-parasha-cycle"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="6">Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
+      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="9">Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.chabad.org/library/article_cdo/aid/6277697/jewish/Likkutei-Dibburim.htm" target="_blank" style="color:var(--gold)">Likkutei Dibburim — Chabad.org</a></div>
     </div>
   </div>
@@ -13992,24 +13995,41 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     g.innerHTML = html;
   }
 
-  // The chain of seven — the Chabad shalsheles, one Rebbe to each of the seven
-  // lower Sefirot. It hangs vertically, first link at the top, so the order on
-  // screen is the order of the descent: Chesed down to Malchut. Links alternate
-  // their long axis so the column reads as a chain and not as a string of
-  // beads, and neighbours overlap so they interlock.
-  const REBBE_LINKS = 7;
-  function buildRebbeChain() {
-    const svg = document.getElementById('rebbe-chain');
+  // The chanukiah — nine lights for the ten who carry the menorah: the Baal
+  // Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven
+  // of Chabad from the Alter Rebbe to the Rebbe. Eight of them take the eight
+  // branches, in the order the teaching came down and from the right, as the
+  // lights of Chanukah are added; the ninth, the Rayatz, is the shamash,
+  // raised at the centre — the one whose whole work was to light others; and
+  // the tenth takes no branch of his own, because when he is gathered every
+  // light on the stand is lit.
+  const REBBE_COUNT = 10;
+  const MENORAH_SHAMASH = 9;
+  // Right to left: the first at the far right, the eighth at the far left.
+  const MENORAH_X = [40, 35.5, 31, 26.5, 17.5, 13, 8.5, 4];
+  function buildRebbeMenorah() {
+    const svg = document.getElementById('rebbe-menorah');
     if (!svg || svg.childNodes.length) return;
-    let html = '';
-    for (let i = 0; i < REBBE_LINKS; i++) {
-      // Centres 4.5 apart against radii of 3.2 and 2.1: the neighbours overlap
-      // by 0.8, which is what makes them read as links rather than beads.
-      const cy = (3.4 + i * 4.5).toFixed(2);
-      const tall = i % 2 === 0;                       // alternate the long axis
-      html += `<ellipse class="chain-link" data-i="${i}" cx="4" cy="${cy}" ` +
-              `rx="${tall ? 2.1 : 3.2}" ry="${tall ? 3.2 : 2.1}" fill="none" ` +
-              `stroke="var(--accent-blue)" stroke-width="0.9" opacity="0.16"/>`;
+    // A light is a bowl with a flame standing in it. The flame is drawn
+    // whether or not it burns — dim and unfilled when it does not — so that
+    // the stand reads as a chanukiah at rest rather than as eight bare arms.
+    const flame = (x, y) =>
+      `M${x} ${y} c -1.75 -1.35 -1.75 -3.2 0 -5.4 c 1.75 2.2 1.75 4.05 0 5.4 z`;
+    const bowl = (x, y) => `M${x - 1.8} ${y} q 1.8 2.05 3.6 0`;
+    let html =
+      '<g fill="none" stroke="var(--accent-blue)" stroke-width="1" ' +
+      'stroke-linecap="round" opacity="0.28">' +
+      '<path d="M22 29 V10"/><path d="M15 32 H29"/><path d="M18 29 H26"/>' +
+      MENORAH_X.map(x => `<path d="M22 29 Q ${x} 29 ${x} 13"/>`).join('') +
+      '</g>';
+    for (let i = 0; i < MENORAH_SHAMASH; i++) {
+      const shamash = i === MENORAH_SHAMASH - 1;
+      const x = shamash ? 22 : MENORAH_X[i];
+      const y = shamash ? 10 : 13;
+      html += `<path class="men-bowl" d="${bowl(x, y)}" fill="none" ` +
+              `stroke="var(--accent-blue)" stroke-width="1" opacity="0.28"/>` +
+              `<path class="men-flame" data-i="${i}" d="${flame(x, y - 0.8)}" ` +
+              `fill="none" stroke="var(--gold)" stroke-width="0.7" opacity="0.18"/>`;
     }
     svg.innerHTML = html;
   }
@@ -14024,30 +14044,33 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.querySelectorAll('.star-mark').forEach(el => {
       const on = set.has(el.dataset.star);
       el.classList.toggle('lit', on);
-      // A Rebbe's star belongs to the chain, not to the ring: counted there
-      // and nowhere else, so the seven cannot crowd out the day's companions.
-      // Gathered by ordinal rather than by mark, so a Rebbe whose heading is
-      // written twice in the page still owns exactly one link.
-      // Ordinal zero is a menorah that is not one of the seven — the Besht,
-      // the Maggid, the Meor Einayim, who stand before the chain rather than
-      // in it. They wear the branched lamp and are counted among the day's
-      // companions, and the chain stays seven links long.
+      // A menorah belongs to the stand, not to the ring: counted there and
+      // nowhere else, so the ten cannot crowd out the day's companions.
+      // Gathered by ordinal rather than by mark, so a master whose heading is
+      // written twice in the page still owns exactly one light.
       if (on) {
         const ord = +(el.dataset.rebbe || 0);
         if (ord) litRebbeim.add(ord);
         else lit.add(el.dataset.star);
       }
     });
-    buildRebbeChain();
+    buildRebbeMenorah();
     const nR = litRebbeim.size;
-    document.querySelectorAll('#rebbe-chain .chain-link').forEach((g, i) => {
-      // Each link belongs to its own Rebbe and lights in place, so the chain
-      // says which of the seven are gathered and not merely how many. Malchut
-      // marked alone lights the foot of the chain, where Malchut stands.
-      const on = litRebbeim.has(i + 1);
-      g.setAttribute('opacity', on ? '0.95' : '0.16');
-      g.setAttribute('stroke-width', on ? '1.15' : '0.9');
+    // The tenth lights the whole stand. Every other light belongs to its own
+    // master and burns in its own place, so the chanukiah says which of the
+    // ten are gathered and not merely how many — but the last of them is the
+    // one who lit others wherever they were, and when he is gathered nothing
+    // on the stand is left dark.
+    const allLit = litRebbeim.has(REBBE_COUNT);
+    document.querySelectorAll('#rebbe-menorah .men-flame').forEach((g, i) => {
+      const on = allLit || litRebbeim.has(i + 1);
+      g.setAttribute('opacity', on ? '1' : '0.18');
+      g.setAttribute('fill', on ? '#dfa016' : 'none');
+      g.setAttribute('stroke', on ? '#dfa016' : 'var(--gold)');
+      g.setAttribute('stroke-width', on ? '0.9' : '0.7');
     });
+    const men = document.getElementById('rebbe-menorah');
+    if (men) men.style.filter = allLit ? 'drop-shadow(0 0 2.5px rgba(223,160,22,0.75))' : '';
     buildStarRing();
     const n = lit.size;
     // Two companions to a star: star i takes the (2i)th and (2i+1)th gathered.
@@ -14064,7 +14087,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const wrap = document.getElementById('maalot-moon');
     if (wrap) wrap.title = "Today's ma'alot — tap each מעלה tag in order · tap for Today's Path" +
       (n ? ` · ${starFig} of ${STARS_IN_RING} stars — ${n} gathered, two to a star` : '') +
-      (nR ? ` · ${nR} of ${REBBE_LINKS} Rebbeim` : '');
+      (nR ? ` · ${nR} of ${REBBE_COUNT} on the menorah` : '');
     syncA11yState();
   }
 
@@ -17137,14 +17160,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="0">Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="2">Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Moshe Cordovero &mdash; The Ramak</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
        ${ramakRow(_ramakDay)}
        ` :
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="0">Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="2">Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Moshe Cordovero &mdash; The Ramak</div>
@@ -17227,7 +17250,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // Rav Arush series rotation — 91 classes × 4 days = 364-day cycle
     document.getElementById('binah-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="0">Meor Einayim${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="3">Meor Einayim${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://www.sefaria.org/Me'or_Einayim?tab=contents" target="_blank" style="color:var(--gold)">Meor Einayim on Sefaria</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Menachem Nachum of Chernobyl</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Breslov Israel Recordings <span class="maalah yom" data-wane="5">מיעוט ה׳</span></div>
@@ -17396,7 +17419,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Reb Shlomo Carlebach Stories <span class="maalah yom" data-wane="7">מיעוט ז׳</span></div>
        <div class="detail-row"><span class="detail-value">${clbVideo1 ? `<a href="${clbVideo1.url}" target="_blank" style="color:var(--gold)">${clbVideo1.label}</a>` : ''}${clbVideo1 && clbVideo2 ? ' &nbsp;·&nbsp; ' : ''}${clbVideo2 ? `<a href="${clbVideo2.url}" target="_blank" style="color:var(--gold)">${clbVideo2.label}</a>` : ''}</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="1">Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="4">Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/texts/Halakhah/Shulchan%20Arukh%20HaRav" target="_blank" style="color:var(--gold)">Shulchan Aruch HaRav on Sefaria</a></div>`;
 
     // Noam Elimelech — Reb Elimelech of Lizhensk — 52 weekly entries (one per KoT week)
@@ -17695,7 +17718,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${(gevMic || seasonInfo).note}</span></div>
        <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">2 chapters/day · 364 days · 4 seasons × 91 (Ilan = 91)</span></div>` +
        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="2">Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
+        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="5">Mitteler Rebbe — אַדְמוּ"ר הָאֶמְצָעִי</div>
         <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Kuntres_HaHitpa'alut" target="_blank" style="color:var(--gold)">Kuntres HaHitpa'alut on Sefaria</a></div>`;
 
     // Derech Mitzvosecha — 26 teachings across cycles 27-28 (2 × 13)
@@ -17901,7 +17924,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ From the New Moon to the Next — Phase ${_micMod}</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="3">Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="6">Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Derech Mitzvosecha</div>
        <div style="font-size:0.88rem;margin-bottom:${_micDm ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha</a> &nbsp;·&nbsp; <a href="https://www.sefaria.org/Derekh_Mitzvotekha?tab=contents" target="_blank" style="color:var(--gold)">the sefer on Sefaria</a></div>
        ${_micDm ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-value"><strong>' + _micDm.name + '</strong>' + (_micDm.part ? ' · ' + _micDm.part : '') + '<br><span style="color:var(--ink-mid);font-size:0.9em">' + _micDm.english + '</span></span></div>' : ''}` :
@@ -17931,7 +17954,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ From the New Moon to the Next — Phase ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="3">Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="6">Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Derech Mitzvosecha</div>
        <div style="font-size:0.88rem;margin-bottom:${dmTeaching ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha</a> &nbsp;·&nbsp; <a href="https://www.sefaria.org/Derekh_Mitzvotekha?tab=contents" target="_blank" style="color:var(--gold)">the sefer on Sefaria</a></div>
        ${dmTeaching ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-value"><strong>' + dmTeaching.name + '</strong>' + (dmTeaching.part ? ' · ' + dmTeaching.part : '') + '<br><span style=\"font-size:0.88em;opacity:0.72\">' + dmTeaching.english + '</span></span></div>' : ''}`;
@@ -18096,7 +18119,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Ma'ayan Ganim — Day ${meynDay} of 369</div>
          <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Section</div><div style="color:var(--ink-mid);font-size:0.88rem;">${meynSection}${meynPage ? ' — ' + (meynPagePhrase ? meynPage : 'p. ' + meynPage) : ''} · Rav Shalom Arush</div></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="4">Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
+         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="7">Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     } else {
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `40-Day Cycle: Receiving the Torah`;
@@ -18125,7 +18148,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
          
          
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="4">Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
+         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="7">Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
     }
 
@@ -18175,7 +18198,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     const hodRashabHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="5">Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="8">Rebbe Rashab — אַדְמוּ"ר הָרַשַׁ"ב</div>` +
       `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/58847" target="_blank" style="color:var(--gold)">Samech Vav — HebrewBooks</a></div>`;
 
     // Position in the 364-day sweep — derived from the same data the face shows,
@@ -18756,7 +18779,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `</div>` +
       weekRows +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="7">The Rebbe</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="10">The Rebbe</div>
        <div style="font-size:0.88rem;margin-bottom:10px;">` +
       `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a> &nbsp;·&nbsp; ` +
       `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
