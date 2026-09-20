@@ -74,6 +74,29 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Our own JSON is data the app is still being written into — the Zohar
+  // summaries grow by a few entries at a time — so it gets the page's own
+  // treatment rather than the fonts': served from cache at once, refetched
+  // behind, and so one open behind rather than frozen. Cache-first with no
+  // revalidation would have pinned the first copy a reader ever fetched, and
+  // no bump of CACHE_NAME short of a new name would have shifted it.
+  const sameOrigin = new URL(req.url).origin === self.location.origin;
+  if (sameOrigin && new URL(req.url).pathname.endsWith('.json')) {
+    event.respondWith((async () => {
+      const network = fetch(req).then((response) => {
+        if (response && response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+        }
+        return response;
+      });
+      event.waitUntil(network.catch(() => {}));
+      const cached = await caches.match(req);
+      return cached || network;
+    })());
+    return;
+  }
+
   event.respondWith(
     caches.match(req).then((cached) => cached || fetch(req).then((response) => {
       if (response && response.status === 200 && response.type === 'basic') {
