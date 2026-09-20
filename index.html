@@ -994,49 +994,6 @@ gap: 6px;
 margin-bottom: 24px;
 }
 
-/* ── THE HOUR'S CARD ──
-   It used to be a card like the nine below it, distinguished only by a gold
-   left edge, and a reader had no way to tell why it stood above them. It is
-   boxed now, and a band across its top carries the dial's own NOW badge and
-   names what it is: the hour the dial is pointing at. Band and card share one
-   border, so the two read as a single block rather than as a caption that
-   happens to sit above a card. */
-#now-header {
-  /* No horizontal margin: the app already insets this column, and adding
-     more put the box 20px inside every other card and the dial above it. */
-  margin: 12px 0 0;
-  padding: 7px 12px;
-  border: 1px solid var(--gold);
-  border-bottom: none;
-  border-radius: 8px 8px 0 0;
-  background: var(--bg-card-alt);
-  font-size: calc(11px * var(--ts, 1));
-  color: var(--ink-mid);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-#now-header .now-badge {
-  display: inline-block;
-  font-family: 'Cinzel', serif;
-  font-size: calc(10px * var(--ts, 1));
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 1px solid var(--gold);
-  border-radius: 3px;
-  padding: 1px 7px;
-  color: var(--gold);
-  white-space: nowrap;
-}
-#now-header-range { color: var(--gold-mid); white-space: nowrap; }
-#now-sefirah-featured {
-  margin: 0;
-  border: 1px solid var(--gold);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 2px 10px rgba(95, 73, 13, 0.10);
-}
 
 .sefirah-card {
 background: var(--bg-card);
@@ -1249,7 +1206,6 @@ right: 38px;
 .sefirah-card .sefirah-cycle-name::before {
   content: ''; float: right; width: 46px; height: 1em;
 }
-#now-sefirah-featured .sefirah-cycle-name::before { display: none; }
 
 .sefirah-cycle-name {
 font-family: 'Cinzel', serif;
@@ -2702,33 +2658,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <!-- MA'ALOT HAZMAN — STEPS OF TIME -->
   <div id="kotw-root"></div>
 
-  <!-- NOW: Sefirah of the Hour -->
-  <!-- The band that ties this card to the dial above it: the dial's own NOW
-       badge, and the hours the Sefirah holds — which the dial is pointing at. -->
-  <div id="now-header" style="display:none;">
-    <span class="now-badge">Now</span>
-    <span>the hour the dial above is pointing at<span id="now-header-range"></span></span>
-  </div>
-  <div id="now-sefirah-featured" class="sefirah-card" onclick="toggleExpand(this)"
-       style="display:none;">
-    <span class="expand-icon">▾</span>
-    <div class="sefirah-label-col">
-      <div id="now-sf-name" class="sefirah-name"></div>
-      <div id="now-sf-hebrew" class="sefirah-hebrew"></div>
-      <div id="now-sf-time" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;"></div>
-      <div id="now-sf-tzadik" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;"></div>
-      <div id="now-sf-prayer" style="margin-top:1px;"></div>
-    </div>
-    <div class="sefirah-content-col">
-      <div id="now-sf-cycle" class="sefirah-cycle-name"></div>
-      <div id="now-sf-main" class="sefirah-main-text"></div>
-      <div id="now-sf-sub" class="sefirah-sub-text"></div>
-      <div id="now-sf-tags" class="sefirah-tags"></div>
-      <div id="now-sf-detail" class="sefirah-detail"></div>
-    </div>
-  </div>
-
-  <div id="now-caption" style="display:none; margin:6px 0 14px; font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); text-align:center; font-style:italic;">Each hour of the day belongs to one of the ten Sefirot — this card mirrors the one shining <span style="color:var(--gold);">now</span>. You'll find the same card in its place below.</div>
+  <!-- The Now card stood here: a copy of whichever Sefirah's face the hour
+       belonged to, with a band above it reading "the hour the dial above is
+       pointing at" and a caption below explaining that it was a mirror. It
+       is gone. The dial is Keter's own face now, so the hour is shown where
+       it is kept rather than reflected a second time further up — and eleven
+       places in this file existed only to say "and not the mirrored one"
+       when hunting for a step to mark. -->
 
   <!-- CROWN — YEARLY CYCLE -->
 
@@ -13455,7 +13391,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       SEFIRAH_TIMES.forEach(s => { labels[s.name] = s.range; });
     }
     document.querySelectorAll('.sefirah-card').forEach(card => {
-      if (card.id === 'now-sefirah-featured') return;
       const nameEl = card.querySelector('.sefirah-name');
       if (!nameEl) return;
       const lbl = labels[nameEl.textContent.trim()];
@@ -13512,7 +13447,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('city-select-wrap').style.display = mode === 'zmaniyot' ? '' : 'none';
     updateZmanimLine();
     updateSefirahTimeLabels();
-    updateNowSefirah();
     if (window.kotwRefresh) window.kotwRefresh();
   }
 
@@ -13521,7 +13455,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     try { localStorage.setItem('kotZmanCity', String(zmanCityIdx)); } catch(e) {}
     updateZmanimLine();
     updateSefirahTimeLabels();
-    updateNowSefirah();
     if (window.kotwRefresh) window.kotwRefresh();
   }
 
@@ -14550,7 +14483,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const btn = (key) => `<span class="cycle-info-btn corner" data-cycle="${key}" title="About this cycle">ⓘ</span>`;
     const keter = document.querySelector('.keter-card');
     if (keter && !keter.querySelector(':scope > .cycle-info-btn')) keter.insertAdjacentHTML('beforeend', btn('keterlm'));
-    const cards = Array.from(document.querySelectorAll('.sefirah-card')).filter(c => c.id !== 'now-sefirah-featured');
+    const cards = Array.from(document.querySelectorAll('.sefirah-card'));
     ['chochmah', 'binah', 'chesed', 'gevurah', 'tiferet', 'netzach', 'hod', 'yesod', 'malchut'].forEach((key, i) => {
       const c = cards[i];
       if (c && !c.querySelector(':scope > .cycle-info-btn')) c.insertAdjacentHTML('beforeend', btn(key));
@@ -14606,7 +14539,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   function _pathLiveNames() {
     const map = {};
     document.querySelectorAll('.maalah').forEach(el => {
-      if (el.closest('#now-sefirah-featured')) return;
       const kind = el.classList.contains('yom') ? 'y' : 'm';
       const key  = kind + '|' + el.textContent.replace(/מעלה|מיעוט/, '').trim();
       const label = (el.parentElement.textContent || '')
@@ -15027,13 +14959,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     closeTodaysPath();
     if (idx < 15) {
       const el = Array.from(document.querySelectorAll('.maalah')).find(e =>
-        !e.classList.contains('yom') && !e.closest('#now-sefirah-featured') &&
+        !e.classList.contains('yom') &&
         e.textContent.replace('מעלה', '').trim() === MAALOT_HEB[idx]);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
       const wane = idx - 14;
       const el = Array.from(document.querySelectorAll('.maalah.yom')).find(e =>
-        +e.dataset.wane === wane && !e.closest('#now-sefirah-featured'));
+        +e.dataset.wane === wane);
       if (!el) return;
       const card = el.closest('.sefirah-card') || el.closest('.keter-card');
       if (card) card.classList.add('expanded');
@@ -15054,103 +14986,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
   } catch (e) {}
 
-  function updateNowSefirah() {
-    const active = getActiveSefirahTime();
-    const allCards = document.querySelectorAll('.sefirah-card');
-    // Keter has its own card class and its own face layout, so it is found and
-    // mirrored differently from the seven.
-    // The names on the cards carry soft hyphens so they break where they should
-    // — Che\u00ADsed, Tife\u00ADret, Mal\u00ADchut — and getActiveSefirahTime returns
-    // them clean. Comparing the two as they stand matched only Hod, the one
-    // name with nowhere to break, so this card stayed hidden for eight of the
-    // ten Sefirot. Both sides are stripped before comparing.
-    const _bare = t => (t || '').replace(/\u00AD/g, '').trim();
-    const sourceCard = active.name.indexOf('Keter') === 0
-      ? document.querySelector('.keter-card')
-      : Array.from(allCards).find(c =>
-          c.id !== 'now-sefirah-featured' &&
-          c.querySelector('.sefirah-name') &&
-          _bare(c.querySelector('.sefirah-name').textContent) === _bare(active.name)
-        );
-    if (!sourceCard) return;
-    document.getElementById('now-sf-name').textContent   = active.name;
-    document.getElementById('now-sf-hebrew').textContent = active.hebrew;
-    document.getElementById('now-sf-time').textContent   = active.range;
-    // This card is a mirror, and a mirror must not answer to the original's
-    // name: ids are stripped from everything copied here, or getElementById —
-    // which takes the first match in the document, and this card stands above
-    // the others — would hand the next render this copy instead of the card.
-    const mirror = (html) => {
-      const t = document.createElement('div');
-      t.innerHTML = html || '';
-      t.querySelectorAll('[id]').forEach(e => e.removeAttribute('id'));
-      return t.innerHTML;
-    };
-    // Clears dst when the source card lacks the element, so nothing stale
-    // lingers from the previous hour's card.
-    const copy = (sel, id) => {
-      const src = sourceCard.querySelector(sel);
-      const dst = document.getElementById(id);
-      if (dst) dst.innerHTML = src ? mirror(src.innerHTML) : '';
-    };
-    const keterFace = sourceCard.querySelector('.keter-visible-content');
-    const malchutFace = sourceCard.querySelector('.malchut-visible-content');
-    // Every face is mirrored whole. Copying only the text rows left the ✦
-    // headings behind — and those headings carry the מעלה tags, so the card of
-    // the hour was the one card in which the day's counted step could not be
-    // seen or marked.
-    const wholeFace = (el) => {
-      document.getElementById('now-sf-cycle').innerHTML = '';
-      document.getElementById('now-sf-main').innerHTML  = mirror(el ? el.innerHTML : '');
-      document.getElementById('now-sf-sub').innerHTML   = '';
-      document.getElementById('now-sf-tags').innerHTML  = '';
-    };
-    if (keterFace) {
-      wholeFace(keterFace);
-    } else if (malchutFace) {
-      wholeFace(malchutFace);
-    } else {
-      // The seven have no wrapper around their face: it is everything in the
-      // content column except the detail, which is mirrored separately below.
-      const col = sourceCard.querySelector('.sefirah-content-col');
-      const face = col ? Array.from(col.children)
-        .filter(n => !n.classList.contains('sefirah-detail'))
-        .map(n => n.outerHTML).join('') : '';
-      document.getElementById('now-sf-cycle').innerHTML = '';
-      document.getElementById('now-sf-main').innerHTML  = mirror(face);
-      document.getElementById('now-sf-sub').innerHTML   = '';
-      document.getElementById('now-sf-tags').innerHTML  = '';
-    }
-    copy(keterFace ? '.keter-detail' : '.sefirah-detail', 'now-sf-detail');
-    // Left margin: the Tzadik of this hour and its prayer. The prayer keeps its
-    // data-prayer, so this copy is tappable too and both stay in step.
-    const _lblCol = keterFace
-      ? document.querySelector('.keter-title-row')
-      : sourceCard.querySelector('.sefirah-label-col');
-    const _tzEl = document.getElementById('now-sf-tzadik');
-    const _prEl = document.getElementById('now-sf-prayer');
-    if (_tzEl) _tzEl.innerHTML = _lblCol
-      ? Array.from(_lblCol.querySelectorAll('div'))
-          .filter(d => /font-style:\s*italic/.test(d.getAttribute('style') || ''))
-          .map(d => d.innerHTML).join('<br>')
-      : '';
-    if (_prEl) {
-      const src = (_lblCol && _lblCol.querySelector('.prayer-tag'))
-        || sourceCard.querySelector('.prayer-tag');
-      _prEl.innerHTML = src ? mirror(src.outerHTML) : '';
-    }
-    document.getElementById('now-sefirah-featured').style.display = 'grid';
-    const nowCap = document.getElementById('now-caption');
-    if (nowCap) nowCap.style.display = '';
-    // The band names the same hours the card does, so the tie to the dial is
-    // a fact on the page and not only a position on it.
-    const nowHead = document.getElementById('now-header');
-    if (nowHead) nowHead.style.display = '';
-    const nowRange = document.getElementById('now-header-range');
-    if (nowRange) nowRange.textContent = active.range ? ' \u00b7 ' + active.range : '';
-    applyMaalotState();
-    applyPrayerState();
-  }
 
   // ── GEVURAH: FOUR SEASONS — 4 × 91-Day Cycle (Ilan = 91 = Hashem 26 + Adni 65) ──
   // Call with the day of the KoT year (1–364): dEff − d_year1 + 1, so the
@@ -16587,7 +16422,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const hal  = getHalachaInfo(dEff - d_year1 + 1);
     const txt  = getDailyText(date);
 
-    const cards = Array.from(document.querySelectorAll('.sefirah-card')).filter(c => c.id !== 'now-sefirah-featured');
+    const cards = Array.from(document.querySelectorAll('.sefirah-card'));
 
     // CHOCHMAH — 22-Day Alef-Bet
     // 231 Gates — compute combination before rendering card face
@@ -19009,7 +18844,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     };
     document.getElementById('daily-script-content').textContent =
       _scriptBeginner ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
-    updateNowSefirah();
   }
 
   function changeDay(delta) {
@@ -19893,7 +19727,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     updateDualClock();
     updateZmanimLine();
     updateSefirahTimeLabels();
-    updateNowSefirah();
   }, 30000);
 
   // ══════════════════════════════════════════════════════════════
