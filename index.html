@@ -645,7 +645,9 @@ border-bottom-color: var(--gold);
 /* ── CROWN ── */
 .keter-title-row {
 text-align: center;
-margin-bottom: 6px;
+/* Clear of Today's Ladder above it. The two were touching, and the Keter
+   heading read as the foot of that block rather than the head of the cards. */
+margin: 24px 0 6px;
 }
 .keter-crown-label {
 font-family: 'Cinzel', serif;
@@ -14462,7 +14464,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // One entry is built rather than written: the day's two shapes are the
     // chosen city's own hours, so they cannot be a stored paragraph.
     const info = (typeof entry === 'function') ? entry() : entry;
-    if (info) openInfoPopup(info.title, info.main, info.meta);
+    if (!info) return;
+    // What a cycle means, and then what it is saying today. The second half
+    // is the matter the card's own detail carries that is not a counted step,
+    // a companion or a menorah — the letters behind Chochmah's cycle, the
+    // lobe of the lung behind Chesed's, the season behind Gevurah's. It has
+    // no other place: it is the face said at more length, and this is the
+    // icon that already stands for the face.
+    const extra = (el.closest('.pane-host') || {}).querySelector
+      ? el.closest('.pane-host').querySelector(':scope > .sefirah-panes > .pane-extra')
+      : null;
+    const more = extra && extra.children.length
+      ? '<hr style="border:0;border-top:1px solid var(--border);margin:16px 0;">' +
+        '<div style="font-family:\'Cinzel\',serif;font-size:calc(10.5px * var(--ts, 1));' +
+        'letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;">Today in this cycle</div>' +
+        extra.innerHTML
+      : '';
+    openInfoPopup(info.title, info.main + more, info.meta);
   }, true);
 
   // Each card carries its ⓘ at the top-right corner, beside the expand
@@ -19772,16 +19790,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // So the column is cut up here instead, and each piece filed by what it
   // already says it is: a מיעוט tag makes it a counted step of the return, a
   // מעלה tag a step of the climb, a Rebbe's ordinal a menorah, a ✡ at the
-  // head of its label a companion. What carries none of those marks is
-  // matter that explains the face, and it is gathered under More until each
-  // piece is given its own place beside the thing it explains.
-  const PANE_ORDER = ['maalot', 'miutim', 'stars', 'menorah', 'more'];
+  // head of its label a companion.
+  //
+  // What carries none of those marks is not a fifth kind of reading. It is
+  // the face said at more length — the letters behind Chochmah's cycle, the
+  // lobe behind Chesed's, the season behind Gevurah's — and the card already
+  // has an icon for what its cycle means. It goes there, behind the ⓘ,
+  // rather than standing as a pane of its own called More.
+  const PANE_ORDER = ['maalot', 'miutim', 'stars', 'menorah'];
   const PANE_LABEL = {
     maalot:  ['מעלות', 'Ma’alot'],
     miutim:  ['מיעוטים', 'Mi’utim'],
     stars:   ['',  '✡ Stars'],
-    menorah: ['מנורה', 'Menorah'],
-    more:    ['',  'More']
+    menorah: ['מנורה', 'Menorah']
   };
 
   // A section heading, as every one of these templates writes it: Cinzel,
@@ -19855,7 +19876,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         (PANE_LABEL[k][0] ? '<bdi lang="he">' + PANE_LABEL[k][0] + '</bdi>' : '') +
         '<span class="pb-en">' + PANE_LABEL[k][1] + '</span></button>').join('') +
       '</div>' +
-      PANE_ORDER.map(k => '<div class="pane-body" data-pane="' + k + '"></div>').join('');
+      PANE_ORDER.map(k => '<div class="pane-body" data-pane="' + k + '"></div>').join('') +
+      '<div class="pane-extra" hidden></div>';
     card.classList.add('pane-host');
     card.appendChild(box);
     return box;
@@ -19892,8 +19914,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const filed = card._paneFiled = [];
       const last = {};
       _paneSections(det).forEach(sec => {
-        const k = sec.kind || 'more';
-        const body = box.querySelector('.pane-body[data-pane="' + k + '"]');
+        const k = sec.kind || 'extra';
+        const body = k === 'extra' ? box.querySelector('.pane-extra')
+                                   : box.querySelector('.pane-body[data-pane="' + k + '"]');
         if (!body) return;
         if (last[k]) {
           const hr = document.createElement('hr');

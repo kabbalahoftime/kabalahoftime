@@ -1073,7 +1073,10 @@ async function checkInBrowser(chromium) {
     await page.evaluate(() => {
       const st = document.createElement('style');
       st.id = '__all-panes';
-      st.textContent = '.pane-body { display: block !important }';
+      // .pane-extra is the matter a card's ⓘ shows rather than a pane; it is
+      // hidden in the card, and its rows measure zero there, so it is opened
+      // with the rest.
+      st.textContent = '.pane-body, .pane-extra { display: block !important }';
       document.head.appendChild(st);
     });
     await settle();
