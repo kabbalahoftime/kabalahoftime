@@ -304,7 +304,11 @@ letter-spacing: 1px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 24px;
+  /* Four columns and three separators will not sit on one line at 320px, so
+     they wrap rather than overflow — what #reading-controls already does for
+     the same reason. The gap closes a little to put off the wrap. */
+  flex-wrap: wrap;
+  gap: 18px;
   padding: 14px 0 10px;
   border-bottom: 1px solid var(--border);
   margin-bottom: 10px;
@@ -529,7 +533,6 @@ animation: prayerPulse 2.2s ease-in-out infinite;
 @media (prefers-reduced-motion: reduce) {
 .prayer-tag.now-flash { animation: none; opacity: 1; text-shadow: 0 0 5px rgba(223,160,22,0.85); }
 }
-#now-sf-heart { margin-top: 5px; cursor: pointer; }
 
 .year-pill-btn {
 background: none;
@@ -2399,9 +2402,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   padding: 17px 12px; margin: -17px -12px;
   position: relative; z-index: 1;
 }
-#now-sf-heart {
-  padding: 7px 12px; margin: 5px -12px 0;
-}
 #maalot-moon { min-height: 44px; }
 /* Both users of this are absolutely positioned in a corner, so the box can be
    given its full 44px outright — it grows inward, away from the edge it is
@@ -2629,6 +2629,30 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       </div>
       <div class="dc-label">Ma'alot &nbsp;מעלות</div>
     </div>
+    <div class="dc-sep">·</div>
+    <!-- The heart came here from the Now card, which is gone. It belongs beside
+         the moon rather than on a card: these two columns are the day's
+         gatherings counted — thirty steps, stars and seven Rebbeim in the one,
+         the ten prayers in the other. On the card it was only ever visible when
+         that card was. -->
+    <div class="dc-col" id="prayer-heart-col" onclick="openPrayers()"
+         style="cursor:pointer;" title="The ten daily prayers">
+      <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:5px;">
+        <svg id="prayer-heart-svg" width="20" height="19" viewBox="0 0 22 20" style="display:block;">
+          <defs>
+            <clipPath id="prayer-heart-clip"><rect id="prayer-heart-rect" x="0" y="20" width="22" height="20"/></clipPath>
+          </defs>
+          <path id="prayer-heart-fill"
+                d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
+                fill="var(--accent-red)" clip-path="url(#prayer-heart-clip)"/>
+          <path id="prayer-heart-rim"
+                d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
+                fill="none" stroke="var(--gold)" stroke-width="1.1"/>
+        </svg>
+        <span id="prayer-heart-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/10</span>
+      </div>
+      <div class="dc-label">Prayers &nbsp;תפילות</div>
+    </div>
   </div>
 
   <!-- THE THIRTY-FIRST — the seal of a completed path. Hidden until the day's
@@ -2676,20 +2700,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="now-sf-time" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;"></div>
       <div id="now-sf-tzadik" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;"></div>
       <div id="now-sf-prayer" style="margin-top:1px;"></div>
-      <div id="now-sf-heart" onclick="event.stopPropagation(); openPrayers()" title="The ten daily prayers">
-        <svg id="prayer-heart-svg" width="20" height="19" viewBox="0 0 22 20" style="display:block;margin:0 auto;">
-          <defs>
-            <clipPath id="prayer-heart-clip"><rect id="prayer-heart-rect" x="0" y="20" width="22" height="20"/></clipPath>
-          </defs>
-          <path id="prayer-heart-fill"
-                d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
-                fill="var(--accent-red)" clip-path="url(#prayer-heart-clip)"/>
-          <path id="prayer-heart-rim"
-                d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
-                fill="none" stroke="var(--gold)" stroke-width="1.1"/>
-        </svg>
-        <div id="prayer-heart-count" style="font-size:calc(10.5px * var(--ts, 1));color:var(--gold);text-align:center;margin-top:1px;">0/10</div>
-      </div>
     </div>
     <div class="sefirah-content-col">
       <div id="now-sf-cycle" class="sefirah-cycle-name"></div>
@@ -13680,7 +13690,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (cnt) cnt.textContent = n + '/10';
     const whole = n === 10;
     if (svg) svg.style.filter = whole ? 'drop-shadow(0 0 3px rgba(179,58,58,0.85))' : '';
-    const wrap = document.getElementById('now-sf-heart');
+    const wrap = document.getElementById('prayer-heart-col');
     // The Baal Shem Tov, through the Maggid and the Alter Rebbe: "Love your
     // fellow as yourself" is the commentary on "Love Hashem your God" — one
     // loves the Jew's inner essence, the part of God Above within him. So the
