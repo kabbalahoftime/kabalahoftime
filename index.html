@@ -2232,9 +2232,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 #today-block > .cycle-info-btn.corner { top:8px; right:12px; }
 .today-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
   text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+/* One line, always: the step and what it asks for belong together, and a name
+   that wrapped left a half-empty second line above the tally. _todayFit steps
+   the size down for the few names too long to fit at full size. */
 .today-next { display:block; width:100%; text-align:left; background:none; border:none;
   font-family:inherit; font-size:calc(15px * var(--ts, 1)); color:var(--ink);
-  line-height:1.5; padding:3px 0; cursor:pointer; }
+  line-height:1.5; padding:3px 0; cursor:pointer;
+  white-space:nowrap; overflow:hidden; }
 .today-next .t-lead { color:var(--ink-dim); font-size:0.8em; text-transform:uppercase;
   letter-spacing:1.5px; }
 .today-next .t-step { color:var(--gold); }
@@ -2482,7 +2486,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <p><strong>What to do.</strong> Tap any card to open its texts. A heading marked <strong>✦</strong> carries a counted step, with a <strong>מעלה</strong> or <strong>מיעוט</strong> tag beside it — tap those in order, fifteen down and fifteen back, and the moon above fills as you go. Tap a <strong>✡</strong>, or a Rebbe&rsquo;s menorah, to gather what you learn beyond the thirty. Tap a <strong>prayer</strong> in a card&rsquo;s left margin when you have prayed it — those may be marked in any order. Tap the moon itself for the whole path.</p>
       <p><strong>The shape of a day.</strong> The climb belongs to one hour: the fifteen <strong>מעלות</strong> are taken together in the Mochin — Chochmah, Binah, and Keter/Da&rsquo;at — the eighty-eight minutes wrapped around Chatzot. The rest of the day then walks the Sefirot in turn, and each hour asks for everything that is its own: its <strong>מיעוט</strong>, its prayer, its <strong>✡</strong> companions, its Rebbe&rsquo;s menorah from Chesed down — and the מעלה already climbed there, returned to and reviewed.</p>
       <p><strong>However you come to it.</strong> That is the ideal, and nothing depends on reaching it. The path can be joined at any hour and still be finished: the hour only says what it is asking for, and a step is marked when it was actually done, not when its hour has passed. Anyone who would rather take a single resource, or stay with one card, is welcome to — the main thing is to learn Torah and to pray as we fulfill our day&rsquo;s acts of kindness. What this offers is a way to bind that learning and that prayer, and ourselves, to time, and to the beautifully intricate Kabbalistic structure found within it.</p>
-      <p><strong>Where to start.</strong> The <strong>Today&rsquo;s Focus</strong> block, just under the date — it names the next step to take and goes straight to it.</p>
+      <p><strong>Where to start.</strong> The <strong>Today&rsquo;s Ladder</strong> block, just under the date — it names the next step to take and goes straight to it.</p>
     
     </div>
     <div class="pane-body pane-prose" data-pane="intro">
@@ -2561,14 +2565,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        is exactly one step being asked for. Two lines said otherwise, and
        reading them side by side suggested a choice that the order does not
        offer.
-       Focus, not Path: Today's Path is already the name of the modal that
+       Ladder, not Path: Today's Path is already the name of the modal that
        "all thirty" and the moon both open, and it is the whole thirty. This
-       holds the one step being asked for now, so it is named for that one
-       thing rather than for the path it is a step of. -->
+       is the rung being stood on — fifteen up and fifteen down is a ladder,
+       and Yaakov's is the one the thirty are counted by. -->
   <div id="today-block">
     <span class="cycle-info-btn corner" data-cycle="dayshape"
           title="The shape of the night">ⓘ</span>
-    <div class="today-label">Today&rsquo;s Focus</div>
+    <div class="today-label">Today&rsquo;s Ladder</div>
     <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
             aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
@@ -14850,6 +14854,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // the foot cannot: that the path is finished.
       el.innerHTML = '<span class="t-lead t-whole">Done</span> ' +
         '<span class="t-sef">the month complete' + note + '</span>';
+      _todayFit(el);
       return;
     }
     const waxing = st.idx < 15;
@@ -14876,10 +14881,34 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // label, which names the step and says whether its hour is running.
     el.setAttribute('aria-label', 'Go to ' + (waxing ? 'ma’alah ' : 'mi’ut ') +
       (st.idx % 15 + 1) + ', ' + name + (st.due ? ' — its hour is now' : ''));
+    // The Sefirah's name is gone from the end. It named the card the step is
+    // on, which is a direction to somewhere else — and the tap already goes
+    // there. What is left is the step and what it asks for, and the day-note
+    // when the step belongs to another day, which is the one thing here the
+    // reader cannot see for themselves.
     el.innerHTML =
       '<bdi class="t-step' + (st.due ? ' t-due' : '') + '" lang="he">' +
-      (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' +
-      nameHtml + ' <span class="t-sef">· ' + p[2] + note + '</span>';
+      (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' + nameHtml +
+      (note ? ' <span class="t-sef">' + note.replace(/^ /, '') + '</span>' : '');
+    _todayFit(el);
+  }
+
+  // One line means one line. The names are of very different lengths — a few
+  // words of English, a phrase of Hebrew, and both together — so no single
+  // size fits all thirty at every reader text size and phone width. The line
+  // is set nowrap and then stepped down until it fits, which leaves the common
+  // case untouched and shrinks only the long ones. Three passes, because the
+  // first ratio is off by a rounding and the second is not.
+  function _todayFit(el) {
+    el.style.fontSize = '';
+    for (let i = 0; i < 3; i++) {
+      const avail = el.clientWidth;
+      if (!avail || el.scrollWidth <= avail) return;
+      const size = parseFloat(getComputedStyle(el).fontSize);
+      const want = Math.max(10, size * avail / el.scrollWidth);
+      if (want >= size) return;
+      el.style.fontSize = want.toFixed(2) + 'px';
+    }
   }
 
   function renderTodayBlock() {
