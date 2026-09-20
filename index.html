@@ -1939,6 +1939,23 @@ to   { opacity: 1; }
   letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.25);opacity:.92;
 }
 #wr-trigger:hover{opacity:1;}
+/* The How-to Guide sits at the other corner, and reads as the quieter of the
+   two: the Journal is the day's own accounting, this is about the page. */
+#hg-trigger{
+  position:fixed;bottom:20px;left:20px;z-index:999;
+  background:var(--bg-card);color:var(--gold);border:1px solid var(--gold);
+  border-radius:6px;padding:8px 14px;cursor:pointer;
+  font-family:'Cormorant Garamond',serif;font-size:calc(13px * var(--ts, 1));
+  letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.18);opacity:.92;
+}
+#hg-trigger:hover{opacity:1;}
+#hg-modal{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.65);overflow-y:auto;
+  padding:20px;box-sizing:border-box;
+}
+/* Inside the panel the strip needs no border or rounding of its own. */
+#hg-modal .intro-panes{ margin:0; border:1px solid var(--border); }
 #wr-modal{
   display:none;position:fixed;inset:0;z-index:1000;
   background:rgba(0,0,0,.65);overflow-y:auto;
@@ -2326,8 +2343,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   min-height: 24px;
   display: inline-flex; align-items: center; justify-content: center;
 }
-.year-pill-btn, .lang-btn, #wr-trigger { position: relative; }
-.year-pill-btn::after, .lang-btn::after, #wr-trigger::after {
+.year-pill-btn, .lang-btn, #wr-trigger, #hg-trigger { position: relative; }
+.year-pill-btn::after, .lang-btn::after, #wr-trigger::after, #hg-trigger::after {
   content: ''; position: absolute; left: 0; right: 0; top: 50%;
   transform: translateY(-50%); height: 44px;
 }
@@ -2459,71 +2476,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        than leaving a broken image at the top of the app. -->
   <div id="week-art" style="margin:16px 0;text-align:center;display:none;"></div>
 
-  <!-- WHAT THIS IS — the week's creature, and the three readings that say
-       what the page is for. All four were open at once under the picture,
-       which is four screens of preamble before the date. They wear the same
-       strip the cards wear now: one open at a time, none to begin with, and
-       the strip itself says what is behind it. -->
-  <div class="pane-host intro-panes" id="intro-panes">
-    <div class="pane-strip" role="tablist" aria-label="About this practice">
-    <button type="button" class="pane-btn" data-pane="shirah" role="tab"
-            aria-selected="false" onclick="selectPane(this)">Perek Shirah</button>
-    <button type="button" class="pane-btn" data-pane="start" role="tab"
-            aria-selected="false" onclick="selectPane(this)">Start Here</button>
-    <button type="button" class="pane-btn" data-pane="intro" role="tab"
-            aria-selected="false" onclick="selectPane(this)">Introduction</button>
-    <button type="button" class="pane-btn" data-pane="howto" role="tab"
-            aria-selected="false" onclick="selectPane(this)">How to Use</button>
-    </div>
-    <div class="pane-body pane-prose" data-pane="shirah">
-    <div id="perek-shirah-week" style="display:none;">
-      <div class="ps-label"><a id="ps-doc-link" target="_blank" style="color:inherit">Perek Shirah</a> · this week</div>
-      <div class="ps-line" id="ps-line"></div>
-    </div>
-    </div>
-    <div class="pane-body pane-prose" data-pane="start">
-      <div class="start-line">A daily practice that maps the Jewish year onto Kabbalistic structure.</div>
-      <p><strong>What you're looking at.</strong> Today's date maps onto several nested cycles at once — a day, a week, a month, a season, a year — each drawn from a different Kabbalistic or textual structure. Every card below is one of those cycles.</p>
-      <p><strong>What to do.</strong> Tap any card to open its texts. A heading marked <strong>✦</strong> carries a counted step, with a <strong>מעלה</strong> or <strong>מיעוט</strong> tag beside it — tap those in order, fifteen down and fifteen back, and the moon above fills as you go. Tap a <strong>✡</strong>, or a Rebbe&rsquo;s menorah, to gather what you learn beyond the thirty. Tap a <strong>prayer</strong> in a card&rsquo;s left margin when you have prayed it — those may be marked in any order. Tap the moon itself for the whole path.</p>
-      <p><strong>The shape of a day.</strong> The climb belongs to one hour: the fifteen <strong>מעלות</strong> are taken together in the Mochin — Chochmah, Binah, and Keter/Da&rsquo;at — the eighty-eight minutes wrapped around Chatzot. The rest of the day then walks the Sefirot in turn, and each hour asks for everything that is its own: its <strong>מיעוט</strong>, its prayer, its <strong>✡</strong> companions, its Rebbe&rsquo;s menorah from Chesed down — and the מעלה already climbed there, returned to and reviewed.</p>
-      <p><strong>However you come to it.</strong> That is the ideal, and nothing depends on reaching it. The path can be joined at any hour and still be finished: the hour only says what it is asking for, and a step is marked when it was actually done, not when its hour has passed. Anyone who would rather take a single resource, or stay with one card, is welcome to — the main thing is to learn Torah and to pray as we fulfill our day&rsquo;s acts of kindness. What this offers is a way to bind that learning and that prayer, and ourselves, to time, and to the beautifully intricate Kabbalistic structure found within it.</p>
-      <p><strong>Where to start.</strong> The <strong>Today&rsquo;s Ladder</strong> block, just under the date — it names the next step to take and goes straight to it.</p>
-    
-    </div>
-    <div class="pane-body pane-prose" data-pane="intro">
-      <p>Rabbi Schneur Zalman of Liadi, the Alter Rebbe, famously stated that we must "live with the times," thereby experiencing the teachings of the Torah related to each day of the year. Every day of the Jewish calendar has a unique meaning.</p>
-      <p>The calendar is the master key to unlock the hidden rationale behind the formal structure of ancient sacred texts, as well as to understand basic mystical concepts. When comprehended within the context of the Jewish calendar, these works reveal the spiritual energy of each day, serving as a practical guide for self-analysis and development.</p>
-      <p>During this daily journey, we learn to live with greater harmony, happiness and gratitude — from the Kabbalah, from age-old Jewish ethical teachings, and even from animals. The objective is to be in touch with the spiritual powers of each day, thereby improving one's daily conduct and rediscovering the universal song within each one of us: the song of the soul.</p>
-      <p>Below, each card opens with the Kabbalistic structure that defines it, and carries beneath it the text that structure measures. Most are built on the week — the Torah's weekly Parasha, or the Omer's count of weeks — layered with shorter and longer spans: 13 attributes, the 22 letters, the Rambam's 28 days, 40 days of receiving the Torah, the 72-fold Name, the four seasons of 91 — each one a single running and returning around its own heart — and the full 364-day year. Ma'alot HaZman above does the reverse, spiraling the whole year upward through the hours of a single day. Tap the ⓘ at the corner of any card to learn what its cycle means. All converge on this moment, each adding its own spiritual dimension to today.</p><p>Alongside the readings runs the day's prayer. Each Sefirah carries one — Hitbodedut in Keter, Shacharit in Tiferet, Mincha in Hod, Maariv in Yesod, Kri'at Shema in Malchut, and so through all ten. The prayer whose hour has come pulses gently in the card until it is said; marking it turns it red, and the heart in Today's Ladder fills as the day's ten accumulate. Whole, it carries both verses at once: ואהבת את ה׳ אלוקיך בכל לבבך and ואהבת לרעך כמוך — for as the Baal Shem Tov taught through the Maggid and the Alter Rebbe, loving your fellow is the commentary on loving Hashem, since what one loves in him is the part of God Above within him.</p>
-      <p>The day itself traces a lunar month. Fifteen ma'alot — steps up — ascend from Malchut back to Keter as the moon in the clock above waxes to fullness, arriving in the hours of the Mochin, when "the light of the moon shall be as the light of the sun" (Isaiah 30:26) — the day's own Shavuot, the fiftieth gate at the top of the climb; then fifteen steps of listening come back down from Keter to Malchut as the moon wanes and makes itself small — doing, then hearing: נעשה ונשמע. Tap the moon at any time to see Today's Path.</p>
-      <p>That verse of Isaiah has an end, and it is the end this whole app is counting toward. Twelve chapters later the sun and the moon are not raised but set aside — the light no longer coming through either of them. It is the close of the haftarah for Ki Tavo, one of the seven parashiyot the Zohar leaves in silence.</p>
-      <div style="margin:10px 0 4px;padding:10px 12px;border-left:2px solid var(--gold);background:var(--bg-card-alt);border-radius:0 6px 6px 0;"><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">י״ט</span>&nbsp; לֹא־יִהְיֶה־לָּךְ עוֹד הַשֶּׁמֶשׁ לְאוֹר יוֹמָם וּלְנֹגַהּ הַיָּרֵחַ לֹא־יָאִיר לָךְ וְהָיָה־לָךְ ה׳ לְאוֹר עוֹלָם וֵאלֹקַיִךְ לְתִפְאַרְתֵּךְ</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">You shall no longer have the sun for light by day, and for brightness the moon shall not give you light; but the Lord shall be to you for an everlasting light, and your God for your glory.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ׳</span>&nbsp; לֹא־יָבוֹא עוֹד שִׁמְשֵׁךְ וִירֵחֵךְ לֹא יֵאָסֵף כִּי ה׳ יִהְיֶה־לָּךְ לְאוֹר עוֹלָם וְשָׁלְמוּ יְמֵי אֶבְלֵךְ</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">Your sun shall no longer set, neither shall your moon be gathered in, for the Lord shall be to you for an everlasting light, and the days of your mourning shall be completed.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ״א</span>&nbsp; וְעַמֵּךְ כֻּלָּם צַדִּיקִים לְעוֹלָם יִירְשׁוּ אָרֶץ נֵצֶר מַטָּעַי מַעֲשֵׂה יָדַי לְהִתְפָּאֵר</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">And your people, all of them righteous, shall inherit the land forever — a scion of My planting, the work of My hands, in which I will glory.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ״ב</span>&nbsp; הַקָּטֹן יִהְיֶה לָאֶלֶף וְהַצָּעִיר לְגוֹי עָצוּם אֲנִי ה׳ בְּעִתָּהּ אֲחִישֶׁנָּה</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">The smallest shall become a thousand, and the least a mighty nation. I am the Lord; in its time I will hasten it.</div></div><div style="font-size:0.82em;color:var(--ink-dim);margin-top:2px;text-align:left;"><a href="https://www.sefaria.org/Isaiah.60.19-22?lang=bi" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="color:var(--gold)">Yeshayahu 60:19–22</a></div></div>
-      <p>הַקָּטֹן יִהְיֶה לָאֶלֶף — the smallest shall become a thousand — is the rule the thirty steps are kept by: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure. And בְּעִתָּהּ אֲחִישֶׁנָּה — in its time, or hastened — is the seam this calendar stands on: a year already fixed, and a day still to be walked.</p>
-    
-    </div>
-    <div class="pane-body pane-prose" data-pane="howto">
-      <ul style="margin:0;padding-left:1.1em;text-align:left;">
-        <li style="margin-bottom:0.7em;">Use <strong>‹ ›</strong> to move a day at a time, or <strong>jump to date ↗</strong> to go straight to any date.</li>
-        <li style="margin-bottom:0.7em;">Tap any card below — Keter, a Sefirah, Malchut — to expand it for the full texts and source links; tap <strong>ⓘ</strong> at a card's top-right corner to learn what its cycle means.</li>
-        <li style="margin-bottom:0.7em;">Each card opens with its own structure — where today falls in its cycle — and beneath it the text that cycle is measuring, under its own heading. A heading marked <strong>✦</strong> carries a counted step, and its מעלה or מיעוט badge sits beside it; the rest are read without being counted. The linked title opens the source.</li>
-        <li style="margin-bottom:0.7em;">Each Sefirah carries one of the day's ten <strong>prayers</strong>, in the left margin beside its hours. The one whose hour has come pulses until it is said; tap it to mark it, and tap again to undo. They may be marked in any order — unlike the ma'alot, each prayer has its own time.</li>
-        <li style="margin-bottom:0.7em;">The <strong>heart</strong> in Today's Ladder fills as those ten accumulate, and glows when the day's prayers are whole.</li>
-        <li style="margin-bottom:0.7em;">Tap a step on Ma'alot HaZman — the spiral of the year above — for that week's theme, animal, and teaching.</li>
-        <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Malchut up to Keter) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
-        <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. Both halves are taken in order, each step the vessel for the next, and the return does not begin until the moon is full — all fifteen climbed. The thirty are one path, so at any moment there is exactly one step being asked for, and tapping any other will not take. A little is a step: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</li>
-        <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
-        <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps. Each companion gathered lights in the sun's gold and fills half a star in the ring around the moon &mdash; two to a star, so a full day&rsquo;s twenty-two make the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars. The seven Chabad Rebbeim — one to each Sefirah from Chesed to Malchut — are the one closed set among them, and they wear a seven-branched menorah rather than a star: they are the ground the companions stand on. A gathered Rebbe lights blue and fills his own link in the chain of seven that hangs beside the moon, rather than a star in the ring.</li>
-        <li style="margin-bottom:0.7em;">Tap any <strong>✡</strong> — six-pointed, a Magen David — to gather it as a <strong>star</strong>, and the count beside the moon rises. The stars have no total to reach: what is on offer changes with the day, so the count says how many you reached, never how many you missed.</li>
-        <li style="margin-bottom:0.7em;">The <strong>Weekly Journal</strong> keeps the accounting. Each day it reports what was actually marked — the thirty steps, the ten prayers, the stars gathered — and <em>The Year</em> lays all 364 days out at once, a column to a week, so nothing is lost at midnight.</li>
-        <li style="margin-bottom:0.7em;">Badges like "Week 40 · Day 4" show where you are in that section's own cycle; the linked title beside them opens the full source text.</li>
-        <li style="margin-bottom:0.7em;">Gevurah's season reads <strong>Ratzo</strong> for its first forty-five days and <strong>Shov</strong> for its last — running in toward the season's <strong>Heart</strong> on day 46, then returning out. Nothing is divided between the halves; only the direction changes. Winter's Heart falls on Tu B'Shvat, the day the sap turns.</li>
-        <li style="margin-bottom:0.7em;">Around Rosh Hashana two Kabbalah of Time years overlap; the <strong>year pills</strong> under the date switch between the one closing and the one begun. Netzach's cycle of 369 runs five days longer than the year, so on the first days of a cycle it offers its own toggle to reach days 365–369 of the one still finishing.</li>
-        <li>Fixed Hours vs. Sha'ot Zmaniyot switches the day's sefirah-times between standard clock hours and halachic "proportional hours" for your chosen city.</li>
-        <li>Under the title sit two small settings for reading. <strong>Contrast</strong> / <strong>Soft</strong> switches the page between the darker, more legible grade and the warmer one — Contrast is the default; both are readable, Soft is simply gentler on the eye. <strong>A</strong> / <strong>A+</strong> / <strong>A++</strong> sets the size of the text. Both are remembered.</li>
-      </ul>
-    
-    </div>
-  </div>
   <!-- DATE BAR — the master control: everything below derives from this day -->
   <div class="date-bar">
     <button class="date-nav-btn" onclick="changeDay(-1)">‹</button>
@@ -2703,9 +2655,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
 <!-- The panes. Five modes, not two: the face is the dial, and what was one
      undivided "detail" is now the kinds the app already thinks in — the
-     counted steps waxing and waning, the companions, and the Rebbeim. Keter
-     has no Rebbe, the seven running Chesed to Malchut, so it offers no
-     menorah button rather than an empty pane.
+     counted steps waxing and waning, the companions, and the menorah. The
+     seven Chabad Rebbeim run Chesed to Malchut and none of them is Keter's;
+     the menorah here is the Baal Shem Tov, from whom the chain comes, and he
+     stands before it rather than in it.
      The strip is the control. The arrow is gone: a card whose face is the
      dial cannot be opened by clicking itself, and two controls for one card
      is one too many. -->
@@ -2717,6 +2670,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             aria-selected="false" onclick="selectPane(this)"><bdi lang="he">מיעוטים</bdi><span class="pb-en">Mi’utim</span></button>
     <button type="button" class="pane-btn" data-pane="stars" role="tab"
             aria-selected="false" onclick="selectPane(this)">✡<span class="pb-en">Stars</span></button>
+    <button type="button" class="pane-btn" data-pane="menorah" role="tab"
+            aria-selected="false" onclick="selectPane(this)"><bdi lang="he">מנורה</bdi><span class="pb-en">Menorah</span></button>
   </div>
   <div class="pane-body" data-pane="maalot">
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
@@ -2802,6 +2757,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="keter-section">
     <div class="keter-section-label">✡ Dvar Malchus &amp; Chayenu</div>
     <div class="keter-main"><a href="https://www.dvarmalchus.org/" target="_blank" style="color:var(--gold)">Dvar Malchus</a> &nbsp;·&nbsp; <a href="https://chayenu.org/" target="_blank" style="color:var(--gold)">Chayenu</a></div>
+  </div>
+  </div>
+  <div class="pane-body" data-pane="menorah">
+  <!-- STORIES OF THE BESHT — the menorah of this card. It was a second text
+       under Malchut's Shabbat book, read one day in seven; it is the Baal
+       Shem Tov's own, and Keter is his card, so it is here and every day.
+       data-rebbe="0" gives it the branched lamp without a link in the chain:
+       the seven are the Chabad Rebbeim, and he stands before them. -->
+  <div class="keter-section">
+    <div class="keter-section-label" data-rebbe="0">Stories of the Besht</div>
+    <div class="keter-main" id="keter-besht-main">Loading…</div>
+    <div class="keter-meta" id="keter-besht-meta">R. Yisrael Yaakov Kaplowitz &middot; Shivchei HaBaal Shem Tov</div>
   </div>
   </div>
 </div>
@@ -9793,7 +9760,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // dayNum 1=Thu→Fri, 2=Fri→Shab, 3=Sat→Sun, 4=Sun→Mon, 5=Mon→Tue, 6=Tue→Wed, 7=Wed→Thu
   const MALCHUT_TEXTS = [
     { name: 'Arizal',      author: 'R. Yitzhak Luria (Arizal)',    shortName: 'Arizal',    day: 'Friday — Erev Shabbat',   desc: 'Etz Chayim — the Arizal\'s map of creation, the hidden architecture of the worlds' },
-    { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight',      secondaryName: 'Stories of the Besht', secondaryAuthor: 'R. YY Kaplowitz', secondaryDesc: 'Stories of the Baal Shem Tov' },
+    { name: 'Likutei Sichos and Toras Menachem',      author: 'Lubavitcher Rebbe',                   shortName: 'LS',       day: 'Shabbat',                 desc: 'Weekly Maamar / Sicha on the Parasha — chassidic insight',      },
     { name: 'Kedushas Levi',       author: 'R. Levi Yitzhak of Berditchev',      shortName: 'KL',       day: 'Sunday',                  desc: 'Chassidic commentary on Torah — love and joy in divine service' },
     { name: 'Noam Elimelech',      author: 'R. Elimelech of Lizhensk',           shortName: 'NE',       day: 'Monday',                  desc: 'The Tzadik\'s path: elevating the world through Torah' },
     { name: 'Tanya',               author: 'Alter Rebbe (R. Schneur Zalman)',     shortName: 'Tanya',    day: 'Tuesday',                 desc: 'Likutei Amarim — the Sefer Shel Beinonim' },
@@ -14058,8 +14025,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // and nowhere else, so the seven cannot crowd out the day's companions.
       // Gathered by ordinal rather than by mark, so a Rebbe whose heading is
       // written twice in the page still owns exactly one link.
+      // Ordinal zero is a menorah that is not one of the seven — the Besht,
+      // the Maggid, the Meor Einayim, who stand before the chain rather than
+      // in it. They wear the branched lamp and are counted among the day's
+      // companions, and the chain stays seven links long.
       if (on) {
-        if (el.dataset.rebbe) litRebbeim.add(+el.dataset.rebbe);
+        const ord = +(el.dataset.rebbe || 0);
+        if (ord) litRebbeim.add(ord);
         else lit.add(el.dataset.star);
       }
     });
@@ -17118,6 +17090,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Chapters 1–3 of Perek Shirah sing before any creature does — the sky and its waters through the 22 letters, the trees and the grains through the five finals, the grasses at the vowels. One element to each half of a set, eleven days apiece.</div>`
       : '';
 
+    // The Ramak keeps the count he was given on Tiferet — three of the
+    // thirty-nine a day, the whole Pardes in one turn of the thirteen. He
+    // is read on Chochmah now: the Pardes is the ordering of the Sefirot,
+    // which is what this card's own letters are reaching for.
+    const _ramakDay = (inExtra && cy13Mic) ? extraDay : cy13.day;
     document.getElementById('chochmah-detail').innerHTML = (inExtra && cy22Mic) ?
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Leap Year Microcosm — 28-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Day:</span><span class="detail-value">Day ${cy22Mic.day} of ${cy22Mic.total}</span></div>
@@ -17141,11 +17118,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://www.chabad.org/library/article_cdo/aid/137068/jewish/Letters-of-Light.htm" target="_blank" style="color:var(--gold)">Letters of Light</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Chabad.org</span></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="0">Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Moshe Cordovero &mdash; The Ramak</div>
+       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
+       ${ramakRow(_ramakDay)}
        ` :
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="0">Ohr Torah${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://hebrewbooks.org/15877" target="_blank" style="color:var(--gold)">Ohr Torah on HebrewBooks</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Dov Ber, the Maggid of Mezeritch</span></div>
+       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Moshe Cordovero &mdash; The Ramak</div>
+       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
+       ${ramakRow(_ramakDay)}
 
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractData.id} <span class="maalah yom" data-wane="4">מיעוט ד׳</span></div>
@@ -17223,13 +17208,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
     // Rav Arush series rotation — 91 classes × 4 days = 364-day cycle
     document.getElementById('binah-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Meor Einayim${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="0">Meor Einayim${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://www.sefaria.org/Me'or_Einayim?tab=contents" target="_blank" style="color:var(--gold)">Meor Einayim on Sefaria</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Menachem Nachum of Chernobyl</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Breslov Israel Recordings <span class="maalah yom" data-wane="5">מיעוט ה׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a>${breslevCD3 ? ` &nbsp;·&nbsp; <a href="${breslevCD3.url}" target="_blank" style="color:var(--gold)">${breslevCD3.label}</a> &nbsp;·&nbsp; <a href="${breslevCD4.url}" target="_blank" style="color:var(--gold)">${breslevCD4.label}</a>` : ''}</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Foundations of the Sefirot</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Foundations of the Sefirot</div>
        <div class="detail-row"><span class="detail-label">Resource:</span><span class="detail-value"><a href="https://inner.org/kabbalah/intermediate/foundations-of-sefirot.php" target="_blank" style="color:var(--gold)">Foundations of the Sefirot</a> &nbsp;·&nbsp; <a href="https://inner.org/sefirot/sefirot.htm" target="_blank" style="color:var(--gold)">The Sefirot</a> — inner.org</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div class="detail-row"><span class="detail-label">Combination:</span><span class="detail-value">${combo}</span></div>
@@ -17877,11 +17862,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="9">מיעוט ט׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Moshe Cordovero &mdash; The Ramak</div>
-       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
-              ${ramakRow(extraDay)}
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Steps of Pinchas Ben Yair</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${_micMod}:</span><span class="detail-value"><strong>${_micStep.name}</strong> — ${_micStep.meaning}${_micChain}</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;">
          <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b</a> &nbsp;·&nbsp;
@@ -17906,11 +17887,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="9">מיעוט ט׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Moshe Cordovero &mdash; The Ramak</div>
-       <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://www.sefaria.org/Tomer_Devorah.1" target="_blank" style="color:var(--gold)">Tomer Devorah on Sefaria</a></div>
-              ${ramakRow(cy13.day)}
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Steps of Pinchas Ben Yair</div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${_cy13mod}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;">
          <a href="https://www.sefaria.org/Avodah_Zarah.20b" target="_blank" style="color:var(--gold)">Avoda Zara 20b</a> &nbsp;·&nbsp;
@@ -18408,6 +18385,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     // Get parasha-specific portion if available — use actual Torah reading, not WEEKLY_BOOKS parasha
     const actualParasha = (window.getParashaForDate && window.getParashaForDate(date)) || wk.parasha;
     const parashaMapping = getParashaMapping(malTxt.name, actualParasha);
+
+    // Keter's menorah is filled from here, where the week's actual reading is
+    // already in hand: the Besht's stories run by the parasha, eight items to
+    // each, and the mapping that says which is the same one Malchut uses.
+    (() => {
+      const el = document.getElementById('keter-besht-main');
+      if (!el) return;
+      const m = getParashaMapping('Stories of the Besht', actualParasha);
+      const url = 'https://www.sefaria.org/Keter_Shem_Tov';
+      el.innerHTML = `<a href="${url}" target="_blank" style="color:var(--gold)">Stories of the Besht</a>` +
+        (m.portion ? ` &mdash; ${m.portion}` : '');
+    })();
     let mainText, subText;
     {
       const displayName = malTxt.name;
@@ -21508,6 +21497,19 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.body.style.overflow = '';
   }
 
+  function openHowtoGuide() {
+    document.getElementById('hg-modal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeHowtoGuide() {
+    document.getElementById('hg-modal').style.display = 'none';
+    document.body.style.overflow = '';
+    // Left shut, so the next opening starts at the strip rather than wherever
+    // the last reader happened to stop.
+    const host = document.getElementById('intro-panes');
+    if (host) setPane(host, '');
+  }
+
   // ── NATIVE BRIDGE ──
   // The iOS app is this page in a web view; everything it needs to schedule
   // prayer notifications and draw a widget is computed here, where the Hebrew
@@ -22696,6 +22698,88 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <button class="cal-size" id="cal-size-2" onclick="calSize(2)">Wider</button>
     </div>
     <div class="cal-scroll" id="cal-body"></div>
+  </div>
+</div>
+
+<!-- How-to Guide trigger — opposite the Weekly Journal, which is the other
+     thing on this page that is about the page rather than about the day.
+     The four readings stood open under the week's picture, four screens of
+     preamble before the date; they are here for whoever wants them. -->
+<button id="hg-trigger" onclick="openHowtoGuide()">How-to Guide</button>
+
+<!-- How-to Guide modal -->
+<div id="hg-modal" onclick="if(event.target===this)closeHowtoGuide()">
+  <div class="wr-panel">
+    <div class="wr-header">
+      <div>
+        <div class="wr-title">How-to Guide</div>
+        <div class="wr-subtitle">The week&rsquo;s creature, where to start, and how this is used</div>
+      </div>
+      <button class="wr-close" onclick="closeHowtoGuide()" aria-label="Close">&#10005;</button>
+    </div>
+<div class="pane-host intro-panes" id="intro-panes">
+  <div class="pane-strip" role="tablist" aria-label="About this practice">
+  <button type="button" class="pane-btn" data-pane="shirah" role="tab"
+          aria-selected="false" onclick="selectPane(this)">Perek Shirah</button>
+  <button type="button" class="pane-btn" data-pane="start" role="tab"
+          aria-selected="false" onclick="selectPane(this)">Start Here</button>
+  <button type="button" class="pane-btn" data-pane="intro" role="tab"
+          aria-selected="false" onclick="selectPane(this)">Introduction</button>
+  <button type="button" class="pane-btn" data-pane="howto" role="tab"
+          aria-selected="false" onclick="selectPane(this)">How to Use</button>
+  </div>
+  <div class="pane-body pane-prose" data-pane="shirah">
+  <div id="perek-shirah-week" style="display:none;">
+    <div class="ps-label"><a id="ps-doc-link" target="_blank" style="color:inherit">Perek Shirah</a> · this week</div>
+    <div class="ps-line" id="ps-line"></div>
+  </div>
+  </div>
+  <div class="pane-body pane-prose" data-pane="start">
+    <div class="start-line">A daily practice that maps the Jewish year onto Kabbalistic structure.</div>
+    <p><strong>What you're looking at.</strong> Today's date maps onto several nested cycles at once — a day, a week, a month, a season, a year — each drawn from a different Kabbalistic or textual structure. Every card below is one of those cycles.</p>
+    <p><strong>What to do.</strong> Tap any card to open its texts. A heading marked <strong>✦</strong> carries a counted step, with a <strong>מעלה</strong> or <strong>מיעוט</strong> tag beside it — tap those in order, fifteen down and fifteen back, and the moon above fills as you go. Tap a <strong>✡</strong>, or a Rebbe&rsquo;s menorah, to gather what you learn beyond the thirty. Tap a <strong>prayer</strong> in a card&rsquo;s left margin when you have prayed it — those may be marked in any order. Tap the moon itself for the whole path.</p>
+    <p><strong>The shape of a day.</strong> The climb belongs to one hour: the fifteen <strong>מעלות</strong> are taken together in the Mochin — Chochmah, Binah, and Keter/Da&rsquo;at — the eighty-eight minutes wrapped around Chatzot. The rest of the day then walks the Sefirot in turn, and each hour asks for everything that is its own: its <strong>מיעוט</strong>, its prayer, its <strong>✡</strong> companions, its Rebbe&rsquo;s menorah from Chesed down — and the מעלה already climbed there, returned to and reviewed.</p>
+    <p><strong>However you come to it.</strong> That is the ideal, and nothing depends on reaching it. The path can be joined at any hour and still be finished: the hour only says what it is asking for, and a step is marked when it was actually done, not when its hour has passed. Anyone who would rather take a single resource, or stay with one card, is welcome to — the main thing is to learn Torah and to pray as we fulfill our day&rsquo;s acts of kindness. What this offers is a way to bind that learning and that prayer, and ourselves, to time, and to the beautifully intricate Kabbalistic structure found within it.</p>
+    <p><strong>Where to start.</strong> The <strong>Today&rsquo;s Ladder</strong> block, just under the date — it names the next step to take and goes straight to it.</p>
+  
+  </div>
+  <div class="pane-body pane-prose" data-pane="intro">
+    <p>Rabbi Schneur Zalman of Liadi, the Alter Rebbe, famously stated that we must "live with the times," thereby experiencing the teachings of the Torah related to each day of the year. Every day of the Jewish calendar has a unique meaning.</p>
+    <p>The calendar is the master key to unlock the hidden rationale behind the formal structure of ancient sacred texts, as well as to understand basic mystical concepts. When comprehended within the context of the Jewish calendar, these works reveal the spiritual energy of each day, serving as a practical guide for self-analysis and development.</p>
+    <p>During this daily journey, we learn to live with greater harmony, happiness and gratitude — from the Kabbalah, from age-old Jewish ethical teachings, and even from animals. The objective is to be in touch with the spiritual powers of each day, thereby improving one's daily conduct and rediscovering the universal song within each one of us: the song of the soul.</p>
+    <p>Below, each card opens with the Kabbalistic structure that defines it, and carries beneath it the text that structure measures. Most are built on the week — the Torah's weekly Parasha, or the Omer's count of weeks — layered with shorter and longer spans: 13 attributes, the 22 letters, the Rambam's 28 days, 40 days of receiving the Torah, the 72-fold Name, the four seasons of 91 — each one a single running and returning around its own heart — and the full 364-day year. Ma'alot HaZman above does the reverse, spiraling the whole year upward through the hours of a single day. Tap the ⓘ at the corner of any card to learn what its cycle means. All converge on this moment, each adding its own spiritual dimension to today.</p><p>Alongside the readings runs the day's prayer. Each Sefirah carries one — Hitbodedut in Keter, Shacharit in Tiferet, Mincha in Hod, Maariv in Yesod, Kri'at Shema in Malchut, and so through all ten. The prayer whose hour has come pulses gently in the card until it is said; marking it turns it red, and the heart in Today's Ladder fills as the day's ten accumulate. Whole, it carries both verses at once: ואהבת את ה׳ אלוקיך בכל לבבך and ואהבת לרעך כמוך — for as the Baal Shem Tov taught through the Maggid and the Alter Rebbe, loving your fellow is the commentary on loving Hashem, since what one loves in him is the part of God Above within him.</p>
+    <p>The day itself traces a lunar month. Fifteen ma'alot — steps up — ascend from Malchut back to Keter as the moon in the clock above waxes to fullness, arriving in the hours of the Mochin, when "the light of the moon shall be as the light of the sun" (Isaiah 30:26) — the day's own Shavuot, the fiftieth gate at the top of the climb; then fifteen steps of listening come back down from Keter to Malchut as the moon wanes and makes itself small — doing, then hearing: נעשה ונשמע. Tap the moon at any time to see Today's Path.</p>
+    <p>That verse of Isaiah has an end, and it is the end this whole app is counting toward. Twelve chapters later the sun and the moon are not raised but set aside — the light no longer coming through either of them. It is the close of the haftarah for Ki Tavo, one of the seven parashiyot the Zohar leaves in silence.</p>
+    <div style="margin:10px 0 4px;padding:10px 12px;border-left:2px solid var(--gold);background:var(--bg-card-alt);border-radius:0 6px 6px 0;"><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">י״ט</span>&nbsp; לֹא־יִהְיֶה־לָּךְ עוֹד הַשֶּׁמֶשׁ לְאוֹר יוֹמָם וּלְנֹגַהּ הַיָּרֵחַ לֹא־יָאִיר לָךְ וְהָיָה־לָךְ ה׳ לְאוֹר עוֹלָם וֵאלֹקַיִךְ לְתִפְאַרְתֵּךְ</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">You shall no longer have the sun for light by day, and for brightness the moon shall not give you light; but the Lord shall be to you for an everlasting light, and your God for your glory.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ׳</span>&nbsp; לֹא־יָבוֹא עוֹד שִׁמְשֵׁךְ וִירֵחֵךְ לֹא יֵאָסֵף כִּי ה׳ יִהְיֶה־לָּךְ לְאוֹר עוֹלָם וְשָׁלְמוּ יְמֵי אֶבְלֵךְ</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">Your sun shall no longer set, neither shall your moon be gathered in, for the Lord shall be to you for an everlasting light, and the days of your mourning shall be completed.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ״א</span>&nbsp; וְעַמֵּךְ כֻּלָּם צַדִּיקִים לְעוֹלָם יִירְשׁוּ אָרֶץ נֵצֶר מַטָּעַי מַעֲשֵׂה יָדַי לְהִתְפָּאֵר</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">And your people, all of them righteous, shall inherit the land forever — a scion of My planting, the work of My hands, in which I will glory.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ״ב</span>&nbsp; הַקָּטֹן יִהְיֶה לָאֶלֶף וְהַצָּעִיר לְגוֹי עָצוּם אֲנִי ה׳ בְּעִתָּהּ אֲחִישֶׁנָּה</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">The smallest shall become a thousand, and the least a mighty nation. I am the Lord; in its time I will hasten it.</div></div><div style="font-size:0.82em;color:var(--ink-dim);margin-top:2px;text-align:left;"><a href="https://www.sefaria.org/Isaiah.60.19-22?lang=bi" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="color:var(--gold)">Yeshayahu 60:19–22</a></div></div>
+    <p>הַקָּטֹן יִהְיֶה לָאֶלֶף — the smallest shall become a thousand — is the rule the thirty steps are kept by: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure. And בְּעִתָּהּ אֲחִישֶׁנָּה — in its time, or hastened — is the seam this calendar stands on: a year already fixed, and a day still to be walked.</p>
+  
+  </div>
+  <div class="pane-body pane-prose" data-pane="howto">
+    <ul style="margin:0;padding-left:1.1em;text-align:left;">
+      <li style="margin-bottom:0.7em;">Use <strong>‹ ›</strong> to move a day at a time, or <strong>jump to date ↗</strong> to go straight to any date.</li>
+      <li style="margin-bottom:0.7em;">Tap any card below — Keter, a Sefirah, Malchut — to expand it for the full texts and source links; tap <strong>ⓘ</strong> at a card's top-right corner to learn what its cycle means.</li>
+      <li style="margin-bottom:0.7em;">Each card opens with its own structure — where today falls in its cycle — and beneath it the text that cycle is measuring, under its own heading. A heading marked <strong>✦</strong> carries a counted step, and its מעלה or מיעוט badge sits beside it; the rest are read without being counted. The linked title opens the source.</li>
+      <li style="margin-bottom:0.7em;">Each Sefirah carries one of the day's ten <strong>prayers</strong>, in the left margin beside its hours. The one whose hour has come pulses until it is said; tap it to mark it, and tap again to undo. They may be marked in any order — unlike the ma'alot, each prayer has its own time.</li>
+      <li style="margin-bottom:0.7em;">The <strong>heart</strong> in Today's Ladder fills as those ten accumulate, and glows when the day's prayers are whole.</li>
+      <li style="margin-bottom:0.7em;">Tap a step on Ma'alot HaZman — the spiral of the year above — for that week's theme, animal, and teaching.</li>
+      <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Malchut up to Keter) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
+      <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. Both halves are taken in order, each step the vessel for the next, and the return does not begin until the moon is full — all fifteen climbed. The thirty are one path, so at any moment there is exactly one step being asked for, and tapping any other will not take. A little is a step: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</li>
+      <li style="margin-bottom:0.7em;">Tap the <strong>moon</strong> itself for Today's Path — all thirty steps in order, your next one highlighted; tap any row to jump straight to it.</li>
+      <li style="margin-bottom:0.7em;">Two lights fill the cards: <strong>✦</strong> marks the counted path — the thirty steps of מעלה and מיעוט, light drawn inward (<em>Or Pnimi</em>); <strong>✡</strong> marks the surrounding light (<em>Or Makif</em>) — companion texts, resources, and the Rebbeim, which accompany the day but stand outside its thirty steps. Each companion gathered lights in the sun's gold and fills half a star in the ring around the moon &mdash; two to a star, so a full day&rsquo;s twenty-two make the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars. The seven Chabad Rebbeim — one to each Sefirah from Chesed to Malchut — are the one closed set among them, and they wear a seven-branched menorah rather than a star: they are the ground the companions stand on. A gathered Rebbe lights blue and fills his own link in the chain of seven that hangs beside the moon, rather than a star in the ring.</li>
+      <li style="margin-bottom:0.7em;">Tap any <strong>✡</strong> — six-pointed, a Magen David — to gather it as a <strong>star</strong>, and the count beside the moon rises. The stars have no total to reach: what is on offer changes with the day, so the count says how many you reached, never how many you missed.</li>
+      <li style="margin-bottom:0.7em;">The <strong>Weekly Journal</strong> keeps the accounting. Each day it reports what was actually marked — the thirty steps, the ten prayers, the stars gathered — and <em>The Year</em> lays all 364 days out at once, a column to a week, so nothing is lost at midnight.</li>
+      <li style="margin-bottom:0.7em;">Badges like "Week 40 · Day 4" show where you are in that section's own cycle; the linked title beside them opens the full source text.</li>
+      <li style="margin-bottom:0.7em;">Gevurah's season reads <strong>Ratzo</strong> for its first forty-five days and <strong>Shov</strong> for its last — running in toward the season's <strong>Heart</strong> on day 46, then returning out. Nothing is divided between the halves; only the direction changes. Winter's Heart falls on Tu B'Shvat, the day the sap turns.</li>
+      <li style="margin-bottom:0.7em;">Around Rosh Hashana two Kabbalah of Time years overlap; the <strong>year pills</strong> under the date switch between the one closing and the one begun. Netzach's cycle of 369 runs five days longer than the year, so on the first days of a cycle it offers its own toggle to reach days 365–369 of the one still finishing.</li>
+      <li>Fixed Hours vs. Sha'ot Zmaniyot switches the day's sefirah-times between standard clock hours and halachic "proportional hours" for your chosen city.</li>
+      <li>Under the title sit two small settings for reading. <strong>Contrast</strong> / <strong>Soft</strong> switches the page between the darker, more legible grade and the warmer one — Contrast is the default; both are readable, Soft is simply gentler on the eye. <strong>A</strong> / <strong>A+</strong> / <strong>A++</strong> sets the size of the text. Both are remembered.</li>
+    </ul>
+  
+  </div>
+</div>
+    <div class="wr-footer">
+      <button class="wr-btn wr-btn-close" onclick="closeHowtoGuide()">Close</button>
+    </div>
   </div>
 </div>
 
