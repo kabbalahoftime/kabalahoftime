@@ -3,7 +3,7 @@
 // name and the shell is fetched again. A cache that has gone stale in a way
 // the network-first rule cannot correct is the one failure this app has that
 // leaves every card reading "Loading…" with nothing to say why.
-const CACHE_NAME = 'kabbalah-of-time-v33';
+const CACHE_NAME = 'kabbalah-of-time-v34';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -21,10 +21,26 @@ const urlsToCache = [
   '/fonts/frank-ruhl-libre-latin.woff2'
 ];
 
-// Install — pre-cache the shell, then take over immediately
+// Install — pre-cache the shell, then take over immediately.
+//
+// Every request is made with cache: 'reload', which is the whole point of
+// bumping CACHE_NAME. addAll goes through the browser's own HTTP cache, and
+// GitHub Pages serves the page with a max-age of its own — so a new cache
+// could be primed with the very copy the bump was meant to replace, and the
+// reader would see yesterday's page for as long as that max-age ran. This
+// goes to the network for the shell, always.
+//
+// One file at a time rather than addAll, which rejects the whole install if
+// any single request fails: a font that 404s should not stop the page being
+// cached. Anything missed here is fetched by the handler below.
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then((cache) => Promise.all(
+      urlsToCache.map((url) =>
+        fetch(new Request(url, { cache: 'reload' }))
+          .then((res) => (res && res.ok) ? cache.put(url, res) : null)
+          .catch(() => {}))
+    ))
   );
   self.skipWaiting();
 });
