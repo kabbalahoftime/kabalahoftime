@@ -2578,7 +2578,7 @@ content: ''; float: right; width: 30px; height: 1em;
                  and one more who lights them all. Drawn dim and lit as they
                  are gathered. Decorative — the marks are the controls, and
                  the count is spoken in the column's title. -->
-            <svg id="rebbe-menorah" width="29" height="23" viewBox="0 0 44 34"
+            <svg id="rebbe-menorah" width="36" height="29" viewBox="0 0 26 21"
                  style="display:block;overflow:visible" aria-hidden="true"></svg>
           </div>
           <div class="dc-label">Ma'alot &nbsp;מעלות</div>
@@ -14008,31 +14008,36 @@ content: ''; float: right; width: 30px; height: 1em;
   // light on the stand is lit.
   const REBBE_COUNT = 10;
   const MENORAH_SHAMASH = 9;
-  // Right to left: the first at the far right, the eighth at the far left.
-  const MENORAH_X = [40, 35.5, 31, 26.5, 17.5, 13, 8.5, 4];
+  // Drawn as the marks in the cards are drawn: straight arms at one angle,
+  // each meeting the shaft lower than the last, tops level along the top.
+  // Four to a side rather than three, and the shaft carries the shamash
+  // raised above them — which is the difference between the Temple's seven
+  // and Chanukah's nine.
+  //
+  // Right to left: the first at the far right, the eighth at the far left,
+  // the order the lights of Chanukah are added in.
+  const MENORAH_X   = [23.8, 21.1, 18.4, 15.7, 10.3, 7.6, 4.9, 2.2];
+  const MENORAH_JOIN = [15.5, 13.6, 11.7, 9.8, 9.8, 11.7, 13.6, 15.5];
   function buildRebbeMenorah() {
     const svg = document.getElementById('rebbe-menorah');
     if (!svg || svg.childNodes.length) return;
-    // A light is a bowl with a flame standing in it. The flame is drawn
-    // whether or not it burns — dim and unfilled when it does not — so that
-    // the stand reads as a chanukiah at rest rather than as eight bare arms.
+    // A flame is drawn on every light whether or not it burns — faint and
+    // unfilled when it does not — so the stand reads as a chanukiah at rest
+    // rather than as eight bare arms.
     const flame = (x, y) =>
-      `M${x} ${y} c -1.75 -1.35 -1.75 -3.2 0 -5.4 c 1.75 2.2 1.75 4.05 0 5.4 z`;
-    const bowl = (x, y) => `M${x - 1.8} ${y} q 1.8 2.05 3.6 0`;
+      `M${x} ${y} c -1 -0.8 -1 -1.9 0 -3.2 c 1 1.3 1 2.4 0 3.2 z`;
     let html =
-      '<g fill="none" stroke="var(--accent-blue)" stroke-width="1" ' +
-      'stroke-linecap="round" opacity="0.28">' +
-      '<path d="M22 29 V10"/><path d="M15 32 H29"/><path d="M18 29 H26"/>' +
-      MENORAH_X.map(x => `<path d="M22 29 Q ${x} 29 ${x} 13"/>`).join('') +
+      '<g fill="none" stroke="var(--accent-blue)" stroke-width="1.05" ' +
+      'stroke-linecap="round" stroke-linejoin="round" opacity="0.3">' +
+      MENORAH_X.map((x, i) => `<path d="M${x} 6.8L13 ${MENORAH_JOIN[i]}"/>`).join('') +
+      '<path d="M13 4.4V17.1"/><path d="M10.6 19.2h4.8"/>' +
       '</g>';
     for (let i = 0; i < MENORAH_SHAMASH; i++) {
       const shamash = i === MENORAH_SHAMASH - 1;
-      const x = shamash ? 22 : MENORAH_X[i];
-      const y = shamash ? 10 : 13;
-      html += `<path class="men-bowl" d="${bowl(x, y)}" fill="none" ` +
-              `stroke="var(--accent-blue)" stroke-width="1" opacity="0.28"/>` +
-              `<path class="men-flame" data-i="${i}" d="${flame(x, y - 0.8)}" ` +
-              `fill="none" stroke="var(--gold)" stroke-width="0.7" opacity="0.18"/>`;
+      const x = shamash ? 13 : MENORAH_X[i];
+      const y = shamash ? 4.2 : 6.6;
+      html += `<path class="men-flame" data-i="${i}" d="${flame(x, y)}" ` +
+              `fill="none" stroke="var(--gold)" stroke-width="0.65" opacity="0.22"/>`;
     }
     svg.innerHTML = html;
   }
@@ -14070,7 +14075,7 @@ content: ''; float: right; width: 30px; height: 1em;
       g.setAttribute('opacity', on ? '1' : '0.18');
       g.setAttribute('fill', on ? '#dfa016' : 'none');
       g.setAttribute('stroke', on ? '#dfa016' : 'var(--gold)');
-      g.setAttribute('stroke-width', on ? '0.9' : '0.7');
+      g.setAttribute('stroke-width', on ? '0.85' : '0.65');
     });
     const men = document.getElementById('rebbe-menorah');
     if (men) men.style.filter = allLit ? 'drop-shadow(0 0 2.5px rgba(223,160,22,0.75))' : '';
