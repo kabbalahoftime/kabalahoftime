@@ -299,24 +299,17 @@ color: var(--ink-soft);
 letter-spacing: 1px;
 }
 
-/* ── DUAL CLOCK ── */
-#dual-clock {
-  /* Two rows, set here rather than left to wrapping: the gatherings above and
-     the clocks below, in that order at every width. Wrapping gave 3 + 1, with
-     a separator stranded at the end of the first line. */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 14px 0 10px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 10px;
-}
+/* ── THE DAY'S GATHERINGS ──
+   The ten prayers and the thirty steps, counted side by side. They stood in a
+   clock above the cards, beside a local and a Jerusalem time; the times are
+   gone and these sit inside Today's Ladder, which is the block that already
+   says how far along the path the day is. */
 .dc-row {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 18px;
+  margin-top: 8px;
 }
 .dc-col {
   display: flex;
@@ -324,15 +317,10 @@ letter-spacing: 1px;
   align-items: center;
   min-width: 72px;
 }
-/* Phones: close the gaps rather than let the four columns overhang */
+/* Phones: close the gap rather than let the columns overhang */
 @media (max-width: 470px) {
-  #dual-clock { gap: 8px; }
+  .dc-row { gap: 12px; }
   .dc-col { min-width: 60px; }
-}
-/* Below that the row wraps rather than shrinking the clocks */
-@media (max-width: 360px) {
-  #dual-clock { flex-wrap: wrap; gap: 8px 12px; }
-  .dc-col { min-width: 62px; }
 }
 
 /* ── STARS — the surrounding light (Or Makif) ──
@@ -393,11 +381,10 @@ letter-spacing: 1px;
   color: var(--gold);
   letter-spacing: 3px;
   line-height: 1;
-  /* All three columns share one row height, so their labels sit on one line.
-     The Ma'alot column is the tall one — its chain is 34px — and the two
-     clocks are only as tall as their numerals, which left LOCAL and JERUSALEM
-     12px above MA'ALOT. Centred within that height rather than topped, so the
-     numerals and the moon sit level with each other too. */
+  /* Both columns share one row height, so their labels sit on one line. The
+     Ma'alot column is the taller — its chain of Rebbeim is 34px — and the
+     heart is only as tall as its own glyph. Centred within that height rather
+     than topped, so the heart and the moon sit level with each other. */
   min-height: calc(34px * var(--ts, 1));
   display: flex;
   align-items: center;
@@ -409,7 +396,7 @@ letter-spacing: 1px;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-top: 4px;
-  /* Two names to a column — Jerusalem ירושלים, Ma'alot מעלות — and when the
+  /* Two names to a column — Prayers תפילות, Ma'alot מעלות — and when the
      column is too narrow to hold them side by side they wrap. Without this
      the wrapped line aligns to the start of the block and the Hebrew sits off
      to the left of the time above it. The trailing letter-space of the last
@@ -2493,7 +2480,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <p>Rabbi Schneur Zalman of Liadi, the Alter Rebbe, famously stated that we must "live with the times," thereby experiencing the teachings of the Torah related to each day of the year. Every day of the Jewish calendar has a unique meaning.</p>
       <p>The calendar is the master key to unlock the hidden rationale behind the formal structure of ancient sacred texts, as well as to understand basic mystical concepts. When comprehended within the context of the Jewish calendar, these works reveal the spiritual energy of each day, serving as a practical guide for self-analysis and development.</p>
       <p>During this daily journey, we learn to live with greater harmony, happiness and gratitude — from the Kabbalah, from age-old Jewish ethical teachings, and even from animals. The objective is to be in touch with the spiritual powers of each day, thereby improving one's daily conduct and rediscovering the universal song within each one of us: the song of the soul.</p>
-      <p>Below, each card opens with the Kabbalistic structure that defines it, and carries beneath it the text that structure measures. Most are built on the week — the Torah's weekly Parasha, or the Omer's count of weeks — layered with shorter and longer spans: 13 attributes, the 22 letters, the Rambam's 28 days, 40 days of receiving the Torah, the 72-fold Name, the four seasons of 91 — each one a single running and returning around its own heart — and the full 364-day year. Ma'alot HaZman above does the reverse, spiraling the whole year upward through the hours of a single day. Tap the ⓘ at the corner of any card to learn what its cycle means. All converge on this moment, each adding its own spiritual dimension to today.</p><p>Alongside the readings runs the day's prayer. Each Sefirah carries one — Hitbodedut in Keter, Shacharit in Tiferet, Mincha in Hod, Maariv in Yesod, Kri'at Shema in Malchut, and so through all ten. The prayer whose hour has come pulses gently in the card until it is said; marking it turns it red, and a heart in the Now card fills as the day's ten accumulate. Whole, it carries both verses at once: ואהבת את ה׳ אלוקיך בכל לבבך and ואהבת לרעך כמוך — for as the Baal Shem Tov taught through the Maggid and the Alter Rebbe, loving your fellow is the commentary on loving Hashem, since what one loves in him is the part of God Above within him.</p>
+      <p>Below, each card opens with the Kabbalistic structure that defines it, and carries beneath it the text that structure measures. Most are built on the week — the Torah's weekly Parasha, or the Omer's count of weeks — layered with shorter and longer spans: 13 attributes, the 22 letters, the Rambam's 28 days, 40 days of receiving the Torah, the 72-fold Name, the four seasons of 91 — each one a single running and returning around its own heart — and the full 364-day year. Ma'alot HaZman above does the reverse, spiraling the whole year upward through the hours of a single day. Tap the ⓘ at the corner of any card to learn what its cycle means. All converge on this moment, each adding its own spiritual dimension to today.</p><p>Alongside the readings runs the day's prayer. Each Sefirah carries one — Hitbodedut in Keter, Shacharit in Tiferet, Mincha in Hod, Maariv in Yesod, Kri'at Shema in Malchut, and so through all ten. The prayer whose hour has come pulses gently in the card until it is said; marking it turns it red, and the heart in Today's Ladder fills as the day's ten accumulate. Whole, it carries both verses at once: ואהבת את ה׳ אלוקיך בכל לבבך and ואהבת לרעך כמוך — for as the Baal Shem Tov taught through the Maggid and the Alter Rebbe, loving your fellow is the commentary on loving Hashem, since what one loves in him is the part of God Above within him.</p>
       <p>The day itself traces a lunar month. Fifteen ma'alot — steps up — ascend from Malchut back to Keter as the moon in the clock above waxes to fullness, arriving in the hours of the Mochin, when "the light of the moon shall be as the light of the sun" (Isaiah 30:26) — the day's own Shavuot, the fiftieth gate at the top of the climb; then fifteen steps of listening come back down from Keter to Malchut as the moon wanes and makes itself small — doing, then hearing: נעשה ונשמע. Tap the moon at any time to see Today's Path.</p>
       <p>That verse of Isaiah has an end, and it is the end this whole app is counting toward. Twelve chapters later the sun and the moon are not raised but set aside — the light no longer coming through either of them. It is the close of the haftarah for Ki Tavo, one of the seven parashiyot the Zohar leaves in silence.</p>
       <div style="margin:10px 0 4px;padding:10px 12px;border-left:2px solid var(--gold);background:var(--bg-card-alt);border-radius:0 6px 6px 0;"><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">י״ט</span>&nbsp; לֹא־יִהְיֶה־לָּךְ עוֹד הַשֶּׁמֶשׁ לְאוֹר יוֹמָם וּלְנֹגַהּ הַיָּרֵחַ לֹא־יָאִיר לָךְ וְהָיָה־לָךְ ה׳ לְאוֹר עוֹלָם וֵאלֹקַיִךְ לְתִפְאַרְתֵּךְ</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">You shall no longer have the sun for light by day, and for brightness the moon shall not give you light; but the Lord shall be to you for an everlasting light, and your God for your glory.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ׳</span>&nbsp; לֹא־יָבוֹא עוֹד שִׁמְשֵׁךְ וִירֵחֵךְ לֹא יֵאָסֵף כִּי ה׳ יִהְיֶה־לָּךְ לְאוֹר עוֹלָם וְשָׁלְמוּ יְמֵי אֶבְלֵךְ</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">Your sun shall no longer set, neither shall your moon be gathered in, for the Lord shall be to you for an everlasting light, and the days of your mourning shall be completed.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ״א</span>&nbsp; וְעַמֵּךְ כֻּלָּם צַדִּיקִים לְעוֹלָם יִירְשׁוּ אָרֶץ נֵצֶר מַטָּעַי מַעֲשֵׂה יָדַי לְהִתְפָּאֵר</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">And your people, all of them righteous, shall inherit the land forever — a scion of My planting, the work of My hands, in which I will glory.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ״ב</span>&nbsp; הַקָּטֹן יִהְיֶה לָאֶלֶף וְהַצָּעִיר לְגוֹי עָצוּם אֲנִי ה׳ בְּעִתָּהּ אֲחִישֶׁנָּה</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">The smallest shall become a thousand, and the least a mighty nation. I am the Lord; in its time I will hasten it.</div></div><div style="font-size:0.82em;color:var(--ink-dim);margin-top:2px;text-align:left;"><a href="https://www.sefaria.org/Isaiah.60.19-22?lang=bi" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="color:var(--gold)">Yeshayahu 60:19–22</a></div></div>
@@ -2506,7 +2493,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         <li style="margin-bottom:0.7em;">Tap any card below — Keter, a Sefirah, Malchut — to expand it for the full texts and source links; tap <strong>ⓘ</strong> at a card's top-right corner to learn what its cycle means.</li>
         <li style="margin-bottom:0.7em;">Each card opens with its own structure — where today falls in its cycle — and beneath it the text that cycle is measuring, under its own heading. A heading marked <strong>✦</strong> carries a counted step, and its מעלה or מיעוט badge sits beside it; the rest are read without being counted. The linked title opens the source.</li>
         <li style="margin-bottom:0.7em;">Each Sefirah carries one of the day's ten <strong>prayers</strong>, in the left margin beside its hours. The one whose hour has come pulses until it is said; tap it to mark it, and tap again to undo. They may be marked in any order — unlike the ma'alot, each prayer has its own time.</li>
-        <li style="margin-bottom:0.7em;">The <strong>heart</strong> in the Now card fills as those ten accumulate, and glows when the day's prayers are whole.</li>
+        <li style="margin-bottom:0.7em;">The <strong>heart</strong> in Today's Ladder fills as those ten accumulate, and glows when the day's prayers are whole.</li>
         <li style="margin-bottom:0.7em;">Tap a step on Ma'alot HaZman — the spiral of the year above — for that week's theme, animal, and teaching.</li>
         <li style="margin-bottom:0.7em;">Tap the gold <strong>מעלה</strong> tags in order (א׳–ט״ו, Malchut up to Keter) to fill the moon in the clock above; at fifteen it becomes the sun, and its rays remain.</li>
         <li style="margin-bottom:0.7em;">Then return: the <strong>מיעוט</strong> tags (א׳–ט״ו) inside the expanded cards mark fifteen steps of listening from Keter down to Malchut — the moon wanes as you go, completing a month in a single day. Both halves are taken in order, each step the vessel for the next, and the return does not begin until the moon is full — all fifteen climbed. The thirty are one path, so at any moment there is exactly one step being asked for, and tapping any other will not take. A little is a step: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</li>
@@ -2576,6 +2563,53 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
             aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
+      <!-- The day's two gatherings — the ten prayers and the thirty steps —
+           which stood in a clock of their own above the cards, beside a local
+           and a Jerusalem time. The times are gone; these belong here, in the
+           block that already says how much of the path is walked. -->
+      <div class="dc-row">
+        <!-- The heart came here from the Now card, which is gone. It belongs beside
+             the moon rather than on a card: these two columns are the day's
+             gatherings counted — thirty steps, stars and seven Rebbeim in the one,
+             the ten prayers in the other. On the card it was only ever visible when
+             that card was. -->
+
+        <div class="dc-col" id="prayer-heart-col" onclick="openPrayers()"
+             style="cursor:pointer;" title="The ten daily prayers">
+          <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:5px;">
+            <svg id="prayer-heart-svg" width="20" height="19" viewBox="0 0 22 20" style="display:block;">
+              <defs>
+                <clipPath id="prayer-heart-clip"><rect id="prayer-heart-rect" x="0" y="20" width="22" height="20"/></clipPath>
+              </defs>
+              <path id="prayer-heart-fill"
+                    d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
+                    fill="var(--accent-red)" clip-path="url(#prayer-heart-clip)"/>
+              <path id="prayer-heart-rim"
+                    d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
+                    fill="none" stroke="var(--gold)" stroke-width="1.1"/>
+            </svg>
+            <span id="prayer-heart-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/10</span>
+          </div>
+          <div class="dc-label">Prayers &nbsp;תפילות</div>
+        </div>
+        <div class="dc-sep">·</div>
+        <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag in order · tap for Today's Path">
+          <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
+            <svg id="maalot-moon-svg" width="33" height="33" viewBox="-6 -6 34 34" style="display:block;overflow:visible">
+              <g id="maalot-stars"></g><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
+            <span id="maalot-moon-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/15</span>
+            <span id="stars-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold-mid);opacity:0.85;"></span>
+            <!-- The shalsheles — seven links for the seven Chabad Rebbeim, one per
+                 Sefirah. It hangs rather than lies: Chesed at the head and Malchut
+                 at the foot, the order the Sefirot themselves come down in. Drawn
+                 dim and filled as they are gathered. Decorative — the marks are
+                 the controls, and the count is spoken in the column's title. -->
+            <svg id="rebbe-chain" width="8" height="34" viewBox="0 0 8 34"
+                 style="display:block;overflow:visible" aria-hidden="true"></svg>
+          </div>
+          <div class="dc-label">Ma'alot &nbsp;מעלות</div>
+        </div>
+      </div>
     <div class="today-foot">
       <span id="today-count" class="today-count"></span>
       <button class="today-more" onclick="openTodaysPath()" aria-label="Open today's path, all thirty steps">all thirty ↗</button>
@@ -2587,71 +2621,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:calc(18px * var(--ts, 1)); cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
     Tap the small gold <strong>מעלה</strong> tags in order to climb from Malchut to Keter and fill tonight's moon; when it becomes the sun, come back down from Keter to Malchut through the <strong>מיעוט</strong> tags inside the cards.
-    Each Sefirah also holds one of the day's ten <strong>prayers</strong> — tap it when you have prayed, and watch the heart in the Now card fill.
+    Each Sefirah also holds one of the day's ten <strong>prayers</strong> — tap it when you have prayed, and watch the heart in Today's Ladder fill.
     <a href="#" onclick="event.preventDefault(); openTodaysPath()" style="color:var(--gold); font-weight:600;">Tap the moon 🌙 above anytime to see Today's Path.</a>
-  </div>
-
-  <!-- DUAL CLOCK -->
-  <!-- Two rows rather than four columns left to wrap. What the day has
-       gathered comes first — the ten prayers and the thirty steps — and the
-       clocks sit under them. Wrapping had put three on one line and left the
-       fourth alone below with a separator dangling after the third, which is
-       the shape a browser chooses, not one. -->
-  <div id="dual-clock">
-    <div class="dc-row">
-      <!-- The heart came here from the Now card, which is gone. It belongs beside
-           the moon rather than on a card: these two columns are the day's
-           gatherings counted — thirty steps, stars and seven Rebbeim in the one,
-           the ten prayers in the other. On the card it was only ever visible when
-           that card was. -->
-
-      <div class="dc-col" id="prayer-heart-col" onclick="openPrayers()"
-           style="cursor:pointer;" title="The ten daily prayers">
-        <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:5px;">
-          <svg id="prayer-heart-svg" width="20" height="19" viewBox="0 0 22 20" style="display:block;">
-            <defs>
-              <clipPath id="prayer-heart-clip"><rect id="prayer-heart-rect" x="0" y="20" width="22" height="20"/></clipPath>
-            </defs>
-            <path id="prayer-heart-fill"
-                  d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
-                  fill="var(--accent-red)" clip-path="url(#prayer-heart-clip)"/>
-            <path id="prayer-heart-rim"
-                  d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
-                  fill="none" stroke="var(--gold)" stroke-width="1.1"/>
-          </svg>
-          <span id="prayer-heart-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/10</span>
-        </div>
-        <div class="dc-label">Prayers &nbsp;תפילות</div>
-      </div>
-      <div class="dc-sep">·</div>
-      <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag in order · tap for Today's Path">
-        <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
-          <svg id="maalot-moon-svg" width="33" height="33" viewBox="-6 -6 34 34" style="display:block;overflow:visible">
-            <g id="maalot-stars"></g><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
-          <span id="maalot-moon-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/15</span>
-          <span id="stars-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold-mid);opacity:0.85;"></span>
-          <!-- The shalsheles — seven links for the seven Chabad Rebbeim, one per
-               Sefirah. It hangs rather than lies: Chesed at the head and Malchut
-               at the foot, the order the Sefirot themselves come down in. Drawn
-               dim and filled as they are gathered. Decorative — the marks are
-               the controls, and the count is spoken in the column's title. -->
-          <svg id="rebbe-chain" width="8" height="34" viewBox="0 0 8 34"
-               style="display:block;overflow:visible" aria-hidden="true"></svg>
-        </div>
-        <div class="dc-label">Ma'alot &nbsp;מעלות</div>
-      </div>
-    </div>
-    <div class="dc-row">
-      <div class="dc-col">
-        <div class="dc-time" id="clock-local">--:--</div>
-        <div class="dc-label">Local</div>
-      </div>
-      <div class="dc-sep">·</div>
-      <div class="dc-col">
-        <div class="dc-time" id="clock-jerusalem">--:--</div>
-        <div class="dc-label">Jerusalem &nbsp;ירושלים</div>
-      </div>
-    </div>
   </div>
 
   <!-- THE THIRTY-FIRST — the seal of a completed path. Hidden until the day's
@@ -13575,21 +13546,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     openInfoPopup('Zmanim — זְמַנֵּי הַיּוֹם', _zmanimMain, _zmanimMeta);
   }
 
-  function updateDualClock() {
-    const now = new Date();
-    const pad = n => String(n).padStart(2, '0');
-    const lEl = document.getElementById('clock-local');
-    const jEl = document.getElementById('clock-jerusalem');
-    if (lEl) lEl.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes());
-    if (jEl) {
-      try {
-        const parts = new Intl.DateTimeFormat('en-US', {
-          timeZone: 'Asia/Jerusalem', hourCycle: 'h23', hour: '2-digit', minute: '2-digit'
-        }).formatToParts(now);
-        jEl.textContent = parts.find(p => p.type === 'hour').value + ':' + parts.find(p => p.type === 'minute').value;
-      } catch(e) { jEl.textContent = '--:--'; }
-    }
-  }
 
   // ── FIFTEEN MA'ALOT — strictly sequential daily checklist + waxing moon ──
   // State: the highest completed step (0-15), stored per displayed Jewish
@@ -19816,10 +19772,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     if (db) db.classList.toggle('year-pill-active', parashaRegion === 'diaspora');
     if (ib) ib.classList.toggle('year-pill-active', parashaRegion === 'israel');
   })();
-  updateDualClock();
   updateZmanimLine();
   setInterval(function() {
-    updateDualClock();
     updateZmanimLine();
     updateSefirahTimeLabels();
   }, 30000);
