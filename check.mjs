@@ -716,12 +716,24 @@ async function checkInBrowser(chromium) {
       if (!focusable(el)) out.unreachable.push(id);
     }
     for (const [s2, cls, attr] of [['.prayer-tag','done','aria-pressed'], ['.maalah','done','aria-pressed'],
-                                   ['.star-mark','lit','aria-pressed'], ['.sefirah-card','expanded','aria-expanded']])
+                                   ['.star-mark','lit','aria-pressed']])
       document.querySelectorAll(s2).forEach(el => {
         if (!el.hasAttribute(attr)) { out.stateless.push(s2 + ' has no ' + attr); return; }
         const want = el.classList.contains(cls) ? 'true' : 'false';
         if (el.getAttribute(attr) !== want) out.stateless.push(`${s2} says ${attr}=${el.getAttribute(attr)} but is ${want}`);
       });
+    // The cards open by a strip of panes rather than by an arrow, so what has
+    // to be announced is which pane is chosen, not whether the card is open.
+    // Every button says so, and exactly the chosen one says true.
+    document.querySelectorAll('.pane-host').forEach(host => {
+      const open = host.getAttribute('data-pane') || '';
+      host.querySelectorAll('.pane-strip .pane-btn').forEach(b2 => {
+        if (!b2.hasAttribute('aria-selected')) { out.stateless.push('.pane-btn has no aria-selected'); return; }
+        const want = b2.dataset.pane === open ? 'true' : 'false';
+        if (b2.getAttribute('aria-selected') !== want)
+          out.stateless.push(`.pane-btn[${b2.dataset.pane}] says aria-selected=${b2.getAttribute('aria-selected')} but is ${want}`);
+      });
+    });
 
     const HE = /[\u0590-\u05FF]/;
     const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -1055,10 +1067,14 @@ async function checkInBrowser(chromium) {
       document.documentElement.scrollWidth - document.documentElement.clientWidth);
 
     // Opening the cards is a layout change too, and gets the same treatment.
+    // Only one pane of a card can be open at a time, so opening them one by
+    // one would be forty measurements. A stylesheet shows all of them at once
+    // instead, which is the widest the page can ever be asked to be.
     await page.evaluate(() => {
-      const cards = [...document.querySelectorAll('.sefirah-card')];
-      window.__wasOpen = cards.filter(c => c.classList.contains('expanded'));
-      cards.forEach(c => c.classList.add('expanded'));
+      const st = document.createElement('style');
+      st.id = '__all-panes';
+      st.textContent = '.pane-body { display: block !important }';
+      document.head.appendChild(st);
     });
     await settle();
     const over = await page.evaluate(() => {
@@ -1080,9 +1096,8 @@ async function checkInBrowser(chromium) {
         return r.width > 0 && r.height > 0 && r.right > lim + 1;
       }).map(e => e.id || (e.className || '').toString().trim().split(/\s+/)[0] || e.tagName)
         .filter((v, i, a) => a.indexOf(v) === i).slice(0, 4);
-      document.querySelectorAll('.sefirah-card').forEach(c => {
-        if (!window.__wasOpen.includes(c)) c.classList.remove('expanded');
-      });
+      const st = document.getElementById('__all-panes');
+      if (st) st.remove();
       return { open, narrowest, rows: vals.length, culprits };
     });
     over.shut = shut;

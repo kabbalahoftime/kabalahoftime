@@ -791,6 +791,34 @@ display: block;
 border-bottom: 1px solid var(--border);
 }
 
+/* Tracking belongs to a heading's Latin small-caps. Hebrew set with it comes
+   apart — letterspaced Hebrew reads as separated letters, not as words — so
+   any Hebrew run inside a pane or a section label keeps its own spacing.
+   These headings were always written this way; it is being said in CSS now
+   because the readings have moved into panes where the page's own check can
+   see them. */
+.keter-section-label[lang="he"], .keter-section-label [lang="he"],
+.sefirah-panes [lang="he"], .keter-panes [lang="he"] {
+letter-spacing: 0;
+}
+
+/* The nine cards' strip. The card is a two-column grid — the Sefirah's name
+   beside its readings — and the strip belongs to neither column, so it spans
+   both and sits below them, clear of the card's own padding. */
+.sefirah-panes {
+grid-column: 1 / -1;
+margin: 10px -18px -14px;
+border-radius: 0 0 3px 3px;
+overflow: hidden;
+}
+@media (max-width: 480px) {
+.sefirah-panes { margin: 10px -18px -14px; }
+}
+.sefirah-panes .pane-body {
+padding: 12px 18px 14px;
+border-top: 1px solid var(--border);
+}
+
 .keter-card::before {
 content: '';
 position: absolute;
@@ -1014,7 +1042,9 @@ grid-template-columns: 86px 1fr;
 gap: 14px;
 align-items: start;
 position: relative;
-cursor: pointer;
+/* Not a pointer: the card does nothing when clicked. The strip at its foot
+   is what opens it, and a hand over the whole card promised otherwise. */
+cursor: default;
 transition: box-shadow 0.2s, transform 0.15s;
 border: 1px solid var(--border);
 border-left: 4px solid var(--sefirah-color, var(--gold));
@@ -1274,16 +1304,11 @@ font-weight: 600;
 }
 
 /* ── EXPANDED DETAIL ── */
+/* The column render() writes the day's detail into. It is never shown:
+   buildCardPanes empties it into the panes as soon as it is written, and
+   what the reader sees is the pane they asked for. */
 .sefirah-detail {
 display: none;
-padding-top: 10px;
-border-top: 1px solid var(--border);
-margin-top: 10px;
-}
-
-.sefirah-card.expanded .sefirah-detail {
-display: block;
-animation: fadeIn 0.25s ease;
 }
 
 /* Label beside value where there is room for both, label above it where there
@@ -1673,17 +1698,6 @@ to   { opacity: 1; transform: translateY(0); }
 from { opacity: 0; }
 to   { opacity: 1; }
 }
-
-/* ── EXPAND ICON ── */
-.expand-icon {
-position: absolute;
-right: 12px;
-top: 14px;
-color: var(--ink-dim);
-font-size: calc(11px * var(--ts, 1));
-transition: transform 0.3s;
-}
-.sefirah-card.expanded .expand-icon { transform: rotate(180deg); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 480px) {
@@ -2839,8 +2853,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="upper-sefirot-grid" id="upper-sefirot-grid">
 
 <!-- CHOCHMAH: 22-Day Alef-Bet Cycle -->
-<div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
-  <span class="expand-icon">▾</span>
+<div class="sefirah-card upper-sefirah">
   <div class="sefirah-label-col">
     <div class="sefirah-name" style="color:var(--accent-blue)">Choch­mah</div>
     <div class="sefirah-hebrew" style="color:var(--accent-blue)">חָכְמָה</div>
@@ -2866,8 +2879,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 </div>
 
 <!-- BINAH: 7×7×7 Sefirot Omer Cycle -->
-<div class="sefirah-card upper-sefirah" onclick="toggleExpand(this)">
-  <span class="expand-icon">▾</span>
+<div class="sefirah-card upper-sefirah">
   <div class="sefirah-label-col">
     <div class="sefirah-name" style="color:var(--accent-red)">Bi­nah</div>
     <div class="sefirah-hebrew" style="color:var(--accent-red)">בִּינָה</div>
@@ -2903,8 +2915,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="sefirot-grid" id="sefirot-grid">
 
 <!-- CHESED: Mishna / Tosefta -->
-<div class="sefirah-card" onclick="toggleExpand(this)">
-  <span class="expand-icon">▾</span>
+<div class="sefirah-card">
   <div class="sefirah-label-col">
     <div class="sefirah-name">Che­sed</div>
     <div class="sefirah-hebrew">חֶסֶד</div>
@@ -2926,8 +2937,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 </div>
 
 <!-- GEVURAH: Tanach -->
-<div class="sefirah-card" onclick="toggleExpand(this)">
-  <span class="expand-icon">▾</span>
+<div class="sefirah-card">
   <div class="sefirah-label-col">
     <div class="sefirah-name">Gevu­rah</div>
     <div class="sefirah-hebrew">גְּבוּרָה</div>
@@ -2954,8 +2964,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 </div>
 
 <!-- TIFERET: 13-Day Cycle (dynamic) -->
-<div class="sefirah-card" onclick="toggleExpand(this)">
-  <span class="expand-icon">▾</span>
+<div class="sefirah-card">
   <div class="sefirah-label-col">
     <div class="sefirah-name">Tife­ret</div>
     <div class="sefirah-hebrew">תִּפְאֶרֶת</div>
@@ -2977,8 +2986,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 </div>
 
 <!-- NETZACH: 40-Day Cycle (dynamic) -->
-<div class="sefirah-card" onclick="toggleExpand(this)">
-  <span class="expand-icon">▾</span>
+<div class="sefirah-card">
   <div class="sefirah-label-col">
     <div class="sefirah-name">Net­zach</div>
     <div class="sefirah-hebrew">נֶצַח</div>
@@ -3005,8 +3013,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 </div>
 
 <!-- HOD: Halacha -->
-<div class="sefirah-card" onclick="toggleExpand(this)">
-  <span class="expand-icon">▾</span>
+<div class="sefirah-card">
   <div class="sefirah-label-col">
     <div class="sefirah-name">Hod</div>
     <div class="sefirah-hebrew">הוֹד</div>
@@ -3032,8 +3039,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 </div>
 
 <!-- YESOD: Shovavim / Parasha -->
-<div class="sefirah-card" onclick="toggleExpand(this)">
-  <span class="expand-icon">▾</span>
+<div class="sefirah-card">
   <div class="sefirah-label-col">
     <div class="sefirah-name">Ye­sod</div>
     <div class="sefirah-hebrew">יְסוֹד</div>
@@ -3679,8 +3685,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 </script>
 
 <!-- MALCHUT: Daily Text + Weekly Book -->
-<div class="sefirah-card malchut-card" onclick="toggleExpand(this)">
-  <span class="expand-icon">▾</span>
+<div class="sefirah-card malchut-card">
   <div class="sefirah-label-col">
     <div class="sefirah-name">Mal­chut</div>
     <div class="sefirah-hebrew">מַלְכוּת</div>
@@ -14992,25 +14997,28 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     document.getElementById('todays-path-modal').style.display = 'none';
   }
 
+  // A card is no longer enough to open: every step is kept in a pane, so the
+  // pane holding it has to be the one showing or the scroll lands on nothing.
+  // Which pane is asked of the step itself rather than assumed, since a
+  // מעלה and a מיעוט are filed apart.
+  function _pathReveal(el) {
+    if (!el) return;
+    const host = el.closest('.pane-host');
+    const body = el.closest('.pane-body');
+    if (host && body) setPane(host, body.dataset.pane);
+    setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+  }
+
   function pathGo(idx) {
     closeTodaysPath();
     if (idx < 15) {
-      const el = Array.from(document.querySelectorAll('.maalah')).find(e =>
+      _pathReveal(Array.from(document.querySelectorAll('.maalah')).find(e =>
         !e.classList.contains('yom') &&
-        e.textContent.replace('מעלה', '').trim() === MAALOT_HEB[idx]);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        e.textContent.replace('מעלה', '').trim() === MAALOT_HEB[idx]));
     } else {
       const wane = idx - 14;
-      const el = Array.from(document.querySelectorAll('.maalah.yom')).find(e =>
-        +e.dataset.wane === wane);
-      if (!el) return;
-      const card = el.closest('.sefirah-card') || el.closest('.keter-card');
-      // A card is no longer enough: on Keter the step lives in a pane, and
-      // opening the card without opening the pane scrolls to something that
-      // is still not on screen.
-      if (card && card.classList.contains('keter-card')) setPane(card, 'miutim');
-      else if (card) card.classList.add('expanded');
-      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+      _pathReveal(Array.from(document.querySelectorAll('.maalah.yom')).find(e =>
+        +e.dataset.wane === wane));
     }
   }
 
@@ -15469,6 +15477,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     _songKey    = 'kotSong:' + hYear + '-' + hMonth + '-' + hDay;
     _prayerKey = 'kotPrayers:' + hYear + '-' + hMonth + '-' + hDay;
     _starsKey  = 'kotStars:' + hYear + '-' + hMonth + '-' + hDay;
+    setTimeout(buildCardPanes, 0);  // file the day's detail into the panes first
     setTimeout(applyMaalotState, 0); // after this render's innerHTML writes settle
     setTimeout(applyPrayerState, 0);
     setTimeout(applyStarState, 0);
@@ -18894,7 +18903,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   function changeDay(delta) {
     currentOffset += delta;
     kotYearAlt = null;      // let the new day choose its own year again
-    document.querySelectorAll('.sefirah-card.expanded').forEach(c => c.classList.remove('expanded'));
+    document.querySelectorAll('.pane-host[data-pane]').forEach(c => setPane(c, ''));
     render();
   }
 
@@ -19118,7 +19127,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     currentOffset = Math.round((selected - localMidnight(new Date())) / 86400000);
     kotYearAlt = null;      // let the jumped-to day choose its own year
     closeDatePicker();
-    document.querySelectorAll('.sefirah-card.expanded').forEach(c => c.classList.remove('expanded'));
+    document.querySelectorAll('.pane-host[data-pane]').forEach(c => setPane(c, ''));
     render();
   }
 
@@ -19743,11 +19752,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return cleanScript(lines.join('\n'));
   }
 
-  function toggleExpand(card) {
-    card.classList.toggle('expanded');
-    card.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
-  }
-
   // The strip is the control, for any block that wears one. Tapping the pane
   // already open closes it, so the host falls back to its face — for Keter
   // the dial, which is the mode it starts in. Nothing toggles on a click to
@@ -19765,6 +19769,168 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     else      host.removeAttribute('data-pane');
     host.querySelectorAll('.pane-strip .pane-btn').forEach(b =>
       b.setAttribute('aria-selected', b.dataset.pane === pane ? 'true' : 'false'));
+  }
+
+  // ── THE CARDS' PANES ──
+  //
+  // Keter's panes are written out in the markup, because Keter has one of each
+  // and they never move. The nine Sefirot cards are not like that: their
+  // detail is one running column built by render() — headings, rows, and a
+  // rule between them — and what is in it changes with the day. Writing each
+  // of those nine templates out four times over would be four times the
+  // chance of them drifting apart.
+  //
+  // So the column is cut up here instead, and each piece filed by what it
+  // already says it is: a מיעוט tag makes it a counted step of the return, a
+  // מעלה tag a step of the climb, a Rebbe's ordinal a menorah, a ✡ at the
+  // head of its label a companion. What carries none of those marks is
+  // matter that explains the face, and it is gathered under More until each
+  // piece is given its own place beside the thing it explains.
+  const PANE_ORDER = ['maalot', 'miutim', 'stars', 'menorah', 'more'];
+  const PANE_LABEL = {
+    maalot:  ['מעלות', 'Ma’alot'],
+    miutim:  ['מיעוטים', 'Mi’utim'],
+    stars:   ['',  '✡ Stars'],
+    menorah: ['מנורה', 'Menorah'],
+    more:    ['',  'More']
+  };
+
+  // A section heading, as every one of these templates writes it: Cinzel,
+  // letterspaced, gold, upper case. It is the only thing that says where one
+  // reading ends and the next begins when no rule was drawn between them.
+  function _paneIsHead(el) {
+    const st = (el.getAttribute && el.getAttribute('style')) || '';
+    return el.tagName === 'DIV' && /Cinzel/.test(st) && /letter-spacing/.test(st);
+  }
+
+  // What a run of nodes is. A counted step comes first: Malchut's Likkutei
+  // Sichos is both the day's mi'ut and the Rebbe's own book, and it is the
+  // step that has an order to keep.
+  function _paneKind(nodes) {
+    const hit = sel => nodes.some(n =>
+      (n.matches && n.matches(sel)) || (n.querySelector && n.querySelector(sel)));
+    if (hit('.maalah.yom[data-wane]')) return 'miutim';
+    if (hit('.maalah')) return 'maalot';
+    if (hit('[data-rebbe]')) return 'menorah';
+    const t = nodes.map(n => n.textContent || '').join('').replace(/^\s+/, '');
+    return t.charAt(0) === '✡' ? 'stars' : '';
+  }
+
+  function _paneSections(det) {
+    const cut = [{ rule: false, nodes: [] }];
+    [...det.children].forEach(el => {
+      // The rules go. They are separators, not content, and one left behind
+      // keeps the column looking full — which on the cards whose detail is
+      // static markup, Yesod's among them, would have this filing run a
+      // second time and delete what render writes into by id.
+      if (el.tagName === 'HR') { det.removeChild(el); cut.push({ rule: true, nodes: [] }); return; }
+      if (_paneIsHead(el) && cut[cut.length - 1].nodes.length)
+        cut.push({ rule: false, nodes: [] });
+      cut[cut.length - 1].nodes.push(el);
+    });
+    // A piece holding more than one kind was never one piece. Malchut writes
+    // its whole detail as a run of wrappers with no rule between them, so it
+    // is taken apart a child at a time.
+    const flat = [];
+    cut.filter(c => c.nodes.length).forEach(c => {
+      const kinds = c.nodes.map(n => _paneKind([n])).filter(Boolean);
+      if (new Set(kinds).size > 1) c.nodes.forEach(n => flat.push({ rule: false, nodes: [n] }));
+      else flat.push(c);
+    });
+    // Unmarked matter following a marked piece with no rule between them is
+    // that piece's own continuation — the Tzemach Tzedek's heading and the
+    // book beneath it are written exactly so — and goes back to it.
+    const out = [];
+    flat.forEach(c => {
+      c.kind = _paneKind(c.nodes);
+      const prev = out[out.length - 1];
+      if (!c.kind && prev && prev.kind && !c.rule) {
+        prev.nodes = prev.nodes.concat(c.nodes);
+        return;
+      }
+      out.push(c);
+    });
+    return out;
+  }
+
+  function _paneBox(card) {
+    let box = card.querySelector(':scope > .sefirah-panes');
+    if (box) return box;
+    box = document.createElement('div');
+    box.className = 'sefirah-panes';
+    box.innerHTML =
+      '<div class="pane-strip" role="tablist" aria-label="This card’s panes">' +
+      PANE_ORDER.map(k =>
+        '<button type="button" class="pane-btn" data-pane="' + k + '" role="tab" ' +
+        'aria-selected="false" onclick="selectPane(this)">' +
+        (PANE_LABEL[k][0] ? '<bdi lang="he">' + PANE_LABEL[k][0] + '</bdi>' : '') +
+        '<span class="pb-en">' + PANE_LABEL[k][1] + '</span></button>').join('') +
+      '</div>' +
+      PANE_ORDER.map(k => '<div class="pane-body" data-pane="' + k + '"></div>').join('');
+    card.classList.add('pane-host');
+    card.appendChild(box);
+    return box;
+  }
+
+  // The climb's own readings come off the face. They are counted steps, which
+  // is a kind this card now has a pane for, and leaving them on the face
+  // would have been the one kind kept in two places. Moved once and left
+  // there: render() writes into them by id, which finds them wherever they
+  // are, and nothing here ever clears them.
+  function _paneTakeFace(card, box) {
+    const maalot = box.querySelector('.pane-body[data-pane="maalot"]');
+    const col = card.querySelector('.sefirah-content-col');
+    if (!col || !maalot) return;
+    [...col.querySelectorAll('.malchut-ksa-row, .malchut-section')].forEach(row => {
+      if (!row.querySelector('.maalah')) return;
+      if (box.contains(row)) return;
+      row.dataset.paneSrc = 'face';
+      maalot.appendChild(row);
+    });
+  }
+
+  function buildCardPanes() {
+    document.querySelectorAll('.sefirah-card').forEach(card => {
+      const box = _paneBox(card);
+      _paneTakeFace(card, box);
+      const det = card.querySelector('.sefirah-detail');
+      // Nothing new was written: Malchut keeps its detail in wrappers that
+      // moved into the panes on the first pass and are refilled in place, so
+      // the column stands empty ever after and there is nothing to re-file.
+      const fresh = det && [...det.children].some(n => n.tagName !== 'HR');
+      if (!fresh) { _paneTrim(box); return; }
+      (card._paneFiled || []).forEach(n => { if (n.parentNode) n.parentNode.removeChild(n); });
+      const filed = card._paneFiled = [];
+      const last = {};
+      _paneSections(det).forEach(sec => {
+        const k = sec.kind || 'more';
+        const body = box.querySelector('.pane-body[data-pane="' + k + '"]');
+        if (!body) return;
+        if (last[k]) {
+          const hr = document.createElement('hr');
+          hr.style.cssText = 'border:0;border-top:1px solid var(--border);margin:14px 0;';
+          body.appendChild(hr); filed.push(hr);
+        }
+        sec.nodes.forEach(n => { n.dataset.paneSrc = 'detail'; body.appendChild(n); filed.push(n); });
+        last[k] = true;
+      });
+      _paneTrim(box);
+    });
+  }
+
+  // A pane with nothing in it is not offered. What a card holds differs by
+  // the day — Gevurah's seasons close, a Rebbe's book runs out — so this is
+  // asked again after every render rather than settled once.
+  function _paneTrim(box) {
+    const host = box.closest('.pane-host');
+    PANE_ORDER.forEach(k => {
+      const body = box.querySelector('.pane-body[data-pane="' + k + '"]');
+      const btn  = box.querySelector('.pane-btn[data-pane="' + k + '"]');
+      if (!body || !btn) return;
+      const empty = !body.children.length;
+      btn.style.display = empty ? 'none' : '';
+      if (empty && host && host.getAttribute('data-pane') === k) setPane(host, '');
+    });
   }
 
   render();
