@@ -745,13 +745,29 @@ box-shadow: 0 3px 12px rgba(139, 105, 20, 0.15);
 
 .keter-card .expand-icon {
 position: absolute;
-top: 16px;
-right: 20px;
+/* A button now rather than a span, so it carries a button's reset and a full
+   44px box: it is the only way this card opens, and a 14px arrow is not a
+   target. Padding gave 37px across — the glyph is narrow — so the box is set
+   outright and the arrow centred in it, placed so it still draws where it
+   always did, at 16px down and 20px in. */
+top: 2px;
+right: 2px;
+min-width: 44px;
+min-height: 44px;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 0;
+background: none;
+border: none;
+cursor: pointer;
+line-height: 1;
 font-size: calc(14px * var(--ts, 1));
 color: var(--gold);
 transition: transform 0.25s ease;
 z-index: 2;
 }
+.keter-card .expand-icon:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
 .keter-card.expanded .expand-icon {
 transform: rotate(180deg);
@@ -792,7 +808,9 @@ z-index: 1;
 }
 
 @media (max-width: 540px) {
-.keter-card .expand-icon { top: 12px; right: 16px; }
+/* The glyph used to be nudged in from 16/20 to 12/16 here. The box is placed
+   by its own corner now, not the glyph's, so the nudge is the same 4px. */
+.keter-card .expand-icon { top: -2px; right: -2px; }
 }
 
 .keter-section {
@@ -2655,9 +2673,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
   </div>
 
-  <!-- MA'ALOT HAZMAN — STEPS OF TIME -->
-  <div id="kotw-root"></div>
-
   <!-- The Now card stood here: a copy of whichever Sefirah's face the hour
        belonged to, with a band above it reading "the hour the dial above is
        pointing at" and a caption below explaining that it was a mirror. It
@@ -2675,11 +2690,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;text-align:center;font-style:italic;">Baal Shem Tov</div>
     <div class="prayer-tag" data-prayer="1" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;text-align:center;opacity:1;">Hitbodedut</div>
   </div>
-  <div class="keter-card" onclick="toggleKeterExpand(this, event)">
-    <span class="expand-icon">▾</span>
+  <div class="keter-card">
+    <button class="expand-icon" type="button" aria-label="Open the Keter card"
+            aria-expanded="false" onclick="toggleKeterExpand(this)">▾</button>
 
 <!-- Always visible sections -->
 <div class="keter-visible-content">
+  <!-- MA'ALOT HAZMAN — STEPS OF TIME, and the face of this card.
+       It stood above as a block of its own, with the Now card under it
+       mirroring whichever hour the dial pointed at. Keter/Da'at is what the
+       dial measures — the year as one day, the day as one year — so it is the
+       card's own face rather than a thing standing near it, and the mirror
+       that tied them together is gone.
+       The card opens by its arrow alone now: the dial is full of controls,
+       and a card that toggled on any click would collapse under every one. -->
+  <div id="kotw-root"></div>
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
   <!-- DAILY LM section -->
   <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
@@ -19703,13 +19728,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     card.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
   }
 
-  function toggleKeterExpand(card, event) {
-    // Don't toggle if clicking on a link
-    if (event && event.target.tagName === 'A') {
-      return;
-    }
-    card.classList.toggle('expanded');
-    card.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
+  // The arrow is the control, not the card. The card used to toggle on any
+  // click and skip only <a> tags, which was serviceable while everything in it
+  // was text and links — it is not once the dial is inside it, where every
+  // face toggle, plan pill and time input would collapse the card underneath.
+  function toggleKeterExpand(btn) {
+    const card = btn.closest('.keter-card');
+    if (!card) return;
+    const open = card.classList.toggle('expanded');
+    card.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close the Keter card' : 'Open the Keter card');
   }
 
   render();
