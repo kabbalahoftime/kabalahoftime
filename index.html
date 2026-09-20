@@ -19826,9 +19826,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     return t.charAt(0) === '✡' ? 'stars' : '';
   }
 
-  function _paneSections(det) {
+  // A wrapper is a box that holds several readings rather than one: it writes
+  // headings of its own, and more than one kind is marked inside it. Malchut
+  // writes its whole card that way — a מיעוט at the head of one box and the
+  // Rebbe at the foot of it — so filing that box whole put the Rebbe in the
+  // מיעוטים pane and left the menorah empty. A wrapper is opened instead: it
+  // stays in the column, where render refills it in place, and what is inside
+  // it is filed piece by piece.
+  function _paneIsWrapper(el) {
+    if (el.tagName === 'HR') return false;
+    if (![...el.children].some(_paneIsHead)) return false;
+    const kinds = new Set();
+    [...el.children].forEach(c => { const k = _paneKind([c]); if (k) kinds.add(k); });
+    return kinds.size > 1;
+  }
+
+  function _paneSections(det, skip) {
     const cut = [{ rule: false, nodes: [] }];
     [...det.children].forEach(el => {
+      if (skip && skip.indexOf(el) !== -1) return;   // opened, not filed
       // The rules go. They are separators, not content, and one left behind
       // keeps the column looking full — which on the cards whose detail is
       // static markup, Yesod's among them, would have this filing run a
@@ -19909,15 +19925,32 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       const box = _paneBox(card);
       _paneTakeFace(card, box);
       const det = card.querySelector('.sefirah-detail');
-      // Nothing new was written: Malchut keeps its detail in wrappers that
-      // moved into the panes on the first pass and are refilled in place, so
-      // the column stands empty ever after and there is nothing to re-file.
-      const fresh = det && [...det.children].some(n => n.tagName !== 'HR');
-      if (!fresh) { _paneTrim(box); return; }
-      (card._paneFiled || []).forEach(n => { if (n.parentNode) n.parentNode.removeChild(n); });
-      const filed = card._paneFiled = [];
+      if (!det) { _paneTrim(box); return; }
+      if (!card._paneFiled) card._paneFiled = new Map();
+      if (!card._paneOpened) card._paneOpened = new Set();
+
+      // Each source is filed on its own, and only when it has something in
+      // it. That is what keeps a card whose detail is static markup — Yesod's
+      // is — from having its readings deleted on the second pass: emptied
+      // once, it is never a source again. A card whose detail render rewrites
+      // whole has content there every pass, and is re-filed every pass.
+      // Once opened, always opened. Whether a box holds more than one kind can
+      // change with the day — some days Malchut's carries no Rebbe — and a box
+      // that stopped counting as a wrapper would fall back to being filed
+      // whole, which would have this pass delete the static markup filed
+      // beside it on the first. The decision is made once and kept.
+      const wrappers = [...det.children].filter(el =>
+        card._paneOpened.has(el) || _paneIsWrapper(el));
+      wrappers.forEach(w => card._paneOpened.add(w));
+      const sources = wrappers.slice();
+      if ([...det.children].some(el =>
+            el.tagName !== 'HR' && wrappers.indexOf(el) === -1)) sources.push(det);
+
+      sources.forEach(src => {
+      (card._paneFiled.get(src) || []).forEach(n => { if (n.parentNode) n.parentNode.removeChild(n); });
+      const filed = []; card._paneFiled.set(src, filed);
       const last = {};
-      _paneSections(det).forEach(sec => {
+      _paneSections(src, src === det ? wrappers : null).forEach(sec => {
         const k = sec.kind || 'extra';
         const body = k === 'extra' ? box.querySelector('.pane-extra')
                                    : box.querySelector('.pane-body[data-pane="' + k + '"]');
@@ -19929,6 +19962,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         }
         sec.nodes.forEach(n => { n.dataset.paneSrc = 'detail'; body.appendChild(n); filed.push(n); });
         last[k] = true;
+      });
       });
       _paneTrim(box);
     });
