@@ -2469,6 +2469,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        than leaving a broken image at the top of the app. -->
   <div id="week-art" style="margin:16px 0;text-align:center;display:none;"></div>
 
+  <!-- The week's creature from Perek Shirah, with the verse it sings, set
+       directly under the week's page from the book — the page is that same
+       creature drawn, so the two belong together and the verse was a screen
+       away from its own picture. The
+       book began here, and until now the verses sat in the file unused while
+       book began here, and until now the verses sat in the file unused while
+       only the animal's name was shown, inside a field of Book 1. -->
+  <div id="perek-shirah-week" style="display:none;">
+    <div class="ps-label"><a id="ps-doc-link" target="_blank" style="color:inherit">Perek Shirah</a> · this week</div>
+    <div class="ps-line" id="ps-line"></div>
+  </div>
+
   <!-- START HERE — collapsed to one line so it never blocks a returning reader -->
   <div class="intro-panel start-panel" id="start-panel" onclick="this.classList.toggle('expanded')">
     <span class="intro-expand-icon">▾</span>
@@ -2541,15 +2553,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
   </div>
 
-  <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
-  <!-- The week's creature from Perek Shirah, with the verse it sings. The
-       book began here, and until now the verses sat in the file unused while
-       only the animal's name was shown, inside a field of Book 1. -->
-  <div id="perek-shirah-week" style="display:none;">
-    <div class="ps-label"><a id="ps-doc-link" target="_blank" style="color:inherit">Perek Shirah</a> · this week</div>
-    <div class="ps-line" id="ps-line"></div>
-  </div>
-
   <!-- INTRODUCTION -->
   <div class="intro-panel" id="intro-panel" onclick="this.classList.toggle('expanded')">
     <span class="intro-expand-icon">▾</span>
@@ -2593,6 +2596,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     </div>
   </div>
 
+  <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
   <div id="kot-welcome" style="display:none; margin:12px 0 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); line-height:1.7; position:relative;">
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:calc(18px * var(--ts, 1)); cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
