@@ -734,7 +734,9 @@ margin-bottom: 10px;
 position: relative;
 box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 animation: fadeInDown 0.5s ease both;
-cursor: pointer;
+/* Not a pointer any more: the card itself does nothing when clicked, and a
+   hand over the dial promised something the dial's own controls deliver. */
+cursor: default;
 transition: all 0.2s ease;
 overflow: hidden;
 }
@@ -743,35 +745,44 @@ overflow: hidden;
 box-shadow: 0 3px 12px rgba(139, 105, 20, 0.15);
 }
 
-.keter-card .expand-icon {
-position: absolute;
-/* A button now rather than a span, so it carries a button's reset and a full
-   44px box: it is the only way this card opens, and a 14px arrow is not a
-   target. Padding gave 37px across — the glyph is narrow — so the box is set
-   outright and the arrow centred in it, placed so it still draws where it
-   always did, at 16px down and 20px in. */
-top: 2px;
-right: 2px;
-min-width: 44px;
-min-height: 44px;
+/* The pane strip — this card's only control, in place of the arrow that used
+   to sit in its corner. Each button is a full-height 44px target of its own,
+   which the 14px arrow never was, and the strip says what is behind it
+   rather than only that there is something. */
+.pane-strip {
 display: flex;
-align-items: center;
-justify-content: center;
-padding: 0;
+border-top: 1px solid var(--border);
+background: #f7f1e4;
+}
+.pane-btn {
+flex: 1 1 0;
+min-width: 0;
+min-height: 44px;
+padding: 5px 2px;
 background: none;
 border: none;
+border-right: 1px solid var(--border);
 cursor: pointer;
-line-height: 1;
-font-size: calc(14px * var(--ts, 1));
-color: var(--gold);
-transition: transform 0.25s ease;
-z-index: 2;
+font-family: 'Frank Ruhl Libre', serif;
+font-size: calc(12.5px * var(--ts, 1));
+line-height: 1.1;
+color: var(--ink-dim);
+transition: background 0.2s ease, color 0.2s ease;
 }
-.keter-card .expand-icon:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-
-.keter-card.expanded .expand-icon {
-transform: rotate(180deg);
+.pane-btn:last-child { border-right: none; }
+/* Named, not a bare descendant selector: the font check wraps every Hebrew
+   run in a span of its own to ask the browser which face drew it, and a rule
+   on "any span in here" would have letterspaced the Hebrew through it. */
+.pane-btn .pb-en {
+display: block;
+font-family: 'Cinzel', serif;
+font-size: calc(8px * var(--ts, 1));
+letter-spacing: 1.2px;
+text-transform: uppercase;
+margin-top: 2px;
 }
+.pane-btn[aria-selected="true"] { background: var(--bg-card); color: var(--gold); }
+.pane-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: -3px; }
 
 .keter-visible-content {
 display: grid;
@@ -784,16 +795,20 @@ background: #f2ead8 !important;
 border-bottom: 1px solid var(--border);
 }
 
-.keter-detail {
+/* A pane shows only while the card names it. Closing the open one leaves the
+   card on its face, the dial, which is where it starts. */
+.keter-pane {
 display: none;
 animation: fadeIn 0.25s ease;
 }
 
-.keter-card.expanded .keter-detail {
+.keter-card[data-pane="maalot"] .keter-pane[data-pane="maalot"],
+.keter-card[data-pane="miutim"] .keter-pane[data-pane="miutim"],
+.keter-card[data-pane="stars"]  .keter-pane[data-pane="stars"] {
 display: block;
 }
 
-.keter-detail .keter-section:not(:last-child) {
+.keter-pane .keter-section:not(:last-child) {
 border-bottom: 1px solid var(--border);
 }
 
@@ -807,17 +822,15 @@ border-radius: 4px 4px 0 0;
 z-index: 1;
 }
 
-@media (max-width: 540px) {
-/* The glyph used to be nudged in from 16/20 to 12/16 here. The box is placed
-   by its own corner now, not the glyph's, so the nudge is the same 4px. */
-.keter-card .expand-icon { top: -2px; right: -2px; }
-}
-
 .keter-section {
 padding: 16px 20px;
 }
 
-.keter-detail .keter-section {
+/* Only the two panes that came out of the old detail take the flat card
+   background. The ma'alot pane keeps the tints the face gave its three
+   readings, which are how the Three Heads tell themselves apart. */
+.keter-pane[data-pane="miutim"] .keter-section,
+.keter-pane[data-pane="stars"] .keter-section {
 background: var(--bg-card) !important;
 }
 
@@ -2691,8 +2704,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="prayer-tag" data-prayer="1" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;text-align:center;opacity:1;">Hitbodedut</div>
   </div>
   <div class="keter-card">
-    <button class="expand-icon" type="button" aria-label="Open the Keter card"
-            aria-expanded="false" onclick="toggleKeterExpand(this)">▾</button>
 
 <!-- Always visible sections -->
 <div class="keter-visible-content">
@@ -2705,6 +2716,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        The card opens by its arrow alone now: the dial is full of controls,
        and a card that toggled on any click would collapse under every one. -->
   <div id="kotw-root"></div>
+</div>
+
+<!-- The panes. Five modes, not two: the face is the dial, and what was one
+     undivided "detail" is now the kinds the app already thinks in — the
+     counted steps waxing and waning, the companions, and the Rebbeim. Keter
+     has no Rebbe, the seven running Chesed to Malchut, so it offers no
+     menorah button rather than an empty pane.
+     The strip is the control. The arrow is gone: a card whose face is the
+     dial cannot be opened by clicking itself, and two controls for one card
+     is one too many. -->
+<div class="keter-panes">
+  <div class="pane-strip" role="tablist" aria-label="Keter's panes">
+    <button type="button" class="pane-btn" data-pane="maalot" role="tab"
+            aria-selected="false" onclick="selectKeterPane(this)"><bdi lang="he">מעלות</bdi><span class="pb-en">Ma’alot</span></button>
+    <button type="button" class="pane-btn" data-pane="miutim" role="tab"
+            aria-selected="false" onclick="selectKeterPane(this)"><bdi lang="he">מיעוטים</bdi><span class="pb-en">Mi’utim</span></button>
+    <button type="button" class="pane-btn" data-pane="stars" role="tab"
+            aria-selected="false" onclick="selectKeterPane(this)">✡<span class="pb-en">Stars</span></button>
+  </div>
+  <div class="keter-pane" data-pane="maalot">
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
   <!-- DAILY LM section -->
   <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
@@ -2734,36 +2765,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-main-text" id="keter-rambam-face">Loading…</div>
     <div class="sefirah-main-text" id="keter-hayomyom" style="margin-top:4px;">Loading…</div>
   </div>
-</div>
-
-<!-- Expandable detail sections -->
-<div class="keter-detail">
-  <div class="section-divider" style="margin: 16px 0">
-    <span class="divider-symbol">◆</span>
   </div>
-  <!-- PARASHA & HAFTORAH RECORDINGS section (moved from the face) -->
-  <div class="keter-section">
-    <div class="keter-section-label">✡ Parasha &amp; Haftorah Recordings</div>
-    <div class="keter-meta" id="keter-kst-meta"></div>
-  </div>
-  <!-- TREASURY OF CHASSIDIC TALES section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✡ Treasury of Chassidic Tales</div>
-    <div class="keter-main" id="keter-treasury-main">Loading…</div>
-    <div class="keter-meta" id="keter-treasury-meta"></div>
-  </div>
+  <div class="keter-pane" data-pane="miutim">
   <!-- CHUMASH section -->
   <div class="keter-section">
     <div class="keter-section-label">✦ Chumash with Rashi <span class="maalah yom" data-wane="1">מיעוט א׳</span></div>
     <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
     <div class="keter-main" id="keter-chumash-main">Loading…</div>
     <div class="keter-meta" id="keter-chumash-meta"></div>
-  </div>
-  <!-- TEHILLIM section -->
-  <div class="keter-section">
-    <div class="keter-section-label">Tehillim</div>
-    <div class="keter-main" id="keter-tehillim-main">Loading…</div>
-    <div class="keter-meta" id="keter-tehillim-meta"></div>
   </div>
   <!-- TANYA section -->
   <div class="keter-section">
@@ -2787,10 +2796,30 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="keter-main" id="keter-rambam-shm-main">Loading…</div>
     <div class="keter-meta" id="keter-rambam-shm-titles"></div>
   </div>
+  </div>
+  <div class="keter-pane" data-pane="stars">
+  <!-- PARASHA & HAFTORAH RECORDINGS section (moved from the face) -->
+  <div class="keter-section">
+    <div class="keter-section-label">✡ Parasha &amp; Haftorah Recordings</div>
+    <div class="keter-meta" id="keter-kst-meta"></div>
+  </div>
+  <!-- TREASURY OF CHASSIDIC TALES section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✡ Treasury of Chassidic Tales</div>
+    <div class="keter-main" id="keter-treasury-main">Loading…</div>
+    <div class="keter-meta" id="keter-treasury-meta"></div>
+  </div>
+  <!-- TEHILLIM section -->
+  <div class="keter-section">
+    <div class="keter-section-label">Tehillim</div>
+    <div class="keter-main" id="keter-tehillim-main">Loading…</div>
+    <div class="keter-meta" id="keter-tehillim-meta"></div>
+  </div>
   <!-- DVAR MALCHUS & CHAYENU section -->
   <div class="keter-section">
     <div class="keter-section-label">✡ Dvar Malchus &amp; Chayenu</div>
     <div class="keter-main"><a href="https://www.dvarmalchus.org/" target="_blank" style="color:var(--gold)">Dvar Malchus</a> &nbsp;·&nbsp; <a href="https://chayenu.org/" target="_blank" style="color:var(--gold)">Chayenu</a></div>
+  </div>
   </div>
 </div>
 
@@ -13965,6 +13994,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       // The wrapper span's own ✡ would otherwise be wrapped again on the next pass
       if (el.closest('.star-mark')) return;
       if (el.querySelector('.maalah')) return;
+      // The pane strip wears a ✡ as the name of a pane, not as a companion to
+      // mark. Left alone it became a star sitting on top of the button, which
+      // swallowed the tap and counted itself among the day's stars.
+      if (el.closest('.pane-strip')) return;
       if (!el.closest('.sefirah-card, .keter-card')) return;
       // \uFE0E keeps the Magen David in text presentation — without it some
       // platforms substitute a colour emoji for the drawn glyph.
@@ -14993,7 +15026,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         +e.dataset.wane === wane);
       if (!el) return;
       const card = el.closest('.sefirah-card') || el.closest('.keter-card');
-      if (card) card.classList.add('expanded');
+      // A card is no longer enough: on Keter the step lives in a pane, and
+      // opening the card without opening the pane scrolls to something that
+      // is still not on screen.
+      if (card && card.classList.contains('keter-card')) setKeterPane(card, 'miutim');
+      else if (card) card.classList.add('expanded');
       setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
     }
   }
@@ -19728,17 +19765,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     card.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
   }
 
-  // The arrow is the control, not the card. The card used to toggle on any
-  // click and skip only <a> tags, which was serviceable while everything in it
-  // was text and links — it is not once the dial is inside it, where every
-  // face toggle, plan pill and time input would collapse the card underneath.
-  function toggleKeterExpand(btn) {
+  // The strip is the control. Tapping the pane already open closes it, so the
+  // card falls back to its face — the dial — which is the fifth mode and the
+  // one it starts in. Nothing toggles on a click to the card itself: the dial
+  // is full of controls and would collapse it under every one.
+  function selectKeterPane(btn) {
     const card = btn.closest('.keter-card');
     if (!card) return;
-    const open = card.classList.toggle('expanded');
-    card.setAttribute('aria-expanded', open ? 'true' : 'false');
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    btn.setAttribute('aria-label', open ? 'Close the Keter card' : 'Open the Keter card');
+    const want = btn.dataset.pane;
+    const open = card.getAttribute('data-pane') === want ? '' : want;
+    setKeterPane(card, open);
+  }
+  function setKeterPane(card, pane) {
+    if (!card) return;
+    if (pane) card.setAttribute('data-pane', pane);
+    else      card.removeAttribute('data-pane');
+    card.querySelectorAll('.pane-strip .pane-btn').forEach(b =>
+      b.setAttribute('aria-selected', b.dataset.pane === pane ? 'true' : 'false'));
   }
 
   render();
