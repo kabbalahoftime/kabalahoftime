@@ -2634,9 +2634,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <a href="https://www.chabad.org/library/bible_cdo/aid/15794/jewish/Chapter-10.htm#v12" target="_blank" style="color:var(--gold)">Yehoshua&nbsp;10:12</a></div>
   </div>
 
-  <!-- THE DAY'S ZMANIM — the hour now, the hour next, and all twelve behind a tap -->
-  <div id="zmanim-line" style="text-align:center;margin:-4px 0 10px;font-size:calc(11px * var(--ts, 1));color:var(--ink-dim);"></div>
-
   <!-- The Now card stood here: a copy of whichever Sefirah's face the hour
        belonged to, with a band above it reading "the hour the dial above is
        pointing at" and a caption below explaining that it was a mirror. It
@@ -2653,6 +2650,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;text-align:center;">1:52–2:22</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;text-align:center;font-style:italic;">Baal Shem Tov</div>
     <div class="prayer-tag" data-prayer="1" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;text-align:center;opacity:1;">Hitbodedut</div>
+    <!-- THE DAY'S ZMANIM, and the mode the day's hours are reckoned in —
+         both under the Keter heading, where the dial they govern begins.
+         The zmanim line names the hour now and the hour next and opens all
+         twelve; the pills switch every Sefirah's times between clock hours
+         and the sun's, and carry the city the sun is taken from. They stood
+         apart, above the heading and inside the card, and read as two page
+         settings rather than as the head of this one dial. -->
+    <div id="zmanim-line" style="text-align:center;margin:8px 0 0;font-size:calc(11px * var(--ts, 1));color:var(--ink-dim);"></div>
+    <div id="time-mode-row" style="text-align:center;margin:8px 0 0;">
+      <div class="year-toggle-pill" style="margin-top:0;">
+        <button id="tm-fixed-btn" class="year-pill-btn year-pill-active" onclick="setTimeMode('fixed')">Fixed Hours</button>
+        <button id="tm-zman-btn" class="year-pill-btn" onclick="setTimeMode('zmaniyot')">Sha'ot Zmaniyot</button>
+      </div>
+      <div id="city-select-wrap" style="display:none;margin-top:7px;">
+        <select id="city-select" onchange="setZmanCity(this.value)"
+          style="font-family:'Cormorant Garamond',serif;font-size:calc(13px * var(--ts, 1));color:var(--ink-mid);background:var(--bg-card);border:1px solid var(--border-strong);border-radius:4px;padding:3px 8px;">
+        </select>
+        <div id="zman-sun-info" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:4px;"></div>
+      </div>
+    </div>
   </div>
   <div class="keter-card pane-host">
 
@@ -2667,24 +2684,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
        Nothing here toggles the card: the dial is full of controls, and a
        card that opened on any click would collapse under every one. The
        strip below is what opens it. -->
-  <!-- TIME MODE: Fixed vs Sha'ot Zmaniyot — set directly above the dial,
-       which is the thing it most visibly moves: on Sha'ot Zmaniyot every
-       Sefirah's hours are redrawn against the sun of the chosen city. It
-       stood two blocks higher, above the Keter title, where the pills read
-       as a page setting rather than as this dial's own. -->
-  <div id="time-mode-row" style="text-align:center;margin:12px 0 10px;">
-    <div class="year-toggle-pill" style="margin-top:0;">
-      <button id="tm-fixed-btn" class="year-pill-btn year-pill-active" onclick="setTimeMode('fixed')">Fixed Hours</button>
-      <button id="tm-zman-btn" class="year-pill-btn" onclick="setTimeMode('zmaniyot')">Sha'ot Zmaniyot</button>
-    </div>
-    <div id="city-select-wrap" style="display:none;margin-top:7px;">
-      <select id="city-select" onchange="setZmanCity(this.value)"
-        style="font-family:'Cormorant Garamond',serif;font-size:calc(13px * var(--ts, 1));color:var(--ink-mid);background:var(--bg-card);border:1px solid var(--border-strong);border-radius:4px;padding:3px 8px;">
-      </select>
-      <div id="zman-sun-info" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:4px;"></div>
-    </div>
-  </div>
-
   <div id="kotw-root"></div>
 </div>
 
