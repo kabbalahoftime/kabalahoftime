@@ -2852,7 +2852,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew" style="color:var(--accent-blue)">חָכְמָה</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">12:54–1:23</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Maggid of Mezritch</div>
-    <div class="prayer-tag" data-prayer="2" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Tikkun Rachel</div>
+    <div class="prayer-tag" data-prayer="2" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Cheshbon HaNefesh</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="chochmah-cycle-name">Alef Bet — 22-Day Three Weeks Cycle</div>
@@ -2879,7 +2879,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     <div class="sefirah-hebrew" style="color:var(--accent-red)">בִּינָה</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">1:23–1:52</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Meor Einayim</div>
-    <div class="prayer-tag" data-prayer="3" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Tikkun Leah</div>
+    <div class="prayer-tag" data-prayer="3" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Tikkun Chatzot</div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="binah-cycle-name">Sefirot — 7×7×7 Cycle</div>
@@ -13067,8 +13067,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Ma'alot HaZman places the Mochin: about the Chatzot seam,
   // at these offsets in minutes from Chatzot. In fixed mode Chatzot is 1:43 AM,
   // which gives 12:54-2:22 — Chochmah and Binah before it, Keter/Da'at after.
-  // This is also what gives the first three prayers their hour: Tikkun Rachel
-  // and Tikkun Leah at Chatzot, and Hitbodedut in the small hours past it.
+  // This is also what gives the first three prayers their hour: Cheshbon
+  // HaNefesh on Chochmah, Tikkun Chatzot on Binah — which is where Chatzot
+  // itself falls, and why it is said there — and Hitbodedut on Keter, in the
+  // small hours past the seam.
   // One step for all fifty-two — the three Mochin are as long as any of the
   // forty-nine, as weeks 50-52 of the year are as long as weeks 1-49. They had
   // been 29, 29 and 30 minutes, which was one week's length before the seven
@@ -13618,7 +13620,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // Unlike the ma'alot these are not sequential: each prayer has its own hour,
   // and a day may be entered at any point in it. State is a 10-bit mask kept
   // per displayed Jewish date, so it resets with the day like the ma'alot do.
-  const PRAYER_NAMES = ['Hitbodedut','Tikkun Rachel','Tikkun Leah','Birchot HaShachar','Tehilim',
+  const PRAYER_NAMES = ['Hitbodedut','Cheshbon HaNefesh','Tikkun Chatzot','Birchot HaShachar','Tehilim',
                         'Shacharit','Tikkun HaKlali','Mincha','Maariv',"Kri'at Shema"];
   let _prayerKey = null;
 
@@ -13660,20 +13662,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       : 'The ten daily prayers — tap each one in its Sefirah to mark it said';
   }
 
-  // On a day Tachanun is not said, Tikkun Rachel is not said either — this
-  // swaps the tag for Perek Shira instead, in the same tracked slot (#2),
-  // so the heart still counts ten and nothing about the other nine changes.
+  // On a day Tachanun is not said, Tikkun Rachel is not said either. The rule
+  // has not changed; the slot it applies to has. It used to sit on Chochmah,
+  // where Tikkun Rachel had an hour of its own and Perek Shira stood in for it.
+  // Chochmah now carries Cheshbon HaNefesh, which no day exempts — and Tikkun
+  // Rachel is said inside Tikkun Chatzot at Binah. So the swap moved to slot 3,
+  // and what it swaps to is what is left of Chatzot on such a night: Tikkun
+  // Leah, which the app has always had said on those days, since slot 3 never
+  // swapped when it was Leah's own.
   // querySelectorAll, not querySelector: the Now card mirrors whichever sefirah
-  // is current, so while Chochmah is active there are two copies of this tag.
-  // Swapping only the first left the Chochmah card itself still reading
-  // "Tikkun Rachel" on a day it is not said, disagreeing with its own mirror.
+  // is current, so while Binah is active there are two copies of this tag.
+  // Swapping only the first left the card itself disagreeing with its own mirror.
   function applyTachanunSwap() {
-    document.querySelectorAll('.prayer-tag[data-prayer="2"]').forEach(el => {
+    document.querySelectorAll('.prayer-tag[data-prayer="3"]').forEach(el => {
       if (_noTachanunToday) {
-        el.textContent = 'Perek Shira';
-        el.title = 'No Tachanun today — Perek Shira instead of Tikkun Rachel. Tap when said.';
+        el.textContent = 'Tikkun Leah';
+        el.title = 'No Tachanun today — Tikkun Leah alone, without Tikkun Rachel. Tap when said.';
       } else {
-        el.textContent = 'Tikkun Rachel';
+        el.textContent = 'Tikkun Chatzot';
         el.title = 'Tap when you have prayed';
       }
     });
@@ -13711,7 +13717,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // somewhere, because a prayer is said off the page — the only thing the app
   // ever does with one is record it.
   function _prayerListName(n) {
-    return (n === 2 && _noTachanunToday) ? 'Perek Shira' : PRAYER_NAMES[n - 1];
+    return (n === 3 && _noTachanunToday) ? 'Tikkun Leah' : PRAYER_NAMES[n - 1];
   }
   function renderPrayersBody() {
     const body = document.getElementById('prayers-body');
@@ -14400,7 +14406,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const table = '<div style="' + GRID + 'margin:0 0 12px;">' +
       row('10:32 PM', 'Down, in week 45 \u2014 Tiferet shebeMalchut, with Kri\u2019at Shema said') +
       row('1:43 AM',  'Up at Chatzot, inside Binah \u00b7 <span style="color:var(--ink-mid);">3h11m</span>') +
-      row('2:19 AM',  'The band closes \u2014 Tikkun Leah to its close, then Hitbodedut') +
+      row('2:19 AM',  'The band closes \u2014 Tikkun Chatzot, said with Tikkun Leah, then Hitbodedut') +
       row('3:37 AM',  'Down again, as week 5 opens at Hod shebeChesed \u2014 the Mishmar kept through weeks 2\u20134') +
       row('7:38 AM',  'Up in the middle of week 13, Yesod shebeGevurah \u00b7 <span style="color:var(--ink-mid);">4h01m</span>') +
       row('8:20 AM',  'Shacharit as Tiferet opens \u2014 42 minutes after rising') +
@@ -14424,7 +14430,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         'can come to more rest than one, not less.') +
       head('What it gives up') +
       p('It rises at Chatzot and not at the band\u2019s own opening, which is 49 minutes earlier. So ' +
-        'Chochmah is slept, and Binah as far as the seam \u2014 Tikkun Rachel is inside that sleep. The ' +
+        'Chochmah is slept, and Binah as far as the seam. Tikkun Chatzot is said on rising, at Binah, ' +
+        'with Tikkun Leah \u2014 Tikkun Rachel inside it on the days it is said at all. The ' +
         'band is kept from Chatzot on, and week 1 with it: the Rooster, who is given the understanding ' +
         'to tell day from night, sits beneath the seam and is never slept in any shape of this day. ' +
         'The climb itself can be taken earlier, in Malchut, and still be in order.');
@@ -14552,8 +14559,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   //
   // This was once set to week 45 of the dial instead — 23:16 to 23:45, inside
   // Malchut's own stretch — on the reasoning that the Mochin already carry the
-  // three longest prayers of the day: Tikkun Rachel on Chochmah, Tikkun Leah
-  // on Binah, Hitbodedut on Keter. That crowding is real, and the band falls
+  // three longest prayers of the day: Cheshbon HaNefesh on Chochmah, Tikkun
+  // Chatzot on Binah, Hitbodedut on Keter.
   // near one in the morning rather than before midnight. But it put the ascent
   // at the moon's end of the very verse the app is built on, which is why it
   // has gone back.
@@ -19997,9 +20004,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     else if (st.maalot > 0)  pathLine = `Waxing — up to מעלה ${WR_MAALOT_HEB[st.maalot - 1]}.`;
     else                     pathLine = 'Not begun.';
 
-    // Tikkun Rachel is not said on a day without Tachanun, so the pill for
-    // slot 2 reads Perek Shira for that historical day — the same swap the
-    // live tag makes, computed for the day this row is, not for today.
+    // Tikkun Rachel is not said on a day without Tachanun, and it is said
+    // inside Tikkun Chatzot at slot 3, so that pill reads Tikkun Leah for such
+    // a historical day — the same swap the live tag makes, computed for the day
+    // this row is, not for today.
     let _wrNoTach = false;
     if (typeof isNoTachanunDay === 'function') {
       const wd = _wrDateFromKey(dateKey);
@@ -20008,7 +20016,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     }
     const prayerPills = PRAYER_NAMES.map((nm, i) => {
       const on = !!(st.mask & (1 << i));
-      const label = (i === 1 && _wrNoTach) ? 'Perek Shira' : nm;
+      const label = (i === 2 && _wrNoTach) ? 'Tikkun Leah' : nm;
       return `<span class="wr-pill tap${on ? ' on' : ''}" onclick="wrTogglePrayer('${dateKey}',${i + 1})">${label}</span>`;
     }).join('');
 
@@ -21401,9 +21409,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     windows.forEach(w => { if (!byName[w.name]) byName[w.name] = w; });
     // Prayers 1-3 sit in the three Mochin, which have no clock window of their
     // own, so they carry no time — the same reason their tags never flash.
-    // Slot 2 follows the same Tachanun swap the live tag makes.
+    // Slot 3 follows the same Tachanun swap the live tag makes.
     const prayers = PRAYER_NAMES.map((nm, i) => ({
-      n: i + 1, name: (i === 1 && _noTachanunToday) ? 'Perek Shira' : nm,
+      n: i + 1, name: (i === 2 && _noTachanunToday) ? 'Tikkun Leah' : nm,
       sefirah: PRAYER_SEFIRAH[i],
       start: (byName[PRAYER_SEFIRAH[i]] || {}).start || null
     }));
@@ -21598,10 +21606,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      It lies down in week 45 and rises at Chatzot itself, which is later than
      the band's own opening — so Chochmah is slept, and Binah until the seam.
      That is a real cost and it is named here rather than buried: the shape
-     that stood before this rose at 49U for the whole band, Tikkun Rachel
-     included. This one trades that opening for the 49 minutes it holds, and
-     keeps the band from Chatzot on — Tikkun Leah's close, Hitbodedut, and
-     week 1 beneath the seam, which no shape has ever slept. */
+     that stood before this rose at 49U for the whole band. This one trades
+     that opening for the 49 minutes it holds, and keeps the band from Chatzot
+     on — Tikkun Chatzot said there with Tikkun Leah, then Hitbodedut, and week
+     1 beneath the seam, which no shape has ever slept.
+
+     The prayers followed the sleep. Tikkun Rachel had an hour of its own on
+     Chochmah and no longer does, that hour being slept: Chochmah carries
+     Cheshbon HaNefesh, and Rachel is said inside Tikkun Chatzot at Binah, on
+     the days it is said at all. */
   /* The reader's own hours, laid over the day the structure gives.
      Everything else on this face is derived; these are not, and cannot be —
      no cycle knows when a person eats or works. So they are a layer rather
@@ -21696,7 +21709,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             wk:'the close of week 51, week 52 · and week 1 beneath it',
             yr:'Elul · Selichot at Chatzot',
             note:'The seam carries week 1 inside the band — Chesed shebeChesed, the Rooster, who is given the understanding to tell day from night, and Rosh Hashanah of the year',
-            what:'Risen at Chatzot — Tikkun Leah to its close, then Hitbodedut · the fifteen climbed'};
+            what:'Risen at Chatzot — Tikkun Chatzot, said here with Tikkun Leah, then Hitbodedut · the fifteen climbed'};
   }
 
   /* Two units apiece. In the shape with a midday sleep each gathering ends
