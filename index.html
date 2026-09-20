@@ -248,7 +248,14 @@ background: var(--bg);
 color: var(--ink);
 font-family: 'Cormorant Garamond', Georgia, serif;
 min-height: 100vh;
+/* clip, not hidden. overflow-x: hidden makes the body a scrolling box, and
+   in WebKit a fixed child of a scrolling box is laid against the document
+   rather than the viewport — which is why the two standing buttons only
+   appeared once the page was scrolled to its end, instead of standing
+   throughout. clip cuts the overflow without making a scroller. The hidden
+   above it is for engines that do not know clip; they keep what they had. */
 overflow-x: hidden;
+overflow-x: clip;
 }
 
 .app {
@@ -1953,24 +1960,34 @@ to   { opacity: 1; }
 #kotw-root a{color:var(--kotw-gold); text-decoration:none}
 
 /* ── WEEKLY JOURNAL ── */
+/* The two standing buttons — the Journal, which is the day's own accounting,
+   and the How-to Guide, which is about the page. They were each fixed to
+   their own corner, which is fine until the labels grow: at the largest
+   reader text on a narrow phone they met in the middle and one printed over
+   the other. They share one row now, held apart by the row rather than by
+   the width of the screen, and the row itself takes no taps — only the
+   buttons in it do. */
+#corner-bar{
+  position:fixed;left:0;right:0;z-index:999;
+  bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:10px;padding:0 16px;pointer-events:none;
+}
+#corner-bar > button{
+  pointer-events:auto;flex:0 1 auto;min-width:0;max-width:47%;
+  border-radius:6px;padding:8px 14px;cursor:pointer;
+  font-family:'Cormorant Garamond',serif;font-size:calc(13px * var(--ts, 1));
+  letter-spacing:.5px;line-height:1.25;opacity:.92;
+}
 #wr-trigger{
-  position:fixed;bottom:20px;right:20px;z-index:999;
   background:var(--gold);color:#fff;border:none;
-  border-radius:6px;padding:8px 14px;cursor:pointer;
-  font-family:'Cormorant Garamond',serif;font-size:calc(13px * var(--ts, 1));
-  letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.25);opacity:.92;
+  box-shadow:0 2px 8px rgba(0,0,0,.25);
 }
-#wr-trigger:hover{opacity:1;}
-/* The How-to Guide sits at the other corner, and reads as the quieter of the
-   two: the Journal is the day's own accounting, this is about the page. */
 #hg-trigger{
-  position:fixed;bottom:20px;left:20px;z-index:999;
   background:var(--bg-card);color:var(--gold);border:1px solid var(--gold);
-  border-radius:6px;padding:8px 14px;cursor:pointer;
-  font-family:'Cormorant Garamond',serif;font-size:calc(13px * var(--ts, 1));
-  letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.18);opacity:.92;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
 }
-#hg-trigger:hover{opacity:1;}
+#wr-trigger:hover,#hg-trigger:hover{opacity:1;}
 #hg-modal{
   display:none;position:fixed;inset:0;z-index:1000;
   background:rgba(0,0,0,.65);overflow-y:auto;
@@ -22837,7 +22854,10 @@ content: ''; float: right; width: 30px; height: 1em;
      thing on this page that is about the page rather than about the day.
      The four readings stood open under the week's picture, four screens of
      preamble before the date; they are here for whoever wants them. -->
-<button id="hg-trigger" onclick="openHowtoGuide()">How-to Guide</button>
+<div id="corner-bar">
+  <button id="hg-trigger" onclick="openHowtoGuide()">How-to Guide</button>
+  <button id="wr-trigger" onclick="openWeeklyReport()">Weekly Journal</button>
+</div>
 
 <!-- How-to Guide modal -->
 <div id="hg-modal" onclick="if(event.target===this)closeHowtoGuide()">
@@ -22914,9 +22934,6 @@ content: ''; float: right; width: 30px; height: 1em;
     </div>
   </div>
 </div>
-
-<!-- Weekly Journal trigger -->
-<button id="wr-trigger" onclick="openWeeklyReport()">Weekly Journal</button>
 
 <!-- Weekly Journal modal -->
 <div id="wr-modal" onclick="if(event.target===this)closeWeeklyReport()">
