@@ -19893,7 +19893,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     const col = card.querySelector('.sefirah-content-col');
     if (!col || !maalot) return;
     [...col.querySelectorAll('.malchut-ksa-row, .malchut-section')].forEach(row => {
-      if (!row.querySelector('.maalah')) return;
+      // The KoT Book goes with them. On Keter it already sits inside the
+      // ma'alah it belongs to; on Chochmah and Binah it stood alone at the
+      // foot of the face, which left the book in one place and the reading it
+      // is the book of in another.
+      if (!row.querySelector('.maalah, .kot-book-icon')) return;
       if (box.contains(row)) return;
       row.dataset.paneSrc = 'face';
       maalot.appendChild(row);
