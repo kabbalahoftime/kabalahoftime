@@ -1895,6 +1895,13 @@ transition: transform 0.3s;
   border-bottom: 1px solid rgba(212,175,55,.22);
 }
 #kotw-root .ka-grp:first-child { margin-top: 0; }
+/* The line under the night's two times, saying what they came to. It sits on
+   the dial's navy like everything else in this panel, so it takes the dial's
+   own parchment rather than --ink-mid, which is a brown and would go muddy. */
+#kotw-root .ka-note {
+  font-size: calc(9.5px * var(--ts, 1)); line-height: 1.5;
+  color: rgba(240,230,201,.62); margin: 5px 0 2px; padding: 0 1px;
+}
 /* A prayer draws as a tick on the dial, so its swatch is a tick too. */
 #kotw-root .ka-row i.tick { width: 3px; height: 12px; border-radius: 1px; margin-left: 3px; }
 #kotw-root .ka-row input.ka-name {
@@ -14395,6 +14402,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // (Tehilim 119:62), and Berachot 3b hangs David's harp above his bed for the
   // north wind to sound at midnight and wake him.
   function _dayShapeInfo() {
+    // The reader's own night if the dial has one, the schedule's otherwise.
+    const H = window.kotwHours;
+    const N = (H && typeof H.night === 'function') ? H.night() : null;
+    const clock = m => { m = ((m % 1440) + 1440) % 1440;
+      let h = Math.floor(m/60), mm = Math.floor(m%60);
+      const ap = h < 12 ? 'AM' : 'PM';
+      return (h % 12 || 12) + ':' + ('0' + mm).slice(-2) + ' ' + ap; };
+    const dur = h => { const m = Math.round(h*60);
+      return Math.floor(m/60) + 'h' + ('0'+(m%60)).slice(-2) + 'm'; };
+    const T = { bed: N ? clock(N.bed) : '10:32 PM', end: N ? clock(N.end) : '3:37 AM',
+                up:  N ? clock(N.up)  : '7:38 AM',
+                total: N ? dur(N.total) : '7h12m' };
     const p = s => '<p style="font-size:0.88rem;line-height:1.62;color:var(--ink-mid);margin:0 0 11px;">' + s + '</p>';
     const head = s => '<div style="font-family:\'Cinzel\',serif;font-size:0.74rem;letter-spacing:2px;' +
       'text-transform:uppercase;color:var(--gold);margin-bottom:6px;">' + s + '</div>';
@@ -14404,12 +14423,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       '<div style="font-size:0.86rem;line-height:1.35;">' + what + '</div>';
 
     const table = '<div style="' + GRID + 'margin:0 0 12px;">' +
-      row('10:32 PM', 'Down, in week 45 \u2014 Tiferet shebeMalchut, with Kri\u2019at Shema said') +
-      row('1:43 AM',  'Up at Chatzot, inside Binah \u00b7 <span style="color:var(--ink-mid);">3h11m</span>') +
+      row(T.bed, (N && N.adjusted)
+        ? 'Down, when you go down \u2014 with Kri\u2019at Shema said'
+        : 'Down, in week 45 \u2014 Tiferet shebeMalchut, with Kri\u2019at Shema said') +
+      row('1:43 AM',  'Up at Chatzot, inside Binah \u2014 the one hour here that does not move') +
       row('2:19 AM',  'The band closes \u2014 Tikkun Chatzot, said with Tikkun Leah, then Hitbodedut') +
-      row('3:37 AM',  'Down again, as week 5 opens at Hod shebeChesed \u2014 the Mishmar kept through weeks 2\u20134') +
-      row('7:38 AM',  'Up in the middle of week 13, Yesod shebeGevurah \u00b7 <span style="color:var(--ink-mid);">4h01m</span>') +
-      row('8:20 AM',  'Shacharit as Tiferet opens \u2014 42 minutes after rising') +
+      row(T.end,  (N && N.floored)
+        ? 'Down again at the band\u2019s close \u2014 no Mishmar left to keep'
+        : (N && N.adjusted)
+          ? 'Down again \u2014 the Mishmar shortened to ' + dur(N.mishmar) + ' to pay for the night'
+          : 'Down again, as week 5 opens at Hod shebeChesed \u2014 the Mishmar kept through weeks 2\u20134') +
+      row(T.up,   (N && N.adjusted)
+        ? 'Up, where you have to be up'
+        : 'Up in the middle of week 13, Yesod shebeGevurah') +
+      row('8:20 AM',  (N && N.adjusted)
+        ? 'Shacharit as Tiferet opens'
+        : 'Shacharit as Tiferet opens \u2014 42 minutes after rising') +
       '</div>';
 
     const main =
@@ -14418,9 +14447,22 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         'only on Sha\u2019ot Zmaniyot. These are the Fixed Hours the dial is anchored to.') +
       table +
       head('Two sleeps, and the rest at midday') +
-      p('<strong style="color:var(--gold)">7h12m</strong> across the night\u2019s two pieces, and ' +
-        '<strong style="color:var(--gold)">8h09m</strong> with the midday rest taken \u2014 weeks 25\u201326, ' +
-        'which straddle Chatzot HaYom as the band straddles Chatzot HaLailah.') +
+      p('<strong style="color:var(--gold)">' + T.total + '</strong> across the night\u2019s two pieces, ' +
+        'and about an hour more with the midday rest taken \u2014 weeks 25\u201326, which straddle ' +
+        'Chatzot HaYom as the band straddles Chatzot HaLailah.' +
+        ((N && N.adjusted) ? ' These are your own two times, set on the dial.' : '')) +
+      head('When the night will not have it') +
+      p('A later bedtime or an earlier waking is paid for out of the Mishmar, not out of either ' +
+        'sleep \u2014 the rising stays at Chatzot, and the stretch after the band shortens to make ' +
+        'up the difference. Set either time under <em style="font-style:normal;color:var(--ink)">' +
+        'your hours</em> on the day face.' +
+        ((N && N.floored)
+          ? ' Tonight it has given all it has: the Mishmar is gone and the vigil stops at the ' +
+            'band\u2019s close, which is where the shortening stops. The band itself is not the ' +
+            'elastic part.'
+          : ' It can give about an hour and a quarter before the Mishmar is gone; past that the ' +
+            'vigil stops at the band\u2019s close and the sleep takes the loss, because Keter\u2019s ' +
+            'three are not the elastic part.')) +
       head('Why it is broken at Chatzot') +
       p('Rising is what the verse itself describes \u2014 ' +
         '<bdi lang="he" style="font-family:\'Frank Ruhl Libre\',serif;">\u05d7\u05b2\u05e6\u05d5\u05b9\u05ea \u05dc\u05b7\u05d9\u05b0\u05dc\u05b8\u05d4 \u05d0\u05b8\u05e7\u05d5\u05bc\u05dd</bdi>, at ' +
@@ -21615,6 +21657,66 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      Chochmah and no longer does, that hour being slept: Chochmah carries
      Cheshbon HaNefesh, and Rachel is said inside Tikkun Chatzot at Binah, on
      the days it is said at all. */
+  /* ── THE NIGHT, AS IT ACTUALLY FALLS ────────────────────────────────────
+     The schedule gives a bedtime and a waking, and a night does not always
+     agree. What gives way when it does not is the vigil, and only from its
+     far end: the rising stays at Chatzot, because that is the one hour here
+     with a verse under it, and the Mishmar after the band is what shortens.
+
+     So a later bedtime or an earlier waking is paid for out of weeks 2-4,
+     not out of either sleep. Both sleeps keep their length until the Mishmar
+     is gone; the reader loses the hour held awake, not the rest.
+
+     The floor is the band's close. Below that the shortening would be eating
+     Keter's three — Tikkun Chatzot itself, and Hitbodedut — and those are not
+     the elastic part. When a night asks for more than the Mishmar has to give,
+     the vigil stops at 52U-24 and the sleep takes the remainder, which the
+     face says outright rather than quietly trimming the band.
+
+     It does not stretch the other way. An early bedtime or a late waking is
+     left as sleep rather than spent on a longer Mishmar: past 4U the stretch
+     would run out of weeks 2-4 and into week 5, and the labels would be lying.
+
+     Read against the fixed seam whether or not the clock is on Fixed Hours.
+     The schedule is anchored there, so the reader's own two times are too —
+     otherwise "I went down at 11" would mean a different week in each mode. */
+  var NIGHT_BED_H = 44*(SEVEN_END/49);     // 10:32 PM — week 45 opens
+  var NIGHT_UP_H  = 12.5*(SEVEN_END/49);   // 7:38 AM  — the middle of week 13
+  var NIGHT_END_H = 4*(SEVEN_END/49);      // 3:37 AM  — the Mishmar's own end
+  var NIGHT_FLOOR_H = 52*(SEVEN_END/49)-24;// 2:19 AM  — the band's close
+  var NIGHT_SLEEP_H = (24-NIGHT_BED_H)+(NIGHT_UP_H-NIGHT_END_H);   // 7h12m
+  function readNight(){
+    try{ var o=JSON.parse(localStorage.getItem('kotDayNight')||'{}');
+         return (o&&typeof o==='object')?o:{}; }catch(e){ return {}; }
+  }
+  function writeNight(o){
+    try{ if(o&&(o.bed!=null||o.up!=null)) localStorage.setItem('kotDayNight',JSON.stringify(o));
+         else localStorage.removeItem('kotDayNight'); }catch(e){}
+  }
+  /* Clock minutes to hours after the fixed seam. */
+  function minToFixedH(m){ return (((m-SEAM)%DAY+DAY)%DAY)/60; }
+  /* The night the reader is actually keeping, and what it costs the Mishmar. */
+  function nightPlan(){
+    var n=readNight();
+    var bedH = (n.bed!=null) ? minToFixedH(n.bed) : NIGHT_BED_H;
+    var upH  = (n.up !=null) ? minToFixedH(n.up)  : NIGHT_UP_H;
+    // A bedtime is an evening thing and a waking a morning one. Read on a ring
+    // they are only numbers, and 1 AM could be either — so each is pinned to
+    // the side of the seam its own default sits on.
+    if(bedH < 12) bedH += 24;                       // an evening hour, past noon
+    var sleep1 = Math.max(0, bedH>=24 ? 0 : 24-bedH);
+    var want   = NIGHT_SLEEP_H - sleep1;            // what the second sleep must hold
+    var endH   = upH - want;
+    var floored = endH < NIGHT_FLOOR_H;
+    if(floored) endH = NIGHT_FLOOR_H;
+    if(endH > NIGHT_END_H) endH = NIGHT_END_H;      // never longer than weeks 2-4
+    if(endH > upH) endH = upH;                      // a waking before the vigil ends
+    var total = sleep1 + Math.max(0, upH-endH);
+    return { bedH:bedH>=24?24:bedH, upH:upH, endH:endH, floored:floored,
+             adjusted:(n.bed!=null||n.up!=null), total:total,
+             mishmar:Math.max(0, endH-NIGHT_FLOOR_H) };
+  }
+
   /* The reader's own hours, laid over the day the structure gives.
      Everything else on this face is derived; these are not, and cannot be —
      no cycle knows when a person eats or works. So they are a layer rather
@@ -21856,20 +21958,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      are Fixed Hours: down 10:32 PM, up 1:43 AM, down 3:37 AM, up 7:38 AM, with
      Shacharit at 8:20 AM as Tiferet opens — 42 minutes after rising. */
   function dayShape(){
-    var U=SEVEN_END/49, bed=44*U;              // week 45 opens here
+    var U=SEVEN_END/49, N=nightPlan(), bed=N.bedH, endH=N.endH;
+    var adj=N.adjusted;
     return [
       {k:'bed',en:'The Night\u2019s First Sleep',he:'\u05e9\u05b5\u05c1\u05e0\u05b8\u05d4',c:DAY_C.sleep,h1:bed,h2:24,
-       wk:'weeks 45\u201349, and into the band',yr:'10 Av \u2192 Elul',
+       wk:adj?'to the seam, from where you went down':'weeks 45\u201349, and into the band',yr:'10 Av \u2192 Elul',
        note:'It runs past 49U into the band itself \u2014 Chochmah is slept, and Binah as far as the seam. The climb can be taken earlier, in Malchut, and still be in order',
        what:'Down at Tiferet shebeMalchut as Tisha B\u2019Av ends, with Kri\u2019at Shema said \u00b7 up at Chatzot'},
       _dsBand(U),
-      {k:'mishmar',en:'Mishmar',he:'\u05de\u05b4\u05e9\u05b0\u05c1\u05de\u05b8\u05e8',c:DAY_C.mishmar,h1:52*U-24,h2:4*U,
-       wk:'weeks 2\u20134',yr:'Yom Kippur \u2192 Shmini Atzeret',
+      {k:'mishmar',en:'Mishmar',he:'\u05de\u05b4\u05e9\u05b0\u05c1\u05de\u05b8\u05e8',c:DAY_C.mishmar,h1:52*U-24,h2:endH,
+       wk:adj?'from week 2, as far as the night allows':'weeks 2\u20134',
+       yr:'Yom Kippur \u2192 Shmini Atzeret',
+       note:N.floored?'Shortened to nothing \u2014 the night asked for more than the Mishmar had to give, and the band is not the elastic part':null,
        what:'Awake through the year\u2019s Tishrei, inside Chesed\u2019s hour \u2014 week 1 is already held by the band'},
-      {k:'sleep',en:'The Night\u2019s Second Sleep',he:'\u05e9\u05b5\u05c1\u05e0\u05b8\u05d4',c:DAY_C.sleep,h1:4*U,h2:12.5*U,
-       wk:'weeks 5\u201313',yr:'Cheshvan \u2192 Chanukah',
+      {k:'sleep',en:'The Night\u2019s Second Sleep',he:'\u05e9\u05b5\u05c1\u05e0\u05b8\u05d4',c:DAY_C.sleep,h1:endH,h2:N.upH,
+       wk:adj?'from where the Mishmar ends, to where you rise':'weeks 5\u201313',
+       yr:'Cheshvan \u2192 Chanukah',
        what:'Hod shebeChesed to the middle of Yesod shebeGevurah'},
-      {k:'day',en:'The Waking Day',he:'\u05d9\u05d5\u05b9\u05dd',c:DAY_C.day,h1:12.5*U,h2:21*U,
+      {k:'day',en:'The Waking Day',he:'\u05d9\u05d5\u05b9\u05dd',c:DAY_C.day,h1:N.upH,h2:21*U,
        wk:'weeks 13\u201321',yr:'Chanukah \u2192 Shevat',
        what:'Shacharit at Tiferet \u00b7 Tikkun HaKlali at Netzach'},
       _dsMaalot(U),
@@ -21878,8 +21984,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       {k:'day2',en:'The Waking Day',he:'\u05d9\u05d5\u05b9\u05dd',c:DAY_C.day,h1:26*U,h2:42*U,
        wk:'weeks 27\u201342',yr:'Nisan \u2192 Tammuz',
        what:'Mincha at Hod \u00b7 Maariv at Yesod'},
-      _dsMiutim(U)
-    ];
+      _dsMiutim(U),
+      // Only when the reader's bedtime is later than the structure's own: the
+      // stretch between the Mi'utim and going down. At the default it has no
+      // width, and a segment of no duration is still drawn and still answers a
+      // tap, so it is dropped — the same filter the shapes carried before.
+      {k:'day2b',en:'The Waking Day',he:'\u05d9\u05d5\u05b9\u05dd',c:DAY_C.day,h1:44*U,h2:bed,
+       wk:'past week 45',yr:'',
+       what:'Kri\u2019at Shema at Malchut, and the last of the day'}
+    ].filter(function(x){ return Math.abs(x.h2-x.h1)>1e-9; });
   }
 
   function fmt(m){m=((m%DAY)+DAY)%DAY;var h=Math.floor(m/60),mm=Math.floor(m%60);
@@ -22236,6 +22349,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
      read as a form waiting to be filled. */
   var actsOpen=false;
   function hhmm(m){return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+(m%60)).slice(-2);}
+  function hToMinFixed(h){return ((SEAM+h*60)%DAY+DAY)%DAY;}
+  function hm(h){var m=Math.round(h*60);return Math.floor(m/60)+'h'+('0'+(m%60)).slice(-2)+'m';}
   function toMin(v){var p=(v||'').split(':');return v?(+p[0])*60+(+p[1]):null;}
   function actsRow(){
     var wrap=fr.querySelector('.kotw-acts'); if(!wrap)return;
@@ -22244,7 +22359,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     var a=readActs();
     var n=DAY_ACTS.filter(function(d){var v=a[d.k];
       return v && v[0]!=null && (!d.span || (v[1]!=null && v[1]!==v[0]));}).length
-      + readCust().filter(function(x){return x&&x.t&&x.t[0]!=null;}).length;
+      + readCust().filter(function(x){return x&&x.t&&x.t[0]!=null;}).length
+      + (readNight().bed!=null?1:0) + (readNight().up!=null?1:0);
     wrap.querySelector('.ka-open').textContent=
       (actsOpen?'\u2715 done':(n?'your hours \u00b7 '+n+' set':'+ your hours'));
     var pan=wrap.querySelector('.ka-panel');
@@ -22271,7 +22387,29 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
         '<input type="time" data-c="'+i+'" data-i="1" value="'+(t[1]!=null?hhmm(t[1]):'')+'">'+
         '</label>';
     };
+    var N=nightPlan();
+    var nv=readNight();
+    var nightRow=function(k,en,ph){
+      return '<label class="ka-row"><i style="background:'+DAY_C.sleep+'"></i>'+
+        '<span>'+en+'</span>'+
+        '<input type="time" data-n="'+k+'" value="'+(nv[k]!=null?hhmm(nv[k]):'')+'" '+
+          'placeholder="'+ph+'" aria-label="'+en+'">'+
+        '<span class="ka-gap"></span></label>';
+    };
     pan.innerHTML=
+      grp('The night \u00b7 leave empty to keep the schedule')+
+      nightRow('bed','Down at','10:32 PM')+
+      nightRow('up','Up at','7:38 AM')+
+      '<div class="ka-note">'+
+        (N.adjusted
+          ? (N.floored
+              ? 'The Mishmar is gone and the band is at its floor \u2014 '+fmt(hToMinFixed(N.endH))+
+                '. Sleep comes to '+hm(N.total)+'.'
+              : 'Vigil to '+fmt(hToMinFixed(N.endH))+' \u00b7 Mishmar '+hm(N.mishmar)+
+                ' \u00b7 sleep '+hm(N.total)+'.')
+          : 'Rising stays at Chatzot. A later bedtime or an earlier waking is taken '+
+            'out of the Mishmar, not out of either sleep.')+
+      '</div>'+
       grp('Activities')+DAY_ACTS.filter(function(d){return d.g==='act';}).map(row).join('')+
       grp('Prayers')+DAY_ACTS.filter(function(d){return d.g==='pray';}).map(row).join('')+
       grp('Your own')+[0,1,2].slice(0,CUST_N).map(custRow).join('')+
@@ -22279,6 +22417,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   }
   fr.addEventListener('change',function(e){
     var t=e.target;
+    if(t.dataset&&t.dataset.n!==undefined){          // the night's own two times
+      var nn=readNight(); var v=toMin(t.value);
+      if(v==null) delete nn[t.dataset.n]; else nn[t.dataset.n]=v;
+      writeNight(nn); actsRow(); tick(); return;
+    }
     if(t.dataset&&t.dataset.c!==undefined){          // a slot the reader named
       var i=+t.dataset.c, cu=readCust();
       while(cu.length<=i) cu.push({n:'',t:[null,null]});
@@ -22306,7 +22449,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       actsOpen=!actsOpen; actsRow(); return;
     }
     if(e.target.classList&&e.target.classList.contains('ka-clear')){
-      writeActs({}); writeCust([]); actsRow(); tick(); return;
+      writeActs({}); writeCust([]); writeNight({}); actsRow(); tick(); return;
     }
     var b=e.target.closest&&e.target.closest('[data-face]');
     if(!b)return;
@@ -22341,7 +22484,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   var userSelected=false;
   function tick(){
     var map=timeMap();
-    var sig=FACE+'|'+(FACE==='day'?actsSig():'')+'|'+
+    var sig=FACE+'|'+(FACE==='day'?actsSig()+'~'+JSON.stringify(readNight()):'')+'|'+
       (map.zman?'z'+(typeof zmanCityIdx!=='undefined'?zmanCityIdx:''):'f')+
       '|'+map.hToMin(0)+'|'+map.hToMin(12);
     if(sig!==lastSig){lastSig=sig;redraw(map);}
@@ -22374,7 +22517,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
     moch:MOCH.map(function(m){return {en:m.en,h1:m.h1,h2:m.h2};}),
     nowH:function(){return timeMap().nowH();},
     nowMin:function(){return timeMap().nowMin();},
-    toMin:function(h){return timeMap().hToMin(h);}
+    toMin:function(h){return timeMap().hToMin(h);},
+    // The night as the reader has it, for the Shape of the Night note. Without
+    // this it printed the schedule's own four times while the dial drew the
+    // reader's, and the two disagreed on the same screen.
+    night:function(){var N=nightPlan();
+      return {bed:hToMinFixed(N.bedH), end:hToMinFixed(N.endH), up:hToMinFixed(N.upH),
+              total:N.total, mishmar:N.mishmar, floored:N.floored, adjusted:N.adjusted};}
   };
   tick();
   setInterval(tick,20000);
