@@ -2927,6 +2927,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       <div id="gevurah-text-face" class="sefirah-main-text">Loading…</div>
       <div class="src-line"><button class="date-jump-trigger" id="tanach-trigger" style="display:none;"
             onclick="event.stopPropagation(); openTanachSummaryModal()">today&rsquo;s summary &#8599;</button></div>
+      <div id="gevurah-tanach-rows" style="margin-top:6px;"></div>
     </div>
     <div class="sefirah-detail" id="gevurah-detail"></div>
   </div>
@@ -17560,6 +17561,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
       tanachInfo.seferiaUrl
         ? `<a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text}</a>`
         : tanachInfo.text;
+    // Where the day's Tanach is read, and where to hear it. These stood in
+    // the detail column, which put them behind the card's ⓘ once the readings
+    // were filed by kind — and they are not matter about the cycle, they are
+    // the מעלה's own reading said in full. So they sit under it.
+    document.getElementById('gevurah-tanach-rows').innerHTML =
+      `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
+       <div class="detail-row"><span class="detail-label">Text:</span><span class="detail-value"><a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text} on Sefaria</a></span></div>
+       <div class="detail-row"><span class="detail-label">Audio:</span><span class="detail-value"><a href="https://mechon-mamre.org/p/pt/ptmp3prq.htm" target="_blank" style="color:var(--gold)">Mechon Mamre</a></span></div>
+       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>`;
     // The summary is not on the face. It sits behind "today's summary" the way
     // the All Year Round one does, so the card stays the length it was and the
     // reading is what the card shows.
@@ -17661,12 +17671,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
             <div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
          : `<div class="detail-row"><span class="detail-label">Cycle:</span><span class="detail-value">Cycle 14</span></div>`
        }
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
-       <div class="detail-row"><span class="detail-label">Text:</span><span class="detail-value"><a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text} on Sefaria</a></span></div>
-       <div class="detail-row"><span class="detail-label">Audio:</span><span class="detail-value"><a href="https://mechon-mamre.org/p/pt/ptmp3prq.htm" target="_blank" style="color:var(--gold)">Mechon Mamre</a></span></div>
-
-       <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Four Seasons — 91-Day Cycle</div>
        <div class="detail-row"><span class="detail-label">Season:</span><span class="detail-value">${gevMic ? `held at Day ${seasonInfo.dayIn} of 91 · ${seasonInfo.name} — the count of 364 pauses for these 28 days and resumes on 26 Adar I` : `${_seasonLine} ${seasonInfo.hebrew}`}</span></div>
