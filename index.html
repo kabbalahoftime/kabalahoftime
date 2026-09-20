@@ -1205,10 +1205,7 @@ line-height: 1;
 z-index: 2;
 }
 
-.keter-card > .cycle-info-btn.corner {
-top: 10px;
-right: 38px;
-}
+
 
 @keyframes maalahShake {
 25% { transform: translateX(-2px); }
@@ -2401,6 +2398,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    label beside them. */
 .keter-section.has-info { position: relative; }
 .keter-section.has-info > .cycle-info-btn.corner { top: 17px; right: 18px; }
+/* The first line of each of these headings keeps out of its ⓘ's way. A
+   float rather than padding, so only the line the icon actually sits on
+   is shortened and the rest of the heading runs the full width. */
+.keter-section.has-info > .keter-section-label::before {
+content: ''; float: right; width: 30px; height: 1em;
+}
 /* Held clear of the ⓘ rather than shortened, exactly as the Malchut cycle
    name is above — both of these labels end in a מעלה badge, and the badge is
    a toggle, so the two must not be able to come down on each other. */
@@ -2681,7 +2684,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   <div class="pane-body" data-pane="maalot">
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
   <!-- DAILY LM section -->
-  <div class="keter-section" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
+  <div class="keter-section has-info" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
     <div class="keter-section-label">✦ All Year Round — בכל השנה <span class="maalah">מעלה ט״ו</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada — Rashbi &amp; Rebbe Nachman</div>
     <div class="sefirah-main-text" id="keter-daily-zohar"></div>
@@ -14512,8 +14515,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   // sticks; the guard makes repeat calls harmless.
   function injectCycleInfoButtons() {
     const btn = (key) => `<span class="cycle-info-btn corner" data-cycle="${key}" title="About this cycle">ⓘ</span>`;
-    const keter = document.querySelector('.keter-card');
-    if (keter && !keter.querySelector(':scope > .cycle-info-btn')) keter.insertAdjacentHTML('beforeend', btn('keterlm'));
+    // Keter's ⓘ goes in the top corner of its Ma'alot pane rather than the
+    // card's. The card's face is the dial, which is not what this note is
+    // about: it explains All Year Round, the first of the three readings
+    // behind that button, so it sits in that section's corner exactly as the
+    // two below it sit in theirs.
+    const keterLM = document.querySelector(
+      '.keter-card .pane-body[data-pane="maalot"] .keter-section:first-of-type');
+    if (keterLM && !keterLM.querySelector(':scope > .cycle-info-btn'))
+      keterLM.insertAdjacentHTML('afterbegin', btn('keterlm'));
     const cards = Array.from(document.querySelectorAll('.sefirah-card'));
     ['chochmah', 'binah', 'chesed', 'gevurah', 'tiferet', 'netzach', 'hod', 'yesod', 'malchut'].forEach((key, i) => {
       const c = cards[i];
