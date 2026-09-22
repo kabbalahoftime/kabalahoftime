@@ -18756,13 +18756,26 @@ content: ''; float: right; width: 30px; height: 1em;
       document.getElementById('malchut-yad-face').innerHTML =
         _yadFace.subs.map(s => `<a href="${yadSefariaUrl(s)}" target="_blank" style="color:var(--gold)">${s.name}</a>`).join('<br>');
 
-      // The head of the card: where the round stands, and the pair of Kohelet 3
-      // it is a time for. On the doubled round both are named, one to a line.
+      // The head of the card: where the round stands, which book of the
+      // fourteen the day is reading, and the pair of Kohelet 3 it is a time
+      // for. On the doubled round both pairs are named, one to a line.
+      //
+      // The book is the combination this card was missing. Every other face
+      // names a position made of two counts meeting — a day inside a cycle,
+      // a Sefirah inside a Sefirah — and this one gave the round and the
+      // times without saying where in the Yad they fell. The three chapters
+      // themselves are not repeated here: they wear a ✡ and are gathered in
+      // Stars, and a companion belongs in one place. At a seam the day's
+      // three straddle two books and both are named.
+      const _yadBooks = [...new Set(_yadFace.subs.map(x => x.book))];
       document.getElementById('malchut-yad-top').innerHTML =
         `<div style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));">Day ${_yadFace.dayInCycle} &middot; ` +
         (_yadFace.nums.length > 1
           ? `Cycles ${_yadFace.nums[0]} &amp; ${_yadFace.nums[1]} of 14`
           : `Cycle ${_yadFace.nums[0]} of 14`) + `</div>` +
+        `<div style="margin-top:4px;"><strong>` +
+        _yadBooks.map(x => x === 'Introduction' ? x : 'Sefer ' + x).join(' &middot; ') +
+        `</strong></div>` +
         `<div style="line-height:1.6;margin-top:3px;">` +
         _yadFace.ittim.map(p =>
           `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.05em">${p.he}</bdi>` +
