@@ -2605,8 +2605,6 @@ content: ''; float: right; width: 30px; height: 1em;
        is the rung being stood on — fifteen up and fifteen down is a ladder,
        and Yaakov's is the one the thirty are counted by. -->
   <div id="today-block">
-    <span class="cycle-info-btn corner" data-cycle="dayshape"
-          title="The shape of the night">ⓘ</span>
     <div class="today-label">Today&rsquo;s Ladder</div>
     <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
@@ -3762,7 +3760,7 @@ content: ''; float: right; width: 30px; height: 1em;
            name comes from. The count and the pair sit here now rather than
            under the subsections below, where they read as a footnote to three
            links instead of as what the card is counting. -->
-      <div class="sefirah-cycle-name malchut-cycle-name">Times of Strength (14 / 28)</div>
+      <div class="sefirah-cycle-name malchut-cycle-name">Cycles of Yad HaChazakah (13/14 &times; 28)</div>
       <div id="malchut-yad-top" style="margin-bottom:8px;"></div>
       <!-- The day's three chapters of the Yad. They stood on the face under
            the round named above them, but the heading wears a ✡: it is a
@@ -3794,13 +3792,14 @@ content: ''; float: right; width: 30px; height: 1em;
           <div class="sefirah-main-text" id="malchut-lh-face">Loading…</div>
         </div>
       </div>
-      <!-- THE WEEK'S SEVEN BOOKS. This is what the card is: the Rebbe's
-           ma'amar and seven daily texts, one to each night of the KoT week.
-           It carries no מעלה, no מיעוט, no ✡ and no menorah, so when the
-           readings were filed by kind it fell through to the matter behind
-           the ⓘ — and the breakdown of the week, which is the face of this
-           card, was not on it at all. It is written here now. -->
-      <div id="malchut-week-face" style="margin-top:16px;"></div>
+      <!-- THE WEEK'S SEVEN BOOKS — today's reading, the week's theme, and one
+           line to each night. They carry no מעלה, no מיעוט, no ✡ and no
+           menorah of their own, so when the readings were filed by kind they
+           fell through to the matter behind the ⓘ. They are not a note about
+           the cycle, though: they are the seven daily texts the card is
+           named for. Written here, and sent to the foot of Ma'alot, under
+           the three steps of the climb they belong to. -->
+      <div id="malchut-week-face" data-pane-to="maalot" style="margin-top:16px;"></div>
     </div>
     <div class="sefirah-detail">
       <!-- Likkutei Sichos — first section, above KSA -->
@@ -14489,7 +14488,7 @@ content: ''; float: right; width: 30px; height: 1em;
     },
     hod: {
       title: '728 Half-Day Cycle',
-      main: "The year split into 728 half-days — one halachah studied in the morning and one in the afternoon, keeping the rhythm of the Korban Tamid: one lamb offered at dawn and one bein ha'arbayim (Bamidbar 28:3\u20134), the offering that framed every day of the Mikdash. </p><p>With the Mikdash gone the two daily halachot stand in their place, and Tanna D'Vei Eliyahu teaches that whoever studies two halachot every day merits the World to Come. </p><p>Menachot 99b gives the measure, and gives it from a second tamid: Rabbi Ami learned from Rabbi Yose that one who studies a single chapter in the morning and one in the evening has fulfilled לא ימוש ספר התורה הזה מפיך — this Book of the Law shall not depart from your mouth, and you shall meditate on it day and night (Yehoshua 1:8). </p><p>He learns it from the Lechem HaPanim: the old bread lifted in the morning and the new set down toward evening, yet the table counted as bearing bread tamid, continually — so too a chapter at each end of the day is Torah without interruption. </p><p>On that same page Rabbi Yochanan says in the name of Rashbi that even the morning and evening Kriyat Shema meets the threshold. </p><p>The poskim keep the two tiers apart: the Rambam (Hilchot Talmud Torah 1:8) and the Shulchan Aruch (Yoreh De’ah 246:1) bind every Jew to fixed times by day and night whatever his circumstances, the Rema allowing Kriyat Shema alone bish’at hadechak; while the Alter Rebbe’s own Shulchan Aruch (Hilchot Talmud Torah 3:1) spells out that the chapter morning and evening is the floor and no more — whoever has further time remains bound to learn to the full of his capacity. </p><p>Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day carry Orach Chaim\'s 697 chapters through most of the year; the closing days seal it with the Chofetz Chaim's laws of speech. </p><p>Alongside runs the Zohar on the weekly parasha — its hidden light following the Torah reading — which gives way on Shabbat to Sefer Yetzirah, one passage for each of the 54 parshiyot. </p><p>And the number itself says why: 728 is \u05e9\u05d1\u05ea (702) joined to \u05e9\u05dd \u05d4\u05d5\u05d9\u05d4 (26). Shabbat is the elevation of the physical world into sacred rest and wholeness; united directly with the Name, it draws the transcendent light straight into the vessel of holy time. So the daily study of Torah is the Shabbat of every day — each half-day a small entry into that rest, 728 of them across the year.",
+      main: "The year is split into 728 half-days — one halachah studied in the morning and one in the afternoon, keeping the rhythm of the Korban Tamid: one lamb offered at dawn and one bein ha'arbayim (Bamidbar 28:3–4), the daily offering that framed every day of the Mikdash.</p><p>With the Mikdash gone, the two daily halachot stand in its place, and Tanna D'Vei Eliyahu teaches that whoever studies two halachot every day merits the World to Come. Menachot 99b gives the measure, and gives it from a second tamid: Rabbi Ami learned from Rabbi Yose that one who studies a single chapter in the morning and one in the evening has fulfilled לא ימוש ספר התורה הזה מפיך — this Book of the Law shall not depart from your mouth, and you shall meditate on it day and night (Yehoshua 1:8).</p><p>He derives it from the Lechem HaPanim: the old bread lifted in the morning and the new set down toward evening, yet the table counted as bearing bread tamid, continually — so too a chapter at each end of the day renders one's Torah continuous, without interruption. On that same page Rabbi Yochanan says in the name of Rashbi that even the morning and evening Kriyat Shema meets the threshold.</p><p>The poskim keep the two tiers distinct. The Rambam (Hilchot Talmud Torah 1:8) and the Shulchan Aruch (Yoreh De’ah 246:1) bind every Jew to fixed times by day and night whatever his circumstances, the Rema allowing Kriyat Shema alone bish’at hadechak; while the Alter Rebbe’s own Shulchan Aruch (Hilchot Talmud Torah 3:1) spells out that the chapter morning and evening is the absolute floor — whoever has further time remains bound to learn to the full measure of his capacity.</p><p>Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day carry Orach Chaim's 697 chapters through most of the year, sealed in the closing days with the Chofetz Chaim's laws of speech. Alongside runs the Zohar on the weekly parasha — its hidden light following the Torah reading — which gives way on Shabbat to Sefer Yetzirah, one passage for each of the 54 parshiyot.</p><p>Underneath the halachic rhythm lies a precise matrix. The 72 Divine Names flowing through the 10 Sefirot give 720 half-days — 72 × 10 — and to these are joined the 8 cornerstone half-days of the 4 root blocks in Chesed, 4 × 2, binding the 72 Names directly to the four letters of the Name and to the four turns of the year, the Tekufot. Counted the other way it is 26 — יהוה — times 28 — כחַ, the Name illuminating the twenty-eight times of human existence.</p><p>And the number says its own purpose: 728 is שַׁבָּת (702) joined directly to שֵׁם הֲוָיָה (26). Shabbat is the elevation of the physical world into sacred rest and wholeness; united with the Name, it draws the transcendent light straight into the vessel of holy time. So the daily study of two halachot is the Shabbat of every day — each half-day a small entry into that rest, 728 of them holding the year complete.",
       meta: 'Shulchan Aruch & Mishnah Berurah · Chofetz Chaim · Zohar · Sefer Yetzirah'
     },
     yesod: {
@@ -14507,7 +14506,11 @@ content: ''; float: right; width: 30px; height: 1em;
       main: 'The year as a single day: the 52 weeks of the Kabbalah of Time year mapped onto the 24 hours of one day, each week a step ascending through the seven Sefirot — with weeks 50–52, the three Mochin, hovering above the Chatzot seam. </p><p>Tap any step to see its week; the hand shows where "now" falls in the inner year.',
       meta: 'From "The Kabbalah of Time" by Daniel Kahane & Ann Helen Wainer'
     },
-    // Built when tapped rather than stored — see _dayShapeInfo below.
+    // The night's shape, built when tapped rather than stored — see
+    // _dayShapeInfo below. Nothing opens it at present: it hung on Today's
+    // Ladder, which is about the thirty steps and not about sleep, and was
+    // taken off there. It is kept because it is the only place the schedule
+    // the dial draws is said in words, and the dial is where it belongs.
     dayshape: () => _dayShapeInfo()
   };
 
@@ -20086,14 +20089,6 @@ content: ''; float: right; width: 30px; height: 1em;
     const maalot = box.querySelector('.pane-body[data-pane="maalot"]');
     const col = card.querySelector('.sefirah-content-col');
     if (!col || !maalot) return;
-    // A face element may name its own pane. Malchut's Yad HaChazakah does:
-    // its heading wears a ✡, so it is a companion and belongs with them.
-    [...col.querySelectorAll('[data-pane-to]')].forEach(el => {
-      const body = box.querySelector('.pane-body[data-pane="' + el.dataset.paneTo + '"]');
-      if (!body || box.contains(el)) return;
-      el.dataset.paneSrc = 'face';
-      body.appendChild(el);
-    });
     [...col.querySelectorAll('.malchut-ksa-row, .malchut-section')].forEach(row => {
       // The KoT Book goes with them. On Keter it already sits inside the
       // ma'alah it belongs to; on Chochmah and Binah it stood alone at the
@@ -20103,6 +20098,16 @@ content: ''; float: right; width: 30px; height: 1em;
       if (box.contains(row)) return;
       row.dataset.paneSrc = 'face';
       maalot.appendChild(row);
+    });
+    // Taken last, so what names Ma'alot lands under the steps rather than
+    // above them. Malchut's Yad HaChazakah names Stars — its heading wears a
+    // ✡, so it is a companion — and the week's seven books name Ma'alot,
+    // where they sit at the foot of the climb.
+    [...col.querySelectorAll('[data-pane-to]')].forEach(el => {
+      const body = box.querySelector('.pane-body[data-pane="' + el.dataset.paneTo + '"]');
+      if (!body || box.contains(el)) return;
+      el.dataset.paneSrc = 'face';
+      body.appendChild(el);
     });
   }
 
@@ -20133,6 +20138,16 @@ content: ''; float: right; width: 30px; height: 1em;
             el.tagName !== 'HR' && wrappers.indexOf(el) === -1)) sources.push(det);
 
       sources.forEach(src => {
+      // Nothing in it to file: leave what was filed from it standing. Two
+      // renders in one tick would otherwise empty a pane — the first files
+      // the column and leaves it empty, and the second, finding an opened
+      // wrapper that is always a source, removes what the first filed and
+      // has nothing to put back. That is the Malchut menorah going missing
+      // at random, which it did whenever the Zohar fetch happened to land
+      // between the two.
+      const fills = [...src.children].some(n => n.tagName !== 'HR' &&
+        (src !== det || wrappers.indexOf(n) === -1));
+      if (!fills) return;
       (card._paneFiled.get(src) || []).forEach(n => { if (n.parentNode) n.parentNode.removeChild(n); });
       const filed = []; card._paneFiled.set(src, filed);
       const last = {};
