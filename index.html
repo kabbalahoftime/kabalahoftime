@@ -2333,6 +2333,26 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   cursor:pointer; padding:5px 0; margin-top:11px; }
 .today-foot { display:flex; justify-content:space-between; align-items:center; gap:10px;
   margin-top:11px; }
+/* Now or Next on the step: outlined while it waits for its hour, filled once
+   the hour has come. The prayer beneath it is labelled for what it is rather
+   than said to be now a second time — it is only ever the hour's own, and the
+   tag pulses until it is said. */
+.t-flag, .tp-flag {
+  display:inline-block; font-family:'Cinzel',serif;
+  font-size:calc(8.5px * var(--ts, 1)); letter-spacing:1.3px; text-transform:uppercase;
+  color:var(--gold); border:1px solid var(--gold); border-radius:3px;
+  padding:1px 5px; margin-right:7px; line-height:1.5; vertical-align:0.1em;
+}
+.t-flag.now { background:var(--gold); color:#fff; }
+/* The prayer this hour is asking for. It marks in place, so it is a control
+   and gets a control's height without moving the line it sits on. */
+.today-prayer { margin-top:10px; font-size:calc(14px * var(--ts, 1)); }
+.today-prayer .prayer-tag {
+  cursor:pointer; color:var(--gold);
+  display:inline-block; padding:12px 6px; margin:-12px -6px;
+  position:relative; z-index:1;
+}
+.today-prayer .tp-sef { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
 .today-count { font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
 .today-more { background:none; border:none; font-family:inherit; cursor:pointer;
   font-size:calc(11px * var(--ts, 1)); color:var(--gold); padding:6px 0; white-space:nowrap; }
@@ -2591,6 +2611,14 @@ content: ''; float: right; width: 30px; height: 1em;
     <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
             aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
+    <!-- THE PRAYER THIS HOUR IS ASKING FOR. The ten tags are scattered one to
+         a Sefirah down the whole page, so knowing which is due meant finding
+         the card whose hour it is. This says it, and marks in place: the tag
+         here carries the same data-prayer as the one on the card, so both
+         read the same mask and both light when either is tapped. Built by
+         applyPrayerState, which is where the active Sefirah is already
+         known. -->
+    <div id="today-prayer" class="today-prayer" style="display:none;"></div>
       <!-- The day's two gatherings — the ten prayers and the thirty steps —
            which stood in a clock of their own above the cards, beside a local
            and a Jerusalem time. The times are gone; these belong here, in the
@@ -13743,6 +13771,25 @@ content: ''; float: right; width: 30px; height: 1em;
     const mask = prayersMask();
     const active = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
     const activeIdx = active ? PRAYER_SEFIRAH.indexOf(active.name.split(' /')[0]) + 1 : 0;
+    // Written before the tags are lit, so the one put here is lit with them.
+    // Rebuilt only when the prayer it names changes — the hour moving on, or
+    // Tachanun giving way to Tikkun Leah — because rewriting it every thirty
+    // seconds would take the focus off it under a reader's finger.
+    const tp = document.getElementById('today-prayer');
+    if (tp) {
+      const want = activeIdx ? activeIdx + (_noTachanunToday ? 'L' : '') : '';
+      if (tp.dataset.built !== want) {
+        tp.dataset.built = want;
+        tp.innerHTML = activeIdx
+          ? '<span class="tp-flag">Prayer</span>' +
+            '<span class="prayer-tag" data-prayer="' + activeIdx + '" role="button" ' +
+            'tabindex="0" title="Tap when you have prayed">' +
+            _prayerListName(activeIdx) + '</span>' +
+            '<span class="tp-sef">· ' + PRAYER_SEFIRAH[activeIdx - 1] + '</span>'
+          : '';
+      }
+      tp.style.display = activeIdx ? '' : 'none';
+    }
     document.querySelectorAll('.prayer-tag').forEach(el => {
       const n = +el.dataset.prayer;
       const done = !!(mask & (1 << (n - 1)));
@@ -14957,7 +15004,13 @@ content: ''; float: right; width: 30px; height: 1em;
     // there. What is left is the step and what it asks for, and the day-note
     // when the step belongs to another day, which is the one thing here the
     // reader cannot see for themselves.
+    // Now or Next, before the step. The pulse said the hour had come and the
+    // word says which of the two it is — a step whose hour is running and a
+    // step waiting for its hour are not the same thing to a reader deciding
+    // whether to do it yet.
     el.innerHTML =
+      '<span class="t-flag' + (st.due ? ' now' : '') + '">' +
+      (st.due ? 'Now' : 'Next') + '</span>' +
       '<bdi class="t-step' + (st.due ? ' t-due' : '') + '" lang="he">' +
       (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' + nameHtml +
       (note ? ' <span class="t-sef">' + note.replace(/^ /, '') + '</span>' : '');
@@ -14968,15 +15021,19 @@ content: ''; float: right; width: 30px; height: 1em;
   // words of English, a phrase of Hebrew, and both together — so no single
   // size fits all thirty at every reader text size and phone width. The line
   // is set nowrap and then stepped down until it fits, which leaves the common
-  // case untouched and shrinks only the long ones. Three passes, because the
-  // first ratio is off by a rounding and the second is not.
+  // case untouched and shrinks only the long ones. Four passes: a ratio is off
+  // by a rounding each time, and the longest name with the Now flag before it
+  // was still a pixel over after three.
   function _todayFit(el) {
     el.style.fontSize = '';
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       const avail = el.clientWidth;
       if (!avail || el.scrollWidth <= avail) return;
       const size = parseFloat(getComputedStyle(el).fontSize);
-      const want = Math.max(10, size * avail / el.scrollWidth);
+      // A pixel under what is available, not exactly it: the ratio rounds up
+      // as often as down, and aiming at the edge left the last glyph of the
+      // longest two names shaved.
+      const want = Math.max(9, size * (avail - 1) / el.scrollWidth);
       if (want >= size) return;
       el.style.fontSize = want.toFixed(2) + 'px';
     }
