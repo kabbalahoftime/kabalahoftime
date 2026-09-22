@@ -1587,6 +1587,23 @@ color: var(--gold);
 /* The book's name is the control that opens its week, so it is allowed to
    wrap — held on one line it was cut off inside the Today's Reading box. */
 .mal-book-label.mal-book-open { cursor:pointer; white-space:normal; display:inline-block; }
+/* The week's seven books stand on the face now, so their names and the label
+   that opens each one are real targets rather than rows inside a shut panel,
+   where a reach probe read them as out of view and let them pass. Each gets
+   the finger's worth of height, taken back in margin so the line stays where
+   it is — the same trade every other link on a card's face makes. */
+.mal-book-row a, .mal-book-label.mal-book-open, #malchut-week-face .mal-text-name a {
+/* 16 rather than 12: these lines are 13px and 16px tall, and twelve either
+   side left them at 37 and 40. */
+padding: 16px 6px;
+margin: -16px -6px;
+position: relative;
+z-index: 1;
+}
+.mal-book-row a { display: inline-block; }
+/* The rows clip their overflow to keep their corners, which would cut the
+   reach above and below away again. */
+#malchut-week-face .mal-book-row { overflow: visible; }
 .mal-book-more { font-size:0.8em; opacity:.6; }
 .mal-book-label {
 font-size: calc(10.5px * var(--ts, 1));
@@ -3719,10 +3736,16 @@ content: ''; float: right; width: 30px; height: 1em;
            links instead of as what the card is counting. -->
       <div class="sefirah-cycle-name malchut-cycle-name">Times of Strength (14 / 28)</div>
       <div id="malchut-yad-top" style="margin-bottom:8px;"></div>
-      <!-- The day's three chapters belong to the round named directly above
-           them, not to the Year-Round Connection they used to sit under. -->
-      <div class="keter-section-label">✡ Yad HaChazakah</div>
-      <div class="sefirah-sub-text" id="malchut-yad-face" style="margin-top:2px;margin-bottom:14px;"></div>
+      <!-- The day's three chapters of the Yad. They stood on the face under
+           the round named above them, but the heading wears a ✡: it is a
+           companion, gathered and counted as one, and a companion on the
+           face is the one kind kept in two places. data-pane-to sends it
+           where it belongs. The round's own count stays above, on the face,
+           because that is what this card is counting. -->
+      <div data-pane-to="stars">
+        <div class="keter-section-label">✡ Yad HaChazakah</div>
+        <div class="sefirah-sub-text" id="malchut-yad-face" style="margin-top:2px;"></div>
+      </div>
       <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
         <div class="malchut-section">
@@ -3743,6 +3766,13 @@ content: ''; float: right; width: 30px; height: 1em;
           <div class="sefirah-main-text" id="malchut-lh-face">Loading…</div>
         </div>
       </div>
+      <!-- THE WEEK'S SEVEN BOOKS. This is what the card is: the Rebbe's
+           ma'amar and seven daily texts, one to each night of the KoT week.
+           It carries no מעלה, no מיעוט, no ✡ and no menorah, so when the
+           readings were filed by kind it fell through to the matter behind
+           the ⓘ — and the breakdown of the week, which is the face of this
+           card, was not on it at all. It is written here now. -->
+      <div id="malchut-week-face" style="margin-top:16px;"></div>
     </div>
     <div class="sefirah-detail">
       <!-- Likkutei Sichos — first section, above KSA -->
@@ -18832,19 +18862,22 @@ content: ''; float: right; width: 30px; height: 1em;
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shlomo Katz — רב שלמה כץ <span class="maalah yom" data-wane="15">מיעוט ט״ו</span></div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://ravshlomokatz.com/" target="_blank" style="color:var(--gold)">Resources</a> &nbsp;·&nbsp; <a href="https://youtube.com/@ravshlomokatz" target="_blank" style="color:var(--gold)">Videos</a></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:0 0 14px 0;">` +
+       <hr style="border:0;border-top:1px solid var(--border);margin:0 0 14px 0;">
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="10">The Rebbe</div>
+       <div style="font-size:0.88rem;margin-bottom:10px;">` +
+      `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a> &nbsp;·&nbsp; ` +
+      `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
+
+    // Today's reading, then the week it stands in — on the face, where the
+    // card's own cycle is.
+    document.getElementById('malchut-week-face').innerHTML =
       todayRow +
       `<div class="mal-week-divider"></div>` +
       `<div class="mal-parasha-header">` +
         `<span>Week ${effectiveKotWeek} · ${wk.month}</span>` +
         `<strong>${wk.b1_theme}</strong>` +
       `</div>` +
-      weekRows +
-      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="10">The Rebbe</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;">` +
-      `<a href="https://www.chabad.org/therebbe/article_cdo/aid/2468546/jewish/Sichos-in-English.htm" target="_blank" style="color:var(--gold)">Sichos in English</a> &nbsp;·&nbsp; ` +
-      `<a href="https://www.lahak.org/templates/lahak/article_cdo/aid/2837128/jewish/page.htm" target="_blank" style="color:var(--gold)">Toras Menachem</a></div>`;
+      weekRows;
 
     document.getElementById('malchut-sichos-detail').innerHTML =
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likkutei Sichos <span class="maalah yom" data-wane="13">מיעוט י״ג</span></div>
@@ -19996,6 +20029,14 @@ content: ''; float: right; width: 30px; height: 1em;
     const maalot = box.querySelector('.pane-body[data-pane="maalot"]');
     const col = card.querySelector('.sefirah-content-col');
     if (!col || !maalot) return;
+    // A face element may name its own pane. Malchut's Yad HaChazakah does:
+    // its heading wears a ✡, so it is a companion and belongs with them.
+    [...col.querySelectorAll('[data-pane-to]')].forEach(el => {
+      const body = box.querySelector('.pane-body[data-pane="' + el.dataset.paneTo + '"]');
+      if (!body || box.contains(el)) return;
+      el.dataset.paneSrc = 'face';
+      body.appendChild(el);
+    });
     [...col.querySelectorAll('.malchut-ksa-row, .malchut-section')].forEach(row => {
       // The KoT Book goes with them. On Keter it already sits inside the
       // ma'alah it belongs to; on Chochmah and Binah it stood alone at the
