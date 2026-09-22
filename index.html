@@ -261,7 +261,9 @@ overflow-x: clip;
 .app {
 max-width: 680px;
 margin: 0 auto;
-padding: 0 20px 60px;
+/* 24 rather than 60: the sixty was clearance for two buttons that floated
+   over the foot of the page. They stand in it now and bring their own. */
+padding: 0 20px 24px;
 }
 
 /* ── HEADER ── */
@@ -1977,21 +1979,21 @@ to   { opacity: 1; }
 #kotw-root a{color:var(--kotw-gold); text-decoration:none}
 
 /* ── WEEKLY JOURNAL ── */
-/* The two standing buttons — the Journal, which is the day's own accounting,
-   and the How-to Guide, which is about the page. They were each fixed to
-   their own corner, which is fine until the labels grow: at the largest
-   reader text on a narrow phone they met in the middle and one printed over
-   the other. They share one row now, held apart by the row rather than by
-   the width of the screen, and the row itself takes no taps — only the
-   buttons in it do. */
+/* The two buttons — the Journal, which is the day's own accounting, and the
+   How-to Guide, which is about the page. They stand at the foot of the page
+   rather than over it: pinned, they covered whatever the reader had scrolled
+   to, and the day's own readings are what the screen is for. They share one
+   row, held apart by the row rather than by the width of the screen, so the
+   labels cannot meet in the middle however large the reader's text. */
 #corner-bar{
-  position:fixed;left:0;right:0;z-index:999;
-  bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  max-width:680px;
+  margin:8px auto 0;
   display:flex;justify-content:space-between;align-items:flex-end;
-  gap:10px;padding:0 16px;pointer-events:none;
+  gap:10px;
+  padding:0 20px calc(28px + env(safe-area-inset-bottom, 0px));
 }
 #corner-bar > button{
-  pointer-events:auto;flex:0 1 auto;min-width:0;max-width:47%;
+  flex:0 1 auto;min-width:0;max-width:47%;
   border-radius:6px;padding:8px 14px;cursor:pointer;
   font-family:'Cormorant Garamond',serif;font-size:calc(13px * var(--ts, 1));
   letter-spacing:.5px;line-height:1.25;opacity:.92;
