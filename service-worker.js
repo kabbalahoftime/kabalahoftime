@@ -3,7 +3,7 @@
 // name and the shell is fetched again. A cache that has gone stale in a way
 // the network-first rule cannot correct is the one failure this app has that
 // leaves every card reading "Loading…" with nothing to say why.
-const CACHE_NAME = 'kabbalah-of-time-v35';
+const CACHE_NAME = 'kabbalah-of-time-v36';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -64,6 +64,19 @@ self.addEventListener('install', (event) => {
 //     issue; the activate handler below drops everything under the old name.
 //
 //   • Everything else (manifest, icons, fonts) → cache-first, as before.
+// The same request, made without consulting the browser's HTTP cache. A
+// navigation Request cannot be rebuilt as-is — its mode is 'navigate', which
+// a constructor will not take — so this builds a plain same-origin GET for
+// the same URL. The response is stored under the original request, so the
+// cache key does not change.
+function fresh(req) {
+  try {
+    return new Request(req.url, { cache: 'reload', credentials: 'same-origin' });
+  } catch (e) {
+    return req;
+  }
+}
+
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -73,7 +86,14 @@ self.addEventListener('fetch', (event) => {
 
   if (isHTML) {
     event.respondWith((async () => {
-      const network = fetch(req).then((response) => {
+      // Past the browser's own HTTP cache, for the same reason the install
+      // does: GitHub Pages serves the page with a max-age, so a plain fetch
+      // here can hand back the very copy this is meant to replace and write
+      // it into the cache again. That is what made a change take several
+      // opens to arrive instead of one — each open refreshed the cache with
+      // the stale copy, and only when the max-age finally ran out did the
+      // real page get through.
+      const network = fetch(fresh(req)).then((response) => {
         if (response && response.ok) {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
@@ -99,7 +119,7 @@ self.addEventListener('fetch', (event) => {
   const sameOrigin = new URL(req.url).origin === self.location.origin;
   if (sameOrigin && new URL(req.url).pathname.endsWith('.json')) {
     event.respondWith((async () => {
-      const network = fetch(req).then((response) => {
+      const network = fetch(fresh(req)).then((response) => {
         if (response && response.ok) {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
