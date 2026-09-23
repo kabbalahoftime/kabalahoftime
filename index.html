@@ -20045,6 +20045,66 @@ content: ''; float: right; width: 30px; height: 1em;
       .split('\n').map(l => l.replace(/[ \t]+$/, '')).join('\n');
   }
 
+  // Break a block into paragraphs at sentence ends. The beginner script keeps
+  // each Sefirah as one long string — a couple of thousand characters, all of
+  // its cycles run together — and those strings are written out in five
+  // languages, so they are broken here rather than rewritten ten times over.
+  //
+  // It only ever cuts where a sentence already ended, and it will not cut
+  // after an initial or an abbreviation ("R. Shimon", "p. 5", "Ch. 4") or
+  // after a number, since those full stops end nothing. Anything the author
+  // already split with a blank line is left alone and split no further.
+  const SENT_ABBR = /(?:^|[\s(])(?:[A-Z]|[Pp]|[Vv]|vol|no|ch|pp|Ps|Prov|St|Mr|Mrs|Dr|Rav|Reb|Rabbi|R)$/;
+  function paragraphize(text, target) {
+    target = target || 420;
+    return String(text || '').split(/\n\n+/).map(block => {
+      const t = block.trim();
+      if (t.length <= target) return t;
+      // sentence ends: . ! ? followed by a space and something that starts one
+      const parts = [];
+      let start = 0;
+      for (let i = 0; i < t.length - 1; i++) {
+        const c = t[i];
+        if (c !== '.' && c !== '!' && c !== '?' && c !== '\u05C3') continue;
+        let j = i + 1;
+        while (j < t.length && (t[j] === '"' || t[j] === '\u201d' || t[j] === ')' ||
+                                t[j] === '\u2019' || t[j] === "'")) j++;
+        if (t[j] !== ' ') continue;
+        const next = t[j + 1];
+        if (!next) continue;
+        // the next sentence must actually begin — a capital, a digit, or a
+        // Hebrew letter, which has no case of its own
+        if (!/[A-Z\u0590-\u05FF0-9\u201c\u2018"]/.test(next)) continue;
+        if (SENT_ABBR.test(t.slice(Math.max(0, i - 8), i))) continue;
+        parts.push(t.slice(start, j).trim());
+        start = j + 1;
+      }
+      if (start < t.length) parts.push(t.slice(start).trim());
+      // gather the sentences back into paragraphs of about the target length
+      const out = [];
+      let cur = '';
+      for (const sen of parts) {
+        if (cur && (cur.length + 1 + sen.length) > target) { out.push(cur); cur = sen; }
+        else cur = cur ? cur + ' ' + sen : sen;
+      }
+      if (cur) out.push(cur);
+      return out.join('\n\n');
+    }).join('\n\n');
+  }
+
+  // A Sefirah's block, as paragraphs. Its opener is a sentence-opening
+  // fragment — "In Hod — Splendor, ... —" — so it runs straight into the
+  // first reading and the two are one paragraph; every reading after that
+  // gets its own. Joined with a single space the whole Sefirah arrived as
+  // one block of twelve or fourteen hundred characters, four unrelated
+  // cycles run together in a breath nobody could take, which is no way to
+  // read aloud and no way to read at all.
+  function sefiraBlock(parts) {
+    const p = parts.filter(x => x != null && String(x).trim() !== '');
+    if (p.length < 2) return p.join(' ');
+    return [p[0] + ' ' + p[1]].concat(p.slice(2)).join('\n\n');
+  }
+
   function buildDailyScript(lang, data) {
     const L = SCRIPT_T[lang] || SCRIPT_T.en;
     const lines = [];
@@ -20068,7 +20128,7 @@ content: ''; float: right; width: 30px; height: 1em;
     keterLines.push(L.keterHayomRambam(data.hayomYomText));
     keterLines.push(L.keterLm(data.lmLessonInPart, data.lmPartLabel, data.lmTheme));
     if (data.treasuryDay) keterLines.push(L.keterTreasury(data.treasuryDay));
-    lines.push(keterLines.join(' '));
+    lines.push(sefiraBlock(keterLines));
     lines.push('');
 
     // Chochmah
@@ -20079,21 +20139,21 @@ content: ''; float: right; width: 30px; height: 1em;
     chLines.push(L.chGate(data.gatePrim, data.gateComp, data.gatesIsVowel));
     chLines.push(L.chTorah(data.chSection, data.chReading));
     if (data.tractTractate) chLines.push((data.tractIsDaily ? L.chTractDay : L.chTract)(data.tractTractate, data.tractPeriod, data.tractDesc));
-    lines.push(chLines.join(' '));
+    lines.push(sefiraBlock(chLines));
     lines.push('');
 
     // Binah
     let binahLines = [L.binah];
     binahLines.push(L.binahCombo(data.combo, data.omerCycle, data.omerPos));
     binahLines.push(L.binahLt(data.ltSection, data.ltReading));
-    lines.push(binahLines.join(' '));
+    lines.push(sefiraBlock(binahLines));
     lines.push('');
 
     // Chesed
     let chesedLines = [L.chesed];
     chesedLines.push(L.chesedMishna(data.mishnaType, data.mishnaText, data.mishnaTag1, data.mishnaTag2));
     if (data.bshtReading) chesedLines.push(L.chesedBsht(data.bshtReading));
-    lines.push(chesedLines.join(' '));
+    lines.push(sefiraBlock(chesedLines));
     lines.push('');
 
     // Gevurah
@@ -20101,7 +20161,7 @@ content: ''; float: right; width: 30px; height: 1em;
     gevLines.push(L.gevTanach(data.tanachTag1, data.tanachTag2));
     if (data.dafName) gevLines.push(L.gevDaf(data.dafName, data.dafNum));
     if (data.noamTitle) gevLines.push(L.gevNoam(data.noamTitle));
-    lines.push(gevLines.join(' '));
+    lines.push(sefiraBlock(gevLines));
     lines.push('');
 
     // Tiferet
@@ -20114,7 +20174,7 @@ content: ''; float: right; width: 30px; height: 1em;
     if (data.tifTextWork) tifLines.push(L.tifTextLine(data.tifTextWork, data.tifTextItem));
     if (data.arushBook) tifLines.push(L.tifArush(data.arushBook));
     if (data.dmName) tifLines.push(L.tifDm(data.dmName, data.dmPart, data.dmEnglish));
-    lines.push(tifLines.join(' '));
+    lines.push(sefiraBlock(tifLines));
     lines.push('');
 
     // Netzach
@@ -20127,7 +20187,7 @@ content: ''; float: right; width: 30px; height: 1em;
     if (data.cy41Mivtzah) netzLines.push(L.netzMivtz(data.cy41Mivtzah));
     if (data.tikkunPsalm) netzLines.push(L.netzTikkun(data.tikkunPsalm));
     if (data.meynSection) netzLines.push(L.netzMaayan(data.meynSection, data.meynPage, data.meynDay, data.meynPagePhrase));
-    lines.push(netzLines.join(' '));
+    lines.push(sefiraBlock(netzLines));
     lines.push('');
 
     // Hod
@@ -20135,19 +20195,26 @@ content: ''; float: right; width: 30px; height: 1em;
     if (data.hodTdeLabel && L.hodTde) hodLines.push(L.hodTde(data.hodTdeLabel, data.hodTdeWhere));
     hodLines.push(L.hodHalacha(data.halMorning, data.halAfternoon));
     if (data.dafName)       hodLines.push(L.hodDaf(data.dafName, data.dafNum));
-    lines.push(hodLines.join(' '));
+    lines.push(sefiraBlock(hodLines));
     lines.push('');
 
     // Yesod
-    lines.push(`${L.yesod} ${L.yesodText(
-      data.parasha || '—',
-      data.shovavimDay   || '—',
-      data.shovavimParasha || '—',
-      data.shovavimCycle || '—',
-      data.shovavimDayLet  || '',
-      data.shovavimDayName || '',
-      data.shovavimDayTik  || ''
-    )}${data.chokZohar && L.yesodChokZohar ? ' ' + (data.chokZoharIsSY && L.yesodChokSY ? L.yesodChokSY(data.chokZohar) : L.yesodChokZohar(data.chokZohar)) : ''}${data.yesodBicLabel ? ' ' + L.yesodBic(data.yesodBicLabel, data.yesodBicItems) : ''}`);
+    lines.push(sefiraBlock([
+      L.yesod,
+      L.yesodText(
+        data.parasha || '—',
+        data.shovavimDay   || '—',
+        data.shovavimParasha || '—',
+        data.shovavimCycle || '—',
+        data.shovavimDayLet  || '',
+        data.shovavimDayName || '',
+        data.shovavimDayTik  || ''),
+      data.chokZohar && L.yesodChokZohar
+        ? (data.chokZoharIsSY && L.yesodChokSY ? L.yesodChokSY(data.chokZohar)
+                                               : L.yesodChokZohar(data.chokZohar))
+        : '',
+      data.yesodBicLabel ? L.yesodBic(data.yesodBicLabel, data.yesodBicItems) : ''
+    ]));
     lines.push('');
 
     // Malchut
@@ -20164,12 +20231,12 @@ content: ''; float: right; width: 30px; height: 1em;
     if (data.zoharWeekLabel && L.malZoharWeek) malLines.push(L.malZoharWeek(data.zoharWeekLabel));
     if (data.lsSichosBook)  malLines.push(L.malLsSichos(data.lsSichosBook));
     if (data.ksaLabel)      malLines.push(L.malKsa(data.ksaLabel));
-    lines.push(malLines.join(' '));
+    lines.push(sefiraBlock(malLines));
 
     lines.push('');
     lines.push(L.closing);
 
-    return cleanScript(lines.join('\n'));
+    return paragraphize(cleanScript(lines.join('\n')));
   }
 
   // ── BEGINNER SCRIPT ──────────────────────────────────────────────────────────
@@ -20263,7 +20330,7 @@ content: ''; float: right; width: 30px; height: 1em;
       lines.push('');
     }
     lines.push(B.closing(data));
-    return cleanScript(lines.join('\n'));
+    return paragraphize(cleanScript(lines.join('\n')));
   }
 
   // The strip is the control, for any block that wears one. Tapping the pane
