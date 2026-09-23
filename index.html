@@ -312,16 +312,16 @@ letter-spacing: 1px;
    How-to Guide, where it was read only by someone who had already decided to
    open a guide — by which time they no longer needed telling. It belongs
    under the title, where it is the first thing read and answers the question
-   before it is asked. Upright, not italic: the line above is the book's
-   own subtitle and this is a plain statement, and two italic lines running
-   together read as one. */
+   before it is asked. Upright, not italic: the title's subtitle above the
+   rule is italic, and two italic lines running together read as one. */
 .title-tag {
 font-family: 'Cormorant Garamond', serif;
 font-size: calc(15px * var(--ts, 1));
 line-height: 1.5;
+text-align: center;
 color: var(--ink-soft);
 max-width: 30em;
-margin: 8px auto 0;
+margin: 12px auto 0;
 padding: 0 16px;
 }
 
@@ -2584,8 +2584,14 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="title-hebrew">קַבָּלַת הַזְּמַן</div>
     <div class="title-main">Kabbalah of Time</div>
     <div class="title-sub">Daily Counting, Daily Calling — ספירת הזמן</div>
-    <div class="title-tag">A daily practice that maps the Jewish year onto Kabbalistic structure.</div>
   </header>
+
+  <!-- Below the header rule, not inside the gold block. Four stacked lines
+       made that block top-heavy, and the sentence is not a third title —
+       it is the page speaking in its own voice about what it is. Under the
+       line it reads as the first thing said rather than the last thing
+       titled. -->
+  <div class="title-tag">A daily practice that maps the Jewish year onto Kabbalistic structure.</div>
 
   <!-- READING CONTROLS — first thing under the header rule. Someone who finds
        the page hard to read should not have to scroll past the whole
