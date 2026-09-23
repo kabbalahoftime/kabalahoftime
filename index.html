@@ -7105,8 +7105,12 @@ content: ''; float: right; width: 30px; height: 1em;
   // actual offering days: the KoT year is built so 1 Nissan = day 182 = 14×13,
   // i.e. CYCLE DAY 13 — the day Nachshon ben Aminadav offered. Days 1-12 of the
   // following cycle then fall on 2-13 Nissan. Day 12 (13 Nissan) is Levi, who
-  // brought no offering — the tribe of Moshe and Aharon, whose consolation was
-  // the Menorah; Levi corresponds to Adar II. Each entry carries its month.
+  // brought none among the twelve — the tribe of Moshe and Aharon — and what
+  // stands in its place is Aharon's own: the kindling of the Menorah, which
+  // the Torah sets immediately after the twelve days of the Nesi'im, and which
+  // Rashi reads as the answer to his distress at being left out. His is the
+  // greater portion, because the lamps endure. Levi corresponds to Adar II.
+  // Each entry carries its month.
   const NASSI_NAMES = [
     'Netanel ben Tzuar (Yissachar) · Iyar',
     'Eliav ben Chelon (Zevulun) · Sivan',
@@ -7119,7 +7123,7 @@ content: ''; float: right; width: 30px; height: 1em;
     'Achiezer ben Amishadai (Dan) · Teves',
     'Pagiel ben Ochran (Asher) · Shevat',
     'Achira ben Einan (Naftali) · Adar I',
-    'Levi — no offering; the tribe of Moshe & Aharon · Adar II',
+    'Levi — Aharon kindles the Menorah · Adar II',
     'Nachshon ben Aminadav (Yehudah) · Nissan'
   ];
 
@@ -17954,7 +17958,12 @@ content: ''; float: right; width: 30px; height: 1em;
       const _tifCyc   = _tifRound === 3 ? `Microcosm · Cycle ${_tifCycN} of 2` : `${['','1st','2nd'][_tifRound]} Cycle ${_tifCycN}`;
       cards[4].querySelector('.sefirah-cycle-name').innerHTML = `Midot — 13-Day Nesi’im Cycle`;
       cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
-        ? `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span><br><strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cycleThemeAttr.meaning.split(',')[0]}</span>`
+        // The cycle's Attribute is the frame, not the day, so it is named and
+        // not explained — its meaning ran a fifth line onto a face that was
+        // already the longest on the page. "in" carries the combination the
+        // way Binah's she'be does, and on the thirteen days a cycle opens with
+        // its own Attribute it is not said twice.
+        ? `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>${cycleThemeAttr.name === cy13.attr.name ? '' : `<br><span style="font-size:0.88em;opacity:0.72">in</span> <strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span>`}`
         : `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>` +
           // The two microcosm cycles have no single cycle Attribute; name the
           // set each one is reviewing instead, since that is what tells them apart.
@@ -17964,14 +17973,17 @@ content: ''; float: right; width: 30px; height: 1em;
       // now, so whose day it is should not have to be dug for. It is appended
       // rather than written into the sub-text slot, which a later block
       // empties unconditionally to make room for the Tiferet text row.
+      // Both Nesi'im on one line, joined by the same "in" that joins the two
+      // Attributes above — the day's man inside the cycle's. They had a line
+      // each, with a label each, which is two lines and two labels for one
+      // fact. Given once when the day's Nassi and the cycle's are the same
+      // man, as the Attributes are: that happens on 26 days of the year.
       cards[4].querySelector('.sefirah-main-text').innerHTML +=
-        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Nassi:</span> ${cy13.nassi}` +
-        // Given once when the day's Nassi and the cycle's are the same man —
-        // the same way the Attributes are given once when day and cycle land
-        // on the same one. That happens on 26 days of the year.
+        `<div style="font-size:0.84em;line-height:1.5;margin-top:4px;">` +
+        `<span style="color:var(--ink-dim)">Nassi:</span> ${cy13.nassi}` +
         ((cy13.cycleNassi && cy13.cycleNassi !== cy13.nassi)
-          ? `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle Nassi:</span> ${cy13.cycleNassi}`
-          : '');
+          ? ` <span style="opacity:0.72">in</span> ${cy13.cycleNassi}`
+          : '') + `</div>`;
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
       _tifTags.innerHTML = '';
     }
