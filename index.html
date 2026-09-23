@@ -17963,11 +17963,14 @@ content: ''; float: right; width: 30px; height: 1em;
         // meaning. The Hebrew comes off the face and is not lost: the ⓘ names
         // both Attributes in Hebrew and explains each at length. "in" carries
         // the combination the way Binah's she'be does, and on the thirteen
-        // days a cycle opens with its own Attribute it is not said twice.
+        // days a cycle opens with its own Attribute it is not said twice. The
+        // two run on as one sentence rather than taking a line each: they are
+        // one position, the day's Attribute inside the cycle's, and a break
+        // between them made them look like two readings.
         ? `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br>` +
           `<strong>${cy13.attr.name}</strong> <span style="font-size:0.84em;opacity:0.72">(${cy13.attr.meaning})</span>` +
           (cycleThemeAttr.name === cy13.attr.name ? ''
-            : ` <span style="font-size:0.84em;opacity:0.72">in</span><br>` +
+            : ` <span style="font-size:0.84em;opacity:0.72">in</span> ` +
               `<strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.84em;opacity:0.72">(${cycleThemeAttr.meaning.split(',')[0]})</span>`)
         : `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br>` +
           `<strong>${cy13.attr.name}</strong> <span style="font-size:0.84em;opacity:0.72">(${cy13.attr.meaning})</span>` +
