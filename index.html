@@ -18395,9 +18395,13 @@ content: ''; float: right; width: 30px; height: 1em;
     const _hodBreak = AYIN_BET_BREAKS.indexOf(_hodDay) !== -1;
     const _hodName  = _hodBreak ? 0 : Math.floor((_hodNamed - 1) / 5) + 1;   // 1–72
     const _hodStep  = _hodBreak ? 0 : ((_hodNamed - 1) % 5) + 1;             // 1–5
-    const _hodPhase = (n, sef, glyph, word) =>
-      `<div style="line-height:1.6;">${glyph} <span style="color:var(--ink-dim);` +
-      `font-size:calc(11px * var(--ts, 1));">Half-Day ${n} &middot; ${word}</span> ` +
+    // The phase is named, not pictured. A sunrise and a moon said no more
+    // than Ratzo and Shov already say, in a face that is otherwise set in
+    // type — the page marks its kinds with ✦ and ✡ and Hebrew, not with
+    // emoji.
+    const _hodPhase = (n, sef, word) =>
+      `<div style="line-height:1.6;"><span style="color:var(--ink-dim);` +
+      `font-size:calc(11px * var(--ts, 1));">${word} &middot; Half-Day ${n}</span> ` +
       `<strong>${sef[0]}</strong> <span style="color:var(--ink-mid);font-size:0.9em">` +
       `&mdash; ${sef[1]}</span></div>`;
     document.getElementById('hod-pos').innerHTML =
@@ -18413,12 +18417,12 @@ content: ''; float: right; width: 30px; height: 1em;
         // A cornerstone takes no Sefirah. The ten are walked by the Names,
         // and these four days stand outside them — giving them Keter and
         // Chochmah would be inventing a place in a matrix they are not in.
-        ? `<div style="line-height:1.6;">\u{1F305} <span style="color:var(--ink-dim);` +
+        ? `<div style="line-height:1.6;"><span style="color:var(--ink-dim);` +
           `font-size:calc(11px * var(--ts, 1));">Half-Days ${_hodDay * 2 - 1} &amp; ` +
           `${_hodDay * 2}</span> <span style="color:var(--ink-mid);font-size:0.9em">` +
           `&mdash; outside the 72 \u00d7 10, binding the Names to the Name</span></div>`
-        : _hodPhase(_hodDay * 2 - 1, HOD_SEFIROT[(_hodStep - 1) * 2], '\u{1F305}', 'Ratzo') +
-          _hodPhase(_hodDay * 2, HOD_SEFIROT[(_hodStep - 1) * 2 + 1], '\u{1F319}', 'Shov'));
+        : _hodPhase(_hodDay * 2 - 1, HOD_SEFIROT[(_hodStep - 1) * 2], 'Ratzo') +
+          _hodPhase(_hodDay * 2, HOD_SEFIROT[(_hodStep - 1) * 2 + 1], 'Shov'));
     // The stream runs out of the Shulchan Aruch into the Chofetz Chaim, so a
     // day may hold one of each — day 349 pairs the last siman with the Petichah.
     const _hodUnit = u => u.url
