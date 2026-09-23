@@ -672,19 +672,26 @@ text-transform: uppercase;
    another, four screens of preamble between the picture and the date. Now
    they share one strip, in the idiom the cards use, and none is open until
    one is asked for. */
-/* The two panes under the week's artwork. They stand on the page rather than
-   inside a modal, so they carry a card's border of their own; two buttons
-   split the strip evenly and neither has to wrap. */
-.intro-panes {
+/* The week's page and its two panes are one card, the way Keter's dial and
+   its strip are: the artwork is the face, the strip the control beneath it.
+   The card owns the border and the rounding, and the image is flush to the
+   inside of it — no frame of its own, no gap, nothing between the picture
+   and the buttons. */
+.week-card {
 max-width: 680px;
-margin: 0 auto 16px;
+margin: 16px auto;
 background: var(--bg-card);
 border: 1px solid var(--border);
-border-radius: 4px;
+border-radius: 6px;
 overflow: hidden;
 }
-.intro-panes .pane-strip { border-top: none; }
+#week-art { line-height: 0; }                 /* no descender gap under the img */
+#week-art img { display: block; width: 100%; height: auto; }
+.week-card .intro-panes { max-width: none; margin: 0; background: none;
+  border: none; border-radius: 0; }
+.intro-panes .pane-strip { border-top: 1px solid var(--border); }
 .intro-panes .pane-btn { flex: 1 1 50%; border-bottom: 1px solid var(--border); }
+.intro-panes .pane-body { border-top: none; }
 
 .pane-prose {
 padding: 14px 16px;
@@ -1606,6 +1613,26 @@ z-index: 1;
 /* The rows clip their overflow to keep their corners, which would cut the
    reach above and below away again. */
 #malchut-week-face .mal-book-row { overflow: visible; }
+
+/* The week's seven books, folded under the step they belong to. The summary
+   reads as one of this card's own labels rather than as a browser control,
+   so the default marker goes and a ▾ is drawn where the book rows draw one. */
+.mal-week-fold { margin-top: 10px; }
+.mal-week-fold > summary {
+  list-style: none;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-size: calc(10.5px * var(--ts, 1));
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 4px 0;
+}
+.mal-week-fold > summary::-webkit-details-marker { display: none; }
+.mal-week-fold > summary::after { content: ' \25BE'; font-size: 0.9em; opacity: .6; }
+.mal-week-fold[open] > summary::after { content: ' \25B4'; }
+.mal-week-fold > summary:hover { color: var(--gold-mid); }
+.mal-week-fold > div { margin-top: 8px; }
 .mal-book-more { font-size:0.8em; opacity:.6; }
 .mal-book-label {
 font-size: calc(10.5px * var(--ts, 1));
@@ -2567,11 +2594,14 @@ content: ''; float: right; width: 30px; height: 1em;
     </div>
   </div>
 
-  <!-- The week's page from the book, set under the title where the book sets
-       it. Which page is decided in render() from the Kabbalah of Time week;
-       the block hides itself on a week whose page we do not yet hold, rather
-       than leaving a broken image at the top of the app. -->
-  <div id="week-art" style="margin:16px 0;text-align:center;display:none;"></div>
+  <!-- The week's page from the book with its two panes, read as one card the
+       way Keter's dial is: the artwork is the face, the strip is the control
+       beneath it, and there is no seam between them. Which page is decided in
+       render() from the Kabbalah of Time week; the card hides itself on a
+       week whose page we do not yet hold, rather than leaving a broken image
+       at the top of the app. -->
+  <div class="week-card" id="week-card">
+  <div id="week-art" style="display:none;"></div>
 
   <!-- Under the week's own page from the book: the creature that page
        pictures, and beside it why any of this is shaped the way it is. Two
@@ -2608,6 +2638,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div style="margin:10px 0 4px;padding:10px 12px;border-left:2px solid var(--gold);background:var(--bg-card-alt);border-radius:0 6px 6px 0;"><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">י״ט</span>&nbsp; לֹא־יִהְיֶה־לָּךְ עוֹד הַשֶּׁמֶשׁ לְאוֹר יוֹמָם וּלְנֹגַהּ הַיָּרֵחַ לֹא־יָאִיר לָךְ וְהָיָה־לָךְ ה׳ לְאוֹר עוֹלָם וֵאלֹקַיִךְ לְתִפְאַרְתֵּךְ</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">You shall no longer have the sun for light by day, and for brightness the moon shall not give you light; but the Lord shall be to you for an everlasting light, and your God for your glory.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ׳</span>&nbsp; לֹא־יָבוֹא עוֹד שִׁמְשֵׁךְ וִירֵחֵךְ לֹא יֵאָסֵף כִּי ה׳ יִהְיֶה־לָּךְ לְאוֹר עוֹלָם וְשָׁלְמוּ יְמֵי אֶבְלֵךְ</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">Your sun shall no longer set, neither shall your moon be gathered in, for the Lord shall be to you for an everlasting light, and the days of your mourning shall be completed.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ״א</span>&nbsp; וְעַמֵּךְ כֻּלָּם צַדִּיקִים לְעוֹלָם יִירְשׁוּ אָרֶץ נֵצֶר מַטָּעַי מַעֲשֵׂה יָדַי לְהִתְפָּאֵר</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">And your people, all of them righteous, shall inherit the land forever — a scion of My planting, the work of My hands, in which I will glory.</div></div><div style="margin-bottom:10px;"><div dir="rtl" lang="he" style="font-size:1.02em;line-height:1.95;text-align:right;"><span style="color:var(--gold-mid);font-size:0.8em;">כ״ב</span>&nbsp; הַקָּטֹן יִהְיֶה לָאֶלֶף וְהַצָּעִיר לְגוֹי עָצוּם אֲנִי ה׳ בְּעִתָּהּ אֲחִישֶׁנָּה</div><div style="font-size:0.9em;color:var(--ink-mid);line-height:1.6;margin-top:2px;text-align:left;">The smallest shall become a thousand, and the least a mighty nation. I am the Lord; in its time I will hasten it.</div></div><div style="font-size:0.82em;color:var(--ink-dim);margin-top:2px;text-align:left;"><a href="https://www.sefaria.org/Isaiah.60.19-22?lang=bi" target="_blank" rel="noopener" onclick="event.stopPropagation();" style="color:var(--gold)">Yeshayahu 60:19–22</a></div></div>
     <p>הַקָּטֹן יִהְיֶה לָאֶלֶף &mdash; the smallest shall become a thousand &mdash; is the rule the thirty steps are kept by: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure. And בְּעִתָּהּ אֲחִישֶׁנָּה &mdash; in its time, or hastened &mdash; is the seam this calendar stands on: a year already fixed, and a day still to be walked.</p>
     </div>
+  </div>
   </div>
 
   <!-- DATE BAR — the master control: everything below derives from this day -->
@@ -3842,6 +3873,19 @@ content: ''; float: right; width: 30px; height: 1em;
           <div id="malchut-cycle-name" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Daily Text</div>
           <div class="sefirah-main-text" id="malchut-main">Loading…</div>
           <div class="sefirah-sub-text" id="malchut-sub"></div>
+          <!-- THE WEEK'S SEVEN BOOKS — today's reading, the week's theme, and
+               one line to each night. They carry no מעלה, no מיעוט, no ✡ and
+               no menorah of their own, and they stood at the foot of Ma'alot
+               as a block of their own, which put today's reading on the page
+               twice: once here as the step, and again there at the head of
+               the week. They are folded under the step they belong to now,
+               shut, so the step reads as one thing and the week is one tap
+               away. Native details/summary: it needs no script, it remembers
+               nothing it should not, and it is open to a keyboard. -->
+          <details class="mal-week-fold">
+            <summary>The week&rsquo;s seven books</summary>
+            <div id="malchut-week-face"></div>
+          </details>
         </div>
         <div class="malchut-section">
           <div class="keter-section-label">✦ Works of Her Praise — בשערים מעשיה <span class="maalah">מעלה א׳</span></div>
@@ -3849,14 +3893,6 @@ content: ''; float: right; width: 30px; height: 1em;
           <div class="sefirah-main-text" id="malchut-lh-face">Loading…</div>
         </div>
       </div>
-      <!-- THE WEEK'S SEVEN BOOKS — today's reading, the week's theme, and one
-           line to each night. They carry no מעלה, no מיעוט, no ✡ and no
-           menorah of their own, so when the readings were filed by kind they
-           fell through to the matter behind the ⓘ. They are not a note about
-           the cycle, though: they are the seven daily texts the card is
-           named for. Written here, and sent to the foot of Ma'alot, under
-           the three steps of the climb they belong to. -->
-      <div id="malchut-week-face" data-pane-to="maalot" style="margin-top:16px;"></div>
     </div>
     <div class="sefirah-detail">
       <!-- Likkutei Sichos — first section, above KSA -->
@@ -10274,62 +10310,62 @@ content: ''; float: right; width: 30px; height: 1em;
   // drawn size, because the pages are not all the same shape, and the space
   // has to be reserved before the image arrives or the title jumps.
   const WEEK_ART = {
-    '25-adar1':  [900, 906],
-    '24-adar1':  [900, 888],
-    '23-adar1':  [900, 889],
-    '22-adar1':  [900, 874],
-    '1':   [900, 994],
-    '2':   [900, 833],
+    '25-adar1':  [898, 891],
+    '24-adar1':  [899, 887],
+    '23-adar1':  [897, 886],
+    '22-adar1':  [899, 860],
+    '1':   [900, 919],
+    '2':   [853, 812],
     '3':   [900, 865],
-    '4':   [900, 897],
-    '5':   [900, 880],
+    '4':   [900, 892],
+    '5':   [900, 878],
     '6':   [900, 884],
-    '7':   [900, 898],
-    '8':   [900, 832],
-    '9':   [900, 834],
-    '10':  [900, 835],
-    '11':  [900, 837],
-    '12':  [900, 828],
-    '13':  [900, 833],
-    '14':  [900, 831],
-    '15':  [900, 846],
-    '16':  [900, 817],
+    '7':   [900, 865],
+    '8':   [847, 830],
+    '9':   [846, 831],
+    '10':  [846, 831],
+    '11':  [848, 834],
+    '12':  [847, 828],
+    '13':  [846, 832],
+    '14':  [843, 828],
+    '15':  [849, 845],
+    '16':  [838, 817],
     '17':  [900, 897],
-    '18':  [900, 859],
-    '19':  [900, 834],
-    '20':  [900, 894],
-    '21':  [900, 843],
-    '22':  [900, 834],
-    '23':  [900, 834],
-    '24':  [900, 843],
-    '25':  [900, 840],
-    '26':  [900, 841],
-    '27':  [900, 842],
-    '28':  [900, 853],
-    '29':  [900, 848],
-    '30':  [900, 837],
-    '31':  [900, 839],
-    '32':  [900, 818],
-    '33':  [900, 935],
-    '34':  [900, 839],
-    '35':  [900, 831],
-    '36':  [900, 831],
-    '37':  [900, 786],
-    '38':  [900, 783],
-    '39':  [900, 841],
-    '40':  [900, 839],
-    '41':  [900, 888],
-    '42':  [900, 796],
-    '43':  [900, 840],
-    '44':  [900, 946],
-    '45':  [900, 948],
-    '46':  [900, 903],
-    '47':  [900, 838],
-    '48':  [900, 844],
-    '49':        [900, 844],
-    '50':  [900, 897],
-    '51':  [900, 868],
-    '52':  [900, 906],
+    '18':  [841, 817],
+    '19':  [839, 818],
+    '20':  [900, 850],
+    '21':  [847, 842],
+    '22':  [847, 823],
+    '23':  [845, 823],
+    '24':  [847, 843],
+    '25':  [846, 840],
+    '26':  [847, 841],
+    '27':  [847, 842],
+    '28':  [850, 844],
+    '29':  [848, 844],
+    '30':  [848, 825],
+    '31':  [840, 838],
+    '32':  [833, 818],
+    '33':  [900, 894],
+    '34':  [850, 838],
+    '35':  [841, 820],
+    '36':  [840, 819],
+    '37':  [846, 786],
+    '38':  [806, 783],
+    '39':  [851, 841],
+    '40':  [849, 839],
+    '41':  [899, 882],
+    '42':  [843, 796],
+    '43':  [838, 824],
+    '44':  [900, 900],
+    '45':  [900, 896],
+    '46':  [900, 894],
+    '47':  [841, 838],
+    '48':  [832, 843],
+    '49':        [841, 843],
+    '50':  [898, 896],
+    '51':  [897, 866],
+    '52':  [900, 882],
   };
 
   // A leap year runs 56 weeks and the artwork runs 52, because weeks 22-25
@@ -10349,13 +10385,23 @@ content: ''; float: right; width: 30px; height: 1em;
     if (!el) return;
     const key = artKeyForWeek(week, weeks);
     const size = key && WEEK_ART[key];
-    if (!size) { el.style.display = 'none'; el.innerHTML = ''; return; }
+    // The card carries the artwork and the two panes together, so a week with
+    // no page hides the card rather than leaving the strip standing alone
+    // over nothing.
+    const card = document.getElementById('week-card');
+    if (!size) {
+      el.style.display = 'none'; el.innerHTML = '';
+      if (card) card.style.display = 'none';
+      return;
+    }
     const src = 'art/week-' + (key.length === 1 ? '0' + key : key) + '.jpg';
-    // It opens the page, so it is fetched eagerly rather than lazily.
+    // It opens the page, so it is fetched eagerly rather than lazily. The
+    // width and height are carried so the space is reserved before the image
+    // arrives and the title does not jump; the CSS sizes it.
     el.innerHTML = '<img src="' + src + '" width="' + size[0] + '" height="' + size[1] + '"' +
-      ' fetchpriority="high" alt="Week ' + week + ' of the Kabbalah of Time — the page from the book."' +
-      ' style="max-width:100%;height:auto;border-radius:6px;">';
+      ' fetchpriority="high" alt="Week ' + week + ' of the Kabbalah of Time — the page from the book.">';
     el.style.display = '';
+    if (card) card.style.display = '';
   }
 
   // Parasha → Sefaria Zohar section. ZOHAR_DAF_SECTIONS is asked first for
