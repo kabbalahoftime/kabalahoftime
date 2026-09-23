@@ -334,7 +334,9 @@ letter-spacing: 1px;
 
 /* ── STARS — the surrounding light (Or Makif) ──
    Every ✡ in the cards is a text that is not one of the thirty counted steps.
-   Tapping one gathers it for the day; there is no total to reach. */
+   Tapping one gathers it for the day. There are twenty-two, which is what
+   fills the ring of eleven at two to a star; the ten who carry the menorah
+   are companions too, but they are counted on the stand and not in the ring. */
 .star-mark {
   cursor: pointer;
   display: inline-block;
@@ -14182,13 +14184,15 @@ content: ''; float: right; width: 30px; height: 1em;
     });
   }
 
-  // The seven Chabad Rebbeim — one per Sefirah, Chesed through Malchut. They
-  // are found by the ordinal their heading carries rather than by a glyph, so
-  // the heading holds no character of its own and the menorah is prepended
-  // here. The mark takes the ordinal too, which is what lets it fill its own
-  // link of the chain instead of a star in the ring. starIdFor is read after
-  // the mark is in place: an <svg> contributes no text, so each Rebbe keeps
-  // the id he had when he wore a star.
+  // The ten who carry the menorah — the Baal Shem Tov, the Maggid and the
+  // Meor Einayim in Keter, Chochmah and Binah, then the seven of Chabad from
+  // Chesed down to Malchut. They are found by the ordinal their heading
+  // carries rather than by a glyph, so the heading holds no character of its
+  // own and the menorah is prepended here. The mark takes the ordinal too,
+  // which is what lets it fill its own light on the stand instead of a star
+  // in the ring. starIdFor is read after the mark is in place: an <svg>
+  // contributes no text, so each bearer keeps the id he had when he wore a
+  // star.
   function markRebbeGlyphs() {
     document.querySelectorAll('[data-rebbe]').forEach(el => {
       // The mark this function inserts carries the ordinal too, so it comes
@@ -14213,7 +14217,9 @@ content: ''; float: right; width: 30px; height: 1em;
   // moon and eleven stars. Each is three crossed strokes, which reads as a
   // star at this size where a hexagram would only smudge. Every companion
   // gathered fills half a star, so the day's twenty-two make the eleven
-  // exactly. A geometric half would be under two pixels across, so the half
+  // exactly. The ten who carry the menorah are counted apart and fill no
+  // star, which is why a day holds thirty-two marks and the ring still
+  // closes. A geometric half would be under two pixels across, so the half
   // state is carried by brightness instead: dark, kindled, full.
   const STARS_IN_RING = 11;
   function buildStarRing() {
@@ -23290,11 +23296,11 @@ content: ''; float: right; width: 30px; height: 1em;
 
   <p><strong>Where to start.</strong> The <strong>Today&rsquo;s Ladder</strong> block, just under the date. It names the next step being asked for and goes straight to it. That is enough to begin; everything below is here for when you want it.</p>
 
-  <h3 class="hg-h">The two marks</h3>
-  <p>Every reading in every card wears one of two marks, and they divide the whole app between them.</p>
-  <p><strong>&#10022;</strong> is a <strong>counted step</strong> &mdash; light drawn inward, <em>Or Pnimi</em>. Beside its heading sits a gold <strong>מעלה</strong> or <strong>מיעוט</strong> tag. There are thirty of them in a day and they are taken strictly in order.</p>
-  <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. Companions may be taken in any order, and there is no total to reach &mdash; what is on offer changes with the day, so the count says how many you reached, never how many you missed. Each one lights in the sun&rsquo;s gold and fills half a star in the ring around the moon &mdash; two to a star, so a full day&rsquo;s twenty-two make the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
-  <p>One closed set among the companions wears a <strong>seven-branched menorah</strong> instead of a star: the seven Chabad Rebbeim, one to each Sefirah from Chesed down to Malchut. They are the ground the companions stand on. A gathered Rebbe lights blue and fills his own link in the chain of seven beside the moon.</p>
+  <h3 class="hg-h">The marks</h3>
+  <p>Almost every reading wears a mark that says what it is, and the marks are what the counts are kept by. A few readings wear none &mdash; the week&rsquo;s seven books in Malchut, the Zohar that stands with Thursday&rsquo;s Ramchal &mdash; and those are simply read.</p>
+  <p><strong>&#10022;</strong> is a <strong>counted step</strong> &mdash; light drawn inward, <em>Or Pnimi</em>. Beside its heading sits a gold <strong>מעלה</strong> or <strong>מיעוט</strong> tag. There are thirty of them in a day, fifteen of each, and they are taken strictly in order.</p>
+  <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. They may be taken in any order &mdash; unlike the thirty steps, none of them waits on another. Each one lights in the sun&rsquo;s gold and fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
+  <p>One closed set among them wears a <strong>menorah</strong> rather than a star, and it is a chanukiah: ten who carry it on nine lights. The Baal Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven of Chabad from the Alter Rebbe to the Rebbe. Eight take the eight branches, in the order the teaching came down and from the right, as the lights of Chanukah are added; the ninth, the Rayatz, is the shamash, raised at the centre &mdash; the one whose whole work was to light others; and the tenth takes no branch of his own, because when he is gathered every light on the stand is lit. A gathered bearer lights blue and fills his own place on the menorah beside the moon.</p>
 
   <h3 class="hg-h">The thirty steps</h3>
   <p>Tap the gold <strong>מעלה</strong> tags in order, א׳ to ט״ו, climbing from Malchut up to Keter; the moon in the clock above fills as you go, and at fifteen it becomes the sun, whose rays then remain. Then return: the <strong>מיעוט</strong> tags inside the cards mark fifteen steps of listening back down from Keter to Malchut, and the moon wanes as you go &mdash; a whole month walked in a single day.</p>
