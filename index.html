@@ -308,6 +308,23 @@ color: var(--ink-soft);
 letter-spacing: 1px;
 }
 
+/* The one sentence that says what this is. It was buried at the top of the
+   How-to Guide, where it was read only by someone who had already decided to
+   open a guide — by which time they no longer needed telling. It belongs
+   under the title, where it is the first thing read and answers the question
+   before it is asked. Upright, not italic: the line above is the book's
+   own subtitle and this is a plain statement, and two italic lines running
+   together read as one. */
+.title-tag {
+font-family: 'Cormorant Garamond', serif;
+font-size: calc(15px * var(--ts, 1));
+line-height: 1.5;
+color: var(--ink-soft);
+max-width: 30em;
+margin: 8px auto 0;
+padding: 0 16px;
+}
+
 /* ── THE DAY'S GATHERINGS ──
    The ten prayers and the thirty steps, counted side by side. They stood in a
    clock above the cards, beside a local and a Jerusalem time; the times are
@@ -708,13 +725,6 @@ border-top: 1px solid var(--border);
    Below them strong is a term marker — the names of the marks and controls —
    and gilding every one of those would turn half the page gold. */
 .hg-page > p:nth-of-type(-n+2) strong { color: var(--gold); }
-.start-line {
-font-family: 'Cormorant Garamond', serif;
-font-size: 1rem;
-line-height: 1.6;
-color: var(--ink);
-margin-bottom: 1em;
-}
 .keter-card {
 border: 2px solid var(--border-strong);
 border-radius: 4px;
@@ -2574,6 +2584,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="title-hebrew">קַבָּלַת הַזְּמַן</div>
     <div class="title-main">Kabbalah of Time</div>
     <div class="title-sub">Daily Counting, Daily Calling — ספירת הזמן</div>
+    <div class="title-tag">A daily practice that maps the Jewish year onto Kabbalistic structure.</div>
   </header>
 
   <!-- READING CONTROLS — first thing under the header rule. Someone who finds
@@ -23402,8 +23413,6 @@ content: ''; float: right; width: 30px; height: 1em;
      creature has gone to its own block above the date, where it is seen
      without opening anything. -->
 <div class="hg-page pane-prose" id="hg-page">
-
-  <div class="start-line">A daily practice that maps the Jewish year onto Kabbalistic structure.</div>
 
   <p><strong>What you&rsquo;re looking at.</strong> Today&rsquo;s date maps onto several nested cycles at once &mdash; a day, a week, a month, a season, a year &mdash; each drawn from a different Kabbalistic or textual structure. Every card below is one of those cycles: it opens with the structure that defines it, and carries beneath it the text that structure measures. Tap a card to open it; tap the <strong>&#9432;</strong> at its top-right corner to learn what its cycle means.</p>
 
