@@ -6895,7 +6895,7 @@ content: ''; float: right; width: 30px; height: 1em;
   // 13-day cycle — enriched with 13 Attributes
   // Micha's 13 Attributes of Mercy (Micah 7:18-20) — Cycles 1-13
   const THIRTEEN_ATTRIBUTES = [
-    { num: 1,  name: 'Mi-El Kamocha', hebrew: 'מִי אֵ-ל כָּמוֹךָ', meaning: 'Who is a G-d like You (in compassion)',
+    { num: 1,  name: 'Mi-El Kamocha', hebrew: 'מִי אֵ-ל כָּמוֹךָ', meaning: 'Who is a G-d like You, in compassion',
       expl: 'He is patient and tolerant, bearing insult, and does not withhold His goodness from the one who offends Him. Man should be willing to overlook slights, and go on helping even those who cause him distress.' },
     { num: 2,  name: 'Noseh Avon', hebrew: 'נֹשֵׂא עָוֹן', meaning: 'Who bears iniquity',
       expl: 'A sin creates an accuser &mdash; &ldquo;one who commits a transgression acquires an accuser against himself&rdquo; &mdash; and that force is borne by Hashem rather than by the sinner, until repentance or affliction wears it away. Man needs greater patience still than the first Attribute asks: to accept a person even while the consequences of his wrongdoing are still in effect.' },
@@ -7123,7 +7123,7 @@ content: ''; float: right; width: 30px; height: 1em;
     'Achiezer ben Amishadai (Dan) · Teves',
     'Pagiel ben Ochran (Asher) · Shevat',
     'Achira ben Einan (Naftali) · Adar I',
-    'Levi — Aharon kindles the Menorah · Adar II',
+    'Aharon (Levi) · Adar II',
     'Nachshon ben Aminadav (Yehudah) · Nissan'
   ];
 
@@ -14484,7 +14484,7 @@ content: ''; float: right; width: 30px; height: 1em;
     },
     tiferet: {
       title: 'Midot — 13-Day Nesi’im Cycle',
-      main: "One of Hashem's Thirteen Attributes of Mercy each day, the cycle completing 28 times a year (28 = כח, \"strength\"): cycles 1–13 follow Micha's inner vessels, 14–26 Moshe's outer ones. </p><p>Mercy is Tiferet's essence — beauty as compassion balanced. Cycles 27–28 close the year as a microcosm of the whole. </p><p>Each cycle carries a text of its own: cycles 1–13 a chapter of the Alter Rebbe’s Seder Birkas HaNehenin, 14–26 one of Rebbe Nachman’s thirteen Tales — the Lost Princess opening in Adar, the Seven Beggars falling in Elul — and the closing two review all twenty-six, a chapter or a tale a day. In a leap year the extra 28 days read the Talks Following the Tales.",
+      main: "One of Hashem's Thirteen Attributes of Mercy each day, the cycle completing 28 times a year (28 = כח, \"strength\"): cycles 1–13 follow Micha's inner vessels, 14–26 Moshe's outer ones. </p><p>Mercy is Tiferet's essence — beauty as compassion balanced. Cycles 27–28 close the year as a microcosm of the whole. </p><p>Twelve of the thirteen days carry a Nassi who brought an offering at the dedication of the Mishkan; the thirteenth carries Aharon. Levi brought none among the twelve — it is the tribe of Moshe and Aharon — and what stands in its place is Aharon's own: the kindling of the Menorah, which the Torah sets immediately after the twelve days of the Nesi'im, and which Rashi reads as the answer to his distress at being left out. His is the greater portion, because the lamps endure. </p><p>Each cycle carries a text of its own: cycles 1–13 a chapter of the Alter Rebbe’s Seder Birkas HaNehenin, 14–26 one of Rebbe Nachman’s thirteen Tales — the Lost Princess opening in Adar, the Seven Beggars falling in Elul — and the closing two review all twenty-six, a chapter or a tale a day. In a leap year the extra 28 days read the Talks Following the Tales.",
       meta: 'An original Kabbalah of Time cycle · Micha 7:18–20 · Shemot 34:6–7'
     },
     netzach: {
@@ -17958,13 +17958,19 @@ content: ''; float: right; width: 30px; height: 1em;
       const _tifCyc   = _tifRound === 3 ? `Microcosm · Cycle ${_tifCycN} of 2` : `${['','1st','2nd'][_tifRound]} Cycle ${_tifCycN}`;
       cards[4].querySelector('.sefirah-cycle-name').innerHTML = `Midot — 13-Day Nesi’im Cycle`;
       cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
-        // The cycle's Attribute is the frame, not the day, so it is named and
-        // not explained — its meaning ran a fifth line onto a face that was
-        // already the longest on the page. "in" carries the combination the
-        // way Binah's she'be does, and on the thirteen days a cycle opens with
-        // its own Attribute it is not said twice.
-        ? `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>${cycleThemeAttr.name === cy13.attr.name ? '' : `<br><span style="font-size:0.88em;opacity:0.72">in</span> <strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cycleThemeAttr.hebrew}</span>`}`
-        : `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br><strong>${cy13.attr.name}</strong> <span style="font-size:0.95em;opacity:0.8">${cy13.attr.hebrew}</span><br><span style="font-size:0.88em;opacity:0.72">${cy13.attr.meaning}</span>` +
+        // Each Attribute on one line with its meaning in brackets beside it,
+        // rather than a line for the name and another under it for the
+        // meaning. The Hebrew comes off the face and is not lost: the ⓘ names
+        // both Attributes in Hebrew and explains each at length. "in" carries
+        // the combination the way Binah's she'be does, and on the thirteen
+        // days a cycle opens with its own Attribute it is not said twice.
+        ? `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br>` +
+          `<strong>${cy13.attr.name}</strong> <span style="font-size:0.84em;opacity:0.72">(${cy13.attr.meaning})</span>` +
+          (cycleThemeAttr.name === cy13.attr.name ? ''
+            : ` <span style="font-size:0.84em;opacity:0.72">in</span><br>` +
+              `<strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.84em;opacity:0.72">(${cycleThemeAttr.meaning.split(',')[0]})</span>`)
+        : `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br>` +
+          `<strong>${cy13.attr.name}</strong> <span style="font-size:0.84em;opacity:0.72">(${cy13.attr.meaning})</span>` +
           // The two microcosm cycles have no single cycle Attribute; name the
           // set each one is reviewing instead, since that is what tells them apart.
           `<br><span style="font-size:0.85em;color:var(--ink-dim)">${cy13.setType}</span>`;
@@ -17982,7 +17988,7 @@ content: ''; float: right; width: 30px; height: 1em;
         `<div style="font-size:0.84em;line-height:1.5;margin-top:4px;">` +
         `<span style="color:var(--ink-dim)">Nassi:</span> ${cy13.nassi}` +
         ((cy13.cycleNassi && cy13.cycleNassi !== cy13.nassi)
-          ? ` <span style="opacity:0.72">in</span> ${cy13.cycleNassi}`
+          ? ` <span style="opacity:0.55">/</span> ${cy13.cycleNassi}`
           : '') + `</div>`;
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
       _tifTags.innerHTML = '';
