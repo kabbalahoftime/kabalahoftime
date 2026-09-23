@@ -18868,7 +18868,15 @@ content: ''; float: right; width: 30px; height: 1em;
       const psBtn = document.querySelector('#intro-panes .pane-btn[data-pane="shirah"]');
       const animal = wk && wk.b1_animal;
       if (psBtn) psBtn.style.display = animal ? '' : 'none';
-      if (!animal) { el.style.display = 'none'; return; }
+      if (!animal) {
+        el.style.display = 'none';
+        // Its button has just gone. If the guide was standing on this pane,
+        // it would be left showing an empty panel, so move it off.
+        const host = document.getElementById('intro-panes');
+        if (host && host.getAttribute('data-pane') === 'shirah')
+          setPane(host, HOWTO_PANE);
+        return;
+      }
       const verse = PEREK_SHIRAH_VERSES[animal];
       el.style.display = '';
       // A few creatures sing only under a condition — the wild goose when it
@@ -21993,17 +22001,24 @@ content: ''; float: right; width: 30px; height: 1em;
     document.body.style.overflow = '';
   }
 
+  // The guide opens on this pane. It used to open on none at all — the strip
+  // was left with nothing selected so that the next reader "starts at the
+  // strip" — which meant the guide opened as four tabs over an empty panel,
+  // and looked broken rather than inviting. It opens on Start Here instead,
+  // which is what someone opening a how-to guide is asking for; the reader
+  // still starts in the same place every time, just not on a blank one.
+  const HOWTO_PANE = 'start';
   function openHowtoGuide() {
     document.getElementById('hg-modal').style.display = 'block';
     document.body.style.overflow = 'hidden';
+    const host = document.getElementById('intro-panes');
+    if (host) setPane(host, HOWTO_PANE);
   }
   function closeHowtoGuide() {
     document.getElementById('hg-modal').style.display = 'none';
     document.body.style.overflow = '';
-    // Left shut, so the next opening starts at the strip rather than wherever
-    // the last reader happened to stop.
     const host = document.getElementById('intro-panes');
-    if (host) setPane(host, '');
+    if (host) setPane(host, HOWTO_PANE);
   }
 
   // ── NATIVE BRIDGE ──
@@ -23212,26 +23227,24 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="wr-header">
       <div>
         <div class="wr-title">How-to Guide</div>
-        <div class="wr-subtitle">The week&rsquo;s creature, where to start, and how this is used</div>
+        <div class="wr-subtitle">Where to start, how this is used, and the week&rsquo;s creature</div>
       </div>
       <button class="wr-close" onclick="closeHowtoGuide()" aria-label="Close">&#10005;</button>
     </div>
 <div class="pane-host intro-panes" id="intro-panes">
+  <!-- In the order a reader needs them: where to begin, then how the marks
+       work, then why any of it is shaped this way — and the week's creature
+       last, which is the one pane that is not instruction. Start Here is the
+       pane the guide opens on; see HOWTO_PANE. -->
   <div class="pane-strip" role="tablist" aria-label="About this practice">
-  <button type="button" class="pane-btn" data-pane="shirah" role="tab"
-          aria-selected="false" onclick="selectPane(this)">Perek Shirah</button>
   <button type="button" class="pane-btn" data-pane="start" role="tab"
           aria-selected="false" onclick="selectPane(this)">Start Here</button>
-  <button type="button" class="pane-btn" data-pane="intro" role="tab"
-          aria-selected="false" onclick="selectPane(this)">Introduction</button>
   <button type="button" class="pane-btn" data-pane="howto" role="tab"
           aria-selected="false" onclick="selectPane(this)">How to Use</button>
-  </div>
-  <div class="pane-body pane-prose" data-pane="shirah">
-  <div id="perek-shirah-week" style="display:none;">
-    <div class="ps-label"><a id="ps-doc-link" target="_blank" style="color:inherit">Perek Shirah</a> · this week</div>
-    <div class="ps-line" id="ps-line"></div>
-  </div>
+  <button type="button" class="pane-btn" data-pane="intro" role="tab"
+          aria-selected="false" onclick="selectPane(this)">Introduction</button>
+  <button type="button" class="pane-btn" data-pane="shirah" role="tab"
+          aria-selected="false" onclick="selectPane(this)">Perek Shirah</button>
   </div>
   <div class="pane-body pane-prose" data-pane="start">
     <div class="start-line">A daily practice that maps the Jewish year onto Kabbalistic structure.</div>
@@ -23273,7 +23286,16 @@ content: ''; float: right; width: 30px; height: 1em;
       <li>Fixed Hours vs. Sha'ot Zmaniyot switches the day's sefirah-times between standard clock hours and halachic "proportional hours" for your chosen city.</li>
       <li>Under the title sit two small settings for reading. <strong>Contrast</strong> / <strong>Soft</strong> switches the page between the darker, more legible grade and the warmer one — Contrast is the default; both are readable, Soft is simply gentler on the eye. <strong>A</strong> / <strong>A+</strong> / <strong>A++</strong> sets the size of the text. Both are remembered.</li>
     </ul>
-  
+
+  </div>
+  <!-- Last, and the only pane that changes with the week. Its button is
+       hidden on a week the tables hold no creature for, and render then
+       moves the guide off this pane if it was the one showing. -->
+  <div class="pane-body pane-prose" data-pane="shirah">
+  <div id="perek-shirah-week" style="display:none;">
+    <div class="ps-label"><a id="ps-doc-link" target="_blank" style="color:inherit">Perek Shirah</a> · this week</div>
+    <div class="ps-line" id="ps-line"></div>
+  </div>
   </div>
 </div>
     <div class="wr-footer">
