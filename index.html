@@ -3093,6 +3093,12 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="keter-section-label" id="hod-zohar-label">✦ Zohar — Chok L'Yisrael <span class="maalah">מעלה ה׳</span></div>
       <div id="hod-zohar-face" class="sefirah-main-text">Loading…</div>
     </div>
+    <!-- A companion, not a counted step — its heading wears a ✡ — so it goes
+         to Stars rather than standing on the face, as Malchut's Yad does. -->
+    <div data-pane-to="stars">
+      <div class="keter-section-label" id="hod-tde-label">✡ Tanna D’vei Eliyahu</div>
+      <div class="sefirah-sub-text" id="hod-tde-face" style="margin-top:2px;"></div>
+    </div>
     <div class="sefirah-sub-text" style="display:none;"></div>
     <div class="sefirah-tags"></div>
     <div class="sefirah-detail"></div>
@@ -7227,6 +7233,58 @@ content: ''; float: right; width: 30px; height: 1em;
   function getHalachaInfo(d) {
     d = Math.max(1, d); // cycle begins at the epoch; dates before it have no defined cycle/day
     return { day: d, m: halachaUnit(d * 2 - 1), a: halachaUnit(d * 2) };
+  }
+
+  // ── TANNA D'VEI ELIYAHU — 56 chapters over the 728 half-days ──────────────
+  // Eliyahu Rabbah's 31 chapters and Eliyahu Zuta's 25 are 56 together, and
+  // 56 × 13 = 728 exactly: one chapter to every thirteen half-days. Thirteen
+  // half-days is six and a half days, so a chapter changes hands at midday
+  // rather than at a date, and every thirteen days carries exactly two — 26
+  // half-days, which is יהוה. The four 91-day tekufot take fourteen chapters
+  // each (14 × 13 = 182 half-days = 91 days), so the reading closes with the
+  // seasons and not only with the year.
+  //
+  // It is the book that gives this card its measure in the first place: Tanna
+  // D'vei Eliyahu is where two halachot a day are promised the World to Come,
+  // and Menachot 99b sets a chapter morning and evening against the Lechem
+  // HaPanim. So the book is read on the rhythm it prescribes.
+  const TDE_RABBAH_CH = 31, TDE_CHAPTERS = 56;
+  function tdeChapter(n) {
+    n = ((((n - 1) % TDE_CHAPTERS) + TDE_CHAPTERS) % TDE_CHAPTERS) + 1;
+    const zuta = n > TDE_RABBAH_CH;
+    const ch   = zuta ? n - TDE_RABBAH_CH : n;
+    return {
+      n, ch, zuta,
+      work:  zuta ? 'Eliyahu Zuta' : 'Eliyahu Rabbah',
+      heb:   zuta ? 'אֵלִיָּהוּ זוּטָא' : 'אֵלִיָּהוּ רַבָּה',
+      label: (zuta ? 'Eliyahu Zuta' : 'Eliyahu Rabbah') + ' ' + ch,
+      url: 'https://www.sefaria.org/Tanna_DeBei_Eliyahu_' +
+           (zuta ? 'Zuta' : 'Rabbah') + '.' + ch + '?lang=bi'
+    };
+  }
+  // d = the day of the KoT year, 1–364, as the halachah is called. Half-days
+  // 2d−1 and 2d; a chapter runs thirteen of them, so six days out of seven
+  // hold one chapter and the seventh holds the seam between two.
+  function getTanaDveiEliyahu(d) {
+    d = ((((d - 1) % 364) + 364) % 364) + 1;
+    const hm = d * 2 - 1, ha = d * 2;
+    const cm = Math.floor((hm - 1) / 13) + 1, ca = Math.floor((ha - 1) / 13) + 1;
+    return {
+      day: d, hm, ha, seam: cm !== ca,
+      m: Object.assign(tdeChapter(cm), { step: ((hm - 1) % 13) + 1 }),
+      a: Object.assign(tdeChapter(ca), { step: ((ha - 1) % 13) + 1 })
+    };
+  }
+  // The intercalary twenty-eight (28 Shevat–25 Adar I) read the whole corpus
+  // through once at two chapters a day — 28 × 2 = 56 — which is the pace
+  // Menachot 99b names outright, one in the morning and one in the evening.
+  // 28 is כֹּחַ, and the sprint is the year's reading held in the hand at full
+  // strength rather than walked. The 364-day count is untouched by it: dEff
+  // steps back past the window, so no chapter is said twice and none missed.
+  function getTanaDveiEliyahuSprint(n) {
+    n = ((((n - 1) % 28) + 28) % 28) + 1;
+    return { day: n, sprint: true,
+             m: tdeChapter(n * 2 - 1), a: tdeChapter(n * 2) };
   }
 
   // Daily text — tonight begins next Hebrew day so use tomorrow's weekday
@@ -14494,8 +14552,8 @@ content: ''; float: right; width: 30px; height: 1em;
     },
     hod: {
       title: '728 Half-Day Cycle',
-      main: "The year is split into 728 half-days — one halachah studied in the morning and one in the afternoon, keeping the rhythm of the Korban Tamid: one lamb offered at dawn and one bein ha'arbayim (Bamidbar 28:3–4), the daily offering that framed every day of the Mikdash.</p><p>With the Mikdash gone, the two daily halachot stand in its place, and Tanna D'Vei Eliyahu teaches that whoever studies two halachot every day merits the World to Come. Menachot 99b gives the measure, and gives it from a second tamid: Rabbi Ami learned from Rabbi Yose that one who studies a single chapter in the morning and one in the evening has fulfilled לא ימוש ספר התורה הזה מפיך — this Book of the Law shall not depart from your mouth, and you shall meditate on it day and night (Yehoshua 1:8).</p><p>He derives it from the Lechem HaPanim: the old bread lifted in the morning and the new set down toward evening, yet the table counted as bearing bread tamid, continually — so too a chapter at each end of the day renders one's Torah continuous, without interruption. On that same page Rabbi Yochanan says in the name of Rashbi that even the morning and evening Kriyat Shema meets the threshold.</p><p>The poskim keep the two tiers distinct. The Rambam (Hilchot Talmud Torah 1:8) and the Shulchan Aruch (Yoreh De’ah 246:1) bind every Jew to fixed times by day and night whatever his circumstances, the Rema allowing Kriyat Shema alone bish’at hadechak; while the Alter Rebbe’s own Shulchan Aruch (Hilchot Talmud Torah 3:1) spells out that the chapter morning and evening is the absolute floor — whoever has further time remains bound to learn to the full measure of his capacity.</p><p>Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day carry Orach Chaim's 697 chapters through most of the year, sealed in the closing days with the Chofetz Chaim's laws of speech. Alongside runs the Zohar on the weekly parasha — its hidden light following the Torah reading — which gives way on Shabbat to Sefer Yetzirah, one passage for each of the 54 parshiyot.</p><p>Underneath the halachic rhythm lies a precise matrix. The 72 Divine Names flowing through the 10 Sefirot give 720 half-days — 72 × 10 — and to these are joined the 8 cornerstone half-days of the 4 root blocks in Chesed, 4 × 2, binding the 72 Names directly to the four letters of the Name and to the four turns of the year, the Tekufot.</p><p>And the number says its own purpose: 728 is שַׁבָּת (702) joined directly to שֵׁם הֲוָיָה (26). Shabbat is the elevation of the physical world into sacred rest and wholeness; united with the Name, it draws the transcendent light straight into the vessel of holy time. So the daily study of two halachot is the Shabbat of every day — each half-day a small entry into that rest, 728 of them holding the year complete.",
-      meta: 'Shulchan Aruch & Mishnah Berurah · Chofetz Chaim · Zohar · Sefer Yetzirah'
+      main: "The year is split into 728 half-days — one halachah studied in the morning and one in the afternoon, keeping the rhythm of the Korban Tamid: one lamb offered at dawn and one bein ha'arbayim (Bamidbar 28:3–4), the daily offering that framed every day of the Mikdash.</p><p>With the Mikdash gone, the two daily halachot stand in its place, and Tanna D'Vei Eliyahu teaches that whoever studies two halachot every day merits the World to Come. Menachot 99b gives the measure, and gives it from a second tamid: Rabbi Ami learned from Rabbi Yose that one who studies a single chapter in the morning and one in the evening has fulfilled לא ימוש ספר התורה הזה מפיך — this Book of the Law shall not depart from your mouth, and you shall meditate on it day and night (Yehoshua 1:8).</p><p>He derives it from the Lechem HaPanim: the old bread lifted in the morning and the new set down toward evening, yet the table counted as bearing bread tamid, continually — so too a chapter at each end of the day renders one's Torah continuous, without interruption. On that same page Rabbi Yochanan says in the name of Rashbi that even the morning and evening Kriyat Shema meets the threshold.</p><p>The poskim keep the two tiers distinct. The Rambam (Hilchot Talmud Torah 1:8) and the Shulchan Aruch (Yoreh De’ah 246:1) bind every Jew to fixed times by day and night whatever his circumstances, the Rema allowing Kriyat Shema alone bish’at hadechak; while the Alter Rebbe’s own Shulchan Aruch (Hilchot Talmud Torah 3:1) spells out that the chapter morning and evening is the absolute floor — whoever has further time remains bound to learn to the full measure of his capacity.</p><p>So the book that sets the measure is itself read on it. Eliyahu Rabbah’s 31 chapters and Eliyahu Zuta’s 25 are 56 together, and 56 × 13 = 728 exactly: one chapter to every thirteen half-days. Thirteen half-days is six and a half days, so a chapter changes hands at midday rather than at a date, and every thirteen days carries exactly two — 26 half-days, which is יהוה, while thirteen itself is אחד and אהבה. The four 91-day tekufot take fourteen chapters each (14 × 13 = 182 half-days), so the reading closes with the seasons and not only with the year: Rabbah 1–14 in Nisan’s quarter, 15–28 in Tammuz’s, 29–31 with Zuta 1–11 in Tishrei’s, and Zuta 12–25 in Tevet’s.</p><p>A leap year’s extra twenty-eight days read the whole corpus through once instead, two chapters a day — 28 × 2 = 56 — which is the pace Menachot 99b names outright, one in the morning and one in the evening. 28 is כֹּחַ: the year’s reading held in the hand at full strength rather than walked, and the standard count untouched beneath it, so no chapter is said twice and none is missed.</p><p>Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day carry Orach Chaim's 697 chapters through most of the year, sealed in the closing days with the Chofetz Chaim's laws of speech. Alongside runs the Zohar on the weekly parasha — its hidden light following the Torah reading — which gives way on Shabbat to Sefer Yetzirah, one passage for each of the 54 parshiyot.</p><p>Underneath the halachic rhythm lies a precise matrix. The 72 Divine Names flowing through the 10 Sefirot give 720 half-days — 72 × 10 — and to these are joined the 8 cornerstone half-days of the 4 root blocks in Chesed, 4 × 2, binding the 72 Names directly to the four letters of the Name and to the four turns of the year, the Tekufot.</p><p>And the number says its own purpose: 728 is שַׁבָּת (702) joined directly to שֵׁם הֲוָיָה (26). Shabbat is the elevation of the physical world into sacred rest and wholeness; united with the Name, it draws the transcendent light straight into the vessel of holy time. So the daily study of two halachot is the Shabbat of every day — each half-day a small entry into that rest, 728 of them holding the year complete.",
+      meta: 'Shulchan Aruch & Mishnah Berurah · Chofetz Chaim · Zohar · Sefer Yetzirah · Tanna D’vei Eliyahu'
     },
     yesod: {
       title: 'Shovavim Cycle',
@@ -18446,6 +18504,42 @@ content: ''; float: right; width: 30px; height: 1em;
       `<span style="font-size:0.8em;color:var(--ink-dim)">Morning:</span> ${_hodUnit(hal.m)}<br>` +
       `<span style="font-size:0.8em;color:var(--ink-dim)">Afternoon:</span> ${_hodUnit(hal.a)}`;
 
+    // ── Tanna D'vei Eliyahu — the book this card's own measure comes from.
+    // In standard time one chapter rides thirteen half-days; in the
+    // intercalary twenty-eight the whole corpus is read through at two a day.
+    const tde = inExtra ? getTanaDveiEliyahuSprint(extraDay)
+                        : getTanaDveiEliyahu(hal.day);
+    const _tdeLink = c =>
+      `<a href="${c.url}" target="_blank" style="color:var(--gold)">${c.label}</a>`;
+    const _tdeHeb = c =>
+      ` <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;color:var(--ink-mid);` +
+      `font-size:0.9em">${c.heb}</bdi>`;
+    const _tdeDim = t =>
+      `<span style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));">${t}</span>`;
+    document.getElementById('hod-tde-label').innerHTML =
+      '✡ Tanna D’vei Eliyahu' +
+      (tde.sprint ? ' <span style="color:var(--ink-mid);font-size:0.85em">· ' +
+                    'Ko’ach Sprint</span>' : '');
+    document.getElementById('hod-tde-face').innerHTML = tde.sprint
+      // Two chapters a day, morning and evening — the measure Menachot 99b
+      // names, and the only twenty-eight days of the year that keep it.
+      ? `<div><span style="font-size:0.8em;color:var(--ink-dim)">Morning:</span> ` +
+        `${_tdeLink(tde.m)}${_tdeHeb(tde.m)}</div>` +
+        `<div><span style="font-size:0.8em;color:var(--ink-dim)">Evening:</span> ` +
+        `${_tdeLink(tde.a)}${_tdeHeb(tde.a)}</div>` +
+        `<div>${_tdeDim(`Day ${tde.day} of 28 · chapters ${tde.m.n} &amp; ` +
+                        `${tde.a.n} of 56`)}</div>`
+      // A seam day carries the end of one chapter and the head of the next;
+      // every other day is one chapter held across both halves.
+      : tde.seam
+        ? `<div><span style="font-size:0.8em;color:var(--ink-dim)">Morning:</span> ` +
+          `${_tdeLink(tde.m)} ${_tdeDim(`· ${tde.m.step} of 13`)}</div>` +
+          `<div><span style="font-size:0.8em;color:var(--ink-dim)">Afternoon:</span> ` +
+          `${_tdeLink(tde.a)} ${_tdeDim(`· ${tde.a.step} of 13`)}</div>`
+        : `<div>${_tdeLink(tde.m)}${_tdeHeb(tde.m)}</div>` +
+          `<div>${_tdeDim(`Half-days ${tde.m.step} &amp; ${tde.a.step} of 13 · ` +
+                          `chapter ${tde.m.n} of 56`)}</div>`;
+
     const hodCcHtml =
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">\u2726 Daily Chofetz Chaim <span class="maalah yom" data-wane="11">\u05de\u05d9\u05e2\u05d5\u05d8 \u05d9\u05f4\u05d0</span></div>` +
       `<div style="font-size:0.88rem;line-height:2;">` +
@@ -21243,6 +21337,23 @@ content: ''; float: right; width: 30px; height: 1em;
         if (!f) return {n:-1,label:'No daf for this day',brk:true,cell:''};
         return { n:6, label:'Chazarah — ' + f.name + ' ' + f.daf,
                  cell:f.name + ' ' + f.daf, cell2:'review' }; } },
+
+    { group:'star', card:'Tanna D’vei Eliyahu', cycle:'✡ 56 chapters over the 728 half-days — one to every thirteen',
+      seg:(D)=>{
+        if (D.inExtra) {
+          const s = getTanaDveiEliyahuSprint(D.extraDay);
+          return { n:0, label:'Ko’ach Sprint — ' + s.m.label + ' · ' + s.a.label,
+                   cell:s.m.label + ' · ' + s.a.label,
+                   cell2:'day ' + s.day + ' of 28' };
+        }
+        const t = getTanaDveiEliyahu(D.yearDay);
+        return { n:0,
+                 label: t.seam
+                   ? 'Tanna D’vei Eliyahu — ' + t.m.label + ' then ' + t.a.label
+                   : 'Tanna D’vei Eliyahu — ' + t.m.label,
+                 cell: t.seam ? t.m.label + ' · ' + t.a.label : t.m.label,
+                 cell2: t.seam ? 'chapter seam'
+                               : 'half-days ' + t.m.step + ' & ' + t.a.step + ' of 13' }; } },
 
     { group:'star', card:'Treasury of Chassidic Tales', cycle:'✡ a story a day, and the week’s portion',
       seg:(D)=>{
