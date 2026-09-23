@@ -969,7 +969,12 @@ async function checkInBrowser(chromium) {
         cell: s => pair(m(s.cell, /Cycle (\d+) · day (\d+) of 41/), 1, 2) ||
                    pair(m(s.cell, /Year-Cycle (\d+) · day (\d+) of 55/), 1, 2) },
       { lens: 7, name: 'Hod',
-        card: () => pair(m(main(6), /Half-Days (\d+) & (\d+)/), 1, 2),
+        // The face names each half-day on its own line now, with the Sefirah
+        // it carries — so the two numbers are read from two runs rather than
+        // from one "N & M". The four cornerstone days still write them the
+        // old way, having no Sefirot to hang them on, so both shapes are read.
+        card: () => pair(m(main(6), /Half-Day (\d+)[\s\S]*?Half-Day (\d+)/), 1, 2) ||
+                    pair(m(main(6), /Half-Days (\d+) & (\d+)/), 1, 2),
         cell: s => pair(m(s.cell, /OC (\d+)–(\d+)/), 1, 2) },
       { lens: 8, name: 'Yesod',
         // A double parasha carries two numbers on each side — "Cycle 6 & 7" —

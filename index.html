@@ -14490,7 +14490,7 @@ content: ''; float: right; width: 30px; height: 1em;
     },
     hod: {
       title: '728 Half-Day Cycle',
-      main: "The year is split into 728 half-days — one halachah studied in the morning and one in the afternoon, keeping the rhythm of the Korban Tamid: one lamb offered at dawn and one bein ha'arbayim (Bamidbar 28:3–4), the daily offering that framed every day of the Mikdash.</p><p>With the Mikdash gone, the two daily halachot stand in its place, and Tanna D'Vei Eliyahu teaches that whoever studies two halachot every day merits the World to Come. Menachot 99b gives the measure, and gives it from a second tamid: Rabbi Ami learned from Rabbi Yose that one who studies a single chapter in the morning and one in the evening has fulfilled לא ימוש ספר התורה הזה מפיך — this Book of the Law shall not depart from your mouth, and you shall meditate on it day and night (Yehoshua 1:8).</p><p>He derives it from the Lechem HaPanim: the old bread lifted in the morning and the new set down toward evening, yet the table counted as bearing bread tamid, continually — so too a chapter at each end of the day renders one's Torah continuous, without interruption. On that same page Rabbi Yochanan says in the name of Rashbi that even the morning and evening Kriyat Shema meets the threshold.</p><p>The poskim keep the two tiers distinct. The Rambam (Hilchot Talmud Torah 1:8) and the Shulchan Aruch (Yoreh De’ah 246:1) bind every Jew to fixed times by day and night whatever his circumstances, the Rema allowing Kriyat Shema alone bish’at hadechak; while the Alter Rebbe’s own Shulchan Aruch (Hilchot Talmud Torah 3:1) spells out that the chapter morning and evening is the absolute floor — whoever has further time remains bound to learn to the full measure of his capacity.</p><p>Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day carry Orach Chaim's 697 chapters through most of the year, sealed in the closing days with the Chofetz Chaim's laws of speech. Alongside runs the Zohar on the weekly parasha — its hidden light following the Torah reading — which gives way on Shabbat to Sefer Yetzirah, one passage for each of the 54 parshiyot.</p><p>Underneath the halachic rhythm lies a precise matrix. The 72 Divine Names flowing through the 10 Sefirot give 720 half-days — 72 × 10 — and to these are joined the 8 cornerstone half-days of the 4 root blocks in Chesed, 4 × 2, binding the 72 Names directly to the four letters of the Name and to the four turns of the year, the Tekufot. Counted the other way it is 26 — יהוה — times 28 — כחַ, the Name illuminating the twenty-eight times of human existence.</p><p>And the number says its own purpose: 728 is שַׁבָּת (702) joined directly to שֵׁם הֲוָיָה (26). Shabbat is the elevation of the physical world into sacred rest and wholeness; united with the Name, it draws the transcendent light straight into the vessel of holy time. So the daily study of two halachot is the Shabbat of every day — each half-day a small entry into that rest, 728 of them holding the year complete.",
+      main: "The year is split into 728 half-days — one halachah studied in the morning and one in the afternoon, keeping the rhythm of the Korban Tamid: one lamb offered at dawn and one bein ha'arbayim (Bamidbar 28:3–4), the daily offering that framed every day of the Mikdash.</p><p>With the Mikdash gone, the two daily halachot stand in its place, and Tanna D'Vei Eliyahu teaches that whoever studies two halachot every day merits the World to Come. Menachot 99b gives the measure, and gives it from a second tamid: Rabbi Ami learned from Rabbi Yose that one who studies a single chapter in the morning and one in the evening has fulfilled לא ימוש ספר התורה הזה מפיך — this Book of the Law shall not depart from your mouth, and you shall meditate on it day and night (Yehoshua 1:8).</p><p>He derives it from the Lechem HaPanim: the old bread lifted in the morning and the new set down toward evening, yet the table counted as bearing bread tamid, continually — so too a chapter at each end of the day renders one's Torah continuous, without interruption. On that same page Rabbi Yochanan says in the name of Rashbi that even the morning and evening Kriyat Shema meets the threshold.</p><p>The poskim keep the two tiers distinct. The Rambam (Hilchot Talmud Torah 1:8) and the Shulchan Aruch (Yoreh De’ah 246:1) bind every Jew to fixed times by day and night whatever his circumstances, the Rema allowing Kriyat Shema alone bish’at hadechak; while the Alter Rebbe’s own Shulchan Aruch (Hilchot Talmud Torah 3:1) spells out that the chapter morning and evening is the absolute floor — whoever has further time remains bound to learn to the full measure of his capacity.</p><p>Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day carry Orach Chaim's 697 chapters through most of the year, sealed in the closing days with the Chofetz Chaim's laws of speech. Alongside runs the Zohar on the weekly parasha — its hidden light following the Torah reading — which gives way on Shabbat to Sefer Yetzirah, one passage for each of the 54 parshiyot.</p><p>Underneath the halachic rhythm lies a precise matrix. The 72 Divine Names flowing through the 10 Sefirot give 720 half-days — 72 × 10 — and to these are joined the 8 cornerstone half-days of the 4 root blocks in Chesed, 4 × 2, binding the 72 Names directly to the four letters of the Name and to the four turns of the year, the Tekufot.</p><p>And the number says its own purpose: 728 is שַׁבָּת (702) joined directly to שֵׁם הֲוָיָה (26). Shabbat is the elevation of the physical world into sacred rest and wholeness; united with the Name, it draws the transcendent light straight into the vessel of holy time. So the daily study of two halachot is the Shabbat of every day — each half-day a small entry into that rest, 728 of them holding the year complete.",
       meta: 'Shulchan Aruch & Mishnah Berurah · Chofetz Chaim · Zohar · Sefer Yetzirah'
     },
     yesod: {
@@ -15399,6 +15399,16 @@ content: ''; float: right; width: 30px; height: 1em;
     'דמב','מנק','איע','חבו','ראה','יבמ','היי','מום',
   ];
   const AYIN_BET_BREAKS = [73, 146, 219, 292];
+  // The ten as Hod walks them, two to a day — the morning half-day taking the
+  // odd one and the evening the even, so the whole ten are crossed every five
+  // days and the 72 Names carry them 360 days of the year.
+  const HOD_SEFIROT = [
+    ['Keter', 'Will'],        ['Chochmah', 'Insight'],
+    ['Binah', 'Structure'],   ['Chesed', 'Expansion'],
+    ['Gevurah', 'Boundaries'],['Tiferet', 'Harmony'],
+    ['Netzach', 'Endurance'], ['Hod', 'Reflection'],
+    ['Yesod', 'Connection'],  ['Malchut', 'Manifestation'],
+  ];
   // Birkat Kohanim is 15 words = 5 × 3, so each of the five 72-day cycles of
   // the Name carries three words of the priestly blessing — the five apertures
   // of the Kohen's hands. Groups of three run straight across the verse breaks.
@@ -18360,8 +18370,43 @@ content: ''; float: right; width: 30px; height: 1em;
     const _hodDay = hal.day;
     // The two halves of the day are half-days 2n−1 and 2n of the 728 — one
     // studied in the morning, one in the afternoon.
+    // WHERE THE DAY STANDS IN THE MATRIX. The 72 Names run through the ten
+    // Sefirot two at a time — a Name to every five days, a Sefirah to every
+    // half-day — so the morning is the odd Sefirah of the pair and the
+    // evening the even one, and the whole ten are walked every five days.
+    //
+    // The four days that carry no Name are the same four Chesed keeps silent
+    // between its five readings of 72: 72 × 10 half-days is 360 days, and the
+    // year is 364. They are the cornerstones the note speaks of, and they are
+    // named as such rather than given a Name they do not have.
+    const _hodNamed = _hodDay - AYIN_BET_BREAKS.filter(b => b < _hodDay).length;
+    const _hodBreak = AYIN_BET_BREAKS.indexOf(_hodDay) !== -1;
+    const _hodName  = _hodBreak ? 0 : Math.floor((_hodNamed - 1) / 5) + 1;   // 1–72
+    const _hodStep  = _hodBreak ? 0 : ((_hodNamed - 1) % 5) + 1;             // 1–5
+    const _hodPhase = (n, sef, glyph, word) =>
+      `<div style="line-height:1.6;">${glyph} <span style="color:var(--ink-dim);` +
+      `font-size:calc(11px * var(--ts, 1));">Half-Day ${n} &middot; ${word}</span> ` +
+      `<strong>${sef[0]}</strong> <span style="color:var(--ink-mid);font-size:0.9em">` +
+      `&mdash; ${sef[1]}</span></div>`;
     document.getElementById('hod-pos').innerHTML =
-      `Half-Days <strong>${_hodDay * 2 - 1}</strong> &amp; <strong>${_hodDay * 2}</strong>`;
+      (_hodBreak
+        ? `<div>A cornerstone half-day pair &mdash; <span style="color:var(--ink-mid);` +
+          `font-size:0.9em">one of the four Chesed keeps silent</span></div>`
+        : `<div>Name <strong>${_hodName}</strong> of 72 &middot; ` +
+          `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em;` +
+          `color:var(--gold)">${AYIN_BET_NAMES[_hodName - 1]}</bdi> ` +
+          `<span style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));">` +
+          `&middot; day ${_hodStep} of 5</span></div>`) +
+      (_hodBreak
+        // A cornerstone takes no Sefirah. The ten are walked by the Names,
+        // and these four days stand outside them — giving them Keter and
+        // Chochmah would be inventing a place in a matrix they are not in.
+        ? `<div style="line-height:1.6;">\u{1F305} <span style="color:var(--ink-dim);` +
+          `font-size:calc(11px * var(--ts, 1));">Half-Days ${_hodDay * 2 - 1} &amp; ` +
+          `${_hodDay * 2}</span> <span style="color:var(--ink-mid);font-size:0.9em">` +
+          `&mdash; outside the 72 \u00d7 10, binding the Names to the Name</span></div>`
+        : _hodPhase(_hodDay * 2 - 1, HOD_SEFIROT[(_hodStep - 1) * 2], '\u{1F305}', 'Ratzo') +
+          _hodPhase(_hodDay * 2, HOD_SEFIROT[(_hodStep - 1) * 2 + 1], '\u{1F319}', 'Shov'));
     // The stream runs out of the Shulchan Aruch into the Chofetz Chaim, so a
     // day may hold one of each — day 349 pairs the last siman with the Petichah.
     const _hodUnit = u => u.url
