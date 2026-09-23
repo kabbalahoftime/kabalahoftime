@@ -18824,11 +18824,15 @@ content: ''; float: right; width: 30px; height: 1em;
           `<span style="color:var(--ink);font-weight:600">${secMain}</span>` +
           `<br>${secSub}`;
       }
-      // Thursday — the Zohar's own section for the week, under the Ramchal.
+      // Thursday — the Zohar's own section for the week, at the head of the
+      // day, with the Ramchal beneath it: the Zohar is what the Ramchal is
+      // heir to, so it is read first and he follows.
       if (parashaMapping._zoharWeek && _zoharWeekHtml) {
-        subText += `<br><span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:4px 0;opacity:0.3"></span>` +
-          `<span style="color:var(--ink);font-weight:600">Zohar — Parasha</span><br>` +
-          _zoharWeekHtml;
+        mainText =
+          `<div><strong>Zohar — Parasha</strong></div>` +
+          `<div style="font-weight:400">${_zoharWeekHtml}</div>` +
+          `<span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:6px 0 4px;opacity:0.3"></span>` +
+          mainText;
       }
     }
 
