@@ -10076,6 +10076,14 @@ content: ''; float: right; width: 30px; height: 1em;
   // trigger is hidden when today's key has no summary, which is exactly the
   // state the page is in for the moment before the file arrives, and for good
   // if it never does.
+  //
+  // On length: a summary carries every teaching the reading holds, and its
+  // length follows from that rather than from a ratio. The early folios run
+  // about a fifth of their source because they are a few long expositions;
+  // the Ra'aya Meheimna folios run to half, being a long list of short
+  // teachings, and holding them to a fifth would mean dropping teachings
+  // outright. The ratio is allowed to drift; what is not allowed is a
+  // teaching left out to make a number.
   let ZOHAR_FOLIO_SUMMARIES = {};
   fetch('zohar-summaries.json')
     .then(r => r.ok ? r.json() : null)
