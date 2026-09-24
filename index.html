@@ -816,6 +816,46 @@ animation: fadeIn 0.25s ease;
 display: block;
 }
 
+/* ── THE VIDEO WINDOW ──
+   The recording is a screen presentation, not a talking head: at 860px wide
+   the writing in it was too small to read, and it only came right once the
+   player was expanded. So the window takes the screen it is given — the
+   frame is as wide as the viewport allows and as tall as what is left after
+   the title and the two links, which on a phone in landscape is nearly all
+   of it. Real fullscreen is asked for on top of that, and where the browser
+   refuses (iOS has no element fullscreen) this size is what remains, which
+   is why it is worth having rather than a tidy 860px card. */
+#video-card {
+width: min(1400px, 100vw);
+max-height: 100vh;
+box-sizing: border-box;
+display: flex;
+flex-direction: column;
+border-radius: 0;
+}
+/* The frame keeps the recording's own shape rather than stretching to the
+   card. Given the whole height of a phone held upright it became a tall
+   black slab with a thin band of picture across the middle — the video is
+   no bigger for the room, only the letterbox is. */
+#video-frame-wrap {
+position: relative;
+flex: 0 1 auto;
+width: 100%;
+aspect-ratio: 16 / 9;
+max-height: calc(100vh - 150px);
+background: #000;
+border-radius: 4px;
+overflow: hidden;
+}
+/* In fullscreen the wrapper is the screen itself: it takes whatever shape
+   the screen has, and drops the rounding it wears inside the card. */
+#video-frame-wrap:fullscreen,
+#video-frame-wrap:-webkit-full-screen {
+aspect-ratio: auto;
+max-height: none;
+border-radius: 0;
+}
+
 .pane-body .keter-section:not(:last-child) {
 border-bottom: 1px solid var(--border);
 }
@@ -3003,17 +3043,18 @@ content: ''; float: right; width: 30px; height: 1em;
        costs nothing for a reader who never opens it, and closeVideoModal
        takes the src away again, which is what stops the sound. -->
   <div id="video-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
-    <div class="heb-picker-card" style="width:min(860px,96vw); max-height:92vh; box-sizing:border-box; display:flex; flex-direction:column;">
+    <div class="heb-picker-card" id="video-card">
       <div class="heb-picker-header" style="flex:0 0 auto; margin-bottom:12px;">
         <span class="heb-picker-title">A Spoken Introduction</span>
         <button class="heb-picker-close" onclick="closeVideoModal()">×</button>
       </div>
-      <div id="video-frame-wrap" style="position:relative; width:100%; padding-top:56.25%; background:#000; border-radius:4px; overflow:hidden;">
+      <div id="video-frame-wrap">
         <iframe id="video-frame" title="A spoken introduction to Kabbalah of Time"
                 style="position:absolute; inset:0; width:100%; height:100%; border:0;"
                 allow="autoplay; fullscreen" allowfullscreen></iframe>
       </div>
-      <div style="flex:0 0 auto; margin-top:10px; font-size:0.86em; color:var(--ink-dim);">
+      <div style="flex:0 0 auto; margin-top:10px; font-size:0.86em; color:var(--ink-dim); display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+        <button class="date-jump-trigger" onclick="expandVideo()">Expand &#10530;</button>
         <a href="https://drive.google.com/file/d/1Ob6a5iXQLl49xlvDB6RXHx5cQDrFwYbe/view" target="_blank" rel="noopener" style="color:var(--gold)">Open on Google Drive &#8599;</a>
       </div>
     </div>
@@ -19558,12 +19599,37 @@ content: ''; float: right; width: 30px; height: 1em;
   // The Drive file id lives here alone; the pane and the modal footer link to
   // the same file in its ordinary viewer, for a browser that will not embed.
   const INTRO_VIDEO_ID = '1Ob6a5iXQLl49xlvDB6RXHx5cQDrFwYbe';
+  // Fullscreen, asked for politely. The names differ between engines, the
+  // call can be refused outright, and on iOS Safari there is no element
+  // fullscreen at all — only a <video> can go full, and the video here is
+  // inside someone else's frame. So every path is guarded and a refusal is
+  // allowed to pass in silence: the window is already the size of the screen,
+  // and the player keeps its own expand button for the browsers that cannot
+  // be asked from outside.
+  function _goFullscreen(el) {
+    if (!el) return;
+    const req = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (!req) return;
+    try { const r = req.call(el); if (r && r.catch) r.catch(() => {}); } catch (e) {}
+  }
+  function _leaveFullscreen() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) return;
+    const exit = document.exitFullscreen || document.webkitExitFullscreen;
+    if (!exit) return;
+    try { const r = exit.call(document); if (r && r.catch) r.catch(() => {}); } catch (e) {}
+  }
+  function expandVideo() { _goFullscreen(document.getElementById('video-frame-wrap')); }
+
   function openVideoModal() {
     const f = document.getElementById('video-frame');
     if (f) f.src = 'https://drive.google.com/file/d/' + INTRO_VIDEO_ID + '/preview';
     document.getElementById('video-modal').style.display = 'flex';
+    // Asked for here, while the tap that opened the window still counts as
+    // the gesture a browser requires; a moment later it would be refused.
+    expandVideo();
   }
   function closeVideoModal() {
+    _leaveFullscreen();
     const f = document.getElementById('video-frame');
     if (f) f.removeAttribute('src');    // this is what stops the playback
     document.getElementById('video-modal').style.display = 'none';
