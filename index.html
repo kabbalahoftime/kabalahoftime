@@ -679,15 +679,23 @@ border-bottom-color: var(--gold);
 position: relative;
 text-align: center;
 background: var(--bg-card);
-border: 1px solid var(--border-strong);
-border-radius: 4px;
-box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+/* One card, not two stacked. The heading, the dial and the panes are a
+   single thing — the heading names what the dial measures — so the heading
+   carries the top of one outline and the card below carries the bottom,
+   with no border and no gap between them. Its border matches the card's
+   2px rather than the 1px the date bar uses, or the sides would step in
+   where they met. The shadow belongs to the card, which now draws it for
+   both. */
+border: 2px solid var(--border-strong);
+border-bottom: none;
+border-radius: 4px 4px 0 0;
 padding: 12px 18px 14px;
 /* Clear of Today's Ladder above it. The two were touching, and the Keter
    heading read as the foot of that block rather than the head of the cards. */
-margin: 24px 0 6px;
+margin: 24px 0 0;
 }
 .keter-title-row > .cycle-info-btn.corner { top: 8px; right: 10px; }
+.keter-card { border-top: none; border-radius: 0 0 4px 4px; margin-top: 0; }
 .keter-crown-label {
 font-family: 'Cinzel', serif;
 font-size: calc(11px * var(--ts, 1));
@@ -1942,9 +1950,13 @@ to   { opacity: 1; }
   --kotw-parch:#f0e6c9;
   font-family:'Cormorant Garamond',serif;
   background:radial-gradient(ellipse at 50% 30%,#161d38 0%,#0d1122 75%);
-  border:1px solid var(--kotw-golddim); border-radius:10px;
-  color:var(--kotw-parch); padding:14px 12px 16px; max-width:420px;
-  margin:0 auto 20px; box-sizing:border-box;
+  /* Flush: no rounding, no side borders, no margin. The dial is the face of
+     this card the way the week's page is the face of its own, and the pane
+     strip below it should meet it with no seam and no gutter of parchment
+     between. */
+  border:none; border-bottom:1px solid var(--kotw-golddim); border-radius:0;
+  color:var(--kotw-parch); padding:14px 12px 16px; max-width:none;
+  margin:0; box-sizing:border-box;
 }
 #kotw-root *{box-sizing:border-box;margin:0;padding:0}
 #kotw-root .kotw-title{
