@@ -10180,13 +10180,20 @@ content: ''; float: right; width: 30px; height: 1em;
   // state the page is in for the moment before the file arrives, and for good
   // if it never does.
   //
-  // On length: a summary carries every teaching the reading holds, and its
-  // length follows from that rather than from a ratio. The early folios run
-  // about a fifth of their source because they are a few long expositions;
-  // the Ra'aya Meheimna folios run to half, being a long list of short
-  // teachings, and holding them to a fifth would mean dropping teachings
-  // outright. The ratio is allowed to drift; what is not allowed is a
-  // teaching left out to make a number.
+  // On length: a summary carries every teaching the reading holds, and aims
+  // at about a third of its source — 0.35 by characters, Aramaic in and
+  // English out. That is a deliberate correction. The ratio had crept up
+  // over the cycle, folio by folio, from 0.20 at the opening to 0.65 by
+  // I:29-32 and 0.8 beyond it, and at the top of that range a summary had
+  // stopped summarising: it was rendering the source paragraph by
+  // paragraph, every proof-text quoted in full, every "he objected and was
+  // answered" kept. The early folios show what a third buys — the shape of
+  // the folio told, the teachings all there, the citations kept where the
+  // citation is itself the teaching.
+  //
+  // It is a target, not a rule. A folio of short identifications, each with
+  // its own verse, will sit above it; a few long expositions will sit below.
+  // What is not allowed is a teaching left out to make the number.
   let ZOHAR_FOLIO_SUMMARIES = {};
   fetch('zohar-summaries.json')
     .then(r => r.ok ? r.json() : null)
