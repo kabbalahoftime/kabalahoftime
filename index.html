@@ -13905,6 +13905,9 @@ content: ''; float: right; width: 30px; height: 1em;
       var el = document.getElementById(pair[0]);
       if (el) el.classList.toggle('year-pill-active', mode === pair[1]);
     });
+    // The Daily Script reads this same setting; it is written further down the
+    // file, so the call is guarded for the moment before it exists.
+    if (typeof refreshScriptLevel === 'function') refreshScriptLevel();
   }
   (function () {
     var saved = null;
@@ -20832,7 +20835,7 @@ content: ''; float: right; width: 30px; height: 1em;
       })(),
     };
     document.getElementById('daily-script-content').textContent =
-      _scriptBeginner ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
+      scriptIsBeginner() ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
   }
 
   function changeDay(delta) {
@@ -21113,7 +21116,11 @@ content: ''; float: right; width: 30px; height: 1em;
 
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
   let _scriptLang = 'en';
-  let _scriptBeginner = false;
+  // The script no longer keeps a mode of its own. It reads the page's one
+  // setting: Beginner takes the explanatory script, Intermediate and Advanced
+  // take the full one. Two controls for one question was one too many, and the
+  // one at the top of the page is the one a reader meets first.
+  function scriptIsBeginner() { return infoLevel === 'beginner'; }
   let _scriptData = null;
 
   // Netzach's five overlap days (365-369) — the closing cycle finishing while
@@ -21150,21 +21157,37 @@ content: ''; float: right; width: 30px; height: 1em;
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
     const btn = document.getElementById('lang-btn-' + lang);
     if (btn) btn.classList.add('active');
-    if (_scriptBeginner) document.getElementById('beginner-btn').classList.add('active');
+    const bb = document.getElementById('beginner-btn');
+    if (bb) bb.classList.toggle('active', scriptIsBeginner());
     if (_scriptData) {
       document.getElementById('daily-script-content').textContent =
-        _scriptBeginner ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
+        scriptIsBeginner() ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
     }
   }
 
+  // The button in the script bar is a second hand on the same dial: pressing
+  // it sets the page's level rather than a mode of its own, so the pills at
+  // the top follow it and it follows them.
   function toggleBeginnerMode() {
-    _scriptBeginner = !_scriptBeginner;
+    setInfoLevel(scriptIsBeginner() ? 'intermediate' : 'beginner');
+  }
+
+  // Called by setInfoLevel whenever the level changes, from wherever.
+  function refreshScriptLevel() {
     const btn = document.getElementById('beginner-btn');
-    if (btn) btn.classList.toggle('active', _scriptBeginner);
-    if (_scriptData) {
-      document.getElementById('daily-script-content').textContent =
-        _scriptBeginner ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
-    }
+    if (btn) btn.classList.toggle('active', scriptIsBeginner());
+    // setInfoLevel runs once at load, before the script's own state has been
+    // initialised — _scriptData is a let declared further down, and touching
+    // it then throws rather than reading undefined. The button above is
+    // updated either way; the text is rewritten only once there is text.
+    try {
+      const out = document.getElementById('daily-script-content');
+      if (out && _scriptData) {
+        out.textContent = scriptIsBeginner()
+          ? buildBeginnerScript(_scriptLang, _scriptData)
+          : buildDailyScript(_scriptLang, _scriptData);
+      }
+    } catch (e) {}
   }
 
   function copyDailyScript() {
