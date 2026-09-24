@@ -1,0 +1,266 @@
+{
+ "he": {
+  "date": {
+   "title": "התאריך — שלושה לוחות כאחד",
+   "beginner": "שלוש שורות, שלוש דרכים לומר את אותו היום. </p><p>הראשונה היא התאריך הלועזי. השנייה היא התאריך העברי, המתחיל עם רדת הלילה שלפניו — יום יהודי מתחיל בצאת הכוכבים ולא בחצות — ולכן השורה שתחתיה מונה בנפרד את הלילה שעבר ואת הלילה המתחיל. </p><p>השלישית אומרת היכן עומד היום הזה בשנה של האפליקציה עצמה: באיזה שבוע, באיזה יום שלו, ובאיזו פרשה. </p><p>החִצים מזיזים יום אחד כל פעם, ו<strong>קפיצה לתאריך</strong> מגיעה לכל יום שתרצו."
+  },
+  "ladder": {
+   "title": "סולם היום",
+   "beginner": "הבלוק שעונה על שאלה אחת: מה עכשיו? </p><p>השורה העליונה מוסרת את הצעד הבא המבוקש, והקשה עליה לוקחת אליו מיד. די בזה כדי להתחיל — כל השאר בעמוד קיים למי שרוצה אותו. </p><p>מתחת נמצאים מוני היום. ה<strong>לב</strong> מתמלא עם עשר התפילות, ה<strong>עיגול</strong> שלצידו סופר את הלימוד, והמנורה שבקצה נושאת את העשרה הנושאים אותה. </p><p>מעט הוא צעד. כמה שורות שנפתחו נחשבות."
+  },
+  "wheel": {
+   "title": "מַעֲלוֹת הַזְּמַן",
+   "beginner": "השנה כולה מצוירת כיום אחד. כל אחד מחמישים ושניים השבועות הוא מדרגה על לוח שעון, והקפה אחת סביבו היא מעבר בכל השנה. </p><p>זו תמונת המראה של מה שהכרטיסים שלמטה עושים. הם לוקחים את היום ומראים את השנה שבתוכה הוא עומד; זה לוקח את השנה ומקפל אותה ליום אחד, כך ששבוע נעשה שעה וניתן לראות את כולה במבט אחד. </p><p>הקישו על כל מדרגה כדי לראות את אותו שבוע ואת מה שהוא נושא. המחוג מראה היכן נופל עכשיו."
+  },
+  "keterdaat": {
+   "title": "כֶּתֶר / דַּעַת",
+   "beginner": "ראש היום, והשעון השומר עליו. </p><p>כתר הוא הגבוה שבעשר, ודעת היא הידיעה. שניהם חולקים מקום אחד משום שאינם נמנים יחד: היכן שהאחד עומד בתוך העשר, השני אינו. </p><p>השעות הנקובות כאן הן הרצועה הקצרה סביב חצות הלילה, והחוגה שלמטה פורשת את היום כולו כמעגל, כך שרואים במבט אחד איזו שעה שייכת לאיזו מידה והיכן נופל עכשיו. הכפתורים שמתחת מחליפים בין שעות השעון לשעות זמניות הנמדדות בשמש עצמה, ולכן הם מבקשים את עירכם. </p><p>ומילה על היכן נמצא הכתר. רבי יהושע בן לוי פגש פעם את המשיח ושאל אותו מתי הוא בא. <strong>היום</strong>, ענה לו. עבר היום והוא לא בא, והלך רבי יהושע לאליהו הנביא ואמר שהמשיח שיקר לו. ענה לו אליהו: לא שיקר. פסוק ציטט לך — <bdi lang=\"he\">הַיּוֹם אִם בְּקֹלוֹ תִשְׁמָעוּ</bdi>. הדבר הגבוה ביותר שיש אינו ממתין הרחק משם. הוא ביום הזה, בתנאי האחד הזה."
+  },
+  "keterlm": {
+   "title": "בְּכָל הַשָּׁנָה",
+   "beginner": "שני ספרים גדולים הנקראים ברצף לאורך השנה, כל אחד ביום ההולם אותו. בליקוטי מוהר\"ן של רבי נחמן יש שיעור לכל תאריך עברי, כך שהשיעור של היום ואופיו של היום אמורים להיפגש; והזוהר, ספר היסוד של הקבלה, נקרא שני דפים ביום — ארבעה בחמישי — המסיימים אותו כולו בשנה אחת. </p><p>זה יושב בכתר, הכתר, משום שכתר הוא מה שעומד מעל השנה ולא בתוכה, ואלו שניים הם הקריאה הרצה סביב בלי הפסק. </p><p>שום דבר כאן אינו מבקש מהירות. כמה שורות מן השיעור, דף מן הזוהר שנפתח: העיקר להיות בו ביום שהוא שייך לו."
+  },
+  "chochmah": {
+   "title": "אָלֶף־בֵּית — מחזור כ״ב ימים",
+   "beginner": "באלף־בית העברי עשרים ושתיים אותיות, וספר יצירה — אחד הספרים העתיקים שבקבלה — מלמד שבהן ברא הקב\"ה את העולם. המחזור הזה נותן אות אחת לכל יום, כך שהאלף־בית כולו חוזר בערך כל שלושה שבועות, שבע עשרה פעמים בשנה. </p><p>המחשבה שמאחוריו פשוטה. אם האותיות הן מה שהכול בנוי ממנו, אז לשהות עם אות אחת יום שלם הוא לשהות עם אחד הכלים שבהם נעשה העולם. אות היום מופיעה בכרטיס, ועימה פסוק הפותח באותה אות. </p><p>לצד האותיות נושא הכרטיס דף ליום מתורתו של אדמו\"ר הזקן, תורה אור וליקוטי תורה, שני הספרים חתוכים כך שיסתיימו עם השנה."
+  },
+  "binah": {
+   "title": "סְפִירוֹת — מחזור העומר 7×7×7",
+   "beginner": "בין פסח לשבועות ארבעים ותשעה ימי העומר, וכל אחד מהם מצרף שתיים משבע מידות הלב — חסד שבחסד, גבורה שבחסד, וכן הלאה בכל התשע וארבעים. </p><p>המחזור הזה לוקח את אותה ספירה ומריץ אותה על פני השנה כולה במקום על פני שבעה שבועות, עובר על אותן ארבעים ותשע שבע פעמים, כך שכל מידה נבחנת בתוך כל אחת מן האחרות, ואז כל הבחינה הזאת נעשית שוב שבע פעמים. בינה היא הבנה, וזה מה שהבנה עושה: לוקחת דבר אחד ומסובבת אותו עד שנראו כל צדדיו. </p><p>לצידו נושא הכרטיס את ליקוטי תפילות, התפילות שעשה רבי נתן מתורותיו של רבי נחמן — תורה שהפכה למשהו שאפשר לומר."
+  },
+  "chesed": {
+   "title": "שֵׁם ע״ב — מחזור ע״ב ימים",
+   "beginner": "חסד הוא נתינה. תורה הנמסרת ממורה לתלמיד היא נתינה בצורתה הזכה ביותר, ולכן נקראת כאן תורה שבעל פה: עשרה פרקי משנה בחמשת הימים הראשונים של השבוע, ואחריהם שמונה פרקי תוספתא בשניים האחרונים. </p><p>לצידה רץ שם ע״ב האותיות, הנדרש משלושה פסוקים בקריעת ים סוף. הוא נקרא בחמישה מקטעים של שבעים ושניים יום ובין כל שניים מהם יום שתיקה — וארבעה ימים כאלה — <bdi lang=\"he\">חֶסֶד</bdi> עצמו הוא שבעים ושניים. </p><p>חמישה עם ארבעה ביניהם הוא צורה החוזרת ומופיעה: הפתחים שבין אצבעות הכהן בברכתו, וחמש אונות הריאה עם השסעים המפרידים ביניהן. זהו מחזור הכהנים, ויסודו מים — הרחיצה שלפני כל ברכה."
+  },
+  "gevurah": {
+   "title": "אַרְבַּע עוֹנוֹת — מחזור צ״א ימים",
+   "beginner": "שני פרקים מנביאים וכתובים בכל יום, המעבירים את כל תשע מאות ועשרים ושמונה הפרקים שלהם לאורך השנה. אלו ספרי תולדותיה של ישראל ותוכחתה — הקול החזק — וגבורה היא ספירת הכוח, של המילה הקבועה שאינה מתכופפת. </p><p>לצידם נחלקת השנה לארבע עונותיה, תשעים ואחד יום כל אחת, בלי שארית: 4 × 91 הם 364, החלוקה הנקייה ביותר שהשנה מאפשרת. </p><p>כל עונה נושאת אחת מארבע פני המרכבה של יחזקאל ואחת מארבע העמידות של פרקי אבות — קל כנשר, רץ כצבי, גיבור כארי, והשור העובד את האדמה — עם מלאך ויסוד לכל אחת. וכל עונה רצה פנימה אל אמצעה ואז חוזרת ויוצאת, כך שאמצע הדרך אינו סימן אלא לב."
+  },
+  "tiferet": {
+   "title": "מִדּוֹת — מחזור י״ג ימים",
+   "beginner": "התורה נותנת שלוש עשרה דרכים לתאר את רחמיו של הקב\"ה, והמחזור הזה לוקח אחת מהן בכל יום, כך שהשלוש עשרה חוזרות עשרים ושמונה פעמים בשנה. </p><p>הן יושבות בתפארת, שפירושה יופי, משום שהיופי כאן אינו קישוט: הוא מה שקורה כשחסד וגבורה מוחזקים באיזון, והרחמים הם בדיוק האיזון הזה. קריאת מידה אחת ביום היא דרך ללמוד את האיזון מתוך הליכה בו. </p><p>שנים עשר מן הימים נושאים גם נשיא שהביא קרבן בחנוכת המשכן, והשלושה עשר נושא את אהרן, שקרבנו היה הדלקת המנורה. וכל מחזור נושא ספר משלו: פרק מסדר ברכת הנהנין של אדמו\"ר הזקן, או אחד משלושה עשר סיפורי רבי נחמן."
+  },
+  "netzach": {
+   "title": "מחזור מ׳ יום: קבלת התורה",
+   "beginner": "ארבעים יום עמד משה בהר לקבל את התורה, וארבעים יום הוא אורכו של המחזור הזה — תשעה מהם בשנה, ויום ארבעים ואחד חותם כל אחד. </p><p>כל סיבוב נושא את עשרת הדיברות דרך ארבע מדרגות הנשמה, עשרה ימים לכל מדרגה, ועולה תוך כדי: מן הנפש המניעה את הגוף, אל זו המרגישה, אל זו המבינה, אל זו המגיעה מעבר לאדם עצמו. חמש עשרה המעלות של היום עושות את אותו הדבר בקטן, כך שמי שמטפס כאן מטפס בשניהם. </p><p>נצח הוא התמדה — המידה של להמשיך — וארבעים ואחד ימים הם גם המניין מראש חודש אלול עד יום הכיפורים. לצד המחזור רצים שני אסופותיו של רבי נתן מדברי רבי נחמן: שיחותיו, ואחר כך עצותיו."
+  },
+  "hod": {
+   "title": "מחזור תשכ״ח חצאי ימים",
+   "beginner": "השנה כאן נמנית לא בימים אלא בחצאי ימים — תשע מאות עשרים ושמונה מהם — הלכה אחת נלמדת בבוקר ואחת אחר הצהריים. הקצב הזה הוא קצב המקדש: כבש אחד קרב עם שחר ואחד לעת ערב, בכל יום בלי הפסק. </p><p>משחרב המקדש, שתי ההלכות היומיות עומדות במקומו. תנא דבי אליהו מלמד שכל השונה שתי הלכות בכל יום מובטח לו שהוא בן העולם הבא, והתלמוד נותן את אותה מידה: פרק בבוקר ופרק בערב עושים את תורתו רציפה ולא מקרית. </p><p>כך שהספר הקובע את המידה נקרא בה בעצמו. חמישים ושישה פרקיו נחלקים בתשכ״ח חצאי היום בדיוק, פרק לכל שלושה עשר. הוד היא מידת ההודיה ושל דיוק בפרטים, וזה מה שיום של הלכה הוא."
+  },
+  "yesod": {
+   "title": "מחזור שובבי״ם",
+   "beginner": "שובבי״ם הוא רצף של שבועות חורף, הנקרא על שם ראשי הפרשות שהוא עובר בהן, משמות עד משפטים. מאז ומתמיד נשמר כעונה של שמירת הטהרה ותיקון מה שנפגם בחלק הזה של החיים. </p><p>המחזור הזה שומר על אותה עבודה כל השנה ולא שישה שבועות, פרשה בשבוע בכל חמישים ושניים. יסוד היא ספירת היסוד — המקום שבו נאסף כל מה שלמעלה ונמסר הלאה — ולכן מה שנשמר כאן הוא מה שנמסר הלאה. </p><p>לצד הפרשה נושא הכרטיס את רב יוסף חיים מבגדאד: שו\"ת שלו לאורך השבוע, ובשישי ובשבת את הבן איש חי עצמו, הלכותיו ואחר כך דרשותיו."
+  },
+  "malchut": {
+   "title": "חיבור לכל השנה וספרי השבוע",
+   "beginner": "מלכות היא האחרונה שבעשר הספירות, זו המקבלת מכל האחרות ונותנת להן מקום לנחות בו — כירח שאין לו אור משלו והוא מאיר באור החמה. </p><p>לכן זה הכרטיס האוסף. הוא נושא את המאמר האחרון של הרבי מליובאוויטש, הנקרא כולו כל שלושה עשר יום; שבעה ספרים, אחד מכתיר כל יום בשבוע; ואת ספר ההלכה כולו של הרמב\"ם, הנסקר מקצה לקצה כל עשרים ושמונה יום. </p><p>עשרים ושמונה אינו מספר שרירותי כאן. שלמה המלך מנה עשרים ושמונה עתים בקהלת — עת ללדת ועת למות, עת לחשות ועת לדבר — ועבודתה של מלכות היא לעבוד את ה' בתוך העת שבה אתה נמצא בפועל."
+  },
+  "ohrkitov": {
+   "title": "אוֹר כִּי טוֹב",
+   "beginner": "שני מאורות של דור אחד, שמעולם לא נפגשו. </p><p>ה<strong>בעל שם טוב</strong> (1698–1760) החל את תנועת החסידות ולא כתב ספר משלו. מה שלימד נרשם בידי תלמידיו ונאסף לאחר מכן ל<strong>כתר שם טוב</strong>, וקטע קצר אחד ממנו עולה כאן בכל יום. </p><p>ה<strong>אור החיים</strong> הוא רבי חיים בן עטר (1696–1743), יליד מרוקו, שהגיע לירושלים בשנה האחרונה לחייו. פירושו לתורה הולך לפי הפרשה, כך שהפרשה ולא התאריך קובעת מה מופיע. </p><p>שם החלק הזה עשוי משני ספריהם — <bdi lang=\"he\">אוֹר</bdi> מן האחד ו<bdi lang=\"he\">טוֹב</bdi> מן השני — ושתי המילים עומדות בפסוק אחד: וירא אלהים את האור כי טוב."
+  },
+  "yomchazak": {
+   "title": "יוֹם חָזָק",
+   "beginner": "שלושה ספרים של הרמב\"ם ושל הרבי, נלמדים מעט בכל יום. </p><p>ה<strong>משנה תורה</strong> הוא הקודקס האחד המקיף את כל ההלכה — שכתב רבי משה בן מימון במאה השתים עשרה, והמכונה מאז <em>יד החזקה</em>, שכן <bdi lang=\"he\">יָד</bdi> הוא ארבע עשרה והחיבור הוא ארבעה עשר ספרים. שלושה פרקים ביום מסיימים אותו בשנה; לצידו יש מסלול של פרק אחד למי שהולך בקצב הזה. </p><p><strong>ספר המצוות</strong> הוא מניין תרי\"ג המצוות של הרמב\"ם, ו<strong>היום יום</strong> הוא לוח חסידי ובו תורה קצרה לכל יום בשנה, שליקט הרבי מליובאוויטש משיחותיו ומכתביו של חותנו. </p><p>זהו החלק הקרוי יום חזק, והוא השלוש עשרה מתוך חמש עשרה המעלות."
+  }
+ },
+ "es": {
+  "date": {
+   "title": "La fecha — tres calendarios a la vez",
+   "beginner": "Tres líneas, tres maneras de decir el mismo día. </p><p>La primera es la fecha civil. La segunda es la fecha hebrea, que comienza la tarde anterior — un día judío empieza al anochecer y no a medianoche — y por eso la línea de abajo nombra por separado la noche pasada y la que comienza esta noche. </p><p>La tercera dice dónde cae hoy en el año propio de esta aplicación: qué semana, qué día de ella, y la porción de la Torá que la semana lee. </p><p>Las flechas mueven un día cada vez, y <strong>ir a una fecha</strong> lleva directamente a cualquier día."
+  },
+  "ladder": {
+   "title": "La escalera de hoy",
+   "beginner": "El bloque que responde a una sola pregunta: ¿y ahora qué? </p><p>La línea de arriba nombra el próximo paso que se pide, y al tocarla se va directamente a él. Con eso basta para empezar; todo lo demás está ahí para cuando se quiera. </p><p>Debajo están las cuentas del día. El <strong>corazón</strong> se llena con las diez oraciones, el <strong>círculo</strong> a su lado cuenta los estudios, y la menorá al final sostiene a los diez que la llevan. </p><p>Un poco es un paso. Unas pocas líneas abiertas cuentan."
+  },
+  "wheel": {
+   "title": "Ma’alot HaZman — מעלות הזמן",
+   "beginner": "El año entero dibujado como un solo día. Cada una de las cincuenta y dos semanas es un escalón en la esfera de un reloj, y dar una vuelta es recorrer el año. </p><p>Es la imagen inversa de lo que hacen las tarjetas de abajo. Ellas toman el día y muestran el año en que está; esto toma el año y lo pliega en un día, de modo que una semana se vuelve una hora y el conjunto se ve de una sola mirada. </p><p>Toque cualquier escalón para ver esa semana y lo que lleva. La aguja muestra dónde cae el ahora."
+  },
+  "keterdaat": {
+   "title": "Keter / Da’at — כֶּתֶר / דַּעַת",
+   "beginner": "La cabeza del día, y el reloj que lo guarda. </p><p>Keter significa corona — la más alta de las diez — y Da’at significa conocer. Comparten un mismo lugar porque nunca se cuentan juntos: donde uno está dentro de las diez, el otro no. </p><p>Las horas nombradas aquí son la breve franja en torno a la mitad de la noche, y la esfera de abajo despliega el día entero como un círculo, de modo que se ve de una mirada qué hora pertenece a qué cualidad y dónde cae el ahora. Los botones de abajo cambian entre horas de reloj y horas medidas por el sol mismo, y por eso piden su ciudad. </p><p>Y una palabra sobre dónde se encuentra Keter. R. Yehoshúa ben Leví encontró una vez al Mashíaj y le preguntó cuándo vendría. <strong>Hoy</strong>, respondió. Pasó el día y no vino, y R. Yehoshúa fue a Eliahu el Profeta y le dijo que el Mashíaj le había mentido. Eliahu respondió: no mintió. Citaba un versículo — <bdi lang=\"he\">הַיּוֹם אִם בְּקֹלוֹ תִשְׁמָעוּ</bdi>, <em>hoy, si escucháis Su voz</em>. Lo más alto que hay no espera en algún lugar lejano. Está en este día, con esa única condición."
+  },
+  "keterlm": {
+   "title": "Todo el año — בכל השנה",
+   "beginner": "Dos grandes libros leídos de corrido a lo largo del año, cada uno en el día que le corresponde. El Likutei Moharán de Rabí Najmán tiene una lección para cada fecha hebrea, de modo que la lección de hoy y el carácter de hoy están hechos para encontrarse; y el Zóhar, el libro central de la Cábala, se lee a dos folios por día —cuatro el jueves— lo que lo completa entero en un solo año. </p><p>Esto está en Keter, la corona, porque Keter es lo que está por encima del año y no dentro de él, y estos dos son la lectura que da la vuelta entera sin interrupción. </p><p>Nada aquí pide prisa. Unas líneas de la lección, una página del Zóhar abierta: lo esencial es estar en ello el día al que pertenece."
+  },
+  "chochmah": {
+   "title": "Alef Bet — ciclo de 22 días",
+   "beginner": "El alfabeto hebreo tiene veintidós letras, y el Séfer Yetzirá —uno de los libros más antiguos de la Cábala— enseña que Dios hizo el mundo con ellas. Este ciclo da una letra a cada día, de modo que el alfabeto entero vuelve cada tres semanas aproximadamente, diecisiete veces al año. </p><p>La idea es sencilla. Si las letras son aquello de lo que todo está hecho, entonces quedarse con una sola letra durante un día es quedarse con una de las herramientas con que se hizo el mundo. La letra de hoy está en la tarjeta, y con ella un versículo que empieza con esa letra. </p><p>Junto a las letras, la tarjeta lleva una página diaria de la Torá del Alter Rebe, Torá Or y Likutei Torá, los dos libros cortados para que terminen con el año."
+  },
+  "binah": {
+   "title": "Sefirot — ciclo del Ómer 7×7×7",
+   "beginner": "Entre Pésaj y Shavuot hay cuarenta y nueve días del Ómer, y cada uno de ellos une dos de las siete cualidades del corazón: bondad dentro de bondad, contención dentro de bondad, y así por las cuarenta y nueve. </p><p>Este ciclo toma esa cuenta y la recorre a lo largo del año entero en vez de siete semanas, pasando siete veces por las mismas cuarenta y nueve, de modo que cada cualidad se mira dentro de cada otra, y luego todo ese examen se hace otras siete veces. Biná significa entendimiento, y esto es lo que el entendimiento hace: toma una cosa y la gira hasta que se ha visto cada uno de sus lados. </p><p>Junto a él, la tarjeta lleva Likutei Tefilot, las plegarias que Reb Noson hizo de las enseñanzas de Rabí Najmán: una enseñanza vuelta algo que se puede decir."
+  },
+  "chesed": {
+   "title": "Shem Ayin-Bet — ciclo de 72 días",
+   "beginner": "Jésed es bondad, y bondad quiere decir dar. La Torá pasada de un maestro a un alumno es dar en su forma más pura, y por eso se lee aquí la Torá Oral: diez capítulos de Mishná en los cinco primeros días de la semana, y luego ocho de Toseftá en los dos últimos. </p><p>Junto a ella corre el Nombre de setenta y dos letras, extraído de tres versículos en la partición del mar. Se lee en cinco tramos de setenta y dos días con cuatro días de silencio entre ellos — y <bdi lang=\"he\">חֶסֶד</bdi> es él mismo setenta y dos. </p><p>Cinco con cuatro en medio es una forma que reaparece: las aberturas entre los dedos alzados del Cohén cuando bendice, y los cinco lóbulos del pulmón con las fisuras que los separan. Éste es el ciclo de los sacerdotes, y su elemento es el agua: el lavado antes de cada bendición."
+  },
+  "gevurah": {
+   "title": "Cuatro estaciones — ciclo de 91 días",
+   "beginner": "Dos capítulos de Profetas y Escritos cada día, lo que lleva sus setecientos veintiocho capítulos a lo largo del año. Son los libros de la historia de Israel y de su reproche —la voz fuerte— y Guevurá es la Sefirá de la fuerza, de la palabra fija que no se dobla. </p><p>Junto a ellos el año se divide en sus cuatro estaciones, noventa y un días cada una, sin que sobre nada: 4 × 91 son 364, la división más limpia que el año permite. </p><p>Cada estación lleva uno de los cuatro rostros de la visión de Yejezkel y una de las cuatro posturas de Pirkei Avot —ligero como el águila, veloz como el ciervo, fuerte como el león, y el buey que labra la tierra— con un ángel y un elemento para cada una. Y cada estación corre hacia su propio centro y luego vuelve a salir, de modo que la mitad del camino no es una marca sino un corazón."
+  },
+  "tiferet": {
+   "title": "Midot — ciclo de 13 días",
+   "beginner": "La Torá da trece maneras de describir la misericordia de Dios, y este ciclo toma una de ellas cada día, de modo que las trece vuelven veintiocho veces al año. </p><p>Están en Tiféret, que significa belleza, porque la belleza aquí no es adorno: es lo que ocurre cuando la bondad y la fuerza se sostienen en equilibrio, y la misericordia es exactamente ese equilibrio. Leer un atributo por día es aprender el equilibrio caminándolo. </p><p>Doce de los trece días llevan también a uno de los príncipes que trajeron una ofrenda en la dedicación del Mishkán, y el decimotercero lleva a Aharón, cuya ofrenda fue el encendido de la Menorá. Y cada ciclo lleva un texto propio: un capítulo de las leyes de bendiciones del Alter Rebe, o uno de los trece Cuentos de Rabí Najmán."
+  },
+  "netzach": {
+   "title": "Ciclo de 40 días: recibir la Torá",
+   "beginner": "Cuarenta días estuvo Moshé en la montaña para recibir la Torá, y cuarenta días dura este ciclo —nueve de ellos al año, con un día cuarenta y uno que sella cada uno. </p><p>Cada vuelta lleva los Diez Mandamientos a través de los cuatro niveles del alma, diez días por nivel, ascendiendo a medida que avanza: desde el alma que mueve el cuerpo, a la que siente, a la que entiende, a la que alcanza más allá de la persona misma. Los quince pasos del día hacen lo mismo en pequeño, de modo que quien sube aquí sube en ambos. </p><p>Nétzaj significa perseverancia —la cualidad de seguir— y cuarenta y un días son también la cuenta desde Rosh Jódesh Elul hasta Iom Kipur. Junto al ciclo corren dos recopilaciones que Reb Noson hizo de las palabras de Rabí Najmán: sus conversaciones, y luego sus consejos."
+  },
+  "hod": {
+   "title": "Ciclo de 728 medios días",
+   "beginner": "El año aquí se cuenta no en días sino en medios días —setecientos veintiocho— con una ley estudiada por la mañana y otra por la tarde. Ese ritmo es el del Templo: un cordero ofrecido al alba y otro al caer la tarde, cada día sin interrupción. </p><p>Ido el Templo, las dos leyes diarias ocupan su lugar. Tana d’Vei Eliahu enseña que quien estudia dos halajot al día tiene asegurado el Mundo Venidero, y el Talmud da la misma medida: un capítulo por la mañana y un capítulo por la tarde hacen que la Torá de uno sea continua y no ocasional. </p><p>Así que el libro que fija la medida se lee él mismo según ella. Sus cincuenta y seis capítulos se dividen en los 728 medios días exactamente, un capítulo por cada trece. Hod es la cualidad del reconocimiento y de acertar en el detalle, que es lo que es un día de ley."
+  },
+  "yesod": {
+   "title": "Ciclo de Shovavim",
+   "beginner": "Shovavim es un tramo de semanas de invierno, llamado por las iniciales de las porciones de la Torá que recorre, de Shemot a Mishpatim. Desde antiguo se guarda como una temporada de cuidar la pureza y reparar lo que se ha torcido en esa parte de la vida. </p><p>Este ciclo mantiene ese trabajo todo el año en vez de seis semanas, una porción por semana a lo largo de las cincuenta y dos. Yesod es la Sefirá del fundamento —el lugar donde se reúne todo lo de arriba y se pasa adelante— de modo que lo que aquí se guarda es lo que se entrega. </p><p>Junto a la porción, la tarjeta lleva a Rav Yosef Jaim de Bagdad: sus responsa durante la semana, y el viernes y el Shabat el Ben Ish Jai mismo, sus leyes y luego sus homilías."
+  },
+  "malchut": {
+   "title": "Conexión de todo el año y los libros semanales",
+   "beginner": "Maljut es la última de las diez Sefirot, la que recibe de todas las demás y les da dónde posarse —como la luna, que no tiene luz propia y brilla con la del sol. </p><p>Por eso ésta es la tarjeta que reúne. Lleva la última enseñanza pública del Rebe de Lubavitch, leída entera cada trece días; siete libros, uno que corona cada día de la semana; y el código entero de la ley del Rambam, recorrido de extremo a extremo cada veintiocho días. </p><p>Veintiocho no es aquí un número arbitrario. Shlomó HaMélej contó veintiocho tiempos en Kohélet —tiempo de nacer y tiempo de morir, tiempo de callar y tiempo de hablar— y el trabajo de Maljut es servir a Dios dentro del tiempo en el que uno realmente está."
+  },
+  "ohrkitov": {
+   "title": "La luz que es buena — אוֹר כִּי טוֹב",
+   "beginner": "Dos maestros de una misma generación, que nunca se encontraron. </p><p>El <strong>Baal Shem Tov</strong> (1698–1760) inició el movimiento jasídico y no escribió libro propio. Lo que enseñó fue puesto por escrito por sus alumnos y reunido después en el <strong>Kéter Shem Tov</strong>, y una sección breve de él aparece aquí cada día. </p><p>El <strong>Or HaJaim</strong> es Rabí Jaim ibn Atar (1696–1743), nacido en Marruecos, que llegó a Jerusalén el último año de su vida. Su comentario a la Torá sigue la porción semanal, de modo que es la parashá y no la fecha la que decide qué aparece. </p><p>El nombre de esta sección está hecho de sus dos libros — <bdi lang=\"he\">אוֹר</bdi> del uno y <bdi lang=\"he\">טוֹב</bdi> del otro — y ambas palabras están en un solo versículo: y vio Dios la luz, que era buena."
+  },
+  "yomchazak": {
+   "title": "Día fuerte — יוֹם חָזָק",
+   "beginner": "Tres libros del Rambam y del Rebe, estudiados poco a poco cada día. </p><p>El <strong>Mishné Torá</strong> es el único código que abarca toda la ley judía —escrito por Rabí Moshé ben Maimón en el siglo doce, y llamado desde entonces <em>la Mano Fuerte</em>, porque <bdi lang=\"he\">יָד</bdi> vale catorce y la obra tiene catorce libros. Tres capítulos al día lo terminan en un año; a su lado hay una vía de un solo capítulo para quien lleve ese paso. </p><p>El <strong>Séfer HaMitzvot</strong> es el recuento de los 613 preceptos del Rambam, y <strong>HaYom Yom</strong> es un almanaque jasídico con una enseñanza breve para cada día del año, reunido por el Rebe de Lubavitch de las charlas y cartas de su suegro. </p><p>Ésta es la parte llamada Día Fuerte, y es el decimotercero de los quince pasos de subida."
+  }
+ },
+ "fr": {
+  "date": {
+   "title": "La date — trois calendriers à la fois",
+   "beginner": "Trois lignes, trois façons de dire le même jour. </p><p>La première est la date civile. La seconde est la date hébraïque, qui commence la veille au soir — un jour juif commence à la tombée de la nuit et non à minuit — et c’est pourquoi la ligne du dessous nomme séparément la nuit passée et celle qui commence ce soir. </p><p>La troisième dit où tombe aujourd’hui dans l’année propre à cette application : quelle semaine, quel jour de celle-ci, et la section de la Torah que la semaine lit. </p><p>Les flèches déplacent d’un jour, et <strong>aller à une date</strong> mène directement au jour voulu."
+  },
+  "ladder": {
+   "title": "L’échelle d’aujourd’hui",
+   "beginner": "Le bloc qui répond à une seule question : et maintenant ? </p><p>La ligne du haut nomme le prochain pas demandé, et la toucher y mène directement. Cela suffit pour commencer ; tout le reste est là pour quand on le voudra. </p><p>En dessous se tiennent les comptes du jour. Le <strong>cœur</strong> se remplit des dix prières, le <strong>cercle</strong> à côté compte les études, et la menorah au bout porte les dix qui la portent. </p><p>Un peu est un pas. Quelques lignes ouvertes comptent."
+  },
+  "wheel": {
+   "title": "Ma’alot HaZman — מעלות הזמן",
+   "beginner": "L’année entière dessinée comme un seul jour. Chacune des cinquante-deux semaines est une marche sur un cadran, et en faire le tour une fois, c’est traverser l’année. </p><p>C’est l’image inverse de ce que font les cartes en dessous. Elles prennent le jour et montrent l’année où il se tient ; ceci prend l’année et la replie en un jour, si bien qu’une semaine devient une heure et que le tout se voit d’un seul regard. </p><p>Touchez n’importe quelle marche pour voir cette semaine et ce qu’elle porte. L’aiguille montre où tombe le maintenant."
+  },
+  "keterdaat": {
+   "title": "Kéter / Da’at — כֶּתֶר / דַּעַת",
+   "beginner": "La tête du jour, et l’horloge qui la garde. </p><p>Kéter veut dire couronne — la plus haute des dix — et Da’at veut dire connaître. Ils partagent un seul lieu parce qu’ils ne sont jamais comptés ensemble : là où l’un est dans les dix, l’autre n’y est pas. </p><p>Les heures nommées ici sont la courte bande autour du milieu de la nuit, et le cadran en dessous déploie le jour entier comme un cercle, si bien qu’on voit d’un regard quelle heure appartient à quelle qualité et où tombe le maintenant. Les boutons en dessous passent des heures d’horloge aux heures mesurées par le soleil lui-même, et c’est pourquoi ils demandent votre ville. </p><p>Et un mot sur le lieu où se trouve Kéter. R. Yehoshoua ben Levi rencontra un jour le Mashiah et lui demanda quand il viendrait. <strong>Aujourd’hui</strong>, répondit-il. Le jour passa et il ne vint pas, et R. Yehoshoua alla trouver Éliyahou le Prophète en disant que le Mashiah lui avait menti. Éliyahou répondit : il n’a pas menti. Il citait un verset — <bdi lang=\"he\">הַיּוֹם אִם בְּקֹלוֹ תִשְׁמָעוּ</bdi>, <em>aujourd’hui, si vous écoutez Sa voix</em>. La chose la plus haute qui soit n’attend pas au loin. Elle est dans ce jour, à cette seule condition."
+  },
+  "keterlm": {
+   "title": "Toute l’année — בכל השנה",
+   "beginner": "Deux grands livres lus d’un bout à l’autre de l’année, chacun le jour qui lui convient. Le Likoutei Moharan de Rabbi Nahman a une leçon pour chaque date hébraïque, de sorte que la leçon du jour et le caractère du jour sont faits pour se rencontrer ; et le Zohar, le livre central de la Kabbale, se lit à deux folios par jour — quatre le jeudi — ce qui l’achève tout entier en une seule année. </p><p>Cela siège en Kéter, la couronne, parce que Kéter est ce qui se tient au-dessus de l’année et non dedans, et ces deux-là sont la lecture qui fait le tour sans s’interrompre. </p><p>Rien ici ne demande de la vitesse. Quelques lignes de la leçon, une page du Zohar ouverte : l’essentiel est d’y être le jour auquel elle appartient."
+  },
+  "chochmah": {
+   "title": "Alef Bet — cycle de 22 jours",
+   "beginner": "L’alphabet hébreu compte vingt-deux lettres, et le Séfer Yetsira — l’un des plus anciens livres de la Kabbale — enseigne que Dieu a fait le monde avec elles. Ce cycle donne une lettre à chaque jour, de sorte que l’alphabet entier revient environ toutes les trois semaines, dix-sept fois par an. </p><p>L’idée est simple. Si les lettres sont ce dont tout est fait, alors demeurer une journée avec une seule lettre, c’est demeurer avec l’un des outils qui ont servi à faire le monde. La lettre du jour est sur la carte, et avec elle un verset qui commence par cette lettre. </p><p>À côté des lettres, la carte porte une page par jour de la Torah de l’Admour Hazaken, Torah Or et Likoutei Torah, les deux livres découpés pour s’achever avec l’année."
+  },
+  "binah": {
+   "title": "Sefirot — cycle du Omer 7×7×7",
+   "beginner": "Entre Pessah et Chavouot il y a quarante-neuf jours du Omer, et chacun d’eux apparie deux des sept qualités du cœur : la bonté dans la bonté, la retenue dans la bonté, et ainsi à travers les quarante-neuf. </p><p>Ce cycle prend ce compte et le fait courir sur l’année entière au lieu de sept semaines, repassant sept fois par les mêmes quarante-neuf, de sorte que chaque qualité est regardée à l’intérieur de chaque autre, puis tout cet examen est refait sept fois. Bina veut dire compréhension, et c’est ce que fait la compréhension : elle prend une chose et la tourne jusqu’à ce que chaque côté en ait été vu. </p><p>À côté, la carte porte le Likoutei Tefilot, les prières que Reb Noson a tirées des enseignements de Rabbi Nahman : un enseignement devenu quelque chose qu’on peut dire."
+  },
+  "chesed": {
+   "title": "Shem Ayin-Bet — cycle de 72 jours",
+   "beginner": "Hessed est bonté, et la bonté veut dire donner. La Torah transmise d’un maître à un élève est le don sous sa forme la plus pure, et c’est pourquoi on lit ici la Torah orale : dix chapitres de Michna les cinq premiers jours de la semaine, puis huit de Tossefta les deux derniers. </p><p>À côté court le Nom de soixante-douze lettres, tiré de trois versets à l’ouverture de la mer. Il se lit en cinq tronçons de soixante-douze jours séparés par quatre jours de silence — et <bdi lang=\"he\">חֶסֶד</bdi> vaut lui-même soixante-douze. </p><p>Cinq avec quatre entre eux est une forme qui revient sans cesse : les ouvertures entre les doigts levés du Cohen lorsqu’il bénit, et les cinq lobes du poumon avec les scissures qui les séparent. C’est le cycle des prêtres, et son élément est l’eau — l’ablution avant chaque bénédiction."
+  },
+  "gevurah": {
+   "title": "Quatre saisons — cycle de 91 jours",
+   "beginner": "Deux chapitres des Prophètes et des Écrits chaque jour, ce qui porte leurs sept cent vingt-huit chapitres à travers l’année. Ce sont les livres de l’histoire d’Israël et de sa réprimande — la voix forte — et Guevoura est la Sefira de la force, de la parole fixe qui ne plie pas. </p><p>À côté d’eux, l’année se divise en ses quatre saisons, quatre-vingt-onze jours chacune, sans rien qui reste : 4 × 91 font 364, la division la plus nette que l’année permette. </p><p>Chaque saison porte l’une des quatre faces de la vision de Yehezkel et l’une des quatre postures des Pirkei Avot — léger comme l’aigle, rapide comme le cerf, fort comme le lion, et le bœuf qui travaille la terre — avec un ange et un élément pour chacune. Et chaque saison court vers son propre milieu puis en ressort, si bien que la mi-chemin n’est pas un repère mais un cœur."
+  },
+  "tiferet": {
+   "title": "Midot — cycle de 13 jours",
+   "beginner": "La Torah donne treize manières de décrire la miséricorde de Dieu, et ce cycle en prend une chaque jour, de sorte que les treize reviennent vingt-huit fois par an. </p><p>Elles siègent en Tiféret, qui veut dire beauté, parce que la beauté n’est pas ici un ornement : c’est ce qui arrive quand la bonté et la force se tiennent en équilibre, et la miséricorde est exactement cet équilibre. Lire un attribut par jour, c’est apprendre l’équilibre en le parcourant. </p><p>Douze des treize jours portent aussi l’un des princes qui apportèrent une offrande à la dédicace du Michkan, et le treizième porte Aharon, dont l’offrande fut l’allumage de la Menorah. Et chaque cycle porte un texte propre : un chapitre des lois des bénédictions de l’Admour Hazaken, ou l’un des treize Contes de Rabbi Nahman."
+  },
+  "netzach": {
+   "title": "Cycle de 40 jours : recevoir la Torah",
+   "beginner": "Quarante jours Moché se tint sur la montagne pour recevoir la Torah, et quarante jours dure ce cycle — neuf par an, avec un quarante et unième jour qui scelle chacun. </p><p>Chaque tour porte les Dix Paroles à travers les quatre niveaux de l’âme, dix jours par niveau, en montant à mesure : de l’âme qui meut le corps, à celle qui sent, à celle qui comprend, à celle qui atteint au-delà de la personne elle-même. Les quinze pas du jour font la même chose en petit, si bien que celui qui monte ici monte dans les deux. </p><p>Netsah veut dire endurance — la qualité de continuer — et quarante et un jours sont aussi le compte de Roch Hodech Eloul à Yom Kippour. À côté du cycle courent deux recueils que Reb Noson a tirés des paroles de Rabbi Nahman : ses conversations, puis ses conseils."
+  },
+  "hod": {
+   "title": "Cycle de 728 demi-journées",
+   "beginner": "L’année se compte ici non en jours mais en demi-journées — sept cent vingt-huit — avec une loi étudiée le matin et une l’après-midi. Ce rythme est celui du Temple : un agneau offert à l’aube et un autre vers le soir, chaque jour sans interruption. </p><p>Le Temple disparu, les deux lois quotidiennes tiennent sa place. Le Tana deVei Eliyahou enseigne que celui qui étudie deux halakhot par jour a part au Monde à Venir, et le Talmud donne la même mesure : un chapitre le matin et un chapitre le soir rendent la Torah d’un homme continue et non occasionnelle. </p><p>Ainsi le livre qui fixe la mesure est lui-même lu selon elle. Ses cinquante-six chapitres se divisent exactement dans les 728 demi-journées, un chapitre pour treize. Hod est la qualité de la reconnaissance et de la justesse du détail, ce qu’est précisément une journée de loi."
+  },
+  "yesod": {
+   "title": "Cycle de Chovavim",
+   "beginner": "Chovavim est une suite de semaines d’hiver, nommée d’après les initiales des sections de la Torah qu’elle traverse, de Chemot à Michpatim. On la garde depuis longtemps comme une saison de garde de la pureté et de réparation de ce qui s’est gâté dans cette part de la vie. </p><p>Ce cycle tient ce travail toute l’année au lieu de six semaines, une section par semaine sur les cinquante-deux. Yesod est la Sefira du fondement — le lieu où tout ce qui est au-dessus est rassemblé puis transmis — de sorte que ce qui est gardé ici est ce qui est remis plus loin. </p><p>À côté de la section, la carte porte Rav Yossef Haïm de Bagdad : ses responsa durant la semaine, et le vendredi et le Chabbat le Ben Ich Haï lui-même, ses lois puis ses homélies."
+  },
+  "malchut": {
+   "title": "Connexion de toute l’année et les livres de la semaine",
+   "beginner": "Malkhout est la dernière des dix Sefirot, celle qui reçoit de toutes les autres et leur donne où se poser — comme la lune, qui n’a pas de lumière propre et brille de celle du soleil. </p><p>C’est pourquoi c’est la carte qui rassemble. Elle porte le dernier enseignement public du Rabbi de Loubavitch, lu en entier tous les treize jours ; sept livres, un pour couronner chaque jour de la semaine ; et le code entier de la loi du Rambam, parcouru d’un bout à l’autre tous les vingt-huit jours. </p><p>Vingt-huit n’est pas ici un nombre arbitraire. Chelomo HaMélekh a compté vingt-huit temps dans Kohélet — un temps pour naître et un temps pour mourir, un temps pour se taire et un temps pour parler — et le travail de Malkhout est de servir Dieu à l’intérieur du temps où l’on se trouve réellement."
+  },
+  "ohrkitov": {
+   "title": "La lumière qui est bonne — אוֹר כִּי טוֹב",
+   "beginner": "Deux maîtres d’une même génération, qui ne se sont jamais rencontrés. </p><p>Le <strong>Baal Chem Tov</strong> (1698–1760) a commencé le mouvement hassidique et n’a écrit aucun livre de sa main. Ce qu’il enseignait fut noté par ses élèves et rassemblé ensuite dans le <strong>Kéter Chem Tov</strong>, dont une courte section revient ici chaque jour. </p><p>L’<strong>Or HaHaïm</strong> est Rabbi Haïm ibn Attar (1696–1743), né au Maroc, arrivé à Jérusalem la dernière année de sa vie. Son commentaire sur la Torah suit la section hebdomadaire, si bien que c’est la paracha et non la date qui décide de ce qui paraît. </p><p>Le nom de cette section est fait de leurs deux livres — <bdi lang=\"he\">אוֹר</bdi> de l’un et <bdi lang=\"he\">טוֹב</bdi> de l’autre — et les deux mots tiennent dans un seul verset : et Dieu vit la lumière, qu’elle était bonne."
+  },
+  "yomchazak": {
+   "title": "Jour fort — יוֹם חָזָק",
+   "beginner": "Trois livres du Rambam et du Rabbi, étudiés un peu chaque jour. </p><p>Le <strong>Michné Torah</strong> est le seul code qui couvre toute la loi juive — écrit par Rabbi Moché ben Maïmon au douzième siècle, et appelé depuis lors <em>la Main Forte</em>, car <bdi lang=\"he\">יָד</bdi> vaut quatorze et l’ouvrage compte quatorze livres. Trois chapitres par jour l’achèvent en un an ; à côté, une voie d’un seul chapitre pour qui tient ce rythme. </p><p>Le <strong>Séfer HaMitsvot</strong> est le dénombrement des 613 commandements par le Rambam, et le <strong>HaYom Yom</strong> est un almanach hassidique donnant un court enseignement pour chaque jour de l’année, rassemblé par le Rabbi de Loubavitch à partir des causeries et des lettres de son beau-père. </p><p>C’est la partie appelée Jour Fort, et c’est le treizième des quinze pas de la montée."
+  }
+ },
+ "pt": {
+  "date": {
+   "title": "A data — três calendários de uma vez",
+   "beginner": "Três linhas, três maneiras de dizer o mesmo dia. </p><p>A primeira é a data civil. A segunda é a data hebraica, que começa na noite anterior — um dia judaico começa ao anoitecer e não à meia-noite — e por isso a linha abaixo nomeia separadamente a noite que passou e a que começa esta noite. </p><p>A terceira diz onde cai hoje no ano próprio deste aplicativo: qual semana, qual dia dela, e a porção da Torá que a semana lê. </p><p>As setas movem um dia de cada vez, e <strong>ir para uma data</strong> leva direto a qualquer dia."
+  },
+  "ladder": {
+   "title": "A escada de hoje",
+   "beginner": "O bloco que responde a uma única pergunta: e agora? </p><p>A linha de cima nomeia o próximo passo pedido, e tocá-la leva direto a ele. Isso basta para começar; todo o resto está ali para quando se quiser. </p><p>Abaixo estão as contas do dia. O <strong>coração</strong> se enche com as dez orações, o <strong>círculo</strong> ao lado conta os estudos, e a menorá ao fim sustenta os dez que a carregam. </p><p>Um pouco é um passo. Algumas linhas abertas contam."
+  },
+  "wheel": {
+   "title": "Ma’alot HaZman — מעלות הזמן",
+   "beginner": "O ano inteiro desenhado como um único dia. Cada uma das cinquenta e duas semanas é um degrau no mostrador de um relógio, e dar uma volta é percorrer o ano. </p><p>É a imagem inversa do que fazem os cartões abaixo. Eles tomam o dia e mostram o ano em que ele está; isto toma o ano e o dobra em um dia, de modo que uma semana vira uma hora e o todo se vê num só olhar. </p><p>Toque qualquer degrau para ver aquela semana e o que ela carrega. O ponteiro mostra onde cai o agora."
+  },
+  "keterdaat": {
+   "title": "Keter / Da’at — כֶּתֶר / דַּעַת",
+   "beginner": "A cabeça do dia, e o relógio que a guarda. </p><p>Keter significa coroa — a mais alta das dez — e Da’at significa conhecer. Partilham um único lugar porque nunca são contados juntos: onde um está dentro das dez, o outro não está. </p><p>As horas aqui nomeadas são a curta faixa em torno do meio da noite, e o mostrador abaixo abre o dia inteiro como um círculo, de modo que se vê num olhar qual hora pertence a qual qualidade e onde cai o agora. Os botões abaixo alternam entre horas de relógio e horas medidas pelo próprio sol, e por isso pedem a sua cidade. </p><p>E uma palavra sobre onde Keter se encontra. R. Yehoshua ben Levi encontrou certa vez o Mashiach e perguntou-lhe quando viria. <strong>Hoje</strong>, respondeu. Passou o dia e ele não veio, e R. Yehoshua foi a Eliahu, o Profeta, dizendo que o Mashiach lhe mentira. Eliahu respondeu: não mentiu. Citava um versículo — <bdi lang=\"he\">הַיּוֹם אִם בְּקֹלוֹ תִשְׁמָעוּ</bdi>, <em>hoje, se ouvirdes a Sua voz</em>. A coisa mais alta que há não espera longe daqui. Está neste dia, com essa única condição."
+  },
+  "keterlm": {
+   "title": "O ano inteiro — בכל השנה",
+   "beginner": "Dois grandes livros lidos de ponta a ponta ao longo do ano, cada um no dia que lhe cabe. O Likutei Moharan de Rebe Nachman tem uma lição para cada data hebraica, de modo que a lição de hoje e o caráter de hoje foram feitos para se encontrar; e o Zohar, o livro central da Cabalá, é lido a dois fólios por dia — quatro na quinta-feira — o que o completa inteiro em um único ano. </p><p>Isto fica em Keter, a coroa, porque Keter é o que está acima do ano e não dentro dele, e estes dois são a leitura que dá a volta inteira sem parar. </p><p>Nada aqui pede pressa. Algumas linhas da lição, uma página do Zohar aberta: o essencial é estar nela no dia a que ela pertence."
+  },
+  "chochmah": {
+   "title": "Alef Bet — ciclo de 22 dias",
+   "beginner": "O alfabeto hebraico tem vinte e duas letras, e o Sefer Yetsirá — um dos livros mais antigos da Cabalá — ensina que Deus fez o mundo com elas. Este ciclo dá uma letra a cada dia, de modo que o alfabeto inteiro retorna a cada três semanas aproximadamente, dezessete vezes por ano. </p><p>A ideia é simples. Se as letras são aquilo de que tudo é feito, então ficar um dia inteiro com uma única letra é ficar com uma das ferramentas com que o mundo foi feito. A letra de hoje está no cartão, e com ela um versículo que começa por essa letra. </p><p>Ao lado das letras, o cartão traz uma página por dia da Torá do Alter Rebe, Torá Or e Likutei Torá, os dois livros cortados para terminarem com o ano."
+  },
+  "binah": {
+   "title": "Sefirot — ciclo do Ômer 7×7×7",
+   "beginner": "Entre Pessach e Shavuot há quarenta e nove dias do Ômer, e cada um deles une duas das sete qualidades do coração: bondade dentro de bondade, contenção dentro de bondade, e assim por todas as quarenta e nove. </p><p>Este ciclo toma essa contagem e a percorre pelo ano inteiro em vez de sete semanas, passando sete vezes pelas mesmas quarenta e nove, de modo que cada qualidade é olhada dentro de cada outra, e depois todo esse exame é feito mais sete vezes. Biná significa entendimento, e é isso que o entendimento faz: toma uma coisa e a gira até que cada lado tenha sido visto. </p><p>Ao lado, o cartão traz o Likutei Tefilot, as preces que Reb Noson fez dos ensinamentos de Rebe Nachman: um ensinamento tornado algo que se pode dizer."
+  },
+  "chesed": {
+   "title": "Shem Ayin-Bet — ciclo de 72 dias",
+   "beginner": "Chessed é bondade, e bondade quer dizer dar. A Torá passada de um mestre a um aluno é dar em sua forma mais pura, e por isso se lê aqui a Torá Oral: dez capítulos de Mishná nos cinco primeiros dias da semana, e depois oito de Tosseftá nos dois últimos. </p><p>Ao lado corre o Nome de setenta e duas letras, tirado de três versículos na abertura do mar. É lido em cinco trechos de setenta e dois dias com quatro dias de silêncio entre eles — e <bdi lang=\"he\">חֶסֶד</bdi> é ele mesmo setenta e dois. </p><p>Cinco com quatro no meio é uma forma que reaparece: as aberturas entre os dedos erguidos do Cohen ao abençoar, e os cinco lobos do pulmão com as fissuras que os separam. Este é o ciclo dos sacerdotes, e seu elemento é a água — a lavagem antes de cada bênção."
+  },
+  "gevurah": {
+   "title": "Quatro estações — ciclo de 91 dias",
+   "beginner": "Dois capítulos dos Profetas e Escritos todos os dias, o que leva os seus setecentos e vinte e oito capítulos ao longo do ano. São os livros da história de Israel e da sua repreensão — a voz forte — e Guevurá é a Sefirá da força, da palavra fixa que não se dobra. </p><p>Ao lado deles o ano se divide nas suas quatro estações, noventa e um dias cada uma, sem que sobre nada: 4 × 91 são 364, a divisão mais limpa que o ano permite. </p><p>Cada estação carrega uma das quatro faces da visão de Yechezkel e uma das quatro posturas de Pirkei Avot — leve como a águia, veloz como o cervo, forte como o leão, e o boi que lavra a terra — com um anjo e um elemento para cada. E cada estação corre para dentro, até o seu próprio meio, e depois volta a sair, de modo que o meio do caminho não é uma marca mas um coração."
+  },
+  "tiferet": {
+   "title": "Midot — ciclo de 13 dias",
+   "beginner": "A Torá dá treze maneiras de descrever a misericórdia de Deus, e este ciclo toma uma delas a cada dia, de modo que as treze retornam vinte e oito vezes por ano. </p><p>Elas ficam em Tiféret, que significa beleza, porque a beleza aqui não é enfeite: é o que acontece quando a bondade e a força são sustentadas em equilíbrio, e a misericórdia é exatamente esse equilíbrio. Ler um atributo por dia é aprender o equilíbrio percorrendo-o. </p><p>Doze dos treze dias carregam também um dos príncipes que trouxeram uma oferenda na dedicação do Mishkan, e o décimo terceiro carrega Aharon, cuja oferenda foi o acendimento da Menorá. E cada ciclo carrega um texto próprio: um capítulo das leis das bênçãos do Alter Rebe, ou um dos treze Contos de Rebe Nachman."
+  },
+  "netzach": {
+   "title": "Ciclo de 40 dias: receber a Torá",
+   "beginner": "Quarenta dias Moshé esteve no monte para receber a Torá, e quarenta dias dura este ciclo — nove deles por ano, com um quadragésimo primeiro dia que sela cada um. </p><p>Cada volta leva os Dez Mandamentos através dos quatro níveis da alma, dez dias por nível, subindo conforme avança: da alma que move o corpo, à que sente, à que entende, à que alcança para além da própria pessoa. Os quinze passos do dia fazem o mesmo em pequeno, de modo que quem sobe aqui sobe em ambos. </p><p>Nétsach significa perseverança — a qualidade de continuar — e quarenta e um dias são também a contagem de Rosh Chódesh Elul até Yom Kipur. Ao lado do ciclo correm duas coletâneas que Reb Noson fez das palavras de Rebe Nachman: suas conversas, e depois seus conselhos."
+  },
+  "hod": {
+   "title": "Ciclo de 728 meios-dias",
+   "beginner": "O ano aqui é contado não em dias mas em meios-dias — setecentos e vinte e oito — com uma lei estudada de manhã e outra à tarde. Esse ritmo é o do Templo: um cordeiro oferecido ao amanhecer e outro ao cair da tarde, todos os dias sem interrupção. </p><p>Ido o Templo, as duas leis diárias ocupam o seu lugar. O Taná deVei Eliahu ensina que quem estuda duas halachot por dia tem assegurado o Mundo Vindouro, e o Talmud dá a mesma medida: um capítulo de manhã e um capítulo à noite tornam a Torá de alguém contínua e não ocasional. </p><p>Assim o livro que fixa a medida é ele mesmo lido por ela. Os seus cinquenta e seis capítulos dividem-se exatamente nos 728 meios-dias, um capítulo para cada treze. Hod é a qualidade do reconhecimento e do acerto no detalhe, que é o que um dia de lei é."
+  },
+  "yesod": {
+   "title": "Ciclo de Shovavim",
+   "beginner": "Shovavim é um trecho de semanas de inverno, chamado pelas iniciais das porções da Torá que percorre, de Shemot a Mishpatim. Há muito é guardado como uma estação de guardar a pureza e reparar o que se torceu nessa parte da vida. </p><p>Este ciclo mantém esse trabalho o ano inteiro em vez de seis semanas, uma porção por semana ao longo das cinquenta e duas. Yesod é a Sefirá do fundamento — o lugar onde tudo o que está acima é reunido e passado adiante — de modo que o que aqui se guarda é o que é entregue. </p><p>Ao lado da porção, o cartão traz Rav Yossef Chaim de Bagdá: suas responsa ao longo da semana, e na sexta-feira e no Shabat o próprio Ben Ish Chai, suas leis e depois suas homilias."
+  },
+  "malchut": {
+   "title": "Conexão do ano inteiro e os livros da semana",
+   "beginner": "Malchut é a última das dez Sefirot, aquela que recebe de todas as outras e lhes dá onde pousar — como a lua, que não tem luz própria e brilha com a do sol. </p><p>Por isso este é o cartão que reúne. Ele traz o último ensinamento público do Rebe de Lubavitch, lido inteiro a cada treze dias; sete livros, um coroando cada dia da semana; e o código inteiro da lei do Rambam, percorrido de ponta a ponta a cada vinte e oito dias. </p><p>Vinte e oito não é aqui um número arbitrário. Shlomo HaMelech contou vinte e oito tempos em Kohélet — tempo de nascer e tempo de morrer, tempo de calar e tempo de falar — e o trabalho de Malchut é servir a Deus dentro do tempo em que se está de fato."
+  },
+  "ohrkitov": {
+   "title": "A luz que é boa — אוֹר כִּי טוֹב",
+   "beginner": "Dois mestres de uma mesma geração, que nunca se encontraram. </p><p>O <strong>Baal Shem Tov</strong> (1698–1760) começou o movimento chassídico e não escreveu livro próprio. O que ensinou foi anotado por seus alunos e reunido depois no <strong>Keter Shem Tov</strong>, e uma seção breve dele aparece aqui a cada dia. </p><p>O <strong>Or HaChaim</strong> é Rabi Chaim ibn Atar (1696–1743), nascido no Marrocos, que chegou a Jerusalém no último ano de sua vida. Seu comentário à Torá segue a porção semanal, de modo que é a parashá e não a data que decide o que aparece. </p><p>O nome desta seção é feito dos seus dois livros — <bdi lang=\"he\">אוֹר</bdi> de um e <bdi lang=\"he\">טוֹב</bdi> do outro — e ambas as palavras estão num único versículo: e viu Deus a luz, que era boa."
+  },
+  "yomchazak": {
+   "title": "Dia forte — יוֹם חָזָק",
+   "beginner": "Três livros do Rambam e do Rebe, estudados um pouco a cada dia. </p><p>O <strong>Mishné Torá</strong> é o único código que cobre toda a lei judaica — escrito por Rabi Moshé ben Maimon no século doze, e chamado desde então <em>a Mão Forte</em>, pois <bdi lang=\"he\">יָד</bdi> vale catorze e a obra tem catorze livros. Três capítulos por dia o terminam em um ano; ao lado há uma trilha de um só capítulo para quem segue esse passo. </p><p>O <strong>Sefer HaMitzvot</strong> é a contagem dos 613 preceitos do Rambam, e o <strong>HaYom Yom</strong> é um almanaque chassídico com um ensinamento breve para cada dia do ano, reunido pelo Rebe de Lubavitch das conversas e cartas de seu sogro. </p><p>Esta é a parte chamada Dia Forte, e é o décimo terceiro dos quinze passos de subida."
+  }
+ }
+}

@@ -4109,6 +4109,8 @@ content: ''; float: right; width: 30px; height: 1em;
         <button class="lang-btn" id="lang-btn-pt" onclick="setScriptLang('pt')">PT</button>
         <span class="lang-bar-sep"></span>
         <button class="lang-btn" id="beginner-btn" onclick="toggleBeginnerMode()" style="letter-spacing:0.3px;">Beginner</button>
+        <!-- The language chosen here is the page's, not the script's alone:
+             the ⓘ explanations follow it where they have been translated. -->
       </div>
     </div>
     <div id="daily-script-body" style="display:none">
@@ -14421,6 +14423,28 @@ content: ''; float: right; width: 30px; height: 1em;
     openTermPopup(t.dataset.term);
   });
 
+  // ── THE EXPLANATIONS IN OTHER LANGUAGES ──
+  // Held outside this file and fetched once, the way the Zohar summaries are:
+  // four languages across three depths would add a quarter of a megabyte to a
+  // page that is already large, and most readers want one of them. Until it
+  // lands — and for any entry or depth not yet translated — the English
+  // stands, which is the same fallback the depths themselves use.
+  let CYCLE_I18N = {};
+  fetch('cycle-info-i18n.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(j => { if (j && typeof j === 'object') CYCLE_I18N = j; })
+    .catch(() => {});
+
+  // The entry as the reader should have it: their language if it has been
+  // written, otherwise the English beside it.
+  function infoLocal(key, entry) {
+    const lang = (typeof _scriptLang === 'string') ? _scriptLang : 'en';
+    if (lang === 'en' || !key) return entry;
+    const t = CYCLE_I18N[lang] && CYCLE_I18N[lang][key];
+    if (!t) return entry;
+    return Object.assign({}, entry, t);
+  }
+
   // The text of an entry at the reader's depth, falling back as described.
   function infoProse(entry) {
     if (!entry) return '';
@@ -16026,8 +16050,9 @@ content: ''; float: right; width: 30px; height: 1em;
     const entry = CYCLE_INFO[el.dataset.cycle];
     // One entry is built rather than written: the day's two shapes are the
     // chosen city's own hours, so they cannot be a stored paragraph.
-    const info = (typeof entry === 'function') ? entry() : entry;
+    let info = (typeof entry === 'function') ? entry() : entry;
     if (!info) return;
+    info = infoLocal(el.dataset.cycle, info);
     // What a cycle means, and then what it is saying today. The second half
     // is the matter the card's own detail carries that is not a counted step,
     // a companion or a menorah — the letters behind Chochmah's cycle, the
@@ -16048,6 +16073,13 @@ content: ''; float: right; width: 30px; height: 1em;
     const body = infoProse(info);
     const prose = /^\s*</.test(body) ? body : '<p>' + body + '</p>';
     openInfoPopup(info.title, prose + more, info.meta);
+    // Hebrew reads the other way. Set on the popup rather than baked into the
+    // text, so the same paragraph serves whichever language asked for it.
+    const pm = document.getElementById('info-popup-main');
+    const pt = document.getElementById('info-popup-title');
+    const he = _scriptLang === 'he' && CYCLE_I18N.he && CYCLE_I18N.he[el.dataset.cycle];
+    if (pm) { pm.dir = he ? 'rtl' : 'ltr'; pm.lang = he ? 'he' : 'en'; }
+    if (pt) pt.dir = he ? 'rtl' : 'ltr';
     glossify(document.getElementById('info-popup-main'));
   }, true);
 
@@ -21115,7 +21147,16 @@ content: ''; float: right; width: 30px; height: 1em;
   });
 
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
-  let _scriptLang = 'en';
+  // The language the page's prose is read in. It began as the Daily Script's
+  // own and is now the page's: the ⓘ explanations and the glossary read it
+  // too. Remembered, as the other reading settings are.
+  let _scriptLang = (function () {
+    try {
+      const v = localStorage.getItem('kotLang');
+      if (v && ['en', 'he', 'es', 'fr', 'pt'].indexOf(v) >= 0) return v;
+    } catch (e) {}
+    return 'en';
+  })();
   // The script no longer keeps a mode of its own. It reads the page's one
   // setting: Beginner takes the explanatory script, Intermediate and Advanced
   // take the full one. Two controls for one question was one too many, and the
@@ -21154,6 +21195,7 @@ content: ''; float: right; width: 30px; height: 1em;
 
   function setScriptLang(lang) {
     _scriptLang = lang;
+    try { localStorage.setItem('kotLang', lang); } catch (e) {}
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
     const btn = document.getElementById('lang-btn-' + lang);
     if (btn) btn.classList.add('active');
