@@ -1045,6 +1045,17 @@ line-height: 1.72;
 #info-popup-main p:last-child { margin-bottom: 0; }
 #info-popup-main .detail-row { margin-bottom: 10px; line-height: 1.6; }
 #info-popup-main .detail-row:last-child { margin-bottom: 0; }
+/* A glossed word: underlined with a dotted gold rule so it reads as a word
+   with an answer behind it rather than as a link that leaves the page. */
+.term {
+color: inherit;
+text-decoration: none;
+border-bottom: 1px dotted var(--gold);
+cursor: help;
+}
+.term:hover, .term:focus-visible { color: var(--gold); }
+.term:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
 #info-popup-main .pop-rule {
 border: 0; border-top: 1px solid var(--border); margin: 18px 0 14px;
 }
@@ -3076,6 +3087,18 @@ content: ''; float: right; width: 30px; height: 1em;
         <button class="date-jump-trigger" onclick="expandVideo()">Expand &#10530;</button>
         <a href="https://drive.google.com/file/d/1Ob6a5iXQLl49xlvDB6RXHx5cQDrFwYbe/view" target="_blank" rel="noopener" style="color:var(--gold)">Open on Google Drive &#8599;</a>
       </div>
+    </div>
+  </div>
+
+  <!-- TERM WINDOW — a word answered without losing the page under it. Its
+       z-index is above the other modals for that reason. -->
+  <div id="term-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9200; align-items:center; justify-content:center;">
+    <div class="heb-picker-card" style="width:min(430px,92vw); max-height:80vh; box-sizing:border-box; display:flex; flex-direction:column;">
+      <div class="heb-picker-header" style="flex:0 0 auto; margin-bottom:10px;">
+        <span class="heb-picker-title" id="term-popup-title"></span>
+        <button class="heb-picker-close" onclick="closeTermPopup()">×</button>
+      </div>
+      <div class="keter-main no-gloss" id="term-popup-body" style="overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1 1 auto;"></div>
     </div>
   </div>
 
@@ -13852,6 +13875,273 @@ content: ''; float: right; width: 30px; height: 1em;
     setInfoLevel(saved);
   })();
 
+  // ── THE GLOSSARY ──
+  // A term explained in passing, at the depth the reader has chosen. Kept
+  // short: this is a word answered on the way, not a cycle opened.
+  const TERMS = {
+    sefirah: {
+      t: 'Sefirah', heb: 'סְפִירָה',
+      forms: ['Sefiroth', 'sefirah', 'Sefirah', 'Sefirot', 'sefirot'],
+      b: 'One of the ten qualities through which God relates to the world — kindness, strength, beauty and the rest. The cards below are named for them.',
+      m: 'One of the ten Sefirot: the channels through which the infinite becomes something a world can hold. Each has its own character, and each hour of the day is given to one of them.',
+      a: 'One of the ten Sefirot, from <bdi lang="he">סַפִּיר</bdi>, sapphire, a light that shines through rather than a thing that shines. Three are Mochin — Keter or Da’at, Chochmah, Binah — and seven are the middot below them; the day walks the seven in turn and climbs all ten.',
+    },
+    keter: {
+      t: 'Keter', heb: 'כֶּתֶר',
+      forms: ['Keter'],
+      b: 'The crown — the highest of the ten, above thought and wanting rather than inside them.',
+      m: 'The crown, first of the Sefirot and not quite among them: will and delight before they have become any particular wish. Its hours are the ones around midnight.',
+      a: 'The crown, the <bdi lang="he">רֵישָׁא</bdi> above the three heads of Arich: Emunah, Ta’anug and Ratzon. Counted among the ten only when Da’at is not; above the intellect, which is why the will it holds has no reason under it.',
+    },
+    mochin: {
+      t: 'Mochin', heb: 'מוֹחִין',
+      forms: ['Mochin', 'mochin'],
+      b: 'The “mind” Sefirot — the thinking ones, as against the feeling ones below them.',
+      m: 'The three upper Sefirot — Chochmah, Binah and Keter or Da’at — the mind of the structure rather than its heart. Their hours are the eighty-eight minutes wrapped around Chatzot, and the fifteen steps up are climbed there.',
+      a: 'The intellectual Sefirot, the head of the partzuf: Chochmah the flash, Binah the unfolding, Da’at the knowing that binds them and reaches down into the middot. In this day they are the band around Chatzot, and the climb is taken inside them.',
+    },
+    orpnimi: {
+      t: 'Or Pnimi', heb: 'אוֹר פְּנִימִי',
+      forms: ['Or Pnimi'],
+      b: 'Inner light — what you actually take in and make your own. The counted steps are marked with it.',
+      m: 'Inner light: the light a vessel can hold, measured to what it can contain. The thirty counted steps are Or Pnimi, which is why they are taken in order and one at a time.',
+      a: 'The light invested within the kli and bounded by its measure, as against Or Makif, which surrounds without entering. Order matters in Or Pnimi because a vessel receives by its own capacity; the surrounding light does not wait on that.',
+    },
+    ormakif: {
+      t: 'Or Makif', heb: 'אוֹר מַקִּיף',
+      forms: ['Or Makif'],
+      b: 'Surrounding light — what is around you rather than inside you. The companions are marked with it.',
+      m: 'Surrounding light: what accompanies without being contained. The companions are Or Makif, which is why they may be gathered in any order — none of them waits on another.',
+      a: 'The encompassing light, too great for the vessel to hold, which therefore rests upon it rather than within. Its gifts arrive whole rather than by measure, which is the reason the ✡ companions carry no sequence.',
+    },
+    maalah: {
+      t: 'ma’alah', heb: 'מַעֲלָה',
+      forms: ['ma’alah', 'Ma\'alot', 'Ma’alot', 'ma\'alah', 'ma’alot'],
+      b: 'A step — a stair, a rung, something climbed. Fifteen of them go up the day.',
+      m: 'A step or ascent; the plural <bdi lang="he">מעלות</bdi> is the word in Ma’alot HaZman and in the Songs of Ascents. Fifteen are climbed from Malchut up to Keter as the moon fills.',
+      a: 'An ascent, and also a virtue — the word carries both, a rung and what standing on it makes of you. Fifteen answer to the fifteen Songs of Ascents and to the moon’s fifteen days of waxing.',
+    },
+    miut: {
+      t: 'mi’ut', heb: 'מִיעוּט',
+      forms: ['Mi’utim', 'mi’utim', 'mi’ut', 'mi\'ut'],
+      b: 'A lessening, a making-small — the opposite of a step up. Fifteen of them come back down.',
+      m: 'A diminishing. Fifteen mark the way back down from Keter to Malchut as the moon wanes — listening rather than climbing.',
+      a: 'A diminishment, the term the Gemara uses of the moon that was told to make herself small. The descent is not a loss: it is the bitul by which what was received above is brought down to where it can be lived.',
+    },
+    chatzot: {
+      t: 'Chatzot', heb: 'חֲצוֹת',
+      forms: ['Chatzot'],
+      b: 'Midnight — the middle of the night, reckoned from the actual hours of darkness rather than by the clock.',
+      m: 'The exact midpoint of the night, halfway between sunset and sunrise, which is rarely twelve o’clock. The day’s climb is taken in the band wrapped around it.',
+      a: 'Halfway between sunset and sunrise by the night’s own length. The hour of the Tikkun and of the King who rises to learn with the righteous; the seam the year’s three Mochin hover above in Ma’alot HaZman.',
+    },
+    parasha: {
+      t: 'parasha', heb: 'פָּרָשָׁה',
+      forms: ['parashiyot', 'parshiyot', 'parasha', 'Parasha'],
+      b: 'The portion of the Torah read that week. It changes every Shabbat, and the whole Torah is finished in a year.',
+      m: 'The week’s Torah portion, one of fifty-four, read through the year and completed at Simchat Torah. Several cards hang on it rather than on the date.',
+      a: 'The week’s portion. Some weeks join two so that the count closes in an ordinary year and parts them in a leap year, which is why a cycle keyed to the parasha reads two units a day in a joined week.',
+    },
+    omer: {
+      t: 'the Omer', heb: 'עוֹמֶר',
+      forms: ['the Omer', 'Omer'],
+      b: 'The forty-nine days counted between Pesach and Shavuot.',
+      m: 'The forty-nine days counted from the second night of Pesach to Shavuot, each one pairing two of the seven lower Sefirot. Binah’s card extends that counting across the whole year.',
+      a: 'The count of forty-nine from the barley offering to Shavuot, each day a combination of two of the seven middot. Beyond it stands the fiftieth gate, which is not counted but given.',
+    },
+    tikkun: {
+      t: 'tikkun', heb: 'תִּיקּוּן',
+      forms: ['tikkun', 'Tikkun'],
+      b: 'A repair — putting right something that has gone wrong, in the world or in oneself.',
+      m: 'A rectification: the work of mending what was broken, whether in a person’s conduct or in the structure of the worlds. Whole cycles here are built as one.',
+      a: 'Rectification — the raising of the sparks scattered in the breaking of the vessels, and the ordering of a partzuf so that it can give and receive. Every cycle on these cards is a tikkun in that second sense: a structure walked until it is whole.',
+    },
+    zohar: {
+      t: 'the Zohar', heb: 'זֹהַר',
+      forms: ['the Zohar', 'Zohar'],
+      b: 'The central book of Kabbalah, on the Torah, whose teachings are attributed to Rabbi Shimon bar Yochai.',
+      m: 'The foundational work of Jewish mysticism, its teachings attributed to Rabbi Shimon bar Yochai and first disseminated in thirteenth-century Spain. It is read here two folios a day, four on Thursday, finishing in a year.',
+      a: 'The Book of Radiance, taught by Rashbi and his circle, brought to light by R. Moshe de León. It follows its own division of the Torah rather than the weekly one, and seven parashiyot it leaves in silence.',
+    },
+    rashbi: {
+      t: 'Rashbi', heb: 'רַשְׁבִּ״י',
+      forms: ['Rashbi'],
+      b: 'Rabbi Shimon bar Yochai, the second-century sage whose teachings are the Zohar.',
+      m: 'R. Shimon bar Yochai, Tanna of the second century, who hid in a cave for thirteen years with his son and to whom the Zohar’s teachings are attributed. Lag BaOmer is his day.',
+      a: 'R. Shimon bar Yochai, disciple of R. Akiva, whose thirteen years in the cave are the ground of the Zohar’s teaching. Rebbe Nachman is read here as extending his work of rectification, and the two names meet in the year’s own number.',
+    },
+    mishnah: {
+      t: 'Mishnah', heb: 'מִשְׁנָה',
+      forms: ['Mishnah', 'Mishna'],
+      b: 'The first written collection of the Oral Torah, arranged by subject.',
+      m: 'The Oral Torah set down by R. Yehudah HaNasi around the year 200, in six orders and sixty-three tractates. Chesed’s card reads ten chapters of it over the week’s first five days.',
+      a: 'R. Yehudah HaNasi’s redaction, the ground on which both Talmuds are built. Its mode is Chesed — Torah given from teacher to student — which is why it sits on that card rather than another.',
+    },
+    tosefta: {
+      t: 'Tosefta', heb: 'תּוֹסֶפְתָּא',
+      forms: ['Tosefta'],
+      b: 'A companion collection to the Mishnah — the “addition”, gathering teachings the Mishnah left out.',
+      m: 'The addition: a parallel collection from the same generations, following the Mishnah’s order and filling out what it states briefly. Eight chapters close each week on Chesed’s card.',
+      a: 'The Tannaitic supplement arranged to the Mishnah’s own orders, often preserving a fuller version of a teaching the Mishnah compresses. Read here as the Oral Torah’s expansion, which is why it closes the week rather than opening it.',
+    },
+    halachah: {
+      t: 'halachah', heb: 'הֲלָכָה',
+      forms: ['halachah', 'halachot', 'Halacha', 'halacha'],
+      b: 'Jewish law — what a person actually does.',
+      m: 'The practical law: not what a thing means but what to do. Two are studied each day here, one in the morning and one in the afternoon.',
+      a: 'From <bdi lang="he">הָלַךְ</bdi>, to walk — the law as a way gone rather than a code consulted. Tanna D’vei Eliyahu’s promise and Menachot 99b both measure a day by two of them.',
+    },
+    tzadik: {
+      t: 'Tzadik', heb: 'צַדִּיק',
+      forms: ['tzadik', 'Tzadik'],
+      b: 'A righteous person — and in Kabbalah, the one through whom blessing reaches everyone else.',
+      m: 'The righteous one. In the Sefirot it is Yesod, the channel that gathers everything above and passes it on, which is why the word names both a person and a place in the structure.',
+      a: 'Yesod, <bdi lang="he">צַדִּיק יְסוֹד עוֹלָם</bdi> — the foundation of the world, the narrow channel through which all that is above is given onward. The person and the Sefirah are called by one name because the work is the same.',
+    },
+    shechinah: {
+      t: 'Shechinah', heb: 'שְׁכִינָה',
+      forms: ['Shechinah', 'Shechina'],
+      b: 'God’s presence as it dwells in the world — the nearest and most hidden of the names.',
+      m: 'The indwelling Presence, from <bdi lang="he">שָׁכַן</bdi>, to dwell. In the Sefirot she is Malchut, the last, who receives from all the rest and rests among us.',
+      a: 'The Divine Presence as Malchut: Knesset Yisrael, the moon with no light of her own, in exile with her people and silent without the voice that speaks her. The lower sea that completes the One.',
+    },
+    gematria: {
+      t: 'gematria', heb: 'גִּימַטְרִיָּא',
+      forms: ['gematria'],
+      b: 'Counting the number-value of Hebrew letters, so that two words with the same total are read as connected.',
+      m: 'The numerical value of Hebrew letters, used to show that two words share a measure — not as proof but as a hint that they belong together.',
+      a: 'Each letter carries a value, and equal sums are read as a hinted identity. It argues nothing on its own; it confirms what is already being said, which is how it is used here.',
+    },
+    ratzoshov: {
+      t: 'ratzo v’shov', heb: 'רָצוֹא וָשׁוֹב',
+      forms: ['ratzo v’shov', 'ratzo v\'shov', 'Ratzo', 'Shov'],
+      b: 'Running and returning — going out toward God and coming back to ordinary life, over and over.',
+      m: 'Running and returning: the motion of the Chayot in Yechezkel’s vision, and of a person in his service — the rush outward and the return to where the work is. Gevurah’s seasons are built on it.',
+      a: 'The Chayot ran and returned (Yechezkel 1:14). Each 91-day season is one such motion: forty-five days running in toward the heart, the heart on day 46, forty-five returning out — the same measure both ways, only the direction changed.',
+    },
+    bitul: {
+      t: 'bitul', heb: 'בִּיטּוּל',
+      forms: ['bitul'],
+      b: 'Setting yourself aside — making room by not filling it.',
+      m: 'Self-nullification: not self-erasure but the stepping back that lets something other than yourself be received. The fifteen steps down are its practice.',
+      a: 'The condition of a vessel that does not obstruct what it holds. The descent from Keter to Malchut is bitul rather than loss, which is why it is counted and not merely endured.',
+    },
+    emunah: {
+      t: 'emunah', heb: 'אֱמוּנָה',
+      forms: ['Emunah', 'emunah'],
+      b: 'Faith — but closer to trust and steadiness than to belief about facts.',
+      m: 'Faith, from the root of <bdi lang="he">אָמֵן</bdi> and of a craftsman’s steady hand: not an opinion held but a reliance rested on.',
+      a: 'The faculty above intellect by which what cannot be grasped is nonetheless held. It stands at the very top of the Keter card because it is not a conclusion reached but the ground the rest is reached from.',
+    },
+    niggun: {
+      t: 'niggun', heb: 'נִיגּוּן',
+      forms: ['niggunim', 'niggun'],
+      b: 'A Chassidic melody, often without words.',
+      m: 'A melody, usually wordless, sung to reach what words cannot. Gevurah’s thirteen carry one a week through each season.',
+      a: 'The wordless melody: <bdi lang="he">קוֹלָא דְלָא אִשְׁתְּמַע</bdi>, a voice that is not heard as speech. Ten of the thirteen here were taught on Simchat Torah between 1955 and 1963.',
+    },
+    maamar: {
+      t: 'ma’amar', heb: 'מַאֲמָר',
+      forms: ['ma’amarim', 'ma’amar', 'ma\'amar'],
+      b: 'A formal Chassidic discourse, delivered by a Rebbe.',
+      m: 'A Chassidic discourse: a sustained teaching delivered and later written, distinct from a talk. Malchut’s card carries the Rebbe’s last one.',
+      a: 'The discourse proper, said in a particular manner and later edited into text. V’Atah Tetzaveh, given for Purim Katan 5752, is the last the Rebbe released.',
+    },
+  };
+
+  // Marking every occurrence by hand across this file is not a thing anyone
+  // could keep true, so the terms are found in the rendered text instead —
+  // but only inside the places that explain rather than instruct, and never
+  // inside a link, a Hebrew run, a heading or a control, where a second
+  // tappable thing would fight the first. One per paragraph, and once per
+  // panel: a word wants defining the first time it is met, not every time.
+  var _termMap = null, _termRe = null;
+  function _termIndex() {
+    if (_termRe) return;
+    var forms = [];
+    _termMap = Object.create(null);
+    Object.keys(TERMS).forEach(function (k) {
+      TERMS[k].forms.forEach(function (f) { forms.push(f); _termMap[f] = k; });
+    });
+    forms.sort(function (a, b) { return b.length - a.length; });
+    _termRe = new RegExp(forms.map(function (f) {
+      return f.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }).join('|'));
+  }
+  var _WORD = /[A-Za-z’']/;
+  function glossify(root) {
+    if (!root) return;
+    _termIndex();
+    var seen = Object.create(null);
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    var nodes = [], n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    // A queue rather than a pass: marking a word splits its text node, and
+    // what is left after it goes back on the queue, so a paragraph naming
+    // three terms answers all three rather than only the first.
+    while (nodes.length) {
+      var node = nodes.shift();
+      var text = node.nodeValue;
+      if (!text || !text.trim()) continue;
+      var p = node.parentElement;
+      if (!p || p.closest('a,button,bdi,code,h1,h2,h3,h4,.term,.no-gloss,.pop-head,.heb')) continue;
+      var from = 0, hit = null;
+      while (from < text.length) {
+        var m = _termRe.exec(text.slice(from));
+        if (!m) break;
+        var at = from + m.index, w = m[0], key = _termMap[w];
+        var before = at > 0 ? text.charAt(at - 1) : '';
+        var after = text.charAt(at + w.length);
+        if (!_WORD.test(before) && !_WORD.test(after) && !seen[key]) { hit = { at: at, w: w, key: key }; break; }
+        from = at + w.length;
+      }
+      if (!hit) continue;
+      seen[hit.key] = true;
+      var word = node.splitText(hit.at);
+      var rest = word.splitText(hit.w.length);
+      var a = document.createElement('a');
+      a.className = 'term';
+      a.setAttribute('role', 'button');
+      a.setAttribute('tabindex', '0');
+      a.dataset.term = hit.key;
+      a.textContent = hit.w;
+      a.title = 'What this means';
+      word.parentNode.replaceChild(a, word);
+      nodes.unshift(rest);
+    }
+  }
+
+  // Its own window rather than the general one, so that a term opened from
+  // inside a cycle's ⓘ does not take the cycle away: close the term and the
+  // cycle is still standing underneath.
+  function openTermPopup(key) {
+    var T = TERMS[key];
+    if (!T) return;
+    var body = infoLevel === 'beginner' ? T.b : infoLevel === 'advanced' ? T.a : T.m;
+    document.getElementById('term-popup-title').innerHTML =
+      T.t + (T.heb ? ' &mdash; <span class="heb">' + T.heb + '</span>' : '');
+    document.getElementById('term-popup-body').innerHTML = '<p>' + body + '</p>';
+    document.getElementById('term-modal').style.display = 'flex';
+  }
+  function closeTermPopup() {
+    document.getElementById('term-modal').style.display = 'none';
+  }
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'term-modal') { closeTermPopup(); return; }
+    var t = e.target.closest && e.target.closest('.term');
+    if (!t) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openTermPopup(t.dataset.term);
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var t = e.target.closest && e.target.closest('.term');
+    if (!t) return;
+    e.preventDefault();
+    openTermPopup(t.dataset.term);
+  });
+
   // The text of an entry at the reader's depth, falling back as described.
   function infoProse(entry) {
     if (!entry) return '';
@@ -15331,6 +15621,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const body = infoProse(info);
     const prose = /^\s*</.test(body) ? body : '<p>' + body + '</p>';
     openInfoPopup(info.title, prose + more, info.meta);
+    glossify(document.getElementById('info-popup-main'));
   }, true);
 
   // Each card carries its ⓘ at the top-right corner, beside the expand
@@ -22737,6 +23028,16 @@ content: ''; float: right; width: 30px; height: 1em;
     document.getElementById('hg-modal').style.display = 'block';
     document.body.style.overflow = 'hidden';
     const pg = document.getElementById('hg-page');
+    // Glossed the first time it is opened, not on every open: the marks are
+    // permanent once made, and a second pass would find nothing but its own
+    // work. The Introduction is taken at the same moment, being the other
+    // long stretch of prose a newcomer reads.
+    if (pg && !pg.dataset.glossed) {
+      pg.dataset.glossed = '1';
+      glossify(pg);
+      const intro = document.querySelector('#intro-panes .pane-body[data-pane="intro"]');
+      if (intro && !intro.dataset.glossed) { intro.dataset.glossed = '1'; glossify(intro); }
+    }
     if (pg) pg.scrollTop = 0;                    // always from the top
     const panel = document.querySelector('#hg-modal .wr-panel');
     if (panel) panel.scrollTop = 0;
