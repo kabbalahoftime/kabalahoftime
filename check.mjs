@@ -725,9 +725,21 @@ async function checkInBrowser(chromium) {
     // The cards open by a strip of panes rather than by an arrow, so what has
     // to be announced is which pane is chosen, not whether the card is open.
     // Every button says so, and exactly the chosen one says true.
+    //
+    // A strip may also carry a button that is not a tab — the week's Video
+    // opens a window instead of turning the card over. Those carry no
+    // data-pane, and selected is not a state they are ever in; what they owe
+    // the reader instead is to say that they open something, which
+    // aria-haspopup does, and that is checked here rather than excused.
     document.querySelectorAll('.pane-host').forEach(host => {
       const open = host.getAttribute('data-pane') || '';
-      host.querySelectorAll('.pane-strip .pane-btn').forEach(b2 => {
+      host.querySelectorAll('.pane-strip .pane-btn:not([data-pane])').forEach(b2 => {
+        if (b2.getAttribute('aria-haspopup') !== 'dialog')
+          out.stateless.push('.pane-btn that is not a tab does not say it opens a dialog');
+        if (b2.hasAttribute('aria-selected'))
+          out.stateless.push('.pane-btn that is not a tab claims aria-selected');
+      });
+      host.querySelectorAll('.pane-strip .pane-btn[data-pane]').forEach(b2 => {
         if (!b2.hasAttribute('aria-selected')) { out.stateless.push('.pane-btn has no aria-selected'); return; }
         const want = b2.dataset.pane === open ? 'true' : 'false';
         if (b2.getAttribute('aria-selected') !== want)
