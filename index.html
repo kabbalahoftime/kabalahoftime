@@ -2789,7 +2789,10 @@ content: ''; float: right; width: 30px; height: 1em;
             </svg>
             <span id="prayer-heart-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/10</span>
           </div>
-          <div class="dc-label">Prayers &nbsp;תפילות</div>
+          <!-- Singular, to match Study לימוד beside it: both name the kind of
+               deed being counted, not the tally. The .heb span is written here
+               rather than left to untrackHebrew, as its neighbour's is. -->
+          <div class="dc-label">Prayer &nbsp;<span class="heb">תפילה</span></div>
         </div>
         <div class="dc-sep">·</div>
         <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag in order · tap for Today's Path">
