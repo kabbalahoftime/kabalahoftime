@@ -21852,7 +21852,14 @@ content: ''; float: right; width: 30px; height: 1em;
 
   function buildBeginnerScript(lang, data) {
     const B = BEGINNER_T[lang] || BEGINNER_T.en;
+    // The greeting and the sign-off are the script's own, whichever depth it
+    // is read at: they are how this is opened and closed aloud, and a reader
+    // who switches to Beginner should not find a different voice greeting
+    // him. What Beginner changes is the body between them.
+    const T = SCRIPT_T[lang] || SCRIPT_T.en;
     const lines = [];
+    lines.push(T.opening);
+    lines.push('');
     lines.push(B.opening(data));
     lines.push('');
     lines.push(B.today(data));
@@ -21861,7 +21868,7 @@ content: ''; float: right; width: 30px; height: 1em;
       lines.push(B[s](data));
       lines.push('');
     }
-    lines.push(B.closing(data));
+    lines.push(T.closing);
     return paragraphize(cleanScript(lines.join('\n')));
   }
 
