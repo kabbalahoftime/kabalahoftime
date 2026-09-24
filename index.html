@@ -444,6 +444,7 @@ padding: 0 16px;
 
 /* ── DATE SELECTOR ── */
 .date-bar {
+position: relative;
 background: var(--bg-card);
 border: 1px solid var(--border-strong);
 border-radius: 4px;
@@ -2407,6 +2408,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    here to clear, so it comes in to the block's own padding rather than the
    32px the cards leave beside theirs. */
 #today-block > .cycle-info-btn.corner { top:8px; right:12px; }
+/* The date bar has no expand arrow either, and its own padding is 18px. */
+.date-bar > .cycle-info-btn.corner { top:8px; right:10px; }
 .today-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
   text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
 /* One line, always: the step and what it asks for belong together, and a name
@@ -15145,6 +15148,88 @@ content: ''; float: right; width: 30px; height: 1em;
 
   // ── ABOUT THE CYCLES — tap-ⓘ explanations of each card's headline cycle ──
   const CYCLE_INFO = {
+    // The two blocks above the cards. They are not cycles, but they are the
+    // two things a reader meets first and the two most likely to be misread
+    // — the date because it carries three calendars at once, and the Ladder
+    // because its count changes what it is counting halfway through the day.
+    date: {
+      title: 'The Date — three calendars at once',
+      beginner:
+        'Three lines, three ways of saying the same day. </p><p>The first is the ordinary date. ' +
+        'The second is the Hebrew date, which begins the evening before &mdash; a Jewish day ' +
+        'starts at nightfall, not at midnight, which is why the line beneath names last night ' +
+        'and tonight separately. </p><p>The third says where today falls in this app&rsquo;s ' +
+        'own year: which week, which day of it, and the Torah portion the week is reading. ' +
+        '</p><p>The arrows move a day at a time, and <strong>jump to date</strong> goes ' +
+        'straight to any day you like.',
+      main:
+        'Three calendars stood side by side. The civil date; the Hebrew date, which turns at ' +
+        'nightfall rather than at midnight, so the indicator beneath names the day that last ' +
+        'night began and the one that begins tonight; and the position in the Kabbalah of Time ' +
+        'year &mdash; week, day, and the week&rsquo;s parasha. </p><p>That third year is 364 ' +
+        'days exactly, which is 52 weeks with nothing left over. It is what lets every cycle on ' +
+        'the cards close cleanly, and it is why this year and the Hebrew year drift against one ' +
+        'another rather than matching. </p><p>Around Rosh Hashana two of these years overlap, ' +
+        'and a pair of <strong>year pills</strong> appears here to switch between the one ' +
+        'closing and the one just begun. The arrows move a day at a time, <strong>jump to ' +
+        'date</strong> reaches any date, and <strong>monthly calendars</strong> lay a whole ' +
+        'month out at once.',
+      advanced:
+        'Three reckonings at once: the civil date; the Hebrew date, which begins at nightfall, ' +
+        'so the indicator below distinguishes the day last night began from the one beginning ' +
+        'tonight; and the Kabbalah of Time position of week, day and parasha. </p><p>The ' +
+        'Kabbalah of Time year is fixed at 364 days: 52 weeks of seven, four quarters of 91, ' +
+        'thirteen months of 28. Nothing is left over, which is what allows a cycle of 13, 22, ' +
+        '28, 40, 72 or 91 days to close on the year rather than against it. It is deliberately ' +
+        'not a lunar-solar year, and so it walks against the Hebrew calendar rather than with ' +
+        'it. </p><p>A leap year is met by an intercalation rather than by stretching the count: ' +
+        'twenty-eight days from 28 Shevat to 25 Adar I, during which the standard cycles hold ' +
+        'where they stood and resume afterwards, so nothing is read twice and nothing is ' +
+        'missed. Several cards give that month a reading of its own &mdash; Hod takes the whole ' +
+        'of Tanna D&rsquo;vei Eliyahu through at two chapters a day, Chesed runs the ' +
+        'twenty-four priestly watches. </p><p>Around Rosh Hashana two years overlap and the ' +
+        'year pills choose between them. Netzach&rsquo;s cycle of 369 runs five days longer ' +
+        'than the year, so early in a cycle it offers a toggle of its own to reach days ' +
+        '365&ndash;369 of the one still finishing.',
+      meta: 'The civil date &middot; the Hebrew date &middot; the Kabbalah of Time year of 364'
+    },
+    ladder: {
+      title: 'Today’s Ladder',
+      beginner:
+        'The block that answers one question: what now? </p><p>The line at the top names the ' +
+        'next step being asked for, and tapping it takes you straight down to it. That is ' +
+        'enough to begin with &mdash; everything else on the page is there for when you want ' +
+        'it. </p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
+        'the ten prayers are said, the <strong>circle</strong> beside it counts the readings, ' +
+        'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
+        'few lines opened counts.',
+      main:
+        'What the day is asking for next, and how much of it has been done. </p><p>The top line ' +
+        'names the next step and goes to it. Beneath, the heart counts the ten prayers &mdash; ' +
+        'each may be marked in any order, because each has its own hour &mdash; and the moon ' +
+        'counts the readings. It fills as the fifteen steps up are taken and becomes the sun at ' +
+        'fifteen, whose rays then remain; from there the count runs on to thirty as the fifteen ' +
+        'back down are taken and the moon wanes. </p><p>So the number under the moon changes ' +
+        'what it is counting halfway through the day: fifteen while climbing, thirty once the ' +
+        'climb is whole. The menorah beside it holds a closed set of ten bearers on nine ' +
+        'lights, gathered as companions rather than counted as steps. </p><p>When the ' +
+        'day&rsquo;s climb is finished, an offer of tomorrow&rsquo;s appears in its place.',
+      advanced:
+        'The thirty counted steps are Or Pnimi, inner light, and are therefore taken strictly ' +
+        'in order: at any moment exactly one is being asked for, and tapping any other will not ' +
+        'take. The return does not begin until the moon is full, which is why the count reads ' +
+        'out of fifteen until then and out of thirty after. </p><p>The ten prayers are not ' +
+        'ordered that way. Each has its own hour, so they may be marked as they are said, and ' +
+        'the one whose hour has come pulses until it is. The heart glows when the day&rsquo;s ' +
+        'ten are whole. </p><p>The companions marked <strong>&#10017;</strong> stand outside ' +
+        'the thirty altogether &mdash; Or Makif, the surrounding light, which does not wait on ' +
+        'a vessel&rsquo;s order. Twenty-two of them fill the ring of eleven stars around the ' +
+        'moon, two to a star. The menorah is a closed set among them: ten bearers on nine ' +
+        'lights, the tenth taking no branch of his own, because when he is gathered every light ' +
+        'on the stand is lit. </p><p>A step is marked when it was actually done rather than ' +
+        'when its hour has passed, so the path can be joined at any hour and still be finished.',
+      meta: 'Thirty counted steps &middot; ten prayers &middot; the companions and the menorah'
+    },
     keterlm: {
       title: 'All Year Round — בכל השנה',
       main: "Rebbe Nachman's Likutei Moharan spread across the entire Jewish year, each lesson pegged to its own Hebrew date and resonating with that day's character — paired with Rashbi's Zohar carried through the whole year — two folios a day, four on Thursday, completing the Zohar in a single year and sealing it with Sefer Yetzirah. </p><p>Both names carry the year: רבי נחמן = 360 = השנה, and בכל = 52, the weeks of the year; while שמעון בן יוחאי yields the same 360 through ש־ן־י, one letter from each word of his name — and the English agrees: a round is 360 degrees, the year's full turn of the spiral, arriving each year one level higher. Rebbe Nachman extends Rashbi's work of rectification.",
@@ -15792,6 +15877,13 @@ content: ''; float: right; width: 30px; height: 1em;
       '.keter-card .pane-body[data-pane="maalot"] .keter-section:first-of-type');
     if (keterLM && !keterLM.querySelector(':scope > .cycle-info-btn'))
       keterLM.insertAdjacentHTML('afterbegin', btn('keterlm'));
+    // The date and the Ladder are not cards, so they are named rather than
+    // taken from the card list.
+    [['.date-bar', 'date'], ['#today-block', 'ladder']].forEach(([sel, key]) => {
+      const host = document.querySelector(sel);
+      if (host && !host.querySelector(':scope > .cycle-info-btn'))
+        host.insertAdjacentHTML('beforeend', btn(key));
+    });
     const cards = Array.from(document.querySelectorAll('.sefirah-card'));
     ['chochmah', 'binah', 'chesed', 'gevurah', 'tiferet', 'netzach', 'hod', 'yesod', 'malchut'].forEach((key, i) => {
       const c = cards[i];
