@@ -672,12 +672,22 @@ border-bottom-color: var(--gold);
 }
 
 /* ── CROWN ── */
+/* A block of its own, drawn as the date and the Ladder above it are. It was
+   bare text between two boxes and read as a caption belonging to whichever
+   was nearer; it is the head of the dial, and now looks like it. */
 .keter-title-row {
+position: relative;
 text-align: center;
+background: var(--bg-card);
+border: 1px solid var(--border-strong);
+border-radius: 4px;
+box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+padding: 12px 18px 14px;
 /* Clear of Today's Ladder above it. The two were touching, and the Keter
    heading read as the foot of that block rather than the head of the cards. */
 margin: 24px 0 6px;
 }
+.keter-title-row > .cycle-info-btn.corner { top: 8px; right: 10px; }
 .keter-crown-label {
 font-family: 'Cinzel', serif;
 font-size: calc(11px * var(--ts, 1));
@@ -15230,6 +15240,72 @@ content: ''; float: right; width: 30px; height: 1em;
         'when its hour has passed, so the path can be joined at any hour and still be finished.',
       meta: 'Thirty counted steps &middot; ten prayers &middot; the companions and the menorah'
     },
+    // The heading over the dial, and the note that had nowhere else to sit:
+    // that the highest of the Sefirot is reached in the present hour rather
+    // than at the end of a long climb — which is the whole claim this card
+    // makes by putting a clock at the top of it.
+    keterdaat: {
+      title: 'Keter / Da\u2019at \u2014 \u05db\u05b6\u05bc\u05ea\u05b6\u05e8 / \u05d3\u05b7\u05bc\u05e2\u05b7\u05ea',
+      beginner:
+        'The head of the day, and the clock that keeps it. </p><p>Keter means crown &mdash; the ' +
+        'highest of the ten &mdash; and Da&rsquo;at means knowing. They share this one place ' +
+        'because they are never counted together: where one stands in the ten, the other does ' +
+        'not. </p><p>The hours named here are the short band around the middle of the night, ' +
+        'and the dial below shows the whole day laid out as a circle, so you can see at a ' +
+        'glance which hour belongs to which quality and where now falls. The pills beneath ' +
+        'switch between ordinary clock hours and hours measured by the sun itself, which is why ' +
+        'they ask for your city. </p><p>And a word about where Keter is to be found. R. ' +
+        'Yehoshua ben Levi once met Mashiach and asked him when he was coming. ' +
+        '<strong>Today</strong>, he answered. The day passed and he did not come, and R. ' +
+        'Yehoshua went to Eliyahu the Prophet and said that Mashiach had lied to him. Eliyahu ' +
+        'answered: he did not lie. He was quoting a verse &mdash; <bdi lang="he">הַיּוֹם אִם ' +
+        'בְּקֹלוֹ תִשְׁמָעוּ</bdi>, <em>today, if you will listen to His voice</em>. The ' +
+        'highest thing there is, is not waiting somewhere far off. It is in this day, on that ' +
+        'one condition.',
+      main:
+        'The head of the day. Keter is the crown, above thought and wanting rather than inside ' +
+        'them; Da&rsquo;at is the knowing that binds the mind to the heart. They stand in one ' +
+        'place because they are never counted at once &mdash; when Keter is reckoned among the ' +
+        'ten, Da&rsquo;at is not, and when Da&rsquo;at is, Keter stands above the count. ' +
+        '</p><p>The hours given here are the Mochin band wrapped around Chatzot, and it is in ' +
+        'them that the fifteen steps up are climbed. The line beneath names the hour now and ' +
+        'the hour next and opens all twelve; the pills switch every Sefirah&rsquo;s times ' +
+        'between fixed clock hours and Sha&rsquo;ot Zmaniyot, the sun&rsquo;s own proportional ' +
+        'hours, which is why a city is asked for. </p><p>Below stands the dial, Ma&rsquo;alot ' +
+        'HaZman, which turns the same reckoning both ways: a single day with the year inside ' +
+        'it, or the whole year drawn as one day. Tapping the ⓘ on the dial itself explains that ' +
+        'turning. </p><p>And a word about where Keter is to be found. R. Yehoshua ben Levi once ' +
+        'met Mashiach and asked him when he was coming. <strong>Today</strong>, he answered. ' +
+        'The day passed and he did not come, and R. Yehoshua went to Eliyahu the Prophet and ' +
+        'said that Mashiach had lied to him. Eliyahu answered: he did not lie. He was quoting a ' +
+        'verse &mdash; <bdi lang="he">הַיּוֹם אִם בְּקֹלוֹ תִשְׁמָעוּ</bdi>, <em>today, if you ' +
+        'will listen to His voice</em>. The highest thing there is, is not waiting somewhere ' +
+        'far off. It is in this day, on that one condition.',
+      advanced:
+        'Keter and Da&rsquo;at share a place because they are two faces of one reckoning. Keter ' +
+        'is the Reisha above the three heads of Arich, will and delight before they have become ' +
+        'any particular wish; Da&rsquo;at is the knowing that binds Chochmah to Binah and ' +
+        'carries them down into the middot. Count Keter among the ten and Da&rsquo;at is not ' +
+        'among them; count Da&rsquo;at and Keter stands above the count entirely. </p><p>The ' +
+        'hours here are the Mochin band about Chatzot, the eighty-eight minutes in which the ' +
+        'day&rsquo;s fifteen <bdi lang="he">מעלות</bdi> are climbed together rather than walked ' +
+        'one to an hour. The mode pills govern every Sefirah&rsquo;s hours at once: fixed hours ' +
+        'divide the clock, Sha&rsquo;ot Zmaniyot divide the day&rsquo;s own light into twelve, ' +
+        'so that an hour in Tevet and an hour in Tammuz are not the same length. </p><p>The ' +
+        'dial below is the same structure read at two scales &mdash; the year as a day, or the ' +
+        'day with the year folded into it &mdash; which is the claim the whole card makes: that ' +
+        'the scales are not analogies of one another but one shape. </p><p>R. Yehoshua ben Levi ' +
+        'met Mashiach at the gates of Rome and asked him, <em>when is the master coming?</em> ' +
+        'He answered, <bdi lang="he">הַיּוֹם</bdi> &mdash; today. The day went and he did not ' +
+        'come. R. Yehoshua came to Eliyahu and said: he lied to me, he said today and he has ' +
+        'not come. Eliyahu answered: this is what he said to you &mdash; <bdi lang="he">הַיּוֹם ' +
+        'אִם בְּקֹלוֹ תִשְׁמָעוּ</bdi>, today, if you will listen to His voice (Sanhedrin 98a, ' +
+        'on Tehillim 95:7). </p><p>Which is why the deepest of them is placed at the top of a ' +
+        'clock rather than at the end of a ladder. Keter is not the far end of a long climb but ' +
+        'the condition of this hour, and the condition is a verb: listening. The whole ' +
+        'day&rsquo;s thirty steps are that listening given a shape.',
+      meta: 'Sanhedrin 98a &middot; Tehillim 95:7 &middot; the Mochin band about Chatzot'
+    },
     keterlm: {
       title: 'All Year Round — בכל השנה',
       main: "Rebbe Nachman's Likutei Moharan spread across the entire Jewish year, each lesson pegged to its own Hebrew date and resonating with that day's character — paired with Rashbi's Zohar carried through the whole year — two folios a day, four on Thursday, completing the Zohar in a single year and sealing it with Sefer Yetzirah. </p><p>Both names carry the year: רבי נחמן = 360 = השנה, and בכל = 52, the weeks of the year; while שמעון בן יוחאי yields the same 360 through ש־ן־י, one letter from each word of his name — and the English agrees: a round is 360 degrees, the year's full turn of the spiral, arriving each year one level higher. Rebbe Nachman extends Rashbi's work of rectification.",
@@ -15879,7 +15955,8 @@ content: ''; float: right; width: 30px; height: 1em;
       keterLM.insertAdjacentHTML('afterbegin', btn('keterlm'));
     // The date and the Ladder are not cards, so they are named rather than
     // taken from the card list.
-    [['.date-bar', 'date'], ['#today-block', 'ladder']].forEach(([sel, key]) => {
+    [['.date-bar', 'date'], ['#today-block', 'ladder'],
+     ['.keter-title-row', 'keterdaat']].forEach(([sel, key]) => {
       const host = document.querySelector(sel);
       if (host && !host.querySelector(':scope > .cycle-info-btn'))
         host.insertAdjacentHTML('beforeend', btn(key));
