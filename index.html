@@ -2539,9 +2539,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    what it was — smaller to the eye, not to the hand. They wrap to a second
    line rather than overflow when the largest text size widens them past a
    narrow phone. */
+/* The row gap is wider than the column gap on purpose. Each pill button is
+   24px tall and wears a 44px-tall hit area, which hangs 10px past it above
+   and below. With three pills the row wraps on a phone, and at an 8px gap the
+   next line's hit area reached up into the line above: a tap 21px under a
+   Contrast button landed on Beginner. 22px is the first gap that clears both
+   overhangs. */
 #reading-controls {
   display: flex; justify-content: center; align-items: center;
-  flex-wrap: wrap; gap: 8px; margin: 10px 0 2px;
+  flex-wrap: wrap; gap: 22px 8px; margin: 10px 0 2px;
 }
 #reading-controls .year-toggle-pill { margin-top: 0; border-color: var(--border-strong); }
 #reading-controls .year-pill-btn {
@@ -2648,6 +2654,15 @@ content: ''; float: right; width: 30px; height: 1em;
       <button id="ts-normal-btn" class="year-pill-btn year-pill-active" onclick="setTextSize('normal')">A</button>
       <button id="ts-large-btn" class="year-pill-btn" onclick="setTextSize('large')">A+</button>
       <button id="ts-larger-btn" class="year-pill-btn" onclick="setTextSize('larger')">A++</button>
+    </div>
+    <!-- How deep the explanations go. This is not a reading comfort like the
+         two beside it; it is how much a reader wants told, and it belongs
+         with them because it is the same kind of choice — made once, about
+         how the page speaks, and then left alone. -->
+    <div class="year-toggle-pill" id="info-level-pill">
+      <button id="il-beginner-btn" class="year-pill-btn" onclick="setInfoLevel('beginner')">Beginner</button>
+      <button id="il-intermediate-btn" class="year-pill-btn year-pill-active" onclick="setInfoLevel('intermediate')">Intermediate</button>
+      <button id="il-advanced-btn" class="year-pill-btn" onclick="setInfoLevel('advanced')">Advanced</button>
     </div>
   </div>
 
@@ -13814,6 +13829,37 @@ content: ''; float: right; width: 30px; height: 1em;
     setTextSize(saved === 'large' || saved === 'larger' ? saved : 'normal');
   })();
 
+  // ── HOW DEEP THE EXPLANATIONS GO ──
+  // Three depths for the same cycle: beginner says what it is and why it is
+  // worth a day's attention, intermediate is the app's own voice and the
+  // default, advanced adds the sources, the Hebrew and the mechanics. An
+  // entry that has not been written at a depth falls back to intermediate,
+  // so a half-finished tier never shows a reader an empty popup.
+  var infoLevel = 'intermediate';
+  function setInfoLevel(mode) {
+    if (mode !== 'beginner' && mode !== 'advanced') mode = 'intermediate';
+    infoLevel = mode;
+    try { localStorage.setItem('kotInfoLevel', mode); } catch (e) {}
+    [['il-beginner-btn', 'beginner'], ['il-intermediate-btn', 'intermediate'],
+     ['il-advanced-btn', 'advanced']].forEach(function (pair) {
+      var el = document.getElementById(pair[0]);
+      if (el) el.classList.toggle('year-pill-active', mode === pair[1]);
+    });
+  }
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('kotInfoLevel'); } catch (e) {}
+    setInfoLevel(saved);
+  })();
+
+  // The text of an entry at the reader's depth, falling back as described.
+  function infoProse(entry) {
+    if (!entry) return '';
+    if (infoLevel === 'beginner'  && entry.beginner) return entry.beginner;
+    if (infoLevel === 'advanced'  && entry.advanced) return entry.advanced;
+    return entry.main;
+  }
+
   function setTimeMode(mode) {
     zmanMode = mode;
     try { localStorage.setItem('kotTimeMode', mode); } catch(e) {}
@@ -14733,11 +14779,63 @@ content: ''; float: right; width: 30px; height: 1em;
     chochmah: {
       title: 'Alef Bet — 22-Day Three Weeks Cycle',
       main: 'Sefer Yetzirah teaches that Hashem created the world through the 22 Hebrew letters. This cycle dwells on one letter each day, completing the Alef-Bet 17 times a year (17 = טוב, "good") — creation\'s alphabet reviewed again and again in the Sefirah of the first creative flash. </p><p>Sefer Yetzirah\'s 32 paths of wisdom = 10 Sefirot + 22 letters; the Three Weeks, 17 Tammuz to 9 Av, span exactly 22 days — an Alef-Bet within the year. </p><p>Each day also carries an acrostic verse: cycles 1–7 one psalm each, cycle 8 Eshet Chayil, cycles 9–16 Psalm 119 in its eight-verse octaves. </p><p>Alongside the letters runs the Alter Rebbe’s own Torah — Torah Ohr and Likutei Torah — a folio a day through the year, the two seforim cut so that each day turns a single leaf.',
+      beginner:
+        'The Hebrew alphabet has twenty-two letters, and Sefer Yetzirah &mdash; one of the ' +
+        'oldest books of Kabbalah &mdash; teaches that God made the world with them. This cycle ' +
+        'gives one letter to each day, so the whole alphabet comes round about every three ' +
+        'weeks, seventeen times in a year. </p><p>The thought behind it is simple. If the ' +
+        'letters are what everything is built out of, then staying with a single letter for a ' +
+        'day is staying with one of the tools the world was made with. Today&rsquo;s letter is ' +
+        'on the card, and with it a verse that begins with that letter. </p><p>Beside the ' +
+        'letters the card carries a page a day of the Alter Rebbe&rsquo;s Torah, Torah Ohr and ' +
+        'Likutei Torah, the two books cut so that they finish with the year.',
+      advanced:
+        'Sefer Yetzirah teaches that the world was created through the twenty-two letters, and ' +
+        'this cycle dwells on one of them each day, completing the Alef-Bet seventeen times a ' +
+        'year &mdash; seventeen being <bdi lang="he">טוֹב</bdi>. It sits in Chochmah because ' +
+        'Chochmah is the first flash, the point before it has been unfolded into anything ' +
+        'sayable, and a letter is exactly that: a form that holds before it is a word. ' +
+        '</p><p>Sefer Yetzirah&rsquo;s thirty-two paths of wisdom are the ten Sefirot and the ' +
+        'twenty-two letters together, which is why the letters belong to the same reckoning as ' +
+        'the Sefirot rather than standing outside it. The Three Weeks, from 17 Tammuz to 9 Av, ' +
+        'span exactly twenty-two days &mdash; an Alef-Bet laid inside the year at its narrowest ' +
+        'point. </p><p>Each day also carries an acrostic verse, and the scheme turns with the ' +
+        'cycles: 1&ndash;7 take one psalm each, 8 takes Eshet Chayil, and 9&ndash;16 take Psalm ' +
+        '119 in its eight-verse octaves &mdash; that psalm being itself an Alef-Bet, eight ' +
+        'verses to a letter. </p><p>Alongside runs the Alter Rebbe&rsquo;s own Torah &mdash; ' +
+        'Torah Ohr and Likutei Torah &mdash; a folio a day through the year, the two seforim ' +
+        'cut so that each day turns a single leaf.',
       meta: 'An original Kabbalah of Time cycle · Sefer Yetzirah'
     },
     binah: {
       title: 'Sefirot — 7×7×7 Omer Cycle',
       main: "The Omer count's 49 combinations (each of the seven emotional Sefirot within each other) extended across the whole year, seven cycles deep — 7×7×7 = 343 days plus three weeks for the three intellectual Sefirot. </p><p>Understanding (Binah) is where structure unfolds: every quality examined inside every other. Beyond the forty-nine stands the fiftieth gate — Binah itself, received at Shavuot with the gift of Matan Torah. </p><p>Alongside it runs Likutei Tefilot — Reb Noson’s prayers drawn out of Rebbe Nachman’s teachings: the introduction, then Part 1’s 152 prayers at two days each and Part 2’s 59, completing 364 exactly.",
+      beginner:
+        'Between Pesach and Shavuot there are forty-nine days of the Omer, and each of them ' +
+        'pairs two of the seven qualities of the heart &mdash; kindness within kindness, ' +
+        'restraint within kindness, and so on through all forty-nine. </p><p>This cycle takes ' +
+        'that counting and runs it through the whole year instead of seven weeks, going over ' +
+        'the same forty-nine seven times, so that every quality is looked at inside every ' +
+        'other, and then that whole examination is made again seven times over. Binah means ' +
+        'understanding, and this is what understanding does: it takes one thing and turns it ' +
+        'until every side has been seen. </p><p>Beside it the card carries Likutei Tefilot, the ' +
+        'prayers Reb Noson made out of Rebbe Nachman&rsquo;s teachings &mdash; a teaching ' +
+        'turned into something you can say.',
+      advanced:
+        'The Omer&rsquo;s forty-nine combinations, each of the seven lower Sefirot within each ' +
+        'other, extended across the whole year and taken seven cycles deep: ' +
+        '7&nbsp;&times;&nbsp;7&nbsp;&times;&nbsp;7 is 343 days, and the three weeks that close ' +
+        'the year carry the three intellectual Sefirot, which the Omer itself does not count. ' +
+        '</p><p>Binah is where structure unfolds, and the sevenfold counting is that unfolding ' +
+        'made a practice: every quality examined inside every other, and the examination itself ' +
+        'examined seven times. Beyond the forty-nine stands the fiftieth gate, which is Binah ' +
+        'herself, and which is not counted but given &mdash; received at Shavuot with Matan ' +
+        'Torah, on the day after the count has finished. </p><p>Alongside runs Likutei Tefilot, ' +
+        'Reb Noson&rsquo;s prayers drawn out of Rebbe Nachman&rsquo;s teachings: the ' +
+        'introduction, then Part 1&rsquo;s 152 prayers at two days each and Part 2&rsquo;s 59, ' +
+        'closing on 364 exactly. Prayer belongs here for the same reason the fiftieth gate does ' +
+        '&mdash; Binah is the Sefirah of return, and a prayer is a teaching turned back toward ' +
+        'the One who gave it.',
       meta: 'An original Kabbalah of Time cycle · Sefirat HaOmer extended'
     },
     chesed: {
@@ -14753,6 +14851,35 @@ content: ''; float: right; width: 30px; height: 1em;
     tiferet: {
       title: 'Midot — 13-Day Nesi’im Cycle',
       main: "One of Hashem's Thirteen Attributes of Mercy each day, the cycle completing 28 times a year (28 = כח, \"strength\"): cycles 1–13 follow Micha's inner vessels, 14–26 Moshe's outer ones. </p><p>Mercy is Tiferet's essence — beauty as compassion balanced. Cycles 27–28 close the year as a microcosm of the whole. </p><p>Twelve of the thirteen days carry a Nassi who brought an offering at the dedication of the Mishkan; the thirteenth carries Aharon. Levi brought none among the twelve — it is the tribe of Moshe and Aharon — and what stands in its place is Aharon's own: the kindling of the Menorah, which the Torah sets immediately after the twelve days of the Nesi'im, and which Rashi reads as the answer to his distress at being left out. His is the greater portion, because the lamps endure. </p><p>Each cycle carries a text of its own: cycles 1–13 a chapter of the Alter Rebbe’s Seder Birkas HaNehenin, 14–26 one of Rebbe Nachman’s thirteen Tales — the Lost Princess opening in Adar, the Seven Beggars falling in Elul — and the closing two review all twenty-six, a chapter or a tale a day. In a leap year the extra 28 days read the Talks Following the Tales.",
+      beginner:
+        'The Torah gives thirteen ways of describing God&rsquo;s mercy, and this cycle takes ' +
+        'one of them each day, so the thirteen come round twenty-eight times in a year. ' +
+        '</p><p>They sit in Tiferet, which means beauty, because beauty here is not decoration: ' +
+        'it is what happens when kindness and strength are held in balance, and mercy is ' +
+        'exactly that balance. Reading one attribute a day is a way of learning the balance by ' +
+        'walking through it. </p><p>Twelve of the thirteen days also carry one of the princes ' +
+        'who brought an offering when the Mishkan was dedicated, and the thirteenth carries ' +
+        'Aharon, whose offering was the kindling of the Menorah. Each cycle carries a text of ' +
+        'its own as well: a chapter of the Alter Rebbe&rsquo;s laws of blessings, or one of ' +
+        'Rebbe Nachman&rsquo;s thirteen Tales.',
+      advanced:
+        'One of the Thirteen Attributes of Mercy each day, the cycle completing twenty-eight ' +
+        'times a year &mdash; twenty-eight being <bdi lang="he">כֹּחַ</bdi>. The two lists are ' +
+        'kept apart rather than merged: cycles 1&ndash;13 follow Micha&rsquo;s attributes, the ' +
+        'inner vessels, and 14&ndash;26 Moshe&rsquo;s, the outer ones; 27&ndash;28 close the ' +
+        'year as a microcosm of the whole. Mercy is Tiferet&rsquo;s essence &mdash; beauty as ' +
+        'compassion balanced, Chesed and Gevurah held together rather than chosen between. ' +
+        '</p><p>Twelve of the thirteen days carry a Nassi who brought an offering at the ' +
+        'dedication of the Mishkan. Levi brought none among the twelve, being the tribe of ' +
+        'Moshe and Aharon, and what stands in its place is Aharon&rsquo;s own: the kindling of ' +
+        'the Menorah, which the Torah sets immediately after the twelve days of the ' +
+        'Nesi&rsquo;im, and which Rashi reads as the answer to his distress at having been left ' +
+        'out. His is the greater portion, because the lamps endure. </p><p>Each cycle carries a ' +
+        'text of its own: 1&ndash;13 a chapter of the Alter Rebbe&rsquo;s Seder Birkas ' +
+        'HaNehenin, 14&ndash;26 one of Rebbe Nachman&rsquo;s thirteen Tales &mdash; the Lost ' +
+        'Princess opening in Adar, the Seven Beggars falling in Elul &mdash; and the closing ' +
+        'two review all twenty-six, a chapter or a tale a day. In a leap year the extra ' +
+        'twenty-eight days read the Talks Following the Tales.',
       meta: 'An original Kabbalah of Time cycle · Micha 7:18–20 · Shemot 34:6–7'
     },
     netzach: {
@@ -14768,6 +14895,29 @@ content: ''; float: right; width: 30px; height: 1em;
     yesod: {
       title: 'Shovavim Cycle',
       main: 'The weekly parasha as a year-round tikkun-cycle, extending the Shovavim weeks (Shemot–Mishpatim, the classic season of rectifying Yesod) across all 52 weeks: the foundation guarded all year. </p><p>Each parasha also carries Rav Yosef Chaim of Baghdad, in the shape Chesed’s week already keeps — five days of Rav Pe’alim, two responsa a day and ten to a parasha, then the Ben Ish Chai itself: its Halachot on Friday, both years side by side, and its Drash on Shabbat. All 540 responsa and the whole Ben Ish Chai complete in a year, and a week of joined parshiyot simply reads two decades a day so the count still closes.',
+      beginner:
+        'Shovavim is a stretch of winter weeks, named from the opening letters of the Torah ' +
+        'portions it runs through, from Shemot to Mishpatim. It has long been kept as a season ' +
+        'for guarding purity and repairing what has gone wrong in that part of life. ' +
+        '</p><p>This cycle keeps that work all year rather than for six weeks, a portion a week ' +
+        'through all fifty-two. Yesod is the Sefirah of foundation &mdash; the place where ' +
+        'everything above is gathered and passed on &mdash; so what is guarded here is what ' +
+        'gets handed forward. </p><p>Alongside the portion the card carries Rav Yosef Chaim of ' +
+        'Baghdad: his responsa through the week, and on Friday and Shabbat the Ben Ish Chai ' +
+        'itself, its laws and then its homilies.',
+      advanced:
+        'The weekly parasha kept as a year-round tikkun-cycle: the Shovavim weeks &mdash; ' +
+        'Shemot through Mishpatim, whose initials give the name, and the classic season for the ' +
+        'rectification of Yesod &mdash; extended across all fifty-two, so that the foundation ' +
+        'is guarded the whole year rather than in one winter stretch. Yesod is where the flow ' +
+        'above is gathered and given onward, which is why its guarding is never finished, and ' +
+        'why the parasha, the one cycle every Jew is already inside, is what carries it. ' +
+        '</p><p>Each parasha also carries Rav Yosef Chaim of Baghdad, in the shape ' +
+        'Chesed&rsquo;s week already keeps: five days of Rav Pe&rsquo;alim, two responsa a day ' +
+        'and ten to a parasha, then the Ben Ish Chai itself &mdash; its Halachot on Friday, ' +
+        'both years side by side, and its Drash on Shabbat. All 540 responsa and the whole Ben ' +
+        'Ish Chai complete in a year, and a week of joined parshiyot simply reads two decades a ' +
+        'day so that the count still closes.',
       meta: 'An original Kabbalah of Time cycle · the Shovavim tikkun extended'
     },
     malchut: {
@@ -14778,6 +14928,24 @@ content: ''; float: right; width: 30px; height: 1em;
     wheel: {
       title: 'Ma\'alot HaZman — מעלות הזמן',
       main: 'The year as a single day: the 52 weeks of the Kabbalah of Time year mapped onto the 24 hours of one day, each week a step ascending through the seven Sefirot — with weeks 50–52, the three Mochin, hovering above the Chatzot seam. </p><p>Tap any step to see its week; the hand shows where "now" falls in the inner year.',
+      beginner:
+        'The whole year drawn as a single day. Each of the fifty-two weeks is a step on the ' +
+        'face of a clock, and walking round the clock once is walking through the year. ' +
+        '</p><p>It is the mirror image of what the cards below do. They take today and show the ' +
+        'year it sits inside; this takes the year and folds it into one day, so that a week ' +
+        'becomes an hour and the whole of it can be seen at once. </p><p>Tap any step to see ' +
+        'that week and what it carries. The hand shows where now falls.',
+      advanced:
+        'The fifty-two weeks of the Kabbalah of Time year mapped onto the twenty-four hours of ' +
+        'one day, each week a step ascending through the seven Sefirot, with weeks 50&ndash;52 ' +
+        '&mdash; the three Mochin &mdash; hovering above the Chatzot seam, where the ' +
+        'day&rsquo;s own fifteen <bdi lang="he">מעלות</bdi> are climbed. </p><p>It runs the ' +
+        'other way from everything beneath it. The cards take a day and open the cycles it ' +
+        'stands inside; this takes the year and draws it into the shape of a day, so that the ' +
+        'same ascent is legible at both scales at once &mdash; the hours of a day climbing ' +
+        'Malchut to Keter, and the weeks of a year doing it slowly. </p><p>Tap any step for ' +
+        'that week&rsquo;s theme and teaching; the hand shows where now falls in the inner ' +
+        'year.',
       meta: 'From "The Kabbalah of Time" by Daniel Kahane & Ann Helen Wainer'
     },
     // The night's shape, built when tapped rather than stored — see
@@ -14912,7 +15080,8 @@ content: ''; float: right; width: 30px; height: 1em;
     // The prose of a cycle is written as one long run with its paragraph
     // seams marked inside it. Entries that lay themselves out — the two on
     // the Keter card do — are left as they are.
-    const prose = /^\s*</.test(info.main) ? info.main : '<p>' + info.main + '</p>';
+    const body = infoProse(info);
+    const prose = /^\s*</.test(body) ? body : '<p>' + body + '</p>';
     openInfoPopup(info.title, prose + more, info.meta);
   }, true);
 
