@@ -1064,6 +1064,57 @@ line-height: 1.72;
 #info-popup-main p:last-child { margin-bottom: 0; }
 #info-popup-main .detail-row { margin-bottom: 10px; line-height: 1.6; }
 #info-popup-main .detail-row:last-child { margin-bottom: 0; }
+/* The newcomer's invitation, above the week's page. Quiet enough to ignore
+   and plain enough to answer: a line of gold on the parchment rather than a
+   banner, with its own dismiss so it can be refused as well as used. */
+#new-here {
+position: relative;
+max-width: 680px;
+margin: 14px auto 0;
+padding: 10px 44px 11px 16px;
+border: 1px solid var(--gold);
+border-radius: 6px;
+background: var(--bg-card-alt);
+text-align: left;
+}
+.nh-open {
+display: block;
+width: 100%;
+text-align: left;
+background: none;
+border: none;
+padding: 0;
+cursor: pointer;
+font-family: 'Cormorant Garamond', serif;
+}
+.nh-lead {
+display: block;
+font-size: calc(15px * var(--ts, 1));
+line-height: 1.45;
+color: var(--gold);
+}
+.nh-open:hover .nh-lead { text-decoration: underline; }
+.nh-sub {
+display: block;
+font-family: 'Cormorant Garamond', serif;
+font-size: calc(13px * var(--ts, 1));
+line-height: 1.5;
+color: var(--ink-dim);
+margin-top: 2px;
+}
+/* The × is drawn small and reaches 44px: its band is the padding the block
+   carries on that side, which is why that padding is 44 and not 34. */
+.nh-close {
+position: absolute;
+top: 0; right: 0;
+width: 44px; height: 100%;
+background: none; border: none; cursor: pointer;
+font-size: calc(15px * var(--ts, 1));
+line-height: 1;
+color: var(--ink-dim);
+}
+.nh-close:hover { color: var(--ink); }
+
 /* A glossed word: underlined with a dotted gold rule so it reads as a word
    with an answer behind it rather than as a link that leaves the page. */
 .term {
@@ -2712,6 +2763,23 @@ content: ''; float: right; width: 30px; height: 1em;
       <button id="il-intermediate-btn" class="year-pill-btn year-pill-active" onclick="setInfoLevel('intermediate')">Intermediate</button>
       <button id="il-advanced-btn" class="year-pill-btn" onclick="setInfoLevel('advanced')">Advanced</button>
     </div>
+  </div>
+
+  <!-- For whoever has just arrived. The Video tab under the week's page is
+       easy to miss on a page this full, and the one thing a newcomer needs is
+       someone to show them round. It takes itself away once the guide has
+       been opened, or once it is dismissed: "New here?" asked of a reader on
+       their hundredth day is noise. -->
+  <div id="new-here" style="display:none;">
+    <!-- Both lines inside the button: the whole invitation is the target,
+         which is how it reads and also what gives it its height — the
+         headline alone was 22px tall and a tap 21px under it landed on the
+         line beneath. -->
+    <button type="button" class="nh-open" onclick="openVideoFromInvite()">
+      <span class="nh-lead">New here? Watch the 3-minute guide.</span>
+      <span class="nh-sub">See how Today&rsquo;s Path, studies, and progress work.</span>
+    </button>
+    <button type="button" class="nh-close" onclick="dismissNewHere()" aria-label="Dismiss">&times;</button>
   </div>
 
   <!-- The week's page from the book with its two panes, read as one card the
@@ -20982,6 +21050,30 @@ content: ''; float: right; width: 30px; height: 1em;
     try { const r = exit.call(document); if (r && r.catch) r.catch(() => {}); } catch (e) {}
   }
   function expandVideo() { _goFullscreen(document.getElementById('video-frame-wrap')); }
+
+  // ── THE NEWCOMER'S INVITATION ──
+  // Shown until the guide has been watched or the line dismissed, and then
+  // not again. Kept in localStorage beside the other reading settings; if
+  // storage is refused the invitation simply shows, which is the safe way for
+  // it to fail.
+  function _seenGuide() {
+    try { return localStorage.getItem('kotSeenGuide') === '1'; } catch (e) { return false; }
+  }
+  function _markGuideSeen() {
+    try { localStorage.setItem('kotSeenGuide', '1'); } catch (e) {}
+    const el = document.getElementById('new-here');
+    if (el) el.style.display = 'none';
+  }
+  function dismissNewHere() { _markGuideSeen(); }
+  function openVideoFromInvite() { _markGuideSeen(); openVideoModal(); }
+  (function () {
+    const show = () => {
+      const el = document.getElementById('new-here');
+      if (el) el.style.display = _seenGuide() ? 'none' : 'block';
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show);
+    else show();
+  })();
 
   function openVideoModal() {
     const f = document.getElementById('video-frame');
