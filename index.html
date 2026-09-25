@@ -22348,6 +22348,35 @@ content: ''; float: right; width: 30px; height: 1em;
   // ══════════════════════════════════════════════════════════════
   
   if ('serviceWorker' in navigator) {
+    // A page already under a worker is handed its HTML from the cache and
+    // fetches the new copy behind it, so a change to the code arrives on the
+    // next open rather than this one. That is the right trade for a reader on
+    // a slow connection and the wrong one when what changed is the thing they
+    // are about to tap. When the replacement worker takes over — which it
+    // does within a few seconds of opening, since it skips waiting and claims
+    // the page — the page can simply fetch itself again, and the one-open lag
+    // disappears.
+    //
+    // Guarded three ways: only for a page that already had a controller, so a
+    // first visit never reloads itself; only once; and only in the opening
+    // seconds with nothing open, because a reload under someone who is
+    // reading is worse than a page one version behind. getClientRects is what
+    // asks whether a modal is really on screen — a computed display of
+    // 'block' is still reported for a child of a hidden parent.
+    const _hadWorker = !!navigator.serviceWorker.controller;
+    const _openedAt = Date.now();
+    let _reloadingForUpdate = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!_hadWorker || _reloadingForUpdate) return;
+      if (Date.now() - _openedAt > 15000) return;
+      const busy = Array.prototype.some.call(
+        document.querySelectorAll('[id$="-modal"]'),
+        (el) => el.getClientRects().length > 0);
+      if (busy) return;
+      _reloadingForUpdate = true;
+      location.reload();
+    });
+
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/service-worker.js')
         .then((registration) => {
