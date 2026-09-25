@@ -1072,7 +1072,10 @@ line-height: 1.72;
 /* The newcomer's invitation, above the week's page. Quiet enough to ignore
    and plain enough to answer: a line of gold on the parchment rather than a
    banner, with its own dismiss so it can be refused as well as used. */
-#new-here {
+/* The invitation to install wears the same clothes, because it is the same
+   kind of offer made at a different moment — and the two never show at once,
+   so they never stack. */
+#new-here, #install-invite {
 position: relative;
 max-width: 680px;
 margin: 14px auto 0;
@@ -1119,6 +1122,12 @@ line-height: 1;
 color: var(--ink-dim);
 }
 .nh-close:hover { color: var(--ink); }
+/* iOS has no install prompt a page may ask for — Safari keeps it behind its
+   own Share sheet. So on iPhone and iPad the block says what to tap and is
+   not a button at all: a control that cannot do the thing it names is worse
+   than a sentence that tells you where the thing is. */
+.nh-static { display: block; font-family: 'Cormorant Garamond', serif; }
+.nh-static .nh-lead { color: var(--gold); }
 
 /* A glossed word: underlined with a dotted gold rule so it reads as a word
    with an answer behind it rather than as a link that leaves the page. */
@@ -2785,6 +2794,25 @@ content: ''; float: right; width: 30px; height: 1em;
       <span class="nh-sub">See how Today&rsquo;s Path, studies, and progress work.</span>
     </button>
     <button type="button" class="nh-close" onclick="dismissNewHere()" aria-label="Dismiss">&times;</button>
+  </div>
+
+  <!-- ADD TO HOME SCREEN. This is a full progressive web app — installed it
+       opens without a browser bar and reads offline, since the service worker
+       holds the shell — and almost nobody finds that out on their own.
+       Offered on a second visit and not a first: someone who came back is
+       someone the offer is for, and someone still deciding should not be
+       asked to keep a thing they have not read yet. Two bodies, because the
+       two platforms answer differently — see .nh-static above. -->
+  <div id="install-invite" style="display:none;">
+    <button type="button" class="nh-open" id="install-open" onclick="installFromInvite()">
+      <span class="nh-lead">Keep it on your home screen.</span>
+      <span class="nh-sub">It opens full screen, and the day&rsquo;s learning is there without a signal.</span>
+    </button>
+    <span class="nh-static" id="install-static" style="display:none;">
+      <span class="nh-lead">Keep it on your home screen.</span>
+      <span class="nh-sub">Tap <strong>Share</strong> in Safari, then <strong>Add to Home Screen</strong>.</span>
+    </span>
+    <button type="button" class="nh-close" onclick="dismissInstall()" aria-label="Dismiss">&times;</button>
   </div>
 
   <!-- The week's page from the book with its two panes, read as one card the
@@ -21078,6 +21106,86 @@ content: ''; float: right; width: 30px; height: 1em;
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show);
     else show();
+  })();
+
+  // ── THE INVITATION TO INSTALL ──
+  // Chrome and the browsers built on it fire beforeinstallprompt when they
+  // judge the app installable; the event is the only handle there is, and it
+  // must be kept, because prompt() can be called once and only from a gesture.
+  // Safari fires nothing, so iOS is recognised outright and told where its
+  // own Share sheet is.
+  let _installEvent = null;
+
+  function _standalone() {
+    try {
+      if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
+    } catch (e) {}
+    return navigator.standalone === true;      // iOS's own flag
+  }
+  // iPadOS reports itself as a Mac; the touch points are what give it away.
+  function _isIOS() {
+    const ua = navigator.userAgent || '';
+    if (/iPhone|iPad|iPod/.test(ua)) return true;
+    return /Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1;
+  }
+  function _installDone() {
+    try { return localStorage.getItem('kotSeenInstall') === '1'; } catch (e) { return false; }
+  }
+  function _markInstallDone() {
+    try { localStorage.setItem('kotSeenInstall', '1'); } catch (e) {}
+    const el = document.getElementById('install-invite');
+    if (el) el.style.display = 'none';
+  }
+  function dismissInstall() { _markInstallDone(); }
+
+  function installFromInvite() {
+    if (!_installEvent) { _markInstallDone(); return; }
+    const e = _installEvent;
+    _installEvent = null;
+    _markInstallDone();          // asked once, either way
+    try {
+      e.prompt();
+    } catch (err) {}
+  }
+
+  function _showInstallInvite() {
+    const el = document.getElementById('install-invite');
+    if (!el || _installDone() || _standalone()) return;
+    // Second visit onward, and only once the newcomer's line is gone — two
+    // invitations at the top of the page at the same time is a plea.
+    if (!_seenGuide()) return;
+    let visits = 0;
+    try { visits = parseInt(localStorage.getItem('kotVisits') || '0', 10) || 0; } catch (e) {}
+    if (visits < 2) return;
+    const ios = !_installEvent && _isIOS();
+    if (!_installEvent && !ios) return;         // nothing to offer on this browser
+    const btn = document.getElementById('install-open');
+    const txt = document.getElementById('install-static');
+    if (btn) btn.style.display = ios ? 'none' : 'block';
+    if (txt) txt.style.display = ios ? 'block' : 'none';
+    el.style.display = 'block';
+  }
+
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();            // hold it; the browser's own bar is coarser
+    _installEvent = e;
+    _showInstallInvite();
+  });
+  window.addEventListener('appinstalled', function () {
+    _installEvent = null;
+    _markInstallDone();
+  });
+
+  (function () {
+    const start = () => {
+      try {
+        const n = (parseInt(localStorage.getItem('kotVisits') || '0', 10) || 0) + 1;
+        localStorage.setItem('kotVisits', String(n));
+      } catch (e) {}
+      _showInstallInvite();        // for iOS, which sends no event to wait for
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
   })();
 
   function openVideoModal() {
