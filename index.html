@@ -3223,7 +3223,7 @@ content: ''; float: right; width: 30px; height: 1em;
       </div>
       <div style="flex:0 0 auto; margin-top:10px; font-size:0.86em; color:var(--ink-dim); display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
         <button class="date-jump-trigger" onclick="expandVideo()">Expand &#10530;</button>
-        <a href="https://drive.google.com/file/d/1Ob6a5iXQLl49xlvDB6RXHx5cQDrFwYbe/view" target="_blank" rel="noopener" style="color:var(--gold)">Open on Google Drive &#8599;</a>
+        <a id="video-drive-link" href="https://drive.google.com/" target="_blank" rel="noopener" style="color:var(--gold)">Open on Google Drive &#8599;</a>
       </div>
     </div>
   </div>
@@ -21060,9 +21060,11 @@ content: ''; float: right; width: 30px; height: 1em;
     document.getElementById('info-popup-modal').style.display = 'flex';
   }
 
-  // The Drive file id lives here alone; the pane and the modal footer link to
-  // the same file in its ordinary viewer, for a browser that will not embed.
-  const INTRO_VIDEO_ID = '1Ob6a5iXQLl49xlvDB6RXHx5cQDrFwYbe';
+  // The Drive file id lives here alone — which it did not, until the footer
+  // link below was made to derive from it. Swapping the video is this one
+  // line. The embed and that footer link point at the same file: the second
+  // is for a browser that will not embed it.
+  const INTRO_VIDEO_ID = '1YK8ZHG9NbZhccGqb1qVZsYcOGnp9_lHd';
   // Fullscreen, asked for politely. The names differ between engines, the
   // call can be refused outright, and on iOS Safari there is no element
   // fullscreen at all — only a <video> can go full, and the video here is
@@ -21191,6 +21193,8 @@ content: ''; float: right; width: 30px; height: 1em;
   function openVideoModal() {
     const f = document.getElementById('video-frame');
     if (f) f.src = 'https://drive.google.com/file/d/' + INTRO_VIDEO_ID + '/preview';
+    const a = document.getElementById('video-drive-link');
+    if (a) a.href = 'https://drive.google.com/file/d/' + INTRO_VIDEO_ID + '/view';
     document.getElementById('video-modal').style.display = 'flex';
     // Asked for here, while the tap that opened the window still counts as
     // the gesture a browser requires; a moment later it would be refused.
