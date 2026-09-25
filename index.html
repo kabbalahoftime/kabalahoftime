@@ -3219,11 +3219,12 @@ content: ''; float: right; width: 30px; height: 1em;
       <div id="video-frame-wrap">
         <iframe id="video-frame" title="A spoken introduction to Kabbalah of Time"
                 style="position:absolute; inset:0; width:100%; height:100%; border:0;"
-                allow="autoplay; fullscreen" allowfullscreen></iframe>
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowfullscreen></iframe>
       </div>
       <div style="flex:0 0 auto; margin-top:10px; font-size:0.86em; color:var(--ink-dim); display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
         <button class="date-jump-trigger" onclick="expandVideo()">Expand &#10530;</button>
-        <a id="video-drive-link" href="https://drive.google.com/" target="_blank" rel="noopener" style="color:var(--gold)">Open on Google Drive &#8599;</a>
+        <a id="video-open-link" href="https://www.youtube.com/" target="_blank" rel="noopener" style="color:var(--gold)">Watch on YouTube &#8599;</a>
       </div>
     </div>
   </div>
@@ -21060,11 +21061,21 @@ content: ''; float: right; width: 30px; height: 1em;
     document.getElementById('info-popup-modal').style.display = 'flex';
   }
 
-  // The Drive file id lives here alone — which it did not, until the footer
-  // link below was made to derive from it. Swapping the video is this one
-  // line. The embed and that footer link point at the same file: the second
-  // is for a browser that will not embed it.
-  const INTRO_VIDEO_ID = '11JwbJeZAl5J8Rg-DZ3HQmXRppAl7ScsU';
+  // The video id lives here alone; the embed and the footer link below are
+  // both built from it, so swapping the video is this one line.
+  //
+  // YouTube rather than Drive, which it was until now. Drive's player is the
+  // reason for half the code around this modal: it opened dark until it was
+  // expanded, it cannot go fullscreen on iOS because a cross-origin iframe
+  // may not, and it stops working the moment the file's sharing is anything
+  // but "anyone with the link". YouTube's player has its own fullscreen
+  // button that works on a phone, plays inline, and answers to nobody's
+  // sharing settings. nocookie is the same player without the tracking
+  // cookie for a viewer who never presses play.
+  const INTRO_VIDEO_ID = 'EAlvAJEC9nA';
+  const INTRO_VIDEO_EMBED = 'https://www.youtube-nocookie.com/embed/' + INTRO_VIDEO_ID +
+    '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+  const INTRO_VIDEO_WATCH = 'https://youtu.be/' + INTRO_VIDEO_ID;
   // Fullscreen, asked for politely. The names differ between engines, the
   // call can be refused outright, and on iOS Safari there is no element
   // fullscreen at all — only a <video> can go full, and the video here is
@@ -21192,9 +21203,9 @@ content: ''; float: right; width: 30px; height: 1em;
 
   function openVideoModal() {
     const f = document.getElementById('video-frame');
-    if (f) f.src = 'https://drive.google.com/file/d/' + INTRO_VIDEO_ID + '/preview';
-    const a = document.getElementById('video-drive-link');
-    if (a) a.href = 'https://drive.google.com/file/d/' + INTRO_VIDEO_ID + '/view';
+    if (f) f.src = INTRO_VIDEO_EMBED;
+    const a = document.getElementById('video-open-link');
+    if (a) a.href = INTRO_VIDEO_WATCH;
     document.getElementById('video-modal').style.display = 'flex';
     // Asked for here, while the tap that opened the window still counts as
     // the gesture a browser requires; a moment later it would be refused.
