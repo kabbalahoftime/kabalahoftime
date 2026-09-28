@@ -2616,8 +2616,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    the size down for the few names too long to fit at full size. */
 .today-next { display:block; width:100%; text-align:left; background:none; border:none;
   font-family:inherit; font-size:calc(15px * var(--ts, 1)); color:var(--ink);
-  line-height:1.5; padding:3px 0; cursor:pointer;
+  line-height:1.5; padding:11px 0; cursor:pointer;
   white-space:nowrap; overflow:hidden; }
+/* 44px of its own. It was 26px and leaned on the space around it to pass the
+   reach test; with the Meditation line moved above it, that space belongs to
+   its neighbour's hit area and the lean no longer holds. The ladder's main
+   control should carry its own height in any case — the padding does it
+   without touching the text metrics _todayFit measures. */
 .today-next .t-lead { color:var(--ink-dim); font-size:0.8em; text-transform:uppercase;
   letter-spacing:1.5px; }
 .today-next .t-step { color:var(--gold); }
@@ -2663,6 +2668,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    was read from rather than a mark. The padding gives the tap its height
    without moving the line, the same trick the prayer tag uses. */
 .today-face { margin-top:8px; font-size:calc(13.5px * var(--ts, 1)); }
+.today-face .tp-sef { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
 .today-face .tf-open {
   background:none; border:none; font-family:inherit; font-size:1em;
   color:var(--ink-mid); cursor:pointer; text-align:left;
@@ -3031,6 +3037,21 @@ content: ''; float: right; width: 30px; height: 1em;
        and Yaakov's is the one the thirty are counted by. -->
   <div id="today-block">
     <div class="today-label">Today&rsquo;s Ladder</div>
+    <!-- THE FACE OF THE HOUR. The thirty steps and the ten prayers are deeds,
+         and this block counts them. The faces of the cards are not deeds —
+         they are the day's coordinates, what makes today this day: the
+         letter, the creature, the Name of the seventy-two, the attribute. A
+         reader can walk a whole path without meeting one of them, and the
+         shorter the path the likelier that is, which is backwards: they are
+         the most valuable thing the page holds. So the ladder names one, the
+         face of the Sefirah whose hour it is, and a tap goes to the card it
+         was read from. Read-only: a fact is not a thing to be ticked off.
+         It stands first of the three because the order is the order of the
+         day's work — one dwells on the thing, then learns, then prays — and
+         not because it is the most urgent. The step being asked for is the
+         line beneath it, and still carries the lit chip when its hour is
+         running. -->
+    <div id="today-face" class="today-face" style="display:none;"></div>
     <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
             aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
@@ -3042,17 +3063,6 @@ content: ''; float: right; width: 30px; height: 1em;
          applyPrayerState, which is where the active Sefirah is already
          known. -->
     <div id="today-prayer" class="today-prayer" style="display:none;"></div>
-    <!-- THE FACE OF THE HOUR. The thirty steps and the ten prayers are deeds,
-         and this block counts them. The faces of the cards are not deeds —
-         they are the day's coordinates, what makes today this day: the
-         letter, the creature, the Name of the seventy-two, the attribute. A
-         reader can walk a whole path without meeting one of them, and the
-         shorter the path the likelier that is, which is backwards: they are
-         the most valuable thing the page holds. So the ladder names one, the
-         face of the Sefirah whose hour it is, beside the prayer of that same
-         hour, and a tap goes to the card it was read from. Read-only: a fact
-         is not a thing to be ticked off. -->
-    <div id="today-face" class="today-face" style="display:none;"></div>
       <!-- The day's two gatherings — the ten prayers and the thirty steps —
            which stood in a clock of their own above the cards, beside a local
            and a Jerusalem time. The times are gone; these belong here, in the
@@ -17157,7 +17167,8 @@ content: ''; float: right; width: 30px; height: 1em;
       el.setAttribute('aria-label', 'The path is complete, thirty of thirty — open it in full');
       // The count is the foot's job, two lines below, so this says only what
       // the foot cannot: that the path is finished.
-      el.innerHTML = '<span class="t-lead t-whole">Done</span> ' +
+      el.innerHTML = '<span class="t-flag">Study</span>' +
+        '<span class="t-lead t-whole">Done</span> ' +
         '<span class="t-sef">the month complete' + note + '</span>';
       _todayFit(el);
       return;
@@ -17195,9 +17206,18 @@ content: ''; float: right; width: 30px; height: 1em;
     // word says which of the two it is — a step whose hour is running and a
     // step waiting for its hour are not the same thing to a reader deciding
     // whether to do it yet.
+    // The flag names the kind of deed, as the two lines beside it do —
+    // Meditation, Study, Prayer — rather than the step's position in a
+    // queue. It read "Next", which was a different kind of word from
+    // "Prayer" below it, and the three together named a position, a
+    // category and a Sefirah: three answers to three questions nobody
+    // had asked in that order.
+    // Now and Next are not lost. The chip already had a lit state for the
+    // hour that is running, so the word stays constant and the fill says
+    // which of the two it is — and the label says it in words for a reader
+    // who cannot see the fill.
     el.innerHTML =
-      '<span class="t-flag' + (st.due ? ' now' : '') + '">' +
-      (st.due ? 'Now' : 'Next') + '</span>' +
+      '<span class="t-flag' + (st.due ? ' now' : '') + '">Study</span>' +
       '<bdi class="t-step' + (st.due ? ' t-due' : '') + '" lang="he">' +
       (waxing ? 'מעלה' : 'מיעוט') + ' ' + p[0] + '</bdi> · ' + nameHtml +
       (note ? ' <span class="t-sef">' + note.replace(/^ /, '') + '</span>' : '');
@@ -17390,13 +17410,17 @@ content: ''; float: right; width: 30px; height: 1em;
     const want = name + '|' + face + '|' + href;
     if (el.dataset.built !== want) {
       el.dataset.built = want;
+      // Meditation, not the Sefirah's name. The flag says what kind of deed
+      // the line is, the same question the two lines beside it answer, and
+      // the Sefirah goes to the end where the prayer line already keeps it.
       el.innerHTML = face
-        ? '<span class="tp-flag">' + name + '</span>' +
+        ? '<span class="tp-flag">Meditation</span>' +
           (href
             ? '<a class="tf-open" href="' + href + '" target="_blank" rel="noopener" ' +
               'aria-label="Read today&rsquo;s Hayom Yom on Chabad.org">' + face + ' &#8599;</a>'
             : '<button type="button" class="tf-open" onclick="todayFaceGo()" ' +
-              'aria-label="Go to the ' + name + ' card">' + face + '</button>')
+              'aria-label="Go to the ' + name + ' card">' + face + '</button>') +
+          '<span class="tp-sef">&middot; ' + name + '</span>'
         : '';
     }
     el.style.display = face ? '' : 'none';
