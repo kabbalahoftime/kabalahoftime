@@ -548,6 +548,12 @@ opacity: 1 !important;
 font-weight: 600;
 }
 .prayer-tag.done::after { content: ' \2665'; font-size: 0.95em; }
+/* A prayer not undertaken: faint, still tappable, and still red once said.
+   These come after .done because that rule forces opacity with !important;
+   the hover line is last so a tag can still be brought up to read. */
+.prayer-tag.off-path { opacity: 0.45 !important; }
+.prayer-tag.off-path.done { opacity: 0.7 !important; }
+.prayer-tag.off-path:hover { opacity: 1 !important; }
 /* Its own hour, still unsaid — a slow pulse, not a blink */
 .prayer-tag.now-flash {
 animation: prayerPulse 2.2s ease-in-out infinite;
@@ -14868,21 +14874,30 @@ content: ''; float: right; width: 30px; height: 1em;
     // about the chord midpoint (5.8, 5.3) with radius 5.28, so the crown sits
     // at y ≈ 0.02, not at 3. Clipping from 3 left a sliver of both lobes
     // unfilled even when all ten had been said.
-    const top = 0, bot = 19, f = n / 10;
+    // Filled against the prayers undertaken rather than against ten, for the
+    // same reason the moon answers to its path: a heart that can never be
+    // whole is not an invitation. A prayer said beyond the set counts to the
+    // ten and not to the fill, and the ten are named in the title and in the
+    // list the heart opens.
+    const mask = prayersMask();
+    const mine = prayerMineDone(mask), total = prayerSteps().length;
+    const top = 0, bot = 19, f = total ? mine / total : 0;
     rect.setAttribute('y', String(bot - (bot - top) * f));
     rect.setAttribute('height', String((bot - top) * f + 1));
-    if (fill) fill.setAttribute('fill-opacity', n ? '1' : '0');
-    if (cnt) cnt.textContent = n + '/10';
-    const whole = n === 10;
+    if (fill) fill.setAttribute('fill-opacity', mine ? '1' : '0');
+    if (cnt) cnt.textContent = mine + '/' + total;
+    const whole = mine === total;
     if (svg) svg.style.filter = whole ? 'drop-shadow(0 0 3px rgba(179,58,58,0.85))' : '';
     const wrap = document.getElementById('prayer-heart-col');
     // The Baal Shem Tov, through the Maggid and the Alter Rebbe: "Love your
     // fellow as yourself" is the commentary on "Love Hashem your God" — one
     // loves the Jew's inner essence, the part of God Above within him. So the
     // whole heart carries both verses at once.
-    if (wrap) wrap.title = whole
-      ? 'All ten prayers said \u2014 \u05d5\u05d0\u05d4\u05d1\u05ea \u05d0\u05ea \u05d4\u05f3 \u05d0\u05dc\u05d5\u05e7\u05d9\u05da \u05d1\u05db\u05dc \u05dc\u05d1\u05d1\u05da \u00b7 \u05d5\u05d0\u05d4\u05d1\u05ea \u05dc\u05e8\u05e2\u05da \u05db\u05de\u05d5\u05da \u2014 love of Hashem with all your heart, and love of your fellow as yourself: the one is the commentary on the other'
-      : 'The ten daily prayers — tap each one in its Sefirah to mark it said';
+    if (wrap) wrap.title = (prayerSetIsWhole() ? '' : 'Your prayers: ' + prayerSetName() +
+        ' \u2014 ' + mine + ' of ' + total + ' \u00b7 of the ten, ' + n + ' said \u00b7 ')
+      + (whole
+      ? 'The heart whole \u2014 \u05d5\u05d0\u05d4\u05d1\u05ea \u05d0\u05ea \u05d4\u05f3 \u05d0\u05dc\u05d5\u05e7\u05d9\u05da \u05d1\u05db\u05dc \u05dc\u05d1\u05d1\u05da \u00b7 \u05d5\u05d0\u05d4\u05d1\u05ea \u05dc\u05e8\u05e2\u05da \u05db\u05de\u05d5\u05da \u2014 love of Hashem with all your heart, and love of your fellow as yourself: the one is the commentary on the other'
+      : 'The daily prayers — tap each one in its Sefirah to mark it said');
   }
 
   // On a day Tachanun is not said, Tikkun Rachel is not said either. The rule
@@ -14931,13 +14946,18 @@ content: ''; float: right; width: 30px; height: 1em;
             '<span class="tp-sef">· ' + PRAYER_SEFIRAH[activeIdx - 1] + '</span>'
           : '';
       }
-      tp.style.display = activeIdx ? '' : 'none';
+      tp.style.display = (activeIdx && prayerHas(activeIdx)) ? '' : 'none';
     }
     document.querySelectorAll('.prayer-tag').forEach(el => {
       const n = +el.dataset.prayer;
       const done = !!(mask & (1 << (n - 1)));
       el.classList.toggle('done', done);
-      el.classList.toggle('now-flash', !done && n === activeIdx);
+      // A prayer not undertaken: faint, still tappable. Its hour does not
+      // flash either, and the ladder does not call for it — it is not being
+      // asked for.
+      const mineNow = prayerHas(n);
+      el.classList.toggle('now-flash', !done && n === activeIdx && mineNow);
+      el.classList.toggle('off-path', !mineNow);
     });
     updatePrayerHeart(prayersDone());
     // A prayer marked on its own tag, or the hour moving on, has to reach the
@@ -14949,6 +14969,65 @@ content: ''; float: right; width: 30px; height: 1em;
   }
   const PRAYER_SEFIRAH = ['Keter','Chochmah','Binah','Chesed','Gevurah',
                           'Tiferet','Netzach','Hod','Yesod','Malchut'];
+
+  // ── WHICH OF THE TEN — the same undertaking the thirty readings carry ──
+  // Ten prayers a day is the whole heart, and someone beginning does not have
+  // it. The ten stay ten: what changes is how many the day asks for, and the
+  // rest stay on the page and can still be marked. Held as prayer numbers
+  // 1-10, defaulting to all of them.
+  const PRAYER_ALL = [1,2,3,4,5,6,7,8,9,10];
+  const PRAYER_PRESETS = [
+    // The three that are obligations: Shacharit, Mincha, Maariv.
+    { key: 'three', name: 'Three', sub: 'Shacharit · Mincha · Maariv — the three tefillot',
+      steps: [6, 8, 9] },
+    // Those, with the day's two ends: the blessings on waking, the Shema on
+    // the bed. A day framed at both ends and prayed three times through.
+    { key: 'five', name: 'Five', sub: 'the three, with Birchot HaShachar and Kri’at Shema al haMitah',
+      steps: [4, 6, 8, 9, 10] },
+    { key: 'seven', name: 'Seven', sub: 'those, with Tehilim and the Tikkun HaKlali',
+      steps: [4, 5, 6, 7, 8, 9, 10] },
+    { key: 'ten', name: 'Ten', sub: 'the heart entire', steps: PRAYER_ALL.slice() },
+  ];
+  // The order another prayer is offered in: outward from the obligations to the
+  // day's ends, then the two that stand with them, and last the inner ones —
+  // Hitbodedut, Cheshbon HaNefesh, Chatzot — which are a practice rather than
+  // an hour and are the hardest to begin.
+  const PRAYER_LADDER = [6, 8, 9, 4, 10, 5, 7, 1, 2, 3];
+
+  let _prayerStepsCache = null;
+  function prayerSteps() {
+    if (_prayerStepsCache) return _prayerStepsCache;
+    let out = null;
+    try {
+      const raw = localStorage.getItem('kotPrayerSteps');
+      if (raw) {
+        const arr = raw.split(',').map(Number)
+          .filter(n => Number.isInteger(n) && n >= 1 && n <= 10);
+        if (arr.length) out = Array.from(new Set(arr)).sort((a, b) => a - b);
+      }
+    } catch (e) {}
+    _prayerStepsCache = out || PRAYER_ALL.slice();
+    return _prayerStepsCache;
+  }
+  function prayerSetIsWhole() { return prayerSteps().length === 10; }
+  function prayerHas(n) { return prayerSteps().indexOf(n) >= 0; }
+  function prayerSetName() {
+    const s = prayerSteps().join(',');
+    const p = PRAYER_PRESETS.find(q => q.steps.join(',') === s);
+    return p ? p.name : 'Your own';
+  }
+  function setPrayerSteps(arr) {
+    const clean = Array.from(new Set((arr || []).filter(
+      n => Number.isInteger(n) && n >= 1 && n <= 10))).sort((a, b) => a - b);
+    const use = clean.length ? clean : PRAYER_ALL.slice();
+    _prayerStepsCache = use;
+    try { localStorage.setItem('kotPrayerSteps', use.join(',')); } catch (e) {}
+    if (typeof applyPrayerState === 'function') applyPrayerState();
+  }
+  // Said, among those undertaken — what the heart answers to.
+  function prayerMineDone(mask) {
+    return prayerSteps().filter(n => mask & (1 << (n - 1))).length;
+  }
 
   // ── THE TEN, GATHERED ──
   // The heart counts the prayers but cannot say which are still owed, and the
@@ -14962,22 +15041,36 @@ content: ''; float: right; width: 30px; height: 1em;
     return (n === 3 && _noTachanunToday) ? 'Tikkun Leah' : PRAYER_NAMES[n - 1];
   }
   function renderPrayersBody() {
+    if (_prayerChoosing) return renderPrayerChooser();
     const body = document.getElementById('prayers-body');
     if (!body) return;
     const mask = prayersMask();
     const H = window.kotwHours;
     const win = (typeof _pathHourWindows === 'function') ? _pathHourWindows() : null;
     const now = (H && typeof H.nowH === 'function') ? _hNorm(H.nowH()) : null;
-    let html = '';
+    const whole = prayerSetIsWhole();
+    const mine = prayerMineDone(mask), total = prayerSteps().length;
+    // What was undertaken, said above the ten, so the faint rows below read as
+    // the rest of the heart rather than as rows switched off.
+    let html = `<div class="path-head">` +
+      `<span class="path-head-name">` +
+        (whole ? `<b>The heart entire</b> — all ten.`
+               : `Your prayers: <b>${prayerSetName()}</b> — ${mine} of ${total}. ` +
+                 `<span style="color:var(--ink-dim)">Of the ten: ${prayersDone()}.</span>`) +
+      `</span>` +
+      `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); prayerOpenChooser()">Change</button>` +
+      `</div>`;
     for (let n = 1; n <= 10; n++) {
       const sef  = PRAYER_SEFIRAH[n - 1];
       const done = !!(mask & (1 << (n - 1)));
+      const off  = !prayerHas(n);
       const v    = win && win[sef];
       // The hour is only ever the reader's own — on a day they have navigated
-      // to, nothing is running, the same rule the Today block follows.
-      const due  = !done && now !== null && !!v && currentOffset === 0 &&
+      // to, nothing is running, the same rule the Today block follows. A
+      // prayer not undertaken has no hour being asked of it.
+      const due  = !done && !off && now !== null && !!v && currentOffset === 0 &&
                    _hIn(now, v[0], v[1]);
-      html += `<div class="path-row${done ? ' done' : ''}${due ? ' next due' : ''}" ` +
+      html += `<div class="path-row${done ? ' done' : ''}${due ? ' next due' : ''}${off ? ' off' : ''}" ` +
         `role="button" tabindex="0" aria-pressed="${done}" ` +
         `onclick="togglePrayerFromList(${n})">` +
         `<span class="path-check">${done ? '☑' : '☐'}</span>` +
@@ -14986,15 +15079,119 @@ content: ''; float: right; width: 30px; height: 1em;
         // Now, not next: the ten have no order to be next in. Each has an
         // hour of its own and any of them can be said whenever it was said.
         (due ? `<span class="path-next-tag">now</span>` : '') +
+        (off && done ? `<span class="path-beyond">beyond</span>` : '') +
         `</div>`;
     }
     const d = prayersDone();
-    html += `<div class="path-complete">` + (d === 10
-      ? 'Ten of ten — the heart whole.'
-      : d + ' of 10 said') + `</div>`;
+    if (whole) {
+      html += `<div class="path-complete">` + (d === 10
+        ? 'Ten of ten — the heart whole.'
+        : d + ' of 10 said') + `</div>`;
+    } else {
+      html += `<div class="path-complete">` + (mine === total
+        ? total + ' of ' + total + ' — your prayers said.'
+        : mine + ' of ' + total + ' said') + `</div>`;
+      if (mine === total) html += _prayerGrowHtml();
+    }
     body.innerHTML = html;
   }
+
+  // ── CHOOSING WHICH OF THE TEN ──
+  // The same two-door arrangement the thirty have, minus the pill: the row
+  // under the title is already three lines deep, and the heart opens this list
+  // anyway. Kept inside the prayers window for the same reason the other is
+  // kept inside Today's Path — choosing among the ten belongs where the ten are.
+  let _prayerChoosing = false;
+  function prayerOpenChooser()  { _prayerChoosing = true;  renderPrayersBody(); }
+  function prayerCloseChooser() { _prayerChoosing = false; renderPrayersBody(); }
+
+  function renderPrayerChooser() {
+    const body = document.getElementById('prayers-body');
+    if (!body) return;
+    const sig = prayerSteps().join(',');
+    let html = `<div class="path-head">` +
+      `<span class="path-head-name"><b>Which of the ten</b> — the prayers you undertake.</span>` +
+      `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); prayerCloseChooser()">Done</button>` +
+      `</div>` +
+      `<div class="path-note">The ten stay ten. What you choose is what the day asks of you; ` +
+      `the rest stay on the page and can still be marked. The heart then fills with yours.</div>`;
+    PRAYER_PRESETS.forEach(p => {
+      const on = p.steps.join(',') === sig;
+      html += `<button type="button" class="path-preset${on ? ' on' : ''}" onclick="event.stopPropagation(); prayerPickPreset('${p.key}')">` +
+        `<span class="path-preset-n">${p.name}</span>` +
+        `<span>${p.sub}<span class="path-preset-sub">${p.steps.length} a day</span></span>` +
+        `</button>`;
+    });
+    html += `<div class="path-section-title" style="margin-top:14px;">Or take them one by one</div>`;
+    for (let n = 1; n <= 10; n++) {
+      html += `<div class="path-pick" onclick="event.stopPropagation(); prayerTogglePick(${n})">` +
+        `<span class="path-check">${prayerHas(n) ? '☑' : '☐'}</span>` +
+        `<span class="path-name">${_prayerListName(n)}</span>` +
+        `<span class="path-sef">${PRAYER_SEFIRAH[n - 1]}</span></div>`;
+    }
+    body.innerHTML = html;
+  }
+
+  function prayerPickPreset(key) {
+    const p = PRAYER_PRESETS.find(q => q.key === key);
+    if (p) setPrayerSteps(p.steps.slice());
+    renderPrayersBody();
+  }
+  function prayerTogglePick(n) {
+    const cur = prayerSteps().slice();
+    const at = cur.indexOf(n);
+    if (at >= 0) cur.splice(at, 1); else cur.push(n);
+    setPrayerSteps(cur);
+    renderPrayersBody();
+  }
+
+  // Read back off the days, as the thirty's streak is: a day counts when every
+  // prayer undertaken was marked on it, and a day still in progress does not
+  // break the count.
+  function prayerStreak() {
+    let n = 0;
+    for (let d = 0; d < 40; d++) {
+      let m = 0;
+      try {
+        m = Math.max(0, parseInt(localStorage.getItem(_keyFor('kotPrayers:', -d)), 10) || 0) & 1023;
+      } catch (e) {}
+      const kept = prayerSteps().every(q => m & (1 << (q - 1)));
+      if (!kept) { if (d === 0) continue; break; }
+      n++;
+    }
+    return n;
+  }
+  function _prayerGrowSnooze() {
+    try { return Math.max(0, parseInt(localStorage.getItem('kotPrayerGrowSnooze'), 10) || 0); }
+    catch (e) { return 0; }
+  }
+  function prayerGrowLater() {
+    try { localStorage.setItem('kotPrayerGrowSnooze', String(prayerStreak())); } catch (e) {}
+    renderPrayersBody();
+  }
+  function prayerAddOne(n) {
+    setPrayerSteps(prayerSteps().concat([n]));
+    try { localStorage.removeItem('kotPrayerGrowSnooze'); } catch (e) {}
+    renderPrayersBody();
+  }
+  function _prayerGrowHtml() {
+    if (prayerSetIsWhole()) return '';
+    const st = prayerStreak();
+    if (st < PATH_GROW_AFTER || st < _prayerGrowSnooze() + PATH_GROW_AFTER) return '';
+    let nxt = 0;
+    for (const n of PRAYER_LADDER) if (!prayerHas(n)) { nxt = n; break; }
+    if (!nxt) return '';
+    return `<div class="path-grow">` +
+      `<div class="path-grow-lead">${st} days kept. Ready for one more?</div>` +
+      `<div class="path-grow-sub">${_prayerListName(nxt)} <span style="font-style:italic">${PRAYER_SEFIRAH[nxt - 1]}</span></div>` +
+      `<div class="path-grow-sub" style="opacity:.8">It joins your prayers today, so today&rsquo;s heart will ask for it too.</div>` +
+      `<div class="path-grow-row">` +
+        `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); prayerAddOne(${nxt})">Add it</button>` +
+        `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); prayerGrowLater()">Not yet</button>` +
+      `</div></div>`;
+  }
   function openPrayers() {
+    _prayerChoosing = false;
     renderPrayersBody();
     document.getElementById('prayers-modal').style.display = 'flex';
   }
@@ -15595,7 +15792,9 @@ content: ''; float: right; width: 30px; height: 1em;
         'three: Chumash, Tanya, Rambam. The moon then fills with your three rather than with ' +
         'thirty, and when you have kept them a week the app offers you one more. </p><p>Tapping ' +
         'the moon and then <strong>Change</strong> opens the same choice in full, where the ' +
-        'thirty can also be picked one by one.',
+        'thirty can also be picked one by one. </p><p>The prayers work the same way. Tap the ' +
+        '<strong>heart</strong>, then <strong>Change</strong>, and take three &mdash; Shacharit, ' +
+        'Mincha, Maariv. The heart then fills with your three.',
       main:
         'What the day is asking for next, and how much of it has been done. </p><p>The top line ' +
         'names the next step and goes to it. Beneath, the heart counts the ten prayers &mdash; ' +
@@ -15613,7 +15812,12 @@ content: ''; float: right; width: 30px; height: 1em;
         'listed for picking one by one. The moon then answers to that portion ' +
         '&mdash; seven steps fill it as thirty do &mdash; and a faint ring outside it keeps the ' +
         'month, so both are in view at once. Nothing is taken off the page: the steps not ' +
-        'undertaken stay in the list, faint, and can still be marked.',
+        'undertaken stay in the list, faint, and can still be marked. </p><p>The ten prayers ' +
+        'are undertaken the same way, from the heart&rsquo;s own list &mdash; three, five, seven ' +
+        'or ten, or any of them picked singly &mdash; and the heart then fills with those. A ' +
+        'prayer not undertaken keeps its place beside its Sefirah, faint; its hour does not ' +
+        'pulse and the ladder does not call for it, but it can still be marked, and then it ' +
+        'counts to the ten rather than to the heart.',
       advanced:
         'The thirty counted steps are Or Pnimi, inner light, and are therefore taken strictly ' +
         'in order: at any moment exactly one is being asked for, and tapping any other will not ' +
