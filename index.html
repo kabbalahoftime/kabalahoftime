@@ -2670,6 +2670,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   position:relative; z-index:1;
 }
 .today-face .tf-open:hover { color:var(--gold); text-decoration:underline; }
+/* The Keter line is a link out rather than a jump down the page, and is drawn
+   as one: gold, with the same ↗ the app uses wherever it hands a reader over
+   to somebody else's site. */
+.today-face a.tf-open { color:var(--gold); text-decoration:none; }
 .today-count { font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
 .today-more { background:none; border:none; font-family:inherit; cursor:pointer;
   font-size:calc(11px * var(--ts, 1)); color:var(--gold); padding:6px 0; white-space:nowrap; }
@@ -17364,20 +17368,35 @@ content: ''; float: right; width: 30px; height: 1em;
     const a = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
     return a ? a.name.split(' /')[0].trim() : '';
   }
+  // Keter's face is the day's Hayom Yom, and the app does not hold that text —
+  // Strong Day carries a link to Chabad.org in its place. So the ladder's line
+  // carries the same link rather than walking a reader to a second link: the
+  // href is taken off that anchor rather than rebuilt, so the two cannot say
+  // different days.
+  function _faceHref(name) {
+    if (name !== 'Keter') return '';
+    const a = document.querySelector('#keter-hayomyom a[href]');
+    return a ? a.getAttribute('href') : '';
+  }
   function applyTodayFace() {
     const el = document.getElementById('today-face');
     if (!el) return;
     const name = _faceHourName();
     const face = _faceOf(_faceCardFor(name), name);
+    const href = _faceHref(name);
     // Rebuilt only when what it says changes, so it is not rewritten under a
-    // reader's finger every half minute.
-    const want = name + '|' + face;
+    // reader's finger every half minute. The href is part of that, because it
+    // carries the date and turns with it.
+    const want = name + '|' + face + '|' + href;
     if (el.dataset.built !== want) {
       el.dataset.built = want;
       el.innerHTML = face
         ? '<span class="tp-flag">' + name + '</span>' +
-          '<button type="button" class="tf-open" onclick="todayFaceGo()" ' +
-          'aria-label="Go to the ' + name + ' card">' + face + '</button>'
+          (href
+            ? '<a class="tf-open" href="' + href + '" target="_blank" rel="noopener" ' +
+              'aria-label="Read today&rsquo;s Hayom Yom on Chabad.org">' + face + ' &#8599;</a>'
+            : '<button type="button" class="tf-open" onclick="todayFaceGo()" ' +
+              'aria-label="Go to the ' + name + ' card">' + face + '</button>')
         : '';
     }
     el.style.display = face ? '' : 'none';
