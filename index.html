@@ -1366,6 +1366,13 @@ border-radius: 3px;
 animation: maalahShake 0.3s;
 }
 
+/* A step the reader did not undertake. Still on the page, still tappable —
+   what changes is that the day is not asking for it. Faint rather than grey,
+   so it reads as further off rather than disabled; a marked one keeps the
+   gold ground, because a thing done is done whether or not it was asked. */
+.maalah.off-path { opacity: 0.4; }
+.maalah.off-path.done { opacity: 0.66; }
+
 /* Waning-step day tags (יום ט״ז–ל׳) — maalah look, but not tappable steps */
 .maalah.yom {
 cursor: pointer;
@@ -2330,6 +2337,60 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 }
 .path-complete { text-align:center; color:var(--gold); margin-top:10px; font-style:italic; }
 
+/* ── THE PATH HEADER AND ITS CHOOSER ──
+   Which portion of the thirty this reader undertook, and the way to change
+   it. The header sits above the two halves so the list is read as "of these
+   thirty, these are mine" rather than as a list with some rows greyed. */
+.path-head {
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  padding:7px 9px; margin-bottom:4px; border-radius:5px;
+  background:var(--bg-card-alt); border:1px solid var(--border);
+}
+.path-head-name { flex:1; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); }
+.path-head-name b { color:var(--gold); font-weight:600; }
+/* 44px of height on a control that draws as a word. */
+.path-head-btn {
+  font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--gold); background:none;
+  border:1px solid var(--gold); border-radius:4px; padding:0 12px;
+  min-height:44px; cursor:pointer; white-space:nowrap;
+}
+.path-head-btn:hover { background:#f2ead8; }
+/* A step the reader did not undertake: present, faint, and still tappable. */
+.path-row.off { opacity:.42; }
+.path-row.off:hover { opacity:.72; }
+.path-row.off.done { opacity:.6; }
+.path-beyond {
+  font-family:'Cinzel',serif; font-size:calc(9.5px * var(--ts, 1)); letter-spacing:1px;
+  color:var(--ink-dim); text-transform:uppercase; white-space:nowrap;
+}
+/* The offer of one more rung, after a path has been kept. */
+.path-grow {
+  margin-top:12px; padding:10px 12px; border-radius:5px;
+  background:var(--bg-card-alt); border:1px solid var(--gold);
+}
+.path-grow-lead { color:var(--gold); font-size:calc(13.5px * var(--ts, 1)); }
+.path-grow-sub { color:var(--ink-dim); font-size:calc(12.5px * var(--ts, 1)); margin-top:2px; }
+.path-grow-row { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+.path-preset {
+  display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+  padding:9px 10px; min-height:44px; margin-bottom:6px; border-radius:5px; cursor:pointer;
+  background:none; border:1px solid var(--border); color:var(--ink-mid);
+  font-family:'Cormorant Garamond',serif; font-size:calc(14px * var(--ts, 1));
+}
+.path-preset:hover { background:#f2ead8; }
+.path-preset.on { border-color:var(--gold); background:#f7efdd; }
+.path-preset-n {
+  font-family:'Cinzel',serif; font-size:calc(11px * var(--ts, 1)); letter-spacing:1px;
+  color:var(--gold); min-width:58px;
+}
+.path-preset-sub { display:block; font-size:calc(12px * var(--ts, 1)); color:var(--ink-dim); }
+/* Stacked taps, so each needs its own 44px rather than borrowing the gap. */
+.path-pick { display:flex; align-items:center; gap:8px; padding:6px; min-height:44px; border-radius:5px; cursor:pointer; }
+.path-pick:hover { background:#f2ead8; }
+.path-pick .path-check { min-width:16px; }
+.path-note { color:var(--ink-dim); font-size:calc(12.5px * var(--ts, 1)); margin:2px 0 10px; }
+
 /* ── THE THIRTY-FIRST ──
    Shown only once all thirty are marked. It is not a step and carries no
    checkbox: the thirty are the month, and this stands outside it. */
@@ -2962,7 +3023,7 @@ content: ''; float: right; width: 30px; height: 1em;
         <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag in order · tap for Today's Path">
           <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
             <svg id="maalot-moon-svg" width="33" height="33" viewBox="-6 -6 34 34" style="display:block;overflow:visible">
-              <g id="maalot-stars"></g><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
+              <g id="maalot-stars"></g><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-month-ring" cx="11" cy="11" r="13.5" fill="none" stroke="var(--gold)" stroke-width="1.1" stroke-linecap="round" opacity="0.34" transform="rotate(-90 11 11)" style="display:none"/><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
             <span id="maalot-moon-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/15</span>
             <span id="stars-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold-mid);opacity:0.85;"></span>
             <!-- The chanukiah — nine lights for the ten who carry the menorah.
@@ -14648,12 +14709,32 @@ content: ''; float: right; width: 30px; height: 1em;
   // State: the highest completed step (0-15), stored per displayed Jewish
   // date in localStorage. Only step k+1 can be marked; only step k unmarked.
   const MAALOT_HEB = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ז׳','ח׳','ט׳','י׳','י״א','י״ב','י״ג','י״ד','ט״ו'];
-  let _maalotKey = null;
+  let _maalotKey = null;      // legacy: the highest מעלה reached, 0-15
+  let _maalotMaskKey = null;  // a 15-bit mask, as the waning has kept since
 
-  function maalotDone() {
-    try { return Math.min(15, Math.max(0, parseInt(localStorage.getItem(_maalotKey), 10) || 0)); }
-    catch (e) { return 0; }
+  // The climb was a count while the climb was the only way up: n of fifteen
+  // said everything, because the first n were always the n taken. A path that
+  // is a portion of the thirty can hold the fifth rung without the first, so
+  // the climb is a mask now, exactly as the waning already is — and a day
+  // written under the count is converted on first read, n steps becoming the
+  // first n bits, which is what a sequential day looks like.
+  function _popcount(m) { let n = 0; while (m) { n += m & 1; m >>>= 1; } return n; }
+
+  function maalotMask() {
+    if (!_maalotMaskKey) return 0;
+    try {
+      const raw = localStorage.getItem(_maalotMaskKey);
+      if (raw !== null) return Math.max(0, parseInt(raw, 10) || 0) & 32767;
+      const legacy = Math.min(15, Math.max(0, parseInt(localStorage.getItem(_maalotKey), 10) || 0));
+      const mask = legacy ? (1 << legacy) - 1 : 0;
+      if (legacy) localStorage.setItem(_maalotMaskKey, String(mask));
+      return mask;
+    } catch (e) { return 0; }
   }
+
+  // Every מעלה marked, whether or not it stands on this reader's path. The
+  // month's own tally; pathWaxDone below is the one the moon answers to.
+  function maalotDone() { return _popcount(maalotMask()); }
 
   function maalotIndexOf(el) {
     return MAALOT_HEB.indexOf(el.textContent.replace('מעלה', '').trim()) + 1;
@@ -14664,29 +14745,54 @@ content: ''; float: right; width: 30px; height: 1em;
   // face ma'alot), the sun's rays appear and REMAIN; the disc inside then
   // wanes back to new as the 15 detail steps (days 16-30) complete — the
   // waning path mirrors the waxing one (lit on the left, Or Chozer).
-  function updateMaalotMoon(k) {
+  // A path takes its own portion of that arc rather than a shortened version
+  // of the whole. Chosen ma'alot wax, chosen מיעוטים wane, and the fractions
+  // are taken over what this reader undertook: seven steps fill the same moon
+  // thirty do, which is the point — a moon that can never fill is no
+  // invitation. A path of descent alone therefore begins full and crowned, at
+  // ט״ו, where its steps stand in the month; a path of ascent alone ends
+  // there. The whole thirty read exactly as before, since the fractions are
+  // then 15 and 15.
+  function updateMaalotMoon() {
     const fill = document.getElementById('maalot-moon-fill');
     const cnt  = document.getElementById('maalot-moon-count');
     if (!fill) return;
+    const mMask = maalotMask(), yMask = yomMask();
+    const waxN = pathWaxNums().length, waneN = pathWaneNums().length;
+    const waxK = pathWaxDone(mMask), waneK = pathWaneDone(yMask);
     const r = 9, cx = 11, cy = 11;
-    const sun = k === 15;
-    const w = sun ? yomDone() : 0;
+    const sun = waxK === waxN;      // the chosen ascent is finished
+    const w = sun ? waneK : 0;
     let d;
     if (!sun) {
-      const f = k / 15;
+      const f = waxK / waxN;
       const rx = r * Math.abs(Math.cos(Math.PI * f));
       const sweep = f <= 0.5 ? 0 : 1;
-      d = k === 0 ? '' :
+      d = waxK === 0 ? '' :
         `M ${cx} ${cy - r} A ${r} ${r} 0 0 1 ${cx} ${cy + r} A ${rx} ${r} 0 0 ${sweep} ${cx} ${cy - r} Z`;
     } else {
-      const g = 1 - w / 15; // lit fraction while waning: full→new
+      const g = waneN ? 1 - w / waneN : 1;   // lit fraction while waning: full→new
       const rx = r * Math.abs(Math.cos(Math.PI * g));
       const sweep = g <= 0.5 ? 1 : 0;
-      d = w === 15 ? '' :
+      d = (waneN && w === waneN) ? '' :
         `M ${cx} ${cy - r} A ${r} ${r} 0 0 0 ${cx} ${cy + r} A ${rx} ${r} 0 0 ${sweep} ${cx} ${cy - r} Z`;
     }
     fill.setAttribute('d', d);
-    if (cnt) cnt.textContent = sun ? (15 + w) + '/30' : k + '/15';
+    if (cnt) cnt.textContent = sun ? (waxN + w) + '/' + (waxN + waneN) : waxK + '/' + waxN;
+    // The month around the path: every one of the thirty marked, whether it
+    // stood on the path or was taken beyond it, drawn as a faint ring outside
+    // the moon. Only for a reader who took a portion — for the whole thirty
+    // it would say what the moon already says.
+    const ring = document.getElementById('maalot-month-ring');
+    if (ring) {
+      if (pathIsWhole()) ring.style.display = 'none';
+      else {
+        const C = 2 * Math.PI * 13.5;
+        const p = Math.min(30, maalotDone() + yomDone()) / 30;
+        ring.style.display = '';
+        ring.setAttribute('stroke-dasharray', (C * p).toFixed(2) + ' ' + C.toFixed(2));
+      }
+    }
     // At ט״ו the light of the moon becomes like the light of the sun (Isaiah 30:26)
     const SUN_GOLD = '#dfa016';
     const rays = document.getElementById('maalot-sun-rays');
@@ -14696,14 +14802,20 @@ content: ''; float: right; width: 30px; height: 1em;
     if (rays) { rays.style.display = sun ? '' : 'none'; rays.setAttribute('stroke', SUN_GOLD); }
     if (rim)  rim.setAttribute('stroke', sun ? SUN_GOLD : 'var(--gold)');
     fill.setAttribute('fill', sun ? SUN_GOLD : 'var(--gold)');
+    if (ring) ring.setAttribute('stroke', sun ? SUN_GOLD : 'var(--gold)');
     if (svg)  svg.style.filter = sun ? 'drop-shadow(0 0 2.5px rgba(223,160,22,0.85))' : '';
-    if (wrap) wrap.title = sun
-      ? 'והיה אור הלבנה כאור החמה — the light of the moon shall be as the light of the sun (Isaiah 30:26) · Or Chozer: fifteen waning steps return from Keter to Malchut'
-      : "Today's ma'alot — tap each מעלה tag in order";
-    // The thirty-first appears when the thirty are complete, and goes again if
-    // a step is unmarked — it is the seal of a finished path, not a trophy.
+    if (wrap) wrap.title = (pathIsWhole() ? '' : 'Your path: ' + pathName() +
+        ' — ' + (waxK + waneK) + ' of ' + (waxN + waneN) +
+        ' · the ring is the month, ' + (maalotDone() + yomDone()) + ' of 30 · ')
+      + (sun
+        ? 'והיה אור הלבנה כאור החמה — the light of the moon shall be as the light of the sun (Isaiah 30:26) · Or Chozer: the waning steps return from Keter to Malchut'
+        : "Today's ma'alot — tap each מעלה tag in order");
+    // The thirty-first appears when the month is complete — all thirty marked,
+    // whether they stood on the path or were taken beyond it. It is the seal
+    // of the month, not of a portion of it, so a short path does not release
+    // it early; and it goes again if a step is unmarked.
     const song = document.getElementById('song-yehoshua');
-    if (song) song.style.display = (sun && w === 15) ? '' : 'none';
+    if (song) song.style.display = ((maalotDone() + yomDone()) === 30) ? '' : 'none';
   }
 
   // ── THE TEN PRAYERS — one per Sefirah, a heart that fills through the day ──
@@ -15251,21 +15363,24 @@ content: ''; float: right; width: 30px; height: 1em;
 
   function applyMaalotState() {
     if (!_maalotKey) return;
-    const k = maalotDone();
-    const sun = k === 15;
-    const w = yomDone();
+    const mMask = maalotMask(), yMask = yomMask();
+    const wxNext = pathWaxNext(mMask);
+    const sun = wxNext === 0;                        // the chosen climb is done
+    const wnNext = pathWaneNext(yMask);
     document.querySelectorAll('.maalah').forEach(el => {
       if (el.classList.contains('yom')) {           // waning steps (מיעוט), only after the sun
         const n = +el.dataset.wane;
-        el.classList.toggle('done', n >= 1 && !!(yomMask() & (1 << (n - 1))));
-        el.classList.toggle('next-step', sun && n === yomNext());
+        el.classList.toggle('done', n >= 1 && !!(yMask & (1 << (n - 1))));
+        el.classList.toggle('next-step', sun && n >= 1 && n === wnNext);
+        el.classList.toggle('off-path', n >= 1 && !pathHas(14 + n));
       } else {                                       // waxing steps (מעלה)
         const n = maalotIndexOf(el);
-        el.classList.toggle('done', n >= 1 && n <= k);
-        el.classList.toggle('next-step', !sun && n === k + 1);
+        el.classList.toggle('done', n >= 1 && !!(mMask & (1 << (n - 1))));
+        el.classList.toggle('next-step', !sun && n >= 1 && n === wxNext);
+        el.classList.toggle('off-path', n >= 1 && !pathHas(n - 1));
       }
     });
-    updateMaalotMoon(k);
+    updateMaalotMoon();
     renderTodayBlock();
     syncA11yState();
   }
@@ -15285,22 +15400,28 @@ content: ''; float: right; width: 30px; height: 1em;
       // back; anything else shakes and refuses, exactly as the climb does.
       const n = +el.dataset.wane;
       if (!n) return;
-      if (maalotDone() < 15) return shakeTag(el);
-      const nx = yomNext();
       const bit = m => { try { localStorage.setItem(_yomMaskKey, String(m & 32767)); } catch (err) {} };
-      if (n === nx)          bit(yomMask() |  (1 << (n - 1)));
-      else if (n === nx - 1) bit(yomMask() & ~(1 << (n - 1)));
-      else                   return shakeTag(el);
+      // Beyond the path: taken or given back freely. It is not part of an
+      // order, because it is not part of what was undertaken — refusing it
+      // would be the app telling someone they may not learn something.
+      if (!pathHas(14 + n)) { bit(yomMask() ^ (1 << (n - 1))); applyMaalotState(); return; }
+      if (pathWaxNext(maalotMask()) !== 0) return shakeTag(el);   // the climb is not finished
+      const yM = yomMask();
+      if (n === pathWaneNext(yM))      bit(yM |  (1 << (n - 1)));
+      else if (n === pathWaneLast(yM)) bit(yM & ~(1 << (n - 1)));
+      else                             return shakeTag(el);
       applyMaalotState();
       return;
     }
     // Waxing step (מעלה)
     const n = maalotIndexOf(el);
     if (!n) return;
-    const k = maalotDone();
-    if (n === k + 1)      { try { localStorage.setItem(_maalotKey, String(n)); } catch (err) {} }
-    else if (n === k)     { try { localStorage.setItem(_maalotKey, String(n - 1)); } catch (err) {} }
-    else                  return shakeTag(el);
+    const mBit = m => { try { localStorage.setItem(_maalotMaskKey, String(m & 32767)); } catch (err) {} };
+    if (!pathHas(n - 1)) { mBit(maalotMask() ^ (1 << (n - 1))); applyMaalotState(); return; }
+    const mM = maalotMask();
+    if (n === pathWaxNext(mM))      mBit(mM |  (1 << (n - 1)));
+    else if (n === pathWaxLast(mM)) mBit(mM & ~(1 << (n - 1)));
+    else                            return shakeTag(el);
     applyMaalotState();
   }, true);
 
@@ -15387,12 +15508,8 @@ content: ''; float: right; width: 30px; height: 1em;
     return n;
   }
 
-  // The lowest step not yet marked — offered as the next one, never required.
-  function yomNext() {
-    const m = yomMask();
-    for (let n = 1; n <= 15; n++) if (!(m & (1 << (n - 1)))) return n;
-    return 0;
-  }
+  // The lowest step not yet marked is now asked of pathWaneNext, which asks it
+  // of the rungs this reader undertook rather than of all fifteen.
 
   // ── ABOUT THE CYCLES — tap-ⓘ explanations of each card's headline cycle ──
   const CYCLE_INFO = {
@@ -15450,7 +15567,10 @@ content: ''; float: right; width: 30px; height: 1em;
         'it. </p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
         'the ten prayers are said, the <strong>circle</strong> beside it counts the readings, ' +
         'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
-        'few lines opened counts.',
+        'few lines opened counts. </p><p>Thirty readings in a day is a great deal to begin ' +
+        'with, and you are not asked for all of them. Tap the moon, then <strong>Change</strong>, ' +
+        'and take three &mdash; Chumash, Tanya, Rambam. The moon then fills with your three ' +
+        'rather than with thirty, and when you have kept them a week the app offers you one more.',
       main:
         'What the day is asking for next, and how much of it has been done. </p><p>The top line ' +
         'names the next step and goes to it. Beneath, the heart counts the ten prayers &mdash; ' +
@@ -15461,7 +15581,12 @@ content: ''; float: right; width: 30px; height: 1em;
         'what it is counting halfway through the day: fifteen while climbing, thirty once the ' +
         'climb is whole. The menorah beside it holds a closed set of ten bearers on nine ' +
         'lights, gathered as companions rather than counted as steps. </p><p>When the ' +
-        'day&rsquo;s climb is finished, an offer of tomorrow&rsquo;s appears in its place.',
+        'day&rsquo;s climb is finished, an offer of tomorrow&rsquo;s appears in its place. ' +
+        '</p><p>The thirty are the month, and a reader takes a portion of it: tap the moon and ' +
+        'then <strong>Change</strong> to choose one. The moon then answers to that portion ' +
+        '&mdash; seven steps fill it as thirty do &mdash; and a faint ring outside it keeps the ' +
+        'month, so both are in view at once. Nothing is taken off the page: the steps not ' +
+        'undertaken stay in the list, faint, and can still be marked.',
       advanced:
         'The thirty counted steps are Or Pnimi, inner light, and are therefore taken strictly ' +
         'in order: at any moment exactly one is being asked for, and tapping any other will not ' +
@@ -15475,7 +15600,16 @@ content: ''; float: right; width: 30px; height: 1em;
         'moon, two to a star. The menorah is a closed set among them: ten bearers on nine ' +
         'lights, the tenth taking no branch of his own, because when he is gathered every light ' +
         'on the stand is lit. </p><p>A step is marked when it was actually done rather than ' +
-        'when its hour has passed, so the path can be joined at any hour and still be finished.',
+        'when its hour has passed, so the path can be joined at any hour and still be finished. ' +
+        '</p><p>A chosen path keeps that order over its own rungs: the climb is taken in order ' +
+        'among the ma&rsquo;alot undertaken, and the return does not open until they are whole. ' +
+        'A step beyond the path is outside that order entirely and may be marked or unmarked at ' +
+        'will &mdash; it was not undertaken, so it is not being asked for, and refusing it ' +
+        'would be the page telling someone they may not learn something. The moon takes its arc ' +
+        'from the portion held: chosen ma&rsquo;alot wax it, chosen mi&rsquo;utim wane it, so a ' +
+        'path of descent alone begins full and crowned at &#1496;&quot;&#1493;, where its steps ' +
+        'stand in the month. The thirty-first waits for all thirty however few were undertaken: ' +
+        'it is the seal of the month, not of a portion of it.',
       meta: 'Thirty counted steps &middot; ten prayers &middot; the companions and the menorah'
     },
     // The heading over the dial, and the note that had nowhere else to sit:
@@ -16255,6 +16389,102 @@ content: ''; float: right; width: 30px; height: 1em;
     ['ט״ו', 'Rav Shlomo Katz', 'Malchut'],
   ];
 
+  // ── THE PATH — which of the thirty this reader has undertaken ──
+  // Thirty a day is the month entire, and it is too much to begin with. So the
+  // month stays thirty and the reader takes a portion of it: the rest remain
+  // on the page, faint, and can still be taken. Nothing is removed from the
+  // month — what changes is what is asked of you.
+  //
+  // A path is held as indices into the thirty: 0-14 the ascent, 15-29 the
+  // descent. The default is all of them, so a reader who never chooses is
+  // exactly where they were.
+  const PATH_ALL = Array.from({ length: 30 }, (_, i) => i);
+  const PATH_PRESETS = [
+    // Chumash with Rashi, Tanya, Rambam — Chitas and Rambam, the daily. It
+    // wanted no inventing: the three were already lying together at the head
+    // of the descent.
+    { key: 'three', name: 'Three', sub: 'Chumash with Rashi · Tanya · Rambam',
+      steps: [15, 16, 17] },
+    // Those three, and the four that make a Chok: Nach, Mishna, Halacha, Zohar.
+    { key: 'seven', name: 'Seven', sub: 'the three, with Tanach, Mishna, Shulchan Aruch and Zohar',
+      steps: [4, 5, 8, 9, 15, 16, 17] },
+    { key: 'fifteen', name: 'Fifteen', sub: 'the ascent alone — Malchut up to Keter, the moon to full',
+      steps: PATH_ALL.slice(0, 15) },
+    { key: 'thirty', name: 'Thirty', sub: 'the month entire',
+      steps: PATH_ALL.slice() },
+  ];
+  // The order a step is offered in when a kept path earns another rung: the
+  // three, then the four that complete the Chok, then the ascent from its
+  // foot, then what is left of the descent.
+  const PATH_LADDER = (() => {
+    const seen = [15, 16, 17, 8, 9, 5, 4];
+    PATH_ALL.slice(0, 15).forEach(i => { if (seen.indexOf(i) < 0) seen.push(i); });
+    PATH_ALL.slice(15).forEach(i => { if (seen.indexOf(i) < 0) seen.push(i); });
+    return seen;
+  })();
+
+  let _pathStepsCache = null;
+  function pathSteps() {
+    if (_pathStepsCache) return _pathStepsCache;
+    let out = null;
+    try {
+      const raw = localStorage.getItem('kotPathSteps');
+      if (raw) {
+        const arr = raw.split(',').map(Number)
+          .filter(n => Number.isInteger(n) && n >= 0 && n < 30);
+        if (arr.length) out = Array.from(new Set(arr)).sort((a, b) => a - b);
+      }
+    } catch (e) {}
+    _pathStepsCache = out || PATH_ALL.slice();
+    return _pathStepsCache;
+  }
+  function pathIsWhole() { return pathSteps().length === 30; }
+  function pathHas(idx) { return pathSteps().indexOf(idx) >= 0; }
+  function pathName() {
+    const s = pathSteps().join(',');
+    const p = PATH_PRESETS.find(q => q.steps.join(',') === s);
+    return p ? p.name : (s === PATH_ALL.join(',') ? 'Thirty' : 'Your own');
+  }
+  // An empty path is not a path, so a save that would leave nothing keeps the
+  // whole thirty instead — the same thing an unset reader has.
+  function setPathSteps(arr) {
+    const clean = Array.from(new Set((arr || []).filter(
+      n => Number.isInteger(n) && n >= 0 && n < 30))).sort((a, b) => a - b);
+    const use = clean.length ? clean : PATH_ALL.slice();
+    _pathStepsCache = use;
+    try { localStorage.setItem('kotPathSteps', use.join(',')); } catch (e) {}
+    if (typeof applyMaalotState === 'function') applyMaalotState();
+  }
+  // The chosen rungs of each half, as מעלה / מיעוט numbers 1-15.
+  function pathWaxNums()  { return pathSteps().filter(i => i < 15).map(i => i + 1); }
+  function pathWaneNums() { return pathSteps().filter(i => i >= 15).map(i => i - 14); }
+  function pathWaxDone(mask)  { return pathWaxNums().filter(n => mask & (1 << (n - 1))).length; }
+  function pathWaneDone(mask) { return pathWaneNums().filter(n => mask & (1 << (n - 1))).length; }
+  // The next rung of the climb, and of the return: the lowest chosen one not
+  // yet marked. 0 when that half is finished or was never taken.
+  function pathWaxNext(mask) {
+    const ns = pathWaxNums();
+    for (const n of ns) if (!(mask & (1 << (n - 1)))) return n;
+    return 0;
+  }
+  function pathWaneNext(mask) {
+    const ns = pathWaneNums();
+    for (const n of ns) if (!(mask & (1 << (n - 1)))) return n;
+    return 0;
+  }
+  // The highest chosen rung already marked — the only one that may be given
+  // back, so the climb can be stepped down as well as up.
+  function pathWaxLast(mask) {
+    const ns = pathWaxNums();
+    for (let i = ns.length - 1; i >= 0; i--) if (mask & (1 << (ns[i] - 1))) return ns[i];
+    return 0;
+  }
+  function pathWaneLast(mask) {
+    const ns = pathWaneNums();
+    for (let i = ns.length - 1; i >= 0; i--) if (mask & (1 << (ns[i] - 1))) return ns[i];
+    return 0;
+  }
+
   // The rows are named by the card itself, so the path always says what the
   // day is actually holding — Tiferet's work alternates through the year,
   // Netzach's Breslov volume rotates, Yesod turns from Ben Ish Chai to Rav
@@ -16409,13 +16639,19 @@ content: ''; float: right; width: 30px; height: 1em;
     const h = gregToHebrew(getDisplayDate(currentOffset + off));
     return prefix + h.year + '-' + h.month + '-' + h.day;
   }
-  function _maalotDoneFor(off) {
-    if (!off) return _maalotKey ? maalotDone() : 0;
+  function _maalotMaskFor(off) {
+    if (!off) return _maalotKey ? maalotMask() : 0;
     try {
-      const v = localStorage.getItem(_keyFor('kotMaalot:', off));
-      return Math.min(15, Math.max(0, parseInt(v, 10) || 0));
+      const raw = localStorage.getItem(_keyFor('kotMaalotMask:', off));
+      if (raw !== null) return Math.max(0, parseInt(raw, 10) || 0) & 32767;
+      // The old count-only key, read as maalotMask reads it — but not written
+      // back, because that day is not the one being rendered.
+      const legacy = Math.min(15, Math.max(0,
+        parseInt(localStorage.getItem(_keyFor('kotMaalot:', off)), 10) || 0));
+      return legacy ? (1 << legacy) - 1 : 0;
     } catch (e) { return 0; }
   }
+  function _maalotDoneFor(off) { return _popcount(_maalotMaskFor(off)); }
   function _yomMaskFor(off) {
     if (!off) return yomMask();
     try {
@@ -16431,9 +16667,13 @@ content: ''; float: right; width: 30px; height: 1em;
 
   // The order is the spine. What comes next is always the lowest unmarked —
   // the hour never reaches past an unclimbed step to a later one.
-  function pathNextIdx(k, yMask) {
-    if (k < 15) return k;
-    for (let j = 0; j < 15; j++) if (!(yMask & (1 << j))) return 15 + j;
+  // The next step of the path: the lowest chosen rung of the climb not yet
+  // marked, and once the climb is whole, the lowest chosen rung of the return.
+  // -1 when the path is walked. Steps beyond the path are never offered here —
+  // they can be taken, but they are not what the day is asking for.
+  function pathNextIdx(mMask, yMask) {
+    for (const n of pathWaxNums())  if (!(mMask & (1 << (n - 1)))) return n - 1;
+    for (const n of pathWaneNums()) if (!(yMask & (1 << (n - 1)))) return 14 + n;
     return -1;
   }
 
@@ -16476,7 +16716,7 @@ content: ''; float: right; width: 30px; height: 1em;
   // a silence: the day on screen is asked first, and another day is looked at
   // only when this hour has nothing to say to it.
   function _pathNow() {
-    const idx = pathNextIdx(_maalotDoneFor(0), yomMask());
+    const idx = pathNextIdx(_maalotMaskFor(0), yomMask());
     if (idx === -1) return { off: 0, done: true };
     if (pathStepIsDue(idx)) return { off: 0, idx, due: true };
     if (currentOffset === 0) {
@@ -16487,7 +16727,7 @@ content: ''; float: right; width: 30px; height: 1em;
         // the Mochin are opening ahead of it.
         for (const off of [_cycleOffset(), _maalotOffset()]) {
           if (!off) continue;
-          const j = pathNextIdx(_maalotDoneFor(off), _yomMaskFor(off));
+          const j = pathNextIdx(_maalotMaskFor(off), _yomMaskFor(off));
           if (j === -1 || _stepDayOffset(j) !== off) continue;
           const live = j < 15 ? _inMaalotBand()
                               : (() => { const v = win[PATH_WANING[j - 15][2]];
@@ -16602,7 +16842,13 @@ content: ''; float: right; width: 30px; height: 1em;
     // The line itself says so when the path is whole, so the foot keeps to the
     // plain tally and does not say it twice.
     const count = document.getElementById('today-count');
-    if (count) count.textContent = (k + w) + ' of 30 marked';
+    if (count) {
+      const mine = pathWaxDone(maalotMask()) + pathWaneDone(yomMask());
+      const tot  = pathWaxNums().length + pathWaneNums().length;
+      count.textContent = pathIsWhole()
+        ? (k + w) + ' of 30 marked'
+        : mine + ' of ' + tot + ' on your path · ' + (k + w) + ' of 30';
+    }
     // The band can shut before midnight while the day it climbed for is still
     // a day away. The hour has passed but the date has not, and someone still
     // awake has not missed the chance — this offers the step forward. While
@@ -16666,18 +16912,28 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   function openTodaysPath() {
-    const k = _maalotKey ? maalotDone() : 0;
-    const w = yomDone();
+    _pathChoosing = false;
+    renderTodaysPath();
+    document.getElementById('todays-path-modal').style.display = 'flex';
+  }
+
+  function renderTodaysPath() {
+    if (_pathChoosing) return renderPathChooser();
+    const mMask = _maalotKey ? maalotMask() : 0;
     const yMask = yomMask();
-    const sun = k === 15;
+    const k = _popcount(mMask);
+    const w = yomDone();
     const live = _pathLiveNames();
-    // The climb is free-order, so the row offered next is the lowest unmarked.
-    const nextIdx = !sun ? k : (w < 15 ? 14 + yomNext() : -1);
+    const nextIdx = pathNextIdx(mMask, yMask);
     const dueNow = pathStepIsDue(nextIdx);
+    const whole = pathIsWhole();
+    const mine = pathWaxDone(mMask) + pathWaneDone(yMask);
+    const total = pathWaxNums().length + pathWaneNums().length;
     const row = (idx, name, sef, isDone, dayLabel) => {
       const next = idx === nextIdx;
       const isDue = next && dueNow;
-      return `<div class="path-row${isDone ? ' done' : ''}${next ? ' next' : ''}${isDue ? ' due' : ''}" onclick="pathGo(${idx})">` +
+      const off = !pathHas(idx);
+      return `<div class="path-row${isDone ? ' done' : ''}${next ? ' next' : ''}${isDue ? ' due' : ''}${off ? ' off' : ''}" onclick="pathGo(${idx})">` +
         `<span class="path-check">${isDone ? '☑' : '☐'}</span>` +
         `<span class="path-day">${dayLabel}</span>` +
         `<span class="path-name">${name}</span>` +
@@ -16685,15 +16941,34 @@ content: ''; float: right; width: 30px; height: 1em;
         // The tag reads next whether or not the hour has come — the row pulses
         // when it has, the same way the Today line does.
         (next ? `<span class="path-next-tag">next</span>` : '') +
+        (off && isDone ? `<span class="path-beyond">beyond</span>` : '') +
         `</div>`;
     };
-    let html = `<div class="path-section-title">☽ Waxing — the ascent, Malchut → Keter</div>`;
-    PATH_WAXING.forEach((p, i) => { html += row(i, live['m|' + p[0]] || p[1], p[2], i < k, 'מעלה ' + p[0]); });
+    // What was undertaken, said before the thirty are listed, so the faint
+    // rows below read as the rest of the month rather than as rows switched off.
+    let html = `<div class="path-head">` +
+      `<span class="path-head-name">` +
+        (whole ? `<b>The month entire</b> — all thirty. ${k + w} of 30 marked.`
+               : `Your path: <b>${pathName()}</b> — ${mine} of ${total}. ` +
+                 `<span style="color:var(--ink-dim)">The month: ${k + w} of 30.</span>`) +
+      `</span>` +
+      `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); pathOpenChooser()">Change</button>` +
+      `</div>`;
+    html += `<div class="path-section-title">☽ Waxing — the ascent, Malchut → Keter</div>`;
+    PATH_WAXING.forEach((p, i) => {
+      html += row(i, live['m|' + p[0]] || p[1], p[2], !!(mMask & (1 << i)), 'מעלה ' + p[0]);
+    });
     html += `<div class="path-section-title" style="margin-top:12px;">☀ Waning — the descent, Keter → Malchut · listening, bitul</div>`;
     PATH_WANING.forEach((p, j) => {
       html += row(15 + j, live['y|' + p[0]] || p[1], p[2], !!(yMask & (1 << j)), 'מיעוט ' + p[0]);
     });
-    if (nextIdx === -1) {
+    // A path walked is said so in its own words. The month's own seal below is
+    // a different thing and waits for all thirty.
+    if (nextIdx === -1 && !whole) {
+      html += `<div class="path-complete">${total}/${total} — your path walked.</div>`;
+      html += _pathGrowHtml();
+    }
+    if (k + w === 30) {
       html += `<div class="path-complete">30/30 — the month complete: the new moon crowned in rays.</div>`;
       // The thirty-first, kept back until the thirty are done. Thirty steps
       // complete a month in a single day; this one stands outside the month,
@@ -16707,7 +16982,117 @@ content: ''; float: right; width: 30px; height: 1em;
         `</div>`;
     }
     document.getElementById('todays-path-body').innerHTML = html;
-    document.getElementById('todays-path-modal').style.display = 'flex';
+  }
+
+  // ── CHOOSING A PATH ──
+  // Kept inside Today's Path rather than given a window of its own: the thirty
+  // are right there, and choosing among them belongs where they are listed.
+  let _pathChoosing = false;
+  function pathOpenChooser()  { _pathChoosing = true;  renderTodaysPath(); }
+  function pathCloseChooser() { _pathChoosing = false; renderTodaysPath(); }
+
+  function _stepLabel(idx) {
+    const p = idx < 15 ? PATH_WAXING[idx] : PATH_WANING[idx - 15];
+    const live = _pathLiveNames();
+    const name = (idx < 15 ? live['m|' + p[0]] : live['y|' + p[0]]) || p[1];
+    return { tag: (idx < 15 ? 'מעלה ' : 'מיעוט ') + p[0], name, sef: p[2] };
+  }
+
+  function renderPathChooser() {
+    const chosen = pathSteps();
+    const sig = chosen.join(',');
+    let html = `<div class="path-head">` +
+      `<span class="path-head-name"><b>Choose your path</b> — the portion of the thirty you undertake.</span>` +
+      `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); pathCloseChooser()">Done</button>` +
+      `</div>` +
+      `<div class="path-note">The month stays thirty. What you choose is what the day asks of you; ` +
+      `the rest stay on the page, faint, and can still be taken. Thirty a day is a great deal to begin with — ` +
+      `begin with three, and the app will offer you another rung when you have kept them.</div>`;
+    html += `<div class="path-section-title">Paths</div>`;
+    PATH_PRESETS.forEach(p => {
+      const on = p.steps.join(',') === sig;
+      html += `<button type="button" class="path-preset${on ? ' on' : ''}" onclick="event.stopPropagation(); pathPickPreset('${p.key}')">` +
+        `<span class="path-preset-n">${p.name}</span>` +
+        `<span>${p.sub}<span class="path-preset-sub">${p.steps.length} step${p.steps.length === 1 ? '' : 's'} a day</span></span>` +
+        `</button>`;
+    });
+    const pick = (idx) => {
+      const L = _stepLabel(idx);
+      const on = pathHas(idx);
+      return `<div class="path-pick" onclick="event.stopPropagation(); pathTogglePick(${idx})">` +
+        `<span class="path-check">${on ? '☑' : '☐'}</span>` +
+        `<span class="path-day">${L.tag}</span>` +
+        `<span class="path-name">${L.name}</span>` +
+        `<span class="path-sef">${L.sef}</span></div>`;
+    };
+    html += `<div class="path-section-title" style="margin-top:14px;">Or take them one by one</div>`;
+    html += `<div class="path-section-title" style="letter-spacing:1px;">☽ The ascent</div>`;
+    for (let i = 0; i < 15; i++) html += pick(i);
+    html += `<div class="path-section-title" style="margin-top:10px; letter-spacing:1px;">☀ The descent</div>`;
+    for (let i = 15; i < 30; i++) html += pick(i);
+    document.getElementById('todays-path-body').innerHTML = html;
+  }
+
+  function pathPickPreset(key) {
+    const p = PATH_PRESETS.find(q => q.key === key);
+    if (p) setPathSteps(p.steps.slice());
+    renderTodaysPath();
+  }
+  function pathTogglePick(idx) {
+    const cur = pathSteps().slice();
+    const at = cur.indexOf(idx);
+    if (at >= 0) cur.splice(at, 1); else cur.push(idx);
+    setPathSteps(cur);
+    renderTodaysPath();
+  }
+
+  // ── GROWING A PATH ──
+  // The streak is read back off the marks rather than kept as a number of its
+  // own: a day counts when every step of the path standing today was marked on
+  // it. A day still in progress does not break it. Read back this way it
+  // cannot drift out of step with what the days actually hold — and it does
+  // answer to today's path, so widening one resets the count honestly.
+  function pathStreak() {
+    let n = 0;
+    for (let d = 0; d < 40; d++) {
+      const whole = pathNextIdx(_maalotMaskFor(-d), _yomMaskFor(-d)) === -1;
+      if (!whole) { if (d === 0) continue; break; }
+      n++;
+    }
+    return n;
+  }
+  const PATH_GROW_AFTER = 7;
+  function _growSnooze() {
+    try { return Math.max(0, parseInt(localStorage.getItem('kotPathGrowSnooze'), 10) || 0); }
+    catch (e) { return 0; }
+  }
+  function pathGrowLater() {
+    try { localStorage.setItem('kotPathGrowSnooze', String(pathStreak())); } catch (e) {}
+    renderTodaysPath();
+  }
+  function pathAddRung(idx) {
+    setPathSteps(pathSteps().concat([idx]));
+    try { localStorage.removeItem('kotPathGrowSnooze'); } catch (e) {}
+    renderTodaysPath();
+  }
+  function _pathGrowHtml() {
+    if (pathIsWhole()) return '';
+    const st = pathStreak();
+    if (st < PATH_GROW_AFTER || st < _growSnooze() + PATH_GROW_AFTER) return '';
+    let nxt = -1;
+    for (const i of PATH_LADDER) if (!pathHas(i)) { nxt = i; break; }
+    if (nxt < 0) return '';
+    const L = _stepLabel(nxt);
+    return `<div class="path-grow">` +
+      `<div class="path-grow-lead">${st} days kept. Ready for one more?</div>` +
+      `<div class="path-grow-sub">${L.tag} · ${L.name} <span style="font-style:italic">${L.sef}</span></div>` +
+      // Adding it un-walks the day, which is the truth of having undertaken
+      // more — better said here than discovered when the moon goes back.
+      `<div class="path-grow-sub" style="opacity:.8">It joins your path today, so today&rsquo;s count will ask for it too.</div>` +
+      `<div class="path-grow-row">` +
+        `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); pathAddRung(${nxt})">Add it</button>` +
+        `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); pathGrowLater()">Not yet</button>` +
+      `</div></div>`;
   }
 
   function closeTodaysPath() {
@@ -17379,6 +17764,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const hMonth = hDate.month, hDay = hDate.day, hYear = hDate.year;
     _noTachanunToday = isNoTachanunDay(hYear, hMonth, hDay, date.getDay());
     _maalotKey = 'kotMaalot:' + hYear + '-' + hMonth + '-' + hDay;
+    _maalotMaskKey = 'kotMaalotMask:' + hYear + '-' + hMonth + '-' + hDay;
     _yomKey     = 'kotYom:' + hYear + '-' + hMonth + '-' + hDay;
     _yomMaskKey = 'kotYomMask:' + hYear + '-' + hMonth + '-' + hDay;
     _songKey    = 'kotSong:' + hYear + '-' + hMonth + '-' + hDay;
