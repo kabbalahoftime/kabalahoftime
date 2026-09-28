@@ -371,10 +371,16 @@ padding: 0 16px;
 .dc-path-glyph { font-size: calc(12px * var(--ts, 1)); color: var(--gold); line-height: 1; }
 /* Quiet, like the settings under the title: findable, not loud. */
 #today-block .year-toggle-pill { margin-top: 0; border-color: var(--border-strong); }
+/* Drawn 34px rather than the 24px the row under the title uses. The hit area
+   was always 44px — the ::after above lays it over every pill — but a control
+   drawn at 24px does not look like one you can hit, and being told it is fine
+   is no answer to that. 34px is most of the way there without pushing the two
+   rows apart; the overlay still hangs 5px past each edge. */
 #today-block .year-pill-btn {
   font-size: calc(9px * var(--ts, 1));
   letter-spacing: 0.5px;
-  padding: 2px 7px;
+  padding: 2px 9px;
+  min-height: 34px;
   color: var(--ink-dim);
 }
 #today-block .year-pill-btn.year-pill-active {
@@ -14860,7 +14866,16 @@ content: ''; float: right; width: 30px; height: 1em;
         `M ${cx} ${cy - r} A ${r} ${r} 0 0 0 ${cx} ${cy + r} A ${rx} ${r} 0 0 ${sweep} ${cx} ${cy - r} Z`;
     }
     fill.setAttribute('d', d);
-    if (cnt) cnt.textContent = sun ? (waxN + w) + '/' + (waxN + waneN) : waxK + '/' + waxN;
+    // Always out of the whole undertaking, never out of the half being walked.
+    // It used to read k/15 while climbing and 15+w/30 after, on the grounds
+    // that the climb is what is being asked for until it is whole. That was
+    // defensible while nothing else on screen named a number — and then the
+    // ☽ row was put directly beneath it, offering 30. A /15 above a 30 makes
+    // a reader work out which of the two is the real scale, and a path of
+    // seven was worse: the count read 0/4 under a pill saying 7. Which half
+    // of the arc is being walked is said by the moon's own shape, which is
+    // the better place for it.
+    if (cnt) cnt.textContent = (waxK + waneK) + '/' + (waxN + waneN);
     // The month around the path: every one of the thirty marked, whether it
     // stood on the path or was taken beyond it, drawn as a faint ring outside
     // the moon. Only for a reader who took a portion — for the whole thirty
@@ -15880,10 +15895,13 @@ content: ''; float: right; width: 30px; height: 1em;
         'names the next step and goes to it. Beneath, the heart counts the ten prayers &mdash; ' +
         'each may be marked in any order, because each has its own hour &mdash; and the moon ' +
         'counts the readings. It fills as the fifteen steps up are taken and becomes the sun at ' +
-        'fifteen, whose rays then remain; from there the count runs on to thirty as the fifteen ' +
-        'back down are taken and the moon wanes. </p><p>So the number under the moon changes ' +
-        'what it is counting halfway through the day: fifteen while climbing, thirty once the ' +
-        'climb is whole. The menorah beside it holds a closed set of ten bearers on nine ' +
+        'fifteen, whose rays then remain; from there the moon wanes as the fifteen back down are ' +
+        'taken. </p><p>The number under it counts the whole undertaking rather than the half ' +
+        'being walked &mdash; out of thirty for the month entire, and out of the same number the ' +
+        '&#9790; row beneath it is set to &mdash; so the two always read one scale. Which half ' +
+        'of the arc the day is on is said by the moon&rsquo;s own shape: filling on the way up, ' +
+        'crowned with rays at the turn, emptying on the way down. The menorah beside it holds a ' +
+        'closed set of ten bearers on nine ' +
         'lights, gathered as companions rather than counted as steps. </p><p>When the ' +
         'day&rsquo;s climb is finished, an offer of tomorrow&rsquo;s appears in its place. ' +
         '</p><p>The thirty are the month, and a reader takes a portion of it: the ' +
@@ -15902,8 +15920,8 @@ content: ''; float: right; width: 30px; height: 1em;
       advanced:
         'The thirty counted steps are Or Pnimi, inner light, and are therefore taken strictly ' +
         'in order: at any moment exactly one is being asked for, and tapping any other will not ' +
-        'take. The return does not begin until the moon is full, which is why the count reads ' +
-        'out of fifteen until then and out of thirty after. </p><p>The ten prayers are not ' +
+        'take. The return does not begin until the moon is full, and the count stands out of the ' +
+        'whole thirty throughout rather than out of the half in hand. </p><p>The ten prayers are not ' +
         'ordered that way. Each has its own hour, so they may be marked as they are said, and ' +
         'the one whose hour has come pulses until it is. The heart glows when the day&rsquo;s ' +
         'ten are whole. </p><p>The companions marked <strong>&#10017;</strong> stand outside ' +
