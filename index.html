@@ -17235,6 +17235,14 @@ content: ''; float: right; width: 30px; height: 1em;
   // The card's own name carries a soft hyphen for wrapping, so the cards are
   // found by position, as the ⓘ buttons are.
   function _faceCardFor(name) {
+    // Keter keeps no card of the nine — it is the dial — but it is not empty:
+    // Strong Day sits in the dial's own panes, and that is where the day's
+    // Hayom Yom is. So Keter's hour, which is the hour of Hitbodedut, has an
+    // object after all, and it is the one the day was given.
+    if (name === 'Keter') {
+      const hy = document.getElementById('keter-hayomyom');
+      return hy ? (hy.closest('.keter-section') || hy) : null;
+    }
     const i = FACE_CARDS.indexOf(name);
     if (i < 0) return null;
     return document.querySelectorAll('.sefirah-card')[i] || null;
@@ -17309,6 +17317,20 @@ content: ''; float: right; width: 30px; height: 1em;
   // the general search below if the card is ever rebuilt differently, so a
   // changed card says something stale rather than nothing.
   const FACE_RULE = {
+    // The day's Hayom Yom, from Strong Day. It asks for the teaching first and
+    // falls back to the line that points at it — which is what shows today,
+    // because HAYOM_YOM is deliberately empty and Strong Day links to
+    // Chabad.org rather than quoting. Written this way round so that the day
+    // the table is filled, this line becomes the teaching with no further
+    // change here.
+    Keter: () => {
+      try {
+        const h = gregToHebrew(getDisplayDate(currentOffset));
+        const t = (typeof getHayomYom === 'function') ? getHayomYom(h.month, h.day) : null;
+        if (t) return t;
+      } catch (e) {}
+      return _flatFace(document.getElementById('keter-hayomyom'));
+    },
     Chochmah: (c) => _afterLabel(c.querySelector('.sefirah-main-text'), 'Day:'),
     Binah:    (c) => _strongFace(c.querySelector('.sefirah-main-text')),
     Chesed:   (c) => _strongFace(c.querySelector('.sefirah-main-text')),
@@ -17360,11 +17382,15 @@ content: ''; float: right; width: 30px; height: 1em;
     }
     el.style.display = face ? '' : 'none';
   }
-  // Keter holds no card of its own — it is the dial at the top — so its hour
-  // simply has no face to name, and the line stands down rather than guessing.
   function todayFaceGo() {
     const card = _faceCardFor(_faceHourName());
-    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (!card) return;
+    // Keter's face lives in one of the dial's panes, which may not be the pane
+    // on show; the card is turned to it first, or the scroll lands on nothing.
+    const body = card.closest && card.closest('.pane-body[data-pane]');
+    if (body && typeof setPane === 'function')
+      setPane(body.closest('.pane-host'), body.getAttribute('data-pane'));
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   function renderTodayBlock() {
