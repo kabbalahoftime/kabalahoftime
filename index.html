@@ -2656,7 +2656,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .t-flag.now { background:var(--gold); color:#fff; }
 /* The prayer this hour is asking for. It marks in place, so it is a control
    and gets a control's height without moving the line it sits on. */
-.today-prayer { margin-top:10px; font-size:calc(14px * var(--ts, 1)); }
+/* 11px, matching the padding the Study button below carries to reach its
+   44px — so the three lines are evenly spaced to the eye even though one of
+   them gets its gap from padding and the others from margin. */
+.today-prayer { margin-top:11px; font-size:calc(14px * var(--ts, 1)); }
 .today-prayer .prayer-tag {
   cursor:pointer; color:var(--gold);
   display:inline-block; padding:12px 6px; margin:-12px -6px;
@@ -3052,9 +3055,6 @@ content: ''; float: right; width: 30px; height: 1em;
          line beneath it, and still carries the lit chip when its hour is
          running. -->
     <div id="today-face" class="today-face" style="display:none;"></div>
-    <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
-    <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
-            aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
     <!-- THE PRAYER THIS HOUR IS ASKING FOR. The ten tags are scattered one to
          a Sefirah down the whole page, so knowing which is due meant finding
          the card whose hour it is. This says it, and marks in place: the tag
@@ -3063,6 +3063,9 @@ content: ''; float: right; width: 30px; height: 1em;
          applyPrayerState, which is where the active Sefirah is already
          known. -->
     <div id="today-prayer" class="today-prayer" style="display:none;"></div>
+    <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
+    <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
+            aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
       <!-- The day's two gatherings — the ten prayers and the thirty steps —
            which stood in a clock of their own above the cards, beside a local
            and a Jerusalem time. The times are gone; these belong here, in the
@@ -15049,8 +15052,12 @@ content: ''; float: right; width: 30px; height: 1em;
           ? '<span class="tp-flag">Prayer</span>' +
             '<span class="prayer-tag" data-prayer="' + activeIdx + '" role="button" ' +
             'tabindex="0" title="Tap when you have prayed">' +
-            _prayerListName(activeIdx) + '</span>' +
-            '<span class="tp-sef">· ' + PRAYER_SEFIRAH[activeIdx - 1] + '</span>'
+            _prayerListName(activeIdx) + '</span>'
+            // The Sefirah is not repeated here. Meditation and Prayer are
+            // both the hour's, so they named the same Sefirah twice running;
+            // it is said once, on the line above, which is also the line that
+            // never hides — a prayer beyond the reader's set does, and the
+            // hour would have gone unnamed with it.
           : '';
       }
       tp.style.display = (activeIdx && prayerHas(activeIdx)) ? '' : 'none';
