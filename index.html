@@ -2658,6 +2658,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   position:relative; z-index:1;
 }
 .today-prayer .tp-sef { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
+/* The face of the hour. Quieter than the prayer above it — that one is being
+   asked for, this one is being told — and its word is a link to the card it
+   was read from rather than a mark. The padding gives the tap its height
+   without moving the line, the same trick the prayer tag uses. */
+.today-face { margin-top:8px; font-size:calc(13.5px * var(--ts, 1)); }
+.today-face .tf-open {
+  background:none; border:none; font-family:inherit; font-size:1em;
+  color:var(--ink-mid); cursor:pointer; text-align:left;
+  display:inline-block; padding:14px 6px; margin:-14px -6px;
+  position:relative; z-index:1;
+}
+.today-face .tf-open:hover { color:var(--gold); text-decoration:underline; }
 .today-count { font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
 .today-more { background:none; border:none; font-family:inherit; cursor:pointer;
   font-size:calc(11px * var(--ts, 1)); color:var(--gold); padding:6px 0; white-space:nowrap; }
@@ -3026,6 +3038,17 @@ content: ''; float: right; width: 30px; height: 1em;
          applyPrayerState, which is where the active Sefirah is already
          known. -->
     <div id="today-prayer" class="today-prayer" style="display:none;"></div>
+    <!-- THE FACE OF THE HOUR. The thirty steps and the ten prayers are deeds,
+         and this block counts them. The faces of the cards are not deeds —
+         they are the day's coordinates, what makes today this day: the
+         letter, the creature, the Name of the seventy-two, the attribute. A
+         reader can walk a whole path without meeting one of them, and the
+         shorter the path the likelier that is, which is backwards: they are
+         the most valuable thing the page holds. So the ladder names one, the
+         face of the Sefirah whose hour it is, beside the prayer of that same
+         hour, and a tap goes to the card it was read from. Read-only: a fact
+         is not a thing to be ticked off. -->
+    <div id="today-face" class="today-face" style="display:none;"></div>
       <!-- The day's two gatherings — the ten prayers and the thirty steps —
            which stood in a clock of their own above the cards, beside a local
            and a Jerusalem time. The times are gone; these belong here, in the
@@ -15876,7 +15899,11 @@ content: ''; float: right; width: 30px; height: 1em;
         'The block that answers one question: what now? </p><p>The line at the top names the ' +
         'next step being asked for, and tapping it takes you straight down to it. That is ' +
         'enough to begin with &mdash; everything else on the page is there for when you want ' +
-        'it. </p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
+        'it. </p><p>Under it stand two lines about the hour itself: the prayer it is asking ' +
+        'for, and the <strong>face of the card whose hour it is</strong> &mdash; today&rsquo;s ' +
+        'letter, or creature, or attribute, whichever that card keeps. That one is not a thing ' +
+        'to do; it is what the day <em>is</em>. Tapping it goes to the card it was read from. ' +
+        '</p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
         'the ten prayers are said, the <strong>circle</strong> beside it counts the readings, ' +
         'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
         'few lines opened counts. </p><p>Ten prayers and thirty readings in a day is a great ' +
@@ -15892,7 +15919,13 @@ content: ''; float: right; width: 30px; height: 1em;
         'they can also be picked one by one.',
       main:
         'What the day is asking for next, and how much of it has been done. </p><p>The top line ' +
-        'names the next step and goes to it. Beneath, the heart counts the ten prayers &mdash; ' +
+        'names the next step and goes to it. Beneath it the hour speaks twice: the prayer it is ' +
+        'asking for, and the face of the Sefirah whose hour it is &mdash; the letter, the ' +
+        'creature, the Name of the seventy-two, the attribute, whichever that card holds. The ' +
+        'counted steps and the prayers are deeds and are marked; a face is not a deed but the ' +
+        'day&rsquo;s own coordinates, so it carries no mark and goes instead to its card. ' +
+        'Keter keeps no card &mdash; it is the dial at the top &mdash; so in its hour that line ' +
+        'stands down. </p><p>Beneath, the heart counts the ten prayers &mdash; ' +
         'each may be marked in any order, because each has its own hour &mdash; and the moon ' +
         'counts the readings. It fills as the fifteen steps up are taken and becomes the sun at ' +
         'fifteen, whose rays then remain; from there the moon wanes as the fifteen back down are ' +
@@ -17189,6 +17222,151 @@ content: ''; float: right; width: 30px; height: 1em;
     }
   }
 
+  // ── THE FACE OF THE HOUR ──
+  // The nine cards do not write their faces alike. Most mark the day's own
+  // word with a <strong> — Eagle, כלי, Lo Hechezik Le'ad Apo — while Hod
+  // writes lines instead and Yesod and Netzach keep theirs in the sub-text.
+  // So this asks in that order and takes the first answer, rather than
+  // pretending one selector fits all nine. Nothing is invented: whatever is
+  // shown was read off the card as it stands, which is also why it follows
+  // the card when the day turns.
+  const FACE_CARDS = ['Chochmah', 'Binah', 'Chesed', 'Gevurah', 'Tiferet',
+                      'Netzach', 'Hod', 'Yesod', 'Malchut'];
+  // The card's own name carries a soft hyphen for wrapping, so the cards are
+  // found by position, as the ⓘ buttons are.
+  function _faceCardFor(name) {
+    const i = FACE_CARDS.indexOf(name);
+    if (i < 0) return null;
+    return document.querySelectorAll('.sefirah-card')[i] || null;
+  }
+  // Block children joined with a separator rather than run together: without
+  // it Yesod reads "HitbodedutParasha".
+  // The walk and the tidying are kept apart on purpose. Tidying inside the
+  // recursion trimmed each child's own edges, so a span that legitimately
+  // begins with a separator — Hod's "· day 3 of 5" — lost it on the way up
+  // and the line read "עלם day 3 of 5".
+  function _walkFace(el) {
+    if (!el) return '';
+    let out = '';
+    el.childNodes.forEach((n) => {
+      if (n.nodeType === 3) { out += n.textContent; return; }
+      if (n.nodeType !== 1) return;
+      const block = n.tagName === 'BR' || n.tagName === 'DIV' || n.tagName === 'P';
+      out += (block ? ' · ' : '') + _walkFace(n);
+    });
+    return out;
+  }
+  function _flatFace(el) {
+    return _walkFace(el).replace(/\s+/g, ' ').replace(/(?:\s·){2,}/g, ' ·')
+                        .replace(/^[\s·]+|[\s·]+$/g, '').trim();
+  }
+  // A position is not a face: "Day 18 · Cycle 1" says when, not what.
+  function _isPosition(s) {
+    return !s || !/[A-Za-z֐-׿]{2}/.test(s.replace(/Day|Cycle|Week|Season|of/gi, ''));
+  }
+  const _faceCut = (s) => (s.length > 72 ? s.slice(0, 71).trim() + '…' : s);
+  // Several cards mark the day's own item with a small dim "Day:" label. What
+  // follows it, up to the next label or line break, is the face.
+  function _afterLabel(root, label) {
+    if (!root) return '';
+    const kids = Array.from(root.childNodes);
+    const at = kids.findIndex(n => n.nodeType === 1 && _flatFace(n) === label);
+    if (at < 0) return '';
+    let out = '';
+    for (let j = at + 1; j < kids.length; j++) {
+      const n = kids[j];
+      if (n.nodeType === 3) { out += ' ' + n.textContent; continue; }
+      if (n.nodeType !== 1) continue;
+      if (n.tagName === 'BR' || n.tagName === 'DIV' || n.tagName === 'P') break;
+      const t = _flatFace(n);
+      if (/:$/.test(t)) break;                 // the next label along
+      out += ' ' + t;
+    }
+    return out.replace(/\s+/g, ' ').trim();
+  }
+  // The day's word, where the card marks one.
+  function _strongFace(root) {
+    if (!root) return '';
+    for (const el of root.querySelectorAll('strong')) {
+      const t = _flatFace(el);
+      if (!_isPosition(t)) return t;
+    }
+    return '';
+  }
+  // The day's line, where the card writes lines instead.
+  function _blockFace(root) {
+    if (!root) return '';
+    for (const el of root.querySelectorAll(':scope > div')) {
+      const t = _flatFace(el);
+      if (!_isPosition(t)) return t;
+    }
+    return '';
+  }
+  // Where each card keeps its face. Written out rather than guessed at: a
+  // single rule that fits all nine does not exist, and guessing gave Hod the
+  // Sefirah of its half-day — Gevurah — in place of the Name of the
+  // seventy-two that its face actually leads with. Each rule falls through to
+  // the general search below if the card is ever rebuilt differently, so a
+  // changed card says something stale rather than nothing.
+  const FACE_RULE = {
+    Chochmah: (c) => _afterLabel(c.querySelector('.sefirah-main-text'), 'Day:'),
+    Binah:    (c) => _strongFace(c.querySelector('.sefirah-main-text')),
+    Chesed:   (c) => _strongFace(c.querySelector('.sefirah-main-text')),
+    Gevurah:  (c) => _strongFace(c.querySelector('.sefirah-main-text')),
+    Tiferet:  (c) => _strongFace(c.querySelector('.sefirah-main-text')),
+    Netzach:  (c) => _afterLabel(c.querySelector('.sefirah-sub-text'), 'Day:'),
+    Hod:      (c) => _blockFace(c.querySelector('.sefirah-main-text')),
+    Yesod:    (c) => _afterLabel(c.querySelector('.sefirah-sub-text'), 'Day:'),
+    // Malchut keeps two: a se'if of Ve'atah Tetzaveh in the main text, and the
+    // day's book of the Yad in the block above it. The book is the face.
+    Malchut:  (c) => _strongFace(c.querySelector('.malchut-visible-content')),
+  };
+  function _faceOf(card, name) {
+    if (!card) return '';
+    const rule = FACE_RULE[name];
+    if (rule) {
+      let t = '';
+      try { t = rule(card) || ''; } catch (e) {}
+      if (!_isPosition(t)) return _faceCut(t);
+    }
+    const mt = card.querySelector('.sefirah-main-text');
+    const strong = _strongFace(mt);
+    if (!_isPosition(strong)) return _faceCut(strong);
+    const block = _blockFace(mt);
+    if (!_isPosition(block)) return _faceCut(block);
+    const sub = _flatFace(card.querySelector('.sefirah-sub-text'));
+    if (!_isPosition(sub)) return _faceCut(sub);
+    return _faceCut(_flatFace(card.querySelector('.sefirah-cycle-name')));
+  }
+  function _faceHourName() {
+    const a = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
+    return a ? a.name.split(' /')[0].trim() : '';
+  }
+  function applyTodayFace() {
+    const el = document.getElementById('today-face');
+    if (!el) return;
+    const name = _faceHourName();
+    const face = _faceOf(_faceCardFor(name), name);
+    // Rebuilt only when what it says changes, so it is not rewritten under a
+    // reader's finger every half minute.
+    const want = name + '|' + face;
+    if (el.dataset.built !== want) {
+      el.dataset.built = want;
+      el.innerHTML = face
+        ? '<span class="tp-flag">' + name + '</span>' +
+          '<button type="button" class="tf-open" onclick="todayFaceGo()" ' +
+          'aria-label="Go to the ' + name + ' card">' + face + '</button>'
+        : '';
+    }
+    el.style.display = face ? '' : 'none';
+  }
+  // Keter holds no card of its own — it is the dial at the top — so its hour
+  // simply has no face to name, and the line stands down rather than guessing.
+  function todayFaceGo() {
+    const card = _faceCardFor(_faceHourName());
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
   function renderTodayBlock() {
     const el = document.getElementById('today-next');
     if (!el) return;
@@ -17213,6 +17391,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const ahead = document.getElementById('today-ahead');
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
+    applyTodayFace();
   }
   // The line does not name the week it runs in. The date bar directly above it
   // reads "Week 48 · Day 334" — the week of the year — and the dial's week 45
@@ -23094,6 +23273,9 @@ content: ''; float: right; width: 30px; height: 1em;
   setInterval(function() {
     updateZmanimLine();
     updateSefirahTimeLabels();
+    // The face follows the hour, so it is asked for on the same beat as the
+    // times are. It rebuilds only when the answer changes.
+    if (typeof applyTodayFace === 'function') applyTodayFace();
   }, 30000);
 
   // ══════════════════════════════════════════════════════════════
