@@ -354,6 +354,33 @@ padding: 0 16px;
   .dc-col { min-width: 60px; }
 }
 
+/* ── HOW MUCH EACH COUNTER ASKS FOR ──
+   A pill under each of the two counts. They are not put inside the columns
+   themselves: a four-way pill is 176px at the 44px-per-button minimum the
+   hand needs, and two of those beside each other would force the counters
+   apart on any phone. So they sit in a row of their own beneath, each with
+   the glyph of the counter it governs.
+   The row gap is the wide one for the reason the reading controls needed it:
+   each button is drawn small and wears a 44px hit area that hangs past it
+   above and below, and on a narrow phone these wrap. */
+.dc-paths {
+  display: flex; justify-content: center; align-items: center;
+  flex-wrap: wrap; gap: 22px 16px; margin-top: 12px;
+}
+.dc-path-grp { display: inline-flex; align-items: center; gap: 6px; }
+.dc-path-glyph { font-size: calc(12px * var(--ts, 1)); color: var(--gold); line-height: 1; }
+/* Quiet, like the settings under the title: findable, not loud. */
+#today-block .year-toggle-pill { margin-top: 0; border-color: var(--border-strong); }
+#today-block .year-pill-btn {
+  font-size: calc(9px * var(--ts, 1));
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  color: var(--ink-dim);
+}
+#today-block .year-pill-btn.year-pill-active {
+  background: var(--gold-mid); color: var(--bg-card);
+}
+
 /* ── STARS — the surrounding light (Or Makif) ──
    Every ✡ in the cards is a text that is not one of the thirty counted steps.
    Tapping one gathers it for the day. There are twenty-two, which is what
@@ -2844,27 +2871,6 @@ content: ''; float: right; width: 30px; height: 1em;
       <button id="il-intermediate-btn" class="year-pill-btn year-pill-active" onclick="setInfoLevel('intermediate')">Intermediate</button>
       <button id="il-advanced-btn" class="year-pill-btn" onclick="setInfoLevel('advanced')">Advanced</button>
     </div>
-    <!-- How much the day asks for. It belongs beside the depth pill for the
-         same reason that one belongs here: the depth is how much the page
-         tells you, this is how much it asks of you, and both are settled once
-         and then left alone. Numerals because the thing being chosen is a
-         count of steps; each says its name on hover and to a screen reader,
-         Today's Path names them in full, and the ⓘ on the ladder explains
-         them. The custom picking this row cannot hold lives there too. -->
-    <div class="year-toggle-pill" id="path-pill">
-      <button id="path-three-btn" class="year-pill-btn" onclick="setPathPreset('three')"
-              title="Three — Chumash with Rashi · Tanya · Rambam"
-              aria-label="Path of three steps a day">3</button>
-      <button id="path-seven-btn" class="year-pill-btn" onclick="setPathPreset('seven')"
-              title="Seven — the three, with Tanach, Mishna, Shulchan Aruch and Zohar"
-              aria-label="Path of seven steps a day">7</button>
-      <button id="path-fifteen-btn" class="year-pill-btn" onclick="setPathPreset('fifteen')"
-              title="Fifteen — the ascent alone, Malchut up to Keter"
-              aria-label="Path of fifteen steps a day">15</button>
-      <button id="path-thirty-btn" class="year-pill-btn year-pill-active" onclick="setPathPreset('thirty')"
-              title="Thirty — the month entire"
-              aria-label="Path of thirty steps a day, the month entire">30</button>
-    </div>
   </div>
 
   <!-- For whoever has just arrived. The Video tab under the week's page is
@@ -3075,6 +3081,55 @@ content: ''; float: right; width: 30px; height: 1em;
                true of the whole day, and needs no switch at ט״ו. -->
           <div class="dc-label">Study &nbsp;<span class="heb">לימוד</span></div>
         </div>
+      </div>
+      <!-- HOW MUCH THE DAY ASKS FOR — one row for each counter above it.
+           These began in the row of reading settings under the title, beside
+           the depth pill, on the argument that both are choices made once
+           about how the page meets you. True, and still the wrong place: the
+           depth pill governs the whole page, while these two govern the two
+           counters directly above them, and up there they cost the page a
+           third line of furniture before anything was read. Here each sits
+           under the count it changes and costs nothing.
+           Numerals, because what is chosen is a count. The glyph says which
+           counter it belongs to; each button says its name on hover and to a
+           screen reader; and the two lists — the heart's and Today's Path —
+           name them in full and hold the picking one by one that a pill
+           cannot. -->
+      <div class="dc-paths">
+        <span class="dc-path-grp">
+          <span class="dc-path-glyph" style="color:var(--accent-red)" aria-hidden="true">&#9829;</span>
+          <span class="year-toggle-pill" id="prayer-pill">
+            <button id="prayer-three-btn" class="year-pill-btn" onclick="setPrayerPreset('three')"
+                    title="Three — Shacharit · Mincha · Maariv"
+                    aria-label="Three prayers a day">3</button>
+            <button id="prayer-five-btn" class="year-pill-btn" onclick="setPrayerPreset('five')"
+                    title="Five — the three, with Birchot HaShachar and Kri’at Shema al haMitah"
+                    aria-label="Five prayers a day">5</button>
+            <button id="prayer-seven-btn" class="year-pill-btn" onclick="setPrayerPreset('seven')"
+                    title="Seven — those, with Tehilim and the Tikkun HaKlali"
+                    aria-label="Seven prayers a day">7</button>
+            <button id="prayer-ten-btn" class="year-pill-btn year-pill-active" onclick="setPrayerPreset('ten')"
+                    title="Ten — the heart entire"
+                    aria-label="Ten prayers a day, the heart entire">10</button>
+          </span>
+        </span>
+        <span class="dc-path-grp">
+          <span class="dc-path-glyph" aria-hidden="true">&#9790;</span>
+          <span class="year-toggle-pill" id="path-pill">
+            <button id="path-three-btn" class="year-pill-btn" onclick="setPathPreset('three')"
+                    title="Three — Chumash with Rashi · Tanya · Rambam"
+                    aria-label="Three readings a day">3</button>
+            <button id="path-seven-btn" class="year-pill-btn" onclick="setPathPreset('seven')"
+                    title="Seven — the three, with Tanach, Mishna, Shulchan Aruch and Zohar"
+                    aria-label="Seven readings a day">7</button>
+            <button id="path-fifteen-btn" class="year-pill-btn" onclick="setPathPreset('fifteen')"
+                    title="Fifteen — the ascent alone, Malchut up to Keter"
+                    aria-label="Fifteen readings a day">15</button>
+            <button id="path-thirty-btn" class="year-pill-btn year-pill-active" onclick="setPathPreset('thirty')"
+                    title="Thirty — the month entire"
+                    aria-label="Thirty readings a day, the month entire">30</button>
+          </span>
+        </span>
       </div>
     <div class="today-foot">
       <span id="today-count" class="today-count"></span>
@@ -15022,8 +15077,32 @@ content: ''; float: right; width: 30px; height: 1em;
     const use = clean.length ? clean : PRAYER_ALL.slice();
     _prayerStepsCache = use;
     try { localStorage.setItem('kotPrayerSteps', use.join(',')); } catch (e) {}
+    syncPrayerPills();
     if (typeof applyPrayerState === 'function') applyPrayerState();
   }
+  // The pill under the heart and the chooser the heart opens are two doors to
+  // one setting, so each shows what the other did. Prayers picked one by one
+  // match no preset, and then no pill is lit — "your own", said by omission.
+  function setPrayerPreset(key) {
+    const p = PRAYER_PRESETS.find(q => q.key === key);
+    if (!p) return;
+    setPrayerSteps(p.steps.slice());
+    const m = document.getElementById('prayers-modal');
+    if (m && m.style.display === 'flex') renderPrayersBody();
+  }
+  function syncPrayerPills() {
+    const sig = prayerSteps().join(',');
+    PRAYER_PRESETS.forEach(p => {
+      const el = document.getElementById('prayer-' + p.key + '-btn');
+      if (el) el.classList.toggle('year-pill-active', p.steps.join(',') === sig);
+    });
+    if (typeof syncA11yState === 'function') syncA11yState();
+  }
+  (function () {
+    const go = () => { try { syncPrayerPills(); } catch (e) {} };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
+    else go();
+  })();
   // Said, among those undertaken — what the heart answers to.
   function prayerMineDone(mask) {
     return prayerSteps().filter(n => mask & (1 << (n - 1))).length;
@@ -15785,16 +15864,17 @@ content: ''; float: right; width: 30px; height: 1em;
         'it. </p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
         'the ten prayers are said, the <strong>circle</strong> beside it counts the readings, ' +
         'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
-        'few lines opened counts. </p><p>Thirty readings in a day is a great deal to begin ' +
-        'with, and you are not asked for all of them. In the row of settings under the title, ' +
-        'the last one reads <strong>3 &middot; 7 &middot; 15 &middot; 30</strong> &mdash; that ' +
-        'is how many of the thirty the day asks for. Tap <strong>3</strong> and it asks for ' +
-        'three: Chumash, Tanya, Rambam. The moon then fills with your three rather than with ' +
-        'thirty, and when you have kept them a week the app offers you one more. </p><p>Tapping ' +
-        'the moon and then <strong>Change</strong> opens the same choice in full, where the ' +
-        'thirty can also be picked one by one. </p><p>The prayers work the same way. Tap the ' +
-        '<strong>heart</strong>, then <strong>Change</strong>, and take three &mdash; Shacharit, ' +
-        'Mincha, Maariv. The heart then fills with your three.',
+        'few lines opened counts. </p><p>Ten prayers and thirty readings in a day is a great ' +
+        'deal to begin with, and you are not asked for all of them. Under the two counts are ' +
+        'two small rows of numbers &mdash; <strong>&#9829; 3 &middot; 5 &middot; 7 &middot; 10</strong> ' +
+        'for the prayers and <strong>&#9790; 3 &middot; 7 &middot; 15 &middot; 30</strong> for ' +
+        'the readings. That is how many of each the day asks for. </p><p>Tap ' +
+        '<strong>3</strong> under each and the day asks for three prayers &mdash; Shacharit, ' +
+        'Mincha, Maariv &mdash; and three readings: Chumash, Tanya, Rambam. The heart and the ' +
+        'moon then fill with your three rather than with ten and thirty, and when you have kept ' +
+        'them a week the app offers you one more. </p><p>Tapping the heart, or the moon, opens ' +
+        'the list it counts; <strong>Change</strong> there offers the same choice in full, where ' +
+        'they can also be picked one by one.',
       main:
         'What the day is asking for next, and how much of it has been done. </p><p>The top line ' +
         'names the next step and goes to it. Beneath, the heart counts the ten prayers &mdash; ' +
@@ -15807,14 +15887,15 @@ content: ''; float: right; width: 30px; height: 1em;
         'lights, gathered as companions rather than counted as steps. </p><p>When the ' +
         'day&rsquo;s climb is finished, an offer of tomorrow&rsquo;s appears in its place. ' +
         '</p><p>The thirty are the month, and a reader takes a portion of it: the ' +
-        '<strong>3 &middot; 7 &middot; 15 &middot; 30</strong> pill under the title sets it, and ' +
-        'tapping the moon and then <strong>Change</strong> opens the same choice with the thirty ' +
-        'listed for picking one by one. The moon then answers to that portion ' +
+        '<strong>&#9790; 3 &middot; 7 &middot; 15 &middot; 30</strong> row under the counts sets ' +
+        'it, and tapping the moon and then <strong>Change</strong> opens the same choice with the ' +
+        'thirty listed for picking one by one. The moon then answers to that portion ' +
         '&mdash; seven steps fill it as thirty do &mdash; and a faint ring outside it keeps the ' +
         'month, so both are in view at once. Nothing is taken off the page: the steps not ' +
         'undertaken stay in the list, faint, and can still be marked. </p><p>The ten prayers ' +
-        'are undertaken the same way, from the heart&rsquo;s own list &mdash; three, five, seven ' +
-        'or ten, or any of them picked singly &mdash; and the heart then fills with those. A ' +
+        'are undertaken the same way, from the <strong>&#9829;</strong> row beside it or the ' +
+        'heart&rsquo;s own list &mdash; three, five, seven or ten, or any of them picked singly ' +
+        '&mdash; and the heart then fills with those. A ' +
         'prayer not undertaken keeps its place beside its Sefirah, faint; its hour does not ' +
         'pulse and the ladder does not call for it, but it can still be marked, and then it ' +
         'counts to the ten rather than to the heart.',
@@ -16688,8 +16769,8 @@ content: ''; float: right; width: 30px; height: 1em;
     if (typeof applyMaalotState === 'function') applyMaalotState();
   }
 
-  // The pill under the header rule and the chooser inside Today's Path are two
-  // doors to one setting, so each has to show what the other did. A path
+  // The pill under the moon and the chooser inside Today's Path are two doors
+  // to one setting, so each has to show what the other did. A path
   // picked step by step matches no preset, and then no pill is lit — which is
   // the honest reading of "your own".
   function setPathPreset(key) {
