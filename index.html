@@ -2838,6 +2838,27 @@ content: ''; float: right; width: 30px; height: 1em;
       <button id="il-intermediate-btn" class="year-pill-btn year-pill-active" onclick="setInfoLevel('intermediate')">Intermediate</button>
       <button id="il-advanced-btn" class="year-pill-btn" onclick="setInfoLevel('advanced')">Advanced</button>
     </div>
+    <!-- How much the day asks for. It belongs beside the depth pill for the
+         same reason that one belongs here: the depth is how much the page
+         tells you, this is how much it asks of you, and both are settled once
+         and then left alone. Numerals because the thing being chosen is a
+         count of steps; each says its name on hover and to a screen reader,
+         Today's Path names them in full, and the ⓘ on the ladder explains
+         them. The custom picking this row cannot hold lives there too. -->
+    <div class="year-toggle-pill" id="path-pill">
+      <button id="path-three-btn" class="year-pill-btn" onclick="setPathPreset('three')"
+              title="Three — Chumash with Rashi · Tanya · Rambam"
+              aria-label="Path of three steps a day">3</button>
+      <button id="path-seven-btn" class="year-pill-btn" onclick="setPathPreset('seven')"
+              title="Seven — the three, with Tanach, Mishna, Shulchan Aruch and Zohar"
+              aria-label="Path of seven steps a day">7</button>
+      <button id="path-fifteen-btn" class="year-pill-btn" onclick="setPathPreset('fifteen')"
+              title="Fifteen — the ascent alone, Malchut up to Keter"
+              aria-label="Path of fifteen steps a day">15</button>
+      <button id="path-thirty-btn" class="year-pill-btn year-pill-active" onclick="setPathPreset('thirty')"
+              title="Thirty — the month entire"
+              aria-label="Path of thirty steps a day, the month entire">30</button>
+    </div>
   </div>
 
   <!-- For whoever has just arrived. The Video tab under the week's page is
@@ -15568,9 +15589,13 @@ content: ''; float: right; width: 30px; height: 1em;
         'the ten prayers are said, the <strong>circle</strong> beside it counts the readings, ' +
         'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
         'few lines opened counts. </p><p>Thirty readings in a day is a great deal to begin ' +
-        'with, and you are not asked for all of them. Tap the moon, then <strong>Change</strong>, ' +
-        'and take three &mdash; Chumash, Tanya, Rambam. The moon then fills with your three ' +
-        'rather than with thirty, and when you have kept them a week the app offers you one more.',
+        'with, and you are not asked for all of them. In the row of settings under the title, ' +
+        'the last one reads <strong>3 &middot; 7 &middot; 15 &middot; 30</strong> &mdash; that ' +
+        'is how many of the thirty the day asks for. Tap <strong>3</strong> and it asks for ' +
+        'three: Chumash, Tanya, Rambam. The moon then fills with your three rather than with ' +
+        'thirty, and when you have kept them a week the app offers you one more. </p><p>Tapping ' +
+        'the moon and then <strong>Change</strong> opens the same choice in full, where the ' +
+        'thirty can also be picked one by one.',
       main:
         'What the day is asking for next, and how much of it has been done. </p><p>The top line ' +
         'names the next step and goes to it. Beneath, the heart counts the ten prayers &mdash; ' +
@@ -15582,8 +15607,10 @@ content: ''; float: right; width: 30px; height: 1em;
         'climb is whole. The menorah beside it holds a closed set of ten bearers on nine ' +
         'lights, gathered as companions rather than counted as steps. </p><p>When the ' +
         'day&rsquo;s climb is finished, an offer of tomorrow&rsquo;s appears in its place. ' +
-        '</p><p>The thirty are the month, and a reader takes a portion of it: tap the moon and ' +
-        'then <strong>Change</strong> to choose one. The moon then answers to that portion ' +
+        '</p><p>The thirty are the month, and a reader takes a portion of it: the ' +
+        '<strong>3 &middot; 7 &middot; 15 &middot; 30</strong> pill under the title sets it, and ' +
+        'tapping the moon and then <strong>Change</strong> opens the same choice with the thirty ' +
+        'listed for picking one by one. The moon then answers to that portion ' +
         '&mdash; seven steps fill it as thirty do &mdash; and a faint ring outside it keeps the ' +
         'month, so both are in view at once. Nothing is taken off the page: the steps not ' +
         'undertaken stay in the list, faint, and can still be marked.',
@@ -16453,8 +16480,34 @@ content: ''; float: right; width: 30px; height: 1em;
     const use = clean.length ? clean : PATH_ALL.slice();
     _pathStepsCache = use;
     try { localStorage.setItem('kotPathSteps', use.join(',')); } catch (e) {}
+    syncPathPills();
     if (typeof applyMaalotState === 'function') applyMaalotState();
   }
+
+  // The pill under the header rule and the chooser inside Today's Path are two
+  // doors to one setting, so each has to show what the other did. A path
+  // picked step by step matches no preset, and then no pill is lit — which is
+  // the honest reading of "your own".
+  function setPathPreset(key) {
+    const p = PATH_PRESETS.find(q => q.key === key);
+    if (!p) return;
+    setPathSteps(p.steps.slice());
+    const modal = document.getElementById('todays-path-modal');
+    if (modal && modal.style.display === 'flex') renderTodaysPath();
+  }
+  function syncPathPills() {
+    const sig = pathSteps().join(',');
+    PATH_PRESETS.forEach(p => {
+      const el = document.getElementById('path-' + p.key + '-btn');
+      if (el) el.classList.toggle('year-pill-active', p.steps.join(',') === sig);
+    });
+    if (typeof syncA11yState === 'function') syncA11yState();
+  }
+  (function () {
+    const go = () => { try { syncPathPills(); } catch (e) {} };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
+    else go();
+  })();
   // The chosen rungs of each half, as מעלה / מיעוט numbers 1-15.
   function pathWaxNums()  { return pathSteps().filter(i => i < 15).map(i => i + 1); }
   function pathWaneNums() { return pathSteps().filter(i => i >= 15).map(i => i - 14); }
