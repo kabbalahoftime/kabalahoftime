@@ -26930,7 +26930,13 @@ content: ''; float: right; width: 30px; height: 1em;
     var e=h.querySelector('.kotw-sub');
     if(e) e.innerHTML=(FACE==='day'?'A Single Day, and the Year in it'
                                    :'The Year as a Single Day')+' \u00b7 '+SUB[FACE]+' '+
-      '<span class="cycle-info-btn" data-cycle="wheel" title="About this cycle">ⓘ</span>';
+      // The dial writes its own, the rest of the page's being built by
+      // injectCycleInfoButtons — which is how this one was left a bare span
+      // when the other twelve became buttons. Said here rather than reached
+      // for from there, because this line is rewritten on every face change
+      // and would lose anything added to it afterwards.
+      '<span class="cycle-info-btn" data-cycle="wheel" role="button" tabindex="0" ' +
+      'aria-label="About this cycle" title="About this cycle">ⓘ</span>';
   }
   h.innerHTML='<div class="kotw-title">מַעֲלוֹת הַזְּמַן</div>'+
     '<div class="kotw-sub"></div>';
