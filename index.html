@@ -2912,6 +2912,55 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   #today-block .is-quiet { transition:opacity 0.3s; }
 }
 
+/* ── THE STEP THAT TRAVELS ──
+   The ladder's lit line, kept at the foot of the screen once the ladder
+   itself has scrolled away. Below every modal and above everything else.
+   The strip does not take taps; only the two buttons inside it do, so the
+   air around them still belongs to the page underneath. */
+.kot-travel {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 800;
+  padding: 0 10px 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+}
+.kot-travel[hidden] { display: none; }
+.kt-inner {
+  display: flex; align-items: stretch; gap: 6px;
+  max-width: 520px; margin: 0 auto; pointer-events: auto;
+  background: var(--bg-card); border: 1px solid var(--gold);
+  border-radius: 8px; box-shadow: 0 3px 14px rgba(0,0,0,0.22);
+}
+.kt-go {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px;
+  background: none; border: none; font: inherit;
+  font-size: calc(13.5px * var(--ts, 1)); color: var(--ink);
+  text-align: left; cursor: pointer; padding: 8px 4px 8px 10px; min-height: 48px;
+  border-radius: 8px 0 0 8px;
+}
+.kt-flag {
+  flex: 0 0 auto; font-family: 'Cinzel', serif;
+  font-size: calc(8.5px * var(--ts, 1)); letter-spacing: 1.3px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid var(--gold); border-radius: 3px;
+  padding: 1px 5px; line-height: 1.5;
+}
+/* One line, cut with an ellipsis rather than wrapped: this is a signpost and
+   it should be the same height every time it appears, whatever the step is
+   called. The whole of it is on the card the arrow leads to. */
+.kt-text { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kt-arrow { flex: 0 0 auto; color: var(--gold); }
+.kt-hide {
+  flex: 0 0 auto; width: 44px; background: none; border: none;
+  border-left: 1px solid var(--border-strong); border-radius: 0 8px 8px 0;
+  color: var(--ink-dim); font-size: calc(13px * var(--ts, 1)); cursor: pointer;
+}
+.kt-hide:hover { color: var(--ink); }
+.kt-go:focus-visible, .kt-hide:focus-visible { outline: 2px solid var(--gold); outline-offset: -3px; }
+/* Room under the page for it, so the last thing on the page is never behind
+   it. Set only while it is up, and taken back when it goes. */
+body.has-travel { padding-bottom: 72px; }
+@media (prefers-reduced-motion: no-preference) {
+  .kt-inner { transition: opacity 0.25s; }
+}
+
 /* The thirty-first, under the clock: shown only once the day's thirty steps
    are done. Same box as Perek Shirah above it, centred, since it is a seal
    rather than a reading. */
@@ -18301,6 +18350,102 @@ content: ''; float: right; width: 30px; height: 1em;
     // width on that line, so it is measured again after the word goes in.
     const nx = document.getElementById('today-next');
     if (nx && typeof _todayFit === 'function') _todayFit(nx);
+    _travelSet(which);
+  }
+
+  // ── THE STEP THAT TRAVELS ──
+  // The same instruction the ladder is showing, kept at the foot of the
+  // screen once the ladder has scrolled away. It writes nothing of its own:
+  // the chip and the line are taken off whichever row is lit, so there is one
+  // sentence in the app and two places it can be read.
+  let _travelWhich = null;      // which row it is repeating, for the tap
+  let _travelSeen  = false;     // is the ladder on screen right now
+  let _travelGone  = false;     // put away by the reader, for this visit
+
+  // The row's own words, without its chip and without the arrow that opens a
+  // prayer's text — that arrow is a control, and a copy of it here would be a
+  // second one that went nowhere.
+  function _travelTextFrom(el) {
+    const c = el.cloneNode(true);
+    c.querySelectorAll('.tp-go, .t-flag, .prayer-src').forEach((n) => n.remove());
+    // Piece by piece with a space between, not textContent straight through.
+    // The ladder sets its words apart with margins, and a margin does not
+    // survive into text: run together it read "Chooseyour paths".
+    let out = '';
+    c.childNodes.forEach((n) => {
+      const t = (n.textContent || '').replace(/\s+/g, ' ').trim();
+      if (t) out += (out ? ' ' : '') + t;
+    });
+    return out.replace(/\s+/g, ' ').replace(/\s+·/g, ' ·').trim();
+  }
+
+  function _travelSet(which) {
+    const bar = document.getElementById('kot-travel');
+    if (!bar) return;
+    _travelWhich = which || null;
+    const id = which === 'start' ? 'today-start'
+             : which === 'med' ? 'today-face'
+             : which === 'pray' ? 'today-prayer'
+             : which === 'study' ? 'today-next' : '';
+    const row = id ? document.getElementById(id) : null;
+    if (row) {
+      const flag = row.querySelector('.tp-flag, .t-flag');
+      const f = bar.querySelector('.kt-flag'), t = bar.querySelector('.kt-text');
+      const fw = flag ? (flag.textContent || '').trim() : '';
+      const tw = _travelTextFrom(row);
+      if (f && f.textContent !== fw) f.textContent = fw;
+      if (t && t.textContent !== tw) t.textContent = tw;
+      const go = bar.querySelector('.kt-go');
+      if (go) go.setAttribute('aria-label', fw + ' — ' + tw);
+    }
+    _travelShow();
+  }
+
+  // Up only when there is something to do, the ladder is out of sight, the
+  // reader has not put it away, and nothing is open over the page. The last
+  // of those is the same test the update reload uses, asked the same way.
+  function _travelShow() {
+    const bar = document.getElementById('kot-travel');
+    if (!bar) return;
+    const busy = Array.prototype.some.call(
+      document.querySelectorAll('[id$="-modal"]'),
+      (el) => el.getClientRects().length > 0);
+    const up = !!_travelWhich && !_travelSeen && !_travelGone && !busy;
+    if (bar.hidden !== !up) bar.hidden = !up;
+    document.body.classList.toggle('has-travel', up);
+  }
+
+  function travelGo() {
+    const w = _travelWhich;
+    if (w === 'start' && typeof openPathChooser === 'function') openPathChooser();
+    else if (w === 'med' && typeof todayFaceGo === 'function') todayFaceGo();
+    else if (w === 'pray' && typeof todayPrayerGo === 'function') todayPrayerGo();
+    else if (w === 'study' && typeof todayGo === 'function') todayGo();
+  }
+  function travelDismiss() { _travelGone = true; _travelShow(); }
+
+  // Watching the ladder rather than the scroll position: the block moves down
+  // the page as cards open and close above it, and a pixel count would have to
+  // be recomputed every time one did.
+  let _travelWatched = false;
+  function _travelWatch() {
+    if (_travelWatched) return;
+    const blk = document.getElementById('today-block');
+    if (!blk || typeof IntersectionObserver !== 'function') return;
+    _travelWatched = true;
+    new IntersectionObserver((ents) => {
+      ents.forEach((e) => { _travelSeen = e.isIntersecting; });
+      _travelShow();
+    }, { rootMargin: '-8px 0px -8px 0px' }).observe(blk);
+    // A modal opening or closing does not move the ladder, so it raises no
+    // entry above. Every modal in this app is shown and hidden by writing its
+    // own style, so that is what is watched — rather than listening for the
+    // tap that opened it, which misses every modal opened by anything else.
+    if (typeof MutationObserver === 'function') {
+      const mo = new MutationObserver(() => _travelShow());
+      document.querySelectorAll('[id$="-modal"]').forEach((m) =>
+        mo.observe(m, { attributes: true, attributeFilter: ['style'] }));
+    }
   }
   // The Prayer chip goes where its prayer lives: the card of the Sefirah whose
   // hour it is. The tag beside it still marks in place — a chip that named a
@@ -19294,6 +19439,7 @@ content: ''; float: right; width: 30px; height: 1em;
     setTimeout(injectCycleInfoButtons, 0); // re-append ⓘ after this render's rewrites
     setTimeout(applyA11y, 0);        // name, role and state for anything tappable
     setTimeout(applySongState, 0);   // the thirty-first's own mark, per day
+    setTimeout(_travelWatch, 0);     // once only; it guards itself
     const hMname = HEB_MONTH_NAMES[hMonth] || '';
     const hDateStr = `${hDay} ${hMname} ${hYear}`;
 
@@ -27267,6 +27413,27 @@ content: ''; float: right; width: 30px; height: 1em;
       <button class="wr-btn wr-btn-close" onclick="closeWeeklyReport()">Close</button>
       <button class="wr-btn wr-btn-save" onclick="saveWeeklyReport()">Save</button>
     </div>
+  </div>
+</div>
+
+<!-- THE STEP THAT TRAVELS.
+     Today's Ladder says what to do now, and then the reader scrolls past it
+     into thirty cards and it is gone. This is the same instruction, kept at
+     the foot of the screen for as long as it is out of sight and there is
+     still something being asked for.
+     It says nothing of its own: the word and the line are read off whichever
+     of the ladder's rows is lit, so the two cannot disagree. It is shown only
+     when the ladder is off screen — beside it, it would be the same sentence
+     twice — and not at all when a modal is open or when the day is done. -->
+<div id="kot-travel" class="kot-travel" hidden>
+  <div class="kt-inner">
+    <button type="button" class="kt-go" onclick="travelGo()">
+      <span class="kt-flag"></span>
+      <span class="kt-text"></span>
+      <span class="kt-arrow" aria-hidden="true">&rarr;</span>
+    </button>
+    <button type="button" class="kt-hide" onclick="travelDismiss()"
+            title="Put this away" aria-label="Put the step away for this visit">&#10005;</button>
   </div>
 </div>
 
