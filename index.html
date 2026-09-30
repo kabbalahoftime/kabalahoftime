@@ -2940,29 +2940,38 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    it should be the same height every time it appears, whatever the step is
    called. The whole of it is on the card the arrow leads to. */
 .kt-text { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* The hour's face and the hour's prayer: a state and a door, not a call.
-   Hollow while the thing is undone and filled once it is, which is how the
-   same two marks read everywhere else in the app. Narrower than the 44px the
-   hand is owed across, and they take the rest of it in height — the bar is
-   48px tall, so a 34px-wide mark still has a 48px box to be hit in, and the
-   width saved is width the step's own name keeps. */
+/* The hour's face and the hour's prayer: two doors carrying a word of state,
+   and not two marks. Narrower than the 44px the hand is owed across, and they
+   take the rest of it in height — the bar is 48px tall, so a 34px-wide door
+   still has a 48px box to be hit in, and the width saved is width the step's
+   own name keeps. */
 .kt-mark {
   flex: 0 0 auto; width: 34px; align-self: stretch;
   display: inline-flex; align-items: center; justify-content: center;
   background: none; border: none; cursor: pointer;
-  font-size: calc(13px * var(--ts, 1)); line-height: 1;
-  color: var(--gold); opacity: 0.55;
+  font-size: calc(12.5px * var(--ts, 1)); line-height: 1;
 }
-.kt-mark svg { width: 15px; height: 15px; display: block; }
-.kt-mark.done { opacity: 1; }
+/* The chip is what says door. Outlined while the thing is undone, filled in
+   its own gathering's colour once it is done — blue for the faces, red for
+   the prayers, the colours their counters already keep. The glyph inside says
+   which of the two it is and carries no state of its own, so it cannot be
+   read as a switch that is on. */
+.kt-chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 21px; border-radius: 3px;
+  border: 1px solid currentColor;
+}
+.kt-mark svg { width: 13px; height: 13px; display: block; }
+.kt-med  { color: var(--accent-blue); }
+.kt-med.done  .kt-chip { background: var(--accent-blue); color: #fdf9f2; }
+.kt-pray.done .kt-chip { background: var(--accent-red);  color: #fdf9f2; }
 /* On the narrowest phones the chip is the first thing to go. With the two
    marks beside it the strip has four things in it, and at 320px the step's
    own name was cut to "Read מעלה ג׳ · Yea…" — the chip says Study and so does
    the word Read, so one of them can be spared and the name keeps the room. */
 @media (max-width: 349px) { .kt-flag { display: none; } }
-.kt-med.done .med-lobes { fill: var(--accent-blue); fill-opacity: 0.85; }
 .kt-pray { color: var(--accent-red); }
-.kt-mark:hover { opacity: 1; }
+.kt-mark:hover .kt-chip { border-color: var(--ink); }
 .kt-mark[hidden] { display: none; }
 .kt-hide {
   flex: 0 0 auto; width: 40px; background: none; border: none;
@@ -18482,7 +18491,8 @@ content: ''; float: right; width: 30px; height: 1em;
         const done = medHas(n);
         med.classList.toggle('done', done);
         med.setAttribute('aria-label',
-          sef + '\u2019s face \u2014 ' + (done ? 'focused on' : 'not yet focused on') + '. Go to it.');
+          'Go to ' + sef + '\u2019s face \u2014 ' + (done ? 'focused on' : 'not yet focused on'));
+        med.title = sef + '\u2019s face' + (done ? ' \u2014 focused on' : '');
       }
     }
     if (pray) {
@@ -18495,7 +18505,7 @@ content: ''; float: right; width: 30px; height: 1em;
         const done = !!(prayersMask() & (1 << (n - 1)));
         pray.classList.toggle('done', done);
         const nm = _prayerListName(n);
-        pray.setAttribute('aria-label', nm + ' \u2014 ' + (done ? 'said' : 'not yet said') + '. Go to it.');
+        pray.setAttribute('aria-label', 'Go to ' + nm + ' \u2014 ' + (done ? 'said' : 'not yet said'));
         pray.title = nm + (done ? ' \u2014 said' : '');
       }
     }
@@ -27508,15 +27518,24 @@ content: ''; float: right; width: 30px; height: 1em;
       <span class="kt-flag"></span>
       <span class="kt-text"></span>
     </button>
-    <!-- The hour's other two, carried but not asked for. They are the same
-         flame and heart the counters use, drawn hollow and filling when the
-         face has been focused on and the prayer said — a state and a way to
-         reach it, which is what they are on the cards too. They say nothing
-         about order, because neither of them has one. -->
+    <!-- The hour's other two, carried but not asked for: a way to reach the
+         face of this hour and its prayer, and a word on whether each is done.
+         Doors, not marks. They were drawn as the bare flame and heart the
+         cards wear, and that is exactly the shape which means "tap me to
+         mark" everywhere else in this app — so one glyph said mark here and
+         go there, and it was read as both, which is a fault of the drawing
+         and not of the reader.
+         Each glyph sits in a chip now. A chip is what this app taps to go
+         somewhere: the ladder's own MEDITATION and PRAYER are chips, and no
+         mark anywhere is one. And the state belongs to the chip rather than
+         to the glyph — outlined while the thing is undone, filled in its own
+         colour once it is done, which is what .t-flag.now does already. -->
     <button type="button" class="kt-mark kt-med" onclick="travelFaceGo()">
-      <svg viewBox="0 0 22 22" aria-hidden="true"></svg>
+      <span class="kt-chip"><svg viewBox="0 0 22 22" aria-hidden="true"></svg></span>
     </button>
-    <button type="button" class="kt-mark kt-pray" onclick="travelPrayerGo()">&#9829;</button>
+    <button type="button" class="kt-mark kt-pray" onclick="travelPrayerGo()">
+      <span class="kt-chip">&#9829;</span>
+    </button>
     <button type="button" class="kt-hide" onclick="travelDismiss()"
             title="Put this away" aria-label="Put the step away for this visit">&#10005;</button>
   </div>
