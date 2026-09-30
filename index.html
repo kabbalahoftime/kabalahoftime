@@ -26040,8 +26040,24 @@ content: ''; float: right; width: 30px; height: 1em;
   actsRow();
   root.insertBefore(fr,foot);
 
+  /* Which of the fifty-two "now" falls in.
+     The forty-nine fill the dial from the seam round to forty-nine minutes
+     before it. That last stretch belongs to no week of the seven — it is where
+     the Mochin stand — and it was being clamped to 49, so for those forty-nine
+     minutes the dial named week 49 and printed a window that had already
+     closed. At 12:30 AM in Miami, with the seam at 1:12, it read
+     "Week 49 · Malchut of Malchut · 11:54 PM – 12:23 AM"; it is Chochmah.
+     Past the seam the Mochin go on overlaying weeks 1 and 2, and there the
+     week of the seven is still what "now" names: the band hovers above the
+     year rather than replacing it, and only in this gap is there no week
+     underneath to name. */
+  function weekAtH(h){
+    var i=Math.floor(h/STEP)+1;
+    if(i<=49)return Math.max(1,i);
+    return 50+Math.min(2,Math.floor((h-SEVEN_END)/STEP));
+  }
   function curWeek(){
-    return Math.min(49,Math.max(1,Math.floor(timeMap().nowH()/(SEVEN_END/49))+1));
+    return weekAtH(timeMap().nowH());
   }
   /* Which stretch of the day "now" falls in. Compared in minutes rather than
      hours because the band's tail is past 24 and the mishmar's head is before
@@ -26069,14 +26085,17 @@ content: ''; float: right; width: 30px; height: 1em;
     if(sig!==lastSig){lastSig=sig;redraw(map);}
     drawZmanim();
     var m=map.nowMin(),n=(FACE==='day')?curDaySeg():(FACE==='sets')?curSet()
-      :Math.min(49,Math.max(1,Math.floor(map.nowH()/(SEVEN_END/49))+1));
+      :weekAtH(map.nowH());
     hand.setAttribute('transform','rotate('+(m/DAY*360)+' '+CX+' '+CY+')');
     cT.textContent=fmt(m);
     var dseg=(FACE==='day')?dayShape()[n-1]:null;
     cW.textContent=(FACE==='day')?dseg.en
       :(FACE==='sets')?'Set '+n+' of the inner year':'Week '+n+' of the inner year';
     cS.textContent=(FACE==='day')?dseg.he
-      :(FACE==='sets')?ALEF_BET[n-1].hebrew:combo(n).he;
+      :(FACE==='sets')?ALEF_BET[n-1].hebrew
+      // combo pairs the week against the seven, and the Mochin stand outside
+      // that pairing — asking it for week 50 would reach past the end of SEF.
+      :(n>=50?MOCH[n-50].he:combo(n).he);
     if(!userSelected&&n!==curSel)select(n);
     // The Today block names the hour, so it is re-read here rather than on a
     // timer of its own: this runs after kotwHours exists, which a timer started
