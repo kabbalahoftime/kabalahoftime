@@ -2678,18 +2678,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    and does not pulse — it is a state, not a call. */
 .today-next .t-whole { color:var(--gold); }
 .today-next .t-heb, .today-next .t-step { font-family:'Frank Ruhl Libre',serif; letter-spacing:0; }
-/* Clear of the button above it. A 44px reach probe from "all thirty" lands on
-   the next-step button otherwise, which is the trap the song lines hit: an
-   invisible band would sit on the neighbouring control and take its taps, so
-   the space is real instead. Nine pixels is what that costs: the button is
-   25px tall, so a probe 21px above its centre clears its top by 8.5, and this
-   is the least that keeps it off the button above. The rest of what was here
-   was not paying for anything. */
+/* Clear of the step button above it, with real space rather than an invisible
+   band: a band would sit over the neighbouring control and take its taps.
+   The note that stood here worked the margin out against the foot's "all
+   thirty" button and a 25px step button; the foot is gone and the step button
+   carries its own 44px now, so the arithmetic is no longer what it was — but
+   the clearance still earns its place and the checks hold it to it. */
 .today-ahead { display:block; width:100%; text-align:left; background:none; border:none;
   font-family:inherit; font-size:calc(11px * var(--ts, 1)); color:var(--gold);
   cursor:pointer; padding:5px 0; margin-top:11px; }
-.today-foot { display:flex; justify-content:space-between; align-items:center; gap:10px;
-  margin-top:11px; }
 /* Now or Next on the step: outlined while it waits for its hour, filled once
    the hour has come. The prayer beneath it is labelled for what it is rather
    than said to be now a second time — it is only ever the hour's own, and the
@@ -2730,9 +2727,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    as one: gold, with the same ↗ the app uses wherever it hands a reader over
    to somebody else's site. */
 .today-face a.tf-open { color:var(--gold); text-decoration:none; }
-.today-count { font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
-.today-more { background:none; border:none; font-family:inherit; cursor:pointer;
-  font-size:calc(11px * var(--ts, 1)); color:var(--gold); padding:6px 0; white-space:nowrap; }
 
 /* The thirty-first, under the clock: shown only once the day's thirty steps
    are done. Same box as Perek Shirah above it, centred, since it is a seal
@@ -3081,8 +3075,8 @@ content: ''; float: right; width: 30px; height: 1em;
        is exactly one step being asked for. Two lines said otherwise, and
        reading them side by side suggested a choice that the order does not
        offer.
-       Ladder, not Path: Today's Path is already the name of the modal that
-       "all thirty" and the moon both open, and it is the whole thirty. This
+       Ladder, not Path: Today's Path is already the name of the modal the
+       moon opens, and it is the whole thirty. This
        is the rung being stood on — fifteen up and fifteen down is a ladder,
        and Yaakov's is the one the thirty are counted by. -->
   <div id="today-block">
@@ -3267,10 +3261,6 @@ content: ''; float: right; width: 30px; height: 1em;
           </span>
         </span>
       </div>
-    <div class="today-foot">
-      <span id="today-count" class="today-count"></span>
-      <button class="today-more" onclick="openTodaysPath()" aria-label="Open today's path, all thirty steps">all thirty ↗</button>
-    </div>
   </div>
 
   <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
@@ -17807,19 +17797,11 @@ content: ''; float: right; width: 30px; height: 1em;
   function renderTodayBlock() {
     const el = document.getElementById('today-next');
     if (!el) return;
-    const k = _maalotKey ? maalotDone() : 0;
-    const w = yomDone();
+    // No foot beneath this block any more. It carried a tally and a way in to
+    // Today's Path, and by the time three counters stood above it both were
+    // said twice: the moon already reads the same count, and tapping it
+    // already opens the path.
     _todayLine(el, _pathNow());
-    // The line itself says so when the path is whole, so the foot keeps to the
-    // plain tally and does not say it twice.
-    const count = document.getElementById('today-count');
-    if (count) {
-      const mine = pathWaxDone(maalotMask()) + pathWaneDone(yomMask());
-      const tot  = pathWaxNums().length + pathWaneNums().length;
-      count.textContent = pathIsWhole()
-        ? (k + w) + ' of 30 marked'
-        : mine + ' of ' + tot + ' on your path · ' + (k + w) + ' of 30';
-    }
     // The band can shut before midnight while the day it climbed for is still
     // a day away. The hour has passed but the date has not, and someone still
     // awake has not missed the chance — this offers the step forward. While
