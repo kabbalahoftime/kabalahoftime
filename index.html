@@ -339,8 +339,15 @@ padding: 0 16px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  /* The two named columns may be squeezed — their labels wrap, which is what
+     they always did. The moon's may not: its row of marks is drawn to a fixed
+     width, and squeezing it pushed the menorah past the card's border. So it
+     holds its size and the others give way around it. */
   gap: 18px;
   margin-top: 8px;
+  /* Air at both ends. Without it the row fills the block exactly and the
+     menorah, which is the last thing drawn, sits on the border. */
+  padding: 0 9px;
 }
 .dc-col {
   display: flex;
@@ -349,9 +356,10 @@ padding: 0 16px;
   min-width: 72px;
 }
 /* Phones: close the gap rather than let the columns overhang */
+#maalot-moon { flex: 0 0 auto; }
 @media (max-width: 470px) {
-  .dc-row { gap: 12px; }
-  .dc-col { min-width: 60px; }
+  .dc-row { gap: 10px; }
+  .dc-col { min-width: 50px; }
 }
 
 /* ── HOW MUCH EACH COUNTER ASKS FOR ──
@@ -3159,7 +3167,7 @@ content: ''; float: right; width: 30px; height: 1em;
         </div>
         <div class="dc-sep">·</div>
         <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag in order · tap for Today's Path">
-          <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
+          <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:2px;">
             <svg id="maalot-moon-svg" width="33" height="33" viewBox="-6 -6 34 34" style="display:block;overflow:visible">
               <g id="maalot-stars"></g><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-month-ring" cx="11" cy="11" r="13.5" fill="none" stroke="var(--gold)" stroke-width="1.1" stroke-linecap="round" opacity="0.34" transform="rotate(-90 11 11)" style="display:none"/><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
             <span id="maalot-moon-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/15</span>
@@ -3172,7 +3180,7 @@ content: ''; float: right; width: 30px; height: 1em;
                  and one more who lights them all. Drawn dim and lit as they
                  are gathered. Decorative — the marks are the controls, and
                  the count is spoken in the column's title. -->
-            <svg id="rebbe-menorah" width="36" height="29" viewBox="0 0 26 21"
+            <svg id="rebbe-menorah" width="30" height="24" viewBox="0 0 26 21"
                  style="display:block;overflow:visible" aria-hidden="true"></svg>
           </div>
           <!-- Study, not Ma'alot. The column beside it reads Prayers תפילות,
