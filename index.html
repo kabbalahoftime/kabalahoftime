@@ -602,6 +602,14 @@ margin-top: 6px;
 .med-mark.off-path.done { opacity: 0.68; }
 .med-mark.off-path:hover { opacity: 1; }
 .med-mark:focus-visible { outline: 2px solid var(--gold); outline-offset: -12px; }
+/* Inside the dial's caption, which is dark and set tight beside the week's
+   number: smaller box, and the gold of that panel rather than the page's. */
+/* A full 44px to the hand; the negative margins keep the caption's line the
+   height it would be without it, and the drawing inside stays 13px. */
+.kotw-med { width: 44px; height: 44px; margin: -16px -12px -16px -14px; color: #d4af37; }
+.kotw-med svg { width: 13px; height: 13px; }
+.kotw-med.done { color: #8fa8d8; }
+.kotw-med.done .med-lobes { fill: #8fa8d8; fill-opacity: 0.9; }
 
 /* ── THE TEN PRAYERS — a daily heart, one prayer per Sefirah ── */
 .prayer-tag {
@@ -4348,7 +4356,7 @@ content: ''; float: right; width: 30px; height: 1em;
            name comes from. The count and the pair sit here now rather than
            under the subsections below, where they read as a footnote to three
            links instead of as what the card is counting. -->
-      <div class="sefirah-cycle-name malchut-cycle-name">Cycles of Yad HaChazakah (13/14 &times; 28)</div>
+      <div class="sefirah-cycle-name malchut-cycle-name">Cycles of <a href="https://www.chabad.org/dailystudy/rambam_cdo/rambamChapters/3" target="_blank" rel="noopener" style="color:inherit">Yad HaChazakah</a> (13/14 &times; 28)</div>
       <div id="malchut-yad-top" style="margin-bottom:8px;"></div>
       <!-- The day's three chapters of the Yad. They stood on the face under
            the round named above them, but the heading wears a ✡: it is a
@@ -16991,6 +16999,23 @@ content: ''; float: right; width: 30px; height: 1em;
   // The glyph is the counter's own, small: a ring cut by a horizon, hollow
   // until the face has been sat with and then filled. A mark and the thing it
   // feeds should be the same shape, which is how ✡ already works for the stars.
+  // Where inside the host the mark actually goes. Hod writes its face as a
+  // stack of lines and Malchut's day sits in one too, so putting the mark at
+  // the head of the host left it standing alone above a block — a flame on a
+  // line of its own. Descending into that first block puts it back beside the
+  // words it belongs to.
+  function _medPlace(host) {
+    let el = host;
+    for (let i = 0; i < 3; i++) {
+      const first = el.firstElementChild;
+      if (!first) break;
+      const d = getComputedStyle(first).display;
+      if (d !== 'block' && d !== 'flex') break;
+      el = first;
+    }
+    return el;
+  }
+
   function injectMedMarks() {
     const mark = (n, sef) =>
       `<span class="med-mark" data-med="${n}" role="button" tabindex="0" ` +
@@ -17002,11 +17027,8 @@ content: ''; float: right; width: 30px; height: 1em;
     // "Day …", rather than into the label column beside the prayer tag. That
     // is where the thing being sat with actually is; beside the prayer it
     // looked like a second prayer mark.
-    // Keter keeps no card of the nine — its face is the day's Hayom Yom, in
-    // Strong Day — so its mark goes on that line.
-    const hy = document.getElementById('keter-hayomyom');
-    if (hy && !hy.querySelector(':scope > .med-mark'))
-      hy.insertAdjacentHTML('afterbegin', mark(1, 'Keter'));
+    // Keter's mark is not injected here: its face is the dial, and the dial
+    // writes the flame into its own caption, which it rebuilds every tick.
     const cards = document.querySelectorAll('.sefirah-card');
     ['Chochmah', 'Binah', 'Chesed', 'Gevurah', 'Tiferet',
      'Netzach', 'Hod', 'Yesod', 'Malchut'].forEach((sef, i) => {
@@ -17018,8 +17040,8 @@ content: ''; float: right; width: 30px; height: 1em;
       const host = (sef === 'Malchut')
         ? card.querySelector('.malchut-visible-content > div:nth-child(2)')
         : card.querySelector('.sefirah-main-text');
-      if (host && !host.querySelector(':scope > .med-mark'))
-        host.insertAdjacentHTML('afterbegin', mark(i + 2, sef));
+      if (host && !host.querySelector('.med-mark'))
+        _medPlace(host).insertAdjacentHTML('afterbegin', mark(i + 2, sef));
     });
   }
 
@@ -17574,8 +17596,9 @@ content: ''; float: right; width: 30px; height: 1em;
     // Hayom Yom is. So Keter's hour, which is the hour of Hitbodedut, has an
     // object after all, and it is the one the day was given.
     if (name === 'Keter') {
-      const hy = document.getElementById('keter-hayomyom');
-      return hy ? (hy.closest('.keter-section') || hy) : null;
+      // The dial's own caption, where the week and its word are written.
+      return document.querySelector('#kotw-root .kotw-wk') ||
+             document.getElementById('kotw-root');
     }
     const i = FACE_CARDS.indexOf(name);
     if (i < 0) return null;
@@ -17657,13 +17680,17 @@ content: ''; float: right; width: 30px; height: 1em;
     // Chabad.org rather than quoting. Written this way round so that the day
     // the table is filled, this line becomes the teaching with no further
     // change here.
+    // Keter's face is the dial, and what the dial says of this moment is the
+    // week the year is standing in and the word that week carries. It was the
+    // day's Hayom Yom, which is a reading rather than a face and is already
+    // named in Strong Day.
     Keter: () => {
       try {
-        const h = gregToHebrew(getDisplayDate(currentOffset));
-        const t = (typeof getHayomYom === 'function') ? getHayomYom(h.month, h.day) : null;
-        if (t) return t;
+        const n = (typeof window.kotwCurWeek === 'function') ? window.kotwCurWeek() : 0;
+        const w = (n && typeof window.kotwWeekData === 'function') ? window.kotwWeekData(n) : null;
+        if (w && w.t) return 'Week ' + n + ' \u00b7 \u201c' + w.t + '\u201d';
       } catch (e) {}
-      return _flatFace(document.getElementById('keter-hayomyom'));
+      return '';
     },
     Chochmah: (c) => _afterLabel(c.querySelector('.sefirah-main-text'), 'Day:'),
     Binah:    (c) => _strongFace(c.querySelector('.sefirah-main-text')),
@@ -17703,11 +17730,10 @@ content: ''; float: right; width: 30px; height: 1em;
   // carries the same link rather than walking a reader to a second link: the
   // href is taken off that anchor rather than rebuilt, so the two cannot say
   // different days.
-  function _faceHref(name) {
-    if (name !== 'Keter') return '';
-    const a = document.querySelector('#keter-hayomyom a[href]');
-    return a ? a.getAttribute('href') : '';
-  }
+  // No face links out any more. Keter's did, while its face was the day's
+  // Hayom Yom and the app held no text for it; the week and its word are the
+  // app's own, and the tap goes to the dial that says them.
+  function _faceHref() { return ''; }
   function applyTodayFace() {
     const el = document.getElementById('today-face');
     if (!el) return;
@@ -26062,9 +26088,25 @@ content: ''; float: right; width: 30px; height: 1em;
     var w=W[n-1],wh=weekHours(n),isM=n>=50;
     var m1=map.hToMin(wh.h1),m2=map.hToMin(wh.h2);
     var cm=isM?{he:MOCH[n-50].he,en:MOCH[n-50].en}:combo(n);
-    var nowBadge=(n===curWeek())?'<span class="kotw-now-badge">Now</span>':'';
+    var isNow=(n===curWeek());
+    var nowBadge=isNow?'<span class="kotw-now-badge">Now</span>':'';
+    /* Keter's face is this: the week the year is standing in, and the word it
+       carries. So the flame is here, beside it — and only on the week that is
+       now, because a week tapped to be read is not the one being sat with.
+       It is written into this HTML rather than injected after, since the
+       caption is rebuilt on every tick and anything put in from outside would
+       be wiped within the half-minute. */
+    var medMark=isNow
+      ? '<span class="med-mark kotw-med'+
+        ((typeof medHas==='function'&&medHas(1))?' done':'')+
+        '" data-med="1" role="button" tabindex="0"'+
+        ' onclick="event.stopPropagation(); toggleMed(1, event)"'+
+        ' title="Keter \u2014 tap when you have sat with this week"'+
+        ' aria-label="Mark the Keter meditation">'+
+        '<svg viewBox="0 0 22 22" aria-hidden="true">'+medGlyph(false)+'</svg></span>'
+      : '';
     detail.innerHTML='<span class="kotw-heb">'+cm.he+'</span>'+
-      '<span class="kotw-wk">Week '+n+nowBadge+'</span>'+
+      '<span class="kotw-wk">'+medMark+'Week '+n+nowBadge+'</span>'+
       '<div class="kotw-theme">\u201c'+w.t+'\u201d</div>'+
       '<div class="kotw-meta">\uD83D\uDC3E '+w.a+'<br>\uD83D\uDCDC '+w.r+
       '<br>\u23F1 '+fmt(m1)+' \u2013 '+fmt(m2)+' \u00b7 '+cm.en+'</div>';
@@ -26412,6 +26454,7 @@ content: ''; float: right; width: 30px; height: 1em;
   }
   window.kotwRefresh=function(){userSelected=false;curSel=null;tick();};
   window.kotwWeekData=function(n){return W[n-1]||null;};
+  window.kotwCurWeek=curWeek;
   window.kotwCombo=combo;
   // The path keeps its hours here rather than computing its own: weeks in
   // inner hours from the seam, the Mochin overlaying it, and "now" in the same
