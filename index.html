@@ -2195,8 +2195,15 @@ to   { opacity: 1; }
   display: grid; gap: 5px; justify-items: stretch;
   max-width: 300px; margin: 9px auto 0; text-align: left;
 }
+/* Five columns: swatch, name, one or two times, and the row's own erase.
+   The panel cannot grow — it is held to the dial's width, 276px on a 360px
+   phone — so the fifth column is found rather than added: the gap goes from
+   8px to 5, the times from 84px to 78, and the times' own font from 10.5px to
+   10 with tighter padding so that "05:00 PM" still shows whole at the
+   narrower width, which at the old font it did not. The name column keeps
+   what it had, or half the prayers would wrap. */
 #kotw-root .ka-row {
-  display: grid; grid-template-columns: 10px 1fr 84px 84px; gap: 8px;
+  display: grid; grid-template-columns: 10px 1fr 78px 78px 27px; gap: 5px;
   align-items: center;
 }
 #kotw-root .ka-row i {
@@ -2207,13 +2214,51 @@ to   { opacity: 1; }
   font-size: calc(10px * var(--ts, 1)); color: rgba(240,230,201,.72);
 }
 #kotw-root .ka-row input[type="time"] {
-  font-family: 'Cinzel', serif; font-size: calc(10.5px * var(--ts, 1));
+  font-family: 'Cinzel', serif; font-size: calc(10px * var(--ts, 1));
   color: #10162c; background: #f0e6c9;
   border: 1px solid rgba(212,175,55,.5); border-radius: 3px;
-  padding: 3px 4px; width: 100%; min-height: 26px;
+  padding: 2px 1px; width: 100%; min-height: 26px;
 }
 #kotw-root .ka-row input:focus-visible { outline: 2px solid #d4af37; outline-offset: 1px; }
 #kotw-root .ka-gap { display: block; }
+/* One row's erase. Drawn only on rows that hold something, so a panel with
+   nothing set has no column of crosses in it.
+   A time input cannot be emptied by hand on a phone: the picker is a wheel
+   and has no blank to land on, so once an hour was set the only way out was
+   "clear all" — which took the other twelve and the night with it.
+   The box is 27px of glyph and reaches 44px wide through padding: it grows
+   sideways — 5px left, which is exactly the gap, and 12px right, which is
+   what the panel's margin has before the card clips at its padding edge —
+   and not up and down, where the next row's cross is five pixels away and a
+   tap that spread would erase the wrong hour. Neither reach lands on
+   anything that can be tapped. */
+#kotw-root .ka-x {
+  background: none; border: none; cursor: pointer;
+  font: 400 calc(13px * var(--ts, 1))/1 'Cormorant Garamond', serif;
+  color: rgba(212,175,55,.78);
+  width: 27px; height: 26px; box-sizing: content-box;
+  padding: 0 12px 0 5px; margin: 0 -12px 0 -5px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+#kotw-root .ka-x:hover { color: #f0e6c9; }
+#kotw-root .ka-x:focus-visible { outline: 2px solid #d4af37; outline-offset: 1px; }
+/* Below about 350px the five columns cannot all hold their width: the row's
+   own minimum is wider than the dial's inside, so the panel spills past the
+   card, which clips. What was cut used to be the second time — the reader's
+   own hour, half-drawn; with a fifth column it would be the erase, which is
+   worse, a control that is half-tappable.
+   The width comes from the picker's clock, which is about 18px of every time
+   field and no loss on a phone: a tap anywhere in the field opens the picker
+   on iOS and on Android alike, and the clock is only ever the affordance a
+   mouse needs. Without it the times hold their font at 60px and the whole
+   row fits inside the dial at 320, with the widest name — "Shacharit" —
+   still on one line.
+   Wrapping the row instead was tried and was worse: the erase went to a line
+   of its own, and the columns stopped lining up down the panel. */
+@media (max-width: 349px) {
+  #kotw-root .ka-row { grid-template-columns: 10px 1fr 60px 60px 27px; gap: 4px; }
+  #kotw-root .ka-row input[type="time"]::-webkit-calendar-picker-indicator { display: none; }
+}
 /* Group headings inside the panel. Sixteen rows in one list is a wall; three
    short headings make it a thing you can look down. */
 #kotw-root .ka-grp {
@@ -2236,7 +2281,7 @@ to   { opacity: 1; }
   font-family: 'Cinzel', serif; font-size: calc(10px * var(--ts, 1));
   letter-spacing: .5px; color: #10162c; background: #f0e6c9;
   border: 1px solid rgba(212,175,55,.5); border-radius: 3px;
-  padding: 3px 5px; width: 100%; min-width: 0; min-height: 26px;
+  padding: 2px 3px; width: 100%; min-width: 0; min-height: 26px;
 }
 #kotw-root .ka-row input.ka-name::placeholder { color: #6b6250; font-style: italic; }
 #kotw-root .ka-clear {
@@ -26513,6 +26558,18 @@ content: ''; float: right; width: 30px; height: 1em;
     pan.hidden=!actsOpen;
     if(!actsOpen){pan.innerHTML='';return;}
     var cu=readCust();
+    /* The row's own erase, on the rows that have something to erase.
+       A set time cannot be unset from the picker on a phone, so without this
+       the only way back was "clear all". */
+    var att=function(s){return String(s==null?'':s)
+      .replace(/&/g,'&amp;').replace(/"/g,'&quot;')
+      .replace(/</g,'&lt;').replace(/>/g,'&gt;');};
+    var xBtn=function(on,tag,what){
+      if(!on)return '';
+      var lbl=att('Erase '+what);
+      return '<button type="button" class="ka-x" data-x="'+tag+'" title="'+lbl+'" '+
+        'aria-label="'+lbl+'">✕</button>';
+    };
     var row=function(d){
       var v=a[d.k]||[];
       return '<label class="ka-row"><i style="background:'+d.c+'"'+
@@ -26521,6 +26578,7 @@ content: ''; float: right; width: 30px; height: 1em;
         '<input type="time" data-k="'+d.k+'" data-i="0" value="'+(v[0]!=null?hhmm(v[0]):'')+'">'+
         (d.span?'<input type="time" data-k="'+d.k+'" data-i="1" value="'+(v[1]!=null?hhmm(v[1]):'')+'">'
                :'<span class="ka-gap"></span>')+
+        xBtn(v[0]!=null||v[1]!=null,'k:'+d.k,d.en)+
         '</label>';
     };
     var grp=function(t){return '<div class="ka-grp">'+t+'</div>';};
@@ -26531,6 +26589,7 @@ content: ''; float: right; width: 30px; height: 1em;
           'value="'+String(x.n||'').replace(/"/g,'&quot;')+'">'+
         '<input type="time" data-c="'+i+'" data-i="0" value="'+(t[0]!=null?hhmm(t[0]):'')+'">'+
         '<input type="time" data-c="'+i+'" data-i="1" value="'+(t[1]!=null?hhmm(t[1]):'')+'">'+
+        xBtn(!!(x.n||t[0]!=null||t[1]!=null),'c:'+i,x.n||'this row')+
         '</label>';
     };
     var N=nightPlan();
@@ -26540,7 +26599,9 @@ content: ''; float: right; width: 30px; height: 1em;
         '<span>'+en+'</span>'+
         '<input type="time" data-n="'+k+'" value="'+(nv[k]!=null?hhmm(nv[k]):'')+'" '+
           'placeholder="'+ph+'" aria-label="'+en+'">'+
-        '<span class="ka-gap"></span></label>';
+        '<span class="ka-gap"></span>'+
+        xBtn(nv[k]!=null,'n:'+k,en+' — back to the schedule')+
+        '</label>';
     };
     pan.innerHTML=
       grp('The night \u00b7 leave empty to keep the schedule')+
@@ -26591,6 +26652,21 @@ content: ''; float: right; width: 30px; height: 1em;
     writeActs(a); actsRow(); tick();
   });
   fr.addEventListener('click',function(e){
+    /* One row erased. preventDefault because the row is a <label>: a tap on a
+       button inside one is not handed to the label's input by the spec, but
+       the default is stopped anyway rather than relying on it — the input
+       here opens a picker, and a picker opening on the way out of a row
+       would read as the erase having failed. */
+    var xb=e.target.closest&&e.target.closest('.ka-x');
+    if(xb){
+      e.preventDefault();
+      var tag=String(xb.dataset.x||''), kind=tag.slice(0,1), key=tag.slice(2);
+      if(kind==='k'){ var ka=readActs(); delete ka[key]; writeActs(ka); }
+      else if(kind==='c'){ var kc=readCust(); var ci=+key;
+        if(kc[ci]) kc[ci]={n:'',t:[null,null]}; writeCust(kc); }
+      else if(kind==='n'){ var kn=readNight(); delete kn[key]; writeNight(kn); }
+      actsRow(); tick(); return;
+    }
     if(e.target.classList&&e.target.classList.contains('ka-open')){
       actsOpen=!actsOpen; actsRow(); return;
     }
