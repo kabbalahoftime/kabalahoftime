@@ -820,6 +820,14 @@ async function checkInBrowser(chromium) {
       if (inlineInProse) return;
       out.push({ what: e.id || (e.className || '').toString().split(/\s+/)[0] || e.tagName,
                  w: Math.round(r.width), h: Math.round(r.height),
+                 inTag: !!e.closest('.prayer-tag'),
+                 // What it says and which card it is on, so a failure names
+                 // the control rather than leaving it to be hunted for.
+                 txt: ((e.getAttribute('aria-label') || e.textContent || '').trim()
+                        .replace(/\s+/g, ' ').slice(0, 24)),
+                 where: (() => { const c = e.closest('.sefirah-card, .keter-card');
+                   return c ? ((c.querySelector('.sefirah-name') || {}).textContent || 'Keter').trim()
+                            : 'the page'; })(),
                  narrow: !wideEnough, short: !tallEnough });
     });
     return out;
@@ -831,15 +839,25 @@ async function checkInBrowser(chromium) {
   //   • the six language buttons — full height, but six of them cannot each be
   //     44px wide inside a 233px strip;
   //   • the toggle halves — 24px tall, the size WCAG requires, with the
-  //     jump-to-date line about 30px below them.
+  //     jump-to-date line about 30px below them;
+  //   • the arrow that opens a prayer's text on a card — it sits at the end
+  //     of the name in a label column 70px wide, and every direction it could
+  //     grow into holds something real: the flame of the same Sefirah just
+  //     past the column's edge, Gevurah's song link 16px below its tag, the
+  //     pane strip 21px below Chesed's, and, where a name has wrapped, the
+  //     tag's own first line above, where a tap must go on marking the prayer
+  //     said. 26px square, twice the glyph, with nothing else tappable in it
+  //     — and the same arrow in Today's Ladder and in the heart's list, where
+  //     there is room, keeps the full 44.
   const excused = small.filter(s =>
     (/^lang-btn|^beginner-btn/.test(s.what) && !s.short) ||
-    (/^year-pill-btn|^pr-|^tm-/.test(s.what) && s.h >= 24));
+    (/^year-pill-btn|^pr-|^tm-/.test(s.what) && s.h >= 24) ||
+    (s.what === 'prayer-src' && s.inTag && s.w >= 26 && s.h >= 26));
   const offenders = small.filter(s => !excused.includes(s));
   if (offenders.length) {
     offenders.slice(0, 10).forEach(s => fail(
-      `${s.what} is ${s.w}x${s.h} and reaches under 44px ${s.narrow && s.short ? 'both ways'
-        : s.narrow ? 'across' : 'down'}`));
+      `${s.what} "${s.txt}" on ${s.where} is ${s.w}x${s.h} and reaches under 44px ${
+        s.narrow && s.short ? 'both ways' : s.narrow ? 'across' : 'down'}`));
     if (offenders.length > 10) fail(`…and ${offenders.length - 10} more`);
   } else pass(`all controls at least 44px${excused.length ? ` (${excused.length} in the language bar excused on width)` : ''}`);
 

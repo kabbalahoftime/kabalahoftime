@@ -621,7 +621,13 @@ color: var(--accent-red) !important;
 opacity: 1 !important;
 font-weight: 600;
 }
-.prayer-tag.done::after { content: ' \2665'; font-size: 0.95em; }
+/* The heart hangs on the name, not on the tag, so that the arrow which opens
+   the prayer's text can sit after it without the heart being pushed past it.
+   The span takes no taps of its own: the whole tag is the control, and a
+   wrapper put there to carry a heart should not become a second target —
+   it was one, and it cut the arrow beside it off from the space to its left. */
+.prayer-tag .pt-name { pointer-events: none; }
+.prayer-tag.done .pt-name::after { content: ' \2665'; font-size: 0.95em; }
 /* A prayer not undertaken: faint, still tappable, and still red once said.
    These come after .done because that rule forces opacity with !important;
    the hover line is last so a tag can still be brought up to read. */
@@ -637,6 +643,38 @@ font-weight: 600;
   vertical-align: middle; position: relative; z-index: 1;
 }
 .prayer-src:hover { color: var(--ink); }
+/* On a card the arrow sits at the end of the prayer's own line, in a label
+   column 70px wide with the name already filling it — and it is the one
+   place in the app where the 44px box cannot be had.
+   It was tried in every direction and each one takes something real. Upward
+   it covers the flame of the same Sefirah, which sits a line above and just
+   right of this column; downward it covers Gevurah's song link, 16px below
+   its tag, and the pane strip under Chesed, 21px below its; and where a name
+   has wrapped — "Cheshbon HaNefesh", "Birchot HaShachar" — upward is the
+   tag's own first line, where a tap has to go on marking the prayer said.
+   So it takes the space it actually has: 26px square, twice the glyph, with
+   nothing else tappable inside it. The ladder's arrow and the heart list's
+   keep their 44px, where the room is.
+   The 8px it does take are taken to the left, into the space before the
+   glyph rather than out past the column's edge where the flame sits — and
+   the padding puts the glyph back exactly where it was drawn. */
+.prayer-tag .prayer-src {
+  /* There is no global border-box in this file, so it is said here. */
+  box-sizing: border-box; width: 26px; height: 26px;
+  padding-left: 8px; margin: -6px 0 -7px -8px;
+}
+/* Keter is the one card whose prayer line runs the whole width, and the one
+   with a tall control just beneath it: the zmanim summary carries its own
+   44px in padding and reaches up into the gap. So Keter's arrow takes its
+   room sideways, where that line has plenty of it, and none at all below. */
+.keter-title-row .prayer-src {
+  width: 40px; height: 15px;
+  padding: 0 12px; margin: 0 -12px;
+}
+/* And the line itself is given air under it, because that same summary
+   reaches up far enough to lie over the bottom of the prayer's own line —
+   which it did before there was an arrow to put there. */
+.keter-title-row .prayer-tag[data-prayer="1"] { margin-bottom: 16px; }
 /* Its own hour, still unsaid — a slow pulse, not a blink */
 .prayer-tag.now-flash {
 animation: prayerPulse 2.2s ease-in-out infinite;
@@ -3680,8 +3718,11 @@ content: ''; float: right; width: 30px; height: 1em;
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Noam Elimelech</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Beis Aharon</div>
     <div class="prayer-tag" data-prayer="5" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Tehilim</div>
-    <div id="gevurah-kot-song" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:16px;font-style:italic;"></div>
-    <div id="gevurah-kot-song-8" style="display:none;font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:16px;font-style:italic;"></div>
+    <!-- The week's song, under the prayer line. Its own 16px of air put its
+         link inside the reach measured upward from it, where the arrow that
+         opens the prayer now sits; ten more px stand the two controls clear. -->
+    <div id="gevurah-kot-song" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:26px;font-style:italic;"></div>
+    <div id="gevurah-kot-song-8" style="display:none;font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:26px;font-style:italic;"></div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
@@ -15141,15 +15182,49 @@ content: ''; float: right; width: 30px; height: 1em;
   // querySelectorAll, not querySelector: the Now card mirrors whichever sefirah
   // is current, so while Binah is active there are two copies of this tag.
   // Swapping only the first left the card itself disagreeing with its own mirror.
+  // The name is written into .pt-name rather than over the whole tag: the tag
+  // also holds the arrow that opens the text, and setting textContent on it
+  // would take the arrow away with the old name twice a minute.
   function applyTachanunSwap() {
     document.querySelectorAll('.prayer-tag[data-prayer="3"]').forEach(el => {
+      const nm = el.querySelector('.pt-name') || el;
       if (_noTachanunToday) {
-        el.textContent = 'Tikkun Leah';
+        if (nm.textContent !== 'Tikkun Leah') nm.textContent = 'Tikkun Leah';
         el.title = 'No Tachanun today — Tikkun Leah alone, without Tikkun Rachel. Tap when said.';
       } else {
-        el.textContent = 'Tikkun Chatzot';
+        if (nm.textContent !== 'Tikkun Chatzot') nm.textContent = 'Tikkun Chatzot';
         el.title = 'Tap when you have prayed';
       }
+    });
+  }
+
+  // ── THE ARROW ON EACH CARD ──
+  // The ten tags are scattered one to a Sefirah down the page, and until now
+  // the text behind a prayer could only be opened from Today's Ladder or from
+  // the heart's list — the card named the prayer and gave no way to reach it.
+  // Written in after each render rather than into the ten templates: the tag
+  // at Binah is rewritten when Tachanun gives way to Tikkun Leah, and the one
+  // in the ladder is rebuilt when the hour turns, so a link baked into the
+  // HTML would be wiped by the one and missing from the other.
+  // The name is wrapped on the way, because the heart that marks a prayer
+  // said is drawn after the name and should not be pushed past the arrow.
+  function injectPrayerLinks() {
+    document.querySelectorAll('.prayer-tag[data-prayer]').forEach(el => {
+      // The ladder's own tag carries its arrow beside it, where there is room
+      // for a wider one; only the cards are short of space.
+      if (el.closest('#today-prayer')) return;
+      const n = +el.dataset.prayer;
+      if (!(n >= 1 && n <= 10) || !prayerLink(n)) return;
+      if (!el.querySelector('.pt-name')) {
+        const name = (el.textContent || '').trim();
+        el.textContent = '';
+        const s = document.createElement('span');
+        s.className = 'pt-name';
+        s.textContent = name;
+        el.appendChild(s);
+      }
+      if (!el.querySelector('.prayer-src'))
+        el.insertAdjacentHTML('beforeend', ' ' + prayerLinkHtml(n, _prayerListName(n)));
     });
   }
 
@@ -15414,6 +15489,9 @@ content: ''; float: right; width: 30px; height: 1em;
   function applyPrayerState() {
     if (!_prayerKey) return;
     applyTachanunSwap();
+    // After the swap, which is what would have taken Binah's arrow away, and
+    // before the tags are lit, so a tag and its arrow are dimmed together.
+    injectPrayerLinks();
     const mask = prayersMask();
     const active = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
     const activeIdx = active ? PRAYER_SEFIRAH.indexOf(active.name.split(' /')[0]) + 1 : 0;
@@ -15431,7 +15509,7 @@ content: ''; float: right; width: 30px; height: 1em;
             'aria-label="Go to the card of this hour’s prayer"><span class="tp-flag">Prayer</span></button>' +
             '<span class="prayer-tag" data-prayer="' + activeIdx + '" role="button" ' +
             'tabindex="0" title="Tap when you have prayed">' +
-            _prayerListName(activeIdx) + '</span>' +
+            '<span class="pt-name">' + _prayerListName(activeIdx) + '</span></span>' +
             prayerLinkHtml(activeIdx, _prayerListName(activeIdx))
             // The Sefirah is not repeated here. Meditation and Prayer are
             // both the hour's, so they named the same Sefirah twice running;
@@ -15879,6 +15957,11 @@ content: ''; float: right; width: 30px; height: 1em;
 
   // Capture-phase so a tap on a prayer never expands the card underneath.
   document.addEventListener('click', (e) => {
+    // The arrow inside a tag opens the text; it is a control of its own and
+    // one tap cannot mean both. Left alone here, the preventDefault below
+    // would have swallowed the link — the tag would have been marked said and
+    // nothing would have opened.
+    if (e.target.closest && e.target.closest('.prayer-src')) return;
     const el = e.target.closest && e.target.closest('.prayer-tag');
     if (!el || !_prayerKey) return;
     e.preventDefault();
