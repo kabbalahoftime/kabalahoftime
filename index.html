@@ -580,9 +580,9 @@ margin-top: 6px;
 /* ── THE MARK ON A FACE ──
    The counter's own glyph drawn small: a flame, the soul's own lamp, and
    נְשָׁמָה is breath before it is anything else. Gold and hollow until the face
-   has been sat with, then filled in the counter's blue.
+   has been focused on, then filled in the counter's blue.
    It sits at the head of the face's own line, before "Day …", so it stands
-   with the thing being sat with. The box is a real 44x44 — the hand's reach —
+   with the thing being focused on. The box is a real 44x44 — the hand's reach —
    while the drawing inside is 15px, and the negative margins keep the line the
    height it would be without it. */
 .med-mark {
@@ -3365,7 +3365,7 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="dc-row">
         <!-- THE TEN MEDITATIONS. The faces are not deeds — they are the day's
              coordinates — but dwelling on one is, and that is what this counts:
-             not the fact, but that the reader sat with it. Ten, because Keter's
+             not the fact, but that the reader focused on it. Ten, because Keter's
              face is the day's Hayom Yom and the nine cards carry the rest.
              The glyph is a ring cut by a horizon: heaven above, earth below,
              and the fill rises from the earth through the horizon as the ten
@@ -3450,7 +3450,7 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="dc-custom">
         <span class="dc-custom-label">Customize Paths</span>
         <button type="button" class="dc-custom-btn" onclick="openMedChooser()"
-                aria-label="Choose which of the ten faces to sit with">
+                aria-label="Choose which of the ten faces to focus on">
           <svg viewBox="0 0 22 22" aria-hidden="true"></svg>
         </button>
         <button type="button" class="dc-custom-btn dc-custom-heart" onclick="openPrayerChooser()"
@@ -3720,7 +3720,7 @@ content: ''; float: right; width: 30px; height: 1em;
 
   <!-- THE TEN MEDITATIONS — the faces gathered, as the heart gathers the ten
        prayers. Each row names the Sefirah, the face its card is holding today,
-       and whether it has been sat with. -->
+       and whether it has been focused on. -->
   <div id="meditations-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
     <div class="heb-picker-card" style="width:min(380px, 92vw); max-height:82vh; overflow-y:auto;">
       <div class="heb-picker-header">
@@ -15349,7 +15349,7 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   // ── THE TEN MEDITATIONS — one face to each Sefirah's hour ──
-  // A face is a fact and cannot be completed; sitting with it can, and that is
+  // A face is a fact and cannot be completed; focusing on it can, and that is
   // what this holds. Ten bits per Jewish date, resetting with the day as the
   // prayers and the steps do. The order is PRAYER_SEFIRAH's, Keter first, so
   // that a Sefirah's prayer and its meditation carry the same number.
@@ -15493,9 +15493,9 @@ content: ''; float: right; width: 30px; height: 1em;
     if (cnt) cnt.textContent = mine + '/' + total;
     const col = document.getElementById('med-col');
     if (col) col.title = (medSetIsWhole() ? '' : 'Your meditations: ' + medSetName() +
-        ' — ' + mine + ' of ' + total + ' · of the ten, ' + medDone() + ' sat with · ')
+        ' — ' + mine + ' of ' + total + ' · of the ten, ' + medDone() + ' focused on · ')
       + (mine === total
-        ? 'All of them sat with — the day looked at from its every side'
+        ? 'All of them focused on — the day looked at from its every side'
         : 'The faces of the day — the face of each Sefirah’s hour');
     const m = document.getElementById('meditations-modal');
     if (m && m.style.display === 'flex') renderMedsBody();
@@ -15507,7 +15507,7 @@ content: ''; float: right; width: 30px; height: 1em;
       // with — it then counts to the ten and not to the flame.
       el.classList.toggle('off-path', n >= 1 && !medStepHas(n));
     });
-    // A face sat with is the ladder's first line answered, so the line being
+    // A face focused on is the ladder's first line answered, so the line being
     // asked for moves on from here as it does from a prayer said.
     if (typeof applyLadderNext === 'function') applyLadderNext();
     if (typeof syncA11yState === 'function') syncA11yState();
@@ -15544,8 +15544,8 @@ content: ''; float: right; width: 30px; height: 1em;
     }
     html += `<div class="path-complete">` + (mine === total
       ? total + ' of ' + total + ' — ' + (whole
-          ? 'the day looked at from every side.' : 'your meditations sat with.')
-      : mine + ' of ' + total + ' sat with') + `</div>`;
+          ? 'the day looked at from every side.' : 'your meditations focused on.')
+      : mine + ' of ' + total + ' focused on') + `</div>`;
     body.innerHTML = html;
   }
   // The three doors the footer opens: each list, already turned to its own
@@ -15574,7 +15574,7 @@ content: ''; float: right; width: 30px; height: 1em;
       `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); medCloseChooser()">Done</button>` +
       `</div>` +
       `<div class="path-note">The ten stay ten. What you choose is what the day asks of you; ` +
-      `the rest keep their place on their cards and can still be sat with. The flame then ` +
+      `the rest keep their place on their cards and can still be focused on. The flame then ` +
       `fills with yours.</div>`;
     MED_PRESETS.forEach(p => {
       const on = p.steps.join(',') === sig;
@@ -16563,10 +16563,10 @@ content: ''; float: right; width: 30px; height: 1em;
         'letter, or creature, or attribute, whichever that card keeps. That one is not a thing ' +
         'to do; it is what the day <em>is</em>. Tapping it goes to the card it was read from, ' +
         'and every card carries a small ring beside its Sefirah&rsquo;s name, which ' +
-        'marks that you have sat with that face. ' +
+        'marks that you have focused on that face. ' +
         '</p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
         'the ten prayers are said, the <strong>ring</strong> at the left counts the ten ' +
-        'faces sat with, the <strong>circle</strong> beside it counts the readings, ' +
+        'faces focused on, the <strong>circle</strong> beside it counts the readings, ' +
         'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
         'few lines opened counts. </p><p>Ten prayers and thirty readings in a day is a great ' +
         'deal to begin with, and you are not asked for all of them. Under the two counts are ' +
@@ -16586,9 +16586,9 @@ content: ''; float: right; width: 30px; height: 1em;
         'creature, the Name of the seventy-two, the attribute, whichever that card holds. A ' +
         'face is not a deed and cannot be completed &mdash; it is the day&rsquo;s own ' +
         'coordinates &mdash; but dwelling on one is, and that is what the ring counts: not ' +
-        'the fact, but that you sat with it. Tapping the face goes to its card, and the ' +
+        'the fact, but that you focused on it. Tapping the face goes to its card, and the ' +
         'small ring on that card takes the meditation &mdash; hollow until the face has ' +
-        'been sat with, then filled. ' +
+        'been focused on, then filled. ' +
         'Keter keeps no card of the nine &mdash; it is the dial at the top &mdash; so in ' +
         'its hour the line names the day&rsquo;s Hayom Yom, out of Strong Day, and links ' +
         'out to it; its own ring is on that section&rsquo;s label. </p><p>Beneath, the heart counts the ten prayers &mdash; ' +
@@ -17357,7 +17357,7 @@ content: ''; float: right; width: 30px; height: 1em;
   // card templates — the cards are rebuilt on every day change and a mark
   // written into the template would have to be rebuilt with them.
   // The glyph is the counter's own, small: a ring cut by a horizon, hollow
-  // until the face has been sat with and then filled. A mark and the thing it
+  // until the face has been focused on and then filled. A mark and the thing it
   // feeds should be the same shape, which is how ✡ already works for the stars.
   // Where inside the host the mark actually goes. Hod writes its face as a
   // stack of lines and Malchut's day sits in one too, so putting the mark at
@@ -17387,12 +17387,12 @@ content: ''; float: right; width: 30px; height: 1em;
     const mark = (n, sef) =>
       `<span class="med-mark" data-med="${n}" role="button" tabindex="0" ` +
       `onclick="toggleMed(${n}, event)" ` +
-      `title="${sef} — tap when you have sat with this face" ` +
+      `title="${sef} — tap when you have focused on this face" ` +
       `aria-label="Mark the ${sef} meditation">` +
       `<svg viewBox="0 0 22 22" aria-hidden="true">${medGlyph(false)}</svg></span>`;
     // The mark goes into the face itself, at the head of the line that opens
     // "Day …", rather than into the label column beside the prayer tag. That
-    // is where the thing being sat with actually is; beside the prayer it
+    // is where the thing being focused on actually is; beside the prayer it
     // looked like a second prayer mark.
     // Keter's mark is not injected here: its face is the dial, and the dial
     // writes the flame into its own caption, which it rebuilds every tick.
@@ -26835,7 +26835,7 @@ content: ''; float: right; width: 30px; height: 1em;
     var nowBadge=isNow?'<span class="kotw-now-badge">Now</span>':'';
     /* Keter's face is this: the week the year is standing in, and the word it
        carries. So the flame is here, beside it — and only on the week that is
-       now, because a week tapped to be read is not the one being sat with.
+       now, because a week tapped to be read is not the one being focused on.
        It is written into this HTML rather than injected after, since the
        caption is rebuilt on every tick and anything put in from outside would
        be wiped within the half-minute. */
@@ -26844,7 +26844,7 @@ content: ''; float: right; width: 30px; height: 1em;
         ((typeof medHas==='function'&&medHas(1))?' done':'')+
         '" data-med="1" role="button" tabindex="0"'+
         ' onclick="event.stopPropagation(); toggleMed(1, event)"'+
-        ' title="Keter \u2014 tap when you have sat with this week"'+
+        ' title="Keter \u2014 tap when you have focused on this week"'+
         ' aria-label="Mark the Keter meditation">'+
         '<svg viewBox="0 0 22 22" aria-hidden="true">'+medGlyph(false)+'</svg></span>'
       : '';
