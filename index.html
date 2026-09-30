@@ -628,6 +628,15 @@ font-weight: 600;
 .prayer-tag.off-path { opacity: 0.45 !important; }
 .prayer-tag.off-path.done { opacity: 0.7 !important; }
 .prayer-tag.off-path:hover { opacity: 1 !important; }
+/* The arrow that opens a prayer's text. Small, gold, and carrying the 44px
+   the hand needs in padding given back in margin, so no line grows. */
+.prayer-src {
+  color: var(--gold); text-decoration: none; font-size: 0.95em;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; padding: 0; margin: -15px -9px;
+  vertical-align: middle; position: relative; z-index: 1;
+}
+.prayer-src:hover { color: var(--ink); }
 /* Its own hour, still unsaid — a slow pulse, not a blink */
 .prayer-tag.now-flash {
 animation: prayerPulse 2.2s ease-in-out infinite;
@@ -15377,7 +15386,8 @@ content: ''; float: right; width: 30px; height: 1em;
             'aria-label="Go to the card of this hour’s prayer"><span class="tp-flag">Prayer</span></button>' +
             '<span class="prayer-tag" data-prayer="' + activeIdx + '" role="button" ' +
             'tabindex="0" title="Tap when you have prayed">' +
-            _prayerListName(activeIdx) + '</span>'
+            _prayerListName(activeIdx) + '</span>' +
+            prayerLinkHtml(activeIdx, _prayerListName(activeIdx))
             // The Sefirah is not repeated here. Meditation and Prayer are
             // both the hour's, so they named the same Sefirah twice running;
             // it is said once, on the line above, which is also the line that
@@ -15408,6 +15418,43 @@ content: ''; float: right; width: 30px; height: 1em;
   }
   const PRAYER_SEFIRAH = ['Keter','Chochmah','Binah','Chesed','Gevurah',
                           'Tiferet','Netzach','Hod','Yesod','Malchut'];
+
+  // ── WHERE EACH PRAYER IS SAID FROM ──
+  // One address per prayer, so a reader who does not know a text by heart can
+  // open it. Chabad's Nusach Ari is the intended default throughout.
+  //
+  // Only Tehilim is filled, and with the address this file already uses and
+  // has proved. This container cannot reach chabad.org or sefaria.org, so the
+  // nine below would have been written from memory and shipped unverified —
+  // nine links that might 404 inside a siddur is worse than nine honestly
+  // absent. A prayer with no address shows no link at all.
+  //
+  // To fill one: paste its address beside the number. The arrow then appears
+  // beside that prayer on its card, in Today's Ladder, and in the heart's list.
+  const PRAYER_LINKS = {
+    1:  null,   // Hitbodedut — Breslov's own practice; Chabad may hold nothing for it
+    2:  null,   // Cheshbon HaNefesh
+    3:  null,   // Tikkun Chatzot, and Tikkun Leah on days Tachanun is not said
+    4:  null,   // Birchot HaShachar — Siddur Tehillat Hashem
+    5:  'https://www.chabad.org/dailystudy/tehillim_cdo/aid/1455591/jewish/Psalms.htm',
+    6:  null,   // Shacharit
+    7:  null,   // Tikkun HaKlali — Breslov; Sefaria holds it, Chabad may not
+    8:  null,   // Mincha
+    9:  null,   // Maariv
+    10: null,   // Kri'at Shema al haMitah
+  };
+  function prayerLink(n) { return PRAYER_LINKS[n] || ''; }
+  // The arrow that opens a prayer's text, drawn alike wherever it appears. It
+  // is a control of its own: the tag beside it marks the prayer as said, and
+  // one tap cannot mean both.
+  function prayerLinkHtml(n, name) {
+    const u = prayerLink(n);
+    return u
+      ? '<a class="prayer-src" href="' + u + '" target="_blank" rel="noopener" ' +
+        'aria-label="Open the text of ' + (name || 'this prayer') + '" ' +
+        'title="Open the text">&#8599;</a>'
+      : '';
+  }
 
   // ── WHICH OF THE TEN — the same undertaking the thirty readings carry ──
   // Ten prayers a day is the whole heart, and someone beginning does not have
@@ -15523,7 +15570,7 @@ content: ''; float: right; width: 30px; height: 1em;
         `role="button" tabindex="0" aria-pressed="${done}" ` +
         `onclick="togglePrayerFromList(${n})">` +
         `<span class="path-check">${done ? '☑' : '☐'}</span>` +
-        `<span class="path-name">${_prayerListName(n)}</span>` +
+        `<span class="path-name">${_prayerListName(n)}${prayerLinkHtml(n, _prayerListName(n))}</span>` +
         `<span class="path-sef">${sef}</span>` +
         // Now, not next: the ten have no order to be next in. Each has an
         // hour of its own and any of them can be said whenever it was said.
@@ -17048,6 +17095,13 @@ content: ''; float: right; width: 30px; height: 1em;
     }
     return el;
   }
+
+  // The arrow is not put beside the scattered prayer tags. The label column it
+  // would sit in is a narrow stack — name, Hebrew, hours, the rabbi, the tag —
+  // and on Gevurah the day's psalm link sits directly under it: a 44px box
+  // there reaches over that link and takes the taps meant for it, which the
+  // checks caught. The tag on a card is for marking; the text is opened from
+  // Today's Ladder or from the heart's list, where there is room for both.
 
   function injectMedMarks() {
     const mark = (n, sef) =>
