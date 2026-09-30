@@ -590,6 +590,10 @@ margin-top: 6px;
 .med-mark:hover { color: var(--accent-blue); }
 .med-mark.done { color: var(--accent-blue); }
 .med-mark.done .med-lobes { fill: var(--accent-blue); fill-opacity: 0.85; }
+/* A face not undertaken: faint, still on its card, still markable. */
+.med-mark.off-path { opacity: 0.4; }
+.med-mark.off-path.done { opacity: 0.68; }
+.med-mark.off-path:hover { opacity: 1; }
 .med-mark:focus-visible { outline: 2px solid var(--gold); outline-offset: -12px; }
 
 /* ── THE TEN PRAYERS — a daily heart, one prayer per Sefirah ── */
@@ -3197,6 +3201,29 @@ content: ''; float: right; width: 30px; height: 1em;
            name them in full and hold the picking one by one that a pill
            cannot. -->
       <div class="dc-paths">
+        <!-- The meditations, first, as they are first in the three lines above.
+             Three is the Mochin — Keter, Chochmah, Binah — which is where
+             hitbonenut is done; seven is the middot beneath them; ten is the
+             day looked at from every side. The glyph is the counter's own
+             flame, drawn rather than set, since ♥ and ☾ beside it are plain
+             characters and an emoji among them would be the only coloured
+             thing in the row. -->
+        <span class="dc-path-grp">
+          <span class="dc-path-glyph med-glyph" aria-hidden="true">
+            <svg viewBox="0 0 22 22" width="12" height="12"></svg>
+          </span>
+          <span class="year-toggle-pill" id="med-pill">
+            <button id="med-three-btn" class="year-pill-btn" onclick="setMedPreset('three')"
+                    title="Three — the Mochin: Keter, Chochmah, Binah"
+                    aria-label="Three meditations a day, the Mochin">3</button>
+            <button id="med-seven-btn" class="year-pill-btn" onclick="setMedPreset('seven')"
+                    title="Seven — the middot, Chesed down to Malchut"
+                    aria-label="Seven meditations a day, the middot">7</button>
+            <button id="med-ten-btn" class="year-pill-btn year-pill-active" onclick="setMedPreset('ten')"
+                    title="Ten — the day looked at from every side"
+                    aria-label="Ten meditations a day">10</button>
+          </span>
+        </span>
         <span class="dc-path-grp">
           <span class="dc-path-glyph" style="color:var(--accent-red)" aria-hidden="true">&#9829;</span>
           <span class="year-toggle-pill" id="prayer-pill">
@@ -15146,6 +15173,72 @@ content: ''; float: right; width: 30px; height: 1em;
     try { return Math.max(0, parseInt(localStorage.getItem(_medKey), 10) || 0) & 1023; }
     catch (e) { return 0; }
   }
+
+  // ── WHICH OF THE TEN ──
+  // The same undertaking the prayers and the thirty carry. Ten faces a day is
+  // the whole of it; the presets are the structure's own divisions rather than
+  // round numbers — the Mochin, where hitbonenut is done, then the middot
+  // beneath them, then all ten.
+  const MED_ALL = [1,2,3,4,5,6,7,8,9,10];
+  const MED_PRESETS = [
+    { key: 'three', name: 'Three', sub: 'the Mochin — Keter, Chochmah, Binah', steps: [1, 2, 3] },
+    { key: 'seven', name: 'Seven', sub: 'the middot — Chesed down to Malchut', steps: [4,5,6,7,8,9,10] },
+    { key: 'ten',   name: 'Ten',   sub: 'the day looked at from every side', steps: MED_ALL.slice() },
+  ];
+  let _medStepsCache = null;
+  function medSteps() {
+    if (_medStepsCache) return _medStepsCache;
+    let out = null;
+    try {
+      const raw = localStorage.getItem('kotMedSteps');
+      if (raw) {
+        const arr = raw.split(',').map(Number)
+          .filter(n => Number.isInteger(n) && n >= 1 && n <= 10);
+        if (arr.length) out = Array.from(new Set(arr)).sort((a, b) => a - b);
+      }
+    } catch (e) {}
+    _medStepsCache = out || MED_ALL.slice();
+    return _medStepsCache;
+  }
+  function medSetIsWhole() { return medSteps().length === 10; }
+  function medStepHas(n) { return medSteps().indexOf(n) >= 0; }
+  function medSetName() {
+    const s = medSteps().join(',');
+    const p = MED_PRESETS.find(q => q.steps.join(',') === s);
+    return p ? p.name : 'Your own';
+  }
+  function medMineDone(mask) {
+    return medSteps().filter(n => mask & (1 << (n - 1))).length;
+  }
+  function setMedSteps(arr) {
+    const clean = Array.from(new Set((arr || []).filter(
+      n => Number.isInteger(n) && n >= 1 && n <= 10))).sort((a, b) => a - b);
+    const use = clean.length ? clean : MED_ALL.slice();
+    _medStepsCache = use;
+    try { localStorage.setItem('kotMedSteps', use.join(',')); } catch (e) {}
+    syncMedPills();
+    if (typeof applyMedState === 'function') applyMedState();
+  }
+  function setMedPreset(key) {
+    const p = MED_PRESETS.find(q => q.key === key);
+    if (!p) return;
+    setMedSteps(p.steps.slice());
+    const m = document.getElementById('meditations-modal');
+    if (m && m.style.display === 'flex') renderMedsBody();
+  }
+  function syncMedPills() {
+    const sig = medSteps().join(',');
+    MED_PRESETS.forEach(p => {
+      const el = document.getElementById('med-' + p.key + '-btn');
+      if (el) el.classList.toggle('year-pill-active', p.steps.join(',') === sig);
+    });
+    if (typeof syncA11yState === 'function') syncA11yState();
+  }
+  (function () {
+    const go = () => { try { syncMedPills(); } catch (e) {} };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
+    else go();
+  })();
   function medDone() { return _popcount(medMask()); }
   function medHas(n) { return !!(medMask() & (1 << (n - 1))); }
   function toggleMed(n, e) {
@@ -15156,8 +15249,12 @@ content: ''; float: right; width: 30px; height: 1em;
   }
   function applyMedState() {
     if (!_medKey) return;
-    const done = medDone();
-    const svg  = document.getElementById('med-ring-svg');
+    const mask  = medMask();
+    const mine  = medMineDone(mask), total = medSteps().length;
+    const svg   = document.getElementById('med-ring-svg');
+    // The flame in the pill row, drawn from the same curves as the rest.
+    const pg = document.querySelector('.med-glyph svg');
+    if (pg && !pg.firstChild) pg.innerHTML = medGlyph(false);
     // Drawn once, the first time this runs: the shell is empty in the markup
     // so that the curves live in one place rather than two.
     if (svg && !svg.firstChild) svg.innerHTML = medGlyph(true);
@@ -15167,24 +15264,29 @@ content: ''; float: right; width: 30px; height: 1em;
     if (rect) {
       // The disc fills from the foot of the ring upward, so the earth rises
       // through the horizon rather than the sky filling downward.
-      const top = 2, bot = 20, f = done / 10;
+      const top = 2, bot = 20, f = total ? mine / total : 0;
       rect.setAttribute('y', String(bot - (bot - top) * f));
       rect.setAttribute('height', String((bot - top) * f + 1));
-      if (fill) fill.setAttribute('fill-opacity', done ? '0.8' : '0');
-      if (svg) svg.style.filter = (done === 10)
+      if (fill) fill.setAttribute('fill-opacity', mine ? '0.8' : '0');
+      if (svg) svg.style.filter = (mine === total && total)
         ? 'drop-shadow(0 0 3px rgba(122,150,205,0.9))' : '';
     }
-    if (cnt) cnt.textContent = done + '/10';
+    if (cnt) cnt.textContent = mine + '/' + total;
     const col = document.getElementById('med-col');
-    if (col) col.title = done === 10
-      ? 'All ten faces sat with — the day looked at from every side'
-      : 'The day’s ten meditations — the face of each Sefirah’s hour';
+    if (col) col.title = (medSetIsWhole() ? '' : 'Your meditations: ' + medSetName() +
+        ' — ' + mine + ' of ' + total + ' · of the ten, ' + medDone() + ' sat with · ')
+      + (mine === total
+        ? 'All of them sat with — the day looked at from its every side'
+        : 'The faces of the day — the face of each Sefirah’s hour');
     const m = document.getElementById('meditations-modal');
     if (m && m.style.display === 'flex') renderMedsBody();
     // The marks scattered down the page, which is where they are taken.
     document.querySelectorAll('.med-mark').forEach((el) => {
       const n = +el.dataset.med;
-      el.classList.toggle('done', n >= 1 && !!(medMask() & (1 << (n - 1))));
+      el.classList.toggle('done', n >= 1 && !!(mask & (1 << (n - 1))));
+      // A face not undertaken keeps its place, faint, and can still be sat
+      // with — it then counts to the ten and not to the flame.
+      el.classList.toggle('off-path', n >= 1 && !medStepHas(n));
     });
     if (typeof syncA11yState === 'function') syncA11yState();
   }
@@ -15194,13 +15296,21 @@ content: ''; float: right; width: 30px; height: 1em;
     if (!body) return;
     const mask = medMask();
     const hour = _faceHourName();
-    let html = '';
+    const whole = medSetIsWhole();
+    const mine = medMineDone(mask), total = medSteps().length;
+    let html = `<div class="path-head">` +
+      `<span class="path-head-name">` +
+        (whole ? `<b>All ten faces</b> — the day from its every side.`
+               : `Your meditations: <b>${medSetName()}</b> — ${mine} of ${total}. ` +
+                 `<span style="color:var(--ink-dim)">Of the ten: ${medDone()}.</span>`) +
+      `</span></div>`;
     for (let n = 1; n <= 10; n++) {
       const sef = medSefirah(n);
       const face = _faceOf(_faceCardFor(sef), sef) || '—';
       const done = !!(mask & (1 << (n - 1)));
-      const now = (sef === hour) && currentOffset === 0;
-      html += `<div class="path-row${done ? ' done' : ''}${now ? ' next due' : ''}" ` +
+      const off = !medStepHas(n);
+      const now = (sef === hour) && currentOffset === 0 && !off;
+      html += `<div class="path-row${done ? ' done' : ''}${now ? ' next due' : ''}${off ? ' off' : ''}" ` +
         `role="button" tabindex="0" aria-pressed="${done}" ` +
         `onclick="toggleMed(${n}, event)">` +
         `<span class="path-check">${done ? '☑' : '☐'}</span>` +
@@ -15209,10 +15319,10 @@ content: ''; float: right; width: 30px; height: 1em;
         (now ? `<span class="path-next-tag">now</span>` : '') +
         `</div>`;
     }
-    const d = medDone();
-    html += `<div class="path-complete">` + (d === 10
-      ? 'Ten of ten — the day looked at from every side.'
-      : d + ' of 10 sat with') + `</div>`;
+    html += `<div class="path-complete">` + (mine === total
+      ? total + ' of ' + total + ' — ' + (whole
+          ? 'the day looked at from every side.' : 'your meditations sat with.')
+      : mine + ' of ' + total + ' sat with') + `</div>`;
     body.innerHTML = html;
   }
   function openMeditations() {
@@ -16122,13 +16232,14 @@ content: ''; float: right; width: 30px; height: 1em;
         'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
         'few lines opened counts. </p><p>Ten prayers and thirty readings in a day is a great ' +
         'deal to begin with, and you are not asked for all of them. Under the two counts are ' +
-        'two small rows of numbers &mdash; <strong>&#9829; 3 &middot; 5 &middot; 7 &middot; 10</strong> ' +
-        'for the prayers and <strong>&#9790; 3 &middot; 7 &middot; 15 &middot; 30</strong> for ' +
-        'the readings. That is how many of each the day asks for. </p><p>Tap ' +
-        '<strong>3</strong> under each and the day asks for three prayers &mdash; Shacharit, ' +
-        'Mincha, Maariv &mdash; and three readings: Chumash, Tanya, Rambam. The heart and the ' +
-        'moon then fill with your three rather than with ten and thirty, and when you have kept ' +
-        'them a week the app offers you one more. </p><p>Tapping the heart, or the moon, opens ' +
+        'three small rows of numbers &mdash; a <strong>flame</strong> for the meditations, ' +
+        '<strong>&#9829;</strong> for the prayers and <strong>&#9790;</strong> for the ' +
+        'readings. That is how many of each the day asks for. </p><p>Tap ' +
+        '<strong>3</strong> under each and the day asks for three meditations &mdash; the ' +
+        'Mochin &mdash; three prayers: Shacharit, Mincha, Maariv, and three readings: Chumash, ' +
+        'Tanya, Rambam. The flame, the heart and the moon then fill with your three rather ' +
+        'than with ten, ten and thirty, and when you have kept the readings a week the app ' +
+        'offers you one more. </p><p>Tapping the flame, the heart, or the moon, opens ' +
         'the list it counts; <strong>Change</strong> there offers the same choice in full, where ' +
         'they can also be picked one by one.',
       main:
