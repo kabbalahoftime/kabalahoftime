@@ -15432,11 +15432,13 @@ content: ''; float: right; width: 30px; height: 1em;
   // To fill one: paste its address beside the number. The arrow then appears
   // beside that prayer in Today's Ladder and in the heart's list.
   const PRAYER_LINKS = {
-    // Hitbodedut and Cheshbon HaNefesh are practices before they are texts,
-    // and no weekday siddur holds either; Tikkun HaKlali is Breslov's and is
-    // not in a Chabad siddur at all. Those three wait for an address of their
-    // own rather than being sent somewhere approximate.
-    1:  null,   // Hitbodedut
+    // Hitbodedut is a practice before it is a text, so what opens is Breslov's
+    // own account of how it is done rather than words to be read — the one
+    // place here where the link teaches a thing instead of holding it. It
+    // breaks the Nusach Ari default on purpose: hitbodedut is Rebbe Nachman's,
+    // and there is no Chabad text for it to break it toward.
+    1:  'https://breslov.org/hitbodedut-jewish-meditation-how-to/',
+    // Cheshbon HaNefesh is likewise a practice, and still wants an address.
     2:  null,   // Cheshbon HaNefesh
     // Nusach Ha-Ari ChaBaD, from the Open Siddur Project. A PDF rather than a
     // page, and it carries Tikkun Rachel and Tikkun Leah both — which is what
@@ -15450,7 +15452,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // the one address here this file already used and had proved.
     5:  'https://www.chabad.org/dailystudy/tehillim_cdo/aid/1455591/jewish/Psalms.htm',
     6:  'https://www.sefaria.org/Weekday_Siddur_Chabad%2C_Shacharit%2C_Upon_Arising.1?lang=bi',
-    7:  null,   // Tikkun HaKlali — Breslov's ten psalms
+    7:  null,   // Tikkun HaKlali — Breslov's ten psalms; not in a Chabad siddur
     8:  'https://www.sefaria.org/Weekday_Siddur_Chabad%2C_Mincha%2C_Korbanot.1?lang=bi',
     9:  'https://www.sefaria.org/Weekday_Siddur_Chabad%2C_Maariv.1?lang=bi',
     10: 'https://www.sefaria.org/Weekday_Siddur_Chabad%2C_Bedtime_Shema?lang=bi',
