@@ -2853,6 +2853,46 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    to somebody else's site. */
 .today-face a.tf-open { color:var(--gold); text-decoration:none; }
 
+/* ── THE ONE TO DO NOW ──
+   The three lines named three things and asked for none of them. A reader
+   who knows the app read them as a list of what today holds; a reader who
+   does not read three labels with no verb between them.
+   So one of the three is the one being asked for and says so in words —
+   "Say Shacharit", "Read מעלה ז׳", "Sit with" — while the other two stand
+   back. No fourth line: a box above these saying what they already say is
+   the duplication this block has twice been cleared of.
+   Which one is the first unmarked reading down, which is both the order they
+   are drawn in and the order of the day's work. */
+.t-do { color:var(--gold); margin-right:5px; }
+/* The two that are not being asked for give way; the lit one keeps exactly
+   the weight it had, so nothing grows or moves. Half strength is still
+   plainly readable, which matters — the other two are the rest of the hour
+   and a reader looks at them on purpose. */
+#today-block .is-quiet { opacity:0.5; }
+#today-block .is-quiet:hover, #today-block .is-quiet:focus-within { opacity:1; }
+/* The rule down the left is the only mark the lit line carries. All three
+   rows carry it always and two of them carry it in nothing, so no line moves
+   when it lights — the three have been measured against each other twice and
+   a border that appeared would undo that. The width it takes is given back in
+   margin, out into the block's padding, so the text does not move either.
+   A border and not a pseudo-element: the step line hides its own overflow, to
+   keep a long name on one line, and that clips anything drawn inside it. */
+#today-block .today-face,
+#today-block .today-prayer,
+#today-block .today-next {
+  border-left:2px solid transparent;
+  padding-left:8px; margin-left:-10px;
+}
+/* The step line is border-box and sized at 100%, so the 10px it was pulled
+   left by has to be given back in width or it ends 10px short of the two
+   above it — which it would spend, since it hides its overflow and fits its
+   name to whatever width it has. */
+#today-block .today-next { width:calc(100% + 10px); }
+#today-block .is-next { border-left-color:var(--gold); }
+@media (prefers-reduced-motion: no-preference) {
+  #today-block .is-quiet { transition:opacity 0.3s; }
+}
+
 /* The thirty-first, under the clock: shown only once the day's thirty steps
    are done. Same box as Perek Shirah above it, centred, since it is a seal
    rather than a reading. */
@@ -15387,6 +15427,9 @@ content: ''; float: right; width: 30px; height: 1em;
       // with — it then counts to the ten and not to the flame.
       el.classList.toggle('off-path', n >= 1 && !medStepHas(n));
     });
+    // A face sat with is the ladder's first line answered, so the line being
+    // asked for moves on from here as it does from a prayer said.
+    if (typeof applyLadderNext === 'function') applyLadderNext();
     if (typeof syncA11yState === 'function') syncA11yState();
   }
 
@@ -15537,6 +15580,9 @@ content: ''; float: right; width: 30px; height: 1em;
     // the reader just tapped.
     const pm = document.getElementById('prayers-modal');
     if (pm && pm.style.display === 'flex') renderPrayersBody();
+    // A prayer said is one line of the ladder answered, so which line is
+    // being asked for is settled again here.
+    if (typeof applyLadderNext === 'function') applyLadderNext();
     syncA11yState();
   }
   const PRAYER_SEFIRAH = ['Keter','Chochmah','Binah','Chesed','Gevurah',
@@ -18077,6 +18123,81 @@ content: ''; float: right; width: 30px; height: 1em;
     }
     el.style.display = face ? '' : 'none';
   }
+
+  // ── THE ONE TO DO NOW ──
+  // Which of the ladder's three lines is being asked for. The first unmarked
+  // reading down — Meditation, Prayer, Study — which is the order they are
+  // drawn in and the order of the day's work: one dwells on the thing, prays
+  // the hour's prayer, then learns the step.
+  // A line the reader's own set does not ask for is skipped. For the prayer
+  // that is already settled by the line being drawn at all; for the face it
+  // is not, because the face is shown whatever the chosen meditations are.
+  // A function and not a const object: this is read from applyPrayerState and
+  // applyMedState, both of which are defined thousands of lines above it, and
+  // a const read before its own line has run throws rather than reading
+  // undefined. That fault cost a whole render once already in this file.
+  function _ladderVerbFor(k) {
+    return k === 'med' ? 'Sit with' : k === 'pray' ? 'Say' : k === 'study' ? 'Read' : '';
+  }
+  function _ladderNext() {
+    const shown = (id) => {
+      const e = document.getElementById(id);
+      return !!e && e.style.display !== 'none';
+    };
+    const fname = _faceHourName();
+    const mn = fname ? medIndexOf(fname) : 0;
+    if (shown('today-face') && mn >= 1 && medStepHas(mn) && !medHas(mn)) return 'med';
+    const a = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
+    const pn = a ? PRAYER_SEFIRAH.indexOf(a.name.split(' /')[0]) + 1 : 0;
+    if (shown('today-prayer') && pn >= 1 && !(prayersMask() & (1 << (pn - 1)))) return 'pray';
+    // There is always a next step until all thirty are marked, so this is the
+    // one that keeps the block speaking for the rest of the day. When it too
+    // is done, the study line already reads "Done · the month complete", and
+    // nothing is lit — there is nothing left to ask for.
+    if (!_pathNow().done) return 'study';
+    return null;
+  }
+
+  // The verb is put in rather than written into the three builders: each of
+  // them rewrites its line only when what it says changes, and each on its
+  // own schedule, so a word baked into one of them would be right until the
+  // other two moved.
+  function _ladderVerb(el, word) {
+    const cur = el.querySelector('.t-do');
+    if (!word) { if (cur) cur.remove(); return; }
+    if (cur) { if (cur.textContent !== word) cur.textContent = word; return; }
+    const chip = el.querySelector('.tp-go, .t-flag');
+    if (!chip) return;
+    const s = document.createElement('span');
+    s.className = 't-do';
+    s.textContent = word;
+    chip.insertAdjacentElement('afterend', s);
+  }
+
+  function applyLadderNext() {
+    const which = _ladderNext();
+    [['med', 'today-face', '.tp-go'],
+     ['pray', 'today-prayer', '.tp-go'],
+     ['study', 'today-next', null]].forEach(([k, id, ctrlSel]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const on = (k === which);
+      el.classList.toggle('is-next', on);
+      el.classList.toggle('is-quiet', !!which && !on);
+      _ladderVerb(el, on ? _ladderVerbFor(k) : '');
+      // Said to a reader who cannot see which line is lit. On the study line
+      // the row is the control; on the other two the chip is.
+      const ctrl = ctrlSel ? el.querySelector(ctrlSel) : el;
+      if (ctrl) {
+        if (on) ctrl.setAttribute('aria-current', 'step');
+        else ctrl.removeAttribute('aria-current');
+      }
+    });
+    // The step line is held to one line and sized to fit it; the verb is new
+    // width on that line, so it is measured again after the word goes in.
+    const nx = document.getElementById('today-next');
+    if (nx && typeof _todayFit === 'function') _todayFit(nx);
+  }
   // The Prayer chip goes where its prayer lives: the card of the Sefirah whose
   // hour it is. The tag beside it still marks in place — a chip that named a
   // thing and did nothing was the odd one of the three.
@@ -18119,6 +18240,9 @@ content: ''; float: right; width: 30px; height: 1em;
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
     applyTodayFace();
+    // Last, because it reads the three lines as they now stand — including
+    // whether the face line is drawn at all.
+    applyLadderNext();
   }
   // The line does not name the week it runs in. The date bar directly above it
   // reads "Week 48 · Day 334" — the week of the year — and the dial's week 45
