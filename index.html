@@ -2864,26 +2864,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    to somebody else's site. */
 .today-face a.tf-open { color:var(--gold); text-decoration:none; }
 
-/* ── THE ONE TO DO NOW ──
-   The three lines named three things and asked for none of them. A reader
-   who knows the app read them as a list of what today holds; a reader who
-   does not read three labels with no verb between them.
-   So one of the three is the one being asked for and says so in words —
-   "Say Shacharit", "Read מעלה ז׳", "Focus on" — while the other two stand
-   back. No fourth line: a box above these saying what they already say is
-   the duplication this block has twice been cleared of.
-   Which one is the first unmarked reading down, which is both the order they
-   are drawn in and the order of the day's work. */
+/* ── THE NEXT STEP ──
+   The lines named things and asked for none of them, so the one that is a
+   step says so in words: "Read מעלה ז׳ · Sichos HaRan".
+   Only the step. The thirty are a sequence — exactly one of them is being
+   asked for at any moment, and doing it moves the asking on to the next. The
+   face of the hour and the hour's prayer are not that: a face is what the day
+   is rather than a thing to be done in turn, and the ten prayers each have
+   their own hour and may be said in any order. Lighting those two by turns
+   made a queue out of what is not one, and left them at half strength for the
+   rest of the hour besides, which is the opposite of what they are worth.
+   So they are drawn as they always were, full weight, and the step alone
+   carries the verb. Before any path is chosen the first step is choosing one,
+   and that line carries it instead. */
 .t-do { color:var(--gold); margin-right:5px; }
-/* The two that are not being asked for give way; the lit one keeps exactly
-   the weight it had, so nothing grows or moves. Half strength is still
-   plainly readable, which matters — the other two are the rest of the hour
-   and a reader looks at them on purpose. */
-#today-block .is-quiet { opacity:0.5; }
-#today-block .is-quiet:hover, #today-block .is-quiet:focus-within { opacity:1; }
-/* The rule down the left is the only mark the lit line carries. All three
-   rows carry it always and two of them carry it in nothing, so no line moves
-   when it lights — the three have been measured against each other twice and
+/* The rule down the left is the only mark the lit line carries. Every row
+   carries it always and all but one carry it in nothing, so no line moves
+   when it lights — the lines have been measured against each other twice and
    a border that appeared would undo that. The width it takes is given back in
    margin, out into the block's padding, so the text does not move either.
    A border and not a pseudo-element: the step line hides its own overflow, to
@@ -2908,9 +2905,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    name to whatever width it has. */
 #today-block .today-next { width:calc(100% + 10px); }
 #today-block .is-next { border-left-color:var(--gold); }
-@media (prefers-reduced-motion: no-preference) {
-  #today-block .is-quiet { transition:opacity 0.3s; }
-}
 
 /* ── THE STEP THAT TRAVELS ──
    The ladder's lit line, kept at the foot of the screen once the ladder
@@ -15507,9 +15501,6 @@ content: ''; float: right; width: 30px; height: 1em;
       // with — it then counts to the ten and not to the flame.
       el.classList.toggle('off-path', n >= 1 && !medStepHas(n));
     });
-    // A face focused on is the ladder's first line answered, so the line being
-    // asked for moves on from here as it does from a prayer said.
-    if (typeof applyLadderNext === 'function') applyLadderNext();
     if (typeof syncA11yState === 'function') syncA11yState();
   }
 
@@ -15615,6 +15606,8 @@ content: ''; float: right; width: 30px; height: 1em;
     // After the swap, which is what would have taken Binah's arrow away, and
     // before the tags are lit, so a tag and its arrow are dimmed together.
     injectPrayerLinks();
+    // What the ladder is asking for is not touched from here any more: it is
+    // the next of the thirty, and a prayer said does not move it.
     const mask = prayersMask();
     const active = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
     const activeIdx = active ? PRAYER_SEFIRAH.indexOf(active.name.split(' /')[0]) + 1 : 0;
@@ -15660,9 +15653,6 @@ content: ''; float: right; width: 30px; height: 1em;
     // the reader just tapped.
     const pm = document.getElementById('prayers-modal');
     if (pm && pm.style.display === 'flex') renderPrayersBody();
-    // A prayer said is one line of the ladder answered, so which line is
-    // being asked for is settled again here.
-    if (typeof applyLadderNext === 'function') applyLadderNext();
     syncA11yState();
   }
   const PRAYER_SEFIRAH = ['Keter','Chochmah','Binah','Chesed','Gevurah',
@@ -18266,48 +18256,35 @@ content: ''; float: right; width: 30px; height: 1em;
     el.style.display = face ? '' : 'none';
   }
 
-  // ── THE ONE TO DO NOW ──
-  // Which of the ladder's three lines is being asked for. The first unmarked
-  // reading down — Meditation, Prayer, Study — which is the order they are
-  // drawn in and the order of the day's work: one dwells on the thing, prays
-  // the hour's prayer, then learns the step.
-  // A line the reader's own set does not ask for is skipped. For the prayer
-  // that is already settled by the line being drawn at all; for the face it
-  // is not, because the face is shown whatever the chosen meditations are.
+  // ── THE NEXT STEP ──
+  // Which line of the ladder is being asked for, and it is only ever the
+  // step. The thirty are a sequence: one of them is next, doing it makes
+  // another next, and that is what a next step means.
+  // The face of the hour and the hour's prayer were lit by turns here and are
+  // not now. A face is what the day is rather than a thing done in its turn,
+  // and the ten prayers each keep their own hour and may be said in any
+  // order — neither is a queue, and making one of them stand in a queue put
+  // both at half strength for the rest of the hour besides.
   // A function and not a const object: this is read from applyPrayerState and
   // applyMedState, both of which are defined thousands of lines above it, and
   // a const read before its own line has run throws rather than reading
   // undefined. That fault cost a whole render once already in this file.
   function _ladderVerbFor(k) {
-    // "Focus on" rather than "Sit with", and rather than "Visualize": the
-    // line has to carry every face there is, and some of them are not things
-    // to picture — a day of the Omer, a week and its quote, "day 5 of 5".
-    // Focus holds all of them, and it is nearer התבוננות, which is the word
-    // on the counter these marks feed: a looking-into, not an image made.
-    return k === 'start' ? 'Choose'
-         : k === 'med' ? 'Focus on'
-         : k === 'pray' ? 'Say'
-         : k === 'study' ? 'Read' : '';
+    return k === 'start' ? 'Choose' : k === 'study' ? 'Read' : '';
   }
   function _ladderNext() {
     const shown = (id) => {
       const e = document.getElementById(id);
       return !!e && e.style.display !== 'none';
     };
-    // Before anything the day asks for: choosing what the day may ask for.
-    // It is shown only while nothing has been chosen, so this is the first
-    // thing a new reader is told and never seen again after.
+    // Before the thirty can ask for anything: choosing which of them they
+    // are. Shown only while nothing has been chosen, so it is the first thing
+    // a new reader is told and never seen again after.
     if (shown('today-start')) return 'start';
-    const fname = _faceHourName();
-    const mn = fname ? medIndexOf(fname) : 0;
-    if (shown('today-face') && mn >= 1 && medStepHas(mn) && !medHas(mn)) return 'med';
-    const a = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
-    const pn = a ? PRAYER_SEFIRAH.indexOf(a.name.split(' /')[0]) + 1 : 0;
-    if (shown('today-prayer') && pn >= 1 && !(prayersMask() & (1 << (pn - 1)))) return 'pray';
-    // There is always a next step until all thirty are marked, so this is the
-    // one that keeps the block speaking for the rest of the day. When it too
-    // is done, the study line already reads "Done · the month complete", and
-    // nothing is lit — there is nothing left to ask for.
+    // Until all thirty are marked there is always a next one, so this keeps
+    // the block speaking for the rest of the day. When it is done the study
+    // line already reads "Done · the month complete", and nothing is lit —
+    // there is nothing left to ask for.
     if (!_pathNow().done) return 'study';
     return null;
   }
@@ -18330,18 +18307,19 @@ content: ''; float: right; width: 30px; height: 1em;
 
   function applyLadderNext() {
     const which = _ladderNext();
+    // Only the two lines that can be a step. The face and the prayer are left
+    // exactly as their own builders drew them — no rule, no verb, and no
+    // dimming, which is what they had before any of this and what they are
+    // worth: the rest of the hour, looked at on purpose.
     [['start', 'today-start', '.tp-go'],
-     ['med', 'today-face', '.tp-go'],
-     ['pray', 'today-prayer', '.tp-go'],
      ['study', 'today-next', null]].forEach(([k, id, ctrlSel]) => {
       const el = document.getElementById(id);
       if (!el) return;
-      // A line that is not drawn is neither lit nor quieted, so it does not
-      // come back wearing the state it had when it went away.
+      // A line that is not drawn is not lit, so it does not come back wearing
+      // the state it had when it went away.
       const here = el.style.display !== 'none';
       const on = here && (k === which);
       el.classList.toggle('is-next', on);
-      el.classList.toggle('is-quiet', here && !!which && !on);
       _ladderVerb(el, on ? _ladderVerbFor(k) : '');
       // Said to a reader who cannot see which line is lit. On the study line
       // the row is the control; on the other two the chip is.
@@ -18389,8 +18367,6 @@ content: ''; float: right; width: 30px; height: 1em;
     if (!bar) return;
     _travelWhich = which || null;
     const id = which === 'start' ? 'today-start'
-             : which === 'med' ? 'today-face'
-             : which === 'pray' ? 'today-prayer'
              : which === 'study' ? 'today-next' : '';
     const row = id ? document.getElementById(id) : null;
     if (row) {
@@ -18423,8 +18399,6 @@ content: ''; float: right; width: 30px; height: 1em;
   function travelGo() {
     const w = _travelWhich;
     if (w === 'start' && typeof openPathChooser === 'function') openPathChooser();
-    else if (w === 'med' && typeof todayFaceGo === 'function') todayFaceGo();
-    else if (w === 'pray' && typeof todayPrayerGo === 'function') todayPrayerGo();
     else if (w === 'study' && typeof todayGo === 'function') todayGo();
   }
   function travelDismiss() { _travelGone = true; _travelShow(); }
