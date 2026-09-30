@@ -15423,26 +15423,42 @@ content: ''; float: right; width: 30px; height: 1em;
   // One address per prayer, so a reader who does not know a text by heart can
   // open it. Chabad's Nusach Ari is the intended default throughout.
   //
-  // Only Tehilim is filled, and with the address this file already uses and
-  // has proved. This container cannot reach chabad.org or sefaria.org, so the
-  // nine below would have been written from memory and shipped unverified —
-  // nine links that might 404 inside a siddur is worse than nine honestly
-  // absent. A prayer with no address shows no link at all.
+  // Seven of the ten are filled, from addresses supplied rather than guessed:
+  // this container reaches neither sefaria.org nor chabad.org, so nothing here
+  // could have been verified from inside it, and writing links from memory
+  // would have put nine possible 404s inside a siddur. A prayer with no
+  // address shows no arrow at all.
   //
   // To fill one: paste its address beside the number. The arrow then appears
-  // beside that prayer on its card, in Today's Ladder, and in the heart's list.
+  // beside that prayer in Today's Ladder and in the heart's list.
   const PRAYER_LINKS = {
-    1:  null,   // Hitbodedut — Breslov's own practice; Chabad may hold nothing for it
+    // Hitbodedut and Cheshbon HaNefesh are practices before they are texts,
+    // and no weekday siddur holds either; Tikkun HaKlali is Breslov's and is
+    // not in a Chabad siddur at all. Those three wait for an address of their
+    // own rather than being sent somewhere approximate.
+    1:  null,   // Hitbodedut
     2:  null,   // Cheshbon HaNefesh
-    3:  null,   // Tikkun Chatzot, and Tikkun Leah on days Tachanun is not said
-    4:  null,   // Birchot HaShachar — Siddur Tehillat Hashem
+    // Nusach Ha-Ari ChaBaD, from the Open Siddur Project. A PDF rather than a
+    // page, and it carries Tikkun Rachel and Tikkun Leah both — which is what
+    // the swap on days without Tachanun needs.
+    3:  'https://opensiddur.org/wp-content/uploads/2010/08/Tikkun-%E1%B8%A4atzot-Nusa%E1%B8%A5-Ha-Ari-%E1%B8%A4aBaD.pdf',
+    // The morning blessings stand at the head of Shacharit in this siddur, so
+    // Birchot HaShachar and Shacharit open at the same place — the one where
+    // the morning begins.
+    4:  'https://www.sefaria.org/Weekday_Siddur_Chabad%2C_Shacharit%2C_Upon_Arising.1?lang=bi',
+    // The day's psalms rather than the whole book: Chabad's own daily portion,
+    // the one address here this file already used and had proved.
     5:  'https://www.chabad.org/dailystudy/tehillim_cdo/aid/1455591/jewish/Psalms.htm',
-    6:  null,   // Shacharit
-    7:  null,   // Tikkun HaKlali — Breslov; Sefaria holds it, Chabad may not
-    8:  null,   // Mincha
-    9:  null,   // Maariv
-    10: null,   // Kri'at Shema al haMitah
+    6:  'https://www.sefaria.org/Weekday_Siddur_Chabad%2C_Shacharit%2C_Upon_Arising.1?lang=bi',
+    7:  null,   // Tikkun HaKlali — Breslov's ten psalms
+    8:  'https://www.sefaria.org/Weekday_Siddur_Chabad%2C_Mincha%2C_Korbanot.1?lang=bi',
+    9:  'https://www.sefaria.org/Weekday_Siddur_Chabad%2C_Maariv.1?lang=bi',
+    10: 'https://www.sefaria.org/Weekday_Siddur_Chabad%2C_Bedtime_Shema?lang=bi',
   };
+  // The siddur these come from, for the three that have no page of their own
+  // and for anyone who would rather start at the contents.
+  const SIDDUR_URL = 'https://www.sefaria.org/Weekday_Siddur_Chabad?tab=contents';
+
   function prayerLink(n) { return PRAYER_LINKS[n] || ''; }
   // The arrow that opens a prayer's text, drawn alike wherever it appears. It
   // is a control of its own: the tag beside it marks the prayer as said, and
