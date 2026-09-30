@@ -2940,14 +2940,39 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    it should be the same height every time it appears, whatever the step is
    called. The whole of it is on the card the arrow leads to. */
 .kt-text { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.kt-arrow { flex: 0 0 auto; color: var(--gold); }
+/* The hour's face and the hour's prayer: a state and a door, not a call.
+   Hollow while the thing is undone and filled once it is, which is how the
+   same two marks read everywhere else in the app. Narrower than the 44px the
+   hand is owed across, and they take the rest of it in height — the bar is
+   48px tall, so a 34px-wide mark still has a 48px box to be hit in, and the
+   width saved is width the step's own name keeps. */
+.kt-mark {
+  flex: 0 0 auto; width: 34px; align-self: stretch;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: none; border: none; cursor: pointer;
+  font-size: calc(13px * var(--ts, 1)); line-height: 1;
+  color: var(--gold); opacity: 0.55;
+}
+.kt-mark svg { width: 15px; height: 15px; display: block; }
+.kt-mark.done { opacity: 1; }
+/* On the narrowest phones the chip is the first thing to go. With the two
+   marks beside it the strip has four things in it, and at 320px the step's
+   own name was cut to "Read מעלה ג׳ · Yea…" — the chip says Study and so does
+   the word Read, so one of them can be spared and the name keeps the room. */
+@media (max-width: 349px) { .kt-flag { display: none; } }
+.kt-med.done .med-lobes { fill: var(--accent-blue); fill-opacity: 0.85; }
+.kt-pray { color: var(--accent-red); }
+.kt-mark:hover { opacity: 1; }
+.kt-mark[hidden] { display: none; }
 .kt-hide {
-  flex: 0 0 auto; width: 44px; background: none; border: none;
+  flex: 0 0 auto; width: 40px; background: none; border: none;
   border-left: 1px solid var(--border-strong); border-radius: 0 8px 8px 0;
   color: var(--ink-dim); font-size: calc(13px * var(--ts, 1)); cursor: pointer;
 }
 .kt-hide:hover { color: var(--ink); }
-.kt-go:focus-visible, .kt-hide:focus-visible { outline: 2px solid var(--gold); outline-offset: -3px; }
+.kt-go:focus-visible, .kt-hide:focus-visible, .kt-mark:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: -3px;
+}
 /* Room under the page for it, so the last thing on the page is never behind
    it. Set only while it is up, and taken back when it goes. */
 body.has-travel { padding-bottom: 72px; }
@@ -15503,6 +15528,7 @@ content: ''; float: right; width: 30px; height: 1em;
       // with — it then counts to the ten and not to the flame.
       el.classList.toggle('off-path', n >= 1 && !medStepHas(n));
     });
+    if (typeof _travelMarks === 'function') _travelMarks();
     if (typeof syncA11yState === 'function') syncA11yState();
   }
 
@@ -15655,6 +15681,9 @@ content: ''; float: right; width: 30px; height: 1em;
     // the reader just tapped.
     const pm = document.getElementById('prayers-modal');
     if (pm && pm.style.display === 'flex') renderPrayersBody();
+    // The travelling bar carries this hour's prayer as a state; a tap expects
+    // it to answer at once rather than at the ladder's next tick.
+    if (typeof _travelMarks === 'function') _travelMarks();
     syncA11yState();
   }
   const PRAYER_SEFIRAH = ['Keter','Chochmah','Binah','Chesed','Gevurah',
@@ -18397,6 +18426,7 @@ content: ''; float: right; width: 30px; height: 1em;
       const go = bar.querySelector('.kt-go');
       if (go) go.setAttribute('aria-label', fw + ' — ' + tw);
     }
+    _travelMarks();
     _travelShow();
   }
 
@@ -18419,7 +18449,57 @@ content: ''; float: right; width: 30px; height: 1em;
     if (w === 'start' && typeof openPathChooser === 'function') openPathChooser();
     else if (w === 'study' && typeof todayGo === 'function') todayGo();
   }
+  function travelFaceGo()   { if (typeof todayFaceGo   === 'function') todayFaceGo(); }
+  function travelPrayerGo() { if (typeof todayPrayerGo === 'function') todayPrayerGo(); }
   function travelDismiss() { _travelGone = true; _travelShow(); }
+
+  // The hour's face and the hour's prayer, carried on the bar without being
+  // asked for. Each is drawn hollow and fills when the thing is done, and
+  // each goes where its line in the ladder goes. They are kept up to date
+  // from wherever a mark is taken rather than on the bar's own schedule,
+  // because a mark is taken by a tap and a tap expects an answer at once.
+  // Hidden when the ladder's own line is hidden — a prayer outside the
+  // reader's set is not being asked for anywhere, and the bar should not be
+  // the one place it still appears.
+  function _travelMarks() {
+    const bar = document.getElementById('kot-travel');
+    if (!bar) return;
+    const med = bar.querySelector('.kt-med'), pray = bar.querySelector('.kt-pray');
+    const sef = (typeof _faceHourName === 'function') ? _faceHourName() : '';
+    if (med) {
+      // The outline glyph, not the fillable one: that carries ids — med-clip,
+      // med-rect, med-fill — and the counter in the ladder already has them.
+      // A second copy would have its clip-path resolve to the first, so the
+      // bar's flame would fill with the counter's count. Here the fill is a
+      // class on the path instead, which is how the dial's flame does it too.
+      const g = med.querySelector('svg');
+      if (g && !g.firstChild && typeof medGlyph === 'function') g.innerHTML = medGlyph(false);
+      const n = sef ? medIndexOf(sef) : 0;
+      const face = document.getElementById('today-face');
+      const up = !!sef && n >= 1 && medStepHas(n) && !!face && face.style.display !== 'none';
+      med.hidden = !up;
+      if (up) {
+        const done = medHas(n);
+        med.classList.toggle('done', done);
+        med.setAttribute('aria-label',
+          sef + '\u2019s face \u2014 ' + (done ? 'focused on' : 'not yet focused on') + '. Go to it.');
+      }
+    }
+    if (pray) {
+      const a = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
+      const n = a ? PRAYER_SEFIRAH.indexOf(a.name.split(' /')[0]) + 1 : 0;
+      const row = document.getElementById('today-prayer');
+      const up = n >= 1 && !!row && row.style.display !== 'none';
+      pray.hidden = !up;
+      if (up) {
+        const done = !!(prayersMask() & (1 << (n - 1)));
+        pray.classList.toggle('done', done);
+        const nm = _prayerListName(n);
+        pray.setAttribute('aria-label', nm + ' \u2014 ' + (done ? 'said' : 'not yet said') + '. Go to it.');
+        pray.title = nm + (done ? ' \u2014 said' : '');
+      }
+    }
+  }
 
   // Watching the ladder rather than the scroll position: the block moves down
   // the page as cards open and close above it, and a pixel count would have to
@@ -27427,8 +27507,16 @@ content: ''; float: right; width: 30px; height: 1em;
     <button type="button" class="kt-go" onclick="travelGo()">
       <span class="kt-flag"></span>
       <span class="kt-text"></span>
-      <span class="kt-arrow" aria-hidden="true">&rarr;</span>
     </button>
+    <!-- The hour's other two, carried but not asked for. They are the same
+         flame and heart the counters use, drawn hollow and filling when the
+         face has been focused on and the prayer said — a state and a way to
+         reach it, which is what they are on the cards too. They say nothing
+         about order, because neither of them has one. -->
+    <button type="button" class="kt-mark kt-med" onclick="travelFaceGo()">
+      <svg viewBox="0 0 22 22" aria-hidden="true"></svg>
+    </button>
+    <button type="button" class="kt-mark kt-pray" onclick="travelPrayerGo()">&#9829;</button>
     <button type="button" class="kt-hide" onclick="travelDismiss()"
             title="Put this away" aria-label="Put the step away for this visit">&#10005;</button>
   </div>
