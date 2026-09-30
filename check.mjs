@@ -703,7 +703,16 @@ async function checkInBrowser(chromium) {
       return s.display !== 'none' && s.visibility !== 'hidden' && el.offsetParent !== null;
     };
     const sel = 'button, a[href], [onclick], [role="button"], .prayer-tag, .maalah, .star-mark, .kot-summary, .year-pill-btn';
-    const controls = [...document.querySelectorAll(sel)].filter(vis);
+    // A box that holds controls is not one. Several elements here carry an
+    // onclick only to stop a tap reaching what is under them — a modal's
+    // card, the strip the language buttons sit in. The page does not call
+    // those buttons any more, and neither does this: asking them to be
+    // focusable would be asking for a tab stop with no name wrapped around a
+    // row of real ones, which is what was there before.
+    const controls = [...document.querySelectorAll(sel)].filter(vis).filter((el) =>
+      !(el.hasAttribute('onclick') &&
+        !['BUTTON', 'A', 'INPUT', 'SELECT', 'TEXTAREA'].includes(el.tagName) &&
+        el.querySelector('button, a[href], input, select, textarea, [role="button"]')));
     const named = el => (el.getAttribute('aria-label') || el.innerText || el.getAttribute('title') || '').trim();
     const focusable = el => el.hasAttribute('tabindex')
       ? +el.getAttribute('tabindex') >= 0
@@ -820,7 +829,7 @@ async function checkInBrowser(chromium) {
       if (inlineInProse) return;
       out.push({ what: e.id || (e.className || '').toString().split(/\s+/)[0] || e.tagName,
                  w: Math.round(r.width), h: Math.round(r.height),
-                 inTag: !!e.closest('.prayer-tag'),
+                 inTag: !!e.closest('.prayer-line'),
                  // What it says and which card it is on, so a failure names
                  // the control rather than leaving it to be hunted for.
                  txt: ((e.getAttribute('aria-label') || e.textContent || '').trim()

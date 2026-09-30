@@ -658,7 +658,17 @@ font-weight: 600;
    The 8px it does take are taken to the left, into the space before the
    glyph rather than out past the column's edge where the flame sits — and
    the padding puts the glyph back exactly where it was drawn. */
-.prayer-tag .prayer-src {
+/* The tag and its arrow, in a box that is not a control so that neither is
+   inside the other. The tag is drawn inline here: it is a <div> on the cards,
+   and a block between the name and the arrow put the arrow on a line of its
+   own on every card. Inline, the two flow as one run again and the arrow
+   lands after the last word of the name, which is where it was measured. */
+.prayer-line { display: block; }
+.prayer-line .prayer-tag { display: inline; }
+/* Keter's line runs the width of the card and its tag centred itself. The
+   tag is inline now and cannot, so the box around it does it instead. */
+.keter-title-row .prayer-line { text-align: center; }
+.prayer-line .prayer-src {
   /* There is no global border-box in this file, so it is said here. */
   box-sizing: border-box; width: 26px; height: 26px;
   padding-left: 8px; margin: -6px 0 -7px -8px;
@@ -727,6 +737,11 @@ letter-spacing: 2px;
 color: var(--gold);
 text-transform: uppercase;
 }
+/* The × that shuts a modal. It was 16x20 — the glyph and two pixels — which
+   is the smallest control in the app and the one a reader most needs to hit
+   first time. The 44px is taken in padding and given back in margin, so the
+   header it sits in keeps its height. The checks never caught it: a modal is
+   shut while the tap targets are swept, and a shut box has no size. */
 .heb-picker-close {
 background: none;
 border: none;
@@ -734,7 +749,14 @@ color: var(--ink-mid);
 font-size: calc(20px * var(--ts, 1));
 cursor: pointer;
 line-height: 1;
-padding: 0 2px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 44px;
+height: 44px;
+padding: 0;
+margin: -11px -11px -11px 0;
+flex: 0 0 auto;
 }
 .heb-picker-close:hover { color: var(--ink); }
 .heb-picker-body { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
@@ -15371,8 +15393,20 @@ content: ''; float: right; width: 30px; height: 1em;
         s.textContent = name;
         el.appendChild(s);
       }
-      if (!el.querySelector('.prayer-src'))
-        el.insertAdjacentHTML('beforeend', ' ' + prayerLinkHtml(n, _prayerListName(n)));
+      // The arrow goes beside the tag and not inside it. The tag is a button
+      // — it marks the prayer said — and a button may not hold a link: it is
+      // invalid, and a screen reader is not obliged to offer what is in
+      // there. So the two are put in a line of their own, which is a box and
+      // not a control, and each keeps its own job.
+      let line = el.parentElement;
+      if (!line || !line.classList.contains('prayer-line')) {
+        line = document.createElement('span');
+        line.className = 'prayer-line';
+        el.parentNode.insertBefore(line, el);
+        line.appendChild(el);
+      }
+      if (!line.querySelector('.prayer-src'))
+        line.insertAdjacentHTML('beforeend', ' ' + prayerLinkHtml(n, _prayerListName(n)));
     });
   }
 
@@ -16026,7 +16060,12 @@ content: ''; float: right; width: 30px; height: 1em;
     ['.prayer-tag',    'done',             'aria-pressed'],
     ['.maalah',        'done',             'aria-pressed'],
     ['.star-mark',     'lit',              'aria-pressed'],
-    ['.sefirah-card',  'expanded',         'aria-expanded'],
+    // .sefirah-card stood here, with 'expanded' and aria-expanded, from when
+    // a card opened and shut. It has not done that for a long time, and the
+    // line outlived it: applyA11y gives anything in this table role="button"
+    // and tabindex="0", so every card was a tab stop announced as a button,
+    // with no name, doing nothing when pressed, and holding three dozen real
+    // controls inside it — which is invalid besides, a button may not.
     ['.sy-la',         'done',             'aria-pressed'],
     ['.year-pill-btn', 'year-pill-active', 'aria-pressed'],
     ['.lang-btn',      'active',           'aria-pressed']
@@ -16041,9 +16080,14 @@ content: ''; float: right; width: 30px; height: 1em;
     const state = [
       ['.prayer-tag', 'done',     'aria-pressed'],
       ['.maalah',     'done',     'aria-pressed'],
-      ['.star-mark',  'lit',      'aria-pressed'],
-      ['.sefirah-card', 'expanded', 'aria-expanded']
+      ['.star-mark',  'lit',      'aria-pressed']
     ].concat(A11Y_STATE);
+    // And taken off any card that has them already, since these are set once
+    // and the cards are never rebuilt.
+    document.querySelectorAll('.sefirah-card[role="button"]').forEach((c) => {
+      c.removeAttribute('role'); c.removeAttribute('tabindex');
+      c.removeAttribute('aria-expanded');
+    });
     for (const [sel, cls, attr] of state) {
       document.querySelectorAll(sel).forEach(el => {
         if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
@@ -16054,6 +16098,13 @@ content: ''; float: right; width: 30px; height: 1em;
     // anything else that is clicked but is not natively a control
     document.querySelectorAll('[onclick]').forEach(el => {
       if (['BUTTON','A','INPUT','SELECT','TEXTAREA'].includes(el.tagName)) return;
+      // A box that holds controls is not one. Several here carry an onclick
+      // only to stop a tap reaching what is under them — a modal's card, the
+      // strip the language buttons sit in — and calling those buttons put a
+      // tab stop with no name around a row of real ones, and nested them
+      // inside it, which a button may not do. The onclick is a guard, not a
+      // deed, and this is how the two are told apart without listing them.
+      if (el.querySelector('button, a[href], input, select, textarea, [role="button"]')) return;
       if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
     });
@@ -17388,8 +17439,15 @@ content: ''; float: right; width: 30px; height: 1em;
     // text, so the same paragraph serves whichever language asked for it.
     const pm = document.getElementById('info-popup-main');
     const pt = document.getElementById('info-popup-title');
-    const he = _scriptLang === 'he' && CYCLE_I18N.he && CYCLE_I18N.he[el.dataset.cycle];
-    if (pm) { pm.dir = he ? 'rtl' : 'ltr'; pm.lang = he ? 'he' : 'en'; }
+    // Which language this popup is actually holding. It said "en" whatever it
+    // held, so a reader in French was given French prose in an English voice.
+    // infoLocal falls back to the English when a language has no entry for
+    // this cycle at this depth, so the answer is asked of the same table it
+    // reads from rather than assumed from the setting.
+    const lang = (CYCLE_I18N[_scriptLang] && CYCLE_I18N[_scriptLang][el.dataset.cycle])
+      ? _scriptLang : 'en';
+    const he = lang === 'he';
+    if (pm) { pm.dir = he ? 'rtl' : 'ltr'; pm.lang = lang; }
     if (pt) pt.dir = he ? 'rtl' : 'ltr';
     glossify(document.getElementById('info-popup-main'));
   }, true);
@@ -23514,6 +23572,39 @@ content: ''; float: right; width: 30px; height: 1em;
     if (e.target && e.target.id === 'date-picker-modal') closeDatePicker();
     if (e.target && e.target.id === 'info-popup-modal') closeInfoPopup();
     if (e.target && e.target.id === 'video-modal') closeVideoModal();
+  });
+
+  // ── ESCAPE ──
+  // No modal in this app answered the Escape key. Every one of them can be
+  // shut by its ×, and the ones drawn as overlays also by the dimmed page
+  // around them — but a reader whose hands are on a keyboard, or who has
+  // simply learnt what Escape does, was left tapping at a page that would not
+  // let go. The video was the worst of them: it holds the screen.
+  // The topmost one is shut, by whatever control it already carries, so each
+  // one's own closing still runs rather than the box being hidden behind its
+  // own back. Only the topmost, so Escape unstacks a popup opened over a list
+  // rather than clearing both at once.
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' && e.key !== 'Esc') return;
+    const open = [...document.querySelectorAll('[id$="-modal"]')]
+      .filter((m) => m.getClientRects().length > 0)
+      .sort((a, b) => (+getComputedStyle(a).zIndex || 0) - (+getComputedStyle(b).zIndex || 0));
+    const top = open[open.length - 1];
+    if (!top) return;
+    e.preventDefault();
+    const shut = top.querySelector('.heb-picker-close, .wr-btn-close, [onclick*="close"], [onclick*="Close"]');
+    if (shut) shut.click(); else top.style.display = 'none';
+  });
+
+  // The segmented toggles — contrast, text size, hours, the year, the
+  // language — flip a class and syncA11yState reads that class, but nothing
+  // called it when one was pressed, so aria-pressed kept the value it had at
+  // load and a screen reader announced the setting the reader had just left.
+  // Asked here rather than added to each setter: there are eight of them, and
+  // a ninth would have been written without this line.
+  document.addEventListener('click', (e) => {
+    if (e.target.closest && e.target.closest('.year-pill-btn, .lang-btn, .beginner-btn'))
+      setTimeout(() => { if (typeof syncA11yState === 'function') syncA11yState(); }, 0);
   });
 
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
