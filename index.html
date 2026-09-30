@@ -353,6 +353,10 @@ padding: 0 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* The columns match heights so the three pickers below them line up: the
+     labels wrap to two lines or one depending on their names, and without
+     this each picker sat wherever its own label left it. */
+  align-self: stretch;
   min-width: 72px;
 }
 /* Phones: close the gap rather than let the columns overhang */
@@ -362,38 +366,7 @@ padding: 0 16px;
   .dc-col { min-width: 50px; }
 }
 
-/* ── HOW MUCH EACH COUNTER ASKS FOR ──
-   A pill under each of the two counts. They are not put inside the columns
-   themselves: a four-way pill is 176px at the 44px-per-button minimum the
-   hand needs, and two of those beside each other would force the counters
-   apart on any phone. So they sit in a row of their own beneath, each with
-   the glyph of the counter it governs.
-   The row gap is the wide one for the reason the reading controls needed it:
-   each button is drawn small and wears a 44px hit area that hangs past it
-   above and below, and on a narrow phone these wrap. */
-.dc-paths {
-  display: flex; justify-content: center; align-items: center;
-  flex-wrap: wrap; gap: 22px 16px; margin-top: 12px;
-}
-.dc-path-grp { display: inline-flex; align-items: center; gap: 6px; }
-.dc-path-glyph { font-size: calc(12px * var(--ts, 1)); color: var(--gold); line-height: 1; }
-/* Quiet, like the settings under the title: findable, not loud. */
-#today-block .year-toggle-pill { margin-top: 0; border-color: var(--border-strong); }
-/* Drawn 34px rather than the 24px the row under the title uses. The hit area
-   was always 44px — the ::after above lays it over every pill — but a control
-   drawn at 24px does not look like one you can hit, and being told it is fine
-   is no answer to that. 34px is most of the way there without pushing the two
-   rows apart; the overlay still hangs 5px past each edge. */
-#today-block .year-pill-btn {
-  font-size: calc(9px * var(--ts, 1));
-  letter-spacing: 0.5px;
-  padding: 2px 9px;
-  min-height: 34px;
-  color: var(--ink-dim);
-}
-#today-block .year-pill-btn.year-pill-active {
-  background: var(--gold-mid); color: var(--bg-card);
-}
+
 
 /* ── STARS — the surrounding light (Or Makif) ──
    Every ✡ in the cards is a text that is not one of the thirty counted steps.
@@ -465,6 +438,7 @@ padding: 0 16px;
   justify-content: center;
 }
 .dc-label {
+  margin-bottom: 5px;
   font-size: calc(10.5px * var(--ts, 1));
   color: var(--ink-dim);
   letter-spacing: 2px;
@@ -578,6 +552,31 @@ border-radius: 20px;
 overflow: hidden;
 margin-top: 6px;
 }
+/* ── CUSTOMISING WHAT THE DAY ASKS FOR ──
+   One line at the foot of the ladder: the words, and the three marks that say
+   which counter is being set. Each opens its own list already turned to the
+   choosing. Drawn quiet — it is a door, not a thing to be read every day —
+   and each mark carries 44px of reach. */
+.dc-custom {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 2px 8px; margin-top: 14px;
+}
+.dc-custom-label {
+  font-family: 'Cinzel', serif; font-size: calc(10px * var(--ts, 1));
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-dim);
+  margin-right: 2px;
+}
+.dc-custom-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; margin: -11px 0;
+  background: none; border: none; cursor: pointer;
+  color: var(--gold); font-size: calc(14px * var(--ts, 1)); line-height: 1;
+}
+.dc-custom-btn svg { width: 15px; height: 15px; display: block; }
+.dc-custom-heart { color: var(--accent-red); }
+.dc-custom-btn:hover { color: var(--ink); }
+.dc-custom-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: -10px; }
+
 /* ── THE MARK ON A FACE ──
    The counter's own glyph drawn small: a flame, the soul's own lamp, and
    נְשָׁמָה is breath before it is anything else. Gold and hollow until the face
@@ -3189,77 +3188,23 @@ content: ''; float: right; width: 30px; height: 1em;
           <div class="dc-label">Study &nbsp;<span class="heb">לימוד</span></div>
         </div>
       </div>
-      <!-- HOW MUCH THE DAY ASKS FOR — one row for each counter above it.
-           These began in the row of reading settings under the title, beside
-           the depth pill, on the argument that both are choices made once
-           about how the page meets you. True, and still the wrong place: the
-           depth pill governs the whole page, while these two govern the two
-           counters directly above them, and up there they cost the page a
-           third line of furniture before anything was read. Here each sits
-           under the count it changes and costs nothing.
-           Numerals, because what is chosen is a count. The glyph says which
-           counter it belongs to; each button says its name on hover and to a
-           screen reader; and the two lists — the heart's and Today's Path —
-           name them in full and hold the picking one by one that a pill
-           cannot. -->
-      <div class="dc-paths">
-        <!-- The meditations, first, as they are first in the three lines above.
-             Three is the Mochin — Keter, Chochmah, Binah — which is where
-             hitbonenut is done; seven is the middot beneath them; ten is the
-             day looked at from every side. The glyph is the counter's own
-             flame, drawn rather than set, since ♥ and ☾ beside it are plain
-             characters and an emoji among them would be the only coloured
-             thing in the row. -->
-        <span class="dc-path-grp">
-          <span class="dc-path-glyph med-glyph" aria-hidden="true">
-            <svg viewBox="0 0 22 22" width="12" height="12"></svg>
-          </span>
-          <span class="year-toggle-pill" id="med-pill">
-            <button id="med-three-btn" class="year-pill-btn" onclick="setMedPreset('three')"
-                    title="Three — the Mochin: Keter, Chochmah, Binah"
-                    aria-label="Three meditations a day, the Mochin">3</button>
-            <button id="med-seven-btn" class="year-pill-btn" onclick="setMedPreset('seven')"
-                    title="Seven — the middot, Chesed down to Malchut"
-                    aria-label="Seven meditations a day, the middot">7</button>
-            <button id="med-ten-btn" class="year-pill-btn year-pill-active" onclick="setMedPreset('ten')"
-                    title="Ten — the day looked at from every side"
-                    aria-label="Ten meditations a day">10</button>
-          </span>
-        </span>
-        <span class="dc-path-grp">
-          <span class="dc-path-glyph" style="color:var(--accent-red)" aria-hidden="true">&#9829;</span>
-          <span class="year-toggle-pill" id="prayer-pill">
-            <button id="prayer-three-btn" class="year-pill-btn" onclick="setPrayerPreset('three')"
-                    title="Three — Shacharit · Mincha · Maariv"
-                    aria-label="Three prayers a day">3</button>
-            <button id="prayer-five-btn" class="year-pill-btn" onclick="setPrayerPreset('five')"
-                    title="Five — the three, with Birchot HaShachar and Kri’at Shema al haMitah"
-                    aria-label="Five prayers a day">5</button>
-            <button id="prayer-seven-btn" class="year-pill-btn" onclick="setPrayerPreset('seven')"
-                    title="Seven — those, with Tehilim and the Tikkun HaKlali"
-                    aria-label="Seven prayers a day">7</button>
-            <button id="prayer-ten-btn" class="year-pill-btn year-pill-active" onclick="setPrayerPreset('ten')"
-                    title="Ten — the heart entire"
-                    aria-label="Ten prayers a day, the heart entire">10</button>
-          </span>
-        </span>
-        <span class="dc-path-grp">
-          <span class="dc-path-glyph" aria-hidden="true">&#9790;</span>
-          <span class="year-toggle-pill" id="path-pill">
-            <button id="path-three-btn" class="year-pill-btn" onclick="setPathPreset('three')"
-                    title="Three — Chumash with Rashi · Tanya · Rambam"
-                    aria-label="Three readings a day">3</button>
-            <button id="path-seven-btn" class="year-pill-btn" onclick="setPathPreset('seven')"
-                    title="Seven — the three, with Tanach, Mishna, Shulchan Aruch and Tanna D’vei Eliyahu"
-                    aria-label="Seven readings a day">7</button>
-            <button id="path-fifteen-btn" class="year-pill-btn" onclick="setPathPreset('fifteen')"
-                    title="Fifteen — the ascent alone, Malchut up to Keter"
-                    aria-label="Fifteen readings a day">15</button>
-            <button id="path-thirty-btn" class="year-pill-btn year-pill-active" onclick="setPathPreset('thirty')"
-                    title="Thirty — the month entire"
-                    aria-label="Thirty readings a day, the month entire">30</button>
-          </span>
-        </span>
+      <!-- CUSTOMISING WHAT THE DAY ASKS FOR.
+           Rows of numbers stood here once, one to each counter, and then a
+           single number apiece that cycled. Both put the setting in front of
+           a reader who had not asked for it. The three counters already open
+           their own lists, and each list already holds the choosing; this is
+           only the door, said once, with the three marks that say which is
+           which. -->
+      <div class="dc-custom">
+        <span class="dc-custom-label">Customize Paths</span>
+        <button type="button" class="dc-custom-btn" onclick="openMedChooser()"
+                aria-label="Choose which of the ten faces to sit with">
+          <svg viewBox="0 0 22 22" aria-hidden="true"></svg>
+        </button>
+        <button type="button" class="dc-custom-btn dc-custom-heart" onclick="openPrayerChooser()"
+                aria-label="Choose which of the ten prayers to say">&#9829;</button>
+        <button type="button" class="dc-custom-btn" onclick="openPathChooser()"
+                aria-label="Choose which of the thirty readings to take">&#9790;</button>
       </div>
   </div>
 
@@ -15214,7 +15159,6 @@ content: ''; float: right; width: 30px; height: 1em;
     const use = clean.length ? clean : MED_ALL.slice();
     _medStepsCache = use;
     try { localStorage.setItem('kotMedSteps', use.join(',')); } catch (e) {}
-    syncMedPills();
     if (typeof applyMedState === 'function') applyMedState();
   }
   function setMedPreset(key) {
@@ -15224,19 +15168,6 @@ content: ''; float: right; width: 30px; height: 1em;
     const m = document.getElementById('meditations-modal');
     if (m && m.style.display === 'flex') renderMedsBody();
   }
-  function syncMedPills() {
-    const sig = medSteps().join(',');
-    MED_PRESETS.forEach(p => {
-      const el = document.getElementById('med-' + p.key + '-btn');
-      if (el) el.classList.toggle('year-pill-active', p.steps.join(',') === sig);
-    });
-    if (typeof syncA11yState === 'function') syncA11yState();
-  }
-  (function () {
-    const go = () => { try { syncMedPills(); } catch (e) {} };
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
-    else go();
-  })();
   function medDone() { return _popcount(medMask()); }
   function medHas(n) { return !!(medMask() & (1 << (n - 1))); }
   function toggleMed(n, e) {
@@ -15251,7 +15182,8 @@ content: ''; float: right; width: 30px; height: 1em;
     const mine  = medMineDone(mask), total = medSteps().length;
     const svg   = document.getElementById('med-ring-svg');
     // The flame in the pill row, drawn from the same curves as the rest.
-    const pg = document.querySelector('.med-glyph svg');
+    // The flame in the footer's door, drawn from the same curves as the rest.
+    const pg = document.querySelector('.dc-custom-btn svg');
     if (pg && !pg.firstChild) pg.innerHTML = medGlyph(false);
     // Drawn once, the first time this runs: the shell is empty in the markup
     // so that the curves live in one place rather than two.
@@ -15290,6 +15222,7 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   function renderMedsBody() {
+    if (_medChoosing) return renderMedChooser();
     const body = document.getElementById('meditations-body');
     if (!body) return;
     const mask = medMask();
@@ -15323,9 +15256,62 @@ content: ''; float: right; width: 30px; height: 1em;
       : mine + ' of ' + total + ' sat with') + `</div>`;
     body.innerHTML = html;
   }
+  // The three doors the footer opens: each list, already turned to its own
+  // choosing rather than to its marks.
+  function openMedChooser()    { openMeditations(); medOpenChooser(); }
+  function openPrayerChooser() { openPrayers();     prayerOpenChooser(); }
+  function openPathChooser()   { openTodaysPath();  pathOpenChooser(); }
+
   function openMeditations() {
+    _medChoosing = false;
     renderMedsBody();
     document.getElementById('meditations-modal').style.display = 'flex';
+  }
+
+  // ── CHOOSING WHICH OF THE TEN FACES ──
+  // The last of the three to get one, and the same shape as the other two.
+  let _medChoosing = false;
+  function medOpenChooser()  { _medChoosing = true;  renderMedsBody(); }
+  function medCloseChooser() { _medChoosing = false; renderMedsBody(); }
+  function renderMedChooser() {
+    const body = document.getElementById('meditations-body');
+    if (!body) return;
+    const sig = medSteps().join(',');
+    let html = `<div class="path-head">` +
+      `<span class="path-head-name"><b>Which of the ten</b> — the faces you undertake.</span>` +
+      `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); medCloseChooser()">Done</button>` +
+      `</div>` +
+      `<div class="path-note">The ten stay ten. What you choose is what the day asks of you; ` +
+      `the rest keep their place on their cards and can still be sat with. The flame then ` +
+      `fills with yours.</div>`;
+    MED_PRESETS.forEach(p => {
+      const on = p.steps.join(',') === sig;
+      html += `<button type="button" class="path-preset${on ? ' on' : ''}" onclick="event.stopPropagation(); medPickPreset('${p.key}')">` +
+        `<span class="path-preset-n">${p.name}</span>` +
+        `<span>${p.sub}<span class="path-preset-sub">${p.steps.length} a day</span></span>` +
+        `</button>`;
+    });
+    html += `<div class="path-section-title" style="margin-top:14px;">Or take them one by one</div>`;
+    for (let n = 1; n <= 10; n++) {
+      const sef = medSefirah(n);
+      html += `<div class="path-pick" onclick="event.stopPropagation(); medTogglePick(${n})">` +
+        `<span class="path-check">${medStepHas(n) ? '\u2611' : '\u2610'}</span>` +
+        `<span class="path-name">${_faceOf(_faceCardFor(sef), sef) || '\u2014'}</span>` +
+        `<span class="path-sef">${sef}</span></div>`;
+    }
+    body.innerHTML = html;
+  }
+  function medPickPreset(key) {
+    const p = MED_PRESETS.find(q => q.key === key);
+    if (p) setMedSteps(p.steps.slice());
+    renderMedsBody();
+  }
+  function medTogglePick(n) {
+    const cur = medSteps().slice();
+    const at = cur.indexOf(n);
+    if (at >= 0) cur.splice(at, 1); else cur.push(n);
+    setMedSteps(cur);
+    renderMedsBody();
   }
   function closeMeditations() {
     document.getElementById('meditations-modal').style.display = 'none';
@@ -15434,7 +15420,6 @@ content: ''; float: right; width: 30px; height: 1em;
     const use = clean.length ? clean : PRAYER_ALL.slice();
     _prayerStepsCache = use;
     try { localStorage.setItem('kotPrayerSteps', use.join(',')); } catch (e) {}
-    syncPrayerPills();
     if (typeof applyPrayerState === 'function') applyPrayerState();
   }
   // The pill under the heart and the chooser the heart opens are two doors to
@@ -15447,19 +15432,6 @@ content: ''; float: right; width: 30px; height: 1em;
     const m = document.getElementById('prayers-modal');
     if (m && m.style.display === 'flex') renderPrayersBody();
   }
-  function syncPrayerPills() {
-    const sig = prayerSteps().join(',');
-    PRAYER_PRESETS.forEach(p => {
-      const el = document.getElementById('prayer-' + p.key + '-btn');
-      if (el) el.classList.toggle('year-pill-active', p.steps.join(',') === sig);
-    });
-    if (typeof syncA11yState === 'function') syncA11yState();
-  }
-  (function () {
-    const go = () => { try { syncPrayerPills(); } catch (e) {} };
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
-    else go();
-  })();
   // Said, among those undertaken — what the heart answers to.
   function prayerMineDone(mask) {
     return prayerSteps().filter(n => mask & (1 << (n - 1))).length;
@@ -16230,13 +16202,12 @@ content: ''; float: right; width: 30px; height: 1em;
         'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
         'few lines opened counts. </p><p>Ten prayers and thirty readings in a day is a great ' +
         'deal to begin with, and you are not asked for all of them. Under the two counts are ' +
-        'three small rows of numbers &mdash; a <strong>flame</strong> for the meditations, ' +
-        '<strong>&#9829;</strong> for the prayers and <strong>&#9790;</strong> for the ' +
-        'readings. That is how many of each the day asks for. </p><p>Tap ' +
-        '<strong>3</strong> under each and the day asks for three meditations &mdash; the ' +
-        'Mochin &mdash; three prayers: Shacharit, Mincha, Maariv, and three readings: Chumash, ' +
-        'Tanya, Rambam. The flame, the heart and the moon then fill with your three rather ' +
-        'than with ten, ten and thirty, and when you have kept the readings a week the app ' +
+        'a small number under each of the three counts. That is how many of each ' +
+        'the day asks for, and a tap moves to the next. </p><p>Tap it down to ' +
+        '<strong>3</strong> and the day asks for three meditations &mdash; the Mochin &mdash; ' +
+        'three prayers: Shacharit, Mincha, Maariv, and three readings: Chumash, Tanya, ' +
+        'Rambam. The flame, the heart and the moon then fill with your three rather than ' +
+        'with ten, ten and thirty, and when you have kept the readings a week the app ' +
         'offers you one more. </p><p>Tapping the flame, the heart, or the moon, opens ' +
         'the list it counts; <strong>Change</strong> there offers the same choice in full, where ' +
         'they can also be picked one by one.',
@@ -17183,7 +17154,6 @@ content: ''; float: right; width: 30px; height: 1em;
     const use = clean.length ? clean : PATH_ALL.slice();
     _pathStepsCache = use;
     try { localStorage.setItem('kotPathSteps', use.join(',')); } catch (e) {}
-    syncPathPills();
     if (typeof applyMaalotState === 'function') applyMaalotState();
   }
 
@@ -17198,19 +17168,6 @@ content: ''; float: right; width: 30px; height: 1em;
     const modal = document.getElementById('todays-path-modal');
     if (modal && modal.style.display === 'flex') renderTodaysPath();
   }
-  function syncPathPills() {
-    const sig = pathSteps().join(',');
-    PATH_PRESETS.forEach(p => {
-      const el = document.getElementById('path-' + p.key + '-btn');
-      if (el) el.classList.toggle('year-pill-active', p.steps.join(',') === sig);
-    });
-    if (typeof syncA11yState === 'function') syncA11yState();
-  }
-  (function () {
-    const go = () => { try { syncPathPills(); } catch (e) {} };
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go);
-    else go();
-  })();
   // The chosen rungs of each half, as מעלה / מיעוט numbers 1-15.
   function pathWaxNums()  { return pathSteps().filter(i => i < 15).map(i => i + 1); }
   function pathWaneNums() { return pathSteps().filter(i => i >= 15).map(i => i - 14); }
