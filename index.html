@@ -2570,6 +2570,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   color:var(--gold); min-width:58px;
 }
 .path-preset-sub { display:block; font-size:calc(12px * var(--ts, 1)); color:var(--ink-dim); }
+/* "in English" on a whole set, "EN" on a single step — the same mark at two
+   sizes, drawn quietly: it is a fact about the step, not a recommendation,
+   and a reader with Hebrew should be able to look past it. */
+.path-en {
+  display:inline-block; margin-left:7px; padding:0 5px;
+  font-family:'Cinzel',serif; font-size:calc(9px * var(--ts, 1));
+  letter-spacing:1px; text-transform:uppercase;
+  color:var(--gold-mid); border:1px solid var(--gold-mid);
+  border-radius:3px; line-height:1.6; vertical-align:0.08em;
+  white-space:nowrap;
+}
 /* Stacked taps, so each needs its own 44px rather than borrowing the gap. */
 .path-pick { display:flex; align-items:center; gap:8px; padding:6px; min-height:44px; border-radius:5px; cursor:pointer; }
 .path-pick:hover { background:#f2ead8; }
@@ -2877,6 +2888,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    margin, out into the block's padding, so the text does not move either.
    A border and not a pseudo-element: the step line hides its own overflow, to
    keep a long name on one line, and that clips anything drawn inside it. */
+/* The first step, above the three and only until it is taken. Drawn as they
+   are — chip, verb, what it asks for — because it is one of them for as long
+   as it is there, and a reader should not have to learn a second shape for
+   the thing they are told to do first. */
+.today-start { margin-bottom:11px; font-size:calc(14px * var(--ts, 1)); }
+.today-start .ts-word { color:var(--gold); }
+.today-start .ts-sub { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
+#today-block .today-start,
 #today-block .today-face,
 #today-block .today-prayer,
 #today-block .today-next {
@@ -3266,6 +3285,18 @@ content: ''; float: right; width: 30px; height: 1em;
          not because it is the most urgent. The step being asked for is the
          line beneath it, and still carries the lit chip when its hour is
          running. -->
+    <!-- THE FIRST STEP, and only until it is taken. The thirty open in order
+         and the first of them is Likutei Halachot, Reb Noson in Hebrew with
+         no translation behind it — which is what the app asks of a reader
+         before it has asked them anything about themselves. So while no path
+         has been chosen, this stands above the three and is the one being
+         asked for; once a path is chosen it is gone for good, and the ladder
+         is the three it always was. -->
+    <div id="today-start" class="today-start" style="display:none;">
+      <button type="button" class="tp-go" onclick="openPathChooser()"
+              aria-label="Choose your paths"><span class="tp-flag">First</span></button><span
+        class="ts-word">your paths</span><span class="ts-sub">&middot; how much of the thirty, and in which language</span>
+    </div>
     <div id="today-face" class="today-face" style="display:none;"></div>
     <!-- THE PRAYER THIS HOUR IS ASKING FOR. The ten tags are scattered one to
          a Sefirah down the whole page, so knowing which is due meant finding
@@ -17409,6 +17440,49 @@ content: ''; float: right; width: 30px; height: 1em;
   // descent. The default is all of them, so a reader who never chooses is
   // exactly where they were.
   const PATH_ALL = Array.from({ length: 30 }, (_, i) => i);
+  // ── WHAT A READER WITHOUT HEBREW CAN ACTUALLY DO ──
+  // The thirty open in order, and the first of them — מעלה א׳, Likutei
+  // Halachot — is Reb Noson in Hebrew with no translation anywhere behind it.
+  // That is the first thing the app asks of anyone, and for a reader without
+  // Hebrew it is a wall in the doorway.
+  // So the set below is the steps whose text, or whose daily shiur, is in
+  // English. Each one is here because of the link the card itself gives —
+  // read off the page rather than remembered — and the reason is written
+  // beside it so that a wrong entry can be found and argued with:
+  const PATH_EN = [
+    2,   // מעלה ג׳   Year-Round Connection — Chabad.org's English of the ma'amar
+    6,   // מעלה ז׳   Sichos HaRan — Sefaria ?lang=bi, the Breslov Research English
+    8,   // מעלה ט׳   Tanach — Sefaria bilingual, and OU Torah's English shiurim
+    12,  // מעלה י״ג  Strong Day — Hayom Yom and Rambam, both English on Chabad
+    15,  // מיעוט א׳  Chumash with Rashi — Chabad's daily reading, English
+    16,  // מיעוט ב׳  Tanya — Chabad's Daily Tanya, English
+    17,  // מיעוט ג׳  Rambam — Chabad, English
+    18,  // מיעוט ד׳  Tractate Cycle — YUTorah, shiurim in English
+    20,  // מיעוט ו׳  Shulchan Aruch HaRav — shulchanaruchharav.com is a translation
+    21,  // מיעוט ז׳  Reb Shlomo Carlebach's stories — told in English
+    22,  // מיעוט ח׳  Daf Yomi — Sefaria's Steinsaltz English
+    23,  // מיעוט ט׳  Chitas for Kids — English
+    24,  // מיעוט י׳  Chok Breslov — the Breslov Research recordings, English
+    25,  // מיעוט י״א Daily Chofetz Chaim — dafaweek and torahcasts, English
+    26,  // מיעוט י״ב Chok L'Yisrael — the app already labels its Zohar "(English)"
+    27,  // מיעוט י״ג Likkutei Sichos — Project Likkutei Sichos and Sichos in English
+    28,  // מיעוט י״ד Living Chassidus — InsideChassidus, JEM, TheYeshiva.net
+    29,  // מיעוט ט״ו Rav Shlomo Katz — English
+  ];
+  // Left out, and why: מעלה א׳ Likutei Halachot, מעלה ב׳ (Etz Chaim and Toras
+  // Menachem), מעלה י״א Likutei Tefilot, מעלה י״ב Torah Ohr and מיעוט ה׳ the
+  // Breslov Israel recordings have no English at all. מעלה ד׳ Rav Pe'alim,
+  // מעלה ה׳ Tanna D'vei Eliyahu, מעלה ו׳ Shulchan Aruch, מעלה ח׳ Birkas
+  // HaNehenin, מעלה י׳ Tosefta, מעלה י״ד the Ohr HaChaim and מעלה ט״ו the
+  // Zohar carry a bilingual link, but the English behind it is partial or
+  // absent on the day the step actually lands. A path that promises English
+  // and hands over Hebrew is worse than one that does not promise.
+  function pathStepInEnglish(i) { return PATH_EN.indexOf(i) >= 0; }
+  // Whether every step of a set has English — used to mark the sets that a
+  // reader without Hebrew can take whole, rather than making them check
+  // eighteen numbers against a list.
+  function pathSetInEnglish(steps) { return (steps || []).every(pathStepInEnglish); }
+
   const PATH_PRESETS = [
     // Chumash with Rashi, Tanya, Rambam — Chitas and Rambam, the daily. It
     // wanted no inventing: the three were already lying together at the head
@@ -17478,6 +17552,16 @@ content: ''; float: right; width: 30px; height: 1em;
     { key: 'tanach', name: 'Chumash & Tanach', group: 'tradition',
       sub: 'Tanach · Chumash with Rashi · Chok L’Yisrael',
       steps: [8, 15, 26] },
+
+    // ── BY LANGUAGE ──
+    // Not a quantity and not a tradition: what a reader can read. It is the
+    // whole of PATH_EN, so it is long — eighteen of the thirty — and that is
+    // the honest answer to "what is open to me". Someone who wants fewer takes
+    // Three, which happens to be English entire, or picks from the list below
+    // where each step now says whether it has English.
+    { key: 'english', name: 'In English', group: 'language',
+      sub: 'every step whose text or daily shiur is in English',
+      steps: PATH_EN.slice() },
   ];
   // The order a step is offered in when a kept path earns another rung: the
   // three, then the four that complete the Chok, then the ascent from its
@@ -17513,12 +17597,21 @@ content: ''; float: right; width: 30px; height: 1em;
   }
   // An empty path is not a path, so a save that would leave nothing keeps the
   // whole thirty instead — the same thing an unset reader has.
+  // Whether the reader has ever answered the question. pathSteps() cannot say
+  // — it returns the whole thirty both for someone who chose them and for
+  // someone who has never been asked, which is the whole difference here.
+  function _pathChosen() {
+    try { return !!localStorage.getItem('kotPathSteps'); } catch (e) { return true; }
+  }
   function setPathSteps(arr) {
     const clean = Array.from(new Set((arr || []).filter(
       n => Number.isInteger(n) && n >= 0 && n < 30))).sort((a, b) => a - b);
     const use = clean.length ? clean : PATH_ALL.slice();
     _pathStepsCache = use;
     try { localStorage.setItem('kotPathSteps', use.join(',')); } catch (e) {}
+    // The question has been answered, so the line that asked it goes. Through
+    // renderTodayBlock, which applyMaalotState calls, so the step line and the
+    // first step settle in the same pass.
     if (typeof applyMaalotState === 'function') applyMaalotState();
   }
 
@@ -18137,13 +18230,20 @@ content: ''; float: right; width: 30px; height: 1em;
   // a const read before its own line has run throws rather than reading
   // undefined. That fault cost a whole render once already in this file.
   function _ladderVerbFor(k) {
-    return k === 'med' ? 'Sit with' : k === 'pray' ? 'Say' : k === 'study' ? 'Read' : '';
+    return k === 'start' ? 'Choose'
+         : k === 'med' ? 'Sit with'
+         : k === 'pray' ? 'Say'
+         : k === 'study' ? 'Read' : '';
   }
   function _ladderNext() {
     const shown = (id) => {
       const e = document.getElementById(id);
       return !!e && e.style.display !== 'none';
     };
+    // Before anything the day asks for: choosing what the day may ask for.
+    // It is shown only while nothing has been chosen, so this is the first
+    // thing a new reader is told and never seen again after.
+    if (shown('today-start')) return 'start';
     const fname = _faceHourName();
     const mn = fname ? medIndexOf(fname) : 0;
     if (shown('today-face') && mn >= 1 && medStepHas(mn) && !medHas(mn)) return 'med';
@@ -18176,14 +18276,18 @@ content: ''; float: right; width: 30px; height: 1em;
 
   function applyLadderNext() {
     const which = _ladderNext();
-    [['med', 'today-face', '.tp-go'],
+    [['start', 'today-start', '.tp-go'],
+     ['med', 'today-face', '.tp-go'],
      ['pray', 'today-prayer', '.tp-go'],
      ['study', 'today-next', null]].forEach(([k, id, ctrlSel]) => {
       const el = document.getElementById(id);
       if (!el) return;
-      const on = (k === which);
+      // A line that is not drawn is neither lit nor quieted, so it does not
+      // come back wearing the state it had when it went away.
+      const here = el.style.display !== 'none';
+      const on = here && (k === which);
       el.classList.toggle('is-next', on);
-      el.classList.toggle('is-quiet', !!which && !on);
+      el.classList.toggle('is-quiet', here && !!which && !on);
       _ladderVerb(el, on ? _ladderVerbFor(k) : '');
       // Said to a reader who cannot see which line is lit. On the study line
       // the row is the control; on the other two the chip is.
@@ -18240,8 +18344,13 @@ content: ''; float: right; width: 30px; height: 1em;
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
     applyTodayFace();
-    // Last, because it reads the three lines as they now stand — including
-    // whether the face line is drawn at all.
+    // Shown until a path is stored, and then never again. Read from the store
+    // rather than from pathSteps(), which answers "the whole thirty" whether
+    // that was chosen or merely never declined.
+    const st0 = document.getElementById('today-start');
+    if (st0) st0.style.display = _pathChosen() ? 'none' : '';
+    // Last, because it reads the lines as they now stand — including whether
+    // the face line is drawn at all and whether the first step is still up.
     applyLadderNext();
   }
   // The line does not name the week it runs in. The date bar directly above it
@@ -18396,13 +18505,23 @@ content: ''; float: right; width: 30px; height: 1em;
       `begin with three, and the app will offer you another rung when you have kept them.</div>`;
     const preset = (p) => {
       const on = p.steps.join(',') === sig;
+      // A set a reader without Hebrew can take whole says so, and the set
+      // that is itself the answer to that question does not need telling.
+      const en = p.group !== 'language' && pathSetInEnglish(p.steps)
+        ? `<span class="path-en">in English</span>` : '';
       return `<button type="button" class="path-preset${on ? ' on' : ''}" onclick="event.stopPropagation(); pathPickPreset('${p.key}')">` +
         `<span class="path-preset-n">${p.name}</span>` +
-        `<span>${p.sub}<span class="path-preset-sub">${p.steps.length} step${p.steps.length === 1 ? '' : 's'} a day</span></span>` +
+        `<span>${p.sub}<span class="path-preset-sub">${p.steps.length} step${p.steps.length === 1 ? '' : 's'} a day${en}</span></span>` +
         `</button>`;
     };
-    html += `<div class="path-section-title">How much — by size</div>`;
-    PATH_PRESETS.filter(p => p.group !== 'tradition').forEach(p => { html += preset(p); });
+    // Language first. The thirty open in order and the first of them is in
+    // Hebrew with nothing behind it, so for a reader without Hebrew this is
+    // not one question among three — it is the one that decides whether the
+    // rest are worth asking.
+    html += `<div class="path-section-title">What you can read — by language</div>`;
+    PATH_PRESETS.filter(p => p.group === 'language').forEach(p => { html += preset(p); });
+    html += `<div class="path-section-title" style="margin-top:14px;">How much — by size</div>`;
+    PATH_PRESETS.filter(p => p.group === 'size').forEach(p => { html += preset(p); });
     // Whose, rather than how much. Under its own heading because it answers a
     // different question: someone choosing Chabad is not choosing a quantity,
     // and the count follows from the books rather than the other way round.
@@ -18411,10 +18530,13 @@ content: ''; float: right; width: 30px; height: 1em;
     const pick = (idx) => {
       const L = _stepLabel(idx);
       const on = pathHas(idx);
+      // Said on the step rather than only in the preset above, so that a
+      // reader building their own is not choosing blind.
+      const en = pathStepInEnglish(idx) ? `<span class="path-en">EN</span>` : '';
       return `<div class="path-pick" onclick="event.stopPropagation(); pathTogglePick(${idx})">` +
         `<span class="path-check">${on ? '☑' : '☐'}</span>` +
         `<span class="path-day">${L.tag}</span>` +
-        `<span class="path-name">${L.name}</span>` +
+        `<span class="path-name">${L.name}${en}</span>` +
         `<span class="path-sef">${L.sef}</span></div>`;
     };
     html += `<div class="path-section-title" style="margin-top:14px;">Or take them one by one</div>`;
