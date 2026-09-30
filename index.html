@@ -2612,6 +2612,23 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* It lives inside a pane now, which is the bordered card. A border of its own
    would be a box drawn inside a box. */
 #perek-shirah-week { margin:0; padding:0 0 0 10px; border-left:3px solid var(--gold); }
+/* ── THE WEEK'S NIGGUN ──
+   Under the week's own song, where it can be heard rather than found. The
+   link leaves for Chabad's recording, so it carries the ↗ the app uses
+   everywhere it hands a reader over. */
+.ps-niggun { margin-top: 10px; font-size: calc(13.5px * var(--ts, 1)); line-height: 1.5; }
+.ps-niggun-flag {
+  display:inline-block; font-family:'Cinzel',serif;
+  font-size:calc(8.5px * var(--ts, 1)); letter-spacing:1.3px; text-transform:uppercase;
+  color:var(--gold); border:1px solid var(--gold); border-radius:3px;
+  padding:1px 5px; margin-right:7px; line-height:1.5; vertical-align:0.1em;
+}
+.ps-niggun a { color:var(--gold); text-decoration:none; padding:12px 2px; margin:-12px 0; display:inline-block; }
+.ps-niggun a::after { content:' \2197'; }
+.ps-niggun a:hover { text-decoration:underline; }
+.ps-niggun-text { color:var(--ink-mid); font-size:calc(12.5px * var(--ts, 1)); font-style:italic; margin-top:2px; }
+.ps-niggun-meta { color:var(--ink-dim); font-style:normal; }
+
 .ps-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
   text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
 .ps-line { font-size:calc(14px * var(--ts, 1)); color:var(--ink); line-height:1.6; }
@@ -2705,6 +2722,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   padding:1px 5px; margin-right:7px; line-height:1.5; vertical-align:0.1em;
 }
 .t-flag.now { background:var(--gold); color:#fff; }
+/* A chip that goes somewhere. Drawn exactly as the chip is, with the 44px
+   the hand needs taken in padding and given back in margin, so the line
+   keeps the height it had. */
+.tp-go {
+  background:none; border:none; padding:14px 0; margin:-14px 0;
+  cursor:pointer; font:inherit; line-height:1; vertical-align:middle;
+}
+.tp-go:hover .tp-flag { background:var(--gold); color:#fdf9f2; }
+.tp-go:focus-visible { outline:2px solid var(--gold); outline-offset:-10px; }
 /* The prayer this hour is asking for. It marks in place, so it is a control
    and gets a control's height without moving the line it sits on. */
 /* 11px, matching the padding the Study button below carries to reach its
@@ -3024,6 +3050,12 @@ content: ''; float: right; width: 30px; height: 1em;
       <div id="perek-shirah-week" style="display:none;">
         <div class="ps-label"><a id="ps-doc-link" target="_blank" style="color:inherit">Perek Shirah</a> &middot; this week</div>
         <div class="ps-line" id="ps-line"></div>
+        <!-- The week's niggun. It was written only into Gevurah's detail,
+             behind an expanded card most of the way down the page, which is
+             no place for the one thing here meant to be heard. The song of
+             the creature and the song of the week belong together, and this
+             pane is where the week already speaks. -->
+        <div class="ps-niggun" id="ps-niggun" style="display:none;"></div>
       </div>
     </div>
     <div class="pane-body pane-prose" data-pane="intro">
@@ -15341,7 +15373,8 @@ content: ''; float: right; width: 30px; height: 1em;
       if (tp.dataset.built !== want) {
         tp.dataset.built = want;
         tp.innerHTML = activeIdx
-          ? '<span class="tp-flag">Prayer</span>' +
+          ? '<button type="button" class="tp-go" onclick="todayPrayerGo()" ' +
+            'aria-label="Go to the card of this hour’s prayer"><span class="tp-flag">Prayer</span></button>' +
             '<span class="prayer-tag" data-prayer="' + activeIdx + '" role="button" ' +
             'tabindex="0" title="Tap when you have prayed">' +
             _prayerListName(activeIdx) + '</span>'
@@ -17792,7 +17825,8 @@ content: ''; float: right; width: 30px; height: 1em;
       // the line is, the same question the two lines beside it answer, and
       // the Sefirah goes to the end where the prayer line already keeps it.
       el.innerHTML = face
-        ? '<span class="tp-flag">Meditation</span>' +
+        ? '<button type="button" class="tp-go" onclick="todayFaceGo()" ' +
+          'aria-label="Go to the face of this hour"><span class="tp-flag">Meditation</span></button>' +
           (href
             ? '<a class="tf-open" href="' + href + '" target="_blank" rel="noopener" ' +
               'aria-label="Read today&rsquo;s Hayom Yom on Chabad.org">' + face + ' &#8599;</a>'
@@ -17808,6 +17842,20 @@ content: ''; float: right; width: 30px; height: 1em;
     }
     el.style.display = face ? '' : 'none';
   }
+  // The Prayer chip goes where its prayer lives: the card of the Sefirah whose
+  // hour it is. The tag beside it still marks in place — a chip that named a
+  // thing and did nothing was the odd one of the three.
+  function todayPrayerGo() {
+    const a = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
+    if (!a) return;
+    const card = _faceCardFor(a.name.split(' /')[0].trim());
+    if (!card) return;
+    const body = card.closest && card.closest('.pane-body[data-pane]');
+    if (body && typeof setPane === 'function')
+      setPane(body.closest('.pane-host'), body.getAttribute('data-pane'));
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
   function todayFaceGo() {
     const card = _faceCardFor(_faceHourName());
     if (!card) return;
@@ -21916,6 +21964,21 @@ content: ''; float: right; width: 30px; height: 1em;
       if (host && !host.getAttribute('data-pane')) setPane(host, 'shirah');
       const verse = PEREK_SHIRAH_VERSES[animal];
       el.style.display = '';
+      // The week's niggun, beside the week's song. seasonInfo is render's own,
+      // computed for Gevurah's card further up; the thirteen run one to a week
+      // of the season, four times a year.
+      const ngEl = document.getElementById('ps-niggun');
+      const ng = NIGGUNIM[seasonInfo.weekIn - 1];
+      if (ngEl) {
+        ngEl.innerHTML = ng
+          ? `<span class="ps-niggun-flag">&#9834; Niggun</span>` +
+            `<a href="${ng.url}" target="_blank" rel="noopener">${ng.name}</a>` +
+            ` <bdi lang="he" class="heb">${ng.heb}</bdi>` +
+            `<div class="ps-niggun-text">${ng.text}` +
+            `<span class="ps-niggun-meta"> &middot; week ${seasonInfo.weekIn} of 13 &middot; taught ${ng.taught}</span></div>`
+          : '';
+        ngEl.style.display = ng ? '' : 'none';
+      }
       // A few creatures sing only under a condition — the wild goose when it
       // sees Israel busy with Torah, the fly when it does not.
       const who = verse && verse[3] ? `${animal}, ${verse[3]},` : animal;
