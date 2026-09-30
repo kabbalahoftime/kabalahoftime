@@ -3361,10 +3361,10 @@ content: ''; float: right; width: 30px; height: 1em;
              coordinates — but dwelling on one is, and that is what this counts:
              not the fact, but that the reader focused on it. Ten, because Keter's
              face is the day's Hayom Yom and the nine cards carry the rest.
-             The glyph is a ring cut by a horizon: heaven above, earth below,
-             and the fill rises from the earth through the horizon as the ten
-             are taken. Blue rather than the heart's red or the moon's gold, so
-             the three gatherings are told apart at a glance. -->
+             The glyph is a flame, and it fills from its base as the ten are
+             taken — נֵר ה׳ נִשְׁמַת אָדָם, the soul of man is the lamp of the
+             Lord. Blue rather than the heart's red or the moon's gold, so the
+             three gatherings are told apart at a glance. -->
         <div class="dc-col" id="med-col" onclick="openMeditations()"
              style="cursor:pointer;" title="The day's ten meditations — the face of each Sefirah's hour">
           <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:5px;">
@@ -15356,13 +15356,15 @@ content: ''; float: right; width: 30px; height: 1em;
   function medIndexOf(name) { return PRAYER_SEFIRAH.indexOf(name) + 1; }
   let _medKey = null;
 
-  // ── THE GLYPH: LUNGS ──
-  // Breath, because that is what a meditation is made of — and because the
-  // world itself was made with a breath, the ה that costs nothing to say.
+  // ── THE GLYPH: A FLAME ──
+  // Lungs first, for the breath a meditation is made of, and they did not
+  // read at fifteen pixels — a pair of small lobes at that size is a smudge.
+  // A flame does read, and says the same thing: נֵר ה׳ נִשְׁמַת אָדָם, and
+  // נְשָׁמָה is breath before it is anything else.
   // Drawn rather than set as an emoji: the heart beside it and the moon beyond
   // it are line drawings in the app's own gold, and a full-colour glyph among
   // them would be the only thing on the page that belongs to somebody else's
-  // typeface. One set of curves serves both sizes, so the ring in the ladder
+  // typeface. One set of curves serves both sizes, so the flame in the ladder
   // and the ten marks down the page cannot drift apart.
   const MED_PATHS = {
     // A flame. נֵר ה׳ נִשְׁמַת אָדָם — the soul of man is the lamp of the Lord
@@ -15464,8 +15466,8 @@ content: ''; float: right; width: 30px; height: 1em;
     const mask  = medMask();
     const mine  = medMineDone(mask), total = medSteps().length;
     const svg   = document.getElementById('med-ring-svg');
-    // The flame in the pill row, drawn from the same curves as the rest.
-    // The flame in the footer's door, drawn from the same curves as the rest.
+    // The flame on the footer's door, drawn from the same curves as the rest.
+    // It stood in a row of pills once; the pills are gone and the door is not.
     const pg = document.querySelector('.dc-custom-btn svg');
     if (pg && !pg.firstChild) pg.innerHTML = medGlyph(false);
     // Drawn once, the first time this runs: the shell is empty in the markup
@@ -16545,75 +16547,91 @@ content: ''; float: right; width: 30px; height: 1em;
     ladder: {
       title: 'Today’s Ladder',
       beginner:
-        'The block that answers one question: what now? </p><p>The line at the top names the ' +
-        'next step being asked for, and tapping it takes you straight down to it. That is ' +
-        'enough to begin with &mdash; everything else on the page is there for when you want ' +
-        'it. </p><p>Under it stand two lines about the hour itself: the prayer it is asking ' +
-        'for, and the <strong>face of the card whose hour it is</strong> &mdash; today&rsquo;s ' +
-        'letter, or creature, or attribute, whichever that card keeps. That one is not a thing ' +
-        'to do; it is what the day <em>is</em>. Tapping it goes to the card it was read from, ' +
-        'and every card carries a small ring beside its Sefirah&rsquo;s name, which ' +
-        'marks that you have focused on that face. ' +
-        '</p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
-        'the ten prayers are said, the <strong>ring</strong> at the left counts the ten ' +
-        'faces focused on, the <strong>circle</strong> beside it counts the readings, ' +
-        'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
-        'few lines opened counts. </p><p>Ten prayers and thirty readings in a day is a great ' +
-        'deal to begin with, and you are not asked for all of them. Under the two counts are ' +
-        'a small number under each of the three counts. That is how many of each ' +
-        'the day asks for, and a tap moves to the next. </p><p>Tap it down to ' +
-        '<strong>3</strong> and the day asks for three meditations &mdash; the Mochin &mdash; ' +
-        'three prayers: Shacharit, Mincha, Maariv, and three readings: Chumash, Tanya, ' +
-        'Rambam. The flame, the heart and the moon then fill with your three rather than ' +
-        'with ten, ten and thirty, and when you have kept the readings a week the app ' +
-        'offers you one more. </p><p>Tapping the flame, the heart, or the moon, opens ' +
-        'the list it counts; <strong>Change</strong> there offers the same choice in full, where ' +
-        'they can also be picked one by one.',
+        'The block that answers one question: what now? </p><p>Three lines, one to each kind ' +
+        'of thing the day asks for &mdash; <strong>Meditation</strong>, ' +
+        '<strong>Prayer</strong>, <strong>Study</strong> &mdash; and the one with a gold rule ' +
+        'down its left is the one being asked for. It says so in words: <em>Read ' +
+        '&#1502;&#1506;&#1500;&#1492; &#1490;&#1523; &middot; Year-Round Connection</em>. ' +
+        'Tapping it goes straight to it. </p><p>That line is the study, and only ever the ' +
+        'study, because the thirty readings are taken in order: one is next, and doing it ' +
+        'makes another next. The very first time, it is something else &mdash; <em>Choose your ' +
+        'paths</em> &mdash; and that line goes for good once you have chosen. </p><p>The other ' +
+        'two lines are the hour itself rather than a queue, so neither is ever lit. ' +
+        '<strong>Prayer</strong> names the prayer this hour is asking for: tap the name when ' +
+        'you have said it, and the &#8599; beside it opens the text. ' +
+        '<strong>Meditation</strong> names the face of the card whose hour it is &mdash; ' +
+        'today&rsquo;s letter, or creature, or attribute, whichever that card keeps. That one ' +
+        'is not a thing to do; it is what the day <em>is</em>. Tapping it goes to the card, ' +
+        'where a small flame beside the day&rsquo;s line marks that you have focused on it. ' +
+        '</p><p>Underneath are the day&rsquo;s counts: the <strong>flame</strong> for the ' +
+        'faces, the <strong>heart</strong> for the prayers, the <strong>moon</strong> for the ' +
+        'readings, and the menorah at the end for the ten who carry it. Tapping any of them ' +
+        'opens the list it counts. </p><p>A little is a step. A few lines opened counts. ' +
+        '</p><p>Thirty readings, ten prayers and ten faces in a day is a great deal to begin ' +
+        'with, and you are not asked for all of them. <strong>Customize Paths</strong> at the ' +
+        'foot of the block sets how much of each the day asks for &mdash; three readings, or ' +
+        'seven, or the whole thirty &mdash; and, for a reader who would rather not read ' +
+        'Hebrew, the eighteen of the thirty that are <strong>in English</strong>. Nothing is ' +
+        'taken off the page: what you have not undertaken stays where it is, faint, and can ' +
+        'still be marked. </p><p>Once the block has scrolled out of sight, that same line ' +
+        'follows you at the foot of the screen until the day&rsquo;s readings are done. The ' +
+        '&#10005; on it puts it away for the visit.',
       main:
-        'What the day is asking for next, and how much of it has been done. </p><p>The top line ' +
-        'names the next step and goes to it. Beneath it the hour speaks twice: the prayer it is ' +
-        'asking for, and the face of the Sefirah whose hour it is &mdash; the letter, the ' +
-        'creature, the Name of the seventy-two, the attribute, whichever that card holds. A ' +
-        'face is not a deed and cannot be completed &mdash; it is the day&rsquo;s own ' +
-        'coordinates &mdash; but dwelling on one is, and that is what the ring counts: not ' +
-        'the fact, but that you focused on it. Tapping the face goes to its card, and the ' +
-        'small ring on that card takes the meditation &mdash; hollow until the face has ' +
-        'been focused on, then filled. ' +
-        'Keter keeps no card of the nine &mdash; it is the dial at the top &mdash; so in ' +
-        'its hour the line names the day&rsquo;s Hayom Yom, out of Strong Day, and links ' +
-        'out to it; its own ring is on that section&rsquo;s label. </p><p>Beneath, the heart counts the ten prayers &mdash; ' +
-        'each may be marked in any order, because each has its own hour &mdash; and the moon ' +
-        'counts the readings. It fills as the fifteen steps up are taken and becomes the sun at ' +
-        'fifteen, whose rays then remain; from there the moon wanes as the fifteen back down are ' +
-        'taken. </p><p>The number under it counts the whole undertaking rather than the half ' +
-        'being walked &mdash; out of thirty for the month entire, and out of the same number the ' +
-        '&#9790; row beneath it is set to &mdash; so the two always read one scale. Which half ' +
-        'of the arc the day is on is said by the moon&rsquo;s own shape: filling on the way up, ' +
-        'crowned with rays at the turn, emptying on the way down. The menorah beside it holds a ' +
-        'closed set of ten bearers on nine ' +
+        'What the day is asking for next, and how much of it has been done. </p><p>Three lines ' +
+        'name the three kinds: the face of the Sefirah whose hour it is, the prayer that hour ' +
+        'is asking for, and the next of the thirty readings. One of them carries a rule down ' +
+        'its left and a verb, and it is always the reading. The thirty are a sequence &mdash; ' +
+        'exactly one is being asked for, and marking it makes another the one being asked for ' +
+        '&mdash; which is what a next step means. A face cannot be finished and the ten ' +
+        'prayers each keep their own hour, so neither stands in a queue and neither is lit. ' +
+        '</p><p>Until a path has been chosen, a line above the three carries the first step ' +
+        'instead: <em>Choose your paths</em>. It is shown once and never again after. ' +
+        '</p><p>The face is the day&rsquo;s own coordinates &mdash; the letter, the creature, ' +
+        'the Name of the seventy-two, the attribute, whichever that card holds. It is not a ' +
+        'deed, but dwelling on one is, and that is what the flame counts: not the fact, but ' +
+        'that you focused on it. Tapping the line goes to its card, where the flame beside the ' +
+        'day&rsquo;s own line takes the mark &mdash; hollow until the face has been focused ' +
+        'on, then filled. Keter keeps no card of the nine &mdash; it is the dial at the top ' +
+        '&mdash; so in its hour the line names the week and the words that name it, and its ' +
+        'flame is in the dial&rsquo;s own caption. </p><p>The prayer marks in place: the tag ' +
+        'here and the tag on the card are the same prayer, and either lights both. Every ' +
+        'prayer carries an &#8599; to its text, here and on its card &mdash; Chabad&rsquo;s ' +
+        'Nusach Ari where there is one, and where there is not, whoever holds it best. ' +
+        '</p><p>Beneath, the heart counts the ten prayers, the flame the ten faces, and the ' +
+        'moon the readings. The moon fills as the fifteen steps up are taken and becomes the ' +
+        'sun at fifteen, whose rays then remain; from there it wanes as the fifteen back down ' +
+        'are taken. Its number counts the whole undertaking rather than the half being walked, ' +
+        'so which half of the arc the day is on is said by the moon&rsquo;s own shape rather ' +
+        'than by the count. The menorah beside it holds a closed set of ten bearers on nine ' +
         'lights, gathered as companions rather than counted as steps. </p><p>When the ' +
         'day&rsquo;s climb is finished, an offer of tomorrow&rsquo;s appears in its place. ' +
-        '</p><p>The thirty are the month, and a reader takes a portion of it: the ' +
-        '<strong>&#9790; 3 &middot; 7 &middot; 15 &middot; 30</strong> row under the counts sets ' +
-        'it, and tapping the moon and then <strong>Change</strong> opens the same choice with the ' +
-        'thirty listed for picking one by one. The moon then answers to that portion ' +
-        '&mdash; seven steps fill it as thirty do &mdash; and a faint ring outside it keeps the ' +
-        'month, so both are in view at once. Nothing is taken off the page: the steps not ' +
-        'undertaken stay in the list, faint, and can still be marked. </p><p>The ten prayers ' +
-        'are undertaken the same way, from the <strong>&#9829;</strong> row beside it or the ' +
-        'heart&rsquo;s own list &mdash; three, five, seven or ten, or any of them picked singly ' +
-        '&mdash; and the heart then fills with those. A ' +
-        'prayer not undertaken keeps its place beside its Sefirah, faint; its hour does not ' +
-        'pulse and the ladder does not call for it, but it can still be marked, and then it ' +
-        'counts to the ten rather than to the heart.',
+        '</p><p>The thirty are the month, and a reader takes a portion of it. ' +
+        '<strong>Customize Paths</strong> at the foot opens three doors, one to each count. ' +
+        'The readings can be chosen by how much &mdash; three, seven, fifteen, thirty &mdash; ' +
+        'by whose they are: Chabad, Breslov, Kabbalah &amp; Midrash, Halacha, Mishna &amp; ' +
+        'Talmud, Chumash &amp; Tanach &mdash; or by what you can read, which is the eighteen ' +
+        'whose text or daily shiur is in English. Any of the thirty can also be picked singly, ' +
+        'and each says whether it has English. The moon then answers to the portion held ' +
+        '&mdash; seven steps fill it as thirty do &mdash; and a faint ring outside it keeps ' +
+        'the month, so both are in view at once. The ten prayers and the ten faces are ' +
+        'undertaken the same way, from their own doors. A prayer not undertaken keeps its ' +
+        'place beside its Sefirah, faint; its hour does not pulse and the ladder does not call ' +
+        'for it, but it can still be said, and then it counts to the ten rather than to the ' +
+        'heart. </p><p>The line being asked for also travels: once this block is off the ' +
+        'screen it sits at the foot of it, saying the same thing, going to the same place, and ' +
+        'gone when the day&rsquo;s readings are done.',
       advanced:
         'The thirty counted steps are Or Pnimi, inner light, and are therefore taken strictly ' +
         'in order: at any moment exactly one is being asked for, and tapping any other will not ' +
         'take. The return does not begin until the moon is full, and the count stands out of the ' +
-        'whole thirty throughout rather than out of the half in hand. </p><p>The ten prayers are not ' +
-        'ordered that way. Each has its own hour, so they may be marked as they are said, and ' +
+        'whole thirty throughout rather than out of the half in hand. That order is why the ' +
+        'reading is the one line the ladder lights: it is the only one of the three that has a ' +
+        'next. </p><p>The ten prayers are not ordered that way. Each has its own hour, so they ' +
+        'may be marked as they are said, and ' +
         'the one whose hour has come pulses until it is. The heart glows when the day&rsquo;s ' +
-        'ten are whole. </p><p>The companions marked <strong>&#10017;</strong> stand outside ' +
+        'ten are whole. The ten faces are not ordered either, and cannot be completed at all ' +
+        '&mdash; what is marked is the dwelling, not the fact. </p><p>The companions marked ' +
+        '<strong>&#10017;</strong> stand outside ' +
         'the thirty altogether &mdash; Or Makif, the surrounding light, which does not wait on ' +
         'a vessel&rsquo;s order. Twenty-two of them fill the ring of eleven stars around the ' +
         'moon, two to a star. The menorah is a closed set among them: ten bearers on nine ' +
@@ -16629,7 +16647,7 @@ content: ''; float: right; width: 30px; height: 1em;
         'path of descent alone begins full and crowned at &#1496;&quot;&#1493;, where its steps ' +
         'stand in the month. The thirty-first waits for all thirty however few were undertaken: ' +
         'it is the seal of the month, not of a portion of it.',
-      meta: 'Thirty counted steps &middot; ten prayers &middot; the companions and the menorah'
+      meta: 'Ten faces &middot; ten prayers &middot; thirty counted steps &middot; and what the day asks next'
     },
     // The heading over the dial, and the note that had nowhere else to sit:
     // that the highest of the Sefirot is reached in the present hour rather
@@ -17346,9 +17364,9 @@ content: ''; float: right; width: 30px; height: 1em;
   // after each render the way the ⓘ buttons are, rather than written into ten
   // card templates — the cards are rebuilt on every day change and a mark
   // written into the template would have to be rebuilt with them.
-  // The glyph is the counter's own, small: a ring cut by a horizon, hollow
-  // until the face has been focused on and then filled. A mark and the thing it
-  // feeds should be the same shape, which is how ✡ already works for the stars.
+  // The glyph is the counter's own, small: a flame, hollow until the face has
+  // been focused on and then filled. A mark and the thing it feeds should be
+  // the same shape, which is how ✡ already works for the stars.
   // Where inside the host the mark actually goes. Hod writes its face as a
   // stack of lines and Malchut's day sits in one too, so putting the mark at
   // the head of the host left it standing alone above a block — a flame on a
