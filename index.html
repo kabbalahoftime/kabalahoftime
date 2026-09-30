@@ -2407,6 +2407,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .path-row.off { opacity:.42; }
 .path-row.off:hover { opacity:.72; }
 .path-row.off.done { opacity:.6; }
+/* A row that marks something gets its own 44px; a row that only navigates
+   keeps the tighter rhythm, because a mis-tap there costs a scroll rather
+   than a change of state — and Today's Path has thirty of them, which at
+   44px apiece would add a screen's worth of height to the list. */
+#meditations-body .path-row, #prayers-body .path-row { min-height:44px; }
 .path-beyond {
   font-family:'Cinzel',serif; font-size:calc(9.5px * var(--ts, 1)); letter-spacing:1px;
   color:var(--ink-dim); text-transform:uppercase; white-space:nowrap;
@@ -2691,6 +2696,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    as one: gold, with the same ↗ the app uses wherever it hands a reader over
    to somebody else's site. */
 .today-face a.tf-open { color:var(--gold); text-decoration:none; }
+/* The mark for the hour's meditation. Drawn small and dim until it is taken,
+   then in the ring's own blue. A real 44x44 box rather than padding around a
+   glyph: padded, it measured 29 across, and a reach to either side landed on
+   the face button beside it. The negative margins keep the line the height it
+   would have been without it. */
+.today-face .tf-mark {
+  background:none; border:none; cursor:pointer; font-size:1.05em;
+  color:var(--ink-dim); line-height:1;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:44px; height:44px; padding:0;
+  margin:-15px -6px -15px 2px;
+  position:relative; z-index:1; vertical-align:middle;
+}
+.today-face .tf-mark.done { color:var(--accent-blue); }
+.today-face .tf-mark:hover { color:var(--gold); }
 .today-count { font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
 .today-more { background:none; border:none; font-family:inherit; cursor:pointer;
   font-size:calc(11px * var(--ts, 1)); color:var(--gold); padding:6px 0; white-space:nowrap; }
@@ -3079,6 +3099,31 @@ content: ''; float: right; width: 30px; height: 1em;
            and a Jerusalem time. The times are gone; these belong here, in the
            block that already says how much of the path is walked. -->
       <div class="dc-row">
+        <!-- THE TEN MEDITATIONS. The faces are not deeds — they are the day's
+             coordinates — but dwelling on one is, and that is what this counts:
+             not the fact, but that the reader sat with it. Ten, because Keter's
+             face is the day's Hayom Yom and the nine cards carry the rest.
+             The glyph is a ring cut by a horizon: heaven above, earth below,
+             and the fill rises from the earth through the horizon as the ten
+             are taken. Blue rather than the heart's red or the moon's gold, so
+             the three gatherings are told apart at a glance. -->
+        <div class="dc-col" id="med-col" onclick="openMeditations()"
+             style="cursor:pointer;" title="The day's ten meditations — the face of each Sefirah's hour">
+          <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:5px;">
+            <svg id="med-ring-svg" width="20" height="20" viewBox="0 0 22 22" style="display:block;">
+              <defs>
+                <clipPath id="med-clip"><rect id="med-rect" x="0" y="22" width="22" height="22"/></clipPath>
+              </defs>
+              <circle id="med-fill" cx="11" cy="11" r="9" fill="var(--accent-blue)"
+                      fill-opacity="0" clip-path="url(#med-clip)"/>
+              <circle cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.1"/>
+              <line x1="2.2" y1="11" x2="19.8" y2="11" stroke="var(--gold)" stroke-width="1" opacity="0.75"/>
+            </svg>
+            <span id="med-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/10</span>
+          </div>
+          <div class="dc-label">Meditation &nbsp;<span class="heb">התבוננות</span></div>
+        </div>
+        <div class="dc-sep">·</div>
         <!-- The heart came here from the Now card, which is gone. It belongs beside
              the moon rather than on a card: these two columns are the day's
              gatherings counted — thirty steps, stars and seven Rebbeim in the one,
@@ -3446,6 +3491,19 @@ content: ''; float: right; width: 30px; height: 1em;
         <button class="heb-picker-close" onclick="closeTodaysPath()">×</button>
       </div>
       <div id="todays-path-body"></div>
+    </div>
+  </div>
+
+  <!-- THE TEN MEDITATIONS — the faces gathered, as the heart gathers the ten
+       prayers. Each row names the Sefirah, the face its card is holding today,
+       and whether it has been sat with. -->
+  <div id="meditations-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:9000; align-items:center; justify-content:center;">
+    <div class="heb-picker-card" style="width:min(380px, 92vw); max-height:82vh; overflow-y:auto;">
+      <div class="heb-picker-header">
+        <span class="heb-picker-title">The Ten Meditations — עֶשֶׂר הִתְבּוֹנְנוּיוֹת</span>
+        <button class="heb-picker-close" onclick="closeMeditations()">×</button>
+      </div>
+      <div id="meditations-body"></div>
     </div>
   </div>
 
@@ -15029,6 +15087,109 @@ content: ''; float: right; width: 30px; height: 1em;
     });
   }
 
+  // ── THE TEN MEDITATIONS — one face to each Sefirah's hour ──
+  // A face is a fact and cannot be completed; sitting with it can, and that is
+  // what this holds. Ten bits per Jewish date, resetting with the day as the
+  // prayers and the steps do. The order is PRAYER_SEFIRAH's, Keter first, so
+  // that a Sefirah's prayer and its meditation carry the same number.
+  // Read through functions rather than aliased into a const here:
+  // PRAYER_SEFIRAH is declared further down the file, and an alias at this
+  // point threw at load and took the rest of the script with it — every
+  // `let` below the throw stayed uninitialised, so the first render died on
+  // one of those rather than on the real cause.
+  function medSefirah(n) { return PRAYER_SEFIRAH[n - 1]; }
+  function medIndexOf(name) { return PRAYER_SEFIRAH.indexOf(name) + 1; }
+  let _medKey = null;
+
+  function medMask() {
+    try { return Math.max(0, parseInt(localStorage.getItem(_medKey), 10) || 0) & 1023; }
+    catch (e) { return 0; }
+  }
+  function medDone() { return _popcount(medMask()); }
+  function medHas(n) { return !!(medMask() & (1 << (n - 1))); }
+  function toggleMed(n, e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    if (!_medKey || !(n >= 1 && n <= 10)) return;
+    try { localStorage.setItem(_medKey, String(medMask() ^ (1 << (n - 1)))); } catch (err) {}
+    applyMedState();
+  }
+  // The face of the hour, marked from the ladder without leaving it.
+  function toggleMedNow(e) {
+    const i = medIndexOf(_faceHourName());
+    if (i) toggleMed(i, e);
+  }
+
+  function applyMedState() {
+    if (!_medKey) return;
+    const done = medDone();
+    const rect = document.getElementById('med-rect');
+    const cnt  = document.getElementById('med-count');
+    const fill = document.getElementById('med-fill');
+    const svg  = document.getElementById('med-ring-svg');
+    if (rect) {
+      // The disc fills from the foot of the ring upward, so the earth rises
+      // through the horizon rather than the sky filling downward.
+      const top = 2, bot = 20, f = done / 10;
+      rect.setAttribute('y', String(bot - (bot - top) * f));
+      rect.setAttribute('height', String((bot - top) * f + 1));
+      if (fill) fill.setAttribute('fill-opacity', done ? '0.8' : '0');
+      if (svg) svg.style.filter = (done === 10)
+        ? 'drop-shadow(0 0 3px rgba(122,150,205,0.9))' : '';
+    }
+    if (cnt) cnt.textContent = done + '/10';
+    const col = document.getElementById('med-col');
+    if (col) col.title = done === 10
+      ? 'All ten faces sat with — the day looked at from every side'
+      : 'The day’s ten meditations — the face of each Sefirah’s hour';
+    // The mark on the ladder's own Meditation line follows the hour.
+    const mk = document.getElementById('today-med-mark');
+    if (mk) {
+      const i = medIndexOf(_faceHourName());
+      const on = !!i && medHas(i);
+      mk.textContent = on ? '☑' : '☐';
+      mk.classList.toggle('done', on);
+      mk.setAttribute('aria-pressed', on ? 'true' : 'false');
+      mk.style.display = i ? '' : 'none';
+    }
+    const m = document.getElementById('meditations-modal');
+    if (m && m.style.display === 'flex') renderMedsBody();
+    if (typeof syncA11yState === 'function') syncA11yState();
+  }
+
+  function renderMedsBody() {
+    const body = document.getElementById('meditations-body');
+    if (!body) return;
+    const mask = medMask();
+    const hour = _faceHourName();
+    let html = '';
+    for (let n = 1; n <= 10; n++) {
+      const sef = medSefirah(n);
+      const face = _faceOf(_faceCardFor(sef), sef) || '—';
+      const done = !!(mask & (1 << (n - 1)));
+      const now = (sef === hour) && currentOffset === 0;
+      html += `<div class="path-row${done ? ' done' : ''}${now ? ' next due' : ''}" ` +
+        `role="button" tabindex="0" aria-pressed="${done}" ` +
+        `onclick="toggleMed(${n}, event)">` +
+        `<span class="path-check">${done ? '☑' : '☐'}</span>` +
+        `<span class="path-name">${face}</span>` +
+        `<span class="path-sef">${sef}</span>` +
+        (now ? `<span class="path-next-tag">now</span>` : '') +
+        `</div>`;
+    }
+    const d = medDone();
+    html += `<div class="path-complete">` + (d === 10
+      ? 'Ten of ten — the day looked at from every side.'
+      : d + ' of 10 sat with') + `</div>`;
+    body.innerHTML = html;
+  }
+  function openMeditations() {
+    renderMedsBody();
+    document.getElementById('meditations-modal').style.display = 'flex';
+  }
+  function closeMeditations() {
+    document.getElementById('meditations-modal').style.display = 'none';
+  }
+
   function applyPrayerState() {
     if (!_prayerKey) return;
     applyTachanunSwap();
@@ -15919,9 +16080,11 @@ content: ''; float: right; width: 30px; height: 1em;
         'it. </p><p>Under it stand two lines about the hour itself: the prayer it is asking ' +
         'for, and the <strong>face of the card whose hour it is</strong> &mdash; today&rsquo;s ' +
         'letter, or creature, or attribute, whichever that card keeps. That one is not a thing ' +
-        'to do; it is what the day <em>is</em>. Tapping it goes to the card it was read from. ' +
+        'to do; it is what the day <em>is</em>. Tapping it goes to the card it was read from, ' +
+        'and the box beside it marks that you have sat with it. ' +
         '</p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
-        'the ten prayers are said, the <strong>circle</strong> beside it counts the readings, ' +
+        'the ten prayers are said, the <strong>ring</strong> at the left counts the ten ' +
+        'faces sat with, the <strong>circle</strong> beside it counts the readings, ' +
         'and the menorah at the end holds the ten who carry it. </p><p>A little is a step. A ' +
         'few lines opened counts. </p><p>Ten prayers and thirty readings in a day is a great ' +
         'deal to begin with, and you are not asked for all of them. Under the two counts are ' +
@@ -15938,9 +16101,11 @@ content: ''; float: right; width: 30px; height: 1em;
         'What the day is asking for next, and how much of it has been done. </p><p>The top line ' +
         'names the next step and goes to it. Beneath it the hour speaks twice: the prayer it is ' +
         'asking for, and the face of the Sefirah whose hour it is &mdash; the letter, the ' +
-        'creature, the Name of the seventy-two, the attribute, whichever that card holds. The ' +
-        'counted steps and the prayers are deeds and are marked; a face is not a deed but the ' +
-        'day&rsquo;s own coordinates, so it carries no mark and goes instead to its card. ' +
+        'creature, the Name of the seventy-two, the attribute, whichever that card holds. A ' +
+        'face is not a deed and cannot be completed &mdash; it is the day&rsquo;s own ' +
+        'coordinates &mdash; but dwelling on one is, and that is what the ring counts: not ' +
+        'the fact, but that you sat with it. Tapping the face goes to its card; the box ' +
+        'beside it takes the meditation. ' +
         'Keter keeps no card &mdash; it is the dial at the top &mdash; so in its hour that line ' +
         'stands down. </p><p>Beneath, the heart counts the ten prayers &mdash; ' +
         'each may be marked in any order, because each has its own hour &mdash; and the moon ' +
@@ -17423,7 +17588,14 @@ content: ''; float: right; width: 30px; height: 1em;
               'aria-label="Read today&rsquo;s Hayom Yom on Chabad.org">' + face + ' &#8599;</a>'
             : '<button type="button" class="tf-open" onclick="todayFaceGo()" ' +
               'aria-label="Go to the ' + name + ' card">' + face + '</button>') +
-          '<span class="tp-sef">&middot; ' + name + '</span>'
+          '<span class="tp-sef">&middot; ' + name + '</span>' +
+          // The mark sits last, after the name, so the line reads as a thing
+          // and then as a thing done. It is a control of its own rather than
+          // the word itself, because tapping the face already goes to its card
+          // and one tap cannot mean two things.
+          '<button type="button" class="tf-mark" id="today-med-mark" ' +
+          'onclick="toggleMedNow(event)" aria-pressed="false" ' +
+          'aria-label="Mark this meditation as sat with">&#9744;</button>'
         : '';
     }
     el.style.display = face ? '' : 'none';
@@ -18376,10 +18548,12 @@ content: ''; float: right; width: 30px; height: 1em;
     _yomMaskKey = 'kotYomMask:' + hYear + '-' + hMonth + '-' + hDay;
     _songKey    = 'kotSong:' + hYear + '-' + hMonth + '-' + hDay;
     _prayerKey = 'kotPrayers:' + hYear + '-' + hMonth + '-' + hDay;
+    _medKey    = 'kotMeditations:' + hYear + '-' + hMonth + '-' + hDay;
     _starsKey  = 'kotStars:' + hYear + '-' + hMonth + '-' + hDay;
     setTimeout(buildCardPanes, 0);  // file the day's detail into the panes first
     setTimeout(applyMaalotState, 0); // after this render's innerHTML writes settle
     setTimeout(applyPrayerState, 0);
+    setTimeout(applyMedState, 0);
     setTimeout(applyStarState, 0);
     setTimeout(injectCycleInfoButtons, 0); // re-append ⓘ after this render's rewrites
     setTimeout(applyA11y, 0);        // name, role and state for anything tappable
