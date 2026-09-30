@@ -17194,15 +17194,15 @@ content: ''; float: right; width: 30px; height: 1em;
     ['א׳', 'Works of Her Praise', 'Malchut'],
     ['ב׳', 'Fruits of Her Labor', 'Malchut'],
     ['ג׳', 'Year-Round Connection', 'Malchut'],
-    ['ד׳', 'Shovavim — Parasha', 'Yesod'],
-    ['ה׳', 'Zohar — Chok L\'Yisrael', 'Hod'],
+    ['ד׳', 'Ben Ish Chai / Rav Pe’alim', 'Yesod'],
+    ['ה׳', 'Tanna D’vei Eliyahu', 'Hod'],
     ['ו׳', 'Shulchan Aruch', 'Hod'],
-    ['ז׳', '40-Day Cycle', 'Netzach'],
-    ['ח׳', '13 Attributes', 'Tiferet'],
+    ['ז׳', 'Sichos HaRan / Likutei Etzot', 'Netzach'],
+    ['ח׳', 'Seder Birkas HaNehenin / Rebbe Nachman’s Tales', 'Tiferet'],
     ['ט׳', 'Tanach — 2 Chapters', 'Gevurah'],
     ['י׳', 'Mishna & Tosefta', 'Chesed'],
-    ['י״א', 'Sefirot — 7×7×7 Cycle', 'Binah'],
-    ['י״ב', 'Alef-Bet — 22-Day Cycle', 'Chochmah'],
+    ['י״א', 'Likutei Tefilot', 'Binah'],
+    ['י״ב', 'Torah Ohr / Likutei Torah', 'Chochmah'],
     ['י״ג', 'Strong Day — Hayom Yom & Rambam', 'Keter'],
     ['י״ד', 'Light that is Good — אור כי טוב', 'Keter'],
     ['ט״ו', 'All Year Round', 'Keter'],
@@ -17211,7 +17211,7 @@ content: ''; float: right; width: 30px; height: 1em;
     ['א׳', 'Chumash with Rashi', 'Keter'],
     ['ב׳', 'Tanya', 'Keter'],
     ['ג׳', 'Rambam — any track', 'Keter'],
-    ['ד׳', 'Likutei Torah', 'Chochmah'],
+    ['ד׳', 'Tractate Cycle', 'Chochmah'],
     ['ה׳', 'Breslov Israel Recordings', 'Binah'],
     ['ו׳', 'Shulchan Aruch HaRav', 'Chesed'],
     ['ז׳', 'Reb Shlomo Carlebach', 'Chesed'],
@@ -17383,6 +17383,19 @@ content: ''; float: right; width: 30px; height: 1em;
     return 0;
   }
 
+  // These names are the fallback, not what a reader usually sees: the rows are
+  // named by the card itself, so the path always says what the day is actually
+  // holding. The fallback is reached when the page cannot be read — chiefly
+  // when the ladder offers tomorrow's step, where the cards on screen are the
+  // wrong day's — so each name here must be the step in general rather than
+  // today's instance of it. Seven had gone stale: four named the card's cycle
+  // from a time when a step was named for its card rather than for the reading
+  // on it, and three named a text that had moved. Likutei Torah, for one, went
+  // up from מיעוט ד׳ to מעלה י״ב and the Tractate Cycle took its place, while
+  // the table kept it where it had been. They were checked by sampling the
+  // live names every fifth day across a whole year, so the ones that rotate
+  // are named by both of their faces.
+  //
   // The rows are named by the card itself, so the path always says what the
   // day is actually holding — Tiferet's work alternates through the year,
   // Netzach's Breslov volume rotates, Yesod turns from Ben Ish Chai to Rav
