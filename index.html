@@ -2869,7 +2869,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    who knows the app read them as a list of what today holds; a reader who
    does not read three labels with no verb between them.
    So one of the three is the one being asked for and says so in words —
-   "Say Shacharit", "Read מעלה ז׳", "Sit with" — while the other two stand
+   "Say Shacharit", "Read מעלה ז׳", "Focus on" — while the other two stand
    back. No fourth line: a box above these saying what they already say is
    the duplication this block has twice been cleared of.
    Which one is the first unmarked reading down, which is both the order they
@@ -18279,8 +18279,13 @@ content: ''; float: right; width: 30px; height: 1em;
   // a const read before its own line has run throws rather than reading
   // undefined. That fault cost a whole render once already in this file.
   function _ladderVerbFor(k) {
+    // "Focus on" rather than "Sit with", and rather than "Visualize": the
+    // line has to carry every face there is, and some of them are not things
+    // to picture — a day of the Omer, a week and its quote, "day 5 of 5".
+    // Focus holds all of them, and it is nearer התבוננות, which is the word
+    // on the counter these marks feed: a looking-into, not an image made.
     return k === 'start' ? 'Choose'
-         : k === 'med' ? 'Sit with'
+         : k === 'med' ? 'Focus on'
          : k === 'pray' ? 'Say'
          : k === 'study' ? 'Read' : '';
   }
