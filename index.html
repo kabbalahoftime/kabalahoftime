@@ -2726,21 +2726,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    as one: gold, with the same ↗ the app uses wherever it hands a reader over
    to somebody else's site. */
 .today-face a.tf-open { color:var(--gold); text-decoration:none; }
-/* The mark for the hour's meditation. Drawn small and dim until it is taken,
-   then in the ring's own blue. A real 44x44 box rather than padding around a
-   glyph: padded, it measured 29 across, and a reach to either side landed on
-   the face button beside it. The negative margins keep the line the height it
-   would have been without it. */
-.today-face .tf-mark {
-  background:none; border:none; cursor:pointer; font-size:1.05em;
-  color:var(--ink-dim); line-height:1;
-  display:inline-flex; align-items:center; justify-content:center;
-  width:44px; height:44px; padding:0;
-  margin:-15px -6px -15px 2px;
-  position:relative; z-index:1; vertical-align:middle;
-}
-.today-face .tf-mark.done { color:var(--accent-blue); }
-.today-face .tf-mark:hover { color:var(--gold); }
 .today-count { font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
 .today-more { background:none; border:none; font-family:inherit; cursor:pointer;
   font-size:calc(11px * var(--ts, 1)); color:var(--gold); padding:6px 0; white-space:nowrap; }
@@ -15143,12 +15128,6 @@ content: ''; float: right; width: 30px; height: 1em;
     try { localStorage.setItem(_medKey, String(medMask() ^ (1 << (n - 1)))); } catch (err) {}
     applyMedState();
   }
-  // The face of the hour, marked from the ladder without leaving it.
-  function toggleMedNow(e) {
-    const i = medIndexOf(_faceHourName());
-    if (i) toggleMed(i, e);
-  }
-
   function applyMedState() {
     if (!_medKey) return;
     const done = medDone();
@@ -15171,16 +15150,6 @@ content: ''; float: right; width: 30px; height: 1em;
     if (col) col.title = done === 10
       ? 'All ten faces sat with — the day looked at from every side'
       : 'The day’s ten meditations — the face of each Sefirah’s hour';
-    // The mark on the ladder's own Meditation line follows the hour.
-    const mk = document.getElementById('today-med-mark');
-    if (mk) {
-      const i = medIndexOf(_faceHourName());
-      const on = !!i && medHas(i);
-      mk.textContent = on ? '☑' : '☐';
-      mk.classList.toggle('done', on);
-      mk.setAttribute('aria-pressed', on ? 'true' : 'false');
-      mk.style.display = i ? '' : 'none';
-    }
     const m = document.getElementById('meditations-modal');
     if (m && m.style.display === 'flex') renderMedsBody();
     // The marks scattered down the page, which is where they are taken.
@@ -16116,9 +16085,8 @@ content: ''; float: right; width: 30px; height: 1em;
         'for, and the <strong>face of the card whose hour it is</strong> &mdash; today&rsquo;s ' +
         'letter, or creature, or attribute, whichever that card keeps. That one is not a thing ' +
         'to do; it is what the day <em>is</em>. Tapping it goes to the card it was read from, ' +
-        'and the box beside it marks that you have sat with it. Every card carries ' +
-        'the same small ring beside its Sefirah&rsquo;s name, so a face can be taken ' +
-        'where it is read. ' +
+        'and every card carries a small ring beside its Sefirah&rsquo;s name, which ' +
+        'marks that you have sat with that face. ' +
         '</p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
         'the ten prayers are said, the <strong>ring</strong> at the left counts the ten ' +
         'faces sat with, the <strong>circle</strong> beside it counts the readings, ' +
@@ -16141,11 +16109,12 @@ content: ''; float: right; width: 30px; height: 1em;
         'creature, the Name of the seventy-two, the attribute, whichever that card holds. A ' +
         'face is not a deed and cannot be completed &mdash; it is the day&rsquo;s own ' +
         'coordinates &mdash; but dwelling on one is, and that is what the ring counts: not ' +
-        'the fact, but that you sat with it. Tapping the face goes to its card; the box ' +
-        'beside it takes the meditation &mdash; as does the small ring on each ' +
-        'card, hollow until the face has been sat with and then filled. ' +
-        'Keter keeps no card &mdash; it is the dial at the top &mdash; so in its hour that line ' +
-        'stands down. </p><p>Beneath, the heart counts the ten prayers &mdash; ' +
+        'the fact, but that you sat with it. Tapping the face goes to its card, and the ' +
+        'small ring on that card takes the meditation &mdash; hollow until the face has ' +
+        'been sat with, then filled. ' +
+        'Keter keeps no card of the nine &mdash; it is the dial at the top &mdash; so in ' +
+        'its hour the line names the day&rsquo;s Hayom Yom, out of Strong Day, and links ' +
+        'out to it; its own ring is on that section&rsquo;s label. </p><p>Beneath, the heart counts the ten prayers &mdash; ' +
         'each may be marked in any order, because each has its own hour &mdash; and the moon ' +
         'counts the readings. It fills as the fifteen steps up are taken and becomes the sun at ' +
         'fifteen, whose rays then remain; from there the moon wanes as the fifteen back down are ' +
@@ -17656,14 +17625,12 @@ content: ''; float: right; width: 30px; height: 1em;
               'aria-label="Read today&rsquo;s Hayom Yom on Chabad.org">' + face + ' &#8599;</a>'
             : '<button type="button" class="tf-open" onclick="todayFaceGo()" ' +
               'aria-label="Go to the ' + name + ' card">' + face + '</button>') +
-          '<span class="tp-sef">&middot; ' + name + '</span>' +
-          // The mark sits last, after the name, so the line reads as a thing
-          // and then as a thing done. It is a control of its own rather than
-          // the word itself, because tapping the face already goes to its card
-          // and one tap cannot mean two things.
-          '<button type="button" class="tf-mark" id="today-med-mark" ' +
-          'onclick="toggleMedNow(event)" aria-pressed="false" ' +
-          'aria-label="Mark this meditation as sat with">&#9744;</button>'
+          // No mark here. The line names the face and goes to it; the
+          // meditation is taken on the face itself, where every card carries
+          // one. A box on this line wrapped to a line of its own on a phone,
+          // which read as a stray checkbox under the text rather than as part
+          // of it.
+          '<span class="tp-sef">&middot; ' + name + '</span>'
         : '';
     }
     el.style.display = face ? '' : 'none';
