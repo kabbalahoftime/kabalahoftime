@@ -17126,15 +17126,57 @@ content: ''; float: right; width: 30px; height: 1em;
     // Chumash with Rashi, Tanya, Rambam — Chitas and Rambam, the daily. It
     // wanted no inventing: the three were already lying together at the head
     // of the descent.
-    { key: 'three', name: 'Three', sub: 'Chumash with Rashi · Tanya · Rambam',
+    { key: 'three', name: 'Three', sub: 'Chumash with Rashi · Tanya · Rambam', group: 'size',
       steps: [15, 16, 17] },
     // Those three, and the four that make a Chok: Nach, Mishna, Halacha, Zohar.
-    { key: 'seven', name: 'Seven', sub: 'the three, with Tanach, Mishna, Shulchan Aruch and Tanna D’vei Eliyahu',
+    { key: 'seven', name: 'Seven', group: 'size',
+      sub: 'the three, with Tanach, Mishna, Shulchan Aruch and Tanna D’vei Eliyahu',
       steps: [4, 5, 8, 9, 15, 16, 17] },
-    { key: 'fifteen', name: 'Fifteen', sub: 'the ascent alone — Malchut up to Keter, the moon to full',
+    { key: 'fifteen', name: 'Fifteen', group: 'size',
+      sub: 'the ascent alone — Malchut up to Keter, the moon to full',
       steps: PATH_ALL.slice(0, 15) },
-    { key: 'thirty', name: 'Thirty', sub: 'the month entire',
+    { key: 'thirty', name: 'Thirty', sub: 'the month entire', group: 'size',
       steps: PATH_ALL.slice() },
+
+    // ── BY TRADITION ──
+    // The four above answer "how much"; these answer "whose". Each is drawn
+    // from what the thirty actually hold, read off the cards rather than off
+    // the tables above — those have gone stale in seven places, and reading
+    // them is what once put the Zohar in the Seven where Tanna D'vei Eliyahu
+    // stands. They overlap on purpose: the Rambam belongs to Chabad and to
+    // Halacha both, Chumash with Rashi to Chabad and to Chumash & Tanach,
+    // because the thing itself belongs to both.
+    //
+    // Chitas and Rambam at the head of the descent, the Alter Rebbe's
+    // ma'amarim and his Shulchan Aruch, Hayom Yom, the Sichos, and the
+    // Rebbe's last ma'amar. Chitas's Tehillim is not here: it is not a
+    // reading of the thirty but one of the ten prayers, on Gevurah.
+    { key: 'chabad', name: 'Chabad', group: 'tradition',
+      sub: 'Chitas and Rambam · Torah Ohr · Hayom Yom · Shulchan Aruch HaRav · Likkutei Sichos · ואתה תצוה',
+      steps: [2, 11, 12, 15, 16, 17, 20, 27] },
+    // Rebbe Nachman through the year: the Sichos, the prayers Reb Noson made
+    // of the lessons, the Chok, the daily recordings, and Likutei Moharan
+    // itself inside All Year Round.
+    { key: 'breslov', name: 'Breslov', group: 'tradition',
+      sub: 'Likutei Moharan · Sichos HaRan · Likutei Tefilot · Chok Breslov · the daily recordings',
+      steps: [6, 10, 14, 19, 24] },
+    // What a Jew is bound to do: the Shulchan Aruch in both recensions, the
+    // Rambam, the blessings over food, the laws of speech, and the Ben Ish
+    // Chai's responsa.
+    { key: 'halacha', name: 'Halacha', group: 'tradition',
+      sub: 'Shulchan Aruch and Shulchan Aruch HaRav · Rambam · Birkas HaNehenin · Chofetz Chaim · Rav Pe’alim',
+      steps: [3, 5, 7, 17, 20, 25] },
+    // The Oral Torah in its own order: Chesed's Mishna, which turns to
+    // Tosefta as the cycle runs; the tractate cycle on Chochmah; and the daf.
+    { key: 'talmud', name: 'Mishna & Talmud', group: 'tradition',
+      sub: 'Mishna and Tosefta · the Tractate Cycle · Daf Yomi',
+      steps: [9, 18, 22] },
+    // The written Torah and what carries it through the week: Tanach two
+    // chapters a day, the parasha with Rashi, and Chok L'Yisrael, whose day
+    // opens with Torah, Nevi'im and Ketuvim.
+    { key: 'tanach', name: 'Chumash & Tanach', group: 'tradition',
+      sub: 'Tanach · Chumash with Rashi · Chok L’Yisrael',
+      steps: [8, 15, 26] },
   ];
   // The order a step is offered in when a kept path earns another rung: the
   // three, then the four that complete the Chok, then the ascent from its
@@ -17945,14 +17987,20 @@ content: ''; float: right; width: 30px; height: 1em;
       `<div class="path-note">The month stays thirty. What you choose is what the day asks of you; ` +
       `the rest stay on the page, faint, and can still be taken. Thirty a day is a great deal to begin with — ` +
       `begin with three, and the app will offer you another rung when you have kept them.</div>`;
-    html += `<div class="path-section-title">Paths</div>`;
-    PATH_PRESETS.forEach(p => {
+    const preset = (p) => {
       const on = p.steps.join(',') === sig;
-      html += `<button type="button" class="path-preset${on ? ' on' : ''}" onclick="event.stopPropagation(); pathPickPreset('${p.key}')">` +
+      return `<button type="button" class="path-preset${on ? ' on' : ''}" onclick="event.stopPropagation(); pathPickPreset('${p.key}')">` +
         `<span class="path-preset-n">${p.name}</span>` +
         `<span>${p.sub}<span class="path-preset-sub">${p.steps.length} step${p.steps.length === 1 ? '' : 's'} a day</span></span>` +
         `</button>`;
-    });
+    };
+    html += `<div class="path-section-title">How much — by size</div>`;
+    PATH_PRESETS.filter(p => p.group !== 'tradition').forEach(p => { html += preset(p); });
+    // Whose, rather than how much. Under its own heading because it answers a
+    // different question: someone choosing Chabad is not choosing a quantity,
+    // and the count follows from the books rather than the other way round.
+    html += `<div class="path-section-title" style="margin-top:14px;">Whose — by tradition</div>`;
+    PATH_PRESETS.filter(p => p.group === 'tradition').forEach(p => { html += preset(p); });
     const pick = (idx) => {
       const L = _stepLabel(idx);
       const on = pathHas(idx);
