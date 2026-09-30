@@ -570,6 +570,36 @@ border-radius: 20px;
 overflow: hidden;
 margin-top: 6px;
 }
+/* ── THE MARK ON A FACE ──
+   The meditation counter's own glyph, drawn small: a ring cut by a horizon,
+   heaven above and earth below. Hollow until the face has been sat with, then
+   filled in the ring's blue. Drawn in CSS rather than as ten copies of an SVG.
+   The box is a real 44x44 with clear space above it, not a 13px glyph wearing
+   an overlay. An overlay reached up into whatever the label column had on the
+   line before — on one card a psalm link, whose own downward reach then landed
+   on this rather than on itself. The ring is centred in the box and the box is
+   pulled left, so what is drawn still sits at the column's edge. */
+.med-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  margin: 16px 0 -8px -15px;
+  position: relative; cursor: pointer;
+}
+.med-mark::before {                 /* the ring */
+  content: ''; width: 13px; height: 13px; border-radius: 50%;
+  border: 1px solid var(--gold); background: transparent;
+  transition: background 0.2s, border-color 0.2s;
+}
+.med-mark::after {                  /* the horizon across it */
+  content: ''; position: absolute; left: 50%; top: 50%;
+  width: 11px; height: 1px; background: var(--gold); opacity: 0.75;
+  transform: translate(-50%, -50%);
+}
+.med-mark:hover::before { border-color: var(--accent-blue); }
+.med-mark.done::before { background: var(--accent-blue); border-color: var(--accent-blue); }
+.med-mark.done::after { background: rgba(255,255,255,0.7); opacity: 1; }
+.med-mark:focus-visible { outline: 2px solid var(--gold); outline-offset: -12px; }
+
 /* ── THE TEN PRAYERS — a daily heart, one prayer per Sefirah ── */
 .prayer-tag {
 transition: color 0.25s, opacity 0.25s, text-shadow 0.25s;
@@ -15153,6 +15183,11 @@ content: ''; float: right; width: 30px; height: 1em;
     }
     const m = document.getElementById('meditations-modal');
     if (m && m.style.display === 'flex') renderMedsBody();
+    // The marks scattered down the page, which is where they are taken.
+    document.querySelectorAll('.med-mark').forEach((el) => {
+      const n = +el.dataset.med;
+      el.classList.toggle('done', n >= 1 && !!(medMask() & (1 << (n - 1))));
+    });
     if (typeof syncA11yState === 'function') syncA11yState();
   }
 
@@ -16081,7 +16116,9 @@ content: ''; float: right; width: 30px; height: 1em;
         'for, and the <strong>face of the card whose hour it is</strong> &mdash; today&rsquo;s ' +
         'letter, or creature, or attribute, whichever that card keeps. That one is not a thing ' +
         'to do; it is what the day <em>is</em>. Tapping it goes to the card it was read from, ' +
-        'and the box beside it marks that you have sat with it. ' +
+        'and the box beside it marks that you have sat with it. Every card carries ' +
+        'the same small ring beside its Sefirah&rsquo;s name, so a face can be taken ' +
+        'where it is read. ' +
         '</p><p>Underneath are the day&rsquo;s counts. The <strong>heart</strong> fills as ' +
         'the ten prayers are said, the <strong>ring</strong> at the left counts the ten ' +
         'faces sat with, the <strong>circle</strong> beside it counts the readings, ' +
@@ -16105,7 +16142,8 @@ content: ''; float: right; width: 30px; height: 1em;
         'face is not a deed and cannot be completed &mdash; it is the day&rsquo;s own ' +
         'coordinates &mdash; but dwelling on one is, and that is what the ring counts: not ' +
         'the fact, but that you sat with it. Tapping the face goes to its card; the box ' +
-        'beside it takes the meditation. ' +
+        'beside it takes the meditation &mdash; as does the small ring on each ' +
+        'card, hollow until the face has been sat with and then filled. ' +
         'Keter keeps no card &mdash; it is the dial at the top &mdash; so in its hour that line ' +
         'stands down. </p><p>Beneath, the heart counts the ten prayers &mdash; ' +
         'each may be marked in any order, because each has its own hour &mdash; and the moon ' +
@@ -16867,6 +16905,36 @@ content: ''; float: right; width: 30px; height: 1em;
   // Each card carries its ⓘ at the top-right corner, beside the expand
   // arrow. Card roots are never innerHTML-rewritten, so one injection
   // sticks; the guard makes repeat calls harmless.
+  // ── THE MARK ON EACH FACE ──
+  // The ring in the ladder counts them; this is where they are taken. Injected
+  // after each render the way the ⓘ buttons are, rather than written into ten
+  // card templates — the cards are rebuilt on every day change and a mark
+  // written into the template would have to be rebuilt with them.
+  // The glyph is the counter's own, small: a ring cut by a horizon, hollow
+  // until the face has been sat with and then filled. A mark and the thing it
+  // feeds should be the same shape, which is how ✡ already works for the stars.
+  function injectMedMarks() {
+    const mark = (n, sef) =>
+      `<span class="med-mark" data-med="${n}" role="button" tabindex="0" ` +
+      `onclick="toggleMed(${n}, event)" ` +
+      `title="${sef} — tap when you have sat with this face"` +
+      `aria-label="Mark the ${sef} meditation"></span>`;
+    // Keter keeps no card of the nine: its face is the day's Hayom Yom, in
+    // Strong Day, so its mark goes on that section's own label.
+    const hy = document.getElementById('keter-hayomyom');
+    const kl = hy && hy.closest('.keter-section') &&
+               hy.closest('.keter-section').querySelector('.keter-section-label');
+    if (kl && !kl.querySelector(':scope > .med-mark'))
+      kl.insertAdjacentHTML('beforeend', mark(1, 'Keter'));
+    const cards = document.querySelectorAll('.sefirah-card');
+    ['Chochmah', 'Binah', 'Chesed', 'Gevurah', 'Tiferet',
+     'Netzach', 'Hod', 'Yesod', 'Malchut'].forEach((sef, i) => {
+      const host = cards[i] && cards[i].querySelector('.sefirah-label-col');
+      if (host && !host.querySelector(':scope > .med-mark'))
+        host.insertAdjacentHTML('beforeend', mark(i + 2, sef));
+    });
+  }
+
   function injectCycleInfoButtons() {
     const btn = (key) => `<span class="cycle-info-btn corner" data-cycle="${key}" title="About this cycle">ⓘ</span>`;
     // Keter's ⓘ goes in the top corner of its Ma'alot pane rather than the
@@ -18553,8 +18621,9 @@ content: ''; float: right; width: 30px; height: 1em;
     setTimeout(buildCardPanes, 0);  // file the day's detail into the panes first
     setTimeout(applyMaalotState, 0); // after this render's innerHTML writes settle
     setTimeout(applyPrayerState, 0);
-    setTimeout(applyMedState, 0);
     setTimeout(applyStarState, 0);
+    setTimeout(injectMedMarks, 0);        // the ten faces' own marks, likewise
+    setTimeout(applyMedState, 0);         // after them, so the marks are there to light
     setTimeout(injectCycleInfoButtons, 0); // re-append ⓘ after this render's rewrites
     setTimeout(applyA11y, 0);        // name, role and state for anything tappable
     setTimeout(applySongState, 0);   // the thirty-first's own mark, per day
