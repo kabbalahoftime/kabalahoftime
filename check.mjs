@@ -814,7 +814,10 @@ async function checkInBrowser(chromium) {
       const hit = document.elementFromPoint(x, y);
       return !!hit && (hit === el || el.contains(hit) || hit.contains(el));
     };
-    document.querySelectorAll('button,a,input,select,[onclick]').forEach(e => {
+    // .cycle-info-btn is in this list by name: it is a span reached by a
+    // delegated listener, so it matches none of the four above and was never
+    // measured. It was 17x13 for as long as it has existed.
+    document.querySelectorAll('button,a,input,select,[onclick],.cycle-info-btn').forEach(e => {
       let r = e.getBoundingClientRect();
       if (r.width <= 0 || r.height <= 0) return;
       e.scrollIntoView({ block: 'center' });
@@ -869,6 +872,43 @@ async function checkInBrowser(chromium) {
         s.narrow && s.short ? 'both ways' : s.narrow ? 'across' : 'down'}`));
     if (offenders.length > 10) fail(`…and ${offenders.length - 10} more`);
   } else pass(`all controls at least 44px${excused.length ? ` (${excused.length} in the language bar excused on width)` : ''}`);
+
+  // 5b. the way out of every modal
+  //
+  // The sweep above cannot see these: a modal is shut while it runs, and a
+  // shut box has no size. So each one is opened and asked two things — is the
+  // control that closes it big enough to hit, and is it the thing actually at
+  // its own centre. The second is the one that matters: the video's × was
+  // 44px and drawn and still could not be pressed, because the frame went
+  // fullscreen over it and took the tap. A window you cannot leave is the
+  // worst thing this app could do to someone, and nothing was watching for it.
+  const ways = await page.evaluate(() => {
+    const OPEN = { 'video-modal': 'openVideoModal', 'prayers-modal': 'openPrayers',
+                   'meditations-modal': 'openMeditations', 'todays-path-modal': 'openTodaysPath',
+                   'year-modal': 'openYearView', 'date-picker-modal': 'openDatePicker' };
+    const out = [];
+    document.querySelectorAll('[id$="-modal"]').forEach((m) => {
+      const fn = OPEN[m.id];
+      if (fn && typeof window[fn] === 'function') { try { window[fn](); } catch (e) {} }
+      else m.style.display = 'flex';
+      if (!m.getClientRects().length) { m.style.display = 'none'; return; }
+      const shut = m.querySelector('.heb-picker-close, .wr-close, .yr-close, .wr-btn-close');
+      if (!shut) out.push(m.id + ' has nothing that closes it');
+      else {
+        const r = shut.getBoundingClientRect();
+        if (r.width < 44 || r.height < 44)
+          out.push(m.id + '\u2019s \u00d7 is ' + Math.round(r.width) + 'x' + Math.round(r.height));
+        const at = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+        if (at && at !== shut && !shut.contains(at))
+          out.push(m.id + '\u2019s \u00d7 is covered by ' + at.tagName.toLowerCase() +
+                   (at.className ? '.' + String(at.className).split(/\s+/)[0] : ''));
+      }
+      m.style.display = 'none';
+    });
+    return out;
+  });
+  ways.slice(0, 6).forEach((w) => fail(`no way out — ${w}`));
+  if (!ways.length) pass('every modal has a way out that is 44px and unobstructed');
 
   // 7. one Hebrew face — asked of the browser, not of the stylesheet
   //

@@ -755,8 +755,15 @@ justify-content: center;
 width: 44px;
 height: 44px;
 padding: 0;
-margin: -11px -11px -11px 0;
 flex: 0 0 auto;
+/* No negative margins. They were there to keep the header at the height it
+   had, and in the video modal the one at the foot pulled the frame up under
+   the button: the iframe took the tap at the button's own centre, so the ×
+   was drawn, was 44px, and could not be pressed — which reads exactly like
+   having no close button at all. The header grows instead, and the button
+   is lifted above whatever follows it. */
+position: relative;
+z-index: 2;
 }
 .heb-picker-close:hover { color: var(--ink); }
 .heb-picker-body { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
@@ -1536,11 +1543,19 @@ cursor: pointer;
 }
 
 /* "About this cycle" info buttons beside cycle names */
+/* The hand's 44px, taken in padding and given back in margin so the glyph
+   stays where it was drawn and no line grows. It was 17x13 — small enough
+   that a tap meant for it lands beside it, which is what "tapping it does
+   nothing" turns out to be. */
 .cycle-info-btn {
 cursor: pointer;
 user-select: none;
-display: inline-block;
-margin-left: 5px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+min-width: 44px;
+min-height: 44px;
+margin: -15px -14px -15px -9px;
 font-size: calc(11px * var(--ts, 1));
 font-style: normal;
 letter-spacing: 0;
@@ -1554,12 +1569,16 @@ opacity: 1;
 }
 
 /* Corner placement — top-right of each card, beside the expand arrow */
+/* The corner one is placed rather than flowed, so its box is grown by moving
+   the anchors out by as much as the box gained: the glyph does not move. */
 .cycle-info-btn.corner {
 position: absolute;
-top: 12px;
-right: 32px;
+top: -3px;
+right: 17px;
 margin: 0;
-padding: 0 2px;
+padding: 0;
+min-width: 47px;
+min-height: 43px;
 font-size: calc(13px * var(--ts, 1));
 line-height: 1;
 z-index: 2;
@@ -2425,7 +2444,10 @@ to   { opacity: 1; }
 .wr-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
 .wr-title{font-size:calc(20px * var(--ts, 1));color:var(--gold);font-weight:600;letter-spacing:.04em;}
 .wr-subtitle{font-size:calc(12px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;}
-.wr-close{background:none;border:none;color:var(--ink-mid);cursor:pointer;font-size:calc(20px * var(--ts, 1));line-height:1;padding:0;}
+/* The way out of the How-to Guide and the Weekly Journal. It was 17x20,
+   the same fault the modal headers had and for the same reason: a shut
+   box has no size, so nothing measured it. */
+.wr-close{background:none;border:none;color:var(--ink-mid);cursor:pointer;font-size:calc(20px * var(--ts, 1));line-height:1;padding:0;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;flex:0 0 auto;position:relative;z-index:2;}
 .wr-week-info{
   font-size:calc(13px * var(--ts, 1));color:var(--ink);background:var(--bg);
   border:1px solid var(--border);border-radius:6px;
@@ -3617,7 +3639,7 @@ content: ''; float: right; width: 30px; height: 1em;
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section has-info">
-    <span class="cycle-info-btn corner" data-cycle="ohrkitov" title="About this cycle">ⓘ</span>
+    <span class="cycle-info-btn corner" data-cycle="ohrkitov" role="button" tabindex="0" aria-label="About this cycle" title="About this cycle">ⓘ</span>
     <div class="keter-section-label" id="keter-kst-label">✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה י״ד</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin — Baal Shem Tov &amp; Ohr HaChaim HaKadosh</div>
     <div class="sefirah-main-text" id="keter-kst-main">Loading…</div>
@@ -3625,7 +3647,7 @@ content: ''; float: right; width: 30px; height: 1em;
   </div>
   <!-- HAYOM YOM + SEFER HAMITZVOS section -->
   <div class="keter-section has-info" style="background:#fdf9f2;">
-    <span class="cycle-info-btn corner" data-cycle="yomchazak" title="About this cycle">ⓘ</span>
+    <span class="cycle-info-btn corner" data-cycle="yomchazak" role="button" tabindex="0" aria-label="About this cycle" title="About this cycle">ⓘ</span>
     <div class="keter-section-label">✦ Strong Day — יום חזק <span class="maalah">מעלה י״ג</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich — Rambam &amp; Lubavitcher Rebbe</div>
     <div class="sefirah-main-text" id="keter-rambam-face">Loading…</div>
@@ -17517,7 +17539,13 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   function injectCycleInfoButtons() {
-    const btn = (key) => `<span class="cycle-info-btn corner" data-cycle="${key}" title="About this cycle">ⓘ</span>`;
+    // role and tabindex written here rather than left to applyA11y, which
+    // adds them only to things carrying an onclick — this one is reached by a
+    // delegated listener and so was never given either, and no keyboard could
+    // open it. The Enter/Space handler keys off role="button", so saying it
+    // is one is the whole of what that needs.
+    const btn = (key) => `<span class="cycle-info-btn corner" data-cycle="${key}" ` +
+      `role="button" tabindex="0" aria-label="About this cycle" title="About this cycle">ⓘ</span>`;
     // Keter's ⓘ goes in the top corner of its Ma'alot pane rather than the
     // card's. The card's face is the dial, which is not what this note is
     // about: it explains All Year Round, the first of the three readings
@@ -23415,9 +23443,13 @@ content: ''; float: right; width: 30px; height: 1em;
     const a = document.getElementById('video-open-link');
     if (a) a.href = INTRO_VIDEO_WATCH;
     document.getElementById('video-modal').style.display = 'flex';
-    // Asked for here, while the tap that opened the window still counts as
-    // the gesture a browser requires; a moment later it would be refused.
-    expandVideo();
+    // It used to go fullscreen here, on the gesture that opened it, because a
+    // browser will not grant fullscreen a moment later. What that cost: the
+    // frame is then the whole screen, over the modal's own header, so the ×
+    // is drawn and painted over — it reads as a window with no way out, and
+    // before Escape worked there was none but reloading the page.
+    // Fullscreen is still a tap away on Expand, which is a gesture too. The
+    // window that opens on its own keeps its title and its ×.
   }
   function closeVideoModal() {
     _leaveFullscreen();
