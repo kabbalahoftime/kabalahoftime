@@ -21707,7 +21707,16 @@ content: ''; float: right; width: 30px; height: 1em;
     // BINAH — 7×7×7 Sefirot Omer Cycle
     // 364 days = 7 cycles of 52 weeks; each cycle of 7 weeks × 7 days = 49 days + 1 overflow
     // 364 / 49 ≈ 7.43 full Omer cycles. We show position within the continuous 343-day (7×7×7) structure
-    const _b777 = sefirot777(d);
+    // The day of the KoT year, as the alphabet and the thirteen and the
+    // forty-one are called — not the epoch count. sefirot777 folds whatever
+    // it is given at 364, and folding the epoch there produces a 364-phase of
+    // its own that only lines up with the year in whichever year the epoch
+    // happens to agree with: the same fault the alphabet had, and the reason
+    // the three names drifted off the date from one year to the next.
+    // On the day the two counts part, the week this reports also stopped
+    // decomposing the week the date bar prints. They now agree by
+    // construction, the year's week being (cycle - 1) * 7 + week.
+    const _b777 = sefirot777(dEff - d_year1 + 1);
     const omerPos = _b777.pos, omerCycle = _b777.cycle;
     const omerWeek = _b777.week, omerDay = _b777.day;
     const weekSef = _b777.weekSef, daySef = _b777.daySef;
@@ -25525,7 +25534,7 @@ content: ''; float: right; width: 30px; height: 1em;
       // Reads through the same sefirot777 the card reads, so the three names
       // cannot part company — the year's last three weeks included, where
       // there is no cycle and no third name to give.
-      seg:(D)=>{ const i = sefirot777(D.abs);
+      seg:(D)=>{ const i = sefirot777(D.yearDay);
         return i.mochin
           ? { n:6,
               label:'Mochin — ' + i.weekSef,
