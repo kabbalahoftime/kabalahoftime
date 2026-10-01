@@ -8155,15 +8155,16 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   // 41-day cycle — enriched
-  // Call with the day of the KoT year (1–364). Nine cycles of 41 would be 369,
-  // so the ninth is short — 36 days — which is why it carries the tenth item as
-  // well as its own. The count folds at 364 with the year; it ran to cycle 30
-  // before, against a card that says "of 10".
-  function get41DayInfo(d) {
-    d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
-    d = ((d - 1) % 364) + 1;
-    const cycle = (d % 41 == 0) ? parseInt(d/41) : 1 + parseInt(d/41);
-    const day   = (d % 41 == 0) ? 41 : d % 41;
+  //
+  // Two entry points, because this is the one cycle longer than the year.
+  // netzachPosInfo takes a position in the 369 and reads it as itself, so
+  // 365–369 come back as Cycle 9, Days 37–41 — including the ninth round's
+  // own forty-first, the Yechidah day, which the fold below can never reach.
+  // Those five days are the cycle's tail hanging past the year's end, and the
+  // Netzach card's toggle is the only way to them.
+  function netzachPosInfo(p) {
+    const cycle = (p % 41 == 0) ? parseInt(p/41) : 1 + parseInt(p/41);
+    const day   = (p % 41 == 0) ? 41 : p % 41;
     const mivtzah = MIVTZOYIM[(cycle - 1) % 9];
     let soulLevel;
     if (day == 41)      soulLevel = 'Yechidah / Adam Kadmon';
@@ -8177,6 +8178,15 @@ content: ''; float: right; width: 30px; height: 1em;
     // Commandment mapping within 41: day mod 10 (1-10 = 10 Commandments)
     const commandmentDay = day == 41 ? 10 : ((day - 1) % 10) + 1;
     return { cycle, day, mivtzah, soulLevel, dayInLevel, commandmentDay };
+  }
+
+  // Call with the day of the KoT year (1–364). Nine cycles of 41 would be 369,
+  // so the ninth comes up short here — 36 days — which is why it carries the
+  // tenth item as well as its own. The count folds at 364 with the year; it ran
+  // to cycle 30 before, against a card that says "of 10".
+  function get41DayInfo(d) {
+    d = Math.max(1, d); // cycles begin at the epoch; dates before it have no defined cycle/day
+    return netzachPosInfo(((d - 1) % 364) + 1);
   }
 
   // Halacha — two half-days a day, one continuous stream of 728:
@@ -22244,6 +22254,14 @@ content: ''; float: right; width: 30px; height: 1em;
     const _netzBase = ((cy41.cycle - 1) % 9) * 41 + cy41.day;   // 1-369
     const _netzCanOverlap = _netzBase <= 5;
     const _netzPos = (_netzCanOverlap && window.netzachOverlap) ? _netzBase + 364 : _netzBase;
+    // The whole card reads the toggled position, not only the day's reading.
+    // The toggle used to move the text and leave the heading behind, so the
+    // closing round's last five days were legible as Sichos HaRan and Ma'ayan
+    // Ganim but never as themselves: on day 369 the card still said "Day 5 ·
+    // Cycle 1 · Nefesh", and Cycle 9's forty-first — the Yechidah day the nine
+    // rounds are built to arrive at — appeared nowhere in the app at all.
+    // Untoggled this is cy41 exactly, _netzPos being _netzBase then.
+    const cy41v = netzachPosInfo(_netzPos);
     (function () {
       const wrap = document.getElementById('netzach-overlap-toggle');
       if (!wrap) return;
@@ -22288,8 +22306,8 @@ content: ''; float: right; width: 30px; height: 1em;
     const TIKKUN_PSALMS = [16, 32, 41, 42, 59, 77, 90, 105, 137, 150];
     const _tikkunPsalm = inLeapCycle
       ? TIKKUN_PSALMS[(leapCycleNum - 1) % 10]
-      : TIKKUN_PSALMS[(cy41.cycle - 1) % 10];
-    const _tikkunCycleNum = inLeapCycle ? leapCycleNum : cy41.cycle;
+      : TIKKUN_PSALMS[(cy41v.cycle - 1) % 10];
+    const _tikkunCycleNum = inLeapCycle ? leapCycleNum : cy41v.cycle;
     const _tikkunUrl   = 'https://www.sefaria.org/Tikkun_HaKlali.' + _tikkunCycleNum + '?lang=bi&with=Navigation';
     // Nine cycles, ten of everything — the Mivtzoyim, the Tikkun HaKlali's
     // Psalms and the Ten Commandments. Rather than shift the nine, which are
@@ -22297,7 +22315,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // 150 are the Tikkun HaKlali's own last two, consecutive, and cycle 9 opens
     // on 30 Av — the first day of Rosh Chodesh Elul — and runs through the Days
     // of Awe, so the year closes on the final Halleluyah and Lo Tachmod.
-    const _cycleItems  = cy41.cycle === 9 ? [9, 10] : [cy41.cycle];
+    const _cycleItems  = cy41v.cycle === 9 ? [9, 10] : [cy41v.cycle];
     const _tikkunHref  = n => 'https://www.sefaria.org/Tikkun_HaKlali.' + n + '?lang=bi&with=Navigation';
     const _mivtzahText = _cycleItems.map(i => MIVTZOYIM[i - 1]).filter(Boolean).join(' &amp; ');
     const _psalmLinks  = _cycleItems.map(i =>
@@ -22305,9 +22323,9 @@ content: ''; float: right; width: 30px; height: 1em;
     const _cycleCmdText = _cycleItems.map(i => TEN_COMMANDMENTS[i - 1] && TEN_COMMANDMENTS[i - 1].text).filter(Boolean).join(' · ');
     const _cycleLabel  = _cycleItems.length > 1
       ? `Cycles ${_cycleItems[0]} &amp; ${_cycleItems[1]} of 10`
-      : `Cycle ${cy41.cycle} of 10`;
-    const cycleCmd = CYCLE_COMMANDMENTS[(cy41.cycle - 1) % 9];
-    const dayCmd   = TEN_COMMANDMENTS[cy41.commandmentDay - 1];
+      : `Cycle ${cy41v.cycle} of 10`;
+    const cycleCmd = CYCLE_COMMANDMENTS[(cy41v.cycle - 1) % 9];
+    const dayCmd   = TEN_COMMANDMENTS[cy41v.commandmentDay - 1];
 
     // 54 parashiyot for leap year 55-day cycles (days 1–54); day 55 = Yechidah
     const NETZACH_54_PARASHIYOT = [
@@ -22382,7 +22400,7 @@ content: ''; float: right; width: 30px; height: 1em;
          <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">In a leap year, cycles 4 &amp; 5 expand to 55 days: Days 1–54 = the 54 Torah parashiyot (each book = one soul level) · Day 55 = Yechidah — Coming Down from Mount Sinai<br>Devarim reviews all 4 levels: 3 · 3 · 3 · 2</div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Mivtzah · Tikkun HaKlali</div>
-         <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41.mivtzah} (Year-Cycle ${leapCycleNum})</span></div>
+         <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41v.mivtzah} (Year-Cycle ${leapCycleNum})</span></div>
          <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Year-Cycle ${leapCycleNum})</span></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="maalah yom" data-wane="10">מיעוט י׳</span></div>
@@ -22397,10 +22415,10 @@ content: ''; float: right; width: 30px; height: 1em;
     } else {
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `40-Day Cycle: Receiving the Torah`;
       cards[5].querySelector('.sefirah-main-text').innerHTML =
-        `Day <strong>${cy41.day}</strong> · Cycle <strong>${cy41.cycle}</strong>`;
+        `Day <strong>${cy41v.day}</strong> · Cycle <strong>${cy41v.cycle}</strong>`;
       cards[5].querySelector('.sefirah-sub-text').innerHTML =
         `<span style="font-size:0.9em;color:var(--ink-dim)">Day:</span> ${dayCmd.text}` +
-        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41.soulLevel.replace(' / ', '/')}` +
+        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41v.soulLevel.replace(' / ', '/')}` +
         `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${_cycleCmdText || cycleCmd.commandment}`;
       cards[5].querySelector('.sefirah-tags').innerHTML = '';
       cards[5].querySelector('.sefirah-detail').innerHTML =
@@ -22417,7 +22435,7 @@ content: ''; float: right; width: 30px; height: 1em;
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          
          
-         <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Soul Level</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41.soulLevel.split(' / ')[0]} · ${cy41.day === 41 ? 'the forty-first' : ['','1st','2nd','3rd','4th'][Math.ceil(cy41.day / 10)] + ' of 4'} · ${cy41.soulLevel.split(' / ')[1]}</div></div>
+         <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Soul Level</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41v.soulLevel.split(' / ')[0]} · ${cy41v.day === 41 ? 'the forty-first' : ['','1st','2nd','3rd','4th'][Math.ceil(cy41v.day / 10)] + ' of 4'} · ${cy41v.soulLevel.split(' / ')[1]}</div></div>
          
          
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
@@ -23241,19 +23259,19 @@ content: ''; float: right; width: 30px; height: 1em;
       dmName:    dmTeaching ? dmTeaching.name    : null,
       dmPart:    dmTeaching ? dmTeaching.part    : null,
       dmEnglish: dmTeaching ? dmTeaching.english : null,
-      cy41Day:    cy41.day,
-      cy41Cycle:  cy41.cycle,
+      cy41Day:    cy41v.day,
+      cy41Cycle:  cy41v.cycle,
       cycleTheme: cycleCmd.theme,
       dayCommandment: dayCmd.commandment,
       dayCommandmentText:   dayCmd.text,
-      cycleCommandmentText: TEN_COMMANDMENTS[cy41.cycle - 1] ? TEN_COMMANDMENTS[cy41.cycle - 1].text : '',
-      cy41SoulLevelShort: cy41.soulLevel.split(' / ')[0],
-      cy41World: cy41.soulLevel.includes('Nefesh')   ? 'Asiyah — Action & Physical'
-               : cy41.soulLevel.includes('Ruach')    ? 'Yetzirah — Emotional World'
-               : cy41.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World'
-               : cy41.soulLevel.includes('Chayah')   ? 'Atzilut — Spiritual World'
+      cycleCommandmentText: TEN_COMMANDMENTS[cy41v.cycle - 1] ? TEN_COMMANDMENTS[cy41v.cycle - 1].text : '',
+      cy41SoulLevelShort: cy41v.soulLevel.split(' / ')[0],
+      cy41World: cy41v.soulLevel.includes('Nefesh')   ? 'Asiyah — Action & Physical'
+               : cy41v.soulLevel.includes('Ruach')    ? 'Yetzirah — Emotional World'
+               : cy41v.soulLevel.includes('Neshamah') ? 'Beriah — Intellectual World'
+               : cy41v.soulLevel.includes('Chayah')   ? 'Atzilut — Spiritual World'
                : 'Adam Kadmon — Yechidah (Day 41)',
-      cy41Mivtzah: cy41.mivtzah,
+      cy41Mivtzah: cy41v.mivtzah,
       meynDay, meynSection, meynPage, meynPagePhrase,
       tikkunPsalm: _tikkunPsalm,
       // The week's Zohar goes with Thursday's Ramchal now, so the script
