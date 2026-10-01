@@ -670,7 +670,18 @@ font-weight: 600;
    and a block between the name and the arrow put the arrow on a line of its
    own on every card. Inline, the two flow as one run again and the arrow
    lands after the last word of the name, which is where it was measured. */
-.prayer-line { display: block; }
+/* The box takes the tag's own size. It is a span and was inheriting the
+   card's 16px, so every line of it was a 20px line box carrying 10.5px text —
+   and where the name wraps and the arrow drops below it, that is three such
+   boxes: sixty pixels of column for two short words and an arrow. The strut
+   is the tag's now, and the arrow keeps its own size so the glyph does not
+   shrink with it. */
+.prayer-line {
+  display: block;
+  font-size: calc(10.5px * var(--ts, 1));
+  line-height: 1.35;
+}
+.prayer-line .prayer-src { font-size: calc(14px * var(--ts, 1)); }
 .prayer-line .prayer-tag { display: inline; }
 /* Keter's line runs the width of the card and its tag centred itself. The
    tag is inline now and cannot, so the box around it does it instead. */
@@ -690,8 +701,12 @@ font-weight: 600;
 }
 /* And the line itself is given air under it, because that same summary
    reaches up far enough to lie over the bottom of the prayer's own line —
-   which it did before there was an arrow to put there. */
-.keter-title-row .prayer-tag[data-prayer="1"] { margin-bottom: 16px; }
+   which it did before there was an arrow to put there.
+   On the line and not on the tag: the tag is drawn inline now, so that it
+   and its arrow flow as one run, and a bottom margin on an inline box does
+   nothing at all. It had been doing nothing since, and the summary was back
+   over the arrow. */
+.keter-title-row .prayer-line { margin-bottom: 16px; }
 /* Its own hour, still unsaid — a slow pulse, not a blink */
 .prayer-tag.now-flash {
 animation: prayerPulse 2.2s ease-in-out infinite;
@@ -1488,7 +1503,9 @@ font-size: 11px;
 letter-spacing: 0.5px;
 text-transform: uppercase;
 color: var(--sefirah-color, var(--gold));
-margin-bottom: 5px;
+/* 3px, not 5. The column is a stack of short lines and the gaps were the
+   loudest thing in it. */
+margin-bottom: 3px;
 font-weight: 600;
 }
 
@@ -21574,7 +21591,25 @@ content: ''; float: right; width: 30px; height: 1em;
       : ayinBetInfo.isBreak
       ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
       : `Day <strong>${ayinBetInfo.nameNum}</strong> &middot; Cycle ${ayinBetInfo.cycle} of 5: <strong>${ayinBetInfo.name}</strong><br>` +
-        `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>`;
+        `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>` +
+        // ── THE WATCH OF THE DAY ──
+        // The twenty-four mishmarot are the families who brought the Tamid,
+        // and each 24-day word-period of Birkat Kohanim carries all of them,
+        // one guard to a day. It was the one part of that reckoning kept off
+        // the face: the leap-year microcosm has said it on this line all
+        // along, and the other eleven months left it to the detail below.
+        // Read from bkMishmar, which that detail reads from too, so there is
+        // one count and not two.
+        // Not the same number as the Day beside it, though the first
+        // twenty-four days of every cycle make it look that way: the Day runs
+        // 1–72 and the watch wraps at 24, so day 25 is watch 1 again. Swept a
+        // hundred and fifty days to be sure — the two agree on twenty-nine of
+        // them and differ on ninety-six, which is the arithmetic working.
+        (bkMishmar
+          ? `<br><span style="font-size:0.88em;opacity:0.72">Mishmar ${bkMishmarNum} of 24: ` +
+            `<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</bdi>` +
+            ` — ${bkMishmar.en}</span>`
+          : '');
     document.getElementById('chesed-sub').innerHTML = '';
     document.getElementById('chesed-text-label').innerHTML =
       `✦ ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} <span class="maalah">מעלה י׳</span>`;
