@@ -5020,7 +5020,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <div id="daily-script-panel" style="margin:8px 0 4px;border:1px solid var(--gold);border-radius:6px;">
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;" onclick="toggleDailyScript()">
       <span style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);letter-spacing:1.5px;flex:1;text-transform:uppercase;">Daily Script</span>
-      <span id="daily-script-expand-icon" style="color:var(--gold);font-size:calc(16px * var(--ts, 1));line-height:1;">▴</span>
+      <span id="daily-script-expand-icon" style="color:var(--gold);font-size:calc(16px * var(--ts, 1));line-height:1;">▾</span>
       <div class="daily-script-lang-bar">
         <button class="lang-btn active" id="lang-btn-en" onclick="setScriptLang('en')">EN</button>
         <button class="lang-btn" id="lang-btn-he" onclick="setScriptLang('he')">HE</button>
@@ -5033,13 +5033,15 @@ content: ''; float: right; width: 30px; height: 1em;
              the ⓘ explanations follow it where they have been translated. -->
       </div>
     </div>
-    <!-- Open from the start. The language strip sits in this panel's header,
-         and with the panel shut it read as decoration — five initials beside
-         a closed drawer, with nothing on the page visibly answering to them.
-         Open, pressing HE turns the script under it into Hebrew while the
-         reader is looking at it, which is the only way the strip says what
-         it is for. -->
-    <div id="daily-script-body" style="display:block">
+    <!-- Shut from the start. It was opened for a while so the language strip
+         in the header above would have something visibly answering to it,
+         but the script runs to eight or nine thousand characters and open it
+         doubled the length of the page — 13,100px against 6,393 — for a tool
+         most readers will not want on most days. The strip still works from
+         here: a language pressed with the panel shut is remembered, and the
+         ⓘ explanations and the glossary follow it whether this is open or
+         not. -->
+    <div id="daily-script-body" style="display:none">
       <div class="daily-script-inner">
         <div id="daily-script-content">Loading…</div>
         <button class="copy-script-btn" onclick="copyDailyScript()">Copy Script</button>
@@ -24187,6 +24189,22 @@ content: ''; float: right; width: 30px; height: 1em;
         scriptIsBeginner() ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
     }
   }
+
+  // The stored language, put on the bar at startup.
+  //
+  // It was already being read — _scriptLang takes it from localStorage above,
+  // and the script is built in it — but the bar itself was left as the markup
+  // wrote it, with EN holding the active class. So a reader who had chosen
+  // Hebrew came back to a Hebrew script under a bar that said EN, and
+  // aria-pressed agreed with the bar rather than with the page. The language
+  // was never lost; only the three places that report it disagreed.
+  //
+  // syncA11yState after it, because the startup pass may already have run
+  // and read the class this is about to move.
+  (function () {
+    setScriptLang(_scriptLang);
+    if (typeof syncA11yState === 'function') syncA11yState();
+  })();
 
   // The button in the script bar is a second hand on the same dial: pressing
   // it sets the page's level rather than a mode of its own, so the pills at
