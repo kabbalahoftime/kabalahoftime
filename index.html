@@ -675,10 +675,6 @@ font-weight: 600;
 /* Keter's line runs the width of the card and its tag centred itself. The
    tag is inline now and cannot, so the box around it does it instead. */
 .keter-title-row .prayer-line { text-align: center; }
-/* The bow takes the size the ↗ had, so no line it sits on moves. */
-.prayer-src .pray-bow { width: 15px; height: 15px; display: block; }
-.keter-title-row .prayer-src .pray-bow,
-.today-prayer .prayer-src .pray-bow { width: 16px; height: 16px; }
 .prayer-line .prayer-src {
   /* There is no global border-box in this file, so it is said here. */
   box-sizing: border-box; width: 26px; height: 26px;
@@ -15819,34 +15815,16 @@ content: ''; float: right; width: 30px; height: 1em;
   // The arrow that opens a prayer's text, drawn alike wherever it appears. It
   // is a control of its own: the tag beside it marks the prayer as said, and
   // one tap cannot mean both.
-  // ── THE BOW ──
-  // The arrow that opens a prayer's text, drawn as the bow it was shot from.
-  // Yaakov gives Yosef the portion he took "with my sword and with my bow",
-  // and Rashi reads the two as his wisdom and his prayer — so a bow is what
-  // prayer is called in the place the word is first explained, and the arrow
-  // that was already here was half of it.
-  // Drawn rather than set as 🏹, for the reason the menorah and the flame are
-  // drawn: everything on this page is line work in the app's own gold, and a
-  // colour emoji among it belongs to somebody else's typeface. It is also the
-  // fault just mended — the ↗ came out a blue tile on a phone — and reaching
-  // for an emoji again would walk straight back into it.
-  // Laid out pointing right and turned up-right, so it leaves at the angle
-  // the arrow left at and still reads as "this opens something".
-  const PRAY_BOW =
-    '<svg class="pray-bow" viewBox="0 0 22 22" fill="none" stroke="currentColor" ' +
-    'stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-    '<g transform="rotate(-45 11 11)">' +
-      '<path d="M8 2.6 C 12 5.6, 12 16.4, 8 19.4"/>' +   // the stave
-      '<path d="M8 2.6 L 5.2 11 L 8 19.4"/>' +            // the string, drawn back
-      '<path d="M5.2 11 L 19.4 11"/>' +                   // the shaft
-      '<path d="M19.4 11 L 16 8.6 M19.4 11 L 16 13.4"/>' +// the head
-    '</g></svg>';
   function prayerLinkHtml(n, name) {
     const u = prayerLink(n);
     return u
       ? '<a class="prayer-src" href="' + u + '" target="_blank" rel="noopener" ' +
         'aria-label="Open the text of ' + (name || 'this prayer') + '" ' +
-        'title="Open the text">' + PRAY_BOW + '</a>'
+        // \uFE0E, as the ✡ beside the companions carries: U+2197 with nothing
+        // after it is drawn as a colour emoji on iOS and on Android, so the
+        // quiet gold arrow became a blue tile in the middle of the line. The
+        // selector asks for the text face, which every platform has.
+        'title="Open the text">&#8599;&#xFE0E;</a>'
       : '';
   }
 
