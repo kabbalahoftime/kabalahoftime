@@ -3111,6 +3111,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   margin:0 0 7px; line-height:1.3;
 }
 .comp-body { font-size:calc(14px * var(--ts, 1)); line-height:1.75; color:var(--ink); }
+/* The manuscript prints the occasional word in the letters themselves. The
+   Latin faces the companion is set in have no Hebrew worth the name, so the
+   marked runs take the page's Hebrew face — and none of its tracking, which
+   is for the Cinzel capitals and does Hebrew no favours. */
+.companion [lang="he"] { font-family:'Frank Ruhl Libre', serif; letter-spacing:0; }
 .comp-body p { margin:0 0 9px; }
 .comp-body p:last-child { margin-bottom:0; }
 /* The two lines the entry ends on. The practice is the only thing it asks
@@ -15376,8 +15381,15 @@ content: ''; float: right; width: 30px; height: 1em;
     _compDay = _compWant;
 
     const set = (id, html) => { const n = document.getElementById(id); if (n) n.innerHTML = html; };
+    // Escaped, and any Hebrew in it marked as Hebrew. The manuscript is in
+    // English and names its Hebrew in transliteration, but it does print the
+    // odd word in the letters themselves — אילן against the ninety-one — and
+    // an unmarked run is drawn in a Latin face that has no business setting
+    // it, and read out by a screen reader as though it were English.
     const esc = (s) => String(s == null ? '' : s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/[֐-׿][֐-׿‏‎ ,.’'-]*[֐-׿]|[֐-׿]/g,
+               (m) => '<bdi lang="he">' + m + '</bdi>');
 
     // Day of the year, then where it sits in the book — the week and the
     // movement, so a reader can see the shape they are walking through.
