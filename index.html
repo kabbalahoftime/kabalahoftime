@@ -452,6 +452,13 @@ padding: 0 16px;
   text-align: center;
   padding-left: 2px;
 }
+/* The Hebrew goes under the English, always. It used to sit beside it and
+   wrap when the column was too narrow, which meant Meditation and Prayer
+   stacked and Study — the shortest word of the three, in the widest column —
+   stayed on one line. Three columns, two shapes. The space before it goes
+   with the change: a trailing one on a centred line pushes that line off its
+   own centre. */
+.dc-label .heb { display: block; }
 .dc-sep {
   font-size: calc(18px * var(--ts, 1));
   color: var(--border-strong);
@@ -3371,8 +3378,8 @@ content: ''; float: right; width: 30px; height: 1em;
         </div>
       </div>
       <div style="display:flex; justify-content:center; align-items:center; gap:14px;">
-        <button class="date-jump-trigger" onclick="openDatePicker()">jump to date ↗</button>
-        <button class="date-jump-trigger" onclick="openYearView()">monthly calendars ↗</button>
+        <button class="date-jump-trigger" onclick="openDatePicker()">jump to date ↗︎</button>
+        <button class="date-jump-trigger" onclick="openYearView()">monthly calendars ↗︎</button>
       </div>
     </div>
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
@@ -3452,7 +3459,7 @@ content: ''; float: right; width: 30px; height: 1em;
             <svg id="med-ring-svg" width="22" height="22" viewBox="0 0 22 22" style="display:block;"></svg>
             <span id="med-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/10</span>
           </div>
-          <div class="dc-label">Meditation &nbsp;<span class="heb">התבוננות</span></div>
+          <div class="dc-label">Meditation<span class="heb">התבוננות</span></div>
         </div>
         <div class="dc-sep">·</div>
         <!-- The heart came here from the Now card, which is gone. It belongs beside
@@ -3480,7 +3487,7 @@ content: ''; float: right; width: 30px; height: 1em;
           <!-- Singular, to match Study לימוד beside it: both name the kind of
                deed being counted, not the tally. The .heb span is written here
                rather than left to untrackHebrew, as its neighbour's is. -->
-          <div class="dc-label">Prayer &nbsp;<span class="heb">תפילה</span></div>
+          <div class="dc-label">Prayer<span class="heb">תפילה</span></div>
         </div>
         <div class="dc-sep">·</div>
         <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag in order · tap for Today's Path">
@@ -3509,7 +3516,7 @@ content: ''; float: right; width: 30px; height: 1em;
                thirty have in common is that each one is learning — Tanach and
                Tosefta and Rambam, a daf, a shiur, a recording — so Study is
                true of the whole day, and needs no switch at ט״ו. -->
-          <div class="dc-label">Study &nbsp;<span class="heb">לימוד</span></div>
+          <div class="dc-label">Study<span class="heb">לימוד</span></div>
         </div>
       </div>
       <!-- CUSTOMISING WHAT THE DAY ASKS FOR.
@@ -3630,11 +3637,11 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="keter-section-label">✦ All Year Round — בכל השנה <span class="maalah">מעלה ט״ו</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada — Rashbi &amp; Rebbe Nachman</div>
     <div class="sefirah-main-text" id="keter-daily-zohar"></div>
-    <button class="date-jump-trigger" id="zohar-trigger" style="display:none;" onclick="event.stopPropagation(); openZoharDailyModal()">Zohar summary ↗</button>
+    <button class="date-jump-trigger" id="zohar-trigger" style="display:none;" onclick="event.stopPropagation(); openZoharDailyModal()">Zohar summary ↗︎</button>
     <div class="sefirah-main-text" id="keter-lm-main" style="margin-top:4px;">Loading…</div>
     <div class="malchut-ksa-row" style="margin-top:10px">
       <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-      <div class="src-line"><a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a> &nbsp;·&nbsp; <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗</button></div>
+      <div class="src-line"><a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a> &nbsp;·&nbsp; <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗︎</button></div>
     </div>
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
@@ -3643,7 +3650,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="keter-section-label" id="keter-kst-label">✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה י״ד</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin — Baal Shem Tov &amp; Ohr HaChaim HaKadosh</div>
     <div class="sefirah-main-text" id="keter-kst-main">Loading…</div>
-    <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Today's Keter Shem Tov summary ↗</button>
+    <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Today's Keter Shem Tov summary ↗︎</button>
   </div>
   <!-- HAYOM YOM + SEFER HAMITZVOS section -->
   <div class="keter-section has-info" style="background:#fdf9f2;">
@@ -3762,7 +3769,7 @@ content: ''; float: right; width: 30px; height: 1em;
       </div>
       <div style="flex:0 0 auto; margin-top:10px; font-size:0.86em; color:var(--ink-dim); display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
         <button class="date-jump-trigger" onclick="expandVideo()">Expand &#10530;</button>
-        <a id="video-open-link" href="https://www.youtube.com/" target="_blank" rel="noopener" style="color:var(--gold)">Watch on YouTube &#8599;</a>
+        <a id="video-open-link" href="https://www.youtube.com/" target="_blank" rel="noopener" style="color:var(--gold)">Watch on YouTube &#8599;&#xFE0E;</a>
       </div>
     </div>
   </div>
@@ -3925,7 +3932,7 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="keter-section-label">✦ Tanach <span class="maalah">מעלה ט׳</span></div>
       <div id="gevurah-text-face" class="sefirah-main-text">Loading…</div>
       <div class="src-line"><button class="date-jump-trigger" id="tanach-trigger" style="display:none;"
-            onclick="event.stopPropagation(); openTanachSummaryModal()">today&rsquo;s summary &#8599;</button></div>
+            onclick="event.stopPropagation(); openTanachSummaryModal()">today&rsquo;s summary &#8599;&#xFE0E;</button></div>
       <div id="gevurah-tanach-rows" style="margin-top:6px;"></div>
     </div>
     <div class="sefirah-detail" id="gevurah-detail"></div>
@@ -15813,7 +15820,11 @@ content: ''; float: right; width: 30px; height: 1em;
     return u
       ? '<a class="prayer-src" href="' + u + '" target="_blank" rel="noopener" ' +
         'aria-label="Open the text of ' + (name || 'this prayer') + '" ' +
-        'title="Open the text">&#8599;</a>'
+        // \uFE0E, as the ✡ beside the companions carries: U+2197 with nothing
+        // after it is drawn as a colour emoji on iOS and on Android, so the
+        // quiet gold arrow became a blue tile in the middle of the line. The
+        // selector asks for the text face, which every platform has.
+        'title="Open the text">&#8599;&#xFE0E;</a>'
       : '';
   }
 
@@ -16669,7 +16680,7 @@ content: ''; float: right; width: 30px; height: 1em;
         'paths</em> &mdash; and that line goes for good once you have chosen. </p><p>The other ' +
         'two lines are the hour itself rather than a queue, so neither is ever lit. ' +
         '<strong>Prayer</strong> names the prayer this hour is asking for: tap the name when ' +
-        'you have said it, and the &#8599; beside it opens the text. ' +
+        'you have said it, and the &#8599;&#xFE0E; beside it opens the text. ' +
         '<strong>Meditation</strong> names the face of the card whose hour it is &mdash; ' +
         'today&rsquo;s letter, or creature, or attribute, whichever that card keeps. That one ' +
         'is not a thing to do; it is what the day <em>is</em>. Tapping it goes to the card, ' +
@@ -16706,7 +16717,7 @@ content: ''; float: right; width: 30px; height: 1em;
         '&mdash; so in its hour the line names the week and the words that name it, and its ' +
         'flame is in the dial&rsquo;s own caption. </p><p>The prayer marks in place: the tag ' +
         'here and the tag on the card are the same prayer, and either lights both. Every ' +
-        'prayer carries an &#8599; to its text, here and on its card &mdash; Chabad&rsquo;s ' +
+        'prayer carries an &#8599;&#xFE0E; to its text, here and on its card &mdash; Chabad&rsquo;s ' +
         'Nusach Ari where there is one, and where there is not, whoever holds it best. ' +
         '</p><p>Beneath, the heart counts the ten prayers, the flame the ten faces, and the ' +
         'moon the readings. The moon fills as the fifteen steps up are taken and becomes the ' +
@@ -16900,7 +16911,7 @@ content: ''; float: right; width: 30px; height: 1em;
           'one by the week.</div>' +
         '<div style="font-size:0.86rem;color:var(--ink-mid);font-style:italic;line-height:1.65;">' +
           'The Kehot edition of the Keter Shem Tov runs to 430 numbered sections, and one comes up each ' +
-          'day. What is behind <span style="font-style:normal;">Today’s Keter Shem Tov summary ↗</span> ' +
+          'day. What is behind <span style="font-style:normal;">Today’s Keter Shem Tov summary ↗︎</span> ' +
           'is that day’s section in translation, with a line on where it sits and what it is answering.' +
         '</div>',
       beginner:
@@ -18384,7 +18395,7 @@ content: ''; float: right; width: 30px; height: 1em;
           'aria-label="Go to the face of this hour"><span class="tp-flag">Meditation</span></button>' +
           (href
             ? '<a class="tf-open" href="' + href + '" target="_blank" rel="noopener" ' +
-              'aria-label="Read today&rsquo;s Hayom Yom on Chabad.org">' + face + ' &#8599;</a>'
+              'aria-label="Read today&rsquo;s Hayom Yom on Chabad.org">' + face + ' &#8599;&#xFE0E;</a>'
             : '<button type="button" class="tf-open" onclick="todayFaceGo()" ' +
               'aria-label="Go to the ' + name + ' card">' + face + '</button>') +
           // No mark here. The line names the face and goes to it; the
@@ -20079,7 +20090,7 @@ content: ''; float: right; width: 30px; height: 1em;
       ['R. Meir',      'https://www.dafyomi.co.il/general/info/torahau/hidden_tzadikim.php?d=17'],
     ].map(([n, u]) => `<a href="${u}" target="_blank" style="color:var(--gold)">${n}</a>`)
      .join(' &nbsp;·&nbsp; ')
-     + ' &nbsp;·&nbsp; <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold)">A\u2019ufa Eshkona ↗</span>';
+     + ' &nbsp;·&nbsp; <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold)">A\u2019ufa Eshkona ↗︎</span>';
 
     // Eleven of them, from 14 Kislev round to 5 Elul. The Adar yahrzeit falls
     // in Adar I when the year has two — Sephardic practice follows the Mechaber
@@ -20120,7 +20131,7 @@ content: ''; float: right; width: 30px; height: 1em;
       main.style.display = today ? '' : 'none';
       main.innerHTML = today
         ? `<strong style="color:var(--gold-mid)">Hilula — ${today.name}</strong>` +
-          (today.piyut ? ` <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold);font-size:0.9em">· אָעוּפָה אֶשְׁכֹּנָה ↗</span>` : '')
+          (today.piyut ? ` <span onclick="openAufaModal()" style="cursor:pointer;color:var(--gold);font-size:0.9em">· אָעוּפָה אֶשְׁכֹּנָה ↗︎</span>` : '')
         : '';
       meta.innerHTML = (today ? today.note + '<br>' : '') + ABU_LINKS;
     })();
@@ -20650,7 +20661,7 @@ content: ''; float: right; width: 30px; height: 1em;
           `<span class="detail-value">${l.meaning}</span></div>`).join('') + `</div>`
       : '';
     _ltDetailMeta = _ltShown.map(l => l.name).join(' &nbsp;·&nbsp; ') +
-      ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_DOC}" target="_blank" style="color:var(--gold)">Hebrew Alphabet, Perek Shirah, and Pirkei Avot ↗</a>`;
+      ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_DOC}" target="_blank" style="color:var(--gold)">Hebrew Alphabet, Perek Shirah, and Pirkei Avot ↗︎</a>`;
     const _ltNames = _ltShown.map(l => `${l.name} <span style="font-family:'Frank Ruhl Libre',serif">${l.heb}</span>`).join(' · ');
 
     const _micGate = gatesMicrocosm(cy22Mic);
@@ -23495,7 +23506,7 @@ content: ''; float: right; width: 30px; height: 1em;
   const AUFA_ESHKONA = `<div style="font-size:0.82rem;color:var(--ink-mid);font-style:italic;line-height:1.6;margin-bottom:12px;">Morocco, at the turn of the twentieth century. It speaks in the language of Shir HaShirim and quotes it outright — but where that book leaves the lovers still seeking, this one ends in their meeting.</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">אָעוּפָה אֶשְׁכֹּנָה וְאַרְחִיקָה נְדֹד<br>בַּמִּדְבָּר אָלִינָה וְאוּלַי אֶמְצָא דּוֹד</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">נֶשֶׁק אַהֲבָתוֹ בְּלִבִּי בֹּעֵרָה<br>מִיּוֹם פְּרֵדָתוֹ נַפְשִׁי עָלַי מָרָה</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">יְדִיד מֶנִי בָּרַח הָלַךְ עֲזָבַנִי<br>אֵיזוֹ דֶּרֶךְ אָרַח וְאֵלְכָה גַּם אֲנִי</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">יָצָאתִי לְבַקֵּשׁ דּוֹדִי בֵּין חֲבֵרִים<br>נִלְכַּדְתִּי בְּמוֹקֵשׁ הִכּוּנִי הַשֹּׁמְרִים</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">צִפִּיתִי לְדוֹדִי מָתַי יָבוֹא אֵלַי<br>יַלְבִּישֵׁנִי עֶדְיִי וִירַחֵם עָלַי</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">חֲשֹׂף זְרוֹעֲךָ לְקַבֵּץ פְּזוּרִים<br>גַּלֵּה קֵץ יִשְׁעֲךָ וְדִגְלְךָ הָרֵם</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">קוּמִי יְחִידָתִי וְשׁוּבִי בִּתְשׁוּבָה<br>אֲחוֹתִי רַעְיָתִי הִנֵּה גוֹאֲלֵךְ בָּא</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">חֲמוּדָה יְקָרָה רַבַּת הַמַּעֲלוֹת<br>גַּם מִפָּז נִבְחָרָה צְאִי נָא בִמְחוֹלוֹת</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">זָכַרְתִּי לָךְ חֶסֶד נְעוּרַיִךְ נְעוּרִים<br>הֵיכָלֵךְ אֲיַסֵּד בְּאַבְנֵי סַפִּירִים</div><div dir="rtl" style="font-family:'Frank Ruhl Libre',serif;font-size:1.02rem;line-height:1.9;margin-bottom:9px;">קוֹל דּוֹדִי הִנֵּה בָּא מְדַלֵּג עַל הֶהָרִים<br>קוּמִי לָךְ אֲהוּבָה כִּי בָּא קֵץ דְּרוֹרִים</div>`;
   function openAufaModal() {
     openInfoPopup('אָעוּפָה אֶשְׁכֹּנָה — A\u2019ufa Eshkona', AUFA_ESHKONA,
-      '<a href="https://youtu.be/ApXR2xxn29I" target="_blank" style="color:var(--gold)">Listen ↗</a>' +
+      '<a href="https://youtu.be/ApXR2xxn29I" target="_blank" style="color:var(--gold)">Listen ↗︎</a>' +
       ' &nbsp;·&nbsp; <a href="https://www.nli.org.il/en/discover/music/jewish-music/piyut/piyut/aufa-eshkona" target="_blank" style="color:var(--gold)">National Library of Israel</a>' +
       '<br>R. Yitzchak Abuchatzeira, fourth and youngest son of the Abir Yaakov · 14 Shevat' +
       '<br>English translation there by Abigail Denemark');
@@ -23518,8 +23529,8 @@ content: ''; float: right; width: 30px; height: 1em;
     openInfoPopup(`${b.emoji} ${b.book}`,
       rows || '<div style="color:var(--ink-mid);font-style:italic">Nothing set for this week.</div>',
       b.day +
-      (b.url ? ` &nbsp;·&nbsp; <a href="${b.url}" target="_blank" style="color:var(--gold)">The book ↗</a>` : '') +
-      (b.weekUrl ? ` &nbsp;·&nbsp; <a href="${b.weekUrl}" target="_blank" style="color:var(--gold)">This week ↗</a>` : ''));
+      (b.url ? ` &nbsp;·&nbsp; <a href="${b.url}" target="_blank" style="color:var(--gold)">The book ↗︎</a>` : '') +
+      (b.weekUrl ? ` &nbsp;·&nbsp; <a href="${b.weekUrl}" target="_blank" style="color:var(--gold)">This week ↗︎</a>` : ''));
   }
 
   // Today's letters and what each one stands for — the day's, and the one or
@@ -25885,7 +25896,7 @@ content: ''; float: right; width: 30px; height: 1em;
     document.getElementById('yr-detail').innerHTML =
       `Each day carries its Hebrew date, what the day is, and where it falls in ${lens.card}'s cycle. ` +
       `Alternate weeks of the Kabbalah of Time year are tinted, and <b>W1…</b> marks where each begins. ` +
-      `Tap a day to go to it. <span class="yr-jump" onclick="window.print()">print ↗</span>`;
+      `Tap a day to go to it. <span class="yr-jump" onclick="window.print()">print ↗︎</span>`;
   }
 
   // Gregorian months, or the Jewish months of the same year. The days and
@@ -25956,7 +25967,7 @@ content: ''; float: right; width: 30px; height: 1em;
       `${day.heb.day} ${YR_MONTHS[day.heb.month] || day.heb.month} ${day.heb.year} · ` +
       `week ${wk}, day ${day.doy}<br>${day._seg.label}` +
       (day.parasha ? ` · Parashat ${day.parasha}` : '') +
-      `<br><span class="yr-jump" style="margin-left:0" onclick="yrGoto(${i})">go to this day ↗</span>`;
+      `<br><span class="yr-jump" style="margin-left:0" onclick="yrGoto(${i})">go to this day ↗︎</span>`;
   }
   function yrGoto(i) {
     const day = _yrDays.days[i];
@@ -27585,7 +27596,7 @@ content: ''; float: right; width: 30px; height: 1em;
 
   <h3 class="hg-h">Moving around</h3>
   <ul class="hg-list">
-    <li>Use <strong>&lsaquo; &rsaquo;</strong> to move a day at a time, <strong>jump to date &#8599;</strong> for any date, and <strong>monthly calendars &#8599;</strong> to lay a whole month out at once.</li>
+    <li>Use <strong>&lsaquo; &rsaquo;</strong> to move a day at a time, <strong>jump to date &#8599;&#xFE0E;</strong> for any date, and <strong>monthly calendars &#8599;&#xFE0E;</strong> to lay a whole month out at once.</li>
     <li>Badges like &ldquo;Week 40 &middot; Day 4&rdquo; show where you are in that section&rsquo;s own cycle; the linked title beside them opens the source.</li>
     <li>Tap a step on <strong>Ma&rsquo;alot HaZman</strong> &mdash; the spiral of the year above &mdash; for that week&rsquo;s theme and teaching.</li>
     <li>Gevurah&rsquo;s season reads <strong>Ratzo</strong> for its first forty-five days and <strong>Shov</strong> for its last &mdash; running in toward the season&rsquo;s <strong>Heart</strong> on day 46, then returning out. Nothing is divided between the halves; only the direction changes. Winter&rsquo;s Heart falls on Tu B&rsquo;Shvat, the day the sap turns.</li>
