@@ -679,7 +679,18 @@ font-weight: 600;
 .prayer-line {
   display: block;
   font-size: calc(10.5px * var(--ts, 1));
-  line-height: 1.35;
+  /* 1.5, not 1.35. The lines above this one run 13px of text on a 2-3px gap,
+     about sixteen to a line, and at 1.35 the prayer's own wrapped lines came
+     out at fourteen — tighter than everything they sit under, which reads as
+     cramped rather than as tidy. This is the column's own rhythm. */
+  line-height: 1.5;
+  /* The tag carries margin-top:1px inline on every card and has carried it
+     for as long as there have been cards. It stopped doing anything when the
+     tag was drawn inline so that it and its arrow would flow as one run —
+     the same fault that had quietly undone Keter's bottom margin — so the
+     line sat flush against the rabbi above it. Said here, on the block, and
+     at the three the column actually uses. */
+  margin-top: 3px;
 }
 .prayer-line .prayer-src { font-size: calc(14px * var(--ts, 1)); }
 .prayer-line .prayer-tag { display: inline; }
@@ -1503,9 +1514,10 @@ font-size: 11px;
 letter-spacing: 0.5px;
 text-transform: uppercase;
 color: var(--sefirah-color, var(--gold));
-/* 3px, not 5. The column is a stack of short lines and the gaps were the
-   loudest thing in it. */
-margin-bottom: 3px;
+/* 4px. Five was the loudest gap in a stack of short lines; three put it
+   under the three the rest of the column keeps, which is one too few for the
+   one line set in caps. */
+margin-bottom: 4px;
 font-weight: 600;
 }
 
