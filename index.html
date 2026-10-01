@@ -2225,7 +2225,13 @@ to   { opacity: 1; }
   color: var(--ink);
   white-space: pre-wrap;
   padding: 12px 0 10px;
-  font-family: Georgia, serif;
+  /* The script is plain text — it is built to be copied out, so it carries
+     no markup and its Hebrew cannot be wrapped and marked run by run. The
+     stack does it instead: Georgia has no Hebrew, so those glyphs fall to
+     the next face that does, and naming Frank Ruhl Libre there makes that
+     the page's own Hebrew rather than whatever generic serif the system
+     happens to keep. It was Liberation Serif, which nobody chose. */
+  font-family: Georgia, 'Frank Ruhl Libre', serif;
 }
 .copy-script-btn {
   background: none;
@@ -2233,7 +2239,10 @@ to   { opacity: 1; }
   border-radius: 4px;
   color: var(--gold);
   font-size: calc(11px * var(--ts, 1));
-  padding: 4px 12px;
+  /* 44px of its own. It was 25 tall, which no check had caught because the
+     panel it sits in was shut whenever anything looked. The height is taken
+     in padding so the button's own box grows rather than the row around it. */
+  padding: 14px 12px;
   cursor: pointer;
   font-family: 'Cinzel', serif;
   letter-spacing: 1px;
@@ -5011,7 +5020,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <div id="daily-script-panel" style="margin:8px 0 4px;border:1px solid var(--gold);border-radius:6px;">
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;" onclick="toggleDailyScript()">
       <span style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);letter-spacing:1.5px;flex:1;text-transform:uppercase;">Daily Script</span>
-      <span id="daily-script-expand-icon" style="color:var(--gold);font-size:calc(16px * var(--ts, 1));line-height:1;">▾</span>
+      <span id="daily-script-expand-icon" style="color:var(--gold);font-size:calc(16px * var(--ts, 1));line-height:1;">▴</span>
       <div class="daily-script-lang-bar">
         <button class="lang-btn active" id="lang-btn-en" onclick="setScriptLang('en')">EN</button>
         <button class="lang-btn" id="lang-btn-he" onclick="setScriptLang('he')">HE</button>
@@ -5024,7 +5033,13 @@ content: ''; float: right; width: 30px; height: 1em;
              the ⓘ explanations follow it where they have been translated. -->
       </div>
     </div>
-    <div id="daily-script-body" style="display:none">
+    <!-- Open from the start. The language strip sits in this panel's header,
+         and with the panel shut it read as decoration — five initials beside
+         a closed drawer, with nothing on the page visibly answering to them.
+         Open, pressing HE turns the script under it into Hebrew while the
+         reader is looking at it, which is the only way the strip says what
+         it is for. -->
+    <div id="daily-script-body" style="display:block">
       <div class="daily-script-inner">
         <div id="daily-script-content">Loading…</div>
         <button class="copy-script-btn" onclick="copyDailyScript()">Copy Script</button>
