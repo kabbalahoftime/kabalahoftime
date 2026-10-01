@@ -3138,6 +3138,31 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   font-family:'Cinzel',serif; font-size:0.78em; letter-spacing:1.5px;
   text-transform:uppercase; color:var(--gold); margin-right:6px; font-style:normal;
 }
+/* The walk. Two arrows at the edges with the jumps between them, and each
+   control carries its own 44px in padding so the row stays the height of one
+   line while every one of them is reachable with a thumb. */
+.comp-nav {
+  display:flex; align-items:center; gap:6px;
+  margin-top:14px; padding-top:10px; border-top:1px solid var(--border);
+}
+.comp-nav-mid { flex:1 1 auto; display:flex; flex-wrap:wrap; gap:4px 14px; justify-content:center; }
+.comp-step, .comp-jump {
+  background:none; border:none; cursor:pointer; font-family:inherit;
+  color:var(--gold); position:relative; z-index:1;
+}
+/* 44 square, and centred in it. The glyph is a single narrow chevron, so
+   padding alone left the target 26 across — the arrows need the size asked
+   for in both directions, not just the one a line of text gives them. */
+.comp-step {
+  flex:none; font-size:calc(20px * var(--ts, 1)); line-height:1;
+  min-width:44px; min-height:44px; padding:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.comp-jump {
+  font-size:calc(12.5px * var(--ts, 1)); letter-spacing:0.3px;
+  padding:14px 2px; margin:-14px 0; text-align:center;
+}
+.comp-step:hover, .comp-jump:hover { text-decoration:underline; }
 .comp-foot { margin-top:11px; }
 /* 44px of its own, taken in padding so the line it sits on does not move. */
 .comp-pdf {
@@ -3797,10 +3822,28 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="comp-body" id="comp-body"></div>
       <div class="comp-practice" id="comp-practice"></div>
       <div class="comp-teaser" id="comp-teaser"></div>
+      <!-- A curriculum a reader can only ever join in the middle is not a
+           curriculum. These walk it: to the beginning, a day either way, and
+           back to the day the rest of the page is on. Where the reader stops
+           is remembered, so the book keeps their place between visits the way
+           a book does. -->
+      <nav class="comp-nav" aria-label="Move through the companion">
+        <button type="button" class="comp-step" id="comp-prev"
+                onclick="companionStep(-1)" aria-label="The day before">&#8249;</button>
+        <span class="comp-nav-mid">
+          <button type="button" class="comp-jump" id="comp-first"
+                  onclick="companionGo(1)">New here? Start at Day&nbsp;1</button>
+          <button type="button" class="comp-jump" id="comp-today"
+                  onclick="companionGo(null)">Back to today</button>
+        </span>
+        <button type="button" class="comp-step" id="comp-next"
+                onclick="companionStep(1)" aria-label="The day after">&#8250;</button>
+      </nav>
       <div class="comp-foot">
         <a class="comp-pdf" id="comp-pdf" href="a-year-inside-the-day.pdf" download
-           aria-label="Download A Year Inside the Day as a PDF">
-          <span aria-hidden="true">&#8681;&#xFE0E;</span> Download the whole year as a PDF</a>
+           aria-label="Download A Year Inside the Day, the whole year, as a PDF">
+          <span aria-hidden="true">&#8681;&#xFE0E;</span>
+          <em>A Year Inside the Day</em> &mdash; the whole year, as a PDF</a>
       </div>
     </div>
   </section>
@@ -15382,20 +15425,50 @@ content: ''; float: right; width: 30px; height: 1em;
     .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
     .catch(() => {});
 
-  // The day of the KoT year the companion is currently showing, kept here by
-  // render() so the fetch above can draw as soon as it lands, whenever that is.
-  let _compWant = null;
+  // The day of the KoT year, kept here by render() so the fetch above can
+  // draw as soon as it lands, whenever that is.
+  let _compToday = null;
+  // Where the reader has stopped, if they have gone anywhere. null means they
+  // have not, and the companion follows the date like everything else.
+  // Remembered, because a curriculum that forgets your place is a magazine.
+  let _compPin = (function () {
+    try {
+      const v = parseInt(localStorage.getItem('kotCompanionDay'), 10);
+      if (v >= 1 && v <= 364) return v;
+    } catch (e) {}
+    return null;
+  })();
+
+  function companionDay() { return _compPin || _compToday; }
+
+  // Go to a day, or back to following the date when given null.
+  function companionGo(n) {
+    if (n === null) { _compPin = null; try { localStorage.removeItem('kotCompanionDay'); } catch (e) {} }
+    else {
+      _compPin = Math.min(364, Math.max(1, n));
+      try { localStorage.setItem('kotCompanionDay', String(_compPin)); } catch (e) {}
+    }
+    _compDay = null;                         // force the redraw
+    applyCompanion();
+    toggleCompanion(true);                   // a day asked for is a day to read
+  }
+  function companionStep(d) {
+    const now = companionDay();
+    if (now) companionGo(now + d);
+  }
 
   function applyCompanion(day) {
-    if (typeof day === 'number' && day >= 1 && day <= 364) _compWant = day;
+    if (typeof day === 'number' && day >= 1 && day <= 364) _compToday = day;
     const el = document.getElementById('companion');
     if (!el) return;
-    if (!COMPANION || !_compWant) { el.style.display = 'none'; return; }
-    const e = COMPANION.days[String(_compWant)];
+    const want = companionDay();
+    if (!COMPANION || !want) { el.style.display = 'none'; return; }
+    const e = COMPANION.days[String(want)];
     if (!e) { el.style.display = 'none'; return; }
     el.style.display = '';
-    if (_compDay === _compWant) return;      // already drawn for this day
-    _compDay = _compWant;
+    compBadge();
+    if (_compDay === want) { compNav(); return; }   // already drawn for this day
+    _compDay = want;
 
     const set = (id, html) => { const n = document.getElementById(id); if (n) n.innerHTML = html; };
     // Escaped, and any Hebrew in it marked as Hebrew. The manuscript is in
@@ -15428,6 +15501,44 @@ content: ''; float: right; width: 30px; height: 1em;
     // is emptied rather than left holding yesterday's.
     const t = document.getElementById('comp-teaser');
     if (t) t.style.display = e.teaser ? '' : 'none';
+    compNav();
+  }
+
+  // The four controls, each shown only where it means something: no step back
+  // from the first day or on from the last, no invitation to start at Day 1
+  // while standing on it, and nothing offering a way back to today until the
+  // reader has left it.
+  function compNav() {
+    const now = companionDay();
+    const show = (id, on, label) => {
+      const n = document.getElementById(id);
+      if (!n) return;
+      n.style.display = on ? '' : 'none';
+      if (label != null) n.textContent = label;
+    };
+    show('comp-prev', now > 1);
+    show('comp-next', now < 364);
+    show('comp-first', now !== 1);
+    show('comp-today', _compPin !== null && _compPin !== _compToday,
+         _compToday ? 'Back to today · Day ' + _compToday : 'Back to today');
+  }
+
+  // The badge retires itself. It says "new", which stops being true the
+  // moment the reader has opened the thing once — after that it is chrome
+  // that has stopped carrying any information. It also ages out on its own
+  // for anyone who never opens it, so it cannot sit there for a year.
+  const COMP_BADGE_DAYS = 21;
+  function compBadge() {
+    const n = document.querySelector('.comp-new');
+    if (!n) return;
+    let seen = null, first = null;
+    try {
+      seen = localStorage.getItem('kotCompanionSeen');
+      first = parseInt(localStorage.getItem('kotCompanionFirst'), 10);
+      if (!(first > 0)) { first = Date.now(); localStorage.setItem('kotCompanionFirst', String(first)); }
+    } catch (e) {}
+    const aged = first > 0 && (Date.now() - first) > COMP_BADGE_DAYS * 86400000;
+    n.style.display = (seen || aged) ? 'none' : '';
   }
 
   // Open and shut. Deliberately not remembered across loads: the card is shut
@@ -15444,6 +15555,11 @@ content: ''; float: right; width: 30px; height: 1em;
     if (open) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '');
     sec.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    // Opened once is the badge's whole job done.
+    if (open) {
+      try { localStorage.setItem('kotCompanionSeen', '1'); } catch (e) {}
+      compBadge();
+    }
   }
 
   // The entry as the reader should have it: their language if it has been
