@@ -2939,15 +2939,51 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    asked for, this one is being told — and its word is a link to the card it
    was read from rather than a mark. The padding gives the tap its height
    without moving the line, the same trick the prayer tag uses. */
-.today-face { margin-top:8px; font-size:calc(13.5px * var(--ts, 1)); }
-.today-face .tp-sef { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
+/* A row, not a sentence. The face is the one ladder line whose text runs
+   long — a commandment is a clause, not a name — and as plain inline flow a
+   long one could not share the chip's line: a button is an atomic box, so it
+   took a line of its own and the chip sat alone above it with the Sefirah
+   stranded underneath. Laid out as a row the chip keeps its place and the
+   text wraps beside it, hanging under itself, the way the eye expects a
+   label and its value to sit. The gap is the row's, since flex eats the
+   whitespace that used to make it. */
+.today-face { margin-top:8px; font-size:calc(13.5px * var(--ts, 1));
+  display:flex; align-items:baseline; column-gap:8px; }
+.today-face .tp-go { flex:none; }
+/* Never broken in two. It is two words wide and the middot has to stay with
+   the name — split across a wrap it reads as a bullet starting a new line.
+   Its gap from the text is a real space in the markup rather than a margin,
+   because a margin survives a line break and a space does not: when the text
+   runs long enough to push the name onto a line of its own, it should start
+   flush under the text, not indented eight pixels adrift of it. */
+.today-face .tp-sef { color:var(--ink-mid); font-size:0.85em;
+  white-space:nowrap; }
 .today-face .tf-open {
   background:none; border:none; font-family:inherit; font-size:1em;
   color:var(--ink-mid); cursor:pointer; text-align:left;
-  display:inline-block; padding:14px 6px; margin:-14px -6px;
+  /* Hugs its text when short, shrinks and wraps when long — min-width:0
+     because a flex item will not shrink below its content without it, and
+     the commandments are longer than any row is wide. The side padding is
+     gone with the inline flow that needed it: the item is as wide as its
+     text now, so the tap is too. */
+  flex:0 1 auto; min-width:0;
+  display:inline-block; padding:14px 0; margin:-14px 0;
   position:relative; z-index:1;
 }
 .today-face .tf-open:hover { color:var(--gold); text-decoration:underline; }
+/* Below this the chip costs more than the column it leaves. "Meditation" is
+   the longest of the four chips, and at 320px it takes a third of the row —
+   the commandment came out four words to a line, four lines deep, where the
+   full width holds it in two. So the narrowest phones stack: chip on its
+   line, text across the whole of the next. The Sefirah's name stays with the
+   text either way, which was the point of moving it inside.
+   A wrap, not a column: flex lines break by content width, so a sentence
+   this long would take a line of its own at every size if the row were
+   allowed to wrap at all. Only here is that what we want. */
+@media (max-width:360px) {
+  .today-face { flex-wrap:wrap; }
+  .today-face .tf-open { flex:1 1 100%; }
+}
 /* The Keter line is a link out rather than a jump down the page, and is drawn
    as one: gold, with the same ↗ the app uses wherever it hands a reader over
    to somebody else's site. */
@@ -18384,7 +18420,16 @@ content: ''; float: right; width: 30px; height: 1em;
   function _isPosition(s) {
     return !s || !/[A-Za-z֐-׿]{2}/.test(s.replace(/Day|Cycle|Week|Season|of/gi, ''));
   }
-  const _faceCut = (s) => (s.length > 72 ? s.slice(0, 71).trim() + '…' : s);
+  // Cut at a word, not at a letter. Sliced flat at 71 the commandments broke
+  // mid-word — "out of the land of Egypt, out o…" — which reads as a fault in
+  // the text rather than as a line that carries on. Back up to the last space
+  // in the last ten characters; if there is none, the flat cut stands.
+  const _faceCut = (s) => {
+    if (s.length <= 72) return s;
+    const cut = s.slice(0, 71).trim();
+    const sp = cut.lastIndexOf(' ');
+    return (sp > 60 ? cut.slice(0, sp).replace(/[ ,;:]+$/, '') : cut) + '…';
+  };
   // Several cards mark the day's own item with a small dim "Day:" label. What
   // follows it, up to the next label or line break, is the face.
   function _afterLabel(root, label) {
@@ -18504,20 +18549,29 @@ content: ''; float: right; width: 30px; height: 1em;
       // Meditation, not the Sefirah's name. The flag says what kind of deed
       // the line is, the same question the two lines beside it answer, and
       // the Sefirah goes to the end where the prayer line already keeps it.
+      // The Sefirah's name sits inside the face rather than after it. Out
+      // here it was a third thing on the line, and the faces are the one
+      // ladder row whose text can run long — the commandments especially —
+      // so when the text wrapped the name was pushed onto a line of its own
+      // and read as a stray fragment, a dangling "· Netzach" under the
+      // sentence. Inside, it follows the last word wherever that word ends.
+      // It costs nothing to the tap: the button goes to that Sefirah's card,
+      // which is exactly what the name says, and aria-label names it anyway.
+      const sefHtml = '<span class="tp-sef">&middot; ' + name + '</span>';
       el.innerHTML = face
         ? '<button type="button" class="tp-go" onclick="todayFaceGo()" ' +
           'aria-label="Go to the face of this hour"><span class="tp-flag">Meditation</span></button>' +
-          (href
-            ? '<a class="tf-open" href="' + href + '" target="_blank" rel="noopener" ' +
-              'aria-label="Read today&rsquo;s Hayom Yom on Chabad.org">' + face + ' &#8599;&#xFE0E;</a>'
-            : '<button type="button" class="tf-open" onclick="todayFaceGo()" ' +
-              'aria-label="Go to the ' + name + ' card">' + face + '</button>') +
           // No mark here. The line names the face and goes to it; the
           // meditation is taken on the face itself, where every card carries
           // one. A box on this line wrapped to a line of its own on a phone,
           // which read as a stray checkbox under the text rather than as part
           // of it.
-          '<span class="tp-sef">&middot; ' + name + '</span>'
+          (href
+            ? '<a class="tf-open" href="' + href + '" target="_blank" rel="noopener" ' +
+              'aria-label="Read today&rsquo;s Hayom Yom on Chabad.org">' + face +
+              ' &#8599;&#xFE0E; ' + sefHtml + '</a>'
+            : '<button type="button" class="tf-open" onclick="todayFaceGo()" ' +
+              'aria-label="Go to the ' + name + ' card">' + face + ' ' + sefHtml + '</button>')
         : '';
     }
     el.style.display = face ? '' : 'none';
