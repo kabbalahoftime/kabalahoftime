@@ -3031,6 +3031,72 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 #today-block .today-next { width:calc(100% + 10px); }
 #today-block .is-next { border-left-color:var(--gold); }
 
+/* ── THE COMPANION ──
+   The on-ramp's daily entry. Drawn as a card like the Sefirot below it, so a
+   reader meets it as part of the page rather than as an advertisement — but
+   with the gold rule down its left that the ladder uses for the thing being
+   asked for, because for a newcomer this is that thing. */
+.companion {
+  position:relative; margin:14px 0 0; padding:12px 14px 10px;
+  border:1px solid var(--border-strong); border-left:2px solid var(--gold);
+  border-radius:8px; background:var(--card, #fdfbf6);
+}
+/* The word the author asked for, and it earns its place only while it is
+   true: a small gold tag rather than a banner, in the corner, said once. */
+.comp-new {
+  position:absolute; top:10px; right:12px;
+  font-family:'Cinzel',serif; font-size:calc(9px * var(--ts, 1));
+  letter-spacing:2px; text-transform:uppercase; color:var(--gold);
+  border:1px solid var(--gold); border-radius:3px; padding:2px 6px; line-height:1;
+}
+.comp-head {
+  font-family:'Cinzel',serif; font-weight:400;
+  font-size:calc(12px * var(--ts, 1)); letter-spacing:1.6px;
+  text-transform:uppercase; color:var(--gold);
+  margin:0 54px 8px 0; line-height:1.5;
+}
+/* The second half of the title is the promise, and quieter than the offer. */
+.comp-head-sub { display:block; color:var(--ink-mid); letter-spacing:1.2px; }
+.comp-meta {
+  font-size:calc(10.5px * var(--ts, 1)); color:var(--ink-dim);
+  letter-spacing:0.4px; margin-bottom:6px;
+}
+.comp-title {
+  font-family:'Cormorant Garamond',serif; font-weight:600;
+  font-size:calc(19px * var(--ts, 1)); color:var(--ink);
+  margin:0 0 7px; line-height:1.3;
+}
+.comp-body { font-size:calc(14px * var(--ts, 1)); line-height:1.75; color:var(--ink); }
+.comp-body p { margin:0 0 9px; }
+.comp-body p:last-child { margin-bottom:0; }
+/* The two lines the entry ends on. The practice is the only thing it asks
+   for, so it carries the gold; the teaser is tomorrow's and stays dim. */
+.comp-practice, .comp-teaser {
+  font-size:calc(13.5px * var(--ts, 1)); line-height:1.7; margin-top:9px;
+}
+.comp-practice { color:var(--ink); }
+.comp-teaser   { color:var(--ink-mid); font-style:italic; }
+.comp-practice .comp-lead, .comp-teaser .comp-lead {
+  font-family:'Cinzel',serif; font-size:0.78em; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--gold); margin-right:6px; font-style:normal;
+}
+.comp-foot { margin-top:11px; }
+/* 44px of its own, taken in padding so the line it sits on does not move. */
+.comp-pdf {
+  display:inline-block; color:var(--gold); text-decoration:none;
+  font-size:calc(12.5px * var(--ts, 1)); letter-spacing:0.3px;
+  padding:14px 6px; margin:-14px -6px; position:relative; z-index:1;
+}
+.comp-pdf:hover { text-decoration:underline; }
+/* The title is a sentence, and set in caps with wide tracking it ran to six
+   lines on the narrowest phones — a wall of gold before the reader reaches
+   the day. Tighter tracking and a little less room kept for the tag give two
+   of those lines back, and the tag only ever sits beside the first. */
+@media (max-width:360px) {
+  .comp-head { font-size:calc(11.5px * var(--ts, 1)); letter-spacing:1px; margin-right:46px; }
+  .comp-head-sub { letter-spacing:0.8px; }
+}
+
 /* ── THE STEP THAT TRAVELS ──
    The ladder's lit line, kept at the foot of the screen once the ladder
    itself has scrolled away. Below every modal and above everything else.
@@ -3650,6 +3716,31 @@ content: ''; float: right; width: 30px; height: 1em;
     <a href="#" onclick="event.preventDefault(); openTodaysPath()" style="color:var(--gold); font-weight:600;">Tap the moon 🌙 above anytime to see Today's Path.</a>
   </div>
 
+  <!-- THE COMPANION — one entry a day from "A Year Inside the Day", the
+       on-ramp for a reader who brings nothing with them. It sits above the
+       cards because that is who it is for: someone who has opened the page
+       and does not yet know what a Sefirah is. The cards assume the year;
+       this assumes nothing and walks there in 364 days.
+       Its text lives in companion.json rather than here — 364 entries is a
+       third of a megabyte, which does not belong in a page that must parse
+       before anything draws. The card holds its place while the file is in
+       flight and fills when it lands, so nothing jumps. -->
+  <section id="companion" class="companion" style="display:none;" aria-labelledby="companion-head">
+    <div class="comp-new">New</div>
+    <h2 id="companion-head" class="comp-head">A Daily Introductory Companion to Your Journey,
+      <span class="comp-head-sub">Requiring No Prior Knowledge</span></h2>
+    <div class="comp-meta" id="comp-meta"></div>
+    <h3 class="comp-title" id="comp-title"></h3>
+    <div class="comp-body" id="comp-body"></div>
+    <div class="comp-practice" id="comp-practice"></div>
+    <div class="comp-teaser" id="comp-teaser"></div>
+    <div class="comp-foot">
+      <a class="comp-pdf" id="comp-pdf" href="a-year-inside-the-day.pdf" download
+         aria-label="Download A Year Inside the Day as a PDF">
+        <span aria-hidden="true">&#8681;&#xFE0E;</span> Download the whole year as a PDF</a>
+    </div>
+  </section>
+
   <!-- THE THIRTY-FIRST — the seal of a completed path. Hidden until the day's
        thirty steps are all marked; updateMaalotMoon shows it. -->
   <div id="song-yehoshua" style="display:none;">
@@ -4078,7 +4169,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="sefirah-sub-text"></div>
     <div class="sefirah-tags"></div>
     <div id="netzach-overlap-toggle" class="year-toggle-pill" style="display:none;margin-top:6px;"
-         onclick="event.stopPropagation()" title="Netzach's 369 runs five days past the year — the closing cycle finishes as the new one begins">
+         onclick="event.stopPropagation()" title="Netzach's 369 runs five days past the year — days 365 to 369 fall on 7 to 11 Tishrei, the closing round finishing while the new one runs">
       <button class="year-pill-btn year-pill-active" id="netz-ov-a" onclick="setNetzachOverlap(false)">Day 1</button>
       <button class="year-pill-btn" id="netz-ov-b" onclick="setNetzachOverlap(true)">Day 365</button>
     </div>
@@ -15202,6 +15293,60 @@ content: ''; float: right; width: 30px; height: 1em;
     .then(j => { if (j && typeof j === 'object') CYCLE_I18N = j; })
     .catch(() => {});
 
+  // ── THE COMPANION ──
+  // "A Year Inside the Day" — one entry for each day of the Kabbalah of Time
+  // year, the on-ramp for a reader who brings nothing with them. Held in its
+  // own file and fetched with the page: 364 entries are a third of a
+  // megabyte, and the page has to parse before it can draw.
+  //
+  // The day it shows is the day of the KoT year, 1-364, which is the number
+  // the date bar already prints — so the companion walks in step with the
+  // cards above and below it rather than keeping a count of its own. A reader
+  // stepping through dates takes the companion with them.
+  let COMPANION = null;
+  let _compDay = null;          // what is drawn now, so it is not redrawn
+  fetch('companion.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
+    .catch(() => {});
+
+  // The day of the KoT year the companion is currently showing, kept here by
+  // render() so the fetch above can draw as soon as it lands, whenever that is.
+  let _compWant = null;
+
+  function applyCompanion(day) {
+    if (typeof day === 'number' && day >= 1 && day <= 364) _compWant = day;
+    const el = document.getElementById('companion');
+    if (!el) return;
+    if (!COMPANION || !_compWant) { el.style.display = 'none'; return; }
+    const e = COMPANION.days[String(_compWant)];
+    if (!e) { el.style.display = 'none'; return; }
+    el.style.display = '';
+    if (_compDay === _compWant) return;      // already drawn for this day
+    _compDay = _compWant;
+
+    const set = (id, html) => { const n = document.getElementById(id); if (n) n.innerHTML = html; };
+    const esc = (s) => String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    // Day of the year, then where it sits in the book — the week and the
+    // movement, so a reader can see the shape they are walking through.
+    const bits = ['Day ' + e.n + ' of 364'];
+    if (e.week) bits.push('Week ' + e.week + (e.weekTitle ? ' — ' + esc(e.weekTitle) : ''));
+    if (e.movementTitle) bits.push(esc(e.movementTitle));
+    set('comp-meta', bits.join(' &nbsp;·&nbsp; '));
+    set('comp-title', esc(e.title));
+    set('comp-body', (e.body || []).map((p) => '<p>' + esc(p) + '</p>').join(''));
+    set('comp-practice', e.practice
+      ? '<span class="comp-lead">Practice</span>' + esc(e.practice) : '');
+    set('comp-teaser', e.teaser
+      ? '<span class="comp-lead">' + esc(e.teaserLead || 'Tomorrow') + '</span>' + esc(e.teaser) : '');
+    // Day 7 has no teaser — the first week ends on its practice — so the line
+    // is emptied rather than left holding yesterday's.
+    const t = document.getElementById('comp-teaser');
+    if (t) t.style.display = e.teaser ? '' : 'none';
+  }
+
   // The entry as the reader should have it: their language if it has been
   // written, otherwise the English beside it.
   function infoLocal(key, entry) {
@@ -19903,6 +20048,12 @@ content: ''; float: right; width: 30px; height: 1em;
       ? `Week ${effectiveKotWeek} (${hMonth === 11 ? 'Shevat' : 'Adar I'} · Extra Day ${extraDay} of 28) · Day ${kotDayOfYear}`
       : `Week ${effectiveKotWeek} · Day ${kotDayOfYear}`;
 
+    // The companion walks the same day the bar just printed. A leap year's
+    // intercalated days are already folded out of kotDayOfYear, so the
+    // on-ramp holds where the cycles hold and resumes with them: 364 entries
+    // against 364 days, however long the Hebrew year runs.
+    if (typeof applyCompanion === 'function') applyCompanion(kotDayOfYear);
+
     // Update Hebrew date in top bar
     document.getElementById('hebrew-date').textContent = formatHebrewDate(hDay, hMonth, hYear);
 
@@ -22302,12 +22453,30 @@ content: ''; float: right; width: 30px; height: 1em;
     // the first, which left roughly 110 days of a leap year without it.
     // Netzach's 369 runs five days past the 364-day year, so at each turn the
     // closing cycle still has days 365-369 to complete while the new one has
-    // already begun — the doubling from about 25 Elul to 11 Tishrei. Those five
-    // days are reachable through the Netzach toggle on the first five days of a
-    // cycle; it hides itself the rest of the year.
+    // already begun. Those five are reachable through the Netzach toggle, and
+    // only on the five days they are actually due.
+    //
+    // Which days those are is not a convention — it is arithmetic. The closing
+    // year's 364th day is 6 Tishrei, fixed, the months from Nisan to Elul
+    // having no variable length; so its 365th is 7 Tishrei and its 369th is
+    // 11 Tishrei. The ninth round therefore runs from Rosh Chodesh Elul — the
+    // 30th of Av, its first day — to the day after Yom Kippur, forty-one days,
+    // with the fortieth falling on Yom Kippur itself and the forty-first, the
+    // Yechidah day, on the day after. That is where the tradition puts the
+    // Yechidah: at Ne'ilah, which closes as the Hebrew day turns, so the
+    // forty-first begins in the moment the fortieth ends.
+    //
+    // This used to offer them on the first five days of the new cycle instead
+    // — base + 364 — which reached day 369 but showed it about ten days early,
+    // around Rosh Hashana, with nothing in the calendar to answer to.
     const _netzBase = ((cy41.cycle - 1) % 9) * 41 + cy41.day;   // 1-369
-    const _netzCanOverlap = _netzBase <= 5;
-    const _netzPos = (_netzCanOverlap && window.netzachOverlap) ? _netzBase + 364 : _netzBase;
+    // Where the closing cycle stands today, counted from its own year's first
+    // day and less that year's intercalation if it carried one, as every other
+    // count of it is. Outside the five-day window the number is meaningless
+    // and unused — the window is what gives it meaning.
+    const _netzPrevPos = d - _dy1P + 1 - (_isLP ? 28 : 0);
+    const _netzCanOverlap = _netzPrevPos >= 365 && _netzPrevPos <= 369;
+    const _netzPos = (_netzCanOverlap && window.netzachOverlap) ? _netzPrevPos : _netzBase;
     // The whole card reads the toggled position, not only the day's reading.
     // The toggle used to move the text and leave the heading behind, so the
     // closing round's last five days were legible as Sichos HaRan and Ma'ayan
@@ -22323,7 +22492,7 @@ content: ''; float: right; width: 30px; height: 1em;
       if (!_netzCanOverlap) { window.netzachOverlap = false; return; }
       const a = document.getElementById('netz-ov-a'), b = document.getElementById('netz-ov-b');
       if (a) { a.textContent = `Day ${_netzBase}`;       a.className = 'year-pill-btn' + (window.netzachOverlap ? '' : ' year-pill-active'); }
-      if (b) { b.textContent = `Day ${_netzBase + 364}`; b.className = 'year-pill-btn' + (window.netzachOverlap ? ' year-pill-active' : ''); }
+      if (b) { b.textContent = `Day ${_netzPrevPos}`;    b.className = 'year-pill-btn' + (window.netzachOverlap ? ' year-pill-active' : ''); }
     })();
 
     // Ma'ayan Ganim — its 368 days plus the closing Dear Reader make 369,
