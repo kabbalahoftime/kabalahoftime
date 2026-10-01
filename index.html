@@ -24114,10 +24114,18 @@ content: ''; float: right; width: 30px; height: 1em;
   // load and a screen reader announced the setting the reader had just left.
   // Asked here rather than added to each setter: there are eight of them, and
   // a ninth would have been written without this line.
+  // In the capture phase, and that is the whole point of it. Several of these
+  // controls sit inside something that stops the click bubbling — the
+  // language strip does it so a tap on HE does not also shut the panel it is
+  // the header of, and Netzach's overlap pills do it so the toggle does not
+  // open the card. A listener on the way up never saw those clicks, so the
+  // strip and the pills kept whatever aria-pressed they had at load: the
+  // class moved to HE and the announcement stayed on EN. Capture runs before
+  // any of them, and the timeout puts the read after the class has moved.
   document.addEventListener('click', (e) => {
     if (e.target.closest && e.target.closest('.year-pill-btn, .lang-btn, .beginner-btn'))
       setTimeout(() => { if (typeof syncA11yState === 'function') syncA11yState(); }, 0);
-  });
+  }, true);
 
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
   // The language the page's prose is read in. It began as the Daily Script's
