@@ -3042,13 +3042,48 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   border-radius:8px; background:var(--card, #fdfbf6);
 }
 /* The word the author asked for, and it earns its place only while it is
-   true: a small gold tag rather than a banner, in the corner, said once. */
+   true: a small gold tag rather than a banner, in the corner, said once.
+   It lies over the control that opens the card, so it lets taps through
+   rather than punching a dead spot in the middle of it. */
 .comp-new {
-  position:absolute; top:10px; right:12px;
+  position:absolute; top:10px; right:12px; pointer-events:none; z-index:1;
   font-family:'Cinzel',serif; font-size:calc(9px * var(--ts, 1));
   letter-spacing:2px; text-transform:uppercase; color:var(--gold);
   border:1px solid var(--gold); border-radius:3px; padding:2px 6px; line-height:1;
 }
+/* Shut until it is asked for. The entry is a page of prose and the cards
+   below it are the app — so it offers itself in two lines and opens on a
+   tap, rather than standing between the ladder and the year every morning.
+   The heading is the control: a button inside the h2, which keeps the
+   section's name a heading while making the whole of it the hit area. */
+.comp-h { margin:0; font-weight:400; }
+.comp-open {
+  display:block; width:100%; text-align:left; cursor:pointer;
+  background:none; border:none; font:inherit; color:inherit;
+  padding:2px 0; position:relative;
+}
+.comp-open:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+/* The arrow turns rather than swapping glyph, so the shut and open states
+   are one thing moving and not two marks to tell apart. */
+.comp-chev {
+  position:absolute; right:2px; bottom:0; color:var(--gold);
+  font-size:calc(13px * var(--ts, 1)); line-height:1;
+  transition:transform 0.18s ease;
+}
+.companion.is-open .comp-chev { transform:rotate(180deg); }
+/* What the day is, said in the shut state — enough that a reader can tell
+   whether to open it, which "a daily companion" alone cannot. */
+.comp-peek {
+  display:block; margin:5px 20px 2px 0;
+  font-family:'Cormorant Garamond',serif;
+  font-size:calc(15px * var(--ts, 1)); line-height:1.4; color:var(--ink);
+}
+.comp-peek .comp-peek-day { color:var(--ink-dim); font-size:0.82em;
+  font-family:'Cinzel',serif; letter-spacing:1px; margin-right:7px; }
+/* Open, the panel below says the day and names it properly, so the peek
+   stands down rather than printing the title twice on top of itself. */
+.companion.is-open .comp-peek { display:none; }
+.comp-panel { margin-top:10px; }
 .comp-head {
   font-family:'Cinzel',serif; font-weight:400;
   font-size:calc(12px * var(--ts, 1)); letter-spacing:1.6px;
@@ -3725,19 +3760,26 @@ content: ''; float: right; width: 30px; height: 1em;
        third of a megabyte, which does not belong in a page that must parse
        before anything draws. The card holds its place while the file is in
        flight and fills when it lands, so nothing jumps. -->
-  <section id="companion" class="companion" style="display:none;" aria-labelledby="companion-head">
-    <div class="comp-new">New</div>
-    <h2 id="companion-head" class="comp-head">A Daily Introductory Companion to Your Journey,
-      <span class="comp-head-sub">Requiring No Prior Knowledge</span></h2>
-    <div class="comp-meta" id="comp-meta"></div>
-    <h3 class="comp-title" id="comp-title"></h3>
-    <div class="comp-body" id="comp-body"></div>
-    <div class="comp-practice" id="comp-practice"></div>
-    <div class="comp-teaser" id="comp-teaser"></div>
-    <div class="comp-foot">
-      <a class="comp-pdf" id="comp-pdf" href="a-year-inside-the-day.pdf" download
-         aria-label="Download A Year Inside the Day as a PDF">
-        <span aria-hidden="true">&#8681;&#xFE0E;</span> Download the whole year as a PDF</a>
+  <section id="companion" class="companion" style="display:none;" aria-labelledby="comp-open">
+    <div class="comp-new" aria-hidden="true">New</div>
+    <h2 class="comp-h"><button type="button" id="comp-open" class="comp-open"
+        aria-expanded="false" aria-controls="comp-panel" onclick="toggleCompanion()">
+      <span class="comp-head">A Daily Introductory Companion to Your Journey,
+        <span class="comp-head-sub">Requiring No Prior Knowledge</span></span>
+      <span class="comp-peek" id="comp-peek"></span>
+      <span class="comp-chev" aria-hidden="true">&#9662;</span>
+    </button></h2>
+    <div class="comp-panel" id="comp-panel" hidden>
+      <div class="comp-meta" id="comp-meta"></div>
+      <h3 class="comp-title" id="comp-title"></h3>
+      <div class="comp-body" id="comp-body"></div>
+      <div class="comp-practice" id="comp-practice"></div>
+      <div class="comp-teaser" id="comp-teaser"></div>
+      <div class="comp-foot">
+        <a class="comp-pdf" id="comp-pdf" href="a-year-inside-the-day.pdf" download
+           aria-label="Download A Year Inside the Day as a PDF">
+          <span aria-hidden="true">&#8681;&#xFE0E;</span> Download the whole year as a PDF</a>
+      </div>
     </div>
   </section>
 
@@ -15336,6 +15378,10 @@ content: ''; float: right; width: 30px; height: 1em;
     if (e.movementTitle) bits.push(esc(e.movementTitle));
     set('comp-meta', bits.join(' &nbsp;·&nbsp; '));
     set('comp-title', esc(e.title));
+    // The shut state says which day and what it is called. Without it the
+    // card offers "a daily companion" and a reader has no way to tell whether
+    // today's is worth opening.
+    set('comp-peek', '<span class="comp-peek-day">Day ' + e.n + '</span>' + esc(e.title));
     set('comp-body', (e.body || []).map((p) => '<p>' + esc(p) + '</p>').join(''));
     set('comp-practice', e.practice
       ? '<span class="comp-lead">Practice</span>' + esc(e.practice) : '');
@@ -15345,6 +15391,22 @@ content: ''; float: right; width: 30px; height: 1em;
     // is emptied rather than left holding yesterday's.
     const t = document.getElementById('comp-teaser');
     if (t) t.style.display = e.teaser ? '' : 'none';
+  }
+
+  // Open and shut. Deliberately not remembered across loads: the card is shut
+  // when the page opens, which is what makes it an offer rather than a wall.
+  // It is remembered across a change of date, though — applyCompanion rewrites
+  // what is inside without touching this — so a reader who has opened it and
+  // is stepping through days keeps it open and reads as they go.
+  function toggleCompanion(force) {
+    const sec = document.getElementById('companion');
+    const btn = document.getElementById('comp-open');
+    const panel = document.getElementById('comp-panel');
+    if (!sec || !btn || !panel) return;
+    const open = (typeof force === 'boolean') ? force : panel.hasAttribute('hidden');
+    if (open) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '');
+    sec.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
   // The entry as the reader should have it: their language if it has been
