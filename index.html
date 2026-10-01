@@ -3056,7 +3056,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    tap, rather than standing between the ladder and the year every morning.
    The heading is the control: a button inside the h2, which keeps the
    section's name a heading while making the whole of it the hit area. */
-.comp-h { margin:0; font-weight:400; }
+/* The h2 carries the size and the leading for everything inside it. Left to
+   itself it took the browser's 1.5em and line-height:normal — a 24px strut
+   under a 12px heading — so every line of the title was set by the strut and
+   not by its own leading, and the gaps came out uneven and far too wide the
+   moment a second line appeared. Stated here once, the button and the title
+   inherit it and the lines are the leading they are given. */
+.comp-h { margin:0; font-weight:400;
+  font-size:calc(12px * var(--ts, 1)); line-height:1.45; }
 .comp-open {
   display:block; width:100%; text-align:left; cursor:pointer;
   background:none; border:none; font:inherit; color:inherit;
@@ -3073,10 +3080,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .companion.is-open .comp-chev { transform:rotate(180deg); }
 /* What the day is, said in the shut state — enough that a reader can tell
    whether to open it, which "a daily companion" alone cannot. */
+/* Relative to the heading, so the two keep their proportion at every text
+   size, and clear of the arrow at the foot. */
 .comp-peek {
-  display:block; margin:5px 20px 2px 0;
+  display:block; margin:7px 1.8em 0 0;
   font-family:'Cormorant Garamond',serif;
-  font-size:calc(15px * var(--ts, 1)); line-height:1.4; color:var(--ink);
+  font-size:1.25em; line-height:1.4; color:var(--ink);
 }
 .comp-peek .comp-peek-day { color:var(--ink-dim); font-size:0.82em;
   font-family:'Cinzel',serif; letter-spacing:1px; margin-right:7px; }
@@ -3084,14 +3093,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    stands down rather than printing the title twice on top of itself. */
 .companion.is-open .comp-peek { display:none; }
 .comp-panel { margin-top:10px; }
+/* The room kept for the New tag is in em, not pixels: the tag's own type
+   scales with the reader's text size, and at the largest setting a fixed
+   54px left the title running underneath it. */
 .comp-head {
-  font-family:'Cinzel',serif; font-weight:400;
-  font-size:calc(12px * var(--ts, 1)); letter-spacing:1.6px;
-  text-transform:uppercase; color:var(--gold);
-  margin:0 54px 8px 0; line-height:1.5;
+  display:block; font-family:'Cinzel',serif; font-weight:400;
+  letter-spacing:1.6px; text-transform:uppercase; color:var(--gold);
+  margin:0 5em 0 0;
 }
-/* The second half of the title is the promise, and quieter than the offer. */
-.comp-head-sub { display:block; color:var(--ink-mid); letter-spacing:1.2px; }
 .comp-meta {
   font-size:calc(10.5px * var(--ts, 1)); color:var(--ink-dim);
   letter-spacing:0.4px; margin-bottom:6px;
@@ -3128,8 +3137,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    the day. Tighter tracking and a little less room kept for the tag give two
    of those lines back, and the tag only ever sits beside the first. */
 @media (max-width:360px) {
-  .comp-head { font-size:calc(11.5px * var(--ts, 1)); letter-spacing:1px; margin-right:46px; }
-  .comp-head-sub { letter-spacing:0.8px; }
+  .comp-h { font-size:calc(11.5px * var(--ts, 1)); }
+  .comp-head { letter-spacing:1px; }
 }
 
 /* ── THE STEP THAT TRAVELS ──
@@ -3764,8 +3773,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="comp-new" aria-hidden="true">New</div>
     <h2 class="comp-h"><button type="button" id="comp-open" class="comp-open"
         aria-expanded="false" aria-controls="comp-panel" onclick="toggleCompanion()">
-      <span class="comp-head">A Daily Introductory Companion to Your Journey,
-        <span class="comp-head-sub">Requiring No Prior Knowledge</span></span>
+      <span class="comp-head">A Daily Introductory Companion to Your Journey</span>
       <span class="comp-peek" id="comp-peek"></span>
       <span class="comp-chev" aria-hidden="true">&#9662;</span>
     </button></h2>
