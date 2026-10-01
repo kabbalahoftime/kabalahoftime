@@ -2362,6 +2362,15 @@ to   { opacity: 1; }
   color: rgba(240,230,201,.62); margin: 5px 0 2px; padding: 0 1px;
 }
 /* A prayer draws as a tick on the dial, so its swatch is a tick too. */
+/* Said when a depth has not been written in the reader's language yet. Quiet
+   — it is a fact about the text, not a warning — and marked lang="en" itself
+   so the sentence is read in the voice it is written in. */
+.pop-lang-note {
+  margin: 14px 0 2px; padding: 7px 10px;
+  border-left: 2px solid var(--border-strong); border-radius: 0 4px 4px 0;
+  background: var(--bg-card-alt);
+  font-size: calc(11.5px * var(--ts, 1)); line-height: 1.5; color: var(--ink-dim);
+}
 #kotw-root .ka-row i.tick { width: 3px; height: 12px; border-radius: 1px; margin-left: 3px; }
 #kotw-root .ka-row input.ka-name {
   font-family: 'Cinzel', serif; font-size: calc(10px * var(--ts, 1));
@@ -3141,6 +3150,18 @@ body.has-travel { padding-bottom: 72px; }
   flex-wrap: wrap; gap: 22px 8px; margin: 10px 0 2px;
 }
 #reading-controls .year-toggle-pill { margin-top: 0; border-color: var(--border-strong); }
+/* The one control in this row whose words do not say what they govern.
+   Contrast and A+ are self-evident; Beginner/Intermediate/Advanced are not,
+   and read as a setting for the whole app unless something says otherwise. */
+/* Wraps, so that at the larger text sizes the label drops above the pill
+   rather than pushing it off a 320px screen — which it did, by 33px. */
+.rc-group { display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 3px 5px; max-width: 100%; }
+.rc-label {
+  font-family: 'Cinzel', serif; font-size: calc(9px * var(--ts, 1));
+  letter-spacing: 1px; text-transform: uppercase; color: var(--ink-dim);
+  white-space: nowrap;
+}
 #reading-controls .year-pill-btn {
   font-size: calc(9px * var(--ts, 1));
   letter-spacing: 0.5px;
@@ -3249,11 +3270,27 @@ content: ''; float: right; width: 30px; height: 1em;
     <!-- How deep the explanations go. This is not a reading comfort like the
          two beside it; it is how much a reader wants told, and it belongs
          with them because it is the same kind of choice — made once, about
-         how the page speaks, and then left alone. -->
-    <div class="year-toggle-pill" id="info-level-pill">
-      <button id="il-beginner-btn" class="year-pill-btn" onclick="setInfoLevel('beginner')">Beginner</button>
-      <button id="il-intermediate-btn" class="year-pill-btn year-pill-active" onclick="setInfoLevel('intermediate')">Intermediate</button>
-      <button id="il-advanced-btn" class="year-pill-btn" onclick="setInfoLevel('advanced')">Advanced</button>
+         how the page speaks, and then left alone.
+         Labelled, because unlabelled it reads as a setting for the whole app:
+         three words that sound like skill levels, standing in a row of page
+         settings, next to Contrast and text size. What they actually govern
+         is the ⓘ explanations and the Daily Script. The cards themselves —
+         the readings, the cycles, every number on them — are the same at all
+         three, and a reader must not have to find that out by trying it. -->
+    <div class="rc-group">
+      <span class="rc-label" aria-hidden="true">&#9432;&nbsp;Explanations</span>
+      <div class="year-toggle-pill" id="info-level-pill" role="group"
+           aria-label="How deep the ⓘ explanations and the Daily Script go. The cards themselves do not change.">
+        <button id="il-beginner-btn" class="year-pill-btn" onclick="setInfoLevel('beginner')"
+                title="Explanations: what am I looking at? — plain language, nothing assumed"
+                aria-label="Explanations: Beginner">Beginner</button>
+        <button id="il-intermediate-btn" class="year-pill-btn year-pill-active" onclick="setInfoLevel('intermediate')"
+                title="Explanations: how does it work? — the full mechanism"
+                aria-label="Explanations: Intermediate">Intermediate</button>
+        <button id="il-advanced-btn" class="year-pill-btn" onclick="setInfoLevel('advanced')"
+                title="Explanations: where does it come from? — sources and roots"
+                aria-label="Explanations: Advanced">Advanced</button>
+      </div>
     </div>
   </div>
 
@@ -15080,6 +15117,10 @@ content: ''; float: right; width: 30px; height: 1em;
   // page that is already large, and most readers want one of them. Until it
   // lands — and for any entry or depth not yet translated — the English
   // stands, which is the same fallback the depths themselves use.
+  // For naming the language in the note when a depth has not been written in
+  // it yet. Each in its own tongue, since it is that reader being addressed.
+  const LANG_NAMES = { he: '\u05e2\u05d1\u05e8\u05d9\u05ea', es: 'Espa\u00f1ol',
+                       fr: 'Fran\u00e7ais', pt: 'Portugu\u00eas' };
   let CYCLE_I18N = {};
   fetch('cycle-info-i18n.json')
     .then(r => r.ok ? r.json() : null)
@@ -17130,73 +17171,57 @@ content: ''; float: right; width: 30px; height: 1em;
       meta: "An original Kabbalah of Time cycle · Nevi'im & Ketuvim · The Four Seasons"
     },
     tiferet: {
-      title: 'Midot — 13-Day Nesi’im Cycle',
-      main: "One of Hashem's Thirteen Attributes of Mercy each day, the cycle completing 28 times a year (28 = כח, \"strength\"): cycles 1–13 follow Micha's inner vessels, 14–26 Moshe's outer ones. </p><p>Mercy is Tiferet's essence — beauty as compassion balanced. Cycles 27–28 close the year as a microcosm of the whole. </p><p>Twelve of the thirteen days carry a Nassi who brought an offering at the dedication of the Mishkan; the thirteenth carries Aharon. Levi brought none among the twelve — it is the tribe of Moshe and Aharon — and what stands in its place is Aharon's own: the kindling of the Menorah, which the Torah sets immediately after the twelve days of the Nesi'im, and which Rashi reads as the answer to his distress at being left out. His is the greater portion, because the lamps endure. </p><p>The thirteen have one stretch of their own in the year, and it is where this cycle comes from: for the first thirteen days of Nissan it is the custom to read one Nassi a day, the twelve in order and then the Menorah. Those days are the cycle in little — the whole of it, once, in its own season. The card opens that thirteen out across the year, twenty-eight times over, so that what is read once in Nissan is walked through again and again — and in Nissan itself it keeps the days exactly: Nachshon on the first, Netanel on the second, Aharon and the lamps on the thirteenth. </p><p>What is anchored is the day and not the cycle. The count opens on the second of Nissan, because the thirteen run in the order of their tribes rather than the order they brought in: Yissachar first — the scholars, the heads of the Sanhedrin, who of all the tribes ask least of mercy — against the first attribute, mercy before a person has sinned; and Yehudah last, the tribe of Moshiach, carrying מימי קדם, from the earliest days, which is the whole return. Nachshon is first in the giving and last in the returning. Which of the twenty-eight cycles a day falls in has no such anchor — the Kabbalah of Time year is 364 days and walks against the Hebrew one — so the cycle's ordinal moves from year to year while the thirteen themselves do not. </p><p>Each cycle carries a text of its own: cycles 1–13 a chapter of the Alter Rebbe’s Seder Birkas HaNehenin, 14–26 one of Rebbe Nachman’s thirteen Tales — the Lost Princess opening in Adar, the Seven Beggars falling in Elul — and the closing two review all twenty-six, a chapter or a tale a day. In a leap year the extra 28 days read the Talks Following the Tales.",
+      title: 'Midot — 13-Day Nesi\u2019im Cycle',
+      // Three levels, three different questions. Beginner asks what a reader is
+      // looking at and assumes nothing; Intermediate asks how it works;
+      // Advanced asks where it comes from. The mechanism lives in the middle
+      // and the sources at the end, so neither crowds the other.
       beginner:
-        'The Torah gives thirteen ways of describing God&rsquo;s mercy, and this cycle takes ' +
-        'one of them each day, so the thirteen come round twenty-eight times in a year. ' +
-        '</p><p>They sit in Tiferet, which means beauty, because beauty here is not decoration: ' +
-        'it is what happens when kindness and strength are held in balance, and mercy is ' +
-        'exactly that balance. Reading one attribute a day is a way of learning the balance by ' +
-        'walking through it. </p><p>Twelve of the thirteen days also carry one of the princes ' +
-        'who brought an offering when the Mishkan was dedicated, and the thirteenth carries ' +
-        'Aharon, whose offering was the kindling of the Menorah. Each cycle carries a text of ' +
-        'its own as well: a chapter of the Alter Rebbe&rsquo;s laws of blessings, or one of ' +
-        'Rebbe Nachman&rsquo;s thirteen Tales. </p><p>Those thirteen days are kept ' +
-        'once a year in the calendar itself: for the first thirteen days of Nissan it is the ' +
-        'custom to read one Nassi a day &mdash; the twelve princes in order, and on the ' +
-        'thirteenth the kindling of the Menorah. Those thirteen days are this cycle in little, and ' +
-        'the card keeps them exactly: on the first of Nissan it names Nachshon, on the second ' +
-        'Netanel, and on the thirteenth Aharon and the lamps. What it does is open that ' +
-        'thirteen out across the whole year, so they come round twenty-eight times instead of ' +
-        'once. </p><p>The count begins on the second of Nissan rather than the first, because ' +
-        'the thirteen are ordered by their tribes and not by who brought first. Yissachar ' +
-        'stands at the head &mdash; the scholars, the heads of the Sanhedrin, who of all the ' +
-        'tribes ask least of mercy &mdash; and he carries the first of the thirteen, which is ' +
-        'mercy before a person has sinned. Yehudah stands at the end, the tribe of Moshiach, ' +
-        'and the attribute he carries is <bdi lang="he">\u05de\u05d9\u05de\u05d9 ' +
-        '\u05e7\u05d3\u05dd</bdi> &mdash; from the earliest days, the whole way back. So ' +
-        'Nachshon, who went first into the sea and first to the altar, is counted thirteenth: ' +
-        'first in the giving and last in the returning.',
-      advanced:
-        'One of the Thirteen Attributes of Mercy each day, the cycle completing twenty-eight ' +
-        'times a year &mdash; twenty-eight being <bdi lang="he">כֹּחַ</bdi>. The two lists are ' +
-        'kept apart rather than merged: cycles 1&ndash;13 follow Micha&rsquo;s attributes, the ' +
-        'inner vessels, and 14&ndash;26 Moshe&rsquo;s, the outer ones; 27&ndash;28 close the ' +
-        'year as a microcosm of the whole. Mercy is Tiferet&rsquo;s essence &mdash; beauty as ' +
-        'compassion balanced, Chesed and Gevurah held together rather than chosen between. ' +
-        '</p><p>Twelve of the thirteen days carry a Nassi who brought an offering at the ' +
-        'dedication of the Mishkan. Levi brought none among the twelve, being the tribe of ' +
-        'Moshe and Aharon, and what stands in its place is Aharon&rsquo;s own: the kindling of ' +
-        'the Menorah, which the Torah sets immediately after the twelve days of the ' +
-        'Nesi&rsquo;im, and which Rashi reads as the answer to his distress at having been left ' +
-        'out. His is the greater portion, because the lamps endure. ' +
-        '</p><p>The thirteen keep one stretch of their own, and it is the cycle\u2019s ' +
-        'origin rather than an instance of it: the first thirteen days of Nissan, where the ' +
-        'custom is to read a Nassi a day &mdash; the twelve of ' +
-        '<bdi lang="he">\u05d1\u05de\u05d3\u05d1\u05e8 \u05d6\u05f3</bdi> in order, and ' +
-        'on the thirteenth the kindling. That is the thirteen entire, once, in its own season; ' +
-        'this cycle is the same thirteen opened out across the year and walked twenty-eight ' +
-        'times. </p><p>The day index is phase-aligned to the offerings and the cycle index is ' +
-        'not, which is the whole of the asymmetry: through Nissan the card names the Nassi of ' +
-        'that very day \u2014 Nachshon on the first, Aharon on the thirteenth \u2014 while ' +
-        'which of the twenty-eight a day falls in moves year to year, this year being 364 days ' +
-        'and walking against the Hebrew one. </p><p>The count opens on the second of Nissan ' +
-        'because the thirteen run in their tribes\u2019 order rather than the order of giving. ' +
-        'Yissachar is first, the scholars and the heads of the Sanhedrin, of all the tribes ' +
-        'asking least of mercy, and his is the first attribute \u2014 mercy before a person ' +
-        'has sinned. Yehudah is last, the tribe of Moshiach, and his is the thirteenth: ' +
-        '<bdi lang="he">\u05de\u05d9\u05de\u05d9 \u05e7\u05d3\u05dd</bdi>, from the ' +
-        'earliest days, which is where the whole return is going. Nachshon goes first into the ' +
-        'sea and first to the altar and is counted thirteenth: first in the giving, last in ' +
-        'the returning. ' +
-        '</p><p>Each cycle carries a ' +
-        'text of its own: 1&ndash;13 a chapter of the Alter Rebbe&rsquo;s Seder Birkas ' +
-        'HaNehenin, 14&ndash;26 one of Rebbe Nachman&rsquo;s thirteen Tales &mdash; the Lost ' +
+        'Thirteen days, repeating all year round. Each day carries one of the thirteen ways ' +
+        'God described His own mercy to Moshe &mdash; patient, forgiving, slow to anger. ' +
+        '</p><p>Twelve of the days are named for the twelve princes who brought gifts when the ' +
+        'Tabernacle was dedicated; the thirteenth belongs to Aharon, who lit the Menorah ' +
+        'instead. </p><p>This is the cycle of Tiferet &mdash; beauty. Not pretty beauty, but ' +
+        'the beauty of balance: kindness held together with strength, which is exactly what ' +
+        'mercy is. </p><p>One quality a day. Twenty-eight rounds a year.',
+      main:
+        'One of Hashem\u2019s Thirteen Attributes of Mercy each day, the cycle completing 28 ' +
+        'times a year (28 = <bdi lang="he">\u05db\u05d7</bdi>, &ldquo;strength&rdquo;): ' +
+        'cycles 1&ndash;13 follow Micha\u2019s inner vessels, 14&ndash;26 Moshe\u2019s outer ' +
+        'ones. Mercy is Tiferet\u2019s essence &mdash; beauty as compassion balanced. Cycles ' +
+        '27&ndash;28 close the year as a microcosm of the whole. </p><p>Twelve of the thirteen ' +
+        'days carry a Nassi who brought an offering at the dedication of the Mishkan; the ' +
+        'thirteenth carries Aharon. Levi brought none among the twelve &mdash; it is the tribe ' +
+        'of Moshe and Aharon &mdash; and what stands in its place is Aharon\u2019s own: the ' +
+        'kindling of the Menorah, which the Torah sets immediately after the twelve days of ' +
+        'the Nesi\u2019im, and which Rashi reads as the answer to his distress at being left ' +
+        'out. His is the greater portion, because the lamps endure. </p><p>Each cycle carries ' +
+        'a text of its own: cycles 1&ndash;13 a chapter of the Alter Rebbe\u2019s Seder Birkas ' +
+        'HaNehenin, 14&ndash;26 one of Rebbe Nachman\u2019s thirteen Tales &mdash; the Lost ' +
         'Princess opening in Adar, the Seven Beggars falling in Elul &mdash; and the closing ' +
-        'two review all twenty-six, a chapter or a tale a day. In a leap year the extra ' +
-        'twenty-eight days read the Talks Following the Tales.',
-      meta: 'An original Kabbalah of Time cycle · Micha 7:18–20 · Shemot 34:6–7'
+        'two review all twenty-six, a chapter or a tale a day. In a leap year the extra 28 ' +
+        'days read the Talks Following the Tales.',
+      advanced:
+        'The thirteen attributes are those revealed to Moshe in Shemot 34:6&ndash;7, after the ' +
+        'golden calf &mdash; God\u2019s self-description, and therefore the pattern all mercy ' +
+        'follows. Each day pairs one attribute with its Nassi from Bamidbar 7, and on the ' +
+        'thirteenth Aharon with the Menorah-kindling of Bamidbar 8, where Rashi reads God\u2019s ' +
+        'comfort &mdash; <bdi lang="he">\u05e9\u05dc\u05da \u05d2\u05d3\u05d5\u05dc\u05d4 ' +
+        '\u05de\u05e9\u05dc\u05d4\u05dd</bdi> &mdash; as the institution of an eternal ' +
+        'light over a one-time offering. </p><p>The cycle\u2019s microcosm is the first thirteen ' +
+        'days of Nissan, when the custom is to read each day\u2019s Nassi &mdash; the Torah\u2019s ' +
+        'own thirteen-day Midot cycle, embedded in the year. The card keeps those days exactly: ' +
+        'it names Nachshon on the first of Nissan, Netanel on the second, and Aharon and the ' +
+        'lamps on the thirteenth. The count itself is not anchored there &mdash; it is taken ' +
+        'from the day of the Kabbalah of Time year and folds at 364 &mdash; but the day index ' +
+        'is phase-aligned to the offerings, which is why the two meet. Tomer Devorah opens the ' +
+        'daily study: each attribute as a practice, not a concept. </p><p>Tiferet is the ' +
+        'central column: Chesed unchecked floods, Gevurah unchecked withholds, and mercy ' +
+        '&mdash; compassion that knows exactly how much to give &mdash; is their balance made ' +
+        'beautiful. Twenty-eight rounds (<bdi lang="he">\u05db\u05d7</bdi>, strength) because ' +
+        'mercy exercised repeatedly becomes strength; the closing two cycles gather the ' +
+        'twenty-six texts of the year into a final review, a microcosm of the whole.',
+      meta: 'An original Kabbalah of Time cycle \u00b7 Micha 7:18\u201320 \u00b7 Shemot 34:6\u20137'
     },
     netzach: {
       title: '40-Day Cycle: Receiving the Torah',
@@ -17532,7 +17557,21 @@ content: ''; float: right; width: 30px; height: 1em;
     // the Keter card do — are left as they are.
     const body = infoProse(info);
     const prose = /^\s*</.test(body) ? body : '<p>' + body + '</p>';
-    openInfoPopup(info.title, prose + more, info.meta);
+    // Which language this depth actually came out in. Only the opening level
+    // has been translated — every language in cycle-info-i18n.json carries a
+    // title and a beginner and nothing else — so a reader who has chosen one
+    // gets their own language at Beginner and English at the two below it.
+    // The depth control was doubling as a language control and saying
+    // nothing about it, which is the one thing it must not do: a reader
+    // cannot tell a level they cannot read from a level that is not there.
+    // So the fall-back is named rather than hidden.
+    const _tr = CYCLE_I18N[_scriptLang] && CYCLE_I18N[_scriptLang][el.dataset.cycle];
+    const _inLang = !!(_tr && (body === _tr.beginner || body === _tr.main || body === _tr.advanced));
+    const _note = (_scriptLang !== 'en' && !_inLang)
+      ? '<div class="pop-lang-note">' + (LANG_NAMES[_scriptLang] || _scriptLang) +
+        ': only the opening level is written yet. This one is shown in English.</div>'
+      : '';
+    openInfoPopup(info.title, prose + _note + more, info.meta);
     // Hebrew reads the other way. Set on the popup rather than baked into the
     // text, so the same paragraph serves whichever language asked for it.
     const pm = document.getElementById('info-popup-main');
@@ -17542,8 +17581,11 @@ content: ''; float: right; width: 30px; height: 1em;
     // infoLocal falls back to the English when a language has no entry for
     // this cycle at this depth, so the answer is asked of the same table it
     // reads from rather than assumed from the setting.
-    const lang = (CYCLE_I18N[_scriptLang] && CYCLE_I18N[_scriptLang][el.dataset.cycle])
-      ? _scriptLang : 'en';
+    // Asked of the text that is actually on screen, not of the entry it came
+    // from: an entry can be translated at one depth and not at another, and
+    // saying "he" over an English paragraph is how a screen reader comes to
+    // read English in a Hebrew voice.
+    const lang = _inLang ? _scriptLang : 'en';
     const he = lang === 'he';
     if (pm) { pm.dir = he ? 'rtl' : 'ltr'; pm.lang = lang; }
     if (pt) pt.dir = he ? 'rtl' : 'ltr';
