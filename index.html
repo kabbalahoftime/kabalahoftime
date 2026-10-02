@@ -3163,6 +3163,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   padding:14px 2px; margin:-14px 0; text-align:center;
 }
 .comp-step:hover, .comp-jump:hover { text-decoration:underline; }
+/* The two clocks, as a pair rather than a switch with a hidden state: both
+   are named and the one in force is filled, so a reader can see what the
+   other would do before pressing it. */
+.comp-mode { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; justify-content:center; }
+.comp-mode-btn {
+  background:none; border:1px solid var(--border); border-radius:4px;
+  color:var(--ink-mid); cursor:pointer; font-family:'Cinzel',serif;
+  font-size:calc(9.5px * var(--ts, 1)); letter-spacing:1px; text-transform:uppercase;
+  padding:14px 10px; line-height:1; position:relative; z-index:1;
+}
+.comp-mode-btn.on { border-color:var(--gold); color:var(--gold); background:var(--bg-card-alt); }
+.comp-mode-btn:hover { color:var(--gold); }
 .comp-foot { margin-top:11px; }
 /* 44px of its own, taken in padding so the line it sits on does not move. */
 .comp-pdf {
@@ -3833,12 +3845,17 @@ content: ''; float: right; width: 30px; height: 1em;
         <span class="comp-nav-mid">
           <button type="button" class="comp-jump" id="comp-first"
                   onclick="companionGo(1)">New here? Start at Day&nbsp;1</button>
-          <button type="button" class="comp-jump" id="comp-today"
-                  onclick="companionGo(null)">Back to today</button>
         </span>
         <button type="button" class="comp-step" id="comp-next"
                 onclick="companionStep(1)" aria-label="The day after">&#8250;</button>
       </nav>
+      <!-- Which clock the companion keeps, named rather than inferred. -->
+      <div class="comp-mode" role="group" aria-label="How the companion chooses its day">
+        <button type="button" class="comp-mode-btn" id="comp-mode-year"
+                onclick="companionMode('year')">The year&rsquo;s count</button>
+        <button type="button" class="comp-mode-btn" id="comp-mode-own"
+                onclick="companionMode('own')">My own pace</button>
+      </div>
       <div class="comp-foot">
         <a class="comp-pdf" id="comp-pdf" href="a-year-inside-the-day.pdf" download
            aria-label="Download A Year Inside the Day, the whole year, as a PDF">
@@ -15428,26 +15445,58 @@ content: ''; float: right; width: 30px; height: 1em;
   // The day of the KoT year, kept here by render() so the fetch above can
   // draw as soon as it lands, whenever that is.
   let _compToday = null;
-  // Where the reader has stopped, if they have gone anywhere. null means they
-  // have not, and the companion follows the date like everything else.
-  // Remembered, because a curriculum that forgets your place is a magazine.
-  let _compPin = (function () {
-    try {
-      const v = parseInt(localStorage.getItem('kotCompanionDay'), 10);
-      if (v >= 1 && v <= 364) return v;
-    } catch (e) {}
-    return null;
-  })();
+  // ── WHICH DAY THE COMPANION IS ON ──
+  //
+  // Two ways of choosing it, and the reader picks.
+  //
+  //   the year's count — the entry is the day of the Kabbalah of Time year,
+  //     so the companion sits in step with the cards and the date bar. Open
+  //     it on day 282 and it is on entry 282.
+  //
+  //   their own pace — the entry advances a day at a time from wherever they
+  //     started. Somebody meeting the book in Tammuz should be able to begin
+  //     at Day 1 and have Day 2 waiting tomorrow, rather than being returned
+  //     to the middle of the arc every morning. This is the mode that makes
+  //     it a curriculum rather than a daily glimpse.
+  //
+  // Own pace is held as an anchor — an entry, and the date the reader was on
+  // it — rather than as a stored entry number, so it keeps moving while the
+  // app is closed and needs nothing written to carry it forward. Both modes
+  // read the displayed date, so stepping the app's date steps the companion
+  // either way.
+  const _compYMD = (d) => d.getFullYear() + '-' +
+    String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const _compStore = (k, v) => { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} };
+  const _compRead = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
 
-  function companionDay() { return _compPin || _compToday; }
+  let _compMode = _compRead('kotCompanionMode') === 'own' ? 'own' : 'year';
+  let _compAnchorDay = parseInt(_compRead('kotCompanionAnchorDay'), 10) || 0;
+  let _compAnchorDate = _compRead('kotCompanionAnchorDate') || '';
 
-  // Go to a day, or back to following the date when given null.
+  function _compViewedDate() {
+    try { return localMidnight(getDisplayDate(currentOffset)); } catch (e) { return localMidnight(new Date()); }
+  }
+  function _compOwnDay() {
+    if (!(_compAnchorDay >= 1) || !_compAnchorDate) return null;
+    const a = new Date(_compAnchorDate + 'T00:00:00');
+    if (isNaN(a)) return null;
+    const gone = Math.round((_compViewedDate() - a) / 86400000);
+    return Math.min(364, Math.max(1, _compAnchorDay + gone));
+  }
+  function companionDay() {
+    if (_compMode === 'own') { const n = _compOwnDay(); if (n) return n; }
+    return _compToday;
+  }
+
+  // Going to a day is choosing to read at your own pace, so it anchors there.
   function companionGo(n) {
-    if (n === null) { _compPin = null; try { localStorage.removeItem('kotCompanionDay'); } catch (e) {} }
-    else {
-      _compPin = Math.min(364, Math.max(1, n));
-      try { localStorage.setItem('kotCompanionDay', String(_compPin)); } catch (e) {}
-    }
+    const want = Math.min(364, Math.max(1, n));
+    _compMode = 'own';
+    _compAnchorDay = want;
+    _compAnchorDate = _compYMD(_compViewedDate());
+    _compStore('kotCompanionMode', 'own');
+    _compStore('kotCompanionAnchorDay', String(want));
+    _compStore('kotCompanionAnchorDate', _compAnchorDate);
     _compDay = null;                         // force the redraw
     applyCompanion();
     toggleCompanion(true);                   // a day asked for is a day to read
@@ -15455,6 +15504,15 @@ content: ''; float: right; width: 30px; height: 1em;
   function companionStep(d) {
     const now = companionDay();
     if (now) companionGo(now + d);
+  }
+  // The named choice. Switching to own pace keeps whatever day is on screen
+  // and starts counting from it, so the toggle never moves the reader.
+  function companionMode(mode) {
+    if (mode === 'own') { companionGo(companionDay() || 1); return; }
+    _compMode = 'year';
+    _compStore('kotCompanionMode', null);
+    _compDay = null;
+    applyCompanion();
   }
 
   function applyCompanion(day) {
@@ -15519,8 +15577,19 @@ content: ''; float: right; width: 30px; height: 1em;
     show('comp-prev', now > 1);
     show('comp-next', now < 364);
     show('comp-first', now !== 1);
-    show('comp-today', _compPin !== null && _compPin !== _compToday,
-         _compToday ? 'Back to today · Day ' + _compToday : 'Back to today');
+    // The year's button names the day it would go to, so the reader can see
+    // what they are choosing between rather than having to try it.
+    const y = document.getElementById('comp-mode-year');
+    const o = document.getElementById('comp-mode-own');
+    if (y && o) {
+      const onYear = _compMode !== 'own';
+      y.textContent = _compToday && !onYear
+        ? 'The year’s count · Day ' + _compToday : 'The year’s count';
+      y.classList.toggle('on', onYear);
+      o.classList.toggle('on', !onYear);
+      y.setAttribute('aria-pressed', onYear ? 'true' : 'false');
+      o.setAttribute('aria-pressed', onYear ? 'false' : 'true');
+    }
   }
 
   // The badge retires itself. It says "new", which stops being true the
