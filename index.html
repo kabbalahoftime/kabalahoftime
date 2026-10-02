@@ -16142,6 +16142,11 @@ content: ''; float: right; width: 30px; height: 1em;
     _medStepsCache = use;
     try { localStorage.setItem('kotMedSteps', use.join(',')); } catch (e) {}
     if (typeof applyMedState === 'function') applyMedState();
+    // The first step asks for a path and this is one of the three that
+    // answers it, so the line that asked has to be told. The thirty's own
+    // setter reaches this through applyMaalotState; these two did not reach
+    // it at all, and the question stood after it had been answered.
+    if (typeof renderTodayBlock === 'function') renderTodayBlock();
   }
   function setMedPreset(key) {
     const p = MED_PRESETS.find(q => q.key === key);
@@ -16481,6 +16486,7 @@ content: ''; float: right; width: 30px; height: 1em;
     _prayerStepsCache = use;
     try { localStorage.setItem('kotPrayerSteps', use.join(',')); } catch (e) {}
     if (typeof applyPrayerState === 'function') applyPrayerState();
+    if (typeof renderTodayBlock === 'function') renderTodayBlock();
   }
   // The pill under the heart and the chooser the heart opens are two doors to
   // one setting, so each shows what the other did. Prayers picked one by one
@@ -18404,8 +18410,24 @@ content: ''; float: right; width: 30px; height: 1em;
   // Whether the reader has ever answered the question. pathSteps() cannot say
   // — it returns the whole thirty both for someone who chose them and for
   // someone who has never been asked, which is the whole difference here.
+  // Has the reader answered the question the first step asks?
+  //
+  // It asked only about the thirty, and the question is not only about the
+  // thirty. The line says "Choose your paths", plural, and the control it
+  // sends a reader to is Customize Paths, which opens three doors: the ten
+  // faces, the ten prayers, and the thirty readings. So a reader could go
+  // there, choose a path for the faces and a path for the prayers, and be
+  // told to choose their paths for the third time — having done it twice.
+  //
+  // Any one of the three answers it. The thirty keep their own default when
+  // they are not the door that was used, which is the whole month; a reader
+  // who has been to that row knows where it is and can set the rest when
+  // they want it. Standing there after the feature has demonstrably been
+  // used is nagging, not onboarding.
+  const _PATH_KEYS = ['kotPathSteps', 'kotMedSteps', 'kotPrayerSteps'];
   function _pathChosen() {
-    try { return !!localStorage.getItem('kotPathSteps'); } catch (e) { return true; }
+    try { return _PATH_KEYS.some((k) => !!localStorage.getItem(k)); }
+    catch (e) { return true; }
   }
   function setPathSteps(arr) {
     const clean = Array.from(new Set((arr || []).filter(
