@@ -3,14 +3,14 @@
 // name and the shell is fetched again. A cache that has gone stale in a way
 // the network-first rule cannot correct is the one failure this app has that
 // leaves every card reading "Loading…" with nothing to say why.
-const CACHE_NAME = 'kabbalah-of-time-v170';
+const CACHE_NAME = 'kabbalah-of-time-v171';
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  // The explanations in other languages, fetched by the page on load. Cached
-  // with it so a reader who has chosen one keeps it offline.
-  '/cycle-info-i18n.json',
+  // cycle-info-i18n.json stood here. The explanations no longer follow the
+  // language strip, so nothing fetches it and there is nothing to pre-cache;
+  // the file is left in the repository against a future that wants it.
   // The companion's 364 daily entries, fetched by the page on load like the
   // translations. It gets the JSON rule in the fetch handler below — served
   // from cache at once, refetched behind — so a corrected manuscript reaches

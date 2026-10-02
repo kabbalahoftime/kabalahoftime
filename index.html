@@ -2433,12 +2433,6 @@ to   { opacity: 1; }
 /* Said when a depth has not been written in the reader's language yet. Quiet
    — it is a fact about the text, not a warning — and marked lang="en" itself
    so the sentence is read in the voice it is written in. */
-.pop-lang-note {
-  margin: 14px 0 2px; padding: 7px 10px;
-  border-left: 2px solid var(--border-strong); border-radius: 0 4px 4px 0;
-  background: var(--bg-card-alt);
-  font-size: calc(11.5px * var(--ts, 1)); line-height: 1.5; color: var(--ink-dim);
-}
 #kotw-root .ka-row i.tick { width: 3px; height: 12px; border-radius: 1px; margin-left: 3px; }
 #kotw-root .ka-row input.ka-name {
   font-family: 'Cinzel', serif; font-size: calc(10px * var(--ts, 1));
@@ -5157,8 +5151,9 @@ content: ''; float: right; width: 30px; height: 1em;
         <button class="lang-btn" id="lang-btn-pt" onclick="setScriptLang('pt')">PT</button>
         <span class="lang-bar-sep"></span>
         <button class="lang-btn" id="beginner-btn" onclick="toggleBeginnerMode()" style="letter-spacing:0.3px;">Beginner</button>
-        <!-- The language chosen here is the page's, not the script's alone:
-             the ⓘ explanations follow it where they have been translated. -->
+        <!-- The script's language, and only the script's. It once set the
+             ⓘ explanations too, which made a control that moved two
+             unrelated things at once. -->
       </div>
     </div>
     <!-- Shut from the start. It was opened for a while so the language strip
@@ -15483,15 +15478,12 @@ content: ''; float: right; width: 30px; height: 1em;
   // page that is already large, and most readers want one of them. Until it
   // lands — and for any entry or depth not yet translated — the English
   // stands, which is the same fallback the depths themselves use.
-  // For naming the language in the note when a depth has not been written in
-  // it yet. Each in its own tongue, since it is that reader being addressed.
-  const LANG_NAMES = { he: '\u05e2\u05d1\u05e8\u05d9\u05ea', es: 'Espa\u00f1ol',
-                       fr: 'Fran\u00e7ais', pt: 'Portugu\u00eas' };
-  let CYCLE_I18N = {};
-  fetch('cycle-info-i18n.json')
-    .then(r => r.ok ? r.json() : null)
-    .then(j => { if (j && typeof j === 'object') CYCLE_I18N = j; })
-    .catch(() => {});
+  // The language strip belongs to the Daily Script alone. The explanations
+  // were made to follow it too, from cycle-info-i18n.json — a title and the
+  // beginner level in four languages — and that is undone: a control that
+  // moves two unrelated things is a control a reader cannot predict, and the
+  // ⓘ is the app's own voice rather than the script's. The file stays in the
+  // repository; nothing reads it, and the service worker no longer fetches it.
 
   // ── THE COMPANION ──
   // "A Year Inside the Day" — one entry for each day of the Kabbalah of Time
@@ -15702,16 +15694,6 @@ content: ''; float: right; width: 30px; height: 1em;
       try { localStorage.setItem('kotCompanionSeen', '1'); } catch (e) {}
       compBadge();
     }
-  }
-
-  // The entry as the reader should have it: their language if it has been
-  // written, otherwise the English beside it.
-  function infoLocal(key, entry) {
-    const lang = (typeof _scriptLang === 'string') ? _scriptLang : 'en';
-    if (lang === 'en' || !key) return entry;
-    const t = CYCLE_I18N[lang] && CYCLE_I18N[lang][key];
-    if (!t) return entry;
-    return Object.assign({}, entry, t);
   }
 
   // The text of an entry at the reader's depth, falling back as described.
@@ -18082,7 +18064,6 @@ content: ''; float: right; width: 30px; height: 1em;
     // chosen city's own hours, so they cannot be a stored paragraph.
     let info = (typeof entry === 'function') ? entry() : entry;
     if (!info) return;
-    info = infoLocal(el.dataset.cycle, info);
     // What a cycle means, and then what it is saying today. The second half
     // is the matter the card's own detail carries that is not a counted step,
     // a companion or a menorah — the letters behind Chochmah's cycle, the
@@ -18102,38 +18083,17 @@ content: ''; float: right; width: 30px; height: 1em;
     // the Keter card do — are left as they are.
     const body = infoProse(info);
     const prose = /^\s*</.test(body) ? body : '<p>' + body + '</p>';
-    // Which language this depth actually came out in. Only the opening level
-    // has been translated — every language in cycle-info-i18n.json carries a
-    // title and a beginner and nothing else — so a reader who has chosen one
-    // gets their own language at Beginner and English at the two below it.
-    // The depth control was doubling as a language control and saying
-    // nothing about it, which is the one thing it must not do: a reader
-    // cannot tell a level they cannot read from a level that is not there.
-    // So the fall-back is named rather than hidden.
-    const _tr = CYCLE_I18N[_scriptLang] && CYCLE_I18N[_scriptLang][el.dataset.cycle];
-    const _inLang = !!(_tr && (body === _tr.beginner || body === _tr.main || body === _tr.advanced));
-    const _note = (_scriptLang !== 'en' && !_inLang)
-      ? '<div class="pop-lang-note">' + (LANG_NAMES[_scriptLang] || _scriptLang) +
-        ': only the opening level is written yet. This one is shown in English.</div>'
-      : '';
-    openInfoPopup(info.title, prose + _note + more, info.meta);
-    // Hebrew reads the other way. Set on the popup rather than baked into the
-    // text, so the same paragraph serves whichever language asked for it.
+    openInfoPopup(info.title, prose + more, info.meta);
+    // The explanations are English, and say so. The note that used to stand
+    // here told a reader in French that this depth had not been written in
+    // their language yet; with the explanations no longer following the
+    // language strip there is nothing to apologise for. The Hebrew inside
+    // them carries its own lang and direction run by run, as it does
+    // everywhere else on the page.
     const pm = document.getElementById('info-popup-main');
     const pt = document.getElementById('info-popup-title');
-    // Which language this popup is actually holding. It said "en" whatever it
-    // held, so a reader in French was given French prose in an English voice.
-    // infoLocal falls back to the English when a language has no entry for
-    // this cycle at this depth, so the answer is asked of the same table it
-    // reads from rather than assumed from the setting.
-    // Asked of the text that is actually on screen, not of the entry it came
-    // from: an entry can be translated at one depth and not at another, and
-    // saying "he" over an English paragraph is how a screen reader comes to
-    // read English in a Hebrew voice.
-    const lang = _inLang ? _scriptLang : 'en';
-    const he = lang === 'he';
-    if (pm) { pm.dir = he ? 'rtl' : 'ltr'; pm.lang = lang; }
-    if (pt) pt.dir = he ? 'rtl' : 'ltr';
+    if (pm) { pm.dir = 'ltr'; pm.lang = 'en'; }
+    if (pt) pt.dir = 'ltr';
     glossify(document.getElementById('info-popup-main'));
   }, true);
 
@@ -24389,9 +24349,11 @@ content: ''; float: right; width: 30px; height: 1em;
   }, true);
 
   // ── DAILY SCRIPT ──────────────────────────────────────────────────────────────
-  // The language the page's prose is read in. It began as the Daily Script's
-  // own and is now the page's: the ⓘ explanations and the glossary read it
-  // too. Remembered, as the other reading settings are.
+  // The language the Daily Script is read in, and nothing else's. It was
+  // briefly the page's — the ⓘ explanations followed it where they had been
+  // translated — and that is undone. (The glossary never read it at all,
+  // whatever the comment here used to claim: it matches terms, which are the
+  // same in any language.) Remembered, as the other reading settings are.
   let _scriptLang = (function () {
     try {
       const v = localStorage.getItem('kotLang');
