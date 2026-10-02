@@ -3151,6 +3151,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   font-size:calc(10.5px * var(--ts, 1)); color:var(--ink-dim);
   letter-spacing:0.4px; margin-bottom:6px;
 }
+.comp-meta-day {
+  display:block; font-family:'Cinzel',serif; font-size:1.12em;
+  letter-spacing:1.2px; color:var(--gold); line-height:1.3;
+}
+.comp-meta-where { display:block; margin-top:2px; line-height:1.35; }
 .comp-title {
   font-family:'Cormorant Garamond',serif; font-weight:600;
   font-size:calc(19px * var(--ts, 1)); color:var(--ink);
@@ -3178,28 +3183,37 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* The walk. Two arrows at the edges with the jumps between them, and each
    control carries its own 44px in padding so the row stays the height of one
    line while every one of them is reachable with a thumb. */
+/* The walk, at the head of the panel: an arrow either side of the day, drawn
+   as the date bar's own are so the gesture is recognised rather than learned.
+   It was at the foot, under the whole entry, where a reader had to finish
+   reading to find the way on. */
 .comp-nav {
-  display:flex; align-items:center; gap:6px;
-  margin-top:14px; padding-top:10px; border-top:1px solid var(--border);
+  display:flex; align-items:center; gap:8px;
+  padding-bottom:9px; margin-bottom:10px; border-bottom:1px solid var(--border);
 }
-.comp-nav-mid { flex:1 1 auto; display:flex; flex-wrap:wrap; gap:4px 14px; justify-content:center; }
-.comp-step, .comp-jump {
+.comp-nav .comp-meta { flex:1 1 auto; min-width:0; text-align:center; margin:0; }
+.comp-step {
+  flex:0 0 auto; background:var(--bg-card-alt); border:1px solid var(--border-strong);
+  color:var(--gold); width:34px; height:34px; border-radius:3px; cursor:pointer;
+  font-family:inherit; font-size:calc(18px * var(--ts, 1)); font-weight:bold;
+  line-height:1; display:flex; align-items:center; justify-content:center;
+  transition:all 0.15s; position:relative;
+}
+.comp-step:hover { background:var(--gold-pale); border-color:var(--gold); }
+/* Drawn 34, reachable 44 — the same overlay the date bar's arrows carry, so
+   the row keeps the height of the line and the thumb still gets its target. */
+.comp-step::after {
+  content:''; position:absolute; left:0; right:0; top:50%;
+  transform:translateY(-50%); height:44px;
+}
+.comp-nav-mid { display:flex; flex-wrap:wrap; gap:4px 14px; justify-content:center; margin-top:14px; }
+.comp-jump {
   background:none; border:none; cursor:pointer; font-family:inherit;
   color:var(--gold); position:relative; z-index:1;
-}
-/* 44 square, and centred in it. The glyph is a single narrow chevron, so
-   padding alone left the target 26 across — the arrows need the size asked
-   for in both directions, not just the one a line of text gives them. */
-.comp-step {
-  flex:none; font-size:calc(20px * var(--ts, 1)); line-height:1;
-  min-width:44px; min-height:44px; padding:0;
-  display:flex; align-items:center; justify-content:center;
-}
-.comp-jump {
   font-size:calc(12.5px * var(--ts, 1)); letter-spacing:0.3px;
   padding:14px 2px; margin:-14px 0; text-align:center;
 }
-.comp-step:hover, .comp-jump:hover { text-decoration:underline; }
+.comp-jump:hover { text-decoration:underline; }
 /* The two clocks, as a pair rather than a switch with a hidden state: both
    are named and the one in force is filled, so a reader can see what the
    other would do before pressing it. */
@@ -3866,7 +3880,18 @@ content: ''; float: right; width: 30px; height: 1em;
       <span class="comp-chev" aria-hidden="true">&#9662;</span>
     </button></h2>
     <div class="comp-panel" id="comp-panel" hidden>
-      <div class="comp-meta" id="comp-meta"></div>
+      <!-- The day, between two arrows, at the top — the same shape as the
+           date bar at the head of the page, because it is the same gesture.
+           Moving a day at a time is the companion's main motion and it was
+           at the foot, under the whole entry, where a reader had to finish
+           reading to find it. -->
+      <nav class="comp-nav" aria-label="Move through the companion">
+        <button type="button" class="comp-step" id="comp-prev"
+                onclick="companionStep(-1)" aria-label="The day before">&#8249;</button>
+        <div class="comp-meta" id="comp-meta"></div>
+        <button type="button" class="comp-step" id="comp-next"
+                onclick="companionStep(1)" aria-label="The day after">&#8250;</button>
+      </nav>
       <h3 class="comp-title" id="comp-title"></h3>
       <div class="comp-body" id="comp-body"></div>
       <div class="comp-practice" id="comp-practice"></div>
@@ -3876,16 +3901,10 @@ content: ''; float: right; width: 30px; height: 1em;
            back to the day the rest of the page is on. Where the reader stops
            is remembered, so the book keeps their place between visits the way
            a book does. -->
-      <nav class="comp-nav" aria-label="Move through the companion">
-        <button type="button" class="comp-step" id="comp-prev"
-                onclick="companionStep(-1)" aria-label="The day before">&#8249;</button>
-        <span class="comp-nav-mid">
-          <button type="button" class="comp-jump" id="comp-first"
-                  onclick="companionGo(1)">New here? Start at Day&nbsp;1</button>
-        </span>
-        <button type="button" class="comp-step" id="comp-next"
-                onclick="companionStep(1)" aria-label="The day after">&#8250;</button>
-      </nav>
+      <div class="comp-nav-mid">
+        <button type="button" class="comp-jump" id="comp-first"
+                onclick="companionGo(1)">New here? Start at Day&nbsp;1</button>
+      </div>
       <!-- Which clock the companion keeps, named rather than inferred. -->
       <div class="comp-mode" role="group" aria-label="How the companion chooses its day">
         <button type="button" class="comp-mode-btn" id="comp-mode-year"
@@ -15590,10 +15609,14 @@ content: ''; float: right; width: 30px; height: 1em;
 
     // Day of the year, then where it sits in the book — the week and the
     // movement, so a reader can see the shape they are walking through.
-    const bits = ['Day ' + e.n + ' of 364'];
-    if (e.week) bits.push('Week ' + e.week + (e.weekTitle ? ' — ' + esc(e.weekTitle) : ''));
-    if (e.movementTitle) bits.push(esc(e.movementTitle));
-    set('comp-meta', bits.join(' &nbsp;·&nbsp; '));
+    // Two lines, as the date bar between its own arrows has two: the day
+    // itself, and under it where that day sits in the book. One line of all
+    // three ran out of room the moment it had an arrow on either side.
+    const where = [];
+    if (e.week) where.push('Week ' + e.week + (e.weekTitle ? ' — ' + esc(e.weekTitle) : ''));
+    if (e.movementTitle) where.push(esc(e.movementTitle));
+    set('comp-meta', '<span class="comp-meta-day">Day ' + e.n + ' of 364</span>' +
+      (where.length ? '<span class="comp-meta-where">' + where.join(' &nbsp;·&nbsp; ') + '</span>' : ''));
     set('comp-title', esc(e.title));
     // The shut state says which day and what it is called. Without it the
     // card offers "a daily companion" and a reader has no way to tell whether
