@@ -2215,6 +2215,36 @@ to   { opacity: 1; }
   border-color: var(--gold);
   font-weight: 600;
 }
+/* The header: the toggle takes the row, the language strip sits beside it
+   and drops to its own line when there is no room. */
+.ds-head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 12px;
+}
+.ds-toggle {
+  flex: 1 1 auto; min-width: 0;
+  display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 8px;
+  background: none; border: none; padding: 0; cursor: pointer; font: inherit;
+  text-align: left; color: inherit;
+}
+.ds-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.ds-title {
+  font-family: 'Cinzel', serif; font-size: calc(10.5px * var(--ts, 1));
+  color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase;
+}
+.ds-chev { color: var(--gold); font-size: calc(16px * var(--ts, 1)); line-height: 1;
+  grid-column: 2; grid-row: 1; transition: transform 0.18s ease; }
+#daily-script-panel.is-open .ds-chev { transform: rotate(180deg); }
+/* The first lines of the script, so the panel says what is inside it before
+   it is opened — and so a reader pressing HE with the panel shut can still
+   see the language change. Two lines, clamped; it is a taste, not the text. */
+.ds-peek {
+  grid-column: 1 / -1; grid-row: 2;
+  margin-top: 5px; font-family: Georgia, 'Frank Ruhl Libre', serif;
+  font-size: calc(12.5px * var(--ts, 1)); line-height: 1.55; color: var(--ink-mid);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#daily-script-panel.is-open .ds-peek { display: none; }
 .daily-script-inner {
   padding: 0 16px 14px;
   border-top: 1px solid var(--border);
@@ -3098,6 +3128,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 }
 .comp-peek .comp-peek-day { color:var(--ink-dim); font-size:0.82em;
   font-family:'Cinzel',serif; letter-spacing:1px; margin-right:7px; }
+/* The entry's opening, under its title, so the card says what is inside it
+   before it is opened. Two lines, clamped — a taste, not the text. */
+.comp-peek .comp-peek-body {
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden;
+  margin-top:4px; font-size:0.86em; line-height:1.55; color:var(--ink-mid);
+}
 /* Open, the panel below says the day and names it properly, so the peek
    stands down rather than printing the title twice on top of itself. */
 .companion.is-open .comp-peek { display:none; }
@@ -5078,9 +5115,21 @@ content: ''; float: right; width: 30px; height: 1em;
 
   <!-- DAILY SCRIPT — personal tool, below main content -->
   <div id="daily-script-panel" style="margin:8px 0 4px;border:1px solid var(--gold);border-radius:6px;">
-    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;" onclick="toggleDailyScript()">
-      <span style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);letter-spacing:1.5px;flex:1;text-transform:uppercase;">Daily Script</span>
-      <span id="daily-script-expand-icon" style="color:var(--gold);font-size:calc(16px * var(--ts, 1));line-height:1;">▾</span>
+    <!-- The header was a div with an onclick, which meant the chevron was a
+         picture of a control rather than one: nothing in the accessibility
+         tree, nothing in the tab order, no state announced, and no way for a
+         keyboard to find it at all. The title and the chevron are a real
+         button now, and the language strip is its sibling rather than its
+         content — a button may not hold other buttons, and the strip was the
+         reason the whole header could not simply become one. -->
+    <div class="ds-head">
+      <button type="button" class="ds-toggle" id="daily-script-toggle"
+              aria-expanded="false" aria-controls="daily-script-body"
+              onclick="toggleDailyScript()">
+        <span class="ds-title">Daily Script</span>
+        <span class="ds-peek" id="daily-script-peek"></span>
+        <span id="daily-script-expand-icon" class="ds-chev" aria-hidden="true">&#9662;</span>
+      </button>
       <div class="daily-script-lang-bar">
         <button class="lang-btn active" id="lang-btn-en" onclick="setScriptLang('en')">EN</button>
         <button class="lang-btn" id="lang-btn-he" onclick="setScriptLang('he')">HE</button>
@@ -15549,7 +15598,8 @@ content: ''; float: right; width: 30px; height: 1em;
     // The shut state says which day and what it is called. Without it the
     // card offers "a daily companion" and a reader has no way to tell whether
     // today's is worth opening.
-    set('comp-peek', '<span class="comp-peek-day">Day ' + e.n + '</span>' + esc(e.title));
+    set('comp-peek', '<span class="comp-peek-day">Day ' + e.n + '</span>' + esc(e.title) +
+      ((e.body && e.body[0]) ? '<span class="comp-peek-body">' + esc(e.body[0]) + '</span>' : ''));
     set('comp-body', (e.body || []).map((p) => '<p>' + esc(p) + '</p>').join(''));
     set('comp-practice', e.practice
       ? '<span class="comp-lead">Practice</span>' + esc(e.practice) : '');
@@ -23873,6 +23923,7 @@ content: ''; float: right; width: 30px; height: 1em;
     };
     document.getElementById('daily-script-content').textContent =
       scriptIsBeginner() ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
+    applyScriptPeek();
   }
 
   function changeDay(delta) {
@@ -24340,25 +24391,38 @@ content: ''; float: right; width: 30px; height: 1em;
     render();
   }
 
-  // Taps inside the language strip must not reach the header that opens the
-  // panel. This is a listener rather than an onclick attribute: the attribute
-  // made the strip look like a control to applyA11y, which duly announced it
-  // as a button named "EN HE ES FR PT Beginner" and put it in the tab order.
-  (function () {
-    const bar = document.querySelector('.daily-script-lang-bar');
-    if (bar) bar.addEventListener('click', e => e.stopPropagation());
-  })();
+  // The guard that used to stand here stopped taps in the language strip
+  // reaching the header that opened the panel, back when the whole header
+  // carried the onclick. The toggle is its own button now and the strip is
+  // its sibling, so a tap on HE cannot reach it in the first place — and a
+  // listener that stops propagation for no remaining reason is the kind of
+  // thing that quietly swallows something years later. It already did: it
+  // hid every one of these clicks from the a11y sync, which is why the bar
+  // announced EN while it showed HE.
 
   function toggleDailyScript() {
     const body = document.getElementById('daily-script-body');
-    const icon = document.getElementById('daily-script-expand-icon');
-    if (body.style.display === 'none') {
-      body.style.display = 'block';
-      icon.textContent = '▴';
-    } else {
-      body.style.display = 'none';
-      icon.textContent = '▾';
-    }
+    const panel = document.getElementById('daily-script-panel');
+    const btn = document.getElementById('daily-script-toggle');
+    const open = body.style.display === 'none';
+    body.style.display = open ? 'block' : 'none';
+    if (panel) panel.classList.toggle('is-open', open);
+    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  // The first lines of the script, under the title, while the panel is shut.
+  // Taken from the script itself rather than written here, so it is always
+  // the language and the level the reader has chosen — which is the other
+  // half of its job: pressing HE with the panel shut still visibly changes
+  // something.
+  function applyScriptPeek() {
+    const el = document.getElementById('daily-script-peek');
+    const src = document.getElementById('daily-script-content');
+    if (!el || !src) return;
+    const t = (src.textContent || '').replace(/\s+/g, ' ').trim();
+    el.textContent = (t && t !== 'Loading…') ? t.slice(0, 180) : '';
+    el.setAttribute('lang', _scriptLang === 'he' ? 'he' : 'en');
+    el.setAttribute('dir', _scriptLang === 'he' ? 'rtl' : 'ltr');
   }
 
   function setScriptLang(lang) {
@@ -24372,6 +24436,7 @@ content: ''; float: right; width: 30px; height: 1em;
     if (_scriptData) {
       document.getElementById('daily-script-content').textContent =
         scriptIsBeginner() ? buildBeginnerScript(_scriptLang, _scriptData) : buildDailyScript(_scriptLang, _scriptData);
+      applyScriptPeek();
     }
   }
 
