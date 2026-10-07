@@ -22776,7 +22776,11 @@ content: ''; float: right; width: 30px; height: 1em;
         : { en: 'The Left Kidney',  he: 'כִּלְיָה שְׂמָאלִית' };
       const f = seasonFaceOf(pl.season, pl.quarter);
       if (!f) return null;
-      return { en: f.own ? `The ${f.of}’s own face` : `The ${f.of}’s ${f.en}-face`, he: f.he };
+      // "The Eagle's face of Man" rather than "the Eagle's Man-face": it is
+      // Yechezkel's own construction — פְּנֵי אָדָם, the face of a man — and the
+      // hyphenated form read as a compound noun rather than as one creature
+      // wearing another's face, which is the whole point of the four.
+      return { en: f.own ? `The ${f.of}’s own face` : `The ${f.of}’s face of ${f.en}`, he: f.he };
     };
     // One line, and the one the meditation reads. The letter is left off the
     // three break-days because there is none — which is what those days are.
@@ -22787,7 +22791,7 @@ content: ''; float: right; width: 30px; height: 1em;
       const letter = (!pl.breakAt && _eicha && _eicha.letter) ? _eicha.letter : '';
       return `<strong>${f.en}</strong>` +
         ` <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">${f.he}</bdi>` +
-        (letter ? ` · letter <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">${letter}</bdi>` : '');
+        (letter ? ` · <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">${letter}</bdi>` : '');
     })();
     const _eichaLink = _eicha
       ? `<a class="tap-line" href="${eichaUrl(_eicha.ref)}" target="_blank" style="color:var(--gold)">${_eicha.label}</a>` +
@@ -22849,8 +22853,21 @@ content: ''; float: right; width: 30px; height: 1em;
         `<div style="font-size:0.88em;opacity:0.72;margin-top:4px">${pl.animal}<br>Angel ${pl.angel}` +
         (pl.element ? ` · ${pl.element}` : '') + `</div>`;
     };
+    // Which way the season is moving, in the heading where the day and the
+    // season are. Day 46 says nothing here: it is neither half, and the face
+    // line below already reads "The Heart". The microcosm's seven parts split
+    // the same way, three out and three back around the fourth.
+    const _gevHalf = gevMic
+      ? (gevMic.part === 4 ? '' : (gevMic.part < 4 ? 'Ratzo' : 'Shov'))
+      : (seasonInfo.dayIn === 46 ? '' : _seasonHalf);
+    const _gevHalfHeb = _gevHalf === 'Ratzo' ? '\u05e8\u05b8\u05e6\u05d5\u05b9\u05d0'
+                      : _gevHalf === 'Shov'  ? '\u05e9\u05c1\u05d5\u05b9\u05d1' : '';
+    const _gevHalfHtml = _gevHalf
+      ? ` <span style="font-size:0.92em;color:var(--ink-mid)">&middot; ${_gevHalf}` +
+        ` <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">${_gevHalfHeb}</bdi></span>`
+      : '';
     document.getElementById('gevurah-main').innerHTML = gevMic
-      ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} <span style="font-size:0.92em">(${gevMic.name})</span>:<br>` +
+      ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} <span style="font-size:0.92em">(${gevMic.name})</span>${_gevHalfHtml}:<br>` +
         // One part to a day here, so the day is a whole face with no letter of
         // its own — the alef-bet is what the 28 days have no room for.
         `<span id="gevurah-day-face">${_gevFaceHtml}</span>` +
@@ -22859,7 +22876,7 @@ content: ''; float: right; width: 30px; height: 1em;
         (_eichaLink ? `<br>${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}` : '') +
         `</div>` +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</div>`
-      : `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong> <span style="font-size:0.92em">(${seasonInfo.name})</span>:<br>` +
+      : `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong> <span style="font-size:0.92em">(${seasonInfo.name})</span>${_gevHalfHtml}:<br>` +
         // What the day is, and the only part of the card that moves every
         // morning. The season's Chayah was named again on a line of its own
         // beneath this one, with a gloss saying it bears all four faces — but
