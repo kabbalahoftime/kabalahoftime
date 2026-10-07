@@ -2880,6 +2880,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .ps-niggun a:hover { text-decoration:underline; }
 .ps-niggun-text { color:var(--ink-mid); font-size:calc(12.5px * var(--ts, 1)); font-style:italic; margin-top:2px; }
 .ps-niggun-meta { color:var(--ink-dim); font-style:normal; }
+/* A bearer's pane may hold two melodies — the Rayatz's own and the one made
+   for his freedom, the Rebbe's own and his father's. The second stands clear
+   of the first's note rather than butting onto it. */
+.rebbe-niggun > div + div { margin-top:7px; }
 
 .ps-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
   text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
@@ -16979,56 +16983,109 @@ content: ''; float: right; width: 30px; height: 1em;
   // his niggun stands inside his son's pane rather than beside it, which is
   // also how it reached us.
   //
-  // An entry with no url draws nothing, which is how this table stands until
-  // each link has been checked against Chabad.org by someone who can reach it.
+  // An entry with no url draws nothing, so a bearer whose melody is not yet
+  // settled simply has no line. A slot takes one niggun or several.
+  //
+  // These addresses were found through search and not opened: Chabad.org is
+  // refused by this environment's egress proxy, so the titles are evidence and
+  // not verification. Four slots are deliberately empty rather than filled on a
+  // guess — a wrong attribution here would be worse than a missing one, and one
+  // was very nearly made: Hishtatchus is the Tzemach Tzedek's, not the Mitteler
+  // Rebbe's.
   const REBBE_NIGGUNIM = {
-    1:  null,   // Baal Shem Tov        — Keter
-    2:  null,   // The Maggid           — Chochmah
-    3:  null,   // Meor Einayim         — Binah
-    4:  null,   // Alter Rebbe          — Chesed
-    5:  null,   // Mitteler Rebbe       — Gevurah
-    6:  null,   // Tzemach Tzedek       — Tiferet
-    7:  null,   // Rebbe Maharash       — Netzach
-    8:  null,   // Rebbe Rashab         — Hod
-    9:  null,   // Rebbe Rayatz         — Yesod
-    10: null,   // The Rebbe            — Malchut
-    leivik: null,
+    // Keter and Chochmah share one niggun, which is not a repetition but the
+    // thing itself: three movements by three masters in the order the teaching
+    // came down. Its third is the Alter Rebbe's, who has his own below.
+    1: { name: 'Sholosh T’Nuos', heb: 'שָׁלֹשׁ תְּנוּעוֹת',
+         url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913800/jewish/1-Sholosh-TNuos.htm',
+         note: 'the first of its three movements — then the Maggid’s, then the Alter Rebbe’s' },
+    2: { name: 'Sholosh T’Nuos', heb: 'שָׁלֹשׁ תְּנוּעוֹת',
+         url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913800/jewish/1-Sholosh-TNuos.htm',
+         note: 'the second of its three movements, between his master’s and his disciple’s' },
+    // Reb Nachum of Chernobyl's Niggun Simcha. Named but not yet addressed:
+    // Chabad.org carries at least four tracks called Nigun Simcha and the one
+    // with a page of its own is Reb Aharon Charitonov's, not his.
+    3: null,
+    4: { name: 'Daled Bavos', heb: 'ד׳ בָּבוֹת',
+         url: 'https://www.chabad.org/multimedia/music_cdo/aid/861419/jewish/Daled-Bavos.htm',
+         note: 'four stanzas for the four worlds' },
+    5: { name: 'Kapelye',
+         url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913803/jewish/3-Kapelye.htm',
+         note: 'sung by the kapelye, the choir he kept — four sections for four rungs of approach' },
+    6: { name: 'Yemin Hashem', heb: 'יְמִין ה׳ רוֹמֵמָה',
+         url: 'https://www.chabad.org/multimedia/music_cdo/aid/254274/jewish/Yemin-Hashem.htm',
+         note: 'Tehillim 118:16, which he sang at Hallel — the right hand of the L-rd is exalted' },
+    7: null,   // Rebbe Maharash — L'chatchila Ariber, but no music page found
+    8: { name: 'Niggun Hachono', heb: 'נִיגּוּן הַהֲכָנָה',
+         url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913806/jewish/6-Niggun-Hachono.htm',
+         note: 'the niggun of preparation' },
+    // Two, as both were asked for, and they are not the same kind of thing: one
+    // he named himself, one was made for his freedom. That the second lands on
+    // Yesod is the app's own arithmetic — 12 Tammuz is day 282 of the Kabbalah
+    // of Time year always, which is Gevurah shebeYesod shebeYesod, and this is
+    // Yesod's pane. See the Gevurah entry in CYCLE_INFO.
+    9: [
+      { name: 'Beinoni', heb: 'בֵּינוֹנִי',
+        url: 'https://www.chabad.org/multimedia/music_cdo/aid/140814/jewish/Beinoni.htm',
+        note: 'the one he named, and the one most his — it has no words' },
+      { name: 'Nigun Yud Beis Tammuz', heb: 'י״ב תַּמּוּז',
+        url: 'https://www.chabad.org/multimedia/music_cdo/aid/3901923/jewish/Nigun-Yud-Beis-Tammuz.htm',
+        note: 'composed for his release before the release came' },
+    ],
+    // The one address here that was not found by search: it has been in this
+    // file since the thirteen niggunim of Gevurah's seasons were added, where
+    // it is the first the Rebbe taught.
+    10: { name: 'Tzama Lecha Nafshi', heb: 'צָמְאָה לְךָ נַפְשִׁי',
+          url: 'https://www.chabad.org/multimedia/music_cdo/aid/140800/jewish/Tzomo-Lecho-Nafshi.htm',
+          note: 'the first he taught, 1 May 1954 — my soul thirsts for You' },
+    leivik: { name: 'Rabbi Levi Yitzchak’s Niggun',
+              url: 'https://www.chabad.org/therebbe/article_cdo/aid/2284856/jewish/Rabbi-Levi-Yitzchaks-Niggun.htm',
+              note: 'his father’s, sung at the hakafot — and here his son singing it' },
   };
 
   // One line under the pane's heading, in the same shape the week's niggun
   // takes beside Perek Shirah — the same classes, so it inherits that link's
   // reach as well as its look.
+  // Each in a block of its own, so a pane holding two does not run the second's
+  // flag onto the end of the first's note.
   function _niggunLineHtml(ng) {
     if (!ng || !ng.url) return '';
-    return `<span class="ps-niggun-flag">&#9834; Niggun</span>` +
+    return `<div>` +
+      `<span class="ps-niggun-flag">&#9834; Niggun</span>` +
       `<a href="${ng.url}" target="_blank" rel="noopener">${ng.name}</a>` +
       (ng.heb ? ` <bdi lang="he" class="heb">${ng.heb}</bdi>` : '') +
-      (ng.note ? `<div class="ps-niggun-text">${ng.note}</div>` : '');
+      (ng.note ? `<div class="ps-niggun-text">${ng.note}</div>` : '') +
+      `</div>`;
   }
 
+  // Walked pane by pane rather than heading by heading, and each pane's lines
+  // are cleared before they are written.
+  //
+  // Two reasons, both found by measuring rather than by reading the code. Each
+  // bearer wears his ordinal twice — once on his pane and once in the card's
+  // detail column, which is matter about the cycle rather than the day's own
+  // reading — so walking every heading put two links to one tune on every card.
+  // And render() rewrites part of a pane without rewriting all of it, which
+  // leaves a line that was inserted after the heading no longer next to it: the
+  // next pass then found none and made another, and the count crept from ten to
+  // fourteen over a few days' turning. Clearing the pane first cannot drift.
   function renderRebbeNiggunim() {
-    document.querySelectorAll('[data-rebbe]').forEach((head) => {
-      if (head.classList.contains('star-mark')) return;      // the mark, not the heading
-      // Each bearer wears his ordinal twice — once on his pane and once in the
-      // card's detail column, which is matter about the cycle rather than the
-      // day's own reading. The niggun belongs to the pane, where the text it
-      // accompanies is. Put after every heading it was two links to one tune.
-      if (!head.closest('.pane-body[data-pane="menorah"]')) return;
-      const n = head.dataset.rebbe;
-      const ng = REBBE_NIGGUNIM[n];
-      const extra = (String(n) === '10') ? REBBE_NIGGUNIM.leivik : null;
-      const html = _niggunLineHtml(ng) + _niggunLineHtml(extra);
-      // The panes are redrawn by render(), so the line is found and rewritten
-      // rather than appended again — otherwise a card gains one a day.
-      let el = head.nextElementSibling;
-      if (!el || !el.classList.contains('rebbe-niggun')) {
+    document.querySelectorAll('.pane-body[data-pane="menorah"]').forEach((pane) => {
+      pane.querySelectorAll('.rebbe-niggun').forEach((old) => old.remove());
+      pane.querySelectorAll('[data-rebbe]').forEach((head) => {
+        if (head.classList.contains('star-mark')) return;    // the mark, not the heading
+        const n = head.dataset.rebbe;
+        // A slot holds one or several. The Rayatz has two, and the Rebbe's pane
+        // carries his father's after his own.
+        const own = [].concat(REBBE_NIGGUNIM[n] || []);
+        if (String(n) === '10') own.push(...[].concat(REBBE_NIGGUNIM.leivik || []));
+        const html = own.map(_niggunLineHtml).join('');
         if (!html) return;
-        el = document.createElement('div');
+        const el = document.createElement('div');
         el.className = 'ps-niggun rebbe-niggun';
+        el.innerHTML = html;
         head.insertAdjacentElement('afterend', el);
-      }
-      if (el.innerHTML !== html) el.innerHTML = html;
-      el.style.display = html ? '' : 'none';
+      });
     });
   }
 
