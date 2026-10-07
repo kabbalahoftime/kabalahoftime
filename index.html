@@ -22791,10 +22791,13 @@ content: ''; float: right; width: 30px; height: 1em;
     })();
     const _eichaLink = _eicha
       ? `<a class="tap-line" href="${eichaUrl(_eicha.ref)}" target="_blank" style="color:var(--gold)">${_eicha.label}</a>` +
-        (_eicha.letter ? ` <span style="font-family:'Frank Ruhl Libre',serif;">${_eicha.letter}</span>` : '') +
+        // The letter stood here too and now stands only on the face line, which
+        // is where the day's own letter belongs. Printed in both places it read
+        // as two facts rather than one, and the verse below opens with it
+        // anyway — which is the whole reason the chapter and the quarter share
+        // a shape.
         // The verse itself, under its reference, as Chochmah carries its
-        // acrostic verse. The letter the day stands on opens it, which is
-        // the whole reason the chapter and the season share a shape.
+        // acrostic verse.
         (_eicha.text ? `<div class="eicha-verse">${_eicha.text}</div>` : '')
       : '';
     // The wings, which is what the halves are: two joined in the going out,
@@ -22836,7 +22839,13 @@ content: ''; float: right; width: 30px; height: 1em;
     };
     const _gevBody = pl => {
       const who = _gevWho(pl);
-      return (who.note ? `<div style="font-size:0.82em;color:var(--ink-dim);font-style:italic">${who.note}</div>` : '') +
+      // Winter is the only one with a note, and it belongs to the Chayah
+      // rather than to the day's face: it is the Man who bears the fish. With
+      // the Chayah's own line gone it had nothing to hang on — three quarters
+      // in four the line above names a different creature's face — so it takes
+      // the Chayah's name with it.
+      return (who.note ? `<div style="font-size:0.82em;color:var(--ink-dim);font-style:italic">` +
+               `the ${who.name.split(' —')[0]} ${who.note}</div>` : '') +
         `<div style="font-size:0.88em;opacity:0.72;margin-top:4px">${pl.animal}<br>Angel ${pl.angel}` +
         (pl.element ? ` · ${pl.element}` : '') + `</div>`;
     };
@@ -22845,19 +22854,21 @@ content: ''; float: right; width: 30px; height: 1em;
         // One part to a day here, so the day is a whole face with no letter of
         // its own — the alef-bet is what the 28 days have no room for.
         `<span id="gevurah-day-face">${_gevFaceHtml}</span>` +
-        `<div style="margin-top:4px;font-size:0.9em"><span style="color:var(--ink-mid)">Chayah:</span> ${_gevWho(gevMic).name}</div>` +
         _gevBody(gevMic) +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-mid)">${_gevPart}` +
         (_eichaLink ? `<br>${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}` : '') +
         `</div>` +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</div>`
       : `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong> <span style="font-size:0.92em">(${seasonInfo.name})</span>:<br>` +
-        // The day's own face and letter, before the season's Chayah. The
-        // Chayah is where the day stands; this is what the day is, and it is
-        // the only part of the card that moves every morning.
+        // What the day is, and the only part of the card that moves every
+        // morning. The season's Chayah was named again on a line of its own
+        // beneath this one, with a gloss saying it bears all four faces — but
+        // this line already says whose face the day wears, so the card read
+        // "Eagle" three times over and the gloss explained a structure the
+        // line above it was already showing. The Chayah keeps its own row in
+        // the detail, where its Hebrew is, and Avot's posture below still
+        // names the creature once.
         `<span id="gevurah-day-face">${_gevFaceHtml}</span>` +
-        `<div style="margin-top:4px;font-size:0.9em"><span style="color:var(--ink-mid)">Chayah:</span> ${_gevWho(seasonInfo).name}` +
-        ` <span style="color:var(--ink-dim)">— the season&rsquo;s creature, bearing all four faces</span></div>` +
         _gevBody(seasonInfo) +
         (_eichaLink
           ? `<div style="margin-top:6px;font-size:0.85em;"><span style="color:var(--ink-mid)">${_eichaLink}</span></div>`
