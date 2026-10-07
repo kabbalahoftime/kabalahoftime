@@ -3825,7 +3825,7 @@ content: ''; float: right; width: 30px; height: 1em;
           <div class="dc-label">Prayer<span class="heb">תפילה</span></div>
         </div>
         <div class="dc-sep">·</div>
-        <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag in order · tap for Today's Path">
+        <div class="dc-col" id="maalot-moon" onclick="openTodaysPath()" style="cursor:pointer;" title="Today's ma'alot — tap each מעלה tag as you learn it · tap for Today's Path">
           <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:2px;">
             <svg id="maalot-moon-svg" width="33" height="33" viewBox="-6 -6 34 34" style="display:block;overflow:visible">
               <g id="maalot-stars"></g><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-month-ring" cx="11" cy="11" r="13.5" fill="none" stroke="var(--gold)" stroke-width="1.1" stroke-linecap="round" opacity="0.34" transform="rotate(-90 11 11)" style="display:none"/><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
@@ -3878,7 +3878,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <div id="kot-welcome" style="display:none; margin:12px 0 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); line-height:1.7; position:relative;">
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:calc(18px * var(--ts, 1)); cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
-    Tap the small gold <strong>מעלה</strong> tags in order to climb from Malchut to Keter and fill tonight's moon; when it becomes the sun, come back down from Keter to Malchut through the <strong>מיעוט</strong> tags inside the cards.
+    Tap a small gold <strong>מעלה</strong> tag when you have learned it — fifteen of them climb from Malchut to Keter and fill tonight's moon; when it becomes the sun, come back down from Keter to Malchut through the <strong>מיעוט</strong> tags inside the cards. Today's Ladder asks for whichever one belongs to the hour you are in; climbing them in order is a practice of its own.
     Each Sefirah also holds one of the day's ten <strong>prayers</strong> — tap it when you have prayed, and watch the heart in Today's Ladder fill.
     <a href="#" onclick="event.preventDefault(); openTodaysPath()" style="color:var(--gold); font-weight:600;">Tap the moon 🌙 above anytime to see Today's Path.</a>
   </div>
@@ -15030,8 +15030,8 @@ content: ''; float: right; width: 30px; height: 1em;
       t: 'Or Pnimi', heb: 'אוֹר פְּנִימִי',
       forms: ['Or Pnimi'],
       b: 'Inner light — what you actually take in and make your own. The counted steps are marked with it.',
-      m: 'Inner light: the light a vessel can hold, measured to what it can contain. The thirty counted steps are Or Pnimi, which is why they are taken in order and one at a time.',
-      a: 'The light invested within the kli and bounded by its measure, as against Or Makif, which surrounds without entering. Order matters in Or Pnimi because a vessel receives by its own capacity; the surrounding light does not wait on that.',
+      m: 'Inner light: the light a vessel can hold, measured to what it can contain. The thirty counted steps are Or Pnimi, which is why they are taken one at a time, and why climbing them in order is a practice of its own.',
+      a: 'The light invested within the kli and bounded by its measure, as against Or Makif, which surrounds without entering. Order belongs to Or Pnimi because a vessel receives by its own capacity, and the surrounding light does not wait on that — but what the day asks for is set by the hour, and the ladder in order is the fuller practice rather than the gate.',
     },
     ormakif: {
       t: 'Or Makif', heb: 'אוֹר מַקִּיף',
@@ -17116,16 +17116,23 @@ content: ''; float: right; width: 30px; height: 1em;
     const wxNext = pathWaxNext(mMask);
     const sun = wxNext === 0;                        // the chosen climb is done
     const wnNext = pathWaneNext(yMask);
+    // Which single tag is lit. The hour's own step where this hour holds one
+    // still unmarked, and the spine's next otherwise — the same two questions,
+    // in the same order, that the Today block asks. The tag and the block must
+    // name one step between them or the app is pointing two ways at once.
+    const hourIdx = (typeof _hourStepIdx === 'function') ? _hourStepIdx(0) : -1;
+    const nextIdx = hourIdx >= 0 ? hourIdx : (sun ? (wnNext ? 14 + wnNext : -1)
+                                                  : wxNext - 1);
     document.querySelectorAll('.maalah').forEach(el => {
       if (el.classList.contains('yom')) {           // waning steps (מיעוט), only after the sun
         const n = +el.dataset.wane;
         el.classList.toggle('done', n >= 1 && !!(yMask & (1 << (n - 1))));
-        el.classList.toggle('next-step', sun && n >= 1 && n === wnNext);
+        el.classList.toggle('next-step', n >= 1 && 14 + n === nextIdx);
         el.classList.toggle('off-path', n >= 1 && !pathHas(14 + n));
       } else {                                       // waxing steps (מעלה)
         const n = maalotIndexOf(el);
         el.classList.toggle('done', n >= 1 && !!(mMask & (1 << (n - 1))));
-        el.classList.toggle('next-step', !sun && n >= 1 && n === wxNext);
+        el.classList.toggle('next-step', n >= 1 && n - 1 === nextIdx);
         el.classList.toggle('off-path', n >= 1 && !pathHas(n - 1));
       }
     });
@@ -17142,35 +17149,39 @@ content: ''; float: right; width: 30px; height: 1em;
     if (!el || !_maalotKey) return;
     e.preventDefault();
     e.stopPropagation();
+    // ── ORDER IS FREE INSIDE A HALF ──
+    // A tag marks what was actually learned, and the hour decides what is
+    // asked for. Those are two different things, and the order between them is
+    // the hour's, not the list's: the Baal Shem Tov's three Psalms of Elul are
+    // said for the day you are in first and the missed ones after, never the
+    // other way round. So any step of the open half can be marked whenever it
+    // was done, and any marked step given back — the ladder in order is still
+    // there, and is now a practice rather than a lock.
+    //
+    // One gate remains, because it is not about order but about which half is
+    // open: the return cannot begin until the moon is full. Giving a מיעוט
+    // back is always allowed, though, or a מעלה handed back afterwards would
+    // shut the gate on marks already made and freeze them.
     if (el.classList.contains('yom')) {
-      // Waning step. The thirty are one path walked in order, so the waning
-      // cannot begin until the moon is full — all fifteen מעלות climbed — and
-      // then only its own next step answers. The one before it gives itself
-      // back; anything else shakes and refuses, exactly as the climb does.
       const n = +el.dataset.wane;
       if (!n) return;
       const bit = m => { try { localStorage.setItem(_yomMaskKey, String(m & 32767)); } catch (err) {} };
-      // Beyond the path: taken or given back freely. It is not part of an
-      // order, because it is not part of what was undertaken — refusing it
-      // would be the app telling someone they may not learn something.
-      if (!pathHas(14 + n)) { bit(yomMask() ^ (1 << (n - 1))); applyMaalotState(); return; }
-      if (pathWaxNext(maalotMask()) !== 0) return shakeTag(el);   // the climb is not finished
-      const yM = yomMask();
-      if (n === pathWaneNext(yM))      bit(yM |  (1 << (n - 1)));
-      else if (n === pathWaneLast(yM)) bit(yM & ~(1 << (n - 1)));
-      else                             return shakeTag(el);
+      const yM = yomMask(), had = !!(yM & (1 << (n - 1)));
+      // Beyond the path: taken or given back freely. It is not part of what was
+      // undertaken — refusing it would be the app telling someone they may not
+      // learn something.
+      if (pathHas(14 + n) && !had && pathWaxNext(maalotMask()) !== 0)
+        return shakeTag(el);                     // the climb is not finished
+      bit(yM ^ (1 << (n - 1)));
       applyMaalotState();
       return;
     }
     // Waxing step (מעלה)
     const n = maalotIndexOf(el);
     if (!n) return;
-    const mBit = m => { try { localStorage.setItem(_maalotMaskKey, String(m & 32767)); } catch (err) {} };
-    if (!pathHas(n - 1)) { mBit(maalotMask() ^ (1 << (n - 1))); applyMaalotState(); return; }
-    const mM = maalotMask();
-    if (n === pathWaxNext(mM))      mBit(mM |  (1 << (n - 1)));
-    else if (n === pathWaxLast(mM)) mBit(mM & ~(1 << (n - 1)));
-    else                            return shakeTag(el);
+    try {
+      localStorage.setItem(_maalotMaskKey, String((maalotMask() ^ (1 << (n - 1))) & 32767));
+    } catch (err) {}
     applyMaalotState();
   }, true);
 
@@ -17316,8 +17327,11 @@ content: ''; float: right; width: 30px; height: 1em;
         'down its left is the one being asked for. It says so in words: <em>Read ' +
         '&#1502;&#1506;&#1500;&#1492; &#1490;&#1523; &middot; Year-Round Connection</em>. ' +
         'Tapping it goes straight to it. </p><p>That line is the study, and only ever the ' +
-        'study, because the thirty readings are taken in order: one is next, and doing it ' +
-        'makes another next. The very first time, it is something else &mdash; <em>Choose your ' +
+        'study, because it is the one of the three that moves: it names the reading <em>this ' +
+        'hour</em> is asking for, and when that one is marked it goes on to the next thing the ' +
+        'day owes. Where the hour&rsquo;s own reading is already done, it turns to whatever is ' +
+        'still outstanding and says <em>catching up</em>, so you can always tell the two apart. ' +
+        'The very first time, it is something else &mdash; <em>Choose your ' +
         'paths</em> &mdash; and that line goes for good once you have chosen. </p><p>The other ' +
         'two lines are the hour itself rather than a queue, so neither is ever lit. ' +
         '<strong>Prayer</strong> names the prayer this hour is asking for: tap the name when ' +
@@ -17342,10 +17356,16 @@ content: ''; float: right; width: 30px; height: 1em;
       main:
         'What the day is asking for next, and how much of it has been done. </p><p>Three lines ' +
         'name the three kinds: the face of the Sefirah whose hour it is, the prayer that hour ' +
-        'is asking for, and the next of the thirty readings. One of them carries a rule down ' +
-        'its left and a verb, and it is always the reading. The thirty are a sequence &mdash; ' +
-        'exactly one is being asked for, and marking it makes another the one being asked for ' +
-        '&mdash; which is what a next step means. A face cannot be finished and the ten ' +
+        'is asking for, and the reading of the thirty that it is asking for. One of them ' +
+        'carries a rule down its left and a verb, and it is always the reading, because it is ' +
+        'the only one of the three that moves when you mark it. </p><p>It asks two questions, ' +
+        'in that order. First the hour: every one of the thirty sits on a card, and the card ' +
+        'has an hour, so what this hour holds still unmarked is what is asked for. Then, once ' +
+        'the hour&rsquo;s own portion is done, whatever is still outstanding &mdash; and the ' +
+        'line says <em>catching up</em>, so the two are never the same sentence. The ' +
+        'day&rsquo;s own portion first and the missed ones after: the Baal Shem Tov&rsquo;s ' +
+        'rule for the three Psalms of Elul, which Book 6 carries too. </p><p>A face cannot be ' +
+        'finished and the ten ' +
         'prayers each keep their own hour, so neither stands in a queue and neither is lit. ' +
         '</p><p>Until a path has been chosen, a line above the three carries the first step ' +
         'instead: <em>Choose your paths</em>. It is shown once and never again after. ' +
@@ -17384,12 +17404,24 @@ content: ''; float: right; width: 30px; height: 1em;
         'screen it sits at the foot of it, saying the same thing, going to the same place, and ' +
         'gone when the day&rsquo;s readings are done.',
       advanced:
-        'The thirty counted steps are Or Pnimi, inner light, and are therefore taken strictly ' +
-        'in order: at any moment exactly one is being asked for, and tapping any other will not ' +
-        'take. The return does not begin until the moon is full, and the count stands out of the ' +
-        'whole thirty throughout rather than out of the half in hand. That order is why the ' +
-        'reading is the one line the ladder lights: it is the only one of the three that has a ' +
-        'next. </p><p>The ten prayers are not ordered that way. Each has its own hour, so they ' +
+        'The thirty counted steps are Or Pnimi, inner light, so they are taken one at a time ' +
+        'and the ladder in order &mdash; Malchut up to Keter, then Keter back down &mdash; is ' +
+        'the fullest way to take them. But the order is not a lock. What the day asks for is ' +
+        'set by the hour, not by the list: the step whose card belongs to the Sefirah now ' +
+        'holding the clock, and only when that hour has nothing left unmarked does the lowest ' +
+        'outstanding step answer, named as <em>catching up</em>. Keter&rsquo;s hour holds three ' +
+        '&mdash; &#1497;&#1524;&#1490;, &#1497;&#1524;&#1491;, &#1496;&#1524;&#1493; &mdash; and ' +
+        'asks for them one at a time across it; an hour holding none of your path goes straight ' +
+        'to the outstanding. Any step of the open half can be marked whenever it was actually ' +
+        'done, and any marked step given back. </p><p>The climb has a second hour of its own: ' +
+        'inside the Mochin band, the eighty-eight minutes wrapped around Chatzot, the whole ' +
+        'ascent is due at once &mdash; so there the step offered pulses whether it is the band ' +
+        'Sefirah&rsquo;s own or one left from earlier in the day, and nothing reads as catching ' +
+        'up. That band is what the ladder taken in order is for. </p><p>The one thing still gated is which half ' +
+        'is open: the return does not begin until the moon is full. That is not about order but ' +
+        'about direction &mdash; Or Yashar before Or Chozer &mdash; and the count stands out of ' +
+        'the whole thirty throughout rather than out of the half in hand. </p><p>The ten ' +
+        'prayers work the same way, and always did. Each has its own hour, so they ' +
         'may be marked as they are said, and ' +
         'the one whose hour has come pulses until it is. The heart glows when the day&rsquo;s ' +
         'ten are whole. The ten faces are not ordered either, and cannot be completed at all ' +
@@ -17401,11 +17433,12 @@ content: ''; float: right; width: 30px; height: 1em;
         'lights, the tenth taking no branch of his own, because when he is gathered every light ' +
         'on the stand is lit. </p><p>A step is marked when it was actually done rather than ' +
         'when its hour has passed, so the path can be joined at any hour and still be finished. ' +
-        '</p><p>A chosen path keeps that order over its own rungs: the climb is taken in order ' +
-        'among the ma&rsquo;alot undertaken, and the return does not open until they are whole. ' +
-        'A step beyond the path is outside that order entirely and may be marked or unmarked at ' +
-        'will &mdash; it was not undertaken, so it is not being asked for, and refusing it ' +
-        'would be the page telling someone they may not learn something. The moon takes its arc ' +
+        '</p><p>A chosen path narrows what is asked for without narrowing what may be marked. ' +
+        'The hour looks only among the ma&rsquo;alot undertaken, and the return does not open ' +
+        'until those are whole. A step beyond the path is never asked for at all &mdash; it was ' +
+        'not undertaken &mdash; but it may be marked or unmarked at will, and even the gate does ' +
+        'not hold it: refusing it would be the page telling someone they may not learn ' +
+        'something. The moon takes its arc ' +
         'from the portion held: chosen ma&rsquo;alot wax it, chosen mi&rsquo;utim wane it, so a ' +
         'path of descent alone begins full and crowned at &#1496;&quot;&#1493;, where its steps ' +
         'stand in the month. The thirty-first waits for all thirty however few were undertaken: ' +
@@ -18504,18 +18537,10 @@ content: ''; float: right; width: 30px; height: 1em;
     for (const n of ns) if (!(mask & (1 << (n - 1)))) return n;
     return 0;
   }
-  // The highest chosen rung already marked — the only one that may be given
-  // back, so the climb can be stepped down as well as up.
-  function pathWaxLast(mask) {
-    const ns = pathWaxNums();
-    for (let i = ns.length - 1; i >= 0; i--) if (mask & (1 << (ns[i] - 1))) return ns[i];
-    return 0;
-  }
-  function pathWaneLast(mask) {
-    const ns = pathWaneNums();
-    for (let i = ns.length - 1; i >= 0; i--) if (mask & (1 << (ns[i] - 1))) return ns[i];
-    return 0;
-  }
+  // pathWaxLast and pathWaneLast stood here: the highest chosen rung already
+  // marked, which was the only one a tap was allowed to give back while the
+  // order was enforced. Any marked step can be given back now, so there is
+  // nothing left to ask them.
 
   // These names are the fallback, not what a reader usually sees: the rows are
   // named by the card itself, so the path always says what the day is actually
@@ -18710,12 +18735,14 @@ content: ''; float: right; width: 30px; height: 1em;
     } catch (e) { return 0; }
   }
 
-  // The order is the spine. What comes next is always the lowest unmarked —
-  // the hour never reaches past an unclimbed step to a later one.
-  // The next step of the path: the lowest chosen rung of the climb not yet
-  // marked, and once the climb is whole, the lowest chosen rung of the return.
-  // -1 when the path is walked. Steps beyond the path are never offered here —
-  // they can be taken, but they are not what the day is asking for.
+  // The spine: the lowest chosen rung of the climb not yet marked, and once the
+  // climb is whole, the lowest chosen rung of the return. -1 when the path is
+  // walked. Steps beyond the path are never offered here — they can be taken,
+  // but they are not what the day is asking for.
+  //
+  // This is the ladder in order, which is no longer the first thing asked. The
+  // hour is (see _hourStepIdx below), and the spine answers for whatever the
+  // hour has left over — the catching up.
   function pathNextIdx(mMask, yMask) {
     for (const n of pathWaxNums())  if (!(mMask & (1 << (n - 1)))) return n - 1;
     for (const n of pathWaneNums()) if (!(yMask & (1 << (n - 1)))) return 14 + n;
@@ -18745,24 +18772,133 @@ content: ''; float: right; width: 30px; height: 1em;
     return !!v && _hIn(now, v[0], v[1]);
   }
 
-  // TODAY — the next step, worked out from the same three pieces of state
-  // Today's Path uses and by the same rule, so the two cannot disagree: the
-  // climb is free-order, so what is offered is the lowest unmarked.
-  // ── THE STEP THE PATH IS ASKING FOR ──
-  // The thirty are one path walked in order, so at any moment exactly one step
-  // is being asked for: the lowest unmarked, climb first and then the waning.
-  // That is the spine, and pathNextIdx is where it lives.
+  // ── THE HOUR'S OWN PORTION ──
+  // The whole app is about connecting to the hour you are standing in, and the
+  // thirty are read somewhere on the dial — each step sits on a card, and that
+  // card's Sefirah has an hour. So the first question is not "where did I get
+  // to in the order" but "what does this hour hold".
   //
-  // The only complication is which day's spine. Two seams put an hour on a day
+  // The Baal Shem Tov's rule for the Psalms of Elul is the shape of it: three
+  // a day, and if you fall behind you say today's three first and then catch
+  // up. The day's own portion comes before the backlog, never after. Book 6
+  // carries the same instruction in its own words.
+  //
+  // So the block asks this first — the hour's step — and only when the hour
+  // has nothing left unmarked does it fall back to pathNextIdx, the spine,
+  // and say that it is catching up.
+
+  // Which Sefirot hold this moment, the finest grain first.
+  //
+  // More than one can hold it. The three Mochin stand above the seam and their
+  // windows are laid over the seven's — Keter's twenty-eight minutes fall
+  // inside Chesed's three and a quarter hours, and part of Binah's do too — so
+  // in the band the hour is Keter's and Chesed's at once. The narrower window
+  // is the more particular answer, which is why they are sorted by width: in
+  // Keter's minutes the climb's own three are asked for before Chesed's one.
+  function _hourSefirot() {
+    const H = window.kotwHours, win = _pathHourWindows();
+    if (!H || !win || typeof H.nowH !== 'function') return null;
+    const now = _hNorm(H.nowH());
+    const span = (v) => { const w = ((v[1] - v[0]) % 24 + 24) % 24; return w || 24; };
+    return Object.keys(win)
+      .filter(k => _hIn(now, win[k][0], win[k][1]))
+      .sort((a, b) => span(win[a]) - span(win[b]));
+  }
+
+  // Which day an hour's steps are marked on is asked of the hour, not of the
+  // step. _stepDayOffset answers for a מעלה with the climb's day, because the
+  // band is the hour of the whole climb taken as one practice — and that is
+  // still true, and still what pathStepIsDue reads. But a rung also has its
+  // card's own hour, and in that hour it belongs to the card's day: the Mochin
+  // face forward into the cycle they open, the seven stay inside the cycle
+  // running behind the date. Asked of the step instead, every מעלה from the
+  // dial's noon onward was filed under tomorrow and no afternoon hour held one.
+  function _hourDayOffset(sef) {
+    return _MOCHIN_RING[sef] ? _maalotOffset() : _cycleOffset();
+  }
+
+  // Everything this hour holds on the day `off` days from the one on screen:
+  // the chosen steps of the open half whose card belongs to a Sefirah of this
+  // hour, marked or not, in the order they are numbered.
+  //
+  // The open half is the same gate the tags keep: the climb while any chosen
+  // מעלה is unmarked, the return once the moon is full. Freeing the order
+  // inside a half did not free the halves from each other.
+  //
+  // Keter's hour holds three — מעלות י״ג, י״ד, ט״ו — so an hour can hold more
+  // than one step and asks for them one at a time, in order, across it.
+  function _hourSteps(off) {
+    const names = _hourSefirot();
+    if (!names || !names.length) return [];
+    const day = currentOffset + off;
+    const out = [];
+    const wax = pathWaxNext(_maalotMaskFor(off)) !== 0;
+    // Sefirah by Sefirah, finest first, and inside each by step number.
+    names.forEach((sef) => {
+      if (_hourDayOffset(sef) !== day) return;
+      if (wax) {
+        for (const n of pathWaxNums())
+          if (PATH_WAXING[n - 1][2] === sef) out.push(n - 1);
+      } else {
+        for (const n of pathWaneNums())
+          if (PATH_WANING[n - 1][2] === sef) out.push(14 + n);
+      }
+    });
+    return out;
+  }
+
+  // Whether a step is marked, read from the day it belongs to. The two halves
+  // keep separate masks, so which one to ask is the step's own number.
+  function _stepMarked(idx, off) {
+    return idx < 15 ? !!(_maalotMaskFor(off) & (1 << idx))
+                    : !!(_yomMaskFor(off)    & (1 << (idx - 15)));
+  }
+
+  // The step this hour is asking for: the first of its own that is still
+  // unmarked. -1 when the hour holds nothing left — either because the path
+  // takes no step there, or because every step it does take has been marked.
+  function _hourStepIdx(off) {
+    for (const idx of _hourSteps(off)) if (!_stepMarked(idx, off)) return idx;
+    return -1;
+  }
+
+  // Whether this hour had a portion and it is finished — which is the one case
+  // where what follows is honestly called catching up. An hour that holds no
+  // step of your path never asked for anything, so the step it falls back to is
+  // simply the next one, not a debt.
+  function _hourIsDone(off) {
+    const steps = _hourSteps(off);
+    return steps.length > 0 && steps.every(idx => _stepMarked(idx, off));
+  }
+
+  // ── THE STEP THE PATH IS ASKING FOR ──
+  // Two questions, asked in that order.
+  //
+  // First the hour. The thirty sit on the cards, the cards have hours, and the
+  // hour you are standing in is the whole point of the app — so what it holds
+  // unmarked is what is asked for. That is _hourStepIdx.
+  //
+  // Then the spine: the lowest unmarked, climb before return, which is
+  // pathNextIdx. It answers once the hour has nothing left — either because
+  // every step it holds is marked, or because your path takes none there. That
+  // is the backlog, and the line says so, so that "this is the hour" and "this
+  // is catching up" are never the same sentence.
+  //
+  // The day's own portion first and the catching up after: the Baal Shem Tov's
+  // rule for the three Psalms of Elul, which Book 6 carries too.
+  //
+  // The remaining complication is which day. Two seams put an hour on a day
   // other than the one on screen — the Mochin facing forward into the cycle
   // they open, a מיעוט of the seven still inside the cycle running behind the
-  // date — so when this hour is asking for that day's next step, the block
-  // offers it there and carries the reader over on the tap. It only ever fills
-  // a silence: the day on screen is asked first, and another day is looked at
-  // only when this hour has nothing to say to it.
+  // date — so when this hour is asking for a step there, the block offers it
+  // and carries the reader over on the tap. Each of those days is asked the
+  // same two questions, hour first; and both are looked at only after the day
+  // on screen has had its turn.
   function _pathNow() {
     const idx = pathNextIdx(_maalotMaskFor(0), yomMask());
     if (idx === -1) return { off: 0, done: true };
+    const h = _hourStepIdx(0);
+    if (h >= 0) return { off: 0, idx: h, due: true };
     if (pathStepIsDue(idx)) return { off: 0, idx, due: true };
     if (currentOffset === 0) {
       const H = window.kotwHours, win = _pathHourWindows();
@@ -18772,6 +18908,8 @@ content: ''; float: right; width: 30px; height: 1em;
         // the Mochin are opening ahead of it.
         for (const off of [_cycleOffset(), _maalotOffset()]) {
           if (!off) continue;
+          const hj = _hourStepIdx(off);
+          if (hj >= 0) return { off, idx: hj, due: true };
           const j = pathNextIdx(_maalotMaskFor(off), _yomMaskFor(off));
           if (j === -1 || _stepDayOffset(j) !== off) continue;
           const live = j < 15 ? _inMaalotBand()
@@ -18781,7 +18919,11 @@ content: ''; float: right; width: 30px; height: 1em;
         }
       }
     }
-    return { off: 0, idx, due: false };
+    // Nothing this hour holds is still owed. Where it held something and that
+    // is now marked, what follows is the backlog, and the line says so — a
+    // reader who has just done the hour's portion and is then offered מעלה ב׳
+    // should be told which of the two they are looking at.
+    return { off: 0, idx, due: false, behind: _hourIsDone(0) };
   }
 
   // A step standing on another day is named as such, so that being carried
@@ -18799,7 +18941,10 @@ content: ''; float: right; width: 30px; height: 1em;
   // says so in the same shape, with the word standing where Next stands.
   function _todayLine(el, st) {
     if (!el) return;
-    const note = _todayDayNote(st.off);
+    // The day-note and the backlog-note share the one faint span at the end of
+    // the line, since both answer the same question — why this step and not the
+    // one the hour would have asked for.
+    const note = _todayDayNote(st.off) + (st.behind ? ' · catching up' : '');
     if (st.done) {
       // Still a live control — there is no step left to go to, so it opens the
       // path, where all thirty and their marks can be seen at once. Which is
@@ -18838,7 +18983,8 @@ content: ''; float: right; width: 30px; height: 1em;
     // announced to begin with, and neither was the pulse — both go into the
     // label, which names the step and says whether its hour is running.
     el.setAttribute('aria-label', 'Go to ' + (waxing ? 'ma’alah ' : 'mi’ut ') +
-      (st.idx % 15 + 1) + ', ' + name + (st.due ? ' — its hour is now' : ''));
+      (st.idx % 15 + 1) + ', ' + name +
+      (st.due ? ' — its hour is now' : st.behind ? ' — catching up, this hour is done' : ''));
     // The Sefirah's name is gone from the end. It named the card the step is
     // on, which is a direction to somewhere else — and the tap already goes
     // there. What is left is the step and what it asks for, and the day-note
@@ -19451,8 +19597,12 @@ content: ''; float: right; width: 30px; height: 1em;
     const k = _popcount(mMask);
     const w = yomDone();
     const live = _pathLiveNames();
-    const nextIdx = pathNextIdx(mMask, yMask);
-    const dueNow = pathStepIsDue(nextIdx);
+    // The same two questions in the same order as the block and the tags: the
+    // hour's own step first, the spine after. A list that tagged a different
+    // step as next from the one the app was asking for would be a third answer.
+    const hourIdx = _hourStepIdx(0);
+    const nextIdx = hourIdx >= 0 ? hourIdx : pathNextIdx(mMask, yMask);
+    const dueNow = hourIdx >= 0 || pathStepIsDue(nextIdx);
     const whole = pathIsWhole();
     const mine = pathWaxDone(mMask) + pathWaneDone(yMask);
     const total = pathWaxNums().length + pathWaneNums().length;
@@ -28415,21 +28565,23 @@ content: ''; float: right; width: 30px; height: 1em;
 
   <h3 class="hg-h">The marks</h3>
   <p>Almost every reading wears a mark that says what it is, and the marks are what the counts are kept by. A few readings wear none &mdash; the week&rsquo;s seven books in Malchut, the Zohar that stands with Thursday&rsquo;s Ramchal &mdash; and those are simply read.</p>
-  <p><strong>&#10022;</strong> is a <strong>counted step</strong> &mdash; light drawn inward, <em>Or Pnimi</em>. Beside its heading sits a gold <strong>מעלה</strong> or <strong>מיעוט</strong> tag. There are thirty of them in a day, fifteen of each, and they are taken strictly in order.</p>
+  <p><strong>&#10022;</strong> is a <strong>counted step</strong> &mdash; light drawn inward, <em>Or Pnimi</em>. Beside its heading sits a gold <strong>מעלה</strong> or <strong>מיעוט</strong> tag. There are thirty of them in a day, fifteen of each, and each is marked when you have learned it.</p>
   <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, the word in <strong>Ma&rsquo;alot HaZman</strong>, the spiral of the year above, and in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is the opposite motion &mdash; a lessening, a making-small, what the moon does coming down.</p>
-  <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. They may be taken in any order &mdash; unlike the thirty steps, none of them waits on another. Each one lights in the sun&rsquo;s gold and fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
+  <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. None of them is ever asked for by the hour or counted toward the thirty &mdash; the surrounding light does not wait on a vessel. Each one lights in the sun&rsquo;s gold and fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
   <p>One closed set among them wears a <strong>menorah</strong> rather than a star, and it is a chanukiah: ten who carry it on nine lights. The Baal Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven of Chabad from the Alter Rebbe to the Rebbe. Eight take the eight branches, in the order the teaching came down and from the right, as the lights of Chanukah are added; the ninth, the Rayatz, is the shamash, raised at the centre &mdash; the one whose whole work was to light others; and the tenth takes no branch of his own, because when he is gathered every light on the stand is lit. A gathered bearer lights blue and fills his own place on the menorah beside the moon.</p>
 
   <h3 class="hg-h">The thirty steps</h3>
-  <p>Tap the gold <strong>מעלה</strong> tags in order, א׳ to ט״ו, climbing from Malchut up to Keter; the moon in the clock above fills as you go, and at fifteen it becomes the sun, whose rays then remain. Then return: the <strong>מיעוט</strong> tags inside the cards mark fifteen steps of listening back down from Keter to Malchut, and the moon wanes as you go &mdash; a whole month walked in a single day.</p>
-  <p>The two halves are one path. The return does not begin until the moon is full, so at any moment there is exactly one step being asked for, and tapping any other will not take. <strong>A little is a step:</strong> a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure.</p>
-  <p>Tap the <strong>moon</strong> itself for Today&rsquo;s Path &mdash; all thirty in order, your next one highlighted; tap any row to jump straight to it.</p>
+  <p>The fifteen gold <strong>מעלה</strong> tags, א׳ to ט״ו, climb from Malchut up to Keter; the moon in the clock above fills as you mark them, and at fifteen it becomes the sun, whose rays then remain. Then return: the <strong>מיעוט</strong> tags inside the cards mark fifteen steps of listening back down from Keter to Malchut, and the moon wanes as you go &mdash; a whole month walked in a single day.</p>
+  <p><strong>What the hour asks for, then what is outstanding.</strong> Each of the thirty sits on a card, and the card has an hour, so the step being asked for is the one belonging to the Sefirah now holding the clock. Once that hour&rsquo;s own reading is marked, Today&rsquo;s Ladder turns to whatever is still outstanding and says <em>catching up</em>. This is the Baal Shem Tov&rsquo;s rule for the three Psalms of Elul &mdash; say the day&rsquo;s own three first, then make up what was missed &mdash; and Book 6 carries it too.</p>
+  <p>So you may tap any tag whenever you have learned it, and tap it again to give it back. Climbing the fifteen in order is a practice of its own, and a beautiful one; it is not a gate. The one thing that is: <strong>the return does not begin until the moon is full</strong> &mdash; that is direction rather than order, the light going out before it comes back. <strong>A little is a step:</strong> a few lines of the Chumash, a page opened, a shiur begun.</p>
+  <p>Tap the <strong>moon</strong> itself for Today&rsquo;s Path &mdash; all thirty laid out in the order of the ladder, with the one being asked for highlighted; tap any row to jump straight to it.</p>
 
   <h3 class="hg-h">The ten prayers</h3>
-  <p>Each Sefirah carries one of the day&rsquo;s ten prayers, in the left margin beside its hours &mdash; Hitbodedut in Keter, Shacharit in Tiferet, Mincha in Hod, Maariv in Yesod, Kri&rsquo;at Shema in Malchut, and so through all ten. The one whose hour has come pulses until it is said; tap to mark it, tap again to undo. Unlike the thirty steps these may be marked in any order, because each prayer has its own time. The <strong>heart</strong> in Today&rsquo;s Ladder fills as they accumulate, and glows when the day&rsquo;s ten are whole.</p>
+  <p>Each Sefirah carries one of the day&rsquo;s ten prayers, in the left margin beside its hours &mdash; Hitbodedut in Keter, Shacharit in Tiferet, Mincha in Hod, Maariv in Yesod, Kri&rsquo;at Shema in Malchut, and so through all ten. The one whose hour has come pulses until it is said; tap to mark it, tap again to undo. Like the thirty steps, these are marked as they are said &mdash; each prayer has its own time. The <strong>heart</strong> in Today&rsquo;s Ladder fills as they accumulate, and glows when the day&rsquo;s ten are whole.</p>
 
   <h3 class="hg-h">The shape of a day</h3>
-  <p>The climb belongs to one hour: the fifteen <strong>מעלות</strong> are taken together in the Mochin &mdash; Chochmah, Binah, and Keter/Da&rsquo;at &mdash; the eighty-eight minutes wrapped around Chatzot. The rest of the day then walks the Sefirot in turn, and each hour asks for everything that is its own: its <strong>מיעוט</strong>, its prayer, its <strong>&#10017;</strong> companions, its Rebbe&rsquo;s menorah from Chesed down &mdash; and the מעלה already climbed there, returned to and reviewed.</p>
+  <p>The climb as one practice belongs to one hour: all fifteen <strong>מעלות</strong> taken together in the Mochin &mdash; Chochmah, Binah, and Keter/Da&rsquo;at &mdash; the eighty-eight minutes wrapped around Chatzot. That is the ladder, and the hour it is made for.</p>
+  <p>Each rung also has a card, and the card has an hour. So the rest of the day walks the Sefirot in turn, and every hour asks for everything that is its own: its <strong>מעלה</strong>, its <strong>מיעוט</strong>, its prayer, its <strong>&#10017;</strong> companions, its Rebbe&rsquo;s menorah from Chesed down. Keter&rsquo;s hour holds three of the מעלות and asks for them one at a time; an hour that holds none of the readings you have undertaken moves straight to whatever is outstanding.</p>
   <p><strong>However you come to it.</strong> That is the ideal, and nothing depends on reaching it. The path can be joined at any hour and still be finished: the hour only says what it is asking for, and a step is marked when it was actually done, not when its hour has passed. Anyone who would rather take a single resource, or stay with one card, is welcome to &mdash; the main thing is to learn Torah and to pray as we fulfill our day&rsquo;s acts of kindness. What this offers is a way to bind that learning and that prayer, and ourselves, to time, and to the beautifully intricate Kabbalistic structure found within it.</p>
 
   <h3 class="hg-h">Moving around</h3>
