@@ -16986,12 +16986,24 @@ content: ''; float: right; width: 30px; height: 1em;
   // An entry with no url draws nothing, so a bearer whose melody is not yet
   // settled simply has no line. A slot takes one niggun or several.
   //
-  // These addresses were found through search and not opened: Chabad.org is
-  // refused by this environment's egress proxy, so the titles are evidence and
-  // not verification. Four slots are deliberately empty rather than filled on a
-  // guess — a wrong attribution here would be worse than a missing one, and one
-  // was very nearly made: Hishtatchus is the Tzemach Tzedek's, not the Mitteler
-  // Rebbe's.
+  // Nine of the thirteen lines now take their melody from one recording of the
+  // niggunim in the order they are usually sung — Sholosh T'Nuos, Keli Atoh,
+  // Kapelye, Yemin Hashem, Lechatchila Ariber, Niggun Hachono, Beinoni, Atah
+  // Vechartanu, Daled Bavos, and a tenth that belongs to no bearer. Its tracks
+  // name the master each belongs to, which is why this table could stop
+  // guessing: the first pass built it out of search results, and three of those
+  // have since been replaced by the album's own address for the same niggun.
+  //
+  // The two that are not on it are the two who are not Chabad Rebbes — the
+  // Maggid and Reb Nachum of Chernobyl — and both of those came from Daniel.
+  //
+  // Nothing here has been opened from this machine: Chabad.org and YouTube are
+  // both refused by this environment's egress proxy. What makes the album's
+  // addresses trustworthy is that he sent them, not that they were found.
+  //
+  // One attribution was very nearly wrong and the album settles it: Yemin
+  // Hashem is the Tzemach Tzedek's, and Hishtatchus is his too — not the
+  // Mitteler Rebbe's, which was the first guess.
   const REBBE_NIGGUNIM = {
     // Three movements by three masters in the order the teaching came down —
     // the Baal Shem Tov's first, the Maggid's second, the Alter Rebbe's third.
@@ -17020,14 +17032,25 @@ content: ''; float: right; width: 30px; height: 1em;
     3: { name: 'Nigun Simcha', heb: 'נִיגּוּן שִׂמְחָה',
          url: 'https://www.chabad.org/multimedia/music_cdo/aid/7465466/jewish/Nigun-Simcha-of-Reb-Nochum-Chernobyl.htm',
          note: 'a niggun of joy, on Binah&rsquo;s card &mdash; <bdi lang="he" class="heb">אֵם הַבָּנִים שְׂמֵחָה</bdi>, the mother of children rejoicing' },
-    4: { name: 'Daled Bavos', heb: 'ד׳ בָּבוֹת',
-         url: 'https://www.chabad.org/multimedia/music_cdo/aid/861419/jewish/Daled-Bavos.htm',
-         note: 'four stanzas for the four worlds' },
+    // Two, because the sung order gives him two: his place in the sequence and
+    // then the Daled Bavos, which comes after all eight.
+    //
+    // Keli Atoh and the Tzemach Tzedek's Yemin Hashem are two verses of one
+    // psalm — Tehillim 118:28 and 118:16, both from Hallel — so grandfather and
+    // grandson are singing the same psalm two cards apart.
+    4: [
+      { name: 'Keli Atoh', heb: 'אֵלִי אַתָּה',
+        url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913802/jewish/2-Keli-Atoh.htm',
+        note: 'Tehillim 118:28 — You are my God, and I will thank You' },
+      { name: 'Daled Bavos', heb: 'ד׳ בָּבוֹת',
+        url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913809/jewish/9-Niggun-Daled-Bovos.htm',
+        note: 'four stanzas for the four worlds, and the ninth of the ten sung' },
+    ],
     5: { name: 'Kapelye',
          url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913803/jewish/3-Kapelye.htm',
          note: 'sung by the kapelye, the choir he kept — four sections for four rungs of approach' },
     6: { name: 'Yemin Hashem', heb: 'יְמִין ה׳ רוֹמֵמָה',
-         url: 'https://www.chabad.org/multimedia/music_cdo/aid/254274/jewish/Yemin-Hashem.htm',
+         url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913804/jewish/4-YMin-Hashem.htm',
          note: 'Tehillim 118:16, which he sang at Hallel — the right hand of the L-rd is exalted' },
     7: { name: 'Lechatchila Ariber',
          url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913805/jewish/5-Lchatchila-Ariber.htm',
@@ -17041,10 +17064,8 @@ content: ''; float: right; width: 30px; height: 1em;
     // of Time year always, which is Gevurah shebeYesod shebeYesod, and this is
     // Yesod's pane. See the Gevurah entry in CYCLE_INFO.
     9: [
-      // Daniel's address for this, in place of the one search found: he can
-      // open the pages and nothing here can.
       { name: 'Beinoni', heb: 'בֵּינוֹנִי',
-        url: 'https://www.chabad.org/multimedia/music_cdo/aid/862340/jewish/12-The-Benuni.htm',
+        url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913807/jewish/7-Beinuni.htm',
         note: 'the one he named, and the one most his — it has no words' },
       { name: 'Nigun Yud Beis Tammuz', heb: 'י״ב תַּמּוּז',
         url: 'https://www.chabad.org/multimedia/music_cdo/aid/3901923/jewish/Nigun-Yud-Beis-Tammuz.htm',
@@ -17053,9 +17074,22 @@ content: ''; float: right; width: 30px; height: 1em;
     // The one address here that was not found by search: it has been in this
     // file since the thirteen niggunim of Gevurah's seasons were added, where
     // it is the first the Rebbe taught.
-    10: { name: 'Tzama Lecha Nafshi', heb: 'צָמְאָה לְךָ נַפְשִׁי',
-          url: 'https://www.chabad.org/multimedia/music_cdo/aid/140800/jewish/Tzomo-Lecho-Nafshi.htm',
-          note: 'the first he taught, 1 May 1954 — my soul thirsts for You' },
+    // Three on this pane, where every other has one or two: his place in the
+    // sung order, the first niggun he ever taught, and then his father's. It is
+    // the pane the whole stand ends on, and he takes no light of his own there
+    // either — so it can hold what the others cannot.
+    //
+    // The second address is the one entry here older than this feature: it has
+    // been in the file since Gevurah's thirteen seasonal niggunim went in,
+    // where it is also the first of the thirteen.
+    10: [
+      { name: 'Atah Vechartanu', heb: 'אַתָּה בְחַרְתָּנוּ',
+        url: 'https://www.chabad.org/multimedia/music_cdo/aid/3913808/jewish/8-Atoh-Vchartonu.htm',
+        note: 'the eighth and last of the Rebbeim in the sung order — a song with no ending, for the returnee is never content' },
+      { name: 'Tzama Lecha Nafshi', heb: 'צָמְאָה לְךָ נַפְשִׁי',
+        url: 'https://www.chabad.org/multimedia/music_cdo/aid/140800/jewish/Tzomo-Lecho-Nafshi.htm',
+        note: 'the first he taught, 1 May 1954 — my soul thirsts for You' },
+    ],
     leivik: { name: 'Rabbi Levi Yitzchak’s Niggun',
               url: 'https://www.chabad.org/therebbe/article_cdo/aid/2284856/jewish/Rabbi-Levi-Yitzchaks-Niggun.htm',
               note: 'his father’s, sung at the hakafot — and here his son singing it' },
