@@ -19148,7 +19148,16 @@ content: ''; float: right; width: 30px; height: 1em;
   // sentence in the app and two places it can be read.
   let _travelWhich = null;      // which row it is repeating, for the tap
   let _travelSeen  = false;     // is the ladder on screen right now
-  let _travelGone  = false;     // put away by the reader, for this visit
+  // What the reader put away, as the sentence it was saying when they did.
+  //
+  // It was a flag, set once and never cleared, so the × silenced the bar for
+  // the rest of the visit — through finishing the step, through the day
+  // rolling over, through any other instruction it might have carried. On a
+  // page people leave open all day that is a long time to be told nothing.
+  // A dismissal is about what is being said, so it is kept as what was said:
+  // when the sentence changes the bar has something new to offer and comes
+  // back, and while it has not, it stays down.
+  let _travelGoneWord = null;
 
   // The row's own words, without its chip and without the arrow that opens a
   // prayer's text — that arrow is a control, and a copy of it here would be a
@@ -19181,6 +19190,8 @@ content: ''; float: right; width: 30px; height: 1em;
       const tw = _travelTextFrom(row);
       if (f && f.textContent !== fw) f.textContent = fw;
       if (t && t.textContent !== tw) t.textContent = tw;
+      // A new sentence is not the one that was put away.
+      if (_travelGoneWord && _travelGoneWord !== fw + '|' + tw) _travelGoneWord = null;
       const go = bar.querySelector('.kt-go');
       if (go) go.setAttribute('aria-label', fw + ' — ' + tw);
     }
@@ -19197,7 +19208,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const busy = Array.prototype.some.call(
       document.querySelectorAll('[id$="-modal"]'),
       (el) => el.getClientRects().length > 0);
-    const up = !!_travelWhich && !_travelSeen && !_travelGone && !busy;
+    const up = !!_travelWhich && !_travelSeen && !_travelGoneWord && !busy;
     if (bar.hidden !== !up) bar.hidden = !up;
     document.body.classList.toggle('has-travel', up);
   }
@@ -19209,7 +19220,12 @@ content: ''; float: right; width: 30px; height: 1em;
   }
   function travelFaceGo()   { if (typeof todayFaceGo   === 'function') todayFaceGo(); }
   function travelPrayerGo() { if (typeof todayPrayerGo === 'function') todayPrayerGo(); }
-  function travelDismiss() { _travelGone = true; _travelShow(); }
+  function travelDismiss() {
+    const bar = document.getElementById('kot-travel');
+    const f = bar && bar.querySelector('.kt-flag'), t = bar && bar.querySelector('.kt-text');
+    _travelGoneWord = ((f && f.textContent) || '') + '|' + ((t && t.textContent) || '');
+    _travelShow();
+  }
 
   // The hour's face and the hour's prayer, carried on the bar without being
   // asked for. Each is drawn hollow and fills when the thing is done, and
