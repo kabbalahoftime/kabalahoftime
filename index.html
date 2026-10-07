@@ -16963,6 +16963,75 @@ content: ''; float: right; width: 30px; height: 1em;
     });
   }
 
+  // ── A NIGGUN FOR EACH BEARER OF THE MENORAH ──
+  // Each of the ten panes carries its master's own melody, beside his text.
+  // Keyed by the ordinal the heading already carries, so a pane's niggun is
+  // found the same way its light on the chanukiah is.
+  //
+  // It is a link and not a mark. The twenty-two ✡ companions of a day fill the
+  // ring of eleven stars exactly, two to a star, and the ten bearers are
+  // counted apart on the stand — so ten new gatherable things would break an
+  // arithmetic that closes. A niggun is heard, not gathered.
+  //
+  // 'leivik' is R. Levi Yitzchak Schneerson, the Rebbe's father, who carries
+  // no light of his own: the ten on nine is a closed set, and the Rebbe takes
+  // no branch precisely because when he is gathered the whole stand is lit. So
+  // his niggun stands inside his son's pane rather than beside it, which is
+  // also how it reached us.
+  //
+  // An entry with no url draws nothing, which is how this table stands until
+  // each link has been checked against Chabad.org by someone who can reach it.
+  const REBBE_NIGGUNIM = {
+    1:  null,   // Baal Shem Tov        — Keter
+    2:  null,   // The Maggid           — Chochmah
+    3:  null,   // Meor Einayim         — Binah
+    4:  null,   // Alter Rebbe          — Chesed
+    5:  null,   // Mitteler Rebbe       — Gevurah
+    6:  null,   // Tzemach Tzedek       — Tiferet
+    7:  null,   // Rebbe Maharash       — Netzach
+    8:  null,   // Rebbe Rashab         — Hod
+    9:  null,   // Rebbe Rayatz         — Yesod
+    10: null,   // The Rebbe            — Malchut
+    leivik: null,
+  };
+
+  // One line under the pane's heading, in the same shape the week's niggun
+  // takes beside Perek Shirah — the same classes, so it inherits that link's
+  // reach as well as its look.
+  function _niggunLineHtml(ng) {
+    if (!ng || !ng.url) return '';
+    return `<span class="ps-niggun-flag">&#9834; Niggun</span>` +
+      `<a href="${ng.url}" target="_blank" rel="noopener">${ng.name}</a>` +
+      (ng.heb ? ` <bdi lang="he" class="heb">${ng.heb}</bdi>` : '') +
+      (ng.note ? `<div class="ps-niggun-text">${ng.note}</div>` : '');
+  }
+
+  function renderRebbeNiggunim() {
+    document.querySelectorAll('[data-rebbe]').forEach((head) => {
+      if (head.classList.contains('star-mark')) return;      // the mark, not the heading
+      // Each bearer wears his ordinal twice — once on his pane and once in the
+      // card's detail column, which is matter about the cycle rather than the
+      // day's own reading. The niggun belongs to the pane, where the text it
+      // accompanies is. Put after every heading it was two links to one tune.
+      if (!head.closest('.pane-body[data-pane="menorah"]')) return;
+      const n = head.dataset.rebbe;
+      const ng = REBBE_NIGGUNIM[n];
+      const extra = (String(n) === '10') ? REBBE_NIGGUNIM.leivik : null;
+      const html = _niggunLineHtml(ng) + _niggunLineHtml(extra);
+      // The panes are redrawn by render(), so the line is found and rewritten
+      // rather than appended again — otherwise a card gains one a day.
+      let el = head.nextElementSibling;
+      if (!el || !el.classList.contains('rebbe-niggun')) {
+        if (!html) return;
+        el = document.createElement('div');
+        el.className = 'ps-niggun rebbe-niggun';
+        head.insertAdjacentElement('afterend', el);
+      }
+      if (el.innerHTML !== html) el.innerHTML = html;
+      el.style.display = html ? '' : 'none';
+    });
+  }
+
   // A ring of eleven small stars around the moon — the surrounding light,
   // drawn where it belongs, and the eleven of Yosef's dream: the sun and the
   // moon and eleven stars. Each is three crossed strokes, which reads as a
@@ -17042,6 +17111,7 @@ content: ''; float: right; width: 30px; height: 1em;
     if (!_starsKey) return;
     markStarGlyphs();
     markRebbeGlyphs();
+    renderRebbeNiggunim();
     const set = starsSet();
     const lit = new Set();
     const litRebbeim = new Set();
