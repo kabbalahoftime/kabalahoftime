@@ -1499,6 +1499,33 @@ border-right: 1px solid var(--border);
 padding-right: 6px;
 }
 
+/* The two prayers of study, in Gevurah's margin beneath its own prayer. They
+   are not marks — nothing is counted by tapping them — so they are quieter
+   than the prayer tag above: the same size, in the ink-dim of the source
+   lines rather than the gold of a thing to be done. Each carries its 44px in
+   padding and gives it back in margin, so the column keeps its rhythm. */
+/* The heading over each of the two inside the popup. */
+.sp-head {
+  font-family:'Cinzel',serif; font-size:calc(10px * var(--ts, 1));
+  letter-spacing:1.4px; text-transform:uppercase; color:var(--gold);
+  margin:16px 0 6px;
+}
+#info-popup-main .sp-head:first-child { margin-top:0; }
+/* The gap below is not decoration. The week's song sits under this line with
+   26px of its own, tuned so its link clears the reach of the prayer arrow
+   that used to be directly above it — and this button, standing between them
+   now, carries a 44px box that reaches 14px past its text and ate that
+   clearance. Ten more px hand it back, measured rather than guessed: the
+   song's link needs about 15px of clear air above it and 26 + 10 - 14 is 22. */
+.study-pray { margin-top:8px; margin-bottom:10px; }
+.study-pray-btn {
+  background:none; border:none; padding:14px 6px; margin:-14px -6px;
+  font-family:inherit; font-size:calc(10.5px * var(--ts, 1));
+  color:var(--ink-dim); font-style:italic; cursor:pointer; text-align:left;
+  position:relative; z-index:1; line-height:1.5;
+}
+.study-pray-btn:hover { color:var(--gold); text-decoration:underline; }
+
 .sefirah-name {
 font-family: 'Cinzel', serif;
 font-size: 11px;
@@ -4284,6 +4311,14 @@ content: ''; float: right; width: 30px; height: 1em;
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Noam Elimelech</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Beis Aharon</div>
     <div class="prayer-tag" data-prayer="5" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Tehilim</div>
+    <!-- The two said around learning rather than at an hour, so they carry no
+         data-prayer and are not marked: the heart counts the day's ten, and
+         these are the act's. They open their text rather than opening a
+         site, the way the ⓘ does. -->
+    <div class="study-pray">
+      <button type="button" class="study-pray-btn" onclick="openStudyPrayer()"
+              aria-label="The prayers before and after study">Study prayers</button>
+    </div>
     <!-- The week's song, under the prayer line. Its own 16px of air put its
          link inside the reach measured upward from it, where the arrow that
          opens the prayer now sits; ten more px stand the two controls clear. -->
@@ -24029,6 +24064,41 @@ content: ''; float: right; width: 30px; height: 1em;
   // Generic popup: shared by all daily-summary triggers (Likutei Moharan,
   // Ohr KiTov, …). Each feature keeps its own openXModal() wrapper so its
   // button's onclick stays simple, but all of them open the same modal.
+  // ── THE TWO PRAYERS OF STUDY ──
+  // Printed at the front of the Talmud, before the first page and after the
+  // last, and said around learning rather than at an hour of the day. So they
+  // are not an eleventh and twelfth of the ten: the ten are the day's, each
+  // with its own hour and its own place on the heart, and these two belong to
+  // the act. They sit in Gevurah's margin because Gevurah is where the app
+  // does its reading — the Written Torah, the Prophets and Writings at two
+  // chapters a day — and they are held here rather than linked, so they are
+  // there when the page is offline, which is where a sefer is wanted.
+  const STUDY_PRAYERS = {
+    before: { title: 'Prayer Before Study \u2014 \u05ea\u05e4\u05d9\u05dc\u05d4 \u05e7\u05d5\u05d3\u05dd \u05d4\u05dc\u05d9\u05de\u05d5\u05d3',
+              he: 'יְהִי רָצוֹן מִלְּפָנֶיךָ, יְהֹוָה אֱלֹהַי, שֶׁלֹּא יֶאֱרַע דְּבַר תַּקָּלָה עַל יָדִי, וְלֹא אֶכָּשֵׁל בִּדְבַר הֲלָכָה וְיִשְׂמְחוּ בִּי חֲבֵרַי, וְלֹא אֹמַר עַל טָמֵא טָהוֹר, וְלֹא עַל טָהוֹר טָמֵא, וְלֹא יִכָּשְׁלוּ חֲבֵרַי בִּדְבַר הֲלָכָה וְאֶשְׂמַח בָּהֶם. כִּי יְהֹוָה יִתֵּן חָכְמָה מִפִּיו דַּעַת וּתְבוּנָה. גַּל עֵינַי וְאַבִּיטָה נִפְלָאוֹת מִתּוֹרָתֶךָ.', en: 'May it be Your will, Hashem, my God, that a mishap not come about through me. And may I not stumble in a matter of law and cause my colleagues to rejoice over me. And may I not say regarding something which is tamei that it is tahor, and not regarding something which is tahor that it is tamei. And may my colleagues not stumble in a matter of law and I rejoice over them. For Hashem grants wisdom; from His mouth come knowledge and understanding. Unveil my eyes that I may perceive wonders from Your Torah.',
+              meta: 'Berachos 28b &middot; Mishlei 2:6 &middot; Tehilim 119:18' },
+    after:  { title: 'Prayer After Study \u2014 \u05ea\u05e4\u05d9\u05dc\u05d4 \u05dc\u05d0\u05d7\u05e8 \u05d4\u05dc\u05d9\u05de\u05d5\u05d3',
+              he: 'מוֹדֶה אֲנִי לְפָנֶיךָ, יְהֹוָה אֱלֹהַי, שֶׁשַּׂמְתָּ חֶלְקִי מִיּוֹשְׁבֵי בֵּית הַמִּדְרָשׁ וְלֹא שַׂמְתָּ חֶלְקִי מִיּוֹשְׁבֵי קְרָנוֹת; שֶׁאֲנִי מַשְׁכִּים וְהֵם מַשְׁכִּימִים: אֲנִי מַשְׁכִּים לְדִבְרֵי תוֹרָה וְהֵם מַשְׁכִּימִים לִדְבָרִים בְּטֵלִים; אֲנִי עָמֵל וְהֵם עֲמֵלִים: אֲנִי עָמֵל וּמְקַבֵּל שָׂכָר וְהֵם עֲמֵלִים וְאֵינָם מְקַבְּלִים שָׂכָר; אֲנִי רָץ וְהֵם רָצִים: אֲנִי רָץ לְחַיֵּי הָעוֹלָם הַבָּא וְהֵם רָצִים לִבְאֵר שַׁחַת. [שֶׁנֶּאֱמַר: וְאַתָּה אֱלֹהִים תּוֹרִדֵם לִבְאֵר שַׁחַת, אַנְשֵׁי דָמִים וּמִרְמָה לֹא יֶחֱצוּ יְמֵיהֶם, וַאֲנִי אֶבְטַח בָּךְ.]', en: 'I thank You, Hashem, my God, that You have established my portion with those who dwell in the study hall, and You have not established my portion with idlers; for I arise early and they arise early: I arise early for words of Torah, and they arise early for idle words; I toil and they toil: I toil and receive reward, and they toil and do not receive reward; I run and they run: I run to the life of the world to come, and they run to the pit of destruction. [As it is written: And You, O God, will lower them into the well of destruction; men of bloodshed and deceit shall not live out half their days; but as for me, I will trust in You.]',
+              meta: 'Berachos 28b &middot; Tehilim 55:24' }
+  };
+  // Both in one popup, as they are printed on one page: two stacked controls
+  // in a column this narrow could not each hold 44px without overlapping the
+  // other's reach, and they are a pair in any case — the sefer opens with the
+  // one and closes with the other.
+  function openStudyPrayer() {
+    const part = (e) =>
+      '<div class="sp-head">' + e.title + '</div>' +
+      '<div dir="rtl" lang="he" style="font-size:1.04em;line-height:2;text-align:right;">' + e.he + '</div>' +
+      '<div style="font-size:0.92em;color:var(--ink-mid);line-height:1.65;margin-top:6px;">' + e.en + '</div>';
+    openInfoPopup('The Prayers of Study',
+      part(STUDY_PRAYERS.before) + part(STUDY_PRAYERS.after),
+      'Berachos 28b &middot; Mishlei 2:6 &middot; Tehilim 119:18 and 55:24');
+    const pm = document.getElementById('info-popup-main');
+    const pt = document.getElementById('info-popup-title');
+    if (pm) { pm.dir = 'ltr'; pm.lang = 'en'; }
+    if (pt) pt.dir = 'ltr';
+  }
+
   function openInfoPopup(title, mainHtml, metaHtml) {
     document.getElementById('info-popup-title').textContent = title;
     document.getElementById('info-popup-main').innerHTML = mainHtml || '';
