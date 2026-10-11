@@ -17307,7 +17307,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // still unmarked, and the spine's next otherwise — the same two questions,
     // in the same order, that the Today block asks. The tag and the block must
     // name one step between them or the app is pointing two ways at once.
-    const hourIdx = (typeof _hourStepIdx === 'function') ? _hourStepIdx(0) : -1;
+    const hourIdx = (typeof _hourOrClimbIdx === 'function') ? _hourOrClimbIdx() : -1;
     const nextIdx = hourIdx >= 0 ? hourIdx : (sun ? (wnNext ? 14 + wnNext : -1)
                                                   : wxNext - 1);
     document.querySelectorAll('.maalah').forEach(el => {
@@ -19068,6 +19068,31 @@ content: ''; float: right; width: 30px; height: 1em;
     return -1;
   }
 
+  // ── WHAT THE APP IS ASKING FOR ON THE DAY ON SCREEN ──
+  // One answer, read by the Today block, by the lit tag in the cards and by
+  // Today's Path, so the three cannot name different steps.
+  //
+  // Inside the Mochin band the whole ascent is due at once — all fifteen taken
+  // together, which is what the band is for — so there the spine outranks the
+  // hour and the climb is offered in its own order, א׳ upward. Everywhere else
+  // the hour answers.
+  //
+  // Without the first rule the band was Keter's hour like any other and gave
+  // its three first: a reader following the line at Chatzot was walked י״ג,
+  // י״ד, ט״ו and then down to י׳ — the ladder climbed backwards in the one hour
+  // it belongs to. The About page says the ascent *arrives* in the hours of
+  // the Mochin, which means Keter is where it ends.
+  //
+  // Only while the climb is open. Once the moon is full the hour rule resumes
+  // at once, and in the band that is Keter's own מיעוט א׳–ג׳, where the return
+  // should begin.
+  function _hourOrClimbIdx() {
+    const spine = pathNextIdx(_maalotMaskFor(0), yomMask());
+    if (spine === -1) return -1;
+    if (spine < 15 && _inMaalotBand() && currentOffset === _stepDayOffset(spine)) return spine;
+    return _hourStepIdx(0);
+  }
+
   // Whether this hour had a portion and it is finished — which is the one case
   // where what follows is honestly called catching up. An hour that holds no
   // step of your path never asked for anything, so the step it falls back to is
@@ -19103,7 +19128,21 @@ content: ''; float: right; width: 30px; height: 1em;
   function _pathNow() {
     const idx = pathNextIdx(_maalotMaskFor(0), yomMask());
     if (idx === -1) return { off: 0, done: true };
-    const h = _hourStepIdx(0);
+    // ── THE BAND IS THE CLIMB'S HOUR, NOT KETER'S ──
+    // Inside the Mochin band the whole ascent is due at once — all fifteen
+    // taken together, which is what the band is for — so the spine outranks
+    // the hour there and the climb is offered in its own order, א׳ upward.
+    //
+    // Without this the band was Keter's hour like any other and offered its
+    // three first: a reader following the line at Chatzot was walked י״ג, י״ד,
+    // ט״ו and then down to י׳, climbing the ladder backwards in the one hour it
+    // belongs to. The About page says the ascent *arrives* in the hours of the
+    // Mochin; you reach Keter at the end of it, not at the start.
+    //
+    // Only while the climb is open. Once the moon is full the hour rule
+    // resumes at once, and in the band that is Keter's own מיעוט א׳–ג׳, which
+    // is where the return should begin.
+    const h = _hourOrClimbIdx();
     if (h >= 0) return { off: 0, idx: h, due: true };
     if (pathStepIsDue(idx)) return { off: 0, idx, due: true };
     if (currentOffset === 0) {
@@ -19813,7 +19852,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // The same two questions in the same order as the block and the tags: the
     // hour's own step first, the spine after. A list that tagged a different
     // step as next from the one the app was asking for would be a third answer.
-    const hourIdx = _hourStepIdx(0);
+    const hourIdx = _hourOrClimbIdx();
     const nextIdx = hourIdx >= 0 ? hourIdx : pathNextIdx(mMask, yMask);
     const dueNow = hourIdx >= 0 || pathStepIsDue(nextIdx);
     const whole = pathIsWhole();
