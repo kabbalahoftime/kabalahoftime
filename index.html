@@ -18566,6 +18566,20 @@ content: ''; float: right; width: 30px; height: 1em;
     { key: 'fifteen', name: 'Fifteen', group: 'size',
       sub: 'the ascent alone — Malchut up to Keter, the moon to full',
       steps: PATH_ALL.slice(0, 15) },
+    // The ascent alone had no counterpart, though the machinery has always
+    // served one: with no ma'alah undertaken, pathWaxNext answers 0 over an
+    // empty list, so the climb is finished before it starts, the gate stands
+    // open and the moon begins full and crowned. The advanced note already
+    // said as much — "a path of descent alone begins full and crowned at
+    // ט״ו" — and the only way to reach it was to pick fifteen steps by hand.
+    //
+    // It is the one path that opens at the full moon, which is what makes it
+    // worth offering: the thirty read from Keter down, Or Chozer with nothing
+    // ahead of it, the day's own direction. The gate it appears to skip it
+    // does not skip — there is simply no ascent to wait on.
+    { key: 'descent', name: 'Fifteen Down', group: 'size',
+      sub: 'the descent alone — Keter down to Malchut, the moon from full',
+      steps: PATH_ALL.slice(15) },
     { key: 'thirty', name: 'Thirty', sub: 'the month entire', group: 'size',
       steps: PATH_ALL.slice() },
 
