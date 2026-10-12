@@ -5728,12 +5728,36 @@ content: ''; float: right; width: 30px; height: 1em;
   // Uses the Molad-based fixed arithmetic calendar (Dershowitz & Reingold).
 
   function hebrewLeapYear(y) { return ((7 * y + 1) % 19) < 7; }
-  function hebrewElapsedDays(y) {
+  // The molad of Tishrei, and the one postponement that falls out of it.
+  // This is only half the calculation: on its own it can put Rosh Hashanah on
+  // a day that leaves the year an illegal length, which is what the correction
+  // below exists to repair. Nothing should call this directly.
+  function _hebrewMoladDay(y) {
     const mE = Math.floor((235 * y - 234) / 19);
     const p  = 12084 + 13753 * mE;
     let day  = mE * 29 + Math.floor(p / 25920);
     if ((3 * (day + 1)) % 7 < 3) day++;
     return day;
+  }
+  // The correction. A Hebrew year is 353, 354, 355, 383, 384 or 385 days and
+  // nothing else; the molad alone sometimes asks for 356 or 382, and these two
+  // rules push Rosh Hashanah off the day that would require it.
+  //
+  // This page went without them for a long time. The result was nine illegal
+  // years between 5700 and 5900 — eight of 356 days, one of 382 — and in a
+  // 356-day year the months only add to 354, so two days had no month to fall
+  // in and the last date of the year repeated: 7, 8 and 9 September 2029 all
+  // came out as Elul 29. It also gave 5788 Cheshvan and Kislev of 29 days each
+  // where the published calendar has 30 and 30, which moved every Hebrew date
+  // from Cheshvan 5788 to Elul 5789, and again across 5795–5796.
+  //
+  // Dates before 30 November 2027 are unaffected, so nothing on this page's
+  // own count of the years it was built in has moved.
+  function hebrewElapsedDays(y) {
+    const self = _hebrewMoladDay(y);
+    if (_hebrewMoladDay(y + 1) - self === 356) return self + 2;
+    if (self - _hebrewMoladDay(y - 1) === 382) return self + 1;
+    return self;
   }
   function hebrewYearDays(y) {
     return hebrewElapsedDays(y + 1) - hebrewElapsedDays(y);

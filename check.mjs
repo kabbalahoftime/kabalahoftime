@@ -333,6 +333,43 @@ async function checkInBrowser(chromium) {
               `(${zoh.gaps} weeks the Zohar does not comment on, named without a link)`);
   }
 
+  // hebrew calendar — a year has one of six legal lengths and its months add up
+  // to it. The molad arithmetic alone does not guarantee either: without the
+  // correction that follows it, 5789 and 5796 came out 356 days long, the months
+  // summed to 354, and the two days left over made Elul 29 repeat three times.
+  console.log('\nhebrew calendar');
+  const cal = await page.evaluate(() => {
+    const LEGAL = [353, 354, 355, 383, 384, 385];
+    const badLen = [], badSum = [], badRepeat = [];
+    for (let y = 5700; y <= 5900; y++) {
+      const len = hebrewElapsedDays(y + 1) - hebrewElapsedDays(y);
+      if (!LEGAL.includes(len)) badLen.push(`${y}: ${len} days`);
+      let sum = 0;
+      for (const m of [7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4, 5, 6]) {
+        if (m === 13 && !hebrewLeapYear(y)) continue;
+        sum += daysInHebMonth(m, y);
+      }
+      if (sum !== len) badSum.push(`${y}: months sum to ${sum}, year is ${len}`);
+    }
+    // and no civil day may repeat a Hebrew date, across a decade of real days
+    const seen = new Set();
+    const d = new Date(2025, 8, 23);
+    for (let i = 0; i < 3700; i++) {
+      const h = gregToHebrew(d);
+      const key = `${h.year}-${h.month}-${h.day}`;
+      if (seen.has(key)) badRepeat.push(`${d.toISOString().slice(0, 10)} repeats ${key}`);
+      seen.add(key);
+      d.setDate(d.getDate() + 1);
+    }
+    return { badLen, badSum, badRepeat, years: 201 };
+  });
+  cal.badLen.slice(0, 5).forEach(m => fail(`Hebrew year of an impossible length — ${m}`));
+  cal.badSum.slice(0, 5).forEach(m => fail(`Hebrew year's months do not fill it — ${m}`));
+  cal.badRepeat.slice(0, 5).forEach(m => fail(`a Hebrew date falls on two civil days — ${m}`));
+  if (!cal.badLen.length && !cal.badSum.length && !cal.badRepeat.length)
+    pass(`all ${cal.years} years 5700-5900 are a legal length and their months fill them, ` +
+         `and no Hebrew date repeats across 3,700 days`);
+
   // perek shirah — every week's creature has its song, keyed by the same name
   console.log('\nperek shirah');
   const ps = await page.evaluate(() => {
