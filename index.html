@@ -21666,15 +21666,30 @@ content: ''; float: right; width: 30px; height: 1em;
     const lmLinkI_Maimon  = `<a href="https://www.breslovtorah.com/series/likutey-moharan-1/" target="_blank" style="color:var(--gold)">LM I — R. Maimon</a>`;
     const lmLinkII_Maimon = `<a href="https://www.breslovtorah.com/series/likutey-moharan-2-tinyana/" target="_blank" style="color:var(--gold)">LM II — R. Maimon</a>`;
 
-    document.getElementById('lm-trigger').style.display = lmInfos.length ? '' : 'none';
-    if (lmInfos.length) {
-      // The lesson label itself is the link, matching the card face
-      _lmDetailMain = lmInfos.map(({ daily, info }) =>
-        `${info.url ? `<a href="${info.url}" target="_blank" style="color:var(--gold)">${info.label}</a>` : info.label}` +
-        `<span class="dsum">${daily.summary}</span>`
-      ).join('<br><br>');
-      _lmDetailMeta = '';
-    }
+    // ── THE DAILY SUMMARIES ARE NOT SHOWN ──
+    // LM_DAILY_CYCLE's summary field describes the calendar day rather than
+    // the lesson. Of its 364 entries, 268 open "for the 14th of Tishrei…"
+    // before saying anything else, 114 say "we" or "our" — which no summary of
+    // a text does — and the Tishrei run is festival copy outright: lesson 28's
+    // summary is "for Simchat Torah. About the joy of the cycle. We finish and
+    // immediately restart." That is the day, not the Torah.
+    //
+    // It shows in how the two tables were built. LM_THEMES carries a Sefaria
+    // link on all 149 of its entries and was plainly written with the text
+    // open; LM_DAILY_CYCLE carries three links in 364 and was written down the
+    // calendar. Where the date was unremarkable something lesson-shaped got
+    // written; where the date had an identity of its own, the date filled the
+    // space. For the 115 lessons both tables cover, the median overlap between
+    // them is four content-words, and across the Sukkot run it is zero.
+    //
+    // So the popup is off and the trigger with it. Nothing is deleted: the
+    // field stands in the table, to be replaced lesson by lesson against the
+    // text. Until then the card shows what it can stand behind — which lesson
+    // today is, and a link to read it. LM_THEMES is untouched and still feeds
+    // the Daily Script.
+    document.getElementById('lm-trigger').style.display = 'none';
+    _lmDetailMain = '';
+    _lmDetailMeta = '';
 
     // For the Daily Script share text — summarize just the first lesson of the day
     const lmFirst        = lmInfos[0];
