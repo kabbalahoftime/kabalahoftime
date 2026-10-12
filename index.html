@@ -8026,15 +8026,20 @@ content: ''; float: right; width: 30px; height: 1em;
 
   // ── PEREK SHIRAH — the elements of Chapters 1-3 ──
   // The Kabbalah of Time appendix "Hebrew Alphabet, Perek Shirah, and Pirkei
-  // Avot" gives each 11-day half of an Alef-Bet set its element: the sky and
-  // its waters for the 22 letters, the trees and grains for the finals, the
-  // grasses for the vowels. So these run one for one with TRACTATE_CYCLES
-  // below, and the ids are kept alongside to say so. Set 8 — Samech and Ayin
-  // — is the one set the appendix gives a single element, the Stars, and both
-  // of its halves carry it. Chapter 2 is the reason: eleven entries, every one
-  // paired but that one, and it falls in Adar, the month that doubles. Chapter
-  // 3 has the mirror of it — eleven again, five pairs and the Grasses alone,
-  // which is why the thirty-third half stands by itself.
+  // Avot" gives each letter of an Alef-Bet set its element: the sky and its
+  // waters for the 22 letters, the trees and grains for the finals, the
+  // grasses for the vowels. Alef and Bet are the Heavens and the Earth;
+  // Gimmel and Dalet are the Garden of Eden and Gehinnom. So a 22-day set
+  // holds two, one for each of the two letters it is named by — sixteen pairs
+  // and a last one, which is the thirty-three. They are stored on the same
+  // slots as TRACTATE_CYCLES below, ids alongside to say so, because the
+  // leap-year microcosm reads both off one index; but the tractate moves at
+  // eleven days and the element does not. Set 8 — Samech and Ayin — is the
+  // one set the appendix gives a single element, the Stars, so both of its
+  // slots carry it and the card shows it once. Chapter 2 is the reason:
+  // eleven entries, every one paired but that one, and it falls in Adar, the
+  // month that doubles. Chapter 3 has the mirror of it — eleven again, five
+  // pairs and the Grasses alone, which is why set 17 stands by itself.
   //
   // Checked against the booklet itself, in full: all 33 elements here and all
   // 52 creature songs in PEREK_SHIRAH_VERSES, verse text and citation both,
@@ -22349,10 +22354,26 @@ content: ''; float: right; width: 30px; height: 1em;
     // Unlabelled, like the reference beside it: the link at the head of this
     // block already reads "Hebrew Alphabet, Perek Shirah, and Pirkei Avot", so
     // naming it again on the line only cost the width the element needed.
-    // The half's element of Perek Shirah, from the same appendix as the letters
-    // and the mishnah. In the microcosm a day can hold two halves, and so two
-    // elements — the trees and the vine on one day.
-    const psElems = halfIdx.map(i => PEREK_SHIRAH_ELEMENTS[i]).filter(Boolean);
+    //
+    // Perek Shirah goes by the set, not by a half of it. The appendix's
+    // elements run one to a letter — Alef and Bet are the Heavens and the
+    // Earth, Gimmel and Dalet are the Garden of Eden and Gehinnom — so the two
+    // elements of a 22-day set belong to its two letters, the way the letters
+    // themselves are named on the face all 22 days. There is no 11-day cycle
+    // here to hang them on: the thirty-three entries are sixteen pairs and a
+    // last one, not thirty-three periods. Set 8 is the proof — Samech and Ayin
+    // share a single element, the Stars, which is why both of its entries
+    // carry it and why ALEF_BET names the set "The Stars — both halves".
+    //
+    // Set 17, the vowels, has one letter and one element. Set 8's two are the
+    // same element twice, so it is shown once. The tractate and the Song of the
+    // Well keep the eleven-day step below: their text is written against the
+    // dates it names, Rosh Hashanah to Yom Kippur to Sukkot.
+    const psIdx = (inExtra && cy22Mic) ? halfIdx
+      : cy22.cycle >= 17 ? [32]
+      : [(cy22.cycle - 1) * 2, (cy22.cycle - 1) * 2 + 1];
+    const psElems = psIdx.map(i => PEREK_SHIRAH_ELEMENTS[i]).filter(Boolean)
+      .filter((p, i, a) => a.findIndex(q => q.el === p.el) === i);
     // The reference is bare — 21:20, not Bamidbar 21:20 — for the same reason
     // the Perek Shirah line above it reads "Ch 3": the label has already named
     // the book. Naming it here pushed the reference onto a line of its own and
@@ -22395,8 +22416,9 @@ content: ''; float: right; width: 30px; height: 1em;
           `<span class="kot-summary" role="button" tabindex="0" onclick="openLettersModal()">${_ltNames} ▾</span></div>`
         : '');
 
-    // The element and its song, shown under the tractate in either branch —
-    // the appendix keeps letter, mishnah and element on the same eleven days.
+    // The elements and their songs, shown under the tractate in either branch.
+    // Both of the set's, since both of its letters are its own — which is why
+    // a day here can carry two songs where the tractate carries one.
     const psElemHtml = psElems.length
       ? `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Perek Shirah — ${psElems.map(p => p.ch).filter((c, i, a) => a.indexOf(c) === i).join(' · ')}</div>
@@ -22404,7 +22426,7 @@ content: ''; float: right; width: 30px; height: 1em;
         `<div class="detail-row"><span class="detail-label">Element:</span><span class="detail-value"><strong>${p.el}</strong> <span style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em">${p.heb}</span></span></div>
          <div class="detail-row"><span class="detail-label">Song:</span><span class="detail-value"><span style="font-style:italic">${p.verse}</span> <span style="color:var(--ink-dim);font-size:0.85em">${p.src}</span></span></div>`
       ).join('<div style="height:8px"></div>') +
-        `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Chapters 1–3 of Perek Shirah sing before any creature does — the sky and its waters through the 22 letters, the trees and the grains through the five finals, the grasses at the vowels. One element to each half of a set, eleven days apiece.</div>`
+        `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">Chapters 1–3 of Perek Shirah sing before any creature does — the sky and its waters through the 22 letters, the trees and the grains through the five finals, the grasses at the vowels. One element to each letter, so a set sings with both of its own for all 22 days.</div>`
       : '';
 
     // The Ramak keeps the count he was given on Tiferet — three of the

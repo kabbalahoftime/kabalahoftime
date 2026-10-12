@@ -350,9 +350,13 @@ async function checkInBrowser(chromium) {
         out.thin.push(`${a}: ${JSON.stringify(v).slice(0, 70)}`);
     }
     out.unused = Object.keys(PEREK_SHIRAH_VERSES).filter(k => !used.has(k));
-    // The elements of Chapters 1-3 run one for one with the 33 tractate halves;
-    // if the two lists ever slip apart the Chochmah card names the wrong element
-    // for the wrong eleven days, and nothing on the page would say so.
+    // The elements of Chapters 1-3 share their 33 slots with the tractates, so
+    // the ids must stay aligned — the leap-year microcosm reads both off the
+    // same index. But the element itself goes by the 22-day set, not by an
+    // eleven-day half of one: the two elements of a set belong to its two
+    // letters, and the card names both for all 22 days. So each set must hold
+    // a full pair, and the pair must sit in one chapter, because the face
+    // prints a single "Ch n" for the two of them.
     out.elems = { n: PEREK_SHIRAH_ELEMENTS.length, halves: TRACTATE_CYCLES.length, bad: [] };
     PEREK_SHIRAH_ELEMENTS.forEach((p, i) => {
       const t = TRACTATE_CYCLES[i];
@@ -362,6 +366,15 @@ async function checkInBrowser(chromium) {
         out.elems.bad.push(`${p.id}: incomplete — ${JSON.stringify(p).slice(0, 70)}`);
       if (!/^[֐-׿\s]+$/.test(p.heb || '')) out.elems.bad.push(`${p.id}: "${p.heb}" is not Hebrew`);
     });
+    out.sets = { n: 0, bad: [] };
+    for (let c = 1; c <= 17; c++) {
+      const want = c === 17 ? ['17a'] : [`${c}a`, `${c}b`];
+      const got = want.map(id => PEREK_SHIRAH_ELEMENTS.find(p => p.id === id));
+      if (got.some(g => !g)) { out.sets.bad.push(`set ${c}: missing ${want.filter((id, i) => !got[i]).join(', ')}`); continue; }
+      const chs = [...new Set(got.map(g => g.ch))];
+      if (chs.length > 1) out.sets.bad.push(`set ${c}: ${got.map(g => g.el).join(' & ')} straddle ${chs.join(' and ')}`);
+      out.sets.n++;
+    }
     return out;
   });
   ps.missing.forEach(m => fail(`no Perek Shirah verse for ${m}`));
@@ -370,10 +383,13 @@ async function checkInBrowser(chromium) {
   if (!ps.missing.length && !ps.thin.length && !ps.unused.length)
     pass(`all ${ps.weeks} weekly creatures have their song, and none is unreachable`);
   if (ps.elems.n !== ps.elems.halves)
-    fail(`${ps.elems.n} Perek Shirah elements against ${ps.elems.halves} eleven-day halves`);
+    fail(`${ps.elems.n} Perek Shirah elements against ${ps.elems.halves} tractate slots`);
   ps.elems.bad.forEach(m => fail(`Perek Shirah element — ${m}`));
   if (ps.elems.n === ps.elems.halves && !ps.elems.bad.length)
-    pass(`all ${ps.elems.n} eleven-day halves have their element, aligned with the tractate cycle`);
+    pass(`all ${ps.elems.n} Perek Shirah elements sit on the tractate cycle's own slots`);
+  ps.sets.bad.forEach(m => fail(`Perek Shirah set — ${m}`));
+  if (!ps.sets.bad.length)
+    pass(`all ${ps.sets.n} Alef-Bet sets hold their elements — a pair each, one chapter apiece, and one for the vowels`);
 
   // ── alef-bet — the 22-day cycle stays inside its 17 sets, every day of every
   // year. The count is 16 × 22 + 12 = 364, so a set number above 17 means the
