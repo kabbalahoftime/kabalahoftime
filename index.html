@@ -8598,6 +8598,226 @@ content: ''; float: right; width: 30px; height: 1em;
     return { day: d, m: halachaUnit(d * 2 - 1), a: halachaUnit(d * 2) };
   }
 
+  // ── CHOFETZ CHAIM YOMI — a reading of the sefer every day ─────────────────
+  // The Chofetz Chaim Heritage Foundation's "A Lesson A Day" calendar, which
+  // Rav Daniel Glatstein records daily. Not the 31 half-days above: that is
+  // this page's own reading of the sefer at the tail of the Shulchan Aruch
+  // sweep. This is the published cycle, and it runs three times a year.
+  //
+  // The cycle is 118 readings. A regular year is 119 + 118 + 118 = 355, the
+  // first cycle padded with the Preface's seventh paragraph. A leap year needs
+  // thirty days more, and the publisher makes them by spreading ten of the
+  // readings over two days apiece: 129 + 128 + 128 = 385. The same shiur
+  // serves both halves of a split, which is why the playlist has no video for
+  // the extra days.
+  //
+  // Checked against the printed calendars for 5787 (leap, 385 days) and 5788
+  // (regular, 355): generating 5787 from this table reproduces all 385 of its
+  // rows exactly, and the ten readings 5788 drops are precisely the second
+  // halves of the ten splits. The videos were gathered from the playlist one
+  // by one and each verified against the reading it names.
+  //
+  // One correction to the printed calendar. In 5787 the day after Loshon Hara
+  // 4:12 prints as "Loshon Hara 4 | 1", which cannot be: klal 4 has just ended
+  // and klal 5 opens at se'if 2 with no se'if 1 anywhere in the year. The video
+  // covering that day is titled "4:12, 5:1", and 5788 drops the reading
+  // altogether. It is Loshon Hara 5:1, and it is given that way here.
+  // The 118 readings of the cycle, in order, each with the video Rav Daniel
+  // Glatstein recorded for it. The 119th entry, the Preface's V'Al Yefalai,
+  // is the padding day: it is read once a year, in the first cycle only.
+  const CC_YOMI = [
+    ['Preface',        'Baruch',              'ila2SqRWHJA'],
+    ['Preface',        "V'Caasher Nachp'sha", 'X3zOMUhYeJI'],
+    ['Preface',        "V'nireh Pashut",      'x1Xt2go46Hs'],
+    ['Preface',        'Vaachashva',          'WRpEiogQvQA'],
+    ['Preface',        'Al Cain',             '1OoKGr2Rg5o'],
+    ['Preface',        'Vaachale Lakorai',    'owtfpBgN5Sw'],
+    ['Preface',        "V'Al Yefalai",        'ZTDznQYAS0I'],
+    ['Introduction',   "B'ahavas Hashem",     'ty_htktpaUU'],
+    ['Introduction',   'Umepnai',             'RicmlGwZSmQ'],
+    ['Negative',       '1',                   'U9icK_XnCAk'],
+    ['Negative',       '3',                   '-wHs3UteFXg'],
+    ['Negative',       '5',                   'f6DFw9hoOP8'],
+    ['Negative',       '7',                   'ALvX_L_HMqE'],
+    ['Negative',       '10',                  '_VQLldPULCM'],
+    ['Negative',       '12',                  'J0qe6FOqtB4'],
+    ['Negative',       '14',                  'WAATYS9sqvw'],
+    ['Negative',       '16',                  '7ljNzIlStIc'],
+    ['Positive',       '1',                   'R37apucA4Lc'],
+    ['Positive',       '3',                   'r8_SN6vxRBM'],
+    ['Positive',       '5',                   'EF6N_Z-Ft1o'],
+    ['Positive',       '7',                   'zof-dPXIF-w'],
+    ['Positive',       '9',                   '9DTzqMa7-zQ'],
+    ['Positive',       '11',                  'PHQ6Np3mLh0'],
+    ['Positive',       '13',                  '6iPLdYik6Ag'],
+    ['Curses',         '1',                   'qQTNb5jFxzg'],
+    ['Loshon Hara 1',  '1',                   'X1WnLukIIdI'],
+    ['Loshon Hara 1',  '3',                   'JepdU0eRRdk'],
+    ['Loshon Hara 1',  '5',                   'Whi5JjFlEAg'],
+    ['Loshon Hara 1',  '7',                   'unNzw-GQUv0'],
+    ['Loshon Hara 2',  '1',                   'WTO28TvtsM8'],
+    ['Loshon Hara 2',  '3',                   'U_H771zKYvQ'],
+    ['Loshon Hara 2',  '5',                   'PCGU_L-5yVU'],
+    ['Loshon Hara 2',  '7',                   '2sEYoSoVBnI'],
+    ['Loshon Hara 2',  '9',                   'mvS2i8AZGC0'],
+    ['Loshon Hara 2',  '11',                  '31lVkcLLTiw'],
+    ['Loshon Hara 2',  '12',                  'HkT3sMXMBBM'],
+    ['Loshon Hara 3',  '1',                   'ZOlD-wv9osk'],
+    ['Loshon Hara 3',  '3',                   'Lr1PolTmR1o'],
+    ['Loshon Hara 3',  '5',                   'SvjhluK_k4g'],
+    ['Loshon Hara 3',  '7',                   'sj2otw7EvGY'],
+    ['Loshon Hara 4',  '1',                   'kke9dMo3Twg'],
+    ['Loshon Hara 4',  '3',                   'LfXhgLN5jN8'],
+    ['Loshon Hara 4',  '5',                   'W7HOafd4F2U'],
+    ['Loshon Hara 4',  '7',                   'kx7rGn0MN8U'],
+    ['Loshon Hara 4',  '9',                   'NdWSe5ScL_8'],
+    ['Loshon Hara 4',  '11',                  'bOq5TQIoJfo'],
+    ['Loshon Hara 4',  '12',                  '8KMYM08Z2-Y'],   // splits in a leap year
+    ['Loshon Hara 5',  '2',                   'x1BazkyiZ-k'],   // splits in a leap year
+    ['Loshon Hara 5',  '5',                   'RteGIGwvxCc'],
+    ['Loshon Hara 5',  '7',                   'm1WFJPNeqg4'],
+    ['Loshon Hara 6',  '1',                   'uXmQCJWNdpc'],
+    ['Loshon Hara 6',  '3',                   'ZlPyv4V0QQA'],
+    ['Loshon Hara 6',  '5',                   'LZOtQBJZKek'],
+    ['Loshon Hara 6',  '7',                   'P0V9iT3JEaM'],
+    ['Loshon Hara 6',  '9',                   'GWM6UJyGNeI'],
+    ['Loshon Hara 6',  '11',                  'lrnwl5ujV6Q'],
+    ['Loshon Hara 7',  '1',                   '2rdT2ondXHE'],
+    ['Loshon Hara 7',  '3',                   'PXhpm17OIe8'],
+    ['Loshon Hara 7',  '5',                   'bVtBWlunUME'],
+    ['Loshon Hara 7',  '7',                   'Ou5T9ycPXHs'],
+    ['Loshon Hara 7',  '9',                   'JX1MZ5GbtxA'],
+    ['Loshon Hara 7',  '10',                  'vwuaIhnAsDU'],   // splits in a leap year
+    ['Loshon Hara 7',  '13',                  'eOuROYBM1ik'],
+    ['Loshon Hara 8',  '1',                   'pw3N_WsCQlc'],
+    ['Loshon Hara 8',  '3',                   '3HPBudDxP74'],
+    ['Loshon Hara 8',  '5',                   'I49BOrrDrPM'],   // splits in a leap year
+    ['Loshon Hara 8',  '8',                   'EqnBKedGG-8'],
+    ['Loshon Hara 8',  '10',                  'k9JLQirN0vg'],
+    ['Loshon Hara 8',  '12',                  'j8ShnW1rC14'],
+    ['Loshon Hara 8',  '13',                  '2f6jvshvq3E'],
+    ['Loshon Hara 9',  '1',                   'StCha0Dl5K0'],
+    ['Loshon Hara 9',  '3',                   'wvoNVq32d_c'],
+    ['Loshon Hara 9',  '5',                   'LdB8-CN6iEo'],
+    ['Loshon Hara 10', '1',                   'b7jMhMlAG0k'],
+    ['Loshon Hara 10', '3',                   'J4v0p4C_d54'],   // splits in a leap year
+    ['Loshon Hara 10', '5',                   'WHjIrQrS6qM'],
+    ['Loshon Hara 10', '7',                   'mMxUHUAlj9s'],
+    ['Loshon Hara 10', '9',                   '80icrGd1dv8'],
+    ['Loshon Hara 10', '11',                  'THP7DjW16Vg'],
+    ['Loshon Hara 10', '13',                  'dO4uOVfkW30'],   // splits in a leap year
+    ['Loshon Hara 10', '15',                  'umn-s8Dpu6Q'],
+    ['Loshon Hara 10', '17',                  'u_HzIuFI2bE'],
+    ['Rechilus 1',     '1',                   'PF5Qqh3glKs'],   // splits in a leap year
+    ['Rechilus 1',     '4',                   '0-8q8A0e95g'],
+    ['Rechilus 1',     '6',                   '5tkKItDZEtQ'],
+    ['Rechilus 1',     '8',                   'j1b-eeeZrS0'],
+    ['Rechilus 1',     '10',                  '9IRKHB0Tc3E'],
+    ['Rechilus 2',     '1',                   'O4xY9lMVArU'],
+    ['Rechilus 2',     '3',                   'ozZg6qoH0FY'],
+    ['Rechilus 3',     '1',                   'QSkV6WpBTBU'],
+    ['Rechilus 3',     '2',                   'zRqBsNDl8Fs'],
+    ['Rechilus 4',     '1',                   'hSSiMCMKk1Y'],
+    ['Rechilus 5',     '1',                   'XI98-1-TOA4'],
+    ['Rechilus 5',     '3',                   'SG8Gd523K-s'],
+    ['Rechilus 5',     '5',                   'kFNvDtZ-Th0'],
+    ['Rechilus 5',     '6',                   'PA_1UvZO0m4'],
+    ['Rechilus 6',     '1',                   'Ef-ryiB27Gk'],
+    ['Rechilus 6',     '3',                   'WS4Lf7PFbd0'],
+    ['Rechilus 6',     '5',                   '3Q-BcLOAKyA'],   // splits in a leap year
+    ['Rechilus 6',     '8',                   'SeHOUwQSPLE'],   // splits in a leap year
+    ['Rechilus 7',     '1',                   '-KgpXeSJfD0'],
+    ['Rechilus 7',     '2',                   'ph8EaTiD6gE'],
+    ['Rechilus 7',     '3',                   'StEbtbaCymo'],
+    ['Rechilus 7',     '5',                   'Q7HDvH1_WbA'],
+    ['Rechilus 8',     '1',                   '4MouANtoZKE'],
+    ['Rechilus 8',     '4',                   'TX_8BiCqtF4'],
+    ['Rechilus 9',     '1',                   'YDhVKddM444'],
+    ['Rechilus 9',     '3',                   'ZKizezLqjc0'],
+    ['Rechilus 9',     '5',                   'fkA7C1o8-zI'],
+    ['Rechilus 9',     '7',                   'LF19XlHoGwo'],
+    ['Rechilus 9',     '10',                  'xwxY1kgGLJw'],
+    ['Rechilus 9',     '11',                  '7G940I0BnbU'],
+    ['Rechilus 9',     '13',                  'f-RRFf1ug-o'],
+    ['Rechilus 9',     '14',                  'gppjB7m8IT8'],
+    ['Tziurim',        '1',                   'M2wJlQszof4'],   // splits in a leap year
+    ['Tziurim',        '4',                   'pmxCADVd7KI'],
+    ['Tziurim',        '6',                   'eeRjJ9e8UAA'],
+    ['Tziurim',        '8',                   'wBH0iWRZRp8'],
+    ['Tziurim',        '10',                  'fhq7TB-xdQk'],
+  ];
+  // In a leap year ten of those readings are spread over two days, the same
+  // video serving both. These are the second days, keyed by the index of the
+  // reading they follow. The printed 5788 calendar drops exactly these ten.
+  const CC_YOMI_SPLIT = {
+     46: ['Loshon Hara 5', '1'],
+     47: ['Loshon Hara 5', '3'],
+     61: ['Loshon Hara 7', '11'],
+     65: ['Loshon Hara 8', '7'],
+     74: ['Loshon Hara 10', '4'],
+     79: ['Loshon Hara 10', '14'],
+     82: ['Rechilus 1', '3'],
+     98: ['Rechilus 6', '7'],
+     99: ['Rechilus 6', '10'],
+    114: ['Tziurim', '3'],
+  };
+  // The cycle for a year: the padding day only when the year has room for it,
+  // and the splits only in a leap year.
+  function _ccCycle(leap, pad) {
+    const out = [];
+    CC_YOMI.forEach((row, i) => {
+      if (row[1] === "V'Al Yefalai" && !pad) return;
+      out.push(row);
+      if (leap && CC_YOMI_SPLIT[i]) out.push([CC_YOMI_SPLIT[i][0], CC_YOMI_SPLIT[i][1], row[2]]);
+    });
+    return out;
+  }
+  // Three cycles against the year's own length. 355 and 385 leave exactly one
+  // day over, which is the padding; 354 and 384 leave none; 353 and 383 fall a
+  // day short, and the year closes one reading early. Only the first two are
+  // attested by a printed calendar — the others follow the same rule, which is
+  // the most this page can honestly do without another year's calendar.
+  //
+  // The length comes from gregToHebrew, and that is the limit of this feature.
+  // For 5786 and 5787 it agrees with the printed calendars exactly. From 5788
+  // it does not: it gives Cheshvan and Kislev 29 days each where the published
+  // calendar has 30 and 30, making the year 353 rather than 355, and it reports
+  // 5789 and 5796 as 356 days, which no Hebrew year can be. Until that is
+  // settled the reading named here will drift from the printed calendar in
+  // those years. It is right for the year this was built in and the next.
+  function ccYomiFor(hYear, hMonth, hDay) {
+    const t1 = hebrewToD(hYear, 7, 1);
+    const doy = hebrewToD(hYear, hMonth, hDay) - t1 + 1;
+    const len = hebrewToD(hYear + 1, 7, 1) - t1;
+    if (doy < 1 || doy > len) return null;
+    const leap = hebrewLeapYear(hYear);
+    const plain = _ccCycle(leap, false);
+    const first = _ccCycle(leap, len - 3 * plain.length >= 1);
+    const year = first.concat(plain, plain).slice(0, len);
+    const row = year[doy - 1];
+    if (!row) return null;
+    const cyc = doy <= first.length ? 1 : (doy <= first.length + plain.length ? 2 : 3);
+    return { section: row[0], seif: row[1], video: row[2], day: doy, cycle: cyc, of: len };
+  }
+  // The reading's name, and the page it opens. Node names are only ever ones
+  // already proven on this page: the Petichah for everything up to the curses,
+  // chofetzKlalUrl for the nineteen klalim, and the Illustrations for the
+  // Tziurim. Nothing here is guessed at.
+  function ccYomiLabel(r) {
+    const m = r.section.match(/^(Loshon Hara|Rechilus) (\d+)$/);
+    if (m) {
+      const n = +m[2] + (m[1] === 'Rechilus' ? 10 : 0);
+      return { text: `${m[1]} ${m[2]} &middot; ${r.seif}`, url: chofetzKlalUrl(n) };
+    }
+    if (r.section === 'Tziurim')
+      return { text: `Tziur ${r.seif}`,
+               url: `https://www.sefaria.org/Chafetz_Chaim,_Illustrations,_Illustration_${r.seif}?lang=bi` };
+    const named = { Preface: 'Preface', Introduction: 'Pesicha', Curses: 'Arurin',
+                    Negative: "La'avin", Positive: 'Asin' }[r.section] || r.section;
+    const num = /^\d+$/.test(r.seif) ? ` &middot; ${r.seif}` : ` &middot; ${r.seif}`;
+    return { text: named + num, url: CHOFETZ_INTRO_URL };
+  }
+
   // ── TANNA D'VEI ELIYAHU — 56 chapters over the 728 half-days ──────────────
   // Eliyahu Rabbah's 31 chapters and Eliyahu Zuta's 25 are 56 together, and
   // 56 × 13 = 728 exactly: one chapter to every thirteen half-days. Thirteen
@@ -23737,11 +23957,24 @@ content: ''; float: right; width: 30px; height: 1em;
 
     const hodCcHtml =
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">\u2726 Daily Chofetz Chaim <span class="maalah yom" data-wane="11">\u05de\u05d9\u05e2\u05d5\u05d8 \u05d9\u05f4\u05d0</span></div>` +
+      // Today's reading, and the shiur recorded for it. On the ten leap-year
+      // days that share a shiur with the day before, the link is the same one
+      // — which is the publisher's own arrangement, not a gap here.
+      (() => {
+        const r = ccYomiFor(hYear, hMonth, hDay);
+        if (!r) return '';
+        const lab = ccYomiLabel(r);
+        return `<div style="font-size:0.95rem;margin-bottom:6px;">` +
+          `<a href="${lab.url}" target="_blank" style="color:var(--gold)"><strong>${lab.text}</strong></a>` +
+          ` &nbsp;·&nbsp; <a href="https://www.youtube.com/watch?v=${r.video}" target="_blank" style="color:var(--gold)">shiur ↗︎</a>` +
+          `<div style="font-size:0.78rem;color:var(--ink-dim);margin-top:2px;">` +
+          `Day ${r.day} of ${r.of} &middot; cycle ${r.cycle} of 3 &middot; R. Daniel Glatstein</div></div>`;
+      })() +
       `<div style="font-size:0.88rem;line-height:2;">` +
       // Given rather than derived. youtube.com is blocked at this environment's
       // proxy, so the address has not been opened from here; it is as supplied,
       // with the ampersand escaped so the attribute is well formed.
-      `<a href="https://youtube.com/playlist?list=PLJpenQiEURu2UENIdxVTZsQd_dWaUMsAO&amp;si=fFs9z6cvJObmevc8" target="_blank" style="color:var(--gold)">Chofetz Chaim Yomi</a><br>` +
+      `<a href="https://youtube.com/playlist?list=PLJpenQiEURu2UENIdxVTZsQd_dWaUMsAO&amp;si=fFs9z6cvJObmevc8" target="_blank" style="color:var(--gold)">Chofetz Chaim Yomi — the whole playlist</a><br>` +
       `<a href="http://www.dafaweek.com/Links/CC_Calendar.html?SelYearH=${hYear}" target="_blank" style="color:var(--gold)">Daily Chofetz Chaim</a><br>` +
       `<a href="https://www.sefaria.org/Chafetz_Chaim?tab=contents" target="_blank" style="color:var(--gold)">Chafetz Chaim on Sefaria</a><br>` +
       `<a href="https://torahcasts.com/rabbi-bentzy-rosenberg/" target="_blank" style="color:var(--gold)">Rabbi Bentzy Rosenberg \u2014 TorahCasts \u00b7 Class ${ccDay}</a>` +
