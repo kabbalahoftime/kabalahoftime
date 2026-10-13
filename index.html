@@ -23807,7 +23807,7 @@ content: ''; float: right; width: 30px; height: 1em;
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">\u2721 Further Reading</div>` +
       `<div style="font-size:0.88rem;line-height:2;">` +
-      `<a href="https://www.sefaria.org/Netzach_Yisrael?tab=contents" target="_blank" style="color:var(--gold)">Netzach Yisrael \u2014 Maharal</a><br>` +
+      `<a href="https://www.sefaria.org/topics/maharal?sort=Relevance&amp;tab=author-works-on-sefaria" target="_blank" style="color:var(--gold)">Maharal \u2014 Netzach Yisrael and the rest</a><br>` +
       `<a href="https://www.sefaria.org/Shenei_Luchot_HaBerit?tab=contents" target="_blank" style="color:var(--gold)">Shenei Luchot HaBerit \u2014 the Shelah</a>` +
       `</div>`;
     if (inLeapCycle) {
@@ -23906,13 +23906,18 @@ content: ''; float: right; width: 30px; height: 1em;
         : '') +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
 
+    // The ✡ is load-bearing: _paneKind reads it to decide which pane a detail
+    // block belongs to, and a block it cannot classify is filed into none and
+    // never seen. This block went without it, so Daf Halacha, All Daf and All
+    // Parsha were in the card and reachable from nothing.
     const hodResourcesHtml =
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Resources</div>` +
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">\u2721 Resources</div>` +
       `<div style="font-size:0.88rem;line-height:2;">` +
       `<a href="https://dafhalacha.com/" target="_blank" style="color:var(--gold)">Daf Halacha</a><br>` +
       `<a href="https://alldaf.org/" target="_blank" style="color:var(--gold)">All Daf</a><br>` +
-      `<a href="https://allparsha.org/" target="_blank" style="color:var(--gold)">All Parsha</a>` +
+      `<a href="https://allparsha.org/" target="_blank" style="color:var(--gold)">All Parsha</a><br>` +
+      `<a href="https://www.sefaria.org/topics/samson-raphael-hirsch?sort=Relevance&amp;tab=author-works-on-sefaria" target="_blank" style="color:var(--gold)">R. Samson Raphael Hirsch</a>` +
       `</div>`;
 
     const hodRashabHtml =
