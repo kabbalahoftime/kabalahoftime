@@ -23793,6 +23793,23 @@ content: ''; float: right; width: 30px; height: 1em;
       }
     }
 
+    // The ✡ is not decoration. _paneKind files a detail block by what it holds
+    // — a .maalah to the מעלות, a [data-rebbe] to the menorah — and failing
+    // those it reads the first character: ✡ sends it to the stars, anything
+    // else returns '' and the block is filed nowhere and never seen. This one
+    // belongs with the stars, which is where the further reading already sits.
+    // Two works kept as resources rather than as a daily count. The Maharal's
+    // Netzach Yisrael is this card's own word, and the Shelah sets the year's
+    // festivals against the soul — both are read at will, so neither is given
+    // a cycle. Addresses as Daniel supplied them; sefaria.org is refused by
+    // this environment's proxy, so they have not been opened from here.
+    const netzResourcesHtml =
+      `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` +
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">\u2721 Further Reading</div>` +
+      `<div style="font-size:0.88rem;line-height:2;">` +
+      `<a href="https://www.sefaria.org/Netzach_Yisrael?tab=contents" target="_blank" style="color:var(--gold)">Netzach Yisrael \u2014 Maharal</a><br>` +
+      `<a href="https://www.sefaria.org/Shenei_Luchot_HaBerit?tab=contents" target="_blank" style="color:var(--gold)">Shenei Luchot HaBerit \u2014 the Shelah</a>` +
+      `</div>`;
     if (inLeapCycle) {
       const lcBookLabel = lcLevel.review
         ? `Devarim — ${lcLevel.level} / ${lcLevel.world} (Review)`
@@ -23828,7 +23845,7 @@ content: ''; float: right; width: 30px; height: 1em;
          <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Section</div><div style="color:var(--ink-mid);font-size:0.88rem;">${meynSection}${meynPage ? ' — ' + (meynPagePhrase ? meynPage : 'p. ' + meynPage) : ''} · Rav Shalom Arush</div></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="7">Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
-         <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
+         <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>` + netzResourcesHtml;
     } else {
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `40-Day Cycle: Receiving the Torah`;
       cards[5].querySelector('.sefirah-main-text').innerHTML =
@@ -23857,7 +23874,7 @@ content: ''; float: right; width: 30px; height: 1em;
          
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="7">Rebbe Maharash — אַדְמוּ"ר מַהַרַ"שׁ</div>
-         <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>`;
+         <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>` + netzResourcesHtml;
     }
 
     // The day's Sichos HaRan / Likutei Etzot reading was repeated at the head of
