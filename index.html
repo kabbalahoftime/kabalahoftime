@@ -5060,13 +5060,28 @@ content: ''; float: right; width: 30px; height: 1em;
     le('Repentance','Repentance'), le('Completeness','Completeness'),
   ];
   window.NETZACH_LE_COUNT = LE.length; // expect 61
+  /* ── THE PRACTICAL LESSON ──
+     What the unit asks of a person, in a sentence, written after studying it.
+     Keyed by the same 1–369 position as the reading: 1–308 are Sichos HaRan
+     §N, 309–369 the Likutei Etzot topics.
+
+     This is a shelf being filled rather than a table that has to be complete.
+     Daniel adds one when he comes to the unit, and a unit with no entry shows
+     nothing at all — no placeholder, no apology. A summary of a text is a
+     different thing and is not wanted here: the question this answers is what
+     to do tomorrow morning, which is the question the Breslov material itself
+     keeps asking. */
+  const LESSONS = {
+    31: "Pray early and have emunah. Don't engage at all in philosophy.",
+  };
   window.getNetzachReading = function (pos) {
     if (!pos || pos < 1) return null;
-    if (pos <= 308) return { work:'Sichos HaRan', name:`§${pos} of 308`, tag:`Sichos HaRan · §${pos}`, items:[{label:`§${pos}`, url:`${S}Sichot_HaRan.${pos}?lang=bi`}] };
+    const lesson = LESSONS[pos] || null;
+    if (pos <= 308) return { work:'Sichos HaRan', name:`§${pos} of 308`, tag:`Sichos HaRan · §${pos}`, lesson, items:[{label:`§${pos}`, url:`${S}Sichot_HaRan.${pos}?lang=bi`}] };
     const u = LE[pos - 309];
     if (!u) return null;
     const parts = u.label.split(' & ');
-    return { work:'Likutei Etzot', name:u.label, tag:`Likutei Etzot · ${u.label}`, items:u.urls.map((url,i)=>({label:parts[i]||u.label, url})) };
+    return { work:'Likutei Etzot', name:u.label, tag:`Likutei Etzot · ${u.label}`, lesson, items:u.urls.map((url,i)=>({label:parts[i]||u.label, url})) };
   };
 })();
 </script>
@@ -23764,9 +23779,15 @@ content: ''; float: right; width: 30px; height: 1em;
         _nrRow.style.display = '';
         document.getElementById('netzach-text-label').innerHTML = `✦ ${_nr.work} <span class="maalah">מעלה ז׳</span>`;
         document.getElementById('netzach-text-face').innerHTML =
-          _nr.items.length === 1
+          (_nr.items.length === 1
             ? `<a href="${_nr.items[0].url}" target="_blank" style="color:var(--gold)">${_nr.name}</a>`
-            : _nr.items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`).join(' &amp; ');
+            : _nr.items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${it.label}</a>`).join(' &amp; ')) +
+          // The practical lesson, on the days there is one. It sits under the
+          // reading rather than behind a tap: it is one line, and a line that
+          // has to be opened is a line that goes unread.
+          (_nr.lesson
+            ? `<div style="font-size:0.82em;color:var(--ink-mid);font-style:italic;line-height:1.45;margin-top:3px;">${_nr.lesson}</div>`
+            : '');
       } else {
         _nrRow.style.display = 'none';
       }
