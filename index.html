@@ -17594,20 +17594,20 @@ content: ''; float: right; width: 30px; height: 1em;
     // was done, and any marked step given back — the ladder in order is still
     // there, and is now a practice rather than a lock.
     //
-    // One gate remains, because it is not about order but about which half is
-    // open: the return cannot begin until the moon is full. Giving a מיעוט
-    // back is always allowed, though, or a מעלה handed back afterwards would
-    // shut the gate on marks already made and freeze them.
+    // No gate at all now. A מיעוט used to refuse the mark until the chosen
+    // ascent was whole — the return cannot begin until the moon is full. That
+    // is true of the moon and stays true of it: the shape above still will not
+    // wane before it has filled. But it was never true of the learning. A
+    // מיעוט studied in the morning is studied whether or not the climb is
+    // finished, and a tag records what was done, not what was permitted.
+    //
+    // So the tag is free in both halves, as the מעלה already was, and the
+    // ladder in order is a practice rather than a lock.
     if (el.classList.contains('yom')) {
       const n = +el.dataset.wane;
       if (!n) return;
       const bit = m => { try { localStorage.setItem(_yomMaskKey, String(m & 32767)); } catch (err) {} };
-      const yM = yomMask(), had = !!(yM & (1 << (n - 1)));
-      // Beyond the path: taken or given back freely. It is not part of what was
-      // undertaken — refusing it would be the app telling someone they may not
-      // learn something.
-      if (pathHas(14 + n) && !had && pathWaxNext(maalotMask()) !== 0)
-        return shakeTag(el);                     // the climb is not finished
+      const yM = yomMask();
       bit(yM ^ (1 << (n - 1)));
       applyMaalotState();
       return;
