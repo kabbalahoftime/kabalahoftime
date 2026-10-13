@@ -23230,8 +23230,10 @@ content: ''; float: right; width: 30px; height: 1em;
     // were filed by kind — and they are not matter about the cycle, they are
     // the מעלה's own reading said in full. So they sit under it.
     document.getElementById('gevurah-tanach-rows').innerHTML =
+      // No "Text:" row. It named the day's reading and linked it to Sefaria,
+      // which is exactly what the line above this already does — the same
+      // words pointing at the same page, one line apart.
       `<div class="detail-row"><span class="detail-label">Section:</span><span class="detail-value">${tanachInfo.sub}</span></div>
-       <div class="detail-row"><span class="detail-label">Text:</span><span class="detail-value"><a href="${tanachInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${tanachInfo.text} on Sefaria</a></span></div>
        <div class="detail-row"><span class="detail-label">Audio:</span><span class="detail-value"><a href="https://mechon-mamre.org/p/pt/ptmp3prq.htm" target="_blank" style="color:var(--gold)">Mechon Mamre</a></span></div>
        <div class="detail-row"><span class="detail-label">Source:</span><span class="detail-value"><a href="https://outorah.org/series/3758" target="_blank" style="color:var(--gold)">Nach Yomi in Depth</a> <span style="color:var(--ink-mid);font-size:0.85em;">— Rabbi Menachem Leibtag</span></span></div>`;
     // The summary is not on the face. It sits behind "today's summary" the way
