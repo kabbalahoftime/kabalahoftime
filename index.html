@@ -23557,16 +23557,28 @@ content: ''; float: right; width: 30px; height: 1em;
       if (tifText) {
         document.getElementById('tiferet-text-label').innerHTML =
           `✦ ${tifText.work}${tifText.review ? ' · Microcosm Review' : ''} <span class="maalah">מעלה ח׳</span>`;
+        // Where the day stands in the reading, under it, the way Hod says it
+        // for Tanna D'vei Eliyahu. A chapter or a tale is held for all thirteen
+        // days of its cycle, so without this the face says what is being read
+        // and not how far through it the day is. On the two review cycles the
+        // reading turns daily and the two numbers run together, which is what
+        // a review is.
+        const _tifDim = s =>
+          `<div><span style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));">${s}</span></div>`;
+        const _tifKind = tifText.kind === 'bh' ? 'chapter' : 'tale';
+        const _tifN = tifText.item.match(/\d+/);
         document.getElementById('tiferet-text-face').innerHTML =
-          tifText.url
+          (tifText.url
             ? `<a href="${tifText.url}" target="_blank" style="color:var(--gold)">${tifText.item}</a>`
-            : tifText.item;
+            : tifText.item) +
+          _tifDim(`Day ${cy13.day} of 13 &middot; ${_tifKind} ${_tifN ? _tifN[0] : '?'} of 13`);
       } else {
         // Leap-year microcosm (28 Shevat–25 Adar I): the Tales' closing talks
         // are the reading for all 28 of those days.
         document.getElementById('tiferet-text-label').innerHTML = `✦ Rebbe Nachman’s Tales <span class="maalah">מעלה ח׳</span>`;
         document.getElementById('tiferet-text-face').innerHTML =
-          `<a href="https://www.sefaria.org/Sippurei_Maasiyot,_Talks_Following_the_Story_Tales?lang=bi" target="_blank" style="color:var(--gold)">Talks Following the Story Tales</a>`;
+          `<a href="https://www.sefaria.org/Sippurei_Maasiyot,_Talks_Following_the_Story_Tales?lang=bi" target="_blank" style="color:var(--gold)">Talks Following the Story Tales</a>` +
+          (cy13Mic ? `<div><span style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));">Day ${cy13Mic.day} of ${cy13Mic.total}</span></div>` : '');
       }
     }
     cards[4].querySelector('.sefirah-detail').innerHTML = (inExtra && cy13Mic) ?
