@@ -8813,19 +8813,46 @@ content: ''; float: right; width: 30px; height: 1em;
   // already proven on this page: the Petichah for everything up to the curses,
   // chofetzKlalUrl for the nineteen klalim, and the Illustrations for the
   // Tziurim. Nothing here is guessed at.
+  // The reading's name, and the page it opens — now the se'if itself rather
+  // than the klal it sits in. Sefaria keeps each Principle as an Opening
+  // Comments node and then a Seif array, so "Principle 2.3" lands on se'if 3;
+  // the Preface and the Pesicha's opening are plain paragraph arrays, and the
+  // calendar names their readings by their opening words, so those are carried
+  // by position. Every one of the 129 refs this builds — the 119 readings and
+  // the ten leap-year days — was fetched from Sefaria and returns its text.
+  const CC_PARA = {
+    'Preface': ["Baruch", "V'Caasher Nachp'sha", "V'nireh Pashut", 'Vaachashva',
+                'Al Cain', 'Vaachale Lakorai', "V'Al Yefalai"],
+    'Introduction': ["B'ahavas Hashem", 'Umepnai'],
+  };
+  const CC_BOOK  = 'https://www.sefaria.org/Chafetz_Chaim,';
+  const CC_INTRO = CC_BOOK + '_Introduction_to_the_Laws_of_the_Prohibition_of_Lashon_Hara_and_Rechilut,';
   function ccYomiLabel(r) {
+    const bi = u => u + '?lang=bi';
     const m = r.section.match(/^(Loshon Hara|Rechilus) (\d+)$/);
     if (m) {
-      const n = +m[2] + (m[1] === 'Rechilus' ? 10 : 0);
-      return { text: `${m[1]} ${m[2]} &middot; ${r.seif}`, url: chofetzKlalUrl(n) };
+      const part = m[1] === 'Loshon Hara'
+        ? '_Part_One,_The_Prohibition_Against_Lashon_Hara,'
+        : '_Part_Two,_The_Prohibition_Against_Rechilut,';
+      return { text: `${m[1]} ${m[2]} &middot; ${r.seif}`,
+               url: bi(`${CC_BOOK}${part}_Principle_${m[2]}.${r.seif}`) };
     }
     if (r.section === 'Tziurim')
       return { text: `Tziur ${r.seif}`,
-               url: `https://www.sefaria.org/Chafetz_Chaim,_Illustrations,_Illustration_${r.seif}?lang=bi` };
-    const named = { Preface: 'Preface', Introduction: 'Pesicha', Curses: 'Arurin',
-                    Negative: "La'avin", Positive: 'Asin' }[r.section] || r.section;
-    const num = /^\d+$/.test(r.seif) ? ` &middot; ${r.seif}` : ` &middot; ${r.seif}`;
-    return { text: named + num, url: CHOFETZ_INTRO_URL };
+               url: bi(`${CC_BOOK}_Illustrations,_Illustration_${r.seif}`) };
+    if (r.section === 'Negative' || r.section === 'Positive')
+      return { text: (r.section === 'Negative' ? "La'avin" : 'Asin') + ` &middot; ${r.seif}`,
+               url: bi(`${CC_INTRO}_${r.section}_Commandments.${r.seif}`) };
+    if (r.section === 'Curses')
+      return { text: 'Arurin', url: bi(`${CC_INTRO}_Curses.1`) };
+    const para = (CC_PARA[r.section] || []).indexOf(r.seif) + 1;
+    if (r.section === 'Preface')
+      return { text: `Preface &middot; ${r.seif}`,
+               url: bi(`${CC_BOOK}_Preface.${para || 1}`) };
+    if (r.section === 'Introduction')
+      return { text: `Pesicha &middot; ${r.seif}`,
+               url: bi(`${CC_INTRO}_Opening_Comments.${para || 1}`) };
+    return { text: `${r.section} &middot; ${r.seif}`, url: CHOFETZ_INTRO_URL };
   }
 
   // ── TANNA D'VEI ELIYAHU — 56 chapters over the 728 half-days ──────────────
