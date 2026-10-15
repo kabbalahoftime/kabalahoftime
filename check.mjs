@@ -751,6 +751,15 @@ async function checkInBrowser(chromium) {
   // only waits; nothing below is relaxed.
   await page.evaluate(() => new Promise(r => setTimeout(r, 50)));
   const a11y = await page.evaluate(() => {
+    // Open every fold first, and shut them again at the end. A control inside
+    // a closed <details> is not hidden the way display:none hides a thing —
+    // Chromium leaves it an offsetParent, so vis() below lets it through —
+    // but its innerText reads empty, so a perfectly well-named link comes back
+    // nameless. Shutting the fold out of the sweep would have been the easy
+    // answer and the wrong one: those controls would then never be checked at
+    // all. Opening them checks them, which is what this is for.
+    const _folds = [...document.querySelectorAll('details')].map(d => [d, d.open]);
+    _folds.forEach(([d]) => { d.open = true; });
     const vis = el => {
       const s = getComputedStyle(el);
       return s.display !== 'none' && s.visibility !== 'hidden' && el.offsetParent !== null;
@@ -833,6 +842,7 @@ async function checkInBrowser(chromium) {
       follows = (mid === cls && mid !== was) ? null : `aria-pressed went ${was} -> ${mid} while the class says ${cls}`;
     }
     out.follows = follows;
+    _folds.forEach(([d, was]) => { d.open = was; });
     return out;
   });
   a11y.unnamed.slice(0, 3).forEach(m => fail(`a control with no accessible name — ${m}`));
