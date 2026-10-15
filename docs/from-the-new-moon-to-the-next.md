@@ -156,7 +156,7 @@ Although things were looking brighter for the boy, after his studies of the law,
 
 It was soon after the boy's 27th birthday that he asked the little girl to marry him despite not having yet a prospect of stable future under the rule of the Pig king. The boy worked hard to keep his job, but eventually he became exhausted. He also felt he was not remunerated properly, and felt the need to dedicate appropriate time to his observances and studies despite the increasing demands of the king. The boy's zealous observances now deeply annoyed the Pig king, but the boy started caring less. It one day struck the little boy that, just as in the most difficult days in the Land of the Bulls, the only one the little boy needed to fear was the Teacher Himself. From that day on it also seemed that the Teacher wanted the boy to leave the Land of the Pigs. Everything that could possibly go wrong seemed to go wrong, and at every turn the little boy was castigated for it. After all that the little boy had been through, he was not taken aback by this as he might have been before. Yet, enough was enough, and he ran away.
 
-## Phase Nine | Refugee on the Way to Israel |
+## Phase Nine | Refugee |
 
 With nowhere to go, and no source of income, the little boy still did not break his engagement with the little girl. He felt deep inside that he would find a way to make it so that he could sustain himself and live with the little girl in the Land of Sweet Waters. In the meantime, he had six months to figure out a plan.
 
@@ -205,8 +205,6 @@ The book written in the language of the Land of the Donkeys was about to finally
 In the meantime, just like with the Land of the Donkeys, the man did still manage to keep certain aspects of each one of the other lands in his life as well. With the Eagles, he further explored the knowledge he had acquired while both in the Land of the Pigs and the Land of the Bulls. In his classes, the knowledge he gained in the Land of the Cats was always with him. In the management of his homes and other dealings, he did occasionally think back to the knowledge he gained in the Land of the Dogs.
 
 It was around this time, that the man had a very pleasant surprise. He received a true gift from the Teacher, the fourth pillar of his home, a beautiful little Lioness-Star. The man's home was now complete. Now it was just (!) a matter of getting stronger, gaining more expertise in his fields, further maintaining his homes, building new ones, and completing the books ahead of him.
-
-## | Notes |
 
 ^1. Each of the first 7 years represents an aspect of chesed, as in the counting of the omer.
 
