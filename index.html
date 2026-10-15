@@ -23150,8 +23150,14 @@ content: ''; float: right; width: 30px; height: 1em;
         ` <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">${f.he}</bdi>` +
         (letter ? ` · <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">${letter}</bdi>` : '');
     })();
+    // The book's own name beside the English, as every other book on these cards
+    // is named — Bekhorot בְּכוֹרוֹת on Hod, the Tanach reading on its own line.
+    // Eicha carried only the transliteration. The reference keeps its digits
+    // after it, so the line reads Eicha אֵיכָה 2:4.
+    const _eichaHe = s => s.replace(/^Eicha\b/,
+      'Eicha <bdi lang="he" style="font-family:\'Frank Ruhl Libre\',serif;letter-spacing:0">\u05d0\u05b5\u05d9\u05db\u05b8\u05d4</bdi>');
     const _eichaLink = _eicha
-      ? `<a class="tap-line" href="${eichaUrl(_eicha.ref)}" target="_blank" style="color:var(--gold)">${_eicha.label}</a>` +
+      ? `<a class="tap-line" href="${eichaUrl(_eicha.ref)}" target="_blank" style="color:var(--gold)">${_eichaHe(_eicha.label)}</a>` +
         // The letter stood here too and now stands only on the face line, which
         // is where the day's own letter belongs. Printed in both places it read
         // as two facts rather than one, and the verse below opens with it
@@ -23230,7 +23236,7 @@ content: ''; float: right; width: 30px; height: 1em;
         `<span id="gevurah-day-face">${_gevFaceHtml}</span>` +
         _gevBody(gevMic) +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-mid)">${_gevPart}` +
-        (_eichaLink ? `<br>${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">Eicha ${gevMic.quarter}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}` : '') +
+        (_eichaLink ? `<br>${gevMic.breakAt ? _eichaLink : `<a href="${eichaUrl(String(gevMic.quarter))}" target="_blank" style="color:var(--gold)">${_eichaHe(`Eicha ${gevMic.quarter}`)}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}` : '') +
         `</div>` +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</div>`
       : `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong> <span style="font-size:0.92em">(${seasonInfo.name})</span>${_gevHalfHtml}:<br>` +
