@@ -101,34 +101,77 @@ for raw in MD.read_text(encoding='utf-8').split('\n\n'):
         notes.append((n, ' '.join(txt.split())))
     else: blocks.append(('p', b))
 
+L, R, T, B = 30*mm, 30*mm, 24*mm, 26*mm
+FW, FH = LETTER[0] - L - R, LETTER[1] - T - B       # the text block
+
+# The air a phase opens with: above the number, and under the heading.
+AIR_TOP, AIR_HEAD = 14*mm, 9*mm
+# How little it may be squeezed to. Below these the opening stops reading as
+# an opening and starts reading as a paragraph that happens to be centred.
+MIN_TOP, MIN_HEAD = 5*mm, 6*mm
+
 story = [Spacer(1, 62*mm), Paragraph(esc(title), ttl), Spacer(1, 13*mm),
          Paragraph(esc(subtitle), sub), Spacer(1, 3*mm),
          Paragraph(esc(dateline), dat), PageBreak()]
 
-prev = None
-for i, (kind, val) in enumerate(blocks):
+# Gather the phases, each with the paragraphs that belong to it.
+phases, cur = [], None
+for kind, val in blocks:
     if kind == 'part':
-        kicker, head, tail = val
-        if i: story.append(PageBreak())
-        story.append(Spacer(1, 14*mm))
-        grp = []
-        if kicker: grp.append(Paragraph(TRACK(esc(kicker).upper()), kick))
-        grp.append(Paragraph(esc(head), part))
-        if tail: grp.append(Paragraph(esc(tail), psub))
-        grp.append(Spacer(1, 9*mm))
-        # The heading and the paragraph under it are one block, so a phase can
-        # never open at the very foot of a page with its first line overleaf.
-        nxt = blocks[i+1] if i+1 < len(blocks) else None
-        if nxt and nxt[0] == 'p':
-            grp.append(Paragraph(esc(nxt[1]), first))
-        story.append(KeepTogether(grp))
-        prev = 'part-consumed'
-        continue
-    if prev == 'part-consumed':
-        prev = kind
-        continue
-    story.append(Paragraph(esc(val), body))
-    prev = kind
+        cur = {'head': val, 'paras': []}
+        phases.append(cur)
+    elif cur is not None:
+        cur['paras'].append(val)
+
+def _h(style, txt):
+    return Paragraph(txt, style).wrap(FW, FH)[1]
+
+def opening(q):
+    """How much air this phase's opening should carry.
+
+    A phase that runs a hair past the foot of its page sends a line or two
+    over to a page of its own, and that page is then blank but for them.
+    "The Pig and the Hare" was doing it with four words. The opening is the
+    one place in the setting with any give — 23mm of it — so when a phase
+    would spill by less than that, the air is taken back and the phase is
+    held whole. Measured, not nudged by hand, so it still holds if the text
+    is edited.
+
+    Nothing is squeezed that does not need to be, and nothing is squeezed
+    past the floor: a phase that genuinely runs two pages opens as wide as
+    every other.
+    """
+    kicker, head, tail = q['head']
+    h = AIR_TOP + AIR_HEAD
+    if kicker: h += _h(kick, TRACK(esc(kicker).upper())) + kick.spaceAfter
+    h += _h(part, esc(head))
+    if tail:  h += psub.spaceBefore + _h(psub, esc(tail))
+    for i, t in enumerate(q['paras']):
+        h += _h(first if i == 0 else body, esc(t))
+    over = h - FH
+    room = (AIR_TOP - MIN_TOP) + (AIR_HEAD - MIN_HEAD)
+    if not (0 < over <= room - 2):
+        return AIR_TOP, AIR_HEAD
+    take = over + 2                       # 2pt so it is not sitting on the line
+    top = max(MIN_TOP, AIR_TOP - take)
+    return top, max(MIN_HEAD, AIR_HEAD - (take - (AIR_TOP - top)))
+
+for i, q in enumerate(phases):
+    kicker, head, tail = q['head']
+    air_top, air_head = opening(q)
+    if i: story.append(PageBreak())
+    story.append(Spacer(1, air_top))
+    grp = []
+    if kicker: grp.append(Paragraph(TRACK(esc(kicker).upper()), kick))
+    grp.append(Paragraph(esc(head), part))
+    if tail: grp.append(Paragraph(esc(tail), psub))
+    grp.append(Spacer(1, air_head))
+    # The heading and the paragraph under it are one block, so a phase can
+    # never open at the very foot of a page with its first line overleaf.
+    if q['paras']: grp.append(Paragraph(esc(q['paras'][0]), first))
+    story.append(KeepTogether(grp))
+    for t in q['paras'][1:]:
+        story.append(Paragraph(esc(t), body))
 
 if notes:
     story.append(PageBreak())
@@ -138,7 +181,6 @@ if notes:
         story.append(Paragraph(
             f'<super><font size="8">{n}</font></super>&nbsp;&nbsp;{esc(txt)}', note))
 
-L, R, T, B = 30*mm, 30*mm, 24*mm, 26*mm
 def footer(canvas, doc):
     if doc.page == 1: return
     canvas.saveState()
