@@ -11630,7 +11630,12 @@ content: ''; float: right; width: 30px; height: 1em;
   // counts out in days. Typeset from the blog's text and carried here rather
   // than linked away to Drive, so it opens even with nothing to connect to.
   const KOT_BOOKS_ALSO = [
-    { book: 'From the New Moon to the Next', emoji: '🌙', where: 'Creative writing',
+    // Tagged Binah so the three read Keter, Chochmah, Binah — the upper three
+    // in their own order. It is a tag on the shelf and nothing more: unlike
+    // the two above it, this one is not carried on its card. Binah's own KoT
+    // Book row shows whichever of the seven the day belongs to, so a reader
+    // who goes looking for this there will not find it.
+    { book: 'From the New Moon to the Next', emoji: '🌙', where: 'Binah',
       url: 'from-the-new-moon-to-the-next.pdf' },
   ];
   // The shelf in the footer. Folded shut: it is somewhere to go when you want
@@ -11643,12 +11648,18 @@ content: ''; float: right; width: 30px; height: 1em;
     const _row = (b, note) => '<div class="footer-book">' + b.emoji + ' ' +
       '<a href="' + b.url + '" target="_blank" rel="noopener">' + b.book + '</a>' +
       (note ? ' <span class="fb-day">· ' + note + '</span>' : '') + '</div>';
-    el.innerHTML = KOT_BOOKS.map((b, i) => {
+    // The three that stand on a card come first — Keter, Chochmah, Binah, in
+    // the order of the cards themselves — and the seven of the week follow.
+    // The seven were first when the shelf was only seven; they are the longer
+    // list but the one a reader already meets every day on Malchut, so the
+    // three that have no other way in are better at the top.
+    el.innerHTML =
+    KOT_BOOKS_MORE.map(b => _row(b, b.where)).join('') +
+    KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('') +
+    KOT_BOOKS.map((b, i) => {
       const day = (MALCHUT_TEXTS[i] || {}).day || '';
       return _row(b, day);
-    }).join('') +
-    KOT_BOOKS_MORE.map(b => _row(b, b.where)).join('') +
-    KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('');
+    }).join('');
     // Keter's link is written into the page rather than rendered, so it is
     // pointed at the one address here instead of carrying a second copy.
     const kl = document.getElementById('keter-kot-link');
@@ -12598,22 +12609,22 @@ content: ''; float: right; width: 30px; height: 1em;
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Business",ch:2},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Business",ch:3},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Business",ch:4},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing Hands for a Meal",ch:1},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing Hands for a Meal",ch:2},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing Hands for a Meal",ch:3},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing Hands for a Meal",ch:4},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing Hands for a Meal",ch:5},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing Hands for a Meal",ch:6},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing One's Hands for a Meal",ch:1},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing One's Hands for a Meal",ch:2},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing One's Hands for a Meal",ch:3},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing One's Hands for a Meal",ch:4},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing One's Hands for a Meal",ch:5},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Washing One's Hands for a Meal",ch:6},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Meals",ch:1},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Meals",ch:2},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Meals",ch:3},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Meals",ch:4},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Meals",ch:5},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals",ch:1},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals",ch:2},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals",ch:3},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals",ch:4},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals",ch:5},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals and Washing after Meals",ch:1},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals and Washing after Meals",ch:2},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals and Washing after Meals",ch:3},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals and Washing after Meals",ch:4},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws of Grace After Meals and Washing after Meals",ch:5},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Blessings Over Fruit",ch:1},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Blessings Over Fruit",ch:2},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Blessings Over Fruit",ch:3},
@@ -12635,17 +12646,17 @@ content: ''; float: right; width: 30px; height: 1em;
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Blessing on Sights and Other Blessings",ch:3},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Blessing on Sights and Other Blessings",ch:4},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Blessing on Sights and Other Blessings",ch:5},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Afternoon Prayer",ch:1},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Afternoon Prayer",ch:2},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Afternoon Prayer",ch:3},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Afternoon Prayer",ch:4},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Afternoon Prayer",ch:5},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Afternoon Prayer",ch:6},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Afternoon Prayer",ch:7},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Evening Prayer",ch:1},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Evening Prayer",ch:2},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Evening Prayer",ch:3},
-    {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Evening Prayer",ch:4},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Afternoon Prayer",ch:1},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Afternoon Prayer",ch:2},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Afternoon Prayer",ch:3},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Afternoon Prayer",ch:4},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Afternoon Prayer",ch:5},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Afternoon Prayer",ch:6},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Afternoon Prayer",ch:7},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Evening Prayer",ch:1},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Evening Prayer",ch:2},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Evening Prayer",ch:3},
+    {kind:"LH",part:"Orach_Chaim",topic:"Laws for Evening Prayer",ch:4},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Reciting Shema Before Retiring",ch:1},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of Reciting Shema Before Retiring",ch:2},
     {kind:"LH",part:"Orach_Chaim",topic:"Laws of the Sabbath",ch:1},
@@ -12738,9 +12749,9 @@ content: ''; float: right; width: 30px; height: 1em;
     {kind:"LH",part:"Yoreh_Deah",topic:"Laws of Unfit Animals",ch:3},
     {kind:"LH",part:"Yoreh_Deah",topic:"Laws of Priestly Gifts",ch:1},
     {kind:"LH",part:"Yoreh_Deah",topic:"Laws of Priestly Gifts",ch:2},
-    {kind:"LH",part:"Yoreh_Deah",topic:"Laws of Limb from a Live Animal",ch:1},
-    {kind:"LH",part:"Yoreh_Deah",topic:"Laws of Limb from a Live Animal",ch:2},
-    {kind:"LH",part:"Yoreh_Deah",topic:"Laws of Limb from a Live Animal",ch:3},
+    {kind:"LH",part:"Yoreh_Deah",topic:"Laws of a Limb from a Live Animal",ch:1},
+    {kind:"LH",part:"Yoreh_Deah",topic:"Laws of a Limb from a Live Animal",ch:2},
+    {kind:"LH",part:"Yoreh_Deah",topic:"Laws of a Limb from a Live Animal",ch:3},
     {kind:"LH",part:"Yoreh_Deah",topic:"Laws of Meat that was Unobserved",ch:1},
     {kind:"LH",part:"Yoreh_Deah",topic:"Laws of Meat that was Unobserved",ch:2},
     {kind:"LH",part:"Yoreh_Deah",topic:"Laws of Meat that was Unobserved",ch:3},
