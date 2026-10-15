@@ -27695,13 +27695,6 @@ content: ''; float: right; width: 30px; height: 1em;
         return { n:2, label:'Rav Shalom Arush — ' + bk,
                  cell:bk.split(' — ')[0], cell2:'cycle ' + m + ' of 13' }; } },
 
-    { group:'star', card:'From the New Moon', cycle:'✡ the moon’s phase across the thirteen',
-      seg:(D)=>{
-        const c = get13DayInfo(D.yearDay);
-        const m = D.inExtra ? D.extraDay : (c.cycle >= 27 ? c.day : ((c.cycle - 1) % 13) + 1);
-        return { n:3, label:'From the New Moon to the Next — Phase ' + m,
-                 cell:'Phase ' + m, cell2:'day ' + c.day + ' of 13' }; } },
-
     { group:'star', card:'The Ramak', cycle:'✡ Pardes Rimmonim and Ohr Ne’erav — 39 in three turns of 13',
       seg:(D)=>{
         const c = get13DayInfo(D.yearDay);
