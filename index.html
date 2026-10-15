@@ -4081,7 +4081,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="sefirah-main-text" id="keter-lm-main" style="margin-top:4px;">Loading…</div>
     <div class="malchut-ksa-row" style="margin-top:10px">
       <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-      <div class="src-line"><a href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a> &nbsp;·&nbsp; <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗︎</button></div>
+      <div class="src-line"><a id="keter-kot-link" href="https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk" target="_blank" style="color:var(--gold);font-size:0.88em">Living Likutei Moharan</a> &nbsp;·&nbsp; <button class="date-jump-trigger" id="lm-trigger" style="display:none;" onclick="event.stopPropagation(); openLmDailyModal()">today's summary ↗︎</button></div>
     </div>
   </div>
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
@@ -5277,10 +5277,10 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="footer-text">Based on the book</div>
     <div class="footer-authors">Kabbalah of Time · by Ann Helen Wainer and Rabbi Daniel Kahane</div>
     <div class="footer-text" style="margin-top:8px;">kabbalahoftime.com</div>
-    <!-- The seven books themselves. The app has been reading a page a day out
-         of them from the beginning and never said where to find one whole. -->
+    <!-- The books themselves. The app has been reading a page a day out of
+         them from the beginning and never said where to find one whole. -->
     <details class="footer-books">
-      <summary>The seven books</summary>
+      <summary>The KoT books</summary>
       <div id="kot-books-list"></div>
     </details>
     <!-- The artists, credited here rather than under each picture. A name set
@@ -11617,20 +11617,41 @@ content: ''; float: right; width: 30px; height: 1em;
     { book: 'Book 7 · Gathering of Songs', emoji: '🪜',
       url: 'https://drive.google.com/file/d/1Z_m4gytOXiDidm5aJM49SoUqwOmxmj6v/view?usp=drivesdk' },
   ];
+  // Two more, which are not of the week and so have no day: they stand on one
+  // card each, all year. Living Likutei Moharan is the book behind Keter's
+  // daily lesson, and the Alef Bet appendix is where Chochmah's letters, their
+  // elements and their mishnayot come from. Both were reachable only from
+  // their own card, and neither is one of the seven, so they are kept apart
+  // here rather than numbered in among them.
+  //
+  // Keter's address was written into the markup; it is taken from here now, so
+  // the card and the shelf cannot come to disagree. Chochmah's was already a
+  // constant and is simply pointed at.
+  const KOT_BOOKS_MORE = [
+    { book: 'Living Likutei Moharan', emoji: '📖', where: 'Keter',
+      url: 'https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk' },
+    { book: 'Alef Bet', emoji: '🔤', where: 'Chochmah', url: CHOCHMA_KOT_DOC },
+  ];
   // The shelf in the footer. Folded shut: it is somewhere to go when you want
   // a whole book, not something to read past on the way to the signature. The
-  // day each is read comes from MALCHUT_TEXTS rather than being written out
-  // again, so the shelf and the card can never name different days.
+  // day each of the seven is read comes from MALCHUT_TEXTS rather than being
+  // written out again, so the shelf and the card can never name different days.
   (function fillKotBooks() {
     const el = document.getElementById('kot-books-list');
     if (!el) return;
+    const _row = (b, note) => '<div class="footer-book">' + b.emoji + ' ' +
+      '<a href="' + b.url + '" target="_blank" rel="noopener">' + b.book + '</a>' +
+      (note ? ' <span class="fb-day">· ' + note + '</span>' : '') + '</div>';
     el.innerHTML = KOT_BOOKS.map((b, i) => {
       const day = (MALCHUT_TEXTS[i] || {}).day || '';
-      return '<div class="footer-book">' + b.emoji + ' ' +
-        '<a href="' + b.url + '" target="_blank" rel="noopener">' + b.book + '</a>' +
-        (day ? ' <span class="fb-day">· ' + day + '</span>' : '') + '</div>';
+      return _row(b, day);
     }).join('') +
-    '<div class="footer-book fb-note">Each opens as a PDF. The Malchut card opens the week&rsquo;s own page from whichever book the day belongs to.</div>';
+    KOT_BOOKS_MORE.map(b => _row(b, b.where)).join('') +
+    '<div class="footer-book fb-note">Each opens in Google Drive. The seven turn with the week; the last two stand on their own card all year. The Malchut card opens the week&rsquo;s own page from whichever of the seven the day belongs to.</div>';
+    // Keter's link is written into the page rather than rendered, so it is
+    // pointed at the one address here instead of carrying a second copy.
+    const kl = document.getElementById('keter-kot-link');
+    if (kl) kl.href = KOT_BOOKS_MORE[0].url;
   })();
 
   // ── THE KoT SONG — one of the seven songs a day, shown beside Tehilim in
