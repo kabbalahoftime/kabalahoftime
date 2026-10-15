@@ -11630,12 +11630,15 @@ content: ''; float: right; width: 30px; height: 1em;
   // counts out in days. Typeset from the blog's text and carried here rather
   // than linked away to Drive, so it opens even with nothing to connect to.
   const KOT_BOOKS_ALSO = [
-    // Tagged Binah so the three read Keter, Chochmah, Binah — the upper three
-    // in their own order. It is a tag on the shelf and nothing more: unlike
-    // the two above it, this one is not carried on its card. Binah's own KoT
-    // Book row shows whichever of the seven the day belongs to, so a reader
-    // who goes looking for this there will not find it.
-    { book: 'From the New Moon to the Next', emoji: '🌙', where: 'Binah',
+    // Binah first so the three read Keter, Chochmah, Binah down the column —
+    // the upper three in their own order — and then what it actually is,
+    // which the other two do not need saying because their names say it.
+    // The Sefirah here is a tag on the shelf and nothing more: unlike the two
+    // above it, this one is not carried on its card. Binah's own KoT Book row
+    // shows whichever of the seven the day belongs to, so a reader who goes
+    // looking for this there will not find it.
+    { book: 'From the New Moon to the Next', emoji: '🌙',
+      where: 'Binah · Creative writing',
       url: 'from-the-new-moon-to-the-next.pdf' },
   ];
   // The shelf in the footer. Folded shut: it is somewhere to go when you want
@@ -23927,9 +23930,6 @@ content: ''; float: right; width: 30px; height: 1em;
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://breslev.com/product/complete-set-of-rabbi-shalom-arushs-books/" target="_blank" style="color:var(--gold)"><strong>${_micArush}</strong></a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:14px;">Breslev.com — the complete set</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ From the New Moon to the Next — Phase ${_micMod}</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="6">Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Derech Mitzvosecha</div>
        <div style="font-size:0.88rem;margin-bottom:${_micDm ? '4px' : '10px'};"><a href="https://www.chabad.org/library/article_cdo/aid/3101998/jewish/Lessons-in-Derech-Mitzvosecha.htm" target="_blank" style="color:var(--gold)">Lessons in Derech Mitzvosecha</a> &nbsp;·&nbsp; <a href="https://www.sefaria.org/Derekh_Mitzvotekha?tab=contents" target="_blank" style="color:var(--gold)">the sefer on Sefaria</a></div>
@@ -23956,9 +23956,6 @@ content: ''; float: right; width: 30px; height: 1em;
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Rav Shalom Arush — Cycle ${_cy13mod}</div>
        <div style="font-size:0.88rem;margin-bottom:4px;"><a href="https://breslev.com/product/complete-set-of-rabbi-shalom-arushs-books/" target="_blank" style="color:var(--gold)"><strong>${arushBook}</strong></a></div>
        <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:14px;">Breslev.com — the complete set</div>
-       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ From the New Moon to the Next — Phase ${_cy13mod}</div>
-       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.kabbalahoftime.com/2013/10/from-new-moon-to-next-creative-writing.html?m=1" target="_blank" style="color:var(--gold)">KabbalahOfTime</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="6">Tzemach Tzedek — אַדְמוּ"ר הַצֶּמַח צֶדֶק</div>
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Derech Mitzvosecha</div>
