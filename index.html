@@ -11632,6 +11632,15 @@ content: ''; float: right; width: 30px; height: 1em;
       url: 'https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk' },
     { book: 'Alef Bet', emoji: '🔤', where: 'Chochmah', url: CHOCHMA_KOT_DOC },
   ];
+  // And one that is not a working book at all: the allegory of the thirteen
+  // phases, written in 2013 — the boy who moves from land to land and is a
+  // different animal in each, which is the same turning the rest of the app
+  // counts out in days. Typeset from the blog's text and carried here rather
+  // than linked away to Drive, so it opens even with nothing to connect to.
+  const KOT_BOOKS_ALSO = [
+    { book: 'From the New Moon to the Next', emoji: '🌙', where: 'Creative writing',
+      url: 'from-the-new-moon-to-the-next.pdf' },
+  ];
   // The shelf in the footer. Folded shut: it is somewhere to go when you want
   // a whole book, not something to read past on the way to the signature. The
   // day each of the seven is read comes from MALCHUT_TEXTS rather than being
@@ -11647,7 +11656,8 @@ content: ''; float: right; width: 30px; height: 1em;
       return _row(b, day);
     }).join('') +
     KOT_BOOKS_MORE.map(b => _row(b, b.where)).join('') +
-    '<div class="footer-book fb-note">Each opens in Google Drive. The seven turn with the week; the last two stand on their own card all year. The Malchut card opens the week&rsquo;s own page from whichever of the seven the day belongs to.</div>';
+    KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('') +
+    '<div class="footer-book fb-note">The seven turn with the week, and the Malchut card opens the week&rsquo;s own page from whichever of them the day belongs to. The next two stand on their own card all year. The last is a piece of writing rather than a working book.</div>';
     // Keter's link is written into the page rather than rendered, so it is
     // pointed at the one address here instead of carrying a second copy.
     const kl = document.getElementById('keter-kot-link');
