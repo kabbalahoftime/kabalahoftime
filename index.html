@@ -2188,14 +2188,6 @@ padding: 12px 4px;
 .footer-book a { color: var(--gold); text-decoration: none; }
 .footer-book a:hover, .footer-book a:focus-visible { text-decoration: underline; }
 .footer-book .fb-day { color: var(--ink-dim); font-size: 0.85em; font-style: italic; }
-.footer-book.fb-note {
-color: var(--ink-dim);
-font-size: calc(10.5px * var(--ts, 1));
-font-style: italic;
-line-height: 1.5;
-padding-top: 6px;
-}
-
 .footer-authors {
 font-family: 'Cinzel', serif;
 font-size: calc(11px * var(--ts, 1));
@@ -11656,8 +11648,7 @@ content: ''; float: right; width: 30px; height: 1em;
       return _row(b, day);
     }).join('') +
     KOT_BOOKS_MORE.map(b => _row(b, b.where)).join('') +
-    KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('') +
-    '<div class="footer-book fb-note">The seven turn with the week, and the Malchut card opens the week&rsquo;s own page from whichever of them the day belongs to. The next two stand on their own card all year. The last is a piece of writing rather than a working book.</div>';
+    KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('');
     // Keter's link is written into the page rather than rendered, so it is
     // pointed at the one address here instead of carrying a second copy.
     const kl = document.getElementById('keter-kot-link');
