@@ -24818,7 +24818,7 @@ content: ''; float: right; width: 30px; height: 1em;
         ? `${_pk.he} <span style="color:var(--ink-dim);font-size:0.85em">— פסוק ${VATAH_HEB[_vtSeif - 1]} · ${_pk.src}</span>` +
           `<div style="color:var(--ink-mid);font-size:0.88em;margin-top:2px;">${_pk.en}</div>`
         : `All twelve, as they were given <span style="color:var(--ink-dim);font-size:0.85em">· Mivtza Chinuch, 5736</span>` +
-          `<div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.55;margin:6px 0 0;">At the farbrengen of Parshas Acharei 5736, after Pesach, the Rebbe declared it the Year of Chinuch and launched Mivtza Chinuch on <em>וְהִגַּדְתָּ לְבִנְךָ</em> — that no Jewish child be denied a true Jewish education. At the start of Iyar he asked that every Jewish boy and girl know the Twelve Pesukim and maamarei Chazal by heart, so that a child away from a sefer still carries Torah with him, and can say it to a friend. Six were given first, and hung on the buildings by 770 for the Lag B'Omer parade. At the parade the Rebbe added six more — two pesukim, two maamarei Chazal, and two sayings of the Alter Rebbe from chapter 33 of Tanya — and afterwards those were hung beside the first. He asked that all twelve be printed pocket-sized, to be reviewed again and again, and gave three sichot on how each one alone is protection, defence and salvation.</div>`);
+          `<div style="margin-top:6px;"><span class="kot-summary" role="button" tabindex="0" onclick="openTwelvePesukimPopup()">How they were given \u25be</span></div>`);
       // Today's three of the 84, each linked; the subheader names the work, so
       // the general Mishneh Torah link it used to carry is redundant.
       //
@@ -25355,6 +25355,24 @@ content: ''; float: right; width: 30px; height: 1em;
   const eichaTap = (ch, from, to) =>
     ` href="${eichaUrl(from === to ? ch + '.' + from : (from === 1 && to === eichaChapterLen(ch)) ? String(ch) : ch + '.' + from + '-' + to)}"` +
     ` onclick="openEichaPopup(${ch},${from},${to});return false;"`;
+
+  // How the Twelve Pesukim came to be given. It stood as a paragraph under
+  // the line on the one day a leap year holds the whole ma'amar, where it was
+  // the longest thing on the card and read as a footnote to a line that is
+  // three words. Behind a tap instead, so the line stays a line.
+  //
+  // The pasuk keeps the pointing it was written with and is marked lang="he"
+  // here, which it was not before: it sat in a plain <em>, in a block shown
+  // one day a year, so nothing that walks the page ever saw it.
+  const TWELVE_PESUKIM_NOTE = `At the farbrengen of Parshas Acharei 5736, after Pesach, the Rebbe declared it the Year of Chinuch and launched Mivtza Chinuch on <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">וְהִגַּדְתָּ לְבִנְךָ</bdi> — that no Jewish child be denied a true Jewish education. At the start of Iyar he asked that every Jewish boy and girl know the Twelve Pesukim and maamarei Chazal by heart, so that a child away from a sefer still carries Torah with him, and can say it to a friend. Six were given first, and hung on the buildings by 770 for the Lag B’Omer parade. At the parade the Rebbe added six more — two pesukim, two maamarei Chazal, and two sayings of the Alter Rebbe from chapter 33 of Tanya — and afterwards those were hung beside the first. He asked that all twelve be printed pocket-sized, to be reviewed again and again, and gave three sichot on how each one alone is protection, defence and salvation.`;
+  function openTwelvePesukimPopup() {
+    openInfoPopup('The Twelve Pesukim', `<p>${TWELVE_PESUKIM_NOTE}</p>`,
+      'Mivtza Chinuch, 5736 &middot; the farbrengen of Parshas Acharei, and the Lag B&rsquo;Omer parade');
+    const pm = document.getElementById('info-popup-main');
+    const pt = document.getElementById('info-popup-title');
+    if (pm) { pm.dir = 'ltr'; pm.lang = 'en'; }
+    if (pt) pt.dir = 'ltr';
+  }
 
   function openInfoPopup(title, mainHtml, metaHtml) {
     document.getElementById('info-popup-title').textContent = title;
