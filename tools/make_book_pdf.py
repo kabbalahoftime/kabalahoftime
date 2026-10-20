@@ -1,4 +1,4 @@
-"""Typeset 'From the New Moon to the Next' as a PDF.
+"""Typeset one of the KoT books as a PDF.
 
 Grown out of the book.py that set 'From the Sunrise to the Next', and set in
 the same face for the same reason: this machine's Chromium renders Cormorant
@@ -13,7 +13,16 @@ Two things the first book did not have:
     empty, and each opens a page of its own. Thirteen phases and an
     introduction, so the story reads as the thirteen chapters it is.
 
-  * Footnotes. The piece carries nine, and they are not asides — they are the
+  * Chapters inside a part, for the second book, which has four parts and
+    chapters within two of them. "### title | subtitle" — centred, with air
+    above, held together with the paragraph beneath so a chapter never opens
+    at the foot of a page. The first ### in a file is still the book's
+    subtitle; a ### after the text has begun is a chapter.
+
+  * An epigraph line, "*...*" once the text has begun: the note under a part
+    heading saying which draft it came from.
+
+  * Footnotes. The first book carries nine, and they are not asides — they are the
     other half of it, the history running underneath the boy's own. They are
     set as endnotes rather than at the foot of the page: several run longer
     than the paragraph that calls them, and at the foot they would have pushed
@@ -57,6 +66,15 @@ sub   = ParagraphStyle('sub', fontName='Cormorant-It', fontSize=14, leading=19,
                        alignment=TA_CENTER, textColor=DIM)
 dat   = ParagraphStyle('dat', fontName='Cormorant', fontSize=10.5, leading=14,
                        alignment=TA_CENTER, textColor=FAINT)
+# A chapter inside a part. Smaller than a part's title and not page-breaking,
+# with its other name under it where it has one — the land's real name.
+chap  = ParagraphStyle('chap', fontName='Cormorant', fontSize=15.5, leading=20,
+                       alignment=TA_CENTER, textColor=INK, spaceBefore=11*mm)
+csub  = ParagraphStyle('csub', fontName='Cormorant-It', fontSize=11.5, leading=15,
+                       alignment=TA_CENTER, textColor=DIM, spaceBefore=1.5*mm)
+# The line under a part heading that says where the draft came from.
+epig  = ParagraphStyle('epig', fontName='Cormorant-It', fontSize=11.5, leading=16,
+                       alignment=TA_CENTER, textColor=FAINT, spaceAfter=6*mm)
 # The notes, set smaller, with the number hanging out to the left of the text.
 note  = ParagraphStyle('note', fontName='Cormorant', fontSize=11.2, leading=15.6,
                        alignment=TA_JUSTIFY, textColor=DIM,
@@ -96,6 +114,12 @@ for raw in MD.read_text(encoding='utf-8').split('\n\n'):
         bits = [x.strip() for x in b[3:].split('|')]
         bits += [''] * (3 - len(bits))
         blocks.append(('part', bits[:3]))
+    elif b.startswith('### '):
+        bits = [x.strip() for x in b[4:].split('|')]
+        bits += [''] * (2 - len(bits))
+        blocks.append(('chap', bits[:2]))
+    elif b.startswith('*') and b.endswith('*'):
+        blocks.append(('epig', b.strip('*')))
     elif re.match(r'^\^\d+\.\s', b):
         n, txt = re.match(r'^\^(\d+)\.\s+(.*)$', b, re.S).groups()
         notes.append((n, ' '.join(txt.split())))
@@ -114,14 +138,14 @@ story = [Spacer(1, 62*mm), Paragraph(esc(title), ttl), Spacer(1, 13*mm),
          Paragraph(esc(subtitle), sub), Spacer(1, 3*mm),
          Paragraph(esc(dateline), dat), PageBreak()]
 
-# Gather the phases, each with the paragraphs that belong to it.
+# Gather the phases, each with everything that belongs under it in order.
 phases, cur = [], None
 for kind, val in blocks:
     if kind == 'part':
-        cur = {'head': val, 'paras': []}
+        cur = {'head': val, 'body': []}
         phases.append(cur)
     elif cur is not None:
-        cur['paras'].append(val)
+        cur['body'].append((kind, val))
 
 def _h(style, txt):
     return Paragraph(txt, style).wrap(FW, FH)[1]
@@ -146,8 +170,14 @@ def opening(q):
     if kicker: h += _h(kick, TRACK(esc(kicker).upper())) + kick.spaceAfter
     h += _h(part, esc(head))
     if tail:  h += psub.spaceBefore + _h(psub, esc(tail))
-    for i, t in enumerate(q['paras']):
-        h += _h(first if i == 0 else body, esc(t))
+    for i, (kind, val) in enumerate(q['body']):
+        if kind == 'chap':
+            h += chap.spaceBefore + _h(chap, esc(val[0]))
+            if val[1]: h += csub.spaceBefore + _h(csub, esc(val[1]))
+        elif kind == 'epig':
+            h += _h(epig, esc(val)) + epig.spaceAfter
+        else:
+            h += _h(first if i == 0 else body, esc(val))
     over = h - FH
     room = (AIR_TOP - MIN_TOP) + (AIR_HEAD - MIN_HEAD)
     if not (0 < over <= room - 2):
@@ -166,12 +196,36 @@ for i, q in enumerate(phases):
     grp.append(Paragraph(esc(head), part))
     if tail: grp.append(Paragraph(esc(tail), psub))
     grp.append(Spacer(1, air_head))
-    # The heading and the paragraph under it are one block, so a phase can
-    # never open at the very foot of a page with its first line overleaf.
-    if q['paras']: grp.append(Paragraph(esc(q['paras'][0]), first))
+    # The heading and whatever comes directly under it are one block, so a
+    # part can never open at the very foot of a page with its first line
+    # overleaf.
+    rest = list(q['body'])
+    if rest and rest[0][0] in ('p', 'epig'):
+        k, v = rest.pop(0)
+        grp.append(Paragraph(esc(v), epig if k == 'epig' else first))
+        # An epigraph is a caption on the heading, so the paragraph after it
+        # is held too — otherwise the part can open on a line about which
+        # draft this is and nothing else.
+        if k == 'epig' and rest and rest[0][0] == 'p':
+            grp.append(Paragraph(esc(rest.pop(0)[1]), first))
     story.append(KeepTogether(grp))
-    for t in q['paras'][1:]:
-        story.append(Paragraph(esc(t), body))
+    # A chapter is held with its first paragraph for the same reason.
+    j = 0
+    while j < len(rest):
+        kind, val = rest[j]
+        if kind == 'chap':
+            cg = [Paragraph(esc(val[0]), chap)]
+            if val[1]: cg.append(Paragraph(esc(val[1]), csub))
+            cg.append(Spacer(1, 5*mm))
+            if j + 1 < len(rest) and rest[j + 1][0] == 'p':
+                cg.append(Paragraph(esc(rest[j + 1][1]), first))
+                j += 1
+            story.append(KeepTogether(cg))
+        elif kind == 'epig':
+            story.append(Paragraph(esc(val), epig))
+        else:
+            story.append(Paragraph(esc(val), body))
+        j += 1
 
 if notes:
     story.append(PageBreak())
