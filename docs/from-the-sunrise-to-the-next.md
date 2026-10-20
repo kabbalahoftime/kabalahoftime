@@ -160,6 +160,8 @@ On the next page: David has one brother and one sister — I will tell you more 
 
 And she had drawn them, the two brothers standing side by side on the page, each named underneath in pencil.
 
+At Thanksgiving they played tennis. Four took the court: the man, his brother, his son, and his stepsister. His father sat above and watched.
+
 The uncle who writes books received a book from a child who writes books. From the new moon to the next. From the sunrise to the next. It wasn't always easy — but it turned out well. It was very good.
 
 ^1. In 2023 the seventh of October was Shemini Atzeret — the birthday of the man's mother-in-law and co-author, who appears in the first book — and the day the darkness fell. By 2026 her Hebrew birthday had moved to the third; the civil date had not moved at all. That the mending should arrive on it: darkness turning into light. The other date does the same. On the 11th of Adar — the man's birthday — the war with Iran began, February 28, 2026: Shabbat Zachor, three days before Purim, the same Shabbat he was born on. In the month of Purim, in the land of the Purim story, everything turned upside down.
