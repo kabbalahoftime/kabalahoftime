@@ -2,11 +2,7 @@
 
 ### The second book
 
-*A first full assembly of drafts · 2026-10-09 · revised 2026-10-20*
-
 ## Part I | Sunrise |
-
-*Daniel's April 2021 draft, reworked 2026-10-09.*
 
 After a period of focus and tranquility, the man found himself haunted: dilemmas, lack of direction, confusion. Everything felt stagnant and repetitive. His health, too, was far less than ideal — constant tiredness, no focus. It was unclear how he accomplished anything at all.
 

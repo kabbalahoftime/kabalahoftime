@@ -134,9 +134,13 @@ AIR_TOP, AIR_HEAD = 14*mm, 9*mm
 # an opening and starts reading as a paragraph that happens to be centred.
 MIN_TOP, MIN_HEAD = 5*mm, 6*mm
 
-story = [Spacer(1, 62*mm), Paragraph(esc(title), ttl), Spacer(1, 13*mm),
-         Paragraph(esc(subtitle), sub), Spacer(1, 3*mm),
-         Paragraph(esc(dateline), dat), PageBreak()]
+# The title page takes what the manuscript gives it. A book that has
+# stopped calling itself a draft has no dateline, and the page should
+# close up rather than print the word None.
+story = [Spacer(1, 62*mm), Paragraph(esc(title), ttl)]
+if subtitle: story += [Spacer(1, 13*mm), Paragraph(esc(subtitle), sub)]
+if dateline: story += [Spacer(1, 3*mm), Paragraph(esc(dateline), dat)]
+story.append(PageBreak())
 
 # Gather the phases, each with everything that belongs under it in order.
 phases, cur = [], None
