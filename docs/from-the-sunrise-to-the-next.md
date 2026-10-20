@@ -114,19 +114,19 @@ He is water, the element that takes every shape — and he is also the fish, hid
 
 The second started as a moon, a shining olive tree. A voracious reader with an expansive mind and an ear for music. A princess-warrior, she brings light to the dark, her greatest weapon: a guitar.
 
-And so, she became the Eagle. She soars — high, brilliant, near the sun. She has a special way with children, and her sweetness and kindness towards them keeps bringing her home: one act at a time. Air is her element.
+And so, she became the Eagle. She soars — high, brilliant, near the sun. She has a special way with children, and her sweetness and kindness towards them keeps bringing her home: one act at a time. Air is her element — and she is loving and nurturing in it: the eagle that carries its young on its wings.
 
 ### The Ox |
 
-The third started as a wolf, with the beautiful qualities of a deer. He also became an Ox. Determined, competitive, disciplined; never a bad word about anyone crosses his lips. A model priest, tennis player, and loyal friend.
+The third started as a wolf, with the beautiful qualities of a deer. He also became an Ox. Determined, competitive, disciplined; never a bad word about anyone crosses his lips. A model priest: constant, consistent — the same man on every day of the week. A tennis player and a loyal friend.
 
 Gifted in math, his success appears effortless, but the labor and emotion is all there, hidden. He would rather it stayed hidden. Earth is his element — and he holds it.
 
 ### The Lioness |
 
-The fourth had begun as a Lioness-Star, and so she remains. Royal and friendly — a true queen, a super star. While the others transformed, she was always herself, which is the harder thing and the one that shows least.
+The fourth had begun as a Lioness-Star, and so she remains. Royal and friendly — a true queen, a super star. While the others transformed, she was always herself, which is the harder thing.
 
-And she dances beautifully and gracefully — like her mother. She goes with the flow, she knows how to enjoy life; she is expressive and warm, and it shows in her dance. But the ease is what the fire makes: she is driven, and what she takes up — the dance, and everything else — she takes up whole. Fire is her element, but the dance pulls her waterward: the lioness who moves like water. The queen, mid-dance, already crowned.
+And she dances beautifully and gracefully — like her mother. She goes with the flow, she knows how to enjoy life; she is expressive and warm, and it shows in her dance. But the ease is what the fire makes: she is driven, in the dance and in everything else. Fire is her element, but the dance pulls her waterward: the lioness who moves like water. The queen, mid-dance, already crowned.
 
 ### The Mother |
 
