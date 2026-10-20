@@ -68,8 +68,13 @@ dat   = ParagraphStyle('dat', fontName='Cormorant', fontSize=10.5, leading=14,
                        alignment=TA_CENTER, textColor=FAINT)
 # A chapter inside a part. Smaller than a part's title and not page-breaking,
 # with its other name under it where it has one — the land's real name.
+# 11mm above a chapter was a guess; 9mm is what the page wants. Three
+# chapters share a page in the second book, so two millimetres each is
+# most of a line — enough to hold a portrait whole rather than send its
+# last line over to sit alone above the next heading. Nothing else in
+# either book has a chapter in it, so nothing else moves.
 chap  = ParagraphStyle('chap', fontName='Cormorant', fontSize=15.5, leading=20,
-                       alignment=TA_CENTER, textColor=INK, spaceBefore=11*mm)
+                       alignment=TA_CENTER, textColor=INK, spaceBefore=9*mm)
 csub  = ParagraphStyle('csub', fontName='Cormorant-It', fontSize=11.5, leading=15,
                        alignment=TA_CENTER, textColor=DIM, spaceBefore=1.5*mm)
 # The line under a part heading that says where the draft came from.

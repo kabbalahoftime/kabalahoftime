@@ -124,7 +124,7 @@ Gifted in math, his success appears effortless, but the labor and emotion is all
 
 ### The Lioness |
 
-The fourth had begun as a Lioness-Star, and so she remains. Royal and friendly — a true queen, a super star. While the others transformed, she was always herself.
+The fourth had begun as a Lioness-Star, and so she remains. Royal and friendly — a gracious queen, a leader, a super star. While the others transformed, she was always herself.
 
 And she dances beautifully and gracefully — like her mother. She goes with the flow, adapting to whoever is in front of her; she knows how to enjoy life, she is expressive and warm, and it shows in her dance. But the ease is what the fire makes: she is driven, in the dance and in everything else. Fire is her element, but the dance pulls her waterward: the lioness who moves like water, with her beautiful smile.
 
