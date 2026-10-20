@@ -112,15 +112,15 @@ He is water, the element that takes every shape — and he is also the fish, hid
 
 ### The Eagle |
 
-The second started as a moon, a shining olive tree. A voracious reader with an expansive mind and an ear for music. A warrior-queen, she brings light to the dark, her greatest weapon: a guitar.
+The second started as a moon, a shining olive tree. A voracious reader with an expansive mind, an ear for music and an artist's hand. A warrior-queen, she brings light to the dark, her greatest weapon: a guitar.
 
 And so, she became the Eagle. She soars — high, brilliant, near the sun. She has a special way with children, and her sweetness and kindness towards them keeps bringing her home: one act at a time. Air is her element — and she is loving and nurturing in it: the eagle that carries its young on its wings.
 
 ### The Ox |
 
-The third started as a wolf, with the beautiful qualities of a deer. He also became an Ox. Determined, competitive, disciplined; never a bad word about anyone crosses his lips. A model priest: constant, consistent. He plans and executes with precision. A tennis player and a loyal friend.
+The third started as a wolf, with the beautiful qualities of a deer. He also became an Ox. Determined, competitive, disciplined; never a bad word about anyone crosses his lips. A model priest: constant, consistent. He plans and executes with precision. A tennis player and a loyal friend, with an appetite for sport and for good food.
 
-Gifted in math, his success appears effortless, but the labor and emotion is all there, hidden. He would rather it stayed hidden. Earth is his element — and he holds it.
+Gifted in math, his success appears effortless, but the labor and emotion is all there, hidden. He would rather it stayed hidden. There is a calmness to him — understanding, conscientious, respectful. Earth is his element — and he holds it.
 
 ### The Lioness |
 
