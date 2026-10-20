@@ -140,6 +140,8 @@ Their life together moves in waves, and it is not without its challenges: the ra
 
 His father and mother lived their separate lives, as they long had. His mother is an ocean away, and yet always present. His father, close by, spends time with his family on an almost weekly basis.
 
+His father comes to the house: he has leaned across the long table, the grandchildren gathered round it, and blown out the candles. The father who left the first home sits down at the second.
+
 On the seventh of October,[^1] a day after his brother's birthday, the man lay in bed thinking about this book and thinking about his brother, and in that same moment the message came: his brother's daughter had made her father a book for his birthday, and her father was sending it on.
 
 The mending was not their parents' to complete; it was his and his brother's — the homes held together, the table around which the chariot sat, the river that took his brother on a basket now turned to flow both ways.
