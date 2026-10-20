@@ -11659,15 +11659,20 @@ content: ''; float: right; width: 30px; height: 1em;
   // than linked away to Drive, so it opens even with nothing to connect to.
   const KOT_BOOKS_ALSO = [
     // Binah first so the three read Keter, Chochmah, Binah down the column —
-    // the upper three in their own order — and then what it actually is,
-    // which the other two do not need saying because their names say it.
-    // The Sefirah here is a tag on the shelf and nothing more: unlike the two
-    // above it, this one is not carried on its card. Binah's own KoT Book row
-    // shows whichever of the seven the day belongs to, so a reader who goes
-    // looking for this there will not find it.
+    // the upper three in their own order — and then what they are, which the
+    // two above them do not need saying because their names say it.
+    //
+    // Two of them, because they are a pair and the second book says so in its
+    // own last lines: from the new moon to the next, the moon learning month
+    // by month to shine like the sun; from the sunrise to the next, the
+    // sweetening, continuing. The moon and then the sun, which is what the
+    // two marks are.
     { book: 'From the New Moon to the Next', emoji: '🌙',
       where: 'Binah · Creative writing',
       url: 'from-the-new-moon-to-the-next.pdf' },
+    { book: 'From the Sunrise to the Next', emoji: '☀️',
+      where: 'Binah · Creative writing',
+      url: 'from-the-sunrise-to-the-next.pdf' },
   ];
   // The shelf in the footer. Folded shut: it is somewhere to go when you want
   // a whole book, not something to read past on the way to the signature. The
@@ -24774,10 +24779,16 @@ content: ''; float: right; width: 30px; height: 1em;
     // seven have a card each now, so this says what the other two say: the
     // book that lives here. It wears the moon rather than a star — one of the
     // app's own volumes, not a companion gathered for the day.
+    // Both of Binah's, the moon's book and the sun's. The second names the
+    // first in its own closing lines, so they are not two things that happen
+    // to live on one card.
     document.getElementById('binah-kot-book').innerHTML =
       `<span style="font-size:1.1em">\u{1F319}</span> ` +
       `<a href="from-the-new-moon-to-the-next.pdf" target="_blank" style="color:var(--gold)"><strong>From the New Moon to the Next</strong></a>` +
-      `<br><span style="font-size:0.85em;color:var(--ink-mid)">the thirteen phases \u2014 creative writing</span>`;
+      `<br><span style="font-size:0.85em;color:var(--ink-mid)">the thirteen phases \u2014 creative writing</span>` +
+      `<div style="margin-top:8px;"><span style="font-size:1.1em">\u2600\uFE0F</span> ` +
+      `<a href="from-the-sunrise-to-the-next.pdf" target="_blank" style="color:var(--gold)"><strong>From the Sunrise to the Next</strong></a>` +
+      `<br><span style="font-size:0.85em;color:var(--ink-mid)">the second book \u2014 four parts of a day</span></div>`;
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
     let _lsSichosBook = null, _ksaLabel = null;
