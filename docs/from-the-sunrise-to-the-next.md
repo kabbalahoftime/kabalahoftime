@@ -140,7 +140,7 @@ Their life together moves in waves, and it is not without its challenges: the ra
 
 His father and mother lived their separate lives, as they long had. His mother is an ocean away, and yet always present. His father, close by, spends time with his family on an almost weekly basis.
 
-At the eldest's eighteenth his father came to the house: the long table, the grandchildren gathered round it, the candles blown out. Then he took the boy to lunch, as he had taken the man at eighteen. The father who left the first home sits down at the second.
+At the eldest's eighteenth his father came to the house: the long table, the grandchildren gathered round it, the candles blown out. The father who left the first home sat down at the second. Then he took the boy to lunch, as he had taken the man at eighteen.
 
 On the seventh of October,[^1] a day after his brother's birthday, the man lay in bed thinking about this book and thinking about his brother, and in that same moment the message came: his brother's daughter had made her father a book for his birthday, and her father was sending it on.
 
