@@ -112,7 +112,7 @@ He is water, the element that takes every shape — and he is also the fish, hid
 
 ### The Eagle |
 
-The second started as a moon, a shining olive tree, born when the Book's light overpowers the darkness. A voracious reader with an expansive mind, an ear for music and an artist's hand. Beautiful, and a maker of beautiful things. A warrior-queen, her greatest weapon: a guitar.
+The second started as a moon, a shining olive tree, born when the Book's light overpowers the darkness. A voracious reader with an expansive mind, an ear for music and an artist's hand. Beautiful, and a maker of beauty. A warrior-queen, her greatest weapon: a guitar.
 
 And so, she became the Eagle, without ceasing to be either. She soars — high, brilliant, near the sun. She has a special way with children, and her sweetness and kindness towards them keeps bringing her home: one act at a time. Air is her element — and she is loving and nurturing in it: the eagle that carries its young on its wings.
 
