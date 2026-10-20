@@ -118,7 +118,7 @@ And so, she became the Eagle. She soars — high, brilliant, near the sun. She h
 
 ### The Ox |
 
-The third started as a wolf, with the beautiful qualities of a deer. He also became an Ox. Determined, competitive, disciplined; never a bad word about anyone crosses his lips. A model priest: constant, consistent — the same man on every day of the week. A tennis player and a loyal friend.
+The third started as a wolf, with the beautiful qualities of a deer. He also became an Ox. Determined, competitive, disciplined; never a bad word about anyone crosses his lips. A model priest: constant, consistent. He plans and executes with precision. A tennis player and a loyal friend.
 
 Gifted in math, his success appears effortless, but the labor and emotion is all there, hidden. He would rather it stayed hidden. Earth is his element — and he holds it.
 
