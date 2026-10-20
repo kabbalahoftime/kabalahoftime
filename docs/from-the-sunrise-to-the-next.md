@@ -96,6 +96,8 @@ On the eve of the Seventh Day, they sit around the table, and the man blesses th
 
 Four faces: the Man/Leopard, the Eagle, the Ox/Deer, the Lioness. The man looks at his children and sees them, each week transformed.
 
+Every one of the creatures bore all four faces; what set one from another was only which of them led. So these are four ways of standing, not four portions.
+
 Water, air, earth, fire, water. Bold as the leopard, light as the eagle, swift as the deer, strong as the lion — to do the will of the Teacher.
 
 And the same four stand in the system he had built in the Land of the Cats, a season to each: the eagle's air in the fall, the man's water in the winter, the ox's earth in the spring, the lion's fire in the summer, each under its own angel. The table and the calendar had come out the same.
@@ -116,13 +118,15 @@ And so, she became the Eagle. She soars — high, brilliant, near the sun. She h
 
 ### The Ox |
 
-The third started as a wolf, with the beautiful qualities of a deer. He also became an Ox. Determined, competitive, disciplined; never a bad word about anyone crosses his lips. A model priest, tennis player, and loyal friend. Gifted in math, his success appears effortless, but the labor and emotion is all there, hidden. Earth is his element — and he holds it.
+The third started as a wolf, with the beautiful qualities of a deer. He also became an Ox. Determined, competitive, disciplined; never a bad word about anyone crosses his lips. A model priest, tennis player, and loyal friend.
+
+Gifted in math, his success appears effortless, but the labor and emotion is all there, hidden. He would rather it stayed hidden. Earth is his element — and he holds it.
 
 ### The Lioness |
 
-The fourth had begun as a Lioness-Star, and so she remains. Royal and friendly — a true queen, a super star. While the others transformed, she was always herself.
+The fourth had begun as a Lioness-Star, and so she remains. Royal and friendly — a true queen, a super star. While the others transformed, she was always herself, which is the harder thing and the one that shows least.
 
-And she dances beautifully and gracefully — like her mother. She goes with the flow, she knows how to enjoy life; she is expressive and warm, and it shows in her dance. Fire is her element, but the dance pulls her waterward: the lioness who moves like water. The queen, mid-dance, already crowned.
+And she dances beautifully and gracefully — like her mother. She goes with the flow, she knows how to enjoy life; she is expressive and warm, and it shows in her dance. But the ease is what the fire makes: she is driven, and what she takes up — the dance, and everything else — she takes up whole. Fire is her element, but the dance pulls her waterward: the lioness who moves like water. The queen, mid-dance, already crowned.
 
 ### The Mother |
 
