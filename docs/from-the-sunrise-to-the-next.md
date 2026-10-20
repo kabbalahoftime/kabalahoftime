@@ -112,7 +112,7 @@ He is water, the element that takes every shape — and he is also the fish, hid
 
 ### The Eagle |
 
-The second started as a moon, a shining olive tree, born when the Book's light overpowers the darkness. A voracious reader with an expansive mind, an ear for music and an artist's hand. A warrior-queen, she brings light to the dark, her greatest weapon: a guitar.
+The second started as a moon, a shining olive tree, born when the Book's light overpowers the darkness. A voracious reader with an expansive mind, an ear for music and an artist's hand. Beautiful, and a maker of beautiful things. A warrior-queen, her greatest weapon: a guitar.
 
 And so, she became the Eagle, without ceasing to be either. She soars — high, brilliant, near the sun. She has a special way with children, and her sweetness and kindness towards them keeps bringing her home: one act at a time. Air is her element — and she is loving and nurturing in it: the eagle that carries its young on its wings.
 
@@ -126,7 +126,7 @@ Gifted in math, his success appears effortless, but the labor and emotion is all
 
 The fourth had begun as a Lioness-Star, and so she remains. Royal and friendly — a true queen, a super star. While the others transformed, she was always herself.
 
-And she dances beautifully and gracefully — like her mother. She goes with the flow, adapting to whoever is in front of her; she knows how to enjoy life, she is expressive and warm, and it shows in her dance. But the ease is what the fire makes: she is driven, in the dance and in everything else. Fire is her element, but the dance pulls her waterward: the lioness who moves like water.
+And she dances beautifully and gracefully — like her mother. She goes with the flow, adapting to whoever is in front of her; she knows how to enjoy life, she is expressive and warm, and it shows in her dance. But the ease is what the fire makes: she is driven, in the dance and in everything else. Fire is her element, but the dance pulls her waterward: the lioness who moves like water, with her beautiful smile.
 
 ### The Mother |
 
