@@ -237,10 +237,22 @@ for i, q in enumerate(phases):
         j += 1
 
 if notes:
-    story.append(PageBreak())
-    story.append(Spacer(1, 14*mm))
-    story.append(KeepTogether([Paragraph(TRACK('NOTES'), kick), Spacer(1, 9*mm)]))
-    for n, txt in notes:
+    # A set of notes is an apparatus and opens a page of its own; a single
+    # note is an aside and follows the text it belongs to. The first book has
+    # nine and keeps its notes page; the second has one, and a forced break
+    # was spending a whole page on a hundred and sixteen words.
+    #
+    # The heading is held to the first note either way, so it can never be
+    # left standing alone at the foot of a page.
+    if len(notes) > 1: story.append(PageBreak())
+    story.append(Spacer(1, 16*mm if len(notes) == 1 else 14*mm))
+    head = TRACK('NOTE' if len(notes) == 1 else 'NOTES')
+    first_note = notes[0]
+    story.append(KeepTogether([
+        Paragraph(head, kick), Spacer(1, 9*mm),
+        Paragraph(f'<super><font size="8">{first_note[0]}</font></super>'
+                  f'&nbsp;&nbsp;{esc(first_note[1])}', note)]))
+    for n, txt in notes[1:]:
         story.append(Paragraph(
             f'<super><font size="8">{n}</font></super>&nbsp;&nbsp;{esc(txt)}', note))
 
