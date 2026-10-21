@@ -166,7 +166,7 @@ On the next page: David has one brother and one sister — I will tell you more 
 
 And she had drawn them, the two brothers standing side by side on the page, each named underneath in pencil.
 
-A month before any of it, his sister had sent them all a photograph: a family tree she had made at school, both her families on the one page, and across an ocean the two brothers. She had drawn the man in a kippah. Five in the room, and three surnames in its name.
+A month before any of it, his sister had sent them all a photograph: a family tree she had made at school, both her families on the one page — two of them beside her, two across an ocean, and herself in the middle. She had drawn the man in a kippah. Five in the room, and three surnames in its name.
 
 At Thanksgiving they played tennis. Four took the court: the man, his brother, his son, and his stepsister. His father sat above and watched.
 
