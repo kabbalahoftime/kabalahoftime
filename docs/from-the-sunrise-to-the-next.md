@@ -154,7 +154,15 @@ And the mending, the man understood at last, is the sun's work. The sun sweetens
 
 ### Epilogue |
 
-His brother's daughter — the little niece, born on the day that stands as the foundation of the entire book — the day of the donkey — had made it by hand for her father's birthday: written it out in pencil, pasted photographs into it, and drawn what the photographs did not have. It reached the uncle as pictures of its pages, at night, on a phone.
+A month earlier, on the seventh of September, his sister had sent a photograph to all of them. Good morning, she wrote. Look what I found in my photos.
+
+It was a family tree she had made at school: a face for every person, the names and the birthdays written out, her father's side and her mother's side on the one page, and across an ocean the two brothers she had barely met. She had drawn the man in a kippah, and written beside him that he likes religion. The teacher gave it ninety-five.
+
+Someone said they would bet it was the hardest tree in the class. She said it certainly was.
+
+She had sent it to a room she had made for them all, with three surnames in its name.
+
+His brother's daughter — the little niece, born on the day that stands as the foundation of the entire book — the day of the donkey — had made the book by hand for her father's birthday: written it out in pencil, pasted photographs into it, and drawn what the photographs did not have. It reached the uncle as pictures of its pages, at night, on a phone.
 
 It began: once upon a time in a faraway land, there lived a baby named David. His parents were Sandra and Alan. David was born in New York. In the same hospital as me.
 
