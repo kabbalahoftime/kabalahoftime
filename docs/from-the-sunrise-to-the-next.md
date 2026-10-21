@@ -166,6 +166,8 @@ On the next page: David has one brother and one sister — I will tell you more 
 
 And she had drawn them, the two brothers standing side by side on the page, each named underneath in pencil.
 
+A month before any of it, his sister had sent them all a photograph: a family tree she had made at school, both her families on the one page, and across an ocean the two brothers she had barely met. She had drawn the man in a kippah. Five in the room, and three surnames in its name.
+
 At Thanksgiving they played tennis. Four took the court: the man, his brother, his son, and his stepsister. His father sat above and watched.
 
 The uncle who writes books received a book from a child who writes books. From the new moon to the next. From the sunrise to the next. It wasn't always easy — but it turned out well. It was very good.
