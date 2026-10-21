@@ -170,8 +170,10 @@ A month before any of it, his sister had sent a photograph from the Land of the 
 
 At Thanksgiving they played tennis. Four took the court: the man, his brother, his son, and his (paternal) stepsister. His father sat above and watched.
 
-The uncle who writes books received a book from a child who writes books. From the new moon to the next. From the sunrise to the next. It wasn't always easy — but it turned out well. It was very good.
+The uncle who writes books received a book from a child who writes books. From the new moon to the next. From the sunrise to the next.[^3] It wasn't always easy — but it turned out well. It was very good.
 
 ^1. In 2023 the seventh of October was Shemini Atzeret — the birthday of the man's mother-in-law and co-author, who appears in the first book — and the day the darkness fell. By 2026 her Hebrew birthday had moved to the third; the civil date had not moved at all. That the mending should arrive on it: darkness turning into light. The other date does the same. On the 11th of Adar — the man's birthday — the war with Iran began, February 28, 2026: Shabbat Zachor, three days before Purim, the same Shabbat he was born on. In the month of Purim, in the land of the Purim story, everything turned upside down.
 
 ^2. Portuguese: "By plane, the time of one saudade" — a line from "Parabolicamará," Gilberto Gil's song. Saudade is the longing for an absent loved one — in Hebrew, ga'aguim, the longing that runs through the Song of Songs.
+
+^3. The finished book was sent, in an instant, to the man's father and mother — who were then in the Land of the Sunrise, whose flag is a sun. As a boy, the man had woken every morning to another of Gilberto Gil's songs, "Oriente": "Orient yourself, young man, by the rotation of the Earth around the Sun; smiling, by the continuity of Adam's dream."
