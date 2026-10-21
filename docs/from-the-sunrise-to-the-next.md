@@ -104,6 +104,10 @@ And the same four stand in the system he had built in the Land of the Cats, a se
 
 At night the man prays the old prayer — to his right the angel of kindness, to his left the angel of strength, before him the angel of light, behind him the angel of healing, and above them all the Divine Presence. He prays it, and sees his family: the eldest to his right, the lioness to his left, the eagle before him, the ox behind, supporting — and above them all, his wife.
 
+And sitting at the table, he saw the pattern whole. Going out: lion, ox, eagle, man. At the centre, the donkey. Coming home: man, eagle, ox, lion. The same four faces read one way and then the other, with the house at the turn.
+
+And through every land and every form, the direction was the same: to be reliable, constant, like the sun, living in the moment, from the sunrise to the next.
+
 ### The Eldest |
 
 The eldest began as a cub — fiery, solar, all pounce. His name, in two tongues, held the first letters of them all: his brothers, his sisters, and the book itself. He is the Face of Man: the human face is the one that contains all the others.
