@@ -124,7 +124,7 @@ And so, she became the Eagle, without ceasing to be either. She soars — high, 
 
 The third started as a wolf, with the beautiful qualities of a deer. He also became an Ox — wolf's edge, deer's gentleness, ox's shoulder, all kept. Determined, competitive, disciplined; never a bad word about anyone crosses his lips. A model priest: constant, consistent. He plans and executes with precision. Named after his great-grandfather, a tennis player, a loyal friend, with the family's taste for the game.
 
-Gifted in math, his success appears effortless, but the labor and emotion is all there, hidden. There is a calmness to him — understanding, conscientious, respectful. Straightforward: plain in his pleasures, and wise in keeping things simple. Earth is his element — and he holds it.
+Gifted in math, his success appears effortless, but the labor and emotion is all there, hidden. There is a wonderful calmness to him — understanding, conscientious, respectful — wise in keeping things simple. Earth is his element — and he holds it.
 
 ### The Lioness |
 
