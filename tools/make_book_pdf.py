@@ -244,12 +244,18 @@ if notes:
     #
     # The heading is held to the first note either way, so it can never be
     # left standing alone at the foot of a page.
-    if len(notes) > 1: story.append(PageBreak())
-    story.append(Spacer(1, 12*mm if len(notes) == 1 else 14*mm))
-    head = TRACK('NOTE' if len(notes) == 1 else 'NOTES')
+    #
+    # A lone note takes less air than a notes page, above and below its
+    # heading both: a page of its own can afford the ceremony, the foot of
+    # the last page of the story cannot, and the second book's last page is
+    # the whole margin between thirteen leaves and fourteen.
+    lone = len(notes) == 1
+    if not lone: story.append(PageBreak())
+    story.append(Spacer(1, 7*mm if lone else 14*mm))
+    head = TRACK('NOTE' if lone else 'NOTES')
     first_note = notes[0]
     story.append(KeepTogether([
-        Paragraph(head, kick), Spacer(1, 9*mm),
+        Paragraph(head, kick), Spacer(1, 1*mm if lone else 9*mm),
         Paragraph(f'<super><font size="8">{first_note[0]}</font></super>'
                   f'&nbsp;&nbsp;{esc(first_note[1])}', note)]))
     for n, txt in notes[1:]:

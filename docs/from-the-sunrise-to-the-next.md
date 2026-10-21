@@ -166,7 +166,7 @@ On the next page: David has one brother and one sister — I will tell you more 
 
 And she had drawn them, the two brothers standing side by side on the page, each named underneath in pencil.
 
-A month before any of it, his sister had sent a photograph to her brothers and sisters: a family tree she had drawn at school thirty years before, both her families on the one page — two of them beside her, two across an ocean, and herself in the middle. Five of them, and three surnames between them.
+A month before any of it, his sister had sent a photograph from the Land of the Donkeys to him and his brother, as well as to his stepbrother and stepsister: a family tree she had drawn at school thirty years before, with both her families on the one page — two of them beside her, two across an ocean, and herself in the middle. Even back then she mentioned how she liked the new instant communication technology. Now the world had become even smaller. “De avião o tempo de uma saudade.”
 
 At Thanksgiving they played tennis. Four took the court: the man, his brother, his son, and his stepsister. His father sat above and watched.
 
