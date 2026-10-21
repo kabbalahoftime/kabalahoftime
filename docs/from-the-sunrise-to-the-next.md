@@ -168,7 +168,7 @@ And she had drawn them, the two brothers standing side by side on the page, each
 
 A month before any of it, his sister had sent a photograph from the Land of the Donkeys to him and his brother, as well as to his stepbrother and stepsister: a family tree she had drawn at school thirty years before, with both her families on the one page — two of them beside her, two across an ocean, and herself in the middle. Even back then she mentioned how she liked the new instant communication technology. Now the world had become even smaller. “De avião o tempo de uma saudade.”
 
-At Thanksgiving they played tennis. Four took the court: the man, his brother, his son, and his stepsister. His father sat above and watched.
+At Thanksgiving they played tennis. Four took the court: the man, his brother, his son, and his stepsister on his father's side. His father sat above and watched.
 
 The uncle who writes books received a book from a child who writes books. From the new moon to the next. From the sunrise to the next. It wasn't always easy — but it turned out well. It was very good.
 
