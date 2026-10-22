@@ -3721,7 +3721,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <p>הַקָּטֹן יִהְיֶה לָאֶלֶף &mdash; the smallest shall become a thousand &mdash; is the rule the thirty steps are kept by: a few lines of the Chumash, a page opened, a shiur begun. The order is what is asked for, not the measure. And בְּעִתָּהּ אֲחִישֶׁנָּה &mdash; in its time, or hastened &mdash; is the seam this calendar stands on: a year already fixed, and a day still to be walked.</p>
     </div>
     <div class="pane-body pane-prose" data-pane="books">
-    <p>The books of the Kabbalah of Time. The seven of the week are read one a day, each on the day named beside it; the rest stand on a card of their own, all year round. Every one of them is linked from its own card too &mdash; this is the shelf.</p>
+    <p>The books of the Kabbalah of Time, each beside the Sefirah it stands on. The seven are read one a day through the week, Chesed down to Malchut; the four above them stand on their card all year round. Every one of them is linked from its own card too &mdash; this is the shelf.</p>
     <div class="book-shelf" id="kot-books-list"></div>
     </div>
   </div>
@@ -11636,8 +11636,16 @@ content: ''; float: right; width: 30px; height: 1em;
     { book: 'Book 7 · Gathering of Songs', emoji: '🪜',
       url: 'https://drive.google.com/file/d/1Z_m4gytOXiDidm5aJM49SoUqwOmxmj6v/view?usp=drivesdk' },
   ];
-  // Two more, which are not of the week and so have no day: they stand on one
-  // card each, all year. Living Likutei Moharan is the book behind Keter's
+  // Which Sefirah each of the seven stands on: Book 1 on Chesed and so down
+  // to Book 7 on Malchut, the seven of the week against the seven lower
+  // Sefirot. Declared once and read twice — here, for the shelf, and by the
+  // render that writes the row onto the card — so the two cannot come to
+  // disagree about where a book lives.
+  const KOT_BOOK_CARDS = ['chesed', 'gevurah', 'tiferet', 'netzach', 'hod', 'yesod', 'malchut'];
+  const _cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  // Two more, which are not of the week: they stand on one card each, all
+  // year. Living Likutei Moharan is the book behind Keter's
   // daily lesson, and the Alef Bet appendix is where Chochmah's letters, their
   // elements and their mishnayot come from. Both were reachable only from
   // their own card, and neither is one of the seven, so they are kept apart
@@ -11667,20 +11675,25 @@ content: ''; float: right; width: 30px; height: 1em;
     // sweetening, continuing. The moon and then the sun, which is what the
     // two marks are.
     { book: 'From the New Moon to the Next', emoji: '🌙',
-      where: 'Binah · Creative writing',
-      url: 'from-the-new-moon-to-the-next.pdf' },
-    { book: 'From the Sunrise to the Next', emoji: '☀️',
-      where: 'Binah · Creative writing',
-      url: 'from-the-sunrise-to-the-next.pdf' },
+      where: 'Binah', url: 'from-the-new-moon-to-the-next.pdf',
+      // The second volume rides with the first: one work in two parts, and
+      // one line on the shelf rather than two entries that would read as two
+      // books. The marks are the moon and then the sun, which is what the
+      // two of them are.
+      also: { book: 'From the Sunrise to the Next', emoji: '☀️',
+              url: 'from-the-sunrise-to-the-next.pdf' } },
   ];
-  // The shelf, in a pane of its own at the head of the page. The day each of
-  // the seven is read comes from MALCHUT_TEXTS rather than being written out
-  // again, so the shelf and the card can never name different days.
+  // The shelf, in a pane of its own at the head of the page. Each book is
+  // named by the Sefirah it stands on rather than by the day it is read: the
+  // day is Malchut's business and the card says it there, and on a shelf what
+  // a reader wants is where the book lives.
   (function fillKotBooks() {
     const el = document.getElementById('kot-books-list');
     if (!el) return;
-    const _row = (b, note) => '<div class="book-row">' + b.emoji + ' ' +
-      '<a href="' + b.url + '" target="_blank" rel="noopener">' + b.book + '</a>' +
+    const _link = b => b.emoji + ' <a href="' + b.url + '" target="_blank" ' +
+      'rel="noopener">' + b.book + '</a>';
+    const _row = (b, note) => '<div class="book-row">' + _link(b) +
+      (b.also ? ' and ' + _link(b.also) : '') +
       (note ? ' <span class="book-where">· ' + note + '</span>' : '') + '</div>';
     // The three that stand on a card come first — Keter, Chochmah, Binah, in
     // the order of the cards themselves — and the seven of the week follow.
@@ -11690,10 +11703,7 @@ content: ''; float: right; width: 30px; height: 1em;
     el.innerHTML =
     KOT_BOOKS_MORE.map(b => _row(b, b.where)).join('') +
     KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('') +
-    KOT_BOOKS.map((b, i) => {
-      const day = (MALCHUT_TEXTS[i] || {}).day || '';
-      return _row(b, day);
-    }).join('');
+    KOT_BOOKS.map((b, i) => _row(b, _cap(KOT_BOOK_CARDS[i] || ''))).join('');
     // Keter's link is written into the page rather than rendered, so it is
     // pointed at the one address here instead of carrying a second copy.
     const kl = document.getElementById('keter-kot-link');
@@ -24555,7 +24565,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // The rows go in the face and the pane machinery moves them: a
     // .malchut-ksa-row carrying a .kot-book-icon is taken into Ma'alot, which
     // is how Chochmah's and Binah's got there.
-    ['chesed', 'gevurah', 'tiferet', 'netzach', 'hod', 'yesod', 'malchut']
+    KOT_BOOK_CARDS
       .forEach((card, i) => {
         const el = document.getElementById(card + '-kot-book');
         const db = DAY_BOOKS[i];
