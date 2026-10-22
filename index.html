@@ -17575,7 +17575,17 @@ content: ''; float: right; width: 30px; height: 1em;
         const el = document.createElement('div');
         el.className = 'ps-niggun rebbe-niggun';
         el.innerHTML = html;
-        head.insertAdjacentElement('afterend', el);
+        // After the bearer's own text, not between his name and it. Perek
+        // Shirah sets the week's niggun under the creature's verse rather
+        // than over it, and the two panes are the same kind of thing: a
+        // closed set whose members each have a song. A melody announced
+        // before the words is a melody interrupting them.
+        let last = head;
+        while (last.nextElementSibling &&
+               !(last.nextElementSibling.matches('[data-rebbe]') &&
+                 !last.nextElementSibling.classList.contains('star-mark')))
+          last = last.nextElementSibling;
+        last.insertAdjacentElement('afterend', el);
       });
     });
   }
