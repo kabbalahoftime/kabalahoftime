@@ -1537,7 +1537,7 @@ of time.
 
 ### Be Maccabees |
 
-Musical Adaptation by the very talented Stephanie Romay, more information at https://www.facebook.com/ellayelmusic
+Musical Adaptation by the very talented Stephanie Romay, more information at [facebook.com](https://www.facebook.com/ellayelmusic)
 
 I wish I could tell you
 Everything is ok.
