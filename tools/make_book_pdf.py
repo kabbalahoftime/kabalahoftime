@@ -125,6 +125,20 @@ verse  = ParagraphStyle('verse', parent=body, alignment=TA_LEFT,
                         spaceBefore=4.6*mm)
 # The stanza that opens a poem has the heading's own air above it already.
 verse1 = ParagraphStyle('verse1', parent=verse, spaceBefore=0)
+# A stanza written in Hebrew reads from the right, so it hangs from the right
+# margin: set flush right, and indented from that side instead of this one.
+# Only a stanza that is Hebrew throughout turns — a Hebrew phrase inside an
+# English sentence stays where the sentence puts it.
+from reportlab.lib.enums import TA_RIGHT
+verseR  = ParagraphStyle('verseR', parent=verse, alignment=TA_RIGHT,
+                         leftIndent=0, rightIndent=7*mm)
+verse1R = ParagraphStyle('verse1R', parent=verseR, spaceBefore=0)
+RTL = {verse: verseR, verse1: verse1R}
+
+def _rtl(val):
+    letters = [c for c in val if c.isalpha()]
+    return bool(letters) and sum(1 for c in letters
+                                 if '\u0590' <= c <= '\u05FF') / len(letters) > 0.5
 # The three lines of a phase opening. The kicker is letterspaced small capitals
 # in all but name — Cormorant has no small-cap face here, so it is set small,
 # tracked and faint, which reads the same way at this size.
@@ -265,6 +279,7 @@ for kind, val in blocks:
 # Escaped whole and broken after, so that the quotation marks a stanza opens
 # on one line and closes on another still come out as a pair.
 def _verse(val, style):
+    if _rtl(val): style = RTL.get(style, style)
     return Paragraph('<br/>'.join(esc(val).split('\n')), style)
 
 def _h(style, txt):
