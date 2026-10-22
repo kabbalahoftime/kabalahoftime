@@ -1024,7 +1024,8 @@ animation: fadeIn 0.25s ease;
 .pane-host[data-pane="stars"]   .pane-body[data-pane="stars"],
 .pane-host[data-pane="menorah"] .pane-body[data-pane="menorah"],
 .pane-host[data-pane="shirah"]  .pane-body[data-pane="shirah"],
-.pane-host[data-pane="intro"]   .pane-body[data-pane="intro"] {
+.pane-host[data-pane="intro"]   .pane-body[data-pane="intro"],
+.pane-host[data-pane="books"]   .pane-body[data-pane="books"] {
 display: block;
 }
 
@@ -2157,37 +2158,24 @@ letter-spacing: 0;
 /* The seven books, folded into the footer. Shut by default, and left-aligned
    inside a centred box so seven rows of different lengths read as a list
    rather than as a stack of loose lines. */
-.footer-books {
-margin-top: 14px;
-display: inline-block;
-text-align: left;
-max-width: 420px;
-}
-.footer-books > summary {
-font-family: 'Cinzel', serif;
-font-size: calc(10px * var(--ts, 1));
-letter-spacing: 2px;
-text-transform: uppercase;
-color: var(--gold);
-text-align: center;
-cursor: pointer;
-padding: 12px 6px;
-list-style: none;
-}
-.footer-books > summary::-webkit-details-marker { display: none; }
-.footer-books > summary::after { content: ' \25be'; }
-.footer-books[open] > summary::after { content: ' \25b4'; }
+/* ── THE SHELF ──
+   The books in a pane of their own at the head of the page. They sat folded
+   shut in the footer, which is where a thing goes when nobody is expected to
+   open it. The seven of the week and Keter's and Chochmah's each stand on a
+   card as well; the two creative-writing volumes stand on none, so this is
+   the only way to them. */
+.book-shelf { text-align: left; max-width: 420px; margin: 0 auto; }
 /* 12px of padding on a 18px line gives the row the finger's worth of height
    the cards' own links get, without moving anything drawn. */
-.footer-book {
+.book-row {
 font-size: calc(12px * var(--ts, 1));
 line-height: 1.5;
 letter-spacing: 0;
 padding: 12px 4px;
 }
-.footer-book a { color: var(--gold); text-decoration: none; }
-.footer-book a:hover, .footer-book a:focus-visible { text-decoration: underline; }
-.footer-book .fb-day { color: var(--ink-dim); font-size: 0.85em; font-style: italic; }
+.book-row a { color: var(--gold); text-decoration: none; }
+.book-row a:hover, .book-row a:focus-visible { text-decoration: underline; }
+.book-row .book-where { color: var(--ink-dim); font-size: 0.85em; font-style: italic; }
 .footer-authors {
 font-family: 'Cinzel', serif;
 font-size: calc(11px * var(--ts, 1));
@@ -3692,6 +3680,8 @@ content: ''; float: right; width: 30px; height: 1em;
               aria-selected="true" onclick="selectPane(this)">Perek Shirah</button>
       <button type="button" class="pane-btn" data-pane="intro" role="tab"
               aria-selected="false" onclick="selectPane(this)">Introduction</button>
+      <button type="button" class="pane-btn" data-pane="books" role="tab"
+              aria-selected="false" onclick="selectPane(this)">Books</button>
       <!-- Not a tab: it opens the window rather than turning the card over,
            so it carries no data-pane and says what it does to a reader who
            cannot see the strip. -->
@@ -3715,6 +3705,10 @@ content: ''; float: right; width: 30px; height: 1em;
     <p>The calendar is the master key to unlock the hidden rationale behind the formal structure of ancient sacred texts, as well as to understand basic mystical concepts. When comprehended within the context of the Jewish calendar, these works reveal the spiritual energy of each day, serving as a practical guide for self-analysis and development.</p>
     <p>During this daily journey, we learn to live with greater harmony, happiness and gratitude &mdash; from the Kabbalah, from age-old Jewish ethical teachings, and even from animals. The objective is to be in touch with the spiritual powers of each day, thereby improving one&rsquo;s daily conduct and rediscovering the universal song within each one of us: the song of the soul.</p>
     <p>Most of the cards are built on the week &mdash; the Torah&rsquo;s weekly Parasha, or the Omer&rsquo;s count of weeks &mdash; layered with shorter and longer spans: 13 attributes, the 22 letters, the Rambam&rsquo;s 28 days, 40 days of receiving the Torah, the 72-fold Name, the four seasons of 91 &mdash; each one a single running and returning around its own heart &mdash; and the full 364-day year. Ma&rsquo;alot HaZman &mdash; the steps of time &mdash; does the reverse above, spiraling the whole year upward through the hours of a single day. All converge on this moment, each adding its own spiritual dimension to today.</p>
+    </div>
+    <div class="pane-body pane-prose" data-pane="books">
+    <p>The books of the Kabbalah of Time. The seven of the week are read one a day, each on the day named beside it, and Binah's row shows whichever one the day has come to. Keter's and Chochmah's stand on their own card all year. The two creative-writing volumes stand on no card &mdash; this is where they live.</p>
+    <div class="book-shelf" id="kot-books-list"></div>
     </div>
   </div>
   </div>
@@ -5266,10 +5260,6 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="footer-text" style="margin-top:8px;">kabbalahoftime.com</div>
     <!-- The books themselves. The app has been reading a page a day out of
          them from the beginning and never said where to find one whole. -->
-    <details class="footer-books">
-      <summary>The KoT books</summary>
-      <div id="kot-books-list"></div>
-    </details>
     <!-- The artists, credited here rather than under each picture. A name set
          beneath the artwork read as a caption competing with it, and the
          weekly page carries one every day of the year. -->
@@ -11635,22 +11625,21 @@ content: ''; float: right; width: 30px; height: 1em;
     // sweetening, continuing. The moon and then the sun, which is what the
     // two marks are.
     { book: 'From the New Moon to the Next', emoji: '🌙',
-      where: 'Binah · Creative writing',
+      where: 'Creative writing',
       url: 'from-the-new-moon-to-the-next.pdf' },
     { book: 'From the Sunrise to the Next', emoji: '☀️',
-      where: 'Binah · Creative writing',
+      where: 'Creative writing',
       url: 'from-the-sunrise-to-the-next.pdf' },
   ];
-  // The shelf in the footer. Folded shut: it is somewhere to go when you want
-  // a whole book, not something to read past on the way to the signature. The
+  // The shelf, in a pane of its own at the head of the page. The
   // day each of the seven is read comes from MALCHUT_TEXTS rather than being
   // written out again, so the shelf and the card can never name different days.
   (function fillKotBooks() {
     const el = document.getElementById('kot-books-list');
     if (!el) return;
-    const _row = (b, note) => '<div class="footer-book">' + b.emoji + ' ' +
+    const _row = (b, note) => '<div class="book-row">' + b.emoji + ' ' +
       '<a href="' + b.url + '" target="_blank" rel="noopener">' + b.book + '</a>' +
-      (note ? ' <span class="fb-day">· ' + note + '</span>' : '') + '</div>';
+      (note ? ' <span class="book-where">· ' + note + '</span>' : '') + '</div>';
     // The three that stand on a card come first — Keter, Chochmah, Binah, in
     // the order of the cards themselves — and the seven of the week follow.
     // The seven were first when the shelf was only seven; they are the longer
@@ -24711,19 +24700,18 @@ content: ''; float: right; width: 30px; height: 1em;
                : `<span class="ps-src">— its song is not recorded here</span>`);
     })();
 
-    // Binah's books: the day's one of the seven, and then the two that do
-    // not turn with the week.
+    // Binah's book: whichever of the seven the day has come to, and only
+    // that. The seven are a reading keyed to the day, and this is the row
+    // that says so — one of them showing, the other six waiting for their
+    // weekday. They had a card each for a week, Chesed through Malchut, which
+    // made each one stand all year on a Sefirah of its own: a shelf rather
+    // than a reading. They are back here, where the day chooses which.
     //
-    // The seven are a reading keyed to the day, and this is the row that says
-    // so — one of them showing, the other six waiting for their weekday. They
-    // had a card each for a week, Chesed through Malchut, which made each one
-    // stand all year on a Sefirah of its own; a shelf rather than a reading.
-    // They are back here, where the day chooses which.
-    //
-    // Beneath them the moon's book and the sun's, which wear the moon and the
-    // sun rather than a star: they are the app's own volumes and not
-    // companions gathered for the day. The second names the first in its own
-    // closing lines, so they are not two things that happen to share a card.
+    // The two creative-writing volumes stood beneath them and no longer do.
+    // They turn with nothing — not the week, not the year — so there was no
+    // reading for them to sit beside, and the Books tab at the head of the
+    // page is where they are now. They are the only two that stand on no
+    // card, which is why that tab exists.
     const bookParts = todayBook.book.split(' \u00b7 ');
     document.getElementById('binah-kot-book').innerHTML =
       `<span style="font-size:1.1em">${todayBook.emoji}</span> ` +
@@ -24736,13 +24724,7 @@ content: ''; float: right; width: 30px; height: 1em;
       // book and the same day.
       `<br><span class="kot-summary" role="button" tabindex="0" ` +
         `onclick="openKotBookModal(${sef.dayNum - 1})">Summary \u25be</span>` +
-      (todayBook.weekUrl ? ` &nbsp;\u00b7&nbsp; <a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '') +
-      `<div style="margin-top:8px;"><span style="font-size:1.1em">\u{1F319}</span> ` +
-      `<a href="from-the-new-moon-to-the-next.pdf" target="_blank" style="color:var(--gold)"><strong>From the New Moon to the Next</strong></a>` +
-      `<br><span style="font-size:0.85em;color:var(--ink-mid)">the thirteen phases \u2014 creative writing</span></div>` +
-      `<div style="margin-top:8px;"><span style="font-size:1.1em">\u2600\uFE0F</span> ` +
-      `<a href="from-the-sunrise-to-the-next.pdf" target="_blank" style="color:var(--gold)"><strong>From the Sunrise to the Next</strong></a>` +
-      `<br><span style="font-size:0.85em;color:var(--ink-mid)">the second book \u2014 four parts of a day</span></div>`;
+      (todayBook.weekUrl ? ` &nbsp;\u00b7&nbsp; <a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
     let _lsSichosBook = null, _ksaLabel = null;
