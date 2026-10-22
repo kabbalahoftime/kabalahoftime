@@ -45,6 +45,63 @@ pdfmetrics.registerFont(TTFont('Cormorant', FD / 'CormorantGaramond-Regular.ttf'
 pdfmetrics.registerFont(TTFont('Cormorant-It', FD / 'CormorantGaramond-Italic.ttf'))
 pdfmetrics.registerFontFamily('Cormorant', normal='Cormorant', bold='Cormorant',
                               italic='Cormorant-It', boldItalic='Cormorant-It')
+# ── WHAT CORMORANT CANNOT DRAW ──
+# Cormorant Garamond has no Hebrew and no mathematics in it, and ReportLab
+# does not go looking for another face the way a browser does: it prints a
+# blank box and says nothing. Six thousand nine hundred Hebrew characters
+# went that way before anyone noticed, and an infinity sign at the end of a
+# poem about pi.
+#
+# So two faces stand behind it. Hebrew is set in Frank Ruhl Libre, which is
+# the face the app itself uses for Hebrew, converted out of the webfont the
+# site serves. Everything else Cormorant lacks falls to FreeSerif, which has
+# most of Unicode and is at least a serif.
+# The Hebrew face is built from the webfont the site itself serves, so the
+# page and the book cannot come to use different Hebrew. ReportLab wants a
+# TrueType, and the repository holds a woff2; fontTools unpacks one into the
+# other, once, beside the other faces.
+_HEB_TTF = FD / 'FrankRuhlLibre-Hebrew.ttf'
+if not _HEB_TTF.exists():
+    from fontTools.ttLib import TTFont as _TTF2
+    _w = pathlib.Path(__file__).resolve().parent.parent / 'fonts' / 'frank-ruhl-libre-hebrew.woff2'
+    _f = _TTF2(str(_w)); _f.flavor = None; _f.save(str(_HEB_TTF))
+pdfmetrics.registerFont(TTFont('Hebrew', _HEB_TTF))
+_FALL = '/usr/share/fonts/truetype/freefont/FreeSerif.ttf'
+pdfmetrics.registerFont(TTFont('Fallback', _FALL if pathlib.Path(_FALL).exists()
+                               else str(FD / 'CormorantGaramond-Regular.ttf')))
+try:
+    from fontTools.ttLib import TTFont as _TTF
+    HAVE = set(_TTF(str(FD / 'CormorantGaramond-Regular.ttf')).getBestCmap())
+except Exception:
+    HAVE = set(range(0x250))          # the Latin a Cormorant certainly has
+HEB = re.compile(r'[\u0590-\u05FF\uFB1D-\uFB4F]')
+try:
+    from bidi.algorithm import get_display
+except Exception:
+    get_display = lambda s: s
+
+def shape(s):
+    """Hebrew put in reading order, and every glyph given a face that has it.
+
+    ReportLab lays type out left to right and knows nothing of bidi, so a
+    Hebrew run has to arrive already reversed. Runs are then wrapped in the
+    face that can draw them — which has to happen after the reordering, or
+    the tags would be reversed along with the letters.
+    """
+    if HEB.search(s): s = get_display(s)
+    out, run, face = [], [], None
+    def flush():
+        if not run: return
+        txt = ''.join(run)
+        out.append(txt if face is None else
+                   '<font name="%s">%s</font>' % (face, txt))
+    for ch in s:
+        f = 'Hebrew' if HEB.match(ch) else (None if ord(ch) in HAVE or ord(ch) < 0x80 else 'Fallback')
+        if f != face:
+            flush(); run, face = [], f
+        run.append(ch)
+    flush()
+    return ''.join(out)
 
 INK, DIM, FAINT, GOLD = '#1b1714', '#5b5048', '#8a7d72', '#8c6d2f'
 body  = ParagraphStyle('body', fontName='Cormorant', fontSize=13.4, leading=19.6,
@@ -115,6 +172,7 @@ def esc(s):
         else:
             out.append(ch)
     s = ''.join(out)
+    s = shape(s)
     # The raised numeral that calls a note.
     s = re.sub(r'\[\^(\d+)\]', r'<super><font size="8">\1</font></super>', s)
     # A link, written [text](address). Set in the same gold a link wears
