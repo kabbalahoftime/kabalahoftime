@@ -3680,11 +3680,17 @@ content: ''; float: right; width: 30px; height: 1em;
        pictures, and beside it why any of this is shaped the way it is. Two
        panes rather than two stacked blocks, because only one of them is read
        daily — the song changes with the week, the introduction does not.
-       Perek Shirah is the pane it opens on — the host carries data-pane in the
-       markup and the CSS shows the body that matches, so no script has to
-       choose. It is no longer the first button, so aria-selected travels with
-       the pane rather than with the position: the introduction and the video
-       are watched once and lead, and the two that are read all year follow.
+       Perek Shirah is the pane it opens on, and it is the last button rather
+       than the first — the host carries data-pane in the markup and the CSS
+       shows the body that matches, so what opens has never depended on what
+       comes first, and aria-selected travels with the pane.
+       The four run as a Sefirah card's four panes do. The introduction is the
+       structure taken in order, which is the מעלות; the video is watched
+       rather than climbed, which is what the מיעוטים are; the books are the
+       companions, texts that accompany the day and are counted toward
+       nothing; and Perek Shirah is the menorah among them — the one closed
+       set, a fixed canon with a place for each of its creatures and one to
+       a week, which is why it is also the one that opens.
 
        The introduction used to be the last section of the How-to Guide. The
        guide is about how the page is worked; this is about why it is built
@@ -3701,10 +3707,10 @@ content: ''; float: right; width: 30px; height: 1em;
            two are watched once and the two beside them are read all year. -->
       <button type="button" class="pane-btn" aria-haspopup="dialog"
               onclick="event.stopPropagation(); openVideoModal()">Video</button>
-      <button type="button" class="pane-btn" data-pane="shirah" role="tab"
-              aria-selected="true" onclick="selectPane(this)">Perek Shirah</button>
       <button type="button" class="pane-btn" data-pane="books" role="tab"
               aria-selected="false" onclick="selectPane(this)">KoT Books</button>
+      <button type="button" class="pane-btn" data-pane="shirah" role="tab"
+              aria-selected="true" onclick="selectPane(this)">Perek Shirah</button>
     </div>
     <div class="pane-body pane-prose" data-pane="shirah">
       <div id="perek-shirah-week" style="display:none;">
