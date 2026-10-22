@@ -11675,13 +11675,9 @@ content: ''; float: right; width: 30px; height: 1em;
     // sweetening, continuing. The moon and then the sun, which is what the
     // two marks are.
     { book: 'From the New Moon to the Next', emoji: '🌙',
-      where: 'Binah', url: 'from-the-new-moon-to-the-next.pdf',
-      // The second volume rides with the first: one work in two parts, and
-      // one line on the shelf rather than two entries that would read as two
-      // books. The marks are the moon and then the sun, which is what the
-      // two of them are.
-      also: { book: 'From the Sunrise to the Next', emoji: '☀️',
-              url: 'from-the-sunrise-to-the-next.pdf' } },
+      where: 'Binah', url: 'from-the-new-moon-to-the-next.pdf' },
+    { book: 'From the Sunrise to the Next', emoji: '☀️',
+      where: 'Binah', url: 'from-the-sunrise-to-the-next.pdf' },
   ];
   // The shelf, in a pane of its own at the head of the page. Each book is
   // named by the Sefirah it stands on rather than by the day it is read: the
@@ -11690,10 +11686,8 @@ content: ''; float: right; width: 30px; height: 1em;
   (function fillKotBooks() {
     const el = document.getElementById('kot-books-list');
     if (!el) return;
-    const _link = b => b.emoji + ' <a href="' + b.url + '" target="_blank" ' +
-      'rel="noopener">' + b.book + '</a>';
-    const _row = (b, note) => '<div class="book-row">' + _link(b) +
-      (b.also ? ' and ' + _link(b.also) : '') +
+    const _row = (b, note) => '<div class="book-row">' + b.emoji + ' ' +
+      '<a href="' + b.url + '" target="_blank" rel="noopener">' + b.book + '</a>' +
       (note ? ' <span class="book-where">· ' + note + '</span>' : '') + '</div>';
     // The three that stand on a card come first — Keter, Chochmah, Binah, in
     // the order of the cards themselves — and the seven of the week follow.
