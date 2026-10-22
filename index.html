@@ -1079,7 +1079,12 @@ border-bottom: 1px solid var(--border);
    because the readings have moved into panes where the page's own check can
    see them. */
 .keter-section-label[lang="he"], .keter-section-label [lang="he"],
-.sefirah-panes [lang="he"], .keter-panes [lang="he"] {
+.sefirah-panes [lang="he"], .keter-panes [lang="he"],
+/* Today's Path names its two halves in Hebrew now — the מעלות going down and
+   the מיעוטים coming back — and the title they sit in is tracked Cinzel, which
+   Hebrew must not be. The run is wrapped in a lang="he" span by the marker
+   that runs over the page, so there is something here to hold. */
+.path-section-title [lang="he"] {
 letter-spacing: 0;
 }
 
@@ -3916,7 +3921,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <div id="kot-welcome" style="display:none; margin:12px 0 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); line-height:1.7; position:relative;">
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:calc(18px * var(--ts, 1)); cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
-    Tap a small gold <strong>מעלה</strong> tag when you have learned it — fifteen of them climb from Malchut to Keter and fill tonight's moon; when it becomes the sun, come back down from Keter to Malchut through the <strong>מיעוט</strong> tags inside the cards. Today's Ladder asks for whichever one belongs to the hour you are in; climbing them in order is a practice of its own.
+    Tap a small gold <strong>מעלה</strong> tag when you have learned it — fifteen of them come down from Keter to Malchut and fill tonight's moon; when it becomes the sun, climb back up from Malchut to Keter through the <strong>מיעוט</strong> tags inside the cards. Today's Ladder asks for whichever one belongs to the hour you are in; taking them in order is a practice of its own.
     Each Sefirah also holds one of the day's ten <strong>prayers</strong> — tap it when you have prayed, and watch the heart in Today's Ladder fill.
     <a href="#" onclick="event.preventDefault(); openTodaysPath()" style="color:var(--gold); font-weight:600;">Tap the moon 🌙 above anytime to see Today's Path.</a>
   </div>
@@ -4063,10 +4068,41 @@ content: ''; float: right; width: 30px; height: 1em;
             aria-selected="false" onclick="selectPane(this)"><bdi lang="he">מנורה</bdi><span class="pb-en">Menorah</span></button>
   </div>
   <div class="pane-body" data-pane="maalot">
+  <!-- CHUMASH section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Chumash with Rashi <span class="maalah">מעלה א׳</span></div>
+    <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
+    <div class="keter-main" id="keter-chumash-main">Loading…</div>
+    <div class="keter-meta" id="keter-chumash-meta"></div>
+  </div>
+  <!-- TANYA section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Tanya <span class="maalah">מעלה ב׳</span></div>
+    <div class="keter-main" id="keter-tanya-main">Loading…</div>
+    <div class="keter-meta" id="keter-tanya-meta"></div>
+  </div>
+  <!-- RAMBAM 3 chapters section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Rambam · 3 Chapters <span class="maalah">מעלה ג׳</span></div>
+    <div class="keter-main" id="keter-rambam-main">Loading…</div>
+  </div>
+  <!-- RAMBAM 1 chapter section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Rambam · 1 Chapter <span class="maalah">מעלה ג׳</span></div>
+    <div class="keter-main" id="keter-rambam1-main">Loading…</div>
+  </div>
+  <!-- RAMBAM Sefer HaMitzvos section -->
+  <div class="keter-section">
+    <div class="keter-section-label">✦ Rambam · Sefer HaMitzvos <span class="maalah">מעלה ג׳</span></div>
+    <div class="keter-main" id="keter-rambam-shm-main">Loading…</div>
+    <div class="keter-meta" id="keter-rambam-shm-titles"></div>
+  </div>
+  </div>
+  <div class="pane-body" data-pane="miutim">
   <!-- Three Heads of Atik — descending: Emunah → Ta'anug → Ratzon -->
   <!-- DAILY LM section -->
   <div class="keter-section has-info" style="background:#fdf9f2;border-bottom:1px solid var(--border);">
-    <div class="keter-section-label">✦ All Year Round — בכל השנה <span class="maalah">מעלה ט״ו</span></div>
+    <div class="keter-section-label">✦ All Year Round — בכל השנה <span class="maalah yom" data-wane="15">מיעוט ט״ו</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Emunah · Reisha d'lo Ityada — Rashbi &amp; Rebbe Nachman</div>
     <div class="sefirah-main-text" id="keter-daily-zohar"></div>
     <button class="date-jump-trigger" id="zohar-trigger" style="display:none;" onclick="event.stopPropagation(); openZoharDailyModal()">Zohar summary ↗︎</button>
@@ -4079,7 +4115,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <!-- KETER SHEM TOV row — Daily Chassidic Foundation -->
   <div class="keter-kst-row keter-section has-info">
     <span class="cycle-info-btn corner" data-cycle="ohrkitov" role="button" tabindex="0" aria-label="About this cycle" title="About this cycle">ⓘ</span>
-    <div class="keter-section-label" id="keter-kst-label">✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה י״ד</span></div>
+    <div class="keter-section-label" id="keter-kst-label">✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah yom" data-wane="14">מיעוט י״ד</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ta'anug · Reisha d'Ayin — Baal Shem Tov &amp; Ohr HaChaim HaKadosh</div>
     <div class="sefirah-main-text" id="keter-kst-main">Loading…</div>
     <button class="date-jump-trigger" id="okt-trigger" style="display:none;" onclick="event.stopPropagation(); openOhrKiTovModal()">Today's Keter Shem Tov summary ↗︎</button>
@@ -4087,41 +4123,10 @@ content: ''; float: right; width: 30px; height: 1em;
   <!-- HAYOM YOM + SEFER HAMITZVOS section -->
   <div class="keter-section has-info" style="background:#fdf9f2;">
     <span class="cycle-info-btn corner" data-cycle="yomchazak" role="button" tabindex="0" aria-label="About this cycle" title="About this cycle">ⓘ</span>
-    <div class="keter-section-label">✦ Strong Day — יום חזק <span class="maalah">מעלה י״ג</span></div>
+    <div class="keter-section-label">✦ Strong Day — יום חזק <span class="maalah yom" data-wane="13">מיעוט י״ג</span></div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Ratzon · Reisha d'Arich — Rambam &amp; Lubavitcher Rebbe</div>
     <div class="sefirah-main-text" id="keter-rambam-face">Loading…</div>
     <div class="sefirah-main-text" id="keter-hayomyom" style="margin-top:4px;">Loading…</div>
-  </div>
-  </div>
-  <div class="pane-body" data-pane="miutim">
-  <!-- CHUMASH section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Chumash with Rashi <span class="maalah yom" data-wane="1">מיעוט א׳</span></div>
-    <div class="keter-hdate" id="keter-chumash-date">Loading…</div>
-    <div class="keter-main" id="keter-chumash-main">Loading…</div>
-    <div class="keter-meta" id="keter-chumash-meta"></div>
-  </div>
-  <!-- TANYA section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Tanya <span class="maalah yom" data-wane="2">מיעוט ב׳</span></div>
-    <div class="keter-main" id="keter-tanya-main">Loading…</div>
-    <div class="keter-meta" id="keter-tanya-meta"></div>
-  </div>
-  <!-- RAMBAM 3 chapters section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Rambam · 3 Chapters <span class="maalah yom" data-wane="3">מיעוט ג׳</span></div>
-    <div class="keter-main" id="keter-rambam-main">Loading…</div>
-  </div>
-  <!-- RAMBAM 1 chapter section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Rambam · 1 Chapter <span class="maalah yom" data-wane="3">מיעוט ג׳</span></div>
-    <div class="keter-main" id="keter-rambam1-main">Loading…</div>
-  </div>
-  <!-- RAMBAM Sefer HaMitzvos section -->
-  <div class="keter-section">
-    <div class="keter-section-label">✦ Rambam · Sefer HaMitzvos <span class="maalah yom" data-wane="3">מיעוט ג׳</span></div>
-    <div class="keter-main" id="keter-rambam-shm-main">Loading…</div>
-    <div class="keter-meta" id="keter-rambam-shm-titles"></div>
   </div>
   </div>
   <div class="pane-body" data-pane="stars">
@@ -4271,7 +4276,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="sefirah-sub-text" id="chochmah-sub"></div>
     <div class="sefirah-tags" id="chochmah-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label">✦ Torah Ohr / Likutei Torah <span class="maalah">מעלה י״ב</span></div>
+      <div class="keter-section-label">✦ Torah Ohr / Likutei Torah <span class="maalah yom" data-wane="12">מיעוט י״ב</span></div>
       <div id="chochmah-lt-face" class="sefirah-main-text">Loading…</div>
     </div>
     <div class="malchut-ksa-row" style="margin-top:8px">
@@ -4297,7 +4302,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="sefirah-sub-text" id="binah-sub"></div>
     <div class="sefirah-tags" id="binah-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label">✦ Likutei Tefilot <span class="maalah">מעלה י״א</span></div>
+      <div class="keter-section-label">✦ Likutei Tefilot <span class="maalah yom" data-wane="11">מיעוט י״א</span></div>
       <div id="binah-lt-face" class="sefirah-main-text">Loading…</div>
     </div>
     <div class="malchut-ksa-row" style="margin-top:8px">
@@ -4373,7 +4378,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="sefirah-sub-text" id="gevurah-sub"></div>
     <div class="sefirah-tags" id="gevurah-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label">✦ Tanach <span class="maalah">מעלה ט׳</span></div>
+      <div class="keter-section-label">✦ Tanach <span class="maalah yom" data-wane="9">מיעוט ט׳</span></div>
       <div id="gevurah-text-face" class="sefirah-main-text">Loading…</div>
       <div class="src-line"><button class="date-jump-trigger" id="tanach-trigger" style="display:none;"
             onclick="event.stopPropagation(); openTanachSummaryModal()">today&rsquo;s summary &#8599;&#xFE0E;</button></div>
@@ -4457,7 +4462,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="sefirah-cycle-name">728 Half-Day Cycle</div>
     <div id="hod-pos" class="sefirah-main-text">Loading…</div>
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label" id="hod-sa-label">✦ Shulchan Aruch <span class="maalah">מעלה ו׳</span></div>
+      <div class="keter-section-label" id="hod-sa-label">✦ Shulchan Aruch <span class="maalah yom" data-wane="6">מיעוט ו׳</span></div>
       <div id="hod-sa-face" class="sefirah-main-text">Loading…</div>
     </div>
     <!-- מעלה ה׳ was the Zohar on the week's parasha, which is a weekly unit
@@ -4466,7 +4471,7 @@ content: ''; float: right; width: 30px; height: 1em;
          book this card's own measure comes from: a chapter of Tanna D'vei
          Eliyahu to every thirteen half-days. -->
     <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label" id="hod-tde-label">✦ Tanna D’vei Eliyahu <span class="maalah">מעלה ה׳</span></div>
+      <div class="keter-section-label" id="hod-tde-label">✦ Tanna D’vei Eliyahu <span class="maalah yom" data-wane="5">מיעוט ה׳</span></div>
       <div id="hod-tde-face" class="sefirah-main-text">Loading…</div>
     </div>
     <div class="sefirah-sub-text" style="display:none;"></div>
@@ -4503,7 +4508,7 @@ content: ''; float: right; width: 30px; height: 1em;
       </div>
     <div class="sefirah-detail">
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael <span class="maalah yom" data-wane="12">מיעוט י״ב</span></div>
+      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael <span class="maalah">מעלה י״ב</span></div>
       <div id="keter-chok-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="keter-chok-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
@@ -5176,13 +5181,13 @@ content: ''; float: right; width: 30px; height: 1em;
       <!-- Parallel to Keter's Three Heads — descending: Emunah → Ta'anug → Ratzon -->
       <div class="malchut-inner-row">
         <div class="malchut-section">
-          <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah">מעלה ג׳</span></div>
+          <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah yom" data-wane="3">מיעוט ג׳</span></div>
           <div class="sefirah-main-text" id="malchut-ksa-face">Loading…</div>
           <div class="keter-section-label" id="malchut-pesukim-label" style="margin-top:10px;">The Twelve Pesukim</div>
           <div class="sefirah-sub-text" id="malchut-pesukim-face" style="margin-top:2px;"></div>
         </div>
         <div class="malchut-section">
-          <div class="keter-section-label">✦ Fruits of Her Labor — מפרי ידיה <span class="maalah">מעלה ב׳</span></div>
+          <div class="keter-section-label">✦ Fruits of Her Labor — מפרי ידיה <span class="maalah yom" data-wane="2">מיעוט ב׳</span></div>
           <div id="malchut-cycle-name" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Daily Text</div>
           <div class="sefirah-main-text" id="malchut-main">Loading…</div>
           <div class="sefirah-sub-text" id="malchut-sub"></div>
@@ -5201,7 +5206,7 @@ content: ''; float: right; width: 30px; height: 1em;
           </details>
         </div>
         <div class="malchut-section">
-          <div class="keter-section-label">✦ Works of Her Praise — בשערים מעשיה <span class="maalah">מעלה א׳</span></div>
+          <div class="keter-section-label">✦ Works of Her Praise — בשערים מעשיה <span class="maalah yom" data-wane="1">מיעוט א׳</span></div>
           <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Likutei Halachot</div>
           <div class="sefirah-main-text" id="malchut-lh-face">Loading…</div>
         </div>
@@ -5216,7 +5221,7 @@ content: ''; float: right; width: 30px; height: 1em;
       <div id="malchut-sichos-detail" style="margin-bottom:14px;"></div>
       <!-- Living Chassidus — InsideChassidus & JEM.TV (moved from Keter) -->
       <div style="margin-bottom:14px;">
-        <div class="keter-section-label">✦ Living Chassidus <span class="maalah yom" data-wane="14">מיעוט י״ד</span></div>
+        <div class="keter-section-label">✦ Living Chassidus <span class="maalah">מעלה י״ד</span></div>
         <div style="font-size:0.88rem;"><a href="https://insidechassidus.org/daily-hayom-yom" target="_blank" style="color:var(--gold)">InsideChassidus</a> &nbsp;·&nbsp; <a href="https://videos.jem.tv/" target="_blank" style="color:var(--gold)">JEM.TV</a> &nbsp;·&nbsp; <a href="https://www.theyeshiva.net" target="_blank" style="color:var(--gold)">TheYeshiva.net</a></div>
       </div>
       <!-- KSA row — Arich Anpin -->
@@ -15465,16 +15470,16 @@ content: ''; float: right; width: 30px; height: 1em;
     maalah: {
       t: 'ma’alah', heb: 'מַעֲלָה',
       forms: ['ma’alah', 'Ma\'alot', 'Ma’alot', 'ma\'alah', 'ma’alot'],
-      b: 'A step — a stair, a rung, something climbed. Fifteen of them go up the day.',
-      m: 'A step or ascent; the plural <bdi lang="he">מעלות</bdi> is the word in Ma’alot HaZman and in the Songs of Ascents. Fifteen are climbed from Malchut up to Keter as the moon fills.',
-      a: 'An ascent, and also a virtue — the word carries both, a rung and what standing on it makes of you. Fifteen answer to the fifteen Songs of Ascents and to the moon’s fifteen days of waxing.',
+      b: 'A step — a stair, a rung. Fifteen of them go down the day, and going down them is the climb.',
+      m: 'A step or ascent; the plural <bdi lang="he">מעלות</bdi> is the word in Ma’alot HaZman and in the Songs of Ascents. Fifteen come down from Keter to Malchut as the moon fills — the descent is the ascent, which is why the early mystics who rose through the palaces were called <bdi lang="he">יורדי מרכבה</bdi>, those who go down to the chariot.',
+      a: 'An ascent, and also a virtue — the word carries both, a rung and what standing on it makes of you. Fifteen answer to the fifteen Songs of Ascents and to the moon’s fifteen days of waxing. They are counted downward because the light is: a step taken in the direction the light is going is Or Yashar, and the one who takes it is a <bdi lang="he">יורד מרכבה</bdi> — descending, and by that ascending.',
     },
     miut: {
       t: 'mi’ut', heb: 'מִיעוּט',
       forms: ['Mi’utim', 'mi’utim', 'mi’ut', 'mi\'ut'],
-      b: 'A lessening, a making-small — the opposite of a step up. Fifteen of them come back down.',
-      m: 'A diminishing. Fifteen mark the way back down from Keter to Malchut as the moon wanes — listening rather than climbing.',
-      a: 'A diminishment, the term the Gemara uses of the moon that was told to make herself small. The descent is not a loss: it is the bitul by which what was received above is brought down to where it can be lived.',
+      b: 'A lessening, a making-small. Fifteen of them climb back up.',
+      m: 'A diminishing. Fifteen mark the way back up from Malchut to Keter as the moon wanes — Or Chozer, the returning light, which is reaching rather than being given.',
+      a: 'A diminishment, the term the Gemara uses of the moon that was told to make herself small. The return is not a loss: what comes down through the מעלות is carried back up by someone smaller than what they are carrying, and the moon gives her light away as she goes.',
     },
     chatzot: {
       t: 'Chatzot', heb: 'חֲצוֹת',
@@ -16362,8 +16367,8 @@ content: ''; float: right; width: 30px; height: 1em;
         ' — ' + (waxK + waneK) + ' of ' + (waxN + waneN) +
         ' · the ring is the month, ' + (maalotDone() + yomDone()) + ' of 30 · ')
       + (sun
-        ? 'והיה אור הלבנה כאור החמה — the light of the moon shall be as the light of the sun (Isaiah 30:26) · Or Chozer: the waning steps return from Keter to Malchut'
-        : "Today's ma'alot — tap each מעלה tag in order");
+        ? 'והיה אור הלבנה כאור החמה — the light of the moon shall be as the light of the sun (Isaiah 30:26) · Or Chozer: the waning steps climb back from Malchut to Keter'
+        : "Today's ma'alot — tap each מעלה tag in order, Keter down to Malchut");
     // The thirty-first appears when the month is complete — all thirty marked,
     // whether they stood on the path or were taken beyond it. It is the seal
     // of the month, not of a portion of it, so a short path does not release
@@ -17743,7 +17748,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const nextIdx = hourIdx >= 0 ? hourIdx : (sun ? (wnNext ? 14 + wnNext : -1)
                                                   : wxNext - 1);
     document.querySelectorAll('.maalah').forEach(el => {
-      if (el.classList.contains('yom')) {           // waning steps (מיעוט), only after the sun
+      if (el.classList.contains('yom')) {           // the climb back (מיעוט), only after the sun
         const n = +el.dataset.wane;
         el.classList.toggle('done', n >= 1 && !!(yMask & (1 << (n - 1))));
         el.classList.toggle('next-step', n >= 1 && 14 + n === nextIdx);
@@ -17804,7 +17809,7 @@ content: ''; float: right; width: 30px; height: 1em;
     applyMaalotState();
   }, true);
 
-  // ── THE FIFTEEN WANING STEPS (מיעוט א׳–ט״ו) — Or Chozer, Keter → Malchut ──
+  // ── THE FIFTEEN WANING STEPS (מיעוט א׳–ט״ו) — Or Chozer, Malchut → Keter ──
   // Fifteen tags retrace the path as it wanes, in order, and not before the
   // moon is full: the thirty are one path, and the return is its second half
   // rather than a second count kept alongside the first. State is a 15-bit
@@ -17866,6 +17871,54 @@ content: ''; float: right; width: 30px; height: 1em;
         localStorage.setItem(key, String(now));
       });
       localStorage.setItem('kzWaneOrder', 'v2');
+    } catch (e) { /* a browser that will not store is one with nothing to turn */ }
+  })();
+
+  // ── THE LADDER TURNED OVER ──
+  // The two halves changed places. The fifteen that come down from Keter —
+  // Chumash with Rashi at the head of them — are the מעלות now and fill the
+  // moon; the fifteen that climb back from Malchut are the מיעוטים and empty
+  // it. Descending is the ascent, which is what the יורדי מרכבה were always
+  // called, and it puts Or Yashar before Or Chozer, where they belong. It
+  // also takes the wall out of the doorway: the first thing the app asked of
+  // anyone was Reb Noson in untranslated Hebrew, and is now the parasha with
+  // Rashi.
+  //
+  // Nothing moved cards and no step was renumbered: מיעוט ד׳ was the
+  // Tractate Cycle and is מעלה ד׳, on Chochmah, where it was. What changed is
+  // which half a step belongs to, so a reader's marks are turned over with
+  // it — the whole of one mask for the whole of the other, bit for bit, since
+  // the numbering each half keeps is the numbering the other half had. A
+  // chosen path is held as indices into the thirty and moves half a month:
+  // whoever took the three now takes the three, which are where the thirty
+  // begin instead of where they resume.
+  (function turnLadder() {
+    try {
+      if (localStorage.getItem('kzLadder') === 'v2') return;
+      const pairs = [['kotMaalotMask:', 'kotYomMask:'], ['kotMaalot:', 'kotYom:']];
+      for (const [a, b] of pairs) {
+        const days = new Set();
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.slice(0, a.length) === a) days.add(key.slice(a.length));
+          if (key && key.slice(0, b.length) === b) days.add(key.slice(b.length));
+        }
+        days.forEach((d) => {
+          const was = localStorage.getItem(a + d), now = localStorage.getItem(b + d);
+          if (now === null) localStorage.removeItem(a + d); else localStorage.setItem(a + d, now);
+          if (was === null) localStorage.removeItem(b + d); else localStorage.setItem(b + d, was);
+        });
+      }
+      const raw = localStorage.getItem('kotPathSteps');
+      if (raw) {
+        const turned = raw.split(',')
+          .map(s => parseInt(s, 10))
+          .filter(n => n >= 0 && n < 30)
+          .map(n => (n + 15) % 30)
+          .sort((x, y) => x - y);
+        if (turned.length) localStorage.setItem('kotPathSteps', turned.join(','));
+      }
+      localStorage.setItem('kzLadder', 'v2');
     } catch (e) { /* a browser that will not store is one with nothing to turn */ }
   })();
 
@@ -18024,20 +18077,20 @@ content: ''; float: right; width: 30px; height: 1em;
         'gone when the day&rsquo;s readings are done.',
       advanced:
         'The thirty counted steps are Or Pnimi, inner light, so they are taken one at a time ' +
-        'and the ladder in order &mdash; Malchut up to Keter, then Keter back down &mdash; is ' +
+        'and the ladder in order &mdash; Keter down to Malchut, then Malchut back up &mdash; is ' +
         'the fullest way to take them. But the order is not a lock. What the day asks for is ' +
         'set by the hour, not by the list: the step whose card belongs to the Sefirah now ' +
         'holding the clock, and only when that hour has nothing left unmarked does the lowest ' +
         'outstanding step answer, named as <em>catching up</em>. Keter&rsquo;s hour holds three ' +
-        '&mdash; &#1497;&#1524;&#1490;, &#1497;&#1524;&#1491;, &#1496;&#1524;&#1493; &mdash; and ' +
+        '&mdash; &#1488;&#1523;, &#1489;&#1523;, &#1490;&#1523; &mdash; and ' +
         'asks for them one at a time across it; an hour holding none of your path goes straight ' +
         'to the outstanding. Any step of the open half can be marked whenever it was actually ' +
-        'done, and any marked step given back. </p><p>The climb has a second hour of its own: ' +
+        'done, and any marked step given back. </p><p>The &#1502;&#1506;&#1500;&#1493;&#1514; have a second hour of their own: ' +
         'inside the Mochin band, the eighty-eight minutes wrapped around Chatzot, the whole ' +
-        'ascent is due at once &mdash; so there the step offered pulses whether it is the band ' +
+        'first half is due at once &mdash; so there the step offered pulses whether it is the band ' +
         'Sefirah&rsquo;s own or one left from earlier in the day, and nothing reads as catching ' +
         'up. That band is what the ladder taken in order is for. </p><p>The one thing still gated is which half ' +
-        'is open: the return does not begin until the moon is full. That is not about order but ' +
+        'is open: the climb back does not begin until the moon is full. That is not about order but ' +
         'about direction &mdash; Or Yashar before Or Chozer &mdash; and the count stands out of ' +
         'the whole thirty throughout rather than out of the half in hand. </p><p>The ten ' +
         'prayers work the same way, and always did. Each has its own hour, so they ' +
@@ -18895,26 +18948,11 @@ content: ''; float: right; width: 30px; height: 1em;
   // Tap the moon in the dual clock to open. Each row shows its live state;
   // the next actionable step is highlighted; tapping a row scrolls to (and
   // for waning steps, expands) the right card.
-  // The fifteen ascend: Malchut back up to Keter, arriving at the Mochin.
-  // Each reading keeps the card it always had; it is the count that turned.
+  // The fifteen descend: Keter down to Malchut, the way the light comes.
+  // Descending is the ascent — יורדי מרכבה — so these are the מעלות, and
+  // the fifteen that climb back are the מיעוטים. Each reading keeps the
+  // card it always had; it is the direction that turned.
   const PATH_WAXING = [
-    ['א׳', 'Works of Her Praise', 'Malchut'],
-    ['ב׳', 'Fruits of Her Labor', 'Malchut'],
-    ['ג׳', 'Year-Round Connection', 'Malchut'],
-    ['ד׳', 'Ben Ish Chai / Rav Pe’alim', 'Yesod'],
-    ['ה׳', 'Tanna D’vei Eliyahu', 'Hod'],
-    ['ו׳', 'Shulchan Aruch', 'Hod'],
-    ['ז׳', 'Sichos HaRan / Likutei Etzot', 'Netzach'],
-    ['ח׳', 'Seder Birkas HaNehenin / Rebbe Nachman’s Tales', 'Tiferet'],
-    ['ט׳', 'Tanach — 2 Chapters', 'Gevurah'],
-    ['י׳', 'Mishna & Tosefta', 'Chesed'],
-    ['י״א', 'Likutei Tefilot', 'Binah'],
-    ['י״ב', 'Torah Ohr / Likutei Torah', 'Chochmah'],
-    ['י״ג', 'Strong Day — Hayom Yom & Rambam', 'Keter'],
-    ['י״ד', 'Light that is Good — אור כי טוב', 'Keter'],
-    ['ט״ו', 'All Year Round', 'Keter'],
-  ];
-  const PATH_WANING = [
     ['א׳', 'Chumash with Rashi', 'Keter'],
     ['ב׳', 'Tanya', 'Keter'],
     ['ג׳', 'Rambam — any track', 'Keter'],
@@ -18931,6 +18969,23 @@ content: ''; float: right; width: 30px; height: 1em;
     ['י״ד', 'Living Chassidus', 'Malchut'],
     ['ט״ו', 'Rav Shlomo Katz', 'Malchut'],
   ];
+  const PATH_WANING = [
+    ['א׳', 'Works of Her Praise', 'Malchut'],
+    ['ב׳', 'Fruits of Her Labor', 'Malchut'],
+    ['ג׳', 'Year-Round Connection', 'Malchut'],
+    ['ד׳', 'Ben Ish Chai / Rav Pe’alim', 'Yesod'],
+    ['ה׳', 'Tanna D’vei Eliyahu', 'Hod'],
+    ['ו׳', 'Shulchan Aruch', 'Hod'],
+    ['ז׳', 'Sichos HaRan / Likutei Etzot', 'Netzach'],
+    ['ח׳', 'Seder Birkas HaNehenin / Rebbe Nachman’s Tales', 'Tiferet'],
+    ['ט׳', 'Tanach — 2 Chapters', 'Gevurah'],
+    ['י׳', 'Mishna & Tosefta', 'Chesed'],
+    ['י״א', 'Likutei Tefilot', 'Binah'],
+    ['י״ב', 'Torah Ohr / Likutei Torah', 'Chochmah'],
+    ['י״ג', 'Strong Day — Hayom Yom & Rambam', 'Keter'],
+    ['י״ד', 'Light that is Good — אור כי טוב', 'Keter'],
+    ['ט״ו', 'All Year Round', 'Keter'],
+  ];
 
   // ── THE PATH — which of the thirty this reader has undertaken ──
   // Thirty a day is the month entire, and it is too much to begin with. So the
@@ -18938,45 +18993,47 @@ content: ''; float: right; width: 30px; height: 1em;
   // on the page, faint, and can still be taken. Nothing is removed from the
   // month — what changes is what is asked of you.
   //
-  // A path is held as indices into the thirty: 0-14 the ascent, 15-29 the
-  // descent. The default is all of them, so a reader who never chooses is
-  // exactly where they were.
+  // A path is held as indices into the thirty: 0-14 the מעלות, which go down
+  // from Keter, 15-29 the מיעוטים, which come back up. The default is all of
+  // them, so a reader who never chooses is exactly where they were.
   const PATH_ALL = Array.from({ length: 30 }, (_, i) => i);
   // ── WHAT A READER WITHOUT HEBREW CAN ACTUALLY DO ──
-  // The thirty open in order, and the first of them — מעלה א׳, Likutei
-  // Halachot — is Reb Noson in Hebrew with no translation anywhere behind it.
-  // That is the first thing the app asks of anyone, and for a reader without
-  // Hebrew it is a wall in the doorway.
-  // So the set below is the steps whose text, or whose daily shiur, is in
+  // The thirty open in order, and the first of them is now Chumash with
+  // Rashi, which Chabad gives in English every day of the year. It was
+  // Likutei Halachot — Reb Noson in Hebrew with no translation anywhere
+  // behind it — and that was the first thing the app asked of anyone: a wall
+  // in the doorway. Turning the ladder took the wall out of the doorway
+  // rather than working around it.
+  // The set below is the steps whose text, or whose daily shiur, is in
   // English. Each one is here because of the link the card itself gives —
   // read off the page rather than remembered — and the reason is written
   // beside it so that a wrong entry can be found and argued with:
   const PATH_EN = [
-    2,   // מעלה ג׳   Year-Round Connection — Chabad.org's English of the ma'amar
-    6,   // מעלה ז׳   Sichos HaRan — Sefaria ?lang=bi, the Breslov Research English
-    8,   // מעלה ט׳   Tanach — Sefaria bilingual, and OU Torah's English shiurim
-    12,  // מעלה י״ג  Strong Day — Hayom Yom and Rambam, both English on Chabad
-    15,  // מיעוט א׳  Chumash with Rashi — Chabad's daily reading, English
-    16,  // מיעוט ב׳  Tanya — Chabad's Daily Tanya, English
-    17,  // מיעוט ג׳  Rambam — Chabad, English
-    18,  // מיעוט ד׳  Tractate Cycle — YUTorah, shiurim in English
-    20,  // מיעוט ו׳  Shulchan Aruch HaRav — shulchanaruchharav.com is a translation
-    21,  // מיעוט ז׳  Reb Shlomo Carlebach's stories — told in English
-    22,  // מיעוט ח׳  Daf Yomi — Sefaria's Steinsaltz English
-    23,  // מיעוט ט׳  Chitas for Kids — English
-    24,  // מיעוט י׳  Chok Breslov — the Breslov Research recordings, English
-    25,  // מיעוט י״א Daily Chofetz Chaim — dafaweek and torahcasts, English
-    26,  // מיעוט י״ב Chok L'Yisrael — the app already labels its Zohar "(English)"
-    27,  // מיעוט י״ג Likkutei Sichos — Project Likkutei Sichos and Sichos in English
-    28,  // מיעוט י״ד Living Chassidus — InsideChassidus, JEM, TheYeshiva.net
-    29,  // מיעוט ט״ו Rav Shlomo Katz — English
+    0,   // מעלה א׳  Chumash with Rashi — Chabad's daily reading, English
+    1,   // מעלה ב׳  Tanya — Chabad's Daily Tanya, English
+    2,   // מעלה ג׳  Rambam — Chabad, English
+    3,   // מעלה ד׳  Tractate Cycle — YUTorah, shiurim in English
+    5,   // מעלה ו׳  Shulchan Aruch HaRav — shulchanaruchharav.com is a translation
+    6,   // מעלה ז׳  Reb Shlomo Carlebach's stories — told in English
+    7,   // מעלה ח׳  Daf Yomi — Sefaria's Steinsaltz English
+    8,   // מעלה ט׳  Chitas for Kids — English
+    9,   // מעלה י׳  Chok Breslov — the Breslov Research recordings, English
+    10,  // מעלה י״א Daily Chofetz Chaim — dafaweek and torahcasts, English
+    11,  // מעלה י״ב Chok L'Yisrael — the app already labels its Zohar "(English)"
+    12,  // מעלה י״ג Likkutei Sichos — Project Likkutei Sichos and Sichos in English
+    13,  // מעלה י״ד Living Chassidus — InsideChassidus, JEM, TheYeshiva.net
+    14,  // מעלה ט״ו Rav Shlomo Katz — English
+    17,  // מיעוט ג׳  Year-Round Connection — Chabad.org's English of the ma'amar
+    21,  // מיעוט ז׳  Sichos HaRan — Sefaria ?lang=bi, the Breslov Research English
+    23,  // מיעוט ט׳  Tanach — Sefaria bilingual, and OU Torah's English shiurim
+    27,  // מיעוט י״ג Strong Day — Hayom Yom and Rambam, both English on Chabad
   ];
-  // Left out, and why: מעלה א׳ Likutei Halachot, מעלה ב׳ (Etz Chaim and Toras
-  // Menachem), מעלה י״א Likutei Tefilot, מעלה י״ב Torah Ohr and מיעוט ה׳ the
-  // Breslov Israel recordings have no English at all. מעלה ד׳ Rav Pe'alim,
-  // מעלה ה׳ Tanna D'vei Eliyahu, מעלה ו׳ Shulchan Aruch, מעלה ח׳ Birkas
-  // HaNehenin, מעלה י׳ Tosefta, מעלה י״ד the Ohr HaChaim and מעלה ט״ו the
-  // Zohar carry a bilingual link, but the English behind it is partial or
+  // Left out, and why: מיעוט א׳ Likutei Halachot, מיעוט ב׳ (Etz Chaim and
+  // Toras Menachem), מיעוט י״א Likutei Tefilot, מיעוט י״ב Torah Ohr and
+  // מעלה ה׳ the Breslov Israel recordings have no English at all. מיעוט ד׳
+  // Rav Pe'alim, מיעוט ה׳ Tanna D'vei Eliyahu, מיעוט ו׳ Shulchan Aruch,
+  // מיעוט ח׳ Birkas HaNehenin, מיעוט י׳ Tosefta, מיעוט י״ד the Ohr HaChaim
+  // and מיעוט ט״ו the Zohar carry a bilingual link, but the English behind it is partial or
   // absent on the day the step actually lands. A path that promises English
   // and hands over Hebrew is worse than one that does not promise.
   function pathStepInEnglish(i) { return PATH_EN.indexOf(i) >= 0; }
@@ -18988,29 +19045,30 @@ content: ''; float: right; width: 30px; height: 1em;
   const PATH_PRESETS = [
     // Chumash with Rashi, Tanya, Rambam — Chitas and Rambam, the daily. It
     // wanted no inventing: the three were already lying together at the head
-    // of the descent.
+    // of the thirty.
     { key: 'three', name: 'Three', sub: 'Chumash with Rashi · Tanya · Rambam', group: 'size',
-      steps: [15, 16, 17] },
+      steps: [0, 1, 2] },
     // Those three, and the four that make a Chok: Nach, Mishna, Halacha, Zohar.
     { key: 'seven', name: 'Seven', group: 'size',
       sub: 'the three, with Tanach, Mishna, Shulchan Aruch and Tanna D’vei Eliyahu',
-      steps: [4, 5, 8, 9, 15, 16, 17] },
+      steps: [0, 1, 2, 19, 20, 23, 24] },
     { key: 'fifteen', name: 'Fifteen', group: 'size',
-      sub: 'the ascent alone — Malchut up to Keter, the moon to full',
+      sub: 'the מעלות alone — Keter down to Malchut, the moon to full',
       steps: PATH_ALL.slice(0, 15) },
-    // The ascent alone had no counterpart, though the machinery has always
-    // served one: with no ma'alah undertaken, pathWaxNext answers 0 over an
-    // empty list, so the climb is finished before it starts, the gate stands
-    // open and the moon begins full and crowned. The advanced note already
-    // said as much — "a path of descent alone begins full and crowned at
-    // ט״ו" — and the only way to reach it was to pick fifteen steps by hand.
+    // The מעלות alone had no counterpart, though the machinery has always
+    // served one: with no מעלה undertaken, pathWaxNext answers 0 over an
+    // empty list, so the first half is finished before it starts, the gate
+    // stands open and the moon begins full and crowned. The advanced note
+    // already said as much — a path of the second half alone begins full and
+    // crowned at ט״ו — and the only way to reach it was to pick fifteen steps
+    // by hand.
     //
     // It is the one path that opens at the full moon, which is what makes it
-    // worth offering: the thirty read from Keter down, Or Chozer with nothing
-    // ahead of it, the day's own direction. The gate it appears to skip it
-    // does not skip — there is simply no ascent to wait on.
-    { key: 'descent', name: 'Fifteen Down', group: 'size',
-      sub: 'the descent alone — Keter down to Malchut, the moon from full',
+    // worth offering: the thirty read from Malchut up, Or Chozer with nothing
+    // ahead of it. The gate it appears to skip it does not skip — there is
+    // simply no first half to wait on.
+    { key: 'ascent', name: 'Fifteen Up', group: 'size',
+      sub: 'the מיעוטים alone — Malchut up to Keter, the moon from full',
       steps: PATH_ALL.slice(15) },
     { key: 'thirty', name: 'Thirty', sub: 'the month entire', group: 'size',
       steps: PATH_ALL.slice() },
@@ -19030,13 +19088,13 @@ content: ''; float: right; width: 30px; height: 1em;
     // reading of the thirty but one of the ten prayers, on Gevurah.
     { key: 'chabad', name: 'Chabad', group: 'tradition',
       sub: 'Chitas and Rambam · Torah Ohr · Hayom Yom · Shulchan Aruch HaRav · Likkutei Sichos · ואתה תצוה',
-      steps: [2, 11, 12, 15, 16, 17, 20, 27] },
+      steps: [0, 1, 2, 5, 12, 17, 26, 27] },
     // Rebbe Nachman through the year: the Sichos, the prayers Reb Noson made
     // of the lessons, the Chok, the daily recordings, and Likutei Moharan
     // itself inside All Year Round.
     { key: 'breslov', name: 'Breslov', group: 'tradition',
       sub: 'Likutei Moharan · Sichos HaRan · Likutei Tefilot · Chok Breslov · the daily recordings',
-      steps: [6, 10, 14, 19, 24] },
+      steps: [4, 9, 21, 25, 29] },
     // The hidden Torah and the telling of it. The Zohar twice over — Rashbi's
     // two folios a day inside All Year Round, and the day's portion inside
     // Chok L'Yisrael — with the Ohr HaChaim and the Baal Shem Tov beside
@@ -19044,7 +19102,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // the school of Eliyahu, for the Midrash.
     { key: 'kabbalah', name: 'Kabbalah & Midrash', group: 'tradition',
       sub: 'the Zohar · Chok L’Yisrael · Ohr HaChaim and Keter Shem Tov · Torah Ohr · Tanna D’vei Eliyahu · ואתה תצוה',
-      steps: [2, 4, 11, 13, 14, 26] },
+      steps: [11, 17, 19, 26, 28, 29] },
     // What a Jew is bound to do: the Shulchan Aruch in both recensions, the
     // Rambam, the blessings over food, the laws of speech, and the Ben Ish
     // Chai's responsa.
@@ -19056,18 +19114,18 @@ content: ''; float: right; width: 30px; height: 1em;
       // The step stays; naming only its halachic face would be the label
       // promising what the day does not always hand over.
       sub: 'Shulchan Aruch and Shulchan Aruch HaRav · Rambam · Birkas HaNehenin and Rebbe Nachman’s Tales · Chofetz Chaim · Ben Ish Chai and Rav Pe’alim',
-      steps: [3, 5, 7, 17, 20, 25] },
+      steps: [2, 5, 10, 18, 20, 22] },
     // The Oral Torah in its own order: Chesed's Mishna, which turns to
     // Tosefta as the cycle runs; the tractate cycle on Chochmah; and the daf.
     { key: 'talmud', name: 'Mishna & Talmud', group: 'tradition',
       sub: 'Mishna and Tosefta · the Tractate Cycle · Daf Yomi',
-      steps: [9, 18, 22] },
+      steps: [3, 7, 24] },
     // The written Torah and what carries it through the week: Tanach two
     // chapters a day, the parasha with Rashi, and Chok L'Yisrael, whose day
     // opens with Torah, Nevi'im and Ketuvim.
     { key: 'tanach', name: 'Chumash & Tanach', group: 'tradition',
       sub: 'Tanach · Chumash with Rashi · Chok L’Yisrael',
-      steps: [8, 15, 26] },
+      steps: [0, 11, 23] },
 
     // ── BY LANGUAGE ──
     // Not a quantity and not a tradition: what a reader can read. It is the
@@ -19080,10 +19138,10 @@ content: ''; float: right; width: 30px; height: 1em;
       steps: PATH_EN.slice() },
   ];
   // The order a step is offered in when a kept path earns another rung: the
-  // three, then the four that complete the Chok, then the ascent from its
-  // foot, then what is left of the descent.
+  // three, then the four that complete the Chok, then the מעלות from the top,
+  // then what is left of the מיעוטים.
   const PATH_LADDER = (() => {
-    const seen = [15, 16, 17, 8, 9, 5, 4];
+    const seen = [0, 1, 2, 23, 24, 20, 19];
     PATH_ALL.slice(0, 15).forEach(i => { if (seen.indexOf(i) < 0) seen.push(i); });
     PATH_ALL.slice(15).forEach(i => { if (seen.indexOf(i) < 0) seen.push(i); });
     return seen;
@@ -19300,8 +19358,10 @@ content: ''; float: right; width: 30px; height: 1em;
   // A step's day follows the ring it sits on. The 49 belong to the cycle they
   // are inside: that is _cycleOffset, and before Chatzot it points back a day.
   // The Mochin hover above the seam and face forward into the cycle they open:
-  // that is _maalotOffset, the climb's day, and מיעוטים א׳–ה׳ share it, since
-  // they sit on Keter, Chochmah and Binah rather than on the seven.
+  // that is _maalotOffset, the מעלות' day, and מיעוטים י״א–ט״ו share it, since
+  // they sit on Binah, Chochmah and Keter rather than on the seven. They were
+  // מיעוטים א׳–ה׳ before the ladder turned over; the Mochin are the same three
+  // Sefirot, and it is the numbering on them that moved.
 
   // The day the cycle now running is named by — the day that begins at its
   // Chatzot. A Chatzot past noon opens the following day; one before noon
@@ -20315,11 +20375,11 @@ content: ''; float: right; width: 30px; height: 1em;
       `</span>` +
       `<button type="button" class="path-head-btn" onclick="event.stopPropagation(); pathOpenChooser()">Change</button>` +
       `</div>`;
-    html += `<div class="path-section-title">☽ Waxing — the ascent, Malchut → Keter</div>`;
+    html += `<div class="path-section-title">☽ Waxing — the מעלות, Keter → Malchut</div>`;
     PATH_WAXING.forEach((p, i) => {
       html += row(i, live['m|' + p[0]] || p[1], p[2], !!(mMask & (1 << i)), 'מעלה ' + p[0]);
     });
-    html += `<div class="path-section-title" style="margin-top:12px;">☀ Waning — the descent, Keter → Malchut · listening, bitul</div>`;
+    html += `<div class="path-section-title" style="margin-top:12px;">☀ Waning — the מיעוטים, Malchut → Keter · the climb back</div>`;
     PATH_WANING.forEach((p, j) => {
       html += row(15 + j, live['y|' + p[0]] || p[1], p[2], !!(yMask & (1 << j)), 'מיעוט ' + p[0]);
     });
@@ -20406,9 +20466,9 @@ content: ''; float: right; width: 30px; height: 1em;
         `<span class="path-sef">${L.sef}</span></div>`;
     };
     html += `<div class="path-section-title" style="margin-top:14px;">Or take them one by one</div>`;
-    html += `<div class="path-section-title" style="letter-spacing:1px;">☽ The ascent</div>`;
+    html += `<div class="path-section-title" style="letter-spacing:1px;">☽ The מעלות</div>`;
     for (let i = 0; i < 15; i++) html += pick(i);
-    html += `<div class="path-section-title" style="margin-top:10px; letter-spacing:1px;">☀ The descent</div>`;
+    html += `<div class="path-section-title" style="margin-top:10px; letter-spacing:1px;">☀ The מיעוטים</div>`;
     for (let i = 15; i < 30; i++) html += pick(i);
     document.getElementById('todays-path-body').innerHTML = html;
   }
@@ -21704,7 +21764,7 @@ content: ''; float: right; width: 30px; height: 1em;
       // innerHTML on every render, so a button left only in the markup is
       // destroyed on the first draw and never comes back.
       document.getElementById('keter-kst-label').innerHTML =
-        '✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah">מעלה י״ד</span>';
+        '✦ <span class="kl-part">Light that is Good</span> — <span class="kl-part heb">אור כי טוב</span> <span class="maalah yom" data-wane="14">מיעוט י״ד</span>';
 
       // HebrewBooks PDF pgnum = printed page + 36 (printed p.4 = pgnum 40).
       // Somewhere around printed p.200 an extra, unnumbered page appears to
@@ -21815,7 +21875,7 @@ content: ''; float: right; width: 30px; height: 1em;
           ? `<a href="${items[0].url}" target="_blank" style="color:var(--gold)">${yearLabel}</a>`
           : items.map(it => `<a href="${it.url}" target="_blank" style="color:var(--gold)">${yearLabel} · ${it.label}</a>`).join(' &amp; ');
         document.getElementById('yesod-text-label').innerHTML =
-          `✦ ${_rd.kind === 'rp' ? 'Rav Pe’alim' : _rd.label} <span class="maalah">מעלה ד׳</span>`;
+          `✦ ${_rd.kind === 'rp' ? 'Rav Pe’alim' : _rd.label} <span class="maalah yom" data-wane="4">מיעוט ד׳</span>`;
         document.getElementById('yesod-text-face').innerHTML =
           _rd.kind !== 'hal'
             ? _faceLinks(_rd.items)
@@ -21823,7 +21883,7 @@ content: ''; float: right; width: 30px; height: 1em;
                 ? `${_yearLinks(_rd.y1, 'Year 1')} &nbsp;·&nbsp; ${_yearLinks(_rd.y2, 'Year 2')}`
                 : `${_yearLinks(_rd.y1, 'Year 1')} <span style="font-size:0.85em;color:var(--ink-dim);font-style:italic;">· Year 2 — not extant for this parasha</span>`);
       } else {
-        document.getElementById('yesod-text-label').innerHTML = `✦ Ben Ish Chai <span class="maalah">מעלה ד׳</span>`;
+        document.getElementById('yesod-text-label').innerHTML = `✦ Ben Ish Chai <span class="maalah yom" data-wane="4">מיעוט ד׳</span>`;
         document.getElementById('yesod-text-face').innerHTML =
           `<a href="https://www.sefaria.org/Ben_Ish_Hai?tab=contents" target="_blank" style="color:var(--gold)">Ben Ish Chai on Sefaria</a>`;
       }
@@ -23052,7 +23112,7 @@ content: ''; float: right; width: 30px; height: 1em;
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Torah Ohr / Likutei Torah — Hosafa ${extraDay} of 28</div>
        <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:8px 0 14px;">The added month reads the addenda: the Hosafot run ½ folio (Vayikra 8b) + 4 (Vayikra) + 23½ (Torah Ohr) = 28, a folio for each of the extra days.</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractMicro ? tractMicro.map(t => t.id).join(' · ') : ''} <span class="maalah yom" data-wane="4">מיעוט ד׳</span></div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractMicro ? tractMicro.map(t => t.id).join(' · ') : ''} <span class="maalah">מעלה ד׳</span></div>
        ${tractMicro ? tractMicro.map(t =>
          `<div class="detail-row"><span class="detail-label">Tractate:</span><span class="detail-value">${t.tractate}</span></div>
           <div class="detail-row"><span class="detail-label">Period:</span><span class="detail-value">${t.period}</span></div>
@@ -23079,7 +23139,7 @@ content: ''; float: right; width: 30px; height: 1em;
        ${ramakRow(_ramakDay)}
 
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractData.id} <span class="maalah yom" data-wane="4">מיעוט ד׳</span></div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Tractate Cycle — ${tractData.id} <span class="maalah">מעלה ד׳</span></div>
        <div class="detail-row"><span class="detail-label">Tractate:</span><span class="detail-value">${tractData.tractate}</span></div>
        <div class="detail-row"><span class="detail-label">Period:</span><span class="detail-value">${tractData.period}</span></div>
        <div class="detail-row"><span class="detail-label">Theme:</span><span class="detail-value">${tractData.desc}</span></div>
@@ -23166,7 +23226,7 @@ content: ''; float: right; width: 30px; height: 1em;
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="3">Meor Einayim${_zoharParasha ? ' — ' + _zoharParasha : ''}</div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://www.sefaria.org/Me'or_Einayim?tab=contents" target="_blank" style="color:var(--gold)">Meor Einayim on Sefaria</a> <span style="color:var(--ink-mid);font-size:0.85em">— R. Menachem Nachum of Chernobyl</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Breslov Israel Recordings <span class="maalah yom" data-wane="5">מיעוט ה׳</span></div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Breslov Israel Recordings <span class="maalah">מעלה ה׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${breslevCD1.url}" target="_blank" style="color:var(--gold)">${breslevCD1.label}</a> &nbsp;·&nbsp; <a href="${breslevCD2.url}" target="_blank" style="color:var(--gold)">${breslevCD2.label}</a>${breslevCD3 ? ` &nbsp;·&nbsp; <a href="${breslevCD3.url}" target="_blank" style="color:var(--gold)">${breslevCD3.label}</a> &nbsp;·&nbsp; <a href="${breslevCD4.url}" target="_blank" style="color:var(--gold)">${breslevCD4.label}</a>` : ''}</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Foundations of the Sefirot</div>
@@ -23303,7 +23363,7 @@ content: ''; float: right; width: 30px; height: 1em;
           : '');
     document.getElementById('chesed-sub').innerHTML = '';
     document.getElementById('chesed-text-label').innerHTML =
-      `✦ ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} <span class="maalah">מעלה י׳</span>`;
+      `✦ ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} <span class="maalah yom" data-wane="10">מיעוט י׳</span>`;
     document.getElementById('chesed-text-face').innerHTML =
       (mishnaInfo.seferiaUrl
         ? `<a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${mishnaInfo.text}</a>`
@@ -23339,7 +23399,7 @@ content: ''; float: right; width: 30px; height: 1em;
             <div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">${nineDaysToday.note}</div>`
          : `<div class="detail-row"><span class="detail-label">Day ${hDay}:</span><span class="detail-value">a pause between the souls</span></div>`) +
        `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">` : '') +
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav <span class="maalah yom" data-wane="6">מיעוט ו׳</span></div>
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Shulchan Aruch HaRav <span class="maalah">מעלה ו׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://shulchanaruchharav.com/" target="_blank" style="color:var(--gold)">shulchanaruchharav.com</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Light and Fire of the Baal Shem Tov &amp; Jewish Spiritual Practices</div>
@@ -23347,7 +23407,7 @@ content: ''; float: right; width: 30px; height: 1em;
        <div class="detail-row"><span class="detail-label">Spiritual Practices:</span><span class="detail-value">${jspReading}</span></div>
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:4px;padding-left:2px;">R. Yitzhak Buxbaum</div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Reb Shlomo Carlebach Stories <span class="maalah yom" data-wane="7">מיעוט ז׳</span></div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Reb Shlomo Carlebach Stories <span class="maalah">מעלה ז׳</span></div>
        <div class="detail-row"><span class="detail-value">${clbVideo1 ? `<a href="${clbVideo1.url}" target="_blank" style="color:var(--gold)">${clbVideo1.label}</a>` : ''}${clbVideo1 && clbVideo2 ? ' &nbsp;·&nbsp; ' : ''}${clbVideo2 ? `<a href="${clbVideo2.url}" target="_blank" style="color:var(--gold)">${clbVideo2.label}</a>` : ''}</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="4">Alter Rebbe — אַדְמוּ"ר הַזָּקֵן</div>
@@ -23696,7 +23756,7 @@ content: ''; float: right; width: 30px; height: 1em;
            <div style="font-size:0.88rem;margin-bottom:10px;"><a href="${ba2Url}" target="_blank" style="color:var(--gold)">Daily Conduct — Entry ${ba2Entry}</a> <span style="color:var(--ink-dim);font-size:0.85em;">· Day ${cy22.day} of 22</span></div>
            <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
        })() +
-       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי <span class="maalah yom" data-wane="8">מיעוט ח׳</span></div>
+       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Daf Yomi — דַּף יוֹמִי <span class="maalah">מעלה ח׳</span></div>
        ${daf
          ? `<div class="detail-row"><span class="detail-label">Today:</span><span class="detail-value"><a href="https://www.sefaria.org/${dafSlug(daf.name)}.${daf.daf}a" target="_blank" style="color:var(--gold)">${daf.name} ${daf.heb}, Daf ${daf.daf}</a></span></div>
             <div class="detail-row"><span class="detail-label">Links:</span><span class="detail-value">
@@ -23910,7 +23970,7 @@ content: ''; float: right; width: 30px; height: 1em;
       _tifRow.style.display = '';
       if (tifText) {
         document.getElementById('tiferet-text-label').innerHTML =
-          `✦ ${tifText.work}${tifText.review ? ' · Microcosm Review' : ''} <span class="maalah">מעלה ח׳</span>`;
+          `✦ ${tifText.work}${tifText.review ? ' · Microcosm Review' : ''} <span class="maalah yom" data-wane="8">מיעוט ח׳</span>`;
         // Where the day stands in the reading, under it, the way Hod says it
         // for Tanna D'vei Eliyahu. A chapter or a tale is held for all thirteen
         // days of its cycle, so without this the face says what is being read
@@ -23929,7 +23989,7 @@ content: ''; float: right; width: 30px; height: 1em;
       } else {
         // Leap-year microcosm (28 Shevat–25 Adar I): the Tales' closing talks
         // are the reading for all 28 of those days.
-        document.getElementById('tiferet-text-label').innerHTML = `✦ Rebbe Nachman’s Tales <span class="maalah">מעלה ח׳</span>`;
+        document.getElementById('tiferet-text-label').innerHTML = `✦ Rebbe Nachman’s Tales <span class="maalah yom" data-wane="8">מיעוט ח׳</span>`;
         document.getElementById('tiferet-text-face').innerHTML =
           `<a href="https://www.sefaria.org/Sippurei_Maasiyot,_Talks_Following_the_Story_Tales?lang=bi" target="_blank" style="color:var(--gold)">Talks Following the Story Tales</a>` +
           (cy13Mic ? `<div><span style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));">Day ${cy13Mic.day} of ${cy13Mic.total}</span></div>` : '');
@@ -23946,7 +24006,7 @@ content: ''; float: right; width: 30px; height: 1em;
        <div data-shelf style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Rebbe Nachman’s Tales — Talks Following</div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Sippurei_Maasiyot,_Talks_Following_the_Story_Tales?lang=bi" target="_blank" style="color:var(--gold)">Talks Following the Story Tales</a> <span style="color:var(--ink-mid);font-size:0.85em">— the Adar I microcosm's reading</span></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="9">מיעוט ט׳</span></div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah">מעלה ט׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Steps of Pinchas Ben Yair</div>
@@ -23969,7 +24029,7 @@ content: ''; float: right; width: 30px; height: 1em;
        ${_micDm ? '<div class="detail-row" style="margin-bottom:10px;"><span class="detail-value"><strong>' + _micDm.name + '</strong>' + (_micDm.part ? ' · ' + _micDm.part : '') + '<br><span style="color:var(--ink-mid);font-size:0.9em">' + _micDm.english + '</span></span></div>' : ''}` :
       `       ${explRow}
        <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah yom" data-wane="9">מיעוט ט׳</span></div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chitas for Kids <span class="maalah">מעלה ט׳</span></div>
        <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://kidschitas.org/today" target="_blank" style="color:var(--gold)">kidschitas.org</a></div>
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Steps of Pinchas Ben Yair</div>
        <div class="detail-row"><span class="detail-label">Rung ${_cy13mod}:</span><span class="detail-value"><strong>${pbyStep.name}</strong> — ${pbyStep.meaning}${pbyChain}</span></div>
@@ -24137,7 +24197,7 @@ content: ''; float: right; width: 30px; height: 1em;
       const _nrRow = document.getElementById('netzach-text-face').parentElement;
       if (_nr) {
         _nrRow.style.display = '';
-        document.getElementById('netzach-text-label').innerHTML = `✦ ${_nr.work} <span class="maalah">מעלה ז׳</span>`;
+        document.getElementById('netzach-text-label').innerHTML = `✦ ${_nr.work} <span class="maalah yom" data-wane="7">מיעוט ז׳</span>`;
         document.getElementById('netzach-text-face').innerHTML =
           (_nr.items.length === 1
             ? `<a href="${_nr.items[0].url}" target="_blank" style="color:var(--gold)">${_nr.name}</a>`
@@ -24199,7 +24259,7 @@ content: ''; float: right; width: 30px; height: 1em;
          <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${cy41v.mivtzah} (Year-Cycle ${leapCycleNum})</span></div>
          <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)"><a href="${_tikkunUrl}" target="_blank" style="color:var(--gold)">Psalm ${_tikkunPsalm}</a> (Year-Cycle ${leapCycleNum})</span></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="maalah yom" data-wane="10">מיעוט י׳</span></div>
+         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="maalah">מעלה י׳</span></div>
          <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
          <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
          <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
@@ -24222,7 +24282,7 @@ content: ''; float: right; width: 30px; height: 1em;
          <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${_mivtzahText} (${_cycleLabel})</span></div>
          <div style="margin-bottom:10px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Psalm:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${_psalmLinks} (${_cycleLabel})</span></div>
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="maalah yom" data-wane="10">מיעוט י׳</span></div>
+         <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;">✦ Chok Breslov <span class="maalah">מעלה י׳</span></div>
          <div style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:6px;">A Daily Dose of Rebbe Nachman · Breslov Research Institute</div>
          <div id="netzach-breslov-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
          <div id="netzach-breslov-meta" style="font-size:0.78rem;color:var(--ink-mid);margin-bottom:10px;"></div>
@@ -24342,7 +24402,7 @@ content: ''; float: right; width: 30px; height: 1em;
     if (hal.m.kind === 'sa' || hal.a.kind === 'sa') _hodWorks.push('Shulchan Aruch');
     if (hal.m.kind === 'cc' || hal.a.kind === 'cc') _hodWorks.push('Sefer Chofetz Chaim');
     document.getElementById('hod-sa-label').innerHTML =
-      '\u2726 ' + _hodWorks.join(' \u00b7 ') + ' <span class="maalah">\u05de\u05e2\u05dc\u05d4 \u05d5\u05f3</span>';
+      '\u2726 ' + _hodWorks.join(' \u00b7 ') + ' <span class="maalah yom" data-wane="6">\u05de\u05d9\u05e2\u05d5\u05d8 \u05d5\u05f3</span>';
     document.getElementById('hod-sa-face').innerHTML =
       `<span style="font-size:0.8em;color:var(--ink-dim)">Morning:</span> ${_hodUnit(hal.m)}<br>` +
       `<span style="font-size:0.8em;color:var(--ink-dim)">Afternoon:</span> ${_hodUnit(hal.a)}`;
@@ -24365,7 +24425,7 @@ content: ''; float: right; width: 30px; height: 1em;
       '✦ Tanna D’vei Eliyahu' +
       (tde.sprint ? ' <span style="color:var(--ink-mid);font-size:0.85em">· ' +
                     'Ko’ach Sprint</span>' : '') +
-      ' <span class="maalah">מעלה ה׳</span>';
+      ' <span class="maalah yom" data-wane="5">מיעוט ה׳</span>';
     document.getElementById('hod-tde-face').innerHTML = tde.sprint
       // Two chapters a day, morning and evening — the measure Menachot 99b
       // names, and the only twenty-eight days of the year that keep it.
@@ -24387,7 +24447,7 @@ content: ''; float: right; width: 30px; height: 1em;
                           `chapter ${tde.m.n} of 56`)}</div>`;
 
     const hodCcHtml =
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">\u2726 Daily Chofetz Chaim <span class="maalah yom" data-wane="11">\u05de\u05d9\u05e2\u05d5\u05d8 \u05d9\u05f4\u05d0</span></div>` +
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">\u2726 Daily Chofetz Chaim <span class="maalah">\u05de\u05e2\u05dc\u05d4 \u05d9\u05f4\u05d0</span></div>` +
       // Today's reading, and the shiur recorded for it. On the ten leap-year
       // days that share a shiur with the day before, the link is the same one
       // — which is the publisher's own arrangement, not a gap here.
@@ -25020,7 +25080,7 @@ content: ''; float: right; width: 30px; height: 1em;
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">`;
       })() +
       `<hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shlomo Katz — רב שלמה כץ <span class="maalah yom" data-wane="15">מיעוט ט״ו</span></div>
+       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Rav Shlomo Katz — רב שלמה כץ <span class="maalah">מעלה ט״ו</span></div>
        <div style="font-size:0.88rem;margin-bottom:14px;"><a href="https://ravshlomokatz.com/" target="_blank" style="color:var(--gold)">Resources</a> &nbsp;·&nbsp; <a href="https://youtube.com/@ravshlomokatz" target="_blank" style="color:var(--gold)">Videos</a></div>
        <hr style="border:0;border-top:1px solid var(--border);margin:0 0 14px 0;">
        <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="10">The Rebbe</div>
@@ -25040,7 +25100,7 @@ content: ''; float: right; width: 30px; height: 1em;
       weekRows;
 
     document.getElementById('malchut-sichos-detail').innerHTML =
-      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likkutei Sichos <span class="maalah yom" data-wane="13">מיעוט י״ג</span></div>
+      `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Likkutei Sichos <span class="maalah">מעלה י״ג</span></div>
        <div style="font-size:0.88rem;margin-bottom:0;">` +
       `<a href="https://thedailysicha.com/" target="_blank" style="color:var(--gold)">Daily Sicha</a> &nbsp;·&nbsp; ` +
       `<a href="https://projectlikkuteisichos.org/" target="_blank" style="color:var(--gold)">Project Likkutei Sichos</a></div>`;
@@ -26656,9 +26716,8 @@ content: ''; float: right; width: 30px; height: 1em;
   // there: render() writes into them by id, which finds them wherever they
   // are, and nothing here ever clears them.
   function _paneTakeFace(card, box) {
-    const maalot = box.querySelector('.pane-body[data-pane="maalot"]');
     const col = card.querySelector('.sefirah-content-col');
-    if (!col || !maalot) return;
+    if (!col || !box.querySelector('.pane-body[data-pane="maalot"]')) return;
     [...col.querySelectorAll('.malchut-ksa-row, .malchut-section')].forEach(row => {
       // The KoT Book goes with them. On Keter it already sits inside the
       // ma'alah it belongs to; on Chochmah and Binah it stood alone at the
@@ -26666,8 +26725,17 @@ content: ''; float: right; width: 30px; height: 1em;
       // is the book of in another.
       if (!row.querySelector('.maalah, .kot-book-icon')) return;
       if (box.contains(row)) return;
+      // A face row goes to the pane its own mark names, not to Ma'alot
+      // because that is where face rows used to go. Chochmah's Torah Ohr and
+      // Binah's Likutei Tefilot are on the face and are מיעוטים now; sending
+      // them to Ma'alot put a מיעוט among the מעלות and left the מיעוטים
+      // pane empty on both cards. A row carrying only the KoT Book names no
+      // kind, and Ma'alot is still where it belongs.
+      const body = box.querySelector(
+        '.pane-body[data-pane="' + (_paneKind([row]) || 'maalot') + '"]');
+      if (!body) return;
       row.dataset.paneSrc = 'face';
-      maalot.appendChild(row);
+      body.appendChild(row);
     });
     // Taken last, so what names Ma'alot lands under the steps rather than
     // above them. Malchut's Yad HaChazakah names Stars — its heading wears a
@@ -27427,12 +27495,249 @@ content: ''; float: right; width: 30px; height: 1em;
                  cell2: lh,
                  cell3: (D.date.getDay() === 6 && D.parasha) ? D.parasha : '' }; } },
 
-    // ── A calendar for each of the fifteen מעלות ──
-    // The counted steps of the descent, one lens apiece. Each reads the same
-    // helper its card reads, so a square and a card face cannot part company —
-    // the fault the calendar check exists to catch. Appended after the ten
-    // card lenses because the checks address lenses by index.
-    { group:'maalah', card:'א׳ · All Year Round', cycle:'מעלה א׳ — the daily Zohar folios and Likutei Moharan',
+    // ── A calendar for each מעלה that has a daily reading ──
+    // The fifteen come down from Keter, and nine of them are standing links
+    // — Chumash with Rashi, Tanya, the Rambam, Shulchan Aruch HaRav, Chitas
+    // for Kids, Chok Breslov, Likkutei Sichos, Living Chassidus, Rav Shlomo
+    // Katz — whose sites resolve the day themselves. The app holds no portion
+    // for them, so a calendar would print one identical square 364 times, and
+    // they are left out rather than filled with a repetition.
+    // Appended after the ten card lenses because the checks address lenses by
+    // index.
+
+    { group:'maalah', card:'ד׳ · Tractate Cycle', cycle:'מעלה ד׳ — the tractates, a half-cycle at a time',
+      seg:(D)=>{
+        if (D.inExtra) return { n:8, mic:true, label:'Adar I — the 33 units compressed into 28',
+                                cell:'microcosm' };
+        const c = get22DayInfo(D.yearDay);
+        const i = c.cycle >= 17 ? 32 : (c.cycle - 1) * 2 + (c.day <= 11 ? 0 : 1);
+        const t = TRACTATE_CYCLES[i];
+        if (!t) return {n:-1,label:'Outside the tractate cycle',brk:true,cell:''};
+        return { n:0, label:'מעלה ד׳ — ' + t.tractate + ' · ' + t.period,
+                 cell:t.tractate, cell2:t.id + ' · ' + t.period }; } },
+
+    { group:'maalah', card:'ה׳ · Breslov Israel', cycle:'מעלה ה׳ — the recordings, two to a parasha',
+      seg:(D)=>{
+        const parts = (D.parasha || '').split('-').map(x => x.trim());
+        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
+        if (!num) return {n:-1,label:'No parasha for this day',brk:true,cell:''};
+        const i = Math.min((num - 1) * 2, BRESLEV_CDS.length - 2);
+        const a = BRESLEV_CDS[i], b = BRESLEV_CDS[i + 1];
+        if (!a) return {n:-1,label:'Outside the recordings',brk:true,cell:''};
+        return { n:1, label:'מעלה ה׳ — ' + a.label + (b ? ' · ' + b.label : ''),
+                 cell:a.label, cell2:b ? b.label : '' }; } },
+
+    { group:'maalah', card:'ז׳ · Carlebach Stories', cycle:'מעלה ז׳ — the stories, two to a parasha',
+      seg:(D)=>{
+        const parts = (D.parasha || '').split('-').map(x => x.trim());
+        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
+        if (!num) return {n:-1,label:'No parasha for this day',brk:true,cell:''};
+        // Parashot 42-46 draw on the nine Devarim stories; the rest run
+        // sequentially through the ninety-nine general ones, two a week.
+        if (num >= 42 && num <= 46) {
+          const d = (num - 42) * 2;
+          const one = d + 1, two = d + 2;
+          return { n:2, label:'מעלה ז׳ — the Devarim stories',
+                   cell:'Devarim Story ' + one + (two <= 9 ? ' · ' + two : ''),
+                   cell2:D.parasha || '' };
+        }
+        const slot = num <= 41 ? (num - 1) : (num - 6);
+        return { n:2, label:'מעלה ז׳ — Reb Shlomo Carlebach',
+                 cell:'Story ' + (slot * 2 + 1) + ' · ' + (slot * 2 + 2),
+                 cell2:D.parasha || '' }; } },
+
+    { group:'maalah', card:'ח׳ · Daf Yomi', cycle:'מעלה ח׳ — the daf of the day',
+      seg:(D)=>{
+        let f = null; try { f = getDafYomi(D.date); } catch (e) {}
+        if (!f) return {n:-1,label:'No daf for this day',brk:true,cell:''};
+        return { n:3, label:'מעלה ח׳ — ' + f.name + ' ' + f.daf,
+                 cell:f.name + ' ' + f.daf, cell2:f.heb || '' }; } },
+
+    { group:'maalah', card:'י״א · Daily Chofetz Chaim', cycle:'מעלה י״א — the 118-day round of classes',
+      seg:(D)=>{
+        const anchor = new Date(2025, 8, 23);
+        const nrm = new Date(D.date.getFullYear(), D.date.getMonth(), D.date.getDate());
+        const n = Math.round((nrm - anchor) / 86400000);
+        const cls = ((n % 118) + 118) % 118 + 1;
+        return { n:4, label:'מעלה י״א — class ' + cls + ' of 118',
+                 cell:'Class ' + cls, cell2:'of 118' }; } },
+
+    { group:'maalah', card:'י״ב · Chok L’Yisrael', cycle:'מעלה י״ב — a portion for each of the six weekdays',
+      seg:(D)=>{
+        const parts = (D.parasha || '').split('-').map(x => x.trim());
+        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
+        // Shabbat has no daily portion; the week's verse of Sefer Yetzirah
+        // stands in its place, exactly as the card reads it.
+        if (D.date.getDay() === 6) {
+          const e = num ? SEFER_YETZIRAH_VERSES[num] : null;
+          const vs = e ? (Array.isArray(e) ? e : [e]) : null;
+          if (!vs) return {n:-1,label:'Shabbat — no portion',brk:true,cell:'Shabbat'};
+          const ref = vs.length > 1 ? vs[0].ref + '–' + vs[vs.length - 1].ref : vs[0].ref;
+          return { n:8, label:'מעלה י״ב — Shabbat: Sefer Yetzirah ' + ref,
+                   cell:'Sefer Yetzirah', cell2:ref };
+        }
+        return { n:5, label:'מעלה י״ב — ' + (D.parasha || '') + ' · day ' + (D.date.getDay() + 1) + ' of 6',
+                 cell:D.parasha || '', cell2:'Day ' + (D.date.getDay() + 1) }; } },
+
+    // ── A calendar for each of the fifteen מיעוטים ──
+    // The counted steps of the climb back, one lens apiece. Each reads the
+    // same helper its card reads, so a square and a card face cannot part
+    // company — the fault the calendar check exists to catch.
+
+    { group:'miut', card:'א׳ · Works of Her Praise', cycle:'מיעוט א׳ — Likutei Halachos through the year',
+      seg:(D)=>{
+        const e = getLikuteiHalachotInfo(D.yearDay);
+        if (!e || !e.length) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:5, label:'מיעוט א׳ — Likutei Halachos',
+                 cell:e.map(x => x.label).join(' · '),
+                 cell2:e.some(x => x.source === 'SA') ? 'with the Shulchan Aruch' : '' }; } },
+
+    { group:'miut', card:'ב׳ · Fruits of Her Labor', cycle:'מיעוט ב׳ — מפרי ידיה, the verse of the day',
+      seg:(D)=>{
+        const c = get13DayInfo(D.yearDay);
+        const sf = VATAH_SEIF_BY_DAY[c.day - 1];
+        const pk = sf > 0 ? VATAH_PESUKIM[sf - 1] : null;
+        if (!pk) return { n:3, label:'מיעוט ב׳ — all twelve, as they were given',
+                          cell:'All twelve', cell2:'Mivtza Chinuch, 5736' };
+        return { n:4, label:'מיעוט ב׳ — ' + (pk.en || ''), cell:pk.he || '', cell2:pk.src || '' }; } },
+
+    { group:'miut', card:'ג׳ · Year-Round Connection', cycle:'מיעוט ג׳ — ואתה תצוה, a se’if to each of the thirteen',
+      seg:(D)=>{
+        const c = get13DayInfo(D.yearDay);
+        const sf = VATAH_SEIF_BY_DAY[c.day - 1];
+        if (sf === undefined) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:3, label:'מיעוט ג׳ — ' + (sf === 0 ? 'the complete ma’amar — Purim Katan'
+                                                      : (VATAH_TITLES[sf - 1] || '')),
+                 cell:sf === 0 ? 'Overview' : 'Se’if ' + VATAH_HEB[sf - 1],
+                 cell2:'day ' + c.day + ' of 13' }; } },
+
+    { group:'miut', card:'ד׳ · Ben Ish Chai', cycle:'מיעוט ד׳ — the Ben Ish Chai and Rav Pe’alim, by parasha and weekday',
+      seg:(D)=>{
+        const nums = D.parasha
+          ? D.parasha.split('-').map(x => PARASHA_TO_NUMBER[x.trim()]).filter(Boolean) : null;
+        let r = null;
+        try { r = window.getYesodReading && window.getYesodReading(nums, D.date.getDay() + 1); } catch (e) {}
+        if (!r) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        const items = (r.items || []).map(x => x.label).join(' · ');
+        return { n:2, label:'מיעוט ד׳ — ' + (r.label || ''), cell:r.label || '',
+                 cell2:items.slice(0, 60) }; } },
+
+    { group:'miut', card:'ה׳ · Tanna D’vei Eliyahu', cycle:'מיעוט ה׳ — 56 chapters over the 728 half-days, one to every thirteen',
+      seg:(D)=>{
+        if (D.inExtra) {
+          const k = getTanaDveiEliyahuSprint(D.extraDay);
+          return { n:1, mic:true, label:'Adar I — the Ko’ach Sprint, two chapters a day: ' +
+                                        k.m.label + ' · ' + k.a.label,
+                   cell:k.m.label + ' · ' + k.a.label, cell2:'day ' + k.day + ' of 28' };
+        }
+        const t = getTanaDveiEliyahu(D.yearDay);
+        return { n:1,
+                 label:'מיעוט ה׳ — ' + (t.seam ? t.m.label + ', then ' + t.a.label : t.m.label),
+                 cell: t.seam ? t.m.label + ' · ' + t.a.label : t.m.label,
+                 cell2: t.seam ? 'chapter seam'
+                               : 'half-days ' + t.m.step + ' & ' + t.a.step + ' of 13' }; } },
+
+    { group:'miut', card:'ו׳ · Shulchan Aruch', cycle:'מיעוט ו׳ — Orach Chaim, then the Chofetz Chaim',
+      seg:(D)=>{
+        const h = getHalachaInfo(D.yearDay);
+        const one = u => u.kind === 'sa' ? 'OC ' + u.ch : u.label;
+        return { n:0, label:'מיעוט ו׳ — morning and afternoon',
+                 cell:(h.m.kind === 'sa' && h.a.kind === 'sa') ? 'OC ' + h.m.ch + '–' + h.a.ch
+                                                              : one(h.m) + ' · ' + one(h.a),
+                 cell2:'half-days ' + (h.day * 2 - 1) + ' & ' + (h.day * 2) }; } },
+
+    { group:'miut', card:'ז׳ · Netzach’s text', cycle:'מיעוט ז׳ — Sichos HaRan and Likutei Etzot, 369 days',
+      seg:(D)=>{
+        const c = get41DayInfo(D.yearDay);
+        const pos = ((c.cycle - 1) % 9) * 41 + c.day;
+        let r = null; try { r = window.getNetzachReading && window.getNetzachReading(pos); } catch (e) {}
+        if (!r) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:8, label:'מיעוט ז׳ — ' + r.work, cell:r.work + ' · ' + r.name,
+                 cell2:'day ' + pos + ' of 369' }; } },
+
+    { group:'miut', card:'ח׳ · Tiferet’s text', cycle:'מיעוט ח׳ — Birkas HaNehenin, then Rebbe Nachman’s Tales',
+      seg:(D)=>{
+        if (D.inExtra) return { n:8, mic:true, label:'Adar I — the Tales’ closing talks, all 28 days',
+                                cell:'Talks Following the Tales' };
+        const c = get13DayInfo(D.yearDay);
+        const bh = ch => ({ work:'Seder Birkas HaNehenin', item:'Chapter ' + ch });
+        const tl = t  => ({ work:'Rebbe Nachman’s Tales', item:'Tale ' + t + ' — ' + REBBE_NACHMAN_TALES[t - 1] });
+        const x = c.cycle <= 13 ? bh(c.cycle)
+                : c.cycle <= 26 ? tl(c.cycle - 13)
+                : c.cycle === 27 ? { ...bh(c.day), review:true } : { ...tl(c.day), review:true };
+        return { n:7, label:'מיעוט ח׳ — ' + x.work + (x.review ? ' · microcosm review' : ''),
+                 cell:x.item, cell2:'cycle ' + c.cycle + ' · day ' + c.day + ' of 13' }; } },
+
+    { group:'miut', card:'ט׳ · Tanach', cycle:'מיעוט ט׳ — Tanach through the year',
+      seg:(D)=>{
+        const i = getTanachInfo(D.yearDay);
+        if (!i) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:6, label:'מיעוט ט׳ — ' + (i.sub || i.tag1 || ''),
+                 cell:String(i.text).replace(/<[^>]*>/g, ''), cell2:i.tag2 || '' }; } },
+
+    { group:'miut', card:'י׳ · Mishna / Tosefta', cycle:'מיעוט י׳ — the Mishna through the year',
+      seg:(D)=>{
+        const i = getMishnaInfo(D.yearDay);
+        if (!i) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:5, label:'מיעוט י׳ — ' + (i.sub || i.tag1 || ''),
+                 cell:String(i.text).replace(/<[^>]*>/g, ''), cell2:i.tag2 || '' }; } },
+
+    { group:'miut', card:'י״א · Likutei Tefilot', cycle:'מיעוט י״א — Reb Nosson’s prayers, 364 days',
+      seg:(D)=>{
+        const ld = ((D.abs - 1) % 364) + 1;
+        let sect, read;
+        if (ld === 1) { sect = 'Introduction'; read = 'Introduction'; }
+        else if (ld <= 305) { const i = ld - 2; sect = 'Part 1';
+          read = 'Prayer ' + (Math.floor(i / 2) + 1) + ' — ' + (i % 2 === 0 ? 'first half' : 'second half'); }
+        else { sect = 'Part 2'; read = 'Prayer ' + (ld - 305); }
+        return { n:4, label:'מיעוט י״א — Likutei Tefilot · ' + sect, cell:read,
+                 cell2:'day ' + ld + ' of 364' }; } },
+
+    { group:'miut', card:'י״ב · Torah Ohr / Likutei Torah', cycle:'מיעוט י״ב — the Alter Rebbe on the parasha, 364 days',
+      seg:(D)=>{
+        if (D.inExtra) return { n:8, mic:true, label:'Adar I — the Hosafot stand in for the year',
+                                cell:'Hosafa ' + D.extraDay + ' of 28' };
+        const cd = ((D.abs - 1) % 364) + 1;
+        for (const sec of CHOCHMA_CYCLE) {
+          if (cd < sec.start || cd > sec.end) continue;
+          if (sec.cover) return { n:3, label:'מיעוט י״ב — a cover day, the sefer opened',
+                                  cell:'Cover', cell2:'day ' + cd + ' of 364' };
+          const dw = cd - sec.start + 1;
+          const read = sec.perDay
+            ? 'Discourses ' + ((dw - 1) * sec.perDay + 1) + '–' + ((dw - 1) * sec.perDay + sec.perDay)
+            : 'Folio ' + dw;
+          return { n:3, label:'מיעוט י״ב — ' + sec.name, cell:sec.name + ' · ' + read,
+                   cell2:'day ' + cd + ' of 364' };
+        }
+        return {n:-1,label:'Outside the cycle',brk:true,cell:''}; } },
+
+    { group:'miut', card:'י״ג · Strong Day', cycle:'מיעוט י״ג — Sefer HaMitzvos, two a day',
+      seg:(D)=>{
+        const h = D.heb; let cell = '', title = '';
+        try {
+          const sh = getSeferHamitzvosInfo(h.month, h.day, h.year, D.leap);
+          const span = a => a.length > 1 ? a[0].n + '–' + a[a.length - 1].n : String(a[0].n);
+          if (sh.mt) { cell = sh.mt.book ? 'MT ' + sh.mt.book + ' of 14' : 'MT — all fourteen'; title = 'Mishneh Torah'; }
+          else {
+            const bits = [];
+            if (sh.neg.length) bits.push('Lo Taaseh ' + span(sh.neg));
+            if (sh.pos.length) bits.push('Aseh ' + span(sh.pos));
+            cell = bits.join(' · ');
+            title = (sh.neg[0] && sh.neg[0].title) || (sh.pos[0] && sh.pos[0].title) || '';
+          }
+        } catch (e) {}
+        if (!cell) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
+        return { n:2, label:'מיעוט י״ג — ' + (title || 'Strong Day'), cell }; } },
+
+    { group:'miut', card:'י״ד · Light that is Good', cycle:'מיעוט י״ד — Keter Shem Tov, by parasha and weekday',
+      seg:(D)=>{
+        const parts = (D.parasha || '').split('-').map(x => x.trim());
+        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
+        let k = null; try { k = num ? getDailyKST(num, D.date.getDay()) : null; } catch (e) {}
+        if (!k) return {n:-1,label:'No Keter Shem Tov reading for this day',brk:true,cell:''};
+        return { n:1, label:'מיעוט י״ד — ' + (k.titleEn || k.label), cell:k.label, cell2:D.parasha || '' }; } },
+
+    { group:'miut', card:'ט״ו · All Year Round', cycle:'מיעוט ט״ו — the daily Zohar folios and Likutei Moharan',
       seg:(D)=>{
         const _t = t => { let m = t.match(/Likutei Moharan II, Torah (\d+)/); if (m) return 'Tinyana ' + m[1];
                           m = t.match(/Likutei Moharan, Lesson (\d+)/); return m ? 'Torah ' + m[1] : t; };
@@ -27458,241 +27763,7 @@ content: ''; float: right; width: 30px; height: 1em;
           }
         }
         if (!lm && !zo) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
-        return { n:0, label:'מעלה א׳ — All Year Round · בכל השנה', cell:lm, cell2:zo }; } },
-
-    { group:'maalah', card:'ב׳ · Light that is Good', cycle:'מעלה ב׳ — Keter Shem Tov, by parasha and weekday',
-      seg:(D)=>{
-        const parts = (D.parasha || '').split('-').map(x => x.trim());
-        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
-        let k = null; try { k = num ? getDailyKST(num, D.date.getDay()) : null; } catch (e) {}
-        if (!k) return {n:-1,label:'No Keter Shem Tov reading for this day',brk:true,cell:''};
-        return { n:1, label:'מעלה ב׳ — ' + (k.titleEn || k.label), cell:k.label, cell2:D.parasha || '' }; } },
-
-    { group:'maalah', card:'ג׳ · Strong Day', cycle:'מעלה ג׳ — Sefer HaMitzvos, two a day',
-      seg:(D)=>{
-        const h = D.heb; let cell = '', title = '';
-        try {
-          const sh = getSeferHamitzvosInfo(h.month, h.day, h.year, D.leap);
-          const span = a => a.length > 1 ? a[0].n + '–' + a[a.length - 1].n : String(a[0].n);
-          if (sh.mt) { cell = sh.mt.book ? 'MT ' + sh.mt.book + ' of 14' : 'MT — all fourteen'; title = 'Mishneh Torah'; }
-          else {
-            const bits = [];
-            if (sh.neg.length) bits.push('Lo Taaseh ' + span(sh.neg));
-            if (sh.pos.length) bits.push('Aseh ' + span(sh.pos));
-            cell = bits.join(' · ');
-            title = (sh.neg[0] && sh.neg[0].title) || (sh.pos[0] && sh.pos[0].title) || '';
-          }
-        } catch (e) {}
-        if (!cell) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
-        return { n:2, label:'מעלה ג׳ — ' + (title || 'Strong Day'), cell }; } },
-
-    { group:'maalah', card:'ד׳ · Torah Ohr / Likutei Torah', cycle:'מעלה ד׳ — the Alter Rebbe on the parasha, 364 days',
-      seg:(D)=>{
-        if (D.inExtra) return { n:8, mic:true, label:'Adar I — the Hosafot stand in for the year',
-                                cell:'Hosafa ' + D.extraDay + ' of 28' };
-        const cd = ((D.abs - 1) % 364) + 1;
-        for (const sec of CHOCHMA_CYCLE) {
-          if (cd < sec.start || cd > sec.end) continue;
-          if (sec.cover) return { n:3, label:'מעלה ד׳ — a cover day, the sefer opened',
-                                  cell:'Cover', cell2:'day ' + cd + ' of 364' };
-          const dw = cd - sec.start + 1;
-          const read = sec.perDay
-            ? 'Discourses ' + ((dw - 1) * sec.perDay + 1) + '–' + ((dw - 1) * sec.perDay + sec.perDay)
-            : 'Folio ' + dw;
-          return { n:3, label:'מעלה ד׳ — ' + sec.name, cell:sec.name + ' · ' + read,
-                   cell2:'day ' + cd + ' of 364' };
-        }
-        return {n:-1,label:'Outside the cycle',brk:true,cell:''}; } },
-
-    { group:'maalah', card:'ה׳ · Likutei Tefilot', cycle:'מעלה ה׳ — Reb Nosson’s prayers, 364 days',
-      seg:(D)=>{
-        const ld = ((D.abs - 1) % 364) + 1;
-        let sect, read;
-        if (ld === 1) { sect = 'Introduction'; read = 'Introduction'; }
-        else if (ld <= 305) { const i = ld - 2; sect = 'Part 1';
-          read = 'Prayer ' + (Math.floor(i / 2) + 1) + ' — ' + (i % 2 === 0 ? 'first half' : 'second half'); }
-        else { sect = 'Part 2'; read = 'Prayer ' + (ld - 305); }
-        return { n:4, label:'מעלה ה׳ — Likutei Tefilot · ' + sect, cell:read,
-                 cell2:'day ' + ld + ' of 364' }; } },
-
-    { group:'maalah', card:'ו׳ · Mishna / Tosefta', cycle:'מעלה ו׳ — the Mishna through the year',
-      seg:(D)=>{
-        const i = getMishnaInfo(D.yearDay);
-        if (!i) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
-        return { n:5, label:'מעלה ו׳ — ' + (i.sub || i.tag1 || ''),
-                 cell:String(i.text).replace(/<[^>]*>/g, ''), cell2:i.tag2 || '' }; } },
-
-    { group:'maalah', card:'ז׳ · Tanach', cycle:'מעלה ז׳ — Tanach through the year',
-      seg:(D)=>{
-        const i = getTanachInfo(D.yearDay);
-        if (!i) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
-        return { n:6, label:'מעלה ז׳ — ' + (i.sub || i.tag1 || ''),
-                 cell:String(i.text).replace(/<[^>]*>/g, ''), cell2:i.tag2 || '' }; } },
-
-    { group:'maalah', card:'ח׳ · Tiferet’s text', cycle:'מעלה ח׳ — Birkas HaNehenin, then Rebbe Nachman’s Tales',
-      seg:(D)=>{
-        if (D.inExtra) return { n:8, mic:true, label:'Adar I — the Tales’ closing talks, all 28 days',
-                                cell:'Talks Following the Tales' };
-        const c = get13DayInfo(D.yearDay);
-        const bh = ch => ({ work:'Seder Birkas HaNehenin', item:'Chapter ' + ch });
-        const tl = t  => ({ work:'Rebbe Nachman’s Tales', item:'Tale ' + t + ' — ' + REBBE_NACHMAN_TALES[t - 1] });
-        const x = c.cycle <= 13 ? bh(c.cycle)
-                : c.cycle <= 26 ? tl(c.cycle - 13)
-                : c.cycle === 27 ? { ...bh(c.day), review:true } : { ...tl(c.day), review:true };
-        return { n:7, label:'מעלה ח׳ — ' + x.work + (x.review ? ' · microcosm review' : ''),
-                 cell:x.item, cell2:'cycle ' + c.cycle + ' · day ' + c.day + ' of 13' }; } },
-
-    { group:'maalah', card:'ט׳ · Netzach’s text', cycle:'מעלה ט׳ — Sichos HaRan and Likutei Etzot, 369 days',
-      seg:(D)=>{
-        const c = get41DayInfo(D.yearDay);
-        const pos = ((c.cycle - 1) % 9) * 41 + c.day;
-        let r = null; try { r = window.getNetzachReading && window.getNetzachReading(pos); } catch (e) {}
-        if (!r) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
-        return { n:8, label:'מעלה ט׳ — ' + r.work, cell:r.work + ' · ' + r.name,
-                 cell2:'day ' + pos + ' of 369' }; } },
-
-    { group:'maalah', card:'י׳ · Shulchan Aruch', cycle:'מעלה י׳ — Orach Chaim, then the Chofetz Chaim',
-      seg:(D)=>{
-        const h = getHalachaInfo(D.yearDay);
-        const one = u => u.kind === 'sa' ? 'OC ' + u.ch : u.label;
-        return { n:0, label:'מעלה י׳ — morning and afternoon',
-                 cell:(h.m.kind === 'sa' && h.a.kind === 'sa') ? 'OC ' + h.m.ch + '–' + h.a.ch
-                                                              : one(h.m) + ' · ' + one(h.a),
-                 cell2:'half-days ' + (h.day * 2 - 1) + ' & ' + (h.day * 2) }; } },
-
-    { group:'maalah', card:'י״א · Tanna D’vei Eliyahu', cycle:'מעלה י״א — 56 chapters over the 728 half-days, one to every thirteen',
-      seg:(D)=>{
-        if (D.inExtra) {
-          const k = getTanaDveiEliyahuSprint(D.extraDay);
-          return { n:1, mic:true, label:'Adar I — the Ko’ach Sprint, two chapters a day: ' +
-                                        k.m.label + ' · ' + k.a.label,
-                   cell:k.m.label + ' · ' + k.a.label, cell2:'day ' + k.day + ' of 28' };
-        }
-        const t = getTanaDveiEliyahu(D.yearDay);
-        return { n:1,
-                 label:'מעלה י״א — ' + (t.seam ? t.m.label + ', then ' + t.a.label : t.m.label),
-                 cell: t.seam ? t.m.label + ' · ' + t.a.label : t.m.label,
-                 cell2: t.seam ? 'chapter seam'
-                               : 'half-days ' + t.m.step + ' & ' + t.a.step + ' of 13' }; } },
-
-    { group:'maalah', card:'י״ב · Ben Ish Chai', cycle:'מעלה י״ב — the Ben Ish Chai and Rav Pe’alim, by parasha and weekday',
-      seg:(D)=>{
-        const nums = D.parasha
-          ? D.parasha.split('-').map(x => PARASHA_TO_NUMBER[x.trim()]).filter(Boolean) : null;
-        let r = null;
-        try { r = window.getYesodReading && window.getYesodReading(nums, D.date.getDay() + 1); } catch (e) {}
-        if (!r) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
-        const items = (r.items || []).map(x => x.label).join(' · ');
-        return { n:2, label:'מעלה י״ב — ' + (r.label || ''), cell:r.label || '',
-                 cell2:items.slice(0, 60) }; } },
-
-    { group:'maalah', card:'י״ג · Year-Round Connection', cycle:'מעלה י״ג — ואתה תצוה, a se’if to each of the thirteen',
-      seg:(D)=>{
-        const c = get13DayInfo(D.yearDay);
-        const sf = VATAH_SEIF_BY_DAY[c.day - 1];
-        if (sf === undefined) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
-        return { n:3, label:'מעלה י״ג — ' + (sf === 0 ? 'the complete ma’amar — Purim Katan'
-                                                      : (VATAH_TITLES[sf - 1] || '')),
-                 cell:sf === 0 ? 'Overview' : 'Se’if ' + VATAH_HEB[sf - 1],
-                 cell2:'day ' + c.day + ' of 13' }; } },
-
-    { group:'maalah', card:'י״ד · Fruits of Her Labor', cycle:'מעלה י״ד — מפרי ידיה, the verse of the day',
-      seg:(D)=>{
-        const c = get13DayInfo(D.yearDay);
-        const sf = VATAH_SEIF_BY_DAY[c.day - 1];
-        const pk = sf > 0 ? VATAH_PESUKIM[sf - 1] : null;
-        if (!pk) return { n:3, label:'מעלה י״ד — all twelve, as they were given',
-                          cell:'All twelve', cell2:'Mivtza Chinuch, 5736' };
-        return { n:4, label:'מעלה י״ד — ' + (pk.en || ''), cell:pk.he || '', cell2:pk.src || '' }; } },
-
-    { group:'maalah', card:'ט״ו · Works of Her Praise', cycle:'מעלה ט״ו — Likutei Halachos through the year',
-      seg:(D)=>{
-        const e = getLikuteiHalachotInfo(D.yearDay);
-        if (!e || !e.length) return {n:-1,label:'Nothing set for this day',brk:true,cell:''};
-        return { n:5, label:'מעלה ט״ו — Likutei Halachos',
-                 cell:e.map(x => x.label).join(' · '),
-                 cell2:e.some(x => x.source === 'SA') ? 'with the Shulchan Aruch' : '' }; } },
-
-    // ── A calendar for each מיעוט that has a daily reading ──
-    // Nine of the fifteen return steps are standing links — Chumash with
-    // Rashi, Tanya, the Rambam, Shulchan Aruch HaRav, Chitas for Kids, Chok
-    // Breslov, Likkutei Sichos, Living Chassidus, Rav Shlomo Katz — whose
-    // sites resolve the day themselves. The app holds no portion for them, so
-    // a calendar would print one identical square 364 times, and they are left
-    // out rather than filled with a repetition.
-    { group:'miut', card:'ד׳ · Tractate Cycle', cycle:'מיעוט ד׳ — the tractates, a half-cycle at a time',
-      seg:(D)=>{
-        if (D.inExtra) return { n:8, mic:true, label:'Adar I — the 33 units compressed into 28',
-                                cell:'microcosm' };
-        const c = get22DayInfo(D.yearDay);
-        const i = c.cycle >= 17 ? 32 : (c.cycle - 1) * 2 + (c.day <= 11 ? 0 : 1);
-        const t = TRACTATE_CYCLES[i];
-        if (!t) return {n:-1,label:'Outside the tractate cycle',brk:true,cell:''};
-        return { n:0, label:'מיעוט ד׳ — ' + t.tractate + ' · ' + t.period,
-                 cell:t.tractate, cell2:t.id + ' · ' + t.period }; } },
-
-    { group:'miut', card:'ה׳ · Breslov Israel', cycle:'מיעוט ה׳ — the recordings, two to a parasha',
-      seg:(D)=>{
-        const parts = (D.parasha || '').split('-').map(x => x.trim());
-        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
-        if (!num) return {n:-1,label:'No parasha for this day',brk:true,cell:''};
-        const i = Math.min((num - 1) * 2, BRESLEV_CDS.length - 2);
-        const a = BRESLEV_CDS[i], b = BRESLEV_CDS[i + 1];
-        if (!a) return {n:-1,label:'Outside the recordings',brk:true,cell:''};
-        return { n:1, label:'מיעוט ה׳ — ' + a.label + (b ? ' · ' + b.label : ''),
-                 cell:a.label, cell2:b ? b.label : '' }; } },
-
-    { group:'miut', card:'ז׳ · Carlebach Stories', cycle:'מיעוט ז׳ — the stories, two to a parasha',
-      seg:(D)=>{
-        const parts = (D.parasha || '').split('-').map(x => x.trim());
-        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
-        if (!num) return {n:-1,label:'No parasha for this day',brk:true,cell:''};
-        // Parashot 42-46 draw on the nine Devarim stories; the rest run
-        // sequentially through the ninety-nine general ones, two a week.
-        if (num >= 42 && num <= 46) {
-          const d = (num - 42) * 2;
-          const one = d + 1, two = d + 2;
-          return { n:2, label:'מיעוט ז׳ — the Devarim stories',
-                   cell:'Devarim Story ' + one + (two <= 9 ? ' · ' + two : ''),
-                   cell2:D.parasha || '' };
-        }
-        const slot = num <= 41 ? (num - 1) : (num - 6);
-        return { n:2, label:'מיעוט ז׳ — Reb Shlomo Carlebach',
-                 cell:'Story ' + (slot * 2 + 1) + ' · ' + (slot * 2 + 2),
-                 cell2:D.parasha || '' }; } },
-
-    { group:'miut', card:'ח׳ · Daf Yomi', cycle:'מיעוט ח׳ — the daf of the day',
-      seg:(D)=>{
-        let f = null; try { f = getDafYomi(D.date); } catch (e) {}
-        if (!f) return {n:-1,label:'No daf for this day',brk:true,cell:''};
-        return { n:3, label:'מיעוט ח׳ — ' + f.name + ' ' + f.daf,
-                 cell:f.name + ' ' + f.daf, cell2:f.heb || '' }; } },
-
-    { group:'miut', card:'י״א · Daily Chofetz Chaim', cycle:'מיעוט י״א — the 118-day round of classes',
-      seg:(D)=>{
-        const anchor = new Date(2025, 8, 23);
-        const nrm = new Date(D.date.getFullYear(), D.date.getMonth(), D.date.getDate());
-        const n = Math.round((nrm - anchor) / 86400000);
-        const cls = ((n % 118) + 118) % 118 + 1;
-        return { n:4, label:'מיעוט י״א — class ' + cls + ' of 118',
-                 cell:'Class ' + cls, cell2:'of 118' }; } },
-
-    { group:'miut', card:'י״ב · Chok L’Yisrael', cycle:'מיעוט י״ב — a portion for each of the six weekdays',
-      seg:(D)=>{
-        const parts = (D.parasha || '').split('-').map(x => x.trim());
-        const num = D.parasha ? (PARASHA_TO_NUMBER[D.parasha] || PARASHA_TO_NUMBER[parts[0]]) : null;
-        // Shabbat has no daily portion; the week's verse of Sefer Yetzirah
-        // stands in its place, exactly as the card reads it.
-        if (D.date.getDay() === 6) {
-          const e = num ? SEFER_YETZIRAH_VERSES[num] : null;
-          const vs = e ? (Array.isArray(e) ? e : [e]) : null;
-          if (!vs) return {n:-1,label:'Shabbat — no portion',brk:true,cell:'Shabbat'};
-          const ref = vs.length > 1 ? vs[0].ref + '–' + vs[vs.length - 1].ref : vs[0].ref;
-          return { n:8, label:'מיעוט י״ב — Shabbat: Sefer Yetzirah ' + ref,
-                   cell:'Sefer Yetzirah', cell2:ref };
-        }
-        return { n:5, label:'מיעוט י״ב — ' + (D.parasha || '') + ' · day ' + (D.date.getDay() + 1) + ' of 6',
-                 cell:D.parasha || '', cell2:'Day ' + (D.date.getDay() + 1) }; } },
+        return { n:0, label:'מיעוט ט״ו — All Year Round · בכל השנה', cell:lm, cell2:zo }; } },
 
     // ── A calendar for each companion that keeps a count of its own ──
     // Nine of the twenty-two are keyed to the week's parasha and nothing else
@@ -29702,21 +29773,21 @@ content: ''; float: right; width: 30px; height: 1em;
   <h3 class="hg-h">The marks</h3>
   <p>Almost every reading wears a mark that says what it is, and the marks are what the counts are kept by. A few readings wear none &mdash; the week&rsquo;s seven books in Malchut, the Zohar that stands with Thursday&rsquo;s Ramchal &mdash; and those are simply read.</p>
   <p><strong>&#10022;</strong> is a <strong>counted step</strong> &mdash; light drawn inward, <em>Or Pnimi</em>. Beside its heading sits a gold <strong>מעלה</strong> or <strong>מיעוט</strong> tag. There are thirty of them in a day, fifteen of each, and each is marked when you have learned it.</p>
-  <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, the word in <strong>Ma&rsquo;alot HaZman</strong>, the spiral of the year above, and in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is the opposite motion &mdash; a lessening, a making-small, what the moon does coming down.</p>
+  <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, the word in <strong>Ma&rsquo;alot HaZman</strong>, the spiral of the year above, and in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is a lessening, a making-small, what the moon does as it empties. The surprise is which way each one runs: the <span lang="he">מעלות</span> go <em>down</em> the Sefirot, from Keter to Malchut, and the <span lang="he">מיעוטים</span> climb back. Descending is the ascent &mdash; the earliest mystics, who rose through the palaces, were called <span lang="he">יורדי מרכבה</span>, those who <em>go down</em> to the chariot &mdash; and a step taken in the direction the light itself is going is the step that lifts you.</p>
   <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. None of them is ever asked for by the hour or counted toward the thirty &mdash; the surrounding light does not wait on a vessel. Each one lights in the sun&rsquo;s gold and fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
   <p>One closed set among them wears a <strong>menorah</strong> rather than a star, and it is a chanukiah: ten who carry it on nine lights. The Baal Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven of Chabad from the Alter Rebbe to the Rebbe. Eight take the eight branches, in the order the teaching came down and from the right, as the lights of Chanukah are added; the ninth, the Rayatz, is the shamash, raised at the centre &mdash; the one whose whole work was to light others; and the tenth takes no branch of his own, because when he is gathered every light on the stand is lit. A gathered bearer lights blue and fills his own place on the menorah beside the moon.</p>
 
   <h3 class="hg-h">The thirty steps</h3>
-  <p>The fifteen gold <strong>מעלה</strong> tags, א׳ to ט״ו, climb from Malchut up to Keter; the moon in the clock above fills as you mark them, and at fifteen it becomes the sun, whose rays then remain. Then return: the <strong>מיעוט</strong> tags inside the cards mark fifteen steps of listening back down from Keter to Malchut, and the moon wanes as you go &mdash; a whole month walked in a single day.</p>
+  <p>The fifteen gold <strong>מעלה</strong> tags, א׳ to ט״ו, come down from Keter to Malchut &mdash; they begin with the Chumash and Rashi and end at Rav Shlomo Katz &mdash; and the moon in the clock above fills as you mark them, until at fifteen it becomes the sun, whose rays then remain. Then return: the <strong>מיעוט</strong> tags inside the cards mark fifteen steps climbing back from Malchut to Keter, from Likutei Halachot to the Zohar, and the moon wanes as you go &mdash; a whole month walked in a single day.</p>
   <p><strong>What the hour asks for, then what is outstanding.</strong> Each of the thirty sits on a card, and the card has an hour, so the step being asked for is the one belonging to the Sefirah now holding the clock. Once that hour&rsquo;s own reading is marked, Today&rsquo;s Ladder turns to whatever is still outstanding and says <em>catching up</em>. This is the Baal Shem Tov&rsquo;s rule for the three Psalms of Elul &mdash; say the day&rsquo;s own three first, then make up what was missed &mdash; and Book 6 carries it too.</p>
-  <p>So you may tap any tag whenever you have learned it, and tap it again to give it back. Climbing the fifteen in order is a practice of its own, and a beautiful one; it is not a gate. The one thing that is: <strong>the return does not begin until the moon is full</strong> &mdash; that is direction rather than order, the light going out before it comes back. <strong>A little is a step:</strong> a few lines of the Chumash, a page opened, a shiur begun.</p>
+  <p>So you may tap any tag whenever you have learned it, and tap it again to give it back. Taking the fifteen in order is a practice of its own, and a beautiful one; it is not a gate. The one thing that is: <strong>the return does not begin until the moon is full</strong> &mdash; that is direction rather than order, the light going out before it comes back. <strong>A little is a step:</strong> a few lines of the Chumash, a page opened, a shiur begun.</p>
   <p>Tap the <strong>moon</strong> itself for Today&rsquo;s Path &mdash; all thirty laid out in the order of the ladder, with the one being asked for highlighted; tap any row to jump straight to it.</p>
 
   <h3 class="hg-h">The ten prayers</h3>
   <p>Each Sefirah carries one of the day&rsquo;s ten prayers, in the left margin beside its hours &mdash; Hitbodedut in Keter, Shacharit in Tiferet, Mincha in Hod, Maariv in Yesod, Kri&rsquo;at Shema in Malchut, and so through all ten. The one whose hour has come pulses until it is said; tap to mark it, tap again to undo. Like the thirty steps, these are marked as they are said &mdash; each prayer has its own time. The <strong>heart</strong> in Today&rsquo;s Ladder fills as they accumulate, and glows when the day&rsquo;s ten are whole.</p>
 
   <h3 class="hg-h">The shape of a day</h3>
-  <p>The climb as one practice belongs to one hour: all fifteen <strong>מעלות</strong> taken together in the Mochin &mdash; Chochmah, Binah, and Keter/Da&rsquo;at &mdash; the eighty-eight minutes wrapped around Chatzot. That is the ladder, and the hour it is made for.</p>
+  <p>The descent as one practice belongs to one hour: all fifteen <strong>מעלות</strong> taken together in the Mochin &mdash; Chochmah, Binah, and Keter/Da&rsquo;at &mdash; the eighty-eight minutes wrapped around Chatzot. That is the ladder, and the hour it is made for.</p>
   <p>Each rung also has a card, and the card has an hour. So the rest of the day walks the Sefirot in turn, and every hour asks for everything that is its own: its <strong>מעלה</strong>, its <strong>מיעוט</strong>, its prayer, its <strong>&#10017;</strong> companions, its Rebbe&rsquo;s menorah from Chesed down. Keter&rsquo;s hour holds three of the מעלות and asks for them one at a time; an hour that holds none of the readings you have undertaken moves straight to whatever is outstanding.</p>
   <p><strong>However you come to it.</strong> That is the ideal, and nothing depends on reaching it. The path can be joined at any hour and still be finished: the hour only says what it is asking for, and a step is marked when it was actually done, not when its hour has passed. Anyone who would rather take a single resource, or stay with one card, is welcome to &mdash; the main thing is to learn Torah and to pray as we fulfill our day&rsquo;s acts of kindness. What this offers is a way to bind that learning and that prayer, and ourselves, to time, and to the beautifully intricate Kabbalistic structure found within it.</p>
 
