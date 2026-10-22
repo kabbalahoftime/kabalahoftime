@@ -2176,6 +2176,10 @@ padding: 12px 4px;
 .book-row a { color: var(--gold); text-decoration: none; }
 .book-row a:hover, .book-row a:focus-visible { text-decoration: underline; }
 .book-row .book-where { color: var(--ink-dim); font-size: 0.85em; font-style: italic; }
+/* One line saying what the book is. Without it the shelf is a list of
+   thirteen addresses; with it, it is a shelf. */
+.book-what { color: var(--ink-mid); font-size: 0.86em; line-height: 1.45;
+  margin-top: 2px; padding-right: 6px; }
 .footer-authors {
 font-family: 'Cinzel', serif;
 font-size: calc(11px * var(--ts, 1));
@@ -3707,7 +3711,8 @@ content: ''; float: right; width: 30px; height: 1em;
     <p>Most of the cards are built on the week &mdash; the Torah&rsquo;s weekly Parasha, or the Omer&rsquo;s count of weeks &mdash; layered with shorter and longer spans: 13 attributes, the 22 letters, the Rambam&rsquo;s 28 days, 40 days of receiving the Torah, the 72-fold Name, the four seasons of 91 &mdash; each one a single running and returning around its own heart &mdash; and the full 364-day year. Ma&rsquo;alot HaZman &mdash; the steps of time &mdash; does the reverse above, spiraling the whole year upward through the hours of a single day. All converge on this moment, each adding its own spiritual dimension to today.</p>
     </div>
     <div class="pane-body pane-prose" data-pane="books">
-    <p>The books of the Kabbalah of Time. The seven of the week are read one a day, each on the day named beside it, and Binah's row shows whichever one the day has come to. Keter's and Chochmah's stand on their own card all year. The last four stand on no card at all &mdash; this is where they live.</p>
+    <p>Thirteen books. Tap a title to open it.</p>
+    <p>Seven of them are the books of the week &mdash; one for each day, named beside it, and the day&rsquo;s own is always waiting on the Binah card. The other six are read whenever you like. If you are starting, start with the day you are in.</p>
     <div class="book-shelf" id="kot-books-list"></div>
     </div>
   </div>
@@ -9801,7 +9806,10 @@ content: ''; float: right; width: 30px; height: 1em;
   // (index 0 = set 1). Set 17 is the half-set of vowels.
   // The appendix itself — the source of the letters, the elements and the
   // mishnayot the Chochmah card reads by.
-  const CHOCHMA_KOT_DOC = 'https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/edit?usp=drivesdk&ouid=107762921026290173420&rtpof=true&sd=true';
+  // Read-only, and without the account id the share link carried. Every
+  // other book on the shelf opens to be read; this one opened in edit mode,
+  // which is a door left open on a document rather than a book handed over.
+  const CHOCHMA_KOT_DOC = 'https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/preview';
   const CHOCHMA_KOT_URLS = [
     'https://www.kabbalahoftime.com/2014/09/first-set-of-22-days-alef-bet-heavens.html',
     'https://www.kabbalahoftime.com/2013/09/second-set-of-22-days-gimmel-dalet-eden.html',
@@ -11579,23 +11587,23 @@ content: ''; float: right; width: 30px; height: 1em;
   // once, and both the card and the footer's shelf are built from this.
   // Indexed as MALCHUT_TEXTS is: 0 = Friday, 1 = Shabbat, … 6 = Thursday.
   const KOT_BOOKS = [
-    { book: 'Book 1 · Song of Nature',     emoji: '🐾',
+    { book: 'Book 1 · Song of Nature', what: 'The week’s theme, its creature from Perek Shirah, and its teaching from Pirkei Avot.',     emoji: '🐾',
       url: 'https://drive.google.com/file/d/1ZrQ4cd0pDe_tuFMwkCU79H1x431lyW-0/view?usp=drivesdk' },
-    { book: 'Book 2 · Song of Moses',      emoji: '📜',
+    { book: 'Book 2 · Song of Moses', what: 'The forty-eight qualities by which Torah is acquired, a prophet, a Levitical city, and the week’s verse of Haazinu.',      emoji: '📜',
       url: 'https://drive.google.com/file/d/14inXTz6KRLUF7m5X130DSzWvaUUyaTsj/view?usp=drivesdk' },
-    { book: 'Book 3 · Song of the Sea',    emoji: '🌾',
+    { book: 'Book 3 · Song of the Sea', what: 'The line that runs to David — Ruth’s genealogy, the haftara, Tractate Sotah, and the journeys through the desert.',    emoji: '🌾',
       url: 'https://drive.google.com/file/d/1x6JhUwY8D1pd4HnBWymn5J11fMM4SBra/view?usp=drivesdk' },
-    { book: 'Book 4 · Song of Hannah',     emoji: '💎',
+    { book: 'Book 4 · Song of Hannah', what: 'Solomon’s writings and Hannah’s song, the sixth chapter of Pirkei Avot, and the week’s yahrzeit.',     emoji: '💎',
       url: 'https://drive.google.com/file/d/1gW4vbY2T2_LWViwYNP5Anx6XhKVsPIva/view?usp=drivesdk' },
-    { book: 'Book 5 · Song of Songs',      emoji: '🌹',
+    { book: 'Book 5 · Song of Songs', what: 'Song of Songs through the year, the seventy souls, Jeremiah, and Tractate Shevuot.',      emoji: '🌹',
       url: 'https://drive.google.com/file/d/1-ukVcYEN-Nykj2FezjoCb2DWM1U_EXj9/view?usp=drivesdk' },
-    { book: 'Book 6 · General Remedy',     emoji: '🎵',
+    { book: 'Book 6 · General Remedy', what: 'The Psalms of the week with Perek Shirah, the ten of the Tikkun HaKlali, and Psalm 89.',     emoji: '🎵',
       url: 'https://drive.google.com/file/d/1i601oP9U0rGc6oiPM-HhCczXPDYKsaR8/view?usp=drivesdk' },
     // Book 7 is carried here rather than linked away to Drive, as the two
     // creative-writing volumes are: it opens with nothing to connect to, and
     // the shelf is the same file the repository holds. The other six are
     // still Drive's.
-    { book: 'Book 7 · Gathering of Songs', emoji: '🪜',
+    { book: 'Book 7 · Gathering of Songs', what: 'Every verse of the songs in Books 1–6, rearranged and combined into a single song for the week.', emoji: '🪜',
       url: 'book7_gathering_of_songs.pdf' },
   ];
   // Two more, which are not of the week and so have no day: they stand on one
@@ -11609,9 +11617,9 @@ content: ''; float: right; width: 30px; height: 1em;
   // the card and the shelf cannot come to disagree. Chochmah's was already a
   // constant and is simply pointed at.
   const KOT_BOOKS_MORE = [
-    { book: 'Living Likutei Moharan', emoji: '📖', where: 'Keter',
+    { book: 'Living Likutei Moharan', what: 'Rebbe Nachman’s lessons through the year — the book behind Keter’s daily reading.', emoji: '📖', where: 'Keter',
       url: 'https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk' },
-    { book: 'Alef Bet', emoji: '🔤', where: 'Chochmah', url: CHOCHMA_KOT_DOC },
+    { book: 'Alef Bet', what: 'The Hebrew letters with Perek Shirah and Pirkei Avot — where Chochmah’s alphabet comes from.', emoji: '🔤', where: 'Chochmah', url: CHOCHMA_KOT_DOC },
   ];
   // And one that is not a working book at all: the allegory of the thirteen
   // phases, written in 2013 — the boy who moves from land to land and is a
@@ -11628,19 +11636,19 @@ content: ''; float: right; width: 30px; height: 1em;
     // by month to shine like the sun; from the sunrise to the next, the
     // sweetening, continuing. The moon and then the sun, which is what the
     // two marks are.
-    { book: 'From the New Moon to the Next', emoji: '🌙',
+    { book: 'From the New Moon to the Next', what: 'An allegory in thirteen phases: a boy who is a different animal in each land he is carried to.', emoji: '🌙',
       where: 'Creative writing',
       url: 'from-the-new-moon-to-the-next.pdf' },
-    { book: 'From the Sunrise to the Next', emoji: '☀️',
+    { book: 'From the Sunrise to the Next', what: 'The second of the two: one day in four parts, lion and ox and eagle and man, going out and coming home.', emoji: '☀️',
       where: 'Creative writing',
       url: 'from-the-sunrise-to-the-next.pdf' },
     // Gathered out of the blog rather than written for a card: seventy-three
     // poems, and a piece to each of the fifty-four portions. Both are carried
     // here rather than linked away, and neither stands on a Sefirah, so the
     // shelf is the only way to them.
-    { book: 'Ascents', emoji: '⛰️', where: 'Poems',
+    { book: 'Ascents', what: 'Seventy-three poems, in English, Portuguese and Hebrew.', emoji: '⛰️', where: 'Poems',
       url: 'ascents.pdf' },
-    { book: 'Reflections', emoji: '✒️', where: 'The Torah Portions',
+    { book: 'Reflections', what: 'A piece written on each of the fifty-four Torah portions, Bereshit to V’Zot HaBracha.', emoji: '✒️', where: 'The Torah Portions',
       url: 'reflections.pdf' },
   ];
   // The shelf, in a pane of its own at the head of the page. The
@@ -11651,7 +11659,8 @@ content: ''; float: right; width: 30px; height: 1em;
     if (!el) return;
     const _row = (b, note) => '<div class="book-row">' + b.emoji + ' ' +
       '<a href="' + b.url + '" target="_blank" rel="noopener">' + b.book + '</a>' +
-      (note ? ' <span class="book-where">· ' + note + '</span>' : '') + '</div>';
+      (note ? ' <span class="book-where">· ' + note + '</span>' : '') +
+      (b.what ? '<div class="book-what">' + b.what + '</div>' : '') + '</div>';
     // The three that stand on a card come first — Keter, Chochmah, Binah, in
     // the order of the cards themselves — and the seven of the week follow.
     // The seven were first when the shelf was only seven; they are the longer

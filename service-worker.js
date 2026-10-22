@@ -3,7 +3,7 @@
 // name and the shell is fetched again. A cache that has gone stale in a way
 // the network-first rule cannot correct is the one failure this app has that
 // leaves every card reading "Loading…" with nothing to say why.
-const CACHE_NAME = 'kabbalah-of-time-v284';
+const CACHE_NAME = 'kabbalah-of-time-v285';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -89,8 +89,17 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
-  const isHTML = req.mode === 'navigate' ||
-    (req.headers.get('accept') || '').includes('text/html');
+  // A file is a file, whatever the browser calls the request. Opening a PDF
+  // in a new tab IS a navigation, so the test below read every book on the
+  // shelf as a page — and when the book was not yet in the cache, the HTML
+  // branch handed back index.html instead. Six of the thirteen books opened
+  // the app again rather than themselves. Anything with a file extension of
+  // its own is taken out of that branch before it can happen.
+  const _path = new URL(req.url).pathname;
+  const isFile = /\.(pdf|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|otf|mp3|mp4|webm|txt|xml|zip)$/i
+    .test(_path);
+  const isHTML = !isFile && (req.mode === 'navigate' ||
+    (req.headers.get('accept') || '').includes('text/html'));
 
   if (isHTML) {
     event.respondWith((async () => {
