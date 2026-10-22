@@ -4336,10 +4336,6 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="keter-section-label" id="chesed-text-label">✡ Mishna</div>
       <div id="chesed-text-face" class="sefirah-main-text">Loading…</div>
     </div>
-      <div class="malchut-ksa-row" style="margin-top:8px">
-        <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-        <div id="chesed-kot-book">Loading…</div>
-      </div>
     <div class="sefirah-detail" id="chesed-detail"></div>
   </div>
 </div>
@@ -4379,10 +4375,6 @@ content: ''; float: right; width: 30px; height: 1em;
             onclick="event.stopPropagation(); openTanachSummaryModal()">today&rsquo;s summary &#8599;&#xFE0E;</button></div>
       <div id="gevurah-tanach-rows" style="margin-top:6px;"></div>
     </div>
-      <div class="malchut-ksa-row" style="margin-top:8px">
-        <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-        <div id="gevurah-kot-book">Loading…</div>
-      </div>
     <div class="sefirah-detail" id="gevurah-detail"></div>
   </div>
 </div>
@@ -4405,10 +4397,6 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="keter-section-label" id="tiferet-text-label">✡ Rebbe Nachman’s Tales</div>
       <div id="tiferet-text-face" class="sefirah-main-text">Loading…</div>
     </div>
-      <div class="malchut-ksa-row" style="margin-top:8px">
-        <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-        <div id="tiferet-kot-book">Loading…</div>
-      </div>
     <div class="sefirah-detail"></div>
   </div>
 </div>
@@ -4436,10 +4424,6 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="keter-section-label" id="netzach-text-label">✡ Sichos HaRan</div>
       <div id="netzach-text-face" class="sefirah-main-text">Loading…</div>
     </div>
-      <div class="malchut-ksa-row" style="margin-top:8px">
-        <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-        <div id="netzach-kot-book">Loading…</div>
-      </div>
     <div class="sefirah-detail"></div>
   </div>
 </div>
@@ -4471,10 +4455,6 @@ content: ''; float: right; width: 30px; height: 1em;
     </div>
     <div class="sefirah-sub-text" style="display:none;"></div>
     <div class="sefirah-tags"></div>
-      <div class="malchut-ksa-row" style="margin-top:8px">
-        <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-        <div id="hod-kot-book">Loading…</div>
-      </div>
     <div class="sefirah-detail"></div>
   </div>
 </div>
@@ -4497,10 +4477,6 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="keter-section-label" id="yesod-text-label">✡ Ben Ish Chai</div>
       <div id="yesod-text-face" class="sefirah-main-text">Loading…</div>
     </div>
-      <div class="malchut-ksa-row" style="margin-top:8px">
-        <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-        <div id="yesod-kot-book">Loading…</div>
-      </div>
     <div class="sefirah-detail">
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✦ Chok L'Yisrael <span class="maalah yom" data-wane="12">מיעוט י״ב</span></div>
@@ -5207,10 +5183,6 @@ content: ''; float: right; width: 30px; height: 1em;
         </div>
       </div>
     </div>
-      <div class="malchut-ksa-row" style="margin-top:8px">
-        <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-        <div id="malchut-kot-book">Loading…</div>
-      </div>
     <div class="sefirah-detail">
       <!-- Likkutei Sichos — first section, above KSA -->
       <div id="malchut-sichos-detail" style="margin-bottom:14px;"></div>
@@ -24487,35 +24459,6 @@ content: ''; float: right; width: 30px; height: 1em;
 
     const todayBook = DAY_BOOKS[sef.dayNum - 1];
 
-    // The seven books, one to each of the lower seven Sefirot, as Keter,
-    // Chochmah and Binah each carry their own: Chesed takes Book 1 and
-    // Malchut Book 7, in the order the books themselves are numbered.
-    //
-    // They were reachable only as the day's book on Binah — one of seven
-    // showing, the other six waiting for their weekday — which is right for
-    // a reading keyed to the day and wrong for a shelf. Each card now holds
-    // its own book all year, with that book's week behind the summary rather
-    // than the day's.
-    //
-    // The rows go in the face and the pane machinery moves them: a
-    // .malchut-ksa-row carrying a .kot-book-icon is taken into Ma'alot, which
-    // is how Chochmah's and Binah's got there.
-    ['chesed', 'gevurah', 'tiferet', 'netzach', 'hod', 'yesod', 'malchut']
-      .forEach((card, i) => {
-        const el = document.getElementById(card + '-kot-book');
-        const db = DAY_BOOKS[i];
-        if (!el || !db) return;
-        const parts = db.book.split(' \u00b7 ');
-        el.innerHTML =
-          `<span style="font-size:1.1em">${db.emoji}</span> ` +
-          (db.url ? `<a href="${db.url}" target="_blank" style="color:var(--gold)"><strong>${parts[0]}</strong></a>`
-                  : `<strong>${parts[0]}</strong>`) +
-          (parts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${parts[1]}</span>` : '') +
-          `<br><span class="kot-summary" role="button" tabindex="0" ` +
-            `onclick="openKotBookModal(${i})">Summary \u25be</span>` +
-          (db.weekUrl ? ` &nbsp;\u00b7&nbsp; <a href="${db.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
-      });
-
     // Card face
     // Helper function to get parasha-specific portion for a Malchut text
     function getParashaMapping(textName, parashaName) {
@@ -24773,19 +24716,35 @@ content: ''; float: right; width: 30px; height: 1em;
                : `<span class="ps-src">— its song is not recorded here</span>`);
     })();
 
-    // Binah's own book, and only its own. It used to show whichever of the
-    // seven the day belonged to, which made this one row mean something
-    // different every morning while Keter's and Chochmah's stood still. The
-    // seven have a card each now, so this says what the other two say: the
-    // book that lives here. It wears the moon rather than a star — one of the
-    // app's own volumes, not a companion gathered for the day.
-    // Both of Binah's, the moon's book and the sun's. The second names the
-    // first in its own closing lines, so they are not two things that happen
-    // to live on one card.
+    // Binah's books: the day's one of the seven, and then the two that do
+    // not turn with the week.
+    //
+    // The seven are a reading keyed to the day, and this is the row that says
+    // so — one of them showing, the other six waiting for their weekday. They
+    // had a card each for a week, Chesed through Malchut, which made each one
+    // stand all year on a Sefirah of its own; a shelf rather than a reading.
+    // They are back here, where the day chooses which.
+    //
+    // Beneath them the moon's book and the sun's, which wear the moon and the
+    // sun rather than a star: they are the app's own volumes and not
+    // companions gathered for the day. The second names the first in its own
+    // closing lines, so they are not two things that happen to share a card.
+    const bookParts = todayBook.book.split(' \u00b7 ');
     document.getElementById('binah-kot-book').innerHTML =
-      `<span style="font-size:1.1em">\u{1F319}</span> ` +
+      `<span style="font-size:1.1em">${todayBook.emoji}</span> ` +
+      (todayBook.url
+        ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><strong>${bookParts[0]}</strong></a>`
+        : `<strong>${bookParts[0]}</strong>`) +
+      (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '') +
+      // The week's reading for this book, behind a tap rather than set out on
+      // the face — the same pop-up a book's name opens in Malchut, on the same
+      // book and the same day.
+      `<br><span class="kot-summary" role="button" tabindex="0" ` +
+        `onclick="openKotBookModal(${sef.dayNum - 1})">Summary \u25be</span>` +
+      (todayBook.weekUrl ? ` &nbsp;\u00b7&nbsp; <a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '') +
+      `<div style="margin-top:8px;"><span style="font-size:1.1em">\u{1F319}</span> ` +
       `<a href="from-the-new-moon-to-the-next.pdf" target="_blank" style="color:var(--gold)"><strong>From the New Moon to the Next</strong></a>` +
-      `<br><span style="font-size:0.85em;color:var(--ink-mid)">the thirteen phases \u2014 creative writing</span>` +
+      `<br><span style="font-size:0.85em;color:var(--ink-mid)">the thirteen phases \u2014 creative writing</span></div>` +
       `<div style="margin-top:8px;"><span style="font-size:1.1em">\u2600\uFE0F</span> ` +
       `<a href="from-the-sunrise-to-the-next.pdf" target="_blank" style="color:var(--gold)"><strong>From the Sunrise to the Next</strong></a>` +
       `<br><span style="font-size:0.85em;color:var(--ink-mid)">the second book \u2014 four parts of a day</span></div>`;
