@@ -33,7 +33,7 @@ import pathlib, re, sys
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.units import mm
 from reportlab.lib.styles import ParagraphStyle
-from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER
+from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER, TA_LEFT
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph,
@@ -51,6 +51,23 @@ body  = ParagraphStyle('body', fontName='Cormorant', fontSize=13.4, leading=19.6
                        alignment=TA_JUSTIFY, textColor=INK, firstLineIndent=16,
                        spaceBefore=0, spaceAfter=0, hyphenationLang='')
 first = ParagraphStyle('first', parent=body, firstLineIndent=0)
+# ── VERSE ──
+# A block that reaches the typesetter with its own line breaks is verse and
+# keeps them: ragged right, because a poem justified to the margin is a poem
+# with its spacing taken away from it, and no first indent, because the line
+# is the unit and not the paragraph. Set in a little, so that a line long
+# enough to wrap is still told from the line beneath it.
+#
+# Prose arrives here as one long line to a paragraph — that is how both of
+# the first two books are written, and how the prose pieces among the poems
+# arrive too. So nothing meant as prose can fall into verse by accident, and
+# the two books cannot be touched by this at all: neither has a single block
+# with a line break in it.
+verse  = ParagraphStyle('verse', parent=body, alignment=TA_LEFT,
+                        firstLineIndent=0, leftIndent=7*mm, leading=18.6,
+                        spaceBefore=4.6*mm)
+# The stanza that opens a poem has the heading's own air above it already.
+verse1 = ParagraphStyle('verse1', parent=verse, spaceBefore=0)
 # The three lines of a phase opening. The kicker is letterspaced small capitals
 # in all but name — Cormorant has no small-cap face here, so it is set small,
 # tracked and faint, which reads the same way at this size.
@@ -130,6 +147,28 @@ for raw in MD.read_text(encoding='utf-8').split('\n\n'):
         notes.append((n, ' '.join(txt.split())))
     else: blocks.append(('p', b))
 
+# ── WHAT IS VERSE ──
+# Decided a chapter at a time, not a paragraph at a time. A block that still
+# has its own line breaks when it reaches here is verse; and a poem is verse
+# throughout, so every block under the same heading goes with it — which is
+# what rescues the one-line stanza, and the opening line that stands alone
+# before the poem gathers. An essay has no line breaks anywhere under its
+# heading and stays prose entire.
+#
+# This is why the two prose pieces among the poems come out as prose: they
+# arrive as one unbroken paragraph under a heading of their own, so there is
+# no line break anywhere in them to make them verse. And it is why neither
+# of the first two books can be touched — not one block in either has a line
+# break in it.
+_run = []
+for _i, (_k, _v) in enumerate(blocks + [('chap', None)]):
+    if _k in ('part', 'chap'):
+        if any('\n' in blocks[j][1] for j in _run):
+            for j in _run: blocks[j] = ('verse', blocks[j][1])
+        _run = []
+    elif _k == 'p':
+        _run.append(_i)
+
 L, R, T, B = 30*mm, 30*mm, 24*mm, 26*mm
 FW, FH = LETTER[0] - L - R, LETTER[1] - T - B       # the text block
 
@@ -155,6 +194,11 @@ for kind, val in blocks:
         phases.append(cur)
     elif cur is not None:
         cur['body'].append((kind, val))
+
+# Escaped whole and broken after, so that the quotation marks a stanza opens
+# on one line and closes on another still come out as a pair.
+def _verse(val, style):
+    return Paragraph('<br/>'.join(esc(val).split('\n')), style)
 
 def _h(style, txt):
     return Paragraph(txt, style).wrap(FW, FH)[1]
@@ -209,9 +253,10 @@ for i, q in enumerate(phases):
     # part can never open at the very foot of a page with its first line
     # overleaf.
     rest = list(q['body'])
-    if rest and rest[0][0] in ('p', 'epig'):
+    if rest and rest[0][0] in ('p', 'epig', 'verse'):
         k, v = rest.pop(0)
-        grp.append(Paragraph(esc(v), epig if k == 'epig' else first))
+        grp.append(_verse(v, verse1) if k == 'verse'
+                   else Paragraph(esc(v), epig if k == 'epig' else first))
         # An epigraph is a caption on the heading, so the paragraph after it
         # is held too — otherwise the part can open on a line about which
         # draft this is and nothing else.
@@ -226,12 +271,16 @@ for i, q in enumerate(phases):
             cg = [Paragraph(esc(val[0]), chap)]
             if val[1]: cg.append(Paragraph(esc(val[1]), csub))
             cg.append(Spacer(1, 5*mm))
-            if j + 1 < len(rest) and rest[j + 1][0] == 'p':
-                cg.append(Paragraph(esc(rest[j + 1][1]), first))
+            if j + 1 < len(rest) and rest[j + 1][0] in ('p', 'verse'):
+                k2, v2 = rest[j + 1]
+                cg.append(_verse(v2, verse1) if k2 == 'verse'
+                          else Paragraph(esc(v2), first))
                 j += 1
             story.append(KeepTogether(cg))
         elif kind == 'epig':
             story.append(Paragraph(esc(val), epig))
+        elif kind == 'verse':
+            story.append(_verse(val, verse))
         else:
             story.append(Paragraph(esc(val), body))
         j += 1
