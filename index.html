@@ -9806,10 +9806,12 @@ content: ''; float: right; width: 30px; height: 1em;
   // (index 0 = set 1). Set 17 is the half-set of vowels.
   // The appendix itself — the source of the letters, the elements and the
   // mishnayot the Chochmah card reads by.
-  // Read-only, and without the account id the share link carried. Every
-  // other book on the shelf opens to be read; this one opened in edit mode,
-  // which is a door left open on a document rather than a book handed over.
-  const CHOCHMA_KOT_DOC = 'https://docs.google.com/document/d/1pFjp5MXCKc3yqA-qIwCdQ6kcgqwWO9QE/preview';
+  // Carried here rather than linked away to a Google Doc, as Book 7 and the
+  // four at the head of the shelf are. It opened in edit mode until today,
+  // which is a door left open on a document rather than a book handed over;
+  // now there is no document to leave open. Set from docs/alef-bet.docx by
+  // tools/make_alefbet_pdf.py, so the file can be made again from its source.
+  const CHOCHMA_KOT_DOC = 'alef-bet.pdf';
   const CHOCHMA_KOT_URLS = [
     'https://www.kabbalahoftime.com/2014/09/first-set-of-22-days-alef-bet-heavens.html',
     'https://www.kabbalahoftime.com/2013/09/second-set-of-22-days-gimmel-dalet-eden.html',
