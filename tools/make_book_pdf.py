@@ -116,7 +116,16 @@ def esc(s):
             out.append(ch)
     s = ''.join(out)
     # The raised numeral that calls a note.
-    return re.sub(r'\[\^(\d+)\]', r'<super><font size="8">\1</font></super>', s)
+    s = re.sub(r'\[\^(\d+)\]', r'<super><font size="8">\1</font></super>', s)
+    # A link, written [text](address). Set in the same gold a link wears
+    # everywhere else, and underlined, because on paper there is nothing else
+    # to tell a reader the words lead anywhere — and some of them do: a poem
+    # whose other half is a recording can only be given as an address.
+    # Written after the escaping rather than before, so the tags survive it
+    # and an ampersand inside an address comes out as the entity a link
+    # needs. Neither of the first two books contains the syntax.
+    return re.sub(r'\[([^\]|]+)\]\(([^)\s]+)\)',
+                  r'<link href="\2" color="' + GOLD + r'"><u>\1</u></link>', s)
 
 # The kicker's letterspacing, done by hand: a space between every letter, and
 # a wider gap between words. Spacing the whole string uniformly collapsed in
