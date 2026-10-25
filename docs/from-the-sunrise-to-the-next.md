@@ -76,7 +76,7 @@ To teach the storytellers of the land, he had to read their tales. To teach the 
 
 This was the work: extraction. The man's daily labor was to find what was clean, to wash what could be washed, to lift out the spark and leave the shell. And he was helped. Again and again, the right tools appeared at the right time, as if the work itself were being assisted by the Great Lion. After all, the elevated Land of the Dogs was renamed after the Great Lions.
 
-He left and returned. He left again and returned again. He left yet again and this time, he felt, he had returned for good. Teaching demanded the skills and qualities acquired in all the other lands. The more he taught, the more he understood what the Great Lion had meant. To be a teacher is to learn in order to teach, and to teach in order to do. The boy had been guided and supported in this land by the Badger and the Hound, and now it was his turn to guide and support the young cubs, as a man.
+He left and returned. He left again and returned again. He left yet again and this time, he felt, he had returned for good. Teaching demanded the skills and qualities acquired in all the other lands. The more he taught, the more he understood what the Great Lion had meant. To be a teacher is to learn in order to teach, and to teach in order to do. The boy had been guided and supported in this land by the Badger and the Hound, and now it was his turn to guide and support the young cubs, as a man. The school, he saw, had never been a building: every land had been a classroom, and he had been a student in each one long before he was anyone's teacher.
 
 ### The Land of the Donkeys, Again | Egypt
 
