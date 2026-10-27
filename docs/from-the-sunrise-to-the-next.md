@@ -162,7 +162,7 @@ It began: once upon a time in a faraway land, there lived a baby named David. Hi
 
 In two books of faraway lands the man had never once written a name. The child began in his own words and wrote all of them.
 
-Beneath those lines she had pasted a photograph: two boys, the older dark-haired in a white collar with his arm around the younger, holding him steady; the younger blonde, in red, looking straight out at whoever held the camera. Four years between them. In the first book that younger one is the baby in the basket, carried away. Here he is being held.
+Beneath those lines she had pasted a photograph: two boys, the older dark-haired in a white collar with his arm around the younger, holding him steady; the younger blonde, in red, looking straight out at whoever held the camera. Three and a half years between them. In the first book that younger one is the boy in the basket, carried away. Here he is being held.
 
 On the next page: David has one brother and one sister — I will tell you more about the sister later. In her book too, the sister comes later.
 
