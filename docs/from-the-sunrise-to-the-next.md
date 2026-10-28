@@ -156,7 +156,7 @@ And the mending, the man understood at last, is the sun's work. The sun sweetens
 
 ### Epilogue |
 
-His brother's daughter — the little niece, born on the day that stands as the foundation of the entire book — the day of the donkey — had made it by hand for her father's birthday: written it out in pencil, pasted photographs into it, and drawn what the photographs did not have. It reached the uncle as pictures of its pages, at night, on a phone.
+His brother's daughter — the little niece, born on the day that stands as the foundation of the entire book — the day of the donkey[^2] — had made it by hand for her father's birthday: written it out in pencil, pasted photographs into it, and drawn what the photographs did not have. It reached the uncle as pictures of its pages, at night, on a phone.
 
 It began: once upon a time in a faraway land, there lived a baby named David. His parents were Sandra and Alan. David was born in New York. In the same hospital as me.
 
@@ -168,14 +168,16 @@ On the next page: David has one brother and one sister — I will tell you more 
 
 And she had drawn them, the two brothers standing side by side on the page, each named underneath in pencil.
 
-A month before any of it, his sister had sent a photograph from the Land of the Donkeys to him and his brother, as well as to his stepbrother and stepsister: a family tree she had drawn at school thirty years before, with both her families on the one page — two of them beside her, two across an ocean, and herself in the middle. Even back then she mentioned how she liked the new instant communication technology. Now the world had become even smaller. “De avião o tempo de uma saudade.”[^2]
+A month before any of it, his sister had sent a photograph from the Land of the Donkeys to him and his brother, as well as to his stepbrother and stepsister: a family tree she had drawn at school thirty years before, with both her families on the one page — two of them beside her, two across an ocean, and herself in the middle. Even back then she mentioned how she liked the new instant communication technology. Now the world had become even smaller. “De avião o tempo de uma saudade.”[^3]
 
 At Thanksgiving they played tennis. Four took the court: the man, his brother, his son, and his (paternal) stepsister. His father sat above and watched.
 
-The uncle who writes books received a book from a child who writes books. From the new moon to the next. From the sunrise to the next.[^3] It wasn't always easy — but it turned out well. It was very good.
+The uncle who writes books received a book from a child who writes books. From the new moon to the next. From the sunrise to the next.[^4] It wasn't always easy — but it turned out well. It was very good.
 
 ^1. In 2023 the seventh of October was Shemini Atzeret — the birthday of the man's mother-in-law and co-author, who appears in the first book — and the day the darkness fell. By 2026 her Hebrew birthday had moved to the third; the civil date had not moved at all. That the mending should arrive on it: darkness turning into light. The other date does the same. On the 11th of Adar — the man's birthday — the war with Iran began, February 28, 2026: Shabbat Zachor, three days before Purim, the same Shabbat he was born on. In the month of Purim, in the land of the Purim story, everything turned upside down.
 
-^2. Portuguese: "By plane, the time of one saudade" — a line from "Parabolicamará," Gilberto Gil's song. Saudade is the longing for an absent loved one — in Hebrew, ga'aguim, the longing that runs through the Song of Songs.
+^2. The day of the donkey is Lag Ba'Omer, the thirty-third day of the Omer — Hod within Hod — and the day of Rabbi Shimon bar Yochai, who brought the hidden Torah out of a cave. In the system the man built, it is the thirty-third week, whose creature is the donkey, and whose song in Perek Shirah is the verse that names the sefirot one by one: the greatness, the might, the splendor, the victory, the glory, all that is in heaven and earth, and the kingship. Chamor, donkey, is written with the letters of chomer, matter — the animal that carries, and in carrying raises what it carries. It is also the day the dying stopped among Rabbi Akiva's students, who had died for want of respect between them: a day for mending between brothers.
 
-^3. The finished book was sent, in an instant, to the man's father and mother — who were then in the Land of the Sunrise, whose flag is a sun. As a boy, the man had woken every morning to another of Gilberto Gil's songs, "Oriente": "Orient yourself, young man, by the rotation of the Earth around the Sun; smiling, by the continuity of Adam's dream."
+^3. Portuguese: "By plane, the time of one saudade" — a line from "Parabolicamará," Gilberto Gil's song. Saudade is the longing for an absent loved one — in Hebrew, ga'aguim, the longing that runs through the Song of Songs.
+
+^4. The finished book was sent, in an instant, to the man's father and mother — who were then in the Land of the Sunrise, whose flag is a sun. As a boy, the man had woken every morning to another of Gilberto Gil's songs, "Oriente": "Orient yourself, young man, by the rotation of the Earth around the Sun; smiling, by the continuity of Adam's dream."
