@@ -15965,10 +15965,26 @@ content: ''; float: right; width: 30px; height: 1em;
   // stepping through dates takes the companion with them.
   let COMPANION = null;
   let _compDay = null;          // what is drawn now, so it is not redrawn
-  fetch('companion.json')
-    .then(r => r.ok ? r.json() : null)
-    .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
-    .catch(() => {});
+  // ── TAKEN OFFLINE, to be reworked ──
+  //
+  // The companion's text was AI-generated, and a sweep of all 364 entries
+  // found it inventing things and attributing them here: a motto this app
+  // does not have ("the order is what's asked for, not the measure", days 36
+  // and 154), a verse it does not carry (Isaiah 60:22, day 154), an "88
+  // Mochin minutes" that exists nowhere (day 151), a quotation on day 288 —
+  // and routes to a "Today view" and a "This Week view" that a reader cannot
+  // follow (days 7, 8, 13). Day 8 also promised four things in a tab that
+  // draws three.
+  //
+  // Nothing fetches it now, so applyCompanion finds COMPANION null and leaves
+  // the section hidden, which also removes the PDF link that lived in its
+  // footer. The entries, the code and the styles are all untouched: restore
+  // the four lines below and it returns exactly as it was.
+  //
+  // fetch('companion.json')
+  //   .then(r => r.ok ? r.json() : null)
+  //   .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
+  //   .catch(() => {});
 
   // The day of the KoT year, kept here by render() so the fetch above can
   // draw as soon as it lands, whenever that is.
