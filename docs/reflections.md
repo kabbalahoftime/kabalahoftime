@@ -1684,6 +1684,12 @@ There is a very important application of the above in our daily lives, especiall
 
 Again, that is not to say that we are not supposed to learn from all the sages (and from every individual, as stated in Pirkei Avot). Similarly, this is also not to say that there is not a hierarchy in leadership, just as each tribe had a leader, who in turn was ultimately subservient to their leader, the head of the entire generation. Ultimately even the head of generation is but simple and completely nullified and subservient slave in the hands of the One and Only. The King of kings, the Holy One, Blessed be He.
 
+### Selichot Nigun |
+
+"Yours, G-d, is the righteousness, and ours is the shamefacedness. What can we complain about? What can we say? What can we speak, and how can we justify ourselves? Let us search and examine our ways, and return to You, for Your right hand is extended to receive those who repent. We do not come before You with kindness, nor with good deeds. We knock at Your doors like paupers and like beggars. We knock at Your doors, Merciful and Gracious One, please do not turn us away empty-handed from Your Presence. Please do not turn us away empty-handed from Your Presence, our G-d, for You are the One who hears prayer."
+
+[Hear the nigun](https://drive.google.com/file/d/12e_4KIruRt11r2vuh5zGRZyrlmgC2AGu/view)
+
 ### Haazinu | "Eclipse" in Leadership
 
 In the Torah portion of Haazinu, we come across a very interesting verse:

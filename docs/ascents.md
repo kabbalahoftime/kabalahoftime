@@ -1200,11 +1200,6 @@ Of knowing that
 I took Your Name
 And made it mine.
 
-### Selichot Nigun |
-
-"Yours, G-d, is the righteousness, and ours is the shamefacedness. What can we complain about? What can we say? What can we speak, and how can we justify ourselves? Let us search and examine our ways, and return to You, for Your right hand is extended to receive those who repent. We do not come before You with kindness, nor with good deeds. We knock at Your doors like paupers and like beggars. We knock at Your doors, Merciful and Gracious One, please do not turn us away empty-handed from Your Presence. Please do not turn us away empty-handed from Your Presence, our G-d, for You are the One who hears prayer."
-
-[Hear the nigun](https://drive.google.com/file/d/12e_4KIruRt11r2vuh5zGRZyrlmgC2AGu/view)
 
 ### Selichót |
 
