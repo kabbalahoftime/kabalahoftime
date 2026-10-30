@@ -4,16 +4,50 @@ The companion's 364 entries were AI-generated. In October 2026 a reader
 followed day 8's instruction, found no such thing on the screen, and asked.
 Everything below came out of answering that.
 
-The companion was taken offline the same day. Its entries, code and styles are
-untouched; the fetch in `index.html` is commented out, with the reasons at the
-switch. Restoring four lines brings it back.
+The companion was taken offline the same day, rewritten, and put back on
+2026-10-30. **Everything below describes the first text.** It is kept because
+the failures are the reason the second text is written the way it is.
 
-Re-run this sweep before it returns:
+Re-run this sweep before any change to it ships:
 
     python3 tools/check_companion.py index.html companion.json
 
 364 entries · 294,297 characters · checked against every string `index.html`
 can render.
+
+## What the rewrite changed
+
+The text is now a manuscript — `docs/a-year-inside-the-day.md` — and
+`companion.json` is built from it by `tools/companion_from_md.py`. Edit the
+manuscript; the JSON is not hand-held.
+
+It was rewritten against one rule: **every claim checkable against
+`index.html`, a named traditional source, or the books.** What that fixed:
+
+| was | is |
+|---|---|
+| the invented motto, in quotation marks, twice as the app's | the same words, no marks, the book's own rule — Days 36, 38, 151, 154, 166, 175, 199 all state it the same way |
+| *hakatan yihyeh le'alef* / Isaiah 60:22 / "the smallest shall become a thousand" | gone. Day 38's opening is plain, Day 154 is retitled "Living the Crown", the echoes read "The smallest counts" |
+| "when the soul reached ultimate completion", quoted | unquoted, and Day 288 says whose phrase it is |
+| a "Today view" and a "This Week view" | the Weekly Journal's **This Week** tab, which is what it is called |
+| day 8 promising four things in a tab that draws three | three — the pairing, the trait, the creature. `openWeeklyReport` builds exactly those |
+
+Day 151's 88 Mochin minutes stayed, because they are real. See the correction
+below.
+
+The second sweep leaves six flags, all of them the checker mis-reading a
+correct sentence: days 8 and 13 (it splices "the Weekly Journal's This Week
+tab" into a label), 149 and 150 (the title running into the sentence), 155
+("the mechanic's view", a metaphor), and 136 (see below).
+
+The PDF link in the companion's footer is **out**. `a-year-inside-the-day.pdf`
+is the first text and carries every fabrication listed here — the motto eight
+times, *hakatan*, Isaiah 60:22, "ultimate completion", and both unfollowable
+routes. The link returns when the PDF is set again from the manuscript.
+
+---
+
+*What follows is the first text, and the record of what was wrong with it.*
 
 ## It put words in the app's mouth
 

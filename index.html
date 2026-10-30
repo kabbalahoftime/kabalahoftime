@@ -3229,6 +3229,11 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .companion [lang="he"] { font-family:'Frank Ruhl Libre', serif; letter-spacing:0; }
 .comp-body p { margin:0 0 9px; }
 .comp-body p:last-child { margin-bottom:0; }
+/* A list in the manuscript arrives as one paragraph an item, opening with a
+   bullet, because the body is drawn as paragraphs and nothing else. The
+   bullet hangs in the margin so a wrapped item lines up under its own words
+   rather than under the bullet. Twenty-two of them, in three gatherings. */
+.comp-body p.comp-li { margin:0 0 4px; padding-left:1.1em; text-indent:-1.1em; }
 /* The two lines the entry ends on. The practice is the only thing it asks
    for, so it carries the gold; the teaser is tomorrow's and stays dim. */
 .comp-practice, .comp-teaser {
@@ -3986,11 +3991,12 @@ content: ''; float: right; width: 30px; height: 1em;
         <button type="button" class="comp-mode-btn" id="comp-mode-own"
                 onclick="companionMode('own')">My own pace</button>
       </div>
+      <!-- The PDF link stood here. It is out until the PDF is set again from
+           the rewritten manuscript: the one at the root is the first text,
+           and it carries the invented motto, the wrong verse and the routes
+           a reader could not follow. A download is harder to correct than a
+           page — it sits on the reader's disk saying the old thing. -->
       <div class="comp-foot">
-        <a class="comp-pdf" id="comp-pdf" href="a-year-inside-the-day.pdf" download
-           aria-label="Download A Year Inside the Day, the whole year, as a PDF">
-          <span aria-hidden="true">&#8681;&#xFE0E;</span>
-          <em>A Year Inside the Day</em> &mdash; the whole year, as a PDF</a>
         <p class="comp-made">The text of this companion is AI&#8209;generated. The books
           on the shelf are not.</p>
       </div>
@@ -15965,26 +15971,35 @@ content: ''; float: right; width: 30px; height: 1em;
   // stepping through dates takes the companion with them.
   let COMPANION = null;
   let _compDay = null;          // what is drawn now, so it is not redrawn
-  // ── TAKEN OFFLINE, to be reworked ──
+  // ── TAKEN OFFLINE IN OCTOBER 2026, AND REWRITTEN ──
   //
-  // The companion's text was AI-generated, and a sweep of all 364 entries
-  // found it inventing things and attributing them here: a motto this app
-  // does not have ("the order is what's asked for, not the measure", days 36
-  // and 154), a verse it does not carry (Isaiah 60:22, day 154 - the app has
-  // Isaiah 60:2, a different verse), a quotation on day 288 — and routes to a
-  // "Today view" and a "This Week view" that a reader cannot
-  // follow (days 7, 8, 13). Day 8 also promised four things in a tab that
-  // draws three.
+  // The first text was AI-generated, and a sweep of all 364 entries found it
+  // inventing things and attributing them here: a motto this app does not
+  // have ("the order is what's asked for, not the measure", days 36 and 154),
+  // a verse it does not carry (Isaiah 60:22, day 154 - the app has Isaiah
+  // 60:2, a different verse), a quotation on day 288 — and routes to a "Today
+  // view" and a "This Week view" that a reader could not follow (days 7, 8,
+  // 13). Day 8 also promised four things in a tab that draws three. It came
+  // down the day a reader tried to follow day 8 and could not.
   //
-  // Nothing fetches it now, so applyCompanion finds COMPANION null and leaves
-  // the section hidden, which also removes the PDF link that lived in its
-  // footer. The entries, the code and the styles are all untouched: restore
-  // the four lines below and it returns exactly as it was.
+  // What is here now was rewritten against one rule: every claim checkable
+  // against this file, a named traditional source, or the books. The invented
+  // motto and verse are gone; the routes name what is on the screen. Day 8
+  // now sends the reader to the Weekly Journal's This Week tab and promises
+  // three things there: the pairing, the trait and the creature. That is what
+  // openWeeklyReport draws into wr-week-info, in that order.
   //
-  // fetch('companion.json')
-  //   .then(r => r.ok ? r.json() : null)
-  //   .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
-  //   .catch(() => {});
+  // It is written as a manuscript, docs/a-year-inside-the-day.md, and
+  // companion.json is built from it by tools/companion_from_md.py. Edit the
+  // manuscript. tools/check_companion.py re-runs the sweep.
+  //
+  // The sweep is in docs/companion-audit.md, and the PDF link that lived in
+  // the footer is gone with it: a-year-inside-the-day.pdf is the old text and
+  // carries every one of the fabrications above.
+  fetch('companion.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
+    .catch(() => {});
 
   // The day of the KoT year, kept here by render() so the fetch above can
   // draw as soon as it lands, whenever that is.
@@ -16099,7 +16114,9 @@ content: ''; float: right; width: 30px; height: 1em;
     // today's is worth opening.
     set('comp-peek', '<span class="comp-peek-day">Day ' + e.n + '</span>' + esc(e.title) +
       ((e.body && e.body[0]) ? '<span class="comp-peek-body">' + esc(e.body[0]) + '</span>' : ''));
-    set('comp-body', (e.body || []).map((p) => '<p>' + esc(p) + '</p>').join(''));
+    set('comp-body', (e.body || []).map((p) =>
+      (String(p).charAt(0) === '•'
+        ? '<p class="comp-li">' : '<p>') + esc(p) + '</p>').join(''));
     set('comp-practice', e.practice
       ? '<span class="comp-lead">Practice</span>' + esc(e.practice) : '');
     set('comp-teaser', e.teaser

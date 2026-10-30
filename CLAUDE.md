@@ -95,8 +95,32 @@ reflow that adds a page usually means something upstream broke.
 | `docs/reflections.md` | `reflections.pdf` | 119 |
 | `docs/alef-bet.md` | `alef-bet.pdf` | 41 |
 
-`book7_gathering_of_songs.pdf`, `perek_shirah_booklet.pdf` and
-`a-year-inside-the-day.pdf` have no manuscript here.
+`book7_gathering_of_songs.pdf` and `perek_shirah_booklet.pdf` have no
+manuscript here.
+
+`a-year-inside-the-day.pdf` is the **old** companion text and is not linked
+from the app: it carries fabrications the rewrite removed. It has a manuscript
+now (`docs/a-year-inside-the-day.md`) but no setter — `make_book_pdf.py` opens
+a page at every `##`, which would give 364 of them. Setting it again is open
+work.
+
+## The daily companion
+
+`docs/a-year-inside-the-day.md` is the manuscript; `companion.json` is built
+from it. **Edit the manuscript, never the JSON.**
+
+```sh
+python3 tools/companion_from_md.py docs/a-year-inside-the-day.md \
+    companion.json companion.json      # meta in, text out, same file
+python3 tools/check_companion.py index.html companion.json
+```
+
+The first text was AI-generated and invented a motto for this app, a verse and
+a route. `docs/companion-audit.md` is the sweep that found it and the rule the
+rewrite is held to: **every claim checkable against `index.html`, a named
+traditional source, or the books.** Run the checker before anything about the
+companion ships, and read its six standing false positives in the audit rather
+than re-investigating them.
 
 Books 1 and 2 are the author's own life in allegory, and the people in them are
 real. **Never invent or adjust a biographical fact to make a sentence work.**
