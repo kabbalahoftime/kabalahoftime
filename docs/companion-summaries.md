@@ -2956,3 +2956,125 @@ Then the two who would not come, and the lovesickness: "Gilead abides beyond the
 And the end is the household and the timbrel: "And Elkanah, her husband said to her, Do what seems good to you" / "Stay until you have weaned him" / "For I am lovesick" / "Miriam, the prophetess, Aaron's sister, took a timbrel in her hand" / "And the woman stayed and nursed her son until she weaned him."
 
 *Source: [Week 23 (Book 7): The Leviathan is Saying](https://www.kabbalahoftime.com/2016/03/the-leviathan-is-saying.html) — 267 words*
+
+---
+
+## Day 162 · Book 1 · Week 24
+
+The fish are saying: "The voice of G-d is upon the waters, the G-d of glory thunders; G-d is upon many waters." (Psalms 29:3) This is the week of Purim, when we remember that Hashem is with us through everything, even if sometimes hidden. Purim is the salvation of the Persian exile, when Haman, with the King's support at first, sought to exterminate the whole people, and through Mordechai and Esther the decree was annulled and Haman, his sons and the enemies of the Jews were the ones killed.
+
+The Zohar says that Yom Kippur, Yom haKippurim, is a day that is KePurim, like Purim — so Purim is higher. If on Yom Kippur we stand at the level of angels, then on Purim we must stand higher than angels, at the level of tzadikim; and fish, as last week, stand for tzadikim.
+
+On Purim we drink many waters in order to come closer, trying to reach ad deloyadah, not knowing the difference between blessed be Mordechai and cursed be Haman. It is in many ways the experience of the four rabbis who entered the Pardes, where Rabbi Akiva said, "When you reach the stones of pure marble, do not say: 'Water, water.'" On Purim we see that there are no divisions on high, that all is One, and that there is no difference between what we take for good and what we take for evil. At those levels the desire to cleave to Him pulls like great waves, out of this world; the voice thunders as at Mount Sinai, and we want to nullify ourselves entirely — ratzo. To survive it we have to do as Rabbi Akiva did and enter in peace and return in peace, understanding that His desire is that we come back and make a dwelling place for Him here — shov.
+
+The song says the voice, and He Himself, are above the waters. But the fish are not above the waters; they are inside them. Even they need emissaries in order to perceive Him fully. Shlichut runs all through the Purim story: Esther is Mordechai's emissary and he is hers, and their messages went through shluchim. So on Purim we give each other mishloach manot, from the word sheliach, preferably through a third person.
+
+Many waters is in the Song of Songs too, where King Solomon writes that many waters cannot extinguish the love. The many waters are the difficulties and turbulences of making a living, which however great cannot put out a Jew's love for G-d.
+
+The Hebrew for fish is dag. Rabbi Yitzchak Ginsburgh explains that fish are the rectification of worry, da'agah, especially about a livelihood. In the time of Nehemiah certain Jews desecrated the Sabbath by selling fish in the market of Jerusalem, not trusting Him for their living: the dag became da'ag, excessive concern. Fish are always aware of their dependence on water, which is more tangible than air — and so always aware of the Source of their existence.
+
+Twenty-four is the twenty-four presents of the kohanim, of the tribe of Levi, and the priesthood was later divided into twenty-four watches. Caf and dalet spell kad, a jar: the famous kad of Chanukah, which held pure oil with the seal of the Kohen Gadol and lasted eight days instead of one. Even the impurity and turbulence of the Hellenistic period did not put out the people's love, and they came out of the struggle with the Greeks purer than before, with redoubled faith. Purim's link to the kohanim is strong too. Esther has to fast and enter the King's chamber to ask for her people's life, much as the Kohen Gadol on Yom Kippur. The Mishnah calls the Kohen Gadol a sheliach Hashem, and he also served as an emissary of the people; Esther was both at once. The kohen is also called malach Hashem, a messenger, literally an angel.
+
+Purim carries two kinds of pairing. Mordechai, of the tribe of Benjamin, of King Shaul, and Haman, a descendant of Amalek, are polar opposites. Esther and Mordechai complete each other for the good, where Haman and Achashverosh completed each other for evil.
+
+Pirkei Avot gives Rabbi Dosa the son of Hurkinas: morning sleep, noontime wine, children's talk and sitting at the meeting places of the ignorant drive a person from the world. Every one of them is encouraged on Purim. There are two ways to reach ad deloyada, sleeping or drinking during the day. The Purim story turns on the words of children studying Torah, which is where the redemption came from. And on Purim we press our unity and make no distinction between rich and poor, in money or in Torah: mishloach manot, gifts to the poor, everyone at one feast. All of it takes us out of this world of illusion — olam, world, from he'elem, hidden — and into higher levels of reality.
+
+The combination is tiferet shebenetzach, beauty and balance within persistence and determination, which is Esther and Mordechai exactly. The lesson from the fish is that material concerns must not eat into our trust in Him.
+
+*Source: [Week 24 (From the Book): To Live Above Our Worldly Concerns](https://www.kabbalahoftime.com/2014/02/week-24-from-book-to-live-above-our.html) — 1272 words*
+
+---
+
+## Day 163 · Book 2 · Week 24
+
+The week of Purim. Haazinu's verse is as grim as they come: "They will sprout hair from famine, attacked by demons, excised by Meriri. I will incite the teeth of livestock upon them, with the venom of creatures that slither in the dust." (Deuteronomy 32:24) The simple positive reading turns it on Amalek. But the second half can be read positively of the Jewish people themselves. "Shen Behemoth Eshalach Bam Im Chamat Zochalei Afar" can be the mitzvoth of Purim: sleep, sheinah; eating a meal and providing one for the needy, behemoth, animals; messenger gifts, mishloach manot, eshalach bam; and drinking the venom of those who lie in the dust, chamat zochalei afar, the drunkards. Wine as venom is in Chabakuk: "Woe to him who gives his friend to drink, who adds Your venom and also makes him drunk in order to gaze upon their nakedness."
+
+The Haftarah asks to be tamim, pure, here translated single-hearted: "And I was single-hearted toward Him, and I kept myself from my iniquity." (II Samuel 22:24) The whole difference between the Jewish people and Amalek comes down to this. Our sages explain that Amalek's essence is instilling doubt in Israel's faith — Amalek has the numerical value of Safek, doubt — and the way to win is to be tamim with G-d, to act with simplicity. That is also the test inside the mitzvah of drinking: when the mind is not fully in control and the truth of a personality comes out, is a person still devoted, and still clear of lewd and improper behaviour.
+
+So the quality is a good heart, lev tov. Purim is all about the heart; the intellect is nullified with wine and the true emotions come out. Wine goes with the heart directly — wine gladdens the heart of the human being — and most explicitly at the start of the Megillah itself: "On the seventh day, when the heart of the king was good with wine, kitov lev bayayin." (Esther, 1:10)
+
+The prophet is Amos, whose prophecy defines what a good heart is: "Seek good and not evil in order that you live, and so the Lord G-d of Hosts shall be with you, as you said. Hate evil and love good, and establish justice in the gate; perhaps the Lord G-d of Hosts will be gracious to the remnant of Joseph."
+
+The levitical city is Kartan, apparently short for Kiriataim, two cities. Adar runs on duality, and the heart has its own: a good inclination and a bad one. On Purim both are meant to serve G-d, with the intellect out of the centre of the work.
+
+*Source: [Week 24 (Book 2): Amos and a "Good Heart"](https://www.kabbalahoftime.com/2014/02/week-24-book-2-amos-and-good-heart.html) — 687 words*
+
+---
+
+## Day 164 · Book 3 · Week 24
+
+Just after the Song of the Sea, there is no water. "Moses led Israel away from the Red Sea, and they went out into the desert of Shur; they walked for three days in the desert but did not find water. They came to Marah, but they could not drink water from Marah because it was bitter; therefore, it was named Marah." Our sages teach that water in the Torah always means Torah. Purim is the same situation — and the fast of Esther is three days without food or drink — with Hashem hidden and the people's lives embittered and threatened by Haman. Their answer was to reaffirm their belief and receive the Torah again.
+
+The Haftorah turns to Asher, who also stayed out: "Asher dwelt at the shore of the seas, and by his breaches he abides." The word for his breaches is mifratzav, the root of Peretz, this week's generation. Rashi explains that Asher was worried about the parts of its land open to attack. Like the tribes before him, Asher's answer to the fight was to protect himself — and the whole idea of Adar is being willing to give yourself up for someone else.
+
+Daf Kaf Dalet of Sotah is cases of women who do not drink, often for extenuating circumstances. Esther is the perfect example. The Midrash says she was married to Mordechai before Achashverosh, and even the plain reading is a problem because Achashverosh was not Jewish; it is hard to imagine greater extenuating circumstances than the days of the Purim miracle. She was in a certain way forced into the marriage, and her actions saved the entire people.
+
+Peretz is one of the twin sons of Yehudah and Tamar. He burst out of the womb first and so took the firstborn's right, which had looked like going to his brother Zerach. Tamar's whole story has the theme Esther's has, and Yael's later in the Song of Devorah: that under extenuating circumstances acts which would otherwise deserve severe punishment are counted righteous. Peretz is from Lifrotz, to breach a fence or boundary, which can go either way — hence two sayings in our tradition: "Poretz Geder Yishchenu Nachash," one who breaks boundaries is bitten by a snake, and "Simchah Poretzet Geder," happiness breaks boundaries. Mashiach is also known as HaPoretz. That is the happiness of Purim and of the redemption, which turns darkness into light.
+
+The journey is from Tahath to Tarah. Tarah is spelled like Terach, Avraham's father, and Terach comes from smell — and the Purim story has much to do with smell, which is very spiritual, and was the one element not used at Achashverosh's party. Rabbi Jacobson explains that Terach also means wild goat and old fool, which is the behaviour of Purim, brought onto the path of holiness. The personal journey moves from making a dwelling place below out of spiritual lowliness, to lifting our surroundings through holy foolish behaviour.
+
+*Source: [Week 24 (Book 3): Peretz and the Power of Joy](https://www.kabbalahoftime.com/2014/02/week-24-book-3-peretz-and-power-of-joy.html) — 720 words*
+
+---
+
+## Day 165 · Book 4 · Week 24
+
+Channah's twenty-fourth verse brings the child: "And she brought him with her when she had weaned him, with three bulls, and one ephah of meal, and an earthenware jug of wine, and she brought him to the house of the Lord, to Shiloh, and the child was young." The first word of what she brings is Parim, bulls, spelled the same as Purim. And there is a jug of wine in it.
+
+The Pirkei Avot quality is that the Torah's secrets are revealed to him. The Talmud famously says "Nichnas Yayin Yotzeh Sod," when wine enters, secrets come out, which usually means something bad. On Purim it is good: when one drinks, the secrets of Torah are revealed.
+
+Proverbs 24 is mostly about fighting evil, and it reads like the pair of phrases a person is meant to stop telling apart. "Do not envy men of evil; do not desire to be with them; for their heart thinks of plunder, and their lips speak of wrongdoing." "Wicked man, do not lurk by the dwelling of a righteous man; do not plunder his resting place. For a righteous man can fall seven times and rise, but the wicked shall stumble upon evil." "When your enemy falls, do not rejoice, and when he stumbles, let your heart not exult." And: "He who says to a wicked man, 'You are righteous'-peoples will curse him; nations will be wroth with him."
+
+Its ending is another practice that is bad all year and good on this one day — sleeping in the daytime. "And I, myself, saw; I applied my heart; I saw and learned a lesson. Little sleep, little slumber, little clasping of the hands to lie down. Then your poverty will come strolling and your wants like an armed man." Which is Pirkei Avot for this week almost word for word: morning sleep, noontime wine, children's talk and sitting at the meeting places of the ignorant, drive a person from the world.
+
+As before, in a year with two months of Adar the yahrzeits are usually kept in the second, so the descriptions wait for next month, when weeks 22 through 25 come round again.
+
+*Source: [Week 24 (Book 4): "When Wine Comes in Secrets Come Out"](https://www.kabbalahoftime.com/2014/02/week-24-book-4a-when-wine-comes-in.html) — 506 words*
+
+---
+
+## Day 166 · Book 5 · Week 24
+
+The Song is asked what is so special about him, and answers. "What is your beloved more than another beloved, O fairest of women? What is your beloved more than another beloved, that you have so adjured us?" Then: "My beloved is white and ruddy, surrounded by myriads. His head is as the finest gold; his locks are curled, [they are as] black as a raven." The fairest of women is likely Queen Esther, chosen above all the women of the Persian Empire, and white and ruddy looks like the wine of Purim.
+
+Of the seventy souls that descended to Egypt, the twenty-fourth is Issachar, conceived on the night Rachel exchanged for the dudayim of Leah. The intoxicating nature of the dudayim runs parallel to the intensity of Purim, which also arrives through physical intoxication.
+
+Daf Kaf Dalet of Shvuot keeps on with forbidden foods, and how one act of eating can break more than one law. One of the great points of contention in the Purim story was that the Jews ate at Achashverosh's festive meal.
+
+Jeremiah's twenty-fourth chapter has duda'ey te'enim, translated pots of figs, literally dudayim of figs. "The Lord showed me two pots of figs, prepared before the Temple of the Lord after Nebuchadrezzar, king of Babylon, had exiled Jeconiah son of Jehoiakim king of Judah and the princes of Judah and the craftsmen and the sentries of the gates from Jerusalem and brought them to Babylon. One pot [contained] very good figs like the first ripe figs, and the other pot [contained] very bad figs that could not be eaten because they were so bad." Some could be eaten, some not at all — the very good and the very bad, which is Adar. The vision is about those who went willingly into exile in Babylon and those who stubbornly stayed in the Land of Israel. And its end sounds like Haazinu's verse for this week: "And I will send forth the sword, the famine, and the pestilence against them until they are consumed from upon the land that I gave them and their forefathers."
+
+*Source: [Week 24 (Book 5): the Intoxicating Power of Food and Drink](https://www.kabbalahoftime.com/2014/02/week-24-book-4b-intoxicating-power-of.html) — 532 words*
+
+---
+
+## Day 167 · Book 6 · Week 24
+
+The third week of Adar in psalms: the seventieth, seventy-first and seventy-second, with three verses of Psalm 77 and one of Psalm 89.
+
+Psalm 70 is short and urgent, a prayer that his enemies be shamed for shaming him and reveling in his troubles, and that the righteous then rejoice. "O G-d, [come] to rescue me; O Lord, hurry to my aid." "Let those who say, 'Aha! Aha!' be turned back in return for their shaming [me]." And the last line, which does not stop asking: "But I am poor and needy; hurry to me, O G-d! You are my help and deliverer; O G-d, do not delay!"
+
+Psalm 71 is an old man's prayer, with his enemies declaring him deserving of death. It starts from the beginning of his life: "For You are my hope, O my Lord, G-d, my security since my youth. I have relied on You from the womb; You drew me from my mother's innards; my praise is of You always." Then the fear of the end: "Do not cast me aside in old age; do not forsake me when my strength fails; for my enemies say of me, and those who watch my soul conspire together, saying, 'G-d has forsaken him. Give chase and catch him, for there is no rescuer.'" He asks for time to finish the telling: "Even into old age and hoariness, O G-d, do not abandon me, until I tell of Your might to the generations, and of Your strength to all who are to come." And the reviving: "You, Who has shown me many and grievous troubles, You will revive me again; You will lift me again from the depths of the earth."
+
+Psalm 72 David composed for Solomon, praying that he be granted the wisdom to provide justice for the poor. "O G-d, impart Your justice to the king, and Your righteousness to the son of the king. May he judge Your people with righteousness, Your poor with justice." The rain: "May [his words] descend like rain upon cut grass, like raindrops that water the earth." The reach: "And may he rule from sea to sea, and from the river until the ends of the earth." And what the kingship is for: "for he rescues the needy one who cries out, the poor one who has no one to help him. He pities the impoverished and needy, and saves the souls of the destitute. He redeems their soul from deception and violence, and their blood is precious in his eyes." It ends the second book of psalms: "Blessed is His glorious Name forever, and may the whole earth be filled with His glory, Amen and Amen. The prayers of David, son of Jesse, are concluded."
+
+Psalm 77's verses keep asking through the night and then turn: "Has G-d forgotten mercy? Has He in anger restrained His compassion forever? I said, 'It is to terrify me that the right hand of the Most High changes.' I remember the deeds of Yah, when I remember Your wonders of long ago." And Psalm 89's verse answers: "Indeed, My faithfulness and My kindness shall be with him, and through My Name his glory shall be exalted."
+
+*Source: [Week 24 (Book 6): Reviewing the Third Week of Adar - Psalms 70-72; 77:10-12; 89:25](https://www.kabbalahoftime.com/2014/02/week-24-book-5-reviewing-third-week-of.html) — 1076 words*
+
+---
+
+## Day 168 · Book 7 · Week 24
+
+The fish open on the voice above the water, and the week comes in around them.
+
+The sea and the leaving of it first, with the terror in the middle: "The voice of G-d is upon the waters" / "Asher dwelt at the shore of the seas" / "Moses led Israel away from the Red Sea" / "And they went out into the desert of Shur" / "I said, 'It is to terrify me that the right hand of the Most High changes'" / "Has G-d forgotten mercy? Has He in anger restrained His compassion forever?" / "Indeed, My faithfulness and My kindness shall be with him" / "And I was single-hearted toward Him and I kept myself from my iniquity."
+
+Then the bitter water, with the famine braided through it: "They came to Marah, but they could not drink water from Marah" / "Because it was bitter" / "Therefore, it was named Marah" / "They will sprout hair from famine" / "Attacked by demons, excised by Meriri" / "They walked for three days in the desert but did not find water" / "I will incite the teeth of livestock upon them" / "The G-d of glory thunders; G-d is upon many waters."
+
+Then the glory and the remembering: "And through my name his glory shall be exalted" / "I remember the deeds of Yah" / "When I remember your wonders of long ago."
+
+Then what was carried to Shiloh, and the venom beside it: "With three bulls, and one ephah of meal, and an earthenware jug of wine" / "With the venom of creatures that slither in the dust" / "My beloved is white and ruddy, surrounded by myriads" / "His head is as the finest gold" / "His locks are curled, black as a raven."
+
+And the end is the child and the question: "And she brought him to the house of the Lord, to Shiloh" / "And the child was young" / "What is your beloved more than another beloved, O fairest of women?" / "What is your beloved more than another beloved, that you have so adjured us?" / "And she brought him with her when she had weaned him" / "And by his breaches he abides."
+
+*Source: [Week 24 (Book 7): The Fish Are Saying](https://www.kabbalahoftime.com/2016/03/the-fish-are-saying.html) — 284 words*
