@@ -4570,3 +4570,123 @@ Then the question about their rock, and the falling at her feet: "Then He will s
 And the end is the ripe fruit and the moon: "The tiny grapes have developed" / "The pomegranates have lost their flowers" / "Like the moon, which is established forever" / "And it is a witness in the sky, eternally true" / "When they were few in number, hardly dwelling in it" / "It came to pass on the sixth day that they gathered" / "He let no man oppress them, and He reproved kings on their account" / "There I will give you my love."
 
 *Source: [Week 37 (Book 7): The Elephant Is Saying](https://www.kabbalahoftime.com/2017/06/the-elephant-is-saying.html) — 221 words*
+
+---
+
+## Day 260 · Book 1 · Week 38
+
+The Lion is saying, "G-d shall go out as a mighty man, He shall arouse zeal, He shall cry, even roar, He shall prevail over His enemies." (Isaiah 42:13) The verse belongs to Sivan, where the whole people trembled at the voice giving the Ten Commandments at Mount Sinai. It belongs to Zevulun too, who went out to sea to trade — and our sages draw an interesting line between going out to war and going out to make a living, which can be its own kind of war.
+
+The week of the lion is the last of Sivan and the last of spring. The two summer months that follow, Tammuz and Av, are intense, and closely tied to the destruction of the Temple — and also to its rebuilding and the coming of Mashiach.
+
+Here Hashem Himself is the lion. The Temple is often called a lion too, Ariel, which means lion of G-d. And the lion is the symbol of the tribe of Judah, from whom come King David and Mashiach. A Midrash runs all three together: the lion, Nebuchadnezzar the Babylonian emperor, came during the lion, the month of Av, and destroyed Ariel, the Temple, so that the Lion, G-d, will appear during the lion, the month of Av, and rebuild Ariel. The verse itself compares Him to a man at war, a roaring lion who will defeat His enemies and redeem His people. In the last week of Sivan we get ready, spiritually and physically and in our minds, for what is coming. Tammuz and Av can hold much pain, and they hold the spirit of redemption; it depends how they are approached. To come through, we have to reach the spark of the lion of Judah, of David, of Mashiach, that each of us carries. Prepared well, with everything learned from Passover to Lag Ba'Omer to Shavuot, we will be strong as lions, and with G-d beside us there is nothing at all to fear.
+
+Thirty-eight is the gematria of Bul, the biblical name of Cheshvan. The Torah says that "in the month Bul, which is the eighth month, the house [of G-d] was finished throughout all the parts thereof, and according to all the fashion of it, and he built it in seven years." In week twenty-three we had the gematria of Ziv, the biblical name of Iyar, the month Solomon's Temple was begun. Having lived the redemption of Adar and Nissan, worked on ourselves in Iyar, and received the Torah in Sivan, our inner Temple should feel finished now — and it is our work to protect it, and to bring about the rebuilding of the Temple in Jerusalem.
+
+Thirty-eight is chet and lamed, which spell chol, sand, recalling the blessing Abraham received that his offspring would be as many as the sand of the sea. Chol also means profane, which belongs to the destruction, the exile, and the profanation of His name in the months after Sivan. And the same letters spell lach, wet or fresh: we leave Sivan, and spring, fresh and full of water — a metaphor for Torah — and ready for the summer heat.
+
+Pirkei Avot gives Rabbi Yonatan: whoever fulfills the Torah in poverty will ultimately fulfill it in wealth, and whoever neglects the Torah in wealth will ultimately neglect it in poverty. This week holds the same thing. If we break the Torah so soon after its revelation in Sivan, it will be harder still to keep it in the poverty that Tammuz and Av may bring. Keep it through those months of poverty, and they turn into months of tremendous enrichment, with the coming of Moshiach — and our commitment through the spiritual poverty of exile will be repaid with the ability to keep the Torah in the spiritual wealth of the Messianic era. The teaching also belongs to Zevulun, whose wealth provided for Issachar, and who, for all his professional activity, stayed faithful to the Torah and devoted to studying it.
+
+The combination is tiferet shebeyesod. This week we feel the beauty and the balance of the Torah inside us and strengthen our foundations for the hard months. The lesson from the lion is that we have to be brave and willing to go out beyond our own sheltered worlds in order to help the people around us.
+
+*Source: [Week 38 (From the Book): To Be Strong and Courageous in order to Defend the Common Good](https://www.kabbalahoftime.com/2014/06/week-38-from-book-to-be-strong-and.html) — 1091 words*
+
+---
+
+## Day 261 · Book 2 · Week 38
+
+The last week of Sivan. Haazinu continues last week's questions: "who ate the fat of their sacrifices and drank the wine of their libations? Let them arise and help you! Let them be your shelter!" (Deuteronomy 32:38) Read positively, the questions are still being put to Israel's enemies. The Haftorah supports that directly: "I have pursued my enemies and have destroyed them; Never turning back until they were consumed." (II Samuel 22:38) They found no refuge at all.
+
+The quality is that he does not act arrogantly with his knowledge. Haughtiness is the opposite of holiness and of Torah, so being arrogant on the strength of what one knows is the plainest case of behaving wrongly — the knowledge does not belong to the individual but to G-d. It can also be read as not acting arrogantly with His knowledge, because the knowledge is all His. That is a central message of Sivan.
+
+The prophet is Daniel — and this is the week of the lion, and Daniel is known above all for being thrown into the den of hungry lions and miraculously saved. His reading of Nebuchadnezzar's dream is this quality at work, because the interpretation of dreams comes from G-d. "And to these youths, the four of them, G-d gave knowledge and understanding in every script and wisdom, and Daniel understood all visions and dreams." Asked for the dream, he first asked for time, told Hananiah, Mishael and Azariah, and prayed; and when the secret was revealed to him in a vision of the night, he blessed the G-d of heaven: "May the Name of G-d be blessed from everlasting even to everlasting, to Whom are wisdom and might. And He changes the times and the seasons, He removes kings and sets up kings; He grants wisdom to the wise and knowledge to those who know understanding. He reveals the profound and secret things; He knows what is in the dark, and light dwells with Him." And standing before the king he said it plainly: "The secret that the king asks, no wise men, astrologers, necromancers, or demonologists can tell the king. But there is a G-d in heaven Who reveals secrets." And: "And I-not with wisdom that I possess more than all living, did He reveal this secret to me." Which is what his predecessor Joseph said to Pharaoh: "Not I; G-d will give an answer [that will bring] peace to Pharaoh."
+
+Rashi notes that the sages discuss whether Daniel should count as a prophet, so some put Shemaiah here instead. The prophet Shemaiah, who prophesied in the days of Rehavam, would be well out of chronological order; another Shemaiah, a kohen, the father of Uriah, is somewhat closer and still out of order. Perhaps the name is a further hint at the quality of the week, since Shemaiah comes from Lishmoah, to hear, with the Name of Hashem in it — heard G-d, or G-d heard. It points at the humility a prophet needs: to remember that his job is to be a conduit, to hear the word of G-d when G-d hears His people. Which is Sivan as well.
+
+The levitical city is Nahalal, whose name holds hallel, to praise. Praising G-d for everything He has done for us is the ultimate form of humility.
+
+*Source: [Week 38 (Book 2): Daniel and Not Acting Arrogantly with One's Knowledge](https://www.kabbalahoftime.com/2014/06/week-38-book-2-daniel-and-not-acting.html) — 1049 words*
+
+---
+
+## Day 262 · Book 3 · Week 38
+
+Beshalach: "So he said to them, That is what the Lord spoke, Tomorrow is a rest day, a holy Sabbath to the Lord. Bake whatever you wish to bake, and cook whatever you wish to cook, and all the rest leave over to keep until morning. So they left it over until morning, as Moses had commanded, and it did not become putrid, and not a worm was in it." The sixth day is special again, and this is preparing for the Sabbath — which is the preparing for the hard summer months, and it has to be done in Sivan.
+
+The Haftorah finishes Sissera and turns to a window: "where he sank, there he fell down dead. Through the window looked forth, the mother of Sisera [peered] through the window." Out of the context of his death, the verse looks like Sinai again. And a mother peering through a window brings to mind the verse of the Song of Songs where G-d peers through the window to see our suffering, ready to return His Shechinah to its place — which points at the coming months too.
+
+Daf Lamed Cheit of Sotah is all the blessing of the Kohanim, and how the blessing given outside the Temple differed from the one given inside. That blessing, which by halachah must be given out of love, as the brachah before it says, is the ultimate example of brotherly love and peace among the Jewish people.
+
+The generation is Jehoshaphat, son of Asa, another extremely righteous king; his counterparts in Israel were Omri, Ahab, and Ahaziah. His name means G-d is Judge — and in Book 2 this week's prophet is Daniel, whose name also means G-d is my Judge. His one mistake was growing too friendly with the evil rulers of the northern kingdom and at times seeking alliances with them, which is the other side of this month's brotherly love: one has to know when to keep a distance. Overall he was extremely righteous and led the people through 25 years of real peace and prosperity. Set his name against Ahab's, which makes no reference to G-d and suggests possible incest, meaning brother-father. Ahab seems to correct that in naming his own son Ahaziah, one who holds on to G-d, with Hashem's name in it; Ahaziah is also the name of one of the kings of Judah. He followed his father's evil ways all the same, was involved in idolatry, and died after only two years.
+
+The journey is from Oboth to the ruins of Abarim, on the Moabite boundary. Abarim comes from Aveirah, transgression. Because of our sins in the summer months of Tammuz and Av, our Temple lies in ruins — and Rashi himself draws the parallel to Jerusalem in one of his few comments on the journeys, reading the ruins of Abarim as an expression of waste and ruin, as in "into a heap in the field," and "they have turned Jerusalem into heaps." Moab was a nation known for its immorality, and like Ahab's, its name suggests incest, and was given for that reason: Moab means from the father, because the nation began when Lot had relations with his own daughter. It is our work to fight such immorality, and so to raise the sparks hidden in that nation's kelipah. And after Ahab's death it was Moab that revolted against Israel. The personal journey moves from staying true to our mission to repenting of, and fighting, the sins that brought the Temple down.
+
+*Source: [Week 38 (Book 3): Preparing for the Summer Months](https://www.kabbalahoftime.com/2014/06/week-38-book-3-preparing-for-summer.html) — 774 words*
+
+---
+
+## Day 263 · Book 4 · Week 38
+
+Channah's tenth verse closes her song: "Those who strive with the Lord will be broken; Upon him will He thunder in Heaven; The Lord will judge the ends of the earth. And He will grant strength to His King, And raise the horn of His anointed one." Judgment, and then strength given to the king.
+
+Pirkei Avot, on the greatness of the Torah, raises those who come near it: "Long days in her right hand; in her left, wealth and honor."
+
+Ecclesiastes 7 is the standing and the length of days that wisdom brings: "Be not overly wicked, and be not a fool; why should you die before your time? It is good that you should take hold of this, and also from this you shall not withdraw your hand, for he who fears God will discharge himself of them all. Wisdom affords strength to the wise more than ten rulers who were in the city."
+
+The week holds the yahrzeits of Rebbe Yisrael Dan of Modzitz on the 20th of Sivan, Rebbe Shlomo Shapira of Munkatch on the 21st, and Rabbi Mordechai-Tzemach Eliyahu on the 25th.
+
+Reb Israel Dan was born in 1928 in Warsaw, the capital of Poland, and made Aliya to Eretz Yisrael with his parents in 1936, as a child of 7. He married Rachel, daughter of HaRav Shmuel Aharon Shadrovitzki from Byalistok, a great talmud chacham among the heads of Agudas Yisrael in Poland. He was chosen to replace the Imrei Aish on his passing, and his deep knowledge of the Torah became evident to many when he became the Admor on his father's death; at his Tishim people heard many beautiful Divre Torah, pleasant to the ear. For some years he led the Chasidim in Tel-Aviv, where his father had lived, and on Lag Ba'omer 1995 he moved to a new building the Chasidim had built in Bnei Brak. Like his fathers he composed Nigunnim, many of which are already sung regularly in Jewish homes. He was very active in the public interest and a member of the Moetzet G'Dolei Hatorah, where his opinions were looked up to.
+
+Rabbi Shlomo Shapira, author of the Shem Shlomoh, was the first Rebbe of Chassidut Munkach, son of Rabbi Elazar Shapira and grandson of Rabbi Zvi Elimelech Shapira of Dynow, the Bnei Yissachar; he was also the rabbi of the town of Munkatch. His biography is set down in a work by David Kahane called Beit Shlomoh.
+
+Rabbi Mordechai-Tzemach Eliyahu, the former Chief Sephardic Rabbi of Israel, was born in Iraq. A noted sage in every area of Torah study and a significant kabbalist, he was considered one of the leading authorities on Jewish law in Israel. His son, Rabbi Shmuel Eliyahu, is Chief Rabbi of Tsfat.
+
+*Source: [Week 38 (Book 4): Strength and Long Life](https://www.kabbalahoftime.com/2014/06/week-38-book-4a-strength-and-long-life.html) — 643 words*
+
+---
+
+## Day 264 · Book 5 · Week 38
+
+The Song's verse keeps to the first fruits, with fruit new and old: "The pots [of figs] have given forth [their] fragrance, and on our doorways are all manner of sweet fruits, both new and old, which I have hidden away for you, my beloved." Rashi comments that before, there were two kinds of fruit, good and bad, and now both of them have given forth their fragrance; they all seek Your countenance. Sivan is the height of both Jewish unity and the revelation that follows it.
+
+Of the seventy souls that descended to Egypt, the thirty-eighth is Ezbon, whose name looks related to Etzbah, finger. A finger is not an independent thing: it is part of a hand and has to be joined to it. And with him Ashbel, son of Benjamin, whose name means taken captive — another of the names Benjamin gave as a sign of unity with his brother, mourning that Joseph had been sold as a slave.
+
+Daf Lamed Cheit of Shvuot keeps on with the oath of a pikadon and opens a new chapter on Shevuas HaDayanim, the oath of judges, on partial admission, and on how an oath is administered. Most of the daf is the collective oath — and this week and this month are about collectivity.
+
+Jeremiah's thirty-eighth chapter has the king receptive again, and promising not to punish him for his words. "And King Zedekiah sent and took Jeremiah the prophet to him, to the third entrance, that was in the house of the Lord, and the king said to Jeremiah, 'I ask you a word; do not conceal a word from me.'" Jeremiah's answer: "If I tell you, will you not put me to death? And if I advise you, you will not listen to me." So the king swore secretly: "As the Lord lives who made for us this soul, I will neither put you to death nor will I deliver you into the hand[s] of these men who seek your life." Then the choice, laid out plainly: "If you go out to the officers of the king of Babylon, your soul shall live, and this city shall not be burnt with fire, and you and your household shall live. But if you do not go out... this city shall be delivered into the hand[s] of the Chaldeans, and they shall burn it with fire." The king was afraid of the Jews who had defected. And then the picture of what refusing would bring, down to the women and the children: "Behold, all the women who remained in the house of the king of Judah shall be taken out to the officers of the king of Babylon, and they shall say, 'Your cohorts have enticed you and prevailed over you. Your feet have sunk into the mire; they have turned back.'" The last verse of the chapter says what happened: "And Jeremiah stayed in the prison yard until the day that Jerusalem was taken, and he was [there] when Jerusalem was taken."
+
+*Source: [Week 38 (Book 5): Unity and Captivity](https://www.kabbalahoftime.com/2014/06/week-38-book-4b-unity-and-captivity.html) — 764 words*
+
+---
+
+## Day 265 · Book 6 · Week 38
+
+The last week of Sivan in psalms: the hundred and twelfth, hundred and thirteenth and hundred and fourteenth, with three verses of Psalm 105 and one of Psalm 89.
+
+Psalm 112 also follows the alphabet, two letters to a verse except the last two, which have three each. It is about the good traits a man should choose, and about how to give charity — whose reward is never having to rely on others. "Fortunate is the man who fears the Lord, and desires His commandments intensely." The light in the dark: "Even in darkness light shines for the upright, for [He is] Compassionate, Merciful, and Just." The measure of the man: "Good is the man who is compassionate and lends, [but] provides for his own needs with discretion." The steadiness: "He will not be afraid of a bad tiding; his heart is steadfast, secure in the Lord." And the giving: "He has distributed [his wealth], giving to the needy. His righteousness will endure forever; his might will be uplifted in honor."
+
+Psalm 113 recounts some of the wonders of the exodus. "From the rising of the sun to its setting, the Name of the Lord is praised. The Lord is high above all nations; His glory transcends the heavens. Who is like the Lord our G-d, Who dwells on high [yet] looks down so low upon heaven and earth!" And what He does when He looks: "He raises the poor from the dust, lifts the destitute from the dunghill, to seat them with nobles, with the nobles of His people. He transforms the barren woman into a household, into a joyful mother of children."
+
+Psalm 114 explains why the tribe of Judah merited kingship. "When Israel went out of Egypt, the House of Jacob from a people of a foreign tongue, Judah became His holy [nation], Israel, His domain." Then the world running: "The sea saw and fled, the Jordan turned backward. The mountains skipped like rams, the hills like young sheep." Then the question put to all of them — what is the matter with you, sea, that you flee; Jordan, that you turn backward; mountains, that you skip — and the answer: "[We do so] before the Master, the Creator of the earth, before the G-d of Jacob, Who turns the rock into a pool of water, the flintstone into a water fountain."
+
+Psalm 105's verses are the protection and the famine and the man sent ahead: "Do not touch My anointed ones, and do not harm My prophets." "He called a famine upon the land; He broke every staff of bread. He sent a man before them; Joseph was sold as a slave." And Psalm 89's verse turns hard: "But You abandoned and You rejected; You became wroth with Your anointed."
+
+*Source: [Week 38 (Book 6): Reviewing the Last Week of Sivan - Psalms 112-114; 105:15-17; 89:39](https://www.kabbalahoftime.com/2014/06/week-38-book-5-reviewing-last-week-of.html) — 550 words*
+
+---
+
+## Day 266 · Book 7 · Week 38
+
+The lion opens, and the week sets a roar against a mother at a window.
+
+The roaring and the pursuing first: "He shall arouse zeal, He shall cry" / "Even roar, He shall prevail over His enemies" / "I have pursued my enemies and have destroyed them" / "Those who strive with the Lord will be broken" / "Upon him will He thunder in Heaven."
+
+Then what was left until morning, and the famine: "So they left it over until morning" / "As Moses had commanded" / "He called a famine upon the land" / "He broke every staff of bread" / "Who ate the fat of their sacrifices" / "And drank the wine of their libations?" / "Through the window looked forth, the mother of Sisera [peered] through the window."
+
+Then the gods called on to help, and the dead man: "Let them arise and help you! Let them be your shelter!" / "And all the rest leave over to keep until morning" / "Where he sank, there he fell down dead" / "The Lord will judge the ends of the earth" / "And He will grant strength to His King" / "And raise the horn of His anointed one."
+
+Then the anointed twice over, and Joseph sold: "'Do not touch My anointed ones, And do not harm My prophets'" / "But You abandoned and You rejected; You became wroth with Your anointed" / "He sent a man before them; Joseph was sold as a slave."
+
+And the end is the Sabbath and the fragrance: "So he said to them, That is what the Lord spoke" / "Tomorrow is a rest day, A holy Sabbath to the Lord" / "The pots [of figs] have given forth [their] fragrance" / "And on our doorways are all manner of sweet fruits" / "Bake whatever you wish to bake" / "And cook whatever you wish to cook" / "G-d shall go out as a mighty man" / "Never turning back until they were consumed" / "And it did not become putrid, and not a worm was in it" / "Both new and old, Which I have hidden away for you, my beloved."
+
+*Source: [Week 38 (Book 7): The Lion is saying](https://www.kabbalahoftime.com/2017/06/the-lion-is-saying.html) — 280 words*
