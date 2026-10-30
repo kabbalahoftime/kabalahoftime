@@ -84,6 +84,8 @@ ALT = {
     # One man, and the blog spells him Maimonedes.
     'rambam': 'maimonedes', 'maimonides': 'maimonedes',
     'aharon': 'aaron', 'hellenist': 'helenist', 'greece': 'greek',
+    # One town, spelled both ways across the posts.
+    'lizhensk': 'lizhenk',
 }
 
 # Twelve years of Blogger has eaten a lot of spaces: "Midrashteaches",
