@@ -3922,3 +3922,125 @@ Then the glory in the cloud, and the praises from the feet up: "And it came to p
 And the end is the curse on Meroz and the two rocks: "'Curse you Meroz,' said the messenger of the Lord" / "'Curse you bitterly inhabitants thereof'" / "For the Lord is a G-d of thoughts, and to Him are deeds counted" / "For their rock is not like our Rock" / "Nevertheless, our enemies sit in judgment" / "Draw near before the Lord, for He has heard your complaints."
 
 *Source: [Week 31 (Book 7): The Horse is Saying](https://www.kabbalahoftime.com/2016/05/the-horse-is-saying-songs-for-week-31.html) — 306 words*
+
+---
+
+## Day 218 · Book 1 · Week 32
+
+The mule is saying, "All the kings of earth shall acknowledge You, G-d, for they have heard the sayings of Your mouth." (Psalms 138:4) The second week of Iyar, still joined to the miracles of Israel's independence — it was then that the right of the Jewish people to the Land of Israel was clearly recognised by the leaders of the world and the United Nations. A verse of the Psalms says, "Do not be like the horse or like the mule, without understanding." It took the nations a long time to understand that right, and for that brief moment in history the world did recognise it.
+
+There is a contrast between this week's animal and next week's. The mule belongs to the gentile prophet Bilaam, whose mule spoke to him; the donkey belongs to Abraham, and to Moshe and Mashiach. The two lives run in parallel. Pirkei Avot teaches that Abraham and Bilaam are polar opposites: Abraham humble and the greatest source of blessing, Bilaam arrogant and the greatest source of curse. Rashi compares Abraham rising early to saddle his donkey, to go and sacrifice Isaac, with Bilaam rising early to saddle his mule, to meet Balak, bring sacrifices and try to curse the Jewish people. Abraham and his descendants were promised the Land; Balak and Bilaam did everything in their power to take it from them. In the end Bilaam was forced not only to recognise the glory of Israel but to praise it and bless it tremendously, and both he and Balak were later defeated by the conquering Israelites.
+
+Iyar belongs to Issachar, whom the Torah calls a strong-boned donkey, and a mule is a donkey bred with a horse. The mule also carries this month's theme of deficiency and the need for healing: it cannot procreate.
+
+Thirty-two is the thirty-two paths of wisdom, chochmah, named in Kabbalah. There are three opinions about Bilaam's connection to Laban: that Bilaam was Laban himself, or his son, or his grandson. Laban's name, Lamed Beit Nun, holds the thirty-two paths of wisdom, lamed beit, and the fifty gates of understanding, nun. Had Laban nullified himself before Yaakov, the tzadik of the generation, the evil in him would have been nullified and all those levels revealed in him.
+
+Thirty-two is also lamed and beit, which spell lev, heart. Sometimes we understand something with the intellect and still cannot get the heart to understand it. For all the heart's stubbornness, in the end we will all acknowledge Hashem, as the mule's song says plainly. One way to hurry it is the saying of our sages the Lubavitcher Rebbe often quoted: words that come from the heart enter the heart. Lev is not only the physical organ; the heart of a thing is its essence. The Torah, which is the essence of Hashem, ends with lamed and begins with beit, which spells lev. The Land of Israel is the heart of our people, and Jerusalem is the heart of our heart. And in the episode of the spies, the only one besides Joshua who stood firmly for our ability to conquer the Land was called Kalev — the name itself shows his connection to our heart.
+
+Pirkei Avot gives Rabbi Levitas of Yavneh, who turns to the other side of the heart, the yetzer harah: be very, very humble, for the hope of mortal man is worms. The word he uses for man is enosh, the lowest of all the names for a human being: if we keep to our physical side, our only hope is to be food for worms. Attend to the soul instead, the divine part of us, and we will know how to use our hearts, and will be able to love our neighbour as ourselves. That is also the lesson of chapter 32, the lev of the Tanya. And it is close to the phrase Abraham is most famous for: "I am like dust and ashes" — dust, because man comes from dust and returns to it, and ashes, because Abraham and Sarah were sterile and could have no children, like the mule. And G-d is capable of anything: children for Abraham and Sarah, speech for a mule, the kings of the nations recognising His words, and Bilaam blessing Israel.
+
+The combination is netzach shebehod. It takes great persistence to reach our own hearts. The mule is persistence and stubbornness itself. This week is also the yahrzeit of Eli the High Priest, on the 10th of Iyar: besides being Kohen Gadol he was leader of the generation, so he held both of these sefirot together — as Samuel, his disciple, also represents both, since the Book of Psalms equates him to Moses and to Aaron. Eli's death, falling backwards and breaking his neck on hearing the fate of the Mishkan, is close to next week's animal: the Torah commands that an owner who does not intend to redeem a firstborn donkey with a sacrifice must break the donkey's neck, and in Kabbalah the neck is the part of the body most associated with the Holy Temple and the Mishkan. The other animal with a commandment about breaking a neck is a female calf, in the case of an unexplained murder — and the mule is close to the donkey and female like the calf.
+
+The lesson from the mule is that even kings, the rich and the powerful, must understand that they are completely subject to Hashem, who controls everyone without distinction. If anything a king is more subject than anyone, as Proverbs says: "A king's heart is like rivulets of water in the Lord's hand; wherever He wishes, He turns it."
+
+*Source: [Week 32 (From the Book): To Recognize Deep in Our Heart How Small We Are, How Great G-d Is](https://www.kabbalahoftime.com/2014/05/week-32-to-recognize-deep-in-our-heart.html) — 1312 words*
+
+---
+
+## Day 219 · Book 2 · Week 32
+
+The second week of Iyar. Haazinu: "For their vine is of the vine of Sodom, and of the field of Gemorrah; their grapes are grapes of rosh, and they have bitter clusters." (Deuteronomy 32:32) Read of the Jewish people, their actions paralleled Sodom and Gemorrah and deserved great punishment. It can as easily be read of their enemies, following the verse just before it. And it can be read as the victory they won, which came out of enduring the suffering and the fermentation of Sodom, and the fields — the concentration camps — of Gemorrah: the strength came out of the bitterness. Rashi notes that the second half of the verse, and the next one, concern the suffering the Jews endured.
+
+The Haftorah keeps to the positive: "For who is G-d, save the Lord? And who is a rock, save our G-d?" (II Samuel 22:32) He alone is G-d, and He alone is the Tzur. This week is bound to the one before it, Yom Ha'Atzma'ut, and to the one before that, Yom HaShoah.
+
+The quality is loving G-d, ohev et HaMakom — and why that name for Him here? Perhaps because this week belongs to the Land of Israel, and it is in that place that we experience Him as fully as possible, as Yaakov did at Beit-El.
+
+The prophet is Nahum, whose message is also that after great suffering He has redeemed the people and the Land, and so we show Him appreciation and love: "Behold on the mountains the feet of a herald announcing peace. O Judah, keep your feasts, pay your vows-for the wicked one shall no longer continue to pass through you; he has been completely cut off." And then: "Watch the way! Strengthen your loins! Fortify your power mightily. For the Lord has restored the pride of Jacob as the pride of Israel."
+
+The levitical city is Dobrath, which means gathering a flock together — a perfect name for the week that marks the flock of the People of Israel gathered back to its Land. More fitting still, Dobrath is the name of a well-known kibbutz established in 1946, against much struggle and Arab opposition.
+
+*Source: [Week 32 (Book 2): Nahum and Light that Comes from Darkness](https://www.kabbalahoftime.com/2014/05/week-32-book-2-light-that-comes-from.html) — 588 words*
+
+---
+
+## Day 220 · Book 3 · Week 32
+
+Like last week, this one is tied to Yom Ha'Atzmaut and the Land. Beshalach: "The Lord spoke to Moses, saying, I have heard the complaints of the children of Israel. Speak to them, saying, In the afternoon you shall eat meat, and in the morning you shall be sated with bread, and you shall know that I am the Lord, your G-d." He heard the complaints, and answered them mercifully and miraculously.
+
+The Haftorah names again those who did not come: "because they came not to the aid of the Lord, to the aid of the Lord against the mighty." Why would He need aid in battle? Rashi states that those who aid Israel are as if they aid the Divine Presence. In 1948 the nations of the world did not come to Israel's aid. The Jewish people faced tremendous odds and came through by Divine mercy.
+
+Daf Lamed Beit of Sotah takes up invalid witnesses, and the statements that must be said in Hebrew to be valid, and the blessings and curses said at Mount Grizim and Mount Eival when the people entered the Land. Entering the Land is this week; and the Hebrew may point to the renewal of the everyday use of the language.
+
+The generation is Yishai, son of Obed and father of King David, and he was great in many ways. He is one of the eight princes of man in Micha according to Sukkah. He went out at the head of a multitude of followers and returned with a multitude, and he taught Torah to a multitude. He inspired David to fight Goliath. Four people died solely because of the serpent's advice to Eve, having never sinned, and Ishai was one of them. The Sages said that Ishai lived more than 400 years. He is identified as Beis haLachmi, usually rendered as from Beis Lechem, Bethlehem. Radak quotes a Midrashic reading of that term: after David killed Goliath, King Saul asked who David was, which is puzzling since he already knew — so some read the question as whether he was the scion of a powerful line, and David answered that he was a son of Yishai Beis haLachmi, meaning a man of war, from Milchamah.
+
+This is week 32, whose gematria is lev, heart. Yishai, spelled yud, shin, yud, has the gematria of 320, ten times Lev. His name reads as Yesh Yud, there is Yud, perhaps the 32 paths of Chochmah, which are also Lev. Yishai laid the foundations for his son David to be king, as the pioneering generation that made the return possible laid the foundations for a redemption still to come. And like Israel's pioneers, he was a man of war.
+
+The journey is from Abronah to Etzion geber, which means the crow of the rooster, and may also mean the wisdom of the rooster. The personal journey moves from re-establishing our identity with the land to the spiritual awakening of Lag Ba'omer, when we open ourselves to the inner wisdom of the Kabbalah.
+
+*Source: [Week 32 (Book 3): Battling for the Land, Laying the Foundations](https://www.kabbalahoftime.com/2014/05/week-32-book-3-battling-for-land-laying.html) — 708 words*
+
+---
+
+## Day 221 · Book 4 · Week 32
+
+Channah's fourth verse turns everything over: "The bows of the mighty are broken; And those who stumbled, are girded with strength." Which is an accurate description of what happened in 1948.
+
+From here Pirkei Avot stops describing those who study Torah for its own sake and takes up verses on the greatness of the Torah itself, which gives life to its observers in this world and in the World To Come: "For they are life to he who finds them, and a healing to all his flesh." The first verse is life and the healing of flesh. At independence the Jewish people were broken, and somehow gathered strength and found life and healing. The same can be said of Channah.
+
+And the readings move from Proverbs to Ecclesiastes. Its first chapter is the world going round in circles, with its ups and downs: the wicked may be on top for a time, and they fall in the end, and life and endurance go to those who stay humble. "The words of Koheleth son of David, king in Jerusalem." Rashi reads the opening that way — the sun rises, all the rivers run into the sea — and says he calls the wicked the sun, the moon and the sea, which have no reward; so it was taught in Sifrei, that the section deals with the wicked and compares them to the rising of the sun, which ultimately sets. Then: "A generation goes and a generation comes, but the earth endures forever." Rashi: however much a wicked man toils and labours to oppress and to rob, he does not outlive his works, for the generation goes and another comes and takes it all from his sons. And who are the ones who endure? The humble and low, who bring themselves down to the earth, as it says, "But the humble shall inherit the earth." And the Midrash Tanhuma states that all the righteous of Israel are called earth, as it is said, "for you shall be a desirable land." Then: "It goes to the south and goes around to the north; the will goes around and around, and the will returns to its circuits." Rashi again: however much the sun of the wicked rises, it will set; however much power they gain, they return to the place of filth they came from.
+
+The week holds many yahrzeits, among them the founders of two prominent Chassidic lines. Rabbi Yitzchak Isaac Yehuda Yechiel Safrin ben Alexander Sender of Komarno, on the 10th of Iyar, was one of the most prolific and respected expounders of the Kabbalah teachings of the Baal Shem Tov. He insisted that every Jew should study the Zohar and the Writings of the Arizal, and emphasised the importance of Kabbalistic meditation. A close disciple of Rebbe Tzvi Hersh from Zhiditchov — Komarno is considered a branch of Zhiditchov — he was a hidden ascetic for many years, and only later, as Rebbe of thousands of chasidim, became known for his genius, piety and ability to work wonders. He wrote volumes on Jewish mysticism and on Mishnah and law; his commentaries include Heichal HaBrachah on the Torah, Otzar HaChaim on the commandments, and Zohar Chai on the Zohar.
+
+Rabbi Naftali of Ropshitz, on the 11th of Iyar, was born on the same day the Besht passed away, and became rebbe to many thousands. Deciding to join the chassidic movement, he chose Rabbi Elimelech of Lizensk as his mentor, and then became a dedicated chasid of the three patriarchs: the Chozeh of Lublin, the Maggid of Koznitz, and Rabbi Menachem Mendel of Rymanov. During the Napoleonic wars the Tzaddikim were divided over Napoleon. Rabbi Menachem Mendel of Rymanov strongly supported him and held that the wars were Gog and Magog, a prelude to the Messiah; his disciple Rabbi Naftali, and Rabbi Shneur Zalman, the Baal HaTanya, were strongly opposed, sensing that a victory would bring changes that would threaten the community's way of life. After those three passed away he settled in Ropshitz, which became the focal point for thousands of chassidim. Ropshitz chassidut is known for its captivating niggunim, melodies of ecstasy and of yearning for nearness to G-d. He is a crucial figure in the development of Galician Chassidut, and many minhagei Ropshitz are followed in Galicia. He was known for profound wisdom, a sharp sense of humour and musical gifts, and was a master of kabbalistic interpretation; his demeanour, sermons and witticisms hid a depth that only his closest students could reach, foremost among them Rabbi Chaim of Tzanz. Some of his teachings are in Zera Kodesh, Ayalah Sheluchah and Imrei Shefer, and many stories about him are in Ohel Naftoli.
+
+Also this week: Rabbi Yerachmiel Rabinowitz of Peshischa, son of the Yid HaKadosh, and Rabbi Moshe Mordechai Twersky of Lublin-Trisk, both on the 8th of Iyar; Rabbi David Twerski of Tolna, son of Rabbi Mordechai of Chernobyl, on the 10th; and Rabbi Masoud Abuchatzeira, son of the Abir Yaakov and father of the Baba Sali, on the 12th.
+
+*Source: [Week 32 (Book 4): Ups and Downs](https://www.kabbalahoftime.com/2014/05/week-32-book-4a-ups-and-downs.html) — 1121 words*
+
+---
+
+## Day 222 · Book 5 · Week 32
+
+The Song's verses are the nations' praises again, and they are full of places in the region, where so many came to attack us: "Your neck is like an ivory tower; your eyes are [like] pools in Heshbon, by the gate of Bath-Rabbim; your face is as the tower of Lebanon, facing towards Damascus." "Your head upon you is like Carmel, and the braided locks of your head are like purple; the king is bound in the tresses." "How fair and how pleasant you are, a love with delights!" Heshbon is in Jordan; and there is Lebanon, and Damascus.
+
+Of the seventy souls that descended to Egypt, the thirty-second is Jahleel, whose name means to wait for, to yearn for G-d. Yachel also carries forgiveness, and nullification, and desecration. This week is about the nations finally acknowledging Israel after so many years, and its animal is the mule, which belongs to Bilaam — who was trying to nullify the oath G-d made to Abraham, and was in many ways the anti-Abraham. And it is the heart, since 32 is Lev. We yearn for Hashem with all our hearts and to return to our land, and in that, He nullifies those who fight our connection to the Land of Israel.
+
+Daf Lamed Beit of Shevuoth keeps on with who is excluded from liability for a court oath — which is last week's three oaths again.
+
+Jeremiah's thirty-second chapter says the return openly, and the prophet himself is told to redeem his family's portion of the Land by buying it. "Behold, Hanamel, the son of Shallum your uncle, is coming to you, saying: Buy for yourself my field that is in Anathoth, for the right of redemption is yours to buy it." Then the deed, witnessed and put away to last: "Take these scrolls, this deed of purchase and the signed one and this open scroll, and put them into an earthen vessel so that they remain many years. For so says the Lord of Hosts, the God of Israel; Houses and fields and vineyards shall be purchased again in this land." Then the gathering: "Behold I will gather them from all the lands where I have driven them with My anger and with My wrath and with great fury, and I will restore them to this place and I will cause them to dwell safely. And they shall be My people, and I will be their God." Then the covenant: "And I will form for them an everlasting covenant, that I will not turn away from them to do them good, and My fear I will place in their heart, not to turn away from Me. And I will rejoice over them to do good to them, and I will plant them in this land truly with all My heart and with all My soul." And the measure of it: "As I have brought upon this people all this great evil, so will I bring upon them all the good that I speak concerning them." And the fields bought in a land now called desolate: "Men shall buy fields for money and inscribe deeds and sign [them] and appoint witnesses in the land of Benjamin and in the environs of Jerusalem."
+
+*Source: [Week 32 (Book 5): Securing Our Connection to the Land in the Face of the Enemy](https://www.kabbalahoftime.com/2014/05/week-32-4b-securing-our-connection-to.html) — 878 words*
+
+---
+
+## Day 223 · Book 6 · Week 32
+
+The second week of Iyar in psalms: the ninety-fourth, ninety-fifth and ninety-sixth, with three verses of Psalm 90 and one of Psalm 89.
+
+Psalm 94 is a prayer any individual can use for the redemption, and an important moral teaching with it. "The Lord is a G-d of retribution; O G-d of retribution, reveal Yourself! Judge of the earth, arise; render to the arrogant their recompense. How long shall the wicked, O Lord, how long shall the wicked exult?" What they do, and what they say about it: "They kill the widow and the stranger, and murder the orphans. And they say, 'The Lord does not see, the G-d of Jacob does not perceive.'" Then the answer, which is made of questions: "Shall He who implants the ear not hear? Shall He who forms the eye not see? Shall He who chastises nations not punish?" Then the fortunate man: "Fortunate is the man whom You chastise, O Lord, and instruct him in Your Torah, bestowing upon him tranquillity in times of adversity, until the pit is dug for the wicked. For the Lord will not abandon His people, nor forsake His heritage." And the holding up: "When I thought that my foot was slipping, Your kindness, O Lord, supported me. When my [worrisome] thoughts multiply within me, Your consolation delights my soul."
+
+Psalm 95 speaks of the time when a man will say to his fellow, come, let us sing and offer praise to G-d for the miracles He has done for us. "Come, let us sing to the Lord; let us raise our voices in jubilation to the Rock of our deliverance." Whose everything is: "in His hands are the depths of the earth, and the heights of the mountains are His. Indeed, the sea is His, for He made it; His hands formed the dry land." Then the flock, and the condition: "For He is our G-d, and we are the people that He tends, the flock under His [guiding] hand-even this very day, if you would but hearken to His voice!" And the warning from the wilderness: "Do not harden your heart as at Merivah, as on the day at Massah in the wilderness, where your fathers tested Me; they tried Me, though they had seen My deeds. For forty years I quarreled with that generation."
+
+Psalm 96 is the same time coming: come, let us sing to G-d. "Sing to the Lord a new song; sing to the Lord, all the earth. Sing to the Lord, bless His Name; proclaim His deliverance from day to day. Recount His glory among the nations, His wonders among all the peoples." Then the call to the families of nations to bring an offering and come to His courtyards. And then the whole world joining in, which is how it ends: "The heavens will rejoice, the earth will exult; the sea and its fullness will roar. The fields and everything therein will jubilate; then all the trees of the forest will sing. Before the Lord [they shall rejoice], for He has come, for He has come to judge the earth; He will judge the world with justice, and the nations with His truth."
+
+Psalm 90's verses ask for joy to match the affliction: "Satiate us in the morning with Your kindness, then we shall sing and rejoice throughout our days. Give us joy corresponding to the days You afflicted us, the years we have seen adversity. Let Your work be revealed to Your servants, and Your splendor be upon their children." And Psalm 89's verse completes the condition of the last two weeks: "then I will punish their transgression with the rod and their misdeeds with plagues."
+
+*Source: [Week 32 (Book 6): Reviewing the Second Week of Iyar - Psalms 94-96; 90:14-16; 89:33](https://www.kabbalahoftime.com/2014/05/week-32-book-5-reviewing-second-week-of.html) — 940 words*
+
+---
+
+## Day 224 · Book 7 · Week 32
+
+The mule opens, and the week sets broken bows against the kings who acknowledge Him.
+
+The breaking and the acknowledging first: "The bows of the mighty are broken" / "And those who stumbled, are girded with strength" / "All the kings of earth shall acknowledge You, G-d" / "For they have heard the sayings of Your mouth."
+
+Then the towers and the pools, with the asking for joy: "Your neck is like an ivory tower" / "Your eyes are [like] pools in Heshbon, by the gate of Bath-Rabbim" / "Your face is as the tower of Lebanon, facing towards Damascus" / "Your head upon you is like Carmel" / "Give us joy corresponding to the days You afflicted us" / "The years we have seen adversity."
+
+Then the vine of Sodom, and those who did not come: "For their vine is of the vine of Sodom" / "And of the field of Gemorrah" / "Because they came not to the aid of the Lord" / "To the aid of the Lord against the mighty" / "For who is G-d, save the Lord?" / "And who is a rock, save our G-d?"
+
+Then the braided locks, and the splendour upon the children: "And the braided locks of your head are like purple" / "The king is bound in the tresses" / "Let Your work be revealed to Your servants" / "And Your splendor be upon their children."
+
+And the end is the meat and the bread, with the bitter clusters between: "The Lord spoke to Moses, saying, I have heard the complaints of the children of Israel" / "Their grapes are grapes of rosh, and they have bitter clusters" / "Speak to them, saying, 'In the afternoon you shall eat meat'" / "'And in the morning you shall be sated with bread'" / "Satiate us in the morning with Your kindness" / "Then we shall sing and rejoice throughout our days" / "And you shall know that I am the Lord, your G-d" / "How fair and how pleasant you are, A love of delights!"
+
+*Source: [Week 32 (Book 7): The Mule Is Saying](https://www.kabbalahoftime.com/2016/05/the-mule-is-saying.html) — 258 words*
