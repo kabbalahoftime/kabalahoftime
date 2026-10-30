@@ -3338,3 +3338,121 @@ Then the fountains and the palms, with the woman who stood there praying: "Water
 And the end is the asking and the answering: "Where has your beloved gone, O fairest of women" / "Where has your beloved turned" / "I am the woman who was standing here with you, to pray to the Lord" / "His palate is sweet, and he is altogether desirable" / "This is my beloved, and this is my friend" / "He will call to Me, You are my Father, My G-d, and the Rock of my salvation" / "Awesome in praise, worker of wonders" / "That we may seek him with you."
 
 *Source: [Week 26 (Book 7): The Lamb Is Saying](https://www.kabbalahoftime.com/2016/04/the-lamb-is-saying-songs-for-week-26.html) — 302 words*
+
+---
+
+## Day 183 · Book 1 · Week 27
+
+The cow is saying, "Rejoice to the Lord over our strength, trumpet to the Lord of Jacob!" (Psalms 81:2) The large pure domestic animal is the cow, and the week stands closer still to Passover.
+
+The Jewish people are called both Israel and Jacob, and Jacob is the name used when we are in the more fragile, humble state. Feeling weak, we have to lean harder on Hashem as the source of our strength. This is also the week of the Rebbe Rashab's yahrzeit, on the 2nd of Nissan — and his leadership fell in a tumultuous time, with the people in a particularly fragile state, facing the harsh anti-religious oppression of the Bolsheviks in Russia.
+
+The cow carries the spiritual exile and impurity of Egypt, in the golden calf. It also carries the purification of the Parah Adumah, the Red Heifer, which had to be entirely red, pure and whole, tamim. Its ashes purified the highest form of impurity, contact with the dead, and every Jew who found himself impure had to go through that in order to bring the Passover offering this month — which is why we read Parashat Parah in the weeks before the holiday. The Rebbe Rashab is a tremendous example of purity himself: he established the Tomchei Tmimim yeshiva system, whose students were known as tmimim, the pure and wholesome ones, and his last ma'amar was about the final destruction of Amalek and the husks of impurity, the kelipah.
+
+Twenty-seven is kaf and zayin, which spell zach, pure. Preparing for Passover, we have to purify ourselves in body and in spirit, returning to G-d and waiting eagerly for His redemption.
+
+Pirkei Avot gives Rabbi Akiva, who first says how to keep that purity: jesting and frivolity accustom a person to promiscuity, and tradition is a safety fence to Torah, tithing a safety fence to wealth, vows a safety fence for abstinence, and a safety fence for wisdom is silence. Then the loves. Beloved is man, for he was created in the image of G-d, and it is a sign of still greater love that he was told so. Beloved are Israel, for they are called children of G-d, and it is a greater love that they were told so. Beloved are Israel, for they were given a precious article, and greater still that they were told so. All is foreseen, and freedom of choice is granted. And then the open shop: everything is placed in pledge, and a net is spread over all the living; the store is open, the storekeeper extends credit, the account-book lies open, the hand writes, and all who wish to borrow may come and borrow; the collection-officers make their rounds every day and exact payment from a man, with his knowledge and without it; their case is well founded, the judgment is a judgment of truth, and ultimately all is prepared for the feast. In Nissan too, everything is prepared for the feast.
+
+Rabbi Akiva elsewhere says how praiseworthy the Jewish people are, whose purification comes directly from our Father in Heaven. And nobody suits this month better: he is one of the greatest examples of complete humility and self-sacrifice. He began to study Torah at the age of 40, sitting silently and humbly beside small children — and became one of the greatest Torah scholars of all time. His name shares a root with Jacob; both come from eikev, heel, where Israel holds the same letters as Li Rosh, mine is the head. The head is the highest part of the body and the heel the lowest.
+
+The combination is yesod shebenetzach, foundation within determination and victory, which is perhaps the most prominent feature of Jewish education through the long exile. The lesson from the cow is that in the work of our tikkun — the very reason we came into the world — G-d is the source of our strength. The cow sings about Jacob, who worked all his life against the obstacles set in front of him, and only after much perseverance became Israel. Each of us changes and advances too, even without noticing, and He is beside us through it.
+
+*Source: [Week 27 (From the Book): To Purify Ourselves in order to Change](https://www.kabbalahoftime.com/2014/04/week-27-from-book-to-purify-ourselves.html) — 1199 words*
+
+---
+
+## Day 184 · Book 2 · Week 27
+
+The second week of Nissan. Haazinu names what delays the end: "Were it not that the enemy's wrath was heaped up, lest their adversaries distort; lest they claim, 'Our hand was triumphant! The Lord did none of this!'" (Deuteronomy 32:27) Read as the destruction of Amalek, the reason it has taken so long is haughtiness — an inflated ego that distorts reality. Something of that was seen after the Six-Day War, when the miraculous victory led to uncalled-for exuberance and distortion, and from there to the debacle of the Yom Kippur War.
+
+The Haftorah says it from the other side: "With a pure one, You show Yourself pure; But with a perverse one, You deal crookedly." (II Samuel 22:27) In the days before Passover we try our utmost to purify ourselves, above all of ego.
+
+So the quality is he who knows his place, Hamakir Et Mekomoh, which may be the best description of humility there is. Being humble is not thinking oneself meaningless; it is knowing one's place — one's responsibility and task in life. And Makom, place, is one of the names of G-d, so Hamakir et Mekomoh can also mean he who knows his G-d. That is the message of Passover. Pharaoh, the ultimate overgrown ego, refused at first to release the people because he said he did not know G-d. Moshe, the most humble of men, knew Him better than any other mortal.
+
+The prophet is Eliyahu, who was humble and still did not hesitate to speak against the King of Israel and to rebuke all of Israel for hesitating to serve G-d alone. He knew his place: asked, "Why are you here, Eliyahu?", he answered, "I have acted with great zeal for Hashem, G-d of Legions." He is also one of the best examples of one who knows his G-d — every Shabbat we read his description and exaltation of G-d's attributes, Patach Eliyahu — and he has a major part in the Passover Seder.
+
+The levitical city is Libnah, also a city of refuge, from Lavan, white. It may point to the purification before Pessach, and to Libun, one of the koshering processes, in which metal is heated until it is white hot. Lavan is also one of the main enemies of the Jewish people: the Seder's recounting begins "Arami Oved Avi," an Aramean tried to destroy my father, which is Lavan, who tried to destroy Jacob.
+
+*Source: [Week 27 (Book 2): Eliyahu and Knowing One's Place](https://www.kabbalahoftime.com/2014/04/week-27-book-2-knowing-ones-place.html) — 561 words*
+
+---
+
+## Day 185 · Book 3 · Week 27
+
+This week holds the yahrzeit of Rabbi Shalom DovBer of Lubavitch, the Rebbe Rashab, and the Torah portion goes fully into Parashat HaMan — the training of a people to have faith and not complain. "They journeyed from Elim, and the entire community of the children of Israel came to the desert of Sin, which is between Elim and Sinai, on the fifteenth day of the second month after their departure from the land of Egypt. The entire community of the children of Israel complained against Moses and against Aaron in the desert." The phrase "the entire community" comes twice, and against the complaining it says that the lack of emunah in that generation was widespread and would take serious work. The commentaries note that it was at this place that their food supplies ran out, and that was the source of the complaint.
+
+The Haftorah's verse is the exact opposite of worrying about supplies: "in Taanach by the waters of Megiddo; they took no gain of money." The Canaanite kings took no money to come and attack. If our enemies will disregard their finances like that, how much more should we, who know where our sustenance comes from.
+
+Daf Kaf Zayin of Sotah takes up a woman of ill repute, some cases of women who do not drink, and the punishment of the male adulterer, and ends with laws taught when Rabbi Elazar ben Azariah became the Nassi, and with how the Song of the Sea was sung between Moshe and the Children of Israel. Both of those belong to Judah and to this month: the Nassi had to be of the tribe of Judah, as an extension of the Davidic dynasty, and Rabbi Elazar's appointment is one of the crucial focus points of the Passover Hagadah. In these days we also read the Nassi for each day, connecting to the head of each tribe. And the Song of the Sea is the Exodus itself.
+
+The generation is Aminadav, son of Ram, father of Nachshon and of Elisheva, Aharon's wife; Miriam was married to his uncle, Calev. There is a well-known Midrash that it was Nachshon's action which split the Sea of Reeds. Aminadav may be the main link between the line of Judah and the family of Moses, and so between the redemption from Egypt and the Messianic one. His name means offering of my people, and Nedavah is a voluntary offering, as the gift of inauguration was. The Rebbe Rashab was a Nasi too, one who offered himself with great Mesirat Nefesh on behalf of his people.
+
+The journey is from Chashmonah to Moseroth, the place of Aaron's passing. Aaron was the Nassi of the tribe of Levi, and we read of his lighting of the Menorah as part of the inauguration; he is the fifth Shepherd, as the Rebbe Rashab was the Fifth Rebbe of Lubavitch. Rabbi Jacobson explains that Moseroth comes from musar, advice and chastisement about conduct — and cleaning for Passover is also a cleaning of ego, which takes the ability to accept criticism. Moseroth is near Mesirat Nefesh, self-sacrifice, and near Masoret, tradition, and much of Passover is the keeping of family custom. The personal journey moves on from rededication and leadership to self-sacrifice and emunah, clearing out the ego before the holiday.
+
+*Source: [Week 27 (Book 3): Amminadab, Emunah & Self-Sacrifice](https://www.kabbalahoftime.com/2014/04/week-27-book-3-amminadab-emunah-self.html) — 787 words*
+
+---
+
+## Day 186 · Book 4 · Week 27
+
+Channah's verse this week is the whole of her answer: "For this child did I pray, and the Lord granted me my request, which I asked of Him." The Talmud teaches that Eli the Kohen Gadol was willing to punish Shmuel and to pray that G-d give Channah a child even better than him. She would not have it: this was her child, the one she had prayed for — and by the next verse he is no longer hers but Hashem's.
+
+That is Nissan and the redemption from Egypt exactly. The Jews of that time were far from perfect, and they were the children of Abraham, Isaac and Jacob, whom He had promised to bring out; deeper than that, they were His children, and He redeemed them whatever their condition. Later, after the golden calf, He offers Moshe to destroy the people and build a nation out of him, and Moshe answers that if He did such a thing, "erase me from Your Book."
+
+The Pirkei Avot quality is that he becomes modest. One side of modesty is not asking Hashem for personal greatness. Channah did not want a greater child than Shmuel; she was happy with her portion. Proverbs 27 opens on the same thing: "Do not boast for tomorrow, for you do not know what the day will bear. May a stranger praise you and not your mouth, an alien and not your lips."
+
+Besides the Rebbe Rashab on the 2nd of Nissan, the week holds Rabbi Yochanan Twersky, the first Rebbe of Rachmastivka, on the 4th, and Rabbi Avraham Yehoshua Heschel, the Ohev Yisrael, Rebbe of Apt, on the 5th. The Rebbe Rashab was known for the love and care he gave his only son, Rabbi Yosef Yitzchak, the Rebbe Rayatz, above all in his education; he said that it is an absolute duty for every person to spend half an hour every day thinking about the education of his children, and to do everything in his power, and beyond his power, to inspire them to follow the path along which they are being guided.
+
+Rabbi Yochanan Twersky was known for great humility. His father, Rav Mordechai Twersky, the Maggid of Chernobyl, said his son had the soul of Rabbi Yochanan Ben Zakkai; he was the last of eight brothers, each of whom became a rebbe. One story tells it best. When the Maggid of Chernobyl was niftar, his sons gathered to divide his spiritual inheritance — one took his kind heart, another his sharp mind, and so on. Reb Yochanan wanted his father's gornisht, his nothingness, his deep humility. But his brother, Harav Moshe of Koristchov, took the gornisht, so Reb Yochanan was left with gor gornisht, absolutely nothing, and he was pleased.
+
+Rabbi Avraham Yehoshua Heschel was one of the close disciples of Rebbe Elimelech of Lizhensk, and was called the Ohev Yisrael, Lover of Israel, for his great love of his fellow Jew. A very similar inheritance story is told of his teacher: before he died, Rebbe Elimelech bequeathed the sight of his eyes to the Chozeh of Lublin, the spirit of his heart to the Kozhnitzer Maggid, the soul of his mind to Rebbe Menachem Mendel of Riminov, and the power of speech to Rebbe Avraham Yehoshua Heshel of Apt. Also this week: Rabbi Yaakov Yosef, son of Rabbi David Twersky, the Skverer Rebbe, on the 2nd of Nissan; Rabbi Tzvi Elimelech Shapira of Bluzhov, son of Rabbi David of Dinov, the Tzvi LaTzadik, and Rabbi Moshe son of Shlomo Rokeach, the Kiev-Zlotchover Rebbe, both on the 5th; and Rabbi Mordechai of Neshchiz, disciple of R. Yechiel Michel of Zlotchov, on the 8th.
+
+*Source: [Week 27 (Book 4): He Becomes Modest](https://www.kabbalahoftime.com/2014/04/week-27-book-4a-he-becomes-modest.html) — 839 words*
+
+---
+
+## Day 187 · Book 5 · Week 27
+
+The Song puts him in the garden, grazing. "My beloved has gone down to his garden, to the spice beds, to graze in the gardens and to gather roses." Then the line that holds both sides: "I am my beloved's, and my beloved is mine, who grazes among the roses." And then the praise: "You are fair, my beloved, as Tirzah, comely as Jerusalem, awesome as the bannered legions." Hashem as Shepherd, which is what these weeks of Nissan are about — a faithful flock and its Shepherd — and the month is Aries, the ram.
+
+Of the seventy souls that descended to Egypt, the twenty-seventh is Iob, whose name recalls Job without the aleph. Job is tied closely to the events before the redemption: the Midrash teaches that he was one of Pharaoh's three top advisors when the decision was made to throw the Jewish boys into the Nile. And Job is a standing symbol of the need for faith and humility.
+
+Daf Caf Zayim of Shvuot takes up oaths about a mitzvah, and two oaths made over the same loaf of bread — which is the house being prepared for Passover.
+
+Jeremiah's twenty-seventh chapter has behemot, domesticated animals, and chayot, wild ones, and several Passover phrases: an outstretched arm, and G-d's servant — a term usually kept for Moses — given here to Nebuchadnezzar. "I made the earth, the man and the beast that are upon the face of the earth, with My great strength and with My outstretched arm, and I gave it to him that pleased Me. And now, I have given these lands into the hand of Nebuchadnezzar the king of Babylon, My servant, and even the beasts of the field I have given to him to serve him." The chapter also carries the yoke of Babylonian oppression and the rest of what that exile did. In Nissan we live through the exiles again, and the redemption from each of them.
+
+*Source: [Week 27 (Book 5): Faith in the Shepherd](https://www.kabbalahoftime.com/2014/04/week-27-book-4b-faith-in-shepherd.html) — 442 words*
+
+---
+
+## Day 188 · Book 6 · Week 27
+
+The second week of Nissan in psalms: the seventy-ninth, eightieth and eighty-first, with three verses of Psalm 77 and one of Psalm 89.
+
+Psalm 79 is Asaph thanking G-d for sparing the people and turning His wrath on the wood and stones of the Temple, and weeping bitterly all the same: the place where the High Priest alone could enter, and only on Yom Kippur, is now so desolate that foxes stroll through it. "O G-d, nations have entered Your inheritance, they defiled Your Holy Sanctuary; they turned Jerusalem into heaps of rubble." The unburied: "They spilled their blood like water around Jerusalem, and there is no one to bury [them]." The asking: "Do not recall our former sins; let Your mercies come swiftly towards us, for we have fallen very low." And the prisoners: "Let the groan of the prisoner come before You; liberate those condemned to death, as befits the greatness of Your strength." It ends with what the flock can still do: "And we, Your people, the flock of Your pasture, will thank You forever."
+
+Psalm 80 asks Him to come near as He did long ago. "Listen, O Shepherd of Israel, Who leads Joseph like sheep. Appear, You Who is enthroned upon the cherubim." Its refrain comes three times: "Return us, O G-d; cause Your countenance to shine, that we may be saved." Then the vine, which is the whole middle of it: "You brought a vine out of Egypt; You drove out nations and planted it. You cleared space before it; it took root and filled the land. Mountains were covered by its shade, and its branches became mighty cedars." And then the breach: "Why did You breach its fences, so that every passerby plucked its fruit? The boars of the forest ravage it, and the creepers of the field feed upon it." And the asking to look: "O G-d of Hosts, please return! Look down from heaven and see, and be mindful of this vine."
+
+Psalm 81 was chanted in the Holy Temple on Rosh Hashanah, a day of many miracles for Israel, and it opens with this week's song: "Sing joyously to G-d, our strength; sound the shofar to the G-d of Jacob. Raise your voice in song, sound the drum, the pleasant harp, and the lyre. Blow the shofar on the New Month, on the designated day of our Holy Day." Then Egypt: "He ordained it as a precept for Joseph when he went forth over the land of Egypt; I heard a language which I did not know. I have taken his shoulder from the burden; his hands were removed from the pot." Then the answer out of hiding: "In distress you called and I delivered you; [you called] in secret, and I answered you with thunderous wonders; I tested you at the waters of Merivah, Selah." Then the opening of the mouth: "I am the Lord your G-d who brought you up from the land of Egypt; open wide your mouth, [state all your desires,] and I shall grant them." And then the grief of it: "But My people did not heed My voice; Israel did not want [to listen to] Me." "If only My people would listen to Me, if Israel would only walk in My ways, then I would quickly subdue their enemies." And the last line, which is what was on offer: "I would feed him with the finest of wheat, and sate you with honey from the rock."
+
+Psalm 77's verses are the thunder and the path through the sea, ending "You led Your people like a flock, by the hand of Moses and Aaron." And Psalm 89's verse is the rank: "I will also make him [My] firstborn, supreme over the kings of the earth."
+
+*Source: [Week 27 (Book 6): Reviewing the Second week of Nissan - Psalms 79-81; 77:19-21; 89:28](https://www.kabbalahoftime.com/2014/04/week-26-book-5-reviewing-second-week-of.html) — 1090 words*
+
+---
+
+## Day 189 · Book 7 · Week 27
+
+The cow opens, and the week braids the garden into the desert.
+
+The grazing and the journey first: "My beloved has gone down to his garden, to the spice beds" / "To graze in the gardens and to gather roses" / "And the entire community of the children of Israel" / "Came to the desert of Scin, which is between Elim and Sinai" / "You led Your people like a flock" / "By the hand of Moses and Aaron."
+
+Then the date, and the complaining: "On the fifteenth day of the second month" / "After their departure from the land of Egypt" / "The entire community of the children of Israel" / "Complained against Moses and against Aaron in the desert" / "The sound of Your thunder was in the rolling wind" / "Lightning lit up the world; the earth trembled and quaked."
+
+Then measure for measure, and the enemy's boast: "With a pure one, You show Yourself pure" / "But with a perverse one, You deal crookedly" / "Were it not that the enemy's wrath was heaped up" / "Lest their adversaries distort" / "Your way was through the sea" / "Your path through the mighty waters" / "And Your footsteps were not known."
+
+Then the kings who took nothing: "In Taanach by the waters of Megiddo" / "They journeyed from Elim" / "They took no gain of money" / "Lest they claim, 'Our hand was triumphant! The Lord did none of this!'"
+
+And the end is the trumpet and the child prayed for: "Rejoice to the Lord of our strength" / "Trumpet to the Lord of Jacob!" / "I will also make him [My] firstborn" / "Supreme over the kings of the earth" / "For this child did I pray" / "I am my beloved's" / "And my beloved is mine" / "Who grazes among the roses" / "You are fair, my beloved, as Tirzah" / "Comely as Jerusalem, awesome as the bannered legions" / "And the Lord granted me my request" / "Which I asked of Him."
+
+*Source: [Week 27 (Book 7): The Cow Is Saying](https://www.kabbalahoftime.com/2016/04/the-cow-is-saying-songs-for-week-27.html) — 265 words*
