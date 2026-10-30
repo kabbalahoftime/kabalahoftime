@@ -3808,3 +3808,117 @@ Then the meat and the bread, with the count of our years: "But [of] what [signif
 And the end is the glory and the roar, and the calling back: "And [in the] morning, you shall see the glory of the Lord" / "When He hears your complaints against the Lord" / "G-d shall roar from upon high and cause His voice to sound" / "From His holy place, His shout echoes profoundly over His dwelling place" / "Return, return, O Shulammite" / "Return, return, and let us gaze upon you" / "What will you see for the Shulammite, as in the dance of the two camps?" / "I did not know; my soul made me chariots for a princely people" / "For by You I run upon a troop" / "By my G-d I scale a wall."
 
 *Source: [Week 30 (Book 7): The Camel is Saying](https://www.kabbalahoftime.com/2016/04/the-camel-is-saying-songs-for-week-30.html) — 332 words*
+
+---
+
+## Day 211 · Book 1 · Week 31
+
+The horse is saying, "Behold, as the eyes of the servants to the hand of their master, as the eyes of the maidservant to the hand of her mistress, so are our eyes to G-d our Lord until He will favor us." (Psalms 123:2) This is the week of Rosh Chodesh Iyar, of the day of remembrance for the fallen soldiers of Israel and the victims of terror, and of the fifth of Iyar, the miraculous victory of the War of Independence.
+
+From beginning to end of this month we are counting the omer. Iyar is also a month of healing, and its letters alef, yud and reish are an acronym of "Ani Hashem Rofecha," I am G-d your Healer. The month belongs to the tribe of Issachar, whom the Torah calls a strong-boned donkey — close to a horse — taking on the yoke of Torah study. Issachar and Zevulun had their partnership, Zevulun in commerce and supporting Issachar's full dedication to Torah; that dedication is Rabbi Shimon Bar Yochai, whose yahrzeit falls this month, and of whom it is said Toratoh Emunatoh, that his Torah study was his profession.
+
+The horse belongs to the fifth of Iyar directly, because in ancient times the horse is military might. The Song of the Sea has G-d throwing horse and rider into the sea — which is the song of the ox, later this month. And for all that power, the horse sings of looking constantly to Hashem for mercy. In the War of Independence the people fought mightily and heroically, like horses, and the victory was only possible because it was miraculous, a product of His great mercy. A horse follows its rider loyally; like the horse, the Jewish people waited a very long time and suffered greatly until He showed favour and made it possible to live in our Holy Land again.
+
+The song is also how a person who is ill or injured prays for healing, which belongs to the day of remembrance and to the fifth of Iyar both. The miracle of the War of Independence came shortly after the Holocaust, when the people as a whole was like a sick person in urgent need.
+
+Thirty-one has the same numerals as thirteen, the thirteen attributes of mercy. It is also the number of kings the Tanach lists as defeated at the end of Joshua's conquest of the Land. And it is lamed and alef, which spell E-l, one of the names of G-d — a name of infinite power and also of infinite mercy. The word el appears many times in the horse's song.
+
+Pirkei Avot gives Ben Azzai: run to pursue a minor mitzvah, and flee from a transgression, for a mitzvah brings another mitzvah and a transgression brings another transgression; the reward of a mitzvah is a mitzvah, and the reward of a transgression is a transgression. As one mitzvah draws the next, healing of body and spirit also comes slowly, a step at a time, like the Counting of the Omer. He also says: do not scorn any man, and do not discount any thing, for there is no man who has not his hour, and no thing that has not its place. Which is Yom Ha'Atzma'ut as much as the horse is — the Jewish people and the Land of Israel finally had their hour.
+
+The combination is tiferet shebehod. With patience and balance, step by step, we serve Him and climb. The horse's example is to understand that for all our strength we are nothing more, and nothing less, than servants of G-d — to be proud of that humble connection, and to know that the journey may be slow and the arrival is certain.
+
+*Source: [Week 31 (From the Book): To Be Proud of Our Humble Connection with G-d](https://www.kabbalahoftime.com/2014/04/week-31-from-book-to-be-proud-of-our.html) — 991 words*
+
+---
+
+## Day 212 · Book 2 · Week 31
+
+Rosh Chodesh Iyar, and Yom Ha'Atzma'ut. Iyar belongs to Issachar, known for complete dedication to the study of Torah. Haazinu: "For their rock is not like our [Mighty] Rock. Nevertheless, our enemies sit in judgment." (Deuteronomy 32:31) The best description of that Tzur is probably King David's in this week's Haftorah verse: "[He is] the G-d Whose way is perfect; The word of the Lord is tried; He is a shield unto all them that trust (take refuge) in him." (II Samuel 22:31) Both verses describe His protection through Israel's difficult struggle for independence, against overwhelming odds, while the rest of the world simply sat in judgment — a hypocritical judgment that continues to this day.
+
+The quality is beloved, Ahuv. Rabbi Meir uses the same word of those who study Torah for its own sake, Lishmah, as Issachar did. The victory kept on Yom Ha'Atzma'ut is itself a sign of how beloved we are, and that feeling came shortly after the Holocaust, when so many felt abandoned.
+
+The prophet is Yoel, whose prophecy runs the same way: destruction and then the modern miracles. He describes the plague of locusts that devastated the Land of Israel, and after the Jews repent they are promised much grain, wine and oil.
+
+The levitical city is Kishion, from kasheh, difficult, tough — which is Issachar, the strong-boned donkey, and which is how the Jews fought and won the War of Independence.
+
+*Source: [Week 31 (Book 2): Yoel and the Rock of Israel](https://www.kabbalahoftime.com/2014/04/week-31-book-2-rock-of-israel.html) — 367 words*
+
+---
+
+## Day 213 · Book 3 · Week 31
+
+Rosh Chodesh Iyar, Yom HaZikaron and Yom Ha'Atzmaut. Iyar is healing — Ani Hashem Rofecha — and the month of Issachar.
+
+Beshalach: "And Moses said to Aaron, Say to the entire community of the children of Israel, Draw near before the Lord, for He has heard your complaints. And it came to pass when Aaron spoke to the entire community of the children of Israel, that they turned toward the desert, and behold! the glory of the Lord appeared in the cloud." Which is the horse's song: our eyes are a servant's eyes on his Master until He shows mercy. He saw everything we went through, heard the complaints, and brought us back to our Land.
+
+The Haftorah has the horse in it too: "by reason of the prancings, the prancings of their mighty ones. 'Curse you Meroz,' said the messenger of the Lord, 'curse you bitterly (you) inhabitants thereof.'" Meroz and its people failed to help in the war.
+
+Daf Lamed Alef of Sotah takes up serving G-d out of love and out of fear, and how many witnesses are needed to testify to her seclusion. Love and fear is the horse again. The War of Independence certainly had aspects of serving out of fear that had not been there before; it had an Ein Brera about it, no other way out, which belongs to the destruction of the Holocaust. The daf also names Iyov, Job, who suffered so much and served out of love, and whose fortunes were turned back in the end, his family, health and wealth restored.
+
+The generation is Obed, son of Boaz and father of Yishai. Obed means worker, and is near eved, servant — the horse's song again. He could also point to the Jewish army and the pioneering, hardworking generation of Israel's independence.
+
+The journey is from Jotbathah to Abronah, which is a river crossing, a ford. Arguably the most important crossing in history is the Jordan, to conquer the Land of Israel; another is the Jabok, when Yaakov faced Eisav. The very word Hebrew comes from crossing — Abraham was known as ha'Ivri. So a crossing is also establishing, or re-establishing, our identity in our own eyes and in other people's. The personal journey moves from the peace that comes with complete faith and with living in our homeland to re-establishing that identity in connection with the land, in the pioneers' phrase: livnot v'lehibanot, to build and to be built.
+
+*Source: [Week 31 (Book 3): Obed and Working Hard](https://www.kabbalahoftime.com/2014/05/week-31-book-3-obed-and-working-hard.html) — 624 words*
+
+---
+
+## Day 214 · Book 4 · Week 31
+
+Channah's third verse warns off pride: "Do not increasingly speak haughtily; Let not arrogance come out of your mouth, For the Lord is a God of thoughts, And to Him are deeds counted." Which is the horse again, looking to Hashem like a servant for all its strength. Israel's victory in the War of Independence came of His great mercy and is no reason for haughtiness.
+
+The Pirkei Avot quality is that the Torah raises him above all creations. Even while it says that one who studies for its own sake is raised above everything, the word used is creations, Ma'assim, rather than things or people — which keeps the proportion right, since even the highest being is a minute creation beside the Creator. This is the very last of the qualities, the culmination of all the others.
+
+Proverbs 31 begins with a king raised above everyone and chastised all the same by the one who gave him life: "The words of Lemuel the king; a prophecy that his mother chastised him; What, my son, and what, the son of my womb, and what, the son of my vows?" It is the last chapter of the book, and it closes with Eshet Chayil, an ode to the Torah itself.
+
+The week holds many yahrzeits, among them two prominent students of the Maggid of Mezritch. Rabbi Menachem Mendel of Vitebsk, on the 1st of Iyar, was an elder disciple of the Magid and one of the earliest Chasidic rebbes; he led the first modern aliyah to Israel, in 1777, where he and three hundred Chasidim and others settled in Tsefat, and after a few years they moved to Tiberias, where he is buried in the students of the Baal Shem Tov section of the Old Cemetery. His works include Pri HaAretz and Likutei Amarim. Rabbi Shmuel Shmelke HaLevi Horowitz of Nikolsburg, on the 2nd of Iyar, was a major disciple of the Maggid along with his younger brother Rabbi Pinchas, who became the Rabbi of Frankfort; many of the leading rebbes in Poland and Galitzia were originally his disciples, and among his books are Divrei Shmuel and Nazir HaShem. Also this week: Rabbi Chaim Vital, principal student of the Arizal, on the 30th of Nissan; Rabbi Yaakov Beirav, Chief Rabbi of Tzfat, and Rabbi Avraham of Slonim-Baranovich, the Beis Avrohom, on the 1st of Iyar; Rabbi Shmuel Eliyahu, son of Rabbi Shaul Yedidya Elazer Taub, the Modzhitzer Rebbe, on the 4th; Rabbi Chaim Meir Yechiel Shapira of Mogelnitz on the 5th; and Rabbi Yaakov Chaim Perlow, the Stoliner Rebbe, and Rabbi Yosef Meir Weiss on the 6th.
+
+*Source: [Week 31 (Book 4): Accepting Greatness with Humility](https://www.kabbalahoftime.com/2014/05/week-31-book-4a-accepting-greatness.html) — 608 words*
+
+---
+
+## Day 215 · Book 5 · Week 31
+
+This week the Song's verses are all praise paid by the other nations, and a wish to cleave to the Jews. "How fair are your feet in sandals, O daughter of nobles! The curves of your thighs are like jewels, the handiwork of a craftsman." "Your navel is [like] a round basin, where no mixed wine is lacking; your belly is [like] a stack of wheat, fenced in with roses." "Your two breasts are like two fawns, the twins of a gazelle." That reads as rare and out of place, and it is exactly what happened after Yom Ha'Atzma'ut: for the first time in a long while, the Jews were widely admired, from 1948 onward. Rashi notes that where the Jewish people praise G-d from the top down, beginning at the head, the nations' praises of the Jewish people run from the bottom up, beginning at the feet — and the first praise after the War of Independence was for deeds and military might, which belong to the feet. The twins of a gazelle may be Iyar too: Yissachar and Zebulun, whose partnership was like twins.
+
+Of the seventy souls that descended to Egypt, the thirty-first is Elon, which means oak tree — majestic, large, strong, enduring. Elon Moreh is another name for Shechem, the first place Avraham visited, and Yaakov, and Yehoshua on entering the Land; and in modern times the first settlement established in Judea and Samaria after the Six Day War was Elon Moreh. Shechem is the gateway to the Land of Israel.
+
+Daf Lamed Alef of Shvuot keeps on with the oath of a witness in court and with staying clear of falsehood, and takes up who is excluded from liability for a court oath, and mistakes made by accident or on purpose, Shogeg uMezid. The return to the Land is often discussed in Jewish law through the three oaths made during exile, one of them not to return by force. There is much debate over whether returning violated it, and if so whether, in the circumstances, anyone could be liable for it. Almost all opinions hold that it was not a violation.
+
+Jeremiah's thirty-first chapter says it openly — a return, to build and be built. "Yet again will I rebuild you, then you shall be built, O virgin of Israel; yet again shall you be adorned with your tabrets, and you shall go out with the dances of those who make merry. Yet again shall you plant vineyards on the mountains of Samaria." The call: "Rise! Let us go up to Zion, to the Lord, our God." The gathering, and who is in it: "Behold I bring them from the north country and gather them from the uttermost ends of the earth, the blind and the lame amongst them, the woman with child and she who travails with child all together; a great company shall they return there. With weeping will they come, and with supplications will I lead them, along brooks of water will I make them go, on a straight road upon which they will not stumble." The shepherd: "He Who scattered Israel will gather them together and watch them as a shepherd his flock." The turning: "I will turn their mourning into joy and will comfort them and make them rejoice from their sorrow." And then Rachel, and the answer to her: "A voice is heard on high, lamentation, bitter weeping, Rachel weeping for her children, she refuses to be comforted for her children for they are not. So says the Lord: Refrain your voice from weeping and your eyes from tears, for there is reward for your work, says the Lord, and they shall come back from the land of the enemy. And there is hope for your future, says the Lord, and the children shall return to their own border."
+
+*Source: [Week 31 (Book 5): Strong and Praiseworthy](https://www.kabbalahoftime.com/2014/05/week-31-book-4b-strong-and-praiseworthy.html) — 1098 words*
+
+---
+
+## Day 216 · Book 6 · Week 31
+
+The first week of Iyar in psalms: the ninety-first, ninety-second and ninety-third, with three verses of Psalm 90 and one of Psalm 89.
+
+Psalm 91 moves people to seek shelter under the wings of the Divine Presence. It also speaks of the four seasons of the year and their respective ministering powers, telling those who safeguard their souls to avoid them. "You who dwells in the shelter of the Most High, who abides in the shadow of the Omnipotent: I say of the Lord who is my refuge and my stronghold, my G-d in whom I trust, that He will save you from the ensnaring trap, from the destructive pestilence. He will cover you with His pinions and you will find refuge under His wings; His truth is a shield and an armor." Then the four times of danger: "You will not fear the terror of the night, nor the arrow that flies by day; the pestilence that prowls in the darkness, nor the destruction that ravages at noon." Then the arithmetic of it: "A thousand may fall at your [left] side, and ten thousand at your right, but it shall not reach you." Then the angels: "For He will instruct His angels in your behalf, to guard you in all your ways. They will carry you in their hands, lest you injure your foot upon a rock. You will tread upon the lion and the viper." And the promise at the end: "When he calls on Me, I will answer him; I am with him in distress. I will deliver him and honor him. I will satiate him with long life, and show him My deliverance."
+
+Psalm 92 the Levites sang every Shabbat in the Holy Temple; it speaks of the World to Come and comforts those crushed by suffering. "It is good to praise the Lord, and to sing to Your Name, O Most High; to proclaim Your kindness in the morning, and Your faithfulness in the nights." The thing a fool cannot see: "When the wicked thrive like grass, and all evildoers flourish-it is in order that they may be destroyed forever." And the tree that answers the grass: "The righteous will flourish like a palm tree, grow tall like a cedar in Lebanon. Planted in the House of the Lord, they shall blossom in the courtyards of our G-d. They shall be fruitful even in old age; they shall be full of sap and freshness- to declare that the Lord is just; He is my Strength, and there is no injustice in Him."
+
+Psalm 93 is the Messianic era, when He will don grandeur and leave no room for a man to boast before Him as Nebuchadnezzar, Pharaoh and Sennacherib did. "The Lord is King; He has garbed Himself with grandeur; the Lord has robed Himself, He has girded Himself with strength; He has also established the world firmly that it shall not falter. Your throne stands firm from of old; You have existed forever." Then the rivers: "The rivers have raised, O Lord, the rivers have raised their voice; the rivers raise their raging waves. More than the sound of many waters, than the mighty breakers of the sea, is the Lord mighty on High."
+
+Psalm 90's verses ask for the measure of a day: "Who can know the intensity of Your anger? Your wrath is commensurate with one's fear of You. Teach us, then, to reckon our days, that we may acquire a wise heart. Relent, O Lord; how long [will Your anger last]? Have compassion upon Your servants." And Psalm 89's verse continues last week's condition: "if they profane My statutes and do not observe My commandments."
+
+*Source: [Week 31 (Book 6): Reviewing the First Week of Iyar - Psalms 91-93; 90:11-13; 89:32](https://www.kabbalahoftime.com/2014/05/week-31-book-5-reviewing-first-week-of.html) — 812 words*
+
+---
+
+## Day 217 · Book 7 · Week 31
+
+The horse opens, and the week sets the prancing of the mighty against the eyes of a servant.
+
+The statutes and the prancings first: "If they profane My statutes and do not observe My commandments" / "By reason of the prancings" / "The prancings of their mighty ones" / "Do not increasingly speak haughtily" / "Let not arrogance come out of your mouth" / "[He is] the G-d Whose way is perfect" / "The word of the Lord is tried."
+
+Then the shield, with the asking how long: "Your wrath is commensurate with one's fear of You" / "He is a shield unto all them that trust in Him" / "Relent, O Lord; how long? Have compassion upon Your servants" / "Who can know the intensity of Your anger?"
+
+Then the servant's eyes, and the reckoning of days: "Behold, as the eyes of the servants to the hand of their master" / "So are our eyes to G-d our Lord until He will favor us" / "And Moses said to Aaron, Say to the entire community of the children of Israel" / "Teach us, then, to reckon our days" / "That we may acquire a wise heart."
+
+Then the glory in the cloud, and the praises from the feet up: "And it came to pass when Aaron spoke to the entire community of the children of Israel" / "That they turned toward the desert, and behold! The glory of the Lord appeared in the cloud" / "How fair are your feet in sandals, O daughter of nobles!" / "As the eyes of the maidservant to the hand of her mistress" / "The curves of your thighs are like jewels, the handiwork of a craftsman" / "Your navel is a round basin, where no mixed wine is lacking" / "Your belly is [like] a stack of wheat, fenced in with roses" / "Your two breasts are like two fawns, the twins of a gazelle."
+
+And the end is the curse on Meroz and the two rocks: "'Curse you Meroz,' said the messenger of the Lord" / "'Curse you bitterly inhabitants thereof'" / "For the Lord is a G-d of thoughts, and to Him are deeds counted" / "For their rock is not like our Rock" / "Nevertheless, our enemies sit in judgment" / "Draw near before the Lord, for He has heard your complaints."
+
+*Source: [Week 31 (Book 7): The Horse is Saying](https://www.kabbalahoftime.com/2016/05/the-horse-is-saying-songs-for-week-31.html) — 306 words*
