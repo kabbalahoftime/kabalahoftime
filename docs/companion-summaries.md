@@ -1582,3 +1582,133 @@ Then the taunt, and the going out into the city: "My tears were my bread day and
 It ends on the compass and the mountains singing — "the north and the south — You created them; Tabor and Hermon sing of Your Name" — and then the sun spreading, the shadows fleeing, and a maskil of the sons of Korah.
 
 *Source: [Week 12 (Book 7): The Raven Is Saying](https://www.kabbalahoftime.com/2021/02/week-12-book-7-raven-is-saying.html) — 262 words*
+
+---
+
+## Day 85 · Book 1 · Week 13
+
+Week thirteen brings in Chanukah, and the starling sings about being seen: "Their seed shall be known among the nations, and their offspring among the peoples; all who see them shall acknowledge them, that they are the seed that G-d has blessed." (Isaiah 61:9)
+
+Which is this week's own mitzvah — *pirsumei nissa*, publicising the miracle, so that everyone can see what was given to this people in the days of the Greeks.
+
+The song's attention to seed points at the kohanim, whose line, unlike nearly everything else in Judaism, runs by the physical male seed; there are even tests for a kohen gene, to tell with near certainty whether a man descends from Aaron. The Maccabees were kohanim, and what they did made the seed of Aaron known among the nations.
+
+And Chanukah comes from *chinuch*. The starling also says that each of us was a seed, planted and tended and blessed by parents and teachers and above all by G-d — and the same or better has to be done for our children and students. Darkness and assimilation are beaten by education in the end.
+
+Pirkei Avot gives Akavia the son of Mahalalel, who is blunt: "Reflect upon three things and you will not come to the hands of transgression. Know from where you came, where you are going, and before whom you are destined to give a judgment and accounting. From where you came — from a putrid drop; where you are going — to a place of dust, maggots and worms; and before whom you are destined to give a judgment and accounting — before the supreme King of Kings, the Holy One, blessed be He."
+
+That is seed again, put much less kindly — and it is pointed straight at what this week defeated. Hellenistic culture valued man, and the human body in particular, above everything. Akavia says the body comes from a putrid drop and ends being eaten by worms, and is then judged by G-d Himself. Keep your eye on G-d, not on man.
+
+Which also shows how much mercy there is in it. Low where we came from and low where we are going, and still in a direct relationship with the King of kings, the way children are with a father. There is a spark of Him in us, and when He punishes it is for our good. Chassidism teaches that we have no idea how precious the body is to Him — precious like the seed in the starling's song.
+
+The pairing is Yesod shebeGevurah, and it could hardly fit better: yesod is foundation, and this week a people held to its foundation, with courage, against a policy of forced assimilation.
+
+*Source: [Week 13 (from the Book): To Publicize Miracles with Pride and Humility](https://www.kabbalahoftime.com/2013/11/week-13-to-publicize-miracles-with.html) — 899 words*
+
+---
+
+## Day 86 · Book 2 · Week 13
+
+"He made them ride upon the high places of the earth, that they would eat the produce of the field. He let them suck honey from a rock, and oil from the mighty part of the crag." (Deuteronomy 32:13) High places, something impossible, and oil — the whole story is in one verse. The word for high places, *bamah*, also means altar. And the oil can be read as the *pintele yid*, the innermost part of a Jew that stays pure whatever happens and shows itself when things get hard.
+
+The haftorah: "From the brightness before Him flamed forth coals of fire." (II Samuel 22:13) Brightness and fire, which is the Menorah — and coals again, which can be burning inside and need one more step before the fire shows.
+
+The quality is sharp discussion with students, *pilpul*. One of the things this people got out of the Greek exile was sharpness and logic. The Greek king's name, *Talmai*, has the same numerical value as *Talmud*, and the Talmud grew greatly out of that encounter — it even carries Greek words.
+
+The prophets are David and Avigail. David is monarchy, and the Maccabees made a dynasty; he is also the proof that a person can be entirely holy and entirely involved in the world at once — Torah and prayer alongside running a government and fighting wars. Chanukah has both halves too: the military victory, and the victory of Jewish wisdom over Greek wisdom, which are David and Solomon respectively. And Avigail kept blood from being spilt by going to David and talking to him about her husband, as the Hasmoneans kept further blood from being spilt by making an alliance with Rome. Both of them had the sharpness this week is about. David's mind was such that the halachah always followed his opinion, and it was Avigail's argument that stopped him.
+
+The Levitical city is 'Almon, which means hidden — from *He'elem*, and from *olam*. Revealing what is hidden is the point of Kislev. Through this miracle you can see that the whole *olam* is a kind of screen and that His power is the real thing. And on Chanukah even the most hidden Jews come out. There are limits on what may be used for Shabbat candles and no such limits for these; every Jew is lit up by it.
+
+*Source: [Week 13 (Book 2): David and Avigail, and the Quality of "Sharp Discussion"](https://www.kabbalahoftime.com/2013/11/week-13-book-2-david-and-avigail-and.html) — 631 words*
+
+---
+
+## Day 87 · Book 3 · Week 13
+
+"Too awesome for praises, performing wonders! You inclined Your right hand; the earth swallowed them up." Praise for wonders, which is the week's whole work. The haftorah asks for it to be told: "those that sit in judgment, and those that walk on the path, tell of it" — and says the persecution has stopped "between the places of drawing water," which stands for the study of Torah the Greeks were attacking.
+
+Sotah's thirteenth daf is the burial of Jacob and of Joseph, and opens with the room filling with light when Moshe was born. On Jacob's burial, the Talmud notices that the argument with Eisav was not won by reasoning: Eisav was making a baseless claim and demanding proof of this and that, and Chushim son of Dan could not stand to see his grandfather's burial held up, so he went ahead and killed him. Which is almost exactly how the revolt began — Matisyahu, told to slaughter a pig on a pagan altar, refused, and then killed the Jew and the Syrian official who had demanded it.
+
+The generation is Shelah, Arpachshad's son — and Shelah is one of the names of Mashiach. It is also the name of Judah's son, whom he did not give to Tamar.
+
+Rabbi Yosef Jacobson draws the two together. Rabbi Isaac Luryah wrote that the judgment begun on Rosh Hashanah and Yom Kippur is completed some three months later, in the days of Chanukah. Three months after Judah and Tamar, Judah is told what Tamar has supposedly done and the verdict goes against her. And at that moment she sends word: "I am pregnant by the man who is the owner of these articles. Identify, I beg you, these objects. Who is the owner of this seal, cord and staff?"
+
+Read as the Jew speaking to G-d, the timing is exact. At the moment the prosecuting angels have nearly proved the whole experiment a failure, the Jew sends word that the report is false — if he has strayed here and there it is a surface thing, and underneath he belongs to no one else. And he points at the objects: the cord, which is the wick soaked in oil each night, commemorating a sealed cruse found after the Temple was plundered; the seal on that cruse; and the staff, which he has had to pick up over and over for two thousand years, leaving house and security to find somewhere he could still live as a Jew.
+
+Then Judah answers: "She is right; it is from me that she conceived. She did it because I did not give her to my son Shelah." And Shelah is the name of Mashiach. Read that way, it is G-d saying the fault is His: how can I expect a Jew never to sin, never to try his luck with a world that looks so appealing, when I held back the light of Mashiach so long? "It is I who is guilty of treason," not the Jew. Tamar is an innocent palm tree with one heart to her Father in heaven.
+
+The journey is a hard place: "They journeyed from the Sinai desert and camped in Kivroth hataavah" — the graves of craving. Having received the Torah, the work is burying one's desires, through *itkafia* and *itapcha*. The Baal Shem Tov reads the graves of craving as utter self-nullification in cleaving to G-d, where cravings die and are buried with no chance of coming back. Chanukah is, unlike the other festivals, mainly a spiritual one: there is no commandment to make a meal. It is a holiday for praising Him.
+
+*Source: [Week 13 (Book 3): Shelah and Chanukah](https://www.kabbalahoftime.com/2013/11/week-13-book-3-shelah-and-chanukah.html) — 1217 words*
+
+---
+
+## Day 88 · Book 4 · Week 13
+
+"Now Hannah, she spoke in her heart; only her lips moved, but her voice could not be heard; therefore, Eli thought she had been drunken." This is the clearest demonstration that prayer is a spiritual act before it is anything else. No sound has to leave a person for Him to hear the cry. And this festival is the victory of the spiritual over the material.
+
+The week's quality is that the Torah makes him fit to be *yashar*, correct — literally straight: truthful, straightforward. Yashar is tied particularly to keeping the negative commandments, which draw down revelations beyond the created order. In the story Eli wrongly takes Hannah for drunk, when she was praying out of a broken heart — and praying drunk would break a negative commandment. Her conduct is the conduct of a yashar, past reproach, and what it drew down was a child.
+
+Proverbs' thirteenth chapter carries on setting the righteous against the wicked, and speaks directly about light: "The light of the righteous will rejoice, but the candle of the wicked will ebb away. Only with wickedness does one cause quarrels, but there is wisdom with those who take counsel."
+
+Two yahrzeits. On the twenty-fourth of Kislev, Rabbi Chaim Chizkiya Medini, known for the Sdei Chemed, an encyclopaedic work of law in eighteen volumes. He was born in Jerusalem and lived in Turkey and Crimea before returning; he was considered for Rishon L'Zion, and moved to Hebron to give himself to his studies instead, eventually becoming its Chief Rabbi. Jews and Arabs alike held him a holy man.
+
+And on the twenty-seventh, Rabbi Chaim Tirar of Chernowitz, known for the Be'er Mayim Chayim, his commentary on the Torah, and for Sidduroh Shel Shabat on the holiness of the Sabbath. He was one of the most important disciples of the Maggid of Mezritch, and studied under Rabbi Yechiel Michel of Zlotchov.
+
+*Source: [Week 13 (Book 4): Being Straightforward](https://www.kabbalahoftime.com/2013/11/week-13-book-4a-being-straightforward.html) — 563 words*
+
+---
+
+## Day 89 · Book 5 · Week 13
+
+"The watchmen who patrol the city found me: 'Have you seen him whom my soul loves?' I had just passed them by, when I found him whom my soul loves; I held him and would not let him go, until I brought him into my mother's house and into the chamber of her who had conceived me. I adjure you, O daughters of Jerusalem, by the gazelles or by the hinds of the field, that you neither awaken nor arouse the love while it is desirous."
+
+After all the searching and not finding, and after asking the watchmen — Rashi reads them as Moshe and Aharon, and perhaps they are the leaders and prophets and priests of any generation — He is found. That is Chanukah: He shows Himself, in an impossible victory and in oil that burned eight days.
+
+And once found, not let go until He is brought into the mother's house, into the chamber of the one who conceived — which is the rededication of the Temple, the home of the Shechinah.
+
+The third verse is the same one that closed week eight. Standing here instead, after the finding, the hard tone toward the nations reads as a victory shout rather than a refusal.
+
+Of the seventy souls the thirteenth is Levi, and the fit needs no explaining: every kohen and every zealous Maccabee came from him.
+
+Shevuot's thirteenth daf asks whether Yom Kippur atones for everything, repentance or not, and finds three exceptions: one who denies the basis of the Torah, one who ridicules it, and one who annuls circumcision. Denying the Torah's origin and undoing circumcision were two of the sharpest points of conflict with Hellenist culture. The daf also treats the atonement of the kohanim separately from everyone else's.
+
+Jeremiah's thirteenth chapter is the girdle he is told to wear, which rots and becomes useless — and then: "just as the girdle clings to a man's loins, so have I caused the entire house of Israel and the entire house of Judah to cling to Me." The chapter returns to skirts uncovered and pulled over the face, and to darkness: "Give the Lord your God honor before it becomes dark, and before your feet stumble on the dark mountains." Then: "Will a Cushite change his skin, or a leopard his spots?" The leopard, in Jewish tradition, is particularly Greece — for its beauty, its speed, and above all its boldness. The word for its spots also means stains, *kesem*, of the kind tied to impurity. And leopards are known to mate outside their species. The chapter's last line asks when Jerusalem will ever be pure. In the days of the Maccabees, it was.
+
+*Source: [Week 13 (Book 5): Finding G-d in Exile](https://www.kabbalahoftime.com/2013/11/week-13-4b-finding-g-d-in-exile.html) — 1003 words*
+
+---
+
+## Day 90 · Book 6 · Week 13
+
+The fifth week of Kislev in psalms: the thirty-seventh, thirty-eighth and thirty-ninth, with three verses of Psalm 42 and one of Psalm 89.
+
+Psalm 37 is a long argument against envying people who are doing well out of doing wrong. "Do not compete with the wicked; do not envy doers of injustice. For like grass they will be swiftly cut down." Its instructions are the kind you can act on: "Trust in the Lord and do good… Delight in the Lord, and He will grant you the desires of your heart. Cast your needs upon the Lord… Let go of anger, abandon rage." And it keeps returning to how short the apparent advantage is: "For soon the wicked one will not be; you will gaze at his place and he will be gone… I saw a powerful wicked man, well-rooted like a vibrant, native tree. Yet he vanished, behold he was gone; I searched for him, but he could not be found." The line in it people remember is an old man's testimony: "I have been a youth, I have also aged; yet I have not seen the righteous forsaken, nor his offspring begging bread."
+
+Psalm 38 is illness and shame together. "There is no soundness in my flesh because of Your rage, no peace in my bones because of my sin. For my iniquities have flooded over my head; like a heavy load, they are too heavy for me. My wounds are rotted; they reek because of my foolishness." And the loneliness in it is precise: "My friends and companions stand aloof from my affliction; my intimates stand afar." His answer to the people laying traps is silence: "But I am like a deaf man, I do not hear; like a mute that does not open his mouth… Because for You, O Lord, I wait."
+
+Psalm 39 is about holding the tongue and what holding it costs. "I said that I would guard my ways from sinning with my tongue; I would guard my mouth with a muzzle… I became mute with stillness, I was silent even from the good, though my pain was crippling. My heart grew hot within me, a fire blazed in my utterance." Then it asks the size of a life: "O Lord, let me know my end and what is the measure of my days… Behold, like handbreadths You set my days; my lifetime is as naught before You." And: "he amasses riches and knows not who will reap them."
+
+Psalm 42's verses are a memory of walking up: "These do I recall, and pour out my soul from within me: how I traveled in covered wagons; I would walk leisurely with them up to the House of G-d, amid the sound of rejoicing and thanksgiving, the celebrating multitude." Then the question asked twice in that psalm: "Why are you downcast, my soul, and why do you wail within me? Hope to G-d, for I will yet thank Him."
+
+*Source: [Week 13 (Book 6): Reviewing the Fifth Week of Kislev - Psalms 37-39; 42:5-7; 89:14](https://www.kabbalahoftime.com/2013/11/week-13-book-5-reviewing-fifth-week-of.html) — 1435 words*
+
+---
+
+## Day 91 · Book 7 · Week 13
+
+The starling opens, and the gathering is riding high places while a soul is downcast.
+
+"He made them ride upon the high places of the earth" / "that they would eat the produce of the field" comes first, with the starling's seed threaded through it: "Their seed shall be known among the nations" / "and their offspring among the peoples" / "He let them suck honey from a rock" / "and oil from the mighty part of the crag" / "all who see them shall acknowledge them."
+
+Then the telling, and the wonders: "those that sit in judgment" / "and those that walk on the path, tell of it" / "too awesome for praises" / "performing wonders!" / "instead of the noise of adversaries" / "between the places of drawing water" / "You inclined Your right hand" / "the earth swallowed them up."
+
+And then the searching and the mistaken accusation together. "The watchmen who patrol the city found me: have you seen him whom my soul loves?" / "only her lips moved, but her voice could not be heard" / "therefore, Eli thought she had been drunk" / "now Hannah, she spoke in her heart" — and immediately the psalm's own question: "why are you downcast, my soul, and why do you wail within me? Hope to G-d."
+
+The coals of fire come next, and the finding, and the pouring out of the soul: "from the brightness before Him flamed forth coals of fire" / "I had just passed them by, when I found him whom my soul loves" / "these do I recall, and pour out my soul from within me."
+
+The last stretch braids the holding-on with the walking up to the House. "Held him and would not let him go, until I brought him into my mother's house" / "and into the chamber of her who had conceived me" / "I would walk leisurely with them up to the House of G-d" / "amid the sound of rejoicing and thanksgiving, the celebrating multitude."
+
+It ends low and then level: "My G-d! My soul is downcast upon me" / "because I remember You from the land of Jordan" / "and Hermon's peaks, from Mount Mitzar" — and the last line is the love that must not be woken before it wants to be.
+
+*Source: [Week 13 (Book 7): The Starling is Singing](https://www.kabbalahoftime.com/2021/02/week-13-book-7-starling-is-singing.html) — 344 words*
