@@ -2348,3 +2348,121 @@ The captivating follows — "You have captivated my heart, my sister, my bride" 
 It ends with the fairness, Lebanon, and the face: "You are all fair, my beloved, and there is no blemish in you" / "with me from Lebanon, my bride, with me from Lebanon shall you come" / "and the woman went on her way and ate" / "and her face was not sad anymore."
 
 *Source: [Week 18 (Book 7): The Grasshopper is Saying](https://www.kabbalahoftime.com/2021/02/week-18-book-7-grasshopper-is-saying.html) — 243 words*
+
+---
+
+## Day 127 · Book 1 · Week 19
+
+The locust is saying, "O G-d, You are my Lord; I will exalt You, I will praise Your Name; for You have done wondrous things; Your counsels of old are faithfulness and truth." (Isaiah 25:1) It blesses G-d for His wonders and for the true and loyal advice He gives from afar.
+
+The nineteenth week holds Yud Shevat, the yahrzeit of the Sixth Rebbe of Lubavitch, Rabbi Yosef Yitzchak Schneerson, and the date on which his successor, Rebbe Menachem Mendel Schneerson, became rebbe exactly one year later. Shevat is the transmission and development of the Oral Torah; the first to pass it on was Moses, who transmitted it to Joshua. Yud Shevat is the transmission of the Torah of Chassidut from the Sixth Rebbe to the Seventh.
+
+The song holds the word etzot and the word emunah. Etza means advice, but etz means tree, and emunah means faith — and the month is both. In the middle of winter the trees are cold and leafless, and on Tu B'Shvat the Jewish people celebrate them anyway, trusting that they will blossom and yield fruit.
+
+The song also reaches for three names at once. Hashem is the Name for how He is above nature and time, connected to Rachamim, mercy. Elohai, my Elohim, is G-d as He is expressed in nature, connected to gevurah, strength or discipline. Atah, You, is the way of calling out that shows closeness, and it also points to His essence far above any given name. So the locust sings of connecting to G-d above nature yet still within it, and of feeling distant from Him while being close to Him at the same time.
+
+Rav Moshe Wolfsohn reads the Akeidah along the same lines. Ness means a test, but also to raise. The main test, the tenth and final one, was not the willingness to sacrifice his son — Abraham's first test was throwing himself into a furnace before G-d had even revealed Himself to him — but that Hashem seemed so far away: "Vaya'ar Et HaMakom Merachok," he saw the place from a distance, and Hamakom is itself one of Hashem's names. After years of closeness Abraham was stripped of his levels of greatness and had to serve like the simplest of Jews, with simple emunah, like the generation of Ikvessa d'Meshicha, the heels of Mashiach. He was rewarded, "Ekev Asher Shamatah beKoli," because you hearkened to My voice — and ekev also means heel. The verse of the week ends with the words "Merachok Emunah Amen."
+
+Bati LeGani was the last ma'amar of the Previous Rebbe and the first of his successor, and the Rebbe went deeper into it for over forty years. It tells how the Shechinah rested and was revealed in the world at the beginning of creation, then became distanced and hidden through sins beginning with the eating of the Tree of Knowledge, then returned by degrees through the acts of tzadikim until the giving of the Torah at Mount Sinai — and it draws the parallel to the final redemption.
+
+Nineteen is a number of increments. Shmoneh Esreh was increased from 18 to 19, and it is a ladder to G-d like the ladder in Jacob's dream, where the angels ascended and descended; with every blessing we climb a rung. Nineteen is also the gematria of Chavah, Eve, whom some commentaries call a loftier version of Adam.
+
+Pirkei Avot gives Rabbi Chalafta the son of Dosa of the village of Chanania, who counts the levels down: ten who sit and occupy themselves with Torah have the Divine Presence among them, and so do five, and three, and two, and even one. The combination is Hod shebeTiferet, grateful service within beauty and balance — and in the month of trees, gratitude is what makes faith easier to hold. The Kotzker Rebbe, as a child, was asked where G-d is. The expected answer was "everywhere." He said: "G-d is wherever you let Him in."
+
+*Source: [Week 19 (From the Book): To Feel that G-d is Close Even When He Seems Far Away](https://www.kabbalahoftime.com/2014/01/week-19-from-book-to-feel-that-g-d-is.html) — 1584 words*
+
+---
+
+## Day 128 · Book 2 · Week 19
+
+The second week of Shevat. Haazinu keeps to the parent and the child: "And the Lord saw this and became angry, provoked by His sons and daughters." (Deuteronomy 32:19) Read in a positive light, the anger is not His at them — He saw the prayer and was insulted by the anger directed against His sons and daughters.
+
+The Haftarah verse agrees: "They confronted me on the day of my calamity; but the Lord was a support to me." (II Samuel 22:19) The support comes from King David's emunah, which is one of the themes of Shevat, along with ta'anug, pleasure.
+
+So the quality is minimized pleasure, miut ta'anug. The idea is not to be rid of pleasure but to take it with miut, smallness and humility — to enjoy the world's pleasure in the way that lifts the world and connects it back to its Creator.
+
+The prophet is Jehu son of Hanani, who spoke out against the corruption of the kings of both Israel and Judah. In one of his few positive statements he praises Jehoshaphat, king of Judah, for exactly this quality — for having removed the idolatrous Ashera trees: "Nevertheless there are good things found in thee, in that thou hast put away the Asheroth out of the land, and hast set thy heart to seek G-d." (2 Chronicles 19:3) The trees were used for idol worship and to beautify the place where it was done; pleasing to the senses, and forbidden beside the altar. Maimonedes writes that one may not derive any pleasure or benefit from them at all.
+
+The levitical city is Abdon, from eved, servant. It brings to mind the verse in Beshalach: "Vaya'aminu BaHashem ub'Moshe Avdo," and they believed in Hashem and in Moshe His servant. Abdon was also the name of one of the Judges, whose sons and grandsons rode on seventy donkeys. All of it is the yoke of Torah taken up willingly, and in this month, the Oral Torah.
+
+*Source: [Week 19 (Book 2): Jehu and "Minimized" Pleasure (Ta'anug)](https://www.kabbalahoftime.com/2014/01/week-19-book-2-jehu-and-minimized.html) — 510 words*
+
+---
+
+## Day 129 · Book 3 · Week 19
+
+The Song of the Sea reaches the arrival: "until this nation that You have acquired crosses over. You shall bring them and plant them on the mount of Your heritage." Acquiring and inheriting are the themes of Yud Shevat, the Previous Rebbe's yahrzeit and the day the Rebbe took the leadership a year later. The verses also carry two of the elements — the plant kingdom in "and plant them," the mineral in the mountain.
+
+The Haftarah sends the high officials down into the fighting: "out of Machir came down officers, and out of Zebulun they that handle the pen of the scribe." Machir is of the tribe of Menashe. That is the message of Yud Shevat and of Bati L'Gani, studied that day, where we are told to spend all the treasures and use everything at our disposal. Chassidic texts that only a select few could reach in manuscript — by the pen of the scribe — were now printed for everyone. The Rebbe's decision to accept was itself a coming down, into the wars of Hashem.
+
+Daf Yud Tet of Sotah is her drinking the water and waving the mincha offering, with a discussion of when a woman can be forced to drink and whether the Name has already been erased. There too different elements in nature act on each other. And it runs parallel to the Chassidim urging the Rebbe to accept: he could not be forced into it.
+
+The generation is Terah, son of Nahor, father of Avraham. He moved from Ur Kasdim to Charan on his way to the Land of Canaan and never arrived. Terah means delay, and he was delayed; it also means to breathe, from re'ach, smell. His father's name, Nahor, means sneezing or snorting. Breathing and smelling belong to pleasure and to nature, which are Shevat.
+
+The journey is from Rissah to Kehelathah. Kehelathah means gathering, and it is the place of Korach's rebellion — where on Yud Shevat the emphasis is the exact opposite: a gathering to accept a new leader who was wholly devoted to the one before him. The personal journey is to be broken in order to receive the Torah, and then to gather with others and commit to the leader.
+
+*Source: [Week 19 (Book 3): Terah and Nature](https://www.kabbalahoftime.com/2014/01/week-19-book-3-terah-and-nature.html) — 535 words*
+
+---
+
+## Day 130 · Book 4 · Week 19
+
+Channah's nineteenth verse is the answer arriving quietly: "And they arose early in the morning, and prostrated themselves before the Lord: and they returned and came to their house, to Ramah, and Elkanah knew Hannah, his wife, and the Lord remembered her."
+
+Shevat is pleasure, Ta'anug, and faith, Emunah, and the verse carries both. It speaks of marital relations, which the Torah often calls knowledge, Da'at — and Da'at is the connecting point between the male aspect of intellect, Chochmah, wisdom, and the female one, Binah, understanding. It is what lets Chochmah impregnate Binah. And it says that Hashem remembered Channah, that her Emunah was rewarded.
+
+The quality of Pirkei Avot is that people enjoy understanding, Binah, from those who study Torah for its own sake. Channah in the verse is Binah. The whole Book of Proverbs is about enjoying understanding from those who have it, and chapter 19 keeps to it: "He who acquires sense loves his soul; he who guards understanding will eventually find good," and "Beat a scorner, and a simple man will gain cunning; reprove a man of understanding, and he will understand knowledge." Rashi reads that second one as a reference to the plagues in Egypt — which is the locust of this week in Book 1.
+
+Besides the Previous Rebbe, the week holds the yahrzeits of two great tzadikim of Yemeni descent, both on the 10th of Shevat: Rabbi Shalom Shabazi, the leader of his generation, known as Mori, a tremendous scholar and the greatest of Yemenite poets, and Rabbi Shalom Sharabi, the Rashash, the father of all contemporary sephardic kabbalists.
+
+Two rabbis from Chassidic dynasties have yahrzeits this week as well. Rabbi David Biederman of Lelov, on the 7th of Shevat, was one of the main disciples of the Seer of Lublin and the founder of the Lelover dynasty; he was known for his extraordinary ability to see every Jew in a positive light, and he taught Rebbe Yitzhak of Vorka, known for the same tremendous Ahavat Yisrael.
+
+*Source: [Week 19 (Book 4): Wisdom, Understanding and Knowledge](https://www.kabbalahoftime.com/2014/01/week-19-book-4a-wisdom-understanding.html) — 491 words*
+
+---
+
+## Day 131 · Book 5 · Week 19
+
+The Song's verses this week are all fragrance and sweetness: "How fair is your love, my sister, [my] bride; how much better is your love than wine, and the fragrance of your oils than all spices!" Then: "Your lips drip flowing honey, O bride; honey and milk are under your tongue, and the fragrance of your garments is like the fragrance of Lebanon." And then the closing: "A locked up garden is my sister, [my] bride; a locked up spring, a sealed fountain." Nature again, and Ta'anug, pleasure.
+
+Of the seventy souls that descended to Egypt, the nineteenth is Shelah. Judah's first two sons are skipped because they died childless through their sins, and those brothers stand for pleasure engaged in wrongly. Shelah was meant to marry Tamar; he was still young, and Yehudah later looked for ways to keep her from him.
+
+Daf Yud Tet of Shvuot is mostly the one who forgot both that he was impure and that he was in the Temple, and then the two main kinds of oath, both about food. The forgetting belongs to the Oral Law, which is this month's focus. The food belongs to Ta'anug.
+
+Jeremiah's nineteenth chapter is the same pair gone wrong — eating and pleasure, completely corrupted. "Because they forsook Me and they estranged this place and burnt incense therein to other gods, which they had not known." "And they built the high places of Baal to burn their children with fire as burnt offerings to Baal, which I did not command, neither did I speak nor did it enter My mind." And the end of it: "And I will feed them the flesh of their sons and the flesh of their daughters, and each one will eat the flesh of his friend, in the siege and the straits."
+
+*Source: [Week 19 (Book 5): Spiritual Pleasure](https://www.kabbalahoftime.com/2014/01/week-19-book-4b-pleasure-in-nature.html) — 423 words*
+
+---
+
+## Day 132 · Book 6 · Week 19
+
+The second week of Shevat in psalms: the fifty-fifth, fifty-sixth and fifty-seventh, with three verses of Psalm 59 and one of Psalm 89.
+
+Psalm 55 is from David escaping Jerusalem before the slanderers, Doeg and Achitofel, who had declared him deserving of death. He had counted Achitofel a friend and given him the utmost honour, and Achitofel breached their covenant. The wound is that it came from inside: "For it is not the enemy who taunts me-that I could bear; nor my foe who raises himself against me, that I could hide from him. But it is you, a man of my equal, my guide and my intimate. Together we took sweet counsel; we walked with the throng to the house of G-d." Before that is the wish to be gone: "If only I had wings like the dove! I would fly off and find rest." And the smooth words: "Smoother than butter are the words of his mouth, but war is in his heart; his words are softer than oil, yet they are curses." It ends where it can: "Cast your burden upon the Lord, and He will sustain you; He will never let the righteous man falter."
+
+Psalm 56 is from mortal danger at the palace of Achish, brother of Goliath, when the Philistines seized him in Gath, and in that danger David accepts vows upon himself. "On the day I am afraid, I trust in You." And twice over: "in G-d I trust, I do not fear-what can [man of] flesh do to me?" Then the flask: "You have counted my wanderings; place my tears in Your flask-are they not in Your record?" And both hands of it: "When G-d deals strictly, I praise His word; when the Lord deals mercifully, I praise His word."
+
+Psalm 57 is from hiding in the cave from Saul. Like Jacob facing Esau, David prayed that he neither be killed nor be forced to kill. "Favor me, O G-d, favor me, for in You my soul took refuge, and in the shadow of Your wings I will take refuge until the disaster passes." The lions: "My soul is in the midst of lions, I lie among fiery men; their teeth are spears and arrows, their tongue a sharp sword." The pit they dug: "they dug a pit before me, [but] they themselves fell into it." And then the waking: "My heart is steadfast, O G-d, my heart is steadfast; I will sing and chant praise. Awake, my soul! Awake, O harp and lyre! I shall awaken the dawn."
+
+Psalm 59's verses ask for less than destruction, so that nothing is forgotten: "Do not kill them, lest my nation forget; drive them about with Your might and impoverish them, O our Shield, my Master." And Psalm 89's verse is the choosing: "I have granted aid to [David] the mighty one; I have exalted the one chosen from among the people."
+
+*Source: [Week 19 (Book 6): Reviewing the Second Week of Shevat - Psalms 55-57; 59:12-14; 89:20](https://www.kabbalahoftime.com/2014/01/week-19-book-5-reviewing-second-week-of.html) — 1185 words*
+
+---
+
+## Day 133 · Book 7 · Week 19
+
+The locust opens, and what it opens is a braid of the week's six books into one song.
+
+The anger first, and the asking that it stop short: "At the sight of their accursed state and deterioration, [people] will recount" / "Consume them in wrath, consume them and they will be no more" / "And the Lord saw this and became angry" / "Provoked by His sons and daughters" / "Do not kill them, lest my nation forget" / "Drive them about with Your might and impoverish them."
+
+Then the crossing and the planting: "Until this nation that You have acquired crosses over" / "You shall bring them and plant them on the mount of Your heritage" / "And they will know that G-d rules in Jacob, to the ends of the earth, Selah."
+
+Then the morning in Ramah, and the support: "And they arose early in the morning, and prostrated themselves before the Lord" / "And they returned and came to their house, to Ramah" / "I will praise Your Name; for You have done wondrous things" / "They confronted me on the day of my calamity" / "But the Lord was a support to me."
+
+Then the scribes and the remembering: "Out of Machir came down officers" / "And out of Zebulun they that handle the pen of the scribe" / "And Elkanah knew Hannah, his wife, and the Lord remembered her" / "Your counsels of old are faithfulness and truth."
+
+And the end is the garden: "How fair is your love, my sister, [my] bride" / "How much better is your love than wine, and the fragrance of your oils than all spices!" / "Your lips drip flowing honey, O bride" / "Honey and milk are under your tongue" / "O G-d, You are my Lord; I will exalt You" / "And the fragrance of your garments is like the fragrance of Lebanon" / "A locked up garden is my sister, [my] bride" / "A locked up spring, a sealed fountain."
+
+*Source: [Week 19: The Locust is Saying (Book 7)](https://www.kabbalahoftime.com/2021/01/week-19-locust-is-saying-book-7.html) — 317 words*
