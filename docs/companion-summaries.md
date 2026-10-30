@@ -552,3 +552,129 @@ The portions for Peninnah and her children are set beside the concealed sin, and
 It closes on being forgiven and adorned at once: "Praiseworthy is he whose transgression is forgiven" / "that I may be satiated with the joy of Your presence" / "We will make you rows of gold with studs of silver."
 
 *Source: [Week 4 (Book 7): The Eagle is Saying](https://www.kabbalahoftime.com/2021/02/week-4-book-7-eagle-is-saying.html) — 244 words*
+
+---
+
+## Day 29 · Book 1 · Week 5
+
+Week five is Rosh Chodesh Cheshvan, and the crane asks for instruments: "Give thanks to G-d with the lyre; make music for Him with the ten-stringed harp." (Psalms 33:2) Not the voice alone. With a lyre, the music made for Him is more beautiful than it was.
+
+That is the month. Cheshvan belongs to the tribe of Menashe, Joseph's firstborn, who helped his father run the whole Egyptian empire. Tishrei was for gathering holiness; Cheshvan is for carrying it into ordinary work and spending it there, using every power and tool and technology we have.
+
+Pirkei Avot says the same thing in Rabban Gamliel the son of Rabbi Yehudah HaNassi: "Beautiful is the study of Torah with the way of the world, for the toil of them both causes sin to be forgotten. Ultimately, all Torah study that is not accompanied with work is destined to cease and to cause sin." He goes on about serving the community for the sake of Heaven, and about governments, who "befriend a person only for their own needs… they do not stand by a person at the time of his distress."
+
+Then Hillel, on living among people: do not separate yourself from the community; do not trust yourself until the day you die; do not judge your fellow until you have stood in his place. And do not say "when I free myself of my concerns, I will study" — because you may never be free. In a place where there are no men, strive to be a man.
+
+Hillel also saw a skull floating on the water and said to it: because you drowned others, you were drowned; and those who drowned you will themselves be drowned. A fitting thing at the opening of Cheshvan, which is the month of the Flood — and those waters stand for the material concerns that threaten to drown a person.
+
+The pairing is Hod shebeChesed, which belongs to Aaron and to the service of the Kohanim. Cheshvan is the month in which the third Temple is to be inaugurated, and that is where the Kohanim will lift the material world through what they offer.
+
+The crane's own lesson is music. It is one of the oldest ways of fighting sadness: David played the harp to lift Saul out of his torment, and the Levites sang while the Kohanim worked.
+
+*Source: [Week 5 (from the Book): To Use All Tools Available in order to Elevate the World](https://www.kabbalahoftime.com/2013/10/week-5-to-use-all-tools-available-in.html) — 1016 words*
+
+---
+
+## Day 30 · Book 2 · Week 5
+
+"Destruction is not His; it is His children's defect you crooked and twisted generation." (Deuteronomy 32:5) Cheshvan is the month of the Mabul, the Flood in the time of Noah, and this is a verse about a generation that brought its own ruin.
+
+The haftorah is nearer still to that water: "For the pains of death have encompassed me; streams of scoundrels would affright me." (II Samuel 22:5) *Nachalei Bli'al*, the streams of scoundrels, read more literally as rivers of G-dlessness.
+
+The quality is perception of the heart, *Binat Ha'Lev*. Noah's great mistake was not using his heart to see that G-d wanted him to pray for the rest of mankind. Prayer is called the service of the heart — and *teivah*, the word for ark, also means a word, which is prayer. It is prayer that keeps a person above the water. The Torah also calls the makers of the Temple's vessels *Chochmei Lev*, wise of heart.
+
+The prophet is Aharon, whom perception of the heart describes better than anything else. He is the mediator, the one who could make peace between people and between a husband and a wife. And he was the first Kohen Gadol, serving in the Mishkan, the Temple that travelled.
+
+The Levitical city is Taanach, whose origin is unclear but looks to come from *lehi'taanot*, to fast. There is a custom among the pious to fast on the first Monday, Thursday and Monday of Cheshvan — *BaHaB*. Not fasting for its own sake: to mark the line between the holidays of Tishrei and what comes after, and to get some hold over the physical. Which is the month's whole work, conquering the world with what Tishrei gave.
+
+And the quality asks one more thing: let the Torah you learn reach your heart, not only your mind. As one of my Talmud teachers would ask — do you feel the question? If you do not feel the question you cannot really value the answer. And if the Torah is not in your heart you will not reach anyone else's.
+
+*Source: [Week 5 (Book 2): The Flood, Aharon, and Perception of the Heart](https://www.kabbalahoftime.com/2013/10/week-5-book-2-flood-aharon-and.html) — 579 words*
+
+---
+
+## Day 31 · Book 3 · Week 5
+
+"And the elite of his officers sank in the Red Sea. The depths covered them; they descended into the depths like a stone." The haftorah adds, "when You marched out of the field of Edom, the earth trembled, the heavens also dripped." Officers going under, depths closing over, heavens dripping — the Flood is in all of it, when the whole world went under its own depths.
+
+The field matters too. Jacob was the wholesome man who sat in tents; his brother Eisav was the man of the field, out in the affairs of the world. Ephraim, who belongs to Tishrei, studied with Jacob as a child. Menashe's place is the field — ground that once belonged to Eisav alone.
+
+Sotah's fifth daf takes up haughtiness and adultery, which are the two things that brought the Flood on. The Torah names sexual corruption and violent robbery — *chamas* — as its causes: "And the land was corrupted and the land was filled with violent robbery." Once the boundaries of personal conduct go, everything becomes permitted. And Noah himself lacked a kind of humility, praying for his own household and not for anyone else; Avraham and Moshe did not do that.
+
+The generation is Mahalalel, who looks like a kosher version of Mehijael, of the line of Cain. Mahalalel holds *halel*, praise; Mehijael is spelled with a *chet* where Mahalalel has a *hay*. A hay is a chet with an opening in it. Chet belongs to sin; hay belongs to malchut and to teshuvah, and the opening is the door the returning person comes back through — teshuvah read as *tashuv hey*, restoring the hay.
+
+The journey leaves the water: "They journeyed from Penei hahiroth and crossed in the midst of the sea to the desert. They walked for three days in the desert of Etham and camped in Marah." Note the change from *pi*, a mouth, to *pnei*, a face. Three days without water, and then bitter water — Marah, which is why Cheshvan is called Mar Cheshvan, bitter, having no holidays yet. The last stage of growing up is leaving the sheltered world of water for the dry one. Moses had to push them out of the sea into the desert; they did not want to go. And at Marah, when the water could not be drunk, he threw in a tree and it became drinkable. Bitterness comes to everyone, and there are two things to do with it: be overwhelmed, or find the sweetness buried in it, which is also where healing comes from.
+
+Mahalalel's lesson for prayer is in his name: *Hallel veHoda'ah*, praise and thanks. Prayer is serving with the whole heart — getting excited, singing, dancing if you can. Read off a page by routine, there is a good chance nothing is being done at all. You have to know before Whom you are standing, and be glad about it.
+
+*Source: [Week 5 (Book 3): the Field and the Flood](https://www.kabbalahoftime.com/2013/10/week-5-book-3-mahalalel-draft.html) — 1325 words*
+
+---
+
+## Day 32 · Book 4 · Week 5
+
+"But unto Hannah he gave a double portion; for he loved Hannah, but the Lord had shut up her womb." Loved, and childless. It is Rachel's story again — Jacob loved her and she had no children — and one of the few dates Cheshvan does mark is Rachel's yahrzeit, on the eleventh.
+
+The week's quality is *Ohev et HaMakom*, loves G-d, which reads literally as loving the Place. G-d is called the Place because He is not in the world; the world is in Him, and there is nowhere without Him. Which is the point just now: stepping out of the Garden of Eden that is Tishrei into the danger of Cheshvan and the world's business, He is still there. We are still inside Him.
+
+Proverbs' fifth chapter is about love and about what can go wrong once you are out in the world: "For the lips of a strange woman drip honey, and her palate is smoother than oil. But her end is as bitter as wormwood, as sharp as a two-edged sword." And then the other way: "Drink water from your own cistern and running water from your own spring… you shall always be intoxicated with her love." Rashi reads the strange woman as foreign gods and the wife of your youth, your own cistern, as the Torah. The water is right for the month of the Flood.
+
+The yahrzeits stay with Rizhin. On the twenty-ninth of Tishrei, Rav Menachem Mendel of Vizhnitz, the Rizhiner's son-in-law and the founder of Vizhnitz; and often this week the Rizhiner himself, on the third of Cheshvan.
+
+A story of him and the Tzemach Tzaddik at a meal: the Rizhiner put down his fork halfway through, and explained that before he was born he had made an agreement with his soul to eat only enough to get by and not a morsel more. The Tzemach Tzaddik said that he had just understood something that had bothered him all his life — why on Friday night we welcome the angels and then so soon send them off. Because angels cannot taste food, and we do not want to eat in front of them. Then he put down his own fork, which said who he thought he was sitting with.
+
+Also usually this week, Rabbi Yisrael Spira, the Bluzhover Rebbe, who survived the camps and lost his wife and children there. He lit Chanukah candles in Bergen-Belsen, and was asked how he could possibly say *Sheheheyanu* — who has kept us alive and brought us to this time — while thousands were dying. He said he had asked himself the same thing, and found his answer in the crowd: that people had risked their lives to come and watch the candles lit. That G-d has Jews like that is reason enough to say it.
+
+*Source: [Week 5 (Book 4): Loving G-d and Bringing Him into the World: Ryzhin and Bluzhev](https://www.kabbalahoftime.com/2013/10/week-5-book-4a-loving-g-d-and-bringing.html) — 1062 words*
+
+---
+
+## Day 33 · Book 5 · Week 5
+
+"A bundle of myrrh is my beloved to me; between my breasts he shall lie. A cluster of henna-flowers is my beloved to me, in the vineyards of Ein-Gedi." Then His answer: "Behold, you are comely, my beloved; behold, you are comely; your eyes are like doves."
+
+The first two are ours, and they are about Him resting in our midst — which is the Temple, and the reason the world was made. Rashi ties it to being forgiven and to His dwelling in the Mishkan. And the word for henna, *kofer*, is the word for the pitch Noah was told to caulk the ark with, inside and out. The third verse is forgiveness again, but nearer the Flood: it was the dove who brought the news that there was dry land.
+
+Cheshvan is the month of the Flood and the month the third Temple is to be built, and the month for going out into the world. All three are in these verses.
+
+Of the seventy souls the fifth is Carmi. *Kerem* is a vineyard, as in Ein-Gedi above, and Carmi can be read Kerem-Yud, the vineyard of Hashem, which is the Temple. It is also the season for working your own fields and vineyards — and one of the first things Noah did was plant a vineyard.
+
+Shevuot's fifth daf is technical: deriving law from a general statement followed by a particular one, forgetting after knowing where offerings are concerned, carrying from a private domain into a public one, and the signs of tzara'as. Which is a fair picture of re-entering the world: leaving the private domain, risking forgetting what you knew, and having to behave well among the minutiae of a place that is not clean.
+
+Jeremiah's fifth chapter sends someone looking: "Stroll in the streets of Jerusalem, and see now and know, and seek in its squares, whether you will find a man, whether there is one who performs justice, who seeks faith, and I will forgive her." He wants to forgive. He is looking for one person to dwell in — someone who does justice and seeks faith, as Noah did in his generation. The rest of the chapter is the destruction coming, which is the Flood again.
+
+*Source: [Week 5 (Book 5): The Temple and the World, the Field and the Flood (again)](https://www.kabbalahoftime.com/2013/10/week-5-4b-temple-and-world-field-and.html) — 642 words*
+
+---
+
+## Day 34 · Book 6 · Week 5
+
+Rosh Chodesh Cheshvan in psalms: the thirteenth, fourteenth and fifteenth, with three verses of the Tikkun HaKlali and one of Psalm 89.
+
+Psalm 13 is marked as a prayer for the end of the long exile, for anyone in distress to say over his troubles. It is four questions in a row, all beginning the same way. "How long, O Lord, will You forget me, forever? How long will You hide Your countenance from me? How long must I seek counsel within my soul, to escape the grief in my heart all day? How long will my enemy be exalted over me?" Then the demand: "Look! Answer me, O Lord, my G-d; give light to my eyes, lest I sleep the sleep of death." And it turns, in one verse: "I have placed my trust in Your kindness, my heart will rejoice in Your deliverance."
+
+Psalm 14 is marked as speaking of the destruction of the two Temples. "The fool says in his heart, 'There is no G-d!'" Then the looking down: "The Lord looked down from heaven upon mankind, to see if there was any wise man who searches for G-d. They have all gone astray together… there is none who does good, not even one." It ends wanting the deliverance to come out of Zion.
+
+Psalm 15 is the short list of what a person has to be. "Who may abide in Your tent, O Lord? Who may dwell on Your holy Mountain? He who walks blamelessly, acts justly, and speaks truth in his heart; who has no slander on his tongue, who has done his fellowman no evil… who does not change his oath even if it is to his own detriment; who does not lend his money at interest, nor accept a bribe against the innocent." And the promise at the end: "He who does these things shall never falter."
+
+The Tikkun HaKlali's verses are confession and its relief: "For day and night Your hand was heavy upon me; my marrow became dry as the droughts of summer… My sin I made known to You, my iniquity I did not cover… and You have forgiven the iniquity of my transgression forever." Then, for this month exactly: "indeed, the flood of many waters will not reach him."
+
+*Source: [Week 5 (Book 6): Reviewing the Week of Rosh Chodesh Cheshvan - Psalms 13-15; 32:4-6; 89:6](https://www.kabbalahoftime.com/2013/10/week-5-book-5-reviewing-fourth-week-of.html) — 571 words*
+
+---
+
+## Day 35 · Book 7 · Week 5
+
+The crane opens with her instruments, and this week the gathering is water and confession laid against each other.
+
+"Give thanks to G-d with the lyre" is answered by the hand that was heavy — "For day and night Your hand was heavy upon me" — and then by the heavens extolling, and by "Behold, you are comely, my beloved."
+
+The drowning comes in from three sides at once. "For the pains of death have encompassed me" / "My marrow became dry as the droughts of summer, Selah" / "And the elite of his officers sank in the Red Sea." Myrrh follows directly: "A bundle of myrrh is my beloved to me; between my breasts he shall lie" — and then the confession, "My sin I made known to You, my iniquity I did not cover."
+
+Hannah's double portion sits between the streams of scoundrels and the crooked generation. "But unto Hannah he gave a double portion; for he loved Hannah, but Hashem had shut up her womb" / "Streams of scoundrels would affright me" / "You crooked and twisted generation."
+
+Then the depths and the promise against them: "The depths covered them" / "indeed, the flood of many waters will not reach him" / "They descended into the depths like a stone."
+
+It ends with the music returning, and the forgiveness. "Make music for Him with the ten-stringed harp" / "the earth trembled, the heavens also dripped" / "Your faithfulness, too, in the congregation of the holy ones" / "And You have forgiven the iniquity of my transgression forever" — and the last lines are henna in the vineyards, the field of Edom, and "I said, 'I will confess my transgressions to the Lord.'"
+
+*Source: [Week 5 (Book 7): The Crane is Saying](https://www.kabbalahoftime.com/2021/02/week-5-book-7-crane-is-saying.html) — 249 words*

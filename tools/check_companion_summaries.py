@@ -77,6 +77,7 @@ ALT = {
     'michael': 'michoel', 'sabbath': 'shabbat', 'isaac': 'yitzchak',
     'jacob': 'yaakov', 'moses': 'moshe', 'rebecca': 'rivkah',
     'elijah': 'eliyahu', 'samson': 'shimshon', 'solomon': 'shlomo',
+    'tikkun': 'tikun',
 }
 
 # Twelve years of Blogger has eaten a lot of spaces: "Midrashteaches",
