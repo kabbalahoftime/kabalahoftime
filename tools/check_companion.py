@@ -95,7 +95,10 @@ def _present_one(phrase, hay):
     return False
 
 UI_WORDS = (r'view|tab|button|card|pane|panel|dial|toggle|widget|menu|icon|link')
-INTERFACE = re.compile(r'\b(the app|this app|the site|the screen|on screen|'
+# The word boundaries after "app" and "site" are load-bearing. Without them
+# "the apple of the eye" contains "the app", and a psalm was reported as a
+# claim about this application.
+INTERFACE = re.compile(r'\b(the app\b|this app\b|the site\b|the screen\b|on screen\b|'
                        r'\w+ (?:' + UI_WORDS + r')\b|tap\b|tapping\b|click\b|'
                        r'scroll\b|swipe\b|long-press)', re.I)
 SENTENCE = re.compile(r'[^.!?\n]{6,400}?[.!?]')
