@@ -4932,3 +4932,115 @@ Then the sons of Eli, and the master of the household: "Now the sons of Eli were
 And the end is the princess answering herself, the oath, and the house of my mother: "The wisest of her princesses answer her" / "She too returns answers to herself" / "For I raise up My hand to heaven" / "And say, 'As I live forever'" / "Israel came to Egypt and Jacob sojourned in the land of Ham" / "For You have girded me with strength for the battle" / "You have subdued under me those that rose up against me" / "I would lead you, I would bring you to the house of my mother" / "Who instructed me; I would give you to drink."
 
 *Source: [Week 40 (Book 7): The Wolf Is Saying](https://www.kabbalahoftime.com/2016/07/the-wolf-is-saying.html) — 233 words*
+
+---
+
+## Day 281 · Book 1 · Week 41
+
+The fox is saying, "Woe to him that builds his house without justice and his chambers without lawfulness; that uses his friend's service without wages, and does not give him for his hire." (Jeremiah 22:13) This week, beginning with the fast of the 17th of Tammuz, opens the three weeks of mourning for the destruction of the Temple, the House of G-d — a destruction that came of the injustice and lawlessness of the Jews of that time.
+
+The week also holds the Chassidic holiday of the 12th and 13th of Tammuz, which marks the Sixth Lubavitcher Rebbe, Rabbi Yosef Yitzchak Schneersohn's birthday and the day he was freed from prison in Communist Russia. Among Chabad Chassidim it is called Chag HaGeulah, the Festival of Redemption.
+
+The fox is a symbol of the destruction, as the Talmud in Makkot tells. A group of rabbis gathered soon after the Temple fell and saw a fox walk into the place on the Temple Mount where the holiest part had stood. The others wept; Rabbi Akiva saw it in a positive light — which is the month of Tammuz — so much so that he laughed. He explained that the Torah makes the prophecy of Jerusalem's destruction depend on the prophecy of its redemption: now that the first has been fulfilled, the second will be fulfilled too. And explaining his laughter, he was able to truly comfort them.
+
+At Yud Beit-Yud Gimmel Tammuz the Sixth Rebbe took on the whole Soviet empire and won. Despite open defiance, refusal to obey orders, and insisting on not giving up an inch of his religiosity, he was eventually released and his death sentence commuted. Years later the Soviet Union itself, full of injustice and G-dlessness, collapsed along with the Berlin Wall — and the Seventh Rebbe, Menachem Mendel Schneerson, had predicted that fall many years earlier, when few thought it even possible.
+
+Forty-one spells em, mother. That suits the start of the three weeks, whose second half falls in Av, which means father. In this historically hard stretch it matters to remember that the difficulties He gives us are ultimately for our good, as a father and a mother sometimes have to be strict with a child. In Judaism the mother is the akeret habayit, the anchor of the house, responsible for its values and its atmosphere — and the upkeep and the moral atmosphere of the Temple, G-d's house, was mainly the responsibility of the kohanim. Much of their extremely holy service paralleled housework: the daily sacrifices, the lighting of the Menorah, the upkeep of the building were close to cooking, cleaning and lighting candles for Shabat. By the time of the Second Temple the priestly class had become enormously corrupt — even the position of High Priest was open for sale to the highest bidder — and the Temple could not stand, in great part because of that.
+
+Pirkei Avot gives Rabbi Yochanan HaSandlar: every gathering that is for the sake of Heaven will endure, and one that is not for the sake of Heaven will not. Which is the same thing: not becoming corrupt or divided out of selfish motives. The firmness of a community comes from rock-solid commitment to our principles and the desire to do His will, and the best example is the Sixth Rebbe himself, whose work kept Judaism alive through intense Communist oppression. Where we do not follow His word, the whole community suffers and our structures do not stand, as at the destruction of the Temple.
+
+The combination is yesod shebeyesod: absolute firmness in our Jewish values. The lesson from the fox is not to let ourselves be dragged down by dishonesty and the thought of immediate gain. Walking in the path of Torah, we will be more solid and more secure.
+
+*Source: [Week 41 (From the Book): Not to Become Corrupt](https://www.kabbalahoftime.com/2014/07/week-41-from-book-not-to-become-corrupt.html) — 1054 words*
+
+---
+
+## Day 282 · Book 2 · Week 41
+
+The week of the 12th and 13th of Tammuz, and of the 17th. Haazinu sharpens: "When I sharpen the blade of My sword, and My hand grasps judgment, I will bring vengeance upon My adversaries and repay those who hate Me." (Deuteronomy 32:41) The Haftorah holds the same: "And of my enemies You have given me the back of their necks; them that hate me, that I may cut them off." (II Samuel 22:41) Judgment and Divine wrath are central to the 17th of Tammuz.
+
+The quality is judging him favorably, Machrioh Lechaf Zechut, which belongs to the repair of sight. The phrase literally means tips him to the side of merit. Rebbe Nachman teaches that focusing on someone else's good points actually tips the person to that side. Maimonedes puts the principle more broadly, in the context of Teshuvah, which this month needs: throughout the entire year a person should look at himself as equally balanced between merit and sin, and the world as equally balanced; if he performs one sin he tips his own balance and the world's to the side of guilt and brings destruction upon himself, and if he performs one mitzvah he tips his own and the world's to the side of merit and brings deliverance and salvation to himself and others. As last week, the action is not only about the friend: the person puts himself in the balance, and by acting justly tips his friend's balance too.
+
+The prophet is Seraiah, Baruch's brother, who went into exile with Zedekiah the King of Judah. Like Baruch, Jeremiah gave him dire prophecies to read to the king — only this time the harsh words were against Babylon itself. So the king and the people were being judged favourably, since the prophecy assured that their suffering would one day end and be avenged.
+
+The levitical city is Kedemoth. The desert of Kedemoth was where Moshe sent messengers to Sihon, king of Heshbon, with words of peace; after Sihon refused, it was at Kedemoth that he was miraculously defeated. His refusal came out of deep Sinat Chinam, gratuitous hatred, which is what destroyed the Temple these days commemorate. Kedemoth is from Kedem, days of yore, often used of the Garden of Eden and the pristine state humanity once had — and in this month we begin our Teshuvah and try to reach back to it.
+
+*Source: [Week 41 (Book 2): Judgement followed by  Teshuvah](https://www.kabbalahoftime.com/2014/07/week-41-book-2-judgement-followed-by.html) — 557 words*
+
+---
+
+## Day 283 · Book 3 · Week 41
+
+Beshalach: "See that the Lord has given you the Sabbath. Therefore, on the sixth day, He gives you bread for two days. Let each man remain in his place; let no man leave his place on the seventh day. So the people rested on the seventh day." The weight falls on staying still, not leaving one's place. In a way it is the reverse of the 17th of Tammuz, when the Jews, running out of food, had no choice but to stay where they were — and then, when the walls were breached, were forced to surrender and were led into exile, unable to stay in place even on the Sabbath. And the message of Yud Beit/Yud Gimmel Tammuz has its own parallel: for all the oppression he suffered in prison, the Sixth Rebbe stood his ground and remained in his spiritual place.
+
+The Haftorah has the enemy counting his winnings: "'Are they not finding (and) dividing the spoils? A damsel, two damsels to every man.'" Which is what happened when the walls were breached. The word used for women, Rechem, is related to womb and to mercy, and brings to mind the verse of Lamentations: "The hands of compassionate women boiled their own children." And 41 is the gematria of em, mother.
+
+Daf Mem Alef of Sotah gives laws of the Torah reading on Yom Kippur and how the King reads the Torah in the Temple — the Temple again — and then the trait of flattery. Flattery causes corruption and leads to destruction: from the day that flattery became rampant, judgments became distorted, deeds became spoiled, and no one can say "My deeds are better than yours." The destruction itself is tied to flattery: we learn from Yirmeyahu, who supported Chananyah's false prophecy, and Chananyah's grandson later seized Yirmeyahu and handed him to the Babylonian officials. The Rebbe Rayatz on the 12th of Tammuz is the opposite of flattery — he spoke his mind about the evil of the Soviet empire, endured torture, and did not move.
+
+The generation is Athaliah, who took the kingdom after her son Ahaziah's death; her counterpart in Israel was Yehu. Her reign was absolute terror, and her hatred after her own son's death drove her to try to destroy the whole House of David. She managed to kill every descendant of King David but one, Jehoash, who miraculously survived. Her story shows how cruel and ruthless a mother, who is naturally merciful, can be, and how distorted and corrupt Israel had become — and a mother's mercy appears in it too, in the saving of Jehoash. The corruption parallels the 17th of Tammuz, and the hope in Jehoash parallels how the Rebbe Rayatz was saved out of the embers and the Chabad dynasty was able to go on. And Athaliah did enormous damage to the Temple, damage which Jehoash would repair.
+
+The journey is from Almon diblathaimah to the mountains of Abarim, in front of Nebo. As in week 38, Abarim comes from aveirah, transgression — and now instead of the ruins of Abarim it is the mountain of Abarim, which is the height teshuvah reaches. The Temple itself is also called a mountain. Nebo is nun boh, the fiftieth gate Moshe reaches at his passing; that gate is beyond nature, and belongs to teshuvah, where G-d lifts us out of our sins in a way nature does not allow. The personal journey moves from the sweetness repentance uncovers to the supernatural heights it can reach.
+
+*Source: [Week 41 (Book 3): Standing One's Ground](https://www.kabbalahoftime.com/2014/07/week-41-book-3-standing-ones-ground.html) — 886 words*
+
+---
+
+## Day 284 · Book 4 · Week 41
+
+The verse is the priests' due: "And this was the due of the priests from the people: (whenever) any man would slaughter a sacrifice, the servant of the priest would come when (one) cooked the flesh, with a three-pronged fork in his hand." The sons of Eli had set up a rule by which anyone bringing a sacrifice had to give them an extra portion, more than Torah law allots. It was a Hillul Hashem, a desecration of His name, and it lowered the Mishkan in the eyes of the people. The seventeenth of Tammuz is largely about the corruption of the Jewish people of that time, the Temple's priests in particular, which brought it down.
+
+This week's acquisition in Pirkei Avot is the heavens and the earth: "So says G-d: The heavens are My throne and the earth is My footstool; what house, then, can you build for Me, and where is My place of rest?" And: "How many are your works, O G-d, You have made them all with wisdom; the earth is filled with Your acquisitions." The verses name the Temple and the limits of it as His house — and against the account above, the point is sharp: since everything is His, and the Temple is His house, how dare the sons of Eli take more for themselves of what plainly belongs to the Master and Owner of all heaven and earth.
+
+Ecclesiastes 10 has a passage on the same centrality, and on not abusing what is in it. "Woe to you, O land whose king is a lad, and your princes eat in the morning. Fortunate are you, O land, whose king is the son of nobles, and your princes eat at the proper time, in might and not in drinking. Through laziness the rafter sinks, and with idleness of the hands the house leaks." And the last verse, which is watched: "Even in your thought, you shall not curse a king, nor in your bedrooms shall you curse a wealthy man, for the bird of the heaven shall carry the voice, and the winged creature will tell the matter." Rashi: the bird of the heaven is the soul, placed within you, which will ultimately fly up to the heaven.
+
+The week holds the yahrzeits of Rebbe Tzvi-Hirsh Eichenstein, first rebbe of Zhidachov, on the 11th of Tammuz, and Rabbi Chaim Ibn Atar, the Ohr HaChaim, on the 15th. Rebbe Tzvi-Hirsh, founder of the Zhidachov dynasty, was a prominent disciple of the Seer of Lublin, and championed the position that the practice of Chasidism had to rest firmly on the study of the Kabbala of the holy Ari of Safed. He wrote and published numerous commentaries on Kabbala, including Ateret Tzvi on the Zohar, and several on the weekly readings; the Malbim was a student of his, and he was succeeded by three nephew-disciples, among them Yitzhak-Isaac of Zhidachov and Yitzhak-Isaac-Yehuda-Yechiel of Komarno. Rabbi Chaim Ibn Atar is best known as the author of one of the most important and popular commentaries on the Torah, the Ohr HaChaim; he established a major yeshiva in Israel after moving there from Morocco. Chassidic tradition holds that the main reason the Baal Shem Tov twice tried so hard, and failed, to reach the Holy Land was that he said if he could join the Ohr HaChaim there, together they could bring Moshiach. His burial site outside the Old City of Jerusalem, on the Mount of Olives, is considered a propitious place to pray. Also this week: Rabbi Elazar of Reishe on the 15th of Tammuz, Rabbi Avrohom Yehoshua Heschel of Kopischnitz on the 16th, and Rabbi Shmuel Yaacov Weinberg on the 17th.
+
+*Source: [Week 41 (Book 4): Not Corrupting G-d's World](https://www.kabbalahoftime.com/2014/07/week-41-book-4a-not-corrupting-g-ds.html) — 774 words*
+
+---
+
+## Day 285 · Book 5 · Week 41
+
+The Song's verse is one line and it is held in both arms: "His left hand would be under my head, and his right hand would embrace me." It is often quoted in the Tanya and in Chassidic and Kabbalistic sources. At the same time that His left hand, which is gevurah, discipline, is under our heads, His right hand, Chesed, kindness, is around us. He held us through our exiles, and He held the Sixth Rebbe through what he faced.
+
+Of the seventy souls that descended to Egypt, the forty-first is Areli, whose name holds the same letters as Ariel, the Lion of G-d, one of the names of the Temple. And with him Ehi, son of Benjamin, whose name means my brother, Achi, for Joseph being Benjamin's brother. Brotherly love is what will rebuild the Temple.
+
+Daf Mem Alef of Shvuot keeps on with the repayment of loans and whether it has to be done in front of witnesses, and then the difference between an oath that is d'rabbanan and one that is d'oraisa, and how a d'rabbanan oath can be reversed though payment is taken by other means. Which belongs to the 17th of Tammuz, when payment is taken for our spiritual debts.
+
+Jeremiah's forty-first chapter is the murder of Gedaliah — for which we still fast, as for the 17th of Tammuz — and the divisions inside the Jewish people that kept the suffering going. "And Ishmael the son of Nethaniah and the ten men who were with him arose and smote Gedaliah the son of Ahikam the son of Shaphan, with the sword, and he slew him, whom the king of Babylon had appointed in the land, and all the Jews who were with him." Then the pilgrims: "men came from Shechem, from Shiloh, and from Samaria, eighty men, with shaven beards and rent garments and having cut themselves, with a meal-offering and frankincense in their hand[s], to bring to the house of the Lord." And Ishmael came out to meet them weeping, and said, "Come to Gedaliah the son of Ahikam" — and killed them in the city. Ten of them were spared for saying they had stores in the field, wheat and barley and oil and honey. And the pit he filled with the bodies was the one King Asa had made because of Baasa, king of Israel.
+
+*Source: [Week 41 (Book 5): G-d's Right and Left "Hands"](https://www.kabbalahoftime.com/2014/07/week-41-book-4b-g-ds-right-and-left.html) — 622 words*
+
+---
+
+## Day 286 · Book 6 · Week 41
+
+The third week of Tammuz in psalms: the hundred and twenty-first, hundred and twenty-second and hundred and twenty-third, with three verses of Psalm 105 and one of Psalm 89. All three are songs of ascents, and all three are short.
+
+Psalm 121 alludes to the Lower Paradise, from which one ascends to the Higher, and speaks of how He watches over us. "I lift my eyes to the mountains-from where will my help come? My help will come from the Lord, Maker of heaven and earth. He will not let your foot falter; your guardian does not slumber. Indeed, the Guardian of Israel neither slumbers nor sleeps." And the last line covers everything: "The Lord will guard your going and your coming from now and for all time."
+
+Psalm 122 sings the praises of Jerusalem and the miracles that happened there. "I rejoiced when they said to me, 'Let us go to the House of the Lord.' Our feet were standing within your gates, O Jerusalem; Jerusalem that is built like a city in which [all Israel] is united together." What stood there: "For there stood the seats of justice, the thrones of the house of David." And the asking, which is the line this week needs: "Pray for the peace of Jerusalem; may those who love you have peace. May there be peace within your walls, serenity within your mansions. For the sake of my brethren and friends, I ask that there be peace within you."
+
+Psalm 123 laments how long the exile has already run. "To You have I lifted my eyes, You Who are enthroned in heaven. Indeed, as the eyes of servants are turned to the hand of their masters, as the eyes of a maid to the hand of her mistress, so are our eyes turned to the Lord our G-d, until He will be gracious to us." And then: "Be gracious to us, Lord, be gracious to us, for we have been surfeited with humiliation. Our soul has been overfilled with the derision of the complacent, with the scorn of the arrogant."
+
+Psalm 105's verses are the growing of the people and the turn against them: "And He made His people very fruitful, and He made it stronger than its adversaries. He turned their heart to hate His people, to plot against His servants. He sent Moses His servant, [and] Aaron whom He chose." And Psalm 89's verse is the plundering: "All wayfarers have plundered him; he was a disgrace to his neighbors."
+
+*Source: [Week 41 (Book 6): Reviewing the Third Week of Tammuz - Psalms 121-123; 105:24-26; 89:42](https://www.kabbalahoftime.com/2014/07/week-41-book-5-reviewing-third-week-of.html) — 478 words*
+
+---
+
+## Day 287 · Book 7 · Week 41
+
+The fox opens on the sharpened sword, and the week sets a house built without justice beside it.
+
+The sword and the house first: "When I sharpen the blade of My sword" / "And My hand grasps judgment" / "Woe to him that builds his house without justice" / "And his chambers without lawfulness" / "When (one) cooked the flesh, With a three-pronged fork in his hand."
+
+Then the spoils divided, and the bread for two days: "Are they not finding (and) dividing the spoils" / "A damsel, two damsels to every man" / "He gives you bread for two days" / "Let each man remain in his place" / "The servant of the priest would come" / "[And] Aaron whom He chose" / "And this was the due of the priests from the people" / "(Whenever) any man would slaughter a sacrifice."
+
+Then the unpaid wages, and the vengeance: "That uses his friend's service without wages" / "And does not give him for his hire" / "I will bring vengeance upon My adversaries" / "And repay those who hate Me" / "Them that hate me, that I may cut them off" / "And of my enemies You have given me the back of their necks."
+
+Then the plundering, and the hearts turned: "All wayfarers have plundered him" / "He was a disgrace to his neighbors" / "He turned their heart to hate His people" / "To plot against His servants."
+
+And the end is the Sabbath and the two hands: "See that the Lord has given you the Sabbath" / "Therefore, on the sixth day" / "He sent Moses His servant" / "His left hand would be under my head, And his right hand would embrace me" / "Let no man leave his place on the seventh day" / "So the people rested on the seventh day" / "And He made His people very fruitful" / "And He made it stronger than its adversaries."
+
+*Source: [Week 41 (Book 7): The Fox Is Saying](https://www.kabbalahoftime.com/2017/07/the-fox-is-saying.html) — 245 words*
