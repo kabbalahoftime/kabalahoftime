@@ -84,6 +84,9 @@ ALT = {
     # One man, and the blog spells him Maimonedes.
     'rambam': 'maimonedes', 'maimonides': 'maimonedes',
     'aharon': 'aaron', 'hellenist': 'helenist', 'hellenized': 'helenized', 'greece': 'greek',
+    # One book. A week-30 post has "teachers of the Misnah", and writing the
+    # blog's slip back out to a reader is worse than aliasing it.
+    'mishnah': 'misnah',
     # One town, spelled both ways across the posts.
     'lizhensk': 'lizhenk', 'arpachshad': 'archpachshad',
     'yafeth': 'yaffeth', 'simcha': 'smicha', 'maccabees': 'macabbees',

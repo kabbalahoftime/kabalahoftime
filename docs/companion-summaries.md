@@ -3690,3 +3690,121 @@ Then the grass, with the counting of queens through it: "In the morning, like gr
 And the end is the brook and the one dove: "And it shall be on the sixth day" / "In the evening, it is cut off and withers" / "You carry them away as a flood" / "They are like a sleep" / "The brook Kishon swept them away" / "That ancient brook, the brook Kishon" / "My dove, my perfect one, is but one, she is one to her mother" / "She is the pure one of she who bore her" / "My heart has rejoiced through the Lord" / "My horn has been raised by the Lord."
 
 *Source: [Week 29 (Book 7): The Beast of Burden is Saying](https://www.kabbalahoftime.com/2016/04/the-beast-of-burden-is-saying-songs-for.html) — 287 words*
+
+---
+
+## Day 204 · Book 1 · Week 30
+
+The camel is saying, "G-d shall roar from upon high and cause His voice to sound forth from His holy place, His shout echoes profoundly over His dwelling place." (Jeremiah 25:30) This is the last week of Nissan and the week of Yom HaShoah, Holocaust Remembrance Day.
+
+The verse is Hashem lamenting the destruction of the Temple. Since it fell, the Jewish people have had to survive a very long time without their basic source of spiritual sustenance, as a camel survives long stretches without water. Nissan is the month of redemption, from Egypt and in the future both — and even on Passover there is an egg on the Seder plate as a sign of mourning, because the final redemption has not come. This week also holds the yahrzeit of Yehoshua Bin Nun, on the 26th of the month.
+
+By the same Midrash cited in week twenty-eight, the camel is the Babylonian exile, when the First Temple was destroyed. Like the beast of burden, it also looks to point to Yishmael. Finishing Nissan, we live through all the exiles and all the redemptions, hoping soon for the one that takes us out of this exile.
+
+Thirty intensifies the balance of three, and it is the numerical value of Yehudah, whose tribe this month belongs to. Pirkei Avot teaches that thirty is the age of koach, strength and potential, when a person is at the height of physical and intellectual capacity; it was at thirty that the kohanim began serving in the Temple. That strength belongs to Judah and to King David, who, unlike Esau, acknowledged their mistakes and repented of them, and so could use all their capacity for good.
+
+Pirkei Avot gives Ben Zoma. Who is wise? One who learns from every man. Who is strong? One who overpowers his inclinations. Who is rich? One who is satisfied with his lot. Who is honorable? One who honors his fellows. All of it bears on the tragedy of the Counting of the Omer: the 24,000 disciples of Rabbi Akiva died because of how hard they found it to respect, accept and learn from each other's readings of their master's teachings. The destruction of the Temple and the exile we are still in, the Holocaust inside it, came of sinat chinam, baseless hatred; we will be redeemed from this last exile through ahavat chinam, baseless love for each person.
+
+The teaching also fits Yehoshua Bin Nun. He was Moses's closest disciple and successor and could still meet anyone: on the verse describing Joshua as "a man in whom there is spirit," Sifrei explains that he was able to meet the spirit of every man. And the second question fits him too. The Rebbe once said of his yahrzeit that on this day assistance from heaven is granted to become a conqueror, like Yehoshua Bin Nun, the most prominent of the conquerors. This week we prepare for the conquests of Iyar.
+
+The combination is gevurah shebehod. The Counting of the Omer, especially once Passover and Nissan are over, is a stretch of service that can be hard, and takes strength and discipline to overcome the evil inclination. And the camel reminds us what we are here for: to make a dwelling place for G-d in this world, beginning with a sacred space for Him inside ourselves.
+
+*Source: [Week 30 (from the Book): To Know that the World Needs More Love and Respect](https://www.kabbalahoftime.com/2014/04/week-30-from-book-to-know-that-world.html) — 974 words*
+
+---
+
+## Day 205 · Book 2 · Week 30
+
+The last week of Nissan, with Yom HaShoah and the yahrzeit of Yehoshua in it. Haazinu counts the odds: "How can one [person] pursue a thousand, and two put ten thousand to flight, unless their [Mighty] Rock has sold them out, and the Lord has given them over?" (Deuteronomy 32:30) Far-fetched as it sounds, that happened in the Holocaust. It also ran the other way in Yehoshua's conquest of the Land of Israel, when the Jews pursued nations far larger than they were — as in the War of Independence and the Six-Day War.
+
+The Haftorah is the same arithmetic read positively: "For by You I run upon a troop; By my G-d I scale a wall." (II Samuel 22:30) King David runs at a whole troop alone and scales a wall, and the verse says who it is by.
+
+So the quality is humility again: he claims no credit for his achievements, Einoh Machazik Tovah L'atzmo. The credit goes to G-d, as that verse says.
+
+The prophet is Isaiah — Nissan begins with Amotz and ends with his son. His behaviour is this quality. Having one of the most vivid and intimate visions of G-d and the Divine Chariot, he does not think of himself and how great he must be to have merited it. The opposite: "Woe is me, for I am lost, because a man of unclean lips am I, and in the midst of people of unclean lips do I dwell; for the King, the L-rd of Hosts, have mine eyes seen." His prophecy holds many admonitions and many consolations, and the optimism always rests on G-d granting the success, once we return to Him. Joshua was very humble too, and took no credit; he always saw himself as Moshe's follower and disciple.
+
+The levitical city is Beth-shemesh, the house of the sun. It was Yehoshua who told the sun to stand still: "Sun, stand still upon Gibeon, and Moon in the valley of Ajalon." "And the sun stood still, and the moon stayed, until the people had avenged themselves upon their enemies." A city of the sun for his yahrzeit is striking, since our sages compare Moshe to the sun and Yehoshua to the moon — and perhaps that is the point, that he saw himself not as a separate thing but as being of the house of Moshe, the student who never left the tent. Beth-shemesh figures elsewhere in the Tanach too: it is the birthplace of Shimshon, whose name is also from Shemesh, and who stands more than any other leader for a supernatural strength that comes from G-d.
+
+*Source: [Week 30 (Book 2): Isaiah and Giving All the Credit to G-d](https://www.kabbalahoftime.com/2014/04/week-30-book-2-giving-all-credit-to-g-d.html) — 681 words*
+
+---
+
+## Day 206 · Book 3 · Week 30
+
+Beshalach: "And [in the] morning, you shall see the glory of the Lord when He hears your complaints against the Lord but [of] what [significance] are we, that you make [the people] complain against us? And Moses said, When the Lord gives you in the evening meat to eat and bread in the morning [with which] to become sated, when the Lord hears your complaints, which you are making [the people] complain against Him, but [of] what [significance] are we? Not against us are your complaints, but against the Lord." He hears the complaints, and Moshe counts himself and Aharon as nothing — Nachnu Mah. Yehoshua shared that. What the Jewish people went through in the Holocaust cannot be described; and He hears our complaints.
+
+The Haftorah treads: "tread down, O my soul, (their) strength. Then were pounded the heels of the horses." It could be read as Jewish suffering, the soul and the strength of a people trodden down into such horror. As Rashi explains, the simple meaning is that we trod with our feet on the strength of our enemies, as Joshua put his feet on the neck of the Canaanite kings. The horse is a symbol of strength, and next week's animal; and horses pounding recalls the horse and its rider thrown into the sea.
+
+Daf Lamed of Sotah goes further into purity laws of terumah and sacrifices, and ends on how the Song of the Sea was sung — in detail, and how even babies and unborn fetuses sang it too. Part of what makes the Holocaust so terrible is that it reached infants, babies and the unborn. And so the month of Nissan ends back at the splitting of the sea.
+
+The generation is Boaz, son of Salmah, husband of Ruth, and the leader of the people in his day. Boaz holds the word oz, strength — Yehoshua's strength, perhaps, and the rescue that came to Ruth after all the death she had seen.
+
+The journey is from Hor hagidgad to Jotbathah, which means calm, peace and tranquility. The personal journey moves from opening our hearts to the mannah and to emunah, to the peace that comes with complete faith — and perhaps to the relative tranquility of returning to our homeland, marked next week on Yom Ha'Atzmaut.
+
+*Source: [Week 30 (Book 3): Destruction and Conquest](https://www.kabbalahoftime.com/2014/04/week-30-book-3-destruction-and-conquest.html) — 583 words*
+
+---
+
+## Day 207 · Book 4 · Week 30
+
+Channah's second verse: "There is none as holy as the Lord, For there is none besides You; And there is no rock like our God." Rashi cites the Talmud: there is no artisan, Tzayar, like our G-d, who makes a form within a form. In pregnancy He shapes and gives life to each of us. Yehoshua was formed by Hashem through Moshe in the same way, and is called the son of Nun, which is a reference to Moshe himself — a person's teacher is like the one who bore him. The Talmud goes on: read not "There is none bilteka" but "There is none lebalotheka," none to consume You. The nature of flesh and blood is to be outlived by its works, and the Holy One, blessed be He, outlives His works. Which reads differently in the week of Yom HaShoah, when so many were so brutally consumed.
+
+The Pirkei Avot quality is that the Torah uplifts him. Few have been as uplifted as Channah at the birth of her child, and the verse shows it. It is true of Yehoshua too: he was not inherently cleverer than everyone else, and he worked on himself until he was chosen as Moshe's successor for his dedication to the Torah. And it is the Torah that lifted so many communities after the loss of the Holocaust.
+
+Proverbs this week opens in exactly that posture of humility before what is transmitted: "For I am more boorish than any man, neither do I have man's understanding. Neither have I learned wisdom, nor do I know the knowledge of the holy ones. Who ascended to heaven and descended? Who gathered wind in his fists? Who wrapped the waters in a garment? Who established all the ends of the earth? What is his name and what is the name of his son, if you know? Every word of God is refined; He is a shield for all who take refuge in Him. Do not add to His words, lest He prove to you, and you be found a liar."
+
+Then it turns to a generation gone wrong. "Distance falsehood and the lying word from me; give me neither poverty nor wealth; provide me my allotted bread." "A generation that curses its father and does not bless its mother. A generation that is pure in its eyes, but is not cleansed of its filth. A generation-how lofty are its eyes! And its eyelids are raised. A generation whose teeth are [like] swords, and its molars are [like] knives, to devour the poor of the land and the needy of men." And the things that are never full: "The grave, the confined womb, and the earth, which is not sated with water, and fire, which does not say, 'Enough!'"
+
+The week holds the yahrzeits of the founders of two important dynasties. Rabbi Chaim Halberstam of Sanz, on the 25th of Nissan, was the first Rebbe of Sanz-Klausenberg, famous for extraordinary dedication to the mitzvah of tzedaka and as a renowned Torah scholar; his voluminous and wide-ranging writings were published as the Divrei Chaim, and his eldest son founded the Sanzer synagogue in Tsfat. Bobov and Klausenberg descend from him. Rabbi Moshe Pallier of Kobrin, on the 29th of Nissan, was a close follower of R. Mordechai of Lechovitch and then of his son R. Noach, and in 1833 became the first Rebbe of Kobrin, with thousands of chassidim, many of whom later moved to Eretz Yisroel; his teachings are collected in Imros Taharos. Also this week: Rabbi Nachman of Tulchin, student of Rabbi Nosson of Breslov, and Rabbi Moshe Teitelbaum, the Satmar Rebbe, both on the 26th of Nissan, Rabbi Aharon HaKohen Rosenfeld, the Pinsk-Karliner Rebbe, on the 28th, and Rabbi Mordechai Shalom Yosef Friedman, the Sadigerer Rebbe, on the 29th.
+
+*Source: [Week 30 (Book 4): Yehoshuah and Being Uplifted by the Torah](https://www.kabbalahoftime.com/2014/04/week-3-book-4a-yehoshuah-and-being.html) — 972 words*
+
+---
+
+## Day 208 · Book 5 · Week 30
+
+The Song goes down to the nut garden: "I went down to the nut garden to see the green plants of the valley, to see whether the vine had blossomed, the pomegranates were in bloom. I did not know; my soul made me chariots for a princely people." And then the calling back: "Return, return, O Shulammite; return, return, and let us gaze upon you." "What will you see for the Shulammite, as in the dance of the two camps?"
+
+Rashi reads the garden largely as Torah scholarship and the keeping of the commandments, and mentions teachers of the Mishnah by name — the Oral Torah passed from Moshe to Yehoshua, and from Yehoshua to the elders and the generations after. He brings a second reading of the nut too: just as a nut that falls into the mud does not have its interior sullied, so are the Israelites exiled among the nations and smitten with many blows, and their deeds are not sullied. Which fits this week.
+
+The next verse he reads as exile, the Roman one we are still in, where the Holocaust happened. On "I did not know," Rashi has the congregation of Israel lamenting: I did not know to beware of sin, that I should keep my honour and my greatness, and I erred in the matter of groundless hatred and controversy, which intensified in the reign of the Hasmonean kings, Hyrcanus and Aristobulus, until one of them brought the kingdom of Rome and received the kingship from their hand and became their vassal — and since then, my soul made me to be chariots, that the nobility of other nations ride upon me. The Second Temple fell to baseless hatred, and not learning the lesson of it is what has kept us in exile.
+
+Of the seventy souls that descended to Egypt, the thirtieth is Sered. A Sarad is a netmaker or a maker of chains. Yehoshua would catch and hold every word of Moshe as a netmaker catches fish — and Yehoshua Bin Nun literally means Joshua the son of a fish, which is Moshe himself. Chains suit the week too, for the captivity endured in the Holocaust.
+
+Daf Lamed of Shvuot begins a new chapter on the oath taken by a witness in court: whom it applies to, the rules against favouring one party over another, and distancing oneself from falsehood. Much of it fits Yehoshua. There is also an emphasis on the people as a whole, with verses on Am — "B'Tzedek Tishpot Amisecha." Yom HaShoah marks a time full of falsehood, and a time when all Jews were persecuted together, whatever their religiosity or nationality.
+
+Jeremiah's thirtieth chapter is destruction and calamity again, and Rashi notes that it is not only the Temple and the Babylonian exile but also Gog and Magog. It speaks of pain like birth pangs, as in the pangs before the Messianic era, Chevlei Mashiach, which many believe the Holocaust to be. "A sound of quaking we have heard, fear, and there is no peace." "Ask now and see whether a male gives birth. Why have I seen every man [with] his hands on his loins like a woman in confinement, and every face has turned to pallor?" "Ho! For that day is great, with none like it, and it is a time of distress for Jacob, through which he shall be saved." And unlike the chapters before it, this one has a silver lining, that this people will not be finished: "For I am with you, says the Lord, to save you, for I will make an end of all the nations where I dispersed you, but of you I will not make an end, but I will chasten you in measure, and I will not completely destroy you." The wound stays open all the same: "No one deems your wound to be healed, you have no healing medicines. All your lovers have forgotten you, they do not seek you."
+
+*Source: [Week 30 (Book 5): Sered, Nets and Chains](https://www.kabbalahoftime.com/2014/04/week-30-book-4b-sered-nets-and-chains.html) — 1019 words*
+
+---
+
+## Day 209 · Book 6 · Week 30
+
+The fifth week of Nissan in psalms: the eighty-eighth, eighty-ninth and ninetieth, with three verses of Psalm 90 and one of Psalm 89.
+
+Psalm 88 weeps bitterly over the maladies and the suffering Israel endures in exile, and describes them in detail. It is the darkest of them. "For my soul is sated with affliction, and my life has reached the grave. I was reckoned with those who go down to the pit, I was like a man without strength." The abandonment: "You have put me into the lowest pit, into the darkest places, into the depths. Your wrath has weighed heavily upon me, and all the waves [of Your fury] have constantly afflicted me. You have estranged my friends from me, You have made me abhorrent to them; I am imprisoned and unable to leave." Then the argument that there is no praise from the grave: "Do You perform wonders for the deceased? Do the dead stand to offer You praise? Selah. Is Your kindness recounted in the grave, your faithfulness in the place of perdition?" And still the praying: "But, I, to You, O Lord, I cry; each morning my prayer comes before You." It ends where it began: "You have estranged from me beloved and friend; I have been rejected by my intimates."
+
+Psalm 89 is here whole — the psalm whose verses have come one a week all year. It is the kingship of the House of David, and the lament over its long fall. "I will sing of the Lord's kindness forever; to all generations I will make known Your faithfulness with my mouth. For I have said, 'The world is built with kindness.'" Then the covenant itself: "I have made a covenant with My chosen one; I have sworn to David, My servant: 'I will establish Your descendants forever; I will build your throne for all generations.'" Then the sea and the foundations: "You rule the vastness of the sea; when its waves surge, You still them." "Righteousness and justice are the foundation of Your throne; kindness and truth go before Your countenance." Then, one after another, every verse that has been arriving singly for weeks: the aid granted to David, the anointing with holy oil, the arm that strengthens him, the adversaries crushed, the hand set upon the sea, the calling out "You are my Father," the firstborn supreme over the kings of the earth. And then the condition and the promise that outlasts it: "If his children forsake My Torah and do not walk in My ordinances... then I will punish their transgression with the rod and their misdeeds with plagues. Yet I shall not take away My kindness from him, nor betray My faithfulness. I will not abrogate My covenant, nor change that which has issued from My lips." Then the turn, and it is severe: "Yet You have forsaken and abhorred; You became enraged at Your anointed. You annulled the covenant with Your servant; You have profaned his crown [by casting it] to the ground. You shattered all his fences; You turned all his strongholds into ruin." And the asking: "How long, O Lord, will You conceal Yourself-forever?" "Where are Your former deeds of kindness, my Lord, which You swore to David in Your faithfulness?" And then the last line, which is how the third book of psalms ends: "Blessed is the Lord forever, Amen and Amen."
+
+Psalm 90 is Moses's prayer, which David found in this form by a tradition attributing it to him, and brought into the Tehillim; the Midrash attributes the next eleven to Moses as well. It is the brevity of a human life, and it moves a person to repent and to drop his pride. "My Lord, You have been a shelter for us in every generation. Before the mountains came into being, before You created the earth and the world-for ever and ever You are Almighty G-d." The measure: "Indeed, a thousand years are in Your eyes like yesterday that has passed, like a watch of the night." The grass: "In the morning it thrives and sprouts anew; in the evening it withers and dries." The count: "The days of our lives number seventy years, and if in great vigor, eighty years; most of them are but travail and futility, passing quickly and flying away." And then the one request that follows from all of it: "Teach us, then, to reckon our days, that we may acquire a wise heart." Then: "Satiate us in the morning with Your kindness, then we shall sing and rejoice throughout our days. Give us joy corresponding to the days You afflicted us, the years we have seen adversity." And the last line, twice over: "May the pleasantness of the Lord our G-d be upon us; establish for us the work of our hands; establish the work of our hands."
+
+*Source: [Week 30 (Book 6): Reviewing the Fifth Week of Nissan - Psalms 88-90; 90:8-10; 89:31](https://www.kabbalahoftime.com/2014/04/week-30-book-5-reviewing-fifth-week-of.html) — 1772 words*
+
+---
+
+## Day 210 · Book 7 · Week 30
+
+The camel opens, and the week sets the treading down beside the nut garden.
+
+The treading and the garden first: "Tread down, O my soul strength" / "Then were pounded the heels of the horses" / "I went down to the nut garden" / "To see the green plants of the valley" / "To see whether the vine had blossomed" / "The pomegranates were in bloom."
+
+Then the condition and the hidden sins: "If his children forsake My Torah" / "And do not walk in My ordinances" / "You have set our wrongdoings before You" / "Our hidden sins before the light of Your countenance" / "For all our days have vanished in Your wrath" / "We cause our years to pass like a fleeting sound."
+
+Then what significance are we, with the thousand and the ten thousand: "But [of] what [significance] are we, that you make complain against us?" / "When the Lord hears your complaints, which you are making complain against Him" / "How can one pursue a thousand, and two put ten thousand to flight" / "Unless their Rock has sold them out, and the Lord has given them over?" / "There is none as holy as the Lord, for there is none besides You" / "And there is no rock like our God."
+
+Then the meat and the bread, with the count of our years: "But [of] what [significance] are we?" / "And Moses said, Not against us are your complaints, but against the Lord" / "When the Lord gives you in the evening meat to eat" / "And bread in the morning to become sated" / "The days of our lives number seventy years, and if in great vigor, eighty years" / "Most of them are but travail and futility" / "Passing quickly and flying away."
+
+And the end is the glory and the roar, and the calling back: "And [in the] morning, you shall see the glory of the Lord" / "When He hears your complaints against the Lord" / "G-d shall roar from upon high and cause His voice to sound" / "From His holy place, His shout echoes profoundly over His dwelling place" / "Return, return, O Shulammite" / "Return, return, and let us gaze upon you" / "What will you see for the Shulammite, as in the dance of the two camps?" / "I did not know; my soul made me chariots for a princely people" / "For by You I run upon a troop" / "By my G-d I scale a wall."
+
+*Source: [Week 30 (Book 7): The Camel is Saying](https://www.kabbalahoftime.com/2016/04/the-camel-is-saying-songs-for-week-30.html) — 332 words*
