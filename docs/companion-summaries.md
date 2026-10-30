@@ -4342,3 +4342,117 @@ Then the gathering that came out even: "And the children of Israel did so" / "Th
 And the end is the blessing itself, with the covenant under it: "Blessed is the One Who is good and bestows good" / "The seed of Abraham His servant, the children of Jacob, His chosen ones" / "He is the Lord our G-d; throughout all the earth are His judgments" / "He remembered His covenant forever, the word He had commanded to the thousandth generation."
 
 *Source: [Week 35 (Book 7): The Wild Animals Say](https://www.kabbalahoftime.com/2016/06/the-wild-animals-say-songs-for-week-35.html) — 204 words*
+
+---
+
+## Day 246 · Book 1 · Week 36
+
+The gazelle is saying, "And I shall sing of Your strength, I shall rejoice of Your kindness in the morning, for You were a refuge to me, and a hiding place on the day of my oppression." (Psalms 59:17) This week holds Shavuot, and the whole week is also known as Shivah Yemei Miluim, in which the Shavuot sacrifices could still be brought to the Temple.
+
+The Hebrew for gazelle is Tzvi, which has the same gematria as emunah, complete faith. Its three letters — tzadi, beit, yud — are an acronym for "tzadik b'emunatoh yichieh," a tzadik lives through his faith, a verse of the prophet Habakkuk; and the Talmud explains that this verse is a summary of the whole Torah given to Moses at Mount Sinai on Shavuot. The song holds faith in both directions, in the morning and in trouble, which is night. Psalm 92 opens the same way: "It is good to give thanks to the Lord, and to sing to Your name, O Most High; To declare in the morning Your kindness and Your faith at night." After the troubles of the Counting of the Omer, which belongs to the night, on Shavuot the revelation comes clear as day.
+
+The horns of a gazelle are like a double crown, and the Jewish people received a double crown on Shavuot, as a reward for their faith. The Midrash teaches that other nations refused the Torah, and the Jews did not even ask first what was in it: they said "Na'aseh veNishmah," we will do and we will listen, accepting the commandments before knowing what they were. So each Jew was given two crowns, one for Na'aseh and one for Nishmah — crowns that were later removed after the sin of the golden calf.
+
+Thirty-six is the thirty-six hidden tzadikim who sustain the world. It is also the total number of Chanukah candles lit over the eight days. Both belong to the light revealed on Shavuot, when, through the work of the omer, we all stand closer to the level of tzadikim — and those thirty-six are literally the foundation of the world.
+
+Pirkei Avot gives Rabbi Yossi: whoever honors the Torah is himself honored by the people, and whoever degrades the Torah is himself degraded by the people. That belongs to the giving of the Torah and to what happened soon after. When we accepted it we were shown great honour; when we dishonoured it with the golden calf, the honour was taken away.
+
+The combination is chesed shebeyesod, kindness within foundation. On Shavuot the people had to stand firm — not coming too close to the mountain, not letting their souls expire altogether from the revelation — in order to receive the great good that is the Torah. The lesson from the gazelle is to have faith at night, in the hard times, knowing that the night will pass and we will thank Him in the open light of day.
+
+*Source: [Week 36 (From the Book): To Have Emunah](https://www.kabbalahoftime.com/2014/06/week-36-from-book-to-have-emunah.html) — 753 words*
+
+---
+
+## Day 247 · Book 2 · Week 36
+
+The week of Shavuot. Haazinu: "When the Lord will judge His people, and will reconsider His servants, when He sees that the power is increasing, and none is controlled or strengthened." (Deuteronomy 32:36) Shavuot is not usually thought of as a day of judgment, and in many ways it has much of one, like Rosh Hashanah. How a person's studies will go through the year is largely settled on Shavuot. As we try not to sleep much on Rosh Hashanah, on Shavuot we stay up all night learning. And for all that it is a day of celebration, what happened immediately after the giving of the Torah — the sin of the golden calf — needed His great mercy, and Moshe begging on our behalf.
+
+The Haftorah points at Shavuot plainly: "And You have given me the shield of Your salvation; And You have increased Your humility for me." (II Samuel 22:36) At Mount Sinai He lowered Himself, which is increased humility, so that He could be revealed to the people.
+
+The quality is loves reproof, Ohev Et Hatochachot. Every year before Shavuot we read the Tochachah in the portion of Bechukotai. This week is tied to the events just after the giving of the Torah, which hold much reproof. And only by being open to reproof can a person learn and grow; it is one of the main teachings of the Book of Proverbs: "Reprove not a scorner lest he hate you; reprove a wise man and he will love you. Give a wise man, and he will become yet wiser; teach a righteous man, and he will increase in learning. The beginning of wisdom is the fear of the Lord, and the knowledge of the holy ones is understanding."
+
+The prophet is Jeremiah, whose prophecy is more associated with reproof than any other: he spoke so strongly about the destruction of the Temple, the devastation of Jerusalem and the Babylonian exile, and he lived to see them. He also recorded the Book of Lamentations, which sets out G-d's reproof as vividly as it has ever been set out. He stood at a level few prophets reached, which also suits the week of Shavuot. And his message belongs to the day: "Let not the wise man glory in his wisdom, neither let the mighty man glory in his might; let not the rich man glory in his riches. But let him that glorieth, glory in this, that he understandeth and knoweth Me, that I am the L-rd Who exercises mercy, justice, and righteousness on the earth; for in these things I delight, saith the L-rd."
+
+The levitical city is Kartah, which means city in Aramaic. Perhaps the point is that receiving the Torah means knowing the simple truth, even when the truth is painful. The Jewish people come from Shem, whose name means name, which points to the same plain truth he stood for. The ruins of Kartah, outside Haifa, are an important and beautiful archeological site today.
+
+There is also an opinion that Kartah is Tavor, a city of the tribe of Issachar — and Mount Tabor was shared by Issachar and Zevulun, so the two brothers share the levitical city of the week of Shavuot, which is the brotherly love the giving of the Torah needed; and the sign of Sivan is gemini, twins. Mount Tabor also thought itself worthy of being the mountain where the Torah would be given, and was later the scene of miracles in the days of Devorah. Rashi, on "I, to the Lord I shall sing," notes that the word is repeated, and gives an Aggadic reading: the Holy One did not withhold the reward of Mount Tabor and Mount Carmel, who came to the giving of the Torah expecting it to be given upon them and turned away in shame. He said to them, I will pay you double fold. At Sinai it was said, "I am the Lord your G-d"; at Tabor it will be said, "I… I…". At Sinai it was said, "I am the Lord your G-d"; at Carmel it will be said twice, "The Lord He is G-d, the Lord He is G-d," in the days of Elijah.
+
+*Source: [Week 36 (Book 2): Accepting the Truth](https://www.kabbalahoftime.com/2014/06/week-36-book-2-accepting-truth.html) — 911 words*
+
+---
+
+## Day 248 · Book 3 · Week 36
+
+Beshalach: "And Moses said to them, Let no one leave over [any] of it until morning. But [some] men did not obey Moses and left over [some] of it until morning, and it bred worms and became putrid, and Moses became angry with them." Which is Shavuot itself, where at the first giving of the Torah the people overslept and Moshe reprimanded them for it — and that is the basis of the custom of spending the whole night studying, not leaving it until morning.
+
+The Haftorah is Yael again: "she struck Sisera, pierced his head, and wounded and penetrated his temple." Taken out of the context of her act, as in week 34, the words could describe the experience of Mount Sinai, where the Torah pierced and penetrated our minds in a way that left a mark in every Jewish soul.
+
+Daf Lamed Vav of Sotah keeps on with how the people entered the Land, how the tribes stood at Mount Grizim and Mount Eival, and how the names of the tribes were inscribed on the Ephod — a symbol of unity, which is Shavuot and Sivan. There is discussion of there being 50 letters in the Ephod, and 50 belongs to Shavuot too. The daf also spends a good deal of time on Yosef and the tests he came through. Shavuot is about miracles, and about all of Israel standing at a mountain and entering a covenant; and Yosef is the consummate example of one who followed the Torah, the very definition of a Tzadik.
+
+The generation is Abijam, son of Rehoboam, also known as Abijah, which means my father is Hashem. As we received the Torah through unity, he sought to reunite the kingdoms of Judah and Israel — and for all his military victory he could not reach it. He followed his father's wicked ways, and the people were steeped in idolatry. Jeroboam, the sinful king of Israel who built an alternate temple with golden calves, also had a son named Abiyah; that child fell critically ill, died, and was eulogized by all of Israel — and even a eulogy for the son of an evil king shows the unity of this week.
+
+The journey is from Zalmonah to Punon, the place where the people complained and were bitten by snakes, and were healed through Moshe's copper snake. Punon comes from the word for directed, or faced, and also means death in Greek. At the giving of the Torah the people died and were revived at once: facing Hashem and hearing Him speak, their souls left their bodies. Punon also has two letter Nuns, which may point to the fiftieth day of the omer, which is Shavuot. The personal journey is to take in the light of Shavuot against the darkness of the omer, and to be revived by the Torah as well.
+
+*Source: [Week 36 (Book 3): Not Leaving the Learning for the Morning](https://www.kabbalahoftime.com/2014/06/week-36-book-3-not-leaving-learning-for.html) — 701 words*
+
+---
+
+## Day 249 · Book 4 · Week 36
+
+Channah's eighth verse lifts people off the ground: "He lifts the poor from the dust; From the dunghill, He raises the pauper, To seat them with princes, And a seat of honor He causes them to inherit, For the pillars of the earth are the Lord's, And He placed the world upon them." He is the one who decides who deserves honour and nobility.
+
+Pirkei Avot, on the greatness of the Torah, speaks of honour again and makes it an ornament: "She shall give to your head a garland of grace, a crown of glory she shall grant you." It was on Shavuot that the people were crowned with a double crown, one for Na'aseh, we will do, and one for Nishmah, we will listen.
+
+Ecclesiastes 5, like chapter 4, sets wealth against poverty, and names cases where a king is the one who is subservient: "If you see oppression of the poor and deprivation of justice and righteousness in the province, wonder not about the matter, for the Highest over the high waits, and there are higher ones over them. And the loftiness of the earth is in everything; even the king is subservient to the field."
+
+The week holds the yahrzeit of the Baal Shem Tov on the 6th of Sivan, and of Rabbi Avraham Mordechai Alter, the third Gerrer Rebbe, on the same date. Rabbi Yisrael ben Eliezer, the Baal Shem Tov, master of the good Name, a unique and seminal figure in Jewish history, revealed the Chassidic movement and his own identity as an exceptionally holy person on his 36th birthday, the 18th of Elul 1734. He wrote no books, though many claim to hold his teachings; one available in English is the annotated translation of Tzava'at Harivash. Rabbi Avraham Mordechai Alter, son of the Sfas Emmes, was the third Rebbe of Gur, spiritual leader of over 250,000 Chassidim in pre-WW II Poland. In 1940 he managed to escape with three of his sons to Israel, though the vast majority of his followers did not survive; he began to rebuild the Gerrer community in Jerusalem and died there during the siege of the city on Shavuos, 1948. He was known as the Imrei Emmes, after the title of his major book.
+
+Also this week: Rabbi Yitzchak Issac son of Rabbi Yisachar Beirish of Ziditchov on the 9th of Sivan, Rabbi Moshe of Rozvadov on the 10th, Rabbi Yehuda son of Rabbi Alter Yechezkel Horowitz of Dzhikov on the 11th, and Rabbi Avraham son of Rabbi Noach Weinberg of Slonim on the 12th.
+
+*Source: [Week 36 (Book 4): The Crown(s) of Torah](https://www.kabbalahoftime.com/2014/06/week-36-book-4a-crowns-of-torah.html) — 527 words*
+
+---
+
+## Day 250 · Book 5 · Week 36
+
+The Song's verse goes out of doors: "Come, my beloved, let us go out to the field, let us lodge in the villages." The field and the villages look toward Eisav, who was a man of the field, and Rashi comments that Kefarim, villages, should be read Kofrim, disbelievers — because at the giving of the Torah He offered it to the other nations, Yishmael and Eisav among them, and they refused. Shavuot belongs to the field in its own right as well: it is Chag HaKatzir, the Harvest Festival, and Chag HaBikkurim, the Festival of the First Fruits.
+
+Of the seventy souls that descended to Egypt, the thirty-sixth is Haggi, and with him Bela, son of Benjamin. Haggi comes from Chag, festival: Chagi means my festival, or Chag-Yud, the festival of G-d. Chag covers all the festivals and especially those with a pilgrimage to Jerusalem — Shavuot, Pessach and Sukkot. Bela means swallowed up, for how Joseph disappeared from Benjamin when he was still a child; Benjamin naming his sons after Joseph is evidence of the brotherly love that existed and still exists among the Jewish people, which is a key part of our meriting to receive the Torah.
+
+Daf Lamed Vav of Shvuot keeps on with the wording of an oath and the holy names of G-d, and opens a new chapter on the oath of a pikadon, a gift or deposit. The names belong to the revelation and the giving of the Torah — and the Torah was the gift itself, given at Sinai.
+
+Jeremiah's thirty-sixth chapter is the writing of a scroll, which is in fact the Book of Lamentations, spoken by Jeremiah and written down by Baruch ben Neriah. "And Jeremiah called Baruch the son of Neriah, and Baruch wrote from Jeremiah's mouth all the words of the Lord that He had spoken to him, on a roll of a book." He could not go himself: "I am imprisoned; I cannot enter the House of the Lord. And you shall come and read in the roll that you have written from my mouth, the words of the Lord, in the ears of the people." Then the king destroyed it: "And it came to pass, when Jehudi read three or four verses, he rent it with a scribe's razor, and cast [it] onto the fire which was on the brazier until the entire roll was consumed." And nobody flinched: "And the king and all his servants who heard all these words were neither frightened nor did they rend their garments." Then it was written again, longer: "And Jeremiah took another roll and gave it to Baruch the son of Neriah the scribe, and he wrote on it from the mouth of Jeremiah all the words of the book that Jehoiakim the king of Judah burnt with fire, and there were yet added to them many words like those." There is a strong parallel there with the giving of the Torah.
+
+*Source: [Week 36 (Book 5): Chag (Festival)](https://www.kabbalahoftime.com/2014/06/week-36-book-4b-chag-festival.html) — 689 words*
+
+---
+
+## Day 251 · Book 6 · Week 36
+
+The second week of Sivan in psalms: the hundred and sixth, hundred and seventh and hundred and eighth, with three verses of Psalm 105 and one of Psalm 89.
+
+Psalm 106 carries on from the last one, praising Him for the miracles it did not mention, because who can recount the mighty acts of G-d? Were we to try, we could not name them all. "Praise the Lord for He is good, for His kindness is everlasting. Who can recount the mighty acts of the Lord, or proclaim all His praises? Fortunate are those who preserve justice, who perform deeds of righteousness all the time." Then the confession, and it is long: "We have sinned as did our fathers, we have acted perversely and wickedly. Our fathers in Egypt did not contemplate Your wonders, they did not remember Your abundant kindnesses, and they rebelled by the sea, at the Sea of Reeds. Yet He delivered them for the sake of His Name, to make His strength known." Then the forgetting: "Then they believed in His words, they sang His praise. They quickly forgot His deeds, they did not wait for His counsel." Then the calf: "They made a calf in Horeb, and bowed down to a molten image. They exchanged their Glory for the likeness of a grass-eating ox." And the one man standing in the way: "He said that He would destroy them-had not Moses His chosen one stood in the breach before Him, to turn away His wrath from destroying." Then the land despised, Baal Peor, Phineas rising and the plague stayed, the waters of Merivah, and the nations not destroyed but mingled with. And then, after all of it, the turn: "But He saw their distress, when He heard their prayer; and He remembered for them His covenant and He relented, in keeping with His abounding kindness, and He caused them to be treated mercifully by all their captors." And the ending, which is the end of the fourth book of psalms: "Deliver us, Lord our G-d; gather us from among the nations, that we may give thanks to Your Holy Name and glory in Your praise. Blessed is the Lord, the G-d of Israel, forever and ever. And let all the people say, 'Amen! Praise the Lord!'"
+
+Psalm 107 is for those saved out of four particular dangers — imprisonment, sickness, desert travel and sea travel — who must give thanks, because their sins brought the trouble and only His kindness brought them out, so it is right that they praise Him and tell everyone of their salvation. The desert: "They lost their way in the wilderness, in the wasteland; they found no inhabited city. Both hungry and thirsty, their soul languished within them." The prison: "Those who sit in darkness and the shadow of death, bound in misery and chains of iron... He brought them out of darkness and the shadow of death, and sundered their bonds, for He broke the brass gates and smashed the iron bars." The sickness: "Their soul loathes all food, and they reach the gates of death... He sent forth His command and healed them; He delivered them from their graves." And the sea, which is the longest of them: "Those who go down to the sea in ships, who perform tasks in mighty waters; they saw the works of the Lord and His wonders in the deep. He spoke and caused the stormy wind to rise, and it lifted up the waves. They rise to the sky, plunge to the depths; their soul melts in distress. They reel and stagger like a drunkard, all their skill is to no avail." And then: "He transformed the storm into stillness, and the waves were quieted. They rejoiced when they were silenced, and He led them to their destination." Four times over comes the same line: "Let them give thanks to the Lord for His kindness, and [proclaim] His wonders to the children of man." Then the turning of places into their opposites — rivers into desert and desert into lake, fruitful land into salt-marsh and parched land into springs — and the last line, which asks for a reader: "Let him who is wise bear these in mind, and then the benevolent acts of the Lord will be understood."
+
+Psalm 108 is a steadfast heart and a man waking the dawn: "My heart is steadfast, O G-d; I will sing and chant praises even with my soul. Awake, O lyre and harp; I shall awaken the dawn. I will thank You among the nations, Lord; I will sing praises to You among the peoples." Then the dividing up of the land again, Gilead and Manasseh, Ephraim and Judah, Moab and Edom and Philistia. And the close, which gives the fighting back where it belongs: "Give us help against the adversary; futile is the help of man. Through G-d we will do valiantly, and He will trample our oppressors."
+
+Psalm 105's verses are the covenant and the land promised. And Psalm 89's verse is the throne: "His seed will endure forever and his throne will be [resplendent] as the sun before Me."
+
+*Source: [Week 36 (Book 6): Reviewing the Second Week of Sivan - Psalms 106-108; 105:9-11; 89:37](https://www.kabbalahoftime.com/2014/06/week-36-book-5-reviewing-second-week-of.html) — 1801 words*
+
+---
+
+## Day 252 · Book 7 · Week 36
+
+The gazelle opens, and the week goes out to the field with it.
+
+The field and the refuge first: "Come, my beloved, let us go out to the field, let us lodge in the villages" / "And I shall sing of Your strength" / "I shall rejoice of Your kindness in the morning" / "For You were a refuge to me, and a hiding place on the day of my oppression" / "And You have given me the shield of Your salvation" / "And You have increased Your humility for me."
+
+Then the lifting out of the dust, with the judging between: "He lifts the poor from the dust" / "From the dunghill, He raises the pauper" / "When the Lord will judge His people" / "And will reconsider His servants" / "To seat them with princes" / "And a seat of honor He causes them to inherit" / "When He sees that the power is increasing" / "And none is controlled or strengthened."
+
+Then what must not be left until morning, and the pillars of the earth: "And Moses said to them, Let no one leave over [any] of it until morning" / "For the pillars of the earth are the Lord's, And He placed the world upon them" / "But [some] men did not obey Moses" / "And left over [some] of it until morning" / "And it bred worms and became putrid" / "And Moses became angry with them."
+
+And the end is the piercing and the covenant: "She struck Sisera, pierced his head" / "And wounded and penetrated his temple" / "The covenant which He made with Abraham" / "And His oath to Isaac" / "He established it for Jacob as a statute, for Israel as an everlasting covenant" / "Stating, 'To you I shall give the land of Canaan'" / "His seed will endure forever and his throne will be as the sun before Me" / "The portion of your inheritance."
+
+*Source: [Week 36 (Book 7): The Gazelle Is Saying](https://www.kabbalahoftime.com/2017/06/the-gazelle-is-saying.html) — 255 words*
