@@ -16129,13 +16129,19 @@ content: ''; float: right; width: 30px; height: 1em;
   // is Book 2's for week 1, day 8 is Book 1's for week 2, day 225 is Book 1's
   // for week 33. Seven books times fifty-two weeks is 364.
   //
-  // Every one of those entries was already in this file before the companion
-  // existed: the weekly table getWeeklyData reads holds all seven books'
-  // readings for all fifty-two weeks. So the entries are transcribed, not
-  // written. There are seven templates, one to a book, and 364 fillings of
-  // them — which is why nothing in the companion can now claim something the
-  // app does not hold. tools/build_companion_days.py does it, over a dump
-  // taken from this page by tools/dump_week_data.mjs.
+  // Every entry is a written summary of that book's own post for that week —
+  // the long form of the same reading — and of nothing else. The manuscript
+  // is docs/companion-summaries.md and tools/build_companion_days.py builds
+  // the JSON from it. All 364 are written; none falls back any more to the
+  // transcription of the app's weekly table the builder still knows how to
+  // make, which is what held the shelf up while they were being written.
+  //
+  // Writing is the dangerous part, so each one is checked against its source.
+  // tools/check_companion_summaries.py scores the proper nouns and numbers of
+  // every entry against its own post and fails on anything the post does not
+  // carry — that is the "Isaiah 60:22" shape, a citation a source never had.
+  // tools/check_companion.py sweeps the same entries for claims about this
+  // app. Both read zero.
   //
   // Each entry names the week's post for its book, which is the long form of
   // the same reading: 364 posts for 364 days, from the app's own

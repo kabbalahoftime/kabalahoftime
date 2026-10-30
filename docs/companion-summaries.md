@@ -16,8 +16,12 @@ written from nothing and invented a motto for this app, a verse it does not
 carry, and routes a reader could not follow.
 
 Headings are `## Day N · Book B · Week W`. Paragraphs are the entry's body.
-A day with no section here falls back to a plain transcription of the app's
-own weekly table, so the companion is never short of an entry.
+
+**All 364 are here.** A day with no section would fall back to a plain
+transcription of the app's own weekly table, which is what kept the companion
+from ever being short of an entry while these were being written; no day falls
+back now. The builder still knows how to make one, so a day whose heading is
+ever removed or renamed degrades rather than disappearing.
 
 ---
 
