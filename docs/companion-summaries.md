@@ -2708,3 +2708,127 @@ Then the healing and the arm: "I will create a new expression of the lips: Peace
 And the end is the garden, with the pilgrimage and the crying out braided through it: "Awake, O north wind, and come, O south wind" / "Blow upon my garden, that the spices thereof may flow out" / "And the man, Elkanah and his entire household, went up to slaughter to the Lord" / "Let my beloved come to his garden and eat his sweet fruit" / "For G-d is my stronghold, the G-d of my kindness" / "I have come to my garden, my sister, [my] bride" / "I have gathered my myrrh with my spice" / "[I raise] my voice to G-d and cry out" / "I have drunk my wine with my milk" / "On the day of my distress, I sought the Lord" / "Eat, friends; drink, yea, drink abundantly, beloved ones" / "Open for me, my sister, my beloved, my dove."
 
 *Source: [Week 21 (Book 7): The Fly is Saying](https://www.kabbalahoftime.com/2021/02/week-21-book-7-fly-is-saying.html) — 401 words*
+
+---
+
+## Day 148 · Book 1 · Week 22
+
+The Sea Monsters say: "Praise G-d from the land, the sea monsters and all the depths." (Psalms 148:7) This is the week of Rosh Chodesh Adar, whose sign is Pisces, so the water creatures are rightly the ones singing through the four weeks of this month. Adar is the month of Purim, and when it begins we increase in joy. The depths of the song are the deep and hidden miracles He did for us in it.
+
+Adar belongs to the tribe of Naftali, and to the quality of being an emissary, a sheliach. Jacob's blessing calls Naftali an ayalah shlucha, a sent-off gazelle, and he was sent as a messenger more than once. Moses's blessing calls him seva ratzon, satisfied will — and ratzon, will, belongs to keter, the highest of the sefirot, which means crown. Naftali is the only tribe described as a feminine animal, and the crown fits, because the hero of this month is a woman sent on a mission to obtain a crown, Queen Esther. Like her, Naftali stands for self-sacrifice and humility: the tribe was known for its speed and alacrity, and its prince accepted being last to bring an offering at the inauguration of the Tabernacle. Being a sheliach takes enormous nullification before the one who sends you, and tremendous will to see the mission done.
+
+The phrase "Ve'anochi Tola'at ve lo Ish," I am a worm and not a man, belongs here too: Velo Ish has the same numerical value as Sheliach. It comes from Psalm 22 — the same number as this week — whose opening verse holds ayelet hashachar, the gazelle of the morning. The sages teach that ayelet hashachar is the planet Venus, the last star to appear before morning, and Queen Esther, the last prophet to appear before the redemption. Adar is likewise the last month counting from Nissan, and the prince of Naftali was the last to bring his offering, wrapping up the work of Asher and of all the tribes before him. That is a sheliach's work, and ours: to finish what those before us began.
+
+Adar is the only month often counted twice. Seven times every nineteen years there are two, Adar I and Adar II, and Adar II belongs to the tribe of Levi. The parallels are strong. Like Naftali, the Levites, and the kohanim above all, were known for alacrity and care in the mitzvot, and they served as emissaries for the whole people in the Temple, with tremendous self-sacrifice. There is one more link between Levi and the sea animals of this month: the animals in the sea did not perish in the Flood, and the tribe of Levi was never enslaved by the Egyptians.
+
+So Adar runs on duality. Pisces is two fish facing opposite ways. The Purim story has not one hero but two, Esther and Mordechai. And this is the month of the half-shekel, a contribution to the Temple so that sacrifices could be brought for the whole public — half and not whole, because no Jew is complete alone, and each of us completes the other.
+
+Twenty-two is the number of letters in the Hebrew alphabet. Hashem made the Torah and the world by combining them, so each letter completes the others too; and the Torah starts with beit, which is duality and relationship. The sea monsters hold the same thing. It seems strange that they should sing about praise on land, until you see that they know their own song is not enough by itself.
+
+The other duality of the month is hidden and revealed. The miracle of Purim came through hidden means, and though His hand is more than apparent in the events, the actual name of G-d never appears in the Megillah. Even the name Megillat Esther says it: Megillah is of nigleh, revealed, and Esther of nistar, hidden. In the song, the depths are what is hidden and the land is what is revealed. The song also recalls Jacob's blessing to his two grandchildren, Ephraim and Menashe: "You will multiply like fish in the face of the land." Rabbi Yitzchak Ginsburgh notes that the gematria of Naftali equals the gematria of Ephraim and Menashe.
+
+Pirkei Avot gives Rabbi Dusta'i the son of Rabbi Yannai, in the name of Rabbi Meir: whoever forgets even a single word of this learning, the Torah considers it as if he had forfeited his life, from "Just be careful, and verily guard your soul, lest you forget the things that your eyes have seen." (Deuteronomy 4:9) But the verse continues, "and lest they be removed from your heart," so nobody forfeits his life for studies that proved too hard — only for deliberately putting them out of his heart. One of the main mitzvot of Adar is remembering what Amalek did and the command to destroy it; forgetting to destroy evil puts our own lives in danger.
+
+The combination is chesed shebenetzach, kindness within victory. The week begins two months of victory and redemption, netzach, which carry Purim and Passover, and we mark the kindness He showed us by being more joyful than usual. The lesson from the sea monsters is that praising G-d by ourselves is not enough — we have to think of those who are distant, as they think of those on land.
+
+*Source: [Week 22 (From the Book): To Complement  Each Other in Happiness](https://www.kabbalahoftime.com/2014/01/week-22-from-book-to-complement-each.html) — 1577 words*
+
+---
+
+## Day 149 · Book 2 · Week 22
+
+Rosh Chodesh Adar, the month of Naftali and of ratzon, desire. Haazinu burns: "For a fire blazed in My wrath, and burned to the lowest depths. It consumed the land and its produce, setting aflame the foundations of mountains." (Deuteronomy 32:22) Read positively, the wrath is not against Israel but against the foolish nation that attacks it — Amalek. The Hebrew behind "lowest depths" is Sheol, which can also be read as Shaul, the first king, who failed to wipe Amalek out; the anger has burned since. In Adar we read Parashat Zachor and remember to destroy Amalek and everything it stands for. The Purim story sets Mordechai, a descendant of Shaul, against Haman, a descendant of Hagag, king of the Amalekites — and Mordechai wins, and Haman is killed along with his sons.
+
+The Haftarah verse draws the same line twice: "For I have kept the ways of the Lord and have not wickedly departed from [the commandments of] my G-d." (II Samuel 22:22) The good half, "Shamarti Darchei," I have kept the ways, holds the letters of Mordechai. The second half, "Veloh Rashati," have not wickedly, points to Haman, who is called Haman HaRashah — and sounds like the name of Vashti, Achashverosh's wife before Esther.
+
+The quality is minimized laughter, miut schok. Laughter can slide into frivolity and pull a person into the wrong circles. It is not bad in itself — it can open the mind, and there is even a custom, based on the Talmud, of beginning each lesson with a joke — but it has to be held with miut, smallness and humility. That holds for the whole month, when we are Marbim B'Simcha, and for Purim itself, when it is a mitzvah to get drunk and behave with schok; what has to stay is the intention.
+
+The prophet is Eliezer son of Dodavahu, and his words to King Yehoshaphat are about exactly this care in company. Yehoshaphat was righteous, and at one point he associated himself with King Ahab. The prophet rebuked him and he was punished: the ships he had built with Ahab were broken and could not sail. That is the last event the Tanach records before his death.
+
+The levitical city is Kedesh, also a city of refuge. Its name is from Kadosh, holy, and it is near the word Kiddush, the blessing over wine — which fits the drinking of this month, superficially frivolous and in fact tremendously holy, in some ways holier than Yom Kippur.
+
+*Source: [Week 22 (Book 2): Adar, Eliezer son of Dodavahu, and "Minimized" Laughter](https://www.kabbalahoftime.com/2014/01/week-22-book-2-adar-eliezer-son-of.html) — 646 words*
+
+---
+
+## Day 150 · Book 3 · Week 22
+
+Rosh Chodesh Adar. The Talmud says MisheNichnas Adar Marbim b'Simcha — when Adar enters, we increase in joy. The month belongs to Naftali, the Ayalah Shluchah, the swift gazelle sent out; when there are two Adars the second belongs to Levi, who served, and will serve again, as emissary for the whole people in the Temple.
+
+The Song of the Sea is back in the water: "and the Lord brought the waters of the sea back upon them; and the children of Israel walked on dry land in the midst of the sea." Dry land in the midst of the sea is the same paradox as Jacob's blessing to Efraim and Menashe, that they would increase like fish over the land.
+
+The Haftorah stays with Reuben's doubt: "to hear the bleatings of the flocks? At the divisions of Reuben, (there are) great searchings of heart." Resolve is ratzon, will, and this month is full of it. Naftali is s'vah ratzon, filled with will; Levi was known for determination and self-sacrifice; Reuben's conduct shows neither. Each tribe had a perfectly good excuse for staying out of the fight — they did not share a border with where it happened — and Devorah makes plain that more was expected of them.
+
+The bleating is worth following. The Tanach has a later one, tied tightly to this month, and it belongs not to Reuven the firstborn but to Shaul the first king. Shaul was commanded to destroy Amalek completely. He did not act with enough Ratzon: he left Amalek's king alive, and the best of the flock. Amalek has the same numerical value as Safek, doubt, which is the opposite of Ratzon. When Shmuel came to reprimand him, Shaul said he had fulfilled the command, and Shmuel asked what, then, was this bleating of flocks he was hearing. The hesitation is the same as Reuven's, a divided heart — and as Reuven is replaced as firstborn, Shaul is replaced as king.
+
+Daf Kaf Beit of Sotah keeps on with the acts that can look pious and end up destroying the world. One of its main discussions is of someone who rules when he is not capable of it, and does not rule when he is. Shaul again: he ruled where he should have obeyed, letting the king and some of the flock live, and did not take his own prominence seriously enough — small in the eyes of the people — and the destruction Amalek still causes came of it.
+
+The generation is Jacob, whose name is from Ekev, heel. A heel treats someone else as the head, which is a messenger's position, and Purim belongs to the people as heel, Ya'akov, rather than head, Yisrael, and to the times of Yikveta d'Meshicha.
+
+The journey is from Haradah to Makheloth. Makheloth means assembly, and in modern Hebrew a choir, a gathering to sing and play. Rabbi Jacobson suggests it may be where the people gathered to see the miracle of Aharon's staff. The personal journey takes last week's trembling happiness further, into unity and into gatherings of singing and dancing.
+
+*Source: [Week 22 (Book 3): Adar and Ratzon (Will, Desire)](https://www.kabbalahoftime.com/2014/01/week-22-book-3-adar-and-ratzon-will.html) — 884 words*
+
+---
+
+## Day 151 · Book 4 · Week 22
+
+Channah's twenty-second verse is the staying behind: "But Hannah did not go up, for she said to her husband: 'Until the child is weaned, then I shall bring him, and he shall appear before the Lord, and abide there forever.'" The text is careful to say that she told her husband why, which shows her concern for him and a certain subservience — even though she has her way in the end. Adar is the month of Purim, where another woman, Queen Esther, convinces her husband, Achashverosh, to save her people and destroy Haman, who was effectively running the kingdom.
+
+The Pirkei Avot quality is that the Torah grants dominion, Memshalah. It is not kingship, Malchut, because it does not need royalty: one can rule without being king, as Joseph did as viceroy and, LeHavdil, as Haman did. Memshalah is a more masculine power, sheer power and force, where Malchut is the more sublime feminine quality, connected to speech. Both are in the verse, and both are in this month.
+
+Proverbs 22 is about power, mostly economic. "A name is chosen above great wealth; good favor over silver and gold." "A rich man and a poor man were visited upon; the Lord is the Maker of them all." "In the wake of humility comes fear of the Lord, riches, honor, and life." And then: "A rich man will rule over the poor, and a borrower is a slave to a lender." The word for rule there is Yimshol, the same root as Memshalah.
+
+In a year with two months of Adar the yahrzeits are usually kept in the second, unless the person died in the first Adar of a year that also had two — so the descriptions wait for next month, when weeks 22 through 25 come round again.
+
+*Source: [Week 22 (Book 4): Dominion versus Kingship, Royalty](https://www.kabbalahoftime.com/2014/01/week-22-book-4a-male-power-versus.html) — 430 words*
+
+---
+
+## Day 152 · Book 5 · Week 22
+
+The Song undresses and washes: "I have taken off my tunic; how can I put it on? I have bathed my feet; how can I soil them?" Taking off the head garment reads as letting go of the intellect, which belongs to this month, and turning to the feet. The Rebbe's Ma'amar Ve'Atah Tetzaveh speaks of Mordechai, the Moshe of the generation, as the head, and the Jewish people as the feet.
+
+The next verse is almost the two most crucial verses of Megillat Esther: "My beloved stretched forth his hand from the hole, and my insides stirred because of him." Against it: "And it came to pass when the king saw Queen Esther standing in the court, that she won favor in his eyes, and the king extended to Esther the golden scepter that was in his hand, and Esther approached and touched the end of the scepter."
+
+Then the myrrh: "I arose to open for my beloved, and my hands dripped with myrrh, and my fingers with flowing myrrh, upon the handles of the lock." Myrrh is Mor, and the Talmud says Mordechai is hinted in the Torah at the verse about pure myrrh, Mor Dror, which in Aramaic is Mara Dachia.
+
+Of the seventy souls that descended to Egypt, the twenty-second is Hezron. Hezron comes from chatzer, courtyard or enclosure — and to carry in a courtyard, two neighbours have to set up an eruv chatzeirot. Eruv shares its root with Arev, sweet. When Jews come together and their duality works for the good, there is sweetness, which is this month.
+
+Daf Kaf Beit of Shvuot keeps on with oaths about eating, but its weight falls on the laws of speech, and on whether drinking counts as eating. Drinking is one of the main themes of Adar — drinking to the point of not knowing the difference between blessed is Mordechai and cursed is Haman. The daf opens its discussion of speech with someone who curses Hashem by mistake and must bring a sacrifice.
+
+Jeremiah's twenty-second chapter is a people left leaderless and confused, with eating and drinking through it. "Shall you reign, for you compete with the cedar? Your father-did he not eat and drink and perform justice and righteousness? Then it was well with him." "All your shepherds shall be broken by the wind, and your lovers shall go into captivity." And the end: "O land, land, land, hearken to the word of the Lord."
+
+*Source: [Week 22 (Book 5): Mordechai the Shepherd](https://www.kabbalahoftime.com/2014/01/week-22-book-4b-test-of-being-without.html) — 679 words*
+
+---
+
+## Day 153 · Book 6 · Week 22
+
+The first week of Adar in psalms: the sixty-fourth, sixty-fifth and sixty-sixth, with three verses of Psalm 77 and one of Psalm 89.
+
+Psalm 64 the masters of homiletics read as Daniel in the lion's den — David foresaw it with divine inspiration and prayed for him, Daniel being a descendant of his. The tongues are the weapon: "who have sharpened their tongue like the sword, aimed their arrow-a bitter word-to shoot at the innocent from hidden places; suddenly they shoot at him, they are not afraid." The hiding: "They sought pretexts; [and when] they completed a diligent search, each man [kept the plot] inside, deep in the heart." And then it turns on them: "But G-d shot at them; [like] a sudden arrow were their blows. Their own tongues caused them to stumble."
+
+Psalm 65 is praise that gives up on praising. "Silence is praise for You, O G-d [Who dwells in] Zion" — because who could recount His mighty acts? Then the rain, which is most of the psalm: "You remember the earth and water it, you enrich it abundantly [from] G-d's stream filled with water." "You saturate its furrows, gratifying its legions; with showers You soften it and bless its growth. You crown the year of Your goodness [with rain], and Your clouds drip abundance." And the fields answering: "The meadows don sheep, and the valleys cloak themselves with grain; they sound blasts, indeed they sing."
+
+Psalm 66 is the praise we will offer when the exiles are gathered in. "Raise your voices in jubilation to G-d, all the earth!" "Go and see the works of G-d, awesome in His deeds toward mankind. He turned the sea into dry land, and they passed through the river on foot; we rejoiced in Him there." Then the testing: "For You tested us, O G-d; You refined us as one refining silver. You brought us into prison; You placed a chain upon our loins. You mounted men over our head; we went through fire and water, and You brought us out to abundance." And the end, which asks to be listened to: "Come listen, all you who fear G-d, and I will relate what He has done for my soul."
+
+Psalm 77's verses are a man awake all night: "I remember G-d and I stir; I speak and my spirit becomes faint, forever. You held fast the awakenings of my eyes; I throb and I do not speak. I think of days of yore, ancient years." And Psalm 89's verse is the protection: "No enemy will exact from him, neither will an unjust person afflict him."
+
+*Source: [Week 22 (Book 6): Reviewing the First Week of Adar - Psalms 64-66; 77:4-6; 89:23](https://www.kabbalahoftime.com/2014/02/week-22-book-5-reviewing-first-week-of.html) — 981 words*
+
+---
+
+## Day 154 · Book 7 · Week 22
+
+The giant sea creatures open, and what they ask for is praise from the other element: "Praise G-d from the land, the giant sea creatures and all the depths."
+
+Then the fire and the water, one after the other: "For a fire blazed in My wrath, and burned to the lowest depths" / "It consumed the land and its produce, setting aflame the foundations of mountains" / "And the Lord brought the waters of the sea back upon them" / "For I have kept the ways of the Lord and have not wickedly departed from my G-d" / "And the children of Israel walked on dry land in the midst of the sea."
+
+Then the child left at home, and the forever in both: "But Hannah did not go up, for she said to her husband: Until the child is weaned, then I shall bring him" / "I remember G-d and I stir; I speak and my spirit becomes faint, forever" / "And he shall appear before the Lord, and abide there forever" / "No enemy will exact from him, neither will an unjust person afflict him."
+
+Then the hand through the hole, with the washing and the bleating between: "My beloved stretched forth his hand from the hole, and my insides stirred because of him" / "I have taken off my tunic; how can I put it on?" / "To hear the bleatings of the flocks?" / "I have bathed my feet; how can I soil them?" / "At the divisions of Reuben, (there are) great searchings of heart."
+
+And the end is the myrrh on the lock, and the sleeplessness beside it: "I arose to open for my beloved, and my hands dripped with myrrh" / "You held fast the awakenings of my eyes; I throb and I do not speak" / "And my fingers with flowing myrrh, upon the handles of the lock" / "I think of days of yore, ancient years."
+
+*Source: [Week 22 (Book 7): The Giant Sea Creatures Are Saying](https://www.kabbalahoftime.com/2021/02/week-22-book-7-giant-sea-creatures-are.html) — 253 words*
