@@ -934,3 +934,267 @@ Then the cry and the burning wrath are braided — "and out of His abode He hear
 The last lines put Channah's weeping beside Shamgar and the straw. "So she vexed her; therefore she wept, and would not eat" / "in the days of Shamgar the son of Anath" / "the Lord will save him on the day of evil" / "many are the agonies of the wicked" / "it devours them like straw" / "but he who trusts in the Lord is surrounded by kindness" — and it ends at the mountain: "this was at Sinai, because of the presence of the Lord."
 
 *Source: [Week 7 (Book 7): The Swallow is Saying](https://www.kabbalahoftime.com/2021/02/week-7-book-7-swallow-is-saying.html) — 304 words*
+
+---
+
+## Day 50 · Book 1 · Week 8
+
+Week eight is the end of Cheshvan, and the swift says one short thing: "My help is from G-d, Maker of Heaven and Earth." (Psalms 121:2)
+
+It is the right verse for how far into the month we are. The deeper in we go the more we are immersed in things to be got done — sometimes sinking in them — and we need His help to stay afloat and not lose sight of what we were doing all this for.
+
+Pirkei Avot gives Rabbi Yehoshua on what ruins a person: "An evil eye, the evil inclination, and the hatred of one's fellows, drive a person from the world." Sin takes you out of the world. Though the phrase can be read the other way as well: turning back after sin takes a person higher than this material world reaches.
+
+All three were loose in the generation of the Flood. The Torah singles out theft as what was most common then — and theft is the evil eye acting, wanting what is not yours. They were so taken up with things that ethics and the spirit stopped seeming important.
+
+The pairing is Chesed shebeGevurah, kindness inside severity. The Flood came on slowly, which gave people room to turn back even after the rain had started. And it was not all destruction: it washed the world and let it begin again. Forty days and forty nights, which is also the forty measures of water a mikvah needs to purify.
+
+From the swift we learn that we need Him for everything, in everything. If you feel alone and past helping, do what this bird does and ask.
+
+*Source: [Week 8 (from the Book): Not to Lose Focus on our Spirituality and Relationship with G-d](https://www.kabbalahoftime.com/2013/10/week-8-from-book-not-to-lose-focus-on.html) — 665 words*
+
+---
+
+## Day 51 · Book 2 · Week 8
+
+"When the Most High gave nations their lot, when He separated the sons of man, He set up the boundaries of peoples according to the number of the children of Israel." (Deuteronomy 32:8) Rashi reads both halves as this month's history: giving those who angered Him their portion means He flooded them and drowned them; and separating the sons of man is the scattering of the generation that built the tower — whom He could have removed from the world altogether and did not. He set boundaries instead, and let them live.
+
+The haftorah is the same ground shaking: "Then the earth shook and quaked, the very foundations of heaven did tremble; and they were shaken when he was angered." (II Samuel 22:8)
+
+The quality is humility, *anavah*, and real humility means caring about someone besides yourself. Noah failed that test. Moshe, whom the Torah calls the humblest man on earth, passed it — and is a tikkun for Noah. Told that He would destroy the people and build a nation out of him, which is very nearly what Noah was told, Moshe answered: erase me from Your book. The Hebrew, *M'cheni Nah*, has the same letters as *Mei Noach*, the waters of Noah, which is what the prophets call the Flood.
+
+The prophets this week are Elkanah and Channah, who are prayer and the Temple, which is the month. Both are humility. From Channah we learn how to pray — whispering, so that nobody hears but herself and Hashem. And Elkanah, for all his own level, was worried about his whole generation: he made the pilgrimage to Shiloh every year by a different route so that more people would come with him, at a time when nobody was bothering, and even though the priests serving there had become corrupt. Their son Samuel was the one who lifted the people.
+
+The Levitical city is Be'eshterah, another name for Ashtarot — which appears to be named for Ashtoreth, a goddess that King Solomon is said to have worshipped. The commentators say he did not; his wives did, and his not stopping them counted against him as if he had. He built the first Temple and finished it in this month. And Ashtarot seems to be bound up with idol worship about wealth, which was Solomon's own exposure, being rich — and is ours in a smaller way, going into this month and risking drowning in things.
+
+So: be careful not to pick up false gods out there, or false ideas, or the rationalisations that go with them. Solomon also wrote that many waters cannot extinguish the love. The many waters are the difficulty of making a living, and however deep they get, they cannot put it out.
+
+*Source: [Week 8 (Book 2): Humility is Key](https://www.kabbalahoftime.com/2013/10/week-8-book-2-humility-is-key.html) — 924 words*
+
+---
+
+## Day 52 · Book 3 · Week 8
+
+"And with the breath of Your nostrils the waters were heaped up; the running water stood erect like a wall." Water standing up — the sea and the Flood alongside each other again.
+
+The haftorah brings in another woman, which has been this fortnight's thread: "in the days of Jael, caravans ceased, and travelers walked on crooked paths." Those crooked paths, *arachot akalkalot*, have at their root *lekalkel*, to ruin — which is what had taken hold of the human race before the Flood.
+
+Sotah's eighth daf continues with the bitter waters, and takes care that the testing itself should not provoke illicit thoughts about other men. It also treats Divine retribution in general, which comes *middah k'neged middah*, measure for measure.
+
+The generation is Methuselah, a kosher Methushael. He was righteous, and he lived longer than anyone in history — nine hundred and sixty-nine years — and he died immediately before the Flood came. His yahrzeit falls in this month, on the same day as Rachel's.
+
+Both names open with *met*, dead. But Methuselah continues with *shalach*, sent, and Methushael with *sha'al*, asked or borrowed, which is also *she'ol*, the grave. One name sends death away; the other brings it closer. Methuselah's life was life-affirming and his predecessor's was not. He kept his righteousness in an environment thoroughly corrupted, in a way that was itself above nature — which is the task in exile too.
+
+The journey is into hunger: "They journeyed from the Red Sea and camped in the desert of Zin." That is where the provisions carried out of Egypt ran out. They cried, and the manna came. The Torah says there was no water either, and water also stands for Torah. We are at the same point in the year: what Tishrei supplied is running down, and we have to ask hard for what will keep us going. In Kislev it comes the way the manna came, from outside nature altogether. One meaning of *Zin* is moon, and a new moon is as empty as that desert.
+
+Methuselah's lesson for prayer is to affirm being alive. Before anything else, praise and thanks for being here, in the way the Creator meant. As the Torah puts it: choose life. That is nearly the only decision there is, and it comes up every day.
+
+*Source: [Week 8 (Book 3): Methuselah and Affirming Life](https://www.kabbalahoftime.com/2013/10/week-8-book-3-methuselah-and-affirming.html) — 708 words*
+
+---
+
+## Day 53 · Book 4 · Week 8
+
+"And Elkanah her husband said unto her: 'Hannah, why weepest thou? and why eatest thou not? and why is thy heart grieved? am not I better to thee than ten sons?'" Here is somebody stepping in to try to make her happy.
+
+The further we get from Tishrei the more bogged down the world's business makes us feel, and it can be a great deal at once. Being able to reach somebody who will lift you is worth something. And the week's quality is exactly that: *Messame'ach et HaBri'ot*, one who makes the creatures happy.
+
+Elkanah's three questions are a short course in how. Sometimes you have to remind a person that they are a created being with the same ordinary needs as every other one — why aren't you eating? Then point at what is good: am I not better to you than ten sons? And then the thing that is hardest to hear and truest, that it looks this bad only from where we are standing, and the Creator has a plan for each of us in which everything He does is for the best.
+
+Proverbs' eighth chapter is wisdom speaking in her own voice, and most of it is about creation. "The Lord acquired me at the beginning of His way, before His works of old. From the distant past I was enthroned, from the beginning, of those that preceded the earth. I was created when there were yet no deeps, when there were no fountains replete with water… When He established the heavens, there I was, when He drew a circle over the face of the deep… when He gave the sea its boundary, and the water shall not transgress His command." And then the lines that make the chapter belong to this week: "I was a nursling beside Him, and I was His delight every day, playing before Him at all times; playing in the habitable world of His earth, and having my delights with the children of man."
+
+The twenty-first of Cheshvan is the yahrzeit of two great Sefardi kabbalists. The Radbaz, Rabbi David ben Zimra, Chief Rabbi of Egypt from about 1514 to 1553, who taught the Arizal and Rabbi Betzalel Ashkenazi, and was a wealthy businessman besides. And Rabbi Avraham Azulai, author of the Chessed L'Avraham, who also shaped the Arizal and is quoted often in his works — Chief Rabbi of Hebron, and the great-great-grandfather of the Chidah.
+
+*Source: [Week 8 (Book 4): Rejoicing with Creation](https://www.kabbalahoftime.com/2013/10/week-8-book-4a-rejoicing-with-creation.html) — 678 words*
+
+---
+
+## Day 54 · Book 5 · Week 8
+
+"Sustain me with flagons of wine, spread my bed with apples, for I am lovesick. His left hand was under my head, and his right hand would embrace me. I adjure you, O daughters of Jerusalem, by the gazelles or by the hinds of the field, that you neither awaken nor arouse the love while it is desirous."
+
+Two of these are ours to Him and the third is addressed to the nations. Rashi takes the first literally as nursing: sustain me now as one does the sick, with flagons of grape wine or cakes of white flour; spread my bed around me with apples for the good smell, in the way of the sick — for I am sick for his love, and I thirst for Him here in my exile. That is this month. The deeper into the year, the more entrenched in daily business, and the sicker for what we are missing.
+
+The second verse remembers when it was easier to see. Rashi: His left hand was under my head — in the desert; and His right hand would embrace me — He went a three days' journey to find them rest, and where the rest was He brought down manna and quails. All of which I remember now in exile, and I am sick for His love. The left hand is discipline, laid under the head to keep us in line; the right is kindness, in an embrace. Which is this week's pairing exactly, kindness inside severity.
+
+The third verse turns outward and is less yielding: whatever the weight of the physical world just now, we are not giving up what we have with Him.
+
+There is the Flood in these verses too. Noah comes out of the ark and back into the world and is overwhelmed by it; he plants a vineyard and falls much as Adam did. One of the major opinions in the Talmud is that the fruit of the Tree of Knowledge was the grape.
+
+Of the seventy souls the eighth is Jamin — *yemin*, the right hand, which is the kindness above. Which is what this part of the year leans on more and more.
+
+Shevuot's eighth daf stays with the goat whose blood went into the Holy of Holies, but the sins have got graver: idolatry, certain sexual sins, murder — though the Talmud is speaking of them done unwittingly. The deeper into exile, the more atonement is needed.
+
+Jeremiah's eighth chapter is the same descent: sins mounting, worse ones, and the eye for how bad they are going dim. They become ordinary, then acceptable, and at last we think we are doing His will. The chapter happens to name the birds of this season: "Even the stork in the heaven knows her seasons, and the turtledoves and the crane and the swallow await the time of their coming, but My people do not know the ordinance of the Lord." And: "they healed the breach of My people easily, saying, 'Peace, peace,' but there is no peace."
+
+*Source: [Week 8 (Book 5): Lovesick](https://www.kabbalahoftime.com/2013/10/week-8-4b-lovesick.html) — 934 words*
+
+---
+
+## Day 55 · Book 6 · Week 8
+
+The fourth week of Cheshvan in psalms: the twenty-second, twenty-third and twenty-fourth, with three verses of Psalm 41 and one of Psalm 89.
+
+Psalm 22 is headed as the prayer for the length of the exile and the fall from prestige to lowliness, for a person to say in agony, and in which to make vows. It opens with the hardest line in the book: "My G-d, my G-d, why have You forsaken me! So far from saving me, from the words of my outcry? My G-d, I call out by day, and You do not answer; at night — but there is no respite for me." Then, immediately: "Yet You, Holy One, are enthroned upon the praises of Israel."
+
+It goes very low. "And I am a worm and not a man; scorn of men, contempt of nations." The body comes apart: "I am poured out like water, all my bones are disjointed; my heart has become like wax, melted within my innards. My strength is dried up like a potsherd, and my tongue cleaves to my palate." The enemies are animals — bulls of Bashan, a lion, dogs — and they divide his garments and cast lots for his clothing. And then it turns and does not turn back: "For He has not despised nor abhorred the entreaty of the poor… Let the humble eat and be satisfied… All the ends of the earth will remember and return to the Lord."
+
+Psalm 23 is given a setting: when David was in the forest of Cheret and nearly died of starvation, and G-d fed him with a taste of the World to Come. "The Lord is my shepherd, I shall lack nothing… Though I walk in the valley of the shadow of death, I will fear no evil, for You are with me… You will prepare a table for me before my enemies."
+
+Psalm 24 asks who may go up. "The earth and all therein is the Lord's… Who may ascend the mountain of the Lord, and who may stand in His holy place? He who has clean hands and a pure heart, who has not used My Name in vain or sworn falsely." And then the gates, twice over: "Lift up your heads, O gates, and be lifted up, eternal doors, so the glorious King may enter. Who is the glorious King? The Lord, strong and mighty; the Lord, mighty in battle."
+
+Psalm 41's verses are about being kept through illness: "The Lord will guard him and keep him alive… The Lord will support him on the bed of illness; You will turn him over in his bed all throughout his sickness." And then the plainest prayer of a sick man: "I said, 'Lord, be gracious to me! Heal my soul, for I have sinned against You!'"
+
+*Source: [Week 8 (Book 6): Reviewing the Fourth Week of Cheshvan - Psalms 22-24; 41:3-5; 89:9](https://www.kabbalahoftime.com/2013/10/week-8-book-5-reviewing-fourth-week-of.html) — 1092 words*
+
+---
+
+## Day 56 · Book 7 · Week 8
+
+The swift opens, and this gathering is the boundaries of the nations braided with a sickbed.
+
+"When the Most High gave nations their lot" comes in first, with Elkanah's portions and a reproach: "and to all her sons and her daughters, portions" / "because they came not to the aid of the Lord" / "then the earth shook and quaked." The gazelles and the hinds follow, and the separating of the sons of man, and the foundations of heaven trembling — and then the left hand: "His left hand was under my head" / "and he will be praised in the land."
+
+The swift's own verse sits at the centre of that: "My help is from G-d, Maker of Heaven and Earth."
+
+Then the boundaries are finished and the manna comes in. "He set up the boundaries of peoples" / "and they were shaken when he was angered" / "when Elkanah sacrificed, that he gave to Peninnah his wife" / "I have heard the complaints of the children of Israel" / "I said, 'O Lord, be gracious to me; heal my soul because I have sinned against You.'" And the promise of meat and bread is laid right across the number of the children of Israel: "in the afternoon you shall eat meat" / "the Lord will preserve him and keep him alive" / "according to the number of the children of Israel."
+
+The lovesickness lands between them: "and his right hand would embrace me" / "the Lord will support him on his sickbed" / "sustain me with flagons of wine, spread my bed with apples, for I am lovesick" / "and in the morning you shall be sated with bread."
+
+It ends with the adjuring and the knowing: "I adjure you, O daughters of Jerusalem" / "and you shall know that I am the Lord, your G-d" — and the last lines are the love that must not be woken before it wants to be, and the enemies it will not be given over to.
+
+*Source: [Week 8 (Book 7): The Swift is Saying](https://www.kabbalahoftime.com/2025/11/week-8-book-7-swift-is-saying) — 302 words*
+
+---
+
+## Day 57 · Book 1 · Week 9
+
+Week nine, and the stormy petrel announces: "Light is sown for the righteous, and joy for the straight-hearted." (Psalms 97:11)
+
+Some years this week sits entirely in Cheshvan; other years it already takes in the first of Kislev, the month of Chanukah. Even when Rosh Chodesh Kislev falls later, this week holds a date the Maccabees kept: the twenty-third of Cheshvan, which in the time of the Talmud was much celebrated, because that was when the stones of the altar that the Greeks had made impure were carried out.
+
+Light, and sowing, and protection for the righteous. The Maccabees were righteous fighters of the seed of Aaron, and G-d arranged it that they beat Greece, which was the greatest empire there was.
+
+Pirkei Avot gives Rabbi Yossi: "The property of your fellow should be as precious to you as your own. Perfect yourself for the study of Torah, for it is not an inheritance to you. And all your deeds should be for the sake of Heaven."
+
+Inheritance is the word that ties it to Kislev. The Greeks admired the Torah as a philosophy and liked its practical parts — respecting another man's money among them — but they wanted our link to it cut, and our own connection to G-d with it. The Midrash puts it exactly: "darkness symbolizes Greece, which darkened the eyes of Israel with its decrees, ordering Israel to, 'Write on the horn of an ox that you have no inheritance in the G-d of Israel.'" Rabbi Yossi was himself a kohen, like the Maccabees, and like them he is called a chassid — someone who goes past the letter of the law to do what G-d wants.
+
+For Rabbi Yossi the thing that matters most is a good neighbour, and avoiding a bad one at all costs. A good neighbour, *shachen tov*, may be the Shechinah, which lives among the Jewish people and in the Temple. The bad one is the empire that worked so hard to make us like itself.
+
+The pairing is Gevurah shebeGevurah, severity within severity.
+
+The petrel's lesson is that a long way towards being happy is simply being a good, honest, fair person. Rebbe Nachman teaches to look for those good points and dwell on them — in others and in yourself. Even when they are small and incomplete, they are worth real joy.
+
+*Source: [Week 9 (from the Book): Fighting Darkness with Light](https://www.kabbalahoftime.com/2013/11/week-9-fighting-darkness-with-light.html) — 772 words*
+
+---
+
+## Day 58 · Book 2 · Week 9
+
+"Because the Lord's portion is His people Jacob, the lot of His inheritance." (Deuteronomy 32:9) Inheritance again, which is the week's whole subject and the Greeks' particular target — the decree that Israel write on the horn of an ox that they have no inheritance in the G-d of Israel.
+
+The haftorah is fire: "Smoke went up in His nostrils, and fire out of His mouth did devour; coals flamed forth from Him." (II Samuel 22:9) The miracle of Chanukah is light and fire. And coals are a good figure for the Jews of that time, because a coal can be cold on the outside and hot inside, and all that is needed is to get the heat out. That was true then and it is true now, when Jews of every kind come out of the woodwork to light together. The verse is also about His might, which is the other half of that miracle — the military one.
+
+The quality is joy, *simchah*. The spiritual kind is one of the great subjects of Chanukah, in praise and in thanks; it is also central to the Temple and to the work of the Kohanim.
+
+The prophet is Eli, the Kohen Gadol, whose service had to be done in joy despite what his life handed him — including his own sons' corruption. Which rhymes with Chanukah, where part of the fight was against the corrupting pull of Hellenist culture.
+
+Because this week lies about half the time in Cheshvan, whose four Levitical cities have all been given, its city is one of the three cities of refuge still to come — likely in the territory of the half-tribe of Menasheh, across the Jordan. And since half the time this week already belongs to Kislev, whose tribe is Benjamin, it is also Jerusalem: half the Temple's area, itself a city of refuge, lies in Benjamin, though in time Jerusalem will be its own territory and no tribe's. It fits either way. Cheshvan saw the first Temple finished and will see the third dedicated; Kislev holds the finishing of the Mishkan and the rededication of the second.
+
+What joy asks is simple and hard. It is not meant to depend on your circumstances. Being happy is first of all a decision — and for the merit of making it, He will give you plenty to be happy about.
+
+*Source: [Week 9 (Book 2): Choosing Joy](https://www.kabbalahoftime.com/2013/11/week-9-book-2-choosing-joy.html) — 732 words*
+
+---
+
+## Day 59 · Book 3 · Week 9
+
+"The depths congealed in the heart of the sea. Because the enemy said, I will pursue." The verse breaks in half, and so does the week: the first part is still the Flood, the second starts something new — a pursuing enemy, which is Chanukah's subject.
+
+The haftorah splits the same way: "The open cities ceased, in Israel they ceased, until I Deborah arose; I arose as a mother in Israel." Open cities ceasing is civilisation stopping, as in the Flood. Then Devorah stands up, as a mother. Her war against Sisera runs parallel to the Maccabees' — and a mother's deepest job is keeping her child's identity intact, which is why Chanukah comes from *chinuch*, education. These weeks have been full of women: Rachel, Anath, Yael, and now Devorah.
+
+Sotah's ninth daf also divides: the bitter waters, and then Shimshon. Samson belongs to Teveth with the tribe of Dan, but Kislev's subject is in him anyway — he was meant to be pure, and what undid him was impurity, intermarriage among it. Teveth holds several days of Chanukah too.
+
+The generation is Lamech, Noah's father, a kosher version of Cain's Lamech, who killed Cain and his own son besides. Cain's Lamech destroys his ancestor and his child; Seth's Lamech, the moment his son is born, says the world will be comforted through him — and through that son his whole line, and the human race, is saved.
+
+Both Lamechs have speeches recorded. Cain's: "Adah and Zillah, hearken to my voice… for I have slain a man by wounding him and a child by bruising him." Seth's: "And he named him Noah, saying, 'This one will give us rest from our work and from the toil of our hands from the ground, which the Lord has cursed.'"
+
+Cain's Lamech also stands for aesthetics and pleasure worshipped without check, which is what Greek culture was at the time, and for technology used the same way. Rashi says that before Noah there were no plowshares, and he made them. Cain's line built better weapons, until Cain himself was killed by one; Seth's built tools that made life easier. Beauty and science are good things held inside something larger, which is what Noah says: "May God expand Japheth, and may he dwell in the tents of Shem." Japheth — whose name comes from *yoffi*, beauty, and from whom Yavan, Greece, descends — may grow; in the tents of Shem, whose name means *name*.
+
+The journey is a knock: "They journeyed from the desert of Zin and camped in Dophkah." From *dofek*, to knock. It is the new moon coming, and the knocking in the chest — *Kol Dodi Dofek*, the voice of my beloved knocking. Providence was ready to put everything back as it had been, if they had all been willing to return; only some were, and the majority and the notables stayed in Babylon, preferring dependence, unwilling to leave their houses and their affairs. Which is the risk of exile: getting comfortable.
+
+Lamech's lesson for prayer is to reach Him above reason. In *melech*, king, the mem is *moach*, the mind, and the lamed is *lev*, the heart — and the mind is meant to rule the heart. Swap the two letters and melech becomes *lemech*, a fool. And yet there is also *shtus d'kedusha*, holy folly: prayer is the service of the heart and not the mind, and what we have with Him is above nature and above logic.
+
+*Source: [Week 9 (Book 3): Lamech and Avoiding Greek Traps](https://www.kabbalahoftime.com/2013/11/week-9-book-3-lamech-and-avoiding-greek.html) — 1148 words*
+
+---
+
+## Day 60 · Book 4 · Week 9
+
+"So Hannah rose up after they had eaten in Shiloh, and after they had drunk — now Eli the priest sat upon his seat by the door-post of the temple of the Lord." Hannah rising, and the next figure in the story arriving: Eli, the Kohen Gadol. Kislev and Chanukah belong to the Kohen Gadol and to the priests. Rashi notes Eli had been made judge over all Israel — and in the Chanukah story the Chashmona'im were priests and kings at once.
+
+And Eli is sitting by the door-post, the *mezuzah*, of the Temple. Which is precisely where the Chanukah lamp is put.
+
+The week's quality is that the Torah enclothes him with humility. It is a strange pairing, because clothes — and particularly the kind one would associate with the Torah — sound like honour, not lowliness. The High Priest's garments are described as being for honour and beauty. But the honour and the beauty are not his. They belong to Hashem and to the office, and the splendour of them is exactly what makes the man wearing them feel small. The Torah works the same way: the more you learn of how great He is and how deep it goes, the smaller you get.
+
+Rashi finds it in the spelling. "And Eli the priest was sitting on the chair" is written defectively, missing a letter, because that day he sat on a huge chair, having been appointed judge over Israel. The chair makes the office great and the man small. And he sat outside, where he could greet whoever came in, which is its own kind of humility.
+
+Proverbs' ninth chapter splits in two. The first part is wisdom keeping house: "Wisdom has built her house; she has hewn her seven pillars. She has prepared her meat; she has mingled her wine; she has even set her table… 'Whoever is simple, let him turn in here'… 'Come, partake of my bread and drink of the wine I have mingled.'" Rashi reads the house as the world and the seven pillars as the seven days of creation. The rest of the chapter returns to corruption and temptation. And buried in it is the Jewish answer to everything Greece offered: "The beginning of wisdom is the fear of the Lord, and the knowledge of the holy ones is understanding." The Greeks were wisdom itself, and not that.
+
+The twenty-seventh of Cheshvan is the yahrzeit of Reb Yaakov Leizer, second Rebbe of Pshevorsk, who based himself in Antwerp. He had hundreds of chassidim and never left off his plain ways: he respected the lowliest Jews, often slept on a bench in the ezras nashim so a wandering beggar could have his bed, and slept in his sukkah with tens of others who had none.
+
+And the twenty-ninth is the yahrzeit of Rebbe Tzvi-Hirsch of Riminov, who was his predecessor's personal attendant before he was his successor — known as Rav Tzvi Hersch Meshares, the helper — and later as a worker of miracles, whose Torah was gathered in Be'erot HaMayim.
+
+*Source: [Week 9 (Book 4): Enclothed in Humility](https://www.kabbalahoftime.com/2013/11/week-9-book-4a-enclothed-in-humility.html) — 1100 words*
+
+---
+
+## Day 61 · Book 5 · Week 9
+
+"The sound of my beloved! Behold, he is coming, skipping over the mountains, jumping over the hills. My beloved resembles a gazelle or a fawn of the hinds; behold, he is standing behind our wall, looking from the windows, peering from the lattices. My beloved raised his voice and said to me, 'Arise, my beloved, my fair one, and come away.'"
+
+All three are ours, and all three share their second word: *dodi*, my Beloved. What they describe is rescue that does not go by the rules — skipping over mountains, jumping hills — which is Kislev and the Maccabees, where He saves in ways nature does not allow. Which is also the difference between the two systems in that war. Jews want a close relationship with Him and call Him beloved; the Greeks of the time believed in the cosmos and its laws, and in no Judge at all.
+
+And "standing behind our wall, looking from the windows, peering from the lattices" is a known reference to the blessing of the priests — Kislev and Chanukah again.
+
+Of the seventy souls the ninth is Ohad, spelled with a *hey* where *echad*, one, has a *chet* — and monotheism was the other great dividing line. Rashi notes that the family of Ohad was one of the few wiped out entirely: when Aharon died the clouds of glory withdrew and the Canaanites came to fight, and the people set their hearts on going back to Egypt and went back eight stages of the journey. The Levites pursued them to bring them back and killed seven of their families, losing four of their own. Which has the shape of the Chanukah story too, where part of the fighting was Jew against Jew, those who meant to stay Jews against those who did not.
+
+Shevuot's ninth daf stays with the goat offered outside the Temple, and takes up the goats of Rosh Chodesh and the festivals. Rosh Chodesh, with Shabbat and circumcision, was one of the three the Greeks tried to forbid outright. It stands for His never-ending part in how we live: for all that we now use a fixed calendar, the ideal was looking up for the first thin appearance of the new moon — a reminder that even the part of our lives tied to nature's cycles is in His hands.
+
+Jeremiah's ninth chapter arrives at lines everybody knows: "Let not the wise man boast of his wisdom, nor the strong man boast of his strength, nor the rich man boast of his riches. But let him that boasts exult in this, that he understands and knows me, for I am the Lord Who practices kindness, justice and righteousness on the earth." Wise, strong, rich — the Greeks were all three, and their wisdom had no G-d in it. Which is what we say in the Shemoneh Esreh: the strong into the hands of the weak, the many into the hands of the few, the impure into the hands of the pure. The chapter ends on circumcision, and on hearts that are uncircumcised.
+
+*Source: [Week 9 (Book 5): Beloved](https://www.kabbalahoftime.com/2013/11/week-9-4b-beloved.html) — 1107 words*
+
+---
+
+## Day 62 · Book 6 · Week 9
+
+The last week of Cheshvan, or the week of Rosh Chodesh Kislev, in psalms: the twenty-fifth, twenty-sixth and twenty-seventh, with three verses of Psalm 41 and one of Psalm 89.
+
+Psalm 25 is a request to be taught. "O Lord, make Your ways known to me; teach me Your paths. Train me in Your truth and teach me, for You are the G-d of my salvation; I yearn for You all day." It asks for an old mercy and a short memory: "O Lord, remember Your mercies and Your kindnesses, for they have existed for all time. Do not recall the sins of my youth." Then the line about who gets taught: "Good and upright is the Lord, therefore He directs sinners along the way. He guides the humble with justice… The secret of the Lord is to those who fear Him." And near the end, alone: "Turn to me and be compassionate to me, for I am alone and afflicted."
+
+Psalm 26 asks for the opposite of mercy — to be examined. "Judge me, O Lord, for in my innocence I have walked… Try me, O Lord, and test me; refine my mind and heart." Then the company he has kept and not kept: "I did not sit with men of falsehood, and with hypocrites I will not mingle." And what he does instead: "I wash my hands in purity, and circle Your altar, O Lord, to give voice to thanks, and to recount all Your wonders. I love the shelter of Your House, O Lord, and the place where Your glory resides."
+
+Psalm 27 is the one said through this season. "The Lord is my light and my salvation — whom shall I fear? The Lord is the strength of my life — whom shall I dread?" Then the single request, which is the heart of it: "One thing I have asked of the Lord, this I seek: that I may dwell in the House of the Lord all the days of my life, to behold the pleasantness of the Lord, and to visit His Sanctuary." It asks not to be hidden from — "Do not conceal Your countenance from me" — and holds the hardest comfort in the book: "Though my father and mother have forsaken me, the Lord has taken me in." It ends twice over: "Hope in the Lord, be strong and let your heart be valiant, and hope in the Lord."
+
+Psalm 41's verses are the whispering of enemies: "My foes say that evil awaits me: 'When will he die, and his name perish?' And if one comes to see me, he speaks insincerely… Together they whisper against me." And Psalm 89 answers with the sea: "You rule the vastness of the sea; when its waves surge, You still them."
+
+*Source: [Week 9 (Book 6): Reviewing the Last Week of Cheshvan / Week of Rosh Chodesh Kislev - Psalms 25-27; 41:6-8; 89:10](https://www.kabbalahoftime.com/2013/11/week-9-book-5-reviewing-last-week-of.html) — 959 words*
+
+---
+
+## Day 63 · Book 7 · Week 9
+
+The stormy petrel opens, and this gathering is a beloved arriving while enemies whisper.
+
+"Light is sown for the righteous" is set between the beloved raising his voice and the Lord's own portion: "My beloved raised his voice and said to me" / "Light is sown for the righteous" / "because the Lord's portion is His people" / "'Arise, my beloved, my fair one, and come away.'"
+
+Then three risings together — Devorah's, Hannah's, and the beloved coming over the hills: "until I Deborah arose; I arose as a mother in Israel" / "so Hannah rose up after they had eaten in Shiloh" / "the sound of my beloved! Behold, he is coming" / "skipping over the mountains, jumping over the hills."
+
+And immediately the whispering starts. "My foes say that evil awaits me" / "the depths congealed in the heart of the sea" / "because the enemy said, I will pursue" / "when will he die, and his name perish?" The open cities cease, and the insincere visitor comes in, and the smoke goes up in His nostrils — "for his heart gathers iniquity for himself" / "together they whisper against me — all my enemies" / "and fire out of His mouth did devour."
+
+Then the sea is stilled: "you rule the vastness of the sea" / "when its waves surge, You still them."
+
+It ends at the windows and the doorpost. "Looking from the windows" / "now Eli the priest sat upon his seat" / "my beloved resembles a gazelle or a fawn of the hinds" / "by the door-post of the temple of Hashem" / "behold, he is standing behind our wall" — and the last lines are Jacob as the lot of His inheritance, joy for the straight-hearted, and peering from the lattices.
+
+*Source: [Week 9 (Book 7): The Stormy Petrel is Saying](https://www.kabbalahoftime.com/2021/02/week-9-book-7-stormy-petrel-is-saying.html) — 244 words*

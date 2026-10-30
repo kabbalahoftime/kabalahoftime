@@ -33,7 +33,10 @@ when where why how all any both each few more most other some only own same too 
 can will just also into over under again further once about against between through
 during before after above below up down out off again more again does do did doing
 have has had having would should could may might must shall them him us me
-one two three four five six seven eight nine ten first second third week day""".split())
+one two three four five six seven eight nine ten first second third week day
+# These identify nobody in a corpus where every post is about them, and "Jew"
+# is too short for the containment rule to reach "Jewish".
+jew jews jewish israel israelite israelites""".split())
 
 NUM_SRC = re.compile(r'\b\d[\d:\u2013\u2014.\-/]*\d\b|\b\d\b')
 
@@ -80,6 +83,7 @@ ALT = {
     'tikkun': 'tikun',
     # One man, and the blog spells him Maimonedes.
     'rambam': 'maimonedes', 'maimonides': 'maimonedes',
+    'aharon': 'aaron', 'hellenist': 'helenist', 'greece': 'greek',
 }
 
 # Twelve years of Blogger has eaten a lot of spaces: "Midrashteaches",
