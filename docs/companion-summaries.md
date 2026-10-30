@@ -4110,3 +4110,117 @@ Then the quails and the dew, with the kindness not cancelled: "It came to pass i
 And the end is the hungry who have ceased, and the work of our hands: "They that were full have hired out themselves for bread" / "And they that were hungry have ceased" / "Give thanks to the Lord, call out in His name" / "Make His deeds known among the peoples" / "And the work of our hands establish for us" / "And the work of our hands establish it."
 
 *Source: [Week 33 (Book 7): The Donkey is Saying](https://www.kabbalahoftime.com/2016/05/the-donkey-is-saying-songs-for-week-33.html) — 297 words*
+
+---
+
+## Day 232 · Book 1 · Week 34
+
+The ox is saying, "Then Moses and the Children of Israel sang this song to G-d, and they said, I shall sing to G-d, for He has triumphed; He has thrown the horse and its rider into the sea." (Exodus 15:1) The month of Iyar is linked to Taurus, and the ox is the last of the farm animals to sing, with a verse from the opening of the Song of the Sea.
+
+The sheep and the goat, the first farm animals, also sang a verse from the Song of the Sea, on Rosh Chodesh Nissan. The cow, which came next, sang a verse that calls the people Jacob, the more fragile and humble side — Yaakov is from Ekev, heel. The ox uses the name Israel, the stronger side. Across this journey of liberation, from the start of Nissan until now, we make the whole transformation from Jacob to Israel. The Hebrew for ox is Shor, which is near Shir, song, and Yashar, upright — and Israel itself reads as Yashar-El, the upright one of G-d, and, with the letters turned around, Shir-El, the song of G-d, and even Li-Rosh, to me is the head. The ox's song is in the future tense, which points to the World to Come.
+
+There is the same journey inside Iyar. The first animal of the month was the horse, and now at its end the ox sings about the horse and its rider being thrown into the sea. Both are strength. But the horse's power is a somewhat unrestrained military might, where the ox is marked by humbly accepting its yoke; the ox's meat is kosher and the horse's is not. That firm acceptance of the yoke of Heaven is what is most precious in His eyes. The ox belongs to the conquest of the Land too, which is this month: "Moab became terrified of the people, for they were numerous, and Moab became disgusted because of the children of Israel. Moab said to the elders of Midian, 'Now this assembly will eat up everything around us, as the ox eats up the greens of the field.'" And Joseph is called an ox, and Joshua descended directly from Joseph.
+
+Thirty-four is twice 17, the gematria of tov, good — the 17 years Jacob lived with Joseph in Israel and the 17 more he lived with Joseph in Egypt, the best years of his life. It is also the gematria of Vayechi, the portion that tells of Jacob's passing. So 34 is that journey from Yaakov to Yisrael, and the healing Jacob found on being reunited with his son. And it is the gematria of ga'al, redeemed.
+
+Pirkei Avot gives Rabbi Yishmael the son of Rabbi Yossi: one who learns Torah in order to teach is given the opportunity to learn and teach; one who learns in order to do is given the opportunity to learn, teach, observe and do. That bears on the death of Rabbi Akiva's students during the omer. They died because they did not respect one another enough: those who thought they knew more believed the respect should come to them rather than from them. The thing that matters in learning is learning in order to teach and to do, not in order to feed one's own ego — which leads a person to think his knowledge makes him better than others, and defeats the whole purpose of having learned.
+
+The combination is yesod shebehod. Joseph, who is yesod, is called an ox by Jacob in the blessing on his deathbed, in the portion of Vayechi. The lesson from the ox is to work on ourselves in a concentrated and humble way, remembering His omnipotence — and to keep in mind that He saved us from our enemies before, and does it again in every generation, so there is nothing to fear.
+
+*Source: [Week 34 (from the Book): To Work in a Focused Manner and without Ego](https://www.kabbalahoftime.com/2014/05/week-34-from-book-to-work-in-focused.html) — 969 words*
+
+---
+
+## Day 233 · Book 2 · Week 34
+
+The last week of Iyar. Haazinu asks a question: "Is it not stored up with Me, sealed up in My treasuries?" (Deuteronomy 32:34) By Rashi's plain reading, the sins of the Jewish people have not been forgotten; He has stored and preserved them. And there is room for another reading, because why would sins be sealed in His treasuries, which implies something He treasures rather than something He despises? Perhaps what is stored is not their sins but their suffering for His sake, which He does treasure. And that suffering gives access to His treasuries, as it did for Rabbi Shimon Bar Yochai, and to the return to the Holy Land.
+
+The Haftorah: "He makes my feet like hinds; And sets me upon my high places." (II Samuel 22:34) He set King David in Jerusalem, Ir David, which stands on a mountain, Mount Zion. As in the verse before it, the kri differs from the ksiv: it is read as making David's feet swift like hinds, presumably for battle, and the ksiv speaks instead of G-d's feet. The Torah says the Earth is the place of His feet, and His representatives on Earth are the Jewish people; Moshe once calls them feet. The word for hinds, Ayalot, is spelled like Ayalut, strength — as in Psalm 22, with Ayaluti, my strength — so the first half can read that He gives the people the power to overcome the enemy and conquer the Land, which fits the second half, David established in Jerusalem. It also recalls Moshe's final blessing, "Ve Atah Al Bamoeimoh Tidroch," and you shall trample upon their high places, which Rashi reads as Yehoshua, commanded in the conquest to place his own feet on the neck of the Cana'anite enemies — and the neck is also the Temple. And there is an almost identical verse at the end of Chabakuk's prayer, last week's prophet, where G-d comes gloriously to save the people and their anointed leader: "G-d the Lord is my strength. He made my feet [as swift] as the hind's, and he guides me on my high places. To the conductor [to play] with my melodies!"
+
+Perhaps because Lag Ba'omer has passed, the quality is no longer one of the marks of someone who studies Torah for its own sake, though love continues in it: loves the ways of righteousness, ohev et hatzedakot. Righteousness stands in the plural and the feminine, which suggests it should also be read as loving the many givings of tzedakah. Charity is called tzedakah because it is not first of all an act of generosity but an act of righteousness and justice. It is a quality found in every Jew, not only the observant ones — plainly so in the efforts to support the Jews of the Holy Land, and in the Zionist endeavour as a whole.
+
+The prophet is Zephaniah, whose prophecy is full of it. "Seek the Lord, all you humble of the earth who executed His judgment; Seek righteousness, seek humility! Perhaps you will be concealed on the day of the Lord's wrath." "The Lord is just in her midst; He commits no injustice. Every morning He brings His judgment to light. It does not fail. But the one who commits injustice knows no shame." "The remnant of Israel shall neither commit injustice nor speak lies; neither shall deceitful speech be found in their mouth, for they shall graze and lie down, with no one to cause them to shudder." He also names what tzedakah stands against, the lust for money and the trust placed in it: "Neither their silver nor their gold will be able to save them on the day of the Lord's wrath."
+
+The levitical city is 'Ein Gannim, the fountain of gardens. Ein also means eye, and it is the letter Ayin, whose value is seventy; one who gives tzedakah generously is said to have an Ayin Tovah. The Tanya draws the connection between Tzedakah and gardens — the Upper and the Lower Garden of Eden — and the letter Ayin. Charity is greater than all the commandments, because performing them produces garments for the soul: garments that let the soul withstand the intense Divine revelation it will meet in Gan Eden instead of being nullified by it, drawn from the light of the Ein Sof, so that having an infinite source they can bear an infinite revelation. And this is the meaning of "He who sows tzedakot brings forth yeshuot," salvations — the drawing down of the light of the shin-ayin nehorin, the three hundred and seventy lights spoken of in the holy Zohar: shin, three hundred, for the three intellectual faculties of ChaBaD at the level called hundreds, and ayin, seventy, for the seven emotive attributes, each holding ten. That illumination, the helmet of salvation, is drawn onto the head, the beginning, of the Ten Sefirot.
+
+Like Dobrath, 'Ein Gannim has its own connection to the Zionist endeavour: it was the name of Israel's first Moshav Poalim, a worker's settlement, a model a little different from the kibbutz, and among its residents were prominent members of the Zionist movement, David Ben-Gurion among them.
+
+*Source: [Week 34 (Book 2): Zephaniah and Loving Tzedakot](https://www.kabbalahoftime.com/2014/05/week-34-book-2-zephaniah-and-loving.html) — 1416 words*
+
+---
+
+## Day 234 · Book 3 · Week 34
+
+Beshalach describes what the Mannah actually was: "When the children of Israel saw [it], they said to one another, It is manna, because they did not know what it was, and Moses said to them, It is the bread that the Lord has given you to eat. This is the thing that the Lord has commanded, Gather of it each one according to his eating capacity, an omer for each person, according to the number of persons, each one for those in his tent you shall take." There was a social side to it, which had people talking to each other — and some commentaries say it had them not recognising one another, because after such spiritual food they stood at a higher level. And there was the miracle in it: each was to take one omer a person, and whatever anyone took came out according to his eating capacity. Him filling the people's needs with bread belongs to the healing of Iyar. "Omer lagulgolet" also looks toward Lag Ba'Omer, the main day of this month, since it holds the word omer, and lagulgolet in Hebrew has two Lamed Gimmels in a row — lag, lag.
+
+The Haftorah sates thirst and hunger: "Water he requested, (but) milk she gave him: in a lordly bowl she brought him cream." Out of the context of Yael killing Sissera, which is a worthy event in itself, the verse hints at the motherly kindness of women, who offer milk and cream when only water was asked for. The mannah is the same: instead of simply giving bread from the earth, He gave heavenly bread, with its own powers and blessings.
+
+Daf Lamed Dalet of Sotah keeps on with crossing the Jordan, the spies, and Hebron. Week 34 is the completion of a cycle, with the Jews now ready to enter the Land — and with the disaster of the spies to keep in mind.
+
+The generation is Solomon, Shlomoh, whose name comes from Shalom, peace, and is also near Shalem, whole, complete. We finish Iyar with the sense of being whole again, healed. And Shlomoh lived to see his father's work completed and the Temple finished — and on that day he wrote the Song of Songs.
+
+The journey is from Kadesh to Mount Hor, at the edge of the land of Edom. Hor HaHar is a double mountain, a small apple atop a big apple, and it is the place where Aharon HaKohen passed away. Rabbi Simon Jacobson explains that the double mountain is Aharon's love — love within love. That love and harmony is what is needed to receive the Torah on another mountain, Mount Sinai, where the Jews camp in week 35. The personal journey moves from living with people's faults to the love and peace of Aharon, Rosh Chodesh Sivan, and the giving of the Torah.
+
+*Source: [Week 34 (Book 3): Feeling "Shalem" (Whole)](https://www.kabbalahoftime.com/2014/05/week-34-book-3-feeling-shalem-whole.html) — 696 words*
+
+---
+
+## Day 235 · Book 4 · Week 34
+
+Channah's sixth verse holds both ends: "The Lord kills and makes alive; He brings down to the grave and raises up." Which is the whole difference between those He heals and those He does not.
+
+Pirkei Avot, on the greatness of the Torah, is also about life this week: "She is a tree of life for those who hold fast to her, and happy are those who support her."
+
+Ecclesiastes 3 opens on the same contrast. "Everything has an appointed season, and there is a time for every matter under the heaven. A time to give birth and a time to die; a time to plant and a time to uproot that which is planted. A time to kill and a time to heal; a time to break and a time to build." The third of those is striking: it sets killing against healing — because healing is ultimately the sparing of life itself.
+
+The week holds two prominent yahrzeits from the line of Kosov, two brothers who passed away on the same date, the 25th of Iyar: Rabbi Chaim Hager of Kosov and Rabbi David of Zubeltov, sons of Rabbi Menachem Mendel Hager of Kosov. Rabbi Chaim succeeded his father as Rav and Rebbe in Kossov in 1827 and wrote the Toras Chayim; a prominent synagogue in Tsfat is named after him, and his son Menachem Mendel became the first Rebbe in Vishnitz. Rabbi David of Zubeltov was the son-in-law of Rabbi Moshe Leib of Sassov and became a rebbe in his own right at the young age of 29, held in great respect for his wisdom even by the other rebbes of his generation. Also this week: Rabbi Mordechai Shraga of Husyatin and Rabbi Shlomo-Eliezer Alfandri on the 22nd of Iyar, Rabbi Benyamin Mendelson on the 24th, and Rabbi Yitzchak-Isaac of Homil, Rabbi Shmuel Eliyahu of Zvolin — son of Rabbi Yecheskel of Kuzmir and father of the first Modzhitzer Rebbe — and Rabbi Shlomo of Zivhil on the 26th.
+
+*Source: [Week 34 (Book 4): The Tree of Life](https://www.kabbalahoftime.com/2014/05/week-34-book-4a-tree-of-life.html) — 481 words*
+
+---
+
+## Day 236 · Book 5 · Week 34
+
+The last week of Iyar, the end of the journey from Yaacov to Yisrael that began in Nissan, with Shavuot ahead. The Song's verse is wine: "And your palate is like the best wine, that glides down smoothly to my beloved, making the lips of the sleeping speak." Wine is the inner secrets of the Torah, and those secrets are what gave the Jewish people life in hard times when they were spiritually asleep, bringing them back and making their lips speak. Which is Lag Ba'Omer and the Kabbalah revealed by Rabbi Shimon Bar Yochai, and the healing of Iyar. The verses that follow belong here too: "I am my beloved's, and his desire is upon me. Come, my beloved, let us go out to the field, let us lodge in the villages. Let us arise early to the vineyards; let us see whether the vine has blossomed, the tiny grapes have developed, the pomegranates have lost their flowers; there I will give you my love." Closeness, with His desire upon us; and the tiny grapes developed and ready to give and receive His love at Mt. Sinai.
+
+Of the seventy souls that descended to Egypt, the thirty-fourth is Gad, son of Zilpah, and with him Menasheh, son of Joseph. Gad was known as a fierce warrior, and his name means good luck. Menashe's name has the verb to forget at its root, for Joseph forgetting the hardships of his past; and Menashe also means to sustain, since he was Joseph's main assistant in sustaining Egypt and running the affairs of the empire. Both of them are the healing of Iyar, and the journey from hardship to strength and relative independence.
+
+Daf Lamed Dalet of Shvuoth keeps on with oaths applying only to monetary claims, and takes up witnesses who did not see or know the facts, and deriving the laws of an oath over a pikadon from the laws of court oaths. The theme again is the move from a poor and weak position to one of strength and order. Rabbi Shimon Bar Yochai is by far the most quoted rabbi on this daf, from beginning to end.
+
+Jeremiah's thirty-fourth chapter is going from slave to free, in the seven-year cycle, and then the promise broken. "The word that came to Jeremiah from the Lord after King Zedekiah had made a covenant with all the people who were in Jerusalem, to proclaim freedom to them; That every man should let his manservant and every man his maidservant, a Jew and a Jewess go free, that none should hold his Jewish brother as a slave." They did it: "then they obeyed and let them go." And then they undid it: "But afterwards they turned and brought back the manservants and the maidservants whom they had let free, and forcibly made them into manservants and maidservants." He reminds them where the law came from — "I made a covenant with your fathers on the day that I brought them forth out of the land of Egypt, out of the house of slaves" — and what they have just done: "And now this day you turned and did what was right in My sight by proclaiming liberty every man to his neighbor, and you made a covenant before Me in the House upon which My Name is called. But then you turned and profaned My Name." And the sentence is made out of their own word: "You have not hearkened to Me to proclaim freedom, every one to his brother and every one to his neighbor; behold I proclaim freedom to you, says the Lord, to the sword, to the pestilence, and to the famine."
+
+*Source: [Week 34 (Book 5): Healing and Rabbi Shimon's "Wine"](https://www.kabbalahoftime.com/2014/05/week-34-book-4b-healing-and-rabbi.html) — 886 words*
+
+---
+
+## Day 237 · Book 6 · Week 34
+
+The fourth week of Iyar in psalms: the hundredth, hundred and first and hundred and second, with three verses of Psalm 105 and one of Psalm 89.
+
+Psalm 100 is for the hearts of those who suffer in this world: let them serve G-d with joy all the same, because all of it is for their good, as in the verse, "He whom G-d loves does He chastise." It also refers to the thanksgiving sacrifice, the only one to be offered in the Messianic era. It is five verses long. "Serve the Lord with joy; come before Him with exultation. Know that the Lord is G-d; He has made us and we are His, His people and the sheep of His pasture. Enter His gates with gratitude, His courtyards with praise; give thanks to Him, bless His Name. For the Lord is good; His kindness is everlasting, and His faithfulness is for all generations."
+
+Psalm 101 is David keeping himself apart from others, and his conduct inside his own house. "I will pay heed to the path of integrity-O when will it come to me? I shall walk with the innocence of my heart [even] within my house. I shall not place an evil thing before my eyes; I despise the doing of wayward deeds, it does not cling to me." Then whom he will not have near him: "He who slanders his fellow in secret, him will I cut down; one with haughty eyes and a lustful heart, him I cannot suffer." And whom he will: "My eyes are upon the faithful of the land, that they may dwell with me; he who walks in the path of integrity, he shall minister to me. He that practices deceit shall not dwell within my house."
+
+Psalm 102 is the prayer of the exiled, and the right prayer for anyone in distress: "A prayer of the poor man when he is faint [with affliction], and pours out his tale of woe before the Lord." The body of it: "For my days have vanished with the smoke; my bones are dried up as a hearth. Smitten like grass and withered is my heart, for I have forgotten to eat my bread." The loneliness: "I am like the bird of the wilderness; like the owl of the wasteland have I become. In haste I fled; I was like a bird, alone on a roof." The food: "For I have eaten ashes like bread, and mixed my drink with tears." And then it turns, and the turn is the whole psalm: "But You, Lord, will be enthroned forever, and Your remembrance is for all generations. You will arise and have mercy on Zion, for it is time to be gracious to her; the appointed time has come. For Your servants cherish her stones, and love her dust." What the nations will see: "Then the nations will fear the Name of the Lord, and all the kings of the earth Your glory, when [they see that] the Lord has built Zion, He has appeared in His glory." Who it is written for: "Let this be written for the last generation, so that the newborn nation will praise the Lord." Why He looked: "to hear the cry of the bound, to untie those who are doomed to die." Then the asking not to be taken mid-life: "My G-d, do not remove me in the midst of my days! You Whose years endure through all generations." And the comparison that answers it: "In the beginning You laid the foundations of the earth, and the heavens are the work of Your hands. They will perish, but You will endure; all of them will wear out like a garment; You will exchange them like a robe, and they will vanish. But You remain the same; Your years will not end. The children of Your servants will abide; their seed shall be established before You."
+
+Psalm 105's verses are the seeking: "Glory in His holy Name; may the heart of those who seek the Lord rejoice. Search for the Lord and His might; seek His countenance always. Remember the wonders that He has wrought, His miracles, and the judgments of His mouth." And Psalm 89's verse holds again: "I will not abrogate My covenant, nor change that which has issued from My lips."
+
+*Source: [Week 34 (Book 6): Reviewing the Fourth Week of Iyar - Psalms 100-102; 105:3-5; 89:35](https://www.kabbalahoftime.com/2014/05/week-34-book-5-reviewing-fourth-week-of.html) — 923 words*
+
+---
+
+## Day 238 · Book 7 · Week 34
+
+The ox opens on remembering the wonders, and the week comes in around it.
+
+The remembering and the manna first: "Remember the wonders that He has wrought" / "His miracles, and the judgments of His mouth" / "When the children of Israel saw, they said to one another, 'It is manna'" / "Because they did not know what it was" / "And your palate is like the best wine" / "That glides down smoothly to my beloved."
+
+Then the seeking, and the sleeping lips: "May the heart of those who seek the Lord rejoice" / "Search for the Lord and His might" / "Seek His countenance always" / "Making the lips of the sleeping speak" / "Glory in His holy Name."
+
+Then the bread and the covenant: "And Moses said to them, It is the bread that the Lord has given you to eat" / "This is the thing that the Lord has commanded" / "I will not abrogate My covenant" / "Nor change that which has issued from My lips" / "Is it not stored up with Me, sealed up in My treasuries?"
+
+Then the song itself, and the feet set high: "Then Moses and the Children of Israel sang this song to G-d" / "And they said, 'I shall sing to G-d, for He has triumphed" / "He has thrown the horse and its rider into the sea'" / "He makes my feet like hinds" / "And sets me upon my high places."
+
+And the end is the gathering by capacity, and the milk in the lordly bowl: "Gather of it each one according to his eating capacity" / "An omer for each person, according to the number of persons" / "Each one for those in his tent you shall take" / "Water he requested, (but) milk she gave him" / "In a lordly bowl she brought him cream" / "The Lord kills and makes alive" / "He brings down to the grave and raises up."
+
+*Source: [Week 34 (Book 7): The Ox is Saying](https://www.kabbalahoftime.com/2016/05/the-ox-is-saying-songs-for-week-34.html) — 252 words*
