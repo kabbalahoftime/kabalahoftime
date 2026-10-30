@@ -36,7 +36,7 @@ have has had having would should could may might must shall them him us me
 one two three four five six seven eight nine ten first second third week day
 # These identify nobody in a corpus where every post is about them, and "Jew"
 # is too short for the containment rule to reach "Jewish".
-jew jews jewish israel israelite israelites""".split())
+jew jews jewish israel israelite israelites lord l-rd""".split())
 
 NUM_SRC = re.compile(r'\b\d[\d:\u2013\u2014.\-/]*\d\b|\b\d\b')
 
@@ -130,7 +130,7 @@ def claims(text):
     body = re.sub(r'^\W+', '', flatten(text))
     out = set()
     # Capitalised words, except where a sentence or a quotation starts.
-    for m in re.finditer(r'(?<![.!?“"]\s)(?<!^)\b([A-Z][a-zA-Z\'-]{2,})',
+    for m in re.finditer(r'(?<![.!?)“"]\s)(?<!^)\b([A-Z][a-zA-Z\'-]{2,})',
                          body, re.M):
         out.add(bare(m.group(1).lower()))
     return {w for w in out if w not in STOP}
@@ -231,6 +231,31 @@ def main(posts_path, companion_path, limit=None):
     for n, pct, total, unfound, _ in rows[:int(limit or 20)]:
         print(f'day {n:>3}  {pct:5.1f}%  of {total:>3} names: '
               f'{", ".join(unfound[:14])}{" ..." if len(unfound) > 14 else ""}')
+
+    # Characters that have no business being there. A stray 動 got into day
+    # 69 between "weather and" and "force" — invisible in a long paragraph,
+    # and no vocabulary or number pass would ever look at it.
+    print('\n' + '=' * 72)
+    print('CHARACTERS THAT DO NOT BELONG')
+    print('=' * 72)
+    OK = set(
+        '\u2018\u2019\u201c\u201d\u2013\u2014\u2026\u2022\u00b7\ufe0e'
+        '\u00e9\u00e8\u00e0\u00fc\u00f6\u00e4\u00ed\u00f3\u00fa\u00f1')
+    strays = {}
+    for k in sorted(days, key=int):
+        if days[k].get('kind') and days[k]['kind'] != 'summary':
+            continue
+        for ch in summary_text(days[k]):
+            o = ord(ch)
+            if o < 128 or ch in OK or 0x0590 <= o <= 0x05FF:
+                continue
+            strays.setdefault(int(k), set()).add(ch)
+    if strays:
+        for n, chs in strays.items():
+            flagged += 1
+            print(f'day {n:>3}  {" ".join(repr(c) + " " + hex(ord(c)) for c in sorted(chs))}')
+    else:
+        print('none')
 
     print('\n' + '=' * 72)
     print('NUMBERS AND REFERENCES NOT IN THE POST')

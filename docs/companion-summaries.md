@@ -1198,3 +1198,129 @@ Then the sea is stilled: "you rule the vastness of the sea" / "when its waves su
 It ends at the windows and the doorpost. "Looking from the windows" / "now Eli the priest sat upon his seat" / "my beloved resembles a gazelle or a fawn of the hinds" / "by the door-post of the temple of Hashem" / "behold, he is standing behind our wall" — and the last lines are Jacob as the lot of His inheritance, joy for the straight-hearted, and peering from the lattices.
 
 *Source: [Week 9 (Book 7): The Stormy Petrel is Saying](https://www.kabbalahoftime.com/2021/02/week-9-book-7-stormy-petrel-is-saying.html) — 244 words*
+
+---
+
+## Day 64 · Book 1 · Week 10
+
+Week ten, and the bat repeats something G-d said: "Comfort My people, comfort them, says your Lord." (Isaiah 40:1)
+
+Now we are fully into Kislev, whose tribe is Benjamin — known for keeping Jewish values intact for the generations after him, and for how much he was prepared to give up. The bat can see in the dark, which is the useful trick in a month of long cold nights. And it is in this month, at Chanukah, that the comfort actually arrives: the Greeks' darkness is beaten and the light of the Temple is put back.
+
+Pirkei Avot gives Rabbi Shimon: "Be meticulous with the reading of the Shemah and with prayer. When you pray, do not make your prayers routine, but an entreaty of mercy and a supplication before the Almighty… And do not be wicked in your own eyes."
+
+The Shema is the plainest statement of there being One, and of this people taking Him as King. Prayer is the intimacy with Him. Those two are exactly what the Greeks wanted gone. They could live with a cosmos — cold, indifferent to how anyone behaves — but not with a G-d who is a merciful Father and a King.
+
+Rabbi Shimon's own answer, asked what path to take, was to see what is coming — literally, to see what is being born — and his worst thing was borrowing and not repaying, because one who borrows from a friend borrows from G-d. Seeing what is about to happen is one of the Talmud's definitions of real wisdom. The Greeks had wisdom. Wisdom by itself is not enough: it has to be tied to the ethics that come with One G-d. And not repaying a loan is not only dishonest, it throws back the mercy somebody showed you, which was a piece of His.
+
+The pairing is Tiferet shebeGevurah — and tiferet is also called *rachamim*, mercy. Further from Tishrei now, we still remember how beautiful it was, and we ask for mercy to hold on to what we decided then.
+
+The bat's lesson: pray for mercy, and hold up the people around you — the poor and the pressed-upon first.
+
+*Source: [Week 10 (From the Book): To Trust in G-d's Mercy](https://www.kabbalahoftime.com/2013/11/week-10-to-trust-in-g-ds-mercy.html) — 689 words*
+
+---
+
+## Day 65 · Book 2 · Week 10
+
+"He found them in a desert land, and in a desolate, howling wasteland. He encompassed them and bestowed understanding upon them; He protected them as the pupil of His eye." (Deuteronomy 32:10) A desolation, and understanding given inside it. That was the state of things at the time of the Chanukah miracle — and what He gave them was not only protection from being absorbed, but the very tools of logic and argument that Greek thought had, to be used on the Torah. Much of the reasoning in the Babylonian Talmud came out of that meeting. The Talmud is full of Greek words, and the name of the Greek king Ptolomy, *Talmai*, has the same numerical value as *Talmud*.
+
+The haftorah bends the sky: "And He bent the heavens and He came down; and thick darkness was under His feet." (II Samuel 22:10) Coming down and bending what nature does — which is what the Jews saw then. And the Greek exile is compared to darkness, while this festival is the one of light.
+
+The quality is purity, *taharah*. With last week's joy, those two are the qualities of Chanukah: after the Greeks defiled the Temple the Kohanim purified it and dedicated it again, and the miracle turns on pure oil still carrying the Kohen Gadol's seal.
+
+The prophet is Samuel, who is purity itself. A Nazir from before he was born, raised in the Tabernacle by the Kohen Gadol, spoken to by G-d while he was still a child — and his greatness is reckoned as Moshe and Aharon together.
+
+The Levitical city is Gibeon, where something else was bent. "Then Joshua spoke to the Lord on the day when the Lord delivered up the Amorites before the children of Israel, and he said in the sight of Israel, 'Sun, stand still upon Gibeon, and Moon in the valley of Ayalon.' And the sun stood still, and the moon stayed, until the people had avenged themselves upon their enemies." Night was coming and the pursuit would have had to stop; the sun staying put gave them the light and the hours. The whole world saw it.
+
+What purity asks of a student is a mind clear enough to take the thing in. A head full of a million useless or degrading images cannot absorb Torah properly, and if the animal in a person is loose it is hard to concentrate and harder to feel what is holy. Without some purifying, the line between holy and ordinary blurs until nothing seems special at all. If everything is holy then nothing is. A yes is only worth something if the same person sometimes says no.
+
+*Source: [Week 10 (Book 2): Samuel and Purity](https://www.kabbalahoftime.com/2013/11/week-10-book-2-samuel-and-purity.html) — 739 words*
+
+---
+
+## Day 66 · Book 3 · Week 10
+
+"I will overtake, I will share the booty; my desire will be filled from them; I will draw my sword, my hand will impoverish them." That is the enemy talking, and confident — as the Greeks were at first about what looked like a small and simple Jewish revolt.
+
+The haftorah names the cause: "When they chose new gods, then there was war in the cities; was there seen a shield or a spear." Assimilation, idolatry, and then being hunted — all three were in the Greek exile.
+
+Sotah's tenth daf stays with Samson, and takes in Judah and Abshalom. Its subject is licentiousness, and children brought up badly who turn against their parents. Which belongs to this month, since Chanukah comes from *chinuch*, education.
+
+The tenth generation from Adam is Noah, who lived in a society that had gone entirely rotten — much as the Jews did under the Greeks. Pirkei Avot says that He waited ten generations before bringing the Flood, out of patience.
+
+The journey is into strength: "They journeyed from Dophkah and camped in Alush." Alush means power, and power's danger is how easily it corrupts. Last week was the knocking, which was formless. This week is having the power to do something with it, in an ordinary day, and do it well.
+
+Noah's lesson for prayer is asking for comfort, which in many ways is what prayer is. His name comes from *lenachem*, to comfort — the bat's own verse this week, *nachamu nachamu ami*. Think what comfort Noah must have needed, having watched the whole world destroyed.
+
+*Source: [Week 10 (Book 3): Noah and Seeking Comfort, Compassion](https://www.kabbalahoftime.com/2013/11/week-10-book-3-noah-and-seeking-comfort.html) — 493 words*
+
+---
+
+## Day 67 · Book 4 · Week 10
+
+"And she was in bitterness of soul — and prayed unto the Lord, and wept sore." Hannah praying out of bitterness, in the week the bat sings of comfort. The verse says she prayed *al* Hashem, upon Him, above the level of revelation that the Name itself is. In Kislev too, the connection runs very high.
+
+The week's quality is that the Torah enclothes him with fear — following last week's humility. The two go together, and they are together in the list of forty-eight as well. What Kislev and Chanukah ask for involves both.
+
+Hannah's weeping is the fear. She had been made to feel so small and so insignificant that it brought her to a greater fear of G-d, and that is what let her pray with such complete self-effacement that no words came out of her mouth at all. She was entirely nullified before the Master.
+
+Proverbs' tenth chapter is the righteous set against the wicked, line after line, and much of it is about the mouth. "Treasures of wickedness will not avail, but charity will save from death… Blessings shall come upon the head of a righteous man, but violence shall cover the mouth of the wicked. The mention of a righteous man is for a blessing, but the name of the wicked shall rot… He who covers up hatred has false lips, and he who spreads slander is a fool. In a multitude of words, transgression will not be avoided, and he who holds back his lips is wise. The tongue of the righteous is choice silver… Fear of the Lord will add days, but the years of the wicked will be shortened."
+
+The righteous few against the wicked many is Chanukah's own phrase. And it is worth noticing that this month's two Chassidic holidays, Yud Kislev and Yud-Tes Kislev, both mark a Rebbe of Chabad coming out of a prison he was put in by slander.
+
+The week holds two yahrzeits of men who built Torah in America out of nothing hospitable. Rabbi Aharon Kotler, on the third of Kislev — born in Russia, orphaned young, formed at Slabodka under the Alter and Rabbi Moshe Mordechai Epstein, and the founder of the Lakewood yeshiva, now one of the great centres of Torah study anywhere. And Rabbi Chaim Michoel Dov Weissmandl, on the sixth — born in Hungary, who during the war went to every authority he could reach to try to save the Jews of Slovakia and failed, lost his entire family, and got out by sawing the lock off a carriage and jumping from a moving train. In America he founded the Nitra Yeshiva and a farming community that kept the Torah's agricultural laws.
+
+*Source: [Week 10 (Book 4): Prayer out of Fear of G-d](https://www.kabbalahoftime.com/2013/11/week-10-book-4a-prayer-out-of-fear-of-g.html) — 902 words*
+
+---
+
+## Day 68 · Book 5 · Week 10
+
+"For behold, the winter has passed; the rain is over and gone. The blossoms have appeared in the land, the time of singing has arrived, and the voice of the turtledove is heard in our land. The fig tree has put forth its green figs, and the vines with their tiny grapes have given forth their fragrance; arise, my beloved, my fair one, and come away."
+
+Winter into spring, which is rescue. Rashi reads it against Egypt and the Passover redemption, and the redemption of this month has much of that one in it. The rain being over is the Flood finally behind us. The singing is the pure singing of the Kohanim and the Maccabees.
+
+And the third verse, Rashi takes apart: "The fig tree has put forth its green figs" — these are the transgressors of Israel, who perished during the three days of darkness; "and the vines with their tiny grapes gave forth their fragrance" — those who were left of them repented and were accepted. Figs and grapes are two of the fruits the Land is praised for, and after the Greeks were beaten, life in it began to come back to normal.
+
+Of the seventy souls the tenth is Jachin, which means to establish or to prepare — and the verb is in our prayer for Jerusalem: *ve'chise David meheira le'tocha tachin*, and install within it soon the throne of David. There is a separate blessing for the kingdom, and yet the throne is named inside the rebuilding, because the Temple and the throne together are what the city is: a place united by worship and by governance. Jachin was also the name of one of the two pillars of Solomon's Temple; the other was Boaz.
+
+Shevuot's tenth daf continues with the goat of the festivals, of Rosh Chodesh and of Yom Kippur, and asks whether the holiness of certain Temple items can leave them.
+
+Jeremiah's tenth chapter keeps the nations' idols apart from Israel's portion: "Not like these is Jacob's portion, for He is the One Who formed everything, and Israel is the tribe of His inheritance; the Lord of Hosts is His name." And it ends with verses said in the Passover Hagaddah: "Pour out Your wrath upon the nations that do not know You… for they have devoured Jacob and consumed him and destroyed him, and have wasted his dwelling."
+
+*Source: [Week 10 (Book 5): Connecting to Holiness](https://www.kabbalahoftime.com/2013/11/week-10-4b-connecting-to-holiness.html) — 691 words*
+
+---
+
+## Day 69 · Book 6 · Week 10
+
+The second week of Kislev in psalms: the twenty-eighth, twenty-ninth and thirtieth, with three verses of Psalm 41 and one of Psalm 89.
+
+Psalm 28 asks not to be met with silence. "I call to You, O Lord; my Strength, do not be deaf to me; for should You be silent to me, I will be like those who descend to the pit. Hear the sound of my pleas when I cry out to You, when I raise my hands toward Your holy Sanctuary." It asks not to be gathered up with the wrong people — "with evildoers who speak of peace with their companions, though evil is in their heart" — and then it is answered, mid-psalm: "Blessed is the Lord, for He has heard the voice of my pleas. The Lord is my strength and my shield; in Him my heart trusted and I was helped."
+
+Psalm 29 is the one about a voice. Seven times "the voice of the Lord," and the whole psalm is weather and force: "The voice of the Lord is over the waters, the G-d of glory thunders… The voice of the Lord breaks cedars; the Lord shatters the cedars of Lebanon. He makes them leap like a calf… The voice of the Lord strikes flames of fire. The voice of the Lord makes the desert tremble… The voice of the Lord causes the does to calve, and strips the forests bare." Then it sits down: "The Lord sat as King at the Flood; the Lord will sit as King forever. The Lord will give strength to His people; the Lord will bless His people with peace."
+
+Psalm 30 is headed as a song for the dedication of the House, which is this month's business exactly. "I exalt You, Lord, for You have uplifted me… Lord, You have brought up my soul from the grave." It holds the line people carry around with them: "For His wrath endures but for a moment… when one retires at night weeping, joy will come in the morning." And the honest admission in the middle: "In my security I thought, 'I shall never falter.' Lord, by Your favor You have made my mountain stand strong; when You concealed Your countenance I was alarmed." Its argument is almost cheeky: "What profit is there in my death, in my going down to the grave? Can dust praise You?" And its end is the turn: "You have turned my mourning into dancing; You have undone my sackcloth and girded me with joy."
+
+Psalm 41's verses are the betrayal: "Even my ally in whom I trusted, who ate of my bread, has raised his heel over me."
+
+*Source: [Week 10 (Book 6): Reviewing the Second Week of Kislev - Psalms 28-30; 41:9-11; 89:11](https://www.kabbalahoftime.com/2013/11/week-10-book-5-reviewing-second-week-of.html) — 715 words*
+
+---
+
+## Day 70 · Book 7 · Week 10
+
+The bat opens with the comfort, and the gathering puts it straight beside Hannah's bitterness.
+
+"Comfort My people, comfort them, says your Lord" / "and she was in bitterness of soul" / "and prayed unto Hashem, and wept sore." Then the heavens bend, and the friend turns: "And He bent the heavens and He came down" / "even my ally in whom I trusted, who ate of my bread" / "has raised his heel over me" / "and thick darkness was under His feet."
+
+The call to come away lands in the middle of the enemy's boasting. "Arise, my beloved, my fair one, and come away" / "I will overtake, I will share the booty" / "my desire will be filled from them" / "when they chose new gods" / "then there was war in the cities" / "I will draw my sword, my hand will impoverish them" / "was there seen a shield or a spear."
+
+Then the answer, three lines of it: "Let his wickedness pour into him; now that he lies down, he shall rise no more" / "you crushed Rahav like a corpse" / "with Your powerful arm You scattered Your enemies."
+
+And the last stretch is spring arriving over the top of the desert. "But you, Lord, be gracious to me" / "and the vines with their tiny grapes have given forth their fragrance" / "He found them in a desert land, and in a desolate, howling wasteland" / "the blossoms have appeared in the land, the time of singing has arrived" / "He encompassed them and bestowed understanding upon them" / "for behold, the winter has passed; the rain is over and gone."
+
+It ends with the turtledove, the green figs, and the pupil of His eye.
+
+*Source: [Week 10 (Book 7): The Bat is Saying](https://www.kabbalahoftime.com/2021/02/week-10-book-7-bat-is-saying.html) — 249 words*
