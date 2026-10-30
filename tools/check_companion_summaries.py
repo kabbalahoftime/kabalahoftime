@@ -78,6 +78,8 @@ ALT = {
     'jacob': 'yaakov', 'moses': 'moshe', 'rebecca': 'rivkah',
     'elijah': 'eliyahu', 'samson': 'shimshon', 'solomon': 'shlomo',
     'tikkun': 'tikun',
+    # One man, and the blog spells him Maimonedes.
+    'rambam': 'maimonedes', 'maimonides': 'maimonedes',
 }
 
 # Twelve years of Blogger has eaten a lot of spaces: "Midrashteaches",
@@ -184,9 +186,17 @@ def main(posts_path, companion_path, limit=None):
             have |= set(content(one.get('text', '')))
             have |= set(content(one.get('title', '')))
         mine = claims(text)
+        # A name counts as present when a word of the post contains it, or
+        # when it contains a word of the post. Both directions are needed:
+        # "byBetzalel" has eaten the space before the name, and the post
+        # writes Vizhnitz where a summary writes Vizhnitzer.
         joined = [h for h in have if len(h) > PREFIX_MIN]
-        unfound = sorted({w for w in mine if w not in have and not (
-            len(w) >= PREFIX_MIN and any(h.startswith(w) for h in joined))})
+        def near(w):
+            if len(w) < PREFIX_MIN:
+                return False
+            return any(w in h for h in joined) or any(
+                h in w for h in joined if len(h) >= PREFIX_MIN)
+        unfound = sorted({w for w in mine if w not in have and not near(w)})
         pct = (len(unfound) / len(mine) * 100) if mine else 0.0
 
         srcnums = set()

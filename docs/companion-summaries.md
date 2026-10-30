@@ -678,3 +678,259 @@ Then the depths and the promise against them: "The depths covered them" / "indee
 It ends with the music returning, and the forgiveness. "Make music for Him with the ten-stringed harp" / "the earth trembled, the heavens also dripped" / "Your faithfulness, too, in the congregation of the holy ones" / "And You have forgiven the iniquity of my transgression forever" — and the last lines are henna in the vineyards, the field of Edom, and "I said, 'I will confess my transgressions to the Lord.'"
 
 *Source: [Week 5 (Book 7): The Crane is Saying](https://www.kabbalahoftime.com/2021/02/week-5-book-7-crane-is-saying.html) — 249 words*
+
+---
+
+## Day 36 · Book 1 · Week 6
+
+Week six is the second week of Cheshvan, and the songbird sings about a house: "The songbird has also found her home, and the sparrow a nest for herself, where she may lay her young — Your altars, G-d of Hosts – my King and my Lord." (Psalms 84:4) A nest, and the altars in the same breath. It is in this month that the third Temple, His house and the place of His altars, is to be dedicated.
+
+Pirkei Avot gives Rabban Yochanan the son of Zakkai, who took the tradition from Hillel and Shammai: "If you have learned much Torah, do not take credit for yourself — it is for this that you have been formed."
+
+He had five disciples, which makes six of them, and he praised each for what he could carry: Rabbi Eliezer the son of Hurkenus is a cemented cistern that loses not a drop; Rabbi Yehoshua the son of Chananya — fortunate is she who gave birth to him; Rabbi Yossi the Kohen is a chassid; Rabbi Shimon the son of Nethanel fears sin; Rabbi Elazar ben Arach is an ever-increasing wellspring.
+
+Then he sent them out with a question: which is the best trait a person can acquire? A good eye, said one. A good friend. A good neighbour. To see what is born out of your own actions. And Rabbi Elazar said: a good heart — and his teacher preferred it, because it contained all the others. Asked the opposite, Rabbi Elazar said: an evil heart. Same answer.
+
+His own life was that going out. He got free of the siege of Jerusalem just before it fell and built a place for scholars at Yavneh, where the Oral Torah was passed on and Judaism survived. Which is Cheshvan: leaving the inward season and going into the world to hold things up.
+
+The pairing is Yesod shebeChesed — Joseph, who fed his whole family and most of the world besides. He read Pharaoh's dream and stocked the granaries against seven years of famine, and so became the foundation under everyone else's good, in both senses.
+
+The songbird's lesson follows from the nest. Beyond caring for others, build something that will hold for your children, and for your students, and for whoever comes after. For a person sinking under their own troubles, that can be the thing that pulls them up.
+
+*Source: [Week 6 (From the Book): To Impact the World, Laying a Foundation for Future Generations](https://www.kabbalahoftime.com/2013/10/week-6-to-impact-world-laying.html) — 1090 words*
+
+---
+
+## Day 37 · Book 2 · Week 6
+
+"Is this how you repay the Lord, you disgraceful, unwise people?! Is He not your Father, your Master? He has made you and established you." (Deuteronomy 32:6) That is ingratitude, after everything — the generation of the Flood, who managed to forget who made them. The haftorah stays in that water: "Bands of those that shall inherit the nether world have surrounded me; the snares of death confronted me." (II Samuel 22:6)
+
+The quality is awe, *eimah*. After the Flood Noah felt it, having watched a world end. The Temple inspires it too.
+
+It is worth separating awe from fear, which is next week's quality. *Yirah* is the ordinary word for fear: what you feel facing an immediate danger, or walking into an interview. *Eimah* is lower and longer — the dull, gnawing dread of something not yet visible, what a person feels marching toward a war. Studying Torah holds both. The Machzor Vitri says a student feels the direct fear of the teacher in whose presence he sits, and a more general awe at being in G-d's presence with G-d's Torah, which he must not misunderstand.
+
+Yaakov had yirah at the place that became the Temple: "How awesome is this place! This is none other than the house of G-d, and this is the gate of heaven." Moshe had it at the bush: "Remove your shoes from your feet, for the place upon which you stand is holy soil" — and he hid his face, because he was afraid to look.
+
+The prophet is Yehoshua, who has the same scene and reacts differently. Outside Jericho he meets a man with a drawn sword, asks "Are you for us, or for our adversaries?", and is told: "No, but I am the captain of the host of the Lord." He falls on his face, and is told to take off his shoe, for the place is holy. The Torah does not say he was afraid. He was Moshe's disciple and used to revelation — and this was the archangel Michael, not G-d Himself at the bush. The Talmud says the angel came in part because Yehoshua was neglecting Torah study at night when he was not actually fighting, which may be why the sword was out.
+
+The Levitical city is Gath-Rimmon, the winepress of pomegranates. In Cheshvan we are pressed, to fill ourselves with as much good as a pomegranate holds seeds.
+
+And that is the lesson: going with the flow is sometimes not enough. You have to press yourself, and know how much more there is to do.
+
+*Source: [Week 6 (Book 2): Being Pressed to Perform, Yehoshua and Awe](https://www.kabbalahoftime.com/2013/10/week-6-book-2-being-pressed-to-perform.html) — 1119 words*
+
+---
+
+## Day 38 · Book 3 · Week 6
+
+"Your right hand, O Lord, is most powerful; Your right hand, O Lord, crushes the foe." The haftorah: "also the clouds dripped water. The mountains melted at the presence of the Lord." Clouds dripping and mountains melting — the Flood is still over this month.
+
+Sotah's sixth daf takes up forbidden marriages, which were among the Flood's causes, and the bitter waters that would punish or clear a woman accused when her witnesses could not be brought.
+
+The generation is Yered, who looks like a kosher Irad — the same name without the *ayin*. Ayin means an eye, and part of what undid Cain was the way he looked at his brother's accepted offering; sins of this kind begin with the eye. Ayin also means nothing, and Ecclesiastes says the difference between a person and a beast is *ayin*, nothing — read deeper, the ability to hold yourself as nothing, as part of the Infinite Light. Perhaps Yered made his ayin into such thorough nothingness that it stopped appearing in his name.
+
+Cain's line runs Enoch, Mehujael, Irad — education, then a profane life, then descent, going downhill. Seth's line runs the other way: Mahalalel, Yered, Enoch — praise, then lowering yourself, in order to teach the next one. The results speak for themselves. Cain's descendants found better and better ways to be depraved and better weapons to kill with, until Cain was killed by one. Yered taught his son well, and that Enoch walked with G-d and was taken so the world's corruption could not reach him; his son Metushelach lived longest of anyone and died before the Flood came.
+
+*Yered* and *Irad* both come from *laredet*, to go down. Which is this month's work: coming down from the heights of Tishrei to make this world a home.
+
+The journey arrives somewhere good: "They journeyed from Marah and arrived in Elim, and in Elim there were twelve springs of water and seventy palm trees." Twelve springs for twelve tribes, seventy palms for seventy nations, and the tribes' water is what waters the palms. Elim is the strength that comes up out of bitterness — the same letters as the Name written with a *hay*, reordered to read *eli mah*, the hidden dimension of love, which emerges from inside the dark.
+
+Exile has mixed everything up — which tribe a Jew belongs to, which nation a man comes from. *Bilbul*, a mix-up, is the root of *Bavel*, and the Talmud we learn is the Bavli: by logic and the rules of reading, confusion is sorted and put back where it belongs. *Mabul*, the Flood, is the same root, because the Flood mixed everything too.
+
+Yered's lesson for prayer is humility, which is in his name. The one who leads is called *Yored Lifnei HaTeivah*, he who goes down before the Ark; the place he stands was lower than the room, and the law forbids praying from a raised place. Prayer comes from underneath: out of the depths I called You.
+
+*Source: [Week 6 (Book 3): Descending in order to Ascend and Sweetening "Bitter Waters"](https://www.kabbalahoftime.com/2013/10/week-6-book-3-yered-draft.html) — 1156 words*
+
+---
+
+## Day 39 · Book 4 · Week 6
+
+"And her rival vexed her sore, to make her fret, because the Lord had shut up her womb." Channah's story is Rachel's again — childless, and watching her sister bear one child after another. Rachel's yahrzeit is the eleventh of Cheshvan.
+
+The week's quality is *Ohev et HaBri'ot*, loves people — more exactly, loves the creatures. It belongs to Aharon: "Be of the disciples of Aharon — a lover of peace, a pursuer of peace, loves the creatures and draws them close to Torah." Our sages say *creatures* is the word used because Aharon loved the people who had nothing else obviously good about them except that G-d had made them. In Cheshvan, out in the world, we meet exactly those people, and the work is to love them and learn from them.
+
+Which is Channah's situation precisely. She lived beside a rival who taunted her for being childless, and that took real love of people and a real willingness to judge her favourably. We are told Peninah's motive was actually good — she wanted to sharpen Channah's prayers.
+
+Proverbs' sixth chapter is a chapter about dealing with other people, and about learning from creatures that are not people at all. On standing surety for a stranger: "you have been trapped by the sayings of your mouth." On getting free: "Save yourself like a deer from the hand and like a bird from the hand of the snare." On industry: "Go to the ant, you sluggard; see her ways and become wise." And a portrait you would recognise anywhere: "An unscrupulous man, a man of violence, walks with a crooked mouth; he winks with his eyes, shuffles with his feet, points with his fingers."
+
+The seventh of Cheshvan is the yahrzeit of Rabbi Yehuda Meir Shapiro of Lublin, who made the Daf Yomi cycle an institution — a devoted chassid of the Chortoker Rebbe, chief rabbi of Galina and Piotrkov, author of Or HaMeir, and founder of Yeshivat Chachmei Lublin in 1930. He had to argue the Jewish leadership of his day into Daf Yomi, partly against his own youth. It is now the measure of Talmud study across the world.
+
+The ninth is the yahrzeit of Rabbi Yidele Horowitz, the Dzikover Rebbe, raised by his grandfather the Vizhnitzer. A formidable scholar who could not stand being treated as a rebbe, lived frugally, and gave away every penny sent to him by his chassidim, to orphans and widows.
+
+*Source: [Week 6 (Book 4): Dealing with Difficult People](https://www.kabbalahoftime.com/2013/10/week-6-book-4a-dealing-with-difficult.html) — 856 words*
+
+---
+
+## Day 40 · Book 5 · Week 6
+
+"Behold, you are comely, my beloved, yea pleasant; also our couch is leafy. The beams of our houses are cedars; our corridors are cypresses." Then a new chapter opens: "I am a rose of Sharon, a rose of the valleys."
+
+The first two are ours, and they are about Him resting among us — the Temple again. Rashi reads *yea pleasant* as His overlooking our transgression and letting His Shechinah rest in our midst, which is the praise of the fire coming down, "and all the people saw and shouted for joy." *Our couch is leafy* he reads as leafy with sons and daughters, all gathered to Him. Both the Tabernacle and the Temple are called a bed, because they are the source of Israel's fruitfulness. *The beams of our houses are cedars* is the praise of the Tabernacle — and the cypresses of the next line are the wood the Ark was built from.
+
+*Chavatzelet*, the rose, our sages read as *chav tzel*, the shade of love, which Betzalel built: the Temple itself.
+
+Of the seventy souls the sixth is Shimon — of all Jacob's sons the one tied to violence, which is what brought the Flood. *Chamas* is the word, and Jacob says of Shimon and Levi that their weapons are weapons of chamas. The name Shimon itself comes from *shmiah*, hearing.
+
+Shevuot's sixth daf is mostly the afflictions of the metzora, with a dispute about colour. The metzora stands for a heavy kind of guilt and for bad behaviour among people — *lashon hara*, evil speech, and listening to it.
+
+Jeremiah's sixth chapter sets the same things side by side: "Cut the trees and cast on Jerusalem a siege mound; that is the city whose sins have been visited upon her, everywhere there is oppression in its midst. As a well lets its water flow, so has she let her evil flow; violence and spoil is heard therein before Me continually; sickness and wounds. Be corrected, O Jerusalem, lest My soul be alienated from you; lest I make you a desolation, a land uninhabited." Water, and violence heard, and a land left empty — which is the world after the Flood. And a correction that could still stop it.
+
+*Source: [Week 6 (Book 5): the Temple, Shimon and Hamas](https://www.kabbalahoftime.com/2013/10/week-6-4b-temple-shimon-and-hamas.html) — 645 words*
+
+---
+
+## Day 41 · Book 6 · Week 6
+
+The second week of Cheshvan in psalms: the sixteenth, seventeenth and eighteenth, with three verses of the Tikkun HaKlali and one of Psalm 89.
+
+Psalm 16 is the whole Tikkun HaKlali psalm at once, having been given three verses at a time until now. "Watch over me, O G-d, for I have put my trust in You… The Lord is my allotted portion and my share; You guide my destiny. Portions have fallen to me in pleasant places; indeed, a beautiful inheritance is mine… I have set the Lord before me at all times; because He is at my right hand, I shall not falter… Make known to me the path of life, that I may be satiated with the joy of Your presence."
+
+Psalm 17 submits to being searched. "You have probed my heart, examined it in the night, tested me and found nothing; no evil thought crossed my mind; as are my words so are my thoughts." Then the famous asking: "Guard me like the apple of the eye; hide me in the shadow of Your wings." The enemy is drawn sharply — "their fat has closed their hearts; their mouths speak arrogantly… his appearance is like a lion longing to devour" — and the psalm ends on waking: "in the time of resurrection, I will be sated by Your image."
+
+Psalm 18 is the long one, and it is the haftorah of these weeks set out whole: David's song on the day he was delivered from all his enemies and from Saul. "I love You, Lord, my strength. The Lord is my rock, my fortress, and my rescuer." It gives the pangs of death and the snares, and then the answer arrives as weather: the earth quaking, smoke in His nostrils, a thick cloud under His feet, hailstones and coals, "the channels of water became visible, the foundations of the world were exposed." And then the rescue: "He sent from heaven and took me; He brought me out of surging waters… He brought me into spaciousness; He delivered me because He desires me." Its measure-for-measure verses are among the plainest in the book: "With the kindhearted You act kindly, with the upright man You act uprightly. With the pure You act purely, but with the crooked You act cunningly."
+
+The Tikkun HaKlali's verses are shelter and instruction: "You are a refuge to me; protect me from distress; surround me with songs of deliverance forever. I will enlighten you and educate you in the path you should go." And then the warning not to need forcing: "Be not like a horse, like a mule, senseless, that must be muzzled with bit and bridle."
+
+*Source: [Week 6 (Book 6): Reviewing the Second Week of Cheshvan - Psalms 16-18; 32:7-9; 89:7](https://www.kabbalahoftime.com/2013/10/week-6-book-5-reviewing-first-week-of.html) — 1527 words*
+
+---
+
+## Day 42 · Book 7 · Week 6
+
+The songbird opens, and the gathering sets her nest against the right hand and the snares.
+
+"The songbird has also found her home" meets "Your right hand, O Lord, is most powerful," and then the altars — "Your altars, G-d of Hosts" — with the mountains melting. The nether world's bands come in next, braided with Haazinu's reproach: "Bands of the nether world have surrounded me" / "Is this how you repay Hashem" / "the snares of death confronted me" / "you disgraceful, unwise people?!" And straight after that, the answer from the Tikkun: "surround me with songs of deliverance forever."
+
+Then the nest is finished in pieces, with the cedars built through it. "And the sparrow a nest for herself" / "the beams of our houses are cedars" / "where she may lay her young" / "my King and my Lord."
+
+The fatherhood and the crushing hand come together — "Is He not your Father, your Master?" / "Your right hand, O Lord, crushes the foe" / "You are a refuge to me; protect me from distress" / "He has made you and established you" — and the corridors of cypress close that run.
+
+The last stretch braids Channah's rival with the mule. "And her rival vexed her sore, to make her fret" / "that must be muzzled with bit and bridle" / "also the clouds dripped water" / "in the path you should go" / "be not like a horse, like a mule, senseless" / "because Hashem had shut up her womb."
+
+It ends with the rose and the teaching: "Behold, you are comely, my beloved, yea pleasant" / "I will enlighten you and educate you" / "I am a rose of Sharon, a rose of the valleys" / "I will advise you with what I have seen."
+
+*Source: [Week 6 (Book 7): The Songbird is Saying](https://www.kabbalahoftime.com/2021/02/week-6-book-7-songbird-is-saying.html) — 242 words*
+
+---
+
+## Day 43 · Book 1 · Week 7
+
+Week seven is still Cheshvan, and the swallow cannot keep quiet: "So that my soul shall praise You, and shall not be silent, G-d my Lord – I shall give thanks to You forever." (Psalms 30:13)
+
+The word for forever, *l'olam*, holds *olam*, world — and olam comes from *ehelem*, which means hidden, a mask. Which is the month exactly: by going into the world we uncover a Presence that was covered up until then.
+
+Pirkei Avot gives Rabbi Eliezer three things. The honour of your fellow should be as precious to you as your own, and do not be easy to anger. Repent one day before your death — and since nobody knows the day, that means repent daily. And warm yourself by the fire of the sages, but beware of being burned by its embers: "for their bite is the bite of a fox, their sting is the sting of a scorpion, their hiss is the hiss of a serpent, and all their words are like fiery coals."
+
+The Flood began on the seventeenth of Cheshvan, which falls in this week or the next. It would not have happened if those people had repented one day before their deaths and treated their neighbours and their sages properly. And the Torah holds Noah to account as well, for not praying for the others: his neighbour's honour was not precious to him. Stealing was one of the Flood's great causes, and stealing begins with an eye looking jealously at what belongs to somebody else.
+
+The pairing is Malchut shebeChesed, and this week is the yahrzeit of Rachel, who is malchut. She had a great deal of chesed too, and did the very thing Rabbi Eliezer asks: Jacob had worked seven years for her and had given her signs so that Laban could not switch brides on the wedding night — and when Rachel saw Leah under the canopy she gave her sister the signs rather than let her be humiliated.
+
+Malchut is also speech, which is the swallow who cannot be silent. The Alter Rebbe ties malchut to *kavod*, honour or glory — the word in the swallow's own verse, and the word we say after the Shema: *Baruch Shem Kvod Malchuto L'Olam Va'ed*.
+
+The swallow's lesson: recognise and thank Him, always. And instruments were last week. This week it has to be your own voice.
+
+*Source: [Week 7 (from the Book): To Recognize and Reveal the Divine Presence within Us and the World](https://www.kabbalahoftime.com/2013/10/week-7-to-recognize-and-reveal-divine.html) — 859 words*
+
+---
+
+## Day 44 · Book 2 · Week 7
+
+"Remember the days of old; reflect upon the years of other generations. Ask your father, and he will tell you; your elders, and they will inform you." (Deuteronomy 32:7) Rashi takes it straight to the water: the generation of Enosh, whom G-d inundated with the waters of the ocean, and the generation of the Flood, whom He washed away.
+
+The haftorah is this week's own verse: "When I am in distress, I call upon the Lord, yes I call upon my G-d: and out of His abode He hears my voice, and my cry enters His ears." (II Samuel 22:7) Because this is the week of Rachel's yahrzeit, and the most famous line in all of Tanach about her is a voice being heard: "A voice is heard in Ramah, lamentation and bitter weeping: Rachel is weeping for her children and refuses to be comforted for her children, because they are away." And the answer: "Restrain your voice from weeping, and your eyes from tears; for your work will be rewarded, says G-d; and they will return from the land of the enemy. There is hope for your future." He hears her as He hears David.
+
+The quality is fear, *yirah* — last week's awe, now nearer and sharper. The prophet is Pinchas, in whom yirah is the whole story: what he did about the tribes' missing fear of Heaven at ba'al peor is what made him worthy to be a Kohen, then Kohen Gadol, and then Elijah the Prophet.
+
+The Levitical city is Golan of Bashan, also a city of refuge. Golan comes from *galut*, exile — which is Rachel's verse. And galut shares its root with *legalot*, to reveal. Exertion in exile is what brings the revelations, and that is why Abraham did not object to being told his children would be exiled and come out with great possessions. Those were not only material: *rechush*, possessions, has the same numerical value as *Torah*.
+
+What fear asks of a student is plain enough. The Alter Rebbe explains in the Tanya that fear of G-d matters not only for the prohibitions but for the positive commandments too. It is usually fear and not love that provides the first push to get anything done.
+
+*Source: [Week 7 (Book 2): Hearing the Cry of Rachel](https://www.kabbalahoftime.com/2013/10/week-7-book-2-hearing-cry-of-rachel.html) — 695 words*
+
+---
+
+## Day 45 · Book 3 · Week 7
+
+"And with Your great pride You tear down those who rise up against You; You send forth Your burning wrath; it devours them like straw." The retribution of the Flood is still running through these verses.
+
+The haftorah holds two things that turn out to be one: "this was at Sinai, because of the presence of the Lord, the G-d of Israel. In the days of Shamgar the son of Anath." Both are feminine. The Shechinah, the Divine Presence, is always spoken of as feminine, and often as Rachel in particular — and this is her week. Anath is the name of a warrior goddess in Canaanite myth, and if it is a woman's name here, this is one of the very few places in Tanach where a man is named for his mother rather than his father.
+
+Sotah's seventh daf carries on with the woman suspected of adultery and the bitter waters. On the way she is given a chance to reconsider, and she is reminded how her own forefathers admitted what they had done, repented, and earned their place in the World to Come. Which belongs to this week too, and to the verse about asking your father.
+
+The generation is Chanoch, a kosher version of Cain's son of the same name. Cain's Enoch had a city named after him and sank into civilisation, further and further from nature and from Hashem. Seth's Chanoch walked with G-d. Rabbi Shalom Arush explains that he spent most of his time apart, so the world could not get at him, but came back regularly to teach — and in the end was taken alive, while he was still pure. The root of his name is *chinuch*, education, which is a parent's work.
+
+The journey turns back to the water: "They journeyed from Elim and camped by the Red Sea." Last week was the twelve springs and the seventy palms, the tribes and the nations, both scattered and mixed together in exile. This week is standing at the shore, ready for the splitting. And on the week of Rachel Imeinu's yahrzeit the exile is felt more sharply, which is part of lifting it.
+
+Chanoch's lesson for prayer is education. Pirkei Avot says an ignoramus cannot be pious. Beside Him we are all ignorant, and prayer is not mainly an intellectual thing — but there are still basics in how a person approaches the King, and anyone who can learn them should. Intent is what matters most, and intent is much harder when you do not understand what you are saying.
+
+*Source: [Week 7 (Book 3): More References to Rachel](https://www.kabbalahoftime.com/2013/10/week-7-book-3-chanoch-draft.html) — 675 words*
+
+---
+
+## Day 46 · Book 4 · Week 7
+
+"And as he did so year by year, when she went up to the house of the Lord, so she vexed her; therefore she wept, and would not eat." Channah weeping, and going up each year — this is Rachel's week, whose crying is heard, and Cheshvan, which belongs to the Temple.
+
+The week's quality is *Messameach et haMakom*, which reads as making the Place happy. He is called the Place because nowhere is without Him — and there is one place where the Presence gathers more than anywhere else, which is the Temple.
+
+Where you are matters enormously. The Rambam writes that one of the ways open to a person who wants to turn from what he has done is to move house. There is a notion that changing place changes your *mazal*, and that is part of Avraham leaving his father's country for the land. Channah does not stay put either; she goes up to weep and pray for a child, rather than sit in the place where she is being taunted.
+
+But the quality turns it around. Once a person is learning Torah for its own sake, it is no longer the place's job to make him happy — it is his job to make the place happy. We can make a Torah atmosphere wherever we are, which the sixth Lubavitcher Rebbe pressed hard, and the Rebbe after him. Even under a barrage like Channah's, how you behave is still yours and not the room's.
+
+Proverbs' seventh chapter is another warning about strange places: "She is bustling and rebellious; her feet do not dwell in her house. Sometimes she is in the street, sometimes in the squares, and she lurks at every corner… Let your heart not veer off into her ways; stray not in her paths. For many are the dead that she has felled."
+
+The eleventh of Cheshvan carries two more yahrzeits besides Rachel's, both of them first in lines that are still giving light. Rabbi Menachem Nachum, the Maggid of Chernobyl, a close disciple of the Ba'al Shem Tov and of the Maggid of Mezeritch, who wrote Meor Einayim — and Chernobyl, a name now attached to disaster, is also a name attached to great holiness. And Rabbi Avraham Wienberg, the Slonimer Rebbe, disciple of Rabbi Noah of Lechovitch and Rabbi Moshe of Kobrin, who wrote Yesod Ha'Avodah, and who was respected by chassidim and their opponents alike in Lithuania, where Chassidic thought was not welcome.
+
+*Source: [Week 7 (Book 4): Elevating (and Being Elevated) by Your Place](https://www.kabbalahoftime.com/2013/10/week-7-book-4a-elevating-and-being.html) — 830 words*
+
+---
+
+## Day 47 · Book 5 · Week 7
+
+"As a rose among the thorns, so is my beloved among the daughters." That one is His. Then ours: "As an apple tree among the trees of the forest, so is my beloved among the sons; in his shade I delighted and sat, and his fruit was sweet to my palate. He brought me to the banquet hall, and his attraction to me was symbolic of his love."
+
+The rose among thorns is Rachel, who like her mother and her sister was a rose pulled out of the thorns of the house of Lavan and Bethuel. The Zohar opens by comparing Israel to a thirteen-petalled rose on this very verse, and reads the petals as thirteen of *rachamim*, mercy. Rachel was known for her rachamim, and for the rachamim Jacob showed her. All three verses are about love declared, and the love between G-d and Israel in them is also the love between Jacob and Rachel. Rashi reads the banquet hall as the tent of meeting.
+
+Of the seventy souls the seventh is Jemuel, which may be read *Yamoh-el*, his sea is G-d — apt for the month of the Flood. *Yam* is also the name of the washbasin Solomon made for the first Temple, which may be another way to read it.
+
+Shevuot's seventh daf is about eating a holy offering while impure, set beside entering the Temple while impure, and about the goat whose blood went into the Holy of Holies. The Temple cleans sin away — but the Talmud concludes that no offering is brought to pardon a sin done on purpose.
+
+Jeremiah's seventh chapter says the same thing, louder: "Stand in the gate of the house of the Lord, and proclaim there this word… Improve your ways and your deeds, I will allow you to dwell in this place. Do not rely on false words, saying: The Temple of the Lord, the Temple of the Lord, the Temple of the Lord are they." The Temple matters and His mercy is real, and neither is a licence.
+
+*Source: [Week 7 (Book 5): Love and the Temple](https://www.kabbalahoftime.com/2013/10/week-7-4b-love-and-temple.html) — 542 words*
+
+---
+
+## Day 48 · Book 6 · Week 7
+
+The third week of Cheshvan in psalms: the nineteenth, twentieth and twenty-first, with the end of Psalm 32, the opening of Psalm 41, and a verse of Psalm 89.
+
+Psalm 19 begins with a sky that talks without talking. "The heavens recount the glory of the Almighty; the sky proclaims His handiwork. Day to day speech streams forth; night to night expresses knowledge." And then: "There is no utterance, there are no words; their voice is inaudible. Their arc extends throughout the world; their message to the end of the earth." The sun comes out of its tent "like a groom coming forth from his bridal canopy, like a strong man rejoicing to run the course."
+
+Then it turns from the sky to the Torah, and the turn is the whole psalm: "The Torah of the Lord is perfect, restoring the soul; the testimony of the Lord is trustworthy, making wise the simpleton… more desirable than gold, than much fine gold; sweeter than honey or the drippings of honeycomb." It ends in two requests about the two kinds of wrong: "Yet who can discern inadvertent wrongs? Purge me of hidden sins. Also hold back Your servant from willful sins." And the last line is the one said after every prayer: "May the words of my mouth and the meditation of my heart be acceptable before You, Lord, my Strength and my Redeemer."
+
+Psalm 20 is a blessing said over somebody else. "May the Lord answer you on the day of distress; may the Name of the G-d of Jacob fortify you. May He send your help from the Sanctuary… May He grant you your heart's desire." And then the line about what to lean on: "Some rely upon chariots and some upon horses, but we invoke the Name of the Lord our G-d. They bend and fall, but we rise and stand firm."
+
+Psalm 21 is the king answered. "You have given him his heart's desire, and You have never withheld the utterance of his lips. You preceded him with blessings of good; You placed a crown of pure gold on his head. He asked of You life, You gave it to him — long life, forever and ever."
+
+The Tikkun HaKlali's verses close Psalm 32 on the difference trust makes: "Many are the agonies of the wicked, but he who trusts in the Lord is surrounded by kindness. Rejoice in the Lord and exult, you righteous ones!" Then Psalm 41 opens on a particular kindness: "Fortunate is he who is thoughtful of the poor, for the Lord will save him on the day of evil."
+
+*Source: [Week 7 (Book 6): Reviewing the Third Week of Cheshvan - Psalms 19-21; 32:10-11 & 41:1-2; 89:8](https://www.kabbalahoftime.com/2013/10/week-7-book-5-reviewing-second-week-of.html) — 775 words*
+
+---
+
+## Day 49 · Book 7 · Week 7
+
+The swallow opens, and this gathering runs on remembering and being heard.
+
+"So that my soul shall praise You, and shall not be silent" is set between Haazinu's remembering — "Remember the days of old; reflect upon the years of other generations" — and the great assembly: "The Almighty is revered in the great assembly of the holy ones."
+
+Then the apple tree and the rejoicing come together. "In his shade I delighted and sat, and his fruit was sweet to my palate" / "Rejoice in the Lord and exult, you righteous ones!" / "He brought me to the banquet hall" / "Sing joyously, all you upright of heart!" / "and his attraction to me was symbolic of his love" / "awe-inspiring to all who surround Him."
+
+The thanks give way to the year-by-year going up, and to the rose: "G-d my Lord – I shall give thanks to You forever" / "and as he did so year by year, when she went up to the house of Hashem" / "as a rose among the thorns, so is my beloved among the daughters" / "ask your father, and he will tell you; your elders, and they will inform you."
+
+Then the cry and the burning wrath are braided — "and out of His abode He hears my voice, and my cry enters His ears" / "and with Your great pride You tear down those who rise up against You" / "yes I call upon my G-d" / "You send forth Your burning wrath" — with the poor man's blessing laid in among them: "Fortunate is he who is thoughtful of the poor."
+
+The last lines put Channah's weeping beside Shamgar and the straw. "So she vexed her; therefore she wept, and would not eat" / "in the days of Shamgar the son of Anath" / "the Lord will save him on the day of evil" / "many are the agonies of the wicked" / "it devours them like straw" / "but he who trusts in the Lord is surrounded by kindness" — and it ends at the mountain: "this was at Sinai, because of the presence of the Lord."
+
+*Source: [Week 7 (Book 7): The Swallow is Saying](https://www.kabbalahoftime.com/2021/02/week-7-book-7-swallow-is-saying.html) — 304 words*
