@@ -133,7 +133,15 @@ def main(app_path, companion_path):
     print('=' * 72)
     for n in sorted(days, key=int):
         for s in SENTENCE.findall(flatten(days[n])):
-            if not INTERFACE.search(s):
+            # Whether this sentence talks about the interface is decided
+            # outside its quotation marks. A verse quoted in a summary is
+            # not a claim about this app, and the Song has "one link of
+            # your necklaces" — which matched the UI word "link" and
+            # reported a psalm as an invented label, the same shape of
+            # false positive as "the apple of the eye". Candidate labels
+            # are still read off the whole sentence, so `tap the "Ladder"
+            # card` is caught exactly as before.
+            if not INTERFACE.search(QUOTED.sub(' ', s)):
                 continue
             miss = [c for c in named_in(s) if not present(c, hay)]
             if miss:

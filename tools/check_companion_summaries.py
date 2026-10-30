@@ -83,7 +83,7 @@ ALT = {
     'tikkun': 'tikun',
     # One man, and the blog spells him Maimonedes.
     'rambam': 'maimonedes', 'maimonides': 'maimonedes',
-    'aharon': 'aaron', 'hellenist': 'helenist', 'greece': 'greek',
+    'aharon': 'aaron', 'hellenist': 'helenist', 'hellenized': 'helenized', 'greece': 'greek',
     # One town, spelled both ways across the posts.
     'lizhensk': 'lizhenk', 'arpachshad': 'archpachshad',
     'yafeth': 'yaffeth', 'simcha': 'smicha', 'maccabees': 'macabbees',

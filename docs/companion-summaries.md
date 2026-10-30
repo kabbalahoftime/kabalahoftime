@@ -2094,3 +2094,257 @@ Then the chieftains of Edom are startled, with the scarlet thread beside them, a
 It ends where it is fairest: "Behold, you are fair, my beloved; behold, you are fair" / "your eyes are like doves, from within your kerchief" / "Arise Barak, and capture your captives, son of Abinoam" / "and the depths of the sea appeared" / "that streamed down from Mount Gilead" / "the foundations of the world were laid bare" / "and there is no bereavement among them."
 
 *Source: [Week 16 (Book 7): The Ducks are Saying](https://www.kabbalahoftime.com/2021/02/week-16-book-7-ducks-are-saying.html) — 264 words*
+
+---
+
+## Day 113 · Book 1 · Week 17
+
+Week seventeen, the last of Teveth, and the bee-eater says: "I will whistle to them and gather them, for I have redeemed them, and they shall increase as they have before increased." (Zechariah 10:8) The increase is Dan again. The whistle is a shepherd's.
+
+This week holds the yahrzeit of the Alter Rebbe, on the twenty-fourth of Teveth. He died largely of the flight from Napoleon. He had backed Russia in that war, because he judged that Napoleon's egalitarian promises would end in assimilation — and that spiritual persecution of that kind was more dangerous than the physical oppression of the Russian government, much as the Greeks had been more dangerous than other empires.
+
+On the flight, the Alter Rebbe rode in the third carriage and his grandson Rabbi Nachum in the first, and at every crossroads they asked him which way. At one of them Rabbi Nachum misheard. When the mistake came to light, much later, "the Alter Rebbe sighed deeply and said: 'How good is it when a grandson follows in the path of his grandfather — and the opposite is true when a grandfather has to follow the path in which his grandson leads him.' … The mistake at the crossroads caused all kinds of troublesome detours, and soon after Alter Rebbe passed away in Piena."
+
+The whistle, then, is the ways He uses to turn a lost Jew back. He is the shepherd and we are the flock. The Zohar calls Moses *Rayah Mehemnah*, a faithful shepherd and a shepherd of faith, and the leader of each generation is that generation's Moses. The point of following such advice is not to lose your way in the dark, which is exactly what happened in that story.
+
+Seventeen is the numerical value of *tov*, good — and it is also the number of the seventeenth of Tammuz, which began the Temple's end. The Talmud ties the two kinds of loss together: the passing of tzadikim is likened to the burning of the Temple. The Lubavitcher Rebbe answers the difficulty the same way for both: this is a descent for the sake of an ascent, and the ascent is great enough to make the exile worth it, there being no other way to reach that rung. The passing of a tzadik opens a level nothing else reaches, and that is the only reason for it. So seventeen really is good, with the extent of the good hidden for now. It is also the value of *cheit*, sin, which is the one thing holding the redemption back — because of our sins we were exiled from our land.
+
+Pirkei Avot gives Rabbi Chanina the son of Chachina'i: "One who stays awake at night, or travels alone on the road, and turns his heart to idleness, has forfeited his life." The night is exile. In it you cannot be alone and occupied with nothing; you have to be gathered, listening for the whistle, and studying — or you lose the road.
+
+Rebbe Nachman reads the same words the other way round. Travelling alone is making your own path in prayer and hitbodedut; *batalah*, idleness, he hears as *bitul*, self-nullification; and "forfeits his life," *mitchayev et nafsho*, he reads as making his soul such that the whole world is obliged to exist for it. Which is the condition of a generation's tzadik.
+
+The pairing is Tiferet shebeTiferet. And the bee-eater's Hebrew name, *Rachamah*, has *rachamim* in it — mercy, which is tiferet's other name. Its lesson is to be sure He is with you and guiding you through the bad part, and also to be listening, so that when the call comes you do not miss it.
+
+*Source: [Week 17 (From the Book): To Pay Attention to G-d's Guidance and to Trust in Our Redemption](https://www.kabbalahoftime.com/2013/12/week-17-to-pay-attention-to-g-ds.html) — 1316 words*
+
+---
+
+## Day 114 · Book 2 · Week 17
+
+"They sacrificed to demons, which have no power, deities they did not know, new things that only recently came, which your forefathers did not fear." (Deuteronomy 32:17) Idolatry again, which is Teveth and is Dan.
+
+And again the verse can be turned: would they sacrifice to demons? No. Their power was G-d; they did not know new ones. Which is worth stopping on, because the verse names what makes assimilation attractive. It is *new* — then as now, the Torah gets painted as out of date. And it comes "from close by." What pulls hardest in another culture is the part that most resembles our own. The Greeks and the Hellenized Jews came from close; what they championed, wisdom and humanism, was often very near Jewish ideals.
+
+The haftorah goes with the positive reading: "He sent from on high and He took me; He drew me out of many waters." (II Samuel 22:17) And many waters, as Book 1 has it, is the struggle of making a living.
+
+Which is the quality: *miut schorah*, minimised business activity. Money and the getting of it turn idolatrous very easily — it becomes the end, and we forget we wanted it in order to serve Him better and provide for a family. So business is to be conducted with *miut*, smallness and humility, with study and service still the main thing.
+
+The prophet is Obadiah, who prophesied like Michaia in Ahab's days, when idolatry was everywhere. Ahab is the opposite of this quality: he took another man's field by force and had the owner killed, and for that he was sentenced from Heaven. Obadiah is the quality itself — he used his own money to keep a hundred prophets alive and hidden from Ahab and Jezebel, and that act earned him prophecy. His name says it: servant of G-d. He understood whose work he was actually doing.
+
+His prophecy is that G-d loves Jacob and hates Esau, which is the message in a fight against assimilation. Much of what drew Jews to Roman culture and its offshoots was how like Judaism they looked. Esau is Jacob's brother, after all. And Jacob, meeting him, says: "My master knows that the children are tender, and the flocks and the cattle, which are raising their young, depend upon me, and if they overdrive them one day, all the flocks will die. Now, let my master go ahead before his servant, and I will move at my own slow pace." He did not want Esau near his family — and, reading the flocks as well as the children, he did not want his possessions exposed to Esau's appetite either.
+
+The Levitical city is Gath-rimmon, the winepress of pomegranates: out in the world and in its dark, there is a great deal of good available, and a person can come back as full as that fruit.
+
+*Source: [Week 17 (Book 2): Obadiah and Minimized Business Activity](https://www.kabbalahoftime.com/2013/12/week-17-book-2-obadiah-and-minimized.html) — 792 words*
+
+---
+
+## Day 115 · Book 3 · Week 17
+
+"All the inhabitants of Canaan melted. May dread and fright fall upon them." And the haftorah could not suit Dan better: "Then ruled a remnant among the mighty of the nations; the Lord dominated the strong for me." A remnant ruling over the mighty, which is being small and then not.
+
+Sotah's seventeenth daf is the writing of the curses on the scroll that gets dissolved in the water, and how curses can be inferred from blessings — and how even in the words for man and woman there is *fire* waiting, if the Divine Presence does not dwell between the couple. Both halves belong to this month: blessings turned to curses, and two Temples left by the Presence and then burned.
+
+The daf also tells how Avraham was rewarded for refusing the spoils of the king of Sodom. Which runs alongside the Alter Rebbe. Napoleon was offering Jews more money and more freedom, and he saw where it led. The king of Sodom had said, take the goods and I will take the souls — and Avraham would not. And where Avraham refused even the smallest personal thing, Napoleon went looking for the smallest personal thing belonging to the Alter Rebbe, who had set fire to his own house before leaving, so that nothing was found.
+
+The generation is Serug, Reu's son, and his name is a further gathering: from *lesareg*, to interlace, to interweave. More than rejoining a flock — being woven in. Which is the Alter Rebbe's own innovation: that chassidim are one family, bound unbreakably. The Hayom Yom for the twenty-fourth of Teveth has it exactly. Asked what the Alter Rebbe meant by the "ways of Chassidus" and by "Chassidus," the Tzemach Tzedek answered: the ways of Chassidus are that all chassidim are to be like one family, with affection, as the Torah teaches. And Chassidus is vitality — to bring life and light into everything, to shed light even on what is undesirable, "to become aware of one's own evil exactly as it is, in order to correct it."
+
+The journey is to bricks: "They journeyed from Rimmon Perez and camped in Libnah." Libnah is from *leveinim*, bricks, which belong to the labour in Egypt — where at the end they were not even given straw. In Torah Or, quoting the Zohar, the Alter Rebbe explains that that labour has a counterpart in study: *leveinim*, bricks, points at *libun hilchesa*, the clarifying of law, and *chomer*, mortar, at *kal vachomer*, one of the main rules of interpretation. The hard labour of exile can be exchanged for the labour of study. Last week was being fruitful; this week is studying properly — which is the thing this month remembers the lack of.
+
+*Source: [Week 17 (Book 3): Avraham, Serug, and the Alter Rebbe](https://www.kabbalahoftime.com/2013/12/week-17-book-3-avraham-serug-and-alter.html) — 962 words*
+
+---
+
+## Day 116 · Book 4 · Week 17
+
+"And Eli answered and said: Go in peace, and the God of Israel will grant your request which you have asked of Him."
+
+The Hebrew is *Lechi L'Shalom*, which is *go to peace* rather than *go in peace* — and *Lech B'Shalom*, go in peace, is said only of those who have died. Rav Kook explains that nobody can be wished final peace in this world. This is a world of struggle, and Teveth more than most of it. The ultimate peace will come; in the meantime, expect an intense journey. The events around the Alter Rebbe's passing were exactly that.
+
+The week's quality is that from such a person people enjoy counsel. Which is the verse: Eli's counsel is what finally lets Channah breathe, knowing the prayer will be answered. And the whole Book of Proverbs is counsel from the wise enjoyed; the seventeenth chapter is no different.
+
+Besides the Alter Rebbe, the twenty-fourth of Teveth carries two more yahrzeits. Rabbi Shmuel Bornstein of Soccatchov, son of the Avnei Nezer, known for the Shem MiShmuel — and like the Alter Rebbe, both father and son were known for the revealed Torah and the law as much as for their Chassidic insight.
+
+And Rabbi Moshe Mordechai Biderman, the sixth Lelover Rebbe, who was living in Israel when Jerusalem was liberated. Of all the Chassidic rebbes he spent the most time at the Kotel; he moved to Jerusalem to be near it, and his prayers there would take up most of the day.
+
+*Source: [Week 17 (Book 4): Going to Peace](https://www.kabbalahoftime.com/2013/12/week-17-book-4a-going-to-peace.html) — 452 words*
+
+---
+
+## Day 117 · Book 5 · Week 17
+
+"Your neck is like the Tower of David, built as a model; a thousand shields hanging on it, all the quivers of the mighty men. Your two breasts are like two fawns, the twins of a gazelle, who graze among the roses. Until the sun spreads and the shadows flee, I will go to the mountain of myrrh and to the hill of frankincense."
+
+These are the verses that use the body most openly for what this people is. The two breasts belong to bearing and feeding, which is Teveth — and Rashi reads them as Moshe and Aharon, and as the two tablets, and explains how the laws on the first, between a person and G-d, answer to the laws on the second, between a person and a person.
+
+Which is this week's own man as well. *Shneur* is *shnei or*, two lights, and he made good on the name: the light of Chassidus and the Torah's deep secrets, in the Tanya and the rest; and a light in the revealed Torah, in his Shulchan Aruch.
+
+Of the seventy souls the seventeenth — not named outright — is Yocheved, the mother of Moshe and Aharon, who like Miriam did the quiet work of midwifing Jewish children.
+
+Shevuot's seventeenth daf is about not taking your time leaving the Temple, and not taking the shortest way out, and entering the grounds improperly. Then it turns to how a man withdraws from a woman who becomes a niddah during intercourse. Both halves are this month's: sins about the Temple, and marriage.
+
+Jeremiah's seventeenth chapter holds the wild goose's own verses from two weeks ago, and they are about multiplying from nothing: "Cursed is the man who trusts in man and makes flesh his arm… He shall be like a lone tree in the plain… Blessed is the man who trusts in the Lord; the Lord shall be his trust. For he shall be like a tree planted by the water, and by a rivulet spreads its roots, and will not see when heat comes, and its leaves shall be green, and in the year of drought will not be anxious, neither shall it cease from bearing fruit."
+
+Trees, in the week before Rosh Chodesh Shevat.
+
+*Source: [Week 17 (Book 5): Our Intimate Connection with G-d](https://www.kabbalahoftime.com/2013/12/week-17-4b-our-intimate-connection-with.html) — 659 words*
+
+---
+
+## Day 118 · Book 6 · Week 17
+
+The fourth week of Teveth in psalms: the forty-ninth, fiftieth and fifty-first, with three verses of Psalm 59 and one of Psalm 89.
+
+Psalm 49 is addressed to everybody and aimed at the rich. "Hear this, all you peoples… sons of common folk and sons of nobility, rich and poor alike." Then the question it answers: "Why am I afraid in times of trouble? Because the sins I trod upon surround me." And what money cannot do: "There are those who rely on their wealth, who boast of their great riches. Yet a man cannot redeem his brother, nor pay his ransom to G-d. The redemption of their soul is too costly, and forever unattainable." It watches men who know better do it anyway: "Though he sees that wise men die, that the fool and the senseless both perish, leaving their wealth to others — nevertheless, in their inner thoughts their houses will last forever."
+
+Psalm 50 is G-d speaking, and what He says He does not want is the surprise. "Not for the lack of your sacrifices will I rebuke you, nor for the lack of your burnt offerings… I do not take oxen from your house, nor goats from your pens; for every beast of the forest is Mine, the cattle of a thousand mountains." And then: "Were I hungry, I would not tell you, for the world and everything in it is mine. Do I eat the flesh of bulls, or drink the blood of goats? Offer confession as a sacrifice to G-d, and fulfill your vows."
+
+Psalm 51 is David after Nathan came to him, and it is the psalm to say over one's own sins. "Be gracious to me, O G-d, in keeping with Your kindness… Cleanse me thoroughly of my wrongdoing, and purify me of my sin. For I acknowledge my transgressions, and my sin is always before me. Against You alone have I sinned." Then: "You desire truth in the innermost parts; teach me the wisdom of concealed things. Purge me with hyssop and I shall be pure; cleanse me and I shall be whiter than snow. Let me hear tidings of joy and gladness; then the bones which You have shattered will rejoice." And the request that is this week's whole business: "Create in me a pure heart, O G-d, and renew within me an upright spirit. Do not cast me out of Your presence, and do not take Your Spirit of Holiness away from me."
+
+Psalm 59's verses are a city circled by dogs: "They return toward evening, they howl like the dog and circle the city. Behold, they spew with their mouths, swords are in their lips, for they say, 'Who hears?'"
+
+*Source: [Week 17 (Book 6): Reviewing the Fourth Week of Teveth - Psalms 49-51; 59:6-8; 89:18](https://www.kabbalahoftime.com/2013/12/week-17-book-5-reviewing-fourth-week-of.html) — 1345 words*
+
+---
+
+## Day 119 · Book 7 · Week 17
+
+The bee-eater opens, and this gathering sets being drawn out of the water against dogs circling a city.
+
+"I will whistle to them and gather them" / "He sent from on high and He took me" / "the twins of a gazelle, who graze among the roses" / "He drew me out of many waters" / "and they shall increase as they have before increased."
+
+Then the splendour, and the remnant ruling: "Indeed, You are the splendor of their might" / "the Lord dominated the strong for me" / "and in Your goodwill our glory is exalted."
+
+The demons come next, with Canaan melting: "They sacrificed to demons, which have no power" / "all the inhabitants of Canaan melted" / "may dread and fright fall upon them" / "which your forefathers did not fear" / "then ruled a remnant among the mighty of the nations" / "deities they did not know, new things that only recently came."
+
+And then the swords in the lips, and the quivers, and the waking: "swords are in their lips, for they say, 'Who hears?'" / "all the quivers of the mighty men" / "And You, Lord, G-d of Hosts, G-d of Israel" / "until the sun spreads and the shadows flee" / "wake up to remember all the nations" / "a thousand shields hanging on it" / "behold, they spew with their mouths" / "your two breasts are like two fawns" / "they howl like the dog and circle the city."
+
+It ends with Eli's blessing laid between the mountain of myrrh and the request granted: "and to the hill of frankincense" / "And Eli answered and said: Go in peace" / "I will go to the mountain of myrrh" / "and the God of Israel will grant your request" / "for I have redeemed them" / "they return toward evening" / "your neck is like the Tower of David, built as a model" / "do not grant favor to any of the iniquitous traitors, Selah" / "which you have asked of Him."
+
+*Source: [Week 17 (Book 7): The Bee-Eater is Saying](https://www.kabbalahoftime.com/2021/02/week-17-book-7-bee-eater-is-saying.html) — 332 words*
+
+---
+
+## Day 120 · Book 1 · Week 18
+
+Week eighteen is Rosh Chodesh Shevat, and the grasshopper asks a question: "I lift my eyes up to the mountains, where shall my help come from?" (Psalms 121:1)
+
+It is answered ten weeks back. The swift, the eighth creature, sings the verse that comes next: "My help comes from the Lord, Creator of Heaven and Earth." Eighteen and eight, question and answer — and eight is the number of what is beyond nature. The grasshopper's song tends to land in the weeks of Vaera or Bo, which are the plagues, locusts among them: help arriving from Him with nature set aside entirely.
+
+Shevat is Tu B'Shvat, the New Year of the Trees, kept on the fifteenth — though the Mishnah has a dispute about whether it should be the first. Which is itself the month's subject: we keep the trees' new year in the middle of winter, and that is faith.
+
+The tribe is Asher, and the word is *ta'anug*, pleasure or delight; the Sixth Lubavitcher Rebbe notes that *asher* itself means delight, from *ashruni*. Jacob blesses Asher that he will bring delicacies to the king. On Tu B'Shvat we drink wine and eat many kinds of fruit — and the delights of this month are intellectual too.
+
+Shevat belongs to the Oral Torah. It was on Rosh Chodesh that Moses began going back over everything he had taught in forty years, which is the whole Book of Deuteronomy. The Chidushei HaRim says that every new Torah insight a person has comes to him in Shevat.
+
+And passing on the Oral Torah needs one trait above all: humility. Without it a person cannot teach purely and plainly what he received from the one before him. Humility is Moses' own mark, the humblest of men and the first to hand it on. Which may be why in Perek Shirah the insects — the humblest creatures — are the ones singing through all four weeks of Shevat. As David said, "I am a worm and not a man."
+
+Eighteen is *chai*, life, which is why gifts are given in multiples of it. Rosh Chodesh Shevat and Tu B'Shvat are a celebration of life in general, not only human life. And *chai* is also a thing's essence: the Ba'al Shem Tov and the Alter Rebbe were both born on Chai Elul, the eighteenth, the life and essence of Elul; Rebbe Nachman's yahrzeit is the eighteenth of Tishrei; Lag Ba'Omer is the eighteenth of Iyar. Eighteen is also the number of blessings in the Amidah, which is called simply *Tefilah* because it is prayer's essence — and prayer is the recognition that a Jew's life is not natural at all.
+
+Pirkei Avot gives Rabbi Nechunia the son of Hakanah: "One who accepts upon himself the yoke of Torah is exempted from the yoke of government duties and the yoke of worldly cares; but one who casts off the yoke of Torah is saddled with" both. Take up the Tree of Life, which is above the world, or be handed the world's obligations instead. Calling the Torah a yoke also says what acquiring it costs. Rabbi Mendel of Kotsk points out that plenty of sages had worldly work and even professions, and did not experience it as a yoke or a worry.
+
+The pairing is Netzach shebeTiferet. A tree is a balance of root, trunk, branch and leaf, and only the balance keeps it up: no roots and it falls, too many branches and it falls, too few leaves and it cannot make enough to grow. In Shevat, mid-winter, it has to hold on. The same balance is wanted between the two yokes, and what it is differs from person to person and from one part of a life to another.
+
+The grasshopper's lesson is that help comes from Him, provided we are willing to look up past our own small view. The Midrash reads the mountains as the patriarchs, and says it is largely for their deeds that we are saved — so look past the present situation, at the whole of what you are and where you came from.
+
+*Source: [Week 18 (From the Book): To Live in Harmony with Nature in a Manner that is Above Nature](https://www.kabbalahoftime.com/2013/12/week-18-to-live-in-harmony-with-nature.html) — 1448 words*
+
+---
+
+## Day 121 · Book 2 · Week 18
+
+"You forgot the Mighty Rock Who bore you; you forgot the G-d Who delivered you." (Deuteronomy 32:18) Shevat is a month of nature, and the verse puts His relation to us as birth, which is the most natural figure there is. But Shevat is also what stands above nature, and the Oral Torah, and *ta'anug*, and *emunah* — keeping the trees' new year in the depths of winter.
+
+And the verse can be read as a prayer instead: Rock, they are your children; forget completely our sins; G-d delivers you. The haftorah goes with that: "He delivered me from my mighty enemy; from them that hated me; for they were too powerful for me." (II Samuel 22:18) Help against odds, which is nature set aside.
+
+The quality is *miut derech eretz*, minimised worldly activity — which is the same thing Pirkei Avot says this week from the other side. When a person's affairs are conducted small and humbly, His hand becomes much easier to see in them.
+
+The prophet is Achiah HaShiloni, who may represent being above nature better than anyone: Maimonides records that he lived longer than any other prophet, and he taught both Eliyahu and the Ba'al Shem Tov. It was precisely because those two kept their worldly activity small that they merited having him revealed to them. And Achiah told the Ba'al Shem Tov that he had to reveal himself to the world — to be involved in it, but in the way of *miut*, smallness. The Ba'al Shem Tov himself spoke about being a genuinely good person with a simple connection to G-d: both *derech eretz*, being a mentsch, and caring for the *amei ha'aretz*, the simple folk.
+
+The Levitical city is Mishal, which means a prayer, a request. Which is the grasshopper's question, and the eighteen blessings, and this month's faith and delight. Mishal also has the letters of *moshel*, to rule — and in prayer we accept who the Ruler is.
+
+*Source: [Week 18 (Book 2): Achia HaShiloni and "Minimized" World Activity](https://www.kabbalahoftime.com/2013/12/week-18-book-2-achia-hashiloni-and.html) — 541 words*
+
+---
+
+## Day 122 · Book 3 · Week 18
+
+"With the arm of Your greatness may they become as still as a stone, until Your people cross over, O Lord." Still as a stone — and entering Shevat we are reminded of the four levels in nature: *domem*, the silent or mineral; *tzomeach*, the growing; *chai*, the living; *medaber*, the speaking. Each week of this month touches one of them, and this week's verse gives us the stone.
+
+The haftorah begins something that will run through Shevat and Adar: what each tribe did in the fight against Sisera. This week is Ephraim and Benjamin, whom Rashi reads as Joshua and Shaul, and how they fought Amalek. Joshua is the Oral Torah, which is Shevat; Shaul belongs to Purim and Adar. And though Amalek is Adar's business, Amalek is the opposite of *emunah* — *Amalek* has the same numerical value as *safek*, doubt. The war against Sisera was a test of faith that not all the tribes passed, and which tribe showed faith and which showed doubt is the thread from here to Adar.
+
+Sotah's eighteenth daf continues with the writing of the curses, and its theme is that things done twice rather than once, or divided rather than whole, or for two people rather than one, are invalid. Nature is multiplicity — and all of it still comes from Him.
+
+The generation is Nahor, Serug's son and Avraham's grandfather. He lived in Ur Kasdim, where Avraham was born, and he had a grandson also called Nahor — continuity through children, as in nature. The name comes from *nachar*, to blow the nose, to sneeze, to snort. Which connects to the breath blown into Adam's nose, and so to nature and the world's making. And sneezing is a physical pleasure, which is this month's quality. The Talmud says that sneezing during prayer is a good sign, since as one is relieved below, so above.
+
+The journey is to being broken: "They journeyed from Libnah and camped in Rissah." Rissah means broken — and only through that brokenness and smallness can a person actually take the Torah in. Rabbi Jacobson notes that Rissah also means a stopped-up well in Arabic: to draw water from the Torah's well, you have to feel that small. Last week was studying properly; this week is being broken enough to receive what is taught.
+
+*Source: [Week 18 (Book 3): Nahor and Ta'anug](https://www.kabbalahoftime.com/2013/12/week-18-book-3-nahor-and-taanug.html) — 727 words*
+
+---
+
+## Day 123 · Book 4 · Week 18
+
+"And she said: May your bondswoman find favor in your eyes; and the woman went on her way and ate, and her face was not sad anymore."
+
+That she *ate* looks like an idle detail and is not. It is the measure of how much she had been let go of. Her faith in what Eli said let her take pleasure in food again — *ta'anug*, which is this month.
+
+The week's quality is that people enjoy wisdom from such a person. Eli's wisdom is what lets her be comforted and eat. The word used is *Tushiah*, which is rare in Tanach and can also be rendered resourcefulness. Even having first misread her entirely, he was quick enough, once she spoke, to see his mistake and bless her with a child. And the first verse of Proverbs' eighteenth chapter uses that same rare word: "He who is separated seeks lust; in all sound wisdom, he is exposed."
+
+Two great yahrzeits. The second of Shevat is Reb Zusha of Anipoli, one of the Maggid of Mezritch's main disciples and the brother of Rebbe Elimelech of Lizhensk. The two of them travelled Eastern Europe bringing Torah and life to the communities there, and Rabbi Noach of Kobryn once heard that Chassidus took root only in the places those brothers had passed through. The stories about him are of miracles, of humility, and of how deeply he looked at himself.
+
+And the fourth of Shevat is the Baba Sali, grandson of Rav Yaakov Abuchatzeira — among the most prominent of Sefardi holy men, with thousands of stories of open miracles, and a man whose love for Hashem, for this people and for the Torah was past measuring. He kept close relations with Torah sages of every kind, and had a particular affinity for Chassidic teaching and its leaders.
+
+*Source: [Week 18 (Book 4): Wisdom That Brings Others Enjoyment and Pleasure in Life](https://www.kabbalahoftime.com/2013/12/week-18-book-4a-wisdom-that-brings.html) — 625 words*
+
+---
+
+## Day 124 · Book 5 · Week 18
+
+"You are all fair, my beloved, and there is no blemish in you. With me from Lebanon, my bride, with me from Lebanon shall you come; you shall look from the peak of Amanah, from the peak of Senir and Hermon, from the lions' dens, from mountains of leopards. You have captivated my heart, my sister, my bride; you have captivated my heart with one of your eyes, with one link of your necklaces."
+
+The middle verse is all nature: a forest, three peaks, lions, leopards. Rashi reads it as His being with us in exile and coming back out of it with us. And the peak of Amanah has the root of *emunah* in it.
+
+Of the seventy souls the eighteenth is Judah, who of all the brothers stands most for the Oral Torah: Jacob sent him ahead to set up a yeshiva in Egypt before the family came down. He is this month's two qualities as well. He showed great faith facing the viceroy who turned out to be Joseph — and his pleasure-seeking, with Tamar, got him into trouble he was not afraid to own and turn from.
+
+Shevuot's eighteenth daf continues on withdrawing from a niddah, where the point is avoiding pleasure, and on separating before the set period of impurity; then on whether a person must know what made him impure before he forgot that he was. It takes in forbidden foods, forbidden relations, and acts that show a lack of faith, like working on Shabbat or Yom Kippur.
+
+Jeremiah's eighteenth chapter is G-d as the potter, which asks for faith that all of it comes from Him. "And at one instant I may speak concerning a nation and concerning a kingdom, to build and to plant." And then: "Shall one abandon water flowing from rocks of the field that comes from the snow of Lebanon? Shall strange cold flowing water be abandoned?" In Shevat the sap begins to move while the cold is still on. Lebanon, whose trees went into the Temple, is in the Song's verses above too — and Levanon is often the Temple itself.
+
+*Source: [Week 18 (Book 5): Nature as a Metaphor and the Setting for Our Relationship with G-d](https://www.kabbalahoftime.com/2013/12/week-18-4b-nature-as-metaphor-and.html) — 616 words*
+
+---
+
+## Day 125 · Book 6 · Week 18
+
+The first week of Shevat in psalms: the fifty-second, fifty-third and fifty-fourth, with three verses of Psalm 59 and one of Psalm 89.
+
+Psalm 52 is about Doeg, who informed on David to Saul, and about a man who takes pride in harm. "Why do you boast with evil, O mighty one? G-d's kindness is all day long. Your tongue devises treachery; like a sharpened razor it works deceit. You love evil more than good, falsehood more than speaking righteousness." And then the answer: "G-d will likewise shatter you forever; He will excise and pluck you from" where you stand.
+
+Psalm 53 is headed as speaking of when Titus pierced the curtain of the Holy of Holies with his sword and thought he had killed Him. It opens with the fool: "The fool says in his heart, 'There is no G-d!'" And the looking down: "G-d looked down from heaven upon mankind, to see if there was any man of intelligence who searches for G-d. But they all regressed together." Then the fright: "There they will be seized with fright, a fright such as never was." And the wish at the end: "O that out of Zion would come Israel's deliverance!"
+
+Psalm 54 is from when the Ziphites told Saul that David was hiding with them, and it is short and direct. "O G-d, deliver me by Your Name, and vindicate me by Your might. G-d, hear my prayer, listen to the words of my mouth. For strangers have risen against me, and ruthless men have sought my soul; they are not mindful of G-d." Then the turn: "Behold, G-d is my helper; my Lord is with those who support my soul." And the close: "With a free-will offering I will sacrifice to You; I will offer thanks to Your Name, O Lord, for it is good. For He has saved me from every trouble."
+
+Psalm 59's verses are the laughing: "But You, Lord, You laugh at them; You mock all nations. Because of his might, I wait for You, for G-d is my stronghold. The G-d of my kindness will anticipate my need."
+
+*Source: [Week 18 (Book 6): Reviewing the First Week of Shevat - Psalms 52-54; 59:9-11; 89:19](https://www.kabbalahoftime.com/2013/12/week-18-book-5-reviewing-first-week-of.html) — 677 words*
+
+---
+
+## Day 126 · Book 7 · Week 18
+
+The grasshopper opens with its question, and the gathering answers it from four directions at once.
+
+"I lift my eyes up to the mountains" / "where shall my help come from?" / "For our protectors turn to the Lord" / "and our king to the Holy One of Israel."
+
+Then the peaks and the dens, with waiting laid under them: "You shall look from the peak of Amanah" / "from the peak of Senir and Hermon" / "from the lions' dens, from mountains of leopards" / "because of his might, I wait for You, for G-d is my stronghold" / "the G-d of my kindness will anticipate my need."
+
+The stone comes next, with the crossing and the rescue: "With the arm of Your greatness may they become as still as a stone" / "until Your people cross over, O Lord" / "He delivered me from my mighty enemy" / "from them that hated me; for they were too powerful for me" / "But You, Lord, You laugh at them; You mock all nations."
+
+Then the forgetting, braided with the tribes: "You forgot the Mighty Rock Who bore you" / "you forgot the G-d Who delivered you" / "Out of Ephraim, whose root was against Amalek" / "after you will be Benjamin with your abaters."
+
+The captivating follows — "You have captivated my heart, my sister, my bride" / "you have captivated my heart with one of your eyes" / "with one link of your necklaces" — and then Channah asking for favour.
+
+It ends with the fairness, Lebanon, and the face: "You are all fair, my beloved, and there is no blemish in you" / "with me from Lebanon, my bride, with me from Lebanon shall you come" / "and the woman went on her way and ate" / "and her face was not sad anymore."
+
+*Source: [Week 18 (Book 7): The Grasshopper is Saying](https://www.kabbalahoftime.com/2021/02/week-18-book-7-grasshopper-is-saying.html) — 243 words*
