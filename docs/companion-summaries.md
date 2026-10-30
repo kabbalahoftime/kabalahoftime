@@ -180,3 +180,123 @@ The rooster's remaining calls carry Elkanah's lineage and the Tikkun HaKlali wit
 Six readings, one voice. It closes on the Song of the Sea: "I will sing to the Lord, for very exalted is He."
 
 *Source: [Week 1 (Book 7): The Rooster is saying](https://www.kabbalahoftime.com/2026/05/week-1-book-7-rooster-is-saying.html) — 467 words*
+
+---
+
+## Day 8 · Book 1 · Week 2
+
+Week two is the week of Yom Kippur, and the creature is the hen: "He gives bread to all flesh, for His kindness endures forever." (Psalms 136:25) She sings of G-d feeding every living thing, in the days when it is settled how much each will receive — and who will live and who will not.
+
+Two customs of this week run through the hen. Eating well on the eve of Yom Kippur is held to be as meritorious as the fast itself. And it is in this week that Kapparot is done, the ancient custom of atoning through a hen, which is then slaughtered and given to families in need; many now use charity money instead.
+
+Pirkei Avot gives Shimon, the son of Rabban Gamliel: "All my life I have been raised among the wise, and I have found nothing better for the body than silence. The essential thing is not study, but deed. And one who speaks excessively brings on sin." To take in what another says you first have to be quiet. And the silencing of the body is this day plainly — the fast, no leather shoes, no anointing, no relations. For one day we stand apart from the physical, like angels.
+
+Week one was about acquiring one teacher. This week it is the wise in the plural. One is unity and two is multiplicity, and they do not contradict: a person can have one master and still learn from everyone.
+
+The pairing is Gevurah shebeChesed, discipline inside kindness — which is the fast itself, self-control exercised while begging for mercy from a G-d we know to be just and kind.
+
+The day also insists that deeds are what count. Its high point is the reading of Jonah, which turns on "And G-d saw their actions."
+
+After the rooster got us out of bed, the hen's lesson is the next step: eat properly, take care of the body you were given.
+
+*Source: [Week 2 (From the Book): To Relate Well to Others and to Our Own Body](https://www.kabbalahoftime.com/2013/09/week-2-to-relate-well-to-others-and-to.html) — 856 words*
+
+---
+
+## Day 9 · Book 2 · Week 2
+
+Haazinu turns to water: "My lesson will drip like rain; my word will flow like dew; like storm winds on vegetation and like raindrops on grass." (Deuteronomy 32:2) Rain and dew — the beginning of time again, and the Flood. Water is purity and it is life, which are not two things. Dew in particular belongs to resurrection: it was with dew that G-d revived the Jewish people at the giving of the Torah, and the Torah itself is called dew.
+
+The haftorah answers with shelter: "The Lord is my rock and my fortress, and a rescuer to me." (II Samuel 22:2) On Yom Kippur we are the ones delivered.
+
+The week's quality is constant study. Last week was desire; this week is discipline, because Torah is not acquired without it. The prophet is Isaac, who is discipline — *gevurah* — and whose dedication is read off the Akeidah. One opinion in the Talmud puts the Akeidah on Yom Kippur. Like Jews on this day, Isaac lived a heavenly life while still on earth; the Zohar says he spent three years in the Garden of Eden afterwards. He is called a pure offering, and he never once left the Land of Israel.
+
+The Levitical city is Gezer, a place so strategic that it is among the most excavated sites in Israel, and a wedding gift from Pharaoh when his daughter married Solomon. *Gezer* shares its root with *gzerah*, a decree — and the business of this day is annulling evil decrees through prayer, repentance and charity.
+
+What constant study asks for in practice is a fixed time. It is one of the questions put to a person in the World to Come: did you set times for Torah? The Alter Rebbe adds that the times must be fixed not only in the day but in the soul.
+
+*Source: [Week 2 (Book 2): Yom Kippur - Rain and Rescue, Isaac and Study, Gezer and Annulling Evil Decrees](https://www.kabbalahoftime.com/2013/09/week-2-book-2-humility-is-key.html) — 467 words*
+
+---
+
+## Day 10 · Book 3 · Week 2
+
+The Song of the Sea reaches the drowning: "a horse and its rider He cast into the sea. The Eternal's strength and His vengeance were my salvation." That is Yom Kippur — we throw ourselves into the water and come out clean. Rabbi Akiva says it outright: Hashem Himself is our mikvah. He is our strength and our song and our salvation, and it is on this day that we actually know it.
+
+The haftorah speaks of "when breaches are made in Israel, when the people offer themselves willingly, bless the Lord." Breaches, *phra'ot*, has the same root as Pharaoh — who stands for the oversized ego and for stubbornness. Seeing what the ego costs, and giving ourselves over willingly, is how the blessing gets said.
+
+The tractate opens here. Daf Beit, the first daf of Sotah, is about how couples are matched and brought together — souls paired before they come down. Two is the number of a mate.
+
+The generation is Seth, who was given to Adam and Eve as consolation for Abel. That belongs to this week too, which is spent undoing what was done, or better, turning it into merit. *Shet* means foundation and source — like the Even Shetiah, the Foundation Stone the world was made from, which sat in the Holy of Holies, the room entered once a year, on this day.
+
+The journey is the second: "The children of Israel journeyed from Rameses and camped in Succoth." Last week was taking in that Hashem is Father and Creator; this week it is Hashem as protector — and in the calendar, after Yom Kippur, we go straight out to build the sukkah.
+
+Seth's lesson for prayer is direction. He is the source, and prayer runs the other way: bringing blessing down, the spiritual into the material.
+
+*Source: [Week 2 (Book 3): Casting our Ego into Water, Seth and Soulmates, connecting to our Father and preparing for Sukkot](https://www.kabbalahoftime.com/2013/09/week-2-book-3-seth-draft.html) — 495 words*
+
+---
+
+## Day 11 · Book 4 · Week 2
+
+"And he had two wives; the name of the one was Hannah and the name of the second was Peninnah; and Peninnah had children, but Hannah had no children." Two wives — two, and marriage, and relationship, which is this week. Peninah means pearl, the beauty that is inside. Channah comes from *chen*, grace and also mercy; Rebbe Nachman makes chen essential to prayer, and the Talmud learns how to pray from Channah herself. All of it is this day: through prayer and fasting the inner beauty is uncovered, grace is found, the past is washed.
+
+Pirkei Avot says of the one who studies Torah for its own sake that "not only that, but the creation of the entire world is worthwhile for him alone." Set that beside the verse: Peninah had children and Channah had none, and yet Peninah and all her children were worth creating because of Channah. The Talmud says the same of Rabbi Chanina — whose name is also from chen — "The whole world is nourished because of Chanina, and for Chanina, one amount of carob is enough from Sabbath eve to the next." (Brachot 17b)
+
+Proverbs' second chapter lays out the two roads: "for her house sinks to death, and her paths lead to the dead… in order that you go in the way of the good, and you keep the ways of the righteous. For the upright shall dwell in the land."
+
+Two yahrzeits. On the eighth of Tishrei, Rabbi Noach of Lechovitch, a link in the chain to Slonim, Kobrin, Koidenov and Karlin, who taught that a Jew who begins to doubt his faith should have faith that he has faith — that it is there, only hidden. On the ninth, the Magen Avraham, among the greatest authorities in Jewish law, sickly as a child, who wrote that when someone wrongs you, do not hold the grudge in silence: say "Why did you do this to me?" — in private, calmly, with soft language.
+
+*Source: [Week 2 (Book 4): Chen, Merit, Life and Death Choices, and the Magen Avraham](https://www.kabbalahoftime.com/2013/09/week-2-book-4a-chen-merit-life-and.html) — 902 words*
+
+---
+
+## Day 12 · Book 5 · Week 2
+
+"Draw me, we will run after you; the king brought me to his chambers." Having been given a glimpse of being drawn near, we run. And on this one day of the year the Kohen Gadol goes into the inner chamber, the Holy of Holies.
+
+The Talmud calls Yom Kippur, with Tu B'Av, the happiest day of the year — which is a startling thing to say of a day with no feasting and no wine. Rashi reads the wine of this verse as standing for every physical festivity.
+
+Then the song turns to what we are: "I am black but comely, O daughters of Jerusalem! Like the tents of Kedar, like the curtains of Solomon." We have sinned and we are beautiful underneath it, and teshuvah is still open. Rashi: black as the tents of Kedar, blackened by rain because they stand out in the desert — and as easily cleaned, to be like the curtains of Solomon. The next verse is the admission: "they made me a keeper of the vineyards; my own vineyard I did not keep." We were to be a light to the nations and could not keep our own.
+
+Of the seventy souls the second is Enoch, Reuven's firstborn — who carries the name of that earlier Enoch, so righteous that Hashem took him alive and he became an angel. Which is what this day asks of us.
+
+Shevuot opens with laws that "are two that are really four," the doubling of a second week, and its first daf gives most of itself to the Yom Kippur offerings.
+
+Jeremiah's second chapter is the verse Rashi was quoting: "I remember to you the lovingkindness of your youth, the love of your nuptials, your following Me in the desert, in a land not sown." Shavuot was the wedding. This day is the second one, when the second tablets were given.
+
+*Source: [Week 2 (Book 5): Yom Kippur - Entering the Inner Chamber, Enoch, Remembering the Love of Our Youth](https://www.kabbalahoftime.com/2013/09/week-2-4b-enoch.html) — 702 words*
+
+---
+
+## Day 13 · Book 6 · Week 2
+
+The week of Yom Kippur in psalms is the fourth, fifth and sixth, with three verses of the Tikkun HaKlali and one of Psalm 89.
+
+Psalm 4 is a man asking to be heard and telling others to stop: "Answer me when I call, O God Who knows my righteousness. You have relieved me in my distress." Then, "Tremble and do not sin; reflect in your hearts upon your beds, and be silent forever." Against those who ask who will show us good, he answers that the joy put in his heart is greater than theirs when grain and wine abound, and ends, "In peace and harmony I will lie down and sleep, for You, Lord, will make me dwell alone, in security."
+
+Psalm 5 is prayer at first light. "Lord, hear my voice in the morning; in the morning I set my prayers before you and hope." It is blunt about what cannot stand before G-d — the boastful, the speakers of falsehood, whose throat is an open grave though their tongue flatters — and it closes on shelter: "You will envelop him with favor as with a shield."
+
+Psalm 6 is the one said from the floor. "Lord, do not punish me in Your anger… heal me, O Lord, for my bones tremble in fear. My soul is panic-stricken; and You, O Lord, how long?" Then the line that gives the reason: "For there is no remembrance of You in death; who will praise You in the grave?" And: "I am weary from sighing; each night I drench my bed, I melt my couch with my tears." It turns at the end — "The Lord has heard my supplication; the Lord accepts my prayer."
+
+The Tikkun HaKlali's verses are contentment with what was given: "The Lord is my allotted portion and my cup; You guide my destiny. Portions have fallen to me in pleasant places." Psalm 89 holds the week's foundation: "Forever will it be built with kindness."
+
+*Source: [Week 2 (Book 6): Review of the Week of Yom Kippur - Psalms 4-6, 16:5-7, 89:3](https://www.kabbalahoftime.com/2013/09/week-2-book-5-reviewing-first-week-of.html) — 660 words*
+
+---
+
+## Day 14 · Book 7 · Week 2
+
+The hen opens the gathering, and the week's six readings come in behind her, a line at a time.
+
+"He gives bread to all flesh, for His kindness endures forever" meets the haftorah's shelter — "The Lord is my rock and my fortress, and a rescuer to me" — and then the running: "Draw me, we will run after you." The willing offering follows, "when the people offer themselves willingly, bless the Lord."
+
+Haazinu's water is broken in two and set on either side of the rejoicing. "My lesson will drip like rain" / "We will rejoice and be glad in you" / "My word will flow like dew" / "They have loved you sincerely" — and then Psalm 89's building, "as the heavens, with which You will establish Your faithfulness."
+
+The sea comes next, "a horse and its rider He cast into the sea," answered by the tents of Kedar and the curtains of Solomon, and by "You guide my destiny." Then the king's chambers, and immediately the two wives: "And he had two wives; the name of the one was Hannah."
+
+From there the song braids the vineyard with the barrenness. "They made me a keeper of the vineyards" / "even the inheritance pleases me" / "my own vineyard I did not keep" / "and the name of the second was Peninnah; and Peninnah had children, but Hannah had no children." The mother's sons who were incensed sit beside the breaches made in Israel, and "I am black but comely" beside "portions have fallen to me in pleasant places."
+
+It ends where a day like this one would want to end: "Even at night my conscience instructs me. I will bless the Lord, Who counseled me."
+
+*Source: [Week 2 (Book 7): The Hen is Saying](https://www.kabbalahoftime.com/2021/02/week-2-book-7-hen-is-saying.html) — 272 words*

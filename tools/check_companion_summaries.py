@@ -67,6 +67,10 @@ ALT = {
     'pesach': 'pessach', 'chanah': 'channah', 'samuel': 'shmuel',
     'frankfurt': 'frankfort', 'haklali': 'klali', 'solomon': 'shlomoh',
     'deborah': 'devorah', 'hannah': 'channah',
+    # The app writes G-d everywhere. The psalm texts the blog quotes are
+    # Chabad's translation, which writes God. Spelling the Name is a house
+    # convention, not a claim about anything.
+    'g-d': 'god',
 }
 
 
