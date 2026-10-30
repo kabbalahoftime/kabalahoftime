@@ -86,6 +86,7 @@ ALT = {
     'aharon': 'aaron', 'hellenist': 'helenist', 'greece': 'greek',
     # One town, spelled both ways across the posts.
     'lizhensk': 'lizhenk', 'arpachshad': 'archpachshad',
+    'yafeth': 'yaffeth', 'simcha': 'smicha',
 }
 
 # Twelve years of Blogger has eaten a lot of spaces: "Midrashteaches",
