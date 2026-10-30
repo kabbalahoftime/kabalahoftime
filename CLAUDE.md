@@ -132,6 +132,31 @@ saying last month's readings. Both steps are checkable by diff: re-run step 1
 and diff `docs/week-data.json`, re-run step 2 and diff `companion-days.json`.
 Either diff coming back non-empty means something upstream moved.
 
+### Check the weekly table against the writing
+
+```sh
+python3 -I tools/check_week_table.py docs/week-data.json docs/companion-posts.json
+```
+
+Every week's reading has a post that names it, so the table can be checked
+rather than trusted. **Run this after any change to the weekly table.** It
+found four faults in one day, none of them visible from a single week:
+
+- the prophets a week late from 24 to 50 (Yoel listed twice, as Yoel and Joel)
+- the qualities a week late from 26 (Emunat Chachamim twice; two of the
+  forty-eight sharing one cell at week 42)
+- Chuldah missing from the prophets
+- 31 of the 52 Levitical cities wrong — Jerusalem missing, the seven nations
+  in weeks 40–42, daf of Nazir in 43–45, nothing at all in 46–52
+
+A reader going a day at a time sees "the card says Nahum, the post says
+Chabakuk" and patches that week. The cause — a duplicate nine weeks earlier —
+only shows with all fifty-two side by side.
+
+It reports repeats as notices rather than failures (Gath-Rimmon is twice in
+Joshua 21), and it leaves out fields a post does not name: Book 4's Solomon
+column holds a verse, not a reference, so there is nothing to match on.
+
 The companion's week is `(day − 1) / 7 + 1`. That matches the week the page
 prints on all 364 days and all 28 intercalated ones — checked — so an entry
 can never sit above the cards claiming a different week.
