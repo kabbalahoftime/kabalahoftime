@@ -1526,7 +1526,7 @@
     },
     "b2": {
      "quality": "Good heart (Lev Tov)",
-     "prophet": "Yoel",
+     "prophet": "Amos",
      "haazinu": "From outside, the sword will bereave, and terror from within",
      "haftorah": "And the Lord has recompensed me according to my righteousness",
      "city": "Kartan"
@@ -1590,7 +1590,7 @@
     },
     "b2": {
      "quality": "Trusting in the Sages (Emunat Chachamim)",
-     "prophet": "Amos",
+     "prophet": "Micah the Morashite",
      "haazinu": "I said that I would make an end of them, eradicate their remembrance from mankind",
      "haftorah": "With a kind one, You show Yourself kind. With an upright mighty man",
      "city": "Hebron - Kiryat Arba (city of refuge)"
@@ -1653,8 +1653,8 @@
      "avot": "Rabbi Yishmael – be submissive to the head, and courteous to the young, and receive every person with joy"
     },
     "b2": {
-     "quality": "Faith in the Sages (Emunat Chachamim)",
-     "prophet": "Micah the Morashite",
+     "quality": "Acceptance of suffering (Kabalat HaYissurin)",
+     "prophet": "Amoz",
      "haazinu": "Were it not that the enemy's wrath was heaped up, lest their adversaries distort",
      "haftorah": "With a pure one, You show Yourself pure; But with a perverse one",
      "city": "Libnah (city of refuge)"
@@ -1717,8 +1717,8 @@
      "avot": "Rabbi Akiva – jest and frivolity accustom a person to lust… everything is prepared for the banquet"
     },
     "b2": {
-     "quality": "Acceptance of suffering (Kabalat HaYissurin)",
-     "prophet": "Amoz",
+     "quality": "He who knows his place (HaMakir et Mekomo)",
+     "prophet": "Eliyahu",
      "haazinu": "For they are a nation devoid of counsel, and they have no understanding",
      "haftorah": "And the humble people You do deliver; But Your eyes are upon the haughty",
      "city": "Juttah"
@@ -1781,8 +1781,8 @@
      "avot": "Rabbi Elazar ben Azariah – without Torah there is no common decency... without flour there is no Torah…"
     },
     "b2": {
-     "quality": "He who knows his place (HaMakir et Mekomo)",
-     "prophet": "Eliyahu",
+     "quality": "He who is happy with his lot (HaSameach beChelkoh)",
+     "prophet": "Elisha",
      "haazinu": "If they were wise, they would understand this; they would reflect upon their fate",
      "haftorah": "For You are my lamp, O' Lord; And the Lord does light my darkness",
      "city": "Beth-shemesh (city of Judah on the border)"
@@ -1845,8 +1845,8 @@
      "avot": "Rabbi Elazar ben Chismah – the laws of bird sacrifices and menstrual periods are essential…"
     },
     "b2": {
-     "quality": "He who is happy with his lot (HaSameach beChelkoh)",
-     "prophet": "Elisha",
+     "quality": "He who makes a fence around his words",
+     "prophet": "Jonah ben Amittai",
      "haazinu": "How can one [person] pursue a thousand, and two put ten thousand to flight",
      "haftorah": "For by You I run upon a troop; By my G-d I scale a wall",
      "city": "Dobrath"
@@ -1909,8 +1909,8 @@
      "avot": "Ben Zomah – Who is wise? One that learns from everyone"
     },
     "b2": {
-     "quality": "He who makes a fence around his words",
-     "prophet": "Jonah ben Amittai",
+     "quality": "He claims no credit for his achievements (Einoh Machazik Tovah l'Atzmo)",
+     "prophet": "Isaiah",
      "haazinu": "For their vine is of the vine of Sodom, and of the field of Gemorrah",
      "haftorah": "[He is] the G-d Whose way is perfect; The word of the Lord is tried",
      "city": "'Ein Gannim"
@@ -1973,8 +1973,8 @@
      "avot": "Ben Azai – run to pursue a mitzvah, and flee from transgression. A mitzvah attracts another mitzvah..."
     },
     "b2": {
-     "quality": "He claims no credit for his achievements (Einoh Machazik Tovah l'Atzmo)",
-     "prophet": "Isaiah",
+     "quality": "Loved (Ahuv)",
+     "prophet": "Joel",
      "haazinu": "Their wine is the bitterness of serpents, and the bitterness of the ruthless cobras",
      "haftorah": "For who is G-d, save the Lord? And who is a rock, save our G-d?",
      "city": "Kartah"
@@ -2037,8 +2037,8 @@
      "avot": "Rabbi Levitas of Yavneh – be extremely humble, because the hope of mortal man is worms..."
     },
     "b2": {
-     "quality": "Loved (Ahuv)",
-     "prophet": "Joel",
+     "quality": "Loves Hashem (Ohev et HaMakom)",
+     "prophet": "Nahum",
      "haazinu": "Is it not stored up with Me, sealed up in My treasuries?",
      "haftorah": "G-d is He who has fortified me with strength; and He looseth perfectly my path",
      "city": "Nahalal"
@@ -2101,8 +2101,8 @@
      "avot": "Rabbi Yochanan ben Berokah – whoever profanes the Divine Name in secret will be punished in public..."
     },
     "b2": {
-     "quality": "Loves Hashem (Ohev et HaMakom)",
-     "prophet": "Nahum",
+     "quality": "Loves people (Ohev et HaBriot)",
+     "prophet": "Chabakuk",
      "haazinu": "Vengeance is poised with Me, and it will pay at the time their foot stumbles",
      "haftorah": "He makes my feet like hinds; And sets me upon my high places",
      "city": "Jahaz (or Yahatz, or Yahatzah)"
@@ -2165,8 +2165,8 @@
      "avot": "Rabbi Yishmael the son of Rabbi Yossi – one who studies Torah in order to teach is given the opportunity to learn and teach; one that studies Torah in order to practice…"
     },
     "b2": {
-     "quality": "Loves people (Ohev et HaBriot)",
-     "prophet": "Chabakuk",
+     "quality": "Loves the ways of righteousness (Ohev et HaTzedakot)",
+     "prophet": "Zephaniah",
      "haazinu": "When the Lord will judge His people, and will reconsider His servants",
      "haftorah": "He trains my hand for war, so that mine arms do bend a brass bow",
      "city": "Mephaath"
@@ -2229,8 +2229,8 @@
      "avot": "Rabbi Tzadok – do not separate yourself from the community… do not make the Torah into a crown to glorify yourself"
     },
     "b2": {
-     "quality": "Loves the ways of righteousness (Ohev et HaTzedakot)",
-     "prophet": "Zephaniah",
+     "quality": "Loves justice (Ohev et HaMeisharim)",
+     "prophet": "Uriah",
      "haazinu": "Then He will say, \"Where is their deity, the rock in which they trusted",
      "haftorah": "And You have given me the shield of Your salvation",
      "city": "Holon"
@@ -2293,8 +2293,8 @@
      "avot": "Rabbi Yossi – one that honors the Torah will be honored by men…"
     },
     "b2": {
-     "quality": "Loves justice (Ohev et HaMeisharim)",
-     "prophet": "Uriah",
+     "quality": "Loves reproof (Ohev et HaTochachot)",
+     "prophet": "Jeremiah",
      "haazinu": "who ate the fat of their sacrifices and drank the wine of their libations?",
      "haftorah": "You have enlarged my step[s] beneath me; And my ankles have not slipped",
      "city": "'Ain; ayin means eye, fountain"
@@ -2357,8 +2357,8 @@
      "avot": "Rabbi Yishmael – one who refrains from serving as a judge avoid hatred, theft and false oaths."
     },
     "b2": {
-     "quality": "Loves reproof (Ohev et HaTochachot)",
-     "prophet": "Jeremiah",
+     "quality": "Keeps far from honor",
+     "prophet": "Ezekiel",
      "haazinu": "See now that it is I! I am the One, and there is no G-d like Me!",
      "haftorah": "I have pursued my enemies and have destroyed them",
      "city": "Future City of Refuge"
@@ -2421,8 +2421,8 @@
      "avot": "Rabbi Yonatan – whoever fulfills the Torah in poverty will ultimately fulfill it in wealth..."
     },
     "b2": {
-     "quality": "Keeps far from honor",
-     "prophet": "Ezekiel",
+     "quality": "Does not act arrogantly with his knowledge (Lo Megis Liboh BeTalmudoh)",
+     "prophet": "Daniel (Shemaiah)",
      "haazinu": "For I raise up My hand to heaven, and say, 'As I live forever",
      "haftorah": "And I have consumed them, and I have crushed them that they cannot rise",
      "city": "Mahanaim"
@@ -2485,8 +2485,8 @@
      "avot": "Rabbi Meir – engage minimally in business, and occupy yourself with Torah..."
     },
     "b2": {
-     "quality": "Does not act arrogantly with his knowledge (Lo Megis Liboh BeTalmudoh)",
-     "prophet": "Daniel (Shemaiah)",
+     "quality": "Does not take pleasure in handing down [halachic] decisions (Einoh Sameach b'Hora'ah)",
+     "prophet": "Baruch",
      "haazinu": "When I sharpen the blade of My sword, and My hand grasps judgment",
      "haftorah": "For You have girded me with strength for the battle",
      "city": "Jazer"
@@ -2549,8 +2549,8 @@
      "avot": "Rabbi Eliezer – one who fulfills one mitzvah acquires an advocate for himself..."
     },
     "b2": {
-     "quality": "Does not take pleasure in handing down [halachic] decisions (Einoh Sameach b'Hora'ah)",
-     "prophet": "Baruch",
+     "quality": "Bears the burden with his friends (Noseh b'Ol im Chaveroh)",
+     "prophet": "Neriah",
      "haazinu": "I will intoxicate My arrows with blood, and My sword will consume flesh",
      "haftorah": "And of my enemies You have given me the back of their necks",
      "city": "Girgashites"
@@ -2613,8 +2613,8 @@
      "avot": "Rabbi Yochanan HaSandlar – every gathering that is for the sake of Heaven will endure…"
     },
     "b2": {
-     "quality": "Bears the burden with his friends (Noseh b'Ol im Chaveroh)",
-     "prophet": "Neriah",
+     "quality": "Judges him favorably (Machrioh Lechaf Zechut)",
+     "prophet": "Seraiah",
      "haazinu": "Sing out praise, O you nations, for His people!",
      "haftorah": "They looked about, but there was no one to save them",
      "city": "Cana'anites"
@@ -2677,8 +2677,8 @@
      "avot": "Rabbi Eliezer ben Shammuah – the honor of your student should be as precious to you as your own…"
     },
     "b2": {
-     "quality": "Judges him favorably (Machrioh Lechaf Zechut) / Places him [in the path of] truth (Ma'amidoh al HaEmet)",
-     "prophet": "Seraiah",
+     "quality": "Places him [in the path of] truth (Ma'amidoh al HaEmet)",
+     "prophet": "Mehsiah",
      "haazinu": "And Moses came and spoke all the words of this song into the ears of the people",
      "haftorah": "Then I ground them as the dust of the earth, as the mud of the streets",
      "city": "Chivites"
@@ -2742,7 +2742,7 @@
     },
     "b2": {
      "quality": "Places him [in the path of] peace (Ma'amidoh al HaShalom)",
-     "prophet": "Mehsiah",
+     "prophet": "Haggai",
      "haazinu": "And Moses finished speaking all these words to all Israel",
      "haftorah": "And You have allowed me to escape from the contenders amongst my people",
      "city": "Nazir 2-22"
@@ -2806,7 +2806,7 @@
     },
     "b2": {
      "quality": "He deliberates in his study (Mityashev Liboh BeTalmudoh)",
-     "prophet": "Haggai",
+     "prophet": "Zechariah",
      "haazinu": "And he said to them, \"Set your hearts to all of the words which I bear witness\"",
      "haftorah": "Strangers lie to me; as soon as their ears hear, they obey me",
      "city": "Nazir 23-44"
@@ -2870,7 +2870,7 @@
     },
     "b2": {
      "quality": "Asks and responds (Shoel uMeshiv)",
-     "prophet": "Zechariah",
+     "prophet": "Malachi",
      "haazinu": "For it is not an empty thing for you, for it is your life",
      "haftorah": "The strangers will wilt, and become lame from their bondage",
      "city": "Nazir 45-66"
@@ -2934,7 +2934,7 @@
     },
     "b2": {
      "quality": "Listens and adds (Shomeah uMosif)",
-     "prophet": "Malachi",
+     "prophet": "Mordechai Bilshan",
      "haazinu": "And the Lord spoke to Moses on that very day, saying",
      "haftorah": "The Lord lives, and blessed be my Rock",
      "city": ""
@@ -2998,7 +2998,7 @@
     },
     "b2": {
      "quality": "Learns in order to teach (Lomed al Menat Lilmod)",
-     "prophet": "Mordechai Bilshan",
+     "prophet": "Unknown / Oded (Mashiach ben Yosef)",
      "haazinu": "Go up this Mount Avarim [to] Mount Nebo, which is in the land of Moab",
      "haftorah": "The G-d who takes vengeance for me; And brings down peoples under me",
      "city": ""
@@ -3062,7 +3062,7 @@
     },
     "b2": {
      "quality": "Learns in order to practice (Lomed al Menat La'asot)",
-     "prophet": "Unknown / Oded (Mashiach ben Yosef)",
+     "prophet": "Unknown / Chanani (Mashiach ben David)",
      "haazinu": "And die on the mountain upon which you are climbing and be gathered to your people",
      "haftorah": "And that brings me forth from my enemies",
      "city": ""
@@ -3126,7 +3126,7 @@
     },
     "b2": {
      "quality": "Increases the wisdom of his teacher (Machkim et Rabboh)",
-     "prophet": "Unknown / Chanani (Mashiach ben David)",
+     "prophet": "Miriam (Rachel); Rebbetzin Menucha Rachel",
      "haazinu": "Because you betrayed Me in the midst of the children of Israel",
      "haftorah": "Therefore I will give thanks to You, O' Lord, among the nations",
      "city": ""
@@ -3187,7 +3187,7 @@
     },
     "b2": {
      "quality": "Who properly understands what he learns (Kavanah)",
-     "prophet": "Miriam (Rachel); Rebbetzin Menucha Rachel",
+     "prophet": "Devorah (Leah); Rebbetzin Devorah Leah",
      "haazinu": "For from afar, you will see the land, but you will not come there",
      "haftorah": "(repeated from last week). He gives great salvation to His king",
      "city": ""
@@ -3248,7 +3248,7 @@
     },
     "b2": {
      "quality": "Who relates a statement in the name of the one who said it",
-     "prophet": "Devorah (Leah); Rebbetzin Devorah Leah",
+     "prophet": "Chuldah",
      "haazinu": "(repeated from last week). For from afar, you will see the land",
      "haftorah": "(repeated from last week). He gives great salvation to His king",
      "city": ""
