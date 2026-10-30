@@ -5274,3 +5274,125 @@ Then the grinding into dust, and the sword turned back: "Then I ground them as t
 And the end is the jug of manna and the apple tree: "Also, before they would make the fat smoke, And the servant of the priest would come" / "And Moses said to Aaron, take one jug and put there an omerful of manna" / "And deposit it before the Lord to be preserved for your generations" / "He made their rains into hail, flaming fire in their land" / "Who is this coming up from the desert, embracing her beloved?" / "As the Lord had commanded Moses, Aaron deposited it before the testimony to be preserved" / "Under the apple tree I aroused you; there your mother was in travail with you" / "There she that bore you was in travail."
 
 *Source: [Week 43 (Book 7): The Cat Is Saying](https://www.kabbalahoftime.com/2017/07/the-cat-is-saying.html) — 308 words*
+
+---
+
+## Day 302 · Book 1 · Week 44
+
+The Mouse says, "I shall exalt you, G-d, for You have impoverished [uplifted] me, and You have not let my enemies rejoice over me." (Psalms 30:2) And once it is caught: "You are just for all that comes upon me, for You have acted truthfully, and I have been wicked." (Nehemiah 9:33) This is the week of Tisha B'Av.
+
+The song belongs to Shimon and to the day. Shimon, the man and the tribe, made serious mistakes: he was instrumental in the sale of Joseph, and the tribe, its prince included, openly rebelled against Moses. And through repentance Shimon will be fully redeemed. As the mouse is caught through its own iniquities, our Temple was destroyed on Tisha B'Av through our sins, and the first step toward redemption is recognising that fault — it is said that in any generation in which the Temple is not rebuilt, it is as if that generation destroyed it.
+
+The word the mouse uses, dilitani, for having been impoverished or uplifted, is near Dal, poor, and Delet, door. The Bnei Yissachar teaches, from the writings of the Arizal, that Tammuz is the letter dalet and Av the letter lamed, which spell Dal — and Elul, the month of Teshuvah, is the letter Tav, which makes Delet. The secret of being lifted in the poor months is to join them to the doors of Elul. That is in the words of Selichot: "kdalim uchrashim dafaknu dlatecha," like the poor and destitute we knock on Your door.
+
+The letters of forty-four, mem and dalet, spell dam, blood, and mad, from limdod, to measure. Av has been a month in which much blood was spilled; once the Jewish people learn the lesson, measure their actions and improve, it will be a month of light and joy. The same letters spell dom, to be silent — a word often used in praise of how our greatest sages met tragedy. Of Aaron, learning that his two eldest sons had died, the Torah says "yehidom Aharon," Aaron was silent and did not complain. Our Chassidic masters explain that King David's way went further still: after great suffering he says, "l'man yezamerchah velo yidom," I will sing to You and not be silent. There is much to learn from both approaches about how to keep this day. And dom has a brighter side: pursuing the enemies of the Jewish people, Joshua calls to the sun and commands it, "Dom!" — telling it to stop its song to G-d, which makes the sun stand still, and gives the people time to finish before the Sabbath begins.
+
+Pirkei Avot gives Rabbi Nehora'i: exile yourself to a place of Torah; do not say that it will come after you, that your colleagues will help you retain it; rely not on your own understanding. Tisha B'Av is about exile in general, and about one exile in particular, to a place of Torah: Yavneh. By establishing Yavneh and bringing our sages there, Rabbi Yochanan Ben Zakkai made sure Judaism continued long after the Roman Empire had stopped existing. And since the suffering of this week is so hard to understand, it is fitting to be told not to lean on our own limited understanding but to stay joined to the rest of our people.
+
+The combination is gevurah shebemalchut. This week we work on the strength to reach goals in this material world against obstacles. As in the week of Yom Kippur, gevurah shebechesed, we fast — and not feeling like angels this time; more like the mouse. On Yom Kippur, one of the happiest days of the year, the fast is for spiritual reasons; on Tisha B'Av we fast in mourning. The day belongs to gevurah because of how many tragedies fell on it, the decree of forty years in the wilderness and the destruction of both Temples among them — and to malchut, because it is exactly out of that tragedy that Mashiach is born.
+
+The lesson from the mouse is that He can raise us up at any moment, and that to come out of sadness we should increase our prayers and direct them to Him alone. Any fall, personal or national, is an opening for teshuvah. And judging oneself is only good if it leads to better behaviour rather than to sadness: there is a fine line between being temporarily broken-hearted over one's sins, which is a good regret, and sadness, which should be avoided at all costs. Broken-heartedness should lead to greater joy.
+
+*Source: [Week 44 (From the Book): To Recognize Our Mistakes and Change](https://www.kabbalahoftime.com/2014/07/week-44-from-book-to-recognize-our.html) — 1108 words*
+
+---
+
+## Day 303 · Book 2 · Week 44
+
+The week of Tisha B'Av. Haazinu ends: "And Moses came and spoke all the words of this song into the ears of the people he and Hoshea the son of Nun." (Deuteronomy 32:44) Av is the tikkun of hearing, and into the ears of the people is how the song arrives. Perhaps Yehoshua stands beside Moshe here because of all of them he was the one best able to absorb Moshe's teaching. This week holds the birth of Mashiach, on the 9th of Av, and the Midrash teaches that Moshe is the first redeemer and the final redeemer; Yehoshua is likewise a prototype for Mashiach Ben Yoseph.
+
+The Haftorah is plainly about that coming: "And You have allowed me to escape from the contenders amongst my people; You shall keep me as head of nations; a people whom I have not known serve me." (II Samuel 22:44) Mashiach will be not only king of Israel but will stand for the Kingdom of G-d on earth.
+
+The quality is he deliberates in his study, Mityashev Liboh Betalmudoh. A great part of the destruction on the 9th of Av came of the hot-headedness of the zealots of that time, where the Torah scholars sought calm and compromise. More literally the phrase is that he settles his heart with his study. The Midrash says that Mashiach is a metzorah, one who suffers a form of spiritual skin disease, and that he cures one wound at a time. The Alter Rebbe explains that the cure for the metzorah is Torah — which is why the verse says "this shall be the Torah of the metzorah on the day of his purification," where the plainer wording would have been "this is the purification of the metzorah." The metzorah is a man whose heart is unsettled, and it is the Torah that settles it. The line can also be read about a friend's heart, continuing the qualities of the past weeks. And Mashiach will be known for his Torah and for his power of speech: the word Mashiach is spelled like Mesiach, one who speaks.
+
+The prophet is Zechariah. We read in the kinot of Tisha B'Av about an earlier Zechariah, killed at the time of the First Temple's destruction, whose blood had to be avenged — and that is settling of another kind. Our Sages say that when Nebuzaradan entered the Temple he found the blood of Zechariah seething, and asked what it meant; the Jews tried to conceal it, and under threat told him there was a prophet among them who chastised them and whom they killed, and that for many years his blood had not rested. He said, I will appease him, and killed the members of the Great and Small Sanhedrins, then youths and maidens, then school-children, 940,000 people in all; and still the blood boiled, until he cried, "Zechariah, Zechariah! I have slain the best of them; do you want all of them destroyed?" — and at last it sank into the ground.
+
+This Zechariah's own prophecy makes some of the most direct references to Mashiach: "Be exceedingly happy, O daughter of Zion; Shout, O daughter of Jerusalem. Behold! Your king shall come to you. He is just and victorious; humble, and riding a donkey and a foal, the offspring of [one of] she-donkeys." And in the story of Rabbi Akiva laughing while the other rabbis mourn, it is Zechariah's prophecy that consoles them: old men and women shall yet sit in the streets of Jerusalem.
+
+The levitical city is Holon, from chol, which means sand and also profane. As at the destruction, when something is emptied of its holiness it is chol, a vacuum, dead like the sand of the sea. And in the Torah almost nothing stands for life, and for children, as the sand does; we are promised to be as many as they are one day. One day our tears of sadness will be tears of joy, and the earth will be filled with the knowledge of G-d as the water covers the sea, and the sand. The numerical value of chol is forty-four. Holon is also a city in modern Israel, the country's second largest industrial area.
+
+*Source: [Week 44 (Book 2): Zechariah and Settling One's Heart](https://www.kabbalahoftime.com/2014/08/week-44-book-2-zechariah-and-settling.html) — 952 words*
+
+---
+
+## Day 304 · Book 3 · Week 44
+
+Tisha B'Av, the only twenty-four-hour fast besides Yom Kippur, marks the destruction of both Temples and many other tragedies. It was on Tisha B'Av that the spies came back with a negative report, and after the people reacted as they did it was decreed that they would spend 40 years in the desert.
+
+Beshalach ends with exactly that span: "And the children of Israel ate the manna for forty years until they came to an inhabited land. They ate the manna until they came to the border of the land of Canaan. The omer is one tenth of an ephah." Once the forty-two journeys are done and we reach that border, in Av, the manna stops and sustenance has to come from working the Land. And that conquest belongs to the coming of Mashiach, which belongs to this week.
+
+The Haftorah rests the land forty years: "And the land rested forty years. And the children of Israel did that which displeased the Lord, and the Lord delivered them into the hand of Midian (for) seven years." Those forty years stand against the forty in the desert. And as the last battle of the desert years was against Midian, Israel now faced oppression from Midian after forty years of relative calm. Like Tisha B'Av, they were given into their enemies' hands because they displeased Him — which reads back onto last week's daf, where Pinchas is the anointed for war against Midian.
+
+Daf Mem Dalet of Sotah gives the laws of the impurity of a dead body, then more of those exempt from a milchemet reshut — the engaged, and the afraid — and then opens a chapter on the Eglah Arufah, the beheading of a calf for an unsolved murder outside a Jewish city. The first and the last belong to a date marked by death. And Tisha B'Av belongs to those who fear war, like the fear that took hold when the people heard the spies.
+
+The generation is Uzziah, also called Azariah, son of Amaziah, one of the most successful kings of Judah. His counterparts in Israel were Jeroboam ben Jehoash, Zechariah, Shallum, Menachem ben Gadi, Pekahiah ben Menahem and Pekah ben Remaliah. The start of his reign, while he was young, saw great devastation, with attackers plundering Judah from every border; once he came of age and held his throne firmly he developed the country extensively, militarily and economically. For all his piety he made one grave mistake that became the defining event of his kingdom: over repeated warnings he tried to play the part of a kohen and offer incense in the Temple, and was immediately struck with tzara'at. He stayed a metzorah for the rest of his life, living in isolation near a cemetery — and there is a well-known story in the Talmud that Mashiach, born on Tisha B'Av, is a Metzorah by the gates of Rome. Uzziah means G-d is my strength, and Azariah G-d is my help. The word for strength, Oz, is near Az, bold: there is a boldness on the side of holiness, as in being bold like a leopard, and a boldness on the side of impurity, as in the saying that those who are bold go to gehinnom. Uzziah showed both, and both belong to this day. And the Haftorah of Shabat Hazon, read this week, opens by saying it was prophesied by Isaiah, Uzziah's uncle, during his reign.
+
+The forty-fourth week goes with conquering the Girgashites, whose name comes from Girgash, a kind of red clay. That recalls the making of man from the earth: Adam comes from Adamah, earth, and is near Adom, red, like Edom. The Girgashites belong to the negative side of Gevurah, which shows itself in violence and murder, which is Eisav's own characteristic. King David, who is also described as red, is the tikkun of it: he used his gevurah for the good, against Goliath and in all his other battles for G-d and Israel.
+
+*Source: [Week 44 (Book 3): War and Conquest](https://www.kabbalahoftime.com/2014/08/week-44-book-3-war-and-conquest.html) — 957 words*
+
+---
+
+## Day 305 · Book 4 · Week 44
+
+The verse ends with a threat: "And (if) the man said to him, 'Let them make the fat smoke now, and (then) take for yourself, as your soul desires,' And he would say, 'No, but now you shall give. And if not, I shall take by force.'" Taking the portion by force, before the offering was ready — a great disdain for the laws of sacrifice and for the person bringing one, which recalls the baseless hatred and the corrupt priests of the time of the destruction.
+
+Pirkei Avot's acquisition this week is the Holy Temple: "The base for Your dwelling that you, G-d, have achieved; the Sanctuary, O L-rd, that Your hands have established." And: "And He brought them to His holy domain, this mount His right hand has acquired." His dwelling, which He established and acquired with His own hands — where the sons of Eli spoke as though the Tabernacle and the sacrifices were theirs, putting their own will before His.
+
+Psalm 127 was said by King Solomon, and it is about building the Temple and how its success depends entirely on His will: "If the Lord will not build a house, its builders have toiled at it in vain." Failing to keep His will leads to the destruction that came on Tisha B'Av.
+
+The week holds the yahrzeits of two of the greatest masters of Kabbalah and Chassidut: Rabbi Yitzchak Luria, the Arizal, on the 5th of Av, and Rabbi Yaakov Yitzchok Horowitz, the Chozeh of Lublin, on the 9th. Rabbi Yitzchak Luria, known as the holy Ari, revolutionised the study of Kabbalah and its place in mainstream Judaism in the two years he spent in Zefat before his death at 38; much of Chasidic thought rests on his teachings as recorded by his main disciple, Rabbi Chaim Vital. Rabbi Yaakov Yitzchok Horowitz, the Chozeh of Lublin, succeeded R. Elimelech of Lizensk and led the spread of chassidus in Poland. Many great Rebbes of the next generation came out of his followers: the Yid HaKodesh, Simcha Bunim of Peshischa, Meir of Apta, David of Lelov, the Yismach Moshe, the Sabba Kadisha of Radoshitz, the Bnai Yisasscher, Rabbi Naftali Zvi of Ropshitz, the Maor Vashemesh and Sar Shalom of Belz. Many of his insights were published after his death, in Divrei Emmes, Zichron Zos and Zos Zichron.
+
+Also this week: Rabbi Shimshon Ostropolier, Rabbi Chaim Yechezkel Taub of Ozorov, and Rabbi Yitzchak Twersky, the first Skverer Rebbe in America, on the 3rd of Av; and Rabbi Ephraim Taub of Kuzmir and Rabbi Benzion Halberstam, the second Bobover Rebbe, on the 4th.
+
+*Source: [Week 44 (Book 4): Building G-d's House](https://www.kabbalahoftime.com/2014/08/week-44-book-4a-building-g-ds-house.html) — 669 words*
+
+---
+
+## Day 306 · Book 5 · Week 44
+
+Tisha B'Av, which marks the destruction of both Temples and the enormous destruction that came with them, remembered every year with fasting and intense mourning, and on which we remember every tragedy of Jewish history, the Holocaust among them.
+
+The Song's verse is hauntingly close to it: "Place me like a seal on your heart, liked a seal on your arm, for love is as strong as death, zeal is as strong as the grave; its coals are coals of fire of a great flame!" Death and the grave; a seal on your arm, like the numbers etched on the arms of Jews in the concentration camps; a great fire, like the one that burned the Temples. And love is stronger than death. We survived, and the great flame of our people burns still.
+
+Of the seventy souls that descended to Egypt, the forty-fourth is Ishvah, whose root is the same as Leshavot, and which looks related to this week's quality, Mityashev Liboh Betalmudoh, to settle one's heart in study. Much of the destruction on the 9th of Av came of the hot-headedness of the zealots, where the Torah scholars of that time sought calm and compromise. And with him Huppim, son of Benjamin, whose name is near Chuppah, a wedding canopy, for Benjamin never seeing Joseph's wedding. The Chuppah is the great symbol of peace and normalcy, in the prophecy of Jeremiah that is part of the Shevah Brachot said under it: "There shall again be heard in this place, concerning which you say, 'It is desolate without man and without beast,' in the cities of Judah and in the streets of Jerusalem that are desolate... the sound of mirth and the sound of joy, the voice of a bridegroom and the voice of a bride, the sound of those saying, 'Thank the Lord of Hosts, for the Lord is good, for His loving-kindness endures forever.'" Those words hold both the tragedy of Tisha B'Av and the redemption. And the Chuppah belongs to love, and to Tu B'Av next week, which is a day of marriage and love — the high that comes directly after these lows.
+
+Daf Mem Dalet of Shvuot keeps on with a mashkon, a security, that was lost, like the Temple, and opens a new chapter on oaths taken in order to receive payment. Much of it is about someone entering another person's house without permission: a case where he takes vessels from the owner, and a case where the owner wounds him. Which reads onto Tisha B'Av, when our house, the House of G-d, was entered without permission and its vessels taken, and when those who entered were punished and will be punished again. And there is a discussion of partial admission — admitting to taking one vessel rather than two, or to wounding once rather than twice — which reads onto two Temples destroyed, both on the same day.
+
+Jeremiah's forty-fourth chapter is the destruction brought on Jerusalem and the cities of Judah, and not listening to the prophets, which is the sense this month repairs. "You saw all the evil that I brought upon Jerusalem and upon all the cities of Judah, and behold, they are waste, and there are no inhabitants in them, because of their evil, which they did to provoke Me, to go to burn incense to worship other gods, which they did not know." And the sending that went unheard: "And I sent to you all My servants the prophets, sending them betimes, saying: Now do not do this abominable thing which I hate. But they did not hearken, nor did they incline their ear[s] to repent of their evil." And the question: "Why do you do this great evil to your souls, to cut off from you man and woman, child and suckling from the midst of Judah, not to leave over a remnant for yourselves?"
+
+*Source: [Week 44 (Book 5): "Love is as Strong as Death"](https://www.kabbalahoftime.com/2014/08/week-44-book-4b-love-is-as-strong-as.html) — 1117 words*
+
+---
+
+## Day 307 · Book 6 · Week 44
+
+The week of Tisha B'Av in psalms: the hundred and thirtieth, hundred and thirty-first and hundred and thirty-second, with three verses of Psalm 105 and one of Psalm 89.
+
+Psalm 130 prays for an end to this long exile, and it begins as low as a psalm can begin: "Out of the depths I call to You, O Lord. My Lord, hearken to my voice; let Your ears be attentive to the sound of my pleas." Then the thing that makes any of it possible: "G-d, if You were to preserve iniquities, my Lord, who could survive? But forgiveness is with You, that You may be held in awe." Then the waiting: "I hope in the Lord; my soul hopes, and I long for His word. My soul yearns for the Lord more than those awaiting the morning wait for the morning." And the last line: "And He will redeem Israel from all its iniquities."
+
+Psalm 131 is David saying that in all his life he was never haughty and never chased greatness or the pleasures of the world. "O Lord, my heart was not proud, nor were my eyes haughty; I did not seek matters that were too great and too wondrous for me. Surely I put my soul at peace and soothed it like a weaned child with his mother; my soul was like a weaned child. Let Israel hope in the Lord from this time forth and forever." Three verses, and that is all of it.
+
+Psalm 132 David composed while he and the elders of Israel wore sackcloth, mourning the plague that had come on the land and their distance from the Holy Temple, and it asks Him to remember the hardship David bore for the Temple's sake. "O Lord, remember unto David all his suffering, how he swore to the Lord, and vowed to the Mighty Power of Jacob: 'I will not enter into the tent of my house; I will not go up into the bed that is spread for me; I will not give sleep to my eyes, nor slumber to my eyelids; until I will have found a place for the Lord, a resting place for the Mighty Power of Jacob.'" Then the finding: "Lo, we heard of it in Ephrath; we found it in the field of the forest." Then the going up: "Ascend, O Lord, to Your resting place, You and the Ark of Your might." Then the oath that answers his: "For the Lord has sworn to David a truth from which He will never retreat: 'From the fruit of your womb will I set for you upon the throne.'" And the choosing, which is the line this week needs: "For the Lord has chosen Zion; He has desired it for His habitation. This is My resting place to the end of time. Here will I dwell, for I have desired it." And the lamp at the end: "There I will cause David's power to flourish; there I have prepared a lamp for My anointed."
+
+Psalm 105's verses are the hail and the locusts: "And it struck their vines and their fig trees, and it broke the trees of their boundary. He spoke and locusts came, and nibbling locusts without number. And they consumed all grass in their land, and they consumed the produce of their soil." And Psalm 89's verse is the throne on the ground: "You have brought an end to his shining, and his throne You have cast down to earth."
+
+*Source: [Week 44 (Book 6): Reviewing the Week of Tisha B'Av - Psalms 130-132; 105:33-35; 89:45](https://www.kabbalahoftime.com/2014/08/week-44-book-5-reviewing-week-of-tisha.html) — 688 words*
+
+---
+
+## Day 308 · Book 7 · Week 44
+
+The mouse opens with the admission, and the week comes in around it.
+
+The displeasing and the admitting first: "And the children of Israel did that which displeased the Lord" / "And the Lord delivered them into the hand of Midian seven years" / "You are just for all that comes upon me" / "For You have acted truthfully, and I have been wicked."
+
+Then the portion demanded, and the locusts: "And (if) the man said to him, 'Let them make the fat smoke now and (then) take for yourself, as your soul desires'" / "He spoke and locusts came, and nibbling locusts without number" / "The omer is one tenth of an ephah" / "And he would say, 'No, but now you shall give'" / "'And if not, I shall take by force'" / "And they consumed all grass in their land" / "And they consumed the produce of their soil" / "Its coals are coals of fire of a great flame!"
+
+Then the escape, and the two spans of forty years: "And You have allowed me to escape from the contenders among my people" / "And the land rested forty years" / "And the children of Israel ate the manna for forty years" / "Until they came to an inhabited land" / "They ate the manna until they came to the border of the land of Canaan."
+
+Then the throne cast down, and the broken trees: "You have brought an end to his shining" / "And his throne You have cast down to earth" / "And it struck their vines and their fig trees" / "And it broke the trees of their boundary."
+
+And the end is the song spoken into their ears, and the seal: "And Moses came and spoke all the words of this song" / "Into the ears of the people he and Hoshea the son of Nun" / "You shall keep me as head of nations" / "A people whom I have not known serve me" / "Place me like a seal on your heart, liked a seal on your arm" / "For love is as strong as death, zeal is as strong as the grave" / "I shall exalt you, G-d, for You have uplifted me and You have not let my enemies rejoice over me."
+
+*Source: [Week 44 (Book 7): The Mouse Is Saying](https://www.kabbalahoftime.com/2017/07/the-mouse-is-saying.html) — 306 words*
