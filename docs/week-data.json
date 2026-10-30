@@ -2558,8 +2558,8 @@
     "b3": {
      "ruth": "Ahaziah",
      "haftara": "Yiftach's daughter",
-     "sotah": "Rosh Chodesh Av",
-     "journeys": "They journeyed from Almon diblathaimah and camped in the mountains of Abarim"
+     "sotah": "40",
+     "journeys": "They journeyed from Dibon gad and camped in Almon diblathaimah"
     },
     "b4": {
      "proverbs": "Kohelet: Chapter 9",
@@ -2622,8 +2622,8 @@
     "b3": {
      "ruth": "Athaliah, mother of Ahaziah",
      "haftara": "Yiftach's daughter",
-     "sotah": "Fourth Week of Tammuz",
-     "journeys": "They journeyed from the mountains of Abarim and camped in the plains of Moab"
+     "sotah": "41",
+     "journeys": "They journeyed from Almon diblathaimah and camped in the mountains of Abarim, in front of Nebo"
     },
     "b4": {
      "proverbs": "Kohelet: Chapter 10",
@@ -2686,8 +2686,8 @@
     "b3": {
      "ruth": "Jehoash",
      "haftara": "Yiftach's daughter",
-     "sotah": "Tisha B'Av",
-     "journeys": "Chittites"
+     "sotah": "42",
+     "journeys": "They journeyed from the mountains of Abarim and camped in the plains of Moab by the Jordan at Jericho; they camped along the Jordan from Beth jeshimoth to Abel shittim, in the plains of Moab"
     },
     "b4": {
      "proverbs": "Kohelet: Chapter 11",
@@ -2750,8 +2750,8 @@
     "b3": {
      "ruth": "Amaziah",
      "haftara": "Yiftach's daughter",
-     "sotah": "Tu B'Av",
-     "journeys": "Girgashites"
+     "sotah": "43",
+     "journeys": "Chittites"
     },
     "b4": {
      "proverbs": "Kohelet: Chapter 12",
@@ -2814,8 +2814,8 @@
     "b3": {
      "ruth": "Uzziah (also known as Azariah)",
      "haftara": "Eliyahu",
-     "sotah": "Third Week of Av",
-     "journeys": "Amorites"
+     "sotah": "44",
+     "journeys": "Girgashites"
     },
     "b4": {
      "proverbs": "Tehilim 127",
@@ -2878,8 +2878,8 @@
     "b3": {
      "ruth": "Jotham",
      "haftara": "Eliyahu",
-     "sotah": "Rosh Chodesh Elul",
-     "journeys": "Perizites"
+     "sotah": "45",
+     "journeys": "Amorites"
     },
     "b4": {
      "proverbs": "Shir HaShirim: Chapter 1",
@@ -2942,8 +2942,8 @@
     "b3": {
      "ruth": "Ahaz",
      "haftara": "Eliyahu",
-     "sotah": "First Week of Elul",
-     "journeys": "Perizites"
+     "sotah": "46",
+     "journeys": "Cana'anites"
     },
     "b4": {
      "proverbs": "Shir HaShirim: Chapter 2",
@@ -3006,8 +3006,8 @@
     "b3": {
      "ruth": "Hezekiah",
      "haftara": "Seven Haftarot of Consolation",
-     "sotah": "Second Week of Elul",
-     "journeys": "Jebusites"
+     "sotah": "47",
+     "journeys": "Perizites"
     },
     "b4": {
      "proverbs": "Shir HaShirim: Chapter 3",
@@ -3070,8 +3070,8 @@
     "b3": {
      "ruth": "Manasseh",
      "haftara": "Seven Haftarot of Consolation",
-     "sotah": "Chai Elul",
-     "journeys": "Nazir 2-22"
+     "sotah": "48",
+     "journeys": "Chivites"
     },
     "b4": {
      "proverbs": "Shir HaShirim: Chapter 4",
@@ -3134,8 +3134,8 @@
     "b3": {
      "ruth": "Amon",
      "haftara": "Seven Haftarot of Consolation",
-     "sotah": "Fourth Week of Elul/Slichot",
-     "journeys": "Nazir 23-44"
+     "sotah": "49",
+     "journeys": "Jebusites"
     },
     "b4": {
      "proverbs": "Shir HaShirim: Chapter 5",
@@ -3195,8 +3195,8 @@
     "b3": {
      "ruth": "Josiah",
      "haftara": "Seven Haftarot of Consolation",
-     "sotah": "Slichot/Rosh Hashanah",
-     "journeys": "Nazir 45-66"
+     "sotah": "Nazir 2-22",
+     "journeys": "Kenites"
     },
     "b4": {
      "proverbs": "Shir HaShirim: Chapter 6",
@@ -3256,8 +3256,8 @@
     "b3": {
      "ruth": "(Jehoahaz, 3 months) Jehoiakim, also known as Eliakim",
      "haftara": "Seven Haftarot of Consolation",
-     "sotah": "",
-     "journeys": "Kenites"
+     "sotah": "Nazir 23-44",
+     "journeys": "Kenizites"
     },
     "b4": {
      "proverbs": "Shir HaShirim: Chapter 7",
@@ -3317,7 +3317,7 @@
     "b3": {
      "ruth": "(Jehoiachin also known as Jeconiah, 3 months) Mattaniah also known as Zedekiah",
      "haftara": "Seven Haftarot of Consolation",
-     "sotah": "",
+     "sotah": "Nazir 45-66",
      "journeys": "Kadmonites"
     },
     "b4": {
