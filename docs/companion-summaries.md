@@ -4456,3 +4456,117 @@ Then what must not be left until morning, and the pillars of the earth: "And Mos
 And the end is the piercing and the covenant: "She struck Sisera, pierced his head" / "And wounded and penetrated his temple" / "The covenant which He made with Abraham" / "And His oath to Isaac" / "He established it for Jacob as a statute, for Israel as an everlasting covenant" / "Stating, 'To you I shall give the land of Canaan'" / "His seed will endure forever and his throne will be as the sun before Me" / "The portion of your inheritance."
 
 *Source: [Week 36 (Book 7): The Gazelle Is Saying](https://www.kabbalahoftime.com/2017/06/the-gazelle-is-saying.html) — 255 words*
+
+---
+
+## Day 253 · Book 1 · Week 37
+
+The elephant is saying, "How great are your works, G-d; Your thoughts are tremendously deep." (Psalms 92:6) The word for great is gadlu, from gadol, big — and the elephant is the largest of the land animals. The verse is from Psalm 92 again, as last week's was.
+
+On Shavuot we were all deeply impressed by the greatness of Hashem and His Torah, and after a day of such revelation we all stand higher. The elephant presses that greatness on us, and that it matters not to let ourselves forget it; elephants are famous for their memory. Physical greatness belongs to the week after Shavuot in another way too, since that is when we read Nasso, the largest portion in all the Five Books of Moses.
+
+Thirty-seven is the gematria of the root of gadol. It is also the numerical difference between the name of Moses, 345, and Korach, 308. The deep thoughts of the verse may be Korach's rebellion against Moses and Aaron. Korach wanted the leadership for himself and persuaded a substantial number of his tribesmen and neighbours to rebel; in the confrontation he and his congregation were miraculously sucked into a deep pit, which Pirkei Avot says was thought of and created in the very first week of Creation. The Rebbe explains that they were brought into the pit still alive so that they could repent and return to G-d, as Korach's sons did. It happened on Rosh Chodesh Sivan, the beginning of this month, and the portion of Korach, which tells it, is often read in the last days of Sivan.
+
+It is fitting that Moses goes with the elephant, the largest land animal, because he also goes with the eagle, the largest bird, and the Leviathan, the largest sea animal. He was and always will be the greatest of all prophets.
+
+Pirkei Avot gives Rabbi Yishmael: one who refrains from serving as a judge avoids hatred, thievery and false oaths, and one who frivolously hands down rulings is a fool, wicked and arrogant. He also says: do not judge on your own, for there is none qualified to judge alone, only the One; and do not say, "You must accept my view," for that is the majority's right, not yours. That belongs to the unity of Sivan, and to the humility the commandments need. We have to do everything in our power not to make ourselves great at the Torah's expense, remembering that only G-d is truly great. And it points straight at Moses and Korach. Korach was enormously rich, with a deep-set enlarged view of himself, and his claim rested on something like the last part of this teaching — that Moses and Aaron should follow the majority rather than keep the key positions for themselves. Moses explained that the rebellion was ultimately against G-d Himself, who had chosen the two of them. And G-d does, and will, judge alone.
+
+The combination is gevurah shebeyesod. This week we work with strength and discipline to keep a solid foundation in study and in the mitzvot, and the elephant is that foundation: who can move an elephant against its will? The lesson from it is that even the largest animal recognises the infinite greatness and depth of Hashem.
+
+*Source: [Week 37 (From the Book): To Maintain our Humility and Not Forget the Greatness We Experienced](https://www.kabbalahoftime.com/2014/06/week-37-from-book-to-maintain-our.html) — 919 words*
+
+---
+
+## Day 254 · Book 2 · Week 37
+
+The third week of Sivan. Haazinu asks the question: "Then He will say, 'Where is their deity, the rock in which they trusted,'" (Deuteronomy 32:37) and read positively it is asked not of the Jewish people but of the other nations — which fits the verse of week thirty-one, that our Rock is not like theirs.
+
+The Haftorah is the footing: "You have enlarged my step[s] beneath me; And my ankles have not slipped." (II Samuel 22:37) That support is a stable rock. It also runs parallel to the elephant's verse about the works of G-d being great — Gadol, big, like the elephant, and Gimmel Dalet Lamed have the numerical value of 37.
+
+The quality is keeping far from honor. Pirkei Avot teaches that seeking honor takes a person out of this world. Honor, or anything that feeds the ego, is an enormous obstacle in serving G-d; haughtiness is the opposite of holiness. For all the honor given the Jewish people at Mount Sinai, the experience was so awe-inspiring that it led to greater humility. It is the same thing the Pirkei Avot of Book 1 says, about not handing down judgments needlessly — and seeking honor is what brought Korach down.
+
+The prophet is Ezekiel, who is bound closely to keeping far from honor. G-d commands him to do things so far against what we would call kevod habriot, the honour and dignity of a person, that it is hard to imagine anyone capable of them: Ezekiel is commanded to eat excrement. And it is Ezekiel who has the most exalted visions of G-d — the Haftorah of the first day of Shavuot is his vision of the Heavenly Chariot, the opening lines of his book. He was a kohen too, like Uriah and Jeremiah, the prophets of the two weeks before.
+
+The levitical city is Dimnah, which literally means dunghill: staying away from honor again.
+
+*Source: [Week 37 (Book 2): Strength and Stability that Come From Humility](https://www.kabbalahoftime.com/2014/06/week-37-book-2-strength-and-stability.html) — 481 words*
+
+---
+
+## Day 255 · Book 3 · Week 37
+
+Beshalach: "They gathered it morning by morning, each one according to his eating capacity, and [when] the sun grew hot, it melted. It came to pass on the sixth day that they gathered a double portion of bread, two omers for [each] one, and all the princes of the community came and reported [it] to Moses." Each took what he could hold. The sixth day is not only the sixth of the week but Shavuot, which fell on the sixth of Sivan; the double portion may be the two crowns of Torah; and all the princes of the community coming together is the unity of this month.
+
+The Haftorah is Sissera going down: "At her feet he sank, fell, lay; at her feet he sank (and) fell." It is remarkable how often the words repeat — karah three times in the whole verse, and nafal three times, and in the part given to this week a whole phrase comes twice with "lay" set between. Taken out of the context of his death and set in Shavuot, it is perhaps the people's own experience at Mount Sinai: there we bowed and fell and lay at the feet of the Shechinah, our souls left our bodies, and we had to be revived.
+
+Daf Lamed Zayin of Sotah takes up the splitting of the Red Sea, including the initiative and self-sacrifice of the tribe of Benjamin and of Nachshon ben Aminadav; then Har Grizim and Har Eival again, with where the Levi'im and the Kohanim stood; and then the number of covenants made with the Jewish people, the one at Har Sinai among them, and the blessings and curses. The parallels with Shavuot are many: the initiative and self-sacrifice of saying Na'aseh veNishmah, and the covenant at the mountain.
+
+The generation is Asa, son of Abijam, an extremely righteous king who returned the kingdom to the ways of Hashem and rid it of idol worship — he even removed his own mother from her position for worshipping Ashera trees. He overlaps briefly with Jeroboam, and with all the kings of Israel who fought over Jeroboam's succession: Nadav, Baasa, Elah, Zimri, Tivni, who was never an undisputed king, and Omri. All of them ruled for very short times, Tivni never ruling at all, except Omri, who ruled for 12 years. Asa reigned for forty-one years, and except for one brief lapse of faith in dealing with Baasa he was righteous and faithful and led Judah on a good path — fitting for the week after Shavuot.
+
+The journey is from Punon to Oboth. Rabbi Jacobson explains that Oboth means enemies, and also necromancy, as in the practice of Ovoth and Yidonim. After the giving of the Torah we begin to be tested by our enemies, who work to bring us down from the height we reached, and it matters to stay firm. Oboth is also spelled like Avoth, the patriarchs — and it was by visiting Hebron, the Cave of the Patriarchs, that Caleb was able to stay faithful to his mission and bring back a true report. The personal journey moves from being revived by the Torah to staying connected to our roots and true to our mission.
+
+*Source: [Week 37 (Book 3): Remembering the Shavuot Experience](https://www.kabbalahoftime.com/2014/06/week-37-book-3-remembering-shavuot.html) — 748 words*
+
+---
+
+## Day 256 · Book 4 · Week 37
+
+Channah's ninth verse: "The feet of His pious ones He will guard, And the wicked shall be cut off in darkness, For not by strength will man prevail."
+
+Pirkei Avot, on the greatness of the Torah, also weighs life against death: "With me, your days shall be increased, and years of life shall be added to you." Days and years look like a repetition, and they are not — a person can live many years and have little quality in his days.
+
+Ecclesiastes 6 is length of days, and the darkness inside even a long life. "Should a man beget one hundred [children] and live many years, and he will have much throughout the days of his years, but his soul will not be sated from all the good, neither did he have burial. I said that the stillborn is better than he. For he comes in vanity and goes in darkness, and in darkness his name is covered." And then: "For who knows what is good for man in his lifetime, the number of the days of his life of vanity, that he do them like a shadow, for who will tell man what will be after him under the sun?"
+
+The week holds the yahrzeits of Rav Aharon of Karlin, the Beis Aharon, on the 17th of Sivan, and Rabbi Yissachar Dov of Radoshitz, the Sabba Kadisha, on the 18th.
+
+Rebbe Aharon of Karlin was the son of Rebbe Asher of Stolin and grandson of Rebbe Aharon HaGadol of Karlin, and is known as the Second Rebbe Aharon. He was chosen as Karliner Rebbe at only 26, and led the Karlin Chassidim with prodigious scholarship and unparalleled piety and humility; tens of thousands thronged around him seeking the blessings of a man said to be endowed with ruach hakodesh, and some even claimed he had the soul of King David. His leadership fell in the dark days of the reign of Czar Nikolai I, and he knew how to cheer his Chassidim and help them carry their burdens. Some powerful residents of Karlin objected to how much song and dance filled his court, and in 1864 he was run out of town; he resettled in Stolin, and since then the dynasty has been known as Karlin-Stolin. By family tradition he was born on Rosh Chodesh Sivan, 1802, and he led the Karliner Chassidim for nearly fifty years. A gifted organiser, he worked at the bonds between himself and his followers, visiting them often in their towns and welcoming them warmly in his court. He had a striking natural simplicity and sense of humour, and regularly made jokes in the Russian vernacular even while teaching at his table; he mixed freely with people of all kinds, and his confident presence was admired even in non-Chassidic circles.
+
+Rabbi Yissachar Dov, the Sabba Kadisha, the holy grandfather, of Radoshitz, was a disciple of the Seer of Lublin and of the Holy Yid of Peshischa. Famed as a miracle maker, he lived in poverty as a simple tutor. Also this week: Rabbi Chaim of Volozhin on the 14th of Sivan and Rabbi Dovid Twersky, Second Rebbe of Skver, on the 19th.
+
+*Source: [Week 37 (Book 4): Years of Life and Length of Days](https://www.kabbalahoftime.com/2014/06/week-37-4a-years-of-life-and-length-of.html) — 741 words*
+
+---
+
+## Day 257 · Book 5 · Week 37
+
+The Song goes out early: "Let us arise early to the vineyards; let us see whether the vine has blossomed, the tiny grapes have developed, the pomegranates have lost their flowers; there I will give you my love." This one belongs to Chag HaBikkurim, the festival of the first fruits, gathered from the field and brought as an offering. Rashi explains that the pomegranates losing their flowers means they had become ripe, and he connects each of the fruits named with the knowledge and study of Torah, the study of Mishnah in particular.
+
+Of the seventy souls that descended to Egypt, the thirty-seventh is Shuni, whose name looks related to LeShanot, to go over, to study. And with him Becher, son of Benjamin, whose name is near Bechor, firstborn, and Bikkurim, first fruits.
+
+Daf Lamed Zayin of Shvuot keeps on with the oath of a pikadon, a gift or deposit — and the Torah is the gift itself, given at Sinai.
+
+Jeremiah's thirty-seventh chapter has the king of Judah finally listening to the prophet, and the first signs of all his prophecies coming true, and of his vindication against the false prophets. "Deceive not yourselves, saying, 'The Chaldeans shall surely withdraw from us,' for they shall not withdraw." Then the king, in private: "And King Zedekiah sent and took him, and the king asked him secretly in his house, and he said, 'Is there a word from the Lord?' And Jeremiah said, 'There is.' And he said, 'You shall be given into the hand[s] of the king of Babylon.'" And then Jeremiah's own question: "What have I sinned against you and against your servants and against this people, that you have put me into the prison? And where are your prophets who prophesied to you, saying, 'The king of Babylon shall not come upon you or upon this land'?"
+
+*Source: [Week 37 (Book 5): First Fruits](https://www.kabbalahoftime.com/2014/06/week-38-book-4b-first-fruits.html) — 420 words*
+
+---
+
+## Day 258 · Book 6 · Week 37
+
+The third week of Sivan in psalms: the hundred and ninth, hundred and tenth and hundred and eleventh, with three verses of Psalm 105 and one of Psalm 89.
+
+Psalm 109 David composed while fleeing from Saul, facing many enemies who acted friendly in his presence and spoke only evil of him — so he curses them bitterly. "O G-d of my praise, be not silent. For the mouth of the wicked and the mouth of the deceitful have opened against me; they spoke to me with a false tongue." The exchange that hurts: "In return for my love they hate me; still, I am [a man of] prayer. They placed harm upon me in return for my favor, and hatred in return for my love." Then the long curse, which runs from his days to his children to his name. Then the reason: "Because he did not remember to do kindness, and he pursued the poor and destitute man and the broken-hearted, to kill [him]." And the curse as clothing: "He donned the curse like his garment, and it came like water into his innards, like oil into his bones." Then his own state: "For I am poor and destitute, and my heart has died within me. Like the fleeting shadow I am banished, I am tossed about like the locust. My knees totter from fasting." And the asking: "Let them know that this is Your hand, that You, Lord, have done it. Let them curse, but You will bless." And the last line, which says where He stands: "when He stands at the right of the destitute one to deliver him from the condemners of his soul."
+
+Psalm 110 records the answer of Eliezer, servant of Abraham, to those who asked how Abraham managed to defeat the four kings; he tells of Abraham killing the mighty kings and their armies. Read it and you will find that the whole psalm is about Abraham, who merited prominence for recognising G-d in his youth. "The Lord said to my master, 'Sit at My right, until I make your enemies a stool for your feet.' The staff of your strength the Lord will send from Zion, to rule amid your enemies." The youth kept: "because of your splendid sanctity from when you emerged from the womb, you still possess the dew of your youth." And the oath: "The Lord has sworn and will not regret: 'You shall be a priest forever, just as Melchizedek!'"
+
+Psalm 111 is written in alphabetical sequence, two letters to a verse, except the last two, which have three each. It is short and prominent, and it is about the works of G-d and their greatness. "Great are the works of the Lord, [yet] available to all who desire them. Majesty and splendor are His work, and His righteousness endures forever. He established a memorial for His wonders, for the Lord is gracious and compassionate." The works that hold: "The works of His hands are true and just; all His mandates are faithful. They are steadfast for ever and ever, for they are made with truth and uprightness." And the last line: "The beginning of wisdom is fear of the Lord; sound wisdom for all who practice it-his praise endures forever."
+
+Psalm 105's verses are the few strangers on the road: "When they were few in number, hardly dwelling in it. And they walked from nation to nation, from one kingdom to another people. He let no man oppress them, and He reproved kings on their account." And Psalm 89's verse is the witness in the sky: "Like the moon, which is established forever, and it is a witness in the sky, eternally true."
+
+*Source: [Week 37 (Book 6): Reviewing the Third Week of Sivan - Psalms 109-111; 105:12-14; 89:38](https://www.kabbalahoftime.com/2014/06/week-36-book-5-reviewing-third-week-of.html) — 1058 words*
+
+---
+
+## Day 259 · Book 7 · Week 37
+
+The elephant opens, and the week sets a widened step beside thoughts too deep to follow.
+
+The step and the depth first: "You have enlarged my step[s] beneath me" / "And my ankles have not slipped" / "How great are your works, G-d" / "Your thoughts are tremendously deep" / "Let us arise early to the vineyards" / "Let us see whether the vine has blossomed."
+
+Then the gathering, and what strength cannot do: "They gathered it morning by morning" / "For not by strength will man prevail" / "And they walked from nation to nation" / "From one kingdom to another people" / "A double portion of bread, two omers for one" / "And all the princes of the community came and reported to Moses" / "Each one according to his eating capacity" / "And [when] the sun grew hot, it melted."
+
+Then the question about their rock, and the falling at her feet: "Then He will say, 'Where is their deity'" / "'The rock in which they trusted?'" / "At her feet he sank, fell, lay" / "At her feet he sank (and) fell" / "The feet of His pious ones He will guard" / "And the wicked shall be cut off in darkness."
+
+And the end is the ripe fruit and the moon: "The tiny grapes have developed" / "The pomegranates have lost their flowers" / "Like the moon, which is established forever" / "And it is a witness in the sky, eternally true" / "When they were few in number, hardly dwelling in it" / "It came to pass on the sixth day that they gathered" / "He let no man oppress them, and He reproved kings on their account" / "There I will give you my love."
+
+*Source: [Week 37 (Book 7): The Elephant Is Saying](https://www.kabbalahoftime.com/2017/06/the-elephant-is-saying.html) — 221 words*
