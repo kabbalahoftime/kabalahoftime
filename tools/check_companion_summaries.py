@@ -35,30 +35,98 @@ during before after above below up down out off again more again does do did doi
 have has had having would should could may might must shall them him us me
 one two three four five six seven eight nine ten first second third week day""".split())
 
-NUM = re.compile(r'\b\d[\d:\u2013\u2014.\-/]*\d\b|\b\d\b')
+NUM_SRC = re.compile(r'\b\d[\d:\u2013\u2014.\-/]*\d\b|\b\d\b')
 
 
 def words(text):
-    return re.findall(r"[a-z']+", (text or '').lower())
+    return re.findall(r"[a-z'\-]+", flatten(text).lower())
+
+
+def flatten(text):
+    """One apostrophe, not three. The posts are twelve years of Blogger and
+    use the curly one; a summary typed here uses the straight one, so
+    She'ol, Lag Ba'Omer and ha'Olam each read as missing from a post that
+    has them."""
+    return (text or '').replace('\u2019', "'").replace('\u2018', "'") \
+                       .replace('\u2013', '-').replace('\u2014', '-')
+
+
+def bare(w):
+    """A word without its possessive, which is not a different word.
+
+    "David's" and "David" scored as two, so a summary that wrote about
+    David's song where the post wrote about David lost a point for it.
+    """
+    return re.sub(r"'s$", '', w.strip("'"))
+
+
+# The same name as the blog spells it over twelve years. Short and written
+# out: each pair is one name, not two, and nothing here is folded together
+# that a reader would call different people or different places.
+ALT = {
+    'pesach': 'pessach', 'chanah': 'channah', 'samuel': 'shmuel',
+    'frankfurt': 'frankfort', 'haklali': 'klali', 'solomon': 'shlomoh',
+    'deborah': 'devorah', 'hannah': 'channah',
+}
 
 
 def content(text):
-    return [w.strip("'") for w in words(text)
-            if len(w.strip("'")) > 2 and w.strip("'") not in STOP]
+    """Every word of the post, and the parts of its hyphenated ones.
+
+    "Ramathaim-Zophim" has to answer for "Zophim" and "Yesod ha'Olam" for
+    "Olam", or a summary that names the second half of a name is charged
+    with inventing it.
+    """
+    out = []
+    for w in words(text):
+        b = bare(w)
+        for part in [b] + re.split(r"['\-]", b):
+            if len(part) > 2 and part not in STOP:
+                out.append(part)
+                if part in ALT:
+                    out.append(ALT[part])
+                out += [k for k, v in ALT.items() if v == part]
+    return out
+
+
+def claims(text):
+    """The words in a summary that could carry a fact in from elsewhere.
+
+    Proper nouns and numbers. This is the pass that matters, and it took a
+    second look to see why: a summary written in one's own voice scores 20%
+    or 30% on ordinary vocabulary purely for its connectives — alternating,
+    beside, opens, holds — none of which is a claim about anything. Measuring
+    those buries the one thing worth finding.
+
+    A name or a citation is different. The first companion's worst line was
+    "Isaiah 60:22", a reference the source did not carry, and that is exactly
+    the shape of thing this finds: a proper noun or a number that the post
+    being summarised does not have.
+    """
+    body = re.sub(r'^\W+', '', flatten(text))
+    out = set()
+    # Capitalised words, except where a sentence or a quotation starts.
+    for m in re.finditer(r'(?<![.!?“"]\s)(?<!^)\b([A-Z][a-zA-Z\'-]{2,})',
+                         body, re.M):
+        out.add(bare(m.group(1).lower()))
+    return {w for w in out if w not in STOP}
 
 
 def numbers(text):
     """Numbers and references, loosely: 33, 29:11, 32:33, 1950, 2019-05-12."""
-    return [m.group(0) for m in NUM.finditer(text or '')]
+    return [m.group(0) for m in NUM_SRC.finditer(flatten(text))]
 
 
 def summary_text(entry):
+    """Only the written body.
+
+    The title is the post's own title and the teaser is generated — "Book 3
+    - Song of the Sea, week 1" — so checking them charged a summary for
+    words nobody wrote in it. "Sea", "Hannah", "General", "Remedy" and a
+    stray "3" were all tomorrow's book name arriving through the teaser.
+    """
     body = entry.get('body')
-    parts = body if isinstance(body, list) else [str(body or '')]
-    for k in ('title', 'teaser'):
-        if entry.get(k):
-            parts.append(str(entry[k]))
-    return ' '.join(parts)
+    return ' '.join(body if isinstance(body, list) else [str(body or '')])
 
 
 def main(posts_path, companion_path, limit=None):
@@ -85,12 +153,26 @@ def main(posts_path, companion_path, limit=None):
             flagged += 1
             continue
 
-        have = set(content(src['text'])) | set(content(src.get('title', '')))
-        mine = content(text)
+        # Book 7 is the gathering: its post is the other six books' verses
+        # for the week, braided into one song, and it names none of them. So
+        # its source is the whole week — the seven posts — because that is
+        # what it is a summary of. Every other book answers to its own post.
+        srcs = [src]
+        if entry.get('book') == 7:
+            first = (entry['week'] - 1) * 7 + 1
+            srcs = [posts[d] for d in range(first, first + 7) if d in posts]
+        have = set()
+        for one in srcs:
+            have |= set(content(one.get('text', '')))
+            have |= set(content(one.get('title', '')))
+        mine = claims(text)
         unfound = sorted({w for w in mine if w not in have})
-        pct = (len(unfound) / len(set(mine)) * 100) if mine else 0.0
+        pct = (len(unfound) / len(mine) * 100) if mine else 0.0
 
-        srcnums = set(numbers(src['text']))
+        srcnums = set()
+        for one in srcs:
+            srcnums |= set(numbers(one.get('text', '')))
+            srcnums |= set(numbers(one.get('title', '')))
         mynums = [x for x in numbers(text) if x not in srcnums]
         # A week number and a day number are the companion's own, not the
         # post's, so they are not expected to be in it.
@@ -104,14 +186,14 @@ def main(posts_path, companion_path, limit=None):
           f'  ({skipped} table entries skipped)\n')
     if rows:
         pcts = sorted(r[1] for r in rows)
-        print(f'unfound vocabulary: {pcts[0]:.1f}% best, '
+        print(f'names not in their post: {pcts[0]:.1f}% best, '
               f'{pcts[len(pcts)//2]:.1f}% median, {pcts[-1]:.1f}% worst\n')
 
     print('=' * 72)
-    print('WORST BY VOCABULARY  (words not in the post)')
+    print('NAMES IN THE SUMMARY THAT THE POST DOES NOT HAVE')
     print('=' * 72)
     for n, pct, total, unfound, _ in rows[:int(limit or 20)]:
-        print(f'day {n:>3}  {pct:5.1f}%  of {total:>3} words: '
+        print(f'day {n:>3}  {pct:5.1f}%  of {total:>3} names: '
               f'{", ".join(unfound[:14])}{" ..." if len(unfound) > 14 else ""}')
 
     print('\n' + '=' * 72)
