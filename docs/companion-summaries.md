@@ -21,54 +21,6 @@ own weekly table, so the companion is never short of an entry.
 
 ---
 
-## Day 225 · Book 1 · Week 33
-
-Week thirty-three is the week of Pesach Sheini and Lag Ba'Omer. Lag Ba'Omer is a day of great celebration, because it was then that the students of Rabbi Akiva stopped perishing. It is also the yahrzeit of Rabbi Shimon Bar Yochai — Yesod ha'Olam, the foundation of the world — and the custom is to light a bonfire in his honor, representing the great light he brought to the world through his teachings of Kabbalah.
-
-In Perek Shirah the creature of this week is the donkey, which proclaims: “Yours, O Lord, are the greatness, and the might, and the glory, and the victory, and the majesty, for all that is in the heavens and on the earth is Yours; Yours is the kingdom and You are He Who is exalted over everything as the Leader.” (I Chronicles 29:11) King David recited this verse when he was at the height of his glory, reiterating that everything is from Hashem: glory and kingship, the Heavens and the earth.
-
-In the Counting of the Omer this is the week of hod, acknowledgement — Hod shebeHod — so it is quite appropriate that the song of the donkey should so gracefully acknowledge that everything comes from G-d. The song contains all seven emotional sefirot: gedulah is a reference to chesed; then come gevurah, tiferet, netzach and hod; hakol is a reference to yesod; and mamlachah, a reference to malchut.
-
-From Pirkei Avot, Rabbi Yochanan the son of Berokah: whoever desecrates the Divine Name covertly is punished in public, and regarding the desecration of the Name the malicious and the merely negligent are one and the same.
-
-Pesach Sheini is the yahrzeit of Rabbi Meir.
-
-*Source: [Week 33 (From the Book): To Recognize the Spiritual Treasures Hidden within Each One of Us](https://www.kabbalahoftime.com/2014/05/week-33-to-recognize-spiritual.html) — 1950 words, 2019-05-12*
-
----
-
-## Day 226 · Book 2 · Week 33
-
-The thirty-third week is the week of Pesach Sheini and Lag Ba'Omer, and in Haazinu the verse speaks again of the bitter punishment faced by the Jewish people, comparing it to wine: “Their wine is the bitterness of serpents, and the bitterness of the ruthless cobras.” (Deuteronomy 32:33) Read in a positive light, their deep Torah wisdom came from the bitter serpents, and their ability to be a head — to have a deep mind — from dealing with ruthless cobras.
-
-Wine is also a known metaphor for the essence and the hidden part of the Torah, associated primarily with the works of Rabbi Shimon Bar Yochai. The joy of Lag Ba'Omer comes in contrast to the suffering and the mourning of the Omer period, with the passing of twenty-four thousand of Rabbi Akiva's students. Rabbi Shimon Bar Yochai himself acquired this wine through much suffering, and in the end he said that the suffering he endured was very much worth it.
-
-The haftorah verse: “G-d is He who has fortified me with strength; and He looseth perfectly my path.” (II Samuel 22:33) The word for strength is chayil, a known reference to the Torah, the source of King David's power. The verse also carries a word written differently from how it is spoken — darchoh, His way, rather than darchi, my way — so that it reads: G-d makes clear to me His perfect way. The word for perfect is tamim, itself a reference to the Torah, as David says, Torat Hashem Tmimah Meshivat Nafesh.
-
-The quality of this week is Ohev et HaBriot, loving the creations, the third term Rabbi Meir uses of those who study Torah lishmah. The prophet is Chabakuk; the Levitical city, Jarmuth.
-
-*Source: [Week 33 (Book 2): Chabakuk and Torah that Comes from Suffering](https://www.kabbalahoftime.com/2014/05/week-33-book-2-torah-that-comes-from.html) — 811 words, 2018-05-20*
-
----
-
-## Day 227 · Book 3 · Week 33
-
-Week thirty-three is the week of Pesach Sheini and Lag Ba'Omer, and the Torah portion section for this week first introduces the Mannah: “It came to pass in the evening that the quails went up and covered the camp, and in the morning there was a layer of dew around the camp. The layer of dew went up, and behold, on the surface of the desert, a fine, bare substance as fine as frost on the ground.”
-
-The Mannah is fine as frost and compared to the dew, in contrast with the physicality of the quail. That contrast is also one between the revealed Torah, nigleh, and the Kabbalah, nistar. In nigleh there is back and forth and room for digestion — setting aside certain opinions and coming to conclusions. When it comes to Kabbalah there is no need for separating the good from the bad. There is also an opinion that the Mannah began falling on Lag Ba'Omer, and that this is the reason for its celebration.
-
-The haftorah: “Blessed above women shall Jael, the wife of Heber the Kenite, be; above women in the tent shall she be blessed.” The women in the tent are a reference to the blessings given to the matriarchs (Talmud, Sanhedrin 105). Similarly, Rabbi Shimon Bar Yochai is said to be praiseworthy above all of his colleagues.
-
-Daf Lamed Gimmel of Sotah continues the discussion of statements that must be said in Hebrew to be valid and those that may be said in any language, and the blessings and curses said at Mount Grizim and Mount Eival. It goes into the language of angels and heavenly voices, and contains a story of what Shimon HaTzadik heard in the Kodesh HaKodashim.
-
-The generation is David. The journey: they journeyed from Ezion geber and camped in the desert of Zin, which is Kadesh.
-
-*Source: [Week 33 (Book 3): Blessed Above All Others](https://www.kabbalahoftime.com/2014/05/week-33-book-3-blessed-above-all-others.html) — 814 words, 2017-05-14*
-
----
-
----
-
 ## Day 1 · Book 1 · Week 1
 
 Week one is the week of Rosh Hashanah, and the year's counting begins on the same weekday the Counting of the Omer begins — the second day of Passover. It takes in the days of selichot leading up to the holiday, when we rise early to ask forgiveness and start the year with a clean slate.
@@ -4044,3 +3996,117 @@ Then the braided locks, and the splendour upon the children: "And the braided lo
 And the end is the meat and the bread, with the bitter clusters between: "The Lord spoke to Moses, saying, I have heard the complaints of the children of Israel" / "Their grapes are grapes of rosh, and they have bitter clusters" / "Speak to them, saying, 'In the afternoon you shall eat meat'" / "'And in the morning you shall be sated with bread'" / "Satiate us in the morning with Your kindness" / "Then we shall sing and rejoice throughout our days" / "And you shall know that I am the Lord, your G-d" / "How fair and how pleasant you are, A love of delights!"
 
 *Source: [Week 32 (Book 7): The Mule Is Saying](https://www.kabbalahoftime.com/2016/05/the-mule-is-saying.html) — 258 words*
+
+---
+
+## Day 225 · Book 1 · Week 33
+
+Week thirty-three is the week of Pesach Sheini and Lag Ba'Omer. Lag Ba'Omer is a day of great celebration, because it was then that the students of Rabbi Akiva stopped perishing. It is also the yahrzeit of Rabbi Shimon Bar Yochai — Yesod ha'Olam, the foundation of the world — and the custom is to light a bonfire in his honor, representing the great light he brought to the world through his teachings of Kabbalah.
+
+In Perek Shirah the creature of this week is the donkey, which proclaims: “Yours, O Lord, are the greatness, and the might, and the glory, and the victory, and the majesty, for all that is in the heavens and on the earth is Yours; Yours is the kingdom and You are He Who is exalted over everything as the Leader.” (I Chronicles 29:11) King David recited this verse when he was at the height of his glory, reiterating that everything is from Hashem: glory and kingship, the Heavens and the earth.
+
+In the Counting of the Omer this is the week of hod, acknowledgement — Hod shebeHod — so it is quite appropriate that the song of the donkey should so gracefully acknowledge that everything comes from G-d. The song contains all seven emotional sefirot: gedulah is a reference to chesed; then come gevurah, tiferet, netzach and hod; hakol is a reference to yesod; and mamlachah, a reference to malchut.
+
+From Pirkei Avot, Rabbi Yochanan the son of Berokah: whoever desecrates the Divine Name covertly is punished in public, and regarding the desecration of the Name the malicious and the merely negligent are one and the same.
+
+Pesach Sheini is the yahrzeit of Rabbi Meir.
+
+*Source: [Week 33 (From the Book): To Recognize the Spiritual Treasures Hidden within Each One of Us](https://www.kabbalahoftime.com/2014/05/week-33-to-recognize-spiritual.html) — 1950 words*
+
+---
+
+## Day 226 · Book 2 · Week 33
+
+The thirty-third week is the week of Pesach Sheini and Lag Ba'Omer, and in Haazinu the verse speaks again of the bitter punishment faced by the Jewish people, comparing it to wine: “Their wine is the bitterness of serpents, and the bitterness of the ruthless cobras.” (Deuteronomy 32:33) Read in a positive light, their deep Torah wisdom came from the bitter serpents, and their ability to be a head — to have a deep mind — from dealing with ruthless cobras.
+
+Wine is also a known metaphor for the essence and the hidden part of the Torah, associated primarily with the works of Rabbi Shimon Bar Yochai. The joy of Lag Ba'Omer comes in contrast to the suffering and the mourning of the Omer period, with the passing of twenty-four thousand of Rabbi Akiva's students. Rabbi Shimon Bar Yochai himself acquired this wine through much suffering, and in the end he said that the suffering he endured was very much worth it.
+
+The haftorah verse: “G-d is He who has fortified me with strength; and He looseth perfectly my path.” (II Samuel 22:33) The word for strength is chayil, a known reference to the Torah, the source of King David's power. The verse also carries a word written differently from how it is spoken — darchoh, His way, rather than darchi, my way — so that it reads: G-d makes clear to me His perfect way. The word for perfect is tamim, itself a reference to the Torah, as David says, Torat Hashem Tmimah Meshivat Nafesh.
+
+The quality of this week is Ohev et HaBriot, loving the creations, the third term Rabbi Meir uses of those who study Torah lishmah. The prophet is Chabakuk; the Levitical city, Jarmuth.
+
+*Source: [Week 33 (Book 2): Chabakuk and Torah that Comes from Suffering](https://www.kabbalahoftime.com/2014/05/week-33-book-2-torah-that-comes-from.html) — 811 words*
+
+---
+
+## Day 227 · Book 3 · Week 33
+
+Week thirty-three is the week of Pesach Sheini and Lag Ba'Omer, and the Torah portion section for this week first introduces the Mannah: “It came to pass in the evening that the quails went up and covered the camp, and in the morning there was a layer of dew around the camp. The layer of dew went up, and behold, on the surface of the desert, a fine, bare substance as fine as frost on the ground.”
+
+The Mannah is fine as frost and compared to the dew, in contrast with the physicality of the quail. That contrast is also one between the revealed Torah, nigleh, and the Kabbalah, nistar. In nigleh there is back and forth and room for digestion — setting aside certain opinions and coming to conclusions. When it comes to Kabbalah there is no need for separating the good from the bad. There is also an opinion that the Mannah began falling on Lag Ba'Omer, and that this is the reason for its celebration.
+
+The haftorah: “Blessed above women shall Jael, the wife of Heber the Kenite, be; above women in the tent shall she be blessed.” The women in the tent are a reference to the blessings given to the matriarchs (Talmud, Sanhedrin 105). Similarly, Rabbi Shimon Bar Yochai is said to be praiseworthy above all of his colleagues.
+
+Daf Lamed Gimmel of Sotah continues the discussion of statements that must be said in Hebrew to be valid and those that may be said in any language, and the blessings and curses said at Mount Grizim and Mount Eival. It goes into the language of angels and heavenly voices, and contains a story of what Shimon HaTzadik heard in the Kodesh HaKodashim.
+
+The generation is David. The journey: they journeyed from Ezion geber and camped in the desert of Zin, which is Kadesh.
+
+*Source: [Week 33 (Book 3): Blessed Above All Others](https://www.kabbalahoftime.com/2014/05/week-33-book-3-blessed-above-all-others.html) — 814 words*
+
+---
+
+## Day 228 · Book 4 · Week 33
+
+Channah's fifth verse keeps last week's reversals going and turns them to the body: "They that were full have hired out themselves for bread; and they that were hungry have ceased; while the barren hath borne seven, she that had many children hath languished." Physical wealth and health, and above all the ability to have children.
+
+Pirkei Avot, on the greatness of the Torah, stays physical too, and seems to point the same way: "It shall be health to your navel, and marrow to your bones."
+
+Ecclesiastes 2 is the pleasures of the body and physical wealth, told by the one man who could afford all of them. "I said to myself, 'Come now, I will mix [wine] with joy and experience pleasure'; and behold, this too was vanity. Of laughter, I said, '[It is] mingled'; and concerning joy, 'What does this accomplish?'" Then the building: "I made myself great works; I built myself houses, and I planted myself vineyards. I made myself gardens and orchards, and I planted in them all sorts of fruit trees. I made myself pools of water, to water from them a forest sprouting with trees." Then the having: slaves and household and cattle and flocks, silver and gold and the treasures of kings and provinces, every kind of musical instrument, wagons and coaches — "So I became great, and I increased more than all who were before me in Jerusalem; also my wisdom remained with me. And [of] all that my eyes desired I did not deprive them; I did not deprive my heart of any joy." And then the accounting: "Then I turned [to look] at all my deeds that my hands had wrought and upon the toil that I had toiled to do, and behold everything is vanity and frustration, and there is no profit under the sun."
+
+The week holds many yahrzeits, among them two prominent rebbes of the Chernobyl line. Rabbi Mordechai, Mottel, of Chernobyl, on the 20th of Iyar, succeeded his father Rabbi Nachum, and was the son-in-law of Rabbi Aharon the Great of Karlin and afterwards of Rabbi David Seirkes, an important disciple of the Baal Shem Tov. All eight of his sons became major Chasidic leaders. One of them, Yaakov Yisrael Twerski of Cherkassy, the first Hornsteipel Rebbe, married Devora Leah, one of the six daughters of Rabbi DovBer of Lubavitch, son of Rabbi Shneur Zalman of Liadi — a match the two grandfather-Rebbes arranged, to make the most of the prediction that the Moshiach would be born of the elder disciple of the Maggid of Mezritch or the youngest. His grandson, named after him, Rabbi Mordechai, Mottele, Twersky of Rachmistrivka, on the 17th of Iyar, moved to Jerusalem from Europe in 1908; he was known for a sharp mind, and many businessmen sought his advice, and he was himself a skilled craftsman who did complex engravings in silver and copper. His father, Rabbi Yochanan Twerski, son of the famous Rebbe Mottele of Chernobyl, was the first Rebbe of Rachmistrivka.
+
+Also this week: R' Chaim Meir Yechiel Shapira, the Saraph of Moglenitz, and Rabbi Shmuel of Karov-Vinagrov on the 15th of Iyar; Rabbi Moshe Chaim Ephraim of Sudylkov, the Degel Machaneh Ephraim, on the 17th; Rabbi Moshe Isserles, the Ramah, on the 18th; Rabbi Menachem Mendel of Riminov and Rabbi Shmuel Abuchatzeira, forefather of the Abuchatzeira dynasty, on the 19th; and Rabbi Yechi ben R' Avrohom Abuchatzeira on the 20th.
+
+*Source: [Week 33 (Book 4): Health](https://www.kabbalahoftime.com/2014/05/week-33-book-4a-health-and-wealth.html) — 791 words*
+
+---
+
+## Day 229 · Book 5 · Week 33
+
+Lag Ba'Omer, and the counting enters a new stretch in which most people stop all signs of mourning. The Song changes speakers with it. Rashi: until this point the nations praise Him; from here on are the words of the Shechinah, to reveal Israel, who are among the nations. And Lag Ba'Omer is a day of tremendous revelation, the day of the Tzadik Yesod Olam, Rabbi Shimon Bar Yochai.
+
+The verses are the palm. "This, your stature, is like a palm tree, and your breasts are like clusters [of dates]. I said: Let me climb up the palm tree, let me seize its boughs, and let your breasts be now like clusters of the vine and the fragrance of your countenance like [that of] apples." The Tamar is the metaphor for the upright Tzadik Yesod Olam, and the vav, which is Yesod, stands upright too; in Perek Shirah the Tamar's own verse is "Tzadik KaTamar Yifrach, K'Erez BaLevanon Yizgueh." The vine is the hidden Torah, and the fragrance of apples is the fragrance of Gan Eden, which is known to be like an apple orchard. The third verse belongs here as well: "And your palate is like the best wine, that glides down smoothly to my beloved, making the lips of the sleeping speak." That is revelation — the inner secrets that gave the Jewish people life in times when they were spiritually asleep, and made their lips speak.
+
+Of the seventy souls that descended to Egypt, the thirty-third is Dinah, the last directly descended from Leah; from here the count turns to Rachel's descendants, beginning with Joseph's family. The first listed, after Rachel, Joseph and Binyamin, who are left for the end, is Joseph's wife, Asenath daughter of Poti-phera Chief of On, whom the Midrash teaches is Dinah's own daughter.
+
+The lesson of the Counting of the Omer and of Lag Ba'Omer is love and respect for one another, and Dinah is the great example of it. Leah foresaw that Dinah was to have been a boy, and prayed that she be turned into a girl so that Rachel could still merit two sons, founders of tribes. Asenath — daughter of Dinah, who came from Leah, and mother of Efraim and Menasheh by Joseph, who came from Rachel — holds that same union; and Efraim and Menashe are the link between the two sides of the people, Rachel and Leah, Yehudah and Yosef, which is why Jacob says those two will be to him like Reuven and Shimon. Dinah endured a great deal and was redeemed in the end, marrying Shimon and seeing her daughter marry Joseph. Dinah means judgement, strictness, and the Hey at the end of her name adds mercy. Asenath's name is harsh too: "And Dinah gave birth to a daughter and named her Asenat, saying, 'To my woe did I bear her for Shechem the son of Chamor who had taken me by force to his house.'" And her name carries an added Heh as well, since she is not called Bat Potiphar but Bat Potipherah.
+
+Daf Lamed Gimmel of Shvuot keeps on with who is excluded from liability for a court oath, especially where there are two pairs of witnesses, with a long discussion of liability for fines, of claiming on behalf of someone else, and of oaths applying only to monetary claims. Lag Ba'Omer is the day we celebrate how the merit of Rabbi Shimon Bar Yochai and his son, Rabbi Elazar, spared the whole world from judgement: in Rabbi Shimon's days there was never a rainbow in the sky, because the rainbow is the reminder of the oath never to destroy the world again, and in his time no such sign was needed. Fittingly, one of the main principles of this daf comes from an opinion of Rabbi Elazar son of Rabbi Shimon Bar Yochai, and the next daf opens with words of Rabbi Shimon Bar Yochai himself.
+
+Jeremiah's thirty-third chapter is joy after desolation, and purification from sin, with the House of David and the Kohanim in it, and even the idea of counting. Iyar is a month of healing and Lag Ba'Omer a day of festivity, weddings among them. "Behold, I will bring it healing and cure, and I will cure them, and I will reveal to them a greeting of peace and truth." "And I will purify them of all their iniquity that they sinned against Me." Then the sound returning to the empty streets: "There shall again be heard in this place, concerning which you say, 'It is desolate without man and without beast,' in the cities of Judah and in the streets of Jerusalem that are desolate... the sound of mirth and the sound of joy, the voice of a bridegroom and the voice of a bride, the sound of those saying, 'Thank the Lord of Hosts, for the Lord is good, for His loving-kindness endures forever.'" Then the shepherds, and the counting: "flocks shall again pass under the hands of one who counts them." And the plant: "In those days and in that time I will cause to grow for David a plant of righteousness, and he shall execute justice and righteousness in the land." And the two lines that will not be cut off, the throne and the priesthood.
+
+*Source: [Week 33 (Book 5): The Tzadik](https://www.kabbalahoftime.com/2014/05/week-33-book-4b-tzadik.html) — 1493 words*
+
+---
+
+## Day 230 · Book 6 · Week 33
+
+The third week of Iyar in psalms: the ninety-seventh, ninety-eighth and ninety-ninth, with the last verse of Psalm 90, the opening of Psalm 105, and one verse of Psalm 89.
+
+Psalm 97 is the revealing of His kingship. "When the Lord will reveal His kingship, the earth will exult; the multitudes of islands will rejoice. Clouds and dense darkness will surround Him; justice and mercy will be the foundation of His throne." Then the melting: "The mountains will melt like wax before the Lord, before the Master of all the earth." Then the idols: "All who worship graven images, who take pride in idols, will be ashamed." And the end, which is sown rather than given: "You who love the Lord, hate evil; He watches over the souls of His pious ones, He saves them from the hand of the wicked. Light is sown for the righteous, and joy for the upright in heart."
+
+Psalm 98 is how Israel will praise Him for the Redemption. "Sing to the Lord a new song, for He has performed wonders; His right hand and holy arm have wrought deliverance for Him." Then the seeing of it: "He has made known His salvation; He has revealed His justice before the eyes of the nations. He has remembered His kindness and faithfulness to the House of Israel; all, from the farthest corners of the earth, witnessed the deliverance by our G-d." Then the instruments — harp, trumpets, the sound of the shofar — and then the world joining: "The sea and its fullness will roar in joy, the earth and its inhabitants. The rivers will clap their hands, the mountains will sing together."
+
+Psalm 99 refers to the wars of Gog and Magog, which come before the Redemption. "When the Lord will reveal His kingship, the nations will tremble; the earth will quake before Him Who is enthroned upon the cherubim." Then the three who were answered: "Moses and Aaron among His priests, and Samuel among those who invoke His Name, would call upon the Lord and He would answer them. He would speak to them from a pillar of cloud; they observed His testimonies and the decrees which He gave them." And both halves of the answer: "Lord our G-d, You have answered them; You were a forgiving G-d for their sake, yet bringing retribution for their own misdeeds."
+
+Psalm 90 ends here, on our own hands: "And may the pleasantness of the Lord our G-d be upon us, and the work of our hands establish for us, and the work of our hands establish it." Psalm 105 begins: "Give thanks to the Lord, call out in His name; make His deeds known among the peoples. Sing to Him, play music to Him, speak of all His wonders." And Psalm 89's verse holds, as it has through the condition of the last three weeks: "But I shall not cancel My kindness from him, and I shall not betray My faith."
+
+*Source: [Week 33 (Book 6): Reviewing the Third Week of Iyar - Psalms 97-99; 90:17, 105:1-2; 89:34](https://www.kabbalahoftime.com/2014/05/week-33-book-5-reviewing-third-week-of.html) — 687 words*
+
+---
+
+## Day 231 · Book 7 · Week 33
+
+The donkey opens with everything being His, and the week's books come in around it.
+
+The greatness and the palm first: "Yours, G-d, is the greatness, and the might" / "And the splendor, and the victory, and the glory" / "This, your stature, is like a palm tree" / "And your breasts are like clusters [of dates]" / "Sing to Him, play music to Him, speak of all His wonders" / "For everything in the Heavens and earth [is Yours]" / "Yours, G-d, is the kingship, and the exaltation over all."
+
+Then the blessing on Jael, with the bitter wine: "Blessed above women shall Jael" / "The wife of Heber the Kenite, be" / "Their wine is the bitterness of serpents" / "And the bitterness of the ruthless cobras" / "While the barren hath borne seven" / "She that had many children hath languished."
+
+Then the clusters and the apples, and the strength: "And let your breasts be now like clusters of the vine" / "And the fragrance of your countenance like apples" / "Above women in the tent shall she be blessed" / "G-d is He who has fortified me with strength" / "And He loosened perfectly my path" / "And may the pleasantness of the Lord our G-d be upon us."
+
+Then the quails and the dew, with the kindness not cancelled: "It came to pass in the evening that the quails went up and covered the camp" / "But I shall not cancel My kindness from him" / "And I shall not betray My faith" / "And in the morning there was a layer of dew around the camp" / "The layer of dew went up" / "I said: Let me climb up the palm tree" / "Let me seize its boughs" / "And behold, on the surface of the desert, a fine bare [substance] as fine as frost on the ground."
+
+And the end is the hungry who have ceased, and the work of our hands: "They that were full have hired out themselves for bread" / "And they that were hungry have ceased" / "Give thanks to the Lord, call out in His name" / "Make His deeds known among the peoples" / "And the work of our hands establish for us" / "And the work of our hands establish it."
+
+*Source: [Week 33 (Book 7): The Donkey is Saying](https://www.kabbalahoftime.com/2016/05/the-donkey-is-saying-songs-for-week-33.html) — 297 words*
