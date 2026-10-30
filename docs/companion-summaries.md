@@ -300,3 +300,131 @@ From there the song braids the vineyard with the barrenness. "They made me a kee
 It ends where a day like this one would want to end: "Even at night my conscience instructs me. I will bless the Lord, Who counseled me."
 
 *Source: [Week 2 (Book 7): The Hen is Saying](https://www.kabbalahoftime.com/2021/02/week-2-book-7-hen-is-saying.html) — 272 words*
+
+---
+
+## Day 15 · Book 1 · Week 3
+
+Week three is Sukkot, and the dove sings: "Like a swift or crane, so do I chatter; I moan like a dove, my eyes fail with looking upward; O G-d, I am oppressed, be my security." (Isaiah 38:14) She says one thing more, before the Holy One: "Master of the World! May my sustenance be as bitter as an olive in Your hands, rather than it being sweet as honey through flesh and blood." (Talmud, Eruvin 18b)
+
+That is the whole week in a sentence. We dip the challah in honey and we eat under branches. The word the dove uses for security, *arveni*, means be my guarantor — and can also be read be sweet to me. It is the word behind *Kol Israel Arevim Zeh LaZeh*, that every Jew is responsible for, and mixed up with, and sweet to every other, which is what Sukkot is about.
+
+The sukkah is a flimsy thing, open to the weather. We do our part and we know the rest is not ours. The dove is loyalty: the Torah likens Israel to a dove and tefillin to its wings, and the wings guard the dove as the mitzvot guard us. She is also the bearer of good news — it was the dove Noah sent, who came back with an olive branch.
+
+Three runs through everything here. Pirkei Avot gives Rabbi Shimon the son of Gamliel: "By three things is the world sustained: law, truth and peace." (Zachariah 8:16) Those are the three holidays we have now passed: Rosh Hashanah is the Day of Din, judgment; on Yom Kippur we are sealed, and G-d's seal is truth; and Sukkot is peace, the One who spreads a sukkah of peace over us. The world stands on three pillars — Torah, Divine service, acts of kindness — and so on the three fathers, with Jacob third, who is *tiferet*, the balance between Abraham's kindness and Isaac's strength. After parting from Esau, Jacob went to a place called Sukkot.
+
+The pairing is Tiferet shebeChesed. This week the yahrzeit of the Rebbe Maharash falls, who was born on the seventeenth day of the Omer — tiferet within tiferet — and whose father sometimes called him by it.
+
+And this week we are commanded to be happy. The dove's lesson is not to be anxious, but also to make a vessel: to be grateful, and to keep the place you live in as ordered and pleasant as a sukkah.
+
+*Source: [Week 3 (From the Book): To Be Happy, Balanced, and Secure in G-d](https://www.kabbalahoftime.com/2013/09/week-3-to-be-happy-balanced-and-secure.html) — 1371 words*
+
+---
+
+## Day 16 · Book 2 · Week 3
+
+"When I call out the name of the Lord, ascribe greatness to our G-d." (Deuteronomy 32:3) The day after Yom Kippur is called G-d's name, and the four days between Yom Kippur and Sukkot answer to the four letters of it. Then comes the ascribing of greatness, which on Sukkot is done with the hands: a good sukkah, a beautiful etrog, a beautiful lulav. That is what the sages read in "This is my G-d and I will glorify Him." (Exodus 15:2; Shabbat 133b)
+
+The haftorah piles up the shelter: "G-d is my rock, under whom I take cover; My shield, and the horn of my salvation, my support, and my refuge; He is my savior Who saves me from violence." (II Samuel 22:3) Last week's protection was large and far off. This one is close enough to sit under, which is the sukkah.
+
+The quality is attentive listening — *shmi'at haOzen*, the listening of the ear. The ear is where the body keeps its balance, and it is the organ of this holiday. Listening is also what it is to be a vessel: you cannot receive a teaching while talking. On Sukkot we are all vessels, and the blessing comes down through the roof.
+
+The prophet is Jacob, who is this holiday twice over — he travelled to a place called Sukkot, and his yahrzeit falls in it. He is listening itself: a plain man who dwelt in tents, and the Shema opens "Listen, O Israel," where the Midrash reads Israel as Jacob himself.
+
+The Levitical city is Kibzaim, which means two gatherings. Sukkot is Chag Ha'Asif, the festival of the ingathering, when the harvest comes in — and its offerings come in two kinds, those we bring for ourselves and those we bring for the other nations.
+
+What constant study taught last week, listening tempers this week: be realistic. Enthusiasm sets a schedule nobody can keep. Add a little at a time, as a lifter adds weight. *Tafastah merubah, lo tafastah* — grab too much and you have grabbed nothing.
+
+*Source: [Week 3 (Book 2): Calling out to G-d and Being Sheltered by Him, Listening and Jacob, Kibzaim and the Holiday of Ingathering](https://www.kabbalahoftime.com/2013/09/week-3-book-2-calling-out-to-g-d-and.html) — 580 words*
+
+---
+
+## Day 17 · Book 3 · Week 3
+
+"This is my G-d, and I will make Him a habitation, the G-d of my father, and I will ascribe to Him exaltation." A house built to honour Him — which is the sukkah, and which is also *Zeh Keili v'Anvehu*, the beautiful etrog and the beautiful lulav.
+
+The haftorah is all ears: "Hear, O kings, give ear, O princes; I, to the Lord I shall sing." *Anochi* comes twice over, and Rashi reads it as the great revelation that happens under the sukkah — like receiving the Torah over again. Our sins have been let go, and we are happy enough to sing.
+
+Sotah's third daf is about how a Divine spirit enters a person, and Sukkot was the season when people received Ruach HaKodesh.
+
+The generation is Enosh, whose name also means mankind as a whole, and on Sukkot we pray on behalf of the whole world.
+
+The journey is out of the shelter: "They journeyed from Succoth and camped in Etham, at the edge of the desert." Etham can mean a fortress — not unlike a sukkah — and in ancient Egyptian, a seashore. The work of this week is the edge: to take in everything the shelter is giving while you are still in it, so that you can do something with it when you walk out into the world. A small child is entirely inside the fortress. Then comes the shoreline, where you go a little further out and run back for approval, not yet in the desert but at its edge, meeting a world that is not interested in you.
+
+Enosh's lesson is about knowing where you are weak. The Hayom Yom gives four words for a person: *Adam* is mind, *Ish* is heart, *Enosh* is weakness in one or the other or both, and *Gever* is the one who gets past it — Gever works on Enosh to raise him to Ish or Adam. Which means Enosh already has what they have, or it could not be raised. As Rebbe Nachman said: if you believe you can break, believe you can fix.
+
+*Source: [Week 3 (Book 3): Making a Habitation for G-d and Beautifying Him, "Giving Ear" and Receiving the Divine Spirit, Enosh and Sukkoth](https://www.kabbalahoftime.com/2013/09/week-3-book-3-enosh-draft.html) — 608 words*
+
+---
+
+## Day 18 · Book 4 · Week 3
+
+"And this man went up out of his city from year to year to worship and to sacrifice unto the Lord of hosts in Shiloh. And the two sons of Eli, Hophni and Phinehas, were there priests unto the Lord." Three priests in one verse, and Elkanah going up year after year — Sukkot being one of the three festivals you go up for.
+
+Rashi notices the tense: he *would* go up, season after season. And the Midrash adds the detail that makes him a tzadik rather than merely observant — the road he took one year he did not take the next, so that different people would see him going, and come too. He went up, and the number of pilgrims went up with him.
+
+Pirkei Avot this week says of the one who learns Torah for its own sake that he is called a friend. Elkanah is what that looks like. And this is the week of walking into each other's sukkot.
+
+Proverbs' third chapter is the same subject in instructions: "Do not withhold good from the one who needs it when you have power in your hand to do it. Do not say to your fellow, 'Go and return, and tomorrow I will give,' though you have it with you. Devise no harm against your fellow, when he dwells securely with you. Do not quarrel with anyone without cause, if he did you no harm."
+
+On the fourteenth of Tishrei is the yahrzeit of Rabbi Yisrael Hopstein, the Maggid of Kozhnitz, whom his chassidim called the second Baal Shem Tov. He was born to elderly parents after a blessing from the Baal Shem Tov — and the blessing was earned by their joy, by his father the bookbinder breaking into a dance at the Shabbat table. The Baal Shem Tov smiled that Friday night because he could see the heavenly court dancing along.
+
+He was sickly as a child and a prodigy. As a young man he studied Magen Avraham with a friend before dawn, and came away so alight that he went to ask Rabbi Shmelke of Nickelsburg where the light had come from. Before he could ask, Rabbi Shmelke said: Israel, I can see on your face that you studied Magen Avraham. That book generates a great light in the heart of the wise.
+
+The next day, the first day of Sukkot, is the yahrzeit of Rabbi Mordechai of Lechovitch, whose teaching turns on happiness.
+
+*Source: [Week 3 (Book 4): Pilgrimage and Friendship, Happiness and the Maggid of Kozhnitz](https://www.kabbalahoftime.com/2013/09/week-3-book-4a-pilgrimage-and-friendship.html) — 843 words*
+
+---
+
+## Day 19 · Book 5 · Week 3
+
+"Tell me, you whom my soul loves, where do you feed, where do you rest the flocks at noon, for why should I be like one who veils herself beside the flocks of your companions?"
+
+Rashi makes the question harder and better: where do You feed Your flock among these wolves they are standing in the middle of, and where do You rest them at noon — in this exile, which is as hard on them as noon is on a flock. In the sukkah we are out in the weather and we feel the noon sun. The companions are the other nations, and on Sukkot we bring offerings for them too.
+
+Then G-d answers, and because we have been judged and have turned back, He calls us the fairest of women: "go your way in the footsteps of the flocks and pasture your kids beside the shepherds' dwellings." The shepherds' dwellings may be the seven shepherds who come into the sukkah.
+
+The third verse goes back further — Pharaoh's chariots and their horses, silenced. All that was asked of us then was to keep still and trust, which is what the sukkah asks now, remembering forty years of being kept.
+
+Of the seventy souls the third is Pallu, whose name is close to *peleh*, a wonder: the clouds of glory, the manna, the forty years of them.
+
+Shevuot's third daf takes up oaths about eating, and the law of carrying in and out of a home — which is eating in the sukkah, and making the sukkah a home. It also treats lashes for things not done, and the sukkah is the mitzvah you keep by sitting still inside it.
+
+Jeremiah's third chapter answers the Song: "Return, backsliding children, says the Lord, for I possessed you… And I will give you shepherds according to My heart, and they will feed you with knowledge and understanding." And later, on where to put us: "How shall I place you among the sons? But I will give you a desirable land… Call Me 'my Father,' and do not turn away from following Me." All the nations are called sons there, and we bring for all of them.
+
+*Source: [Week 3 (Book 5): Shepherds' Dwellings](https://www.kabbalahoftime.com/2013/09/week-3-4b-shepherds-dwellings.html) — 781 words*
+
+---
+
+## Day 20 · Book 6 · Week 3
+
+The first part of Sukkot in psalms is the seventh, eighth and ninth, with three verses of the Tikkun HaKlali and one of Psalm 89.
+
+Psalm 7 is a man under pursuit who submits himself to examination. "I put my trust in You, Lord, my G-d; deliver me from all my pursuers and save me. Lest he tear my soul like a lion, crushing me with none to rescue." Then the oath: if I have done this, if there is wrongdoing in my hands, if I have rewarded my friends with evil — then let the enemy overtake me. It settles on the judge: "G-d is the righteous judge," the "Searcher of hearts and minds." And it watches the trap work backwards: "He digs a pit, digs it deep, only to fall into the trap he laid. His mischief will return upon his own head."
+
+Psalm 8 steps outside and looks up. "Lord, our Master, how mighty is Your Name throughout the earth, You Who has set Your majesty upon the heavens! Out of the mouths of babes and sucklings You have established might." Then the question the night sky puts: "When I behold Your heavens, the work of Your fingers, the moon and the stars which You have set in place — what is man that You should remember him?" And the answer, which does not shrink him: "Yet, You have made him but a little less than the angels, and crowned him with honor and glory."
+
+Psalm 9 is thanks and the throne. "I will thank the Lord with all my heart; I will recount all Your wonders… You sat on the throne, O righteous Judge." Its mercy is specific: "The Lord will be a stronghold for the oppressed, a stronghold in times of trouble… He does not forget the cry of the downtrodden."
+
+The Tikkun HaKlali's verses are steadiness: "I have set the Lord before me at all times; because He is at my right hand, I shall not falter. Therefore my heart rejoices and my soul exults; my flesh, too, rests secure." And Psalm 89 swears: "I have made a covenant with My chosen one; I have sworn to David, My servant."
+
+*Source: [Week 3 (Book 6): Reviewing the Week of (the first part) of Sukkot - Psalms 7-9; 16:8-10; 89:4](https://www.kabbalahoftime.com/2013/09/week-3-book-5-reviewing-second-week-of.html) — 957 words*
+
+---
+
+## Day 21 · Book 7 · Week 3
+
+The dove opens, and this week the gathering is full of listening and sheltering.
+
+"Like a swift or crane, so do I chatter" is answered by "Hear, O kings, give ear, O princes," and then Haazinu — "When I call out the name of the Lord" / "Ascribe greatness to our G-d" — and the Song of the Sea's own ascribing: "the G-d of my father, and I will ascribe to Him exaltation."
+
+Then the dove speaks before the Holy One, and the haftorah's rescue falls in beside her, with Elkanah going up: "He is my savior Who saves me from violence" / "to worship and to sacrifice unto Hashem of hosts in Shiloh."
+
+The moaning and the cover come together. "I moan like a dove, my eyes fail with looking upward" / "G-d is my rock, under whom I take cover" / "This is my G-d, and I will make Him a habitation" / "I have set the Lord before me at all times" / "O G-d, I am oppressed, be my security."
+
+The olive and the honey sit at the centre — "May my sustenance be as bitter as an olive in Your hands, rather than it being sweet as honey through flesh and blood" — with "My support, and my refuge" and "Because He is at my right hand, I shall not falter" on either side of "Master of the World!"
+
+Toward the end the covenant and the flocks braid together: "I have made a covenant with My chosen one" / "if you do not know, O fairest of women" / "go your way in the footsteps of the flocks" / "my flesh, too, rests secure" / "I have sworn to David, My servant." Hophni and Phinehas come in at Shiloh, and the song ends where the shepherds are: "where do you feed, where do you rest the flocks at noon" — "and pasture your kids beside the shepherds' dwellings."
+
+*Source: [Week 3 (Book 7): The Dove is Saying](https://www.kabbalahoftime.com/2021/02/week-3-book-7-dove-is-saying.html) — 336 words*

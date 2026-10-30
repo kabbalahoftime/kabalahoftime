@@ -70,8 +70,15 @@ ALT = {
     # The app writes G-d everywhere. The psalm texts the blog quotes are
     # Chabad's translation, which writes God. Spelling the Name is a house
     # convention, not a claim about anything.
-    'g-d': 'god',
+    'g-d': 'god', 'shema': 'shemah', 'shabbat': 'shabat',
 }
+
+# Twelve years of Blogger has eaten a lot of spaces: "Midrashteaches",
+# "Channahis", "commandedto". A name of five letters or more is counted as
+# present when a word of the post begins with it, which finds the name
+# inside the collision. Five, so that short words cannot swallow longer
+# ones they merely start.
+PREFIX_MIN = 5
 
 
 def content(text):
@@ -170,7 +177,9 @@ def main(posts_path, companion_path, limit=None):
             have |= set(content(one.get('text', '')))
             have |= set(content(one.get('title', '')))
         mine = claims(text)
-        unfound = sorted({w for w in mine if w not in have})
+        joined = [h for h in have if len(h) > PREFIX_MIN]
+        unfound = sorted({w for w in mine if w not in have and not (
+            len(w) >= PREFIX_MIN and any(h.startswith(w) for h in joined))})
         pct = (len(unfound) / len(mine) * 100) if mine else 0.0
 
         srcnums = set()
