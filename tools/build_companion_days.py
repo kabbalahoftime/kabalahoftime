@@ -1,27 +1,34 @@
-"""Build the companion's 364 daily entries from the app's own weekly table.
+"""Build the companion's 364 daily entries.
 
 The companion is one KoT Book for one week, each day, filed the way Binah
 files them: day 1 is Book 1's entry for week 1, day 2 is Book 2's for week 1,
 day 8 is Book 1's for week 2, day 225 is Book 1's for week 33. Seven books
 times fifty-two weeks is three hundred and sixty-four, which is the year.
 
-    node tools/dump_week_data.mjs http://127.0.0.1:8731/index.html week.json
-    python3 -I tools/build_companion_days.py week.json index.html companion.json
+    node tools/dump_week_data.mjs http://127.0.0.1:8731/index.html docs/week-data.json
+    python3 -I tools/build_companion_days.py docs/week-data.json index.html \
+        companion-days.json [docs/companion-summaries.md]
 
-Every entry is already in index.html before this runs — the weekly table holds
-all seven books' readings for all fifty-two weeks. So nothing here is written
-per entry. There are seven templates, one to each book, reviewed once, and
-364 fillings of them. That is the only way a generated entry cannot invent
-something: not because a source is named beside it, but because no sentence
-in it was composed.
+An entry comes from one of two places, and says which it is.
 
-The companion that came down in October failed the other way. It was written
-entry by entry, and day 154 cited Isaiah 60:22 for a phrase that does not
+  * A summary, from docs/companion-summaries.md — a digestible account of
+    that book's post for that week, written against the post itself. These
+    are the entries the companion is for: they say what the week's writing
+    teaches, not merely what its readings are. Each is checkable against its
+    source by tools/check_companion_summaries.py, which is the only reason
+    writing them is safe.
+
+  * Otherwise a transcription of the app's own weekly table, through seven
+    templates, one to each book. Nothing in those is composed, so nothing in
+    them can be invented, and the companion is never short of an entry while
+    the summaries are being written.
+
+The companion that came down in October had neither. It was written entry by
+entry from nothing, and day 154 cited Isaiah 60:22 for a phrase that does not
 exist. The citation read exactly as sound as a true one.
 
-Each entry also carries `source`: the week's post for that book, from the
-app's own BOOKn_WEEK_URLS and b7_url — 364 posts for 364 days, one each. The
-reader who wants the whole thing rather than the digest has somewhere to go.
+Each entry carries `source`: the week's post for that book, from the app's own
+BOOKn_WEEK_URLS and b7_url — 364 posts for 364 days, one each.
 
 Fields the table leaves empty are left out rather than filled. Four creatures
 have no Perek Shirah verse in the app (Wild Goose, Fly, Sheep & Goat, Pig &
@@ -147,7 +154,57 @@ def sentence(label, value):
     return f'{label}: {v}' + ('' if v[-1] in '.!?…”' else '.')
 
 
-def build(data, songs):
+SUMMARY_HEAD = re.compile(
+    r'^##\s*Day\s+(\d+)\s*[·|]\s*Book\s+(\d+)\s*[·|]\s*Week\s+(\d+)',
+    re.I)
+
+
+def read_summaries(path):
+    """The manuscript, as day number to paragraphs.
+
+    A section runs to the next heading or rule. The italic source line the
+    samples end on is dropped: the address is the app's own and goes on the
+    entry as `source`, so a second copy in the prose could come to disagree
+    with it.
+    """
+    if not path:
+        return {}
+    text = pathlib.Path(path).read_text(encoding='utf-8')
+    out, cur, paras = {}, None, []
+
+    def flush():
+        if cur and paras:
+            out[cur] = list(paras)
+
+    for block in re.split(r'\n\s*\n', text):
+        b = block.strip()
+        if not b:
+            continue
+        m = SUMMARY_HEAD.match(b)
+        if m:
+            flush()
+            cur, paras = int(m.group(1)), []
+            continue
+        if b.startswith('#') or set(b) <= set('-*_ '):
+            flush()
+            cur, paras = None, []
+            continue
+        if cur is None:
+            continue
+        if re.match(r'^\*Source:', b, re.I):
+            continue
+        paras.append(re.sub(r'\s+', ' ', b).strip())
+    flush()
+
+    bad = {n: p for n, p in out.items() if not (1 <= n <= 364)}
+    if bad:
+        sys.exit(f'summaries outside 1-364: {sorted(bad)}')
+    return out
+
+
+def build(data, songs, summaries=None, posts=None):
+    summaries = summaries or {}
+    posts = posts or {}
     books = data.get('books') or []
     days = {}
     for wk in data['weeks']:
@@ -213,6 +270,21 @@ def build(data, songs):
                       if n < 364 else
                       f'{nname}, week 1 — the year begins again.')
 
+            # A written summary of the week's post replaces the transcription
+            # wholesale, title and all. It is the better entry — it says what
+            # the writing teaches rather than what the readings are — and the
+            # two are never mixed inside one day, because a reader cannot be
+            # expected to tell which half came from where.
+            wrote = summaries.get(n)
+            if wrote:
+                body = list(wrote)
+                # The post's own title, which is the author's title for the
+                # thing being summarised. The table's title names the week's
+                # reading, which is the wrong heading for a summary of the
+                # week's writing — and a first clause cut out of the prose
+                # makes a worse one than either.
+                title = post_title(posts.get(n), title)
+
             days[n] = {
                 'n': n,
                 'title': title,
@@ -220,6 +292,8 @@ def build(data, songs):
                 'teaser': teaser,
                 'teaserLead': 'Tomorrow',
                 'week': w,
+                'book': bi + 1,
+                'kind': 'summary' if wrote else 'table',
                 'weekTitle': pair['en'] if pair else 'the Mochin',
                 'movementTitle': f'{emoji} {name}'.strip(),
                 'source': wk['postUrls'][bi] or '',
@@ -229,10 +303,27 @@ def build(data, songs):
     return days
 
 
-def main(week_path, app_path, out_path):
+def post_title(post, fallback):
+    """The post's title, without the "Week 33 (Book 2):" it opens with.
+
+    The prefix is already on the entry twice over — the meta row says the day,
+    the week and the book — so a third copy inside the title is noise.
+    """
+    t = re.sub(r'^\s*Week\s*\d+\s*\((?:Book\s*\d+|From the Book)\)\s*[:—-]\s*',
+               '', str((post or {}).get('title') or ''), flags=re.I).strip()
+    t = re.sub(r'\s+', ' ', t)
+    return t or fallback
+
+
+def main(week_path, app_path, out_path, summaries_path=None, posts_path=None):
     data = json.loads(pathlib.Path(week_path).read_text(encoding='utf-8'))
     songs = perek_shirah(pathlib.Path(app_path).read_text(encoding='utf-8'))
-    days = build(data, songs)
+    summaries = read_summaries(summaries_path)
+    posts = {}
+    if posts_path:
+        posts = {r['day']: r for r in
+                 json.loads(pathlib.Path(posts_path).read_text(encoding='utf-8'))}
+    days = build(data, songs, summaries, posts)
 
     missing = [n for n in range(1, 365) if n not in days]
     if missing:
@@ -251,14 +342,19 @@ def main(week_path, app_path, out_path):
         json.dumps(out, ensure_ascii=False, indent=1), encoding='utf-8')
 
     chars = sum(len(' '.join(e['body'])) for e in days.values())
+    wrote = [n for n, e in days.items() if e['kind'] == 'summary']
     print(f'{len(days)} entries, {chars:,} characters of body -> {out_path}')
+    print(f'  written summaries  : {len(wrote)} of 364'
+          + (f'  ({min(wrote)}–{max(wrote)})' if wrote else ''))
+    print(f'  from the table     : {364 - len(wrote)}')
     print(f'  with a source post : '
           f'{sum(1 for e in days.values() if e["source"])}')
-    print(f'  with a Perek Shirah verse : '
-          f'{sum(1 for e in days.values() for b in e["body"] if "Perek Shirah (" in b)}')
     sizes = sorted(len(e['body']) for e in days.values())
     print(f'  paragraphs per entry : {sizes[0]} to {sizes[-1]}')
+    if wrote:
+        ws = sorted(len(' '.join(days[n]['body']).split()) for n in wrote)
+        print(f'  words per summary  : {ws[0]} / {ws[len(ws)//2]} median / {ws[-1]}')
 
 
 if __name__ == '__main__':
-    main(*sys.argv[1:4])
+    main(*sys.argv[1:6])
