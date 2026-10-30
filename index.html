@@ -15991,15 +15991,29 @@ content: ''; float: right; width: 30px; height: 1em;
   //
   // It is written as a manuscript, docs/a-year-inside-the-day.md, and
   // companion.json is built from it by tools/companion_from_md.py. Edit the
-  // manuscript. tools/check_companion.py re-runs the sweep.
+  // manuscript. tools/check_companion.py re-runs the sweep, and the sweep
+  // itself is in docs/companion-audit.md.
   //
-  // The sweep is in docs/companion-audit.md, and the PDF link that lived in
-  // the footer is gone with it: a-year-inside-the-day.pdf is the old text and
-  // carries every one of the fabrications above.
-  fetch('companion.json')
-    .then(r => r.ok ? r.json() : null)
-    .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
-    .catch(() => {});
+  // ── STILL OFF: THE OPENING IS A PLACEHOLDER ──
+  //
+  // The rewritten text holds, but its own header says weeks 1 and 2 stand as
+  // placeholder until the real opening replaces them — creation as the
+  // creation of time, the six thousand years, the Torah before the world.
+  // Those two weeks are the first fourteen days a reader meets, and the book
+  // is not going out with its door unbuilt. So the fetch stays commented
+  // until they are written, and the entries wait in companion.json.
+  //
+  // Nothing fetches it, so applyCompanion finds COMPANION null and leaves the
+  // section hidden. Restore the four lines below and it returns.
+  //
+  // The PDF link that lived in the footer is gone for its own reason:
+  // a-year-inside-the-day.pdf is the first text and carries every one of the
+  // fabrications above.
+  //
+  // fetch('companion.json')
+  //   .then(r => r.ok ? r.json() : null)
+  //   .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
+  //   .catch(() => {});
 
   // The day of the KoT year, kept here by render() so the fetch above can
   // draw as soon as it lands, whenever that is.

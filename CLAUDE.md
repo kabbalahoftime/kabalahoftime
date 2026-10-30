@@ -106,6 +106,12 @@ work.
 
 ## The daily companion
 
+**It is off.** The rewritten text holds, but weeks 1 and 2 are placeholder
+until the real opening is written — creation as the creation of time, the six
+thousand years, the Torah before the world. Those are the first fourteen days
+a reader meets. The fetch in `index.html` is commented out with the reason at
+the switch; restoring four lines brings it back.
+
 `docs/a-year-inside-the-day.md` is the manuscript; `companion.json` is built
 from it. **Edit the manuscript, never the JSON.**
 

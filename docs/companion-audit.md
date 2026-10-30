@@ -4,9 +4,16 @@ The companion's 364 entries were AI-generated. In October 2026 a reader
 followed day 8's instruction, found no such thing on the screen, and asked.
 Everything below came out of answering that.
 
-The companion was taken offline the same day, rewritten, and put back on
-2026-10-30. **Everything below describes the first text.** It is kept because
-the failures are the reason the second text is written the way it is.
+The companion was taken offline the same day and rewritten.
+**Everything below describes the first text.** It is kept because the failures
+are the reason the second text is written the way it is.
+
+**It is still off.** The rewrite holds, but the manuscript's own header marks
+weeks 1 and 2 as placeholder until the real opening replaces them — creation
+as the creation of time, the six thousand years, the Torah before the world.
+Those are the first fourteen days a reader meets, and it does not go out with
+its door unbuilt. The entries are in `companion.json` and the fetch in
+`index.html` is commented out, with the reason at the switch.
 
 Re-run this sweep before any change to it ships:
 
