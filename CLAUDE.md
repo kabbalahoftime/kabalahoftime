@@ -112,20 +112,48 @@ each day**, filed the way Binah files them. Day 1 is Book 1's reading for week
 1's for week 33. Seven books × fifty-two weeks = 364, and 364 posts on the
 blog, one to each day, which is where each entry links.
 
-**Nothing in it is written.** Every entry is already in `index.html` — the
-weekly table `getWeeklyData` reads holds all seven books' readings for all
-fifty-two weeks. There are seven templates, one to a book, and 364 fillings of
-them. That, not a citation beside a sentence, is what stops an entry claiming
-something the app does not hold.
+An entry comes from one of two places and says which it is.
+
+**A summary**, written in `docs/companion-summaries.md` against the week's
+post for that book — what the writing teaches, not just what the readings
+are. **Edit the manuscript, never the JSON.** These are the entries the
+companion is for.
+
+**Otherwise a transcription** of the weekly table through seven templates,
+one to a book. Nothing in those is composed, so nothing in them can be
+invented, and the companion is never short of an entry while the summaries
+are being written.
 
 ```sh
 # 1. ask the page what it knows (needs a server on some port)
 node tools/dump_week_data.mjs http://127.0.0.1:8731/index.html docs/week-data.json
-# 2. build the entries
-python3 -I tools/build_companion_days.py docs/week-data.json index.html companion-days.json
-# 3. the sweep, which should flag nothing at all
+# 2. build the entries — summary where one exists, table where not
+python3 -I tools/build_companion_days.py docs/week-data.json index.html \
+    companion-days.json docs/companion-summaries.md docs/companion-posts.json
+# 3. every summary against its own post
+python3 -I tools/check_companion_summaries.py docs/companion-posts.json companion-days.json
+# 4. the app-claims sweep, which should flag nothing at all
 python3 -I tools/check_companion.py index.html companion-days.json
 ```
+
+### Writing a summary
+
+Read the post. Write from it and from nothing else. Step 3 scores the
+**proper nouns and numbers** in each entry against its own post, and any that
+the post does not have is a fault — that is the "Isaiah 60:22" shape, a
+citation the source never carried.
+
+It has caught, so far, only my own habits rather than inventions: a verse
+range merged out of two separate citations, a chapter-and-verse nobody wrote,
+*Frankfurt* for *the Frankforter*, and a dozen transliterations the blog
+spells its own way. **Match the post's spelling rather than aliasing the
+check** unless the two really are one name; the alias list says which.
+
+Two scopes are deliberately wider than one post. **Book 7** is the gathering —
+the other six books' verses braided into one song, naming none of them — so
+it answers to the week's seven posts. And a **Book 6** psalms post is often
+bare psalm text with no commentary, so an entry for it must keep to the words
+that are there; it cannot call the week Sukkot if its post never does.
 
 **Rebuild it whenever the weekly table changes**, or the companion starts
 saying last month's readings. Both steps are checkable by diff: re-run step 1

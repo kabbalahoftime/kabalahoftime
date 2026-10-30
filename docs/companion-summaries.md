@@ -428,3 +428,127 @@ The olive and the honey sit at the centre — "May my sustenance be as bitter as
 Toward the end the covenant and the flocks braid together: "I have made a covenant with My chosen one" / "if you do not know, O fairest of women" / "go your way in the footsteps of the flocks" / "my flesh, too, rests secure" / "I have sworn to David, My servant." Hophni and Phinehas come in at Shiloh, and the song ends where the shepherds are: "where do you feed, where do you rest the flocks at noon" — "and pasture your kids beside the shepherds' dwellings."
 
 *Source: [Week 3 (Book 7): The Dove is Saying](https://www.kabbalahoftime.com/2021/02/week-3-book-7-dove-is-saying.html) — 336 words*
+
+---
+
+## Day 22 · Book 1 · Week 4
+
+Week four holds the end of Sukkot — Hoshanah Rabbah, Shemini Atzeret, Simchat Torah — and the eagle sings: "And You, G-d, Lord of Hosts, Lord of Israel, awake to remember all the nations; do not be gracious to any wicked traitors, sela!" (Psalms 59:6) To remember can mean for good or for punishment, and the second half of her verse leans to the second.
+
+That is the turn this week makes. All through Sukkot we have been bringing offerings for the nations. On Shemini Atzeret they stop, and the Jewish people are alone with G-d.
+
+The eagle is the highest-flying bird, which gives her the widest view of everything made. Unlike other birds she carries her young on her wings rather than in her talons, because nothing can reach them up there: "You have seen what I did unto the Egyptians, and how I took them on eagles' wings and brought them to Me." (Exodus 19:4) She renews her feathers year after year, and in this week each community finishes the whole Torah and starts it again at once. And for the hoshanot and the hakafot we spend these days circling the bimah, which is what an eagle does.
+
+Pirkei Avot gives Rabbi Yehudah HaNassi: be as careful with a small mitzvah as with a great one, because you do not know what each is worth. Some people suppose that dancing with the Torah counts for less than the prayers of Rosh Hashanah and Yom Kippur. It does not.
+
+He then names three things to keep in mind, which are really four: know what is above you — a seeing eye, a listening ear, and all your deeds written in a book. Those are the four holidays we have just walked through. Rosh Hashanah is knowing; on Yom Kippur He sees; Sukkot is the ear; and on Hoshanah Rabbah the judgment is finished and written.
+
+The pairing is Netzach shebeChesed. The Torah ends with Moses blessing each of the twelve tribes, and Moses is netzach — victory and endurance, which is what finishing feels like. Rebbe Nachman, whose yahrzeit falls in this week, said of himself that his sefirah was netzach: "I have been victorious and I will be victorious; I have finished and I will finish." Two of his great themes are to be always happy and to always begin again, which is Simchat Torah exactly.
+
+The eagle's lesson is to care about more than yourself. Caring for others is also one of the better ways out of sadness.
+
+*Source: [Week 4 (From the Book): To Take Responsibility for All, Yet Protecting Oneself from Bad Influences](https://www.kabbalahoftime.com/2013/10/week-4-to-take-responsibility-for-all.html) — 1420 words*
+
+---
+
+## Day 23 · Book 2 · Week 4
+
+"The deeds of the Mighty Rock are perfect, for all His ways are justice; a faithful God, without injustice He is righteous and upright." (Deuteronomy 32:4) On Hoshanah Rabbah the year's judgment is sent out, and this is the verse for a judgment you can trust.
+
+The haftorah answers with noise: "With praise, I call to the Lord, for from my enemies I shall be saved." (II Samuel 22:4) These are the days of calling out and dancing — and it echoes the eagle, who asked G-d to remember the nations and not to favour traitors.
+
+The quality is verbal enunciation, saying the thing out loud. Hoshanah Rabbah is built on it: all the hoshanot of the previous days are said aloud, and the blessings of the coming year are brought down by speech. Then on Shemini Atzeret and Simchat Torah the Torah is taken up in a way that is not thought at all. We lift it with our bodies and dance. Torah cannot stay in the head; it has to come out through the mouth and into the world.
+
+The prophet is Moses, who is this quality's hardest case. Speech did not come easily to him — in large part because his soul was so high that bringing its thoughts down into words was difficult. Which is the work of these days: getting what is pure in thought down into action, and into the dancing.
+
+The Levitical city is Beth-Horon, a hollow house. On Shemini Atzeret we say goodbye to the sukkah and leave it empty — and carry its holiness out with us, into the year and into the world.
+
+What this quality asks in practice is that you talk about what you learn. If Torah is only in study hours it is not yet real; it has to get into ordinary conversation, and be told to someone else. Proverbs says, a mitzvah is a candle and the Torah is light. A candle stands in one place. Light travels.
+
+*Source: [Week 4 (Book 2): Justice, Speech, Moses, Beit-Horon and Leaving the Sukkah](https://www.kabbalahoftime.com/2013/10/week-4-book-2-justice-speech-moses-beit.html) — 471 words*
+
+---
+
+## Day 24 · Book 3 · Week 4
+
+"The Lord is a Master of war; the Lord is His Name. Pharaoh's chariots and his army He cast into the sea." The haftorah stands in the same place: "I shall sing to the Lord, the G-d of Israel. Lord, when You went forth out of Seir" — Seir being where Esau lives. Three books this week are about the enemy being dealt with.
+
+Sotah's daf takes up *yichud*, being shut in alone with someone. That is what Shemini Atzeret is: the day G-d keeps for Himself with the Jewish people, after the guests have gone.
+
+The generation is Keinan, whose name looks like a version of Kayin — Cain — with an extra *nun*, the letter that stands elsewhere for the fiftieth gate, the power of prayer and of teshuvah. His whole line runs parallel to Cain's, as a kosher version of it, and humanity carries on through Keinan while Cain's line is set aside. Though not entirely: Noah's wife Na'amah came from Cain's side.
+
+The journey goes to the hard place: "They journeyed from Etham and camped in Pi hahiroth, which faces Baal zephon; and they camped in front of Migdol." Last week was the edge of the desert. This week is the mouth of the rocks, camped in front of a place of idolatry. The work is to lift the material world and bring all of it to worship the one G-d.
+
+Keinan's lesson is that serving G-d is a *kinyan*, an acquisition — the root inside both Keinan and Cain. To acquire a thing you have to give something of yourself, usually what you worked for. The last days of Sukkot are a marathon: intense, and tiring, and what you come out with is measured by what you put in. That is why it is called *avodah*, which means work.
+
+*Source: [Week 4 (Book 3): Being Secluded with G-d and Casting the Enemy Aside](https://www.kabbalahoftime.com/2013/10/week-4-book-3-keinan-draft.html) — 487 words*
+
+---
+
+## Day 25 · Book 4 · Week 4
+
+"And it came to pass upon a day, when Elkanah sacrificed, that he gave to Peninnah his wife, and to all her sons and her daughters, portions." Portions for everyone — which is Sukkot, when offerings are brought for all the nations. And the verse is a set-up for the next one, where he gives Hannah a double portion. Which is what happens now: after the week of everyone, a day is kept for the Jewish people alone.
+
+Shemini Atzeret is the hour after a great party, when the guests have gone home and only the one He loves is still there. And the word Pirkei Avot gives this week is exactly that: *beloved*.
+
+Proverbs' fourth chapter is a chapter about not letting go. "Do not leave her, and she will preserve you; love her and she will guard you. The beginning of wisdom is to acquire wisdom, and with all your possession acquire understanding. Search for her, and she will exalt you; she will honor you when you embrace her. She will give your head a wreath of grace; she will transmit to you a crown of glory."
+
+On the twenty-first of Tishrei, Hoshanah Rabbah, is the yahrzeit of Rabbi David Moshe Friedman, the first Chortkover Rebbe, son of the Rizhiner. Chortkov drew wealthy chassidim and served Hashem through wealth, which was the Rizhiner's own way — bringing blessing down into the physical, which is this week's business.
+
+And on the twenty-fourth, the Ribnitzer Rebbe, Rabbi Chaim Zanvil Abramowitz, who went the other way entirely: a worker of miracles who fasted from Shabbat to Shabbat for some sixty years, and whose times for prayer seemed not to be bound by clock or place. Both of them are Rizhin. The Rizhiner himself descended from Rabbi Avraham the Angel and from the Maggid of Mezritch, and those two were known for exactly that kind of heavenly life.
+
+*Source: [Week 4 (Book 4): Thinking of Others, Feeling Beloved, and the Rebbes of Chortkov and Ribnitz](https://www.kabbalahoftime.com/2013/10/week-4-book-4a-rejoicing-with-creation.html) — 579 words*
+
+---
+
+## Day 26 · Book 5 · Week 4
+
+"Your cheeks are comely with rows, your neck with necklaces. We will make you rows of gold with studs of silver." These two are G-d speaking to us, and Rashi reads them as the spoils of the sea, when Israel emptied Egypt out — physically, and of its sparks.
+
+The words themselves sound like this week. *Torim*, rows, are also lines: lines of dancers, or lines of a song. *Charuzim*, studs, are also rhymes — the piyyutim of the hakafot and of Tefilat Geshem. And silver, Chassidus says, comes from *kissufim*, longing: the wanting to hold on to G-d in these days. Rashi adds a forehead plate to the rows. He adorns us and we adorn Him.
+
+The strongest hint is in the first word. *Lehi* is a cheek, and also a jawbone — the jawbone of a donkey, *chamor*, matter, with which Samson struck down a thousand Philistines, and out of which water came. The great dancing of Sukkot is the water drawing, and out of that water came Ruach HaKodesh, as the spirit rested on Samson in that fight.
+
+The Baal Shem Tov, on Simchat Torah: Michael boasted that the archangel Metat ties crowns for G-d out of Israel's prayers — "Today, I shall fashion an even more glorious crown for the Almighty out of these torn shoes."
+
+Then the third verse: "While the king was still at his table, my spikenard gave forth its fragrance." Sukkot belongs to all the nations, and then on the last day He keeps a private audience for us alone — just ourselves, at His table. The commentators do not agree whether that fragrance is sweet or not, which may be the point: it is closeness, and a little inadequacy, as the reading of the Torah starts over.
+
+Of the seventy souls the fourth is Hezron — also a descendant of Judah, the father of Caleb. *Chatzer* is a courtyard, and this is the Temple courtyard, where the dancing was: "So abundant was the light that there was no courtyard in Jerusalem that was not illumined by the light coming from the place of the water-drawing." (Mishnah, Sukkah 5:2)
+
+Shevuot's fourth daf is about punishment for inaction, and these days are all deeds. Jeremiah's fourth chapter asks for the same turning: "If you return, O Israel, says the Lord, to Me, you shall return, and if you remove your detestable things from My Presence, you shall not wander." Its later verses keep returning to the voice of the shofar, as the season of judgment closes.
+
+*Source: [Week 4 (Book 5): The Crown of the Angel Metat](https://www.kabbalahoftime.com/2013/10/week-4-4b-crown-of-angel-metat.html) — 763 words*
+
+---
+
+## Day 27 · Book 6 · Week 4
+
+Hoshanah, Shmini Atzeret and Simchat Torah in psalms: the tenth, eleventh and twelfth, with a verse of the Tikkun HaKlali, the opening of Psalm 32, and a verse of Psalm 89.
+
+Psalm 10 is the longest look this book takes at a man who believes he will not be caught. "Why, O Lord, do You stand afar, do You hide Yourself in times of distress?" The wicked man glories in what he wants; he says in his heart, "I shall not falter; for all generations no evil will befall me"; his mouth is full of oaths and deceit; he lies in wait "like a lion in his lair" for the poor. Twice he says the thing the psalm is answering: "God has forgotten, He conceals His countenance, He will never see." And the answer comes back flat: "Indeed, You do see!" It ends asking for the orphan and the downtrodden, "so that the wicked shall no longer crush the frail of the earth."
+
+Psalm 11 is short and steady. "I have placed my trust in the Lord; thus how can you say of my soul… that it flees like a bird?" The wicked have the arrow already on the string, to shoot in the dark at the upright. And then the sentence that settles it: "The Lord is in His holy Sanctuary, the Lord's throne is in heaven, yet His eyes behold, His pupils probe mankind."
+
+Psalm 12 is about speech gone bad. "Men speak falsehood to one another; with flattering lips, with a duplicitous heart do they speak"; those who say, "With our tongues we shall prevail." Against them: "The words of the Lord are pure words, like silver refined in the finest earthen crucible, purified seven times."
+
+The Tikkun HaKlali's verse is the one these days are for: "Make known to me the path of life, that I may be satiated with the joy of Your presence, with the bliss of Your right hand forever." Psalm 32 opens on forgiveness — "Praiseworthy is he whose transgression is forgiven, whose sin is concealed" — and on what silence cost: "When I was silent, my bones decayed with my moaning all day long." Psalm 89 holds the throne: "Until eternity, I shall establish your seed."
+
+*Source: [Week 4 (Book 6): Reviewing the Week of Hoshanah, Shmini Atzeret, Simchat Torah - Psalms 10-12; 16:11; 32:1-3; 89:5](https://www.kabbalahoftime.com/2013/10/week-4-book-5-reviewing-third-week-of.html) — 772 words*
+
+---
+
+## Day 28 · Book 7 · Week 4
+
+The eagle opens, and this gathering is justice and praise braided with a table set for two.
+
+"And You, G-d, Lord of Hosts, Lord of Israel" meets Haazinu's verdict — "a faithful God, without injustice He is righteous and upright" — and then the haftorah's shout, "With praise, I call to the Lord, for from my enemies I shall be saved," and the sea closing over the chariots.
+
+The eagle's "awake to remember all the nations" is answered by "the Lord is a Master of war; the Lord is His Name," and the Rock's perfect deeds come in two halves around it, "for all His ways are justice." Seir follows, and then the hard end of the eagle's verse: "do not be gracious to any wicked traitors, sela!"
+
+Then the song turns, and the rest of it is almost entirely tenderness. "Make known to me the path of life" / "Your cheeks are comely with rows, your neck with necklaces" / "And it came to pass upon a day, when Elkanah sacrificed" / "with the bliss of Your right hand forever" / "Praiseworthy is the man to whom the Lord ascribes no iniquity."
+
+The portions for Peninnah and her children are set beside the concealed sin, and the silence beside the king's table: "whose sin is concealed" / "When I was silent" / "While the king was still at his table, my spikenard gave forth its fragrance" / "my bones decayed with my moaning all day long."
+
+It closes on being forgiven and adorned at once: "Praiseworthy is he whose transgression is forgiven" / "that I may be satiated with the joy of Your presence" / "We will make you rows of gold with studs of silver."
+
+*Source: [Week 4 (Book 7): The Eagle is Saying](https://www.kabbalahoftime.com/2021/02/week-4-book-7-eagle-is-saying.html) — 244 words*

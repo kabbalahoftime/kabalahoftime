@@ -71,6 +71,12 @@ ALT = {
     # Chabad's translation, which writes God. Spelling the Name is a house
     # convention, not a claim about anything.
     'g-d': 'god', 'shema': 'shemah', 'shabbat': 'shabat',
+    # Transliteration. The blog settled on one spelling and a summary
+    # written here reached for another; they are one name either way.
+    'shemini': 'shmini', 'esau': 'eisav', 'noah': 'noach',
+    'michael': 'michoel', 'sabbath': 'shabbat', 'isaac': 'yitzchak',
+    'jacob': 'yaakov', 'moses': 'moshe', 'rebecca': 'rivkah',
+    'elijah': 'eliyahu', 'samson': 'shimshon', 'solomon': 'shlomo',
 }
 
 # Twelve years of Blogger has eaten a lot of spaces: "Midrashteaches",
@@ -91,7 +97,7 @@ def content(text):
     out = []
     for w in words(text):
         b = bare(w)
-        for part in [b] + re.split(r"['\-]", b):
+        for part in [b, b.replace("'", '')] + re.split(r"['\-]", b):
             if len(part) > 2 and part not in STOP:
                 out.append(part)
                 if part in ALT:
@@ -192,7 +198,9 @@ def main(posts_path, companion_path, limit=None):
         own = {str(n), str(entry.get('week', '')), str(entry.get('book', '')), '364', '52'}
         mynums = [x for x in mynums if x not in own]
 
-        rows.append((n, pct, len(set(mine)), unfound, mynums))
+        if unfound:
+            flagged += 1
+        rows.append((n, pct, len(mine), unfound, mynums))
 
     rows.sort(key=lambda r: -r[1])
     print(f'{len(rows)} summaries checked against their posts'
