@@ -1087,9 +1087,23 @@ border-bottom: 1px solid var(--border);
    any Hebrew run inside a pane or a section label keeps its own spacing.
    These headings were always written this way; it is being said in CSS now
    because the readings have moved into panes where the page's own check can
-   see them. */
+   see them.
+
+   This rule cannot reach a heading whose tracking is inline: a style
+   attribute beats any selector, so the Hebrew inside it inherits the 2.5px
+   however this is written. Two headings were caught that way — Abuchatzeira
+   and Rebbe Rayatz. A heading set inline has to hold its Hebrew in its own
+   <bdi lang="he" style="…letter-spacing:0">, which is how the Maharal and
+   Shenei Luchot headings beside them were always written.
+
+   The last five selectors are the labels untrackHebrew already walks. It
+   wraps their Hebrew in .heb, which is untracked — but only once it has run,
+   and the check caught .yr-title in the gap before it did. Saying it in CSS
+   as well means the answer does not depend on which pass arrives first. */
 .keter-section-label[lang="he"], .keter-section-label [lang="he"],
-.sefirah-panes [lang="he"], .keter-panes [lang="he"] {
+.sefirah-panes [lang="he"], .keter-panes [lang="he"],
+.title-sub [lang="he"], .dc-label [lang="he"], .sefirah-detail [lang="he"],
+.heb-picker-title [lang="he"], .yr-title [lang="he"] {
 letter-spacing: 0;
 }
 
@@ -4516,13 +4530,13 @@ content: ''; float: right; width: 30px; height: 1em;
       <div id="yesod-hida-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-hida-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Abuchatzeira — אַבוּחַצִּירָא</div>
+      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Abuchatzeira — <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">אַבוּחַצִּירָא</bdi></div>
       <div id="yesod-abu-main" style="font-size:0.88rem;margin-bottom:4px;">Loading…</div>
       <div id="yesod-abu-meta" style="font-size:0.78rem;color:var(--ink-mid);"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
       <div id="yesod-parasha-cycle"></div>
       <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
-      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="9">Rebbe Rayatz — אַדְמוּ"ר הָרַיָּ"ץ</div>
+      <div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;" data-rebbe="9">Rebbe Rayatz — <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">אַדְמוּ״ר הָרַיָּ״ץ</bdi></div>
       <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.chabad.org/library/article_cdo/aid/6277697/jewish/Likkutei-Dibburim.htm" target="_blank" style="color:var(--gold)">Likkutei Dibburim — Chabad.org</a></div>
     </div>
   </div>
