@@ -50,8 +50,37 @@ def flatten(entry):
         out.append(' '.join(v) if isinstance(v, list) else str(v or ''))
     return ' '.join(out)
 
+NUMBERS = {'88': 'eighty-eight', '52': 'fifty-two', '49': 'forty-nine',
+           '22': 'twenty-two', '28': 'twenty-eight', '13': 'thirteen',
+           '15': 'fifteen', '72': 'seventy-two', '91': 'ninety-one',
+           '41': 'forty-one', '40': 'forty', '364': 'three hundred and sixty-four'}
+
+
+def variants(phrase):
+    """The same claim, spelled the ways the app might spell it.
+
+    Day 151's "88 Mochin minutes" was reported as invented because the search
+    was for 88 and the app writes "eighty-eight". Absence was concluded from a
+    search that could not have found it. Apostrophes do the same: Ma'alot
+    HaZman is in the app with a curly one.
+    """
+    out = {phrase}
+    for a, b in NUMBERS.items():
+        if a in phrase:
+            out.add(phrase.replace(a, b))
+        if b in phrase.lower():
+            out.add(re.sub(b, a, phrase, flags=re.I))
+    return {v.replace('\u2019', "'").replace('\u2018', "'") for v in out}
+
+
 def present(phrase, hay):
     """Is this phrase somewhere in the app? Short ones are not worth judging."""
+    if any(_present_one(v, hay) for v in variants(phrase)):
+        return True
+    return False
+
+
+def _present_one(phrase, hay):
     n = re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9 ]+', ' ', phrase.lower())).strip()
     if len(n) < 8:
         return True

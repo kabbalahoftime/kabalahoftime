@@ -24,13 +24,30 @@ and a reader has no way to tell.
 |---|---|---|
 | 36 | "The order is what's asked for, not the measure" — **the app's motto**, and again as "the beginner's charter" | no such string anywhere |
 | 38 | the entry is **titled** "The Order, Not the Measure", and quotes "Hakatan yihiyeh l'elef" — "the small shall become a thousand" | neither phrase is in the app |
-| 151 | the fifteen are climbed in the **"88 Mochin minutes"** around Chatzot — **"the app's guide says"** | no such concept. All 19 uses of "88" are opacity values, mitzvah numbers and daf counts |
 | 154 | *hakatan yihyeh le'alef* — "the smallest shall become a thousand" (Isaiah 60:22), **"in the app's own words"**, plus the motto a third time | no "hakatan", no "smallest … thousand", no "60:22" |
 | 288 | the tzadikim cycle, "when the soul reached ultimate completion" | no such string |
 
 An invented motto, an invented verse citation, and an invented number — each
 stated with complete confidence, and one of them load-bearing enough to title
 an entry.
+
+### Correction — day 151 was wrongly listed here
+
+The first version of this audit listed day 151's **"88 Mochin minutes"** as
+invented. It is not. The app says it four times, in the Mochin dialogs:
+*"the eighty-eight minutes wrapped around Chatzot."*
+
+The search was for `88`. The app spells the number out. Absence was concluded
+from a search that could not have found it — which is the same mistake the
+companion makes, committed by the person auditing the companion.
+
+`Ma'alot HaZman` is real too; it uses a curly apostrophe, and a straight-quote
+search missed it.
+
+**The rule this leaves:** before writing "no such string", search the spelled
+form, the digit form, and both apostrophes. A checker that reports absence is
+only as good as its worst variant.
+
 
 ## Routes a reader cannot follow
 
