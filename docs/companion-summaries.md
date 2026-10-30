@@ -5520,3 +5520,113 @@ Then the thirst and the testing: "And there was no water for the people to drink
 And the end is Midian and the going out with silver and gold: "Because of Midian the children of Israel made for themselves" / "And it was, when Israel had sown, that Midian came up" / "So the people quarreled with Moses" / "And the hand of Midian prevailed against Israel" / "Egypt rejoiced with their departure" / "For their fear had fallen upon them" / "The dens which are in the mountains" / "And the caves and the strongholds" / "And He took them out with silver and gold" / "And there was no pauper among their tribes."
 
 *Source: [Week 45 (Book 7) : The Creeping Creatures Are Saying](https://www.kabbalahoftime.com/2020/08/week-45-creeping-creatures-are-saying.html) — 288 words*
+
+---
+
+## Day 316 · Book 1 · Week 46
+
+The Prolific Creeping Creatures are saying: "Your wife shall be like a fruitful vine in the recesses of your house; your children like olive shoots around your table." (Psalms 128:3) This is the last week of Av, and it holds the yahrzeit of the Rebbe's father, Rabbi Levi Yitzchak Schneerson, on the 20th of Av.
+
+In the week after Tu B'Av, Perek Shirah is still on marriage and reproduction. Keeping the theme going says that love, marriage and building a home are not a single action or decision: the feeling that first brought a couple together has to be worked at and improved across a whole life, day by day, week by week, month by month, year by year.
+
+The gematria of forty-six is Levi. Levi and Shimon were both men with an overwhelming capacity for violence and radical action, especially together: the two were responsible for killing the inhabitants of Shchem, and were the main actors in the kidnapping and sale of Joseph. The tribe of Levi turned those extreme qualities into good ones, using their zealousness on G-d's behalf, and became a tribe made up entirely of priests. In the end Shimon too will use all that strength and potential only for the good.
+
+Pirkei Avot gives Rabbi Matya the son of Charash: be first to greet every man, and be a tail to lions rather than a head to foxes. It is striking that this lesson falls in the last week of Av, whose sign is Leo, and a week from Rosh Chodesh, which means the head of the month. In the past Shimon and his tribe led actions that were fox-like; and the Tanach also recounts that in the end the tribe agreed to be the tail of a lion, the tribe of Judah. After Joshua's passing, when it was time to conquer the rest of the Land, Judah was chosen to go first, and Judah turned to Shimon and asked it to follow: "Come up with me into my lot, and we will fight against the Canaanites, and I will also go with you into your lot." The Bnei Yissachar explains that the statement runs deeper, and connects the redemption of Passover, in Nissan, which is Judah, with the future redemption of Mashiach, born on Tisha B'Av, which is Shimon. On Passover we keep an egg on the Seder plate to remember the destruction that happened in Av; and in the final redemption, for all its unprecedented miracles, we will still remember the redemption from Egypt that happened in Nissan.
+
+Likewise, under enormous Soviet pressure Rabbi Levi Yitzchak held firm to his values and refused to associate himself with the fox-like Communist leadership. His extreme care over the kashrut of the matzah he mass-produced for Passover shows that resolve, and his refusal to give in to Communist demands got him exiled to Siberia, where he passed away in this week of the year. It is known that the lion brings its tail to its head, and the fox brings its head to its tail — and today the Rebbe's father is still held in tremendous esteem as a leader, rabbi and scholar, while Soviet Communism is a completely outdated and bankrupt idea.
+
+The combination is netzach shebemalchut. We have to be persistent in connecting ourselves to the King of kings and revealing Him in this material world. And the lesson from the prolific creeping creatures is that the humility this month of judgment gave us has to be put to use: to grow and multiply, like the vine and the olive tree.
+
+*Source: [Week 46 (From the Book): To Know Our Place in Order to Be Truly Happy](https://www.kabbalahoftime.com/2014/08/week-46-from-book-to-know-our-place-in.html) — 805 words*
+
+---
+
+## Day 317 · Book 2 · Week 46
+
+The last week of Av, and the yahrzeit of the Rebbe's father, Rabbi Levi Yitzchak Schneerson. Haazinu: "And he said to them, 'Set your hearts to all of the words which I bear witness for you this day, so that you may command your children to observe to do all the words of this Torah.'" (Deuteronomy 32:46) Hearing again — and Rashi notes that setting the heart also refers to the eyes and the ears, which belong to Tammuz and Av. Rav Levi Yitzchak was the perfect example of a man who set the words of the Torah to heart and trained his child, the Rebbe, with the utmost perfection; which is this week's creeping creatures and their children.
+
+The other side of those creatures, total nullification and humility, is in the Haftorah verse: "The strangers will wilt, and become lame from their bondage." (II Samuel 22:46) The enemies wilting before King David.
+
+The quality is listens and adds, shomeah umosif — the main tikkun of Av, the ability to listen properly and positively.
+
+The prophet is Mordechai Bilshan, and Mordechai and the redemption of Purim are listening and adding themselves. Mordechai listened to a conversation of men who meant to assassinate King Achashverosh and reported it to Queen Esther, and the conspiracy fell apart. His words were added to the chronicles of the king, and later, when the future of the Jewish people hung in the balance, Achashverosh checked the chronicles and saw that Mordechai had saved him and had not been rewarded for it. That was the crucial turning point of the Megillah. And Esther's part in repeating Mordechai's words — and in attributing them to him by name — is later named as a quality that brings redemption. Mordechai is the last known prophet of the 48 the Talmud lists; Esther is the last female prophet, and comes in week 52.
+
+The Levitical City is 'Ain, which means spring. A famous Ayin in Israel today is Ein Gedi, near the Dead Sea, among many other springs in the Land. A spring is the sign of something much deeper, coming up from far below the ground, and it takes close attention to notice — Ayin also means eye, a window into the soul. And 'Ayin is near the word Ayin spelled with an Alef, which means nothingness, and stands for nullification. Like the Prolific Creatures, our salvation comes from humility, from our sense of Ayin, as in the verse "Essah Eynai el heHarim, M'Ayin Yavoh Ezri" — which can be read: I turn my eyes to the mountains, and my salvation comes from my sense of Ayin.
+
+*Source: [Week 46 (Book 2): Mordechai and the Quality of "Listens and Adds"](https://www.kabbalahoftime.com/2014/08/week-46-book-2-mordechai-and-quality-of.html) — 582 words*
+
+---
+
+## Day 318 · Book 3 · Week 46
+
+Beshalach keeps on with the thirst, and now Moshe himself is in crisis: "The people thirsted there for water, and the people complained against Moses, and they said, Why have you brought us up from Egypt to make me and my children and my livestock die of thirst? Moses cried out to the Lord, saying, What shall I do for this people? Just a little longer and they will stone me!" He is criticised for believing the people could come to stone him.
+
+The verses of the Tanach have their own crisis of sustenance: "And they encamped against them, and they destroyed the produce of the earth, until you come to Gaza. They would leave no sustenance in Israel, neither sheep, nor ox, nor donkey. For they and their cattle came up, and their tents, and they came as numerous as locusts; both they and their camels without number, and they came into the land to destroy it." Midian and Amalek again. Both passages belong to the suffering of Av, which is meant to bring us to humility and repentance.
+
+Daf Mem Vav of Sotah keeps on with the Eglah Arufah, the qualifications of the calf itself, and the importance of escorting people out of a city. It turns on Elisha, who, had he been escorted out, would not have set bears on 42 youngsters. That city had a serious water problem and he had just remedied its water, and the miracle made the boys' water-carrying work useless; so they insulted him, and that brought the response. Like Moshe, Elisha is criticised for not controlling his anger.
+
+The generation is Ahaz, son of Jotham, a truly terrible king — weak and extremely idolatrous, and he did tremendous damage; through his weakness and subservience to other kings the treasures of the Temple were looted. His rule was contemporary with Hoshea ben Elah and Pekah in Israel. Ahaz means to grasp, to hold — and instead of holding tight to Hashem and relying on His mercy, he tried to hold on to everyone and everything else.
+
+The forty-sixth week goes with conquering the Cana'anites, who belong to the negative side of the fourth sefirah, Netzach, victory. Their name comes from Cana'an, whose root is Canah, from the verb to subdue. Cana'an is also the fourth son of Cham, cursed by Noah for Cham's disgraceful behaviour, which made it impossible for Noah to have a fourth son of his own; Cham's motive in essentially castrating his father was that he did not want to share the world with any other progeny of Noah. He wanted to rule as much as he could, with no competition — which is the negative side of Netzach: angry, recalcitrant, fixed on winning, unwilling to see another person's view. The Cana'anites were given the chance to surrender and none of them took it. All seven nations in the Land are called Cana'anites, so this group being named for Cana'an seems to say that it somehow holds the qualities of all seven — and Netzach too is said to hold the qualities of all the other Sefirot.
+
+*Source: [Week 46 (Book 3): Handling Crisis with Humility and not Anger](https://www.kabbalahoftime.com/2014/08/week-46-book-3-handling-crisis-with.html) — 657 words*
+
+---
+
+## Day 319 · Book 4 · Week 46
+
+The verse is the boy at his work: "And Samuel was serving before the Lord, being a lad girded with a linen robe." Girding is a word of strength, and the linen ephod is a sign of his holiness and his growth.
+
+The Pirkei Avot quality becoming to the righteous and to the world is exactly that: strength. Again, not any strength, but the kind that stays firm in serving G-d, in order to serve Him as well as possible.
+
+Chapter 2 of the Song of Songs opens on strength of a particular kind — staying strong under attack, and going on serving with beauty and holiness. "I am a rose of Sharon, a rose of the valleys." Rashi: this is prettier than the rose of the mountains because it is always moist, since the sun has no strength there. "As a rose among the thorns, so is my beloved among the daughters." Rashi: as a rose among the thorns, which pierce it and it stays constant in its beauty and its redness, so is my beloved among the daughters — they entice her to stray after strange gods as they do, and she remains firm in her faith.
+
+The week holds the yahrzeits of Rabbi Levi Yitzhak Schneerson, father of the Lubavitcher Rebbe, on the 20th of Av, and Rabbi Aharon of Belz, the fourth Rebbe of Belz, on the 21st. Rabbi Levi Yitzchak was considered by the Rebbe Reshab to be one of his three greatest chassidim. An outstanding scholar and a leading Kabbalist of his generation, he was Chief Rabbi of the major Ukrainian city Yekaterinoslav, today called Dniepropetrovsk, until his arrest and exile. His extensive writings from exile, crammed into the margins of his books, were rescued, smuggled out, brought to his son, and are being published in a multi-volume set called Toldot Levi Yitzchak. Rabbi Aharon of Belz, the fourth rebbe of that dynasty, was considered one of the purest holy men of his generation; in 1944 he miraculously escaped the Nazis and moved to Israel, where after a brief time in Jerusalem he set up his court in Tel Aviv. The current Belzer Rebbe, who has built a huge centre in Jerusalem, is his nephew. Also this week: Rabbi Yaakov Culi, author of the Meam Loez, on the 19th of Av, and Rabbi Meir Hagadol of Premishlan on the 22nd.
+
+*Source: [Week 46 (Book 4): Serving G-d with Strength](https://www.kabbalahoftime.com/2014/08/week-46-book-4a-serving-g-d-with.html) — 518 words*
+
+---
+
+## Day 320 · Book 5 · Week 46
+
+The Song's verse is a sister not yet grown: "We have a little sister who has no breasts; what shall we do for our sister on the day she is spoken for?" Rashi explains that her time for redemption has not yet come — a vulnerable position, which leaves us open to attack. Which is the Jewish experience in Av, and the difficulties the Rebbe's father endured. In the end our situation will improve and we will be redeemed.
+
+Of the seventy souls that descended to Egypt, the forty-sixth is Briah, whose name means cut down, cropped. And with him Dan, whose name comes from Din, judgement. We are near the end of the period of stern judgement, in which we have been cut down and humbled.
+
+Daf Mem Vav of Shvuot keeps on with the oaths of a worker, and again with someone entering another's house without permission, and someone injured — still the tragic events of Av. And the daf ends by opening a discussion of who is disqualified from taking oaths, such as those who have sworn falsely before, which looks like the beginning of Teshuvah and of our need to change, the central theme of Elul.
+
+Jeremiah's forty-sixth chapter is the downfall of Egypt, which will be cut down and paid back for its sins, so that the Jewish people, so long open to attack, will not have to live in fear. The focus turns to the other nations and their faults. Rebbe Nachman teaches that each gentile nation is associated with a particular impurity, and as we come to Elul and begin correcting our ways we take one source of impurity at a time. "They will cut down her forest, says the Lord, for they are innumerable, for they are more numerous than locusts and they are uncountable. The daughter of Egypt has been put to shame; she has been delivered into the hand[s] of the people of the north." And then the promise, which is the end of the chapter: "You fear not, O Jacob My servant, and be not dismayed, O Israel! for behold, I will redeem you from afar and your children from the land of their captivity, and Jacob shall return and be quiet and at ease, and there shall be none who disturb his rest. You fear not, My servant Jacob, says the Lord, for I am with you, for I will make a full end of all the nations where I have driven you, but of you I will not make a full end, but I will chastise you justly, and I will not completely destroy you."
+
+*Source: [Week 46 (Book 5): Enduring Through Vulnerable Times](https://www.kabbalahoftime.com/2014/08/week-46-book-4b-enduring-through.html) — 711 words*
+
+---
+
+## Day 321 · Book 6 · Week 46
+
+The last week of Av in psalms: the hundred and thirty-sixth, hundred and thirty-seventh and hundred and thirty-eighth, with three verses of Psalm 105 and one of Psalm 89.
+
+The first of them has twenty-six verses, for the twenty-six generations between the creation of the world and the giving of the Torah, and every one of them ends the same way: for His kindness is forever. It runs from the making of the heavens and the spreading of the earth above the waters, through the great lights, the sun to rule by day and the moon and stars by night; then Egypt struck through its firstborn and Israel brought out with a strong hand and an outstretched arm; then the Sea of Reeds split into sections and Israel brought across and Pharaoh cast in; then the desert, and the great kings struck down, Sichon of the Amorites and Og of Bashan, and their land given as a heritage to Israel His servant. And then the two verses that make the whole of it personal: "Who remembered us in our humiliation, for His kindness is forever. And redeemed us from our oppressors, for His kindness is forever." And the last: "Who gives food to all flesh, for His kindness is forever. Praise the G-d of heaven, for His kindness is forever."
+
+Psalm 137 is the time of the destruction, when Nebuchadnezzar would ask the Levites to sing in captivity as they had in the Temple, and they would answer, how can we sing the song of G-d upon alien soil — and they were then comforted by Divine inspiration. "By the rivers of Babylon, there we sat and wept as we remembered Zion. There, upon the willows, we hung our harps. For there our captors demanded of us songs, and those who scorned us-rejoicing, [saying,] 'Sing to us of the songs of Zion.' How can we sing the song of the Lord on alien soil?" Then the oath on himself: "If I forget you, Jerusalem, let my right hand forget [its dexterity]. Let my tongue cleave to my palate if I will not remember you, if I will not bring to mind Jerusalem during my greatest joy!" And the asking at the end: "Remember, O Lord, against the Edomites the day of [the destruction of] Jerusalem, when they said, 'Raze it, raze it to its very foundation!'"
+
+Psalm 138 is David's praise for the kindness shown him and for the promise of kingship kept. "I will thank You with all my heart, in the presence of princes I shall praise You. I will bow toward Your Holy Sanctuary, and praise Your Name for Your kindness and for Your truth; for You have exalted Your word above all Your Names. On the day that I called out You answered me, You emboldened me, [You put] strength in my soul." Then the eye that notices: "For though the Lord is exalted, He sees the lowly; the High One castigates from afar." And the asking: "If I walk in the midst of distress, keep me alive." And the last line: "Lord, complete [Your kindness] on my behalf. Lord, Your kindness is forever, do not forsake the work of Your hands."
+
+Psalm 105's verses are the shelter and the water: "He spread out a cloud for shelter, and fire to illuminate the night. They asked, and He brought quails, and the bread of heaven sated them. He opened a rock and water flowed; in the deserts ran rivers." And Psalm 89's verse asks the question of these weeks: "How long, O Lord? Will You hide forever? Will Your anger burn like fire?"
+
+*Source: [Week 46 (Book 6): Reviewing the Last Week of Av - Psalms 136-138; 105:39-41; 89:47](https://www.kabbalahoftime.com/2014/08/week-46-book-5-reviewing-last-week-of.html) — 849 words*
+
+---
+
+## Day 322 · Book 7 · Week 46
+
+The prolific creeping creatures open, and the week sets a household against a thirst.
+
+The little sister and the fruitful vine first: "We have a little sister who has no breasts" / "What shall we do for our sister on the day she is spoken for?" / "Your wife shall be like a fruitful vine in the recesses of your house" / "Your children like olive shoots around your table" / "So that you may command your children" / "To observe to do all the words of this Torah" / "And Samuel was serving before the Lord" / "Being a lad girded with a linen robe."
+
+Then the thirst, and the camels without number: "The people thirsted there for water" / "And the people complained against Moses" / "Both they and their camels without number" / "And they came into the land to destroy it" / "And they said, 'Why have you brought us up from Egypt To make me and my children and my livestock die of thirst?'" / "The strangers will wilt, And become lame from their bondage."
+
+Then the produce destroyed, and the cry of a leader: "And they encamped against them, And they destroyed the produce of the earth" / "Until you come to Gaza" / "Moses cried out to the Lord" / "Saying, 'What shall I do for this people?'" / "Just a little longer and they will stone me!" / "They would leave no sustenance in Israel" / "Neither sheep, nor ox, nor donkey."
+
+And the end is the cloud and the rock: "He spread out a cloud for shelter" / "And fire to illuminate the night" / "For they and their cattle came up, and their tents" / "And they came as numerous as locusts" / "They asked, and He brought quails, and the bread of heaven sated them" / "He opened a rock and water flowed; in the deserts ran rivers" / "And he said to them, set your hearts to all of the words" / "Which I bear witness for you this day."
+
+*Source: [Week 46 (Book 7): The Prolific Creeping Creatures Are Saying](https://www.kabbalahoftime.com/2013/08/week-46-book-7-prolific-creeping.html) — 274 words*
