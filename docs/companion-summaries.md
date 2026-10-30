@@ -2588,3 +2588,123 @@ Then the house, with the refuge inside it: "Directed toward Your habitation" / "
 And the end is the orchard and the cymbals: "Your arid fields are as a pomegranate orchard" / "With sweet fruit, henna and spikenard" / "Praise Him with sounding cymbals!" / "Into the valley they rushed forth with their feet" / "Spikenard and saffron, calamus and cinnamon, with all frankincense trees" / "He delivered me because He took delight in me" / "Myrrh and aloes, with all the chief spices" / "A garden fountain, a well of living waters and flowing streams from Lebanon" / "Praise Him with loud clashing cymbals!"
 
 *Source: [Week 20 (Book 7): The Spider is Saying](https://www.kabbalahoftime.com/2021/01/week-20-book-7-spider-is-saying.html) — 261 words*
+
+---
+
+## Day 141 · Book 1 · Week 21
+
+The fly, when Israel is not busying itself with Torah, is saying: "The voice said, 'Call out'. And he said, 'What shall I call out? All flesh is grass, and all its grace is as the flower of the field.' '…The grass withers, the flower fades, but the word of our Lord shall endure forever.'" And then: "I will create a new expression of the lips: Peace, peace for him who is far off and for him who is near, says G-d, and I will heal him." (Isaiah 40:6,8; 57:19) The song is a kind of dialogue — one voice says call out, and the second asks what there is to say.
+
+This is the last week of Shevat, and it holds the yahrzeit of Rebbetzin Chaya Mushka, the Rebbe's wife, on the 22nd of Shevat. Just after Tu B'Shvat, with trees and nature still in view, the fly comes to remind us that nature and life itself, beautiful and pleasurable and meaningful as they are, are fleeting. They reflect the Creator; only the Creator, and those attached to Him, last.
+
+Flies do not disturb the tzadikim. Perhaps that is why we only know what the fly sings when the Jews are not studying Torah: when we are truly engaged in it we are all tzadikim, no fly comes near, and so there is no way to hear the song.
+
+The fly recalls the Shunammite woman, the Ishah Shunamit. She kept the great mitzvah of hachnasat orchim, hospitality, in the tradition inherited from Abraham, and prepared a room so the prophet Elisha could always stay with her and her husband. The Talmud and the Zohar explain how she knew his greatness: she never saw a fly land on his table. His table was like the altar of the Temple, where there were never flies, despite the constant meat and blood — so the story is about the sanctification of pleasure. She was childless and always satisfied with what she had; asked by the prophet whether she needed anything, she answered, "I dwell within my people." Her behaviour toward Elisha, the disciple of Elijah, is one of the prime biblical examples of humility, modesty, kindness and hospitality.
+
+The same things show in the Rebbetzin's life. She had no children of her own and considered all her people, the Chassidim, to be her children. She was the Rebbe's best friend and most devout partner throughout his life, and she was known for her great kindness, hospitality and modesty, learned in the home of her father, Rabbi Yosef Yitzchak Schneersohn, the Sixth Lubavitcher Rebbe.
+
+Twenty-one is the sum of the first three letters of Hashem's name. It is also the square root of 441, the gematria of Emet, truth, which is G-d's seal.
+
+Pirkei Avot gives Rabbi Yaakov: one who walks along a road and studies, and interrupts his studying to say, "How beautiful is this tree!", "How beautiful is this ploughed field!" — the Torah considers it as if he had forfeited his life. That is the fly's song again. The eternal words of the Creator are not to be put down in order to enjoy something passing, or even to exalt His own Creation. The Maggid of Mezritch reads the teaching as being about someone who stops learning in order to reflect on how much he has learned.
+
+This week completes the third cycle of seven, and the combination is Malchut shebeTiferet, kingship within beauty. Malchut is a female sefirah, and the truest feminine beauty is inner beauty: "Kol Kvudah Bat Melech Pnimah," all the glory of the princess is within. One of the last verses of Eshet Chayil, sung before Kiddush on Shabbat night, says the same — "charm is deceitful and beauty is vanity; a woman that is G-d-fearing, she is the one to be praised" — and those are among the last verses of Solomon's Book of Proverbs. King Solomon, who also wrote Ecclesiastes, knew what held permanent value and what was only vanity of vanities. The fly teaches the same lesson, and adds that healing always comes through Him, with no need of intermediaries.
+
+The 22nd of Shevat is also the yahrzeit of Rabbi Menachem Mendel of Kotsk, who was known for cutting through people's flowery, egocentric behaviour and keeping entirely to the truth.
+
+*Source: [Week 21 (From the Book): To Keep Things in Perspective](https://www.kabbalahoftime.com/2014/01/week-21-from-book-to-keep-things-in.html) — 1080 words*
+
+---
+
+## Day 142 · Book 2 · Week 21
+
+The last week of Shevat. Haazinu answers provocation with provocation: "They have provoked My jealousy with a non G-d, provoked My anger with their vanities. Thus, I will provoke their jealousy with a non people, provoke their anger with a foolish nation." (Deuteronomy 32:21) Read positively, it turns around completely: they have been zealous for Me against a non-G-d and angered for Me against the vanities of the nations, so I will be zealous for them and angry for them in return.
+
+The Haftarah verse says exactly that: "The Lord rewarded me according to my righteousness; According to the cleanness of my hands He recompensed me." (II Samuel 22:21) Zealotry, done rightly, comes out of the depths of faith, as it did in Pinchas and Eliyahu, and the promise is that we will be rewarded for our emunah. Vanities, meanwhile, are a focus on what is not essential — the same thing as "How beautiful is this tree."
+
+So the quality is minimized conversation, miut sichah; idle talk is the standing example of vanity. Conversation distracts and runs on into consequences nobody intended, which is why the sages warn against too much of it, even with one's own wife. But purposeful conversation taken with miut, humility and smallness, is a very good quality. Prayer itself is called conversation — Isaac went to converse in the field — and Rebbe Nachman holds Hitbodedut, conversing with G-d, to be the highest of all levels. Conversation in a field suits this month well.
+
+The prophet is Jahaziel the Levite, and his prophecy is this quality at work. "Hearken, all Judeans, inhabitants of Jerusalem, and King Jehoshaphat, so said the Lord to you: You shall not fear, neither shall you be dismayed because of this great multitude, for the war is not yours but G-d's." And then: "It is not for you to fight in this [war]; set yourselves, stand and see the salvation of the Lord with you, O Judah and Jerusalem; fear not and be not dismayed." The salvation that follows is full of humility, with singing and praise. When we do our part and then step back and let Hashem do the rest, incredible things happen. Sometimes the best thing is to be quiet, as at the splitting of the Sea of Reeds: "The Lord will fight for you, but you shall remain silent." (Exodus 14:14)
+
+The levitical city is Rehob, which means street, from rahav, wide. The near word merchav, wide place, is in last week's Haftarah verse. Called to out of dire straits, He answers broadly, and that is the essence of emunah.
+
+*Source: [Week 21 (Book 2): Jahaziel and "Minimized" Speech](https://www.kabbalahoftime.com/2014/01/week-21-book-2-jahaziel-and-minimized.html) — 738 words*
+
+---
+
+## Day 143 · Book 3 · Week 21
+
+The Song of the Sea's verses are first of all a declaration of faith, Emunah, which is this month: "The Lord will reign to all eternity; When Pharaoh's horses came with his chariots and his horsemen into the sea." They hold the elements too — Pharaoh and the horsemen are man, the horses are animal, and the sea is mineral, Domem.
+
+The Haftorah turns to doubt: "(But) among the divisions of Reuben, (there were) great resolves of heart. Why do you sit between the borders." Great resolves and no resolve — that was Reuben's own difficulty. He knew he had to save Joseph and lacked the emunah to do it outright; he knew later that Benjamin had to be brought to Egypt, and again could not carry his father.
+
+Daf Kaf Alef of Sotah keeps on with how the merit of Torah and mitzvoth can protect from punishment, and how a woman can earn merit from Torah — fitting in the week of the Rebbetzin's yahrzeit, the 22nd of Shevat.
+
+The generation is Yitzchak, the second forefather, whose whole life, and above all his near sacrifice, was Emunah. His name comes from Tzchok, laughter: Yitzchak means he will laugh, which is faith in what has not happened yet, and also pleasure, Ta'anug.
+
+The journey is from Mount Shepher to Haradah. Haradah means trembling, and it is tied to the fear the people felt after the plague that followed Korach's rebellion. Trembling also belongs to happiness: "Vegilu b'Readah," rejoice in trembling, and the Talmud says that where there is gilah, rejoicing, there must be trembling. The personal journey takes the beauty and the enjoyment of the last stop and gets ready for the trembling happiness of Adar.
+
+*Source: [Week 21 (Book 3): Isaac and Emunah](https://www.kabbalahoftime.com/2014/01/week-21-book-3-isaac-and-emunah.html) — 413 words*
+
+---
+
+## Day 144 · Book 4 · Week 21
+
+Channah's twenty-first verse is the yearly pilgrimage: "And the man, Elkanah and his entire household, went up to slaughter to the Lord, the sacrifice of the days and his vow." Household, Beitoh, usually means a man's wife — so the verse is there to set up what comes next, that Channah stays behind to nurse Shmuel and will only bring him to the Tabernacle, to live there, once he is weaned.
+
+The Pirkei Avot quality is that the Torah grants him kingship, Malchut, which is a feminine sefirah and receives its energy from the others. The verse says the Torah gives kingship; it is left to us to know how to receive it. And Elkanah goes up out of gratitude.
+
+Proverbs 21 opens on kingship and then turns to the weight a wife carries, here for the worse. "A king's heart is like rivulets of water in the Lord's hand; wherever He wishes, He turns it." "It is better to sit on the corner of a roof than with a quarrelsome wife and the house of a friend." "It is better to dwell in a desert land than [with] a quarrelsome and vexatious wife."
+
+Besides Rebbetzin Chaya Mushka's yahrzeit on the 22nd of Shevat, the week holds Rebbe Menachem Mendel of Kotzk on the same day and Rebbe Yehoshua Rokeach, the Second Rebbe of Belz, son of the Sar Shalom, on the 23rd. The Kotzker was known for immense Torah knowledge reached very young and for an uncompromising pursuit of truth; his sharp, penetrating sayings cut through people's ego and fantasies. Among his students were the first two leaders of Ger, the largest Chassidic group in all of Poland. The 22nd of Shevat is also the yahrzeit of one of his closest disciples, Rabbi Yehuda Leib Eiger of Lublin, grandson of Rabbi Akiva Eiger, and the 21st of Shevat that of another, R. Yechiel Meir Lifschitz of Gostynin, Der Tilim Yid.
+
+Rebbe Yehoshua Rokeach grew the Belz dynasty his father had begun into the largest in Galicia. He fought vigorously against the Haskalah, the Jewish secularist enlightenment movement. He was a tremendous Torah scholar, known also for common sense in his leadership; he moved his followers to study with great devotion and set up programs for newly married men to stay in Yeshiva. Sometimes this week also holds Rav David HaLevi Segal, author of the Turei Zahav, and Rabbi Mordechai Yosef Elazar Leiner, the Radziner Rebbe, both on the 26th of Shevat.
+
+*Source: [Week 21 (Book 4): Malchut (Kingship)](https://www.kabbalahoftime.com/2014/01/week-21-book-4a-malchut-kingship.html) — 584 words*
+
+---
+
+## Day 145 · Book 5 · Week 21
+
+The Song calls both winds and then sits down to eat. "Awake, O north wind, and come, O south wind; blow upon my garden, that the spices thereof may flow out; let my beloved come to his garden and eat his sweet fruit." Then the answer: "I have come to my garden, my sister, [my] bride; I have gathered my myrrh with my spice, I have eaten my sugar cane with my sugar, I have drunk my wine with my milk. Eat, friends; drink, yea, drink abundantly, beloved ones." The drinking abundantly may be looking ahead to Adar. And then the verse that is Shevat itself: "I sleep, but my heart is awake. Hark! My beloved is knocking: Open for me, my sister, my beloved, my dove, my perfect one, for my head is full of dew, my locks with the drops of the night." Still the middle of winter, but past Tu B'Shvat, and inside the trees the sap has begun to melt.
+
+Of the seventy souls that descended to Egypt, the twenty-first is Zerach, Perez's brother, whose name means sunrise. At the birth he was the first to put out his hand and the second to be born. Sunrise is like that too: it is the first moment the morning Shmoneh Esreh can be said, and where the day begins, though most people start praying much later. Shevat is the same — the first appearance of spring and the sun, with spring itself a long way off.
+
+Daf Kaf Alef of Shvuot keeps on with the laws of oaths, most of them about eating.
+
+Jeremiah's twenty-first chapter is full of nature — valleys, plains, fruit, a forest. "Behold I am against you, O dweller of the valley, rock of the plain, says the Lord, those who say, 'Who will encamp upon us, and who will come into our dwellings?'" And then: "And I will visit upon you according to the fruit of your deeds, says the Lord, and I will ignite a fire in her forest, and it will consume all her surroundings."
+
+*Source: [Week 21 (Book 5): Celebrating "Sweet Fruit" in the Winter](https://www.kabbalahoftime.com/2014/01/week-21book-4b-celebrating-sweet-fruit.html) — 497 words*
+
+---
+
+## Day 146 · Book 6 · Week 21
+
+G-d is our strength, in three psalms: the sixty-first, sixty-second and sixty-third, with one verse of Psalm 59, the opening of Psalm 77, and one verse of Psalm 89.
+
+Psalm 61 David composed while fleeing from Saul, and all of it asks for long life — not to pursue the pleasures of the world but to serve G-d in awe, all his days. "From the end of the earth I call to You, when my heart is faint [with trouble]: Lead me upon the rock that surpasses me!" Then the shelter: "I will dwell in Your tent forever; I will take refuge in the shelter of Your wings, Selah." And the asking itself: "Add days to the days of the king; may his years equal those of every generation. May he sit always before G-d; appoint kindness and truth to preserve him."
+
+Psalm 62 prays for the downfall of his enemies and tells his generation not to rest their faith in riches, because piling up wealth is futility. "To G-d alone does my soul hope; my salvation is from Him. He alone is my rock and salvation, my stronghold; I shall not falter greatly." The blessing that is a curse: "with their mouths they bless, and in their hearts they curse, Selah." The weighing: "Men are but vanity; people [but] transients. Were they to be raised upon the scale, they would be lighter than vanity." The warning: "Put not your trust in exploitation, nor place futile hope in robbery. If [corrupt] wealth flourishes, pay it no heed." And the close, one thing heard as two: "G-d spoke one thing, from which I perceived two: That strength belongs to G-d; and that Yours, my Lord, is kindness."
+
+Psalm 63 is from hiding in the Judean desert, yearning toward the place of the Holy Ark like a man thirsty for water. "My soul thirsts for You, my flesh longs for You; [like one] in a desolate and dry land, without water, so [I thirst] to see You in the Sanctuary, to behold Your might and glory. For Your kindness is better than life; my lips shall praise You." Then the nights: "Indeed, I remember You upon my bed; during the watches of the night I meditate upon You." And the holding on: "My soul cleaved to You; Your right hand supported me."
+
+Psalm 59's verse is the strength: "[You are] my strength, to You I will sing, for G-d is my stronghold, the G-d of my kindness." Psalm 77 begins in the night that will not close: "[I raise] my voice to G-d and cry out; [I raise] my voice to G-d and He will listen to me. On the day of my distress, I sought the Lord; my wound oozes at night and does not abate; my soul refuses to be comforted." And Psalm 89's verse answers it: "It is he whom My hand shall be prepared [to assist]; My arm, too, shall strengthen him."
+
+*Source: [Week 21 (Book 6): G-d is our Strength  - Psalms 61-63; 59:18, 77:1-3; 89:22](https://www.kabbalahoftime.com/2014/01/week-21-book-5-reviewing-last-week-of.html) — 809 words*
+
+---
+
+## Day 147 · Book 7 · Week 21
+
+The fly opens — when Israel is not busying itself with Torah — and the week's books answer around it.
+
+The sea and the provoking first: "When Pharaoh's horses came with his chariots" / "And his horsemen into the sea" / "They have provoked My jealousy with a non-G-d" / "Provoked My anger with their vanities" / "All flesh is grass, and all its grace is as the flower of the field" / "(But) among the divisions of Reuben, (there were) great resolves of heart."
+
+Then the calling out, with the sitting still and the sleeping beside it: "The voice said, 'Call out'. And he said, 'What shall I call out?'" / "Why do you sit between the borders?" / "I sleep, but my heart is awake. Hark! My beloved is knocking" / "My perfect one, for my head is full of dew" / "My locks with the drops of the night" / "My wound oozes at night and does not abate" / "My soul refuses to be comforted."
+
+Then what withers and what does not: "The grass withers, the flower fades" / "But the word of our Lord shall endure forever" / "The Lord will reign to all eternity" / "[You are] my strength, to You I will sing" / "The Lord rewarded me according to my righteousness" / "According to the cleanness of my hands He recompensed me."
+
+Then the healing and the arm: "I will create a new expression of the lips: Peace, peace for him Who is far off and for him who is near, says G-d, and I will heal him" / "It is he whom My hand shall be prepared [to assist]" / "My arm, too, shall strengthen him."
+
+And the end is the garden, with the pilgrimage and the crying out braided through it: "Awake, O north wind, and come, O south wind" / "Blow upon my garden, that the spices thereof may flow out" / "And the man, Elkanah and his entire household, went up to slaughter to the Lord" / "Let my beloved come to his garden and eat his sweet fruit" / "For G-d is my stronghold, the G-d of my kindness" / "I have come to my garden, my sister, [my] bride" / "I have gathered my myrrh with my spice" / "[I raise] my voice to G-d and cry out" / "I have drunk my wine with my milk" / "On the day of my distress, I sought the Lord" / "Eat, friends; drink, yea, drink abundantly, beloved ones" / "Open for me, my sister, my beloved, my dove."
+
+*Source: [Week 21 (Book 7): The Fly is Saying](https://www.kabbalahoftime.com/2021/02/week-21-book-7-fly-is-saying.html) — 401 words*
