@@ -3456,3 +3456,119 @@ Then the kings who took nothing: "In Taanach by the waters of Megiddo" / "They j
 And the end is the trumpet and the child prayed for: "Rejoice to the Lord of our strength" / "Trumpet to the Lord of Jacob!" / "I will also make him [My] firstborn" / "Supreme over the kings of the earth" / "For this child did I pray" / "I am my beloved's" / "And my beloved is mine" / "Who grazes among the roses" / "You are fair, my beloved, as Tirzah" / "Comely as Jerusalem, awesome as the bannered legions" / "And the Lord granted me my request" / "Which I asked of Him."
 
 *Source: [Week 27 (Book 7): The Cow Is Saying](https://www.kabbalahoftime.com/2016/04/the-cow-is-saying-songs-for-week-27.html) — 265 words*
+
+---
+
+## Day 190 · Book 1 · Week 28
+
+The pig and rabbit are saying: "G-d is good to the good, and to the straight-hearted." (Psalms 128:2) The small impure domestic animal is read by some as the pig and by others as the rabbit. This week carries the first night of Passover, the yahrzeit of the Third Lubavitcher Rebbe, Menachem Mendel, the Tzemach Tzedek, and the birthday of the Seventh Rebbe, who carries the Third's name, his ancestor by direct patrilineal descent.
+
+The sages consider the pig a hypocrite: it displays the external mark of a kosher animal, split hooves, while its intestines make it non-kosher. The rabbit and its kind — the hare, the hyrax — are the exact reverse: no split hooves, and the intestines of a kosher animal. Inside they are upright of heart, and their outward actions are plainly not. Besides the pig and the camel, the hyrax and the hare are the only animals the Torah names explicitly as not kosher. The Midrash in Vaikra Rabbah explains that the hyrax is the Persian exile and the hare the Greek one; the pig is the Roman exile, which belongs to Esau and his descendants, and that is the exile we are in now. Their song is about the final redemption, when even the pig will be upright of heart and all of them will be kosher.
+
+The Tzemach Tzedek and the Rebbe carry the message of Passover, which is redemption; Tzemach Tzedek is one of the names of Mashiach, as Menachem is. As the animals show, redemption has an inner side and an outer one. Inwardly, both of them brought important new concepts into Chassidic thought and were at last able to publish and spread the works of the Rebbes before them. Outwardly, both were extremely successful in action: the Tzemach Tzedek set up agricultural settlements that saved many Jews from dire poverty and rescued thousands upon thousands of children forced to enlist in the Russian army, and the Rebbe established Jewish centres all over the world and helped save thousands of Jews trapped behind the iron curtain of the Soviet Union.
+
+Twenty-eight is twice fourteen, yad, the strong and outstretched arm that took us out of Egypt — here doubled, two outstretched arms. On Passover we celebrate that He saved us then while believing fully that He will save us again, more miraculously than in Egypt. Twenty-eight is also kaf and chet, which spell koach, strength — and koach also means potential, what has not yet been revealed. The pig looks as though it has the possibility of being kosher, and it is not, at least not yet. It stands for Esau, who had enormous potential; that potential made Isaac believe he would prove worthy of the firstborn's blessings. Like the pig, Esau would play the tzadik before his father, so much so that the Midrash relates he would ask Isaac how to tithe salt and straw — neither of which needs tithing, so that the question made him look ready to go beyond the letter of the law. The Rebbe explains that salt is an example of potential: on its own it is only salt, and with other food it brings out flavour and even keeps it from spoiling.
+
+Pirkei Avot gives Rabbi Eliezer the son of Azariah, and the rabbinical discussion in the Haggadah begins with his remarks. If there is no Torah, there is no common decency, and if there is no common decency, there is no Torah. If there is no wisdom, there is no fear of G-d, and without fear of G-d there is no wisdom. Without applied knowledge there is no analytical knowledge, and the reverse. If there is no flour, there is no Torah, and if there is no Torah, there is no flour. Then the trees: one whose wisdom is greater than his deeds is a tree with many branches and few roots, which a storm uproots and turns on its face — "He shall be as a lone tree in a wasteland" — and one whose deeds are greater than his wisdom is a tree with many roots and few branches, which all the storms in the world cannot budge: "He shall be as a tree planted upon water, who spreads his roots by the river; who fears not when comes heat, whose leaf is ever lush."
+
+That is the inner and outer kosher again. Knowledge needs action and action needs knowledge, and Rabbi Elazar makes clear that action comes first — which the Rebbe stressed too: HaMa'aseh Hu HaIkar. The flour may also be the matzah, and the custom of providing flour to the poor, Maot Chitim, wheat money, so they can celebrate properly. And preparing for the holiday means ridding ourselves of chametz, the leavened bread outside and the inflated ego within.
+
+This week completes another cycle of seven, and the combination is malchut shebenetzach. At the Seder we live victory, humility and redemption openly, in this physical world. From the pig and the rabbit we learn to want a life of complete integrity, and a complete redemption.
+
+*Source: [Week 28 (from the Book): To Recognize our Limits in order to Free Ourselves from Them](https://www.kabbalahoftime.com/2014/04/week-28-from-book-to-recognize-our.html) — 1336 words*
+
+---
+
+## Day 191 · Book 2 · Week 28
+
+The week of the first day of Passover. Haazinu: "For they are a nation devoid of counsel, and they have no understanding." (Deuteronomy 32:28) Read another way entirely: once this people — Amalek — is no more, there is counsel, and when they are nothing, there is understanding. Amalek is arrogance, and destroying it, burning the chametz of our inflated ego, is where wisdom comes from; Chochmah stands for Koach Mah, the strength of being "what," nothing. And read a third way: when the Jewish people make themselves like nothing, there is counsel and understanding.
+
+The Haftarah agrees: "And the humble people You do deliver; But Your eyes are upon the haughty [in order] to humble them." (II Samuel 22:28)
+
+So the quality is another of humility's basics: he who is happy with his lot, HaSameach Be'Chelkoh.
+
+The prophet is Elisha, Eliyahu's disciple and successor, who showed it in accepting that place — and who later received a very special portion indeed, twice the spirit of Eliyahu. One of the greatest examples of being happy with one's lot is in his own story. Asking the Shunamite woman whether she needed anything, so that he could repay the great hospitality she and her husband gave him, he got this answer: "I dwell among my people." She asked for nothing, and she had no children at the time.
+
+The levitical city is Eshtemoa, whose name seems to mean making oneself heard — which is the Seder, and the importance of speaking abundantly about the miracle.
+
+*Source: [Week 28 (Book 2): Elisha and Being Happy with One's Lot](https://www.kabbalahoftime.com/2014/04/week-28-book-2-elisha-and-being-happy.html) — 382 words*
+
+---
+
+## Day 192 · Book 3 · Week 28
+
+This week holds the first day of Passover, and the portion holds the people at their most desperate, forgetting every miracle they had just seen: "The children of Israel said to them, If only we had died by the hand of the Lord in the land of Egypt, when we sat by pots of meat, when we ate bread to our fill! For you have brought us out into this desert, to starve this entire congregation to death." And then the Mannah: "Behold! I am going to rain down for you bread from heaven, and the people shall go out and gather what is needed for the day, so that I can test them, whether or not they will follow My teaching." On Seder night one of the primary mitzvot is to eat matzah, the bread of faith and of healing, which runs parallel to the Mannah.
+
+The Haftorah fights from the same direction: "From heaven they fought; the stars from their courses fought against Sisera." The Mannah came from heaven, and so did the whole salvation in Egypt. On Passover the initiative came from above to below — Ita'aruta d'Leilah, arousal from Above, and then Ita'aruta d'Letatah, arousal from below. The plagues and the splitting of the sea did not follow from any first effort of ours.
+
+Daf Kaf Cheit of Sotah goes on to how the water also checks and punishes the male adulterer, who stays forbidden to her as her husband does, and how she becomes forbidden to eat Terumah. The punishment of the adulterer is open heavenly intervention: he was nowhere near the drinking, and it reached him exactly as it reached her. And the terumah runs parallel to the mannah, the matzah and above all the Passover offering — holy food, given to the kohanim by Divine decree, which could only be eaten in a state of purity.
+
+The generation is Nachshon, the first Nassi of the tribe of Judah, who brought the first offering for the inauguration of the Mishkan, read on each of the first days of Nissan. He is best known for the splitting of the sea: diving in before it split is the very essence of faith. His name holds Nachash, snake, which has the same gematria as Mashiach, who will uproot the evil of the primordial snake, the yetzer harah — a clearer link still between the redemption from Egypt and the one to come.
+
+The journey is from Moseroth to Benei Jaakan. Rabbi Jacobson writes that Benay Yaakan literally means the sons of Yaakan, grandson of Seir, and is also translated as wells of distress, a place that is narrow, confined and tight. On Passover we live through the distress and narrowness of the Egyptian exile as well as the redemption from it. The personal journey moves from purifying our conduct before the holiday to feeling both the narrowness and the freedom of the first exile and the last. This week faces Seir, literally goat, another name of Eisav, who is our last exile, and evil in general, and that primordial snake.
+
+*Source: [Week 28 (Book 3): Nachshon and Help from Above](https://www.kabbalahoftime.com/2014/04/week-28-book-3-nachshon-and-help-from.html) — 734 words*
+
+---
+
+## Day 193 · Book 4 · Week 28
+
+Channah's twenty-eighth verse hands him over: "And I also have lent him to the Lord; all the days which he will be alive, he is borrowed by the Lord." And he prostrated himself there to the Lord — Samuel, though some say Elkanah. On Passover we give ourselves over too, nullifying the ego entirely, and in the time of the Temple we went there and prostrated ourselves. The Passover story is leaving one domain, slavery in Egypt, and entering another, service of G-d: He took Goy MiKerev Goy, a nation from the innards of another nation.
+
+The Pirkei Avot quality is that the Torah makes him patient — Erech Ruach, more literally long-spirited. It looks toward Mashiach, as we read in the Haftorah of the last day of Pessach: "And the spirit of G-d shall rest upon him.... And he will be permeated with the spirit of the fear of the L-rd." Menachem and Tzemach Tzedek are both names of Mashiach.
+
+The Midrash Shmuel says Channah's own words were divinely inspired with Ruach HaKodesh without her knowing it: "For as long as he lives he is lent [sha'ul] to the Lord" — because as long as Samuel lived, so did Saul. That G-d let Shaul live on despite his grave sins is itself an example of His patience.
+
+Proverbs 28 holds the same patience in a single verse: "Because of the sin of a land, its princes are many, but because of an understanding, knowledgeable man, so will [its retribution] be delayed" — Ya'arich, from Erech.
+
+Besides the Tzemach Tzedek, the week holds at least three other great yahrzeits, major figures in both the Sefardi and Ashkenazi worlds, and like him authorities in the revealed and the hidden Torah both; all three lived in Tzfat. The 11th of Nissan is the yahrzeit of Rabbi Yeshayahu HaLevi Horowitz, the Shnei Luchot HaBrit, the Shlah. He was chief rabbi of Cracow, Frankfort and then Prague, later moved to Israel and became chief rabbi of Jerusalem, lived his last years in Tzfat, and is buried near Maimonedes' grave in Tiberias. His major work is a foundational kabbalistic text, a basis for many Chassidic works including the Tanya. The 13th of Nissan is the yahrzeit of Rabbi Yosef Karo and of Rabbi Moshe Alsheich. Rabbi Yosef Karo wrote the Shulchan Aruch, the basic text of Jewish law, still in use today; he was chief rabbi of Tzfat, and also wrote the Beit Yosef and the Maggid Meisharim, which records his conversations with an angel. Rabbi Moshe Alsheich was his student and a member of the Beit Din of Tzfat, and his interpretations and discourses on the Torah are widely used to this day. Also this week: R' Chaim Meir ben R' Yisroel Hager of Vizhnitz, the Imrei Chaim, on the 9th of Nissan, and Rabbi Asher Yeshaya of Ropshitz, son-in-law and successor of Rabbi Naftali of Ropshitz, on the 14th.
+
+*Source: [Week 28 (Book 4): Being Patient and "Long" of Spirit](https://www.kabbalahoftime.com/2014/04/week-28-book-4a-being-patient-and-long.html) — 731 words*
+
+---
+
+## Day 194 · Book 5 · Week 28
+
+This week the Song speaks from His side. "Turn away your eyes from me, for they have made me haughty; your hair is like a flock of goats that streamed down from Gilead." "Your teeth are like a flock of ewes that came up from the washing, all of which are perfect and there is no bereavement among them." "Your temple is like a split pomegranate from beneath your kerchief." Domesticated animals again, the goat and the ewe, and a warning off haughtiness, which is the essential work of Passover: out with the chametz, in with the matzah.
+
+Of the seventy souls that descended to Egypt, the twenty-eighth is Shimron, whose name has Shomer in it, to keep, to guard. Matzah has to be Shmurah, guarded: "You shall guard the matzot." They are guarded so they cannot become chametz, or they may not be eaten. The main mitzvah of eating matzah falls on the first night, and that night is called Leil Shimurim, a night when we feel Him watching over us so strongly that it is even common custom to leave the doors unlocked.
+
+Daf Kaf Chet of Shvuot keeps on with oaths made over a loaf of bread, and what happens if the bread is eaten — bread again, in the week when it is not eaten.
+
+Jeremiah's twenty-eighth chapter has the yoke of the Babylonian exile, the kind a domesticated animal carries, and then the clearest case of a man so full of spiritual chametz that he believes his own false prophecies, against Jeremiah, who keeps his humility throughout. "And Hananiah the prophet took the bar off the neck of Jeremiah the prophet and broke it." "Go and say to Hananiah, saying: So said the Lord: Bars of wood have you broken, and you shall make in their stead bars of iron." "And Jeremiah the prophet said to Hananiah the prophet: The Lord did not send you, and you assured this people with a lie. Therefore, so said the Lord: Behold I send you off the face of the earth; this year you shall die, for you have spoken perversion against the Lord." And then: "And Hananiah the prophet died in that year, in the seventh month." Nissan is the seventh month counting from Rosh Hashanah.
+
+*Source: [Week 28 (Book 5): Shimron and the "Night of Vigil" (Leil Shimurim)](https://www.kabbalahoftime.com/2014/04/week-28-book-4b-shimron-and-night-of.html) — 503 words*
+
+---
+
+## Day 195 · Book 6 · Week 28
+
+The third week of Nissan in psalms: the eighty-second, eighty-third and eighty-fourth, with the opening of Psalm 90 and one verse of Psalm 89.
+
+Psalm 82 admonishes judges who feign ignorance of the law, dealing unjustly with the pauper and the orphan while coddling the rich and pocketing their bribes. "G-d stands in the council of judges; among the judges He renders judgment: How long will you judge wickedly, ever showing partiality toward the evildoers? Render justice to the needy and the orphan; deal righteously with the poor and the destitute." What their blindness costs: "But they do not know, nor do they understand; they go about in darkness, [therefore] all the foundations of the earth tremble." And what they are: "I said that you are angels, supernal beings, all of you; but you will die as mortals, you will fall like any prince."
+
+Psalm 83 is a prayer about the wars against Israel in the days of Jehoshaphat, when the nations plotted against them. "O G-d, do not be silent; do not be quiet and do not be still, O G-d." The plot in their own words: "Come, let us sever them from nationhood, and the name of Israel will be remembered no more." Then the roll of them, conspiring with one heart: the tents of Edom and the Ishmaelites, Moab and the Hagrites, Geval and Ammon, and Amalek, Philistia with the inhabitants of Tyre, and Assyria joined with them. Then the precedents: "Do to them as to Midian; as to Sisera and Yavin at the brook of Kishon." And the asking: "My G-d, make them like whirling chaff, like straw before the wind." It ends not in destruction but in recognition: "Fill their faces with shame, and they will seek Your Name, O Lord." "And they will know that You, Whose Name is the Lord, are alone, Most High over all the earth."
+
+Psalm 84 mourns the destruction of the Temple from the depths of the heart and speaks of all the blessings that come with its restoration; fortunate is the one who trusts it will be rebuilt and does not despair in this long exile. "How beloved are Your dwellings, O Lord of Hosts! My soul yearns, indeed it pines, for the courtyards of the Lord." The bird in the ruin: "Even the bird has found a home, and the swallow a nest for herself, where she lays her young on the [ruins of] Your altars." The road there: "Fortunate is the man whose strength is in You; the paths [to the Temple] are in his heart. For those who pass through the Valley of Thorns, He places wellsprings; their guide will be cloaked in blessings. They go from strength to strength; they will appear before G-d in Zion." And the weighing: "For better one day in Your courtyards than a thousand [elsewhere]. I would rather stand at the threshold of the house of my G-d, than dwell [in comfort] in the tents of wickedness."
+
+Psalm 90 begins here, and it is Moses's own: "A prayer of Moses, the man of G-d. O Lord, You have been our dwelling place throughout all generations. Before the mountains were born, and You brought forth the earth and the inhabited world, and from everlasting to everlasting, You are G-d. You bring man to the crushing point, and You say, 'Return, O sons of men.' For a thousand years are in Your eyes like yesterday, which passed, and a watch in the night." And Psalm 89's verse holds: "I will forever keep My kindness for him, and My covenant will remain true to him."
+
+*Source: [Week 28 (Book 6): Reviewing the Third Week of Nissan - Psalms 82-84; 90:1-4; 89:29](https://www.kabbalahoftime.com/2014/04/week-28-book-5-reviewing-third-week-of.html) — 876 words*
+
+---
+
+## Day 196 · Book 7 · Week 28
+
+The pig opens, and the week sets the haughty next to the humble.
+
+The eyes and the counsel first: "Turn away your eyes from me, for they have made me haughty" / "For they are a nation devoid of counsel and they have no understanding" / "G-d is good to those that are good, as well as to the straight-hearted" / "And the humble people You do deliver; but Your eyes are upon the haughty to humble them."
+
+Then the pots of meat, and the crushing point: "The children of Israel said to them, If only we had died by the hand of the Lord in the land of Egypt" / "When we sat by pots of meat, when we ate bread to our fill!" / "For you have brought us out into this desert, to starve this entire congregation to death" / "You bring man to the crushing point and You say, 'Return, O sons of men.'"
+
+Then the flocks, and the dwelling place: "Your hair is like a flock of goats that streamed down from Gilead" / "Your teeth are like a flock of ewes that came up from the washing" / "All of which are perfect and there is no bereavement among them" / "A prayer of Moses, the man of G-d. O Lord, You have been our dwelling place throughout all generations."
+
+Then the child lent, and what was there before the mountains: "And I also have lent him to the Lord; all the days which he will be alive, he is borrowed by the Lord" / "Before the mountains were born, and You brought forth the earth and the inhabited world" / "And from everlasting to everlasting, You are G-d."
+
+And the end is the bread from heaven and the stars: "Behold! I am going to rain down for you bread from heaven" / "From heaven they fought; the stars" / "From their courses fought against Sisera" / "I will forever keep My kindness for him, and My covenant will remain true to him" / "Your temple is like a split pomegranate from beneath your kerchief" / "For a thousand years are in Your eyes like yesterday, which passed, and a watch in the night" / "And the people shall go out and gather what is needed for the day" / "So that I can test them, whether or not they will follow My teaching" / "And he prostrated himself there to the Lord."
+
+*Source: [Week 28 (Book 7): The Pig Is Saying](https://www.kabbalahoftime.com/2016/04/the-pig-is-saying-songs-for-week-28.html) — 343 words*
