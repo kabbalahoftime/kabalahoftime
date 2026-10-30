@@ -4690,3 +4690,125 @@ Then the anointed twice over, and Joseph sold: "'Do not touch My anointed ones, 
 And the end is the Sabbath and the fragrance: "So he said to them, That is what the Lord spoke" / "Tomorrow is a rest day, A holy Sabbath to the Lord" / "The pots [of figs] have given forth [their] fragrance" / "And on our doorways are all manner of sweet fruits" / "Bake whatever you wish to bake" / "And cook whatever you wish to cook" / "G-d shall go out as a mighty man" / "Never turning back until they were consumed" / "And it did not become putrid, and not a worm was in it" / "Both new and old, Which I have hidden away for you, my beloved."
 
 *Source: [Week 38 (Book 7): The Lion is saying](https://www.kabbalahoftime.com/2017/06/the-lion-is-saying.html) — 280 words*
+
+---
+
+## Day 267 · Book 1 · Week 39
+
+This week holds Rosh Chodesh Tammuz and Gimmel Tammuz, the date of the Lubavitcher Rebbe's passing and also the beginning of the liberation of the Sixth Lubavitcher Rebbe.
+
+Tammuz belongs to Reuven, Jacob's firstborn. His name comes from reiyiah, sight, and the month is the tikkun of our sense of sight. Reuven belongs to teshuvah in general: the Midrash says of him that he was the first to repent out of love, without being chastised first. The month is also the tikkun for the sin of the spies. Moses sent them, and they travelled through the Land of Israel for the whole month of Tammuz, and apart from Joshua and Caleb they saw it in a negative light. Tammuz carries the tragedies of the 17th day of the month — among them the destruction of the first tablets of the Ten Commandments, and the breaching of the walls of Jerusalem — and it also carries the final redemption, when, after we repent and are redeemed, the 17th of Tammuz will no longer be a day of fasting and mourning but a day of celebration. That turnaround is Reuven's own. Jacob took away his firstborn rights after a severe mistake involving one of his father's concubines, and Reuven spent his whole life doing teshuvah for it — and the Torah recognises that repentance, still calling him Jacob's firstborn long after.
+
+The Bear is saying, "Let the wilderness and its cities lift up their voice, the village that Kedar inhabits; let the inhabitants of the rock sing, let them shout from the peaks of the mountains. Let them give glory to G-d and tell of His praise in the islands." (Isaiah 42:11-12) The song is about looking at the world with good eyes. The Bear sees that the deserts, the cities, the villages, the mountains and the islands all hold the great potential of praising G-d. That is how the world should be seen — everyone has it, and we only need to open our eyes. One of the Rebbe's main accomplishments, which began with the Previous Rebbe, was always to see in each follower and in every Jew that enormous potential for good; it is how he formed so many leaders and reached so many people, spreading the light of Judaism and Chassidism to the far corners of the world — cities and spiritual deserts, mountains and isolated islands.
+
+Eliyahu HaNavi, who will announce the coming of Mashiach, also goes with the Bear. As in week 12, the Tanach tells that before Elijah ascended, Elisha asked for a double portion of his strength. Soon after, when Elisha purified the waters of a city, he was insulted by some young men who had made their money carrying clean water from elsewhere, and whose trade his miracle had made useless. They began taunting him, calling him bald, to set him against Elijah, who had a head full of hair. Elisha cursed them, and two bears — an apparent reference to that double portion — came out of the wilderness and killed them. And just as the bear's song names Arabia, Kedar, the Talmud has various stories of Elijah disguising himself as an Arab when he appeared before tzadikim, to test them or to help them.
+
+Thirty-nine is the number of kinds of work forbidden on Shabbat, which parallel the thirty-nine kinds of work done in building the Mishkan, a miniature Temple where the Divine Presence rested. The Mishkan is a microcosm of the world: as G-d rested on the seventh day of creation, the Jewish people rested on the same day while building it. And the bear's song is about distant, uninhabited places that hold the potential to praise Hashem, and so to make Him a home in this world. The Midrash Tanchumah teaches that His main object in creating the world was to make a home for Himself in the lowly realms — and that home is the Mishkan. The letters lamed and tet, which make thirty-nine, spell tel, mountain; the laws of Shabbat are known as mountains on a wire, because a vast number of prohibitions are drawn from a few explicit verses.
+
+Pirkei Avot gives Rabbi Meir: engage minimally in business and occupy yourself with Torah; be humble before every man; if you neglect the Torah there will be many more causes for neglect before you, and if you toil much in Torah there is much reward to give you. The Talmud says that whoever saw Rabbi Meir studying saw him take mountains and grind them into each other. He was known for miracles, many of them involving Eliyahu HaNavi. He is teshuvah too, and seeing the potential in people and in far places: he was himself a descendant of Roman converts, and when a certain group of people mistreated and insulted him, he followed his wife Beruria's advice and, instead of praying for their destruction, prayed that they do teshuvah — which in the end they did. His words belong to Tammuz and to Reuven: humbly turning any lack of dedication to the Torah, which brought our people such obstacles and tragedies, into full dedication and toil, and so into enormous reward.
+
+The combination is netzach shebeyesod. We have to be persistent in keeping our foundation in Torah and mitzvot. Joseph, who is yesod, endured the constant attempts of Potiphar's wife to seduce him and resisted her in the end — and Rashi compares her to a bear. There will always be bears trying to pull us off our purpose; we have to stand as firm as one ourselves. And from the bear we learn that wherever we are, we should try to speak of the Torah and raise the place we are in as far as we can.
+
+*Source: [Week 39 (From the Book): To See the World in a Positive Light in Order to Elevate It](https://www.kabbalahoftime.com/2014/06/week-39-from-book-to-see-world-in.html) — 1328 words*
+
+---
+
+## Day 268 · Book 2 · Week 39
+
+Rosh Chodesh Tammuz and Gimmel Tammuz. Tammuz is marked by the fast of the 17th, when the walls of Jerusalem were breached, and the month belongs to Reuven, Jacob's firstborn.
+
+Haazinu: "See now that it is I! I am the One, and there is no G-d like Me! I cause death and grant life. I strike, but I heal, and no one can rescue from My Hand!" (Deuteronomy 32:39) That verse is Tammuz exactly — before the times of Mashiach a month of death and suffering, and after them a month of life and healing.
+
+The Haftorah picks up the last words of it: "And I have consumed them, and I have crushed them that they cannot rise; Yes, they are fallen under my feet." (II Samuel 22:39) In this month we have been crushed and consumed in the past, and in the future the enemies of the Jews will fall under their feet.
+
+The quality is that he does not take pleasure in handing down halachic decisions, Einoh Sameach B'hora'ah — not using the Torah for one's own honor. More literally, the person is not happy in making rulings. Tammuz has been a month in which the Jewish people were not happy, having been handed difficult decrees in it. And it is in our power to reverse those decrees, through Teshuvah.
+
+The prophet is Baruch, Jeremiah's scribe, who was given the task of reading those dire prophecies to the people — a task he certainly took no pleasure in, and he handed the decrees down all the same, according to his master's will. All four prophets of the month of Tammuz are related to Baruch: after him comes his father, then his brother, then his grandfather.
+
+The levitical city is Betzer, also a city of refuge. Betzer means fortification, which suits the week, since it was in Tammuz that the fortifications of Jerusalem were breached. All the cities of this week are connected to Moab, and to Jeremiah's prophecy against that nation. Moab is the kelipah of broad powers, physical and intellectual, and the fear of losing them — which is Reuven's own.
+
+*Source: [Week 39 (Book 2): Baruch and Not Being Happy in Handing Down Decrees](https://www.kabbalahoftime.com/2014/06/week-39-book-2-baruch-and-not-being.html) — 532 words*
+
+---
+
+## Day 269 · Book 3 · Week 39
+
+Beshalach: "And Moses said, Eat it today, for today is a Sabbath to the Lord; today you will not find it in the field. Six days you shall gather it, but on the seventh day [which is the] Sabbath on it there will be none." The mannah did not fall on the Sabbath, and it made the people nervous. Rashi sets the scene: in the morning, when they were used to going out to gather, they came to ask whether they should go out or not, and he said, what you have in your possession, eat. In the evening they came again and asked, and he said, today is the Sabbath. He saw they were worried that the manna had perhaps stopped and would not come down again, so he said, today you will not find it — meaning today you will not find it, and tomorrow you will.
+
+Tammuz is a difficult month. In it the spies looked at the Land with negative eyes. In it, because of Moshe's brief delay in coming down the mountain, the grave sin of the golden calf happened, and then the breaking of the Luchot HaBrit. It is a month in which our Emunah is tested. And in Messianic times it will be a month of celebration. The mannah, the source of physical and spiritual substance, is not readily to be had at this time of year — in Moshe's words, today you will not find it, but tomorrow you will.
+
+The Haftorah asks after a son who has not come home: "why is his chariot late in coming? Why tarry the strides of his chariots?" That is a challenge to faith too. And out of the context of Sissera's death, the chariot can mean something else: the visions of the Divine Presence, Ezekiel's and Isaiah's, and all the esoteric literature on them, are known as Ma'aseh Merkavah, the Workings of the Chariot. From Tammuz on, we think about how late the Shechinah is in returning to its holy place.
+
+Daf Lamed Tet of Sotah gives the laws of proper behaviour in a synagogue, during the reading of the Torah and the blessing of the Kohanim. It mentions the verses the congregation says during the priestly blessing, which are about Zion, and the verses of the blessing said on the afternoon of a fast day, which plead to be saved from exile. A synagogue is known as a mikdash me'at, a miniature Temple — and this is the time of year we turn to Zion, to the destruction, and to the rebuilding.
+
+The generation is Jehoram, son of Jehoshaphat, whose reign was a complete disaster. His counterparts in Israel were Ahaziah and another king named Jehoram, son of Ahab, who was also wicked. Jehoram of Judah married Athaliah, daughter of Ahab and Jezebel, two of the most wicked and idolatrous people in all of Jewish history; she was idolatrous to an extreme and led her husband the same way, and soon idols and their priests were brought to Jerusalem. She then convinced him to kill his own six brothers. The kingdom was so steeped in crime and idolatry that all the nations that had been tributaries of Judah rebelled, ransacking every house including the royal palace; his wives and all but one of his children were captured and killed, and he himself died of an incurable disease. His name means G-d is exalted, and as this difficult month opens his reign shows how low we sometimes fall, and how much repentance matters.
+
+The journey is from the ruins to Dibon gad. Dibon looks related to daveh, pining or moaning, and gad means good fortune, like the tribe of Gad, which belongs to Elul and to teshuvah. The secret is connecting Tammuz and Av to Elul, turning the word Dal, poor, into Dalet, door, which is the gates of teshuvah. The personal journey moves from fighting the sins that destroyed the Temple to pining for the good tidings that such repentance brings.
+
+*Source: [Week 39 (Book 3): Challenges to Faith in the Times of Exile](https://www.kabbalahoftime.com/2014/06/week-39-book-3-challenges-to-faith-in.html) — 904 words*
+
+---
+
+## Day 270 · Book 4 · Week 39
+
+Channah's story ends quietly: "And Elkanah went to Ramah, to his house, and the child was serving the Lord before Eli the priest." It is a peaceful end to her life's dream of having children — and the end is really a beginning, a life full of meaning, with Shmuel now spending his days in the service of the leader of the generation.
+
+Pirkei Avot, on the greatness of the Torah, adds peace to the length of days: "For long days, years of life, and peace, they shall add to you."
+
+Ecclesiastes 8 says the days of the wicked will not be long: "But it will not be well with the wicked, and he will not prolong [his] days, like a shadow, because he does not fear God." And the days he does have hold no peace: "When I applied my heart to know wisdom and to see the conduct that is done upon the earth, for neither by day nor by night does he see sleep with his eyes."
+
+Besides the Lubavitcher Rebbe's yahrzeit, the week holds Rabbi Shlomo of Bobov on the 1st of Tammuz, and Rabbi Nachman Horodenker and Rabbi Avraham of Trisk on the 2nd.
+
+Rabbi Menachem Mendel Schneerson, the Lubavitcher Rebbe, became the seventh Rebbe of Chabad after his father-in-law, Rabbi Yosef Yitzchak Schneersohn, passed away in Brooklyn on the 10th of Shvat 1950. He is widely acknowledged as the greatest Jewish leader of the second half of the 20th century. A dominant scholar in both the revealed and the hidden Torah, fluent in many languages and scientific subjects, he is best known for an extraordinary love and concern for every Jew on the planet; his emissaries around the globe number in the thousands, and hundreds of volumes of his teachings have been printed, with dozens of English renditions.
+
+Rabbi Shlomo of Bobov was the first rebbe of the Bobover dynasty, which he took up shortly after the death of his renowned grandfather, the Divrei Chaim of Sanz. He was noted for strengthening the Judaism of the younger generation and for founding numerous yeshivas, and his chasidim numbered in the thousands. Rabbi Avraham of Trisk was one of the eight sons of Rabbi Mordechai of Chernobyl, all of whom became chasidic rebbes in their own right; besides being well known for the success of his blessings, his approachability and friendliness to all comers drew thousands to the court he conducted for some fifty years at Trisk, and his book, Magen Avraham on the Torah and the festivals, is popular among Chasidim and among yeshiva students for the guidelines it offers.
+
+Rabbi Nachman Horodenker, Rebbe Nachman's grandfather, was associated with the pious scholars of Brody. Around 1740 he travelled with his son Reb Shimshon to Eretz Yisrael and left two years later. When Rabbi Elazar Rokeach, rabbi in Amsterdam and later Tzfat, heard that Rabbi Nachman was in Eretz Yisrael, he said that if they were both there together they would be able to bring the Mashiach, and he rushed to join him — but Rabbi Nachman had already left. And when Rabbi Nachman, back in Europe, heard that Rabbi Elazar was in Israel, he travelled back to Tsfat to join him, and Rabbi Elazar had died. When his wife passed away he returned to Europe and became one of the closest followers of the Baal Shem Tov; around that time he remarried, and Rabbi Simcha, Rebbe Nachman's father, was born. The Baal Shem Tov said that Rabbi Nachman Horodenker had prayed not to be able to hear anything unnecessary to his service of G-d, and that his request was granted. He was known for remarking on every occurrence that it was for the best, and he is quoted several times in the works of Rabbi Yaakov Yosef of Polonnoye and in Degel Machaneh Ephraim. The Baal Shem Tov held him back from returning to the Land of Israel, and in 1764, after visiting the Baal Shem Tov's grave, he said the Baal Shem Tov had appeared to him and granted permission. Rabbi Pinchas of Koretz said that as long as Rabbi Nachman was in what was then Poland, the Cossaks could not enter the country — and it was while he was on his way to Eretz Yisrael that the massacre in Uman took place. He is buried in the old cemetery in Tiveria.
+
+*Source: [Week 39 (Book 4): Years of Fullness and Peace](https://www.kabbalahoftime.com/2014/07/week-39-book-4a-years-of-fullness-and.html) — 924 words*
+
+---
+
+## Day 271 · Book 5 · Week 39
+
+The Song begins its last chapter wishing for a brother: "O, that you were like my brother, who sucked my mother's breasts! I would find you outside, I would kiss you, and they would not despise me." Fitting, now that Sivan and its twins are over and Tammuz has come, a month tied to exile, when we were despised outside our land. Rashi's comment points to Joseph: that you were like my brother, meaning that you would come to console me as Joseph did his brothers, who had done evil to him, and of whom it is said, "and he consoled them." And Rosh Chodesh Tammuz is Joseph's yahrzeit.
+
+Of the seventy souls that descended to Egypt, the thirty-ninth is Eri, whose name looks related to being awake — as in "I am asleep, but my heart is awake," on which our Sages comment: although I am sleeping in exile, my heart is awake for the Holy One, blessed be He. And with him Gera, son of Benjamin, whose name means a foreigner, which is Joseph becoming a stranger in a strange country, as the Jewish people did in this season. Er is also the name of Judah's son who was killed by G-d for his sins — and the harsh punishments of these months serve as a wake-up call.
+
+Daf Lamed Tet of Shvuot describes the harsh punishments for false oaths. Even the family of the one who swears falsely is punished, and the punishment is immediate: water and fire do not wear away the wood and rocks of his house, but false oaths do; and regarding false oaths Hash-m does not cleanse without punishment even if he repents. The daf connects this to the oaths taken at Sinai.
+
+Jeremiah's thirty-ninth chapter begins the description of the atrocities. It says it was in the tenth month that Nebuchadnezzar's army besieged Jerusalem, and in the fourth month that it breached the walls. Here the months are counted from Nissan, so the fourth is Tammuz; and though Tammuz is also called the tenth month, counting from Rosh Hashanah, here the tenth is Teveth. Tammuz belongs to Reuven and to sight — and after the walls are breached the king of Judah is blinded. "And the king of Babylon slaughtered Zedekiah's sons in Riblah before his eye, and the king of Babylon slaughtered all the nobles of Judah." Rashi: all the nobles of Judah are the Sanhedrin, because they had annulled the oath. "And he blinded Zedekiah's eyes, and he bound him with copper chains to bring him to Babylon. And the king's palace and the houses of the people the Chaldeans burnt with fire, and they demolished the walls of Jerusalem."
+
+*Source: [Week 39 (Book 5): Feeling the Harshness of Exile](https://www.kabbalahoftime.com/2014/07/week-39-book-4b-feeling-harshness-of.html) — 659 words*
+
+---
+
+## Day 272 · Book 6 · Week 39
+
+The week of Rosh Chodesh Tammuz in psalms: the hundred and fifteenth, hundred and sixteenth and hundred and seventeenth, with three verses of Psalm 105 and one of Psalm 89.
+
+Psalm 115 asks Him to end this long exile for the sake of His Name, that it not be desecrated. "Not for our sake, Lord, not for our sake, but for the sake of Your Name bestow glory, because of Your kindness and Your truth. Why should the nations say, 'Where, now, is their G-d?'" Then the idols, made of silver and gold by human hands, taken apart sense by sense: "They have a mouth, but cannot speak; they have eyes, but cannot see; they have ears, but cannot hear; they have a nose, but cannot smell; their hands cannot touch; their feet cannot walk; they can make no sound in their throat." And then the warning: "Those who make them will become like them-all who put their trust in them." Then the three who are told to trust instead — Israel, the House of Aaron, those who fear the Lord — and the blessing on the small with the great. And the end: "The dead cannot praise the Lord, nor any who descend into the silence [of the grave]. But we will bless the Lord from now to eternity."
+
+Psalm 116 is David's love for G-d in the light of all the miracles done for him, and his not knowing how to repay any of it. "The pangs of death encompassed me and the misery of the grave came upon me; I encounter trouble and sorrow. I invoke the Name of the Lord, 'Lord, I implore you, deliver my soul!'" Then the saving: "The Lord watches over the simpletons; I was brought low, and He saved me. Return, my soul, to your tranquility, for the Lord has bestowed goodness upon you. For You have delivered my soul from death, my eyes from tears, my feet from stumbling." The faith held in the worst of it: "I had faith even when I declared, 'I am greatly afflicted'; [even when] I said in my haste, 'All men are deceitful.'" Then the question the psalm is built on: "How can I repay the Lord for all His beneficences to me? I will raise the cup of deliverance and proclaim the Name of the Lord." And the line that reads differently in this month: "Grievous in the eyes of the Lord is the death of His pious ones."
+
+Psalm 117 is two verses, and it points at the Messianic era, when the Children of Israel will have their former glory and all will praise G-d, in fulfilment of the verse that all will then call in the Name of G-d: "Praise the Lord, all you nations; extol Him, all you peoples. For His kindness was mighty over us, and the truth of the Lord is everlasting."
+
+Psalm 105's verses are a man in irons and then released: "They afflicted his foot with fetters; his soul was placed in irons. Until His word came, the saying of the Lord purified him. A king sent and released him, a ruler of peoples [sent] and loosed his bonds." And Psalm 89's verse is the crown thrown down: "You abrogated the covenant of Your servant; You profaned his crown to the ground."
+
+*Source: [Week 39 (Book 6): Reviewing the Week of Rosh Chodesh Tammuz - Psalms 115-117; 105:18-20; 89:40](https://www.kabbalahoftime.com/2014/07/week-38-book-5-reviewing-week-of-rosh.html) — 787 words*
+
+---
+
+## Day 273 · Book 7 · Week 39
+
+The bear opens by calling on every place there is, and the week comes in around it.
+
+The wilderness and the wish for a brother first: "Let the wilderness and its cities lift up their voice" / "The village that Kedar inhabits" / "O, that you were like my brother" / "Who sucked my mother's breasts!" / "And Moses said, 'Eat it today, For today is a Sabbath to the Lord; Today you will not find it in the field.'"
+
+Then the rocks and the islands, and the going home: "Let the inhabitants of the rock sing" / "Let them shout from the peaks of the mountains" / "Let them give glory to G-d and tell of His praise in the islands" / "And Elkanah went to Ramah, to his house" / "I would find you outside, I would kiss you, and they would not despise me."
+
+Then I am the One, with the six days and the child serving: "See now that it is I! I am the One, And there is no G-d like Me!" / "Six days you shall gather it, But on the seventh day, the Sabbath, on it there will be none" / "And the child was serving the Lord before Eli the priest" / "They afflicted his foot with fetters; His soul was placed in irons" / "You abrogated the covenant of Your servant."
+
+And the end is the late chariot, the striking and the healing: "Why is his chariot late in coming?" / "Why tarry the strides of his chariots?" / "I cause death and grant life. I strike, but I heal" / "And no one can rescue from My Hand!" / "And I have consumed them, And I have crushed them that they cannot rise" / "Yes, they are fallen under my feet" / "You profaned his crown to the ground" / "Until His word came, the saying of the Lord purified him" / "A king sent and released him, A ruler of peoples [sent] and loosed his bonds."
+
+*Source: [Week 39 (Book 7): The Bear Is Saying](https://www.kabbalahoftime.com/2017/06/week-39-bear-is-saying.html) — 263 words*
