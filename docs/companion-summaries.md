@@ -2466,3 +2466,125 @@ Then the scribes and the remembering: "Out of Machir came down officers" / "And 
 And the end is the garden: "How fair is your love, my sister, [my] bride" / "How much better is your love than wine, and the fragrance of your oils than all spices!" / "Your lips drip flowing honey, O bride" / "Honey and milk are under your tongue" / "O G-d, You are my Lord; I will exalt You" / "And the fragrance of your garments is like the fragrance of Lebanon" / "A locked up garden is my sister, [my] bride" / "A locked up spring, a sealed fountain."
 
 *Source: [Week 19: The Locust is Saying (Book 7)](https://www.kabbalahoftime.com/2021/01/week-19-locust-is-saying-book-7.html) — 317 words*
+
+---
+
+## Day 134 · Book 1 · Week 20
+
+The spider is saying, "Praise Him with sounding cymbals! Praise Him with loud clashing cymbals!" (Psalms 150:5) It is the twentieth animal, and this is the week of Tu B'Shvat, the New Year of the Trees.
+
+The spider mattered to King David, to whom Perek Shirah is attributed. A Midrash teaches that he once wondered why G-d had created it at all and could find no purpose for it. Later, fleeing from Saul, he entered a cave, and a spider spun an entire web across the entrance. Saul's men saw the web and reasoned that nobody could have been inside for long, so they went away without checking. The web saved his life and taught him that everything G-d creates has a glorious purpose. Perhaps that is why he kept the spider for Tu B'Shvat itself, the high point of Judaism's celebration of nature, and why its verse comes from the very last Psalm, where the praise comes to its culmination.
+
+A web and a tree are built the same way. A tree takes a long time to grow and then bears fruit; a spider takes a long time to make its web, and its fruits are what the web catches. Both are examples of balance and resistance, both are delicate, and both stand up to very strong winds because they can absorb impact by giving a little instead of breaking.
+
+Twenty is two complete units, so it intensifies the duality and the relationship that two already holds. It is also the age of full maturity, when a man may be enlisted for war and is expected to provide for his own sustenance, and from twenty onward we are held accountable in the Heavenly court.
+
+Pirkei Avot gives Rabbi Elazar of Bartota: give to Him what is His, for you and all that is yours is His, as King David said, "For everything comes from You, and from Your own hand we give to You." (I Chronicles 29:14) Fitting that David is the one quoted, in the week that is so much his. Tzedakah comes from the word for justice, and the Tanya explains that it is arguably the highest of all the mitzvoth: when we give away part of our livelihood we give away part of our own life. We fought hard for that money, and letting it go is the clearest admission that all of it was a gift to begin with — and that even after Hashem gives, it stays His, because He is the Supreme Owner of everything.
+
+Rabbi Elazar's line belongs to Tu B'Shvat directly. The first fruits were brought as an offering to the Temple, and all fruit requires ma'aser, tithing; Tu B'Shvat is the day the obligation to tithe the fruit begins, which is why it is the Rosh Hashanah of the Trees. He grants the fruit, so at least a tenth of it goes back to Him, as at least a tenth of our income goes to tzedakah.
+
+The same holds for passing on the Oral Torah. Whoever transmits it has to stay conscious that it comes from G-d, the Ultimate Teacher — both what came from a teacher and the new insight that looks like one's own. He grants knowledge for safekeeping and for the best use we can make of it, and there is a concept of tithing one's time to teach Torah too.
+
+The combination is yesod shebetiferet, a foundation that has both beauty and balance, which is what a tree is. And from the spider: with total confidence and a loud, firm voice — like the smashing of cymbals — we can be a good influence on others, and help them see that nobody is alone.
+
+*Source: [Week 20 (From the Book): To Be Solid and Giving in Our Relationships](https://www.kabbalahoftime.com/2014/01/week-20-from-book-to-be-solid-and.html) — 910 words*
+
+---
+
+## Day 135 · Book 2 · Week 20
+
+Tu B'Shevat, and Haazinu's verse hides His face: "And He said, 'I will hide My face from them. I will see what their end will be, for they are a generation of changes [reversals]; they are not [recognizable] as My children whom I have reared.'" (Deuteronomy 32:20) Read positively, He hides His face from their sins and focuses on how they will be at their completion — a generation transformed by teshuvah, and His children after all, with faith in them.
+
+The Haftarah says the same from the other side: "And He brought me forth into a wide place; He delivered me because He took delight in me." (II Samuel 22:20) Once we are taken out of our confines, our essence comes out, which is what He desires. Delight and desire are Ta'anug, and Ta'anug is Shevat. The Hebrew for "generation of changes" is Dor Ta'apuchot, which sounds like Tapuach, apple — and the theme underneath is emunah, which is also the ability to change for the better. To celebrate the New Year of the Trees in the middle of winter, knowing spring will come, is the whole message of the day.
+
+So the quality is minimized sleep, miut sheinah. Sleep confines us; consciousness drops and so does the ability to serve. But sleep is also a moment of increased faith, because we trust that we will wake. That is Tu B'Shvat again: the tree's vitality is still dormant and the fruit is already there in potential. Better not to sleep — not to slacken — in serving Him; and in the hours when we are less attuned, to act with miut, smallness and humility, hoping to serve better soon.
+
+The prophet is Azariah son of Oded, and his prophecy to King Asa is exactly this. "Hearken to me, Asa and all of Judah and Benjamin; the Lord is with you because you are with Him, and if you seek Him, He will be found by you, but if you forsake Him, He will forsake you." He describes the sleeping years — "there were many days for Israel without a true G-d and without an instructing priest, and without the Torah" — and then the waking: "And they returned to the Lord, the G-d of Israel, when they were in distress, and they sought Him, and He was found by them." And the charge: "But you be strong and let your hands not slacken, for there is reward for your work." Asa heard it, strengthened himself, removed the abominations from Judah and Benjamin and from the cities he had captured from Mount Ephraim, renewed the altar, and gathered the people.
+
+The levitical city is Helkath, from chelek, part — which is the tithing of produce again, the thing this day begins.
+
+*Source: [Week 20 (Book 2): Azariah and "Minimized" Sleep](https://www.kabbalahoftime.com/2014/01/week-20-book-2-azariah-and-minimized.html) — 854 words*
+
+---
+
+## Day 136 · Book 3 · Week 20
+
+The Song of the Sea names the house: "directed toward Your habitation, which You made, O Lord; the sanctuary, O Lord, [which] Your hands founded." Rashi explains "directed toward Your habitation" to mean that the Temple below stands directly opposite the Temple above. At that moment neither the Temple nor the Tabernacle had been built; they were there only in potential, a reflection of the one above. Which is Tu B'Shevat exactly — celebrated in midwinter, when the fruit is only there in potential.
+
+The Haftorah brings Issachar: "And the princes of Issachar were with Deborah, as was Issachar with Barak; into the valley they rushed forth with their feet." Issachar was wholly given to learning Torah and passing it on, and so stands for the Oral Torah more than any other tribe, which is this month.
+
+Daf Kaf of Sotah keeps on with the drinking and when she can refuse, and takes in teaching Torah to women, how the water tests her, what ink may be used, and how a woman's merit can hold back punishment. It also has a passage that looks down on withholding from pleasure improperly — and pleasure is the theme of the day.
+
+The generation is Avraham, forefather of the Jewish people and father, Av, of many others, which is what his name means. At the time his name was changed, and even before that, he was still childless: his children too were there only in potential. He was known for his hospitality, feeding his guests all kinds of delicacies, and that was how he taught them about the One True G-d.
+
+The connection is plainer still in the tamarisk. "And Avraham planted an eshel, a tamarisk tree… and there he called in the name of G-d, L-rd of the world," and then, "And Avraham lived in the land of the Philistines for an extended period" — and after those verses comes the binding of Yitzchak. Why does it matter that he planted a tree? The tamarisk is large and broad-branched, and he was living in a desert, so he planted it to shade wayfarers from the scorching sun. The Talmud widens eshel from one tree to an orchard, so that passersby could refresh themselves with fruit, and offers a second reading in which eshel is an inn: bread and meat, drink and lodging. The Midrash says he even gave his guests a court of law to settle any dispute among them. He did not stop at bread, salt and water — not the bare minimum but the things that bring pleasure: fruit, wine, delicacies, lodging, and a court for their troubles.
+
+The journey is from Kehelathah to Mount Shepher. Rabbi Jacobson explains that Mount Shepher means beautiful mountain, and cites Targum Yonasan, which renders it mountain with beautiful fruit. The personal journey moves on from the gathering and the commitment to the leader, to the enjoyment and the beauty of both the natural and the spiritual fruit.
+
+*Source: [Week 20 (Book 3): Avraham and Giving](https://www.kabbalahoftime.com/2014/01/week-20-book-3-avraham-and-potential.html) — 894 words*
+
+---
+
+## Day 137 · Book 4 · Week 20
+
+Channah's twentieth verse is the birth: "And it was, when the time came about (lit. after the seasons and the days), after Hannah had conceived, that she bore a son, and she called his name Samuel, because (she said); 'I asked him of the Lord.'" Conception and birth run through this month. In Shevat the fruit is there in potential, and it still takes a turn of seasons and days before the tree bears it — and in the meantime there is the harshness of winter to get through.
+
+The Pirkei Avot quality is that people enjoy power from those who study Torah for its own sake, Lishmah: "Mine are counsel and wisdom, I am understanding, mine is power." Gevurah is might, strength, discipline, and also judgment. In the story, Eli's blessing is what gives Channah the strength to bear a child, and the name Shmuel and the reason given for it say plainly that it all came from Hashem.
+
+Proverbs 20 carries the same. "Fear of a king is like a lion's roar; he who provokes him forfeits his life." "A king sits upon a throne of judgment; all evil is spread out before him." "Who will say, 'I have cleansed my heart; I have become purified of my sin'?" And then: "'It is bad, it is bad,' says the buyer, but when he goes away, then he boasts." Rashi reads that last one as the pains and the rewards of Gevurah together — one who acquires Torah through poverty and the pains of hunger says woe is me for this trouble, and then goes away full of wisdom and boasts about the pain he suffered.
+
+The week usually holds the yahrzeits of two Chassidic founders: Rabbi Mordechai of Lechovitch on the 13th of Shevat and Rav Yechiel Danziger of Alexander on the 14th. Rabbi Mordechai is one of the foremost figures in the Karlin dynasty, and Lechovitch later branched into Kobrin, Koidanov and Slonim. There are many stories about him and many recorded statements; he once gave this blessing: "Don't fool yourself, don't fool G-d, and don't fool people."
+
+Rav Yechiel Danziger founded Alexander, which before the Holocaust was the second largest dynasty after Ger. He was a student of Rabbi Yitzchak Kalish of Vorka, and after Rabbi Yitzchak's son, Rabbi Menachem Mendel of Vorka, passed away, many of his disciples became Alexander Chassidim. Rav Yechiel's teachings are recorded in the group's primary text, Yismach Yisroel, written by his son.
+
+Strikov continues Alexander. After Rav Yechiel's son, Rabbi Yisroel Yitzchok Danziger, passed away, the leadership was eventually transferred to Rav Elimelech Menachem Mendel Landau of Strikov, whose yahrzeit also often falls this week, on the 19th of Shevat; he only accepted it once his brother, Rabbi Tzvi Aharon, had passed away. Under him there were 150 Strikover houses of study throughout Poland; he founded Yeshivas Zechusa DeAvraham in Israel, and his Torah thoughts are published in Maggid Devarav L'Yaakov and Bayeshishim Chochmah. Also this week: Rav Yaakov Yehoshua Falk Katz, the Pnei Yehoshua, and Rabbi Aryeh Kaplan on the 14th of Shevat, Rav Yechezkel of Kuzmir, grandfather of the first Modzitzer Rebbe, on the 17th, and sometimes Rav Shmuel Weinberg of Slonim, the Divrei Shmuel, on the 19th.
+
+*Source: [Week 20 (Book 4): Hanging in There Through the Winter](https://www.kabbalahoftime.com/2014/01/week-20-book-4a-hanging-in-there.html) — 738 words*
+
+---
+
+## Day 138 · Book 5 · Week 20
+
+This week the Song names the fruit outright. "Your arid fields are as a pomegranate orchard with sweet fruit, henna and spikenard." Then the whole list: "Spikenard and saffron, calamus and cinnamon, with all frankincense trees, myrrh and aloes, with all the chief spices." And then the water: "A garden fountain, a well of living waters and flowing streams from Lebanon." Nature and pleasure again, but fruit and trees by name, because this is the Rosh Hashanah of the trees.
+
+Of the seventy souls that descended to Egypt, the twentieth is Perez, whose name means to burst forth. His birth is told in some detail, and how he burst forth to become the firstborn — which is how the flowers and the fruit have to come out, after the trees have endured the cold.
+
+Daf Kaf of Shvuot keeps on with the laws of oaths, most of them about eating and pleasure.
+
+Jeremiah's twentieth chapter is the pain he endured, and its most striking part is where he speaks of the day of his birth. "Cursed be the day in which I was begotten; the day in which my mother bore me shall not be blessed." "That he did not put me to death from the womb, that my mother should be my grave and her womb a perpetual pregnancy. Why did I come forth out of the womb to see toil and grief, and my days end with shame?" Birth and conception again, from the other end of it.
+
+*Source: [Week 20 (Book 5):Perez and Bursting Out of the Cold](https://www.kabbalahoftime.com/2014/01/week-20-book-4bperez-and-bursting-out.html) — 383 words*
+
+---
+
+## Day 139 · Book 6 · Week 20
+
+The third week of Shevat in psalms: the fifty-eighth, fifty-ninth and sixtieth, with three verses of Psalm 59 again and one of Psalm 89.
+
+Psalm 58 is David's anguish at Avner and the others who justified Saul's pursuit of him. It opens by asking the judges why they are silent: "Is it true that you are mute [instead of] speaking justice? [Instead of] judging men with fairness?" Then the venom: "Their venom is like the venom of a snake; like the deaf viper that closes its ear so as not to hear the voice of charmers, [even] the most skillful caster of spells." Then the asking: "O G-d, smash their teeth in their mouth." "Let them melt like water and disappear." "Like the snail that melts as it goes along." And the end of it: "And man will say, 'There is indeed reward for the righteous; indeed there is a G-d Who judges in the land.'"
+
+Psalm 59 is the great miracle of the escape through a window, unnoticed by the guards at the door, with the prayers he offered then. "Rescue me from my enemies, my G-d; raise me above those who rise against me." The dogs: "They return toward evening, they howl like the dog and circle the city." The laughing: "But You, Lord, You laugh at them; You mock all nations." Then the asking for less than destruction, so nothing is forgotten: "Do not kill them, lest my nation forget." And the morning at the end: "As for me, I shall sing of Your might, and sing joyously of Your kindness toward morning, for You have been a stronghold to me, a refuge on the day of my distress."
+
+Psalm 60 has a story behind it. Joab, David's general, came to Aram Naharayim for war and the people asked him: are you not from the children of Jacob? What of the pact he made with Laban? He did not know what to answer and put it to the Sanhedrin. The psalm is David's prayer for success in that war, and it starts from the breach: "O G-d, You forsook us, You have breached us! You grew furious-restore us! You made the earth quake, You split it apart-heal its fragments, for it totters!" Then the banner: "[Now] give those who fear You a banner to raise themselves, for the sake of truth, Selah." Then the dividing up of the land, Shechem and the Valley of Succot, Gilead and Menasseh, Ephraim and Judah, Moab and Edom and Philistia. And the close, which gives the fighting back to Him: "Grant us relief from the oppressor; futile is the salvation of man. With G-d we will do valiantly, and He will trample our oppressors."
+
+Psalm 89's verse is the anointing: "I have found David, My servant; I have anointed him with My holy oil."
+
+*Source: [Week 20 (Book 6): Reviewing the Third Week of Shevat - Psalms 58-60; 59:15-17; 89:21](https://www.kabbalahoftime.com/2014/01/week-20-book-5-reviewing-third-week-of.html) — 1035 words*
+
+---
+
+## Day 140 · Book 7 · Week 20
+
+The spider opens, and the week's six books come in around it.
+
+The howling first, braided with the hiding: "And they will return toward evening" / "They will howl like the dog and circle the city" / "And He said, 'I will hide My face from them. I will see what their end will be'" / "They will wander about to eat" / "When they will not be sated they will groan" / "For they are a generation of reversals" / "They are not My children whom I have reared."
+
+Then the singing toward morning, and the princes going down: "As for me, I shall sing of Your might" / "And sing joyously of Your kindness toward morning" / "And the princes of Issachar were with Deborah" / "As was Issachar with Barak."
+
+Then the birth and the anointing together: "And it was, after the seasons and the days" / "After Hannah had conceived, that she bore a son" / "I have found David, My servant; I have anointed him with My holy oil" / "And she called his name Samuel" / "Because, 'I asked him of the Lord.'"
+
+Then the house, with the refuge inside it: "Directed toward Your habitation" / "Which You made, O Lord" / "For You have been a stronghold to me" / "A refuge on the day of my distress" / "The sanctuary, O Lord, [Which] Your hands founded" / "And He brought me forth into a wide place."
+
+And the end is the orchard and the cymbals: "Your arid fields are as a pomegranate orchard" / "With sweet fruit, henna and spikenard" / "Praise Him with sounding cymbals!" / "Into the valley they rushed forth with their feet" / "Spikenard and saffron, calamus and cinnamon, with all frankincense trees" / "He delivered me because He took delight in me" / "Myrrh and aloes, with all the chief spices" / "A garden fountain, a well of living waters and flowing streams from Lebanon" / "Praise Him with loud clashing cymbals!"
+
+*Source: [Week 20 (Book 7): The Spider is Saying](https://www.kabbalahoftime.com/2021/01/week-20-book-7-spider-is-saying.html) — 261 words*
