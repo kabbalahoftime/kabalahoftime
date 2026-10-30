@@ -13,9 +13,14 @@ const urlsToCache = [
   // the file is left in the repository against a future that wants it.
   // The companion's 364 daily entries, fetched by the page on load like the
   // translations. It gets the JSON rule in the fetch handler below — served
-  // from cache at once, refetched behind — so a corrected manuscript reaches
-  // a reader on their next open rather than being pinned forever.
-  '/companion.json',
+  // from cache at once, refetched behind — so a rebuilt companion reaches a
+  // reader on their next open rather than being pinned forever.
+  //
+  // companion.json is the other companion — the written one, which is off
+  // until its opening is written. It is not pre-cached: nothing fetches it,
+  // and a third of a megabyte nobody reads is a third of a megabyte of a
+  // reader's offline allowance.
+  '/companion-days.json',
   // Fonts are bundled now rather than fetched from Google, so pre-cache them
   // — otherwise the first offline load falls back to system serifs.
   '/fonts/cinzel-latin-ext.woff2',

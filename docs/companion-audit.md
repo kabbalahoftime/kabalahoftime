@@ -6,14 +6,33 @@ Everything below came out of answering that.
 
 The companion was taken offline the same day and rewritten.
 **Everything below describes the first text.** It is kept because the failures
-are the reason the second text is written the way it is.
+are the reason everything after it is built the way it is.
 
-**It is still off.** The rewrite holds, but the manuscript's own header marks
-weeks 1 and 2 as placeholder until the real opening replaces them — creation
-as the creation of time, the six thousand years, the Torah before the world.
-Those are the first fourteen days a reader meets, and it does not go out with
-its door unbuilt. The entries are in `companion.json` and the fetch in
-`index.html` is commented out, with the reason at the switch.
+## What the app shows now
+
+Not either written text. `companion-days.json`: **one KoT Book for one week,
+each day**, filed the way Binah files them — day 1 is Book 1's reading for
+week 1, day 2 is Book 2's for week 1, day 225 is Book 1's for week 33. Seven
+books × fifty-two weeks = 364.
+
+Every entry was already in `index.html` before the companion existed, in the
+weekly table. Seven templates, one to a book, and 364 fillings of them — so
+there is no sentence in it that anybody composed, which is a stronger promise
+than any citation. The sweep below now flags **nothing at all**: no routes
+named, no claims about the app, no quotations attributed to it, because the
+entries only say what the week's readings are.
+
+Each entry links the week's post for its book — 364 posts for 364 days, from
+the app's own `BOOKn_WEEK_URLS` and `b7_url`.
+
+## The written text, which is off
+
+`companion.json` and its manuscript `docs/a-year-inside-the-day.md` are the
+rewrite of the text described below. It holds, but the manuscript's own header
+marks weeks 1 and 2 as placeholder until the real opening replaces them —
+creation as the creation of time, the six thousand years, the Torah before the
+world. Those are the first fourteen days a reader meets, and it does not go
+out with its door unbuilt. Nothing fetches it.
 
 Re-run this sweep before any change to it ships:
 

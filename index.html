@@ -3293,18 +3293,20 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   padding:14px 2px; margin:-14px 0; text-align:center;
 }
 .comp-jump:hover { text-decoration:underline; }
-/* The two clocks, as a pair rather than a switch with a hidden state: both
-   are named and the one in force is filled, so a reader can see what the
-   other would do before pressing it. */
-.comp-mode { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; justify-content:center; }
-.comp-mode-btn {
-  background:none; border:1px solid var(--border); border-radius:4px;
-  color:var(--ink-mid); cursor:pointer; font-family:'Cinzel',serif;
-  font-size:calc(9.5px * var(--ts, 1)); letter-spacing:1px; text-transform:uppercase;
-  padding:14px 10px; line-height:1; position:relative; z-index:1;
+/* .comp-mode and .comp-mode-btn stood here — the two clocks, the year's count
+   and the reader's own pace. The companion they belonged to was a curriculum
+   somebody could start on any day. These entries are the day's own reading, so
+   there is one clock and it is the page's. Their rules are gone with them
+   rather than left as style for markup that no longer exists. */
+/* The way out to the week's writing for this book. It is the one link in the
+   entry, so it gets the finger's worth of height the same way the readings
+   on the cards do. */
+.comp-source {
+  display:inline-block; color:var(--gold); text-decoration:none;
+  font-size:calc(12.5px * var(--ts, 1)); letter-spacing:0.3px;
+  padding:14px 6px; margin:-14px -6px; position:relative; z-index:1;
 }
-.comp-mode-btn.on { border-color:var(--gold); color:var(--gold); background:var(--bg-card-alt); }
-.comp-mode-btn:hover { color:var(--gold); }
+.comp-source:hover { text-decoration:underline; }
 .comp-foot { margin-top:11px; }
 .comp-made { margin:9px 0 0; font-size:calc(11px * var(--ts, 1));
              line-height:1.55; color:var(--ink-dim); font-style:italic; }
@@ -3587,6 +3589,41 @@ content: ''; float: right; width: 30px; height: 1em;
 }
 /* Opens the book's week; a control rather than a link, so it says so. */
 .kot-summary { color: var(--gold); font-size: 0.85em; cursor: pointer; }
+
+/* ── THE WEEK'S SEVEN READINGS ──
+   The day chooses which of the seven books Binah shows, and that is right:
+   the books are a reading keyed to the weekday. The week's writing for them
+   is not keyed to anything — all seven posts stand the whole week — so one
+   showing a day meant six of them were unreachable until their weekday came
+   round, and a reader who opened the app on Tuesday never knew Monday's was
+   there. The row carries all seven, every day. */
+.kot-week-all { margin-top:5px; font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
+/* The lead takes a line of its own so the seven below it get the card's full
+   width, which is what lets each of them be a finger wide. */
+.kot-week-all .kwa-lead { display:block; letter-spacing:0.3px; margin-bottom:1px; }
+/* Centred, because seven 44px targets need 308px and the pane is 273px wide
+   on a 390px phone: the row wraps, and a seventh left hanging at the left
+   margin reads as a mistake where a centred one reads as a second row. */
+.kwa-row { display:flex; flex-wrap:wrap; justify-content:center; }
+/* A finger each, in both directions — not a drawn size with an overlay over
+   it, because seven of them sit shoulder to shoulder and an overlay on one
+   would be reaching across its neighbour. 7 x 44 is 308px, which a 320px
+   phone wraps rather than scrolls, and it does not grow with the text size:
+   the number inside it does, the box does not need to. */
+.kwa, .kwa-off {
+  flex:0 0 auto; min-width:44px; min-height:44px;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:calc(12px * var(--ts, 1));
+}
+.kwa { color:var(--gold); text-decoration:none; }
+.kwa:hover { text-decoration:underline; }
+/* Today's is marked, because the row would otherwise give no sign which of
+   the seven the card above it is showing. It is not named again — the card
+   names it two lines up. */
+.kwa.kwa-on { font-weight:700; }
+/* A week with no post for a book: shown, so the seven stay seven and the gap
+   is visible, but not offered as something to tap. */
+.kwa-off { color:var(--ink-dim); opacity:0.55; }
 </style>
 
 </head>
@@ -3955,20 +3992,27 @@ content: ''; float: right; width: 30px; height: 1em;
     <a href="#" onclick="event.preventDefault(); openTodaysPath()" style="color:var(--gold); font-weight:600;">Tap the moon 🌙 above anytime to see Today's Path.</a>
   </div>
 
-  <!-- THE COMPANION — one entry a day from "A Year Inside the Day", the
-       on-ramp for a reader who brings nothing with them. It sits above the
-       cards because that is who it is for: someone who has opened the page
-       and does not yet know what a Sefirah is. The cards assume the year;
-       this assumes nothing and walks there in 364 days.
-       Its text lives in companion.json rather than here — 364 entries is a
-       third of a megabyte, which does not belong in a page that must parse
-       before anything draws. The card holds its place while the file is in
-       flight and fills when it lands, so nothing jumps. -->
+  <!-- THE COMPANION — one of the seven KoT Books, for one week, each day.
+       The day chooses the book exactly as Binah does: day 1 is Book 1's
+       entry for week 1, day 2 is Book 2's for week 1, day 8 is Book 1's for
+       week 2, day 225 is Book 1's for week 33. Seven books times fifty-two
+       weeks is 364, which is the year — and 364 posts on the blog, one to
+       each day, which is where each entry links.
+       It sits above the cards because of who it is for: someone who has
+       opened the page and does not yet know what a Sefirah is. The cards
+       set the day's readings out in full; this says in sentences what one of
+       them is.
+       Its text lives in companion-days.json rather than here — a third of a
+       megabyte does not belong in a page that must parse before anything
+       draws. The card holds its place while the file is in flight and fills
+       when it lands, so nothing jumps. The entries are built from the app's
+       own weekly table by tools/build_companion_days.py, so the companion
+       and the cards cannot come to say different things. -->
   <section id="companion" class="companion" style="display:none;" aria-labelledby="comp-open">
     <div class="comp-new" aria-hidden="true">New</div>
     <h2 class="comp-h"><button type="button" id="comp-open" class="comp-open"
         aria-expanded="false" aria-controls="comp-panel" onclick="toggleCompanion()">
-      <span class="comp-head">A Daily Introductory Companion</span>
+      <span class="comp-head">A Daily Companion</span>
       <span class="comp-peek" id="comp-peek"></span>
       <span class="comp-chev" aria-hidden="true">&#9662;</span>
     </button></h2>
@@ -3989,30 +4033,34 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="comp-body" id="comp-body"></div>
       <div class="comp-practice" id="comp-practice"></div>
       <div class="comp-teaser" id="comp-teaser"></div>
-      <!-- A curriculum a reader can only ever join in the middle is not a
-           curriculum. These walk it: to the beginning, a day either way, and
-           back to the day the rest of the page is on. Where the reader stops
-           is remembered, so the book keeps their place between visits the way
-           a book does. -->
+      <!-- Where the digest came from. Each entry is one book's reading for
+           one week, and the week's writing for that book is a post of its
+           own — 364 of them for 364 days. The entry is the short form; this
+           is the long one, and it is named rather than hinted at. -->
+      <div class="comp-nav-mid">
+        <a class="comp-source" id="comp-source" href="#" target="_blank"
+           rel="noopener" style="display:none;"></a>
+      </div>
+      <!-- Back to the day the rest of the page is on, shown only once the
+           reader has stepped away from it. There is no "start at day 1" any
+           more and no own-pace mode: an entry says which week it is, and a
+           companion drifting a few weeks behind the cards would be telling
+           the reader it was week 5 while every card said week 8. Stepping is
+           browsing now, and it lasts as long as the visit. -->
       <div class="comp-nav-mid">
         <button type="button" class="comp-jump" id="comp-first"
-                onclick="companionGo(1)">New here? Start at Day&nbsp;1</button>
+                onclick="companionHome()">Back to today</button>
       </div>
-      <!-- Which clock the companion keeps, named rather than inferred. -->
-      <div class="comp-mode" role="group" aria-label="How the companion chooses its day">
-        <button type="button" class="comp-mode-btn" id="comp-mode-year"
-                onclick="companionMode('year')">The year&rsquo;s count</button>
-        <button type="button" class="comp-mode-btn" id="comp-mode-own"
-                onclick="companionMode('own')">My own pace</button>
-      </div>
-      <!-- The PDF link stood here. It is out until the PDF is set again from
-           the rewritten manuscript: the one at the root is the first text,
-           and it carries the invented motto, the wrong verse and the routes
-           a reader could not follow. A download is harder to correct than a
-           page — it sits on the reader's disk saying the old thing. -->
+      <!-- The PDF link stood here. It is out until the PDF is set again:
+           the one at the root is the first companion text, and it carries an
+           invented motto, a wrong verse and routes a reader could not
+           follow. A download is harder to correct than a page — it sits on
+           the reader's disk saying the old thing. -->
       <div class="comp-foot">
-        <p class="comp-made">The text of this companion is AI&#8209;generated. The books
-          on the shelf are not.</p>
+        <p class="comp-made">Every entry here is assembled from this app&rsquo;s own
+          weekly table &mdash; the same readings the cards below show, said in
+          sentences. Nothing in it is written by hand, and nothing in it is
+          anything the app does not already hold.</p>
       </div>
     </div>
   </section>
@@ -16003,87 +16051,63 @@ content: ''; float: right; width: 30px; height: 1em;
   // three things there: the pairing, the trait and the creature. That is what
   // openWeeklyReport draws into wr-week-info, in that order.
   //
-  // It is written as a manuscript, docs/a-year-inside-the-day.md, and
-  // companion.json is built from it by tools/companion_from_md.py. Edit the
-  // manuscript. tools/check_companion.py re-runs the sweep, and the sweep
-  // itself is in docs/companion-audit.md.
+  // That text is still here, as a manuscript — docs/a-year-inside-the-day.md,
+  // with companion.json built from it by tools/companion_from_md.py — and it
+  // is still off. Its own header marks weeks 1 and 2 as standing in until the
+  // real opening is written, and those are the first fourteen days a reader
+  // meets. It waits for them.
   //
-  // ── STILL OFF: THE OPENING IS A PLACEHOLDER ──
+  // ── WHAT IS HERE INSTEAD ──
   //
-  // The rewritten text holds, but its own header says weeks 1 and 2 stand as
-  // placeholder until the real opening replaces them — creation as the
-  // creation of time, the six thousand years, the Torah before the world.
-  // Those two weeks are the first fourteen days a reader meets, and the book
-  // is not going out with its door unbuilt. So the fetch stays commented
-  // until they are written, and the entries wait in companion.json.
+  // One of the seven KoT Books, for one week, each day — the day choosing the
+  // book exactly as Binah does. Day 1 is Book 1's reading for week 1, day 2
+  // is Book 2's for week 1, day 8 is Book 1's for week 2, day 225 is Book 1's
+  // for week 33. Seven books times fifty-two weeks is 364.
   //
-  // Nothing fetches it, so applyCompanion finds COMPANION null and leaves the
-  // section hidden. Restore the four lines below and it returns.
+  // Every one of those entries was already in this file before the companion
+  // existed: the weekly table getWeeklyData reads holds all seven books'
+  // readings for all fifty-two weeks. So the entries are transcribed, not
+  // written. There are seven templates, one to a book, and 364 fillings of
+  // them — which is why nothing in the companion can now claim something the
+  // app does not hold. tools/build_companion_days.py does it, over a dump
+  // taken from this page by tools/dump_week_data.mjs.
   //
-  // The PDF link that lived in the footer is gone for its own reason:
-  // a-year-inside-the-day.pdf is the first text and carries every one of the
-  // fabrications above.
-  //
-  // fetch('companion.json')
-  //   .then(r => r.ok ? r.json() : null)
-  //   .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
-  //   .catch(() => {});
+  // Each entry names the week's post for its book, which is the long form of
+  // the same reading: 364 posts for 364 days, from the app's own
+  // BOOKn_WEEK_URLS and b7_url.
+  fetch('companion-days.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(j => { if (j && j.days) { COMPANION = j; _compDay = null; applyCompanion(); } })
+    .catch(() => {});
 
   // The day of the KoT year, kept here by render() so the fetch above can
   // draw as soon as it lands, whenever that is.
   let _compToday = null;
   // ── WHICH DAY THE COMPANION IS ON ──
   //
-  // Two ways of choosing it, and the reader picks.
+  // The day the rest of the page is on, and nothing else. The arrows step
+  // away from it to look, and "Back to today" returns.
   //
-  //   the year's count — the entry is the day of the Kabbalah of Time year,
-  //     so the companion sits in step with the cards and the date bar. Open
-  //     it on day 282 and it is on entry 282.
+  // There used to be two modes — the year's count, and the reader's own pace,
+  // which advanced a day at a time from wherever they began. That belonged to
+  // a companion that was a curriculum: a 364-day arc somebody should be able
+  // to start in Tammuz. These entries are not an arc. Each one says which
+  // week of fifty-two it is and which of the seven books it is reading, so a
+  // companion running three weeks behind would sit above the cards insisting
+  // it was week 5 while every card on the page said week 8. An entry that can
+  // contradict the page it is on is worse than no entry.
   //
-  //   their own pace — the entry advances a day at a time from wherever they
-  //     started. Somebody meeting the book in Tammuz should be able to begin
-  //     at Day 1 and have Day 2 waiting tomorrow, rather than being returned
-  //     to the middle of the arc every morning. This is the mode that makes
-  //     it a curriculum rather than a daily glimpse.
-  //
-  // Own pace is held as an anchor — an entry, and the date the reader was on
-  // it — rather than as a stored entry number, so it keeps moving while the
-  // app is closed and needs nothing written to carry it forward. Both modes
-  // read the displayed date, so stepping the app's date steps the companion
-  // either way.
-  const _compYMD = (d) => d.getFullYear() + '-' +
-    String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  const _compStore = (k, v) => { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} };
-  const _compRead = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  // So stepping is browsing. It lasts the visit, is not written down, and is
+  // dropped the moment the page's own day moves — the reader who steps
+  // forward to look at next Tuesday has not asked to live there.
+  let _compBrowse = null;
 
-  let _compMode = _compRead('kotCompanionMode') === 'own' ? 'own' : 'year';
-  let _compAnchorDay = parseInt(_compRead('kotCompanionAnchorDay'), 10) || 0;
-  let _compAnchorDate = _compRead('kotCompanionAnchorDate') || '';
-
-  function _compViewedDate() {
-    try { return localMidnight(getDisplayDate(currentOffset)); } catch (e) { return localMidnight(new Date()); }
-  }
-  function _compOwnDay() {
-    if (!(_compAnchorDay >= 1) || !_compAnchorDate) return null;
-    const a = new Date(_compAnchorDate + 'T00:00:00');
-    if (isNaN(a)) return null;
-    const gone = Math.round((_compViewedDate() - a) / 86400000);
-    return Math.min(364, Math.max(1, _compAnchorDay + gone));
-  }
   function companionDay() {
-    if (_compMode === 'own') { const n = _compOwnDay(); if (n) return n; }
-    return _compToday;
+    return _compBrowse || _compToday;
   }
-
-  // Going to a day is choosing to read at your own pace, so it anchors there.
   function companionGo(n) {
     const want = Math.min(364, Math.max(1, n));
-    _compMode = 'own';
-    _compAnchorDay = want;
-    _compAnchorDate = _compYMD(_compViewedDate());
-    _compStore('kotCompanionMode', 'own');
-    _compStore('kotCompanionAnchorDay', String(want));
-    _compStore('kotCompanionAnchorDate', _compAnchorDate);
+    _compBrowse = (want === _compToday) ? null : want;
     _compDay = null;                         // force the redraw
     applyCompanion();
     toggleCompanion(true);                   // a day asked for is a day to read
@@ -16092,18 +16116,19 @@ content: ''; float: right; width: 30px; height: 1em;
     const now = companionDay();
     if (now) companionGo(now + d);
   }
-  // The named choice. Switching to own pace keeps whatever day is on screen
-  // and starts counting from it, so the toggle never moves the reader.
-  function companionMode(mode) {
-    if (mode === 'own') { companionGo(companionDay() || 1); return; }
-    _compMode = 'year';
-    _compStore('kotCompanionMode', null);
+  function companionHome() {
+    _compBrowse = null;
     _compDay = null;
     applyCompanion();
   }
 
   function applyCompanion(day) {
-    if (typeof day === 'number' && day >= 1 && day <= 364) _compToday = day;
+    // A new day for the page is a new day for the companion: whatever the
+    // reader had stepped away to look at is let go, because the entry they
+    // came back for is the one belonging to the day on screen.
+    if (typeof day === 'number' && day >= 1 && day <= 364) {
+      if (day !== _compToday) { _compToday = day; _compBrowse = null; }
+    }
     const el = document.getElementById('companion');
     if (!el) return;
     const want = companionDay();
@@ -16149,17 +16174,32 @@ content: ''; float: right; width: 30px; height: 1em;
       ? '<span class="comp-lead">Practice</span>' + esc(e.practice) : '');
     set('comp-teaser', e.teaser
       ? '<span class="comp-lead">' + esc(e.teaserLead || 'Tomorrow') + '</span>' + esc(e.teaser) : '');
-    // Day 7 has no teaser — the first week ends on its practice — so the line
-    // is emptied rather than left holding yesterday's.
+    // An entry without a teaser empties the line rather than leaving it
+    // holding yesterday's.
     const t = document.getElementById('comp-teaser');
     if (t) t.style.display = e.teaser ? '' : 'none';
+
+    // The week's writing for this book — the long form of the same reading.
+    // The address comes from the entry rather than from here, because it is
+    // the app's own BOOKn_WEEK_URLS that put it there.
+    const s = document.getElementById('comp-source');
+    if (s) {
+      if (e.source) {
+        s.href = e.source;
+        s.textContent = (e.sourceLabel || 'The whole entry') + ' ↗︎';
+        s.style.display = '';
+      } else {
+        s.removeAttribute('href');
+        s.style.display = 'none';
+      }
+    }
     compNav();
   }
 
-  // The four controls, each shown only where it means something: no step back
-  // from the first day or on from the last, no invitation to start at Day 1
-  // while standing on it, and nothing offering a way back to today until the
-  // reader has left it.
+  // Three controls, each shown only where it means something: no step back
+  // from the first day, none on from the last, and nothing offering a way
+  // back to today until the reader has actually left it. The way back names
+  // the day it goes to, so a reader three weeks out can see where it lands.
   function compNav() {
     const now = companionDay();
     const show = (id, on, label) => {
@@ -16170,20 +16210,8 @@ content: ''; float: right; width: 30px; height: 1em;
     };
     show('comp-prev', now > 1);
     show('comp-next', now < 364);
-    show('comp-first', now !== 1);
-    // The year's button names the day it would go to, so the reader can see
-    // what they are choosing between rather than having to try it.
-    const y = document.getElementById('comp-mode-year');
-    const o = document.getElementById('comp-mode-own');
-    if (y && o) {
-      const onYear = _compMode !== 'own';
-      y.textContent = _compToday && !onYear
-        ? 'The year’s count · Day ' + _compToday : 'The year’s count';
-      y.classList.toggle('on', onYear);
-      o.classList.toggle('on', !onYear);
-      y.setAttribute('aria-pressed', onYear ? 'true' : 'false');
-      o.setAttribute('aria-pressed', onYear ? 'false' : 'true');
-    }
+    show('comp-first', !!_compBrowse && !!_compToday,
+      _compToday ? 'Back to today · Day ' + _compToday : 'Back to today');
   }
 
   // The badge retires itself. It says "new", which stops being true the
@@ -24840,6 +24868,28 @@ content: ''; float: right; width: 30px; height: 1em;
     // reading for them to sit beside, and the Books tab at the head of the
     // page is where they are now. They are the only two that stand on no
     // card, which is why that tab exists.
+    // The seven numbered, each going to its own week's writing. The number is
+    // the book's own name for itself, so a row of seven of them needs no
+    // legend; the label a screen reader is given says the whole name, since
+    // "6" on its own says nothing at all.
+    function _binahWeekLinks(books, dayNum) {
+      const q = (s) => String(s).replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;').replace(/"/g, '&quot;');
+      const seven = books.map((db, i) => {
+        const parts = String(db.book).split(' \u00b7 ');
+        const face = `${db.emoji}${i + 1}`;
+        if (!db.weekUrl)
+          return `<span class="kwa-off" title="Nothing posted for this week">${face}</span>`;
+        const name = parts[1] ? `${parts[0]}, ${parts[1]}` : parts[0];
+        return `<a class="kwa${(i + 1) === dayNum ? ' kwa-on' : ''}" ` +
+          `href="${q(db.weekUrl)}" target="_blank" rel="noopener" ` +
+          ((i + 1) === dayNum ? 'aria-current="true" ' : '') +
+          `aria-label="${q(name)} \u2014 this week\u2019s writing">${face}</a>`;
+      });
+      return `<div class="kot-week-all"><span class="kwa-lead">This week:</span>` +
+        `<span class="kwa-row">${seven.join('')}</span></div>`;
+    }
+
     const bookParts = todayBook.book.split(' \u00b7 ');
     document.getElementById('binah-kot-book').innerHTML =
       `<span style="font-size:1.1em">${todayBook.emoji}</span> ` +
@@ -24852,7 +24902,14 @@ content: ''; float: right; width: 30px; height: 1em;
       // book and the same day.
       `<br><span class="kot-summary" role="button" tabindex="0" ` +
         `onclick="openKotBookModal(${sef.dayNum - 1})">Summary \u25be</span>` +
-      (todayBook.weekUrl ? ` &nbsp;\u00b7&nbsp; <a href="${todayBook.weekUrl}" target="_blank" style="color:var(--gold);font-size:0.85em">This Week</a>` : '');
+      // \u2500\u2500 ALL SEVEN WEEKS, EVERY DAY \u2500\u2500
+      // This line used to carry one link: the week's writing for whichever
+      // book the day had come to. But the writing is the week's, not the
+      // day's \u2014 all seven posts stand from Friday to Thursday \u2014 so six of
+      // them were out of reach on any given day, and nothing on the page
+      // said they existed. Today's is named; the other six are numbered,
+      // which is how the books name themselves.
+      _binahWeekLinks(DAY_BOOKS, sef.dayNum);
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
     let _lsSichosBook = null, _ksaLabel = null;

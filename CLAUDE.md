@@ -106,27 +106,49 @@ work.
 
 ## The daily companion
 
-**It is off.** The rewritten text holds, but weeks 1 and 2 are placeholder
-until the real opening is written — creation as the creation of time, the six
-thousand years, the Torah before the world. Those are the first fourteen days
-a reader meets. The fetch in `index.html` is commented out with the reason at
-the switch; restoring four lines brings it back.
+`companion-days.json` is what the app fetches: **one KoT Book for one week,
+each day**, filed the way Binah files them. Day 1 is Book 1's reading for week
+1, day 2 is Book 2's for week 1, day 8 is Book 1's for week 2, day 225 is Book
+1's for week 33. Seven books × fifty-two weeks = 364, and 364 posts on the
+blog, one to each day, which is where each entry links.
 
-`docs/a-year-inside-the-day.md` is the manuscript; `companion.json` is built
-from it. **Edit the manuscript, never the JSON.**
+**Nothing in it is written.** Every entry is already in `index.html` — the
+weekly table `getWeeklyData` reads holds all seven books' readings for all
+fifty-two weeks. There are seven templates, one to a book, and 364 fillings of
+them. That, not a citation beside a sentence, is what stops an entry claiming
+something the app does not hold.
 
 ```sh
-python3 tools/companion_from_md.py docs/a-year-inside-the-day.md \
-    companion.json companion.json      # meta in, text out, same file
-python3 tools/check_companion.py index.html companion.json
+# 1. ask the page what it knows (needs a server on some port)
+node tools/dump_week_data.mjs http://127.0.0.1:8731/index.html docs/week-data.json
+# 2. build the entries
+python3 -I tools/build_companion_days.py docs/week-data.json index.html companion-days.json
+# 3. the sweep, which should flag nothing at all
+python3 -I tools/check_companion.py index.html companion-days.json
 ```
 
-The first text was AI-generated and invented a motto for this app, a verse and
-a route. `docs/companion-audit.md` is the sweep that found it and the rule the
-rewrite is held to: **every claim checkable against `index.html`, a named
-traditional source, or the books.** Run the checker before anything about the
-companion ships, and read its six standing false positives in the audit rather
-than re-investigating them.
+**Rebuild it whenever the weekly table changes**, or the companion starts
+saying last month's readings. Both steps are checkable by diff: re-run step 1
+and diff `docs/week-data.json`, re-run step 2 and diff `companion-days.json`.
+Either diff coming back non-empty means something upstream moved.
+
+The companion's week is `(day − 1) / 7 + 1`. That matches the week the page
+prints on all 364 days and all 28 intercalated ones — checked — so an entry
+can never sit above the cards claiming a different week.
+
+### The other companion, which is off
+
+`companion.json` is a written 364-entry text, with its manuscript at
+`docs/a-year-inside-the-day.md` and `tools/companion_from_md.py` to build it.
+Nothing fetches it. Its own header marks weeks 1 and 2 as placeholder until
+the real opening is written — creation as the creation of time, the six
+thousand years, the Torah before the world — and those are the first fourteen
+days a reader meets.
+
+Its first version was AI-generated and invented a motto for this app, a verse
+and a route. `docs/companion-audit.md` is the sweep that found it, the rule the
+rewrite is held to, and six standing false positives in the checker — read
+those rather than re-investigating them.
 
 Books 1 and 2 are the author's own life in allegory, and the people in them are
 real. **Never invent or adjust a biographical fact to make a sentence work.**

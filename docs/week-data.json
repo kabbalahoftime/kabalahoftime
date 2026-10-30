@@ -1,0 +1,3356 @@
+{
+ "books": [
+  {
+   "book": "Book 1 · Song of Nature",
+   "what": "The week’s theme, its creature from Perek Shirah, and its teaching from Pirkei Avot.",
+   "emoji": "🐾"
+  },
+  {
+   "book": "Book 2 · Song of Moses",
+   "what": "The forty-eight qualities by which Torah is acquired, a prophet, a Levitical city, and the week’s verse of Haazinu.",
+   "emoji": "📜"
+  },
+  {
+   "book": "Book 3 · Song of the Sea",
+   "what": "The line that runs to David — Ruth’s genealogy, the haftara, Tractate Sotah, and the journeys through the desert.",
+   "emoji": "🌾"
+  },
+  {
+   "book": "Book 4 · Song of Hannah",
+   "what": "Solomon’s writings and Hannah’s song, the sixth chapter of Pirkei Avot, and the week’s yahrzeit.",
+   "emoji": "💎"
+  },
+  {
+   "book": "Book 5 · Song of Songs",
+   "what": "Song of Songs through the year, the seventy souls, Jeremiah, and Tractate Shevuot.",
+   "emoji": "🌹"
+  },
+  {
+   "book": "Book 6 · General Remedy",
+   "what": "The Psalms of the week with Perek Shirah, the ten of the Tikkun HaKlali, and Psalm 89.",
+   "emoji": "🎵"
+  },
+  {
+   "book": "Book 7 · Gathering of Songs",
+   "what": "Every verse of the songs in Books 1–6, rearranged and combined into a single song for the week.",
+   "emoji": "🪜"
+  }
+ ],
+ "weeks": [
+  {
+   "week": 1,
+   "month": "Tishrei",
+   "parasha": "Rosh Hashana / Haazinu",
+   "pairing": {
+    "he": "חֶסֶד שֶׁבְּחֶסֶד",
+    "en": "Chesed of Chesed"
+   },
+   "face": {
+    "animal": "Rooster (first bird)",
+    "avot": "Introduction & 14 rabbis (7 pairs) — acquiring a master",
+    "trait": "To Raise our Heads, Choose a Master, and Recognize G’d’s Oneness"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Raise our Heads & Recognize G-d's Oneness",
+     "animal": "Rooster",
+     "avot": "Introduction and 14 rabbis (7 pairs) – acquiring a master"
+    },
+    "b2": {
+     "quality": "Torah greater than priesthood and kingship",
+     "prophet": "Avraham & Sarah",
+     "haazinu": "Listen, O heavens, and I will speak! And let the earth hear the words of my mouth!",
+     "haftorah": "And David spoke to the Lord the words of this song, on the day that the Lord delivered him",
+     "city": "Shechem (also a city of refuge)"
+    },
+    "b3": {
+     "ruth": "Adam",
+     "haftara": "Hannah's Prayer",
+     "sotah": "Portion of Sotah Torah reading",
+     "journeys": "They journeyed from Rameses; the Egyptians were busy burying"
+    },
+    "b4": {
+     "proverbs": "Prov 1 — The beginning of wisdom is awe of G-d",
+     "hannah": "Now there was a certain man of Ramathaim-zophim, of the hill-country of Ephraim",
+     "avot6": "Whoever studies Torah for Torah's sake alone, merits many things",
+     "yahrzeit": "2 Tishrei - R' Yisroel ben R' Asher of Stolin (1868) \"Yenuka\" | Stolin (Karlin), Kapitchnitz (Apta)"
+    },
+    "b5": {
+     "shir": "Shir 1:1–1:3 — The Song of Songs which is Solomon's",
+     "souls": "Reuven",
+     "jeremiah": "Chapter 1",
+     "talmud": "Portion of Shevuos Torah reading"
+    },
+    "b6": {
+     "psalms": "Ps 1–3 — Happy the man who walks not in counsel of the wicked",
+     "tikkun": "Psalm 16:1-4",
+     "psalm89": "Ps 89:1-2 — A maskil of Ethan the Ezrahite. The kindnesses of the Lord I shall sing forever"
+    },
+    "b7": {
+     "mesilas": "Intro — Man's purpose: to delight in G-d and enjoy His presence",
+     "theme": "The Rooster is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/09/week-1-book-1-to-raise-our-heads-choose.html",
+    "https://www.kabbalahoftime.com/2013/09/week-1-book-2-rosh-hashanah-draft.html",
+    "https://www.kabbalahoftime.com/2013/09/week-1-book-3-adam-draft.html",
+    "https://www.kabbalahoftime.com/2013/09/week-1-book-4a-yenukah-draft.html",
+    "https://www.kabbalahoftime.com/2013/09/week-1-book-4b-reuven-draft.html",
+    "https://www.kabbalahoftime.com/2013/09/week-1-book-5-reviewing-week-of-rosh.html",
+    "https://www.kabbalahoftime.com/2026/05/week-1-book-7-rooster-is-saying.html"
+   ]
+  },
+  {
+   "week": 2,
+   "month": "Tishrei",
+   "parasha": "Yom Kippur / Bereshit",
+   "pairing": {
+    "he": "גְּבוּרָה שֶׁבְּחֶסֶד",
+    "en": "Gevurah of Chesed"
+   },
+   "face": {
+    "animal": "Hen",
+    "avot": "Shimon ben Rabban Gamliel — “silence” of the body",
+    "trait": "To Relate Well to Others and to Our Own Body"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Relate Well to Others and to Our Own Body",
+     "animal": "Hen",
+     "avot": "Shimon ben Raban Gamliel – \"silence\" of the body"
+    },
+    "b2": {
+     "quality": "Constant study",
+     "prophet": "Yitzchak",
+     "haazinu": "My lesson will drip like rain; my word will flow like dew",
+     "haftorah": "And he said, \"The Lord is my rock and my fortress, and a rescuer to me",
+     "city": "Gezer"
+    },
+    "b3": {
+     "ruth": "Shet",
+     "haftara": "Hannah's Prayer",
+     "sotah": "2",
+     "journeys": "The children of Israel journeyed from Rameses and camped in Succoth"
+    },
+    "b4": {
+     "proverbs": "Prov 2 — If you seek it like silver, you will find knowledge of G-d",
+     "hannah": "And he had two wives: the name of the one was Hannah",
+     "avot6": "not only that, but [the creation of] the entire world is worthwhile for him alone",
+     "yahrzeit": "9 Tishrei - R' Elazar Nisan ben R' Moshe of Drobitich (1854) | Karlin, Lubavitch"
+    },
+    "b5": {
+     "shir": "Shir 1:4–1:6 — Draw me, we will run after you",
+     "souls": "Hanoch",
+     "jeremiah": "Chapter 2",
+     "talmud": "2"
+    },
+    "b6": {
+     "psalms": "Ps 4–6 — O Lord, rebuke me not in Your anger",
+     "tikkun": "Psalm 16:5-6",
+     "psalm89": "Ps 89:3 — Forever will it be built with kindness; as the heavens, with which You will establish Your faithfulness"
+    },
+    "b7": {
+     "mesilas": "Ch 1 — Man's Duty in his World: clarify your purpose",
+     "theme": "The Hen is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/09/week-2-to-relate-well-to-others-and-to.html",
+    "https://www.kabbalahoftime.com/2013/09/week-2-book-2-yom-kippur-rain-and.html",
+    "https://www.kabbalahoftime.com/2013/09/week-2-book-3-casting-our-ego-into.html",
+    "https://www.kabbalahoftime.com/2013/09/week-2-book-4a-chen-merit-life-and.html",
+    "https://www.kabbalahoftime.com/2013/09/week-2-book-4b-yom-kippur-entering.html",
+    "https://www.kabbalahoftime.com/2013/09/book-5-review-of-week-of-yom-kippur.html",
+    "https://www.kabbalahoftime.com/2026/05/week-2-book-7-hen-is-saying.html"
+   ]
+  },
+  {
+   "week": 3,
+   "month": "Tishrei",
+   "parasha": "Sukkot",
+   "pairing": {
+    "he": "תִּפְאֶרֶת שֶׁבְּחֶסֶד",
+    "en": "Tiferet of Chesed"
+   },
+   "face": {
+    "animal": "Dove",
+    "avot": "Rabban Shimon ben Gamliel — justice, truth and peace",
+    "trait": "To Be Happy, Balanced, and Secure in G’d"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Be Happy, Balanced, and Secure in G-d",
+     "animal": "Dove",
+     "avot": "Rabban Shimon ben Gamliel – justice, truth and peace"
+    },
+    "b2": {
+     "quality": "Attentive listening (Shmiat haOzen)",
+     "prophet": "Yaakov",
+     "haazinu": "When I call out the name of the Lord, ascribe greatness to our G-d",
+     "haftorah": "G-d is my rock, under whom I take cover; My shield, and the horn of my salvation",
+     "city": "Kibzaim"
+    },
+    "b3": {
+     "ruth": "Enosh",
+     "haftara": "Hannah's Prayer",
+     "sotah": "3",
+     "journeys": "They journeyed from Succoth and camped in Etham, at the edge of the desert"
+    },
+    "b4": {
+     "proverbs": "Prov 3 — Trust in G-d with all your heart",
+     "hannah": "And this man went up out of his city from year to year to worship",
+     "avot6": "He is called friend",
+     "yahrzeit": "14 Tishrei - Rav Yisrael Hopstein, the Maggid of Kozhnitz | Karlin, Breslev"
+    },
+    "b5": {
+     "shir": "Shir 1:7–1:9 — Tell me, O you whom my soul loves",
+     "souls": "Pallu",
+     "jeremiah": "Chapter 3",
+     "talmud": "3"
+    },
+    "b6": {
+     "psalms": "Ps 7–9 — O Lord our Master, how mighty is Your name",
+     "tikkun": "Psalm 16:7-10",
+     "psalm89": "Ps 89:4 — I formed a covenant with My chosen one; I swore to David My servant"
+    },
+    "b7": {
+     "mesilas": "Ch 2 — Watchfulness (Zehirut): mindful awareness of all actions",
+     "theme": "The Dove is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/09/week-3-from-book-to-be-happy-balanced.html",
+    "https://www.kabbalahoftime.com/2013/09/week-3-book-2-calling-out-to-g-d-and.html",
+    "https://www.kabbalahoftime.com/2013/09/week-3-book-3-making-habitation-for-g-d.html",
+    "https://www.kabbalahoftime.com/2013/09/week-3-book-4a-pilgrimage-and.html",
+    "https://www.kabbalahoftime.com/2013/09/week-3-book-4b-shepherds-dwellings.html",
+    "https://www.kabbalahoftime.com/2013/09/week-3-book-5-reviewing-week-of-first.html",
+    "https://www.kabbalahoftime.com/2026/05/week-3-book-7-dove-is-saying.html"
+   ]
+  },
+  {
+   "week": 4,
+   "month": "Tishrei",
+   "parasha": "Bereshit",
+   "pairing": {
+    "he": "נֶצַח שֶׁבְּחֶסֶד",
+    "en": "Netzach of Chesed"
+   },
+   "face": {
+    "animal": "Eagle",
+    "avot": "Rabbi Yehudah HaNassi — an Eye that sees, an Ear that hears",
+    "trait": "To Take Responsibility for All, Yet Protecting Oneself from Bad Influences"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Take Responsibility Yet Protect Oneself",
+     "animal": "Eagle",
+     "avot": "Rabbi Yehudah HaNassí – an eye that sees, an Ear that hears, and all your deeds are written in a Book"
+    },
+    "b2": {
+     "quality": "Verbal enunciation",
+     "prophet": "Moshe",
+     "haazinu": "The deeds of the [Mighty] Rock are perfect, for all His ways are just[ice]",
+     "haftorah": "With praise, I call to the Lord, for from my enemies I shall be saved",
+     "city": "Beth-Horon"
+    },
+    "b3": {
+     "ruth": "Keinan",
+     "haftara": "Hannah's Prayer",
+     "sotah": "4",
+     "journeys": "They journeyed from Etham and camped in Pi hahiroth, which faces Baal zephon"
+    },
+    "b4": {
+     "proverbs": "Prov 4 — Acquire wisdom, acquire understanding — do not forget",
+     "hannah": "And it came to pass upon a day, when Elkanah sacrificed",
+     "avot6": "beloved",
+     "yahrzeit": "Rabbi David Moshe Friedman, first Chortkover Rebbe (1828-1903) | Chortkov (Ryzhin), Ribnitz"
+    },
+    "b5": {
+     "shir": "Shir 1:10–1:12 — Your cheeks are lovely with rows of ornaments",
+     "souls": "Hezron",
+     "jeremiah": "Chapter 4",
+     "talmud": "4"
+    },
+    "b6": {
+     "psalms": "Ps 10–12 — Why do You stand afar, O Lord?",
+     "tikkun": "Psalm 16:11; Psalm 32:1-3",
+     "psalm89": "Ps 89:5 — Until eternity, I shall establish your seed, and I shall build your throne for all generations forever"
+    },
+    "b7": {
+     "mesilas": "Ch 3 — Divisions of Watchfulness: intellectual and personal introspection",
+     "theme": "The Eagle is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/09/week-4-from-book-to-take-responsibility.html",
+    "https://www.kabbalahoftime.com/2013/09/week-4-book-2-justice-speech-moses-beit.html",
+    "https://www.kabbalahoftime.com/2013/09/week-4-book-3-being-secluded-with-g-d.html",
+    "https://www.kabbalahoftime.com/2013/09/week-4-book-4a-thinking-of-others.html",
+    "https://www.kabbalahoftime.com/2013/09/week-4-book-4b-crown-of-angel-metat.html",
+    "https://www.kabbalahoftime.com/2013/09/week-4-book-5-reviewing-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-4-book-7-eagle-is-saying.html"
+   ]
+  },
+  {
+   "week": 5,
+   "month": "Cheshvan",
+   "parasha": "Noach",
+   "pairing": {
+    "he": "הוֹד שֶׁבְּחֶסֶד",
+    "en": "Hod of Chesed"
+   },
+   "face": {
+    "animal": "Crane",
+    "avot": "Rabban Gamliel ben R. Yehudah HaNassi — Torah study with work",
+    "trait": "To Use All Tools Available in order to Elevate the World"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Use All Tools Available to Elevate the World",
+     "animal": "Crane",
+     "avot": "Rabban Gamliel ben Rabbi Yehudah HaNassí - combine Torah study with work"
+    },
+    "b2": {
+     "quality": "Perception of the heart (Binat HaLev)",
+     "prophet": "Aharon",
+     "haazinu": "Destruction is not His; it is His children's defect you crooked and twisted generation",
+     "haftorah": "For the pains of death have encompassed me; streams of scoundrels would affright me",
+     "city": "Taanach"
+    },
+    "b3": {
+     "ruth": "Mahalel",
+     "haftara": "Hannah's Prayer",
+     "sotah": "5",
+     "journeys": "They journeyed from Penei hahiroth and crossed in the midst of the sea"
+    },
+    "b4": {
+     "proverbs": "Prov 5 — Beware the strange woman; her lips drip honey",
+     "hannah": "but unto Hannah he gave a double portion; for he loved Hannah",
+     "avot6": "lover of G-d",
+     "yahrzeit": "29th of Tishrei Rav Menachem Mendel of Vizhnitz | Rizhyn, Vizhnitz"
+    },
+    "b5": {
+     "shir": "Shir 1:13–1:15 — My beloved is to me a bundle of myrrh",
+     "souls": "Carmi",
+     "jeremiah": "Chapter 5",
+     "talmud": "5"
+    },
+    "b6": {
+     "psalms": "Ps 13–15 — Who shall dwell on Your holy mountain?",
+     "tikkun": "Psalm 32:4-6",
+     "psalm89": "Ps 89:6 — And the heavens acknowledge Your wonder, O Lord, also Your faithfulness in the congregation of holy ones"
+    },
+    "b7": {
+     "mesilas": "Ch 4 — Acquiring Watchfulness through self-reflection and Torah",
+     "theme": "The Crane is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/10/week-5-from-book-to-use-all-tools.html",
+    "https://www.kabbalahoftime.com/2013/10/week-5-book-2-flood-aharon-and.html",
+    "https://www.kabbalahoftime.com/2013/10/week-5-book-3-field-and-flood.html",
+    "https://www.kabbalahoftime.com/2013/10/week-5-book-4a-loving-g-d-and-bringing.html",
+    "https://www.kabbalahoftime.com/2013/10/week-5-book-4b-temple-and-world-field.html",
+    "https://www.kabbalahoftime.com/2013/10/week-5-book-5-reviewing-week-of-rosh.html",
+    "https://www.kabbalahoftime.com/2026/05/week-5-book-7-crane-is-saying.html"
+   ]
+  },
+  {
+   "week": 6,
+   "month": "Cheshvan",
+   "parasha": "Lech Lecha",
+   "pairing": {
+    "he": "יְסוֹד שֶׁבְּחֶסֶד",
+    "en": "Yesod of Chesed"
+   },
+   "face": {
+    "animal": "Songbird",
+    "avot": "Rabban Yochanan ben Zakai — claim no credit for your learning",
+    "trait": "To Impact the World, Laying a Foundation for Future Generations"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Impact the World, Laying a Foundation",
+     "animal": "Songbird",
+     "avot": "Rabban Yochanan ben Zakai – an individual that learned much Torah should not feel that he or she deserves special recognition"
+    },
+    "b2": {
+     "quality": "Awe (Eimah)",
+     "prophet": "Yehoshua",
+     "haazinu": "Is this how you repay the Lord, you disgraceful, unwise people?!",
+     "haftorah": "Bands of [those that shall inherit] the nether world have surrounded me",
+     "city": "Gath-Rimmon"
+    },
+    "b3": {
+     "ruth": "Yered",
+     "haftara": "Hannah's Prayer",
+     "sotah": "6",
+     "journeys": "They journeyed from Marah and arrived in Elim; twelve springs and seventy palm trees"
+    },
+    "b4": {
+     "proverbs": "Prov 6 — Go to the ant, you sluggard; consider its ways",
+     "hannah": "And her rival vexed her sore, to make her fret",
+     "avot6": "lover of humanity",
+     "yahrzeit": "7 Cheshvan - R' Yehuda Meir ben R' Yaakov Shimshon Shapiro (1933) | Chortkov, Vizhnitz"
+    },
+    "b5": {
+     "shir": "Shir 1:16–2:1 — Behold you are beautiful, my beloved, yea, pleasant",
+     "souls": "Simeon",
+     "jeremiah": "Chapter 6",
+     "talmud": "6"
+    },
+    "b6": {
+     "psalms": "Ps 16–18 — I have set G-d before me always",
+     "tikkun": "Psalm 32:7-9",
+     "psalm89": "Ps 89:7 — For who in the heavens is equal to the Lord? [Who] resembles the Lord among the sons of the mighty?"
+    },
+    "b7": {
+     "mesilas": "Ch 5 — Obstacles to Watchfulness: frivolity, bad company, worldliness",
+     "theme": "The Songbird is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/10/week-6-to-impact-world-laying.html",
+    "https://www.kabbalahoftime.com/2013/10/week-6-book-2-being-pressed-to-perform.html",
+    "https://www.kabbalahoftime.com/2013/10/week-6-book-2-descending-in-order-to.html",
+    "https://www.kabbalahoftime.com/2013/10/week-6-book-4a-dealing-with-difficult.html",
+    "https://www.kabbalahoftime.com/2013/10/week-6-book-4b-temple-shimon-and.html",
+    "https://www.kabbalahoftime.com/2013/10/week-6-book-5-reviewing-second-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-6-book-7-songbird-is-saying.html"
+   ]
+  },
+  {
+   "week": 7,
+   "month": "Cheshvan",
+   "parasha": "Vayera",
+   "pairing": {
+    "he": "מַלְכוּת שֶׁבְּחֶסֶד",
+    "en": "Malchut of Chesed"
+   },
+   "face": {
+    "animal": "Swallow",
+    "avot": "Rabbi Eliezer — your neighbor’s honor as precious as your own",
+    "trait": "To Recognize and Reveal the Divine Presence within Us and the World"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Recognize and Reveal the Divine Presence",
+     "animal": "Swallow",
+     "avot": "Rabbi Eliezer – the honor of your neighbor should be as precious in your eyes as your own, and do not become easily irritated"
+    },
+    "b2": {
+     "quality": "Fear (Yirah)",
+     "prophet": "Pinchas",
+     "haazinu": "Remember the days of old; reflect upon the years of [other] generations",
+     "haftorah": "When I am in distress, I call upon the Lord, yes I call upon my G-d",
+     "city": "Golan of Bashan (also a city of refuge)"
+    },
+    "b3": {
+     "ruth": "Enoch",
+     "haftara": "Hannah's Prayer",
+     "sotah": "7",
+     "journeys": "They journeyed from Elim and camped by the Red Sea"
+    },
+    "b4": {
+     "proverbs": "Prov 7 — Keep my commandments and live; guard my Torah as the apple of your eye",
+     "hannah": "And as he did so year by year, when she went up to the house of the LORD",
+     "avot6": "rejoicer of G-d",
+     "yahrzeit": "14 Cheshvan - Rabbi Avraham Elimelech Perlow of Stolin-Karlin (1891-1942) | Vizhnitz, Stolin-Karlin"
+    },
+    "b5": {
+     "shir": "Shir 2:2–2:4 — Like a lily among thorns, so is my beloved",
+     "souls": "Jemuel",
+     "jeremiah": "Chapter 7",
+     "talmud": "7"
+    },
+    "b6": {
+     "psalms": "Ps 19–21 — The heavens declare the glory of G-d",
+     "tikkun": "Psalm 32:10-11; Psalm 41:1-2",
+     "psalm89": "Ps 89:8 — G-d is revered in the great council of the holy ones and feared by all around Him"
+    },
+    "b7": {
+     "mesilas": "Ch 6 — Alacrity (Zerizut): enthusiasm and speed in divine service",
+     "theme": "The Swallow is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/10/week-7-from-book-to-recognize-and.html",
+    "https://www.kabbalahoftime.com/2013/10/week-7-book-2-hearing-cry-of-rachel.html",
+    "https://www.kabbalahoftime.com/2013/10/week-7-book-3-more-references-to-rachel.html",
+    "https://www.kabbalahoftime.com/2013/10/week-7-book-4a-elevating-and-being.html",
+    "https://www.kabbalahoftime.com/2013/10/week-7-book-4b-love-and-temple.html",
+    "https://www.kabbalahoftime.com/2013/10/week-6-book-7-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-7-book-7-swallow-is-saying.html"
+   ]
+  },
+  {
+   "week": 8,
+   "month": "Cheshvan",
+   "parasha": "Chayei Sarah",
+   "pairing": {
+    "he": "חֶסֶד שֶׁבְּגְּבוּרָה",
+    "en": "Chesed of Gevurah"
+   },
+   "face": {
+    "animal": "Swift",
+    "avot": "Rabbi Yehoshua — the evil eye and hatred remove one from the world",
+    "trait": "Not to Lose Focus on our Spirituality and Relationship with G’d"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Not Lose Focus on Our Spirituality",
+     "animal": "Swift",
+     "avot": "Rabbi Yehoshua – an evil eye, an evil inclination, and hatred of one's fellow takes a man out of this world"
+    },
+    "b2": {
+     "quality": "Humility (Anavah)",
+     "prophet": "Elkanah & Chanah",
+     "haazinu": "When the Most High gave nations their lot, when He separated the sons of man",
+     "haftorah": "Then the earth shook and quaked, the [very] foundations of heaven did tremble",
+     "city": "Be'eshterah (Ashtarot)"
+    },
+    "b3": {
+     "ruth": "Methuselah",
+     "haftara": "Hannah's Prayer",
+     "sotah": "8",
+     "journeys": "They journeyed from the Red Sea and camped in the desert of Zin"
+    },
+    "b4": {
+     "proverbs": "Prov 8 — Does not Wisdom call out, does not Understanding raise her voice?",
+     "hannah": "And Elkanah her husband said unto her: Hannah, why weepest thou?",
+     "avot6": "rejoicer of humanity",
+     "yahrzeit": "20 Cheshvan - Rav Yechezkel, Kenesses Yechezkel of Radomsk (1864-1910) | Radomsk, Belz"
+    },
+    "b5": {
+     "shir": "Shir 2:5–2:7 — Sustain me with raisin cakes, comfort me with apples",
+     "souls": "Jamin",
+     "jeremiah": "Chapter 8",
+     "talmud": "8"
+    },
+    "b6": {
+     "psalms": "Ps 22–24 — The Lord is my shepherd, I shall not want",
+     "tikkun": "Psalm 41:3-5",
+     "psalm89": "Ps 89:9 — O Lord, G-d of Hosts, who is like You, O Yah, Who are mighty? And Your faithfulness surrounds You"
+    },
+    "b7": {
+     "mesilas": "Ch 7 — Divisions of Alacrity: beginning and completing a mitzvah",
+     "theme": "The Swift is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/10/week-8-from-book-not-to-lose-focus-on.html",
+    "https://www.kabbalahoftime.com/2013/10/week-8-book-2-humility-is-key.html",
+    "https://www.kabbalahoftime.com/2013/10/week-8-book-3-methuselah-and-affirming.html",
+    "https://www.kabbalahoftime.com/2013/10/week-8-book-4a-rejoicing-with-creation.html",
+    "https://www.kabbalahoftime.com/2013/10/week-8-4b-lovesick.html",
+    "https://www.kabbalahoftime.com/2013/10/week-8-book-5-reviewing-fourth-week-of.html",
+    "https://www.kabbalahoftime.com/2025/11/week-8-book-7-swift-is-saying"
+   ]
+  },
+  {
+   "week": 9,
+   "month": "Kislev",
+   "parasha": "Toldot",
+   "pairing": {
+    "he": "גְּבוּרָה שֶׁבְּגְּבוּרָה",
+    "en": "Gevurah of Gevurah"
+   },
+   "face": {
+    "animal": "Stormy Petrel",
+    "avot": "Rabbi Yossi — your neighbor’s possessions as dear as your own",
+    "trait": "Fighting Darkness with Light"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Fighting Darkness with Light",
+     "animal": "Stormy Petrel",
+     "avot": "Rabbi Yossi – the possessions of your neighbor should be as dear to you as your own"
+    },
+    "b2": {
+     "quality": "Joy (Simchah)",
+     "prophet": "Eli",
+     "haazinu": "Because the Lord's portion is His people Jacob, the lot of His inheritance",
+     "haftorah": "Smoke went up in His nostrils, and fire out of His mouth did devour",
+     "city": "Future City of Refuge; for now, Jerusalem"
+    },
+    "b3": {
+     "ruth": "Lamech",
+     "haftara": "Hannah's Prayer",
+     "sotah": "9",
+     "journeys": "They journeyed from the desert of Zin and camped in Dophkah"
+    },
+    "b4": {
+     "proverbs": "Prov 9 — Wisdom has built her house; she has hewn her seven pillars",
+     "hannah": "So Hannah rose up after they had eaten in Shiloh",
+     "avot6": "The Torah enclothes him with humility",
+     "yahrzeit": "27 Cheshvan - Reb Yaakov Leiser, second Pshevorsker Rebbe | Riminov, Pshevorsk"
+    },
+    "b5": {
+     "shir": "Shir 2:8–2:10 — The voice of my beloved! Behold, he comes",
+     "souls": "Ohad",
+     "jeremiah": "Chapter 9",
+     "talmud": "9"
+    },
+    "b6": {
+     "psalms": "Ps 25–27 — The Lord is my light and my salvation",
+     "tikkun": "Psalm 41:6-8",
+     "psalm89": "Ps 89:10 — You rule over the pride of the sea; when it raises its waves, You humble them"
+    },
+    "b7": {
+     "mesilas": "Ch 8 — Acquiring Alacrity through contemplating G-d's greatness",
+     "theme": "The Stormy Petrel is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/10/week-9-from-book-fighting-darkness-with.html",
+    "https://www.kabbalahoftime.com/2013/10/week-9-book-2-choosing-joy.html",
+    "https://www.kabbalahoftime.com/2013/10/week-9-book-3-lamech-and-avoiding-greek.html",
+    "https://www.kabbalahoftime.com/2013/11/week-9-book-4a-enclothed-with-humility.html",
+    "https://www.kabbalahoftime.com/2013/11/week-9-book-4b-beloved.html",
+    "https://www.kabbalahoftime.com/2013/11/week-8-book-5-reviewing-last-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-9-book-7-stormy-petrel-is-saying.html"
+   ]
+  },
+  {
+   "week": 10,
+   "month": "Kislev",
+   "parasha": "Vayetze",
+   "pairing": {
+    "he": "תִּפְאֶרֶת שֶׁבְּגְּבוּרָה",
+    "en": "Tiferet of Gevurah"
+   },
+   "face": {
+    "animal": "Bat",
+    "avot": "Rabbi Shimon — care in the Shemah; prayer is not routine",
+    "trait": "To Trust in G’d’s Mercy"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Trust in G-d's Mercy",
+     "animal": "Bat",
+     "avot": "Rabbi Shimon – be careful in reciting the Shemah and the Shmoneh Esreh. Do not make of your prayer a routine act"
+    },
+    "b2": {
+     "quality": "Purity (Taharah)",
+     "prophet": "Shmuel",
+     "haazinu": "He found them in a desert land, and in a desolate, howling wasteland",
+     "haftorah": "And He bent the heavens and He came down; and thick darkness was under His feet",
+     "city": "Gibeon"
+    },
+    "b3": {
+     "ruth": "Noach",
+     "haftara": "Hannah's Prayer",
+     "sotah": "10",
+     "journeys": "They journeyed from Dophkah and camped in Alush"
+    },
+    "b4": {
+     "proverbs": "Prov 10 — The proverbs of Solomon: a wise son gladdens his father",
+     "hannah": "and she was in bitterness of soul--and prayed unto the LORD",
+     "avot6": "and awe",
+     "yahrzeit": "Rabbi Yaakov David Kalish (1803-1878), founder of Amshinov | Amshinov, Lubavitch"
+    },
+    "b5": {
+     "shir": "Shir 2:11–2:13 — For behold, the winter is past, the rain is over and gone",
+     "souls": "Jachin",
+     "jeremiah": "Chapter 10",
+     "talmud": "10"
+    },
+    "b6": {
+     "psalms": "Ps 28–30 — I will exalt You, O Lord, for You have raised me up",
+     "tikkun": "Psalm 41:9-11",
+     "psalm89": "Ps 89:11 — You crushed Rahab like one slain; with the arm of Your might You scattered Your enemies"
+    },
+    "b7": {
+     "mesilas": "Ch 9 — Obstacles to Alacrity: laziness and excessive comfort",
+     "theme": "The Bat is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/11/week-10-from-book-to-trust-in-g-ds-mercy.html",
+    "https://www.kabbalahoftime.com/2013/11/week-10-book-2-samuel-and-purity.html",
+    "https://www.kabbalahoftime.com/2013/11/week-10-noah-and-seeking-comfort.html",
+    "https://www.kabbalahoftime.com/2013/11/week-10-book-4a-prayer-out-of-fear-of-g.html",
+    "https://www.kabbalahoftime.com/2013/11/week-10-book-4b-connecting-to-holiness.html",
+    "https://www.kabbalahoftime.com/2013/11/week-10-book-5-reviewing-second-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-10-book-7-bat-is-saying.html"
+   ]
+  },
+  {
+   "week": 11,
+   "month": "Kislev",
+   "parasha": "Vayishlach",
+   "pairing": {
+    "he": "נֶצַח שֶׁבְּגְּבוּרָה",
+    "en": "Netzach of Gevurah"
+   },
+   "face": {
+    "animal": "Stork",
+    "avot": "Rabbi Elazar — know what to answer the heretic",
+    "trait": "Fighting Evil and Heresy, Yet Knowing How to Forgive"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Fighting Evil & Heresy, Knowing How to Forgive",
+     "animal": "Stork",
+     "avot": "Rabbi Elazar – know what to answer the heretic and be diligent in your Torah study"
+    },
+    "b2": {
+     "quality": "Ministering to sages",
+     "prophet": "Gad",
+     "haazinu": "As an eagle awakens its nest, hovering over its fledglings",
+     "haftorah": "And He rode upon a cherub and did fly; He was seen upon the wings of the wind",
+     "city": "Gebah (Giv'ah)"
+    },
+    "b3": {
+     "ruth": "Shem",
+     "haftara": "Eli and Shmuel",
+     "sotah": "11",
+     "journeys": "They journeyed from Alush and camped in Rephidim, but there was no water"
+    },
+    "b4": {
+     "proverbs": "Prov 11 — A false balance is an abomination to G-d",
+     "hannah": "And she vowed a vow, and said: O LORD of hosts",
+     "avot6": "makes him fit to be righteous",
+     "yahrzeit": "12 Kislev - Rabbi Avraham Dov of Avritch; 13 Kislev – Rabbi Israel Taub, Divrei Israel | Modzitz (2), Amshinov"
+    },
+    "b5": {
+     "shir": "Shir 2:14–2:16 — My dove, in the clefts of the rock",
+     "souls": "Zohar",
+     "jeremiah": "Chapter 11",
+     "talmud": "11"
+    },
+    "b6": {
+     "psalms": "Ps 31–33 — Rejoice in the Lord, O righteous",
+     "tikkun": "Psalm 41:12-14",
+     "psalm89": "Ps 89:12 — The heaven is Yours, even the earth is Yours"
+    },
+    "b7": {
+     "mesilas": "Ch 10 — Cleanliness (Nekiyut): purity of motives and subtle sins",
+     "theme": "The Stork is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/11/week-11-from-book-fighting-evil-and.html",
+    "https://www.kabbalahoftime.com/2013/11/week-11-book-2-ministering-sages.html",
+    "https://www.kabbalahoftime.com/2013/11/week-11-book-3-shem-and-being-truthful.html",
+    "https://www.kabbalahoftime.com/2013/11/week-11-book-4a-creating-kosher.html",
+    "https://www.kabbalahoftime.com/2013/11/week-11-book-4b-staying-true-to-covenant.html",
+    "https://www.kabbalahoftime.com/2013/11/week-11-book-5-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-11-book-7-stork-is-saying.html"
+   ]
+  },
+  {
+   "week": 12,
+   "month": "Kislev",
+   "parasha": "Vayeshev",
+   "pairing": {
+    "he": "הוֹד שֶׁבְּגְּבוּרָה",
+    "en": "Hod of Gevurah"
+   },
+   "face": {
+    "animal": "Raven",
+    "avot": "Rabbi Tarfon — the day is short, the work is great",
+    "trait": "Revealing Warmth to Those that Are Cold and Indifferent"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Revealing Warmth to Those That Are Cold",
+     "animal": "Raven",
+     "avot": "Rabbi Tarfon – the day is short, the work is great, the workers are lazy, the reward is big, and the Owner is pressing"
+    },
+    "b2": {
+     "quality": "Bonding with friends (Dibuk Chaverim)",
+     "prophet": "Natan",
+     "haazinu": "[So] the Lord guided them alone, and there was no alien deity with Him",
+     "haftorah": "And He fixed darkness about Him as booths (lit. Sukkot); gathering of waters",
+     "city": "Anathoth"
+    },
+    "b3": {
+     "ruth": "Arpachshad",
+     "haftara": "Eli and Shmuel",
+     "sotah": "12",
+     "journeys": "They journeyed from Rephidim and camped in the Sinai desert"
+    },
+    "b4": {
+     "proverbs": "Prov 12 — A righteous man cares for the life of his animal",
+     "hannah": "And it came to pass, as she prayed long before the LORD",
+     "avot6": "pious",
+     "yahrzeit": "19 Kislev - Yahrzeit of Rebbe Dov Ber, the Magid of Mezritch | Rachmastrivka (Chernobyl), Stolin"
+    },
+    "b5": {
+     "shir": "Shir 2:17–3:2 — Until the day breathes and the shadows flee away",
+     "souls": "Saul the son of the Canaanitess",
+     "jeremiah": "Chapter 12",
+     "talmud": "12"
+    },
+    "b6": {
+     "psalms": "Ps 34–36 — Taste and see that the Lord is good",
+     "tikkun": "Psalm 42:1-4",
+     "psalm89": "Ps 89:13 — North and south-You created them; Tabor and Hermon sing praises in Your name"
+    },
+    "b7": {
+     "mesilas": "Ch 11 — Particulars of Cleanliness: speech, business, and personal integrity",
+     "theme": "The Raven is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/11/week-12-from-book-revealing-warmth-to.html",
+    "https://www.kabbalahoftime.com/2013/11/week-12-book-2-nathan-and-friendship.html",
+    "https://www.kabbalahoftime.com/2017/10/week-12-book-3-arpachshad-and-fiery.html",
+    "https://www.kabbalahoftime.com/2013/11/week-12-book-4a-rosh-hashanah-of.html",
+    "https://www.kabbalahoftime.com/2013/11/week-12-book-4b-longing-for-g-d.html",
+    "https://www.kabbalahoftime.com/2013/11/week-12-book-5-reviewing-fourth-week-of.html",
+    "https://www.kabbalahoftime.com/2020/12/week-12-book-7-raven-is-saying.html"
+   ]
+  },
+  {
+   "week": 13,
+   "month": "Kislev",
+   "parasha": "Chanukah / Miketz",
+   "pairing": {
+    "he": "יְסוֹד שֶׁבְּגְּבוּרָה",
+    "en": "Yesod of Gevurah"
+   },
+   "face": {
+    "animal": "Starling",
+    "avot": "Rabbi Akaviah ben Mahalalel — know from where you come",
+    "trait": "To Publicize Miracles with Pride and Humility"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Publicize Miracles with Pride and Humility",
+     "animal": "Starling",
+     "avot": "Akaviah ben Mahalalel – know from where you come and to where you are going, and before Whom you will be judged"
+    },
+    "b2": {
+     "quality": "Sharp discussion with students (Pilpul HaTalmidim)",
+     "prophet": "David & Avigail",
+     "haazinu": "He made them ride upon the high places of the earth, that they would eat the produce of the field",
+     "haftorah": "From the brightness before Him flamed forth coals of fire",
+     "city": "'Almon"
+    },
+    "b3": {
+     "ruth": "Shelah",
+     "haftara": "Eli and Shmuel",
+     "sotah": "13",
+     "journeys": "They journeyed from the Sinai desert and camped in Kivroth hataavah"
+    },
+    "b4": {
+     "proverbs": "Prov 13 — A wise son heeds his father's instruction",
+     "hannah": "Now Hannah, she spoke in her heart; only her lips moved",
+     "avot6": "correct",
+     "yahrzeit": "Rabbi Chaim of Tchernovitz (1760-1817) Be'er Mayim Chayim | Tolna (Chernobyl), Peschischa"
+    },
+    "b5": {
+     "shir": "Shir 3:3–3:5 — The watchmen who patrol the city found me",
+     "souls": "Levi",
+     "jeremiah": "Chapter 13",
+     "talmud": "13"
+    },
+    "b6": {
+     "psalms": "Ps 37–39 — Commit your way to the Lord; trust in Him"
+    },
+    "b7": {
+     "mesilas": "Ch 12 — Acquiring Cleanliness: persistence and careful observance",
+     "theme": "The Starling is Singing"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/11/week-13-from-book-to-publicize-miracles.html",
+    "https://www.kabbalahoftime.com/2013/11/week-13-book-2-david-and-avigail-and.html",
+    "https://www.kabbalahoftime.com/2013/11/week-13-book-3-shelah-and-chanukah.html",
+    "https://www.kabbalahoftime.com/2013/11/week-13-book-4a-being-straightforward.html",
+    "https://www.kabbalahoftime.com/2013/11/week-13-book-4b-finding-g-d-in-exile.html",
+    "https://www.kabbalahoftime.com/2013/11/week-13-book-5-reviewing-fifth-week-of.html",
+    "https://www.kabbalahoftime.com/2020/12/week-13-book-7-starling-is-singing.html"
+   ]
+  },
+  {
+   "week": 14,
+   "month": "Tevet",
+   "parasha": "Miketz / Vayigash",
+   "pairing": {
+    "he": "מַלְכוּת שֶׁבְּגְּבוּרָה",
+    "en": "Malchut of Gevurah"
+   },
+   "face": {
+    "animal": "Domestic Goose",
+    "avot": "Rabbi Chaninah, Segan HaKohanim — pray for the government’s welfare",
+    "trait": "To Believe in Our Own Strength, which Comes from G’d"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Believe in Our Own Strength from G-d",
+     "animal": "Domestic Goose",
+     "avot": "Rabbi Chaninah, Segan Kohen Gadol – pray for the welfare of the government, for if it were not for the fear of it…"
+    },
+    "b2": {
+     "quality": "With calmness (Yishuv)",
+     "prophet": "Shlomo",
+     "haazinu": "The cream of cattle and the milk of sheep, with the fat of lambs and rams",
+     "haftorah": "The Lord thundered from heaven; and the Most High gave forth His voice",
+     "city": "Elteke"
+    },
+    "b3": {
+     "ruth": "Eber",
+     "haftara": "Eli and Shmuel",
+     "sotah": "14",
+     "journeys": "They journeyed from Kivroth haTaavah and camped in Hazeroth"
+    },
+    "b4": {
+     "proverbs": "Prov 14 — The wise woman builds her house; the foolish one tears it down",
+     "hannah": "And Eli said unto her: How long wilt thou be drunken?",
+     "avot6": "and faithful",
+     "yahrzeit": "4 Teves - R' Gershon Chanoch Henoch Leiner of Radzin (1890) | Peschischa (2), Ishbitza (2)"
+    },
+    "b5": {
+     "shir": "Shir 3:6–3:8 — Who is this coming up from the wilderness like pillars of smoke",
+     "souls": "Gershon",
+     "jeremiah": "Chapter 14",
+     "talmud": "14"
+    },
+    "b6": {
+     "psalms": "Ps 40–42 — As the deer yearns for the water brooks"
+    },
+    "b7": {
+     "mesilas": "Ch 13 — Separation (Perishut): distancing from excess pleasure",
+     "theme": "The Domestic Goose is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/12/week-14-from-book-to-believe-in-our-own.html",
+    "https://www.kabbalahoftime.com/2013/12/week-14-book-2-solomon-and-having.html",
+    "https://www.kabbalahoftime.com/2013/12/week-14-book-3-eber-and-fighting-off.html",
+    "https://www.kabbalahoftime.com/2013/12/week-14-book-4a-being-faithful.html",
+    "https://www.kabbalahoftime.com/2013/12/week-14-book-4b-sticking-with-torah-and.html",
+    "https://www.kabbalahoftime.com/2013/12/week-14-book-5-reviewing-first-week-of.html",
+    "https://www.kabbalahoftime.com/2020/12/week-14-book-7-domestic-goose-is-saying.html"
+   ]
+  },
+  {
+   "week": 15,
+   "month": "Tevet",
+   "parasha": "Vayigash / Vayechi",
+   "pairing": {
+    "he": "חֶסֶד שֶׁבְּתִּפְאֶרֶת",
+    "en": "Chesed of Tiferet"
+   },
+   "face": {
+    "animal": "Wild Goose",
+    "avot": "Rabbi Chaninah ben Teradion — two who exchange words of Torah",
+    "trait": "Giving Proper Value to Torah and to the Presence of the Shechinah"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Give Proper Value to Torah & the Shechinah",
+     "animal": "Wild Goose",
+     "avot": "Rabbi Chaninah ben Teradion – if two people are sitting together and do not exchange words of Torah…"
+    },
+    "b2": {
+     "quality": "With knowledge of Mikra (Scripture)",
+     "prophet": "Iddo",
+     "haazinu": "And Jeshurun became fat and rebelled; you grew fat, thick and rotund",
+     "haftorah": "And He sent out arrows and He scattered them, lightning and He discomfited them",
+     "city": "Gibbethon"
+    },
+    "b3": {
+     "ruth": "Peleg",
+     "haftara": "Eli and Shmuel",
+     "sotah": "15",
+     "journeys": "They journeyed from Hazeroth and camped in Rithmah"
+    },
+    "b4": {
+     "proverbs": "Prov 15 — A gentle answer turns away wrath",
+     "hannah": "And Hannah answered and said: No, my lord, I am a woman of a sorrowful spirit",
+     "avot6": "distances him from sin",
+     "yahrzeit": "10th of Teveth, Yahrzeit of Rabbi Nathan of Breslov | Dzikov (Ropshitz), Lelov"
+    },
+    "b5": {
+     "shir": "Shir 3:9–3:11 — King Solomon made himself a palanquin",
+     "souls": "Kehath",
+     "jeremiah": "Chapter 15",
+     "talmud": "15"
+    },
+    "b6": {
+     "psalms": "Ps 43–45 — My heart overflows with a goodly theme",
+     "tikkun": "Psalm 42:5-7",
+     "psalm89": "Ps 89:14 — You have an arm with might; Your hand is mighty, Your right hand is high"
+    },
+    "b7": {
+     "mesilas": "Ch 14 — Particulars of Separation: food, relations, speech, thoughts",
+     "theme": "The Wild Goose is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/12/week-15-from-book-giving-proper-value.html",
+    "https://www.kabbalahoftime.com/2013/12/week-5-book-2-prophet-iddo-and.html",
+    "https://www.kabbalahoftime.com/2013/12/week-15-book-3-peleg-and-evil-speech.html",
+    "https://www.kabbalahoftime.com/2013/12/week-15-book-4a-handling-reproof.html",
+    "https://www.kabbalahoftime.com/2013/12/week-15-book-4b-jerusalem-and-motherhood.html",
+    "https://www.kabbalahoftime.com/2013/12/week-15-book-5-reviewing-second-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-15-book-7-wild-goose-is-saying.html"
+   ]
+  },
+  {
+   "week": 16,
+   "month": "Tevet",
+   "parasha": "Vayechi",
+   "pairing": {
+    "he": "גְּבוּרָה שֶׁבְּתִּפְאֶרֶת",
+    "en": "Gevurah of Tiferet"
+   },
+   "face": {
+    "animal": "Ducks",
+    "avot": "Rabbi Shimon [Bar Yochai] — three who ate and said Torah",
+    "trait": "To Use Adversity as a Way to Grow, Relying on G’d for Support"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Use Adversity as a Way to Grow",
+     "animal": "Ducks",
+     "avot": "Rabbi Shimon [Bar Yochai] – Three people that ate together and did not say words of Torah…"
+    },
+    "b2": {
+     "quality": "Knowledge of Mishnah",
+     "prophet": "Michah ben Imlah",
+     "haazinu": "They provoked His zeal with alien worship; they made Him angry with abominations",
+     "haftorah": "And the depths of the sea appeared; the foundations of the world were laid bare",
+     "city": "Ajalon"
+    },
+    "b3": {
+     "ruth": "Reu",
+     "haftara": "Eli and Shmuel",
+     "sotah": "16",
+     "journeys": "They journeyed from Rithmah and camped in Rimmon perez"
+    },
+    "b4": {
+     "proverbs": "Prov 16 — Pride comes before destruction",
+     "hannah": "Count not thy handmaid for a wicked woman",
+     "avot6": "and brings him close to merit",
+     "yahrzeit": "18 Tevet - Rav Tzvi Elimelech Shapira of Dinov (1783-1841) | Melitz (Ropshitz), Abuchatzira"
+    },
+    "b5": {
+     "shir": "Shir 4:1–4:3 — Behold you are beautiful, my beloved; your eyes are doves",
+     "souls": "Merari",
+     "jeremiah": "Chapter 16",
+     "talmud": "16"
+    },
+    "b6": {
+     "psalms": "Ps 46–48 — G-d is our refuge and strength",
+     "tikkun": "Psalm 42:8-10",
+     "psalm89": "Ps 89:15 — Righteousness and judgment are the basis of Your throne; kindness and truth come before Your countenance"
+    },
+    "b7": {
+     "mesilas": "Ch 15 — Acquiring Separation: moderation and ongoing self-examination",
+     "theme": "The Ducks are Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/12/week-16-to-use-adversity-as-way-to-grow.html",
+    "https://www.kabbalahoftime.com/2013/12/week-16-michaiah-and-oral-torah.html",
+    "https://www.kabbalahoftime.com/2013/12/week-16-book-3-overcoming-setbacks.html",
+    "https://www.kabbalahoftime.com/2013/12/week-16-book-4a-bringing-oneself-close.html",
+    "https://www.kabbalahoftime.com/2013/12/week-16-book-4b-being-wife-and-midwife.html",
+    "https://www.kabbalahoftime.com/2013/12/week-16-book-5-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-16-book-7-ducks-are-saying.html"
+   ]
+  },
+  {
+   "week": 17,
+   "month": "Tevet",
+   "parasha": "Shemot",
+   "pairing": {
+    "he": "תִּפְאֶרֶת שֶׁבְּתִּפְאֶרֶת",
+    "en": "Tiferet of Tiferet"
+   },
+   "face": {
+    "animal": "Bee-Eater (last bird)",
+    "avot": "Rabbi Chaninah ben Chachinai — awake at night, guard the heart",
+    "trait": "To Pay Attention to G’d’s Guidance and to Trust in Our Redemption"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Pay Attention to G-d's Guidance",
+     "animal": "Bee-Eater",
+     "avot": "Rabbi Chaninah ben Chachinai – one who is awake at night or travels on the road, and turns his heart to idleness…"
+    },
+    "b2": {
+     "quality": "Minimized business activity (Miut Schorah)",
+     "prophet": "Ovadiah",
+     "haazinu": "They sacrificed to demons, which have no power, deities they did not know",
+     "haftorah": "He sent from on high [and] He took me; He drew me out of many waters",
+     "city": "Gath-rimmon"
+    },
+    "b3": {
+     "ruth": "Serug",
+     "haftara": "Eli and Shmuel",
+     "sotah": "17",
+     "journeys": "They journeyed from Rimmon perez and camped in Libnah"
+    },
+    "b4": {
+     "proverbs": "Prov 17 — Better is a dry morsel with quiet than a house full of feasting with strife",
+     "hannah": "Then Eli answered and said: Go in peace",
+     "avot6": "From him, people enjoy counsel",
+     "yahrzeit": "24 Tevet - Yahrzeit of Rabbi Shneur Zalman, the Alter Rebbe of Chabad | Lubavitch, Lelov"
+    },
+    "b5": {
+     "shir": "Shir 4:4–4:6 — Your neck is like the Tower of David",
+     "souls": "Yocheved",
+     "jeremiah": "Chapter 17",
+     "talmud": "17"
+    },
+    "b6": {
+     "psalms": "Ps 49–51 — Have mercy on me, O G-d, according to Your loving-kindness",
+     "tikkun": "Psalm 42:11-12; Psalm 59:1-2",
+     "psalm89": "Ps 89:16 — Fortunate is the people that know the blasting of the shofar; O Lord, may they walk in the light of Your countenance"
+    },
+    "b7": {
+     "mesilas": "Ch 16 — Purity (Taharah): purifying one's heart and imagination",
+     "theme": "The Bee-Eater is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/12/week-17-from-book-to-pay-attention-to-g.html",
+    "https://www.kabbalahoftime.com/2013/12/obadiah-and-minimized-business-activity.html",
+    "https://www.kabbalahoftime.com/2013/12/week-17-book-3-avraham-serug-and-alter.html",
+    "https://www.kabbalahoftime.com/2013/12/week-17-book-4a-going-to-peace.html",
+    "https://www.kabbalahoftime.com/2013/12/week-17-book-4b-our-intimate-connection.html",
+    "https://www.kabbalahoftime.com/2013/12/week-17-book-5-reviewing-fourth-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-17-book-7-bee-eater-is-saying.html"
+   ]
+  },
+  {
+   "week": 18,
+   "month": "Shvat",
+   "parasha": "Vaera",
+   "pairing": {
+    "he": "נֶצַח שֶׁבְּתִּפְאֶרֶת",
+    "en": "Netzach of Tiferet"
+   },
+   "face": {
+    "animal": "Grasshopper (first insect)",
+    "avot": "Rabbi Nechuniah — the yoke of Torah removes other yokes",
+    "trait": "To Live in Harmony with Nature in a Manner that is Above Nature"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Live in Harmony with Nature, Above Nature",
+     "animal": "Grasshopper",
+     "avot": "Rabbi Nechuniah – one who takes upon oneself the yoke of Torah, the yoke of making a living and of government are removed from him"
+    },
+    "b2": {
+     "quality": "Minimized worldly activity (Miut Derech Eretz)",
+     "prophet": "Ahiah HaShiloni",
+     "haazinu": "You forgot the [Mighty] Rock Who bore you; you forgot the G-d Who delivered you",
+     "haftorah": "He delivered me from my mighty enemy; from them that hated me",
+     "city": "Mishal"
+    },
+    "b3": {
+     "ruth": "Nahor",
+     "haftara": "The Tribes in War",
+     "sotah": "18",
+     "journeys": "They journeyed from Libnah and camped in Rissah"
+    },
+    "b4": {
+     "proverbs": "Prov 18 — A brother offended is harder to win than a strong city",
+     "hannah": "And she said: Let thy servant find favour in thy sight",
+     "avot6": "and wisdom",
+     "yahrzeit": "2 Shevat - Yarhzeit of Rebbe Meshulam Zusil (Zusha) | Alexander, Abuchatzira"
+    },
+    "b5": {
+     "shir": "Shir 4:7–4:9 — You are all beautiful, my beloved, there is no blemish in you",
+     "souls": "Judah",
+     "jeremiah": "Chapter 18",
+     "talmud": "18"
+    },
+    "b6": {
+     "psalms": "Ps 52–54 — O G-d, save me by Your name",
+     "tikkun": "Psalm 59:3-5",
+     "psalm89": "Ps 89:17 — With Your name they rejoice every day, and with Your righteousness they are exalted"
+    },
+    "b7": {
+     "mesilas": "Ch 17 — Particulars of Purity: refining thought and imagination",
+     "theme": "The Grasshopper is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2013/12/week-18-from-book-to-live-in-harmony.html",
+    "https://www.kabbalahoftime.com/2014/01/week-18-book-2-achia-hashiloni-and.html",
+    "https://www.kabbalahoftime.com/2014/01/week-18-book-3-nahor-and-continuity.html",
+    "https://www.kabbalahoftime.com/2014/01/week-18-book-4a-wisdom-that-brings.html",
+    "https://www.kabbalahoftime.com/2014/01/week-18-book-4b-nature-as-metaphor-and.html",
+    "https://www.kabbalahoftime.com/2014/01/week-18-book-5-reviewing-first-week-of.html",
+    "https://www.kabbalahoftime.com/2022/01/week-18-grasshopper-is-saying-book-7.html"
+   ]
+  },
+  {
+   "week": 19,
+   "month": "Shvat",
+   "parasha": "Bo",
+   "pairing": {
+    "he": "הוֹד שֶׁבְּתִּפְאֶרֶת",
+    "en": "Hod of Tiferet"
+   },
+   "face": {
+    "animal": "Locust",
+    "avot": "Rabbi Chalaftah — ten gathered in Torah, the Shechinah dwells",
+    "trait": "To Feel that G’d is Close Even When He Seems Far Away"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Feel that G-d is Close Even When Far Away",
+     "animal": "Locust",
+     "avot": "Rabbi Chalaftah – ten men that are gathered and occupy themselves in Torah..."
+    },
+    "b2": {
+     "quality": "Minimized pleasure (Miut Ta'anug)",
+     "prophet": "Yehu ben Chanani",
+     "haazinu": "And the Lord saw this and became angry, provoked by His sons and daughters",
+     "haftorah": "They confronted me on the day of my calamity; but the Lord was a support to me",
+     "city": "Abdon"
+    },
+    "b3": {
+     "ruth": "Terah",
+     "haftara": "The Tribes in War",
+     "sotah": "19",
+     "journeys": "They journeyed from Rissah and camped in Kehelathah"
+    },
+    "b4": {
+     "proverbs": "Prov 19 — Wealth adds many friends; the poor man is separated from his friend",
+     "hannah": "And they rose up in the morning early, and worshipped before the LORD",
+     "avot6": "understanding",
+     "yahrzeit": "Yahrzeit of Rabbi Yosef Yitzchak Schneersohn, 6th Lubavitcher Rebbe | Lubavitch, Lelov"
+    },
+    "b5": {
+     "shir": "Shir 4:10–4:12 — How beautiful is your love, my sister, my bride",
+     "souls": "Shelah",
+     "jeremiah": "Chapter 19",
+     "talmud": "19"
+    },
+    "b6": {
+     "psalms": "Ps 55–57 — Be gracious to me, O G-d, be gracious to me",
+     "tikkun": "Psalm 59:6-8",
+     "psalm89": "Ps 89:18 — For You are the glory of their might, and with Your favor our horns will be raised"
+    },
+    "b7": {
+     "mesilas": "Ch 18 — Acquiring Purity: constant mindfulness and directed thought",
+     "theme": "The Locust is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/01/week-19-from-book-to-feel-that-g-d-is.html",
+    "https://www.kabbalahoftime.com/2014/01/week-19-book-2-jehu-and-minimized.html",
+    "https://www.kabbalahoftime.com/2014/01/week-19-book-3-terah-and-nature.html",
+    "https://www.kabbalahoftime.com/2014/01/week-19-book-4a-wisdom-understanding.html",
+    "https://www.kabbalahoftime.com/2014/01/week-19-book-4b-pleasure-in-nature.html",
+    "https://www.kabbalahoftime.com/2014/01/week-19-book-5-reviewing-second-week-of.html",
+    "https://www.kabbalahoftime.com/2021/01/week-19-locust-is-saying-book-7.html"
+   ]
+  },
+  {
+   "week": 20,
+   "month": "Shvat",
+   "parasha": "Beshalach",
+   "pairing": {
+    "he": "יְסוֹד שֶׁבְּתִּפְאֶרֶת",
+    "en": "Yesod of Tiferet"
+   },
+   "face": {
+    "animal": "Spider",
+    "avot": "Rabbi Elazar of Bartota — give to Him what is His",
+    "trait": "To Be Solid and Giving in Our Relationships"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Be Solid and Giving in Our Relationships",
+     "animal": "Spider",
+     "avot": "Rabbi Elazar de Bartota – give to Him what is His, for you and all that is yours is His"
+    },
+    "b2": {
+     "quality": "Minimized sleep (Miut Sheinah)",
+     "prophet": "Azariah ben Oded",
+     "haazinu": "And He said, \"I will hide My face from them. I will see what their end will be",
+     "haftorah": "And He brought me forth into a wide place; He delivered me because He took delight in me",
+     "city": "Debir – Debir means Temple!"
+    },
+    "b3": {
+     "ruth": "Abraham",
+     "haftara": "The Tribes in War",
+     "sotah": "20",
+     "journeys": "They journeyed from Kehelathah and camped in Mount Shepher"
+    },
+    "b4": {
+     "proverbs": "Prov 20 — Wine is a mocker, strong drink a brawler",
+     "hannah": "And it came to pass, when the time was come about, that Hannah conceived",
+     "avot6": "and power, as is stated: Mine are counsel and wisdom, I am understanding, mine is power",
+     "yahrzeit": "Shevat 14 - Rav Yechiel Danziger, first Alexander Rebbe | Alexander, Modzitz"
+    },
+    "b5": {
+     "shir": "Shir 4:13–4:15 — Your shoot is an orchard of pomegranates",
+     "souls": "Perez",
+     "jeremiah": "Chapter 20",
+     "talmud": "20"
+    },
+    "b6": {
+     "psalms": "Ps 58–60 — O G-d, You have rejected us and broken our defenses",
+     "tikkun": "Psalm 59:9-11",
+     "psalm89": "Ps 89:19 — For our shield is [devoted] to the Lord, and our king to the Holy One of Israel"
+    },
+    "b7": {
+     "mesilas": "Ch 19 — Piety (Chassidut): going beyond the letter of the law",
+     "theme": "The Spider is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/01/week-20-from-book-to-be-solid-and.html",
+    "https://www.kabbalahoftime.com/2014/01/week-20-book-2-azariah-and-minimized.html",
+    "https://www.kabbalahoftime.com/2014/01/week-20-book-3-avraham-and-potential.html",
+    "https://www.kabbalahoftime.com/2014/01/week-20-book-4a-hanging-in-there.html",
+    "https://www.kabbalahoftime.com/2014/01/week-20-book-4bperez-and-bursting-out.html",
+    "https://www.kabbalahoftime.com/2014/01/week-20-book-5-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2021/01/week-20-book-7-spider-is-saying.html"
+   ]
+  },
+  {
+   "week": 21,
+   "month": "Shvat",
+   "parasha": "Yitro",
+   "pairing": {
+    "he": "מַלְכוּת שֶׁבְּתִּפְאֶרֶת",
+    "en": "Malchut of Tiferet"
+   },
+   "face": {
+    "animal": "Fly",
+    "avot": "Rabbi Yaakov — do not interrupt your study for the beautiful tree",
+    "trait": "To Keep Things in Perspective"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Keep Things in Perspective",
+     "animal": "Fly",
+     "avot": "Rabbi Yaakov – whoever is travelling on the road while studying and interrupts to exclaim how beautiful is this tree…"
+    },
+    "b2": {
+     "quality": "Minimized conversation (Miut Sichah)",
+     "prophet": "Yachaziel HaLevi",
+     "haazinu": "For a fire blazed in My wrath, and burned to the lowest depths",
+     "haftorah": "For I have kept the ways of the Lord and have not wickedly departed",
+     "city": "Rehob"
+    },
+    "b3": {
+     "ruth": "Isaac",
+     "haftara": "The Tribes in War",
+     "sotah": "21",
+     "journeys": "They journeyed from Mount Shepher and camped in Haradah"
+    },
+    "b4": {
+     "proverbs": "Prov 21 — A king's heart is like rivulets of water in G-d's hand",
+     "hannah": "And the man Elkanah, and all his house, went up to offer unto the LORD",
+     "avot6": "The Torah grants him sovereignty",
+     "yahrzeit": "22nd of Shvat - Rav Menachem Mendel of Kotzk (1787-1859) | Kotzk, Belz"
+    },
+    "b5": {
+     "shir": "Shir 4:16–5:2 — Awake, O north wind, and come O south wind",
+     "souls": "Zerah",
+     "jeremiah": "Chapter 21",
+     "talmud": "21"
+    },
+    "b6": {
+     "psalms": "Ps 61–63 — My soul thirsts for You in a dry and weary land",
+     "tikkun": "Psalm 59:12-14",
+     "psalm89": "Ps 89:20 — Then You spoke in a vision to Your pious ones, and You said, I placed help on a mighty man"
+    },
+    "b7": {
+     "mesilas": "Ch 20 — Particulars of Piety: prayer, love of G-d, and humility",
+     "theme": "The Fly is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/01/week-21-from-book-to-keep-things-in.html",
+    "https://www.kabbalahoftime.com/2014/01/week-21-book-2-jahaziel-and-minimized.html",
+    "https://www.kabbalahoftime.com/2014/01/week-21-book-3-isaac-and-emunah.html",
+    "https://www.kabbalahoftime.com/2014/01/week-21-book-4a-malchut-kingship.html",
+    "https://www.kabbalahoftime.com/2014/01/week-21book-4b-celebrating-sweet-fruit.html",
+    "https://www.kabbalahoftime.com/2014/01/week-21-book-5-reviewing-last-week-of.html",
+    "https://www.kabbalahoftime.com/2014/01/week-21-to-keep-things-in-perspective.html"
+   ]
+  },
+  {
+   "week": 22,
+   "month": "Adar",
+   "parasha": "Terumah",
+   "pairing": {
+    "he": "חֶסֶד שֶׁבְּנֶצַח",
+    "en": "Chesed of Netzach"
+   },
+   "face": {
+    "animal": "Sea Monsters",
+    "avot": "Rabbi Dostai ben Yanai — guard your Torah from forgetfulness",
+    "trait": "To Complement Each Other in Happiness"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Complement Each Other in Happiness",
+     "animal": "Sea Monsters",
+     "avot": "Rabbi Dostai, ben Yanai – one who forgets their Torah knowledge…"
+    },
+    "b2": {
+     "quality": "Minimized laughter (Miut Schok)",
+     "prophet": "Eliezer ben Dodavahu",
+     "haazinu": "I will link evils upon them. I will use up My arrows on them",
+     "haftorah": "For all His ordinances were before me; and [as for] His statutes, I did not depart from it",
+     "city": "Kedesh in Galillee (city of refuge)"
+    },
+    "b3": {
+     "ruth": "Jacob",
+     "haftara": "The Tribes in War",
+     "sotah": "22",
+     "journeys": "They journeyed from Haradah and camped in Makheloth"
+    },
+    "b4": {
+     "proverbs": "Prov 22 — Train the child in the way he should go",
+     "hannah": "But Hannah went not up; for she said unto her husband",
+     "avot6": "dominion",
+     "yahrzeit": "Adar 2 – 4th Gerrer Rebbe, the Beis Yisroel | Ger, Premishlan"
+    },
+    "b5": {
+     "shir": "Shir 5:3–5:5 — I have taken off my robe, shall I put it on again?",
+     "souls": "Hezron",
+     "jeremiah": "Chapter 22",
+     "talmud": "22"
+    },
+    "b6": {
+     "psalms": "Ps 64–66 — Shout joyfully to G-d, all the earth",
+     "tikkun": "Psalm 59:15-17",
+     "psalm89": "Ps 89:21 — I found David My servant, I anointed him with My holy oil"
+    },
+    "b7": {
+     "mesilas": "Ch 21 — Acquiring Piety: love of G-d through meditation on His greatness",
+     "theme": "The Giant Sea Creatures are Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/01/week-22-from-book-to-complement-each.html",
+    "https://www.kabbalahoftime.com/2014/01/week-22-book-2-adar-eliezer-son-of.html",
+    "https://www.kabbalahoftime.com/2014/01/week-22-book-3-adar-and-ratzon-will.html",
+    "https://www.kabbalahoftime.com/2014/01/week-22-book-4a-male-power-versus.html",
+    "https://www.kabbalahoftime.com/2014/01/week-22-book-4b-test-of-being-without.html",
+    "https://www.kabbalahoftime.com/2014/02/week-22-book-5-reviewing-first-week-of.html",
+    "https://www.kabbalahoftime.com/2021/02/week-22-book-7-giant-sea-creatures-are.html"
+   ]
+  },
+  {
+   "week": 23,
+   "month": "Adar",
+   "parasha": "Purim",
+   "pairing": {
+    "he": "גְּבוּרָה שֶׁבְּנֶצַח",
+    "en": "Gevurah of Netzach"
+   },
+   "face": {
+    "animal": "Leviathan",
+    "avot": "Rabbi Chaninah ben Dossah — fear of sin before wisdom",
+    "trait": "To Be Happy Even Without Knowing Why Things Are the Way They Are"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Be Happy Even Without Knowing Why",
+     "animal": "Leviathan",
+     "avot": "Rabbi Chaninah ben Dossah – one whose fear of sin is greater than his wisdom, his wisdom will endure…"
+    },
+    "b2": {
+     "quality": "With slowness to anger (Erech Apayim)",
+     "prophet": "Hoshea",
+     "haazinu": "They will sprout hair from famine, attacked by demons, excised by Meriri",
+     "haftorah": "And I was single-hearted toward Him, and I kept myself from my iniquity",
+     "city": "Hamoth-dor"
+    },
+    "b3": {
+     "ruth": "Yehudah",
+     "haftara": "The Tribes in War",
+     "sotah": "23",
+     "journeys": "They journeyed from Makheloth and camped in Tahath"
+    },
+    "b4": {
+     "proverbs": "Prov 23 — Do not eat the bread of a stingy man; do not desire his delicacies",
+     "hannah": "And Elkanah her husband said unto her: Do what seemeth thee good",
+     "avot6": "and jurisprudence",
+     "yahrzeit": "7 Adar - Rav Yitzchak Eizik Taub of Kalev | Kalev (2), Chechanov"
+    },
+    "b5": {
+     "shir": "Shir 5:6–5:8 — I opened to my beloved, but my beloved had turned and gone",
+     "souls": "Hamul",
+     "jeremiah": "Chapter 23",
+     "talmud": "23"
+    },
+    "b6": {
+     "psalms": "Ps 67–69 — Save me, O G-d, for the waters have reached my soul",
+     "tikkun": "Psalm 59:18; Psalm 77:1-3",
+     "psalm89": "Ps 89:22 — With whom My hand will be established, even My arm will strengthen him"
+    },
+    "b7": {
+     "mesilas": "Ch 22 — Humility (Anavah): seeing oneself clearly before G-d",
+     "theme": "The Leviathan is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/02/week-23-from-book-to-be-happy-even.html",
+    "https://www.kabbalahoftime.com/2014/02/week-23-book-2-slowness-to-anger.html",
+    "https://www.kabbalahoftime.com/2014/02/week-23-book-3-being-emissary.html",
+    "https://www.kabbalahoftime.com/2014/02/week-23-book-4a-coming-to-good-decision.html",
+    "https://www.kabbalahoftime.com/2014/02/week-23-book-4b-when-hashem-and-our.html",
+    "https://www.kabbalahoftime.com/2014/02/week-23-book-5-reviewing-second-week-of.html",
+    "https://www.kabbalahoftime.com/2016/03/the-leviathan-is-saying.html"
+   ]
+  },
+  {
+   "week": 24,
+   "month": "Adar",
+   "parasha": "Terumah",
+   "pairing": {
+    "he": "תִּפְאֶרֶת שֶׁבְּנֶצַח",
+    "en": "Tiferet of Netzach"
+   },
+   "face": {
+    "animal": "Fish",
+    "avot": "Rabbi Dossah ben Harkinas — morning sleep, afternoon wine…",
+    "trait": "To Live Above Our Worldly Concerns"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Live Above Our Worldly Concerns",
+     "animal": "Fish",
+     "avot": "Rabbi Dossah ben Harkinas – the sleep of the morning, wine of the afternoon, the talk of children, and meeting places of the ignorant…"
+    },
+    "b2": {
+     "quality": "Good heart (Lev Tov)",
+     "prophet": "Yoel",
+     "haazinu": "From outside, the sword will bereave, and terror from within",
+     "haftorah": "And the Lord has recompensed me according to my righteousness",
+     "city": "Kartan"
+    },
+    "b3": {
+     "ruth": "Perez",
+     "haftara": "The Tribes in War",
+     "sotah": "24",
+     "journeys": "They journeyed from Tahath and camped in Tarah"
+    },
+    "b4": {
+     "proverbs": "Prov 24 — Do not envy evil men or desire to be with them",
+     "hannah": "And when she had weaned him, she took him up with her",
+     "avot6": "The Torah's secrets are revealed to him",
+     "yahrzeit": "11 Adar - R' Avrohom Bornstein of Sochatcov | Ger, Sochatchov"
+    },
+    "b5": {
+     "shir": "Shir 5:9–5:11 — What is your beloved more than another beloved",
+     "souls": "Issachar",
+     "jeremiah": "Chapter 24",
+     "talmud": "24"
+    },
+    "b6": {
+     "psalms": "Ps 70–72 — Give the king Your judgments, O G-d",
+     "tikkun": "Psalm 77:4-6",
+     "psalm89": "Ps 89:23 — No enemy will exact from him, neither will an unjust person afflict him"
+    },
+    "b7": {
+     "mesilas": "Ch 23 — Particulars of Humility: honor, position, and recognition",
+     "theme": "The Fish are Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/02/week-24-from-book-to-live-above-our.html",
+    "https://www.kabbalahoftime.com/2014/02/week-24-book-2-amos-and-good-heart.html",
+    "https://www.kabbalahoftime.com/2014/02/week-24-book-3-peretz-and-power-of-joy.html",
+    "https://www.kabbalahoftime.com/2014/02/week-24-book-4a-when-wine-comes-in.html",
+    "https://www.kabbalahoftime.com/2014/02/week-24-book-4b-intoxicating-power-of.html",
+    "https://www.kabbalahoftime.com/2014/02/week-24-book-5-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2016/03/the-fish-are-saying.html"
+   ]
+  },
+  {
+   "week": 25,
+   "month": "Adar",
+   "parasha": "Tetzaveh",
+   "pairing": {
+    "he": "נֶצַח שֶׁבְּנֶצַח",
+    "en": "Netzach of Netzach"
+   },
+   "face": {
+    "animal": "Frog",
+    "avot": "Rabbi Elazar HaModai — do not profane the sacred",
+    "trait": "To Have Self-Sacrifice in order to Fulfill Our Mission in Life"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Have Self-Sacrifice to Fulfill Our Mission",
+     "animal": "Frog",
+     "avot": "Rabbi Elazar, the Modahite – one who profanes sacred objects, degrades the festivals, humiliates other in public…"
+    },
+    "b2": {
+     "quality": "Trusting in the Sages (Emunat Chachamim)",
+     "prophet": "Amos",
+     "haazinu": "I said that I would make an end of them, eradicate their remembrance from mankind",
+     "haftorah": "With a kind one, You show Yourself kind. With an upright mighty man",
+     "city": "Hebron - Kiryat Arba (city of refuge)"
+    },
+    "b3": {
+     "ruth": "Hezron",
+     "haftara": "The Tribes in War",
+     "sotah": "25",
+     "journeys": "They journeyed from Tarah and camped in Mithkah"
+    },
+    "b4": {
+     "proverbs": "Prov 25 — A word aptly spoken is like apples of gold in settings of silver",
+     "hannah": "And when the bullock was slain, the child was brought to Eli",
+     "avot6": "and he becomes as an ever-increasing wellspring",
+     "yahrzeit": "21 Adar - Yarhzeit of Rabbi Elimelech of Lizhensk | Ger, Alexander"
+    },
+    "b5": {
+     "shir": "Shir 5:12–5:14 — His eyes are like doves by the water brooks",
+     "souls": "Tola",
+     "jeremiah": "Chapter 25",
+     "talmud": "25"
+    },
+    "b6": {
+     "psalms": "Ps 73–75 — Truly G-d is good to Israel, to those pure of heart",
+     "tikkun": "Psalm 77:7-9",
+     "psalm89": "Ps 89:24 — And I shall crush his adversaries from before him, and I shall strike his enemies"
+    },
+    "b7": {
+     "mesilas": "Ch 24 — Acquiring Humility: knowing one's place and G-d's greatness",
+     "theme": "The Frog is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/02/week-25-from-book-to-have-self.html",
+    "https://www.kabbalahoftime.com/2014/02/week-25-book-2-micah-morashite-and.html",
+    "https://www.kabbalahoftime.com/2014/02/week-25-book-3-hezron-and-sweetening.html",
+    "https://www.kabbalahoftime.com/2014/02/week-25-book-4a-ever-increasing.html",
+    "https://www.kabbalahoftime.com/2014/02/week-25-book-4b-learning-torah-and.html",
+    "https://www.kabbalahoftime.com/2014/02/week-24-book-5-reviewing-fourth-week-of.html",
+    "https://www.kabbalahoftime.com/2016/03/the-frog-is-saying-songs-for-week-25.html"
+   ]
+  },
+  {
+   "week": 26,
+   "month": "Nissan",
+   "parasha": "Ki Tisa",
+   "pairing": {
+    "he": "הוֹד שֶׁבְּנֶצַח",
+    "en": "Hod of Netzach"
+   },
+   "face": {
+    "animal": "Sheep & Goat (first farm animals)",
+    "avot": "Rabbi Yishmael — receive every person with joy",
+    "trait": "To Be Humble and Let G’d Guide Us"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Be Humble and Let G-d Guide Us",
+     "animal": "Sheep and Goat",
+     "avot": "Rabbi Yishmael – be submissive to the head, and courteous to the young, and receive every person with joy"
+    },
+    "b2": {
+     "quality": "Faith in the Sages (Emunat Chachamim)",
+     "prophet": "Micah the Morashite",
+     "haazinu": "Were it not that the enemy's wrath was heaped up, lest their adversaries distort",
+     "haftorah": "With a pure one, You show Yourself pure; But with a perverse one",
+     "city": "Libnah (city of refuge)"
+    },
+    "b3": {
+     "ruth": "Ram",
+     "haftara": "The Tribes in War",
+     "sotah": "26",
+     "journeys": "They journeyed from Mithkah and camped in Hashmonah"
+    },
+    "b4": {
+     "proverbs": "Prov 26 — Like snow in summer and rain at harvest, so honor is unseemly for a fool",
+     "hannah": "And she said: Oh, my lord, as thy soul liveth, my lord",
+     "avot6": "and as an unceasing river",
+     "yahrzeit": "29 Adar - Shlomo Hakohen Rabinowicz, Tiferes Shlomo (1801–1866) | Vizhnitz, Radomsk"
+    },
+    "b5": {
+     "shir": "Shir 5:15–6:1 — His legs are pillars of marble",
+     "souls": "Puvvah",
+     "jeremiah": "Chapter 26",
+     "talmud": "26"
+    },
+    "b6": {
+     "psalms": "Ps 76–78 — A psalm of Asaph: G-d is known in Judah",
+     "tikkun": "Psalm 77:10-12",
+     "psalm89": "Ps 89:25 — My faithfulness and My kindness will be with him, and with My name his horn will be raised"
+    },
+    "b7": {
+     "mesilas": "Ch 25 — Fear of Sin (Yirat Chet): constant mindfulness of G-d's presence",
+     "theme": "The Lamb is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/03/week-26-from-book-to-be-humble-and-let.html",
+    "https://www.kabbalahoftime.com/2014/03/week-26-book-2-destroying-our-arrogance.html",
+    "https://www.kabbalahoftime.com/2014/03/week-26-book-3-connecting-to-head.html",
+    "https://www.kabbalahoftime.com/2014/03/week-26-book-4a-big-picture.html",
+    "https://www.kabbalahoftime.com/2014/03/week-26-book-4b-importance-of-speech.html",
+    "https://www.kabbalahoftime.com/2014/03/week-25-book-5-reviewing-week-of-rosh.html",
+    "https://www.kabbalahoftime.com/2016/04/the-lamb-is-saying-songs-for-week-26.html"
+   ]
+  },
+  {
+   "week": 27,
+   "month": "Nissan",
+   "parasha": "Pesach",
+   "pairing": {
+    "he": "יְסוֹד שֶׁבְּנֶצַח",
+    "en": "Yesod of Netzach"
+   },
+   "face": {
+    "animal": "Cow",
+    "avot": "Rabbi Akiva — everything is prepared for the banquet",
+    "trait": "To Purify Ourselves in order to Change"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Purify Ourselves in Order to Change",
+     "animal": "Cow",
+     "avot": "Rabbi Akiva – jest and frivolity accustom a person to lust… everything is prepared for the banquet"
+    },
+    "b2": {
+     "quality": "Acceptance of suffering (Kabalat HaYissurin)",
+     "prophet": "Amoz",
+     "haazinu": "For they are a nation devoid of counsel, and they have no understanding",
+     "haftorah": "And the humble people You do deliver; But Your eyes are upon the haughty",
+     "city": "Juttah"
+    },
+    "b3": {
+     "ruth": "Amminadab",
+     "haftara": "The Tribes in War",
+     "sotah": "27",
+     "journeys": "They journeyed from Hashmonah and camped in Moseroth"
+    },
+    "b4": {
+     "proverbs": "Prov 27 — Do not boast about tomorrow; you do not know what a day may bring",
+     "hannah": "For this child I prayed; and the LORD hath granted me my petition",
+     "avot6": "He becomes modest",
+     "yahrzeit": "2 Nissan - Yarhzeit of Rebbe Rashab | Lubavitch, Apta"
+    },
+    "b5": {
+     "shir": "Shir 6:2–6:4 — My beloved has gone down to his garden, to the beds of spices",
+     "souls": "Iob",
+     "jeremiah": "Chapter 27",
+     "talmud": "27"
+    },
+    "b6": {
+     "psalms": "Ps 79–81 — Blow the shofar at the new moon, at the full moon on our feast day",
+     "tikkun": "Psalm 77:13-15",
+     "psalm89": "Ps 89:26 — I shall place his hand over the sea, and his right hand over the rivers"
+    },
+    "b7": {
+     "mesilas": "Ch 26 — Particulars of Fear of Sin: examination of deeds and thoughts",
+     "theme": "The Cow is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/04/week-27-from-book-to-purify-ourselves.html",
+    "https://www.kabbalahoftime.com/2014/04/week-27-book-2-knowing-ones-place.html",
+    "https://www.kabbalahoftime.com/2014/04/week-27-book-3-amminadab-emunah-self.html",
+    "https://www.kabbalahoftime.com/2014/04/week-27-book-4a-he-becomes-modest.html",
+    "https://www.kabbalahoftime.com/2014/04/week-27-book-4b-faith-in-shepherd.html",
+    "https://www.kabbalahoftime.com/2014/04/week-26-book-5-reviewing-second-week-of.html",
+    "https://www.kabbalahoftime.com/2016/04/the-cow-is-saying-songs-for-week-27.html"
+   ]
+  },
+  {
+   "week": 28,
+   "month": "Nissan",
+   "parasha": "Shemini",
+   "pairing": {
+    "he": "מַלְכוּת שֶׁבְּנֶצַח",
+    "en": "Malchut of Netzach"
+   },
+   "face": {
+    "animal": "Pig & Rabbit",
+    "avot": "Rabbi Elazar ben Azariah — without flour there is no Torah",
+    "trait": "To Recognize our Limits in order to Free Ourselves from Them"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Recognize Our Limits to Free Ourselves",
+     "animal": "Pig and Rabbit",
+     "avot": "Rabbi Elazar ben Azariah – without Torah there is no common decency... without flour there is no Torah…"
+    },
+    "b2": {
+     "quality": "He who knows his place (HaMakir et Mekomo)",
+     "prophet": "Eliyahu",
+     "haazinu": "If they were wise, they would understand this; they would reflect upon their fate",
+     "haftorah": "For You are my lamp, O' Lord; And the Lord does light my darkness",
+     "city": "Beth-shemesh (city of Judah on the border)"
+    },
+    "b3": {
+     "ruth": "Nachshon",
+     "haftara": "Deborah",
+     "sotah": "28",
+     "journeys": "They journeyed from Moseroth and camped in Benei jaakan"
+    },
+    "b4": {
+     "proverbs": "Prov 28 — The wicked flee when no man pursues",
+     "hannah": "therefore I also have lent him to the LORD; And he worshipped the LORD there",
+     "avot6": "patient",
+     "yahrzeit": "13 Nissan - Yahrzeit of the Tzemach Tzedek | Lubavitch, Vizhnitz"
+    },
+    "b5": {
+     "shir": "Shir 6:5–6:7 — Turn away your eyes from me, for they have overcome me",
+     "souls": "Shimron",
+     "jeremiah": "Chapter 28",
+     "talmud": "28"
+    },
+    "b6": {
+     "psalms": "Ps 82–84 — How lovely are Your tabernacles, O Lord of Hosts",
+     "tikkun": "Psalm 77:16-18",
+     "psalm89": "Ps 89:27 — He will call to Me, You are my Father, my G-d, and the Rock of my salvation"
+    },
+    "b7": {
+     "mesilas": "Ch 27 — Holiness (Kedushah): sanctifying all physical activities for G-d",
+     "theme": "The Pig is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/04/week-28-from-book-to-recognize-our.html",
+    "https://www.kabbalahoftime.com/2014/04/week-28-book-2-elisha-and-being-happy.html",
+    "https://www.kabbalahoftime.com/2014/04/week-28-book-3-nachshon-and-help-from.html",
+    "https://www.kabbalahoftime.com/2014/04/week-28-book-4a-being-patient-and-long.html",
+    "https://www.kabbalahoftime.com/2014/04/week-28-book-4b-shimron-and-night-of.html",
+    "https://www.kabbalahoftime.com/2014/04/week-28-book-5-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2016/04/the-pig-is-saying-songs-for-week-28.html"
+   ]
+  },
+  {
+   "week": 29,
+   "month": "Nissan",
+   "parasha": "Tazria",
+   "pairing": {
+    "he": "חֶסֶד שֶׁבְּהוֹד",
+    "en": "Chesed of Hod"
+   },
+   "face": {
+    "animal": "Beast of Burden",
+    "avot": "Rabbi Elazar ben Chismah — even “small” laws are essential",
+    "trait": "After the Initial Inspiration, To Get to Work"
+   },
+   "fields": {
+    "b1": {
+     "theme": "After the Initial Inspiration, Get to Work",
+     "animal": "Beast of Burden",
+     "avot": "Rabbi Elazar ben Chismah – the laws of bird sacrifices and menstrual periods are essential…"
+    },
+    "b2": {
+     "quality": "He who is happy with his lot (HaSameach beChelkoh)",
+     "prophet": "Elisha",
+     "haazinu": "How can one [person] pursue a thousand, and two put ten thousand to flight",
+     "haftorah": "For by You I run upon a troop; By my G-d I scale a wall",
+     "city": "Dobrath"
+    },
+    "b3": {
+     "ruth": "Salmah",
+     "haftara": "Deborah",
+     "sotah": "29",
+     "journeys": "They journeyed from Benei jaakan and camped in Hor hagidgad"
+    },
+    "b4": {
+     "proverbs": "Prov 29 — Where there is no vision, the people perish",
+     "hannah": "And Hannah prayed, and said: my heart exulteth in the LORD",
+     "avot6": "and forgiving of insults",
+     "yahrzeit": "19 Nissan - Rav Aharon Hagadol of Karlin (1736-1772) | Karlin, Vorka"
+    },
+    "b5": {
+     "shir": "Shir 6:8–6:10 — There are sixty queens",
+     "souls": "Zebulun",
+     "jeremiah": "Chapter 29",
+     "talmud": "29"
+    },
+    "b6": {
+     "psalms": "Ps 85–87 — You have been favorable to Your land, O Lord",
+     "tikkun": "Psalm 77:19-21",
+     "psalm89": "Ps 89:28 — I, too, shall make him a firstborn, the highest of the kings of the earth"
+    },
+    "b7": {
+     "mesilas": "Ch 28 — Acquiring Holiness: consecrating all deeds and intentions",
+     "theme": "The Beast of Burden is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/04/week-29-from-book-after-initial.html",
+    "https://www.kabbalahoftime.com/2014/04/week-29-book-2-jonah-gechazi-and.html",
+    "https://www.kabbalahoftime.com/2014/05/week-29-book-3-salmah-and-leaving-our.html",
+    "https://www.kabbalahoftime.com/2014/04/week-29-book-4a-forgiving-of-personal.html",
+    "https://www.kabbalahoftime.com/2014/04/week-29-book-4b-feeling-chosen-our.html",
+    "https://www.kabbalahoftime.com/2014/04/week-29-book-5-reviewing-fourth-week-of.html",
+    "https://www.kabbalahoftime.com/2016/04/the-beast-of-burden-is-saying-songs-for.html"
+   ]
+  },
+  {
+   "week": 30,
+   "month": "Iyar",
+   "parasha": "Metzora",
+   "pairing": {
+    "he": "גְּבוּרָה שֶׁבְּהוֹד",
+    "en": "Gevurah of Hod"
+   },
+   "face": {
+    "animal": "Camel",
+    "avot": "Ben Zomah — who is wise? One who learns from everyone",
+    "trait": "To Know that the World Needs More Love and Respect"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Know the World Needs More Love and Respect",
+     "animal": "Camel",
+     "avot": "Ben Zomah – Who is wise? One that learns from everyone"
+    },
+    "b2": {
+     "quality": "He who makes a fence around his words",
+     "prophet": "Jonah ben Amittai",
+     "haazinu": "For their vine is of the vine of Sodom, and of the field of Gemorrah",
+     "haftorah": "[He is] the G-d Whose way is perfect; The word of the Lord is tried",
+     "city": "'Ein Gannim"
+    },
+    "b3": {
+     "ruth": "Boaz",
+     "haftara": "Deborah",
+     "sotah": "30",
+     "journeys": "They journeyed from Hor hagidgad and camped in Jotbathah"
+    },
+    "b4": {
+     "proverbs": "Prov 30 — Who can find a virtuous woman? Her price is far above rubies",
+     "hannah": "There is none holy as the LORD, for there is none beside Thee",
+     "avot6": "The Torah uplifts him",
+     "yahrzeit": "25 Nissan - Rav Chaim Halberstam of Sanz, founder of Sanzer Chasidim | Karlin, Kobrin (Slonim)"
+    },
+    "b5": {
+     "shir": "Shir 6:11–7:1 — I went down to the garden of nuts",
+     "souls": "Sered",
+     "jeremiah": "Chapter 30",
+     "talmud": "30"
+    },
+    "b6": {
+     "psalms": "Ps 88–90 — Lord, You have been our dwelling place throughout all generations",
+     "tikkun": "Psalm 90:1-4",
+     "psalm89": "Ps 89:29 — I will forever keep My kindness for him, and My covenant will remain true to him"
+    },
+    "b7": {
+     "mesilas": "Ch 29 — Particulars of Holiness: elevating food, sleep, and physical acts",
+     "theme": "The Camel is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/04/week-30-from-book-to-know-that-world.html",
+    "https://www.kabbalahoftime.com/2014/04/week-30-book-2-giving-all-credit-to-g-d.html",
+    "https://www.kabbalahoftime.com/2014/04/week-30-book-3-destruction-and-conquest.html",
+    "https://www.kabbalahoftime.com/2014/04/week-3-book-4a-yehoshuah-and-being.html",
+    "https://www.kabbalahoftime.com/2014/04/week-30-book-4b-sered-nets-and-chains.html",
+    "https://www.kabbalahoftime.com/2014/04/week-30-book-5-reviewing-fifth-week-of.html",
+    "https://www.kabbalahoftime.com/2016/04/the-camel-is-saying-songs-for-week-30.html"
+   ]
+  },
+  {
+   "week": 31,
+   "month": "Iyar",
+   "parasha": "Acharei Mot",
+   "pairing": {
+    "he": "תִּפְאֶרֶת שֶׁבְּהוֹד",
+    "en": "Tiferet of Hod"
+   },
+   "face": {
+    "animal": "Horse",
+    "avot": "Ben Azai — run to pursue a mitzvah",
+    "trait": "To Be Proud of Our Humble Connection with G’d"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Be Proud of Our Humble Connection with G-d",
+     "animal": "Horse",
+     "avot": "Ben Azai – run to pursue a mitzvah, and flee from transgression. A mitzvah attracts another mitzvah..."
+    },
+    "b2": {
+     "quality": "He claims no credit for his achievements (Einoh Machazik Tovah l'Atzmo)",
+     "prophet": "Isaiah",
+     "haazinu": "Their wine is the bitterness of serpents, and the bitterness of the ruthless cobras",
+     "haftorah": "For who is G-d, save the Lord? And who is a rock, save our G-d?",
+     "city": "Kartah"
+    },
+    "b3": {
+     "ruth": "Obed",
+     "haftara": "Deborah",
+     "sotah": "31",
+     "journeys": "They journeyed from Jotbathah and camped in Abronah"
+    },
+    "b4": {
+     "proverbs": "Prov 31 — Eshet Chayil: a woman of valor, who can find?",
+     "hannah": "Multiply not exceeding proud talk; let not arrogancy come out of your mouth",
+     "avot6": "and makes him greater than all creations",
+     "yahrzeit": "1 Iyar - Yarhzeit of Rebbe Menachem Mendel of Vitebsk (5548) | Slonim, Stolin (Karlin)"
+    },
+    "b5": {
+     "shir": "Shir 7:2–7:4 — How beautiful are your feet in sandals, O nobleman's daughter",
+     "souls": "Elon",
+     "jeremiah": "Chapter 31",
+     "talmud": "31"
+    },
+    "b6": {
+     "psalms": "Ps 91–93 — The Lord reigns; He is clothed in majesty",
+     "tikkun": "Psalm 90:5-7",
+     "psalm89": "Ps 89:30 — And I shall make his seed endure forever, and his throne as the days of the heavens"
+    },
+    "b7": {
+     "mesilas": "Ch 30 — Ruach HaKodesh (Divine Inspiration): the crown of the ladder",
+     "theme": "The Horse is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/04/week-31-from-book-to-be-proud-of-our.html",
+    "https://www.kabbalahoftime.com/2014/04/week-31-book-2-rock-of-israel.html",
+    "https://www.kabbalahoftime.com/2014/05/week-31-book-3-obed-and-working-hard.html",
+    "https://www.kabbalahoftime.com/2014/05/week-31-book-4a-accepting-greatness.html",
+    "https://www.kabbalahoftime.com/2014/05/week-31-book-4b-strong-and-praiseworthy.html",
+    "https://www.kabbalahoftime.com/2014/05/week-31-book-5-reviewing-first-week-of.html",
+    "https://www.kabbalahoftime.com/2016/05/the-horse-is-saying-songs-for-week-31.html"
+   ]
+  },
+  {
+   "week": 32,
+   "month": "Iyar",
+   "parasha": "Kedoshim",
+   "pairing": {
+    "he": "נֶצַח שֶׁבְּהוֹד",
+    "en": "Netzach of Hod"
+   },
+   "face": {
+    "animal": "Mule",
+    "avot": "Rabbi Levitas of Yavneh — be extremely humble",
+    "trait": "To Recognize Deep in Our Heart How Small We Are, How Great G’d Is"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Recognize Deep in Our Heart How Small We Are",
+     "animal": "Mule",
+     "avot": "Rabbi Levitas of Yavneh – be extremely humble, because the hope of mortal man is worms..."
+    },
+    "b2": {
+     "quality": "Loved (Ahuv)",
+     "prophet": "Joel",
+     "haazinu": "Is it not stored up with Me, sealed up in My treasuries?",
+     "haftorah": "G-d is He who has fortified me with strength; and He looseth perfectly my path",
+     "city": "Nahalal"
+    },
+    "b3": {
+     "ruth": "Yishai",
+     "haftara": "Deborah",
+     "sotah": "32",
+     "journeys": "They journeyed from Abronah and camped in Etzion geber"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 1",
+     "hannah": "The bows of the mighty men are broken",
+     "avot6": "Great is Torah, for it gives life to its observers in this world and the World To Come",
+     "yahrzeit": "11 Iyar - Rav Naftali Tzvi of Ropshitz, Ayalah Sheluchah (1760-1827) | Lublin-Trisk, Tolna (Chernobyl)"
+    },
+    "b5": {
+     "shir": "Shir 7:5–7:7 — Your head upon you is like Carmel",
+     "souls": "Jahleel",
+     "jeremiah": "Chapter 32",
+     "talmud": "32"
+    },
+    "b6": {
+     "psalms": "Ps 94–96 — O come, let us sing to the Lord",
+     "tikkun": "Psalm 90:8-10",
+     "psalm89": "Ps 89:31 — If his sons forsake My Torah and do not walk in My judgments"
+    },
+    "b7": {
+     "mesilas": "Introduction (Cycle 2) — Man's purpose revisited in light of practice",
+     "theme": "The Mule is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/05/week-32-to-recognize-deep-in-our-heart.html",
+    "https://www.kabbalahoftime.com/2014/05/week-32-book-2-light-that-comes-from.html",
+    "https://www.kabbalahoftime.com/2014/05/week-32-book-3-battling-for-land-laying.html",
+    "https://www.kabbalahoftime.com/2014/05/week-32-book-4a-ups-and-downs.html",
+    "https://www.kabbalahoftime.com/2014/05/week-32-4b-securing-our-connection-to.html",
+    "https://www.kabbalahoftime.com/2014/05/week-32-book-5-reviewing-second-week-of.html",
+    "https://www.kabbalahoftime.com/2016/05/the-mule-is-saying.html"
+   ]
+  },
+  {
+   "week": 33,
+   "month": "Iyar",
+   "parasha": "Emor",
+   "pairing": {
+    "he": "הוֹד שֶׁבְּהוֹד",
+    "en": "Hod of Hod"
+   },
+   "face": {
+    "animal": "Donkey",
+    "avot": "Rabbi Yochanan ben Berokah — the Divine Name is never profaned in vain",
+    "trait": "To Recognize the Spiritual Treasures Hidden within Each One of Us"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Recognize the Spiritual Treasures Within Each",
+     "animal": "Donkey",
+     "avot": "Rabbi Yochanan ben Berokah – whoever profanes the Divine Name in secret will be punished in public..."
+    },
+    "b2": {
+     "quality": "Loves Hashem (Ohev et HaMakom)",
+     "prophet": "Nahum",
+     "haazinu": "Vengeance is poised with Me, and it will pay at the time their foot stumbles",
+     "haftorah": "He makes my feet like hinds; And sets me upon my high places",
+     "city": "Jahaz (or Yahatz, or Yahatzah)"
+    },
+    "b3": {
+     "ruth": "David",
+     "haftara": "Deborah",
+     "sotah": "33",
+     "journeys": "They journeyed from Ezion geber and camped in the desert of Zin, which is Kadesh"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 2",
+     "hannah": "They that were full have hired out themselves for bread",
+     "avot6": "And it says: It shall be health to your navel, and marrow to your bones",
+     "yahrzeit": "19 Iyar - Rav Menachem Mendel of Rimanov (1755-1815) | Abuchatzira (2), Chernobyl (2)"
+    },
+    "b5": {
+     "shir": "Shir 7:8–7:9 — I said, I will go up to the palm tree",
+     "souls": "Dinah / Asenath daughter of Poti-phera Chief of On",
+     "jeremiah": "Chapter 33",
+     "talmud": "33"
+    },
+    "b6": {
+     "psalms": "Ps 97–99 — The Lord reigns; let the earth rejoice",
+     "tikkun": "Psalm 90:11-13",
+     "psalm89": "Ps 89:32 — If they profane My statutes and do not keep My commandments"
+    },
+    "b7": {
+     "mesilas": "Ch 1 (Cycle 2) — Man's Duty: renewed clarity of purpose",
+     "theme": "The Donkey is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/05/week-33-to-recognize-spiritual.html",
+    "https://www.kabbalahoftime.com/2014/05/week-33-book-2-torah-that-comes-from.html",
+    "https://www.kabbalahoftime.com/2014/05/week-33-book-3-blessed-above-all-others.html",
+    "https://www.kabbalahoftime.com/2014/05/week-33-book-4a-health-and-wealth.html",
+    "https://www.kabbalahoftime.com/2014/05/week-33-book-4b-tzadik.html",
+    "https://www.kabbalahoftime.com/2014/05/week-33-book-5-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2016/05/the-donkey-is-saying-songs-for-week-33.html"
+   ]
+  },
+  {
+   "week": 34,
+   "month": "Iyar",
+   "parasha": "Behar",
+   "pairing": {
+    "he": "יְסוֹד שֶׁבְּהוֹד",
+    "en": "Yesod of Hod"
+   },
+   "face": {
+    "animal": "Ox (last farm animal)",
+    "avot": "Rabbi Yishmael b. R. Yossi — study in order to practice",
+    "trait": "To Work in a Focused Manner and without Ego"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Work in a Focused Manner and Without Ego",
+     "animal": "Ox",
+     "avot": "Rabbi Yishmael the son of Rabbi Yossi – one who studies Torah in order to teach is given the opportunity to learn and teach; one that studies Torah in order to practice…"
+    },
+    "b2": {
+     "quality": "Loves people (Ohev et HaBriot)",
+     "prophet": "Chabakuk",
+     "haazinu": "When the Lord will judge His people, and will reconsider His servants",
+     "haftorah": "He trains my hand for war, so that mine arms do bend a brass bow",
+     "city": "Mephaath"
+    },
+    "b3": {
+     "ruth": "Solomon",
+     "haftara": "Devorah and the women of Israel",
+     "sotah": "34",
+     "journeys": "They journeyed from Kadesh and camped at Mount Hor, at the edge of the land of Edom"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 3",
+     "hannah": "The LORD killeth, and maketh alive",
+     "avot6": "And it says: She is a tree of life for those who hold fast to her",
+     "yahrzeit": "26 Iyar – R' Chaim ben R' Menachem Mendel Hager of Kosov (1854) | Kosov (2), Modzitz"
+    },
+    "b5": {
+     "shir": "Shir 7:10 — I am my beloved's, and his desire is toward me",
+     "souls": "Gad / Menasheh",
+     "jeremiah": "Chapter 34",
+     "talmud": "34"
+    },
+    "b6": {
+     "psalms": "Ps 100–102 — O Lord, hear my prayer; let my cry come to You",
+     "tikkun": "Psalm 90:14-16",
+     "psalm89": "Ps 89:33 — I shall punish their transgression with a rod, and their iniquity with stripes"
+    },
+    "b7": {
+     "mesilas": "Ch 2 (Cycle 2) — Watchfulness deepened through experience",
+     "theme": "The Ox is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/05/week-34-from-book-to-work-in-focused.html",
+    "https://www.kabbalahoftime.com/2014/05/week-34-book-2-zephaniah-and-loving.html",
+    "https://www.kabbalahoftime.com/2014/05/week-34-book-3-feeling-shalem-whole.html",
+    "https://www.kabbalahoftime.com/2014/05/week-34-book-4a-tree-of-life.html",
+    "https://www.kabbalahoftime.com/2014/05/week-34-book-4b-healing-and-rabbi.html",
+    "https://www.kabbalahoftime.com/2014/05/week-34-book-5-reviewing-fourth-week-of.html",
+    "https://www.kabbalahoftime.com/2016/05/the-ox-is-saying-songs-for-week-34.html"
+   ]
+  },
+  {
+   "week": 35,
+   "month": "Sivan",
+   "parasha": "Bechukotai",
+   "pairing": {
+    "he": "מַלְכוּת שֶׁבְּהוֹד",
+    "en": "Malchut of Hod"
+   },
+   "face": {
+    "animal": "Wild Animals",
+    "avot": "Rabbi Tzadok — do not separate from the community",
+    "trait": "To Thank G’d in Unison"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Thank G-d in Unison",
+     "animal": "Wild Animals",
+     "avot": "Rabbi Tzadok – do not separate yourself from the community… do not make the Torah into a crown to glorify yourself"
+    },
+    "b2": {
+     "quality": "Loves the ways of righteousness (Ohev et HaTzedakot)",
+     "prophet": "Zephaniah",
+     "haazinu": "Then He will say, \"Where is their deity, the rock in which they trusted",
+     "haftorah": "And You have given me the shield of Your salvation",
+     "city": "Holon"
+    },
+    "b3": {
+     "ruth": "Rehoboam",
+     "haftara": "Devorah and the women of Israel",
+     "sotah": "35",
+     "journeys": "They journeyed from Mount Hor and camped in Zalmonah"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 4",
+     "hannah": "The LORD maketh poor, and maketh rich",
+     "avot6": "And it says: For they shall be a garland of grace for your head",
+     "yahrzeit": "29 Iyar - Rav Meir of Premishlan (1773) | Vizhnitz, Munkatch"
+    },
+    "b5": {
+     "shir": "Shir 7:11 — Come, my beloved, let us go forth into the field",
+     "souls": "Ziphion / Ephraim",
+     "jeremiah": "Chapter 35",
+     "talmud": "35"
+    },
+    "b6": {
+     "psalms": "Ps 103–105 — Bless the Lord, O my soul",
+     "tikkun": "Psalm 90:17; Psalm 105:1-2",
+     "psalm89": "Ps 89:34 — But I shall not cancel My kindness from him, and I shall not betray My faith"
+    },
+    "b7": {
+     "mesilas": "Ch 3 (Cycle 2) — Watchfulness divisions: examining one's inner world",
+     "theme": "The Wild Animals Say"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/05/week-35-from-book-to-thank-g-d-in-unison.html",
+    "https://www.kabbalahoftime.com/2014/05/week-35-book-2-uriah-and-loving-just.html",
+    "https://www.kabbalahoftime.com/2014/05/week-35-book-3-to-be-united-and-not.html",
+    "https://www.kabbalahoftime.com/2014/05/week-35-book-4a-true-wealth-and-honor.html",
+    "https://www.kabbalahoftime.com/2014/05/week-35-book-4b-feeling-hashems-desire.html",
+    "https://www.kabbalahoftime.com/2014/06/week-35-book-5-reviewing-week-of-rosh.html",
+    "https://www.kabbalahoftime.com/2016/06/the-wild-animals-say-songs-for-week-35.html"
+   ]
+  },
+  {
+   "week": 36,
+   "month": "Sivan",
+   "parasha": "Shavuot",
+   "pairing": {
+    "he": "חֶסֶד שֶׁבְּיְסוֹד",
+    "en": "Chesed of Yesod"
+   },
+   "face": {
+    "animal": "Gazelle",
+    "avot": "Rabbi Yossi — one who honors the Torah will be honored",
+    "trait": "To Have Emunah"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Have Emunah",
+     "animal": "Gazelle",
+     "avot": "Rabbi Yossi – one that honors the Torah will be honored by men…"
+    },
+    "b2": {
+     "quality": "Loves justice (Ohev et HaMeisharim)",
+     "prophet": "Uriah",
+     "haazinu": "who ate the fat of their sacrifices and drank the wine of their libations?",
+     "haftorah": "You have enlarged my step[s] beneath me; And my ankles have not slipped",
+     "city": "'Ain; ayin means eye, fountain"
+    },
+    "b3": {
+     "ruth": "Abijam",
+     "haftara": "Devorah and the women of Israel",
+     "sotah": "36",
+     "journeys": "They journeyed from Zalmonah and camped in Punon"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 5",
+     "hannah": "He raiseth up the poor out of the dust",
+     "avot6": "And it says: She shall give to your head a garland of grace",
+     "yahrzeit": "6th of Sivan, Rabbi Yisrael Baal Shem Tov | Baal Shem Tov, Ger"
+    },
+    "b5": {
+     "shir": "Shir 7:12 — Let us get up early to the vineyards",
+     "souls": "Haggi / Bela",
+     "jeremiah": "Chapter 36",
+     "talmud": "36"
+    },
+    "b6": {
+     "psalms": "Ps 106–108 — Give thanks to the Lord, for He is good",
+     "tikkun": "Psalm 105:3-5",
+     "psalm89": "Ps 89:35 — I shall not profane My covenant, neither shall I alter the utterance of My lips"
+    },
+    "b7": {
+     "mesilas": "Ch 4 (Cycle 2) — Acquiring Watchfulness: self-examination leads to growth",
+     "theme": "The Gazelle is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/06/week-36-from-book-to-have-emunah.html",
+    "https://www.kabbalahoftime.com/2014/06/week-36-book-2-accepting-truth.html",
+    "https://www.kabbalahoftime.com/2014/06/week-36-book-3-not-leaving-learning-for.html",
+    "https://www.kabbalahoftime.com/2014/06/week-36-book-4a-crowns-of-torah.html",
+    "https://www.kabbalahoftime.com/2014/06/week-36-book-4b-chag-festival.html",
+    "https://www.kabbalahoftime.com/2014/06/week-36-book-5-reviewing-second-week-of.html",
+    "https://www.kabbalahoftime.com/2017/06/the-gazelle-is-saying.html"
+   ]
+  },
+  {
+   "week": 37,
+   "month": "Sivan",
+   "parasha": "Bamidbar",
+   "pairing": {
+    "he": "גְּבוּרָה שֶׁבְּיְסוֹד",
+    "en": "Gevurah of Yesod"
+   },
+   "face": {
+    "animal": "Elephant",
+    "avot": "Rabbi Yishmael — judge with care, avoid hatred and theft",
+    "trait": "To Maintain our Humility and Not Forget the Greatness We Experienced"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Maintain Our Humility After Greatness",
+     "animal": "Elephant",
+     "avot": "Rabbi Yishmael – one who refrains from serving as a judge avoid hatred, theft and false oaths."
+    },
+    "b2": {
+     "quality": "Loves reproof (Ohev et HaTochachot)",
+     "prophet": "Jeremiah",
+     "haazinu": "See now that it is I! I am the One, and there is no G-d like Me!",
+     "haftorah": "I have pursued my enemies and have destroyed them",
+     "city": "Future City of Refuge"
+    },
+    "b3": {
+     "ruth": "Asa",
+     "haftara": "Devorah and the women of Israel",
+     "sotah": "37",
+     "journeys": "They journeyed from Punon and camped in Oboth"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 6",
+     "hannah": "He will keep the feet of His holy ones",
+     "avot6": "And it says: With me, your days shall be increased",
+     "yahrzeit": "17 Sivan - Rav Aharon of Karlin, the Beis Aharon (1802-1872) | Sanz, Skver"
+    },
+    "b5": {
+     "shir": "Shir 7:13 — The mandrakes give forth their fragrance",
+     "souls": "Shuni / Becher",
+     "jeremiah": "Chapter 37",
+     "talmud": "37"
+    },
+    "b6": {
+     "psalms": "Ps 109–111 — Praise the Lord! I will give thanks with my whole heart",
+     "tikkun": "Psalm 105:6-8",
+     "psalm89": "Ps 89:36 — One thing have I sworn by My holiness, that I will not fail David"
+    },
+    "b7": {
+     "mesilas": "Ch 5 (Cycle 2) — Obstacles to Watchfulness revisited with new depth",
+     "theme": "The Elephant is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/06/week-37-from-book-to-maintain-our.html",
+    "https://www.kabbalahoftime.com/2014/06/week-37-book-2-strength-and-stability.html",
+    "https://www.kabbalahoftime.com/2014/06/week-37-book-3-remembering-shavuot.html",
+    "https://www.kabbalahoftime.com/2014/06/week-37-4a-years-of-life-and-length-of.html",
+    "https://www.kabbalahoftime.com/2014/06/week-38-book-4b-first-fruits.html",
+    "https://www.kabbalahoftime.com/2014/06/week-36-book-5-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2017/06/the-elephant-is-saying.html"
+   ]
+  },
+  {
+   "week": 38,
+   "month": "Sivan",
+   "parasha": "Naso",
+   "pairing": {
+    "he": "תִּפְאֶרֶת שֶׁבְּיְסוֹד",
+    "en": "Tiferet of Yesod"
+   },
+   "face": {
+    "animal": "Lion",
+    "avot": "Rabbi Yonatan — fulfill the Torah in poverty, fulfill it in wealth",
+    "trait": "To Be Strong and Courageous in order to Defend the Common Good"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Be Strong and Courageous for the Common Good",
+     "animal": "Lion",
+     "avot": "Rabbi Yonatan – whoever fulfills the Torah in poverty will ultimately fulfill it in wealth..."
+    },
+    "b2": {
+     "quality": "Keeps far from honor",
+     "prophet": "Ezekiel",
+     "haazinu": "For I raise up My hand to heaven, and say, 'As I live forever",
+     "haftorah": "And I have consumed them, and I have crushed them that they cannot rise",
+     "city": "Mahanaim"
+    },
+    "b3": {
+     "ruth": "Jehoshaphat",
+     "haftara": "Devorah and the women of Israel",
+     "sotah": "38",
+     "journeys": "They journeyed from Oboth and camped at the ruins of Abarim"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 7",
+     "hannah": "They that strive with the LORD shall be broken to pieces",
+     "avot6": "And it says: Long days in her right hand; in her left, wealth and honor",
+     "yahrzeit": "20 Sivan - Rebbe Yisrael Dan Taub | Modzitz, Munkatz"
+    },
+    "b5": {
+     "shir": "Shir 7:14 — At our doors are all manner of precious fruits",
+     "souls": "Ezbon / Ashbel",
+     "jeremiah": "Chapter 38",
+     "talmud": "38"
+    },
+    "b6": {
+     "psalms": "Ps 112–114 — When Israel went out from Egypt",
+     "tikkun": "Psalm 105:9-11",
+     "psalm89": "Ps 89:37 — His seed will be forever and his throne is like the sun before Me"
+    },
+    "b7": {
+     "mesilas": "Ch 6 (Cycle 2) — Alacrity deepened: acting from love, not obligation",
+     "theme": "The Lion is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/06/week-38-from-book-to-be-strong-and.html",
+    "https://www.kabbalahoftime.com/2014/06/week-38-book-2-daniel-and-not-acting.html",
+    "https://www.kabbalahoftime.com/2014/06/week-38-book-3-preparing-for-summer.html",
+    "https://www.kabbalahoftime.com/2014/06/week-38-book-4a-strength-and-long-life.html",
+    "https://www.kabbalahoftime.com/2014/06/week-38-book-4b-unity-and-captivity.html",
+    "https://www.kabbalahoftime.com/2014/06/week-38-book-5-reviewing-last-week-of.html",
+    "https://www.kabbalahoftime.com/2017/06/the-lion-is-saying.html"
+   ]
+  },
+  {
+   "week": 39,
+   "month": "Tammuz",
+   "parasha": "Behaalotecha",
+   "pairing": {
+    "he": "נֶצַח שֶׁבְּיְסוֹד",
+    "en": "Netzach of Yesod"
+   },
+   "face": {
+    "animal": "Bear",
+    "avot": "Rabbi Meir — engage minimally in business, occupy yourself with Torah",
+    "trait": "To See the World in a Positive Light in Order to Elevate It"
+   },
+   "fields": {
+    "b1": {
+     "theme": "See the World in a Positive Light to Elevate It",
+     "animal": "Bear",
+     "avot": "Rabbi Meir – engage minimally in business, and occupy yourself with Torah..."
+    },
+    "b2": {
+     "quality": "Does not act arrogantly with his knowledge (Lo Megis Liboh BeTalmudoh)",
+     "prophet": "Daniel (Shemaiah)",
+     "haazinu": "When I sharpen the blade of My sword, and My hand grasps judgment",
+     "haftorah": "For You have girded me with strength for the battle",
+     "city": "Jazer"
+    },
+    "b3": {
+     "ruth": "Jehoram",
+     "haftara": "Yiftach's daughter",
+     "sotah": "39",
+     "journeys": "They journeyed from the ruins and camped in Dibon gad"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 8",
+     "hannah": "And Elkanah went to Ramah to his house",
+     "avot6": "And it says: For long days, years of life and peace, they shall add to you",
+     "yahrzeit": "3 Tamuz - Yahrzeit of the Rebbe | Lubavitch, Bobov"
+    },
+    "b5": {
+     "shir": "Shir 8:1 — O that you were as my brother",
+     "souls": "Eri / Gera",
+     "jeremiah": "Chapter 39",
+     "talmud": "39"
+    },
+    "b6": {
+     "psalms": "Ps 115–118 — This is the day the Lord has made; let us rejoice",
+     "tikkun": "Psalm 105:12-14",
+     "psalm89": "Ps 89:38 — Like the moon, which is established forever, and it is a witness in the sky, eternally true"
+    },
+    "b7": {
+     "mesilas": "Ch 7 (Cycle 2) — Alacrity divisions: beginning and finishing with the same fire",
+     "theme": "The Bear is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/06/week-39-from-book-to-see-world-in.html",
+    "https://www.kabbalahoftime.com/2014/06/week-39-book-2-baruch-and-not-being.html",
+    "https://www.kabbalahoftime.com/2014/06/week-39-book-3-challenges-to-faith-in.html",
+    "https://www.kabbalahoftime.com/2014/07/week-39-book-4a-years-of-fullness-and.html",
+    "https://www.kabbalahoftime.com/2014/07/week-39-book-4b-feeling-harshness-of.html",
+    "https://www.kabbalahoftime.com/2014/07/week-38-book-5-reviewing-week-of-rosh.html",
+    "https://www.kabbalahoftime.com/2017/06/week-39-bear-is-saying.html"
+   ]
+  },
+  {
+   "week": 40,
+   "month": "Tammuz",
+   "parasha": "Shelach",
+   "pairing": {
+    "he": "הוֹד שֶׁבְּיְסוֹד",
+    "en": "Hod of Yesod"
+   },
+   "face": {
+    "animal": "Wolf",
+    "avot": "Rabbi Eliezer — one mitzvah acquires an advocate",
+    "trait": "To Fight for Truth"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Fight for Truth",
+     "animal": "Wolf",
+     "avot": "Rabbi Eliezer – one who fulfills one mitzvah acquires an advocate for himself..."
+    },
+    "b2": {
+     "quality": "Does not take pleasure in handing down [halachic] decisions (Einoh Sameach b'Hora'ah)",
+     "prophet": "Baruch",
+     "haazinu": "I will intoxicate My arrows with blood, and My sword will consume flesh",
+     "haftorah": "And of my enemies You have given me the back of their necks",
+     "city": "Girgashites"
+    },
+    "b3": {
+     "ruth": "Ahaziah",
+     "haftara": "Yiftach's daughter",
+     "sotah": "Rosh Chodesh Av",
+     "journeys": "They journeyed from Almon diblathaimah and camped in the mountains of Abarim"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 9",
+     "hannah": "Now the sons of Eli were base men; they knew not the LORD",
+     "avot6": "one acquisition is the Torah",
+     "yahrzeit": "Rav Yekusiel Yehuda Halberstam, Klausenberger Rebbe (1905-1994) | Ger, Klausenberg (Sanz)"
+    },
+    "b5": {
+     "shir": "Shir 8:2 — I would lead you and bring you to my mother's house",
+     "souls": "Arodi / Naaman",
+     "jeremiah": "Chapter 40",
+     "talmud": "40"
+    },
+    "b6": {
+     "psalms": "Ps 119:1–96 — Happy are those whose way is blameless",
+     "tikkun": "Psalm 105:15-17",
+     "psalm89": "Ps 89:39 — But You abandoned and You rejected; You became wroth with Your anointed"
+    },
+    "b7": {
+     "mesilas": "Ch 8 (Cycle 2) — Acquiring Alacrity through love of G-d's commandments",
+     "theme": "The Wolf is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/07/week-40-from-book-to-fight-for-truth.html",
+    "https://www.kabbalahoftime.com/2014/07/week-40-book-2-neriah-and-bearing.html",
+    "https://www.kabbalahoftime.com/2014/07/week-40-book-3-returning-to-ourselves.html",
+    "https://www.kabbalahoftime.com/2014/07/week-40-book-4a-getting-to-root-of.html",
+    "https://www.kabbalahoftime.com/2014/07/week-40-book-4b-upholding-our-morality.html",
+    "https://www.kabbalahoftime.com/2014/07/week-39-book-5-reviewing-week-of-rosh.html",
+    "https://www.kabbalahoftime.com/2016/07/the-wolf-is-saying.html"
+   ]
+  },
+  {
+   "week": 41,
+   "month": "Tammuz",
+   "parasha": "Korach",
+   "pairing": {
+    "he": "יְסוֹד שֶׁבְּיְסוֹד",
+    "en": "Yesod of Yesod"
+   },
+   "face": {
+    "animal": "Fox",
+    "avot": "Rabbi Yochanan HaSandlar — gatherings for the sake of Heaven endure",
+    "trait": "Not to Become Corrupt"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Not Become Corrupt",
+     "animal": "Fox",
+     "avot": "Rabbi Yochanan HaSandlar – every gathering that is for the sake of Heaven will endure…"
+    },
+    "b2": {
+     "quality": "Bears the burden with his friends (Noseh b'Ol im Chaveroh)",
+     "prophet": "Neriah",
+     "haazinu": "Sing out praise, O you nations, for His people!",
+     "haftorah": "They looked about, but there was no one to save them",
+     "city": "Cana'anites"
+    },
+    "b3": {
+     "ruth": "Athaliah, mother of Ahaziah",
+     "haftara": "Yiftach's daughter",
+     "sotah": "Fourth Week of Tammuz",
+     "journeys": "They journeyed from the mountains of Abarim and camped in the plains of Moab"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 10",
+     "hannah": "And the custom of the priests with the people was",
+     "avot6": "one acquisition are the heavens and the earth",
+     "yahrzeit": "11 Tammuz - Rav Tzvi Hirsch Eichenstein of Zhidatchov (1785-1831) | Lubavitch, Kopischnitz (Apta)"
+    },
+    "b5": {
+     "shir": "Shir 8:3 — His left hand should be under my head",
+     "souls": "Areli / Ehi",
+     "jeremiah": "Chapter 41",
+     "talmud": "41"
+    },
+    "b6": {
+     "psalms": "Ps 119:97–176 — Oh, how I love Your Torah!",
+     "tikkun": "Psalm 105:18-20",
+     "psalm89": "Ps 89:40 — You abrogated the covenant of Your servant; You profaned his crown to the ground"
+    },
+    "b7": {
+     "mesilas": "Ch 9 (Cycle 2) — Obstacles to Alacrity: identifying inner inertia",
+     "theme": "The Fox is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/07/week-41-from-book-not-to-become-corrupt.html",
+    "https://www.kabbalahoftime.com/2014/07/week-41-book-2-judgement-followed-by.html",
+    "https://www.kabbalahoftime.com/2014/07/week-41-book-3-standing-ones-ground.html",
+    "https://www.kabbalahoftime.com/2014/07/week-41-book-4a-not-corrupting-g-ds.html",
+    "https://www.kabbalahoftime.com/2014/07/week-41-book-4b-g-ds-right-and-left.html",
+    "https://www.kabbalahoftime.com/2014/07/week-41-book-5-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2017/07/the-fox-is-saying.html"
+   ]
+  },
+  {
+   "week": 42,
+   "month": "Tammuz",
+   "parasha": "Chukat",
+   "pairing": {
+    "he": "מַלְכוּת שֶׁבְּיְסוֹד",
+    "en": "Malchut of Yesod"
+   },
+   "face": {
+    "animal": "Hound",
+    "avot": "Rabbi Eliezer ben Shammuah — your student’s honor as your own",
+    "trait": "To Be Loyal and Pursue Justice"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Be Loyal and Pursue Justice",
+     "animal": "Hound",
+     "avot": "Rabbi Eliezer ben Shammuah – the honor of your student should be as precious to you as your own…"
+    },
+    "b2": {
+     "quality": "Judges him favorably (Machrioh Lechaf Zechut) / Places him [in the path of] truth (Ma'amidoh al HaEmet)",
+     "prophet": "Seraiah",
+     "haazinu": "And Moses came and spoke all the words of this song into the ears of the people",
+     "haftorah": "Then I ground them as the dust of the earth, as the mud of the streets",
+     "city": "Chivites"
+    },
+    "b3": {
+     "ruth": "Jehoash",
+     "haftara": "Yiftach's daughter",
+     "sotah": "Tisha B'Av",
+     "journeys": "Chittites"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 11",
+     "hannah": "and he struck it into the pan, or kettle, or caldron, or pot",
+     "avot6": "one acquisition is Abraham",
+     "yahrzeit": "22 Tamuz - Yahrzeit of Rebbe Shlomo of Karlin | Shtefanesht (Ryzhin), Karlin"
+    },
+    "b5": {
+     "shir": "Shir 8:4 — I charge you, O daughters of Jerusalem, do not awaken love",
+     "souls": "Asher / Rosh",
+     "jeremiah": "Chapter 42",
+     "talmud": "42"
+    },
+    "b6": {
+     "psalms": "Ps 120–122 — I lift my eyes to the mountains",
+     "tikkun": "Psalm 105:21-23",
+     "psalm89": "Ps 89:41 — You breached all his fences; You made his fortifications a ruin"
+    },
+    "b7": {
+     "mesilas": "Ch 10 (Cycle 2) — Cleanliness: rooting out subtle rationalized sins",
+     "theme": "The Hound is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/07/week-42-to-be-loyal-and-pursue-justice.html",
+    "https://www.kabbalahoftime.com/2014/07/week-42-book-2-mehsiah-and-being-placed.html",
+    "https://www.kabbalahoftime.com/2014/07/week-42-book-3-remembering-to-repent-in.html",
+    "https://www.kabbalahoftime.com/2014/07/week-42-book-4a-importance-of-giving.html",
+    "https://www.kabbalahoftime.com/2014/07/week-42-book-4b-faithfulness-in-exile.html",
+    "https://www.kabbalahoftime.com/2014/07/week-42-book-5-reviewing-last-week-of.html",
+    "https://www.kabbalahoftime.com/2017/07/the-hound-is-saying.html"
+   ]
+  },
+  {
+   "week": 43,
+   "month": "Av",
+   "parasha": "Balak",
+   "pairing": {
+    "he": "חֶסֶד שֶׁבְּמַלְכוּת",
+    "en": "Chesed of Malchut"
+   },
+   "face": {
+    "animal": "Cat",
+    "avot": "Rabbi Yehudah — an error in learning is tantamount to willful sin",
+    "trait": "To Pursue the Enemy and to Pursue Peace"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Pursue the Enemy and Pursue Peace",
+     "animal": "Cat",
+     "avot": "Rabbi Yehudah – be careful in your studies, for an error in learning it tantamount to a willful sin."
+    },
+    "b2": {
+     "quality": "Places him [in the path of] peace (Ma'amidoh al HaShalom)",
+     "prophet": "Mehsiah",
+     "haazinu": "And Moses finished speaking all these words to all Israel",
+     "haftorah": "And You have allowed me to escape from the contenders amongst my people",
+     "city": "Nazir 2-22"
+    },
+    "b3": {
+     "ruth": "Amaziah",
+     "haftara": "Yiftach's daughter",
+     "sotah": "Tu B'Av",
+     "journeys": "Girgashites"
+    },
+    "b4": {
+     "proverbs": "Kohelet: Chapter 12",
+     "hannah": "Yea, before the fat was made to smoke",
+     "avot6": "one acquisition is the people of Israel",
+     "yahrzeit": "Tammuz 28 - Rabbi Moshe Teitelbaum (1759-1841) Yismach Moshe | Sanz, Bobov"
+    },
+    "b5": {
+     "shir": "Shir 8:5 — Who is this who comes up from the wilderness",
+     "souls": "Imnah / Muppim",
+     "jeremiah": "Chapter 43",
+     "talmud": "43"
+    },
+    "b6": {
+     "psalms": "Ps 123–125 — Those who trust in G-d are like Mount Zion",
+     "tikkun": "Psalm 105:24-26",
+     "psalm89": "Ps 89:42 — All wayfarers have plundered him; he was a disgrace to his neighbors"
+    },
+    "b7": {
+     "mesilas": "Ch 11 (Cycle 2) — Particulars of Cleanliness: refining speech and thought",
+     "theme": "The Cat is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/07/week-43-from-book-to-pursue-enemy-and.html",
+    "https://www.kabbalahoftime.com/2014/07/week-43-book-2-destruction-that-leads.html",
+    "https://www.kabbalahoftime.com/2014/07/week-43-book-3-facing-esau-edom.html",
+    "https://www.kabbalahoftime.com/2014/07/week-43-book-4a-israef-acquisition-of-g.html",
+    "https://www.kabbalahoftime.com/2014/07/week-43-book-4b-holding-on-through.html",
+    "https://www.kabbalahoftime.com/2014/07/week-43-book-5-reviewing-week-of-rosh.html",
+    "https://www.kabbalahoftime.com/2017/07/the-cat-is-saying.html"
+   ]
+  },
+  {
+   "week": 44,
+   "month": "Av",
+   "parasha": "Pinchas",
+   "pairing": {
+    "he": "גְּבוּרָה שֶׁבְּמַלְכוּת",
+    "en": "Gevurah of Malchut"
+   },
+   "face": {
+    "animal": "Mouse (last house animal)",
+    "avot": "Rabbi Nehorai — exile yourself to a place of Torah",
+    "trait": "To Recognize Our Mistakes and Change"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Recognize Our Mistakes and Change",
+     "animal": "Mouse",
+     "avot": "Rabbi Nehorai – exile yourself  to a place of Torah; do not say that it will come after you… rely not on your own understanding."
+    },
+    "b2": {
+     "quality": "He deliberates in his study (Mityashev Liboh BeTalmudoh)",
+     "prophet": "Haggai",
+     "haazinu": "And he said to them, \"Set your hearts to all of the words which I bear witness\"",
+     "haftorah": "Strangers lie to me; as soon as their ears hear, they obey me",
+     "city": "Nazir 23-44"
+    },
+    "b3": {
+     "ruth": "Uzziah (also known as Azariah)",
+     "haftara": "Eliyahu",
+     "sotah": "Third Week of Av",
+     "journeys": "Amorites"
+    },
+    "b4": {
+     "proverbs": "Tehilim 127",
+     "hannah": "And the sin of the young men was very great before the LORD",
+     "avot6": "and one acquisition is the Holy Temple",
+     "yahrzeit": "9th of Av - Rav Yaakov Yitzchak HaLevi Horowitz, Chozeh of Lublin (1754-1815) | Skver, Bobov"
+    },
+    "b5": {
+     "shir": "Shir 8:6 — Set me as a seal upon your heart",
+     "souls": "Ishvah / Huppim",
+     "jeremiah": "Chapter 44",
+     "talmud": "44"
+    },
+    "b6": {
+     "psalms": "Ps 126–128 — Unless G-d builds the house, the builders labor in vain",
+     "tikkun": "Psalm 105:27-29",
+     "psalm89": "Ps 89:43 — You raised the right hand of his adversaries; You caused all his enemies to rejoice"
+    },
+    "b7": {
+     "mesilas": "Ch 12 (Cycle 2) — Acquiring Cleanliness through consistent vigilance",
+     "theme": "The Mouse is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/07/week-44-from-book-to-recognize-our.html",
+    "https://www.kabbalahoftime.com/2014/08/week-44-book-2-zechariah-and-settling.html",
+    "https://www.kabbalahoftime.com/2014/08/week-44-book-3-war-and-conquest.html",
+    "https://www.kabbalahoftime.com/2014/08/week-44-book-4a-building-g-ds-house.html",
+    "https://www.kabbalahoftime.com/2014/08/week-44-book-4b-love-is-as-strong-as.html",
+    "https://www.kabbalahoftime.com/2014/08/week-44-book-5-reviewing-week-of-tisha.html",
+    "https://www.kabbalahoftime.com/2017/07/the-mouse-is-saying.html"
+   ]
+  },
+  {
+   "week": 45,
+   "month": "Av",
+   "parasha": "Matot-Masei",
+   "pairing": {
+    "he": "תִּפְאֶרֶת שֶׁבְּמַלְכוּת",
+    "en": "Tiferet of Malchut"
+   },
+   "face": {
+    "animal": "Creeping Creatures",
+    "avot": "Rabbi Yanai — we cannot comprehend the tranquility of the wicked",
+    "trait": "To Raise Ourselves Up Through Love and Humility"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Raise Ourselves Up Through Love and Humility",
+     "animal": "Creeping Creatures",
+     "avot": "Rabbi Yanai – we cannot comprehend the tranquility of the wicked or the suffering of the righteous..."
+    },
+    "b2": {
+     "quality": "Asks and responds (Shoel uMeshiv)",
+     "prophet": "Zechariah",
+     "haazinu": "For it is not an empty thing for you, for it is your life",
+     "haftorah": "The strangers will wilt, and become lame from their bondage",
+     "city": "Nazir 45-66"
+    },
+    "b3": {
+     "ruth": "Jotham",
+     "haftara": "Eliyahu",
+     "sotah": "Rosh Chodesh Elul",
+     "journeys": "Perizites"
+    },
+    "b4": {
+     "proverbs": "Shir HaShirim: Chapter 1",
+     "hannah": "But Samuel ministered before the LORD, being a child",
+     "avot6": "Beauty",
+     "yahrzeit": "15 Av - Rabbi Yaakov Leiner, second Izhbitzer Rebbe | Vishnitz, Bobov"
+    },
+    "b5": {
+     "shir": "Shir 8:7 — Many waters cannot quench love",
+     "souls": "Ishvi / Ard",
+     "jeremiah": "Chapter 45",
+     "talmud": "45"
+    },
+    "b6": {
+     "psalms": "Ps 129–131 — Out of the depths I cry to You, O Lord",
+     "tikkun": "Psalm 105:30-32",
+     "psalm89": "Ps 89:44 — You even turned back the sharp edge of his sword, and You did not raise him up in battle"
+    },
+    "b7": {
+     "mesilas": "Ch 13 (Cycle 2) — Separation: voluntary withdrawal for spiritual depth",
+     "theme": "The Creeping Creatures are Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/08/week-45-from-book-to-raise-ourselves-up.html",
+    "https://www.kabbalahoftime.com/2014/08/week-45-book-2-malachi-and-quality-of.html",
+    "https://www.kabbalahoftime.com/2014/08/week-45-book-3-unity-and-upright.html",
+    "https://www.kabbalahoftime.com/2014/08/week-45-book-4a-appreciating-true-beauty.html",
+    "https://www.kabbalahoftime.com/2014/08/week-45-book-4b-our-enduring-love-for-g.html",
+    "https://www.kabbalahoftime.com/2014/08/week-45-book-5-reviewing-week-of-tu-bav.html",
+    "https://www.kabbalahoftime.com/2020/08/week-45-creeping-creatures-are-saying.html"
+   ]
+  },
+  {
+   "week": 46,
+   "month": "Av",
+   "parasha": "Devarim",
+   "pairing": {
+    "he": "נֶצַח שֶׁבְּמַלְכוּת",
+    "en": "Netzach of Malchut"
+   },
+   "face": {
+    "animal": "Prolific Creeping Creatures",
+    "avot": "Rabbi Matiah ben Charash — be a tail to lions",
+    "trait": "To Know Our Place in Order to Be Truly Happy"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Know Our Place in Order to Be Truly Happy",
+     "animal": "Prolific Creeping Creatures",
+     "avot": "Rabbi Matiah ben Charash – be first to greet every man. Be a tail to lions, rather than a head to foxes."
+    },
+    "b2": {
+     "quality": "Listens and adds (Shomeah uMosif)",
+     "prophet": "Malachi",
+     "haazinu": "And the Lord spoke to Moses on that very day, saying",
+     "haftorah": "The Lord lives, and blessed be my Rock",
+     "city": ""
+    },
+    "b3": {
+     "ruth": "Ahaz",
+     "haftara": "Eliyahu",
+     "sotah": "First Week of Elul",
+     "journeys": "Perizites"
+    },
+    "b4": {
+     "proverbs": "Shir HaShirim: Chapter 2",
+     "hannah": "Moreover his mother made him a little robe",
+     "avot6": "strength",
+     "yahrzeit": "21 Av - R' Ahron ben R' Yisachor Dov Rokeach, Belzer Rebbe (1957) | Belz, Radomsk"
+    },
+    "b5": {
+     "shir": "Shir 8:8 — We have a little sister, and she has no breasts",
+     "souls": "Briah / Dan",
+     "jeremiah": "Chapter 46",
+     "talmud": "46"
+    },
+    "b6": {
+     "psalms": "Ps 132–134 — Behold how good and pleasant it is",
+     "tikkun": "Psalm 105:33-35",
+     "psalm89": "Ps 89:45 — You have brought an end to his shining, and his throne You have cast down to earth"
+    },
+    "b7": {
+     "mesilas": "Ch 14 (Cycle 2) — Particulars of Separation: time, food, and focus",
+     "theme": "The Prolific Creeping Creatures are Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/08/week-46-from-book-to-know-our-place-in.html",
+    "https://www.kabbalahoftime.com/2014/08/week-46-book-2-mordechai-and-quality-of.html",
+    "https://www.kabbalahoftime.com/2014/08/week-46-book-3-handling-crisis-with.html",
+    "https://www.kabbalahoftime.com/2014/08/week-46-book-4a-serving-g-d-with.html",
+    "https://www.kabbalahoftime.com/2014/08/week-46-book-4b-enduring-through.html",
+    "https://www.kabbalahoftime.com/2014/08/week-46-book-5-reviewing-last-week-of.html",
+    "https://www.kabbalahoftime.com/2013/08/week-46-book-7-prolific-creeping.html"
+   ]
+  },
+  {
+   "week": 47,
+   "month": "Elul",
+   "parasha": "Vaetchanan",
+   "pairing": {
+    "he": "הוֹד שֶׁבְּמַלְכוּת",
+    "en": "Hod of Malchut"
+   },
+   "face": {
+    "animal": "Snake",
+    "avot": "Rabbi Yaakov — this world is an antechamber for the World to Come",
+    "trait": "Time for Teshuvah (Return to G’d)!"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Time for Teshuvah — Return to G-d!",
+     "animal": "Snake",
+     "avot": "Rabbi Yaakov – this world is like an antechamber for the World to Come..."
+    },
+    "b2": {
+     "quality": "Learns in order to teach (Lomed al Menat Lilmod)",
+     "prophet": "Mordechai Bilshan",
+     "haazinu": "Go up this Mount Avarim [to] Mount Nebo, which is in the land of Moab",
+     "haftorah": "The G-d who takes vengeance for me; And brings down peoples under me",
+     "city": ""
+    },
+    "b3": {
+     "ruth": "Hezekiah",
+     "haftara": "Seven Haftarot of Consolation",
+     "sotah": "Second Week of Elul",
+     "journeys": "Jebusites"
+    },
+    "b4": {
+     "proverbs": "Shir HaShirim: Chapter 3",
+     "hannah": "And Eli would bless Elkanah and his wife",
+     "avot6": "wealth",
+     "yahrzeit": "26 Av - Rav Yoel Teitelbaum of Sighet, Satmar Rav (1888-1979) | Satmar, Ger (2)"
+    },
+    "b5": {
+     "shir": "Shir 8:9 — If she is a wall, we will build upon her a turret of silver",
+     "souls": "Serah / Hushim",
+     "jeremiah": "Chapter 47",
+     "talmud": "47"
+    },
+    "b6": {
+     "psalms": "Ps 135–137 — By the rivers of Babylon, there we sat and wept",
+     "tikkun": "Psalm 105:36-38",
+     "psalm89": "Ps 89:46 — You have shortened the days of his youth; You have enwrapped him with shame forever"
+    },
+    "b7": {
+     "mesilas": "Ch 15 (Cycle 2) — Acquiring Separation through self-mastery",
+     "theme": "The Snake is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/08/week-47-from-book-time-for-teshuvah.html",
+    "https://www.kabbalahoftime.com/2014/08/week-47-book-2-mashiach-ben-yosef-and.html",
+    "https://www.kabbalahoftime.com/2014/08/week-47-book-3-hezekiah-and-teshuvah.html",
+    "https://www.kabbalahoftime.com/2014/08/week-47-book-4a-purpose-of-wealth.html",
+    "https://www.kabbalahoftime.com/2014/08/week-47-book-4b-serach-and-month-of.html",
+    "https://www.kabbalahoftime.com/2014/08/week-47-book-5-reviewing-week-of-rosh.html",
+    "https://www.kabbalahoftime.com/2013/03/week-47-book-7-snake-is-saying.html"
+   ]
+  },
+  {
+   "week": 48,
+   "month": "Elul",
+   "parasha": "Eikev",
+   "pairing": {
+    "he": "יְסוֹד שֶׁבְּמַלְכוּת",
+    "en": "Yesod of Malchut"
+   },
+   "face": {
+    "animal": "Scorpion",
+    "avot": "Rabbi Shimon ben Elazar — do not appease your friend in his anger",
+    "trait": "To Fight Coldness with Warmth"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Fight Coldness with Warmth",
+     "animal": "Scorpion",
+     "avot": "Rabbi Shimon ben Elazar – do not attempt to appease your friend at the moment of his anger…"
+    },
+    "b2": {
+     "quality": "Learns in order to practice (Lomed al Menat La'asot)",
+     "prophet": "Unknown / Oded (Mashiach ben Yosef)",
+     "haazinu": "And die on the mountain upon which you are climbing and be gathered to your people",
+     "haftorah": "And that brings me forth from my enemies",
+     "city": ""
+    },
+    "b3": {
+     "ruth": "Manasseh",
+     "haftara": "Seven Haftarot of Consolation",
+     "sotah": "Chai Elul",
+     "journeys": "Nazir 2-22"
+    },
+    "b4": {
+     "proverbs": "Shir HaShirim: Chapter 4",
+     "hannah": "So the LORD remembered Hannah, and she conceived",
+     "avot6": "honor",
+     "yahrzeit": "3rd of Elul - Rav Avraham Yitzchak Kook, Chief Rabbi of Israel | Sighet (Satmar), Chayim"
+    },
+    "b5": {
+     "shir": "Shir 8:10 — I am a wall, and my breasts like towers",
+     "souls": "Heber / Naftali",
+     "jeremiah": "Chapter 48",
+     "talmud": "48"
+    },
+    "b6": {
+     "psalms": "Ps 138–140 — O Lord, You have probed me and You know me",
+     "tikkun": "Psalm 105:39-41",
+     "psalm89": "Ps 89:47 — How long, O Lord? Will You hide forever? Will Your anger burn like fire?"
+    },
+    "b7": {
+     "mesilas": "Ch 16 (Cycle 2) — Purity: deeper refinement of inner life",
+     "theme": "The Scorpion is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/08/week-48-from-book-to-fight-coldness.html",
+    "https://www.kabbalahoftime.com/2014/08/week-48-book-2-mashiach-ben-david-and.html",
+    "https://www.kabbalahoftime.com/2014/08/week-48-book-3-manasseh-and-asking.html",
+    "https://www.kabbalahoftime.com/2014/08/week-48-book-4a-to-honor-righteous.html",
+    "https://www.kabbalahoftime.com/2014/08/week-48-book-4b-heber-and-to-be.html",
+    "https://www.kabbalahoftime.com/2014/09/week-48-book-5-reviewing-second-week-of.html",
+    "https://www.kabbalahoftime.com/2017/08/the-scorpion-is-saying.html"
+   ]
+  },
+  {
+   "week": 49,
+   "month": "Elul",
+   "parasha": "Re'eh",
+   "pairing": {
+    "he": "מַלְכוּת שֶׁבְּמַלְכוּת",
+    "en": "Malchut of Malchut"
+   },
+   "face": {
+    "animal": "Snail",
+    "avot": "Shmuel the Small — when your enemy falls, do not rejoice",
+    "trait": "To Bring More Light in Order to Extinguish Darkness Altogether"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Bring More Light to Extinguish Darkness",
+     "animal": "Snail",
+     "avot": "Shmuel the Small – when your enemy falls, do not rejoice..."
+    },
+    "b2": {
+     "quality": "Increases the wisdom of his teacher (Machkim et Rabboh)",
+     "prophet": "Unknown / Chanani (Mashiach ben David)",
+     "haazinu": "Because you betrayed Me in the midst of the children of Israel",
+     "haftorah": "Therefore I will give thanks to You, O' Lord, among the nations",
+     "city": ""
+    },
+    "b3": {
+     "ruth": "Amon",
+     "haftara": "Seven Haftarot of Consolation",
+     "sotah": "Fourth Week of Elul/Slichot",
+     "journeys": "Nazir 23-44"
+    },
+    "b4": {
+     "proverbs": "Shir HaShirim: Chapter 5",
+     "hannah": "Now Eli was very old; and he heard all that his sons did",
+     "avot6": "wisdom",
+     "yahrzeit": "12 Elul - Rebbe Simcha Bunim of Pshischa | Bohush/Sadiger (4), Chayim"
+    },
+    "b5": {
+     "shir": "Shir 8:11 — Solomon had a vineyard at Baal Hamon",
+     "souls": "Malkiel / Jahze'el",
+     "jeremiah": "Chapter 49",
+     "talmud": "49"
+    },
+    "b6": {
+     "psalms": "Ps 141–143 — O Lord, I call to You; hasten to me",
+     "tikkun": "Psalm 105:42-44",
+     "psalm89": "Ps 89:48 — I am mindful what my old age is; for what futility have You created all the sons of man?"
+    },
+    "b7": {
+     "mesilas": "Ch 17 (Cycle 2) — Purity particulars: guarding the mind for G-d's sake",
+     "theme": "The Snail is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/09/week-49-from-book-to-bring-more-light.html",
+    "https://www.kabbalahoftime.com/2014/09/week-49-book-2-miriam-and-increasing.html",
+    "https://www.kabbalahoftime.com/2014/09/week-49-book-3-amon-and-raising-lowest.html",
+    "https://www.kabbalahoftime.com/2014/09/week-49-book-4a-g-ds-wisdom.html",
+    "https://www.kabbalahoftime.com/2014/09/week-49-book-4b-king-is-in-field.html",
+    "https://www.kabbalahoftime.com/2014/09/week-49-book-5-reviewing-third-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-49-book-7-snail-is-saying.html"
+   ]
+  },
+  {
+   "week": 50,
+   "month": "Elul",
+   "parasha": "Shoftim",
+   "pairing": null,
+   "face": {
+    "animal": "Ant",
+    "avot": "Elishah ben Avuyah — Torah in childhood is ink on fresh paper",
+    "trait": "To Know That There Are No Limits to Our Growth and Closeness"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Know There Are No Limits to Our Growth",
+     "animal": "Ant",
+     "avot": "Elishah ben Avuyah – one who learns Torah in his childhood, to what is he compared? To ink on fresh paper…"
+    },
+    "b2": {
+     "quality": "Who properly understands what he learns (Kavanah)",
+     "prophet": "Miriam (Rachel); Rebbetzin Menucha Rachel",
+     "haazinu": "For from afar, you will see the land, but you will not come there",
+     "haftorah": "(repeated from last week). He gives great salvation to His king",
+     "city": ""
+    },
+    "b3": {
+     "ruth": "Josiah",
+     "haftara": "Seven Haftarot of Consolation",
+     "sotah": "Slichot/Rosh Hashanah",
+     "journeys": "Nazir 45-66"
+    },
+    "b4": {
+     "proverbs": "Shir HaShirim: Chapter 6",
+     "hannah": "And he said unto them: Why do ye such things?",
+     "avot6": "sageness",
+     "yahrzeit": "15 Elul - R' Yaakov Koppel Chassid (1787) | Kosov-Vizhnitz, Somech (Chayim)"
+    },
+    "b5": {
+     "shir": "Shir 8:12 — My vineyard, which is mine, is before me",
+     "souls": "Rachel / Guni",
+     "jeremiah": "Chapter 50",
+     "talmud": "Makkoth 2-8"
+    },
+    "b6": {
+     "psalms": "Ps 144–146 — Praise G-d! Praise G-d from the heavens",
+     "tikkun": "Psalm 105:45; Psalm 137:1-3",
+     "psalm89": "Ps 89:49 — Who is a man who will live and not see death, who will rescue his soul from the grasp of the grave forever?"
+    },
+    "b7": {
+     "mesilas": "Ch 18 (Cycle 2) — Acquiring Purity: guarding all senses for holiness",
+     "theme": "The Ant is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/09/week-50-from-book-to-know-that-there.html",
+    "https://www.kabbalahoftime.com/2014/09/week-50-book-2-devorah-and-properly.html",
+    "https://www.kabbalahoftime.com/2014/09/week-50-book-3-josiah-and-emunah.html",
+    "https://www.kabbalahoftime.com/2014/09/week-50-book-4a-wisdom-that-comes-with.html",
+    "https://www.kabbalahoftime.com/2014/09/week-50-book-4b-kings-field.html",
+    "https://www.kabbalahoftime.com/2014/09/week-50-book-5-reviewing-fourth-week-of.html",
+    "https://www.kabbalahoftime.com/2026/05/week-50-book-7-ant-is-saying.html"
+   ]
+  },
+  {
+   "week": 51,
+   "month": "Elul",
+   "parasha": "Ki Teitzei",
+   "pairing": null,
+   "face": {
+    "animal": "Weasel (Chulda)",
+    "avot": "Rabbi Yossi ben Yehudah of Kfar Bavli — learning from the young and the old",
+    "trait": "To Understand That We Are All One Soul"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Understand That We Are All One Soul",
+     "animal": "Weasel",
+     "avot": "Rabbi Yossi ben Yehudah of Kfar Bavli – one who learns Torah from youngsters…"
+    },
+    "b2": {
+     "quality": "Who relates a statement in the name of the one who said it",
+     "prophet": "Devorah (Leah); Rebbetzin Devorah Leah",
+     "haazinu": "(repeated from last week). For from afar, you will see the land",
+     "haftorah": "(repeated from last week). He gives great salvation to His king",
+     "city": ""
+    },
+    "b3": {
+     "ruth": "(Jehoahaz, 3 months) Jehoiakim, also known as Eliakim",
+     "haftara": "Seven Haftarot of Consolation",
+     "sotah": "",
+     "journeys": "Kenites"
+    },
+    "b4": {
+     "proverbs": "Shir HaShirim: Chapter 7",
+     "hannah": "Nay, my sons; for it is no good report",
+     "avot6": "old age",
+     "yahrzeit": "Elul 27 - Rabbi Shalom Rokeach (1779-1855), founder of Belz | Belz, Strelisk (Kosov-Vizhnitz)"
+    },
+    "b5": {
+     "shir": "Shir 8:13 — You that dwell in the gardens, companions hearken to your voice",
+     "souls": "Joseph / Yezer",
+     "jeremiah": "Chapter 51",
+     "talmud": "Makkoth 9-16"
+    },
+    "b6": {
+     "psalms": "Ps 148–150 — Praise the Lord! Let every soul praise G-d",
+     "tikkun": "Psalm 150:4-5",
+     "psalm89": "Ps 89:52 — Which Your enemies disgraced, O Lord, which they disgraced the ends of Your anointed"
+    },
+    "b7": {
+     "mesilas": "Ch 19 (Cycle 2) — Piety: going beyond the law from love",
+     "theme": "The Wiesel is Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/09/week-51-from-book-to-understand-that-we.html",
+    "https://www.kabbalahoftime.com/2014/09/week-51-book-2-chuldah-and-relating.html",
+    "https://www.kabbalahoftime.com/2014/09/week-51-book-3-using-understanding.html",
+    "https://www.kabbalahoftime.com/2014/09/week-51-book-4a-wholeness-and-long-life.html",
+    "https://www.kabbalahoftime.com/2014/09/week-51-book-4b-speaking-to-king.html",
+    "https://www.kabbalahoftime.com/2014/09/week-51-book-5-reviewing-fourth-week-of.html",
+    "https://www.kabbalahoftime.com/2021/08/week-51-book-7-wiesel-is-saying.html"
+   ]
+  },
+  {
+   "week": 52,
+   "month": "Elul",
+   "parasha": "Ki Tavo",
+   "pairing": null,
+   "face": {
+    "animal": "Dogs (last animals)",
+    "avot": "Rabbi Elazar HaKappar — He is the Knower, He is the Judge",
+    "trait": "To Crown G’d as Our King"
+   },
+   "fields": {
+    "b1": {
+     "theme": "Crown G-d as Our King",
+     "animal": "Dogs",
+     "avot": "Rabbi Elazar HaKappar – envy, lust, and honor take a man out of the world… Those who are born will die, and the dead will live [again]…"
+    },
+    "b2": {
+     "quality": "Whoever relates a statement in the name of the one who said it brings redemption to the world",
+     "prophet": "Esther (Sarah); Rebbetzin Shterna Sarah",
+     "haazinu": "",
+     "haftorah": "",
+     "city": ""
+    },
+    "b3": {
+     "ruth": "(Jehoiachin also known as Jeconiah, 3 months) Mattaniah also known as Zedekiah",
+     "haftara": "Seven Haftarot of Consolation",
+     "sotah": "",
+     "journeys": "Kadmonites"
+    },
+    "b4": {
+     "proverbs": "Shir HaShirim: Chapter 8",
+     "hannah": "And the child Samuel grew on, and increased in favour",
+     "avot6": "and children are becoming to the righteous and becoming to the world",
+     "yahrzeit": "6 Tishrei - Rav Aryeh Leib of Shpolya, \"The Shpoler Zayde\" | Stolin-Karlin, Kapichnitz"
+    },
+    "b5": {
+     "shir": "Shir 8:14 — Make haste, my beloved, and be like a gazelle",
+     "souls": "Benjamin / Shilem",
+     "jeremiah": "Chapter 52",
+     "talmud": "Makkoth 17-24"
+    },
+    "b6": {
+     "psalms": "Perek Shirah, Chapters 1-3",
+     "tikkun": "Psalm 150:1-3",
+     "psalm89": "Ps 89:53 — Blessed is the Lord forever. Amen and Amen"
+    },
+    "b7": {
+     "mesilas": "Ch 20 (Cycle 2) — Piety particulars: prayer and love as daily service",
+     "theme": "The Dogs are Saying"
+    }
+   },
+   "postUrls": [
+    "https://www.kabbalahoftime.com/2014/09/week-52-from-book-to-crown-g-d-as-our.html",
+    "https://www.kabbalahoftime.com/2014/09/week-52-book-2-esther-and-bringing.html",
+    "https://www.kabbalahoftime.com/2014/09/week-52-book-3-crowning-g-d-as-our-king.html",
+    "https://www.kabbalahoftime.com/2014/09/week-52-book-4a-parent-and-child.html",
+    "https://www.kabbalahoftime.com/2014/09/week-52-book-4b-transforming-world-and.html",
+    "https://www.kabbalahoftime.com/2014/09/week-52-book-5-reviewing-week-of-rosh.html",
+    "https://www.kabbalahoftime.com/2026/05/week-52-book-7-dogs-are-saying.html"
+   ]
+  }
+ ]
+}
