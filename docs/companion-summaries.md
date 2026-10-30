@@ -3208,3 +3208,133 @@ Then the spices and the gold, with the wonders between them: "His jaws are like 
 And the end is the recompense and the sword, with the child carried in: "And the Lord has recompensed me according to my righteousness" / "According to my cleanness before His eyes" / "O G-d, Your way is in sanctity; what god is as great as G-d?" / "From outside, the sword will bereave, and terror from within" / "And when the bullock was slain, the child was brought to Eli" / "Young men and maidens, suckling babes with venerable elders."
 
 *Source: [Week 25 (Book 7): The Frog Is Saying](https://www.kabbalahoftime.com/2016/03/the-frog-is-saying-songs-for-week-25.html) — 247 words*
+
+---
+
+## Day 176 · Book 1 · Week 26
+
+The sheep and goat are saying: "Who is like You among the might ones, G-d, who is like You, mighty in holiness, awesome in praise, worker of wonders." (Exodus 15:11) The small pure domestic animal is the sheep — Nissan's sign is Aries — and the goat as well. Rosh Chodesh Nissan is the inauguration of the Mishkan, where sacrifices of pure kosher animals like these were brought, and Nissan is the month of redemption and miracles.
+
+Shepherd and flock is one of the great metaphors for G-d and the Jewish people. He is far above our understanding, as a shepherd is entirely beyond the understanding of his flock; and like sheep we have complete humility and faith that our Shepherd leads us the right way, even with foxes and lions along it.
+
+The goat stands for the Jewish people in Chad Gadya, sung on Passover night. The name means One Goat, and it sounds close to Haggadah, the text read at the Seder. Chad Gadya is like Perek Shirah in being full of animals and natural elements, but there the animals are the exiles and the nations that conquered the Land of Israel: the cat that eats the goat is the Assyrians, the dog that eats the cat is Babylon, the stick is Persia, the fire is Macedonia, the water is Rome, the ox is the Saracens, the slaughterer is the crusaders, and the Angel of Death is the Turks. At the end G-d saves us from all of them and brings us back to our Land.
+
+The two zuzim the goat was bought for are said to be the two tablets of the Ten Commandments given at Mount Sinai, and also look like the two Temples that were destroyed and their people exiled. Zuz means to move, to change places; the Third Temple will not move. Each animal that sings during Nissan carries an exile and a redemption from it. Sheep were gods to the Egyptians, our first exile, and the goat, Seir, points to Esau, our last. We were redeemed from Egypt in this month, and in this month we will be redeemed again.
+
+The Torah says plainly that Nissan is the head of all months, Rosh Chodashim, so it belongs to Judah, the leader of his brothers, from whom King David comes. Every legitimate king, Mashiach included, descends from David and so from Judah. Yehudah comes from hoda'ah, acknowledgement, the root of Modeh, as in the Modeh Ani we say on waking, acknowledging Him as King and thanking Him for returning the soul. The tribe is marked by self-sacrifice, acknowledgement and thankfulness.
+
+Because the Egyptians idolized sheep, it is fitting that the sheep is the one to proclaim His absolute greatness. The sheep is the animal of the Passover sacrifice, which showed the Egyptians that G-d is far greater than any other god. On Shabat HaGadol, just before Passover, we mark the miracle that the Egyptians did not turn on the Jewish people when they tied sheep to their bedposts and told them they were about to sacrifice their gods. And since Nissan is the month of Passover, it is right that the song comes from the Song of the Sea, sung after the splitting of the Sea of Reeds.
+
+Twenty-six is the gematria of Hashem. It is also twice thirteen, which is the gematria of echad, one, and of ahavah, love.
+
+Pirkei Avot gives Rabbi Yishmael: be yielding to a leader, affable to the black-haired, and receive every man with joy. Among the kohanim Rabbi Yishmael was the head, the Kohen Gadol, and besides his closeness to Hashem he had, as Aaron had before him, a great love for every member of the people whatever their status. And the verse fits Nissan, the head of the months.
+
+The combination is hod shebenetzach. With humility and gratitude, self-sacrifice and acknowledgement, we reach the miraculous victory of this month. The sheep and the goat teach that all our work on ourselves rests on the belief that only Hashem can truly redeem us.
+
+*Source: [Week 26 (From the Book): To Be Humble and Let G-d Guide Us](https://www.kabbalahoftime.com/2014/03/week-26-from-book-to-be-humble-and-let.html) — 1021 words*
+
+---
+
+## Day 177 · Book 2 · Week 26
+
+Rosh Chodesh Nissan, the month of Judah, the leader of the brothers, from whom King David and all his royal descendants come. Haazinu's verse is the last that speaks directly of destruction, and this time it is total: "I said that I would make an end of them, eradicate their remembrance from mankind." (Deuteronomy 32:26) Which confirms that the grim verses before it were about Amalek, since it is Amalek that will be utterly destroyed, not the Jewish people. Adar carries that destruction most, but Nissan has it too: Passover is marked by burning all the chametz. Spiritually chametz is the ego, and Amalek's impurity is bound up with an inflated ego. As Rabbi Shalom Arush explains, the kelipah of Amalek is haughtiness and a lack of gratitude. Haman had so much and said all of it was meaningless because one man, Mordechai, would not bow to him.
+
+The Haftorah stays kind: "With a kind one, You show Yourself kind. With an upright mighty man, You show Yourself upright." (II Samuel 22:26) Rid of ego and personal wants, acting with temimut, purity, and keeping our attention on what He wants, we are answered in the same vein. The verse also carries hoda'ah, acknowledgement, which is the root of Judah's name — Judah courageously recognised Tamar's righteousness. Hoda'ah is also thanks: when we are grateful, He gives us more to be grateful for. And we should be grateful for everything, even what looks bad to us, because everything He does is for the good.
+
+So the quality is acceptance of suffering, kabalat hayissurim, which is the ultimate sign of gratefulness and humility.
+
+The prophet is Amotz, father of Isaiah. The Talmud teaches that Amotz was the brother of Amatziah, son of King Joash. He watched his brother fall. Amatziah began his reign well, obeying the prophet and winning militarily; then, having taken spoils from Edom, he began to worship their idols. G-d sent Amotz to question him, and Amatziah dismissed the prophet with tremendous arrogance — an arrogance the King of Israel, Joash, also pointed out before defeating him in battle. His downfall came of keeping the spoils of Edom and not cleansing them of idolatry, which is the burning of chametz exactly. Amotz did not press him: "So the prophet desisted, but he said, 'I know that G-d has made a plan to destroy you, for you have done this thing, and you have not heeded my counsel.'" He accepted that the suffering coming was G-d's will, and came of his brother's arrogance.
+
+The levitical city is Hebron, also called Kiryat Arbah, and also a city of refuge. Kiryat Arbah means City of Four — the four couples buried there, Adam and Eve, Abraham and Sarah, Isaac and Rebeccah, Jacob and Leah, and also the four giants who lived there. Four is a theme of Passover too: four glasses of wine, four kinds of sons in the Hagaddah.
+
+The four giants look like the four main exiles. Sheshai is Babylonia: the Jastrow dictionary calls Sheshai a surname for Babylonia, and it spells Bavel in the transposition known as Atbash; the Midrash says he was named for being made of marble, Shaish, which suits Nebuchadnezzar and the statues made in his honour. Achiman is Persia, his name a contraction of Achashverosh and Haman. Talmai is Greece, whose leader in that exile was Talmai, Ptolomy in English. The fourth is named only as the father of the other three, which is Edom, the father of the exiles, the longest and harshest by far.
+
+Giants stand for arrogance, and the forefathers buried in Hebron for humility. Abraham said to G-d, "I am but dust and ashes" — and when we nullify the chametz we declare it like the dust of the earth.
+
+The four giants also line up with the four couples. Sheshai and Bavel recall the Tower of Babel, whose generation and whose leader Nimrod Avraham confronted directly; Avraham is also known for destroying his father's statues. Achiman and Persia, and the Purim story, are marked by extreme self-sacrifice, which is Isaac and the Akeidah; and the Torah notes how Isaac and Rebecca prayed together for a child, and how much of what followed was settled by Rebecca's actions, like the blessing of Jacob over Eisau. Talmai and Greece were an affront to the Torah, its Divine origin and its way of life, and Torah is above all Jacob's: Jacob, Ish Tam, a wholesome and straightforward man, stands against the godless sophistication of the Greeks. The father of the giants is Rome, and it involves all of humanity — Pax Romana reached the whole world, and in many ways we are still under it. Edom is Eisav, who was red, like Mars and his military prowess. Adam and Eve are all of humanity, and Adam is also an acronym of three: Adam himself, David, and Mashiach. David was red too, a kosher version of Eisav and of the potential Eisav missed so badly. Mashiach son of David will redeem the whole world, fix the curse of the snake, and bring it back to the fullness it had in the Garden of Eden.
+
+*Source: [Week 26 (Book 2): Amotz and Destroying our Arrogance](https://www.kabbalahoftime.com/2014/03/week-26-book-2-destroying-our-arrogance.html) — 1285 words*
+
+---
+
+## Day 178 · Book 3 · Week 26
+
+Rosh Chodesh Nissan is the head of the month that is the head of all the months. Nissan is king of the months as Judah, its tribe, was leader of all the tribes.
+
+Beshalach gives the condition and the healing: "If you hearken to the voice of the Lord, your G-d, and you do what is proper in His eyes, and you listen closely to His commandments and observe all His statutes, all the sicknesses that I have visited upon Egypt I will not visit upon you, for I, the Lord, heal you." And then the camp: "They came to Elim, and there were twelve water fountains and seventy palms, and they encamped there by the water." The twelve fountains are the tribes and the seventy palms the seventy elders, and perhaps also the seventy general souls that went down to Egypt and the seventy nations. A true leader, the head of the people, has to be connected to all of them. The portion is faith in Hashem and the exodus — do our part, and He does His — and He is named as our Healer.
+
+The Haftorah turns to kings: "The kings came and fought; then fought the kings of Canaan."
+
+Daf Kaf Vav of Sotah returns to women who do not drink but dwells more on those who must, and its cases are not only unusual but often at an unusually low spiritual level: possible social outcasts, the Mamzer, converts. And in the middle of all that, a ray of hope. The verse "She will be vindicated, and bear seed" teaches that if she used to give birth in pain she will give birth easily; if she used to bear daughters she will bear sons; if she used to bear short babies she will bear tall ones; if she bore babies with a dark complexion she will bear babies with a light complexion. Which is the story of Judah and Mashiach. Out of Lot's daughter and her father comes Moab, a Mamzer; out of Judah and Tamar, who faced the death penalty and was vindicated; and later out of the persistent efforts of a convert, Ruth, who was vindicated too — comes King David, and Mashiach.
+
+The generation is Ram, son of Hezron, father of Aminadav, who fathered Nachshon and Elisheva, Aharon's wife. Ram is also Calev's brother, and Calev is Miriam's husband, so he stands close to Moshe and the exodus. His name says it too: Ram means mighty, exalted, and the Jews left Egypt with a Yad Ramah, an exalted arm — and His arm runs all through Beshalach. As a side note, Ram in English is this week's Perek Shirah animal, and Nissan's sign is Aries.
+
+The journey is from Mithkah to Chashmonah. Mithkah comes from matok, sweet. Chashmonah goes with the Chashmonaim and Chanukah: this week is the inauguration of the Mishkan as Chanukah is the inauguration of the Temple, and some note that Chashmonah is the 25th place journeyed to, as Chanukah is the 25th of Kislev and the name itself is Chanu-Kah, they rested on the 25th. Rabbi Simon Jacobson explains that Chashmonah means ambassador, and may also point to leadership; the Chashmonaim became kings. In the first days of Nissan the Nasi of each tribe brought sacrifices for the inauguration. The personal journey moves on from sweetening bitterness to rededicating ourselves, leading, staying connected to our leaders, and starting again in this second half of the year.
+
+*Source: [Week 26 (Book 3): Connecting to the "Head"](https://www.kabbalahoftime.com/2014/03/week-26-book-3-connecting-to-head.html) — 821 words*
+
+---
+
+## Day 179 · Book 4 · Week 26
+
+Channah's twenty-sixth verse is a request whose content is not stated: "And she said, 'Please, my lord! As surely as your soul lives, my lord, I am the woman who was standing here with you, to pray to the Lord.'" Rashi fills it in: take care of him, that he become your disciple — and according to the Midrash of our sages, do not punish him with death. Last week Shmuel had shown great insight and in doing so had given a ruling in front of his master, which is punishable by death, and the more grievous because Eli was the Judge and head of the whole people. So she asks Eli both to take the boy on and to forgive him.
+
+The Pirkei Avot quality is that he becomes an unceasing river. Shmuel's insight into one area of law belongs to the ever-increasing wellspring of last week, the ability to find new rulings by concentrating on chosen parts of the text. An unceasing river is the other thing: comprehensive knowledge of the whole Torah. That is what Channah is asking Eli to teach him.
+
+Proverbs 26 is mostly about the actions of fools, and also the lazy, the quarrelsome, the deceptive and the wicked. What runs through it is that an act which might be righteous in itself becomes ridiculous in the wrong context — honouring fools, or fearing some danger purely as an excuse not to get out of bed. A person needs the big picture in order to act rightly.
+
+The week holds the yahrzeits of Rav Yitzchak Abuchatzera, the Baba Chaki, on the 25th of Adar, and Rabbi Shlomo Hakohen Rabinowicz, the Tiferes Shlomo, founding Rebbe of Radomsk, on the 29th. The Baba Chaki was the Baba Sali's brother, and like him was known for great holiness and saintly conduct; like him he moved from Morocco to Israel, and he became chief rabbi of Ramla-Lod. Rabbi Shlomo Hakohen Rabinowicz was called the Tiferes Shelomo after the Chassidic masterpiece he wrote, and founded Radomsk in 1843. When Rabbi Moshe Biderman of Lelov made aliyah in 1850 he told his followers to become Chassidim of the Tiferes Shelomo, and the court grew to thousands upon thousands. Besides his scholarship and his speaking, the Radomsker Rebbe was known for a beautiful voice and for composing new nigunim. Also this week: Rabbi Menachem Mendel of Visiva, son of Rabbi Yisroel Hager of Vizhnitz, on the 25th of Adar, and Rabbi Elimelech of Grodzensk, author of Divrei Elimelech and Imrei Elimelech and father of the Piazeczna Rebbe, on the 1st of Nissan. Rosh Chodesh Nissan is also the birthday of Rebbe Nachman of Breslov.
+
+*Source: [Week 26 (Book 4): The Big Picture](https://www.kabbalahoftime.com/2014/03/week-26-book-4a-big-picture.html) — 641 words*
+
+---
+
+## Day 180 · Book 5 · Week 26
+
+The Song finishes the description and then loses him again. "His legs are [as] pillars of marble, founded upon sockets of fine gold, his appearance is like the Lebanon, chosen as the cedars." "His palate is sweet, and he is altogether desirable; this is my beloved, and this is my friend, O daughters of Jerusalem." And then the daughters ask: "Where has your beloved gone, O fairest of women? Where has your beloved turned, that we may seek him with you?"
+
+All of it is the mouth, which is the chief symbol of Passover. Rabbi Levi Yitzchak of Berditchev says that Pesach is Peh Sach, a mouth converses, because it is a special mitzvah at the Seder to recount and turn over the miracles of our liberation as much as possible. The Megaleh Amukos says Pharaoh is Peh Rah, an evil mouth. Rashi reads the verses the same way: his appearance is like the Lebanon means that one who reflects and ponders over His words finds blossoms and sprouts in them, like a forest in bloom — so are the words of Torah, and whoever meditates over them constantly finds new explanations in them. And his palate is sweet means his words are pleasant.
+
+Of the seventy souls that descended to Egypt, the twenty-sixth is Puvvah, whose name also looks to come from Peh, mouth, and so from Pessach. It is near the name Puah, spelled with an Ayin rather than an Aleph, which belongs to Miriam at the very start of the Exodus story: Puah comes from a root that implies a particular gift of speech, and Rashi comments that she could soothe a crying baby to sleep with her special way of talking. Puvvah is also the name of Tola's father, the Judge from the tribe of Issachar.
+
+The daf of Shvuot this week keeps on with oaths, and above all whether an oath has to be spoken. Peh Sach again.
+
+Jeremiah's twenty-sixth chapter presses the same point from the other end — not the mouth but the ear. "And the priests and the prophets said to the princes and to all the people, saying, 'This man is liable to death, for he prophesied concerning this city, as you have heard with your ears.'" "And Jeremiah said to all the princes and to all the people saying, 'The Lord sent me to prophesy concerning this house and concerning this city all the words that you have heard.'" And the warning: "But you should know that if you put me to death, that you are bringing innocent blood upon yourselves and upon this city and upon its inhabitants, for indeed God sent me concerning you, to speak into your ears all these words."
+
+*Source: [Week 26 (Book 5): The Importance of Speech](https://www.kabbalahoftime.com/2014/03/week-26-book-4b-importance-of-speech.html) — 551 words*
+
+---
+
+## Day 181 · Book 6 · Week 26
+
+The week of Rosh Chodesh Nissan in psalms: the seventy-sixth, seventy-seventh and seventy-eighth, with three verses of Psalm 77 and one of Psalm 89.
+
+Psalm 76 holds the prophecy of the vast army of Sennacherib seized by a deep slumber that left the soldiers' hands powerless to raise their weapons, so that they all fell in battle. "G-d is known in Judah, His Name is great in Israel." The sleep: "The stout-hearted were without sense, they slept their sleep, and all the warriors were unable to find their strength. At Your rebuke, O G-d of Jacob, chariot and horse were stunned." Then the stillness: "From heaven You let the verdict be heard; the earth feared and was still, when G-d rose to pass judgment, to save all the humble of the earth forever."
+
+Psalm 77 is here whole, and it is the psalm whose verses have been arriving three at a time for weeks. It begins in the night that will not end — "my wound oozes at night and does not abate; my soul refuses to be consoled" — and asks everything it can: "Is it for eternity that my Lord forsakes [me], nevermore to be appeased? Has His kindness ceased forever? Has G-d forgotten mercy?" Then it turns on remembering: "I remember the deeds of Yah, when I remember Your wonders of long ago." And then the sea answers it: "You redeemed Your people with a mighty arm, the children of Jacob and Joseph, Selah. The waters saw You, O G-d, the waters saw You and trembled; even the deep shuddered." "Your way was through the sea, Your path through the mighty waters; and Your footsteps were not known." And the last line is the whole answer in one image: "You led Your people like a flock, by the hand of Moses and Aaron."
+
+Psalm 78 recounts every miracle from the exodus to David becoming king, and it is built as a thing to hand on: "Listen, my people, to my teaching; incline your ear to the words of my mouth. I will open my mouth with a parable, I will utter riddles of long ago; that which we have heard and know [to be true], and that our fathers have told us. We will not withhold from their children, telling the final generation the praises of the Lord." The point of telling is that the next generation not be like the last: "And they shall not be like their fathers, a wayward and rebellious generation, a generation that did not set its heart straight." Then the sea and the rock: "He split the sea and brought them across; He erected the waters like a wall." "He split rocks in the wilderness, and gave them to drink as if from the abundant depths." Then the asking for meat: "They spoke against G-d; they said, 'Can G-d set a table in the wilderness? True, He hit the rock and waters flowed, streams gushed forth; but can He also give bread?'" And the answer that was already there: "He had rained upon them manna to eat, and given them grain of heaven. Man ate the bread of angels." Then the long account of forgetting and being forgiven: "Yet He is compassionate, pardons iniquity, and does not destroy; time and again He turns away His anger." "He remembered that they were but flesh, a spirit that leaves and does not return." Then the plagues told backwards into memory — the rivers turned to blood, the frogs, the grasshopper and the locust, the hail, the firstborn — and the shepherding out: "He drove His nation like sheep, and guided them like a flock in the desert." Then Shilo abandoned, and the waking: "And the Lord awoke like one who had been asleep, like a warrior shouting [to sober himself] from wine." And the end is the choosing: "He chose the tribe of Judah, Mount Zion which He loves." "And He chose David His servant, and took him from the sheep corrals. From following the nursing ewes, He brought Him to shepherd His nation Jacob, Israel His inheritance. And he tended them with the integrity of his heart, and led them with the skill of his hands."
+
+The Tikkun HaKlali verses are the sea again — "the waters perceived You, they trembled, even the deeps quaked" — and Psalm 89's verse is the name he will call Him by: "He will call to Me, 'You are my Father, my G-d, and the Rock of my salvation.'"
+
+*Source: [Week 26 (Book 6): Reviewing the Week of Rosh Chodesh Nissan - Psalms 76-78; 77:16-18; 89:27](https://www.kabbalahoftime.com/2014/03/week-25-book-5-reviewing-week-of-rosh.html) — 1886 words*
+
+---
+
+## Day 182 · Book 7 · Week 26
+
+The lamb opens on who is like Him, and the week's books come in around it.
+
+The holiness and the redeeming arm first, with the kings: "Who is like You among the might ones, G-d" / "Who is like You, mighty in holiness" / "You redeemed Your people with Your arm" / "The sons of Jacob and Joseph forever" / "The kings came and fought" / "Then fought the kings of Canaan."
+
+Then the end of Amalek and the healing: "I said that I would make an end of them" / "Eradicate their remembrance from mankind" / "All the sicknesses that I have visited upon Egypt I will not visit upon you, for I, the Lord, heal you" / "With a kind one, You show Yourself kind" / "With the upright, mighty, You show Yourself upright."
+
+Then the hearkening, and the cedars: "And he said, if you hearken to the voice of the Lord, Your G-d" / "And you do what is proper in His eyes" / "His appearance is like the Lebanon" / "Chosen as the cedars" / "O daughters of Jerusalem."
+
+Then the waters trembling, and the marble pillars: "They trembled, even the deeps quaked" / "They poured forth thick waters" / "His legs are [as] pillars of marble" / "Founded upon sockets of fine gold" / "The skies let out a voice" / "Even your arrows went abroad."
+
+Then the fountains and the palms, with the woman who stood there praying: "Water fountains and seventy palms" / "And they encamped there by the water" / "The waters perceived You, O G-d" / "The waters perceived You" / "And she said, 'Please, my lord! As surely as your soul lives, my lord'" / "And you listen closely to His commandments" / "And observe all His statutes" / "They came to Elim, and there were twelve."
+
+And the end is the asking and the answering: "Where has your beloved gone, O fairest of women" / "Where has your beloved turned" / "I am the woman who was standing here with you, to pray to the Lord" / "His palate is sweet, and he is altogether desirable" / "This is my beloved, and this is my friend" / "He will call to Me, You are my Father, My G-d, and the Rock of my salvation" / "Awesome in praise, worker of wonders" / "That we may seek him with you."
+
+*Source: [Week 26 (Book 7): The Lamb Is Saying](https://www.kabbalahoftime.com/2016/04/the-lamb-is-saying-songs-for-week-26.html) — 302 words*
