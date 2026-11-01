@@ -3971,9 +3971,17 @@ content: ''; float: right; width: 30px; height: 1em;
        Its text lives in companion-days.json rather than here — a third of a
        megabyte does not belong in a page that must parse before anything
        draws. The card holds its place while the file is in flight and fills
-       when it lands, so nothing jumps. The entries are built from the app's
-       own weekly table by tools/build_companion_days.py, so the companion
-       and the cards cannot come to say different things. -->
+       when it lands, so nothing jumps. Each entry is a written summary of
+       that book's own post for that week, built by
+       tools/build_companion_days.py from docs/companion-summaries.md. The
+       builder can still transcribe the app's own weekly table instead, which
+       is what held the shelf up while the summaries were being written, and
+       no day falls back to it now. -->
+  <!-- This section used to say the entries were built from the weekly table
+       and that nothing in it was written by hand. That was true of the
+       transcriptions and is not true of a summary, so both places that said
+       it — here and the line at the foot of the panel — say what these are
+       instead. -->
   <section id="companion" class="companion" style="display:none;" aria-labelledby="comp-open">
     <div class="comp-new" aria-hidden="true">New</div>
     <h2 class="comp-h"><button type="button" id="comp-open" class="comp-open"
@@ -4017,16 +4025,28 @@ content: ''; float: right; width: 30px; height: 1em;
         <button type="button" class="comp-jump" id="comp-first"
                 onclick="companionHome()">Back to today</button>
       </div>
-      <!-- The PDF link stood here. It is out until the PDF is set again:
-           the one at the root is the first companion text, and it carries an
-           invented motto, a wrong verse and routes a reader could not
-           follow. A download is harder to correct than a page — it sits on
-           the reader's disk saying the old thing. -->
+      <!-- The PDF link stood here and is still out, though the reason has
+           changed. It went because the only companion PDF at the root was
+           the first text, which carries an invented motto, a wrong verse and
+           routes a reader could not follow — and a download is harder to
+           correct than a page, since it sits on the reader's disk saying the
+           old thing. There is a right one now, daily-companion.pdf, set from
+           these same 364 entries; it is on the shelf in the KoT Books pane
+           with every other volume. Whether it also belongs here, beside the
+           one day a reader is actually on, is a question about this panel
+           rather than about the book. -->
+      <!-- Where these came from, said so a stranger can follow it. The line
+           here used to read "assembled from this app's own weekly table...
+           nothing in it is written by hand", which described the companion
+           while its entries were transcriptions of the table above the cards.
+           They are all written summaries of the week's posts now, so the line
+           was both opaque to anyone who had not read the source and no longer
+           true. It names the method plainly instead, and points at the post,
+           which is the only claim a reader can check for themselves. -->
       <div class="comp-foot">
-        <p class="comp-made">Every entry here is assembled from this app&rsquo;s own
-          weekly table &mdash; the same readings the cards below show, said in
-          sentences. Nothing in it is written by hand, and nothing in it is
-          anything the app does not already hold.</p>
+        <p class="comp-made">Summarized and assembled with AI. Each of the 364
+          entries is the short form of one post, and links to the post it came
+          from.</p>
       </div>
     </div>
   </section>
