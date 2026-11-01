@@ -2184,6 +2184,11 @@ padding: 12px 4px;
 .book-row a { color: var(--gold); text-decoration: none; }
 .book-row a:hover, .book-row a:focus-visible { text-decoration: underline; }
 .book-row .book-where { color: var(--ink-dim); font-size: 0.85em; font-style: italic; }
+/* Where the book has reached today — the week's writing for one of the seven,
+   the set's for the Alef Bet. Empty, and it takes no room, so a book with
+   nothing posted this week reads as a plain row rather than a broken one. */
+.book-row .book-now { font-size: 0.85em; }
+.book-row .book-now:empty { display: none; }
 /* One line saying what the book is. Without it the shelf is a list of
    thirteen addresses; with it, it is a shelf. */
 .book-what { color: var(--ink-mid); font-size: 0.86em; line-height: 1.45;
@@ -3575,40 +3580,16 @@ content: ''; float: right; width: 30px; height: 1em;
 /* Opens the book's week; a control rather than a link, so it says so. */
 .kot-summary { color: var(--gold); font-size: 0.85em; cursor: pointer; }
 
-/* ── THE WEEK'S SEVEN READINGS ──
-   The day chooses which of the seven books Binah shows, and that is right:
-   the books are a reading keyed to the weekday. The week's writing for them
-   is not keyed to anything — all seven posts stand the whole week — so one
-   showing a day meant six of them were unreachable until their weekday came
-   round, and a reader who opened the app on Tuesday never knew Monday's was
-   there. The row carries all seven, every day. */
-.kot-week-all { margin-top:5px; font-size:calc(11px * var(--ts, 1)); color:var(--ink-dim); }
-/* The lead takes a line of its own so the seven below it get the card's full
-   width, which is what lets each of them be a finger wide. */
-.kot-week-all .kwa-lead { display:block; letter-spacing:0.3px; margin-bottom:1px; }
-/* Centred, because seven 44px targets need 308px and the pane is 273px wide
-   on a 390px phone: the row wraps, and a seventh left hanging at the left
-   margin reads as a mistake where a centred one reads as a second row. */
-.kwa-row { display:flex; flex-wrap:wrap; justify-content:center; }
-/* A finger each, in both directions — not a drawn size with an overlay over
-   it, because seven of them sit shoulder to shoulder and an overlay on one
-   would be reaching across its neighbour. 7 x 44 is 308px, which a 320px
-   phone wraps rather than scrolls, and it does not grow with the text size:
-   the number inside it does, the box does not need to. */
-.kwa, .kwa-off {
-  flex:0 0 auto; min-width:44px; min-height:44px;
-  display:inline-flex; align-items:center; justify-content:center;
-  font-size:calc(12px * var(--ts, 1));
-}
-.kwa { color:var(--gold); text-decoration:none; }
-.kwa:hover { text-decoration:underline; }
-/* Today's is marked, because the row would otherwise give no sign which of
-   the seven the card above it is showing. It is not named again — the card
-   names it two lines up. */
-.kwa.kwa-on { font-weight:700; }
-/* A week with no post for a book: shown, so the seven stay seven and the gap
-   is visible, but not offered as something to tap. */
-.kwa-off { color:var(--ink-dim); opacity:0.55; }
+/* The Song of the Well, as a song rather than a line of words: one verse to
+   a block, the words running right to left, and today's word of the thirty-two
+   marked in gold. Pointed but not cantillated — Frank Ruhl Libre declares the
+   Hebrew block but ships no glyphs for the te'amim, so a ta'am would come out
+   in a different hand from the letters it sits on. */
+.well-song { font-family:'Frank Ruhl Libre',serif; font-size:1.06rem; line-height:2.1; }
+.well-verse { margin-bottom:10px; }
+.well-vnum { font-family:inherit; color:var(--ink-dim); font-size:0.72em; margin-left:6px; }
+.well-word { display:inline-block; }
+.well-now { color:var(--gold); font-weight:700; }
 </style>
 
 </head>
@@ -3774,7 +3755,7 @@ content: ''; float: right; width: 30px; height: 1em;
     </div>
     <div class="pane-body pane-prose" data-pane="books">
     <p>Thirteen books. Tap a title to open it.</p>
-    <p>Seven of them are the books of the week &mdash; one for each day, named beside it, and the day&rsquo;s own is always waiting on the Binah card. The other six are read whenever you like. If you are starting, start with the day you are in.</p>
+    <p>Seven of them are the books of the week &mdash; one for each day, named beside it, and each one linked to this week&rsquo;s writing as well as to the whole book. The other six are read whenever you like. If you are starting, start with the day you are in.</p>
     <div class="book-shelf" id="kot-books-list"></div>
     </div>
   </div>
@@ -4344,10 +4325,6 @@ content: ''; float: right; width: 30px; height: 1em;
       <div class="keter-section-label">✦ Torah Ohr / Likutei Torah <span class="maalah">מעלה י״ב</span></div>
       <div id="chochmah-lt-face" class="sefirah-main-text">Loading…</div>
     </div>
-    <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-      <div id="chochmah-kot-book">Loading…</div>
-    </div>
     <div class="sefirah-detail" id="chochmah-detail"></div>
   </div>
 </div>
@@ -4369,10 +4346,6 @@ content: ''; float: right; width: 30px; height: 1em;
     <div class="malchut-ksa-row" style="margin-top:8px">
       <div class="keter-section-label">✦ Likutei Tefilot <span class="maalah">מעלה י״א</span></div>
       <div id="binah-lt-face" class="sefirah-main-text">Loading…</div>
-    </div>
-    <div class="malchut-ksa-row" style="margin-top:8px">
-      <div class="keter-section-label"><span class="kot-book-icon">📖</span> KoT Book</div>
-      <div id="binah-kot-book">Loading…</div>
     </div>
     <div class="sefirah-detail" id="binah-detail"></div>
   </div>
@@ -4396,6 +4369,15 @@ content: ''; float: right; width: 30px; height: 1em;
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:3px;">1:43–5:09</div>
     <div style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:2px;font-style:italic;">Kedushas Levi</div>
     <div class="prayer-tag" data-prayer="4" title="Tap when you have prayed" style="cursor:pointer;font-size:calc(10.5px * var(--ts, 1));color:var(--gold);margin-top:1px;opacity:1;">Birchot HaShachar</div>
+    <!-- The Song of the Well, said rather than counted: it carries no
+         data-prayer, so the heart still counts the day's ten, the same choice
+         the study prayers make on Gevurah. It stood on Chochmah as the day's
+         one word of the thirty-two; here it opens whole, with today's word
+         marked inside it, which is what a song is for. -->
+    <div class="study-pray">
+      <button type="button" class="study-pray-btn" onclick="openWellSong()"
+              aria-label="The Song of the Well, with today&rsquo;s word marked">Song of the Well</button>
+    </div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="chesed-cycle-name">Mishna — Oral Torah</div>
@@ -8038,10 +8020,16 @@ content: ''; float: right; width: 30px; height: 1em;
 
   // ── WHAT EACH LETTER STANDS FOR ──
   // One sentence for each of the 27 — the 22 and the five finals — drawn from
-  // the Kabbalah of Time appendix the Chochmah card links to, which reads the
-  // letters two at a time across the year and gives the finals their own five
-  // sets. Keyed by the names SINGLE_LETTERS_22 and FINAL_LETTERS_MIC use, so
-  // the day's letter finds its own line.
+  // the Kabbalah of Time appendix the shelf links to, which reads the letters
+  // two at a time across the year and gives the finals their own five sets.
+  // Keyed by the names SINGLE_LETTERS_22 and FINAL_LETTERS_MIC use, so the
+  // day's letter finds its own line.
+  //
+  // NOTHING READS THIS NOW. The tap that opened these sentences stood under
+  // the KoT Book on Chochmah's face, and that block has gone to the shelf;
+  // the sentences are the book's own appendix, which the shelf opens. They
+  // are kept here rather than deleted because they are written text, not
+  // generated, and putting the tap back is one line if it is ever wanted.
   const LETTER_MEANINGS = {
     'Alef': 'Stands for Aluf\'oh Shel Olam, the Master of the World — two yuds, G-d above and the Jew below, joined by the vav of Emunah, faith.',
     'Bet': 'Stands for Bayit, home, for the dwelling in the lower realms that G-d desired — and it is the letter the Torah itself opens with.',
@@ -11815,9 +11803,16 @@ content: ''; float: right; width: 30px; height: 1em;
   (function fillKotBooks() {
     const el = document.getElementById('kot-books-list');
     if (!el) return;
-    const _row = (b, note) => '<div class="book-row">' + b.emoji + ' ' +
+    // A book whose reading turns gets a second slot beside its name, filled at
+    // render time: the seven take the week's writing, the Alef Bet takes the
+    // set's. Both used to hang off a card — the seven under Binah, the set
+    // under Chochmah — which put the whole book in one place and the piece of
+    // it you are up to in another. They are one line now: the book, and where
+    // the book has reached today.
+    const _row = (b, note, slot) => '<div class="book-row">' + b.emoji + ' ' +
       '<a href="' + b.url + '" target="_blank" rel="noopener">' + b.book + '</a>' +
       (note ? ' <span class="book-where">· ' + note + '</span>' : '') +
+      (slot ? ' <span class="book-now" id="' + slot + '"></span>' : '') +
       (b.what ? '<div class="book-what">' + b.what + '</div>' : '') + '</div>';
     // The three that stand on a card come first — Keter, Chochmah, Binah, in
     // the order of the cards themselves — and the seven of the week follow.
@@ -11825,11 +11820,12 @@ content: ''; float: right; width: 30px; height: 1em;
     // list but the one a reader already meets every day on Malchut, so the
     // three that have no other way in are better at the top.
     el.innerHTML =
-    KOT_BOOKS_MORE.map(b => _row(b, b.where)).join('') +
+    KOT_BOOKS_MORE.map(b => _row(b, b.where,
+      b.url === CHOCHMA_KOT_DOC ? 'kot-shelf-set' : '')).join('') +
     KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('') +
     KOT_BOOKS.map((b, i) => {
       const day = (MALCHUT_TEXTS[i] || {}).day || '';
-      return _row(b, day);
+      return _row(b, day, 'kot-shelf-week-' + (i + 1));
     }).join('');
     // Keter's link is written into the page rather than rendered, so it is
     // pointed at the one address here instead of carrying a second copy.
@@ -22562,38 +22558,10 @@ content: ''; float: right; width: 30px; height: 1em;
       ? `<strong>${gatesPrimName}</strong> <span style="font-size:1.1em">${gatesPrimHeb}</span>`
       : `<strong>${gatesPrimName}</strong> + <strong>${gatesCompName}</strong> <span style="font-size:1.1em">${gatesPrimHeb}${gatesCompHeb}</span>`;
 
-    // Every letter the card is showing stands for something, so every one of
-    // them says so: the day's letter, and the one or two the set is named for
-    // — two or three each day, and one in the leap month's microcosm, which
-    // names a single letter or final letter on 27 of its 28 days. A day whose
-    // letter is also its set's, Alef on the first day of Alef & Bet, is
-    // named once.
-    const _ltShown = [];
-    const _ltAdd = (name, heb) => {
-      name = (name || '').trim();
-      if (!name || _ltShown.some(l => l.name === name)) return;
-      const meaning = LETTER_MEANINGS[name];
-      if (meaning) _ltShown.push({ name, heb: (heb || '').trim(), meaning });
-    };
-    if (inExtra && cy22Mic) {
-      _ltAdd(cy22Mic.label, cy22Mic.hebrew);
-    } else {
-      _ltAdd(cy22.dailyLetter, cy22.dailyHebrew);
-      const _setHeb = cy22.hebrew.split('&');
-      cy22.letters.split('&').forEach((n, i) => _ltAdd(n, _setHeb[i]));
-    }
-    // The sentences live behind the KoT Book they come from rather than on the
-    // face: the face already names the letters, and three paragraphs under
-    // them crowded out everything else the card has to say.
-    _ltDetailMain = _ltShown.length
-      ? `<div class="lt-notes">` + _ltShown.map(l =>
-          `<div class="detail-row" data-letter="${l.name}"><span class="detail-label">${l.name} ` +
-          `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.25em">${l.heb}</span>:</span>` +
-          `<span class="detail-value">${l.meaning}</span></div>`).join('') + `</div>`
-      : '';
-    _ltDetailMeta = _ltShown.map(l => l.name).join(' &nbsp;·&nbsp; ') +
-      ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_DOC}" target="_blank" style="color:var(--gold)">Hebrew Alphabet, Perek Shirah, and Pirkei Avot ↗︎</a>`;
-    const _ltNames = _ltShown.map(l => `${l.name} <span style="font-family:'Frank Ruhl Libre',serif">${l.heb}</span>`).join(' · ');
+    // What each letter stands for was built here and opened from a tap under
+    // the KoT Book on this face. The book went to the shelf and the sentences
+    // went with it: they are the book's own appendix, which the shelf opens,
+    // and the face names the letters as it always did.
 
     const _micGate = gatesMicrocosm(cy22Mic);
     if (inExtra && cy22Mic) {
@@ -23155,47 +23123,22 @@ content: ''; float: right; width: 30px; height: 1em;
       : [(cy22.cycle - 1) * 2, (cy22.cycle - 1) * 2 + 1];
     const psElems = psIdx.map(i => PEREK_SHIRAH_ELEMENTS[i]).filter(Boolean)
       .filter((p, i, a) => a.findIndex(q => q.el === p.el) === i);
-    // The reference is bare — 21:20, not Bamidbar 21:20 — for the same reason
-    // the Perek Shirah line above it reads "Ch 3": the label has already named
-    // the book. Naming it here pushed the reference onto a line of its own and
-    // left the middot hanging off the end of the Hebrew.
-    // The half's word of the Song of the Well, on that same index. Thirty-two
-    // words fill thirty-three halves because במחקק is held across both halves
-    // of the stars, 15 and 16, as Perek Shirah holds the stars across them.
-    const sbWords = halfIdx.map(i => SHIRAT_HABEER[i]).filter(Boolean);
-
-    // KoT Book — displayed on the Chochmah card face
-    document.getElementById('chochmah-kot-book').innerHTML =
-      `<a href="${CHOCHMA_KOT_DOC}" target="_blank" style="color:var(--gold);font-size:0.88em">Hebrew Alphabet, Perek Shirah, and Pirkei Avot</a>` +
-      (CHOCHMA_KOT_URLS[cy22.cycle - 1]
-        ? ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_URLS[cy22.cycle - 1]}" target="_blank" style="color:var(--gold);font-size:0.88em">This Set</a>`
-        : '') +
-      (psElems.length
-        ? `<div style="margin-top:3px;font-size:0.88em;">` +
-          psElems.map(p => `<strong>${p.el}</strong> <bdi style="font-family:'Frank Ruhl Libre',serif" lang="he">${p.heb}</bdi>`).join(' &amp; ') +
-          ` <span style="color:var(--ink-dim);font-size:0.9em">&middot;&nbsp;${psElems[0].ch.replace(' ', '\u00a0')}</span></div>`
-        : '') +
-      (sbWords.length
-        ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Song of the Well:</span> ` +
-          sbWords.map(b => `<bdi style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em" lang="he">${b.w}</bdi>`).join(' &amp; ') +
-          ` <span style="font-size:0.9em">&middot;&nbsp;</span>${(() => {
-              const vs = sbWords.map(b => b.v).filter((v, i, a) => a.indexOf(v) === i);
-              // A day in the microcosm can take two halves from two verses; the
-              // link then opens the span rather than either end of it.
-              const range = vs.length > 1 ? `${vs[0]}-${vs[vs.length - 1]}` : `${vs[0]}`;
-              // The anchor sits in the line itself rather than inside a span of
-              // its own: it is an inline citation in a run of text, like the
-              // one under the Song of Yehoshua, and the tap-target check reads
-              // that from how much text its parent carries beside it.
-              return `<a href="https://www.sefaria.org/Numbers.21.${range}?lang=bi" target="_blank" style="color:var(--gold);font-size:0.9em">${vs.map(v => '21:' + v).join(',\u00a0')}</a>`;
-            })()}</div>`
-        : '') +
-      // What today's letters stand for — the same appendix, one sentence each,
-      // behind a tap because the face has already named them.
-      (_ltNames
-        ? `<div style="margin-top:3px;font-size:0.88em;"><span style="color:var(--ink-dim)">Letters:</span> ` +
-          `<span class="kot-summary" role="button" tabindex="0" onclick="openLettersModal()">${_ltNames} ▾</span></div>`
-        : '');
+    // The Alef Bet book stood here with the set's writing, today's Perek
+    // Shirah elements, the day's word of the Song of the Well and a tap that
+    // explained today's letters. The book and the set's writing are on the
+    // shelf in the KoT Books pane now, one line with both. The Song of the
+    // Well is a prayer on Chesed, where it can be said whole. What the
+    // letters stand for is in the book itself, which the shelf opens — the
+    // face still names them, as it always did.
+    _wellIdx = halfIdx.slice();
+    (() => {
+      const slot = document.getElementById('kot-shelf-set');
+      if (!slot) return;
+      const u = CHOCHMA_KOT_URLS[cy22.cycle - 1];
+      slot.innerHTML = u
+        ? '\u00b7 <a href="' + u + '" target="_blank" rel="noopener">this set \u2197\uFE0E</a>'
+        : '';
+    })();
 
     // The elements and their songs, shown under the tractate in either branch.
     // Both of the set's, since both of its letters are its own — which is why
@@ -24661,16 +24604,18 @@ content: ''; float: right; width: 30px; height: 1em;
 
     const todayBook = DAY_BOOKS[sef.dayNum - 1];
 
-    // What the Summary pop-up reads. It used to be filled while Malchut drew a
-    // book's name on each of its seven rows, so the pop-up only worked once
-    // that card had rendered. The books have come off Malchut, so the filling
-    // stands on its own line here and depends on nothing being drawn.
-    ['Friday','Shabbat','Sunday','Monday','Tuesday','Wednesday','Thursday']
-      .forEach((day, i) => {
-        const db = DAY_BOOKS[i];
-        _malBooks[i] = { day, emoji: db.emoji, book: db.book, url: db.url || '',
-                         weekUrl: db.weekUrl || '', fields: db.fields || [] };
-      });
+    // The shelf's seven, each pointed at its own week's writing. The writing
+    // is the week's, not the day's — all seven posts stand from Friday to
+    // Thursday — so the row carries all seven every day, and a reader is not
+    // held to the one the day has come to. A book with nothing posted for the
+    // week gets no link rather than a dead one.
+    DAY_BOOKS.forEach((db, i) => {
+      const slot = document.getElementById('kot-shelf-week-' + (i + 1));
+      if (!slot) return;
+      slot.innerHTML = db.weekUrl
+        ? '· <a href="' + db.weekUrl + '" target="_blank" rel="noopener">this week ↗︎</a>'
+        : '';
+    });
 
     // Card face
     // Helper function to get parasha-specific portion for a Malchut text
@@ -24929,60 +24874,13 @@ content: ''; float: right; width: 30px; height: 1em;
                : `<span class="ps-src">— its song is not recorded here</span>`);
     })();
 
-    // Binah's book: whichever of the seven the day has come to, and only
-    // that. The seven are a reading keyed to the day, and this is the row
-    // that says so — one of them showing, the other six waiting for their
-    // weekday. They had a card each for a week, Chesed through Malchut, which
-    // made each one stand all year on a Sefirah of its own: a shelf rather
-    // than a reading. They are back here, where the day chooses which.
-    //
-    // The two creative-writing volumes stood beneath them and no longer do.
-    // They turn with nothing — not the week, not the year — so there was no
-    // reading for them to sit beside, and the Books tab at the head of the
-    // page is where they are now. They are the only two that stand on no
-    // card, which is why that tab exists.
-    // The seven numbered, each going to its own week's writing. The number is
-    // the book's own name for itself, so a row of seven of them needs no
-    // legend; the label a screen reader is given says the whole name, since
-    // "6" on its own says nothing at all.
-    function _binahWeekLinks(books, dayNum) {
-      const q = (s) => String(s).replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;').replace(/"/g, '&quot;');
-      const seven = books.map((db, i) => {
-        const parts = String(db.book).split(' \u00b7 ');
-        const face = `${db.emoji}${i + 1}`;
-        if (!db.weekUrl)
-          return `<span class="kwa-off" title="Nothing posted for this week">${face}</span>`;
-        const name = parts[1] ? `${parts[0]}, ${parts[1]}` : parts[0];
-        return `<a class="kwa${(i + 1) === dayNum ? ' kwa-on' : ''}" ` +
-          `href="${q(db.weekUrl)}" target="_blank" rel="noopener" ` +
-          ((i + 1) === dayNum ? 'aria-current="true" ' : '') +
-          `aria-label="${q(name)} \u2014 this week\u2019s writing">${face}</a>`;
-      });
-      return `<div class="kot-week-all"><span class="kwa-lead">This week:</span>` +
-        `<span class="kwa-row">${seven.join('')}</span></div>`;
-    }
-
-    const bookParts = todayBook.book.split(' \u00b7 ');
-    document.getElementById('binah-kot-book').innerHTML =
-      `<span style="font-size:1.1em">${todayBook.emoji}</span> ` +
-      (todayBook.url
-        ? `<a href="${todayBook.url}" target="_blank" style="color:var(--gold)"><strong>${bookParts[0]}</strong></a>`
-        : `<strong>${bookParts[0]}</strong>`) +
-      (bookParts[1] ? `<br><span style="font-size:0.85em;color:var(--ink-mid)">${bookParts[1]}</span>` : '') +
-      // The week's reading for this book, behind a tap rather than set out on
-      // the face — the same pop-up a book's name opens in Malchut, on the same
-      // book and the same day.
-      `<br><span class="kot-summary" role="button" tabindex="0" ` +
-        `onclick="openKotBookModal(${sef.dayNum - 1})">Summary \u25be</span>` +
-      // \u2500\u2500 ALL SEVEN WEEKS, EVERY DAY \u2500\u2500
-      // This line used to carry one link: the week's writing for whichever
-      // book the day had come to. But the writing is the week's, not the
-      // day's \u2014 all seven posts stand from Friday to Thursday \u2014 so six of
-      // them were out of reach on any given day, and nothing on the page
-      // said they existed. Today's is named; the other six are numbered,
-      // which is how the books name themselves.
-      _binahWeekLinks(DAY_BOOKS, sef.dayNum);
+    // Binah carried the day's KoT book here: its name, its week's table
+    // behind a Summary tap, and a numbered row linking all seven weeks'
+    // writing. All of it has gone to the shelf in the KoT Books pane, where
+    // each book now stands once with a link to this week's writing beside it.
+    // The numbered row could not be made to fit in any case — seven targets a
+    // finger wide need 308px and this column is 273px on a 390px phone, so it
+    // always wrapped six and one.
 
     // Panel 3: Daily Sicha + Selections from Likkutei Sichos by book
     let _lsSichosBook = null, _ksaLabel = null;
@@ -25790,32 +25688,38 @@ content: ''; float: right; width: 30px; height: 1em;
     openInfoPopup('Zohar — זוהר', _zoharDetailMain, _zoharDetailMeta);
   }
 
-  // The seven Kabbalah of Time books, one to each day of the week, kept for
-  // the Summary pop-up on Binah's face — the week's reading for the book the
-  // day has come to. Malchut carried the same seven under their own names and
-  // opened the same pop-up; that was one set of books said twice, and it is
-  // gone, so this is read from one place now.
-  const _malBooks = [];
-  function openKotBookModal(i) {
-    const b = _malBooks[i];
-    if (!b) return;
-    const rows = (b.fields || []).map(f =>
-      `<div class="detail-row"><span class="detail-label">${f.label}:</span>` +
-      `<span class="detail-value">${f.value}</span></div>`).join('');
-    openInfoPopup(`${b.emoji} ${b.book}`,
-      rows || '<div style="color:var(--ink-mid);font-style:italic">Nothing set for this week.</div>',
-      b.day +
-      (b.url ? ` &nbsp;·&nbsp; <a href="${b.url}" target="_blank" style="color:var(--gold)">The book ↗︎</a>` : '') +
-      (b.weekUrl ? ` &nbsp;·&nbsp; <a href="${b.weekUrl}" target="_blank" style="color:var(--gold)">This week ↗︎</a>` : ''));
-  }
-
-  // Today's letters and what each one stands for — the day's, and the one or
-  // two the set is named after. Filled by render; opened from the KoT Book on
-  // the Chochmah face, which is the book these sentences are drawn from.
-  let _ltDetailMain = '', _ltDetailMeta = '';
-  function openLettersModal() {
-    if (!_ltDetailMain) return;
-    openInfoPopup('The Letters — הָאוֹתִיּוֹת', _ltDetailMain, _ltDetailMeta);
+  // The Song of the Well, opened from Chesed. Which half of the year the day
+  // stands in is set by render, on the same index the tractate uses; the song
+  // itself never changes, so only the marking does.
+  //
+  // Thirty-two words fill thirty-three halves because במחקק is held across
+  // both halves of the stars, 15 and 16, as Perek Shirah holds the stars
+  // across them. It is one word read twice, so it is drawn once and marked
+  // when either half is today's.
+  let _wellIdx = [];
+  function openWellSong() {
+    const DOUBLED = 15;                       // the second במחקק, 0-based
+    const here = new Set(_wellIdx.map(i => (i === DOUBLED ? DOUBLED - 1 : i)));
+    let html = '', verse = null;
+    SHIRAT_HABEER.forEach((w, i) => {
+      if (i === DOUBLED) return;
+      if (w.v !== verse) {
+        if (verse !== null) html += '</div>';
+        verse = w.v;
+        html += `<div class="well-verse"><span class="well-vnum">21:${verse}</span> `;
+      }
+      html += `<span class="well-word${here.has(i) ? ' well-now' : ''}">${w.w}</span> `;
+    });
+    if (verse !== null) html += '</div>';
+    openInfoPopup('Song of the Well — שִׁירַת הַבְּאֵר',
+      '<div style="font-size:0.82rem;color:var(--ink-mid);font-style:italic;line-height:1.6;margin-bottom:12px;">' +
+        'Thirty-two words, one to each half of the year’s twenty-two-day sets. ' +
+        'Today’s is marked.</div>' +
+      '<div dir="rtl" lang="he" class="well-song">' + html + '</div>',
+      'Bamidbar 21:17–20 &nbsp;·&nbsp; ' +
+      '<a href="https://www.sefaria.org/Numbers.21.17-20?lang=bi" target="_blank" style="color:var(--gold)">Sefaria ↗︎</a>');
+    const pt = document.getElementById('info-popup-title');
+    if (pt) pt.dir = 'ltr';
   }
 
   function openSeferYetzirahModal() {

@@ -436,38 +436,38 @@ async function checkInBrowser(chromium) {
   // so nothing else on the page would have shown it.
   console.log('\nalef-bet');
   const ab = await page.evaluate(() => {
-    const out = { card: { days: 0, bad: [] }, cal: [], shown: { days: 0, bad: [], least: 99 } };
+    const out = { card: { days: 0, bad: [] }, cal: [], well: { days: 0, bad: [], marked: 0 } };
     for (let o = -400; o <= 800; o++) {
       currentOffset = o; render();
       const face = document.getElementById('chochmah-main').innerText;
-      // Every letter the face names — the day's and the set's — must carry its
-      // sentence in the pop-up the KoT Book opens; a letter named with nothing
-      // behind it is the whole point of having them. Vowels are not a letter.
-      const named = new Set();
-      const dayLt = (face.match(/Day:\s*(.+?)\s+[֐-׿]/) || [])[1];
-      const setLt = (face.match(/Cycle:\s*(.+?)\s+[֐-׿]/) || [])[1];
-      if (dayLt) named.add(dayLt.trim());
-      (setLt || '').split('&').forEach(x => x.trim() && named.add(x.trim()));
-      named.delete('Vowels');
-      if (named.size) {
-        out.shown.days++;
-        const box = document.createElement('div');
-        box.innerHTML = _ltDetailMain;
-        const lines = new Set([...box.querySelectorAll('[data-letter]')].map(e => e.dataset.letter));
-        out.shown.least = Math.min(out.shown.least, lines.size);
-        named.forEach(n => { if (!lines.has(n)) out.shown.bad.push(`offset ${o}: ${n} named with no sentence`); });
-        lines.forEach(n => { if (!named.has(n)) out.shown.bad.push(`offset ${o}: a sentence for ${n}, which is not on the face`); });
-        // and the control that opens them must be there, naming the same letters
-        const ctl = document.querySelector('#chochmah-kot-book .kot-summary');
-        if (!ctl) out.shown.bad.push(`offset ${o}: the letters are explained but nothing opens them`);
-        else named.forEach(n => { if (!ctl.innerText.includes(n)) out.shown.bad.push(`offset ${o}: the control omits ${n}`); });
-      }
+      // The Song of the Well runs on the same index this card counts — one
+      // word to each half of a 22-day set — and it is opened from Chesed, so
+      // the two are checked together here rather than apart. It used to read
+      // "every letter the face names has its sentence in the pop-up the KoT
+      // Book opens", which was the right check while the KoT Book stood on
+      // this face; the book is on the shelf now and the sentences with it.
+      //
+      // Thirty-two words over thirty-three halves: במחקק is held across both
+      // halves of the stars and drawn once. So the song must always draw 32
+      // and always mark at least one, which is exactly what a naive index
+      // into a 33-long array would get wrong.
+      openWellSong();
+      const pm = document.getElementById('info-popup-main');
+      const drawn = pm.querySelectorAll('.well-word').length;
+      const marked = pm.querySelectorAll('.well-now').length;
+      out.well.days++;
+      out.well.marked = Math.max(out.well.marked, marked);
+      if (drawn !== 32) out.well.bad.push(`offset ${o}: the song drew ${drawn} words, not 32`);
+      if (!marked) out.well.bad.push(`offset ${o}: no word of the song marked for today`);
       const m = face.match(/Day (\d+) · Cycle (\d+)/);
       if (!m) continue;               // the leap year's microcosm names no set
       out.card.days++;
       if (+m[2] > 17 || +m[2] < 1 || +m[1] > 22 || +m[1] < 1)
         out.card.bad.push(`offset ${o}: ${m[0]}`);
     }
+    // The song was opened 1,200 times to be read; shut it, or everything
+    // after this runs with a modal over the page.
+    document.getElementById('info-popup-modal').style.display = 'none';
     currentOffset = 0; render();
     // and the calendar's own lens, over a whole year — the card and the lens
     // are two readings of one count, and both were reading it from the epoch.
@@ -534,9 +534,9 @@ async function checkInBrowser(chromium) {
   ab.meanings.unused.forEach(m => fail(`a sentence for "${m}", which is no letter the card names`));
   if (!ab.meanings.missing.length && !ab.meanings.thin.length && !ab.meanings.unused.length)
     pass(`all ${ab.meanings.n} letters stand for something, one sentence each`);
-  ab.shown.bad.slice(0, 5).forEach(m => fail(`the face and its sentences disagree — ${m}`));
-  if (!ab.shown.bad.length)
-    pass(`on ${ab.shown.days.toLocaleString()} days every letter the face names has its sentence, and no other does`);
+  ab.well.bad.slice(0, 5).forEach(m => fail(`the Song of the Well — ${m}`));
+  if (!ab.well.bad.length)
+    pass(`on ${ab.well.days.toLocaleString()} days the Song of the Well draws its 32 words and marks today's (at most ${ab.well.marked})`);
 
   // ── leap ──────────────────────────────────────────────────────────────────
   // The 392-day year and its 28-day Adar I microcosm. This is the least-walked
