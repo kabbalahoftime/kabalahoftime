@@ -20,7 +20,7 @@ The rooster's own lesson is the plainest one: stop sleeping, get up, move forwar
 
 *[Week 1, Book 1 — the whole entry](https://www.kabbalahoftime.com/2013/09/week-1-book-1-to-raise-our-heads-choose.html)*
 
-### Day 2 · Book 2 · Song of Moses | Rosh Hashanah - Creation and the Grave, Avraham & Sarah and Acquiring the Torah, Shechem and Acquiring a Head (DRAFT)
+### Day 2 · Book 2 · Song of Moses | Rosh Hashanah - Creation and the Grave, Avraham & Sarah and Acquiring the Torah, Shechem and Acquiring a Head
 
 Haazinu's first verse opens the week: "Listen, O heavens, and I will speak! And let the earth hear the words of my mouth!" (Deuteronomy 32:1) Heavens and earth — which is how the Torah itself begins, and the week of Rosh Hashanah is the week of the world's creation.
 

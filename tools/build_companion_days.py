@@ -308,9 +308,19 @@ def post_title(post, fallback):
 
     The prefix is already on the entry twice over — the meta row says the day,
     the week and the book — so a third copy inside the title is noise.
+
+    And without the "(DRAFT)" one of them ends in. That word is the blog's
+    note to itself about its own post, twelve years old and true of nothing a
+    reader of this app is looking at — the entry under it is finished, and so
+    is the post. Day 2 is the only one, but it is stripped by rule rather than
+    by name, so another does not have to be noticed by eye. It comes off here,
+    where the title is made for showing, and not in docs/companion-posts.json,
+    which is a record of what the blog actually says and is what the summaries
+    are checked against.
     """
     t = re.sub(r'^\s*Week\s*\d+\s*\((?:Book\s*\d+|From the Book)\)\s*[:—-]\s*',
                '', str((post or {}).get('title') or ''), flags=re.I).strip()
+    t = re.sub(r'\s*[\(\[]\s*draft\s*[\)\]]\s*$', '', t, flags=re.I).strip()
     t = re.sub(r'\s+', ' ', t)
     return t or fallback
 
