@@ -11786,8 +11786,9 @@ content: ''; float: right; width: 30px; height: 1em;
   // constant and is simply pointed at.
   const KOT_BOOKS_MORE = [
     { book: 'Living Likutei Moharan', what: 'Rebbe Nachman’s lessons through the year — the book behind Keter’s daily reading.', emoji: '📖', where: 'Keter',
+      slot: 'kot-shelf-lm',
       url: 'https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk' },
-    { book: 'Alef Bet', what: 'Sixteen cycles of twenty-two days: two letters to each, the creatures that sing for them in Perek Shirah, and the mishnayot that count for them in Pirkei Avot.', emoji: '🔤', where: 'Chochmah', url: CHOCHMA_KOT_DOC },
+    { book: 'Alef Bet', what: 'Sixteen cycles of twenty-two days: two letters to each, the creatures that sing for them in Perek Shirah, and the mishnayot that count for them in Pirkei Avot.', emoji: '🔤', where: 'Chochmah', slot: 'kot-shelf-set', url: CHOCHMA_KOT_DOC },
     // And the companion, which is Binah's: it files its 364 entries the way
     // Binah files the seven, one book for one week, each day. It sat below
     // with the creative writing, which put a book the app hands the reader
@@ -11799,7 +11800,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // docs/daily-companion.md and the shared setter typesets that, so the
     // page and the book cannot come to say different things.
     { book: 'A Daily Companion', what: 'All 364 daily readings in one volume — one KoT Book for one week, each day, in the order the year reads them.', emoji: '📅',
-      where: 'Binah',
+      where: 'Binah', slot: 'kot-shelf-comp',
       url: 'daily-companion.pdf' },
   ];
   // And one that is not a working book at all: the allegory of the thirteen
@@ -11877,8 +11878,7 @@ content: ''; float: right; width: 30px; height: 1em;
     _head('Creative Writing and Reflections on the Parasha') +
     KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('') +
     _head('The Kabbalah of Time books') +
-    KOT_BOOKS_MORE.map(b => _row(b, b.where,
-      b.url === CHOCHMA_KOT_DOC ? 'kot-shelf-set' : '')).join('') +
+    KOT_BOOKS_MORE.map(b => _row(b, b.where, b.slot)).join('') +
     KOT_BOOKS.map((b, i) =>
       _row(b, SEFIROT_777[i] || '', 'kot-shelf-week-' + (i + 1))).join('');
     // Keter's link is written into the page rather than rendered, so it is
@@ -16243,11 +16243,26 @@ content: ''; float: right; width: 30px; height: 1em;
     }
     const el = document.getElementById('companion');
     if (!el) return;
+    // The shelf's row for the companion points at the entry itself, which is
+    // on this page rather than away from it — so a plain anchor to the
+    // section, which scrolls without script, and a click that also opens the
+    // panel, which is shut until someone asks. An arrow down rather than the
+    // out-and-up one the other rows wear, because nothing is being left.
+    // Written here, where the entry is known to exist: a failed fetch leaves
+    // the section hidden, and a link to a hidden section goes nowhere.
+    const shelfSlot = document.getElementById('kot-shelf-comp');
+    const noEntry = () => {
+      el.style.display = 'none';
+      if (shelfSlot) shelfSlot.innerHTML = '';
+    };
     const want = companionDay();
-    if (!COMPANION || !want) { el.style.display = 'none'; return; }
+    if (!COMPANION || !want) { noEntry(); return; }
     const e = COMPANION.days[String(want)];
-    if (!e) { el.style.display = 'none'; return; }
+    if (!e) { noEntry(); return; }
     el.style.display = '';
+    if (shelfSlot) shelfSlot.innerHTML =
+      '· <a href="#companion" onclick="toggleCompanion(true)">' +
+      'today’s entry ↓</a>';
     compBadge();
     if (_compDay === want) { compNav(); return; }   // already drawn for this day
     _compDay = want;
@@ -22507,6 +22522,21 @@ content: ''; float: right; width: 30px; height: 1em;
     // was a different text: it described the calendar day rather than the
     // lesson, and the popup was switched off for a day until this one could
     // replace it, key by key, with all 364 lesson labels asserted to agree.
+    // The shelf's Living Likutei Moharan row gets the same lesson, so the
+    // book and the day's place in it are one line there, as they are for the
+    // Alef Bet and the seven. Named rather than called "today", because some
+    // days carry two and one link saying "today" would be hiding the other.
+    (() => {
+      const slot = document.getElementById('kot-shelf-lm');
+      if (!slot) return;
+      slot.innerHTML = lmInfos.length
+        ? '· today: ' + lmInfos.map(({ info }) => info.url
+            ? `<a href="${info.url}" target="_blank" rel="noopener">` +
+              `${info.label.replace(/^[^·]*·\s*/, '')} ↗︎</a>`
+            : info.label.replace(/^[^·]*·\s*/, '')).join(', ')
+        : '';
+    })();
+
     document.getElementById('lm-trigger').style.display = lmInfos.length ? '' : 'none';
     if (lmInfos.length) {
       // The lesson label itself is the link, matching the card face
