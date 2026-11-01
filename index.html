@@ -3755,7 +3755,7 @@ content: ''; float: right; width: 30px; height: 1em;
     </div>
     <div class="pane-body pane-prose" data-pane="books">
     <p>Fourteen books. Tap a title to open it.</p>
-    <p>Seven of them are the books of the week &mdash; one for each day, named beside it, and each one linked to this week&rsquo;s writing as well as to the whole book. The other seven are read whenever you like. If you are starting, start with the day you are in.</p>
+    <p>Seven of them are the books of the week &mdash; one to each Sefirah, Chesed through Malchut, named beside it, and each one linked to this week&rsquo;s writing as well as to the whole book. The other seven are read whenever you like. If you are starting, any of the seven is this week&rsquo;s.</p>
     <div class="book-shelf" id="kot-books-list"></div>
     </div>
   </div>
@@ -11829,9 +11829,15 @@ content: ''; float: right; width: 30px; height: 1em;
     { book: 'Reflections', what: 'A piece written on each of the fifty-four Torah portions, Bereshit to V’Zot HaBracha.', emoji: '✒️', where: 'The Torah Portions',
       url: 'reflections.pdf' },
   ];
-  // The shelf, in a pane of its own at the head of the page. The
-  // day each of the seven is read comes from MALCHUT_TEXTS rather than being
-  // written out again, so the shelf and the card can never name different days.
+  // The shelf, in a pane of its own at the head of the page.
+  //
+  // The seven are named by their Sefirah — Chesed through Malchut, one each
+  // in order — rather than by the weekday they are read on. Every other line
+  // here answers which card or which kind a book is, so a weekday was the
+  // odd one out, and the Sefirah is the name the seven already had: they
+  // stood a card each, Chesed to Malchut, before the day chose between them.
+  // Read off SEFIROT_777 rather than written again, because it is the same
+  // seven in the same order and two copies could come to disagree.
   (function fillKotBooks() {
     const el = document.getElementById('kot-books-list');
     if (!el) return;
@@ -11855,10 +11861,8 @@ content: ''; float: right; width: 30px; height: 1em;
     KOT_BOOKS_MORE.map(b => _row(b, b.where,
       b.url === CHOCHMA_KOT_DOC ? 'kot-shelf-set' : '')).join('') +
     KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('') +
-    KOT_BOOKS.map((b, i) => {
-      const day = (MALCHUT_TEXTS[i] || {}).day || '';
-      return _row(b, day, 'kot-shelf-week-' + (i + 1));
-    }).join('');
+    KOT_BOOKS.map((b, i) =>
+      _row(b, SEFIROT_777[i] || '', 'kot-shelf-week-' + (i + 1))).join('');
     // Keter's link is written into the page rather than rendered, so it is
     // pointed at the one address here instead of carrying a second copy.
     const kl = document.getElementById('keter-kot-link');
