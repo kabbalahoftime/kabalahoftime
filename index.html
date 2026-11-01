@@ -3754,8 +3754,8 @@ content: ''; float: right; width: 30px; height: 1em;
     <p>During this daily journey, we learn to live with greater harmony, happiness and gratitude &mdash; from the Kabbalah, from age-old Jewish ethical teachings, and even from animals. The objective is to be in touch with the spiritual powers of each day, thereby improving one&rsquo;s daily conduct and rediscovering the universal song within each one of us: the song of the soul.</p>
     </div>
     <div class="pane-body pane-prose" data-pane="books">
-    <p>Thirteen books. Tap a title to open it.</p>
-    <p>Seven of them are the books of the week &mdash; one for each day, named beside it, and each one linked to this week&rsquo;s writing as well as to the whole book. The other six are read whenever you like. If you are starting, start with the day you are in.</p>
+    <p>Fourteen books. Tap a title to open it.</p>
+    <p>Seven of them are the books of the week &mdash; one for each day, named beside it, and each one linked to this week&rsquo;s writing as well as to the whole book. The other seven are read whenever you like. If you are starting, start with the day you are in.</p>
     <div class="book-shelf" id="kot-books-list"></div>
     </div>
   </div>
@@ -11758,6 +11758,19 @@ content: ''; float: right; width: 30px; height: 1em;
   // counts out in days. Typeset from the blog's text and carried here rather
   // than linked away to Drive, so it opens even with nothing to connect to.
   const KOT_BOOKS_ALSO = [
+    // The companion first, above the creative writing. It is the one book
+    // here a reader is already inside: the app hands them one of its 364
+    // entries every day, and this is all of them at once, in the order the
+    // year reads them — seven books to a week, fifty-two weeks. Nothing else
+    // on the shelf is a book you are partway through without having opened.
+    //
+    // Set from the same entries the app fetches rather than written again.
+    // tools/build_companion_book.py turns companion-days.json into
+    // docs/daily-companion.md, and the shared setter typesets that, so the
+    // page and the book cannot come to say different things.
+    { book: 'A Daily Companion', what: 'All 364 daily readings in one volume — one KoT Book for one week, each day, in the order the year reads them.', emoji: '📅',
+      where: 'The whole year',
+      url: 'daily-companion.pdf' },
     // Binah first so the three read Keter, Chochmah, Binah down the column —
     // the upper three in their own order — and then what they are, which the
     // two above them do not need saying because their names say it.

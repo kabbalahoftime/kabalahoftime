@@ -187,6 +187,20 @@ def esc(s):
             out.append(ch)
     s = ''.join(out)
     s = shape(s)
+    # A word set in italic, written *like this*. A block that is asterisked
+    # end to end is an epigraph and has had its asterisks taken off by the
+    # parser long before this, so only emphasis inside a line reaches here.
+    #
+    # It was printing as literal asterisks. Nobody saw it in the first two
+    # books because neither contains the syntax, and the four in Reflections
+    # sat in the middle of long paragraphs — but the Daily Companion leans on
+    # it 253 times, for the Hebrew word a sentence is turning on: *Shaul*
+    # spelled as *She'ol*, *Shechem* meaning shoulder.
+    #
+    # Guarded on both sides so a lone asterisk cannot pair with one three
+    # paragraphs away: no word character or second asterisk may touch the
+    # marks from outside, none may fall inside, and the run is bounded.
+    s = re.sub(r'(?<![\w*])\*([^*\n]{1,160}?)\*(?![\w*])', r'<i>\1</i>', s)
     # The raised numeral that calls a note.
     s = re.sub(r'\[\^(\d+)\]', r'<super><font size="8">\1</font></super>', s)
     # A link, written [text](address). Set in the same gold a link wears

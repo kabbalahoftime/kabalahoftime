@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v312**; the next is v313.
+nobody. Currently **v313**; the next is v314.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -77,8 +77,12 @@ Manuscripts in `docs/*.md`, typeset to PDFs at the repo root by the shared
 setter. Edit the manuscript, never the PDF.
 
 ```sh
-python3 tools/make_book_pdf.py docs/<name>.md <name>.pdf
+python3.13 tools/make_book_pdf.py docs/<name>.md <name>.pdf
 ```
+
+**`python3` on PATH is 3.11 and pip installs into 3.13**, so the setter only
+runs under `python3.13`. A fresh container has neither the packages nor the
+faces; `tools/setup_book_fonts.py` does both in one step and is safe to re-run.
 
 It handles verse, `[links](url)`, Hebrew (flush right, Frank Ruhl Libre built
 at run time from `fonts/`), bidi, and footnotes. Its docstring covers the
@@ -94,15 +98,30 @@ reflow that adds a page usually means something upstream broke.
 | `docs/ascents.md` | `ascents.pdf` | 52 |
 | `docs/reflections.md` | `reflections.pdf` | 119 |
 | `docs/alef-bet.md` | `alef-bet.pdf` | 41 |
+| `docs/daily-companion.md` | `daily-companion.pdf` | 494 |
 
 `book7_gathering_of_songs.pdf` and `perek_shirah_booklet.pdf` have no
 manuscript here.
 
 `a-year-inside-the-day.pdf` is the **old** companion text and is not linked
 from the app: it carries fabrications the rewrite removed. It has a manuscript
-now (`docs/a-year-inside-the-day.md`) but no setter — `make_book_pdf.py` opens
-a page at every `##`, which would give 364 of them. Setting it again is open
-work.
+now (`docs/a-year-inside-the-day.md`) and still no setter of its own.
+
+`docs/daily-companion.md` is the one manuscript here that is **generated, not
+written** — `tools/build_companion_book.py` makes it from `companion-days.json`,
+which is itself built from `docs/companion-summaries.md`. Edit the summaries;
+never this file and never the PDF. The chain is
+
+```sh
+# after any change to docs/companion-summaries.md
+python3 -I tools/build_companion_days.py ...          # as in the section below
+python3 -I tools/build_companion_book.py companion-days.json docs/daily-companion.md
+python3.13 tools/make_book_pdf.py docs/daily-companion.md daily-companion.pdf
+```
+
+A page at every `##` is what kept the companion off paper: 364 entries would
+have been 364 mostly-white pages. It is set by **week** instead — `##` takes
+the week and `###` the day — so 52 openings carry seven readings each.
 
 ## The daily companion
 
