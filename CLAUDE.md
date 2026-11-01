@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v301**; the next is v302.
+nobody. Currently **v312**; the next is v313.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -30,7 +30,7 @@ nobody. Currently **v301**; the next is v302.
 node check.mjs          # ~4 minutes, binds 127.0.0.1:8731
 ```
 
-55 checks over 17 sections, ending in `all checks passed`. Its own header
+56 checks over 17 sections, ending in `all checks passed`. Its own header
 explains what each section is for and which bug put it there — read that rather
 than guessing. Playwright lives at `/opt/pw-browsers/chromium`; override with
 `CHROMIUM=/path/to/chromium`.

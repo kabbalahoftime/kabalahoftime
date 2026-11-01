@@ -8024,12 +8024,6 @@ content: ''; float: right; width: 30px; height: 1em;
   // two at a time across the year and gives the finals their own five sets.
   // Keyed by the names SINGLE_LETTERS_22 and FINAL_LETTERS_MIC use, so the
   // day's letter finds its own line.
-  //
-  // NOTHING READS THIS NOW. The tap that opened these sentences stood under
-  // the KoT Book on Chochmah's face, and that block has gone to the shelf;
-  // the sentences are the book's own appendix, which the shelf opens. They
-  // are kept here rather than deleted because they are written text, not
-  // generated, and putting the tap back is one line if it is ever wanted.
   const LETTER_MEANINGS = {
     'Alef': 'Stands for Aluf\'oh Shel Olam, the Master of the World — two yuds, G-d above and the Jew below, joined by the vav of Emunah, faith.',
     'Bet': 'Stands for Bayit, home, for the dwelling in the lower realms that G-d desired — and it is the letter the Torah itself opens with.',
@@ -22558,10 +22552,48 @@ content: ''; float: right; width: 30px; height: 1em;
       ? `<strong>${gatesPrimName}</strong> <span style="font-size:1.1em">${gatesPrimHeb}</span>`
       : `<strong>${gatesPrimName}</strong> + <strong>${gatesCompName}</strong> <span style="font-size:1.1em">${gatesPrimHeb}${gatesCompHeb}</span>`;
 
-    // What each letter stands for was built here and opened from a tap under
-    // the KoT Book on this face. The book went to the shelf and the sentences
-    // went with it: they are the book's own appendix, which the shelf opens,
-    // and the face names the letters as it always did.
+    // Every letter the card is showing stands for something, so every one of
+    // them says so: the day's letter, and the one or two the set is named for
+    // — two or three each day, and one in the leap month's microcosm, which
+    // names a single letter or final letter on 27 of its 28 days. A day whose
+    // letter is also its set's, Alef on the first day of Alef & Bet, is
+    // named once.
+    const _ltShown = [];
+    const _ltAdd = (name, heb) => {
+      name = (name || '').trim();
+      if (!name || _ltShown.some(l => l.name === name)) return;
+      const meaning = LETTER_MEANINGS[name];
+      if (meaning) _ltShown.push({ name, heb: (heb || '').trim(), meaning });
+    };
+    if (inExtra && cy22Mic) {
+      _ltAdd(cy22Mic.label, cy22Mic.hebrew);
+    } else {
+      _ltAdd(cy22.dailyLetter, cy22.dailyHebrew);
+      const _setHeb = cy22.hebrew.split('&');
+      cy22.letters.split('&').forEach((n, i) => _ltAdd(n, _setHeb[i]));
+    }
+    // The sentences live behind a tap rather than on the face: the face
+    // already names the letters, and three paragraphs under them crowded out
+    // everything else the card has to say.
+    _ltDetailMain = _ltShown.length
+      ? `<div class="lt-notes">` + _ltShown.map(l =>
+          `<div class="detail-row" data-letter="${l.name}"><span class="detail-label">${l.name} ` +
+          `<span style="font-family:'Frank Ruhl Libre',serif;font-size:1.25em">${l.heb}</span>:</span>` +
+          `<span class="detail-value">${l.meaning}</span></div>`).join('') + `</div>`
+      : '';
+    _ltDetailMeta = _ltShown.map(l => l.name).join(' &nbsp;·&nbsp; ') +
+      ` &nbsp;·&nbsp; <a href="${CHOCHMA_KOT_DOC}" target="_blank" style="color:var(--gold)">Hebrew Alphabet, Perek Shirah, and Pirkei Avot ↗︎</a>`;
+    // One control, at the foot of the same block that names them. It used to
+    // list the letters again — Zayin ז · Tet ט · Yud י ▾ — because it stood
+    // under a KoT Book heading of its own, a block away from the Day and
+    // Cycle lines. It sits with them now, so naming them twice would be
+    // saying the same thing twice. And one rather than one per line: the
+    // 44px reach is an overlay centred on the word, so two controls on
+    // consecutive lines would each be reaching across the other.
+    const _ltOpen = _ltShown.length
+      ? `<br><span class="kot-summary" role="button" tabindex="0" ` +
+        `onclick="openLettersModal()">What the letters stand for ▾</span>`
+      : '';
 
     const _micGate = gatesMicrocosm(cy22Mic);
     if (inExtra && cy22Mic) {
@@ -22570,7 +22602,8 @@ content: ''; float: right; width: 30px; height: 1em;
         `Microcosm Day <strong>${cy22Mic.day}</strong> of ${cy22Mic.total}<br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22Mic.label}</strong> <span style="font-size:1.1em">${cy22Mic.hebrew}</span><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>` +
-        (_micGate ? `<br><span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + _micGate : '');
+        (_micGate ? `<br><span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + _micGate : '') +
+        _ltOpen;
       document.getElementById('chochmah-sub').innerHTML = '';
       document.getElementById('chochmah-tags').innerHTML = '';
     } else {
@@ -22579,7 +22612,8 @@ content: ''; float: right; width: 30px; height: 1em;
         `Day <strong>${cy22.day}</strong> · Cycle <strong>${cy22.cycle}</strong><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
         `<span style="font-size:0.8em;color:var(--ink-dim)">Cycle:</span> <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine;
+        `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine +
+        _ltOpen;
       document.getElementById('chochmah-sub').innerHTML = '';
       document.getElementById('chochmah-tags').innerHTML = '';
     }
@@ -25696,6 +25730,17 @@ content: ''; float: right; width: 30px; height: 1em;
   // both halves of the stars, 15 and 16, as Perek Shirah holds the stars
   // across them. It is one word read twice, so it is drawn once and marked
   // when either half is today's.
+  // Today's letters and what each one stands for — the day's, and the one or
+  // two the set is named after. Filled by render; opened from the line under
+  // them on the Chochmah face, which is the card that names them. It hung
+  // under that card's KoT Book until the book went to the shelf; the book is
+  // still where the sentences come from, and the pop-up's foot says so.
+  let _ltDetailMain = '', _ltDetailMeta = '';
+  function openLettersModal() {
+    if (!_ltDetailMain) return;
+    openInfoPopup('The Letters — הָאוֹתִיּוֹת', _ltDetailMain, _ltDetailMeta);
+  }
+
   let _wellIdx = [];
   function openWellSong() {
     const DOUBLED = 15;                       // the second במחקק, 0-based
