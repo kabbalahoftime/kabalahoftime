@@ -2173,6 +2173,18 @@ letter-spacing: 0;
    card as well; the two creative-writing volumes stand on none, so this is
    the only way to them. */
 .book-shelf { text-align: left; max-width: 420px; margin: 0 auto; }
+/* The shelf in two sections. Set like every other section label on the page
+   — Cinzel, tracked, gold — so the heading reads as the page's own rather
+   than as a book with no link. */
+.book-section {
+font-family: 'Cinzel', serif;
+font-size: calc(10.5px * var(--ts, 1));
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(--gold);
+margin: 16px 0 2px;
+}
+.book-section:first-child { margin-top: 0; }
 /* 12px of padding on a 18px line gives the row the finger's worth of height
    the cards' own links get, without moving anything drawn. */
 .book-row {
@@ -3755,7 +3767,8 @@ content: ''; float: right; width: 30px; height: 1em;
     </div>
     <div class="pane-body pane-prose" data-pane="books">
     <p>Fourteen books. Tap a title to open it.</p>
-    <p>Seven of them are the books of the week &mdash; one to each Sefirah, Chesed through Malchut, named beside it, and each one linked to this week&rsquo;s writing as well as to the whole book. The other seven are read whenever you like. If you are starting, any of the seven is this week&rsquo;s.</p>
+    <p>Four of them are keyed to nothing &mdash; stories, poems and the pieces on the portions. Read those whenever you like.</p>
+    <p>The other ten are the Kabbalah of Time books. Three stand on a card, named beside them. Seven are the books of the week, one to each Sefirah from Chesed to Malchut, and each of those links to this week&rsquo;s writing as well as to the whole book.</p>
     <div class="book-shelf" id="kot-books-list"></div>
     </div>
   </div>
@@ -11770,6 +11783,19 @@ content: ''; float: right; width: 30px; height: 1em;
     { book: 'Living Likutei Moharan', what: 'Rebbe Nachman’s lessons through the year — the book behind Keter’s daily reading.', emoji: '📖', where: 'Keter',
       url: 'https://drive.google.com/file/d/1JZtj5EGd4mVlqmiysAWSls61aL4TJp1J/view?usp=drivesdk' },
     { book: 'Alef Bet', what: 'Sixteen cycles of twenty-two days: two letters to each, the creatures that sing for them in Perek Shirah, and the mishnayot that count for them in Pirkei Avot.', emoji: '🔤', where: 'Chochmah', url: CHOCHMA_KOT_DOC },
+    // And the companion, which is Binah's: it files its 364 entries the way
+    // Binah files the seven, one book for one week, each day. It sat below
+    // with the creative writing, which put a book the app hands the reader
+    // every morning among four that turn with nothing. Here the three that
+    // name a card read Keter, Chochmah, Binah down the column.
+    //
+    // Set from the same entries the app fetches rather than written again:
+    // tools/build_companion_book.py turns companion-days.json into
+    // docs/daily-companion.md and the shared setter typesets that, so the
+    // page and the book cannot come to say different things.
+    { book: 'A Daily Companion', what: 'All 364 daily readings in one volume — one KoT Book for one week, each day, in the order the year reads them.', emoji: '📅',
+      where: 'Binah',
+      url: 'daily-companion.pdf' },
   ];
   // And one that is not a working book at all: the allegory of the thirteen
   // phases, written in 2013 — the boy who moves from land to land and is a
@@ -11777,28 +11803,11 @@ content: ''; float: right; width: 30px; height: 1em;
   // counts out in days. Typeset from the blog's text and carried here rather
   // than linked away to Drive, so it opens even with nothing to connect to.
   const KOT_BOOKS_ALSO = [
-    // The companion first, above the creative writing. It is the one book
-    // here a reader is already inside: the app hands them one of its 364
-    // entries every day, and this is all of them at once, in the order the
-    // year reads them — seven books to a week, fifty-two weeks. Nothing else
-    // on the shelf is a book you are partway through without having opened.
-    //
-    // Set from the same entries the app fetches rather than written again.
-    // tools/build_companion_book.py turns companion-days.json into
-    // docs/daily-companion.md, and the shared setter typesets that, so the
-    // page and the book cannot come to say different things.
-    // Binah, not "the whole year". Every other line on this shelf answers
-    // the same question — which card is this the book of — and the companion
-    // files its 364 entries the way Binah files the seven: one book for one
-    // week, each day. Saying the span instead was answering a question
-    // nobody else on the shelf was being asked, and it put the three that
-    // name a card out of step. They read Keter, Chochmah, Binah now.
-    { book: 'A Daily Companion', what: 'All 364 daily readings in one volume — one KoT Book for one week, each day, in the order the year reads them.', emoji: '📅',
-      where: 'Binah',
-      url: 'daily-companion.pdf' },
-    // Binah first so the three read Keter, Chochmah, Binah down the column —
-    // the upper three in their own order — and then what they are, which the
-    // two above them do not need saying because their names say it.
+    // These four stand in a section of their own, above the rest. The pane
+    // is called KoT Books and these are not that: they are keyed to nothing
+    // — not a day, not a week, not a card — where every other book here is
+    // the book of something the app counts. Mixed in among them they read as
+    // ten working books with four strays in the middle.
     //
     // Two of them, because they are a pair and the second book says so in its
     // own last lines: from the new moon to the next, the moon learning month
@@ -11852,15 +11861,19 @@ content: ''; float: right; width: 30px; height: 1em;
       (note ? ' <span class="book-where">· ' + note + '</span>' : '') +
       (slot ? ' <span class="book-now" id="' + slot + '"></span>' : '') +
       (b.what ? '<div class="book-what">' + b.what + '</div>' : '') + '</div>';
-    // The three that stand on a card come first — Keter, Chochmah, Binah, in
-    // the order of the cards themselves — and the seven of the week follow.
-    // The seven were first when the shelf was only seven; they are the longer
-    // list but the one a reader already meets every day on Malchut, so the
-    // three that have no other way in are better at the top.
+    const _head = (s) => '<div class="book-section">' + s + '</div>';
+    // Two sections. The four that are keyed to nothing stand first, under
+    // their own heading, because they are the ones a reader can simply open
+    // — the other ten are the book of a day, a week or a card, and reading
+    // them means knowing which. Then the Kabbalah of Time books: the three
+    // that stand on a card, Keter, Chochmah and Binah in the order of the
+    // cards themselves, and the seven of the week after them.
     el.innerHTML =
+    _head('Read whenever you like') +
+    KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('') +
+    _head('The Kabbalah of Time books') +
     KOT_BOOKS_MORE.map(b => _row(b, b.where,
       b.url === CHOCHMA_KOT_DOC ? 'kot-shelf-set' : '')).join('') +
-    KOT_BOOKS_ALSO.map(b => _row(b, b.where)).join('') +
     KOT_BOOKS.map((b, i) =>
       _row(b, SEFIROT_777[i] || '', 'kot-shelf-week-' + (i + 1))).join('');
     // Keter's link is written into the page rather than rendered, so it is
