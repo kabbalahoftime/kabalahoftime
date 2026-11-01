@@ -2020,15 +2020,12 @@ flex: 1;
 .mal-today .mal-text-name {
 color: var(--gold);
 }
-/* The book's name is the control that opens its week, so it is allowed to
-   wrap — held on one line it was cut off inside the Today's Reading box. */
-.mal-book-label.mal-book-open { cursor:pointer; white-space:normal; display:inline-block; }
-/* The week's seven books stand on the face now, so their names and the label
-   that opens each one are real targets rather than rows inside a shut panel,
-   where a reach probe read them as out of view and let them pass. Each gets
-   the finger's worth of height, taken back in margin so the line stays where
-   it is — the same trade every other link on a card's face makes. */
-.mal-book-row a, .mal-book-label.mal-book-open, #malchut-week-face .mal-text-name a {
+/* The week's seven rows stand on the face now, so the links in them are real
+   targets rather than rows inside a shut panel, where a reach probe read them
+   as out of view and let them pass. Each gets the finger's worth of height,
+   taken back in margin so the line stays where it is — the same trade every
+   other link on a card's face makes. */
+.mal-book-row a, #malchut-week-face .mal-text-name a {
 /* 16 rather than 12: these lines are 13px and 16px tall, and twelve either
    side left them at 37 and 40. */
 padding: 16px 6px;
@@ -2041,9 +2038,9 @@ z-index: 1;
    reach above and below away again. */
 #malchut-week-face .mal-book-row { overflow: visible; }
 
-/* The week's seven books, folded under the step they belong to. The summary
-   reads as one of this card's own labels rather than as a browser control,
-   so the default marker goes and a ▾ is drawn where the book rows draw one. */
+/* The week's seven readings, folded under the step they belong to. The
+   summary reads as one of this card's own labels rather than as a browser
+   control, so the default marker goes and a ▾ is drawn in its place. */
 .mal-week-fold { margin-top: 10px; }
 .mal-week-fold > summary {
   list-style: none;
@@ -2060,18 +2057,6 @@ z-index: 1;
 .mal-week-fold[open] > summary::after { content: ' \25B4'; }
 .mal-week-fold > summary:hover { color: var(--gold-mid); }
 .mal-week-fold > div { margin-top: 8px; }
-.mal-book-more { font-size:0.8em; opacity:.6; }
-.mal-book-label {
-font-size: calc(10.5px * var(--ts, 1));
-letter-spacing: 0.8px;
-text-transform: uppercase;
-color: var(--gold);
-opacity: 0.75;
-white-space: nowrap;
-}
-.mal-today .mal-book-label {
-opacity: 1;
-}
 
 .mal-fields {
 padding: 4px 8px 5px;
@@ -5247,7 +5232,7 @@ content: ''; float: right; width: 30px; height: 1em;
           <div id="malchut-cycle-name" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);font-style:italic;margin-bottom:6px;">Daily Text</div>
           <div class="sefirah-main-text" id="malchut-main">Loading…</div>
           <div class="sefirah-sub-text" id="malchut-sub"></div>
-          <!-- THE WEEK'S SEVEN BOOKS — today's reading, the week's theme, and
+          <!-- THE WEEK'S SEVEN READINGS — today's text, the week's theme, and
                one line to each night. They carry no מעלה, no מיעוט, no ✡ and
                no menorah of their own, and they stood at the foot of Ma'alot
                as a block of their own, which put today's reading on the page
@@ -5255,9 +5240,15 @@ content: ''; float: right; width: 30px; height: 1em;
                the week. They are folded under the step they belong to now,
                shut, so the step reads as one thing and the week is one tap
                away. Native details/summary: it needs no script, it remembers
-               nothing it should not, and it is open to a keyboard. -->
+               nothing it should not, and it is open to a keyboard.
+
+               Seven readings, not seven books: each row named its KoT book as
+               well, which put that set of seven on the page a second time in
+               a second visual language. Binah names the day's book, opens its
+               week's writing and links the other six, and is the only place
+               they stand now. -->
           <details class="mal-week-fold">
-            <summary>The week&rsquo;s seven books</summary>
+            <summary>The week&rsquo;s seven readings</summary>
             <div id="malchut-week-face"></div>
           </details>
         </div>
@@ -24670,6 +24661,17 @@ content: ''; float: right; width: 30px; height: 1em;
 
     const todayBook = DAY_BOOKS[sef.dayNum - 1];
 
+    // What the Summary pop-up reads. It used to be filled while Malchut drew a
+    // book's name on each of its seven rows, so the pop-up only worked once
+    // that card had rendered. The books have come off Malchut, so the filling
+    // stands on its own line here and depends on nothing being drawn.
+    ['Friday','Shabbat','Sunday','Monday','Tuesday','Wednesday','Thursday']
+      .forEach((day, i) => {
+        const db = DAY_BOOKS[i];
+        _malBooks[i] = { day, emoji: db.emoji, book: db.book, url: db.url || '',
+                         weekUrl: db.weekUrl || '', fields: db.fields || [] };
+      });
+
     // Card face
     // Helper function to get parasha-specific portion for a Malchut text
     function getParashaMapping(textName, parashaName) {
@@ -25114,9 +25116,11 @@ content: ''; float: right; width: 30px; height: 1em;
     const todayThemeHtml = (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]'))
       ? `<div style="font-size:calc(11px * var(--ts, 1));color:var(--ink-dim);font-style:italic;font-weight:400;">${parashaMapping.theme}</div>`
       : '';
-    const todayBookLabelHtml =
-      `<span class="mal-book-label mal-book-open" onclick="openKotBookModal(${todayIdx})">` +
-        `${todayBook.emoji} ${todayBook.book} <span class="mal-book-more">▾</span></span>`;
+    // No KoT book on this row. The seven books are a reading keyed to the day,
+    // and Binah is the card that says so — it names the day's book, opens its
+    // week's writing and links the other six. Here they were a second copy in
+    // another visual language, which left a reader to work out that the two
+    // were the same seven.
     const todayRow = `<div class="mal-today-highlight">` +
       `<div class="mal-today-badge">★ Today's Reading</div>` +
       `<div class="mal-book-row mal-today">` +
@@ -25125,14 +25129,13 @@ content: ''; float: right; width: 30px; height: 1em;
           `<div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;">` +
             `<span class="mal-text-name" style="flex:none;">${todayNameLine}</span>` +
             todayThemeHtml +
-            `<div>${todayBookLabelHtml}</div>` +
           `</div>` +
         `</div>` +
       `</div>` +
       `</div>`;
 
     // Full 7-day week for context
-    const weekRows = DAY_BOOKS.map((db, i) => {
+    const weekRows = DAYS_LABELS.map((_dayLabel, i) => {
       const isCurrent = (i + 1) === sef.dayNum;
       const textName = displayTexts[i];
       let displayName = textName;
@@ -25176,17 +25179,12 @@ content: ''; float: right; width: 30px; height: 1em;
         }
       }
       
-      // The week's reading for that book is kept behind its name rather than
-      // set out in full seven times over — it was the bulk of this card, and
-      // the same book already stands on Binah's face.
-      _malBooks[i] = { day: DAYS_LABELS[i], emoji: db.emoji, book: db.book,
-                       url: db.url || '', weekUrl: db.weekUrl || '', fields: db.fields || [] };
+      // Each row is the day's text and where to read it. The KoT book for that
+      // day is Binah's, and naming it again here said the same seven twice.
       return `<div class="mal-book-row${isCurrent ? ' mal-today' : ''}">` +
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[i]}</span>` +
           `<span class="mal-text-name">${displayName}${themeHTML}</span>` +
-          `<span class="mal-book-label mal-book-open" onclick="openKotBookModal(${i})">` +
-            `${db.emoji} ${db.book} <span class="mal-book-more">▾</span></span>` +
         `</div>` +
         `</div>`;
     }).join('');
@@ -25793,8 +25791,10 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   // The seven Kabbalah of Time books, one to each day of the week, kept for
-  // the pop-up that opens from a book's name in Malchut — and from the book
-  // named on Binah's face, which is the same book on the same day.
+  // the Summary pop-up on Binah's face — the week's reading for the book the
+  // day has come to. Malchut carried the same seven under their own names and
+  // opened the same pop-up; that was one set of books said twice, and it is
+  // gone, so this is read from one place now.
   const _malBooks = [];
   function openKotBookModal(i) {
     const b = _malBooks[i];
