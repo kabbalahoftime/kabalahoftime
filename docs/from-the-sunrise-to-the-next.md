@@ -26,11 +26,7 @@ It happened the way everything happened in those years: almost all at once. He j
 
 ## Part II | Noon |
 
-He was called back to the various lands he once inhabited, and in each one he would now play a different role. Incredibly, he would now often return to an elevated Land of the Pigs. However, this time, not as someone subservient to a ruthless king, but as someone who supported the good that could be found within it.
-
-He also returned to a more refined Land of the Bulls, where he would serve as a trusted advisor. Similarly, he returned to the Land of the Cats, where he had the opportunity to soar and expand on previous discoveries.
-
-He returned also to the Land of the Dogs, this time, as a teacher himself, fulfilling the directive of the Great Lion. And finally, he would return to the Land of the Donkeys, humbly taking on the yoke himself, where his children now began their own similar journeys, with the Promised Land shining on the horizon.
+He was called back to the various lands he once inhabited, and in each one he would now play a different role.
 
 ### The Land of the Pigs, Again | Rome
 
