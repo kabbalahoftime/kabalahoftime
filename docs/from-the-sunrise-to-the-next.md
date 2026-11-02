@@ -18,9 +18,7 @@ He remembered the first message he had received from the Great Lion: that he was
 
 Back in the Land of the Sweet Waters, things began to improve. He had more energy; the work grew more interesting; he was given more young cubs to teach. And the more he taught, the clearer it became: he had always been meant to be a teacher.
 
-There was repetition again — but it no longer felt stagnant. The highest growth, he saw, would come from finding consistency. That was the challenge now. In truth it had been the challenge all along, the message received at the very beginning of his journeys.
-
-The key to the old-new approach: to see not only each month and each week, but the smaller cycles too — each day, each moment. Every day a whole year, opening with the new year and closing with repentance. Every day, the Book received anew and transmitted to the next generation. Every day: faith, gratitude, love, joy — and the equanimity of feeling that all things rest in the Teacher's hands.
+There was repetition again — but it no longer felt stagnant. In truth it had been the challenge all along, the message received at the very beginning of his journeys.
 
 It happened the way everything happened in those years: almost all at once. He joined a new house of prayer, took up new work, and even a new way to share the book, and started teaching at a new school, all of this while the man and his family moved into a new house.
 
@@ -55,6 +53,8 @@ As a boy, he had arrived in the Land of the Cats with his ears closed and left w
 He returned there with the same spirit of discovery. However, this time, he was not looking for guides to the texts, nor for rabbits to lead the way. This time, he was there to bring everything together, and build it into a system. Everything he had learned, applied. And the land itself he found in a place without ground — the feeds, the screens — a land of scattering, as the enemy of his people once told its king: one people, scattered and dispersed through all his provinces. It would be made inside that land, out of its own materials: a focus and a healing for it, from within.
 
 For years it had been a book and a journal, added to slowly, entry by entry. Then a new instrument arrived — and the work went exponential. What had been pages became a living calendar: every day marked, many ways at once, the whole system complete, interactive and awake. It all happened with tremendous power and speed, both uplifting and intoxicating.
+
+The key to the old-new approach: to see not only each month and each week, but the smaller cycles too — each day, each moment. Every day a whole year, opening with the new year and closing with repentance. Every day, the Book received anew and transmitted to the next generation. Every day: faith, gratitude, love, joy — and the equanimity of feeling that all things rest in the Teacher's hands.
 
 The system also had the potential to focus the generation's scattered attention. What the work asked of him was something of the humble shepherd of faith, who rose to the mountain to bring down knowledge, and who was willing to sacrifice everything for the sake of his people's liberation.
 
@@ -148,7 +148,7 @@ On the seventh of October,[^1] a day after his brother's birthday, the man lay i
 
 The mending was not their parents' to complete; it was his and his brother's — the homes held together, the table around which the chariot sat, the river that took his brother on a basket now turned to flow both ways.
 
-And the mending, the man understood at last, is the sun's work. The sun sweetens the fruit. That is what the second book does: it does not ripen by force. It sweetens — the judgments, the home, the brothers — until the bitter turns drinkable. From the new moon to the next: the moon learning, month by month, to shine like the sun. From the sunrise to the next: the sweetening, continuing.
+And the mending, the man understood at last, is the sun's work. The sun sweetens the fruit. It does not ripen by force. It sweetens — the judgments, the home, the brothers — until the bitter turns drinkable. From the new moon to the next: the moon learning, month by month, to shine like the sun. From the sunrise to the next: the sweetening, continuing.
 
 ### Epilogue |
 
