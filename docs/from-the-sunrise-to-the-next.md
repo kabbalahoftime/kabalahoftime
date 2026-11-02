@@ -18,7 +18,7 @@ He remembered the first message he had received from the Great Lion: that he was
 
 Back in the Land of the Sweet Waters, things began to improve. He had more energy; the work grew more interesting; he was given more young cubs to teach. And the more he taught, the clearer it became: he had always been meant to be a teacher.
 
-There was repetition again — but it no longer felt stagnant. In truth it had been the challenge all along, the message received at the very beginning of his journeys.
+There was repetition again — but it no longer felt stagnant. Consistency had been the challenge all along, the message received at the very beginning of his journeys.
 
 It happened the way everything happened in those years: almost all at once. He joined a new house of prayer, took up new work, and even a new way to share the book, and started teaching at a new school, all of this while the man and his family moved into a new house.
 
