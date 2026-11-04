@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v316**; the next is v317.
+nobody. Currently **v317**; the next is v318.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -100,8 +100,10 @@ reflow that adds a page usually means something upstream broke.
 | `docs/alef-bet.md` | `alef-bet.pdf` | 41 |
 | `docs/daily-companion.md` | `daily-companion.pdf` | 494 |
 
-`book7_gathering_of_songs.pdf` and `perek_shirah_booklet.pdf` have no
-manuscript here.
+`book7_gathering_of_songs.pdf`, `perek_shirah_booklet.pdf` and
+`branches-roots.pdf` have no manuscript here. Branches / Roots is on the
+shelf and is also the source `branches.json` is built from; its row says it
+was written with AI.
 
 `a-year-inside-the-day.pdf` is the **old** companion text and is not linked
 from the app: it carries fabrications the rewrite removed. It has a manuscript
