@@ -3243,6 +3243,109 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    marked runs take the page's Hebrew face — and none of its tracking, which
    is for the Cinzel capitals and does Hebrew no favours. */
 .companion [lang="he"] { font-family:'Frank Ruhl Libre', serif; letter-spacing:0; }
+
+/* ── BRANCHES / ROOTS ──
+   Built to the companion's pattern, because the two are the same kind of
+   thing: a long read offered under the cards rather than standing in front
+   of them. Shut until asked for, the heading is the control, and the arrow
+   turns rather than swapping glyph. */
+.branches {
+  margin:14px 0 0; padding:12px 14px 10px;
+  border:1px solid var(--border-strong); border-left:2px solid var(--gold);
+  border-radius:8px; background:var(--card, #fdfbf6);
+}
+.branches-h { margin:0; font-weight:400;
+  font-size:calc(12px * var(--ts, 1)); line-height:1.45; }
+.branches-open {
+  display:block; width:100%; text-align:left; cursor:pointer;
+  background:none; border:none; font:inherit; color:inherit;
+  padding:2px 0; position:relative;
+}
+.branches-open:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+.branches-head {
+  display:block; font-family:'Cinzel',serif; font-weight:400;
+  letter-spacing:1.6px; text-transform:uppercase; color:var(--gold);
+  margin:0 1.8em 0 0;
+}
+.branches-sub {
+  display:block; margin:5px 1.8em 0 0;
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:1.2em; line-height:1.4; color:var(--ink-mid);
+}
+.branches-chev {
+  position:absolute; right:2px; bottom:0; color:var(--gold);
+  font-size:calc(13px * var(--ts, 1)); line-height:1;
+  transition:transform 0.18s ease;
+}
+.branches.is-open .branches-chev { transform:rotate(180deg); }
+.branches-lede {
+  margin:12px 0 4px; font-size:calc(13px * var(--ts, 1)); line-height:1.7;
+  color:var(--ink-mid); font-style:italic;
+}
+
+/* One card to a Sefirah. The label column repeats the cards above it — the
+   name, the letters — so a reader meeting Chesed here knows it is the card
+   they marked this morning and not a second scheme wearing the same words. */
+.branch-card {
+  display:flex; gap:12px; align-items:flex-start;
+  border:1px solid var(--border); border-radius:6px;
+  padding:11px 12px; margin-top:10px;
+}
+.branch-label { flex:0 0 auto; width:4.6em; text-align:left; }
+.branch-sef {
+  font-family:'Cinzel',serif; font-size:calc(11px * var(--ts, 1));
+  letter-spacing:1.4px; color:var(--gold); line-height:1.25;
+}
+.branch-heb {
+  font-family:'Frank Ruhl Libre',serif; letter-spacing:0;
+  font-size:calc(13px * var(--ts, 1)); color:var(--gold); margin-top:2px;
+}
+/* Only Mathematics carries one, and it is the book's own reading: the crown
+   that is also knowledge. Every other card's station is its Sefirah, which
+   the column already says, so the line is not printed ten times to say
+   nothing nine of them. */
+.branch-station {
+  font-size:calc(9.5px * var(--ts, 1)); letter-spacing:1.6px;
+  text-transform:uppercase; color:var(--ink-dim); margin-bottom:2px;
+}
+.branch-body { flex:1 1 auto; min-width:0; }
+.branch-name {
+  margin:0; font-family:'Cormorant Garamond',serif; font-weight:600;
+  font-size:calc(18px * var(--ts, 1)); line-height:1.25; color:var(--ink);
+}
+.branch-sub {
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); margin-top:1px;
+}
+.branch-open p {
+  font-size:calc(13.5px * var(--ts, 1)); line-height:1.72;
+  color:var(--ink); margin:9px 0 0;
+}
+/* The five sections, each behind its own summary. Native details: no script,
+   open to a keyboard, and it remembers nothing it should not. The marker is
+   drawn rather than the browser's, to match the folds elsewhere on the page. */
+.branch-fold { margin-top:9px; border-top:1px solid var(--border); }
+.branch-fold > summary {
+  list-style:none; cursor:pointer; padding:9px 0 7px;
+  font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1));
+  letter-spacing:1.5px; text-transform:uppercase; color:var(--gold);
+}
+.branch-fold > summary::-webkit-details-marker { display:none; }
+.branch-fold > summary::after { content:' \25BE'; font-size:0.9em; opacity:.6; }
+.branch-fold[open] > summary::after { content:' \25B4'; }
+.branch-fold > summary:hover { color:var(--gold-mid); }
+.branch-fold p {
+  font-size:calc(13.5px * var(--ts, 1)); line-height:1.72;
+  color:var(--ink); margin:0 0 10px;
+}
+@media (max-width: 420px) {
+  /* The label column stops being a column: at this width four-and-a-half ems
+     taken off the front left Mathematics setting two words to a line. */
+  .branch-card { display:block; }
+  .branch-label { width:auto; margin-bottom:5px; }
+  .branch-heb { display:inline; margin-left:6px; }
+  .branch-sef { display:inline; }
+}
 .comp-body p { margin:0 0 9px; }
 .comp-body p:last-child { margin-bottom:0; }
 /* A list in the manuscript arrives as one paragraph an item, opening with a
@@ -5306,6 +5409,39 @@ content: ''; float: right; width: 30px; height: 1em;
 </div>
 
   </div>
+
+  <!-- BRANCHES / ROOTS — the Sefirot and the sciences.
+       Ten disciplines on the same tree the cards above are built on, one to
+       each Sefirah, from Mathematics at the crown to Law in the kingdom. It
+       stands under Malchut because that is where the tree ends and because
+       these are branches rather than readings: nothing here turns with the
+       day, so it would be wrong among cards that do.
+
+       Shut by default, and its text is not in this page. 153KB of prose
+       belongs no more in a page that must parse before anything draws than
+       the companion's own third of a megabyte did, and unlike the companion
+       nothing here is wanted on load — so branches.json is fetched the first
+       time a reader opens the section, and not before. The service worker's
+       JSON rule then holds it for offline; it is deliberately not
+       pre-cached, for the reason written against companion.json there.
+
+       Its cards carry their own classes rather than .sefirah-card. That
+       class is what buildCardPanes files into Ma'alot, Mi'utim, Stars and
+       Menorah, and these have five sections of their own with other names. -->
+  <section id="branches" class="branches" aria-labelledby="branches-open">
+    <h2 class="branches-h"><button type="button" id="branches-open" class="branches-open"
+        aria-expanded="false" aria-controls="branches-panel" onclick="toggleBranches()">
+      <span class="branches-head">Branches / Roots</span>
+      <span class="branches-sub">The Sefirot and the Sciences</span>
+      <span class="branches-chev" aria-hidden="true">&#9662;</span>
+    </button></h2>
+    <div id="branches-panel" hidden>
+      <p class="branches-lede">Every discipline is a branch. Torah is the root and the
+        blueprint &mdash; not one subject among the ten, but the ground from which each of
+        them grows and to which each chapter returns.</p>
+      <div id="branches-list">Loading&hellip;</div>
+    </div>
+  </section>
 
   <!-- FOOTER -->
 
@@ -16387,6 +16523,71 @@ content: ''; float: right; width: 30px; height: 1em;
       try { localStorage.setItem('kotCompanionSeen', '1'); } catch (e) {}
       compBadge();
     }
+  }
+
+  // ── BRANCHES / ROOTS ──
+  // Ten disciplines on the tree, one to each Sefirah, read from their root in
+  // Torah. The text is 153KB and is not in this page: nothing above the fold
+  // wants it, so it is fetched the first time the section is opened and never
+  // for a reader who does not open it. The companion is fetched on load
+  // because the day's entry is wanted on load; this is not.
+  let BRANCHES = null, _branchesAsked = false;
+
+  function toggleBranches(force) {
+    const sec = document.getElementById('branches');
+    const btn = document.getElementById('branches-open');
+    const panel = document.getElementById('branches-panel');
+    if (!sec || !btn || !panel) return;
+    const open = (typeof force === 'boolean') ? force : panel.hasAttribute('hidden');
+    if (open) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '');
+    sec.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) loadBranches();
+  }
+
+  function loadBranches() {
+    if (_branchesAsked || BRANCHES) return;
+    _branchesAsked = true;
+    fetch('branches.json')
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((j) => { BRANCHES = j; drawBranches(); })
+      .catch(() => {
+        // Asked for and not delivered. Say so and offer the ask again,
+        // rather than leaving "Loading…" standing for ever with no reason —
+        // which is the one failure this app has that tells a reader nothing.
+        _branchesAsked = false;
+        const el = document.getElementById('branches-list');
+        if (el) el.innerHTML = '<p class="branches-lede">The chapters did not load. ' +
+          '<span class="kot-summary" role="button" tabindex="0" ' +
+          'onclick="loadBranches()">Try again ▾</span></p>';
+      });
+  }
+
+  function drawBranches() {
+    const el = document.getElementById('branches-list');
+    if (!el || !BRANCHES || !BRANCHES.chapters) return;
+    const esc = (s) => String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const paras = (a) => (a || []).map((p) => `<p>${esc(p)}</p>`).join('');
+    el.innerHTML = BRANCHES.chapters.map((c) =>
+      `<article class="branch-card">` +
+        `<div class="branch-label">` +
+          `<div class="branch-sef">${esc(c.sefirah)}</div>` +
+          `<div class="branch-heb" lang="he">${esc(c.hebrew)}</div>` +
+        `</div>` +
+        `<div class="branch-body">` +
+          // Only Mathematics stands on two: the crown that is also knowledge.
+          // The other nine would print the name the column has just said.
+          (c.station && c.station !== c.sefirah
+            ? `<div class="branch-station">${esc(c.station)}</div>` : '') +
+          `<h3 class="branch-name">${esc(c.name)}</h3>` +
+          `<div class="branch-sub">${esc(c.subtitle)}</div>` +
+          `<div class="branch-open">${paras(c.opening)}</div>` +
+          (c.sections || []).map((s) =>
+            `<details class="branch-fold"><summary>${esc(s.head)}</summary>` +
+            paras(s.paras) + `</details>`).join('') +
+        `</div>` +
+      `</article>`).join('');
   }
 
   // The text of an entry at the reader's depth, falling back as described.

@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v315**; the next is v316.
+nobody. Currently **v316**; the next is v317.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -122,6 +122,38 @@ python3.13 tools/make_book_pdf.py docs/daily-companion.md daily-companion.pdf
 A page at every `##` is what kept the companion off paper: 364 entries would
 have been 364 mostly-white pages. It is set by **week** instead — `##` takes
 the week and `###` the day — so 52 openings carry seven readings each.
+
+## Branches / Roots
+
+`branches.json` is ten chapters — one discipline to each Sefirah, Mathematics
+at the crown to Law in the kingdom — shown in a shut section under Malchut.
+Each chapter has an opening and five sections: a Torah-root section named
+differently every time, `First doors`, `How X works`, `The present edge`, and
+a closing `The ... at work`. Physics is the one chapter whose root section is
+a quotation, `"Let there be light"`.
+
+It is **built from the PDF, not written here**, so the book stays the source:
+
+```sh
+python3.13 -I tools/build_branches.py <the book>.pdf branches.json
+```
+
+The builder reads the page's **layout**, not its text, and asserts what it
+finds — fifty 18pt headings, ten chapters, five sections each — so a changed
+PDF fails loudly rather than quietly losing a section. Font sizes carry the
+structure (36 title, 18 heading, 16 subtitle, 14.7 body, 12.7 station) and
+paragraphs come from the vertical gap: 23-24 points inside a paragraph, 36-37
+between, nothing in between. Line length will not do it — a last line can run
+the full column, and on page 4 one does.
+
+153KB, so it is **fetched when the section is first opened**, never on load,
+and deliberately **not pre-cached** — the same reasoning written against
+`companion.json` in `service-worker.js`. The service worker's JSON rule holds
+it for offline once a reader has opened it.
+
+The cards use `.branch-card`, not `.sefirah-card`: that class is what
+`buildCardPanes` files into the four panes, and these have five sections of
+their own.
 
 ## The daily companion
 
