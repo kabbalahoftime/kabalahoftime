@@ -12014,13 +12014,17 @@ content: ''; float: right; width: 30px; height: 1em;
     // group, in From the Sunrise to the Next: lion and ox and eagle and man.
     { book: 'Reflections', what: 'A piece written on each of the fifty-four Torah portions, Bereshit to V’Zot HaBracha.', emoji: '🦁', where: 'The Torah Portions',
       url: 'reflections.pdf' },
-    // Last of this group rather than among the Kabbalah of Time books. Every
-    // book in that other section is the book of something the app counts —
-    // a day, a week, a card — and this one is not: it is a reading of the
-    // tree rather than a part of the count. It sits at the foot here because
-    // it is the one piece that is not a story, a poem or a portion, so it
-    // does not interrupt the pair, the poems and the parashiyot above it.
-    //
+  ];
+  // A shelf of its own, because the two it sat on in turn were each wrong
+  // about it in a different way. Among the Kabbalah of Time books it claimed
+  // to be the book of something the app counts, which it is not. Under
+  // Creative Writing and Reflections on the Parasha it made that heading
+  // false for a fifth of what stood beneath it: this is neither a story, a
+  // poem nor a portion. It is expository, so it is named for what it is.
+  //
+  // One book on it today. It is the beginning of a shelf rather than the
+  // whole of one, which is why the heading is a category and not a title.
+  const KOT_BOOKS_ARTS = [
     // The row says it was written with AI. A reader of a book about what can
     // be known should be told how the book was made, and the companion's own
     // line at the foot of its panel says the same thing.
@@ -12052,15 +12056,23 @@ content: ''; float: right; width: 30px; height: 1em;
       (slot ? ' <span class="book-now" id="' + slot + '"></span>' : '') +
       (b.what ? '<div class="book-what">' + b.what + '</div>' : '') + '</div>';
     const _head = (s) => '<div class="book-section">' + s + '</div>';
-    // Two sections. The four that are keyed to nothing stand first, under
-    // their own heading, because they are the ones a reader can simply open
-    // — the other ten are the book of a day, a week or a card, and reading
-    // them means knowing which. Then the Kabbalah of Time books: the three
-    // that stand on a card, Keter, Chochmah and Binah in the order of the
-    // cards themselves, and the seven of the week after them.
+    // Three sections, and the two that are keyed to nothing come first,
+    // because they are the ones a reader can simply open: the ten below them
+    // are the book of a day, a week or a card, and reading one means knowing
+    // which. The author's own stories, poems and portions; then Arts and
+    // Sciences, which is expository and is neither; then the Kabbalah of
+    // Time books — the three that stand on a card, Keter, Chochmah and Binah
+    // in the order of the cards themselves, and the seven of the week after
+    // them.
+    //
+    // Arts and Sciences sits between rather than last. The two substantial
+    // groups stand as the ends of the shelf, and a shelf that finished on a
+    // single row would read as a stub rather than as a beginning.
     el.innerHTML =
     _head('Creative Writing and Reflections on the Parasha') +
     KOT_BOOKS_ALSO.map(b => _row(b, b.where, b.slot)).join('') +
+    _head('Arts and Sciences') +
+    KOT_BOOKS_ARTS.map(b => _row(b, b.where, b.slot)).join('') +
     _head('The Kabbalah of Time books') +
     KOT_BOOKS_MORE.map(b => _row(b, b.where, b.slot)).join('') +
     KOT_BOOKS.map((b, i) =>
