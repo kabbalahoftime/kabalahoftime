@@ -1,4 +1,4 @@
-"""Build branches.json — the ten chapters of Branches / Roots, for the app.
+"""Build branches.json — the ten chapters of Branches (Part I), for the app.
 
     python3 -I build_branches.py <the book>.pdf branches.json
 
@@ -127,7 +127,7 @@ def main(pdf_path, out_path):
         print(f"      opening {len(c['opening'])}¶ | " +
               ' | '.join(f"{s['head']} {len(s['paras'])}¶" for s in c['sections']))
 
-    doc = {'title': 'Branches / Roots',
+    doc = {'title': 'Branches (Part I)',
            'subtitle': 'The Sefirot and the Sciences',
            'chapters': chapters}
     pathlib.Path(out_path).write_text(

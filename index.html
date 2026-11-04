@@ -5483,7 +5483,7 @@ content: ''; float: right; width: 30px; height: 1em;
     <div style="font-size:0.78rem;color:var(--ink-mid);margin-top:8px;line-height:1.5;">The 28 Times &amp; The 28 Cycles of the Jewish Year — Koheles 3:1–8. On the 14th cycle, War / Peace: the days before Yom Kippur, when we make peace with one another.</div>
   </div>
 
-  <!-- BRANCHES / ROOTS — the Sefirot and the sciences.
+  <!-- BRANCHES (PART I) — the Sefirot and the sciences.
        Ten disciplines on the same tree the cards above are built on, one to
        each Sefirah, from Mathematics at the crown to Political Science in the kingdom.
 
@@ -5510,7 +5510,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <section id="branches" class="branches" aria-labelledby="branches-open">
     <h2 class="branches-h"><button type="button" id="branches-open" class="branches-open"
         aria-expanded="false" aria-controls="branches-panel" onclick="toggleBranches()">
-      <span class="branches-head">Branches / Roots</span>
+      <span class="branches-head">Branches (Part I)</span>
       <span class="branches-sub">The Sefirot and the Sciences</span>
       <span class="branches-chev" aria-hidden="true">&#9662;</span>
     </button></h2>
@@ -12028,7 +12028,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // The row says it was written with AI. A reader of a book about what can
     // be known should be told how the book was made, and the companion's own
     // line at the foot of its panel says the same thing.
-    { book: 'Branches / Roots', what: 'Ten disciplines on the tree of the Sefirot, each read from its root in Torah — Mathematics at the crown to Political Science in the kingdom. Written with AI.', emoji: '🌳',
+    { book: 'Branches (Part I)', what: 'Ten disciplines on the tree of the Sefirot, each read from its root in Torah — Mathematics at the crown to Political Science in the kingdom. Written with AI.', emoji: '🌳',
       where: 'The ten Sefirot', slot: 'kot-shelf-branches',
       url: 'branches-roots.pdf' },
   ];
@@ -12081,12 +12081,12 @@ content: ''; float: right; width: 30px; height: 1em;
     // pointed at the one address here instead of carrying a second copy.
     //
     // Found by its slot, not by [0]. It was [0], and that was a trap waiting
-    // on the next book added above it: Branches / Roots went to the head of
+    // on the next book added above it: Branches went to the head of
     // this group and Keter's card would have started opening it.
     const lm = KOT_BOOKS_MORE.find((b) => b.slot === 'kot-shelf-lm');
     const kl = document.getElementById('keter-kot-link');
     if (kl && lm) kl.href = lm.url;
-    // Branches / Roots is on this page as well as in the PDF, so its row
+    // Branches is on this page as well as in the PDF, so its row
     // offers the section under Malchut — down, like the companion's, because
     // it is here rather than away. Written once: nothing about it turns.
     const br = document.getElementById('kot-shelf-branches');

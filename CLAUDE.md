@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v319**; the next is v320.
+nobody. Currently **v320**; the next is v321.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -101,9 +101,11 @@ reflow that adds a page usually means something upstream broke.
 | `docs/daily-companion.md` | `daily-companion.pdf` | 494 |
 
 `book7_gathering_of_songs.pdf`, `perek_shirah_booklet.pdf` and
-`branches-roots.pdf` have no manuscript here. Branches / Roots is on the
-shelf and is also the source `branches.json` is built from; its row says it
-was written with AI.
+`branches-roots.pdf` have no manuscript here. That file is **Branches
+(Part I)** — the name on the shelf and in the app; the filename is older
+than the title and is left alone, since nothing is gained by breaking the
+address. It is also the source `branches.json` is built from, and its row
+says it was written with AI.
 
 `a-year-inside-the-day.pdf` is the **old** companion text and is not linked
 from the app: it carries fabrications the rewrite removed. It has a manuscript
@@ -125,7 +127,7 @@ A page at every `##` is what kept the companion off paper: 364 entries would
 have been 364 mostly-white pages. It is set by **week** instead — `##` takes
 the week and `###` the day — so 52 openings carry seven readings each.
 
-## Branches / Roots
+## Branches (Part I)
 
 `branches.json` is ten chapters — one discipline to each Sefirah, Mathematics
 at the crown to Political Science in the kingdom — shown in a shut section
