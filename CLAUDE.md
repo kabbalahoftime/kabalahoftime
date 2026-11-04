@@ -102,7 +102,7 @@ reflow that adds a page usually means something upstream broke.
 
 `book7_gathering_of_songs.pdf`, `perek_shirah_booklet.pdf` and
 `branches-sciences.pdf` and `branches-arts.pdf` have no manuscript here. They
-are the two volumes of **Branches (Part I)** — the sciences and the arts —
+are the two volumes of **Branches** — the sciences and the arts —
 and each is the source its own JSON is built from. Both rows on the shelf say
 they were written with AI.
 
@@ -130,7 +130,7 @@ A page at every `##` is what kept the companion off paper: 364 entries would
 have been 364 mostly-white pages. It is set by **week** instead — `##` takes
 the week and `###` the day — so 52 openings carry seven readings each.
 
-## Branches (Part I)
+## Branches
 
 Two volumes on one tree, shown in a shut section below the Kohelet artwork
 with a switch at the top. The Arts volume's own Tree page is why it is one
