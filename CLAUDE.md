@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v318**; the next is v319.
+nobody. Currently **v319**; the next is v320.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -128,7 +128,8 @@ the week and `###` the day — so 52 openings carry seven readings each.
 ## Branches / Roots
 
 `branches.json` is ten chapters — one discipline to each Sefirah, Mathematics
-at the crown to Law in the kingdom — shown in a shut section under Malchut.
+at the crown to Political Science in the kingdom — shown in a shut section
+below the Kohelet artwork.
 Each chapter has an opening and five sections: a Torah-root section named
 differently every time, `First doors`, `How X works`, `The present edge`, and
 a closing `The ... at work`. Physics is the one chapter whose root section is
