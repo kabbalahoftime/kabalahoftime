@@ -1,0 +1,18 @@
+{
+  "_note": "Leaves on the branches: links gathered by hand, one list to a station. THIS FILE IS WRITTEN, NOT GENERATED. branches-sciences.json and branches-arts.json are built from the PDFs and are overwritten whenever a book is rebuilt — which has happened three times in two days — so a link put in one of those would be destroyed without a word. It belongs here, where the builder never looks.",
+  "_keys": "Keyed by volume and by SEFIRAH, not by the name of the discipline. The names move: Malchut was Law before the rework and is Political Science now, and a list keyed to the old name would have come away attached to nothing. A station does not move.",
+  "_fields": "label (required), url (required), where (who made it, optional), note (why it is here, optional).",
+  "links": {
+    "sciences": {
+      "Malchut": [
+        {
+          "label": "David McCullough on George Washington",
+          "where": "Charlie Rose",
+          "url": "https://youtu.be/84015J3oef0",
+          "note": "The historian on Washington and the revolutionary war — the man who held command and gave it back, which is this station's whole question."
+        }
+      ]
+    },
+    "arts": {}
+  }
+}

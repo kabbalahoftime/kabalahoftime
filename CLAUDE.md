@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v322**; the next is v323.
+nobody. Currently **v323**; the next is v324.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -179,6 +179,33 @@ The reader's choice of volume is remembered in `kotBranchVolume`.
 The cards use `.branch-card`, not `.sefirah-card`: that class is what
 `buildCardPanes` files into the four panes, and these have sections of their
 own.
+
+### Leaves
+
+`branches-links.json` holds links gathered by hand, shown as a **Leaves** fold
+at the foot of a card that has any. A station with none gets no fold.
+
+**It is written, never generated.** The two volumes are rebuilt from their
+PDFs — three times in two days so far — so a link added to one of those would
+be thrown away without a word. This file is the only place a link belongs, and
+the builder never looks at it.
+
+Keyed by volume and by **Sefirah, not by the name of the discipline**. The
+names move: Malchut was Law before the rework and is Political Science now,
+and a list keyed to the old name would have come away attached to nothing.
+
+```sh
+python3 -I tools/check_branch_links.py branches-links.json \
+    branches-sciences.json branches-arts.json
+```
+
+Run it after any rebuild of a volume. It confirms every volume and station
+named still exists, that each link has a label and an http(s) address, and
+that nothing is listed twice under one station. It does not go to the network:
+a checker that needs the internet fails on a train.
+
+**Strip the tracking parameter.** A YouTube share link arrives as
+`?si=...`, which identifies the sharer; store the bare address.
 
 ## The daily companion
 

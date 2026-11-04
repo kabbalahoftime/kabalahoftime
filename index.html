@@ -3360,6 +3360,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   font-size:calc(13.5px * var(--ts, 1)); line-height:1.72;
   color:var(--ink); margin:0 0 10px;
 }
+/* The leaves. A list rather than paragraphs, because each is one thing to
+   go and look at, and the note under it says why it is here. */
+.leaf-list { list-style:none; margin:0 0 8px; padding:0; }
+.leaf-list li { margin:0 0 12px; }
+.leaf-list a {
+  color:var(--gold); text-decoration:none;
+  font-size:calc(13.5px * var(--ts, 1)); line-height:1.5;
+  display:inline-block; padding:8px 4px; margin:-8px -4px;
+  position:relative; z-index:1;
+}
+.leaf-list a:hover, .leaf-list a:focus-visible { text-decoration:underline; }
+.leaf-where {
+  color:var(--ink-dim); font-size:calc(11.5px * var(--ts, 1)); font-style:italic;
+  margin-left:4px;
+}
+.leaf-note {
+  color:var(--ink-mid); font-size:calc(12.5px * var(--ts, 1));
+  line-height:1.6; margin-top:3px;
+}
 @media (max-width: 420px) {
   /* The label column stops being a column: at this width four-and-a-half ems
      taken off the front left Mathematics setting two words to a line. */
@@ -16636,6 +16655,11 @@ content: ''; float: right; width: 30px; height: 1em;
   // A reader who only ever opens the arts never pays for the sciences.
   const BRANCHES = { sciences: null, arts: null };
   const _branchAsked = { sciences: false, arts: false };
+  // The leaves: links gathered by hand, keyed by volume and station. A few
+  // KB, one file for both volumes, fetched once when the section opens. It
+  // is written rather than generated — the volumes are rebuilt from their
+  // PDFs and would throw away anything added to them.
+  let BRANCH_LEAVES = null, _leavesAsked = false;
   let _branchVol = 'sciences';
   try {
     const v = localStorage.getItem('kotBranchVolume');
@@ -16651,7 +16675,7 @@ content: ''; float: right; width: 30px; height: 1em;
     if (open) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '');
     sec.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (open) { _branchButtons(); loadBranches(); }
+    if (open) { _branchButtons(); loadLeaves(); loadBranches(); }
   }
 
   // Which of the two is lit. Set from _branchVol rather than from the tap, so
@@ -16677,6 +16701,18 @@ content: ''; float: right; width: 30px; height: 1em;
     loadBranches();
   }
 
+  // Quietly: a card without leaves is the ordinary case, so a failure here
+  // costs a reader nothing and is not worth a notice. The chapters are the
+  // thing; the leaves hang on them.
+  function loadLeaves() {
+    if (_leavesAsked) return;
+    _leavesAsked = true;
+    fetch('branches-links.json')
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((j) => { BRANCH_LEAVES = (j && j.links) || {}; drawBranches(); })
+      .catch(() => {});
+  }
+
   function loadBranches() {
     const vol = _branchVol;
     if (BRANCHES[vol]) { drawBranches(); return; }
@@ -16696,6 +16732,25 @@ content: ''; float: right; width: 30px; height: 1em;
           '<span class="kot-summary" role="button" tabindex="0" ' +
           'onclick="loadBranches()">Try again \u25be</span></p>';
       });
+  }
+
+  // The leaves of one station, if it has any. Last in the card, after the
+  // chapter's own sections, because they hang off the branch rather than
+  // being part of it. A station with none gets no fold at all.
+  function _leaves(sefirah) {
+    const list = ((BRANCH_LEAVES || {})[_branchVol] || {})[sefirah] || [];
+    if (!list.length) return '';
+    const esc = (t) => String(t == null ? '' : t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+    const rows = list.filter((x) => x && x.url && x.label).map((x) =>
+      `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label)}</a>` +
+      (x.where ? ` <span class="leaf-where">${esc(x.where)}</span>` : '') +
+      (x.note ? `<div class="leaf-note">${esc(x.note)}</div>` : '') +
+      `</li>`).join('');
+    if (!rows) return '';
+    return `<details class="branch-fold branch-leaves"><summary>Leaves</summary>` +
+      `<ul class="leaf-list">${rows}</ul></details>`;
   }
 
   function drawBranches() {
@@ -16730,6 +16785,7 @@ content: ''; float: right; width: 30px; height: 1em;
           (c.sections || []).map((sec) =>
             `<details class="branch-fold"><summary>${esc(sec.head)}</summary>` +
             paras(sec.paras) + `</details>`).join('') +
+          _leaves(c.sefirah) +
         `</div>` +
       `</details>`).join('');
 
@@ -16737,6 +16793,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // the container in the capture phase — and it has to tell a card from
     // the folds inside it, which fire the same event. Bound once: the
     // container survives a switch of volume, the cards inside it do not.
+    //
     if (!el._branchAccordion) {
       el._branchAccordion = true;
       el.addEventListener('toggle', (e) => {
