@@ -12107,27 +12107,29 @@ content: ''; float: right; width: 30px; height: 1em;
       (slot ? ' <span class="book-now" id="' + slot + '"></span>' : '') +
       (b.what ? '<div class="book-what">' + b.what + '</div>' : '') + '</div>';
     const _head = (s) => '<div class="book-section">' + s + '</div>';
-    // Three sections, and the two that are keyed to nothing come first,
-    // because they are the ones a reader can simply open: the ten below them
-    // are the book of a day, a week or a card, and reading one means knowing
-    // which. The author's own stories, poems and portions; then Arts and
-    // Sciences, which is expository and is neither; then the Kabbalah of
-    // Time books — the three that stand on a card, Keter, Chochmah and Binah
-    // in the order of the cards themselves, and the seven of the week after
-    // them.
+    // Three sections. The author's own stories, poems and portions first,
+    // because they are the ones a reader can simply open — the ten that
+    // follow are the book of a day, a week or a card, and reading one means
+    // knowing which. Then the Kabbalah of Time books: the three that stand
+    // on a card, Keter, Chochmah and Binah in the order of the cards
+    // themselves, and the seven of the week after them. Then Arts and
+    // Sciences.
     //
-    // Arts and Sciences sits between rather than last. The two substantial
-    // groups stand as the ends of the shelf, and a shelf that finished on a
-    // single row would read as a stub rather than as a beginning.
+    // Arts and Sciences stands last rather than between. It was put in the
+    // middle when it held one row and a shelf ending on a single row would
+    // have read as a stub; it holds two volumes now and does not need
+    // propping up. Last is also where it belongs: the ten books above it are
+    // what the app counts out day by day, and these two are the reading that
+    // begins once that is done.
     el.innerHTML =
     _head('Creative Writing and Reflections on the Parasha') +
     KOT_BOOKS_ALSO.map(b => _row(b, b.where, b.slot)).join('') +
-    _head('Arts and Sciences') +
-    KOT_BOOKS_ARTS.map(b => _row(b, b.where, b.slot)).join('') +
     _head('The Kabbalah of Time books') +
     KOT_BOOKS_MORE.map(b => _row(b, b.where, b.slot)).join('') +
     KOT_BOOKS.map((b, i) =>
-      _row(b, SEFIROT_777[i] || '', 'kot-shelf-week-' + (i + 1))).join('');
+      _row(b, SEFIROT_777[i] || '', 'kot-shelf-week-' + (i + 1))).join('') +
+    _head('Arts and Sciences') +
+    KOT_BOOKS_ARTS.map(b => _row(b, b.where, b.slot)).join('');
     // Keter's link is written into the page rather than rendered, so it is
     // pointed at the one address here instead of carrying a second copy.
     //
