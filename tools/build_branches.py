@@ -1,6 +1,6 @@
-"""Build branches.json — the ten chapters of Branches (Part I), for the app.
+"""Build a Branches volume — ten chapters on the tree — for the app.
 
-    python3 -I build_branches.py <the book>.pdf branches.json
+    python3 -I build_branches.py <the book>.pdf branches-<volume>.json
 
 Read from the page's own layout rather than from its text, because the text
 alone does not say where a paragraph ends and the guesses go wrong. The PDF
@@ -10,8 +10,12 @@ sets the book in one column and tells us everything we need:
   16.0pt   the chapter's subtitle     14.7pt   body
   12.7pt   the station, letterspaced  12.0pt   a page number
 
-There are exactly fifty 18pt lines, which is ten chapters of five sections,
-and that is asserted below rather than hoped for. Paragraphs come from the
+Ten chapters, and every chapter carries the same number of 18pt sections —
+five in the sciences volume, four in the arts, which has no closing "at
+work". That regularity is what is asserted below: a count fixed at fifty was
+right for one volume and wrong for the other, where the shape holding even
+is right for both and still catches a section dropped from one chapter.
+Paragraphs come from
 vertical gap: 23-24 points between two lines of one paragraph, 36-37 between
 two paragraphs, with nothing in between, so 30 separates them cleanly.
 
@@ -25,6 +29,7 @@ from pypdf import PdfReader
 
 LIG = {'ﬀ': 'ff', 'ﬁ': 'fi', 'ﬂ': 'fl', 'ﬃ': 'ffi', 'ﬄ': 'ffl'}
 TITLE, HEAD, SUB, BODY, STATION = 36.0, 18.0, 16.0, 14.7, 12.7
+BOOK, KICKER = 53.3, 12.7          # the title page's own two sizes
 PARA_GAP = 30.0
 
 STATIONS = ["Keter / Da'at", 'Chochmah', 'Binah', 'Chesed', 'Gevurah',
@@ -69,8 +74,18 @@ def near(a, b):
 
 def main(pdf_path, out_path):
     lines = lines_of(pdf_path)
-    heads = [l for l in lines if near(l['size'], HEAD)]
-    assert len(heads) == 50, f'expected 50 section headings, found {len(heads)}'
+
+    # The title page says which volume this is. The kicker is letterspaced —
+    # "T H E  S E F I R O T  A N D  T H E  A R T S" — so it is closed up
+    # before it is read, and the volume is taken from it rather than from the
+    # title, which is "Branches" in one book and "Branches / Roots" in the
+    # other and will not tell them apart.
+    book = next((l['text'] for l in lines if near(l['size'], BOOK)), '')
+    kick = next((re.sub(r'\s+', '', l['text']).upper()
+                 for l in lines if near(l['size'], KICKER)), '')
+    m = re.match(r'THESEFIROTANDTHE(.+)$', kick)
+    assert m, f'no "THE SEFIROT AND THE ..." kicker on the title page: {kick!r}'
+    volume = 'The ' + m.group(1).capitalize()
 
     # chapter openings: a station line followed by a 36pt title
     opens = []
@@ -106,7 +121,7 @@ def main(pdf_path, out_path):
         body = [l for l in lines[o['i'] + 3: end]
                 if near(l['size'], BODY) or near(l['size'], HEAD)]
         cuts = [j for j, l in enumerate(body) if near(l['size'], HEAD)]
-        assert len(cuts) == 5, f"{o['name']}: {len(cuts)} sections, expected 5"
+        assert len(cuts) >= 3, f"{o['name']}: only {len(cuts)} sections"
         secs = []
         for s, j in enumerate(cuts):
             nxt = cuts[s + 1] if s + 1 < len(cuts) else len(body)
@@ -116,6 +131,13 @@ def main(pdf_path, out_path):
             'station': o['station'], 'name': o['name'], 'subtitle': o['subtitle'],
             'opening': paras(body[:cuts[0]]), 'sections': secs,
         })
+
+    # Every chapter the same shape. One chapter short of the rest is a
+    # section lost in extraction, and it is the fault worth catching.
+    counts = {len(c['sections']) for c in chapters}
+    assert len(counts) == 1, (
+        'chapters disagree on how many sections they have: '
+        + ', '.join(f"{c['name']} {len(c['sections'])}" for c in chapters))
 
     total = 0
     for c in chapters:
@@ -127,12 +149,11 @@ def main(pdf_path, out_path):
         print(f"      opening {len(c['opening'])}¶ | " +
               ' | '.join(f"{s['head']} {len(s['paras'])}¶" for s in c['sections']))
 
-    doc = {'title': 'Branches (Part I)',
-           'subtitle': 'The Sefirot and the Sciences',
-           'chapters': chapters}
+    doc = {'title': book, 'volume': volume, 'chapters': chapters}
     pathlib.Path(out_path).write_text(
         json.dumps(doc, ensure_ascii=False, indent=1), encoding='utf-8')
-    print(f"\n10 chapters, {total:,} words -> {out_path}")
+    print(f"\n{book} \u00b7 {volume}: 10 chapters \u00d7 "
+          f"{counts.pop()} sections, {total:,} words -> {out_path}")
     return 0
 
 

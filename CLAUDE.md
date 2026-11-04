@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v320**; the next is v321.
+nobody. Currently **v321**; the next is v322.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -101,11 +101,11 @@ reflow that adds a page usually means something upstream broke.
 | `docs/daily-companion.md` | `daily-companion.pdf` | 494 |
 
 `book7_gathering_of_songs.pdf`, `perek_shirah_booklet.pdf` and
-`branches-roots.pdf` have no manuscript here. That file is **Branches
-(Part I)** — the name on the shelf and in the app; the filename is older
-than the title and is left alone, since nothing is gained by breaking the
-address. It is also the source `branches.json` is built from, and its row
-says it was written with AI.
+`branches-roots.pdf` and `branches-arts.pdf` have no manuscript here. They
+are the two volumes of **Branches (Part I)** — the sciences and the arts —
+and each is the source its own JSON is built from. `branches-roots.pdf` keeps
+a filename older than the title because nothing is gained by breaking a live
+address. Both rows on the shelf say they were written with AI.
 
 `a-year-inside-the-day.pdf` is the **old** companion text and is not linked
 from the app: it carries fabrications the rewrite removed. It has a manuscript
@@ -129,36 +129,53 @@ the week and `###` the day — so 52 openings carry seven readings each.
 
 ## Branches (Part I)
 
-`branches.json` is ten chapters — one discipline to each Sefirah, Mathematics
-at the crown to Political Science in the kingdom — shown in a shut section
-below the Kohelet artwork.
-Each chapter has an opening and five sections: a Torah-root section named
-differently every time, `First doors`, `How X works`, `The present edge`, and
-a closing `The ... at work`. Physics is the one chapter whose root section is
-a quotation, `"Let there be light"`.
+Two volumes on one tree, shown in a shut section below the Kohelet artwork
+with a switch at the top. The Arts volume's own Tree page is why it is one
+section and not two: *there is one tree, not two — each branch bears two
+fruits.* Ten stations, each bearing a science and an art.
 
-It is **built from the PDF, not written here**, so the book stays the source:
+| volume | PDF | JSON | shape |
+| --- | --- | --- | --- |
+| The Sciences | `branches-roots.pdf` | `branches-sciences.json` | 10 × 5 sections |
+| The Arts | `branches-arts.pdf` | `branches-arts.json` | 10 × 4 sections |
+
+Every chapter has an opening, then a Torah-root section named differently
+every time, `First doors`, `How X works`, `The present edge` — and, in the
+sciences only, a closing `The ... at work`.
+
+Both are **built from their PDF, not written here**, so the books stay the
+source:
 
 ```sh
-python3.13 -I tools/build_branches.py <the book>.pdf branches.json
+python3.13 -I tools/build_branches.py branches-roots.pdf branches-sciences.json
+python3.13 -I tools/build_branches.py branches-arts.pdf  branches-arts.json
 ```
 
 The builder reads the page's **layout**, not its text, and asserts what it
-finds — fifty 18pt headings, ten chapters, five sections each — so a changed
-PDF fails loudly rather than quietly losing a section. Font sizes carry the
-structure (36 title, 18 heading, 16 subtitle, 14.7 body, 12.7 station) and
-paragraphs come from the vertical gap: 23-24 points inside a paragraph, 36-37
-between, nothing in between. Line length will not do it — a last line can run
-the full column, and on page 4 one does.
+finds: ten chapters, and **every chapter carrying the same number of
+sections**. That regularity is the check — a count fixed at fifty was right
+for the sciences and wrong for the arts, where "the shape holds even" is
+right for both and still catches a section dropped from one chapter. Font
+sizes carry the structure (53.3 book title, 36 chapter, 18 heading, 16
+subtitle, 14.7 body, 12.7 station and kicker) and paragraphs come from the
+vertical gap: 23-24 points inside a paragraph, 36-37 between, nothing in
+between. Line length will not do it — a last line can run the full column,
+and in the sciences volume one does.
 
-153KB, so it is **fetched when the section is first opened**, never on load,
-and deliberately **not pre-cached** — the same reasoning written against
-`companion.json` in `service-worker.js`. The service worker's JSON rule holds
-it for offline once a reader has opened it.
+Which volume a PDF is comes from its **title-page kicker**, "THE SEFIROT AND
+THE ARTS", not from its title: one book is called *Branches* and the other
+*Branches / Roots*, so the title will not tell them apart.
+
+Each volume is **fetched when it is first asked for**, never on load, and
+neither is pre-cached — the same reasoning written against `companion.json`
+in `service-worker.js`. A reader who only opens the arts never pays for the
+sciences. The service worker's JSON rule holds what was fetched for offline.
+
+The reader's choice of volume is remembered in `kotBranchVolume`.
 
 The cards use `.branch-card`, not `.sefirah-card`: that class is what
-`buildCardPanes` files into the four panes, and these have five sections of
-their own.
+`buildCardPanes` files into the four panes, and these have sections of their
+own.
 
 ## The daily companion
 

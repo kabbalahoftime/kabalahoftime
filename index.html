@@ -3282,6 +3282,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   margin:12px 0 4px; font-size:calc(13px * var(--ts, 1)); line-height:1.7;
   color:var(--ink-mid); font-style:italic;
 }
+/* The pair that says which fruit is showing. Centred, and the page's own
+   pill, so it reads as one of this app's switches and not a new invention. */
+.branches-switch { text-align:center; margin:10px 0 2px; }
+.branches-switch .year-pill-btn { padding:7px 16px; }
 
 /* One card to a Sefirah, and each opens on its own. The label column
    repeats the cards above it — the name, the letters — so a reader meeting
@@ -5483,9 +5487,13 @@ content: ''; float: right; width: 30px; height: 1em;
     <div style="font-size:0.78rem;color:var(--ink-mid);margin-top:8px;line-height:1.5;">The 28 Times &amp; The 28 Cycles of the Jewish Year — Koheles 3:1–8. On the 14th cycle, War / Peace: the days before Yom Kippur, when we make peace with one another.</div>
   </div>
 
-  <!-- BRANCHES (PART I) — the Sefirot and the sciences.
-       Ten disciplines on the same tree the cards above are built on, one to
-       each Sefirah, from Mathematics at the crown to Political Science in the kingdom.
+  <!-- BRANCHES (PART I) — the Sefirot, the arts and the sciences.
+       Two volumes on the same tree the cards above are built on. Ten stations,
+       and each bears two fruits: a science — Mathematics at the crown to
+       Political Science in the kingdom — and an art, Music at the crown to
+       Drama and Dance in it. The Arts volume's own Tree page is what settles
+       the shape: there is one tree, not two, so this is one section with a
+       switch rather than two sections drawing the same column twice.
 
        It stands here, below the Kohelet artwork and above the footer, rather
        than among the cards. Nothing in it turns with the day: it is a reading
@@ -5496,12 +5504,13 @@ content: ''; float: right; width: 30px; height: 1em;
        done. It is new, and the beginning of something rather than the whole
        of it, so it is given room of its own to grow into.
 
-       Shut by default, and its text is not in this page. 153KB of prose
-       belongs no more in a page that must parse before anything draws than
-       the companion's own third of a megabyte did, and unlike the companion
-       nothing here is wanted on load — so branches.json is fetched the first
-       time a reader opens the section, and not before. The service worker's
-       JSON rule then holds it for offline; it is deliberately not
+       Shut by default, and neither volume's text is in this page. 160KB and
+       120KB of prose belong no more in a page that must parse before
+       anything draws than the companion's own third of a megabyte did, and
+       unlike the companion nothing here is wanted on load — so a volume is
+       fetched the first time a reader asks for it, and not before. A reader
+       who only ever opens the arts never pays for the sciences. The service
+       worker's JSON rule then holds what was fetched for offline; neither is
        pre-cached, for the reason written against companion.json there.
 
        Its cards carry their own classes rather than .sefirah-card. That
@@ -5511,13 +5520,29 @@ content: ''; float: right; width: 30px; height: 1em;
     <h2 class="branches-h"><button type="button" id="branches-open" class="branches-open"
         aria-expanded="false" aria-controls="branches-panel" onclick="toggleBranches()">
       <span class="branches-head">Branches (Part I)</span>
-      <span class="branches-sub">The Sefirot and the Sciences</span>
+      <span class="branches-sub">The Sefirot, the Arts and the Sciences</span>
       <span class="branches-chev" aria-hidden="true">&#9662;</span>
     </button></h2>
     <div id="branches-panel" hidden>
-      <p class="branches-lede">Every discipline is a branch. Torah is the root and the
-        blueprint &mdash; not one subject among the ten, but the ground from which each of
-        them grows and to which each chapter returns.</p>
+      <!-- The Arts volume's own Tree page, which is the sentence that made
+           one section of two volumes rather than two sections. -->
+      <p class="branches-lede">There is one tree, not two. Each branch bears two fruits:
+        an art and a science. Torah is the root and the blueprint &mdash; not one subject
+        among the twenty, but the ground from which each of them grows and to which each
+        chapter returns.</p>
+      <!-- Which fruit of the branch is showing. A pair rather than a list,
+           because there are two and there will not be a third: the tree has
+           ten stations and each bears one of each. The reader's choice is
+           remembered, so a reader who came for the arts is not handed the
+           sciences every morning. -->
+      <div class="branches-switch">
+        <div class="year-toggle-pill" role="group" aria-label="Which fruit of each branch">
+          <button type="button" id="branch-vol-sciences" class="year-pill-btn year-pill-active"
+                  onclick="setBranchVolume('sciences')">Sciences</button>
+          <button type="button" id="branch-vol-arts" class="year-pill-btn"
+                  onclick="setBranchVolume('arts')">Arts</button>
+        </div>
+      </div>
       <div id="branches-list">Loading&hellip;</div>
     </div>
   </section>
@@ -12025,12 +12050,19 @@ content: ''; float: right; width: 30px; height: 1em;
   // One book on it today. It is the beginning of a shelf rather than the
   // whole of one, which is why the heading is a category and not a title.
   const KOT_BOOKS_ARTS = [
-    // The row says it was written with AI. A reader of a book about what can
-    // be known should be told how the book was made, and the companion's own
-    // line at the foot of its panel says the same thing.
-    { book: 'Branches (Part I)', what: 'Ten disciplines on the tree of the Sefirot, each read from its root in Torah — Mathematics at the crown to Political Science in the kingdom. Written with AI.', emoji: '🌳',
-      where: 'The ten Sefirot', slot: 'kot-shelf-branches',
+    // Two volumes of one work, and the shelf names each. Both rows say they
+    // were written with AI: a reader of a book about what can be known
+    // should be told how the book was made, and the companion's own line at
+    // the foot of its panel says the same thing.
+    //
+    // The sciences first, because that is what the section opens on and what
+    // the tree has carried since it was built.
+    { book: 'Branches (Part I) · The Sciences', what: 'Ten disciplines on the tree of the Sefirot, each read from its root in Torah — Mathematics at the crown to Political Science in the kingdom. Written with AI.', emoji: '🌳',
+      where: 'The ten Sefirot', slot: 'kot-shelf-sciences',
       url: 'branches-roots.pdf' },
+    { book: 'Branches (Part I) · The Arts', what: 'The other fruit of each branch — Music at the crown, the least physical of the arts, to Drama and Dance in the kingdom, the body enacted. Written with AI.', emoji: '🎨',
+      where: 'The ten Sefirot', slot: 'kot-shelf-arts',
+      url: 'branches-arts.pdf' },
   ];
   // The shelf, in a pane of its own at the head of the page.
   //
@@ -12086,12 +12118,17 @@ content: ''; float: right; width: 30px; height: 1em;
     const lm = KOT_BOOKS_MORE.find((b) => b.slot === 'kot-shelf-lm');
     const kl = document.getElementById('keter-kot-link');
     if (kl && lm) kl.href = lm.url;
-    // Branches is on this page as well as in the PDF, so its row
-    // offers the section under Malchut — down, like the companion's, because
-    // it is here rather than away. Written once: nothing about it turns.
-    const br = document.getElementById('kot-shelf-branches');
-    if (br) br.innerHTML = '· <a href="#branches" onclick="toggleBranches(true)">' +
-      'read it here ↓</a>';
+    // Both volumes are on this page as well as in their PDFs, so each row
+    // offers the section — down, like the companion's, because it is here
+    // rather than away. A row opens the section on its own volume, so the
+    // Arts row does not hand a reader the Sciences. Written once: nothing
+    // about either turns.
+    [['kot-shelf-sciences', 'sciences'], ['kot-shelf-arts', 'arts']].forEach(([id, vol]) => {
+      const n = document.getElementById(id);
+      if (n) n.innerHTML = '· <a href="#branches" ' +
+        'onclick="setBranchVolume(\'' + vol + '\');toggleBranches(true)">' +
+        'read it here ↓</a>';
+    });
   })();
 
   // ── THE KoT SONG — one of the seven songs a day, shown beside Tehilim in
@@ -16587,13 +16624,23 @@ content: ''; float: right; width: 30px; height: 1em;
     }
   }
 
-  // ── BRANCHES / ROOTS ──
-  // Ten disciplines on the tree, one to each Sefirah, read from their root in
-  // Torah. The text is 153KB and is not in this page: nothing above the fold
-  // wants it, so it is fetched the first time the section is opened and never
-  // for a reader who does not open it. The companion is fetched on load
-  // because the day's entry is wanted on load; this is not.
-  let BRANCHES = null, _branchesAsked = false;
+  // ── BRANCHES ──
+  // Two volumes on one tree: a science and an art at each of the ten
+  // stations. The Arts volume's own Tree page is the reason this is one
+  // section and not two — "there is one tree, not two" — so the column of
+  // Sefirot is drawn once and a switch says which fruit is showing.
+  //
+  // Each volume is its own file and neither is in this page. 160KB and
+  // 120KB, and nothing above the fold wants either, so a volume is fetched
+  // the first time it is asked for and never for a reader who does not ask.
+  // A reader who only ever opens the arts never pays for the sciences.
+  const BRANCHES = { sciences: null, arts: null };
+  const _branchAsked = { sciences: false, arts: false };
+  let _branchVol = 'sciences';
+  try {
+    const v = localStorage.getItem('kotBranchVolume');
+    if (v === 'arts' || v === 'sciences') _branchVol = v;
+  } catch (e) {}
 
   function toggleBranches(force) {
     const sec = document.getElementById('branches');
@@ -16604,39 +16651,65 @@ content: ''; float: right; width: 30px; height: 1em;
     if (open) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '');
     sec.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (open) loadBranches();
+    if (open) { _branchButtons(); loadBranches(); }
+  }
+
+  // Which of the two is lit. Set from _branchVol rather than from the tap, so
+  // the remembered choice shows on the first open as well as on a switch.
+  function _branchButtons() {
+    ['sciences', 'arts'].forEach((v) => {
+      const b = document.getElementById('branch-vol-' + v);
+      if (!b) return;
+      b.classList.toggle('year-pill-active', v === _branchVol);
+      b.setAttribute('aria-pressed', v === _branchVol ? 'true' : 'false');
+    });
+  }
+
+  function setBranchVolume(vol) {
+    if (vol !== 'sciences' && vol !== 'arts') return;
+    _branchVol = vol;
+    try { localStorage.setItem('kotBranchVolume', vol); } catch (e) {}
+    _branchButtons();
+    const el = document.getElementById('branches-list');
+    // Say so while it is coming. The first switch to a volume is a fetch, and
+    // a column that simply sits there says nothing about why.
+    if (el && !BRANCHES[vol]) el.innerHTML = '<p class="branches-lede">Loading\u2026</p>';
+    loadBranches();
   }
 
   function loadBranches() {
-    if (_branchesAsked || BRANCHES) return;
-    _branchesAsked = true;
-    fetch('branches.json')
+    const vol = _branchVol;
+    if (BRANCHES[vol]) { drawBranches(); return; }
+    if (_branchAsked[vol]) return;
+    _branchAsked[vol] = true;
+    fetch('branches-' + vol + '.json')
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((j) => { BRANCHES = j; drawBranches(); })
+      .then((j) => { BRANCHES[vol] = j; if (_branchVol === vol) drawBranches(); })
       .catch(() => {
         // Asked for and not delivered. Say so and offer the ask again,
         // rather than leaving "Loading…" standing for ever with no reason —
         // which is the one failure this app has that tells a reader nothing.
-        _branchesAsked = false;
+        _branchAsked[vol] = false;
         const el = document.getElementById('branches-list');
-        if (el) el.innerHTML = '<p class="branches-lede">The chapters did not load. ' +
+        if (el && _branchVol === vol) el.innerHTML =
+          '<p class="branches-lede">The chapters did not load. ' +
           '<span class="kot-summary" role="button" tabindex="0" ' +
-          'onclick="loadBranches()">Try again ▾</span></p>';
+          'onclick="loadBranches()">Try again \u25be</span></p>';
       });
   }
 
   function drawBranches() {
     const el = document.getElementById('branches-list');
-    if (!el || !BRANCHES || !BRANCHES.chapters) return;
+    const doc = BRANCHES[_branchVol];
+    if (!el || !doc || !doc.chapters) return;
     const esc = (s) => String(s == null ? '' : s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const paras = (a) => (a || []).map((p) => `<p>${esc(p)}</p>`).join('');
     // Each card opens on its own, and only one at a time. Ten chapters of
-    // two and a half thousand words each: all of them open at once is not a
-    // page anyone reads, it is a scroll bar. Shut, the ten stand as the tree
-    // — Keter to Malchut down the column, a discipline against each — which
-    // is the thing worth seeing first.
-    el.innerHTML = BRANCHES.chapters.map((c) =>
+    // two thousand words and more, all open at once, is not a page anyone
+    // reads — it is a scroll bar. Shut, the ten stand as the tree, which is
+    // the thing worth seeing first.
+    el.innerHTML = doc.chapters.map((c) =>
       `<details class="branch-card">` +
         `<summary class="branch-sum">` +
           `<span class="branch-label">` +
@@ -16644,8 +16717,8 @@ content: ''; float: right; width: 30px; height: 1em;
             `<span class="branch-heb" lang="he">${esc(c.hebrew)}</span>` +
           `</span>` +
           `<span class="branch-titles">` +
-            // Only Mathematics stands on two: the crown that is also
-            // knowledge. The other nine would print the name just said.
+            // Only the crown stands on two: the crown that is also knowledge.
+            // The other nine would print the name just said.
             (c.station && c.station !== c.sefirah
               ? `<span class="branch-station">${esc(c.station)}</span>` : '') +
             `<h3 class="branch-name">${esc(c.name)}</h3>` +
@@ -16654,15 +16727,16 @@ content: ''; float: right; width: 30px; height: 1em;
         `</summary>` +
         `<div class="branch-body">` +
           `<div class="branch-open">${paras(c.opening)}</div>` +
-          (c.sections || []).map((s) =>
-            `<details class="branch-fold"><summary>${esc(s.head)}</summary>` +
-            paras(s.paras) + `</details>`).join('') +
+          (c.sections || []).map((sec) =>
+            `<details class="branch-fold"><summary>${esc(sec.head)}</summary>` +
+            paras(sec.paras) + `</details>`).join('') +
         `</div>` +
       `</details>`).join('');
 
     // One at a time. A toggle event does not bubble, so the listener is on
     // the container in the capture phase — and it has to tell a card from
-    // the five folds inside it, which fire the same event.
+    // the folds inside it, which fire the same event. Bound once: the
+    // container survives a switch of volume, the cards inside it do not.
     if (!el._branchAccordion) {
       el._branchAccordion = true;
       el.addEventListener('toggle', (e) => {
