@@ -5429,38 +5429,6 @@ content: ''; float: right; width: 30px; height: 1em;
 
   </div>
 
-  <!-- BRANCHES / ROOTS — the Sefirot and the sciences.
-       Ten disciplines on the same tree the cards above are built on, one to
-       each Sefirah, from Mathematics at the crown to Law in the kingdom. It
-       stands under Malchut because that is where the tree ends and because
-       these are branches rather than readings: nothing here turns with the
-       day, so it would be wrong among cards that do.
-
-       Shut by default, and its text is not in this page. 153KB of prose
-       belongs no more in a page that must parse before anything draws than
-       the companion's own third of a megabyte did, and unlike the companion
-       nothing here is wanted on load — so branches.json is fetched the first
-       time a reader opens the section, and not before. The service worker's
-       JSON rule then holds it for offline; it is deliberately not
-       pre-cached, for the reason written against companion.json there.
-
-       Its cards carry their own classes rather than .sefirah-card. That
-       class is what buildCardPanes files into Ma'alot, Mi'utim, Stars and
-       Menorah, and these have five sections of their own with other names. -->
-  <section id="branches" class="branches" aria-labelledby="branches-open">
-    <h2 class="branches-h"><button type="button" id="branches-open" class="branches-open"
-        aria-expanded="false" aria-controls="branches-panel" onclick="toggleBranches()">
-      <span class="branches-head">Branches / Roots</span>
-      <span class="branches-sub">The Sefirot and the Sciences</span>
-      <span class="branches-chev" aria-hidden="true">&#9662;</span>
-    </button></h2>
-    <div id="branches-panel" hidden>
-      <p class="branches-lede">Every discipline is a branch. Torah is the root and the
-        blueprint &mdash; not one subject among the ten, but the ground from which each of
-        them grows and to which each chapter returns.</p>
-      <div id="branches-list">Loading&hellip;</div>
-    </div>
-  </section>
 
   <!-- FOOTER -->
 
@@ -5514,6 +5482,45 @@ content: ''; float: right; width: 30px; height: 1em;
     <img src="28-times-28-cycles.jpg" width="900" height="1350" alt="The 28 Times &amp; The 28 Cycles of the Jewish Year — Ecclesiastes 3:1–8" style="max-width:100%;height:auto;border-radius:6px;border:1px solid var(--border);" loading="lazy">
     <div style="font-size:0.78rem;color:var(--ink-mid);margin-top:8px;line-height:1.5;">The 28 Times &amp; The 28 Cycles of the Jewish Year — Koheles 3:1–8. On the 14th cycle, War / Peace: the days before Yom Kippur, when we make peace with one another.</div>
   </div>
+
+  <!-- BRANCHES / ROOTS — the Sefirot and the sciences.
+       Ten disciplines on the same tree the cards above are built on, one to
+       each Sefirah, from Mathematics at the crown to Law in the kingdom.
+
+       It stands here, below the Kohelet artwork and above the footer, rather
+       than among the cards. Nothing in it turns with the day: it is a reading
+       of the tree and not a part of the count, so putting it in the column of
+       cards that do turn would have said it was one of them. Past the artwork
+       is where the day's work has finished and a reader is no longer keeping
+       anything — which is the right place for a thing to be read rather than
+       done. It is new, and the beginning of something rather than the whole
+       of it, so it is given room of its own to grow into.
+
+       Shut by default, and its text is not in this page. 153KB of prose
+       belongs no more in a page that must parse before anything draws than
+       the companion's own third of a megabyte did, and unlike the companion
+       nothing here is wanted on load — so branches.json is fetched the first
+       time a reader opens the section, and not before. The service worker's
+       JSON rule then holds it for offline; it is deliberately not
+       pre-cached, for the reason written against companion.json there.
+
+       Its cards carry their own classes rather than .sefirah-card. That
+       class is what buildCardPanes files into Ma'alot, Mi'utim, Stars and
+       Menorah, and these have five sections of their own with other names. -->
+  <section id="branches" class="branches" aria-labelledby="branches-open">
+    <h2 class="branches-h"><button type="button" id="branches-open" class="branches-open"
+        aria-expanded="false" aria-controls="branches-panel" onclick="toggleBranches()">
+      <span class="branches-head">Branches / Roots</span>
+      <span class="branches-sub">The Sefirot and the Sciences</span>
+      <span class="branches-chev" aria-hidden="true">&#9662;</span>
+    </button></h2>
+    <div id="branches-panel" hidden>
+      <p class="branches-lede">Every discipline is a branch. Torah is the root and the
+        blueprint &mdash; not one subject among the ten, but the ground from which each of
+        them grows and to which each chapter returns.</p>
+      <div id="branches-list">Loading&hellip;</div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="footer-text">Based on the book</div>
