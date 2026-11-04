@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v321**; the next is v322.
+nobody. Currently **v322**; the next is v323.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -101,11 +101,14 @@ reflow that adds a page usually means something upstream broke.
 | `docs/daily-companion.md` | `daily-companion.pdf` | 494 |
 
 `book7_gathering_of_songs.pdf`, `perek_shirah_booklet.pdf` and
-`branches-roots.pdf` and `branches-arts.pdf` have no manuscript here. They
+`branches-sciences.pdf` and `branches-arts.pdf` have no manuscript here. They
 are the two volumes of **Branches (Part I)** — the sciences and the arts —
-and each is the source its own JSON is built from. `branches-roots.pdf` keeps
-a filename older than the title because nothing is gained by breaking a live
-address. Both rows on the shelf say they were written with AI.
+and each is the source its own JSON is built from. Both rows on the shelf say
+they were written with AI.
+
+The sciences volume was `branches-roots.pdf` while the book was called
+*Branches / Roots*. It is retitled simply *Branches*, so the filename that
+matched the old title has gone with it and the two volumes are named alike.
 
 `a-year-inside-the-day.pdf` is the **old** companion text and is not linked
 from the app: it carries fabrications the rewrite removed. It has a manuscript
@@ -136,7 +139,7 @@ fruits.* Ten stations, each bearing a science and an art.
 
 | volume | PDF | JSON | shape |
 | --- | --- | --- | --- |
-| The Sciences | `branches-roots.pdf` | `branches-sciences.json` | 10 × 5 sections |
+| The Sciences | `branches-sciences.pdf` | `branches-sciences.json` | 10 × 5 sections |
 | The Arts | `branches-arts.pdf` | `branches-arts.json` | 10 × 4 sections |
 
 Every chapter has an opening, then a Torah-root section named differently
@@ -147,7 +150,7 @@ Both are **built from their PDF, not written here**, so the books stay the
 source:
 
 ```sh
-python3.13 -I tools/build_branches.py branches-roots.pdf branches-sciences.json
+python3.13 -I tools/build_branches.py branches-sciences.pdf branches-sciences.json
 python3.13 -I tools/build_branches.py branches-arts.pdf  branches-arts.json
 ```
 
