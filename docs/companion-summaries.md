@@ -239,7 +239,7 @@ The Tikkun HaKlali's verses are contentment with what was given: "The Lord is my
 
 The hen opens the gathering, and the week's six readings come in behind her, a line at a time.
 
-It runs from the haftorah's shelter through Psalm 89's building and the sea to the king's chambers and the two wives, and braids the vineyard with the barrenness.
+It runs from the haftorah's shelter through Psalm 89's building and the sea to the king's chambers and the two wives, and sets the vineyard against the barrenness.
 
 *Source: [Week 2 (Book 7): The Hen is Saying](https://www.kabbalahoftime.com/2021/02/week-2-book-7-hen-is-saying.html) — 272 words*
 
@@ -359,7 +359,7 @@ The Tikkun HaKlali's verses are steadiness: "I have set the Lord before me at al
 
 The dove opens, and this week the gathering is full of listening and sheltering.
 
-The olive and the honey sit at the centre, the covenant and the flocks braid together toward the end, and it closes where the shepherds are.
+The olive and the honey sit at the centre, the covenant and the flocks come together toward the end, and it closes where the shepherds are.
 
 *Source: [Week 3 (Book 7): The Dove is Saying](https://www.kabbalahoftime.com/2021/02/week-3-book-7-dove-is-saying.html) — 336 words*
 
@@ -473,7 +473,7 @@ The Tikkun HaKlali's verse is the one these days are for: "Make known to me the 
 
 ## Day 28 · Book 7 · Week 4
 
-The eagle opens, and this gathering is justice and praise braided with a table set for two.
+The eagle opens, and this gathering is justice and praise set against a table set for two.
 
 The Rock's perfect deeds come in two halves around the eagle's verse, then the song turns and the rest of it is almost entirely tenderness, closing on being forgiven and adorned at once.
 
@@ -717,7 +717,7 @@ The Tikkun HaKlali's verses are shelter and instruction: "You are a refuge to me
 
 The songbird opens, and the gathering sets her nest against the right hand and the snares.
 
-The nether world's bands braid with Haazinu's reproach, the fatherhood and the crushing hand come together, and it ends with the rose and the teaching.
+The nether world's bands run alongside Haazinu's reproach, the fatherhood and the crushing hand come together, and it ends with the rose and the teaching.
 
 *Source: [Week 6 (Book 7): The Songbird is Saying](https://www.kabbalahoftime.com/2021/02/week-6-book-7-songbird-is-saying.html) — 242 words*
 
@@ -833,7 +833,7 @@ The Tikkun HaKlali's verses close Psalm 32 on the difference trust makes: "Many 
 
 The swallow opens, and this gathering runs on remembering and being heard.
 
-The apple tree and the rejoicing come together, the cry and the burning wrath are braided with the poor man's blessing laid in among them, and it ends at the mountain.
+The apple tree and the rejoicing come together, the cry and the burning wrath run together with the poor man's blessing laid in among them, and it ends at the mountain.
 
 *Source: [Week 7 (Book 7): The Swallow is Saying](https://www.kabbalahoftime.com/2021/02/week-7-book-7-swallow-is-saying.html) — 304 words*
 
@@ -953,7 +953,7 @@ Psalm 41's verses are about being kept through illness: "The Lord will guard him
 
 ## Day 56 · Book 7 · Week 8
 
-The swift opens, and this gathering is the boundaries of the nations braided with a sickbed.
+The swift opens, and this gathering is the boundaries of the nations set against a sickbed.
 
 The swift's own verse sits at the centre, the lovesickness lands between the boundaries and the manna, and the last lines are the love that must not be woken before it wants to be, and the enemies it will not be given over to.
 
@@ -1559,7 +1559,7 @@ Psalm 42's verses are a memory of walking up: "These do I recall, and pour out m
 
 The starling opens, and the gathering is riding high places while a soul is downcast.
 
-The searching and the mistaken accusation come together, the last stretch braids the holding-on with the walking up to the House, and the last line is the love that must not be woken before it wants to be.
+The searching and the mistaken accusation come together, the last stretch sets the holding-on beside the walking up to the House, and the last line is the love that must not be woken before it wants to be.
 
 *Source: [Week 13 (Book 7): The Starling is Singing](https://www.kabbalahoftime.com/2021/02/week-13-book-7-starling-is-singing.html) — 344 words*
 
@@ -1799,7 +1799,7 @@ Psalm 42's last verses carry the reproach — "my oppressors have reproached me 
 
 The wild goose opens — seeing Israel busy with Torah — and the gathering sets the way through the wilderness against a palanquin.
 
-The goose's second song arrives braided with Haazinu's growing fat, the two readings of shemen side by side, and the last stretch is Hannah answering, with Saul's men at the door.
+The goose's second song arrives beside Haazinu's growing fat, the two readings of shemen side by side, and the last stretch is Hannah answering, with Saul's men at the door.
 
 *Source: [Week 15 (Book 7): The Wild Goose Is Saying](https://www.kabbalahoftime.com/2021/02/week-15-book-7-wild-goose-is-saying.html) — 351 words*
 
@@ -1911,7 +1911,7 @@ Psalm 59's verses are the ambush: "For behold they lie in ambush for my soul, mi
 
 ## Day 112 · Book 7 · Week 16
 
-The ducks open, and this gathering braids a description of beauty with an ambush.
+The ducks open, and this gathering sets a description of beauty against an ambush.
 
 The teeth and the temple follow with the righteousness between them, Channah's own protest is broken across the psalm's, and it ends where it is fairest.
 
@@ -2149,7 +2149,7 @@ Psalm 59's verses are the laughing: "But You, Lord, You laugh at them; You mock 
 
 The grasshopper opens with its question, and the gathering answers it from four directions at once.
 
-The stone comes with the crossing and the rescue, the forgetting is braided with the tribes, and it ends with the fairness, Lebanon, and the face.
+The stone comes with the crossing and the rescue, the forgetting is set among the tribes, and it ends with the fairness, Lebanon, and the face.
 
 *Source: [Week 18 (Book 7): The Grasshopper is Saying](https://www.kabbalahoftime.com/2021/02/week-18-book-7-grasshopper-is-saying.html) — 243 words*
 
@@ -2257,7 +2257,7 @@ Psalm 59's verses ask for less than destruction, so that nothing is forgotten: "
 
 ## Day 133 · Book 7 · Week 19
 
-The locust opens, and what it opens is a braid of the week's six books into one song.
+The locust opens, and what it opens is the week's six books laid into one song, line alternating with line.
 
 The anger comes first and the asking that it stop short, then the crossing and the planting, then the morning in Ramah, then the scribes and the remembering. The end is the garden.
 
@@ -2373,7 +2373,7 @@ Psalm 89's verse is the anointing: "I have found David, My servant; I have anoin
 
 The spider opens, and the week's six books come in around it.
 
-The howling first, braided with the hiding, then the princes going down, then the birth and the anointing together, then the house with the refuge inside it. The end is the orchard and the cymbals.
+The howling first, set against the hiding, then the princes going down, then the birth and the anointing together, then the house with the refuge inside it. The end is the orchard and the cymbals.
 
 *Source: [Week 20 (Book 7): The Spider is Saying](https://www.kabbalahoftime.com/2021/01/week-20-book-7-spider-is-saying.html) — 261 words*
 
@@ -2485,7 +2485,7 @@ Psalm 59's verse is the strength: "[You are] my strength, to You I will sing, fo
 
 The fly opens — when Israel is not busying itself with Torah — and the week's books answer around it.
 
-The sea and the provoking first, then the sitting still and the sleeping, then what withers and what does not, then the healing and the arm. The end is the garden, with the pilgrimage and the crying out braided through it.
+The sea and the provoking first, then the sitting still and the sleeping, then what withers and what does not, then the healing and the arm. The end is the garden, with the pilgrimage and the crying out running through it.
 
 *Source: [Week 21 (Book 7): The Fly is Saying](https://www.kabbalahoftime.com/2021/02/week-21-book-7-fly-is-saying.html) — 401 words*
 
@@ -2833,7 +2833,7 @@ Psalm 77's verses keep asking through the night and then turn: "Has G-d forgotte
 
 The fish open on the voice above the water, and the week comes in around them.
 
-The sea and the leaving of it first, with the terror in the middle, then the bitter water braided with the famine, then what was carried to Shiloh. The end is the child and the question.
+The sea and the leaving of it first, with the terror in the middle, then the bitter water with the famine running through it, then what was carried to Shiloh. The end is the child and the question.
 
 *Source: [Week 24 (Book 7): The Fish Are Saying](https://www.kabbalahoftime.com/2016/03/the-fish-are-saying.html) — 284 words*
 
@@ -3183,7 +3183,7 @@ Psalm 77's verses are the thunder and the path through the sea, ending "You led 
 
 ## Day 189 · Book 7 · Week 27
 
-The cow opens, and the week braids the garden into the desert.
+The cow opens, and the week lays the garden into the desert.
 
 The grazing and the journey first, then the date and the complaining, then measure for measure and the enemy's boast, then the kings who took nothing. The end is the trumpet and the child prayed for.
 
