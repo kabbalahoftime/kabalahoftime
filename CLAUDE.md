@@ -100,11 +100,33 @@ reflow that adds a page usually means something upstream broke.
 | `docs/alef-bet.md` | `alef-bet.pdf` | 41 |
 | `docs/daily-companion.md` | `daily-companion.pdf` | 494 |
 
-`book7_gathering_of_songs.pdf`, `perek_shirah_booklet.pdf` and
-`branches-sciences.pdf` and `branches-arts.pdf` have no manuscript here. They
-are the two volumes of **Branches** — the sciences and the arts —
-and each is the source its own JSON is built from. Both rows on the shelf say
-they were written with AI.
+`perek_shirah_booklet.pdf` has no manuscript here.
+
+`branches-sciences.pdf` and `branches-arts.pdf` are the two volumes of
+**Branches** — the sciences and the arts — and each is the source its own
+JSON is built from. Both rows on the shelf say they were written with AI.
+
+**Book 7 does have a manuscript**, and this file used to say it did not.
+`book7_content.txt` at the repo root, set by `make_book7_pdf.py` beside it —
+not `docs/` and not `tools/`, and it takes no arguments:
+
+```sh
+python3.13 make_book7_pdf.py        # book7_content.txt -> book7_gathering_of_songs.pdf
+```
+
+The songs are set in **stanzas of four**, and a blank line in the source is a
+stanza break. So a source with a blank line after every line gives one stanza
+per line, which the setter renders faithfully at stanza spacing: the week
+comes out double-spaced and ungrouped. Week 8 shipped that way, along with
+its opposite — fourteen lines run into a single block where the blank lines
+were missing. The setter now warns on both, naming the week; it does not fail
+the build, because several weeks legitimately carry a five- or six-line
+stanza and most end on a single line. 100 pages.
+
+**A changed PDF needs a cache bump to reach anyone.** PDFs fall to the last
+branch of the service worker's fetch handler, which is cache-first with no
+revalidation — a reader who has opened a book keeps that copy until
+`CACHE_NAME` changes and `activate` purges the old cache.
 
 The sciences volume was `branches-roots.pdf` while the book was called
 *Branches / Roots*. It is retitled simply *Branches*, so the filename that

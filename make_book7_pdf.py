@@ -351,6 +351,41 @@ def build_pdf(content_path, output_path):
     for wn, title, stanzas in weeks:
         print(f"  Week {wn:2d}: {title}  ({len(stanzas)} stanzas)")
 
+    # ── IS THE SHAPE RIGHT? ──
+    # The songs are set in stanzas of four. A blank line in the source is a
+    # stanza break, so a source with a blank line after EVERY line gives one
+    # stanza per line — which the setter renders faithfully, at stanza
+    # spacing, and the week comes out double-spaced and ungrouped. Week 8
+    # shipped that way and nobody saw it until a reader did: on that page
+    # every gap was a stanza gap and there was not one ordinary line space
+    # in the week.
+    #
+    # The opposite fault reads the same way in the source and the reverse on
+    # the page: no blank lines at all, and fourteen lines run into one block.
+    # Week 8 had both, in that order.
+    #
+    # Neither is worth failing a build over — several weeks legitimately
+    # carry a five- or six-line stanza, and the last stanza of most weeks is
+    # a single line. So this warns, loudly, and sets the eye on the week.
+    odd = []
+    for wn, title, stanzas in weeks:
+        if len(stanzas) < 2:
+            continue
+        singles = sum(1 for st in stanzas if len(st) == 1)
+        longest = max(len(st) for st in stanzas)
+        if singles > len(stanzas) / 2:
+            odd.append(f"week {wn}: {singles} of {len(stanzas)} stanzas are a single "
+                       f"line — a blank line after every line?")
+        if longest > 8:
+            odd.append(f"week {wn}: a stanza of {longest} lines — a missing blank line?")
+    if odd:
+        print("\n  !! the shape of these weeks looks wrong:")
+        for o in odd:
+            print(f"     {o}")
+    else:
+        print("  stanza shapes look right in all "
+              f"{len(weeks)} weeks")
+
     for week_num, title, stanzas in weeks:
         story.append(PageBreak())
         story.append(Spacer(1, 0.15 * inch))
