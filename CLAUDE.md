@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v330**; the next is v331.
+nobody. Currently **v331**; the next is v332.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -382,6 +382,16 @@ shape as `kotPrayerSteps`; the ordinals index `Object.keys(TZEDAKAH)`, so
 the table's own order is the only list of the ten. The Action line hides in
 the hour of a fund that is not undertaken. Nothing marks and nothing counts
 — giving happens on somebody else's page.
+
+A reader can add funds of their own, kept in `kotFundsOwn` as
+`[{sef, label, url}]` and nowhere else. **Nothing draws a fund from
+`TZEDAKAH` directly** — the pane, the window, the chooser and the ladder
+all ask `fundsFor(sef)`, which merges the written ones with the reader's,
+flagging the latter with a third element so they can be marked *yours*.
+`fundCleanUrl` adds `https://` to a bare host and refuses anything that is
+not http(s), which is the one way a stored string here could do harm.
+`_paneTzedakah` keeps a `data-sig` of what it drew, so a fund added or
+dropped rebuilds the block instead of leaving the old one in place.
 
 Two things lean on it, so check them after any change:
 

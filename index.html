@@ -360,9 +360,15 @@ padding: 0 16px;
      last column drawn sits on the border. */
   padding: 0 9px;
 }
-@media (max-width: 419px) {
-  .dc-row { grid-template-columns: repeat(2, auto); column-gap: 20px; }
-}
+/* Two by two when four will not fit, decided by fitCounterRow rather than
+   by a breakpoint. The width at which four stop fitting is not a property
+   of the screen: it moves with the reader's text size, with how long the
+   four names are, and with the figure beside the moon, which grows by a
+   star and a numeral as the day's companions are gathered. A media query
+   knows none of those, and the one written here first let 330px at the
+   largest text draw MEDITATIONPRAYER as one word with the moon sitting on
+   top of the heart's tally. */
+.dc-row.two-up { grid-template-columns: repeat(2, auto); column-gap: 20px; }
 .dc-col {
   display: flex;
   flex-direction: column;
@@ -373,10 +379,27 @@ padding: 0 16px;
   align-self: stretch;
   min-width: 72px;
 }
-/* Phones: let the columns draw in rather than overhang */
-@media (max-width: 470px) {
-  .dc-col { min-width: 50px; }
-}
+/* The figures beside the glyphs. They were written inline at each of the
+   four, which is why they could not be eased on a narrow screen: an inline
+   size outranks any rule. One class, so the media query below can reach
+   them. */
+.dc-num { font-size: calc(16px * var(--ts, 1)); color: var(--gold); }
+/* The star tally is the widest thing the row ever grows by — ✡︎11 beside
+   30/30 made the Study column 110px of the 284 a 390px phone has — and it
+   is the one figure the page already draws: the ring of eleven around the
+   moon fills as the companions are gathered. It stays, small and dim, as a
+   gloss on the ring rather than a second tally beside the moon's. */
+.dc-num-stars { font-size: 0.7em; color: var(--gold-mid); opacity: 0.85;
+  letter-spacing: 0; }
+/* What is left to do, said quietly. The figure was "0/10" at one size, and
+   three quarters of it was the part that does not move: the glyph beside it
+   already says the fraction — the flame fills, the heart fills, the moon
+   waxes — so the denominator was drawing the eye to the one number that
+   never changes. It still has work to do, because a reader who undertook
+   seven of the thirty has nowhere else to read what they undertook, so it
+   stays; it is simply not the thing being said. */
+.dc-den { font-size: 0.64em; color: var(--ink-dim); letter-spacing: 0; }
+
 
 
 
@@ -471,7 +494,11 @@ padding: 0 16px;
    stayed on one line. Three columns, two shapes. The space before it goes
    with the change: a trailing one on a centred line pushes that line off its
    own centre. */
-.dc-label .heb { display: block; }
+/* Hebrew is never tracked here, the rule the rest of the page keeps: the
+   small capitals above it want their letters apart and התבוננות does
+   not. It was inheriting the label's tracking, which made the Hebrew line
+   the widest thing in the row. */
+.dc-label .heb { display: block; letter-spacing: 0; }
 /* ── THE TZEDAKAH BOX ──
    A pushka drawn around the chanukiah: the walls, and the slot the coin goes
    through above them. Hairline and gold, like the three glyphs beside it, so
@@ -501,6 +528,33 @@ padding: 0 16px;
   border-radius: 1px;
   background: var(--gold);
   opacity: 0.6;
+}
+
+/* Phones: the four draw in rather than overhang, and still stand on one
+   line. Four columns across 360px is 236px of content once the gaps are
+   paid for, and left at their full size they want 291 — so the figures
+   come down from 16px to 12, the names from 10.5 to 8.6 with the tracking
+   cut from 2px to 0.6, and the three glyphs lose a few pixels each. None of
+   them is reading matter: they are a tally and a label, and the row they
+   make is read as one thing.
+
+   The Hebrew under each name sets the floor, not the English. התבוננות
+   is eight letters at no tracking and is wider than MEDITATION is at ten. */
+/* Phones: the names draw their letters in and the gap closes, which is
+   what lets the four stand on one line. Nothing else is made smaller — the
+   figures and the glyphs are what the row is for. Whether four actually fit
+   is settled by fitCounterRow, not here. */
+@media (max-width: 470px) {
+  .dc-col { min-width: 0; }
+  .dc-row { column-gap: 6px; }
+  .dc-label { font-size: calc(9.4px * var(--ts, 1)); letter-spacing: 1px; }
+  #maalot-moon-svg { width: 30px; height: 30px; }
+  #med-ring-svg { width: 20px; height: 20px; }
+  /* Three pixels of tracking between numerals is a title's habit, not a
+     tally's, and on the widest figure the row ever shows — 30/30 with the
+     star count beside it — it was ten pixels of the sixteen that stood
+     between four columns and one line. */
+  .dc-time { letter-spacing: 0.5px; }
 }
 
 /* ── DATE SELECTOR ── */
@@ -2802,6 +2856,35 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 }
 .path-complete { text-align:center; color:var(--gold); margin-top:10px; font-style:italic; }
 
+/* ── A FUND THE READER ADDED ── */
+/* Marked, quietly, so the ten that came with the page and the ones a reader
+   put there are never mistaken for each other. */
+.fund-own {
+  font-family:'Cinzel',serif; font-size:calc(9px * var(--ts, 1)); letter-spacing:1px;
+  text-transform:uppercase; color:var(--ink-dim); margin-left:7px;
+}
+.path-row.fund-mine { cursor:default; }
+.fund-drop {
+  background:none; border:none; cursor:pointer; color:var(--ink-dim);
+  font-size:calc(17px * var(--ts, 1)); line-height:1;
+  width:44px; height:44px; margin:-11px -10px -11px 0;
+}
+.fund-drop:hover { color:var(--accent-red); }
+.fund-drop:focus-visible { outline:2px solid var(--gold); outline-offset:-10px; }
+/* The form. Stacked rather than in a row: three fields side by side on a
+   phone leaves each of them too narrow to read what was typed into it. */
+.fund-add { display:flex; flex-direction:column; gap:7px; margin-top:10px; }
+.fund-add-row { display:flex; align-items:center; gap:8px; }
+.fund-add-in {
+  font-family:'Cormorant Garamond',serif; font-size:calc(14px * var(--ts, 1));
+  color:var(--ink); background:#fdf9f2;
+  border:1px solid var(--border-strong); border-radius:5px;
+  padding:9px 10px; min-height:44px; width:100%; box-sizing:border-box;
+}
+.fund-add-row .fund-add-in { flex:1 1 auto; width:auto; }
+.fund-add-in:focus-visible { outline:2px solid var(--gold); outline-offset:-2px; }
+.fund-add-say { font-size:calc(12px * var(--ts, 1)); color:var(--accent-red); min-height:1em; }
+
 /* ── THE PATH HEADER AND ITS CHOOSER ──
    Which portion of the thirty this reader undertook, and the way to change
    it. The header sits above the two halves so the list is read as "of these
@@ -4157,7 +4240,7 @@ content: ''; float: right; width: 30px; height: 1em;
                  this column and the ten marks down the page cannot drift
                  apart: one set of curves, two sizes. -->
             <svg id="med-ring-svg" width="22" height="22" viewBox="0 0 22 22" style="display:block;overflow:visible"></svg>
-            <span id="med-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/10</span>
+            <span id="med-count" class="dc-num">0<span class="dc-den">/10</span></span>
           </div>
           <div class="dc-label">Meditation<span class="heb">התבוננות</span></div>
         </div>
@@ -4181,7 +4264,7 @@ content: ''; float: right; width: 30px; height: 1em;
                     d="M11 19 C 3 13.5, 0.6 9.2, 0.6 6.2 A 5.2 5.2 0 0 1 11 4.4 A 5.2 5.2 0 0 1 21.4 6.2 C 21.4 9.2, 19 13.5, 11 19 Z"
                     fill="none" stroke="var(--gold)" stroke-width="1.1"/>
             </svg>
-            <span id="prayer-heart-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/10</span>
+            <span id="prayer-heart-count" class="dc-num">0<span class="dc-den">/10</span></span>
           </div>
           <!-- Singular, to match Study לימוד beside it: both name the kind of
                deed being counted, not the tally. The .heb span is written here
@@ -4192,8 +4275,8 @@ content: ''; float: right; width: 30px; height: 1em;
           <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:2px;">
             <svg id="maalot-moon-svg" width="33" height="33" viewBox="-6 -6 34 34" style="display:block;overflow:visible">
               <g id="maalot-stars"></g><g id="maalot-sun-rays" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" style="display:none"><line x1="20.8" y1="11" x2="21.9" y2="11"/><line x1="1.2" y1="11" x2="0.1" y2="11"/><line x1="11" y1="20.8" x2="11" y2="21.9"/><line x1="11" y1="1.2" x2="11" y2="0.1"/><line x1="17.93" y1="17.93" x2="18.71" y2="18.71"/><line x1="4.07" y1="4.07" x2="3.29" y2="3.29"/><line x1="17.93" y1="4.07" x2="18.71" y2="3.29"/><line x1="4.07" y1="17.93" x2="3.29" y2="18.71"/></g><circle id="maalot-month-ring" cx="11" cy="11" r="13.5" fill="none" stroke="var(--gold)" stroke-width="1.1" stroke-linecap="round" opacity="0.34" transform="rotate(-90 11 11)" style="display:none"/><circle id="maalot-moon-rim" cx="11" cy="11" r="9" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path id="maalot-moon-fill" d="" fill="var(--gold)"/></svg>
-            <span id="maalot-moon-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold);">0/15</span>
-            <span id="stars-count" style="font-size:calc(16px * var(--ts, 1));color:var(--gold-mid);opacity:0.85;"></span>
+            <span id="maalot-moon-count" class="dc-num">0<span class="dc-den">/15</span></span>
+            <span id="stars-count" class="dc-num dc-num-stars"></span>
           </div>
           <!-- Study, not Ma'alot. The column beside it reads Prayers תפילות,
                a deed and its Hebrew; this one read a transliteration beside
@@ -16010,6 +16093,9 @@ content: ''; float: right; width: 30px; height: 1em;
     // The clock draws its own labels at fixed sizes, so it is redrawn rather
     // than left at the old scale.
     if (window.kotwRefresh) window.kotwRefresh();
+    // The counter row stands four across only while four fit, and a larger
+    // text is exactly what stops them fitting.
+    if (typeof fitCounterRow === 'function') fitCounterRow();
   }
   (function () {
     var saved = null;
@@ -17137,6 +17223,12 @@ content: ''; float: right; width: 30px; height: 1em;
   // ט״ו, where its steps stand in the month; a path of ascent alone ends
   // there. The whole thirty read exactly as before, since the fractions are
   // then 15 and 15.
+  // Done, and out of how many. Both numbers come from the app's own counts,
+  // so neither needs escaping.
+  function _tally(done, of) {
+    return String(done) + '<span class="dc-den">/' + String(of) + '</span>';
+  }
+
   function updateMaalotMoon() {
     const fill = document.getElementById('maalot-moon-fill');
     const cnt  = document.getElementById('maalot-moon-count');
@@ -17171,7 +17263,10 @@ content: ''; float: right; width: 30px; height: 1em;
     // seven was worse: the count read 0/4 under a pill saying 7. Which half
     // of the arc is being walked is said by the moon's own shape, which is
     // the better place for it.
-    if (cnt) cnt.textContent = (waxK + waneK) + '/' + (waxN + waneN);
+    if (cnt) cnt.innerHTML = _tally(waxK + waneK, waxN + waneN);
+    // A figure that has gained a digit is wider, and four across may no
+    // longer fit. Asked here rather than guessed at once a day.
+    if (typeof fitCounterRow === 'function') fitCounterRow();
     // The month around the path: every one of the thirty marked, whether it
     // stood on the path or was taken beyond it, drawn as a faint ring outside
     // the moon. Only for a reader who took a portion — for the whole thirty
@@ -17251,7 +17346,8 @@ content: ''; float: right; width: 30px; height: 1em;
     rect.setAttribute('y', String(bot - (bot - top) * f));
     rect.setAttribute('height', String((bot - top) * f + 1));
     if (fill) fill.setAttribute('fill-opacity', mine ? '1' : '0');
-    if (cnt) cnt.textContent = mine + '/' + total;
+    if (cnt) cnt.innerHTML = _tally(mine, total);
+    if (typeof fitCounterRow === 'function') fitCounterRow();
     const whole = mine === total;
     if (svg) svg.style.filter = whole ? 'drop-shadow(0 0 3px rgba(179,58,58,0.85))' : '';
     const wrap = document.getElementById('prayer-heart-col');
@@ -17498,7 +17594,8 @@ content: ''; float: right; width: 30px; height: 1em;
         ? 'drop-shadow(0 0 4px rgba(122,150,205,0.95)) drop-shadow(0 0 9px rgba(122,150,205,0.4))'
         : ((mine === total && total) ? 'drop-shadow(0 0 3px rgba(122,150,205,0.9))' : '');
     }
-    if (cnt) cnt.textContent = mine + '/' + total;
+    if (cnt) cnt.innerHTML = _tally(mine, total);
+    if (typeof fitCounterRow === 'function') fitCounterRow();
     const col = document.getElementById('med-col');
     if (col) col.title = (medSetIsWhole() ? '' : 'Your meditations: ' + medSetName() +
         ' — ' + mine + ' of ' + total + ' · of the ten, ' + medDone() + ' focused on · ')
@@ -18561,6 +18658,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const cnt = document.getElementById('stars-count');
     const starFig = (halves >> 1) + (halves % 2 ? '\u00BD' : '');
     if (cnt) cnt.textContent = n ? '✡\uFE0E' + starFig : '';
+    if (typeof fitCounterRow === 'function') fitCounterRow();
     const wrap = document.getElementById('maalot-moon');
     if (wrap) wrap.title = "Today's ma'alot — tap each מעלה tag in order · tap for Today's Path" +
       (n ? ` · ${starFig} of ${STARS_IN_RING} stars — ${n} gathered, two to a star` : '');
@@ -18828,7 +18926,9 @@ content: ''; float: right; width: 30px; height: 1em;
         'readings, and tapping any of those opens the list it counts. The fourth is ' +
         '<strong>Action</strong>, a tzedakah box with the menorah inside it &mdash; the ten ' +
         'who carry it, lit as they are gathered. It has no number, because giving is not a ' +
-        'thing a day finishes. Tapping it goes to the menorah of this hour. </p><p>A little is a step. A few lines opened counts. ' +
+        'thing a day finishes. Tapping it opens the ten funds, and there you can ' +
+        '<strong>add your own</strong>: the places you already give to, filed under whichever ' +
+        'Sefirah you like, kept in this browser and sent nowhere. </p><p>A little is a step. A few lines opened counts. ' +
         '</p><p>Thirty readings, ten prayers and ten faces in a day is a great deal to begin ' +
         'with, and you are not asked for all of them. <strong>Customize Paths</strong> at the ' +
         'foot of the block opens four doors, one to each column. It sets how much of each ' +
@@ -18836,7 +18936,7 @@ content: ''; float: right; width: 30px; height: 1em;
         'seven, or the whole thirty &mdash; and, for a reader who would rather not read ' +
         'Hebrew, the eighteen of the thirty that are <strong>in English</strong>. The fourth ' +
         'door is the ten funds: tick the ones you give through, and the Action line asks only ' +
-        'for those. Nothing is ' +
+        'for those. You can add your own there too. Nothing is ' +
         'taken off the page: what you have not undertaken stays where it is, faint, and can ' +
         'still be marked. </p><p>Once the block has scrolled out of sight, that same line ' +
         'follows you at the foot of the screen until the day&rsquo;s readings are done. The ' +
@@ -18903,6 +19003,10 @@ content: ''; float: right; width: 30px; height: 1em;
         'heart. </p><p>The fourth door is the ten funds. Tick the ones you give through and ' +
         'the Action line asks only for those; the rest keep their place at the foot of their ' +
         'own Menorah and can still be given to. Nothing there is marked or counted. ' +
+        '</p><p>Your own funds go in the same window. A name, its page, and the Sefirah it ' +
+        'belongs to &mdash; and from then on it stands with the ten: at the foot of that ' +
+        'card&rsquo;s Menorah, in that list, and on the Action line in that Sefirah&rsquo;s ' +
+        'hour. It is kept in this browser and sent nowhere. ' +
         '</p><p>The line being asked for also travels: once this block is off the ' +
         'screen it sits at the foot of it, saying the same thing, going to the same place, and ' +
         'gone when the day&rsquo;s readings are done.',
@@ -21121,6 +21225,49 @@ content: ''; float: right; width: 30px; height: 1em;
   // Rebuilt only when the hour's Sefirah changes, like the two lines above
   // it: the beat is every thirty seconds and the line carries a link, which
   // should not be replaced under a finger already on it.
+  // ── FOUR ACROSS, OR TWO BY TWO ──
+  // Measured, not guessed. What the four columns need is the widest of each
+  // one's two rows — its glyph and figure, and its name under them — plus
+  // the gaps, and that total moves with three things a media query cannot
+  // see: the reader's text size, the length of the four names, and the
+  // figure beside the moon, which gains a star and a numeral as the day's
+  // companions are gathered.
+  //
+  // Measured at four every time, because the question is always whether
+  // four would fit now — asking it while the row is already stacked would
+  // answer about the stacked row and it could never come back.
+  //
+  // Nothing here moves if the answer has not changed, so this can be called
+  // on every render and on every resize without touching the page.
+  function fitCounterRow() {
+    const row = document.querySelector('.dc-row');
+    if (!row || !row.clientWidth) return;
+    const was = row.classList.contains('two-up');
+    row.classList.remove('two-up');
+    const cols = [...row.querySelectorAll('.dc-col')];
+    const cs = getComputedStyle(row);
+    const gap = parseFloat(cs.columnGap) || 0;
+    const avail = row.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    let want = gap * Math.max(0, cols.length - 1);
+    cols.forEach((c) => {
+      let w = 0;
+      c.querySelectorAll('.dc-time, .dc-label').forEach((e) => {
+        // scrollWidth is the content's own width even where the box has been
+        // squeezed under it, which is exactly the case being tested for.
+        w = Math.max(w, e.scrollWidth, Math.ceil(e.getBoundingClientRect().width));
+      });
+      want += w;
+    });
+    const two = want > avail;
+    if (two) row.classList.add('two-up');
+    if (two !== was && typeof syncA11yState === 'function') syncA11yState();
+  }
+  window.addEventListener('resize', () => { try { fitCounterRow(); } catch (e) {} });
+  // Cinzel is a web font, and the names are set in it. Measured before it
+  // arrives, they are measured in a fallback serif of another width.
+  if (document.fonts && document.fonts.ready)
+    document.fonts.ready.then(() => { try { fitCounterRow(); } catch (e) {} });
+
   function applyTodayAction() {
     const el = document.getElementById('today-action');
     if (!el) return;
@@ -21132,7 +21279,8 @@ content: ''; float: right; width: 30px; height: 1em;
     const mine = fundHas(fundOrder().indexOf(name) + 1);
     const entry = mine ? TZEDAKAH[name] : null;
     // The set is part of what the line says, so a change to it redraws.
-    const want = name + (mine ? '' : '\u00b7off');
+    const want = name + (mine ? '' : '\u00b7off') +
+      (entry ? '\u00b7' + fundsFor(name).length : '');
     if (el.dataset.built !== want) {
       el.dataset.built = want;
       if (!entry) el.innerHTML = '';
@@ -21140,8 +21288,9 @@ content: ''; float: right; width: 30px; height: 1em;
         const esc = (t) => String(t == null ? '' : t)
           .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
           .replace(/"/g, '&quot;');
-        const label = entry.funds[0][0], url = entry.funds[0][1];
-        const rest = entry.funds.length - 1;
+        const funds = fundsFor(name);
+        const label = funds[0][0], url = funds[0][1];
+        const rest = funds.length - 1;
         el.innerHTML =
           '<button type="button" class="tp-go" onclick="todayActionGo()" ' +
           'aria-label="Go to this hour’s menorah">' +
@@ -21191,6 +21340,56 @@ content: ''; float: right; width: 30px; height: 1em;
   function fundOrder() { return Object.keys(TZEDAKAH); }
   function fundSefirah(n) { return fundOrder()[n - 1] || ''; }
 
+  // ── THE READER'S OWN ──
+  // Ten funds chosen by one person are ten funds chosen by one person. A
+  // reader gives where they give — their shul, their chevra kadisha, the
+  // family they know of — and the page should carry that beside the ten
+  // rather than instead of it.
+  //
+  // Each is filed under a Sefirah, because that is the only way it can take
+  // part: the Menorah pane it sits in belongs to a Sefirah, and so does the
+  // hour the ladder asks in. Filed under one, it appears at the foot of
+  // that card, in the window, and on the Action line in that hour, exactly
+  // as the written ones do.
+  //
+  // Kept in this browser and nowhere else. It is a list of what somebody
+  // gives to, which is nobody's business but theirs, and the app has no
+  // server to put it on in any case.
+  let _fundsOwnCache = null;
+  function fundsOwn() {
+    if (_fundsOwnCache) return _fundsOwnCache;
+    let out = [];
+    try {
+      const raw = localStorage.getItem('kotFundsOwn');
+      const arr = raw ? JSON.parse(raw) : null;
+      if (Array.isArray(arr)) out = arr.filter(x =>
+        x && typeof x.label === 'string' && typeof x.url === 'string' &&
+        fundOrder().indexOf(x.sef) >= 0 && /^https?:\/\//i.test(x.url));
+    } catch (e) {}
+    _fundsOwnCache = out;
+    return out;
+  }
+  function setFundsOwn(arr) {
+    _fundsOwnCache = (arr || []).slice();
+    try { localStorage.setItem('kotFundsOwn', JSON.stringify(_fundsOwnCache)); } catch (e) {}
+    if (typeof applyTodayAction === 'function') applyTodayAction();
+    if (typeof buildCardPanes === 'function') buildCardPanes();
+  }
+  // The written ones first, then the reader's own under the same Sefirah.
+  // Everything that draws a fund asks this rather than the table, so a fund
+  // added once shows in all three places it belongs.
+  function fundsFor(sef) {
+    const own = fundsOwn().filter(x => x.sef === sef).map(x => [x.label, x.url, true]);
+    return ((TZEDAKAH[sef] || {}).funds || []).concat(own);
+  }
+  // An address a person typed. Only http and https, and never javascript:
+  // or data:, which is the one way a stored string here could do harm.
+  function fundCleanUrl(raw) {
+    const t = String(raw || '').trim();
+    const u = /^[a-z][a-z0-9+.-]*:/i.test(t) ? t : 'https://' + t;
+    return /^https?:\/\/[^\s/?#]+/i.test(u) ? u : '';
+  }
+
   let _fundStepsCache = null;
   function fundSteps() {
     if (_fundStepsCache) return _fundStepsCache;
@@ -21231,6 +21430,7 @@ content: ''; float: right; width: 30px; height: 1em;
   let _fundChoosing = false;
   function openFunds() {
     _fundChoosing = false;
+    if (!_fundAddSef) _fundAddSef = _faceHourName() || '';
     renderFundsBody();
     document.getElementById('funds-modal').style.display = 'flex';
   }
@@ -21258,14 +21458,14 @@ content: ''; float: right; width: 30px; height: 1em;
       '<div class="path-note">Each opens that fund\u2019s own page, where the giving is done. ' +
       'Nothing here is marked or counted.</div>';
     order.forEach((sef, i) => {
-      const entry = TZEDAKAH[sef] || { funds: [] };
       const off = !fundHas(i + 1);
       html += '<div class="path-row' + (off ? ' off' : '') + (sef === nowSef ? ' next' : '') + '">' +
         '<span class="path-name">' +
-          entry.funds.map(f =>
+          fundsFor(sef).map(f =>
             '<a href="' + _fundEsc(f[1]) + '" target="_blank" rel="noopener" ' +
             'style="color:var(--gold);text-decoration:none">' + _fundEsc(f[0]) +
-            ' &#8599;&#xFE0E;</a>').join('<br>') +
+            ' &#8599;&#xFE0E;</a>' + (f[2] ? '<span class="fund-own">yours</span>' : '')
+          ).join('<br>') +
         '</span>' +
         '<span class="path-sef">' + sef + '</span>' +
         (sef === nowSef ? '<span class="path-next-tag">now</span>' : '') +
@@ -21286,14 +21486,83 @@ content: ''; float: right; width: 30px; height: 1em;
       'the rest keep their place at the foot of their own Menorah and can still be given to.</div>' +
       '<div class="path-section-title">Take them one by one</div>';
     order.forEach((sef, i) => {
-      const entry = TZEDAKAH[sef] || { funds: [] };
-      const names = entry.funds.map(f => f[0]).join(' · ');
+      const names = fundsFor(sef).map(f => f[0]).join(' · ');
       html += '<div class="path-pick" onclick="event.stopPropagation(); fundTogglePick(' + (i + 1) + ')">' +
         '<span class="path-check">' + (fundHas(i + 1) ? '\u2611' : '\u2610') + '</span>' +
         '<span class="path-name">' + _fundEsc(names) + '</span>' +
         '<span class="path-sef">' + sef + '</span></div>';
     });
+
+    // Your own, under the ten. Each is filed to a Sefirah, which is how it
+    // takes part at all: that is the card it stands on and the hour it is
+    // asked in.
+    const own = fundsOwn();
+    html += '<div class="path-section-title" style="margin-top:14px;">Your own</div>';
+    if (own.length) {
+      own.forEach((x, i) => {
+        html += '<div class="path-row fund-mine">' +
+          '<span class="path-name"><a href="' + _fundEsc(x.url) + '" target="_blank" ' +
+          'rel="noopener" style="color:var(--gold);text-decoration:none">' +
+          _fundEsc(x.label) + ' &#8599;&#xFE0E;</a></span>' +
+          '<span class="path-sef">' + _fundEsc(x.sef) + '</span>' +
+          '<button type="button" class="fund-drop" title="Remove this fund" ' +
+          'aria-label="Remove ' + _fundEsc(x.label) + '" ' +
+          'onclick="event.stopPropagation(); fundDropOwn(' + i + ')">\u00d7</button>' +
+          '</div>';
+      });
+    } else {
+      html += '<div class="path-note">Nothing yet. Add the places you already give to — ' +
+        'your shul, a chevra kadisha, a family you know of — and they stand with the ' +
+        'ten: at the foot of that Sefirah\u2019s Menorah, in this list, and on the ladder in ' +
+        'that Sefirah\u2019s hour. They are kept in this browser and sent nowhere.</div>';
+    }
+    html += '<div class="fund-add">' +
+      '<input id="fund-add-name" class="fund-add-in" type="text" maxlength="60" ' +
+      'placeholder="Name of the fund" aria-label="Name of the fund">' +
+      '<input id="fund-add-url" class="fund-add-in" type="url" maxlength="300" ' +
+      'placeholder="Its page \u2014 example.org/donate" aria-label="The fund\u2019s address">' +
+      '<div class="fund-add-row">' +
+        '<select id="fund-add-sef" class="fund-add-in" aria-label="Which Sefirah it belongs to">' +
+          order.map(sf => '<option value="' + sf + '"' +
+            (sf === _fundAddSef ? ' selected' : '') + '>' + sf + '</option>').join('') +
+        '</select>' +
+        '<button type="button" class="path-head-btn" ' +
+        'onclick="event.stopPropagation(); fundAddOwn()">Add</button>' +
+      '</div>' +
+      '<div id="fund-add-say" class="fund-add-say" role="status"></div>' +
+      '</div>';
     body.innerHTML = html;
+  }
+
+  // Added from what was typed, with the address tidied: a bare example.org
+  // is given https:// so a reader need not know to type it, and anything
+  // that is not http or https is refused rather than stored.
+  // The Sefirah last filed under, so a reader adding three to one card does
+  // not pick it three times. It starts on the hour's own, which is the one
+  // they are most likely looking at.
+  let _fundAddSef = '';
+  function fundAddOwn() {
+    const say = document.getElementById('fund-add-say');
+    const nameEl = document.getElementById('fund-add-name');
+    const urlEl = document.getElementById('fund-add-url');
+    const sefEl = document.getElementById('fund-add-sef');
+    if (!nameEl || !urlEl || !sefEl) return;
+    const label = nameEl.value.trim();
+    const url = fundCleanUrl(urlEl.value);
+    const sef = sefEl.value;
+    if (!label) { if (say) say.textContent = 'It needs a name.'; return; }
+    if (!url) { if (say) say.textContent = 'That is not a web address.'; return; }
+    if (fundOrder().indexOf(sef) < 0) return;
+    _fundAddSef = sef;
+    setFundsOwn(fundsOwn().concat([{ sef: sef, label: label, url: url }]));
+    renderFundsBody();
+  }
+  function fundDropOwn(i) {
+    const cur = fundsOwn().slice();
+    if (i < 0 || i >= cur.length) return;
+    cur.splice(i, 1);
+    setFundsOwn(cur);
+    renderFundsBody();
   }
 
   function fundTogglePick(n) {
@@ -22491,6 +22760,7 @@ content: ''; float: right; width: 30px; height: 1em;
     setTimeout(applyMaalotState, 0); // after this render's innerHTML writes settle
     setTimeout(applyPrayerState, 0);
     setTimeout(applyStarState, 0);
+    setTimeout(fitCounterRow, 0);    // four across or two by two, measured
     setTimeout(injectMedMarks, 0);        // the ten faces' own marks, likewise
     setTimeout(applyMedState, 0);         // after them, so the marks are there to light
     setTimeout(injectCycleInfoButtons, 0); // re-append ⓘ after this render's rewrites
@@ -27854,7 +28124,14 @@ content: ''; float: right; width: 30px; height: 1em;
     const entry = TZEDAKAH[sef];
     const body = box && box.querySelector(':scope > .pane-body[data-pane="menorah"]');
     if (!entry || !body) return;
+    const funds = fundsFor(sef);
+    // Rebuilt when what it says changes and not otherwise. It used to be
+    // built once and only moved after that, which was right while the list
+    // was fixed; a reader can add a fund of their own now, and the block
+    // has to answer to that without the page being reloaded.
+    const sig = funds.map(f => f[0] + '|' + f[1]).join('\n');
     let blk = body.querySelector(':scope > .tzedakah-block');
+    if (blk && blk.dataset.sig !== sig) { blk.remove(); blk = null; }
     if (!blk) {
       const esc = (t) => String(t == null ? '' : t)
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -27865,12 +28142,14 @@ content: ''; float: right; width: 30px; height: 1em;
       // counting cards: Keter's menorah is in the dial's panes and is not
       // one of the nine.
       blk.dataset.sef = sef;
+      blk.dataset.sig = sig;
       blk.innerHTML =
         '<div class="tzedakah-label">Tzedakah — ' +
         '<bdi lang="he">צְדָקָה</bdi></div>' +
-        entry.funds.map(([label, url]) =>
+        funds.map(([label, url, mine]) =>
           '<div class="src-line"><a href="' + esc(url) + '" target="_blank" ' +
-          'rel="noopener">' + esc(label) + ' ↗︎</a></div>').join('') +
+          'rel="noopener">' + esc(label) + ' ↗︎</a>' +
+          (mine ? '<span class="fund-own">yours</span>' : '') + '</div>').join('') +
         (entry.note ? '<div class="tzedakah-note">' + esc(entry.note) + '</div>' : '');
     }
     body.appendChild(blk);
@@ -30917,7 +31196,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, the word in <strong>Ma&rsquo;alot HaZman</strong>, the spiral of the year above, and in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is the opposite motion &mdash; a lessening, a making-small, what the moon does coming down.</p>
   <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. None is ever asked for by the hour; the surrounding light does not wait on a vessel. Each fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
   <p>One closed set among them wears a <strong>menorah</strong> rather than a star, and it is a chanukiah: ten who carry it on nine lights. The Baal Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven of Chabad from the Alter Rebbe to the Rebbe. Eight take the eight branches, in the order the teaching came down; the ninth, the Rayatz, is the shamash at the centre &mdash; the one whose whole work was to light others; and the tenth takes no branch, because when he is gathered every light on the stand is lit. A gathered bearer lights blue in his own place.</p>
-  <p>At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there. Today&rsquo;s Ladder carries the hour&rsquo;s own fund on its fourth line, so you need not come looking for it.</p>
+  <p>At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there. Today&rsquo;s Ladder carries the hour&rsquo;s own fund on its fourth line, so you need not come looking for it, and the <strong>Action</strong> column beneath opens all ten at once &mdash; which is also where you <strong>add your own</strong>: the places you already give to, filed under whichever Sefirah you like, kept in this browser and sent nowhere.</p>
   <p>Four, and a face above them. Every Sefirah card carries four panes &mdash; <span lang="he">מעלות</span>, <span lang="he">מיעוטים</span>, Stars and Menorah &mdash; under its face, and the strip at the head of the page carries four under its artwork. The four are things to do; a face is what the hour already is. Four living creatures, and above them a throne.</p>
 
   <h3 class="hg-h">The thirty steps</h3>
