@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v336**; the next is v337.
+nobody. Currently **v337**; the next is v338.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -408,7 +408,14 @@ not http(s), which is the one way a stored string here could do harm.
 `_paneTzedakah` keeps a `data-sig` of what it drew, so a fund added or
 dropped rebuilds the block instead of leaving the old one in place.
 
-Two things lean on it, so check them after any change:
+Three things lean on the order, so check them after any change:
+
+- The master's own book is named by CSS, not by a pass:
+  `.tzedakah-block + *:not(.ps-niggun):not([data-rebbe])::before` draws a
+  TORAH flag on whatever follows the funds. A `::before` rather than a span
+  because that element is rewritten by render on the nine cards and by a
+  fetch on Keter, and a span inside it would be wiped within the second.
+
 
 - `renderRebbeNiggunim` walks forward from each `[data-rebbe]` heading to the
   next bearer, and puts the melody there. It used to stop at

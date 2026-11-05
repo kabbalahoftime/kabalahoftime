@@ -1350,6 +1350,37 @@ margin-top: 6px;
 .tzedakah-block {
 margin: 12px 0 15px;
 }
+/* ── THE MASTER'S TORAH, NAMED ──
+   Three things stand under his name, and two of them said what they were:
+   TZEDAKAH over the funds and ♪ NIGGUN beside the melody. The learning
+   between them said nothing, so a reader met a bare link with a labelled
+   thing on either side of it.
+   Taken from the fund block's own adjacency rather than put in by a pass,
+   because the element it lands on is rewritten on most cards by render and
+   on Keter by a fetch that arrives later: a span placed inside it would be
+   wiped within the second, and a ::before cannot be. The one thing after
+   the funds that is not the learning is a melody, and that is excluded.
+   Drawn as the niggun's own flag is — the same box, the same small
+   capitals — because they are the same kind of thing: a word saying what
+   the line beside it holds.
+   A second bearer's name is excluded as well. No pane carries two today,
+   but one that did and whose first master had no book would otherwise
+   have the next master's name labelled Torah. */
+.tzedakah-block + *:not(.ps-niggun):not([data-rebbe])::before {
+content: 'Torah';
+display: inline-block;
+font-family: 'Cinzel', serif;
+font-size: calc(8.5px * var(--ts, 1));
+letter-spacing: 1.3px;
+text-transform: uppercase;
+color: var(--gold);
+border: 1px solid var(--gold);
+border-radius: 3px;
+padding: 1px 5px;
+margin-right: 7px;
+line-height: 1.5;
+vertical-align: 0.1em;
+}
 .tzedakah-label {
 font-family: 'Cinzel', serif;
 font-size: calc(10.5px * var(--ts, 1));
