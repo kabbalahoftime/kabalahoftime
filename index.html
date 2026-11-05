@@ -1266,6 +1266,39 @@ color: var(--ink-dim);
 margin-top: 6px;
 }
 
+/* ── TZEDAKAH, AT THE FOOT OF EVERY MENORAH ──
+   A rule above it, because it is not more of the reading it follows: the
+   other three panes hold things to read and this one ends in a thing to do.
+   The label borrows the section headings' small capitals rather than
+   inventing a louder shape — it stands under the master whose branch it is,
+   not over him. */
+.tzedakah-block {
+margin-top: 14px;
+padding-top: 12px;
+border-top: 1px solid var(--border);
+}
+.tzedakah-label {
+font-family: 'Cinzel', serif;
+font-size: calc(10.5px * var(--ts, 1));
+letter-spacing: 2.5px;
+color: var(--gold);
+text-transform: uppercase;
+margin-bottom: 6px;
+}
+.tzedakah-label [lang="he"] {
+font-family: 'Frank Ruhl Libre', serif;
+letter-spacing: 0;
+text-transform: none;
+}
+.tzedakah-block .src-line { margin-top: 3px; }
+.tzedakah-block .src-line a { color: var(--gold); font-size: 0.88em; }
+.tzedakah-note {
+font-size: calc(11px * var(--ts, 1));
+color: var(--ink-dim);
+font-style: italic;
+margin-top: 7px;
+}
+
 /* The daily-summary popup carries paragraphs, not a line or two: upright
    rather than italic, larger, and with the leading to be read at length. */
 #info-popup-main {
@@ -2379,6 +2412,24 @@ to   { opacity: 1; }
 #kotw-root .kotw-sub{
   text-align:center; font-style:italic; font-size:calc(13px * var(--ts, 1)); opacity:.75; margin:2px 0 10px;
 }
+/* ── THE DIAL'S OWN ⓘ ──
+   The same two faults the toggle below had, from the same two causes.
+
+   It was not visible: --gold is #5f490d, a dark brown chosen to carry 7.6:1
+   against parchment. On the navy dial it is all but unlit — 0.55 of its own
+   and 0.75 of the line it sits in, so four tenths of a dark brown on
+   near-black. It takes the dial's own gold instead, as the toggle does.
+
+   And the line was not centred: `#kotw-root *{margin:0}` is an id and a
+   universal, so it outranks a class and wiped the negative margins the
+   shared rule uses to keep a 44px tap target from costing 44px of layout.
+   The box kept its full size — which pushed the line 11px left of its own
+   centre and opened a 44px-tall gap under the title. Put back here rather
+   than loosening the reset, which is what keeps the dial's boxes tight. */
+#kotw-root .kotw-sub .cycle-info-btn{
+  color:var(--kotw-gold); opacity:.85; margin:-15px -14px -15px -9px;
+}
+#kotw-root .kotw-sub .cycle-info-btn:hover{opacity:1}
 #kotw-root svg{width:100%; height:auto; display:block}
 #kotw-root .kotw-seg{cursor:pointer}
 /* ── THE DIAL'S OWN TOGGLE ──
@@ -18250,8 +18301,13 @@ content: ''; float: right; width: 30px; height: 1em;
         // than over it, and the two panes are the same kind of thing: a
         // closed set whose members each have a song. A melody announced
         // before the words is a melody interrupting them.
+        // The tzedakah block stops the walk as a next bearer would. It is not
+        // the master's text and the melody does not go under it: left to run
+        // on, the walk reached the foot of the pane and put the niggun below
+        // the fund, which reads as the fund's own song.
         let last = head;
         while (last.nextElementSibling &&
+               !last.nextElementSibling.classList.contains('tzedakah-block') &&
                !(last.nextElementSibling.matches('[data-rebbe]') &&
                  !last.nextElementSibling.classList.contains('star-mark')))
           last = last.nextElementSibling;
@@ -18619,8 +18675,11 @@ content: ''; float: right; width: 30px; height: 1em;
     ladder: {
       title: 'Today’s Ladder',
       beginner:
-        'The block that answers one question: what now? </p><p>Three lines, one to each kind ' +
-        'of thing the day asks for &mdash; <strong>Meditation</strong>, ' +
+        'The block that answers one question: what now? </p><p>The day asks for four things: ' +
+        '<strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and ' +
+        '<strong>action</strong>. Three of them have a line here. The fourth is the tzedakah ' +
+        'at the foot of each card&rsquo;s <strong>Menorah</strong> pane. </p><p>So: three ' +
+        'lines, one to each kind &mdash; <strong>Meditation</strong>, ' +
         '<strong>Prayer</strong>, <strong>Study</strong> &mdash; and the one with a gold line ' +
         'down its left is the one being asked for. It says so in words: <em>Read ' +
         '&#1502;&#1506;&#1500;&#1492; &#1490;&#1523; &middot; Year-Round Connection</em>. ' +
@@ -18652,8 +18711,11 @@ content: ''; float: right; width: 30px; height: 1em;
         'follows you at the foot of the screen until the day&rsquo;s readings are done. The ' +
         '&#10005; on it puts it away for the visit.',
       main:
-        'What the day is asking for next, and how much of it has been done. </p><p>Three lines ' +
-        'name the three kinds: the face of the Sefirah whose hour it is, the prayer that hour ' +
+        'What the day is asking for next, and how much of it has been done. </p><p>The day ' +
+        'asks for four kinds of thing &mdash; meditation, prayer, study and action &mdash; and ' +
+        'three of them are named here. The fourth stands at the foot of each card&rsquo;s ' +
+        'Menorah: the fund that Sefirah carries, and the giving is the deed. </p><p>Three lines ' +
+        'name the three: the face of the Sefirah whose hour it is, the prayer that hour ' +
         'is asking for, and the reading of the thirty that it is asking for. One of them ' +
         'carries a gold line down its left and a verb, and it is always the reading, because ' +
         'it is ' +
@@ -20519,17 +20581,37 @@ content: ''; float: right; width: 30px; height: 1em;
     // heading above it, it told a reader the year when it meant the moment,
     // which is the one thing this line exists to give them.
     //
-    // "of 52" stays, because the parallel to the year is why the number is
-    // fifty-two and not forty-eight.
-    //
     // Only here. Week ${week} · Day ${day} on the Mishna and Psalms cards,
     // and the companion's own week, are the year's real weeks and keep the
     // word.
+    //
+    // And the line gives the stretch's own Sefirah pairing rather than a
+    // theme. It used to print kotwWeekData(n).t, which is W[n].t — and W is
+    // the YEAR's fifty-two weeks: W[1] is "To Raise our Heads, Choose a
+    // Master", the same words the companion prints for week 1 of the year.
+    // So renaming the noun fixed the label and left the content still
+    // quoting the year: the day's 22nd stretch wearing the year's 22nd
+    // week's theme. On the dial, where "The Year as a Single Day" stands
+    // above it, borrowing that theme is the whole conceit. On a card it is
+    // the same false claim the word "week" was making.
+    //
+    // The pairing is the stretch's own: seven of seven, Chesed of Chesed to
+    // Malchut of Malchut, and the three Mochin past 49 that stand outside
+    // the square. Taken from the dial's own combo() and MOCH so the two
+    // cannot say different things about one moment.
+    //
+    // In the row's own colour. The pairing carries a colour on the dial,
+    // where it fills a segment and tells the wheel apart at a glance; here
+    // it is one line among ten and a colour would say this face matters
+    // more than the nine under it.
     Keter: () => {
       try {
         const n = (typeof window.kotwCurWeek === 'function') ? window.kotwCurWeek() : 0;
-        const w = (n && typeof window.kotwWeekData === 'function') ? window.kotwWeekData(n) : null;
-        if (w && w.t) return 'Stretch ' + n + ' of 52 \u00b7 \u201c' + w.t + '\u201d';
+        if (!n) return '';
+        const pair = (typeof window.kotwCombo === 'function' && n < 50)
+          ? (window.kotwCombo(n) || {}).en
+          : (window.kotwMochin ? (window.kotwMochin(n) || {}).en : '');
+        if (pair) return 'Stretch ' + n + ': ' + pair;
       } catch (e) {}
       return '';
     },
@@ -27372,12 +27454,85 @@ content: ''; float: right; width: 30px; height: 1em;
     });
   }
 
+  // ── TZEDAKAH — the Menorah pane's own deed ──
+  // The day asks for four things: meditation, prayer, study and action. The
+  // first three have a line each on the ladder. The fourth is the Menorah,
+  // and giving is what it asks for — so each card's menorah carries the fund
+  // that belongs to its Sefirah, and nothing else here is a thing to read.
+  //
+  // One fund to a Sefirah, except where the fund itself comes in parts:
+  // Chesed has the two seasonal appeals, Yesod the three standing ones,
+  // Malchut two. Each address is the fund's own page, and the donation form
+  // is on that page rather than a step further in.
+  //
+  // Written here, by hand, and never generated. It is the same rule the
+  // Branches leaves are kept under: a list of addresses gathered by a person
+  // has no source to be rebuilt from, so there is exactly one place it can
+  // live without being thrown away by the next rebuild of something else.
+  const TZEDAKAH = {
+    Keter:    { funds: [['Keren Hashana', 'https://www.mykerenhashana.com']] },
+    Chochmah: { funds: [['Keren Levi Yitzchak', 'https://kerenleviyitzchak.com']] },
+    Binah:    { funds: [['Keren Chana', 'https://www.magbis.org/keren-chana']] },
+    Chesed:   { funds: [['The Tishrei Fund', 'https://www.magbis.org/tishrei-fund'],
+                        ['The Passover Fund', 'https://www.magbis.org/passover-fund']],
+                note: 'Mo’os Chittim — the two seasonal appeals.' },
+    Gevurah:  { funds: [['Ata Horeisa', 'https://www.magbis.org/ata-horeisa']] },
+    Tiferet:  { funds: [['Keren Torah', 'https://www.magbis.org/keren-torah']] },
+    Netzach:  { funds: [['Keren Oholei Yosef Yitzchak',
+                         'https://www.magbis.org/keren-oholei-yosef-yitzchak']],
+                note: 'The Tammuz appeal, for the Rayatz’s institutions.' },
+    Hod:      { funds: [['The 19 Kislev – Chanukah Magbis',
+                         'https://www.magbis.org/19-kislev-chanukah']] },
+    Yesod:    { funds: [['Maamad', 'https://www.magbis.org/maamad'],
+                        ['Kupas Rabbeinu', 'https://www.magbis.org/kupas-rabeinu'],
+                        ['Demei Pan', 'https://www.magbis.org/demei-pan']],
+                note: 'Maamad is the year-round fund to the Rebbe.' },
+    Malchut:  { funds: [['Keren Hachomesh', 'https://www.kerenhachomesh.org'],
+                        ['Keren MaMoSh', 'https://www.magbis.org/keren-mamosh']] }
+  };
+
+  // A card's own name, with the soft hyphens that let "Choch­mah" break in a
+  // narrow label taken out again. Those are real characters in the markup,
+  // so a plain textContent match against "Chochmah" finds nothing.
+  function _sefName(card) {
+    const el = card.querySelector('.sefirah-name');
+    return el ? (el.textContent || '').replace(/[­\s]/g, '') : '';
+  }
+
+  // Appended rather than written into the markup, and appended again on every
+  // pass. The filing above empties and refills a pane each render, so a block
+  // put there once would end up above the day's reading on the second pass;
+  // appendChild on a node already in the pane moves it to the foot, which is
+  // where this belongs — under the master whose branch it is.
+  function _paneTzedakah(box, sef) {
+    const entry = TZEDAKAH[sef];
+    const body = box && box.querySelector(':scope > .pane-body[data-pane="menorah"]');
+    if (!entry || !body) return;
+    let blk = body.querySelector(':scope > .tzedakah-block');
+    if (!blk) {
+      const esc = (t) => String(t == null ? '' : t)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+      blk = document.createElement('div');
+      blk.className = 'tzedakah-block';
+      blk.innerHTML =
+        '<div class="tzedakah-label">Tzedakah — ' +
+        '<bdi lang="he">צְדָקָה</bdi></div>' +
+        entry.funds.map(([label, url]) =>
+          '<div class="src-line"><a href="' + esc(url) + '" target="_blank" ' +
+          'rel="noopener">' + esc(label) + ' ↗︎</a></div>').join('') +
+        (entry.note ? '<div class="tzedakah-note">' + esc(entry.note) + '</div>' : '');
+    }
+    body.appendChild(blk);
+  }
+
   function buildCardPanes() {
     document.querySelectorAll('.sefirah-card').forEach(card => {
       const box = _paneBox(card);
       _paneTakeFace(card, box);
+      const sef = _sefName(card);
       const det = card.querySelector('.sefirah-detail');
-      if (!det) { _paneTrim(box); return; }
+      if (!det) { _paneTzedakah(box, sef); _paneTrim(box); return; }
       if (!card._paneFiled) card._paneFiled = new Map();
       if (!card._paneOpened) card._paneOpened = new Set();
 
@@ -27426,8 +27581,13 @@ content: ''; float: right; width: 30px; height: 1em;
         last[k] = true;
       });
       });
+      _paneTzedakah(box, sef);
       _paneTrim(box);
     });
+    // Keter's panes are written out in the markup rather than built here, so
+    // the strip above the cards is reached on its own. It is the one card
+    // whose Sefirah is not printed beside it, so it is named outright.
+    _paneTzedakah(document.querySelector('.keter-panes'), 'Keter');
   }
 
   // A pane with nothing in it is not offered. What a card holds differs by
@@ -30273,6 +30433,10 @@ content: ''; float: right; width: 30px; height: 1em;
   window.kotwWeekData=function(n){return W[n-1]||null;};
   window.kotwCurWeek=curWeek;
   window.kotwCombo=combo;
+  // The three past 49 stand outside the seven-by-seven and have no pairing,
+  // so the face that asks for one needs them by name. Given out here beside
+  // combo for the same reason: one clock, one set of names.
+  window.kotwMochin=function(n){return (n>=50&&MOCH[n-50])?MOCH[n-50]:null;};
   // The path keeps its hours here rather than computing its own: weeks in
   // inner hours from the seam, the Mochin overlaying it, and "now" in the same
   // terms. One clock, so the dial and the path cannot drift apart, and both
@@ -30402,6 +30566,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, the word in <strong>Ma&rsquo;alot HaZman</strong>, the spiral of the year above, and in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is the opposite motion &mdash; a lessening, a making-small, what the moon does coming down.</p>
   <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. None is ever asked for by the hour; the surrounding light does not wait on a vessel. Each fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
   <p>One closed set among them wears a <strong>menorah</strong> rather than a star, and it is a chanukiah: ten who carry it on nine lights. The Baal Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven of Chabad from the Alter Rebbe to the Rebbe. Eight take the eight branches, in the order the teaching came down; the ninth, the Rayatz, is the shamash at the centre &mdash; the one whose whole work was to light others; and the tenth takes no branch, because when he is gathered every light on the stand is lit. A gathered bearer lights blue in his own place.</p>
+  <p>At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there.</p>
   <p>Four, and a face above them. Every Sefirah card carries four panes &mdash; <span lang="he">מעלות</span>, <span lang="he">מיעוטים</span>, Stars and Menorah &mdash; under its face, and the strip at the head of the page carries four under its artwork. The four are things to do; a face is what the hour already is. Four living creatures, and above them a throne.</p>
 
   <h3 class="hg-h">The thirty steps</h3>
