@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v325**; the next is v326.
+nobody. Currently **v326**; the next is v327.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -98,7 +98,7 @@ reflow that adds a page usually means something upstream broke.
 | `docs/ascents.md` | `ascents.pdf` | 52 |
 | `docs/reflections.md` | `reflections.pdf` | 119 |
 | `docs/alef-bet.md` | `alef-bet.pdf` | 41 |
-| `docs/daily-companion.md` | `daily-companion.pdf` | 494 |
+| `docs/daily-companion.md` | `daily-companion.pdf` | 461 |
 
 `perek_shirah_booklet.pdf` has no manuscript here.
 
@@ -243,6 +243,15 @@ An entry comes from one of two places and says which it is.
 post for that book — what the writing teaches, not just what the readings
 are. **Edit the manuscript, never the JSON.** These are the entries the
 companion is for.
+
+**Book 7's entries are short on purpose.** It is the gathering — the other
+six books' verses rearranged, with no commentary of its own — so there is no
+teaching to summarise. Its entries say what the braid makes and stop, in two
+paragraphs and forty to eighty words. They were 340 words of quotations
+chained with slashes, a median sentence of 175 words against the other books'
+25 to 39, and the builder's floor of three paragraphs is relaxed for Book 7
+alone because of it. The floor that remains catches an entry that failed to
+get written: two paragraphs and thirty words.
 
 **Otherwise a transcription** of the weekly table through seven templates,
 one to a book. Nothing in those is composed, so nothing in them can be

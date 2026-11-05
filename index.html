@@ -16538,10 +16538,24 @@ content: ''; float: right; width: 30px; height: 1em;
     // odd word in the letters themselves — אילן against the ninety-one — and
     // an unmarked run is drawn in a Latin face that has no business setting
     // it, and read out by a screen reader as though it were English.
+    //
+    // A word set in italic, written *like this*, is set in italic. The
+    // manuscript leans on it for the word a sentence turns on — Shaul
+    // spelled as She'ol, Shechem meaning shoulder, what the week asks for
+    // being ratzon — and 148 of the 364 entries carry at least one. They
+    // were reaching readers as literal asterisks: the printed companion set
+    // them properly and the page did not, which is the same fault on the
+    // other side of the same text.
+    //
+    // No lookbehind. Safari only learned it in 16.4, and a regular
+    // expression the browser cannot parse takes the whole script down
+    // rather than the one line — so the character before is captured and
+    // put back instead.
     const esc = (s) => String(s == null ? '' : s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/[֐-׿][֐-׿‏‎ ,.’'-]*[֐-׿]|[֐-׿]/g,
-               (m) => '<bdi lang="he">' + m + '</bdi>');
+               (m) => '<bdi lang="he">' + m + '</bdi>')
+      .replace(/(^|[^\w*])\*([^*\n]{1,160}?)\*(?![\w*])/g, '$1<em>$2</em>');
 
     // Day of the year, then where it sits in the book — the week and the
     // movement, so a reader can see the shape they are walking through.

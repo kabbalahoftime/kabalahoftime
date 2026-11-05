@@ -335,9 +335,25 @@ def main(week_path, app_path, out_path, summaries_path=None, posts_path=None):
     missing = [n for n in range(1, 365) if n not in days]
     if missing:
         sys.exit(f'{len(missing)} days missing: {missing[:12]}')
-    thin = sorted(n for n, e in days.items() if len(e['body']) < 3)
+    # A floor on substance, not on length. Three paragraphs was the floor
+    # while every entry was the same kind of thing; Book 7 is not. It is the
+    # gathering — the other six books' verses rearranged, with no commentary
+    # of its own — so there is no teaching to summarise and nothing for a
+    # third paragraph to hold. Its entries say what the braid makes and stop,
+    # in two paragraphs and forty to eighty words.
+    #
+    # What the floor is actually for is an entry that failed to get written:
+    # empty, or a heading with a line under it. That is caught by asking for
+    # two paragraphs and thirty words, which no real entry comes near.
+    thin = sorted(n for n, e in days.items()
+                  if len(e['body']) < 2
+                  or len(' '.join(e['body']).split()) < 30)
     if thin:
-        sys.exit(f'days with fewer than three paragraphs: {thin}')
+        sys.exit(f'days too thin to be an entry: {thin}')
+    short = sorted(n for n, e in days.items()
+                   if e.get('book') != 7 and len(e['body']) < 3)
+    if short:
+        sys.exit(f'days outside Book 7 with fewer than three paragraphs: {short}')
 
     out = {
         'title': 'A Year Inside the Day',
