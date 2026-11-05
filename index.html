@@ -19648,6 +19648,9 @@ content: ''; float: right; width: 30px; height: 1em;
         'hours of one day, each week a step ascending through the seven Sefirot &mdash; with ' +
         'weeks 50&ndash;52, the three Mochin, hovering above the Chatzot seam. Tap any step to ' +
         'see its week; the hand shows where &ldquo;now&rdquo; falls in the inner year. ' +
+        '</p><p>A step of this dial is half an hour of today, so the readouts call it a ' +
+        '<strong>stretch</strong>: <em>Stretch 27 of the inner year</em>. The week it wears ' +
+        'is the year&rsquo;s 27th, which is the whole point of the face. ' +
         '</p><p>The dial turns both ways: a single day with the year inside it, or the whole ' +
         'year drawn as one day. Three views &mdash; 52 weeks, 17 sets, the day.',
       beginner:
@@ -19656,7 +19659,9 @@ content: ''; float: right; width: 30px; height: 1em;
         'the night turns back toward the new year. Each week is a step, and the steps climb ' +
         '&mdash; about twenty-eight minutes of the day to a week. </p><p>The hand shows where ' +
         'you are right now: which week of the year is alive in this hour. Tap any step to visit ' +
-        'its week &mdash; its animal, its rabbi, its quality. </p><p>The highest view of all: ' +
+        'its week &mdash; its animal, its rabbi, its quality. </p><p>Each step is about half ' +
+        'an hour of today, so the dial calls it a <strong>stretch</strong> rather than a week. ' +
+        'It is the week of the year that this half hour is standing in. </p><p>The highest view of all: ' +
         'the entire year, inside a single day.',
       advanced:
         'The fifty-two weeks of the Kabbalah of Time year mapped onto the twenty-four hours of ' +
@@ -30705,23 +30710,33 @@ content: ''; float: right; width: 30px; height: 1em;
     var cm=isM?{he:MOCH[n-50].he,en:MOCH[n-50].en}:combo(n);
     var isNow=(n===curWeek());
     var nowBadge=isNow?'<span class="kotw-now-badge">Now</span>':'';
-    /* Keter's face is this: the week the year is standing in, and the word it
-       carries. So the flame is here, beside it — and only on the week that is
-       now, because a week tapped to be read is not the one being focused on.
-       It is written into this HTML rather than injected after, since the
-       caption is rebuilt on every tick and anything put in from outside would
-       be wiped within the half-minute. */
+    /* Keter's face is this: the stretch of the day that is now, and the word
+       the year's matching week carries. So the flame is here, beside it —
+       and only on the stretch that is now, because one tapped to be read is
+       not the one being focused on. It is written into this HTML rather than
+       injected after, since the caption is rebuilt on every tick and
+       anything put in from outside would be wiped within the half-minute. */
     var medMark=isNow
       ? '<span class="med-mark kotw-med'+
         ((typeof medHas==='function'&&medHas(1))?' done':'')+
         '" data-med="1" role="button" tabindex="0"'+
         ' onclick="event.stopPropagation(); toggleMed(1, event)"'+
-        ' title="Keter \u2014 tap when you have focused on this week"'+
+        ' title="Keter \u2014 tap when you have focused on this stretch"'+
         ' aria-label="Mark the Keter meditation">'+
         '<svg viewBox="0 0 22 22" aria-hidden="true">'+medGlyph(false)+'</svg></span>'
       : '';
+    /* Stretch, not week. The heading above says the parallel and the
+       sub-label glosses it; this line and the one in the middle of the dial
+       are the two that answer "where am I", and what they are answering
+       about is half an hour of this day. A reader meets "Stretch 27" on
+       Keter's card and should not be told "Week 27" here about the very
+       same half hour.
+       The theme below it stays the year's, and that is the whole conceit of
+       this face: the day's 27th stretch wearing the year's 27th week. On a
+       card, lifted out from under the heading, the same borrowing would be
+       a false claim, which is why Keter's line carries the pairing. */
     detail.innerHTML='<span class="kotw-heb">'+cm.he+'</span>'+
-      '<span class="kotw-wk">'+medMark+'Week '+n+nowBadge+'</span>'+
+      '<span class="kotw-wk">'+medMark+'Stretch '+n+nowBadge+'</span>'+
       '<div class="kotw-theme">\u201c'+w.t+'\u201d</div>'+
       '<div class="kotw-meta">\uD83D\uDC3E '+w.a+'<br>\uD83D\uDCDC '+w.r+
       '<br>\u23F1 '+fmt(m1)+' \u2013 '+fmt(m2)+' \u00b7 '+cm.en+'</div>';
@@ -31085,7 +31100,7 @@ content: ''; float: right; width: 30px; height: 1em;
     cT.textContent=fmt(m);
     var dseg=(FACE==='day')?dayShape()[n-1]:null;
     cW.textContent=(FACE==='day')?dseg.en
-      :(FACE==='sets')?'Set '+n+' of the inner year':'Week '+n+' of the inner year';
+      :(FACE==='sets')?'Set '+n+' of the inner year':'Stretch '+n+' of the inner year';
     cS.textContent=(FACE==='day')?dseg.he
       :(FACE==='sets')?ALEF_BET[n-1].hebrew
       // combo pairs the week against the seven, and the Mochin stand outside
