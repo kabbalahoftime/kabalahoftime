@@ -29751,10 +29751,13 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   var h=document.createElement('div');
-  // "stretches" with the old word kept in brackets after it: the dial is
-  // where the parallel is stated, so a reader who has learned to call them
-  // weeks is not left wondering what changed.
-  var SUB={weeks:'52 stretches (\u201cweeks\u201d)',sets:'17 alef-bet sets',day:'the day\u2019s own shape'};
+  // "weeks" leads and "stretches" follows in brackets. On the dial the
+  // parallel to the year is the whole point — it is stated directly above
+  // this line, "The Year as a Single Day" — so week is the word that
+  // belongs here and stretch is the gloss. On a card, lifted out from under
+  // that heading, the two change places: there it reads "Stretch N of 52",
+  // because without the heading "week" claims the year.
+  var SUB={weeks:'52 weeks (\u201cstretches\u201d)',sets:'17 alef-bet sets',day:'the day\u2019s own shape'};
   function faceSub(){
     var e=h.querySelector('.kotw-sub');
     if(e) e.innerHTML=(FACE==='day'?'A Single Day, and the Year in it'
