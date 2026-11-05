@@ -20504,14 +20504,32 @@ content: ''; float: right; width: 30px; height: 1em;
     // the table is filled, this line becomes the teaching with no further
     // change here.
     // Keter's face is the dial, and what the dial says of this moment is the
-    // week the year is standing in and the word that week carries. It was the
-    // day's Hayom Yom, which is a reading rather than a face and is already
-    // named in Strong Day.
+    // now: the stretch of THIS DAY the hour has reached, and the word that
+    // stretch carries. It was the day's Hayom Yom, which is a reading rather
+    // than a face and is already named in Strong Day.
+    //
+    // It said "Week 21", and that was wrong twice over — the comment here
+    // said so too, calling it "the week the year is standing in". It is not.
+    // kotwCurWeek is weekAtH(nowH): it comes from the hour, not the date.
+    // The dial divides one day into fifty-two stretches of about half an
+    // hour because they parallel the year's fifty-two weeks — "The Year as a
+    // Single Day" is the dial's own heading — so the number borrows the
+    // year's vocabulary while meaning something else entirely. On the dial,
+    // under that heading, "week" reads honestly. Lifted onto a card with no
+    // heading above it, it told a reader the year when it meant the moment,
+    // which is the one thing this line exists to give them.
+    //
+    // "of 52" stays, because the parallel to the year is why the number is
+    // fifty-two and not forty-eight.
+    //
+    // Only here. Week ${week} · Day ${day} on the Mishna and Psalms cards,
+    // and the companion's own week, are the year's real weeks and keep the
+    // word.
     Keter: () => {
       try {
         const n = (typeof window.kotwCurWeek === 'function') ? window.kotwCurWeek() : 0;
         const w = (n && typeof window.kotwWeekData === 'function') ? window.kotwWeekData(n) : null;
-        if (w && w.t) return 'Week ' + n + ' \u00b7 \u201c' + w.t + '\u201d';
+        if (w && w.t) return 'Stretch ' + n + ' of 52 \u00b7 \u201c' + w.t + '\u201d';
       } catch (e) {}
       return '';
     },
@@ -29733,7 +29751,10 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   var h=document.createElement('div');
-  var SUB={weeks:'52 weeks',sets:'17 alef-bet sets',day:'the day\u2019s own shape'};
+  // "stretches" with the old word kept in brackets after it: the dial is
+  // where the parallel is stated, so a reader who has learned to call them
+  // weeks is not left wondering what changed.
+  var SUB={weeks:'52 stretches (\u201cweeks\u201d)',sets:'17 alef-bet sets',day:'the day\u2019s own shape'};
   function faceSub(){
     var e=h.querySelector('.kotw-sub');
     if(e) e.innerHTML=(FACE==='day'?'A Single Day, and the Year in it'
