@@ -499,37 +499,6 @@ padding: 0 16px;
    not. It was inheriting the label's tracking, which made the Hebrew line
    the widest thing in the row. */
 .dc-label .heb { display: block; letter-spacing: 0; }
-/* ── THE TZEDAKAH BOX ──
-   A pushka drawn around the chanukiah: the walls, and the slot the coin goes
-   through above them. Hairline and gold, like the three glyphs beside it, so
-   the four columns read as one row.
-   The slot is a pseudo-element rather than a fourth stroke inside the SVG
-   because buildRebbeMenorah rewrites that SVG whole, and anything drawn in
-   it from here would go on the next pass. */
-.tz-box {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  /* Comes in at 33px, just under the 34 the row's glyphs share, so the four
-     labels below sit on one line. The room above the stand is the slot's. */
-  padding: 8px 6px 3px;
-  border: 1.1px solid var(--gold);
-  border-radius: 2px;
-}
-.tz-box::before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 50%;
-  width: 11px;
-  height: 2px;
-  margin-left: -5.5px;
-  border-radius: 1px;
-  background: var(--gold);
-  opacity: 0.6;
-}
-
 /* Phones: the four draw in rather than overhang, and still stand on one
    line. Four columns across 360px is 236px of content once the gaps are
    paid for, and left at their full size they want 291 — so the figures
@@ -682,6 +651,9 @@ margin-top: 6px;
   color: var(--gold); font-size: calc(14px * var(--ts, 1)); line-height: 1;
 }
 .dc-custom-btn svg { width: 15px; height: 15px; display: block; }
+/* The stand is wider than it is tall, unlike the three round marks beside
+   it, so it is given its own box rather than squeezed into a square one. */
+.dc-custom-menorah svg { width: 19px; height: 17.1px; }
 .dc-custom-heart { color: var(--accent-red); }
 .dc-custom-btn:hover { color: var(--ink); }
 .dc-custom-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: -10px; }
@@ -4337,10 +4309,12 @@ content: ''; float: right; width: 30px; height: 1em;
         <div class="dc-col" id="action-col" onclick="openFunds()"
              style="cursor:pointer;" title="המעשה הוא העיקר — the main thing is the deed. The ten funds, one to each Sefirah">
           <div class="dc-time" style="display:flex;align-items:center;justify-content:center;">
-            <span class="tz-box">
-              <svg id="rebbe-menorah" width="25" height="20" viewBox="0 0 26 21"
-                   style="display:block;overflow:visible" aria-hidden="true"></svg>
-            </span>
+            <!-- The stand on its own. It stood in a drawn pushka for a day —
+                 walls and a coin slot — and the box was saying what the
+                 menorah already says: a flame, a heart, a moon and a
+                 chanukiah, four marks and no frames. -->
+            <svg id="rebbe-menorah" width="32" height="26" viewBox="0 0 26 21"
+                 style="display:block;overflow:visible" aria-hidden="true"></svg>
           </div>
           <div class="dc-label">Action<span class="heb">מעשה</span></div>
         </div>
@@ -4369,15 +4343,14 @@ content: ''; float: right; width: 30px; height: 1em;
                   aria-label="Choose which of the ten prayers to say">&#9829;</button>
           <button type="button" class="dc-custom-btn" onclick="openPathChooser()"
                   aria-label="Choose which of the thirty readings to take">&#9790;</button>
-          <!-- The fourth door. A pushka at this size is a box and the slot in
-               its lid, and nothing else survives fifteen pixels. -->
-          <button type="button" class="dc-custom-btn" onclick="openFundChooser()"
+            <!-- The fourth door, and the mark on it is the chanukiah its column
+               wears. The three beside it each draw their own column's glyph;
+               this one drew a pushka for a day, which named the deed rather
+               than the door. -->
+          <button type="button" class="dc-custom-btn dc-custom-menorah" onclick="openFundChooser()"
                   aria-label="Choose which of the ten funds the day asks for">
-            <svg viewBox="0 0 22 22" aria-hidden="true" fill="none" stroke="currentColor"
-                 stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3.3" y="6.6" width="15.4" height="11.6" rx="1.3"/>
-              <line x1="8.2" y1="10.4" x2="13.8" y2="10.4"/>
-            </svg>
+            <svg viewBox="0 0 20 18" aria-hidden="true" fill="none" stroke="currentColor"
+                 stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round"></svg>
           </button>
         </span>
       </div>
@@ -17604,6 +17577,13 @@ content: ''; float: right; width: 30px; height: 1em;
     // It stood in a row of pills once; the pills are gone and the door is not.
     const pg = document.querySelector('.dc-custom-btn svg');
     if (pg && !pg.firstChild) pg.innerHTML = medGlyph(false);
+    // And the stand on the fourth door, from the same curves a bearer's own
+    // mark is drawn from. Named by its class rather than taken by position:
+    // the flame above is the first .dc-custom-btn svg and would be found by
+    // any looser selector.
+    const mg = document.querySelector('.dc-custom-menorah svg');
+    if (mg && !mg.firstChild && typeof MENORAH_PATHS === 'string')
+      mg.innerHTML = MENORAH_PATHS;
     // Drawn once, the first time this runs: the shell is empty in the markup
     // so that the curves live in one place rather than two.
     if (svg && !svg.firstChild) svg.innerHTML = medGlyph(true);
@@ -18300,16 +18280,20 @@ content: ''; float: right; width: 30px; height: 1em;
   // menorah: eight straight arms at one angle, four to a side, each meeting
   // the shaft lower than the last, every lamp level along the top. Stroked in
   // currentColor, so it takes the lit colour as any other mark does.
+  // Six arms at one angle, three to a side, each meeting the shaft lower
+  // than the last; with the shaft's own lamp that is seven, level along the
+  // top and evenly spaced — the Temple's number, and the Rebbeim's.
+  // Kept apart from the <svg> around them because two places draw this: a
+  // bearer's own mark, and the fourth door under Customize Paths. One set
+  // of curves, two shells.
+  const MENORAH_PATHS =
+    '<path d="M2 4.8L10 11.6"/><path d="M4.7 4.8L10 9.7"/><path d="M7.4 4.8L10 7.8"/>' +
+    '<path d="M18 4.8L10 11.6"/><path d="M15.3 4.8L10 9.7"/><path d="M12.6 4.8L10 7.8"/>' +
+    '<path d="M10 4.8V15.1"/><path d="M7.6 17.2h4.8"/>';
   const MENORAH_SVG =
     '<svg class="menorah" viewBox="0 0 20 18" fill="none" stroke="currentColor" ' +
     'stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round" ' +
-    'aria-hidden="true" focusable="false">' +
-    // Six arms at one angle, three to a side, each meeting the shaft lower
-    // than the last; with the shaft's own lamp that is seven, level along the
-    // top and evenly spaced — the Temple's number, and the Rebbeim's.
-    '<path d="M2 4.8L10 11.6"/><path d="M4.7 4.8L10 9.7"/><path d="M7.4 4.8L10 7.8"/>' +
-    '<path d="M18 4.8L10 11.6"/><path d="M15.3 4.8L10 9.7"/><path d="M12.6 4.8L10 7.8"/>' +
-    '<path d="M10 4.8V15.1"/><path d="M7.6 17.2h4.8"/></svg>';
+    'aria-hidden="true" focusable="false">' + MENORAH_PATHS + '</svg>';
 
   // Wrap the leading ✡ of every uncounted section label in a tappable span.
   // Labels that carry a מעלה or מיעוט tag are counted steps and are left
