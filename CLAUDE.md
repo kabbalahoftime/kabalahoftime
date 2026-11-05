@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v335**; the next is v336.
+nobody. Currently **v336**; the next is v337.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -369,12 +369,21 @@ button whose body is empty.
 The day asks for four things — **meditation, prayer, study and action** — and
 the Menorah pane is the action. `TZEDAKAH` in `index.html` holds one fund per
 Sefirah (Chesed, Yesod and Malchut hold more than one), and `_paneTzedakah`
-appends it to the foot of that card's Menorah pane. **Written by hand, never
-generated** — the same rule the Branches leaves are kept under.
+puts it **under the master's name and above his Torah**: the menorah and the
+name head the pane as they always have, and beneath them come the deed, the
+learning and the niggun, in that order. **Written by hand, never generated**
+— the same rule the Branches leaves are kept under.
 
-It is appended again on every pass, because the filing empties and refills a
-pane each render and a block put there once would end up above the day's
-reading. `appendChild` on a node already in the pane moves it to the foot.
+It is placed against the heading rather than against the pane, because on
+Keter the heading is not a child of the pane: label, text and meta are one
+box and the block belongs inside it. The lookup for an existing block is
+likewise unscoped (`body.querySelector('.tzedakah-block')`) — scoped to the
+pane's own children it found nothing on Keter and built a second block on
+every pass.
+
+Done again on every render, because the filing empties and refills the pane
+and its nodes land after whatever is there. A block already in place is left
+alone.
 
 The ladder's fourth line and the row's fourth column both read this table.
 `kotFundSteps` holds which of the ten a reader has undertaken, the same
@@ -401,9 +410,11 @@ dropped rebuilds the block instead of leaving the old one in place.
 
 Two things lean on it, so check them after any change:
 
-- `renderRebbeNiggunim` walks forward from each `[data-rebbe]` heading to find
-  where the niggun goes, and `.tzedakah-block` stops that walk the way a next
-  bearer does. Without the stop the melody lands under the fund.
+- `renderRebbeNiggunim` walks forward from each `[data-rebbe]` heading to the
+  next bearer, and puts the melody there. It used to stop at
+  `.tzedakah-block` as well, which was right while the block stood at the
+  foot of the pane; with the block between the name and the Torah that stop
+  would put the niggun above both, so it is gone.
 - Every Menorah pane is now non-empty, so `_paneTrim` never hides that button.
 
 Keter's panes are static markup rather than built by `buildCardPanes`, so

@@ -1342,16 +1342,13 @@ color: var(--ink-dim);
 margin-top: 6px;
 }
 
-/* ── TZEDAKAH, AT THE FOOT OF EVERY MENORAH ──
-   A rule above it, because it is not more of the reading it follows: the
-   other three panes hold things to read and this one ends in a thing to do.
-   The label borrows the section headings' small capitals rather than
-   inventing a louder shape — it stands under the master whose branch it is,
-   not over him. */
+/* ── TZEDAKAH, UNDER THE MASTER'S NAME ──
+   First of the three things that stand under the name: the deed, then the
+   Torah, then the niggun. No rule above or below it — it is inside the
+   master's own run rather than a section beside it, and its own small
+   capitals are break enough. */
 .tzedakah-block {
-margin-top: 14px;
-padding-top: 12px;
-border-top: 1px solid var(--border);
+margin: 12px 0 15px;
 }
 .tzedakah-label {
 font-family: 'Cinzel', serif;
@@ -18542,13 +18539,13 @@ content: ''; float: right; width: 30px; height: 1em;
         // than over it, and the two panes are the same kind of thing: a
         // closed set whose members each have a song. A melody announced
         // before the words is a melody interrupting them.
-        // The tzedakah block stops the walk as a next bearer would. It is not
-        // the master's text and the melody does not go under it: left to run
-        // on, the walk reached the foot of the pane and put the niggun below
-        // the fund, which reads as the fund's own song.
+        // To the end of this master's run, which is the next bearer or the
+        // end of the pane. The tzedakah block stopped the walk for a day,
+        // while it stood at the foot and the melody would otherwise have
+        // landed under the fund. It sits between the name and the Torah
+        // now, so stopping at it would put the niggun above both.
         let last = head;
         while (last.nextElementSibling &&
-               !last.nextElementSibling.classList.contains('tzedakah-block') &&
                !(last.nextElementSibling.matches('[data-rebbe]') &&
                  !last.nextElementSibling.classList.contains('star-mark')))
           last = last.nextElementSibling;
@@ -28173,7 +28170,11 @@ content: ''; float: right; width: 30px; height: 1em;
     // was fixed; a reader can add a fund of their own now, and the block
     // has to answer to that without the page being reloaded.
     const sig = funds.map(f => f[0] + '|' + f[1]).join('\n');
-    let blk = body.querySelector(':scope > .tzedakah-block');
+    // Anywhere in the pane, not only among its own children: on Keter the
+    // block sits inside his section, beside the label it follows, and a
+    // lookup scoped to the pane's children found nothing and built a second
+    // one on every pass.
+    let blk = body.querySelector('.tzedakah-block');
     if (blk && blk.dataset.sig !== sig) { blk.remove(); blk = null; }
     if (!blk) {
       const esc = (t) => String(t == null ? '' : t)
@@ -28195,7 +28196,26 @@ content: ''; float: right; width: 30px; height: 1em;
           (mine ? '<span class="fund-own">yours</span>' : '') + '</div>').join('') +
         (entry.note ? '<div class="tzedakah-note">' + esc(entry.note) + '</div>' : '');
     }
-    body.appendChild(blk);
+    // Under the master's name, above his Torah. The menorah and the name
+    // head the pane as they always have; the order beneath them is the
+    // deed, then the learning, then the melody.
+    //
+    // Placed against the heading rather than against the pane, because on
+    // Keter the heading is not a child of the pane: his whole section —
+    // label, text and meta — is one box, and the block belongs inside it,
+    // after the label. The nine cards write the label as a child of the
+    // pane itself, where the same line puts the block beside it.
+    //
+    // Done again on every pass, because the filing empties and refills the
+    // pane each render and its nodes land after whatever is there. A block
+    // already in its place is left alone.
+    const head = body.querySelector('[data-rebbe]:not(.star-mark)');
+    if (head && head.parentNode) {
+      if (blk.previousElementSibling !== head)
+        head.parentNode.insertBefore(blk, head.nextSibling);
+    } else if (body.firstChild !== blk) {
+      body.insertBefore(blk, body.firstChild);
+    }
   }
 
   function buildCardPanes() {
