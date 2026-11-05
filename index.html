@@ -654,12 +654,26 @@ margin-top: 6px;
    and each mark carries 44px of reach. */
 .dc-custom {
   display: flex; align-items: center; justify-content: center;
-  flex-wrap: wrap; gap: 2px 8px; margin-top: 14px;
+  flex-wrap: wrap; gap: 2px 6px; margin-top: 14px;
+}
+/* The four doors, held together. Each is a 44px tap target around a 15px
+   mark, so there is 29px of air between the marks already and the box needs
+   no gap of its own. */
+.dc-custom-marks {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-wrap: nowrap;
 }
 .dc-custom-label {
   font-family: 'Cinzel', serif; font-size: calc(10px * var(--ts, 1));
   letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-dim);
-  margin-right: 2px;
+}
+/* On a phone the name joins the four marks on their line only just: at 390
+   it wanted 302 of the 302 there are, and lost by the two pixels of margin
+   it carried beside the row's own gap. Eased a little, it sits with them
+   from 390 up and takes a line of its own below that — where the four
+   still stand together, which is the part that matters. */
+@media (max-width: 470px) {
+  .dc-custom-label { font-size: calc(9.4px * var(--ts, 1)); letter-spacing: 1.2px; }
 }
 .dc-custom-btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -2856,6 +2870,17 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 }
 .path-complete { text-align:center; color:var(--gold); margin-top:10px; font-style:italic; }
 
+/* The saying the window stands on. Gold and centred, above the note rather
+   than inside it: it is the reason the page has this window at all, not a
+   remark about how the window works. */
+.fund-saying {
+  text-align:center; color:var(--gold); margin:10px 0 8px;
+  font-size:calc(14px * var(--ts, 1)); line-height:1.6;
+}
+.fund-saying [lang="he"] {
+  font-family:'Frank Ruhl Libre',serif; letter-spacing:0;
+}
+
 /* ── A FUND THE READER ADDED ── */
 /* Marked, quietly, so the ten that came with the page and the ones a reader
    put there are never mistaken for each other. */
@@ -4310,7 +4335,7 @@ content: ''; float: right; width: 30px; height: 1em;
              count; the ladder's own Action chip is the one that goes to the
              menorah of the hour. -->
         <div class="dc-col" id="action-col" onclick="openFunds()"
-             style="cursor:pointer;" title="The ten funds, one to each Sefirah — tap to see them all">
+             style="cursor:pointer;" title="המעשה הוא העיקר — the main thing is the deed. The ten funds, one to each Sefirah">
           <div class="dc-time" style="display:flex;align-items:center;justify-content:center;">
             <span class="tz-box">
               <svg id="rebbe-menorah" width="25" height="20" viewBox="0 0 26 21"
@@ -4329,24 +4354,32 @@ content: ''; float: right; width: 30px; height: 1em;
            which. -->
       <div class="dc-custom">
         <span class="dc-custom-label">Customize Paths:</span>
-        <button type="button" class="dc-custom-btn" onclick="openMedChooser()"
-                aria-label="Choose which of the ten faces to focus on">
-          <svg viewBox="0 0 22 22" aria-hidden="true"></svg>
-        </button>
-        <button type="button" class="dc-custom-btn dc-custom-heart" onclick="openPrayerChooser()"
-                aria-label="Choose which of the ten prayers to say">&#9829;</button>
-        <button type="button" class="dc-custom-btn" onclick="openPathChooser()"
-                aria-label="Choose which of the thirty readings to take">&#9790;</button>
-        <!-- The fourth door. A pushka at this size is a box and the slot in
-             its lid, and nothing else survives fifteen pixels. -->
-        <button type="button" class="dc-custom-btn" onclick="openFundChooser()"
-                aria-label="Choose which of the ten funds the day asks for">
-          <svg viewBox="0 0 22 22" aria-hidden="true" fill="none" stroke="currentColor"
-               stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3.3" y="6.6" width="15.4" height="11.6" rx="1.3"/>
-            <line x1="8.2" y1="10.4" x2="13.8" y2="10.4"/>
-          </svg>
-        </button>
+        <!-- The four in one box, so they are never parted. Loose in the row
+             they were four flex items like the label, and a fourth door was
+             one more than the line would hold: the row broke three and one,
+             with the pushka alone under the other three. Together they
+             break as a block — the label takes a line of its own and the
+             four stay on theirs. -->
+        <span class="dc-custom-marks">
+          <button type="button" class="dc-custom-btn" onclick="openMedChooser()"
+                  aria-label="Choose which of the ten faces to focus on">
+            <svg viewBox="0 0 22 22" aria-hidden="true"></svg>
+          </button>
+          <button type="button" class="dc-custom-btn dc-custom-heart" onclick="openPrayerChooser()"
+                  aria-label="Choose which of the ten prayers to say">&#9829;</button>
+          <button type="button" class="dc-custom-btn" onclick="openPathChooser()"
+                  aria-label="Choose which of the thirty readings to take">&#9790;</button>
+          <!-- The fourth door. A pushka at this size is a box and the slot in
+               its lid, and nothing else survives fifteen pixels. -->
+          <button type="button" class="dc-custom-btn" onclick="openFundChooser()"
+                  aria-label="Choose which of the ten funds the day asks for">
+            <svg viewBox="0 0 22 22" aria-hidden="true" fill="none" stroke="currentColor"
+                 stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3.3" y="6.6" width="15.4" height="11.6" rx="1.3"/>
+              <line x1="8.2" y1="10.4" x2="13.8" y2="10.4"/>
+            </svg>
+          </button>
+        </span>
       </div>
   </div>
 
@@ -18666,7 +18699,9 @@ content: ''; float: right; width: 30px; height: 1em;
     // said there rather than at the end of the moon's sentence, where it had
     // been because the stand was drawn in the moon's row.
     const act = document.getElementById('action-col');
-    if (act) act.title = 'The ten funds, one to each Sefirah — tap to see them all' +
+    if (act) act.title =
+      'המעשה הוא העיקר — the main thing is the deed. ' +
+      'The ten funds, one to each Sefirah' +
       (nR ? ` · ${nR} of ${REBBE_COUNT} on the menorah gathered` : '');
     syncA11yState();
   }
@@ -21455,6 +21490,10 @@ content: ''; float: right; width: 30px; height: 1em;
       '</span>' +
       '<button type="button" class="path-head-btn" onclick="event.stopPropagation(); fundOpenChooser()">Change</button>' +
       '</div>' +
+      // The line the window is for. The Rebbe said it often, and it is the
+      // same word that stands under the Action column: מעשה.
+      '<div class="fund-saying"><bdi lang="he">המעשה הוא העיקר</bdi> \u2014 ' +
+      '<i>HaMaaseh Hu HaIkar.</i> The main thing is the deed.</div>' +
       '<div class="path-note">Each opens that fund\u2019s own page, where the giving is done. ' +
       'Nothing here is marked or counted.</div>';
     order.forEach((sef, i) => {
@@ -31196,7 +31235,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, the word in <strong>Ma&rsquo;alot HaZman</strong>, the spiral of the year above, and in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is the opposite motion &mdash; a lessening, a making-small, what the moon does coming down.</p>
   <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. None is ever asked for by the hour; the surrounding light does not wait on a vessel. Each fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
   <p>One closed set among them wears a <strong>menorah</strong> rather than a star, and it is a chanukiah: ten who carry it on nine lights. The Baal Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven of Chabad from the Alter Rebbe to the Rebbe. Eight take the eight branches, in the order the teaching came down; the ninth, the Rayatz, is the shamash at the centre &mdash; the one whose whole work was to light others; and the tenth takes no branch, because when he is gathered every light on the stand is lit. A gathered bearer lights blue in his own place.</p>
-  <p>At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there. Today&rsquo;s Ladder carries the hour&rsquo;s own fund on its fourth line, so you need not come looking for it, and the <strong>Action</strong> column beneath opens all ten at once &mdash; which is also where you <strong>add your own</strong>: the places you already give to, filed under whichever Sefirah you like, kept in this browser and sent nowhere.</p>
+  <p><strong><bdi lang="he">המעשה הוא העיקר</bdi> &mdash; <em>HaMaaseh Hu HaIkar</em>, the main thing is the deed.</strong> The Rebbe said it often, and it is the word under the fourth column: <bdi lang="he">מעשה</bdi>. At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there. Today&rsquo;s Ladder carries the hour&rsquo;s own fund on its fourth line, so you need not come looking for it, and the <strong>Action</strong> column beneath opens all ten at once &mdash; which is also where you <strong>add your own</strong>: the places you already give to, filed under whichever Sefirah you like, kept in this browser and sent nowhere.</p>
   <p>Four, and a face above them. Every Sefirah card carries four panes &mdash; <span lang="he">מעלות</span>, <span lang="he">מיעוטים</span>, Stars and Menorah &mdash; under its face, and the strip at the head of the page carries four under its artwork. The four are things to do; a face is what the hour already is. Four living creatures, and above them a throne.</p>
 
   <h3 class="hg-h">The thirty steps</h3>
