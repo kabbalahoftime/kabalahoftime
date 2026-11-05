@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v334**; the next is v335.
+nobody. Currently **v335**; the next is v336.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -380,8 +380,14 @@ The ladder's fourth line and the row's fourth column both read this table.
 `kotFundSteps` holds which of the ten a reader has undertaken, the same
 shape as `kotPrayerSteps`; the ordinals index `Object.keys(TZEDAKAH)`, so
 the table's own order is the only list of the ten. The Action line hides in
-the hour of a fund that is not undertaken. Nothing marks and nothing counts
-— giving happens on somebody else's page.
+the hour of a fund that is not undertaken. **No fund is ever marked or
+counted** — giving happens on somebody else's page.
+
+What the Action column counts is the menorah: `#rebbe-count`, the ten
+bearers lit as they are gathered, written by `applyStarState` beside the
+`nR` it already had. Kindling a light is a deed, so that tally sits with
+the action and not at the end of the moon's row, where it was while the
+stand was drawn there and read as part of the learning.
 
 A reader can add funds of their own, kept in `kotFundsOwn` as
 `[{sef, label, url}]` and nowhere else. **Nothing draws a fund from

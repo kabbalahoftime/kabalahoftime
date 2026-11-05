@@ -389,7 +389,7 @@ padding: 0 16px;
    is the one figure the page already draws: the ring of eleven around the
    moon fills as the companions are gathered. It stays, small and dim, as a
    gloss on the ring rather than a second tally beside the moon's. */
-.dc-num-stars { font-size: 0.7em; color: var(--gold-mid); opacity: 0.85;
+.dc-num-stars { font-size: 0.62em; color: var(--gold-mid); opacity: 0.85;
   letter-spacing: 0; }
 /* What is left to do, said quietly. The figure was "0/10" at one size, and
    three quarters of it was the part that does not move: the glyph beside it
@@ -515,15 +515,17 @@ padding: 0 16px;
    is settled by fitCounterRow, not here. */
 @media (max-width: 470px) {
   .dc-col { min-width: 0; }
-  .dc-row { column-gap: 6px; }
-  .dc-label { font-size: calc(9.4px * var(--ts, 1)); letter-spacing: 1px; }
-  #maalot-moon-svg { width: 30px; height: 30px; }
+  .dc-row { column-gap: 5px; }
+  .dc-label { font-size: calc(9.1px * var(--ts, 1)); letter-spacing: 1px; }
+  .dc-num { font-size: calc(15px * var(--ts, 1)); }
+  #maalot-moon-svg { width: 28px; height: 28px; }
   #med-ring-svg { width: 20px; height: 20px; }
+  #rebbe-menorah { width: 27px; height: 22px; }
   /* Three pixels of tracking between numerals is a title's habit, not a
      tally's, and on the widest figure the row ever shows — 30/30 with the
      star count beside it — it was ten pixels of the sixteen that stood
      between four columns and one line. */
-  .dc-time { letter-spacing: 0.5px; }
+  .dc-time { letter-spacing: 0.3px; }
 }
 
 /* ── DATE SELECTOR ── */
@@ -4308,13 +4310,19 @@ content: ''; float: right; width: 30px; height: 1em;
              menorah of the hour. -->
         <div class="dc-col" id="action-col" onclick="openFunds()"
              style="cursor:pointer;" title="המעשה הוא העיקר — the main thing is the deed. The ten funds, one to each Sefirah">
-          <div class="dc-time" style="display:flex;align-items:center;justify-content:center;">
+          <div class="dc-time" style="display:flex;align-items:center;justify-content:center;gap:4px;">
             <!-- The stand on its own. It stood in a drawn pushka for a day —
                  walls and a coin slot — and the box was saying what the
                  menorah already says: a flame, a heart, a moon and a
                  chanukiah, four marks and no frames. -->
-            <svg id="rebbe-menorah" width="32" height="26" viewBox="0 0 26 21"
+            <svg id="rebbe-menorah" width="29" height="23" viewBox="0 0 26 21"
                  style="display:block;overflow:visible" aria-hidden="true"></svg>
+            <!-- And its tally, like the three beside it. The ten who carry
+                 the menorah are lit by gathering them, and kindling a light
+                 is a deed — so the count belongs on this column and not at
+                 the end of the moon's row, where it sat while the stand did
+                 and read as part of the learning. -->
+            <span id="rebbe-count" class="dc-num">0<span class="dc-den">/10</span></span>
           </div>
           <div class="dc-label">Action<span class="heb">מעשה</span></div>
         </div>
@@ -18647,6 +18655,11 @@ content: ''; float: right; width: 30px; height: 1em;
     });
     buildRebbeMenorah();
     const nR = litRebbeim.size;
+    // The Action column's own figure. Written before the lights are set so
+    // the number and the stand never disagree within a tick.
+    const rc = document.getElementById('rebbe-count');
+    if (rc) rc.innerHTML = _tally(nR, REBBE_COUNT);
+    if (typeof fitCounterRow === 'function') fitCounterRow();
     // The tenth lights the whole stand. Every other light belongs to its own
     // master and burns in its own place, so the chanukiah says which of the
     // ten are gathered and not merely how many — but the last of them is the
@@ -18685,8 +18698,8 @@ content: ''; float: right; width: 30px; height: 1em;
     const act = document.getElementById('action-col');
     if (act) act.title =
       'המעשה הוא העיקר — the main thing is the deed. ' +
-      'The ten funds, one to each Sefirah' +
-      (nR ? ` · ${nR} of ${REBBE_COUNT} on the menorah gathered` : '');
+      `${nR} of ${REBBE_COUNT} on the menorah lit` +
+      ' · tap for the ten funds, one to each Sefirah';
     syncA11yState();
   }
 
@@ -18939,13 +18952,14 @@ content: ''; float: right; width: 30px; height: 1em;
         '<strong>Action</strong> names this Sefirah&rsquo;s own fund: the name goes out to ' +
         'its page, where the giving is done, and the chip goes down to the ' +
         '<strong>Menorah</strong> pane, where the fund stands under the master whose branch ' +
-        'it is. Nothing counts it. </p><p>Underneath are four columns, one to each line above. ' +
+        'it is. The giving itself is never marked &mdash; it happens on somebody else&rsquo;s ' +
+        'page. </p><p>Underneath are four columns, one to each line above. ' +
         'Three of them are counts: the <strong>flame</strong> for the ' +
         'faces, the <strong>heart</strong> for the prayers, the <strong>moon</strong> for the ' +
         'readings, and tapping any of those opens the list it counts. The fourth is ' +
-        '<strong>Action</strong>, a tzedakah box with the menorah inside it &mdash; the ten ' +
-        'who carry it, lit as they are gathered. It has no number, because giving is not a ' +
-        'thing a day finishes. Tapping it opens the ten funds, and there you can ' +
+        '<strong>Action</strong>, the menorah &mdash; the ten who carry it, lit as they are ' +
+        'gathered. Kindling a light is a deed, so that count sits here and not with the ' +
+        'learning. Tapping it opens the ten funds, and there you can ' +
         '<strong>add your own</strong>: the places you already give to, filed under whichever ' +
         'Sefirah you like, kept in this browser and sent nowhere. </p><p>A little is a step. A few lines opened counts. ' +
         '</p><p>Thirty readings, ten prayers and ten faces in a day is a great deal to begin ' +
@@ -18994,17 +19008,18 @@ content: ''; float: right; width: 30px; height: 1em;
         'names the fund this Sefirah carries: the name opens that fund&rsquo;s own page, ' +
         'where the giving is done, and the chip goes down to the pane, under the master ' +
         'whose branch it is. Three Sefirot carry more than one fund, and the line says how ' +
-        'many are waiting there. Nothing counts it, and nothing marks it. ' +
+        'many are waiting there. The giving is not marked: it is done on somebody ' +
+        'else&rsquo;s page, and a tally of it would be a guess. ' +
         '</p><p>Beneath are four columns, one to each line. The heart counts the ten prayers, ' +
         'the flame the ten faces, and the ' +
         'moon the readings. The moon fills as the fifteen steps up are taken and becomes the ' +
         'sun at fifteen, whose rays then remain; from there it wanes as the fifteen back down ' +
         'are taken. Its number counts the whole undertaking rather than the half being walked, ' +
         'so which half of the arc the day is on is said by the moon&rsquo;s own shape rather ' +
-        'than by the count. The fourth column counts nothing: it is a tzedakah box with the ' +
-        'menorah in it, a closed set of ten bearers on nine lights, gathered as companions ' +
-        'rather than counted as steps. It stood unnamed at the end of the moon&rsquo;s row ' +
-        'until it had a column of its own. Tapping it goes to the menorah of this hour. ' +
+        'than by the count. The fourth counts the menorah: ten bearers on nine lights, lit as ' +
+        'they are gathered. Kindling a light is a deed, so that count is the action&rsquo;s ' +
+        'and no part of the learning &mdash; it stood at the end of the moon&rsquo;s row ' +
+        'until it had a column of its own. Tapping it opens the ten funds. ' +
         '</p><p>When the ' +
         'day&rsquo;s climb is finished, an offer of tomorrow&rsquo;s appears in its place. ' +
         '</p><p>The thirty are the month, and a reader takes a portion of it. ' +
@@ -19021,7 +19036,7 @@ content: ''; float: right; width: 30px; height: 1em;
         'for it, but it can still be said, and then it counts to the ten rather than to the ' +
         'heart. </p><p>The fourth door is the ten funds. Tick the ones you give through and ' +
         'the Action line asks only for those; the rest keep their place at the foot of their ' +
-        'own Menorah and can still be given to. Nothing there is marked or counted. ' +
+        'own Menorah and can still be given to. No fund is marked or counted. ' +
         '</p><p>Your own funds go in the same window. A name, its page, and the Sefirah it ' +
         'belongs to &mdash; and from then on it stands with the ten: at the foot of that ' +
         'card&rsquo;s Menorah, in that list, and on the Action line in that Sefirah&rsquo;s ' +
@@ -21240,11 +21255,11 @@ content: ''; float: right; width: 30px; height: 1em;
   // (Chesed two, Yesod three, Malchut two) and where the master whose branch
   // it is stands above them.
   //
-  // Not marked and not counted, so it is never the lit line. The three
-  // counters under this block are the thirty readings, the ten prayers and
-  // the ten faces: closed sets, each of which a day can finish. Giving is
-  // not one of those, and a tally of it would be the single count on this
-  // page that can only ever tell a reader they are behind.
+  // Never the lit line, and the fund itself is never marked. Giving happens
+  // on somebody else's page and a tally of it would be a guess. What the
+  // Action column does count is the menorah — the ten who carry it, lit as
+  // they are gathered — because kindling a light is a deed, and that count
+  // belongs with the deeds rather than with the learning.
   //
   // Rebuilt only when the hour's Sefirah changes, like the two lines above
   // it: the beat is every thirty seconds and the line carries a link, which
@@ -21484,7 +21499,7 @@ content: ''; float: right; width: 30px; height: 1em;
       '<div class="fund-saying"><bdi lang="he">המעשה הוא העיקר</bdi> \u2014 ' +
       '<i>HaMaaseh Hu HaIkar.</i> The main thing is the deed.</div>' +
       '<div class="path-note">Each opens that fund\u2019s own page, where the giving is done. ' +
-      'Nothing here is marked or counted.</div>';
+      'No fund here is marked or counted \u2014 what the column counts is the menorah.</div>';
     order.forEach((sef, i) => {
       const off = !fundHas(i + 1);
       html += '<div class="path-row' + (off ? ' off' : '') + (sef === nowSef ? ' next' : '') + '">' +
@@ -31234,7 +31249,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, the word in <strong>Ma&rsquo;alot HaZman</strong>, the spiral of the year above, and in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is the opposite motion &mdash; a lessening, a making-small, what the moon does coming down.</p>
   <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. None is ever asked for by the hour; the surrounding light does not wait on a vessel. Each fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
   <p>One closed set among them wears a <strong>menorah</strong> rather than a star, and it is a chanukiah: ten who carry it on nine lights. The Baal Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven of Chabad from the Alter Rebbe to the Rebbe. Eight take the eight branches, in the order the teaching came down; the ninth, the Rayatz, is the shamash at the centre &mdash; the one whose whole work was to light others; and the tenth takes no branch, because when he is gathered every light on the stand is lit. A gathered bearer lights blue in his own place.</p>
-  <p><strong><bdi lang="he">המעשה הוא העיקר</bdi> &mdash; <em>HaMaaseh Hu HaIkar</em>, the main thing is the deed.</strong> The Rebbe said it often, and it is the word under the fourth column: <bdi lang="he">מעשה</bdi>. At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there. Today&rsquo;s Ladder carries the hour&rsquo;s own fund on its fourth line, so you need not come looking for it, and the <strong>Action</strong> column beneath opens all ten at once &mdash; which is also where you <strong>add your own</strong>: the places you already give to, filed under whichever Sefirah you like, kept in this browser and sent nowhere.</p>
+  <p><strong><bdi lang="he">המעשה הוא העיקר</bdi> &mdash; <em>HaMaaseh Hu HaIkar</em>, the main thing is the deed.</strong> The Rebbe said it often, and it is the word under the fourth column: <bdi lang="he">מעשה</bdi>. At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there. Today&rsquo;s Ladder carries the hour&rsquo;s own fund on its fourth line, so you need not come looking for it, and the <strong>Action</strong> column beneath counts the menorah &mdash; the ten bearers, lit as you gather them, because kindling a light is a deed and belongs with the deeds. Tapping it opens all ten funds at once &mdash; which is also where you <strong>add your own</strong>: the places you already give to, filed under whichever Sefirah you like, kept in this browser and sent nowhere.</p>
   <p>Four, and a face above them. Every Sefirah card carries four panes &mdash; <span lang="he">מעלות</span>, <span lang="he">מיעוטים</span>, Stars and Menorah &mdash; under its face, and the strip at the head of the page carries four under its artwork. The four are things to do; a face is what the hour already is. Four living creatures, and above them a throne.</p>
 
   <h3 class="hg-h">The thirty steps</h3>
