@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v324**; the next is v325.
+nobody. Currently **v325**; the next is v326.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -287,6 +287,14 @@ only shows with all fifty-two side by side.
 It reports repeats as notices rather than failures (Gath-Rimmon is twice in
 Joshua 21), and it leaves out fields a post does not name: Book 4's Solomon
 column holds a verse, not a reference, so there is nothing to match on.
+
+It also checks the **shape of every post address** — Blogger gives each one
+`/YYYY/MM/slug.html` and no other form. Week 8's Book 7 shipped with the
+`.html` missing: a 404 in the companion, in the printed companion and on the
+card. Nothing caught it, because the post's text had been fetched and cached
+correctly, so every check that reads text passed and the only thing wrong was
+a string nothing compared against anything. The shape can be compared, and it
+costs no network call.
 
 The companion's week is `(day − 1) / 7 + 1`. That matches the week the page
 prints on all 364 days and all 28 intercalated ones — checked — so an entry

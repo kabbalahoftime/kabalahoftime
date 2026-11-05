@@ -193,6 +193,39 @@ def check_journey_chain(weeks):
     return len(breaks)
 
 
+# Blogger gives every post an address of this shape and no other:
+# /YYYY/MM/some-slug.html. The year and month are the post's own.
+BLOGGER = re.compile(r'^https://www\.kabbalahoftime\.com/\d{4}/\d{2}/[a-z0-9-]+\.html$')
+
+
+def check_post_urls(weeks, posts):
+    """Every post address shaped the way Blogger shapes one.
+
+    Week 8's Book 7 went out with its address missing the .html — a 404 in
+    the companion, in the printed companion, and on the card. Nothing caught
+    it: the post's text had been fetched and cached correctly, so every
+    check that reads the text passed, and the only thing wrong was a string
+    nobody compares against anything.
+
+    The shape can be compared. It costs nothing and it does not go to the
+    network — the address being well formed is not the same as it resolving,
+    and a checker that needs the internet fails on a train.
+    """
+    seen, bad = {}, 0
+    urls = [(f'week {w} book 7', weeks[w]['fields']['b7'].get('url'))
+            for w in sorted(weeks) if weeks[w]['fields'].get('b7')]
+    urls += [(f"day {d}", p.get('url')) for d, p in sorted(posts.items())]
+    for where, u in urls:
+        if not u:
+            continue
+        if not BLOGGER.match(u):
+            print(f'  BAD ADDRESS  {where}: {u}')
+            bad += 1
+        seen.setdefault(u, []).append(where)
+    print(f'{len(urls)} post addresses checked for shape, {bad} malformed')
+    return bad
+
+
 def main(week_path, posts_path):
     weeks = {w['week']: w for w in
              json.loads(pathlib.Path(week_path).read_text(encoding='utf-8'))['weeks']}
@@ -277,6 +310,7 @@ def main(week_path, posts_path):
         print()
 
     bad += check_journey_chain(weeks)
+    bad += check_post_urls(weeks, posts)
 
     print(f'{bad} fault(s) flagged')
     return 1 if bad else 0

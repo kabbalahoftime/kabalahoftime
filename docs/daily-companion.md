@@ -904,7 +904,7 @@ The lovesickness lands between them: "and his right hand would embrace me" / "th
 
 It ends with the adjuring and the knowing: "I adjure you, O daughters of Jerusalem" / "and you shall know that I am the Lord, your G-d" — and the last lines are the love that must not be woken before it wants to be, and the enemies it will not be given over to.
 
-*[Week 8, Book 7 — the whole entry](https://www.kabbalahoftime.com/2025/11/week-8-book-7-swift-is-saying)*
+*[Week 8, Book 7 — the whole entry](https://www.kabbalahoftime.com/2025/11/week-8-book-7-swift-is-saying.html)*
 
 ## Week IX | Gevurah of Gevurah | Days 57–63
 
