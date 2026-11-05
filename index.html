@@ -3155,6 +3155,40 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    to somebody else's site. */
 .today-face a.tf-open { color:var(--gold); text-decoration:none; }
 
+/* ── THE ACTION OF THE HOUR ──
+   The fourth line. Drawn as the face is — a row, chip then text — because
+   its text can also run long: "Keren Oholei Yosef Yitzchak" is wider than
+   any face name. It wraps at every width rather than only under 360px,
+   since nothing about it needs to be held on one line.
+   The fund's name is gold and carries the ↗, which is what the app wears
+   wherever it hands a reader over to somebody else's site. What follows it,
+   where a Sefirah has more than one fund, is the quiet grey the Sefirah's
+   own name wears on the line above. */
+/* No margin of its own, unlike the three above it. The Study button it
+   follows carries 11px of padding below its text to reach its 44px, and that
+   padding is already the gap — an 11px margin on top of it set this line
+   ten pixels further down than any of the others, which the eye reads at
+   once in a stack of four. Measured chip to chip: 29.7, 32.9, and this was
+   42.5. */
+.today-action { font-size:calc(13.5px * var(--ts, 1));
+  display:flex; align-items:baseline; column-gap:8px; flex-wrap:wrap; }
+.today-action .tp-go { flex:none; }
+.today-action .ta-fund {
+  color:var(--gold); text-decoration:none;
+  flex:0 1 auto; min-width:0;
+  display:inline-block; padding:14px 0; margin:-14px 0;
+  position:relative; z-index:1;
+}
+.today-action .ta-fund:hover { text-decoration:underline; }
+.today-action .ta-more {
+  background:none; border:none; font-family:inherit; font-size:0.85em;
+  color:var(--ink-mid); cursor:pointer; white-space:nowrap; text-align:left;
+  flex:none;
+  display:inline-block; padding:14px 0; margin:-14px 0;
+  position:relative; z-index:1;
+}
+.today-action .ta-more:hover { color:var(--gold); text-decoration:underline; }
+
 /* ── THE NEXT STEP ──
    The lines named things and asked for none of them, so the one that is a
    step says so in words: "Read מעלה ז׳ · Sichos HaRan".
@@ -3186,6 +3220,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 #today-block .today-start,
 #today-block .today-face,
 #today-block .today-prayer,
+#today-block .today-action,
 #today-block .today-next {
   border-left:2px solid transparent;
   padding-left:8px; margin-left:-10px;
@@ -4059,6 +4094,13 @@ content: ''; float: right; width: 30px; height: 1em;
          known. -->
     <div id="today-prayer" class="today-prayer" style="display:none;"></div>
     <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
+    <!-- THE ACTION THIS HOUR ASKS FOR. The fourth kind, after meditation,
+         prayer and study. The Menorah pane is where the action stands, and
+         at the foot of every Menorah is that Sefirah's own fund — so this
+         names the fund whose hour it is, goes out to its page, and the chip
+         goes down to the pane where it and any others sit. Built by
+         applyTodayAction, which is asked on the same beat as the face. -->
+    <div id="today-action" class="today-action" style="display:none;"></div>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
             aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
       <!-- The day's two gatherings — the ten prayers and the thirty steps —
@@ -18675,29 +18717,30 @@ content: ''; float: right; width: 30px; height: 1em;
     ladder: {
       title: 'Today’s Ladder',
       beginner:
-        'The block that answers one question: what now? </p><p>The day asks for four things: ' +
-        '<strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and ' +
-        '<strong>action</strong>. Three of them have a line here. The fourth is the tzedakah ' +
-        'at the foot of each card&rsquo;s <strong>Menorah</strong> pane. </p><p>So: three ' +
-        'lines, one to each kind &mdash; <strong>Meditation</strong>, ' +
-        '<strong>Prayer</strong>, <strong>Study</strong> &mdash; and the one with a gold line ' +
+        'The block that answers one question: what now? </p><p>Four lines, one to each kind ' +
+        'of thing the day asks for &mdash; <strong>Meditation</strong>, ' +
+        '<strong>Prayer</strong>, <strong>Study</strong>, <strong>Action</strong> &mdash; and ' +
+        'the one with a gold line ' +
         'down its left is the one being asked for. It says so in words: <em>Read ' +
         '&#1502;&#1506;&#1500;&#1492; &#1490;&#1523; &middot; Year-Round Connection</em>. ' +
-        'Tapping it goes straight to it. </p><p>That line is always the study, never the ' +
-        'prayer or the meditation. It is the one of the three that moves: it names the ' +
+        'Tapping it goes straight to it. </p><p>That line is always the study, never one of ' +
+        'the other three. It is the one of the four that moves: it names the ' +
         'reading <em>this hour</em> is asking for, and when that one is marked it moves on ' +
         'to the next. Where the hour&rsquo;s own reading is already done, it turns to whatever is ' +
         'still outstanding and says <em>catching up</em>, so you can always tell the two apart. ' +
         'The very first time, it is something else &mdash; <em>Choose your ' +
         'paths</em> &mdash; and that line goes for good once you have chosen. </p><p>The other ' +
-        'two lines are the hour itself rather than a queue, so neither is ever lit. ' +
+        'three lines are the hour itself rather than a queue, so none of them is ever lit. ' +
         '<strong>Prayer</strong> names the prayer this hour is asking for: tap the name when ' +
         'you have said it, and the &#8599;&#xFE0E; beside it opens the text. ' +
         '<strong>Meditation</strong> names the face of the card whose hour it is &mdash; ' +
         'today&rsquo;s letter, or creature, or attribute, whichever that card keeps. That one ' +
         'is not a thing to do; it is what the day <em>is</em>. Tapping it goes to the card, ' +
         'where a small flame beside the day&rsquo;s line marks that you have focused on it. ' +
-        '</p><p>Underneath are the day&rsquo;s counts: the <strong>flame</strong> for the ' +
+        '<strong>Action</strong> names this Sefirah&rsquo;s own fund: the name goes out to ' +
+        'its page, where the giving is done, and the chip goes down to the ' +
+        '<strong>Menorah</strong> pane, where the fund stands under the master whose branch ' +
+        'it is. Nothing counts it. </p><p>Underneath are the day&rsquo;s counts: the <strong>flame</strong> for the ' +
         'faces, the <strong>heart</strong> for the prayers, the <strong>moon</strong> for the ' +
         'readings, and the menorah at the end for the ten who carry it. Tapping any of them ' +
         'opens the list it counts. </p><p>A little is a step. A few lines opened counts. ' +
@@ -18711,24 +18754,23 @@ content: ''; float: right; width: 30px; height: 1em;
         'follows you at the foot of the screen until the day&rsquo;s readings are done. The ' +
         '&#10005; on it puts it away for the visit.',
       main:
-        'What the day is asking for next, and how much of it has been done. </p><p>The day ' +
-        'asks for four kinds of thing &mdash; meditation, prayer, study and action &mdash; and ' +
-        'three of them are named here. The fourth stands at the foot of each card&rsquo;s ' +
-        'Menorah: the fund that Sefirah carries, and the giving is the deed. </p><p>Three lines ' +
-        'name the three: the face of the Sefirah whose hour it is, the prayer that hour ' +
-        'is asking for, and the reading of the thirty that it is asking for. One of them ' +
+        'What the day is asking for next, and how much of it has been done. </p><p>Four lines ' +
+        'name the four kinds: the face of the Sefirah whose hour it is, the prayer that hour ' +
+        'is asking for, the reading of the thirty that it is asking for, and that ' +
+        'Sefirah&rsquo;s own fund. One of them ' +
         'carries a gold line down its left and a verb, and it is always the reading, because ' +
         'it is ' +
-        'the only one of the three that moves when you mark it. </p><p>It asks two questions, ' +
+        'the only one of the four that moves when you mark it. </p><p>It asks two questions, ' +
         'in that order. First the hour: every one of the thirty sits on a card, and the card ' +
         'has an hour, so what this hour holds still unmarked is what is asked for. Then, once ' +
         'the hour&rsquo;s own portion is done, whatever is still outstanding &mdash; and the ' +
         'line says <em>catching up</em>, so the two are never the same sentence. The ' +
         'day&rsquo;s own portion first and the missed ones after: the Baal Shem Tov&rsquo;s ' +
         'rule for the three Psalms of Elul, which Book 6 carries too. </p><p>A face cannot be ' +
-        'finished and the ten ' +
-        'prayers each keep their own hour, so neither stands in a queue and neither is lit. ' +
-        '</p><p>Until a path has been chosen, a line above the three carries the first step ' +
+        'finished, the ten ' +
+        'prayers each keep their own hour, and giving is not a set that closes, so none of ' +
+        'those three stands in a queue and none of them is lit. ' +
+        '</p><p>Until a path has been chosen, a line above the four carries the first step ' +
         'instead: <em>Choose your paths</em>. It is shown once and never again after. ' +
         '</p><p>The face is the day&rsquo;s own coordinates &mdash; the letter, the creature, ' +
         'the Name of the seventy-two, the attribute, whichever that card holds. It is not a ' +
@@ -18741,6 +18783,11 @@ content: ''; float: right; width: 30px; height: 1em;
         'here and the tag on the card are the same prayer, and either lights both. Every ' +
         'prayer carries an &#8599;&#xFE0E; to its text, here and on its card &mdash; Chabad&rsquo;s ' +
         'Nusach Ari where there is one, and where there is not, whoever holds it best. ' +
+        '</p><p>The action is the fourth kind, and the Menorah is where it stands. The line ' +
+        'names the fund this Sefirah carries: the name opens that fund&rsquo;s own page, ' +
+        'where the giving is done, and the chip goes down to the pane, under the master ' +
+        'whose branch it is. Three Sefirot carry more than one fund, and the line says how ' +
+        'many are waiting there. Nothing counts it, and nothing marks it. ' +
         '</p><p>Beneath, the heart counts the ten prayers, the flame the ten faces, and the ' +
         'moon the readings. The moon fills as the fifteen steps up are taken and becomes the ' +
         'sun at fifteen, whose rays then remain; from there it wanes as the fifteen back down ' +
@@ -20959,6 +21006,68 @@ content: ''; float: right; width: 30px; height: 1em;
     card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
+  // ── THE ACTION OF THE HOUR ──
+  // The fourth kind. Meditation, prayer and study each had a line; action is
+  // the Menorah, and at the foot of every Menorah is that Sefirah's own
+  // fund. So this names the fund whose hour it is.
+  //
+  // Two taps, because there are two places to go. The name goes out to the
+  // fund's own page, where the giving is done. The chip goes down to the
+  // pane — which is where a Sefirah carrying more than one keeps the rest
+  // (Chesed two, Yesod three, Malchut two) and where the master whose branch
+  // it is stands above them.
+  //
+  // Not marked and not counted, so it is never the lit line. The three
+  // counters under this block are the thirty readings, the ten prayers and
+  // the ten faces: closed sets, each of which a day can finish. Giving is
+  // not one of those, and a tally of it would be the single count on this
+  // page that can only ever tell a reader they are behind.
+  //
+  // Rebuilt only when the hour's Sefirah changes, like the two lines above
+  // it: the beat is every thirty seconds and the line carries a link, which
+  // should not be replaced under a finger already on it.
+  function applyTodayAction() {
+    const el = document.getElementById('today-action');
+    if (!el) return;
+    const name = _faceHourName();
+    const entry = TZEDAKAH[name];
+    if (el.dataset.built !== name) {
+      el.dataset.built = name;
+      if (!entry) el.innerHTML = '';
+      else {
+        const esc = (t) => String(t == null ? '' : t)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+        const label = entry.funds[0][0], url = entry.funds[0][1];
+        const rest = entry.funds.length - 1;
+        el.innerHTML =
+          '<button type="button" class="tp-go" onclick="todayActionGo()" ' +
+          'aria-label="Go to this hour’s menorah">' +
+          '<span class="tp-flag">Action</span></button>' +
+          '<a class="ta-fund" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+          esc(label) + ' &#8599;&#xFE0E;</a>' +
+          (rest > 0
+            ? '<button type="button" class="ta-more" onclick="todayActionGo()" ' +
+              'aria-label="Go to this hour’s menorah for the other funds">&middot; and ' +
+              rest + ' more</button>'
+            : '');
+      }
+    }
+    el.style.display = entry ? '' : 'none';
+  }
+
+  // Found by the Sefirah written on the block rather than by counting cards,
+  // because Keter's menorah is in the dial's own panes and is not one of the
+  // nine. The pane is turned to before the scroll, or it lands on nothing.
+  function todayActionGo() {
+    const blk = document.querySelector(
+      '.tzedakah-block[data-sef="' + _faceHourName() + '"]');
+    if (!blk) return;
+    const host = blk.closest('.pane-host');
+    if (host && typeof setPane === 'function') setPane(host, 'menorah');
+    blk.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
   function todayFaceGo() {
     const card = _faceCardFor(_faceHourName());
     if (!card) return;
@@ -20987,6 +21096,7 @@ content: ''; float: right; width: 30px; height: 1em;
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
     applyTodayFace();
+    applyTodayAction();
     // Shown until a path is stored, and then never again. Read from the store
     // rather than from pathSteps(), which answers "the whole thirty" whether
     // that was chosen or merely never declined.
@@ -27515,6 +27625,10 @@ content: ''; float: right; width: 30px; height: 1em;
         .replace(/"/g, '&quot;');
       blk = document.createElement('div');
       blk.className = 'tzedakah-block';
+      // The ladder's Action line finds its fund by this rather than by
+      // counting cards: Keter's menorah is in the dial's panes and is not
+      // one of the nine.
+      blk.dataset.sef = sef;
       blk.innerHTML =
         '<div class="tzedakah-label">Tzedakah — ' +
         '<bdi lang="he">צְדָקָה</bdi></div>' +
@@ -27621,6 +27735,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // The face follows the hour, so it is asked for on the same beat as the
     // times are. It rebuilds only when the answer changes.
     if (typeof applyTodayFace === 'function') applyTodayFace();
+    if (typeof applyTodayAction === 'function') applyTodayAction();
   }, 30000);
 
   // ══════════════════════════════════════════════════════════════
@@ -30566,7 +30681,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, the word in <strong>Ma&rsquo;alot HaZman</strong>, the spiral of the year above, and in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is the opposite motion &mdash; a lessening, a making-small, what the moon does coming down.</p>
   <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. None is ever asked for by the hour; the surrounding light does not wait on a vessel. Each fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
   <p>One closed set among them wears a <strong>menorah</strong> rather than a star, and it is a chanukiah: ten who carry it on nine lights. The Baal Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven of Chabad from the Alter Rebbe to the Rebbe. Eight take the eight branches, in the order the teaching came down; the ninth, the Rayatz, is the shamash at the centre &mdash; the one whose whole work was to light others; and the tenth takes no branch, because when he is gathered every light on the stand is lit. A gathered bearer lights blue in his own place.</p>
-  <p>At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there.</p>
+  <p>At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there. Today&rsquo;s Ladder carries the hour&rsquo;s own fund on its fourth line, so you need not come looking for it.</p>
   <p>Four, and a face above them. Every Sefirah card carries four panes &mdash; <span lang="he">מעלות</span>, <span lang="he">מיעוטים</span>, Stars and Menorah &mdash; under its face, and the strip at the head of the page carries four under its artwork. The four are things to do; a face is what the hour already is. Four living creatures, and above them a throne.</p>
 
   <h3 class="hg-h">The thirty steps</h3>
