@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v350**; the next is v351.
+nobody. Currently **v351**; the next is v352.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -509,6 +509,19 @@ and Yesod alone loses it.
 `displayParasha` asks for the marks again at both its exits now. Anything
 else added that rewrites a card's main text must do the same;
 `injectMedMarks` only fills a host that has no mark, so asking is cheap.
+
+### Two ascents, two words
+
+The dial is **מַדְרֵגוֹת הַזְּמַן** and its fifty-two half-hours are
+**rungs**. The thirty readings on the cards are **מעלות** and **מיעוטים**,
+and in prose they are **steps**. The two must never share a word: the dial
+was מעלות הזמן and one of the four panes is מעלות, which is what made it
+confusing. "Stretch" was tried for the dial's unit and dropped; "step" was
+tried and dropped, because step is already the thirty's word 48 times over
+and the Help Guide defines a מעלה as one.
+
+Both the dial's ⓘ and the Help Guide name the difference outright, so it
+is stated rather than left to be noticed.
 
 ## Scratch work
 
