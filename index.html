@@ -3778,6 +3778,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    the word Read, so one of them can be spared and the name keeps the room. */
 @media (max-width: 349px) { .kt-flag { display: none; } }
 .kt-pray { color: var(--accent-red); }
+/* The third door: gold, the colour the deed already wears on the Action
+   column and the ladder's Action line. The stand is wider than it is tall,
+   so it is given its own box rather than the square the other two sit in. */
+.kt-act { color: var(--gold); }
+.kt-act.done .kt-chip { background: var(--gold); color: #fdf9f2; }
+.kt-act svg { width: 15px; height: 13.5px; }
 .kt-mark:hover .kt-chip { border-color: var(--ink); }
 .kt-mark[hidden] { display: none; }
 .kt-hide {
@@ -18915,6 +18921,11 @@ content: ''; float: right; width: 30px; height: 1em;
       'המעשה הוא העיקר — the main thing is the deed. ' +
       `${nR} of ${REBBE_COUNT} on the menorah lit` +
       ' · tap for the ten funds, one to each Sefirah';
+    // The travelling bar carries the hour's menorah now, and its chip fills
+    // from a bearer being gathered. The faces and the prayers already told
+    // the bar when they moved; until the third door there was nothing here
+    // for it to hear, so nothing called it and the chip stayed hollow.
+    if (typeof _travelMarks === 'function') _travelMarks();
     syncA11yState();
   }
 
@@ -21366,6 +21377,7 @@ content: ''; float: right; width: 30px; height: 1em;
   }
   function travelFaceGo()   { if (typeof todayFaceGo   === 'function') todayFaceGo(); }
   function travelPrayerGo() { if (typeof todayPrayerGo === 'function') todayPrayerGo(); }
+  function travelActionGo() { if (typeof todayActionGo === 'function') todayActionGo(); }
   function travelDismiss() {
     const bar = document.getElementById('kot-travel');
     const f = bar && bar.querySelector('.kt-flag'), t = bar && bar.querySelector('.kt-text');
@@ -21385,6 +21397,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const bar = document.getElementById('kot-travel');
     if (!bar) return;
     const med = bar.querySelector('.kt-med'), pray = bar.querySelector('.kt-pray');
+    const act = bar.querySelector('.kt-act');
     const sef = (typeof _faceHourName === 'function') ? _faceHourName() : '';
     if (med) {
       // The outline glyph, not the fillable one: that carries ids — med-clip,
@@ -21418,6 +21431,28 @@ content: ''; float: right; width: 30px; height: 1em;
         const nm = _prayerListName(n);
         pray.setAttribute('aria-label', 'Go to ' + nm + ' \u2014 ' + (done ? 'said' : 'not yet said'));
         pray.title = nm + (done ? ' \u2014 said' : '');
+      }
+    }
+    if (act) {
+      const g = act.querySelector('svg');
+      if (g && !g.firstChild && typeof MENORAH_PATHS === 'string') g.innerHTML = MENORAH_PATHS;
+      // Up with the ladder's own Action line, which is hidden in the hour of
+      // a fund the reader has not undertaken. The bar should not be the one
+      // place a thing still appears after it has been set aside.
+      const row = document.getElementById('today-action');
+      const up = !!sef && !!row && row.style.display !== 'none';
+      act.hidden = !up;
+      if (up) {
+        // The light, not the fund. Giving is never marked here — it happens
+        // on somebody else's page — so what this chip can fill from is
+        // whether this hour's bearer has been gathered.
+        const mark = document.querySelector(
+          '.star-mark[data-rebbe="' + (PRAYER_SEFIRAH.indexOf(sef) + 1) + '"]');
+        const done = !!mark && mark.classList.contains('lit');
+        act.classList.toggle('done', done);
+        act.setAttribute('aria-label', 'Go to ' + sef + '\u2019s menorah \u2014 ' +
+          (done ? 'gathered' : 'not yet gathered'));
+        act.title = sef + '\u2019s menorah and its fund' + (done ? ' \u2014 gathered' : '');
       }
     }
   }
@@ -31766,6 +31801,17 @@ content: ''; float: right; width: 30px; height: 1em;
     </button>
     <button type="button" class="kt-mark kt-pray" onclick="travelPrayerGo()">
       <span class="kt-chip">&#9829;</span>
+    </button>
+    <!-- And the third: the hour's menorah. Its state is the one thing the
+         action has that can be marked — whether this hour's bearer has been
+         gathered. The fund itself is never marked, so there is nothing of it
+         to carry here; the door goes to the pane where both stand. The
+         stand is drawn from MENORAH_PATHS, the same curves a bearer's own
+         mark uses, so the two cannot drift. -->
+    <button type="button" class="kt-mark kt-act" onclick="travelActionGo()">
+      <span class="kt-chip"><svg viewBox="0 0 20 18" aria-hidden="true" fill="none"
+        stroke="currentColor" stroke-width="1.05" stroke-linecap="round"
+        stroke-linejoin="round"></svg></span>
     </button>
     <button type="button" class="kt-hide" onclick="travelDismiss()"
             title="Put this away" aria-label="Put the step away for this visit">&#10005;</button>

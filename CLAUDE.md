@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v342**; the next is v343.
+nobody. Currently **v343**; the next is v344.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -479,6 +479,19 @@ already holds rather than chosen. So "your own" exists where it can:
 
 The two forms toggle **by index**, not by id: an id built from a reader's
 own words would have to survive being quoted into an `onclick` attribute.
+
+### The travelling bar
+
+Three doors beside the lit step: `.kt-med` (the hour's face), `.kt-pray`
+(its prayer) and `.kt-act` (its menorah). Each is a chip — outlined while
+undone, filled in its own colour when done: blue, red, gold. The action's
+"done" is **the bearer being gathered**, because the fund itself is never
+marked; the door goes to the pane where both stand.
+
+`_travelMarks()` must be called from wherever a mark is taken. The faces
+and the prayers already did it; `applyStarState` did not, because until the
+third door the bar carried nothing that depended on star state — so the
+chip lit only on the next render. It calls it now.
 
 ## Scratch work
 
