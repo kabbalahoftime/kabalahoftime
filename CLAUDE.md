@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v340**; the next is v341.
+nobody. Currently **v341**; the next is v342.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -434,6 +434,38 @@ Three things lean on the order, so check them after any change:
 
 Keter's panes are static markup rather than built by `buildCardPanes`, so
 `_paneTzedakah` is called for `.keter-panes` by name.
+
+### A reader's own
+
+Two of the four kinds can take additions, and two cannot. The difference is
+in the storage, and it is not an accident:
+
+```
+maalotMask()  … & 32767   15 bits — the fifteen Songs of Ascents
+yomMask()     … & 32767   15 bits
+prayersMask() … & 1023    10 bits — the ten Sefirot
+medMask()     … & 1023    10 bits
+funds         … no mask           nothing is marked
+```
+
+The thirty and the ten faces are **closed structures**, not lists: there is
+no sixteenth מעלה, and a face is computed by `_faceOf()` from what the card
+already holds rather than chosen. So "your own" exists where it can:
+
+- **Funds** — `kotFundsOwn`, merged by `fundsFor(sef)`. See above.
+- **Companions** — `kotStarsOwn` as `[{sef, label, url}]`, `url` optional.
+  `_paneStarsOwn` draws them at the foot of that Sefirah's **Stars** pane
+  with their own `.star-mark[data-own]`, so the ordinary click handler and
+  `starsSet()` mark them for free. The id is `starsOwnId()`, not
+  `starIdFor()`, so it cannot collide with one of the day's and survives the
+  pane being rebuilt. Added from the **path chooser's** foot, under a
+  heading that says they are not among the thirty.
+
+  **They must stay out of the ring.** The eleven stars are twenty-two halves
+  and the day has exactly twenty-two companions, so `applyStarState` files a
+  `[data-own]` mark into `litOwn` rather than `lit`. Without that they are
+  either clamped away by `Math.min` or they fill a half belonging to the
+  day's own. How many are gathered is said in the Study column's title.
 
 ## Scratch work
 

@@ -2914,6 +2914,13 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* The way in to a reader's own funds, said in the window rather than found
    by scrolling past the ten inside the chooser. */
 .fund-door { display:block; margin:2px 0 4px; }
+/* A reader's own companions, at the foot of their Sefirah's Stars pane.
+   Set off above by a rule, because what stands over them is the day's own
+   and these are not. */
+.stars-own-block { margin-top:14px; padding-top:12px; border-top:1px solid var(--border); }
+.stars-own-block .src-line { margin-top:3px; }
+.stars-own-block a { color:var(--gold); }
+.star-own-name { color:var(--ink-mid); }
 
 /* ── THE PATH HEADER AND ITS CHOOSER ──
    Which portion of the thirty this reader undertook, and the way to change
@@ -18678,6 +18685,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const set = starsSet();
     const lit = new Set();
     const litRebbeim = new Set();
+    const litOwn = new Set();
     document.querySelectorAll('.star-mark').forEach(el => {
       const on = set.has(el.dataset.star);
       el.classList.toggle('lit', on);
@@ -18688,6 +18696,10 @@ content: ''; float: right; width: 30px; height: 1em;
       if (on) {
         const ord = +(el.dataset.rebbe || 0);
         if (ord) litRebbeim.add(ord);
+        // A reader's own fills no half of the ring. The eleven are the day's
+        // twenty-two exactly, and a half given away here is one the day's
+        // own companion would not get.
+        else if (el.dataset.own) litOwn.add(el.dataset.star);
         else lit.add(el.dataset.star);
       }
     });
@@ -18728,8 +18740,10 @@ content: ''; float: right; width: 30px; height: 1em;
     if (cnt) cnt.textContent = n ? '✡\uFE0E' + starFig : '';
     if (typeof fitCounterRow === 'function') fitCounterRow();
     const wrap = document.getElementById('maalot-moon');
+    const nOwn = litOwn.size, totOwn = starsOwn().length;
     if (wrap) wrap.title = "Today's ma'alot — tap each מעלה tag in order · tap for Today's Path" +
-      (n ? ` · ${starFig} of ${STARS_IN_RING} stars — ${n} gathered, two to a star` : '');
+      (n ? ` · ${starFig} of ${STARS_IN_RING} stars — ${n} gathered, two to a star` : '') +
+      (totOwn ? ` · ${nOwn} of ${totOwn} of your own` : '');
     // The menorah has a column of its own now, so how many are gathered is
     // said there rather than at the end of the moon's sentence, where it had
     // been because the stand was drawn in the moon's row.
@@ -21431,6 +21445,73 @@ content: ''; float: right; width: 30px; height: 1em;
     return fundOrder().map((sef, i) => ({ sef: sef, n: i + 1 })).reverse();
   }
 
+  // ── THE READER'S OWN COMPANIONS ──
+  // "I also learn this every day." The thirty cannot hold it: fifteen up and
+  // fifteen down are the fifteen Songs of Ascents, and a sixteenth is not a
+  // step. But the app already has the shape for a thing done beside the
+  // thirty rather than among them — the companions, Or Makif, gathered and
+  // not counted as steps. A reader's own belong there.
+  //
+  // The ring of eleven stays the day's. Its twenty-two halves are the day's
+  // own twenty-two companions exactly, and they fill it to the brim; a
+  // reader's own would be clamped away by Math.min and show nothing, or
+  // worse, fill a half that belongs to the day. So they are marked like any
+  // companion, kept out of the ring, and counted on their own.
+  let _starsOwnCache = null;
+  function starsOwn() {
+    if (_starsOwnCache) return _starsOwnCache;
+    let out = [];
+    try {
+      const raw = localStorage.getItem('kotStarsOwn');
+      const arr = raw ? JSON.parse(raw) : null;
+      if (Array.isArray(arr)) out = arr.filter(x =>
+        x && typeof x.label === 'string' && x.label &&
+        PRAYER_SEFIRAH.indexOf(x.sef) >= 0 &&
+        (!x.url || /^https?:\/\//i.test(x.url)));
+    } catch (e) {}
+    _starsOwnCache = out;
+    return out;
+  }
+  function setStarsOwn(arr) {
+    _starsOwnCache = (arr || []).slice();
+    try { localStorage.setItem('kotStarsOwn', JSON.stringify(_starsOwnCache)); } catch (e) {}
+    if (typeof buildCardPanes === 'function') buildCardPanes();
+    if (typeof applyStarState === 'function') applyStarState();
+  }
+  function starsOwnFor(sef) { return starsOwn().filter(x => x.sef === sef); }
+  // The id a mark is remembered by. Its own, rather than starIdFor's card and
+  // label, so that it cannot collide with one of the day's and so that it
+  // survives the pane being rebuilt around it.
+  function starsOwnId(x) { return 'own|' + x.sef + '|' + String(x.label).slice(0, 60); }
+
+  function starsOwnAdd() {
+    const say = document.getElementById('star-add-say');
+    const nameEl = document.getElementById('star-add-name');
+    const urlEl = document.getElementById('star-add-url');
+    const sefEl = document.getElementById('star-add-sef');
+    if (!nameEl || !sefEl) return;
+    const label = nameEl.value.trim();
+    const raw = urlEl ? urlEl.value.trim() : '';
+    // An address is optional here, unlike a fund: plenty of what a person
+    // learns daily is a book on their own shelf with nowhere to link to.
+    const url = raw ? fundCleanUrl(raw) : '';
+    const sef = sefEl.value;
+    if (!label) { if (say) say.textContent = 'It needs a name.'; return; }
+    if (raw && !url) { if (say) say.textContent = 'That is not a web address.'; return; }
+    if (PRAYER_SEFIRAH.indexOf(sef) < 0) return;
+    _starAddSef = sef;
+    setStarsOwn(starsOwn().concat([{ sef: sef, label: label, url: url }]));
+    renderTodaysPath();
+  }
+  function starsOwnDrop(i) {
+    const cur = starsOwn().slice();
+    if (i < 0 || i >= cur.length) return;
+    cur.splice(i, 1);
+    setStarsOwn(cur);
+    renderTodaysPath();
+  }
+  let _starAddSef = '';
+
   // ── THE READER'S OWN ──
   // Ten funds chosen by one person are ten funds chosen by one person. A
   // reader gives where they give — their shul, their chevra kadisha, the
@@ -21914,6 +21995,47 @@ content: ''; float: right; width: 30px; height: 1em;
     for (let i = 0; i < 15; i++) html += pick(i);
     html += `<div class="path-section-title" style="margin-top:10px; letter-spacing:1px;">☀ The descent</div>`;
     for (let i = 15; i < 30; i++) html += pick(i);
+
+    // ── AND WHAT A READER ALREADY LEARNS ──
+    // Not among the thirty, and said so plainly. Fifteen up and fifteen down
+    // are the fifteen Songs of Ascents; a sixteenth is not a step. What a
+    // reader keeps beside them is a companion, which is what companions are
+    // for: Or Makif, gathered rather than counted.
+    const esc = (t) => String(t == null ? '' : t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+    const own = starsOwn();
+    if (!_starAddSef) _starAddSef = (typeof _faceHourName === 'function' && _faceHourName()) || 'Keter';
+    html += `<div class="path-section-title" style="margin-top:16px;">✡︎ Your own — gathered, not counted</div>` +
+      `<div class="path-note">The month stays thirty and the ring stays the day’s twenty-two. ` +
+      `What you add here stands on its Sefirah’s card among the <b>✡︎ companions</b>, ` +
+      `and is marked the same way. An address is optional — a book on your own shelf has none. ` +
+      `Kept in this browser and sent nowhere.</div>`;
+    own.forEach((x, i) => {
+      html += `<div class="path-row fund-mine">` +
+        `<span class="path-name">${x.url
+          ? `<a href="${esc(x.url)}" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">${esc(x.label)} &#8599;&#xFE0E;</a>`
+          : esc(x.label)}</span>` +
+        `<span class="path-sef">${esc(x.sef)}</span>` +
+        `<button type="button" class="fund-drop" title="Remove this" ` +
+        `aria-label="Remove ${esc(x.label)}" ` +
+        `onclick="event.stopPropagation(); starsOwnDrop(${i})">×</button>` +
+        `</div>`;
+    });
+    html += `<div class="fund-add">` +
+      `<input id="star-add-name" class="fund-add-in" type="text" maxlength="60" ` +
+      `placeholder="What you learn" aria-label="What you learn">` +
+      `<input id="star-add-url" class="fund-add-in" type="url" maxlength="300" ` +
+      `placeholder="Where it is — optional" aria-label="Where it is, optional">` +
+      `<div class="fund-add-row">` +
+        `<select id="star-add-sef" class="fund-add-in" aria-label="Which Sefirah it belongs to">` +
+          PRAYER_SEFIRAH.map(sf => `<option value="${sf}"${sf === _starAddSef ? ' selected' : ''}>${sf}</option>`).join('') +
+        `</select>` +
+        `<button type="button" class="path-head-btn" ` +
+        `onclick="event.stopPropagation(); starsOwnAdd()">Add</button>` +
+      `</div>` +
+      `<div id="star-add-say" class="fund-add-say" role="status"></div>` +
+      `</div>`;
     document.getElementById('todays-path-body').innerHTML = html;
   }
 
@@ -28286,13 +28408,48 @@ content: ''; float: right; width: 30px; height: 1em;
     }
   }
 
+  // A reader's own companions, at the foot of their Sefirah's Stars pane.
+  // The mark is written here with its own data-star rather than left to
+  // markStarGlyphs, so the id is ours and cannot collide with one of the
+  // day's, and data-own keeps it out of the ring.
+  function _paneStarsOwn(box, sef) {
+    const body = box && box.querySelector(':scope > .pane-body[data-pane="stars"]');
+    if (!body) return;
+    const mine = starsOwnFor(sef);
+    const sig = mine.map(x => x.label + '|' + (x.url || '')).join('\n');
+    let blk = body.querySelector('.stars-own-block');
+    if (blk && blk.dataset.sig !== sig) { blk.remove(); blk = null; }
+    if (!mine.length) return;
+    if (!blk) {
+      const esc = (t) => String(t == null ? '' : t)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+      blk = document.createElement('div');
+      blk.className = 'stars-own-block';
+      blk.dataset.sig = sig;
+      blk.innerHTML =
+        '<div class="tzedakah-label">Your own — ' +
+        '<bdi lang="he">שֶׁלְּךָ</bdi></div>' +
+        mine.map((x) =>
+          '<div class="src-line">' +
+          '<span class="star-mark" data-own="1" data-star="' + esc(starsOwnId(x)) + '" ' +
+          'role="button" tabindex="0" title="Tap when you have learned it">✡︎</span> ' +
+          (x.url
+            ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener">' +
+              esc(x.label) + ' ↗︎</a>'
+            : '<span class="star-own-name">' + esc(x.label) + '</span>') +
+          '</div>').join('');
+    }
+    body.appendChild(blk);
+  }
+
   function buildCardPanes() {
     document.querySelectorAll('.sefirah-card').forEach(card => {
       const box = _paneBox(card);
       _paneTakeFace(card, box);
       const sef = _sefName(card);
       const det = card.querySelector('.sefirah-detail');
-      if (!det) { _paneTzedakah(box, sef); _paneTrim(box); return; }
+      if (!det) { _paneTzedakah(box, sef); _paneStarsOwn(box, sef); _paneTrim(box); return; }
       if (!card._paneFiled) card._paneFiled = new Map();
       if (!card._paneOpened) card._paneOpened = new Set();
 
@@ -28342,12 +28499,14 @@ content: ''; float: right; width: 30px; height: 1em;
       });
       });
       _paneTzedakah(box, sef);
+      _paneStarsOwn(box, sef);
       _paneTrim(box);
     });
     // Keter's panes are written out in the markup rather than built here, so
     // the strip above the cards is reached on its own. It is the one card
     // whose Sefirah is not printed beside it, so it is named outright.
     _paneTzedakah(document.querySelector('.keter-panes'), 'Keter');
+    _paneStarsOwn(document.querySelector('.keter-panes'), 'Keter');
   }
 
   // A pane with nothing in it is not offered. What a card holds differs by
