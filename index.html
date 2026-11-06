@@ -5379,6 +5379,8 @@ content: ''; float: right; width: 30px; height: 1em;
             ' reckoning. Try the other with the pills above.';
           const _nu = document.getElementById('yesod-parasha-numbers');
           if (_nu) _nu.textContent = '';
+          // Writing the face wipes the flame that was in it. See below.
+          if (typeof injectMedMarks === 'function') injectMedMarks();
           return;
         }
 
@@ -5442,6 +5444,17 @@ content: ''; float: right; width: 30px; height: 1em;
         }
         document.getElementById('yesod-parasha-name').innerHTML = mainHtml;
         document.getElementById('yesod-parasha-numbers').textContent = '';
+        // Yesod's meditation flame lives at the head of this very element,
+        // put there by injectMedMarks — so writing it throws the flame away.
+        // render() calls this and then asks for the marks again on a timer,
+        // which covers that path; this function has a second caller of its
+        // own at DOMContentLoaded, and anything that rewrites the face after
+        // the marks have gone in leaves Yesod the one card without one until
+        // the next full render. Asked for again here, where the face is
+        // written, rather than relying on the order of everything that may
+        // call it. injectMedMarks only fills a host that has no mark, so
+        // asking twice costs nothing.
+        if (typeof injectMedMarks === 'function') injectMedMarks();
 
         const tagsEl = document.getElementById('yesod-tags');
         if (tagsEl) tagsEl.innerHTML = '';

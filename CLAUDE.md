@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v346**; the next is v347.
+nobody. Currently **v347**; the next is v348.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -492,6 +492,23 @@ marked; the door goes to the pane where both stand.
 and the prayers already did it; `applyStarState` did not, because until the
 third door the bar carried nothing that depended on star state — so the
 chip lit only on the next render. It calls it now.
+
+### The meditation flames
+
+`injectMedMarks` puts each card's flame **inside** its first
+`.sefirah-main-text`. So anything that rewrites that element throws the
+flame away, and only the next render puts it back.
+
+Yesod is the one card whose face is written by a second function with a
+caller of its own — `displayParasha`, which `render()` calls and which is
+*also* called at DOMContentLoaded. When that second call lands after the
+marks have gone in, Yesod is left the only card without a flame for the
+rest of the visit. Reproduced on the live build: one `displayParasha()`
+and Yesod alone loses it.
+
+`displayParasha` asks for the marks again at both its exits now. Anything
+else added that rewrites a card's main text must do the same;
+`injectMedMarks` only fills a host that has no mark, so asking is cheap.
 
 ## Scratch work
 
