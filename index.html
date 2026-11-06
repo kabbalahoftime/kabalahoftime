@@ -3270,6 +3270,24 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   position:relative; z-index:1;
 }
 .today-prayer .tp-sef { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
+/* ── WHERE THE JOURNEY BEGINS ──
+   The dial, above the four. Drawn as the face below it is — a row, chip
+   then text — because it is the same kind of line: something the hour
+   already is, not something asked of anyone. No mark and never lit: the
+   moment is not a deed, and the step being asked for is further down. */
+.today-dial { margin-top: 8px; font-size: calc(13.5px * var(--ts, 1));
+  display: flex; align-items: baseline; column-gap: 8px; flex-wrap: wrap; }
+.today-dial .tp-go { flex: none; }
+.today-dial .td-open {
+  background: none; border: none; font-family: inherit; font-size: 1em;
+  color: var(--ink-mid); cursor: pointer; text-align: left;
+  flex: 0 1 auto; min-width: 0;
+  display: inline-block; padding: 14px 0; margin: -14px 0;
+  position: relative; z-index: 1;
+}
+.today-dial .td-open:hover { color: var(--gold); text-decoration: underline; }
+.today-dial .td-sub { color: var(--ink-dim); font-size: 0.85em; white-space: nowrap; }
+
 /* The face of the hour. Quieter than the prayer above it — that one is being
    asked for, this one is being told — and its word is a link to the card it
    was read from rather than a mark. The padding gives the tap its height
@@ -3387,6 +3405,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .today-start .ts-word { color:var(--gold); }
 .today-start .ts-sub { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
 #today-block .today-start,
+#today-block .today-dial,
 #today-block .today-face,
 #today-block .today-prayer,
 #today-block .today-action,
@@ -4259,6 +4278,15 @@ content: ''; float: right; width: 30px; height: 1em;
               aria-label="Choose your paths"><span class="tp-flag">First</span></button><span
         class="ts-word">your paths</span><span class="ts-sub">&middot; how much of the thirty, and in which language</span>
     </div>
+    <!-- WHERE THE JOURNEY BEGINS. The dial, before any of the four: the
+         clock in Keter, which is the moment itself rather than a thing
+         asked of anyone. The four lines under it are the journey from
+         there — the meditations, then the prayer, the study and the deed
+         — and they were already in that order; what the block never said
+         was where to start. Built by applyTodayDial, on the same beat as
+         the face, because what it names is the stretch and the stretch
+         turns with the hour. -->
+    <div id="today-dial" class="today-dial" style="display:none;"></div>
     <div id="today-face" class="today-face" style="display:none;"></div>
     <!-- THE PRAYER THIS HOUR IS ASKING FOR. The ten tags are scattered one to
          a Sefirah down the whole page, so knowing which is due meant finding
@@ -21616,6 +21644,37 @@ content: ''; float: right; width: 30px; height: 1em;
   if (document.fonts && document.fonts.ready)
     document.fonts.ready.then(() => { try { fitCounterRow(); } catch (e) {} });
 
+  // The dial line. It names the stretch the day is standing in, which is
+  // what the dial says about now, and goes there. No mark: the moment is
+  // not a deed, and Keter's own flame is in the dial's caption already.
+  function applyTodayDial() {
+    const el = document.getElementById('today-dial');
+    if (!el) return;
+    const n = (typeof window.kotwCurWeek === 'function') ? window.kotwCurWeek() : 0;
+    let pair = '';
+    try {
+      pair = (n && n < 50 && typeof window.kotwCombo === 'function')
+        ? (window.kotwCombo(n) || {}).en
+        : (n && window.kotwMochin ? (window.kotwMochin(n) || {}).en : '');
+    } catch (e) {}
+    const want = n ? (n + '|' + (pair || '')) : '';
+    if (el.dataset.built !== want) {
+      el.dataset.built = want;
+      el.innerHTML = n
+        ? '<button type="button" class="tp-go" onclick="todayDialGo()" ' +
+          'aria-label="Go to the dial"><span class="tp-flag">Dial</span></button>' +
+          '<button type="button" class="td-open" onclick="todayDialGo()">' +
+          'Stretch ' + n + (pair ? ': ' + pair : '') +
+          ' <span class="td-sub">&middot; begin here</span></button>'
+        : '';
+    }
+    el.style.display = n ? '' : 'none';
+  }
+  function todayDialGo() {
+    const el = document.getElementById('kotw-root');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
   function applyTodayAction() {
     const el = document.getElementById('today-action');
     if (!el) return;
@@ -22046,6 +22105,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const ahead = document.getElementById('today-ahead');
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
+    applyTodayDial();
     applyTodayFace();
     applyTodayAction();
     // Shown until a path is stored, and then never again. Read from the store
@@ -28808,6 +28868,7 @@ content: ''; float: right; width: 30px; height: 1em;
     updateSefirahTimeLabels();
     // The face follows the hour, so it is asked for on the same beat as the
     // times are. It rebuilds only when the answer changes.
+    if (typeof applyTodayDial === 'function') applyTodayDial();
     if (typeof applyTodayFace === 'function') applyTodayFace();
     if (typeof applyTodayAction === 'function') applyTodayAction();
   }, 30000);
