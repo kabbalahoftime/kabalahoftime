@@ -2911,6 +2911,9 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .fund-add-row .fund-add-in { flex:1 1 auto; width:auto; }
 .fund-add-in:focus-visible { outline:2px solid var(--gold); outline-offset:-2px; }
 .fund-add-say { font-size:calc(12px * var(--ts, 1)); color:var(--accent-red); min-height:1em; }
+/* The way in to a reader's own funds, said in the window rather than found
+   by scrolling past the ten inside the chooser. */
+.fund-door { display:block; margin:2px 0 4px; }
 
 /* ── THE PATH HEADER AND ITS CHOOSER ──
    Which portion of the thirty this reader undertook, and the way to change
@@ -21547,8 +21550,19 @@ content: ''; float: right; width: 30px; height: 1em;
       // same word that stands under the Action column: מעשה.
       '<div class="fund-saying"><bdi lang="he">המעשה הוא העיקר</bdi> \u2014 ' +
       '<i>HaMaaseh Hu HaIkar.</i> The main thing is the deed.</div>' +
-      '<div class="path-note">Each opens that fund\u2019s own page, where the giving is done. ' +
-      'No fund here is marked or counted \u2014 what the column counts is the menorah.</div>';
+      // Why these ten and not others. The Menorah pane is one chain — the
+      // Baal Shem Tov, the Maggid, the Meor Einayim and the seven of Chabad
+      // — and each fund belongs to the master whose branch it sits on. Said
+      // here because an unstated reason reads as a gap: the rest of the app
+      // is wide, and a reader who learns Breslov or Halacha should see that
+      // this list is a starting point and not a prescription.
+      '<div class="path-note">These ten are the chain\u2019s own — one to each bearer ' +
+      'of the menorah. Each opens its own page, where the giving is done, and none of ' +
+      'them is marked or counted; what the column counts is the menorah itself.</div>' +
+      '<div class="path-note">Give where you already give: add your own below, under ' +
+      'whichever Sefirah you like.</div>' +
+      '<button type="button" class="path-head-btn fund-door" ' +
+      'onclick="event.stopPropagation(); fundOpenChooser()">Add your own</button>';
     html += '<div class="path-section-title">The deed rises — Malchut → Keter</div>';
     fundOrderUp().forEach(({ sef, n }) => {
       const off = !fundHas(n);
@@ -21575,7 +21589,9 @@ content: ''; float: right; width: 30px; height: 1em;
       '<button type="button" class="path-head-btn" onclick="event.stopPropagation(); fundCloseChooser()">Done</button>' +
       '</div>' +
       '<div class="path-note">The ten stay ten. What you choose is what the day asks of you; ' +
-      'the rest keep their place at the foot of their own Menorah and can still be given to.</div>' +
+      'the rest keep their place at the foot of their own Menorah and can still be given to. ' +
+      'The ten are the chain\u2019s own — one to each bearer of the menorah — and ' +
+      '<b>your own go under them</b>, filed to whichever Sefirah you like.</div>' +
       '<div class="path-section-title">Take them one by one — Malchut → Keter</div>';
     fundOrderUp().forEach(({ sef, n }) => {
       const names = fundsFor(sef).map(f => f[0]).join(' · ');
