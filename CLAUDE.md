@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v341**; the next is v342.
+nobody. Currently **v342**; the next is v343.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -466,6 +466,19 @@ already holds rather than chosen. So "your own" exists where it can:
   `[data-own]` mark into `litOwn` rather than `lit`. Without that they are
   either clamped away by `Math.min` or they fill a half belonging to the
   day's own. How many are gathered is said in the Study column's title.
+- **Prayers** — `kotPrayersOwn` as `[{sef, label, url}]`, `url` optional.
+  These *do* join the heart: it has never counted to ten but to
+  `prayerSteps().length`, which is already five or seven for most readers,
+  so an eleventh undertaken thing belongs in the count rather than beside
+  it. That is the difference from the ring, whose eleven are a geometry.
+  Marked in a key of their own (`kotPrayersOwn:<date>`, derived from
+  `_prayerKey` so the two cannot fall on different days) rather than in
+  `prayersMask`, which is ten bits and holds the ten. They live in the
+  window the heart opens, not on the cards — the ten tags sit in a label
+  column with no room for an eleventh. Added from the prayer chooser's foot.
+
+The two forms toggle **by index**, not by id: an id built from a reader's
+own words would have to survive being quoted into an `onclick` attribute.
 
 ## Scratch work
 

@@ -17400,7 +17400,12 @@ content: ''; float: right; width: 30px; height: 1em;
     // ten and not to the fill, and the ten are named in the title and in the
     // list the heart opens.
     const mask = prayersMask();
-    const mine = prayerMineDone(mask), total = prayerSteps().length;
+    // A reader's own join the count. The heart has never been a fixed ten —
+    // it fills against what was undertaken — so an eleventh undertaken thing
+    // belongs in it rather than beside it. That is the difference from the
+    // ring of stars, whose eleven are a geometry and cannot grow.
+    const mine = prayerMineDone(mask) + prayersOwnDone();
+    const total = prayerSteps().length + prayersOwn().length;
     const top = 0, bot = 19, f = total ? mine / total : 0;
     rect.setAttribute('y', String(bot - (bot - top) * f));
     rect.setAttribute('height', String((bot - top) * f + 1));
@@ -17976,6 +17981,103 @@ content: ''; float: right; width: 30px; height: 1em;
     return prayerSteps().filter(n => mask & (1 << (n - 1))).length;
   }
 
+  // ── THE READER'S OWN PRAYERS ──
+  // The ten are one to a Sefirah and stay ten. But the heart has never
+  // counted to ten — it counts to what was undertaken, which is already
+  // five or seven for most readers — so a prayer of a reader's own can join
+  // that count without breaking anything. Unlike the ring of stars, whose
+  // eleven are a fixed geometry, the heart is a proportion.
+  //
+  // Marked in a key of their own rather than in prayersMask, which is ten
+  // bits and holds the ten. A separate set cannot corrupt what is already
+  // stored, and it needs no bit arithmetic.
+  //
+  // They live in the window the heart opens, not on the cards: the ten tags
+  // sit in each card's narrow label column, and that column has no room. The
+  // window exists for exactly this reason — the ten are scattered down the
+  // page and seeing where the day stands meant scrolling it.
+  let _prayersOwnCache = null;
+  function prayersOwn() {
+    if (_prayersOwnCache) return _prayersOwnCache;
+    let out = [];
+    try {
+      const raw = localStorage.getItem('kotPrayersOwn');
+      const arr = raw ? JSON.parse(raw) : null;
+      if (Array.isArray(arr)) out = arr.filter(x =>
+        x && typeof x.label === 'string' && x.label &&
+        PRAYER_SEFIRAH.indexOf(x.sef) >= 0 &&
+        (!x.url || /^https?:\/\//i.test(x.url)));
+    } catch (e) {}
+    _prayersOwnCache = out;
+    return out;
+  }
+  function setPrayersOwn(arr) {
+    _prayersOwnCache = (arr || []).slice();
+    try { localStorage.setItem('kotPrayersOwn', JSON.stringify(_prayersOwnCache)); } catch (e) {}
+    if (typeof applyPrayerState === 'function') applyPrayerState();
+  }
+  function prayersOwnId(x) { return 'own|' + x.sef + '|' + String(x.label).slice(0, 60); }
+  // The day's own key, taken from the ten's so the two can never fall on
+  // different days.
+  function _prayersOwnKey() {
+    return _prayerKey ? _prayerKey.replace('kotPrayers:', 'kotPrayersOwn:') : null;
+  }
+  function prayersOwnSet() {
+    const k = _prayersOwnKey();
+    if (!k) return new Set();
+    try { return new Set(JSON.parse(localStorage.getItem(k) || '[]')); }
+    catch (e) { return new Set(); }
+  }
+  function prayersOwnSave(set) {
+    const k = _prayersOwnKey();
+    if (!k) return;
+    try { localStorage.setItem(k, JSON.stringify(Array.from(set))); } catch (e) {}
+  }
+  // Counted against what still exists: a prayer dropped from the list must
+  // not go on counting from a mark left behind in yesterday's set.
+  function prayersOwnDone() {
+    const set = prayersOwnSet();
+    return prayersOwn().filter(x => set.has(prayersOwnId(x))).length;
+  }
+  // By index rather than by id: an id built from a reader's own words would
+  // have to survive being quoted into an onclick attribute, and the one
+  // thing worse than a clumsy escape is a nearly-right one.
+  function togglePrayerOwnAt(i) {
+    const x = prayersOwn()[i];
+    if (x) togglePrayerOwn(prayersOwnId(x));
+  }
+  function togglePrayerOwn(id) {
+    const set = prayersOwnSet();
+    if (set.has(id)) set.delete(id); else set.add(id);
+    prayersOwnSave(set);
+    if (typeof applyPrayerState === 'function') applyPrayerState();
+  }
+  let _prayerAddSef = '';
+  function prayersOwnAdd() {
+    const say = document.getElementById('po-add-say');
+    const nameEl = document.getElementById('po-add-name');
+    const urlEl = document.getElementById('po-add-url');
+    const sefEl = document.getElementById('po-add-sef');
+    if (!nameEl || !sefEl) return;
+    const label = nameEl.value.trim();
+    const raw = urlEl ? urlEl.value.trim() : '';
+    const url = raw ? fundCleanUrl(raw) : '';
+    const sef = sefEl.value;
+    if (!label) { if (say) say.textContent = 'It needs a name.'; return; }
+    if (raw && !url) { if (say) say.textContent = 'That is not a web address.'; return; }
+    if (PRAYER_SEFIRAH.indexOf(sef) < 0) return;
+    _prayerAddSef = sef;
+    setPrayersOwn(prayersOwn().concat([{ sef: sef, label: label, url: url }]));
+    renderPrayersBody();
+  }
+  function prayersOwnDrop(i) {
+    const cur = prayersOwn().slice();
+    if (i < 0 || i >= cur.length) return;
+    cur.splice(i, 1);
+    setPrayersOwn(cur);
+    renderPrayersBody();
+  }
+
   // ── THE TEN, GATHERED ──
   // The heart counts the prayers but cannot say which are still owed, and the
   // ten tags are scattered one to a Sefirah down the whole page — so seeing
@@ -18029,6 +18131,28 @@ content: ''; float: right; width: 30px; height: 1em;
         (off && done ? `<span class="path-beyond">beyond</span>` : '') +
         `</div>`;
     }
+    // The reader's own, under the ten. Not tags on the cards: the label
+    // column each of the ten sits in has no room, and this window is where
+    // the scattered ten are gathered anyway.
+    const own = prayersOwn();
+    if (own.length) {
+      const oset = prayersOwnSet();
+      const oesc = (t) => String(t == null ? '' : t)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+      html += `<div class="path-section-title" style="margin-top:12px;">Your own</div>`;
+      own.forEach((x, i) => {
+        const on = oset.has(prayersOwnId(x));
+        html += `<div class="path-row${on ? ' done' : ''}" role="button" tabindex="0" ` +
+          `aria-pressed="${on}" onclick="togglePrayerOwnAt(${i})">` +
+          `<span class="path-check">${on ? '☑' : '☐'}</span>` +
+          `<span class="path-name">${oesc(x.label)}` +
+          (x.url ? ` <a href="${oesc(x.url)}" target="_blank" rel="noopener" ` +
+                   `onclick="event.stopPropagation()" style="color:var(--gold)">&#8599;&#xFE0E;</a>` : '') +
+          `</span>` +
+          `<span class="path-sef">${oesc(x.sef)}</span></div>`;
+      });
+    }
     const d = prayersDone();
     if (whole) {
       html += `<div class="path-complete">` + (d === 10
@@ -18076,6 +18200,45 @@ content: ''; float: right; width: 30px; height: 1em;
         `<span class="path-name">${_prayerListName(n)}</span>` +
         `<span class="path-sef">${PRAYER_SEFIRAH[n - 1]}</span></div>`;
     }
+
+    // And a reader's own. The ten stay ten and stay one to a Sefirah; what
+    // is added here is undertaken beside them and counts to the heart,
+    // which has never been a fixed ten.
+    const pesc = (t) => String(t == null ? '' : t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+    const own = prayersOwn();
+    if (!_prayerAddSef) _prayerAddSef = (typeof _faceHourName === 'function' && _faceHourName()) || 'Keter';
+    html += `<div class="path-section-title" style="margin-top:16px;">Your own</div>` +
+      `<div class="path-note">The ten stay ten, one to each Sefirah. What you add here is ` +
+      `undertaken beside them and counts to the heart. It is marked in the list rather than ` +
+      `on a card \u2014 the ten tags sit in a column with no room for an eleventh. ` +
+      `An address is optional. Kept in this browser and sent nowhere.</div>`;
+    own.forEach((x, i) => {
+      html += `<div class="path-row fund-mine">` +
+        `<span class="path-name">${x.url
+          ? `<a href="${pesc(x.url)}" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">${pesc(x.label)} &#8599;&#xFE0E;</a>`
+          : pesc(x.label)}</span>` +
+        `<span class="path-sef">${pesc(x.sef)}</span>` +
+        `<button type="button" class="fund-drop" title="Remove this" ` +
+        `aria-label="Remove ${pesc(x.label)}" ` +
+        `onclick="event.stopPropagation(); prayersOwnDrop(${i})">\u00d7</button>` +
+        `</div>`;
+    });
+    html += `<div class="fund-add">` +
+      `<input id="po-add-name" class="fund-add-in" type="text" maxlength="60" ` +
+      `placeholder="What you say" aria-label="What you say">` +
+      `<input id="po-add-url" class="fund-add-in" type="url" maxlength="300" ` +
+      `placeholder="Where its text is \u2014 optional" aria-label="Where its text is, optional">` +
+      `<div class="fund-add-row">` +
+        `<select id="po-add-sef" class="fund-add-in" aria-label="Which Sefirah it belongs to">` +
+          PRAYER_SEFIRAH.map(sf => `<option value="${sf}"${sf === _prayerAddSef ? ' selected' : ''}>${sf}</option>`).join('') +
+        `</select>` +
+        `<button type="button" class="path-head-btn" ` +
+        `onclick="event.stopPropagation(); prayersOwnAdd()">Add</button>` +
+      `</div>` +
+      `<div id="po-add-say" class="fund-add-say" role="status"></div>` +
+      `</div>`;
     body.innerHTML = html;
   }
 
