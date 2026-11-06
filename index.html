@@ -3383,43 +3383,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    are — chip, verb, what it asks for — because it is one of them for as long
    as it is there, and a reader should not have to learn a second shape for
    the thing they are told to do first. */
-/* ── THE ROUTE ──
-   One line under the block's name, and the only place the page says the
-   order of the day's own work. Quiet: it is a map, not an instruction, and
-   the instruction is the lit line below it. Wraps where it must — five
-   stops and two languages will not hold on one line at every size — and
-   each arrow stays with the stop before it so a wrap never begins on one. */
-.ladder-route {
-  margin: 2px 0 12px; line-height: 1.75;
-  font-size: calc(12.5px * var(--ts, 1)); color: var(--ink-mid);
-}
-/* A stop and the arrow that leads to it are one unbreakable thing, so a
-   line can never end on an arrow pointing at nothing. Where the route wraps
-   the next line opens with "→ מנורה", which reads as the road carrying on. */
-.lr-hop { white-space: nowrap; margin-right: 3px; }
-.lr-step {
-  background: none; border: none; cursor: pointer; font: inherit;
-  color: var(--gold);
-  /* 44px in both directions, taken in padding and given back in margin, so
-     the tap is a hand's worth while the words sit where they sit. 12px is
-     what the niggun links use to reach 44 down; 9px across carries the
-     shortest stop — מנורה, 27px of ink — to 45. At 8 it came to 43 and was
-     refused by a pixel, which is the check doing exactly its job: it caught
-     these at 40 first, and again at 43.
-     The mark under the word is text-decoration and not a border: these take
-     their height in padding, and a border is drawn under the padding box,
-     which floated it a whole line below the word. */
-  padding: 12px 9px; margin: -12px -9px;
-  text-decoration: underline dotted; text-underline-offset: 3px;
-}
-.lr-step[lang="he"] { font-family: 'Frank Ruhl Libre', serif; letter-spacing: 0; }
-.lr-step:hover { color: var(--ink); }
-.lr-step:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-.lr-arrow { color: var(--ink-dim); }
-.lr-aside {
-  display: block; color: var(--ink-dim); font-style: italic;
-  font-size: 0.92em; margin-top: 1px;
-}
 .today-start { margin-bottom:11px; font-size:calc(14px * var(--ts, 1)); }
 .today-start .ts-word { color:var(--gold); }
 .today-start .ts-sub { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
@@ -4270,25 +4233,6 @@ content: ''; float: right; width: 30px; height: 1em;
        and Yaakov's is the one the thirty are counted by. -->
   <div id="today-block">
     <div class="today-label">Today&rsquo;s Ladder</div>
-    <!-- THE ROUTE. The block below says what is being asked for now; this
-         says the order the day is walked in, which nothing on the page said
-         anywhere a reader would meet it. Start at the dial — the clock in
-         Keter, the moment itself — then the face of the hour, then the climb,
-         then the return, then the menorah.
-         The prayer is not in it. It is not a station on the way: it belongs
-         to the hour whatever else is happening, which is why it sits in the
-         margin beside the hours rather than in the panes. Said at the end so
-         its absence reads as a statement and not as an oversight.
-         The Stars are not in it either, for the reason they are Or Makif:
-         they do not wait on a vessel's order. -->
-    <div class="ladder-route">
-      <span class="lr-hop">Start at <button type="button" class="lr-step" onclick="todayDialGo()">the dial</button></span>
-      <span class="lr-hop"><span class="lr-arrow">&rarr;</span> <button type="button" class="lr-step" onclick="todayFaceGo()">the face</button></span>
-      <span class="lr-hop"><span class="lr-arrow">&rarr;</span> <button type="button" class="lr-step" onclick="todayPaneGo('maalot')" lang="he">מעלות</button></span>
-      <span class="lr-hop"><span class="lr-arrow">&rarr;</span> <button type="button" class="lr-step" onclick="todayPaneGo('miutim')" lang="he">מיעוטים</button></span>
-      <span class="lr-hop"><span class="lr-arrow">&rarr;</span> <button type="button" class="lr-step" onclick="todayPaneGo('menorah')" lang="he">מנורה</button></span>
-      <span class="lr-aside">The prayer of the hour stands beside all of it.</span>
-    </div>
     <!-- THE FACE OF THE HOUR. The thirty steps and the ten prayers are deeds,
          and this block counts them. The faces of the cards are not deeds —
          they are the day's coordinates, what makes today this day: the
@@ -21493,35 +21437,6 @@ content: ''; float: right; width: 30px; height: 1em;
   function travelFaceGo()   { if (typeof todayFaceGo   === 'function') todayFaceGo(); }
   function travelPrayerGo() { if (typeof todayPrayerGo === 'function') todayPrayerGo(); }
   function travelActionGo() { if (typeof todayActionGo === 'function') todayActionGo(); }
-
-  // ── THE ROUTE'S OWN DOORS ──
-  // The dial first, because that is where the day starts: the clock in
-  // Keter, which is the moment itself before anything is asked of anyone.
-  function todayDialGo() {
-    const el = document.getElementById('kotw-root');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  // The card of the hour, by name rather than by the face helper: that one
-  // answers Keter with the dial's caption, which is right for a face and
-  // wrong for a pane.
-  function _cardForSef(sef) {
-    if (sef === 'Keter') return document.querySelector('.keter-card');
-    const i = FACE_CARDS.indexOf(sef);
-    return i >= 0 ? document.querySelectorAll('.sefirah-card')[i] : null;
-  }
-  function todayPaneGo(kind) {
-    const card = _cardForSef(_faceHourName());
-    if (!card) return;
-    const box = card.querySelector('.sefirah-panes, .keter-panes');
-    const body = box && box.querySelector(':scope > .pane-body[data-pane="' + kind + '"]');
-    if (!box || !body) return;
-    const host = box.closest('.pane-host');
-    if (host && typeof setPane === 'function') setPane(host, kind);
-    // The pane if it has anything in it, the card if it does not — a pane
-    // trimmed away for the day would otherwise scroll to a box of nothing.
-    (body.children.length ? body : card)
-      .scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
   function travelDismiss() {
     const bar = document.getElementById('kot-travel');
     const f = bar && bar.querySelector('.kt-flag'), t = bar && bar.querySelector('.kt-text');

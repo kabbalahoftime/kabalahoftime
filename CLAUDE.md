@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v348**; the next is v349.
+nobody. Currently **v347**; the next is v348.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -492,32 +492,6 @@ marked; the door goes to the pane where both stand.
 and the prayers already did it; `applyStarState` did not, because until the
 third door the bar carried nothing that depended on star state — so the
 chip lit only on the next render. It calls it now.
-
-### The route
-
-Today's Ladder opens with the order of the day's own work, which nothing
-said anywhere a reader would meet it: **the dial → the face → מעלות →
-מיעוטים → מנורה**. Each stop is a door — `todayDialGo`, `todayFaceGo`,
-`todayPaneGo(kind)`.
-
-Two things are deliberately **not** in it. The **prayer**, because it is
-not a station: it belongs to the hour whatever else is happening, which is
-why it sits in the margin beside the hours rather than in a pane. The line
-says so at its end, so the absence reads as a statement. And the
-**Stars**, for the reason they are Or Makif — they do not wait on a
-vessel's order.
-
-`todayPaneGo` finds the card by name, not through `_faceCardFor`: that one
-answers Keter with the dial's caption, which is right for a face and wrong
-for a pane. It scrolls to the pane when the pane has anything in it and to
-the card when `_paneTrim` has emptied it.
-
-In the markup each arrow belongs to the stop **after** it, inside one
-`white-space: nowrap` hop, so a wrap can never leave a line ending on an
-arrow that points at nothing. And the mark under each word is
-`text-decoration`, not `border-bottom`: these buttons take their tap
-height in padding, and a border is drawn under the padding box — it
-floated a whole line below the word.
 
 ### The meditation flames
 
