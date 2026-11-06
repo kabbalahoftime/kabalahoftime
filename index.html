@@ -19961,8 +19961,11 @@ content: ''; float: right; width: 30px; height: 1em;
         'weeks 50&ndash;52, the three Mochin, hovering above the Chatzot seam. Tap any step to ' +
         'see its week; the hand shows where &ldquo;now&rdquo; falls in the inner year. ' +
         '</p><p>A step of this dial is half an hour of today, so the readouts call it a ' +
-        '<strong>stretch</strong>: <em>Stretch 27 of the inner year</em>. The week it wears ' +
+        '<strong>step</strong>: <em>Step 27 of the inner year</em>. The week it wears ' +
         'is the year&rsquo;s 27th, which is the whole point of the face. ' +
+        'These fifty-two are not the thirty <bdi lang="he">מעלות</bdi> and ' +
+        '<bdi lang="he">מיעוטים</bdi> on the cards below. Both are steps, and both climb, ' +
+        'but these are the steps of the clock and those are the steps of the learning. ' +
         '</p><p>The dial turns both ways: a single day with the year inside it, or the whole ' +
         'year drawn as one day. Three views &mdash; 52 weeks, 17 sets, the day.',
       beginner:
@@ -19972,8 +19975,10 @@ content: ''; float: right; width: 30px; height: 1em;
         '&mdash; about twenty-eight minutes of the day to a week. </p><p>The hand shows where ' +
         'you are right now: which week of the year is alive in this hour. Tap any step to visit ' +
         'its week &mdash; its animal, its rabbi, its quality. </p><p>Each step is about half ' +
-        'an hour of today, so the dial calls it a <strong>stretch</strong> rather than a week. ' +
-        'It is the week of the year that this half hour is standing in. </p><p>The highest view of all: ' +
+        'an hour of today, so the dial calls it a <strong>step</strong> rather than a week. ' +
+        'It is the week of the year that this half hour is standing in. These are not the ' +
+        'thirty steps on the cards below: those are readings, and there are thirty of them; ' +
+        'these are half-hours, and there are fifty-two. </p><p>The highest view of all: ' +
         'the entire year, inside a single day.',
       advanced:
         'The fifty-two weeks of the Kabbalah of Time year mapped onto the twenty-four hours of ' +
@@ -21171,7 +21176,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // It said "Week 21", and that was wrong twice over — the comment here
     // said so too, calling it "the week the year is standing in". It is not.
     // kotwCurWeek is weekAtH(nowH): it comes from the hour, not the date.
-    // The dial divides one day into fifty-two stretches of about half an
+    // The dial divides one day into fifty-two steps of about half an
     // hour because they parallel the year's fifty-two weeks — "The Year as a
     // Single Day" is the dial's own heading — so the number borrows the
     // year's vocabulary while meaning something else entirely. On the dial,
@@ -21209,7 +21214,7 @@ content: ''; float: right; width: 30px; height: 1em;
         const pair = (typeof window.kotwCombo === 'function' && n < 50)
           ? (window.kotwCombo(n) || {}).en
           : (window.kotwMochin ? (window.kotwMochin(n) || {}).en : '');
-        if (pair) return 'Stretch ' + n + ': ' + pair;
+        if (pair) return 'Step ' + n + ': ' + pair;
       } catch (e) {}
       return '';
     },
@@ -21664,7 +21669,7 @@ content: ''; float: right; width: 30px; height: 1em;
         ? '<button type="button" class="tp-go" onclick="todayDialGo()" ' +
           'aria-label="Go to the dial"><span class="tp-flag">Dial</span></button>' +
           '<button type="button" class="td-open" onclick="todayDialGo()">' +
-          'Stretch ' + n + (pair ? ': ' + pair : '') +
+          'Step ' + n + (pair ? ': ' + pair : '') +
           ' <span class="td-sub">&middot; begin here</span></button>'
         : '';
     }
@@ -31161,13 +31166,13 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   var h=document.createElement('div');
-  // "weeks" leads and "stretches" follows in brackets. On the dial the
+  // "weeks" leads and "steps" follows in brackets. On the dial the
   // parallel to the year is the whole point — it is stated directly above
   // this line, "The Year as a Single Day" — so week is the word that
   // belongs here and stretch is the gloss. On a card, lifted out from under
-  // that heading, the two change places: there it reads "Stretch N of 52",
+  // that heading, the two change places: there it reads "Step N of 52",
   // because without the heading "week" claims the year.
-  var SUB={weeks:'52 weeks (\u201cstretches\u201d)',sets:'17 alef-bet sets',day:'the day\u2019s own shape'};
+  var SUB={weeks:'52 weeks (\u201csteps\u201d)',sets:'17 alef-bet sets',day:'the day\u2019s own shape'};
   function faceSub(){
     var e=h.querySelector('.kotw-sub');
     if(e) e.innerHTML=(FACE==='day'?'A Single Day, and the Year in it'
@@ -31286,7 +31291,7 @@ content: ''; float: right; width: 30px; height: 1em;
     var cm=isM?{he:MOCH[n-50].he,en:MOCH[n-50].en}:combo(n);
     var isNow=(n===curWeek());
     var nowBadge=isNow?'<span class="kotw-now-badge">Now</span>':'';
-    /* Keter's face is this: the stretch of the day that is now, and the word
+    /* Keter's face is this: the step of the day that is now, and the word
        the year's matching week carries. So the flame is here, beside it —
        and only on the stretch that is now, because one tapped to be read is
        not the one being focused on. It is written into this HTML rather than
@@ -31304,7 +31309,7 @@ content: ''; float: right; width: 30px; height: 1em;
     /* Stretch, not week. The heading above says the parallel and the
        sub-label glosses it; this line and the one in the middle of the dial
        are the two that answer "where am I", and what they are answering
-       about is half an hour of this day. A reader meets "Stretch 27" on
+       about is half an hour of this day. A reader meets "Step 27" on
        Keter's card and should not be told "Week 27" here about the very
        same half hour.
        The theme below it stays the year's, and that is the whole conceit of
@@ -31312,7 +31317,7 @@ content: ''; float: right; width: 30px; height: 1em;
        card, lifted out from under the heading, the same borrowing would be
        a false claim, which is why Keter's line carries the pairing. */
     detail.innerHTML='<span class="kotw-heb">'+cm.he+'</span>'+
-      '<span class="kotw-wk">'+medMark+'Stretch '+n+nowBadge+'</span>'+
+      '<span class="kotw-wk">'+medMark+'Step '+n+nowBadge+'</span>'+
       '<div class="kotw-theme">\u201c'+w.t+'\u201d</div>'+
       '<div class="kotw-meta">\uD83D\uDC3E '+w.a+'<br>\uD83D\uDCDC '+w.r+
       '<br>\u23F1 '+fmt(m1)+' \u2013 '+fmt(m2)+' \u00b7 '+cm.en+'</div>';
@@ -31676,7 +31681,7 @@ content: ''; float: right; width: 30px; height: 1em;
     cT.textContent=fmt(m);
     var dseg=(FACE==='day')?dayShape()[n-1]:null;
     cW.textContent=(FACE==='day')?dseg.en
-      :(FACE==='sets')?'Set '+n+' of the inner year':'Stretch '+n+' of the inner year';
+      :(FACE==='sets')?'Set '+n+' of the inner year':'Step '+n+' of the inner year';
     cS.textContent=(FACE==='day')?dseg.he
       :(FACE==='sets')?ALEF_BET[n-1].hebrew
       // combo pairs the week against the seven, and the Mochin stand outside
