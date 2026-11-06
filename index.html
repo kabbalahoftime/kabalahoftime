@@ -1849,10 +1849,16 @@ z-index: 2;
    drawn 60% wider than this engine draws it. It costs six wrapped heading
    lines over the 34px it replaced.
 
+   54px now, because the ⓘ itself grew: it was 13px and is 19, or 21 on a
+   phone, which draws 27.3px at the largest text size against the 17px this
+   number was measured for. At 46 the tightest daylight had fallen to 10.8px,
+   under the 12 the number above was chosen to hold — no overlap, but no
+   margin either, and the margin is the point.
+
    The featured Now card mirrors another card and is the one card the injector
    gives no ⓘ, so it keeps its full width. */
 .sefirah-card .sefirah-cycle-name::before {
-  content: ''; float: right; width: 46px; height: 1em;
+  content: ''; float: right; width: 54px; height: 1em;
 }
 
 .sefirah-cycle-name {
@@ -26183,11 +26189,16 @@ content: ''; float: right; width: 30px; height: 1em;
     // than Ratzo and Shov already say, in a face that is otherwise set in
     // type — the page marks its kinds with ✦ and ✡ and Hebrew, not with
     // emoji.
+    // Three units, and none of them may be broken across a line. "Ratzo ·
+    // Half-Day 113" is one label; a dash left at the end of a line with its
+    // word stranded underneath reads as something torn rather than as a line
+    // carrying on. The line still wraps — it has to, in a column this narrow
+    // at the larger text sizes — but it wraps between the units.
     const _hodPhase = (n, sef, word) =>
       `<div style="line-height:1.6;"><span style="color:var(--ink-dim);` +
-      `font-size:calc(11px * var(--ts, 1));">${word} &middot; Half-Day ${n}</span> ` +
-      `<strong>${sef[0]}</strong> <span style="color:var(--ink-mid);font-size:0.9em">` +
-      `&mdash; ${sef[1]}</span></div>`;
+      `font-size:calc(11px * var(--ts, 1));white-space:nowrap">${word} &middot; Half-Day ${n}</span> ` +
+      `<strong>${sef[0]}</strong> <span style="color:var(--ink-mid);font-size:0.9em;` +
+      `white-space:nowrap">&mdash; ${sef[1]}</span></div>`;
     document.getElementById('hod-pos').innerHTML =
       (_hodBreak
         ? `<div>A cornerstone half-day pair &mdash; <span style="color:var(--ink-mid);` +
@@ -26195,8 +26206,8 @@ content: ''; float: right; width: 30px; height: 1em;
         : `<div>Name <strong>${_hodName}</strong> of 72 &middot; ` +
           `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em;` +
           `color:var(--gold)">${AYIN_BET_NAMES[_hodName - 1]}</bdi> ` +
-          `<span style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));">` +
-          `&middot; day ${_hodStep} of 5</span></div>`) +
+          `<span style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));` +
+          `white-space:nowrap">&middot; day ${_hodStep} of 5</span></div>`) +
       (_hodBreak
         // A cornerstone takes no Sefirah. The ten are walked by the Names,
         // and these four days stand outside them — giving them Keter and
