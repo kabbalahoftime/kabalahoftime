@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v338**; the next is v339.
+nobody. Currently **v339**; the next is v340.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -366,8 +366,16 @@ button whose body is empty.
 
 ### Tzedakah
 
-The day asks for four things — **meditation, prayer, study and action** — and
-the Menorah pane is the action. `TZEDAKAH` in `index.html` holds one fund per
+The day asks for four things — **meditation, prayer, study and action** —
+and they are four movements, not one journey. The meditation comes down,
+Keter to Malchut; the מעלות climb back, Malchut to Keter; the מיעוטים come
+down again; and **the deed rises, Malchut to Keter**, because Malchut is the
+world a deed happens in and nothing descends into it to act. So the ten
+funds are read from the bottom up: `fundOrderUp()` reverses the reading
+only — the ordinals index `TZEDAKAH` itself and `kotFundSteps` is written
+in them, so reversing those would silently move what a reader had chosen.
+
+The Menorah pane is the action. `TZEDAKAH` in `index.html` holds one fund per
 Sefirah (Chesed, Yesod and Malchut hold more than one), and `_paneTzedakah`
 puts it **under the master's name and above his Torah**: the menorah and the
 name head the pane as they always have, and beneath them come the deed, the

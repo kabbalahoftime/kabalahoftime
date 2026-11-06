@@ -4395,9 +4395,12 @@ content: ''; float: right; width: 30px; height: 1em;
   <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
   <div id="kot-welcome" style="display:none; margin:12px 0 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); line-height:1.7; position:relative;">
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:calc(18px * var(--ts, 1)); cursor:pointer; line-height:1;">×</button>
-    <strong style="color:var(--gold);">Welcome!</strong> Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
+    <strong style="color:var(--gold);">Welcome!</strong> <strong>Begin with the now.</strong> The clock at the top is Keter's — the moment you are standing in. Contemplate that, and then come down through the ten <strong>meditations</strong>, Keter to Malchut, one to a card: each is the face that card wears today. Then say the <strong>prayer</strong> this hour is asking for, then take its <strong>reading</strong>, and after that whatever is still outstanding from earlier in the day.
+    <strong>Today's Ladder</strong>, under the date, names all four and goes straight to each.
+    Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
     Tap a small gold <strong>מעלה</strong> tag when you have learned it — fifteen of them climb from Malchut to Keter and fill tonight's moon; when it becomes the sun, come back down from Keter to Malchut through the <strong>מיעוט</strong> tags inside the cards. Today's Ladder asks for whichever one belongs to the hour you are in; climbing them in order is a practice of its own.
     Each Sefirah also holds one of the day's ten <strong>prayers</strong> — tap it when you have prayed, and watch the heart in Today's Ladder fill.
+    And the day's fourth thing is the <strong>deed</strong>: each Sefirah carries a fund at the foot of its Menorah, and those are read the other way, Malchut up to Keter — a deed starts in the world where things are done.
     <a href="#" onclick="event.preventDefault(); openTodaysPath()" style="color:var(--gold); font-weight:600;">Tap the moon 🌙 above anytime to see Today's Path.</a>
   </div>
 
@@ -21411,6 +21414,20 @@ content: ''; float: right; width: 30px; height: 1em;
   function fundOrder() { return Object.keys(TZEDAKAH); }
   function fundSefirah(n) { return fundOrder()[n - 1] || ''; }
 
+  // ── THE FOURTH MOVEMENT ──
+  // The day goes down, up, down, and up again. The meditation comes down
+  // from Keter to Malchut; the מעלות climb back, Malchut to Keter; the
+  // מיעוטים come down again. The deed is the last of the four and it
+  // rises, because Malchut is the world a deed happens in — nothing
+  // descends into it to act. So the ten are read from the bottom up.
+  //
+  // Only the reading turns. The ordinals index the table itself and
+  // kotFundSteps is written in them, so reversing those would silently
+  // move what a reader had chosen. Each row carries its own n.
+  function fundOrderUp() {
+    return fundOrder().map((sef, i) => ({ sef: sef, n: i + 1 })).reverse();
+  }
+
   // ── THE READER'S OWN ──
   // Ten funds chosen by one person are ten funds chosen by one person. A
   // reader gives where they give — their shul, their chevra kadisha, the
@@ -21532,8 +21549,9 @@ content: ''; float: right; width: 30px; height: 1em;
       '<i>HaMaaseh Hu HaIkar.</i> The main thing is the deed.</div>' +
       '<div class="path-note">Each opens that fund\u2019s own page, where the giving is done. ' +
       'No fund here is marked or counted \u2014 what the column counts is the menorah.</div>';
-    order.forEach((sef, i) => {
-      const off = !fundHas(i + 1);
+    html += '<div class="path-section-title">The deed rises — Malchut → Keter</div>';
+    fundOrderUp().forEach(({ sef, n }) => {
+      const off = !fundHas(n);
       html += '<div class="path-row' + (off ? ' off' : '') + (sef === nowSef ? ' next' : '') + '">' +
         '<span class="path-name">' +
           fundsFor(sef).map(f =>
@@ -21552,18 +21570,17 @@ content: ''; float: right; width: 30px; height: 1em;
   function renderFundChooser() {
     const body = document.getElementById('funds-body');
     if (!body) return;
-    const order = fundOrder();
     let html = '<div class="path-head">' +
       '<span class="path-head-name"><b>Which of the ten</b> — the funds you undertake.</span>' +
       '<button type="button" class="path-head-btn" onclick="event.stopPropagation(); fundCloseChooser()">Done</button>' +
       '</div>' +
       '<div class="path-note">The ten stay ten. What you choose is what the day asks of you; ' +
       'the rest keep their place at the foot of their own Menorah and can still be given to.</div>' +
-      '<div class="path-section-title">Take them one by one</div>';
-    order.forEach((sef, i) => {
+      '<div class="path-section-title">Take them one by one — Malchut → Keter</div>';
+    fundOrderUp().forEach(({ sef, n }) => {
       const names = fundsFor(sef).map(f => f[0]).join(' · ');
-      html += '<div class="path-pick" onclick="event.stopPropagation(); fundTogglePick(' + (i + 1) + ')">' +
-        '<span class="path-check">' + (fundHas(i + 1) ? '\u2611' : '\u2610') + '</span>' +
+      html += '<div class="path-pick" onclick="event.stopPropagation(); fundTogglePick(' + n + ')">' +
+        '<span class="path-check">' + (fundHas(n) ? '\u2611' : '\u2610') + '</span>' +
         '<span class="path-name">' + _fundEsc(names) + '</span>' +
         '<span class="path-sef">' + sef + '</span></div>';
     });
@@ -21598,7 +21615,7 @@ content: ''; float: right; width: 30px; height: 1em;
       'placeholder="Its page \u2014 example.org/donate" aria-label="The fund\u2019s address">' +
       '<div class="fund-add-row">' +
         '<select id="fund-add-sef" class="fund-add-in" aria-label="Which Sefirah it belongs to">' +
-          order.map(sf => '<option value="' + sf + '"' +
+          fundOrderUp().map(({ sef: sf }) => '<option value="' + sf + '"' +
             (sf === _fundAddSef ? ' selected' : '') + '>' + sf + '</option>').join('') +
         '</select>' +
         '<button type="button" class="path-head-btn" ' +
@@ -31296,7 +31313,7 @@ content: ''; float: right; width: 30px; height: 1em;
 
   <p><strong>What you&rsquo;re looking at.</strong> Today&rsquo;s date maps onto several nested cycles at once &mdash; a day, a week, a month, a season, a year &mdash; each drawn from a different Kabbalistic or textual structure. Every card below is one of those cycles: it opens with the structure that defines it, and carries beneath it the text that structure measures. Tap a card to open it; tap the <strong>&#9432;</strong> at its top-right corner to learn what its cycle means.</p>
 
-  <p><strong>Where to start.</strong> The <strong>Today&rsquo;s Ladder</strong> block, just under the date. It names the next step being asked for and goes straight to it. That is enough to begin; everything below is here for when you want it.</p>
+  <p><strong>Where to start.</strong> With the now. The clock at the top of the page is Keter&rsquo;s &mdash; the moment you are standing in. Contemplate that, then come down through the ten <strong>meditations</strong>, Keter to Malchut. Then the <strong>prayer</strong> this hour asks for, then its <strong>reading</strong>, then whatever is still outstanding from earlier. The <strong>Today&rsquo;s Ladder</strong> block, just under the date, names all four and goes straight to each. That is enough to begin; everything below is here for when you want it.</p>
 
   <h3 class="hg-h">The marks</h3>
   <p>Almost every reading wears a mark that says what it is, and the marks are what the counts are kept by. A few readings wear none &mdash; the week&rsquo;s seven books in Malchut, the Zohar that stands with Thursday&rsquo;s Ramchal &mdash; and those are simply read.</p>
@@ -31317,6 +31334,8 @@ content: ''; float: right; width: 30px; height: 1em;
   <p>Each Sefirah carries one of the day&rsquo;s ten prayers, in the left margin beside its hours &mdash; Hitbodedut in Keter, Shacharit in Tiferet, Mincha in Hod, Maariv in Yesod, Kri&rsquo;at Shema in Malchut, and so through all ten. The one whose hour has come pulses until it is said; tap to mark it, tap again to undo. The <strong>heart</strong> in Today&rsquo;s Ladder fills as they accumulate, and glows when the day&rsquo;s ten are whole.</p>
 
   <h3 class="hg-h">The shape of a day</h3>
+  <p><strong>Four movements, and they do not all go the same way.</strong> The <strong>meditation</strong> comes down: Keter to Malchut, ten faces, one to a card. The <strong>מעלות</strong> climb back: Malchut to Keter, fifteen steps. The <strong>מיעוטים</strong> come down again: Keter to Malchut, fifteen more. And the <strong>deed</strong> rises: Malchut to Keter, which is why the ten funds are listed from the bottom up. Down, up, down, up. Malchut is the world a deed happens in, so nothing descends into it to act &mdash; the action begins where we stand and carries the day back to the top.</p>
+  <p>The descent that opens it is not one of the thirty. It is what the day <em>is</em>, looked at on purpose, before anything is asked of you.</p>
   <p>The climb as one practice belongs to one hour: all fifteen <strong>מעלות</strong> taken together in the Mochin &mdash; Chochmah, Binah, and Keter/Da&rsquo;at &mdash; the eighty-eight minutes wrapped around Chatzot. That is the ladder, and the hour it is made for.</p>
   <p>Each rung also has a card, and the card has an hour. So the rest of the day walks the Sefirot in turn, and every hour asks for everything that is its own: its <strong>מעלה</strong>, its <strong>מיעוט</strong>, its prayer, its <strong>&#10017;</strong> companions, its Rebbe&rsquo;s menorah from Chesed down. Keter&rsquo;s hour holds three of the מעלות and asks for them one at a time; an hour that holds none of the readings you have undertaken moves straight to whatever is outstanding.</p>
   <p><strong>However you come to it.</strong> That is the ideal, and nothing depends on reaching it. The path can be joined at any hour: a step is marked when it was done, not when its hour has passed. Anyone who would rather take a single resource, or stay with one card, is welcome to &mdash; the main thing is to learn Torah and to pray as we fulfill our day&rsquo;s acts of kindness. What this offers is a way to bind that learning and that prayer, and ourselves, to time, and to the beautifully intricate Kabbalistic structure found within it.</p>
