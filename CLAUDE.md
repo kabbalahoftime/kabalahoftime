@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v351**; the next is v352.
+nobody. Currently **v352**; the next is v353.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -510,18 +510,37 @@ and Yesod alone loses it.
 else added that rewrites a card's main text must do the same;
 `injectMedMarks` only fills a host that has no mark, so asking is cheap.
 
-### Two ascents, two words
+### The dial's name, and its unit
 
-The dial is **מַדְרֵגוֹת הַזְּמַן** and its fifty-two half-hours are
-**rungs**. The thirty readings on the cards are **מעלות** and **מיעוטים**,
-and in prose they are **steps**. The two must never share a word: the dial
-was מעלות הזמן and one of the four panes is מעלות, which is what made it
-confusing. "Stretch" was tried for the dial's unit and dropped; "step" was
-tried and dropped, because step is already the thirty's word 48 times over
-and the Help Guide defines a מעלה as one.
+The dial is **מַעֲלוֹת הַזְּמַן** and its fifty-two half-hours are
+**steps**. One of the four panes on every card is also **מעלות**, and the
+thirty readings are steps in prose 48 times over. **Both overlaps are
+settled rather than open, and neither is to be renamed again.**
 
-Both the dial's ⓘ and the Help Guide name the difference outright, so it
-is stated rather than left to be noticed.
+Four candidates were tried in one sitting and each was worse than the step
+it replaced:
+
+- **stretch** — what the unit was. Not a climbing word, which was the
+  objection to it.
+- **מדרגות / rung** — already the word for R. Pinchas ben Yair's ten, for
+  the Ramchal's ladder, for `pathAddRung` and the path chooser's own offer
+  of "another rung", and for the micro-step's `Rung N:` detail row. It did
+  not resolve the collision; it moved it onto a word carrying three things
+  already.
+- **week** — what the fifty-two actually are, and the one candidate with
+  nothing in its way. Declined.
+- a title without מעלות at all — declined; the dial keeps its name.
+
+The lesson is that every climbing word in this app is spoken for, so a
+fifth synonym is not available. What carries the distinction instead is
+**prose, in both depths of the dial's ⓘ**: both are steps and both climb,
+but these are the steps of the clock, fifty-two half-hours, and those are
+the steps of the learning, of which there are thirty. Said outright rather
+than left to be noticed.
+
+A **"Dial" line at the head of Today's Ladder** was built three times and
+rejected three times. The four lines under it are already in the journey's
+order; what the block does not do is name where to begin. Leave it so.
 
 ## Scratch work
 

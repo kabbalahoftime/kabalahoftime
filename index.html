@@ -3270,24 +3270,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   position:relative; z-index:1;
 }
 .today-prayer .tp-sef { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
-/* ── WHERE THE JOURNEY BEGINS ──
-   The dial, above the four. Drawn as the face below it is — a row, chip
-   then text — because it is the same kind of line: something the hour
-   already is, not something asked of anyone. No mark and never lit: the
-   moment is not a deed, and the step being asked for is further down. */
-.today-dial { margin-top: 8px; font-size: calc(13.5px * var(--ts, 1));
-  display: flex; align-items: baseline; column-gap: 8px; flex-wrap: wrap; }
-.today-dial .tp-go { flex: none; }
-.today-dial .td-open {
-  background: none; border: none; font-family: inherit; font-size: 1em;
-  color: var(--ink-mid); cursor: pointer; text-align: left;
-  flex: 0 1 auto; min-width: 0;
-  display: inline-block; padding: 14px 0; margin: -14px 0;
-  position: relative; z-index: 1;
-}
-.today-dial .td-open:hover { color: var(--gold); text-decoration: underline; }
-.today-dial .td-sub { color: var(--ink-dim); font-size: 0.85em; white-space: nowrap; }
-
 /* The face of the hour. Quieter than the prayer above it — that one is being
    asked for, this one is being told — and its word is a link to the card it
    was read from rather than a mark. The padding gives the tap its height
@@ -3405,7 +3387,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .today-start .ts-word { color:var(--gold); }
 .today-start .ts-sub { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
 #today-block .today-start,
-#today-block .today-dial,
 #today-block .today-face,
 #today-block .today-prayer,
 #today-block .today-action,
@@ -4278,15 +4259,6 @@ content: ''; float: right; width: 30px; height: 1em;
               aria-label="Choose your paths"><span class="tp-flag">First</span></button><span
         class="ts-word">your paths</span><span class="ts-sub">&middot; how much of the thirty, and in which language</span>
     </div>
-    <!-- WHERE THE JOURNEY BEGINS. The dial, before any of the four: the
-         clock in Keter, which is the moment itself rather than a thing
-         asked of anyone. The four lines under it are the journey from
-         there — the meditations, then the prayer, the study and the deed
-         — and they were already in that order; what the block never said
-         was where to start. Built by applyTodayDial, on the same beat as
-         the face, because what it names is the stretch and the stretch
-         turns with the hour. -->
-    <div id="today-dial" class="today-dial" style="display:none;"></div>
     <div id="today-face" class="today-face" style="display:none;"></div>
     <!-- THE PRAYER THIS HOUR IS ASKING FOR. The ten tags are scattered one to
          a Sefirah down the whole page, so knowing which is due meant finding
@@ -15869,7 +15841,7 @@ content: ''; float: right; width: 30px; height: 1em;
     return [rows[6]].concat(rows.slice(0, 6));       // Malchut first, as before
   })();
 
-  // Madregot HaZman places the Mochin: about the Chatzot seam,
+  // Ma'alot HaZman places the Mochin: about the Chatzot seam,
   // at these offsets in minutes from Chatzot. In fixed mode Chatzot is 1:43 AM,
   // which gives 12:54-2:22 — Chochmah and Binah before it, Keter/Da'at after.
   // This is also what gives the first three prayers their hour: Cheshbon
@@ -16323,8 +16295,8 @@ content: ''; float: right; width: 30px; height: 1em;
     maalah: {
       t: 'ma’alah', heb: 'מַעֲלָה',
       forms: ['ma’alah', 'Ma\'alot', 'Ma’alot', 'ma\'alah', 'ma’alot'],
-      b: 'A step — a stair, something climbed. Fifteen of them go up the day.',
-      m: 'A step or ascent; the plural <bdi lang="he">מעלות</bdi> is the word in the Songs of Ascents. Fifteen are climbed from Malchut up to Keter as the moon fills. The dial keeps a word of its own for its fifty-two — <bdi lang="he">מדרגות</bdi>, rungs — so the two ascents are never one word.',
+      b: 'A step — a stair, a rung, something climbed. Fifteen of them go up the day.',
+      m: 'A step or ascent; the plural <bdi lang="he">מעלות</bdi> is the word in Ma’alot HaZman and in the Songs of Ascents. Fifteen are climbed from Malchut up to Keter as the moon fills.',
       a: 'An ascent, and also a virtue — the word carries both, a rung and what standing on it makes of you. Fifteen answer to the fifteen Songs of Ascents and to the moon’s fifteen days of waxing.',
     },
     miut: {
@@ -16339,7 +16311,7 @@ content: ''; float: right; width: 30px; height: 1em;
       forms: ['Chatzot'],
       b: 'Midnight — the middle of the night, reckoned from the actual hours of darkness rather than by the clock.',
       m: 'The exact midpoint of the night, halfway between sunset and sunrise, which is rarely twelve o’clock. The day’s climb is taken in the band wrapped around it.',
-      a: 'Halfway between sunset and sunrise by the night’s own length. The hour of the Tikkun and of the King who rises to learn with the righteous; the seam the year’s three Mochin hover above in Madregot HaZman.',
+      a: 'Halfway between sunset and sunrise by the night’s own length. The hour of the Tikkun and of the King who rises to learn with the righteous; the seam the year’s three Mochin hover above in Ma’alot HaZman.',
     },
     parasha: {
       t: 'parasha', heb: 'פָּרָשָׁה',
@@ -19954,18 +19926,18 @@ content: ''; float: right; width: 30px; height: 1em;
       meta: "An original Kabbalah of Time cycle · V'Atah Tetzaveh, Purim Katan 5752 · Yad HaChazakah · Kohelet 3"
     },
     wheel: {
-      title: 'Madregot HaZman — מדרגות הזמן',
+      title: 'Ma\'alot HaZman — מעלות הזמן',
       main:
         'The year as a single day: the 52 weeks of the Kabbalah of Time year mapped onto the 24 ' +
         'hours of one day, each week a step ascending through the seven Sefirot &mdash; with ' +
         'weeks 50&ndash;52, the three Mochin, hovering above the Chatzot seam. Tap any step to ' +
         'see its week; the hand shows where &ldquo;now&rdquo; falls in the inner year. ' +
-        '</p><p>A step of this dial is half an hour of today, so it has a word of its own: a ' +
-        '<strong>rung</strong>. <em>Rung 27 of the inner year</em>. The week it wears ' +
+        '</p><p>A step of this dial is half an hour of today, so the readouts call it a ' +
+        '<strong>step</strong>: <em>Step 27 of the inner year</em>. The week it wears ' +
         'is the year&rsquo;s 27th, which is the whole point of the face. ' +
-        'Rungs here and <bdi lang="he">מעלות</bdi> on the cards below: both climb, and the ' +
-        'two are never one word. These are the rungs of the clock &mdash; fifty-two half-hours ' +
-        '&mdash; and those are the steps of the learning, of which there are thirty. ' +
+        'These fifty-two are not the thirty <bdi lang="he">מעלות</bdi> and ' +
+        '<bdi lang="he">מיעוטים</bdi> on the cards below. Both are steps, and both climb, ' +
+        'but these are the steps of the clock and those are the steps of the learning. ' +
         '</p><p>The dial turns both ways: a single day with the year inside it, or the whole ' +
         'year drawn as one day. Three views &mdash; 52 weeks, 17 sets, the day.',
       beginner:
@@ -19975,10 +19947,10 @@ content: ''; float: right; width: 30px; height: 1em;
         '&mdash; about twenty-eight minutes of the day to a week. </p><p>The hand shows where ' +
         'you are right now: which week of the year is alive in this hour. Tap any step to visit ' +
         'its week &mdash; its animal, its rabbi, its quality. </p><p>Each step is about half ' +
-        'an hour of today, so the dial calls it a <strong>rung</strong> rather than a week. ' +
-        'It is the week of the year that this half hour is standing in. Rungs are not the ' +
-        '<bdi lang="he">מעלות</bdi> on the cards below: those are readings, and there ' +
-        'are thirty of them; these are half-hours, and there are fifty-two. </p><p>The highest view of all: ' +
+        'an hour of today, so the dial calls it a <strong>step</strong> rather than a week. ' +
+        'It is the week of the year that this half hour is standing in. These are not the ' +
+        'thirty steps on the cards below: those are readings, and there are thirty of them; ' +
+        'these are half-hours, and there are fifty-two. </p><p>The highest view of all: ' +
         'the entire year, inside a single day.',
       advanced:
         'The fifty-two weeks of the Kabbalah of Time year mapped onto the twenty-four hours of ' +
@@ -21214,7 +21186,7 @@ content: ''; float: right; width: 30px; height: 1em;
         const pair = (typeof window.kotwCombo === 'function' && n < 50)
           ? (window.kotwCombo(n) || {}).en
           : (window.kotwMochin ? (window.kotwMochin(n) || {}).en : '');
-        if (pair) return 'Rung ' + n + ': ' + pair;
+        if (pair) return 'Step ' + n + ': ' + pair;
       } catch (e) {}
       return '';
     },
@@ -21649,37 +21621,6 @@ content: ''; float: right; width: 30px; height: 1em;
   if (document.fonts && document.fonts.ready)
     document.fonts.ready.then(() => { try { fitCounterRow(); } catch (e) {} });
 
-  // The dial line. It names the stretch the day is standing in, which is
-  // what the dial says about now, and goes there. No mark: the moment is
-  // not a deed, and Keter's own flame is in the dial's caption already.
-  function applyTodayDial() {
-    const el = document.getElementById('today-dial');
-    if (!el) return;
-    const n = (typeof window.kotwCurWeek === 'function') ? window.kotwCurWeek() : 0;
-    let pair = '';
-    try {
-      pair = (n && n < 50 && typeof window.kotwCombo === 'function')
-        ? (window.kotwCombo(n) || {}).en
-        : (n && window.kotwMochin ? (window.kotwMochin(n) || {}).en : '');
-    } catch (e) {}
-    const want = n ? (n + '|' + (pair || '')) : '';
-    if (el.dataset.built !== want) {
-      el.dataset.built = want;
-      el.innerHTML = n
-        ? '<button type="button" class="tp-go" onclick="todayDialGo()" ' +
-          'aria-label="Go to the dial"><span class="tp-flag">Dial</span></button>' +
-          '<button type="button" class="td-open" onclick="todayDialGo()">' +
-          'Rung ' + n + (pair ? ': ' + pair : '') +
-          ' <span class="td-sub">&middot; begin here</span></button>'
-        : '';
-    }
-    el.style.display = n ? '' : 'none';
-  }
-  function todayDialGo() {
-    const el = document.getElementById('kotw-root');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
   function applyTodayAction() {
     const el = document.getElementById('today-action');
     if (!el) return;
@@ -22110,7 +22051,6 @@ content: ''; float: right; width: 30px; height: 1em;
     const ahead = document.getElementById('today-ahead');
     if (ahead) ahead.style.display =
       (todayAheadDue() && currentOffset === 0) ? '' : 'none';
-    applyTodayDial();
     applyTodayFace();
     applyTodayAction();
     // Shown until a path is stored, and then never again. Read from the store
@@ -28873,7 +28813,6 @@ content: ''; float: right; width: 30px; height: 1em;
     updateSefirahTimeLabels();
     // The face follows the hour, so it is asked for on the same beat as the
     // times are. It rebuilds only when the answer changes.
-    if (typeof applyTodayDial === 'function') applyTodayDial();
     if (typeof applyTodayFace === 'function') applyTodayFace();
     if (typeof applyTodayAction === 'function') applyTodayAction();
   }, 30000);
@@ -31169,10 +31108,10 @@ content: ''; float: right; width: 30px; height: 1em;
   // "weeks" leads and "steps" follows in brackets. On the dial the
   // parallel to the year is the whole point — it is stated directly above
   // this line, "The Year as a Single Day" — so week is the word that
-  // belongs here and stretch is the gloss. On a card, lifted out from under
+  // belongs here and step is the gloss. On a card, lifted out from under
   // that heading, the two change places: there it reads "Step N of 52",
   // because without the heading "week" claims the year.
-  var SUB={weeks:'52 weeks (\u201crungs\u201d)',sets:'17 alef-bet sets',day:'the day\u2019s own shape'};
+  var SUB={weeks:'52 weeks (\u201csteps\u201d)',sets:'17 alef-bet sets',day:'the day\u2019s own shape'};
   function faceSub(){
     var e=h.querySelector('.kotw-sub');
     if(e) e.innerHTML=(FACE==='day'?'A Single Day, and the Year in it'
@@ -31185,13 +31124,13 @@ content: ''; float: right; width: 30px; height: 1em;
       '<span class="cycle-info-btn" data-cycle="wheel" role="button" tabindex="0" ' +
       'aria-label="About this cycle" title="About this cycle">ⓘ</span>';
   }
-  h.innerHTML='<div class="kotw-title">מַדְרֵגוֹת הַזְּמַן</div>'+
+  h.innerHTML='<div class="kotw-title">מַעֲלוֹת הַזְּמַן</div>'+
     '<div class="kotw-sub"></div>';
   faceSub();                                   // so the first draw reads as a toggled one does
   root.appendChild(h);
 
   var svg=mk('svg',{viewBox:'-24 -24 468 468',role:'img',
-    'aria-label':'Madregot HaZman \u2014 the 52 weeks of the year ascending through a single day'},root);
+    'aria-label':'Ma\u2019alot HaZman \u2014 the 52 weeks of the year ascending through a single day'},root);
 
   mk('circle',{cx:CX,cy:CY,r:200,fill:'none',stroke:'#9a7e2a','stroke-width':1,opacity:.4},svg);
   for(var hh=0;hh<24;hh++){
@@ -31293,7 +31232,7 @@ content: ''; float: right; width: 30px; height: 1em;
     var nowBadge=isNow?'<span class="kotw-now-badge">Now</span>':'';
     /* Keter's face is this: the step of the day that is now, and the word
        the year's matching week carries. So the flame is here, beside it —
-       and only on the stretch that is now, because one tapped to be read is
+       and only on the step that is now, because one tapped to be read is
        not the one being focused on. It is written into this HTML rather than
        injected after, since the caption is rebuilt on every tick and
        anything put in from outside would be wiped within the half-minute. */
@@ -31306,10 +31245,10 @@ content: ''; float: right; width: 30px; height: 1em;
         ' aria-label="Mark the Keter meditation">'+
         '<svg viewBox="0 0 22 22" aria-hidden="true">'+medGlyph(false)+'</svg></span>'
       : '';
-    /* Stretch, not week. The heading above says the parallel and the
+    /* Step, not week. The heading above says the parallel and the
        sub-label glosses it; this line and the one in the middle of the dial
        are the two that answer "where am I", and what they are answering
-       about is half an hour of this day. A reader meets "Rung 27" on
+       about is half an hour of this day. A reader meets "Step 27" on
        Keter's card and should not be told "Week 27" here about the very
        same half hour.
        The theme below it stays the year's, and that is the whole conceit of
@@ -31317,7 +31256,7 @@ content: ''; float: right; width: 30px; height: 1em;
        card, lifted out from under the heading, the same borrowing would be
        a false claim, which is why Keter's line carries the pairing. */
     detail.innerHTML='<span class="kotw-heb">'+cm.he+'</span>'+
-      '<span class="kotw-wk">'+medMark+'Rung '+n+nowBadge+'</span>'+
+      '<span class="kotw-wk">'+medMark+'Step '+n+nowBadge+'</span>'+
       '<div class="kotw-theme">\u201c'+w.t+'\u201d</div>'+
       '<div class="kotw-meta">\uD83D\uDC3E '+w.a+'<br>\uD83D\uDCDC '+w.r+
       '<br>\u23F1 '+fmt(m1)+' \u2013 '+fmt(m2)+' \u00b7 '+cm.en+'</div>';
@@ -31681,7 +31620,7 @@ content: ''; float: right; width: 30px; height: 1em;
     cT.textContent=fmt(m);
     var dseg=(FACE==='day')?dayShape()[n-1]:null;
     cW.textContent=(FACE==='day')?dseg.en
-      :(FACE==='sets')?'Set '+n+' of the inner year':'Rung '+n+' of the inner year';
+      :(FACE==='sets')?'Set '+n+' of the inner year':'Step '+n+' of the inner year';
     cS.textContent=(FACE==='day')?dseg.he
       :(FACE==='sets')?ALEF_BET[n-1].hebrew
       // combo pairs the week against the seven, and the Mochin stand outside
@@ -31828,7 +31767,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <h3 class="hg-h">The marks</h3>
   <p>Almost every reading wears a mark that says what it is, and the marks are what the counts are kept by. A few readings wear none &mdash; the week&rsquo;s seven books in Malchut, the Zohar that stands with Thursday&rsquo;s Ramchal &mdash; and those are simply read.</p>
   <p><strong>&#10022;</strong> is a <strong>counted step</strong> &mdash; light drawn inward, <em>Or Pnimi</em>. Beside its heading sits a gold <strong>מעלה</strong> or <strong>מיעוט</strong> tag. There are thirty of them in a day, fifteen of each, and each is marked when you have learned it.</p>
-  <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, and the word in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. The spiral of the year above climbs too, and keeps a word of its own for its fifty-two &mdash; <strong lang="he">מדרגות</strong> (<em>madregot</em>), rungs &mdash; so the two ascents are never called the same thing. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is the opposite motion &mdash; a lessening, a making-small, what the moon does coming down.</p>
+  <p>Those two words name the two directions. A <strong lang="he">מעלה</strong> (<em>ma&rsquo;alah</em>) is <strong>a step</strong> &mdash; a stair, a rung, something climbed. Its plural is <strong lang="he">מעלות</strong> (<em>ma&rsquo;alot</em>): the steps, the word in <strong>Ma&rsquo;alot HaZman</strong>, the spiral of the year above, and in <span lang="he">שיר המעלות</span>, the Songs of Ascents sung going up to the Temple. A <strong lang="he">מיעוט</strong> (<em>mi&rsquo;ut</em>) is the opposite motion &mdash; a lessening, a making-small, what the moon does coming down.</p>
   <p><strong>&#10017;</strong> is a <strong>companion</strong> &mdash; the surrounding light, <em>Or Makif</em>: texts, resources and teachers that accompany the day but stand outside its thirty steps. Tap one to gather it. None is ever asked for by the hour; the surrounding light does not wait on a vessel. Each fills half a star in the ring around the moon, two to a star, and a full day&rsquo;s twenty-two fill the ring of eleven exactly &mdash; the eleven of Yosef&rsquo;s dream: the sun and the moon and eleven stars.</p>
   <p>One closed set among them wears a <strong>menorah</strong> rather than a star, and it is a chanukiah: ten who carry it on nine lights. The Baal Shem Tov, the Maggid of Mezritch and the Meor Einayim, and then the seven of Chabad from the Alter Rebbe to the Rebbe. Eight take the eight branches, in the order the teaching came down; the ninth, the Rayatz, is the shamash at the centre &mdash; the one whose whole work was to light others; and the tenth takes no branch, because when he is gathered every light on the stand is lit. A gathered bearer lights blue in his own place.</p>
   <p><strong><bdi lang="he">המעשה הוא העיקר</bdi> &mdash; <em>HaMaaseh Hu HaIkar</em>, the main thing is the deed.</strong> The Rebbe said it often, and it is the word under the fourth column: <bdi lang="he">מעשה</bdi>. At the foot of every menorah is a <strong>tzedakah</strong>. The day asks for four things &mdash; <strong>meditation</strong>, <strong>prayer</strong>, <strong>study</strong> and <strong>action</strong> &mdash; and the Menorah is where the action stands. Each Sefirah carries the fund that belongs to it: Keren Hashana in Keter, Keren Levi Yitzchak in Chochmah, Keren Chana in Binah, and so through all ten. Every link opens that fund&rsquo;s own page, and the giving is done there. Today&rsquo;s Ladder carries the hour&rsquo;s own fund on its fourth line, so you need not come looking for it, and the <strong>Action</strong> column beneath counts the menorah &mdash; the ten bearers, lit as you gather them, because kindling a light is a deed and belongs with the deeds. Tapping it opens all ten funds at once &mdash; which is also where you <strong>add your own</strong>: the places you already give to, filed under whichever Sefirah you like, kept in this browser and sent nowhere.</p>
