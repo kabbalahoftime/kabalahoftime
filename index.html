@@ -5324,7 +5324,20 @@ content: ''; float: right; width: 30px; height: 1em;
         let rows = [];
         for (let hy = h.year - 1; hy <= h.year + 1; hy++) rows = rows.concat(p_rows(hy, il));
         rows.sort((x, y) => x.date < y.date ? -1 : x.date > y.date ? 1 : 0);
-        const i = rows.findIndex(r => r.date === f);
+        // On or after, not exactly on. An exact match is what every day I can
+        // reach gives — 1200 days swept in both reckonings, all hit — and yet
+        // a reader on the Israel reckoning saw the card come up empty, which
+        // means some Shabbat somewhere is not in these rows under some
+        // condition I have not reproduced.
+        //
+        // The miss is not worth a blank card. The rows are sorted, so the
+        // first one on or after the date is the Shabbat whose reading this
+        // week is named by — the same thing the forward walk below already
+        // does for a festival Shabbat, applied one step earlier. Where the
+        // exact date is present, which is everywhere I can test, this picks
+        // it and nothing changes.
+        let i = rows.findIndex(r => r.date === f);
+        if (i < 0) i = rows.findIndex(r => r.date > f);
         if (i < 0) return null;
         if (rows[i].isHoliday)
             for (let k = i + 1; k < rows.length; k++) if (!rows[k].isHoliday) return rows[k];
@@ -5355,7 +5368,7 @@ content: ''; float: right; width: 30px; height: 1em;
           // sentence tells them which one lookup came back empty.
           const _nm = document.getElementById('yesod-parasha-name');
           if (_nm) _nm.textContent =
-            'No parasha found for the coming Shabbat \u2014 ' +
+            'No parasha found for ' + formatDate(getNextShabbat(_ref)) + ' \u2014 ' +
             (typeof parashaRegion !== 'undefined' ? parashaRegion : 'diaspora') +
             ' reckoning. Try the other with the pills above.';
           const _nu = document.getElementById('yesod-parasha-numbers');
