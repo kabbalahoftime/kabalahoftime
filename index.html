@@ -1780,7 +1780,7 @@ justify-content: center;
 min-width: 44px;
 min-height: 44px;
 margin: -15px -14px -15px -9px;
-font-size: calc(11px * var(--ts, 1));
+font-size: calc(14px * var(--ts, 1));
 font-style: normal;
 letter-spacing: 0;
 color: var(--gold);
@@ -1803,7 +1803,13 @@ margin: 0;
 padding: 0;
 min-width: 47px;
 min-height: 43px;
-font-size: calc(13px * var(--ts, 1));
+/* The one on a card's own face, and the smallest thing on it that anyone
+   is asked to find. It was 13px — and on a phone it stayed 13px, because
+   the ergonomics rule below raises `.cycle-info-btn` and a corner one
+   outranks it. It is drawn to be seen now, at 19 and 21. The box around it
+   does not change, so nothing moves: the glyph is centred in a 47 by 43
+   box that was always there for the hand. */
+font-size: calc(19px * var(--ts, 1));
 line-height: 1;
 z-index: 2;
 }
@@ -3017,7 +3023,10 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* ── PHONE ERGONOMICS — larger type and touch targets ── */
 @media (max-width: 600px) {
   .maalah { font-size: calc(11px * var(--ts, 1)); padding: 2px 5px; }
-  .cycle-info-btn { font-size: calc(15px * var(--ts, 1)); padding: 2px 6px; }
+  .cycle-info-btn { font-size: calc(17px * var(--ts, 1)); padding: 2px 6px; }
+  /* Named on its own, or the corner rule above wins and the ⓘ a reader
+     actually taps stays at its desk size on the device it is tapped on. */
+  .cycle-info-btn.corner { font-size: calc(21px * var(--ts, 1)); padding: 0; }
   .sefirah-main-text { font-size: calc(17px * var(--ts, 1)); }
   .sefirah-sub-text { font-size: calc(15px * var(--ts, 1)); }
   .keter-main { font-size: calc(15px * var(--ts, 1)); }
@@ -5334,7 +5343,25 @@ content: ''; float: right; width: 30px; height: 1em;
     function displayParasha(forDate) {
         const _ref = forDate || new Date();
         const foundParasha = findCurrentParasha(formatDate(getNextShabbat(_ref)));
-        if (!foundParasha) return;
+        if (!foundParasha) {
+          // The one way this card can be left saying "Loading..." for ever.
+          // Everything that fills Yesod's face is synchronous — there is no
+          // fetch behind it — so the only way the placeholder survives is a
+          // branch that did not run, and this early return is the branch.
+          // It should not fire: p_rows builds three Hebrew years around the
+          // date, and a sweep of 460 days in both the Israel and the
+          // Diaspora reckoning found no day where it does. But a card that
+          // says Loading for ever tells a reader the app is broken, where a
+          // sentence tells them which one lookup came back empty.
+          const _nm = document.getElementById('yesod-parasha-name');
+          if (_nm) _nm.textContent =
+            'No parasha found for the coming Shabbat \u2014 ' +
+            (typeof parashaRegion !== 'undefined' ? parashaRegion : 'diaspora') +
+            ' reckoning. Try the other with the pills above.';
+          const _nu = document.getElementById('yesod-parasha-numbers');
+          if (_nu) _nu.textContent = '';
+          return;
+        }
 
         const nums = foundParasha.numbers;
         // For a double (or multi-) parasha week, every number gets its own cycle/relativeNumber
@@ -25296,11 +25323,18 @@ content: ''; float: right; width: 30px; height: 1em;
         : { en: 'The Left Kidney',  he: 'כִּלְיָה שְׂמָאלִית' };
       const f = seasonFaceOf(pl.season, pl.quarter);
       if (!f) return null;
-      // "The Eagle's face of Man" rather than "the Eagle's Man-face": it is
+      // "The Eagle's Face of the Ox" rather than "the Eagle's Ox-face": it is
       // Yechezkel's own construction — פְּנֵי אָדָם, the face of a man — and the
       // hyphenated form read as a compound noun rather than as one creature
       // wearing another's face, which is the whole point of the four.
-      return { en: f.own ? `The ${f.of}’s own face` : `The ${f.of}’s face of ${f.en}`, he: f.he };
+      //
+      // The article goes before the three creatures and not before Man. An
+      // ox, a lion and an eagle are each one animal and want it; Man is the
+      // kind and does not — "the Face of Man" is idiomatic where "the Face
+      // of Ox" is not.
+      const _the = f.en === 'Man' ? '' : 'the ';
+      return { en: f.own ? `The ${f.of}’s own Face` : `The ${f.of}’s Face of ${_the}${f.en}`,
+               he: f.he };
     };
     // One line, and the one the meditation reads. The letter is left off the
     // three break-days because there is none — which is what those days are.
