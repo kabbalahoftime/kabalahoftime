@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v352**; the next is v353.
+nobody. Currently **v353**; the next is v354.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
