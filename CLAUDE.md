@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v353**; the next is v354.
+nobody. Currently **v354**; the next is v355.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -541,6 +541,34 @@ than left to be noticed.
 A **"Dial" line at the head of Today's Ladder** was built three times and
 rejected three times. The four lines under it are already in the journey's
 order; what the block does not do is name where to begin. Leave it so.
+
+### The ladder asks one thing
+
+Four lines at once read as a menu, and a menu is not a place to start. The
+ladder shows only the line being **asked for** — the step, or the path
+chooser before a path is kept — and the hour's other three fold away under
+a button reading *the rest of the hour*. Shut by default, remembered in
+`kotLadderRest`.
+
+**The wrapper hides, never the rows.** `_travelMarks` tests
+`row.style.display` on `today-face` / `today-prayer` / `today-action` to
+decide whether to draw that row's chip on the travelling bar, so the rows
+have to go on being drawn by their own builders. Hide a row itself and its
+chip goes down with it.
+
+`applyLadderRest` also drops the button when all three rows are hidden — a
+door onto an empty room — so it is called from `applyLadderNext` and again
+on the 30-second beat, where the face and the fund turn with the hour.
+
+The step moved above the other three, which is what this cost: the order
+was face, prayer, step, action, *"the order of the day's work"*. Shut,
+there is nothing to order; open, the three keep that order among
+themselves.
+
+Two sentences claimed the ladder "names all four and goes straight to
+each" — the welcome box and the Help Guide's **Where to start**. Both now
+say it asks one thing at a time. Anything else added to the ladder has to
+keep those two honest.
 
 ## Scratch work
 
