@@ -21474,11 +21474,15 @@ content: ''; float: right; width: 30px; height: 1em;
     // it is the whole ladder.
     if (shown('today-start')) return 'start';
     if (ladderMode() === 'free') {
-      // The prayer keeps its hour here too, and takes precedence while it is
-      // unsaid: it is the one of the five that cannot simply be done later.
+      const pick = _ladderFreePick();
+      // The meditations come first and are not interrupted: the descent from
+      // Keter to Malchut is one movement, and a prayer in the middle of it
+      // would break it in half.
+      if (pick && pick.kind === 'med') return 'med';
+      // Then the prayer, which still keeps its own hour — it is the one of
+      // the five the clock is never released from. After it, the climb.
       const dp = _ladderDone();
       if (!dp.pray && shown('today-prayer')) return 'pray';
-      const pick = _ladderFreePick();
       return pick ? pick.kind : null;
     }
     const d = _ladderDone();

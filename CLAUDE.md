@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v358**; the next is v359.
+nobody. Currently **v359**; the next is v360.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -636,15 +636,19 @@ their own directions:
 
 ```
 meditations   Keter → Malchut    1…10          medStepHas / medHas
+the prayer    its own hour       the hour's    prayersMask
 מעלות          Malchut → Keter    idx 0…14      pathSteps / _stepMarked
 מיעוטים        Keter → Malchut    idx 15…29     (one pass: pathSteps is sorted)
 מעשה          Malchut → Keter    fundOrderUp   bearer gathered, never the fund
 ```
 
-**The prayer is never released, in either mode.** A prayer has its hour in
-a way a face and a reading do not, so in order it is still offered when its
-hour comes and still takes precedence while unsaid. Everything else goes at
-the reader's own pace.
+**The prayer is never released from the clock, in either mode.** A prayer
+has its hour in a way a face and a reading do not. But in order it sits
+**after the meditations**, not ahead of them: the descent from Keter to
+Malchut is one movement, and a prayer in the middle would break it in
+half. So the meditations are never interrupted, and the prayer is the next
+thing asked for once they are done — before the climb, and still waiting
+while it is unsaid.
 
 `_ladderFreePick()` returns the first undone thing in that order, and
 `_ladderFaceSef()` / `_ladderActSef()` say which Sefirah each row is about
