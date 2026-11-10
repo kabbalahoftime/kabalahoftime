@@ -3421,7 +3421,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   background: none; border: none; cursor: pointer;
   font-family: 'Cinzel', serif; font-size: calc(10.5px * var(--ts, 1));
   letter-spacing: 1px; color: var(--ink-mid);
-  padding: 13px 14px; line-height: 1.1;
+  /* 17px, not 13: the text is 10.5px on a 1.1 line, which is 11.6, and
+     13 each side made the pill 38 against the 44 every target here is
+     held to. The pill grows rather than being pulled back by a negative
+     margin, because it sits inside a drawn border and the border would
+     be pulled with it. */
+  padding: 17px 14px; line-height: 1.1;
 }
 .lad-pill + .lad-pill { border-left: 1px solid var(--gold-mid); }
 .lad-pill-on { background: var(--gold-mid); color: #fdf9f2; }
