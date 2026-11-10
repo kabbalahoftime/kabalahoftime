@@ -3358,20 +3358,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 }
 .today-action .ta-more:hover { color:var(--gold); text-decoration:underline; }
 
-/* ── THE NEXT STEP ──
-   The lines named things and asked for none of them, so the one that is a
-   step says so in words: "Read מעלה ז׳ · Sichos HaRan".
-   Only the step. The thirty are a sequence — exactly one of them is being
-   asked for at any moment, and doing it moves the asking on to the next. The
-   face of the hour and the hour's prayer are not that: a face is what the day
-   is rather than a thing to be done in turn, and the ten prayers each have
-   their own hour and may be said in any order. Lighting those two by turns
-   made a queue out of what is not one, and left them at half strength for the
-   rest of the hour besides, which is the opposite of what they are worth.
-   So they are drawn as they always were, full weight, and the step alone
-   carries the verb. Before any path is chosen the first step is choosing one,
-   and that line carries it instead. */
-.t-do { color:var(--gold); margin-right:5px; }
 /* The rule down the left is the only mark the lit line carries. Every row
    carries it always and all but one carry it in nothing, so no line moves
    when it lights — the lines have been measured against each other twice and
@@ -21300,15 +21286,6 @@ content: ''; float: right; width: 30px; height: 1em;
   // and the ten prayers each keep their own hour and may be said in any
   // order — neither is a queue, and making one of them stand in a queue put
   // both at half strength for the rest of the hour besides.
-  // A function and not a const object: this is read from applyPrayerState and
-  // applyMedState, both of which are defined thousands of lines above it, and
-  // a const read before its own line has run throws rather than reading
-  // undefined. That fault cost a whole render once already in this file.
-  function _ladderVerbFor(k) {
-    return k === 'start' ? 'Choose' : k === 'study' ? 'Read'
-         : k === 'med' ? 'Dwell on' : k === 'pray' ? 'Say'
-         : k === 'act' ? 'Give' : '';
-  }
 
   // ── THE LADDER IS ONE LINE ──
   // The block asks one thing. Four at once is a menu, and a menu is not an
@@ -21411,22 +21388,6 @@ content: ''; float: right; width: 30px; height: 1em;
     });
   }
 
-  // The verb is put in rather than written into the three builders: each of
-  // them rewrites its line only when what it says changes, and each on its
-  // own schedule, so a word baked into one of them would be right until the
-  // other two moved.
-  function _ladderVerb(el, word) {
-    const cur = el.querySelector('.t-do');
-    if (!word) { if (cur) cur.remove(); return; }
-    if (cur) { if (cur.textContent !== word) cur.textContent = word; return; }
-    const chip = el.querySelector('.tp-go, .t-flag');
-    if (!chip) return;
-    const s = document.createElement('span');
-    s.className = 't-do';
-    s.textContent = word;
-    chip.insertAdjacentElement('afterend', s);
-  }
-
   function applyLadderNext() {
     const which = _ladderNext();
     // One line showing, and it is the one being asked for — so it is the one
@@ -21445,7 +21406,6 @@ content: ''; float: right; width: 30px; height: 1em;
       const here = el.style.display !== 'none';
       const on = here && (k === which);
       el.classList.toggle('is-next', on);
-      _ladderVerb(el, on ? _ladderVerbFor(k) : '');
       // Said to a reader who cannot see which line is lit. On the study line
       // the row is the control; on the other two the chip is.
       const ctrl = ctrlSel ? el.querySelector(ctrlSel) : el;
@@ -21454,8 +21414,7 @@ content: ''; float: right; width: 30px; height: 1em;
         else ctrl.removeAttribute('aria-current');
       }
     });
-    // The step line is held to one line and sized to fit it; the verb is new
-    // width on that line, so it is measured again after the word goes in.
+    // The step line is held to one line and sized to fit it.
     const nx = document.getElementById('today-next');
     if (nx && typeof _todayFit === 'function') _todayFit(nx);
     _travelSet(which);

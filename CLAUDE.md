@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v355**; the next is v356.
+nobody. Currently **v356**; the next is v357.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -563,10 +563,16 @@ rather than borrowing somebody else's to stand in third place.
 
 **`_ladderNext` and `_ladderShow` are two questions, not one.** The first
 is what is being *asked for* — null when nothing is, which is what lights
-nothing, gives no verb and hides the bar. The second is what to *draw*, and
-when nothing is asked it keeps the last line up in its done state so the
-block is never empty. Collapsing them told a reader to `Read` a line
-saying *"Done · the month complete"*.
+nothing and hides the bar. The second is what to *draw*, and when nothing
+is asked it keeps the last line up in its done state so the block is never
+empty. Collapsed into one, the line reading *"Done · the month complete"*
+was lit as though it were still being asked for.
+
+**No verb.** The lines carried one for a while — `Dwell on`, `Say`, `Read`,
+`Give`, in a `.t-do` span after the chip. The pill already names the kind,
+so the verb said it twice, and the bar inherited it because
+`_travelTextFrom` strips the chip and the arrow but not that span. Gone:
+the CSS, `_ladderVerb`, `_ladderVerbFor` and the call.
 
 **The wrapper hides, never the row.** Rows go away by `.ladder-off`
 (`display:none !important`), not by their own `style.display` — each
