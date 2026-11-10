@@ -24448,8 +24448,27 @@ content: ''; float: right; width: 30px; height: 1em;
     const ACROSTIC_REFS = {
       1: ['9:2','9:3','9:4','9:5','9:6','9:8','9:9','9:10','9:11','9:12','9:14',
           '10:1','10:3','10:4','10:6','10:8','10:7','10:9','10:12','10:14','10:15','10:17'],
-      2: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22].map(d=>`25:${d}`),
-      3: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22].map(d=>`34:${d+1}`),
+      // Psalms 25 and 34 are NOT a verse a letter in order, and mapping them
+      // arithmetically put every day from the sixth onward against the wrong
+      // letter. Both are missing the ו verse, so the run slips by one at
+      // day 6 and never recovers; both close with an extra פ verse outside
+      // the acrostic (25:22, 34:23), which the arithmetic landed on ת.
+      // Psalm 25 also has no ק — 25:18 and 25:19 both open with ר.
+      //
+      // Checked against the Hebrew this file already holds, verse by verse.
+      // A letter the psalm does not have gets null, and the card draws
+      // nothing for it: `if (_raw)` below already guards that, which is how
+      // cycle 17 carries its ten empty days.
+      //
+      // The first two verses of each take their letter from the second word
+      // — אליך in 25:1, בך in 25:2 — which is the usual reading and is
+      // why they look wrong to a check that only sees first letters.
+      2: ['25:1','25:2','25:3','25:4','25:5', null,
+          '25:6','25:7','25:8','25:9','25:10','25:11','25:12','25:13','25:14',
+          '25:15','25:16','25:17', null, '25:18','25:20','25:21'],
+      3: ['34:2','34:3','34:4','34:5','34:6', null,
+          '34:7','34:8','34:9','34:10','34:11','34:12','34:13','34:14','34:15',
+          '34:16','34:17','34:18','34:19','34:20','34:21','34:22'],
       4: ['37:1','37:3','37:5','37:7','37:8','37:10','37:12','37:14','37:16','37:18',
           '37:20','37:21','37:23','37:25','37:27','37:28','37:30','37:29','37:34','37:35','37:37','37:39'],
       5: ['111:1','111:1','111:2','111:2','111:3','111:3','111:4','111:4','111:5','111:5',

@@ -58,6 +58,10 @@ and kills it. Use a fresh port instead.
 
 Develop on the feature branch. `main` is live, so merging to it publishes.
 
+**Publish without asking.** Once `check.mjs` ends in `all checks passed`,
+merge and push. Do not wait to be told; the author has said so standing.
+The suite passing is the gate, not a second opinion.
+
 ```sh
 git fetch origin main
 git checkout main
@@ -601,6 +605,27 @@ four is asked for turns with the hour.
 Two sentences have to stay honest with this — the welcome box and the Help
 Guide's **Where to start**. Both have twice said the ladder "names all four
 and goes straight to each", and twice been made false by a change here.
+
+### The acrostic psalms are not one verse a letter
+
+Chochmah's 22-day cycles name a verse for the letter of the day, and two of
+them were mapped **arithmetically** — `d => 34:${d+1}` and `25:${d}`. Both
+psalms are missing the **ו** verse, so from day 6 onward every day sat
+against the wrong letter, and the extra **פ** verse each closes with
+(25:22, 34:23) landed on ת. Seventeen of twenty-two wrong in each.
+
+Psalm 25 also has no **ק**: 25:18 and 25:19 both open with ר.
+
+Both are hand-mapped now and checked verse by verse against `ACROSTIC_HE`,
+which this file already holds — so the check costs no network call. A
+letter the psalm does not have is `null`, and the card draws nothing:
+`if (_raw)` guards it, the same way cycle 17 carries its ten empty days.
+
+**A first-letter check gives false positives**, so do not "fix" the others
+on one. The first verse of Psalms 25 and 37 takes its letter from the
+second word (אליך, אל), Psalm 37's ת is the second letter of וּתְשׁוּעַת,
+and Psalms 9–10 are a broken acrostic in the Masoretic text whose list here
+is deliberate. Cycles 1 and 4 were examined and left alone.
 
 ## Scratch work
 
