@@ -3411,7 +3411,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* The two modes, drawn as the date card's own pills are: a single outlined
    box cut in two, the chosen half filled. The 44px the targets are held to
    comes from padding, so the row keeps the height it had. */
-.lad-order { margin-bottom: 10px; }
+/* Last of the three rows now, so the breathing space goes above it. */
+.lad-order { margin-top: 12px; }
 .lad-order-pills {
   display: inline-flex; border: 1px solid var(--gold-mid);
   border-radius: 20px; overflow: hidden;
@@ -4422,20 +4423,6 @@ content: ''; float: right; width: 30px; height: 1em;
            their own lists, and each list already holds the choosing; this is
            only the door, said once, with the three marks that say which is
            which. -->
-      <!-- BY THE HOUR, OR IN ORDER. Two questions, so two modes, and the
-           reader says which. By the hour the ladder asks for this hour's
-           own; in order it walks the four movements end to end at the
-           reader's own pace. The prayer keeps its hour either way, which is
-           why it is not named here. -->
-      <div class="dc-custom lad-order">
-        <span class="dc-custom-label">Ladder:</span>
-        <span class="lad-order-pills">
-          <button type="button" class="lad-pill" data-mode="hour"
-                  aria-pressed="true" onclick="setLadderMode('hour')">by the hour</button>
-          <button type="button" class="lad-pill" data-mode="free"
-                  aria-pressed="false" onclick="setLadderMode('free')">in order</button>
-        </span>
-      </div>
       <div class="dc-custom">
         <span class="dc-custom-label">Customize Paths:</span>
         <!-- The four in one box, so they are never parted. Loose in the row
@@ -4462,6 +4449,20 @@ content: ''; float: right; width: 30px; height: 1em;
             <svg viewBox="0 0 20 18" aria-hidden="true" fill="none" stroke="currentColor"
                  stroke-width="1.05" stroke-linecap="round" stroke-linejoin="round"></svg>
           </button>
+        </span>
+      </div>
+      <!-- BY THE HOUR, OR IN ORDER. Two questions, so two modes, and the
+           reader says which. By the hour the ladder asks for this hour's
+           own; in order it walks the four movements end to end at the
+           reader's own pace. The prayer keeps its hour either way, which is
+           why it is not named here. -->
+      <div class="dc-custom lad-order">
+        <span class="dc-custom-label">Ladder:</span>
+        <span class="lad-order-pills">
+          <button type="button" class="lad-pill" data-mode="hour"
+                  aria-pressed="true" onclick="setLadderMode('hour')">by the hour</button>
+          <button type="button" class="lad-pill" data-mode="free"
+                  aria-pressed="false" onclick="setLadderMode('free')">in order</button>
         </span>
       </div>
   </div>
