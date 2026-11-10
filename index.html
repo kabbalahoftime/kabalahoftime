@@ -3791,6 +3791,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 /* The third door: gold, the colour the deed already wears on the Action
    column and the ladder's Action line. The stand is wider than it is tall,
    so it is given its own box rather than the square the other two sit in. */
+.kt-study { color: var(--gold); }
+.kt-study.done .kt-chip { background: var(--gold); color: #fdf9f2; }
 .kt-act { color: var(--gold); }
 .kt-act.done .kt-chip { background: var(--gold); color: #fdf9f2; }
 .kt-act svg { width: 15px; height: 13.5px; }
@@ -21501,6 +21503,7 @@ content: ''; float: right; width: 30px; height: 1em;
   }
   function travelFaceGo()   { if (typeof todayFaceGo   === 'function') todayFaceGo(); }
   function travelPrayerGo() { if (typeof todayPrayerGo === 'function') todayPrayerGo(); }
+  function travelStudyGo()  { if (typeof todayGo === 'function') todayGo(); }
   function travelActionGo() { if (typeof todayActionGo === 'function') todayActionGo(); }
   function travelDismiss() {
     const bar = document.getElementById('kot-travel');
@@ -21521,8 +21524,14 @@ content: ''; float: right; width: 30px; height: 1em;
     const bar = document.getElementById('kot-travel');
     if (!bar) return;
     const med = bar.querySelector('.kt-med'), pray = bar.querySelector('.kt-pray');
-    const act = bar.querySelector('.kt-act');
+    const act = bar.querySelector('.kt-act'), study = bar.querySelector('.kt-study');
     const sef = (typeof _faceHourName === 'function') ? _faceHourName() : '';
+    // The four doors go up together or not at all. Each used to answer for
+    // itself, so an hour whose fund was set aside showed two chips and an
+    // hour outside a prayer's window showed one — a ragged row, which reads
+    // as something having gone missing rather than as a set. What each one
+    // can say is gathered here and applied to all four at the end.
+    const ups = {};
     if (med) {
       // The outline glyph, not the fillable one: that carries ids — med-clip,
       // med-rect, med-fill — and the counter in the ladder already has them.
@@ -21534,7 +21543,7 @@ content: ''; float: right; width: 30px; height: 1em;
       const n = sef ? medIndexOf(sef) : 0;
       const face = document.getElementById('today-face');
       const up = !!sef && n >= 1 && medStepHas(n) && !!face && face.style.display !== 'none';
-      med.hidden = !up;
+      ups.med = up;
       if (up) {
         const done = medHas(n);
         med.classList.toggle('done', done);
@@ -21548,7 +21557,7 @@ content: ''; float: right; width: 30px; height: 1em;
       const n = a ? PRAYER_SEFIRAH.indexOf(a.name.split(' /')[0]) + 1 : 0;
       const row = document.getElementById('today-prayer');
       const up = n >= 1 && !!row && row.style.display !== 'none';
-      pray.hidden = !up;
+      ups.pray = up;
       if (up) {
         const done = !!(prayersMask() & (1 << (n - 1)));
         pray.classList.toggle('done', done);
@@ -21565,7 +21574,7 @@ content: ''; float: right; width: 30px; height: 1em;
       // place a thing still appears after it has been set aside.
       const row = document.getElementById('today-action');
       const up = !!sef && !!row && row.style.display !== 'none';
-      act.hidden = !up;
+      ups.act = up;
       if (up) {
         // The light, not the fund. Giving is never marked here — it happens
         // on somebody else's page — so what this chip can fill from is
@@ -21579,6 +21588,23 @@ content: ''; float: right; width: 30px; height: 1em;
         act.title = sef + '\u2019s menorah and its fund' + (done ? ' \u2014 gathered' : '');
       }
     }
+    if (study) {
+      // The step line is always drawn, so this door is always reachable.
+      // What it can say is whether this hour's own steps are all marked,
+      // which is the test the ladder skips the step on.
+      ups.study = !!document.getElementById('today-next');
+      if (ups.study) {
+        let done = false;
+        try { done = (_hourStepIdx(currentOffset) === -1); } catch (e) {}
+        study.classList.toggle('done', done);
+        study.setAttribute('aria-label', 'Go to the step \u2014 ' +
+          (done ? 'this hour\u2019s are read' : 'not yet read'));
+        study.title = 'The step' + (done ? ' \u2014 this hour\u2019s are read' : '');
+      }
+    }
+    // All four or none.
+    const all = !!(ups.med && ups.pray && ups.study && ups.act);
+    [med, pray, study, act].forEach((el) => { if (el) el.hidden = !all; });
   }
 
   // Watching the ladder rather than the scroll position: the block moves down
@@ -31941,7 +31967,18 @@ content: ''; float: right; width: 30px; height: 1em;
     <button type="button" class="kt-mark kt-pray" onclick="travelPrayerGo()">
       <span class="kt-chip">&#9829;</span>
     </button>
-    <!-- And the third: the hour's menorah. Its state is the one thing the
+    <!-- And the third: the step. The ladder's own order is the face, the
+         prayer, the step and the deed, so the doors stand in it too. The
+         moon is drawn bare here — a rim and nothing else. The counter's own
+         moon carries ids (maalot-moon-rim, maalot-moon-fill) and a second
+         copy of those would be a duplicate id in the document, which is the
+         same trap the flame is kept out of two lines above. -->
+    <button type="button" class="kt-mark kt-study" onclick="travelStudyGo()">
+      <span class="kt-chip"><svg viewBox="0 0 22 22" aria-hidden="true"><circle
+        cx="11" cy="11" r="8.4" fill="none" stroke="currentColor"
+        stroke-width="1.6"/></svg></span>
+    </button>
+    <!-- And the fourth: the hour's menorah. Its state is the one thing the
          action has that can be marked — whether this hour's bearer has been
          gathered. The fund itself is never marked, so there is nothing of it
          to carry here; the door goes to the pane where both stand. The

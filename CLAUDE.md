@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v356**; the next is v357.
+nobody. Currently **v357**; the next is v358.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -482,11 +482,26 @@ own words would have to survive being quoted into an `onclick` attribute.
 
 ### The travelling bar
 
-Three doors beside the lit step: `.kt-med` (the hour's face), `.kt-pray`
-(its prayer) and `.kt-act` (its menorah). Each is a chip — outlined while
-undone, filled in its own colour when done: blue, red, gold. The action's
-"done" is **the bearer being gathered**, because the fund itself is never
-marked; the door goes to the pane where both stand.
+**Four** doors beside the lit step, in the day's own order: `.kt-med` (the
+hour's face), `.kt-pray` (its prayer), `.kt-study` (the step) and `.kt-act`
+(its menorah). Each is a chip — outlined while undone, filled in its own
+colour when done: blue, red, gold, gold. The step and the menorah share
+gold because gold is the step's colour everywhere here; the shapes tell
+them apart. The action's "done" is **the bearer being gathered**, because
+the fund itself is never marked; the door goes to the pane where both
+stand. The step's "done" is `_hourStepIdx(currentOffset) === -1`, the same
+test the ladder skips the step on.
+
+**All four go up together or none does.** Each used to answer for itself,
+so an hour whose fund was set aside showed two chips and an hour outside a
+prayer's window showed one — a ragged row reads as something having gone
+missing rather than as a set. `_travelMarks` gathers what each can say in
+`ups` and applies one verdict to all four at the end.
+
+The study chip draws a **bare rim**, not the counter's moon: that one
+carries `maalot-moon-rim` and `maalot-moon-fill`, and a second copy would
+put duplicate ids in the document — the same trap the flame is kept out of,
+where a cloned `med-clip` made the bar's flame fill from the counter.
 
 `_travelMarks()` must be called from wherever a mark is taken. The faces
 and the prayers already did it; `applyStarState` did not, because until the
