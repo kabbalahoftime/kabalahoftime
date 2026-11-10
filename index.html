@@ -3399,25 +3399,6 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    above it — which it would spend, since it hides its overflow and fits its
    name to whatever width it has. */
 #today-block .today-next { width:calc(100% + 10px); }
-
-/* THE FOLD UNDER THE ONE THING ASKED. Quiet on purpose: it is a door, not an
-   instruction, and the ladder now has exactly one instruction. The padding
-   buys the 44px tap target and the negative margin gives the space back, so
-   opening the fold does not shove the counters down — the same trick the
-   prayer tag and the face line use. */
-.today-rest-btn{
-  display:block; background:none; border:none; font-family:inherit;
-  font-size:calc(12.5px * var(--ts, 1)); line-height:1.2;
-  color:var(--ink-dim); text-transform:uppercase; letter-spacing:.08em;
-  cursor:pointer; text-align:left;
-  padding:15px 0; margin:-9px 0 -9px -10px; padding-left:8px;
-}
-/* display:block above beats the hidden attribute, so it is said again. */
-.today-rest-btn[hidden]{ display:none; }
-.today-rest-btn::after{ content:' \25BE'; }
-.today-rest-btn[aria-expanded="true"]::after{ content:' \25B4'; }
-.today-rest-btn:hover{ color:var(--gold); }
-.today-rest-btn:focus-visible{ outline:1px dotted var(--gold); outline-offset:2px; }
 #today-block .is-next { border-left-color:var(--gold); }
 
 /* ── THE COMPANION ──
@@ -4278,45 +4259,23 @@ content: ''; float: right; width: 30px; height: 1em;
               aria-label="Choose your paths"><span class="tp-flag">First</span></button><span
         class="ts-word">your paths</span><span class="ts-sub">&middot; how much of the thirty, and in which language</span>
     </div>
-    <!-- ONE THING ASKED, AND THE REST OF THE HOUR BEHIND IT. Four lines at
-         once read as a menu, and a menu is not a place to start. So the line
-         that is actually being asked for — the step, or the path chooser
-         before a path is kept — stands alone at the head of the ladder, and
-         the other three fold away beneath it.
-
-         They are folded and not deleted. The face, the prayer and the fund
-         are the hour's own and a reader should still be able to reach them;
-         and the travelling bar's three chips test `row.style.display` to
-         know whether to appear, so the rows have to go on being drawn. The
-         wrapper is what hides, never the rows — hide a row itself and its
-         chip goes with it.
-
-         The step moves above the other three, which is the one thing this
-         costs: the old order ran face, prayer, step, action, "the order of
-         the day's work". Shut, there is nothing to order. Open, the three
-         keep that order among themselves. -->
+    <div id="today-face" class="today-face" style="display:none;"></div>
+    <!-- THE PRAYER THIS HOUR IS ASKING FOR. The ten tags are scattered one to
+         a Sefirah down the whole page, so knowing which is due meant finding
+         the card whose hour it is. This says it, and marks in place: the tag
+         here carries the same data-prayer as the one on the card, so both
+         read the same mask and both light when either is tapped. Built by
+         applyPrayerState, which is where the active Sefirah is already
+         known. -->
+    <div id="today-prayer" class="today-prayer" style="display:none;"></div>
     <button id="today-next" class="today-next" onclick="todayGo()" aria-label="Go to the next step">…</button>
-    <button type="button" id="today-rest-btn" class="today-rest-btn"
-            onclick="toggleLadderRest()" aria-expanded="false"
-            aria-controls="today-rest">the rest of the hour</button>
-    <div id="today-rest" class="today-rest" hidden>
-      <div id="today-face" class="today-face" style="display:none;"></div>
-      <!-- THE PRAYER THIS HOUR IS ASKING FOR. The ten tags are scattered one to
-           a Sefirah down the whole page, so knowing which is due meant finding
-           the card whose hour it is. This says it, and marks in place: the tag
-           here carries the same data-prayer as the one on the card, so both
-           read the same mask and both light when either is tapped. Built by
-           applyPrayerState, which is where the active Sefirah is already
-           known. -->
-      <div id="today-prayer" class="today-prayer" style="display:none;"></div>
-      <!-- THE ACTION THIS HOUR ASKS FOR. The fourth kind, after meditation,
-           prayer and study. The Menorah pane is where the action stands, and
-           at the foot of every Menorah is that Sefirah's own fund — so this
-           names the fund whose hour it is, goes out to its page, and the chip
-           goes down to the pane where it and any others sit. Built by
-           applyTodayAction, which is asked on the same beat as the face. -->
-      <div id="today-action" class="today-action" style="display:none;"></div>
-    </div>
+    <!-- THE ACTION THIS HOUR ASKS FOR. The fourth kind, after meditation,
+         prayer and study. The Menorah pane is where the action stands, and
+         at the foot of every Menorah is that Sefirah's own fund — so this
+         names the fund whose hour it is, goes out to its page, and the chip
+         goes down to the pane where it and any others sit. Built by
+         applyTodayAction, which is asked on the same beat as the face. -->
+    <div id="today-action" class="today-action" style="display:none;"></div>
     <button id="today-ahead" class="today-ahead" style="display:none;" onclick="todayAhead()"
             aria-label="Step forward a day to climb tomorrow's ma'alot">tomorrow&rsquo;s climb &rarr;</button>
       <!-- The day's two gatherings — the ten prayers and the thirty steps —
@@ -4468,7 +4427,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <div id="kot-welcome" style="display:none; margin:12px 0 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); line-height:1.7; position:relative;">
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:calc(18px * var(--ts, 1)); cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> <strong>Begin with the now.</strong> The clock at the top is Keter's — the moment you are standing in. Contemplate that, and then come down through the ten <strong>meditations</strong>, Keter to Malchut, one to a card: each is the face that card wears today. Then say the <strong>prayer</strong> this hour is asking for, then take its <strong>reading</strong>, and after that whatever is still outstanding from earlier in the day.
-    <strong>Today's Ladder</strong>, under the date, asks one thing at a time; <em>the rest of the hour</em> opens the other three.
+    <strong>Today's Ladder</strong>, under the date, names all four and goes straight to each.
     Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
     Tap a small gold <strong>מעלה</strong> tag when you have learned it — fifteen of them climb from Malchut to Keter and fill tonight's moon; when it becomes the sun, come back down from Keter to Malchut through the <strong>מיעוט</strong> tags inside the cards. Today's Ladder asks for whichever one belongs to the hour you are in; climbing them in order is a practice of its own.
     Each Sefirah also holds one of the day's ten <strong>prayers</strong> — tap it when you have prayed, and watch the heart in Today's Ladder fill.
@@ -21401,44 +21360,6 @@ content: ''; float: right; width: 30px; height: 1em;
     const nx = document.getElementById('today-next');
     if (nx && typeof _todayFit === 'function') _todayFit(nx);
     _travelSet(which);
-    applyLadderRest();
-  }
-
-  // ── THE REST OF THE HOUR ──
-  // Four lines at once read as a menu. The ladder now asks one thing, and the
-  // hour's other three — its face, its prayer, its fund — wait behind a fold.
-  // Shut by default; remembered once opened, because a reader who wants the
-  // rest of the hour will want it tomorrow too.
-  //
-  // The wrapper is what hides. The rows keep whatever display their own
-  // builders gave them, because the travelling bar reads `row.style.display`
-  // to decide whether to show that row's chip — hide a row itself and its
-  // chip goes down with it.
-  function ladderRestOpen() {
-    try { return localStorage.getItem('kotLadderRest') === '1'; } catch (e) { return false; }
-  }
-  function toggleLadderRest() {
-    let open = false;
-    try {
-      open = !ladderRestOpen();
-      localStorage.setItem('kotLadderRest', open ? '1' : '0');
-    } catch (e) {}
-    applyLadderRest();
-  }
-  function applyLadderRest() {
-    const box = document.getElementById('today-rest');
-    const btn = document.getElementById('today-rest-btn');
-    if (!box || !btn) return;
-    // A door onto an empty room is noise. Before the hour has a face, a
-    // prayer or a fund to name, there is nothing behind this.
-    const any = ['today-face', 'today-prayer', 'today-action'].some((id) => {
-      const el = document.getElementById(id);
-      return !!el && el.style.display !== 'none';
-    });
-    btn.hidden = !any;
-    const open = any && ladderRestOpen();
-    box.hidden = !open;
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
   // ── THE STEP THAT TRAVELS ──
@@ -28894,9 +28815,6 @@ content: ''; float: right; width: 30px; height: 1em;
     // times are. It rebuilds only when the answer changes.
     if (typeof applyTodayFace === 'function') applyTodayFace();
     if (typeof applyTodayAction === 'function') applyTodayAction();
-    // The fold's door comes and goes with what is behind it, and what is
-    // behind it turns with the hour.
-    if (typeof applyLadderRest === 'function') applyLadderRest();
   }, 30000);
 
   // ══════════════════════════════════════════════════════════════
@@ -31844,7 +31762,7 @@ content: ''; float: right; width: 30px; height: 1em;
 
   <p><strong>What you&rsquo;re looking at.</strong> Today&rsquo;s date maps onto several nested cycles at once &mdash; a day, a week, a month, a season, a year &mdash; each drawn from a different Kabbalistic or textual structure. Every card below is one of those cycles: it opens with the structure that defines it, and carries beneath it the text that structure measures. Tap a card to open it; tap the <strong>&#9432;</strong> at its top-right corner to learn what its cycle means.</p>
 
-  <p><strong>Where to start.</strong> With the now. The clock at the top of the page is Keter&rsquo;s &mdash; the moment you are standing in. Contemplate that, then come down through the ten <strong>meditations</strong>, Keter to Malchut. Then the <strong>prayer</strong> this hour asks for, then its <strong>reading</strong>, then whatever is still outstanding from earlier. The <strong>Today&rsquo;s Ladder</strong> block, just under the date, asks one thing at a time and goes straight to it; the line reading <em>the rest of the hour</em> opens the other three. That is enough to begin; everything below is here for when you want it.</p>
+  <p><strong>Where to start.</strong> With the now. The clock at the top of the page is Keter&rsquo;s &mdash; the moment you are standing in. Contemplate that, then come down through the ten <strong>meditations</strong>, Keter to Malchut. Then the <strong>prayer</strong> this hour asks for, then its <strong>reading</strong>, then whatever is still outstanding from earlier. The <strong>Today&rsquo;s Ladder</strong> block, just under the date, names all four and goes straight to each. That is enough to begin; everything below is here for when you want it.</p>
 
   <h3 class="hg-h">The marks</h3>
   <p>Almost every reading wears a mark that says what it is, and the marks are what the counts are kept by. A few readings wear none &mdash; the week&rsquo;s seven books in Malchut, the Zohar that stands with Thursday&rsquo;s Ramchal &mdash; and those are simply read.</p>
