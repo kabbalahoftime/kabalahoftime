@@ -3399,6 +3399,15 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    above it — which it would spend, since it hides its overflow and fits its
    name to whatever width it has. */
 #today-block .today-next { width:calc(100% + 10px); }
+
+/* THE LADDER SHOWS ONE LINE. The others are put away here rather than by
+   setting their own style.display, because each builder writes that to say
+   whether the row has anything in it at all — a fund set aside, a prayer
+   outside the set — and _travelMarks reads exactly that to decide whether to
+   draw the row's chip on the travelling bar. Those chips are now the only way
+   to reach the other three. !important because the builders set the inline
+   display themselves. */
+#today-block .ladder-off { display:none !important; }
 #today-block .is-next { border-left-color:var(--gold); }
 
 /* ── THE COMPANION ──
@@ -4427,7 +4436,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <div id="kot-welcome" style="display:none; margin:12px 0 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); line-height:1.7; position:relative;">
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:calc(18px * var(--ts, 1)); cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> <strong>Begin with the now.</strong> The clock at the top is Keter's — the moment you are standing in. Contemplate that, and then come down through the ten <strong>meditations</strong>, Keter to Malchut, one to a card: each is the face that card wears today. Then say the <strong>prayer</strong> this hour is asking for, then take its <strong>reading</strong>, and after that whatever is still outstanding from earlier in the day.
-    <strong>Today's Ladder</strong>, under the date, names all four and goes straight to each.
+    <strong>Today's Ladder</strong>, under the date, asks for one at a time, in that order, for the Sefirah whose hour it is.
     Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
     Tap a small gold <strong>מעלה</strong> tag when you have learned it — fifteen of them climb from Malchut to Keter and fill tonight's moon; when it becomes the sun, come back down from Keter to Malchut through the <strong>מיעוט</strong> tags inside the cards. Today's Ladder asks for whichever one belongs to the hour you are in; climbing them in order is a practice of its own.
     Each Sefirah also holds one of the day's ten <strong>prayers</strong> — tap it when you have prayed, and watch the heart in Today's Ladder fill.
@@ -21296,8 +21305,59 @@ content: ''; float: right; width: 30px; height: 1em;
   // a const read before its own line has run throws rather than reading
   // undefined. That fault cost a whole render once already in this file.
   function _ladderVerbFor(k) {
-    return k === 'start' ? 'Choose' : k === 'study' ? 'Read' : '';
+    return k === 'start' ? 'Choose' : k === 'study' ? 'Read'
+         : k === 'med' ? 'Dwell on' : k === 'pray' ? 'Say'
+         : k === 'act' ? 'Give' : '';
   }
+
+  // ── THE LADDER IS ONE LINE ──
+  // The block asks one thing. Four at once is a menu, and a menu is not an
+  // instruction. So it shows the next of this hour's four still undone, in
+  // the order the day's work goes: the face, the prayer, the step, the deed,
+  // all of them this Sefirah's.
+  //
+  // Catching up comes last. The hour's own step is third, where the order
+  // puts it; anything outstanding from earlier is offered again after the
+  // deed. That is the Baal Shem Tov's rule for the Psalms of Elul, already
+  // written into _pathNow: today's portion first, the backlog after, never
+  // before.
+  //
+  // Each of the four can be a thing the reader never undertook — a fund set
+  // aside, a prayer outside the set — and each builder already says so by
+  // writing style.display on its own row. Those are skipped.
+  const _LADDER_ROW = { start: 'today-start', med: 'today-face',
+    pray: 'today-prayer', study: 'today-next', act: 'today-action' };
+
+  // Is each of the hour's four already done? The same tests the travelling
+  // bar's three chips fill from, so the line and the chip cannot disagree.
+  function _ladderDone() {
+    const sef = (typeof _faceHourName === 'function') ? _faceHourName() : '';
+    const out = { med: true, pray: true, study: true, act: true, back: true };
+    try {
+      const n = sef && typeof medIndexOf === 'function' ? medIndexOf(sef) : 0;
+      out.med = !(n >= 1) || (typeof medHas === 'function' && medHas(n));
+    } catch (e) {}
+    try {
+      const a = (typeof getActiveSefirahTime === 'function') ? getActiveSefirahTime() : null;
+      const n = a ? PRAYER_SEFIRAH.indexOf(a.name.split(' /')[0]) + 1 : 0;
+      out.pray = !(n >= 1) || !!(prayersMask() & (1 << (n - 1)));
+    } catch (e) {}
+    // This hour's own chosen steps, all marked. An hour that holds none of
+    // the thirty reads done, and the line is skipped rather than borrowing
+    // somebody else's step to stand in the hour's third place.
+    try { out.study = (_hourStepIdx(currentOffset) === -1); } catch (e) {}
+    try { out.back = !!_pathNow().done; } catch (e) {}
+    try {
+      // The light, not the fund. Giving is never marked here — it happens on
+      // somebody else's page — so what stands for the deed is whether this
+      // hour's bearer has been gathered.
+      const mark = sef && document.querySelector(
+        '.star-mark[data-rebbe="' + (PRAYER_SEFIRAH.indexOf(sef) + 1) + '"]');
+      out.act = !!mark && mark.classList.contains('lit');
+    } catch (e) {}
+    return out;
+  }
+
   function _ladderNext() {
     const shown = (id) => {
       const e = document.getElementById(id);
@@ -21305,14 +21365,50 @@ content: ''; float: right; width: 30px; height: 1em;
     };
     // Before the thirty can ask for anything: choosing which of them they
     // are. Shown only while nothing has been chosen, so it is the first thing
-    // a new reader is told and never seen again after.
+    // a new reader is told and never seen again after — and while it stands
+    // it is the whole ladder.
     if (shown('today-start')) return 'start';
-    // Until all thirty are marked there is always a next one, so this keeps
-    // the block speaking for the rest of the day. When it is done the study
-    // line already reads "Done · the month complete", and nothing is lit —
-    // there is nothing left to ask for.
-    if (!_pathNow().done) return 'study';
+    const d = _ladderDone();
+    const order = [['med', d.med], ['pray', d.pray], ['study', d.study],
+                   ['act', d.act], ['study', d.back]];
+    for (const [k, done] of order) if (!done && shown(_LADDER_ROW[k])) return k;
+    // Nothing is being asked for. Nothing is lit and nothing carries a verb,
+    // which is what the end of a finished day looked like before any of this.
     return null;
+  }
+
+  // Which row to draw, which is not the same question. When the hour has
+  // nothing left to ask, the last line the reader could have taken stays up
+  // wearing its done state — so the block is never empty and the hour can be
+  // seen to be finished — but it is not lit and it is given no verb. The
+  // study line at the end of a complete day reads "Done · the month
+  // complete", and telling someone to Read that would be a lie.
+  function _ladderShow(which) {
+    if (which) return which;
+    const shown = (id) => {
+      const e = document.getElementById(id);
+      return !!e && e.style.display !== 'none';
+    };
+    for (const k of ['act', 'study', 'pray', 'med'])
+      if (shown(_LADDER_ROW[k])) return k;
+    return null;
+  }
+
+  // One line showing, the rest put away. Hidden by a class carrying
+  // !important rather than by style.display, and that is the whole reason it
+  // works: each builder writes style.display on its own row to say whether
+  // there is anything there at all, and _travelMarks reads exactly that to
+  // decide whether to draw that row's chip on the travelling bar. Those three
+  // chips are now the only way to reach the other three, so the signal has to
+  // survive being hidden.
+  function applyLadderOne(which) {
+    const keep = _LADDER_ROW[which] || '';
+    Object.keys(_LADDER_ROW).forEach((k) => {
+      const el = document.getElementById(_LADDER_ROW[k]);
+      if (!el) return;
+      const here = el.style.display !== 'none';
+      el.classList.toggle('ladder-off', here && _LADDER_ROW[k] !== keep);
+    });
   }
 
   // The verb is put in rather than written into the three builders: each of
@@ -21333,11 +21429,14 @@ content: ''; float: right; width: 30px; height: 1em;
 
   function applyLadderNext() {
     const which = _ladderNext();
-    // Only the two lines that can be a step. The face and the prayer are left
-    // exactly as their own builders drew them — no rule, no verb, and no
-    // dimming, which is what they had before any of this and what they are
-    // worth: the rest of the hour, looked at on purpose.
+    // One line showing, and it is the one being asked for — so it is the one
+    // that wears the rule and the verb. All four can be it now; the chip is
+    // the control on every row but the step, where the row itself is.
+    applyLadderOne(_ladderShow(which));
     [['start', 'today-start', '.tp-go'],
+     ['med',   'today-face',  '.tp-go'],
+     ['pray',  'today-prayer', '.tp-go'],
+     ['act',   'today-action', '.tp-go'],
      ['study', 'today-next', null]].forEach(([k, id, ctrlSel]) => {
       const el = document.getElementById(id);
       if (!el) return;
@@ -21401,8 +21500,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const bar = document.getElementById('kot-travel');
     if (!bar) return;
     _travelWhich = which || null;
-    const id = which === 'start' ? 'today-start'
-             : which === 'study' ? 'today-next' : '';
+    const id = _LADDER_ROW[which] || '';
     const row = id ? document.getElementById(id) : null;
     if (row) {
       const flag = row.querySelector('.tp-flag, .t-flag');
@@ -21438,6 +21536,9 @@ content: ''; float: right; width: 30px; height: 1em;
     const w = _travelWhich;
     if (w === 'start' && typeof openPathChooser === 'function') openPathChooser();
     else if (w === 'study' && typeof todayGo === 'function') todayGo();
+    else if (w === 'med' && typeof todayFaceGo === 'function') todayFaceGo();
+    else if (w === 'pray' && typeof todayPrayerGo === 'function') todayPrayerGo();
+    else if (w === 'act' && typeof todayActionGo === 'function') todayActionGo();
   }
   function travelFaceGo()   { if (typeof todayFaceGo   === 'function') todayFaceGo(); }
   function travelPrayerGo() { if (typeof todayPrayerGo === 'function') todayPrayerGo(); }
@@ -28815,6 +28916,9 @@ content: ''; float: right; width: 30px; height: 1em;
     // times are. It rebuilds only when the answer changes.
     if (typeof applyTodayFace === 'function') applyTodayFace();
     if (typeof applyTodayAction === 'function') applyTodayAction();
+    // Which of the four is being asked for turns with the hour, so the one
+    // line the ladder shows has to be chosen again on the same beat.
+    if (typeof applyLadderNext === 'function') applyLadderNext();
   }, 30000);
 
   // ══════════════════════════════════════════════════════════════
@@ -31762,7 +31866,7 @@ content: ''; float: right; width: 30px; height: 1em;
 
   <p><strong>What you&rsquo;re looking at.</strong> Today&rsquo;s date maps onto several nested cycles at once &mdash; a day, a week, a month, a season, a year &mdash; each drawn from a different Kabbalistic or textual structure. Every card below is one of those cycles: it opens with the structure that defines it, and carries beneath it the text that structure measures. Tap a card to open it; tap the <strong>&#9432;</strong> at its top-right corner to learn what its cycle means.</p>
 
-  <p><strong>Where to start.</strong> With the now. The clock at the top of the page is Keter&rsquo;s &mdash; the moment you are standing in. Contemplate that, then come down through the ten <strong>meditations</strong>, Keter to Malchut. Then the <strong>prayer</strong> this hour asks for, then its <strong>reading</strong>, then whatever is still outstanding from earlier. The <strong>Today&rsquo;s Ladder</strong> block, just under the date, names all four and goes straight to each. That is enough to begin; everything below is here for when you want it.</p>
+  <p><strong>Where to start.</strong> With the now. The clock at the top of the page is Keter&rsquo;s &mdash; the moment you are standing in. Contemplate that, then come down through the ten <strong>meditations</strong>, Keter to Malchut. Then the <strong>prayer</strong> this hour asks for, then its <strong>reading</strong>, then whatever is still outstanding from earlier. The <strong>Today&rsquo;s Ladder</strong> block, just under the date, asks for one at a time and goes straight to it &mdash; the face, then the prayer, then the step, then the deed, all of them the Sefirah&rsquo;s whose hour it is. Mark one and the next comes up. That is enough to begin; everything below is here for when you want it.</p>
 
   <h3 class="hg-h">The marks</h3>
   <p>Almost every reading wears a mark that says what it is, and the marks are what the counts are kept by. A few readings wear none &mdash; the week&rsquo;s seven books in Malchut, the Zohar that stands with Thursday&rsquo;s Ramchal &mdash; and those are simply read.</p>

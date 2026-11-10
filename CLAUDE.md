@@ -542,6 +542,45 @@ A **"Dial" line at the head of Today's Ladder** was built three times and
 rejected three times. The four lines under it are already in the journey's
 order; what the block does not do is name where to begin. Leave it so.
 
+### Today's Ladder is one line
+
+The block asks **one thing**. It shows the next of the hour's four still
+undone, in the order the day's work goes — **the face, the prayer, the
+step, the deed** — all of them the Sefirah's whose hour it is. Mark one and
+the next comes up. Four lines at once was a menu, and a menu is not an
+instruction.
+
+`_ladderDone()` answers all four with **the same tests the travelling bar's
+chips fill from**, so a line and its chip can never disagree. The deed's
+"done" is the bearer gathered, because a fund is never marked.
+
+**Catching up comes last.** The hour's own step is third, where the order
+puts it (`_hourStepIdx`); anything outstanding from earlier is offered
+again *after* the deed. That is the Baal Shem Tov's rule for the Psalms of
+Elul, already written into `_pathNow`: today's portion first, the backlog
+after, never before. An hour holding none of the thirty skips the step
+rather than borrowing somebody else's to stand in third place.
+
+**`_ladderNext` and `_ladderShow` are two questions, not one.** The first
+is what is being *asked for* — null when nothing is, which is what lights
+nothing, gives no verb and hides the bar. The second is what to *draw*, and
+when nothing is asked it keeps the last line up in its done state so the
+block is never empty. Collapsing them told a reader to `Read` a line
+saying *"Done · the month complete"*.
+
+**The wrapper hides, never the row.** Rows go away by `.ladder-off`
+(`display:none !important`), not by their own `style.display` — each
+builder writes that to say whether the row holds anything at all, and
+`_travelMarks` reads exactly that to decide whether to draw the row's chip.
+Those chips are the only way to reach the other three now.
+
+`applyLadderNext` also runs on the **30-second beat**, because which of the
+four is asked for turns with the hour.
+
+Two sentences have to stay honest with this — the welcome box and the Help
+Guide's **Where to start**. Both have twice said the ladder "names all four
+and goes straight to each", and twice been made false by a change here.
+
 ## Scratch work
 
 Prototypes and experiments belong in the session scratchpad, not the repo.
