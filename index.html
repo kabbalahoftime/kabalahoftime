@@ -3372,6 +3372,18 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .today-start { margin-bottom:11px; font-size:calc(14px * var(--ts, 1)); }
 .today-start .ts-word { color:var(--gold); }
 .today-start .ts-sub { color:var(--ink-mid); font-size:0.85em; margin-left:8px; }
+/* THE LADDER'S LINE KEEPS OUT OF ITS ⓘ. The icon is pinned to the block's
+   top-right and its glyph inks from 18px to 43px down, while the line beneath
+   the label begins at 32 — so the text ran under it, by 13px at the normal
+   text size and 45px at the largest. The cards solve this with a float on the
+   heading, which shortens only the line the icon sits on; that is not
+   available here, because every one of these rows is a flex container and a
+   float inside one does nothing. So the whole row is held clear instead.
+
+   58px = the row's own right edge (347) minus where the text has to stop,
+   which is 12px of daylight before the icon's left edge (302) — the same 12
+   the cards' own clearance was chosen to hold. Only one row is ever drawn, so
+   this costs one line's width and not four. */
 #today-block .today-start,
 #today-block .today-face,
 #today-block .today-prayer,
@@ -3379,6 +3391,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 #today-block .today-next {
   border-left:2px solid transparent;
   padding-left:8px; margin-left:-10px;
+  padding-right:58px;
 }
 /* The step line is border-box and sized at 100%, so the 10px it was pulled
    left by has to be given back in width or it ends 10px short of the two
@@ -3394,6 +3407,25 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    to reach the other three. !important because the builders set the inline
    display themselves. */
 #today-block .ladder-off { display:none !important; }
+
+/* The two modes, drawn as the date card's own pills are: a single outlined
+   box cut in two, the chosen half filled. The 44px the targets are held to
+   comes from padding, so the row keeps the height it had. */
+.lad-order { margin-bottom: 10px; }
+.lad-order-pills {
+  display: inline-flex; border: 1px solid var(--gold-mid);
+  border-radius: 20px; overflow: hidden;
+}
+.lad-pill {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Cinzel', serif; font-size: calc(10.5px * var(--ts, 1));
+  letter-spacing: 1px; color: var(--ink-mid);
+  padding: 13px 14px; line-height: 1.1;
+}
+.lad-pill + .lad-pill { border-left: 1px solid var(--gold-mid); }
+.lad-pill-on { background: var(--gold-mid); color: #fdf9f2; }
+.lad-pill:not(.lad-pill-on):hover { color: var(--gold); }
+.lad-pill:focus-visible { outline: 1px dotted var(--gold); outline-offset: -3px; }
 #today-block .is-next { border-left-color:var(--gold); }
 
 /* ── THE COMPANION ──
@@ -4390,6 +4422,20 @@ content: ''; float: right; width: 30px; height: 1em;
            their own lists, and each list already holds the choosing; this is
            only the door, said once, with the three marks that say which is
            which. -->
+      <!-- BY THE HOUR, OR IN ORDER. Two questions, so two modes, and the
+           reader says which. By the hour the ladder asks for this hour's
+           own; in order it walks the four movements end to end at the
+           reader's own pace. The prayer keeps its hour either way, which is
+           why it is not named here. -->
+      <div class="dc-custom lad-order">
+        <span class="dc-custom-label">Ladder:</span>
+        <span class="lad-order-pills">
+          <button type="button" class="lad-pill" data-mode="hour"
+                  aria-pressed="true" onclick="setLadderMode('hour')">by the hour</button>
+          <button type="button" class="lad-pill" data-mode="free"
+                  aria-pressed="false" onclick="setLadderMode('free')">in order</button>
+        </span>
+      </div>
       <div class="dc-custom">
         <span class="dc-custom-label">Customize Paths:</span>
         <!-- The four in one box, so they are never parted. Loose in the row
@@ -21239,7 +21285,7 @@ content: ''; float: right; width: 30px; height: 1em;
   function applyTodayFace() {
     const el = document.getElementById('today-face');
     if (!el) return;
-    const name = _faceHourName();
+    const name = _ladderFaceSef();
     const face = _faceOf(_faceCardFor(name), name);
     const href = _faceHref(name);
     // Rebuilt only when what it says changes, so it is not rewritten under a
@@ -21337,6 +21383,86 @@ content: ''; float: right; width: 30px; height: 1em;
     return out;
   }
 
+  // ── BY THE HOUR, OR IN ORDER ──
+  // The ladder asks for the hour's own four. A reader who wants to sit down
+  // and go through the day as a whole is asking a different question, so
+  // there are two modes and the reader says which.
+  //
+  // "In order" walks the four movements in their own directions, which is
+  // what the day is: the meditation comes down, Keter to Malchut; the מעלות
+  // climb back, Malchut to Keter; the מיעוטים come down again; and the deed
+  // rises, because Malchut is the world a deed happens in and nothing
+  // descends into it to act. The clock is released from all four.
+  //
+  // The prayer is not released, in either mode. A prayer has its hour in a
+  // way a face and a reading do not, so it keeps it: in order, it is still
+  // offered when its hour comes and still waits until it is said. Everything
+  // else goes at the reader's own pace.
+  //
+  // Declared as functions and not as consts: these are read from builders
+  // defined thousands of lines above, and a const read before its own line
+  // has run throws rather than reading undefined.
+  function ladderMode() {
+    try { return localStorage.getItem('kotLadderMode') === 'free' ? 'free' : 'hour'; }
+    catch (e) { return 'hour'; }
+  }
+  function setLadderMode(m) {
+    try { localStorage.setItem('kotLadderMode', m === 'free' ? 'free' : 'hour'); }
+    catch (e) {}
+    if (typeof render === 'function') render();
+    else { applyTodayFace(); applyTodayAction(); applyLadderNext(); }
+  }
+  // The deed is never marked — giving happens on somebody else's page — so
+  // what stands for it is whether that Sefirah's bearer has been gathered.
+  function _bearerLit(sef) {
+    const n = PRAYER_SEFIRAH.indexOf(sef) + 1;
+    if (n < 1) return false;
+    const m = document.querySelector('.star-mark[data-rebbe="' + n + '"]');
+    return !!m && m.classList.contains('lit');
+  }
+  // The first thing in the four movements the reader has undertaken and not
+  // yet done. pathSteps() comes back sorted, and 0-14 are the מעלות and 15-29
+  // the מיעוטים, so one pass over it is the second and third movements in
+  // order without having to say so twice.
+  function _ladderFreePick() {
+    try {
+      for (let n = 1; n <= 10; n++)
+        if (medStepHas(n) && !medHas(n))
+          return { kind: 'med', sef: PRAYER_SEFIRAH[n - 1], n: n };
+      for (const idx of pathSteps())
+        if (!_stepMarked(idx, 0)) return { kind: 'study', idx: idx };
+      for (const f of fundOrderUp())
+        if (fundHas(f.n) && !_bearerLit(f.sef))
+          return { kind: 'act', sef: f.sef, n: f.n };
+    } catch (e) {}
+    return null;
+  }
+  // Which Sefirah each row is about. By the hour it is the hour's; in order
+  // it is the one the next undone thing belongs to, and only for the row that
+  // thing is — the meditations come down while the deeds climb, so the two
+  // are rarely the same Sefirah and must not be made to share one.
+  function _ladderFaceSef() {
+    const hour = (typeof _faceHourName === 'function') ? _faceHourName() : '';
+    if (ladderMode() !== 'free') return hour;
+    const p = _ladderFreePick();
+    return (p && p.kind === 'med') ? p.sef : hour;
+  }
+  function _ladderActSef() {
+    const hour = (typeof _faceHourName === 'function') ? _faceHourName() : '';
+    if (ladderMode() !== 'free') return hour;
+    const p = _ladderFreePick();
+    return (p && p.kind === 'act') ? p.sef : hour;
+  }
+  // Keeps the two pills saying which mode is on.
+  function applyLadderMode() {
+    const m = ladderMode();
+    document.querySelectorAll('.lad-pill').forEach((b) => {
+      const on = b.dataset.mode === m;
+      b.classList.toggle('lad-pill-on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
   function _ladderNext() {
     const shown = (id) => {
       const e = document.getElementById(id);
@@ -21347,6 +21473,14 @@ content: ''; float: right; width: 30px; height: 1em;
     // a new reader is told and never seen again after — and while it stands
     // it is the whole ladder.
     if (shown('today-start')) return 'start';
+    if (ladderMode() === 'free') {
+      // The prayer keeps its hour here too, and takes precedence while it is
+      // unsaid: it is the one of the five that cannot simply be done later.
+      const dp = _ladderDone();
+      if (!dp.pray && shown('today-prayer')) return 'pray';
+      const pick = _ladderFreePick();
+      return pick ? pick.kind : null;
+    }
     const d = _ladderDone();
     const order = [['med', d.med], ['pray', d.pray], ['study', d.study],
                    ['act', d.act], ['study', d.back]];
@@ -21395,6 +21529,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // One line showing, and it is the one being asked for — so it is the one
     // that wears the rule and the verb. All four can be it now; the chip is
     // the control on every row but the step, where the row itself is.
+    applyLadderMode();
     applyLadderOne(_ladderShow(which));
     [['start', 'today-start', '.tp-go'],
      ['med',   'today-face',  '.tp-go'],
@@ -21525,7 +21660,10 @@ content: ''; float: right; width: 30px; height: 1em;
     if (!bar) return;
     const med = bar.querySelector('.kt-med'), pray = bar.querySelector('.kt-pray');
     const act = bar.querySelector('.kt-act'), study = bar.querySelector('.kt-study');
-    const sef = (typeof _faceHourName === 'function') ? _faceHourName() : '';
+    // The bar repeats the ladder, so its chips answer for the same Sefirot
+    // the ladder's rows do — the hour's by the hour, the movement's in order.
+    const sef = (typeof _ladderFaceSef === 'function') ? _ladderFaceSef() : '';
+    const actSef = (typeof _ladderActSef === 'function') ? _ladderActSef() : sef;
     // The four doors go up together or not at all. Each used to answer for
     // itself, so an hour whose fund was set aside showed two chips and an
     // hour outside a prayer's window showed one — a ragged row, which reads
@@ -21573,19 +21711,19 @@ content: ''; float: right; width: 30px; height: 1em;
       // a fund the reader has not undertaken. The bar should not be the one
       // place a thing still appears after it has been set aside.
       const row = document.getElementById('today-action');
-      const up = !!sef && !!row && row.style.display !== 'none';
+      const up = !!actSef && !!row && row.style.display !== 'none';
       ups.act = up;
       if (up) {
         // The light, not the fund. Giving is never marked here — it happens
         // on somebody else's page — so what this chip can fill from is
         // whether this hour's bearer has been gathered.
         const mark = document.querySelector(
-          '.star-mark[data-rebbe="' + (PRAYER_SEFIRAH.indexOf(sef) + 1) + '"]');
+          '.star-mark[data-rebbe="' + (PRAYER_SEFIRAH.indexOf(actSef) + 1) + '"]');
         const done = !!mark && mark.classList.contains('lit');
         act.classList.toggle('done', done);
-        act.setAttribute('aria-label', 'Go to ' + sef + '\u2019s menorah \u2014 ' +
+        act.setAttribute('aria-label', 'Go to ' + actSef + '\u2019s menorah \u2014 ' +
           (done ? 'gathered' : 'not yet gathered'));
-        act.title = sef + '\u2019s menorah and its fund' + (done ? ' \u2014 gathered' : '');
+        act.title = actSef + '\u2019s menorah and its fund' + (done ? ' \u2014 gathered' : '');
       }
     }
     if (study) {
@@ -21595,7 +21733,11 @@ content: ''; float: right; width: 30px; height: 1em;
       ups.study = !!document.getElementById('today-next');
       if (ups.study) {
         let done = false;
-        try { done = (_hourStepIdx(currentOffset) === -1); } catch (e) {}
+        try {
+          done = (ladderMode() === 'free')
+            ? pathSteps().every((i) => _stepMarked(i, 0))
+            : (_hourStepIdx(currentOffset) === -1);
+        } catch (e) {}
         study.classList.toggle('done', done);
         study.setAttribute('aria-label', 'Go to the step \u2014 ' +
           (done ? 'this hour\u2019s are read' : 'not yet read'));
@@ -21710,7 +21852,7 @@ content: ''; float: right; width: 30px; height: 1em;
   function applyTodayAction() {
     const el = document.getElementById('today-action');
     if (!el) return;
-    const name = _faceHourName();
+    const name = _ladderActSef();
     // A fund the reader has not undertaken is not asked for, and the line
     // goes rather than standing there greyed — which is what the prayer
     // line does with a prayer outside the set. The fund keeps its place at
@@ -21751,7 +21893,7 @@ content: ''; float: right; width: 30px; height: 1em;
   // nine. The pane is turned to before the scroll, or it lands on nothing.
   function todayActionGo() {
     const blk = document.querySelector(
-      '.tzedakah-block[data-sef="' + _faceHourName() + '"]');
+      '.tzedakah-block[data-sef="' + _ladderActSef() + '"]');
     if (!blk) return;
     const host = blk.closest('.pane-host');
     if (host && typeof setPane === 'function') setPane(host, 'menorah');
@@ -22111,7 +22253,7 @@ content: ''; float: right; width: 30px; height: 1em;
   }
 
   function todayFaceGo() {
-    const card = _faceCardFor(_faceHourName());
+    const card = _faceCardFor(_ladderFaceSef());
     if (!card) return;
     // Keter's face lives in one of the dial's panes, which may not be the pane
     // on show; the card is turned to it first, or the scroll lands on nothing.
@@ -22128,7 +22270,15 @@ content: ''; float: right; width: 30px; height: 1em;
     // Today's Path, and by the time three counters stood above it both were
     // said twice: the moon already reads the same count, and tapping it
     // already opens the path.
-    _todayLine(el, _pathNow());
+    // In order, the step line names the next of the thirty rather than the
+    // one this hour holds. _todayLine writes dataset.idx, so todayGo follows
+    // it without being told.
+    let _ln = _pathNow();
+    if (ladderMode() === 'free') {
+      const _fp = _ladderFreePick();
+      if (_fp && _fp.kind === 'study') _ln = { off: 0, idx: _fp.idx, due: false };
+    }
+    _todayLine(el, _ln);
     // The band can shut before midnight while the day it climbed for is still
     // a day away. The hour has passed but the date has not, and someone still
     // awake has not missed the chance — this offers the step forward. While

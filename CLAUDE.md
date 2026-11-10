@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v357**; the next is v358.
+nobody. Currently **v358**; the next is v359.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -626,6 +626,41 @@ on one. The first verse of Psalms 25 and 37 takes its letter from the
 second word (אליך, אל), Psalm 37's ת is the second letter of וּתְשׁוּעַת,
 and Psalms 9–10 are a broken acrostic in the Masoretic text whose list here
 is deliberate. Cycles 1 and 4 were examined and left alone.
+
+### By the hour, or in order
+
+Two modes, in `kotLadderMode`, chosen by two pills at the foot of the
+ladder. **By the hour** (the default) asks for this hour's own four. **In
+order** releases the clock and walks the four movements end to end, in
+their own directions:
+
+```
+meditations   Keter → Malchut    1…10          medStepHas / medHas
+מעלות          Malchut → Keter    idx 0…14      pathSteps / _stepMarked
+מיעוטים        Keter → Malchut    idx 15…29     (one pass: pathSteps is sorted)
+מעשה          Malchut → Keter    fundOrderUp   bearer gathered, never the fund
+```
+
+**The prayer is never released, in either mode.** A prayer has its hour in
+a way a face and a reading do not, so in order it is still offered when its
+hour comes and still takes precedence while unsaid. Everything else goes at
+the reader's own pace.
+
+`_ladderFreePick()` returns the first undone thing in that order, and
+`_ladderFaceSef()` / `_ladderActSef()` say which Sefirah each row is about
+— the hour's by the hour, the movement's in order. **They must stay
+separate:** the meditations come down while the deeds climb, so in order
+the face row and the action row are rarely the same Sefirah and cannot be
+made to share one.
+
+Four things read those two: `applyTodayFace`, `applyTodayAction`, their
+`todayFaceGo` / `todayActionGo` doors, and `_travelMarks`, so the bar's
+chips answer for the same Sefirot the rows do. The study row passes
+`{off:0, idx}` to `_todayLine`, which writes `dataset.idx`, so `todayGo`
+follows without being told.
+
+The study chip's "done" differs by mode: this hour's steps all marked
+(`_hourStepIdx`) by the hour, none of the thirty left at all in order.
 
 ## Scratch work
 
