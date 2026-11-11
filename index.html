@@ -12443,48 +12443,54 @@ content: ''; float: right; width: 30px; height: 1em;
     // the book of something the app counts. Mixed in among them they read as
     // ten working books with four strays in the middle.
     //
-    // Two of them, because they are a pair and the second book says so in its
-    // own last lines: from the new moon to the next, the moon learning month
-    // by month to shine like the sun; from the sunrise to the next, the
-    // sweetening, continuing. The moon and then the sun, which is what the
-    // two marks are.
+    // The two gathered out of the blog come first, and the pair of stories
+    // after them, which is the order the heading reads in: the portions, and
+    // then the writing. It ran the other way until the heading was read
+    // against the shelf and found to be back to front.
     //
     // Not shown anywhere, but worth keeping: the four of them answer to the
-    // four panes, and the app is the face above them. From the New Moon to
-    // the Next is the Ma'alot, and a month. From the Sunrise to the Next is
-    // the Mi'utim, and a day. Ascents is the Stars, and the moments.
-    // Reflections is the Menorah, and the year. Three of the four name their
-    // own span in their title or subtitle; poems are moments by nature, which
-    // is why they are the scattered lights. The face holds every span at
-    // once, which is the only thing the app does.
-    { book: 'From the New Moon to the Next', what: 'An allegory in thirteen phases: a boy who is a different animal in each land he is carried to.', emoji: '🌙',
-      where: 'Creative writing',
-      url: 'from-the-new-moon-to-the-next.pdf' },
-    { book: 'From the Sunrise to the Next', what: 'The second of the two: one day in four parts, lion and ox and eagle and man, going out and coming home.', emoji: '☀️',
-      where: 'Creative writing',
-      url: 'from-the-sunrise-to-the-next.pdf' },
-    // Gathered out of the blog rather than written for a card: seventy-two
-    // poems, and a piece to each of the fifty-four portions, with the Selichot
-    // niggun among them. Both are carried here rather than linked away, and
-    // neither stands on a Sefirah, so the shelf is the only way to them.
+    // four panes, and the app is the face above them. Reflections is the
+    // Menorah, and the year. Ascents is the Stars, and the moments. From the
+    // New Moon to the Next is the Ma'alot, and a month. From the Sunrise to
+    // the Next is the Mi'utim, and a day. Three of the four name their own
+    // span in their title or subtitle; poems are moments by nature, which is
+    // why they are the scattered lights. The face holds every span at once,
+    // which is the only thing the app does.
+    //
+    // A lion rather than the pen. The pen said how the book was made, which
+    // is the least interesting thing about it and is true of every book on
+    // this shelf. With the eagle beneath it the two read as two of the four
+    // faces of the chariot — and the four of them are already in this group,
+    // in From the Sunrise to the Next: lion and ox and eagle and man.
+    { book: 'Reflections', what: 'A piece written on each of the fifty-four Torah portions, Bereshit to V’Zot HaBracha.', emoji: '🦁', where: 'The Torah Portions',
+      url: 'reflections.pdf' },
+    // Gathered out of the blog rather than written for a card: a piece to
+    // each of the fifty-four portions, and seventy-two poems, with the
+    // Selichot niggun among them. Both are carried here rather than linked
+    // away, and neither stands on a Sefirah, so the shelf is the only way to
+    // them.
     // An eagle rather than the mountain it wore. ⛰️ is drawn so differently
     // from one device to the next that it was not reading as a mountain at
     // all, and a mark nobody can identify is worse than no mark. The eagle
     // is the one that goes up, which is what the book is called.
     { book: 'Ascents', what: 'Seventy-two poems, in English, Portuguese and Hebrew.', emoji: '🦅', where: 'Poems',
       url: 'ascents.pdf' },
-    // A lion rather than the pen. The pen said how the book was made, which
-    // is the least interesting thing about it and is true of every book on
-    // this shelf. With the eagle above it the two now read as two of the
-    // four faces of the chariot — and the four of them are already in this
-    // group, in From the Sunrise to the Next: lion and ox and eagle and man.
-    { book: 'Reflections', what: 'A piece written on each of the fifty-four Torah portions, Bereshit to V’Zot HaBracha.', emoji: '🦁', where: 'The Torah Portions',
-      url: 'reflections.pdf' },
+    // Two of them, because they are a pair and the second book says so in its
+    // own last lines: from the new moon to the next, the moon learning month
+    // by month to shine like the sun; from the sunrise to the next, the
+    // sweetening, continuing. The moon and then the sun, which is what the
+    // two marks are, and that order holds wherever the pair is put.
+    { book: 'From the New Moon to the Next', what: 'An allegory in thirteen phases: a boy who is a different animal in each land he is carried to.', emoji: '🌙',
+      where: 'Creative writing',
+      url: 'from-the-new-moon-to-the-next.pdf' },
+    { book: 'From the Sunrise to the Next', what: 'The second of the two: one day in four parts, lion and ox and eagle and man, going out and coming home.', emoji: '☀️',
+      where: 'Creative writing',
+      url: 'from-the-sunrise-to-the-next.pdf' },
   ];
   // A shelf of its own, because the two it sat on in turn were each wrong
   // about it in a different way. Among the Kabbalah of Time books it claimed
   // to be the book of something the app counts, which it is not. Under
-  // Creative Writing and Reflections on the Parasha it made that heading
+  // Reflections on the Parasha and Creative Writing it made that heading
   // false for a fifth of what stood beneath it: this is neither a story, a
   // poem nor a portion. It is expository, so it is named for what it is.
   //
@@ -12544,7 +12550,7 @@ content: ''; float: right; width: 30px; height: 1em;
     // what the app counts out day by day, and these two are the reading that
     // begins once that is done.
     el.innerHTML =
-    _head('Creative Writing and Reflections on the Parasha') +
+    _head('Reflections on the Parasha and Creative Writing') +
     KOT_BOOKS_ALSO.map(b => _row(b, b.where, b.slot)).join('') +
     _head('The Kabbalah of Time books') +
     KOT_BOOKS_MORE.map(b => _row(b, b.where, b.slot)).join('') +
