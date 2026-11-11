@@ -697,6 +697,12 @@ in the cycle (0–2) and `bkMishmarNum` the watch in the word (1–24).
 plain day**: the heart and the two kidneys have neither letter nor face,
 which is what they are.
 
+Gevurah's line carried the season's name and its half — *(Fall) · Shov* —
+and both came off: they are said in full in the detail, under **Season**
+and under **Motion**, where Motion also gives the Hebrew and what the word
+means. Three numbers and nothing else, as Binah's line is. Taking them off
+also stopped the line wrapping, which put the tag at 81px — Binah's own.
+
 The absolute day left both faces and lives only in the tag, as Binah's
 does. And "Mishmar N of 24" on Chesed's face lost its number — Watch and
 Mishmar are one thing under two names and it was being said twice; the
