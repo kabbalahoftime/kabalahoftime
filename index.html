@@ -25467,7 +25467,18 @@ content: ''; float: right; width: 30px; height: 1em;
         ? `<a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${mishnaInfo.text}</a>`
         : mishnaInfo.text) +
       ` <span style="font-size:0.85em;opacity:0.7">· ${mishnaInfo.sub}</span>`;
-    document.getElementById('chesed-tags').innerHTML = '';
+    // Where the day falls in its own count, said once in a tag — the shape
+    // Binah has carried all along and the only one of these cards that did.
+    // The face above names the day; this says where it stands, which is the
+    // question a reader asks second and had to open the detail to answer.
+    //
+    // A silent day has no number in the seventy-two, which is what makes it
+    // silent, so it says that instead of counting.
+    document.getElementById('chesed-tags').innerHTML = chesedMic
+      ? `<span class="tag highlight">Microcosm \u00b7 Day ${chesedMic.day} of 28</span>`
+      : ayinBetInfo.isBreak
+        ? `<span class="tag highlight">A silent day</span>`
+        : `<span class="tag highlight">Cycle ${ayinBetInfo.cycle} \u00b7 Day ${ayinBetInfo.nameNum} of 72</span>`;
     // Buxbaum 364-day cycles
     const bshtDay = ((dEff - d_year1) % 364 + 364) % 364 + 1;
     const bshtReading = bshtDay === 1 ? 'Introduction' : `Page ${bshtDay - 1}`;
@@ -25812,7 +25823,12 @@ content: ''; float: right; width: 30px; height: 1em;
       : '';
     _tanachDetailMeta = _tanSum ? TANACH_SUMMARY_NOTE : '';
     document.getElementById('tanach-trigger').style.display = _tanSum ? '' : 'none';
-    document.getElementById('gevurah-tags').innerHTML = '';
+    // The same tag Binah and Chesed carry. The break-days keep their number:
+    // the heart and the two kidneys are days of the ninety-one like any
+    // other, and it is the letters that stop on them, not the count.
+    document.getElementById('gevurah-tags').innerHTML = gevMic
+      ? `<span class="tag highlight">Microcosm \u00b7 Day ${gevMic.day} of ${gevMic.total}</span>`
+      : `<span class="tag highlight">Season ${seasonInfo.season} \u00b7 Day ${seasonInfo.dayIn} of 91</span>`;
     const _kotDay = ((sef.dayNum - 1) % 7) + 1;
     const _kotSong = KOT_SONGS[_kotDay - 1];
     const _kotSongEl = document.getElementById('gevurah-kot-song');

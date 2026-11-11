@@ -674,6 +674,30 @@ follows without being told.
 The study chip's "done" differs by mode: this hour's steps all marked
 (`_hourStepIdx`) by the hour, none of the thirty left at all in order.
 
+### Where the day falls, in a tag
+
+Every Sefirah card has a `*-tags` row under its face, and **only Binah used
+it** — `Cycle 2 · Day 13 of 49`. Chesed, Gevurah and Chochmah all set it to
+`''`, so on those cards the question a reader asks second, *where does
+today stand in this count*, could only be answered by opening the detail.
+
+Chesed and Gevurah carry it now, in Binah's own shape and with its
+`tag highlight` class:
+
+```
+Binah     Cycle 2  · Day 13 of 49
+Chesed    Cycle 1  · Day 62 of 72     Microcosm · Day N of 28
+Gevurah   Season 1 · Day 62 of 91     Microcosm · Day N of 28
+```
+
+A **silent day** on Chesed says so instead of counting: it has no number in
+the seventy-two, which is what makes it silent. Gevurah's three break-days
+**keep** their number — the heart and the two kidneys are days of the
+ninety-one like any other, and it is the letters that stop on them, not the
+count.
+
+Chochmah still sets its tag row empty, and was left alone.
+
 ### Why this face, in this season
 
 Gevurah's card named the day *"The Eagle's Face of the Ox"* and left the
