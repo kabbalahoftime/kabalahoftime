@@ -25439,7 +25439,14 @@ content: ''; float: right; width: 30px; height: 1em;
         `<br><span style="font-size:0.85em;color:var(--ink-dim)">The five lobes in 28 days — the twenty-four watches once through</span>`
       : ayinBetInfo.isBreak
       ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
-      : `Day <strong>${ayinBetInfo.nameNum}</strong> &middot; Cycle ${ayinBetInfo.cycle} of 5: <strong>${ayinBetInfo.name}</strong><br>` +
+      // Nested as Binah's line is: where the day stands in the smallest
+      // cycle, then that cycle, then the large one. The watches wrap at 24
+      // and each word of Birkat Kohanim holds exactly those 24 days, so a
+      // 72-day cycle is three words and the three numbers nest without a
+      // remainder. The day's own number in the seventy-two is not here any
+      // more — it is in the tag, which is where Binah keeps its own.
+      : `Watch <strong>${bkMishmarNum}</strong> &middot; Word <strong>${bkIdx + 1}</strong> &middot; Cycle <strong>${ayinBetInfo.cycle}</strong><br>` +
+      `<strong>${ayinBetInfo.name}</strong><br>` +
         `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>` +
         // ── THE WATCH OF THE DAY ──
         // The twenty-four mishmarot are the families who brought the Tamid,
@@ -25455,7 +25462,11 @@ content: ''; float: right; width: 30px; height: 1em;
         // hundred and fifty days to be sure — the two agree on twenty-nine of
         // them and differ on ninety-six, which is the arithmetic working.
         (bkMishmar
-          ? `<br><span style="font-size:0.88em;opacity:0.72">Mishmar ${bkMishmarNum} of 24: ` +
+          // The number is in the line above now — Watch and Mishmar are one
+          // thing under two names, and it was being said twice. The family's
+          // own name is what this line is for. The count keeps its "of 24"
+          // in the detail below, which states it in full.
+          ? `<br><span style="font-size:0.88em;opacity:0.72">Mishmar: ` +
             `<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</bdi>` +
             ` — ${bkMishmar.en}</span>`
           : '');
@@ -25779,7 +25790,14 @@ content: ''; float: right; width: 30px; height: 1em;
         (_eichaLink ? `<br>${gevMic.breakAt ? _eichaLink : `<a class="tap-line"${eichaTap(gevMic.quarter, 1, eichaChapterLen(gevMic.quarter))} style="color:var(--gold)">${_eichaHe(`Eicha ${gevMic.quarter}`)}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}` : '') +
         `</div>` +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</div>`
-      : `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong> <span style="font-size:0.92em">(${seasonInfo.name})</span>${_gevHalfHtml}:<br>` +
+      // The same nesting. A face is twenty-two letters and a season is four
+      // of them, so the letter inside the face inside the season is the
+      // season's own three numbers. The break-days have neither letter nor
+      // face — that is what they are — so they keep the plain day, and the
+      // line below says which of the three they are.
+      : (seasonInfo.breakAt
+          ? `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong> <span style="font-size:0.92em">(${seasonInfo.name})</span>${_gevHalfHtml}:<br>`
+          : `Letter <strong>${seasonInfo.inQuarter}</strong> · Face <strong>${seasonInfo.quarter}</strong> · Season <strong>${seasonInfo.season}</strong> <span style="font-size:0.92em">(${seasonInfo.name})</span>${_gevHalfHtml}:<br>`) +
         // What the day is, and the only part of the card that moves every
         // morning. The season's Chayah was named again on a line of its own
         // beneath this one, with a gloss saying it bears all four faces — but
@@ -25792,7 +25810,7 @@ content: ''; float: right; width: 30px; height: 1em;
         _gevBody(seasonInfo) +
         (_gevTurn
           ? `<div style="margin-top:6px;font-size:0.8em;color:var(--ink-dim)">` +
-            `Face ${seasonInfo.quarter} of 4 &middot; the season turns ${_gevTurn}</div>`
+            `the season turns ${_gevTurn}</div>`
           : ``) +
         (_eichaLink
           ? `<div style="margin-top:6px;font-size:0.85em;"><span style="color:var(--ink-mid)">${_eichaLink}</span></div>`
