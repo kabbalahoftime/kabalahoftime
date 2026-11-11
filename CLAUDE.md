@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v359**; the next is v360.
+nobody. Currently **v360**; the next is v361.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -630,7 +630,15 @@ is deliberate. Cycles 1 and 4 were examined and left alone.
 ### By the hour, or in order
 
 Two modes, in `kotLadderMode`, chosen by two pills at the foot of the
-ladder. **By the hour** (the default) asks for this hour's own four. **In
+ladder, **drawn with the app's own `.year-toggle-pill` / `.year-pill-btn`**
+rather than anything of their own. Written fresh they were given 17px of
+padding to reach the 44px tap target, which made them 46px slabs — exactly
+what the note three hundred lines above the toggle's CSS warns against,
+where growing a control "turned the Diaspora/Israel pill into a slab". The
+control keeps its drawn height of 24px and the `::after` overlay does the
+reaching. `white-space: nowrap` is the one rule of their own: "by the hour"
+is three words where "Diaspora" is one, and at the largest text size it
+wrapped and doubled the pill's height. **By the hour** (the default) asks for this hour's own four. **In
 order** releases the clock and walks the four movements end to end, in
 their own directions:
 

@@ -3413,25 +3413,21 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    comes from padding, so the row keeps the height it had. */
 /* Last of the three rows now, so the breathing space goes above it. */
 .lad-order { margin-top: 12px; }
-.lad-order-pills {
-  display: inline-flex; border: 1px solid var(--gold-mid);
-  border-radius: 20px; overflow: hidden;
-}
-.lad-pill {
-  background: none; border: none; cursor: pointer;
-  font-family: 'Cinzel', serif; font-size: calc(10.5px * var(--ts, 1));
-  letter-spacing: 1px; color: var(--ink-mid);
-  /* 17px, not 13: the text is 10.5px on a 1.1 line, which is 11.6, and
-     13 each side made the pill 38 against the 44 every target here is
-     held to. The pill grows rather than being pulled back by a negative
-     margin, because it sits inside a drawn border and the border would
-     be pulled with it. */
-  padding: 17px 14px; line-height: 1.1;
-}
-.lad-pill + .lad-pill { border-left: 1px solid var(--gold-mid); }
-.lad-pill-on { background: var(--gold-mid); color: #fdf9f2; }
-.lad-pill:not(.lad-pill-on):hover { color: var(--gold); }
-.lad-pill:focus-visible { outline: 1px dotted var(--gold); outline-offset: -3px; }
+/* The same toggle the date card wears: .year-toggle-pill round
+   .year-pill-btn, and nothing of its own. That brings the drawn size, the
+   rounded halves, the 44px ::after overlay that gives the finger its target
+   without the pill growing, the 44px min-width so a reach does not land on
+   the neighbour, and overflow:visible so the overlay is not clipped away.
+
+   Drawn at 17px of padding first, which made it 38 tall and failed the tap
+   check; raising the padding to reach 44 is exactly what this file warns
+   against three hundred lines above — it "turned the Diaspora/Israel pill
+   into a slab", and it turned this one into a slab too. The control keeps
+   the size it was drawn at; the overlay does the reaching. */
+/* "by the hour" is three words where "Diaspora" is one, so at the largest
+   text size it wrapped and the pill doubled in height. */
+.lad-pill { white-space: nowrap; }
+.lad-pill + .lad-pill { border-left: 1px solid var(--gold); }
 #today-block .is-next { border-left-color:var(--gold); }
 
 /* ── THE COMPANION ──
@@ -4463,10 +4459,10 @@ content: ''; float: right; width: 30px; height: 1em;
            why it is not named here. -->
       <div class="dc-custom lad-order">
         <span class="dc-custom-label">Ladder:</span>
-        <span class="lad-order-pills">
-          <button type="button" class="lad-pill" data-mode="hour"
+        <span class="year-toggle-pill lad-order-pills">
+          <button type="button" class="year-pill-btn lad-pill" data-mode="hour"
                   aria-pressed="true" onclick="setLadderMode('hour')">by the hour</button>
-          <button type="button" class="lad-pill" data-mode="free"
+          <button type="button" class="year-pill-btn lad-pill" data-mode="free"
                   aria-pressed="false" onclick="setLadderMode('free')">in order</button>
         </span>
       </div>
@@ -21464,7 +21460,7 @@ content: ''; float: right; width: 30px; height: 1em;
     const m = ladderMode();
     document.querySelectorAll('.lad-pill').forEach((b) => {
       const on = b.dataset.mode === m;
-      b.classList.toggle('lad-pill-on', on);
+      b.classList.toggle('year-pill-active', on);
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
   }
