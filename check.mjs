@@ -1118,12 +1118,27 @@ async function checkInBrowser(chromium) {
       { lens: 2, name: 'Binah',
         card: () => combo(main(1)),
         cell: s => combo((s.cell || '') + ' ' + (s.cell2 || '')) },
+      // Both faces were rewritten to nest their numbers the way Binah's does
+      // — the small cycle, then its cycle, then the large one — and the
+      // absolute day moved into the tag beneath the name. The tag is drawn
+      // inside .sefirah-main-text, so main() still reaches it; these two read
+      // it there rather than from the old wording.
       { lens: 3, name: 'Chesed',
-        card: () => pair(m(main(2), /Day (\d+) · Cycle \d+ of 5: (\S+)/), 2, 1),
+        // "... Cycle 1  <name>  Cycle 1 · Day 62 of 72 ..." — the name is the
+        // one token before the tag, and the day is in it.
+        card: () => pair(m(main(2), /(\S+) Cycle \d+ · Day (\d+) of 72/), 1, 2),
         cell: s => pair(m(s.cell, /^(\S+) · (\d+) of 72$/), 1, 2) },
       { lens: 4, name: 'Gevurah',
-        card: () => pair(m(main(3), /Day (\d+) · Season \d+ \((\w+)/), 2, 1),
-        cell: s => pair(m(s.cell, /^(\w+) · (\d+) of 91$/), 1, 2) },
+        // The face no longer prints the season's name at all — it is in the
+        // detail, under Season — so the card gives the number and the cell's
+        // name is turned into one. The order is fixed in GEVURAH_SEASONS and
+        // cannot drift: Fall, Winter, Spring, Summer. Compared this way the
+        // check is exactly as strong, still asserting that the calendar and
+        // the card name one season and one day.
+        card: () => pair(m(main(3), /Season (\d+) · Day (\d+) of 91/), 1, 2),
+        cell: s => { const x = m(s.cell, /^(\w+) · (\d+) of 91$/);
+                     const n = { Fall: '1', Winter: '2', Spring: '3', Summer: '4' };
+                     return x ? (n[x[1]] || x[1]) + '|' + x[2] : ''; } },
       { lens: 5, name: 'Tiferet',
         card: () => { const x = m(main(4), /Day (\d+), (?:(\d)(?:st|nd|rd|th)|Microcosm ·) Cycle (\d+)/);
                       return x ? (x[2] || '3') + '|' + x[3] + '|' + x[1] : ''; },
