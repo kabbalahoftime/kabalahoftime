@@ -710,7 +710,14 @@ it** — `Cycle 2 · Day 13 of 49`. Chesed, Gevurah and Chochmah all set it to
 today stand in this count*, could only be answered by opening the detail.
 
 Chesed and Gevurah carry it now, in Binah's own shape and with its
-`tag highlight` class:
+`tag highlight` class — but **drawn inside `*-main`, under the day's own
+name, not in the `*-tags` row at the foot**. The row sits after the face
+and the sub-text, which on Binah is two lines and on these two is six, so
+the one line that answers *where am I* was the last thing a reader
+reached. Both `*-tags` rows are left empty and the pill is built into the
+face with `<div class="sefirah-tags">` round it, which is all that row
+ever was — flex, a 5px gap and a 7px top margin — so it draws identically
+wherever it stands.
 
 ```
 Binah     Cycle 2  · Day 13 of 49

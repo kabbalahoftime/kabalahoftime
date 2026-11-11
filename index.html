@@ -25430,6 +25430,14 @@ content: ''; float: right; width: 30px; height: 1em;
     document.getElementById('chesed-cycle-name').innerHTML = chesedMic
       ? 'Shem Ayin-Bet — Leap Year Microcosm'
       : 'Shem Ayin-Bet — 72-Day Cycle';
+    // The same tag, in the same class the row at the foot used, so it is
+    // drawn identically wherever it stands.
+    const _chesedTagRow = `<div class="sefirah-tags">` + (chesedMic
+      ? `<span class="tag highlight">Microcosm \u00b7 Day ${chesedMic.day} of 28</span>`
+      : ayinBetInfo.isBreak
+        ? `<span class="tag highlight">A silent day</span>`
+        : `<span class="tag highlight">Cycle ${ayinBetInfo.cycle} \u00b7 Day ${ayinBetInfo.nameNum} of 72</span>`
+      ) + `</div>`;
     document.getElementById('chesed-main').innerHTML = chesedMic
       ? (chesedMic.silence
           ? `Microcosm Day <strong>${chesedMic.day}</strong> of 28 — a silent day<br>` +
@@ -25446,7 +25454,7 @@ content: ''; float: right; width: 30px; height: 1em;
       // remainder. The day's own number in the seventy-two is not here any
       // more — it is in the tag, which is where Binah keeps its own.
       : `Watch <strong>${bkMishmarNum}</strong> &middot; Word <strong>${bkIdx + 1}</strong> &middot; Cycle <strong>${ayinBetInfo.cycle}</strong><br>` +
-      `<strong>${ayinBetInfo.name}</strong><br>` +
+      `<strong>${ayinBetInfo.name}</strong>` + _chesedTagRow +
         `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>` +
         // ── THE WATCH OF THE DAY ──
         // The twenty-four mishmarot are the families who brought the Tamid,
@@ -25485,11 +25493,12 @@ content: ''; float: right; width: 30px; height: 1em;
     //
     // A silent day has no number in the seventy-two, which is what makes it
     // silent, so it says that instead of counting.
-    document.getElementById('chesed-tags').innerHTML = chesedMic
-      ? `<span class="tag highlight">Microcosm \u00b7 Day ${chesedMic.day} of 28</span>`
-      : ayinBetInfo.isBreak
-        ? `<span class="tag highlight">A silent day</span>`
-        : `<span class="tag highlight">Cycle ${ayinBetInfo.cycle} \u00b7 Day ${ayinBetInfo.nameNum} of 72</span>`;
+    // Emptied: the tag is drawn inside the face now, straight under the
+    // name, which is where Binah's sits. Left at the foot of the card it
+    // came after everything the face had to say — on Binah that is two
+    // lines and on these two it is six — so the one line that answers
+    // "where am I" was the last thing a reader reached.
+    document.getElementById('chesed-tags').innerHTML = '';
     // Buxbaum 364-day cycles
     const bshtDay = ((dEff - d_year1) % 364 + 364) % 364 + 1;
     const bshtReading = bshtDay === 1 ? 'Introduction' : `Page ${bshtDay - 1}`;
@@ -25779,11 +25788,15 @@ content: ''; float: right; width: 30px; height: 1em;
     const _gevHalfHtml = _gevHalf
       ? ` <span style="font-size:0.92em;color:var(--ink-mid)">&middot; ${_gevHalf}</span>`
       : '';
+    const _gevTagRow = `<div class="sefirah-tags">` + (gevMic
+      ? `<span class="tag highlight">Microcosm \u00b7 Day ${gevMic.day} of ${gevMic.total}</span>`
+      : `<span class="tag highlight">Season ${seasonInfo.season} \u00b7 Day ${seasonInfo.dayIn} of 91</span>`
+      ) + `</div>`;
     document.getElementById('gevurah-main').innerHTML = gevMic
       ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} <span style="font-size:0.92em">(${gevMic.name})</span>${_gevHalfHtml}:<br>` +
         // One part to a day here, so the day is a whole face with no letter of
         // its own — the alef-bet is what the 28 days have no room for.
-        `<span id="gevurah-day-face">${_gevFaceHtml}</span>` +
+        `<span id="gevurah-day-face">${_gevFaceHtml}</span>` + _gevTagRow +
         _gevBody(gevMic) +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-mid)">${_gevPart}` +
         (_gevTurn ? ` &middot; ${_gevTurn}` : ``) +
@@ -25806,7 +25819,7 @@ content: ''; float: right; width: 30px; height: 1em;
         // line above it was already showing. The Chayah keeps its own row in
         // the detail, where its Hebrew is, and Avot's posture below still
         // names the creature once.
-        `<span id="gevurah-day-face">${_gevFaceHtml}</span>` +
+        `<span id="gevurah-day-face">${_gevFaceHtml}</span>` + _gevTagRow +
         _gevBody(seasonInfo) +
         (_gevTurn
           ? `<div style="margin-top:6px;font-size:0.8em;color:var(--ink-dim)">` +
@@ -25844,9 +25857,9 @@ content: ''; float: right; width: 30px; height: 1em;
     // The same tag Binah and Chesed carry. The break-days keep their number:
     // the heart and the two kidneys are days of the ninety-one like any
     // other, and it is the letters that stop on them, not the count.
-    document.getElementById('gevurah-tags').innerHTML = gevMic
-      ? `<span class="tag highlight">Microcosm \u00b7 Day ${gevMic.day} of ${gevMic.total}</span>`
-      : `<span class="tag highlight">Season ${seasonInfo.season} \u00b7 Day ${seasonInfo.dayIn} of 91</span>`;
+    // Emptied: drawn inside the face now, under the day's own face, which
+    // is where Binah keeps it. See the note on chesed-tags.
+    document.getElementById('gevurah-tags').innerHTML = '';
     const _kotDay = ((sef.dayNum - 1) % 7) + 1;
     const _kotSong = KOT_SONGS[_kotDay - 1];
     const _kotSongEl = document.getElementById('gevurah-kot-song');
