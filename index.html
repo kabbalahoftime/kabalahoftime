@@ -25658,7 +25658,7 @@ content: ''; float: right; width: 30px; height: 1em;
         : { en: 'The Left Kidney',  he: 'כִּלְיָה שְׂמָאלִית' };
       const f = seasonFaceOf(pl.season, pl.quarter);
       if (!f) return null;
-      // "The Eagle's Face of the Ox" rather than "the Eagle's Ox-face": it is
+      // "Eagle's Face of the Ox" rather than "the Eagle's Ox-face": it is
       // Yechezkel's own construction — פְּנֵי אָדָם, the face of a man — and the
       // hyphenated form read as a compound noun rather than as one creature
       // wearing another's face, which is the whole point of the four.
@@ -25668,7 +25668,11 @@ content: ''; float: right; width: 30px; height: 1em;
       // kind and does not — "the Face of Man" is idiomatic where "the Face
       // of Ox" is not.
       const _the = f.en === 'Man' ? '' : 'the ';
-      return { en: f.own ? `The ${f.of}’s own Face` : `The ${f.of}’s Face of ${_the}${f.en}`,
+      // No "The" in front. "Eagle's Face of the Ox" says the same thing in
+      // one word fewer, and the line it heads is a name rather than a
+      // sentence. The heart and the two kidneys keep theirs: "Heart" alone
+      // would read as a part of the body rather than as the day.
+      return { en: f.own ? `${f.of}’s own Face` : `${f.of}’s Face of ${_the}${f.en}`,
                he: f.he };
     };
     // One line, and the one the meditation reads. The letter is left off the
@@ -25700,7 +25704,7 @@ content: ''; float: right; width: 30px; height: 1em;
         (_eicha.text ? `<div class="eicha-verse">${_eicha.text}</div>` : '')
       : '';
     // ── WHY THIS FACE, IN THIS SEASON ──
-    // The card named the day "The Eagle's Face of the Ox" and left a reader
+    // The card named the day "Eagle's Face of the Ox" and left a reader
     // to work out where the Ox had come from. The rule was written down twice
     // — in the comment over seasonFaceOf and in the advanced depth of this
     // card's ⓘ — and in neither place where the words are actually read.
