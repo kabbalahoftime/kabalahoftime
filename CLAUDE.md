@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v360**; the next is v361.
+nobody. Currently **v361**; the next is v362.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -673,6 +673,27 @@ follows without being told.
 
 The study chip's "done" differs by mode: this hour's steps all marked
 (`_hourStepIdx`) by the hour, none of the thirty left at all in order.
+
+### Why this face, in this season
+
+Gevurah's card named the day *"The Eagle's Face of the Ox"* and left the
+reader to work out where the Ox came from. The rule was written down
+twice — in the comment over `seasonFaceOf` and in the **advanced** depth
+of the card's ⓘ — and in neither place a reader meets the words.
+
+The four turn in the seasons' own order, **Eagle → Man → Ox → Lion**,
+beginning at the season's own face. So the Eagle's season runs Eagle, Man,
+Ox, Lion and its third quarter is the Ox; the Lion's runs Lion, Eagle,
+Man, Ox. Sixteen quarters in a year, each position carrying each face once
+— a Latin square, which the advanced ⓘ still explains in full.
+
+The card now prints the season's own four with today's marked, under the
+face: *Face 3 of 4 · the season turns Eagle → Man → Ox → Lion*. It says
+the rule by showing it, which is shorter than explaining it, and **it asks
+`seasonFaceOf` rather than repeating its order**, so the two cannot drift.
+
+Nothing is drawn on the three break-days — the heart and the two kidneys
+have no face, which is what those days are.
 
 ## Scratch work
 

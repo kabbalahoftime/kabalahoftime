@@ -25668,6 +25668,33 @@ content: ''; float: right; width: 30px; height: 1em;
         // acrostic verse.
         (_eicha.text ? `<div class="eicha-verse">${_eicha.text}</div>` : '')
       : '';
+    // ── WHY THIS FACE, IN THIS SEASON ──
+    // The card named the day "The Eagle's Face of the Ox" and left a reader
+    // to work out where the Ox had come from. The rule was written down twice
+    // — in the comment over seasonFaceOf and in the advanced depth of this
+    // card's ⓘ — and in neither place where the words are actually read.
+    //
+    // The four turn in the seasons' own order, Eagle → Man → Ox → Lion,
+    // beginning at the season's own face. So the Eagle's season runs Eagle,
+    // Man, Ox, Lion and its third quarter is the Ox; the Lion's runs Lion,
+    // Eagle, Man, Ox. Showing the season's own four with today's marked says
+    // that by showing it, which is shorter than explaining it and cannot
+    // drift from seasonFaceOf, because it asks seasonFaceOf.
+    //
+    // Nothing on the three break-days: the letters have stopped and the day
+    // is the heart or a kidney, which is what those days are.
+    const _gevTurn = (() => {
+      const pl = gevMic || seasonInfo;
+      if (pl.heart || pl.silent || !pl.quarter) return '';
+      const four = [1, 2, 3, 4].map((i) => {
+        const f = seasonFaceOf(pl.season, i);
+        if (!f) return '';
+        return i === pl.quarter
+          ? `<strong style="color:var(--gold)">${f.en}</strong>` : f.en;
+      });
+      if (four.some((x) => !x)) return '';
+      return four.join(' \u2192 ');
+    })();
     // The wings, which is what the halves are: two joined in the going out,
     // two covering in the return (Yechezkel 1:11, 1:24). Forty-five days to
     // each, and day 46 — the heart — is the turn itself, neither one nor the
@@ -25737,6 +25764,7 @@ content: ''; float: right; width: 30px; height: 1em;
         `<span id="gevurah-day-face">${_gevFaceHtml}</span>` +
         _gevBody(gevMic) +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-mid)">${_gevPart}` +
+        (_gevTurn ? ` &middot; ${_gevTurn}` : ``) +
         (_eichaLink ? `<br>${gevMic.breakAt ? _eichaLink : `<a class="tap-line"${eichaTap(gevMic.quarter, 1, eichaChapterLen(gevMic.quarter))} style="color:var(--gold)">${_eichaHe(`Eicha ${gevMic.quarter}`)}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}` : '') +
         `</div>` +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-dim)">The four seasons in 28 days — seven parts to each</div>`
@@ -25751,6 +25779,10 @@ content: ''; float: right; width: 30px; height: 1em;
         // names the creature once.
         `<span id="gevurah-day-face">${_gevFaceHtml}</span>` +
         _gevBody(seasonInfo) +
+        (_gevTurn
+          ? `<div style="margin-top:6px;font-size:0.8em;color:var(--ink-dim)">` +
+            `Face ${seasonInfo.quarter} of 4 &middot; the season turns ${_gevTurn}</div>`
+          : ``) +
         (_eichaLink
           ? `<div style="margin-top:6px;font-size:0.85em;"><span style="color:var(--ink-mid)">${_eichaLink}</span></div>`
           : ``);
