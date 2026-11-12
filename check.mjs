@@ -158,9 +158,17 @@ function checkSeo() {
       try { ld = JSON.parse(m[1]); }
       catch (e) { bad++; fail(`${file}: ld+json does not parse — ${e.message}`); continue; }
       // Authorship is the one field a search engine reads as a claim about a
-      // person, so it must name one and must not quietly go missing.
-      if (!ld.author || ld.author['@type'] !== 'Person' || !ld.author.name)
-        { bad++; fail(`${file}: ld+json names no Person as author`); }
+      // person, and this site deliberately makes no such claim: the bylines
+      // were taken out of all three pages, the footer credits the book rather
+      // than its authors, and none of the twelve PDFs carries a name.
+      //
+      // So the assertion is inverted rather than dropped. It used to require
+      // a Person and guard against one going missing; it now catches one
+      // being put back, which is the failure that would matter — a byline
+      // restored by a later edit, unnoticed, is exactly how the name would
+      // return to the search engines.
+      if (ld.author && ld.author['@type'] === 'Person')
+        { bad++; fail(`${file}: ld+json names a Person as author — the bylines are deliberately absent`); }
     }
   }
   if (!bad) pass(`${pages.length} pages: canonical, description and any JSON-LD all sound`);

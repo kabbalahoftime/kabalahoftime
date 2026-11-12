@@ -349,16 +349,18 @@ and a route. `docs/companion-audit.md` is the sweep that found it, the rule the
 rewrite is held to, and six standing false positives in the checker — read
 those rather than re-investigating them.
 
-Books 1 and 2 are the author's own life in allegory, and the people in them are
-real. **Never invent or adjust a biographical fact to make a sentence work.**
-Where two books disagree about a fact, or a change would contradict one, say so
-and ask. Lands carry other names — the Land of the Donkeys is Egypt and Brazil
-at once — and **no character anywhere carries a real name**. The Epilogue of
-Book 2 quotes a child's own handwritten book, which did name them, and those
-three are **redacted to initials**: *a baby named D. His parents were S. and
-A.* The quotation is otherwise word for word, and the sentence after it still
-stands — *the child began in his own words and wrote all of them* — because
-the child did write them; the redaction is the book's, not hers.
+**Never invent or adjust a fact in Books 1 and 2 to make a sentence work**, and
+never fill a gap in them by inference. Where two books disagree about a fact, or
+a change would contradict one, say so and ask. Lands carry other names, and one
+land may answer to more than one at once — and **no character anywhere carries a
+real name**.
+
+The Epilogue of Book 2 quotes a child's own handwritten book, which did name
+three people, and those are **redacted to initials**: *a baby named D. His
+parents were S. and A.* The quotation is otherwise word for word, and the
+sentence after it still stands — *the child began in his own words and wrote
+all of them* — because the child did write them; the redaction is the book's,
+not hers.
 
 This file used to say to leave that quotation exactly as it stood. The author
 changed it. Should another name ever be needed there, redact it the same way
@@ -766,6 +768,24 @@ the rule by showing it, which is shorter than explaining it, and **it asks
 
 Nothing is drawn on the three break-days — the heart and the two kidneys
 have no face, which is what those days are.
+
+### No byline, anywhere
+
+The app names **no person**. The two JSON-LD `author` fields are gone from
+`index.html` and `kot-structure.html`; the footer credits the work rather
+than the people — *Based on the book / Kabbalah of Time / kabbalahoftime.com*
+— and the two in-text citations read *From "The Kabbalah of Time"*. None of
+the twelve PDFs carries a name on any opening page; they never did.
+
+**Do not put one back.** `check.mjs` used to require a Person as author and
+now fails if it finds one: the assertion was inverted rather than dropped,
+because a byline restored by a later edit, unnoticed, is exactly how the
+name would return to the search engines.
+
+The book keeps its credit and its own site, `kabbalahoftime.com`, still
+leads to the authors. Removing the names here removed a co-author's credit
+too, which was deliberate: leaving one name would have read as sole
+authorship.
 
 ## Scratch work
 
