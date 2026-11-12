@@ -154,13 +154,13 @@ And the mending, the man understood at last, is the sun's work. The sun sweetens
 
 His brother's daughter — the little niece, born on the day that stands as the foundation of the entire book — the day of the donkey[^2] — had made it by hand for her father's birthday: written it out in pencil, pasted photographs into it, and drawn what the photographs did not have. It reached the uncle as pictures of its pages, at night, on a phone.
 
-It began: once upon a time in a faraway land, there lived a baby named David. His parents were Sandra and Alan. David was born in New York. In the same hospital as me.
+It began: once upon a time in a faraway land, there lived a baby named D. His parents were S. and A. D. was born in New York. In the same hospital as me.
 
 In two books of faraway lands the man had never once written a name. The child began in his own words and wrote all of them.
 
 Beneath those lines she had pasted a photograph: two boys, the older dark-haired in a white collar with his arm around the younger, holding him steady; the younger blonde, in red, looking straight out at whoever held the camera. Three and a half years between them. In the first book that younger one is the boy in the basket, carried away. Here he is being held.
 
-On the next page: David has one brother and one sister — I will tell you more about the sister later. In her book too, the sister comes later.
+On the next page: D. has one brother and one sister — I will tell you more about the sister later. In her book too, the sister comes later.
 
 And she had drawn them, the two brothers standing side by side on the page, each named underneath in pencil.
 

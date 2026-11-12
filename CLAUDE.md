@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v361**; the next is v362.
+nobody. Currently **v362**; the next is v363.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -353,9 +353,16 @@ Books 1 and 2 are the author's own life in allegory, and the people in them are
 real. **Never invent or adjust a biographical fact to make a sentence work.**
 Where two books disagree about a fact, or a change would contradict one, say so
 and ask. Lands carry other names — the Land of the Donkeys is Egypt and Brazil
-at once — and no character is ever given a name except in the Epilogue of Book
-2, where a child's own handwritten book is quoted verbatim. Leave that quotation
-exactly as it stands.
+at once — and **no character anywhere carries a real name**. The Epilogue of
+Book 2 quotes a child's own handwritten book, which did name them, and those
+three are **redacted to initials**: *a baby named D. His parents were S. and
+A.* The quotation is otherwise word for word, and the sentence after it still
+stands — *the child began in his own words and wrote all of them* — because
+the child did write them; the redaction is the book's, not hers.
+
+This file used to say to leave that quotation exactly as it stood. The author
+changed it. Should another name ever be needed there, redact it the same way
+and rebuild the PDF: 14 pages.
 
 LibreOffice is broken in this environment; read `.docx` XML directly.
 
