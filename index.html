@@ -27184,49 +27184,26 @@ content: ''; float: right; width: 30px; height: 1em;
       }).join(' · ');
     })();
 
-    // Detail panel: today's entry highlighted, then full weekly context
+    // Detail panel: the week's seven, with today marked among them
     const DAYS_LABELS = ['Friday','Shabbat','Sunday','Monday','Tuesday','Wednesday','Thursday'];
     const TEXTS  = ['Arizal','Likutei Sichos and Toras Menachem','Kedushas Levi',
                     'Noam Elimelech','Tanya','Likutei Moharan','Mesilat Yesharim'];
     const displayTexts = TEXTS;
 
-    // Today's highlighted entry
-    const todayMalTxt = getMalchutText(sef.dayNum);
-    const todayIdx = sef.dayNum - 1;
-    let todayTextDisplay = displayTexts[todayIdx];
-    if (todayMalTxt.secondaryName) {
-      todayTextDisplay += ` & ${todayMalTxt.secondaryName}`;
-    }
-    // Today's Reading: the day label sits to the left; the Zohar (paired with
-    // Mesilat Yesharim), the text with its chapter/parshiyot, and its theme
-    // stack in a left-aligned column beside it, so the Zohar and Mesilat
-    // Yesharim line up.
-    let todayNameLine = displayTexts[todayIdx];
-    if (parashaMapping.portion) {
-      todayNameLine += ` — ${parashaMapping.portion}`;
-      if (parashaMapping.parshiyot) todayNameLine += ` (${parashaMapping.parshiyot.join(' / ')})`;
-    }
-    if (todayMalTxt.secondaryName) todayNameLine += ` & ${todayMalTxt.secondaryName}`;
-    const todayThemeHtml = (parashaMapping.theme && !parashaMapping.theme.includes('[To be mapped]'))
-      ? `<div style="font-size:calc(11px * var(--ts, 1));color:var(--ink-dim);font-style:italic;font-weight:400;">${parashaMapping.theme}</div>`
-      : '';
-    // No KoT book on this row. The seven books are a reading keyed to the day,
-    // and Binah is the card that says so — it names the day's book, opens its
-    // week's writing and links the other six. Here they were a second copy in
-    // another visual language, which left a reader to work out that the two
-    // were the same seven.
-    const todayRow = `<div class="mal-today-highlight">` +
-      `<div class="mal-today-badge">★ Today's Reading</div>` +
-      `<div class="mal-book-row mal-today">` +
-        `<div class="mal-book-header" style="flex-wrap:nowrap;align-items:baseline;">` +
-          `<span class="mal-night">${DAYS_LABELS[todayIdx]}</span>` +
-          `<div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;">` +
-            `<span class="mal-text-name" style="flex:none;">${todayNameLine}</span>` +
-            todayThemeHtml +
-          `</div>` +
-        `</div>` +
-      `</div>` +
-      `</div>`;
+    // There was a "★ Today's Reading" row above these, so the fold held EIGHT
+    // rows under a heading that says seven — and today's row stood twice in a
+    // row, the badge copy and then the week's own, adjacent and nearly
+    // identical. A third printing, in fact: today's reading is the step on the
+    // face directly above the fold, which is what the fold was made to stop
+    // repeating. The note over the fold already says the block "put today's
+    // reading on the page twice"; folding it moved the duplicate inside rather
+    // than removing it.
+    //
+    // It is gone. Today is marked where it belongs, inside the week, by
+    // .mal-today — gold border and a tinted header — which is what that class
+    // is for. The badge row also carried LESS than the week's row it
+    // duplicated: no Etz Chayim line on a Friday, and never the Thursday
+    // Zohar, though the comment it carried claimed to pair the two.
 
     // Full 7-day week for context
     const weekRows = DAYS_LABELS.map((_dayLabel, i) => {
@@ -27234,8 +27211,25 @@ content: ''; float: right; width: 30px; height: 1em;
       const textName = displayTexts[i];
       let displayName = textName;
       let themeHTML = '';
+      let zoharHTML = '';
       {
         const mapping = getParashaMapping(textName, actualParasha);
+        // Thursday carries the week's Zohar above the Ramchal, which is the
+        // arrangement the mapping's own _zoharWeek flag is set for: a week's
+        // reading, not a day's, so it belongs to one of the seven books, and
+        // the Ramchal is Rashbi's heir through R. Pinchas ben Yair's ladder,
+        // so the Zohar is read first and he follows.
+        //
+        // Only the FACE was reading that flag, so the Zohar appeared on
+        // Malchut one day in seven and was named nowhere on the other six —
+        // including in this list, which is the one place a reader looks to see
+        // what Thursday holds. Same markup as the face, same order.
+        if (mapping._zoharWeek && _zoharWeekHtml) {
+          zoharHTML =
+            `<div><strong>Zohar — Parasha</strong></div>` +
+            `<div style="font-weight:400">${_zoharWeekHtml}</div>` +
+            `<span style="display:inline-block;width:100%;border-top:1px solid var(--ink-dim);margin:6px 0 4px;opacity:0.3"></span>`;
+        }
         if (mapping.portion) {
           displayName += ` — ${mapping.portion}`;
           if (mapping.parshiyot) {
@@ -27278,7 +27272,7 @@ content: ''; float: right; width: 30px; height: 1em;
       return `<div class="mal-book-row${isCurrent ? ' mal-today' : ''}">` +
         `<div class="mal-book-header">` +
           `<span class="mal-night">${DAYS_LABELS[i]}</span>` +
-          `<span class="mal-text-name">${displayName}${themeHTML}</span>` +
+          `<span class="mal-text-name">${zoharHTML}${displayName}${themeHTML}</span>` +
         `</div>` +
         `</div>`;
     }).join('');
@@ -27315,8 +27309,6 @@ content: ''; float: right; width: 30px; height: 1em;
     // Today's reading, then the week it stands in — on the face, where the
     // card's own cycle is.
     document.getElementById('malchut-week-face').innerHTML =
-      todayRow +
-      `<div class="mal-week-divider"></div>` +
       `<div class="mal-parasha-header">` +
         `<span>Week ${effectiveKotWeek} · ${wk.month}</span>` +
         `<strong>${wk.b1_theme}</strong>` +
