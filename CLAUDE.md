@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v364**; the next is v365.
+nobody. Currently **v365**; the next is v366.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -30,9 +30,27 @@ nobody. Currently **v364**; the next is v365.
 node check.mjs          # ~4 minutes, binds 127.0.0.1:8731
 ```
 
-56 checks over 17 sections, ending in `all checks passed`. Its own header
-explains what each section is for and which bug put it there — read that rather
-than guessing. Playwright lives at `/opt/pw-browsers/chromium`; override with
+Ending in `all checks passed`. Its own header explains what each section is
+for and which bug put it there — read that rather than guessing.
+
+**The suite runs in UTC, and that hid a bug for a long time.** Section 16
+exists for it: the reading cycle was walked in `7 * 864e5` jumps from a local
+midnight, so the first daylight-saving fall-back after Simchat Torah moved
+every remaining Shabbat onto the Friday, and a reader in New York was shown
+**the next week's parasha** for a third of every year. 326 of 938 readings
+wrong in New York, 384 in London, 372 in Jerusalem — and none in UTC or São
+Paulo, which is why 501 readings checked against Hebcal said nothing was
+wrong. `getDafYomi` floored the same kind of difference and ran a day behind
+for half the year.
+
+So: **never add a day to a Date in milliseconds and then read a calendar day
+off it.** Use `setDate()`, which moves whole calendar days whatever the offset
+does, and anchor at noon so no shift can cross midnight. `Math.round` of a
+day-difference tolerates the hour; `Math.floor` does not. Section 16 asserts
+that the answer does not depend on where the reader is standing — UTC is the
+baseline the rest of the suite has matched to Hebcal, and four zones chosen
+for their differing transitions must agree with it, reading for reading. It
+needs no network. Playwright lives at `/opt/pw-browsers/chromium`; override with
 `CHROMIUM=/path/to/chromium`.
 
 Run it in the background and **wait by polling the log for `all checks

@@ -86,6 +86,19 @@
 //                   Seven years in nineteen, one month in each: the least
 //                   walked path here, and the same shape as the three faults
 //                   already found.
+//  16. timezone   — the same day must read the same in a zone that keeps
+//                   daylight saving as it does in UTC. The suite runs in UTC,
+//                   so every other section agreed with itself while a reader
+//                   in New York was shown the wrong parasha for a third of
+//                   every year: the reading cycle was walked in 7 * 864e5
+//                   jumps from a local midnight, and the first fall-back after
+//                   Simchat Torah moved every later row onto the Friday. 326
+//                   of 938 readings wrong in New York, 384 in London, 372 in
+//                   Jerusalem, none in UTC — which is why 501 readings checked
+//                   against Hebcal said nothing was wrong. The daf floored the
+//                   same kind of difference and ran a day behind for half the
+//                   year. Asserted against UTC rather than an almanac: the
+//                   answer must not depend on where the reader is standing.
 //
 // Exits non-zero if any check fails, so it can gate a commit.
 
@@ -1313,6 +1326,94 @@ async function checkInBrowser(chromium) {
   await page.evaluate(() => { if (typeof setTextSize === 'function') setTextSize('normal'); });
 
   if (crashes.length) crashes.slice(0, 5).forEach(c => fail('uncaught: ' + c));
+
+  // 16. timezone — the same day read in a zone that keeps daylight saving
+  // must give the same reading as UTC.
+  //
+  // This section exists because the suite runs in UTC and the whole of the
+  // rest of it therefore agreed with itself while a reader in New York was
+  // shown the WRONG PARASHA for a third of every year. p_cycle walked the
+  // year in 7 * 864e5 jumps from a local midnight, so the first daylight
+  // saving fall-back after Simchat Torah moved every remaining row onto the
+  // Friday; the Saturday lookup then missed and fell through to the next
+  // week's reading. 326 of 938 readings wrong in New York, 384 in London,
+  // 372 in Jerusalem — and none at all in UTC or São Paulo, which is exactly
+  // why 501 readings checked against Hebcal said nothing was wrong.
+  // getDafYomi floored the same kind of millisecond difference and was a day
+  // behind for about half of every year in the same zones.
+  //
+  // So the assertion is not against an almanac — it is that the answer does
+  // not depend on where the reader is standing. UTC is the baseline the rest
+  // of the suite has already checked against Hebcal; every other zone must
+  // agree with it, reading for reading. That needs no network and no table.
+  //
+  // The zones are chosen for their transitions, not their offsets: New York
+  // and London change on different dates, Jerusalem on its own, Sydney is in
+  // the southern hemisphere, where the error runs the other way and floor
+  // still lands on the right day — which is why a one-zone check would have
+  // missed it. Both reckonings, because the Israel one was where the reader
+  // first saw the card come up blank.
+  console.log('\ntimezone');
+  {
+    const ZONES = ['America/New_York', 'Europe/London', 'Asia/Jerusalem', 'Australia/Sydney'];
+    const readAll = async (tz) => {
+      const ctx = await browser.newContext(
+        { viewport: { width: 390, height: 844 }, ...(tz ? { timezoneId: tz } : {}) });
+      const pg = await ctx.newPage();
+      await pg.goto(`http://127.0.0.1:${PORT}/${FILE}`, { waitUntil: 'load' });
+      await pg.waitForFunction(() => typeof window.getParashaForDate === 'function',
+        null, { timeout: 60000 });
+      await pg.waitForTimeout(1200);
+      const out = await pg.evaluate(() => {
+        const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0')
+          + '-' + String(d.getDate()).padStart(2, '0');
+        const r = { parasha: {}, daf: {} };
+        for (const region of ['diaspora', 'israel']) {
+          if (window.setParashaRegion) window.setParashaRegion(region);
+          const d = new Date(2024, 0, 6, 12);
+          while (d.getFullYear() < 2031) {
+            r.parasha[region + ' ' + iso(d)] = window.getParashaForDate(new Date(d)) || '(null)';
+            d.setDate(d.getDate() + 7);
+          }
+        }
+        if (window.setParashaRegion) window.setParashaRegion('diaspora');
+        // The daf at LOCAL MIDNIGHT, which is the shape new Date(y, m, d)
+        // gives and what the year view hands it. At noon it was always right,
+        // so a probe that used noon would have passed throughout.
+        const g = window.getDafYomi || (typeof getDafYomi === 'function' ? getDafYomi : null);
+        if (g) {
+          const d = new Date(2024, 0, 1);
+          while (d.getFullYear() < 2028) {
+            let f = null;
+            try { f = g(new Date(d.getFullYear(), d.getMonth(), d.getDate())); } catch (e) {}
+            r.daf[iso(d)] = f ? f.name + ' ' + f.daf : '(null)';
+            d.setDate(d.getDate() + 1);
+          }
+        }
+        return r;
+      });
+      await ctx.close();
+      return out;
+    };
+    const base = await readAll(null);
+    const nP = Object.keys(base.parasha).length, nD = Object.keys(base.daf).length;
+    const nulls = Object.values(base.parasha).filter(v => v === '(null)').length;
+    if (!nP || !nD) fail(`the timezone baseline came back empty — ${nP} readings, ${nD} dapim`);
+    else if (nulls) fail(`${nulls} of ${nP} readings are null in the baseline zone`);
+    else pass(`baseline: ${nP} readings and ${nD} dapim, none null`);
+    for (const tz of ZONES) {
+      const r = await readAll(tz);
+      const pBad = Object.keys(base.parasha).filter(k => r.parasha[k] !== base.parasha[k]);
+      const dBad = Object.keys(base.daf).filter(k => r.daf[k] !== base.daf[k]);
+      if (pBad.length)
+        fail(`${tz}: ${pBad.length} of ${nP} readings differ from the baseline` +
+             ` — e.g. ${pBad[0]} is ${base.parasha[pBad[0]]} there but ${r.parasha[pBad[0]]} here`);
+      else if (dBad.length)
+        fail(`${tz}: ${dBad.length} of ${nD} dapim differ from the baseline` +
+             ` — e.g. ${dBad[0]} is ${base.daf[dBad[0]]} there but ${r.daf[dBad[0]]} here`);
+      else pass(`${tz}: all ${nP} readings and ${nD} dapim agree with the baseline`);
+    }
+  }
 
   await browser.close();
 }

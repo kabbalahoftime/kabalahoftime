@@ -5252,8 +5252,29 @@ content: ''; float: right; width: 30px; height: 1em;
       const stNext = hebrewToGreg(hy + 1, 7, il ? 22 : 23);
       const fest = new Map([...p_festivals(hy, il), ...p_festivals(hy + 1, il)]);
       const out = [];
-      let d = new Date(st.getTime() + (((6 - st.getDay() + 7) % 7) || 7) * 864e5);
-      for (; d < stNext; d = new Date(d.getTime() + 7 * 864e5))
+      // Walk the year in CALENDAR days, from noon, not in 864e5-millisecond
+      // jumps from midnight.
+      //
+      // jdnToGreg returns new Date(y, m, d) — local midnight. Adding exact
+      // 24-hour multiples to a local midnight slips to 23:00 of the previous
+      // day the moment the walk crosses a daylight-saving fall-back, and from
+      // there every remaining row of the cycle lands on the Friday. The
+      // Saturday lookup then misses, and since the row is sorted and present
+      // for a LATER Shabbat, findCurrentParasha's on-or-after fallback returns
+      // the NEXT week's reading — Vayetzei where Toledot belongs.
+      //
+      // Reported from New York. Reproduced in New York, Los Angeles and
+      // Jerusalem; UTC, São Paulo, Tokyo, Sydney and Auckland were all
+      // correct, which is why it hid for so long: the suite runs in UTC, and
+      // the zones that pass are the ones with no DST or still inside it. The
+      // reader's earlier blank card on the Israel reckoning was this same
+      // fault, before the fallback turned a blank into a wrong answer.
+      //
+      // setDate() moves whole calendar days whatever the offset does, and noon
+      // leaves twelve hours of slack either way, so no shift can cross midnight.
+      let d = new Date(st.getFullYear(), st.getMonth(), st.getDate(), 12);
+      d.setDate(d.getDate() + (((6 - st.getDay() + 7) % 7) || 7));
+      for (; d < stNext; d.setDate(d.getDate() + 7))
         out.push({ date: p_iso(d), holiday: fest.get(p_iso(d)) || null });
       if (stNext.getDay() === 6) out.push({ date: p_iso(stNext), holiday: 'Simchat Torah' });
       return out;
@@ -8542,7 +8563,22 @@ content: ''; float: right; width: 30px; height: 1em;
   })();
 
   function getDafYomi(civilDate) {
-    const raw = Math.floor((civilDate - DAF_EPOCH) / 86400000);
+    // Whole CALENDAR days between two noons, not millisecond-days floored.
+    //
+    // DAF_EPOCH is new Date(2020, 0, 1) — a local midnight in January. A date
+    // handed in at local midnight while daylight saving is on is an hour short
+    // of a whole number of days from it, and Math.floor drops the day: 15 July
+    // 2027 in New York gave Berakhot 53 where it is Berakhot 54. The callers
+    // in the year view pass exactly that shape (D.date), so the daf ran a day
+    // behind for about half the year in every northern DST zone, while the
+    // render path — which passes the live clock — was right except between
+    // midnight and 1am. Southern zones escaped it: there the error runs the
+    // other way and floor still lands on the right day.
+    //
+    // Same fault as the parasha walk above. Normalised here rather than at the
+    // three call sites so a later caller cannot reintroduce it.
+    const _noon = d => new Date(d.getFullYear(), d.getMonth(), d.getDate(), 12);
+    const raw = Math.round((_noon(civilDate) - _noon(DAF_EPOCH)) / 86400000);
     // Before the epoch as after it: the cycle has no beginning of its own that
     // a date can fall outside, so the modulo is taken on both sides of zero.
     const off = ((raw - DAF_CYCLE.first) % DAF_CYCLE.length + DAF_CYCLE.length)
