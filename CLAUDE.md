@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v363**; the next is v364.
+nobody. Currently **v364**; the next is v365.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -788,6 +788,27 @@ The book keeps its credit and its own site, `kabbalahoftime.com`, still
 leads to the authors. Removing the names here removed a co-author's credit
 too, which was deliberate: leaving one name would have read as sole
 authorship.
+
+### The ma'amar in Hebrew is linked, not carried
+
+Malchut's **Year-Round Connection** names the se'if and its month and links
+Chabad's English. The Hebrew was nowhere on the card, and there was nothing
+to put there without writing it: the twelve se'ifim are **numbered, not
+titled**, and `VATAH_TITLES` holds the author's own English summaries, which
+render in the monthly calendar and not in the pane.
+
+So the pane links Sichos In English's bilingual edition — the whole ma'amar,
+Hebrew facing a translation, with the summaries and the notes — at
+`sie.org/media/pdf/1130/fkNX11307530.pdf`. **One link, not twelve:** the
+document is the whole ma'amar and every se'if is in it.
+
+**Linked rather than copied in**, which is the line this file already keeps:
+Eicha reads the public-domain 1917 JPS here because the Steinsaltz and Chabad
+translations could not be published. Extracting the twelve דיבור המתחיל from
+that PDF was offered and declined.
+
+The link is `http`, as supplied; `sie.org` is blocked from this session's
+proxy so neither it nor an `https` variant could be checked from here.
 
 ## Scratch work
 

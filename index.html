@@ -3996,6 +3996,19 @@ content: ''; float: right; width: 30px; height: 1em;
   padding: 17px 12px; margin: -17px -12px;
   position: relative; z-index: 1;
 }
+/* The link out to the ma'amar. The anchor grows by padding with the same
+   amount taken back as negative margin, so the finger gets its 44px and
+   nothing on the card moves — the trick this file uses for a control that
+   stands on its own. */
+.mal-maamar { font-size: calc(11px * var(--ts, 1)); margin-top: 5px; line-height: 1.4; }
+.mal-maamar a {
+  color: var(--gold); text-decoration: none;
+  display: inline-block; padding: 15px 0; margin: -15px 0;
+  position: relative; z-index: 1;
+}
+.mal-maamar a:hover { text-decoration: underline; }
+.mal-maamar-src { color: var(--ink-dim); margin-left: 5px; }
+
 #maalot-moon { min-height: 44px; }
 /* Both users of this are absolutely positioned in a corner, so the box can be
    given its full 44px outright — it grows inward, away from the edge it is
@@ -5806,6 +5819,22 @@ content: ''; float: right; width: 30px; height: 1em;
         <div class="malchut-section">
           <div class="keter-section-label">✦ Year-Round Connection — ואתה תצוה <span class="maalah">מעלה ג׳</span></div>
           <div class="sefirah-main-text" id="malchut-ksa-face">Loading…</div>
+          <!-- THE MA'AMAR ITSELF, IN HEBREW. The line above names the se'if
+               and its month and links Chabad's English; the Hebrew was
+               nowhere on the card, and the twelve se'ifim are numbered
+               rather than titled, so there was nothing to put there without
+               writing it.
+               Sichos In English's bilingual edition carries the whole thing
+               — the Hebrew facing a translation, with the summaries and the
+               notes — and it is linked rather than copied in. That is the
+               line this app already keeps for somebody else's edition: Eicha
+               reads the public-domain 1917 JPS here because the Steinsaltz
+               and Chabad translations could not be published. One link, not
+               twelve: the document is the whole ma'amar, every se'if in it. -->
+          <div class="mal-maamar"><a
+            href="http://sie.org/media/pdf/1130/fkNX11307530.pdf"
+            target="_blank" rel="noopener">the ma&rsquo;amar in Hebrew &#8599;&#xFE0E;</a><span
+            class="mal-maamar-src">&middot; with translation, Sichos In English</span></div>
           <div class="keter-section-label" id="malchut-pesukim-label" style="margin-top:10px;">The Twelve Pesukim</div>
           <div class="sefirah-sub-text" id="malchut-pesukim-face" style="margin-top:2px;"></div>
         </div>
