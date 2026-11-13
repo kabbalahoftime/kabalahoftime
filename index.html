@@ -1541,7 +1541,12 @@ gap: 12px;
 margin-bottom: 12px;
 }
 .upper-sefirah {
+/* Both rails off, not just the left. These two are not rungs of the ladder
+   below — they sit above the ◆ divider, wear their accent on a top border
+   instead, and have never carried the left rail. When the right rail was
+   added to .sefirah-card they picked it up and stood lopsided. */
 border-left: none !important;
+border-right: none !important;
 grid-template-columns: 96px 1fr;
 }
 
@@ -1599,7 +1604,22 @@ position: relative;
 cursor: default;
 transition: box-shadow 0.2s, transform 0.15s;
 border: 1px solid var(--border);
-border-left: 4px solid var(--sefirah-color, var(--gold));
+/* ── THE LADDER ──
+   Two rails and a rung between each pair. The cards already stood in a
+   column with the Sefirot in their own order, Keter at the top and Malchut
+   at the foot, so the page was a ladder before it was drawn as one — the
+   meditation comes down it and the מעלות climb back up it.
+   The right rail matches the left; the rung is drawn by ::after into the
+   6px gap below each card, reaching out to both rails. The last card has
+   none, because a ladder does not end in a rung.
+   One colour for all three, named outright rather than taken from
+   var(--sefirah-color, var(--gold)): a ladder is one piece of wood. The
+   fallback was what drew it in gold anyway — the seven --sefirah-color
+   declarations below are spelt with an EN DASH and have never set
+   anything — so a later fix to those would otherwise have broken the
+   ladder into seven colours without anyone touching this rule. */
+border-left: 4px solid var(--gold);
+border-right: 4px solid var(--gold);
 box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 animation: fadeInUp 0.4s ease both;
 }
@@ -1607,6 +1627,12 @@ animation: fadeInUp 0.4s ease both;
 .sefirah-card:hover {
 box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 transform: translateY(-1px);
+}
+
+.sefirot-grid > .sefirah-card:not(:last-child)::after {
+  content: ''; position: absolute;
+  left: -4px; right: -4px; bottom: -7px; height: 7px;
+  background: var(--gold);
 }
 
 .sefirot-grid .sefirah-card:nth-child(1) {
