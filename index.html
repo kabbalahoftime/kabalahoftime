@@ -3231,6 +3231,12 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 .date-bar > .cycle-info-btn.corner { top:8px; right:10px; }
 .today-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
   text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+/* Sized in em, so it grows with the label at all three reader text sizes
+   rather than staying put while the words around it grow. margin-right is
+   3px because the label's own 2.5px of letter-spacing lands after the icon
+   too, which makes the gap about 5.5px. */
+.today-label-icon { width:0.82em; height:1.12em; vertical-align:-0.17em;
+  margin-right:3px; flex:none; }
 /* One line, always: the step and what it asks for belong together, and a name
    that wrapped left a half-empty second line above the tally. _todayFit steps
    the size down for the few names too long to fit at full size. */
@@ -4298,7 +4304,20 @@ content: ''; float: right; width: 30px; height: 1em;
        is the rung being stood on — fifteen up and fifteen down is a ladder,
        and Yaakov's is the one the thirty are counted by. -->
   <div id="today-block">
-    <div class="today-label">Today&rsquo;s Ladder</div>
+    <!-- The ladder, drawn rather than typed. 🪜 is Unicode 13 and still
+         absent from older devices, where it falls back to tofu; and a
+         full-colour emoji at 10.5px beside a gold Cinzel label would read as
+         a sticker against this page's palette. The SVG takes currentColor, so
+         it IS the heading's gold, and it is the same two rails and rungs the
+         seven cards below are drawn with. aria-hidden: it says "ladder" and
+         so does the word after it. -->
+    <div class="today-label"><svg class="today-label-icon" viewBox="0 0 12 16"
+         aria-hidden="true" focusable="false"><g fill="currentColor"
+         ><rect x="0" y="0" width="2.2" height="16" rx="0.7"/><rect
+          x="9.8" y="0" width="2.2" height="16" rx="0.7"/><rect
+          x="2.2" y="2.4" width="7.6" height="1.7"/><rect
+          x="2.2" y="7.15" width="7.6" height="1.7"/><rect
+          x="2.2" y="11.9" width="7.6" height="1.7"/></g></svg>Today&rsquo;s Ladder</div>
     <!-- THE FACE OF THE HOUR. The thirty steps and the ten prayers are deeds,
          and this block counts them. The faces of the cards are not deeds —
          they are the day's coordinates, what makes today this day: the
