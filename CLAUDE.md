@@ -810,6 +810,49 @@ that PDF was offered and declined.
 The link is `http`, as supplied; `sie.org` is blocked from this session's
 proxy so neither it nor an `https` variant could be checked from here.
 
+### The cards are drawn as a ladder
+
+The seven in `#sefirot-grid` carry a 4px rail on each side and a rung between
+each pair. They already stood in a column with the Sefirot in their own order,
+Keter at the top and Malchut at the foot, so the page was a ladder before it
+was drawn as one — the meditation comes down it and the מעלות climb back up.
+
+The rung is `::after` on `.sefirah-card:not(:last-child)`, `left:-4px;
+right:-4px; bottom:-7px; height:7px`, which fills the 6px gap plus the 1px
+bottom border exactly — so the rails run **unbroken** through it. Thinner and
+centred in the gap, the rails would break at every junction and it would stop
+reading as a ladder. **The last card has no rung**, because a ladder does not
+end in one.
+
+**Chochmah and Binah are not rungs of it.** They sit above the ◆ divider in
+`#upper-sefirot-grid`, wear their accent on a top border, and have never
+carried the left rail. `.upper-sefirah` switched off `border-left` alone, so
+the new right rail reached them and they stood lopsided; both are off there
+now. Anything added to `.sefirah-card`'s box reaches those two as well.
+
+**One colour, named outright.** All three rules say `var(--gold)` rather than
+`var(--sefirah-color, var(--gold))`, which is what the left rail asked for
+before. That matters because of the next item.
+
+### Two faults left standing, on purpose
+
+Both are old, both were found while drawing the ladder, and the author has
+said to leave them. **Do not "tidy" either without asking** — each is a
+visible change to every card, not a cleanup.
+
+- `index.html:1629` and the six rules after it declare **`–sefirah-color`
+  with an EN DASH** (U+2013). A custom property must begin with two hyphens,
+  so all seven have never set anything, and every `var(--sefirah-color,
+  var(--gold))` in the file — the rails, the Sefirah name, two more — has
+  always fallen back to gold. That fallback is what makes the ladder one
+  colour. Repairing the dash would give each card its own rail and name
+  colour, which is a change to look at first; it is also why the ladder's
+  rules name gold directly, so a later repair cannot split the ladder into
+  seven colours without anyone touching them.
+- `index.html:245` is `- { margin: 0; padding: 0; box-sizing: border-box; }`
+  — a hyphen where `*` was meant, so the global reset is dead. Harmless as it
+  stands; applying it would reflow the whole page.
+
 ## Scratch work
 
 Prototypes and experiments belong in the session scratchpad, not the repo.
