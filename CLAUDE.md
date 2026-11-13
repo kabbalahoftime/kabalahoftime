@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v362**; the next is v363.
+nobody. Currently **v363**; the next is v364.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -761,13 +761,15 @@ Ox, Lion and its third quarter is the Ox; the Lion's runs Lion, Eagle,
 Man, Ox. Sixteen quarters in a year, each position carrying each face once
 — a Latin square, which the advanced ⓘ still explains in full.
 
-The card now prints the season's own four with today's marked, under the
-face: *Face 3 of 4 · the season turns Eagle → Man → Ox → Lion*. It says
-the rule by showing it, which is shorter than explaining it, and **it asks
-`seasonFaceOf` rather than repeating its order**, so the two cannot drift.
+A line was added under the face that printed the season's own four with
+today's marked — *the season turns Eagle → Man → Ox → Lion* — and it was
+**taken out again the next day**. Do not add it back.
 
-Nothing is drawn on the three break-days — the heart and the two kidneys
-have no face, which is what those days are.
+What answers the question now is the face line itself: *Letter 16 · Face 3
+· Season 1*. A reader who sees the day is face 3 of the Eagle's season has
+what the turn would have told them, and the ⓘ still explains the rule in
+full at the advanced depth. The turn line said a third time what two lines
+above it were already saying.
 
 ### No byline, anywhere
 
