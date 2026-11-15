@@ -28,7 +28,7 @@ He was called back to the various lands he once inhabited, and in each one he wo
 
 ### The Land of the Pigs, Again | Rome
 
-In the house of prayer, the man found his place the way he always found it: as the stand-in. When the rabbi was away, he taught.
+In the house of prayer, the man taught.
 
 Two deeper roles held him, which together were reminiscent of the zealous priest who became a prophet. The first was the provider's. The second was to raise his hands in blessing — and this, if you asked anyone, was his true role.
 
