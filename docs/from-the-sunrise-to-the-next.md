@@ -28,11 +28,9 @@ He was called back to the various lands he once inhabited, and in each one he wo
 
 ### The Land of the Pigs, Again | Rome
 
-In the house of prayer, the man taught.
+In the house of prayer, the man's two roles felt reminiscent of the zealous priest who became a prophet. The first was the provider's. The second was to raise his hands in blessing — and this, if you asked anyone, was his true role.
 
-Two deeper roles held him, which together were reminiscent of the zealous priest who became a prophet. The first was the provider's. The second was to raise his hands in blessing — and this, if you asked anyone, was his true role.
-
-The house of prayer stood in a prosperous land. A man called to the reading would pledge, and the pledge was said aloud; the honors of the holidays were taken up and given for. So there was a great deal to raise, and raising it was the man's work: to turn the money-talk toward Heaven and the hearts toward each other.
+The man also raised his hands when making donation pledges. There was a great deal to raise, and to elevate: to turn the money-talk toward Heaven and the hearts toward each other.
 
 To stand in the elevated Land of the Pigs and raise his hands in powerful blessings of peace — was to be a lion for them.
 
