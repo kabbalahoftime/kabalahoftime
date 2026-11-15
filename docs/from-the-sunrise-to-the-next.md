@@ -28,13 +28,13 @@ He was called back to the various lands he once inhabited, and in each one he wo
 
 ### The Land of the Pigs, Again | Rome
 
-In the house of prayer, the man found his place the way he always found it: as the stand-in. When the rabbi was away, he taught. Even here, in the holy place, there were turf wars; the exile does not disappear.
+In the house of prayer, the man found his place the way he always found it: as the stand-in. When the rabbi was away, he taught.
 
-But beneath the turf, two deeper roles held him, which together were reminiscent of the zealous priest who became a prophet. The first was the provider's. The second was to raise his hands in blessing — and this, if you asked anyone, was his true role.
+Two deeper roles held him, which together were reminiscent of the zealous priest who became a prophet. The first was the provider's. The second was to raise his hands in blessing — and this, if you asked anyone, was his true role.
 
-Yet the air of the house of prayer was thick with the very thing the land had always breathed: gold. That air of self-importance, that drive for wealth and standing, the utmost focus on professional success — the pig-energy, was still there, but elevated. Every time a man went up to the reading, a gift was expected, and announced aloud. Every honor of the holidays was auctioned or bought. Money was everywhere — and the man's work was to elevate it further: to turn the money-talk toward Heaven and the hearts toward each other. It worked, and it didn't. You could elevate the gold and still be shocked by its effects.
+The land had always breathed gold, and the house of prayer stood inside it. A man called to the reading would pledge, and the pledge was said aloud; the honors of the holidays were taken up and given for. So there was a great deal to raise, and raising it was the man's work: to turn the money-talk toward Heaven and the hearts toward each other. It worked.
 
-To stand in the elevated Land of the Pigs, among the gold and the appetites, to raise his hands in powerful blessings of peace — was to be a lion for them.
+To stand in the elevated Land of the Pigs and raise his hands in powerful blessings of peace — was to be a lion for them.
 
 ### The Land of the Bulls, Again | Greece
 
