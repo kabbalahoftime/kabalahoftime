@@ -3473,20 +3473,14 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    true: a small gold tag rather than a banner, in the corner, said once.
    It lies over the control that opens the card, so it lets taps through
    rather than punching a dead spot in the middle of it. */
-/* Left of the ⓘ, not under it. The corner belongs to the ⓘ on every block
-   that has one, so this tag — which ages out, where the ⓘ does not — is the
-   one that moves aside.
-   The offset has to grow with the glyph: the corner ⓘ is sized
-   calc(21px * var(--ts)), so a fixed clearance that works at the normal text
-   size puts the tag back under it at the largest. 33px is the ⓘ's own 12px
-   from the edge plus a gap; the rest tracks the glyph. */
-.comp-new {
-  position:absolute; top:10px; right:calc(33px + 21px * var(--ts, 1));
-  pointer-events:none; z-index:1;
-  font-family:'Cinzel',serif; font-size:calc(9px * var(--ts, 1));
-  letter-spacing:2px; text-transform:uppercase; color:var(--gold);
-  border:1px solid var(--gold); border-radius:3px; padding:2px 6px; line-height:1;
-}
+/* The "New" tag stood here, in the corner, until the companion moved to the
+   top of the page. It was there because the block sat below the ladder and
+   below the welcome box, where a reader could miss it; being the second
+   thing on the page does that work better than a word can, so the word has
+   gone and the corner belongs to the ⓘ alone, as on every other block.
+   With it went compBadge, COMP_BADGE_DAYS and the two keys it kept —
+   kotCompanionSeen and kotCompanionFirst. A reader who still has those in
+   this browser is carrying two strings nothing reads. */
 /* Shut until it is asked for. The entry is a page of prose and the cards
    below it are the app — so it offers itself in two lines and opens on a
    tap, rather than standing between the ladder and the year every morning.
@@ -4328,7 +4322,6 @@ content: ''; float: right; width: 30px; height: 1em;
        it — here and the line at the foot of the panel — say what these are
        instead. -->
   <section id="companion" class="companion" style="display:none;" aria-labelledby="comp-open">
-    <div class="comp-new" aria-hidden="true">New</div>
     <h2 class="comp-h"><button type="button" id="comp-open" class="comp-open"
         aria-expanded="false" aria-controls="comp-panel" onclick="toggleCompanion()">
       <span class="comp-head">A Daily Companion</span>
@@ -17083,7 +17076,6 @@ content: ''; float: right; width: 30px; height: 1em;
     if (shelfSlot) shelfSlot.innerHTML =
       '· <a href="#companion" onclick="toggleCompanion(true)">' +
       'today’s entry ↓</a>';
-    compBadge();
     if (_compDay === want) { compNav(); return; }   // already drawn for this day
     _compDay = want;
 
@@ -17175,24 +17167,6 @@ content: ''; float: right; width: 30px; height: 1em;
       _compToday ? 'Back to today · Day ' + _compToday : 'Back to today');
   }
 
-  // The badge retires itself. It says "new", which stops being true the
-  // moment the reader has opened the thing once — after that it is chrome
-  // that has stopped carrying any information. It also ages out on its own
-  // for anyone who never opens it, so it cannot sit there for a year.
-  const COMP_BADGE_DAYS = 21;
-  function compBadge() {
-    const n = document.querySelector('.comp-new');
-    if (!n) return;
-    let seen = null, first = null;
-    try {
-      seen = localStorage.getItem('kotCompanionSeen');
-      first = parseInt(localStorage.getItem('kotCompanionFirst'), 10);
-      if (!(first > 0)) { first = Date.now(); localStorage.setItem('kotCompanionFirst', String(first)); }
-    } catch (e) {}
-    const aged = first > 0 && (Date.now() - first) > COMP_BADGE_DAYS * 86400000;
-    n.style.display = (seen || aged) ? 'none' : '';
-  }
-
   // Open and shut. Deliberately not remembered across loads: the card is shut
   // when the page opens, which is what makes it an offer rather than a wall.
   // It is remembered across a change of date, though — applyCompanion rewrites
@@ -17207,11 +17181,6 @@ content: ''; float: right; width: 30px; height: 1em;
     if (open) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '');
     sec.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    // Opened once is the badge's whole job done.
-    if (open) {
-      try { localStorage.setItem('kotCompanionSeen', '1'); } catch (e) {}
-      compBadge();
-    }
   }
 
   // ── BRANCHES ──
