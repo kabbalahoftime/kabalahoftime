@@ -726,7 +726,7 @@ follows without being told.
 The study chip's "done" differs by mode: this hour's steps all marked
 (`_hourStepIdx`) by the hour, none of the thirty left at all in order.
 
-### Three cards nest the same way
+### Four cards nest the same way
 
 Binah's face reads **where the day stands in the smallest cycle, then that
 cycle, then the large one**, and the tag under it repeats the large cycle
@@ -734,10 +734,26 @@ with the absolute day. Chesed and Gevurah hold the same shape and were not
 using it: both led with the absolute day and left the nesting unsaid.
 
 ```
-Binah     Day 6    · Week 2 · Cycle 2     >>  Cycle 2  · Day 13 of 49
-Chesed    Watch 14 · Word 3 · Cycle 1     >>  Cycle 1  · Day 62 of 72
+Binah     Day 6    · Week 2  · Cycle 2    >>  Cycle 2  · Day 13 of 49
+Chesed    Watch 14 · Word 3  · Cycle 1    >>  Cycle 1  · Day 62 of 72
 Gevurah   Letter 16 · Face 3 · Season 1   >>  Season 1 · Day 62 of 91
+Netzach   Day 23   · Level 3 · Cycle 2    >>  (no tag)
 ```
+
+**Netzach was the fourth and nobody had noticed.** Three rows stand under
+its face — **Day**, **Level/World**, **Cycle** — and the face named only two
+of them, so the middle count had no number anywhere on the card. Ten days to
+a level, four levels to the forty: the level is `Math.ceil(day / 10)`, the
+same rule the Soul Level row below already used.
+
+**Day 41 keeps the plain day**, as Gevurah's break-days do. It is Yechidah
+in Adam Kadmon, which stands *above* all four rather than being a fifth, so
+it has no level to name — and `Math.ceil(41 / 10)` would otherwise index a
+fifth that is not there. The guard is in both places for that reason.
+
+Checked across 44 consecutive days: the printed level agrees with the
+Level/World row on every one, and none is printed on the forty-first.
+Netzach's `*-tags` row is still set empty and was left alone.
 
 **Chesed nests without a remainder**: the mishmarot wrap at 24, each word
 of Birkat Kohanim holds exactly those 24 days, and `BIRKAT_KOHANIM_CYCLES`

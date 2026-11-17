@@ -26469,8 +26469,22 @@ content: ''; float: right; width: 30px; height: 1em;
          <div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://hebrewbooks.org/pdfpager.aspx?req=16026&pgnum=1" target="_blank" style="color:var(--gold)">Toras Shmuel — HebrewBooks</a></div>` + netzResourcesHtml;
     } else {
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `40-Day Cycle: Receiving the Torah`;
+      // Three rows stand under this line — Day, Level/World, Cycle — and the
+      // line named only two of them, so the middle count had no number
+      // anywhere on the face. It nests exactly as Binah, Chesed and Gevurah
+      // do: the smallest count, then the one it sits inside, then the large
+      // one. Ten days to a level, four levels to the forty.
+      //
+      // Day 41 keeps the plain day, the way Gevurah's break-days do. It is
+      // Yechidah in Adam Kadmon, which stands above all four rather than
+      // being a fifth, so it has no level to name — and the same guard is
+      // used in the Soul Level row below, where Math.ceil(41 / 10) would
+      // otherwise index a fifth that is not there.
+      const _netzLevel = cy41v.day === 41 ? 0 : Math.ceil(cy41v.day / 10);
       cards[5].querySelector('.sefirah-main-text').innerHTML =
-        `Day <strong>${cy41v.day}</strong> · Cycle <strong>${cy41v.cycle}</strong>`;
+        `Day <strong>${cy41v.day}</strong>` +
+        (_netzLevel ? ` · Level <strong>${_netzLevel}</strong>` : '') +
+        ` · Cycle <strong>${cy41v.cycle}</strong>`;
       cards[5].querySelector('.sefirah-sub-text').innerHTML =
         `<span style="font-size:0.9em;color:var(--ink-dim)">Day:</span> ${dayCmd.text}` +
         `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41v.soulLevel.replace(' / ', '/')}` +
