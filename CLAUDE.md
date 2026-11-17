@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v371**; the next is v372.
+nobody. Currently **v372**; the next is v373.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -657,6 +657,31 @@ what a Sefirah is, and the ladder asks that reader to do one of four things
 before anything has explained why. It is shut by default and about 117px
 tall, so a reader who already knows scrolls past one line and a two-line
 peek. It stood below the ladder and below the welcome box until then.
+
+### One gap down the column
+
+Every card in the stack above the Sefirot is **16px** from the one before it:
+the week artwork, the date bar, the companion, the Ladder, the welcome box
+and the crown. They had drifted to 16, 24, 14, 12 and 24, which on a phone
+read as the companion sitting closer to the Ladder than to anything else.
+
+```
+.week-card        margin: 16px auto
+.date-bar         margin-bottom: 16px
+.companion        margin: 16px 0 0
+#today-block      margin: 16px 0 0
+#kot-welcome      margin: 16px 0 0   (inline)
+.keter-title-row  margin: 16px 0 0
+```
+
+**These are collapsing margins, so one stray value wins the whole gap.** The
+date bar's old 24 beat the companion's 14 and made the first gap wider than
+the second — the drift was invisible until two of the five sat next to each
+other. Change one and change them all.
+
+`.keter-card` keeps `margin-top: 0` on purpose: its own comment says the
+heading and the dial are **one card, not two stacked**, so the crown's
+heading carries the top of one outline and the card below carries the bottom.
 
 ### The acrostic psalms are not one verse a letter
 

@@ -531,7 +531,15 @@ background: var(--bg-card);
 border: 1px solid var(--border-strong);
 border-radius: 4px;
 padding: 12px 18px;
-margin-bottom: 24px;
+/* ── THE STACK GAP ──
+   16px, and the same on every card in the column above the Sefirot: the week
+   artwork, this, the companion, the Ladder, the welcome box and the crown.
+   They had drifted to 16, 24, 14, 12 and 24, which on a phone reads as the
+   companion being closer to the Ladder than to anything else.
+   These are bottom-to-top collapses, so one stray value wins the whole gap —
+   which is how a 24 here beat the companion's 14 and made the first gap
+   wider than the second. Change one and change them all. */
+margin-bottom: 16px;
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -958,7 +966,7 @@ border-radius: 4px 4px 0 0;
 padding: 12px 18px 14px;
 /* Clear of Today's Ladder above it. The two were touching, and the Keter
    heading read as the foot of that block rather than the head of the cards. */
-margin: 24px 0 0;
+margin: 16px 0 0;   /* the stack gap */
 }
 .keter-title-row > .cycle-info-btn.corner { top: 8px; right: 10px; }
 .keter-card { border-top: none; border-radius: 0 0 4px 4px; margin-top: 0; }
@@ -3221,7 +3229,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
 
 /* TODAY — the same box as the Perek Shirah banner below it, because it is the
    same kind of thing: one line of what today asks, with a way in. */
-#today-block { position:relative; margin:14px 0 0; padding:9px 14px 8px; border:1px solid var(--border-strong);
+#today-block { position:relative; margin:16px 0 0; padding:9px 14px 8px;   /* the stack gap */ border:1px solid var(--border-strong);
   border-left:3px solid var(--gold); border-radius:4px; background:var(--bg-card); }
 /* The ⓘ sits in the corner as it does on every card. There is no expand arrow
    here to clear, so it comes in to the block's own padding rather than the
@@ -3465,7 +3473,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    with the gold rule down its left that the ladder uses for the thing being
    asked for, because for a newcomer this is that thing. */
 .companion {
-  position:relative; margin:14px 0 0; padding:12px 14px 10px;
+  position:relative; margin:16px 0 0; padding:12px 14px 10px;   /* the stack gap */
   border:1px solid var(--border-strong); border-left:2px solid var(--gold);
   border-radius:8px; background:var(--card, #fdfbf6);
 }
@@ -4626,7 +4634,7 @@ content: ''; float: right; width: 30px; height: 1em;
   </div>
 
   <!-- FIRST-VISIT WELCOME HINT (dismissible; remembered in localStorage) -->
-  <div id="kot-welcome" style="display:none; margin:12px 0 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); line-height:1.7; position:relative;">
+  <div id="kot-welcome" style="display:none; margin:16px 0 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); line-height:1.7; position:relative;">
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:calc(18px * var(--ts, 1)); cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> <strong>Begin with the now.</strong> The clock at the top is Keter's — the moment you are standing in. Contemplate that, and then come down through the ten <strong>meditations</strong>, Keter to Malchut, one to a card: each is the face that card wears today. Then say the <strong>prayer</strong> this hour is asking for, then take its <strong>reading</strong>, and after that whatever is still outstanding from earlier in the day.
     <strong>Today's Ladder</strong> asks for one at a time, in that order, for the Sefirah whose hour it is.
