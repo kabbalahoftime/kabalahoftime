@@ -3227,6 +3227,7 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    here to clear, so it comes in to the block's own padding rather than the
    32px the cards leave beside theirs. */
 #today-block > .cycle-info-btn.corner { top:8px; right:12px; }
+#companion > .cycle-info-btn.corner { top:8px; right:12px; }
 /* The date bar has no expand arrow either, and its own padding is 18px. */
 .date-bar > .cycle-info-btn.corner { top:8px; right:10px; }
 .today-label { font-family:'Cinzel',serif; font-size:calc(10.5px * var(--ts, 1)); letter-spacing:2.5px;
@@ -3472,8 +3473,16 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
    true: a small gold tag rather than a banner, in the corner, said once.
    It lies over the control that opens the card, so it lets taps through
    rather than punching a dead spot in the middle of it. */
+/* Left of the ⓘ, not under it. The corner belongs to the ⓘ on every block
+   that has one, so this tag — which ages out, where the ⓘ does not — is the
+   one that moves aside.
+   The offset has to grow with the glyph: the corner ⓘ is sized
+   calc(21px * var(--ts)), so a fixed clearance that works at the normal text
+   size puts the tag back under it at the largest. 33px is the ⓘ's own 12px
+   from the edge plus a gap; the rest tracks the glyph. */
 .comp-new {
-  position:absolute; top:10px; right:12px; pointer-events:none; z-index:1;
+  position:absolute; top:10px; right:calc(33px + 21px * var(--ts, 1));
+  pointer-events:none; z-index:1;
   font-family:'Cinzel',serif; font-size:calc(9px * var(--ts, 1));
   letter-spacing:2px; text-transform:uppercase; color:var(--gold);
   border:1px solid var(--gold); border-radius:3px; padding:2px 6px; line-height:1;
@@ -19377,6 +19386,51 @@ content: ''; float: right; width: 30px; height: 1em;
         '365&ndash;369 of the one still finishing.',
       meta: 'The civil date &middot; the Hebrew date &middot; the Kabbalah of Time year of 364'
     },
+    // The companion stands between two blocks that each have an ⓘ — the date
+    // bar above and the Ladder below — so without one of its own a reader
+    // meets explained, unexplained, explained, and reads the gap as an
+    // oversight. It is also the block whose filing is least guessable:
+    // nothing on the face says why today's entry is Book 4's and not Book
+    // 1's, and that rule is the only thing about it a reader cannot work out
+    // by opening it.
+    companion: {
+      title: 'A Daily Companion',
+      beginner:
+        'One short reading a day, for the same day the rest of the page is on. ' +
+        '</p><p>Tap the heading to open it, and again to shut it. The arrows at the top ' +
+        'move a day at a time, and a line appears to bring you back to today once you have ' +
+        'stepped away. </p><p>Inside: which day of the 364 it is and which week, what the ' +
+        'reading is called, the reading itself, and often a <strong>Practice</strong> ' +
+        '&mdash; one thing to do with it &mdash; and a line about tomorrow. </p><p>At the ' +
+        'foot is a link to the full piece the entry was drawn from. This is the short form; ' +
+        'that is the long one.',
+      main:
+        'The seven Kabbalah of Time books, taken a day at a time. </p><p>Each book has an ' +
+        'entry for each of the fifty-two weeks. Seven books times fifty-two weeks is 364 ' +
+        '&mdash; the year, with a day to each entry. </p><p>The day chooses the book the ' +
+        'way Binah does. Day 1 is Book 1&rsquo;s reading for week 1, day 2 is Book ' +
+        '2&rsquo;s for that same week, and so on through the seven; day 8 opens week 2 with ' +
+        'Book 1 again. So one week is read across seven mornings, a different book each ' +
+        'morning &mdash; and the week the entry names is always the week the cards are ' +
+        'on. </p><p>Each entry is a summary of that book&rsquo;s own writing for that week, ' +
+        'which is a post of its own: 364 of them, one to each day. The link at the foot ' +
+        'goes to it.',
+      advanced:
+        'Every entry is written rather than assembled. Each is a summary of the week&rsquo;s ' +
+        'post for that book &mdash; what the writing teaches, not a list of what the readings ' +
+        'are &mdash; and each is checked back against its own post, where a name or a number ' +
+        'the post does not carry counts as a fault. </p><p><strong>Book 7</strong> is short ' +
+        'on purpose. It is the gathering: the other six books&rsquo; verses rearranged into ' +
+        'one song, with no commentary of its own, so there is no teaching to summarise. Its ' +
+        'entries say what the braid makes, and stop. </p><p>The text is not in this page. It ' +
+        'is a third of a megabyte, and it is fetched after the page has drawn &mdash; which ' +
+        'is why the card holds its place and fills a moment later, rather than arriving late ' +
+        'and pushing everything down. </p><p>The week is reckoned as (day &minus; 1) ' +
+        '&divide; 7 + 1. That is the same week the page prints on all 364 days and on the 28 ' +
+        'intercalated ones, so the companion can never stand above the cards claiming a ' +
+        'different week from theirs.',
+      meta: '364 entries &middot; seven books &times; fifty-two weeks &middot; one post to each day'
+    },
     ladder: {
       title: 'Today’s Ladder',
       beginner:
@@ -20360,9 +20414,11 @@ content: ''; float: right; width: 30px; height: 1em;
       '.keter-card .pane-body[data-pane="maalot"] .keter-section:first-of-type');
     if (keterLM && !keterLM.querySelector(':scope > .cycle-info-btn'))
       keterLM.insertAdjacentHTML('afterbegin', btn('keterlm'));
-    // The date and the Ladder are not cards, so they are named rather than
-    // taken from the card list.
-    [['.date-bar', 'date'], ['#today-block', 'ladder'],
+    // The date, the companion and the Ladder are not cards, so they are named
+    // rather than taken from the card list. They are also the first three
+    // things on the page, in this order, and all three carry one now — the
+    // companion was the gap in the middle.
+    [['.date-bar', 'date'], ['#companion', 'companion'], ['#today-block', 'ladder'],
      ['.keter-title-row', 'keterdaat']].forEach(([sel, key]) => {
       const host = document.querySelector(sel);
       if (host && !host.querySelector(':scope > .cycle-info-btn'))
