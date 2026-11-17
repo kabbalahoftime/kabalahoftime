@@ -4291,9 +4291,108 @@ content: ''; float: right; width: 30px; height: 1em;
     <button class="date-nav-btn" onclick="changeDay(1)">›</button>
   </div>
 
+  <!-- THE COMPANION — one of the seven KoT Books, for one week, each day.
+       The day chooses the book exactly as Binah does: day 1 is Book 1's
+       entry for week 1, day 2 is Book 2's for week 1, day 8 is Book 1's for
+       week 2, day 225 is Book 1's for week 33. Seven books times fifty-two
+       weeks is 364, which is the year — and 364 posts on the blog, one to
+       each day, which is where each entry links.
+       It sits above Today's Ladder, and so above everything, because of who
+       it is for: someone who has opened the page and does not yet know what
+       a Sefirah is. The ladder asks that reader to do one of four things
+       before anything has told them why. This says in sentences what one of
+       the day's readings is, and it is shut, so a reader who already knows
+       scrolls past a single line.
+       It stood below the ladder and below the welcome box until then.
+       Its text lives in companion-days.json rather than here — a third of a
+       megabyte does not belong in a page that must parse before anything
+       draws. The card holds its place while the file is in flight and fills
+       when it lands, so nothing jumps. Each entry is a written summary of
+       that book's own post for that week, built by
+       tools/build_companion_days.py from docs/companion-summaries.md. The
+       builder can still transcribe the app's own weekly table instead, which
+       is what held the shelf up while the summaries were being written, and
+       no day falls back to it now. -->
+  <!-- This section used to say the entries were built from the weekly table
+       and that nothing in it was written by hand. That was true of the
+       transcriptions and is not true of a summary, so both places that said
+       it — here and the line at the foot of the panel — say what these are
+       instead. -->
+  <section id="companion" class="companion" style="display:none;" aria-labelledby="comp-open">
+    <div class="comp-new" aria-hidden="true">New</div>
+    <h2 class="comp-h"><button type="button" id="comp-open" class="comp-open"
+        aria-expanded="false" aria-controls="comp-panel" onclick="toggleCompanion()">
+      <span class="comp-head">A Daily Companion</span>
+      <span class="comp-peek" id="comp-peek"></span>
+      <span class="comp-chev" aria-hidden="true">&#9662;</span>
+    </button></h2>
+    <div class="comp-panel" id="comp-panel" hidden>
+      <!-- The day, between two arrows, at the top — the same shape as the
+           date bar at the head of the page, because it is the same gesture.
+           Moving a day at a time is the companion's main motion and it was
+           at the foot, under the whole entry, where a reader had to finish
+           reading to find it. -->
+      <nav class="comp-nav" aria-label="Move through the companion">
+        <button type="button" class="comp-step" id="comp-prev"
+                onclick="companionStep(-1)" aria-label="The day before">&#8249;</button>
+        <div class="comp-meta" id="comp-meta"></div>
+        <button type="button" class="comp-step" id="comp-next"
+                onclick="companionStep(1)" aria-label="The day after">&#8250;</button>
+      </nav>
+      <h3 class="comp-title" id="comp-title"></h3>
+      <div class="comp-body" id="comp-body"></div>
+      <div class="comp-practice" id="comp-practice"></div>
+      <div class="comp-teaser" id="comp-teaser"></div>
+      <!-- Where the digest came from. Each entry is one book's reading for
+           one week, and the week's writing for that book is a post of its
+           own — 364 of them for 364 days. The entry is the short form; this
+           is the long one, and it is named rather than hinted at. -->
+      <div class="comp-nav-mid">
+        <a class="comp-source" id="comp-source" href="#" target="_blank"
+           rel="noopener" style="display:none;"></a>
+      </div>
+      <!-- Back to the day the rest of the page is on, shown only once the
+           reader has stepped away from it. There is no "start at day 1" any
+           more and no own-pace mode: an entry says which week it is, and a
+           companion drifting a few weeks behind the cards would be telling
+           the reader it was week 5 while every card said week 8. Stepping is
+           browsing now, and it lasts as long as the visit. -->
+      <div class="comp-nav-mid">
+        <button type="button" class="comp-jump" id="comp-first"
+                onclick="companionHome()">Back to today</button>
+      </div>
+      <!-- The PDF link stood here and stays out, by decision rather than for
+           want of a PDF. It first went because the only companion text at the
+           root was the old one, which carries an invented motto, a wrong
+           verse and routes a reader could not follow. There is a right one
+           now — daily-companion.pdf, set from these same 364 entries — and it
+           belongs on the shelf in the KoT Books pane, with every other
+           volume, rather than here. This panel is the one day a reader is on;
+           a 494-page download is the whole year, and that is a different
+           errand. -->
+      <!-- Where these came from, said so a stranger can follow it. The line
+           here used to read "assembled from this app's own weekly table...
+           nothing in it is written by hand", which described the companion
+           while its entries were transcriptions of the table above the cards.
+           They are all written summaries of the week's posts now, so the line
+           was both opaque to anyone who had not read the source and no longer
+           true. It names the method plainly instead, and points at the post,
+           which is the only claim a reader can check for themselves. -->
+      <div class="comp-foot">
+        <p class="comp-made">Summarized and assembled with AI. Each of the 364
+          entries is the short form of one post, and links to the post it came
+          from.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- TODAY'S PATH — the one question the page did not answer above the fold:
-       what now. The date and the position are in the bar directly above, so
+       what now. The date and the position are given in the date bar, so
        this adds only the step that is next and a way straight to it.
+       It used to say "the bar directly above", which stopped being true when
+       the companion moved up between the two. Three sentences said where this
+       block sits and all three had to be corrected in one go; they say what
+       it does now instead, which no later move can falsify.
        One line, because the thirty are one path and not two counts: the
        waning does not begin until the climb is whole, so at any moment there
        is exactly one step being asked for. Two lines said otherwise, and
@@ -4528,105 +4627,13 @@ content: ''; float: right; width: 30px; height: 1em;
   <div id="kot-welcome" style="display:none; margin:12px 0 0; padding:12px 34px 12px 14px; border:1px solid var(--gold); border-radius:8px; background:#fdf9f2; font-size:calc(13px * var(--ts, 1)); color:var(--ink-mid); line-height:1.7; position:relative;">
     <button class="tap-grow" onclick="dismissWelcome()" aria-label="Dismiss" style="position:absolute; top:6px; right:8px; background:none; border:none; color:var(--gold); font-size:calc(18px * var(--ts, 1)); cursor:pointer; line-height:1;">×</button>
     <strong style="color:var(--gold);">Welcome!</strong> <strong>Begin with the now.</strong> The clock at the top is Keter's — the moment you are standing in. Contemplate that, and then come down through the ten <strong>meditations</strong>, Keter to Malchut, one to a card: each is the face that card wears today. Then say the <strong>prayer</strong> this hour is asking for, then take its <strong>reading</strong>, and after that whatever is still outstanding from earlier in the day.
-    <strong>Today's Ladder</strong>, under the date, asks for one at a time, in that order, for the Sefirah whose hour it is.
+    <strong>Today's Ladder</strong> asks for one at a time, in that order, for the Sefirah whose hour it is.
     Every card below holds one of today's readings — <strong>tap a card</strong> to open its full sources, and tap the <strong>ⓘ</strong> beside a cycle's name to learn what it means.
     Tap a small gold <strong>מעלה</strong> tag when you have learned it — fifteen of them climb from Malchut to Keter and fill tonight's moon; when it becomes the sun, come back down from Keter to Malchut through the <strong>מיעוט</strong> tags inside the cards. Today's Ladder asks for whichever one belongs to the hour you are in; climbing them in order is a practice of its own.
     Each Sefirah also holds one of the day's ten <strong>prayers</strong> — tap it when you have prayed, and watch the heart in Today's Ladder fill.
     And the day's fourth thing is the <strong>deed</strong>: each Sefirah carries a fund at the foot of its Menorah, and those are read the other way, Malchut up to Keter — a deed starts in the world where things are done.
     <a href="#" onclick="event.preventDefault(); openTodaysPath()" style="color:var(--gold); font-weight:600;">Tap the moon 🌙 above anytime to see Today's Path.</a>
   </div>
-
-  <!-- THE COMPANION — one of the seven KoT Books, for one week, each day.
-       The day chooses the book exactly as Binah does: day 1 is Book 1's
-       entry for week 1, day 2 is Book 2's for week 1, day 8 is Book 1's for
-       week 2, day 225 is Book 1's for week 33. Seven books times fifty-two
-       weeks is 364, which is the year — and 364 posts on the blog, one to
-       each day, which is where each entry links.
-       It sits above the cards because of who it is for: someone who has
-       opened the page and does not yet know what a Sefirah is. The cards
-       set the day's readings out in full; this says in sentences what one of
-       them is.
-       Its text lives in companion-days.json rather than here — a third of a
-       megabyte does not belong in a page that must parse before anything
-       draws. The card holds its place while the file is in flight and fills
-       when it lands, so nothing jumps. Each entry is a written summary of
-       that book's own post for that week, built by
-       tools/build_companion_days.py from docs/companion-summaries.md. The
-       builder can still transcribe the app's own weekly table instead, which
-       is what held the shelf up while the summaries were being written, and
-       no day falls back to it now. -->
-  <!-- This section used to say the entries were built from the weekly table
-       and that nothing in it was written by hand. That was true of the
-       transcriptions and is not true of a summary, so both places that said
-       it — here and the line at the foot of the panel — say what these are
-       instead. -->
-  <section id="companion" class="companion" style="display:none;" aria-labelledby="comp-open">
-    <div class="comp-new" aria-hidden="true">New</div>
-    <h2 class="comp-h"><button type="button" id="comp-open" class="comp-open"
-        aria-expanded="false" aria-controls="comp-panel" onclick="toggleCompanion()">
-      <span class="comp-head">A Daily Companion</span>
-      <span class="comp-peek" id="comp-peek"></span>
-      <span class="comp-chev" aria-hidden="true">&#9662;</span>
-    </button></h2>
-    <div class="comp-panel" id="comp-panel" hidden>
-      <!-- The day, between two arrows, at the top — the same shape as the
-           date bar at the head of the page, because it is the same gesture.
-           Moving a day at a time is the companion's main motion and it was
-           at the foot, under the whole entry, where a reader had to finish
-           reading to find it. -->
-      <nav class="comp-nav" aria-label="Move through the companion">
-        <button type="button" class="comp-step" id="comp-prev"
-                onclick="companionStep(-1)" aria-label="The day before">&#8249;</button>
-        <div class="comp-meta" id="comp-meta"></div>
-        <button type="button" class="comp-step" id="comp-next"
-                onclick="companionStep(1)" aria-label="The day after">&#8250;</button>
-      </nav>
-      <h3 class="comp-title" id="comp-title"></h3>
-      <div class="comp-body" id="comp-body"></div>
-      <div class="comp-practice" id="comp-practice"></div>
-      <div class="comp-teaser" id="comp-teaser"></div>
-      <!-- Where the digest came from. Each entry is one book's reading for
-           one week, and the week's writing for that book is a post of its
-           own — 364 of them for 364 days. The entry is the short form; this
-           is the long one, and it is named rather than hinted at. -->
-      <div class="comp-nav-mid">
-        <a class="comp-source" id="comp-source" href="#" target="_blank"
-           rel="noopener" style="display:none;"></a>
-      </div>
-      <!-- Back to the day the rest of the page is on, shown only once the
-           reader has stepped away from it. There is no "start at day 1" any
-           more and no own-pace mode: an entry says which week it is, and a
-           companion drifting a few weeks behind the cards would be telling
-           the reader it was week 5 while every card said week 8. Stepping is
-           browsing now, and it lasts as long as the visit. -->
-      <div class="comp-nav-mid">
-        <button type="button" class="comp-jump" id="comp-first"
-                onclick="companionHome()">Back to today</button>
-      </div>
-      <!-- The PDF link stood here and stays out, by decision rather than for
-           want of a PDF. It first went because the only companion text at the
-           root was the old one, which carries an invented motto, a wrong
-           verse and routes a reader could not follow. There is a right one
-           now — daily-companion.pdf, set from these same 364 entries — and it
-           belongs on the shelf in the KoT Books pane, with every other
-           volume, rather than here. This panel is the one day a reader is on;
-           a 494-page download is the whole year, and that is a different
-           errand. -->
-      <!-- Where these came from, said so a stranger can follow it. The line
-           here used to read "assembled from this app's own weekly table...
-           nothing in it is written by hand", which described the companion
-           while its entries were transcriptions of the table above the cards.
-           They are all written summaries of the week's posts now, so the line
-           was both opaque to anyone who had not read the source and no longer
-           true. It names the method plainly instead, and points at the post,
-           which is the only claim a reader can check for themselves. -->
-      <div class="comp-foot">
-        <p class="comp-made">Summarized and assembled with AI. Each of the 364
-          entries is the short form of one post, and links to the post it came
-          from.</p>
-      </div>
-    </div>
-  </section>
 
   <!-- THE THIRTY-FIRST — the seal of a completed path. Hidden until the day's
        thirty steps are all marked; updateMaalotMoon shows it. -->
@@ -32188,7 +32195,7 @@ content: ''; float: right; width: 30px; height: 1em;
 
   <p><strong>What you&rsquo;re looking at.</strong> Today&rsquo;s date maps onto several nested cycles at once &mdash; a day, a week, a month, a season, a year &mdash; each drawn from a different Kabbalistic or textual structure. Every card below is one of those cycles: it opens with the structure that defines it, and carries beneath it the text that structure measures. Tap a card to open it; tap the <strong>&#9432;</strong> at its top-right corner to learn what its cycle means.</p>
 
-  <p><strong>Where to start.</strong> With the now. The clock at the top of the page is Keter&rsquo;s &mdash; the moment you are standing in. Contemplate that, then come down through the ten <strong>meditations</strong>, Keter to Malchut. Then the <strong>prayer</strong> this hour asks for, then its <strong>reading</strong>, then whatever is still outstanding from earlier. The <strong>Today&rsquo;s Ladder</strong> block, just under the date, asks for one at a time and goes straight to it &mdash; the face, then the prayer, then the step, then the deed, all of them the Sefirah&rsquo;s whose hour it is. Mark one and the next comes up. That is enough to begin; everything below is here for when you want it.</p>
+  <p><strong>Where to start.</strong> With the now. The clock at the top of the page is Keter&rsquo;s &mdash; the moment you are standing in. Contemplate that, then come down through the ten <strong>meditations</strong>, Keter to Malchut. Then the <strong>prayer</strong> this hour asks for, then its <strong>reading</strong>, then whatever is still outstanding from earlier. The <strong>Today&rsquo;s Ladder</strong> block asks for one at a time and goes straight to it &mdash; the face, then the prayer, then the step, then the deed, all of them the Sefirah&rsquo;s whose hour it is. Mark one and the next comes up. That is enough to begin; everything below is here for when you want it.</p>
 
   <h3 class="hg-h">The marks</h3>
   <p>Almost every reading wears a mark that says what it is, and the marks are what the counts are kept by. A few readings wear none &mdash; the week&rsquo;s seven books in Malchut, the Zohar that stands with Thursday&rsquo;s Ramchal &mdash; and those are simply read.</p>

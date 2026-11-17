@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v370**; the next is v371.
+nobody. Currently **v371**; the next is v372.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -632,6 +632,23 @@ four is asked for turns with the hour.
 Two sentences have to stay honest with this — the welcome box and the Help
 Guide's **Where to start**. Both have twice said the ladder "names all four
 and goes straight to each", and twice been made false by a change here.
+
+**Three said where the block sits, and none does now.** The welcome box and
+the Help Guide both placed it "under the date", and the comment over
+`#today-block` said the date was "in the bar directly above" — all three went
+false the moment the companion moved up between the two. The locators are
+gone rather than corrected: a sentence that says what the block *does* cannot
+be falsified by moving it, and these have now rotted three times between
+them. Do not put a position back into any of them.
+
+### The companion comes first
+
+`#companion` sits between the date bar and `#today-block`, above everything
+else on the page. It is for the reader who has just arrived and does not know
+what a Sefirah is, and the ladder asks that reader to do one of four things
+before anything has explained why. It is shut by default and about 117px
+tall, so a reader who already knows scrolls past one line and a two-line
+peek. It stood below the ladder and below the welcome box until then.
 
 ### The acrostic psalms are not one verse a letter
 
