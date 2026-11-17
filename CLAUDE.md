@@ -629,9 +629,17 @@ Those chips are the only way to reach the other three now.
 `applyLadderNext` also runs on the **30-second beat**, because which of the
 four is asked for turns with the hour.
 
-Two sentences have to stay honest with this — the welcome box and the Help
-Guide's **Where to start**. Both have twice said the ladder "names all four
-and goes straight to each", and twice been made false by a change here.
+**Three** places have to stay honest with this, not two: the welcome box, the
+Help Guide's **Where to start**, and the ladder's own **ⓘ** (`CYCLE_INFO.ladder`).
+The first two have twice said the ladder "names all four and goes straight to
+each", and twice been made false by a change here.
+
+The ⓘ was the one nobody listed, so nobody checked it, and it rotted longest.
+Its beginner and main depths still described **four lines** with a gold rule
+down the lit one, and said that line carried **a verb** — a design removed
+twice over, the fourth row when the block became one line, and the verbs in
+this file's own "No verb" note above. It is rewritten around the four
+movements and their directions. **Check all three after any change here.**
 
 **Three said where the block sits, and none does now.** The welcome box and
 the Help Guide both placed it "under the date", and the comment over
