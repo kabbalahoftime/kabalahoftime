@@ -25499,7 +25499,12 @@ content: ''; float: right; width: 30px; height: 1em;
       // 72-day cycle is three words and the three numbers nest without a
       // remainder. The day's own number in the seventy-two is not here any
       // more — it is in the tag, which is where Binah keeps its own.
-      : `Watch <strong>${bkMishmarNum}</strong> &middot; Word <strong>${bkIdx + 1}</strong> &middot; Cycle <strong>${ayinBetInfo.cycle}</strong><br>` +
+      // Mishmar, not Watch. They are one thing, and this line was the only
+      // place in the whole Chesed reckoning that used the English: the
+      // microcosm branch, the row below, the detail and the link to I Divrei
+      // HaYamim 24 all say Mishmar. One word for one thing, and it is the
+      // word the source uses.
+      : `Mishmar <strong>${bkMishmarNum}</strong> &middot; Word <strong>${bkIdx + 1}</strong> &middot; Cycle <strong>${ayinBetInfo.cycle}</strong><br>` +
       `<strong>${ayinBetInfo.name}</strong>` + _chesedTagRow +
         // Mishmar first, then Birkat Kohanim: each row now follows the number
         // it explains. The counts above read Watch · Word · Cycle, and these two

@@ -760,7 +760,7 @@ using it: both led with the absolute day and left the nesting unsaid.
 
 ```
 Binah     Day 6    · Week 2  · Cycle 2    >>  Cycle 2  · Day 13 of 49
-Chesed    Watch 14 · Word 3  · Cycle 1    >>  Cycle 1  · Name 62 of 72
+Chesed    Mishmar 14 · Word 3 · Cycle 1   >>  Cycle 1  · Name 62 of 72
 Gevurah   Letter 16 · Face 3 · Season 1   >>  Season 1 · Day 62 of 91
 Netzach   Day 7    · Level 3 · Cycle 2    >>  Cycle 2  · Day 27 of 41
 ```
@@ -808,7 +808,7 @@ to label.
 
 **The two rows under the face follow their numbers**, Mishmar then Birkat
 Kohanim. They ran the other way — Birkat Kohanim, which explains *Word*,
-above Mishmar, which explains *Watch* — the reverse of the Watch · Word ·
+above Mishmar, which explains *Watch* — the reverse of the Mishmar · Word ·
 Cycle line they belong to. The `<br>` belongs to the Mishmar row, so a day
 without a watch cannot leave Birkat Kohanim opening on a stray break.
 
@@ -824,9 +824,15 @@ means. Three numbers and nothing else, as Binah's line is. Taking them off
 also stopped the line wrapping, which put the tag at 81px — Binah's own.
 
 The absolute day left both faces and lives only in the tag, as Binah's
-does. And "Mishmar N of 24" on Chesed's face lost its number — Watch and
-Mishmar are one thing under two names and it was being said twice; the
-detail below still states the count in full.
+does. And "Mishmar N of 24" on Chesed's face lost its number — Mishmar is one
+thing and the count was being said twice; the detail below still states it
+in full.
+
+**One word for it, and the word is Mishmar.** The face line said *Watch*
+and everything else on the card said *Mishmar* — the microcosm branch, the
+row under the face, the detail, and the link to I Divrei HaYamim 24, which
+is where the twenty-four come from. The face was the only English in the
+reckoning. Do not reintroduce *Watch*.
 
 ### Where the day falls, in a tag
 
