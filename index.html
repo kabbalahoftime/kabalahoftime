@@ -25482,7 +25482,7 @@ content: ''; float: right; width: 30px; height: 1em;
       ? `<span class="tag highlight">Microcosm \u00b7 Day ${chesedMic.day} of 28</span>`
       : ayinBetInfo.isBreak
         ? `<span class="tag highlight">A silent day</span>`
-        : `<span class="tag highlight">Cycle ${ayinBetInfo.cycle} \u00b7 Day ${ayinBetInfo.nameNum} of 72</span>`
+        : `<span class="tag highlight">Cycle ${ayinBetInfo.cycle} \u00b7 Name ${ayinBetInfo.nameNum} of 72</span>`
       ) + `</div>`;
     document.getElementById('chesed-main').innerHTML = chesedMic
       ? (chesedMic.silence
@@ -25501,7 +25501,9 @@ content: ''; float: right; width: 30px; height: 1em;
       // more — it is in the tag, which is where Binah keeps its own.
       : `Watch <strong>${bkMishmarNum}</strong> &middot; Word <strong>${bkIdx + 1}</strong> &middot; Cycle <strong>${ayinBetInfo.cycle}</strong><br>` +
       `<strong>${ayinBetInfo.name}</strong>` + _chesedTagRow +
-        `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>` +
+        // Mishmar first, then Birkat Kohanim: each row now follows the number
+        // it explains. The counts above read Watch · Word · Cycle, and these two
+        // ran Word then Watch — the reverse of the line they belong to.
         // ── THE WATCH OF THE DAY ──
         // The twenty-four mishmarot are the families who brought the Tamid,
         // and each 24-day word-period of Birkat Kohanim carries all of them,
@@ -25520,10 +25522,14 @@ content: ''; float: right; width: 30px; height: 1em;
           // thing under two names, and it was being said twice. The family's
           // own name is what this line is for. The count keeps its "of 24"
           // in the detail below, which states it in full.
-          ? `<br><span style="font-size:0.88em;opacity:0.72">Mishmar: ` +
+          // The <br> belongs to this row rather than to the one after it, so
+          // that a day without a watch cannot leave Birkat Kohanim opening on
+          // a stray break.
+          ? `<span style="font-size:0.88em;opacity:0.72">Mishmar: ` +
             `<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</bdi>` +
-            ` — ${bkMishmar.en}</span>`
-          : '');
+            ` — ${bkMishmar.en}</span><br>`
+          : '') +
+        `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>`;
     document.getElementById('chesed-sub').innerHTML = '';
     document.getElementById('chesed-text-label').innerHTML =
       `✦ ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} <span class="maalah">מעלה י׳</span>`;
@@ -25562,7 +25568,7 @@ content: ''; float: right; width: 30px; height: 1em;
        <div class="detail-row"><span class="detail-label">Lobe of the Lung:</span><span class="detail-value">${_lobe
          ? `the ${_lobe.nth} of the ${_lobe.side} — <strong>${_lobe.book}</strong> <span style="font-size:1.05em">${_lobe.he}</span>`
          : `a fissure — the parting between the ${CHESED_LOBES[ayinBetInfo.afterCycle - 1].book} lobe and the ${CHESED_LOBES[ayinBetInfo.afterCycle].book}`}</span></div>
-       ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Cycle ${ayinBetInfo.cycle} of 5 · Day ${ayinBetInfo.dayInCycle} of 72</div>`}
+       ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Cycle ${ayinBetInfo.cycle} of 5 · Name ${ayinBetInfo.dayInCycle} of 72</div>`}
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Birkat Kohanim · this cycle: <span style="font-size:1.15em;color:var(--ink)">${bkWords.map((w, i) => i === bkIdx ? `<span style="color:var(--gold)">${w}</span>` : w).join(' ')}</span> <span style="font-size:0.9em">· one word each 24 days</span></div>`}
        ${ayinBetInfo.isBreak ? '' : `<div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Mishmar ${bkMishmarNum} of 24: <span style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</span> — ${bkMishmar.en} · <a href="https://www.sefaria.org/I_Chronicles.24" target="_blank" style="color:var(--gold)">I Divrei HaYamim 24</a></div>`}
        <div style="font-size:0.82em;color:var(--ink-mid);margin-top:2px;padding-left:2px;">Shemot 14:19–21 · חסד = 72</div>

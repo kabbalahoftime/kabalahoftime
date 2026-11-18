@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v372**; the next is v373.
+nobody. Currently **v373**; the next is v374.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -760,7 +760,7 @@ using it: both led with the absolute day and left the nesting unsaid.
 
 ```
 Binah     Day 6    · Week 2  · Cycle 2    >>  Cycle 2  · Day 13 of 49
-Chesed    Watch 14 · Word 3  · Cycle 1    >>  Cycle 1  · Day 62 of 72
+Chesed    Watch 14 · Word 3  · Cycle 1    >>  Cycle 1  · Name 62 of 72
 Gevurah   Letter 16 · Face 3 · Season 1   >>  Season 1 · Day 62 of 91
 Netzach   Day 7    · Level 3 · Cycle 2    >>  Cycle 2  · Day 27 of 41
 ```
@@ -799,6 +799,19 @@ of Birkat Kohanim holds exactly those 24 days, and `BIRKAT_KOHANIM_CYCLES`
 gives three words to a cycle — so 24 × 3 = 72 exactly. `bkIdx` is the word
 in the cycle (0–2) and `bkMishmarNum` the watch in the word (1–24).
 
+**The seventy-two are Names, not days.** The tag and the detail both said
+*Day N of 72*, so the day's own Name sat bare on its line with its number
+named nowhere — on a card titled *Shem Ayin-Bet* that is the one count that
+matters. Both say **Name N of 72** now. `nameNum` and `dayInCycle` are the
+same field, returned twice under two names, so there is only ever one number
+to label.
+
+**The two rows under the face follow their numbers**, Mishmar then Birkat
+Kohanim. They ran the other way — Birkat Kohanim, which explains *Word*,
+above Mishmar, which explains *Watch* — the reverse of the Watch · Word ·
+Cycle line they belong to. The `<br>` belongs to the Mishmar row, so a day
+without a watch cannot leave Birkat Kohanim opening on a stray break.
+
 **Gevurah's** face is 22 letters and a season is four of them, so
 `inQuarter` inside `quarter` inside `season`. The **break-days keep the
 plain day**: the heart and the two kidneys have neither letter nor face,
@@ -834,7 +847,7 @@ wherever it stands.
 
 ```
 Binah     Cycle 2  · Day 13 of 49
-Chesed    Cycle 1  · Day 62 of 72     Microcosm · Day N of 28
+Chesed    Cycle 1  · Name 62 of 72    Microcosm · Day N of 28
 Gevurah   Season 1 · Day 62 of 91     Microcosm · Day N of 28
 Netzach   Cycle 2  · Day 27 of 41
 ```
