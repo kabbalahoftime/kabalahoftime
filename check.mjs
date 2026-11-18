@@ -1145,9 +1145,14 @@ async function checkInBrowser(chromium) {
       // inside .sefirah-main-text, so main() still reaches it; these two read
       // it there rather than from the old wording.
       { lens: 3, name: 'Chesed',
-        // "... Cycle 1  <name>  Cycle 1 · Day 62 of 72 ..." — the name is the
-        // one token before the tag, and the day is in it.
-        card: () => pair(m(main(2), /(\S+) Cycle \d+ · Day (\d+) of 72/), 1, 2),
+        // "... Cycle 1  <name>  Cycle 1 · Name 62 of 72 ..." — the Name is the
+        // one token before the tag, and its number is in it.
+        // The tag said "Day N of 72" until the card was made to call the
+        // seventy-two what they are, which is Names. This probe is the thing
+        // that caught the rename, so it is matched to the new wording rather
+        // than widened to accept both: a probe that accepts the old word too
+        // would not catch the next rename.
+        card: () => pair(m(main(2), /(\S+) Cycle \d+ · Name (\d+) of 72/), 1, 2),
         cell: s => pair(m(s.cell, /^(\S+) · (\d+) of 72$/), 1, 2) },
       { lens: 4, name: 'Gevurah',
         // The face no longer prints the season's name at all — it is in the
