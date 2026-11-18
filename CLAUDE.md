@@ -889,9 +889,15 @@ what the turn would have told them, and the ⓘ still explains the rule in
 full at the advanced depth. The turn line said a third time what two lines
 above it were already saying.
 
-**The break-days keep the Chaya.** They read *Eagle's Heart*, *Eagle's Right
-Kidney*, *Eagle's Left Kidney* — not *The Heart*, which is what they said
-until a reader noticed that today's card never mentioned the creature.
+**A break-day's face is the Chaya itself, bare: *Eagle*.** The day has no
+face, and what is left when the face goes is the creature whose season it
+still is.
+
+Two wrong answers came first. It said **The Left Kidney**, which named no
+creature at all — so the one day a reader happened to look at was the one
+day the card never mentioned the Chaya. Then **Eagle's Left Kidney**, which
+named it but put a kidney in the possessive that belongs to a face. A kidney
+is not a face. Both were mine; the author rejected the second in one line.
 
 `_gevFace` returned for the heart and the kidneys **above** its call to
 `seasonFaceOf`, so those three days never reached the possessive that the
@@ -904,13 +910,20 @@ creatures for one day.
 The letter and the face **do** stop on a joint; that is what a joint is. The
 season does not. The day is still inside the Eagle's ninety-one, and the tag
 beside it says *Season 1*, so dropping the Eagle was an over-correction.
-Read across the seam the line is now continuous: *Eagle's Face of the Ox*,
-*Eagle's Left Kidney*, *Eagle's Face of the Lion*.
+Read across the seam: *Eagle's Face of the Ox*, **Eagle**, *Eagle's Face of
+the Lion*.
 
-The possessive replaces the article the three used to carry. *Heart* alone
-would read as a part of a body rather than as the day — which is why it had
-one — and *Eagle's Heart* reads as the day. Man needs no article either; the
-possessive supplies it, as it already did in *Man's Face of the Ox*.
+**Which joint it is belongs in the detail**, and was there all along —
+`_placeLine`'s own note states the rule it was already keeping: *the face
+carries only what the day is, and where it falls is read inside*. Two rows
+say it, and the pane machinery files them out of `#gevurah-detail`, so look
+for them in the panes rather than there:
+
+```
+Within the 91:  Left Kidney — 22 + 1 + 22 + 1 + 22 + 1 + 22 …
+This day:       Left Kidney — between faces 3 and 4
+                The Heart of Fall — near Rachel Imeinu's yahrzeit
+```
 
 The leap microcosm shares `_gevFace`, so its twelve break-days were corrected
 by the same change. Swept a full year: all twelve of the season break-days
