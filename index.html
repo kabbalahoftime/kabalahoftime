@@ -25709,10 +25709,26 @@ content: ''; float: right; width: 30px; height: 1em;
     // day, since chapters 2, 3 and 4 set פ before ע and the plain alef-bet does
     // not.
     const _gevFace = (pl) => {
-      if (pl.heart)  return { en: 'The Heart', he: 'לֵב' };
+      // The season's own Chaya, read straight from the season. seasonFaceOf
+      // returns null without a quarter and the break-days have none, so they
+      // used to return above it and came out with no creature at all: "The
+      // Left Kidney", where every other day of the ninety-one says "Eagle's
+      // Face of the Ox". The letter and the face do stop on a joint — that is
+      // what a joint is — but the season does not. The day is still inside the
+      // Eagle's ninety-one, and the tag beside it says so.
+      //
+      // Taken the same way seasonFaceOf takes its own `of`, from the season
+      // alone, so the two cannot name different creatures for one day.
+      const _chaya = (CHAYOT_FACES[((pl.season || 1) - 1) % 4] || {}).en;
+      // The possessive replaces the article. "Heart" alone would read as a
+      // part of a body rather than as the day, which is why it carried "The";
+      // "Eagle's Heart" reads as the day and matches the other eighty-eight.
+      // Man needs no article here either — the possessive supplies it.
+      const _own = _chaya ? `${_chaya}’s ` : 'The ';
+      if (pl.heart)  return { en: `${_own}Heart`, he: 'לֵב' };
       if (pl.silent) return pl.silent === 1
-        ? { en: 'The Right Kidney', he: 'כִּלְיָה יְמָנִית' }
-        : { en: 'The Left Kidney',  he: 'כִּלְיָה שְׂמָאלִית' };
+        ? { en: `${_own}Right Kidney`, he: 'כִּלְיָה יְמָנִית' }
+        : { en: `${_own}Left Kidney`,  he: 'כִּלְיָה שְׂמָאלִית' };
       const f = seasonFaceOf(pl.season, pl.quarter);
       if (!f) return null;
       // "Eagle's Face of the Ox" rather than "the Eagle's Ox-face": it is

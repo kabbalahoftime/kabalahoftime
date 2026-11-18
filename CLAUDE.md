@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v373**; the next is v374.
+nobody. Currently **v374**; the next is v375.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -888,6 +888,34 @@ What answers the question now is the face line itself: *Letter 16 · Face 3
 what the turn would have told them, and the ⓘ still explains the rule in
 full at the advanced depth. The turn line said a third time what two lines
 above it were already saying.
+
+**The break-days keep the Chaya.** They read *Eagle's Heart*, *Eagle's Right
+Kidney*, *Eagle's Left Kidney* — not *The Heart*, which is what they said
+until a reader noticed that today's card never mentioned the creature.
+
+`_gevFace` returned for the heart and the kidneys **above** its call to
+`seasonFaceOf`, so those three days never reached the possessive that the
+other eighty-eight wear. And `seasonFaceOf` returns null without a quarter,
+which a break-day has none of — so the creature had to be read straight from
+the season, the same way that function derives its own `of`. Both now come
+from `CHAYOT_FACES[(season - 1) % 4]`, so they cannot name different
+creatures for one day.
+
+The letter and the face **do** stop on a joint; that is what a joint is. The
+season does not. The day is still inside the Eagle's ninety-one, and the tag
+beside it says *Season 1*, so dropping the Eagle was an over-correction.
+Read across the seam the line is now continuous: *Eagle's Face of the Ox*,
+*Eagle's Left Kidney*, *Eagle's Face of the Lion*.
+
+The possessive replaces the article the three used to carry. *Heart* alone
+would read as a part of a body rather than as the day — which is why it had
+one — and *Eagle's Heart* reads as the day. Man needs no article either; the
+possessive supplies it, as it already did in *Man's Face of the Ox*.
+
+The leap microcosm shares `_gevFace`, so its twelve break-days were corrected
+by the same change. Swept a full year: all twelve of the season break-days
+and all twelve of the microcosm's carry their creature, and no ordinary day
+changed.
 
 ### No byline, anywhere
 
