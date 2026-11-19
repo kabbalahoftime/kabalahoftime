@@ -25393,13 +25393,21 @@ content: ''; float: right; width: 30px; height: 1em;
     // the nine days: the Temple fell for sinat chinam, and is rebuilt through
     // ahavat chinam (Yoma 9b; Rav Kook) — Chesed poured directly into Din's
     // own wound.
+    //
+    // The `he` is for Chesed's face, which names the soul of the cycle it is
+    // standing in. It is written here rather than in a second table so the
+    // two cannot name different souls for one cycle, and unvocalized because
+    // that is how this app writes these five everywhere else.
     const NINE_DAYS_SOULS = {
-      1: { soul: 'Moshe Rabbeinu',    note: "Aharon HaKohen's own yahrzeit (Bamidbar 33:38) — Ish Chesed opening the Nine Days; Moshe, his brother, 1st of the five" },
-      3: { soul: 'Rashbi',            note: '2nd of the five' },
-      5: { soul: 'the Arizal',        note: 'his own yahrzeit, at the exact heart of the nine — 3rd of the five' },
-      7: { soul: 'the Baal Shem Tov', note: '4th of the five' },
-      9: { soul: 'Rebbe Nachman',     note: "Tisha B'Av — 5th of the five, sealing the nine" },
+      1: { soul: 'Moshe Rabbeinu',    he: 'משה רבינו',    note: "Aharon HaKohen's own yahrzeit (Bamidbar 33:38) — Ish Chesed opening the Nine Days; Moshe, his brother, 1st of the five" },
+      3: { soul: 'Rashbi',            he: 'רשב״י',        note: '2nd of the five' },
+      5: { soul: 'the Arizal',        he: 'האר״י',        note: 'his own yahrzeit, at the exact heart of the nine — 3rd of the five' },
+      7: { soul: 'the Baal Shem Tov', he: 'הבעל שם טוב', note: '4th of the five' },
+      9: { soul: 'Rebbe Nachman',     he: 'רבי נחמן',     note: "Tisha B'Av — 5th of the five, sealing the nine" },
     };
+    // Chesed's face reads the soul of the cycle it stands in, derived from
+    // this table — see _cycleSoul, declared with ayinBetInfo further down
+    // because that is where the cycle number exists.
     const inNineDays = (hMonth === 5 && hDay >= 1 && hDay <= 9);
     const nineDaysToday = inNineDays ? (NINE_DAYS_SOULS[hDay] || null) : null;
 
@@ -25455,6 +25463,15 @@ content: ''; float: right; width: 30px; height: 1em;
     const bkMishmar = ayinBetInfo.isBreak ? null : MISHMAROT_24[(ayinBetInfo.dayInCycle - 1) % 24];
     const bkMishmarNum = ayinBetInfo.isBreak ? 0 : ((ayinBetInfo.dayInCycle - 1) % 24) + 1;
     const _lobe = ayinBetInfo.isBreak ? null : CHESED_LOBES[ayinBetInfo.cycle - 1];
+    // THE SOUL OF THE CYCLE. The Nine Days are the year's 5-cycle/4-gap shape
+    // in miniature — five odd days marked, four even days between them — and
+    // NINE_DAYS_SOULS above carries Rebbe Nachman's five holy souls on those
+    // five. Read the other way round, cycle N answers to the (2N-1)th of Av:
+    // cycle 1 to 1 Av and Moshe, cycle 5 to 9 Av and Rebbe Nachman. Derived
+    // from that one table rather than listed again, so the two cannot name
+    // different souls for one cycle.
+    const _cycleSoulDay = ayinBetInfo.isBreak ? 0 : 2 * ayinBetInfo.cycle - 1;
+    const _cycleSoul = NINE_DAYS_SOULS[_cycleSoulDay] || null;
     // The leap year's 28 days are Chesed's own shape in miniature: five blocks
     // parted by four silences, exactly as the year is — and the twenty-four
     // priestly watches run once through them, five to a lobe and four to the
@@ -25489,11 +25506,24 @@ content: ''; float: right; width: 30px; height: 1em;
         `<br><span style="font-size:0.85em;color:var(--ink-dim)">The five lobes in 28 days — the twenty-four watches once through</span>`
       : ayinBetInfo.isBreak
       ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
-      // ── FOUR LINES, EACH A NUMBER AND ITS OWN NAME ──
+      // ── FIVE LINES, EACH A NUMBER AND ITS OWN NAME ──
       //   Name 70 (יבמ)
       //   Cycle 1 (בְּרֵאשִׁית)
       //   Mishmar 22 (גָּמוּל)
       //   Blessing Word 3 (וְיִשְׁמְרֶךָ)
+      //   1 Av (משה רבינו)
+      //
+      // THE FIFTH IS THE SOUL OF THE CYCLE, and it carries a number of its
+      // own rather than the cycle's: the day of Av. The Nine Days are this
+      // year's 5-cycle/4-gap shape in miniature — five odd days marked, four
+      // even days between — so cycle N answers to the (2N-1)th of Av. See
+      // _cycleSoul, which derives it from NINE_DAYS_SOULS rather than listing
+      // the five again.
+      //
+      // Putting the soul in the CYCLE's parenthesis instead was built and
+      // measured: "Cycle 4 (בְּמִדְבַּר · הבעל שם טוב)" wraps at 390px, so
+      // four cycles drew at 108px and the fourth at 136 — one ragged card in
+      // five. A line of its own is 136px for all five and wraps on none.
       //
       // THE OTHER THREE NESTING CARDS DO NOT APPLY HERE. They read small ·
       // middle · large, one count with three levels. Chesed carries two
@@ -25569,7 +25599,11 @@ content: ''; float: right; width: 30px; height: 1em;
           ? ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</bdi>)`
           : '') + `<br>` +
         `Blessing Word <strong>${bkIdx + 1}</strong>` +
-        ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkWords[bkIdx]}</bdi>)`;
+        ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkWords[bkIdx]}</bdi>)` +
+        (_cycleSoul
+          ? `<br><strong>${_cycleSoulDay}</strong> Av` +
+            ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${_cycleSoul.he}</bdi>)`
+          : '');
     document.getElementById('chesed-sub').innerHTML = '';
     document.getElementById('chesed-text-label').innerHTML =
       `✦ ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} <span class="maalah">מעלה י׳</span>`;

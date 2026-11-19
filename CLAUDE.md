@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v376**; the next is v377.
+nobody. Currently **v377**; the next is v378.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -812,7 +812,7 @@ is not the same as nesting, and the author named it before I saw it:
 
 5 × 72 and 15 × 24 are **two factorings of the same 360 days**, not one count
 with four levels. Four numbers on one line read as the latter, which is what
-made the line hard. The face is **four lines, each a number and its own
+made the line hard. The face is **five lines, each a number and its own
 name**:
 
 ```
@@ -820,15 +820,43 @@ Name 70 (יבמ)
 Cycle 1 (בְּרֵאשִׁית)
 Mishmar 22 (גָּמוּל)
 Blessing Word 3 (וְיִשְׁמְרֶךָ)
+1 Av (משה רבינו)
 ```
 
 **Every line is built the same way** — a number, then in parentheses the
-Hebrew thing that number points at. The parenthesis is the same gesture four
-times, which is what makes the block read as one list rather than four facts.
+Hebrew thing that number points at. The parenthesis is the same gesture five
+times, which is what makes the block read as one list rather than five facts.
 
 **The Cycle's name is its lobe.** `_lobe` is `CHESED_LOBES[cycle - 1]`, the
 app's own mapping, already drawn in the detail's *Lobe of the Lung* row. The
 Cycle was the one count on this face with a number and no name.
+
+**The fifth line is the soul of the cycle**, and it carries a number of its
+own — the day of Av — rather than repeating the cycle's. `NINE_DAYS_SOULS`
+was already in `index.html` with the whole idea in its comment: the Nine Days
+are the year's **5-cycle/4-gap shape in miniature**, five odd days marked and
+four even days between them, carrying Rebbe Nachman's five holy souls. Read
+the other way round, **cycle N answers to the (2N-1)th of Av**:
+
+```
+Cycle 1   1 Av   משה רבינו        Cycle 4   7 Av   הבעל שם טוב
+Cycle 2   3 Av   רשב״י            Cycle 5   9 Av   רבי נחמן
+Cycle 3   5 Av   האר״י
+```
+
+`_cycleSoul` **derives** this from that one table rather than listing the
+five again, so the face and the Nine Days cannot name different souls for one
+cycle. The Hebrew lives in `NINE_DAYS_SOULS` beside the English for the same
+reason, unvocalized because that is how the app writes these five everywhere
+else. Note `_cycleSoul` must be declared **with `ayinBetInfo`**, not beside
+the table — the table is three hundred lines above the `const` that holds the
+cycle number, and reading it there is a temporal-dead-zone throw.
+
+**Putting the soul in the Cycle's own parenthesis was built and measured
+instead, and lost on the measurement.** `Cycle 4 (בְּמִדְבַּר · הבעל שם טוב)`
+wraps at 390px, so four cycles drew at 108px and the fourth at 136 — one
+ragged card in five. A line of its own is **136px for all five and wraps on
+none**.
 
 **Two intermediate shapes came before it, and the history is the argument:**
 
@@ -897,9 +925,10 @@ suite: it fires, and the `ok` line no longer prints. The `mishmar:` field
 beside it reads the *microcosm* branch, which still says `Mishmar N of 24:`,
 and was never affected.
 
-Swept 401 days: 369 ordinary days all four lines well-formed, all **15**
-cycle-and-word pairs seen (5 × 3), no tag anywhere inside the face, and the
-height a constant **108px with nothing wrapping** on any of them.
+Swept 401 days: 369 ordinary days all five lines well-formed, all **15**
+cycle-and-word pairs seen (5 × 3), all five souls on their own cycles, no tag
+anywhere inside the face, and the height a constant **136px with nothing
+wrapping** on any of them.
 
 **Gevurah's** face is 22 letters and a season is four of them, so
 `inQuarter` inside `quarter` inside `season`. The **break-days keep the
