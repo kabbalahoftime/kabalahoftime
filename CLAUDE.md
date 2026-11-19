@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v377**; the next is v378.
+nobody. Currently **v378**; the next is v379.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -539,6 +539,46 @@ and the prayers already did it; `applyStarState` did not, because until the
 third door the bar carried nothing that depended on star state — so the
 chip lit only on the next render. It calls it now.
 
+### The meditation face falls through to the heading
+
+**`_faceOf` cannot fail.** It walks a chain — the card's `FACE_RULE`, then the
+first non-position `<strong>`, then the first block, then the sub-text — and
+**ends at the card's `.sefirah-cycle-name`, which is a heading and never a
+face**. So when a card's face stops being findable, nothing throws and
+nothing fails. The ladder quietly starts naming the section instead of the
+day, and it reads plausibly enough that nobody looks.
+
+It happened twice in one sitting and **shipped twice**. Chesed's day-Name was
+the only bold thing on that card that was not a number, so `_strongFace`
+found it by accident. The rewritten face bolds a number on every line:
+
+| version | what the Ladder named |
+| --- | --- |
+| v374 | `יבמ` — the day's Name ✓ |
+| v375 | `וְיִשְׁמְרֶךָ` — the gold blessing word |
+| v376–v377 | `Shem Ayin-Bet — 72-Day Cycle` — the card's own heading |
+
+So **a card whose face a reader meditates on must name it outright**, not
+leave `_faceOf` to find it. Chesed has `#chesed-day-face` and Gevurah has
+`#gevurah-day-face`, each with a one-line `FACE_RULE`, and both survive the
+face being reshuffled under them. On Gevurah the span sits on the **Face**
+line, and on the three break-days — which have no face — on the **Season**
+line, so the standing rule that a break-day names its Chaya is kept by the
+meditation too.
+
+`check.mjs` has a **`faces`** section for this: all ten cards must name a
+face, and none of it may equal that card's own heading. Landing on the
+heading is the signature of the whole class and costs one render to ask.
+Proved by reverting the fix and watching it fire:
+
+```
+FAIL the meditation face — Chesed: the face is the cycle heading,
+     "Shem Ayin-Bet — 72-Day Cycle"
+```
+
+Every other check passed through both broken versions, because **every other
+check reads the card and this one reads the ladder**.
+
 ### The meditation flames
 
 `injectMedMarks` puts each card's flame **inside** its first
@@ -751,23 +791,26 @@ follows without being told.
 The study chip's "done" differs by mode: this hour's steps all marked
 (`_hourStepIdx`) by the hour, none of the thirty left at all in order.
 
-### Three cards nest the same way, and Chesed does not
+### Two cards nest, and two are read one count to a line
 
 Binah's face reads **where the day stands in the smallest cycle, then that
 cycle, then the large one**, and the tag under it repeats the large cycle
-with the absolute day. Gevurah and Netzach hold the same shape and were not
-using it: both led with the absolute day and left the nesting unsaid.
+with the absolute day. Netzach holds the same shape and was not using it: it
+led with the absolute day and left the nesting unsaid.
 
 ```
 Binah     Day 6    · Week 2  · Cycle 2    >>  Cycle 2  · Day 13 of 49
-Gevurah   Letter 16 · Face 3 · Season 1   >>  Season 1 · Day 62 of 91
 Netzach   Day 7    · Level 3 · Cycle 2    >>  Cycle 2  · Day 27 of 41
 ```
 
-**Chesed was made the fourth and should not have been.** It had the shape
-forced on it — `Mishmar 14 · Word 3 · Cycle 1` over a tag reading `Cycle 1 ·
-Name 62 of 72` — and the author's answer was to give it two lines and no
-tag. See below.
+**Chesed and Gevurah were made to nest and both have come back out of it.**
+Each now reads **one count to a line, a number and its own name**, which is
+the section below and the one after it. Chesed had `Mishmar 14 · Word 3 ·
+Cycle 1` over a tag saying `Cycle 1 · Name 62 of 72`; Gevurah had `Letter 16
+· Face 3 · Season 1` over `Eagle's Face of the Ox שׁוֹר · ט`.
+
+**Neither carries a tag any more**, because on both the face now says the
+count the tag was repeating.
 
 **Netzach was the fourth and nobody had noticed.** Three rows stand under
 its face — **Day**, **Level/World**, **Cycle** — and the face named only two
@@ -959,37 +1002,85 @@ it** — `Cycle 2 · Day 13 of 49`. Chesed, Gevurah and Chochmah all set it to
 `''`, so on those cards the question a reader asks second, *where does
 today stand in this count*, could only be answered by opening the detail.
 
-Gevurah and Netzach carry it now, in Binah's own shape and with its
-`tag highlight` class — but **drawn inside `*-main`, under the day's own
-name, not in the `*-tags` row at the foot**. The row sits after the face
-and the sub-text, which on Binah is two lines and on Gevurah is six, so
-the one line that answers *where am I* was the last thing a reader
-reached. Their `*-tags` rows are left empty and the pill is built into the
-face with `<div class="sefirah-tags">` round it, which is all that row
-ever was — flex, a 5px gap and a 7px top margin — so it draws identically
-wherever it stands.
+Netzach carries it now, in Binah's own shape and with its `tag highlight`
+class — but **drawn inside `*-main`, under the day's own name, not in the
+`*-tags` row at the foot**. The row sits after the face and the sub-text, so
+the one line that answers *where am I* was the last thing a reader reached.
+Its `*-tags` row is left empty and the pill is built into the face with
+`<div class="sefirah-tags">` round it, which is all that row ever was — flex,
+a 5px gap and a 7px top margin — so it draws identically wherever it stands.
 
 ```
 Binah     Cycle 2  · Day 13 of 49
-Gevurah   Season 1 · Day 62 of 91     Microcosm · Day N of 28
 Netzach   Cycle 2  · Day 27 of 41
+Gevurah   (microcosm only)            Microcosm · Day N of 28
 ```
 
-Gevurah's three break-days **keep** their number — the heart and the two
-kidneys are days of the ninety-one like any other, and it is the letters
-that stop on them, not the count.
+**Chesed and Gevurah have no tag on an ordinary day**, and that is
+deliberate: each says on its own face the count the tag was repeating. See
+their two sections above. Gevurah keeps one **only in the leap microcosm**,
+whose day is nowhere else on the face.
 
-**Chesed has no tag at all**, and that is deliberate; see the section above.
-A **silent day** there says so on the face instead of counting, because it
-has no number in the seventy-two, which is what makes it silent. Chochmah
+A **silent day** on Chesed says so on the face instead of counting, because
+it has no number in the seventy-two. Gevurah's three break-days **keep**
+their number — the heart and the two kidneys are days of the ninety-one like
+any other, and it is the letters that stop on them, not the count. Chochmah
 also sets its tag row empty, and was left alone.
 
-### Why this face, in this season
+### Gevurah reads one count to a line, with the English
+
+```
+Letter 1 (Alef — א)
+Face 4 (Lion — אַרְיֵה)
+Season 1 (Eagle — נֶשֶׁר)
+```
+
+Chesed's shape, and the author asked for it directly. It was two lines —
+three numbers, then the day's name, `Eagle's Face of the Lion אַרְיֵה · א` —
+which **wrapped at 390px and left `· א` stranded on a line of its own**.
+
+**With the English, which is where this differs from Chesed.** There the
+parenthesis holds Hebrew alone and the transliteration lives in the detail.
+Here the creatures and the letters have English names the card uses in prose,
+and the author asked for both: *"I think this one should have the English,
+too."*
+
+**The letter's English comes from `SINGLE_LETTERS_22` by glyph, never by
+index.** Eicha 2, 3 and 4 set פ before ע, so the day's position in the
+twenty-two is not its position in the alef-bet. Checked: 461 days, all 22
+letters, **none mismatched**.
+
+**Quarter 1 is the season's own face**, so those two lines name one creature
+twice — on 88 days a year. True, but two identical lines read as a fault, so
+the day that is its own says `Face 1 (Eagle — נֶשֶׁר, its own)`. Not *", the
+season's own"*: that wrapped the line in two, which costs more than the
+repeat it explains. `f.own` is the flag `seasonFaceOf` already sets.
+
+**A break-day keeps the plain day and the Chaya**: `Day 69` over
+`Season 4 (Lion — אַרְיֵה)`. It has neither letter nor face — that is what a
+break-day is — and which joint it is stays in the detail under *This day*.
+
+**No tag and no body rows.** The tag said `Season 1 · Day 70 of 91` and the
+face now says the season, so it had become half a repeat; the absolute day is
+in the detail's Season row, which reads `Day 70 of 91 · Ratzo of Fall` in
+full. `_gevBody` printed Yehuda ben Teima's posture, the angel and the
+element — all three are detail rows already, at greater length, and
+`Chayot HaKodesh` carries Winter's gloss about the Man who bears the fish.
+`_gevBody` and `_gevWho` are **deleted rather than left unused**, and
+`_gevTagRow` is down to the one arm the microcosm reaches.
+
+#### What the possessive used to carry
 
 Gevurah's card named the day *"The Eagle's Face of the Ox"* and left the
 reader to work out where the Ox came from. The rule was written down
 twice — in the comment over `seasonFaceOf` and in the **advanced** depth
 of the card's ⓘ — and in neither place a reader meets the words.
+
+**That construction is gone, and the two lines say it better:** a reader who
+sees `Face 3 (Ox — שׁוֹר)` over `Season 1 (Eagle — נֶשֶׁר)` has been told
+outright what the possessive made them infer. The notes below are kept
+because the reasoning still governs which face a day wears; the wording they
+describe is no longer on the card.
 
 The four turn in the seasons' own order, **Eagle → Man → Ox → Lion**,
 beginning at the season's own face. So the Eagle's season runs Eagle, Man,

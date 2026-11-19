@@ -21289,7 +21289,12 @@ content: ''; float: right; width: 30px; height: 1em;
     },
     Chochmah: (c) => _afterLabel(c.querySelector('.sefirah-main-text'), 'Day:'),
     Binah:    (c) => _strongFace(c.querySelector('.sefirah-main-text')),
-    Chesed:   (c) => _strongFace(c.querySelector('.sefirah-main-text')),
+    // Chesed's own span, not the first <strong> on the card. The day's Name
+    // was the only bold thing that was not a number, so _strongFace reached
+    // it; the five-line face bolds a number on every line, and the fallbacks
+    // then named the gold blessing word, and after that the cycle heading.
+    // The Name is what the day's meditation is, so it says so itself.
+    Chesed:   (c) => _flatFace(c.querySelector('#chesed-day-face')),
     // Gevurah's own line, not the first <strong> on the card. That was the
     // season's Chayah, which turns four times a year — so the meditation said
     // "Eagle — נשר" for ninety-one mornings running, and the flame counted
@@ -25589,7 +25594,14 @@ content: ''; float: right; width: 30px; height: 1em;
       // an opening bracket it is no longer a run of its own, and must be
       // told which way it reads.
       : `Name <strong>${ayinBetInfo.nameNum}</strong> ` +
-        `(<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${ayinBetInfo.name}</bdi>)<br>` +
+        // THE MEDITATION READS THIS SPAN. The day's Name used to be the only
+        // bold non-number on the card, so _strongFace found it by accident;
+        // once every line bolded a number and the Name moved into brackets,
+        // _faceOf fell through strategy after strategy and the ladder named
+        // first the gold blessing word and then "Shem Ayin-Bet — 72-Day
+        // Cycle", the cycle heading. Both shipped. Named outright now, as
+        // Gevurah's #gevurah-day-face is, so it survives the next reshuffle.
+        `(<span id="chesed-day-face"><bdi lang="he" style="font-size:1.1em;color:var(--ink)">${ayinBetInfo.name}</bdi></span>)<br>` +
         `Cycle <strong>${ayinBetInfo.cycle}</strong>` +
         (_lobe
           ? ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${_lobe.he}</bdi>)`
@@ -25817,16 +25829,58 @@ content: ''; float: right; width: 30px; height: 1em;
       return { en: f.own ? `${f.of}’s own Face` : `${f.of}’s Face of ${_the}${f.en}`,
                he: f.he };
     };
-    // One line, and the one the meditation reads. The letter is left off the
-    // three break-days because there is none — which is what those days are.
+    // ── ONE COUNT TO A LINE, AS CHESED READS ──
+    //   Letter 1 (Alef — א)
+    //   Face 4 (Lion — אַרְיֵה)
+    //   Season 1 (Eagle — נֶשֶׁר)
+    //
+    // It was two lines: three numbers, then the day's name — "Eagle's Face of
+    // the Lion אַרְיֵה · א" — which wrapped at 390px and left "· א" stranded on
+    // a line of its own. Everything that line said is said by these three,
+    // and said better: the possessive made a reader work out where the Eagle
+    // came from, and now the Season line answers it outright.
+    //
+    // WITH THE ENGLISH, which is where this differs from Chesed. There the
+    // parenthesis holds Hebrew alone and the transliteration is in the
+    // detail. Here the creatures and the letters have English names the card
+    // uses in prose, and the author asked for both.
+    //
+    // The letter's English comes from SINGLE_LETTERS_22 BY GLYPH, never by
+    // index: Eicha 2, 3 and 4 set פ before ע, so the day's position in the
+    // twenty-two is not its position in the alef-bet.
+    const _gevHeb = s =>
+      `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">${s}</bdi>`;
+    // The meditation reads #gevurah-day-face, so it has to keep holding what
+    // the day's face IS. On an ordinary day that is the Face line's creature;
+    // on the three break-days there is no face, and what is left is the
+    // creature whose season it still is — the standing rule for those days.
     const _gevFaceHtml = (() => {
       const pl = gevMic || seasonInfo;
-      const f = _gevFace(pl);
-      if (!f) return '';
-      const letter = (!pl.breakAt && _eicha && _eicha.letter) ? _eicha.letter : '';
-      return `<strong>${f.en}</strong>` +
-        ` <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">${f.he}</bdi>` +
-        (letter ? ` · <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">${letter}</bdi>` : '');
+      const chayah = CHAYOT_FACES[((pl.season || 1) - 1) % 4] || CHAYOT_FACES[0];
+      const f = pl.breakAt ? null : seasonFaceOf(pl.season, pl.quarter);
+      const lines = [];
+      // No letter on a break-day, and none in the microcosm: 28 days have no
+      // room for the alef-bet, which is what gevMic.inQuarter being absent says.
+      const lt = (!pl.breakAt && !gevMic && _eicha && _eicha.letter)
+        ? SINGLE_LETTERS_22.find(x => x.hebrew === _eicha.letter) : null;
+      if (lt) lines.push(`Letter <strong>${pl.inQuarter}</strong> ` +
+        `(${lt.letter} &mdash; ${_gevHeb(lt.hebrew)})`);
+      // QUARTER 1 IS THE SEASON'S OWN FACE, so these two lines name one
+      // creature twice — on 88 days a year. That is the structure and not a
+      // fault, but two identical lines read as a fault, and the wording this
+      // replaced said it outright ("the Eagle's own Face"). So the day that
+      // is its own says so. f.own is the flag seasonFaceOf already sets.
+      if (f) lines.push(`Face <strong>${pl.quarter}</strong> ` +
+        `(<span id="gevurah-day-face">${f.en} &mdash; ${_gevHeb(f.he)}</span>` +
+        // ", its own" and not ", the season's own": the longer form wrapped
+        // the line in two at 390px, which costs more than the repeat it is
+        // there to explain.
+        (f.own ? `<span style="color:var(--ink-mid)">, its own</span>` : '') +
+        `)`);
+      lines.push(`Season <strong>${pl.season}</strong> ` +
+        (f ? `(${chayah.en} &mdash; ${_gevHeb(chayah.he)})`
+           : `(<span id="gevurah-day-face">${chayah.en} &mdash; ${_gevHeb(chayah.he)}</span>)`));
+      return lines.join('<br>');
     })();
     // The book's own name beside the English, as every other book on these cards
     // is named — Bekhorot בְּכוֹרוֹת on Hod, the Tanach reading on its own line.
@@ -25871,29 +25925,15 @@ content: ''; float: right; width: 30px; height: 1em;
     document.getElementById('gevurah-cycle-name').innerHTML = gevMic
       ? 'Four Seasons — Leap Year Microcosm'
       : 'Four Seasons — 91-Day Cycle';
-    // Where the day falls in the count comes before what the day is: the
-    // quarter and its verse of Eicha, and then the Chayah and its angel.
-    // The face in three groups: what the season is, then what its Chayah
-    // carries, then where the day falls in the count. The heading holds the
-    // day and the season alone so it keeps to one line, and the Chayah is
-    // named under it — with its own long gloss, the Man bearing the fish,
-    // under that again rather than stretching either.
-    const _gevWho = pl => {
-      const parts = (pl.chayah || '').split(' · ');
-      return { name: parts[0], note: parts.slice(1).join(' · ') };
-    };
-    const _gevBody = pl => {
-      const who = _gevWho(pl);
-      // Winter is the only one with a note, and it belongs to the Chayah
-      // rather than to the day's face: it is the Man who bears the fish. With
-      // the Chayah's own line gone it had nothing to hang on — three quarters
-      // in four the line above names a different creature's face — so it takes
-      // the Chayah's name with it.
-      return (who.note ? `<div style="font-size:0.82em;color:var(--ink-dim);font-style:italic">` +
-               `the ${who.name.split(' —')[0]} ${who.note}</div>` : '') +
-        `<div style="font-size:0.88em;opacity:0.72;margin-top:4px">${pl.animal}<br>Angel ${pl.angel}` +
-        (pl.element ? ` · ${pl.element}` : '') + `</div>`;
-    };
+    // _gevWho and _gevBody stood here and are gone with the body rows they
+    // drew — Yehuda ben Teima's posture, the angel and the element, and
+    // Winter's gloss about the Man who bears the fish. Every one of them is
+    // a detail row already, at greater length: "Yehuda ben Teima", "Angel",
+    // "Element", and "Chayot HaKodesh", which carries that gloss whole. They
+    // are deleted rather than left unused, because an uncalled builder reads
+    // like a choice somebody made and is really just something nothing
+    // reaches — which is how Chesed's tag row came to have two arms that had
+    // never once drawn.
     // Which way the season is moving, in the heading where the day and the
     // season are. Day 46 says nothing here: it is neither half, and the face
     // line below already reads "The Heart". The microcosm's seven parts split
@@ -25907,16 +25947,23 @@ content: ''; float: right; width: 30px; height: 1em;
     const _gevHalfHtml = _gevHalf
       ? ` <span style="font-size:0.92em;color:var(--ink-mid)">&middot; ${_gevHalf}</span>`
       : '';
-    const _gevTagRow = `<div class="sefirah-tags">` + (gevMic
-      ? `<span class="tag highlight">Microcosm \u00b7 Day ${gevMic.day} of ${gevMic.total}</span>`
-      : `<span class="tag highlight">Season ${seasonInfo.season} \u00b7 Day ${seasonInfo.dayIn} of 91</span>`
-      ) + `</div>`;
+    // ONE ARM, BECAUSE ONLY ONE IS REACHED. It had a second \u2014 "Season N \u00b7
+    // Day N of 91" \u2014 for the ordinary days, which no longer draw a tag at
+    // all: the face says the season itself now, and the absolute day is in
+    // the detail's Season row. A branch nothing can reach is how Chesed's
+    // tag row came to have two arms that had never once rendered, so this
+    // one is cut rather than left to look like a choice.
+    const _gevTagRow = gevMic
+      ? `<div class="sefirah-tags"><span class="tag highlight">` +
+        `Microcosm \u00b7 Day ${gevMic.day} of ${gevMic.total}</span></div>`
+      : '';
     document.getElementById('gevurah-main').innerHTML = gevMic
       ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} <span style="font-size:0.92em">(${gevMic.name})</span>${_gevHalfHtml}:<br>` +
         // One part to a day here, so the day is a whole face with no letter of
-        // its own — the alef-bet is what the 28 days have no room for.
-        `<span id="gevurah-day-face">${_gevFaceHtml}</span>` + _gevTagRow +
-        _gevBody(gevMic) +
+        // its own — the alef-bet is what the 28 days have no room for, which
+        // is why _gevFaceHtml gives the microcosm two lines and not three.
+        // Its own tag stays: the microcosm's day is nowhere else on the face.
+        _gevFaceHtml + _gevTagRow +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-mid)">${_gevPart}` +
         (_eichaLink ? `<br>${gevMic.breakAt ? _eichaLink : `<a class="tap-line"${eichaTap(gevMic.quarter, 1, eichaChapterLen(gevMic.quarter))} style="color:var(--gold)">${_eichaHe(`Eicha ${gevMic.quarter}`)}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}` : '') +
         `</div>` +
@@ -25926,24 +25973,28 @@ content: ''; float: right; width: 30px; height: 1em;
       // season's own three numbers. The break-days have neither letter nor
       // face — that is what they are — so they keep the plain day, and the
       // line below says which of the three they are.
-      : (seasonInfo.breakAt
-          // Three numbers and nothing else, as Binah's line is. The season's
-          // name and the half it is in — Fall, Shov — came off: both are said
-          // in full in the detail below, under Season and under Motion, where
-          // Motion also gives the Hebrew and what the word means. On the face
-          // they were two more things to read before the day's own name.
-          ? `Day <strong>${seasonInfo.dayIn}</strong> · Season <strong>${seasonInfo.season}</strong><br>`
-          : `Letter <strong>${seasonInfo.inQuarter}</strong> · Face <strong>${seasonInfo.quarter}</strong> · Season <strong>${seasonInfo.season}</strong><br>`) +
-        // What the day is, and the only part of the card that moves every
-        // morning. The season's Chayah was named again on a line of its own
-        // beneath this one, with a gloss saying it bears all four faces — but
-        // this line already says whose face the day wears, so the card read
-        // "Eagle" three times over and the gloss explained a structure the
-        // line above it was already showing. The Chayah keeps its own row in
-        // the detail, where its Hebrew is, and Avot's posture below still
-        // names the creature once.
-        `<span id="gevurah-day-face">${_gevFaceHtml}</span>` + _gevTagRow +
-        _gevBody(seasonInfo) +
+      // THE NUMBERS LINE AND THE NAME LINE ARE ONE THING NOW. The face was
+      // "Letter 1 · Face 4 · Season 1" over "Eagle's Face of the Lion אַרְיֵה
+      // · א"; _gevFaceHtml above makes those three lines, each a number and
+      // its own name, which is how Chesed reads.
+      //
+      // A BREAK-DAY KEEPS THE PLAIN DAY. It has neither letter nor face —
+      // that is what a break-day is — so _gevFaceHtml gives it the Season
+      // line alone, and the day goes above it. Which joint it is stays in the
+      // detail, under "This day", where the standing rule puts it.
+      : (seasonInfo.breakAt ? `Day <strong>${seasonInfo.dayIn}</strong><br>` : '') +
+        _gevFaceHtml +
+        // NO TAG, and no body rows.
+        //
+        // The tag said "Season 1 · Day 70 of 91" and the face now says the
+        // season itself, so it had become half a repeat — the same reason
+        // Chesed's went. The absolute day is in the detail's Season row,
+        // which reads "Day 70 of 91 · Ratzo of Fall" in full.
+        //
+        // _gevBody printed Yehuda ben Teima's posture, the angel and the
+        // element under the face. All three are detail rows already — "Yehuda
+        // ben Teima", "Angel", "Element" — stated there at greater length, so
+        // nothing of them is lost.
         (_eichaLink
           ? `<div style="margin-top:6px;font-size:0.85em;"><span style="color:var(--ink-mid)">${_eichaLink}</span></div>`
           : ``);

@@ -1280,6 +1280,54 @@ async function checkInBrowser(chromium) {
     }
   }
 
+  // 5b. the ten meditation faces — each card says what the day's face is
+  //
+  // _faceOf walks a chain of strategies and ENDS AT THE CARD'S CYCLE-NAME
+  // HEADING, which is a heading and never a face. So when a card's face
+  // stops being findable, nothing breaks and nothing fails: the ladder just
+  // starts naming the section instead of the day, and it reads plausibly.
+  //
+  // That happened twice in one sitting, and shipped twice. Chesed's day-Name
+  // was the only bold thing on the card that was not a number, so _strongFace
+  // found it by accident; the rewritten face bolds a number on every line,
+  // and _faceOf fell through to the gold blessing word (v375) and then to
+  // "Shem Ayin-Bet — 72-Day Cycle" (v376). Every other check passed both
+  // times, because every other check reads the card and this reads the
+  // ladder.
+  //
+  // Landing on the heading is the signature of the whole class, and it costs
+  // one render to ask. A face that is empty, or that is only a position
+  // ("Day 7 of 41"), is the same fault one strategy earlier.
+  console.log('\nfaces');
+  const facesSeen = await page.evaluate(() => {
+    if (typeof _faceOf !== 'function' || typeof _faceCardFor !== 'function')
+      return { missing: true };
+    const names = ['Keter', 'Chochmah', 'Binah', 'Chesed', 'Gevurah',
+                   'Tiferet', 'Netzach', 'Hod', 'Yesod', 'Malchut'];
+    return { rows: names.map(n => {
+      const card = _faceCardFor(n);
+      let face = '';
+      try { face = _faceOf(card, n) || ''; } catch (e) { face = ''; }
+      const head = card ? ((card.querySelector('.sefirah-cycle-name') || {}).textContent || '')
+        .replace(/\s+/g, ' ').trim() : '';
+      return { n, face, head };
+    }) };
+  });
+  if (facesSeen.missing) {
+    fail('the meditation faces cannot be read — _faceOf is missing');
+  } else {
+    const faceBad = [];
+    for (const r of facesSeen.rows) {
+      if (!r.face) faceBad.push(`${r.n}: no face at all`);
+      else if (r.head && r.face === r.head)
+        faceBad.push(`${r.n}: the face is the cycle heading, "${r.face}" — ` +
+                     `_faceOf fell through every strategy`);
+    }
+    faceBad.forEach(m => fail(`the meditation face — ${m}`));
+    if (!faceBad.length)
+      pass(`all 10 cards name a face, and none of them is the card's own heading`);
+  }
+
   // 6. sideways scroll at phone widths, shut and open
   //
   // Measuring only with the cards shut missed a real one: a long unbreakable
