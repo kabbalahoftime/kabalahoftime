@@ -923,11 +923,11 @@ face.** No line carries a transliteration, and the detail states
 `Mishmar N of 24: יָכִין — Yachin` in full with its link, and the cycle's
 three words with today's in gold under *one word each 24 days*.
 
-**And no tag.** It read `Cycle 1 · Name 62 of 72`, which is two of those four
-numbers over again. The other three keep theirs because their absolute count
-is nowhere on their face; on Chesed it now is. The tag row went with it — it
-was built with three arms and reached on only one, so the silent-day and
-microcosm arms had never rendered at all.
+**The tag is at the foot, not on the face.** It stood inside the face for a
+while, under the day's name; with the face one count to a line its
+`Cycle 1 · Name 62 of 72` read as the first line over again, so it came off
+altogether — and then back, in `#chesed-tags`, where Binah keeps its own.
+See *Where the day falls, in a tag*.
 
 Each Hebrew word goes inside its **own `<bdi>`**: after a Latin label and an
 opening bracket it is no longer a run of its own and has to be told which way
@@ -1002,30 +1002,65 @@ it** — `Cycle 2 · Day 13 of 49`. Chesed, Gevurah and Chochmah all set it to
 `''`, so on those cards the question a reader asks second, *where does
 today stand in this count*, could only be answered by opening the detail.
 
-Netzach carries it now, in Binah's own shape and with its `tag highlight`
-class — but **drawn inside `*-main`, under the day's own name, not in the
-`*-tags` row at the foot**. The row sits after the face and the sub-text, so
-the one line that answers *where am I* was the last thing a reader reached.
-Its `*-tags` row is left empty and the pill is built into the face with
-`<div class="sefirah-tags">` round it, which is all that row ever was — flex,
-a 5px gap and a 7px top margin — so it draws identically wherever it stands.
+**Chesed and Gevurah carry it at the foot**, in `#chesed-tags` and
+`#gevurah-tags`, **parallel to Binah's** — the author's own ask: *"The golden
+tag in the bottom of Binah can be paralleled in the bottom of Chesed and the
+bottom of Gevurah."*
 
 ```
 Binah     Cycle 2  · Day 13 of 49
-Netzach   Cycle 2  · Day 27 of 41
-Gevurah   (microcosm only)            Microcosm · Day N of 28
+Chesed    Cycle 1  · Name 70 of 72     A silent day   /  Microcosm · Day N of 28
+Gevurah   Season 1 · Day 70 of 91                        Microcosm · Day N of 28
+Netzach   Cycle 2  · Day 27 of 41      (inside *-main)
 ```
 
-**Chesed and Gevurah have no tag on an ordinary day**, and that is
-deliberate: each says on its own face the count the tag was repeating. See
-their two sections above. Gevurah keeps one **only in the leap microcosm**,
-whose day is nowhere else on the face.
+**The tag has stood in three places, and this is the third.** At the foot
+first; then drawn **inside `*-main`**, under the day's own name, because at
+the foot it came after everything the face had to say; then **nowhere at
+all**, when both faces were rebuilt one count to a line and the tag's two
+numbers read as the first line over again. Back at the foot, where it is not
+read against the face's own lines and the parallel with Binah is the point.
 
-A **silent day** on Chesed says so on the face instead of counting, because
-it has no number in the seventy-two. Gevurah's three break-days **keep**
-their number — the heart and the two kidneys are days of the ninety-one like
-any other, and it is the letters that stop on them, not the count. Chochmah
-also sets its tag row empty, and was left alone.
+So **do not move it inside the face again**. The objection that sent it
+there — that the foot is far from the face — is real, and it is outweighed by
+the repetition it causes once the face names its own counts.
+
+Netzach is the one that still draws its tag **inside `*-main`**, with
+`<div class="sefirah-tags">` round it: that is all the row ever was — flex, a
+5px gap and a 7px top margin — so it draws identically wherever it stands.
+
+A **silent day** on Chesed says so instead of counting, because it has no
+number in the seventy-two. Gevurah's three break-days **keep** their number —
+the heart and the two kidneys are days of the ninety-one like any other, and
+it is the letters that stop on them, not the count. Chochmah still sets its
+tag row empty, and was left alone.
+
+Checked over 461 days: all three cards carry a foot tag on **every** day, and
+neither Chesed nor Gevurah draws one inside its face.
+
+### The label column must not outrun the face
+
+Gevurah was **the one card in the ten whose label column was taller than its
+content** — 250px against 209 — so the margin punched a hole in the face
+beside it. Two things did it, and both are fixed:
+
+- **the songs' margins.** `#gevurah-kot-song` and `#gevurah-kot-song-8` each
+  carried `margin-top:26px`, and most days show both, so the pair was 52px of
+  a 250px column. They are **12px** now. That number is measured, not
+  chosen: `.study-pray-btn` reaches 14px below its text for its 44px target
+  and the song links carry **no `::after` overlay at all**, so at 26 the two
+  boxes stood 22px apart and at 12 they stand 8px apart — closer, and still
+  clear. Below 12 starts eating that 8.
+- **the tag's return.** Putting it back at the foot gave the content column
+  19px it did not have.
+
+Together: **−40px of overhang became +7px of slack** on an ordinary day.
+
+**It is not gone everywhere, and that is the content's doing, not the
+margin's.** 18 days in 461 still overhang — Gevurah's break-days, whose face
+is `Day 46 / Season 1 (Eagle — נֶשֶׁר) / Eicha 5` with no letter, no face and
+no verse text, and Chesed's four silent days, which are one line. On those
+the card genuinely has less to say than its own margin.
 
 ### Gevurah reads one count to a line, with the English
 
@@ -1060,14 +1095,13 @@ repeat it explains. `f.own` is the flag `seasonFaceOf` already sets.
 `Season 4 (Lion — אַרְיֵה)`. It has neither letter nor face — that is what a
 break-day is — and which joint it is stays in the detail under *This day*.
 
-**No tag and no body rows.** The tag said `Season 1 · Day 70 of 91` and the
-face now says the season, so it had become half a repeat; the absolute day is
-in the detail's Season row, which reads `Day 70 of 91 · Ratzo of Fall` in
-full. `_gevBody` printed Yehuda ben Teima's posture, the angel and the
-element — all three are detail rows already, at greater length, and
-`Chayot HaKodesh` carries Winter's gloss about the Man who bears the fish.
-`_gevBody` and `_gevWho` are **deleted rather than left unused**, and
-`_gevTagRow` is down to the one arm the microcosm reaches.
+**No tag on the face, and no body rows.** The tag is at the foot in
+`#gevurah-tags`, parallel to Binah's — on the face its `Season 1` read
+against the Season line. `_gevBody` printed Yehuda ben Teima's posture, the
+angel and the element — all three are detail rows already, at greater length,
+and `Chayot HaKodesh` carries Winter's gloss about the Man who bears the
+fish. `_gevBody`, `_gevWho` and `_gevTagRow` are all **deleted rather than
+left unused**.
 
 #### What the possessive used to carry
 

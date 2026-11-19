@@ -5042,11 +5042,19 @@ content: ''; float: right; width: 30px; height: 1em;
       <button type="button" class="study-pray-btn" onclick="openStudyPrayer()"
               aria-label="The prayers before and after study">Study prayers</button>
     </div>
-    <!-- The week's song, under the prayer line. Its own 16px of air put its
-         link inside the reach measured upward from it, where the arrow that
-         opens the prayer now sits; ten more px stand the two controls clear. -->
-    <div id="gevurah-kot-song" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:26px;font-style:italic;"></div>
-    <div id="gevurah-kot-song-8" style="display:none;font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:26px;font-style:italic;"></div>
+    <!-- The week's songs, under the prayer line. 12px, not the 26 they stood
+         at. This is the only card in the ten whose LABEL COLUMN IS TALLER
+         THAN ITS CONTENT — 250px against 209 — so those margins were not
+         air between two controls, they were a hole punched in the face
+         beside them. Two songs show on most days and each carried 26, so
+         the pair was 52px of a 250px column.
+         12 is measured rather than chosen. The button above reaches 14px
+         below its text for its 44px target and the song links carry no
+         ::after overlay at all, so at 26 their boxes stood 22px apart and at
+         12 they stand 8px apart — closer, and still clear. Going below this
+         starts eating that 8. -->
+    <div id="gevurah-kot-song" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:12px;font-style:italic;"></div>
+    <div id="gevurah-kot-song-8" style="display:none;font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:12px;font-style:italic;"></div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>
@@ -25498,10 +25506,6 @@ content: ''; float: right; width: 30px; height: 1em;
     document.getElementById('chesed-cycle-name').innerHTML = chesedMic
       ? 'Shem Ayin-Bet — Leap Year Microcosm'
       : 'Shem Ayin-Bet — 72-Day Cycle';
-    // No tag row here any more. It was three arms and one caller \u2014 only the
-    // ordinary-day branch ever drew it, so the microcosm and silent-day arms
-    // had never rendered. And on the ordinary day it repeated both of the
-    // face's own numbers, Name and Cycle. See the face below.
     document.getElementById('chesed-main').innerHTML = chesedMic
       ? (chesedMic.silence
           ? `Microcosm Day <strong>${chesedMic.day}</strong> of 28 — a silent day<br>` +
@@ -25576,12 +25580,11 @@ content: ''; float: right; width: 30px; height: 1em;
       // its link. Nor are the blessing's other two words: the detail has the
       // cycle's three with today's in gold, under "one word each 24 days".
       //
-      // NO TAG. It said "Cycle N · Name N of 72", which is two of these four
-      // numbers over again. The other three nesting cards keep theirs
-      // because their absolute count is nowhere on the face; here it now is.
-      // The tag row went with it: it was built with three arms and only ever
-      // reached on this one, so the silent-day and microcosm variants of it
-      // had never been drawn at all.
+      // THE TAG IS AT THE FOOT, not here. It stood inside the face for a
+      // while, under the day's name; with the face one count to a line its
+      // "Cycle N · Name N of 72" read as the first line over again, so it
+      // came off altogether — and then back, in #chesed-tags, where Binah
+      // keeps its own and where it is not read against these five lines.
       //
       // The Mishmar is NOT the same number as the Name above it, though the
       // first twenty-four days of every cycle make it look that way: the
@@ -25624,19 +25627,25 @@ content: ''; float: right; width: 30px; height: 1em;
         ? `<a href="${mishnaInfo.seferiaUrl}" target="_blank" style="color:var(--gold)">${mishnaInfo.text}</a>`
         : mishnaInfo.text) +
       ` <span style="font-size:0.85em;opacity:0.7">· ${mishnaInfo.sub}</span>`;
-    // Where the day falls in its own count, said once in a tag — the shape
-    // Binah has carried all along and the only one of these cards that did.
-    // The face above names the day; this says where it stands, which is the
-    // question a reader asks second and had to open the detail to answer.
+    // Where the day falls in its own count, said once in a gold tag at the
+    // FOOT of the card — Binah's own position, and parallel to it by the
+    // author's ask. The face above names the day; this says where it stands,
+    // which is the question a reader asks second.
+    //
+    // It has stood in three places now. At the foot first; then drawn inside
+    // the face, straight under the day's name, because the foot came after
+    // everything the face had to say; then nowhere at all, when the face was
+    // rebuilt one count to a line and the tag's two numbers became a repeat
+    // of the first line. Back at the foot, where it is not reading against
+    // the face's own lines and the parallel with Binah is the point.
     //
     // A silent day has no number in the seventy-two, which is what makes it
     // silent, so it says that instead of counting.
-    // Emptied: the tag is drawn inside the face now, straight under the
-    // name, which is where Binah's sits. Left at the foot of the card it
-    // came after everything the face had to say — on Binah that is two
-    // lines and on these two it is six — so the one line that answers
-    // "where am I" was the last thing a reader reached.
-    document.getElementById('chesed-tags').innerHTML = '';
+    document.getElementById('chesed-tags').innerHTML = chesedMic
+      ? `<span class="tag highlight">Microcosm · Day ${chesedMic.day} of 28</span>`
+      : ayinBetInfo.isBreak
+        ? `<span class="tag highlight">A silent day</span>`
+        : `<span class="tag highlight">Cycle ${ayinBetInfo.cycle} · Name ${ayinBetInfo.nameNum} of 72</span>`;
     // Buxbaum 364-day cycles
     const bshtDay = ((dEff - d_year1) % 364 + 364) % 364 + 1;
     const bshtReading = bshtDay === 1 ? 'Introduction' : `Page ${bshtDay - 1}`;
@@ -25947,23 +25956,16 @@ content: ''; float: right; width: 30px; height: 1em;
     const _gevHalfHtml = _gevHalf
       ? ` <span style="font-size:0.92em;color:var(--ink-mid)">&middot; ${_gevHalf}</span>`
       : '';
-    // ONE ARM, BECAUSE ONLY ONE IS REACHED. It had a second \u2014 "Season N \u00b7
-    // Day N of 91" \u2014 for the ordinary days, which no longer draw a tag at
-    // all: the face says the season itself now, and the absolute day is in
-    // the detail's Season row. A branch nothing can reach is how Chesed's
-    // tag row came to have two arms that had never once rendered, so this
-    // one is cut rather than left to look like a choice.
-    const _gevTagRow = gevMic
-      ? `<div class="sefirah-tags"><span class="tag highlight">` +
-        `Microcosm \u00b7 Day ${gevMic.day} of ${gevMic.total}</span></div>`
-      : '';
+    // NO TAG INSIDE THE FACE. Both of them \u2014 the microcosm's day and the
+    // ordinary day's season \u2014 are written into #gevurah-tags at the FOOT of
+    // the card, which is Binah's position and the parallel the author asked
+    // for. Drawn in both places the microcosm's would have printed twice.
     document.getElementById('gevurah-main').innerHTML = gevMic
       ? `Microcosm Day <strong>${gevMic.day}</strong> of ${gevMic.total} <span style="font-size:0.92em">(${gevMic.name})</span>${_gevHalfHtml}:<br>` +
         // One part to a day here, so the day is a whole face with no letter of
         // its own — the alef-bet is what the 28 days have no room for, which
         // is why _gevFaceHtml gives the microcosm two lines and not three.
-        // Its own tag stays: the microcosm's day is nowhere else on the face.
-        _gevFaceHtml + _gevTagRow +
+        _gevFaceHtml +
         `<div style="margin-top:6px;font-size:0.85em;color:var(--ink-mid)">${_gevPart}` +
         (_eichaLink ? `<br>${gevMic.breakAt ? _eichaLink : `<a class="tap-line"${eichaTap(gevMic.quarter, 1, eichaChapterLen(gevMic.quarter))} style="color:var(--gold)">${_eichaHe(`Eicha ${gevMic.quarter}`)}</a> <span style="color:var(--ink-dim)">— the chapter whole</span>`}` : '') +
         `</div>` +
@@ -26024,12 +26026,14 @@ content: ''; float: right; width: 30px; height: 1em;
       : '';
     _tanachDetailMeta = _tanSum ? TANACH_SUMMARY_NOTE : '';
     document.getElementById('tanach-trigger').style.display = _tanSum ? '' : 'none';
-    // The same tag Binah and Chesed carry. The break-days keep their number:
-    // the heart and the two kidneys are days of the ninety-one like any
-    // other, and it is the letters that stop on them, not the count.
-    // Emptied: drawn inside the face now, under the day's own face, which
-    // is where Binah keeps it. See the note on chesed-tags.
-    document.getElementById('gevurah-tags').innerHTML = '';
+    // The same tag Binah and Chesed carry, at the foot where Binah's is.
+    // The break-days keep their number: the heart and the two kidneys are
+    // days of the ninety-one like any other, and it is the letters that stop
+    // on them, not the count. See the note on chesed-tags for why it has
+    // moved three times.
+    document.getElementById('gevurah-tags').innerHTML = gevMic
+      ? `<span class="tag highlight">Microcosm · Day ${gevMic.day} of ${gevMic.total}</span>`
+      : `<span class="tag highlight">Season ${seasonInfo.season} · Day ${seasonInfo.dayIn} of 91</span>`;
     const _kotDay = ((sef.dayNum - 1) % 7) + 1;
     const _kotSong = KOT_SONGS[_kotDay - 1];
     const _kotSongEl = document.getElementById('gevurah-kot-song');

@@ -1141,6 +1141,10 @@ async function checkInBrowser(chromium) {
     const cards = [...document.querySelectorAll('.sefirah-card')].filter(c => c.id !== 'now-sefirah-featured');
     const flat = el => el ? el.innerText.replace(/\s+/g, ' ').trim() : '';
     const main = i => flat(cards[i] && cards[i].querySelector('.sefirah-main-text'));
+    // The whole card, for a probe whose string may sit in the face or in the
+    // foot tag. Those two have swapped places repeatedly, and a probe bound
+    // to one of them goes quiet the next time they do.
+    const whole = i => flat(cards[i]);
     const m = (s, re) => (s || '').match(re);
     const pair = (x, a, b) => x ? x[a] + '|' + x[b] : '';
     // every match of a repeating pattern, order-independent
@@ -1192,7 +1196,13 @@ async function checkInBrowser(chromium) {
         // cannot drift: Fall, Winter, Spring, Summer. Compared this way the
         // check is exactly as strong, still asserting that the calendar and
         // the card name one season and one day.
-        card: () => pair(m(main(3), /Season (\d+) · Day (\d+) of 91/), 1, 2),
+        //
+        // READ OFF THE WHOLE CARD, not .sefirah-main-text. "Day N of 91" is
+        // in the foot tag now, which is a SIBLING of the main text, so main()
+        // stopped reaching it the moment the tag went back to the foot where
+        // Binah keeps its own. The face and the tag have each moved three
+        // times in two days; the card contains both wherever they sit.
+        card: () => pair(m(whole(3), /Season (\d+) · Day (\d+) of 91/), 1, 2),
         cell: s => { const x = m(s.cell, /^(\w+) · (\d+) of 91$/);
                      const n = { Fall: '1', Winter: '2', Spring: '3', Summer: '4' };
                      return x ? (n[x[1]] || x[1]) + '|' + x[2] : ''; } },
