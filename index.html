@@ -5138,6 +5138,7 @@ content: ''; float: right; width: 30px; height: 1em;
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name">728 Half-Day Cycle</div>
     <div id="hod-pos" class="sefirah-main-text">Loading…</div>
+    <div class="sefirah-tags" id="hod-tags"></div>
     <div class="malchut-ksa-row" style="margin-top:8px">
       <div class="keter-section-label" id="hod-sa-label">✦ Shulchan Aruch <span class="maalah">מעלה ו׳</span></div>
       <div id="hod-sa-face" class="sefirah-main-text">Loading…</div>
@@ -21371,11 +21372,16 @@ content: ''; float: right; width: 30px; height: 1em;
     // face's twenty-two letters, and on the three break-days the heart or a
     // kidney, where the letters stop.
     Gevurah:  (c) => _flatFace(c.querySelector('#gevurah-day-face')),
-    Tiferet:  (c) => _strongFace(c.querySelector('.sefirah-main-text')),
+    // Tiferet's own span. _strongFace found the Attribute by its being the
+    // first bold thing that was not a number; every line bolds a number now.
+    Tiferet:  (c) => _flatFace(c.querySelector('#tiferet-day-face')),
     // Netzach's own span, for the same reason Yesod has one: the "Day:"
     // label the rule used to read is gone with the labelled rows.
     Netzach:  (c) => _flatFace(c.querySelector('#netzach-day-face')),
-    Hod:      (c) => _blockFace(c.querySelector('.sefirah-main-text')),
+    // Hod's own span, round the Name alone. _blockFace took the whole first
+    // block, which is the label and the number as well as the Name.
+    Hod:      (c) => _flatFace(c.querySelector('#hod-day-face')) ||
+                     _blockFace(c.querySelector('.sefirah-main-text')),
     // Yesod's own span. The rule read what followed a "Day:" label in a
     // nested .sefirah-sub-text; the face is one count to a line now and
     // carries neither, so the day's quality says which it is itself.
@@ -26343,6 +26349,32 @@ content: ''; float: right; width: 30px; height: 1em;
       const _tifRound = cy13.cycle <= 13 ? 1 : (cy13.cycle <= 26 ? 2 : 3);
       const _tifCycN  = _tifRound === 3 ? cy13.cycle - 26 : (_tifRound === 2 ? cy13.cycle - 13 : cy13.cycle);
       const _tifCyc   = _tifRound === 3 ? `Microcosm · Cycle ${_tifCycN} of 2` : `${['','1st','2nd'][_tifRound]} Cycle ${_tifCycN}`;
+      // "Cycle", or "1st Cycle" / "2nd Cycle" where the round matters, or the
+      // microcosm's own word. The round is what the old position line carried
+      // and it has to survive on to the Cycle line.
+      const _tifCycWord = () => _tifRound === 3 ? 'Microcosm Cycle'
+        : (_tifRound === 1 ? '1st Cycle' : '2nd Cycle');
+      const _tifCycLabel = () =>
+        `${_tifCycWord()} <strong>${_tifCycN}</strong> ` +
+        `<span style="font-size:0.84em;opacity:0.72">(the same Attribute)</span>`;
+      // A number, then in brackets the Attribute and its Hebrew — the shape
+      // every other rebuilt face uses. The span is for the meditation, which
+      // reads #tiferet-day-face; _strongFace used to find the Attribute by
+      // being the first bold non-number on the card, and every line bolds a
+      // number now.
+      // THE HEBREW ALONE, as Chesed's brackets hold Hebrew alone. The
+      // Attributes are long transliterations — "Lo Hechezik Le'ad Apo" — and
+      // the name with its Hebrew beside it measured 40-odd characters, which
+      // wrapped to two lines at the DEFAULT text size and three at large.
+      // That is worse than the line it replaced, so one of the two had to go,
+      // and it is the transliteration: the detail names each Attribute in
+      // English and explains it at length, and the ⓘ does too.
+      const _tifLine = (label, num, attr, id) =>
+        `${label} <strong>${num}</strong> (` + (id ? `<span id="${id}">` : '') +
+        (attr.hebrew
+          ? `<bdi lang="he" style="font-size:1.05em;color:var(--ink)">${attr.hebrew}</bdi>`
+          : `<strong>${attr.name}</strong>`) +
+        (id ? `</span>` : '') + `)`;
       cards[4].querySelector('.sefirah-cycle-name').innerHTML = `Midot — 13-Day Nesi’im Cycle`;
       cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
         // Each Attribute on one line with its meaning in brackets beside it,
@@ -26354,13 +26386,25 @@ content: ''; float: right; width: 30px; height: 1em;
         // two run on as one sentence rather than taking a line each: they are
         // one position, the day's Attribute inside the cycle's, and a break
         // between them made them look like two readings.
-        ? `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br>` +
-          `<strong>${cy13.attr.name}</strong> <span style="font-size:0.84em;opacity:0.72">(${cy13.attr.meaning})</span>` +
-          (cycleThemeAttr.name === cy13.attr.name ? ''
-            : ` <span style="font-size:0.84em;opacity:0.72">in</span> ` +
-              `<strong>${cycleThemeAttr.name}</strong> <span style="font-size:0.84em;opacity:0.72">(${cycleThemeAttr.meaning.split(',')[0]})</span>`)
-        : `Day <strong>${cy13.day}</strong>, ${_tifCyc}:<br>` +
-          `<strong>${cy13.attr.name}</strong> <span style="font-size:0.84em;opacity:0.72">(${cy13.attr.meaning})</span>` +
+        // ONE COUNT TO A LINE, as the other six read. It was a position line
+        // — "Day 5, 1st Cycle 6:" — and then one long sentence carrying four
+        // things: the day's Attribute, its meaning, the word "in", the
+        // cycle's Attribute and ITS meaning. Each Attribute goes on the line
+        // of the count it belongs to, and the number comes down with it.
+        //
+        // THE HEBREW REPLACES THE MEANING IN THE BRACKET, which is what the
+        // author asked for and is a net shortening: the meaning is a clause
+        // and the Hebrew is two or three words. Both meanings are stated in
+        // full in the detail, which explains each Attribute at length, and
+        // the ⓘ names both in Hebrew too.
+        ? _tifLine('Day', cy13.day, cy13.attr, 'tiferet-day-face') +
+          (cycleThemeAttr.name === cy13.attr.name
+            // On the thirteen days a cycle opens with its own Attribute it is
+            // not said twice; the cycle's number still needs saying, so the
+            // line names the count and points at the line above it.
+            ? `<br>` + _tifCycLabel()
+            : `<br>` + _tifLine(_tifCycWord(), _tifCycN, cycleThemeAttr))
+        : _tifLine('Day', cy13.day, cy13.attr, 'tiferet-day-face') +
           // The two microcosm cycles have no single cycle Attribute; name the
           // set each one is reviewing instead, since that is what tells them apart.
           `<br><span style="font-size:0.85em;color:var(--ink-dim)">${cy13.setType}</span>`;
@@ -26381,7 +26425,11 @@ content: ''; float: right; width: 30px; height: 1em;
           ? ` <span style="opacity:0.55">/</span> ${cy13.cycleNassi}`
           : '') + `</div>`;
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
-      _tifTags.innerHTML = '';
+      // The gold tag at the foot, parallel to Binah's. The 13-day cycle runs
+      // twice through the year and then twice more in miniature, so the round
+      // is what the tag carries beside the day.
+      _tifTags.innerHTML =
+        `<span class="tag highlight">${_tifCyc} \u00b7 Day ${cy13.day} of 13</span>`;
     }
 
     // The Attributes explained, at the head of the detail: the day's Attribute
@@ -26916,11 +26964,24 @@ content: ''; float: right; width: 30px; height: 1em;
       (_hodBreak
         ? `<div>A cornerstone half-day pair &mdash; <span style="color:var(--ink-mid);` +
           `font-size:0.9em">one of the four Chesed keeps silent</span></div>`
-        : `<div>Name <strong>${_hodName}</strong> of 72 &middot; ` +
-          `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.15em;` +
-          `color:var(--gold)">${AYIN_BET_NAMES[_hodName - 1]}</bdi> ` +
-          `<span style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));` +
-          `white-space:nowrap">&middot; day ${_hodStep} of 5</span></div>`) +
+        // The Name line in the bracket form the other faces use: the number,
+        // then the Name itself. "of 72" and "day N of 5" have gone to the
+        // gold tag at the foot, where Binah keeps its own — they are the
+        // where-am-I counts, and this line is what the day IS.
+        //
+        // The two phase lines below are left exactly as they are. They are
+        // already a count and then its name, and their wrapping is tuned:
+        // each unit is white-space:nowrap so the line breaks BETWEEN units
+        // rather than inside one. Putting brackets round "Yesod — Connection"
+        // would add a group that must not split either, and at the larger
+        // text size "(Malchut — Manifestation)" held whole could run past a
+        // 208px column — which is a sideways-scroll failure, not a wrap.
+        // The Name itself carries the span, not the whole line: the
+        // meditation is the Name, as Chesed's is, and _blockFace was handing
+        // the ladder "Name 14 (מבה)" — the label and the number with it.
+        : `<div>Name <strong>${_hodName}</strong> ` +
+          `(<span id="hod-day-face"><bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;` +
+          `font-size:1.15em;color:var(--gold)">${AYIN_BET_NAMES[_hodName - 1]}</bdi></span>)</div>`) +
       (_hodBreak
         // A cornerstone takes no Sefirah. The ten are walked by the Names,
         // and these four days stand outside them — giving them Keter and
@@ -26931,6 +26992,18 @@ content: ''; float: right; width: 30px; height: 1em;
           `&mdash; outside the 72 \u00d7 10, binding the Names to the Name</span></div>`
         : _hodPhase(_hodDay * 2 - 1, HOD_SEFIROT[(_hodStep - 1) * 2], 'Ratzo') +
           _hodPhase(_hodDay * 2, HOD_SEFIROT[(_hodStep - 1) * 2 + 1], 'Shov'));
+    // The gold tag at the foot, parallel to Binah's. It carries the two
+    // where-am-I counts the Name line gave up: the Name out of seventy-two
+    // and the day out of its five. A cornerstone pair has neither — it stands
+    // outside the 72 × 10 — so it says that instead of counting.
+    {
+      const _hodTags = document.getElementById('hod-tags');
+      if (_hodTags) _hodTags.innerHTML = _hodBreak
+        ? `<span class="tag highlight">A cornerstone pair</span>`
+        : `<span class="tag highlight">Name ${_hodName} of 72 \u00b7 ` +
+          `Day ${_hodStep} of 5</span>`;
+    }
+
     // The stream runs out of the Shulchan Aruch into the Chofetz Chaim, so a
     // day may hold one of each — day 349 pairs the last siman with the Petichah.
     const _hodUnit = u => u.url
@@ -27427,10 +27500,22 @@ content: ''; float: right; width: 30px; height: 1em;
       // three straddle two books and both are named.
       const _yadBooks = [...new Set(_yadFace.subs.map(x => x.book))];
       document.getElementById('malchut-yad-top').innerHTML =
-        `<div style="color:var(--ink-dim);font-size:calc(11px * var(--ts, 1));">Day ${_yadFace.dayInCycle} &middot; ` +
+        // THE COUNT AS A GOLD TAG, which is the parallel the author asked for
+        // across the cards. Malchut has no foot row to put one in — its
+        // visible content is a stack of sections and _paneTakeFace files most
+        // of them away, so "the foot" is wherever the filing happens to end.
+        // Its count already stood here, at the head of the face, as plain dim
+        // text; the only thing it lacked was Binah's gold. The one tag that
+        // did exist on this card is in the detail, which the pane machinery
+        // files out of sight, so nothing is now drawn twice.
+        //
+        // The cycle reads first and the day second, as every other tag on
+        // these cards does.
+        `<div class="sefirah-tags" style="margin-bottom:4px;"><span class="tag highlight">` +
         (_yadFace.nums.length > 1
           ? `Cycles ${_yadFace.nums[0]} &amp; ${_yadFace.nums[1]} of 14`
-          : `Cycle ${_yadFace.nums[0]} of 14`) + `</div>` +
+          : `Cycle ${_yadFace.nums[0]} of 14`) +
+        ` \u00b7 Day ${_yadFace.dayInCycle} of 28</span></div>` +
         `<div style="margin-top:4px;"><strong>` +
         _yadBooks.map(x => x === 'Introduction' ? x : 'Sefer ' + x).join(' &middot; ') +
         `</strong></div>` +
@@ -27574,7 +27659,10 @@ content: ''; float: right; width: 30px; height: 1em;
         const sub = s => `<a href="${yadSefariaUrl(s)}" target="_blank" style="color:var(--gold)">${s.name}</a> <span style="color:var(--ink-dim);font-size:0.85em">· ${s.book}</span>`;
         const et = p => `<span style="font-size:1.05em">${p.he}</span> <span style="color:var(--ink-dim);font-size:0.85em">— ${p.en}</span>`;
         return `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Yad HaChazakah — the 28-Day Overview</div>
-         <div class="sefirah-tags" style="margin-bottom:6px;"><span class="tag highlight">${yad.nums.length > 1 ? 'Cycles ' + yad.nums[0] + ' &amp; ' + yad.nums[1] : 'Cycle ' + yad.nums[0]} of 14 · Day ${yad.dayInCycle} of 28</span></div>
+         <!-- The gold tag is on the FACE now, at the head of the Yad block,
+              where Malchut's count already stood as plain text. Drawn here
+              too it would be the same two numbers twice, and this copy is
+              filed into a pane by _paneTakeFace, where it is not seen. -->
          <div class="detail-row"><span class="detail-label">This cycle's ittim:</span><span class="detail-value">${yad.ittim.map(et).join('<br>')}</span></div>
          <div style="font-size:0.78rem;color:var(--ink-dim);font-style:italic;line-height:1.5;margin:2px 0 8px;">${yad.ittim.map(p => p.note).join('<br>')}</div>
          <div class="detail-row"><span class="detail-label">Today (3 of 84):</span><span class="detail-value">${yad.subs.map(sub).join('<br>')}</span></div>

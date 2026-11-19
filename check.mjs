@@ -1224,8 +1224,18 @@ async function checkInBrowser(chromium) {
                      const n = { Fall: '1', Winter: '2', Spring: '3', Summer: '4' };
                      return x ? (n[x[1]] || x[1]) + '|' + x[2] : ''; } },
       { lens: 5, name: 'Tiferet',
-        card: () => { const x = m(main(4), /Day (\d+), (?:(\d)(?:st|nd|rd|th)|Microcosm ·) Cycle (\d+)/);
-                      return x ? (x[2] || '3') + '|' + x[3] + '|' + x[1] : ''; },
+        // The position line "Day 5, 1st Cycle 6:" is gone — the face is one
+        // count to a line, so the day and the round-and-cycle are two runs
+        // now and are matched separately. The round still has to come out of
+        // the Cycle line, which is where it moved to.
+        //
+        // The foot tag is NOT read here: it says "1st Cycle 6 · Day 5 of 13",
+        // the same two numbers, and a probe should read what the card tells a
+        // reader rather than the pill that repeats it.
+        card: () => { const t = main(4);
+                      const d = m(t, /Day (\d+) \(/);
+                      const c = m(t, /(?:(\d)(?:st|nd|rd|th) Cycle|Microcosm Cycle) (\d+)/);
+                      return (d && c) ? (c[1] || '3') + '|' + c[2] + '|' + d[1] : ''; },
         cell: s => { const x = m((s.cell || '') + ' ' + (s.cell2 || ''),
                                  /(?:(\d)(?:st|nd|rd|th)|microcosm) cycle (\d+)(?: of 2)? day (\d+) of 13/);
                      return x ? (x[1] || '3') + '|' + x[2] + '|' + x[3] : ''; } },
@@ -1266,7 +1276,12 @@ async function checkInBrowser(chromium) {
         // textContent sees it whether the card is open or shut.
         // The round can be a double — "Cycles 6 & 7" in a common year — so the
         // run is taken whole, as the Chochmah probe above takes its parasha.
-        card: () => pair(m((document.getElementById('malchut-detail') || {}).textContent,
+        // READ OFF THE FACE. This used to read the detail, where the same
+        // tag was drawn; the tag has moved to the head of the Yad block on
+        // the face, gold like Binah's, and the detail's copy is gone rather
+        // than left to say it twice. #malchut-yad-top is always rendered, so
+        // no textContent-versus-innerText dodge is needed any more.
+        card: () => pair(m((document.getElementById('malchut-yad-top') || {}).textContent,
                            /Cycles? (\d+(?: & \d+)*) of 14 · Day (\d+) of 28/), 1, 2),
         cell: s => pair(m(s.cell, /set (\d+(?: & \d+)*) · (\d+)\/28/), 1, 2) },
     ];
