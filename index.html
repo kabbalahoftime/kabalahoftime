@@ -5554,10 +5554,32 @@ content: ''; float: right; width: 30px; height: 1em;
         // Compact: one labeled line per quality — "Role N: Letter · Name — short method"
         // Styled to match Netzach's labelled Day:/Level:/Cycle: lines — the
         // caller wraps the set in a .sefirah-sub-text block.
-        function qLine(label, q) {
+        // ONE COUNT TO A LINE, as Chesed and Gevurah read: the number, then
+        // in brackets the thing it points at. Here that thing is a letter and
+        // the tzaddik who carries it, which is what this cycle is about.
+        //
+        // qualitiesData holds the letter by its ENGLISH NAME only — "Yud",
+        // never "י" — so the glyph is looked up in SINGLE_LETTERS_22 by that
+        // name rather than written out again. A letter that is not in the
+        // twenty-two simply draws without one; the sweep says none does.
+        //
+        // The practice came off the line — "Tikkun HaKlali", "Torah study".
+        // The detail states it in full under Method:, for both the parasha's
+        // quality and the cycle's, so nothing of it is lost and the line stops
+        // carrying three things at once.
+        // `id` is passed for the Day line alone: THE MEDITATION READS IT.
+        // Yesod's FACE_RULE took what followed a "Day:" label inside a nested
+        // .sefirah-sub-text, and this rewrite removed both the label and the
+        // element — so the face would have fallen through to the card's own
+        // heading, which is the fault that shipped twice on Chesed. Named
+        // outright instead, as #chesed-day-face and #gevurah-day-face are.
+        function qLine(label, num, q, id) {
             if (!q) return '';
-            return `<span style="font-size:0.9em;color:var(--ink-dim)">${label}:</span> ${q.letter} · <strong>${q.name}</strong>` +
-                   ` <span style="font-size:0.85em;opacity:1">— ${q.tikkunShort || q.tikkunMethod}</span>`;
+            const he = (SINGLE_LETTERS_22.find(l => l.letter === q.letter) || {}).hebrew;
+            return `${label} <strong>${num}</strong> (` +
+                   (id ? `<span id="${id}">` : '') + `${q.letter}` +
+                   (he ? ` &mdash; <bdi lang="he" style="font-size:1.1em;color:var(--ink)">${he}</bdi>` : '') +
+                   ` &middot; <strong>${q.name}</strong>` + (id ? `</span>` : '') + `)`;
         }
         // Expose shovavim data for script builder
         window._shovavimScriptData = primaryData ? {
@@ -5577,20 +5599,28 @@ content: ''; float: right; width: 30px; height: 1em;
             // On a double parasha both numbers show: "Parasha 3 & 4".
             const _pNums = parashaInfos.map(pd => pd.relativeNumber).join(' &amp; ');
             const _cNums = uniqueCycles.join(' &amp; ');
-            // The labels below repeat the number only when there are two, where
-            // it's what tells the lines apart.
-            const _pLabel = pd => parashaInfos.length > 1 ? `Parasha ${pd.relativeNumber}` : 'Parasha';
-            const _cLabel = c  => uniqueCycles.length  > 1 ? `Cycle ${c}` : 'Cycle';
+            // Every line carries its own number now, so the numbers line that
+            // stood above them is gone: it said Day, Parasha and Cycle once
+            // each, and the three lines under it said them again. A double
+            // parasha simply draws two Parasha lines, which is what the old
+            // "Parasha 3 & 4" was compressing.
             const _qLines = [
-                qLine('Day', dayQ),
-                ...parashaInfos.map((pd, i) => qLine(_pLabel(pd), parashaQs[i])),
-                ...uniqueCycles.map((c, i) => qLine(_cLabel(c), cycleQs[i])),
+                qLine('Day', _shovavimDay, dayQ, 'yesod-day-face'),
+                ...parashaInfos.map((pd, i) => qLine('Parasha', pd.relativeNumber, parashaQs[i])),
+                ...uniqueCycles.map((c, i) => qLine('Cycle', c, cycleQs[i])),
             ].filter(Boolean).join('<br>');
             // The parasha itself is named on the Hod face (Chok L'Yisrael) and,
             // on Shabbat, by the Ben Ish Chai Drash row below — no need to head
             // this card with it too.
-            mainHtml = `Day <strong>${_shovavimDay}</strong> · Parasha <strong>${_pNums}</strong> · Cycle <strong>${_cNums}</strong>` +
-                       (_qLines ? `<div class="sefirah-sub-text">${_qLines}</div>` : '');
+            //
+            // No nested .sefirah-sub-text any more. The set used to be wrapped
+            // in one INSIDE the main text, so the card held two elements of
+            // that class — the real #yesod-parasha-numbers below, and this —
+            // and any querySelector('.sefirah-sub-text') on the card reached
+            // this one first. That is not a rendering fault, but it reads as a
+            // duplicate to anything probing the card, and it cost a wrong bug
+            // report.
+            mainHtml = _qLines || `Day <strong>${_shovavimDay}</strong>`;
         } else {
             mainHtml = foundParasha.name;
         }
@@ -5608,8 +5638,18 @@ content: ''; float: right; width: 30px; height: 1em;
         // asking twice costs nothing.
         if (typeof injectMedMarks === 'function') injectMedMarks();
 
+        // The gold tag at the foot, parallel to Binah's. The absolute parasha
+        // is derived from the app's own `cycles` table — start + relative - 1
+        // — rather than kept as a second number that could drift from it.
         const tagsEl = document.getElementById('yesod-tags');
-        if (tagsEl) tagsEl.innerHTML = '';
+        if (tagsEl) {
+            const _pd = primaryData;
+            const _cRow = _pd ? cycles.find(c => c.cycle === _pd.cycle) : null;
+            tagsEl.innerHTML = (_pd && _cRow)
+                ? `<span class="tag highlight">Cycle ${_pd.cycle} \u00b7 ` +
+                  `Parasha ${_cRow.start + _pd.relativeNumber - 1} of 54</span>`
+                : '';
+        }
 
         // Detail: attribute explanation rows
         function buildAttrRows(num) {
@@ -21300,8 +21340,13 @@ content: ''; float: right; width: 30px; height: 1em;
       } catch (e) {}
       return '';
     },
-    Chochmah: (c) => _afterLabel(c.querySelector('.sefirah-main-text'), 'Day:'),
-    Binah:    (c) => _strongFace(c.querySelector('.sefirah-main-text')),
+    // Chochmah's own span. The rule read what followed a "Day:" label on the
+    // face; the face is one count to a line now and carries no such label.
+    Chochmah: (c) => _flatFace(c.querySelector('#chochmah-day-face')),
+    // Binah's own span. _strongFace reached the combo phrase while it stood
+    // on the face; the face is one count to a line now, and the first bold
+    // thing on it is a number.
+    Binah:    (c) => _flatFace(c.querySelector('#binah-day-face')),
     // Chesed's own span, not the first <strong> on the card. The day's Name
     // was the only bold thing that was not a number, so _strongFace reached
     // it; the five-line face bolds a number on every line, and the fallbacks
@@ -21317,9 +21362,14 @@ content: ''; float: right; width: 30px; height: 1em;
     // kidney, where the letters stop.
     Gevurah:  (c) => _flatFace(c.querySelector('#gevurah-day-face')),
     Tiferet:  (c) => _strongFace(c.querySelector('.sefirah-main-text')),
-    Netzach:  (c) => _afterLabel(c.querySelector('.sefirah-sub-text'), 'Day:'),
+    // Netzach's own span, for the same reason Yesod has one: the "Day:"
+    // label the rule used to read is gone with the labelled rows.
+    Netzach:  (c) => _flatFace(c.querySelector('#netzach-day-face')),
     Hod:      (c) => _blockFace(c.querySelector('.sefirah-main-text')),
-    Yesod:    (c) => _afterLabel(c.querySelector('.sefirah-sub-text'), 'Day:'),
+    // Yesod's own span. The rule read what followed a "Day:" label in a
+    // nested .sefirah-sub-text; the face is one count to a line now and
+    // carries neither, so the day's quality says which it is itself.
+    Yesod:    (c) => _flatFace(c.querySelector('#yesod-day-face')),
     // Malchut keeps two: a se'if of Ve'atah Tetzaveh in the main text, and the
     // day's book of the Yad in the block above it. The book is the face.
     Malchut:  (c) => _strongFace(c.querySelector('.malchut-visible-content')),
@@ -23305,6 +23355,18 @@ content: ''; float: right; width: 30px; height: 1em;
   // The ten as Hod walks them, two to a day — the morning half-day taking the
   // odd one and the evening the even, so the whole ten are crossed every five
   // days and the 72 Names carry them 360 days of the year.
+  // The seven lower Sefirot in Hebrew, for the faces that name a Sefirah
+  // rather than a letter. The strings are COPIED FROM THE DIAL'S OWN `SEF`
+  // table further down this file — the one inside the kotw-root IIFE, which
+  // nothing out here can reach — so that the vocalization is the app's and
+  // not written out again from memory. The ten cards carry the same spellings
+  // a third time, in their .sefirah-hebrew divs. Change one, change all three.
+  const SEFIRAH_HE = {
+    Keter: 'כֶּתֶר', Chochmah: 'חָכְמָה', Binah: 'בִּינָה',
+    Chesed: 'חֶסֶד', Gevurah: 'גְּבוּרָה', Tiferet: 'תִּפְאֶרֶת',
+    Netzach: 'נֶצַח', Hod: 'הוֹד', Yesod: 'יְסוֹד', Malchut: 'מַלְכוּת',
+  };
+
   const HOD_SEFIROT = [
     ['Keter', 'Will'],        ['Chochmah', 'Insight'],
     ['Binah', 'Structure'],   ['Chesed', 'Expansion'],
@@ -24651,23 +24713,41 @@ content: ''; float: right; width: 30px; height: 1em;
     if (inExtra && cy22Mic) {
       document.getElementById('chochmah-cycle-name').innerHTML = cy22Mic.setLabel;
       document.getElementById('chochmah-main').innerHTML =
-        `Microcosm Day <strong>${cy22Mic.day}</strong> of ${cy22Mic.total}<br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22Mic.label}</strong> <span style="font-size:1.1em">${cy22Mic.hebrew}</span><br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Set:</span> <strong>${cy22Mic.setLabel}</strong> <span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>` +
-        (_micGate ? `<br><span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + _micGate : '') +
+        `Day <strong>${cy22Mic.day}</strong> (<span id="chochmah-day-face"><strong>${cy22Mic.label}</strong> ` +
+        `<span style="font-size:1.1em">${cy22Mic.hebrew}</span></span>)<br>` +
+        `Set (<strong>${cy22Mic.setLabel}</strong> ` +
+        `<span style="font-size:0.9em;color:var(--ink-dim)">${cy22Mic.setHebrew}</span>)` +
+        (_micGate ? `<br>Gate (` + _micGate + `)` : '') +
         _ltOpen;
       document.getElementById('chochmah-sub').innerHTML = '';
-      document.getElementById('chochmah-tags').innerHTML = '';
+      // The microcosm's own day, which the face no longer carries: the day
+      // line names the letter now, not the count out of 28.
+      document.getElementById('chochmah-tags').innerHTML =
+        `<span class="tag highlight">Microcosm \u00b7 Day ${cy22Mic.day} of ${cy22Mic.total}</span>`;
     } else {
       document.getElementById('chochmah-cycle-name').innerHTML = 'Alef Bet — 22-Day Three Weeks Cycle';
+      // ONE COUNT TO A LINE, as Chesed, Gevurah, Yesod and Netzach read: the
+      // number, then in brackets the thing it points at. The "Day N · Cycle N"
+      // line that stood above said both numbers once and the labelled rows
+      // under it said them again, so each number has moved down on to its own
+      // row and that line is gone.
+      //
+      // The Gate keeps no number because it has none — it is the pair the day
+      // and the cycle make between them, not a third count.
       document.getElementById('chochmah-main').innerHTML =
-        `Day <strong>${cy22.day}</strong> · Cycle <strong>${cy22.cycle}</strong><br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Day:</span> <strong>${cy22.dailyLetter}</strong> <span style="font-size:1.1em">${cy22.dailyHebrew}</span><br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Cycle:</span> <strong>${cy22.letters}</strong> <span style="font-size:1.1em">${cy22.hebrew}</span><br>` +
-        `<span style="font-size:0.8em;color:var(--ink-dim)">Gate:</span> ` + gatesFaceLine +
+        `Day <strong>${cy22.day}</strong> (<span id="chochmah-day-face"><strong>${cy22.dailyLetter}</strong> ` +
+        `<span style="font-size:1.1em">${cy22.dailyHebrew}</span></span>)<br>` +
+        `Cycle <strong>${cy22.cycle}</strong> (<strong>${cy22.letters}</strong> ` +
+        `<span style="font-size:1.1em">${cy22.hebrew}</span>)<br>` +
+        `Gate (` + gatesFaceLine + `)` +
         _ltOpen;
       document.getElementById('chochmah-sub').innerHTML = '';
-      document.getElementById('chochmah-tags').innerHTML = '';
+      // The gold tag at the foot, parallel to Binah's. It repeats the Day and
+      // the Cycle the face names, and adds the "of 22" that neither line
+      // carries — the same bargain Chesed's "Cycle 1 · Name 70 of 72" makes
+      // against its own first line, and the author asked for the parallel.
+      document.getElementById('chochmah-tags').innerHTML =
+        `<span class="tag highlight">Cycle ${cy22.cycle} \u00b7 Day ${cy22.day} of 22</span>`;
     }
     
     // Acrostic verse references — day index into each cycle's 22-day journey
@@ -25346,14 +25426,37 @@ content: ''; float: right; width: 30px; height: 1em;
     const breslevCD4 = breslevIdx2 !== null ? BRESLEV_CDS[breslevIdx2 + 1] : null;
 
     document.getElementById('binah-cycle-name').innerHTML = 'Sefirot — 7×7×7 Omer Cycle';
+    // ONE COUNT TO A LINE, as the other five read. Each of the three numbers
+    // already had a Sefirah — the combo line under them, "Malchut she'beTiferet
+    // she'beGevurah", IS those three in order — so the card was saying each
+    // count twice, once as a number and once inside a phrase.
+    //
+    // THE COMBO PHRASE IS GONE FROM THE FACE, and that is a real loss, not a
+    // tidy: it is how the Omer is said aloud. It is kept in the detail, and
+    // the three lines say outright what it encodes. Weighed and chosen, the
+    // same way Gevurah's "Eagle's Face of the Lion" was.
+    //
+    // The Hebrew comes from SEFIRAH_HE, which copies the dial's own table.
+    const _bLine = (label, num, sef, id) =>
+      `${label} <strong>${num}</strong> (` + (id ? `<span id="${id}">` : '') +
+      `<strong>${sef}</strong>` +
+      (SEFIRAH_HE[sef] ? ` &mdash; <bdi lang="he" style="font-size:1.1em;color:var(--ink)">${SEFIRAH_HE[sef]}</bdi>` : '') +
+      (id ? `</span>` : '') + `)`;
     document.getElementById('binah-main').innerHTML =
       // In the Mochin weeks there is no cycle to name and no third she'be, so
-      // the line names the week of the year — which is the same number the
-      // date bar above is already showing — and the Sefirah it belongs to.
+      // the card names the week of the year and the Sefirah it belongs to,
+      // and there is no Cycle line to draw.
       (_b777.mochin
-        ? `Day <strong>${omerDay}</strong> · Week <strong>${omerWeek}</strong> — <strong>${_b777.weekSef}</strong><br>`
-        : `Day <strong>${omerDay}</strong> · Week <strong>${omerWeek}</strong> · Cycle <strong>${omerCycle}</strong><br>`) +
-      `<strong>${combo}</strong>`;
+        ? _bLine('Day', omerDay, _b777.daySef, 'binah-day-face') + `<br>` +
+          _bLine('Week', omerWeek, _b777.weekSef)
+        // EVERY NAME OFF _b777, not the bare daySef/weekSef/superSef that
+        // were in scope. Those are an older, separate computation; `combo`
+        // in the detail is built from _b777, so reading the face from the
+        // same object is what keeps the three lines and the phrase they
+        // decompose into from ever naming different Sefirot.
+        : _bLine('Day', omerDay, _b777.daySef, 'binah-day-face') + `<br>` +
+          _bLine('Week', omerWeek, _b777.weekSef) + `<br>` +
+          _bLine('Cycle', omerCycle, _b777.cycleSef));
     document.getElementById('binah-sub').innerHTML = '';
     document.getElementById('binah-tags').innerHTML = _b777.mochin
       ? `<span class="tag highlight">Mochin · Day ${omerPos} of 21</span>`
@@ -26655,25 +26758,42 @@ content: ''; float: right; width: 30px; height: 1em;
       // one never.
       const _netzLevel = cy41v.day === 41 ? 0 : Math.ceil(cy41v.day / 10);
       const _netzInLevel = _netzLevel ? ((cy41v.day - 1) % 10) + 1 : cy41v.day;
-      // Drawn inside *-main, under the day's own name, not in the *-tags row
-      // at the foot — the same choice Chesed and Gevurah make, and for the
-      // same reason: the row at the foot sits after the sub-text, so the line
-      // that answers "where am I" would be the last thing reached.
-      const _netzTagRow = `<div class="sefirah-tags"><span class="tag highlight">` +
-        `Cycle ${cy41v.cycle} · Day ${cy41v.day} of 41</span></div>`;
+      // ONE COUNT TO A LINE, as Chesed, Gevurah and Yesod read. The numbers
+      // line and the three labelled rows under it said Day, Level and Cycle
+      // once each and then again, so each number has moved down on to the row
+      // that explains it and the line above is gone.
+      //
+      // AN EM DASH, NOT BRACKETS, and that is the one place this card departs
+      // from its three siblings. Theirs hold a name — יבמ, Lion, Rashbi — and
+      // a bracket round a name closes on the same line. Netzach's hold
+      // sentences: "You shall not bear false witness against your neighbour"
+      // is the whole value, and a bracket opened before it closes three lines
+      // later, where it reads as something broken rather than as a pair.
+      //
+      // The day's own commandment carries #netzach-day-face. The FACE_RULE
+      // took what followed a "Day:" label in the sub-text, and there is no
+      // such label now; unnamed, the meditation would have fallen through to
+      // the card's heading, which is the fault that shipped twice on Chesed.
+      const _netzLine = (label, num, value, id) =>
+        `${label} <strong>${num}</strong> &mdash; ` +
+        (id ? `<span id="${id}">${value}</span>` : value);
       cards[5].querySelector('.sefirah-main-text').innerHTML =
-        `Day <strong>${_netzInLevel}</strong>` +
-        (_netzLevel ? ` · Level <strong>${_netzLevel}</strong>` : '') +
-        ` · Cycle <strong>${cy41v.cycle}</strong>` + _netzTagRow;
-      cards[5].querySelector('.sefirah-sub-text').innerHTML =
-        `<span style="font-size:0.9em;color:var(--ink-dim)">Day:</span> ${dayCmd.text}` +
-        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Level/World:</span> ${cy41v.soulLevel.replace(' / ', '/')}` +
-        `<br><span style="font-size:0.9em;color:var(--ink-dim)">Cycle:</span> ${_cycleCmdText || cycleCmd.commandment}`;
-      // The FOOT row, explicitly. querySelector finds the first match in the
-      // card, and the face above now contains a .sefirah-tags of its own — so
-      // the bare selector cleared the tag that had just been written there and
-      // left an empty div behind. The child combinator can only reach the row.
-      cards[5].querySelector('.sefirah-content-col > .sefirah-tags').innerHTML = '';
+        _netzLine('Day', _netzInLevel, dayCmd.text, 'netzach-day-face') + `<br>` +
+        (_netzLevel
+          ? _netzLine('Level', _netzLevel, cy41v.soulLevel.replace(' / ', '/')) + `<br>`
+          : '') +
+        _netzLine('Cycle', cy41v.cycle, _cycleCmdText || cycleCmd.commandment);
+      cards[5].querySelector('.sefirah-sub-text').innerHTML = '';
+      // THE GOLD TAG AT THE FOOT, where Binah, Chesed, Gevurah and Yesod keep
+      // theirs. It was drawn inside *-main; the face names the Level and the
+      // Cycle itself now, and the absolute day of the forty-one is the one
+      // count that is nowhere on it.
+      //
+      // The child combinator stays. querySelector finds the first match in
+      // the card, and while the face held a .sefirah-tags of its own the bare
+      // selector cleared the tag just written there and left an empty div.
+      cards[5].querySelector('.sefirah-content-col > .sefirah-tags').innerHTML =
+        `<span class="tag highlight">Cycle ${cy41v.cycle} \u00b7 Day ${cy41v.day} of 41</span>`;
       cards[5].querySelector('.sefirah-detail').innerHTML =
         `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">Mivtzah · Tikkun HaKlali</div>
          <div style="margin-bottom:4px;"><span style="font-size:0.78rem;color:var(--gold-mid)">Mivtzah:</span> <span style="font-size:0.88rem;color:var(--ink-mid)">${_mivtzahText} (${_cycleLabel})</span></div>
