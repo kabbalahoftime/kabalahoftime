@@ -21388,7 +21388,11 @@ content: ''; float: right; width: 30px; height: 1em;
     Yesod:    (c) => _flatFace(c.querySelector('#yesod-day-face')),
     // Malchut keeps two: a se'if of Ve'atah Tetzaveh in the main text, and the
     // day's book of the Yad in the block above it. The book is the face.
-    Malchut:  (c) => _strongFace(c.querySelector('.malchut-visible-content')),
+    // Malchut's own span, round the day's book of the Yad. _strongFace found
+    // it only by its being the first bold thing in the visible content, and
+    // the Day line bolds a number ahead of it now.
+    Malchut:  (c) => _flatFace(c.querySelector('#malchut-day-face')) ||
+                     _strongFace(c.querySelector('.malchut-visible-content')),
   };
   function _faceOf(card, name) {
     if (!card) return '';
@@ -27500,30 +27504,56 @@ content: ''; float: right; width: 30px; height: 1em;
       // three straddle two books and both are named.
       const _yadBooks = [...new Set(_yadFace.subs.map(x => x.book))];
       document.getElementById('malchut-yad-top').innerHTML =
-        // THE COUNT AS A GOLD TAG, which is the parallel the author asked for
-        // across the cards. Malchut has no foot row to put one in — its
-        // visible content is a stack of sections and _paneTakeFace files most
-        // of them away, so "the foot" is wherever the filing happens to end.
-        // Its count already stood here, at the head of the face, as plain dim
-        // text; the only thing it lacked was Binah's gold. The one tag that
-        // did exist on this card is in the detail, which the pane machinery
-        // files out of sight, so nothing is now drawn twice.
+        // ONE COUNT TO A LINE, as the other eight read, in the author's own
+        // layout:
         //
-        // The cycle reads first and the day second, as every other tag on
-        // these cards does.
-        `<div class="sefirah-tags" style="margin-bottom:4px;"><span class="tag highlight">` +
+        //   Day 14 (Sefer Zeraim · Sefer Avodah)
+        //   Cycle 3 (עת להרוג ועת לרפוא — a time to kill, and a time to heal)
+        //   [ Cycle 3 of 14 · Day 14 of 28 ]
+        //
+        // The day's books and the cycle's pair of times were three unlabelled
+        // blocks before — the count in dim text, then the books, then the
+        // ittim — so neither of the two numbers sat with the thing it names.
+        //
+        // MALCHUT HAS NO FOOT ROW to put the tag in. Its visible content is a
+        // stack of sections and _paneTakeFace files most of them away, so
+        // "the foot" is wherever the filing happens to end. The tag goes
+        // under these two lines, which is as close to a foot as this card
+        // has. The copy that used to sit in the detail is gone rather than
+        // left to say the same two numbers twice.
+        //
+        // The books carry #malchut-day-face: the meditation is the day's
+        // book of the Yad, and _strongFace found it only by its being the
+        // first bold thing on the card.
+        `<div>Day <strong>${_yadFace.dayInCycle}</strong> ` +
+        // THE BOOK NAMES WITHOUT "Sefer". Three days in each round straddle
+        // two books, and "Sefer Zeraim · Sefer Avodah" wrapped with
+        // "Avodah)" alone on the second line at the DEFAULT text size — the
+        // orphaned bracket the author caught on Yesod. Saying Sefer once for
+        // both was tried and still wrapped: the column is 208px.
+        //
+        // So it is dropped from the face. The heading above these lines
+        // reads "Cycles of Yad HaChazakah", which is the only context the
+        // names need, and the detail and the Stars pane both give each book
+        // its Sefer in full.
+        `(<span id="malchut-day-face"><strong>` +
+        _yadBooks.join(' &middot; ') +
+        `</strong></span>)</div>` +
+        // One Cycle line per cycle: a day that straddles two rounds has two
+        // numbers and two pairs of times, and nums[i] is the round that
+        // ittim[i] belongs to. Indexed rather than zipped blind, so a day
+        // with more times than numbers still names a round.
+        `<div style="line-height:1.6;margin-top:3px;">` +
+        _yadFace.ittim.map((pair, i) =>
+          `Cycle <strong>${_yadFace.nums[i] != null ? _yadFace.nums[i] : _yadFace.nums[0]}</strong> ` +
+          `(<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.05em">${pair.he}</bdi>` +
+          ` <span style="color:var(--ink-mid)">&mdash; ${pair.en}</span>)`).join('<br>') +
+        `</div>` +
+        `<div class="sefirah-tags" style="margin-top:6px;"><span class="tag highlight">` +
         (_yadFace.nums.length > 1
           ? `Cycles ${_yadFace.nums[0]} &amp; ${_yadFace.nums[1]} of 14`
           : `Cycle ${_yadFace.nums[0]} of 14`) +
-        ` \u00b7 Day ${_yadFace.dayInCycle} of 28</span></div>` +
-        `<div style="margin-top:4px;"><strong>` +
-        _yadBooks.map(x => x === 'Introduction' ? x : 'Sefer ' + x).join(' &middot; ') +
-        `</strong></div>` +
-        `<div style="line-height:1.6;margin-top:3px;">` +
-        _yadFace.ittim.map(p =>
-          `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.05em">${p.he}</bdi>` +
-          ` <span style="color:var(--ink-mid)">&mdash; ${p.en}</span>`).join('<br>') +
-        `</div>`;
+        ` \u00b7 Day ${_yadFace.dayInCycle} of 28</span></div>`;
     })();
 
     // KSA row: Kitzur Shulchan Aruch Yomi
