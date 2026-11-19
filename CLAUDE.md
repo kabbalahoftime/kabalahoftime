@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v375**; the next is v376.
+nobody. Currently **v376**; the next is v377.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -812,68 +812,94 @@ is not the same as nesting, and the author named it before I saw it:
 
 5 × 72 and 15 × 24 are **two factorings of the same 360 days**, not one count
 with four levels. Four numbers on one line read as the latter, which is what
-made the line hard. So the face is two lines, one meditation each, in the
-author's own layout:
+made the line hard. The face is **four lines, each a number and its own
+name**:
 
 ```
-Name 69 (ראה) · Cycle 1
-Mishmar 21 (יָכִין) · Blessing: יְבָרֶכְךָ ה׳ וְיִשְׁמְרֶךָ
+Name 70 (יבמ)
+Cycle 1 (בְּרֵאשִׁית)
+Mishmar 22 (גָּמוּל)
+Blessing Word 3 (וְיִשְׁמְרֶךָ)
 ```
 
-The **Name leads**: it is what the card is titled after, and the one count a
-reader of *Shem Ayin-Bet* is here for. Its Hebrew rides in parentheses rather
-than standing bare on a line of its own, which is where it was and where it
-said nothing about itself.
+**Every line is built the same way** — a number, then in parentheses the
+Hebrew thing that number points at. The parenthesis is the same gesture four
+times, which is what makes the block read as one list rather than four facts.
 
-**Each line is a number and its own name, and the parenthesis is the same
-gesture both times.** Name 69 is ראה; Mishmar 21 is יָכִין. Two rows used to
-stand under these two lines — `Mishmar: יָכִין — Yachin` and `Birkat
-Kohanim: <the cycle's three words>` — which **said Mishmar twice, a line
-apart**. Each count carries its own name on its own line now and the rows
-are gone, which took the face from 101px to 80px.
+**The Cycle's name is its lobe.** `_lobe` is `CHESED_LOBES[cycle - 1]`, the
+app's own mapping, already drawn in the detail's *Lobe of the Lung* row. The
+Cycle was the one count on this face with a number and no name.
 
-The blessing **lost its ordinal and kept its words**. `Blessing Word 3`
-named the position and not the word; the cycle's three words with today's in
-gold say the same thing and say *which*. The whole word-run goes inside one
-`<bdi>` — standing alone in its old row the three Hebrew words formed one
-right-to-left run by themselves, but after a Latin label and a middot they
-have to be told. The transliteration went with the row: the Name's line has
-never carried one, and the detail still states `Mishmar N of 24: יָכִין —
-Yachin` in full, with the link to I Divrei HaYamim 24.
+**Two intermediate shapes came before it, and the history is the argument:**
 
-**And no tag.** It read `Cycle 1 · Name 62 of 72`, which is both of line
-one's numbers over again. The other three keep theirs because their absolute
-count is nowhere on their face; on Chesed it now is. The tag row went with
-it — it was built with three arms and reached on only one, so the silent-day
-and microcosm arms had never rendered at all.
+```
+Mishmar 21 · Word 3 · Cycle 1        the nest forced on it, over a tag
+ראה                                   saying Cycle 1 · Name 69 of 72
+
+Name 69 (ראה) · Cycle 1              two lines — but said Mishmar twice,
+Mishmar 21 · Blessing Word 3          once here and again in the row under
+Mishmar: יָכִין — Yachin              it
+Birkat Kohanim: <three words>
+```
+
+Giving every count its name killed both sub-rows. Then the four would not
+sit two to a line: at 390px the blessing word wrapped to a line by itself,
+`(וְיִשְׁמְרֶךָ)` orphaned in brackets. **One count to a line, 108px, and
+nothing wraps.** The author chose it from a render of both.
+
+**Neither the transliteration nor the blessing's other two words are on the
+face.** No line carries a transliteration, and the detail states
+`Mishmar N of 24: יָכִין — Yachin` in full with its link, and the cycle's
+three words with today's in gold under *one word each 24 days*.
+
+**And no tag.** It read `Cycle 1 · Name 62 of 72`, which is two of those four
+numbers over again. The other three keep theirs because their absolute count
+is nowhere on their face; on Chesed it now is. The tag row went with it — it
+was built with three arms and reached on only one, so the silent-day and
+microcosm arms had never rendered at all.
+
+Each Hebrew word goes inside its **own `<bdi>`**: after a Latin label and an
+opening bracket it is no longer a run of its own and has to be told which way
+it reads.
 
 **The seventy-two are Names, not days.** The tag and the detail both said
 *Day N of 72*, so the day's own Name sat bare with its number named nowhere.
 Both say **Name N** now. `nameNum` and `dayInCycle` are the same field,
 returned twice under two names, so there is only ever one number to label.
 
-`check.mjs`'s Chesed probe reads the **face**, not a tag:
-`/Name (\d+) \((\S+)\) · Cycle \d+/`, assembled name-first to match the
-calendar cell. It is matched to the current wording rather than widened to
-accept the old — this probe is what caught the Day→Name rename, and a probe
-that accepts every past spelling catches no future one.
+**Two readers in `check.mjs` read this face, and both break when it moves.**
+`flat()` is `innerText`, so the `<br>`s arrive as single spaces and the four
+lines read as one run.
 
-**A second reader of that face had gone stale and said nothing.** The leap
-sweep gathers `name:` off `#chesed-main` for check (d), *the 72 Names hold
-across each microcosm*, and its pattern was still `/Day (\d+) · Cycle (\d+)
-of 5/` — wording the face dropped at some earlier rewrite. Its only reader
-skips a row whose name is null, so the check printed **ok while comparing
-nothing at all**. It reads the current face now. The lesson is the quiet
-failure mode, not the pattern: a probe that `continue`s on no-match goes
-silent rather than red, so **a rewrite of Chesed's face means re-reading
-both readers**. The `mishmar:` field beside it reads the *microcosm* branch,
-which still says `Mishmar N of 24:`, and was never affected.
+- the **calendar probe**, `/Name (\d+) \((\S+)\) Cycle \d+/`, assembled
+  name-first to match the calendar cell. Matched to the current wording
+  rather than widened to accept the old — this probe caught the Day→Name
+  rename, and a probe that accepts every past spelling catches no future one.
+  It fails loudly.
+- the **leap sweep's `name:`**, for check (d) *the 72 Names hold across each
+  microcosm*. This one **failed silently**, and did for a long time: its
+  pattern was still `/Day (\d+) · Cycle (\d+) of 5/`, wording the face had
+  dropped at some earlier rewrite, and its only reader skips a row whose
+  name is null — so the check printed **ok while comparing nothing at all**.
 
-Swept 401 days across all five cycles: 369 ordinary days all matching
-`Name N (he) · Cycle N` / `Mishmar N (he) · Blessing: …`, exactly one gold
-word on each, no tag anywhere inside the face, and the height a constant
-80px — the longest blessing (`וְיָשֵׂם לְךָ שָׁלוֹם`) wraps no further than
-the shortest.
+The quiet failure mode is the lesson, not the pattern. Two things now stand
+against it. The Name and the Cycle are matched **separately** rather than as
+one run, so a line inserted between them cannot unmatch both. And the check
+**fails outright when a whole 1401-day sweep yields no name**:
+
+```
+FAIL the Chesed face reader has gone stale — no day in 1401 yielded a
+     Name, so the check below compares nothing
+```
+
+That guard was proved by breaking the pattern on purpose and running the
+suite: it fires, and the `ok` line no longer prints. The `mishmar:` field
+beside it reads the *microcosm* branch, which still says `Mishmar N of 24:`,
+and was never affected.
+
+Swept 401 days: 369 ordinary days all four lines well-formed, all **15**
+cycle-and-word pairs seen (5 × 3), no tag anywhere inside the face, and the
+height a constant **108px with nothing wrapping** on any of them.
 
 **Gevurah's** face is 22 letters and a season is four of them, so
 `inQuarter` inside `quarter` inside `season`. The **break-days keep the

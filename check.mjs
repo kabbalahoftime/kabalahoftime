@@ -624,10 +624,17 @@ async function checkInBrowser(chromium) {
         // reader skips a row whose name is null — so check (d) below, "the 72
         // Names hold across each microcosm", printed ok while comparing
         // nothing at all. The face stopped saying "Day N · Cycle N of 5" when
-        // it was rewritten, and says "Name 69 (ראה) · Cycle 1" now. Matched to
-        // that. If it goes stale again the check goes quiet again, so a
-        // rewrite of Chesed's face means re-reading this line.
-        name: (chesed.match(/Name (\d+) \(\S+\) · Cycle (\d+)/) || []).slice(1, 3).join('/') || null,
+        // it was rewritten, and reads "Name 69 (ראה) / Cycle 1 (בראשית) / …"
+        // now, four lines that innerText joins with spaces.
+        //
+        // The two numbers are matched SEPARATELY rather than as one run, so
+        // that a line inserted between them does not silently unmatch both —
+        // and (d) below now fails outright if a whole sweep yields no name,
+        // which is the fault this line had and could not report.
+        name: (() => {
+          const n = chesed.match(/Name (\d+) \(/), c = chesed.match(/Cycle (\d+)/);
+          return n && c ? n[1] + '/' + c[1] : null;
+        })(),
         // Read off the MICROCOSM branch, not the ordinary one — the rows this
         // is used on are the 28 days inside a window, and that branch still
         // prints "Mishmar N of 24:". Unchanged by the ordinary face's rewrite.
@@ -709,6 +716,15 @@ async function checkInBrowser(chromium) {
 
   // (d) the 72 Names hold across the window and resume — "no Name is said twice
   //     and none is missed" is the claim the cycle note makes, so it is checked.
+  //
+  // THE READER ITSELF IS CHECKED FIRST. This loop skips a row it cannot
+  // parse, so when the face was rewritten and the pattern went stale the
+  // check printed ok having compared nothing at all — silent, not red. A
+  // sweep of 1401 days that yields no name at all means the reader is
+  // broken, not that the Names are fine, and that is now a failure.
+  const named = leapRows.filter(r => r.name).length;
+  if (!named) fail('the Chesed face reader has gone stale — no day in 1401 ' +
+                   'yielded a Name, so the check below compares nothing');
   const resumeBad = [];
   for (const w of windows) {
     const before = leapRows.find(r => r.o === w.startO - 1);
@@ -720,7 +736,7 @@ async function checkInBrowser(chromium) {
     if (!stepped) resumeBad.push(`offset ${w.startO}: held at ${before.name}, resumed at ${after.name}`);
   }
   resumeBad.forEach(m => fail(`the 72 Names lost their place across the microcosm — ${m}`));
-  if (!resumeBad.length && windows.length)
+  if (!resumeBad.length && windows.length && named)
     pass(`the 72 Names hold across each microcosm and resume one step on, none said twice`);
 
   // (e) the 24 priestly watches run once through the 28 days, four silences
@@ -1156,9 +1172,10 @@ async function checkInBrowser(chromium) {
       // main() still reaches it. Chesed went the other way: it holds two
       // reckonings rather than one nest, so it is two lines and no tag.
       { lens: 3, name: 'Chesed',
-        // "Name 62 (<name>) · Cycle 1 / Mishmar 14 (<he>) · Blessing: ..." —
-        // the face carries two meditations on two lines now, and the Name's
-        // own line opens with its number and carries its Hebrew beside it.
+        // "Name 62 (<name>) / Cycle 1 (<he>) / Mishmar 14 (<he>) / Blessing
+        // Word 3 (<he>)" — four lines, each a number and the Hebrew thing it
+        // points at. flat() turns the <br>s into single spaces, so the Name
+        // and the Cycle read as one run here.
         // The tag this used to read is gone: it repeated both of that line's
         // numbers. So the number comes from the line and the name from the
         // parentheses, and the pair is assembled name-first to match the cell.
@@ -1166,7 +1183,7 @@ async function checkInBrowser(chromium) {
         // Matched to the current wording rather than widened to accept the
         // old. This probe is what caught the Day→Name rename, and a probe
         // that accepts every past spelling catches no future one.
-        card: () => pair(m(main(2), /Name (\d+) \((\S+)\) · Cycle \d+/), 2, 1),
+        card: () => pair(m(main(2), /Name (\d+) \((\S+)\) Cycle \d+/), 2, 1),
         cell: s => pair(m(s.cell, /^(\S+) · (\d+) of 72$/), 1, 2) },
       { lens: 4, name: 'Gevurah',
         // The face no longer prints the season's name at all — it is in the

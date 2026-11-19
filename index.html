@@ -25489,72 +25489,87 @@ content: ''; float: right; width: 30px; height: 1em;
         `<br><span style="font-size:0.85em;color:var(--ink-dim)">The five lobes in 28 days — the twenty-four watches once through</span>`
       : ayinBetInfo.isBreak
       ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
-      // TWO LINES, BECAUSE THIS CARD HOLDS TWO MEDITATIONS.
-      // The other three nesting cards read small · middle · large, one count
-      // with three levels. Chesed is not that shape. It carries two separate
-      // reckonings of the same days — the Name through the five cycles, and
-      // the twenty-four mishmarot under the fifteen words of the blessing —
-      // and 5 × 72 and 15 × 24 are two factorings of 360, not one nest. Four
-      // numbers on one line read as a single count with four levels, which
-      // is what made the line hard. So: the Name's line, then the Mishmar's.
+      // ── FOUR LINES, EACH A NUMBER AND ITS OWN NAME ──
+      //   Name 70 (יבמ)
+      //   Cycle 1 (בְּרֵאשִׁית)
+      //   Mishmar 22 (גָּמוּל)
+      //   Blessing Word 3 (וְיִשְׁמְרֶךָ)
       //
-      // The Name leads, because it is what the card is titled after and the
-      // one count a reader of Shem Ayin-Bet is here for. Its Hebrew comes
-      // with it in parentheses rather than standing bare on a line of its
-      // own, which is where it was and where it said nothing about itself.
+      // THE OTHER THREE NESTING CARDS DO NOT APPLY HERE. They read small ·
+      // middle · large, one count with three levels. Chesed carries two
+      // separate reckonings of the same days — the Name through the five
+      // cycles, and the twenty-four mishmarot under the fifteen words of the
+      // blessing — and 5 × 72 and 15 × 24 are two factorings of 360, not one
+      // nest. Four numbers on one line read as a single count with four
+      // levels, which is what made that line hard. The author named it:
+      // "It feels like two separate meditations."
       //
-      // Mishmar, not Watch. They are one thing, and this line was the only
-      // place in the whole Chesed reckoning that used the English: the
-      // microcosm branch, the row below, the detail and the link to I Divrei
-      // HaYamim 24 all say Mishmar. One word for one thing, and it is the
-      // word the source uses. "Blessing Word" rather than "Word", because
-      // Word alone named neither which words nor whose.
+      // Two intermediate shapes came before this one and both are worse:
       //
-      // NO TAG. It said "Cycle N · Name N of 72", which is both of line
-      // one's numbers over again. The other three nesting cards keep theirs
+      //   Mishmar 21 · Word 3 · Cycle 1      the forced nest, over a tag
+      //   ראה                                 saying Cycle 1 · Name 69 of 72
+      //
+      //   Name 69 (ראה) · Cycle 1            two lines, but said Mishmar
+      //   Mishmar 21 · Blessing Word 3        twice — once here and again in
+      //   Mishmar: יָכִין — Yachin            the row under it
+      //   Birkat Kohanim: <three words>
+      //
+      // Giving every count its name killed both sub-rows, and then the four
+      // would not sit two to a line: at 390px the blessing word wrapped to a
+      // line by itself, "(וְיִשְׁמְרֶךָ)" orphaned in brackets. One count to
+      // a line, measured at 108px and nothing wrapping. The author chose it
+      // from a render of both.
+      //
+      // EVERY LINE IS BUILT THE SAME WAY: a number, then in parentheses the
+      // Hebrew thing that number points at. The parenthesis is the same
+      // gesture four times, which is what makes the block read as one list
+      // rather than four facts.
+      //
+      // THE CYCLE'S NAME IS ITS LOBE, and _lobe is CHESED_LOBES[cycle - 1] —
+      // the app's own mapping, already drawn in the detail's "Lobe of the
+      // Lung" row. Until now the Cycle was the one count on this face with a
+      // number and no name.
+      //
+      // Mishmar, not Watch. They are one thing, and the face was once the
+      // only place in the whole Chesed reckoning that used the English: the
+      // microcosm branch, the detail and the link to I Divrei HaYamim 24 all
+      // say Mishmar. "Blessing Word" rather than "Word", because Word alone
+      // named neither which words nor whose.
+      //
+      // The transliteration is not here — no line carries one, and the
+      // detail below states "Mishmar N of 24: יָכִין — Yachin" in full with
+      // its link. Nor are the blessing's other two words: the detail has the
+      // cycle's three with today's in gold, under "one word each 24 days".
+      //
+      // NO TAG. It said "Cycle N · Name N of 72", which is two of these four
+      // numbers over again. The other three nesting cards keep theirs
       // because their absolute count is nowhere on the face; here it now is.
       // The tag row went with it: it was built with three arms and only ever
       // reached on this one, so the silent-day and microcosm variants of it
       // had never been drawn at all.
-      // ── EACH LINE IS A NUMBER AND ITS OWN NAME ──
-      // Two rows used to stand under these two lines: "Mishmar: יָכִין —
-      // Yachin" and "Birkat Kohanim: <the cycle's three words>". That said
-      // Mishmar twice, a line apart, which is what the author caught. So each
-      // count now carries its own name on its own line, and the rows are gone.
       //
-      // The two lines are built the same way: a number, then in parentheses
-      // the Hebrew thing that number points at. Name 69 is ראה. Mishmar 21 is
-      // יָכִין. The parenthesis is the same gesture both times.
+      // The Mishmar is NOT the same number as the Name above it, though the
+      // first twenty-four days of every cycle make it look that way: the
+      // Name runs 1–72 and the mishmar wraps at 24, so day 25 is mishmar 1
+      // again. Swept a hundred and fifty days to be sure — the two agree on
+      // twenty-nine and differ on ninety-six, which is the arithmetic
+      // working.
       //
-      // The blessing word lost its ordinal and kept its words. "Blessing Word
-      // 3" named the position and not the word; the three words of the cycle
-      // with today's in gold say the same thing and say which word it is. The
-      // ordinal is still in the detail below, under "one word each 24 days".
-      //
-      // The English transliteration went with the row — the Name's line has
-      // never carried one, and the detail states "Mishmar N of 24: יָכִין —
-      // Yachin" in full, with the link to I Divrei HaYamim 24.
-      //
-      // Not the same number as the Name beside it, though the first
-      // twenty-four days of every cycle make it look that way: the Name runs
-      // 1–72 and the mishmar wraps at 24, so day 25 is mishmar 1 again. Swept
-      // a hundred and fifty days to be sure — the two agree on twenty-nine of
-      // them and differ on ninety-six, which is the arithmetic working.
+      // Each Hebrew word goes inside its own <bdi>: after a Latin label and
+      // an opening bracket it is no longer a run of its own, and must be
+      // told which way it reads.
       : `Name <strong>${ayinBetInfo.nameNum}</strong> ` +
-        `(<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${ayinBetInfo.name}</bdi>)` +
-        ` &middot; Cycle <strong>${ayinBetInfo.cycle}</strong><br>` +
+        `(<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${ayinBetInfo.name}</bdi>)<br>` +
+        `Cycle <strong>${ayinBetInfo.cycle}</strong>` +
+        (_lobe
+          ? ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${_lobe.he}</bdi>)`
+          : '') + `<br>` +
         `Mishmar <strong>${bkMishmarNum}</strong>` +
         (bkMishmar
           ? ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</bdi>)`
-          : '') +
-        // The whole word-run inside one <bdi>. Standing alone in its old row
-        // the three Hebrew words formed one right-to-left run by themselves;
-        // mid-line, after a Latin label and a middot, they need to be told.
-        ` &middot; Blessing: ` +
-        `<bdi lang="he" style="font-size:1.05em;color:var(--ink)">` +
-        bkWords.map((w, i) => i === bkIdx
-          ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ') +
-        `</bdi>`;
+          : '') + `<br>` +
+        `Blessing Word <strong>${bkIdx + 1}</strong>` +
+        ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkWords[bkIdx]}</bdi>)`;
     document.getElementById('chesed-sub').innerHTML = '';
     document.getElementById('chesed-text-label').innerHTML =
       `✦ ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} <span class="maalah">מעלה י׳</span>`;
