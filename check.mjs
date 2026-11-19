@@ -620,7 +620,17 @@ async function checkInBrowser(chromium) {
         // of 22 and then the twelve vowels, 16 × 22 + 12 = 364. It is the value
         // every folded cycle is handed, and the one that ran from the epoch.
         yearDay: cm ? (+cm[2] - 1) * 22 + (+cm[1]) : null,
-        name: (chesed.match(/Day (\d+) · Cycle (\d+) of 5/) || []).slice(1, 3).join('/') || null,
+        // THIS PATTERN HAD GONE STALE AND NOBODY NOTICED, because its only
+        // reader skips a row whose name is null — so check (d) below, "the 72
+        // Names hold across each microcosm", printed ok while comparing
+        // nothing at all. The face stopped saying "Day N · Cycle N of 5" when
+        // it was rewritten, and says "Name 69 (ראה) · Cycle 1" now. Matched to
+        // that. If it goes stale again the check goes quiet again, so a
+        // rewrite of Chesed's face means re-reading this line.
+        name: (chesed.match(/Name (\d+) \(\S+\) · Cycle (\d+)/) || []).slice(1, 3).join('/') || null,
+        // Read off the MICROCOSM branch, not the ordinary one — the rows this
+        // is used on are the 28 days inside a window, and that branch still
+        // prints "Mishmar N of 24:". Unchanged by the ordinary face's rewrite.
         mishmar: (chesed.match(/Mishmar (\d+) of 24/) || [])[1] || null,
         silent: /a silent day/i.test(chesed)
       };
@@ -1146,7 +1156,7 @@ async function checkInBrowser(chromium) {
       // main() still reaches it. Chesed went the other way: it holds two
       // reckonings rather than one nest, so it is two lines and no tag.
       { lens: 3, name: 'Chesed',
-        // "Name 62 (<name>) · Cycle 1 / Mishmar 14 · Blessing Word 3 ..." —
+        // "Name 62 (<name>) · Cycle 1 / Mishmar 14 (<he>) · Blessing: ..." —
         // the face carries two meditations on two lines now, and the Name's
         // own line opens with its number and carries its Hebrew beside it.
         // The tag this used to read is gone: it repeated both of that line's

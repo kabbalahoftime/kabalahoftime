@@ -25516,40 +25516,45 @@ content: ''; float: right; width: 30px; height: 1em;
       // The tag row went with it: it was built with three arms and only ever
       // reached on this one, so the silent-day and microcosm variants of it
       // had never been drawn at all.
+      // ── EACH LINE IS A NUMBER AND ITS OWN NAME ──
+      // Two rows used to stand under these two lines: "Mishmar: יָכִין —
+      // Yachin" and "Birkat Kohanim: <the cycle's three words>". That said
+      // Mishmar twice, a line apart, which is what the author caught. So each
+      // count now carries its own name on its own line, and the rows are gone.
+      //
+      // The two lines are built the same way: a number, then in parentheses
+      // the Hebrew thing that number points at. Name 69 is ראה. Mishmar 21 is
+      // יָכִין. The parenthesis is the same gesture both times.
+      //
+      // The blessing word lost its ordinal and kept its words. "Blessing Word
+      // 3" named the position and not the word; the three words of the cycle
+      // with today's in gold say the same thing and say which word it is. The
+      // ordinal is still in the detail below, under "one word each 24 days".
+      //
+      // The English transliteration went with the row — the Name's line has
+      // never carried one, and the detail states "Mishmar N of 24: יָכִין —
+      // Yachin" in full, with the link to I Divrei HaYamim 24.
+      //
+      // Not the same number as the Name beside it, though the first
+      // twenty-four days of every cycle make it look that way: the Name runs
+      // 1–72 and the mishmar wraps at 24, so day 25 is mishmar 1 again. Swept
+      // a hundred and fifty days to be sure — the two agree on twenty-nine of
+      // them and differ on ninety-six, which is the arithmetic working.
       : `Name <strong>${ayinBetInfo.nameNum}</strong> ` +
         `(<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${ayinBetInfo.name}</bdi>)` +
         ` &middot; Cycle <strong>${ayinBetInfo.cycle}</strong><br>` +
-        `Mishmar <strong>${bkMishmarNum}</strong> &middot; ` +
-        `Blessing Word <strong>${bkIdx + 1}</strong><br>` +
-        // Mishmar first, then Birkat Kohanim: each row follows the number it
-        // explains, and both of those numbers are on the second line now, in
-        // that same order.
-        // ── THE WATCH OF THE DAY ──
-        // The twenty-four mishmarot are the families who brought the Tamid,
-        // and each 24-day word-period of Birkat Kohanim carries all of them,
-        // one guard to a day. It was the one part of that reckoning kept off
-        // the face: the leap-year microcosm has said it on this line all
-        // along, and the other eleven months left it to the detail below.
-        // Read from bkMishmar, which that detail reads from too, so there is
-        // one count and not two.
-        // Not the same number as the Day beside it, though the first
-        // twenty-four days of every cycle make it look that way: the Day runs
-        // 1–72 and the watch wraps at 24, so day 25 is watch 1 again. Swept a
-        // hundred and fifty days to be sure — the two agree on twenty-nine of
-        // them and differ on ninety-six, which is the arithmetic working.
+        `Mishmar <strong>${bkMishmarNum}</strong>` +
         (bkMishmar
-          // The number is in the line above now — Watch and Mishmar are one
-          // thing under two names, and it was being said twice. The family's
-          // own name is what this line is for. The count keeps its "of 24"
-          // in the detail below, which states it in full.
-          // The <br> belongs to this row rather than to the one after it, so
-          // that a day without a watch cannot leave Birkat Kohanim opening on
-          // a stray break.
-          ? `<span style="font-size:0.88em;opacity:0.72">Mishmar: ` +
-            `<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</bdi>` +
-            ` — ${bkMishmar.en}</span><br>`
+          ? ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkMishmar.he}</bdi>)`
           : '') +
-        `<span style="font-size:0.88em;opacity:0.72">Birkat Kohanim: ${bkWords.map((w, i) => i === bkIdx ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ')}</span>`;
+        // The whole word-run inside one <bdi>. Standing alone in its old row
+        // the three Hebrew words formed one right-to-left run by themselves;
+        // mid-line, after a Latin label and a middot, they need to be told.
+        ` &middot; Blessing: ` +
+        `<bdi lang="he" style="font-size:1.05em;color:var(--ink)">` +
+        bkWords.map((w, i) => i === bkIdx
+          ? `<strong style="color:var(--gold)">${w}</strong>` : w).join(' ') +
+        `</bdi>`;
     document.getElementById('chesed-sub').innerHTML = '';
     document.getElementById('chesed-text-label').innerHTML =
       `✦ ${mishnaInfo.type === 'mishna' ? 'Mishna' : 'Tosefta'} <span class="maalah">מעלה י׳</span>`;

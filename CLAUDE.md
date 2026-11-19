@@ -817,14 +817,29 @@ author's own layout:
 
 ```
 Name 69 (ראה) · Cycle 1
-Mishmar 21 · Blessing Word 3
+Mishmar 21 (יָכִין) · Blessing: יְבָרֶכְךָ ה׳ וְיִשְׁמְרֶךָ
 ```
 
 The **Name leads**: it is what the card is titled after, and the one count a
 reader of *Shem Ayin-Bet* is here for. Its Hebrew rides in parentheses rather
 than standing bare on a line of its own, which is where it was and where it
-said nothing about itself. **"Blessing Word", not "Word"** — *Word* alone
-named neither which words nor whose.
+said nothing about itself.
+
+**Each line is a number and its own name, and the parenthesis is the same
+gesture both times.** Name 69 is ראה; Mishmar 21 is יָכִין. Two rows used to
+stand under these two lines — `Mishmar: יָכִין — Yachin` and `Birkat
+Kohanim: <the cycle's three words>` — which **said Mishmar twice, a line
+apart**. Each count carries its own name on its own line now and the rows
+are gone, which took the face from 101px to 80px.
+
+The blessing **lost its ordinal and kept its words**. `Blessing Word 3`
+named the position and not the word; the cycle's three words with today's in
+gold say the same thing and say *which*. The whole word-run goes inside one
+`<bdi>` — standing alone in its old row the three Hebrew words formed one
+right-to-left run by themselves, but after a Latin label and a middot they
+have to be told. The transliteration went with the row: the Name's line has
+never carried one, and the detail still states `Mishmar N of 24: יָכִין —
+Yachin` in full, with the link to I Divrei HaYamim 24.
 
 **And no tag.** It read `Cycle 1 · Name 62 of 72`, which is both of line
 one's numbers over again. The other three keep theirs because their absolute
@@ -837,16 +852,28 @@ and microcosm arms had never rendered at all.
 Both say **Name N** now. `nameNum` and `dayInCycle` are the same field,
 returned twice under two names, so there is only ever one number to label.
 
-**The two rows under the face follow their numbers**, Mishmar then Birkat
-Kohanim, which is the order of the second line they belong to. They ran the
-other way once. The `<br>` belongs to the Mishmar row, so a day without a
-mishmar cannot leave Birkat Kohanim opening on a stray break.
-
 `check.mjs`'s Chesed probe reads the **face**, not a tag:
 `/Name (\d+) \((\S+)\) · Cycle \d+/`, assembled name-first to match the
 calendar cell. It is matched to the current wording rather than widened to
 accept the old — this probe is what caught the Day→Name rename, and a probe
 that accepts every past spelling catches no future one.
+
+**A second reader of that face had gone stale and said nothing.** The leap
+sweep gathers `name:` off `#chesed-main` for check (d), *the 72 Names hold
+across each microcosm*, and its pattern was still `/Day (\d+) · Cycle (\d+)
+of 5/` — wording the face dropped at some earlier rewrite. Its only reader
+skips a row whose name is null, so the check printed **ok while comparing
+nothing at all**. It reads the current face now. The lesson is the quiet
+failure mode, not the pattern: a probe that `continue`s on no-match goes
+silent rather than red, so **a rewrite of Chesed's face means re-reading
+both readers**. The `mishmar:` field beside it reads the *microcosm* branch,
+which still says `Mishmar N of 24:`, and was never affected.
+
+Swept 401 days across all five cycles: 369 ordinary days all matching
+`Name N (he) · Cycle N` / `Mishmar N (he) · Blessing: …`, exactly one gold
+word on each, no tag anywhere inside the face, and the height a constant
+80px — the longest blessing (`וְיָשֵׂם לְךָ שָׁלוֹם`) wraps no further than
+the shortest.
 
 **Gevurah's** face is 22 letters and a season is four of them, so
 `inQuarter` inside `quarter` inside `season`. The **break-days keep the
