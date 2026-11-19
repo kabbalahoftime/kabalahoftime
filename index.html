@@ -5573,13 +5573,23 @@ content: ''; float: right; width: 30px; height: 1em;
         // element — so the face would have fallen through to the card's own
         // heading, which is the fault that shipped twice on Chesed. Named
         // outright instead, as #chesed-day-face and #gevurah-day-face are.
+        // THE TZADDIK, THEN THE LETTER — and the letter's English name is not
+        // here. The line carried four things: the label and number, the
+        // letter in English, the letter in Hebrew, and the tzaddik. At the
+        // large text size that wrapped and left "Moshe)" alone on a line, the
+        // closing bracket orphaned from the one it opened.
+        //
+        // The English name is the part the detail already states, as
+        // "Cycle 2: Vav", so it is the part that goes. What is left reads the
+        // way Binah and Gevurah read — the name, then its Hebrew — and the
+        // name here is the tzaddik, which is what the cycle is about.
         function qLine(label, num, q, id) {
             if (!q) return '';
             const he = (SINGLE_LETTERS_22.find(l => l.letter === q.letter) || {}).hebrew;
             return `${label} <strong>${num}</strong> (` +
-                   (id ? `<span id="${id}">` : '') + `${q.letter}` +
+                   (id ? `<span id="${id}">` : '') + `<strong>${q.name}</strong>` +
                    (he ? ` &mdash; <bdi lang="he" style="font-size:1.1em;color:var(--ink)">${he}</bdi>` : '') +
-                   ` &middot; <strong>${q.name}</strong>` + (id ? `</span>` : '') + `)`;
+                   (id ? `</span>` : '') + `)`;
         }
         // Expose shovavim data for script builder
         window._shovavimScriptData = primaryData ? {
@@ -24737,8 +24747,14 @@ content: ''; float: right; width: 30px; height: 1em;
       document.getElementById('chochmah-main').innerHTML =
         `Day <strong>${cy22.day}</strong> (<span id="chochmah-day-face"><strong>${cy22.dailyLetter}</strong> ` +
         `<span style="font-size:1.1em">${cy22.dailyHebrew}</span></span>)<br>` +
-        `Cycle <strong>${cy22.cycle}</strong> (<strong>${cy22.letters}</strong> ` +
-        `<span style="font-size:1.1em">${cy22.hebrew}</span>)<br>` +
+        // THE SET IS HEBREW ONLY. It names two letters, so English and Hebrew
+        // together made it twice the day line's length and it wrapped at the
+        // large text size. The day's own letter keeps both, because that is
+        // the one being meditated on; the set's English is one tap away in
+        // "What the letters stand for", which lists exactly the letters this
+        // face is showing and exists for that.
+        `Cycle <strong>${cy22.cycle}</strong> ` +
+        `(<span style="font-size:1.1em">${cy22.hebrew}</span>)<br>` +
         `Gate (` + gatesFaceLine + `)` +
         _ltOpen;
       document.getElementById('chochmah-sub').innerHTML = '';

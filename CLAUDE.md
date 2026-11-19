@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v379**; the next is v380.
+nobody. Currently **v380**; the next is v381.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -994,6 +994,49 @@ and everything else on the card said *Mishmar* — the microcosm branch, the
 row under the face, the detail, and the link to I Divrei HaYamim 24, which
 is where the twenty-four come from. The face was the only English in the
 reckoning. Do not reintroduce *Watch*.
+
+### The faces must be measured at every text size
+
+A sweep at the default size says nothing about the other two. Six faces were
+rebuilt one count to a line, swept over hundreds of days, and shipped — and
+the author's next screenshot showed Yesod at the **large** setting with
+`Moshe)` alone on a line, the closing bracket orphaned from the one it
+opened. The overflow section of `check.mjs` has walked all three sizes for
+years, for exactly this reason; the sweeps written by hand did not.
+
+Measured properly, at 390px:
+
+```
+normal   every line on every card fits on one row
+large    Yesod's Parasha line and Chochmah's Cycle line wrapped
+larger   those two, plus all three of Binah's and one of Chesed's
+```
+
+**A wrapped line is not the fault. An orphaned bracket is.** Two lines were
+shortened until they fit at `large`, and both lost the part the detail
+already states:
+
+- **Yesod** carried four things — label, letter in English, letter in Hebrew,
+  tzaddik. The English name went; the detail says `Cycle 2: Vav`. What is
+  left reads as Binah and Gevurah read, the name then its Hebrew, and the
+  name here is the tzaddik: `Parasha 1 (Moshe — ש)`.
+- **Chochmah's set line** names *two* letters, so English and Hebrew together
+  made it twice the day line's length. It is Hebrew alone — `Cycle 4 (ז & ח)`
+  — while the day's own letter keeps both, because that is the one being
+  meditated on. The set's English is one tap below in *What the letters stand
+  for*, which lists exactly the letters the face is showing.
+
+At `larger`, Binah's three lines and Chesed's longest still wrap and are left
+to. They are vocalized Hebrew words that cannot be shortened without losing
+them, and the break falls after the em dash — `Day 7 (Malchut —` /
+`מַלְכוּת)` — so the Hebrew and its bracket stay together and the line reads
+as a continuation.
+
+**Measuring this needs care.** `Range.getClientRects()` returns a rect per
+inline *box*, not per line, so a probe built on it reported "10 rows" for a
+three-word line and would have sent the fix in the wrong direction. Count
+lines by dividing the rendered height by a one-line reference in the same
+styles.
 
 ### Where the day falls, in a tag
 
