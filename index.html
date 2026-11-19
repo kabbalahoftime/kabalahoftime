@@ -5042,19 +5042,24 @@ content: ''; float: right; width: 30px; height: 1em;
       <button type="button" class="study-pray-btn" onclick="openStudyPrayer()"
               aria-label="The prayers before and after study">Study prayers</button>
     </div>
-    <!-- The week's songs, under the prayer line. 12px, not the 26 they stood
-         at. This is the only card in the ten whose LABEL COLUMN IS TALLER
-         THAN ITS CONTENT — 250px against 209 — so those margins were not
-         air between two controls, they were a hole punched in the face
-         beside them. Two songs show on most days and each carried 26, so
-         the pair was 52px of a 250px column.
-         12 is measured rather than chosen. The button above reaches 14px
-         below its text for its 44px target and the song links carry no
-         ::after overlay at all, so at 26 their boxes stood 22px apart and at
-         12 they stand 8px apart — closer, and still clear. Going below this
-         starts eating that 8. -->
-    <div id="gevurah-kot-song" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:12px;font-style:italic;"></div>
-    <div id="gevurah-kot-song-8" style="display:none;font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:12px;font-style:italic;"></div>
+    <!-- The week's songs, under the prayer line. 20px, down from 26, and
+         20 IS THE FLOOR rather than a preference.
+         This is the only card in the ten whose label column is taller than
+         its content, so these margins were a hole punched in the face beside
+         them; two songs show most days, so the pair was 52px of a 250px
+         column. The obvious fix was 12px, on the reasoning that the button
+         above reaches 14px below its text and the song links carry no
+         ::after overlay, so their boxes would still stand 8px clear.
+         THAT REASONING WAS WRONG AND THE SUITE CAUGHT IT. The tap rule is
+         not about boxes overlapping. A control under 44px must be able to
+         hit-test 21px above and below its own centre and still land on
+         itself, so a one-line song — "Perek Shirah", 47x13 — needs about
+         28px of clear air above it, not 8. The 26 was load-bearing.
+         Walked 12, 16, 18, 20, 22, 24, 26 against the suite's own reaches()
+         over a fortnight of songs: 18 and below fail, 20 and above pass. So
+         20, and no lower. -->
+    <div id="gevurah-kot-song" style="font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:20px;font-style:italic;"></div>
+    <div id="gevurah-kot-song-8" style="display:none;font-size:calc(10.5px * var(--ts, 1));color:var(--ink-dim);margin-top:20px;font-style:italic;"></div>
   </div>
   <div class="sefirah-content-col">
     <div class="sefirah-cycle-name" id="gevurah-cycle-name">Tanach — Nevi'im &amp; Ketuvim</div>

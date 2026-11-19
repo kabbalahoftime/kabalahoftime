@@ -1046,21 +1046,45 @@ beside it. Two things did it, and both are fixed:
 
 - **the songs' margins.** `#gevurah-kot-song` and `#gevurah-kot-song-8` each
   carried `margin-top:26px`, and most days show both, so the pair was 52px of
-  a 250px column. They are **12px** now. That number is measured, not
-  chosen: `.study-pray-btn` reaches 14px below its text for its 44px target
-  and the song links carry **no `::after` overlay at all**, so at 26 the two
-  boxes stood 22px apart and at 12 they stand 8px apart — closer, and still
-  clear. Below 12 starts eating that 8.
+  a 250px column. They are **20px**, and **20 is the floor, not a
+  preference** — see below.
 - **the tag's return.** Putting it back at the foot gave the content column
   19px it did not have.
 
-Together: **−40px of overhang became +7px of slack** on an ordinary day.
+Together: **−40px of overhang became −9px** on an ordinary day.
 
-**It is not gone everywhere, and that is the content's doing, not the
-margin's.** 18 days in 461 still overhang — Gevurah's break-days, whose face
-is `Day 46 / Season 1 (Eagle — נֶשֶׁר) / Eicha 5` with no letter, no face and
-no verse text, and Chesed's four silent days, which are one line. On those
-the card genuinely has less to say than its own margin.
+**It does not reach zero, and two different things stop it.**
+
+The first is the content: 18 days in 461 overhang badly whatever the margins
+do — Gevurah's break-days, whose face is `Day 46 / Season 1 (Eagle — נֶשֶׁר)
+/ Eicha 5` with no letter, no face and no verse text, and Chesed's four
+silent days, which are one line. There the card has less to say than its own
+margin.
+
+The second is the **44px tap rule, and it cost a failed suite run.** The
+margins went to 12px first, on the reasoning that `.study-pray-btn` reaches
+14px below its text and the song links carry no `::after` overlay, so the
+boxes would still stand 8px clear. **That reasoning was wrong.** `targets`
+does not ask whether boxes overlap; it asks whether a control under 44px can
+hit-test **21px above and below its own centre** and still land on itself. A
+one-line song — `Perek Shirah`, 47×13 — therefore needs about 28px of clear
+air above it, not 8. The 26 was load-bearing:
+
+```
+FAIL A "Perek Shirah" on Gevurah is 47x13 and reaches under 44px down
+```
+
+Walked 12, 16, 18, 20, 22, 24, 26 against the suite's own `reaches()` over a
+fortnight of songs: **18 and below fail, 20 and above pass.** So Gevurah's
+label column has four tappable things in it — a prayer arrow, the study
+button and two song links — and each needs roughly 44px of its own. That sets
+the column's height, and the last 9px is not available.
+
+**A reach test needs the element scrolled into view.** `reaches()` returns
+true for anything off-screen, as "cannot judge", so a probe that forgets
+`scrollIntoView` passes everything silently — which is how 65 of 79 controls
+once went untested, and how my first attempt to find the floor reported that
+*every* candidate failed, 26 included.
 
 ### Gevurah reads one count to a line, with the English
 
