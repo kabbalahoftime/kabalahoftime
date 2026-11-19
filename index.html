@@ -25476,14 +25476,10 @@ content: ''; float: right; width: 30px; height: 1em;
     document.getElementById('chesed-cycle-name').innerHTML = chesedMic
       ? 'Shem Ayin-Bet — Leap Year Microcosm'
       : 'Shem Ayin-Bet — 72-Day Cycle';
-    // The same tag, in the same class the row at the foot used, so it is
-    // drawn identically wherever it stands.
-    const _chesedTagRow = `<div class="sefirah-tags">` + (chesedMic
-      ? `<span class="tag highlight">Microcosm \u00b7 Day ${chesedMic.day} of 28</span>`
-      : ayinBetInfo.isBreak
-        ? `<span class="tag highlight">A silent day</span>`
-        : `<span class="tag highlight">Cycle ${ayinBetInfo.cycle} \u00b7 Name ${ayinBetInfo.nameNum} of 72</span>`
-      ) + `</div>`;
+    // No tag row here any more. It was three arms and one caller \u2014 only the
+    // ordinary-day branch ever drew it, so the microcosm and silent-day arms
+    // had never rendered. And on the ordinary day it repeated both of the
+    // face's own numbers, Name and Cycle. See the face below.
     document.getElementById('chesed-main').innerHTML = chesedMic
       ? (chesedMic.silence
           ? `Microcosm Day <strong>${chesedMic.day}</strong> of 28 — a silent day<br>` +
@@ -25493,22 +25489,41 @@ content: ''; float: right; width: 30px; height: 1em;
         `<br><span style="font-size:0.85em;color:var(--ink-dim)">The five lobes in 28 days — the twenty-four watches once through</span>`
       : ayinBetInfo.isBreak
       ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
-      // Nested as Binah's line is: where the day stands in the smallest
-      // cycle, then that cycle, then the large one. The watches wrap at 24
-      // and each word of Birkat Kohanim holds exactly those 24 days, so a
-      // 72-day cycle is three words and the three numbers nest without a
-      // remainder. The day's own number in the seventy-two is not here any
-      // more — it is in the tag, which is where Binah keeps its own.
+      // TWO LINES, BECAUSE THIS CARD HOLDS TWO MEDITATIONS.
+      // The other three nesting cards read small · middle · large, one count
+      // with three levels. Chesed is not that shape. It carries two separate
+      // reckonings of the same days — the Name through the five cycles, and
+      // the twenty-four mishmarot under the fifteen words of the blessing —
+      // and 5 × 72 and 15 × 24 are two factorings of 360, not one nest. Four
+      // numbers on one line read as a single count with four levels, which
+      // is what made the line hard. So: the Name's line, then the Mishmar's.
+      //
+      // The Name leads, because it is what the card is titled after and the
+      // one count a reader of Shem Ayin-Bet is here for. Its Hebrew comes
+      // with it in parentheses rather than standing bare on a line of its
+      // own, which is where it was and where it said nothing about itself.
+      //
       // Mishmar, not Watch. They are one thing, and this line was the only
       // place in the whole Chesed reckoning that used the English: the
       // microcosm branch, the row below, the detail and the link to I Divrei
       // HaYamim 24 all say Mishmar. One word for one thing, and it is the
-      // word the source uses.
-      : `Mishmar <strong>${bkMishmarNum}</strong> &middot; Word <strong>${bkIdx + 1}</strong> &middot; Cycle <strong>${ayinBetInfo.cycle}</strong><br>` +
-      `<strong>${ayinBetInfo.name}</strong>` + _chesedTagRow +
-        // Mishmar first, then Birkat Kohanim: each row now follows the number
-        // it explains. The counts above read Watch · Word · Cycle, and these two
-        // ran Word then Watch — the reverse of the line they belong to.
+      // word the source uses. "Blessing Word" rather than "Word", because
+      // Word alone named neither which words nor whose.
+      //
+      // NO TAG. It said "Cycle N · Name N of 72", which is both of line
+      // one's numbers over again. The other three nesting cards keep theirs
+      // because their absolute count is nowhere on the face; here it now is.
+      // The tag row went with it: it was built with three arms and only ever
+      // reached on this one, so the silent-day and microcosm variants of it
+      // had never been drawn at all.
+      : `Name <strong>${ayinBetInfo.nameNum}</strong> ` +
+        `(<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${ayinBetInfo.name}</bdi>)` +
+        ` &middot; Cycle <strong>${ayinBetInfo.cycle}</strong><br>` +
+        `Mishmar <strong>${bkMishmarNum}</strong> &middot; ` +
+        `Blessing Word <strong>${bkIdx + 1}</strong><br>` +
+        // Mishmar first, then Birkat Kohanim: each row follows the number it
+        // explains, and both of those numbers are on the second line now, in
+        // that same order.
         // ── THE WATCH OF THE DAY ──
         // The twenty-four mishmarot are the families who brought the Tamid,
         // and each 24-day word-period of Birkat Kohanim carries all of them,

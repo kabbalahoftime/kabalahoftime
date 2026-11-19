@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v374**; the next is v375.
+nobody. Currently **v375**; the next is v376.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -751,19 +751,23 @@ follows without being told.
 The study chip's "done" differs by mode: this hour's steps all marked
 (`_hourStepIdx`) by the hour, none of the thirty left at all in order.
 
-### Four cards nest the same way
+### Three cards nest the same way, and Chesed does not
 
 Binah's face reads **where the day stands in the smallest cycle, then that
 cycle, then the large one**, and the tag under it repeats the large cycle
-with the absolute day. Chesed and Gevurah hold the same shape and were not
+with the absolute day. Gevurah and Netzach hold the same shape and were not
 using it: both led with the absolute day and left the nesting unsaid.
 
 ```
 Binah     Day 6    · Week 2  · Cycle 2    >>  Cycle 2  · Day 13 of 49
-Chesed    Mishmar 14 · Word 3 · Cycle 1   >>  Cycle 1  · Name 62 of 72
 Gevurah   Letter 16 · Face 3 · Season 1   >>  Season 1 · Day 62 of 91
 Netzach   Day 7    · Level 3 · Cycle 2    >>  Cycle 2  · Day 27 of 41
 ```
+
+**Chesed was made the fourth and should not have been.** It had the shape
+forced on it — `Mishmar 14 · Word 3 · Cycle 1` over a tag reading `Cycle 1 ·
+Name 62 of 72` — and the author's answer was to give it two lines and no
+tag. See below.
 
 **Netzach was the fourth and nobody had noticed.** Three rows stand under
 its face — **Day**, **Level/World**, **Cycle** — and the face named only two
@@ -794,23 +798,55 @@ Checked across 44 consecutive days and a cycle roll: the level agrees with
 the Level/World row on every one, the tag counts to 41, the foot row stays
 empty, and the forty-first prints no level.
 
-**Chesed nests without a remainder**: the mishmarot wrap at 24, each word
-of Birkat Kohanim holds exactly those 24 days, and `BIRKAT_KOHANIM_CYCLES`
-gives three words to a cycle — so 24 × 3 = 72 exactly. `bkIdx` is the word
-in the cycle (0–2) and `bkMishmarNum` the watch in the word (1–24).
+#### Chesed holds two meditations, not one nest
+
+The numbers do divide evenly — the mishmarot wrap at 24, each word of Birkat
+Kohanim holds exactly those 24 days, and `BIRKAT_KOHANIM_CYCLES` gives three
+words to a cycle, so 24 × 3 = 72 exactly. `bkIdx` is the word in the cycle
+(0–2) and `bkMishmarNum` the mishmar in the word (1–24). But dividing evenly
+is not the same as nesting, and the author named it before I saw it:
+
+> It feels like two separate meditations. Each of the 72 names within one of
+> the 5 books. And each of 24 Watches within each of the 15 words of Birkat
+> Kohanim.
+
+5 × 72 and 15 × 24 are **two factorings of the same 360 days**, not one count
+with four levels. Four numbers on one line read as the latter, which is what
+made the line hard. So the face is two lines, one meditation each, in the
+author's own layout:
+
+```
+Name 69 (ראה) · Cycle 1
+Mishmar 21 · Blessing Word 3
+```
+
+The **Name leads**: it is what the card is titled after, and the one count a
+reader of *Shem Ayin-Bet* is here for. Its Hebrew rides in parentheses rather
+than standing bare on a line of its own, which is where it was and where it
+said nothing about itself. **"Blessing Word", not "Word"** — *Word* alone
+named neither which words nor whose.
+
+**And no tag.** It read `Cycle 1 · Name 62 of 72`, which is both of line
+one's numbers over again. The other three keep theirs because their absolute
+count is nowhere on their face; on Chesed it now is. The tag row went with
+it — it was built with three arms and reached on only one, so the silent-day
+and microcosm arms had never rendered at all.
 
 **The seventy-two are Names, not days.** The tag and the detail both said
-*Day N of 72*, so the day's own Name sat bare on its line with its number
-named nowhere — on a card titled *Shem Ayin-Bet* that is the one count that
-matters. Both say **Name N of 72** now. `nameNum` and `dayInCycle` are the
-same field, returned twice under two names, so there is only ever one number
-to label.
+*Day N of 72*, so the day's own Name sat bare with its number named nowhere.
+Both say **Name N** now. `nameNum` and `dayInCycle` are the same field,
+returned twice under two names, so there is only ever one number to label.
 
 **The two rows under the face follow their numbers**, Mishmar then Birkat
-Kohanim. They ran the other way — Birkat Kohanim, which explains *Word*,
-above Mishmar, which explains *Watch* — the reverse of the Mishmar · Word ·
-Cycle line they belong to. The `<br>` belongs to the Mishmar row, so a day
-without a watch cannot leave Birkat Kohanim opening on a stray break.
+Kohanim, which is the order of the second line they belong to. They ran the
+other way once. The `<br>` belongs to the Mishmar row, so a day without a
+mishmar cannot leave Birkat Kohanim opening on a stray break.
+
+`check.mjs`'s Chesed probe reads the **face**, not a tag:
+`/Name (\d+) \((\S+)\) · Cycle \d+/`, assembled name-first to match the
+calendar cell. It is matched to the current wording rather than widened to
+accept the old — this probe is what caught the Day→Name rename, and a probe
+that accepts every past spelling catches no future one.
 
 **Gevurah's** face is 22 letters and a season is four of them, so
 `inQuarter` inside `quarter` inside `season`. The **break-days keep the
@@ -823,10 +859,10 @@ and under **Motion**, where Motion also gives the Hebrew and what the word
 means. Three numbers and nothing else, as Binah's line is. Taking them off
 also stopped the line wrapping, which put the tag at 81px — Binah's own.
 
-The absolute day left both faces and lives only in the tag, as Binah's
-does. And "Mishmar N of 24" on Chesed's face lost its number — Mishmar is one
-thing and the count was being said twice; the detail below still states it
-in full.
+The absolute day left Gevurah's face and lives only in its tag, as Binah's
+does. And "Mishmar N of 24" on Chesed's face lost its *of 24* — Mishmar is
+one thing and the count was being said twice; the detail below still states
+it in full.
 
 **One word for it, and the word is Mishmar.** The face line said *Watch*
 and everything else on the card said *Mishmar* — the microcosm branch, the
@@ -841,30 +877,30 @@ it** — `Cycle 2 · Day 13 of 49`. Chesed, Gevurah and Chochmah all set it to
 `''`, so on those cards the question a reader asks second, *where does
 today stand in this count*, could only be answered by opening the detail.
 
-Chesed and Gevurah carry it now, in Binah's own shape and with its
+Gevurah and Netzach carry it now, in Binah's own shape and with its
 `tag highlight` class — but **drawn inside `*-main`, under the day's own
 name, not in the `*-tags` row at the foot**. The row sits after the face
-and the sub-text, which on Binah is two lines and on these two is six, so
+and the sub-text, which on Binah is two lines and on Gevurah is six, so
 the one line that answers *where am I* was the last thing a reader
-reached. Both `*-tags` rows are left empty and the pill is built into the
+reached. Their `*-tags` rows are left empty and the pill is built into the
 face with `<div class="sefirah-tags">` round it, which is all that row
 ever was — flex, a 5px gap and a 7px top margin — so it draws identically
 wherever it stands.
 
 ```
 Binah     Cycle 2  · Day 13 of 49
-Chesed    Cycle 1  · Name 62 of 72    Microcosm · Day N of 28
 Gevurah   Season 1 · Day 62 of 91     Microcosm · Day N of 28
 Netzach   Cycle 2  · Day 27 of 41
 ```
 
-A **silent day** on Chesed says so instead of counting: it has no number in
-the seventy-two, which is what makes it silent. Gevurah's three break-days
-**keep** their number — the heart and the two kidneys are days of the
-ninety-one like any other, and it is the letters that stop on them, not the
-count.
+Gevurah's three break-days **keep** their number — the heart and the two
+kidneys are days of the ninety-one like any other, and it is the letters
+that stop on them, not the count.
 
-Chochmah still sets its tag row empty, and was left alone.
+**Chesed has no tag at all**, and that is deliberate; see the section above.
+A **silent day** there says so on the face instead of counting, because it
+has no number in the seventy-two, which is what makes it silent. Chochmah
+also sets its tag row empty, and was left alone.
 
 ### Why this face, in this season
 

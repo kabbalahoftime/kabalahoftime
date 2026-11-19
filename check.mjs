@@ -1139,20 +1139,24 @@ async function checkInBrowser(chromium) {
       { lens: 2, name: 'Binah',
         card: () => combo(main(1)),
         cell: s => combo((s.cell || '') + ' ' + (s.cell2 || '')) },
-      // Both faces were rewritten to nest their numbers the way Binah's does
-      // — the small cycle, then its cycle, then the large one — and the
-      // absolute day moved into the tag beneath the name. The tag is drawn
-      // inside .sefirah-main-text, so main() still reaches it; these two read
-      // it there rather than from the old wording.
+      // Both faces were rewritten, and neither reads the way it used to.
+      // Gevurah nests its numbers the way Binah's does — the small cycle,
+      // then its cycle, then the large one — with the absolute day in a tag
+      // beneath the name; that tag is drawn inside .sefirah-main-text, so
+      // main() still reaches it. Chesed went the other way: it holds two
+      // reckonings rather than one nest, so it is two lines and no tag.
       { lens: 3, name: 'Chesed',
-        // "... Cycle 1  <name>  Cycle 1 · Name 62 of 72 ..." — the Name is the
-        // one token before the tag, and its number is in it.
-        // The tag said "Day N of 72" until the card was made to call the
-        // seventy-two what they are, which is Names. This probe is the thing
-        // that caught the rename, so it is matched to the new wording rather
-        // than widened to accept both: a probe that accepts the old word too
-        // would not catch the next rename.
-        card: () => pair(m(main(2), /(\S+) Cycle \d+ · Name (\d+) of 72/), 1, 2),
+        // "Name 62 (<name>) · Cycle 1 / Mishmar 14 · Blessing Word 3 ..." —
+        // the face carries two meditations on two lines now, and the Name's
+        // own line opens with its number and carries its Hebrew beside it.
+        // The tag this used to read is gone: it repeated both of that line's
+        // numbers. So the number comes from the line and the name from the
+        // parentheses, and the pair is assembled name-first to match the cell.
+        //
+        // Matched to the current wording rather than widened to accept the
+        // old. This probe is what caught the Day→Name rename, and a probe
+        // that accepts every past spelling catches no future one.
+        card: () => pair(m(main(2), /Name (\d+) \((\S+)\) · Cycle \d+/), 2, 1),
         cell: s => pair(m(s.cell, /^(\S+) · (\d+) of 72$/), 1, 2) },
       { lens: 4, name: 'Gevurah',
         // The face no longer prints the season's name at all — it is in the
