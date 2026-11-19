@@ -502,7 +502,8 @@ async function checkInBrowser(chromium) {
       out.well.marked = Math.max(out.well.marked, marked);
       if (drawn !== 32) out.well.bad.push(`offset ${o}: the song drew ${drawn} words, not 32`);
       if (!marked) out.well.bad.push(`offset ${o}: no word of the song marked for today`);
-      const m = face.match(/Day (\d+) · Cycle (\d+)/);
+      const m = (() => { const _d = face.match(/Day (\d+)/), _c = face.match(/Cycle (\d+)/);
+                         return _d && _c ? [null, _d[1], _c[1]] : null; })();
       if (!m) continue;               // the leap year's microcosm names no set
       out.card.days++;
       if (+m[2] > 17 || +m[2] < 1 || +m[1] > 22 || +m[1] < 1)
@@ -612,7 +613,8 @@ async function checkInBrowser(chromium) {
       const face = document.getElementById('chochmah-main').innerText;
       const chesed = document.getElementById('chesed-main').innerText.replace(/\s+/g, ' ');
       const xm = ind.match(/Extra Day (\d+) of 28/);
-      const cm = face.match(/Day (\d+) · Cycle (\d+)/);
+      const cm = (() => { const _d = face.match(/Day (\d+)/), _c = face.match(/Cycle (\d+)/);
+                         return _d && _c ? [null, _d[1], _c[1]] : null; })();
       const row = {
         o,
         extra: xm ? +xm[1] : 0,
@@ -765,7 +767,9 @@ async function checkInBrowser(chromium) {
   console.log('\nyear seam');
   const seam = await page.evaluate(() => {
     const yd = () => {
-      const m = document.getElementById('chochmah-main').innerText.match(/Day (\d+) · Cycle (\d+)/);
+      const m = (() => { const _f = document.getElementById('chochmah-main').innerText;
+        const _d = _f.match(/Day (\d+)/), _c = _f.match(/Cycle (\d+)/);
+        return _d && _c ? [null, _d[1], _c[1]] : null; })();
       return m ? (+m[2] - 1) * 22 + (+m[1]) : null;
     };
     const rows = [];
@@ -1164,10 +1168,23 @@ async function checkInBrowser(chromium) {
                         { 'Part I · Lesson': 'I', 'Tinyana · Torah': 'II' }),
         cell: s => sig(s.cell, /(Torah|Tinyana) (\d+)/, { Torah: 'I', Tinyana: 'II' }) },
       { lens: 1, name: 'Chochmah',
-        card: () => (m(main(0), /Day: (\w+)/) || [])[1] || '',
+        // "Day 4 (Dalet ד)" — the face is one count to a line now and the
+        // "Day:" label this read is gone with the labelled rows.
+        card: () => (m(main(0), /Day \d+ \((\w+)/) || [])[1] || '',
         cell: s => (m(s.cell, /^\S+ (\w+)/) || [])[1] || '' },
       { lens: 2, name: 'Binah',
-        card: () => combo(main(1)),
+        // The combo phrase has left the face — "Malchut she'beTiferet
+        // she'beGevurah" was those three lines in order, so the card said each
+        // count twice. It is still in the detail, which innerText skips while
+        // the card is shut, so the three Sefirot are read off the lines
+        // themselves and joined in the order combo() would have given them:
+        // day, then week, then cycle. The cell side is unchanged.
+        card: () => { const t = main(1);
+                      const d = m(t, /Day \d+ \((\w+)/),
+                            w = m(t, /Week \d+ \((\w+)/),
+                            c = m(t, /Cycle \d+ \((\w+)/);
+                      // The Mochin weeks have no cycle and no third she'be.
+                      return d && w ? d[1] + '|' + w[1] + (c ? '|' + c[1] : '') : ''; },
         cell: s => combo((s.cell || '') + ' ' + (s.cell2 || '')) },
       // Both faces were rewritten, and neither reads the way it used to.
       // Gevurah nests its numbers the way Binah's does — the small cycle,
@@ -1213,8 +1230,12 @@ async function checkInBrowser(chromium) {
                                  /(?:(\d)(?:st|nd|rd|th)|microcosm) cycle (\d+)(?: of 2)? day (\d+) of 13/);
                      return x ? (x[1] || '3') + '|' + x[2] + '|' + x[3] : ''; } },
       { lens: 6, name: 'Netzach',
-        card: () => pair(m(main(5), /Day (\d+) · Cycle (\d+)/), 2, 1) ||
-                    pair(m(main(5), /Day (\d+) of 55 · Year-Cycle (\d+)/), 2, 1),
+        // READ OFF THE WHOLE CARD. The absolute day of the forty-one is in
+        // the foot tag now, a sibling of the main text, so main() no longer
+        // reaches it — and the tag is the authoritative count, which is why
+        // it is read rather than the face's day-inside-the-level.
+        card: () => pair(m(whole(5), /Cycle (\d+) · Day (\d+) of 41/), 1, 2) ||
+                    pair(m(whole(5), /Day (\d+) of 55 · Year-Cycle (\d+)/), 2, 1),
         cell: s => pair(m(s.cell, /Cycle (\d+) · day (\d+) of 41/), 1, 2) ||
                    pair(m(s.cell, /Year-Cycle (\d+) · day (\d+) of 55/), 1, 2) },
       { lens: 7, name: 'Hod',
@@ -1228,8 +1249,16 @@ async function checkInBrowser(chromium) {
       { lens: 8, name: 'Yesod',
         // A double parasha carries two numbers on each side — "Cycle 6 & 7" —
         // so the run has to be taken whole, not up to the first space.
-        card: () => { const x = m(main(7), /Day (\d+) · Parasha (\d+(?: & \d+)*) · Cycle (\d+(?: & \d+)*)/);
-                      return x ? x[1] + '|' + x[2] + '|' + x[3] : ''; },
+        // The face is one count to a line, and a double parasha simply draws
+        // two Parasha lines where the old numbers line compressed them into
+        // "Parasha 3 & 4". So the numbers are gathered from every line and
+        // re-joined in that shape, which is what the calendar cell still says.
+        card: () => { const t = main(7);
+                      const d  = m(t, /Day (\d+)/);
+                      const ps = [...t.matchAll(/Parasha (\d+)/g)].map(x => x[1]);
+                      const cs = [...new Set([...t.matchAll(/Cycle (\d+)/g)].map(x => x[1]))];
+                      return (d && ps.length && cs.length)
+                        ? d[1] + '|' + ps.join(' & ') + '|' + cs.join(' & ') : ''; },
         cell: s => { const x = m(s.cell2, /D(\d+) · P(\d+(?: & \d+)*) · C(\d+(?: & \d+)*)/);
                      return x ? x[1] + '|' + x[2] + '|' + x[3] : ''; } },
       { lens: 9, name: 'Malchut',
