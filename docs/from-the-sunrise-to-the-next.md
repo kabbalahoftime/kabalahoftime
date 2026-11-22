@@ -148,7 +148,7 @@ The mending was not their parents' to complete; it was his and his brother's —
 
 And the mending, the man understood at last, is the sun's work. The sun sweetens the fruit. It does not ripen by force. It sweetens — the judgments, the home, the brothers — until the bitter turns drinkable. From the new moon to the next: the moon learning, month by month, to shine like the sun. From the sunrise to the next: the sweetening, continuing.
 
-In the last of the days, a call came to the man from a farther perch of the Eagles, from a place called Sunrise.
+In the last of the days, a call came to the man from a place called Sunrise, and Sunrise held a little of every land at once.
 
 It was a high perch, higher than the one he sat on — and not of his seeking; it had come to him. And signs moved him along, one after another: the Eagles lifted his name above the others; the gates opened as he reached them; the old ones who had watched over his work spoke well of him. Door after door, and none of them closed.
 
