@@ -169,9 +169,19 @@ csub  = ParagraphStyle('csub', fontName='Cormorant-It', fontSize=11.5, leading=1
 epig  = ParagraphStyle('epig', fontName='Cormorant-It', fontSize=11.5, leading=16,
                        alignment=TA_CENTER, textColor=FAINT, spaceAfter=6*mm)
 # The notes, set smaller, with the number hanging out to the left of the text.
+#
+# The number is a BULLET, not the head of the first line. Written inline with
+# two non-breaking spaces behind it and firstLineIndent=-9mm, it was part of
+# the justified line: the gap after the numeral stretched with the rest of the
+# line, so it was wide on one note and narrow on the next, and the first line
+# of every note began a word-width left of the block under it. The bullet is
+# drawn at bulletIndent and the text begins at leftIndent, so the left edge is
+# straight from the first line down and the gap is geometry rather than type.
 note  = ParagraphStyle('note', fontName='Cormorant', fontSize=11.2, leading=15.6,
                        alignment=TA_JUSTIFY, textColor=DIM,
-                       leftIndent=9*mm, firstLineIndent=-9*mm, spaceAfter=4.5*mm)
+                       leftIndent=9*mm, firstLineIndent=0, spaceAfter=4.5*mm,
+                       bulletIndent=3*mm, bulletFontName='Cormorant',
+                       bulletFontSize=8, bulletOffsetY=4.5)
 
 def esc(s):
     """The manuscript keeps ASCII apostrophes; here they become typographic."""
@@ -401,11 +411,9 @@ if notes:
     first_note = notes[0]
     story.append(KeepTogether([
         Paragraph(head, kick), Spacer(1, 1*mm if lone else 9*mm),
-        Paragraph(f'<super><font size="8">{first_note[0]}</font></super>'
-                  f'&nbsp;&nbsp;{esc(first_note[1])}', note)]))
+        Paragraph(esc(first_note[1]), note, bulletText=str(first_note[0]))]))
     for n, txt in notes[1:]:
-        story.append(Paragraph(
-            f'<super><font size="8">{n}</font></super>&nbsp;&nbsp;{esc(txt)}', note))
+        story.append(Paragraph(esc(txt), note, bulletText=str(n)))
 
 def footer(canvas, doc):
     if doc.page == 1: return
