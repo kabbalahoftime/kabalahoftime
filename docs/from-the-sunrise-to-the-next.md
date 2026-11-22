@@ -150,15 +150,15 @@ And the mending, the man understood at last, is the sun's work. The sun sweetens
 
 In the last of the days, a call came to the man from a farther perch of the Eagles, from a place called Sunrise.
 
-It was a high perch, higher than the one he sat on — and not of his seeking; it had come to him. And signs moved him along, one after another: the eagles lifted his name above the others; the gates opened as he reached them; the old ones who had watched over his work spoke well of him. Door after door, and none of them closed.
+It was a high perch, higher than the one he sat on — and not of his seeking; it had come to him. And signs moved him along, one after another: the Eagles lifted his name above the others; the gates opened as he reached them; the old ones who had watched over his work spoke well of him. Door after door, and none of them closed.
 
 But the perch had a price, and the price was not feathers. To sit at Sunrise he would have to lay on the altar the life of his own house: his prayers at their unhurried hours, the mornings with the children, his teaching in its season, the quiet evenings under his own roof. All of it bound, all of it laid out, and the man did not turn aside at any gate. He went the whole way, as the first father went, up the mountain with everything he loved.
 
-And at the very top, on the night after the day of rest, walking with the woman and with the eagle, the word came to him clear: hold back.
+And at the very top, on the night after the day of rest, walking with the woman and with the moon eagle, the word came to him clear: hold back.
 
 The man heard it, and his hand stayed. There was another in the old days, a judge, who also climbed with what he loved — and he could not hold back, and his own vow carried him past the voice, and he walked home alone with what the vow had taken.
 
-But the first father walked down the mountain with his son beside him. And the man walked home with the eagle beside him, and the woman on his other side, and his house stood as it had stood: the prayers at their hours, the children at the table, the teaching in its season. Nothing had been taken from him. Everything had been asked of him — and everything had been given back.
+But the first father walked down the mountain with his son beside him. And the man walked home with the moon eagle beside him, and the woman on his other side, and his house stood as it had stood: the prayers at their hours, the children at the table, the teaching in its season. Nothing had been taken from him. Everything had been asked of him — and everything had been given back.
 
 ### Epilogue |
 
