@@ -25577,7 +25577,20 @@ content: ''; float: right; width: 30px; height: 1em;
       3: { soul: 'Rashbi',            he: 'רשב״י',        note: '2nd of the five' },
       5: { soul: 'the Arizal',        he: 'האר״י',        note: 'his own yahrzeit, at the exact heart of the nine — 3rd of the five' },
       7: { soul: 'the Baal Shem Tov', he: 'הבעל שם טוב', note: '4th of the five' },
-      9: { soul: 'Rebbe Nachman',     he: 'רבי נחמן',     note: "Tisha B'Av — 5th of the five, sealing the nine" },
+      // 9 Av carries two, as 1 Av does. Rebbe Nachman seals the five, and
+      // the Chozeh of Lublin's yahrzeit is that day — the app's own Rebbe
+      // table has it: "9th of Av - Rav Yaakov Yitzchak HaLevi Horowitz,
+      // Chozeh of Lublin (1754-1815)". One phrase joined by a vav, as
+      // משה ואהרון is.
+      // והחוזה, not והחוזה מלובלין. Measured: the full form wraps at ALL
+      // THREE text sizes, normal included; without מלובלין it fits at every
+      // one. Abbreviating רבי to ר׳ instead was tried and still wrapped at
+      // large. So only the name being added is shortened — רבי נחמן stands
+      // as the table had it — and there is one Chozeh, so he needs no town.
+      // The note below keeps him in full.
+      9: { soul: 'Rebbe Nachman',     he: 'רבי נחמן והחוזה',
+           soul2: 'the Chozeh of Lublin',
+           note: "Tisha B'Av — 5th of the five, sealing the nine; the Chozeh of Lublin's yahrzeit" },
     };
     // Chesed's face reads the soul of the cycle it stands in, derived from
     // this table — see _cycleSoul, declared with ayinBetInfo further down
