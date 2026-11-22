@@ -25554,7 +25554,24 @@ content: ''; float: right; width: 30px; height: 1em;
     // two cannot name different souls for one cycle, and unvocalized because
     // that is how this app writes these five everywhere else.
     const NINE_DAYS_SOULS = {
-      1: { soul: 'Moshe Rabbeinu',    he: 'משה רבינו',    note: "Aharon HaKohen's own yahrzeit (Bamidbar 33:38) — Ish Chesed opening the Nine Days; Moshe, his brother, 1st of the five" },
+      // 1 Av is the one day of the five that genuinely carries two, and the
+      // note has said so all along: Aharon died on it (Bamidbar 33:38 — the
+      // only yahrzeit the Torah dates), and Moshe, his brother, is first of
+      // Rebbe Nachman's five. So the face names both. The other four keep one
+      // name each; the author asked for this day alone.
+      //
+      // soul2/he2 rather than a longer `he` string, so the pair stays two
+      // facts and the Nine Days note can reach either. Unvocalized like the
+      // rest of this table, though the app writes בֵּית אַהֲרֹן with points
+      // elsewhere — inside one table the spelling should not change by row.
+      1: { soul: 'Moshe Rabbeinu',    he: 'משה רבינו',
+           // אהרן, not אהרן הכהן. Measured at all three text sizes: with
+           // הכהן the line wraps at large and larger, which would orphan
+           // "אהרן הכהן)" and its bracket on 72 days of every year — cycle 1
+           // is 72 days long. Without it the line fits at every size. Only
+           // the name being added is shortened; משה רבינו stands as it was.
+           soul2: 'Aharon HaKohen',   he2: 'אהרן',
+           note: "Aharon HaKohen's own yahrzeit (Bamidbar 33:38) — Ish Chesed opening the Nine Days; Moshe, his brother, 1st of the five" },
       3: { soul: 'Rashbi',            he: 'רשב״י',        note: '2nd of the five' },
       5: { soul: 'the Arizal',        he: 'האר״י',        note: 'his own yahrzeit, at the exact heart of the nine — 3rd of the five' },
       7: { soul: 'the Baal Shem Tov', he: 'הבעל שם טוב', note: '4th of the five' },
@@ -25656,7 +25673,19 @@ content: ''; float: right; width: 30px; height: 1em;
             `<span style="font-size:0.88em;opacity:0.72">Mishmar ${chesedMic.watch} of 24: <span style="font-size:1.1em;color:var(--ink)">${chesedMic.mishmar.he}</span> — ${chesedMic.mishmar.en}</span>`) +
         `<br><span style="font-size:0.85em;color:var(--ink-dim)">The five lobes in 28 days — the twenty-four watches once through</span>`
       : ayinBetInfo.isBreak
-      ? `A silent day — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
+      // THE SILENT DAY CARRIES #chesed-day-face TOO, and it did not before —
+      // on the four silent days of the year this card had no findable face
+      // at all, so _faceOf fell through every strategy to the card's own
+      // heading and the Ladder meditated on "Shem Ayin-Bet — 72-Day Cycle".
+      // Confirmed on the pre-session build: this is old, not new. The faces
+      // section of check.mjs is what surfaced it, on a day that happened to
+      // be silent.
+      //
+      // What a silent day's face IS follows Gevurah's rule for its
+      // break-days: what is left when the face goes. Here nothing is left —
+      // the day has no number in the seventy-two, which is what makes it
+      // silent — so the face is that it is silent, said outright.
+      ? `<span id="chesed-day-face">A silent day</span> — between Cycle <strong>${ayinBetInfo.afterCycle}</strong> and Cycle <strong>${ayinBetInfo.afterCycle + 1}</strong>`
       // ── FIVE LINES, EACH A NUMBER AND ITS OWN NAME ──
       //   Name 70 (יבמ)
       //   Cycle 1 (בְּרֵאשִׁית)
@@ -25759,7 +25788,9 @@ content: ''; float: right; width: 30px; height: 1em;
         ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${bkWords[bkIdx]}</bdi>)` +
         (_cycleSoul
           ? `<br><strong>${_cycleSoulDay}</strong> Av` +
-            ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">${_cycleSoul.he}</bdi>)`
+            ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">` +
+            _cycleSoul.he + (_cycleSoul.he2 ? ` \u00b7 ${_cycleSoul.he2}` : '') +
+            `</bdi>)`
           : '');
     document.getElementById('chesed-sub').innerHTML = '';
     document.getElementById('chesed-text-label').innerHTML =
