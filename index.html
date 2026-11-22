@@ -25564,13 +25564,15 @@ content: ''; float: right; width: 30px; height: 1em;
       // facts and the Nine Days note can reach either. Unvocalized like the
       // rest of this table, though the app writes בֵּית אַהֲרֹן with points
       // elsewhere — inside one table the spelling should not change by row.
-      1: { soul: 'Moshe Rabbeinu',    he: 'משה רבינו',
-           // אהרן, not אהרן הכהן. Measured at all three text sizes: with
-           // הכהן the line wraps at large and larger, which would orphan
-           // "אהרן הכהן)" and its bracket on 72 days of every year — cycle 1
-           // is 72 days long. Without it the line fits at every size. Only
-           // the name being added is shortened; משה רבינו stands as it was.
-           soul2: 'Aharon HaKohen',   he2: 'אהרן',
+      // ONE PHRASE, משה ואהרון, in the author's own words and spelling — not
+      // two names joined by a middot. The pair was built that way first and
+      // he shortened it to this.
+      //
+      // soul and soul2 stay as two English facts, because they are two: the
+      // yahrzeit the Torah dates and the first of Rebbe Nachman's five. The
+      // Hebrew is the one thing the face draws, so it is one string.
+      1: { soul: 'Moshe Rabbeinu',    he: 'משה ואהרון',
+           soul2: 'Aharon HaKohen',
            note: "Aharon HaKohen's own yahrzeit (Bamidbar 33:38) — Ish Chesed opening the Nine Days; Moshe, his brother, 1st of the five" },
       3: { soul: 'Rashbi',            he: 'רשב״י',        note: '2nd of the five' },
       5: { soul: 'the Arizal',        he: 'האר״י',        note: 'his own yahrzeit, at the exact heart of the nine — 3rd of the five' },
@@ -25789,7 +25791,7 @@ content: ''; float: right; width: 30px; height: 1em;
         (_cycleSoul
           ? `<br><strong>${_cycleSoulDay}</strong> Av` +
             ` (<bdi lang="he" style="font-size:1.1em;color:var(--ink)">` +
-            _cycleSoul.he + (_cycleSoul.he2 ? ` \u00b7 ${_cycleSoul.he2}` : '') +
+            _cycleSoul.he +
             `</bdi>)`
           : '');
     document.getElementById('chesed-sub').innerHTML = '';
