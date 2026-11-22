@@ -1302,7 +1302,14 @@ padding: 10px 12px;
 }
 
 /* Harmonize Malchut face type scale with Keter's (13.5px main / 11px sub) */
-.malchut-visible-content .sefirah-main-text { font-size: calc(16px * var(--ts, 1)); line-height: 1.5; }
+/* #malchut-yad-top is the Day and Cycle lines — the card's own face. It is a
+   plain div rather than a .sefirah-main-text, so it was inheriting the body
+   size and drew a pixel smaller than every other card's face; the author saw
+   it. Named here rather than given the class, because the class would also
+   make it the FIRST .sefirah-main-text in the card, which is what
+   injectMedMarks and the _blockFace fallback both reach for. */
+.malchut-visible-content .sefirah-main-text,
+.malchut-visible-content #malchut-yad-top { font-size: calc(16px * var(--ts, 1)); line-height: 1.5; }
 .malchut-visible-content .sefirah-sub-text { font-size: calc(12.5px * var(--ts, 1)); }
 
 .malchut-inner-row .malchut-section:nth-child(odd) {
@@ -3071,7 +3078,8 @@ hr.wr-hr{border:none;border-top:1px solid var(--border);margin:14px 0;}
   .keter-section-label { font-size: calc(11px * var(--ts, 1)); }
   .sefirah-cycle-name { font-size: calc(11px * var(--ts, 1)); }
   .detail-row { font-size: calc(15px * var(--ts, 1)); }
-  .malchut-visible-content .sefirah-main-text { font-size: calc(17px * var(--ts, 1)); }
+  .malchut-visible-content .sefirah-main-text,
+  .malchut-visible-content #malchut-yad-top { font-size: calc(17px * var(--ts, 1)); }
   .malchut-visible-content .sefirah-sub-text { font-size: calc(13px * var(--ts, 1)); }
   #todays-path-body { font-size: calc(14px * var(--ts, 1)); }
   .path-row { padding: 8px 6px; }
@@ -27536,9 +27544,24 @@ content: ''; float: right; width: 30px; height: 1em;
         // reads "Cycles of Yad HaChazakah", which is the only context the
         // names need, and the detail and the Stars pane both give each book
         // its Sefer in full.
-        `(<span id="malchut-day-face"><strong>` +
-        _yadBooks.join(' &middot; ') +
-        `</strong></span>)</div>` +
+        //
+        // AN EM DASH WHEN TWO BOOKS SHARE THE DAY, brackets when one.
+        // Matching this face to the other cards' 17px cost the last of the
+        // room: at that size 2 of the 14 book-pairs — Mishpatim · Shoftim and
+        // Introduction · Madda — still wrap, on 3 days of each 28-day round.
+        // A bracket that opens and closes on different lines strands its
+        // second book; a dash has nothing to strand, so the wrap reads as a
+        // continuation. It is the rule Netzach already follows: brackets hold
+        // a name, a dash holds what will not fit on one line.
+        //
+        // The author chose this over accepting the wrap and over dashing all
+        // twenty-eight days, so the twenty-five single-book days keep the
+        // bracket form the other eight cards use.
+        ((_yadBooks.length > 1)
+          ? `&mdash; <span id="malchut-day-face"><strong>` +
+            _yadBooks.join(' &middot; ') + `</strong></span>`
+          : `(<span id="malchut-day-face"><strong>` +
+            _yadBooks.join(' &middot; ') + `</strong></span>)`) + `</div>` +
         // One Cycle line per cycle: a day that straddles two rounds has two
         // numbers and two pairs of times, and nums[i] is the round that
         // ittim[i] belongs to. Indexed rather than zipped blind, so a day
