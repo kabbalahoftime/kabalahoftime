@@ -150,7 +150,7 @@ And the mending, the man understood at last, is the sun's work. The sun sweetens
 
 In the last of the days, a call came to the man from a place called Sunrise, and Sunrise held a little of every land at once.
 
-It was a high perch, higher than the one he sat on — and not of his seeking; it had come to him. And signs moved him along, one after another: the Eagles lifted his name above the others; the gates opened as he reached them; the old ones who had watched over his work spoke well of him. Door after door, and none of them closed.
+It was a high perch, higher than the one he sat on — and not of his seeking; it had come to him. And signs moved him along, one after another: his name was lifted above the others; the gates opened as he reached them; the old ones who had watched over his work spoke well of him. Door after door, and none of them closed.
 
 But the perch had a price, and the price was not feathers. To sit at Sunrise he would have to lay on the altar the life of his own house: his prayers at their unhurried hours, the mornings with the children, his teaching in its season, the quiet evenings under his own roof. All of it bound, all of it laid out, and the man did not turn aside at any gate. He went the whole way, as the first father went, up the mountain with everything he loved.
 
