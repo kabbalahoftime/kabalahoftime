@@ -158,7 +158,7 @@ And at the very top, on the night after the day of rest, walking with the woman 
 
 The man heard it, and his hand stayed. There was another in the old days, a judge, who also climbed with what he loved — and he could not hold back, and his own vow carried him past the voice, and he walked home alone with what the vow had taken.
 
-But the first father walked down the mountain with his son beside him. And the man walked home with the moon eagle beside him, and the woman on his other side, and his house stood as it had stood: the prayers at their hours, the children at the table, the teaching in its season. Nothing had been taken from him. Everything had been asked of him — and everything had been given back.
+But the first father walked down the mountain with his son beside him. And the man walked home with the moon eagle beside him, and the woman on his other side, and his house stood as it had stood: the prayers at their hours, the children at the table, the teaching in its season. Nothing had been taken from him. Everything had been asked of him — and everything had been given back. And ahead of him, as ever, lay the one land that had never been on the altar — the Promised Land, still on the horizon, still calling.
 
 ### Epilogue |
 
