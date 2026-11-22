@@ -20,9 +20,9 @@ Back in the Land of the Sweet Waters, things began to improve. He had more energ
 
 There was repetition again — but it no longer felt stagnant. Consistency had been the challenge all along, the message received at the very beginning of his journeys.
 
-It happened the way everything happened in those years: almost all at once. He joined a new house of prayer, took up new work, and even a new way to share the book, and started teaching at a new school, all of this while the man and his family moved into a new house.
-
 ## Part II | Noon |
+
+It happened the way everything happened in those years: almost all at once. He joined a new house of prayer, took up new work, and even a new way to share the book, and started teaching at a new school, all of this while the man and his family moved into a new house.
 
 He was called back to the various lands he once inhabited, and in each one he would now play a different role.
 

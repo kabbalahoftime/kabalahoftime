@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v383**; the next is v384.
+nobody. Currently **v384**; the next is v385.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -116,7 +116,7 @@ reflow that adds a page usually means something upstream broke.
 | manuscript | PDF | pages |
 | --- | --- | --- |
 | `docs/from-the-new-moon-to-the-next.md` | `from-the-new-moon-to-the-next.pdf` | 31 |
-| `docs/from-the-sunrise-to-the-next.md` | `from-the-sunrise-to-the-next.pdf` | 15 |
+| `docs/from-the-sunrise-to-the-next.md` | `from-the-sunrise-to-the-next.pdf` | 14 |
 | `docs/ascents.md` | `ascents.pdf` | 52 |
 | `docs/reflections.md` | `reflections.pdf` | 119 |
 | `docs/alef-bet.md` | `alef-bet.pdf` | 41 |
