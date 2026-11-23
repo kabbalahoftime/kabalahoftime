@@ -26433,6 +26433,26 @@ content: ''; float: right; width: 30px; height: 1em;
           ? `<bdi lang="he" style="font-size:1.05em;color:var(--ink)">${attr.hebrew}</bdi>`
           : `<strong>${attr.name}</strong>`) +
         (id ? `</span>` : '') + `)`;
+      // EACH NASSI UNDER ITS OWN COUNT, not gathered at the foot of the face.
+      // They stood together under one "Nassi:" label below both count lines,
+      // which left the reader to work out that the first belonged to the Day
+      // line and the second to the Cycle line two rows above. Interleaved,
+      // the pairing is the layout and needs no label — and the card's own
+      // heading already says the thirteen are the Nesi'im.
+      //
+      // Tight to the line it belongs to and airy before the next count, so
+      // the face reads as two pairs rather than four rows.
+      //
+      // Every entry is "Name (Tribe) · Month" and the whole of it is too
+      // long for the column, so it wraps at the default size already. Where
+      // it wraps is the choice: left alone the break fell after "(Binyamin)
+      // ·" and left the month by itself. The tribe and the month are held
+      // together, so the break falls after the man's name instead and each
+      // row is a whole thing.
+      const _tifNassi = (nm) =>
+        `<div style="font-size:0.84em;line-height:1.45;margin:1px 0 5px;">` +
+        nm.replace(/\s\((.+)$/, ' <span style="white-space:nowrap">($1</span>') +
+        `</div>`;
       cards[4].querySelector('.sefirah-cycle-name').innerHTML = `Midot — 13-Day Nesi’im Cycle`;
       cards[4].querySelector('.sefirah-main-text').innerHTML = cycleThemeAttr
         // Each Attribute on one line with its meaning in brackets beside it,
@@ -26456,48 +26476,33 @@ content: ''; float: right; width: 30px; height: 1em;
         // full in the detail, which explains each Attribute at length, and
         // the ⓘ names both in Hebrew too.
         ? _tifLine('Day', cy13.day, cy13.attr, 'tiferet-day-face') +
+          _tifNassi(cy13.nassi) +
           (cycleThemeAttr.name === cy13.attr.name
             // On the thirteen days a cycle opens with its own Attribute it is
             // not said twice; the cycle's number still needs saying, so the
-            // line names the count and points at the line above it.
-            ? `<br>` + _tifCycLabel()
-            : `<br>` + _tifLine(_tifCycWord(), _tifCycN, cycleThemeAttr))
+            // line names the count and points at the line above it. Those are
+            // the same 26 days the two Nesi'im are one man, so the name is not
+            // said twice either — it stands under the Day line alone.
+            ? _tifCycLabel()
+            : _tifLine(_tifCycWord(), _tifCycN, cycleThemeAttr) +
+              (cy13.cycleNassi ? _tifNassi(cy13.cycleNassi) : ''))
         : _tifLine('Day', cy13.day, cy13.attr, 'tiferet-day-face') +
+          _tifNassi(cy13.nassi) +
           // The two microcosm cycles have no single cycle Attribute; name the
           // set each one is reviewing instead, since that is what tells them apart.
-          `<br><span style="font-size:0.85em;color:var(--ink-dim)">${cy13.setType}</span>`;
+          `<span style="font-size:0.85em;color:var(--ink-dim)">${cy13.setType}</span>`;
       // The Nassi of the day goes on the face, not behind the expand: the
       // thirteen days ARE the Nesi'im, which is what the cycle is named for
-      // now, so whose day it is should not have to be dug for. It is appended
-      // rather than written into the sub-text slot, which a later block
-      // empties unconditionally to make room for the Tiferet text row.
-      // A LINE EACH, UNDER ONE LABEL. They were joined on one line by a
-      // slash, which is two names, two tribes and two months in a single
-      // run — about seventy characters, so it wrapped to three ragged rows
-      // at 390px and the slash fell wherever the break put it. The day's
-      // man and the cycle's are the two lines above in the same order, Day
-      // then Cycle, so they read as that pair once they stand apart.
+      // now, so whose day it is should not have to be dug for. It is written
+      // into the face above rather than into the sub-text slot, which the
+      // next line empties unconditionally to make room for the Tiferet row.
       //
-      // One label, not two: the label is a flex column of its own and the
-      // names stack beside it, so the second name begins under the first
-      // and a wrapped name does too. Writing "Nassi:" twice was tried
-      // before this and is the thing that put them back on one line — two
-      // labels for one fact. Given once when the day's Nassi and the
-      // cycle's are the same man, as the Attributes are: 26 days a year.
-      cards[4].querySelector('.sefirah-main-text').innerHTML +=
-        `<div style="font-size:0.84em;line-height:1.5;margin-top:4px;` +
-        `display:flex;gap:0.35em;align-items:baseline;">` +
-        `<span style="color:var(--ink-dim);white-space:nowrap">Nassi:</span>` +
-        // Two blocks with air between them, not a <br>. Each name is long
-        // enough to wrap on its own at the larger text sizes, and separated
-        // by a bare line break the second began exactly where a wrapped
-        // continuation of the first would — so the pair read as one run of
-        // four rows. 3px is enough to tell them apart and does not open a
-        // gap at the default size.
-        `<span><div>${cy13.nassi}</div>` +
-        ((cy13.cycleNassi && cy13.cycleNassi !== cy13.nassi)
-          ? `<div style="margin-top:3px">${cy13.cycleNassi}</div>`
-          : '') + `</span></div>`;
+      // Two earlier shapes, and the history is the argument. Both Nesi'im on
+      // ONE LINE joined by a slash: seventy characters, so it wrapped to
+      // three ragged rows at 390px and the slash fell wherever the break
+      // put it. Then a LINE EACH UNDER ONE LABEL, stacked in a flex column
+      // beside "Nassi:": straight, but it sat below both counts and left the
+      // reader to pair the first name with a line two rows above it.
       cards[4].querySelector('.sefirah-sub-text').textContent = '';
       // The gold tag at the foot, parallel to Binah's. The 13-day cycle runs
       // twice through the year and then twice more in miniature, so the round
