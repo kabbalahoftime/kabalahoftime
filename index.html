@@ -8880,6 +8880,43 @@ content: ''; float: right; width: 30px; height: 1em;
     { letter: 'Tav', hebrew: 'ת' }        // Day 22
   ];
 
+  // ── HOD'S 728 COMBINATIONS ───────────────────────────────────────────────
+  // The twenty-seven letters — the twenty-two, then the five finals, which is
+  // the order the leap microcosm already walks them in — paired with one
+  // another. 27 × 27 = 729 ordered pairs against 728 half-days, so exactly
+  // one is left out, and it is ALEF WITH ITSELF: the One is not a
+  // combination. What that leaves is the whole argument:
+  //
+  //   729 − 1 = 728 = 26 × 28                     יהוה  ×  כֹּחַ
+  //   pairs of two different letters   27 × 26 = 702 = שַׁבָּת
+  //   letters standing with themselves 27 − 1  =  26 = שֵׁם הֲוָיָה
+  //
+  // The card's advanced note already said 728 is שבת joined to the Name. It
+  // said it as gematria; here it is the structure. What this replaces was 72
+  // Names × 10 Sefirot = 720 with eight "cornerstone" half-days added on to
+  // reach 728 — a ten with no particular claim on Hod and a patch of eight.
+  // Nothing in this is left over, and no day stands outside it.
+  //
+  // Built from the two tables above rather than listed again, so the letters
+  // and their spellings cannot drift apart from the cycles that use them.
+  const LETTERS_27 = SINGLE_LETTERS_22.concat(FINAL_LETTERS_MIC);
+  // Half-day h → the pair it carries, read straight through: first letter,
+  // then second. The grid index skips 1 — alef with alef — so g is h + 1,
+  // and `block` is which of the twenty-seven leads.
+  //
+  // IT FOLDS AT 728, as get13DayInfo folds at 364, and the folded number
+  // comes back in `h` so the line printed and the pair drawn can never be
+  // two different half-days. Without the fold the year-seam check walked
+  // past day 364, LETTERS_27 handed back undefined and the whole suite died
+  // on `reading 'hebrew'` — the old matrix never showed it, because its
+  // index was a modulo of five and could not leave the table.
+  function hodGate(h) {
+    h = ((Math.max(1, Math.round(h)) - 1) % 728) + 1;
+    const g = h + 1;
+    const i = Math.floor((g - 1) / 27), j = (g - 1) % 27;
+    return { h, first: LETTERS_27[i], second: LETTERS_27[j], block: i + 1 };
+  }
+
   // ── WHAT EACH LETTER STANDS FOR ──
   // One sentence for each of the 27 — the 22 and the five finals — drawn from
   // the Kabbalah of Time appendix the shelf links to, which reads the letters
@@ -19985,8 +20022,8 @@ content: ''; float: right; width: 30px; height: 1em;
         'chapters a day also carry the Shulchan Aruch&rsquo;s Orach Chaim through most of the ' +
         'year, sealed in the closing days with the Chofetz Chaim&rsquo;s laws of holy speech. ' +
         'Hod is acknowledgment and precision &mdash; the splendour of getting the details ' +
-        'right.',
-      advanced: "The year is split into 728 half-days — one halachah studied in the morning and one in the afternoon, keeping the rhythm of the Korban Tamid: one lamb offered at dawn and one bein ha'arbayim (Bamidbar 28:3–4), the daily offering that framed every day of the Mikdash.</p><p>With the Mikdash gone, the two daily halachot stand in its place, and Tanna D'Vei Eliyahu teaches that whoever studies two halachot every day merits the World to Come. Menachot 99b gives the measure, and gives it from a second tamid: Rabbi Ami learned from Rabbi Yose that one who studies a single chapter in the morning and one in the evening has fulfilled לא ימוש ספר התורה הזה מפיך — this Book of the Law shall not depart from your mouth, and you shall meditate on it day and night (Yehoshua 1:8).</p><p>He derives it from the Lechem HaPanim: the old bread lifted in the morning and the new set down toward evening, yet the table counted as bearing bread tamid, continually — so too a chapter at each end of the day renders one's Torah continuous, without interruption. On that same page Rabbi Yochanan says in the name of Rashbi that even the morning and evening Kriyat Shema meets the threshold.</p><p>The poskim keep the two tiers distinct. The Rambam (Hilchot Talmud Torah 1:8) and the Shulchan Aruch (Yoreh De’ah 246:1) bind every Jew to fixed times by day and night whatever his circumstances, the Rema allowing Kriyat Shema alone bish’at hadechak; while the Alter Rebbe’s own Shulchan Aruch (Hilchot Talmud Torah 3:1) spells out that the chapter morning and evening is the absolute floor — whoever has further time remains bound to learn to the full measure of his capacity.</p><p>So the book that sets the measure is itself read on it. Eliyahu Rabbah’s 31 chapters and Eliyahu Zuta’s 25 are 56 together, and 56 × 13 = 728 exactly: one chapter to every thirteen half-days. Thirteen half-days is six and a half days, so a chapter changes hands at midday rather than at a date, and every thirteen days carries exactly two — 26 half-days, which is יהוה, while thirteen itself is אחד and אהבה. The four 91-day tekufot take fourteen chapters each (14 × 13 = 182 half-days), so the reading closes with the seasons and not only with the year: Rabbah 1–14 in Nisan’s quarter, 15–28 in Tammuz’s, 29–31 with Zuta 1–11 in Tishrei’s, and Zuta 12–25 in Tevet’s.</p><p>A leap year’s extra twenty-eight days read the whole corpus through once instead, two chapters a day — 28 × 2 = 56 — which is the pace Menachot 99b names outright, one in the morning and one in the evening. 28 is כֹּחַ: the year’s reading held in the hand at full strength rather than walked, and the standard count untouched beneath it, so no chapter is said twice and none is missed.</p><p>Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day carry Orach Chaim's 697 chapters through most of the year, sealed in the closing days with the Chofetz Chaim's laws of speech. Beside them runs Tanna D’vei Eliyahu itself, a chapter to every thirteen half-days. The Zohar on the weekly parasha — its hidden light following the Torah reading, giving way on Shabbat to Sefer Yetzirah — is a week’s reading and not a day’s, and stands with Malchut’s Thursday book, beside the Ramchal.</p><p>Underneath the halachic rhythm lies a precise matrix. The 72 Divine Names flowing through the 10 Sefirot give 720 half-days — 72 × 10 — and to these are joined the 8 cornerstone half-days of the 4 root blocks in Chesed, 4 × 2, binding the 72 Names directly to the four letters of the Name and to the four turns of the year, the Tekufot.</p><p>And the number says its own purpose: 728 is שַׁבָּת (702) joined directly to שֵׁם הֲוָיָה (26). Shabbat is the elevation of the physical world into sacred rest and wholeness; united with the Name, it draws the transcendent light straight into the vessel of holy time. So the daily study of two halachot is the Shabbat of every day — each half-day a small entry into that rest, 728 of them holding the year complete.",
+        'right. </p><p>Each half-day also carries one combination of the twenty-seven letters &mdash; the twenty-two and the five finals. There are 27 &times; 27 = 729 such pairs and 728 half-days, so one is left out: alef with itself, because the One is not a combination. What remains divides exactly &mdash; 702 pairs of two different letters, which is <bdi lang="he">שַׁבָּת</bdi>, and 26 letters standing alone, which is the Name. So the number says what it is made of.',
+      advanced: "The year is split into 728 half-days — one halachah studied in the morning and one in the afternoon, keeping the rhythm of the Korban Tamid: one lamb offered at dawn and one bein ha'arbayim (Bamidbar 28:3–4), the daily offering that framed every day of the Mikdash.</p><p>With the Mikdash gone, the two daily halachot stand in its place, and Tanna D'Vei Eliyahu teaches that whoever studies two halachot every day merits the World to Come. Menachot 99b gives the measure, and gives it from a second tamid: Rabbi Ami learned from Rabbi Yose that one who studies a single chapter in the morning and one in the evening has fulfilled לא ימוש ספר התורה הזה מפיך — this Book of the Law shall not depart from your mouth, and you shall meditate on it day and night (Yehoshua 1:8).</p><p>He derives it from the Lechem HaPanim: the old bread lifted in the morning and the new set down toward evening, yet the table counted as bearing bread tamid, continually — so too a chapter at each end of the day renders one's Torah continuous, without interruption. On that same page Rabbi Yochanan says in the name of Rashbi that even the morning and evening Kriyat Shema meets the threshold.</p><p>The poskim keep the two tiers distinct. The Rambam (Hilchot Talmud Torah 1:8) and the Shulchan Aruch (Yoreh De’ah 246:1) bind every Jew to fixed times by day and night whatever his circumstances, the Rema allowing Kriyat Shema alone bish’at hadechak; while the Alter Rebbe’s own Shulchan Aruch (Hilchot Talmud Torah 3:1) spells out that the chapter morning and evening is the absolute floor — whoever has further time remains bound to learn to the full measure of his capacity.</p><p>So the book that sets the measure is itself read on it. Eliyahu Rabbah’s 31 chapters and Eliyahu Zuta’s 25 are 56 together, and 56 × 13 = 728 exactly: one chapter to every thirteen half-days. Thirteen half-days is six and a half days, so a chapter changes hands at midday rather than at a date, and every thirteen days carries exactly two — 26 half-days, which is יהוה, while thirteen itself is אחד and אהבה. The four 91-day tekufot take fourteen chapters each (14 × 13 = 182 half-days), so the reading closes with the seasons and not only with the year: Rabbah 1–14 in Nisan’s quarter, 15–28 in Tammuz’s, 29–31 with Zuta 1–11 in Tishrei’s, and Zuta 12–25 in Tevet’s.</p><p>A leap year’s extra twenty-eight days read the whole corpus through once instead, two chapters a day — 28 × 2 = 56 — which is the pace Menachot 99b names outright, one in the morning and one in the evening. 28 is כֹּחַ: the year’s reading held in the hand at full strength rather than walked, and the standard count untouched beneath it, so no chapter is said twice and none is missed.</p><p>Hod is acknowledgment and precision — the splendor of getting the details right. Two chapters a day carry Orach Chaim's 697 chapters through most of the year, sealed in the closing days with the Chofetz Chaim's laws of speech. Beside them runs Tanna D’vei Eliyahu itself, a chapter to every thirteen half-days. The Zohar on the weekly parasha — its hidden light following the Torah reading, giving way on Shabbat to Sefer Yetzirah — is a week’s reading and not a day’s, and stands with Malchut’s Thursday book, beside the Ramchal.</p><p>Underneath the halachic rhythm lies the letters. Each half-day carries one combination of the twenty-seven — the twenty-two and the five finals, ך ם ן ף ץ — taken straight through, the first letter with each of the twenty-seven in turn, then the second, to the end. 27 × 27 is 729 ordered pairs against 728 half-days, so exactly one is left out, and it is alef with itself: the One is not a combination, and the count begins where multiplicity begins.</p><p>What that leaves is not a tidy remainder but the number itself, three times over. 729 − 1 = 728 = 26 × 28, יהוה by כֹּחַ — the Name by the strength, which is also the count of the leap year’s added days. The pairs of two different letters are 27 × 26 = 702, which is שַׁבָּת. And the letters standing with themselves are 27 less the one withheld = 26, which is שֵׁם הֲוָיָה. So 728 is שבת joined directly to the Name — not as a gematria laid over the cycle afterwards, but as the two kinds of half-day the cycle is made of: seven hundred and two gates of two letters, and twenty-six letters standing alone.</p><p>This replaced a matrix of 72 Divine Names through the 10 Sefirot, 720 half-days, with 8 cornerstone half-days added on to reach 728. The ten there was the ten Sefirot, which have no particular claim on Hod; the eight were four of Chesed’s own silent days, borrowed; and four days of the year stood outside the count altogether. Nothing here is left over and no day stands outside.</p><p>Thirteen days a year turn from one leading letter to the next at midday, a block being twenty-seven half-days and a day two — אחד again, the number this cycle keeps meeting. Shabbat is the elevation of the physical world into sacred rest and wholeness; united with the Name, it draws the transcendent light straight into the vessel of holy time. So the daily study of two halachot is the Shabbat of every day — each half-day a small entry into that rest, 728 of them holding the year complete.",
       beginner:
         'The year, split into 728 half-days: a morning half and an afternoon half &mdash; like ' +
         'the two daily offerings that once framed every day in the Temple, one at dawn and one ' +
@@ -19994,7 +20031,7 @@ content: ''; float: right; width: 30px; height: 1em;
         'sages teach that whoever studies two teachings every day is assured a place in the ' +
         'World to Come &mdash; and with the Temple gone, these two daily portions stand in the ' +
         'offerings’ place. </p><p>Hod means splendour: the splendour of getting the details ' +
-        'right. Twice a day, every day, all year.',
+        'right. Twice a day, every day, all year. </p><p>Each half also carries two Hebrew letters paired together. There are twenty-seven letters, counting the five that change shape at the end of a word, and every letter is paired with every letter &mdash; which comes to exactly one pair for each half of each day of the year, with one left out: alef on its own, because one is not a pair.',
       meta: 'Shulchan Aruch & Mishnah Berurah · Chofetz Chaim · Tanna D’vei Eliyahu'
     },
     yesod: {
@@ -23395,13 +23432,10 @@ content: ''; float: right; width: 30px; height: 1em;
     Netzach: 'נֶצַח', Hod: 'הוֹד', Yesod: 'יְסוֹד', Malchut: 'מַלְכוּת',
   };
 
-  const HOD_SEFIROT = [
-    ['Keter', 'Will'],        ['Chochmah', 'Insight'],
-    ['Binah', 'Structure'],   ['Chesed', 'Expansion'],
-    ['Gevurah', 'Boundaries'],['Tiferet', 'Harmony'],
-    ['Netzach', 'Endurance'], ['Hod', 'Reflection'],
-    ['Yesod', 'Connection'],  ['Malchut', 'Manifestation'],
-  ];
+  // HOD_SEFIROT stood here — the ten walked two to a day under Hod's 72 × 10
+  // matrix. That matrix is gone; its half-days carry the letter combinations
+  // now (see LETTERS_27), and the table had no other reader, so it is deleted
+  // rather than left standing unused.
   // Birkat Kohanim is 15 words = 5 × 3, so each of the five 72-day cycles of
   // the Name carries three words of the priestly blessing — the five apertures
   // of the Kohen's hands. Groups of three run straight across the verse breaks.
@@ -27011,20 +27045,16 @@ content: ''; float: right; width: 30px; height: 1em;
     // so the two can never disagree (chapters are half-days 2n−1 and 2n).
     const _hodDay = hal.day;
     // The two halves of the day are half-days 2n−1 and 2n of the 728 — one
-    // studied in the morning, one in the afternoon.
-    // WHERE THE DAY STANDS IN THE MATRIX. The 72 Names run through the ten
-    // Sefirot two at a time — a Name to every five days, a Sefirah to every
-    // half-day — so the morning is the odd Sefirah of the pair and the
-    // evening the even one, and the whole ten are walked every five days.
+    // studied in the morning, one in the afternoon — and each carries one
+    // combination of the twenty-seven letters. See LETTERS_27 / hodGate for
+    // why there are exactly 728 of them and which one is missing.
     //
-    // The four days that carry no Name are the same four Chesed keeps silent
-    // between its five readings of 72: 72 × 10 half-days is 360 days, and the
-    // year is 364. They are the cornerstones the note speaks of, and they are
-    // named as such rather than given a Name they do not have.
-    const _hodNamed = _hodDay - AYIN_BET_BREAKS.filter(b => b < _hodDay).length;
-    const _hodBreak = AYIN_BET_BREAKS.indexOf(_hodDay) !== -1;
-    const _hodName  = _hodBreak ? 0 : Math.floor((_hodNamed - 1) / 5) + 1;   // 1–72
-    const _hodStep  = _hodBreak ? 0 : ((_hodNamed - 1) % 5) + 1;             // 1–5
+    // This replaced a matrix of 72 Names × 10 Sefirot plus four "cornerstone"
+    // days that stood outside it. Those four were Chesed's own silent days,
+    // borrowed to make 720 reach 728; every day is inside the count now, so
+    // the branch that spoke for them is gone and so is HOD_SEFIROT.
+    const _hodAM = hodGate(_hodDay * 2 - 1);
+    const _hodPM = hodGate(_hodDay * 2);
     // The phase is named, not pictured. A sunrise and a moon said no more
     // than Ratzo and Shov already say, in a face that is otherwise set in
     // type — the page marks its kinds with ✦ and ✡ and Hebrew, not with
@@ -27034,53 +27064,48 @@ content: ''; float: right; width: 30px; height: 1em;
     // word stranded underneath reads as something torn rather than as a line
     // carrying on. The line still wraps — it has to, in a column this narrow
     // at the larger text sizes — but it wraps between the units.
-    const _hodPhase = (n, sef, word) =>
+    // The pair is one run of Hebrew and must stay one: inside a Latin label
+    // and after a middot it is no longer a run of its own, so it takes its
+    // own <bdi>, as Chesed's words do.
+    const _hodPhase = (n, g, word, id) =>
       `<div style="line-height:1.6;"><span style="color:var(--ink-dim);` +
       `font-size:calc(11px * var(--ts, 1));white-space:nowrap">${word} &middot; Half-Day ${n}</span> ` +
-      `<strong>${sef[0]}</strong> <span style="color:var(--ink-mid);font-size:0.9em;` +
-      `white-space:nowrap">&mdash; ${sef[1]}</span></div>`;
+      (id ? `<span id="${id}">` : '') +
+      `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.2em;` +
+      `color:var(--gold)">${g.first.hebrew}${g.second.hebrew}</bdi>` +
+      (id ? `</span>` : '') +
+      ` <span style="color:var(--ink-mid);font-size:0.9em;` +
+      `white-space:nowrap">&mdash; ${g.first.letter}, ${g.second.letter}</span></div>`;
+    // Two lines, a count and the thing it points at, as the rebuilt faces
+    // read.
+    //
+    // THE MEDITATION IS THE AFTERNOON PAIR, which carries #hod-day-face.
+    // Hod’s own hour is 3:26–6:52, which is after midday, so the combination
+    // standing in Hod's hour is the second of the two. The id sits on the
+    // pair alone and not on the line: _blockFace was handing the ladder the
+    // label and the number along with it.
     document.getElementById('hod-pos').innerHTML =
-      (_hodBreak
-        ? `<div>A cornerstone half-day pair &mdash; <span style="color:var(--ink-mid);` +
-          `font-size:0.9em">one of the four Chesed keeps silent</span></div>`
-        // The Name line in the bracket form the other faces use: the number,
-        // then the Name itself. "of 72" and "day N of 5" have gone to the
-        // gold tag at the foot, where Binah keeps its own — they are the
-        // where-am-I counts, and this line is what the day IS.
-        //
-        // The two phase lines below are left exactly as they are. They are
-        // already a count and then its name, and their wrapping is tuned:
-        // each unit is white-space:nowrap so the line breaks BETWEEN units
-        // rather than inside one. Putting brackets round "Yesod — Connection"
-        // would add a group that must not split either, and at the larger
-        // text size "(Malchut — Manifestation)" held whole could run past a
-        // 208px column — which is a sideways-scroll failure, not a wrap.
-        // The Name itself carries the span, not the whole line: the
-        // meditation is the Name, as Chesed's is, and _blockFace was handing
-        // the ladder "Name 14 (מבה)" — the label and the number with it.
-        : `<div>Name <strong>${_hodName}</strong> ` +
-          `(<span id="hod-day-face"><bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;` +
-          `font-size:1.15em;color:var(--gold)">${AYIN_BET_NAMES[_hodName - 1]}</bdi></span>)</div>`) +
-      (_hodBreak
-        // A cornerstone takes no Sefirah. The ten are walked by the Names,
-        // and these four days stand outside them — giving them Keter and
-        // Chochmah would be inventing a place in a matrix they are not in.
-        ? `<div style="line-height:1.6;"><span style="color:var(--ink-dim);` +
-          `font-size:calc(11px * var(--ts, 1));">Half-Days ${_hodDay * 2 - 1} &amp; ` +
-          `${_hodDay * 2}</span> <span style="color:var(--ink-mid);font-size:0.9em">` +
-          `&mdash; outside the 72 \u00d7 10, binding the Names to the Name</span></div>`
-        : _hodPhase(_hodDay * 2 - 1, HOD_SEFIROT[(_hodStep - 1) * 2], 'Ratzo') +
-          _hodPhase(_hodDay * 2, HOD_SEFIROT[(_hodStep - 1) * 2 + 1], 'Shov'));
-    // The gold tag at the foot, parallel to Binah's. It carries the two
-    // where-am-I counts the Name line gave up: the Name out of seventy-two
-    // and the day out of its five. A cornerstone pair has neither — it stands
-    // outside the 72 × 10 — so it says that instead of counting.
+      _hodPhase(_hodAM.h, _hodAM, 'Ratzo') +
+      _hodPhase(_hodPM.h, _hodPM, 'Shov', 'hod-day-face');
+    // The gold tag at the foot, parallel to Binah's: which of the twenty-seven
+    // leads the day's pairs. Thirteen days a year turn from one leading letter
+    // to the next at midday — a block is 27 half-days and a day is 2, so a
+    // boundary falls mid-day whenever it falls on an odd half-day — and those
+    // thirteen say so rather than naming one letter and hiding the other.
     {
       const _hodTags = document.getElementById('hod-tags');
-      if (_hodTags) _hodTags.innerHTML = _hodBreak
-        ? `<span class="tag highlight">A cornerstone pair</span>`
-        : `<span class="tag highlight">Name ${_hodName} of 72 \u00b7 ` +
-          `Day ${_hodStep} of 5</span>`;
+      // The Hebrew carries letter-spacing:normal of its own. `.tag` is tracked,
+      // as the page's Latin small-caps labels are, and no tag had held Hebrew
+      // before this one — tracked Hebrew is what the tracking check forbids,
+      // and it failed the suite on the mem sofit the first time round.
+      const _hodHe = g =>
+        `<bdi lang="he" style="letter-spacing:normal">${g}</bdi>`;
+      if (_hodTags) _hodTags.innerHTML = (_hodAM.block === _hodPM.block)
+        ? `<span class="tag highlight">Letter ${_hodPM.block} of 27 ` +
+          `(${_hodHe(_hodPM.first.hebrew)})</span>`
+        : `<span class="tag highlight">Letter ${_hodAM.block} → ` +
+          `${_hodPM.block} of 27 (${_hodHe(_hodAM.first.hebrew)} ` +
+          `→ ${_hodHe(_hodPM.first.hebrew)})</span>`;
     }
 
     // The stream runs out of the Shulchan Aruch into the Chofetz Chaim, so a

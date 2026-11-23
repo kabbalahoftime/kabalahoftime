@@ -1240,6 +1240,71 @@ by the same change. Swept a full year: all twelve of the season break-days
 and all twelve of the microcosm's carry their creature, and no ordinary day
 changed.
 
+### Hod's 728 are the letters, and nothing is left over
+
+Each half-day carries one **combination of the twenty-seven letters** — the
+twenty-two and the five finals, `ך ם ן ף ץ` — taken straight through: the
+first letter with each of the twenty-seven, then the second, to the end.
+
+`27 × 27 = 729` ordered pairs against 728 half-days, so exactly one is left
+out, and it is **alef with itself**. The One is not a combination. What that
+leaves is the number three times over:
+
+```
+729 − 1 = 728 = 26 × 28                      יהוה × כֹּחַ
+pairs of two different letters  27 × 26 = 702 = שַׁבָּת
+letters standing with themselves 27 − 1 =  26 = שֵׁם הֲוָיָה
+```
+
+The card's advanced ⓘ already asserted *728 is שבת joined to the Name* as
+gematria. It is now the structure: 702 gates of two letters and 26 letters
+standing alone are **the two kinds of half-day the cycle is made of**.
+
+**What it replaced, and why.** A matrix of 72 Divine Names × 10 Sefirot = 720
+half-days, with **8 "cornerstone" half-days added on** to reach 728. The ten
+was the ten Sefirot, which have no particular claim on Hod; the eight were
+four of **Chesed's own silent days**, borrowed; and those four days of the
+year stood outside the count altogether, with a branch of their own on the
+card saying so. All of that is gone — `HOD_SEFIROT` deleted rather than left
+unused, the break branch deleted, and the suite's `Half-Days N & M` fallback
+deleted with them rather than left to rot unmatched.
+
+`LETTERS_27` is `SINGLE_LETTERS_22.concat(FINAL_LETTERS_MIC)` — **derived, not
+listed again**, so the letters and their spellings cannot drift from the
+cycles that already use them. The author's own order, and the order the leap
+microcosm already walks.
+
+**`hodGate` folds at 728**, as `get13DayInfo` folds at 364, and returns the
+folded number in `h` so the line printed and the pair drawn can never be two
+different half-days. Without the fold the **year-seam** check walked past day
+364, `LETTERS_27` handed back `undefined`, and the whole suite died on
+`reading 'hebrew'`. The old matrix never showed this, because its index was a
+modulo of five and could not leave its table — so a seam that had always been
+walked became reachable the moment the lookup stopped folding.
+
+**The meditation is the afternoon pair.** Hod's hour is 3:26–6:52, after
+midday, so `#hod-day-face` sits on the second of the two. The id is on the
+pair alone, not the line: `_blockFace` would hand the ladder the label and
+the number with it.
+
+**Thirteen days a year turn letter at midday** — a block is 27 half-days and
+a day is 2, so a boundary falls mid-day whenever it falls on an odd half-day.
+The foot tag says so (`Letter 5 → 6 of 27`) rather than naming one and hiding
+the other. Checked: 13 in a Kabbalah of Time year, all 27 blocks seen.
+
+**The tag's Hebrew carries `letter-spacing:normal`.** `.tag` is tracked, as
+the page's Latin small-caps labels are, and no tag had held Hebrew before
+this one. Tracked Hebrew is exactly what the `tracking` check forbids, and it
+failed the suite on the mem sofit the first time round.
+
+Swept a year at all three text sizes: 0 malformed, no overflow, all 728 pairs
+distinct, alef-alef absent, first `אב`, 27th `בא`, last `ץץ`.
+
+**Three depths of the ⓘ say this**, not one — `beginner`, `main` and
+`advanced` all describe the combinations now. Change the construction and
+change all three.
+
+
 ### No byline, anywhere
 
 The app names **no person**. The two JSON-LD `author` fields are gone from
