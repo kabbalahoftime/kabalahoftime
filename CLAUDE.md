@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v393**; the next is v394.
+nobody. Currently **v394**; the next is v395.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -1240,7 +1240,7 @@ by the same change. Swept a full year: all twelve of the season break-days
 and all twelve of the microcosm's carry their creature, and no ordinary day
 changed.
 
-### Hod's 728 are the letters, and nothing is left over
+### Hod's 728 are the letters, and the Names run over them
 
 Each half-day carries one **combination of the twenty-seven letters** — the
 twenty-two and the five finals, `ך ם ן ף ץ` — taken straight through: the
@@ -1260,14 +1260,30 @@ The card's advanced ⓘ already asserted *728 is שבת joined to the Name* as
 gematria. It is now the structure: 702 gates of two letters and 26 letters
 standing alone are **the two kinds of half-day the cycle is made of**.
 
-**What it replaced, and why.** A matrix of 72 Divine Names × 10 Sefirot = 720
-half-days, with **8 "cornerstone" half-days added on** to reach 728. The ten
-was the ten Sefirot, which have no particular claim on Hod; the eight were
-four of **Chesed's own silent days**, borrowed; and those four days of the
-year stood outside the count altogether, with a branch of their own on the
-card saying so. All of that is gone — `HOD_SEFIROT` deleted rather than left
-unused, the break branch deleted, and the suite's `Half-Days N & M` fallback
-deleted with them rather than left to rot unmatched.
+**The older count stands beside it, and that is deliberate.** A Name of the
+Shem Ayin-Bet holds for five days — `72 × 5 = 360` days, 720 half-days — and
+the four days Chesed keeps silent between its five readings of the
+seventy-two are 8 half-days more. **720 + 8 = 728**, which is `27² − 1` again
+by another road. Two constructions meeting on one number is the whole reason
+to keep both, so **neither is written as the explanation of the other**: the
+face names the Name over the day and a pair over each half of it, and the
+foot carries a tag for each count.
+
+The author asked for this after the letters shipped alone: *"I also want to
+keep the 72-name × 5 + 8 combination."* The four cornerstone days keep their
+branch — they have no Name, and say so — but they do have letters like every
+other day, so the two half-day lines are drawn on all 364.
+
+**What did come out is the ten.** `HOD_SEFIROT`, the ten Sefirot walked two to
+a day inside that matrix, is deleted rather than left unused. It was the one
+part with no particular claim on Hod, which is what the author objected to:
+*"perhaps there's something that is ten that is more true to Hod."* Nothing
+is now walked by tens here.
+
+**Ratzo and Shov are off the two half-day lines.** They named the morning
+half and the afternoon half while those halves walked the ten out and back;
+the combinations do not run and return, and the Shulchan Aruch row below says
+Morning and Afternoon outright. Do not put them back.
 
 `LETTERS_27` is `SINGLE_LETTERS_22.concat(FINAL_LETTERS_MIC)` — **derived, not
 listed again**, so the letters and their spellings cannot drift from the
@@ -1283,9 +1299,12 @@ modulo of five and could not leave its table — so a seam that had always been
 walked became reachable the moment the lookup stopped folding.
 
 **The meditation is the afternoon pair.** Hod's hour is 3:26–6:52, after
-midday, so `#hod-day-face` sits on the second of the two. The id is on the
-pair alone, not the line: `_blockFace` would hand the ladder the label and
-the number with it.
+midday, so `#hod-day-face` sits on the second of the two. It was the Name
+until the letters arrived, and **the Name is Chesed's own meditation
+already** — Chesed's face names one of the seventy-two every day — so the
+pair is what this card has that no other card does. The id is on the pair
+alone, not the line: `_blockFace` would hand the ladder the label and the
+number with it.
 
 **Thirteen days a year turn letter at midday** — a block is 27 half-days and
 a day is 2, so a boundary falls mid-day whenever it falls on an odd half-day.
@@ -1298,7 +1317,9 @@ this one. Tracked Hebrew is exactly what the `tracking` check forbids, and it
 failed the suite on the mem sofit the first time round.
 
 Swept a year at all three text sizes: 0 malformed, no overflow, all 728 pairs
-distinct, alef-alef absent, first `אב`, 27th `בא`, last `ץץ`.
+distinct, alef-alef absent, first `אב`, 27th `בא`, last `ץץ` — and with both
+counts on the face, 361 days naming a Name, 3 a cornerstone, two tags on
+every one.
 
 **Three depths of the ⓘ say this**, not one — `beginner`, `main` and
 `advanced` all describe the combinations now. Change the construction and

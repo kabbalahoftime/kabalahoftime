@@ -1252,9 +1252,10 @@ async function checkInBrowser(chromium) {
         // The face names each half-day on its own line, with the letter
         // combination it carries — so the two numbers are read from two runs.
         // The "Half-Days N & M" fallback that stood here was for the four
-        // cornerstone days of the old 72 × 10 matrix; there are no days
-        // outside the count any more, so it is gone rather than left to rot
-        // unmatched.
+        // cornerstone days, which used to write their numbers that way for
+        // want of a Sefirah to hang them on. They carry letters like every
+        // other day now, so both lines are drawn on all 364 and the fallback
+        // is gone rather than left to rot unmatched.
         card: () => pair(m(main(6), /Half-Day (\d+)[\s\S]*?Half-Day (\d+)/), 1, 2),
         cell: s => pair(m(s.cell, /OC (\d+)–(\d+)/), 1, 2) },
       { lens: 8, name: 'Yesod',
