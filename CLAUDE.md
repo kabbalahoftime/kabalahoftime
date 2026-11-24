@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v394**; the next is v395.
+nobody. Currently **v395**; the next is v396.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -1324,6 +1324,73 @@ every one.
 **Three depths of the ⓘ say this**, not one — `beginner`, `main` and
 `advanced` all describe the combinations now. Change the construction and
 change all three.
+
+
+### Malchut reads the Yad twice, and the face takes the books
+
+Two counts, kept apart on purpose — the author's own words: *"There are two
+separate counts for Yad HaChazakah: one with just the 14 books for the face,
+and one with the 84 subsections in the stars."*
+
+```
+the face    14 books, one to each 28-day cycle       getYadInfo().books
+the stars   84 subsections, three a day, whole Yad   getYadInfo().subs
+            every 28 days                            (✡ row, filed to Stars)
+```
+
+**A leap year's 392 days give fourteen cycles, so one book each. A common
+year has thirteen, so the Adar cycle carries two** — Haflaah and Zeraim —
+exactly as it carries two of Kohelet's fourteen pairs, and for the same
+reason. The books ride `pairNums`, the same array the ittim ride, so the two
+can never fall out of step.
+
+**The face used to show the 84-count** and nobody noticed, because it looked
+right: it named the book the day's three subsections happened to fall in, so
+it changed daily and straddled two books three days in each round. The card's
+own ⓘ had said the other thing all along — *"the Adar cycle carrying two of
+the 14 books"* — while the code swept all 84 every round. **The prose was
+right and the code was wrong**, which is the reverse of the usual rot here.
+
+The face now reads one count to a line with the pair of times under it:
+
+```
+Cycle 3 (Zemanim — Times)
+עת להרוג ועת לרפוא — a time to kill, and a time to heal
+[ Cycle 3 of 14 · Day 19 of 28 ]
+```
+
+On the doubled Adar cycle both are drawn in full, each with its number, its
+book and its own pair of times. **The et carries no number of its own** — the
+Cycle line above it has already given one, and repeating it was the fault
+that made Tiferet's two Nesi'im unreadable.
+
+**The book name drops its "Sefer"** and keeps its English: the heading above
+already says Yad HaChazakah, and the Stars pane and the detail both give each
+book its Sefer in full. `_yadSplit` cuts `MISHNEH_TORAH_14`'s entries on the
+em dash rather than a second list being written.
+
+**`#malchut-day-face` is the book**, so the meditation holds for the whole
+28-day cycle rather than turning daily. On a doubled cycle it is the first of
+the two.
+
+**Malchut has no foot row for its tag.** Its visible content is a stack of
+sections and `_paneTakeFace` files most of them away, so "the foot" is
+wherever the filing happens to end. The tag sits under these lines instead,
+and `check.mjs` reads it there — `/Cycles? (\d+(?: & \d+)*) of 14 · Day
+(\d+) of 28/` off `#malchut-yad-top`, which is always rendered.
+
+**A `<bdi lang="he">` cost a suite run here.** Malchut's advanced note is a
+double-quoted JS string with `\"under the sun\"` already escaped in it, so an
+unescaped `lang="he"` closed the string: `Unexpected identifier 'he'`, and
+with that script block dead `CYCLE_INFO`, `medGlyph` and `gregToHebrew` were
+all undefined. The `parse` section catches it, but a hand probe that only
+reads the DOM reports the symptom — "CYCLE_INFO is not defined" — rather than
+the cause. **Check which quote the string uses before putting markup in it.**
+
+Checked: the 14 books map one to a cycle in a leap year and 13 cycles in a
+common one with Adar doubling; swept a year at all three text sizes, 0
+malformed, no overflow; and the doubled round found at offset −645 draws both
+books, both pairs of times, and the `Cycles 6 & 7 of 14` tag.
 
 
 ### No byline, anywhere
