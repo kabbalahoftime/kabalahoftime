@@ -27144,7 +27144,14 @@ content: ''; float: right; width: 30px; height: 1em;
     // marks, not one.
     const _hodPhase = (n, g, id, sef) =>
       `<div style="line-height:1.6;">` +
-      `<span style="white-space:nowrap">Half-Day <strong>${n}</strong></span>` +
+      // ½ DAY, NOT "HALF-DAY". The word was the width: measured over a year
+      // of rows at 390px, "Half-Day N" wrapped 87 of 280 at large and 253 of
+      // 280 at larger; "½ Day N" wraps 10 and 89. The ligature is what does
+      // it — "1/2 Day N" was measured too and wrapped 26 and 151, three
+      // glyphs where ½ is one. A bare number wraps none at all, and is the
+      // author's other offer; the unit is kept because the line sits beside
+      // a Sefirah and a pair of letters, where a lone 149 names nothing.
+      `<span style="white-space:nowrap">½ Day <strong>${n}</strong></span>` +
       // THE SEFIRAH AND ITS LETTERS ARE ONE NOWRAP GROUP, and both middots
       // travel inside it, so the only place the line can break is after the
       // count. Three units at the line's own size do not fit a 208px column

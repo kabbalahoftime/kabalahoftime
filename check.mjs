@@ -1249,14 +1249,19 @@ async function checkInBrowser(chromium) {
         cell: s => pair(m(s.cell, /Cycle (\d+) · day (\d+) of 41/), 1, 2) ||
                    pair(m(s.cell, /Year-Cycle (\d+) · day (\d+) of 55/), 1, 2) },
       { lens: 7, name: 'Hod',
-        // The face names each half-day on its own line, with the letter
-        // combination it carries — so the two numbers are read from two runs.
+        // The face names each half-day on its own line, with the Sefirah and
+        // the letter combination it carries — so the two numbers are read
+        // from two runs. The label is "½ Day", not "Half-Day": the word was
+        // costing the line its width at the larger text sizes. Matched to
+        // the current wording rather than widened to accept both, which is
+        // the rule the Chesed probes are kept under — a probe that accepts
+        // every past spelling catches no future one.
         // The "Half-Days N & M" fallback that stood here was for the four
         // cornerstone days, which used to write their numbers that way for
         // want of a Sefirah to hang them on. They carry letters like every
         // other day now, so both lines are drawn on all 364 and the fallback
         // is gone rather than left to rot unmatched.
-        card: () => pair(m(main(6), /Half-Day (\d+)[\s\S]*?Half-Day (\d+)/), 1, 2),
+        card: () => pair(m(main(6), /½ Day (\d+)[\s\S]*?½ Day (\d+)/), 1, 2),
         cell: s => pair(m(s.cell, /OC (\d+)–(\d+)/), 1, 2) },
       { lens: 8, name: 'Yesod',
         // A double parasha carries two numbers on each side — "Cycle 6 & 7" —
