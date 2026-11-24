@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v395**; the next is v396.
+nobody. Currently **v396**; the next is v397.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -1274,16 +1274,58 @@ keep the 72-name × 5 + 8 combination."* The four cornerstone days keep their
 branch — they have no Name, and say so — but they do have letters like every
 other day, so the two half-day lines are drawn on all 364.
 
-**What did come out is the ten.** `HOD_SEFIROT`, the ten Sefirot walked two to
-a day inside that matrix, is deleted rather than left unused. It was the one
-part with no particular claim on Hod, which is what the author objected to:
-*"perhaps there's something that is ten that is more true to Hod."* Nothing
-is now walked by tens here.
+**The ten came out and then came back, and the difference is the matching.**
+`HOD_SEFIROT` — the ten walked two to a day, in order, as the thing that made
+728 — is deleted. The author's objection was never to the Sefirot but to that
+ten having no claim on Hod: *"perhaps there's something that is ten that is
+more true to Hod."* He then named the claim himself — *"The Sefirot are
+specifically connected to Hod (Lag Ba'Omer!); question is how to match them to
+the 10"* — Lag Ba'Omer being Hod she'b'Hod, the Omer's Sefirah within
+Sefirah.
 
-**Ratzo and Shov are off the two half-day lines.** They named the morning
-half and the afternoon half while those halves walked the ten out and back;
-the combinations do not run and return, and the Shulchan Aruch row below says
-Morning and Afternoon outright. Do not put them back.
+**FIVE OPPOSITE FIVE is the matching, and the card had already half-said it.**
+Its half-days carry Sefer Yetzirah's letters, and that book's opening pairs
+them with the ten and then divides the ten:
+
+```
+1:2  עשר ספירות בלי מה ועשרים ושתים אותיות יסוד
+     ten Sefirot of nothingness AND twenty-two foundation letters
+1:3  במספר עשר אצבעות חמש כנגד חמש
+     in the number of ten fingers, five opposite five
+```
+
+A half-day is the day halved, so **the five mornings of a Name take the upper
+five and the five afternoons the lower five.** Both columns descend. The
+day-pairs it yields are Keter–Tiferet, Chochmah–Netzach, Binah–Hod,
+Chesed–Yesod, Gevurah–Malchut — the middle two being the right and left
+columns' own. Straight descent two to a day was the other candidate, and is
+what the deleted matrix did; the author chose this from the two.
+
+The arithmetic needs no new structure: **a Name holds five days, which is ten
+half-days**, so the ten walk once inside every Name. `SEFIROT_10` is
+`Object.keys(SEFIRAH_HE)` — derived, not a second list. A cornerstone day has
+no Name, so no ten.
+
+**The letters' English came off when the Sefirah went on**, and the
+measurement is the argument. The line had held four things — Sefirah, count,
+pair, and *"— Vav, Samech"* — and over a year of rows:
+
+| line | wraps at normal | at large |
+| --- | --- | --- |
+| as built, four things | 168/240 | 237/240 |
+| without the English gloss | **0/240** | **0/240** |
+| gloss kept, "Half-Day" cut to a bare number | 22/240 | 104/240 |
+
+So the gloss was the whole cost and the label none of it. It is the line
+Chesed already keeps — no face here carries a transliteration — and the trade
+Chochmah's set line made.
+
+**Ratzo and Shov are off the head of the two half-day lines, and the Sefirah
+stands where they stood.** They named the morning and afternoon halves while
+those halves walked the ten out and back; the combinations do not run and
+return, the Shulchan Aruch row says Morning and Afternoon outright, and what
+belongs at the head of a half-day is which of the ten it is. Do not put those
+two words back.
 
 `LETTERS_27` is `SINGLE_LETTERS_22.concat(FINAL_LETTERS_MIC)` — **derived, not
 listed again**, so the letters and their spellings cannot drift from the
@@ -1317,9 +1359,10 @@ this one. Tracked Hebrew is exactly what the `tracking` check forbids, and it
 failed the suite on the mem sofit the first time round.
 
 Swept a year at all three text sizes: 0 malformed, no overflow, all 728 pairs
-distinct, alef-alef absent, first `אב`, 27th `בא`, last `ץץ` — and with both
-counts on the face, 361 days naming a Name, 3 a cornerstone, two tags on
-every one.
+distinct, alef-alef absent, first `אב`, 27th `בא`, last `ץץ` — and with all
+three counts on the face, 361 days naming a Name, 3 a cornerstone, two tags on
+every one, **all five opposite-pairs seen, the morning never a lower Sefirah
+and the afternoon never an upper one**, and nothing wrapping at any size.
 
 **Three depths of the ⓘ say this**, not one — `beginner`, `main` and
 `advanced` all describe the combinations now. Change the construction and
