@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v400**; the next is v401.
+nobody. Currently **v401**; the next is v402.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -1270,13 +1270,33 @@ holds a short name and two or three Hebrew words.
 detail, under `Commandment N`, which is where Chesed and Gevurah keep what
 will not fit a face.
 
-**The Hebrew carries `white-space:nowrap`.** Without it the Cycle line broke
-*inside* the Hebrew — `(No Other Gods —` over `יִהְיֶה לְךָ)` — stranding the
-bracket, which is the one wrapping fault this file forbids. Held together the
-break falls after the em dash instead, and the Hebrew keeps its bracket,
-which is exactly what Binah and Chesed do at the largest size. No `&nbsp;` is
-needed before the `)`: a line can only break at a space and there is none
-there, so pinning the Hebrew pins the bracket with it.
+**The openings are fuller than the one or two words they carried first** —
+the author's ask, *"I think the Hebrew commandments could have more words"* —
+and each is a **contiguous run of its own verse**. An opening may stop early;
+nothing is cut out of the middle, which would make a verse the Torah does not
+have. Six, seven and eight are whole commandments in two words and have
+nothing to lengthen.
+
+**The Hebrew wraps, and it was pinned for one commit before that.** While it
+was one or two words it carried `white-space:nowrap`, because the Cycle line
+broke *inside* it — `(No Other Gods —` over `יִהְיֶה לְךָ)` — leaving a single
+word at the end of a row. Pinned, the whole phrase moved down with its
+bracket, which is what Binah does.
+
+A pinned run of five vocalized words does not fit a 208px column, and the
+measurement said so outright — 140 days, Netzach's face:
+
+| | normal | large | larger |
+| --- | --- | --- | --- |
+| nowrap | 0 overflow | 0 | **49/140 overflow** |
+| wrapping | 0 | 0 | **0** |
+
+An overflow is a sideways scroll, which is a failure, not a wrap. So the pin
+came off with the lengthening. **Nothing is stranded by that**: a line can
+only break at a space and there is none before the `)`, so the bracket always
+rides the last Hebrew word, and a five-word phrase breaking between its own
+words is ordinary setting. **Lengthen the Hebrew and the pin must come off;
+shorten it and the pin must go back** — they are one decision.
 
 #### The leap branch is a second face, and it was missed first time
 
@@ -1304,7 +1324,9 @@ trusting a splice.**
 
 Swept 140 days at all three text sizes: 0 days without Hebrew on either
 branch, 0 malformed, no overflow, every 41-day line matching
-`^(Day|Level|Cycle) \d+ \(.+\)$`.
+`^(Day|Level|Cycle) \d+ \(.+\)$`. The face is taller for the fuller Hebrew —
+74–179px at the default size where it was 74–127 — which is what more words
+cost and was asked for.
 
 
 ### Hod's 728 are the letters, and the Names run over them

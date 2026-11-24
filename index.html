@@ -6536,22 +6536,26 @@ content: ''; float: right; width: 30px; height: 1em;
     { cycle: 10, mivtzah: 'Torah',                      commandment: 'Do Not Covet',                theme: 'Torah as the remedy for desire' }
   ];
 
-  // The Hebrew is the opening of each Dibbur from Shemot 20, short enough
-  // for a card face. Netzach was the one face in the ten with no Hebrew on
+  // The Hebrew is the opening of each Dibbur from Shemot 20 — a fuller run
+  // than the one or two words it carried first, at the author's ask. Each
+  // is a CONTIGUOUS run of its own verse: an opening may stop early, but
+  // nothing is skipped out of the middle, which would make a verse the
+  // Torah does not have. Six, seven and eight are whole commandments in two
+  // words and have nothing to lengthen. Netzach was the one face in the ten with no Hebrew on
   // any day — measured, 60 of 60 — because its two sources held English
   // alone. The full English of each commandment stays in `text` and is
   // stated in the detail; the face takes `commandment` and this.
   const TEN_COMMANDMENTS = [
-    { num: 1,  commandment: 'I Am the Lord',              theme: 'Divine Closeness',             text: 'I am the Lord your God, who brought you out of the land of Egypt, out of the house of bondage', he: 'אָנֹכִי' },
-    { num: 2,  commandment: 'No Other Gods',              theme: 'Worldly Interaction',           text: 'You shall have no other gods before Me', he: 'לֹא יִהְיֶה לְךָ' },
-    { num: 3,  commandment: 'Not to Profane G-d\'s Name', theme: 'Holiness Above Nature',         text: 'You shall not take the name of the Lord your God in vain', he: 'לֹא תִשָּׂא' },
-    { num: 4,  commandment: 'The Sabbath',                theme: 'Holiness in Nature',            text: 'Remember the Sabbath day to keep it holy', he: 'זָכוֹר' },
-    { num: 5,  commandment: 'Honor Parents',              theme: 'Jewish Connection',             text: 'Honor your father and your mother', he: 'כַבֵּד' },
+    { num: 1,  commandment: 'I Am the Lord',              theme: 'Divine Closeness',             text: 'I am the Lord your God, who brought you out of the land of Egypt, out of the house of bondage', he: 'אָנֹכִי ה׳ אֱלֹהֶיךָ' },
+    { num: 2,  commandment: 'No Other Gods',              theme: 'Worldly Interaction',           text: 'You shall have no other gods before Me', he: 'לֹא יִהְיֶה לְךָ אֱלֹהִים אֲחֵרִים' },
+    { num: 3,  commandment: 'Not to Profane G-d\'s Name', theme: 'Holiness Above Nature',         text: 'You shall not take the name of the Lord your God in vain', he: 'לֹא תִשָּׂא אֶת שֵׁם ה׳ אֱלֹהֶיךָ' },
+    { num: 4,  commandment: 'The Sabbath',                theme: 'Holiness in Nature',            text: 'Remember the Sabbath day to keep it holy', he: 'זָכוֹר אֶת יוֹם הַשַּׁבָּת לְקַדְּשׁוֹ' },
+    { num: 5,  commandment: 'Honor Parents',              theme: 'Jewish Connection',             text: 'Honor your father and your mother', he: 'כַּבֵּד אֶת אָבִיךָ וְאֶת אִמֶּךָ' },
     { num: 6,  commandment: 'Do Not Murder',              theme: 'Refining the Divine Image',     text: 'You shall not murder', he: 'לֹא תִרְצָח' },
     { num: 7,  commandment: 'Faithfulness',               theme: 'Marriage to Hashem',            text: 'You shall not commit adultery', he: 'לֹא תִנְאָף' },
     { num: 8,  commandment: 'Do Not Steal',               theme: 'Human Dignity / Baseless Love', text: 'You shall not steal', he: 'לֹא תִגְנֹב' },
-    { num: 9,  commandment: 'Truth / No False Witness',   theme: 'Testifying/Confessing',         text: 'You shall not bear false witness against your neighbor', he: 'לֹא תַעֲנֶה' },
-    { num: 10, commandment: 'Do Not Covet',               theme: 'Complete Trust in G-d',         text: 'You shall not covet…', he: 'לֹא תַחְמֹד' }
+    { num: 9,  commandment: 'Truth / No False Witness',   theme: 'Testifying/Confessing',         text: 'You shall not bear false witness against your neighbor', he: 'לֹא תַעֲנֶה בְרֵעֲךָ עֵד שָׁקֶר' },
+    { num: 10, commandment: 'Do Not Covet',               theme: 'Complete Trust in G-d',         text: 'You shall not covet…', he: 'לֹא תַחְמֹד בֵּית רֵעֶךָ' }
   ];
 
   // Inverse of gregToJDN: converts a Julian Day Number to a Gregorian Date object.
@@ -27013,19 +27017,30 @@ content: ''; float: right; width: 30px; height: 1em;
       // The full English of each commandment is NOT lost: it is stated in
       // the detail, under the day's own heading, which is where Chesed and
       // Gevurah keep what will not fit a face.
-      // THE HEBREW AND THE CLOSING BRACKET ARE ONE NOWRAP GROUP. Left to
-      // itself the Cycle line broke inside the Hebrew — "(No Other Gods —
-      // לֹא" over "יִהְיֶה לְךָ)" — which strands the bracket, the one wrapping
-      // fault this file forbids. Held together the break falls after the em
-      // dash instead, which is what Binah and Chesed already do at the
-      // largest size: "Day 7 (Malchut —" over "מַלְכוּת)", read as a
-      // continuation rather than as something torn.
+      // THE HEBREW WRAPS, and that is the second answer to one question.
+      //
+      // While the Hebrew was one or two words it carried white-space:nowrap,
+      // because the Cycle line was breaking INSIDE it — "(No Other Gods —
+      // לֹא" over "יִהְיֶה לְךָ)" — leaving one word stranded at the end of a
+      // row. Pinned, the whole phrase moved to the next row with its bracket,
+      // which is what Binah does: "Day 7 (Malchut —" over "מַלְכוּת)".
+      //
+      // The author then asked for fuller openings, and a pinned run of five
+      // vocalized words does not fit a 208px column: measured over 140 days,
+      // nowrap OVERFLOWED on 49 of them at the largest text size — a sideways
+      // scroll, which is a failure and not a wrap. Letting it wrap: 0 of 140
+      // at every size. So the pin comes off.
+      //
+      // Nothing is stranded by that. A line can only break at a space and
+      // there is none before the ")", so the bracket always rides the last
+      // Hebrew word whatever row it lands on, and a five-word phrase breaking
+      // between its own words is ordinary setting rather than a tear.
       const _netzLine = (label, num, name, he, id) =>
         `${label} <strong>${num}</strong> (` + (id ? `<span id="${id}">` : '') +
         `<strong>${name}</strong>` +
         (he ? ` <span style="color:var(--ink-mid)">&mdash;</span> ` +
               `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;` +
-              `font-size:1.05em;white-space:nowrap">${he}</bdi>` : '') +
+              `font-size:1.05em">${he}</bdi>` : '') +
         (id ? `</span>` : '') + `)`;
       // Cycle 9 carries the tenth alongside its own, so the Cycle line can
       // hold two commandments; each keeps its own Hebrew and they are joined
