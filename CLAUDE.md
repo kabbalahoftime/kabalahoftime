@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v397**; the next is v398.
+nobody. Currently **v398**; the next is v399.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -1321,9 +1321,30 @@ Chesed already keeps — no face here carries a transliteration — and the trad
 Chochmah's set line made.
 
 **The line reads count, then Sefirah, then letters** — `Half-Day 149 · Chesed
-וס` — which is the author's own order: *"Half Day x - Sefirah - Letters."*
+· וס` — which is the author's own order: *"Half Day x - Sefirah - Letters."*
 The Sefirah led the line for one version, standing where Ratzo and Shov had
 stood; the count is what the line is a line of, so it goes first.
+
+**All three units are at the line's own size, and two middots separate them.**
+Both were asked about and both were leftovers of the old design. `Half-Day N`
+carried `font-size:calc(11px * var(--ts,1))` and `--ink-dim` because it used
+to be a dim PREFIX — *"Ratzo · Half-Day 113"* — set small to keep out of the
+way of what followed; leading its own row at that size it read as a footnote
+to itself. And there was no mark before the pair at all, the gold being asked
+to do the separating on its own: three units want two marks.
+
+**Where the line breaks is set, because at the larger sizes it must.** Three
+units at full size do not fit a 208px column — 87 of 280 rows wrap at `large`
+and 253 of 280 at `larger`. The Sefirah, both middots and the pair are **one
+`white-space:nowrap` group**, so the only break is after the count:
+
+```
+Half-Day 149
+· Chesed · וס
+```
+
+Giving each middot its own unit was tried first and put the pair alone on the
+second row, `· וס` by itself. Held together it is one thing under another.
 
 **Ratzo and Shov are off these lines for good.** They named the morning and
 afternoon halves while those halves walked the ten out and back; the

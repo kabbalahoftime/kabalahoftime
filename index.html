@@ -27132,16 +27132,36 @@ content: ''; float: right; width: 30px; height: 1em;
     // author's own: "Half Day x - Sefirah - Letters". The Sefirah led the
     // line for one version, standing where Ratzo and Shov had stood, and the
     // count is what the line is a line of.
+    // THE COUNT IS AT THE LINE'S OWN SIZE, with its number bold, as the Name
+    // line above it reads and as every other rebuilt face reads. It carried
+    // `font-size:calc(11px * var(--ts,1))` and var(--ink-dim) because it used
+    // to be a dim PREFIX — "Ratzo · Half-Day 113" — set small to keep out of
+    // the way of what followed. Leading the line, that size read as a
+    // footnote to its own row.
+    //
+    // A MIDDOT BEFORE THE LETTERS TOO. The pair is gold, and the colour was
+    // being asked to do the separating on its own; three units want two
+    // marks, not one.
     const _hodPhase = (n, g, id, sef) =>
       `<div style="line-height:1.6;">` +
-      `<span style="color:var(--ink-dim);` +
-      `font-size:calc(11px * var(--ts, 1));white-space:nowrap">Half-Day ${n}</span>` +
-      (sef ? ` <span style="color:var(--ink-dim);font-size:0.9em">·</span> ` +
-             `<strong>${sef}</strong>` : '') + ` ` +
+      `<span style="white-space:nowrap">Half-Day <strong>${n}</strong></span>` +
+      // THE SEFIRAH AND ITS LETTERS ARE ONE NOWRAP GROUP, and both middots
+      // travel inside it, so the only place the line can break is after the
+      // count. Three units at the line's own size do not fit a 208px column
+      // at the two larger text sizes — 87 of 280 rows wrap at large and 253
+      // of 280 at larger — so where the break falls is the whole question.
+      //
+      // Separators leading their own units was tried first and put the pair
+      // alone on the second row, · וס by itself. Held together, the count
+      // takes the first row and the Sefirah with its letters the second,
+      // which is one thing under another rather than a line in pieces.
+      ` <span style="white-space:nowrap">` +
+      (sef ? `<span style="opacity:0.55">·</span> <strong>${sef}</strong> ` : '') +
+      `<span style="opacity:0.55">·</span> ` +
       (id ? `<span id="${id}">` : '') +
       `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.2em;` +
       `color:var(--gold)">${g.first.hebrew}${g.second.hebrew}</bdi>` +
-      (id ? `</span>` : '') + `</div>`;
+      (id ? `</span>` : '') + `</span></div>`;
     // THE LETTERS' ENGLISH CAME OFF when the Sefirah went on. The line had
     // held four things — the Sefirah, the count, the pair and "— Vav,
     // Samech" — and measured over a year it wrapped on 168 of 240 rows at
