@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v399**; the next is v400.
+nobody. Currently **v400**; the next is v401.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -1239,6 +1239,73 @@ The leap microcosm shares `_gevFace`, so its twelve break-days were corrected
 by the same change. Swept a full year: all twelve of the season break-days
 and all twelve of the microcosm's carry their creature, and no ordinary day
 changed.
+
+### Netzach was the only face with no Hebrew, and now has it
+
+Measured rather than assumed: over 60 consecutive days, **Netzach carried no
+Hebrew on 60 of 60**. Yesod lacked it on 7 and Malchut on 5, both only on
+leap-microcosm days; the other six had Hebrew every day.
+
+The cause was the sources. `TEN_COMMANDMENTS` held English alone, and
+`soulLevel` is a plain string like `'Chayah / Atzilut'`. **Neither had any
+Hebrew in the app at all**, so it had to be written in: the opening of each
+Dibbur from Shemot 20 as a `he` field, and `SOUL_LEVEL_HE` for the five.
+
+The face reads as Gevurah's does, a name and its Hebrew in the bracket —
+the author's choice from four:
+
+```
+Day 4 (The Sabbath — זָכוֹר)
+Level 4 (Chayah — חַיָּה)
+Cycle 2 (No Other Gods — לֹא יִהְיֶה לְךָ)
+```
+
+**The brackets could come back**, and that is the whole reason this works.
+The em dash was here for one documented reason — Netzach's values were whole
+sentences, *"You shall not bear false witness against your neighbour"*, and a
+bracket opened before one of those closed three lines later. Each line now
+holds a short name and two or three Hebrew words.
+
+**The full English of each commandment is not lost**: it is stated in the
+detail, under `Commandment N`, which is where Chesed and Gevurah keep what
+will not fit a face.
+
+**The Hebrew carries `white-space:nowrap`.** Without it the Cycle line broke
+*inside* the Hebrew — `(No Other Gods —` over `יִהְיֶה לְךָ)` — stranding the
+bracket, which is the one wrapping fault this file forbids. Held together the
+break falls after the em dash instead, and the Hebrew keeps its bracket,
+which is exactly what Binah and Chesed do at the largest size. No `&nbsp;` is
+needed before the `)`: a line can only break at a space and there is none
+there, so pinning the Hebrew pins the bracket with it.
+
+#### The leap branch is a second face, and it was missed first time
+
+`inLeapCycle` draws an entirely different Netzach — `Day 1 of 55 ·
+Year-Cycle 4` over a parasha and `Bereshit — Nefesh / Asiyah` — and it also
+had no Hebrew. **91 of the 140 days swept landed on it**, so fixing only the
+41-day branch would have left the card English on most days of a leap year
+while the sweep of the other branch said it was fixed.
+
+Its obvious Hebrew is the parasha's, and **the app holds no vocalized Hebrew
+for the fifty-four parashiyot** — `P_NAMES`, `SLUG` and `PARASHA_TO_NUMBER`
+are all English. Writing that table is a larger piece and was not done here.
+What the line takes instead is the soul level's, from the same
+`SOUL_LEVEL_HE`, and the Yechidah day names its level where it had named only
+its world.
+
+**Two splices cost a round here.** Cutting the old `_netzLine` out by index
+took the three `const`s under it, the whole `.sefirah-main-text` assignment
+and the foot-tag write with them — the card lost its gold tag silently,
+because every probe pointed at the face. `check.mjs` reads Netzach's counts
+from **the foot tag, not the face** (`/Cycle (\d+) · Day (\d+) of 41/` off
+`whole(5)`), so that deletion would have failed the calendar section — but
+only after four minutes. **Grep for what the cut region defined before
+trusting a splice.**
+
+Swept 140 days at all three text sizes: 0 days without Hebrew on either
+branch, 0 malformed, no overflow, every 41-day line matching
+`^(Day|Level|Cycle) \d+ \(.+\)$`.
+
 
 ### Hod's 728 are the letters, and the Names run over them
 

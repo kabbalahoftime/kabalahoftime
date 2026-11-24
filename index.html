@@ -6536,17 +6536,22 @@ content: ''; float: right; width: 30px; height: 1em;
     { cycle: 10, mivtzah: 'Torah',                      commandment: 'Do Not Covet',                theme: 'Torah as the remedy for desire' }
   ];
 
+  // The Hebrew is the opening of each Dibbur from Shemot 20, short enough
+  // for a card face. Netzach was the one face in the ten with no Hebrew on
+  // any day — measured, 60 of 60 — because its two sources held English
+  // alone. The full English of each commandment stays in `text` and is
+  // stated in the detail; the face takes `commandment` and this.
   const TEN_COMMANDMENTS = [
-    { num: 1,  commandment: 'I Am the Lord',              theme: 'Divine Closeness',             text: 'I am the Lord your God, who brought you out of the land of Egypt, out of the house of bondage' },
-    { num: 2,  commandment: 'No Other Gods',              theme: 'Worldly Interaction',           text: 'You shall have no other gods before Me' },
-    { num: 3,  commandment: 'Not to Profane G-d\'s Name', theme: 'Holiness Above Nature',         text: 'You shall not take the name of the Lord your God in vain' },
-    { num: 4,  commandment: 'The Sabbath',                theme: 'Holiness in Nature',            text: 'Remember the Sabbath day to keep it holy' },
-    { num: 5,  commandment: 'Honor Parents',              theme: 'Jewish Connection',             text: 'Honor your father and your mother' },
-    { num: 6,  commandment: 'Do Not Murder',              theme: 'Refining the Divine Image',     text: 'You shall not murder' },
-    { num: 7,  commandment: 'Faithfulness',               theme: 'Marriage to Hashem',            text: 'You shall not commit adultery' },
-    { num: 8,  commandment: 'Do Not Steal',               theme: 'Human Dignity / Baseless Love', text: 'You shall not steal' },
-    { num: 9,  commandment: 'Truth / No False Witness',   theme: 'Testifying/Confessing',         text: 'You shall not bear false witness against your neighbor' },
-    { num: 10, commandment: 'Do Not Covet',               theme: 'Complete Trust in G-d',         text: 'You shall not covet…' }
+    { num: 1,  commandment: 'I Am the Lord',              theme: 'Divine Closeness',             text: 'I am the Lord your God, who brought you out of the land of Egypt, out of the house of bondage', he: 'אָנֹכִי' },
+    { num: 2,  commandment: 'No Other Gods',              theme: 'Worldly Interaction',           text: 'You shall have no other gods before Me', he: 'לֹא יִהְיֶה לְךָ' },
+    { num: 3,  commandment: 'Not to Profane G-d\'s Name', theme: 'Holiness Above Nature',         text: 'You shall not take the name of the Lord your God in vain', he: 'לֹא תִשָּׂא' },
+    { num: 4,  commandment: 'The Sabbath',                theme: 'Holiness in Nature',            text: 'Remember the Sabbath day to keep it holy', he: 'זָכוֹר' },
+    { num: 5,  commandment: 'Honor Parents',              theme: 'Jewish Connection',             text: 'Honor your father and your mother', he: 'כַבֵּד' },
+    { num: 6,  commandment: 'Do Not Murder',              theme: 'Refining the Divine Image',     text: 'You shall not murder', he: 'לֹא תִרְצָח' },
+    { num: 7,  commandment: 'Faithfulness',               theme: 'Marriage to Hashem',            text: 'You shall not commit adultery', he: 'לֹא תִנְאָף' },
+    { num: 8,  commandment: 'Do Not Steal',               theme: 'Human Dignity / Baseless Love', text: 'You shall not steal', he: 'לֹא תִגְנֹב' },
+    { num: 9,  commandment: 'Truth / No False Witness',   theme: 'Testifying/Confessing',         text: 'You shall not bear false witness against your neighbor', he: 'לֹא תַעֲנֶה' },
+    { num: 10, commandment: 'Do Not Covet',               theme: 'Complete Trust in G-d',         text: 'You shall not covet…', he: 'לֹא תַחְמֹד' }
   ];
 
   // Inverse of gregToJDN: converts a Julian Day Number to a Gregorian Date object.
@@ -7490,6 +7495,15 @@ content: ''; float: right; width: 30px; height: 1em;
     'Sefer Mishpatim — Civil Laws',
     'Sefer Shoftim — Judges',
   ];
+  // The five levels of soul, for Netzach's Level line. `soulLevel` is a
+  // string like 'Chayah / Atzilut' and the face takes the first half, so
+  // this is keyed by that half and the world stays in the detail, where the
+  // Soul Level row already gives both.
+  const SOUL_LEVEL_HE = {
+    Nefesh: 'נֶפֶשׁ', Ruach: 'רוּחַ', Neshamah: 'נְשָׁמָה',
+    Chayah: 'חַיָּה', Yechidah: 'יְחִידָה',
+  };
+
   const MISHNEH_TORAH_URL = 'https://www.sefaria.org/texts/Halakhah/Mishneh%20Torah';
 
   // The KoT Sefer HaMitzvos wheel — date-pegged like Daily Likutei Moharan.
@@ -26897,14 +26911,25 @@ content: ''; float: right; width: 30px; height: 1em;
       `<div style="font-family:'Cinzel',serif;font-size:calc(10.5px * var(--ts, 1));letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">✡ Shenei Luchot HaBerit — <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;letter-spacing:0">של״ה</bdi></div>` +
       `<div style="font-size:0.88rem;margin-bottom:10px;"><a href="https://www.sefaria.org/Shenei_Luchot_HaBerit?tab=contents" target="_blank" style="color:var(--gold)">the Shelah on Sefaria</a> <span style="color:var(--ink-mid);font-size:0.85em">— the year’s festivals against the soul</span></div>`;
     if (inLeapCycle) {
+      // THE LEAP BRANCH CARRIES HEBREW TOO, and it is the soul level's. This
+      // face is the other half of the answer to "Netzach is the only one all
+      // in English": the 41-day branch takes the commandments' Hebrew, and
+      // on a leap year this one runs instead — 91 of 140 days in the window
+      // it was measured over. What it names is a parasha and a book, and the
+      // app holds no vocalized Hebrew for the fifty-four parashiyot; writing
+      // that table is a larger piece than this and is not done here. The
+      // level is in hand, from SOUL_LEVEL_HE, and gives the line its Hebrew.
+      const _lcHe = SOUL_LEVEL_HE[lcLevel.level]
+        ? ` <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif">` +
+          `(${SOUL_LEVEL_HE[lcLevel.level]})</bdi>` : '';
       const lcBookLabel = lcLevel.review
-        ? `Devarim — ${lcLevel.level} / ${lcLevel.world} (Review)`
-        : `${lcLevel.book} — ${lcLevel.level} / ${lcLevel.world}`;
+        ? `Devarim — ${lcLevel.level}${_lcHe} / ${lcLevel.world} (Review)`
+        : `${lcLevel.book} — ${lcLevel.level}${_lcHe} / ${lcLevel.world}`;
       cards[5].querySelector('.sefirah-cycle-name').innerHTML = `55-Day Cycle: Torah Parashiyot`;
       cards[5].querySelector('.sefirah-main-text').innerHTML =
         `Day <strong>${leapCycleDay}</strong> of <strong>55</strong> · Year-Cycle <strong>${leapCycleNum}</strong>:<br>` +
         (lcIsYechidah
-          ? `<strong>Coming Down from Mount Sinai</strong><br><span style="font-size:0.88em;opacity:0.72">World: Adam Kadmon</span>`
+          ? `<strong>Coming Down from Mount Sinai</strong><br><span style="font-size:0.88em;opacity:0.72">Yechidah <bdi lang="he" style="font-family:'Frank Ruhl Libre',serif">(יְחִידָה)</bdi> / Adam Kadmon</span>`
           : `<strong>${lcParasha}</strong><br><span style="font-size:0.88em;opacity:0.72">${lcBookLabel}</span>`);
       cards[5].querySelector('.sefirah-sub-text').innerHTML = '';
       // The FOOT row, explicitly. querySelector finds the first match in the
@@ -26972,15 +26997,55 @@ content: ''; float: right; width: 30px; height: 1em;
       // took what followed a "Day:" label in the sub-text, and there is no
       // such label now; unnamed, the meditation would have fallen through to
       // the card's heading, which is the fault that shipped twice on Chesed.
-      const _netzLine = (label, num, value, id) =>
-        `${label} <strong>${num}</strong> &mdash; ` +
-        (id ? `<span id="${id}">${value}</span>` : value);
+      // A NAME AND ITS HEBREW IN THE BRACKET, which is Gevurah's shape and
+      // the one the author asked for here: Netzach was the only face in the
+      // ten carrying no Hebrew on any day — 60 of 60 measured, against 7 of
+      // 60 on Yesod and 5 on Malchut, both only on leap-microcosm days.
+      //
+      // THE BRACKETS COULD COME BACK because the values are names again. The
+      // em dash was here for one reason, written down at the time: Netzach's
+      // values were whole sentences — "You shall not bear false witness
+      // against your neighbour" — and a bracket opened before one of those
+      // closed three lines later, reading as something broken. Each line now
+      // holds a short name and two or three Hebrew words, so the bracket
+      // opens and closes on the same line as it does on the other eight.
+      //
+      // The full English of each commandment is NOT lost: it is stated in
+      // the detail, under the day's own heading, which is where Chesed and
+      // Gevurah keep what will not fit a face.
+      // THE HEBREW AND THE CLOSING BRACKET ARE ONE NOWRAP GROUP. Left to
+      // itself the Cycle line broke inside the Hebrew — "(No Other Gods —
+      // לֹא" over "יִהְיֶה לְךָ)" — which strands the bracket, the one wrapping
+      // fault this file forbids. Held together the break falls after the em
+      // dash instead, which is what Binah and Chesed already do at the
+      // largest size: "Day 7 (Malchut —" over "מַלְכוּת)", read as a
+      // continuation rather than as something torn.
+      const _netzLine = (label, num, name, he, id) =>
+        `${label} <strong>${num}</strong> (` + (id ? `<span id="${id}">` : '') +
+        `<strong>${name}</strong>` +
+        (he ? ` <span style="color:var(--ink-mid)">&mdash;</span> ` +
+              `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;` +
+              `font-size:1.05em;white-space:nowrap">${he}</bdi>` : '') +
+        (id ? `</span>` : '') + `)`;
+      // Cycle 9 carries the tenth alongside its own, so the Cycle line can
+      // hold two commandments; each keeps its own Hebrew and they are joined
+      // by the middot the rest of the page joins with.
+      const _netzCycName = _cycleItems
+        .map(i => TEN_COMMANDMENTS[i - 1] && TEN_COMMANDMENTS[i - 1].commandment)
+        .filter(Boolean).join(' \u00b7 ');
+      const _netzCycHe = _cycleItems
+        .map(i => TEN_COMMANDMENTS[i - 1] && TEN_COMMANDMENTS[i - 1].he)
+        .filter(Boolean).join(' \u00b7 ');
+      // The soul level's own name, the world staying in the detail's Soul
+      // Level row, which already gives both halves.
+      const _netzSoul = (cy41v.soulLevel || '').split(' / ')[0];
       cards[5].querySelector('.sefirah-main-text').innerHTML =
-        _netzLine('Day', _netzInLevel, dayCmd.text, 'netzach-day-face') + `<br>` +
+        _netzLine('Day', _netzInLevel, dayCmd.commandment, dayCmd.he, 'netzach-day-face') + `<br>` +
         (_netzLevel
-          ? _netzLine('Level', _netzLevel, cy41v.soulLevel.replace(' / ', '/')) + `<br>`
+          ? _netzLine('Level', _netzLevel, _netzSoul, SOUL_LEVEL_HE[_netzSoul]) + `<br>`
           : '') +
-        _netzLine('Cycle', cy41v.cycle, _cycleCmdText || cycleCmd.commandment);
+        _netzLine('Cycle', cy41v.cycle,
+                  _netzCycName || cycleCmd.commandment, _netzCycHe);
       cards[5].querySelector('.sefirah-sub-text').innerHTML = '';
       // THE GOLD TAG AT THE FOOT, where Binah, Chesed, Gevurah and Yesod keep
       // theirs. It was drawn inside *-main; the face names the Level and the
@@ -27006,6 +27071,7 @@ content: ''; float: right; width: 30px; height: 1em;
          <hr style="border:0;border-top:1px solid var(--border);margin:14px 0;">
          
          
+         <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Commandment ${dayCmd.num}</div><div style="color:var(--ink-mid);font-size:0.88rem;">“${dayCmd.text}”</div></div>
          <div style="margin-bottom:10px;"><div style="font-size:0.78rem;color:var(--gold-mid);font-style:italic;font-weight:500;margin-bottom:3px;">Soul Level</div><div style="color:var(--ink-mid);font-size:0.88rem;">${cy41v.soulLevel.split(' / ')[0]} · ${cy41v.day === 41 ? 'the forty-first' : ['','1st','2nd','3rd','4th'][Math.ceil(cy41v.day / 10)] + ' of 4'} · ${cy41v.soulLevel.split(' / ')[1]}</div></div>
          
          
