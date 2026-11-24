@@ -27128,11 +27128,16 @@ content: ''; float: right; width: 30px; height: 1em;
     // The pair is one run of Hebrew and must stay one: inside a Latin label
     // it is no longer a run of its own, so it takes its own <bdi>, as
     // Chesed's words do.
+    // THE ORDER IS THE COUNT, THEN THE SEFIRAH, THEN THE LETTERS — the
+    // author's own: "Half Day x - Sefirah - Letters". The Sefirah led the
+    // line for one version, standing where Ratzo and Shov had stood, and the
+    // count is what the line is a line of.
     const _hodPhase = (n, g, id, sef) =>
       `<div style="line-height:1.6;">` +
-      (sef ? `<strong>${sef}</strong> ` : '') +
       `<span style="color:var(--ink-dim);` +
-      `font-size:calc(11px * var(--ts, 1));white-space:nowrap">Half-Day ${n}</span> ` +
+      `font-size:calc(11px * var(--ts, 1));white-space:nowrap">Half-Day ${n}</span>` +
+      (sef ? ` <span style="color:var(--ink-dim);font-size:0.9em">·</span> ` +
+             `<strong>${sef}</strong>` : '') + ` ` +
       (id ? `<span id="${id}">` : '') +
       `<bdi lang="he" style="font-family:'Frank Ruhl Libre',serif;font-size:1.2em;` +
       `color:var(--gold)">${g.first.hebrew}${g.second.hebrew}</bdi>` +

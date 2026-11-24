@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v396**; the next is v397.
+nobody. Currently **v397**; the next is v398.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -1320,12 +1320,15 @@ So the gloss was the whole cost and the label none of it. It is the line
 Chesed already keeps — no face here carries a transliteration — and the trade
 Chochmah's set line made.
 
-**Ratzo and Shov are off the head of the two half-day lines, and the Sefirah
-stands where they stood.** They named the morning and afternoon halves while
-those halves walked the ten out and back; the combinations do not run and
-return, the Shulchan Aruch row says Morning and Afternoon outright, and what
-belongs at the head of a half-day is which of the ten it is. Do not put those
-two words back.
+**The line reads count, then Sefirah, then letters** — `Half-Day 149 · Chesed
+וס` — which is the author's own order: *"Half Day x - Sefirah - Letters."*
+The Sefirah led the line for one version, standing where Ratzo and Shov had
+stood; the count is what the line is a line of, so it goes first.
+
+**Ratzo and Shov are off these lines for good.** They named the morning and
+afternoon halves while those halves walked the ten out and back; the
+combinations do not run and return, and the Shulchan Aruch row says Morning
+and Afternoon outright. Do not put those two words back.
 
 `LETTERS_27` is `SINGLE_LETTERS_22.concat(FINAL_LETTERS_MIC)` — **derived, not
 listed again**, so the letters and their spellings cannot drift from the
