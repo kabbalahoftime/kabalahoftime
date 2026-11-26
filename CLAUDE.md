@@ -22,7 +22,7 @@ is missing.
 **1. Bump the cache on every change that ships.** `service-worker.js` holds
 `CACHE_NAME = 'kabbalah-of-time-vNNN'`. Returning visitors keep the old copy
 until that string changes, so a correct fix that forgets the bump reaches
-nobody. Currently **v401**; the next is v402.
+nobody. Currently **v402**; the next is v403.
 
 **2. Run `check.mjs` before anything reaches `main`.**
 
@@ -383,6 +383,15 @@ not hers.
 This file used to say to leave that quotation exactly as it stood. The author
 changed it. Should another name ever be needed there, redact it the same way
 and rebuild the PDF: 14 pages.
+
+**Book 1's Moose was the Donkey**, and is now named as him. An *old moose
+friend* joined the boy in the Land of the Bulls for his third year, known
+from the days he lived in the Land of the Donkey; forty lines later *his good
+friend the Donkey* moves out of the Land of the Bulls to the Land of the
+Donkeys. Same origin, same city, and the Donkey leaves the place the Moose
+had joined him in — one friend under two names. The author confirmed it was
+one friend; the rename is his, not an inference drawn here. Moose appeared
+nowhere else in either book. Still 31 pages.
 
 LibreOffice is broken in this environment; read `.docx` XML directly.
 
